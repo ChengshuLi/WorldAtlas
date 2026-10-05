@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "retrieved_at": "2026-10-05",
+  "items": [
+    {
+      "id": "geoboundaries-mne-adm1-2017",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/MNE/ADM1/geoBoundaries-MNE-ADM1.geojson",
+      "vintage": "2017 (geoBoundaries metadata; exact capture date unknown)",
+      "role": "retained 2017 comparison geometry; not official legal boundary evidence",
+      "retention": "retained",
+      "path": "source/gb-MNE-ADM1-geoBoundaries-2017.geojson",
+      "bytes": 610015,
+      "sha256": "9674292fbc0a50c68c6584a2ae23fae768e76cc796bdb7e3e009c0197aec6ae3",
+      "license": "Open Data Commons Open Database License 1.0, as stated by geoBoundaries; attribute OpenStreetMap and Wambacher; comply with ODbL attribution/share-alike obligations for any adaptation",
+      "provenance": "Exact payload copied from the retained #422 evidence source, retrieved at immutable geoBoundaries repository commit 9469f09592ced973a3448cf66b6100b741b64c0d. Payload SHA matches geoBoundaries LFS OID. Catalog's separate sha256 c9afe5300b402f75cf13b5d65341d849afd631af32b220be3f74c883cab36833 is preserved as ambiguous and does not match these payload bytes.",
+      "limit": "This is OSM/Wambacher-derived comparison geometry, not confirmed official cadastre geometry. Catalog canonical field is unknown; actual administrative legal boundary basis, snapshot date, positional accuracy, island/coast/water inclusion, and completeness are not established."
+    },
+    {
+      "id": "montenegro-current-municipality-roster",
+      "url": "https://data.gov.me/dataset/1a0689c9-2ea3-4adb-85eb-2ba6a88f6980/resource/bc7d04d9-2632-4d96-a778-fa1f5f3a2ccb/download/lokalne_samouprave.json",
+      "vintage": "Current administrative roster; catalog last updated 2025-05-30",
+      "role": "official municipality/local-government names and contacts; not geometry",
+      "retrieved_at": "2026-10-05",
+      "retention": "retained",
+      "path": "source/current-municipalities-2025.json",
+      "bytes": 4375,
+      "sha256": "cd4e94fd3236fc9b3f7bea043fd8dcda6bcbd72d9b3157f3ff1b417650e8a64a",
+      "license": "Creative Commons Attribution (catalog states CC BY; version unspecified)",
+      "verification": "Downloaded JSON preserved; catalog claims are as inspected 2026-10-05",
+      "limit": "Roster is a current names/contact list, not an authoritative boundary or parent/settlement hierarchy. It has 25 local-government entries, including Tuzi and Zeta."
+    },
+    {
+      "id": "monstat-statistical-yearbook-2017-table-1-2",
+      "url": "https://monstat.org/userfiles/file/publikacije/godisnjak%202017/1.pdf",
+      "vintage": "2017 publication; municipal areas as of December 2015; table 1-2, PDF page 18",
+      "role": "official historical municipality roster and reported area comparison; source attributed to Real Estate Directorate",
+      "retrieved_at": "2026-10-05",
+      "retention": "restoration-only",
+      "original_sha256": "4d6e1d5226ecb81b3a39b54d4ef89e55b097b2dc1ef384dc16d14d959fd9fb89",
+      "license": "No explicit reuse/redistribution license identified on inspected report/page",
+      "restoration": "Retrieve the PDF from the exact URL; verify SHA-256 4d6e1d5226ecb81b3a39b54d4ef89e55b097b2dc1ef384dc16d14d959fd9fb89; inspect chapter 1 table 1-2 on PDF page 18 and the neighboring notes. A compact factual transcription is retained in source/official-municipal-areas-2017.json.",
+      "limit": "Official reported areas are aggregate measurements, not municipal linework or proof of legal boundary position/completeness. The 23 municipality table sums to 13,969 km2, 157 km2 above the report's national 13,812 km2; the report does not explain this. Lake Skadar notes are national/cross-border context, not per-municipality geometry."
+    },
+    {
+      "id": "monstat-statistical-yearbook-2021-table-1-2",
+      "url": "https://monstat.org/uploads/files/publikacije/godisnjak%202021/1.pdf",
+      "vintage": "2021 publication; municipal areas as of December 2018; table 1-2, PDF page 18",
+      "role": "official later roster/area comparison and Tuzi/Lake Skadar caveats",
+      "retrieved_at": "2026-10-05",
+      "retention": "restoration-only",
+      "original_sha256": "fd3d06010564bc9d252cc2d199f0d52d2dc20010611067a84863d41d1cf14466",
+      "license": "No explicit reuse/redistribution license identified on inspected report/page",
+      "restoration": "Retrieve PDF from exact URL; verify SHA-256 fd3d06010564bc9d252cc2d199f0d52d2dc20010611067a84863d41d1cf14466; inspect table 1-2 and footnotes on PDF page 18. Compact transcription in source/official-municipal-areas-2018.json.",
+      "limit": "This is a post-Tuzi 24-unit roster and not a direct same-roster comparison. Report explains 226 km2 national-minus-municipal-area difference as Montenegro's part of Lake Skadar; Tuzi's 246 km2 area is temporary/approximate pending demarcation. Area figures still cannot validate boundaries."
+    },
+    {
+      "id": "water-information-system-municipality-layer",
+      "url": "https://wis.gov.me/geoportal",
+      "vintage": "Portal layer vintage not exposed in inspected pages (retrieved 2026-10-05)",
+      "role": "official water geoportal municipality-territory display lead",
+      "retention": "restoration-only",
+      "license": "Unknown for municipal boundary layer; no reuse terms found",
+      "restoration": "Inspect the official geoportal's Opštine > Teritorija layer; request its underlying downloadable/native vector, service endpoint, metadata record, lineage and dated snapshot from the responsible authority. Do not substitute a screenshot or undocumented service response.",
+      "limit": "Inspected public page exposed no downloadable/API geometry, layer vintage, lineage or reuse terms. It is a lead only, not retained boundary evidence."
+    },
+    {
+      "id": "real-estate-administration-cadastre-register",
+      "url": "https://geoportal.co.me/geoportal/geoportal_eng.html",
+      "vintage": "Current portal observed 2026-10-05; target historical/current snapshots unavailable",
+      "role": "official Cadastre and State Property Administration portal and Spatial Units Register restoration route",
+      "retention": "restoration-only",
+      "license": "Unknown for requested municipal boundary data; confirm with authority before redistribution",
+      "restoration": "Use the portal metadata catalogue (INSPIRE/ISO) and request native vector snapshots from the Real Estate Administration Spatial Units Register: (a) official 2017 municipality geometry comparable to source vintage, (b) current geometry with effective dates and legal acts, (c) machine-readable codes/names and settlement parents, (d) all polygon components/islands and coastal/territorial-water conventions, (e) source survey/update lineage and boundary basis, and (f) written redistribution/adaptation terms. Administration service index: https://www.gov.me/en/article/services.",
+      "limit": "Portal description confirms official geospatial search/display and metadata catalogue, but does not itself provide the required layer bytes, historical snapshot, complete geometry or license."
+    },
+    {
+      "id": "municipal-delimitation-ministry-statements",
+      "url": "https://www.gov.me/cyr/clanak/mju-u-mandatu-ministra-dukaja-proces-razgranicenja-izmedu-tuzi-i-podgorice-vodilo-nepristrasno-otvoreno-i-transparentno",
+      "vintage": "Ministry statement published 2026-02-26; retrieved 2026-10-05",
+      "role": "official process-status evidence for unresolved Tuzi/Podgorica demarcation",
+      "retention": "restoration-only",
+      "license": "No explicit reuse terms for this page inspected",
+      "restoration": "Restore the ministry page at exact URL and date. For context, also inspect 2024-03-13 statement https://www.gov.me/clanak/saopstenje-ministarstva-javne-uprave-2, which said Podgorica/Tuzi and Podgorica/Zeta boundary processes remained open then.",
+      "limit": "The 2026 statement reports agreement to refer open demarcation questions to arbitration; it does not establish that arbitration completed or provide a boundary geometry. Do not state present-day resolution absent a later authoritative result."
+    }
+  ]
+}

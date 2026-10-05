@@ -1,0 +1,814 @@
+{
+  "version": 1,
+  "issue": 996,
+  "lane": "geography",
+  "worker_id": "codex-geography-422-20261005-a88425a6-102e-4a9f-b3f4-ef588ed6c410",
+  "subject_ids": [
+    "gb:MNE:ADM1:59799669B12564288388297",
+    "gb:MNE:ADM1:59799669B20110685483927",
+    "gb:MNE:ADM1:59799669B20319020653405",
+    "gb:MNE:ADM1:59799669B20349667855259",
+    "gb:MNE:ADM1:59799669B22511566400758",
+    "gb:MNE:ADM1:59799669B28207041867492",
+    "gb:MNE:ADM1:59799669B41052051546873",
+    "gb:MNE:ADM1:59799669B48420505719641",
+    "gb:MNE:ADM1:59799669B58100018961631",
+    "gb:MNE:ADM1:59799669B59523358081802",
+    "gb:MNE:ADM1:59799669B66678983232609",
+    "gb:MNE:ADM1:59799669B74362705567987",
+    "gb:MNE:ADM1:59799669B75560777931070",
+    "gb:MNE:ADM1:59799669B7591395216485",
+    "gb:MNE:ADM1:59799669B78864851615199",
+    "gb:MNE:ADM1:59799669B79583520985931",
+    "gb:MNE:ADM1:59799669B80293643035426",
+    "gb:MNE:ADM1:59799669B84579627936880",
+    "gb:MNE:ADM1:59799669B88193558767116",
+    "gb:MNE:ADM1:59799669B91583747266461",
+    "gb:MNE:ADM1:59799669B93063361678836",
+    "gb:MNE:ADM1:59799669B93779420845023",
+    "gb:MNE:ADM1:59799669B9703090978387"
+  ],
+  "subject_ids_sha256": "a3247490b6758e44570b1288cce6f352f6e59a52a8934e55f9dd452ed82b1757",
+  "baseline": {
+    "commit": "b6cfaada43a1e0472cd833d16733d1fd6065eaec",
+    "files": [
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geographic-releases/current-manifest.json",
+        "bytes": 206,
+        "sha256": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-15.json",
+        "bytes": 5180426,
+        "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/macro-foundation/approved-boundary-decisions.json",
+        "bytes": 634171,
+        "sha256": "b67d5a3bcf8101cffb089c0262286378a80bb642cd6dde33f7721419227e3f18",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/macro-foundation/current-membership-inventory.json.gz",
+        "bytes": 2404397,
+        "sha256": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 10317725,
+        "uncompressed_sha256": "52348f585df4fa12b598ffa61ddd1f764497f421e16ed2dc412a0cead820c4e3"
+      },
+      {
+        "path": "data/macro-foundation/macro-certificate.json",
+        "bytes": 38959,
+        "sha256": "f50f70fcb0756712ab7a7a388bc8cada093080518f07d3a6f7329758980ea81b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/macro-foundation/regional-handoffs.json.gz",
+        "bytes": 71286,
+        "sha256": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 440969,
+        "uncompressed_sha256": "25dd00067eee73913e2d2c1c46599008eb8b40f46ca2925b98786f054e5571d8"
+      },
+      {
+        "path": "data/macro-foundation/review-index.json",
+        "bytes": 2383,
+        "sha256": "31dfd5cbfd8f3def829f655e7ddd855d2d2865e5ac63f9d1a97d1c08782910cf",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/area-assessments.json",
+        "bytes": 110972,
+        "sha256": "c292ce2794aa786494c19dd87dfdb7867c195c99c9652ec564c7fc00458e513b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/source-manifest.json",
+        "bytes": 6787,
+        "sha256": "fded0febc8ef8d934b1f7358755b3102ec8043cc027a88ad8106dec8247b7f56",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/subject-assessments.json",
+        "bytes": 361842,
+        "sha256": "9ca1665ab634d7ffa2c25230bb73509e4b3166dd4d00aab805502ddae0dc2ae5",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "data/world-index.json": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "data/hierarchy.json": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "data/geographic-releases/current-manifest.json": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81",
+      "data/administrative-sources.json": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "data/macro-foundation/current-membership-inventory.json.gz": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+      "data/macro-foundation/review-index.json": "31dfd5cbfd8f3def829f655e7ddd855d2d2865e5ac63f9d1a97d1c08782910cf",
+      "data/macro-foundation/regional-handoffs.json.gz": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
+      "data/macro-foundation/macro-certificate.json": "f50f70fcb0756712ab7a7a388bc8cada093080518f07d3a6f7329758980ea81b",
+      "data/macro-foundation/approved-boundary-decisions.json": "b67d5a3bcf8101cffb089c0262286378a80bb642cd6dde33f7721419227e3f18"
+    },
+    "pin_files": {
+      "data/world-index.json": "data/world-index.json",
+      "data/hierarchy.json": "data/hierarchy.json",
+      "data/geographic-releases/current-manifest.json": "data/geographic-releases/current-manifest.json",
+      "data/administrative-sources.json": "data/administrative-sources.json",
+      "data/macro-foundation/current-membership-inventory.json.gz": "data/macro-foundation/current-membership-inventory.json.gz",
+      "data/macro-foundation/review-index.json": "data/macro-foundation/review-index.json",
+      "data/macro-foundation/regional-handoffs.json.gz": "data/macro-foundation/regional-handoffs.json.gz",
+      "data/macro-foundation/macro-certificate.json": "data/macro-foundation/macro-certificate.json",
+      "data/macro-foundation/approved-boundary-decisions.json": "data/macro-foundation/approved-boundary-decisions.json"
+    },
+    "subject_files": {
+      "gb:MNE:ADM1:59799669B12564288388297": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B20110685483927": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B20319020653405": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B20349667855259": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B22511566400758": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B28207041867492": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B41052051546873": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B48420505719641": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B58100018961631": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B59523358081802": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B66678983232609": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B74362705567987": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B75560777931070": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B7591395216485": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B78864851615199": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B79583520985931": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B80293643035426": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B84579627936880": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B88193558767116": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B91583747266461": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B93063361678836": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B93779420845023": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B9703090978387": "data/geography/part-15.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "geoboundaries-mne-adm1-2017",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/MNE/ADM1/geoBoundaries-MNE-ADM1.geojson",
+      "role": "retained OSM/Wambacher comparison geometry and exact ID/name crosswalk; not legal official boundary geometry",
+      "vintage": "2017 metadata vintage; exact snapshot date unknown",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "geoBoundaries declares ODbL 1.0; attribution to OpenStreetMap and Wambacher; honor ODbL for adaptations"
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/source/gb-MNE-ADM1-geoBoundaries-2017.geojson",
+          "bytes": 610015,
+          "sha256": "9674292fbc0a50c68c6584a2ae23fae768e76cc796bdb7e3e009c0197aec6ae3",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "limit": "Not confirmed official/legal geometry; unknown exact date, boundary basis, positional accuracy, and island/coast/water completeness."
+    },
+    {
+      "id": "montenegro-current-municipality-roster",
+      "url": "https://opendata.gov.me/en/dataset/lista-opstina-crne-gore",
+      "role": "official current local-government name/contact roster; no geometry",
+      "vintage": "catalog last updated 2025-05-30",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "Catalog states Creative Commons Attribution (version unspecified)"
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/source/current-municipalities-2025.json",
+          "bytes": 4375,
+          "sha256": "cd4e94fd3236fc9b3f7bea043fd8dcda6bcbd72d9b3157f3ff1b417650e8a64a",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "limit": "25 roster entries including Tuzi/Zeta; names and contacts only, not boundary or settlement hierarchy."
+    },
+    {
+      "id": "monstat-2017-yearbook",
+      "url": "https://monstat.org/userfiles/file/publikacije/godisnjak%202017/1.pdf",
+      "role": "official historical municipal roster and aggregate area table attributed to Real Estate Directorate",
+      "vintage": "2017 publication; status December 2015; table 1-2, page 18",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "No explicit redistribution license identified in inspected report/page"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Retrieve this exact URL; verify original PDF SHA-256 4d6e1d5226ecb81b3a39b54d4ef89e55b097b2dc1ef384dc16d14d959fd9fb89; inspect table 1-2 and neighboring notes on page 18. Compact transcription retained at data/regional-review/followup-montenegro-422-boundaries-20261005/source/official-municipal-areas-2017.json.",
+      "limit": "Aggregate areas cannot validate boundary lines; table sum exceeds reported national area by 157 km2, unexplained by the report."
+    },
+    {
+      "id": "monstat-2021-yearbook",
+      "url": "https://monstat.org/uploads/files/publikacije/godisnjak%202021/1.pdf",
+      "role": "official later municipal roster/area table and Lake Skadar/Tuzi footnotes",
+      "vintage": "2021 publication; status December 2018; table 1-2, page 18",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "No explicit redistribution license identified in inspected report/page"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Retrieve exact URL; verify original PDF SHA-256 fd3d06010564bc9d252cc2d199f0d52d2dc20010611067a84863d41d1cf14466; inspect table and footnotes on PDF page 18. Compact transcription retained at data/regional-review/followup-montenegro-422-boundaries-20261005/source/official-municipal-areas-2018.json.",
+      "limit": "Post-Tuzi 24-unit roster differs from exact 23-subject 2017 set; 226 km2 difference is attributed by source to Lake Skadar; Tuzi 246 km2 is temporary pending demarcation. The geographic overview states cadastre records were not established for part of Montenegro and reported area data can change annually as records are developed/certified."
+    },
+    {
+      "id": "water-info-geoportal",
+      "url": "https://wis.gov.me/geoportal",
+      "role": "official municipality territory display layer lead",
+      "vintage": "not exposed in inspected portal pages (2026-10-05)",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Layer reuse terms not exposed"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Request native downloadable layer bytes, service endpoint, dated metadata and lineage from responsible authority for the portal Opštine > Teritorija layer; do not treat screenshot/undocumented service response as geometry.",
+      "limit": "No downloadable/API geometry, layer vintage, lineage or license was exposed."
+    },
+    {
+      "id": "cadastre-spatial-units-register",
+      "url": "https://geoportal.co.me/geoportal/geoportal_eng.html",
+      "role": "official Cadastre/State Property Administration metadata and Spatial Units Register restoration route",
+      "vintage": "current portal inspected 2026-10-05; needed dated snapshots unavailable",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Request and confirm redistribution terms with the Administration"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Use official metadata catalog and request 2017/current native vectors, effective dates/legal acts, IDs/crosswalk, settlements, multipart/island and coastline conventions, survey lineage and explicit redistribution/adaptation permission from https://www.gov.me/en/article/services.",
+      "limit": "Portal description confirms search/display and metadata catalog, not the needed geometry bytes or terms."
+    },
+    {
+      "id": "ministry-tuzi-demarcation",
+      "url": "https://www.gov.me/cyr/clanak/mju-u-mandatu-ministra-dukaja-proces-razgranicenja-izmedu-tuzi-i-podgorice-vodilo-nepristrasno-otvoreno-i-transparentno",
+      "role": "official Podgorica/Tuzi boundary process status; 2026 statement reports arbitration referral",
+      "vintage": "published 2026-02-26; earlier context statement 2024-03-13",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "No explicit reuse terms identified"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Restore ministry page at cited URL and 2024 context at https://www.gov.me/clanak/saopstenje-ministarstva-javne-uprave-2. Seek arbitration outcome and final legal geometry before asserting current line.",
+      "limit": "Referral to arbitration is reported; completion/outcome and geometry were not established."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/REVIEW.md",
+      "bytes": 9306,
+      "sha256": "2d11a754893158b41ca14fa02324da6c01faf42f785ae5b4ce140353131043ff",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/comparison.json",
+      "bytes": 30048,
+      "sha256": "0f26b5da1f7f4e9f68ff8a9e2ff0cdaaf6b0bd15c182f3db63209de1c04ba4f2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/negative-control.json",
+      "bytes": 325,
+      "sha256": "43e1dbc50fe0c3457c7473d834cafbce3d323d3306a9aff42fa0cf38c7ab83a9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/positive-control.json",
+      "bytes": 238,
+      "sha256": "602214625b36012fa5322271e816d3d8c42da16e31534add4f80326bd6c74e72",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/reproduce.py",
+      "bytes": 14060,
+      "sha256": "21122c7ac619acecba2854cb2e3ed70d57518dc61af7b5ead0524e11bd13e14a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/reproduction-control.json",
+      "bytes": 886,
+      "sha256": "e1a4c5c97aa900c4f942ce73098ba3153b8e455c00b33808dbd015d1b7143af1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/reservation.json",
+      "bytes": 668,
+      "sha256": "1068513b870ed4b7d8ec6a1866db6e7b4fd1b34a587633bd5a8ce219a847c08d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/source/issue-996-api-response.json",
+      "bytes": 11628,
+      "sha256": "aa4f41a30e5126153eade3b215fd15fe3a07bfcaf32121f4ee46dce45811fb45",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/source/official-municipal-areas-2017.json",
+      "bytes": 1129,
+      "sha256": "f930097bce008d5d5d0075c2597fba464d9cd001ad0b59b35f4c8e4e0ede9f91",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/source/official-municipal-areas-2018.json",
+      "bytes": 1346,
+      "sha256": "7802dab826682e3da0eca1bcf92e2ca8de50450c322991ee5aae4996adcb2802",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/source-manifest.json",
+      "bytes": 8268,
+      "sha256": "3940d3bc984563f2d251a5c5ccfb0e4c62dd6c8df219c4a3a558947708f92ef4",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "source-crosswalk-and-area-comparison",
+      "kind": "code",
+      "description": "Parse immutable issue scope and pinned baseline; verify exact subject containment and source shapeID/name correspondence; compare previously recorded area values against transcribed exact-name MONSTAT values; guard unmatched names; serialize deterministically twice. No polygon overlay or new area computation.",
+      "software": "Python 3 standard library; repository Git; evidence-quality validator on Node.js",
+      "units": "IDs/names exact after documented Unicode NFKD/ASCII normalization; areas km2"
+    },
+    {
+      "id": "primary-source-inspection",
+      "kind": "source",
+      "description": "Inspect MONSTAT official yearbook tables/footnotes, ministry roster catalog/resource, official geoportal descriptions, and Ministry demarcation statements; preserve PDFs as restoration-only where no explicit reuse terms were identified.",
+      "software": "GitHub/API and public official HTTPS sources; extraction hand-transcribed and independently reproducible from cited page/hash",
+      "units": "reported km2; local-government roster counts; source dates"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "area-delta-2017-59799669B12564288388297",
+      "value": -27.052361,
+      "unit": "km2",
+      "vintage": "baseline",
+      "evaluation_commit": "b6cfaada43a1e0472cd833d16733d1fd6065eaec",
+      "input_sha256": "f930097bce008d5d5d0075c2597fba464d9cd001ad0b59b35f4c8e4e0ede9f91"
+    },
+    {
+      "id": "area-delta-2017-59799669B20110685483927",
+      "value": 9.151689,
+      "unit": "km2",
+      "vintage": "baseline",
+      "evaluation_commit": "b6cfaada43a1e0472cd833d16733d1fd6065eaec",
+      "input_sha256": "f930097bce008d5d5d0075c2597fba464d9cd001ad0b59b35f4c8e4e0ede9f91"
+    },
+    {
+      "id": "area-delta-2017-59799669B20319020653405",
+      "value": -24.051464,
+      "unit": "km2",
+      "vintage": "baseline",
+      "evaluation_commit": "b6cfaada43a1e0472cd833d16733d1fd6065eaec",
+      "input_sha256": "f930097bce008d5d5d0075c2597fba464d9cd001ad0b59b35f4c8e4e0ede9f91"
+    },
+    {
+      "id": "area-delta-2017-59799669B20349667855259",
+      "value": -31.369171,
+      "unit": "km2",
+      "vintage": "baseline",
+      "evaluation_commit": "b6cfaada43a1e0472cd833d16733d1fd6065eaec",
+      "input_sha256": "f930097bce008d5d5d0075c2597fba464d9cd001ad0b59b35f4c8e4e0ede9f91"
+    },
+    {
+      "id": "area-delta-2017-59799669B22511566400758",
+      "value": -29.149463,
+      "unit": "km2",
+      "vintage": "baseline",
+      "evaluation_commit": "b6cfaada43a1e0472cd833d16733d1fd6065eaec",
+      "input_sha256": "f930097bce008d5d5d0075c2597fba464d9cd001ad0b59b35f4c8e4e0ede9f91"
+    },
+    {
+      "id": "area-delta-2017-59799669B28207041867492",
+      "value": -23.923799,
+      "unit": "km2",
+      "vintage": "baseline",
+      "evaluation_commit": "b6cfaada43a1e0472cd833d16733d1fd6065eaec",
+      "input_sha256": "f930097bce008d5d5d0075c2597fba464d9cd001ad0b59b35f4c8e4e0ede9f91"
+    },
+    {
+      "id": "area-delta-2017-59799669B41052051546873",
+      "value": 4.635982,
+      "unit": "km2",
+      "vintage": "baseline",
+      "evaluation_commit": "b6cfaada43a1e0472cd833d16733d1fd6065eaec",
+      "input_sha256": "f930097bce008d5d5d0075c2597fba464d9cd001ad0b59b35f4c8e4e0ede9f91"
+    },
+    {
+      "id": "area-delta-2017-59799669B48420505719641",
+      "value": 12.00294,
+      "unit": "km2",
+      "vintage": "baseline",
+      "evaluation_commit": "b6cfaada43a1e0472cd833d16733d1fd6065eaec",
+      "input_sha256": "f930097bce008d5d5d0075c2597fba464d9cd001ad0b59b35f4c8e4e0ede9f91"
+    },
+    {
+      "id": "area-delta-2017-59799669B58100018961631",
+      "value": -23.329796,
+      "unit": "km2",
+      "vintage": "baseline",
+      "evaluation_commit": "b6cfaada43a1e0472cd833d16733d1fd6065eaec",
+      "input_sha256": "f930097bce008d5d5d0075c2597fba464d9cd001ad0b59b35f4c8e4e0ede9f91"
+    },
+    {
+      "id": "area-delta-2017-59799669B59523358081802",
+      "value": 158.216784,
+      "unit": "km2",
+      "vintage": "baseline",
+      "evaluation_commit": "b6cfaada43a1e0472cd833d16733d1fd6065eaec",
+      "input_sha256": "f930097bce008d5d5d0075c2597fba464d9cd001ad0b59b35f4c8e4e0ede9f91"
+    },
+    {
+      "id": "area-delta-2017-59799669B66678983232609",
+      "value": 42.537634,
+      "unit": "km2",
+      "vintage": "baseline",
+      "evaluation_commit": "b6cfaada43a1e0472cd833d16733d1fd6065eaec",
+      "input_sha256": "f930097bce008d5d5d0075c2597fba464d9cd001ad0b59b35f4c8e4e0ede9f91"
+    },
+    {
+      "id": "area-delta-2017-59799669B74362705567987",
+      "value": 12.211095,
+      "unit": "km2",
+      "vintage": "baseline",
+      "evaluation_commit": "b6cfaada43a1e0472cd833d16733d1fd6065eaec",
+      "input_sha256": "f930097bce008d5d5d0075c2597fba464d9cd001ad0b59b35f4c8e4e0ede9f91"
+    },
+    {
+      "id": "area-delta-2017-59799669B75560777931070",
+      "value": 1.967303,
+      "unit": "km2",
+      "vintage": "baseline",
+      "evaluation_commit": "b6cfaada43a1e0472cd833d16733d1fd6065eaec",
+      "input_sha256": "f930097bce008d5d5d0075c2597fba464d9cd001ad0b59b35f4c8e4e0ede9f91"
+    },
+    {
+      "id": "area-delta-2017-59799669B7591395216485",
+      "value": 3.606333,
+      "unit": "km2",
+      "vintage": "baseline",
+      "evaluation_commit": "b6cfaada43a1e0472cd833d16733d1fd6065eaec",
+      "input_sha256": "f930097bce008d5d5d0075c2597fba464d9cd001ad0b59b35f4c8e4e0ede9f91"
+    },
+    {
+      "id": "area-delta-2017-59799669B78864851615199",
+      "value": 73.749994,
+      "unit": "km2",
+      "vintage": "baseline",
+      "evaluation_commit": "b6cfaada43a1e0472cd833d16733d1fd6065eaec",
+      "input_sha256": "f930097bce008d5d5d0075c2597fba464d9cd001ad0b59b35f4c8e4e0ede9f91"
+    },
+    {
+      "id": "area-delta-2017-59799669B79583520985931",
+      "value": 23.743126,
+      "unit": "km2",
+      "vintage": "baseline",
+      "evaluation_commit": "b6cfaada43a1e0472cd833d16733d1fd6065eaec",
+      "input_sha256": "f930097bce008d5d5d0075c2597fba464d9cd001ad0b59b35f4c8e4e0ede9f91"
+    },
+    {
+      "id": "area-delta-2017-59799669B80293643035426",
+      "value": 40.157667,
+      "unit": "km2",
+      "vintage": "baseline",
+      "evaluation_commit": "b6cfaada43a1e0472cd833d16733d1fd6065eaec",
+      "input_sha256": "f930097bce008d5d5d0075c2597fba464d9cd001ad0b59b35f4c8e4e0ede9f91"
+    },
+    {
+      "id": "area-delta-2017-59799669B84579627936880",
+      "value": 16.821789,
+      "unit": "km2",
+      "vintage": "baseline",
+      "evaluation_commit": "b6cfaada43a1e0472cd833d16733d1fd6065eaec",
+      "input_sha256": "f930097bce008d5d5d0075c2597fba464d9cd001ad0b59b35f4c8e4e0ede9f91"
+    },
+    {
+      "id": "area-delta-2017-59799669B88193558767116",
+      "value": -26.701509,
+      "unit": "km2",
+      "vintage": "baseline",
+      "evaluation_commit": "b6cfaada43a1e0472cd833d16733d1fd6065eaec",
+      "input_sha256": "f930097bce008d5d5d0075c2597fba464d9cd001ad0b59b35f4c8e4e0ede9f91"
+    },
+    {
+      "id": "area-delta-2017-59799669B91583747266461",
+      "value": -5.387909,
+      "unit": "km2",
+      "vintage": "baseline",
+      "evaluation_commit": "b6cfaada43a1e0472cd833d16733d1fd6065eaec",
+      "input_sha256": "f930097bce008d5d5d0075c2597fba464d9cd001ad0b59b35f4c8e4e0ede9f91"
+    },
+    {
+      "id": "area-delta-2017-59799669B93063361678836",
+      "value": -60.988631,
+      "unit": "km2",
+      "vintage": "baseline",
+      "evaluation_commit": "b6cfaada43a1e0472cd833d16733d1fd6065eaec",
+      "input_sha256": "f930097bce008d5d5d0075c2597fba464d9cd001ad0b59b35f4c8e4e0ede9f91"
+    },
+    {
+      "id": "area-delta-2017-59799669B93779420845023",
+      "value": -65.086571,
+      "unit": "km2",
+      "vintage": "baseline",
+      "evaluation_commit": "b6cfaada43a1e0472cd833d16733d1fd6065eaec",
+      "input_sha256": "f930097bce008d5d5d0075c2597fba464d9cd001ad0b59b35f4c8e4e0ede9f91"
+    },
+    {
+      "id": "area-delta-2017-59799669B9703090978387",
+      "value": 1.216626,
+      "unit": "km2",
+      "vintage": "baseline",
+      "evaluation_commit": "b6cfaada43a1e0472cd833d16733d1fd6065eaec",
+      "input_sha256": "f930097bce008d5d5d0075c2597fba464d9cd001ad0b59b35f4c8e4e0ede9f91"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "All 23 pinned issue subjects match one retained 2017 source feature and a same-period official MONSTAT municipality name/area row; this is an identity/name crosswalk and area triage, not boundary-position validation.",
+      "status": "supported",
+      "source_ids": [
+        "geoboundaries-mne-adm1-2017",
+        "monstat-2017-yearbook"
+      ]
+    },
+    {
+      "text": "No official reusable 2017 municipality geometry was obtained from inspected public sources; Cadastre/Spatial Units Register and official water geoportal are explicit restoration leads with unresolved bytes/vintage/reuse details.",
+      "status": "unresolved",
+      "source_ids": [
+        "water-info-geoportal",
+        "cadastre-spatial-units-register"
+      ]
+    },
+    {
+      "text": "The source comparison polygons have unverified legal boundary basis and island/coast completeness; no geometry approval or correction is supported.",
+      "status": "unresolved",
+      "source_ids": [
+        "geoboundaries-mne-adm1-2017",
+        "cadastre-spatial-units-register"
+      ]
+    },
+    {
+      "text": "MONSTAT tables identify an unexplained 157 km2 2017 area sum discrepancy; the 2018 report attributes its separate 226 km2 country/table difference to Lake Skadar and calls Tuzi area temporary pending demarcation.",
+      "status": "supported",
+      "source_ids": [
+        "monstat-2017-yearbook",
+        "monstat-2021-yearbook"
+      ]
+    },
+    {
+      "text": "Latest inspected Ministry statement reports agreement to arbitrate open Podgorica/Tuzi demarcation questions; final outcome/current geometry is not established.",
+      "status": "unresolved",
+      "source_ids": [
+        "ministry-tuzi-demarcation"
+      ]
+    },
+    {
+      "text": "The current official municipality roster has 25 entries including Tuzi and Zeta, but is contact/name data and cannot verify boundary geometry.",
+      "status": "supported",
+      "source_ids": [
+        "montenegro-current-municipality-roster"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 data/regional-review/followup-montenegro-422-boundaries-20261005/reproduce.py",
+    "node scripts/evidence-quality.mjs data/regional-review/followup-montenegro-422-boundaries-20261005/evidence-quality.json",
+    "git diff --check"
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "area-delta-2017-59799669B12564288388297",
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/comparison.json",
+      "json_pointer": "/subjects/0/area_delta_2017_official_minus_geometry_km2"
+    },
+    {
+      "metric_id": "area-delta-2017-59799669B20110685483927",
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/comparison.json",
+      "json_pointer": "/subjects/1/area_delta_2017_official_minus_geometry_km2"
+    },
+    {
+      "metric_id": "area-delta-2017-59799669B20319020653405",
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/comparison.json",
+      "json_pointer": "/subjects/2/area_delta_2017_official_minus_geometry_km2"
+    },
+    {
+      "metric_id": "area-delta-2017-59799669B20349667855259",
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/comparison.json",
+      "json_pointer": "/subjects/3/area_delta_2017_official_minus_geometry_km2"
+    },
+    {
+      "metric_id": "area-delta-2017-59799669B22511566400758",
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/comparison.json",
+      "json_pointer": "/subjects/4/area_delta_2017_official_minus_geometry_km2"
+    },
+    {
+      "metric_id": "area-delta-2017-59799669B28207041867492",
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/comparison.json",
+      "json_pointer": "/subjects/5/area_delta_2017_official_minus_geometry_km2"
+    },
+    {
+      "metric_id": "area-delta-2017-59799669B41052051546873",
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/comparison.json",
+      "json_pointer": "/subjects/6/area_delta_2017_official_minus_geometry_km2"
+    },
+    {
+      "metric_id": "area-delta-2017-59799669B48420505719641",
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/comparison.json",
+      "json_pointer": "/subjects/7/area_delta_2017_official_minus_geometry_km2"
+    },
+    {
+      "metric_id": "area-delta-2017-59799669B58100018961631",
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/comparison.json",
+      "json_pointer": "/subjects/8/area_delta_2017_official_minus_geometry_km2"
+    },
+    {
+      "metric_id": "area-delta-2017-59799669B59523358081802",
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/comparison.json",
+      "json_pointer": "/subjects/9/area_delta_2017_official_minus_geometry_km2"
+    },
+    {
+      "metric_id": "area-delta-2017-59799669B66678983232609",
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/comparison.json",
+      "json_pointer": "/subjects/10/area_delta_2017_official_minus_geometry_km2"
+    },
+    {
+      "metric_id": "area-delta-2017-59799669B74362705567987",
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/comparison.json",
+      "json_pointer": "/subjects/11/area_delta_2017_official_minus_geometry_km2"
+    },
+    {
+      "metric_id": "area-delta-2017-59799669B75560777931070",
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/comparison.json",
+      "json_pointer": "/subjects/12/area_delta_2017_official_minus_geometry_km2"
+    },
+    {
+      "metric_id": "area-delta-2017-59799669B7591395216485",
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/comparison.json",
+      "json_pointer": "/subjects/13/area_delta_2017_official_minus_geometry_km2"
+    },
+    {
+      "metric_id": "area-delta-2017-59799669B78864851615199",
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/comparison.json",
+      "json_pointer": "/subjects/14/area_delta_2017_official_minus_geometry_km2"
+    },
+    {
+      "metric_id": "area-delta-2017-59799669B79583520985931",
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/comparison.json",
+      "json_pointer": "/subjects/15/area_delta_2017_official_minus_geometry_km2"
+    },
+    {
+      "metric_id": "area-delta-2017-59799669B80293643035426",
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/comparison.json",
+      "json_pointer": "/subjects/16/area_delta_2017_official_minus_geometry_km2"
+    },
+    {
+      "metric_id": "area-delta-2017-59799669B84579627936880",
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/comparison.json",
+      "json_pointer": "/subjects/17/area_delta_2017_official_minus_geometry_km2"
+    },
+    {
+      "metric_id": "area-delta-2017-59799669B88193558767116",
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/comparison.json",
+      "json_pointer": "/subjects/18/area_delta_2017_official_minus_geometry_km2"
+    },
+    {
+      "metric_id": "area-delta-2017-59799669B91583747266461",
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/comparison.json",
+      "json_pointer": "/subjects/19/area_delta_2017_official_minus_geometry_km2"
+    },
+    {
+      "metric_id": "area-delta-2017-59799669B93063361678836",
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/comparison.json",
+      "json_pointer": "/subjects/20/area_delta_2017_official_minus_geometry_km2"
+    },
+    {
+      "metric_id": "area-delta-2017-59799669B93779420845023",
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/comparison.json",
+      "json_pointer": "/subjects/21/area_delta_2017_official_minus_geometry_km2"
+    },
+    {
+      "metric_id": "area-delta-2017-59799669B9703090978387",
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/comparison.json",
+      "json_pointer": "/subjects/22/area_delta_2017_official_minus_geometry_km2"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/REVIEW.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/comparison.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/reproduce.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/reproduction-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/reservation.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/source-manifest.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/source/current-municipalities-2025.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/source/gb-MNE-ADM1-geoBoundaries-2017.geojson",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/source/issue-996-api-response.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/source/official-municipal-areas-2017.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/source/official-municipal-areas-2018.json",
+      "status": "added"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "source-crosswalk-and-area-comparison",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/followup-montenegro-422-boundaries-20261005/positive-control.json"
+    },
+    {
+      "method_id": "source-crosswalk-and-area-comparison",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/followup-montenegro-422-boundaries-20261005/negative-control.json"
+    }
+  ],
+  "rendered_tables": []
+}
