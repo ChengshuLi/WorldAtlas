@@ -134,7 +134,7 @@ const manifests = [
   ...['dated-reference-names', 'demographic-evidence', 'population-ghsl'].flatMap(name =>
     ['index.json', 'proof.json', 'revalidation.json'].map(file => [`data/${name}/${file}`, `data/${name}`])),
 ];
-const required = new Set(['data/granularity-audit.json', 'data/world-index.json', 'data/world-review.json', 'data/hierarchy-report.json']);
+const required = new Set(['data/granularity-audit.json', 'data/world-index.json', 'data/world-review.json', 'data/hierarchy-report.json', 'data/ownership-history/index.json', 'data/reference-attributes/index.json', 'data/ownership-runtime/index.json']);
 
 /** Read only immutable base blobs; missing/capped/malformed evidence throws. */
 export async function packageResearchInputs({route, base, api}) {
@@ -185,10 +185,11 @@ export async function packageResearchInputs({route, base, api}) {
       // fields. URLs/prose cannot match the normalized research namespaces.
       if (/^file:/i.test(value.trim().replace(/[\t\r\n]/g, ''))) throw Error('External file URL in package input manifest');
       {
-        const variants = [value];
+        const clean = value.trim().replace(/[\t\r\n]/g, '');
+        const variants = [value, clean];
         // URL-based committed readers decode escaped file names. Inspect the
         // decoded form too; literal fs/path readers still use the first form.
-        try { variants.push(decodeURIComponent(value)); } catch { /* prose may contain literal percent signs */ }
+        try { variants.push(decodeURIComponent(value), decodeURIComponent(clean)); } catch { /* prose may contain literal percent signs */ }
         for (const variant of variants) {
           const file = path.posix.normalize(path.posix.join(root, variant.replaceAll('\\', '/')));
           if (researchPath(file)) inputs.add(file);
@@ -200,6 +201,14 @@ export async function packageResearchInputs({route, base, api}) {
     }
   }
   await Promise.all(manifests.filter(([file]) => entries.has(file)).map(async ([file, root]) => collect(await read(file), root)));
+  const ownership = await read('data/ownership-history/index.json');
+  for (const algorithms of [ownership.execution_algorithms, ownership.initial_execution?.algorithms]) {
+    if (!Array.isArray(algorithms)) throw Error('Incomplete executed ownership reader inventory');
+    for (const algorithm of algorithms) {
+      if (typeof algorithm?.path !== 'string' || algorithm.path.includes('\\') || algorithm.path.split('/').some(part => !part || part === '.' || part === '..') ||
+          !/^[a-f0-9]{64}$/.test(algorithm.sha256 ?? '') || !Object.hasOwn(BUILD_MODULE_PINS, `data/ownership-history/${algorithm.path}`)) throw Error('Unreviewed executed ownership reader');
+    }
+  }
   const indexFile = 'data/source-quality-reviews/index.json';
   if (entries.has(indexFile)) {
     const index = await read(indexFile);

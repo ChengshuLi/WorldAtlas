@@ -136,8 +136,12 @@ function inputFixture(extra = {}) {
     'data/world-index.json': {parts: ['world-part.json']},
     'data/world-review.json': {location_parts: ['world-review/part.json']},
     'data/hierarchy-report.json': {change_parts: ['hierarchy-part.json']},
+    'data/ownership-history/index.json': {execution_algorithms: [], initial_execution: {algorithms: []}},
+    'data/reference-attributes/index.json': {},
+    'data/ownership-runtime/index.json': {},
     ...extra,
   };
+  if (files['data/ownership-history/index.json']) files['data/ownership-history/index.json'] = {execution_algorithms: [], initial_execution: {algorithms: []}, ...files['data/ownership-history/index.json']};
   const blobs = new Map(), tree = Object.entries(BUILD_MODULE_PINS).map(([name, sha]) => ({path: name, sha, size: 0, mode: '100644', type: 'blob'}));
   for (const [name, value] of Object.entries(files)) {
     const raw = Buffer.from(JSON.stringify(value));
@@ -178,6 +182,8 @@ test('public review attachments, annotation plans, audited inputs and copied par
     inputFixture({'data/reference-attributes/index.json': {parts: ['../regional-review/example/public.json']}}),
     inputFixture({'data/geographic-repair-evidence/index.json': {files: {'archive.json.gz': {archive_path: '../regional-review/example/public.json'}}}}),
     inputFixture({'data/ownership-history/index.json': {parts: [{path: '../%72egional-review/example/public.json'}]}}),
+    inputFixture({'data/ownership-history/index.json': {parts: [{path: ' ../regional-review/example/public.json '} ]}}),
+    inputFixture({'data/ownership-history/index.json': {parts: [{path: '../regional-re\tview/example/public.json'}]}}),
     inputFixture({'data/ownership-history/index.json': {parts: [{path: '../regional-review\\example\\public.json'}]}}),
   ]) {
     const inputs = await packageResearchInputs({route: `/repos/${repository}`, base: before, api: fixture.api});
@@ -198,9 +204,12 @@ test('unavailable, capped, malformed, symlinked or hash-mismatched package depen
     async () => { throw Error('unavailable'); },
     async () => ({truncated: true, tree: fixture.tree}),
     async () => ({truncated: false, tree: []}),
-    ...['vite.config.mjs', 'postcss.config.js', 'tsconfig.json'].map(file => async () => ({truncated: false, tree: [...fixture.tree, {path: file, type: 'blob', mode: '100644', sha: 'f'.repeat(40), size: 0}]})),
+    ...['vite.config.mjs', 'postcss.config.js', 'tsconfig.json', 'data/ownership-history/algorithms/exact/ellipsoidal_area.so'].map(file => async () => ({truncated: false, tree: [...fixture.tree, {path: file, type: 'blob', mode: '100644', sha: 'f'.repeat(40), size: 0}]})),
     ...['120000', '160000'].map(mode => async () => ({truncated: false, tree: [...fixture.tree, {path: 'data/typed-prepared-v1.json', type: mode === '120000' ? 'blob' : 'commit', mode, sha: 'f'.repeat(40), size: 0}]})),
     inputFixture({'data/ownership-history/index.json': {parts: [{path: 'file:../external.json'}]}}).api,
+    inputFixture({'data/ownership-history/index.json': {parts: [{path: ' FILE:../external.json '}]}}).api,
+    inputFixture({'data/ownership-history/index.json': {execution_algorithms: [{path: '../regional-review/example/majority.py', sha256: 'a'.repeat(64)}]}}).api,
+    inputFixture({'data/ownership-history/index.json': {execution_algorithms: [{path: 'unknown/majority.py', sha256: 'a'.repeat(64)}]}}).api,
     async () => ({truncated: false, tree: [...fixture.tree, {path: 'src/new-build-reader.js', type: 'blob', mode: '100644', sha: 'f'.repeat(40), size: 0}]}),
     ...['database.mjs', 'scripts/boundary-version-hash.py', 'data/ownership-history/algorithms/exact/majority.py'].map(file => async route => route.includes('/git/trees/') ? {truncated: false, tree: fixture.tree.map(row => row.path === file ? {...row, sha: 'f'.repeat(40)} : row)} : fixture.api(route)),
     async route => route.includes('/git/trees/') ? {truncated: false, tree: fixture.tree.map(row => ({...row, mode: '120000'}))} : fixture.api(route),
