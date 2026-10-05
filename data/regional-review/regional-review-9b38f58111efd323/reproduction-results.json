@@ -1,0 +1,1181 @@
+{
+  "verification_version": 1,
+  "generated_at": "2026-10-05",
+  "baseline_commit": "2bab7a0fc8b84e1d792d57996abf9f08539d1876",
+  "input_pins": {
+    "issue_scope": {
+      "path": "data/regional-review/regional-review-9b38f58111efd323/scope.json",
+      "sha256": "a0221f5e3ded12fe1686d78401a2ee61be0f8ae593b3229aa2f9a8d0232b5358"
+    },
+    "retained_geojson": {
+      "path": "data/regional-review/regional-review-9b38f58111efd323/sources/geoboundaries-chn-adm2-2017.geojson",
+      "bytes": 7618692,
+      "sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34"
+    },
+    "geojson_lfs_pointer": {
+      "path": "data/regional-review/regional-review-9b38f58111efd323/sources/geoboundaries-chn-adm2-2017.lfs-pointer.txt",
+      "sha256": "e3813c4ec8338704511fc234fad7653d68f694c6840e0f26a8d56737c20f8549"
+    },
+    "source_metadata": {
+      "path": "data/regional-review/regional-review-9b38f58111efd323/sources/geoboundaries-chn-adm2-metadata.json",
+      "sha256": "7f609da61c856d022a9bf83b35fb271d78ebb5855ad2c1cdff337e51acdec58a"
+    },
+    "source_citation_terms": {
+      "path": "data/regional-review/regional-review-9b38f58111efd323/sources/geoboundaries-citation-and-use.txt",
+      "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+    },
+    "world_index": {
+      "path": "data/world-index.json",
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+    },
+    "hierarchy": {
+      "path": "data/hierarchy.json",
+      "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+    },
+    "membership_inventory": {
+      "path": "data/macro-foundation/current-membership-inventory.json.gz",
+      "sha256": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab"
+    }
+  },
+  "results": {
+    "scoped_ids": 40,
+    "unique_scoped_ids": 40,
+    "scope_ids_found_once_in_pinned_world_index": 40,
+    "scope_ids_matched_once_to_retained_geojson": 40,
+    "all_pinned_yunnan_inventory_ids_in_retained_geojson": 125,
+    "source_geojson_feature_count": 2391,
+    "scoped_parent_counts": {
+      "framework:province:honghe-hani-and-yi-autonomous-prefecture:bf2f208cb205": 13,
+      "framework:province:qujing:63ef078a8d2a": 8,
+      "framework:province:wenshan-zhuang-and-miao-autonomous-prefecture:769019fc316e": 8,
+      "framework:province:zhaotong:c5d5d89a10c1": 11
+    },
+    "scoped_rows": [
+      {
+        "id": "gb:CHN:ADM2:17275852B10038962244175",
+        "source_shape_id": "17275852B10038962244175",
+        "source_name": "Kaiyuanshi",
+        "parent_id": "framework:province:honghe-hani-and-yi-autonomous-prefecture:bf2f208cb205",
+        "parent_name": "Honghe Hani and Yi Autonomous Prefecture",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 50,
+        "bbox_lon_lat": [
+          103.09548172900008,
+          23.52630934000007,
+          103.69836613200005,
+          23.978263066000068
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B10474076998029",
+        "source_shape_id": "17275852B10474076998029",
+        "source_name": "Huizhexian",
+        "parent_id": "framework:province:qujing:63ef078a8d2a",
+        "parent_name": "Qujing",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 96,
+        "bbox_lon_lat": [
+          103.02290624200003,
+          25.84447341400005,
+          103.92554335500006,
+          27.03846620300004
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B12394774588724",
+        "source_shape_id": "17275852B12394774588724",
+        "source_name": "Funingxian",
+        "parent_id": "framework:province:wenshan-zhuang-and-miao-autonomous-prefecture:769019fc316e",
+        "parent_name": "Wenshan Zhuang and Miao Autonomous Prefecture",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 91,
+        "bbox_lon_lat": [
+          105.22227037800008,
+          23.208516368000062,
+          106.19217367200008,
+          24.123049329000025
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B12551067010404",
+        "source_shape_id": "17275852B12551067010404",
+        "source_name": "Qiaojiaxian",
+        "parent_id": "framework:province:zhaotong:c5d5d89a10c1",
+        "parent_name": "Zhaotong",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 69,
+        "bbox_lon_lat": [
+          102.90743718100003,
+          26.57910044700003,
+          103.42676637600005,
+          27.43636439000005
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B15994587403299",
+        "source_shape_id": "17275852B15994587403299",
+        "source_name": "Yanjinxian",
+        "parent_id": "framework:province:zhaotong:c5d5d89a10c1",
+        "parent_name": "Zhaotong",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 55,
+        "bbox_lon_lat": [
+          104.00748439300008,
+          27.80213724600003,
+          104.47133587700006,
+          28.402894247000063
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B22092438679853",
+        "source_shape_id": "17275852B22092438679853",
+        "source_name": "Qujingshi",
+        "parent_id": "framework:province:qujing:63ef078a8d2a",
+        "parent_name": "Qujing",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 93,
+        "bbox_lon_lat": [
+          103.49569578900008,
+          25.157420649000073,
+          104.23210913600008,
+          26.115121643000066
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B2220262487318",
+        "source_shape_id": "17275852B2220262487318",
+        "source_name": "Yongshanxian",
+        "parent_id": "framework:province:zhaotong:c5d5d89a10c1",
+        "parent_name": "Zhaotong",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 84,
+        "bbox_lon_lat": [
+          103.26108829700007,
+          27.532459059000075,
+          104.05305655500007,
+          28.465393697000025
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B24732894609656",
+        "source_shape_id": "17275852B24732894609656",
+        "source_name": "Jinpingmiaozhuyaozhudaizuzizhixian",
+        "parent_id": "framework:province:honghe-hani-and-yi-autonomous-prefecture:bf2f208cb205",
+        "parent_name": "Honghe Hani and Yi Autonomous Prefecture",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 101,
+        "bbox_lon_lat": [
+          102.56072225800006,
+          22.44939173800003,
+          103.63427183800007,
+          23.100536528000077
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B25118635178414",
+        "source_shape_id": "17275852B25118635178414",
+        "source_name": "Yuanyangxian",
+        "parent_id": "framework:province:honghe-hani-and-yi-autonomous-prefecture:bf2f208cb205",
+        "parent_name": "Honghe Hani and Yi Autonomous Prefecture",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 65,
+        "bbox_lon_lat": [
+          102.46868659600005,
+          22.815949697000065,
+          103.22050887100005,
+          23.34509461400006
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B25475293774164",
+        "source_shape_id": "17275852B25475293774164",
+        "source_name": "Shuifuxian",
+        "parent_id": "framework:province:zhaotong:c5d5d89a10c1",
+        "parent_name": "Zhaotong",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 19,
+        "bbox_lon_lat": [
+          104.07165339000005,
+          28.367850022000027,
+          104.40093803300005,
+          28.59774208300007
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B29331893920720",
+        "source_shape_id": "17275852B29331893920720",
+        "source_name": "Yiliangxian",
+        "parent_id": "framework:province:zhaotong:c5d5d89a10c1",
+        "parent_name": "Zhaotong",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 68,
+        "bbox_lon_lat": [
+          103.87121489900005,
+          27.26647559500003,
+          104.73070790100007,
+          27.934662031000073
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B29668080933041",
+        "source_shape_id": "17275852B29668080933041",
+        "source_name": "Hekouyaozuzizhixian",
+        "parent_id": "framework:province:honghe-hani-and-yi-autonomous-prefecture:bf2f208cb205",
+        "parent_name": "Honghe Hani and Yi Autonomous Prefecture",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 61,
+        "bbox_lon_lat": [
+          103.39744842600004,
+          22.49394218200007,
+          104.28883955600008,
+          23.03559931800004
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B3143049294932",
+        "source_shape_id": "17275852B3143049294932",
+        "source_name": "Qiubeixian",
+        "parent_id": "framework:province:wenshan-zhuang-and-miao-autonomous-prefecture:769019fc316e",
+        "parent_name": "Wenshan Zhuang and Miao Autonomous Prefecture",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 83,
+        "bbox_lon_lat": [
+          103.61547562600003,
+          23.78290212400003,
+          104.60913575500007,
+          24.460614815000042
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B32703931530540",
+        "source_shape_id": "17275852B32703931530540",
+        "source_name": "Honghexian",
+        "parent_id": "framework:province:honghe-hani-and-yi-autonomous-prefecture:bf2f208cb205",
+        "parent_name": "Honghe Hani and Yi Autonomous Prefecture",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 56,
+        "bbox_lon_lat": [
+          101.82289751900004,
+          23.115750226000046,
+          102.62951402300007,
+          23.464111623000065
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B3395613846237",
+        "source_shape_id": "17275852B3395613846237",
+        "source_name": "Pingbianmiaozuzizhixian",
+        "parent_id": "framework:province:honghe-hani-and-yi-autonomous-prefecture:bf2f208cb205",
+        "parent_name": "Honghe Hani and Yi Autonomous Prefecture",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 53,
+        "bbox_lon_lat": [
+          103.38410563700006,
+          22.840907143000038,
+          103.95193232600008,
+          23.40683389900005
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B38063051407977",
+        "source_shape_id": "17275852B38063051407977",
+        "source_name": "Luchunxian",
+        "parent_id": "framework:province:honghe-hani-and-yi-autonomous-prefecture:bf2f208cb205",
+        "parent_name": "Honghe Hani and Yi Autonomous Prefecture",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 75,
+        "bbox_lon_lat": [
+          101.80306526000004,
+          22.55298446200004,
+          102.63345955900007,
+          23.142596507000064
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B38849967553627",
+        "source_shape_id": "17275852B38849967553627",
+        "source_name": "Zhenxiongxian",
+        "parent_id": "framework:province:zhaotong:c5d5d89a10c1",
+        "parent_name": "Zhaotong",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 66,
+        "bbox_lon_lat": [
+          104.30409136400004,
+          27.285086041000056,
+          105.33242968600007,
+          27.83639398500003
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B42027013653658",
+        "source_shape_id": "17275852B42027013653658",
+        "source_name": "Gejiushi",
+        "parent_id": "framework:province:honghe-hani-and-yi-autonomous-prefecture:bf2f208cb205",
+        "parent_name": "Honghe Hani and Yi Autonomous Prefecture",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 57,
+        "bbox_lon_lat": [
+          102.87847444200008,
+          23.01047490600007,
+          103.45002347600007,
+          23.65091518500003
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B42043031438117",
+        "source_shape_id": "17275852B42043031438117",
+        "source_name": "Ludingshi",
+        "parent_id": "framework:province:zhaotong:c5d5d89a10c1",
+        "parent_name": "Zhaotong",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 66,
+        "bbox_lon_lat": [
+          103.18559761100005,
+          27.00009378900006,
+          103.74166960300005,
+          27.50239780800007
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B43817460377390",
+        "source_shape_id": "17275852B43817460377390",
+        "source_name": "Malipoxian",
+        "parent_id": "framework:province:wenshan-zhuang-and-miao-autonomous-prefecture:769019fc316e",
+        "parent_name": "Wenshan Zhuang and Miao Autonomous Prefecture",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 76,
+        "bbox_lon_lat": [
+          104.51415043200006,
+          22.831750009000075,
+          105.28679933800004,
+          23.55242554800003
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B47269106522129",
+        "source_shape_id": "17275852B47269106522129",
+        "source_name": "Jianshanxian",
+        "parent_id": "framework:province:wenshan-zhuang-and-miao-autonomous-prefecture:769019fc316e",
+        "parent_name": "Wenshan Zhuang and Miao Autonomous Prefecture",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 103,
+        "bbox_lon_lat": [
+          103.59561173800006,
+          23.360222815000043,
+          104.76745399000004,
+          24.01467838900004
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B51665073570281",
+        "source_shape_id": "17275852B51665073570281",
+        "source_name": "Shipingxian",
+        "parent_id": "framework:province:honghe-hani-and-yi-autonomous-prefecture:bf2f208cb205",
+        "parent_name": "Honghe Hani and Yi Autonomous Prefecture",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 67,
+        "bbox_lon_lat": [
+          102.15837585900005,
+          23.34509461400006,
+          102.73027024400005,
+          24.12856638900007
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B59271898684947",
+        "source_shape_id": "17275852B59271898684947",
+        "source_name": "Luliangxian",
+        "parent_id": "framework:province:qujing:63ef078a8d2a",
+        "parent_name": "Qujing",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 51,
+        "bbox_lon_lat": [
+          103.42418562800003,
+          24.77886007400008,
+          104.01390801800005,
+          25.35219558500006
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B6036299829891",
+        "source_shape_id": "17275852B6036299829891",
+        "source_name": "Zhaotongshi",
+        "parent_id": "framework:province:zhaotong:c5d5d89a10c1",
+        "parent_name": "Zhaotong",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 65,
+        "bbox_lon_lat": [
+          103.16209819700003,
+          27.188279849000025,
+          103.93571204400007,
+          27.650565228000062
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B63296783362201",
+        "source_shape_id": "17275852B63296783362201",
+        "source_name": "Fuyuanxian",
+        "parent_id": "framework:province:qujing:63ef078a8d2a",
+        "parent_name": "Qujing",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 76,
+        "bbox_lon_lat": [
+          103.97218473300006,
+          25.057855095000036,
+          104.81633739000006,
+          25.983757067000056
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B67045134559909",
+        "source_shape_id": "17275852B67045134559909",
+        "source_name": "Suijiangxian",
+        "parent_id": "framework:province:zhaotong:c5d5d89a10c1",
+        "parent_name": "Zhaotong",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 37,
+        "bbox_lon_lat": [
+          103.81094195000009,
+          28.33403444000004,
+          104.42756829200005,
+          28.669235798000045
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B68348636009640",
+        "source_shape_id": "17275852B68348636009640",
+        "source_name": "Xichouxian",
+        "parent_id": "framework:province:wenshan-zhuang-and-miao-autonomous-prefecture:769019fc316e",
+        "parent_name": "Wenshan Zhuang and Miao Autonomous Prefecture",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 50,
+        "bbox_lon_lat": [
+          104.39644320600007,
+          23.116251082000076,
+          104.99274918600008,
+          23.615737616000047
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B68484553596353",
+        "source_shape_id": "17275852B68484553596353",
+        "source_name": "Jianshuixian",
+        "parent_id": "framework:province:honghe-hani-and-yi-autonomous-prefecture:bf2f208cb205",
+        "parent_name": "Honghe Hani and Yi Autonomous Prefecture",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 78,
+        "bbox_lon_lat": [
+          102.60838824200005,
+          23.237517997000054,
+          103.22112975800007,
+          24.221304282000062
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B68781805037856",
+        "source_shape_id": "17275852B68781805037856",
+        "source_name": "Guangnanxian",
+        "parent_id": "framework:province:wenshan-zhuang-and-miao-autonomous-prefecture:769019fc316e",
+        "parent_name": "Wenshan Zhuang and Miao Autonomous Prefecture",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 101,
+        "bbox_lon_lat": [
+          104.51402244200005,
+          23.502100425000037,
+          105.58366421800008,
+          24.46207304400008
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B72941365568170",
+        "source_shape_id": "17275852B72941365568170",
+        "source_name": "Milexian",
+        "parent_id": "framework:province:honghe-hani-and-yi-autonomous-prefecture:bf2f208cb205",
+        "parent_name": "Honghe Hani and Yi Autonomous Prefecture",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 74,
+        "bbox_lon_lat": [
+          103.08981289900004,
+          23.82491680100003,
+          103.81502568500008,
+          24.703631483000038
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B75800233864805",
+        "source_shape_id": "17275852B75800233864805",
+        "source_name": "Weixinxian",
+        "parent_id": "framework:province:zhaotong:c5d5d89a10c1",
+        "parent_name": "Zhaotong",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 45,
+        "bbox_lon_lat": [
+          104.72569913200005,
+          27.695554753000067,
+          105.33852023200006,
+          28.121293880000053
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B76506385801060",
+        "source_shape_id": "17275852B76506385801060",
+        "source_name": "Wenshanxian",
+        "parent_id": "framework:province:wenshan-zhuang-and-miao-autonomous-prefecture:769019fc316e",
+        "parent_name": "Wenshan Zhuang and Miao Autonomous Prefecture",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 62,
+        "bbox_lon_lat": [
+          103.74766825900008,
+          23.131661326000028,
+          104.45263127200008,
+          23.74345053600007
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B76703841753402",
+        "source_shape_id": "17275852B76703841753402",
+        "source_name": "Maguanxian",
+        "parent_id": "framework:province:wenshan-zhuang-and-miao-autonomous-prefecture:769019fc316e",
+        "parent_name": "Wenshan Zhuang and Miao Autonomous Prefecture",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 73,
+        "bbox_lon_lat": [
+          103.89068880900004,
+          22.696847542000057,
+          104.67328686200005,
+          23.272664555000063
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B78997448672423",
+        "source_shape_id": "17275852B78997448672423",
+        "source_name": "Xuanweishi",
+        "parent_id": "framework:province:qujing:63ef078a8d2a",
+        "parent_name": "Qujing",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 68,
+        "bbox_lon_lat": [
+          103.60410347900006,
+          25.906330773000036,
+          104.68280636200006,
+          26.734882329000072
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B83580863536590",
+        "source_shape_id": "17275852B83580863536590",
+        "source_name": "Daguanxian",
+        "parent_id": "framework:province:zhaotong:c5d5d89a10c1",
+        "parent_name": "Zhaotong",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 58,
+        "bbox_lon_lat": [
+          103.68559641600007,
+          27.603254569000057,
+          104.09217931700005,
+          28.22408431300005
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B87805726740652",
+        "source_shape_id": "17275852B87805726740652",
+        "source_name": "Luxixian",
+        "parent_id": "framework:province:honghe-hani-and-yi-autonomous-prefecture:bf2f208cb205",
+        "parent_name": "Honghe Hani and Yi Autonomous Prefecture",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 45,
+        "bbox_lon_lat": [
+          103.52955177200005,
+          24.28179557900006,
+          104.05383794600004,
+          24.80008025500007
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B88435317014830",
+        "source_shape_id": "17275852B88435317014830",
+        "source_name": "Shizongxian",
+        "parent_id": "framework:province:qujing:63ef078a8d2a",
+        "parent_name": "Qujing",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 72,
+        "bbox_lon_lat": [
+          103.72454861700004,
+          24.355885147000038,
+          104.54294941000006,
+          25.03667282400005
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B93143295309052",
+        "source_shape_id": "17275852B93143295309052",
+        "source_name": "Luopingxian",
+        "parent_id": "framework:province:qujing:63ef078a8d2a",
+        "parent_name": "Qujing",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 73,
+        "bbox_lon_lat": [
+          103.97352203700007,
+          24.557036177000043,
+          104.70446088200003,
+          25.42498204000003
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B96140347691266",
+        "source_shape_id": "17275852B96140347691266",
+        "source_name": "Malongxian",
+        "parent_id": "framework:province:qujing:63ef078a8d2a",
+        "parent_name": "Qujing",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 44,
+        "bbox_lon_lat": [
+          103.28009868200007,
+          25.180075224000063,
+          103.77365794500008,
+          25.625810295000065
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B98994351670446",
+        "source_shape_id": "17275852B98994351670446",
+        "source_name": "Mengzixian",
+        "parent_id": "framework:province:honghe-hani-and-yi-autonomous-prefecture:bf2f208cb205",
+        "parent_name": "Honghe Hani and Yi Autonomous Prefecture",
+        "baseline_feature_path": "data/geography/part-4.json",
+        "baseline_feature_file_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "feature_geometry_type": "Polygon",
+        "polygon_parts": 1,
+        "rings": 1,
+        "vertices": 58,
+        "bbox_lon_lat": [
+          103.22305435200008,
+          23.076358739000057,
+          103.83058983900008,
+          23.58940606300007
+        ],
+        "coordinate_range_and_ring_closure": "passed",
+        "geometry_topology": "not assessed by a topology engine",
+        "source_metadata": {
+          "reference_year": "2017",
+          "role": "County Level",
+          "type": "ADM2",
+          "parent_source_level": "ADM1",
+          "hierarchy_source": "geoBoundaries gbHumanitarian / HDX China ADM2, 2020"
+        }
+      }
+    ]
+  },
+  "limits": [
+    "These checks establish exact identity joins and basic coordinate/ring structure only; they do not test self-intersection, polygon validity, inter-unit gaps/overlaps, island completeness, source-to-official boundary alignment, or territorial accuracy.",
+    "The issue owns 40 of 125 Yunnan inventory members. Matching the remaining 85 IDs to the same source is a roster control only, not a semantic review of those units.",
+    "The source includes no county-to-prefecture parent field or official administrative code. Current hierarchy parents were produced from a separate 2020 humanitarian/HDX source and cannot be independently verified from this 2017 file alone."
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "version": 1,
+  "retrieved_on": "2026-10-05",
+  "sources": [
+    {
+      "id": "geoboundaries-chn-adm2-2017",
+      "url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/CHN/ADM2/geoBoundaries-CHN-ADM2.geojson",
+      "restore_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/CHN/ADM2/geoBoundaries-CHN-ADM2.geojson",
+      "access": "retained",
+      "bytes": 7618692,
+      "sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
+      "vintage": "boundaryYear 2017; sourceDataUpdateDate 2023-01-19; buildDate 2023-12-12; immutable repo commit 9469f09592ced973a3448cf66b6100b741b64c0d",
+      "reuse": "Per-layer metadata declares ODC PDDL 1.0; source terms file asks for geoBoundaries and source attribution under CC BY 4.0 for derivative works.",
+      "use_limit": "Metadata source/license links are malformed or third-party; upstream authority and original source terms remain unverified."
+    },
+    {
+      "id": "geoboundaries-chn-adm2-metadata",
+      "url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/CHN/ADM2/geoBoundaries-CHN-ADM2-metaData.json",
+      "restore_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/CHN/ADM2/geoBoundaries-CHN-ADM2-metaData.json",
+      "access": "retained",
+      "bytes": 1101,
+      "sha256": "7f609da61c856d022a9bf83b35fb271d78ebb5855ad2c1cdff337e51acdec58a",
+      "use_limit": "Metadata source URL cites third-party GitHub shapefile; metadata URL fields for source/license contain missing-colon https// strings."
+    },
+    {
+      "id": "geoboundaries-citation-use",
+      "url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/CHN/ADM2/CITATION-AND-USE-geoBoundaries.txt",
+      "restore_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/CHN/ADM2/CITATION-AND-USE-geoBoundaries.txt",
+      "access": "retained",
+      "bytes": 4316,
+      "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+      "use_limit": "GeoBoundaries general terms cite its derivative-work license and instruct users to also check per-boundary source metadata."
+    },
+    {
+      "id": "yunnan-admin-setup-current",
+      "url": "https://ynmz.yn.gov.cn/bmfw/xzqh/xzqhsz/",
+      "restore": "Open the Provincial Civil Affairs Department page and read its administrative table dated 2025-09-30 and county-level names below it.",
+      "access": "official web search/index extract; direct page fetch timed out/failed on 2026-10-05",
+      "sha256": null,
+      "license": "No explicit reuse terms established; facts and citation only, no copied page/map bytes."
+    },
+    {
+      "id": "yunnan-admin-codes-current",
+      "url": "https://ynmz.yn.gov.cn/index.php/cms/quhuadaima.html",
+      "restore": "Open the Provincial Civil Affairs Department code table, current through 2026-01-31; confirm county/city names and codes.",
+      "access": "official web search/index extract; direct page fetch timed out/failed on 2026-10-05",
+      "sha256": null,
+      "license": "No explicit reuse terms established; facts and citation only."
+    },
+    {
+      "id": "qujing-standard-db53-1176-3-2023",
+      "url": "https://ynmz.yn.gov.cn/uploads/resource/download/20937/DB53_T_1176.3-2023%E4%BA%91%E5%8D%97%E7%9C%81%E8%A1%8C%E6%94%BF%E6%9D%91%E3%80%81%E7%A4%BE%E5%8C%BA%E7%BC%96%E7%A0%81_%E7%AC%AC3%E9%83%A8%E5%88%86%EF%BC%9A%E6%9B%B2%E9%9D%96%E5%B8%82.pdf",
+      "restore": "Retrieve table 1 for current Qujing county/district/city names and codes; standard is also linked on the Provincial Civil Affairs release page https://ynmz.yn.gov.cn/cms/quhuadiming/5997.html.",
+      "access": "official PDF result/index excerpt; direct host fetch failed on 2026-10-05",
+      "sha256": null,
+      "license": "Official standard; no explicit reuse terms verified. No PDF retained."
+    },
+    {
+      "id": "honghe-standard-db53-1176-11-2023",
+      "url": "https://ynmz.yn.gov.cn/uploads/resource/download/20937/DB53_T_1176.11-2023%E4%BA%91%E5%8D%97%E7%9C%81%E8%A1%8C%E6%94%BF%E6%9D%91%E3%80%81%E7%A4%BE%E5%8C%BA%E7%BC%96%E7%A0%81_%E7%AC%AC11%E9%83%A8%E5%88%86%EF%BC%9A%E7%BA%A2%E6%B2%B3%E5%93%88%E5%B0%BC%E6%97%8F%E5%BD%9D%E6%97%8F%E8%87%AA%E6%B2%BB%E5%B7%9E.pdf",
+      "restore": "Retrieve table 1 for Honghe county/city names and codes; standard is linked on https://ynmz.yn.gov.cn/cms/quhuadiming/5997.html.",
+      "access": "official PDF result/index excerpt; direct host fetch failed on 2026-10-05",
+      "sha256": null,
+      "license": "Official standard; no explicit reuse terms verified. No PDF retained."
+    },
+    {
+      "id": "wenshan-standard-db53-1176-12-2023",
+      "url": "https://ynmz.yn.gov.cn/uploads/resource/download/20937/DB53_T_1176.12-2023%E4%BA%91%E5%8D%97%E7%9C%81%E8%A1%8C%E6%94%BF%E6%9D%91%E3%80%81%E7%A4%BE%E5%8C%BA%E7%BC%96%E7%A0%81_%E7%AC%AC12%E9%83%A8%E5%88%86%EF%BC%9A%E6%96%87%E5%B1%B1%E5%A3%AE%E6%97%8F%E8%8B%97%E6%97%8F%E8%87%AA%E6%B2%BB%E5%B7%9E.pdf",
+      "restore": "Retrieve table 1 for Wenshan county/city names and codes; standard is linked on https://ynmz.yn.gov.cn/cms/quhuadiming/5997.html.",
+      "access": "official PDF result/index excerpt; direct host fetch failed on 2026-10-05",
+      "sha256": null,
+      "license": "Official standard; no explicit reuse terms verified. No PDF retained."
+    },
+    {
+      "id": "zhaotong-standard-release",
+      "url": "https://ynmz.yn.gov.cn/cms/quhuadiming/5997.html",
+      "restore": "Open the Provincial Civil Affairs Department release page and follow the DB53/T 1176.6-2023 Zhaotong PDF link; use table 1.",
+      "access": "official web search/index extract; direct page fetch timed out/failed on 2026-10-05",
+      "sha256": null,
+      "license": "No explicit reuse terms established; facts and citation only."
+    },
+    {
+      "id": "yunnan-2010-county-city-changes",
+      "url": "https://ynmz.yn.gov.cn/cms/nianduzhengfuxinxigongkainianbao/4580.html",
+      "restore": "Open the 2010 Provincial Civil Affairs Department annual information report; its text says Mengzi and Wenshan completed county-to-city changes in 2010.",
+      "access": "official web search/index extract; direct fetch failed on 2026-10-05",
+      "sha256": null,
+      "license": "No explicit reuse terms established; facts and citation only."
+    },
+    {
+      "id": "qujing-1997-admin-reorganization",
+      "url": "https://www.qj.gov.cn/html/2013/qjdsj_0419/3135.html",
+      "access": "retrieved and SHA-256 streamed without retaining response bytes on 2026-10-05",
+      "bytes": 33494,
+      "sha256": "bf09274108f5e011182947b9889beb2978be448dff92e2fa5e9371c61fb8f822",
+      "restore": "URL is the Qujing Municipal Government history page; read the 1997 reform paragraph.",
+      "license": "No explicit reuse terms established; facts and citation only."
+    },
+    {
+      "id": "mile-county-to-city-history",
+      "url": "https://www.hhml.gov.cn/info/5181/884162.htm",
+      "access": "retrieved and SHA-256 streamed without retaining response bytes on 2026-10-05",
+      "bytes": 46421,
+      "sha256": "012f60d1bf6a48eb55f66ee21471e22cab57c5a4b64049056f6045903d2c939a",
+      "restore": "URL is the Mile Municipal Government history page; read the history paragraph citing 2013-01-24 approval.",
+      "license": "No explicit reuse terms established; facts and citation only."
+    },
+    {
+      "id": "malong-2018-change",
+      "url": "https://ynmz.yn.gov.cn/cms/quhuadiming/5970.html",
+      "restore": "Open the Provincial Civil Affairs Department notice dated 2018-02-09 about Malong County to Malong District.",
+      "access": "official web search/index extract; direct page fetch failed on 2026-10-05",
+      "sha256": null,
+      "license": "No explicit reuse terms established; facts and citation only."
+    },
+    {
+      "id": "shuifu-2018-change",
+      "url": "https://ynmz.yn.gov.cn/cms/quhuadiming/5982.html",
+      "restore": "Open the Provincial Civil Affairs Department notice dated 2018-07-03 about Shuifu County to county-level Shuifu City.",
+      "access": "official web search/index extract; direct page fetch failed on 2026-10-05",
+      "sha256": null,
+      "license": "No explicit reuse terms established; facts and citation only."
+    },
+    {
+      "id": "geoboundaries-china-adm2-caveat",
+      "url": "https://github.com/wmgeolab/geoBoundaries/issues/21",
+      "access": "retrieved and SHA-256 streamed without retaining response bytes on 2026-10-05",
+      "bytes": 245237,
+      "sha256": "88ca950b1e9cd51f64ba0b85a0144ccad9b2c2f048a53ad51373f7c78d645526",
+      "restore": "Open geoBoundaries issue #21; it is a general China ADM2 caveat, not Yunnan-specific boundary proof.",
+      "license": "Public GitHub issue used as a citation; no comments or issue content are copied into this packet."
+    }
+  ],
+  "limits": [
+    "Official Yunnan government host requests failed or timed out via direct API fetch on retrieval date. Official web search/index excerpts were accessible and are cited, but their exact served bytes could not be hashed. Restore directly from each URL and record bytes/hash before relying on those sources as retained machine evidence.",
+    "No official boundary geometry or map archive for the exact 2017 units was retained. Current official code/name lists and administrative change notices do not prove exact source polygon alignment.",
+    "No web page, official standard or map was retained where terms were unclear. The relevant official facts, source URLs, retrieval date and non-retention reason are recorded."
+  ]
+}
