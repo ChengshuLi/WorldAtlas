@@ -15,8 +15,19 @@ assert all(x['assessment'] in {'justified','correction-needed','insufficient_evi
 assert all(x['assessment']=='insufficient_evidence' for x in rows.values())
 assert all(x['source_feature_found'] for x in rows.values())
 assert all(x['source_name']==x['name'] for x in rows.values())
-assert len(readj('province-assessments.json'))==len(s['province_scopes'])==37
-assert len(readj('area-assessments.json'))==len(s['area_scopes'])==3
+province_rows=readj('province-assessments.json')
+area_rows=readj('area-assessments.json')
+risk=readj('scope-risk-screen.json')
+assert len(province_rows)==len(s['province_scopes'])==37
+assert len(area_rows)==len(s['area_scopes'])==3
+assert {x['id'] for x in province_rows}=={x['id'] for x in s['province_scopes']}
+assert {x['id'] for x in area_rows}=={x['id'] for x in s['area_scopes']}
+area_group_counts={aid:sum(x['area_id']==aid for x in province_rows) for aid in {x['area_id'] for x in province_rows}}
+assert area_group_counts=={
+ 'atlas:area:IND:8170e1c79f28':28,
+ 'atlas:area:IND:5948131347f0':7,
+ 'atlas:macro-foundation:area:f54495a7a03aa7c3':2}
+assert {aid:row['group_count'] for aid,row in risk['province_group_size_screen'].items()}==area_group_counts
 with gzip.open(ROOT/'sources/geoBoundaries-IND-ADM3-2018-retained.geojson.gz','rt') as f: g3=json.load(f)
 g2=readj('sources/geoBoundaries-IND-ADM2-2021.geojson')
 def index(features):
@@ -40,4 +51,4 @@ assert sum(x['source_id']=='gb:IND:ADM2' for x in rows.values())==26
 inv=readj('source-inventory.json')
 for f in inv['sources']:
  assert sha(f['path'])==f['sha256'], f['path']
-print(json.dumps({'scope_ids':len(ids),'unique_scope_ids':len(set(ids)),'assessment_rows':len(rows),'province_rows':37,'area_rows':3,'source_feature_id_matches':230,'source_name_equalities':230,'source_geometry_type_and_component_checks':230,'adm2_source_features':len(g2['features']),'adm3_source_features':len(g3['features']),'scoped_adm2':26,'scoped_adm3':204,'result':'PASS','meaning':'Exact scope, source identity, packet coverage and retained-byte hashes only; no proof of legal/current boundaries, source completeness, tier suitability, topological accuracy or geographic truth.'},indent=2))
+print(json.dumps({'scope_ids':len(ids),'unique_scope_ids':len(set(ids)),'assessment_rows':len(rows),'province_rows':len(province_rows),'area_rows':len(area_rows),'province_groups_by_area':area_group_counts,'source_feature_id_matches':230,'source_name_equalities':230,'source_geometry_type_and_component_checks':230,'adm2_source_features':len(g2['features']),'adm3_source_features':len(g3['features']),'scoped_adm2':26,'scoped_adm3':204,'result':'PASS','meaning':'Exact scope, source identity, packet coverage and retained-byte hashes only; no proof of legal/current boundaries, source completeness, tier suitability, topological accuracy or geographic truth.'},indent=2))
