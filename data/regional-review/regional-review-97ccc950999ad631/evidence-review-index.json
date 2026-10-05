@@ -1,0 +1,225 @@
+{
+  "version": 1,
+  "purpose": "Supplemental review index for legacy issue #473. This is not a policy-mandated evidence-quality v1 manifest; the issue predates evidence-policy activation. It inventories exact changed bytes and source artifacts for independent human review.",
+  "issue": 473,
+  "lane": "geography",
+  "worker_id": "codex-01a10948-7d38-75d0-bc01-4cc28ea41f49",
+  "prepared_from_commit": "5937ba3d679682bf327709b63881d77e7bb83d1e",
+  "baseline_commit": "ee1b368bcaeb1fb114e3a5d0d9d3a2e06d633fa7",
+  "region_release": {
+    "id": "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+    "version": 5,
+    "hierarchy_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+    "footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286",
+    "macro_certificate_sha256": "979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e"
+  },
+  "exact_subject_inventory_path": "data/regional-review/regional-review-97ccc950999ad631/issue-scope-pinned.json",
+  "exact_subject_count": 229,
+  "scope_sha256": "9dcbb9d68e6f1d875052eb58b65ba323c9be242817d522bd114459338b43e3d7",
+  "changed_files_excluding_this_index": [
+    {
+      "path": "data/regional-review/regional-review-97ccc950999ad631/README.md",
+      "role": "method-or-documentation",
+      "bytes": 10929,
+      "sha256": "19f2332388fc5cc636fe469d2a27bde2e8fd94e0c14e221d3b0836249555c682"
+    },
+    {
+      "path": "data/regional-review/regional-review-97ccc950999ad631/acquire_sources.py",
+      "role": "method-or-documentation",
+      "bytes": 5269,
+      "sha256": "56c7c37e372b24470281dcb0390e6a810c4708fcbea295290249dffc56ccac4c"
+    },
+    {
+      "path": "data/regional-review/regional-review-97ccc950999ad631/assessment.json",
+      "role": "generated-assessment",
+      "bytes": 1162344,
+      "sha256": "98ccc11740dba379a47b0fadc90764891c40f4576f71a265826eee1035e84fbf"
+    },
+    {
+      "path": "data/regional-review/regional-review-97ccc950999ad631/baseline-members.geojson.gz",
+      "role": "retained-source",
+      "bytes": 172151,
+      "sha256": "bceb1b2eda923e5acddcf5bec28a5c6b0cd3ce060b91e5df4053ae31b25761a2"
+    },
+    {
+      "path": "data/regional-review/regional-review-97ccc950999ad631/baseline-receipt.json",
+      "role": "generated-assessment",
+      "bytes": 989,
+      "sha256": "c78b8b72343320258bdef55bcabded9bd115c6e42ddb18e5dcfbc2d89f83ea51"
+    },
+    {
+      "path": "data/regional-review/regional-review-97ccc950999ad631/build_assessment.cjs",
+      "role": "method-or-documentation",
+      "bytes": 28346,
+      "sha256": "66bf6657891fc7489b395910e02946af018b3766ee46fe72466e4ef480fdf64a"
+    },
+    {
+      "path": "data/regional-review/regional-review-97ccc950999ad631/coverage-screen.json",
+      "role": "generated-assessment",
+      "bytes": 6729,
+      "sha256": "868e6c7cf6c755667420b460ecf9bd228ae739c33d4193b698300d98a209b665"
+    },
+    {
+      "path": "data/regional-review/regional-review-97ccc950999ad631/findings-and-handoffs.json",
+      "role": "generated-assessment",
+      "bytes": 42381,
+      "sha256": "c454f4c6dbb32d7c2c037ba6c88a4edb78a12bb07bafda84521c57eedff8c02f"
+    },
+    {
+      "path": "data/regional-review/regional-review-97ccc950999ad631/hash_reference_sources.py",
+      "role": "method-or-documentation",
+      "bytes": 5119,
+      "sha256": "4ff6f76040f4e8ee2514ef494295fa388ffab9b1380b1ce018851c1d7db7b64a"
+    },
+    {
+      "path": "data/regional-review/regional-review-97ccc950999ad631/issue-metadata.json",
+      "role": "generated-assessment",
+      "bytes": 23415,
+      "sha256": "859f161c2ab26c6a1f6e1da57775a55cf2c83d89d29e2f0111fd46502a4c3af4"
+    },
+    {
+      "path": "data/regional-review/regional-review-97ccc950999ad631/issue-scope-pinned.json",
+      "role": "generated-assessment",
+      "bytes": 21365,
+      "sha256": "9dcbb9d68e6f1d875052eb58b65ba323c9be242817d522bd114459338b43e3d7"
+    },
+    {
+      "path": "data/regional-review/regional-review-97ccc950999ad631/province-assessments.json",
+      "role": "generated-assessment",
+      "bytes": 48301,
+      "sha256": "1f9d1b91c0592b1e1a31b842a5c49b82c0778c014f101ee1c92387fb9d5df4aa"
+    },
+    {
+      "path": "data/regional-review/regional-review-97ccc950999ad631/reference-source-checksums.json",
+      "role": "retained-source",
+      "bytes": 8701,
+      "sha256": "0cb1caccdcac511566c70a9a6cd98cd4066c865dd3129a528316157bdb7e3b4a"
+    },
+    {
+      "path": "data/regional-review/regional-review-97ccc950999ad631/reservation-renewal.json",
+      "role": "generated-assessment",
+      "bytes": 1764,
+      "sha256": "7c0b757d69b7962b06a6a2ff05ba9eede19b0451c7c045d19ed08ff3cc103f6b"
+    },
+    {
+      "path": "data/regional-review/regional-review-97ccc950999ad631/scale-screens.json",
+      "role": "generated-assessment",
+      "bytes": 2738,
+      "sha256": "a42be2bf63fcd3fe8761fe42c14b8cfc2010a730b84f11ad38c2379c6f37c829"
+    },
+    {
+      "path": "data/regional-review/regional-review-97ccc950999ad631/source-review.json",
+      "role": "generated-assessment",
+      "bytes": 12497,
+      "sha256": "354290677fbe3207b76635820cdf9c92c24fce271d31e94aa929d8f83b8c9d3e"
+    },
+    {
+      "path": "data/regional-review/regional-review-97ccc950999ad631/sources/esri-wca-item-data.json",
+      "role": "retained-source",
+      "bytes": 3277,
+      "sha256": "07ebea5c4a70c20b929508acb0bbb929e2f841d145b9c45f2c044ec6953fbb9c"
+    },
+    {
+      "path": "data/regional-review/regional-review-97ccc950999ad631/sources/esri-wca-item-metadata.json",
+      "role": "retained-source",
+      "bytes": 8638,
+      "sha256": "c24f40adbe800cb792527f99324bd510bebcbdfd597c7fe1c7c782f09496c7eb"
+    },
+    {
+      "path": "data/regional-review/regional-review-97ccc950999ad631/sources/geoboundaries-current-metadata-lbr.json",
+      "role": "retained-source",
+      "bytes": 1767,
+      "sha256": "f21bb1363b8afa92272043785d7ff5625ceb193d471ab31668d09547c195b8e5"
+    },
+    {
+      "path": "data/regional-review/regional-review-97ccc950999ad631/sources/geoboundaries-current-metadata-mli.json",
+      "role": "retained-source",
+      "bytes": 2023,
+      "sha256": "abf07152a8373f35263cdb7c401e610c4905beb619fd43c60fdaeeee3fcc0a86"
+    },
+    {
+      "path": "data/regional-review/regional-review-97ccc950999ad631/sources/geoboundaries-current-metadata-mrt.json",
+      "role": "retained-source",
+      "bytes": 1800,
+      "sha256": "ca98b796683319332b7f3fd00b6823276dc763e1e414042d0e184f516ef5c605"
+    },
+    {
+      "path": "data/regional-review/regional-review-97ccc950999ad631/sources/geoboundaries-lbr-adm1-2021.geojson.gz",
+      "role": "retained-source",
+      "bytes": 255948,
+      "sha256": "2f51f5aef36f9349b44074e44168e5e0e12eef509474f15f53e14abb18e9991d"
+    },
+    {
+      "path": "data/regional-review/regional-review-97ccc950999ad631/sources/geoboundaries-lbr-adm2-2021.geojson.gz",
+      "role": "retained-source",
+      "bytes": 507453,
+      "sha256": "810dc4f1a89bff9219ada61b8176f320adf4d6cfe1a73f2eec2bce8054935f70"
+    },
+    {
+      "path": "data/regional-review/regional-review-97ccc950999ad631/sources/geoboundaries-mli-adm1-2017.geojson.gz",
+      "role": "retained-source",
+      "bytes": 131090,
+      "sha256": "55f877fc84ae9acc07e925d764fde91d1f5158b9a432243855146cd5d5f573de"
+    },
+    {
+      "path": "data/regional-review/regional-review-97ccc950999ad631/sources/geoboundaries-mli-adm2-2017.geojson.gz",
+      "role": "retained-source",
+      "bytes": 199591,
+      "sha256": "72d1614cd60b785b09d42f5f90c5b035e2e2c230b961c99eaaa50c2fa94c115b"
+    },
+    {
+      "path": "data/regional-review/regional-review-97ccc950999ad631/sources/geoboundaries-mrt-adm1-2020.geojson.gz",
+      "role": "retained-source",
+      "bytes": 282954,
+      "sha256": "f783758088f5e2ca6d98bc6f2f496ddaf118505effb89a8373a6ea3c06e94bb9"
+    },
+    {
+      "path": "data/regional-review/regional-review-97ccc950999ad631/sources/geoboundaries-mrt-adm2-2020.geojson.gz",
+      "role": "retained-source",
+      "bytes": 35991,
+      "sha256": "6dfb42d709cd94a3d370c7ac4dc0b50186a775397165cc7cb73a9fa1bbbe4dd3"
+    },
+    {
+      "path": "data/regional-review/regional-review-97ccc950999ad631/sources/metadata-review.json",
+      "role": "retained-source",
+      "bytes": 23872,
+      "sha256": "b1c8c49fbc747de5dbbfafefd3d839241c2b4c05a163779fdbb0dc23ec8eb07c"
+    },
+    {
+      "path": "data/regional-review/regional-review-97ccc950999ad631/sources/register.json",
+      "role": "retained-source",
+      "bytes": 9277,
+      "sha256": "38db0305c91de377f5492af42a5f297eee4c6d3d391b06bb0a0a3805d9469e68"
+    },
+    {
+      "path": "data/regional-review/regional-review-97ccc950999ad631/sources/resolve-ecoregions-53-71-745-842-846.geojson.gz",
+      "role": "retained-source",
+      "bytes": 733159,
+      "sha256": "e14ebb64c273006ebecc4e58735e16338c5ae8f1b59b3f176c132576ef2943e7"
+    },
+    {
+      "path": "data/regional-review/regional-review-97ccc950999ad631/sources/resolve-ecoregions-service.json",
+      "role": "retained-source",
+      "bytes": 3399,
+      "sha256": "bbafae5dbb1411d19dfd8ed04b10bc247f06c10c4db23d90e42510c56cd20e15"
+    },
+    {
+      "path": "data/regional-review/regional-review-97ccc950999ad631/sources/resolve-query-receipt.json",
+      "role": "retained-source",
+      "bytes": 2727,
+      "sha256": "b55171217cbd91092ab2c26f51d738d351e7848824e742d9627f7103e384bad8"
+    },
+    {
+      "path": "data/regional-review/regional-review-97ccc950999ad631/verify_packet.cjs",
+      "role": "method-or-documentation",
+      "bytes": 9925,
+      "sha256": "0dd7e498111b253ed0a7f5f6ddcb82c78f5121f7ce177f26d211dbfe6f7236ff"
+    }
+  ],
+  "external_reference_index": "data/regional-review/regional-review-97ccc950999ad631/reference-source-checksums.json",
+  "limitations": [
+    "This review index is not a scientific or geographic approval.",
+    "The work packet has no policy-required evidence-quality v1 manifest because the original issue predates activation.",
+    "Hashes prove byte identity only; reviewers must inspect source meaning, methods, controls, legal/redistribution status, and unresolved findings."
+  ]
+}

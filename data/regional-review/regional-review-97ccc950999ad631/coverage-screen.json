@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "issue": 473,
+  "subject_count": 229,
+  "source_geometry_morphology": {
+    "method": "Count geometry component and ring statistics from the pinned source ADM2 feature for direct units and administrative predecessor for ecology-derived subjects. This is a descriptive screen only.",
+    "counts": {
+      "ADM2:components=1:rings=1": 227,
+      "ADM2:components=1:rings=2": 2
+    },
+    "multipolygon_subject_rows": 0,
+    "interpretation": "No scoped predecessor is represented as GeoJSON MultiPolygon in these pinned sources. This does not show that an island or detached territory is present in the source; the source itself can omit land and the eco portions are separately clipped or partial records. Two Polygon sources have an interior ring; no full shore/island completeness comparison was run."
+  },
+  "name_and_anonymous_remainder_screen": {
+    "unnamed_or_placeholder_source_names": [],
+    "candidate_count": 0,
+    "interpretation": "All scoped source features have a nonempty named source shapeName; that does not identify every unmatched out-of-scope or unnamed territorial remainder. Exact source roster remainders are separately listed in assessment.json."
+  },
+  "city_and_parent_granularity_candidates": [
+    {
+      "name_signal": "Greater Monrovia",
+      "subject_ids": [
+        "gb:LBR:ADM2:62588387B62702599090886"
+      ],
+      "finding": "One named metropolitan district occurs in the cohort; no settlement/city footprint comparison was done."
+    },
+    {
+      "name_signal": "Bamako",
+      "subject_ids": [
+        "gb:MLI:ADM2:8926073B70420899930674"
+      ],
+      "finding": "Candidate special/single-child urban administration requiring role/source review; see scale-screens.json. No city footprint comparison was done."
+    },
+    {
+      "name_signal": "Nouadhibou",
+      "subject_ids": [
+        "gb:MRT:ADM2:47542326B41685059019738"
+      ],
+      "finding": "Candidate special/single-child urban administration requiring role/source review; see scale-screens.json. No city footprint comparison was done."
+    },
+    {
+      "name_signal": "Nouakchott city subunits",
+      "subject_ids": [
+        "gb:MRT:ADM2:47542326B18524078593640",
+        "gb:MRT:ADM2:47542326B19939520283708",
+        "gb:MRT:ADM2:47542326B20684442825570",
+        "gb:MRT:ADM2:47542326B30050302787661",
+        "gb:MRT:ADM2:47542326B34919448738513",
+        "gb:MRT:ADM2:47542326B41815213489591",
+        "gb:MRT:ADM2:47542326B65700672861559",
+        "gb:MRT:ADM2:47542326B736390613482",
+        "gb:MRT:ADM2:47542326B78041808774540"
+      ],
+      "member_count": 9,
+      "source_names": [
+        "Arafat",
+        "Dar Naim",
+        "El Mina",
+        "Ksar",
+        "Riyadh",
+        "Sebkha",
+        "Tevragh Zein",
+        "Teyarett",
+        "Toujounine"
+      ],
+      "finding": "Nine named ADM2 features (Riyadh, Ksar, Dar Naim, Arafat, El Mina, Sebkha, Teyarett, Tevragh Zein, Toujounine) fall under the same-name source ADM1 parent by point/name screen. This suggests an urban parent cohort, but no official city footprint, source-code crosswalk or complete polygon overlay was evaluated."
+    }
+  ],
+  "parent_cohort_scale": {
+    "method": "Count exact assigned subjects under each scoped province-parent ID; not an Atlas size threshold or completeness measure. Full per-parent list is province-assessments.json.",
+    "largest_scoped_groups": [
+      {
+        "province_id": "framework:province:grand-kru:423c1097f865",
+        "name": "Grand Kru",
+        "country": "Liberia",
+        "member_count": 18
+      },
+      {
+        "province_id": "framework:province:nimba:877ec3fa2d74",
+        "name": "Nimba",
+        "country": "Liberia",
+        "member_count": 17
+      },
+      {
+        "province_id": "framework:province:sinoe:faa9ce85838a",
+        "name": "Sinoe",
+        "country": "Liberia",
+        "member_count": 17
+      },
+      {
+        "province_id": "framework:province:bong:92e5dbf90557",
+        "name": "Bong",
+        "country": "Liberia",
+        "member_count": 12
+      },
+      {
+        "province_id": "framework:province:adrar:3b532481c551",
+        "name": "Adrar",
+        "country": "Mauritania",
+        "member_count": 10
+      },
+      {
+        "province_id": "framework:province:river-gee:bf4e7ae9afe6",
+        "name": "River Gee",
+        "country": "Liberia",
+        "member_count": 10
+      },
+      {
+        "province_id": "framework:province:nouakchott:5c63c37c91bd",
+        "name": "Nouakchott",
+        "country": "Mauritania",
+        "member_count": 9
+      },
+      {
+        "province_id": "framework:province:tombouctou:cbd2b04d1edd",
+        "name": "Tombouctou",
+        "country": "Mali",
+        "member_count": 9
+      }
+    ],
+    "interpretation": "These are workload counts only; they do not independently flag an oversized administrative group."
+  },
+  "repeated_tier_and_large_unit_candidates": {
+    "flagged_subject_ids": [
+      "gb:MLI:ADM2:8926073B70420899930674",
+      "gb:MRT:ADM2:47542326B41685059019738"
+    ],
+    "details_path": "scale-screens.json",
+    "count": 2,
+    "interpretation": "Bamako is exactly geometry-equal to the same-name source ADM1; Nouadhibou is a 90.16% spherical source-area screen relative to Dakhlet Nouadhibou and a single-child point parent. Neither establishes geometry or tier error."
+  },
+  "neighbor_context": {
+    "same_region_neighbor_packet": 474,
+    "status": "Existing shared-source OCHA WCA edge screen reports no positive area overlap for Senegal-Mauritania and Senegal-Mali at its stated precision. This screen is not a crosswalk of the different vintage country ADM2 sources and is not a shared-boundary approval.",
+    "senegal_neighbor_packet": 478
+  },
+  "unassessed_completeness": [
+    "No independent current city/urban footprint source was inspected for Greater Monrovia, Bamako, Nouadhibou, or Nouakchott.",
+    "No authoritative full-settlement gazetteer, all-land/outer-island inventory, detached-territory source, or coastal low-water source was acquired for any country.",
+    "No complete polygon overlay against current legal ADM2 and ADM1 extents was run.",
+    "No source evidence establishes that all direct locations are optimally chosen functional/administrative atlas tiers or that ecoregion extents are full clipped intersections."
+  ],
+  "limits": [
+    "All morphology/scale/name signals are screens, not geographic proof.",
+    "An absence of MultiPolygon geometry is not evidence of island completeness.",
+    "Counts are limited to this packet’s exact scope, except where source roster remainder is explicitly reported.",
+    "No regional certificate, approval, boundary edit, publication or import is authorized."
+  ]
+}

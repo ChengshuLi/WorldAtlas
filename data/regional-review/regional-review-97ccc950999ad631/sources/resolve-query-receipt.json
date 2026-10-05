@@ -1,0 +1,57 @@
+{
+  "publisher": "RESOLVE / Esri Living Atlas",
+  "service_item": "https://www.arcgis.com/sharing/rest/content/items/37ea320eebb647c6838c23f72abae5ef",
+  "layer": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer/0",
+  "query_url": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer/0/query?where=ECO_ID+IN+%2853%2C71%2C745%2C842%2C846%29&outFields=FID%2CECO_NAME%2CBIOME_NUM%2CBIOME_NAME%2CREALM%2CECO_BIOME_%2CNNH%2CECO_ID%2CNNH_NAME%2CLICENSE&outSR=4326&returnGeometry=true&f=geojson",
+  "resolved_url": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer/0/query?where=ECO_ID+IN+%2853%2C71%2C745%2C842%2C846%29&outFields=FID%2CECO_NAME%2CBIOME_NUM%2CBIOME_NAME%2CREALM%2CECO_BIOME_%2CNNH%2CECO_ID%2CNNH_NAME%2CLICENSE&outSR=4326&returnGeometry=true&f=geojson",
+  "method": "GET query, outSR=4326, returnGeometry=true, f=geojson",
+  "where": "ECO_ID IN (53,71,745,842,846)",
+  "out_fields": "FID,ECO_NAME,BIOME_NUM,BIOME_NAME,REALM,ECO_BIOME_,NNH,ECO_ID,NNH_NAME,LICENSE",
+  "retrieved_utc": "2026-10-04",
+  "http_status": 200,
+  "content_type": "application/json; charset=utf-8",
+  "response_bytes": 3891608,
+  "response_sha256": "50c09aad9782273269e338aeb5ccbe378009cabb2319a66df28a49da4366b283",
+  "feature_count": 5,
+  "features": [
+    {
+      "eco_id": 71,
+      "name": "Inner Niger Delta flooded savanna",
+      "biome": "Flooded Grasslands & Savannas",
+      "realm": "Afrotropic",
+      "license": "CC-BY 4.0"
+    },
+    {
+      "eco_id": 745,
+      "name": "Saharan halophytics",
+      "biome": "Flooded Grasslands & Savannas",
+      "realm": "Palearctic",
+      "license": "CC-BY 4.0"
+    },
+    {
+      "eco_id": 53,
+      "name": "Sahelian Acacia savanna",
+      "biome": "Tropical & Subtropical Grasslands, Savannas & Shrublands",
+      "realm": "Afrotropic",
+      "license": "CC-BY 4.0"
+    },
+    {
+      "eco_id": 842,
+      "name": "South Sahara desert",
+      "biome": "Deserts & Xeric Shrublands",
+      "realm": "Palearctic",
+      "license": "CC-BY 4.0"
+    },
+    {
+      "eco_id": 846,
+      "name": "West Saharan montane xeric woodlands",
+      "biome": "Deserts & Xeric Shrublands",
+      "realm": "Palearctic",
+      "license": "CC-BY 4.0"
+    }
+  ],
+  "retained_gzip_path": "sources/resolve-ecoregions-53-71-745-842-846.geojson.gz",
+  "retained_gzip_bytes": 733159,
+  "retained_gzip_sha256": "e14ebb64c273006ebecc4e58735e16338c5ae8f1b59b3f176c132576ef2943e7",
+  "limitation": "Selected complete global ecoregion polygons for all referenced ECO_IDs; this is not the full 846-feature source and no geometric intersection calculation is asserted."
+}

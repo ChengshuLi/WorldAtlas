@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "action": "renew",
+  "accepted": true,
+  "issue": 473,
+  "worker_id": "codex-01a10948-7d38-75d0-bc01-4cc28ea41f49",
+  "claim_id": "e28683e2-1b80-4bb4-8fa6-d2f33d07c254",
+  "branch": "geography/regional-review-97ccc950999ad631",
+  "request_id": "042b14cf-cbb7-44bc-a7a3-b70b76f97632",
+  "claimed_at": "2026-10-04T23:50:34.991Z",
+  "updated_at": "2026-10-05T00:21:27.144Z",
+  "expires_at": "2026-10-06T00:21:27.144Z",
+  "live_work": false,
+  "owned_paths": [
+    "data/regional-review/regional-review-97ccc950999ad631/"
+  ],
+  "workflow": {
+    "id": 37247189439,
+    "html_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37247189439",
+    "conclusion": "success",
+    "status": "completed"
+  },
+  "reservation_comment": {
+    "comment_id": 5986000904,
+    "comment_url": "https://github.com/ChengshuLi/WorldAtlas/issues/473#issuecomment-5986000904",
+    "result": {
+      "accepted": true,
+      "request_id": "042b14cf-cbb7-44bc-a7a3-b70b76f97632",
+      "issue_number": 473,
+      "claim": {
+        "comment_id": 5985749113,
+        "version": 1,
+        "active": true,
+        "worker_id": "codex-01a10948-7d38-75d0-bc01-4cc28ea41f49",
+        "claim_id": "e28683e2-1b80-4bb4-8fa6-d2f33d07c254",
+        "branch": "geography/regional-review-97ccc950999ad631",
+        "request_id": "042b14cf-cbb7-44bc-a7a3-b70b76f97632",
+        "issue_number": 473,
+        "claimed_at": "2026-10-04T23:50:34.991Z",
+        "updated_at": "2026-10-05T00:21:27.144Z",
+        "expires_at": "2026-10-06T00:21:27.144Z",
+        "live_work": false,
+        "mode": "geography",
+        "max_prs": 2,
+        "owned_paths": [
+          "data/regional-review/regional-review-97ccc950999ad631/"
+        ]
+      },
+      "replayed": false
+    }
+  }
+}
