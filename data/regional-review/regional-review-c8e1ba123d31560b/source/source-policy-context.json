@@ -1,0 +1,137 @@
+{
+  "baseline_commit": "e5393834c715396a60967d366523712edd5d1b65",
+  "correction_overlay": {
+    "applies_to_FLK_or_SGS": false,
+    "id": "source-policy:europe-v1",
+    "profile_isos": [
+      "ESP",
+      "ITA",
+      "XKX"
+    ]
+  },
+  "global_policy_crosswalk": {
+    "FLK": null,
+    "SGS": null,
+    "basis": "All original source-country IDs plus fallback reference-owner ISO; a territory remains represented when modern sovereignty combines owner labels.",
+    "unmatched_reference_groups": [
+      "Falkland Islands",
+      "South Georgia and the Islands"
+    ]
+  },
+  "input_hashes": {
+    "data/geographic-semantic-followup/south-america.json.gz": "2bf5d32ef46e6e828fd4492445f67c8b405ce8f2925509edfdb3855aaa5d754b",
+    "data/location-policy.json": "efab4528fd4b7b180815ef82de93480f490ef8fa48ad9ef32d1f9d76a64b7fb9",
+    "data/source-policy-corrections/europe-v1.json.gz": "b5570900525b037ac10350e54793bf11c040b2afa867a261f819ca5d1e601d18",
+    "data/world-review.json": "e3fabc14cfe505c2f834f88e4848ff281bc646750e584088214760203e251164"
+  },
+  "policy_schema": {
+    "ARG": {
+      "level": "ADM2",
+      "reason": "Named departments territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "role": "departments",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/ARG/ADM2/geoBoundaries-ARG-ADM2.geojson"
+    },
+    "FLK": null,
+    "GBR": {
+      "level": "ADM2",
+      "reason": "Named Counties and Unitary Authorities territories at the reviewed country-specific district tier; subordinate wards, villages and electoral divisions are not substituted based on area.",
+      "role": "Counties and Unitary Authorities",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/GBR/ADM2/geoBoundaries-GBR-ADM2.geojson"
+    },
+    "SGS": null,
+    "principle": "Named district/county-equivalent or coherent city territory, with named physical geography for anonymous remote census coverage. No count targets or mean-area selection. Country-specific source roles and individual outliers require review.",
+    "profile_count": 201,
+    "version": 3
+  },
+  "south_america_semantic_assessment": {
+    "countries": [
+      {
+        "actual_role_inventory": {
+          "Unspecified source role": 1
+        },
+        "assessment": "A whole Falkland archipelago aggregates East Falkland, West Falkland and offshore islands. Official government pages were retrieved but no complete licensed island inventory was established here. Named-island subdivision is a research proposal, not a split justified by disconnected geometry alone.",
+        "assessment_complete": true,
+        "attention_location_ids": [
+          "FLK-5152"
+        ],
+        "count": 1,
+        "evidence_ids": [
+          "falkland-home",
+          "falkland-people"
+        ],
+        "iso": "FLK",
+        "licenses": {
+          "Public domain": 1
+        },
+        "location_ids": [
+          "FLK-5152"
+        ],
+        "parent_ids": [
+          "framework:area:falkland-is:aa9151e086ab",
+          "framework:continent:south-america:bbda637e3435",
+          "framework:province:falkland-islands:5308efe57fb0",
+          "framework:region:south-atlantic-islands:8be064d49c48",
+          "framework:subcontinent:southern-south-america:37612476d887"
+        ],
+        "policy_metadata_receipt": null,
+        "prepared_source_geometry_inventory": null,
+        "reference_owner": "Falkland Islands",
+        "reference_vintages": {
+          "Undated modern reference": 1
+        },
+        "remaining_required_reviews": [
+          "Independent purpose/settlement/physical evidence for every local territory",
+          "Exact original source coverage, source vintage and license suitability",
+          "Individually justified flagged cases, including all islands and urban envelopes",
+          "Every higher-tier boundary and complete member union"
+        ],
+        "semantic_complete": false,
+        "source_policy": null
+      },
+      {
+        "actual_role_inventory": {
+          "Named territory": 1
+        },
+        "assessment": "The single active territory includes South Georgia and the separate South Sandwich chain. The government explicitly identifies eleven South Sandwich volcanic islands 350–500 miles southeast of South Georgia. This challenges a single local-territory purpose; splitting requires exact licensed named-archipelago footprints and original coverage, not a centroid-based cut.",
+        "assessment_complete": true,
+        "attention_location_ids": [
+          "atlas:coverage:SGS+00?"
+        ],
+        "count": 1,
+        "evidence_ids": [
+          "south-georgia-about"
+        ],
+        "iso": "SGS",
+        "licenses": {
+          "Public domain": 1
+        },
+        "location_ids": [
+          "atlas:coverage:SGS+00?"
+        ],
+        "parent_ids": [
+          "framework:area:south-georgia:2cb092c9700c",
+          "framework:continent:south-america:bbda637e3435",
+          "framework:province:south-georgia-and-the-south-sandwich-islands:170c3c7a36d3",
+          "framework:region:south-atlantic-islands:8be064d49c48",
+          "framework:subcontinent:southern-south-america:37612476d887"
+        ],
+        "policy_metadata_receipt": null,
+        "prepared_source_geometry_inventory": null,
+        "reference_owner": "South Georgia and the Islands",
+        "reference_vintages": {
+          "Undated modern reference": 1
+        },
+        "remaining_required_reviews": [
+          "Independent purpose/settlement/physical evidence for every local territory",
+          "Exact original source coverage, source vintage and license suitability",
+          "Individually justified flagged cases, including all islands and urban envelopes",
+          "Every higher-tier boundary and complete member union"
+        ],
+        "semantic_complete": false,
+        "source_policy": null
+      }
+    ],
+    "review_date": "2026-10-02",
+    "semantic_complete": false
+  }
+}

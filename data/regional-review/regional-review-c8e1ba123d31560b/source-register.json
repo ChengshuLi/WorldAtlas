@@ -2,7 +2,10 @@
   "issue": 402,
   "retrieved_utc": "2026-10-05",
   "baseline_commit": "e5393834c715396a60967d366523712edd5d1b65",
-  "owned_member_ids": ["FLK-5152", "atlas:coverage:SGS+00?"],
+  "owned_member_ids": [
+    "FLK-5152",
+    "atlas:coverage:SGS+00?"
+  ],
   "sources": [
     {
       "id": "natural-earth-admin1-arg-5493-2022-06-02",
@@ -33,7 +36,12 @@
     },
     {
       "id": "gsgssi-official-about-gis-protected-features-laws",
-      "urls": ["https://gov.gs/about-sgssi/", "https://gov.gs/gis/", "https://gov.gs/wp-content/uploads/2023/10/Description-of-the-protected-features.pdf", "https://laws.gov.gs/1985-onwards-laws/"],
+      "urls": [
+        "https://gov.gs/about-sgssi/",
+        "https://gov.gs/gis/",
+        "https://gov.gs/wp-content/uploads/2023/10/Description-of-the-protected-features.pdf",
+        "https://laws.gov.gs/1985-onwards-laws/"
+      ],
       "retrieval": "Attempted 2026-10-05 via verified HTTPS; local CA chain verification failed for gov.gs/laws.gov.gs.",
       "retained": false,
       "response_hash": null,
@@ -42,7 +50,10 @@
     },
     {
       "id": "falkland-government-geography-and-camp",
-      "urls": ["https://www.falklands.gov.fk/our-home", "https://www.falklands.gov.fk/22-visiting-the-falkland-islands/visiting-the-falklands-list/277-camp"],
+      "urls": [
+        "https://www.falklands.gov.fk/our-home",
+        "https://www.falklands.gov.fk/22-visiting-the-falkland-islands/visiting-the-falklands-list/277-camp"
+      ],
       "retrieved_utc": "2026-10-05",
       "response_hashes": "source/remote-response-hashes.json",
       "license": "not identified; do not redistribute; restore from official URLs",
@@ -50,7 +61,10 @@
     },
     {
       "id": "argentina-official-sovereignty-claim",
-      "urls": ["https://www.argentina.gob.ar/defensa/malvinas", "https://www.argentina.gob.ar/noticias/comunicado-oficial-numero-157"],
+      "urls": [
+        "https://www.argentina.gob.ar/defensa/malvinas",
+        "https://www.argentina.gob.ar/noticias/comunicado-oficial-numero-157"
+      ],
       "retrieved_utc": "2026-10-05",
       "response_hashes": "source/remote-response-hashes.json",
       "license": "not identified; do not redistribute; restore from official URLs",
@@ -70,8 +84,30 @@
       "retrieved_utc": "2026-10-05",
       "response_hashes": "source/remote-response-hashes.json",
       "license": "Natural Earth states all versions are public domain; no credit required, attribution encouraged."
+    },
+    {
+      "id": "worldatlas-policy-context-402",
+      "title": "Pinned WorldAtlas policy schema and South America semantic follow-up",
+      "paths": [
+        "data/location-policy.json",
+        "data/source-policy-corrections/europe-v1.json.gz",
+        "data/world-review.json",
+        "data/geographic-semantic-followup/south-america.json.gz"
+      ],
+      "baseline_commit": "e5393834c715396a60967d366523712edd5d1b65",
+      "sha256": {
+        "data/location-policy.json": "efab4528fd4b7b180815ef82de93480f490ef8fa48ad9ef32d1f9d76a64b7fb9",
+        "data/source-policy-corrections/europe-v1.json.gz": "b5570900525b037ac10350e54793bf11c040b2afa867a261f819ca5d1e601d18",
+        "data/world-review.json": "e3fabc14cfe505c2f834f88e4848ff281bc646750e584088214760203e251164",
+        "data/geographic-semantic-followup/south-america.json.gz": "2bf5d32ef46e6e828fd4492445f67c8b405ce8f2925509edfdb3855aaa5d754b"
+      },
+      "findings": "The 201-entry location-policy map has neither FLK nor SGS; the global fallback crosswalk maps neither and lists both reference territories as unmatched. South America assessment records one location for each, no policy or policy metadata receipt, FLK unspecified source role and SGS named territory. Existing Europe overlay contains only ITA/ESP/XKX. Selected current entries are not transferred across ADM tiers.",
+      "reuse": "WorldAtlas repository data; inspected at pinned commit and summarized in owned source/source-policy-context.json"
     }
   ],
-  "missing_policy_profiles": ["FLK", "SGS"],
+  "missing_policy_profiles": [
+    "FLK",
+    "SGS"
+  ],
   "policy_followup": "No source suitability decision may be inferred from the absent policy profiles; identify those omissions explicitly in a bounded policy follow-up."
 }

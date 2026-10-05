@@ -8,10 +8,15 @@ import pathlib
 
 HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
+POLICY_FILE = ROOT / "data/location-policy.json"
+CORRECTIONS = ROOT / "data/source-policy-corrections/europe-v1.json.gz"
+WORLD_REVIEW = ROOT / "data/world-review.json"
+SA_REVIEW = ROOT / "data/geographic-semantic-followup/south-america.json.gz"
 SOURCE_ARCHIVE = ROOT / "data/regional-review/regional-review-7cf674a63057d43f/source/NaturalEarth-ca96624/ne_10m_admin_1_states_provinces.geojson.gz"
 SNAPSHOT = HERE / "source/issue-402-api-snapshot.json"
 SELECTED = HERE / "source/natural-earth-selected-features.geojson"
 OUT = HERE / "findings/reproduction.json"
+POLICY_CONTEXT = HERE / "source/source-policy-context.json"
 MEMBERS = ["FLK-5152", "atlas:coverage:SGS+00?"]
 SOURCE_IDS = {"FLK-5152": "FLK-5152", "atlas:coverage:SGS+00?": "SGS+00?"}
 
@@ -91,6 +96,26 @@ selected_hierarchy_ids={
 hierarchy_rows=[{"id":n["id"],"level":n["level"],"name":n.get("name"),"parent_id":n.get("parent_id"),"child_count":n.get("metadata",{}).get("child_count"),
   "review_reasons":n.get("metadata",{}).get("semantic_review",{}).get("remaining_reasons",[])} for n in hierarchy if n.get("id") in selected_hierarchy_ids]
 assert {n["id"] for n in hierarchy_rows}==selected_hierarchy_ids
+policy=json.loads(POLICY_FILE.read_text())
+corrections=json.loads(gzip.decompress(CORRECTIONS.read_bytes()))
+world=json.loads(WORLD_REVIEW.read_text())
+sa=json.loads(gzip.decompress(SA_REVIEW.read_bytes()))
+country_rows={row["iso"]:row for row in sa["countries"] if row.get("iso") in ("FLK","SGS")}
+assert set(country_rows)=={"FLK","SGS"}
+assert all(policy["countries"].get(code) is None for code in ("FLK","SGS"))
+assert all(world["policy_crosswalk"].get(code) is None for code in ("FLK","SGS"))
+assert all(row.get("source_policy") is None and row.get("policy_metadata_receipt") is None for row in country_rows.values())
+assert {item["profile_iso"] for item in corrections["policy_corrections"]}=={"ITA","ESP","XKX"}
+policy_context={"baseline_commit":"e5393834c715396a60967d366523712edd5d1b65",
+ "input_hashes":{"data/location-policy.json":sha(POLICY_FILE.read_bytes()),"data/source-policy-corrections/europe-v1.json.gz":sha(CORRECTIONS.read_bytes()),
+  "data/world-review.json":sha(WORLD_REVIEW.read_bytes()),"data/geographic-semantic-followup/south-america.json.gz":sha(SA_REVIEW.read_bytes())},
+ "policy_schema":{"version":policy["version"],"principle":policy["principle"],"profile_count":len(policy["countries"]),
+  "FLK":policy["countries"].get("FLK"),"SGS":policy["countries"].get("SGS"),"ARG":policy["countries"].get("ARG"),"GBR":policy["countries"].get("GBR")},
+ "global_policy_crosswalk":{"basis":world["policy_crosswalk_basis"],"FLK":world["policy_crosswalk"].get("FLK"),"SGS":world["policy_crosswalk"].get("SGS"),
+  "unmatched_reference_groups":[name for name in world["unmatched_reference_groups"] if name in ("Falkland Islands","South Georgia and the Islands")]},
+ "south_america_semantic_assessment":{"review_date":sa["review_date"],"semantic_complete":sa["semantic_complete"],"countries":[country_rows[k] for k in ("FLK","SGS")]},
+ "correction_overlay":{"id":corrections["id"],"profile_isos":sorted(p["profile_iso"] for p in corrections["policy_corrections"]),"applies_to_FLK_or_SGS":False}}
+POLICY_CONTEXT.write_text(json.dumps(policy_context,indent=2,ensure_ascii=False,sort_keys=True)+"\n")
 handoffs=json.loads(gzip.decompress((ROOT/"data/macro-foundation/regional-handoffs.json.gz").read_bytes()))
 region=next(r for r in handoffs["regions"] if r.get("region_id")=="framework:region:south-atlantic-islands:8be064d49c48")
 assert region["envelope"]["locations"]==2 and region["envelope"]["member_location_ids_sha256"]==scope["frozen_region_member_ids_sha256"]
@@ -109,10 +134,12 @@ result={"issue":402,"baseline_commit":"e5393834c715396a60967d366523712edd5d1b65"
   "world-index.json":sha((ROOT/"data/world-index.json").read_bytes()),"hierarchy.json":sha((ROOT/"data/hierarchy.json").read_bytes()),
   "current-manifest.json":sha((ROOT/"data/geographic-releases/current-manifest.json").read_bytes()),
   "regional-handoffs.json.gz":sha((ROOT/"data/macro-foundation/regional-handoffs.json.gz").read_bytes()),
-  "current-membership-inventory.json.gz":sha((ROOT/"data/macro-foundation/current-membership-inventory.json.gz").read_bytes())},"locations":rows}
+  "current-membership-inventory.json.gz":sha((ROOT/"data/macro-foundation/current-membership-inventory.json.gz").read_bytes()),
+  "location-policy.json":sha(POLICY_FILE.read_bytes()),"europe-policy-corrections.gz":sha(CORRECTIONS.read_bytes()),
+  "world-review.json":sha(WORLD_REVIEW.read_bytes()),"south-america-semantic-followup.json.gz":sha(SA_REVIEW.read_bytes())},"locations":rows}
 OUT.write_text(json.dumps(result,indent=2,ensure_ascii=False,sort_keys=True)+"\n")
 packet_files=[]
-for file in sorted(p for p in HERE.rglob("*") if p.is_file() and p.name!="packet-manifest.json"):
+for file in sorted(p for p in HERE.rglob("*") if p.is_file() and p.name!="packet-manifest.json" and "__pycache__" not in p.parts):
     raw_file=file.read_bytes()
     packet_files.append({"path":file.relative_to(HERE).as_posix(),"bytes":len(raw_file),"sha256":sha(raw_file)})
 (HERE/"packet-manifest.json").write_text(json.dumps({"version":1,"issue":402,"baseline_commit":"e5393834c715396a60967d366523712edd5d1b65","files":packet_files},indent=2,sort_keys=True)+"\n")
