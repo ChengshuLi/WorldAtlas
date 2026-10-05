@@ -1,0 +1,6320 @@
+{
+  "layers" : [ {
+    "currentVersion" : 10.81,
+    "id" : 0,
+    "name" : "Addresses",
+    "type" : "Group Layer",
+    "description" : "",
+    "geometryType" : null,
+    "copyrightText" : "",
+    "parentLayer" : null,
+    "subLayers" : [ {
+      "id" : 1,
+      "name" : "Addresses_1128"
+    }, {
+      "id" : 2,
+      "name" : "Addresses_2257"
+    }, {
+      "id" : 3,
+      "name" : "Addresses_4514"
+    } ],
+    "minScale" : 0,
+    "maxScale" : 0,
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223023.514330117,
+      "ymin" : 3795955.0119754104,
+      "xmax" : -7196646.843469892,
+      "ymax" : 3814713.3208062756,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeNone",
+    "displayField" : "",
+    "typeIdField" : null,
+    "fields" : null,
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "supportsStatistics" : false,
+    "supportsAdvancedQueries" : false,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 1,
+    "name" : "Addresses_1128",
+    "type" : "Feature Layer",
+    "description" : "This data was created from the Addresses table in the same Addressing geodatabase.",
+    "geometryType" : "esriGeometryPoint",
+    "copyrightText" : "Data maintained by Department of Land Surveys & Registration; converted by Kevin Mayall, Locus Ltd.",
+    "parentLayer" : {
+      "id" : 0,
+      "name" : "Addresses"
+    },
+    "subLayers" : [ ],
+    "minScale" : 1692,
+    "maxScale" : 564,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSMS",
+          "style" : "esriSMSCircle",
+          "color" : [ 0, 0, 0, 0 ],
+          "size" : 1,
+          "angle" : 0,
+          "xoffset" : 0,
+          "yoffset" : 0,
+          "outline" : null
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : [ {
+        "labelPlacement" : "esriServerPointLabelPlacementCenterCenter",
+        "where" : null,
+        "labelExpression" : "[NUMBER] CONCAT [EXTENSION]",
+        "useCodedValues" : true,
+        "symbol" : {
+          "type" : "esriTS",
+          "color" : [ 0, 0, 0, 255 ],
+          "backgroundColor" : null,
+          "borderLineColor" : null,
+          "borderLineSize" : null,
+          "verticalAlignment" : "baseline",
+          "horizontalAlignment" : "left",
+          "rightToLeft" : false,
+          "angle" : 0,
+          "xoffset" : 0,
+          "yoffset" : 0,
+          "kerning" : true,
+          "haloColor" : null,
+          "haloSize" : null,
+          "font" : {
+            "family" : "Arial",
+            "size" : 8,
+            "style" : "normal",
+            "weight" : "normal",
+            "decoration" : "none"
+          }
+        },
+        "minScale" : 0,
+        "maxScale" : 0
+      } ]
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223023.514330117,
+      "ymin" : 3795955.0119754104,
+      "xmax" : -7196646.843469892,
+      "ymax" : 3814713.3208062756,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "NUMBER",
+    "typeIdField" : null,
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "NUMBER",
+      "type" : "esriFieldTypeString",
+      "alias" : "NUMBER",
+      "length" : 4,
+      "domain" : null
+    }, {
+      "name" : "STREET",
+      "type" : "esriFieldTypeString",
+      "alias" : "STREET",
+      "length" : 255,
+      "domain" : null
+    }, {
+      "name" : "PARISH",
+      "type" : "esriFieldTypeString",
+      "alias" : "PARISH",
+      "length" : 255,
+      "domain" : null
+    }, {
+      "name" : "STATUS",
+      "type" : "esriFieldTypeString",
+      "alias" : "STATUS",
+      "length" : 255,
+      "domain" : null
+    }, {
+      "name" : "POSTCODE",
+      "type" : "esriFieldTypeString",
+      "alias" : "POSTCODE",
+      "length" : 255,
+      "domain" : null
+    }, {
+      "name" : "DATECREATED",
+      "type" : "esriFieldTypeDate",
+      "alias" : "DATECREATED",
+      "length" : 8,
+      "domain" : null
+    }, {
+      "name" : "DATEUPDATED",
+      "type" : "esriFieldTypeDate",
+      "alias" : "DATEUPDATED",
+      "length" : 8,
+      "domain" : null
+    }, {
+      "name" : "UPDATEDBY",
+      "type" : "esriFieldTypeString",
+      "alias" : "UPDATEDBY",
+      "length" : 255,
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "ADDRESSID",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "ADDRESSID",
+      "domain" : null
+    }, {
+      "name" : "STREETID",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "STREETID",
+      "domain" : null
+    }, {
+      "name" : "PARISHID",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "PARISHID",
+      "domain" : null
+    }, {
+      "name" : "STATUSID",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "STATUSID",
+      "domain" : null
+    }, {
+      "name" : "EXTENSION",
+      "type" : "esriFieldTypeString",
+      "alias" : "EXT",
+      "length" : 255,
+      "domain" : null
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : true,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 2,
+    "name" : "Addresses_2257",
+    "type" : "Feature Layer",
+    "description" : "This data was created from the Addresses table in the same Addressing geodatabase.",
+    "geometryType" : "esriGeometryPoint",
+    "copyrightText" : "Data maintained by Department of Land Surveys & Registration; converted by Kevin Mayall, Locus Ltd.",
+    "parentLayer" : {
+      "id" : 0,
+      "name" : "Addresses"
+    },
+    "subLayers" : [ ],
+    "minScale" : 3385,
+    "maxScale" : 1693,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSMS",
+          "style" : "esriSMSCircle",
+          "color" : [ 0, 0, 0, 0 ],
+          "size" : 1,
+          "angle" : 0,
+          "xoffset" : 0,
+          "yoffset" : 0,
+          "outline" : null
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : [ {
+        "labelPlacement" : "esriServerPointLabelPlacementCenterCenter",
+        "where" : null,
+        "labelExpression" : "[NUMBER] CONCAT [EXTENSION]",
+        "useCodedValues" : true,
+        "symbol" : {
+          "type" : "esriTS",
+          "color" : [ 0, 0, 0, 255 ],
+          "backgroundColor" : null,
+          "borderLineColor" : null,
+          "borderLineSize" : null,
+          "verticalAlignment" : "baseline",
+          "horizontalAlignment" : "left",
+          "rightToLeft" : false,
+          "angle" : 0,
+          "xoffset" : 0,
+          "yoffset" : 0,
+          "kerning" : true,
+          "haloColor" : null,
+          "haloSize" : null,
+          "font" : {
+            "family" : "Arial",
+            "size" : 8,
+            "style" : "normal",
+            "weight" : "normal",
+            "decoration" : "none"
+          }
+        },
+        "minScale" : 0,
+        "maxScale" : 0
+      } ]
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223023.514330117,
+      "ymin" : 3795955.0119754104,
+      "xmax" : -7196646.843469892,
+      "ymax" : 3814713.3208062756,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "NUMBER",
+    "typeIdField" : null,
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "NUMBER",
+      "type" : "esriFieldTypeString",
+      "alias" : "NUMBER",
+      "length" : 4,
+      "domain" : null
+    }, {
+      "name" : "STREET",
+      "type" : "esriFieldTypeString",
+      "alias" : "STREET",
+      "length" : 255,
+      "domain" : null
+    }, {
+      "name" : "PARISH",
+      "type" : "esriFieldTypeString",
+      "alias" : "PARISH",
+      "length" : 255,
+      "domain" : null
+    }, {
+      "name" : "STATUS",
+      "type" : "esriFieldTypeString",
+      "alias" : "STATUS",
+      "length" : 255,
+      "domain" : null
+    }, {
+      "name" : "POSTCODE",
+      "type" : "esriFieldTypeString",
+      "alias" : "POSTCODE",
+      "length" : 255,
+      "domain" : null
+    }, {
+      "name" : "DATECREATED",
+      "type" : "esriFieldTypeDate",
+      "alias" : "DATECREATED",
+      "length" : 8,
+      "domain" : null
+    }, {
+      "name" : "DATEUPDATED",
+      "type" : "esriFieldTypeDate",
+      "alias" : "DATEUPDATED",
+      "length" : 8,
+      "domain" : null
+    }, {
+      "name" : "UPDATEDBY",
+      "type" : "esriFieldTypeString",
+      "alias" : "UPDATEDBY",
+      "length" : 255,
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "ADDRESSID",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "ADDRESSID",
+      "domain" : null
+    }, {
+      "name" : "STREETID",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "STREETID",
+      "domain" : null
+    }, {
+      "name" : "PARISHID",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "PARISHID",
+      "domain" : null
+    }, {
+      "name" : "STATUSID",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "STATUSID",
+      "domain" : null
+    }, {
+      "name" : "EXTENSION",
+      "type" : "esriFieldTypeString",
+      "alias" : "EXT",
+      "length" : 255,
+      "domain" : null
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : true,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 3,
+    "name" : "Addresses_4514",
+    "type" : "Feature Layer",
+    "description" : "This data was created from the Addresses table in the same Addressing geodatabase.",
+    "geometryType" : "esriGeometryPoint",
+    "copyrightText" : "Data maintained by Department of Land Surveys & Registration; converted by Kevin Mayall, Locus Ltd.",
+    "parentLayer" : {
+      "id" : 0,
+      "name" : "Addresses"
+    },
+    "subLayers" : [ ],
+    "minScale" : 6771,
+    "maxScale" : 3386,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSMS",
+          "style" : "esriSMSCircle",
+          "color" : [ 0, 0, 0, 0 ],
+          "size" : 1,
+          "angle" : 0,
+          "xoffset" : 0,
+          "yoffset" : 0,
+          "outline" : null
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : [ {
+        "labelPlacement" : "esriServerPointLabelPlacementCenterCenter",
+        "where" : null,
+        "labelExpression" : "[NUMBER] CONCAT [EXTENSION]",
+        "useCodedValues" : true,
+        "symbol" : {
+          "type" : "esriTS",
+          "color" : [ 0, 0, 0, 255 ],
+          "backgroundColor" : null,
+          "borderLineColor" : null,
+          "borderLineSize" : null,
+          "verticalAlignment" : "baseline",
+          "horizontalAlignment" : "left",
+          "rightToLeft" : false,
+          "angle" : 0,
+          "xoffset" : 0,
+          "yoffset" : 0,
+          "kerning" : true,
+          "haloColor" : null,
+          "haloSize" : null,
+          "font" : {
+            "family" : "Arial",
+            "size" : 8,
+            "style" : "normal",
+            "weight" : "normal",
+            "decoration" : "none"
+          }
+        },
+        "minScale" : 0,
+        "maxScale" : 0
+      } ]
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223023.514330117,
+      "ymin" : 3795955.0119754104,
+      "xmax" : -7196646.843469892,
+      "ymax" : 3814713.3208062756,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "NUMBER",
+    "typeIdField" : null,
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "NUMBER",
+      "type" : "esriFieldTypeString",
+      "alias" : "NUMBER",
+      "length" : 4,
+      "domain" : null
+    }, {
+      "name" : "STREET",
+      "type" : "esriFieldTypeString",
+      "alias" : "STREET",
+      "length" : 255,
+      "domain" : null
+    }, {
+      "name" : "PARISH",
+      "type" : "esriFieldTypeString",
+      "alias" : "PARISH",
+      "length" : 255,
+      "domain" : null
+    }, {
+      "name" : "STATUS",
+      "type" : "esriFieldTypeString",
+      "alias" : "STATUS",
+      "length" : 255,
+      "domain" : null
+    }, {
+      "name" : "POSTCODE",
+      "type" : "esriFieldTypeString",
+      "alias" : "POSTCODE",
+      "length" : 255,
+      "domain" : null
+    }, {
+      "name" : "DATECREATED",
+      "type" : "esriFieldTypeDate",
+      "alias" : "DATECREATED",
+      "length" : 8,
+      "domain" : null
+    }, {
+      "name" : "DATEUPDATED",
+      "type" : "esriFieldTypeDate",
+      "alias" : "DATEUPDATED",
+      "length" : 8,
+      "domain" : null
+    }, {
+      "name" : "UPDATEDBY",
+      "type" : "esriFieldTypeString",
+      "alias" : "UPDATEDBY",
+      "length" : 255,
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "ADDRESSID",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "ADDRESSID",
+      "domain" : null
+    }, {
+      "name" : "STREETID",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "STREETID",
+      "domain" : null
+    }, {
+      "name" : "PARISHID",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "PARISHID",
+      "domain" : null
+    }, {
+      "name" : "STATUSID",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "STATUSID",
+      "domain" : null
+    }, {
+      "name" : "EXTENSION",
+      "type" : "esriFieldTypeString",
+      "alias" : "EXT",
+      "length" : 255,
+      "domain" : null
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : true,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 4,
+    "name" : "SwimmingPools",
+    "type" : "Group Layer",
+    "description" : "",
+    "geometryType" : null,
+    "copyrightText" : "",
+    "parentLayer" : null,
+    "subLayers" : [ {
+      "id" : 5,
+      "name" : "SwimmingPools_2012_1128"
+    }, {
+      "id" : 6,
+      "name" : "SwimmingPools_2012_2257"
+    }, {
+      "id" : 7,
+      "name" : "SwimmingPools_2012_4514"
+    }, {
+      "id" : 8,
+      "name" : "SwimmingPools_2012_9028"
+    } ],
+    "minScale" : 0,
+    "maxScale" : 0,
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7222904.782741172,
+      "ymin" : 3795992.8009558385,
+      "xmax" : -7196793.874381142,
+      "ymax" : 3813633.4439395373,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeNone",
+    "displayField" : "",
+    "typeIdField" : null,
+    "fields" : null,
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "supportsStatistics" : false,
+    "supportsAdvancedQueries" : false,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 5,
+    "name" : "SwimmingPools_2012_1128",
+    "type" : "Feature Layer",
+    "description" : "",
+    "geometryType" : "esriGeometryPolygon",
+    "copyrightText" : "",
+    "parentLayer" : {
+      "id" : 4,
+      "name" : "SwimmingPools"
+    },
+    "subLayers" : [ ],
+    "minScale" : 1692,
+    "maxScale" : 564,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSFS",
+          "style" : "esriSFSSolid",
+          "color" : [ 194, 230, 242, 255 ],
+          "outline" : {
+            "type" : "esriSLS",
+            "style" : "esriSLSSolid",
+            "color" : [ 150, 168, 235, 255 ],
+            "width" : 0.4
+          }
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7222904.782741172,
+      "ymin" : 3795992.8009558385,
+      "xmax" : -7196793.874381142,
+      "ymax" : 3813633.4439395373,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "SurveyBy",
+    "typeIdField" : "FeatureCode",
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "SHAPE",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "FeatureCode",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "FeatureCode",
+      "domain" : null
+    }, {
+      "name" : "SurveyBy",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurveyBy",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "Remarks",
+      "type" : "esriFieldTypeString",
+      "alias" : "Remarks",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "SHAPE_Length",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "SHAPE_Length",
+      "domain" : null
+    }, {
+      "name" : "SHAPE_Area",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "SHAPE_Area",
+      "domain" : null
+    } ],
+    "types" : [ {
+      "id" : 424,
+      "name" : "Swimming pool",
+      "domains" : { }
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 6,
+    "name" : "SwimmingPools_2012_2257",
+    "type" : "Feature Layer",
+    "description" : "",
+    "geometryType" : "esriGeometryPolygon",
+    "copyrightText" : "",
+    "parentLayer" : {
+      "id" : 4,
+      "name" : "SwimmingPools"
+    },
+    "subLayers" : [ ],
+    "minScale" : 3385,
+    "maxScale" : 1693,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSFS",
+          "style" : "esriSFSSolid",
+          "color" : [ 194, 230, 242, 255 ],
+          "outline" : {
+            "type" : "esriSLS",
+            "style" : "esriSLSSolid",
+            "color" : [ 150, 168, 235, 255 ],
+            "width" : 0.4
+          }
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7222904.782741172,
+      "ymin" : 3795992.8009558385,
+      "xmax" : -7196793.874381142,
+      "ymax" : 3813633.4439395373,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "SurveyBy",
+    "typeIdField" : "FeatureCode",
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "SHAPE",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "FeatureCode",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "FeatureCode",
+      "domain" : null
+    }, {
+      "name" : "SurveyBy",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurveyBy",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "Remarks",
+      "type" : "esriFieldTypeString",
+      "alias" : "Remarks",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "SHAPE_Length",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "SHAPE_Length",
+      "domain" : null
+    }, {
+      "name" : "SHAPE_Area",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "SHAPE_Area",
+      "domain" : null
+    } ],
+    "types" : [ {
+      "id" : 424,
+      "name" : "Swimming pool",
+      "domains" : { }
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 7,
+    "name" : "SwimmingPools_2012_4514",
+    "type" : "Feature Layer",
+    "description" : "",
+    "geometryType" : "esriGeometryPolygon",
+    "copyrightText" : "",
+    "parentLayer" : {
+      "id" : 4,
+      "name" : "SwimmingPools"
+    },
+    "subLayers" : [ ],
+    "minScale" : 6771,
+    "maxScale" : 3386,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSFS",
+          "style" : "esriSFSSolid",
+          "color" : [ 194, 230, 242, 255 ],
+          "outline" : {
+            "type" : "esriSLS",
+            "style" : "esriSLSSolid",
+            "color" : [ 150, 168, 235, 255 ],
+            "width" : 0.4
+          }
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7222904.782741172,
+      "ymin" : 3795992.8009558385,
+      "xmax" : -7196793.874381142,
+      "ymax" : 3813633.4439395373,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "SurveyBy",
+    "typeIdField" : "FeatureCode",
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "SHAPE",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "FeatureCode",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "FeatureCode",
+      "domain" : null
+    }, {
+      "name" : "SurveyBy",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurveyBy",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "Remarks",
+      "type" : "esriFieldTypeString",
+      "alias" : "Remarks",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "SHAPE_Length",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "SHAPE_Length",
+      "domain" : null
+    }, {
+      "name" : "SHAPE_Area",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "SHAPE_Area",
+      "domain" : null
+    } ],
+    "types" : [ {
+      "id" : 424,
+      "name" : "Swimming pool",
+      "domains" : { }
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 8,
+    "name" : "SwimmingPools_2012_9028",
+    "type" : "Feature Layer",
+    "description" : "",
+    "geometryType" : "esriGeometryPolygon",
+    "copyrightText" : "",
+    "parentLayer" : {
+      "id" : 4,
+      "name" : "SwimmingPools"
+    },
+    "subLayers" : [ ],
+    "minScale" : 13542,
+    "maxScale" : 6772,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSFS",
+          "style" : "esriSFSSolid",
+          "color" : [ 194, 230, 242, 255 ],
+          "outline" : {
+            "type" : "esriSLS",
+            "style" : "esriSLSSolid",
+            "color" : [ 150, 168, 235, 255 ],
+            "width" : 0.4
+          }
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7222904.782741172,
+      "ymin" : 3795992.8009558385,
+      "xmax" : -7196793.874381142,
+      "ymax" : 3813633.4439395373,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "SurveyBy",
+    "typeIdField" : "FeatureCode",
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "SHAPE",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "FeatureCode",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "FeatureCode",
+      "domain" : null
+    }, {
+      "name" : "SurveyBy",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurveyBy",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "Remarks",
+      "type" : "esriFieldTypeString",
+      "alias" : "Remarks",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "SHAPE_Length",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "SHAPE_Length",
+      "domain" : null
+    }, {
+      "name" : "SHAPE_Area",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "SHAPE_Area",
+      "domain" : null
+    } ],
+    "types" : [ {
+      "id" : 424,
+      "name" : "Swimming pool",
+      "domains" : { }
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 9,
+    "name" : "Buildings",
+    "type" : "Group Layer",
+    "description" : "",
+    "geometryType" : null,
+    "copyrightText" : "",
+    "parentLayer" : null,
+    "subLayers" : [ {
+      "id" : 10,
+      "name" : "Buildings_2012_1128"
+    }, {
+      "id" : 11,
+      "name" : "Buildings_2012_2257"
+    }, {
+      "id" : 12,
+      "name" : "Buildings_2012_4514"
+    }, {
+      "id" : 13,
+      "name" : "Buildings_2012_9028"
+    }, {
+      "id" : 14,
+      "name" : "Buildings_2012_18056"
+    } ],
+    "minScale" : 0,
+    "maxScale" : 0,
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223054.049288822,
+      "ymin" : 3795851.4775312296,
+      "xmax" : -7196507.721082398,
+      "ymax" : 3814720.4867891385,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeNone",
+    "displayField" : "",
+    "typeIdField" : null,
+    "fields" : null,
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "supportsStatistics" : false,
+    "supportsAdvancedQueries" : false,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 10,
+    "name" : "Buildings_2012_1128",
+    "type" : "Feature Layer",
+    "description" : "",
+    "geometryType" : "esriGeometryPolygon",
+    "copyrightText" : "",
+    "parentLayer" : {
+      "id" : 9,
+      "name" : "Buildings"
+    },
+    "subLayers" : [ ],
+    "minScale" : 1692,
+    "maxScale" : 564,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSFS",
+          "style" : "esriSFSSolid",
+          "color" : [ 225, 225, 225, 255 ],
+          "outline" : {
+            "type" : "esriSLS",
+            "style" : "esriSLSSolid",
+            "color" : [ 178, 178, 178, 255 ],
+            "width" : 0.4
+          }
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223054.049288822,
+      "ymin" : 3795851.4775312296,
+      "xmax" : -7196507.721082398,
+      "ymax" : 3814720.4867891385,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "PlaceName",
+    "typeIdField" : null,
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "FeatureCode",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "FeatureCode",
+      "domain" : null
+    }, {
+      "name" : "SurveyBy",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurveyBy",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "BuildingElevation",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "BuildingElevation",
+      "domain" : null
+    }, {
+      "name" : "Remarks",
+      "type" : "esriFieldTypeString",
+      "alias" : "Remarks",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "UniqueNum",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "UniqueNum",
+      "domain" : null
+    }, {
+      "name" : "PlaceName",
+      "type" : "esriFieldTypeString",
+      "alias" : "PlaceName",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "created_user",
+      "type" : "esriFieldTypeString",
+      "alias" : "created_user",
+      "length" : 255,
+      "domain" : null
+    }, {
+      "name" : "created_date",
+      "type" : "esriFieldTypeDate",
+      "alias" : "created_date",
+      "length" : 8,
+      "domain" : null
+    }, {
+      "name" : "last_edited_user",
+      "type" : "esriFieldTypeString",
+      "alias" : "last_edited_user",
+      "length" : 255,
+      "domain" : null
+    }, {
+      "name" : "last_edited_date",
+      "type" : "esriFieldTypeDate",
+      "alias" : "last_edited_date",
+      "length" : 8,
+      "domain" : null
+    }, {
+      "name" : "Shape_STArea__",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_STArea__",
+      "domain" : null
+    }, {
+      "name" : "Shape_STLength__",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_STLength__",
+      "domain" : null
+    }, {
+      "name" : "Shape_Length",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Length",
+      "domain" : null
+    }, {
+      "name" : "Shape_Area",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Area",
+      "domain" : null
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 11,
+    "name" : "Buildings_2012_2257",
+    "type" : "Feature Layer",
+    "description" : "",
+    "geometryType" : "esriGeometryPolygon",
+    "copyrightText" : "",
+    "parentLayer" : {
+      "id" : 9,
+      "name" : "Buildings"
+    },
+    "subLayers" : [ ],
+    "minScale" : 3385,
+    "maxScale" : 1693,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSFS",
+          "style" : "esriSFSSolid",
+          "color" : [ 225, 225, 225, 255 ],
+          "outline" : {
+            "type" : "esriSLS",
+            "style" : "esriSLSSolid",
+            "color" : [ 178, 178, 178, 255 ],
+            "width" : 0.4
+          }
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223054.049288822,
+      "ymin" : 3795851.4775312296,
+      "xmax" : -7196507.721082398,
+      "ymax" : 3814720.4867891385,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "PlaceName",
+    "typeIdField" : null,
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "FeatureCode",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "FeatureCode",
+      "domain" : null
+    }, {
+      "name" : "SurveyBy",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurveyBy",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "BuildingElevation",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "BuildingElevation",
+      "domain" : null
+    }, {
+      "name" : "Remarks",
+      "type" : "esriFieldTypeString",
+      "alias" : "Remarks",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "UniqueNum",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "UniqueNum",
+      "domain" : null
+    }, {
+      "name" : "PlaceName",
+      "type" : "esriFieldTypeString",
+      "alias" : "PlaceName",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "created_user",
+      "type" : "esriFieldTypeString",
+      "alias" : "created_user",
+      "length" : 255,
+      "domain" : null
+    }, {
+      "name" : "created_date",
+      "type" : "esriFieldTypeDate",
+      "alias" : "created_date",
+      "length" : 8,
+      "domain" : null
+    }, {
+      "name" : "last_edited_user",
+      "type" : "esriFieldTypeString",
+      "alias" : "last_edited_user",
+      "length" : 255,
+      "domain" : null
+    }, {
+      "name" : "last_edited_date",
+      "type" : "esriFieldTypeDate",
+      "alias" : "last_edited_date",
+      "length" : 8,
+      "domain" : null
+    }, {
+      "name" : "Shape_STArea__",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_STArea__",
+      "domain" : null
+    }, {
+      "name" : "Shape_STLength__",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_STLength__",
+      "domain" : null
+    }, {
+      "name" : "Shape_Length",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Length",
+      "domain" : null
+    }, {
+      "name" : "Shape_Area",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Area",
+      "domain" : null
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 12,
+    "name" : "Buildings_2012_4514",
+    "type" : "Feature Layer",
+    "description" : "",
+    "geometryType" : "esriGeometryPolygon",
+    "copyrightText" : "",
+    "parentLayer" : {
+      "id" : 9,
+      "name" : "Buildings"
+    },
+    "subLayers" : [ ],
+    "minScale" : 6771,
+    "maxScale" : 3386,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSFS",
+          "style" : "esriSFSSolid",
+          "color" : [ 225, 225, 225, 255 ],
+          "outline" : {
+            "type" : "esriSLS",
+            "style" : "esriSLSSolid",
+            "color" : [ 178, 178, 178, 255 ],
+            "width" : 0.4
+          }
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223054.049288822,
+      "ymin" : 3795851.4775312296,
+      "xmax" : -7196507.721082398,
+      "ymax" : 3814720.4867891385,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "PlaceName",
+    "typeIdField" : null,
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "FeatureCode",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "FeatureCode",
+      "domain" : null
+    }, {
+      "name" : "SurveyBy",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurveyBy",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "BuildingElevation",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "BuildingElevation",
+      "domain" : null
+    }, {
+      "name" : "Remarks",
+      "type" : "esriFieldTypeString",
+      "alias" : "Remarks",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "UniqueNum",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "UniqueNum",
+      "domain" : null
+    }, {
+      "name" : "PlaceName",
+      "type" : "esriFieldTypeString",
+      "alias" : "PlaceName",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "created_user",
+      "type" : "esriFieldTypeString",
+      "alias" : "created_user",
+      "length" : 255,
+      "domain" : null
+    }, {
+      "name" : "created_date",
+      "type" : "esriFieldTypeDate",
+      "alias" : "created_date",
+      "length" : 8,
+      "domain" : null
+    }, {
+      "name" : "last_edited_user",
+      "type" : "esriFieldTypeString",
+      "alias" : "last_edited_user",
+      "length" : 255,
+      "domain" : null
+    }, {
+      "name" : "last_edited_date",
+      "type" : "esriFieldTypeDate",
+      "alias" : "last_edited_date",
+      "length" : 8,
+      "domain" : null
+    }, {
+      "name" : "Shape_STArea__",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_STArea__",
+      "domain" : null
+    }, {
+      "name" : "Shape_STLength__",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_STLength__",
+      "domain" : null
+    }, {
+      "name" : "Shape_Length",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Length",
+      "domain" : null
+    }, {
+      "name" : "Shape_Area",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Area",
+      "domain" : null
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 13,
+    "name" : "Buildings_2012_9028",
+    "type" : "Feature Layer",
+    "description" : "",
+    "geometryType" : "esriGeometryPolygon",
+    "copyrightText" : "",
+    "parentLayer" : {
+      "id" : 9,
+      "name" : "Buildings"
+    },
+    "subLayers" : [ ],
+    "minScale" : 13542,
+    "maxScale" : 6772,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSFS",
+          "style" : "esriSFSSolid",
+          "color" : [ 225, 225, 225, 255 ],
+          "outline" : {
+            "type" : "esriSLS",
+            "style" : "esriSLSSolid",
+            "color" : [ 178, 178, 178, 255 ],
+            "width" : 0.4
+          }
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223054.049288822,
+      "ymin" : 3795851.4775312296,
+      "xmax" : -7196507.721082398,
+      "ymax" : 3814720.4867891385,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "PlaceName",
+    "typeIdField" : null,
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "FeatureCode",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "FeatureCode",
+      "domain" : null
+    }, {
+      "name" : "SurveyBy",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurveyBy",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "BuildingElevation",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "BuildingElevation",
+      "domain" : null
+    }, {
+      "name" : "Remarks",
+      "type" : "esriFieldTypeString",
+      "alias" : "Remarks",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "UniqueNum",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "UniqueNum",
+      "domain" : null
+    }, {
+      "name" : "PlaceName",
+      "type" : "esriFieldTypeString",
+      "alias" : "PlaceName",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "created_user",
+      "type" : "esriFieldTypeString",
+      "alias" : "created_user",
+      "length" : 255,
+      "domain" : null
+    }, {
+      "name" : "created_date",
+      "type" : "esriFieldTypeDate",
+      "alias" : "created_date",
+      "length" : 8,
+      "domain" : null
+    }, {
+      "name" : "last_edited_user",
+      "type" : "esriFieldTypeString",
+      "alias" : "last_edited_user",
+      "length" : 255,
+      "domain" : null
+    }, {
+      "name" : "last_edited_date",
+      "type" : "esriFieldTypeDate",
+      "alias" : "last_edited_date",
+      "length" : 8,
+      "domain" : null
+    }, {
+      "name" : "Shape_STArea__",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_STArea__",
+      "domain" : null
+    }, {
+      "name" : "Shape_STLength__",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_STLength__",
+      "domain" : null
+    }, {
+      "name" : "Shape_Length",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Length",
+      "domain" : null
+    }, {
+      "name" : "Shape_Area",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Area",
+      "domain" : null
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 14,
+    "name" : "Buildings_2012_18056",
+    "type" : "Feature Layer",
+    "description" : "",
+    "geometryType" : "esriGeometryPolygon",
+    "copyrightText" : "",
+    "parentLayer" : {
+      "id" : 9,
+      "name" : "Buildings"
+    },
+    "subLayers" : [ ],
+    "minScale" : 27084,
+    "maxScale" : 13543,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSFS",
+          "style" : "esriSFSSolid",
+          "color" : [ 225, 225, 225, 255 ],
+          "outline" : {
+            "type" : "esriSLS",
+            "style" : "esriSLSSolid",
+            "color" : [ 225, 225, 225, 255 ],
+            "width" : 0.4
+          }
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223054.049288822,
+      "ymin" : 3795851.4775312296,
+      "xmax" : -7196507.721082398,
+      "ymax" : 3814720.4867891385,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "PlaceName",
+    "typeIdField" : null,
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "FeatureCode",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "FeatureCode",
+      "domain" : null
+    }, {
+      "name" : "SurveyBy",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurveyBy",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "BuildingElevation",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "BuildingElevation",
+      "domain" : null
+    }, {
+      "name" : "Remarks",
+      "type" : "esriFieldTypeString",
+      "alias" : "Remarks",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "UniqueNum",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "UniqueNum",
+      "domain" : null
+    }, {
+      "name" : "PlaceName",
+      "type" : "esriFieldTypeString",
+      "alias" : "PlaceName",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "created_user",
+      "type" : "esriFieldTypeString",
+      "alias" : "created_user",
+      "length" : 255,
+      "domain" : null
+    }, {
+      "name" : "created_date",
+      "type" : "esriFieldTypeDate",
+      "alias" : "created_date",
+      "length" : 8,
+      "domain" : null
+    }, {
+      "name" : "last_edited_user",
+      "type" : "esriFieldTypeString",
+      "alias" : "last_edited_user",
+      "length" : 255,
+      "domain" : null
+    }, {
+      "name" : "last_edited_date",
+      "type" : "esriFieldTypeDate",
+      "alias" : "last_edited_date",
+      "length" : 8,
+      "domain" : null
+    }, {
+      "name" : "Shape_STArea__",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_STArea__",
+      "domain" : null
+    }, {
+      "name" : "Shape_STLength__",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_STLength__",
+      "domain" : null
+    }, {
+      "name" : "Shape_Length",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Length",
+      "domain" : null
+    }, {
+      "name" : "Shape_Area",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Area",
+      "domain" : null
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 15,
+    "name" : "GeneralLines",
+    "type" : "Group Layer",
+    "description" : "",
+    "geometryType" : null,
+    "copyrightText" : "",
+    "parentLayer" : null,
+    "subLayers" : [ {
+      "id" : 16,
+      "name" : "GeneralLines_2012_1128"
+    }, {
+      "id" : 17,
+      "name" : "GeneralLines_2012_2257"
+    }, {
+      "id" : 18,
+      "name" : "GeneralLines_2012_4514"
+    }, {
+      "id" : 19,
+      "name" : "GeneralLines_2012_9028"
+    } ],
+    "minScale" : 0,
+    "maxScale" : 0,
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223104.202832789,
+      "ymin" : 3795834.1699824086,
+      "xmax" : -7196505.557777172,
+      "ymax" : 3814734.708340043,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeNone",
+    "displayField" : "",
+    "typeIdField" : null,
+    "fields" : null,
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "supportsStatistics" : false,
+    "supportsAdvancedQueries" : false,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 16,
+    "name" : "GeneralLines_2012_1128",
+    "type" : "Feature Layer",
+    "description" : "",
+    "geometryType" : "esriGeometryPolyline",
+    "copyrightText" : "",
+    "parentLayer" : {
+      "id" : 15,
+      "name" : "GeneralLines"
+    },
+    "subLayers" : [ ],
+    "minScale" : 1692,
+    "maxScale" : 564,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSLS",
+          "style" : "esriSLSSolid",
+          "color" : [ 225, 225, 225, 255 ],
+          "width" : 1
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223104.202832789,
+      "ymin" : 3795834.1699824086,
+      "xmax" : -7196505.557777172,
+      "ymax" : 3814734.708340043,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "SurveyBy",
+    "typeIdField" : "FeatureCode",
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "FeatureCode",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "FeatureCode",
+      "domain" : null
+    }, {
+      "name" : "SurveyBy",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurveyBy",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "Remarks",
+      "type" : "esriFieldTypeString",
+      "alias" : "Remarks",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "Thickness",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Thickness",
+      "domain" : null
+    }, {
+      "name" : "Shape_Length",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Length",
+      "domain" : null
+    } ],
+    "types" : [ {
+      "id" : 110,
+      "name" : "Wall",
+      "domains" : { }
+    }, {
+      "id" : 111,
+      "name" : "Wall_Retaining",
+      "domains" : { }
+    }, {
+      "id" : 112,
+      "name" : "Hedge-Centre",
+      "domains" : { }
+    }, {
+      "id" : 113,
+      "name" : "Fence",
+      "domains" : { }
+    }, {
+      "id" : 116,
+      "name" : "Fence_Security",
+      "domains" : { }
+    }, {
+      "id" : 117,
+      "name" : "Broken_Boundary",
+      "domains" : { }
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "hasZ" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 17,
+    "name" : "GeneralLines_2012_2257",
+    "type" : "Feature Layer",
+    "description" : "",
+    "geometryType" : "esriGeometryPolyline",
+    "copyrightText" : "",
+    "parentLayer" : {
+      "id" : 15,
+      "name" : "GeneralLines"
+    },
+    "subLayers" : [ ],
+    "minScale" : 3385,
+    "maxScale" : 1693,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSLS",
+          "style" : "esriSLSSolid",
+          "color" : [ 225, 225, 225, 255 ],
+          "width" : 1
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223104.202832789,
+      "ymin" : 3795834.1699824086,
+      "xmax" : -7196505.557777172,
+      "ymax" : 3814734.708340043,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "SurveyBy",
+    "typeIdField" : "FeatureCode",
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "FeatureCode",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "FeatureCode",
+      "domain" : null
+    }, {
+      "name" : "SurveyBy",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurveyBy",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "Remarks",
+      "type" : "esriFieldTypeString",
+      "alias" : "Remarks",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "Thickness",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Thickness",
+      "domain" : null
+    }, {
+      "name" : "Shape_Length",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Length",
+      "domain" : null
+    } ],
+    "types" : [ {
+      "id" : 110,
+      "name" : "Wall",
+      "domains" : { }
+    }, {
+      "id" : 111,
+      "name" : "Wall_Retaining",
+      "domains" : { }
+    }, {
+      "id" : 112,
+      "name" : "Hedge-Centre",
+      "domains" : { }
+    }, {
+      "id" : 113,
+      "name" : "Fence",
+      "domains" : { }
+    }, {
+      "id" : 116,
+      "name" : "Fence_Security",
+      "domains" : { }
+    }, {
+      "id" : 117,
+      "name" : "Broken_Boundary",
+      "domains" : { }
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "hasZ" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 18,
+    "name" : "GeneralLines_2012_4514",
+    "type" : "Feature Layer",
+    "description" : "",
+    "geometryType" : "esriGeometryPolyline",
+    "copyrightText" : "",
+    "parentLayer" : {
+      "id" : 15,
+      "name" : "GeneralLines"
+    },
+    "subLayers" : [ ],
+    "minScale" : 6771,
+    "maxScale" : 3386,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSLS",
+          "style" : "esriSLSSolid",
+          "color" : [ 225, 225, 225, 255 ],
+          "width" : 1
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223104.202832789,
+      "ymin" : 3795834.1699824086,
+      "xmax" : -7196505.557777172,
+      "ymax" : 3814734.708340043,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "SurveyBy",
+    "typeIdField" : "FeatureCode",
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "FeatureCode",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "FeatureCode",
+      "domain" : null
+    }, {
+      "name" : "SurveyBy",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurveyBy",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "Remarks",
+      "type" : "esriFieldTypeString",
+      "alias" : "Remarks",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "Thickness",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Thickness",
+      "domain" : null
+    }, {
+      "name" : "Shape_Length",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Length",
+      "domain" : null
+    } ],
+    "types" : [ {
+      "id" : 110,
+      "name" : "Wall",
+      "domains" : { }
+    }, {
+      "id" : 111,
+      "name" : "Wall_Retaining",
+      "domains" : { }
+    }, {
+      "id" : 112,
+      "name" : "Hedge-Centre",
+      "domains" : { }
+    }, {
+      "id" : 113,
+      "name" : "Fence",
+      "domains" : { }
+    }, {
+      "id" : 116,
+      "name" : "Fence_Security",
+      "domains" : { }
+    }, {
+      "id" : 117,
+      "name" : "Broken_Boundary",
+      "domains" : { }
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "hasZ" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 19,
+    "name" : "GeneralLines_2012_9028",
+    "type" : "Feature Layer",
+    "description" : "",
+    "geometryType" : "esriGeometryPolyline",
+    "copyrightText" : "",
+    "parentLayer" : {
+      "id" : 15,
+      "name" : "GeneralLines"
+    },
+    "subLayers" : [ ],
+    "minScale" : 13542,
+    "maxScale" : 6772,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSLS",
+          "style" : "esriSLSSolid",
+          "color" : [ 225, 225, 225, 255 ],
+          "width" : 1
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223104.202832789,
+      "ymin" : 3795834.1699824086,
+      "xmax" : -7196505.557777172,
+      "ymax" : 3814734.708340043,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "SurveyBy",
+    "typeIdField" : "FeatureCode",
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "FeatureCode",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "FeatureCode",
+      "domain" : null
+    }, {
+      "name" : "SurveyBy",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurveyBy",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "Remarks",
+      "type" : "esriFieldTypeString",
+      "alias" : "Remarks",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "Thickness",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Thickness",
+      "domain" : null
+    }, {
+      "name" : "Shape_Length",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Length",
+      "domain" : null
+    } ],
+    "types" : [ {
+      "id" : 110,
+      "name" : "Wall",
+      "domains" : { }
+    }, {
+      "id" : 111,
+      "name" : "Wall_Retaining",
+      "domains" : { }
+    }, {
+      "id" : 112,
+      "name" : "Hedge-Centre",
+      "domains" : { }
+    }, {
+      "id" : 113,
+      "name" : "Fence",
+      "domains" : { }
+    }, {
+      "id" : 116,
+      "name" : "Fence_Security",
+      "domains" : { }
+    }, {
+      "id" : 117,
+      "name" : "Broken_Boundary",
+      "domains" : { }
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "hasZ" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 20,
+    "name" : "Water",
+    "type" : "Group Layer",
+    "description" : "",
+    "geometryType" : null,
+    "copyrightText" : "",
+    "parentLayer" : null,
+    "subLayers" : [ {
+      "id" : 21,
+      "name" : "Water_2012_1128"
+    }, {
+      "id" : 22,
+      "name" : "Water_2012_2257"
+    }, {
+      "id" : 23,
+      "name" : "Water_2012_4514"
+    }, {
+      "id" : 24,
+      "name" : "Water_2012_9028"
+    }, {
+      "id" : 25,
+      "name" : "Water_2012_18056"
+    }, {
+      "id" : 26,
+      "name" : "Water_2012_36112"
+    }, {
+      "id" : 27,
+      "name" : "Water_2012_72224"
+    }, {
+      "id" : 28,
+      "name" : "Water_2012_144448"
+    } ],
+    "minScale" : 0,
+    "maxScale" : 0,
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7222280.677600542,
+      "ymin" : 3796023.745644529,
+      "xmax" : -7196974.708744581,
+      "ymax" : 3814145.953033362,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeNone",
+    "displayField" : "",
+    "typeIdField" : null,
+    "fields" : null,
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "supportsStatistics" : false,
+    "supportsAdvancedQueries" : false,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 21,
+    "name" : "Water_2012_1128",
+    "type" : "Feature Layer",
+    "description" : "",
+    "geometryType" : "esriGeometryPolygon",
+    "copyrightText" : "",
+    "parentLayer" : {
+      "id" : 20,
+      "name" : "Water"
+    },
+    "subLayers" : [ ],
+    "minScale" : 1692,
+    "maxScale" : 564,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSFS",
+          "style" : "esriSFSSolid",
+          "color" : [ 194, 230, 242, 255 ],
+          "outline" : {
+            "type" : "esriSLS",
+            "style" : "esriSLSSolid",
+            "color" : [ 150, 168, 235, 255 ],
+            "width" : 0.4
+          }
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7222280.677600542,
+      "ymin" : 3796023.745644529,
+      "xmax" : -7196974.708744581,
+      "ymax" : 3814145.953033362,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "SurveyBy",
+    "typeIdField" : "FeatureCode",
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "FeatureCode",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "FeatureCode",
+      "domain" : null
+    }, {
+      "name" : "SurveyBy",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurveyBy",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "WaterElevation",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "WaterElevation",
+      "domain" : null
+    }, {
+      "name" : "Remarks",
+      "type" : "esriFieldTypeString",
+      "alias" : "Remarks",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "Shape_Length",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Length",
+      "domain" : null
+    }, {
+      "name" : "Shape_Area",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Area",
+      "domain" : null
+    } ],
+    "types" : [ {
+      "id" : 610,
+      "name" : "Water body",
+      "domains" : { }
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 22,
+    "name" : "Water_2012_2257",
+    "type" : "Feature Layer",
+    "description" : "",
+    "geometryType" : "esriGeometryPolygon",
+    "copyrightText" : "",
+    "parentLayer" : {
+      "id" : 20,
+      "name" : "Water"
+    },
+    "subLayers" : [ ],
+    "minScale" : 3385,
+    "maxScale" : 1693,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSFS",
+          "style" : "esriSFSSolid",
+          "color" : [ 194, 230, 242, 255 ],
+          "outline" : {
+            "type" : "esriSLS",
+            "style" : "esriSLSSolid",
+            "color" : [ 150, 168, 235, 255 ],
+            "width" : 0.4
+          }
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7222280.677600542,
+      "ymin" : 3796023.745644529,
+      "xmax" : -7196974.708744581,
+      "ymax" : 3814145.953033362,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "SurveyBy",
+    "typeIdField" : "FeatureCode",
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "FeatureCode",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "FeatureCode",
+      "domain" : null
+    }, {
+      "name" : "SurveyBy",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurveyBy",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "WaterElevation",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "WaterElevation",
+      "domain" : null
+    }, {
+      "name" : "Remarks",
+      "type" : "esriFieldTypeString",
+      "alias" : "Remarks",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "Shape_Length",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Length",
+      "domain" : null
+    }, {
+      "name" : "Shape_Area",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Area",
+      "domain" : null
+    } ],
+    "types" : [ {
+      "id" : 610,
+      "name" : "Water body",
+      "domains" : { }
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 23,
+    "name" : "Water_2012_4514",
+    "type" : "Feature Layer",
+    "description" : "",
+    "geometryType" : "esriGeometryPolygon",
+    "copyrightText" : "",
+    "parentLayer" : {
+      "id" : 20,
+      "name" : "Water"
+    },
+    "subLayers" : [ ],
+    "minScale" : 6771,
+    "maxScale" : 3386,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSFS",
+          "style" : "esriSFSSolid",
+          "color" : [ 194, 230, 242, 255 ],
+          "outline" : {
+            "type" : "esriSLS",
+            "style" : "esriSLSSolid",
+            "color" : [ 150, 168, 235, 255 ],
+            "width" : 0.4
+          }
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7222280.677600542,
+      "ymin" : 3796023.745644529,
+      "xmax" : -7196974.708744581,
+      "ymax" : 3814145.953033362,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "SurveyBy",
+    "typeIdField" : "FeatureCode",
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "FeatureCode",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "FeatureCode",
+      "domain" : null
+    }, {
+      "name" : "SurveyBy",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurveyBy",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "WaterElevation",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "WaterElevation",
+      "domain" : null
+    }, {
+      "name" : "Remarks",
+      "type" : "esriFieldTypeString",
+      "alias" : "Remarks",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "Shape_Length",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Length",
+      "domain" : null
+    }, {
+      "name" : "Shape_Area",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Area",
+      "domain" : null
+    } ],
+    "types" : [ {
+      "id" : 610,
+      "name" : "Water body",
+      "domains" : { }
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 24,
+    "name" : "Water_2012_9028",
+    "type" : "Feature Layer",
+    "description" : "",
+    "geometryType" : "esriGeometryPolygon",
+    "copyrightText" : "",
+    "parentLayer" : {
+      "id" : 20,
+      "name" : "Water"
+    },
+    "subLayers" : [ ],
+    "minScale" : 13542,
+    "maxScale" : 6772,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSFS",
+          "style" : "esriSFSSolid",
+          "color" : [ 194, 230, 242, 255 ],
+          "outline" : {
+            "type" : "esriSLS",
+            "style" : "esriSLSSolid",
+            "color" : [ 150, 168, 235, 255 ],
+            "width" : 0.4
+          }
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7222280.677600542,
+      "ymin" : 3796023.745644529,
+      "xmax" : -7196974.708744581,
+      "ymax" : 3814145.953033362,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "SurveyBy",
+    "typeIdField" : "FeatureCode",
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "FeatureCode",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "FeatureCode",
+      "domain" : null
+    }, {
+      "name" : "SurveyBy",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurveyBy",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "WaterElevation",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "WaterElevation",
+      "domain" : null
+    }, {
+      "name" : "Remarks",
+      "type" : "esriFieldTypeString",
+      "alias" : "Remarks",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "Shape_Length",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Length",
+      "domain" : null
+    }, {
+      "name" : "Shape_Area",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Area",
+      "domain" : null
+    } ],
+    "types" : [ {
+      "id" : 610,
+      "name" : "Water body",
+      "domains" : { }
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 25,
+    "name" : "Water_2012_18056",
+    "type" : "Feature Layer",
+    "description" : "",
+    "geometryType" : "esriGeometryPolygon",
+    "copyrightText" : "",
+    "parentLayer" : {
+      "id" : 20,
+      "name" : "Water"
+    },
+    "subLayers" : [ ],
+    "minScale" : 27084,
+    "maxScale" : 13543,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSFS",
+          "style" : "esriSFSSolid",
+          "color" : [ 194, 230, 242, 255 ],
+          "outline" : {
+            "type" : "esriSLS",
+            "style" : "esriSLSSolid",
+            "color" : [ 150, 168, 235, 255 ],
+            "width" : 0.4
+          }
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7222280.677600542,
+      "ymin" : 3796023.745644529,
+      "xmax" : -7196974.708744581,
+      "ymax" : 3814145.953033362,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "SurveyBy",
+    "typeIdField" : "FeatureCode",
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "FeatureCode",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "FeatureCode",
+      "domain" : null
+    }, {
+      "name" : "SurveyBy",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurveyBy",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "WaterElevation",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "WaterElevation",
+      "domain" : null
+    }, {
+      "name" : "Remarks",
+      "type" : "esriFieldTypeString",
+      "alias" : "Remarks",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "Shape_Length",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Length",
+      "domain" : null
+    }, {
+      "name" : "Shape_Area",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Area",
+      "domain" : null
+    } ],
+    "types" : [ {
+      "id" : 610,
+      "name" : "Water body",
+      "domains" : { }
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 26,
+    "name" : "Water_2012_36112",
+    "type" : "Feature Layer",
+    "description" : "",
+    "geometryType" : "esriGeometryPolygon",
+    "copyrightText" : "",
+    "parentLayer" : {
+      "id" : 20,
+      "name" : "Water"
+    },
+    "subLayers" : [ ],
+    "minScale" : 54168,
+    "maxScale" : 27085,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSFS",
+          "style" : "esriSFSSolid",
+          "color" : [ 194, 230, 242, 255 ],
+          "outline" : {
+            "type" : "esriSLS",
+            "style" : "esriSLSSolid",
+            "color" : [ 150, 168, 235, 255 ],
+            "width" : 0.4
+          }
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7222280.677600542,
+      "ymin" : 3796023.745644529,
+      "xmax" : -7196974.708744581,
+      "ymax" : 3814145.953033362,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "SurveyBy",
+    "typeIdField" : "FeatureCode",
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "FeatureCode",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "FeatureCode",
+      "domain" : null
+    }, {
+      "name" : "SurveyBy",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurveyBy",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "WaterElevation",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "WaterElevation",
+      "domain" : null
+    }, {
+      "name" : "Remarks",
+      "type" : "esriFieldTypeString",
+      "alias" : "Remarks",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "Shape_Length",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Length",
+      "domain" : null
+    }, {
+      "name" : "Shape_Area",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Area",
+      "domain" : null
+    } ],
+    "types" : [ {
+      "id" : 610,
+      "name" : "Water body",
+      "domains" : { }
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 27,
+    "name" : "Water_2012_72224",
+    "type" : "Feature Layer",
+    "description" : "",
+    "geometryType" : "esriGeometryPolygon",
+    "copyrightText" : "",
+    "parentLayer" : {
+      "id" : 20,
+      "name" : "Water"
+    },
+    "subLayers" : [ ],
+    "minScale" : 108336,
+    "maxScale" : 54169,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSFS",
+          "style" : "esriSFSSolid",
+          "color" : [ 194, 230, 242, 255 ],
+          "outline" : {
+            "type" : "esriSLS",
+            "style" : "esriSLSSolid",
+            "color" : [ 150, 168, 235, 255 ],
+            "width" : 0.4
+          }
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7222280.677600542,
+      "ymin" : 3796023.745644529,
+      "xmax" : -7196974.708744581,
+      "ymax" : 3814145.953033362,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "SurveyBy",
+    "typeIdField" : "FeatureCode",
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "FeatureCode",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "FeatureCode",
+      "domain" : null
+    }, {
+      "name" : "SurveyBy",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurveyBy",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "WaterElevation",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "WaterElevation",
+      "domain" : null
+    }, {
+      "name" : "Remarks",
+      "type" : "esriFieldTypeString",
+      "alias" : "Remarks",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "Shape_Length",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Length",
+      "domain" : null
+    }, {
+      "name" : "Shape_Area",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Area",
+      "domain" : null
+    } ],
+    "types" : [ {
+      "id" : 610,
+      "name" : "Water body",
+      "domains" : { }
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 28,
+    "name" : "Water_2012_144448",
+    "type" : "Feature Layer",
+    "description" : "",
+    "geometryType" : "esriGeometryPolygon",
+    "copyrightText" : "",
+    "parentLayer" : {
+      "id" : 20,
+      "name" : "Water"
+    },
+    "subLayers" : [ ],
+    "minScale" : 216671,
+    "maxScale" : 108337,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSFS",
+          "style" : "esriSFSSolid",
+          "color" : [ 194, 230, 242, 255 ],
+          "outline" : {
+            "type" : "esriSLS",
+            "style" : "esriSLSSolid",
+            "color" : [ 150, 168, 235, 255 ],
+            "width" : 0.4
+          }
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7222280.677600542,
+      "ymin" : 3796023.745644529,
+      "xmax" : -7196974.708744581,
+      "ymax" : 3814145.953033362,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "SurveyBy",
+    "typeIdField" : "FeatureCode",
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "FeatureCode",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "FeatureCode",
+      "domain" : null
+    }, {
+      "name" : "SurveyBy",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurveyBy",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "WaterElevation",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "WaterElevation",
+      "domain" : null
+    }, {
+      "name" : "Remarks",
+      "type" : "esriFieldTypeString",
+      "alias" : "Remarks",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "Shape_Length",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Length",
+      "domain" : null
+    }, {
+      "name" : "Shape_Area",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Area",
+      "domain" : null
+    } ],
+    "types" : [ {
+      "id" : 610,
+      "name" : "Water body",
+      "domains" : { }
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 29,
+    "name" : "RoadCentrelines",
+    "type" : "Group Layer",
+    "description" : "",
+    "geometryType" : null,
+    "copyrightText" : "",
+    "parentLayer" : null,
+    "subLayers" : [ {
+      "id" : 30,
+      "name" : "RoadCentrelines_1128"
+    }, {
+      "id" : 31,
+      "name" : "RoadCentrelines_2257"
+    }, {
+      "id" : 32,
+      "name" : "RoadCentrelines_4514"
+    }, {
+      "id" : 33,
+      "name" : "RoadCentrelines_9028"
+    }, {
+      "id" : 34,
+      "name" : "RoadCentrelines_18056"
+    }, {
+      "id" : 35,
+      "name" : "RoadCentrelines_36112"
+    }, {
+      "id" : 36,
+      "name" : "RoadCentrelines_72224"
+    } ],
+    "minScale" : 0,
+    "maxScale" : 0,
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223112.556824469,
+      "ymin" : 3795961.8423995567,
+      "xmax" : -7196653.962424396,
+      "ymax" : 3814707.873861857,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeNone",
+    "displayField" : "",
+    "typeIdField" : null,
+    "fields" : null,
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "supportsStatistics" : false,
+    "supportsAdvancedQueries" : false,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 30,
+    "name" : "RoadCentrelines_1128",
+    "type" : "Feature Layer",
+    "description" : "A centreline network of Bermuda roads with road names.  Does not include directionality, impedance values or intersection node data.",
+    "geometryType" : "esriGeometryPolyline",
+    "copyrightText" : "Data maintained by Department of Land Surveys & Registration; converted by Kevin Mayall, Locus Ltd.",
+    "parentLayer" : {
+      "id" : 29,
+      "name" : "RoadCentrelines"
+    },
+    "subLayers" : [ ],
+    "minScale" : 1692,
+    "maxScale" : 564,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSLS",
+          "style" : "esriSLSSolid",
+          "color" : [ 204, 204, 204, 255 ],
+          "width" : 3
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : [ {
+        "labelPlacement" : "esriServerLinePlacementAboveAlong",
+        "where" : null,
+        "labelExpression" : "[ROADNAME]",
+        "useCodedValues" : true,
+        "symbol" : {
+          "type" : "esriTS",
+          "color" : [ 52, 52, 52, 255 ],
+          "backgroundColor" : null,
+          "borderLineColor" : null,
+          "borderLineSize" : null,
+          "verticalAlignment" : "baseline",
+          "horizontalAlignment" : "left",
+          "rightToLeft" : false,
+          "angle" : 0,
+          "xoffset" : 0,
+          "yoffset" : 0,
+          "kerning" : true,
+          "haloColor" : null,
+          "haloSize" : null,
+          "font" : {
+            "family" : "Arial",
+            "size" : 8,
+            "style" : "italic",
+            "weight" : "normal",
+            "decoration" : "none"
+          }
+        },
+        "minScale" : 0,
+        "maxScale" : 0
+      } ]
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223112.556824469,
+      "ymin" : 3795961.8423995567,
+      "xmax" : -7196653.962424396,
+      "ymax" : 3814707.873861857,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "ROADNAME",
+    "typeIdField" : "FeatureCode",
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "FeatureCode",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "FeatureCode",
+      "domain" : null
+    }, {
+      "name" : "SurveyBy",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurveyBy",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "Remarks",
+      "type" : "esriFieldTypeString",
+      "alias" : "Remarks",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "ROADID",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "ROADID",
+      "domain" : null
+    }, {
+      "name" : "ROADNAME",
+      "type" : "esriFieldTypeString",
+      "alias" : "ROADNAME",
+      "length" : 30,
+      "domain" : null
+    }, {
+      "name" : "ROADCLASS",
+      "type" : "esriFieldTypeString",
+      "alias" : "ROADCLASS",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "FEATCODE",
+      "type" : "esriFieldTypeString",
+      "alias" : "FEATCODE",
+      "length" : 4,
+      "domain" : null
+    }, {
+      "name" : "RD_CAT",
+      "type" : "esriFieldTypeString",
+      "alias" : "RoadCategory",
+      "length" : 4,
+      "domain" : null
+    }, {
+      "name" : "Shape_Length",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Length",
+      "domain" : null
+    } ],
+    "types" : [ {
+      "id" : 520,
+      "name" : "Road Centerline",
+      "domains" : { }
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : true,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "hasZ" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 31,
+    "name" : "RoadCentrelines_2257",
+    "type" : "Feature Layer",
+    "description" : "A centreline network of Bermuda roads with road names.  Does not include directionality, impedance values or intersection node data.",
+    "geometryType" : "esriGeometryPolyline",
+    "copyrightText" : "Data maintained by Department of Land Surveys & Registration; converted by Kevin Mayall, Locus Ltd.",
+    "parentLayer" : {
+      "id" : 29,
+      "name" : "RoadCentrelines"
+    },
+    "subLayers" : [ ],
+    "minScale" : 3385,
+    "maxScale" : 1693,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSLS",
+          "style" : "esriSLSSolid",
+          "color" : [ 204, 204, 204, 255 ],
+          "width" : 3
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : [ {
+        "labelPlacement" : "esriServerLinePlacementAboveAlong",
+        "where" : null,
+        "labelExpression" : "[ROADNAME]",
+        "useCodedValues" : true,
+        "symbol" : {
+          "type" : "esriTS",
+          "color" : [ 52, 52, 52, 255 ],
+          "backgroundColor" : null,
+          "borderLineColor" : null,
+          "borderLineSize" : null,
+          "verticalAlignment" : "baseline",
+          "horizontalAlignment" : "left",
+          "rightToLeft" : false,
+          "angle" : 0,
+          "xoffset" : 0,
+          "yoffset" : 0,
+          "kerning" : true,
+          "haloColor" : null,
+          "haloSize" : null,
+          "font" : {
+            "family" : "Arial",
+            "size" : 8,
+            "style" : "italic",
+            "weight" : "normal",
+            "decoration" : "none"
+          }
+        },
+        "minScale" : 0,
+        "maxScale" : 0
+      } ]
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223112.556824469,
+      "ymin" : 3795961.8423995567,
+      "xmax" : -7196653.962424396,
+      "ymax" : 3814707.873861857,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "ROADNAME",
+    "typeIdField" : "FeatureCode",
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "FeatureCode",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "FeatureCode",
+      "domain" : null
+    }, {
+      "name" : "SurveyBy",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurveyBy",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "Remarks",
+      "type" : "esriFieldTypeString",
+      "alias" : "Remarks",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "ROADID",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "ROADID",
+      "domain" : null
+    }, {
+      "name" : "ROADNAME",
+      "type" : "esriFieldTypeString",
+      "alias" : "ROADNAME",
+      "length" : 30,
+      "domain" : null
+    }, {
+      "name" : "ROADCLASS",
+      "type" : "esriFieldTypeString",
+      "alias" : "ROADCLASS",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "FEATCODE",
+      "type" : "esriFieldTypeString",
+      "alias" : "FEATCODE",
+      "length" : 4,
+      "domain" : null
+    }, {
+      "name" : "RD_CAT",
+      "type" : "esriFieldTypeString",
+      "alias" : "RoadCategory",
+      "length" : 4,
+      "domain" : null
+    }, {
+      "name" : "Shape_Length",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Length",
+      "domain" : null
+    } ],
+    "types" : [ {
+      "id" : 520,
+      "name" : "Road Centerline",
+      "domains" : { }
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : true,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "hasZ" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 32,
+    "name" : "RoadCentrelines_4514",
+    "type" : "Feature Layer",
+    "description" : "A centreline network of Bermuda roads with road names.  Does not include directionality, impedance values or intersection node data.",
+    "geometryType" : "esriGeometryPolyline",
+    "copyrightText" : "Data maintained by Department of Land Surveys & Registration; converted by Kevin Mayall, Locus Ltd.",
+    "parentLayer" : {
+      "id" : 29,
+      "name" : "RoadCentrelines"
+    },
+    "subLayers" : [ ],
+    "minScale" : 6771,
+    "maxScale" : 3386,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSLS",
+          "style" : "esriSLSSolid",
+          "color" : [ 204, 204, 204, 255 ],
+          "width" : 3
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : [ {
+        "labelPlacement" : "esriServerLinePlacementAboveAlong",
+        "where" : null,
+        "labelExpression" : "[ROADNAME]",
+        "useCodedValues" : true,
+        "symbol" : {
+          "type" : "esriTS",
+          "color" : [ 52, 52, 52, 255 ],
+          "backgroundColor" : null,
+          "borderLineColor" : null,
+          "borderLineSize" : null,
+          "verticalAlignment" : "baseline",
+          "horizontalAlignment" : "left",
+          "rightToLeft" : false,
+          "angle" : 0,
+          "xoffset" : 0,
+          "yoffset" : 0,
+          "kerning" : true,
+          "haloColor" : null,
+          "haloSize" : null,
+          "font" : {
+            "family" : "Arial",
+            "size" : 8,
+            "style" : "italic",
+            "weight" : "normal",
+            "decoration" : "none"
+          }
+        },
+        "minScale" : 0,
+        "maxScale" : 0
+      } ]
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223112.556824469,
+      "ymin" : 3795961.8423995567,
+      "xmax" : -7196653.962424396,
+      "ymax" : 3814707.873861857,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "ROADNAME",
+    "typeIdField" : "FeatureCode",
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "FeatureCode",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "FeatureCode",
+      "domain" : null
+    }, {
+      "name" : "SurveyBy",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurveyBy",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "Remarks",
+      "type" : "esriFieldTypeString",
+      "alias" : "Remarks",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "ROADID",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "ROADID",
+      "domain" : null
+    }, {
+      "name" : "ROADNAME",
+      "type" : "esriFieldTypeString",
+      "alias" : "ROADNAME",
+      "length" : 30,
+      "domain" : null
+    }, {
+      "name" : "ROADCLASS",
+      "type" : "esriFieldTypeString",
+      "alias" : "ROADCLASS",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "FEATCODE",
+      "type" : "esriFieldTypeString",
+      "alias" : "FEATCODE",
+      "length" : 4,
+      "domain" : null
+    }, {
+      "name" : "RD_CAT",
+      "type" : "esriFieldTypeString",
+      "alias" : "RoadCategory",
+      "length" : 4,
+      "domain" : null
+    }, {
+      "name" : "Shape_Length",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Length",
+      "domain" : null
+    } ],
+    "types" : [ {
+      "id" : 520,
+      "name" : "Road Centerline",
+      "domains" : { }
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : true,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "hasZ" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 33,
+    "name" : "RoadCentrelines_9028",
+    "type" : "Feature Layer",
+    "description" : "A centreline network of Bermuda roads with road names.  Does not include directionality, impedance values or intersection node data.",
+    "geometryType" : "esriGeometryPolyline",
+    "copyrightText" : "Data maintained by Department of Land Surveys & Registration; converted by Kevin Mayall, Locus Ltd.",
+    "parentLayer" : {
+      "id" : 29,
+      "name" : "RoadCentrelines"
+    },
+    "subLayers" : [ ],
+    "minScale" : 13542,
+    "maxScale" : 6772,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSLS",
+          "style" : "esriSLSSolid",
+          "color" : [ 204, 204, 204, 255 ],
+          "width" : 1
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : [ {
+        "labelPlacement" : "esriServerLinePlacementAboveAlong",
+        "where" : null,
+        "labelExpression" : "[ROADNAME]",
+        "useCodedValues" : true,
+        "symbol" : {
+          "type" : "esriTS",
+          "color" : [ 52, 52, 52, 255 ],
+          "backgroundColor" : null,
+          "borderLineColor" : null,
+          "borderLineSize" : null,
+          "verticalAlignment" : "baseline",
+          "horizontalAlignment" : "left",
+          "rightToLeft" : false,
+          "angle" : 0,
+          "xoffset" : 0,
+          "yoffset" : 0,
+          "kerning" : true,
+          "haloColor" : [ 255, 255, 255, 253 ],
+          "haloSize" : 1,
+          "font" : {
+            "family" : "Arial",
+            "size" : 8,
+            "style" : "italic",
+            "weight" : "normal",
+            "decoration" : "none"
+          }
+        },
+        "minScale" : 0,
+        "maxScale" : 0
+      } ]
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223112.556824469,
+      "ymin" : 3795961.8423995567,
+      "xmax" : -7196653.962424396,
+      "ymax" : 3814707.873861857,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "ROADNAME",
+    "typeIdField" : "FeatureCode",
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "FeatureCode",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "FeatureCode",
+      "domain" : null
+    }, {
+      "name" : "SurveyBy",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurveyBy",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "Remarks",
+      "type" : "esriFieldTypeString",
+      "alias" : "Remarks",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "ROADID",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "ROADID",
+      "domain" : null
+    }, {
+      "name" : "ROADNAME",
+      "type" : "esriFieldTypeString",
+      "alias" : "ROADNAME",
+      "length" : 30,
+      "domain" : null
+    }, {
+      "name" : "ROADCLASS",
+      "type" : "esriFieldTypeString",
+      "alias" : "ROADCLASS",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "FEATCODE",
+      "type" : "esriFieldTypeString",
+      "alias" : "FEATCODE",
+      "length" : 4,
+      "domain" : null
+    }, {
+      "name" : "RD_CAT",
+      "type" : "esriFieldTypeString",
+      "alias" : "RoadCategory",
+      "length" : 4,
+      "domain" : null
+    }, {
+      "name" : "Shape_Length",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Length",
+      "domain" : null
+    } ],
+    "types" : [ {
+      "id" : 520,
+      "name" : "Road Centerline",
+      "domains" : { }
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : true,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "hasZ" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 34,
+    "name" : "RoadCentrelines_18056",
+    "type" : "Feature Layer",
+    "description" : "A centreline network of Bermuda roads with road names.  Does not include directionality, impedance values or intersection node data.",
+    "geometryType" : "esriGeometryPolyline",
+    "copyrightText" : "Data maintained by Department of Land Surveys & Registration; converted by Kevin Mayall, Locus Ltd.",
+    "parentLayer" : {
+      "id" : 29,
+      "name" : "RoadCentrelines"
+    },
+    "subLayers" : [ ],
+    "minScale" : 27084,
+    "maxScale" : 13543,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSLS",
+          "style" : "esriSLSSolid",
+          "color" : [ 204, 204, 204, 255 ],
+          "width" : 1.5
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : [ {
+        "labelPlacement" : "esriServerLinePlacementAboveAlong",
+        "where" : "Shape_Length >= 250",
+        "labelExpression" : "[ROADNAME]",
+        "useCodedValues" : true,
+        "symbol" : {
+          "type" : "esriTS",
+          "color" : [ 52, 52, 52, 255 ],
+          "backgroundColor" : null,
+          "borderLineColor" : null,
+          "borderLineSize" : null,
+          "verticalAlignment" : "baseline",
+          "horizontalAlignment" : "left",
+          "rightToLeft" : false,
+          "angle" : 0,
+          "xoffset" : 0,
+          "yoffset" : 0,
+          "kerning" : true,
+          "haloColor" : [ 255, 255, 255, 253 ],
+          "haloSize" : 1,
+          "font" : {
+            "family" : "Arial",
+            "size" : 8,
+            "style" : "italic",
+            "weight" : "normal",
+            "decoration" : "none"
+          }
+        },
+        "minScale" : 0,
+        "maxScale" : 0
+      } ]
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223112.556824469,
+      "ymin" : 3795961.8423995567,
+      "xmax" : -7196653.962424396,
+      "ymax" : 3814707.873861857,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "ROADNAME",
+    "typeIdField" : "FeatureCode",
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "FeatureCode",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "FeatureCode",
+      "domain" : null
+    }, {
+      "name" : "SurveyBy",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurveyBy",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "Remarks",
+      "type" : "esriFieldTypeString",
+      "alias" : "Remarks",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "ROADID",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "ROADID",
+      "domain" : null
+    }, {
+      "name" : "ROADNAME",
+      "type" : "esriFieldTypeString",
+      "alias" : "ROADNAME",
+      "length" : 30,
+      "domain" : null
+    }, {
+      "name" : "ROADCLASS",
+      "type" : "esriFieldTypeString",
+      "alias" : "ROADCLASS",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "FEATCODE",
+      "type" : "esriFieldTypeString",
+      "alias" : "FEATCODE",
+      "length" : 4,
+      "domain" : null
+    }, {
+      "name" : "RD_CAT",
+      "type" : "esriFieldTypeString",
+      "alias" : "RoadCategory",
+      "length" : 4,
+      "domain" : null
+    }, {
+      "name" : "Shape_Length",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Length",
+      "domain" : null
+    } ],
+    "types" : [ {
+      "id" : 520,
+      "name" : "Road Centerline",
+      "domains" : { }
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : true,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "hasZ" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 35,
+    "name" : "RoadCentrelines_36112",
+    "type" : "Feature Layer",
+    "description" : "A centreline network of Bermuda roads with road names.  Does not include directionality, impedance values or intersection node data.",
+    "geometryType" : "esriGeometryPolyline",
+    "copyrightText" : "Data maintained by Department of Land Surveys & Registration; converted by Kevin Mayall, Locus Ltd.",
+    "parentLayer" : {
+      "id" : 29,
+      "name" : "RoadCentrelines"
+    },
+    "subLayers" : [ ],
+    "minScale" : 54168,
+    "maxScale" : 27085,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSLS",
+          "style" : "esriSLSSolid",
+          "color" : [ 204, 204, 204, 255 ],
+          "width" : 1
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223112.556824469,
+      "ymin" : 3795961.8423995567,
+      "xmax" : -7196653.962424396,
+      "ymax" : 3814707.873861857,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "ROADNAME",
+    "typeIdField" : "FeatureCode",
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "FeatureCode",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "FeatureCode",
+      "domain" : null
+    }, {
+      "name" : "SurveyBy",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurveyBy",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "Remarks",
+      "type" : "esriFieldTypeString",
+      "alias" : "Remarks",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "ROADID",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "ROADID",
+      "domain" : null
+    }, {
+      "name" : "ROADNAME",
+      "type" : "esriFieldTypeString",
+      "alias" : "ROADNAME",
+      "length" : 30,
+      "domain" : null
+    }, {
+      "name" : "ROADCLASS",
+      "type" : "esriFieldTypeString",
+      "alias" : "ROADCLASS",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "FEATCODE",
+      "type" : "esriFieldTypeString",
+      "alias" : "FEATCODE",
+      "length" : 4,
+      "domain" : null
+    }, {
+      "name" : "RD_CAT",
+      "type" : "esriFieldTypeString",
+      "alias" : "RoadCategory",
+      "length" : 4,
+      "domain" : null
+    }, {
+      "name" : "Shape_Length",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Length",
+      "domain" : null
+    } ],
+    "types" : [ {
+      "id" : 520,
+      "name" : "Road Centerline",
+      "domains" : { }
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "hasZ" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 36,
+    "name" : "RoadCentrelines_72224",
+    "type" : "Feature Layer",
+    "description" : "A centreline network of Bermuda roads with road names.  Does not include directionality, impedance values or intersection node data.",
+    "geometryType" : "esriGeometryPolyline",
+    "copyrightText" : "Data maintained by Department of Land Surveys & Registration; converted by Kevin Mayall, Locus Ltd.",
+    "parentLayer" : {
+      "id" : 29,
+      "name" : "RoadCentrelines"
+    },
+    "subLayers" : [ ],
+    "minScale" : 108336,
+    "maxScale" : 54169,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSLS",
+          "style" : "esriSLSSolid",
+          "color" : [ 204, 204, 204, 255 ],
+          "width" : 1
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223112.556824469,
+      "ymin" : 3795961.8423995567,
+      "xmax" : -7196653.962424396,
+      "ymax" : 3814707.873861857,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "ROADNAME",
+    "typeIdField" : "FeatureCode",
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "FeatureCode",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "FeatureCode",
+      "domain" : null
+    }, {
+      "name" : "SurveyBy",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurveyBy",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "Remarks",
+      "type" : "esriFieldTypeString",
+      "alias" : "Remarks",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "ROADID",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "ROADID",
+      "domain" : null
+    }, {
+      "name" : "ROADNAME",
+      "type" : "esriFieldTypeString",
+      "alias" : "ROADNAME",
+      "length" : 30,
+      "domain" : null
+    }, {
+      "name" : "ROADCLASS",
+      "type" : "esriFieldTypeString",
+      "alias" : "ROADCLASS",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "FEATCODE",
+      "type" : "esriFieldTypeString",
+      "alias" : "FEATCODE",
+      "length" : 4,
+      "domain" : null
+    }, {
+      "name" : "RD_CAT",
+      "type" : "esriFieldTypeString",
+      "alias" : "RoadCategory",
+      "length" : 4,
+      "domain" : null
+    }, {
+      "name" : "Shape_Length",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Length",
+      "domain" : null
+    } ],
+    "types" : [ {
+      "id" : 520,
+      "name" : "Road Centerline",
+      "domains" : { }
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "hasZ" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 37,
+    "name" : "RoadAreas",
+    "type" : "Group Layer",
+    "description" : "",
+    "geometryType" : null,
+    "copyrightText" : "",
+    "parentLayer" : null,
+    "subLayers" : [ {
+      "id" : 38,
+      "name" : "RoadAreas_2012_1128"
+    }, {
+      "id" : 39,
+      "name" : "RoadAreas_2012_2257"
+    }, {
+      "id" : 40,
+      "name" : "RoadAreas_2012_4514"
+    }, {
+      "id" : 41,
+      "name" : "RoadAreas_2012_9028"
+    }, {
+      "id" : 42,
+      "name" : "RoadAreas_2012_18056"
+    } ],
+    "minScale" : 0,
+    "maxScale" : 0,
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223114.425913043,
+      "ymin" : 3795897.7690097447,
+      "xmax" : -7196651.281084077,
+      "ymax" : 3814716.8359883875,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeNone",
+    "displayField" : "",
+    "typeIdField" : null,
+    "fields" : null,
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "supportsStatistics" : false,
+    "supportsAdvancedQueries" : false,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 38,
+    "name" : "RoadAreas_2012_1128",
+    "type" : "Feature Layer",
+    "description" : "",
+    "geometryType" : "esriGeometryPolygon",
+    "copyrightText" : "",
+    "parentLayer" : {
+      "id" : 37,
+      "name" : "RoadAreas"
+    },
+    "subLayers" : [ ],
+    "minScale" : 1692,
+    "maxScale" : 564,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSFS",
+          "style" : "esriSFSSolid",
+          "color" : [ 204, 204, 204, 255 ],
+          "outline" : {
+            "type" : "esriSLS",
+            "style" : "esriSLSSolid",
+            "color" : [ 204, 204, 204, 255 ],
+            "width" : 0.4
+          }
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223114.425913043,
+      "ymin" : 3795897.7690097447,
+      "xmax" : -7196651.281084077,
+      "ymax" : 3814716.8359883875,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "RoadName",
+    "typeIdField" : "FeatureCode",
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "FeatureCode",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "FeatureCode",
+      "domain" : null
+    }, {
+      "name" : "SurveyBy",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurveyBy",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "SurfaceType",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurfaceType",
+      "length" : 15,
+      "domain" : null
+    }, {
+      "name" : "Remarks",
+      "type" : "esriFieldTypeString",
+      "alias" : "Remarks",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "UniqueID",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "UniqueID",
+      "domain" : null
+    }, {
+      "name" : "RoadName",
+      "type" : "esriFieldTypeString",
+      "alias" : "RoadName",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "Shape_Length",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Length",
+      "domain" : null
+    }, {
+      "name" : "Shape_Area",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Area",
+      "domain" : null
+    } ],
+    "types" : [ {
+      "id" : 510,
+      "name" : "Road",
+      "domains" : { }
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 39,
+    "name" : "RoadAreas_2012_2257",
+    "type" : "Feature Layer",
+    "description" : "",
+    "geometryType" : "esriGeometryPolygon",
+    "copyrightText" : "",
+    "parentLayer" : {
+      "id" : 37,
+      "name" : "RoadAreas"
+    },
+    "subLayers" : [ ],
+    "minScale" : 3385,
+    "maxScale" : 1693,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSFS",
+          "style" : "esriSFSSolid",
+          "color" : [ 204, 204, 204, 255 ],
+          "outline" : {
+            "type" : "esriSLS",
+            "style" : "esriSLSSolid",
+            "color" : [ 204, 204, 204, 255 ],
+            "width" : 0.4
+          }
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223114.425913043,
+      "ymin" : 3795897.7690097447,
+      "xmax" : -7196651.281084077,
+      "ymax" : 3814716.8359883875,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "RoadName",
+    "typeIdField" : "FeatureCode",
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "FeatureCode",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "FeatureCode",
+      "domain" : null
+    }, {
+      "name" : "SurveyBy",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurveyBy",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "SurfaceType",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurfaceType",
+      "length" : 15,
+      "domain" : null
+    }, {
+      "name" : "Remarks",
+      "type" : "esriFieldTypeString",
+      "alias" : "Remarks",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "UniqueID",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "UniqueID",
+      "domain" : null
+    }, {
+      "name" : "RoadName",
+      "type" : "esriFieldTypeString",
+      "alias" : "RoadName",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "Shape_Length",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Length",
+      "domain" : null
+    }, {
+      "name" : "Shape_Area",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Area",
+      "domain" : null
+    } ],
+    "types" : [ {
+      "id" : 510,
+      "name" : "Road",
+      "domains" : { }
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 40,
+    "name" : "RoadAreas_2012_4514",
+    "type" : "Feature Layer",
+    "description" : "",
+    "geometryType" : "esriGeometryPolygon",
+    "copyrightText" : "",
+    "parentLayer" : {
+      "id" : 37,
+      "name" : "RoadAreas"
+    },
+    "subLayers" : [ ],
+    "minScale" : 6771,
+    "maxScale" : 3386,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSFS",
+          "style" : "esriSFSSolid",
+          "color" : [ 204, 204, 204, 255 ],
+          "outline" : {
+            "type" : "esriSLS",
+            "style" : "esriSLSSolid",
+            "color" : [ 204, 204, 204, 255 ],
+            "width" : 0.4
+          }
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223114.425913043,
+      "ymin" : 3795897.7690097447,
+      "xmax" : -7196651.281084077,
+      "ymax" : 3814716.8359883875,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "RoadName",
+    "typeIdField" : "FeatureCode",
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "FeatureCode",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "FeatureCode",
+      "domain" : null
+    }, {
+      "name" : "SurveyBy",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurveyBy",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "SurfaceType",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurfaceType",
+      "length" : 15,
+      "domain" : null
+    }, {
+      "name" : "Remarks",
+      "type" : "esriFieldTypeString",
+      "alias" : "Remarks",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "UniqueID",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "UniqueID",
+      "domain" : null
+    }, {
+      "name" : "RoadName",
+      "type" : "esriFieldTypeString",
+      "alias" : "RoadName",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "Shape_Length",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Length",
+      "domain" : null
+    }, {
+      "name" : "Shape_Area",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Area",
+      "domain" : null
+    } ],
+    "types" : [ {
+      "id" : 510,
+      "name" : "Road",
+      "domains" : { }
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 41,
+    "name" : "RoadAreas_2012_9028",
+    "type" : "Feature Layer",
+    "description" : "",
+    "geometryType" : "esriGeometryPolygon",
+    "copyrightText" : "",
+    "parentLayer" : {
+      "id" : 37,
+      "name" : "RoadAreas"
+    },
+    "subLayers" : [ ],
+    "minScale" : 13542,
+    "maxScale" : 6772,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSFS",
+          "style" : "esriSFSSolid",
+          "color" : [ 204, 204, 204, 255 ],
+          "outline" : {
+            "type" : "esriSLS",
+            "style" : "esriSLSSolid",
+            "color" : [ 204, 204, 204, 255 ],
+            "width" : 0.4
+          }
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223114.425913043,
+      "ymin" : 3795897.7690097447,
+      "xmax" : -7196651.281084077,
+      "ymax" : 3814716.8359883875,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "RoadName",
+    "typeIdField" : "FeatureCode",
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "FeatureCode",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "FeatureCode",
+      "domain" : null
+    }, {
+      "name" : "SurveyBy",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurveyBy",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "SurfaceType",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurfaceType",
+      "length" : 15,
+      "domain" : null
+    }, {
+      "name" : "Remarks",
+      "type" : "esriFieldTypeString",
+      "alias" : "Remarks",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "UniqueID",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "UniqueID",
+      "domain" : null
+    }, {
+      "name" : "RoadName",
+      "type" : "esriFieldTypeString",
+      "alias" : "RoadName",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "Shape_Length",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Length",
+      "domain" : null
+    }, {
+      "name" : "Shape_Area",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Area",
+      "domain" : null
+    } ],
+    "types" : [ {
+      "id" : 510,
+      "name" : "Road",
+      "domains" : { }
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 42,
+    "name" : "RoadAreas_2012_18056",
+    "type" : "Feature Layer",
+    "description" : "",
+    "geometryType" : "esriGeometryPolygon",
+    "copyrightText" : "",
+    "parentLayer" : {
+      "id" : 37,
+      "name" : "RoadAreas"
+    },
+    "subLayers" : [ ],
+    "minScale" : 27084,
+    "maxScale" : 13543,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSFS",
+          "style" : "esriSFSSolid",
+          "color" : [ 204, 204, 204, 255 ],
+          "outline" : {
+            "type" : "esriSLS",
+            "style" : "esriSLSSolid",
+            "color" : [ 204, 204, 204, 255 ],
+            "width" : 0.4
+          }
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223114.425913043,
+      "ymin" : 3795897.7690097447,
+      "xmax" : -7196651.281084077,
+      "ymax" : 3814716.8359883875,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "RoadName",
+    "typeIdField" : "FeatureCode",
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "FeatureCode",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "FeatureCode",
+      "domain" : null
+    }, {
+      "name" : "SurveyBy",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurveyBy",
+      "length" : 10,
+      "domain" : null
+    }, {
+      "name" : "SurfaceType",
+      "type" : "esriFieldTypeString",
+      "alias" : "SurfaceType",
+      "length" : 15,
+      "domain" : null
+    }, {
+      "name" : "Remarks",
+      "type" : "esriFieldTypeString",
+      "alias" : "Remarks",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "UniqueID",
+      "type" : "esriFieldTypeSmallInteger",
+      "alias" : "UniqueID",
+      "domain" : null
+    }, {
+      "name" : "RoadName",
+      "type" : "esriFieldTypeString",
+      "alias" : "RoadName",
+      "length" : 50,
+      "domain" : null
+    }, {
+      "name" : "Shape_Length",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Length",
+      "domain" : null
+    }, {
+      "name" : "Shape_Area",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape_Area",
+      "domain" : null
+    } ],
+    "types" : [ {
+      "id" : 510,
+      "name" : "Road",
+      "domains" : { }
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 43,
+    "name" : "Parishes",
+    "type" : "Group Layer",
+    "description" : "",
+    "geometryType" : null,
+    "copyrightText" : "",
+    "parentLayer" : null,
+    "subLayers" : [ {
+      "id" : 44,
+      "name" : "Parishes_1128"
+    }, {
+      "id" : 45,
+      "name" : "Parishes_2257"
+    }, {
+      "id" : 46,
+      "name" : "Parishes_4514"
+    }, {
+      "id" : 47,
+      "name" : "Parishes_9028"
+    }, {
+      "id" : 48,
+      "name" : "Parishes_18056"
+    }, {
+      "id" : 49,
+      "name" : "Parishes_36112"
+    }, {
+      "id" : 50,
+      "name" : "Parishes_72224"
+    }, {
+      "id" : 51,
+      "name" : "Parishes_144448"
+    }, {
+      "id" : 52,
+      "name" : "Parishes_288895"
+    }, {
+      "id" : 53,
+      "name" : "Parishes_577791"
+    }, {
+      "id" : 54,
+      "name" : "Parishes_1155581"
+    } ],
+    "minScale" : 0,
+    "maxScale" : 0,
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223265.7750263065,
+      "ymin" : 3795758.547691501,
+      "xmax" : -7196408.87854916,
+      "ymax" : 3814776.4922246025,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeNone",
+    "displayField" : "",
+    "typeIdField" : null,
+    "fields" : null,
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "supportsStatistics" : false,
+    "supportsAdvancedQueries" : false,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 44,
+    "name" : "Parishes_1128",
+    "type" : "Feature Layer",
+    "description" : "These are the determined parish boundaries at the time of the 2003 Topographic Map Database.  They incorporate the coastline from the 2003 TMD.",
+    "geometryType" : "esriGeometryPolygon",
+    "copyrightText" : "Data maintained by Department of Land Surveys & Registration; converted by Kevin Mayall, Locus Ltd.",
+    "parentLayer" : {
+      "id" : 43,
+      "name" : "Parishes"
+    },
+    "subLayers" : [ ],
+    "minScale" : 1692,
+    "maxScale" : 564,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSFS",
+          "style" : "esriSFSSolid",
+          "color" : [ 255, 255, 255, 255 ],
+          "outline" : {
+            "type" : "esriSLS",
+            "style" : "esriSLSSolid",
+            "color" : [ 114, 138, 186, 255 ],
+            "width" : 2
+          }
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223265.7750263065,
+      "ymin" : 3795758.547691501,
+      "xmax" : -7196408.87854916,
+      "ymax" : 3814776.4922246025,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "PARISHNAME",
+    "typeIdField" : null,
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "PARISHID",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "PARISHID",
+      "domain" : null
+    }, {
+      "name" : "PARISHNAME",
+      "type" : "esriFieldTypeString",
+      "alias" : "PARISHNAME",
+      "length" : 30,
+      "domain" : null
+    }, {
+      "name" : "PARISHABBREV",
+      "type" : "esriFieldTypeString",
+      "alias" : "PARISHABBREV",
+      "length" : 3,
+      "domain" : null
+    }, {
+      "name" : "FEATCODE",
+      "type" : "esriFieldTypeString",
+      "alias" : "FEATCODE",
+      "length" : 4,
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "Shape.area",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape.area",
+      "domain" : null
+    }, {
+      "name" : "Shape.len",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape.len",
+      "domain" : null
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 45,
+    "name" : "Parishes_2257",
+    "type" : "Feature Layer",
+    "description" : "These are the determined parish boundaries at the time of the 2003 Topographic Map Database.  They incorporate the coastline from the 2003 TMD.",
+    "geometryType" : "esriGeometryPolygon",
+    "copyrightText" : "Data maintained by Department of Land Surveys & Registration; converted by Kevin Mayall, Locus Ltd.",
+    "parentLayer" : {
+      "id" : 43,
+      "name" : "Parishes"
+    },
+    "subLayers" : [ ],
+    "minScale" : 3385,
+    "maxScale" : 1693,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSFS",
+          "style" : "esriSFSSolid",
+          "color" : [ 255, 255, 255, 255 ],
+          "outline" : {
+            "type" : "esriSLS",
+            "style" : "esriSLSSolid",
+            "color" : [ 114, 138, 186, 255 ],
+            "width" : 2
+          }
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223265.7750263065,
+      "ymin" : 3795758.547691501,
+      "xmax" : -7196408.87854916,
+      "ymax" : 3814776.4922246025,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "PARISHNAME",
+    "typeIdField" : null,
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "PARISHID",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "PARISHID",
+      "domain" : null
+    }, {
+      "name" : "PARISHNAME",
+      "type" : "esriFieldTypeString",
+      "alias" : "PARISHNAME",
+      "length" : 30,
+      "domain" : null
+    }, {
+      "name" : "PARISHABBREV",
+      "type" : "esriFieldTypeString",
+      "alias" : "PARISHABBREV",
+      "length" : 3,
+      "domain" : null
+    }, {
+      "name" : "FEATCODE",
+      "type" : "esriFieldTypeString",
+      "alias" : "FEATCODE",
+      "length" : 4,
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "Shape.area",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape.area",
+      "domain" : null
+    }, {
+      "name" : "Shape.len",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape.len",
+      "domain" : null
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 46,
+    "name" : "Parishes_4514",
+    "type" : "Feature Layer",
+    "description" : "These are the determined parish boundaries at the time of the 2003 Topographic Map Database.  They incorporate the coastline from the 2003 TMD.",
+    "geometryType" : "esriGeometryPolygon",
+    "copyrightText" : "Data maintained by Department of Land Surveys & Registration; converted by Kevin Mayall, Locus Ltd.",
+    "parentLayer" : {
+      "id" : 43,
+      "name" : "Parishes"
+    },
+    "subLayers" : [ ],
+    "minScale" : 6771,
+    "maxScale" : 3386,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSFS",
+          "style" : "esriSFSSolid",
+          "color" : [ 255, 255, 255, 255 ],
+          "outline" : {
+            "type" : "esriSLS",
+            "style" : "esriSLSSolid",
+            "color" : [ 114, 138, 186, 255 ],
+            "width" : 2
+          }
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223265.7750263065,
+      "ymin" : 3795758.547691501,
+      "xmax" : -7196408.87854916,
+      "ymax" : 3814776.4922246025,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "PARISHNAME",
+    "typeIdField" : null,
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "PARISHID",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "PARISHID",
+      "domain" : null
+    }, {
+      "name" : "PARISHNAME",
+      "type" : "esriFieldTypeString",
+      "alias" : "PARISHNAME",
+      "length" : 30,
+      "domain" : null
+    }, {
+      "name" : "PARISHABBREV",
+      "type" : "esriFieldTypeString",
+      "alias" : "PARISHABBREV",
+      "length" : 3,
+      "domain" : null
+    }, {
+      "name" : "FEATCODE",
+      "type" : "esriFieldTypeString",
+      "alias" : "FEATCODE",
+      "length" : 4,
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "Shape.area",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape.area",
+      "domain" : null
+    }, {
+      "name" : "Shape.len",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape.len",
+      "domain" : null
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 47,
+    "name" : "Parishes_9028",
+    "type" : "Feature Layer",
+    "description" : "These are the determined parish boundaries at the time of the 2003 Topographic Map Database.  They incorporate the coastline from the 2003 TMD.",
+    "geometryType" : "esriGeometryPolygon",
+    "copyrightText" : "Data maintained by Department of Land Surveys & Registration; converted by Kevin Mayall, Locus Ltd.",
+    "parentLayer" : {
+      "id" : 43,
+      "name" : "Parishes"
+    },
+    "subLayers" : [ ],
+    "minScale" : 13542,
+    "maxScale" : 6772,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSFS",
+          "style" : "esriSFSSolid",
+          "color" : [ 255, 255, 255, 255 ],
+          "outline" : {
+            "type" : "esriSLS",
+            "style" : "esriSLSSolid",
+            "color" : [ 114, 138, 186, 255 ],
+            "width" : 2
+          }
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223265.7750263065,
+      "ymin" : 3795758.547691501,
+      "xmax" : -7196408.87854916,
+      "ymax" : 3814776.4922246025,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "PARISHNAME",
+    "typeIdField" : null,
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "PARISHID",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "PARISHID",
+      "domain" : null
+    }, {
+      "name" : "PARISHNAME",
+      "type" : "esriFieldTypeString",
+      "alias" : "PARISHNAME",
+      "length" : 30,
+      "domain" : null
+    }, {
+      "name" : "PARISHABBREV",
+      "type" : "esriFieldTypeString",
+      "alias" : "PARISHABBREV",
+      "length" : 3,
+      "domain" : null
+    }, {
+      "name" : "FEATCODE",
+      "type" : "esriFieldTypeString",
+      "alias" : "FEATCODE",
+      "length" : 4,
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "Shape.area",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape.area",
+      "domain" : null
+    }, {
+      "name" : "Shape.len",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape.len",
+      "domain" : null
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 48,
+    "name" : "Parishes_18056",
+    "type" : "Feature Layer",
+    "description" : "These are the determined parish boundaries at the time of the 2003 Topographic Map Database.  They incorporate the coastline from the 2003 TMD.",
+    "geometryType" : "esriGeometryPolygon",
+    "copyrightText" : "Data maintained by Department of Land Surveys & Registration; converted by Kevin Mayall, Locus Ltd.",
+    "parentLayer" : {
+      "id" : 43,
+      "name" : "Parishes"
+    },
+    "subLayers" : [ ],
+    "minScale" : 27084,
+    "maxScale" : 13543,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSFS",
+          "style" : "esriSFSSolid",
+          "color" : [ 255, 255, 255, 255 ],
+          "outline" : {
+            "type" : "esriSLS",
+            "style" : "esriSLSSolid",
+            "color" : [ 114, 138, 186, 255 ],
+            "width" : 2
+          }
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223265.7750263065,
+      "ymin" : 3795758.547691501,
+      "xmax" : -7196408.87854916,
+      "ymax" : 3814776.4922246025,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "PARISHNAME",
+    "typeIdField" : null,
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "PARISHID",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "PARISHID",
+      "domain" : null
+    }, {
+      "name" : "PARISHNAME",
+      "type" : "esriFieldTypeString",
+      "alias" : "PARISHNAME",
+      "length" : 30,
+      "domain" : null
+    }, {
+      "name" : "PARISHABBREV",
+      "type" : "esriFieldTypeString",
+      "alias" : "PARISHABBREV",
+      "length" : 3,
+      "domain" : null
+    }, {
+      "name" : "FEATCODE",
+      "type" : "esriFieldTypeString",
+      "alias" : "FEATCODE",
+      "length" : 4,
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "Shape.area",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape.area",
+      "domain" : null
+    }, {
+      "name" : "Shape.len",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape.len",
+      "domain" : null
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 49,
+    "name" : "Parishes_36112",
+    "type" : "Feature Layer",
+    "description" : "These are the determined parish boundaries at the time of the 2003 Topographic Map Database.  They incorporate the coastline from the 2003 TMD.",
+    "geometryType" : "esriGeometryPolygon",
+    "copyrightText" : "Data maintained by Department of Land Surveys & Registration; converted by Kevin Mayall, Locus Ltd.",
+    "parentLayer" : {
+      "id" : 43,
+      "name" : "Parishes"
+    },
+    "subLayers" : [ ],
+    "minScale" : 54168,
+    "maxScale" : 27085,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSFS",
+          "style" : "esriSFSSolid",
+          "color" : [ 255, 255, 255, 255 ],
+          "outline" : {
+            "type" : "esriSLS",
+            "style" : "esriSLSSolid",
+            "color" : [ 114, 138, 186, 255 ],
+            "width" : 2
+          }
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223265.7750263065,
+      "ymin" : 3795758.547691501,
+      "xmax" : -7196408.87854916,
+      "ymax" : 3814776.4922246025,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "PARISHNAME",
+    "typeIdField" : null,
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "PARISHID",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "PARISHID",
+      "domain" : null
+    }, {
+      "name" : "PARISHNAME",
+      "type" : "esriFieldTypeString",
+      "alias" : "PARISHNAME",
+      "length" : 30,
+      "domain" : null
+    }, {
+      "name" : "PARISHABBREV",
+      "type" : "esriFieldTypeString",
+      "alias" : "PARISHABBREV",
+      "length" : 3,
+      "domain" : null
+    }, {
+      "name" : "FEATCODE",
+      "type" : "esriFieldTypeString",
+      "alias" : "FEATCODE",
+      "length" : 4,
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "Shape.area",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape.area",
+      "domain" : null
+    }, {
+      "name" : "Shape.len",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape.len",
+      "domain" : null
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 50,
+    "name" : "Parishes_72224",
+    "type" : "Feature Layer",
+    "description" : "These are the determined parish boundaries at the time of the 2003 Topographic Map Database.  They incorporate the coastline from the 2003 TMD.",
+    "geometryType" : "esriGeometryPolygon",
+    "copyrightText" : "Data maintained by Department of Land Surveys & Registration; converted by Kevin Mayall, Locus Ltd.",
+    "parentLayer" : {
+      "id" : 43,
+      "name" : "Parishes"
+    },
+    "subLayers" : [ ],
+    "minScale" : 108336,
+    "maxScale" : 54169,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSFS",
+          "style" : "esriSFSSolid",
+          "color" : [ 255, 255, 255, 255 ],
+          "outline" : {
+            "type" : "esriSLS",
+            "style" : "esriSLSSolid",
+            "color" : [ 114, 138, 186, 255 ],
+            "width" : 2
+          }
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223265.7750263065,
+      "ymin" : 3795758.547691501,
+      "xmax" : -7196408.87854916,
+      "ymax" : 3814776.4922246025,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "PARISHNAME",
+    "typeIdField" : null,
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "PARISHID",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "PARISHID",
+      "domain" : null
+    }, {
+      "name" : "PARISHNAME",
+      "type" : "esriFieldTypeString",
+      "alias" : "PARISHNAME",
+      "length" : 30,
+      "domain" : null
+    }, {
+      "name" : "PARISHABBREV",
+      "type" : "esriFieldTypeString",
+      "alias" : "PARISHABBREV",
+      "length" : 3,
+      "domain" : null
+    }, {
+      "name" : "FEATCODE",
+      "type" : "esriFieldTypeString",
+      "alias" : "FEATCODE",
+      "length" : 4,
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "Shape.area",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape.area",
+      "domain" : null
+    }, {
+      "name" : "Shape.len",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape.len",
+      "domain" : null
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 51,
+    "name" : "Parishes_144448",
+    "type" : "Feature Layer",
+    "description" : "These are the determined parish boundaries at the time of the 2003 Topographic Map Database.  They incorporate the coastline from the 2003 TMD.",
+    "geometryType" : "esriGeometryPolygon",
+    "copyrightText" : "Data maintained by Department of Land Surveys & Registration; converted by Kevin Mayall, Locus Ltd.",
+    "parentLayer" : {
+      "id" : 43,
+      "name" : "Parishes"
+    },
+    "subLayers" : [ ],
+    "minScale" : 216671,
+    "maxScale" : 108337,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSFS",
+          "style" : "esriSFSSolid",
+          "color" : [ 255, 255, 255, 255 ],
+          "outline" : {
+            "type" : "esriSLS",
+            "style" : "esriSLSSolid",
+            "color" : [ 114, 138, 186, 255 ],
+            "width" : 1.5
+          }
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223265.7750263065,
+      "ymin" : 3795758.547691501,
+      "xmax" : -7196408.87854916,
+      "ymax" : 3814776.4922246025,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "PARISHNAME",
+    "typeIdField" : null,
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "PARISHID",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "PARISHID",
+      "domain" : null
+    }, {
+      "name" : "PARISHNAME",
+      "type" : "esriFieldTypeString",
+      "alias" : "PARISHNAME",
+      "length" : 30,
+      "domain" : null
+    }, {
+      "name" : "PARISHABBREV",
+      "type" : "esriFieldTypeString",
+      "alias" : "PARISHABBREV",
+      "length" : 3,
+      "domain" : null
+    }, {
+      "name" : "FEATCODE",
+      "type" : "esriFieldTypeString",
+      "alias" : "FEATCODE",
+      "length" : 4,
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "Shape.area",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape.area",
+      "domain" : null
+    }, {
+      "name" : "Shape.len",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape.len",
+      "domain" : null
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 52,
+    "name" : "Parishes_288895",
+    "type" : "Feature Layer",
+    "description" : "These are the determined parish boundaries at the time of the 2003 Topographic Map Database.  They incorporate the coastline from the 2003 TMD.",
+    "geometryType" : "esriGeometryPolygon",
+    "copyrightText" : "Data maintained by Department of Land Surveys & Registration; converted by Kevin Mayall, Locus Ltd.",
+    "parentLayer" : {
+      "id" : 43,
+      "name" : "Parishes"
+    },
+    "subLayers" : [ ],
+    "minScale" : 433343,
+    "maxScale" : 216672,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSFS",
+          "style" : "esriSFSSolid",
+          "color" : [ 255, 255, 255, 255 ],
+          "outline" : {
+            "type" : "esriSLS",
+            "style" : "esriSLSSolid",
+            "color" : [ 114, 138, 186, 255 ],
+            "width" : 1
+          }
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223265.7750263065,
+      "ymin" : 3795758.547691501,
+      "xmax" : -7196408.87854916,
+      "ymax" : 3814776.4922246025,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "PARISHNAME",
+    "typeIdField" : null,
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "PARISHID",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "PARISHID",
+      "domain" : null
+    }, {
+      "name" : "PARISHNAME",
+      "type" : "esriFieldTypeString",
+      "alias" : "PARISHNAME",
+      "length" : 30,
+      "domain" : null
+    }, {
+      "name" : "PARISHABBREV",
+      "type" : "esriFieldTypeString",
+      "alias" : "PARISHABBREV",
+      "length" : 3,
+      "domain" : null
+    }, {
+      "name" : "FEATCODE",
+      "type" : "esriFieldTypeString",
+      "alias" : "FEATCODE",
+      "length" : 4,
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "Shape.area",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape.area",
+      "domain" : null
+    }, {
+      "name" : "Shape.len",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape.len",
+      "domain" : null
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 53,
+    "name" : "Parishes_577791",
+    "type" : "Feature Layer",
+    "description" : "These are the determined parish boundaries at the time of the 2003 Topographic Map Database.  They incorporate the coastline from the 2003 TMD.",
+    "geometryType" : "esriGeometryPolygon",
+    "copyrightText" : "Data maintained by Department of Land Surveys & Registration; converted by Kevin Mayall, Locus Ltd.",
+    "parentLayer" : {
+      "id" : 43,
+      "name" : "Parishes"
+    },
+    "subLayers" : [ ],
+    "minScale" : 866686,
+    "maxScale" : 433344,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSFS",
+          "style" : "esriSFSSolid",
+          "color" : [ 255, 255, 255, 255 ],
+          "outline" : {
+            "type" : "esriSLS",
+            "style" : "esriSLSSolid",
+            "color" : [ 114, 138, 186, 255 ],
+            "width" : 1
+          }
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223265.7750263065,
+      "ymin" : 3795758.547691501,
+      "xmax" : -7196408.87854916,
+      "ymax" : 3814776.4922246025,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "PARISHNAME",
+    "typeIdField" : null,
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "PARISHID",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "PARISHID",
+      "domain" : null
+    }, {
+      "name" : "PARISHNAME",
+      "type" : "esriFieldTypeString",
+      "alias" : "PARISHNAME",
+      "length" : 30,
+      "domain" : null
+    }, {
+      "name" : "PARISHABBREV",
+      "type" : "esriFieldTypeString",
+      "alias" : "PARISHABBREV",
+      "length" : 3,
+      "domain" : null
+    }, {
+      "name" : "FEATCODE",
+      "type" : "esriFieldTypeString",
+      "alias" : "FEATCODE",
+      "length" : 4,
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "Shape.area",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape.area",
+      "domain" : null
+    }, {
+      "name" : "Shape.len",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape.len",
+      "domain" : null
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  }, {
+    "currentVersion" : 10.81,
+    "id" : 54,
+    "name" : "Parishes_1155581",
+    "type" : "Feature Layer",
+    "description" : "These are the determined parish boundaries at the time of the 2003 Topographic Map Database.  They incorporate the coastline from the 2003 TMD.",
+    "geometryType" : "esriGeometryPolygon",
+    "copyrightText" : "Data maintained by Department of Land Surveys & Registration; converted by Kevin Mayall, Locus Ltd.",
+    "parentLayer" : {
+      "id" : 43,
+      "name" : "Parishes"
+    },
+    "subLayers" : [ ],
+    "minScale" : 0,
+    "maxScale" : 866687,
+    "drawingInfo" : {
+      "renderer" : {
+        "type" : "simple",
+        "symbol" : {
+          "type" : "esriSFS",
+          "style" : "esriSFSSolid",
+          "color" : [ 255, 255, 255, 255 ],
+          "outline" : {
+            "type" : "esriSLS",
+            "style" : "esriSLSSolid",
+            "color" : [ 114, 138, 186, 255 ],
+            "width" : 1
+          }
+        },
+        "label" : "",
+        "description" : ""
+      },
+      "transparency" : 0,
+      "labelingInfo" : null
+    },
+    "defaultVisibility" : true,
+    "extent" : {
+      "xmin" : -7223265.7750263065,
+      "ymin" : 3795758.547691501,
+      "xmax" : -7196408.87854916,
+      "ymax" : 3814776.4922246025,
+      "spatialReference" : {
+        "wkid" : 102100,
+        "latestWkid" : 3857
+      }
+    },
+    "hasAttachments" : false,
+    "htmlPopupType" : "esriServerHTMLPopupTypeAsHTMLText",
+    "displayField" : "PARISHNAME",
+    "typeIdField" : null,
+    "fields" : [ {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID",
+      "domain" : null
+    }, {
+      "name" : "PARISHID",
+      "type" : "esriFieldTypeInteger",
+      "alias" : "PARISHID",
+      "domain" : null
+    }, {
+      "name" : "PARISHNAME",
+      "type" : "esriFieldTypeString",
+      "alias" : "PARISHNAME",
+      "length" : 30,
+      "domain" : null
+    }, {
+      "name" : "PARISHABBREV",
+      "type" : "esriFieldTypeString",
+      "alias" : "PARISHABBREV",
+      "length" : 3,
+      "domain" : null
+    }, {
+      "name" : "FEATCODE",
+      "type" : "esriFieldTypeString",
+      "alias" : "FEATCODE",
+      "length" : 4,
+      "domain" : null
+    }, {
+      "name" : "Shape",
+      "type" : "esriFieldTypeGeometry",
+      "alias" : "Shape",
+      "domain" : null
+    }, {
+      "name" : "Shape.area",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape.area",
+      "domain" : null
+    }, {
+      "name" : "Shape.len",
+      "type" : "esriFieldTypeDouble",
+      "alias" : "Shape.len",
+      "domain" : null
+    } ],
+    "relationships" : [ ],
+    "canModifyLayer" : false,
+    "canScaleSymbols" : false,
+    "hasLabels" : false,
+    "capabilities" : "Map",
+    "maxRecordCount" : 1000,
+    "supportsStatistics" : true,
+    "supportsAdvancedQueries" : true,
+    "supportedQueryFormats" : "JSON, AMF",
+    "ownershipBasedAccessControlForFeatures" : {
+      "allowOthersToQuery" : true
+    }
+  } ],
+  "tables" : [ ]
+}

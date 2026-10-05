@@ -1,0 +1,93 @@
+{
+  "scope": {
+    "issue": 427,
+    "pinned_members": 245,
+    "county_members": 244,
+    "bermuda_members": 1
+  },
+  "repository_head_at_reproduction": "ffeed22261fc5c37c9093b9d14955c7e032991ec",
+  "counts": {
+    "current_tigerweb": {
+      "01": 67,
+      "21": 120,
+      "28": 82,
+      "47": 95
+    },
+    "scope_county_by_state": {
+      "01": 67,
+      "28": 82,
+      "47": 95
+    },
+    "east_south_central_full_division": {
+      "states": [
+        "Alabama",
+        "Kentucky",
+        "Mississippi",
+        "Tennessee"
+      ],
+      "four_state_count": 364,
+      "issue_427_subset": 244,
+      "sibling_428_total_members": 279,
+      "sibling_428_east_south_central_subset": 120,
+      "sibling_state_counts": {
+        "kentucky": 120,
+        "georgia": 159
+      },
+      "disjoint": true
+    },
+    "neighboring_packet_partition": {
+      "427_members": 245,
+      "428_members": 279,
+      "429_members": 268,
+      "pairwise_disjoint": true,
+      "429_current_state_counts": {
+        "south-carolina": 46,
+        "north-carolina": 100,
+        "west-virginia": 55,
+        "florida": 67
+      },
+      "429_issue_state_at_snapshot": "closed",
+      "428_issue_state_at_snapshot": "open",
+      "428_status_label_at_snapshot": true
+    },
+    "parent_match_count": 244,
+    "province_count": 4,
+    "u_s_province_union_vs_state_iou": {
+      "Alabama": 0.985893,
+      "Mississippi": 0.98297167,
+      "Tennessee": 0.99849134
+    },
+    "unique_current_geoid_count": 244,
+    "2018_iou_below_095": 1,
+    "2026_iou_below_095": 6
+  },
+  "method": {
+    "projection": "EPSG:5070; always_xy",
+    "score": "intersection area / union area",
+    "interpretation": "diagnostic only; both 2018 and 2026 geometry sources are generalized/cartographic or service representations"
+  },
+  "software": {
+    "python": "3.8.5",
+    "shapely": "2.0.7",
+    "pyproj": "3.5.0",
+    "pyshp": "2.4.2"
+  },
+  "input_hashes": {
+    "geoBoundaries": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43",
+    "Census_2018_cartographic_zip": "aaa866af327754e1b80aa87bfb97b04a7209f4f871075aef84affb8f0b3afe67",
+    "Natural_Earth_zip": "ce1ac7036499a0edd641fbc093cd209a98f96a49d2eca8480aaacad35138a7f6",
+    "TIGERweb_state_layer_80_metadata": "f995e30536d4c49fa5426255b2eccb48702b72ae9b27d1a83b8e7ff3325429c4",
+    "TIGERweb_counties_01": "386d08c97bfae31678cf70609ba277a4bbc271f4e79d5f651537cf64cac00084",
+    "TIGERweb_counties_21": "3313b7e09481f2365a0844a7319c8fa63014b846bef57a01f5ad2919c55404c5",
+    "TIGERweb_counties_28": "3826b033a59e185281418d5c624764d6e70e6a938f868d68a773c4e3911b7cb1",
+    "TIGERweb_counties_47": "b9b10ee31927e67c295180c885e8e616940d099a52879df2c5a49bad123f6a15",
+    "TIGERweb_state_01": "ae175e36ca908c1e3bf4a7ac95059f071fa6a803b9608213b89c26aa2fb505c6",
+    "TIGERweb_state_28": "93489b6ab2d19953a742b70a21781a106db226a2d4da3806be8f6bda05385a97",
+    "TIGERweb_state_47": "d53e45db344b51f538862d556af6458395b19367444288178644ae4ff1ba4d34"
+  },
+  "issue_snapshot_sha256": "7e65c48019b7697a95ca9268bf21ea71304b43d751ae84193f9336401982bbe2",
+  "issue_pinned_member_ids_sha256": "e2fc47b926f935efea12e76569d78ea1d97b654d442aaff8d8f764946d91aaee",
+  "sibling_428_pinned_member_ids_sha256": "3ca1e40285884fca1e3ac8a23868e9a49e6d7c706c5c1106f560ffcede075dbc",
+  "sibling_429_pinned_member_ids_sha256": "3e8d528a1889b9e3b598206718acdfc133dc8cbc5b2b862d81946975ca0982ef",
+  "findings": "See subject-assessments.csv, usa-county-crosswalk.csv, bermuda-assessment.json and REVIEW.md. No core geography modified."
+}

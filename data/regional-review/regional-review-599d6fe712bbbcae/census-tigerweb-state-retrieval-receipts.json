@@ -1,0 +1,109 @@
+{
+  "version": 1,
+  "records": [
+    {
+      "source_id": "census-tigerweb-acs26-state-01",
+      "requested_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2026/MapServer/82/query?where=STATE%20%3D%20%2701%27&outFields=GEOID%2CSTATE%2CCOUNTY%2CCOUNTYNS%2CBASENAME%2CNAME%2CLSADC%2CFUNCSTAT%2CCOUNTYCC%2CAREALAND%2CAREAWATER&returnGeometry=true&outSR=4326&f=geojson",
+      "final_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2026/MapServer/82/query?where=STATE%20%3D%20%2701%27&outFields=GEOID%2CSTATE%2CCOUNTY%2CCOUNTYNS%2CBASENAME%2CNAME%2CLSADC%2CFUNCSTAT%2CCOUNTYCC%2CAREALAND%2CAREAWATER&returnGeometry=true&outSR=4326&f=geojson",
+      "retrieved_utc": "2026-10-05T14:38:57.289646+00:00",
+      "http_status": 200,
+      "content_type": "application/geo+json;charset=UTF-8",
+      "response_headers": {
+        "Cache-Control": "max-age=0,must-revalidate",
+        "Content-Security-Policy": "script-src 'self';",
+        "Strict-Transport-Security": "max-age=31536000",
+        "X-Content-Type-Options": "nosniff",
+        "Vary": "Origin",
+        "ETag": "\"1784720359\"",
+        "Content-Type": "application/geo+json;charset=UTF-8",
+        "Date": "Mon, 05 Oct 2026 14:38:48 GMT",
+        "Connection": "close",
+        "Transfer-Encoding": "chunked"
+      },
+      "bytes": 6021222,
+      "sha256": "386d08c97bfae31678cf70609ba277a4bbc271f4e79d5f651537cf64cac00084",
+      "retained": true,
+      "reuse_terms": "U.S. Census Bureau federal work; public domain. TIGERweb ACS26 county-equivalent layer, current source vintage described as 2026-01-01.",
+      "feature_count": 67,
+      "retained_path": "census-tigerweb-acs26/counties-state-01.geojson"
+    },
+    {
+      "source_id": "census-tigerweb-acs26-state-21",
+      "requested_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2026/MapServer/82/query?where=STATE%20%3D%20%2721%27&outFields=GEOID%2CSTATE%2CCOUNTY%2CCOUNTYNS%2CBASENAME%2CNAME%2CLSADC%2CFUNCSTAT%2CCOUNTYCC%2CAREALAND%2CAREAWATER&returnGeometry=true&outSR=4326&f=geojson",
+      "final_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2026/MapServer/82/query?where=STATE%20%3D%20%2721%27&outFields=GEOID%2CSTATE%2CCOUNTY%2CCOUNTYNS%2CBASENAME%2CNAME%2CLSADC%2CFUNCSTAT%2CCOUNTYCC%2CAREALAND%2CAREAWATER&returnGeometry=true&outSR=4326&f=geojson",
+      "retrieved_utc": "2026-10-05T14:39:13.733260+00:00",
+      "http_status": 200,
+      "content_type": "application/geo+json;charset=UTF-8",
+      "response_headers": {
+        "Cache-Control": "max-age=0,must-revalidate",
+        "Content-Security-Policy": "script-src 'self';",
+        "Strict-Transport-Security": "max-age=31536000",
+        "X-Content-Type-Options": "nosniff",
+        "Vary": "Origin",
+        "ETag": "\"1784720359\"",
+        "Content-Type": "application/geo+json;charset=UTF-8",
+        "Date": "Mon, 05 Oct 2026 14:38:58 GMT",
+        "Connection": "close",
+        "Transfer-Encoding": "chunked"
+      },
+      "bytes": 10922945,
+      "sha256": "3313b7e09481f2365a0844a7319c8fa63014b846bef57a01f5ad2919c55404c5",
+      "retained": true,
+      "reuse_terms": "U.S. Census Bureau federal work; public domain. TIGERweb ACS26 county-equivalent layer, current source vintage described as 2026-01-01.",
+      "feature_count": 120,
+      "retained_path": "census-tigerweb-acs26/counties-state-21.geojson"
+    },
+    {
+      "source_id": "census-tigerweb-acs26-state-28",
+      "requested_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2026/MapServer/82/query?where=STATE%20%3D%20%2728%27&outFields=GEOID%2CSTATE%2CCOUNTY%2CCOUNTYNS%2CBASENAME%2CNAME%2CLSADC%2CFUNCSTAT%2CCOUNTYCC%2CAREALAND%2CAREAWATER&returnGeometry=true&outSR=4326&f=geojson",
+      "final_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2026/MapServer/82/query?where=STATE%20%3D%20%2728%27&outFields=GEOID%2CSTATE%2CCOUNTY%2CCOUNTYNS%2CBASENAME%2CNAME%2CLSADC%2CFUNCSTAT%2CCOUNTYCC%2CAREALAND%2CAREAWATER&returnGeometry=true&outSR=4326&f=geojson",
+      "retrieved_utc": "2026-10-05T14:39:25.484482+00:00",
+      "http_status": 200,
+      "content_type": "application/geo+json;charset=UTF-8",
+      "response_headers": {
+        "Cache-Control": "max-age=0,must-revalidate",
+        "Content-Security-Policy": "script-src 'self';",
+        "Strict-Transport-Security": "max-age=31536000",
+        "X-Content-Type-Options": "nosniff",
+        "Vary": "Origin",
+        "ETag": "\"1784720359\"",
+        "Content-Type": "application/geo+json;charset=UTF-8",
+        "Date": "Mon, 05 Oct 2026 14:39:14 GMT",
+        "Connection": "close",
+        "Transfer-Encoding": "chunked"
+      },
+      "bytes": 7635933,
+      "sha256": "3826b033a59e185281418d5c624764d6e70e6a938f868d68a773c4e3911b7cb1",
+      "retained": true,
+      "reuse_terms": "U.S. Census Bureau federal work; public domain. TIGERweb ACS26 county-equivalent layer, current source vintage described as 2026-01-01.",
+      "feature_count": 82,
+      "retained_path": "census-tigerweb-acs26/counties-state-28.geojson"
+    },
+    {
+      "source_id": "census-tigerweb-acs26-state-47",
+      "requested_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2026/MapServer/82/query?where=STATE%20%3D%20%2747%27&outFields=GEOID%2CSTATE%2CCOUNTY%2CCOUNTYNS%2CBASENAME%2CNAME%2CLSADC%2CFUNCSTAT%2CCOUNTYCC%2CAREALAND%2CAREAWATER&returnGeometry=true&outSR=4326&f=geojson",
+      "final_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2026/MapServer/82/query?where=STATE%20%3D%20%2747%27&outFields=GEOID%2CSTATE%2CCOUNTY%2CCOUNTYNS%2CBASENAME%2CNAME%2CLSADC%2CFUNCSTAT%2CCOUNTYCC%2CAREALAND%2CAREAWATER&returnGeometry=true&outSR=4326&f=geojson",
+      "retrieved_utc": "2026-10-05T14:39:41.577032+00:00",
+      "http_status": 200,
+      "content_type": "application/geo+json;charset=UTF-8",
+      "response_headers": {
+        "Cache-Control": "max-age=0,must-revalidate",
+        "Content-Security-Policy": "script-src 'self';",
+        "Strict-Transport-Security": "max-age=31536000",
+        "X-Content-Type-Options": "nosniff",
+        "Vary": "Origin",
+        "ETag": "\"1784720359\"",
+        "Content-Type": "application/geo+json;charset=UTF-8",
+        "Date": "Mon, 05 Oct 2026 14:39:26 GMT",
+        "Connection": "close",
+        "Transfer-Encoding": "chunked"
+      },
+      "bytes": 10736861,
+      "sha256": "b9b10ee31927e67c295180c885e8e616940d099a52879df2c5a49bad123f6a15",
+      "retained": true,
+      "reuse_terms": "U.S. Census Bureau federal work; public domain. TIGERweb ACS26 county-equivalent layer, current source vintage described as 2026-01-01.",
+      "feature_count": 95,
+      "retained_path": "census-tigerweb-acs26/counties-state-47.geojson"
+    }
+  ]
+}

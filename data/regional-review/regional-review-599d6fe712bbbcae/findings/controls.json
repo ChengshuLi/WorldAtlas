@@ -1,0 +1,20 @@
+{
+  "method": "unique same-state normalized name; unique GEOID carries 2018 and 2026 comparisons; no geometry-selected identity repair",
+  "positive_control": {
+    "name": "Morgan",
+    "state": "Tennessee",
+    "geoid": "47129",
+    "passed": true
+  },
+  "negative_control": {
+    "wrong_state_candidate_states": [
+      "01"
+    ],
+    "name": "Morgan",
+    "target_state": "Tennessee",
+    "selected_geoid": "47129",
+    "passed": true
+  },
+  "axis_order_control": "Inputs read as GeoJSON longitude,latitude; EPSG:5070 transform is explicitly always_xy. Reversed-axis trial omitted because it produces out-of-range latitude for most county coordinates and is not a valid alternative input.",
+  "interpretive_limit": "Controls validate the identity join and code path, not legal or positional truth of any boundary."
+}

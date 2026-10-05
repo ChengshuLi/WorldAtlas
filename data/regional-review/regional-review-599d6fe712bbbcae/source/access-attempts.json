@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "attempts": [
+    {
+      "source_id": "census-tigerweb-acs26-combined-four-state-query",
+      "attempt_date": "2026-10-05",
+      "timestamp_utc": "not captured by retrieval script",
+      "requested_source": "TIGERweb ACS2026 MapServer layer 82; combined four-state feature request for Alabama, Kentucky, Mississippi and Tennessee",
+      "result": "HTTP/WAF denial returned HTML rather than GeoJSON. The body says \u201cRequest Rejected\u201d and contains support ID 13427891565824806769. No feature data was accepted or parsed.",
+      "retained_response_path": "sources/census-tigerweb-acs26/combined-four-state-request-rejected.html",
+      "response_bytes": 189,
+      "response_sha256": "52cc91de41a5a27d1ab3647e4cb1472d360300ffe5a77c1844e38e4268b5f472",
+      "recovery": "Use the four successful state-filtered query URLs and retained response receipts in census-tigerweb-state-retrieval-receipts.json; never retry a broad query without a bounded request."
+    },
+    {
+      "source_id": "bermuda-space-hostname-tls-failure",
+      "attempt_date": "2026-10-05",
+      "timestamp_utc": "not captured by retrieval script",
+      "requested_source": "A linked Bermuda 2016 census PDF hosted at space.gov.bm (exact path not retained in the failed attempt)",
+      "result": "TLS hostname validation failed for the requested space.gov.bm host. No certificate verification bypass was used and no bytes were retained.",
+      "recovery": "Official gov.bm 2016 Census Report and Parish Profiles landing pages were subsequently retrieved and hashed in sources/bermuda-official/bermuda-gov-2016-pages-retrieval-receipts.json. Follow their official PDF links only if needed; respect current reuse terms."
+    },
+    {
+      "source_id": "arcgis-parishboundaries-rejected-mislocated-candidate",
+      "attempt_date": "2026-10-05",
+      "timestamp_utc": "not captured; metadata response receipts provide individual timestamps",
+      "requested_source": "ArcGIS item a808ce306de14b9992604382f49a6796; item, service and layer metadata endpoints only",
+      "result": "Rejected as a Bermuda source. Item owner is CarissChoong; live service/layer extent is around 59.5W, 13.2N in Barbados; item license text refers to Government of Barbados copyright and restricted third-party transmission despite Bermuda-like description. No feature query/export/download was made. Metadata snapshots and exact hashes are retained under sources/bermuda-official/suspect-parish-boundaries-candidate/.",
+      "recovery": "Use only a direct Bermuda Government Department of Land Surveys/National Mapping Office source with clear jurisdiction, vintage and reuse terms. Do not fetch geometry from this candidate."
+    },
+    {
+      "source_id": "bermuda-department-of-land-surveys-2003-parish-boundary-metadata",
+      "attempt_date": "2026-10-05",
+      "timestamp_utc": "recorded in metadata receipts",
+      "requested_source": "Officially attributed Bermuda Department of Land Surveys ArcGIS basemap_2012 service, service and layer-list metadata only",
+      "result": "Layer metadata describes determined parish boundaries at the 2003 Topographic Map Database, with 2003 coastline; copyright credits Department of Land Surveys & Registration and converter Kevin Mayall/Locus Ltd. Reuse permission was not established. Only metadata was retained; no feature query, tile request or geometry download was made.",
+      "retained_metadata_receipts": "sources/bermuda-official/department-of-land-surveys-2003-map/retrieval-receipts.json",
+      "recovery": "Ask the Bermuda National Mapping Office for the current boundary source and reuse terms. Do not query or redistribute the geometry until permission and vintage are resolved."
+    }
+  ]
+}
