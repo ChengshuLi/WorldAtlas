@@ -1,0 +1,41 @@
+{
+  "number": 980,
+  "title": "Investigate coastal and invalid Census county references from #428",
+  "url": "https://github.com/ChengshuLi/WorldAtlas/issues/980",
+  "retrieved_at": "2026-10-05T15:34:00Z",
+  "scope_subject_ids": [
+    "gb:USA:ADM2:52423323B68249799438553",
+    "gb:USA:ADM2:52423323B35006791438696",
+    "gb:USA:ADM2:52423323B58673559392327",
+    "gb:USA:ADM2:52423323B71362647483761",
+    "gb:USA:ADM2:52423323B31615661575159",
+    "gb:USA:ADM2:52423323B40186233786127",
+    "gb:USA:ADM2:52423323B93853380479562",
+    "gb:USA:ADM2:52423323B62158301450735"
+  ],
+  "subject_count": 8,
+  "parent_issue": 428,
+  "contract": {
+    "max_prs": 1,
+    "depends_on": [
+      428
+    ],
+    "mode": "geography",
+    "owned_paths": [
+      "data/regional-review/coastal-reference-check-428/"
+    ],
+    "review_kind": "geometry"
+  },
+  "body": "Parent: #428. This is a separately bounded, blocked follow-up created to carry forward the exact evidence gap recorded by that packet.\n\n**Scope:** Exact eight county subjects flagged in #428: five coastal Georgia comparison signals and three self-intersecting Census TIGER reference geometries. Determine county-specific source vintage, boundary/shoreline treatment, and whether any discrepancy warrants an engineering proposal. Preserve original references; do not treat generalized CBF or IoU as legal boundary evidence.\n\n**Acceptance:** Provide dated, sourced, reproducible findings for each of the eight IDs; distinguish invalid reference geometry from Atlas correctness and identify any required engineering follow-up.\n\nNo shared geography/source catalog edits, publication, region approval, or historical imports. Maintain exact source receipts, restoration/license limits, reproduction commands, dated progress, and unresolved uncertainty in the owned directory.\n\n```json\n{\"subject_ids\":[\"gb:USA:ADM2:52423323B68249799438553\",\"gb:USA:ADM2:52423323B35006791438696\",\"gb:USA:ADM2:52423323B58673559392327\",\"gb:USA:ADM2:52423323B71362647483761\",\"gb:USA:ADM2:52423323B31615661575159\",\"gb:USA:ADM2:52423323B40186233786127\",\"gb:USA:ADM2:52423323B93853380479562\",\"gb:USA:ADM2:52423323B62158301450735\"],\"subject_count\":8,\"parent_issue\":428}\n```\n\n<!-- worldatlas-work:v1\n{\"max_prs\":1,\"depends_on\":[428],\"scope\":\"Exact eight county subjects flagged in #428: five coastal Georgia comparison signals and three self-intersecting Census TIGER reference geometries. Determine county-specific source vintage, boundary/shoreline treatment, and whether any discrepancy warrants an engineering proposal. Preserve original references; do not treat generalized CBF or IoU as legal boundary evidence.\",\"mode\":\"geography\",\"owned_paths\":[\"data/regional-review/coastal-reference-check-428/\"],\"evidence_quality\":{\"version\":1,\"manifest_path\":\"data/regional-review/coastal-reference-check-428/evidence-quality.json\",\"subject_ids\":[\"gb:USA:ADM2:52423323B68249799438553\",\"gb:USA:ADM2:52423323B35006791438696\",\"gb:USA:ADM2:52423323B58673559392327\",\"gb:USA:ADM2:52423323B71362647483761\",\"gb:USA:ADM2:52423323B31615661575159\",\"gb:USA:ADM2:52423323B40186233786127\",\"gb:USA:ADM2:52423323B93853380479562\",\"gb:USA:ADM2:52423323B62158301450735\"],\"pins\":{\"data/world-index.json\":\"a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03\",\"data/hierarchy.json\":\"568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b\",\"data/geographic-releases/current-manifest.json\":\"85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81\",\"data/administrative-sources.json\":\"ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633\",\"data/macro-foundation/current-membership-inventory.json.gz\":\"db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab\",\"data/macro-foundation/review-index.json\":\"31dfd5cbfd8f3def829f655e7ddd855d2d2865e5ac63f9d1a97d1c08782910cf\",\"data/macro-foundation/regional-handoffs.json.gz\":\"29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a\",\"data/macro-foundation/macro-certificate.json\":\"f50f70fcb0756712ab7a7a388bc8cada093080518f07d3a6f7329758980ea81b\",\"data/macro-foundation/approved-boundary-decisions.json\":\"b67d5a3bcf8101cffb089c0262286378a80bb642cd6dde33f7721419227e3f18\",\"data/geography/part-25.json\":\"dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394\",\"data/geography/part-26.json\":\"44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632\",\"data/geography/part-27.json\":\"e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758\",\"data/geography/part-28.json\":\"2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d\",\"data/geography/part-29.json\":\"077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a\"}},\"review_kind\":\"geometry\"}\n-->",
+  "state": "open",
+  "labels": [
+    "kind:work-item",
+    "status:ready",
+    "status:claimed",
+    "type:geography",
+    "follow-up",
+    "priority:follow-up"
+  ],
+  "comment_count_at_snapshot": 4,
+  "effective_reproduction_baseline": "f81f77eae61c9e537e7f160fef85b65925359c70"
+}
