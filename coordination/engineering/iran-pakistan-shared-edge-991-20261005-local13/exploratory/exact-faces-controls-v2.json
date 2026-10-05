@@ -1,0 +1,119 @@
+{
+  "controls": [
+    {
+      "area": "100",
+      "case": "nested hole",
+      "faces": 2,
+      "holes": 1,
+      "noding": {
+        "all_pairs": 28,
+        "compared_pairs": 28,
+        "exact_bbox_reference": false,
+        "exact_edges_equal": true
+      },
+      "passed": true
+    },
+    {
+      "area": "100",
+      "case": "island within hole",
+      "faces": 3,
+      "holes": 2,
+      "noding": {
+        "all_pairs": 66,
+        "compared_pairs": 66,
+        "exact_bbox_reference": false,
+        "exact_edges_equal": true
+      },
+      "passed": true
+    },
+    {
+      "area": "13",
+      "case": "separate islands",
+      "faces": 2,
+      "holes": 0,
+      "noding": {
+        "all_pairs": 28,
+        "compared_pairs": 28,
+        "exact_bbox_reference": false,
+        "exact_edges_equal": true
+      },
+      "passed": true
+    },
+    {
+      "area": "7",
+      "case": "overlapping neighbors",
+      "faces": 3,
+      "holes": 0,
+      "noding": {
+        "all_pairs": 28,
+        "compared_pairs": 28,
+        "exact_bbox_reference": false,
+        "exact_edges_equal": true
+      },
+      "passed": true
+    },
+    {
+      "area": "8",
+      "case": "shared edge",
+      "faces": 2,
+      "holes": 0,
+      "noding": {
+        "all_pairs": 28,
+        "compared_pairs": 28,
+        "exact_bbox_reference": false,
+        "exact_edges_equal": true
+      },
+      "passed": true
+    },
+    {
+      "area": "4",
+      "case": "coincident opposite rings",
+      "faces": 1,
+      "holes": 0,
+      "noding": {
+        "all_pairs": 28,
+        "compared_pairs": 28,
+        "exact_bbox_reference": false,
+        "exact_edges_equal": true
+      },
+      "passed": true
+    },
+    {
+      "case": "bridge and dangling segment",
+      "passed": true
+    },
+    {
+      "case": "point-touching hole preserves every edge and valid output",
+      "passed": true
+    },
+    {
+      "case": "nonzero exact bend never removed by magnitude",
+      "passed": true
+    },
+    {
+      "area": "1/10000000000000000000000000000000000000000",
+      "case": "nonzero tiny face retained",
+      "faces": 1,
+      "holes": 0,
+      "noding": {
+        "all_pairs": 6,
+        "compared_pairs": 6,
+        "exact_bbox_reference": false,
+        "exact_edges_equal": true
+      },
+      "passed": true
+    },
+    {
+      "case": "old nested-face classifier rejected",
+      "passed": true
+    },
+    {
+      "case": "missing edge rejected",
+      "passed": true
+    }
+  ],
+  "experimental": true,
+  "limits": [
+    "Synthetic exact planar controls only; not global audit, source authority, spherical/dateline correctness or valid rounded repair."
+  ]
+}

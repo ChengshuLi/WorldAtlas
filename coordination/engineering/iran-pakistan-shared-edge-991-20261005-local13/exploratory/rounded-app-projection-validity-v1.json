@@ -1,0 +1,33 @@
+{
+  "experimental": true,
+  "input_sha256": "bde069060b82dd201c589bb5e99de46971b47e298ec94b43ea6bc05021eaae0f",
+  "limits": [
+    "Application-projected polygon validation only; a grid pass does not waive invalid source or projection geometry."
+  ],
+  "records": [
+    {
+      "owner": "gb:IRN:ADM2:26516999B17111396986996",
+      "reason": "Self-intersection[177182.43908484 110548.801388677]",
+      "valid": false,
+      "vintage": "baseline"
+    },
+    {
+      "owner": "gb:IRN:ADM2:26516999B17111396986996",
+      "reason": "Self-intersection[177182.43908484 110548.801388677]",
+      "valid": false,
+      "vintage": "candidate"
+    },
+    {
+      "owner": "gb:PAK:ADM2:60131773B78019453337506",
+      "reason": "Self-intersection[177182.43908484 110548.801388677]",
+      "valid": false,
+      "vintage": "baseline"
+    },
+    {
+      "owner": "gb:PAK:ADM2:60131773B78019453337506",
+      "reason": "Self-intersection[177182.43908484 110548.801388677]",
+      "valid": false,
+      "vintage": "candidate"
+    }
+  ]
+}
