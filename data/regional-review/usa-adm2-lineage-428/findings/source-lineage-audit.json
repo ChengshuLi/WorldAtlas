@@ -1,0 +1,251 @@
+{
+  "version": 1,
+  "issue": 981,
+  "retrieved_at_utc": "2026-10-05T15:44:27.025339Z",
+  "baseline_commit": "ec33c238d801aeb9dfe83e87025560b9383c695d",
+  "upstream": {
+    "repository": "wmgeolab/geoBoundaries",
+    "commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+    "commit_date": "2023-12-13T04:03:07Z",
+    "metadata": {
+      "boundaryID": "USA-ADM2-52423323",
+      "boundaryISO": "USA",
+      "boundaryYear": "2018",
+      "boundaryType": "ADM2",
+      "boundarySource": "United States Census Bureau, MAF/TIGER Database",
+      "boundaryCanonical": "Counties",
+      "boundaryLicense": "Public Domain",
+      "admUnitCount": "3233",
+      "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+      "buildDate": "Dec 12, 2023"
+    },
+    "files": {
+      "full_geojson": {
+        "bytes": 10500644,
+        "sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43",
+        "pointer_sha256": "bce3f45df8a08d5f2475eaa44717eab79f9f57dababa22378c5d62f5bbabc1dd",
+        "pointer_bytes": 133,
+        "object_sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43",
+        "object_bytes": 10500644
+      },
+      "simplified_geojson": {
+        "bytes": 7938450,
+        "sha256": "16249e8d795aaded6a72910a8c72115a073814b25ee902d61ccc9a9490c6641a",
+        "pointer_sha256": "3a9de34f51a4ce4d4b670bb0c091345f9fec0bc3703f654c395b9b42fd4bba45",
+        "pointer_bytes": 132,
+        "object_sha256": "16249e8d795aaded6a72910a8c72115a073814b25ee902d61ccc9a9490c6641a",
+        "object_bytes": 7938450
+      },
+      "metadata_json": {
+        "bytes": 939,
+        "sha256": "a4d2a82a1cd434960b6ed49531bff3330d0881674eea9dc8711e1ad6bf049b9f",
+        "pointer_sha256": "c312a38735f5b437262981afae4ea72f49c6d1608c4aefd7fef4e345de493d21",
+        "pointer_bytes": 128,
+        "object_sha256": "a4d2a82a1cd434960b6ed49531bff3330d0881674eea9dc8711e1ad6bf049b9f",
+        "object_bytes": 939
+      },
+      "all_zip_lfs_pointer": {
+        "pointer_sha256": "e0b93eda2f2afc41bda3dc2343e80621933f53e1925446eedee265818d986599",
+        "pointer_bytes": 133,
+        "object_sha256": "ed4502abc8ecff1251d08fba4831f1e25520b6d9241c90d543f0d043bab22a50",
+        "object_bytes": 12018479
+      },
+      "topojson_lfs_pointer": {
+        "pointer_sha256": "d46ff3121da18651d21910e2ee5e69da8354b6dffc00fb5e3868f4e191aca660",
+        "pointer_bytes": 132,
+        "object_sha256": "f340a032a7c2568a0512affcbb4b42a15e1f8f7a2603eef15ff1124dd15ca6a1",
+        "object_bytes": 1813317
+      },
+      "previous_full_object_restoration_receipt": {
+        "source_id": "geoboundaries-usa-adm2-2018",
+        "requested_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.geojson",
+        "final_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.geojson",
+        "retrieved_started_at": "2026-10-05T14:41:55.470Z",
+        "retrieved_completed_at": "2026-10-05T14:41:57.088Z",
+        "http_status": 200,
+        "content_type": "application/octet-stream",
+        "resolved_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+        "restored_object_sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43",
+        "restored_object_bytes": 10500644,
+        "pointer_sha256": "bce3f45df8a08d5f2475eaa44717eab79f9f57dababa22378c5d62f5bbabc1dd",
+        "pointer_bytes": 133,
+        "retained_bytes_equal": true,
+        "license": "Public Domain as stated in upstream metadata; upstream metadata cites US Census MAF/TIGER Database.",
+        "retained_path": "source/geoBoundaries-USA-ADM2.geojson",
+        "limitation": "This verifies byte restoration and metadata only; it does not certify geometry or legal boundaries."
+      }
+    },
+    "catalog_record": {
+      "source_id": "gb:USA:ADM2",
+      "sha256": "16249e8d795aaded6a72910a8c72115a073814b25ee902d61ccc9a9490c6641a",
+      "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2_simplified.geojson",
+      "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.geojson"
+    },
+    "digest_finding": "The catalog sha256 equals the exact LFS object hash for simplifiedGeometryGeoJSON (16249e8d...). It does not identify the full GeoJSON bytes (81fdd384...). The two artifacts retain the same 3,233 unique shapeIDs; many scoped geometries differ as expected for a simplified representation.",
+    "license_limit": "Upstream metadata declares Public Domain and cites the U.S. Census MAF/TIGER database. This is recorded as the upstream product statement, not a legal boundary determination."
+  },
+  "scope": {
+    "subject_count": 279,
+    "subjects_sha256_sorted_json": "dd740f1e873123883c46d2f08712203cf565af0e18d0a32de21c4f315cb3eb4d",
+    "matches_closed_428_scope": true,
+    "atlas_feature_occurrences_across_all_index_parts": 279,
+    "atlas_containing_file_counts": {
+      "data/geography/part-25.json": 55,
+      "data/geography/part-26.json": 149,
+      "data/geography/part-27.json": 75
+    },
+    "state_parent_counts": {
+      "Georgia": 159,
+      "Kentucky": 120
+    },
+    "shape_id_join_count_full": 279,
+    "shape_id_join_count_simplified": 279,
+    "prior_2018_census_crosswalk_rows_verified": 279,
+    "legal_or_current_boundary_adjudication": false,
+    "neighboring_granularity": "geoBoundaries national ADM2 Counties set: 3,233 distinct shapeIDs; scoped Atlas county IDs parented to State-level framework records. The raw GeoBoundaries features carry shapeGroup=USA, not a per-feature state-parent field."
+  },
+  "input_manifest_sha256": "d582b787f663988ad908ff14329a9aac271c9b7b3b659ce285ce19f063a74b1f",
+  "subject_crosswalk_path": "findings/subject-crosswalk.jsonl",
+  "subject_crosswalk_sha256": "c7ae095791268a05e266b450229f99b7b86546fdd7d644dcbf5876d6eea313c3",
+  "metrics": [
+    {
+      "id": "full_national_feature_count",
+      "value": 3233,
+      "unit": "features",
+      "input_sha256": "d582b787f663988ad908ff14329a9aac271c9b7b3b659ce285ce19f063a74b1f",
+      "vintage": "baseline",
+      "evaluation_commit": "ec33c238d801aeb9dfe83e87025560b9383c695d"
+    },
+    {
+      "id": "full_national_unique_shape_ids",
+      "value": 3233,
+      "unit": "shape IDs",
+      "input_sha256": "d582b787f663988ad908ff14329a9aac271c9b7b3b659ce285ce19f063a74b1f",
+      "vintage": "baseline",
+      "evaluation_commit": "ec33c238d801aeb9dfe83e87025560b9383c695d"
+    },
+    {
+      "id": "simplified_national_feature_count",
+      "value": 3233,
+      "unit": "features",
+      "input_sha256": "d582b787f663988ad908ff14329a9aac271c9b7b3b659ce285ce19f063a74b1f",
+      "vintage": "baseline",
+      "evaluation_commit": "ec33c238d801aeb9dfe83e87025560b9383c695d"
+    },
+    {
+      "id": "simplified_unique_shape_ids",
+      "value": 3233,
+      "unit": "shape IDs",
+      "input_sha256": "d582b787f663988ad908ff14329a9aac271c9b7b3b659ce285ce19f063a74b1f",
+      "vintage": "baseline",
+      "evaluation_commit": "ec33c238d801aeb9dfe83e87025560b9383c695d"
+    },
+    {
+      "id": "full_to_simplified_matching_shape_ids",
+      "value": 3233,
+      "unit": "shape IDs",
+      "input_sha256": "d582b787f663988ad908ff14329a9aac271c9b7b3b659ce285ce19f063a74b1f",
+      "vintage": "baseline",
+      "evaluation_commit": "ec33c238d801aeb9dfe83e87025560b9383c695d"
+    },
+    {
+      "id": "scoped_exact_subject_count",
+      "value": 279,
+      "unit": "subjects",
+      "input_sha256": "d582b787f663988ad908ff14329a9aac271c9b7b3b659ce285ce19f063a74b1f",
+      "vintage": "baseline",
+      "evaluation_commit": "ec33c238d801aeb9dfe83e87025560b9383c695d"
+    },
+    {
+      "id": "scoped_subjects_found_once_in_each_upstream_variant",
+      "value": 279,
+      "unit": "subjects",
+      "input_sha256": "d582b787f663988ad908ff14329a9aac271c9b7b3b659ce285ce19f063a74b1f",
+      "vintage": "baseline",
+      "evaluation_commit": "ec33c238d801aeb9dfe83e87025560b9383c695d"
+    },
+    {
+      "id": "scoped_subjects_found_once_across_world_index",
+      "value": 279,
+      "unit": "subjects",
+      "input_sha256": "d582b787f663988ad908ff14329a9aac271c9b7b3b659ce285ce19f063a74b1f",
+      "vintage": "baseline",
+      "evaluation_commit": "ec33c238d801aeb9dfe83e87025560b9383c695d"
+    },
+    {
+      "id": "georgia_parent_subject_count",
+      "value": 159,
+      "unit": "subjects",
+      "input_sha256": "d582b787f663988ad908ff14329a9aac271c9b7b3b659ce285ce19f063a74b1f",
+      "vintage": "baseline",
+      "evaluation_commit": "ec33c238d801aeb9dfe83e87025560b9383c695d"
+    },
+    {
+      "id": "kentucky_parent_subject_count",
+      "value": 120,
+      "unit": "subjects",
+      "input_sha256": "d582b787f663988ad908ff14329a9aac271c9b7b3b659ce285ce19f063a74b1f",
+      "vintage": "baseline",
+      "evaluation_commit": "ec33c238d801aeb9dfe83e87025560b9383c695d"
+    },
+    {
+      "id": "catalog_sha256_matches_simplified_object",
+      "value": 1,
+      "unit": "boolean",
+      "input_sha256": "d582b787f663988ad908ff14329a9aac271c9b7b3b659ce285ce19f063a74b1f",
+      "vintage": "baseline",
+      "evaluation_commit": "ec33c238d801aeb9dfe83e87025560b9383c695d"
+    },
+    {
+      "id": "catalog_sha256_matches_full_object",
+      "value": 0,
+      "unit": "boolean",
+      "input_sha256": "d582b787f663988ad908ff14329a9aac271c9b7b3b659ce285ce19f063a74b1f",
+      "vintage": "baseline",
+      "evaluation_commit": "ec33c238d801aeb9dfe83e87025560b9383c695d"
+    },
+    {
+      "id": "full_source_vertex_count",
+      "value": 14794,
+      "unit": "vertices",
+      "input_sha256": "d582b787f663988ad908ff14329a9aac271c9b7b3b659ce285ce19f063a74b1f",
+      "vintage": "baseline",
+      "evaluation_commit": "ec33c238d801aeb9dfe83e87025560b9383c695d"
+    },
+    {
+      "id": "simplified_source_vertex_count",
+      "value": 12294,
+      "unit": "vertices",
+      "input_sha256": "d582b787f663988ad908ff14329a9aac271c9b7b3b659ce285ce19f063a74b1f",
+      "vintage": "baseline",
+      "evaluation_commit": "ec33c238d801aeb9dfe83e87025560b9383c695d"
+    },
+    {
+      "id": "subject_geometries_differ_across_full_and_simplified",
+      "value": 210,
+      "unit": "subjects",
+      "input_sha256": "d582b787f663988ad908ff14329a9aac271c9b7b3b659ce285ce19f063a74b1f",
+      "vintage": "baseline",
+      "evaluation_commit": "ec33c238d801aeb9dfe83e87025560b9383c695d"
+    }
+  ],
+  "conclusions": [
+    {
+      "status": "supported",
+      "source_id": "geoboundaries-usa-adm2-2018",
+      "text": "For this exact 279-ID scope, each Atlas source ID joins one-to-one to the corresponding full and simplified 2018 GeoBoundaries feature by exact shapeID; the national variants each contain 3,233 unique shapeIDs, matching metadata count."
+    },
+    {
+      "status": "supported",
+      "source_id": "geoboundaries-usa-adm2-2018",
+      "text": "The repository catalog sha256 identifies the simplifiedGeometryGeoJSON LFS object, not the full-resolution GeoJSON. Both hashes and exact object sizes are verified against immutable commit 9469f09592ced973a3448cf66b6100b741b64c0d."
+    },
+    {
+      "status": "unresolved",
+      "source_id": "geoboundaries-usa-adm2-2018",
+      "text": "The product count and hash lineage do not establish legal boundaries, currentness, universal county equivalence, shoreline/island completeness, or the wider custom region's meaning."
+    }
+  ],
+  "engineering_handoff": "Preserve data/administrative-sources.json sha256=16249e8d795aaded6a72910a8c72115a073814b25ee902d61ccc9a9490c6641a; it matches the declared simplifiedGeometryGeoJSON artifact. If engineering needs an unambiguous checksum contract, document the hash target/path in a separate scoped engineering change. Do not repin this catalog field to the full GeoJSON digest based on the prior mismatch alone.",
+  "boundary_note": "Per-subject County role/state parent is cross-referenced to the already reviewed #428 packet. This source-lineage audit does not repeat that packet's boundary comparison or convert Census TIGER/CBF overlap into legal correctness."
+}
