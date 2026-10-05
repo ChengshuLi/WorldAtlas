@@ -19,7 +19,20 @@ export function polygonIntervals(index,{size,rowStart,rowEnd}){
            !Array.from(ring).every(Number.isFinite))throw Error('Nonfinite or unclosed original projected ring');
         for(let k=0;k<ring.length-2;k+=2){
           const x1=ring[k],y1=ring[k+1],x2=ring[k+2],y2=ring[k+3];
-          if(y1===y2)continue;
+          // Boundary diagnostics include edges/vertices excluded by raster fill.
+          // Horizontal centres are retained as half-open integer cell spans.
+          if(y1===y2){
+            const y=y1-.5;
+            if(Number.isInteger(y)&&y>=rowStart&&y<rowEnd){
+              const start=Math.max(0,Math.ceil(Math.min(x1,x2)-.5));
+              const end=Math.min(size,Math.floor(Math.max(x1,x2)-.5)+1);
+              if(start<end)ties.push({y,start,end,owner:item.index,kind:'horizontal-boundary-cell-centres'});
+            }
+            continue;
+          }
+          const upperY=Math.max(y1,y2),upperX=y1>y2?x1:x2,y=upperY-.5;
+          if(Number.isInteger(y)&&y>=rowStart&&y<rowEnd&&Number.isInteger(upperX-.5)&&upperX>=.5&&upperX<size)
+            ties.push({y,x:upperX,owner:item.index,kind:'excluded-upper-vertex-on-cell-centre'});
           const first=Math.max(rowStart,Math.ceil(Math.min(y1,y2)-.5));
           const end=Math.min(rowEnd,Math.ceil(Math.max(y1,y2)-.5));
           if(first<end)edges.push({first,end,x1,y1,x2,y2});

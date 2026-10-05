@@ -108,3 +108,29 @@ test('using unprojected longitude/latitude is detected as a representation misma
   const sparse=polygonIntervals(wrong,{size:GRID_WIDTH,rowStart:start,rowEnd:start+1});
   assert.ok(compareRow(sparse.rows.get(start)??[],native,GRID_WIDTH).counts.native_outside_projected>0);
 });
+
+
+test('horizontal boundary centres include both endpoints and clip to the declared domain',()=>{
+  const index=[item(1,[[ring([[0,.5],[4,.5],[4,2.5],[0,2.5],[0,.5]])]])];
+  const all=polygonIntervals(index,{size:8,rowStart:0,rowEnd:8});
+  assert.deepEqual(all.ties.filter(t=>t.kind==='horizontal-boundary-cell-centres'),[
+    {y:0,start:0,end:4,owner:1,kind:'horizontal-boundary-cell-centres'},
+    {y:2,start:0,end:4,owner:1,kind:'horizontal-boundary-cell-centres'}]);
+  assert.equal(all.rows.has(2),false);
+  const clipped=polygonIntervals([item(1,[[ring([[-.5,.5],[8.5,.5],[8.5,2.5],[-.5,2.5],[-.5,.5]])]])],
+    {size:8,rowStart:2,rowEnd:3});
+  assert.deepEqual(clipped.ties,[{y:2,start:0,end:8,owner:1,kind:'horizontal-boundary-cell-centres'}]);
+});
+
+test('excluded upper vertices remain boundary diagnostics without changing fill',()=>{
+  const index=[item(1,[[ring([[0,0],[4,0],[2.5,2.5],[0,0]])]])];
+  const all=polygonIntervals(index,{size:8,rowStart:0,rowEnd:8});
+  assert.equal(all.rows.has(2),false);
+  assert.equal(all.ties.filter(t=>t.y===2&&t.x===2.5&&
+    t.kind==='excluded-upper-vertex-on-cell-centre').length,2);
+  const partial=polygonIntervals(index,{size:8,rowStart:2,rowEnd:3});
+  assert.deepEqual(partial.ties,all.ties.filter(t=>t.y===2));
+  const actual=rasterize(index,{x:0,y:0,width:8,height:8});
+  for(let y=0;y<8;y++)assert.deepEqual(
+    expand(coverageRow(all.rows.get(y)??[],8),8,s=>s.owners[0]??0),actual.slice(y*8,y*8+8));
+});
