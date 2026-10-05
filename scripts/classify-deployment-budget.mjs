@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {researchPath, packageResearchInputs} from './package-research-inputs.mjs';
 
 // These controls neither produce nor enter the deployment archive. New scripts,
 // including this classifier, remain full until their purpose is reviewed here.
@@ -31,7 +32,9 @@ export function packageIndependentPath(file) {
     /^coordination\/engineering\/[a-z0-9][a-z0-9-]{0,63}\/.+\.(?:json|log|md|txt)$/.test(file);
 }
 
-export function classifyBudgetFiles(files) {
+export function classifyBudgetFiles(files, researchInputs) {
+  const independent = file => packageIndependentPath(file) ||
+    (researchPath(file) && researchInputs instanceof Set && !researchInputs.has(file));
   if (!Array.isArray(files)) throw Error('Missing changed-file inventory');
   const paths = new Set();
   for (const file of files) {
@@ -42,9 +45,9 @@ export function classifyBudgetFiles(files) {
     if (file.previous_filename !== undefined) {
       if (typeof file.previous_filename !== 'string') throw Error('Invalid rename source');
       // Include rename/copy origins even when the destination is a receipt.
-      if (!packageIndependentPath(file.previous_filename)) return {full: true, reason: 'Package-relevant original path', paths: [...paths, file.previous_filename]};
+      if (!independent(file.previous_filename)) return {full: true, reason: 'Package-relevant original path', paths: [...paths, file.previous_filename]};
     }
-    if (!packageIndependentPath(file.filename)) return {full: true, reason: 'Unknown or package-relevant path', paths: [...paths]};
+    if (!independent(file.filename)) return {full: true, reason: 'Unknown or package-relevant path', paths: [...paths]};
   }
   return {full: false, reason: 'Only explicit package-independent paths', paths: [...paths]};
 }
@@ -56,10 +59,11 @@ export async function deploymentBudgetProfile({event, eventName, repository, api
     if (!/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(repository ?? '') ||
         event?.repository?.full_name !== repository) throw Error('Unknown repository');
     const route = `/repos/${repository}`;
-    let files;
+    let files, base;
     if (eventName === 'pull_request') {
       const pr = event.pull_request;
       if (!Number.isSafeInteger(pr?.number) || pr.number < 1 || !commit(pr.base?.sha) || !commit(pr.head?.sha)) throw Error('Incomplete PR identity');
+      base = pr.base.sha;
       const actual = await api(`${route}/pulls/${pr.number}`);
       if (actual.base?.sha !== pr.base.sha || actual.head?.sha !== pr.head.sha ||
           !Number.isSafeInteger(actual.changed_files) || actual.changed_files < 0) throw Error('PR changed or inventory size unavailable');
@@ -78,6 +82,7 @@ export async function deploymentBudgetProfile({event, eventName, repository, api
           settled.changed_files !== files.length) throw Error('PR changed during file enumeration');
     } else if (eventName === 'push') {
       if (!commit(event.before) || !commit(event.after)) throw Error('Missing push comparison');
+      base = event.before;
       const comparison = await api(`${route}/compare/${event.before}...${event.after}`);
       if (comparison.base_commit?.sha !== event.before || !['ahead', 'identical'].includes(comparison.status) ||
           !Array.isArray(comparison.files) || comparison.files.length >= 300 ||
@@ -85,7 +90,15 @@ export async function deploymentBudgetProfile({event, eventName, repository, api
       if (event.after !== event.before && comparison.commits?.at(-1)?.sha !== event.after) throw Error('Push head unavailable in comparison');
       files = comparison.files;
     } else throw Error('Unsupported event');
-    return {version: 1, event: eventName, ...classifyBudgetFiles(files)};
+    const paths = files.flatMap(file => [file?.filename, file?.previous_filename].filter(value => value !== undefined));
+    // Do not fetch package manifests for documentation-only or already-full work.
+    // A base inventory is sufficient: changing any non-research build manifest
+    // is full, while changing a research-hosted manifest is caught as an input.
+    let inputs;
+    if (paths.some(researchPath) && paths.every(file => packageIndependentPath(file) || researchPath(file))) {
+      inputs = await packageResearchInputs({route, base, api});
+    }
+    return {version: 1, event: eventName, ...classifyBudgetFiles(files, inputs)};
   } catch (error) {
     return {version: 1, event: eventName, full: true,
       reason: error instanceof Error ? error.message : 'Inventory lookup failed', paths: [], fallback: true};

@@ -1,0 +1,6 @@
+Final validation: Node 24; GNU tar 1.35 compiled in /tmp for the unchanged archive tests.
+13 deployment budget/applicability tests passed, zero failures/skips.
+146 focused ownership/evidence/integration tests passed, zero failures/skips.
+Actual read-only GitHub PR #823 base/head inventory selected full=false with immutable build dependencies checked.
+Initial archive run failed on macOS BSD tar; rerun with GNU tar passed. Initial focused run lacked hosted/drizzle in sparse checkout; adding the workflow inputs yielded the complete passing suite.
+No production or database changes. Current PR remains full because it changes classifier/workflow tests; hosted verification is pending CI.
