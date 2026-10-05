@@ -1,0 +1,430 @@
+{
+  "version": 1,
+  "issue": 429,
+  "retrieved_utc_date": "2026-10-05",
+  "baseline_commit": "f7b45a2d491ced539ca520979e182bcec9e0e90b",
+  "retained_evidence": [
+    {
+      "path": "data/regional-review/regional-review-e5d9b45b0ad3ed31/issue-api-snapshot.json",
+      "bytes": 25012,
+      "sha256": "8f573419912015015a45537f8c24493e8e9d750416cf70e77b78b984646fa528",
+      "hash_kind": "file-bytes",
+      "description": "GitHub REST issue 429 response, retrieved 2026-10-05 UTC"
+    },
+    {
+      "path": "data/regional-review/regional-review-e5d9b45b0ad3ed31/issue-scope.json",
+      "bytes": 14873,
+      "sha256": "c77e34add3b9d81c13640daedd7d6a777b7b8e07cbb67fd8d5820543115d0d64",
+      "hash_kind": "file-bytes",
+      "description": "Machine-readable exact issue scope extracted without edits from the issue body"
+    },
+    {
+      "path": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/geoboundaries-USA-ADM2-2018.geojson",
+      "bytes": 10500644,
+      "sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43",
+      "hash_kind": "file-bytes",
+      "description": "Full retained USA ADM2 GeoJSON source, 3,233 records; copied byte-for-byte from prior committed research packet in the pinned baseline"
+    },
+    {
+      "path": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/geoboundaries-USA-ADM2-2018-metadata.json",
+      "bytes": 939,
+      "sha256": "a4d2a82a1cd434960b6ed49531bff3330d0881674eea9dc8711e1ad6bf049b9f",
+      "hash_kind": "file-bytes",
+      "description": "Original GeoBoundaries metadata byte-for-byte from the same prior packet"
+    },
+    {
+      "path": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2025/tigerweb-layer-41-metadata.json",
+      "bytes": 7513,
+      "sha256": "4c959004df584254b587373181d4e5125ef3b495ef6e8df317a86fae0c4217bf",
+      "hash_kind": "file-bytes",
+      "description": "U.S. Census Bureau TIGERweb layer 41 metadata response"
+    },
+    {
+      "path": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2025/tigerweb-2025-state-12-counties.geojson",
+      "bytes": 8532064,
+      "sha256": "f594d236a9b071994fad56c96597a7d8b7f632fc158d7e8d792fdd7bcc5fc432",
+      "hash_kind": "file-bytes",
+      "description": "U.S. Census Bureau TIGERweb layer 41 state-filtered complete county feature response; STATE=12"
+    },
+    {
+      "path": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2025/state-12-count.json",
+      "bytes": 12,
+      "sha256": "458a1ee390b82611e3349e60c2b9f186d55671ff30400ea8e022f7bae9a7acef",
+      "hash_kind": "file-bytes",
+      "description": "U.S. Census Bureau TIGERweb layer 41 STATE=12 count query response"
+    },
+    {
+      "path": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2025/tigerweb-2025-state-37-counties.geojson",
+      "bytes": 17575960,
+      "sha256": "7e1e757073b40a8877df83442f1958f1f7e19b5b8ed3a0fcd2e6721593d41cd5",
+      "hash_kind": "file-bytes",
+      "description": "U.S. Census Bureau TIGERweb layer 41 state-filtered complete county feature response; STATE=37"
+    },
+    {
+      "path": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2025/state-37-count.json",
+      "bytes": 13,
+      "sha256": "f65a04fc8ad700ad00260653617fd76ad37f1a0791d867746dc8a6cca68188bf",
+      "hash_kind": "file-bytes",
+      "description": "U.S. Census Bureau TIGERweb layer 41 STATE=37 count query response"
+    },
+    {
+      "path": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2025/tigerweb-2025-state-45-counties.geojson",
+      "bytes": 8435562,
+      "sha256": "c55508975c34cce8cc53eeb3bfa571e1f7cf3e551a7d38f064463b933d5b390c",
+      "hash_kind": "file-bytes",
+      "description": "U.S. Census Bureau TIGERweb layer 41 state-filtered complete county feature response; STATE=45"
+    },
+    {
+      "path": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2025/state-45-count.json",
+      "bytes": 12,
+      "sha256": "79c5b423bad1a5257e68475fe06c4b6c4f353966d18e2748308232af029ac955",
+      "hash_kind": "file-bytes",
+      "description": "U.S. Census Bureau TIGERweb layer 41 STATE=45 count query response"
+    },
+    {
+      "path": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2025/tigerweb-2025-state-54-counties.geojson",
+      "bytes": 6352189,
+      "sha256": "9a5615b546aac411f1cdd7ef6297341480288c3f57eba1d4574c8131c2688d2a",
+      "hash_kind": "file-bytes",
+      "description": "U.S. Census Bureau TIGERweb layer 41 state-filtered complete county feature response; STATE=54"
+    },
+    {
+      "path": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2025/state-54-count.json",
+      "bytes": 12,
+      "sha256": "6834b3d0a252b8e9631f3f2aa7178b8b2661497e7c396ca6029c462b0676e9a1",
+      "hash_kind": "file-bytes",
+      "description": "U.S. Census Bureau TIGERweb layer 41 STATE=54 count query response"
+    },
+    {
+      "path": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2025/national-count.json",
+      "bytes": 14,
+      "sha256": "8aba93b08703d380494a6bc5fd3f1f81e804944e43b3b5fe687ef77a37c246d8",
+      "hash_kind": "file-bytes",
+      "description": "U.S. Census Bureau TIGERweb layer 41 unfiltered national count query response"
+    },
+    {
+      "path": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2026/state-12-count.json",
+      "bytes": 12,
+      "sha256": "458a1ee390b82611e3349e60c2b9f186d55671ff30400ea8e022f7bae9a7acef",
+      "hash_kind": "file-bytes",
+      "description": "U.S. Census Bureau TIGERweb ACS 2026 layer 82 complete STATE=12 count query response"
+    },
+    {
+      "path": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2026/tigerweb-2026-state-12-counties.geojson",
+      "bytes": 8507596,
+      "sha256": "ebcf7185ebb8ae11ddf45a7c4c97cff6621b0aba66923de324f02e6c34d24d73",
+      "hash_kind": "file-bytes",
+      "description": "U.S. Census Bureau TIGERweb ACS 2026 layer 82 complete STATE=12 county feature query response"
+    },
+    {
+      "path": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2026/state-37-count.json",
+      "bytes": 13,
+      "sha256": "f65a04fc8ad700ad00260653617fd76ad37f1a0791d867746dc8a6cca68188bf",
+      "hash_kind": "file-bytes",
+      "description": "U.S. Census Bureau TIGERweb ACS 2026 layer 82 complete STATE=37 count query response"
+    },
+    {
+      "path": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2026/tigerweb-2026-state-37-counties.geojson",
+      "bytes": 17577677,
+      "sha256": "980a7fbf18de3fd363ecd55712240b444f0a523ef1e358dacceebcfca394e490",
+      "hash_kind": "file-bytes",
+      "description": "U.S. Census Bureau TIGERweb ACS 2026 layer 82 complete STATE=37 county feature query response"
+    },
+    {
+      "path": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2026/state-45-count.json",
+      "bytes": 12,
+      "sha256": "79c5b423bad1a5257e68475fe06c4b6c4f353966d18e2748308232af029ac955",
+      "hash_kind": "file-bytes",
+      "description": "U.S. Census Bureau TIGERweb ACS 2026 layer 82 complete STATE=45 count query response"
+    },
+    {
+      "path": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2026/tigerweb-2026-state-45-counties.geojson",
+      "bytes": 8435562,
+      "sha256": "a254f7954818c1b88f839d8ffe9988ec7f7fbeed6240090514bdaec8ab30e7b2",
+      "hash_kind": "file-bytes",
+      "description": "U.S. Census Bureau TIGERweb ACS 2026 layer 82 complete STATE=45 county feature query response"
+    },
+    {
+      "path": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2026/state-54-count.json",
+      "bytes": 12,
+      "sha256": "6834b3d0a252b8e9631f3f2aa7178b8b2661497e7c396ca6029c462b0676e9a1",
+      "hash_kind": "file-bytes",
+      "description": "U.S. Census Bureau TIGERweb ACS 2026 layer 82 complete STATE=54 count query response"
+    },
+    {
+      "path": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2026/tigerweb-2026-state-54-counties.geojson",
+      "bytes": 6352189,
+      "sha256": "4897811da9948e3a8bea772e4db12005e6ce5c83ad769bdb6ebcb46a52b71d81",
+      "hash_kind": "file-bytes",
+      "description": "U.S. Census Bureau TIGERweb ACS 2026 layer 82 complete STATE=54 county feature query response"
+    },
+    {
+      "path": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2026/tigerweb-layer-82-metadata.json",
+      "bytes": 7489,
+      "sha256": "56df6e7d6cff8fe1e082bbdc10109cc2c7c22a134f5dfca1899f93d9bd98337d",
+      "hash_kind": "file-bytes",
+      "description": "U.S. Census Bureau TIGERweb ACS 2026 Counties layer 82 metadata response"
+    },
+    {
+      "path": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2026/national-count.json",
+      "bytes": 14,
+      "sha256": "8aba93b08703d380494a6bc5fd3f1f81e804944e43b3b5fe687ef77a37c246d8",
+      "hash_kind": "file-bytes",
+      "description": "U.S. Census Bureau TIGERweb ACS 2026 layer 82 unfiltered national count query response"
+    },
+    {
+      "path": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2026/state-12-area-attributes.json",
+      "bytes": 9248,
+      "sha256": "dd6ed71ef529f31b7e5649f8bec84fe83f4e779a1e707cb64b9bf841835db67f",
+      "hash_kind": "file-bytes",
+      "description": "U.S. Census Bureau TIGERweb ACS 2026 layer 82 complete STATE=12 GEOID/name/land/water-area attribute query"
+    },
+    {
+      "path": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2026/state-37-area-attributes.json",
+      "bytes": 13362,
+      "sha256": "6253824caff23af3e6806a2bbdc400abd05afe9ccaafc3180b6c1bffd151757c",
+      "hash_kind": "file-bytes",
+      "description": "U.S. Census Bureau TIGERweb ACS 2026 layer 82 complete STATE=37 GEOID/name/land/water-area attribute query"
+    },
+    {
+      "path": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2026/state-45-area-attributes.json",
+      "bytes": 6553,
+      "sha256": "e54cd0a803a04cefb64e94f744b92fb999a928902141c3d35eef4c71fbf7c6bb",
+      "hash_kind": "file-bytes",
+      "description": "U.S. Census Bureau TIGERweb ACS 2026 layer 82 complete STATE=45 GEOID/name/land/water-area attribute query"
+    },
+    {
+      "path": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2026/state-54-area-attributes.json",
+      "bytes": 7579,
+      "sha256": "c7d651d99c94fdfbc5bd305c67e55bed91ec43f3ae86a70120439100287fd212",
+      "hash_kind": "file-bytes",
+      "description": "U.S. Census Bureau TIGERweb ACS 2026 layer 82 complete STATE=54 GEOID/name/land/water-area attribute query"
+    }
+  ],
+  "baseline_inputs": [
+    {
+      "path": "data/geography/part-25.json",
+      "commit": "f7b45a2d491ced539ca520979e182bcec9e0e90b",
+      "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394",
+      "hash_kind": "file-bytes",
+      "restore": "git show f7b45a2d491ced539ca520979e182bcec9e0e90b:data/geography/part-25.json"
+    },
+    {
+      "path": "data/geography/part-26.json",
+      "commit": "f7b45a2d491ced539ca520979e182bcec9e0e90b",
+      "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632",
+      "hash_kind": "file-bytes",
+      "restore": "git show f7b45a2d491ced539ca520979e182bcec9e0e90b:data/geography/part-26.json"
+    },
+    {
+      "path": "data/geography/part-27.json",
+      "commit": "f7b45a2d491ced539ca520979e182bcec9e0e90b",
+      "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758",
+      "hash_kind": "file-bytes",
+      "restore": "git show f7b45a2d491ced539ca520979e182bcec9e0e90b:data/geography/part-27.json"
+    },
+    {
+      "path": "data/world-index.json",
+      "commit": "f7b45a2d491ced539ca520979e182bcec9e0e90b",
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "hash_kind": "file-bytes",
+      "restore": "git show f7b45a2d491ced539ca520979e182bcec9e0e90b:data/world-index.json"
+    },
+    {
+      "path": "data/hierarchy.json",
+      "commit": "f7b45a2d491ced539ca520979e182bcec9e0e90b",
+      "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "hash_kind": "file-bytes",
+      "restore": "git show f7b45a2d491ced539ca520979e182bcec9e0e90b:data/hierarchy.json"
+    },
+    {
+      "path": "data/administrative-sources.json",
+      "commit": "f7b45a2d491ced539ca520979e182bcec9e0e90b",
+      "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "hash_kind": "file-bytes",
+      "restore": "git show f7b45a2d491ced539ca520979e182bcec9e0e90b:data/administrative-sources.json"
+    },
+    {
+      "path": "data/geographic-releases/current-manifest.json",
+      "commit": "f7b45a2d491ced539ca520979e182bcec9e0e90b",
+      "sha256": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81",
+      "hash_kind": "file-bytes",
+      "restore": "git show f7b45a2d491ced539ca520979e182bcec9e0e90b:data/geographic-releases/current-manifest.json"
+    },
+    {
+      "path": "data/macro-foundation/regional-handoffs.json.gz",
+      "commit": "f7b45a2d491ced539ca520979e182bcec9e0e90b",
+      "sha256": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
+      "hash_kind": "file-bytes",
+      "restore": "git show f7b45a2d491ced539ca520979e182bcec9e0e90b:data/macro-foundation/regional-handoffs.json.gz"
+    },
+    {
+      "path": "data/macro-foundation/current-membership-inventory.json.gz",
+      "commit": "f7b45a2d491ced539ca520979e182bcec9e0e90b",
+      "sha256": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+      "hash_kind": "file-bytes",
+      "restore": "git show f7b45a2d491ced539ca520979e182bcec9e0e90b:data/macro-foundation/current-membership-inventory.json.gz"
+    }
+  ],
+  "sources": [
+    {
+      "name": "geoBoundaries gbOpen USA ADM2",
+      "source_id": "gb:USA:ADM2",
+      "vintage": "2018",
+      "role": "Counties",
+      "license": "Public Domain (as stated by retained GeoBoundaries metadata)",
+      "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.geojson",
+      "metadata_file": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/geoboundaries-USA-ADM2-2018-metadata.json",
+      "source_metadata_hash_sha256": "a4d2a82a1cd434960b6ed49531bff3330d0881674eea9dc8711e1ad6bf049b9f",
+      "declared_original_adm_unit_count": 3233,
+      "preservation": "Exact original GeoJSON retained as data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/geoboundaries-USA-ADM2-2018.geojson",
+      "completeness_limit": "2018 source release; its 3,233 total differs from the 2025 Census layer count and is not a current complete roster."
+    },
+    {
+      "name": "U.S. Census Bureau TIGERweb ACS 2025 Counties (layer 41)",
+      "vintage": "January 1, 2025",
+      "retrieval_date_utc": "2026-10-05",
+      "role": "Counties or statistically equivalent entities",
+      "license": "U.S. government work; public domain under 17 U.S.C. §105. Cite U.S. Census Bureau.",
+      "source_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/41",
+      "metadata_file": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2025/tigerweb-layer-41-metadata.json",
+      "metadata_hash_sha256": "4c959004df584254b587373181d4e5125ef3b495ef6e8df317a86fae0c4217bf",
+      "state_queries": [
+        {
+          "state": "Florida",
+          "STATEFP": "12",
+          "expected_count": 67,
+          "count_file": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2025/state-12-count.json",
+          "features_file": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2025/tigerweb-2025-state-12-counties.geojson",
+          "query_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/41/query?where=STATE%3D%2712%27&outFields=GEOID%2CNAME%2CSTATE%2CCOUNTY%2CLSADC%2CFUNCSTAT&returnGeometry=true&outSR=4326&f=geojson"
+        },
+        {
+          "state": "North Carolina",
+          "STATEFP": "37",
+          "expected_count": 100,
+          "count_file": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2025/state-37-count.json",
+          "features_file": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2025/tigerweb-2025-state-37-counties.geojson",
+          "query_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/41/query?where=STATE%3D%2737%27&outFields=GEOID%2CNAME%2CSTATE%2CCOUNTY%2CLSADC%2CFUNCSTAT&returnGeometry=true&outSR=4326&f=geojson"
+        },
+        {
+          "state": "South Carolina",
+          "STATEFP": "45",
+          "expected_count": 46,
+          "count_file": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2025/state-45-count.json",
+          "features_file": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2025/tigerweb-2025-state-45-counties.geojson",
+          "query_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/41/query?where=STATE%3D%2745%27&outFields=GEOID%2CNAME%2CSTATE%2CCOUNTY%2CLSADC%2CFUNCSTAT&returnGeometry=true&outSR=4326&f=geojson"
+        },
+        {
+          "state": "West Virginia",
+          "STATEFP": "54",
+          "expected_count": 55,
+          "count_file": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2025/state-54-count.json",
+          "features_file": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2025/tigerweb-2025-state-54-counties.geojson",
+          "query_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/41/query?where=STATE%3D%2754%27&outFields=GEOID%2CNAME%2CSTATE%2CCOUNTY%2CLSADC%2CFUNCSTAT&returnGeometry=true&outSR=4326&f=geojson"
+        }
+      ],
+      "total_scoped_feature_count": 268,
+      "scope_completeness": "Four state query counts and returned feature counts were checked against the 268 issue IDs; every issue subject crosswalked once by parent state plus normalized county name.",
+      "national_feature_count": {
+        "count": 3235,
+        "response_file": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2025/national-count.json",
+        "sha256": "8aba93b08703d380494a6bc5fd3f1f81e804944e43b3b5fe687ef77a37c246d8",
+        "query_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/41/query?where=1%3D1&returnCountOnly=true&f=json"
+      },
+      "status": "intermediate-vintage; retained for year-to-year comparison"
+    },
+    {
+      "name": "U.S. Census Bureau TIGERweb ACS 2026 Counties (layer 82)",
+      "vintage": "January 1, 2026",
+      "retrieval_date_utc": "2026-10-05",
+      "role": "Counties or statistically equivalent entities",
+      "license": "U.S. government work; public domain under 17 U.S.C. §105. Cite U.S. Census Bureau.",
+      "source_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2026/MapServer/82",
+      "metadata_file": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2026/tigerweb-layer-82-metadata.json",
+      "metadata_hash_sha256": "56df6e7d6cff8fe1e082bbdc10109cc2c7c22a134f5dfca1899f93d9bd98337d",
+      "national_feature_count": {
+        "count": 3235,
+        "response_file": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2026/national-count.json",
+        "sha256": "8aba93b08703d380494a6bc5fd3f1f81e804944e43b3b5fe687ef77a37c246d8",
+        "query_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2026/MapServer/82/query?where=1%3D1&returnCountOnly=true&f=json"
+      },
+      "state_queries": [
+        {
+          "state": "Florida",
+          "STATEFP": "12",
+          "expected_count": 67,
+          "count_file": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2026/state-12-count.json",
+          "features_file": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2026/tigerweb-2026-state-12-counties.geojson",
+          "query_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2026/MapServer/82/query?where=STATE%3D%2712%27&outFields=GEOID%2CNAME%2CSTATE%2CCOUNTY%2CLSADC%2CFUNCSTAT&returnGeometry=true&outSR=4326&f=geojson",
+          "area_attributes_file": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2026/state-12-area-attributes.json",
+          "area_attributes_query_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2026/MapServer/82/query?where=STATE%3D%2712%27&outFields=GEOID%2CNAME%2CSTATE%2CCOUNTY%2CAREALAND%2CAREAWATER&returnGeometry=false&f=json"
+        },
+        {
+          "state": "North Carolina",
+          "STATEFP": "37",
+          "expected_count": 100,
+          "count_file": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2026/state-37-count.json",
+          "features_file": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2026/tigerweb-2026-state-37-counties.geojson",
+          "query_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2026/MapServer/82/query?where=STATE%3D%2737%27&outFields=GEOID%2CNAME%2CSTATE%2CCOUNTY%2CLSADC%2CFUNCSTAT&returnGeometry=true&outSR=4326&f=geojson",
+          "area_attributes_file": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2026/state-37-area-attributes.json",
+          "area_attributes_query_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2026/MapServer/82/query?where=STATE%3D%2737%27&outFields=GEOID%2CNAME%2CSTATE%2CCOUNTY%2CAREALAND%2CAREAWATER&returnGeometry=false&f=json"
+        },
+        {
+          "state": "South Carolina",
+          "STATEFP": "45",
+          "expected_count": 46,
+          "count_file": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2026/state-45-count.json",
+          "features_file": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2026/tigerweb-2026-state-45-counties.geojson",
+          "query_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2026/MapServer/82/query?where=STATE%3D%2745%27&outFields=GEOID%2CNAME%2CSTATE%2CCOUNTY%2CLSADC%2CFUNCSTAT&returnGeometry=true&outSR=4326&f=geojson",
+          "area_attributes_file": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2026/state-45-area-attributes.json",
+          "area_attributes_query_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2026/MapServer/82/query?where=STATE%3D%2745%27&outFields=GEOID%2CNAME%2CSTATE%2CCOUNTY%2CAREALAND%2CAREAWATER&returnGeometry=false&f=json"
+        },
+        {
+          "state": "West Virginia",
+          "STATEFP": "54",
+          "expected_count": 55,
+          "count_file": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2026/state-54-count.json",
+          "features_file": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2026/tigerweb-2026-state-54-counties.geojson",
+          "query_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2026/MapServer/82/query?where=STATE%3D%2754%27&outFields=GEOID%2CNAME%2CSTATE%2CCOUNTY%2CLSADC%2CFUNCSTAT&returnGeometry=true&outSR=4326&f=geojson",
+          "area_attributes_file": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/tiger2026/state-54-area-attributes.json",
+          "area_attributes_query_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2026/MapServer/82/query?where=STATE%3D%2754%27&outFields=GEOID%2CNAME%2CSTATE%2CCOUNTY%2CAREALAND%2CAREAWATER&returnGeometry=false&f=json"
+        }
+      ],
+      "total_scoped_feature_count": 268,
+      "scope_completeness": "Four state query counts and returned feature counts equal the exact 268 issue IDs; each issue member crosswalks once by current parent state plus normalized county name."
+    },
+    {
+      "name": "TIGERweb ACS 2026 land and water area attributes",
+      "vintage": "January 1, 2026",
+      "retrieval_date_utc": "2026-10-05",
+      "fields": {
+        "AREALAND": "Census reported land area in square meters",
+        "AREAWATER": "Census reported water area in square meters"
+      },
+      "source_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2026/MapServer/82",
+      "license": "U.S. government work; public domain under 17 U.S.C. §105. Cite U.S. Census Bureau."
+    }
+  ],
+  "authoritative_references": [
+    {
+      "title": "2025 TIGER/Line Shapefiles Technical Documentation",
+      "url": "https://www2.census.gov/geo/pdfs/maps-data/data/tiger/tgrshp2025/TGRSHP2025_TechDoc.pdf",
+      "supports": "County/equivalent meanings and neighboring county subdivision level (pp. 4-27 and following); Jan 1 2025 vintage; U.S. government work/public domain (p. 1-1); statistical use, no warranty, not legal land descriptions/jurisdiction determinations."
+    },
+    {
+      "title": "TIGERweb ACS 2025 Counties layer 41",
+      "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/41",
+      "supports": "County or statistically equivalent entities, Jan 1 2025 vintage, U.S. Census Bureau source and available query schema."
+    },
+    {
+      "title": "Census Bureau Geographic Terms and Definitions: Counties (and equivalents)",
+      "url": "https://www.census.gov/programs-surveys/popest/about/glossary/geo-terms.html",
+      "supports": "Counties are primary legal divisions of most states; county-equivalent exceptions vary by jurisdiction; legally defined county subdivisions are a lower neighbor tier."
+    },
+    {
+      "title": "TIGERweb ACS 2026 Legal and Statistical Entities Web Map Service",
+      "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2026/MapServer",
+      "supports": "Current January 1, 2026 vintage; County layer 82; U.S. Census Bureau source."
+    }
+  ]
+}
