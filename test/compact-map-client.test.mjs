@@ -9,7 +9,7 @@ const temporalPins={release_id:'reference:test',hierarchy_sha256:'a'.repeat(64),
 const temporalPage=(stream,year=2020,revision=7)=>({year,stream,...temporalPins,records:[],withdrawals:[],sources:[],next_cursor:null,revision,capability:{datedMembership:1,datedExistence:1,datedFootprints:0}});
 async function withLoader(run,{enabled=true,geography=false}={}){
  const file=new URL('../src/data-client.js',import.meta.url);
- const source=fs.readFileSync(file,'utf8').replace(/from '(\.\/[^']+)'/g,(_,path)=>`from '${new URL(path,file).href}'`).replace("import.meta.env.VITE_STATIC_ATLAS === 'true'",'true').replace("import.meta.env.VITE_HOSTED_DATABASE === 'true'",'true')+`\n${enabled?'compactMapSupported=true;':''}\n${geography?`datedGeographySupported=true;expectedGeography=${JSON.stringify(temporalPins)};`:''}\nexport {loadHostedMapEvidence,loadReferenceAttributes,loadSelectedHostedMap,loadPreparedEvidence,loadHistory};\n// isolated client fixture ${++loaderSerial}`;
+ const source=fs.readFileSync(file,'utf8').replace(/from '(\.\/[^']+)'/g,(_,path)=>`from '${new URL(path,file).href}'`).replace("import.meta.env.VITE_STATIC_ATLAS === 'true'",'true').replace("import.meta.env.VITE_HOSTED_DATABASE === 'true'",'true')+`\n${enabled?'compactMapSupported=true;':''}\n${geography?`datedGeographySupported=true;expectedGeography=${JSON.stringify(temporalPins)};`:''}\nexport {loadHostedMapEvidence,loadReferenceAttributes,loadSelectedHostedMap,loadPreparedEvidence,loadHistory,loadOwnershipHistory};\n// isolated client fixture ${++loaderSerial}`;
  const loader=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64')),previous=global.fetch;
  try{return await run(loader);}finally{global.fetch=previous;}
 }
@@ -359,3 +359,48 @@ test('the geography capability enables compact reads through the actual manifest
  const calls=[];global.fetch=async url=>{calls.push(url);if(url==='./atlas-geography.json')return Response.json({units:[],features:[],contentCapabilities:{mapSnapshots:1}});request(url);return Response.json(validPage());};
  await loader.loadGeography();const result=await loader.loadHostedMapEvidence(2020,false);assert.equal(calls[0],'./atlas-geography.json');assert.equal(calls.length,2);assert.match(calls[1],/^\/api\/map\/snapshot\?/);assert.equal(result.attributes.available,true);
 },{enabled:false}));
+
+function ownershipFixture(generation){
+ const index={version:1,encoding:'ownership-v2-century',source_index_sha256:`source-${generation}`,shared:{version:2,owner_ids:['owner:stable'],labels:[`Label ${generation}`],source_ids:[`source:${generation}`],statuses_order:['derived'],entities:{'owner:stable':{name:'Stable owner'}},source:`Source ${generation}`,source_url:'https://example.org/original'},buckets:[{path:'same-path.json',valid_from:1901,valid_to:2001}]};
+ const bucket={version:1,source_index_sha256:index.source_index_sha256,valid_from:1901,valid_to:2001,parts:[[['location:A',[[1901,2001,0,0,0]]]]],evidence:[[0,1,1,[[0,1]],[0],0]]};
+ return {index,bucket};
+}
+
+test('ownership index and same-path buckets reload with geography while nearby years reuse them',async()=>withLoader(async loader=>{
+ let generation=1,indexReads=0,bucketReads=0;
+ global.fetch=async url=>{
+  if(url==='./atlas-geography.json')return Response.json({units:[],features:[]});
+  const fixture=ownershipFixture(generation);
+  if(url==='./ownership-runtime/index.json'){indexReads++;return Response.json(fixture.index);}
+  assert.equal(url,'./ownership-runtime/same-path.json');bucketReads++;return Response.json(fixture.bucket);
+ };
+ await loader.loadGeography();
+ const first=await loader.loadOwnershipHistory(1950);await loader.loadOwnershipHistory(1951);
+ assert.equal(indexReads,1);assert.equal(bucketReads,1);assert.equal(first[0].value,'Label 1');
+ generation=2;await loader.loadGeography();
+ const next=await loader.loadOwnershipHistory(1950);await loader.loadOwnershipHistory(1951);
+ assert.equal(indexReads,2);assert.equal(bucketReads,2);assert.equal(next[0].value,'Label 2');
+ assert.equal(next[0].id,first[0].id);assert.equal(next[0].category_id,first[0].category_id);
+ assert.deepEqual([next[0].valid_from,next[0].valid_to],[1901,2001]);
+ assert.deepEqual(next[0].metadata.source_record_ids,['source:2']);assert.equal(first[0].value,'Label 1');
+}));
+
+for(const failingAsset of ['index','bucket'])test(`late old ownership ${failingAsset} failure cannot evict current generation`,async()=>withLoader(async loader=>{
+ let generation=1,rejectOld,indexReads=0,bucketReads=0;
+ global.fetch=async url=>{
+  if(url==='./atlas-geography.json')return Response.json({units:[],features:[]});
+  const fixture=ownershipFixture(generation);
+  if(url==='./ownership-runtime/index.json'){
+   indexReads++;if(generation===1&&failingAsset==='index')return new Promise((resolve,reject)=>{rejectOld=reject;});
+   return Response.json(fixture.index);
+  }
+  assert.equal(url,'./ownership-runtime/same-path.json');bucketReads++;
+  if(generation===1&&failingAsset==='bucket')return new Promise((resolve,reject)=>{rejectOld=reject;});
+  return Response.json(fixture.bucket);
+ };
+ await loader.loadGeography();const old=assert.rejects(loader.loadOwnershipHistory(1950),/old-generation-unavailable/);await new Promise(setImmediate);
+ generation=2;await loader.loadGeography();const current=await loader.loadOwnershipHistory(1950);
+ const reads=[indexReads,bucketReads];rejectOld(Error('old-generation-unavailable'));await old;
+ const repeated=await loader.loadOwnershipHistory(1951);
+ assert.deepEqual([indexReads,bucketReads],reads);assert.equal(current[0].value,'Label 2');assert.equal(repeated[0].value,'Label 2');
+}));

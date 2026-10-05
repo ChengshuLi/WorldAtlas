@@ -1,0 +1,10 @@
+{
+  "method_id": "ownership-generation-cache",
+  "kind": "code",
+  "outcome": "passed",
+  "positive_control": "Current client passes all 34 compact-map client tests including generation reload, nearby-year reuse and both late-rejection cases.",
+  "negative_control": "Unmodified PR-base client fails same-path geography reload: expected two index reads across two generations, observed one.",
+  "negative_control_exit_status": 1,
+  "baseline_commit": "1232d03d2d9a5e1118c0d5239092c879a9539990",
+  "limits": "Synthetic immutable ownership fixtures and mocked read-only fetches; no production deployment or startup performance certificate."
+}
