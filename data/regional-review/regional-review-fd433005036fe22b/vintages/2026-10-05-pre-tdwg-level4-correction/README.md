@@ -1,0 +1,3 @@
+# Superseded packet vintage: 2026-10-05
+
+Preserved before correcting a WGSRPD Level 4 roster error identified during independent PR #950 review. This vintage incorrectly said Argentina Northeast (AGE) had ten Level 4 units including Santa Fe, based on the explanatory narrative rather than the primary `tblLevel4.txt` table. At pinned TDWG repository commit `52da7828aba9d461dd133c27b3bd7a4407161f54`, the primary table lists nine AGE rows and assigns Santa Fe (`AGS-SF`) to Argentina South (`AGS`). The current packet files supersede these copies; do not use the old roster claims or classifications as current findings. SHA-256 checksums for this exact prior packet are in the copied `artifact-checksums.json`.

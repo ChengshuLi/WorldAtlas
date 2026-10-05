@@ -100,38 +100,13 @@
     },
     {
       "id": "TDWG-WGSRPD-2001",
-    "title": "Brummitt, World Geographic Scheme for Recording Plant Distributions, Edition 2",
-    "url": "https://www.tdwg.org/standards/wgsrpd/",
-      "primary_document": "https://github.com/tdwg/wgsrpd/blob/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/SecondEdGeog.htm",
+      "title": "Brummitt, World Geographic Scheme for Recording Plant Distributions, Edition 2",
+      "url": "https://www.tdwg.org/standards/wgsrpd/",
+      "primary_document": "https://github.com/tdwg/wgsrpd/blob/master/109-488-1-ED/2nd%20Edition/SecondEdGeog.htm",
       "vintage": "2001-08",
       "role": "Authoritative semantic description of botanical geographic Level 3 and political Level 4 units",
       "license": "No reuse license recorded in the consulted page",
-      "repository_commit": "52da7828aba9d461dd133c27b3bd7a4407161f54",
-      "exact_membership_files": [
-        {
-          "path": "109-488-1-ED/2nd Edition/tblLevel3.txt",
-          "url": "https://github.com/tdwg/wgsrpd/blob/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/tblLevel3.txt",
-          "raw_url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/tblLevel3.txt",
-          "retrieval_date": "2026-10-05",
-          "bytes": 9933,
-          "sha256": "7eaf281dfbdca610c93938326c333d7c62d8e82ce3cba63b299d5a3a01d0003f",
-          "git_blob_sha": "91620ba4f89943fc5b2e1646d41b1c641fe2604f",
-          "encoding": "ISO-8859-1",
-          "restoration": "Fetch the exact raw path at repository commit 52da7828aba9d461dd133c27b3bd7a4407161f54 and verify the listed byte count and SHA-256. The pinned line records AGE as Argentina Northeast."
-        },
-        {
-          "path": "109-488-1-ED/2nd Edition/tblLevel4.txt",
-          "url": "https://github.com/tdwg/wgsrpd/blob/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/tblLevel4.txt",
-          "raw_url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/tblLevel4.txt",
-          "retrieval_date": "2026-10-05",
-          "bytes": 17137,
-          "sha256": "6fa350a0bb5939df0c665ae6cf253ddb0aa85fef6daa684c87ba400faf93b1c2",
-          "git_blob_sha": "f91e7a4ea698645eacb79fb7de86d35225c11000",
-          "encoding": "ISO-8859-1",
-          "restoration": "Fetch the exact raw path at repository commit 52da7828aba9d461dd133c27b3bd7a4407161f54 and verify the listed byte count and SHA-256. The nine AGE rows omit Santa Fe; row AGS-SF places it under the neighboring Argentina South Level 3 area (AGS). The table is retained by restoration instructions, not redistributed, because no reuse license was located."
-        }
-      ],
-      "findings": ["Level 3 is a botanical-country scale that can disregard purely political boundaries.", "Level 4 basic recording units recognize political integrity.", "The pinned Level 3 table identifies AGE as Argentina Northeast.", "The pinned Level 4 table lists nine AGE members: Buenos Aires, Chaco, Corrientes, Córdoba, Argentina Distrito Federal, Entre Ríos, Formosa, La Pampa, and Misiones.", "Santa Fe appears as AGS-SF under AGS (Argentina South), not under AGE."]
+      "findings": ["Level 3 is a botanical-country scale that can disregard purely political boundaries.", "Level 4 basic recording units recognize political integrity.", "WGSRPD identifies AGE Argentina Northeast Level 3 and Argentina Buenos Aires, Córdoba, Chaco, Corrientes, Distrito Federal, Entre Ríos, Formosa, La Pampa, Misiones, and Santa Fe as its Level 4 units."]
     }
   ]
 }

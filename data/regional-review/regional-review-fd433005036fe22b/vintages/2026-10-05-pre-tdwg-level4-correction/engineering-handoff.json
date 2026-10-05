@@ -55,36 +55,5 @@
       "finding": "Six unmatched and three ambiguous identities remain for source, name-history and code reconciliation; see geometry-comparisons.jsonl and issue #949."
     }
   ],
-  "scope_limit": "Research finding only. Does not alter stable IDs, parents, geometry, published release pins, claims or history. Engineering should wait for the linked source/area integration decisions.",
-  "area_membership_followup": {
-    "parent_integration": 441,
-    "neighboring_packet": 444,
-    "subject_count": 19,
-    "subject_ids_sha256": "6a4a86d57f22be5c5cab70f5480ecf59f83290e503d44a15c34b39732763436a",
-    "subject_ids": [
-      "gb:ARG:ADM2:61730980B15935899611470",
-      "gb:ARG:ADM2:61730980B18182396698532",
-      "gb:ARG:ADM2:61730980B23902943966550",
-      "gb:ARG:ADM2:61730980B38020683731034",
-      "gb:ARG:ADM2:61730980B41711157234352",
-      "gb:ARG:ADM2:61730980B46237487976912",
-      "gb:ARG:ADM2:61730980B4652577007654",
-      "gb:ARG:ADM2:61730980B49644503791094",
-      "gb:ARG:ADM2:61730980B50411515207012",
-      "gb:ARG:ADM2:61730980B52273662212744",
-      "gb:ARG:ADM2:61730980B61800814165729",
-      "gb:ARG:ADM2:61730980B62800099035851",
-      "gb:ARG:ADM2:61730980B6439123039884",
-      "gb:ARG:ADM2:61730980B65517483181137",
-      "gb:ARG:ADM2:61730980B672443386534",
-      "gb:ARG:ADM2:61730980B68223475909099",
-      "gb:ARG:ADM2:61730980B70528593712709",
-      "gb:ARG:ADM2:61730980B94012431772813",
-      "gb:ARG:ADM2:61730980B95993881972660"
-    ],
-    "standard_membership": "All 19 IDs have frozen immediate parent Santa Fe. The exact pinned WGSRPD Level 4 table assigns Santa Fe (AGS-SF) to Argentina South (AGS), not Argentina Northeast (AGE).",
-    "recommendation": "Cross-area membership/parent review with #441 and #444; preserve stable IDs, footprints, and history until the integrated scope is decided. The #442 packet only records evidence.",
-    "followup_issue": 951,
-    "blocked_until_issue": 442
-  }
+  "scope_limit": "Research finding only. Does not alter stable IDs, parents, geometry, published release pins, claims or history. Engineering should wait for the linked source/area integration decisions."
 }

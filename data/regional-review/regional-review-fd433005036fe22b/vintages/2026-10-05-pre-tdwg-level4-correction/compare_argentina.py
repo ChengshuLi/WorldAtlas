@@ -22,7 +22,6 @@ EXPECTED_ORIGINAL_SHA256 = "f35dae5a257302dea5bd1549ae135baf82e7ee7491918854c3db
 EXPECTED_CURRENT_SHA256 = "5bdf36f66a5fd93d00b93b5cb28c1d71a0212848325612e84d3fbf5764870e87"
 EXPECTED_ORIGINAL_BYTES = 69_702_323
 EXPECTED_CURRENT_BYTES = 3_634_462
-EXPECTED_CROSS_AREA_SCOPE_SHA256 = "6a4a86d57f22be5c5cab70f5480ecf59f83290e503d44a15c34b39732763436a"
 
 # CODPROV is the official INDEC two-digit province code. These are the six
 # parents declared by this legacy packet, whose native roster is issue-pinned.
@@ -39,14 +38,6 @@ PARENT_CODES = {
     "framework:province:formosa:6ec8d4a4a329": "34",
     "framework:province:la-pampa:d10ea068ae3a": "42",
     "framework:province:santa-fe:1f6b7cf8fad3": "82",
-}
-WGSRPD_L4 = {
-    "framework:province:buenos-aires:df466c06286c": ("AGE", "AGE-BA"),
-    "framework:province:cordoba:beae6ba6b36e": ("AGE", "AGE-CO"),
-    "framework:province:chaco:87e685fd273c": ("AGE", "AGE-CH"),
-    "framework:province:formosa:6ec8d4a4a329": ("AGE", "AGE-FO"),
-    "framework:province:la-pampa:d10ea068ae3a": ("AGE", "AGE-LP"),
-    "framework:province:santa-fe:1f6b7cf8fad3": ("AGS", "AGS-SF"),
 }
 
 
@@ -178,8 +169,6 @@ def main() -> None:
         parent_id = atlas_props["parent_id"]
         parent_name = parents[parent_id]["name"]
         province_code = PARENT_CODES[parent_id]
-        wg_l3, wg_l4 = WGSRPD_L4[parent_id]
-        area_conflict = wg_l3 != "AGE"
         candidates = []
         for f in current:
             p = f["properties"]
@@ -211,28 +200,15 @@ def main() -> None:
             union = a.union(b).area
             if union > 0:
                 iou = a.intersection(b).area / union
-        parent_code_mismatch = bool(current_feature and str(current_feature["properties"].get("CODPROV", "")).strip() != province_code)
-        if area_conflict:
-            assessment_classification = "correction-needed"
-            assessment_finding = "The frozen hierarchy places this Santa Fe department in the Argentina Northeast AGE area, but the pinned TDWG Level 4 table identifies Santa Fe as AGS-SF under Argentina South (AGS). Review this cross-area membership with #441 and the Argentina South packet #444 before any move; the current-unit join and boundary remain independently unresolved as recorded."
-        elif parent_code_mismatch:
-            assessment_classification = "correction-needed"
-            assessment_finding = "Exact normalized-name identity candidate has a current IGN province code different from the frozen atlas parent; propose a source-backed parent assignment review, no hierarchy edit in this packet."
-        else:
-            assessment_classification = "insufficient-evidence"
-            assessment_finding = "This row remains insufficient-evidence for geographic certification. A source/name/code match is a present-day identity cross-check only; source completeness, precise legal boundary, reuse rights/vintage, and suitability as a general-purpose geographic location remain unverified."
         row = {
             "id": identifier,
             "baseline_name": source_name,
             "parent_id": parent_id,
             "parent_name": parent_name,
             "province_code": province_code,
-            "wgsrpd_level3_code": wg_l3,
-            "wgsrpd_level4_code": wg_l4,
-            "area_membership_status": "cross-area-conflict" if area_conflict else "matches-pinned-level4",
             "match_status": status,
-            "assessment_classification": assessment_classification,
-            "assessment_finding": assessment_finding,
+            "assessment_classification": "correction-needed" if status == "matched-name-parent-code-mismatch" else "insufficient-evidence",
+            "assessment_finding": ("Exact normalized-name identity candidate has a current IGN province code different from the frozen atlas parent; propose a source-backed parent assignment review, no hierarchy edit in this packet." if status == "matched-name-parent-code-mismatch" else "This row remains insufficient-evidence for geographic certification. A source/name/code match is a present-day identity cross-check only; source completeness, precise legal boundary, reuse rights/vintage, and suitability as a general-purpose geographic location remain unverified."),
             "current_name": current_feature["properties"].get("NAM") if current_feature else None,
             "current_geographic_name": current_feature["properties"].get("FNA") if current_feature else None,
             "current_indec_code": current_feature["properties"].get("CODINDEC") if current_feature else None,
@@ -240,7 +216,7 @@ def main() -> None:
             "ambiguous_candidates": [{"name": f["properties"].get("NAM"), "geographic_name": f["properties"].get("FNA"), "province_code": str(f["properties"].get("CODPROV", "")).strip(), "indec_code": f["properties"].get("CODINDEC")} for f in candidates] if len(candidates) > 1 else [],
             "current_province_code": str(current_feature["properties"].get("CODPROV", "")).strip() if current_feature else None,
             "parent_code_agrees": bool(current_feature and str(current_feature["properties"].get("CODPROV", "")).strip() == province_code),
-            "parent_handoff": ("WGSRPD Level 4 places Santa Fe as AGS-SF in Argentina South, while the frozen hierarchy assigns these 19 scoped IDs to AGE; coordinate an exact-ID cross-area parent review with #441 and the Argentina South packet #444 before any move." if area_conflict else ("Candidate is framework:province:salta:7e3f9095353a, but this moves membership from the Argentina Northeast area into Argentina Northwest; coordinate with #441 and #943 before any change." if current_feature and str(current_feature["properties"].get("CODPROV", "")).strip() == "86" and province_code != "86" else ("Code 30 indicates Entre Ríos, but no Entre Ríos province ID is a direct child of the frozen Argentina Northeast area; resolve the Level 4 area roster with #441 before creating or moving a parent." if current_feature and str(current_feature["properties"].get("CODPROV", "")).strip() == "30" and province_code != "30" else None))),
+            "parent_handoff": ("Candidate is framework:province:salta:7e3f9095353a, but this moves membership from the Argentina Northeast area into Argentina Northwest; coordinate with #441 and #943 before any change." if current_feature and str(current_feature["properties"].get("CODPROV", "")).strip() == "86" and province_code != "86" else ("Code 30 indicates Entre Ríos, but no Entre Ríos province ID is a direct child of the frozen Argentina Northeast area; resolve the Level 4 area roster with #441 before creating or moving a parent." if current_feature and str(current_feature["properties"].get("CODPROV", "")).strip() == "30" and province_code != "30" else None)),
             "current_unit_type": current_feature["properties"].get("Tipo_de_Un") if current_feature else None,
             "current_division_type": current_feature["properties"].get("Tipo_de_di") if current_feature else None,
             "baseline_geometry": {k: v for k, v in left.items() if k != "projected"},
@@ -255,19 +231,13 @@ def main() -> None:
                 canonical(str(f["properties"].get("NAM", ""))), canonical(str(f["properties"].get("FNA", "")))}]
             negative_controls.append({"id": identifier, "wrong_province_code": "14", "candidate_count": len(wrong_parent_candidates)})
 
-    cross_area_rows = [row for row in rows if row["area_membership_status"] == "cross-area-conflict"]
-    cross_area_digest = hashlib.sha256("\n".join(row["id"] for row in cross_area_rows).encode("utf-8")).hexdigest()
     if len(rows) != len(ids) or len(positive_controls) != 1 or not negative_controls or negative_controls[0]["candidate_count"] != 0:
         raise ValueError("Scope or positive/negative province-parent control failed")
-    if len(cross_area_rows) != 19 or cross_area_digest != EXPECTED_CROSS_AREA_SCOPE_SHA256:
-        raise ValueError("The exact 19-subject Santa Fe cross-area finding changed")
-    if Counter(row["assessment_classification"] for row in rows) != Counter({"correction-needed": 36, "insufficient-evidence": 205}):
-        raise ValueError("The expected individual correction/evidence disposition counts changed")
 
     counts = Counter(row["match_status"] for row in rows)
     ious = [row["equal_area_iou"] for row in rows if row["equal_area_iou"] is not None]
     summary = {
-        "version": 2,
+        "version": 1,
         "issue": 442,
         "scope_count": len(rows),
         "issue_scope_location_count": pinned_scope["location_count"],
@@ -279,16 +249,6 @@ def main() -> None:
         "current_source_roster": {"unique_nonblank_indec_codes": len(set(nonblank_codes)), "blank_code_feature_count": len(blank_code_features), "blank_code_feature_names": sorted(str(f.get("properties", {}).get("NAM", "")) for f in blank_code_features)},
         "source_join_status_counts": dict(sorted(counts.items())),
         "individual_assessment_counts": dict(sorted(Counter(row["assessment_classification"] for row in rows).items())),
-        "wgsrpd_area_membership": {
-            "level3_target": "AGE",
-            "table_repository_commit": "52da7828aba9d461dd133c27b3bd7a4407161f54",
-            "level3_table_sha256": "7eaf281dfbdca610c93938326c333d7c62d8e82ce3cba63b299d5a3a01d0003f",
-            "pinned_level4_table_sha256": "6fa350a0bb5939df0c665ae6cf253ddb0aa85fef6daa684c87ba400faf93b1c2",
-            "target_area_level4_count": 9,
-            "cross_area_conflict_count": sum(row["area_membership_status"] == "cross-area-conflict" for row in rows),
-            "cross_area_conflict_subject_ids": [row["id"] for row in rows if row["area_membership_status"] == "cross-area-conflict"],
-            "limit": "AGE/AGS codes describe WGSRPD botanical membership, not a current administrative boundary. Exact area reassignment remains coordinated integration work under #441.",
-        },
         "geometry_results": {
             "valid_pair_count": len(ious),
             "invalid_or_missing_pair_count": len(rows) - len(ious),
@@ -308,7 +268,7 @@ def main() -> None:
         "negative_controls": negative_controls,
         "method": {
             "name_normalization": "Unicode NFKD, casefold, remove diacritics and non-alphanumeric characters; strip initial Departamento/Partido/Dpto./Depto. label. Explicit aliases: Ezeiza/José M. Ezeiza; Coronel de Marina L. Rosales/Coronel de Marina Leonardo Rosales; Bolívar/San Carlos de Bolívar; Constitución/Villa Constitución.",
-            "candidate_partition": "Match normalized source name against the national roster; report whether current INDEC province code agrees with the frozen immediate atlas parent; independently compare the six frozen province parents with the pinned TDWG Level 4 AGE/AGS roster. Ambiguous names remain unjoined.",
+            "candidate_partition": "Match normalized source name against the national roster; report whether current INDEC province code agrees with the frozen atlas parent. Ambiguous names remain unjoined.",
             "geometry_crs": "EPSG:6933 (WGS 84 / NSIDC EASE-Grid 2.0 Global, equal-area projection); GeoJSON axes interpreted longitude, latitude.",
             "geometry_method": "2020 geoBoundaries versus dated IGN 2026-10-05 generalized-source IoU. Repeated normalized names are disambiguated only when exactly one candidate has IoU >= 0.95. Invalid source geometries are preserved and not silently repaired.",
             "software": "Python 3.12; NumPy 2.3.5; Shapely 2.1.2; pyproj 3.7.2; requirements.txt",

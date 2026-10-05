@@ -76,13 +76,13 @@
     "valid_pair_count": 227
   },
   "individual_assessment_counts": {
-    "correction-needed": 36,
-    "insufficient-evidence": 205
+    "correction-needed": 17,
+    "insufficient-evidence": 224
   },
   "issue": 442,
   "issue_scope_location_count": 241,
   "method": {
-    "candidate_partition": "Match normalized source name against the national roster; report whether current INDEC province code agrees with the frozen immediate atlas parent; independently compare the six frozen province parents with the pinned TDWG Level 4 AGE/AGS roster. Ambiguous names remain unjoined.",
+    "candidate_partition": "Match normalized source name against the national roster; report whether current INDEC province code agrees with the frozen atlas parent. Ambiguous names remain unjoined.",
     "geometry_crs": "EPSG:6933 (WGS 84 / NSIDC EASE-Grid 2.0 Global, equal-area projection); GeoJSON axes interpreted longitude, latitude.",
     "geometry_method": "2020 geoBoundaries versus dated IGN 2026-10-05 generalized-source IoU. Repeated normalized names are disambiguated only when exactly one candidate has IoU >= 0.95. Invalid source geometries are preserved and not silently repaired.",
     "limitations": [
@@ -121,35 +121,5 @@
     "matched-name-parent-code-mismatch": 17,
     "unmatched": 6
   },
-  "version": 2,
-  "wgsrpd_area_membership": {
-    "cross_area_conflict_count": 19,
-    "cross_area_conflict_subject_ids": [
-      "gb:ARG:ADM2:61730980B15935899611470",
-      "gb:ARG:ADM2:61730980B18182396698532",
-      "gb:ARG:ADM2:61730980B23902943966550",
-      "gb:ARG:ADM2:61730980B38020683731034",
-      "gb:ARG:ADM2:61730980B41711157234352",
-      "gb:ARG:ADM2:61730980B46237487976912",
-      "gb:ARG:ADM2:61730980B4652577007654",
-      "gb:ARG:ADM2:61730980B49644503791094",
-      "gb:ARG:ADM2:61730980B50411515207012",
-      "gb:ARG:ADM2:61730980B52273662212744",
-      "gb:ARG:ADM2:61730980B61800814165729",
-      "gb:ARG:ADM2:61730980B62800099035851",
-      "gb:ARG:ADM2:61730980B6439123039884",
-      "gb:ARG:ADM2:61730980B65517483181137",
-      "gb:ARG:ADM2:61730980B672443386534",
-      "gb:ARG:ADM2:61730980B68223475909099",
-      "gb:ARG:ADM2:61730980B70528593712709",
-      "gb:ARG:ADM2:61730980B94012431772813",
-      "gb:ARG:ADM2:61730980B95993881972660"
-    ],
-    "level3_table_sha256": "7eaf281dfbdca610c93938326c333d7c62d8e82ce3cba63b299d5a3a01d0003f",
-    "level3_target": "AGE",
-    "limit": "AGE/AGS codes describe WGSRPD botanical membership, not a current administrative boundary. Exact area reassignment remains coordinated integration work under #441.",
-    "pinned_level4_table_sha256": "6fa350a0bb5939df0c665ae6cf253ddb0aa85fef6daa684c87ba400faf93b1c2",
-    "table_repository_commit": "52da7828aba9d461dd133c27b3bd7a4407161f54",
-    "target_area_level4_count": 9
-  }
+  "version": 1
 }
