@@ -1,0 +1,1 @@
+{"basis": "Shared controls reject invalid latitude, self-intersecting polygon, overlapping multipart geometry and unsupported pole-touching input.", "commands": ["python test/geographic-gaps.py", "python test/evidence-geography.py"], "kind": "negative-control", "method_id": "wgs84-area", "outcome": "passed"}

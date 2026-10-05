@@ -11,6 +11,8 @@ a new output directory in the engineering job's owned evidence namespace:
 ```sh
 python scripts/audit-geographic-gaps.py \
   --commit 5f6ab02338a07fd4b3d1cf82d58b96bc84b70312 \
+  --water-commit ff566eab31ef072084c548f67dee8ee727ab3d47 \
+  --water-reference coordination/engineering/coverage-gaps-907-20261005-local01/sources \
   --output coordination/engineering/YOUR-JOB/global-vintage
 python test/geographic-gaps.py
 ```
@@ -36,7 +38,7 @@ intermediates are consolidated losslessly into bundles before completion. There
 is no area cutoff, simplification, nearest-location
 fill or source geometry repair. The report inventories input/output hashes,
 software, bounds, invalid locations, blocked tiles and measurement errors.
-Invalid location geometry blocks affected tiles; invalid physical reference stops
+Invalid location or lake reference geometry blocks affected tiles; invalid physical land reference stops
 the run. The shared WGS84 source-edge area helper measures candidates in square
 metres. Measurement failures retain the geometry with null area; totals include
 only successfully measured fragments and do not imply a complete error-area total.

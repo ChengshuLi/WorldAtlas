@@ -8,6 +8,7 @@ affected tiles; it is never silently repaired. All coordinates are lon/lat WGS84
 import argparse
 import gzip
 import hashlib
+import io
 import json
 import math
 import pathlib
@@ -65,7 +66,8 @@ def bundle_outputs(report, out):
 
 def decode(raw, layers=1):
     for _ in range(layers):
-        raw = gzip.decompress(raw)
+        with gzip.GzipFile(fileobj=io.BytesIO(raw)) as stream:
+            raw = stream.read(32 * 1024 * 1024 + 1)
         if len(raw) > 32 * 1024 * 1024:
             raise ValueError('Decoded source exceeds 32 MiB budget')
     return raw
@@ -98,7 +100,7 @@ def tiles(bounds, size):
         y += size
 
 
-def load_inputs(repo, commit, water_reference=None):
+def load_inputs(repo, commit, water_reference=None, water_commit=None):
     raw = subprocess.check_output(['git', '-C', str(repo), 'show', commit + ':data/world-index.json'])
     baseline = Baseline(repo, commit, [descriptor('data/world-index.json', raw)])
     pins = dict(baseline.pins)
@@ -121,16 +123,26 @@ def load_inputs(repo, commit, water_reference=None):
     for g in land:
         if not g.is_valid:
             raise ValueError('Invalid physical reference: ' + explain_validity(g))
-    water, water_source = [], None
+    water, water_source, invalid_water = [], None, []
     if water_reference:
-        water_source = json.loads(read(water_reference + '/receipt.json'))
-        water_encoded = read(water_reference + '/natural-earth-lakes.geojson.gz')
+        source_commit = water_commit or commit
+        receipt_path = water_reference + '/receipt.json'
+        receipt = subprocess.check_output(['git', '-C', str(repo), 'show', source_commit + ':' + receipt_path])
+        source_baseline = Baseline(repo, source_commit, [descriptor(receipt_path, receipt)])
+        water_source = json.loads(receipt)
+        water_encoded = source_baseline.read(water_reference + '/natural-earth-lakes.geojson.gz')
+        water_source['input_commit'] = source_commit
+        water_source['input_files'] = [descriptor(receipt_path, receipt), descriptor(water_reference + '/natural-earth-lakes.geojson.gz', water_encoded)]
         water_raw = decode(water_encoded)
         if hashlib.sha256(water_encoded).hexdigest() != water_source['retained_sha256'] or hashlib.sha256(water_raw).hexdigest() != water_source['original_sha256']:
             raise ValueError('Water reference fails original source receipt')
-        water = [shape(f['geometry']) for f in json.loads(water_raw)['features']]
-        if any(not g.is_valid for g in water):
-            raise ValueError('Invalid water reference; no implicit repair allowed')
+        for i, f in enumerate(json.loads(water_raw)['features']):
+            g = shape(f['geometry'])
+            if not g.is_valid:
+                invalid_water.append({'id': f'lake-reference:{i}', 'name': f['properties'].get('name'),
+                                      'bounds': list(g.bounds), 'reason': explain_validity(g)})
+            else:
+                water.append(g)
     locations, metadata, invalid, seen = [], [], [], set()
     for part in json.loads(raw)['parts']:
         for f in json.loads(read('data/' + part))['features']:
@@ -147,7 +159,7 @@ def load_inputs(repo, commit, water_reference=None):
             else:
                 locations.append(g)
                 metadata.append(record)
-    return land, water, locations, metadata, invalid, list(pins.values()), source, water_source
+    return land, water, locations, metadata, invalid, invalid_water, list(pins.values()), source, water_source
 
 
 def run(args):
@@ -159,13 +171,14 @@ def run(args):
     owned = ROOT / 'coordination/engineering'
     if owned not in out.parents or out.exists():
         raise ValueError('Use a NEW output directory beneath coordination/engineering; never overwrite a vintage')
-    land, water, locations, metadata, invalid, pins, source, water_source = load_inputs(ROOT, args.commit, args.water_reference)
+    land, water, locations, metadata, invalid, invalid_water, pins, source, water_source = load_inputs(ROOT, args.commit, args.water_reference, args.water_commit)
     lt, wt, ft = STRtree(land), STRtree(water), STRtree(locations)
     out.mkdir(parents=True, exist_ok=False)
     report = {'version': VERSION, 'baseline_commit': args.commit, 'inputs': pins,
               'physical_reference': source, 'water_reference': water_source, 'bounds': args.bounds, 'tile_degrees': args.tile_degrees,
               'method': METHOD, 'software': {'python': sys.version.split()[0], 'shapely': shapely.__version__, 'geos': shapely.geos_version_string},
               'locations': len(locations) + len(invalid), 'invalid_locations': invalid,
+              'invalid_water_reference': invalid_water,
               'tiles_scanned': 0, 'tiles_blocked': [], 'candidate_fragments': 0,
               'candidate_area_m2': 0, 'measurement_errors': [], 'outputs': [],
               'limits': ['Reference is Natural Earth 1:10m physical land, not detailed hydrography or a complete island inventory.',
@@ -177,8 +190,9 @@ def run(args):
     for i, bounds in enumerate(tiles(args.bounds, args.tile_degrees)):
         tile = box(*bounds)
         bad = [r['id'] for r in invalid if box(*r['bounds']).intersects(tile)]
-        if bad:
-            report['tiles_blocked'].append({'bounds': bounds, 'invalid_location_ids': bad})
+        bad_water = [r['id'] for r in invalid_water if box(*r['bounds']).intersects(tile)]
+        if bad or bad_water:
+            report['tiles_blocked'].append({'bounds': bounds, 'invalid_location_ids': bad, 'invalid_water_ids': bad_water})
             continue
         li = lt.query(tile, predicate='intersects')
         if not len(li):
@@ -237,4 +251,5 @@ if __name__ == '__main__':
     parser.add_argument('--bounds', nargs=4, type=float, default=[-180, -60, 180, 85.0511287798066])
     parser.add_argument('--tile-degrees', type=float, default=5)
     parser.add_argument('--water-reference', help='Immutable Git source directory containing lake GeoJSON and its receipt')
+    parser.add_argument('--water-commit', help='Separate exact immutable source commit; defaults to the geography input commit')
     run(parser.parse_args())
