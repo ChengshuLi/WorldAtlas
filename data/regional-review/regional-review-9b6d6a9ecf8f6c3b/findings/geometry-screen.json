@@ -1,0 +1,30 @@
+{
+  "interpretation": "Vertex and geometry type comparisons are screening metrics only; they do not establish boundary correctness.",
+  "countries": {
+    "CHL": {
+      "rows": 167,
+      "geometry_type_pairs": {
+        "MultiPolygon/MultiPolygon": 23,
+        "Polygon/Polygon": 124,
+        "Polygon/MultiPolygon": 20
+      },
+      "source_minus_baseline_vertex_delta": {
+        "min": 48,
+        "median": 2526,
+        "max": 606011
+      }
+    },
+    "PRY": {
+      "rows": 47,
+      "geometry_type_pairs": {
+        "Polygon/Polygon": 46,
+        "MultiPolygon/Polygon": 1
+      },
+      "source_minus_baseline_vertex_delta": {
+        "min": 103,
+        "median": 1608,
+        "max": 51178
+      }
+    }
+  }
+}

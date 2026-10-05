@@ -1,0 +1,146 @@
+{
+  "retrieval_date": "2026-10-05",
+  "retained_sources": [],
+  "restoration_only_sources": [
+    {
+      "name": "Chile SUBDERE 2023 DPA polygon archive",
+      "url": "https://ide.subdere.gov.cl/descargas/SHP/Limite_DPA_03082023.rar",
+      "size_bytes": 262380302,
+      "sha256": "4c8dd01ca4ca7d8b111dac78b88cc8ac64c1af7b8ebe0c85a21eaab337ae3fd3",
+      "license_status": "no reuse license located; not retained",
+      "use": "restoration only; extraction/feature audit blocked by local RAR5 extraction failure",
+      "source_id": "subdere-chile-dpa-2023",
+      "retrieved": "2026-10-05"
+    },
+    {
+      "name": "Chile SUBDERE/IGM DPA 2022 lines archive",
+      "url": "https://ide.subdere.gov.cl/wp-content/uploads/74_limites_dpa_2022.zip",
+      "size_bytes": 9115083,
+      "sha256": "9dc14e36be4af326b912e124b7895f36f149dec4dc9956e55534a4c760f79992",
+      "license_status": "no explicit reuse license located; not retained",
+      "use": "restoration only; lines and metadata establish stated vintage/limitations, not polygon validation",
+      "source_id": "subdere-igm-chile-dpa-2022-lines",
+      "retrieved": "2026-10-05"
+    },
+    {
+      "name": "Paraguay INE 2022 district attribute response (geometry omitted)",
+      "url": "https://geonode.ine.gov.py/geoserver/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=geonode%3ADistritos_Paraguay_INE_2022_conID&propertyName=DPTO%2CDPTO_DESC%2CDISTRITO%2CDIST_DESC_%2CCLAVE%2Cid&outputFormat=application%2Fjson&srsName=EPSG%3A4326",
+      "sha256": "3cf026dd552ac4128f97b68acbdb8e06aba08afdde13fa208185cb07447ae228",
+      "license": "INE public information license; attribution required",
+      "use": "row-code/name/parent statistical crosswalk only; boundaries approximate/statistical-only",
+      "source_id": "ine-districts-2022-attributes",
+      "retrieved": "2026-10-05",
+      "captured_response_bytes": 55137,
+      "captured_response_sha256": "3cf026dd552ac4128f97b68acbdb8e06aba08afdde13fa208185cb07447ae228",
+      "restoration": "Request the layer attributes listed above without geometry; select 47 source rows using documented normalized and expanded spelling matches. Verify against the captured response hash if reproducing the exact recorded retrieval."
+    },
+    {
+      "name": "Paraguay National Cadastre District Limits Study",
+      "url": "https://www.catastro.gov.py/public/967e7c_ESTUDIO%20DE%20L%C3%8DMITES%20DISTRITALES%20DE%20LA%20REP%C3%9ABLICA%20DEL%20PARAGUAY.pdf",
+      "size_bytes": 4079648,
+      "sha256": "c07fd97db9ee7063e377dd6df14f032847c16296a9c8354fe1179d3203762bd1",
+      "license_status": "no redistribution terms located; not retained",
+      "use": "restoration-only primary technical/legal-context evidence",
+      "source_id": "paraguay-cadastre-district-study",
+      "retrieved": "2026-10-05"
+    },
+    {
+      "source_id": "gb:CHL:ADM3",
+      "snapshot": "geoBoundaries-CHL-ADM3.geojson.gz",
+      "retrieved": "2026-10-05",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CHL/ADM3/geoBoundaries-CHL-ADM3.geojson",
+      "resolved_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "original_size_bytes": 171783952,
+      "original_sha256": "f3833ce1965394ae705e3793b50bdd007775b43da604251871deffed04f3bffd",
+      "compressed_size_bytes": 48864138,
+      "metadata_file": "geoBoundaries-CHL-ADM3-metaData.json",
+      "metadata_sha256": "658356bb413f8b284b260360d1309527781e1b0c46027e1ae0a4c58da1c99409",
+      "reference_year": "2020",
+      "license": "CC BY 3.0 IGO",
+      "license_basis": "geoBoundaries metadata; redistributable attribution license",
+      "national_feature_count": 345,
+      "scope_feature_count": 167,
+      "match": "one-to-one shapeID and exact shapeName in scoped rows",
+      "license_status": "CC BY 3.0 IGO; licensed for attribution redistribution",
+      "retention": "restoration-only; full-country source exceeds 32 MiB evidence input cap; no source geometry redistributor retained",
+      "restoration": "Download the exact URL at resolved_commit 9469f09592ced973a3448cf66b6100b741b64c0d; verify the full original file is 171783952 bytes with SHA-256 f3833ce1965394ae705e3793b50bdd007775b43da604251871deffed04f3bffd; decompress/parse as GeoJSON and select feature properties.shapeID for each crosswalk row.",
+      "limit": "Full-country source bytes were inspected during this review but are not included; row-level feature mapping must be independently rerun after restoration.",
+      "source_provider": "BCN Chile and OCHA ROLAC (as reported by geoBoundaries metadata)",
+      "license_attribution": "CC BY 3.0 IGO"
+    },
+    {
+      "source_id": "gb:PRY:ADM2",
+      "snapshot": "geoBoundaries-PRY-ADM2.geojson.gz",
+      "retrieved": "2026-10-05",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/f549eab/releaseData/gbOpen/PRY/ADM2/geoBoundaries-PRY-ADM2.geojson",
+      "resolved_commit": "f549eab25a258603ea32c9dc6cb11b7657796478",
+      "original_size_bytes": 45589273,
+      "original_sha256": "d42bd1f910070bf805e32dc46708230c91f58902a3c8792eda60928b22362858",
+      "compressed_size_bytes": 15941755,
+      "metadata_file": "geoBoundaries-PRY-ADM2-metaData.json",
+      "metadata_sha256": "d78f4e8a966cf3b077e62a33e8544e8c4bc08aab269da52f3b8d3602875851aa",
+      "reference_year": "2012",
+      "license": "CC BY 4.0",
+      "license_basis": "geoBoundaries metadata; redistributable attribution license",
+      "national_feature_count": 247,
+      "scope_feature_count": 47,
+      "match": "one-to-one shapeID and exact shapeName in scoped rows",
+      "license_status": "CC BY 4.0; licensed for attribution redistribution",
+      "retention": "restoration-only; full-country source exceeds 32 MiB evidence input cap; no source geometry redistributor retained",
+      "restoration": "Download the exact URL at resolved_commit f549eab25a258603ea32c9dc6cb11b7657796478; verify the full original file is 45589273 bytes with SHA-256 d42bd1f910070bf805e32dc46708230c91f58902a3c8792eda60928b22362858; decompress/parse as GeoJSON and select feature properties.shapeID for each crosswalk row.",
+      "limit": "Full-country source bytes were inspected during this review but are not included; row-level feature mapping must be independently rerun after restoration.",
+      "source_provider": "DGEEC Paraguay (as reported by geoBoundaries metadata)",
+      "license_attribution": "CC BY 4.0"
+    }
+  ],
+  "primary_reference_pages": [
+    {
+      "id": "subdere-chile-dpa-2023-announcement",
+      "url": "https://www.subdere.gov.cl/sala-de-prensa/subdere-publica-nueva-versi%C3%B3n-de-los-l%C3%ADmites-de-la-divisi%C3%B3n-pol%C3%ADtico-administrativa",
+      "retrieved": "2026-10-05",
+      "use": "Publisher description of current 2023 polygon layers and source responsibilities."
+    },
+    {
+      "id": "chile-dfl-1-18715-bcn",
+      "url": "https://www.bcn.cl/leychile/Navegar?idNorma=3438&idVersion=1989-12-05",
+      "retrieved": "2026-10-05",
+      "use": "Official Chile territorial administrative legal framework; commune-specific amendments remain to be reviewed."
+    },
+    {
+      "id": "ine-cartografia-digital-2022",
+      "url": "https://www.ine.gov.py/microdatos/cartografia-digital-2022.php",
+      "retrieved": "2026-10-05",
+      "use": "INE says the 2022 DPA lines are referential and intended for statistical fieldwork."
+    },
+    {
+      "id": "ine-district-geonode-metadata",
+      "url": "https://geonode.ine.gov.py/catalogue/csw_to_extra_format/fa775300-fe68-472d-9d75-e87594c2b093/distritos.html",
+      "retrieved": "2026-10-05",
+      "use": "Layer publication date, district attributes and approximate/statistical boundary limitation."
+    },
+    {
+      "id": "ine-public-information-license",
+      "url": "https://www.ine.gov.py/microdatos/license.php",
+      "retrieved": "2026-10-05",
+      "use": "Reuse terms for statistical attribute response: attribution and no implied endorsement."
+    },
+    {
+      "id": "paraguay-law-426-1973-bacn",
+      "url": "https://www.bacn.gov.py/leyes-paraguayas/2521/ley-n-426-establece-la-division-politica-del-territorio-de-la-republica",
+      "retrieved": "2026-10-05",
+      "use": "National departmental political division framework; subsequent district creation/modification laws and exact limits must be resolved."
+    },
+    {
+      "id": "geoboundaries-api-docs",
+      "url": "https://www.geoboundaries.org/api.html",
+      "retrieved": "2026-10-05",
+      "use": "geoBoundaries source/archive and API documentation."
+    },
+    {
+      "id": "natural-earth-admin1",
+      "url": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/",
+      "retrieved": "2026-10-05",
+      "use": "Issue metadata’s source entry point for the Asunción derived city record; the exact aggregation operation remains unverified."
+    }
+  ]
+}
