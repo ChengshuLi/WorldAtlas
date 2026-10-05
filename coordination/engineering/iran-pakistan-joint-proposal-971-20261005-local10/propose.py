@@ -4,14 +4,16 @@ import copy
 import gzip
 import importlib.util
 import json
+import math
 from pathlib import Path
 import sys
 
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / 'scripts'))
 from shapely import union_all
-from shapely.geometry import shape, mapping, LineString, MultiPolygon, GeometryCollection
+from shapely.geometry import shape, mapping, LineString, MultiPolygon, GeometryCollection, Point
 from evidence.immutable import Baseline, canonical_json, sha256
+from geographic_grid import projected_polygon
 
 PREVIOUS = 'coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/reproduce.py'
 spec = importlib.util.spec_from_file_location('reviewed_native_comparison', ROOT / PREVIOUS)
@@ -100,6 +102,50 @@ def source_agreement(left, right):
             'original_shared_elements_identical': True}
 
 
+def expected_component_cells(component, current, candidates, size):
+    """Bounded shape-only expectation at actual grid centres, not a compiled grid."""
+    region = projected_polygon(component, size)
+    old = {country: projected_polygon(g, size) for country, g in current.items()}
+    new = {country: projected_polygon(g, size) for country, g in candidates.items()}
+    validity = {'component': region.is_valid, 'baseline': {k:g.is_valid for k,g in old.items()},
+                'candidate': {k:g.is_valid for k,g in new.items()}}
+    if not validity['component'] or not all(validity['baseline'].values()) or not all(validity['candidate'].values()):
+        return {'size': size, 'status': 'unknown-invalid-projected-geometry',
+                'projected_validity': validity, 'counts': None, 'cells': [],
+                'compiled_grid_checked': False,
+                'limit': 'Invalid projected geometry cannot establish cell coverage. Original geographic and projected validity remain distinct; no repair or inferred assignment.'}
+    west, south, east, north = region.bounds
+    x0, x1 = max(0, math.floor(west)), min(size, math.ceil(east))
+    y0, y1 = max(0, math.floor(south)), min(size, math.ceil(north))
+    if (x1 - x0) * (y1 - y0) > 1000000:
+        raise ValueError('Case exceeds bounded cell-check domain')
+    rows, boundary, outside = [], [], 0
+    for y in range(y0, y1):
+        for x in range(x0, x1):
+            centre = Point(x + .5, y + .5)
+            if not region.contains(centre):
+                if region.covers(centre):
+                    boundary.append([x, y])
+                else:
+                    outside += 1
+                continue
+            rows.append({'x': x, 'y': y,
+                         'baseline_geometric_subjects': sorted(country for country, g in old.items() if g.covers(centre)),
+                         'candidate_geometric_subjects': sorted(country for country, g in new.items() if g.covers(centre))})
+    counts = {'baseline_uncovered': 0, 'candidate_uncovered': 0, 'candidate_single': 0, 'candidate_multiple': 0}
+    for row in rows:
+        counts['baseline_uncovered'] += not row['baseline_geometric_subjects']
+        n = len(row['candidate_geometric_subjects'])
+        counts['candidate_uncovered'] += n == 0
+        counts['candidate_single'] += n == 1
+        counts['candidate_multiple'] += n > 1
+    return {'size': size, 'status': 'bounded-shape-expectation', 'bbox_cell_count': (x1-x0)*(y1-y0), 'strict_component_centre_count': len(rows),
+            'outside_component_centre_count': outside, 'boundary_centres': boundary, 'counts': counts,
+            'projected_validity': validity,
+            'cells': rows, 'compiled_grid_checked': False,
+            'limit': 'Shape-only expectation over all strict projected component centres in this bounded box. Existing encoded grid, new scan-conversion/packing, boundary-centre treatment, pixels whose centres lie outside component, all other world cells and delivery remain unchecked.'}
+
+
 def propose(repo, commit, registry):
     base = Baseline(repo, registry['baseline_commit'], registry['baseline_files'])
     originals = Baseline(repo, commit, registry['source_files'])
@@ -147,6 +193,8 @@ def propose(repo, commit, registry):
         original_features[country] = matches[0]
         current[country] = native.valid_polygon(shape(matches[0]['geometry']))
     candidates, proof = build_candidate(component, current, sources)
+    grid_manifest = json.loads(base.read('data/canonical-grid/manifest.json'))
+    cells = expected_component_cells(component, current, candidates, grid_manifest['size'])
     after = []
     preservation = []
     for country in sorted(candidates):
@@ -167,6 +215,7 @@ def propose(repo, commit, registry):
             'source_agreement': agreement, 'source_assembly': assembly, 'source_parent_relations': parents,
             'current_sources_component_union_covers': union_all(list(sources.values())).covers(component),
             'proof': proof, 'preserved_before_features': preservation,
+            'expected_component_cell_coverage': cells,
             'candidate': {'type': 'FeatureCollection', 'features': after},
             'physical_classification': 'unknown', 'history_transfer': False,
             'geographic_approval': 'unapproved', 'installation_ready': False,

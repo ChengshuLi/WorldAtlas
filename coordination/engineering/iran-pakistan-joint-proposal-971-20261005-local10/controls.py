@@ -2,6 +2,9 @@ import copy
 import json
 from shapely.geometry import Polygon, box, shape, GeometryCollection, LineString
 from propose import build_candidate, source_agreement, separate_polygonal_result
+import propose
+from geographic_grid import cell_centre
+from unittest.mock import patch
 
 
 def rejects(callback):
@@ -70,6 +73,26 @@ def main():
     polygon, residual = separate_polygonal_result(GeometryCollection([tiny, line]))
     assert polygon.equals(tiny) and residual.equals(line)
     checks.append('all tiny areal geometry and nonpolygon remnants retained in separate representations')
+    size = 64
+    west, north = cell_centre(31, 30, size)
+    east, south = cell_centre(34, 33, size)
+    region = box(west, south, east, north)
+    old = {'IRN': box(-180, -80, west, 80), 'PAK': box(east, -80, 180, 80)}
+    new = {'IRN': box(-180, -80, 0, 80), 'PAK': box(0, -80, 180, 80)}
+    cells = propose.expected_component_cells(region, old, new, size)
+    assert cells['status'] == 'bounded-shape-expectation'
+    assert cells['strict_component_centre_count'] > 0
+    assert cells['counts']['baseline_uncovered'] == cells['strict_component_centre_count']
+    assert cells['counts']['candidate_single'] == cells['strict_component_centre_count']
+    assert cells['counts']['candidate_uncovered'] == cells['counts']['candidate_multiple'] == 0
+    assert cells['compiled_grid_checked'] is False
+    checks.append('bounded strict-centre geometric coverage distinguishes baseline from candidate without claiming compiled grid')
+    invalid = Polygon([(0, 0), (2, 1), (0, 1), (2, 0), (0, 0)])
+    with patch.object(propose, 'projected_polygon', return_value=invalid):
+        unknown = propose.expected_component_cells(region, old, new, size)
+    assert unknown['status'] == 'unknown-invalid-projected-geometry'
+    assert unknown['counts'] is None and unknown['cells'] == []
+    checks.append('invalid projection yields unknown rather than coverage predicates or repaired shapes')
     print(json.dumps({'method_id': 'joint-source-candidate', 'kind': 'positive-control',
                       'outcome': 'passed', 'check_count': len(checks), 'checks': checks}, sort_keys=True))
 
