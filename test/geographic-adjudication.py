@@ -203,5 +203,48 @@ class Adjudication(unittest.TestCase):
             water.adjudicate(report, envelope, files.__getitem__)
 
 
+def receipt_run(directory):
+    class Result(unittest.TextTestResult):
+        def addSuccess(self, test):
+            super().addSuccess(test)
+            self.successes = getattr(self, 'successes', []) + [test._testMethodName]
+    result = unittest.TextTestRunner(resultclass=Result, verbosity=2).run(
+        unittest.defaultTestLoader.loadTestsFromTestCase(Adjudication))
+    if not result.wasSuccessful() or result.skipped:
+        return 1
+    directory = pathlib.Path(directory)
+    if any(p.is_symlink() for p in [directory, *directory.absolute().parents]):
+        raise ValueError('Symlink receipt destination')
+    directory.mkdir()
+    paths = ['scripts/geographic_adjudication.py', 'scripts/check-geographic-regression.py',
+             'scripts/evidence/immutable.py', 'scripts/evidence/geometry.py',
+             'scripts/ellipsoidal_area.py', 'test/geographic-adjudication.py', SOURCE]
+    files = [{'path': name, 'sha256': hashlib.sha256((ROOT / name).read_bytes()).hexdigest()} for name in paths]
+    sample = Adjudication()
+    sample.setUp()
+    negative = box(-84.508983,46.463515,-84.488983,46.483515)
+    if not sample.lake.covers(sample.loss) or not sample.lake.contains(negative.centroid) or sample.lake.covers(negative):
+        raise ValueError('Native physical source controls changed')
+    summary = {'method_id': 'scoped-water-adjudication', 'outcome': 'passed', 'tests': result.testsRun,
+               'failures': len(result.failures), 'errors': len(result.errors), 'skipped': len(result.skipped),
+               'controls': sorted(result.successes), 'executed_files': files,
+               'native_source_binding': sample.ref,
+               'limits': ['Synthetic candidate losses against an original retained coarse current lake. No real territory edit, source suitability approval, hosted authority or publication.']}
+    (directory / 'results.json').write_bytes(canonical_json(summary))
+    for kind in ['positive-control', 'negative-control']:
+        selected = [name for name in summary['controls'] if (name == 'test_actual_detector_loss_inside_retained_native_water') == (kind == 'positive-control')]
+        diagnostic = {'whole_loss': mapping(sample.loss), 'whole_shape_supported': True} if kind == 'positive-control' else {
+            'whole_loss': mapping(negative), 'centroid_inside_water': True, 'whole_shape_supported': False,
+            'unsupported_geometry': mapping(negative.difference(sample.lake))}
+        (directory / (kind + '.json')).write_bytes(canonical_json({**summary, 'kind': kind,
+                                                               'controls': selected, 'diagnostic': diagnostic}))
+    return 0
+
+
 if __name__ == '__main__':
+    if '--receipts' in sys.argv:
+        import argparse
+        parser = argparse.ArgumentParser()
+        parser.add_argument('--receipts', required=True)
+        raise SystemExit(receipt_run(parser.parse_args().receipts))
     unittest.main()

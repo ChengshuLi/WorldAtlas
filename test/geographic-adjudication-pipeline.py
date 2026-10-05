@@ -38,6 +38,11 @@ if sys.argv[1] == 'prepare':
     source = fixture.repo / native.SOURCE
     source.parent.mkdir(parents=True, exist_ok=True)
     source.write_bytes(controls.raw)
+    # A fixed committed child stub tests wrapper plumbing only. The separate
+    # Node suite authenticates the envelope using actual common API validators.
+    (fixture.repo / 'scripts/geographic_adjudication.py').write_bytes((ROOT / 'scripts/geographic_adjudication.py').read_bytes())
+    (fixture.repo / 'scripts/check-geographic-adjudications.mjs').write_text(
+        "import fs from 'node:fs'; if(process.env.NODE_OPTIONS || process.env.NODE_PATH) throw Error('Unsafe Node environment'); process.stdout.write(fs.readFileSync(process.env.SYNTHETIC_ENVELOPE));\n")
     fixture.baseline = fixture.commit('synthetic-actual-git-native-water-baseline')
     fixture.write('data/geography/part.json', {'type': 'FeatureCollection', 'features': [
         {**feature, 'properties': {'id': key}, 'id': key} for key, feature in after.items()]})
@@ -59,6 +64,29 @@ if sys.argv[1] == 'prepare':
     print(json.dumps({'repo': str(fixture.repo), 'candidate': candidate, 'report': report,
                      'dossier': dossier, 'dossier_base64': base64.b64encode(subprocess.check_output(['git', '-C', str(fixture.repo), 'show', candidate + ':' + dossier_name])).decode(), 'source_base64': base64.b64encode(controls.raw).decode(),
                      'decoded_sha256': controls.ref['decoded_sha256']}))
+elif sys.argv[1] == 'wrapper':
+    import os
+    payload = json.load(sys.stdin)
+    repo = pathlib.Path(payload['repo'])
+    envelope = repo / 'synthetic-api-envelope.json'
+    envelope.write_text(json.dumps(payload['envelope']))
+    output = repo / 'wrapper-adjudication.json'
+    env = dict(os.environ)
+    env.pop('GH_TOKEN', None)
+    env.update(GEOGRAPHY_PR_NUMBER='32', GEOGRAPHY_REVIEWED_HEAD='b'*40,
+               SYNTHETIC_ENVELOPE=str(envelope), NODE_PATH='candidate-shadow-must-be-removed',
+               NODE_OPTIONS='--require candidate-shadow-must-be-removed',
+               GITHUB_OUTPUT=str(repo / 'trusted-job-output.txt'))
+    result = subprocess.run([sys.executable, '-I', '-B', str(repo / 'scripts/run-geographic-check.py'),
+                             '--baseline', payload['report']['baseline_commit'], '--candidate', payload['candidate'],
+                             '--out', str(output)], env=env, capture_output=True, text=True)
+    if result.returncode:
+        raise ValueError('Controlled wrapper path failed: ' + result.stderr + (output.read_text() if output.exists() else ''))
+    raw = output.read_bytes()
+    digest = hashlib.sha256(raw).hexdigest()
+    if (repo / 'trusted-job-output.txt').read_text() != 'report_sha256=' + digest + '\n':
+        raise ValueError('Trusted step output does not bind exact report bytes')
+    print(raw.decode(), end='')
 elif sys.argv[1] == 'validate':
     payload = json.load(sys.stdin)
     repo = payload['repo']

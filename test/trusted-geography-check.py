@@ -34,7 +34,8 @@ class Fixture:
         self.git('config', 'user.email', 'test@example.invalid')
         self.git('config', 'user.name', 'synthetic-control')
         for name in ['scripts/check-geographic-regression.py', 'scripts/evidence/immutable.py',
-                     'scripts/evidence/geometry.py', 'scripts/ellipsoidal_area.py', 'requirements.txt']:
+                     'scripts/evidence/geometry.py', 'scripts/ellipsoidal_area.py', 'requirements.txt',
+                     'package.json', '.github/evidence-policy.json', 'src/regional-import-gate.js']:
             target = self.repo / name
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(ROOT / name, target)
@@ -82,6 +83,46 @@ class TrustedCheckControls(unittest.TestCase):
     def tearDown(self):
         self.f.close()
 
+    def test_external_src_code_tampering_is_rejected(self):
+        (self.f.repo / 'src/regional-import-gate.js').write_text("throw Error('tampered trusted dependency')\n")
+        result, report = self.f.run(self.f.baseline, rewind=False)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIsNone(report)
+        self.assertIn('differs from immutable trusted baseline', result.stderr)
+
+    def test_external_package_and_policy_tampering_is_rejected(self):
+        for name in ['package.json', '.github/evidence-policy.json']:
+            target = self.f.repo / name
+            raw = target.read_bytes()
+            target.write_bytes(b'{}\n')
+            result, report = self.f.run(self.f.baseline, rewind=False)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIsNone(report)
+            self.assertIn('metadata or evidence policy differs', result.stderr)
+            target.write_bytes(raw)
+
+    def test_missing_or_symlinked_external_input_is_rejected(self):
+        target = self.f.repo / '.github/evidence-policy.json'
+        raw = target.read_bytes()
+        target.unlink()
+        result, report = self.f.run(self.f.baseline, rewind=False)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIsNone(report)
+        replacement = self.f.repo / 'policy-copy.json'
+        replacement.write_bytes(raw)
+        target.symlink_to(replacement)
+        result, report = self.f.run(self.f.baseline, rewind=False)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIsNone(report)
+
+    def test_untracked_src_import_shadow_is_rejected(self):
+        (self.f.repo / 'src/regional-import-gate').mkdir()
+        (self.f.repo / 'src/regional-import-gate/index.js').write_text("throw Error('shadow')\n")
+        result, report = self.f.run(self.f.baseline, rewind=False)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIsNone(report)
+        self.assertIn('Untracked or missing file', result.stderr)
+
     def test_shallow_partial_fetch_reads_lazy_blobs_without_candidate_code(self):
         self.f.write('data/geography/part.json', collection(left=.9))
         (self.f.repo / 'scripts/check-geographic-regression.py').write_text("raise RuntimeError('candidate code executed')\n")
@@ -94,7 +135,7 @@ class TrustedCheckControls(unittest.TestCase):
         def git(*args, env=None):
             return subprocess.run(['git', '-C', str(checkout), *args], capture_output=True, text=True, env=env)
         self.assertEqual(git('sparse-checkout', 'init', '--cone').returncode, 0)
-        self.assertEqual(git('sparse-checkout', 'set', 'scripts').returncode, 0)
+        self.assertEqual(git('sparse-checkout', 'set', 'scripts', 'src', '.github').returncode, 0)
         self.assertEqual(git('checkout', '--quiet', 'trusted').returncode, 0)
         self.assertEqual(git('rev-parse', '--is-shallow-repository').stdout.strip(), 'true')
         self.assertFalse((checkout / 'data').exists())

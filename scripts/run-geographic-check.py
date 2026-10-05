@@ -74,7 +74,7 @@ def verify_trusted_checkout(repo, baseline):
     # A byte-correct geometry.py is insufficient if an untracked evidence.py,
     # package initializer, extension module or cached bytecode can shadow it.
     expected = {}
-    for row in git(repo, 'ls-tree', '-r', '-z', baseline, '--', 'scripts').decode().split('\0'):
+    for row in git(repo, 'ls-tree', '-r', '-z', baseline, '--', 'scripts', 'src').decode().split('\0'):
         if not row:
             continue
         fields, name = row.split('\t', 1)
@@ -82,19 +82,24 @@ def verify_trusted_checkout(repo, baseline):
             raise ValueError('Trusted scripts must be ordinary committed files')
         expected[name] = fields.split()[2]
     actual = {}
-    for target in (repo / 'scripts').rglob('*'):
-        if target.is_symlink():
+    for namespace in ['scripts', 'src']:
+        if (repo / namespace).is_symlink():
             raise ValueError('Trusted scripts namespace cannot contain symlinks')
-        if target.is_file():
-            actual[str(target.relative_to(repo))] = target
+        for target in (repo / namespace).rglob('*'):
+            if target.is_symlink():
+                raise ValueError('Trusted scripts namespace cannot contain symlinks')
+            if target.is_file():
+                actual[str(target.relative_to(repo))] = target
     if set(actual) != set(expected):
         raise ValueError('Untracked or missing file in trusted scripts namespace')
     for name, target in actual.items():
         if target.read_bytes() != git(repo, 'cat-file', 'blob', expected[name]):
             raise ValueError('Checker differs from immutable trusted baseline: ' + name)
-    if (repo / 'requirements.txt').is_symlink() or (repo / 'requirements.txt').read_bytes() != read(repo, baseline, 'requirements.txt'):
-        raise ValueError('Trusted dependency requirements differ from baseline')
-    expected['requirements.txt'] = entry(repo, baseline, 'requirements.txt')['git_blob_oid']
+    for name in ['requirements.txt', 'package.json', '.github/evidence-policy.json']:
+        target = repo / name
+        if any(path.is_symlink() for path in [target, *target.parents]) or not target.is_file() or target.read_bytes() != read(repo, baseline, name):
+            raise ValueError('Trusted dependency metadata or evidence policy differs from baseline')
+        expected[name] = entry(repo, baseline, name)['git_blob_oid']
     return hashlib.sha256((json.dumps(expected, sort_keys=True, separators=(',', ':')) + '\n').encode()).hexdigest()
 
 

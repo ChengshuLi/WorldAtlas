@@ -24,7 +24,7 @@ listed in its owned outputs. Each dossier has exactly these fields:
   `target_context: "current-reference-geography"`.
 - `context`: the raw check's `trusted_code_inventory_sha256`,
   `baseline_input_inventory` and `candidate_input_inventory`. These bind the
-  consumed input bytes and trusted scripts namespace without a self-referential
+  consumed input bytes and trusted scripts/src namespaces and package/policy bytes without a self-referential
   candidate commit digest. Changes to neighbors or trusted code require a fresh
   dossier/review; adding evidence alone leaves geography input inventories intact.
 - `findings`: exact raw `{sha256, feature}` rows. Feature digests use shared

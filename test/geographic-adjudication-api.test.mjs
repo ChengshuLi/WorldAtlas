@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';
 import fs from 'node:fs';
+import path from 'node:path';
 import {gunzipSync} from 'node:zlib';
 import {bindingHash} from '../scripts/geographic-adjudication-api.mjs';
 
@@ -104,6 +105,13 @@ test('actual Git CLI loss passes through real evidence validators and native who
   assert.equal(accepted.authority_sha256,envelope.authority_sha256);
   assert.equal(control.report.gate_status,'blocked','raw actual CLI lacked real hosted authority');
   assert.equal(control.report.status,'regressions-found');
+  const wrapper=spawnSync(python,['-I','-B','test/geographic-adjudication-pipeline.py','wrapper'],{
+   input:JSON.stringify({...control,envelope}),encoding:'utf8',timeout:120000,maxBuffer:8*1024*1024,
+   env:{...process.env,PATH:path.dirname(process.execPath)+path.delimiter+process.env.PATH}});
+  assert.equal(wrapper.status,0,wrapper.stderr);const job=JSON.parse(wrapper.stdout);
+  assert.equal(job.gate_status,'passed');assert.equal(job.status,'regressions-found');
+  assert.equal(job.adjudication.authority_sha256,envelope.authority_sha256);
+  assert.equal(job.source_approval,false);assert.equal(job.candidate_code_executed,false);
   // Replacing the actual combined Git dossier after the API bytes were checked
   // is rejected by whole-file bindings, despite the valid authority carrier.
   const changed={...control,envelope,candidate:control.report.baseline_commit};

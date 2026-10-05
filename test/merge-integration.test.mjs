@@ -520,3 +520,22 @@ test('raw unresolved findings cannot be relabeled as a successful geography chec
   published:false,source_approval:false,gate_status:'passed',status:'regressions-found',regressions:1
  })}),/findings remain unresolved/); assert.equal(f.writes.length,0);
 });
+
+test('trusted geography outputs bind attempted artifact digest through the privileged merge job',()=>{
+ const workflow=fs.readFileSync('.github/workflows/worker-merge.yml','utf8');
+ const geography=workflow.match(/\n  geography:\n([\s\S]*?)(?=\n  integration:)/)[1];
+ assert.match(geography,/report_sha256: \$\{\{ steps\.check\.outputs\.report_sha256 \}\}/);
+ assert.match(geography,/artifact_name: \$\{\{ steps\.check\.outputs\.artifact_name \}\}/);
+ assert.match(geography,/id: check/);
+ assert.match(geography,/GEOGRAPHY_PR_NUMBER: \$\{\{ inputs\.pr_number \}\}/);
+ assert.match(geography,/GEOGRAPHY_REVIEWED_HEAD: \$\{\{ inputs\.expected_head \}\}/);
+ assert.match(geography,/GEOGRAPHY_ARTIFACT_NAME: geography-\$\{\{ inputs\.request_id \}\}-\$\{\{ github\.run_attempt \}\}/);
+ assert.match(geography,/echo "artifact_name=\$GEOGRAPHY_ARTIFACT_NAME" >> "\$GITHUB_OUTPUT"/);
+ assert.match(workflow,/GEOGRAPHY_REPORT_SHA256: \$\{\{ needs\.geography\.outputs\.report_sha256 \}\}/);
+ assert.match(workflow,/GEOGRAPHY_ARTIFACT_NAME: \$\{\{ needs\.geography\.outputs\.artifact_name \}\}/);
+ const runner=fs.readFileSync('scripts/run-worker-merge.mjs','utf8');
+ assert.match(runner,/geographyReportLoader: \(\) => loadGeographicReport/);
+ assert.match(runner,/runId: process\.env\.GITHUB_RUN_ID/);
+ assert.match(runner,/expectedHash: process\.env\.GEOGRAPHY_REPORT_SHA256/);
+ assert.doesNotMatch(workflow,/actions\/download-artifact/,'privileged job must not extract an unverified archive');
+});
