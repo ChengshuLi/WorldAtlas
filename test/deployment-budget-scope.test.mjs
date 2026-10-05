@@ -176,11 +176,15 @@ test('public review attachments, annotation plans, audited inputs and copied par
     inputFixture({'data/macro-foundation/world-review-projection.json': {location_parts: [attachment.slice(5)]}}),
     inputFixture({'data/hierarchy-report.json': {change_parts: [attachment.slice(5)]}}),
     inputFixture({'data/reference-attributes/index.json': {parts: ['../regional-review/example/public.json']}}),
+    inputFixture({'data/geographic-repair-evidence/index.json': {files: {'archive.json.gz': {archive_path: '../regional-review/example/public.json'}}}}),
+    inputFixture({'data/ownership-history/index.json': {parts: [{path: '../%72egional-review/example/public.json'}]}}),
+    inputFixture({'data/ownership-history/index.json': {parts: [{path: '../regional-review\\example\\public.json'}]}}),
   ]) {
     const inputs = await packageResearchInputs({route: `/repos/${repository}`, base: before, api: fixture.api});
     assert.equal(classifyBudgetFiles([file(attachment)], inputs).full, true);
     assert.equal(classifyBudgetFiles([file('research/geography/example/copy.json', {status: 'renamed', previous_filename: attachment})], inputs).full, true);
-    assert.equal(classifyBudgetFiles([file('data/regional-review/example/private.json')], inputs).full, false);
+    assert.equal(classifyBudgetFiles([file('data/regional-review/example/private.json')], inputs).full, true, 'a referenced packet may have transitive inputs');
+    assert.equal(classifyBudgetFiles([file('data/regional-review/unpublished/private.json')], inputs).full, false);
   }
   const inputs = new Set();
   for (const name of ['src/main.js', 'data/hierarchy.json', 'scripts/import-history.mjs', 'drizzle/0002.sql']) {
@@ -194,8 +198,11 @@ test('unavailable, capped, malformed, symlinked or hash-mismatched package depen
     async () => { throw Error('unavailable'); },
     async () => ({truncated: true, tree: fixture.tree}),
     async () => ({truncated: false, tree: []}),
+    ...['vite.config.mjs', 'postcss.config.js', 'tsconfig.json'].map(file => async () => ({truncated: false, tree: [...fixture.tree, {path: file, type: 'blob', mode: '100644', sha: 'f'.repeat(40), size: 0}]})),
+    ...['120000', '160000'].map(mode => async () => ({truncated: false, tree: [...fixture.tree, {path: 'data/typed-prepared-v1.json', type: mode === '120000' ? 'blob' : 'commit', mode, sha: 'f'.repeat(40), size: 0}]})),
+    inputFixture({'data/ownership-history/index.json': {parts: [{path: 'file:../external.json'}]}}).api,
     async () => ({truncated: false, tree: [...fixture.tree, {path: 'src/new-build-reader.js', type: 'blob', mode: '100644', sha: 'f'.repeat(40), size: 0}]}),
-    async route => route.includes('/git/trees/') ? {truncated: false, tree: fixture.tree.map(row => row.path === 'database.mjs' ? {...row, sha: 'f'.repeat(40)} : row)} : fixture.api(route),
+    ...['database.mjs', 'scripts/boundary-version-hash.py', 'data/ownership-history/algorithms/exact/majority.py'].map(file => async route => route.includes('/git/trees/') ? {truncated: false, tree: fixture.tree.map(row => row.path === file ? {...row, sha: 'f'.repeat(40)} : row)} : fixture.api(route)),
     async route => route.includes('/git/trees/') ? {truncated: false, tree: fixture.tree.map(row => ({...row, mode: '120000'}))} : fixture.api(route),
     async route => route.includes('/git/trees/') ? fixture.api(route) : {...await fixture.api(route), content: Buffer.from('{}').toString('base64')},
     inputFixture({'data/world-review.json': 'invalid manifest'}).api,

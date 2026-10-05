@@ -7,6 +7,16 @@ import {createHash} from 'node:crypto';
 export const BUILD_MODULE_PINS = Object.freeze({
   "attribute-records.mjs": "4e2f50a9035223395975f2638e4b887f20ef38e4",
   "data/observation-registry-history/base-v1.json": "91c6e99190a1a90be820a5b3ca8dd5acd8e9fb00",
+  "data/ownership-history/algorithms/exact/ellipsoidal_area.py": "518dcaada9e94907d7d886636dcbf928bd0788fa",
+  "data/ownership-history/algorithms/exact/majority.py": "859b8e877f3a4199b848fbcf0949d9c3c10d8422",
+  "data/ownership-history/algorithms/exact/prepare-ownership.py": "93d7a5fc759fe854521bdecc0b74188a78a9f2c2",
+  "data/ownership-history/algorithms/incremental/e08d67bc39bde0e1-b33afcb77b20715f/prepare-ownership-incremental.py": "281a45a3f71c6fedf9e9f371a62345533fee8604",
+  "data/ownership-history/algorithms/incremental/f44affea3bf822e7-b33afcb77b20715f/prepare-ownership-incremental.py": "281a45a3f71c6fedf9e9f371a62345533fee8604",
+  "data/ownership-history/algorithms/incremental/prepare-ownership-incremental.py": "cc42970d339ea9a12e8f042c3e46509b8ec453cf",
+  "data/ownership-history/algorithms/majority-refinement.py": "6d79206e9122fb3f2f0ffe961a4bc57c894d5b07",
+  "data/ownership-history/algorithms/majority.py": "5d889e48489c17a709fd73d747d38dfac1d70d85",
+  "data/ownership-history/algorithms/prepare-ownership.py": "3e164fd585b94844876acc8877cb5d23db511c0f",
+  "data/ownership-history/algorithms/refine-ownership-threshold.py": "f6fdaf11c87c27ed2c87b054432bcb7eb2c9cfae",
   "database.mjs": "6a845801f610773d32ecd54aebd902c0ffc2ddd6",
   "derived.mjs": "ca020163448baf702d6ececcf49731b6478cc1a7",
   "geographic-archive.mjs": "314623f84b480a9d72cce1f3c602bb19fcadb2fc",
@@ -44,6 +54,7 @@ export const BUILD_MODULE_PINS = Object.freeze({
   "reference-archive.mjs": "2dac27d0f10eb4a3a25529d33f2dc0c29be7e2c0",
   "reference.mjs": "ef221489dea59894c8358b1376fe5830f3e2fc2a",
   "requirements.txt": "a51a1fe5d483cadf8c6bbfb8390f8c5bbad61f9c",
+  "scripts/boundary-version-hash.py": "8dda3929ca08464172513ceba73a4e03885ba926",
   "scripts/build-hosted.mjs": "247fbd3a0161e3167848506e73f4555eefd79218",
   "scripts/build-static.mjs": "acafda278cec70f4adf200e811a23449a4341e83",
   "scripts/check-prepared.mjs": "238d7a7526a4fc6e2b2e55ff8a56916e57ea1938",
@@ -117,6 +128,7 @@ const manifests = [
   ['data/world-review.json', 'data'], ['data/hierarchy-report.json', 'data'],
   ['data/macro-foundation/world-review-projection.json', 'data'],
   ['data/source-quality-reviews/index.json', 'data'],
+  ['data/geographic-repair-evidence/index.json', 'data/geographic-repair-evidence'],
   ['data/canonical-grid/manifest.json', 'data/canonical-grid'],
   ...['ownership-history', 'ownership-runtime', 'reference-attributes', 'cliopatria'].map(name => [`data/${name}/index.json`, `data/${name}`]),
   ...['dated-reference-names', 'demographic-evidence', 'population-ghsl'].flatMap(name =>
@@ -134,7 +146,9 @@ export async function packageResearchInputs({route, base, api}) {
     entries.set(entry.path, entry);
   }
   for (const entry of tree.tree) {
-    if (entry.type !== 'tree' && /^(?:src|hosted|public)\//.test(entry.path) && !Object.hasOwn(BUILD_MODULE_PINS, entry.path)) throw Error(`Unreviewed package source: ${entry.path}`);
+    if (entry.path.startsWith('data/') && (entry.type !== 'tree' && (entry.type !== 'blob' || !['100644', '100755'].includes(entry.mode)))) throw Error('Nonordinary data input tree entry');
+    if (/^(?:vite\.config\.(?:js|mjs|cjs|ts|mts|cts)|postcss\.config\.[^/]+|\.postcssrc[^/]*|tsconfig[^/]*\.json)$/.test(entry.path) && !Object.hasOwn(BUILD_MODULE_PINS, entry.path)) throw Error('Unreviewed build configuration');
+    if (entry.type !== 'tree' && (/^(?:src|hosted|public)\//.test(entry.path) || (/^data\/ownership-history\/.+\.py$/.test(entry.path) || entry.path.startsWith('data/ownership-history/algorithms/'))) && !Object.hasOwn(BUILD_MODULE_PINS, entry.path)) throw Error(`Unreviewed package source: ${entry.path}`);
   }
   for (const [file, sha] of Object.entries(BUILD_MODULE_PINS)) {
     const entry = entries.get(file);
@@ -169,9 +183,16 @@ export async function packageResearchInputs({route, base, api}) {
     if (typeof value === 'string') {
       // Inspect every string/key, rather than assuming only one schema's path
       // fields. URLs/prose cannot match the normalized research namespaces.
-      if (!value.includes('\\')) {
-        const file = path.posix.normalize(path.posix.join(root, value));
-        if (researchPath(file)) inputs.add(file);
+      if (/^file:/i.test(value.trim().replace(/[\t\r\n]/g, ''))) throw Error('External file URL in package input manifest');
+      {
+        const variants = [value];
+        // URL-based committed readers decode escaped file names. Inspect the
+        // decoded form too; literal fs/path readers still use the first form.
+        try { variants.push(decodeURIComponent(value)); } catch { /* prose may contain literal percent signs */ }
+        for (const variant of variants) {
+          const file = path.posix.normalize(path.posix.join(root, variant.replaceAll('\\', '/')));
+          if (researchPath(file)) inputs.add(file);
+        }
       }
     } else if (Array.isArray(value)) value.forEach(row => collect(row, root));
     else if (value && typeof value === 'object') for (const [key, row] of Object.entries(value)) {
@@ -191,4 +212,8 @@ export async function packageResearchInputs({route, base, api}) {
     }));
   }
   return inputs;
+}
+
+export function researchPacket(file) {
+  return researchPath(file) ? file.match(/^(?:data\/regional-review|research\/(?:geography|campaigns))\/[a-z0-9][a-z0-9-]{0,63}\//)[0] : null;
 }

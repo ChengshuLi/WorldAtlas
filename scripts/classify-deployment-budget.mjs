@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {researchPath, packageResearchInputs} from './package-research-inputs.mjs';
+import {researchPath, researchPacket, packageResearchInputs} from './package-research-inputs.mjs';
 
 // These controls neither produce nor enter the deployment archive. New scripts,
 // including this classifier, remain full until their purpose is reviewed here.
@@ -33,8 +33,9 @@ export function packageIndependentPath(file) {
 }
 
 export function classifyBudgetFiles(files, researchInputs) {
+  const referencedPackets = new Set(researchInputs instanceof Set ? [...researchInputs].map(researchPacket).filter(Boolean) : []);
   const independent = file => packageIndependentPath(file) ||
-    (researchPath(file) && researchInputs instanceof Set && !researchInputs.has(file));
+    (researchPath(file) && researchInputs instanceof Set && !referencedPackets.has(researchPacket(file)));
   if (!Array.isArray(files)) throw Error('Missing changed-file inventory');
   const paths = new Set();
   for (const file of files) {
