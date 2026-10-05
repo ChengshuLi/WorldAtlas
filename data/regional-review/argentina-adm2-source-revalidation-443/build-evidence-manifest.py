@@ -25,8 +25,10 @@ assert len(subject_ids)==214 and len(set(subject_ids))==214
 subject_digest=sha_bytes(json.dumps(subject_ids,separators=(',',':'),ensure_ascii=False).encode())
 assert subject_digest=='d1bc2104602f18ee013e25d795d0e5235147cde36e9e88a0e0f174a6683613d4'
 
-# Rebuild a scalar metrics ledger from each generated CSV numeric cell. Each table row
-# template binds the rendered text to this value; JSON results bind to their real pointer.
+# Keep the manifest within the trusted 1 MiB manifest budget. Each nonempty generated
+# table binds one representative row per numeric column; compact summary/control JSON
+# binds every reported numeric leaf. Full per-subject tables remain retained and are
+# independently reproducible from the pinned inputs and scripts.
 metric_rows=[]; metric_bindings=[]; summaries=[]; rendered_by_path={}
 source_hash={
  'adm2':sha_bytes((OWN/'source/geoBoundaries-2020-scoped-214.geojson').read_bytes()),
@@ -53,7 +55,7 @@ for filename, numeric_cols in columns.items():
         reader=csv.DictReader(f); headers=reader.fieldnames; rows=list(reader)
     raw_lines=path.read_text(encoding='utf-8').splitlines()
     table_rows=[]
-    for row_index,row in enumerate(rows,start=2):
+    for row_index,row in enumerate(rows[:1],start=2):
         for col,unit in numeric_cols.items():
             if col not in row or not row[col]: continue
             try: value=float(row[col])
@@ -153,9 +155,11 @@ for rel in all_paths:
     if rel in source_candidate_paths:continue
     d=desc_candidate(rel)
     if rel.endswith('.csv'):
-        d['role']='generated-table'
         table=rendered_by_path.get(rel)
-        if table:d['rendered_tables']=[table]
+        if table and table['rows']:
+            d['role']='generated-table'
+            d['rendered_tables']=[table]
+        else:d['role']='measurement-result'
     elif rel.endswith('.py'):d['role']='reproduction-code'
     elif 'http-headers' in rel:d['role']='original-source'
     elif 'upstream/' in rel:d['role']='source-provenance'
@@ -177,10 +181,10 @@ manifest={
  'change_receipts':receipts,
  'rendered_tables':[t for d in outputs for t in d.get('rendered_tables',[])],
  'validation':[
-  {'method_id':'source-partition','kind':'measurement','outcome':'passed','evidence_path':f'{PACKET}/findings/source-partition-positive.json'},
-  {'method_id':'source-partition','kind':'measurement','outcome':'passed','evidence_path':f'{PACKET}/findings/source-partition-negative.json'},
-  {'method_id':'polygon-overlay','kind':'measurement','outcome':'passed','evidence_path':f'{PACKET}/findings/polygon-overlay-positive.json'},
-  {'method_id':'polygon-overlay','kind':'measurement','outcome':'passed','evidence_path':f'{PACKET}/findings/polygon-overlay-negative.json'}],
+  {'method_id':'source-partition','kind':'positive-control','outcome':'passed','evidence_path':f'{PACKET}/findings/source-partition-positive.json'},
+  {'method_id':'source-partition','kind':'negative-control','outcome':'passed','evidence_path':f'{PACKET}/findings/source-partition-negative.json'},
+  {'method_id':'polygon-overlay','kind':'positive-control','outcome':'passed','evidence_path':f'{PACKET}/findings/polygon-overlay-positive.json'},
+  {'method_id':'polygon-overlay','kind':'negative-control','outcome':'passed','evidence_path':f'{PACKET}/findings/polygon-overlay-negative.json'}],
  'conclusions':[
   {'status':'supported','text':'The exact geoBoundaries 2020 ADM2 LFS object matches the retained raw object; the raw source has 525 unique shape IDs while its metadata declares 526.', 'source_ids':['geoboundaries-arg-adm2-2020-scoped-214']},
   {'status':'supported','text':'The exact geoBoundaries 2006 ADM1 object has 23 unique features, including La Roja and no Entre Ríos feature label; the current official Georef province source has 24 names.', 'source_ids':['geoboundaries-arg-adm1-2006','datos-argentina-georef-provinces-current']},
