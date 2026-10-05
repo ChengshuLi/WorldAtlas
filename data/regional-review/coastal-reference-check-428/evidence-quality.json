@@ -1161,5 +1161,232 @@
       "method_id": "all-retained-georgia-change-notes-hashed",
       "outcome": "passed"
     }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "Chatham:atlas_to_tiger_2018",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/0/iou/atlas_to_tiger_2018"
+    },
+    {
+      "metric_id": "Chatham:atlas_to_tiger_2025",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/0/iou/atlas_to_tiger_2025"
+    },
+    {
+      "metric_id": "Chatham:atlas_to_tiger_2026",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/0/iou/atlas_to_tiger_2026"
+    },
+    {
+      "metric_id": "Chatham:tiger_2018_to_tiger_2025",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/0/iou/tiger_2018_to_tiger_2025"
+    },
+    {
+      "metric_id": "Chatham:tiger_2025_to_tiger_2026",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/0/iou/tiger_2025_to_tiger_2026"
+    },
+    {
+      "metric_id": "Glynn:atlas_to_tiger_2018",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/1/iou/atlas_to_tiger_2018"
+    },
+    {
+      "metric_id": "Glynn:atlas_to_tiger_2025",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/1/iou/atlas_to_tiger_2025"
+    },
+    {
+      "metric_id": "Glynn:atlas_to_tiger_2026",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/1/iou/atlas_to_tiger_2026"
+    },
+    {
+      "metric_id": "Glynn:tiger_2018_to_tiger_2025",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/1/iou/tiger_2018_to_tiger_2025"
+    },
+    {
+      "metric_id": "Glynn:tiger_2025_to_tiger_2026",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/1/iou/tiger_2025_to_tiger_2026"
+    },
+    {
+      "metric_id": "McIntosh:atlas_to_tiger_2018",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/2/iou/atlas_to_tiger_2018"
+    },
+    {
+      "metric_id": "McIntosh:atlas_to_tiger_2025",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/2/iou/atlas_to_tiger_2025"
+    },
+    {
+      "metric_id": "McIntosh:atlas_to_tiger_2026",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/2/iou/atlas_to_tiger_2026"
+    },
+    {
+      "metric_id": "McIntosh:tiger_2018_to_tiger_2025",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/2/iou/tiger_2018_to_tiger_2025"
+    },
+    {
+      "metric_id": "McIntosh:tiger_2025_to_tiger_2026",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/2/iou/tiger_2025_to_tiger_2026"
+    },
+    {
+      "metric_id": "Camden:atlas_to_tiger_2018",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/3/iou/atlas_to_tiger_2018"
+    },
+    {
+      "metric_id": "Camden:atlas_to_tiger_2025",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/3/iou/atlas_to_tiger_2025"
+    },
+    {
+      "metric_id": "Camden:atlas_to_tiger_2026",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/3/iou/atlas_to_tiger_2026"
+    },
+    {
+      "metric_id": "Camden:tiger_2018_to_tiger_2025",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/3/iou/tiger_2018_to_tiger_2025"
+    },
+    {
+      "metric_id": "Camden:tiger_2025_to_tiger_2026",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/3/iou/tiger_2025_to_tiger_2026"
+    },
+    {
+      "metric_id": "Liberty:atlas_to_tiger_2018",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/4/iou/atlas_to_tiger_2018"
+    },
+    {
+      "metric_id": "Liberty:atlas_to_tiger_2025",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/4/iou/atlas_to_tiger_2025"
+    },
+    {
+      "metric_id": "Liberty:atlas_to_tiger_2026",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/4/iou/atlas_to_tiger_2026"
+    },
+    {
+      "metric_id": "Liberty:tiger_2018_to_tiger_2025",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/4/iou/tiger_2018_to_tiger_2025"
+    },
+    {
+      "metric_id": "Liberty:tiger_2025_to_tiger_2026",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/4/iou/tiger_2025_to_tiger_2026"
+    },
+    {
+      "metric_id": "Schley:atlas_to_tiger_2018",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/5/iou/atlas_to_tiger_2018"
+    },
+    {
+      "metric_id": "Schley:atlas_to_tiger_2025",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/5/iou/atlas_to_tiger_2025"
+    },
+    {
+      "metric_id": "Schley:atlas_to_tiger_2026",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/5/iou/atlas_to_tiger_2026"
+    },
+    {
+      "metric_id": "Schley:tiger_2018_to_tiger_2025",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/5/iou/tiger_2018_to_tiger_2025"
+    },
+    {
+      "metric_id": "Schley:tiger_2025_to_tiger_2026",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/5/iou/tiger_2025_to_tiger_2026"
+    },
+    {
+      "metric_id": "Pike:atlas_to_tiger_2018",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/6/iou/atlas_to_tiger_2018"
+    },
+    {
+      "metric_id": "Pike:atlas_to_tiger_2025",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/6/iou/atlas_to_tiger_2025"
+    },
+    {
+      "metric_id": "Pike:atlas_to_tiger_2026",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/6/iou/atlas_to_tiger_2026"
+    },
+    {
+      "metric_id": "Pike:tiger_2018_to_tiger_2025",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/6/iou/tiger_2018_to_tiger_2025"
+    },
+    {
+      "metric_id": "Pike:tiger_2025_to_tiger_2026",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/6/iou/tiger_2025_to_tiger_2026"
+    },
+    {
+      "metric_id": "Terrell:atlas_to_tiger_2018",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/7/iou/atlas_to_tiger_2018"
+    },
+    {
+      "metric_id": "Terrell:atlas_to_tiger_2025",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/7/iou/atlas_to_tiger_2025"
+    },
+    {
+      "metric_id": "Terrell:atlas_to_tiger_2026",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/7/iou/atlas_to_tiger_2026"
+    },
+    {
+      "metric_id": "Terrell:tiger_2018_to_tiger_2025",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/7/iou/tiger_2018_to_tiger_2025"
+    },
+    {
+      "metric_id": "Terrell:tiger_2025_to_tiger_2026",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/7/iou/tiger_2025_to_tiger_2026"
+    },
+    {
+      "metric_id": "Chatham:tiger2026-minus-atlas-share-of-areawater",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/0/atlas_2018_2026_difference_km2/tiger_minus_atlas_as_share_of_census_areawater"
+    },
+    {
+      "metric_id": "Glynn:tiger2026-minus-atlas-share-of-areawater",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/1/atlas_2018_2026_difference_km2/tiger_minus_atlas_as_share_of_census_areawater"
+    },
+    {
+      "metric_id": "McIntosh:tiger2026-minus-atlas-share-of-areawater",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/2/atlas_2018_2026_difference_km2/tiger_minus_atlas_as_share_of_census_areawater"
+    },
+    {
+      "metric_id": "Camden:tiger2026-minus-atlas-share-of-areawater",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/3/atlas_2018_2026_difference_km2/tiger_minus_atlas_as_share_of_census_areawater"
+    },
+    {
+      "metric_id": "Liberty:tiger2026-minus-atlas-share-of-areawater",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/4/atlas_2018_2026_difference_km2/tiger_minus_atlas_as_share_of_census_areawater"
+    }
   ]
 }
