@@ -74,6 +74,22 @@ def main() -> None:
         props = feature["properties"]
         if props.get("name") != record["name"] or props.get("parent_id") != record["parent_id"]:
             raise SystemExit(f"Historical name/parent changed in provenance receipt: {record['id']}")
+    hierarchy_path = CONTRACT["baseline_paths"]["hierarchy"]
+    hierarchy_rows = json.loads(subprocess.check_output([
+        "git", "show", f"{baseline}:{hierarchy_path}"], cwd=ROOT))
+    hierarchy = {row["id"]: row for row in hierarchy_rows}
+    if len(hierarchy) != len(hierarchy_rows):
+        raise SystemExit("Pinned hierarchy has duplicate IDs")
+    for record in packet["sierra_leone_rows"] + packet["togo_read_only_context"]:
+        chain, parent, seen = [], record["parent_id"], {record["id"]}
+        while parent is not None:
+            if parent in seen or parent not in hierarchy:
+                raise SystemExit(f"Canonical hierarchy chain is missing or cyclic for {record['id']}")
+            seen.add(parent)
+            chain.append(parent)
+            parent = hierarchy[parent].get("parent_id")
+        if chain != record["parent_chain"]:
+            raise SystemExit(f"Parent chain differs from pinned hierarchy for {record['id']}")
     result = {
         "version": 1,
         "method_id": "country-license-provenance",
@@ -87,7 +103,7 @@ def main() -> None:
             "foreign_country_metadata_rejected": True,
             "injected_togo_license_rejected_for_sle": True,
         },
-        "identity_preservation": "all 12 subject IDs, names, and direct parent IDs match the pinned canonical partition",
+        "identity_preservation": "all 12 subject IDs, names, direct parents, and all 49 SLE/TGO parent chains match pinned canonical data",
         "limits": ["Metadata-declared licensing is not independently adjudicated.", "No boundary or regional approval is established."],
     }
     (HERE / "verification-results.json").write_text(json.dumps(result, sort_keys=True, indent=2) + "\n")

@@ -59,6 +59,12 @@
         "hash_kind": "file-bytes",
         "path": "data/geography/part-22.json",
         "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+      },
+      {
+        "bytes": 10164089,
+        "hash_kind": "file-bytes",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
       }
     ],
     "pin_files": {
@@ -232,40 +238,40 @@
   ],
   "outputs": [
     {
-      "bytes": 2674,
+      "bytes": 2750,
       "hash_kind": "file-bytes",
       "path": "research/geography/sierra-leone-license-provenance-746/README.md",
-      "sha256": "207bfcbd66f7ecaeb5384302f741cc0a9167a60fb93db878f3a7414b28546d84"
+      "sha256": "760a1aae1bfca8bc3f5223aa4bfe5ece2a7534a45122f92436467afd99a84fac"
     },
     {
-      "bytes": 4040,
+      "bytes": 4080,
       "hash_kind": "file-bytes",
       "path": "research/geography/sierra-leone-license-provenance-746/issue-contract.json",
-      "sha256": "2c002fc2c6e4287266762a64bee8aa2ebdf34d44b34a8ad5d533ad09257206c6"
+      "sha256": "37ab337e0e3dc333bfbb9fc337a58ebe76df9d81a7f14f15c7610afbdd0dcdc1"
     },
     {
-      "bytes": 31803,
+      "bytes": 45968,
       "hash_kind": "file-bytes",
       "path": "research/geography/sierra-leone-license-provenance-746/license-provenance.json",
-      "sha256": "df8144b83c788a6236cc19b04a61fc78728182294d03660e7b41cd8a5e43186f"
+      "sha256": "3b106d961b9b1a3c6ee691f8c8ab89904d55270fe985183c652fa702bdec6763"
     },
     {
-      "bytes": 13215,
+      "bytes": 14286,
       "hash_kind": "file-bytes",
       "path": "research/geography/sierra-leone-license-provenance-746/reproduce.py",
-      "sha256": "063f22b0ec578d45155c86741cba1753c868d6acfebb718b9a2870fbd2bc8638"
+      "sha256": "b594084345cff8133266bce6f902a0535231b72739d6ea9bf00ad465fea6f1a9"
     },
     {
-      "bytes": 4685,
+      "bytes": 5661,
       "hash_kind": "file-bytes",
       "path": "research/geography/sierra-leone-license-provenance-746/verify.py",
-      "sha256": "ac631679aa08a07867033aa083d342bc78854df2043baca8631d10416cf931d4"
+      "sha256": "7ba6e88e75803ea4b9492216d003db94f41cb7556f03891d43f965b815014d8e"
     },
     {
-      "bytes": 771,
+      "bytes": 789,
       "hash_kind": "file-bytes",
       "path": "research/geography/sierra-leone-license-provenance-746/verification-results.json",
-      "sha256": "88526cfe48313ae98bc625eadc1d824b61b919c9467882b6427c9aa7df394c38"
+      "sha256": "799f34a7287c6121156c4eb128b7dfc8d6d8c07271bfe9b3fa46cc92298ae949"
     }
   ],
   "sources": [
@@ -351,7 +357,7 @@
     "method_id": "country-license-provenance",
     "outcome": "passed",
     "path": "research/geography/sierra-leone-license-provenance-746/verification-results.json",
-    "sha256": "88526cfe48313ae98bc625eadc1d824b61b919c9467882b6427c9aa7df394c38"
+    "sha256": "799f34a7287c6121156c4eb128b7dfc8d6d8c07271bfe9b3fa46cc92298ae949"
   },
   "version": 1,
   "worker_id": "geo-1c67a91d-3251-4b37-9b39-afca30545bad"

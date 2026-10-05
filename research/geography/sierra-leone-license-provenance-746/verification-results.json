@@ -1,6 +1,6 @@
 {
   "equal_runs": true,
-  "identity_preservation": "all 12 subject IDs, names, and direct parent IDs match the pinned canonical partition",
+  "identity_preservation": "all 12 subject IDs, names, direct parents, and all 49 SLE/TGO parent chains match pinned canonical data",
   "kind": "source",
   "limits": [
     "Metadata-declared licensing is not independently adjudicated.",
@@ -12,8 +12,8 @@
     "injected_togo_license_rejected_for_sle": true
   },
   "outcome": "passed",
-  "run_one_sha256": "df8144b83c788a6236cc19b04a61fc78728182294d03660e7b41cd8a5e43186f",
-  "run_two_sha256": "df8144b83c788a6236cc19b04a61fc78728182294d03660e7b41cd8a5e43186f",
+  "run_one_sha256": "3b106d961b9b1a3c6ee691f8c8ab89904d55270fe985183c652fa702bdec6763",
+  "run_two_sha256": "3b106d961b9b1a3c6ee691f8c8ab89904d55270fe985183c652fa702bdec6763",
   "scope": {
     "sierra_leone_subjects": 12,
     "togo_context_rows": 37

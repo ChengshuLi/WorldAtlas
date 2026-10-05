@@ -20,4 +20,4 @@ python research/geography/sierra-leone-license-provenance-746/verify.py
 node scripts/evidence-quality.mjs research/geography/sierra-leone-license-provenance-746/evidence-quality.json
 ```
 
-The verifier runs the generator from two separate temporary working directories, requires byte-identical outputs, checks all 12 SLE and 37 TGO rows, verifies identity and direct-parent agreement with the pinned canonical partition, and exercises country-metadata and injected-license negative controls.
+The verifier runs the generator from two separate temporary working directories, requires byte-identical outputs, checks all 12 SLE and 37 TGO rows, verifies IDs, names and direct parents against the pinned canonical partition, reconstructs all 49 SLE/TGO parent chains through pinned `data/hierarchy.json`, and exercises country-metadata and injected-license negative controls.

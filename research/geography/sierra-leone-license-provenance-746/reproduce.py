@@ -82,6 +82,10 @@ def main() -> None:
     scope = read_json(inputs["scope"]["raw"])
     assessment = read_json(inputs["assessment"]["raw"])
     acquisition = read_json(inputs["acquisition"]["raw"])
+    hierarchy_rows = read_json(inputs["hierarchy"]["raw"])
+    hierarchy = {row["id"]: row for row in hierarchy_rows}
+    if len(hierarchy) != len(hierarchy_rows):
+        raise SystemExit("Pinned hierarchy contains duplicate IDs")
     sle_path = paths["sle_metadata"]
     tgo_path = paths["tgo_metadata"]
     sle_gzip = inputs["sle_metadata"]["raw"]
@@ -134,6 +138,22 @@ def main() -> None:
     if set(scope["member_location_ids"]) != {row["id"] for row in members}:
         raise SystemExit("Original assessment members differ from the immutable scope roster")
 
+    def canonical_parent_chain(member: dict) -> list[str]:
+        chain = []
+        parent = member["atlas_parent_id"]
+        visited = {member["id"]}
+        while parent is not None:
+            if parent in visited or parent not in hierarchy:
+                raise SystemExit(f"Missing or cyclic canonical hierarchy parent for {member['id']}: {parent}")
+            visited.add(parent)
+            chain.append(parent)
+            parent = hierarchy[parent].get("parent_id")
+        return chain
+
+    for member in sle_members + tgo_members:
+        if canonical_parent_chain(member) != member["atlas_parent_chain"]:
+            raise SystemExit(f"Assessment parent chain disagrees with pinned hierarchy: {member['id']}")
+
     sle_license = sle["boundaryLicense"]
     tgo_license = tgo["boundaryLicense"]
     rows = []
@@ -171,6 +191,8 @@ def main() -> None:
             "id": member["id"],
             "name": member["name"],
             "country": "TGO",
+            "parent_id": member["atlas_parent_id"],
+            "parent_chain": member["atlas_parent_chain"],
             "original_assessment_license": member["baseline_license"],
             "source_metadata_license": tgo_license,
             "license_match": True,
