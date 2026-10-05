@@ -123,6 +123,8 @@ test('native readback diagnostics retain only fixed process codes or terse SQLST
  assert.equal(nativeReadbackFailureCode({code:'ENOBUFS',stderr:'private://credentials'}),'native-query-enobufs');
  assert.equal(nativeReadbackFailureCode({stderr:'ERROR: private credential source value'}),'native-query-failed');
  assert.equal(nativeReadbackFailureCode({stderr:'ERROR:  53100private-token'}),'native-query-failed');
+ assert.equal(nativeReadbackFailureCode({stderr:'ERROR: TOKEN private-source-value'}),'native-query-failed');
+ assert.equal(nativeReadbackFailureCode({stderr:'ERROR: TOKEN'}),'native-query-failed');
 });
 test('isolated disk readback accepts one bounded mount measurement and rejects malformed or unsafe totals',()=>{
  assert.deepEqual(isolatedFilesystemUsage('Filesystem 1024-blocks Used Available Capacity Mounted on\ntmpfs 3145728 2400000 745728 77% /var/lib/postgresql\n'),{capacity_bytes:3221225472,used_bytes:2457600000,available_bytes:763625472});

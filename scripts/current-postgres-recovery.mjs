@@ -248,7 +248,7 @@ export function assertRestoredInventory(before,target,after){
 // publish native stderr, which can contain source values or connection details.
 export function nativeReadbackFailureCode(error){
  if(['EPIPE','ENOBUFS','ETIMEDOUT'].includes(error?.code))return 'native-query-'+error.code.toLowerCase();
- const state=/\bERROR:\s+([0-9A-Z]{5})(?=\s|$)/.exec(String(error?.stderr??''))?.[1];
+ const state=/^ERROR:[ \t]+((?:[0-9][0-9A-Z]|F0|HV|P0|XX)[0-9A-Z]{3})[ \t]*$/m.exec(String(error?.stderr??''))?.[1];
  return state?'native-query-sqlstate-'+state.toLowerCase():'native-query-failed';
 }
 export function isolatedFilesystemUsage(text){
@@ -331,7 +331,7 @@ export async function runCurrentPostgresRecovery({env=process.env,fetcher=fetch,
   const endpoints=(await get('/endpoints')).endpoints?.filter(e=>e.branch_id===branchId&&e.type==='read_write');need(endpoints?.length===1,'ambiguous-production-endpoint');
   const connection=validatedOwnerConnection((await get('/connection_uri?'+new URLSearchParams({branch_id:branchId,database_name:'neondb',role_name:'neondb_owner',pooled:'false'}))).uri,endpoints[0].host);secrets.push(connection.password);
   stage='native-client';native(['pull',recoveryImage],undefined,180000,4*1024*1024);
-  const client=sourceClient(connection,readers),rawSourceQuery=queryJSON(sql=>client(['psql','-X','-Atq','-v','ON_ERROR_STOP=1'],sql),secrets);
+  const client=sourceClient(connection,readers),rawSourceQuery=queryJSON(sql=>client(['psql','-X','-Atq','-v','ON_ERROR_STOP=1','-v','VERBOSITY=sqlstate'],sql),secrets);
   stage='shared-source-lock';lock=await holdSourceLock(connection,readers);releaseProbe=async()=>{const result=(await rawSourceQuery(`SELECT exists(SELECT 1 FROM pg_locks WHERE locktype='advisory' AND pid=${lock.pid} AND classid=807245315 AND objid=1 AND objsubid=2 AND granted) held`))[0];need(result?.held===false,'source-lock-release-unconfirmed');};receipt.source_lock={key:[807245315,1],backend_pid:lock.pid,kind:'session-level; no open transaction'};
   const sourceQuery=async sql=>{need(lock.alive(),'source-lock-session-lost');const held=(await rawSourceQuery(`SELECT exists(SELECT 1 FROM pg_locks WHERE locktype='advisory' AND pid=${lock.pid} AND classid=807245315 AND objid=1 AND objsubid=2 AND granted) held`))[0];need(held?.held===true,'source-lock-lost');const rows=await rawSourceQuery(sql);need(lock.alive(),'source-lock-session-lost');return rows;};
   const capture=path.join(output,'original-rows');fs.mkdirSync(capture,{mode:0o700});
