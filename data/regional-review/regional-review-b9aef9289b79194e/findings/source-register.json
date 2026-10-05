@@ -1,0 +1,283 @@
+{
+  "baseline": {
+    "administrative_sources_path": "data/administrative-sources.json",
+    "administrative_sources_sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+    "issue_api_snapshot_sha256": "f50841149d4fa4e80f5c14e3934f48b5895b067b468802beea369ff1c03f9794",
+    "issue_member_ids_sha256": "75508666501c08b0aa422614a6df7518d7a442687c51639589ed400e2a2ec736",
+    "issue_scope_sha256": "f3565d0212f5c5a06997c9782f113ca7532fd6bf6817646c034bb887c3b113ad",
+    "status": "exact immutable source/scope snapshots from current issue and current main; snapshots do not authorize edits outside the packet path"
+  },
+  "batch_id": "regional-review:b9aef9289b79194e",
+  "external_primary_references_not_redistributed": [
+    {
+      "evidence_id": "BWA-STATSBOTS-2022",
+      "finding": "Table 4 enumerates 28 census districts and separate Sub-District/Admin Authority fields; census areas include city/town districts and divisions, so 'administrative district' is not a safe universal tier inference.",
+      "retention": "Only the exact checksum is kept; the PDF itself is not redistributed. Restore via URL and verify SHA-256.",
+      "retrieved_utc_date": "2026-10-05",
+      "sha256_exact_original_bytes": "eca23da4cb3dfa1dcc1df8b53d6abe5a0790db3dc3c95a329e7f80bd9caf0034",
+      "title": "Population Housing Census 2022 Administrative and Technical Report",
+      "url": "https://www.statsbots.org.bw/sites/default/files/publications/Population%20and%20Housing%20Census%202022-Administrative%20and%20Technical%20Report%20Version%202.pdf"
+    },
+    {
+      "evidence_id": "LSO-GOV-2022",
+      "finding": "Official government report lists ten administrative districts and next-tier 80 constituencies / 124 community councils; Figure 2.3 credits the district map to Lesotho Meteorological Services.",
+      "restoration_note": "Direct response declared 26,096,689 bytes; a bounded 20-second transfer timed out after 3,538,464 bytes. No partial bytes retained. Retrieve the complete PDF later and record its whole-file SHA-256 before reuse.",
+      "retrieved_utc_date": "2026-10-05",
+      "sha256_exact_original_bytes": null,
+      "title": "Lesotho Third National Communication, Chapter 2",
+      "url": "https://www.gov.ls/wp-content/uploads/2022/03/Third-National-Communication.pdf"
+    },
+    {
+      "evidence_id": "NAM-GAZETTE-2013",
+      "finding": "2013 legal proclamation creates Kavango East/West, renames Caprivi Region to Zambezi Region and !Karas Region, and re-divides constituencies.",
+      "metadata_url": "https://the-eis.com/elibrary/search/3787",
+      "retention": "Legal instrument used by title/metadata and the reproduced proclamation abstract; no document bytes are retained. Restore the complete Gazette PDF from the attachment link on the EIS record before any geometry use.",
+      "retrieved_utc_date": "2026-10-05",
+      "sha256_exact_original_bytes": null,
+      "title": "Government Gazette No. 5261, Proclamation No. 25",
+      "url": "https://the-eis.com/elibrary/sites/default/files/downloads/literature/Government%20Gazette%20No%205261.pdf"
+    },
+    {
+      "evidence_id": "NAM-NSA-2023",
+      "finding": "Current official census report maps regional and constituency boundaries; the 2007 retained polygon vintage predates the 2013 legal rearrangement.",
+      "metadata_url": "https://nsa.org.na/document/2023-population-and-housing-census-main-report/",
+      "retention": "No report/map copied; reuse terms were not located. Restore from the Namibia Statistics Agency, inspect its administrative map and record the PDF SHA-256 before boundary use.",
+      "retrieved_utc_date": "2026-10-05",
+      "sha256_exact_original_bytes": null,
+      "title": "Namibia 2023 Population and Housing Census Main Report",
+      "url": "https://nsa.org.na/wp-content/uploads/2024/10/2023-Population-and-Housing-Census-Main-Report-28-Oct-2024.pdf"
+    },
+    {
+      "additional_primary_url": "https://eia.met.gov.na/screening/4917_scoping_report_profile_energy_epl_8617_updated.pdf",
+      "evidence_id": "NAM-ARANDIS-ERONGO",
+      "finding": "The official-hosted EIA source places Arandis in Erongo at approximately 15.16453E, 22.53234S; the scoped Atlas polygon bounds are 20.999–22.504E, 17.822–18.318S and its parent is Caprivi. This is a source-backed location/parent contradiction, not a polygon verdict.",
+      "retention": "No submitted EIA map/report copied. Restore the official registry PDFs; check publisher reuse terms and hash exact response bytes before geometry use.",
+      "retrieved_utc_date": "2026-10-05",
+      "sha256_exact_original_bytes": null,
+      "title": "Official Namibia Government / EIA locality and constituency references for Arandis",
+      "url": "https://eia.met.gov.na/screening/4489_location_map_2.pdf"
+    },
+    {
+      "evidence_id": "NAM-ERONGO-REGIONAL-REPORT",
+      "finding": "Government table gives Arandis constituency in Erongo Region.",
+      "retention": "Restoration URL only; no PDF copy retained. Hash the exact original before future use.",
+      "retrieved_utc_date": "2026-10-05",
+      "sha256_exact_original_bytes": null,
+      "title": "Namibia Index of Multiple Deprivation 2015, National Planning Commission",
+      "url": "https://www.npc.gov.na/wp-content/uploads/2023/06/Namibia-Index-of-Multiple-Deprivation-2015.pdf"
+    },
+    {
+      "evidence_id": "SWZ-CURRENT-COUNT-59",
+      "finding": "Government page reports 59 Tinkhundla centres across four regions (15, 18, 15, 11).",
+      "retention": "Current web reference only; restore the exact page and record its byte hash before reusing a roster or boundary claim.",
+      "retrieved_utc_date": "2026-10-05",
+      "sha256_exact_original_bytes": null,
+      "title": "Regional Administration, Government of Eswatini",
+      "url": "https://swazigov.gov.sz/index.php/ministries-departments/ministry-of-tinkhundla-administration/regional-administration"
+    },
+    {
+      "evidence_id": "SWZ-CURRENT-COUNT-55",
+      "finding": "Different official government page says 55 Tinkhundla and lists region counts 14, 16, 11, 14. The two current government pages disagree; treat 53 OSM/Wambacher units as incomplete/stale relative to at least one official account and leave the exact current roster unresolved.",
+      "retention": "Current web reference only; restore the exact page and record its byte hash before reusing a roster or boundary claim.",
+      "retrieved_utc_date": "2026-10-05",
+      "sha256_exact_original_bytes": null,
+      "title": "Tinkhundla Centres, Government of Eswatini",
+      "url": "https://www.gov.sz/index.php/tinkhundla-centres"
+    },
+    {
+      "evidence_id": "SWZ-EBC-2017-MAP",
+      "finding": "Official EBC map identifies regional and inkhundla boundaries but the 2017 map alone is not current boundary evidence.",
+      "license": "Government copyright notice © 2017; no open redistribution grant found",
+      "retention": "Do not retain or redistribute map geometry. Restore from EBC/Government URL for future licensed review; seek an open alternative or explicit permission.",
+      "retrieved_utc_date": "2026-10-05",
+      "sha256_exact_original_bytes": null,
+      "title": "2017 Tinkhundla Map, Elections and Boundaries Commission / Government of Swaziland",
+      "url": "https://www.gov.sz/images/Tinkhundla/Tinkhundla-Service-Charter-.pdf"
+    },
+    {
+      "evidence_id": "SA-STATSSA-2022",
+      "finding": "Stats SA reports Cacadu District Municipality renamed Sarah Baartman District Municipality in 2018, with small boundary adjustments in several Eastern Cape districts during the same period.",
+      "retention": "No PDF retained. Restore the official Stats SA report, check use terms and record SHA-256 before geometry use.",
+      "retrieved_utc_date": "2026-10-05",
+      "sha256_exact_original_bytes": null,
+      "title": "Statistics South Africa, district municipal boundary and name change in Eastern Cape (2011–2018)",
+      "url": "https://www.statssa.gov.za/publications/Report-03-01-71/Report-03-01-712022.pdf"
+    },
+    {
+      "additional_primary_url": "https://www.demarcation.org.za/circulars/",
+      "evidence_id": "SA-MDB",
+      "finding": "MDB is the statutory independent boundary authority; its official site exposes 2021 municipal boundary redeterminations and later boundary notices, so 2020 boundaries need current revalidation.",
+      "retention": "No MDB boundary dataset was copied; current product license/reuse terms and exact feature bytes remain unresolved. Restore through the Board's published boundary/redetermination downloads and record exact checksums before use.",
+      "retrieved_utc_date": "2026-10-05",
+      "sha256_exact_original_bytes": null,
+      "title": "Municipal Demarcation Board: municipal boundaries and Eastern Cape publications",
+      "url": "https://www.demarcation.org.za/municipal-boundaries/"
+    }
+  ],
+  "issue": 435,
+  "limitations": [
+    "Only retained source files have exact retained-byte SHA-256 values. Null external hashes are explicit missing whole-response hashes, not inferred hashes.",
+    "No current authoritative/reusable boundary product was found for the Eswatini current roster or latest Namibia constituencies; source restoration remains an engineering/research handoff.",
+    "Source polygons and overlap metrics do not prove legal territorial meaning, current completeness, or island and enclave coverage."
+  ],
+  "retained_arcgis_evidence": [
+    {
+      "evidence_id": "RESOLVE-ITEM-METADATA",
+      "finding": "Title RESOLVE Ecoregions and Biomes; description identifies RESOLVE terrestrial ecoregions updated in 2017; public Feature Service.",
+      "license": "CC BY 4.0, as declared in item licenseInfo HTML",
+      "path": "sources/arcgis-item-37ea320eebb647c6838c23f72abae5ef.json",
+      "retrieved_utc": "2026-10-05",
+      "sha256_exact_retained_bytes": "8f48e7dbe3fe6f1ce8272fde997fbc1b4338d3a4165ed8cce7ede08489f95e01",
+      "url": "https://www.arcgis.com/sharing/rest/content/items/37ea320eebb647c6838c23f72abae5ef?f=pjson"
+    },
+    {
+      "evidence_id": "RESOLVE-SERVICE-METADATA",
+      "finding": "FeatureServer layer 0 is Biomes and Ecoregions 2017, polygon geometry, WGS84.",
+      "path": "sources/arcgis-resolve-ecoregions-service.json",
+      "retrieved_utc": "2026-10-05",
+      "sha256_exact_retained_bytes": "3b899aaf67c1ed31b19452e4393fadaa7cf9e709b03983e8a7e197b125043ebe",
+      "url": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer?f=pjson"
+    },
+    {
+      "evidence_id": "RESOLVE-SCOPED-ECOREGIONS",
+      "features": 9,
+      "finding": "The numeric resolve suffix matches ECO_ID, not FID or OBJECTID. Each of the 16 scoped geometries matches the referenced geoBoundaries admin feature clipped by the ECO_ID feature at IoU 0.9520–0.9995.",
+      "license": "CC BY 4.0 per the ArcGIS item metadata above; underlying administrative-source license stays separate",
+      "path": "sources/arcgis-resolve-scoped-ecoregions.geojson",
+      "request": {
+        "f": "geojson",
+        "outFields": "OBJECTID,FID,ECO_NAME,ECO_ID,BIOME_NAME,REALM",
+        "outSR": "4326",
+        "returnGeometry": "true",
+        "where": "ECO_NAME IN ('Gariep Karoo','Kalahari Acacia woodlands','Kalahari xeric savanna','Makgadikgadi halophytics','Namib Desert','Namibian savanna woodlands','Zambezian Baikiaea woodlands','Zambezian flooded grasslands','Zambezian mopane woodlands')"
+      },
+      "retrieved_utc": "2026-10-05T13:18:43.356Z",
+      "sha256_exact_retained_bytes": "b8ddf724a301b783c6cac18f2727156a6f2525b8149b4c854cbfbbc8b0d5dbca",
+      "url_template": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer/0/query"
+    }
+  ],
+  "retained_polygon_sources": [
+    {
+      "attribution": "RCMRD",
+      "baseline_administrative_sources_sha256_field": "8931d2e634f89c81146470b098918b90f2e58c89bb16914d81928e1a230286fb",
+      "baseline_sha256_field_note": "Recorded separately from retained-byte SHA-256; it does not equal this whole GeoJSON byte hash and is not substituted for it.",
+      "bytes": 219907,
+      "evidence_id": "GB-BWA-2015",
+      "feature_count": 25,
+      "parts": [
+        {
+          "bytes": 219907,
+          "path": "sources/gb-BWA-ADM2.geojson",
+          "sha256": "466b6a2c45c81ade313403f7cfe004325079bbaa0cd06c97e7bc5c5b5c43db5e"
+        }
+      ],
+      "path": "sources/gb-BWA-ADM2.geojson",
+      "pinned_geoBoundaries_release": "9469f09 (resolved Git commit 9469f09592ced973a3448cf66b6100b741b64c0d)",
+      "reconstruction": null,
+      "retrieval_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BWA/ADM2/geoBoundaries-BWA-ADM2.geojson",
+      "retrieved_utc_date": "2026-10-05",
+      "sha256_exact_retained_bytes": "466b6a2c45c81ade313403f7cfe004325079bbaa0cd06c97e7bc5c5b5c43db5e",
+      "source_license": "Public Domain",
+      "source_vintage": "2015"
+    },
+    {
+      "attribution": "OpenStreetMap contributors / Wambacher",
+      "baseline_administrative_sources_sha256_field": "2c931ba136f10cedeb99a91c44e8a515a35dd12b8b4a887347cbe2f3e1600b0f",
+      "baseline_sha256_field_note": "Recorded separately from retained-byte SHA-256; it does not equal this whole GeoJSON byte hash and is not substituted for it.",
+      "bytes": 1229492,
+      "evidence_id": "GB-LSO-2017",
+      "feature_count": 10,
+      "parts": [
+        {
+          "bytes": 1229492,
+          "path": "sources/gb-LSO-ADM1.geojson",
+          "sha256": "d2402f2fd99b06d894237e652f70d3e163b4e0cf5f95bb8e2227a1d5f3162a19"
+        }
+      ],
+      "path": "sources/gb-LSO-ADM1.geojson",
+      "pinned_geoBoundaries_release": "9469f09 (resolved Git commit 9469f09592ced973a3448cf66b6100b741b64c0d)",
+      "reconstruction": null,
+      "retrieval_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/LSO/ADM1/geoBoundaries-LSO-ADM1.geojson",
+      "retrieved_utc_date": "2026-10-05",
+      "sha256_exact_retained_bytes": "d2402f2fd99b06d894237e652f70d3e163b4e0cf5f95bb8e2227a1d5f3162a19",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "source_vintage": "2017"
+    },
+    {
+      "attribution": "Stanford Digital Repository / Namibia Statistics Agency",
+      "baseline_administrative_sources_sha256_field": "203efe728da20c121ccff44ebd1c7862a8da9ed703d6bc7187bdc65ff1d88eb8",
+      "baseline_sha256_field_note": "Recorded separately from retained-byte SHA-256; it does not equal this whole GeoJSON byte hash and is not substituted for it.",
+      "bytes": 3039021,
+      "evidence_id": "GB-NAM-2007",
+      "feature_count": 109,
+      "parts": [
+        {
+          "bytes": 3039021,
+          "path": "sources/gb-NAM-ADM2.geojson",
+          "sha256": "602e48176ff563f029cd08a00b0f8177b47c46a3aad53b8f93659c816593a7f9"
+        }
+      ],
+      "path": "sources/gb-NAM-ADM2.geojson",
+      "pinned_geoBoundaries_release": "9469f09 (resolved Git commit 9469f09592ced973a3448cf66b6100b741b64c0d)",
+      "reconstruction": null,
+      "retrieval_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/NAM/ADM2/geoBoundaries-NAM-ADM2.geojson",
+      "retrieved_utc_date": "2026-10-05",
+      "sha256_exact_retained_bytes": "602e48176ff563f029cd08a00b0f8177b47c46a3aad53b8f93659c816593a7f9",
+      "source_license": "Public Domain",
+      "source_vintage": "2007"
+    },
+    {
+      "attribution": "OpenStreetMap contributors / Wambacher",
+      "baseline_administrative_sources_sha256_field": "5d54a3629b8b766c061734f7fa3d04c84eab5946b62932e77d067d1b01e7749f",
+      "baseline_sha256_field_note": "Recorded separately from retained-byte SHA-256; it does not equal this whole GeoJSON byte hash and is not substituted for it.",
+      "bytes": 334110,
+      "evidence_id": "GB-SWZ-2017",
+      "feature_count": 53,
+      "parts": [
+        {
+          "bytes": 334110,
+          "path": "sources/gb-SWZ-ADM2.geojson",
+          "sha256": "5731b27769f77d547ca6165f88357ac981477cca6b47eb84d8641cb3d09e54c0"
+        }
+      ],
+      "path": "sources/gb-SWZ-ADM2.geojson",
+      "pinned_geoBoundaries_release": "9469f09 (resolved Git commit 9469f09592ced973a3448cf66b6100b741b64c0d)",
+      "reconstruction": null,
+      "retrieval_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SWZ/ADM2/geoBoundaries-SWZ-ADM2.geojson",
+      "retrieved_utc_date": "2026-10-05",
+      "sha256_exact_retained_bytes": "5731b27769f77d547ca6165f88357ac981477cca6b47eb84d8641cb3d09e54c0",
+      "source_license": "Open Data Commons Open Database License 1.0",
+      "source_vintage": "2017"
+    },
+    {
+      "attribution": "OCHA Regional Office for Southern and Eastern Africa / South African Municipal Demarcation Board",
+      "baseline_administrative_sources_sha256_field": "35cbea5cef92308a1894bdf6a68dfb49e73a90830bc62d3fb7d73d70f5ece3e6",
+      "baseline_sha256_field_note": "Recorded separately from retained-byte SHA-256; it does not equal this whole GeoJSON byte hash and is not substituted for it.",
+      "bytes": 50705428,
+      "evidence_id": "GB-ZAF-2020",
+      "feature_count": 213,
+      "parts": [
+        {
+          "bytes": 25352714,
+          "path": "sources/gb-ZAF-ADM3.geojson.part-001",
+          "sha256": "a87211053b2a57f7948bf4c416655959cca91a720e35ca3a5aef5a891ac52433"
+        },
+        {
+          "bytes": 25352714,
+          "path": "sources/gb-ZAF-ADM3.geojson.part-002",
+          "sha256": "fa2143ac904ae38dd71793d9b520badccd79088735d1dd8082e72679494f1616"
+        }
+      ],
+      "path": null,
+      "pinned_geoBoundaries_release": "9469f09 (resolved Git commit 9469f09592ced973a3448cf66b6100b741b64c0d)",
+      "reconstruction": "Concatenate ordered part files byte-for-byte to restore original source bytes; no transformation.",
+      "retrieval_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/ZAF/ADM3/geoBoundaries-ZAF-ADM3.geojson",
+      "retrieved_utc_date": "2026-10-05",
+      "sha256_exact_retained_bytes": "74e489fd4370972403950719026a317abba443668cea7d49f4b36c61637958f1",
+      "source_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "source_vintage": "2020"
+    }
+  ],
+  "retrieval_period_utc": "2026-10-05",
+  "version": 1
+}

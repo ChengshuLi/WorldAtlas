@@ -1,0 +1,36 @@
+{
+  "intersection_ids": [],
+  "issue_435": {
+    "direct_ZAF_ids": 17,
+    "number": 435
+  },
+  "issue_436": {
+    "direct_ZAF_ids": 196,
+    "merge_pr": 957,
+    "number": 436,
+    "snapshot_path": "source/neighbor-436-issue-api-snapshot.json",
+    "state": "closed",
+    "title": "Review Southern Africa interior batch 2: Eastern Cape, Free State, Gauteng + 6 more existing areas"
+  },
+  "limitation": "This proves only that these adjacent evidence packets partition every feature in the pinned geoBoundaries ZAF ADM3 file; it does not prove all current South African municipalities or legal boundaries are present.",
+  "result": "disjoint-complete-pinned-source-partition",
+  "source": {
+    "features": 213,
+    "parts": [
+      {
+        "bytes": 25352714,
+        "path": "sources/gb-ZAF-ADM3.geojson.part-001",
+        "sha256": "a87211053b2a57f7948bf4c416655959cca91a720e35ca3a5aef5a891ac52433"
+      },
+      {
+        "bytes": 25352714,
+        "path": "sources/gb-ZAF-ADM3.geojson.part-002",
+        "sha256": "fa2143ac904ae38dd71793d9b520badccd79088735d1dd8082e72679494f1616"
+      }
+    ],
+    "reconstructed_sha256": "74e489fd4370972403950719026a317abba443668cea7d49f4b36c61637958f1"
+  },
+  "source_ids_missing_from_union": [],
+  "union_ids_not_in_source": [],
+  "version": 1
+}

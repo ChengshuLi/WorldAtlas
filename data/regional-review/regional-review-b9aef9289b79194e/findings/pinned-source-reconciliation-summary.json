@@ -1,0 +1,34 @@
+{
+  "direct_admin_source_features": 210,
+  "ecological_subregions_with_admin_source_reference": 16,
+  "ecoregion_source_bytes_sha256": "b8ddf724a301b783c6cac18f2727156a6f2525b8149b4c854cbfbbc8b0d5dbca",
+  "geometry_comparison": {
+    "limitations": [
+      "similarity does not prove boundary authority, source completeness, legal currency, or intended territorial meaning",
+      "physical subregion geometries are ecological clips and are not expected to equal their referenced whole administrative feature",
+      "coordinate quantization and differing source generalization can yield legitimate area differences"
+    ],
+    "projection": "EPSG:6933 equal-area",
+    "purpose": "Reproducible geometric similarity diagnostic against pinned source bytes"
+  },
+  "missing_atlas_ids": [],
+  "missing_source_links": [],
+  "pinned_source_record_counts": {
+    "BWA": 25,
+    "LSO": 10,
+    "NAM": 109,
+    "SWZ": 53,
+    "ZAF": 213
+  },
+  "reconciled_count": 226,
+  "result_sha256": "d39f26a2f84f2ded1bca42fec2eb42a59ecfe863dbb9f2d3c12d7c836f36ee58",
+  "scope_count": 226,
+  "source_bytes_sha256": {
+    "BWA": "466b6a2c45c81ade313403f7cfe004325079bbaa0cd06c97e7bc5c5b5c43db5e",
+    "LSO": "d2402f2fd99b06d894237e652f70d3e163b4e0cf5f95bb8e2227a1d5f3162a19",
+    "NAM": "602e48176ff563f029cd08a00b0f8177b47c46a3aad53b8f93659c816593a7f9",
+    "SWZ": "5731b27769f77d547ca6165f88357ac981477cca6b47eb84d8641cb3d09e54c0",
+    "ZAF": "74e489fd4370972403950719026a317abba443668cea7d49f4b36c61637958f1"
+  },
+  "version": 1
+}
