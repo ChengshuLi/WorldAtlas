@@ -1,0 +1,217 @@
+{
+  "version": 1,
+  "packet": "regional-review:3f920fc5cb99166e",
+  "retrieved_on": "2026-10-05",
+  "sources": [
+    {
+      "id": "S1",
+      "title": "geoBoundaries GRC ADM3 2010 exact source, retained by ancestor packet #71",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/GRC/ADM3/geoBoundaries-GRC-ADM3-all.zip",
+      "release_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "boundary_id": "GRC-ADM3-53547021",
+      "vintage": "2010",
+      "source_update": "2023-02-10",
+      "build_date": "2023-12-12",
+      "feature_count": 326,
+      "feature_count_metadata": 326,
+      "scope_crosswalk": "226 scoped Atlas location rows all match source shapeID and shapeName; Oraiokastro is one Atlas multipart aggregation of two native source IDs.",
+      "license": "geoBoundaries metadata says CC0 1.0 Universal; licenseDetail also says source 2 and 3 are CC BY 3.0. Do not treat the contradictory fields as resolved.",
+      "retained_files": [
+        {
+          "path": "../regional-review-ef67318527f5f3a3/sources/geoBoundaries-GRC-ADM3.geojson.gz",
+          "bytes": 519962,
+          "sha256": "c0c518f1b87a09b52776accff437a4aae5c82061cc0127342305f777b56ac7b2",
+          "uncompressed_bytes": 1732871,
+          "uncompressed_sha256": "15c68b18cbf96f3c3c5021df38353b2d407adb2d1dc06c7165ee158da81fb3f6"
+        },
+        {
+          "path": "../regional-review-ef67318527f5f3a3/sources/geoBoundaries-GRC-ADM3-metaData.json",
+          "bytes": 889,
+          "sha256": "0c0956d301dd1e04cb2586e27237e91d4509c9ecdb3471210989315cda013d2d"
+        }
+      ],
+      "limits": [
+        "All source matches are lineage/name checks, not current-boundary validation.",
+        "Official source collection boundaries do not establish this entire 230-record area scope, legal boundaries, or omitted islands.",
+        "Preserve the source and mixed license caveat from #71; do not overwrite it."
+      ]
+    },
+    {
+      "id": "S2",
+      "title": "geoBoundaries GRC ADM2 parent reference collection",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/GRC/ADM2/geoBoundaries-GRC-ADM2-all.zip",
+      "release_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "boundary_id": "GRC-ADM2-26713481",
+      "vintage": "2016",
+      "source_update": "2023-01-19",
+      "build_date": "2023-12-12",
+      "feature_count": 14,
+      "license": "CC BY 4.0 in geoBoundaries metadata; original source credited to EuroGeoGraphics, Regional IM Working Group - Europe. Raw boundaryCanonical is empty and licenseDetail points to an unspecified metadata tab.",
+      "retained_files": [
+        {
+          "path": "sources/geoBoundaries-GRC-ADM2-all.zip",
+          "bytes": 1336957,
+          "sha256": "213a8f4bdf66c9edb2c99e2e2895f6acefa531f498489538a3ac2cc3021a5a0e"
+        },
+        {
+          "path": "sources/geoBoundaries-GRC-ADM2.geojson",
+          "bytes": 1329310,
+          "sha256": "005ac2734762f33b822ed568991bb8ec8c1b5e46fc99a4a7557e65d7ed0d8f4a"
+        },
+        {
+          "path": "sources/geoBoundaries-GRC-ADM2-metaData.json",
+          "bytes": 864,
+          "sha256": "a9649a5377d9eb834deeba926a850d4a7d73539e3fec8c0d431d64f5ff0fbc7f"
+        }
+      ],
+      "limits": [
+        "Feature names/IDs align with several retained Atlas parents; only a candidate name match is recorded where the baseline has no parent shapeID.",
+        "Layer metadata does not independently establish parent tier purpose or legal boundaries.",
+        "No complete 2016-current parent/child legal boundary proof is claimed."
+      ]
+    },
+    {
+      "id": "S3",
+      "title": "Greek Ministry of Interior, Structure and Operation of Local Government, 2024",
+      "url": "https://www.ypes.gr/wp-content/uploads/2024/06/STRUCTURE-OPERATION-LRD-ENGLISH-VERSION-2024.pdf",
+      "retrieved_at": "2026-10-05",
+      "vintage": "Current local-government structure described in 2024",
+      "inspected_facts": [
+        "Municipalities and Regions are first and second level local government; 332 municipalities and 13 Regions are reported.",
+        "The Ministry describes Regions and municipalities as separate levels without hierarchical relationship/control.",
+        "The paper describes Mount Athos/Aghion Oros as a self-governed part of Greece."
+      ],
+      "license": "Official PDF not retained; redistribution terms were not established.",
+      "retention": "restoration-only",
+      "restoration": "Retrieve the exact PDF from the official URL above; verify its title/date and pages 13-15 and 28-29 against the 2024 Ministry edition.",
+      "limit": "Exact response checksum was not retained; this is a textual/current-structure source, not a municipal boundary geometry.",
+      "status": "inspected via official published PDF/searchable text"
+    },
+    {
+      "id": "S4",
+      "title": "geoBoundaries XKX ADM1 source archive and metadata",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/XKX/ADM1/geoBoundaries-XKX-ADM1-all.zip",
+      "api_metadata_url": "https://www.geoboundaries.org/api/current/gbOpen/XKX/ADM1/",
+      "release_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "boundary_id": "XKX-ADM1-2360587",
+      "vintage": "2021",
+      "source_update": "2023-01-19",
+      "build_date": "2023-12-12",
+      "retrieved_at": "2026-10-05",
+      "asset_feature_count": 7,
+      "metadata_admUnitCount": 48,
+      "asset_feature_names": [
+        "District of Prishtina",
+        "District of Mitrovica",
+        "District of Peja",
+        "District of Gjilan",
+        "District of Gjakova",
+        "District of Prizren",
+        "District of Ferizaj"
+      ],
+      "metadata_role": "Municipalities",
+      "license": "geoBoundaries metadata declares CC BY-SA 2.0 and credits OpenStreetMap/OSM Boundaries; bundled geoBoundaries use instructions require attribution under CC BY 4.0 and citation of the individual metadata source. These terms are preserved; compatibility for any Atlas redistribution/publication was not adjudicated here.",
+      "retained_files": [
+        {
+          "path": "sources/geoBoundaries-XKX-ADM1-all.zip",
+          "bytes": 1585582,
+          "sha256": "6b7af09355bc9b5f82e69c3cb98585ef4da33a1c6e48abec6d5e0a57e822c429"
+        },
+        {
+          "path": "sources/geoBoundaries-XKX-ADM1.geojson",
+          "bytes": 1898578,
+          "sha256": "9b07b08fe0f9ca5a26ddb6de2008ac235b38ffaf069063df9851711c2d358315"
+        },
+        {
+          "path": "sources/geoBoundaries-XKX-ADM1-metaData.json",
+          "bytes": 799,
+          "sha256": "a912dcaefa1096a6c0af067af9723b2a67c32f5b0147b8198f99751eb591b49c"
+        },
+        {
+          "path": "sources/geoBoundaries-XKX-ADM1-current-api-metadata.json",
+          "bytes": 1664,
+          "sha256": "28fa0fdf25211cfcb4f649db3b23fc53a8e7f442b6312341c801d02eed4d6fa0"
+        }
+      ],
+      "limits": [
+        "The raw file and metadata count/role conflict is unresolved, not an accepted official municipal boundary roster.",
+        "The Git object is an LFS pointer; the retained original ZIP is the downloaded immutable release asset and contains the exact 1,898,578-byte GeoJSON.",
+        "Four scoped IDs are only four of the seven asset features; the remaining three belong to other work and are handled through #999.",
+        "No political-status conclusion is made from source code or label."
+      ]
+    },
+    {
+      "id": "S5",
+      "title": "Kosovo Agency of Statistics, ReKos 2024 settlement release",
+      "url": "https://ask.rks-gov.net/Releases/Details/8471",
+      "retrieved_at": "2026-10-05",
+      "vintage": "2024 Population, Households and Housing Census; release 2025-02-07",
+      "inspected_facts": [
+        "The release says its settlement results cover 1,469 settlements in 38 municipalities."
+      ],
+      "license": "Official census release not retained; reuse terms for a bulk extract or boundary data were not established.",
+      "retention": "restoration-only",
+      "restoration": "Restore the official KAS release webpage and its linked tables from the URL above; record each exact download URL/hash and its metadata before any spatial reuse.",
+      "limit": "This release provides municipality count/context, not municipal boundary geometry or the seven-region feature crosswalk."
+    },
+    {
+      "id": "S6",
+      "title": "Official Gazette of Kosovo, Law No. 03/L-041 on Administrative Municipal Boundaries",
+      "url": "https://gzk.rks-gov.net/ActDetail.aspx?ActID=2518",
+      "retrieved_at": "2026-10-05",
+      "vintage": "Published 2008-06-02; ActDetail page identifies subsequent amendment acts",
+      "inspected_facts": [
+        "Official act record identifies Law 03/L-041 and Official Gazette 26/2008 as the municipal-boundary legal instrument; the record lists amendment/supplement acts."
+      ],
+      "license": "Official Gazette web record not retained; redistribution terms were not established.",
+      "retention": "restoration-only",
+      "restoration": "Restore the act and amendment pages from the Official Gazette record above; inspect the exact legal annex/articles applicable to the seven districts and 38 municipalities.",
+      "limit": "The act index alone does not establish that any retained GeoBoundaries feature is a current municipality or provide the exact crosswalk."
+    },
+    {
+      "id": "S7",
+      "title": "Greek Constitution Article 105, official Hellenic Parliament text",
+      "url": "https://www.hellenicparliament.gr/vouli-ton-ellinon/to-politevma/syntagma/article-109/",
+      "retrieved_at": "2026-10-05",
+      "vintage": "Constitution as revised through 2019; Article 105",
+      "inspected_facts": [
+        "Article 105 describes the region of Aghion Oros as a self-governed part of the Greek State and assigns its administration to representatives of the twenty Holy Monasteries."
+      ],
+      "license": "Official Parliament text not retained; redistribution terms were not established.",
+      "retention": "restoration-only",
+      "restoration": "Restore Article 105 through the Hellenic Parliament Constitution page or its linked current Constitution PDF; compare the Greek and official English text.",
+      "limit": "The provision supports territorial-role adjudication, not the exact geometry or the identity of a specific GeoBoundaries polygon."
+    },
+    {
+      "id": "S8",
+      "title": "ELSTAT digital cartographical data / 2021 Kallikratis census boundaries",
+      "url": "https://www.statistics.gr/digital-cartographical-data",
+      "retrieved_at": "2026-10-05",
+      "vintage": "2021 Census; mapping source mentions 2015-2016 orthophotography",
+      "inspected_facts": [
+        "ELSTAT lists 2021 Kallikratis municipality and related statistical boundary layers.",
+        "ELSTAT explicitly says the listed boundaries are purely census boundaries, prepared for ELSTAT needs, and are not evidence of administrative boundaries."
+      ],
+      "license": "Bulk census-shapefile reuse terms were not established; no source files were retained.",
+      "retention": "restoration-only",
+      "restoration": "Restore only from the official ELSTAT page; compare exact whole-file hashes before reuse. Ancestor issue #71 records separate, non-scoped 2021 municipality/regional-unit screen hashes b16817eb6f1a2c2527a598c3d7e6c0a16a4bc017f756d64ceedcb963d96d1174 and 0619b183eb0d9b3b420fc4ed6d312049681a19c8bed04ddd5b5aa6722ee82713; those bytes are not retained and do not cover this exact 226-member scope.",
+      "limit": "Statistical crosswalk only; no legal boundary proof, no largest-overlap transfer, and no basis to infer current municipality completeness."
+    },
+    {
+      "id": "S9",
+      "title": "Greek Ministry of Interior circular on municipal splits under Law 4600/2019",
+      "url": "https://www.ypes.gr/wp-content/uploads/2019/04/egk24740-03-04-2019.pdf",
+      "retrieved_at": "2026-10-05",
+      "vintage": "2019; Law 4600/2019 Articles 154-158",
+      "inspected_facts": [
+        "The Ministry's circular describes splitting five municipalities (Corfu, Kefalonia, Servia-Velventos, Lesvos, Samos) and establishing 12 municipalities effective in 2019."
+      ],
+      "license": "Official circular not retained; redistribution terms were not established.",
+      "retention": "restoration-only",
+      "restoration": "Restore the official circular and Law 4600/2019 plus corrections from YPES and the Government Gazette. For the exact 332 roster use current official municipality records, not a count alone.",
+      "limit": "Provides a source-vintage/identity lead; no geographic crosswalk for this exact subset was established."
+    }
+  ],
+  "source_collection_attribution": "Retained geoBoundaries original packages include CITATION-AND-USE-geoBoundaries.txt; it says geoBoundaries computer code/derivatives are CC BY 4.0, asks for attribution/link to geoBoundaries, and tells users of individual boundary files to cite the sources named in each metadata file.",
+  "retrieval_limit": "Official legal/statistical webpages and PDFs were inspected online and are cited with restoration instructions; no response hashes are asserted for those non-retained works. GeoBoundaries retained-file hashes are exact local byte hashes."
+}
