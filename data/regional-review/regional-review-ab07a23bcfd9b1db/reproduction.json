@@ -1,0 +1,217 @@
+{
+  "version": 1,
+  "issue": 469,
+  "retrieved_at_utc": "2026-10-05",
+  "base_commit": "1232d03d2d9a5e1118c0d5239092c879a9539990",
+  "issue_scope": {
+    "count": 215,
+    "member_location_ids_sha256": "634735fa5fc98ae4a27fd4124d69e2160d9120810cf9ab254822738f2ee1ebde",
+    "all_ids_in_baseline": true
+  },
+  "baseline_files": [
+    {
+      "path": "data/geography/part-4.json",
+      "bytes": 4835479,
+      "sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c"
+    }
+  ],
+  "pinned_sources": {
+    "adm1": {
+      "path": "data/regional-review/regional-review-ab07a23bcfd9b1db/sources/geoboundaries-CIV-ADM1-2016.geojson",
+      "bytes": 1851031,
+      "sha256": "70c70589b509e477355f1ba81f73d6338d97549620c8e5b8a898483781ec88be",
+      "units": 14,
+      "vintage": "2016",
+      "canonical": "districts de Côte d’Ivoire",
+      "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)"
+    },
+    "adm2": {
+      "path": "data/regional-review/regional-review-ab07a23bcfd9b1db/sources/geoboundaries-CIV-ADM2-2016.geojson",
+      "bytes": 2810302,
+      "sha256": "a9035b8f759e54ae5f6c1289a7b06711d6cd4f0e9545f83e319388304e1a1403",
+      "units": 33,
+      "vintage": "2016",
+      "canonical": "régions de Côte d'Ivoire",
+      "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)"
+    },
+    "adm3": {
+      "path": "data/regional-review/regional-review-ab07a23bcfd9b1db/sources/geoboundaries-CIV-ADM3-2021.geojson",
+      "bytes": 7813996,
+      "sha256": "7bf038dd0c666f76f5638289cf80991997a7f26e891578b57222d939e11b9da8",
+      "units": 510,
+      "vintage": "2021",
+      "canonical": "Departments",
+      "source": "Comité National de Télédétection et d'Information Géographique (CNTIG), OCHA ROWCA",
+      "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "source_data_update_date": "Thu Jan 19 07:31:04 2023",
+      "build_date": "Dec 12, 2023"
+    }
+  },
+  "official_current_source": {
+    "data": {
+      "path": "data/regional-review/regional-review-ab07a23bcfd9b1db/sources/cntig-ocha-subprefectures-query-2025.geojson",
+      "bytes": 6738415,
+      "sha256": "11deee85b6d41698d371846b0fd57cac6ad7b28a723e686c1ab6a0e149c3065e"
+    },
+    "layer_metadata": {
+      "path": "data/regional-review/regional-review-ab07a23bcfd9b1db/sources/cntig-ocha-subprefectures-layer-metadata.json",
+      "bytes": 12980,
+      "sha256": "49855a9332d87b143f04e9914559867475fda45b28f6a186af864e3a02134868"
+    },
+    "unit_count": 510,
+    "unique_administrative_regions_or_districts": 33,
+    "unique_departments": 108,
+    "unique_subprefecture_names": 506
+  },
+  "role_result": {
+    "assessment": "correction-needed",
+    "count": 215,
+    "pinned_role_claim_counts": {
+      "Departments": 215
+    },
+    "source_boundary_type": "ADM3",
+    "official_current_layer_level_field": "admin3Name / Sous-Prefecture",
+    "official_parent_field": "admin2Name / Département"
+  },
+  "parent_result": {
+    "atlas_parents": {
+      "bafing": 15,
+      "bagoue": 14,
+      "bere": 9,
+      "folon": 7,
+      "gbokle": 9,
+      "goh": 16,
+      "guemon": 23,
+      "haut-sassandra": 23,
+      "kabadougou": 15,
+      "marahoue": 18,
+      "nawa": 11,
+      "san-pedro": 11,
+      "tonkpi": 33,
+      "worodougou": 11
+    },
+    "all_parents_match_official_current_admin1_names": true,
+    "pinned_admin1_units": 14,
+    "pinned_admin2_units": 33,
+    "current_unique_region_or_district_labels": 33
+  },
+  "official_name_region_crosswalk": {
+    "unique": 213,
+    "ambiguous": 2,
+    "missing": 0,
+    "ambiguous_names": [
+      "Guézon"
+    ]
+  },
+  "province_review": {
+    "assessed": 14,
+    "justified_groupings": 14,
+    "source_parent_level": "ADM2",
+    "source_parent_role": "régions de Côte d'Ivoire"
+  },
+  "area_review": {
+    "area_id": "framework:area:ivory-coast:86d2b1a53604",
+    "name": "Côte d’Ivoire",
+    "owned_member_location_count": 215,
+    "full_area_location_count": 510,
+    "owned_fraction": 0.4215686274509804,
+    "scoped_province_count": 14,
+    "full_direct_child_count": 33,
+    "other_issue_scope_members": 295,
+    "issue_scope_partition_matches_baseline": true,
+    "baseline_parent_purpose": "WGSRPD level 3 botanical country; botanical country-level unit for recording plant distributions, not an asserted political boundary.",
+    "assessment": "insufficient-evidence",
+    "finding": "Only 215/510 locations and 14/33 direct regional groups are owned by this packet. The inherited area source is a botanical-country scheme whose standard permits level-3 units to ignore political factors; this packet has not revalidated the complete area perimeter, land coverage, islands, or current sovereign boundary."
+  },
+  "issue_scope_partition": {
+    "issue_cohorts": [
+      {
+        "issue": 468,
+        "state_at_capture": "open",
+        "civ_member_count": 17
+      },
+      {
+        "issue": 470,
+        "state_at_capture": "closed",
+        "civ_member_count": 215
+      },
+      {
+        "issue": 471,
+        "state_at_capture": "closed",
+        "civ_member_count": 63
+      }
+    ],
+    "this_issue_civ_member_count": 215,
+    "captured_peer_civ_member_count": 295,
+    "combined_distinct_issue_scope_civ_count": 510,
+    "baseline_atlas_civ_count": 510,
+    "exact_workload_partition_matches_baseline": true,
+    "limit": "This verifies only the distinct GitHub issue workload IDs against the baseline Atlas roster; it does not certify current legal units, source completeness, boundaries, or island coverage."
+  },
+  "geometry": {
+    "types": {
+      "Polygon": 215
+    },
+    "polygon_components": {
+      "1": 215
+    },
+    "limit": "Component counts come from original source polygons; they do not prove island completeness, adjacency, topology, or legal boundary correctness."
+  },
+  "completeness": {
+    "pinned_adm3_count": 510,
+    "official_current_service_count": 510,
+    "dgat_current_counts": {
+      "regions": 31,
+      "departments": 108,
+      "subprefectures_created": 509,
+      "subprefectures_open": 475,
+      "villages": 8576,
+      "communes": 201,
+      "autonomous_districts": 2
+    },
+    "limit": "The counts describe different vintages/status concepts. Their one-unit variance between the DGAT administrative count and the 2021/2025 510-shape sets remains unresolved; no count is used as proof of exhaustive current legal coverage."
+  },
+  "source_files": [
+    {
+      "path": "data/regional-review/regional-review-ab07a23bcfd9b1db/sources/cntig-ocha-subprefectures-layer-metadata.json",
+      "bytes": 12980,
+      "sha256": "49855a9332d87b143f04e9914559867475fda45b28f6a186af864e3a02134868"
+    },
+    {
+      "path": "data/regional-review/regional-review-ab07a23bcfd9b1db/sources/cntig-ocha-subprefectures-query-2025.geojson",
+      "bytes": 6738415,
+      "sha256": "11deee85b6d41698d371846b0fd57cac6ad7b28a723e686c1ab6a0e149c3065e"
+    },
+    {
+      "path": "data/regional-review/regional-review-ab07a23bcfd9b1db/sources/geoboundaries-CIV-ADM1-2016.geojson",
+      "bytes": 1851031,
+      "sha256": "70c70589b509e477355f1ba81f73d6338d97549620c8e5b8a898483781ec88be"
+    },
+    {
+      "path": "data/regional-review/regional-review-ab07a23bcfd9b1db/sources/geoboundaries-CIV-ADM1-metadata.json",
+      "bytes": 945,
+      "sha256": "32ebd4b46d2ce76c8bae6380625e18c5a4903c4b4932fcc24b05e670b524edf3"
+    },
+    {
+      "path": "data/regional-review/regional-review-ab07a23bcfd9b1db/sources/geoboundaries-CIV-ADM2-2016.geojson",
+      "bytes": 2810302,
+      "sha256": "a9035b8f759e54ae5f6c1289a7b06711d6cd4f0e9545f83e319388304e1a1403"
+    },
+    {
+      "path": "data/regional-review/regional-review-ab07a23bcfd9b1db/sources/geoboundaries-CIV-ADM2-metadata.json",
+      "bytes": 905,
+      "sha256": "d7246f239e6cdef768672085ef422270edf22b3083e868e09d6d5b507121a84e"
+    },
+    {
+      "path": "data/regional-review/regional-review-ab07a23bcfd9b1db/sources/geoboundaries-CIV-ADM3-2021.geojson",
+      "bytes": 7813996,
+      "sha256": "7bf038dd0c666f76f5638289cf80991997a7f26e891578b57222d939e11b9da8"
+    },
+    {
+      "path": "data/regional-review/regional-review-ab07a23bcfd9b1db/sources/geoboundaries-CIV-ADM3-metadata.json",
+      "bytes": 957,
+      "sha256": "6e335f347fb1209e5dc3006ac7788cb9d0354d4f21534175e67d7a2d86066452"
+    }
+  ],
+  "reproducibility": "Generated by this script from the pinned issue scope, baseline atlas features, pinned geoBoundaries files, and retained official CNTIG/OCHA service response."
+}

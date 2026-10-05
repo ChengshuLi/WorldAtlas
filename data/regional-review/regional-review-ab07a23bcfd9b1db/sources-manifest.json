@@ -1,0 +1,181 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "id": "geoboundaries-civ-adm3-2021",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM3/geoBoundaries-CIV-ADM3.geojson",
+      "role": "Pinned 2021 Côte d’Ivoire ADM3 child units; producer CNTIG/OCHA ROWCA; geoBoundaries metadata canonical role is Departments (disputed by official field-level source evidence).",
+      "vintage": "Boundary year 2021; upstream source update 2023-01-19; geoBoundaries build 2023-12-12; pinned repository commit 9469f09.",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "Pinned metadata states Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO), license source HDX. Preserve attribution to CNTIG/OCHA and geoBoundaries and retain the pinned metadata."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-ab07a23bcfd9b1db/sources/geoboundaries-CIV-ADM3-2021.geojson",
+          "bytes": 7813996,
+          "sha256": "7bf038dd0c666f76f5638289cf80991997a7f26e891578b57222d939e11b9da8",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-ab07a23bcfd9b1db/sources/geoboundaries-CIV-ADM3-metadata.json",
+          "bytes": 957,
+          "sha256": "6e335f347fb1209e5dc3006ac7788cb9d0354d4f21534175e67d7a2d86066452",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "geoboundaries-civ-adm1-2016",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM1/geoBoundaries-CIV-ADM1.geojson",
+      "role": "Pinned 2016 parent reference layer; 14 districts.",
+      "vintage": "Boundary year 2016; pinned repository commit 9469f09; build 2023-12-12.",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "Pinned ADM1 metadata states Creative Commons Attribution 4.0 International (CC BY 4.0), license source World Bank."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-ab07a23bcfd9b1db/sources/geoboundaries-CIV-ADM1-2016.geojson",
+          "bytes": 1851031,
+          "sha256": "70c70589b509e477355f1ba81f73d6338d97549620c8e5b8a898483781ec88be",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-ab07a23bcfd9b1db/sources/geoboundaries-CIV-ADM1-metadata.json",
+          "bytes": 945,
+          "sha256": "32ebd4b46d2ce76c8bae6380625e18c5a4903c4b4932fcc24b05e670b524edf3",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "geoboundaries-civ-adm2-2016",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson",
+      "role": "Pinned 2016 ADM2 parent reference layer; metadata canonical role regions (33).",
+      "vintage": "Boundary year 2016; pinned repository commit 9469f09; build 2023-12-12.",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "Pinned ADM2 metadata states Creative Commons Attribution 4.0 International (CC BY 4.0), license source World Bank."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-ab07a23bcfd9b1db/sources/geoboundaries-CIV-ADM2-2016.geojson",
+          "bytes": 2810302,
+          "sha256": "a9035b8f759e54ae5f6c1289a7b06711d6cd4f0e9545f83e319388304e1a1403",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-ab07a23bcfd9b1db/sources/geoboundaries-CIV-ADM2-metadata.json",
+          "bytes": 905,
+          "sha256": "d7246f239e6cdef768672085ef422270edf22b3083e868e09d6d5b507121a84e",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "cntig-ocha-current-subprefecture-service",
+      "url": "https://services-eu1.arcgis.com/HApVBfqpU6uDawrd/ArcGIS/rest/services/SP/FeatureServer/14",
+      "role": "Official current CNTIG/OCHA sub-prefecture layer; fields distinguish admin1 region, admin2 department, and admin3 sub-prefecture; used for semantic role and parent labels, not as a replacement boundary vintage.",
+      "vintage": "Layer reference period 2018-08-06 through 2023-09-20; layer updated 2023-04-04; service data last edited 2025-04-11; retrieval 2026-10-05.",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "ArcGIS layer metadata states Creative Commons Attribution for Intergovernmental Organisations and identifies CNTIG copyright text. Preserve CNTIG/OCHA attribution; the metadata does not state a version number."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-ab07a23bcfd9b1db/sources/cntig-ocha-subprefectures-query-2025.geojson",
+          "bytes": 6738415,
+          "sha256": "11deee85b6d41698d371846b0fd57cac6ad7b28a723e686c1ab6a0e149c3065e",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-ab07a23bcfd9b1db/sources/cntig-ocha-subprefectures-layer-metadata.json",
+          "bytes": 12980,
+          "sha256": "49855a9332d87b143f04e9914559867475fda45b28f6a186af864e3a02134868",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "dgat-current-organization",
+      "url": "https://dgat.interieur.gouv.ci/creation-de-circonscriptions-administratives/",
+      "role": "Official territorial organization and current administrative counts; not a unit-level boundary/crosswalk source.",
+      "vintage": "Page says organization is evolving; retrieved 2026-10-05.",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "No page reuse license found; the inspected response was not retained. Exact response byte count and SHA-256 are recorded in source-restoration.json."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Fetch the source URL and compare the response body to the recorded 83,361-byte SHA-256 capture in source-restoration.json. Use only the stated counts, not the page as a unit-roster certificate.",
+      "limit": "No reuse license was stated; the response is not redistributed. Counts describe created/open statuses and do not certify a dated boundary inventory."
+    },
+    {
+      "id": "anstat-public-api-documentation",
+      "url": "https://www.anstat.ci/public/api",
+      "role": "Official API schema lead for 2021 district/department/sub-prefecture rows and codes.",
+      "vintage": "API documentation refers to 2021 data; exact response unavailable.",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "No reuse license verified for documentation/data response."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Open official API docs and retrieve the endpoint/page output; see source-restoration.json for the attempted endpoint/count and restoration steps.",
+      "limit": "The index preview exposed cod_dep/cod_sp and 526 rows, but exact official unit rows could not be retrieved; it is not used as a per-unit crosswalk."
+    },
+    {
+      "id": "tdwg-wgsrpd-standard",
+      "url": "https://www.tdwg.org/standards/wgsrpd/",
+      "role": "Inherited area-source scheme purpose, not a current territorial boundary source.",
+      "vintage": "WGSRPD edition 2 (2001); TDWG page retrieved 2026-10-05.",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "No redistributed WGSRPD geometry is included; the standard page/repository does not establish license for the historic boundary file inherited by WorldAtlas."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Inspect the TDWG standards page and cited edition-2 repository data; for any boundary restoration identify the exact file/vintage and verify its redistribution terms and SHA-256 before retention.",
+      "limit": "Level 3 botanical-country purpose may ignore political factors; no current sovereignty or perimeter claim follows."
+    },
+    {
+      "id": "anstat-rgph-2021-volume-1",
+      "url": "https://www.anstat.ci/assets/publications/files/rgpg_tom1.pdf",
+      "role": "Official 2021 census count lead only.",
+      "vintage": "Census 2021; source response could not be retrieved.",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Origin returned HTTP 403; no source payload retained or hashed."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Retrieve the official ANStat RGPH 2021 volume; see source-restoration.json for its URL and access failure.",
+      "limit": "The web-indexed excerpt reports 510 sub-prefectures but no individual source-ID crosswalk; not used as an exact roster."
+    }
+  ]
+}

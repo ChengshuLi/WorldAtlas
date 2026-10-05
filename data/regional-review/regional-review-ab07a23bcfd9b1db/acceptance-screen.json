@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "issue": 469,
+  "scope_location_count": 215,
+  "screens": [
+    {
+      "criterion": "fragmented_city_territories",
+      "status": "insufficient-evidence",
+      "finding": "The retained sources do not provide an exhaustive city/municipal footprint roster for these 215 units; no city-extent conclusion is made.",
+      "next_evidence": "Obtain official locality/commune and sub-prefecture codes and compare scoped polygons with sourced urban footprints."
+    },
+    {
+      "criterion": "province_sized_locations",
+      "status": "insufficient-evidence",
+      "finding": "Official layer fields identify ADM3 as sub-prefecture, but there is no verified code crosswalk or comparable area measurement in this packet; no size outlier is classified as a province-sized unit.",
+      "follow_up_issue": 841
+    },
+    {
+      "criterion": "anonymous_administrative_remainders",
+      "status": "limited-screen",
+      "finding": "Every scoped pinned shape has a nonempty source name that matches its Atlas label after the documented reversible encoding repair. This rules out blank names only; it does not rule out a named remainder or an unofficial label."
+    },
+    {
+      "criterion": "disconnected_territories",
+      "status": "limited-screen",
+      "finding": "All 215 pinned geometries are Polygon with one polygon component and no interior rings. No topology validation, connectivity check against official administrative units, or completeness conclusion was performed."
+    },
+    {
+      "criterion": "omitted_islands",
+      "status": "insufficient-evidence",
+      "finding": "The packet has no exhaustive official code roster or independent island inventory. Source feature counts and the issue-workload partition cannot establish island completeness.",
+      "follow_up_issue": 841
+    },
+    {
+      "criterion": "repeated_tiers",
+      "status": "supported-with-limits",
+      "finding": "All 215 members resolve to unique shapes from the same pinned ADM3 source tier, and the other captured Côte d’Ivoire issue cohorts partition the remaining baseline ADM3 IDs. Atlas parent nodes group by official region names; this does not establish direct parent links or exclude repeated/missing current units.",
+      "follow_up_issue": 841
+    },
+    {
+      "criterion": "oversized_groups",
+      "status": "insufficient-evidence",
+      "finding": "The 14 scoped region groups contain 7 to 33 of this packet's locations. No complete-child-area denominator or reviewed size threshold exists, so group size is not judged."
+    },
+    {
+      "criterion": "weak_parents",
+      "status": "correction-needed",
+      "finding": "The 14 Atlas parent labels match official regions, but the official source places departments between regions and sub-prefectures. The source-name crosswalk does not identify the direct department for two Guézon records; the current parent evidence justifies a region grouping only.",
+      "follow_up_issue": 841
+    },
+    {
+      "criterion": "inconsistent_neighboring_units",
+      "status": "insufficient-evidence",
+      "finding": "This packet did not inspect full neighboring-region or cross-border units, nor did it reconcile adjacent boundary vintages. No inter-region boundary change is proposed from this subset."
+    }
+  ],
+  "interpretation": "This screen reports acceptance evidence and gaps. Limited-screen and structural results do not establish legal completeness, topology, boundary accuracy, or regional approval."
+}

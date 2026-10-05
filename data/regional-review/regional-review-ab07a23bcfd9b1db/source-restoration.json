@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "id": "dgat-current-organization",
+      "url": "https://dgat.interieur.gouv.ci/creation-de-circonscriptions-administratives/",
+      "retrieved_at": "2026-10-05T02:33:18Z",
+      "captured_response_bytes": 83361,
+      "captured_response_sha256": "ee8bf0fa0f9f30e4b9e21eaf750666886cdea120b83da234647919387a43ae3e",
+      "retention": "restoration-only",
+      "license_status": "unknown; the DGAT page has no reuse license statement and carries a site copyright notice",
+      "restoration": "Fetch the URL as an HTML response on the retrieval date; recompute SHA-256 over the response body. The response used for this finding was inspected but is not redistributed in this packet.",
+      "finding": "The page states the current organization is evolving and lists 31 regions, 108 departments, 509 sub-prefectures (475 open), 8,576 villages, 201 communes, and two autonomous districts."
+    },
+    {
+      "id": "anstat-public-api-documentation",
+      "url": "https://www.anstat.ci/public/api",
+      "retrieved_at": "2026-10-05",
+      "retention": "restoration-only",
+      "license_status": "unknown for page reuse; official API documentation only",
+      "restoration": "Open the official ANStat public API documentation and retrieve its Sous-préfectures endpoint and 2021 rows. This session's web-index excerpt reports 526 rows, which is inconsistent with the 510-shape geospatial sources; exact downloadable row bytes could not be retrieved from the API host in this environment, so no response hash is claimed.",
+      "finding": "The official documentation exposes administrative codes (cod_dep, cod_sp), but its 2021 endpoint count of 526 is not reconcilable here to the pinned shape IDs; exact code crosswalk remains unresolved."
+    },
+    {
+      "id": "tdwg-wgsrpd-standard",
+      "url": "https://www.tdwg.org/standards/wgsrpd/",
+      "related_repository": "https://github.com/tdwg/wgsrpd",
+      "retrieved_at": "2026-10-05",
+      "retention": "restoration-only",
+      "license_status": "unknown for redistribution of the historical WGSRPD boundary geometry; no WGSRPD geometry file is retained in this packet",
+      "restoration": "Consult TDWG's WGSRPD standard page and its edition-2 repository record; restore only a specific dated geography file after verifying its license and exact file hash.",
+      "finding": "TDWG defines level 3 as botanical-country units for plant-distribution records, approximately country-level, and notes political factors may be ignored. This limits the inherited source's use as proof of sovereign boundaries."
+    },
+    {
+      "id": "anstat-rgph-2021-volume-1",
+      "url": "https://www.anstat.ci/assets/publications/files/rgpg_tom1.pdf",
+      "retrieved_at": "2026-10-05",
+      "retention": "restoration-only",
+      "license_status": "unknown; download returned HTTP 403 in this environment",
+      "restoration": "Retrieve the official RGPH 2021 volume from ANStat; the web-indexed result excerpt reports 510 sub-prefectures. The origin server returned HTTP 403 to this worker, so no response bytes or SHA-256 are claimed.",
+      "finding": "An official census-source lead for the 2021 sub-prefecture count only; not used as an exact per-unit code crosswalk."
+    }
+  ]
+}
