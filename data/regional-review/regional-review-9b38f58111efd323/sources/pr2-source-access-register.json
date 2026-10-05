@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "issue": 451,
+  "retrieved_at": "2026-10-05",
+  "sources": [
+    {
+      "id": "natural-earth-admin1-southwest-china",
+      "title": "Natural Earth 10m Admin 1 States, Provinces, version 5.1.1 as stated in retained README",
+      "url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19/10m_cultural",
+      "source_commit": "ca96624a56bd078437bca8184e78163e5039ad19",
+      "commit_date": "2022-06-02T07:25:00Z",
+      "evidence_path": "data/regional-review/regional-review-365cbd6478904888/findings/natural-earth-admin1-southwest-china.csv",
+      "evidence_sha256_at_baseline": "4dbe542e6c69e9f8311f505d2a0a9e4530660ea6cea490afc3bd41a17c2cce5e",
+      "source_register_path": "data/regional-review/regional-review-365cbd6478904888/source/natural-earth-admin1/source-register.json",
+      "source_register_sha256_at_baseline": "ac5d510c312d71a83122109fc56d5505461c46945713a77cfc0ab7958417965d",
+      "license": "The retained Natural Earth repository LICENSE states vector/raster map data is public domain; the README describes source status and warns the product is beta and can be difficult to keep current. This is a regional grouping/context source, not authoritative current Chinese legal boundaries.",
+      "observed": "The retained table attributes first-order China features to the dataset region Southwest China: Chongqing (Municipality), Guizhou (Province), Sichuan (Province), Tibet (Autonomous Region), Yunnan (Province).",
+      "use_limit": "Supports only Natural Earth’s source-defined first-order grouping and component types at the 2022 repository vintage. It does not establish WorldAtlas tier design, current legal status, correct county boundaries, completeness, or topology.",
+      "restoration": "Read the exact Natural Earth commit and use the retained README/license and shapefile components under the referenced regional-review packet. Do not download a current release in place of the pinned source."
+    },
+    {
+      "id": "yunnan-civil-affairs-administrative-setup",
+      "title": "Yunnan Provincial Civil Affairs Department, 行政区划设置 (Administrative Division Setup)",
+      "url": "https://ynmz.yn.gov.cn/bmfw/xzqh/xzqhsz/",
+      "publisher": "Yunnan Provincial Civil Affairs Department",
+      "table_cutoff": "2025-09-30",
+      "access": "Official search-index extracts were accessible on 2026-10-05; direct page fetch timed out in both web open and local HTTP retrieval. No original response bytes retained.",
+      "sha256": null,
+      "license": "No explicit reuse terms verified; facts and citation only. Do not mirror the full page/table without checking terms.",
+      "observed": "The official page reports 129 county-level units for Yunnan, 16 prefecture-level cities/autonomous prefectures, and lists county-level units by prefecture. It reports Honghe 13 (4 county-level cities, 6 counties, 3 autonomous counties), Qujing 9 (3 districts, 1 county-level city, 5 counties), Zhaotong 11 (1 county-level city, 1 district, 9 counties), and Wenshan 8 (1 county-level city, 7 counties).",
+      "use_limit": "Current roster evidence for the 2025-09-30 snapshot only. It does not resolve 2017 polygon identity, 2020 parent assignment lineage, current boundary geometry, historical persistence, island/fragment completeness, or reuse rights for the source page.",
+      "restoration": "Retrieve the Civil Affairs page at the exact URL. Preserve the response and retrieval timestamp if reuse is permitted; hash the bytes. Capture the county-level table entries for Honghe, Qujing, Zhaotong and Wenshan. Compare official code/name rows against every scoped source ID and preserve unmatched rows without reassignment."
+    },
+    {
+      "id": "yunnan-local-administrative-code-standards-release",
+      "title": "Yunnan Provincial Civil Affairs Department release page for DB53/T 1176-2023 administrative village/community code standards",
+      "url": "https://ynmz.yn.gov.cn/cms/quhuadiming/5997.html",
+      "publisher": "Yunnan Provincial Civil Affairs Department, jointly with Provincial Market Regulation Administration and Provincial Institute of Standardization per the page",
+      "publication_date": "2023-07-12",
+      "effective_date": "2023-07-25",
+      "access": "Official page/PDFs appeared in search-index records on 2026-10-05; direct page and PDF fetches timed out. No source bytes retained.",
+      "sha256": null,
+      "license": "No explicit PDF reuse terms verified. Facts and citation only; do not mirror the standards until reuse terms are checked.",
+      "observed": "The release page links area-specific standards including DB53/T 1176.3 (Qujing), .6 (Zhaotong), .11 (Honghe), and .12 (Wenshan). Indexed table-of-contents extracts identify the prefecture-level jurisdiction and its county/city administrative-code table.",
+      "use_limit": "Administrative names/codes and jurisdiction structure do not supply boundary polygons and cannot establish geometry or county completeness by themselves.",
+      "restoration": "Open the release page, retrieve each of the four linked official PDFs when allowed, record final URL, bytes, SHA-256, access time and reuse terms, then compare table 1 code/name rows with the scoped 2017 source and the dated 2025 roster."
+    },
+    {
+      "id": "qujing-1997-administrative-reorganization",
+      "title": "Qujing Municipal Government history of the 1997 administrative reorganization",
+      "url": "https://www.qj.gov.cn/html/2013/qjdsj_0419/3135.html",
+      "publisher": "Qujing Municipal Government",
+      "source_vintage": "Describes the 1997 reorganization; page retrieved/stream-hashed 2026-10-05 by the prior #451 source review.",
+      "bytes": 33494,
+      "sha256": "bf09274108f5e011182947b9889beb2978be448dff92e2fa5e9371c61fb8f822",
+      "license": "No explicit reuse terms verified; facts and citation only. Response body was not retained by the prior packet.",
+      "observed": "The source history states prefecture-level Qujing was established in 1997 and former county-level Qujing City was divided into Qilin and Zhanyi districts.",
+      "use_limit": "Historical administrative context does not identify which polygon, if any, the 2017 source's Qujingshi geometry represents.",
+      "restoration": "Fetch the official URL and verify the 1997 paragraph and exact response hash before relying on it as retained evidence. Resolve the old feature only against an authoritative map/code crosswalk."
+    },
+    {
+      "id": "yunnan-provincial-2025-yearend-summary",
+      "title": "Yunnan Provincial Government, Yunnan administrative division summary, data through 2025-12-31",
+      "url": "https://www.yn.gov.cn/yngk/gk/201904/t20190416_96241.html",
+      "publisher": "Yunnan Provincial Government Office; page attributes the table to Yunnan Civil Affairs Department",
+      "publication_date": "2026-01-08",
+      "access": "Page text was opened through the web index; detailed statistical content is provided as images. The image bytes and tables were not retained or interpreted for this packet.",
+      "sha256": null,
+      "license": "No explicit reuse terms verified; source provenance only.",
+      "observed": "Confirms a later official Yunnan-wide summary exists with a 2025-12-31 data cutoff; it is not used here for detailed counts because its table is embedded in uninspected images.",
+      "use_limit": "Does not replace the 2025-09-30 detailed Civil Affairs roster used for parent-specific counts. The page title/cutoff alone is not roster evidence.",
+      "restoration": "Retrieve the page and both linked images, record hashes and inspect the county-level table before using it for any updated roster comparison."
+    }
+  ],
+  "general_limit": "Official current roster evidence improves the named territorial and parent-role crosswalk but does not close the missing official-boundary geometry or license-chain questions for the 2017 geoBoundaries layer."
+}
