@@ -72,10 +72,14 @@ try{
   const latitudes=nativeRowLatitudes(size),latitudeBytes=Buffer.alloc(size*8);
   for(let y=0;y<size;y++)latitudeBytes.writeDoubleLE(latitudes[y],y*8);
   const latitudeProduct=write('native-row-latitudes.f64le.gz',latitudeBytes);
-  const rosterProduct=write('original-owner-roster.json.gz',inputs.roster);
+  // Complete roster is recoverable from the pinned original bounds/world parts.
+  // Keep its canonical digest without exporting a duplicate world inventory.
+  const rosterDigest=sha256(Buffer.from(JSON.stringify(inputs.roster)+'\n'));
   const inventory={version:1,baseline_commit:commit,evaluation_commit:head,method:NATIVE_GRID_METHOD,
     source_files:inputs.sourceFiles,executed_sources:code,latitude_product:latitudeProduct,
-    owner_roster:rosterProduct,geographic_release:inputs.release.id,
+    owner_roster:{count:inputs.roster.length,canonical_json_sha256:rosterDigest,
+      restoration:'Original indices/IDs/parents in bounds; original names/containing paths in all pinned world parts.'},
+    geographic_release:inputs.release.id,
     footprints_sha256:inputs.manifest.footprints_sha256,hierarchy_sha256:inputs.manifest.hierarchy_sha256,
     original_partitions:inputs.manifest.parts.length,locations:inputs.roster.length,vertices:inputs.vertices,
     original_total_runs:inputs.totalStoredRuns,original_owned_cells:inputs.totalStoredOwned};
