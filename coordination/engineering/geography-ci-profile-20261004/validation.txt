@@ -1,0 +1,5 @@
+Node24 targeted caller/claim/integration controls: 76 passed, zero failed/skipped.
+Actual focused evidence profile runner: 146 passed, zero failed/skipped.
+Caller-level positive fixture reproduces PR814's declared regional-review folder/issue relationship and chooses evidence/one shard. Negative controls cover missing/released/expired/mismatched/unsafe ownership, changed head/file inventory and outside file/rename impact; other lane behavior retained.
+PR814 merged during diagnosis; no rerun or worker takeover. Current closed/released records cannot authorize a new focused run. No production/source geography/data/provider/Site changes.
+Commands: node --test test/integration-proof.test.mjs test/merge-integration.test.mjs test/issue-claims.test.mjs; INTEGRATION_PROFILE=evidence INTEGRATION_SHARD=0 node scripts/run-integration-tests.mjs; git diff --check.

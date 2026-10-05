@@ -129,7 +129,7 @@ barriers, evidence/review validation, workflow checkout and integration controls
 Source-only owned research retains its focused controls. Every changed path and
 rename origin participates; unknown non-text documentation/scripts, application code, storage,
 atlas data, geometry, schema, imports, builds and deployment require full regression.
-The PR profile selector runs trusted base code against GitHub's complete file list;
+The PR profile selector runs trusted base code against GitHub's complete file list and verifies the current head. Geography focused selection also reads the linked issue and paginated canonical reservation, requiring an active unexpired exact-branch geography claim with identical safe owned prefixes; missing/stale ownership fails rather than allowing reduced tests. Out-of-scope files or rename origins retain full regression;
 a base without the selector runs full regression. Full shards cover every test file
 exactly once, build actual packaged assets and reject skipped tests.
 
