@@ -1,0 +1,308 @@
+{
+  "version": 1,
+  "issue": 904,
+  "lane": "engineering",
+  "worker_id": "engineering-local-storage-main-20261005",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344",
+    "files": [
+      {
+        "path": "AGENTS.md",
+        "bytes": 7588,
+        "sha256": "c040391c07d9bec1b90e764e6481b2e8fb70cea4da2c4d14b8071843ce441b4a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/PARALLEL_WORK_PROTOCOL.md",
+        "bytes": 8231,
+        "sha256": "fb26fb85d01212596016665c5c6344fd902be525ad0e21686fd6ce9928cd3e98",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/PREMERGE_EVIDENCE_REVIEW.md",
+        "bytes": 14550,
+        "sha256": "f262c464f3e67f062b653e358e69811db1a3b9d39cec7ad9250cb3efbc306501",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 24974,
+        "sha256": "b47d944918335c984ddce7132481dfb0f226adf8004010c2b2fe90cec64b9e7d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/AUDITOR.txt",
+        "bytes": 5997,
+        "sha256": "182d5bf992ba0c0f906d8cc67a4ef39f526faa5768610eb463e103356b3884ce",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/ENGINEERING.txt",
+        "bytes": 8713,
+        "sha256": "dd6490f423a3d3fbbe3d17a09e9d7ba2a138b019dae99d560915e2d4bb077360",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/GEOGRAPHY.txt",
+        "bytes": 6198,
+        "sha256": "e7d02e0fa9b471896d50047eefcec8b4d9e2f5acb997975248f3dac9c943e5cc",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/LUNA_HISTORY.txt",
+        "bytes": 7043,
+        "sha256": "68f979f0a6d7b2d5dbc4efcdfa6b1064a39a31855bb3dc371c0e8188eed0cdd8",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/PUBLISHER.txt",
+        "bytes": 3919,
+        "sha256": "da3c2e8ab4886677efc476b3c7a3a19a7df05a5a88d393ebc0d392d900bd29a4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/queue-pr-merge.mjs",
+        "bytes": 3117,
+        "sha256": "2daedba75ce32cbe246bd37156dcfe2ce345810a96c21ade8f970b7ed8f336c9",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 7904,
+      "sha256": "25c68ea54dd61dd7a1116d624393d198acbd6b6339dff01a644b15f54abd03b2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/local-workspace-budget-20261005/claim.json",
+      "bytes": 834,
+      "sha256": "76274aa4dc8bd988eb4f86741fa2d05a78154f88e15a18837fd87537628950a7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/local-workspace-budget-20261005/negative-control.json",
+      "bytes": 487,
+      "sha256": "45e7476ca161980e02a4d7c23b7da604702179c5cf4ba1e3133d9fad76b63550",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/local-workspace-budget-20261005/positive-control.json",
+      "bytes": 494,
+      "sha256": "6fa2f100cfc34f208f177a58866adfc0d3e3440c5a01455b45310303d8f95e28",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/local-workspace-budget-20261005/sparse-smoke.json",
+      "bytes": 230,
+      "sha256": "7a200822795766703e7796e15e88a2c463ebe6e6d02c18a6890e8b3c6a46bde0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/local-workspace-budget-20261005/validation.txt",
+      "bytes": 589,
+      "sha256": "e486cd39cdbc95a2d3b017865bd722cdd2f4211a394678defa8ca3a686518d7a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/LOCAL_WORKSPACES.md",
+      "bytes": 7908,
+      "sha256": "4c05c85b0979da7760170771a879f2e5a99606223fae7674bdd005081ca3e3f5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/PARALLEL_WORK_PROTOCOL.md",
+      "bytes": 8635,
+      "sha256": "7389d613140686529899528d9ffb441deafac930654d64fc15416b1a4b2dc91e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/PREMERGE_EVIDENCE_REVIEW.md",
+      "bytes": 15510,
+      "sha256": "7f3ea5ed2f80f009942213dc1f25d20b7a22924f952229e11545571af6a9ae4b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "bytes": 25378,
+      "sha256": "c6ce3287ad451b7f93d677eee73d3330f9952c57c94cc6a61a11248a506a5e0b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/AUDITOR.txt",
+      "bytes": 7251,
+      "sha256": "14730e609fd32f4362d91eac1086940947f3ebaf32f746df32668c4ef908d0a8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/ENGINEERING.txt",
+      "bytes": 9967,
+      "sha256": "f1e01e14e11a79438b2d818e79c6309181e3f74b39c9fa0a22b0d29d261d4fb3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/GEOGRAPHY.txt",
+      "bytes": 7452,
+      "sha256": "dfbf1ed85fef74768c89d800fa1bea3f2be1eb8efaa2e1388472a2444e580ccb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/LUNA_HISTORY.txt",
+      "bytes": 8297,
+      "sha256": "d0301512a965bf71e03beb7ec393aa733274af9b1c9cc03ea12ad02a09bfa944",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/PUBLISHER.txt",
+      "bytes": 5173,
+      "sha256": "4f0e45f9c67052e1a02212fc33b18895ecd2067281b2a3c56308397048805066",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/local-workspace.mjs",
+      "bytes": 13238,
+      "sha256": "1d95aa9ff4aa12c0f62f3496dbf022499f3cef770200ff476e3e1a777cdf96cb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/local-workspace.test.mjs",
+      "bytes": 10250,
+      "sha256": "f51a5e935e434d162b635cde8131b77fb5d30badd6b6be9e7e57d988482bd2a9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/queue-pr-merge.mjs",
+      "bytes": 3271,
+      "sha256": "5aaef3641e262332a8d21484e8bc2682c740205af8ad1e0c72878a4cd1a50178",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "local-storage-guard",
+      "kind": "code",
+      "description": "Local Git fixture and real-repository controls for bounded isolated allocation, sparse scope, ownership, preservation and fail-closed release",
+      "software": "Node24, Git, du; no added dependencies",
+      "units": "bytes"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/local-workspace.test.mjs test/merge-integration-client.test.mjs",
+    "node scripts/local-workspace.mjs report"
+  ],
+  "validation": [
+    {
+      "method_id": "local-storage-guard",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/local-workspace-budget-20261005/positive-control.json"
+    },
+    {
+      "method_id": "local-storage-guard",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/local-workspace-budget-20261005/negative-control.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "AGENTS.md",
+      "status": "modified",
+      "original_sha256": "c040391c07d9bec1b90e764e6481b2e8fb70cea4da2c4d14b8071843ce441b4a"
+    },
+    {
+      "path": "coordination/engineering/local-workspace-budget-20261005/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/local-workspace-budget-20261005/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/local-workspace-budget-20261005/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/local-workspace-budget-20261005/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/local-workspace-budget-20261005/sparse-smoke.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/local-workspace-budget-20261005/validation.txt",
+      "status": "added"
+    },
+    {
+      "path": "docs/LOCAL_WORKSPACES.md",
+      "status": "added"
+    },
+    {
+      "path": "docs/PARALLEL_WORK_PROTOCOL.md",
+      "status": "modified",
+      "original_sha256": "fb26fb85d01212596016665c5c6344fd902be525ad0e21686fd6ce9928cd3e98"
+    },
+    {
+      "path": "docs/PREMERGE_EVIDENCE_REVIEW.md",
+      "status": "modified",
+      "original_sha256": "f262c464f3e67f062b653e358e69811db1a3b9d39cec7ad9250cb3efbc306501"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "status": "modified",
+      "original_sha256": "b47d944918335c984ddce7132481dfb0f226adf8004010c2b2fe90cec64b9e7d"
+    },
+    {
+      "path": "docs/prompts/AUDITOR.txt",
+      "status": "modified",
+      "original_sha256": "182d5bf992ba0c0f906d8cc67a4ef39f526faa5768610eb463e103356b3884ce"
+    },
+    {
+      "path": "docs/prompts/ENGINEERING.txt",
+      "status": "modified",
+      "original_sha256": "dd6490f423a3d3fbbe3d17a09e9d7ba2a138b019dae99d560915e2d4bb077360"
+    },
+    {
+      "path": "docs/prompts/GEOGRAPHY.txt",
+      "status": "modified",
+      "original_sha256": "e7d02e0fa9b471896d50047eefcec8b4d9e2f5acb997975248f3dac9c943e5cc"
+    },
+    {
+      "path": "docs/prompts/LUNA_HISTORY.txt",
+      "status": "modified",
+      "original_sha256": "68f979f0a6d7b2d5dbc4efcdfa6b1064a39a31855bb3dc371c0e8188eed0cdd8"
+    },
+    {
+      "path": "docs/prompts/PUBLISHER.txt",
+      "status": "modified",
+      "original_sha256": "da3c2e8ab4886677efc476b3c7a3a19a7df05a5a88d393ebc0d392d900bd29a4"
+    },
+    {
+      "path": "scripts/local-workspace.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/local-workspace.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/queue-pr-merge.mjs",
+      "status": "modified",
+      "original_sha256": "2daedba75ce32cbe246bd37156dcfe2ce345810a96c21ade8f970b7ed8f336c9"
+    }
+  ]
+}

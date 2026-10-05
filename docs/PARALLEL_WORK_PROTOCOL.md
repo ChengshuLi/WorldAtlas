@@ -18,6 +18,8 @@ GitHub Issues is the single source of truth for TODOs, current status and work h
 
 Geography researchers use `docs/GEOGRAPHY_HANDOFF.md` and `docs/prompts/GEOGRAPHY.txt`, label `type:geography`, branch `geography/<job-id>`, and the issue's exact evidence ownership prefixes. They do not execute migrations, update shared geography, perform live imports or publish. The existing table's engineering geographic releases and historical content responsibilities remain distinct.
 
+Read [LOCAL_WORKSPACES.md](LOCAL_WORKSPACES.md). Allocate isolated checkouts through `scripts/local-workspace.mjs`; keep bounded work/review slots, include exact required sparse inputs, check storage before generation/installations, and release finished slots after preserving unique work. Do not retain a full checkout per task or review revision. Existing chats must refresh their saved instructions.
+
 ## Issue workflow and incremental PRs
 
 Use issue forms and exactly one type label. Future work types may add `type:*` labels/forms and appropriate ownership rules; the current Git lanes are engineering, geography and research. Geography is evidence/proposal-only, with safe issue-declared `owned_paths`; history keeps its campaign ownership and complete-region import gate. Labels describe type; GitHub open/closed state and dated comments describe progress. Keep completed issues. Preserve legacy dates and evidence; never substitute a migrated issue's creation timestamp for an unknown original raised date.

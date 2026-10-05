@@ -1,0 +1,13 @@
+{
+  "method_id": "local-storage-guard",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "checks": [
+    "Below-free-floor and over-budget refused",
+    "Simultaneous processes yield exactly one allocation",
+    "Uncommitted/untracked/ignored files retained",
+    "Traversal, invalid IDs, symlink roots and stale tokens refused",
+    "Interrupted allocation remains discoverable",
+    "Assume-unchanged cannot conceal unique tracked bytes during manual or automatic cleanup"
+  ]
+}
