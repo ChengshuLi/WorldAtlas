@@ -110,6 +110,12 @@ def main():
 
     location_rows, province_rows, area_rows, geom_rows = [], [], [], []
     name_exact = repaired_count = geom_exact = official_csv_count = 0
+    atlas_name_parent_map = defaultdict(set)
+    for ident, feature in atlas.items():
+        props = feature["properties"]
+        atlas_name_parent_map[name_key(props["name"])].add(props["parent_id"])
+    duplicate_name_parent_ids = {ident for ident, feature in atlas.items()
+        if len(atlas_name_parent_map[name_key(feature["properties"]["name"])]) > 1}
     country_stats = defaultdict(Counter)
     province_members = defaultdict(list)
     area_members = defaultdict(list)
@@ -164,8 +170,15 @@ def main():
         rel_delta = (atlas_area - source_area) / source_area
         sym_ratio = symmetric_area / max(source_area, atlas_area)
         ckey = "verified_name_parent" if country == "CMR" and ident in cmr_crosswalk and cmr_crosswalk[ident]["status"] == "matched" else "unresolved"
-        classification = "correction_needed" if country == "CMR" and ident in cmr_crosswalk and cmr_crosswalk[ident]["status"] == "unmatched" else "insufficient_evidence"
-        reason = "Official 2021 name/parent crosswalk mismatch requires reconciliation" if classification == "correction_needed" else "Identity/source role evidence does not verify current legal boundary, completeness, or full parent geometry"
+        official_mismatch = country == "CMR" and ident in cmr_crosswalk and cmr_crosswalk[ident]["status"] == "unmatched"
+        duplicate_name_parent = ident in duplicate_name_parent_ids
+        classification = "correction_needed" if official_mismatch or duplicate_name_parent else "insufficient_evidence"
+        if official_mismatch:
+            reason = "Official 2021 name/parent crosswalk mismatch requires reconciliation"
+        elif duplicate_name_parent:
+            reason = "Same normalized Atlas feature name occurs under distinct parent IDs; reconcile identity and parent before treating either relationship as supported"
+        else:
+            reason = "Identity/source role evidence does not verify current legal boundary, completeness, or full parent geometry"
         row = {
             "id": ident,
             "country_code": country,
@@ -184,6 +197,7 @@ def main():
             "atlas_containing_file": subject_file[ident],
             "classification": classification,
             "official_cmr_crosswalk_status": ckey if country == "CMR" else "not-applicable",
+            "name_parent_review_flags": ["duplicate-normalized-feature-name-under-distinct-parent-IDs; reconcile exact source identity and parent"] if duplicate_name_parent else [],
             "boundary_status": "unverified against current legal/official geometry",
             "geometry_review_flags": (["source-or-Atlas-multipart; inspect disconnected components against authoritative evidence"] if (gtype == "MultiPolygon" or agtype == "MultiPolygon") else []) + (["absolute area delta exceeds 5%; trace preparation and compare authoritative current boundary"] if abs(rel_delta) > 0.05 else []) + (["symmetric difference exceeds 10% of larger polygon; inspect lineage and authoritative evidence"] if sym_ratio > 0.10 else []),
             "reason": reason,
@@ -275,6 +289,7 @@ def main():
         if code and " | " not in code:
             duplicate_official_codes.setdefault(code, []).append(row["location_id"])
     duplicate_official_codes = {k: sorted(v) for k,v in duplicate_official_codes.items() if len(v) > 1}
+    duplicate_name_parent_conflicts = [{"normalized_name": name, "ids": sorted(ident for ident, f in atlas.items() if name_key(f["properties"]["name"]) == name), "parent_ids": sorted(parent_ids)} for name, parent_ids in sorted(atlas_name_parent_map.items()) if len(parent_ids) > 1]
     measured = {
         "status": "PASS: reproduced scope/source association and diagnostic metrics",
         "baseline_commit": BASELINE,
@@ -297,6 +312,8 @@ def main():
         "official_name_parent_unmatched": sum(x["status"] == "unmatched" for x in cmr_crosswalk.values()),
         "duplicate_codes_within_scoped_rows": duplicate_official_codes,
         "source_feature_totals": {code: source_meta[code].get("admUnitCount") for code in ("CAF", "CMR")},
+        "duplicate_name_parent_conflicts_count": len(duplicate_name_parent_conflicts),
+        "duplicate_name_parent_conflicts": duplicate_name_parent_conflicts,
         "limit": "These checks do not prove legal boundaries, official completeness, adjacency, or land coverage.",
     }
     write_json("source-screen-results.json", measured)

@@ -122,6 +122,26 @@
       "recommendation": "Country follow-ups should explicitly check city-fragmentation and disconnected/coastal/island status against law-era unit lists and authoritative polygons. Preserve the observed parts and both geometry vintages; do not infer correction or official completeness from component counts or area.",
       "severity": "medium",
       "subjects": "All 226 scoped geometries; multi-component observations are listed by exact ID in source-geometry-screen.csv and location-assessments.json"
+    },
+    {
+      "citations": [
+        "https://justice.gouv.cf/actualites/190/bruxelles-discours-du-ministre-detat-charge-de-la-justice-garde-des-sceaux-dr-arnaud"
+      ],
+      "confidence": "High for observed duplicate names, IDs and Atlas parent labels in the pinned baseline/source; unresolved for current official identities and correct parents.",
+      "evidence": [
+        "location-assessments.json",
+        "province-assessments.json",
+        "source-screen-results.json",
+        "sources/geoBoundaries-CAF-ADM3.geojson"
+      ],
+      "finding": "The exact Atlas feature name `Nola` occurs twice in the 92-subject CAF scope. One row is parented under Atlas parent `Nola`; the other has source feature name `Nola` but Atlas parent `Mbaïki`. The issue-scoped 2018 source bytes also contain both exact feature IDs/names, but no current official list or boundary crosswalk identifies their legal identities or parent relationships. Both rows and their parent groups are flagged correction-needed for identity/parent reconciliation; this is not a finding that either polygon is legally wrong.",
+      "id": "CAF-DUPLICATE-NOLA-PARENT-007",
+      "recommendation": "Follow-up #899 must resolve both exact IDs against the current official commune/parent roster and law-era boundaries, preserving both original IDs and geometries until identity is supported. Engineering must not migrate a parent from the name alone.",
+      "severity": "high",
+      "subjects": [
+        "gb:CAF:ADM3:52401652B27659488729720",
+        "gb:CAF:ADM3:52401652B63841913442805"
+      ]
     }
   ],
   "packet_status": "Initial scoped source/semantic review; Central Africa is not certified and no location import is authorized."

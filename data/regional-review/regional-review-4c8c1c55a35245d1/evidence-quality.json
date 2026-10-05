@@ -236,33 +236,9 @@
     "commit": "bb7e3321dd65413c4029fc9fb85ccb1da1d0d43f",
     "files": [
       {
-        "path": "data/geography/part-5.json",
-        "bytes": 5226173,
-        "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc",
-        "hash_kind": "file-bytes"
-      },
-      {
         "path": "data/location-policy.json",
         "bytes": 69433,
         "sha256": "efab4528fd4b7b180815ef82de93480f490ef8fa48ad9ef32d1f9d76a64b7fb9",
-        "hash_kind": "file-bytes"
-      },
-      {
-        "path": "data/geography/part-2.json",
-        "bytes": 6259307,
-        "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf",
-        "hash_kind": "file-bytes"
-      },
-      {
-        "path": "data/hierarchy.json",
-        "bytes": 10164089,
-        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
-        "hash_kind": "file-bytes"
-      },
-      {
-        "path": "data/administrative-sources.json",
-        "bytes": 661416,
-        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
         "hash_kind": "file-bytes"
       },
       {
@@ -272,9 +248,33 @@
         "hash_kind": "file-bytes"
       },
       {
+        "path": "data/geography/part-2.json",
+        "bytes": 6259307,
+        "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-5.json",
+        "bytes": 5226173,
+        "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc",
+        "hash_kind": "file-bytes"
+      },
+      {
         "path": "data/world-index.json",
         "bytes": 944,
         "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
         "hash_kind": "file-bytes"
       },
       {
@@ -668,8 +668,8 @@
   "outputs": [
     {
       "path": "data/regional-review/regional-review-4c8c1c55a35245d1/README.md",
-      "bytes": 6848,
-      "sha256": "7d276001ec3f91ca059efb45a96755fa4e895c14cc4ecc2fbd5dd92f8ddbbd48",
+      "bytes": 7066,
+      "sha256": "c5918ced1f954880125367a263b3e026f0ddc9a3ab430659bf53d0b9184bdae7",
       "hash_kind": "file-bytes"
     },
     {
@@ -680,14 +680,14 @@
     },
     {
       "path": "data/regional-review/regional-review-4c8c1c55a35245d1/findings.json",
-      "bytes": 12211,
-      "sha256": "1ab3cbebe970e0a5d96cdcfad9380bb0576db00af6d0460e520ffc963e8043ed",
+      "bytes": 13790,
+      "sha256": "9f92a5319e989c6b4e6ff58882c1c52e58010d5fced9e9f9023b65975f44d2cc",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/regional-review-4c8c1c55a35245d1/follow-up-recommendations.json",
-      "bytes": 2849,
-      "sha256": "9b06500df8ff23eeaa2da7195b89b1b351b553e8c5230d37f35c449fde66fb49",
+      "bytes": 3021,
+      "sha256": "e5fa6bf6fb4cdd007857582666c26d314bed7da4d7213a39c0ca7c0179a29ec0",
       "hash_kind": "file-bytes"
     },
     {
@@ -710,8 +710,8 @@
     },
     {
       "path": "data/regional-review/regional-review-4c8c1c55a35245d1/location-assessments.json",
-      "bytes": 197469,
-      "sha256": "e2cbbb483dcea29f2f91d4aa974ab0dd2822f1b1b916dc3d75d12ff2e8e46d15",
+      "bytes": 204531,
+      "sha256": "baed6795710d35c85c223d07151fe2da31de2a711b3535c98dbd22c8d4af2443",
       "hash_kind": "file-bytes"
     },
     {
@@ -734,20 +734,20 @@
     },
     {
       "path": "data/regional-review/regional-review-4c8c1c55a35245d1/province-assessments.json",
-      "bytes": 36859,
-      "sha256": "f70b1152c54925abcbbb2693e0365919ffd67c1df81098b59c4ffb0d15da4420",
+      "bytes": 36941,
+      "sha256": "8bcbdc8ca544a1deedcb9cf69734a57365ad258addb4b1678c2e5fc5896a87e5",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/regional-review-4c8c1c55a35245d1/reproduce.py",
-      "bytes": 18412,
-      "sha256": "d6bf4e12fd83f3afdf9bc7c86cb1ae5b87be19197484fa48ecc57007ac36d5a3",
+      "bytes": 19769,
+      "sha256": "95733afa77c37c9a1e6f81d7322f064edc7b203d5eb6e11e57d79dd4cc9c0e63",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/regional-review-4c8c1c55a35245d1/reproducibility.json",
       "bytes": 1263,
-      "sha256": "b4e585b5bef905359f5ed43417c006fb0fd87af6143bc267106df3b9bea68fb0",
+      "sha256": "b12820edbcad68e4689a49be11627e3ac7b4dc07ecc484d66a2553825a1c5e8c",
       "hash_kind": "file-bytes"
     },
     {
@@ -764,8 +764,8 @@
     },
     {
       "path": "data/regional-review/regional-review-4c8c1c55a35245d1/source-screen-results.json",
-      "bytes": 1119,
-      "sha256": "bcc68eb87a02d2dcbe083d358bde49d5ff4364cb2a4e006b2f82e2fde892546f",
+      "bytes": 1403,
+      "sha256": "8aed877898ab2ed3099b1064b9a185cd6f4ca63b50cac6751fe662c001e0f978",
       "hash_kind": "file-bytes"
     }
   ],
@@ -894,6 +894,14 @@
       "vintage": "baseline",
       "input_sha256": "324e373aa4a762399e81c11c52926f70fc7258b5e78b082be49d18aeba292d9e",
       "evaluation_commit": "bb7e3321dd65413c4029fc9fb85ccb1da1d0d43f"
+    },
+    {
+      "id": "CAF_duplicate_name_parent_conflicts",
+      "value": 1,
+      "unit": "name-groups",
+      "vintage": "baseline",
+      "input_sha256": "8aed877898ab2ed3099b1064b9a185cd6f4ca63b50cac6751fe662c001e0f978",
+      "evaluation_commit": "bb7e3321dd65413c4029fc9fb85ccb1da1d0d43f"
     }
   ],
   "metric_bindings": [
@@ -956,6 +964,11 @@
       "metric_id": "source_atlas_geometry_exact",
       "path": "data/regional-review/regional-review-4c8c1c55a35245d1/source-screen-results.json",
       "json_pointer": "/source_atlas_geometry_exact"
+    },
+    {
+      "metric_id": "CAF_duplicate_name_parent_conflicts",
+      "path": "data/regional-review/regional-review-4c8c1c55a35245d1/source-screen-results.json",
+      "json_pointer": "/duplicate_name_parent_conflicts_count"
     }
   ],
   "summaries": [
@@ -1018,6 +1031,11 @@
       "metric_id": "source_atlas_geometry_exact",
       "value": 0,
       "unit": "features"
+    },
+    {
+      "metric_id": "CAF_duplicate_name_parent_conflicts",
+      "value": 1,
+      "unit": "name-groups"
     }
   ],
   "conclusions": [
@@ -1053,6 +1071,14 @@
       "source_ids": [
         "gb:CAF:ADM3",
         "gb:CMR:ADM3"
+      ]
+    },
+    {
+      "text": "The two CAF Nola source/Atlas identities occur under distinct parent IDs; the supported current identity and parent relationship remain unresolved.",
+      "status": "unresolved",
+      "source_ids": [
+        "gb:CAF:ADM3",
+        "official:CAF:Justice"
       ]
     }
   ],
