@@ -1,0 +1,164 @@
+{
+  "baseline_commit": "fdab75892d979b995a1d20f311006aeeddb770b5",
+  "country_sources": [
+    {
+      "administrative_level": "ADM2",
+      "country": "Benin",
+      "current_atlas_land_area_m2": {
+        "median": 536776746.238,
+        "p10": 156722738.462,
+        "p90": 3880348588.895
+      },
+      "location_count": 77,
+      "reference_year": "2007",
+      "source_id": "gb:BEN:ADM2",
+      "source_role": "Commune"
+    },
+    {
+      "administrative_level": "ADM3",
+      "country": "Burkina Faso",
+      "current_atlas_land_area_m2": {
+        "median": 577544828.323,
+        "p10": 210614646.636,
+        "p90": 1553788624.49
+      },
+      "location_count": 351,
+      "reference_year": "2007",
+      "source_id": "gb:BFA:ADM3",
+      "source_role": "Named local administrative territory"
+    },
+    {
+      "administrative_level": "ADM3",
+      "country": "Côte d'Ivoire",
+      "current_atlas_land_area_m2": {
+        "median": 465187980.749,
+        "p10": 169020379.167,
+        "p90": 1244189116.182
+      },
+      "location_count": 510,
+      "reference_year": "2021",
+      "source_id": "gb:CIV:ADM3",
+      "source_role": "Departments"
+    },
+    {
+      "administrative_level": "ADM2",
+      "country": "Ghana",
+      "current_atlas_land_area_m2": {
+        "median": 574642814.61,
+        "p10": 72976839.642,
+        "p90": 1886722410.813
+      },
+      "location_count": 260,
+      "reference_year": "2019",
+      "source_id": "gb:GHA:ADM2",
+      "source_role": "Districts"
+    },
+    {
+      "administrative_level": "ADM2",
+      "country": "Mali",
+      "current_atlas_land_area_m2": {
+        "median": 10668755009.15,
+        "p10": 4827062531.696,
+        "p90": 31102403201.617
+      },
+      "location_count": 47,
+      "reference_year": "2017",
+      "source_id": "gb:MLI:ADM2",
+      "source_role": "Cercle"
+    },
+    {
+      "administrative_level": "ADM3",
+      "country": "Niger",
+      "current_atlas_land_area_m2": {
+        "median": 784167512.019,
+        "p10": 199553033.964,
+        "p90": 4832230897.683
+      },
+      "location_count": 255,
+      "reference_year": "2012",
+      "source_id": "gb:NER:ADM3",
+      "source_role": "Communes"
+    },
+    {
+      "administrative_level": "ADM2",
+      "country": "Nigeria",
+      "current_atlas_land_area_m2": {
+        "median": 715873892.227,
+        "p10": 113961796.084,
+        "p90": 2733324841.047
+      },
+      "location_count": 774,
+      "reference_year": "2022",
+      "source_id": "gb:NGA:ADM2",
+      "source_role": "Local Government Areas"
+    },
+    {
+      "administrative_level": "ADM2",
+      "country": "Togo",
+      "current_atlas_land_area_m2": {
+        "median": 1235615007.112,
+        "p10": 362186949.697,
+        "p90": 3185116071.326
+      },
+      "location_count": 37,
+      "reference_year": "2017",
+      "source_id": "gb:TGO:ADM2",
+      "source_role": "Prefectures"
+    }
+  ],
+  "issue": 467,
+  "limits": [
+    "Current Atlas polygons are a published reference layer and may include documented border reconciliation; source tags and role statements were not re-reviewed for all comparator countries.",
+    "Country-level area distributions conceal local variation and cannot establish territorial purpose, completeness or neighboring semantic compatibility.",
+    "The role and source facts for the 224 issue subjects are independently assessed in the subject packet; these other-country counts are contextual screening only."
+  ],
+  "method": {
+    "description": "WGS84 straight-source-edge ellipsoidal area per current atlas location footprint. Groups compare local administrative role, source vintage and scale context only; they are not evidence of semantic correctness or comparable administrative law.",
+    "helper_version": "worldatlas-evidence-geometry-v1",
+    "kind": "measurement",
+    "units": "m2"
+  },
+  "regional_context": {
+    "all_region_locations": 2713,
+    "containing_files_for_all_neighbor_inputs": [
+      "geography/part-1.json",
+      "geography/part-15.json",
+      "geography/part-16.json",
+      "geography/part-17.json",
+      "geography/part-23.json",
+      "geography/part-4.json",
+      "geography/part-9.json"
+    ],
+    "file_feature_counts": {
+      "geography/part-1.json": 428,
+      "geography/part-15.json": 47,
+      "geography/part-16.json": 859,
+      "geography/part-17.json": 170,
+      "geography/part-23.json": 37,
+      "geography/part-4.json": 510,
+      "geography/part-9.json": 260
+    },
+    "neighbor_countries_screened": [
+      "Benin",
+      "Burkina Faso",
+      "Côte d'Ivoire",
+      "Ghana",
+      "Mali",
+      "Niger",
+      "Nigeria",
+      "Togo"
+    ],
+    "region_id": "framework:region:west-tropical-africa:ba6e06497098",
+    "source_ids": [
+      "gb:BEN:ADM2",
+      "gb:BFA:ADM3",
+      "gb:CIV:ADM3",
+      "gb:GHA:ADM2",
+      "gb:MLI:ADM2",
+      "gb:NER:ADM3",
+      "gb:NGA:ADM2",
+      "gb:TGO:ADM2"
+    ]
+  },
+  "version": 1
+}

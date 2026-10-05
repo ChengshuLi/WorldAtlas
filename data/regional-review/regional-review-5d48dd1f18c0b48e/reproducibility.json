@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "issue": 467,
+  "outcome": "passed",
+  "runs": 2,
+  "baseline_commit": "fdab75892d979b995a1d20f311006aeeddb770b5",
+  "method": "Re-ran the scope reconstruction, geography overlay, neighbor-tier screen, per-row/per-parent assessment generator, and controls twice with pinned Python 3.12.14, Shapely 2.1.2 and pyproj 3.7.2. Whole-file SHA-256 receipts were byte-identical across both runs.",
+  "outputs": {
+    "scope-source-inventory.json": "8425fc84190b976e787e5f4cbaf630a31b00ea0d2ee8aa76f18dbe511e6a9349",
+    "geographic-screen.json": "19005d9d03abc0e5c155b7cc8820449dae2982379856e2cb53f5ea21701c83af",
+    "neighbor-granularity-screen.json": "de6e80efb41ba7d91e5daf049aef8127852264e46dc9737c370b610f48e0ed02",
+    "subject-assessments.json": "786c3146d42c960cb0b6e78e4bccfde8c39223b3b98556e331358bd76e9762ce",
+    "source-crosswalk-controls.json": "2d0818c054c97341150e3ea6b3078165aa439a9c1807174a59f9d38ed4eaa4db",
+    "geometry-controls.json": "59a3d800a614a94ede2627a1c86a4e40821707dad42a1a89e95c317baaeb778d",
+    "packet-generator-controls.json": "b10f9953acf45d3cef08e5084c22c5e0a1e65541539dc4eae4c1f67f2c843b2c"
+  },
+  "limitations": [
+    "Reproducibility establishes deterministic processing, not source truth or legal boundary accuracy.",
+    "Benin official same-vintage parent crosswalk and Burkina publication transformation evidence remain unresolved."
+  ]
+}

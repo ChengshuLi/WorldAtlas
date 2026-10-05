@@ -1,0 +1,1071 @@
+{
+  "baseline": {
+    "commit": "fdab75892d979b995a1d20f311006aeeddb770b5",
+    "files": [
+      {
+        "bytes": 944,
+        "hash_kind": "file-bytes",
+        "path": "data/world-index.json",
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+      },
+      {
+        "bytes": 10164089,
+        "hash_kind": "file-bytes",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      {
+        "bytes": 8060108,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-1.json",
+        "sha256": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7"
+      },
+      {
+        "bytes": 4835479,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-4.json",
+        "sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c"
+      },
+      {
+        "bytes": 5729632,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-9.json",
+        "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6"
+      },
+      {
+        "bytes": 5180426,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-15.json",
+        "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df"
+      },
+      {
+        "bytes": 5213846,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-16.json",
+        "sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797"
+      },
+      {
+        "bytes": 4945828,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-17.json",
+        "sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db"
+      },
+      {
+        "bytes": 4962410,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-23.json",
+        "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2"
+      },
+      {
+        "bytes": 71286,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/regional-handoffs.json.gz",
+        "sha256": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a"
+      },
+      {
+        "bytes": 2404397,
+        "hash_kind": "file-bytes",
+        "path": "data/macro-foundation/current-membership-inventory.json.gz",
+        "sha256": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab"
+      }
+    ],
+    "pin_files": {
+      "current-membership-inventory": "data/macro-foundation/current-membership-inventory.json.gz",
+      "hierarchy-file": "data/hierarchy.json",
+      "regional-handoffs": "data/macro-foundation/regional-handoffs.json.gz",
+      "subject-features": "data/geography/part-1.json",
+      "world-index": "data/world-index.json"
+    },
+    "pins": {
+      "current-membership-inventory": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+      "hierarchy-file": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "regional-handoffs": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
+      "subject-features": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7",
+      "world-index": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+    },
+    "subject_files": {
+      "gb:BEN:ADM2:17685819B11652159225436": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B12843899137908": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B13440574347317": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B13654727190048": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B14284481019860": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B15106537416311": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B15816629354661": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B16235974739823": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B18003775101914": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B20513081200557": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B21167128046214": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B22505126398074": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B24804117588339": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B25851007312804": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B25902777071239": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B2600041724770": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B27582361148713": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B27727011440945": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B31222842827733": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B31481778008604": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B31910055772004": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B32176770628240": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B32706375807456": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B33333613616473": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B34979669430532": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B36498320143439": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B36696986957740": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B3857845768140": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B4092451643280": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B42315243749993": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B44038505687321": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B44866040554021": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B4559503573339": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B47795371701587": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B47850119626851": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B50728061848372": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B52071067315918": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B53288119636086": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B53348586225757": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B54194513987818": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B54561297103056": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B5479142895221": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B55066990993617": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B56321809459452": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B57031298313635": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B57130091553848": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B57139564746449": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B58605420666587": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B59667857223414": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B61468565661274": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B6397671477640": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B66349454131554": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B66402044537068": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B6698534807541": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B6734193751411": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B67930032483199": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B68474195135253": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B68764251362376": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B69046773697304": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B69592983793811": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B70132266072899": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B72435311571007": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B73457125885179": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B73911627176990": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B74075406499118": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B76954688832254": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B78854505931864": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B79860756135863": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B85973060374162": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B86631365550325": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B88590181370069": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B92421826245631": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B94511677610410": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B95850649576266": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B98321853839803": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B98348434447391": "data/geography/part-1.json",
+      "gb:BEN:ADM2:17685819B99804537894120": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B13366359142961": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B1338223866667": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B13549029678191": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B14278444138468": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B16831190976939": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B17246885311253": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B18358329057009": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B18397805273277": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B18464666784761": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B19354082614429": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B19470023297682": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B21207937160129": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B21364682823117": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B22006364973965": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B23935856515630": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B24193274859271": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B24285292265494": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B24493432724544": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B2474507756845": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B2484904803284": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B24961298550801": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B25969280386086": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B26304104697538": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B26324428915797": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B2633686972345": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B26903772127725": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B269835991919": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B27133048062136": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B28307161231084": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B29982757481778": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B30445117604657": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B31603694672773": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B32273624840297": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B34453858394075": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B35492218081193": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B36411918469129": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B37104353840830": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B37415713350877": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B38088664877736": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B38518260370692": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B39163884174855": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B39422983009651": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B3947844123383": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B3965842455768": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B40044761929098": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B40166139245913": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B40677652674756": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B4111837231739": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B41219300509989": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B43761360391430": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B43884105227908": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B45284072581758": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B45418261839820": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B45585951356100": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B46486309029997": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B48869062221896": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B49910358966013": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B5002765376866": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B51069498271877": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B51156996890672": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B51709645650809": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B52386116272945": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B53455062029217": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B53616457301834": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B53700061974151": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B53714824050636": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B54734417599050": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B54932048209855": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B56589285108362": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B57045798477942": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B57688121793974": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B58024946613473": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B59165709554737": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B59709427509633": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B61668218511057": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B63097227675622": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B63244020672058": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B64178443767960": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B64385002689571": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B64731571185780": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B64849087178214": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B64910131253246": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B65115541474403": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B65573003772900": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B65909987893466": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B65936561287072": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B67041600938043": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B67471086093404": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B68419689017220": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B70851617120132": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B71093387257241": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B71249370335403": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B71432500241843": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B71865713119219": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B71888785866036": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B71969077134585": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B72235153927387": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B72818753155868": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B72890279720100": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B73057308480531": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B73252805782344": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B74397844132031": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B74672538793751": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B74780748949617": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B76358293518012": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B76566076780698": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B76879994711766": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B7740320455325": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B78687498330734": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B79035484727943": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B80003266126581": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B80183659134557": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B81659322834572": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B82247688636930": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B8242100010293": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B82622081378142": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B82997639563785": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B83893506914794": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B84073294119523": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B84674728348338": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B85111587488175": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B85180471375686": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B85201351425189": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B86062149942811": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B87927741253246": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B88929404731058": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B88987829326975": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B89320381776124": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B90056611705464": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B9007594153168": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B90242579498040": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B90803654003688": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B91074558581991": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B93680604687354": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B94005895949338": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B94041554607665": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B94418441220907": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B95084256654356": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B95539329314404": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B96200275035101": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B96474046227229": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B96864216443466": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B97023064152667": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B9721963258644": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B97475198310550": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B97751491466239": "data/geography/part-1.json",
+      "gb:BFA:ADM3:42667915B98611440136422": "data/geography/part-1.json"
+    }
+  },
+  "change_receipts": [
+    {
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/README.md",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/audit_geography.py",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/audit_neighbor_granularity.py",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/build_assessments.py",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/build_evidence_manifest.py",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/geographic-screen.json",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/geometry-controls.json",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/issue-467-snapshot.json",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/neighbor-granularity-screen.json",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/packet-generator-controls.json",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/packet_controls.py",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/reproduce_scope.py",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/reproducibility.json",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/scope-source-inventory.json",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/source-crosswalk-controls.json",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/source-facts-manifest.json",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/source-research.md",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/subject-assessments.json",
+      "previous_path": null,
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "PYTHONPATH=scripts/evidence:scripts python3 data/regional-review/regional-review-5d48dd1f18c0b48e/reproduce_scope.py",
+    "PYTHONPATH=scripts/evidence:scripts python3 data/regional-review/regional-review-5d48dd1f18c0b48e/audit_geography.py",
+    "PYTHONPATH=scripts/evidence:scripts python3 data/regional-review/regional-review-5d48dd1f18c0b48e/audit_neighbor_granularity.py",
+    "PYTHONPATH=scripts/evidence:scripts python3 data/regional-review/regional-review-5d48dd1f18c0b48e/build_assessments.py",
+    "PYTHONPATH=scripts/evidence:scripts python3 data/regional-review/regional-review-5d48dd1f18c0b48e/packet_controls.py",
+    "node scripts/evidence-quality.mjs data/regional-review/regional-review-5d48dd1f18c0b48e/evidence-quality.json"
+  ],
+  "conclusions": [
+    {
+      "source_ids": [
+        "gb:BEN:ADM2",
+        "gb:BFA:ADM3",
+        "benin-tbs-2011",
+        "burkina-stanford-bv378fk8507",
+        "burkina-insd-2007"
+      ],
+      "status": "supported",
+      "text": "The 2007 source layers represent local communes in both countries; Burkina Faso's ADM3 code is not used alone to infer that role. All 224 exact issue IDs and names match the retained source features."
+    },
+    {
+      "source_ids": [
+        "gb:BEN:ADM2",
+        "gb:BEN:ADM1",
+        "gb:BFA:ADM3",
+        "gb:BFA:ADM2",
+        "benin-tbs-2011",
+        "burkina-insd-2007"
+      ],
+      "status": "unresolved",
+      "text": "Thirty-three Benin child-to-department relationships lack a same-vintage official crosswalk; two Burkina current footprints have incompletely reproduced topology provenance. These 35 rows remain insufficient-evidence, and no error or correction is asserted."
+    },
+    {
+      "source_ids": [
+        "gb:BEN:ADM2",
+        "gb:BFA:ADM3",
+        "benin-tbs-2011",
+        "burkina-stanford-bv378fk8507",
+        "burkina-insd-2007"
+      ],
+      "status": "supported",
+      "text": "All 224 locations and 30 scoped parent groups have explicit assessments. The packet does not certify full national or regional coverage, approve the regional envelope, or permit imports."
+    }
+  ],
+  "issue": 467,
+  "lane": "geography",
+  "methods": [
+    {
+      "description": "Resolve exact scoped IDs to pinned geoBoundaries source IDs/names and establish country-specific territorial roles from official statistical sources and the exact Stanford catalog item; retain temporal and completeness limits.",
+      "id": "source-role-crosswalk",
+      "kind": "source",
+      "software": "Python 3.12 standard library",
+      "units": "source features, locations and administrative parent groups"
+    },
+    {
+      "area_method": "WGS84 straight-source-edge ellipsoidal integral; Shapely planar lon/lat intersection numerator",
+      "axis_order": "longitude-latitude",
+      "crs": "EPSG:4326",
+      "description": "Diagnostic source/current and child/parent polygon overlays with positive identity and negative disjoint controls; no geometry is changed and overlaps do not establish legal boundaries.",
+      "distance_method": "WGS84 inverse geodesic",
+      "id": "geographic-overlay",
+      "kind": "geography",
+      "software": "Python 3.12.14; Shapely 2.1.2; pyproj 3.7.2; scripts/evidence/geometry.py worldatlas-evidence-geometry-v1",
+      "units": "WGS84 ellipsoidal m2 and area fractions"
+    },
+    {
+      "description": "Compare neighboring current Atlas local-unit area distributions and source role/vintage metadata as context only.",
+      "id": "neighbor-tier-screen",
+      "kind": "measurement",
+      "software": "Python 3.12.14; Shapely 2.1.2; pyproj 3.7.2; shared helper",
+      "units": "source cohorts and WGS84 m2"
+    },
+    {
+      "description": "Deterministically materialize exact roster, one assessment per location and parent, and control receipts.",
+      "id": "packet-generators",
+      "kind": "generator",
+      "software": "Python 3.12 standard library and pinned geometry dependencies",
+      "units": "IDs, parent groups, SHA-256"
+    }
+  ],
+  "metric_bindings": [],
+  "metrics": [
+    {
+      "evaluation_commit": "fdab75892d979b995a1d20f311006aeeddb770b5",
+      "id": "scoped-locations",
+      "input_sha256": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7",
+      "unit": "locations",
+      "value": 224,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "fdab75892d979b995a1d20f311006aeeddb770b5",
+      "id": "scoped-parents",
+      "input_sha256": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7",
+      "unit": "parent groups",
+      "value": 30,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "fdab75892d979b995a1d20f311006aeeddb770b5",
+      "id": "insufficient-evidence",
+      "input_sha256": "19005d9d03abc0e5c155b7cc8820449dae2982379856e2cb53f5ea21701c83af",
+      "unit": "locations",
+      "value": 35,
+      "vintage": "baseline"
+    }
+  ],
+  "outputs": [
+    {
+      "bytes": 3240,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/README.md",
+      "sha256": "a13713f53c627d9034b8d6c24ef2c30450d77cc488b12f488d59d35dc32170f4"
+    },
+    {
+      "bytes": 10827,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/audit_geography.py",
+      "sha256": "d10d9c88f036365d905b5c9d7823d896be3abed71e18592de93ce535cc7d811d"
+    },
+    {
+      "bytes": 4073,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/audit_neighbor_granularity.py",
+      "sha256": "9068eb1f3b79a4d4f9d394f115504a34fa1c1677a038a0336982401c90bbec18"
+    },
+    {
+      "bytes": 10424,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/build_assessments.py",
+      "sha256": "a7d36619c794ce4a9a02f1cd3a13aaa0d60b22e46cdacaac9168608acb41d362"
+    },
+    {
+      "bytes": 9700,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/build_evidence_manifest.py",
+      "sha256": "39f2ed14873a27bd2d700d646af36cbd0d72b39143f3091f3f91029bc56b0630"
+    },
+    {
+      "bytes": 299350,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/geographic-screen.json",
+      "sha256": "19005d9d03abc0e5c155b7cc8820449dae2982379856e2cb53f5ea21701c83af"
+    },
+    {
+      "bytes": 560,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/geometry-controls.json",
+      "sha256": "59a3d800a614a94ede2627a1c86a4e40821707dad42a1a89e95c317baaeb778d"
+    },
+    {
+      "bytes": 29424,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/issue-467-snapshot.json",
+      "sha256": "33e022bf9af05257c9c9fe82d59bb021d83b2742623dbe1d1ac3ce4acca6ea1e"
+    },
+    {
+      "bytes": 4936,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/neighbor-granularity-screen.json",
+      "sha256": "de6e80efb41ba7d91e5daf049aef8127852264e46dc9737c370b610f48e0ed02"
+    },
+    {
+      "bytes": 551,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/packet-generator-controls.json",
+      "sha256": "b10f9953acf45d3cef08e5084c22c5e0a1e65541539dc4eae4c1f67f2c843b2c"
+    },
+    {
+      "bytes": 4021,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/packet_controls.py",
+      "sha256": "90c05dc0d39bc61363e5e8b1b1cae6ddc3b9485abd8556623500ee0fc20299a8"
+    },
+    {
+      "bytes": 5874,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/reproduce_scope.py",
+      "sha256": "63b515926657b21d5401674e5c94aecac1e538d6fa79eb10566b1d9e188f4c65"
+    },
+    {
+      "bytes": 1397,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/reproducibility.json",
+      "sha256": "330f152f28394c7f9a948d94f9b1e01a3410d366ce8a5fec6b18978b56c7baf0"
+    },
+    {
+      "bytes": 261581,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/scope-source-inventory.json",
+      "sha256": "8425fc84190b976e787e5f4cbaf630a31b00ea0d2ee8aa76f18dbe511e6a9349"
+    },
+    {
+      "bytes": 1088,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/source-crosswalk-controls.json",
+      "sha256": "2d0818c054c97341150e3ea6b3078165aa439a9c1807174a59f9d38ed4eaa4db"
+    },
+    {
+      "bytes": 5399,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/source-facts-manifest.json",
+      "sha256": "012ee5039e1955c2f54786b67fd6928a6cb84d2a90ce8cba98569a02f1d1246f"
+    },
+    {
+      "bytes": 9880,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/source-research.md",
+      "sha256": "9755180d8a3e594ba9916260cc42cf05a7769bed60bb2c85d38f96ff6dd3ea31"
+    },
+    {
+      "bytes": 593275,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/subject-assessments.json",
+      "sha256": "786c3146d42c960cb0b6e78e4bccfde8c39223b3b98556e331358bd76e9762ce"
+    }
+  ],
+  "sources": [
+    {
+      "files": [
+        {
+          "bytes": 212930,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/sources/geoboundaries-9469f09/BEN-ADM2/geoBoundaries-BEN-ADM2.geojson",
+          "sha256": "4489b38747709783884dbc0cbdd12df3874921a7f8a00737c155e4a8b899daec"
+        },
+        {
+          "bytes": 833,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/sources/geoboundaries-9469f09/BEN-ADM2/geoBoundaries-BEN-ADM2-metaData.json",
+          "sha256": "d91ee2c5dbab65623cb5459e133cfd923d20508349c81e8410b2b8ab8791ddc7"
+        }
+      ],
+      "id": "gb:BEN:ADM2",
+      "license": {
+        "status": "redistributable",
+        "terms": "Public Domain (pinned metadata); retain source attribution and metadata."
+      },
+      "retention": "retained",
+      "retrieved_at": "2026-10-04",
+      "role": "Benin communes, ADM2",
+      "temporal_status": "reference",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BEN/ADM2/geoBoundaries-BEN-ADM2.geojson",
+      "verification": "verified",
+      "vintage": "2007"
+    },
+    {
+      "files": [
+        {
+          "bytes": 4840718,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/sources/geoboundaries-9469f09/BFA-ADM3/geoBoundaries-BFA-ADM3.geojson",
+          "sha256": "6f4d9351318bd29ace3e56d17fdcd26d74a798f47abc3c5674605b083d34cf12"
+        },
+        {
+          "bytes": 893,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/sources/geoboundaries-9469f09/BFA-ADM3/geoBoundaries-BFA-ADM3-metaData.json",
+          "sha256": "b559ada1ddb95c401556801cfef3b444c49d96590a736ec914e1d66f97469dae"
+        }
+      ],
+      "id": "gb:BFA:ADM3",
+      "license": {
+        "status": "redistributable",
+        "terms": "Public Domain (pinned metadata and Stanford catalog); retain source attribution and metadata."
+      },
+      "retention": "retained",
+      "retrieved_at": "2026-10-04",
+      "role": "Burkina Faso communes, ADM3; catalog resolves blank boundaryCanonical field",
+      "temporal_status": "reference",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BFA/ADM3/geoBoundaries-BFA-ADM3.geojson",
+      "verification": "verified",
+      "vintage": "2007"
+    },
+    {
+      "files": [
+        {
+          "bytes": 63347,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/sources/geoboundaries-9469f09/BEN-ADM1/geoBoundaries-BEN-ADM1.geojson",
+          "sha256": "f0c544f26a8d7625004123936269b1953cca4a6ef94ee9e716037a4667d073ca"
+        },
+        {
+          "bytes": 792,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/sources/geoboundaries-9469f09/BEN-ADM1/geoBoundaries-BEN-ADM1-metaData.json",
+          "sha256": "0e9362096220907717a21131a709ff128703937fb5f9115e17a4b90bd51872a0"
+        }
+      ],
+      "id": "gb:BEN:ADM1",
+      "license": {
+        "status": "redistributable",
+        "terms": "Public Domain (pinned metadata); retain source attribution and metadata."
+      },
+      "retention": "retained",
+      "retrieved_at": "2026-10-04",
+      "role": "Benin department comparison only; not contemporaneous with the 2007 commune layer",
+      "temporal_status": "reference",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BEN/ADM1/geoBoundaries-BEN-ADM1.geojson",
+      "verification": "verified",
+      "vintage": "2012"
+    },
+    {
+      "files": [
+        {
+          "bytes": 2228501,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/sources/geoboundaries-9469f09/BFA-ADM2/geoBoundaries-BFA-ADM2.geojson",
+          "sha256": "aea17813a774c47f3ee0ccc0f39906116d9e0b48add0c8adf091998281f723b0"
+        },
+        {
+          "bytes": 864,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/sources/geoboundaries-9469f09/BFA-ADM2/geoBoundaries-BFA-ADM2-metaData.json",
+          "sha256": "5a436248cca65ac8e892856f91c9f6361fb5cf08151fba0d3b06a3eda0628a94"
+        }
+      ],
+      "id": "gb:BFA:ADM2",
+      "license": {
+        "status": "redistributable",
+        "terms": "CC BY 4.0 (pinned metadata); retain source attribution and metadata."
+      },
+      "retention": "retained",
+      "retrieved_at": "2026-10-04",
+      "role": "Burkina Faso province comparison only; not contemporaneous with the 2007 commune layer",
+      "temporal_status": "reference",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BFA/ADM2/geoBoundaries-BFA-ADM2.geojson",
+      "verification": "verified",
+      "vintage": "2017"
+    },
+    {
+      "id": "benin-tbs-2011",
+      "license": {
+        "status": "unknown",
+        "terms": "No reuse license verified; full bytes not retained."
+      },
+      "limit": "Official 12-department/77-commune hierarchy; restore and inspect cited pages.",
+      "restoration": "Restore from https://www.instad.bj/images/docs/insae-publications/annuelles/TBS/Archive/TBS%202011.pdf; see source-facts-manifest.json for cited pages and limitations.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-04",
+      "role": "INStaD Tableau de Bord Social 2011 pp. 28, 30. Official 12-department/77-commune hierarchy; restore and inspect cited pages.",
+      "temporal_status": "reference",
+      "url": "https://www.instad.bj/images/docs/insae-publications/annuelles/TBS/Archive/TBS%202011.pdf",
+      "verification": "verified",
+      "vintage": "as cited in source-research.md"
+    },
+    {
+      "id": "burkina-stanford-bv378fk8507",
+      "license": {
+        "status": "unknown",
+        "terms": "No reuse license verified; full bytes not retained."
+      },
+      "limit": "Exact record establishes commune role, 2007 vintage, level 3 and public-domain status.",
+      "restoration": "Restore from https://geodata-cdn.lib.utexas.edu/catalog/stanford-bv378fk8507; see source-facts-manifest.json for cited pages and limitations.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-04",
+      "role": "UT Austin/Stanford catalog Communes Burkina Faso 2007. Exact record establishes commune role, 2007 vintage, level 3 and public-domain status.",
+      "temporal_status": "reference",
+      "url": "https://geodata-cdn.lib.utexas.edu/catalog/stanford-bv378fk8507",
+      "verification": "verified",
+      "vintage": "as cited in source-research.md"
+    },
+    {
+      "id": "burkina-insd-2007",
+      "license": {
+        "status": "unknown",
+        "terms": "No reuse license verified; full bytes not retained."
+      },
+      "limit": "Indexed official excerpts only; complete PDF unavailable, so full named crosswalk remains unverified.",
+      "restoration": "Restore from https://web2.insd.bf/sites/default/files/2021-12/Annuaire_statistique_National_2007.pdf; see source-facts-manifest.json for cited pages and limitations.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-04",
+      "role": "INSD Annuaire statistique 2007 Tables 01.01/01.03. Indexed official excerpts only; complete PDF unavailable, so full named crosswalk remains unverified.",
+      "temporal_status": "reference",
+      "url": "https://web2.insd.bf/sites/default/files/2021-12/Annuaire_statistique_National_2007.pdf",
+      "verification": "unverified",
+      "vintage": "as cited in source-research.md"
+    },
+    {
+      "id": "benin-annuaire-2019",
+      "license": {
+        "status": "unknown",
+        "terms": "No reuse license verified; full bytes not retained."
+      },
+      "limit": "Indexed excerpts only; temporary official PDF error, not a completed commune crosswalk.",
+      "restoration": "Restore from https://www.instad.bj/images/docs/insae-publications/annuelles/AS-INSAE/Archive/Annee_2019/Annuaire_INSAE_2019.pdf; see source-facts-manifest.json for cited pages and limitations.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-04",
+      "role": "INStaD Annuaire statistique 2019 Tables 01.01–01.12. Indexed excerpts only; temporary official PDF error, not a completed commune crosswalk.",
+      "temporal_status": "reference",
+      "url": "https://www.instad.bj/images/docs/insae-publications/annuelles/AS-INSAE/Archive/Annee_2019/Annuaire_INSAE_2019.pdf",
+      "verification": "unverified",
+      "vintage": "as cited in source-research.md"
+    },
+    {
+      "id": "burkina-territorial-reorganization-2025",
+      "license": {
+        "status": "unknown",
+        "terms": "No reuse license verified; full bytes not retained."
+      },
+      "limit": "Temporal caution; do not project current administrative counts onto 2007 source.",
+      "restoration": "Restore from https://www.matd.gov.bf/accueil/actualites/details?cHash=268871d043c3b736e5d3721ee1c06cb7&tx_news_pi1%5Baction%5D=detail&tx_news_pi1%5Bcontroller%5D=News&tx_news_pi1%5Bnews%5D=1079; see source-facts-manifest.json for cited pages and limitations.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-04",
+      "role": "Burkina Faso Ministry 2025 reorganization. Temporal caution; do not project current administrative counts onto 2007 source.",
+      "temporal_status": "reference",
+      "url": "https://www.matd.gov.bf/accueil/actualites/details?cHash=268871d043c3b736e5d3721ee1c06cb7&tx_news_pi1%5Baction%5D=detail&tx_news_pi1%5Bcontroller%5D=News&tx_news_pi1%5Bnews%5D=1079",
+      "verification": "verified",
+      "vintage": "as cited in source-research.md"
+    }
+  ],
+  "stages": {
+    "geographic_approval": "unapproved",
+    "implementation": "proposed",
+    "research": "complete"
+  },
+  "subject_ids": [
+    "gb:BEN:ADM2:17685819B11652159225436",
+    "gb:BEN:ADM2:17685819B12843899137908",
+    "gb:BEN:ADM2:17685819B13440574347317",
+    "gb:BEN:ADM2:17685819B13654727190048",
+    "gb:BEN:ADM2:17685819B14284481019860",
+    "gb:BEN:ADM2:17685819B15106537416311",
+    "gb:BEN:ADM2:17685819B15816629354661",
+    "gb:BEN:ADM2:17685819B16235974739823",
+    "gb:BEN:ADM2:17685819B18003775101914",
+    "gb:BEN:ADM2:17685819B20513081200557",
+    "gb:BEN:ADM2:17685819B21167128046214",
+    "gb:BEN:ADM2:17685819B22505126398074",
+    "gb:BEN:ADM2:17685819B24804117588339",
+    "gb:BEN:ADM2:17685819B25851007312804",
+    "gb:BEN:ADM2:17685819B25902777071239",
+    "gb:BEN:ADM2:17685819B2600041724770",
+    "gb:BEN:ADM2:17685819B27582361148713",
+    "gb:BEN:ADM2:17685819B27727011440945",
+    "gb:BEN:ADM2:17685819B31222842827733",
+    "gb:BEN:ADM2:17685819B31481778008604",
+    "gb:BEN:ADM2:17685819B31910055772004",
+    "gb:BEN:ADM2:17685819B32176770628240",
+    "gb:BEN:ADM2:17685819B32706375807456",
+    "gb:BEN:ADM2:17685819B33333613616473",
+    "gb:BEN:ADM2:17685819B34979669430532",
+    "gb:BEN:ADM2:17685819B36498320143439",
+    "gb:BEN:ADM2:17685819B36696986957740",
+    "gb:BEN:ADM2:17685819B3857845768140",
+    "gb:BEN:ADM2:17685819B4092451643280",
+    "gb:BEN:ADM2:17685819B42315243749993",
+    "gb:BEN:ADM2:17685819B44038505687321",
+    "gb:BEN:ADM2:17685819B44866040554021",
+    "gb:BEN:ADM2:17685819B4559503573339",
+    "gb:BEN:ADM2:17685819B47795371701587",
+    "gb:BEN:ADM2:17685819B47850119626851",
+    "gb:BEN:ADM2:17685819B50728061848372",
+    "gb:BEN:ADM2:17685819B52071067315918",
+    "gb:BEN:ADM2:17685819B53288119636086",
+    "gb:BEN:ADM2:17685819B53348586225757",
+    "gb:BEN:ADM2:17685819B54194513987818",
+    "gb:BEN:ADM2:17685819B54561297103056",
+    "gb:BEN:ADM2:17685819B5479142895221",
+    "gb:BEN:ADM2:17685819B55066990993617",
+    "gb:BEN:ADM2:17685819B56321809459452",
+    "gb:BEN:ADM2:17685819B57031298313635",
+    "gb:BEN:ADM2:17685819B57130091553848",
+    "gb:BEN:ADM2:17685819B57139564746449",
+    "gb:BEN:ADM2:17685819B58605420666587",
+    "gb:BEN:ADM2:17685819B59667857223414",
+    "gb:BEN:ADM2:17685819B61468565661274",
+    "gb:BEN:ADM2:17685819B6397671477640",
+    "gb:BEN:ADM2:17685819B66349454131554",
+    "gb:BEN:ADM2:17685819B66402044537068",
+    "gb:BEN:ADM2:17685819B6698534807541",
+    "gb:BEN:ADM2:17685819B6734193751411",
+    "gb:BEN:ADM2:17685819B67930032483199",
+    "gb:BEN:ADM2:17685819B68474195135253",
+    "gb:BEN:ADM2:17685819B68764251362376",
+    "gb:BEN:ADM2:17685819B69046773697304",
+    "gb:BEN:ADM2:17685819B69592983793811",
+    "gb:BEN:ADM2:17685819B70132266072899",
+    "gb:BEN:ADM2:17685819B72435311571007",
+    "gb:BEN:ADM2:17685819B73457125885179",
+    "gb:BEN:ADM2:17685819B73911627176990",
+    "gb:BEN:ADM2:17685819B74075406499118",
+    "gb:BEN:ADM2:17685819B76954688832254",
+    "gb:BEN:ADM2:17685819B78854505931864",
+    "gb:BEN:ADM2:17685819B79860756135863",
+    "gb:BEN:ADM2:17685819B85973060374162",
+    "gb:BEN:ADM2:17685819B86631365550325",
+    "gb:BEN:ADM2:17685819B88590181370069",
+    "gb:BEN:ADM2:17685819B92421826245631",
+    "gb:BEN:ADM2:17685819B94511677610410",
+    "gb:BEN:ADM2:17685819B95850649576266",
+    "gb:BEN:ADM2:17685819B98321853839803",
+    "gb:BEN:ADM2:17685819B98348434447391",
+    "gb:BEN:ADM2:17685819B99804537894120",
+    "gb:BFA:ADM3:42667915B13366359142961",
+    "gb:BFA:ADM3:42667915B1338223866667",
+    "gb:BFA:ADM3:42667915B13549029678191",
+    "gb:BFA:ADM3:42667915B14278444138468",
+    "gb:BFA:ADM3:42667915B16831190976939",
+    "gb:BFA:ADM3:42667915B17246885311253",
+    "gb:BFA:ADM3:42667915B18358329057009",
+    "gb:BFA:ADM3:42667915B18397805273277",
+    "gb:BFA:ADM3:42667915B18464666784761",
+    "gb:BFA:ADM3:42667915B19354082614429",
+    "gb:BFA:ADM3:42667915B19470023297682",
+    "gb:BFA:ADM3:42667915B21207937160129",
+    "gb:BFA:ADM3:42667915B21364682823117",
+    "gb:BFA:ADM3:42667915B22006364973965",
+    "gb:BFA:ADM3:42667915B23935856515630",
+    "gb:BFA:ADM3:42667915B24193274859271",
+    "gb:BFA:ADM3:42667915B24285292265494",
+    "gb:BFA:ADM3:42667915B24493432724544",
+    "gb:BFA:ADM3:42667915B2474507756845",
+    "gb:BFA:ADM3:42667915B2484904803284",
+    "gb:BFA:ADM3:42667915B24961298550801",
+    "gb:BFA:ADM3:42667915B25969280386086",
+    "gb:BFA:ADM3:42667915B26304104697538",
+    "gb:BFA:ADM3:42667915B26324428915797",
+    "gb:BFA:ADM3:42667915B2633686972345",
+    "gb:BFA:ADM3:42667915B26903772127725",
+    "gb:BFA:ADM3:42667915B269835991919",
+    "gb:BFA:ADM3:42667915B27133048062136",
+    "gb:BFA:ADM3:42667915B28307161231084",
+    "gb:BFA:ADM3:42667915B29982757481778",
+    "gb:BFA:ADM3:42667915B30445117604657",
+    "gb:BFA:ADM3:42667915B31603694672773",
+    "gb:BFA:ADM3:42667915B32273624840297",
+    "gb:BFA:ADM3:42667915B34453858394075",
+    "gb:BFA:ADM3:42667915B35492218081193",
+    "gb:BFA:ADM3:42667915B36411918469129",
+    "gb:BFA:ADM3:42667915B37104353840830",
+    "gb:BFA:ADM3:42667915B37415713350877",
+    "gb:BFA:ADM3:42667915B38088664877736",
+    "gb:BFA:ADM3:42667915B38518260370692",
+    "gb:BFA:ADM3:42667915B39163884174855",
+    "gb:BFA:ADM3:42667915B39422983009651",
+    "gb:BFA:ADM3:42667915B3947844123383",
+    "gb:BFA:ADM3:42667915B3965842455768",
+    "gb:BFA:ADM3:42667915B40044761929098",
+    "gb:BFA:ADM3:42667915B40166139245913",
+    "gb:BFA:ADM3:42667915B40677652674756",
+    "gb:BFA:ADM3:42667915B4111837231739",
+    "gb:BFA:ADM3:42667915B41219300509989",
+    "gb:BFA:ADM3:42667915B43761360391430",
+    "gb:BFA:ADM3:42667915B43884105227908",
+    "gb:BFA:ADM3:42667915B45284072581758",
+    "gb:BFA:ADM3:42667915B45418261839820",
+    "gb:BFA:ADM3:42667915B45585951356100",
+    "gb:BFA:ADM3:42667915B46486309029997",
+    "gb:BFA:ADM3:42667915B48869062221896",
+    "gb:BFA:ADM3:42667915B49910358966013",
+    "gb:BFA:ADM3:42667915B5002765376866",
+    "gb:BFA:ADM3:42667915B51069498271877",
+    "gb:BFA:ADM3:42667915B51156996890672",
+    "gb:BFA:ADM3:42667915B51709645650809",
+    "gb:BFA:ADM3:42667915B52386116272945",
+    "gb:BFA:ADM3:42667915B53455062029217",
+    "gb:BFA:ADM3:42667915B53616457301834",
+    "gb:BFA:ADM3:42667915B53700061974151",
+    "gb:BFA:ADM3:42667915B53714824050636",
+    "gb:BFA:ADM3:42667915B54734417599050",
+    "gb:BFA:ADM3:42667915B54932048209855",
+    "gb:BFA:ADM3:42667915B56589285108362",
+    "gb:BFA:ADM3:42667915B57045798477942",
+    "gb:BFA:ADM3:42667915B57688121793974",
+    "gb:BFA:ADM3:42667915B58024946613473",
+    "gb:BFA:ADM3:42667915B59165709554737",
+    "gb:BFA:ADM3:42667915B59709427509633",
+    "gb:BFA:ADM3:42667915B61668218511057",
+    "gb:BFA:ADM3:42667915B63097227675622",
+    "gb:BFA:ADM3:42667915B63244020672058",
+    "gb:BFA:ADM3:42667915B64178443767960",
+    "gb:BFA:ADM3:42667915B64385002689571",
+    "gb:BFA:ADM3:42667915B64731571185780",
+    "gb:BFA:ADM3:42667915B64849087178214",
+    "gb:BFA:ADM3:42667915B64910131253246",
+    "gb:BFA:ADM3:42667915B65115541474403",
+    "gb:BFA:ADM3:42667915B65573003772900",
+    "gb:BFA:ADM3:42667915B65909987893466",
+    "gb:BFA:ADM3:42667915B65936561287072",
+    "gb:BFA:ADM3:42667915B67041600938043",
+    "gb:BFA:ADM3:42667915B67471086093404",
+    "gb:BFA:ADM3:42667915B68419689017220",
+    "gb:BFA:ADM3:42667915B70851617120132",
+    "gb:BFA:ADM3:42667915B71093387257241",
+    "gb:BFA:ADM3:42667915B71249370335403",
+    "gb:BFA:ADM3:42667915B71432500241843",
+    "gb:BFA:ADM3:42667915B71865713119219",
+    "gb:BFA:ADM3:42667915B71888785866036",
+    "gb:BFA:ADM3:42667915B71969077134585",
+    "gb:BFA:ADM3:42667915B72235153927387",
+    "gb:BFA:ADM3:42667915B72818753155868",
+    "gb:BFA:ADM3:42667915B72890279720100",
+    "gb:BFA:ADM3:42667915B73057308480531",
+    "gb:BFA:ADM3:42667915B73252805782344",
+    "gb:BFA:ADM3:42667915B74397844132031",
+    "gb:BFA:ADM3:42667915B74672538793751",
+    "gb:BFA:ADM3:42667915B74780748949617",
+    "gb:BFA:ADM3:42667915B76358293518012",
+    "gb:BFA:ADM3:42667915B76566076780698",
+    "gb:BFA:ADM3:42667915B76879994711766",
+    "gb:BFA:ADM3:42667915B7740320455325",
+    "gb:BFA:ADM3:42667915B78687498330734",
+    "gb:BFA:ADM3:42667915B79035484727943",
+    "gb:BFA:ADM3:42667915B80003266126581",
+    "gb:BFA:ADM3:42667915B80183659134557",
+    "gb:BFA:ADM3:42667915B81659322834572",
+    "gb:BFA:ADM3:42667915B82247688636930",
+    "gb:BFA:ADM3:42667915B8242100010293",
+    "gb:BFA:ADM3:42667915B82622081378142",
+    "gb:BFA:ADM3:42667915B82997639563785",
+    "gb:BFA:ADM3:42667915B83893506914794",
+    "gb:BFA:ADM3:42667915B84073294119523",
+    "gb:BFA:ADM3:42667915B84674728348338",
+    "gb:BFA:ADM3:42667915B85111587488175",
+    "gb:BFA:ADM3:42667915B85180471375686",
+    "gb:BFA:ADM3:42667915B85201351425189",
+    "gb:BFA:ADM3:42667915B86062149942811",
+    "gb:BFA:ADM3:42667915B87927741253246",
+    "gb:BFA:ADM3:42667915B88929404731058",
+    "gb:BFA:ADM3:42667915B88987829326975",
+    "gb:BFA:ADM3:42667915B89320381776124",
+    "gb:BFA:ADM3:42667915B90056611705464",
+    "gb:BFA:ADM3:42667915B9007594153168",
+    "gb:BFA:ADM3:42667915B90242579498040",
+    "gb:BFA:ADM3:42667915B90803654003688",
+    "gb:BFA:ADM3:42667915B91074558581991",
+    "gb:BFA:ADM3:42667915B93680604687354",
+    "gb:BFA:ADM3:42667915B94005895949338",
+    "gb:BFA:ADM3:42667915B94041554607665",
+    "gb:BFA:ADM3:42667915B94418441220907",
+    "gb:BFA:ADM3:42667915B95084256654356",
+    "gb:BFA:ADM3:42667915B95539329314404",
+    "gb:BFA:ADM3:42667915B96200275035101",
+    "gb:BFA:ADM3:42667915B96474046227229",
+    "gb:BFA:ADM3:42667915B96864216443466",
+    "gb:BFA:ADM3:42667915B97023064152667",
+    "gb:BFA:ADM3:42667915B9721963258644",
+    "gb:BFA:ADM3:42667915B97475198310550",
+    "gb:BFA:ADM3:42667915B97751491466239",
+    "gb:BFA:ADM3:42667915B98611440136422"
+  ],
+  "subject_ids_sha256": "a0fa84f5ae0a9ebc952289e2ecbb89b076d8de9d33c362505513471e1687e056",
+  "summaries": [],
+  "validation": [
+    {
+      "evidence_path": "data/regional-review/regional-review-5d48dd1f18c0b48e/source-crosswalk-controls.json",
+      "kind": "source",
+      "method_id": "source-role-crosswalk",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/regional-review-5d48dd1f18c0b48e/geometry-controls.json",
+      "kind": "geography",
+      "method_id": "geographic-overlay",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/regional-review-5d48dd1f18c0b48e/packet-generator-controls.json",
+      "kind": "generator",
+      "method_id": "packet-generators",
+      "outcome": "passed"
+    }
+  ],
+  "version": 1,
+  "worker_id": "codex-01a10948-7d38-75d0-bc01-4cc28ea41f49-467-bf"
+}
