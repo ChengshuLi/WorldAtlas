@@ -1,0 +1,124 @@
+{
+  "version": 1,
+  "issue": 798,
+  "lane": "engineering",
+  "worker_id": "engineering-neon-storage-publisher-20261004-local01",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "75c73b8485d1d28a9392bff656a5cbbb7db284ec",
+    "files": [
+      {
+        "path": "postgres/schema.sql",
+        "bytes": 51470,
+        "sha256": "1a43333772e6059d4fa97ce60baad7a27239616693c86708d08eadbc73b97618",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "scripts/current-postgres-recovery.mjs",
+        "bytes": 40453,
+        "sha256": "6da5563948de3b7139449f132d19d263c289d3625a715965a1e21f003e06cf5e",
+        "hash_kind": "file-bytes",
+        "role": "previous-implementation"
+      },
+      {
+        "path": "scripts/test-current-postgres-recovery-native.mjs",
+        "bytes": 10378,
+        "sha256": "41034d3fd018f7eb02217c878c55de1673bf057a2b26c6fb1ae09ead7248423a",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "test/current-postgres-recovery.test.mjs",
+        "bytes": 17236,
+        "sha256": "b5b801f70d727afe9145c8c4bd46a5a7cbb540717cd593248ba1bac5705f8da6",
+        "hash_kind": "file-bytes",
+        "role": "previous-implementation"
+      },
+      {
+        "path": "package-lock.json",
+        "bytes": 246133,
+        "sha256": "38279076ceffe227ac3e77678916d5f223bd0fb086c0036a4fe0c8905d110394",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {},
+    "pin_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "scripts/current-postgres-recovery.mjs",
+      "bytes": 42042,
+      "sha256": "bd6024257aaa0a8b8571f97fa97cadb08a0cd84fd3611b81cc7e55c90d93fdc8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/current-postgres-recovery.test.mjs",
+      "bytes": 18678,
+      "sha256": "0a18ecb7b13c9725ef6251546f2fd96d10d964d4df53f13b934e13708854c0c4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-target-disk-20261004-local01/README.md",
+      "bytes": 1882,
+      "sha256": "1839c5fe92bb94ec7bc7e6d367150fccfc231f76a559f979edf6c498c2d212c4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-target-disk-20261004-local01/prepare-evidence.mjs",
+      "bytes": 2588,
+      "sha256": "f0789e48ba0230d9022ea329cc2d39ad6efbc0f918370d3b2f8bc4c0dec285c8",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "native-owner-maintenance",
+      "kind": "code",
+      "description": "Increase temporary recovery disk to3GiB within unchanged4GiB memory cap, retain bounded filesystem measurement before/after final readback and sanitize only terse PostgreSQL SQLSTATE or process codes. All exact source/restore ACL and factual parity remains required. No source SQL writes or production recovery claim before actual rerun",
+      "software": "Node24, pinned PostgreSQL18 native container and locked Neon serverless driver",
+      "units": "No new physical benchmark or native production capacity claim before actual execution"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "change_receipts": [
+    {
+      "path": "scripts/current-postgres-recovery.mjs",
+      "status": "modified",
+      "original_sha256": "6da5563948de3b7139449f132d19d263c289d3625a715965a1e21f003e06cf5e"
+    },
+    {
+      "path": "test/current-postgres-recovery.test.mjs",
+      "status": "modified",
+      "original_sha256": "b5b801f70d727afe9145c8c4bd46a5a7cbb540717cd593248ba1bac5705f8da6"
+    },
+    {
+      "path": "coordination/engineering/native-target-disk-20261004-local01/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-target-disk-20261004-local01/prepare-evidence.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-target-disk-20261004-local01/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "node --test test/current-postgres-recovery.test.mjs",
+    "node coordination/engineering/native-target-disk-20261004-local01/prepare-evidence.mjs",
+    "node scripts/evidence-quality.mjs coordination/engineering/native-target-disk-20261004-local01/evidence-quality.json"
+  ]
+}
