@@ -1,6 +1,6 @@
 # Reproduce issue #980 county checks
 
-Run from repository root in the exact baseline checkout recorded in `scope.json` (commit `aa42ca45e4e687cd109a86cbc40583b77016b8bb`). The geometry program loads Atlas features using `git show` at this immutable commit and reads the retained 2018/2025 source responses in the read-only #428 packet plus the eight-record 2026 response in this directory. It fails if the exact eight IDs are missing or duplicated.
+Run from repository root in the exact baseline checkout recorded in `scope.json` (commit `c42f4b7465964245ecbcd8eed4961eb76af3106b`). The geometry program loads Atlas features using `git show` at this immutable commit and reads the retained 2018/2025 source responses in the read-only #428 packet plus the eight-record 2026 response in this directory. It fails if the exact eight IDs are missing or duplicated.
 
 ## Environment and commands
 
