@@ -1,0 +1,1739 @@
+{
+  "version": 1,
+  "repo": "ChengshuLi/WorldAtlas",
+  "issue": 894,
+  "started_at": "2026-10-05T06:42:53.472Z",
+  "implementation_pr": 895,
+  "reviewed_head": "078053c665441a191fd05d786994820b0f792215",
+  "helper_sha256": "4d862a0b852259b8f1956be3e051ce57059aa8fadbfa30c6fabb2246bb57ba85",
+  "checkout_commit": "0f0f090dc0db118f2a4deb2c1c18edc7e99850d0",
+  "inventory": {
+    "captured_at": "2026-10-05T06:42:07.200074+00:00",
+    "candidates": [
+      {
+        "branch": "engineering/auditor-prompt-20261004",
+        "pr": 780,
+        "expected_head": "fd57d2124a39770b200caaf587367eb6f5632e12",
+        "protected": false
+      },
+      {
+        "branch": "engineering/budget-classification-698-20261004",
+        "pr": 701,
+        "expected_head": "f44057a61733792493e70dbda8c439eb42a41ec2",
+        "protected": false
+      },
+      {
+        "branch": "engineering/budget-proof-698-20261004",
+        "pr": 704,
+        "expected_head": "5f6183de04cda469fce572fca3b645e433e811a1",
+        "protected": false
+      },
+      {
+        "branch": "engineering/checkout-benchmark-686-20261003",
+        "pr": 689,
+        "expected_head": "b09db3bf21624deef2cd618aef8191ab1d1b5dcd",
+        "protected": false
+      },
+      {
+        "branch": "engineering/checkout-efficiency-686-20261003",
+        "pr": 687,
+        "expected_head": "a53a8a50b9c4fad144ab2bb9d3693a5257d7dcb8",
+        "protected": false
+      },
+      {
+        "branch": "engineering/ci-duration-balance-20261004",
+        "pr": 707,
+        "expected_head": "d50b44f1eaf58f225d3e629813ca772a1a7df0f1",
+        "protected": false
+      },
+      {
+        "branch": "engineering/ci-duration-proof-706-20261004",
+        "pr": 708,
+        "expected_head": "1c2f11a65ae3aef4d532989ed1e4462540954494",
+        "protected": false
+      },
+      {
+        "branch": "engineering/ci-reuse-proof-688",
+        "pr": 691,
+        "expected_head": "e907a116d62c3a63668cb58772397b70a3c7c6cb",
+        "protected": false
+      },
+      {
+        "branch": "engineering/cloudflare-migration-792",
+        "pr": 795,
+        "expected_head": "a2781737fce714f1313f96a938682f932af10358",
+        "protected": false
+      },
+      {
+        "branch": "engineering/cloudflare-public-822",
+        "pr": 825,
+        "expected_head": "b7f921ce3139f5a42330e6e7208159981cb5ea4d",
+        "protected": false
+      },
+      {
+        "branch": "engineering/compact-live-api-proof-20261004-local01",
+        "pr": 793,
+        "expected_head": "9b73d3865fe2606e43b1157055dd1ca20039d45f",
+        "protected": false
+      },
+      {
+        "branch": "engineering/compact-membership-production-20261004-local01",
+        "pr": 788,
+        "expected_head": "03503ab39f7089541ded70f47081e3cd8500234d",
+        "protected": false
+      },
+      {
+        "branch": "engineering/compact-membership-profile-20261004-local01",
+        "pr": 787,
+        "expected_head": "68611be79ec32265b170c09e5c469f76e2d16df7",
+        "protected": false
+      },
+      {
+        "branch": "engineering/compact-memberships-20261004-local01",
+        "pr": 785,
+        "expected_head": "5d368fa5d65d812414cc33d17eaa464ccfc237ae",
+        "protected": false
+      },
+      {
+        "branch": "engineering/compact-recovery-20261004-local01",
+        "pr": 862,
+        "expected_head": "d5106fe8eda06bcf28960e048b914161d02437fe",
+        "protected": false
+      },
+      {
+        "branch": "engineering/compact-retirement-lock-20261004-local01",
+        "pr": 809,
+        "expected_head": "b041a5c601f21182b9afc7b2f6659116bee1d522",
+        "protected": false
+      },
+      {
+        "branch": "engineering/delegated-recovery-20261004",
+        "pr": 734,
+        "expected_head": "27997acd4669910eaf8197344ed78bdf7f8a3556",
+        "protected": false
+      },
+      {
+        "branch": "engineering/export-pages-20261004-local01",
+        "pr": 881,
+        "expected_head": "5ca22e8668d0d21cfc961a3fd32c6b279fd94a15",
+        "protected": false
+      },
+      {
+        "branch": "engineering/focused-deps-695",
+        "pr": 697,
+        "expected_head": "97717781292a78a06dc1a912358db51c2bc310e9",
+        "protected": false
+      },
+      {
+        "branch": "engineering/focused-deps-proof-695",
+        "pr": 702,
+        "expected_head": "886296a325207c441e70a37ed168750b550e86cd",
+        "protected": false
+      },
+      {
+        "branch": "engineering/full-suite-balance-692",
+        "pr": 693,
+        "expected_head": "617e514d5765c32fb26f38df44968774f092c5c0",
+        "protected": false
+      },
+      {
+        "branch": "engineering/full-suite-balance-proof-692",
+        "pr": 700,
+        "expected_head": "3ba9a5880f598f0e3edd101fc82dabf1790cf2aa",
+        "protected": false
+      },
+      {
+        "branch": "engineering/geography-ci-profile-20261004",
+        "pr": 816,
+        "expected_head": "7ad8d60d4537716598c2249944ca01cbd65562f6",
+        "protected": false
+      },
+      {
+        "branch": "engineering/hierarchy-crosswalk-20261003-a9c2",
+        "pr": 673,
+        "expected_head": "a0d648207b868b0e9437e14d12af8c8e4eea8c64",
+        "protected": false
+      },
+      {
+        "branch": "engineering/hierarchy-install-20261003-a9c2",
+        "pr": 680,
+        "expected_head": "cad76b1187e8e487bc65a1b16fceb9eb6a2d18f3",
+        "protected": false
+      },
+      {
+        "branch": "engineering/membership-storage-20261004-local01",
+        "pr": 782,
+        "expected_head": "4bb843c57faae1041a084f01ef47c88345b21366",
+        "protected": false
+      },
+      {
+        "branch": "engineering/merge-integration-650-20261003",
+        "pr": 681,
+        "expected_head": "f9427ed1eac4290589316642a8795ad7d2abf74d",
+        "protected": false
+      },
+      {
+        "branch": "engineering/merge-integration-650-confirmed-20261003",
+        "pr": 683,
+        "expected_head": "a4cd70955a6a08704cd94c20be6882edad380b47",
+        "protected": false
+      },
+      {
+        "branch": "engineering/merged-head-cleanup-20261004",
+        "pr": 895,
+        "expected_head": "078053c665441a191fd05d786994820b0f792215",
+        "protected": false
+      },
+      {
+        "branch": "engineering/native-fullsize-transport-20261004-local01",
+        "pr": 796,
+        "expected_head": "23987e46bfa8ab2b0e1dce5f1d9b08535fb0373b",
+        "protected": false
+      },
+      {
+        "branch": "engineering/native-neon-recovery-20261004-local01",
+        "pr": 791,
+        "expected_head": "5c669429f29e1b66da7dce4e7b56639201482178",
+        "protected": false
+      },
+      {
+        "branch": "engineering/native-target-disk-20261004-local01",
+        "pr": 799,
+        "expected_head": "451b23c0c784e69892c0ea74f8151660e1926dae",
+        "protected": false
+      },
+      {
+        "branch": "engineering/observation-contracts-20261003-7e91",
+        "pr": 659,
+        "expected_head": "e1b60187076c9a05cb084e496aeb9fa4af1cf6e7",
+        "protected": false
+      },
+      {
+        "branch": "engineering/observation-integration-20261003-7e91",
+        "pr": 677,
+        "expected_head": "25a85392979580275e7ba2f4f2aa0424ba411276",
+        "protected": false
+      },
+      {
+        "branch": "engineering/observation-storage-20261003-7e91",
+        "pr": 671,
+        "expected_head": "bd48350a9fed47b6ca66401a0a21db4ca8cee4ba",
+        "protected": false
+      },
+      {
+        "branch": "engineering/ownership-generation-20261004-local01",
+        "pr": 850,
+        "expected_head": "d961e229ffdec4e202de89cb13999c62b033a8c3",
+        "protected": false
+      },
+      {
+        "branch": "engineering/palette-publish-20261003-7e91",
+        "pr": 651,
+        "expected_head": "38418bef0b31ab2b8eed5ba804f91a9fad0f9890",
+        "protected": false
+      },
+      {
+        "branch": "engineering/parity-hoist-694-20261004",
+        "pr": 696,
+        "expected_head": "a368cdbdb2e651bd0261515a930bdb480333d72b",
+        "protected": false
+      },
+      {
+        "branch": "engineering/parity-proof-694-20261004",
+        "pr": 705,
+        "expected_head": "4b0ef0a38e036cb5ef3a00c9d40a95d4ced62b2f",
+        "protected": false
+      },
+      {
+        "branch": "engineering/populated-navigation-20261004-a9c2",
+        "pr": 740,
+        "expected_head": "f22961a681d6980b49c46b6391b7426700ed09a7",
+        "protected": false
+      },
+      {
+        "branch": "engineering/provenance-727-20261004-7e91",
+        "pr": 739,
+        "expected_head": "b6bcc6a20c3e1549ccae27182056c698a230988c",
+        "protected": false
+      },
+      {
+        "branch": "engineering/provider-capacity-20261003-7e91",
+        "pr": 656,
+        "expected_head": "0b29b3c467545387137f7f24950693770a084fd6",
+        "protected": false
+      },
+      {
+        "branch": "engineering/publisher-handoff-20261004",
+        "pr": 731,
+        "expected_head": "3af0ff614f976ad4eda2e0af4bc5bbd6a6f4e807",
+        "protected": false
+      },
+      {
+        "branch": "engineering/publisher-main-20261004",
+        "pr": 781,
+        "expected_head": "8a3fae34693ff695b2ca92159b99b987bb23fb21",
+        "protected": false
+      },
+      {
+        "branch": "engineering/queue-test-clock-699",
+        "pr": 703,
+        "expected_head": "83eceea975ead6133ad8eab3c2e61e9184dcecbb",
+        "protected": false
+      },
+      {
+        "branch": "engineering/research-ci-budget-20261004",
+        "pr": 829,
+        "expected_head": "d943a083324eddcd79686c1f38335547687f247c",
+        "protected": false
+      },
+      {
+        "branch": "engineering/research-ci-package-inputs-20261004",
+        "pr": 842,
+        "expected_head": "02e53e4c12a3bd340018521584736b59f18a87d6",
+        "protected": false
+      },
+      {
+        "branch": "engineering/reviewer-instructions-684-20261003",
+        "pr": 685,
+        "expected_head": "1bd87433b78cc955f90a5a3e182b614139bfc54d",
+        "protected": false
+      },
+      {
+        "branch": "engineering/source-hints-20261003-a9c2",
+        "pr": 670,
+        "expected_head": "a29039cd3dc21db37a0f5a1b2273449f99ab96df",
+        "protected": false
+      },
+      {
+        "branch": "engineering/source-subject-extracts-713-20261003",
+        "pr": 715,
+        "expected_head": "82b8399f3aacabfada98ecb77b7589853fd45678",
+        "protected": false
+      },
+      {
+        "branch": "engineering/sql-recovery-20261004-7e91",
+        "pr": 721,
+        "expected_head": "7ae6cc4ac382b8c2787a9fe98f9553da2355a264",
+        "protected": false
+      },
+      {
+        "branch": "engineering/stale-candidate-717-20261004",
+        "pr": 719,
+        "expected_head": "1402b27871fb769e5a032e3a3ac3b4c4ed8b4549",
+        "protected": false
+      },
+      {
+        "branch": "engineering/startup-20261004-a9c2",
+        "pr": 745,
+        "expected_head": "9e00fc089ec61f15e74406b452789688c28b82a4",
+        "protected": false
+      },
+      {
+        "branch": "engineering/startup-scheduling-20261004-a9c2",
+        "pr": 747,
+        "expected_head": "93556809c5a785cf606fcf866870ee6e6f5f7194",
+        "protected": false
+      },
+      {
+        "branch": "engineering/storage-catalog-complete-20261004-a9c2",
+        "pr": 753,
+        "expected_head": "88ddf472ada6e46503d632ae85163bdb9afd3b1c",
+        "protected": false
+      },
+      {
+        "branch": "engineering/storage-diagnostic-20261004-a9c2",
+        "pr": 748,
+        "expected_head": "76bf793e7cffaf93aad73e064818e5ecc400e4db",
+        "protected": false
+      },
+      {
+        "branch": "engineering/storage-handoff-20261003-a9c2",
+        "pr": 664,
+        "expected_head": "832f795fd5dac8051269201eee5e23f6130795b7",
+        "protected": false
+      },
+      {
+        "branch": "engineering/storage-recovery-20261004-7e91",
+        "pr": 711,
+        "expected_head": "2ef5b20a95ade006e268011426d2d468e39c5621",
+        "protected": false
+      },
+      {
+        "branch": "engineering/urgent-worker-priority-20261004",
+        "pr": 710,
+        "expected_head": "b34a25499d112e616a2c80ea2b630e2af346ca50",
+        "protected": false
+      },
+      {
+        "branch": "geography/alaska-ecoregion-role-20261004-601b",
+        "pr": 736,
+        "expected_head": "4105f4776cb9e5c24c16e414ac13d0215b379d1d",
+        "protected": false
+      },
+      {
+        "branch": "geography/alaska-settlement-gaps-20261003",
+        "pr": 672,
+        "expected_head": "395a90053f7510ae3334dd1a8a02f429ccb00a5d",
+        "protected": false
+      },
+      {
+        "branch": "geography/alaska-settlement-verification-20261004",
+        "pr": 716,
+        "expected_head": "14ef1376b7aa33f9bebc7f3df43144a865f7035f",
+        "protected": false
+      },
+      {
+        "branch": "geography/anatolia-batch2-72-20261005",
+        "pr": 824,
+        "expected_head": "8b083135d6546e663bb3361125cd9e3edcad6369",
+        "protected": false
+      },
+      {
+        "branch": "geography/bc-csd-crosswalk-607-restart-20261004-ecb3053c",
+        "pr": 733,
+        "expected_head": "351457f7e358b7adb4260f5d925a8fcc1f39c492",
+        "protected": false
+      },
+      {
+        "branch": "geography/bc-physical-settlement-606-20261003",
+        "pr": 669,
+        "expected_head": "48ba97a15d2182ec4048603cbc87270ab04668fc",
+        "protected": false
+      },
+      {
+        "branch": "geography/bc-remainders-20261003-24b4052a",
+        "pr": 658,
+        "expected_head": "d43e162563de6b3acf46d6f72d18aaae01cd14ea",
+        "protected": false
+      },
+      {
+        "branch": "geography/bc-remainders-reproduction-667-20261003",
+        "pr": 678,
+        "expected_head": "22f019cab117b9bfe708155f5a11c4eef48b522e",
+        "protected": false
+      },
+      {
+        "branch": "geography/bc-wa-repro-20261004-660-a6d59b",
+        "pr": 724,
+        "expected_head": "111ed2a503ece5056beccba2e69aa9bde3e18aeb",
+        "protected": false
+      },
+      {
+        "branch": "geography/bc-wa-reproduction-660-b150279b",
+        "pr": 737,
+        "expected_head": "ef5c3b47578ec6de6960e931e0983620beefafff",
+        "protected": false
+      },
+      {
+        "branch": "geography/bc-washington-coastal-edge",
+        "pr": 657,
+        "expected_head": "3e4aa4b9836599b9d5a4fb902dd83ae0843a418c",
+        "protected": false
+      },
+      {
+        "branch": "geography/bolivia-ecoregion-roles-20261003",
+        "pr": 668,
+        "expected_head": "e06860ea0070734e20aac87129222545a015886c",
+        "protected": false
+      },
+      {
+        "branch": "geography/bolivia-repro-20261004-675-7ed19418",
+        "pr": 718,
+        "expected_head": "d071eceb347e4d71bca620951a71084881decdd2",
+        "protected": false
+      },
+      {
+        "branch": "geography/bouvet-tristan-786",
+        "pr": 800,
+        "expected_head": "53cf68fafe0255c90b4e912ae1d45724f1f08049",
+        "protected": false
+      },
+      {
+        "branch": "geography/central-africa-batch3-20261005",
+        "pr": 882,
+        "expected_head": "87bb40780b7fdf5ea62c1daa50397c0cf6f29c6a",
+        "protected": false
+      },
+      {
+        "branch": "geography/central-africa-batch4-20261005",
+        "pr": 873,
+        "expected_head": "093ccbc3d4e9f1fa1d38c26b5170426e02a910fd",
+        "protected": false
+      },
+      {
+        "branch": "geography/chad-ecoregion-role-20261005-r1",
+        "pr": 892,
+        "expected_head": "c5605ccfca1fe8ba5ea3e26081d78ce8c3698257",
+        "protected": false
+      },
+      {
+        "branch": "geography/colombia-axis-order-20261003",
+        "pr": 655,
+        "expected_head": "ed1a1e70ad8e4a85349e670a53845f6c449f8321",
+        "protected": false
+      },
+      {
+        "branch": "geography/colombia-dane-587-20261004",
+        "pr": 744,
+        "expected_head": "25dce57608839515cc6abf0aeffc81fee78b010c",
+        "protected": false
+      },
+      {
+        "branch": "geography/equatorial-micronesia-20261003-661-83b9d991",
+        "pr": 666,
+        "expected_head": "c0d55ee7c8361d5cd735d33e0dd17ffc1358e287",
+        "protected": false
+      },
+      {
+        "branch": "geography/issue486-baseline-pins-20261004",
+        "pr": 729,
+        "expected_head": "d9ab19350f4f55a35718580801cc98ba13526a37",
+        "protected": false
+      },
+      {
+        "branch": "geography/las-golondrinas-restore-20261003",
+        "pr": 665,
+        "expected_head": "6c67ddad630a56b194bb15391cb3f1f7d64a31be",
+        "protected": false
+      },
+      {
+        "branch": "geography/pacific-ne-repro-20261003",
+        "pr": 674,
+        "expected_head": "d635791996e1b65251d6843644e240074588449c",
+        "protected": false
+      },
+      {
+        "branch": "geography/protect-wna-485-reproduction",
+        "pr": 652,
+        "expected_head": "d361a00838a1d5e562000e08dbba1b8fed01af58",
+        "protected": false
+      },
+      {
+        "branch": "geography/regional-review-1deb892647c1aa26",
+        "pr": 814,
+        "expected_head": "bf216a78b0e9f4e31f3d30aec804c3baa8608fb3",
+        "protected": false
+      },
+      {
+        "branch": "geography/regional-review-3e1fa7fa469a0b13",
+        "pr": 880,
+        "expected_head": "8092ac2746ac86e55ea226911d3fb428d1a684f9",
+        "protected": false
+      },
+      {
+        "branch": "geography/regional-review-71fc01fe133fc303",
+        "pr": 848,
+        "expected_head": "ad7f6b02cb9a658453cbb1561399952341ddfdb4",
+        "protected": false
+      },
+      {
+        "branch": "geography/regional-review-97ccc950999ad631",
+        "pr": 805,
+        "expected_head": "ba44970bfc8e9f825794f42265cbeaf65fcadc84",
+        "protected": false
+      },
+      {
+        "branch": "geography/regional-review-819251b400ceb679",
+        "pr": 840,
+        "expected_head": "307ac91d0c7199bdea6eb1164dd7be6119f92601",
+        "protected": false
+      },
+      {
+        "branch": "geography/regional-review-96597060edbd6143",
+        "pr": 853,
+        "expected_head": "ccab101277b922018ae5293add992ec2d58f481a",
+        "protected": false
+      },
+      {
+        "branch": "geography/regional-review-aeea5c053fbdeb8d-20261005",
+        "pr": 885,
+        "expected_head": "bb87a6f79bfa96a273fb653c8e9b9189ddf26516",
+        "protected": false
+      },
+      {
+        "branch": "geography/regional-review-c06ee400da8c0bf6",
+        "pr": 867,
+        "expected_head": "bf685358cf54b0990dc3417490de53e90255cc1d",
+        "protected": false
+      },
+      {
+        "branch": "geography/regional-review-d0984f717127fb3e-20261005",
+        "pr": 891,
+        "expected_head": "60c709821f0d068d56d0ff5427331e61991ec0f5",
+        "protected": false
+      },
+      {
+        "branch": "geography/regional-review-ef67318527f5f3a3",
+        "pr": 823,
+        "expected_head": "aec507a6bbba570cf042ab7cffae3db8e4528c9a",
+        "protected": false
+      },
+      {
+        "branch": "geography/release-pin-579-20261004",
+        "pr": 741,
+        "expected_head": "fcc53c92dab06fc85cc685cf30dab7d47eac3c03",
+        "protected": false
+      },
+      {
+        "branch": "geography/san-bernardino-ecoregion-roles-597-20261004",
+        "pr": 735,
+        "expected_head": "7281b0ed34ab76858dd2900aa4661067ad03fcd7",
+        "protected": false
+      },
+      {
+        "branch": "geography/sierra-leone-license-provenance-746",
+        "pr": 860,
+        "expected_head": "eeff7ee6eef29167186ed1198a14f1fefc334cb4",
+        "protected": false
+      },
+      {
+        "branch": "geography/southern-indian-ocean-baseline-pins-20261004",
+        "pr": 725,
+        "expected_head": "a4c7ddf461c6cd1b8be0da6585dfa9d3849d59cb",
+        "protected": false
+      },
+      {
+        "branch": "geography/subarctic-america-batch1-20261005",
+        "pr": 890,
+        "expected_head": "b4019f0957cdde93b2b193926b7c1001c2b59b23",
+        "protected": false
+      },
+      {
+        "branch": "geography/turkey-batch4-continue-20261005",
+        "pr": 863,
+        "expected_head": "81b3ddee2043a9b7e539c3d85d8a157dfad3f7ee",
+        "protected": false
+      },
+      {
+        "branch": "geography/valdez-cordova-successor-602-20261004",
+        "pr": 730,
+        "expected_head": "37435ab565aab003bafacb5ea48a6da7eb540d98",
+        "protected": false
+      },
+      {
+        "branch": "geography/washington-overlay-600-20261004",
+        "pr": 743,
+        "expected_head": "c46bf49a8d9cea19bc8da43456365849e969e5e3",
+        "protected": false
+      },
+      {
+        "branch": "geography/west-africa-batch2-20261005",
+        "pr": 861,
+        "expected_head": "3fef42ac4ba72b4baf9e9e46f401e9ce81f971d3",
+        "protected": false
+      },
+      {
+        "branch": "geography/west-africa-batch5-20261005",
+        "pr": 837,
+        "expected_head": "2e0a818711cbb03f24a8d9a15099a6e9688bdf46",
+        "protected": false
+      },
+      {
+        "branch": "geography/west-africa-batch8-20261004",
+        "pr": 807,
+        "expected_head": "3f6bfcb69b7529a74edbdb438360e3e750328f36",
+        "protected": false
+      },
+      {
+        "branch": "geography/west-africa-batch8-completion-20261005",
+        "pr": 836,
+        "expected_head": "6f778fe497833ce7c80007898d8538b2b6be01f0",
+        "protected": false
+      },
+      {
+        "branch": "geography/west-africa-ben-bf-batch1-20261005",
+        "pr": 859,
+        "expected_head": "b19968912dfd9426fa7f20e2179b4ba121faaeaa",
+        "protected": false
+      },
+      {
+        "branch": "geography/west-africa-civ-batch3-20261005",
+        "pr": 844,
+        "expected_head": "3c5eae86b06ab4026f53e8ff3d87893902075a74",
+        "protected": false
+      },
+      {
+        "branch": "geography/westafrica-476-20261004-b49a3d12",
+        "pr": 760,
+        "expected_head": "939c22ddc60988258511abc33d972c61c9111b5e",
+        "protected": false
+      },
+      {
+        "branch": "geography/westafrica-476-20261004-followups",
+        "pr": 765,
+        "expected_head": "b417c7b0aa2e29bc2d61f87850811c0843026c15",
+        "protected": false
+      },
+      {
+        "branch": "geography/westafrica-477-20261004-f8d97563",
+        "pr": 758,
+        "expected_head": "e0f9eac4fdd0ad1e3881add4aa0a3d9239987a66",
+        "protected": false
+      },
+      {
+        "branch": "geography/westafrica-478-20261004",
+        "pr": 752,
+        "expected_head": "a9fef411b6fbe4b4fa0128c1657391cace464dc1",
+        "protected": false
+      },
+      {
+        "branch": "geography/westafrica-479-20261004",
+        "pr": 746,
+        "expected_head": "ea888d99d1a3a0fabadc2d53cd21291336178ec2",
+        "protected": false
+      },
+      {
+        "branch": "geography/western-county-water-edges-20261004-598",
+        "pr": 742,
+        "expected_head": "30a77498b5a3885056e47ea9eef1506727c255b9",
+        "protected": false
+      },
+      {
+        "branch": "geography/wio-reproduction-662-20261004",
+        "pr": 722,
+        "expected_head": "7f0e05e6d08bb768a3f344ec4a76e060bb2f7e73",
+        "protected": false
+      }
+    ],
+    "advanced": [],
+    "no_merged_match": [
+      "engineering/cloudflare-public-822-deploy",
+      "engineering/research-ci-feature-preserved-20261004",
+      "engineering/wheel-zoom-886",
+      "geography/bc-admin-vintage-crosswalk-20261004-607-0589ac8b",
+      "main"
+    ]
+  },
+  "results": [
+    {
+      "branch": "engineering/auditor-prompt-20261004",
+      "pr": 780,
+      "expected_head": "fd57d2124a39770b200caaf587367eb6f5632e12",
+      "protected": false,
+      "observed_at": "2026-10-05T06:42:56.890Z",
+      "status": "deleted",
+      "reference": "engineering/auditor-prompt-20261004"
+    },
+    {
+      "branch": "engineering/budget-classification-698-20261004",
+      "pr": 701,
+      "expected_head": "f44057a61733792493e70dbda8c439eb42a41ec2",
+      "protected": false,
+      "observed_at": "2026-10-05T06:43:00.477Z",
+      "status": "deleted",
+      "reference": "engineering/budget-classification-698-20261004"
+    },
+    {
+      "branch": "engineering/budget-proof-698-20261004",
+      "pr": 704,
+      "expected_head": "5f6183de04cda469fce572fca3b645e433e811a1",
+      "protected": false,
+      "observed_at": "2026-10-05T06:43:04.522Z",
+      "status": "deleted",
+      "reference": "engineering/budget-proof-698-20261004"
+    },
+    {
+      "branch": "engineering/checkout-benchmark-686-20261003",
+      "pr": 689,
+      "expected_head": "b09db3bf21624deef2cd618aef8191ab1d1b5dcd",
+      "protected": false,
+      "observed_at": "2026-10-05T06:43:08.106Z",
+      "status": "deleted",
+      "reference": "engineering/checkout-benchmark-686-20261003"
+    },
+    {
+      "branch": "engineering/checkout-efficiency-686-20261003",
+      "pr": 687,
+      "expected_head": "a53a8a50b9c4fad144ab2bb9d3693a5257d7dcb8",
+      "protected": false,
+      "observed_at": "2026-10-05T06:43:12.040Z",
+      "status": "deleted",
+      "reference": "engineering/checkout-efficiency-686-20261003"
+    },
+    {
+      "branch": "engineering/ci-duration-balance-20261004",
+      "pr": 707,
+      "expected_head": "d50b44f1eaf58f225d3e629813ca772a1a7df0f1",
+      "protected": false,
+      "observed_at": "2026-10-05T06:43:15.492Z",
+      "status": "deleted",
+      "reference": "engineering/ci-duration-balance-20261004"
+    },
+    {
+      "branch": "engineering/ci-duration-proof-706-20261004",
+      "pr": 708,
+      "expected_head": "1c2f11a65ae3aef4d532989ed1e4462540954494",
+      "protected": false,
+      "observed_at": "2026-10-05T06:43:18.894Z",
+      "status": "deleted",
+      "reference": "engineering/ci-duration-proof-706-20261004"
+    },
+    {
+      "branch": "engineering/ci-reuse-proof-688",
+      "pr": 691,
+      "expected_head": "e907a116d62c3a63668cb58772397b70a3c7c6cb",
+      "protected": false,
+      "observed_at": "2026-10-05T06:43:22.401Z",
+      "status": "deleted",
+      "reference": "engineering/ci-reuse-proof-688"
+    },
+    {
+      "branch": "engineering/cloudflare-migration-792",
+      "pr": 795,
+      "expected_head": "a2781737fce714f1313f96a938682f932af10358",
+      "protected": false,
+      "observed_at": "2026-10-05T06:43:25.862Z",
+      "status": "deleted",
+      "reference": "engineering/cloudflare-migration-792"
+    },
+    {
+      "branch": "engineering/cloudflare-public-822",
+      "pr": 825,
+      "expected_head": "b7f921ce3139f5a42330e6e7208159981cb5ea4d",
+      "protected": false,
+      "observed_at": "2026-10-05T06:43:29.368Z",
+      "status": "deleted",
+      "reference": "engineering/cloudflare-public-822"
+    },
+    {
+      "branch": "engineering/compact-live-api-proof-20261004-local01",
+      "pr": 793,
+      "expected_head": "9b73d3865fe2606e43b1157055dd1ca20039d45f",
+      "protected": false,
+      "observed_at": "2026-10-05T06:43:33.008Z",
+      "status": "deleted",
+      "reference": "engineering/compact-live-api-proof-20261004-local01"
+    },
+    {
+      "branch": "engineering/compact-membership-production-20261004-local01",
+      "pr": 788,
+      "expected_head": "03503ab39f7089541ded70f47081e3cd8500234d",
+      "protected": false,
+      "observed_at": "2026-10-05T06:43:36.410Z",
+      "status": "deleted",
+      "reference": "engineering/compact-membership-production-20261004-local01"
+    },
+    {
+      "branch": "engineering/compact-membership-profile-20261004-local01",
+      "pr": 787,
+      "expected_head": "68611be79ec32265b170c09e5c469f76e2d16df7",
+      "protected": false,
+      "observed_at": "2026-10-05T06:43:39.684Z",
+      "status": "deleted",
+      "reference": "engineering/compact-membership-profile-20261004-local01"
+    },
+    {
+      "branch": "engineering/compact-memberships-20261004-local01",
+      "pr": 785,
+      "expected_head": "5d368fa5d65d812414cc33d17eaa464ccfc237ae",
+      "protected": false,
+      "observed_at": "2026-10-05T06:43:43.245Z",
+      "status": "deleted",
+      "reference": "engineering/compact-memberships-20261004-local01"
+    },
+    {
+      "branch": "engineering/compact-recovery-20261004-local01",
+      "pr": 862,
+      "expected_head": "d5106fe8eda06bcf28960e048b914161d02437fe",
+      "protected": false,
+      "observed_at": "2026-10-05T06:43:46.720Z",
+      "status": "deleted",
+      "reference": "engineering/compact-recovery-20261004-local01"
+    },
+    {
+      "branch": "engineering/compact-retirement-lock-20261004-local01",
+      "pr": 809,
+      "expected_head": "b041a5c601f21182b9afc7b2f6659116bee1d522",
+      "protected": false,
+      "observed_at": "2026-10-05T06:43:50.433Z",
+      "status": "deleted",
+      "reference": "engineering/compact-retirement-lock-20261004-local01"
+    },
+    {
+      "branch": "engineering/delegated-recovery-20261004",
+      "pr": 734,
+      "expected_head": "27997acd4669910eaf8197344ed78bdf7f8a3556",
+      "protected": false,
+      "observed_at": "2026-10-05T06:43:54.041Z",
+      "status": "deleted",
+      "reference": "engineering/delegated-recovery-20261004"
+    },
+    {
+      "branch": "engineering/export-pages-20261004-local01",
+      "pr": 881,
+      "expected_head": "5ca22e8668d0d21cfc961a3fd32c6b279fd94a15",
+      "protected": false,
+      "observed_at": "2026-10-05T06:43:57.367Z",
+      "status": "deleted",
+      "reference": "engineering/export-pages-20261004-local01"
+    },
+    {
+      "branch": "engineering/focused-deps-695",
+      "pr": 697,
+      "expected_head": "97717781292a78a06dc1a912358db51c2bc310e9",
+      "protected": false,
+      "observed_at": "2026-10-05T06:44:00.847Z",
+      "status": "deleted",
+      "reference": "engineering/focused-deps-695"
+    },
+    {
+      "branch": "engineering/focused-deps-proof-695",
+      "pr": 702,
+      "expected_head": "886296a325207c441e70a37ed168750b550e86cd",
+      "protected": false,
+      "observed_at": "2026-10-05T06:44:04.410Z",
+      "status": "deleted",
+      "reference": "engineering/focused-deps-proof-695"
+    },
+    {
+      "branch": "engineering/full-suite-balance-692",
+      "pr": 693,
+      "expected_head": "617e514d5765c32fb26f38df44968774f092c5c0",
+      "protected": false,
+      "observed_at": "2026-10-05T06:44:07.785Z",
+      "status": "deleted",
+      "reference": "engineering/full-suite-balance-692"
+    },
+    {
+      "branch": "engineering/full-suite-balance-proof-692",
+      "pr": 700,
+      "expected_head": "3ba9a5880f598f0e3edd101fc82dabf1790cf2aa",
+      "protected": false,
+      "observed_at": "2026-10-05T06:44:11.884Z",
+      "status": "deleted",
+      "reference": "engineering/full-suite-balance-proof-692"
+    },
+    {
+      "branch": "engineering/geography-ci-profile-20261004",
+      "pr": 816,
+      "expected_head": "7ad8d60d4537716598c2249944ca01cbd65562f6",
+      "protected": false,
+      "observed_at": "2026-10-05T06:44:15.393Z",
+      "status": "deleted",
+      "reference": "engineering/geography-ci-profile-20261004"
+    },
+    {
+      "branch": "engineering/hierarchy-crosswalk-20261003-a9c2",
+      "pr": 673,
+      "expected_head": "a0d648207b868b0e9437e14d12af8c8e4eea8c64",
+      "protected": false,
+      "observed_at": "2026-10-05T06:44:18.851Z",
+      "status": "deleted",
+      "reference": "engineering/hierarchy-crosswalk-20261003-a9c2"
+    },
+    {
+      "branch": "engineering/hierarchy-install-20261003-a9c2",
+      "pr": 680,
+      "expected_head": "cad76b1187e8e487bc65a1b16fceb9eb6a2d18f3",
+      "protected": false,
+      "observed_at": "2026-10-05T06:44:22.593Z",
+      "status": "deleted",
+      "reference": "engineering/hierarchy-install-20261003-a9c2"
+    },
+    {
+      "branch": "engineering/membership-storage-20261004-local01",
+      "pr": 782,
+      "expected_head": "4bb843c57faae1041a084f01ef47c88345b21366",
+      "protected": false,
+      "observed_at": "2026-10-05T06:44:26.140Z",
+      "status": "deleted",
+      "reference": "engineering/membership-storage-20261004-local01"
+    },
+    {
+      "branch": "engineering/merge-integration-650-20261003",
+      "pr": 681,
+      "expected_head": "f9427ed1eac4290589316642a8795ad7d2abf74d",
+      "protected": false,
+      "observed_at": "2026-10-05T06:44:29.823Z",
+      "status": "deleted",
+      "reference": "engineering/merge-integration-650-20261003"
+    },
+    {
+      "branch": "engineering/merge-integration-650-confirmed-20261003",
+      "pr": 683,
+      "expected_head": "a4cd70955a6a08704cd94c20be6882edad380b47",
+      "protected": false,
+      "observed_at": "2026-10-05T06:44:33.522Z",
+      "status": "deleted",
+      "reference": "engineering/merge-integration-650-confirmed-20261003"
+    },
+    {
+      "branch": "engineering/merged-head-cleanup-20261004",
+      "pr": 895,
+      "expected_head": "078053c665441a191fd05d786994820b0f792215",
+      "protected": false,
+      "observed_at": "2026-10-05T06:44:36.950Z",
+      "status": "deleted",
+      "reference": "engineering/merged-head-cleanup-20261004"
+    },
+    {
+      "branch": "engineering/native-fullsize-transport-20261004-local01",
+      "pr": 796,
+      "expected_head": "23987e46bfa8ab2b0e1dce5f1d9b08535fb0373b",
+      "protected": false,
+      "observed_at": "2026-10-05T06:44:40.689Z",
+      "status": "deleted",
+      "reference": "engineering/native-fullsize-transport-20261004-local01"
+    },
+    {
+      "branch": "engineering/native-neon-recovery-20261004-local01",
+      "pr": 791,
+      "expected_head": "5c669429f29e1b66da7dce4e7b56639201482178",
+      "protected": false,
+      "observed_at": "2026-10-05T06:44:44.253Z",
+      "status": "deleted",
+      "reference": "engineering/native-neon-recovery-20261004-local01"
+    },
+    {
+      "branch": "engineering/native-target-disk-20261004-local01",
+      "pr": 799,
+      "expected_head": "451b23c0c784e69892c0ea74f8151660e1926dae",
+      "protected": false,
+      "observed_at": "2026-10-05T06:44:47.998Z",
+      "status": "deleted",
+      "reference": "engineering/native-target-disk-20261004-local01"
+    },
+    {
+      "branch": "engineering/observation-contracts-20261003-7e91",
+      "pr": 659,
+      "expected_head": "e1b60187076c9a05cb084e496aeb9fa4af1cf6e7",
+      "protected": false,
+      "observed_at": "2026-10-05T06:44:51.394Z",
+      "status": "deleted",
+      "reference": "engineering/observation-contracts-20261003-7e91"
+    },
+    {
+      "branch": "engineering/observation-integration-20261003-7e91",
+      "pr": 677,
+      "expected_head": "25a85392979580275e7ba2f4f2aa0424ba411276",
+      "protected": false,
+      "observed_at": "2026-10-05T06:44:55.095Z",
+      "status": "deleted",
+      "reference": "engineering/observation-integration-20261003-7e91"
+    },
+    {
+      "branch": "engineering/observation-storage-20261003-7e91",
+      "pr": 671,
+      "expected_head": "bd48350a9fed47b6ca66401a0a21db4ca8cee4ba",
+      "protected": false,
+      "observed_at": "2026-10-05T06:44:58.391Z",
+      "status": "deleted",
+      "reference": "engineering/observation-storage-20261003-7e91"
+    },
+    {
+      "branch": "engineering/ownership-generation-20261004-local01",
+      "pr": 850,
+      "expected_head": "d961e229ffdec4e202de89cb13999c62b033a8c3",
+      "protected": false,
+      "observed_at": "2026-10-05T06:45:02.238Z",
+      "status": "deleted",
+      "reference": "engineering/ownership-generation-20261004-local01"
+    },
+    {
+      "branch": "engineering/palette-publish-20261003-7e91",
+      "pr": 651,
+      "expected_head": "38418bef0b31ab2b8eed5ba804f91a9fad0f9890",
+      "protected": false,
+      "observed_at": "2026-10-05T06:45:05.747Z",
+      "status": "deleted",
+      "reference": "engineering/palette-publish-20261003-7e91"
+    },
+    {
+      "branch": "engineering/parity-hoist-694-20261004",
+      "pr": 696,
+      "expected_head": "a368cdbdb2e651bd0261515a930bdb480333d72b",
+      "protected": false,
+      "observed_at": "2026-10-05T06:45:09.664Z",
+      "status": "deleted",
+      "reference": "engineering/parity-hoist-694-20261004"
+    },
+    {
+      "branch": "engineering/parity-proof-694-20261004",
+      "pr": 705,
+      "expected_head": "4b0ef0a38e036cb5ef3a00c9d40a95d4ced62b2f",
+      "protected": false,
+      "observed_at": "2026-10-05T06:45:13.340Z",
+      "status": "deleted",
+      "reference": "engineering/parity-proof-694-20261004"
+    },
+    {
+      "branch": "engineering/populated-navigation-20261004-a9c2",
+      "pr": 740,
+      "expected_head": "f22961a681d6980b49c46b6391b7426700ed09a7",
+      "protected": false,
+      "observed_at": "2026-10-05T06:45:16.969Z",
+      "status": "deleted",
+      "reference": "engineering/populated-navigation-20261004-a9c2"
+    },
+    {
+      "branch": "engineering/provenance-727-20261004-7e91",
+      "pr": 739,
+      "expected_head": "b6bcc6a20c3e1549ccae27182056c698a230988c",
+      "protected": false,
+      "observed_at": "2026-10-05T06:45:20.586Z",
+      "status": "deleted",
+      "reference": "engineering/provenance-727-20261004-7e91"
+    },
+    {
+      "branch": "engineering/provider-capacity-20261003-7e91",
+      "pr": 656,
+      "expected_head": "0b29b3c467545387137f7f24950693770a084fd6",
+      "protected": false,
+      "observed_at": "2026-10-05T06:45:24.243Z",
+      "status": "deleted",
+      "reference": "engineering/provider-capacity-20261003-7e91"
+    },
+    {
+      "branch": "engineering/publisher-handoff-20261004",
+      "pr": 731,
+      "expected_head": "3af0ff614f976ad4eda2e0af4bc5bbd6a6f4e807",
+      "protected": false,
+      "observed_at": "2026-10-05T06:45:27.700Z",
+      "status": "deleted",
+      "reference": "engineering/publisher-handoff-20261004"
+    },
+    {
+      "branch": "engineering/publisher-main-20261004",
+      "pr": 781,
+      "expected_head": "8a3fae34693ff695b2ca92159b99b987bb23fb21",
+      "protected": false,
+      "observed_at": "2026-10-05T06:45:31.245Z",
+      "status": "deleted",
+      "reference": "engineering/publisher-main-20261004"
+    },
+    {
+      "branch": "engineering/queue-test-clock-699",
+      "pr": 703,
+      "expected_head": "83eceea975ead6133ad8eab3c2e61e9184dcecbb",
+      "protected": false,
+      "observed_at": "2026-10-05T06:45:35.017Z",
+      "status": "deleted",
+      "reference": "engineering/queue-test-clock-699"
+    },
+    {
+      "branch": "engineering/research-ci-budget-20261004",
+      "pr": 829,
+      "expected_head": "d943a083324eddcd79686c1f38335547687f247c",
+      "protected": false,
+      "observed_at": "2026-10-05T06:45:39.609Z",
+      "status": "deleted",
+      "reference": "engineering/research-ci-budget-20261004"
+    },
+    {
+      "branch": "engineering/research-ci-package-inputs-20261004",
+      "pr": 842,
+      "expected_head": "02e53e4c12a3bd340018521584736b59f18a87d6",
+      "protected": false,
+      "observed_at": "2026-10-05T06:45:43.261Z",
+      "status": "deleted",
+      "reference": "engineering/research-ci-package-inputs-20261004"
+    },
+    {
+      "branch": "engineering/reviewer-instructions-684-20261003",
+      "pr": 685,
+      "expected_head": "1bd87433b78cc955f90a5a3e182b614139bfc54d",
+      "protected": false,
+      "observed_at": "2026-10-05T06:45:46.774Z",
+      "status": "deleted",
+      "reference": "engineering/reviewer-instructions-684-20261003"
+    },
+    {
+      "branch": "engineering/source-hints-20261003-a9c2",
+      "pr": 670,
+      "expected_head": "a29039cd3dc21db37a0f5a1b2273449f99ab96df",
+      "protected": false,
+      "observed_at": "2026-10-05T06:45:50.200Z",
+      "status": "deleted",
+      "reference": "engineering/source-hints-20261003-a9c2"
+    },
+    {
+      "branch": "engineering/source-subject-extracts-713-20261003",
+      "pr": 715,
+      "expected_head": "82b8399f3aacabfada98ecb77b7589853fd45678",
+      "protected": false,
+      "observed_at": "2026-10-05T06:45:53.801Z",
+      "status": "deleted",
+      "reference": "engineering/source-subject-extracts-713-20261003"
+    },
+    {
+      "branch": "engineering/sql-recovery-20261004-7e91",
+      "pr": 721,
+      "expected_head": "7ae6cc4ac382b8c2787a9fe98f9553da2355a264",
+      "protected": false,
+      "observed_at": "2026-10-05T06:45:57.832Z",
+      "status": "deleted",
+      "reference": "engineering/sql-recovery-20261004-7e91"
+    },
+    {
+      "branch": "engineering/stale-candidate-717-20261004",
+      "pr": 719,
+      "expected_head": "1402b27871fb769e5a032e3a3ac3b4c4ed8b4549",
+      "protected": false,
+      "observed_at": "2026-10-05T06:46:01.522Z",
+      "status": "deleted",
+      "reference": "engineering/stale-candidate-717-20261004"
+    },
+    {
+      "branch": "engineering/startup-20261004-a9c2",
+      "pr": 745,
+      "expected_head": "9e00fc089ec61f15e74406b452789688c28b82a4",
+      "protected": false,
+      "observed_at": "2026-10-05T06:46:04.943Z",
+      "status": "deleted",
+      "reference": "engineering/startup-20261004-a9c2"
+    },
+    {
+      "branch": "engineering/startup-scheduling-20261004-a9c2",
+      "pr": 747,
+      "expected_head": "93556809c5a785cf606fcf866870ee6e6f5f7194",
+      "protected": false,
+      "observed_at": "2026-10-05T06:46:08.572Z",
+      "status": "deleted",
+      "reference": "engineering/startup-scheduling-20261004-a9c2"
+    },
+    {
+      "branch": "engineering/storage-catalog-complete-20261004-a9c2",
+      "pr": 753,
+      "expected_head": "88ddf472ada6e46503d632ae85163bdb9afd3b1c",
+      "protected": false,
+      "observed_at": "2026-10-05T06:46:11.974Z",
+      "status": "deleted",
+      "reference": "engineering/storage-catalog-complete-20261004-a9c2"
+    },
+    {
+      "branch": "engineering/storage-diagnostic-20261004-a9c2",
+      "pr": 748,
+      "expected_head": "76bf793e7cffaf93aad73e064818e5ecc400e4db",
+      "protected": false,
+      "observed_at": "2026-10-05T06:46:15.658Z",
+      "status": "deleted",
+      "reference": "engineering/storage-diagnostic-20261004-a9c2"
+    },
+    {
+      "branch": "engineering/storage-handoff-20261003-a9c2",
+      "pr": 664,
+      "expected_head": "832f795fd5dac8051269201eee5e23f6130795b7",
+      "protected": false,
+      "observed_at": "2026-10-05T06:46:19.032Z",
+      "status": "deleted",
+      "reference": "engineering/storage-handoff-20261003-a9c2"
+    },
+    {
+      "branch": "engineering/storage-recovery-20261004-7e91",
+      "pr": 711,
+      "expected_head": "2ef5b20a95ade006e268011426d2d468e39c5621",
+      "protected": false,
+      "observed_at": "2026-10-05T06:46:22.552Z",
+      "status": "deleted",
+      "reference": "engineering/storage-recovery-20261004-7e91"
+    },
+    {
+      "branch": "engineering/urgent-worker-priority-20261004",
+      "pr": 710,
+      "expected_head": "b34a25499d112e616a2c80ea2b630e2af346ca50",
+      "protected": false,
+      "observed_at": "2026-10-05T06:46:26.091Z",
+      "status": "deleted",
+      "reference": "engineering/urgent-worker-priority-20261004"
+    },
+    {
+      "branch": "geography/alaska-ecoregion-role-20261004-601b",
+      "pr": 736,
+      "expected_head": "4105f4776cb9e5c24c16e414ac13d0215b379d1d",
+      "protected": false,
+      "observed_at": "2026-10-05T06:46:29.436Z",
+      "status": "deleted",
+      "reference": "geography/alaska-ecoregion-role-20261004-601b"
+    },
+    {
+      "branch": "geography/alaska-settlement-gaps-20261003",
+      "pr": 672,
+      "expected_head": "395a90053f7510ae3334dd1a8a02f429ccb00a5d",
+      "protected": false,
+      "observed_at": "2026-10-05T06:46:32.916Z",
+      "status": "deleted",
+      "reference": "geography/alaska-settlement-gaps-20261003"
+    },
+    {
+      "branch": "geography/alaska-settlement-verification-20261004",
+      "pr": 716,
+      "expected_head": "14ef1376b7aa33f9bebc7f3df43144a865f7035f",
+      "protected": false,
+      "observed_at": "2026-10-05T06:46:36.832Z",
+      "status": "deleted",
+      "reference": "geography/alaska-settlement-verification-20261004"
+    },
+    {
+      "branch": "geography/anatolia-batch2-72-20261005",
+      "pr": 824,
+      "expected_head": "8b083135d6546e663bb3361125cd9e3edcad6369",
+      "protected": false,
+      "observed_at": "2026-10-05T06:46:40.498Z",
+      "status": "deleted",
+      "reference": "geography/anatolia-batch2-72-20261005"
+    },
+    {
+      "branch": "geography/bc-csd-crosswalk-607-restart-20261004-ecb3053c",
+      "pr": 733,
+      "expected_head": "351457f7e358b7adb4260f5d925a8fcc1f39c492",
+      "protected": false,
+      "observed_at": "2026-10-05T06:46:44.552Z",
+      "status": "deleted",
+      "reference": "geography/bc-csd-crosswalk-607-restart-20261004-ecb3053c"
+    },
+    {
+      "branch": "geography/bc-physical-settlement-606-20261003",
+      "pr": 669,
+      "expected_head": "48ba97a15d2182ec4048603cbc87270ab04668fc",
+      "protected": false,
+      "observed_at": "2026-10-05T06:46:48.436Z",
+      "status": "deleted",
+      "reference": "geography/bc-physical-settlement-606-20261003"
+    },
+    {
+      "branch": "geography/bc-remainders-20261003-24b4052a",
+      "pr": 658,
+      "expected_head": "d43e162563de6b3acf46d6f72d18aaae01cd14ea",
+      "protected": false,
+      "observed_at": "2026-10-05T06:46:52.285Z",
+      "status": "deleted",
+      "reference": "geography/bc-remainders-20261003-24b4052a"
+    },
+    {
+      "branch": "geography/bc-remainders-reproduction-667-20261003",
+      "pr": 678,
+      "expected_head": "22f019cab117b9bfe708155f5a11c4eef48b522e",
+      "protected": false,
+      "observed_at": "2026-10-05T06:46:56.151Z",
+      "status": "deleted",
+      "reference": "geography/bc-remainders-reproduction-667-20261003"
+    },
+    {
+      "branch": "geography/bc-wa-repro-20261004-660-a6d59b",
+      "pr": 724,
+      "expected_head": "111ed2a503ece5056beccba2e69aa9bde3e18aeb",
+      "protected": false,
+      "observed_at": "2026-10-05T06:46:59.908Z",
+      "status": "deleted",
+      "reference": "geography/bc-wa-repro-20261004-660-a6d59b"
+    },
+    {
+      "branch": "geography/bc-wa-reproduction-660-b150279b",
+      "pr": 737,
+      "expected_head": "ef5c3b47578ec6de6960e931e0983620beefafff",
+      "protected": false,
+      "observed_at": "2026-10-05T06:47:03.429Z",
+      "status": "deleted",
+      "reference": "geography/bc-wa-reproduction-660-b150279b"
+    },
+    {
+      "branch": "geography/bc-washington-coastal-edge",
+      "pr": 657,
+      "expected_head": "3e4aa4b9836599b9d5a4fb902dd83ae0843a418c",
+      "protected": false,
+      "observed_at": "2026-10-05T06:47:06.821Z",
+      "status": "deleted",
+      "reference": "geography/bc-washington-coastal-edge"
+    },
+    {
+      "branch": "geography/bolivia-ecoregion-roles-20261003",
+      "pr": 668,
+      "expected_head": "e06860ea0070734e20aac87129222545a015886c",
+      "protected": false,
+      "observed_at": "2026-10-05T06:47:10.437Z",
+      "status": "deleted",
+      "reference": "geography/bolivia-ecoregion-roles-20261003"
+    },
+    {
+      "branch": "geography/bolivia-repro-20261004-675-7ed19418",
+      "pr": 718,
+      "expected_head": "d071eceb347e4d71bca620951a71084881decdd2",
+      "protected": false,
+      "observed_at": "2026-10-05T06:47:14.491Z",
+      "status": "deleted",
+      "reference": "geography/bolivia-repro-20261004-675-7ed19418"
+    },
+    {
+      "branch": "geography/bouvet-tristan-786",
+      "pr": 800,
+      "expected_head": "53cf68fafe0255c90b4e912ae1d45724f1f08049",
+      "protected": false,
+      "observed_at": "2026-10-05T06:47:18.117Z",
+      "status": "deleted",
+      "reference": "geography/bouvet-tristan-786"
+    },
+    {
+      "branch": "geography/central-africa-batch3-20261005",
+      "pr": 882,
+      "expected_head": "87bb40780b7fdf5ea62c1daa50397c0cf6f29c6a",
+      "protected": false,
+      "observed_at": "2026-10-05T06:47:21.884Z",
+      "status": "deleted",
+      "reference": "geography/central-africa-batch3-20261005"
+    },
+    {
+      "branch": "geography/central-africa-batch4-20261005",
+      "pr": 873,
+      "expected_head": "093ccbc3d4e9f1fa1d38c26b5170426e02a910fd",
+      "protected": false,
+      "observed_at": "2026-10-05T06:47:25.677Z",
+      "status": "deleted",
+      "reference": "geography/central-africa-batch4-20261005"
+    },
+    {
+      "branch": "geography/chad-ecoregion-role-20261005-r1",
+      "pr": 892,
+      "expected_head": "c5605ccfca1fe8ba5ea3e26081d78ce8c3698257",
+      "protected": false,
+      "observed_at": "2026-10-05T06:47:29.093Z",
+      "status": "deleted",
+      "reference": "geography/chad-ecoregion-role-20261005-r1"
+    },
+    {
+      "branch": "geography/colombia-axis-order-20261003",
+      "pr": 655,
+      "expected_head": "ed1a1e70ad8e4a85349e670a53845f6c449f8321",
+      "protected": false,
+      "observed_at": "2026-10-05T06:47:32.720Z",
+      "status": "deleted",
+      "reference": "geography/colombia-axis-order-20261003"
+    },
+    {
+      "branch": "geography/colombia-dane-587-20261004",
+      "pr": 744,
+      "expected_head": "25dce57608839515cc6abf0aeffc81fee78b010c",
+      "protected": false,
+      "observed_at": "2026-10-05T06:47:36.568Z",
+      "status": "deleted",
+      "reference": "geography/colombia-dane-587-20261004"
+    },
+    {
+      "branch": "geography/equatorial-micronesia-20261003-661-83b9d991",
+      "pr": 666,
+      "expected_head": "c0d55ee7c8361d5cd735d33e0dd17ffc1358e287",
+      "protected": false,
+      "observed_at": "2026-10-05T06:47:40.064Z",
+      "status": "deleted",
+      "reference": "geography/equatorial-micronesia-20261003-661-83b9d991"
+    },
+    {
+      "branch": "geography/issue486-baseline-pins-20261004",
+      "pr": 729,
+      "expected_head": "d9ab19350f4f55a35718580801cc98ba13526a37",
+      "protected": false,
+      "observed_at": "2026-10-05T06:47:43.563Z",
+      "status": "deleted",
+      "reference": "geography/issue486-baseline-pins-20261004"
+    },
+    {
+      "branch": "geography/las-golondrinas-restore-20261003",
+      "pr": 665,
+      "expected_head": "6c67ddad630a56b194bb15391cb3f1f7d64a31be",
+      "protected": false,
+      "observed_at": "2026-10-05T06:47:47.028Z",
+      "status": "deleted",
+      "reference": "geography/las-golondrinas-restore-20261003"
+    },
+    {
+      "branch": "geography/pacific-ne-repro-20261003",
+      "pr": 674,
+      "expected_head": "d635791996e1b65251d6843644e240074588449c",
+      "protected": false,
+      "observed_at": "2026-10-05T06:47:50.463Z",
+      "status": "deleted",
+      "reference": "geography/pacific-ne-repro-20261003"
+    },
+    {
+      "branch": "geography/protect-wna-485-reproduction",
+      "pr": 652,
+      "expected_head": "d361a00838a1d5e562000e08dbba1b8fed01af58",
+      "protected": false,
+      "observed_at": "2026-10-05T06:47:54.212Z",
+      "status": "deleted",
+      "reference": "geography/protect-wna-485-reproduction"
+    },
+    {
+      "branch": "geography/regional-review-1deb892647c1aa26",
+      "pr": 814,
+      "expected_head": "bf216a78b0e9f4e31f3d30aec804c3baa8608fb3",
+      "protected": false,
+      "observed_at": "2026-10-05T06:47:57.711Z",
+      "status": "deleted",
+      "reference": "geography/regional-review-1deb892647c1aa26"
+    },
+    {
+      "branch": "geography/regional-review-3e1fa7fa469a0b13",
+      "pr": 880,
+      "expected_head": "8092ac2746ac86e55ea226911d3fb428d1a684f9",
+      "protected": false,
+      "observed_at": "2026-10-05T06:48:01.594Z",
+      "status": "deleted",
+      "reference": "geography/regional-review-3e1fa7fa469a0b13"
+    },
+    {
+      "branch": "geography/regional-review-71fc01fe133fc303",
+      "pr": 848,
+      "expected_head": "ad7f6b02cb9a658453cbb1561399952341ddfdb4",
+      "protected": false,
+      "observed_at": "2026-10-05T06:48:05.094Z",
+      "status": "deleted",
+      "reference": "geography/regional-review-71fc01fe133fc303"
+    },
+    {
+      "branch": "geography/regional-review-97ccc950999ad631",
+      "pr": 805,
+      "expected_head": "ba44970bfc8e9f825794f42265cbeaf65fcadc84",
+      "protected": false,
+      "observed_at": "2026-10-05T06:48:08.616Z",
+      "status": "deleted",
+      "reference": "geography/regional-review-97ccc950999ad631"
+    },
+    {
+      "branch": "geography/regional-review-819251b400ceb679",
+      "pr": 840,
+      "expected_head": "307ac91d0c7199bdea6eb1164dd7be6119f92601",
+      "protected": false,
+      "observed_at": "2026-10-05T06:48:12.246Z",
+      "status": "deleted",
+      "reference": "geography/regional-review-819251b400ceb679"
+    },
+    {
+      "branch": "geography/regional-review-96597060edbd6143",
+      "pr": 853,
+      "expected_head": "ccab101277b922018ae5293add992ec2d58f481a",
+      "protected": false,
+      "observed_at": "2026-10-05T06:48:16.035Z",
+      "status": "deleted",
+      "reference": "geography/regional-review-96597060edbd6143"
+    },
+    {
+      "branch": "geography/regional-review-aeea5c053fbdeb8d-20261005",
+      "pr": 885,
+      "expected_head": "bb87a6f79bfa96a273fb653c8e9b9189ddf26516",
+      "protected": false,
+      "observed_at": "2026-10-05T06:48:19.811Z",
+      "status": "deleted",
+      "reference": "geography/regional-review-aeea5c053fbdeb8d-20261005"
+    },
+    {
+      "branch": "geography/regional-review-c06ee400da8c0bf6",
+      "pr": 867,
+      "expected_head": "bf685358cf54b0990dc3417490de53e90255cc1d",
+      "protected": false,
+      "observed_at": "2026-10-05T06:48:23.337Z",
+      "status": "deleted",
+      "reference": "geography/regional-review-c06ee400da8c0bf6"
+    },
+    {
+      "branch": "geography/regional-review-d0984f717127fb3e-20261005",
+      "pr": 891,
+      "expected_head": "60c709821f0d068d56d0ff5427331e61991ec0f5",
+      "protected": false,
+      "observed_at": "2026-10-05T06:48:26.642Z",
+      "status": "deleted",
+      "reference": "geography/regional-review-d0984f717127fb3e-20261005"
+    },
+    {
+      "branch": "geography/regional-review-ef67318527f5f3a3",
+      "pr": 823,
+      "expected_head": "aec507a6bbba570cf042ab7cffae3db8e4528c9a",
+      "protected": false,
+      "observed_at": "2026-10-05T06:48:30.079Z",
+      "status": "deleted",
+      "reference": "geography/regional-review-ef67318527f5f3a3"
+    },
+    {
+      "branch": "geography/release-pin-579-20261004",
+      "pr": 741,
+      "expected_head": "fcc53c92dab06fc85cc685cf30dab7d47eac3c03",
+      "protected": false,
+      "observed_at": "2026-10-05T06:48:33.556Z",
+      "status": "deleted",
+      "reference": "geography/release-pin-579-20261004"
+    },
+    {
+      "branch": "geography/san-bernardino-ecoregion-roles-597-20261004",
+      "pr": 735,
+      "expected_head": "7281b0ed34ab76858dd2900aa4661067ad03fcd7",
+      "protected": false,
+      "observed_at": "2026-10-05T06:48:36.900Z",
+      "status": "deleted",
+      "reference": "geography/san-bernardino-ecoregion-roles-597-20261004"
+    },
+    {
+      "branch": "geography/sierra-leone-license-provenance-746",
+      "pr": 860,
+      "expected_head": "eeff7ee6eef29167186ed1198a14f1fefc334cb4",
+      "protected": false,
+      "observed_at": "2026-10-05T06:48:40.436Z",
+      "status": "deleted",
+      "reference": "geography/sierra-leone-license-provenance-746"
+    },
+    {
+      "branch": "geography/southern-indian-ocean-baseline-pins-20261004",
+      "pr": 725,
+      "expected_head": "a4c7ddf461c6cd1b8be0da6585dfa9d3849d59cb",
+      "protected": false,
+      "observed_at": "2026-10-05T06:48:44.361Z",
+      "status": "deleted",
+      "reference": "geography/southern-indian-ocean-baseline-pins-20261004"
+    },
+    {
+      "branch": "geography/subarctic-america-batch1-20261005",
+      "pr": 890,
+      "expected_head": "b4019f0957cdde93b2b193926b7c1001c2b59b23",
+      "protected": false,
+      "observed_at": "2026-10-05T06:48:48.009Z",
+      "status": "deleted",
+      "reference": "geography/subarctic-america-batch1-20261005"
+    },
+    {
+      "branch": "geography/turkey-batch4-continue-20261005",
+      "pr": 863,
+      "expected_head": "81b3ddee2043a9b7e539c3d85d8a157dfad3f7ee",
+      "protected": false,
+      "observed_at": "2026-10-05T06:48:51.448Z",
+      "status": "deleted",
+      "reference": "geography/turkey-batch4-continue-20261005"
+    },
+    {
+      "branch": "geography/valdez-cordova-successor-602-20261004",
+      "pr": 730,
+      "expected_head": "37435ab565aab003bafacb5ea48a6da7eb540d98",
+      "protected": false,
+      "observed_at": "2026-10-05T06:48:54.795Z",
+      "status": "deleted",
+      "reference": "geography/valdez-cordova-successor-602-20261004"
+    },
+    {
+      "branch": "geography/washington-overlay-600-20261004",
+      "pr": 743,
+      "expected_head": "c46bf49a8d9cea19bc8da43456365849e969e5e3",
+      "protected": false,
+      "observed_at": "2026-10-05T06:48:58.019Z",
+      "status": "deleted",
+      "reference": "geography/washington-overlay-600-20261004"
+    },
+    {
+      "branch": "geography/west-africa-batch2-20261005",
+      "pr": 861,
+      "expected_head": "3fef42ac4ba72b4baf9e9e46f401e9ce81f971d3",
+      "protected": false,
+      "observed_at": "2026-10-05T06:49:01.358Z",
+      "status": "deleted",
+      "reference": "geography/west-africa-batch2-20261005"
+    },
+    {
+      "branch": "geography/west-africa-batch5-20261005",
+      "pr": 837,
+      "expected_head": "2e0a818711cbb03f24a8d9a15099a6e9688bdf46",
+      "protected": false,
+      "observed_at": "2026-10-05T06:49:04.697Z",
+      "status": "deleted",
+      "reference": "geography/west-africa-batch5-20261005"
+    },
+    {
+      "branch": "geography/west-africa-batch8-20261004",
+      "pr": 807,
+      "expected_head": "3f6bfcb69b7529a74edbdb438360e3e750328f36",
+      "protected": false,
+      "observed_at": "2026-10-05T06:49:08.407Z",
+      "status": "deleted",
+      "reference": "geography/west-africa-batch8-20261004"
+    },
+    {
+      "branch": "geography/west-africa-batch8-completion-20261005",
+      "pr": 836,
+      "expected_head": "6f778fe497833ce7c80007898d8538b2b6be01f0",
+      "protected": false,
+      "observed_at": "2026-10-05T06:49:11.864Z",
+      "status": "deleted",
+      "reference": "geography/west-africa-batch8-completion-20261005"
+    },
+    {
+      "branch": "geography/west-africa-ben-bf-batch1-20261005",
+      "pr": 859,
+      "expected_head": "b19968912dfd9426fa7f20e2179b4ba121faaeaa",
+      "protected": false,
+      "observed_at": "2026-10-05T06:49:15.260Z",
+      "status": "deleted",
+      "reference": "geography/west-africa-ben-bf-batch1-20261005"
+    },
+    {
+      "branch": "geography/west-africa-civ-batch3-20261005",
+      "pr": 844,
+      "expected_head": "3c5eae86b06ab4026f53e8ff3d87893902075a74",
+      "protected": false,
+      "observed_at": "2026-10-05T06:49:18.647Z",
+      "status": "deleted",
+      "reference": "geography/west-africa-civ-batch3-20261005"
+    },
+    {
+      "branch": "geography/westafrica-476-20261004-b49a3d12",
+      "pr": 760,
+      "expected_head": "939c22ddc60988258511abc33d972c61c9111b5e",
+      "protected": false,
+      "observed_at": "2026-10-05T06:49:22.468Z",
+      "status": "deleted",
+      "reference": "geography/westafrica-476-20261004-b49a3d12"
+    },
+    {
+      "branch": "geography/westafrica-476-20261004-followups",
+      "pr": 765,
+      "expected_head": "b417c7b0aa2e29bc2d61f87850811c0843026c15",
+      "protected": false,
+      "observed_at": "2026-10-05T06:49:26.079Z",
+      "status": "deleted",
+      "reference": "geography/westafrica-476-20261004-followups"
+    },
+    {
+      "branch": "geography/westafrica-477-20261004-f8d97563",
+      "pr": 758,
+      "expected_head": "e0f9eac4fdd0ad1e3881add4aa0a3d9239987a66",
+      "protected": false,
+      "observed_at": "2026-10-05T06:49:29.561Z",
+      "status": "deleted",
+      "reference": "geography/westafrica-477-20261004-f8d97563"
+    },
+    {
+      "branch": "geography/westafrica-478-20261004",
+      "pr": 752,
+      "expected_head": "a9fef411b6fbe4b4fa0128c1657391cace464dc1",
+      "protected": false,
+      "observed_at": "2026-10-05T06:49:33.166Z",
+      "status": "deleted",
+      "reference": "geography/westafrica-478-20261004"
+    },
+    {
+      "branch": "geography/westafrica-479-20261004",
+      "pr": 746,
+      "expected_head": "ea888d99d1a3a0fabadc2d53cd21291336178ec2",
+      "protected": false,
+      "observed_at": "2026-10-05T06:49:36.868Z",
+      "status": "deleted",
+      "reference": "geography/westafrica-479-20261004"
+    },
+    {
+      "branch": "geography/western-county-water-edges-20261004-598",
+      "pr": 742,
+      "expected_head": "30a77498b5a3885056e47ea9eef1506727c255b9",
+      "protected": false,
+      "observed_at": "2026-10-05T06:49:40.511Z",
+      "status": "deleted",
+      "reference": "geography/western-county-water-edges-20261004-598"
+    },
+    {
+      "branch": "geography/wio-reproduction-662-20261004",
+      "pr": 722,
+      "expected_head": "7f0e05e6d08bb768a3f344ec4a76e060bb2f7e73",
+      "protected": false,
+      "observed_at": "2026-10-05T06:49:43.820Z",
+      "status": "deleted",
+      "reference": "geography/wio-reproduction-662-20261004"
+    }
+  ],
+  "limits": [
+    "GitHub delete-ref has no atomic SHA guard; worker protocol prohibits reusing merged heads. Each deletion rechecks immutable PR head, current protection, complete open PR head/base identities, and final current ref. Unknown state remains."
+  ],
+  "completed_at": "2026-10-05T06:49:43.821Z"
+}

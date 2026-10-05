@@ -1,0 +1,14 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {execFileSync} from 'node:child_process';
+const job=import.meta.dirname;
+const backlog=JSON.parse(fs.readFileSync(path.join(job,'backlog-results.json'),'utf8'));
+const backup=JSON.parse(fs.readFileSync(path.join(job,'backup-result.json'),'utf8'));
+const pages=JSON.parse(execFileSync(process.env.GH_BIN??'gh',['api',`repos/${backlog.repo}/branches`,'--paginate','--slurp'],{encoding:'utf8',timeout:60000,maxBuffer:8*1024*1024}));
+const branches=pages.flat();
+if(!branches.every(row=>typeof row.name==='string'&&/^[a-f0-9]{40}$/.test(row.commit?.sha??'')))throw Error('Invalid branch inventory');
+const deleted=backlog.results.filter(row=>row.status==='deleted').map(row=>row.reference);
+if(backup.status==='deleted')deleted.push(backup.branch);
+const remaining=new Set(branches.map(row=>row.name)),reappeared=deleted.filter(ref=>remaining.has(ref));
+console.log(JSON.stringify({observed_at:new Date().toISOString(),checked_deleted_refs:deleted.length,reappeared_refs:reappeared,current_refs:branches.map(row=>row.name)},null,2));
+if(reappeared.length)process.exitCode=1;

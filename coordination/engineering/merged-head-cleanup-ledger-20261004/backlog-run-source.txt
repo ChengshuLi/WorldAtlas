@@ -1,0 +1,28 @@
+import fs from 'node:fs';
+import {execFileSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
+import {cleanupMergedHead} from '/Users/chengshuli/world-atlas-workspace/WorldAtlas-research-ci/scripts/merge-integration.mjs';
+const gh='/Users/chengshuli/.local/bin/gh',repo='ChengshuLi/WorldAtlas';
+const api=async(route,method='GET')=>{
+ const raw=execFileSync(gh,['api','--method',method,route],{encoding:'utf8',timeout:20000,maxBuffer:16*1024*1024});
+ return raw.trim()?JSON.parse(raw):null;
+};
+const reviewed=execFileSync('git',['show','078053c665441a191fd05d786994820b0f792215:scripts/merge-integration.mjs']);
+if(!reviewed.equals(fs.readFileSync('scripts/merge-integration.mjs')))throw Error('Cleanup helper differs from independently reviewed source');
+const inventory=JSON.parse(fs.readFileSync('/tmp/worldatlas-cleanup-inventory.json','utf8'));
+const output='/tmp/worldatlas-cleanup-backlog-results.json';
+const ledger=fs.existsSync(output)?JSON.parse(fs.readFileSync(output,'utf8')):{version:1,repo,issue:894,started_at:new Date().toISOString(),
+ implementation_pr:895,reviewed_head:'078053c665441a191fd05d786994820b0f792215',
+ helper_sha256:createHash('sha256').update(fs.readFileSync('scripts/merge-integration.mjs')).digest('hex'),
+ checkout_commit:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),
+ inventory,results:[],limits:['GitHub delete-ref has no atomic SHA guard; worker protocol prohibits reusing merged heads. Each deletion rechecks immutable PR head, current protection, complete open PR head/base identities, and final current ref. Unknown state remains.']};
+const done=new Set(ledger.results.map(row=>`${row.pr}:${row.expected_head}`));
+for(const item of inventory.candidates){
+ if(done.has(`${item.pr}:${item.expected_head}`))continue;
+ const result=await cleanupMergedHead({api,repo,number:item.pr,expectedHead:item.expected_head});
+ ledger.results.push({...item,observed_at:new Date().toISOString(),...result});
+ fs.writeFileSync(output,JSON.stringify(ledger,null,2)+'\n');
+ if(ledger.results.length%5===0||result.status!=='deleted')console.log(JSON.stringify({processed:ledger.results.length,total:inventory.candidates.length,branch:item.branch,status:result.status,reason:result.reason}));
+}
+ledger.completed_at=new Date().toISOString();fs.writeFileSync(output,JSON.stringify(ledger,null,2)+'\n');
+console.log(JSON.stringify({complete:true,counts:ledger.results.reduce((a,row)=>(a[row.status]=(a[row.status]??0)+1,a),{})}));
