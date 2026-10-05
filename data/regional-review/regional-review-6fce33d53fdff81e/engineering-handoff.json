@@ -17,7 +17,7 @@
       "source_scope": "Nationwide gb:USA:ADM2 catalog entry; this packet supplies exact 216 affected IDs."
     },
     {
-      "finding": "Eight coastal county geometries have large 2018-to-2025 TIGER screen differences; 28 total rows have IoU below 0.98.",
+      "finding": "Thirty seven county geometries fall below 0.98 IoU against the 2026 Census TIGERweb capture; eight coastal counties have particularly large differences.",
       "engineering_action": "Use dated county-change notes and exact contemporaneous cartographic source. Distinguish legal changes from water representation/generalization before proposing any polygon edits. Current Census geometry does not prove the older geometry was unlawful or wrong at its claimed vintage.",
       "source_scope": "Cameron, Iberia, Lafourche, Plaquemines, St. Bernard, St. Mary, Terrebonne, Vermilion; their exact Atlas IDs, measurements and GEOIDs are in county-assessments.jsonl."
     },
