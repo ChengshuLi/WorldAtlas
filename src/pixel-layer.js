@@ -47,16 +47,20 @@ export class PixelLayer extends L.Layer {
     this.map=map;this.canvas.setAttribute('aria-label','Pixel world map');this.canvas.style.pointerEvents='none';
     this.canvas.dataset.gridZoom=String(GRID_ZOOM);this.canvas.dataset.renderer='webgl2';
     map.getPane('overlayPane').append(this.canvas);this.tooltip=L.tooltip({sticky:true});
-    map.on('moveend resize',this.redraw,this);map.on('zoomanim',this.animateZoom,this);
+    map.on('move',this.moveCamera,this);map.on('moveend resize',this.redraw,this);map.on('zoomanim',this.animateZoom,this);
     map.on('mousemove',this.hover,this);map.on('click',this.click,this);this.redraw();
   }
   onRemove(map){
-    cancelAnimationFrame(this.pending);map.off('moveend resize',this.redraw,this);map.off('zoomanim',this.animateZoom,this);
+    cancelAnimationFrame(this.pending);map.off('move',this.moveCamera,this);map.off('moveend resize',this.redraw,this);map.off('zoomanim',this.animateZoom,this);
     map.off('mousemove',this.hover,this);map.off('click',this.click,this);this.tooltip.remove();this.canvas.remove();this.worker.terminate();this.gpu.destroy();this.map=null;
   }
   animateZoom(event){
     if(!this.origin)return;
     L.DomUtil.setTransform(this.canvas,this.map._latLngToNewLayerPoint(this.origin,event.zoom,event.center),this.map.getZoomScale(event.zoom,this.drawZoom));
+  }
+  moveCamera(){
+    if(this.origin)L.DomUtil.setTransform(this.canvas,this.map.latLngToLayerPoint(this.origin),this.map.getZoomScale(this.map.getZoom(),this.drawZoom));
+    this.redraw();
   }
   setStyle(){this.styleDirty=true;this.redraw();}
   updateMetadata(features){updateLocationMetadata(this.index,features);this.styleDirty=true;}
@@ -80,7 +84,7 @@ export class PixelLayer extends L.Layer {
     for(const {index,feature} of this.political||[])political.set([...rgb(this.options.politicalColor(feature)),255],index*4);
     this.gpu.upload('colors',colors);this.gpu.upload('metadata',metadata,2);this.gpu.upload('politicalColors',political);this.styleDirty=false;
   }
-  redraw(){cancelAnimationFrame(this.pending);this.pending=requestAnimationFrame(()=>this.draw());}
+  redraw(){if(!this.pending)this.pending=requestAnimationFrame(()=>{this.pending=null;this.draw();});}
   draw(){
     if(!this.map||!this.grids.locations||this.lost)return;
     const started=performance.now(),zoom=this.map.getZoom(),scale=2**(zoom-GRID_ZOOM),size=this.map.getSize(),dpr=window.devicePixelRatio||1;

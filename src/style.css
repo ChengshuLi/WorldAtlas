@@ -171,6 +171,7 @@ main{display:flex;flex-direction:column}
 .tier-note{display:block;font-size:9px;line-height:1.4;opacity:.7;margin-top:3px}.hierarchy-note{font-size:11px!important;line-height:1.5!important;margin:8px 0 14px!important;color:#607168}
 
 .atlas-pixel-canvas{image-rendering:pixelated;image-rendering:crisp-edges}#map{background:#637f99;background-image:none}
+.atlas-wheel-zoom .atlas-pixel-canvas{transition:none}
 .reference-name{font-size:12px;line-height:1.5;color:#687568;margin:6px 0 12px}.name-history{font-size:12px;border-top:1px solid #dde1d6;padding:12px 0}.name-history summary{cursor:pointer;font-weight:600}.name-history p{line-height:1.5}.name-history small{color:#6c776e}.political-estimate p{font-size:12px;line-height:1.5}
 .profile-year{font-size:13px;color:#52674d;margin:6px 0 17px}
 .profile-name-context{font-size:10px;color:#687568;line-height:1.5;margin:-5px 0 8px}

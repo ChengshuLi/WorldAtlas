@@ -11,6 +11,7 @@ import {categoryPresentationKey} from './category-presentation.js';
 import { loadGeography, loadSnapshot, ensureGeometry } from './data-client.js';
 import { pointInGeometry } from './geometry.js';
 import { PixelLayer } from './pixel-layer.js';
+import {installWheelZoom} from './wheel-zoom.js';
 import {locationInventoryChanged,boundaryFootprintsChanged} from './pixel-metadata.js';
 import { GRID_ZOOM } from './pixel-grid.js';
 const $ = selector => document.querySelector(selector);
@@ -50,7 +51,8 @@ $('#app').innerHTML = `
   <p>2026 uses modern ownership references with varying source dates, not a verified 2026 snapshot. Cliopatria has no 2025–2026 coverage.</p>
   <p><a href="https://www.geoboundaries.org/" target="_blank" rel="noreferrer">geoBoundaries / William & Mary</a> · Per-country dates and licenses appear in the inspector. <a href="https://www.naturalearthdata.com/about/terms-of-use/" target="_blank" rel="noreferrer">Natural Earth: public domain</a>.</p>
   <p><a href="https://doi.org/10.1038/s41597-025-04516-9" target="_blank" rel="noreferrer">Bennett et al., Cliopatria (2025)</a> · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">CC BY 4.0</a>. Geographic islands classifications also use <a href="https://github.com/datasets/country-codes" target="_blank" rel="noreferrer">country-codes / GeoNames continent codes</a>.</p><p>Physical subdivisions: AAFC, RESOLVE and Australia DCCEEW / IBRA. Name crosswalks: MLIT / Geolonia and <a href="https://www.geonames.org/" target="_blank" rel="noreferrer">GeoNames (CC BY 4.0)</a>. Turkmenistan district adaptations: <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">© OpenStreetMap contributors (ODbL)</a>. Source years and coverage vary; retained coarse territories are listed in the audit.</p><p><a href="./semantic-report.json" target="_blank">Location crosswalk</a> · <a href="./granularity-audit.json" target="_blank">Full location audit</a> · <a href="./coverage-report.json" target="_blank">Coverage review</a> · <a href="./location-policy.json" target="_blank">Country policies</a> · <a href="./granularity-report.json" target="_blank">Source-level audit</a> · <a href="./hierarchy-report.json" target="_blank">Geographic crosswalk report</a></p></dialog>`;
-const map = L.map('map', { zoomControl:false, attributionControl:true, minZoom:1, maxZoom:13, zoomSnap:0.25, preferCanvas:true, maxBounds:[[-89,-210],[89,210]], maxBoundsViscosity:0.7 });
+const map = L.map('map', { zoomControl:false, attributionControl:true, minZoom:1, maxZoom:13, zoomSnap:0, scrollWheelZoom:false, preferCanvas:true, maxBounds:[[-89,-210],[89,210]], maxBoundsViscosity:0.7 });
+installWheelZoom(map);
 map.attributionControl.setPrefix(false);
 map.attributionControl.addAttribution('<a href="https://www.geoboundaries.org/">geoBoundaries</a> · <a href="https://www.naturalearthdata.com/">Natural Earth</a> · <a href="https://doi.org/10.1038/s41597-025-04516-9">Cliopatria, CC BY 4.0</a>');
 const worldBounds = [[-57,-174],[80,179]];
