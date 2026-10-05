@@ -1,0 +1,154 @@
+{
+  "retrieved_date": "2026-10-05",
+  "sources": [
+    {
+      "path": "sources/aafc-terrestrial-ecoregions-v2.2.geojson",
+      "title": "Agriculture and Agri-Food Canada, Terrestrial Ecoregions of Canada v2.2; complete 218-feature GeoJSON",
+      "url": "https://agriculture.canada.ca/atlas/data_donnees/nationalEcologicalFramework/data_donnees/geoJSON/er/nef_ca_ter_ecoregion_v2_2.geojson",
+      "license_or_reuse": "Open Government Licence - Canada",
+      "source_vintage": "AAFC Terrestrial Ecoregions of Canada v2.2 spatial representation; National Ecological Framework developed 1991–1999; portal record current at retrieval",
+      "retrieved_utc": "2026-10-05T05:33:21Z",
+      "sha256": "f2c7ac1cabc601c364479c4616c245c993443ac61f6842f01a12078844a71e6b",
+      "bytes": 13567291,
+      "finding_or_limit": "Original official source; retained. This edition is a comparison only and does not replace the baseline source item/version or release pins."
+    },
+    {
+      "path": "sources/aafc-national-ecological-framework-product-specification.pdf",
+      "title": "AAFC National Ecological Framework for Canada data product specification",
+      "url": "https://agriculture.canada.ca/atlas/data_donnees/nationalEcologicalFramework/supportdocument_documentdesupport/en/ISO_19131_National_Ecological_Framework_for_Canada_Data_Product_Specification.pdf",
+      "license_or_reuse": "Government of Canada publication; reuse under OGL Canada as stated by product",
+      "source_vintage": "Framework developed 1991–1999; specification retrieved 2026-10-05",
+      "retrieved_utc": "2026-10-05",
+      "sha256": "d2e2fb60a3db901e434d2271ca72566bde06f152788d49c0fdbb4515add7c473",
+      "bytes": 344301,
+      "finding_or_limit": "Defines ecological hierarchy ecozone > ecoprovince > ecoregion > ecodistrict and transition zones; does not make ecoregions administrative divisions."
+    },
+    {
+      "path": "sources/geoboundaries-GRL-ADM1-9469f09.geojson",
+      "title": "geoBoundaries gbOpen Greenland ADM1 GeoJSON (pinned commit)",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/GRL/ADM1/geoBoundaries-GRL-ADM1.geojson",
+      "license_or_reuse": "CC BY-SA 3.0 Unported (upstream says Germany variant)",
+      "source_vintage": "Boundary year 2020; 6 features; retrieval 2026-10-05",
+      "retrieved_utc": "2026-10-05T05:35Z",
+      "sha256": "a3132d9511f99c11a70aa40969567e29aa6f12d347117286025f87c6cdde86b0",
+      "bytes": 1758212,
+      "finding_or_limit": "Original upstream release source retained. Upstream lineage lists GeoBoundaries and Wikipedia; not primary boundary authority."
+    },
+    {
+      "path": "sources/resolve-item-metadata.json",
+      "title": "ArcGIS item metadata: RESOLVE Ecoregions and Biomes, item 37ea320eebb647c6838c23f72abae5ef",
+      "url": "https://www.arcgis.com/sharing/rest/content/items/37ea320eebb647c6838c23f72abae5ef?f=pjson",
+      "license_or_reuse": "CC BY 4.0 per item",
+      "source_vintage": "Dataset described as 2017; item modified 2026-05-28; extent longitude -170..170, latitude -70..70",
+      "retrieved_utc": "2026-10-05",
+      "sha256": "39be5d1fe0c7aee0c4892b93c1ae68a928740f23df045a4ebe898dd2dcf6732f",
+      "bytes": 9587,
+      "finding_or_limit": "Metadata snapshot retained. Max latitude 70 means this product cannot substantiate Greenland north of 70°N."
+    },
+    {
+      "path": null,
+      "title": "Statistics Greenland, Municipalities in Greenland 2018",
+      "url": "https://stat.gl/publ/en/BE/201704/pdf/Municipalities%20in%20Greenland%202018.pdf",
+      "license_or_reuse": "Publisher copyright; attributed quotations permitted. Not retained or redistributed.",
+      "source_vintage": "Published 2017-10-18; describes 2018 municipal change",
+      "retrieved_utc": "2026-10-05",
+      "sha256": null,
+      "bytes": null,
+      "finding_or_limit": "Restoration link only. Confirms Qaasuitsup split effective 2018-01-01 into Kommune Qeqertalik and Avannaata Kommunia; includes areas outside municipalities. Administrative/population source, not a boundary file."
+    },
+    {
+      "path": null,
+      "title": "Statistics Greenland, Greenland in Figures 2024",
+      "url": "https://stat.gl/publ/en/gf/2024/pdf/Greenland%20in%20Figures%202024.pdf",
+      "license_or_reuse": "Copyright Statistics Greenland 2024; attributed quotations permitted. Not retained or redistributed.",
+      "source_vintage": "21st edition; editorial deadline May 2024",
+      "retrieved_utc": "2026-10-05",
+      "sha256": null,
+      "bytes": null,
+      "finding_or_limit": "Restoration link only. Supports current five-municipality and former district context; administrative/statistical overview, not a boundary file."
+    },
+    {
+      "path": "sources/aafc-arcgis-item-metadata.json",
+      "title": "ArcGIS item metadata for baseline AAFC source item ee462b0692cc4005aefee69dc44f010d",
+      "url": "https://www.arcgis.com/sharing/rest/content/items/ee462b0692cc4005aefee69dc44f010d?f=pjson",
+      "license_or_reuse": "Open Government Licence - Canada as stated in linked source item",
+      "source_vintage": "ArcGIS metadata snapshot retrieved 2026-10-05",
+      "retrieved_utc": "2026-10-05",
+      "sha256": "d7e8057854167db7dcd6cd6332bc90cee3a303e6d801490b43d0f01421fa08a9",
+      "bytes": 6389,
+      "finding_or_limit": "Metadata links the layer to official National Ecological Framework data, describes ecoregions as subdivisions of ecoprovinces, and states Open Government Licence - Canada."
+    },
+    {
+      "path": "sources/aafc-arcgis-layer-metadata.json.gz",
+      "title": "ArcGIS REST layer metadata for baseline AAFC feature service layer 0",
+      "url": "https://services.arcgis.com/wjcPoefzjpzCgffS/arcgis/rest/services/EcoRegions_of_Canada/FeatureServer/0?f=pjson",
+      "license_or_reuse": "Open Government Licence - Canada as stated in linked source item",
+      "source_vintage": "ArcGIS metadata snapshot retrieved 2026-10-05",
+      "retrieved_utc": "2026-10-05",
+      "sha256": "aa56e524d732eb6c9fa25c118e23e80a13bda17d87f92823f2c514a03ea64e2a",
+      "bytes": 3232,
+      "finding_or_limit": "Fields include ecoregion, ecozone and ecoprovince IDs and official EN/FR names. Service dataLastEditDate is 2025-12-18; schema/item edit dates are later. This helps explain why the current source display/metadata vintage differs from the 2023 edition GeoJSON comparison. Raw JSON is retained losslessly in deterministic gzip so source formatting whitespace does not fail diff hygiene.",
+      "uncompressed_sha256": "32eacb8a1619a500db0ce58727c92fd58b581796e3ea0e6de4b5fbc91b79e1e3",
+      "uncompressed_bytes": 14183
+    },
+    {
+      "path": "sources/aafc-baseline-arcgis-layer0.geojson",
+      "title": "Complete 218-feature response from baseline AAFC ArcGIS EcoRegions of Canada FeatureServer layer 0",
+      "url": "https://services.arcgis.com/wjcPoefzjpzCgffS/arcgis/rest/services/EcoRegions_of_Canada/FeatureServer/0/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=geojson",
+      "license_or_reuse": "Open Government Licence - Canada as stated by baseline source item",
+      "source_vintage": "Layer metadata reports dataLastEditDate 2025-12-18; response retrieved 2026-10-05",
+      "retrieved_utc": "2026-10-05",
+      "sha256": "30e5e2fc80df6624ecc10d2a6714cf88339fad88e5a8577e41f9fb26e2c4a992",
+      "bytes": 12241679,
+      "finding_or_limit": "Retained complete baseline-linked source response. Compare with official AAFC v2.2 GeoJSON in reproduce_assessment.py; source-level geometry rings match after 1e-6 degree rounding and order/direction normalization. This does not validate atlas clipping or legal boundaries."
+    },
+    {
+      "path": "sources/aafc-ecoprovinces-baseline-arcgis-layer0.geojson",
+      "title": "Complete 68-feature AAFC EcoProvinces FeatureServer layer 0 response",
+      "url": "https://services.arcgis.com/wjcPoefzjpzCgffS/arcgis/rest/services/EcoProvinces_of_Canada/FeatureServer/0/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=geojson",
+      "license_or_reuse": "Open Government Licence - Canada as stated by linked AAFC item",
+      "source_vintage": "Layer metadata dataLastEditDate 2026-01-06; response retrieved 2026-10-05",
+      "retrieved_utc": "2026-10-05",
+      "sha256": "5602aa328b64c3db9236cf610056d8375f164a51651dec34dc63334ecd4bc51f",
+      "bytes": 7164752,
+      "finding_or_limit": "Provides unique ecoprovince IDs and official EN/FR names. Used to verify child ecoregion IDs against parent province labels; does not independently verify clipped atlas parent boundaries."
+    },
+    {
+      "path": "sources/aafc-ecoprovinces-arcgis-item-metadata.json",
+      "title": "AAFC ArcGIS item metadata for EcoProvinces of Canada (item 37a4b193e51e4e499de948e903945e5d)",
+      "url": "https://www.arcgis.com/sharing/rest/content/items/37a4b193e51e4e499de948e903945e5d?f=pjson",
+      "license_or_reuse": "Open Government Licence - Canada as stated by linked AAFC item",
+      "source_vintage": "Metadata snapshot retrieved 2026-10-05",
+      "retrieved_utc": "2026-10-05",
+      "sha256": "81296b43a616b61953f7b8c88269c033fbe6552f4f8c2197e61c7cda38b8ce95",
+      "bytes": 7237,
+      "finding_or_limit": "Names the public AAFC EcoProvinces layer; OGL Canada as stated by item."
+    },
+    {
+      "path": "sources/aafc-ecoprovinces-arcgis-layer-metadata.json.gz",
+      "title": "AAFC ArcGIS EcoProvinces layer 0 metadata",
+      "url": "https://services.arcgis.com/wjcPoefzjpzCgffS/arcgis/rest/services/EcoProvinces_of_Canada/FeatureServer/0?f=pjson",
+      "license_or_reuse": "Open Government Licence - Canada as stated by linked AAFC item",
+      "source_vintage": "Layer metadata retrieved 2026-10-05; dataLastEditDate 2026-01-06",
+      "retrieved_utc": "2026-10-05",
+      "sha256": "daca8ecc4bee07fb62bc50db03174cc895ad69de5a21cc1a6146f7e6ba0897d6",
+      "bytes": 3192,
+      "finding_or_limit": "Fields ECOZONE_ID, ECOPROVINCE_ID and official English/French names; OGL Canada via linked item. Raw JSON is retained losslessly in deterministic gzip to keep diff hygiene.",
+      "uncompressed_sha256": "2b66b3768de4891b14ac11114cfb55daef4aa7d823bb1599b7d504605d208535",
+      "uncompressed_bytes": 13503
+    },
+    {
+      "path": "sources/resolve-scoped-ecoregions-0-417-418.geojson.gz",
+      "title": "RESOLVE/Esri GeoJSON source geometry for exact scoped feature IDs 0, 417 and 418",
+      "url": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer/0/query?where=ECO_ID%20IN%20(0%2C417%2C418)&outFields=*&returnGeometry=true&outSR=4326&f=geojson",
+      "license_or_reuse": "CC BY 4.0 as declared per source feature/item",
+      "source_vintage": "RESOLVE Ecoregions of the World 2017; service dataLastEditDate 2022-01-27; retrieved 2026-10-05T06:01Z",
+      "retrieved_utc": "2026-10-05T06:01Z",
+      "sha256": "dd3b90100f2917d3cc3b4e1b81769674292594003f496acee0e8f73ab7b4299b",
+      "bytes": 9209353,
+      "uncompressed_sha256": "a6918a9961fa6be51802a904ea052ea1ad52d0944e27288d51e9146b6ce1ff52",
+      "uncompressed_bytes": 44945438,
+      "finding_or_limit": "Retains exactly the three claimed native physical source geometries. Original names are Rock and Ice, Kalaallit Nunaat Arctic steppe and Kalaallit Nunaat High Arctic tundra. The parent item extent ends at 70 degrees north; this source cannot substantiate land/ice geography north of that extent. Atlas members are portions and require their own territory/clipping analysis."
+    }
+  ]
+}
