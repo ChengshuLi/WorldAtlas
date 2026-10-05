@@ -1,0 +1,36 @@
+{
+  "baseline_commit": "5f6ab02338a07fd4b3d1cf82d58b96bc84b70312",
+  "counts": {
+    "shore_contact": 60862,
+    "interior_reference": 37462,
+    "interior_multiple_neighbors": 35060
+  },
+  "sample_checks": {
+    "saravan-panjgur": {
+      "lonlat": [
+        63.20772768102681,
+        26.8032
+      ],
+      "candidate_fragments": [
+        "1272:39"
+      ]
+    },
+    "idanha-brozas": {
+      "lonlat": [
+        -6.9369282471386455,
+        39.864122023581864
+      ],
+      "candidate_fragments": [
+        "1402:90"
+      ]
+    },
+    "lake-superior": {
+      "lonlat": [
+        -87.97807178571429,
+        47.727000000000004
+      ],
+      "candidate_fragments": []
+    }
+  },
+  "limits": "Sample matches support reference-based detection only. Lake Superior exclusion checks separately retained major-water reference; no complete hydrology certificate."
+}
