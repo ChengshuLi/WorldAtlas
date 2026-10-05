@@ -1,0 +1,266 @@
+{
+  "issue": 944,
+  "limitations": [
+    "Source hash verification is distinct from feature-count metadata reconciliation and factual/geographic verification.",
+    "Current Georef results are a comparison source, not a legal boundary ruling.",
+    "No exact licensed current IGN 2017 boundary file was available."
+  ],
+  "official_documentation": [
+    {
+      "claim": "The service dataset carries CC BY 4.0 and describes provincial/departmental data as based on IGN, BAHRA and INDEC.",
+      "url": "https://datos.gob.ar/dataset/jgm-servicio-normalizacion-datos-geograficos"
+    },
+    {
+      "claim": "Full departments/provinces JSON and GeoJSON data are downloadable.",
+      "url": "https://datosgobar.github.io/georef-ar-api/download/"
+    },
+    {
+      "claim": "The API ETL data model describes territorial-unit source as IGN.",
+      "url": "https://datosgobar.github.io/georef-ar-api/georef-api-data/"
+    }
+  ],
+  "provenance_records": [
+    {
+      "bytes": 1383,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/source/geoBoundaries-upstream/README.md",
+      "sha256": "1cb1851270d6bb3766f70de30b77573aefe80e462ec1bc1184c37974bf6531d3"
+    },
+    {
+      "bytes": 1318,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/source/geoBoundaries-upstream/arg-adm1-geometry-content.json",
+      "sha256": "853b3be3d78c371bfc9f7b1e82f7f2f01b46f97e42af3e3e0c8b84cd88744e50"
+    },
+    {
+      "bytes": 1353,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/source/geoBoundaries-upstream/arg-adm1-metadata-content.json",
+      "sha256": "8bd4dffabc2dc3a28e02cdd2a8de87b5849b489831274daa4e2c08b0e6103ae3"
+    },
+    {
+      "bytes": 1324,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/source/geoBoundaries-upstream/arg-adm2-geometry-content.json",
+      "sha256": "142008ddea26a26d2a550ab731911472b38335b6263c76a1389c77b40ee501b1"
+    },
+    {
+      "bytes": 304,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/source/geoBoundaries-upstream/arg-adm2-geometry-github-record.json",
+      "sha256": "bcdd19c796f308066089fa6fa7864244afb97358a7b9ba5b94ce22da0cc876fa"
+    },
+    {
+      "bytes": 127,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/source/geoBoundaries-upstream/arg-adm2-github-content.json",
+      "sha256": "e45906ce02e79f16fb87a838d86bb4e497e37a9591f97608fa013bbcd8b9cbc2"
+    },
+    {
+      "bytes": 1353,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/source/geoBoundaries-upstream/arg-adm2-metadata-content.json",
+      "sha256": "28fb35e0dc128231eb64fe1fec858fb20e26fbbd0c29e79680adc65653b29069"
+    },
+    {
+      "bytes": 303566,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/source/geoBoundaries-upstream/commit-9469f09.json",
+      "sha256": "3443ba146cecbd295fe0a2571dc872ad008b3126153b88d70232a8bfb0b2f833"
+    }
+  ],
+  "retrieved_at": "2026-10-05",
+  "sources": [
+    {
+      "files": [
+        {
+          "bytes": 21210311,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/argentina-adm2-source-revalidation-443/source/geoBoundaries-2020-scoped-214.geojson",
+          "sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305"
+        },
+        {
+          "bytes": 958,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/argentina-adm2-source-revalidation-443/source/geoBoundaries-2020/geoBoundaries-ARG-ADM2-metaData.json",
+          "sha256": "17452b82df4498c1b29a4489bd78709cef922b453579b1a47010dfd2524a7ce2"
+        }
+      ],
+      "github_api": "https://api.github.com/repos/wmgeolab/geoBoundaries/contents/releaseData/gbOpen/ARG/ADM2/geoBoundaries-ARG-ADM2.geojson?ref=9469f09",
+      "id": "geoboundaries-arg-adm2-2020-scoped-214",
+      "license": {
+        "status": "redistributable",
+        "terms": "Creative Commons Attribution 3.0 IGO as declared by the exact upstream metadata. Attribute geoBoundaries and its named source agencies."
+      },
+      "limit": "The 2020 source metadata declares 526 while restored geometry has 525 features. The 214 subject check cannot identify the missing 526th unit, certify national completeness, or establish current/legal boundaries.",
+      "original_full_object": {
+        "archive_path": "data/regional-review/regional-review-7cf674a63057d43f/source/geoBoundaries-ARG/geoBoundaries-ARG-ADM2.geojson.gz",
+        "archive_sha256": "aaf34413713c3b75175d04b6b7cafa4910ebdca762d2637a6547024466e3e07e",
+        "bytes": 69702323,
+        "feature_count": 525,
+        "git_blob_sha": "5f227ef80bcea39f76583bb48869cb461cee0796",
+        "lfs_pointer_file_sha256": "80e8dc71e89e75f581089fc16270943b559235dfcaf6c49174b0935fc5febc68",
+        "lfs_pointer_path": "data/regional-review/regional-review-7cf674a63057d43f/source/geoBoundaries-ARG/geoBoundaries-ARG-ADM2.geojson.lfs-pointer.txt",
+        "metadata_admUnitCount": 526,
+        "restoration": "git show 9469f09 releaseData/gbOpen/ARG/ADM2/geoBoundaries-ARG-ADM2.geojson via Git LFS; or gzip -cd the retained #443 archive; verify raw object SHA-256 and 69,702,323 bytes. `prepare-scoped-2020.py` verifies archive/raw hashes and feature IDs, then writes the canonical scoped partition.",
+        "sha256": "f35dae5a257302dea5bd1549ae135baf82e7ee7491918854c3db9bbdec890177",
+        "unique_shapeID_count": 525
+      },
+      "retention": "retained",
+      "retrieved_at": "2026-10-05",
+      "role": "2020 Argentina ADM2 departments source partition for exact issue subjects",
+      "temporal_status": "unknown",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/ARG/ADM2/geoBoundaries-ARG-ADM2.geojson",
+      "verification": "verified",
+      "vintage": "Published boundary year 2020; metadata update 2023-01-19, build 2023-12-12"
+    },
+    {
+      "files": [
+        {
+          "bytes": 201505,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/argentina-adm2-source-revalidation-443/source/geoBoundaries-2006/geoBoundaries-ARG-ADM1-2006.geojson",
+          "sha256": "b5d13177b09ad3347b617a83252cc77bc985f3c70802d4d7a8b50d3fbe5adba6"
+        },
+        {
+          "bytes": 810,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/argentina-adm2-source-revalidation-443/source/geoBoundaries-2006/geoBoundaries-ARG-ADM1-metaData.json",
+          "sha256": "328f5cbf32c674fc4d8a58553909e501634ee46edcc5044cfa076783d3e6feed"
+        }
+      ],
+      "github_api": "https://api.github.com/repos/wmgeolab/geoBoundaries/contents/releaseData/gbOpen/ARG/ADM1/geoBoundaries-ARG-ADM1.geojson?ref=9469f09",
+      "id": "geoboundaries-arg-adm1-2006",
+      "license": {
+        "status": "redistributable",
+        "terms": "Creative Commons Attribution 2.5 Generic as declared in exact companion upstream metadata; provide attribution."
+      },
+      "limit": "This historical comparison source is not a certified legal boundary for any current province; source-register expected SHA differs and requires an engineering source-identity decision.",
+      "retention": "retained",
+      "retrieved_at": "2026-10-05",
+      "role": "2006 Argentina ADM1 province comparison source",
+      "temporal_status": "unknown",
+      "upstream_lfs": {
+        "bytes": 201505,
+        "feature_count": 23,
+        "git_blob_sha": "36f9928b436d49cae2c60db4d4dbd600b1875a0e",
+        "lfs_object_sha256": "b5d13177b09ad3347b617a83252cc77bc985f3c70802d4d7a8b50d3fbe5adba6",
+        "unique_shapeID_count": 23
+      },
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/ARG/ADM1/geoBoundaries-ARG-ADM1.geojson",
+      "verification": "verified",
+      "vintage": "Published boundary year 2006; metadata update 2023-01-19, build 2023-12-12"
+    },
+    {
+      "categories": {
+        "Comuna": 15,
+        "Departamento": 379,
+        "Partido": 135
+      },
+      "feature_count": 529,
+      "files": [
+        {
+          "bytes": 127459,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/argentina-adm2-source-revalidation-443/source/Georef-current/departamentos.json",
+          "sha256": "c548f61942be94c26c8b57d64b06a4c210b85d4787fa32b18ac8d3c1af4d08b8"
+        },
+        {
+          "bytes": 127459,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/argentina-adm2-source-revalidation-443/source/Georef-current/departamentos-all.json",
+          "sha256": "c548f61942be94c26c8b57d64b06a4c210b85d4787fa32b18ac8d3c1af4d08b8"
+        },
+        {
+          "bytes": 1193417,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/argentina-adm2-source-revalidation-443/source/Georef-current/departamentos.geojson",
+          "sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92"
+        }
+      ],
+      "http_headers": [
+        "source/Georef-current/departamentos-http-headers.txt",
+        "source/Georef-current/departamentos-all-http-headers.txt",
+        "source/Georef-current/departamentos-geojson-http-headers.txt"
+      ],
+      "id": "datos-argentina-georef-departments-current",
+      "license": {
+        "status": "redistributable",
+        "terms": "Datos Argentina Servicio de normalización de datos geográficos, Creative Commons Attribution 4.0; attribution to Jefatura de Gabinete/Secretaría de Innovación Pública and note the API underlying territorial-unit source as IGN."
+      },
+      "limit": "Official current API source with a mixed category schema and 484 positive-area feature-pair intersections within the reviewed source footprint. It is not a clean planar partition or legal adjudication.",
+      "retention": "retained",
+      "retrieved_at": "2026-10-05",
+      "role": "Current official second-order territorial comparison geometry and category/name/parent source",
+      "temporal_status": "reference",
+      "url": "https://apis.datos.gob.ar/georef/api/departamentos.geojson?max=1000",
+      "verification": "verified",
+      "vintage": "API response retrieved 2026-10-05; Last-Modified 2026-08-19; no version/effective legal date in response"
+    },
+    {
+      "feature_count": 24,
+      "files": [
+        {
+          "bytes": 5238,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/argentina-adm2-source-revalidation-443/source/Georef-current/provincias.json",
+          "sha256": "1da5632e8e2e3ba642e53e13159c3696126c4c6e2b8055f71a5aee01b8a9a444"
+        },
+        {
+          "bytes": 614706,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/argentina-adm2-source-revalidation-443/source/Georef-current/provincias.geojson",
+          "sha256": "b086852064c26813d9f607c82c91b4e74e18ea83fd21993ddedd473cf8495af5"
+        }
+      ],
+      "http_headers": [
+        "source/Georef-current/provincias-http-headers.txt",
+        "source/Georef-current/provincias-geojson-http-headers.txt"
+      ],
+      "id": "datos-argentina-georef-provinces-current",
+      "license": {
+        "status": "redistributable",
+        "terms": "Datos Argentina Servicio de normalización de datos geográficos, Creative Commons Attribution 4.0; attribution to Jefatura de Gabinete/Secretaría de Innovación Pública and note the API underlying territorial-unit source as IGN."
+      },
+      "limit": "Current comparison only; the service does not certify historical/province legal boundary lineage. One repeated framework parent name in Atlas resolves to the same official feature.",
+      "retention": "retained",
+      "retrieved_at": "2026-10-05",
+      "role": "Current official province names, IDs and comparison geometries",
+      "temporal_status": "reference",
+      "url": "https://apis.datos.gob.ar/georef/api/provincias.geojson?max=1000",
+      "verification": "verified",
+      "vintage": "API response retrieved 2026-10-05; Last-Modified 2026-08-19; no version/effective legal date in response"
+    },
+    {
+      "advertised_geometry_attempt": {
+        "http_status": 404,
+        "retained_bytes": false,
+        "retrieved_at": "2026-10-05"
+      },
+      "advertised_geometry_url": "https://www.ign.gob.ar/descargas/geodatos/limite_interdepartamental_partido_geojson.zip",
+      "files": [
+        {
+          "bytes": 64743,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/argentina-adm2-source-revalidation-443/source/IGN-2017/limite_interdepartamental_partido-metadata.pdf",
+          "sha256": "95f001ec9e874b05b36187daac158d2285b7aa816b7b99d25c4ff9c5517ae16a"
+        }
+      ],
+      "id": "ign-interdepartmental-metadata-2017",
+      "license": {
+        "status": "redistributable",
+        "terms": "CC BY as stated in the retained IGN metadata PDF; attribution required."
+      },
+      "limit": "The advertised source GeoJSON returned HTTP 404 on 2026-10-05. Metadata is not a boundary geometry and cannot support an overlay.",
+      "metadata_url": "https://www.ign.gob.ar/archivos/sig250/metadatos/limite_interdepartamental_partido.pdf",
+      "retention": "retained",
+      "retrieved_at": "2026-10-05 (metadata originally retained in #443)",
+      "role": "2017 metadata evidence for advertised interdepartmental/partido boundaries and license",
+      "temporal_status": "unknown",
+      "url": "https://www.ign.gob.ar/archivos/sig250/metadatos/limite_interdepartamental_partido.pdf",
+      "verification": "verified",
+      "vintage": "Metadata update December 2017"
+    }
+  ],
+  "version": 1
+}
