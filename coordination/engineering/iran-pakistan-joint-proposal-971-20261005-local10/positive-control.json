@@ -1,0 +1,23 @@
+{
+  "check_count": 15,
+  "checks": [
+    "bilateral source intersections close known full component",
+    "existing geometry preserved and new coverage constrained to source and component",
+    "uncovered source stripe rejected rather than nearest-filled",
+    "contradictory positive-area sources rejected",
+    "missing affected neighbor rejected",
+    "invalid source rejected without geometry repair",
+    "tiny positive source additions preserved",
+    "source hole remains unsupported and rejected",
+    "exact shared original source members accepted",
+    "changed shared coordinate rejected without snapping",
+    "different shared source version rejected",
+    "absent shared source evidence rejected",
+    "all tiny areal geometry and nonpolygon remnants retained in separate representations",
+    "bounded strict-centre geometric coverage distinguishes baseline from candidate without claiming compiled grid",
+    "invalid projection yields unknown rather than coverage predicates or repaired shapes"
+  ],
+  "kind": "positive-control",
+  "method_id": "joint-source-candidate",
+  "outcome": "passed"
+}
