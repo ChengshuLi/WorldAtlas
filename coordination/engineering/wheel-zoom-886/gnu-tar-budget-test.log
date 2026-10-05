@@ -1,0 +1,22 @@
+✔ only explicit coordination controls, plain docs and engineering receipts avoid a package build (5.67225ms)
+✔ renamed or copied runtime origins cannot hide behind documentation or receipt destinations (1.130375ms)
+✔ PR inventory exhausts pages and catches a relevant path on a later page (1.201625ms)
+✔ PR missing pages, changed heads, unavailable lookup and malformed inventories default full (0.368125ms)
+✔ push before/after comparison includes rename origins and fails full for missing or capped inventories (0.94875ms)
+✔ API failures use bounded authenticated read-only requests (0.872583ms)
+✔ workflow keeps trusted bootstrap fallback and runs package checks only when their inputs can change (73.532333ms)
+✔ both research lanes skip package compilation only after immutable build-input proof (21.535709ms)
+✔ public review attachments, annotation plans, audited inputs and copied partitions remain package inputs (16.987792ms)
+✔ unavailable, capped, malformed, symlinked or hash-mismatched package dependencies fail full (16.916583ms)
+✔ unreachable ordinary source modules do not invalidate unchanged package readers (0.688792ms)
+✔ exact upload archive accounting includes transport/config and preserves excluded sources (142.769834ms)
+✔ reserve breaches fail before hard limits and diagnostics name large files/categories (0.453417ms)
+✔ staged Site inventory agrees with actual archive and rejects redundant transport/linked inputs (46.932542ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 417.182542
