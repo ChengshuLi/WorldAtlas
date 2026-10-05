@@ -1,0 +1,102 @@
+{
+  "issue": 418,
+  "scope_id_count": 206,
+  "source_feature_count": 205,
+  "source_feature_joins": 205,
+  "roster_matches_conditional_on_inherited_parent": 185,
+  "probable_name_candidates_conditional_on_inherited_parent": 3,
+  "island_label_name_candidates_conditional_on_inherited_parent": 2,
+  "island_label_correction_candidates": 19,
+  "overall_status_counts": {
+    "insufficient-evidence": 187,
+    "correction-needed": 19
+  },
+  "county_summary": {
+    "Istria": {
+      "scoped_source_features": 41,
+      "official_2021_town_municipality_roster": 41,
+      "exact_roster_matches": 41,
+      "probable_name_candidates": 0,
+      "unmatched_source_features": 0,
+      "roster_units_not_exactly_matched_in_this_issue_scope": 0,
+      "roster_units_not_represented_even_by_name_candidate_in_this_issue_scope": 0
+    },
+    "Karlovac": {
+      "scoped_source_features": 22,
+      "official_2021_town_municipality_roster": 22,
+      "exact_roster_matches": 22,
+      "probable_name_candidates": 0,
+      "unmatched_source_features": 0,
+      "roster_units_not_exactly_matched_in_this_issue_scope": 0,
+      "roster_units_not_represented_even_by_name_candidate_in_this_issue_scope": 0
+    },
+    "Krapina-Zagorje": {
+      "scoped_source_features": 32,
+      "official_2021_town_municipality_roster": 32,
+      "exact_roster_matches": 32,
+      "probable_name_candidates": 0,
+      "unmatched_source_features": 0,
+      "roster_units_not_exactly_matched_in_this_issue_scope": 0,
+      "roster_units_not_represented_even_by_name_candidate_in_this_issue_scope": 0
+    },
+    "Lika-Senj": {
+      "scoped_source_features": 12,
+      "official_2021_town_municipality_roster": 12,
+      "exact_roster_matches": 12,
+      "probable_name_candidates": 0,
+      "unmatched_source_features": 0,
+      "roster_units_not_exactly_matched_in_this_issue_scope": 0,
+      "roster_units_not_represented_even_by_name_candidate_in_this_issue_scope": 0
+    },
+    "Primorje-Gorski Kotar": {
+      "scoped_source_features": 39,
+      "official_2021_town_municipality_roster": 36,
+      "exact_roster_matches": 29,
+      "probable_name_candidates": 2,
+      "unmatched_source_features": 8,
+      "roster_units_not_exactly_matched_in_this_issue_scope": 7,
+      "roster_units_not_represented_even_by_name_candidate_in_this_issue_scope": 5
+    },
+    "Zadar County": {
+      "scoped_source_features": 32,
+      "official_2021_town_municipality_roster": 34,
+      "exact_roster_matches": 32,
+      "probable_name_candidates": 0,
+      "unmatched_source_features": 0,
+      "roster_units_not_exactly_matched_in_this_issue_scope": 2,
+      "roster_units_not_represented_even_by_name_candidate_in_this_issue_scope": 2
+    },
+    "Šibenik-Knin": {
+      "scoped_source_features": 27,
+      "official_2021_town_municipality_roster": 20,
+      "exact_roster_matches": 17,
+      "probable_name_candidates": 1,
+      "unmatched_source_features": 9,
+      "roster_units_not_exactly_matched_in_this_issue_scope": 3,
+      "roster_units_not_represented_even_by_name_candidate_in_this_issue_scope": 2
+    }
+  },
+  "official_2021_units_not_matched_in_this_issue_scope": {
+    "Primorje-Gorski Kotar": [
+      "Baška",
+      "Dobrinj",
+      "Mali Lošinj",
+      "Punat",
+      "Vrbnik"
+    ],
+    "Zadar County": [
+      "Lišane Ostrovičke",
+      "Stankovci"
+    ],
+    "Šibenik-Knin": [
+      "Tisno",
+      "Tribunj"
+    ]
+  },
+  "boundary_license_limits": [
+    "geoBoundaries/Atlas metadata reports CC BY-SA 2.0 for an OSM-derived source, while OSM's current official notice says ODbL; no license change is proposed.",
+    "DGU's official INSPIRE Administrative Units feed carries an explicit public-access restriction; its polygon archive was not downloaded."
+  ],
+  "boundary_verification": "No scoped Croatia polygon is certified by this reproduction.",
+  "roster_name_matches_are_not_extent_or_identity_proof": "Two island-labeled source features normalize to DZS local-government names (Krk and Cres); feature identity and geometry still require authoritative review."
+}
