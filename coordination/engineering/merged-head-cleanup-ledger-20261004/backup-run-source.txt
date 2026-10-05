@@ -1,0 +1,30 @@
+import fs from 'node:fs';
+import {execFileSync} from 'node:child_process';
+import {githubPages} from '/Users/chengshuli/world-atlas-workspace/WorldAtlas-research-ci/scripts/issue-claim-contract.mjs';
+const repo='ChengshuLi/WorldAtlas',branch='engineering/research-ci-feature-preserved-20261004';
+const expected='220e6077e812c2de5ac0ecb559a34829039264f8',archive='d943a083324eddcd79686c1f38335547687f247c';
+const result={version:1,repo,branch,expected_head:expected,archived_pr:829,archive_head:archive,observed_at:new Date().toISOString(),
+ authorization:'User explicitly approved removing this author-created feature preservation backup after the implementation and original evidence were retained through merged PR829 and842.'};
+const need=(value,message)=>{if(!value)throw Error(message);};let calls=0;const started=performance.now();
+const api=async route=>{
+ need(calls++<10&&performance.now()-started<30000,'Backup cleanup API/time budget exhausted');
+ const raw=execFileSync('/Users/chengshuli/.local/bin/gh',['api',route],{encoding:'utf8',timeout:20000,maxBuffer:32*1024*1024});
+ need(performance.now()-started<30000,'Backup cleanup time budget exhausted');return JSON.parse(raw);
+};
+try {
+ const metadata=await api(`/repos/${repo}`);need(typeof metadata.default_branch==='string'&&metadata.default_branch.length>0&&branch!==metadata.default_branch,'Default branch guard');
+ const source=await api(`/repos/${repo}/pulls/829`);
+ need(source.merged===true&&source.state==='closed'&&source.head?.sha===archive&&source.head.repo?.full_name===repo,'Archive PR/head is not confirmed');
+ const compare=await api(`/repos/${repo}/compare/${expected}...${archive}`);
+ need(compare.status==='ahead'&&compare.merge_base_commit?.sha===expected,'Original feature history is not an ancestor of the retained PR head');
+ const encoded=encodeURIComponent(branch),current=await api(`/repos/${repo}/branches/${encoded}`);
+ need(current.protected===false&&current.commit?.sha===expected,'Backup protected, unknown or advanced');
+ const open=await githubPages(api,`/repos/${repo}/pulls?state=open`);
+ need(open.every(p=>Number.isSafeInteger(p.number)&&p.state==='open'&&typeof p.head?.ref==='string'&&typeof p.head.repo?.full_name==='string'&&typeof p.base?.ref==='string'&&typeof p.base.repo?.full_name==='string'),'Incomplete open PR identities');
+ need(!open.some(p=>(p.head.repo.full_name===repo&&p.head.ref===branch)||(p.base.repo.full_name===repo&&p.base.ref===branch)),'Open PR uses backup');
+ const final=await api(`/repos/${repo}/git/ref/heads/${encoded}`);need(final.object?.sha===expected,'Backup ref changed');
+ need(calls<10&&performance.now()-started<30000,'Backup cleanup API/time budget exhausted before deletion');calls++;
+ execFileSync('/Users/chengshuli/.local/bin/gh',['api','--method','DELETE',`/repos/${repo}/git/refs/heads/${encoded}`],{encoding:'utf8',timeout:20000});
+ result.status='deleted';result.proof={default_branch:metadata.default_branch,protected:current.protected,ancestor:compare.merge_base_commit.sha,archive_head:source.head.sha,open_pr_count:open.length,final_ref_sha:final.object.sha};
+} catch(error){result.status='pending';result.reason=error.message;}
+fs.writeFileSync('/tmp/worldatlas-cleanup-backup-result.json',JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));

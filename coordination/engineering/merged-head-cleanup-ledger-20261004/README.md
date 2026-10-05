@@ -1,0 +1,11 @@
+# One-time remote branch cleanup
+
+Issue894 completes in two bounded PRs: PR895 implemented guarded cleanup in the trusted worker queue; this packet preserves the authorized backlog cleanup results. Original data, sources, local branches/worktrees and archived PRs remain. The queue's new behavior applies automatically to future merges.
+
+The backlog mutator used `cleanupMergedHead` byte-identical to reviewed PR895 head078053c665441a191fd05d786994820b0f792215. Each candidate was independently rechecked against a confirmed merged PR, exact head SHA, same repository, ordinary worker lane, non-default/unprotected current branch, complete open-PR head/base identities, and final current ref SHA. Slow/capped/failed requests stop conservatively. The ledger records timestamps and original inventory; it is an historical remote-state snapshot, not a claim that GitHub state cannot change afterward.
+
+The separately authorized `engineering/research-ci-feature-preserved-20261004` backup never had a PR. Its narrow cleanup additionally confirms its fixed220e607 original commit remains an ancestor of merged PR829's retainedd943a083 head, as well as protection/default/open-PR/final-ref guards. It is not a general exception for unmerged branches.
+
+GitHub's delete-ref endpoint has no atomic SHA guard. The final read/delete interval still requires workers to honor the fresh-branch protocol and never push to or reuse merged heads. API receipts provide cooperative accountability, not authenticated independent evidence of every server-side event. Read-only post-cleanup verification records absence of deleted refs and retained active/unknown branches.
+
+The archived `*-run-source.txt` files preserve the actual author execution code and original local paths; they are historical evidence, not instructions to rerun mutation. `verify-cleanup.mjs` is portable read-only inspection and makes no remote changes. The batch deleted114 confirmed merged heads; the explicitly authorized backup added one deletion. Post-cleanup snapshot verified all115 absent and retained main, active/unknown worker/deployment heads and the separately owned integration candidate. Future snapshots can differ because other workers continue.

@@ -1,0 +1,177 @@
+{
+  "version": 1,
+  "issue": 894,
+  "lane": "engineering",
+  "worker_id": "engineering-branch-cleanup-main-20261004",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "0f0f090dc0db118f2a4deb2c1c18edc7e99850d0",
+    "files": [
+      {
+        "path": "scripts/merge-integration.mjs",
+        "bytes": 23302,
+        "sha256": "4d862a0b852259b8f1956be3e051ce57059aa8fadbfa30c6fabb2246bb57ba85",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/merged-head-cleanup-ledger-20261004/README.md",
+      "bytes": 2217,
+      "sha256": "850c53ba686404ed9514ca0647579abe886d37272b19967402119f8150b81502",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merged-head-cleanup-ledger-20261004/backlog-results.json",
+      "bytes": 60568,
+      "sha256": "15504508bbbed3316c3688eead663f96058ed5eec5440c88ec57fd60203486e1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merged-head-cleanup-ledger-20261004/backlog-run-source.txt",
+      "bytes": 2491,
+      "sha256": "0fabafd168cb0c9b58369e88de0bf2f0720c62e267d346aff555c11a4c739b0c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merged-head-cleanup-ledger-20261004/backup-result.json",
+      "bytes": 813,
+      "sha256": "bbf0293fba650c6342a3b73b27f2a7ecd2d3cb5d3c43b42d604aeeb657b92b94",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merged-head-cleanup-ledger-20261004/backup-run-source.txt",
+      "bytes": 3316,
+      "sha256": "6f008b5764f55abf87e3c479315f1fdb664ba5f5f808e04702ea2f5a7a1918cc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merged-head-cleanup-ledger-20261004/claim.json",
+      "bytes": 839,
+      "sha256": "57f80e55dae4fef145ef3b594f4fc6ea93773b3d2a2410ca6db49661619f3427",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merged-head-cleanup-ledger-20261004/negative-control.json",
+      "bytes": 380,
+      "sha256": "5de6462ae4d5136c77158f230f9ce50b24802aec5b7bfe56c1799a643e408519",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merged-head-cleanup-ledger-20261004/positive-control.json",
+      "bytes": 313,
+      "sha256": "c4ba2a6c242416a5330694005a8fd53c3fe3cb3a59ce2ffdee157c18e367fd70",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merged-head-cleanup-ledger-20261004/post-cleanup-verification.json",
+      "bytes": 1084,
+      "sha256": "f99d4420be22777a66d89b7affc6eee52091712bffc40ee05a27728ec049653e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merged-head-cleanup-ledger-20261004/validation.txt",
+      "bytes": 727,
+      "sha256": "787f421193c3baa862789bffbaff3e7b5fd1a76e68f22d88750dd50a00eb277d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merged-head-cleanup-ledger-20261004/verify-cleanup.mjs",
+      "bytes": 1134,
+      "sha256": "18fdfe93f86a934fe0500b64223e22bbb0da1864dd6c32889376576da43d8a30",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "approved-backlog-cleanup",
+      "kind": "code",
+      "description": "Execute independently reviewed postmerge guards on approved stale heads; fixed backup ancestry and safety guards; preserve perbranch timestamped decisions and original execution sources; read-only absence verification.",
+      "software": "Node24; GitHub REST through authenticated gh; reviewed PR895 helper",
+      "units": "branch cleanup decision"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "Historical mutator source and immutable reviewed-helper identity retained in this packet; approved one-time run is completed.",
+    "GH_BIN=/path/to/gh node coordination/engineering/merged-head-cleanup-ledger-20261004/verify-cleanup.mjs (read-only)",
+    "node scripts/evidence-quality.mjs coordination/engineering/merged-head-cleanup-ledger-20261004/evidence-quality.json",
+    "git diff --check"
+  ],
+  "validation": [
+    {
+      "method_id": "approved-backlog-cleanup",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/merged-head-cleanup-ledger-20261004/positive-control.json"
+    },
+    {
+      "method_id": "approved-backlog-cleanup",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/merged-head-cleanup-ledger-20261004/negative-control.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/merged-head-cleanup-ledger-20261004/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merged-head-cleanup-ledger-20261004/backlog-results.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merged-head-cleanup-ledger-20261004/backlog-run-source.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merged-head-cleanup-ledger-20261004/backup-result.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merged-head-cleanup-ledger-20261004/backup-run-source.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merged-head-cleanup-ledger-20261004/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merged-head-cleanup-ledger-20261004/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merged-head-cleanup-ledger-20261004/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merged-head-cleanup-ledger-20261004/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merged-head-cleanup-ledger-20261004/post-cleanup-verification.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merged-head-cleanup-ledger-20261004/validation.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merged-head-cleanup-ledger-20261004/verify-cleanup.mjs",
+      "status": "added"
+    }
+  ]
+}
