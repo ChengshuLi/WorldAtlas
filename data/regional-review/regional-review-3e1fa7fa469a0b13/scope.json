@@ -1,0 +1,116 @@
+{
+  "baseline_commit": "f9a1dfa98b664dcf322806c843e82ab29d2b7935",
+  "batch_id": "regional-review:3e1fa7fa469a0b13",
+  "classification_summary": {
+    "correction-needed": 0,
+    "insufficient-evidence": 30,
+    "justified": 0
+  },
+  "issue": 75,
+  "issue_member_location_ids_sha256": "a1ae27720aaea5dc9d34b2cdd8dac7650c2ea40f77de45bfaec2053941a400ba",
+  "location_count": 30,
+  "member_location_ids": [
+    "gb:TUR:ADM2:54988432B11506112394599",
+    "gb:TUR:ADM2:54988432B12859589940172",
+    "gb:TUR:ADM2:54988432B27415936221667",
+    "gb:TUR:ADM2:54988432B29564092922191",
+    "gb:TUR:ADM2:54988432B35038871298949",
+    "gb:TUR:ADM2:54988432B39980691668600",
+    "gb:TUR:ADM2:54988432B42317071313317",
+    "gb:TUR:ADM2:54988432B47270758673920",
+    "gb:TUR:ADM2:54988432B48034047733274",
+    "gb:TUR:ADM2:54988432B49000461137157",
+    "gb:TUR:ADM2:54988432B50394805884304",
+    "gb:TUR:ADM2:54988432B53167672259322",
+    "gb:TUR:ADM2:54988432B53179569886424",
+    "gb:TUR:ADM2:54988432B53845687770419",
+    "gb:TUR:ADM2:54988432B59251116366587",
+    "gb:TUR:ADM2:54988432B62353974928440",
+    "gb:TUR:ADM2:54988432B6281772994077",
+    "gb:TUR:ADM2:54988432B66454172152747",
+    "gb:TUR:ADM2:54988432B69584017445691",
+    "gb:TUR:ADM2:54988432B71225398808763",
+    "gb:TUR:ADM2:54988432B73173192257924",
+    "gb:TUR:ADM2:54988432B7371544527763",
+    "gb:TUR:ADM2:54988432B79438437943955",
+    "gb:TUR:ADM2:54988432B81567150601582",
+    "gb:TUR:ADM2:54988432B84066107129786",
+    "gb:TUR:ADM2:54988432B84889548595985",
+    "gb:TUR:ADM2:54988432B86310086710434",
+    "gb:TUR:ADM2:54988432B86685660972424",
+    "gb:TUR:ADM2:54988432B8973824492298",
+    "gb:TUR:ADM2:54988432B97639118870532"
+  ],
+  "province_scopes": [
+    {
+      "classification": "insufficient-evidence",
+      "id": "framework:province:agr:dc819bd911a0",
+      "name": "Ağrı",
+      "owned_location_ids": [
+        "gb:TUR:ADM2:54988432B59251116366587",
+        "gb:TUR:ADM2:54988432B6281772994077",
+        "gb:TUR:ADM2:54988432B69584017445691",
+        "gb:TUR:ADM2:54988432B71225398808763",
+        "gb:TUR:ADM2:54988432B7371544527763",
+        "gb:TUR:ADM2:54988432B79438437943955",
+        "gb:TUR:ADM2:54988432B81567150601582",
+        "gb:TUR:ADM2:54988432B97639118870532"
+      ]
+    },
+    {
+      "classification": "insufficient-evidence",
+      "id": "framework:province:van:f871881e462f",
+      "name": "Van",
+      "owned_location_ids": [
+        "gb:TUR:ADM2:54988432B12859589940172",
+        "gb:TUR:ADM2:54988432B35038871298949",
+        "gb:TUR:ADM2:54988432B39980691668600",
+        "gb:TUR:ADM2:54988432B48034047733274",
+        "gb:TUR:ADM2:54988432B50394805884304",
+        "gb:TUR:ADM2:54988432B53179569886424",
+        "gb:TUR:ADM2:54988432B62353974928440",
+        "gb:TUR:ADM2:54988432B66454172152747",
+        "gb:TUR:ADM2:54988432B73173192257924",
+        "gb:TUR:ADM2:54988432B84066107129786",
+        "gb:TUR:ADM2:54988432B84889548595985",
+        "gb:TUR:ADM2:54988432B86310086710434",
+        "gb:TUR:ADM2:54988432B86685660972424"
+      ]
+    },
+    {
+      "classification": "insufficient-evidence",
+      "id": "framework:province:igdr:1542a52eac4f",
+      "name": "Iğdır",
+      "owned_location_ids": [
+        "gb:TUR:ADM2:54988432B27415936221667",
+        "gb:TUR:ADM2:54988432B47270758673920",
+        "gb:TUR:ADM2:54988432B53167672259322",
+        "gb:TUR:ADM2:54988432B53845687770419"
+      ]
+    },
+    {
+      "classification": "insufficient-evidence",
+      "id": "framework:province:hakkari:45bd46f77b6f",
+      "name": "Hakkâri",
+      "owned_location_ids": [
+        "gb:TUR:ADM2:54988432B11506112394599",
+        "gb:TUR:ADM2:54988432B29564092922191",
+        "gb:TUR:ADM2:54988432B42317071313317",
+        "gb:TUR:ADM2:54988432B49000461137157",
+        "gb:TUR:ADM2:54988432B8973824492298"
+      ]
+    }
+  ],
+  "source": {
+    "count_difference": 26,
+    "geojson_feature_count": 973,
+    "id": "gb:TUR:ADM2",
+    "metadata_admUnitCount": 999,
+    "release_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+    "retained_original_path": "data/regional-review/regional-review-ef67318527f5f3a3/sources/geoBoundaries-TUR-ADM2.geojson.gz",
+    "retained_original_sha256": "a88007de2cf14f14e06da390aab8861442c7a8332ef8e70865d78e0d9b549d78",
+    "source_metadata": "Districts; ODbL 1.0",
+    "source_parent_property": "shapeGroup=TUR only; no province code",
+    "vintage": "2021"
+  }
+}
