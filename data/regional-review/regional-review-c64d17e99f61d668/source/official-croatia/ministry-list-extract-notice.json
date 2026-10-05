@@ -1,0 +1,12 @@
+{
+  "source_title": "Popis županija, gradova i općina",
+  "publisher": "Ministry of Justice, Public Administration and Digital Transformation of the Republic of Croatia",
+  "source_url": "https://mpu.gov.hr/UserDocsImages/MURH-%20arhiva/Uprava%20za%20politi%C4%8Dki%20sustav/JLRS/100613-Kopija%20opcine_gradovi_RH.xls",
+  "catalog_record": "https://data.gov.hr/ckan/dataset/popis-zupanija-gradova-i-opcina",
+  "catalog_license": "Croatian Open Licence (Otvorena dozvola)",
+  "source_file": "ministry-local-government-list.xls",
+  "source_file_sha256": "1f60a60b90e875cf59dd69de2fff64a1550a699165251ff665ed039fa67a3ac0",
+  "source_file_last_saved": "2013-06-10T12:06:12 (file metadata)",
+  "extract_file": "ministry-local-government-list-2013.csv",
+  "modification_statement": "Converted the original single-sheet 556-row workbook to UTF-8 CSV with the same three columns, values, and row order. No rows or labels were corrected. The CSV is retained to make the name/county/type crosswalk reproducible without an XLS reader; CRLF line endings were normalized to LF. No rows, values, labels, or row order were corrected."
+}
