@@ -1,0 +1,65 @@
+{
+  "sources": [
+    {
+      "id": "mp-district-count",
+      "url": "https://www.epos.mp.gov.in/month_start",
+      "purpose": "Current Government of Madhya Pradesh EPOS page, Number of Districts indicator.",
+      "retrieved_utc": "2026-10-05",
+      "http_status": 200,
+      "final_url": "https://www.epos.mp.gov.in/month_start",
+      "media_type": "text/html;charset=utf-8",
+      "bytes": 19520,
+      "sha256": "9d95e415d622efb10bc6e524c5f53107e2d7e12a404741451246e9cc8f0342f1",
+      "bytes_retained_in_repository": false,
+      "reuse_terms": "Not verified for the Government HTML pages; cite/restore by exact URL only and do not redistribute copied page bytes. ODbL page is legal text and retained here only as a URL/hash record.",
+      "restoration_instruction": "Fetch the exact URL again, retain retrieval timestamp/status/media type and new SHA-256; do not substitute a different date or page. For government content, preserve only if reuse terms are confirmed."
+    },
+    {
+      "id": "cg-district-roster",
+      "url": "https://erojgar.cg.gov.in/LandingSite/en/Dist_Recruitments.aspx",
+      "purpose": "Government of Chhattisgarh Employment Department district page, states 33 districts/5 divisions.",
+      "retrieved_utc": "2026-10-05",
+      "http_status": 200,
+      "final_url": "https://erojgar.cg.gov.in/LandingSite/en/Dist_Recruitments.aspx",
+      "media_type": "text/html; charset=utf-8",
+      "bytes": 49897,
+      "sha256": "b5b5cb2b98169f28d60900ba470514b126244308d1f422cbc65a1dc7eebe4639",
+      "bytes_retained_in_repository": false,
+      "reuse_terms": "Not verified for the Government HTML pages; cite/restore by exact URL only and do not redistribute copied page bytes. ODbL page is legal text and retained here only as a URL/hash record.",
+      "restoration_instruction": "Fetch the exact URL again, retain retrieval timestamp/status/media type and new SHA-256; do not substitute a different date or page. For government content, preserve only if reuse terms are confirmed."
+    },
+    {
+      "id": "cg-district-creation",
+      "url": "https://tribal.cg.gov.in/en/preliminary-information",
+      "purpose": "Government of Chhattisgarh Department of Tribal and Scheduled Caste, history of 2020 and 2022 district creation.",
+      "retrieved_utc": "2026-10-05",
+      "retrieval_error": "<urlopen error timed out>",
+      "bytes_retained_in_repository": false,
+      "restoration_instruction": "Retry exact URL; no downloaded body/hash available."
+    },
+    {
+      "id": "india-census-2011",
+      "url": "https://censusindia.gov.in/nada/index.php/catalog/11345",
+      "purpose": "Census of India 2011 Madhya Pradesh PCA REL and administrative-tier labels.",
+      "retrieved_utc": "2026-10-05",
+      "retrieval_error": "<urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1123)>",
+      "bytes_retained_in_repository": false,
+      "restoration_instruction": "Retry exact URL; no downloaded body/hash available."
+    },
+    {
+      "id": "odbl-license",
+      "url": "https://opendatacommons.org/licenses/odbl/1-0/",
+      "purpose": "Open Data Commons ODbL 1.0 legal terms.",
+      "retrieved_utc": "2026-10-05",
+      "http_status": 200,
+      "final_url": "https://opendatacommons.org/licenses/odbl/1-0/",
+      "media_type": "text/html; charset=utf-8",
+      "bytes": 51543,
+      "sha256": "cdcbc6bd08f482e515b6a4ceabbfd40e33522144ac315a1cb80cfb14a0ebbce5",
+      "bytes_retained_in_repository": false,
+      "reuse_terms": "Not verified for the Government HTML pages; cite/restore by exact URL only and do not redistribute copied page bytes. ODbL page is legal text and retained here only as a URL/hash record.",
+      "restoration_instruction": "Fetch the exact URL again, retain retrieval timestamp/status/media type and new SHA-256; do not substitute a different date or page. For government content, preserve only if reuse terms are confirmed."
+    }
+  ],
+  "note": "Hashes bind retrieved response bodies only. Response bodies are not retained here where current reuse permissions have not been established; unsuccessful/error bodies are never treated as substantive evidence."
+}

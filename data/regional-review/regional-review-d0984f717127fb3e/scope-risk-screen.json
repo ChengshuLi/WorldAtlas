@@ -1,0 +1,125 @@
+{
+  "scope": {
+    "location_count": 230,
+    "province_group_count": 37,
+    "area_count": 3,
+    "partial_area": "Madhya Pradesh: 54 of 422 scoped area units"
+  },
+  "tier_screen": {
+    "ADM3_subdistrict": 204,
+    "ADM2_district": 26,
+    "observed": "ADM3 members in state-named MP/Chhattīsgarh areas sit below district-named province groups; ADM2 members in macro-geographic Central India portion sit below state-named UP/Uttarakhand province groups. This is a one-tier granularity shift across area groups.",
+    "classification": "unresolved; purpose-backed neighboring scale review required"
+  },
+  "province_group_size_screen": {
+    "atlas:macro-foundation:area:f54495a7a03aa7c3": {
+      "group_count": 2,
+      "scoped_location_count": 26,
+      "scoped_units_per_group_min": 1,
+      "scoped_units_per_group_max": 25
+    },
+    "atlas:area:IND:8170e1c79f28": {
+      "group_count": 28,
+      "scoped_location_count": 150,
+      "scoped_units_per_group_min": 2,
+      "scoped_units_per_group_max": 10
+    },
+    "atlas:area:IND:5948131347f0": {
+      "group_count": 7,
+      "scoped_location_count": 54,
+      "scoped_units_per_group_min": 5,
+      "scoped_units_per_group_max": 9
+    }
+  },
+  "named_urban_or_municipal_keyword_screen": {
+    "matches": [
+      {
+        "id": "atlas:local:IND:7132399B24197406138184",
+        "name": "Mandsaur Nagar",
+        "source_role": "Sub-District"
+      },
+      {
+        "id": "atlas:local:IND:7132399B29463406957285",
+        "name": "Meghnagar",
+        "source_role": "Sub-District"
+      },
+      {
+        "id": "atlas:local:IND:7132399B44312185300230",
+        "name": "Neemuch Nagar",
+        "source_role": "Sub-District"
+      },
+      {
+        "id": "atlas:local:IND:7132399B48083103739073",
+        "name": "Wadrafnagar",
+        "source_role": "Sub-District"
+      },
+      {
+        "id": "atlas:local:IND:7132399B58599707521936",
+        "name": "Ramanujnagar",
+        "source_role": "Sub-District"
+      },
+      {
+        "id": "atlas:local:IND:7132399B79808281624313",
+        "name": "Premnagar",
+        "source_role": "Sub-District"
+      },
+      {
+        "id": "atlas:local:IND:7132399B99558291906996",
+        "name": "Ratlam Nagar",
+        "source_role": "Sub-District"
+      },
+      {
+        "id": "gb:IND:ADM2:76128533B21119051307760",
+        "name": "Jyotiba Phule Nagar",
+        "source_role": "District"
+      },
+      {
+        "id": "gb:IND:ADM2:76128533B34462889864078",
+        "name": "Gautam Buddha Nagar",
+        "source_role": "District"
+      },
+      {
+        "id": "gb:IND:ADM2:76128533B7643504807381",
+        "name": "Kanshiram Nagar",
+        "source_role": "District"
+      },
+      {
+        "id": "gb:IND:ADM2:76128533B87051210355251",
+        "name": "Muzaffarnagar",
+        "source_role": "District"
+      },
+      {
+        "id": "gb:IND:ADM2:76128533B8878807356913",
+        "name": "Mahamaya Nagar",
+        "source_role": "District"
+      }
+    ],
+    "interpretation": "Text-search candidates only. Names such as Nagar do not prove city boundary fragmentation, an urban location tier, or a mismatch. Compare with current official municipal/administrative material in #889."
+  },
+  "source_geometry_type_screen": {
+    "polygon": 209,
+    "multipolygon": 21,
+    "unmapped_or_unnamed": 0,
+    "interpretation": "Encoding screen only; no topology, area, adjacency or land completeness determination."
+  },
+  "semantic_and_geographic_status": {
+    "location_rows_classified_insufficient_evidence": 230,
+    "province_rows_classified_insufficient_evidence": 37,
+    "area_rows_classified_insufficient_evidence": 3,
+    "authoritative_current_boundaries_retained": false,
+    "district_subdistrict_parent_crosswalk_verified": false,
+    "city_fragmentation_verified": false,
+    "detached_or_offshore_component_reviewed": false,
+    "island_omission_screen": "Areas are inland by their administrative labels, but no current spatial coastline/island screen was completed; surrounding regional/macro coverage still needs review. No island completeness conclusion."
+  },
+  "neighboring_granularity": {
+    "status": "unresolved; needs siblings for Central India region and adjacent North/East India seams",
+    "shared_macro_scope_change_permitted": false,
+    "follow_up_issue": 889
+  },
+  "limits": [
+    "Do not infer absent units or correctness from source and administrative counts.",
+    "Do not treat source Feature IDs/names or MultiPolygon counts as legal or geographic validation.",
+    "Madhya Pradesh evidence is partial and all three area purpose/coverage decisions await full regional integration."
+  ]
+}

@@ -1,0 +1,54 @@
+[
+  {
+    "id": "atlas:area:IND:5948131347f0",
+    "name": "Madhya Pradesh",
+    "owned_member_count": 54,
+    "full_area_member_count": 422,
+    "partial": true,
+    "assessment": "insufficient_evidence",
+    "observed_role": "Madhya Pradesh is named for the Indian state and its 54 scoped locations fall under seven district-named province groups; this packet owns only 54/422 locations, so cannot establish the whole area union or all district groups. Government state portal identifies 55 districts (count context only).",
+    "source_and_use": "2018 geoBoundaries Sub-District features; official Census 2011 district/subdistrict table is historical role evidence. No current authoritative boundary data retained for this scope.",
+    "neighboring_granularity": "Adjacent Chhattisgarh area is also state-named, but source member geography/parent grouping and vintage differ. Need compare shared state seam and child detail with sibling Central/North/East India packets.",
+    "unresolved": [
+      "complete current state and district membership",
+      "2018 subdistrict-to-current-district crosswalk",
+      "all scoped boundary fit, detached components and urban fragments",
+      "partial-area complete purpose and source coverage"
+    ]
+  },
+  {
+    "id": "atlas:area:IND:8170e1c79f28",
+    "name": "Chhattīsgarh",
+    "owned_member_count": 150,
+    "full_area_member_count": 150,
+    "partial": false,
+    "assessment": "insufficient_evidence",
+    "observed_role": "Chhattīsgarh is state-named; 150 scoped subdistrict features are grouped under 28 district-named province groups. State sources report 33 districts and say five were created 17 April 2022. The gap is a concrete current crosswalk/completeness question, not evidence by itself of five absent Atlas provinces or erroneous locations.",
+    "source_and_use": "geoBoundaries ADM3 canonical Sub-District, boundaryYear 2018; official state sources used for current district count and creation dates only.",
+    "neighboring_granularity": "Compare new/current district groupings and boundaries with Madhya Pradesh and eastern/northern sibling region packets; fixed macro envelope must stay unchanged.",
+    "unresolved": [
+      "legal boundary orders and exact new-district affected memberships",
+      "2018-to-current parent and child crosswalk",
+      "post-2022 completeness and possible split/multipart changes",
+      "boundary seam and subdistrict-vs-district tier suitability"
+    ]
+  },
+  {
+    "id": "atlas:macro-foundation:area:f54495a7a03aa7c3",
+    "name": "India — Central India geographic portion",
+    "owned_member_count": 26,
+    "full_area_member_count": 26,
+    "partial": false,
+    "assessment": "insufficient_evidence",
+    "observed_role": "This is a macro-geographic portion of India rather than a named state. Its 26 scoped ADM2 District members are grouped beneath Uttar Pradesh (25) and Uttarakhand (1). Whether the area defines a coherent geographic reporting partition and why it stops at these exact districts is not evidenced by official administrative counts.",
+    "source_and_use": "geoBoundaries ADM2 canonical District, boundaryYear 2021, ODbL 1.0; no current official legal boundary/source register retained for exact membership.",
+    "neighboring_granularity": "Its locations are ADM2 districts, while MP and Chhattīsgarh areas use ADM3 sub-districts. This one-tier coarser detail is a material inter-area scale seam needing purpose-based review with all Central India region packets.",
+    "unresolved": [
+      "definition and purpose of the macro-geographic area",
+      "why those exact districts mark its boundary",
+      "2021 district roster and current validity",
+      "coherence against adjacent areas and frozen region envelope",
+      "harmonization or explicit justification of mixed location tier"
+    ]
+  }
+]

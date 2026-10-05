@@ -1,0 +1,88 @@
+{
+  "packet_status": "initial source/semantic review; region not certified",
+  "findings": [
+    {
+      "id": "IND-SOURCE-001",
+      "severity": "high",
+      "subjects": "204 scoped atlas:local:IND locations sourced as gb:IND:ADM3",
+      "finding": "Pinned geoBoundaries source declares canonical role Sub-District, boundaryYear 2018, ODbL 1.0, Pathways Data Pvt Ltd / LG Directory source. The retained collection reproduces exactly to the provider raw SHA-256 4ea6807d0a0c5aac0b46ee8e31ed7c30fbec273b44345bba1e4a2bb5f299f5fb, and its compressed hash matches 211a72c2c80bb60d10214944fa8cc4764e9ba888116e802ce6d87084872f5301. Yet provider metadata states admUnitCount 6836 while the hash-verified GeoJSON has 6822 features. This is a source completeness discrepancy; the 204 scoped shape IDs are all present and match source names, but nationwide completeness and current district/subdistrict parenting remain unverified.",
+      "evidence": [
+        "sources/geoBoundaries-IND-ADM3-2018-retained.geojson.gz",
+        "sources/geoBoundaries-IND-ADM3-2018-retained-metadata.json",
+        "source-inventory.json",
+        "location-assessments.json"
+      ],
+      "recommendation": "Obtain provider clarification or an independently pinned complete licensed 2018 subdistrict source; retain the exact acquisition and reconcile the 14-record discrepancy. Separately crosswalk current legal/official subdistrict parents and boundaries for the scoped Madhya Pradesh and Chhattisgarh locations.",
+      "confidence": "high for byte/hash/count mismatch; unresolved for cause and geographic omissions"
+    },
+    {
+      "id": "IND-SOURCE-002",
+      "severity": "high",
+      "subjects": "26 scoped gb:IND:ADM2 IDs in the Central India geographic portion, including 25 Uttar Pradesh and 1 Uttarakhand member by existing Atlas parent grouping",
+      "finding": "Pinned geoBoundaries collection identifies District, boundaryYear 2021, ODbL 1.0, Pathways Data Pvt Ltd / LG Directory. The retained GeoJSON has 735 features while provider metadata declares 736 units. All 26 scoped features are present. Legal current district roster, boundary vintage applicability and match to Atlas parent groupings have not been checked against current source records.",
+      "evidence": [
+        "sources/geoBoundaries-IND-ADM2-2021.geojson",
+        "sources/geoBoundaries-IND-ADM2-2021-metadata.json",
+        "source-inventory.json",
+        "province-assessments.json"
+      ],
+      "recommendation": "Acquire a current official/licensed district roster and boundary edition, resolve the one-feature count discrepancy, then compare exact scoped identities, parent and neighboring region seams.",
+      "confidence": "high for collection count mismatch and scoped shape ID presence; unresolved for cause/current boundary status"
+    },
+    {
+      "id": "IND-CURRENT-003",
+      "severity": "high",
+      "subjects": "Scoped Chhattisgarh parent groups and their 150 scoped subdistrict features",
+      "finding": "Chhattisgarh government sources report 33 districts. The state's Department of Tribal and Scheduled Caste says five new districts were created on 17 April 2022. The pinned ADM3 role is subdistrict and boundaryYear 2018; the scoped Atlas has 27 currently named Chhattisgarh province groups, including post-vintage groups. The old feature layer alone cannot verify transfer, current parent, split geometry, or unit completeness after these district creations.",
+      "evidence": [
+        "https://erojgar.cg.gov.in/LandingSite/en/Dist_Recruitments.aspx",
+        "https://tribal.cg.gov.in/en/preliminary-information",
+        "location-assessments.json",
+        "province-assessments.json"
+      ],
+      "recommendation": "Acquire current gazette/legal orders and authoritative ADM2/ADM3 crosswalk/geometry for the 150 scoped units; retain legally reusable sources or exact restoration instructions and compare each parent and boundary.",
+      "confidence": "high for official reported count/change dates; unresolved for scoped effects"
+    },
+    {
+      "id": "IND-SEMANTIC-004",
+      "severity": "high",
+      "subjects": "Three scoped areas and 37 scoped province groups",
+      "finding": "Area and province labels, member counts, official administrative counts and structural membership are insufficient to establish the area's geographic purpose, province-level tier meaning, completeness, or neighboring granularity. Madhya Pradesh is partial (54/422 owned). The adjacent North/East India and Central India batches have disjoint exact IDs but shared state/boundary seams require coordinated review.",
+      "evidence": [
+        "issue-scope.json",
+        "area-assessments.json",
+        "province-assessments.json",
+        "docs/TOP_DOWN_GEOGRAPHY_WORKFLOW.md"
+      ],
+      "recommendation": "Region integration must synthesize all sibling evidence and decide area purpose and seams against frozen macro boundaries; do not certify on this packet alone.",
+      "confidence": "high that integration is required; geographic suitability unresolved"
+    },
+    {
+      "id": "IND-TIER-005",
+      "severity": "high",
+      "subjects": "All 230 members; all three areas and 37 province groups",
+      "finding": "The Atlas hierarchy uses different source tiers in adjacent area groups: Madhya Pradesh (54 scoped) and Chhattīsgarh (150) contain ADM3 Sub-District locations below district-named province groups; India Central geographic portion (26) contains ADM2 District locations below state-named Uttar Pradesh/Uttarakhand province groups. The coarse level shifts between area groups. This may be a deliberate reporting-scale convention, but no purpose-backed source evidence presently justifies the change or the macro-area exact extent.",
+      "evidence": [
+        "issue-scope.json",
+        "location-assessments.json",
+        "province-assessments.json",
+        "area-assessments.json"
+      ],
+      "recommendation": "Issue #889 owns a current crosswalk and scale-purpose review; integrate against sibling area packets before regional approval. Keep current parent IDs and macro boundary frozen until sourced engineering decisions.",
+      "confidence": "high for observed source-vintage/tier difference; unresolved for purpose or correctness"
+    },
+    {
+      "id": "IND-MULTIPART-006",
+      "severity": "medium",
+      "subjects": "21 scoped ADM3 source features encoded as MultiPolygon",
+      "finding": "A format-level source screen finds 21 MultiPolygon and 183 Polygon among 204 scoped ADM3 features; all 26 scoped ADM2 features are Polygon. A MultiPolygon flag is not proof of fragmentation error, detached territory or offshore completeness. No authoritative current boundaries were available to decide whether components are correct, and city-fragmentation, island/coast omission and topology checks remain open.",
+      "evidence": [
+        "source-geometry-screen.csv",
+        "source-screen-results.json"
+      ],
+      "recommendation": "In #889 compare each multipart unit, urban boundary and nearby island/coastal geometry with current official material; preserve every source component and map exact differences.",
+      "confidence": "high for geometry-type counts; unresolved for geography"
+    }
+  ],
+  "follow_up_issue": 889
+}
