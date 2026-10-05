@@ -91,6 +91,31 @@
       "limit": "Full-country source bytes were inspected during this review but are not included; row-level feature mapping must be independently rerun after restoration.",
       "source_provider": "DGEEC Paraguay (as reported by geoBoundaries metadata)",
       "license_attribution": "CC BY 4.0"
+    },
+    {
+      "name": "TDWG WGSRPD 2nd Edition Level 3 and Level 4 tables",
+      "url": "https://github.com/tdwg/wgsrpd/tree/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition",
+      "resolved_commit": "52da7828aba9d461dd133c27b3bd7a4407161f54",
+      "files": [
+        {
+          "path": "109-488-1-ED/2nd Edition/tblLevel3.txt",
+          "raw_url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/tblLevel3.txt",
+          "sha256": "7eaf281dfbdca610c93938326c333d7c62d8e82ce3cba63b299d5a3a01d0003f",
+          "encoding": "Windows-1252",
+          "size_bytes": 9933
+        },
+        {
+          "path": "109-488-1-ED/2nd Edition/tblLevel4.txt",
+          "raw_url": "https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/tblLevel4.txt",
+          "sha256": "6fa350a0bb5939df0c665ae6cf253ddb0aa85fef6daa684c87ba400faf93b1c2",
+          "encoding": "Windows-1252",
+          "size_bytes": 17137
+        }
+      ],
+      "license_status": "No reuse terms located in the pinned repository; files not retained",
+      "use": "Exact area-code/name and historical Level 4 row-count crosswalk only; not legal hierarchy or boundary evidence",
+      "retrieved": "2026-10-05",
+      "restoration": "Fetch the two raw URLs at the exact resolved commit, verify each whole-file SHA-256, then pass them to findings/reproduce-area-source-crosswalk.py."
     }
   ],
   "primary_reference_pages": [
@@ -141,6 +166,18 @@
       "url": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/",
       "retrieved": "2026-10-05",
       "use": "Issue metadata’s source entry point for the Asunción derived city record; the exact aggregation operation remains unverified."
+    },
+    {
+      "id": "issue-444-companion-workload",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/444",
+      "retrieved": "2026-10-05",
+      "use": "Embedded exact workload scope snapshot; 177 of 252 Chile Central locations; not geography validation."
+    },
+    {
+      "id": "issue-446-companion-workload",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/446",
+      "retrieved": "2026-10-05",
+      "use": "Embedded exact workload scope snapshot; 195 of 243 Paraguay locations; not geography validation."
     }
   ]
 }
