@@ -14,6 +14,10 @@ TurkStat's official *Türkiye in Statistics 2021*, table 1.2, reports 81 provinc
 
 The Turkish General Command of Mapping (HGM) 2022 notice says its province/district boundary vectors are indicative/display data and not official. A current HGM archive was retained in prior packet #72 with its terms and hash, but it was not used as proof for 2021 boundaries here. Do not substitute those current illustrative boundaries for legal records.
 
+## Versioned evidence inventory
+
+`evidence-quality.json` adds an exact 228-subject evidence inventory for review traceability. It binds the subjects to the actual baseline feature files, verifies all 36 indexed geographic parts plus hierarchy, prior screens, macro handoffs and membership inventory by hash and byte length, and lists retained source files, restoration-only official references, output hashes, methods, metrics and unresolved conclusions. The repository evidence validator reports `limited` because some official-source bytes and terms are not retained or fully verified; this is expected and is not a geographic certificate. Issue #73 predates evidence-gate activation, so this packet-local inventory does not change its acceptance contract or assert that CI enforced a manifest.
+
 ## Exact 228-subject reproduction
 
 `reproduce.py` verifies the issue scope hash and all retained source hashes, reads all World Atlas index parts from the immutable fresh-main baseline, and resolves the exact 228 IDs to one source feature and one Atlas feature each. It checks the 20 full province groups and the fixed envelope, then compares OSM-derived ADM2 and ADM1 shapes with the shared `worldatlas-evidence-geometry-v1` helper. `district-assessments.json` was generated twice with identical SHA-256 `e18f32077a8c17f1ebb103c8927bf39f16998ef654e015c92576f249c30be1b6`. Positive identical-shape and negative translated-shape controls scored IoU 1 and 0. The measures test reproducibility and agreement between selected data layers; they do not establish geographic truth.

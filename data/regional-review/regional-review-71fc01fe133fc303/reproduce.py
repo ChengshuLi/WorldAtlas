@@ -53,6 +53,14 @@ def main():
             raise SystemExit('Province scope is not a complete owned group: '+row['name'])
     if sum(x['full_province_locations'] for x in scope['province_scopes'])!=228: raise SystemExit('Province groups do not sum to issue scope.')
 
+    baseline_receipts={}
+    for record in receipt_doc['baseline_files']:
+        rel=record['path']; raw=git_blob(rel)
+        actual={'bytes':len(raw),'sha256':sha(raw)}
+        if actual['bytes']!=record['bytes'] or actual['sha256']!=record['sha256']:
+            raise SystemExit('Pinned baseline hash/length mismatch: '+rel)
+        baseline_receipts[rel]=actual
+
     source_receipts={x['path']:x for x in receipt_doc['retained_source_files']}
     for rel,record in source_receipts.items():
         raw=git_blob(rel)
@@ -178,7 +186,7 @@ def main():
         'prior_multipart_flags':sum('multipart-footprint' in r['prior_screen_flags'] for r in rows),
         'rows_insufficient_evidence':sum(r['classification']=='insufficient-evidence' for r in rows)
     }
-    basefiles={x['path']:x['sha256'] for x in receipt_doc['baseline_files']}
+    basefiles={path:record['sha256'] for path,record in sorted(baseline_receipts.items())}
     inputs={'scope_sha256':sha(scope_raw),'source_files':{k:v['sha256'] for k,v in sorted(source_receipts.items())},'baseline_files':basefiles,'atlas_index_part_hashes':dict(sorted(index_part_hashes.items()))}
     report={'version':1,'issue_number':73,'baseline_commit':BASELINE,'region_id':scope['region_id'],'fixed_macro_envelope':{'geometry_sha256':region['envelope']['geometry_sha256'],'member_location_ids_sha256':region['envelope']['member_location_ids_sha256'],'own_boundary_approved':region['own_boundary_approved'],'regional_interiors_approved':region['regional_interiors_approved'],'location_attribute_imports_ready':region['location_attribute_imports_ready']},'scope':{'area_scopes':scope['area_scopes'],'subject_ids_sha256':scope['member_location_ids_sha256'],'subject_count':len(ids),'province_scopes':province_summary,'owned_path':scope['owned_evidence_path']},'inputs':inputs,'counts':count,'geometry_method':{'helper_version':VERSION,'method':'WGS84 straight-source-edge ellipsoidal area via scripts/evidence/geometry.py; canonical longitude-first EPSG:4326 polygons','controls':{'identical_geometry_iou':control_iou,'translated_geometry_iou':negative_iou},'interpretation':'Comparative source/Atlas and source/ADM1 screens; no legal boundary or administrative-parent proof.'},'source_metadata':{'boundary_year':source_meta['boundaryYear'],'source':source_meta['boundarySource'],'canonical_role':source_meta['boundaryCanonical'],'license':source_meta['boundaryLicense'],'source_data_update':source_meta['sourceDataUpdateDate'],'build_date':source_meta['buildDate'],'declared_feature_count':int(source_meta['admUnitCount']),'actual_feature_count':len(source_features)},'findings':rows,'limits':['Only 228 of the 911 Atlas members in the Turkey area are in this packet; the area is partial.','The 228 subjects comprise 20 full province groups, but do not constitute a whole-country or whole-region review.','The OSM-derived source contains no named province-parent ID; source/ADM1 overlay uses an ADM1 layer from the same geoBoundaries release, not official legal parent evidence.','No official 2021 exact ID/name/immediate-parent roster or authoritative 2021 district boundaries were retained; all per-row legal and boundary status remains insufficient-evidence.','The source metadata reports 999 units while its retained raw ADM2 file has 973 features. TurkStat 2021 reports 922 districts excluding central districts; numeric relationships do not establish exact roster equivalence or completeness.','Current HGM boundaries are explicitly indicative and not official; their current vintage cannot settle 2021 status.','Review of inherited weak-parent, multipart, central-district, coastline/island, and cross-border boundary findings is diagnostic and incomplete where official source comparison is unavailable.','No regional interior approval, geography correction, production data change, publication, or import authorization is claimed.']}
     raw=(json.dumps(report,ensure_ascii=False,sort_keys=True,indent=2)+'\n').encode(); OUTPUT.write_bytes(raw)
