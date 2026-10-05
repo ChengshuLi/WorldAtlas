@@ -1,0 +1,14 @@
+{
+  "source_vintage_retrieved_at": "2026-10-03T16:22:00Z",
+  "status": "HTTP 200 as recorded in the preserved predecessor packet; page bytes not retained because reuse terms were not established",
+  "receipts": [
+    {"url":"https://www.tristandc.com/mapgroup.php","bytes":9717,"sha256":"a1b1f75404ed34340715c37d99a1d53c87ed78fe86ab10bbd3a8a4947d77cdf8","sha256_valid":true},
+    {"url":"https://www.tristandc.com/settlement.php","bytes":15516,"sha256":"7a5940df57e7fe521e7714f195385f3eb6901a71e0102b43b571d5fa90ddeee","sha256_valid":false,"note":"Preserved original receipt is 63 hex characters; it is not a complete SHA-256 digest."},
+    {"url":"https://www.tristandc.com/gough.php","bytes":15788,"sha256":"41b6cb49718ae429aee10ceb9619889d67c55d3e16a5c7520ee1f1ef6078078f","sha256_valid":true},
+    {"url":"https://www.tristandc.com/nightingale.php","bytes":13899,"sha256":"7998b8fa84d69f0c54fc12a6338057770e0c2741cb514ac187be6627843fefb0","sha256_valid":true},
+    {"url":"https://www.tristandc.com/inaccessible.php","bytes":13610,"sha256":"605a18e9f0cf5682eea00345886df7f3f44c5860fabb63ef5f810bf0158ee561","sha256_valid":true},
+    {"url":"https://www.tristandc.com/government.php","bytes":16059,"sha256":"32550752e41387aa5ca5712164971cd0aa104cc4e74a4e795656c7e688c2e93b6","sha256_valid":true},
+    {"url":"https://npolar.no/en/themes/bouvetoya/","bytes":190339,"sha256":"384f164000863b46e678eaf173dd2f02c99f44473b8bbb5bb05a638b801da455","sha256_valid":true,"note":"Original page bytes were not available in the predecessor packet; this records its reported response receipt only."}
+  ],
+  "restoration": "For each canonical URL, issue an HTTP GET and record final response URL, status, date, exact body byte count and SHA-256 before parsing. These historical hashes identify only the recorded responses; mutable current pages may differ."
+}

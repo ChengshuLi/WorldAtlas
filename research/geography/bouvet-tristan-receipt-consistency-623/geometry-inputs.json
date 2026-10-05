@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "baseline_commit": "89e4dc5415a288e363974c0d7a5d0d58ae3a4637",
+  "atlas_input": {
+    "path": "data/geography/part-28.json",
+    "bytes": 6613963,
+    "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+    "hash_kind": "file-bytes"
+  },
+  "natural_earth_commit": "ca96624a56bd078437bca8184e78163e5039ad19",
+  "natural_earth_sidecars": [
+    {
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/sources/natural-earth-5.1.1/ne_10m_admin_1_states_provinces.shp",
+      "bytes": 20998780,
+      "sha256": "c6f5c8b4b1320d9417033762419c6df1eb423989cd880fba78ea0b1e3522cbe4",
+      "upstream_path": "10m_cultural/ne_10m_admin_1_states_provinces.shp"
+    },
+    {
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/sources/natural-earth-5.1.1/ne_10m_admin_1_states_provinces.dbf",
+      "bytes": 15161514,
+      "sha256": "7b3244333680d6aec58cc49bde9484177a0baa44c974ec9d371a8f7f1cdb5359",
+      "upstream_path": "10m_cultural/ne_10m_admin_1_states_provinces.dbf"
+    },
+    {
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/sources/natural-earth-5.1.1/ne_10m_admin_1_states_provinces.shx",
+      "bytes": 36868,
+      "sha256": "37a9e2bc79ed31d3bdea3cb62d928f77281a1c88d645cd33430231c75dbcf350",
+      "upstream_path": "10m_cultural/ne_10m_admin_1_states_provinces.shx"
+    },
+    {
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/sources/natural-earth-5.1.1/ne_10m_admin_1_states_provinces.prj",
+      "bytes": 145,
+      "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4",
+      "upstream_path": "10m_cultural/ne_10m_admin_1_states_provinces.prj"
+    },
+    {
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/sources/natural-earth-5.1.1/ne_10m_admin_1_states_provinces.cpg",
+      "bytes": 5,
+      "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824",
+      "upstream_path": "10m_cultural/ne_10m_admin_1_states_provinces.cpg"
+    },
+    {
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/sources/natural-earth-5.1.1/ne_10m_admin_1_states_provinces.VERSION.txt",
+      "bytes": 6,
+      "sha256": "f9893302cd3158f3b5aea394dcd2a91574869e9e6ff69e9235b10a3bf8c983fb",
+      "upstream_path": "10m_cultural/ne_10m_admin_1_states_provinces.VERSION.txt"
+    }
+  ],
+  "subject_source_selectors": {
+    "SHN-4865": {
+      "iso_3166_2": "SH-TA",
+      "adm1_code": "SHN-4865"
+    },
+    "atlas:coverage:BVT+00?": {
+      "iso_3166_2": "NO-X01~",
+      "adm1_code": "BVT+00?"
+    }
+  },
+  "note": "Input receipt only; reproduce.py parses the source shapefile and immutable atlas GeoJSON and emits the measured rows."
+}
