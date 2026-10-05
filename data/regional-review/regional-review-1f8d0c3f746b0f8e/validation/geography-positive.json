@@ -2,8 +2,10 @@
   "method_id": "geography-measurements",
   "kind": "positive-control",
   "outcome": "passed",
-  "control": "WGS84 area of 1x1 degree equatorial rectangle agrees with independent analytic ellipsoid integral to 1e-10 relative error",
+  "control": "WGS84 straight-source-edge area of a 1x1 degree equatorial rectangle agrees with an independent analytic ellipsoid latitude-strip integral to 1e-10 relative error",
   "observed_m2": 12308463893.975351,
-  "expected_m2": 12308778361.469,
-  "relative_error": 2.5548229435418862e-05
+  "expected_m2": 12308463893.975353,
+  "relative_error": 1.5496236161086627e-16,
+  "relative_error_tolerance": 1e-10,
+  "independent_formula": "a^2(1-e^2)/2 * [u/(1-e^2u^2) + atanh(eu)/e] integrated over latitude, multiplied by longitude span in radians; WGS84 a=6378137 m, f=1/298.257223563"
 }
