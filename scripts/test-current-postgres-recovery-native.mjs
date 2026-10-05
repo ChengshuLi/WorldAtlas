@@ -17,17 +17,18 @@ const sql=value=>command(['psql','-X','-Atq','-U','postgres','-d','neondb','-v',
 const query=async value=>JSON.parse(sql('SET ROLE neondb_owner; SELECT coalesce(json_agg(row_to_json(q)),\'[]\'::json) FROM ('+value+') q;').toString());
 // One real native session owns the rehearsal transaction and advisory lock.
 // Independent CLI round trips would not preserve that transaction.
-async function compactFixture(){
+async function compactFixture({failAfterCopy=false}={}){
  const child=spawn('docker',['exec','-i',name,'psql','-X','-Atq','-U','postgres','-d','neondb','-v','ON_ERROR_STOP=1'],{stdio:['pipe','pipe','pipe']});
  child.stdin.on('error',()=>{});let sessionError='';child.stderr.on('data',chunk=>{sessionError=(sessionError+chunk).slice(-4096);});
- let pending,buffer='';
+ let pending,buffer='',closed=false;
+ const finished=new Promise(resolve=>child.once('close',()=>{closed=true;resolve();}));
  const rejectPending=()=>{if(pending){clearTimeout(pending.timer);pending.reject(Error('fixture native session failed: '+sessionError));pending=null;}};
  child.on('error',rejectPending);child.on('close',rejectPending);
  child.stdout.on('data',chunk=>{buffer+=chunk;const at=pending?buffer.indexOf(pending.marker+'\n'):-1;if(at>=0){const value=buffer.slice(0,at).trim(),row=pending;buffer=buffer.slice(at+row.marker.length+1);pending=null;clearTimeout(row.timer);row.resolve(value);}});
- const exec=value=>new Promise((resolve,reject)=>{assert.ok(!pending);const marker='end_'+randomUUID().replaceAll('-','');pending={marker,resolve,reject,timer:setTimeout(()=>{child.kill();rejectPending();},180000)};child.stdin.write(value+';\n\\echo '+marker+'\n');});
+ const exec=value=>new Promise((resolve,reject)=>{if(closed||child.stdin.destroyed){reject(Error('fixture native session already closed'));return;}assert.ok(!pending);const marker='end_'+randomUUID().replaceAll('-','');pending={marker,resolve,reject,timer:setTimeout(()=>{child.kill();rejectPending();},180000)};child.stdin.write(value+';\n\\echo '+marker+'\n');});
  const tx={exec,query:async(value,params=[])=>{assert.deepEqual(params,[]);if(!/^\s*(SELECT|WITH)\b/i.test(value)){await exec(value);return {rows:[]};}return {rows:JSON.parse(await exec("SELECT coalesce(json_agg(row_to_json(q)),'[]'::json) FROM ("+value+') q'))};}};
- try{await exec('SET ROLE neondb_owner');await rehearseCompactMembershipStorage({transaction:async callback=>{await exec('BEGIN');try{const result=await callback(tx);await exec('COMMIT');return result;}catch(error){await exec('ROLLBACK');throw error;}}},{copyOnServer:true});}
- finally{child.stdin.end('\\q\n');await new Promise(resolve=>{if(child.exitCode!==null)resolve();else child.once('close',resolve);});}
+ try{await exec('SET ROLE neondb_owner');await rehearseCompactMembershipStorage({transaction:async callback=>{await exec('BEGIN');try{const result=await callback(tx);await exec('COMMIT');return result;}catch(error){try{await exec('ROLLBACK');}catch{}throw error;}}},{copyOnServer:true,afterCopy:failAfterCopy?tx=>tx.query('SELECT 1/0'):undefined});}
+ finally{if(!closed&&!child.stdin.destroyed)child.stdin.end('\\q\n');await finished;}
 }
 try{
  await start();command(['psql','-X','-U','postgres','-d','postgres','-v','ON_ERROR_STOP=1'],isolatedRecoveryBootstrapSQL);
@@ -81,6 +82,8 @@ cleanup();await start();command(['psql','-X','-U','postgres','-d','postgres','-v
   const id=pin.path.split('/').at(-1).replace('.sql',''),contract=await recoveryForwardContract(query,id);
   sql(`SET ROLE neondb_owner; INSERT INTO worldatlas_schema_migrations VALUES('${id}','${pin.sha256}','${storageExportV2Contract.postgres_migrations[0].sha256}',repeat('c',64),repeat('d',64),'${contract}',123456789);`);
  }
+ const failedSessionStarted=Date.now();await assert.rejects(()=>compactFixture({failAfterCopy:true}),/fixture native session failed/);assert.ok(Date.now()-failedSessionStarted<10000);
+ assert.equal((await query("SELECT to_regclass('public.worldatlas_membership_rows')::text name"))[0].name,null);receipt.compact_failed_session_rolled_back_and_closed=true;
  await compactFixture();
  await assert.rejects(()=>readRecoveryInventory(query,{profile:compactRecoveryProfile}),/incomplete-owner-and-factual-inventory/);
  sql('SET ROLE neondb_owner; DROP TABLE worldatlas_memberships_original_v1;');

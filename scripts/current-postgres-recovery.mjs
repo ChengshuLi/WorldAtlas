@@ -117,10 +117,16 @@ export function tableReadSQL(collection){
 }
 const inventorySQL="SELECT table_name FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE' ORDER BY table_name";
 const registrySQL='SELECT migration_id,file_sha256,core_schema_sha256,source_snapshot_fingerprint,base_guards_sha256,installed_contract_sha256,applied_at FROM worldatlas_schema_migrations ORDER BY migration_id COLLATE "C"';
+// pg_dump omits explicit ACL arrays equal to the object default. Native restore
+// may therefore use NULL for the exact same grants. Compare every expanded
+// grant/grantor/grantee/grant option in stable role-name order, not array spelling.
+const canonicalACL=(acl,owner,type)=>`(SELECT coalesce(json_agg(row_to_json(grants) ORDER BY grantor COLLATE "C",grantee COLLATE "C",privilege COLLATE "C",grantable),'[]'::json) FROM
+ (SELECT pg_get_userbyid(a.grantor) grantor,CASE WHEN a.grantee=0 THEN 'PUBLIC' ELSE pg_get_userbyid(a.grantee) END grantee,a.privilege_type privilege,a.is_grantable grantable
+ FROM aclexplode(coalesce(${acl},acldefault('${type}'::"char",${owner}))) a) grants)`;
 const permissionSQL=`SELECT c.relname object_name,c.relkind object_kind,pg_get_userbyid(c.relowner) owner,
  has_table_privilege('worldatlas_app',c.oid,'SELECT') app_select,has_table_privilege('worldatlas_app',c.oid,'INSERT') app_insert,
  has_table_privilege('worldatlas_app',c.oid,'UPDATE') app_update,has_table_privilege('worldatlas_app',c.oid,'DELETE') app_delete,
- has_table_privilege('worldatlas_app',c.oid,'TRUNCATE') app_truncate,c.relacl::text acl
+ has_table_privilege('worldatlas_app',c.oid,'TRUNCATE') app_truncate,${canonicalACL('c.relacl','c.relowner','r')} acl
  FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='public' AND c.relkind IN ('r','v') ORDER BY c.relname`;
 
 /** Native PostgreSQL JSON scalar spelling is used only for comparison between
@@ -166,8 +172,8 @@ export async function readRecoveryInventory(query,{directory,profile=originalRec
  need(sequence.length===1&&Number.isSafeInteger(sequence[0].last_value)&&sequence[0].last_value>=revision,'invalid-ingestion-sequence');
  const database_acl=await query("SELECT datacl::text acl FROM pg_database WHERE datname=current_database()");
  const default_acls=await query("SELECT pg_get_userbyid(d.defaclrole) role_name,n.nspname schema_name,d.defaclobjtype object_type,d.defaclacl::text acl FROM pg_default_acl d LEFT JOIN pg_namespace n ON n.oid=d.defaclnamespace WHERE n.nspname='public' ORDER BY role_name,object_type");
- const sequence_permissions=await query("SELECT c.relname name,pg_get_userbyid(c.relowner) owner,c.relacl::text acl,has_sequence_privilege('worldatlas_app',c.oid,'USAGE') app_usage,has_sequence_privilege('worldatlas_app',c.oid,'SELECT') app_select,has_sequence_privilege('worldatlas_app',c.oid,'UPDATE') app_update FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='public' AND c.relkind='S' ORDER BY c.relname");
- const function_permissions=await query("SELECT p.proname name,pg_get_function_identity_arguments(p.oid) arguments,pg_get_userbyid(p.proowner) owner,p.proacl::text acl,p.prosecdef security_definer,p.proconfig settings FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname='public' AND p.prokind IN ('f','p') ORDER BY p.proname,arguments");
+ const sequence_permissions=await query(`SELECT c.relname name,pg_get_userbyid(c.relowner) owner,${canonicalACL('c.relacl','c.relowner','S')} acl,has_sequence_privilege('worldatlas_app',c.oid,'USAGE') app_usage,has_sequence_privilege('worldatlas_app',c.oid,'SELECT') app_select,has_sequence_privilege('worldatlas_app',c.oid,'UPDATE') app_update FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='public' AND c.relkind='S' ORDER BY c.relname`);
+ const function_permissions=await query(`SELECT p.proname name,pg_get_function_identity_arguments(p.oid) arguments,pg_get_userbyid(p.proowner) owner,${canonicalACL('p.proacl','p.proowner','f')} acl,p.prosecdef security_definer,p.proconfig settings FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname='public' AND p.prokind IN ('f','p') ORDER BY p.proname,arguments`);
  return {database_acl,default_acls,identity,revision,catalog_sha256:sha(JSON.stringify(catalog)),collections:proofs,owner_registry:registry,owner_registry_sha256:sha(JSON.stringify(registry)),permissions,sequence,sequence_permissions,function_permissions,...(compact?{profile,compact_storage:compactStorage}:{} )};
 }
 
