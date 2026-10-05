@@ -15,7 +15,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[3]
 OWNED = Path(__file__).resolve().parent.relative_to(ROOT).as_posix() + "/"
-VINTAGE = "20261004-current-main-reviewed"
+VINTAGE = "20261005-main-89e-reviewed"
 MANIFEST_PATH = ROOT / OWNED / "evidence-quality.json"
 sys.path.insert(0, str(ROOT / "scripts"))
 sys.path.insert(0, str(ROOT / OWNED))

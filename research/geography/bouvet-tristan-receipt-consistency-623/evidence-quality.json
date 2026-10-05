@@ -9,7 +9,7 @@
   ],
   "subject_ids_sha256": "1300754a1407e77c6613ff96738a4480355adac72941a41d513742adeba4ae1f",
   "baseline": {
-    "commit": "75c73b8485d1d28a9392bff656a5cbbb7db284ec",
+    "commit": "89e4dc5415a288e363974c0d7a5d0d58ae3a4637",
     "files": [
       {
         "path": "data/world-index.json",
@@ -212,15 +212,15 @@
   "outputs": [
     {
       "path": "research/geography/bouvet-tristan-receipt-consistency-623/README.md",
-      "bytes": 9540,
-      "sha256": "67aec0579e6e90bc0cc176936afdfd438c5af6774aa71fe59ad6ecd091dcedce",
+      "bytes": 9757,
+      "sha256": "cd34e99e0fcefd429ab89c87915d1cd4075800f40e7a49aa876cbbe5ab6f697b",
       "hash_kind": "file-bytes",
       "role": "generated-table"
     },
     {
       "path": "research/geography/bouvet-tristan-receipt-consistency-623/geometry-inputs.json",
       "bytes": 2743,
-      "sha256": "7553fe16ab0bf45ed148bec90a933d199dd832ae22f8ed576bd488e220cce478",
+      "sha256": "9019fa7dcf69b8e6a5ee06073ba55cf5a539302ad11658b4b81249d26e944bb7",
       "hash_kind": "file-bytes"
     },
     {
@@ -231,8 +231,8 @@
     },
     {
       "path": "research/geography/bouvet-tristan-receipt-consistency-623/reproduce.py",
-      "bytes": 23684,
-      "sha256": "e83141b976ecd595b687e9c7802ff60ace089c8dfb23f87faf4f5b02c3738cc4",
+      "bytes": 23680,
+      "sha256": "32f63ed345acbaa282012890db97adb20a2bdd816bc34f49b788038d2c298728",
       "hash_kind": "file-bytes"
     },
     {
@@ -306,6 +306,66 @@
       "bytes": 146,
       "sha256": "5bd3eb17b4071f2d9e7f954710edc28e969bd5c2b02a3981cc9a2dc7a13894f5",
       "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/findings.json",
+      "bytes": 8795,
+      "sha256": "e04fc67c70ab38bbcda84904ebf7ecb5856b622bed511de51f1dfe8230cb4d35",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/generator-negative-control.json",
+      "bytes": 586,
+      "sha256": "6e952402fe2787f3f785a991f91ac1e9b3fedfcd36705a6c70c86cd6bbe7f477",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/generator-positive-control.json",
+      "bytes": 196,
+      "sha256": "0578f9d873bb02ef759e5631febc78211542f6ed9ae46b316e275f784089ef5d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/generator-reproducibility-control.json",
+      "bytes": 252,
+      "sha256": "0530b5993da8e3044ff45f5e6dcfd503334db701e2932a60597ba140d8be156e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/geometry-negative-control.json",
+      "bytes": 246,
+      "sha256": "98d0d8068ab02ba9426b8b08cc9b0663febf09b5dfde71616caf9ec390307210",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/geometry-positive-control.json",
+      "bytes": 298,
+      "sha256": "9a87247027087b3a873ae419a0c5d203d33eb0e11d3940060bcad22758d451d3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/measurement-negative-control.json",
+      "bytes": 226,
+      "sha256": "2b8e2a845d01e14f20fac38c4b62fd713e40a88e19e20724305169ac1ec56de3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/measurement-positive-control.json",
+      "bytes": 292,
+      "sha256": "3ce303d7bef0b1b5b73abc740555a777030d0592b8b57a1aea33b46a22149782",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/pin-negative-control.json",
+      "bytes": 196,
+      "sha256": "6093fbd6033c28154711b575dcbf10fc16859ee68cc79b560ee0ceaab4ff7985",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/pin-positive-control.json",
+      "bytes": 146,
+      "sha256": "5bd3eb17b4071f2d9e7f954710edc28e969bd5c2b02a3981cc9a2dc7a13894f5",
+      "hash_kind": "file-bytes"
     }
   ],
   "methods": [
@@ -350,40 +410,40 @@
       "value": 55.20999649850502,
       "unit": "km²",
       "vintage": "current",
-      "input_sha256": "7553fe16ab0bf45ed148bec90a933d199dd832ae22f8ed576bd488e220cce478",
-      "evaluation_commit": "75c73b8485d1d28a9392bff656a5cbbb7db284ec"
+      "input_sha256": "9019fa7dcf69b8e6a5ee06073ba55cf5a539302ad11658b4b81249d26e944bb7",
+      "evaluation_commit": "89e4dc5415a288e363974c0d7a5d0d58ae3a4637"
     },
     {
       "id": "bouvet-atlas-shared-helper-area",
       "value": 55209717.48072058,
       "unit": "m²",
       "vintage": "current",
-      "input_sha256": "7553fe16ab0bf45ed148bec90a933d199dd832ae22f8ed576bd488e220cce478",
-      "evaluation_commit": "75c73b8485d1d28a9392bff656a5cbbb7db284ec"
+      "input_sha256": "9019fa7dcf69b8e6a5ee06073ba55cf5a539302ad11658b4b81249d26e944bb7",
+      "evaluation_commit": "89e4dc5415a288e363974c0d7a5d0d58ae3a4637"
     },
     {
       "id": "bouvet-difference-epsg6933-area",
       "value": -0.00019627351579032393,
       "unit": "km²",
       "vintage": "current",
-      "input_sha256": "7553fe16ab0bf45ed148bec90a933d199dd832ae22f8ed576bd488e220cce478",
-      "evaluation_commit": "75c73b8485d1d28a9392bff656a5cbbb7db284ec"
+      "input_sha256": "9019fa7dcf69b8e6a5ee06073ba55cf5a539302ad11658b4b81249d26e944bb7",
+      "evaluation_commit": "89e4dc5415a288e363974c0d7a5d0d58ae3a4637"
     },
     {
       "id": "bouvet-source-epsg6933-area",
       "value": 55.20980022498923,
       "unit": "km²",
       "vintage": "current",
-      "input_sha256": "7553fe16ab0bf45ed148bec90a933d199dd832ae22f8ed576bd488e220cce478",
-      "evaluation_commit": "75c73b8485d1d28a9392bff656a5cbbb7db284ec"
+      "input_sha256": "9019fa7dcf69b8e6a5ee06073ba55cf5a539302ad11658b4b81249d26e944bb7",
+      "evaluation_commit": "89e4dc5415a288e363974c0d7a5d0d58ae3a4637"
     },
     {
       "id": "bouvet-source-shared-helper-area",
       "value": 55209521.18568479,
       "unit": "m²",
       "vintage": "current",
-      "input_sha256": "7553fe16ab0bf45ed148bec90a933d199dd832ae22f8ed576bd488e220cce478",
-      "evaluation_commit": "75c73b8485d1d28a9392bff656a5cbbb7db284ec"
+      "input_sha256": "9019fa7dcf69b8e6a5ee06073ba55cf5a539302ad11658b4b81249d26e944bb7",
+      "evaluation_commit": "89e4dc5415a288e363974c0d7a5d0d58ae3a4637"
     },
     {
       "id": "bouvet-vicinity-count",
@@ -391,7 +451,7 @@
       "unit": "rows",
       "vintage": "current",
       "input_sha256": "44847f5c043d78c9349f623cdb063e9b26d459ed73a0a56c21cb5231999747fd",
-      "evaluation_commit": "75c73b8485d1d28a9392bff656a5cbbb7db284ec"
+      "evaluation_commit": "89e4dc5415a288e363974c0d7a5d0d58ae3a4637"
     },
     {
       "id": "gough-vicinity-count",
@@ -399,7 +459,7 @@
       "unit": "rows",
       "vintage": "current",
       "input_sha256": "44847f5c043d78c9349f623cdb063e9b26d459ed73a0a56c21cb5231999747fd",
-      "evaluation_commit": "75c73b8485d1d28a9392bff656a5cbbb7db284ec"
+      "evaluation_commit": "89e4dc5415a288e363974c0d7a5d0d58ae3a4637"
     },
     {
       "id": "settlement-current-response-bytes",
@@ -407,47 +467,47 @@
       "unit": "response bytes",
       "vintage": "current",
       "input_sha256": "0b65676bbf98d0efcc3f5094cd437895abfa5bfa7f66093583aa11ede055eddc",
-      "evaluation_commit": "75c73b8485d1d28a9392bff656a5cbbb7db284ec"
+      "evaluation_commit": "89e4dc5415a288e363974c0d7a5d0d58ae3a4637"
     },
     {
       "id": "shn-atlas-epsg6933-area",
       "value": 151.8376770744319,
       "unit": "km²",
       "vintage": "current",
-      "input_sha256": "7553fe16ab0bf45ed148bec90a933d199dd832ae22f8ed576bd488e220cce478",
-      "evaluation_commit": "75c73b8485d1d28a9392bff656a5cbbb7db284ec"
+      "input_sha256": "9019fa7dcf69b8e6a5ee06073ba55cf5a539302ad11658b4b81249d26e944bb7",
+      "evaluation_commit": "89e4dc5415a288e363974c0d7a5d0d58ae3a4637"
     },
     {
       "id": "shn-atlas-shared-helper-area",
       "value": 151838969.1776703,
       "unit": "m²",
       "vintage": "current",
-      "input_sha256": "7553fe16ab0bf45ed148bec90a933d199dd832ae22f8ed576bd488e220cce478",
-      "evaluation_commit": "75c73b8485d1d28a9392bff656a5cbbb7db284ec"
+      "input_sha256": "9019fa7dcf69b8e6a5ee06073ba55cf5a539302ad11658b4b81249d26e944bb7",
+      "evaluation_commit": "89e4dc5415a288e363974c0d7a5d0d58ae3a4637"
     },
     {
       "id": "shn-difference-epsg6933-area",
       "value": 0.9833046955852467,
       "unit": "km²",
       "vintage": "current",
-      "input_sha256": "7553fe16ab0bf45ed148bec90a933d199dd832ae22f8ed576bd488e220cce478",
-      "evaluation_commit": "75c73b8485d1d28a9392bff656a5cbbb7db284ec"
+      "input_sha256": "9019fa7dcf69b8e6a5ee06073ba55cf5a539302ad11658b4b81249d26e944bb7",
+      "evaluation_commit": "89e4dc5415a288e363974c0d7a5d0d58ae3a4637"
     },
     {
       "id": "shn-source-epsg6933-area",
       "value": 152.82098177001714,
       "unit": "km²",
       "vintage": "current",
-      "input_sha256": "7553fe16ab0bf45ed148bec90a933d199dd832ae22f8ed576bd488e220cce478",
-      "evaluation_commit": "75c73b8485d1d28a9392bff656a5cbbb7db284ec"
+      "input_sha256": "9019fa7dcf69b8e6a5ee06073ba55cf5a539302ad11658b4b81249d26e944bb7",
+      "evaluation_commit": "89e4dc5415a288e363974c0d7a5d0d58ae3a4637"
     },
     {
       "id": "shn-source-shared-helper-area",
       "value": 152822967.9096101,
       "unit": "m²",
       "vintage": "current",
-      "input_sha256": "7553fe16ab0bf45ed148bec90a933d199dd832ae22f8ed576bd488e220cce478",
-      "evaluation_commit": "75c73b8485d1d28a9392bff656a5cbbb7db284ec"
+      "input_sha256": "9019fa7dcf69b8e6a5ee06073ba55cf5a539302ad11658b4b81249d26e944bb7",
+      "evaluation_commit": "89e4dc5415a288e363974c0d7a5d0d58ae3a4637"
     },
     {
       "id": "shoreline-total",
@@ -455,7 +515,7 @@
       "unit": "rows",
       "vintage": "current",
       "input_sha256": "44847f5c043d78c9349f623cdb063e9b26d459ed73a0a56c21cb5231999747fd",
-      "evaluation_commit": "75c73b8485d1d28a9392bff656a5cbbb7db284ec"
+      "evaluation_commit": "89e4dc5415a288e363974c0d7a5d0d58ae3a4637"
     },
     {
       "id": "shoreline-unique-ids",
@@ -463,7 +523,7 @@
       "unit": "unique source IDs",
       "vintage": "current",
       "input_sha256": "44847f5c043d78c9349f623cdb063e9b26d459ed73a0a56c21cb5231999747fd",
-      "evaluation_commit": "75c73b8485d1d28a9392bff656a5cbbb7db284ec"
+      "evaluation_commit": "89e4dc5415a288e363974c0d7a5d0d58ae3a4637"
     },
     {
       "id": "tristan-vicinity-count",
@@ -471,88 +531,88 @@
       "unit": "rows",
       "vintage": "current",
       "input_sha256": "44847f5c043d78c9349f623cdb063e9b26d459ed73a0a56c21cb5231999747fd",
-      "evaluation_commit": "75c73b8485d1d28a9392bff656a5cbbb7db284ec"
+      "evaluation_commit": "89e4dc5415a288e363974c0d7a5d0d58ae3a4637"
     }
   ],
   "metric_bindings": [
     {
       "metric_id": "bouvet-atlas-epsg6933-area",
-      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261004-current-main-reviewed/findings.json",
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/findings.json",
       "json_pointer": "/metric_values/bouvet-atlas-epsg6933-area/value"
     },
     {
       "metric_id": "bouvet-atlas-shared-helper-area",
-      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261004-current-main-reviewed/findings.json",
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/findings.json",
       "json_pointer": "/metric_values/bouvet-atlas-shared-helper-area/value"
     },
     {
       "metric_id": "bouvet-difference-epsg6933-area",
-      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261004-current-main-reviewed/findings.json",
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/findings.json",
       "json_pointer": "/metric_values/bouvet-difference-epsg6933-area/value"
     },
     {
       "metric_id": "bouvet-source-epsg6933-area",
-      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261004-current-main-reviewed/findings.json",
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/findings.json",
       "json_pointer": "/metric_values/bouvet-source-epsg6933-area/value"
     },
     {
       "metric_id": "bouvet-source-shared-helper-area",
-      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261004-current-main-reviewed/findings.json",
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/findings.json",
       "json_pointer": "/metric_values/bouvet-source-shared-helper-area/value"
     },
     {
       "metric_id": "bouvet-vicinity-count",
-      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261004-current-main-reviewed/findings.json",
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/findings.json",
       "json_pointer": "/metric_values/bouvet-vicinity-count/value"
     },
     {
       "metric_id": "gough-vicinity-count",
-      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261004-current-main-reviewed/findings.json",
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/findings.json",
       "json_pointer": "/metric_values/gough-vicinity-count/value"
     },
     {
       "metric_id": "settlement-current-response-bytes",
-      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261004-current-main-reviewed/findings.json",
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/findings.json",
       "json_pointer": "/metric_values/settlement-current-response-bytes/value"
     },
     {
       "metric_id": "shn-atlas-epsg6933-area",
-      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261004-current-main-reviewed/findings.json",
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/findings.json",
       "json_pointer": "/metric_values/shn-atlas-epsg6933-area/value"
     },
     {
       "metric_id": "shn-atlas-shared-helper-area",
-      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261004-current-main-reviewed/findings.json",
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/findings.json",
       "json_pointer": "/metric_values/shn-atlas-shared-helper-area/value"
     },
     {
       "metric_id": "shn-difference-epsg6933-area",
-      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261004-current-main-reviewed/findings.json",
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/findings.json",
       "json_pointer": "/metric_values/shn-difference-epsg6933-area/value"
     },
     {
       "metric_id": "shn-source-epsg6933-area",
-      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261004-current-main-reviewed/findings.json",
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/findings.json",
       "json_pointer": "/metric_values/shn-source-epsg6933-area/value"
     },
     {
       "metric_id": "shn-source-shared-helper-area",
-      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261004-current-main-reviewed/findings.json",
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/findings.json",
       "json_pointer": "/metric_values/shn-source-shared-helper-area/value"
     },
     {
       "metric_id": "shoreline-total",
-      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261004-current-main-reviewed/findings.json",
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/findings.json",
       "json_pointer": "/metric_values/shoreline-total/value"
     },
     {
       "metric_id": "shoreline-unique-ids",
-      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261004-current-main-reviewed/findings.json",
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/findings.json",
       "json_pointer": "/metric_values/shoreline-unique-ids/value"
     },
     {
       "metric_id": "tristan-vicinity-count",
-      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261004-current-main-reviewed/findings.json",
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/findings.json",
       "json_pointer": "/metric_values/tristan-vicinity-count/value"
     }
   ],
@@ -743,55 +803,55 @@
       "method_id": "pinned-shoreline-ledger",
       "kind": "positive-control",
       "outcome": "passed",
-      "evidence_path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261004-current-main-reviewed/generator-positive-control.json"
+      "evidence_path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/generator-positive-control.json"
     },
     {
       "method_id": "pinned-shoreline-ledger",
       "kind": "negative-control",
       "outcome": "passed",
-      "evidence_path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261004-current-main-reviewed/generator-negative-control.json"
+      "evidence_path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/generator-negative-control.json"
     },
     {
       "method_id": "pinned-shoreline-ledger",
       "kind": "reproducibility",
       "outcome": "passed",
-      "evidence_path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261004-current-main-reviewed/generator-reproducibility-control.json"
+      "evidence_path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/generator-reproducibility-control.json"
     },
     {
       "method_id": "subject-geometry-comparison",
       "kind": "positive-control",
       "outcome": "passed",
-      "evidence_path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261004-current-main-reviewed/geometry-positive-control.json"
+      "evidence_path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/geometry-positive-control.json"
     },
     {
       "method_id": "subject-geometry-comparison",
       "kind": "negative-control",
       "outcome": "passed",
-      "evidence_path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261004-current-main-reviewed/geometry-negative-control.json"
+      "evidence_path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/geometry-negative-control.json"
     },
     {
       "method_id": "epsg6933-area-comparison",
       "kind": "positive-control",
       "outcome": "passed",
-      "evidence_path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261004-current-main-reviewed/measurement-positive-control.json"
+      "evidence_path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/measurement-positive-control.json"
     },
     {
       "method_id": "epsg6933-area-comparison",
       "kind": "negative-control",
       "outcome": "passed",
-      "evidence_path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261004-current-main-reviewed/measurement-negative-control.json"
+      "evidence_path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/measurement-negative-control.json"
     },
     {
       "method_id": "historical-pin-validation",
       "kind": "positive-control",
       "outcome": "passed",
-      "evidence_path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261004-current-main-reviewed/pin-positive-control.json"
+      "evidence_path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/pin-positive-control.json"
     },
     {
       "method_id": "historical-pin-validation",
       "kind": "negative-control",
       "outcome": "passed",
-      "evidence_path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261004-current-main-reviewed/pin-negative-control.json"
+      "evidence_path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/pin-negative-control.json"
     }
   ],
   "change_receipts": [
@@ -881,6 +941,46 @@
     },
     {
       "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261004-current-main-reviewed/pin-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/findings.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/generator-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/generator-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/generator-reproducibility-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/geometry-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/geometry-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/measurement-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/measurement-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/pin-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/bouvet-tristan-receipt-consistency-623/vintages/20261005-main-89e-reviewed/pin-positive-control.json",
       "status": "added"
     },
     {
