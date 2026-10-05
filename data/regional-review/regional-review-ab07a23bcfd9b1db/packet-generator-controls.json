@@ -1,0 +1,19 @@
+{
+  "method_id": "packet-generator",
+  "kind": "generator",
+  "outcome": "passed",
+  "positive_controls": [
+    "The exact pinned 215-member roster, all per-location rows and all 14 parents are reproduced.",
+    "Each of the nine issue acceptance screens has an explicit status, finding and limitation or handoff.",
+    "The four frozen issue-workload rosters are disjoint and exactly equal the 510 Atlas CIV ADM3 IDs present at the pinned baseline.",
+    "Two independent executions produce identical location, parent, area, acceptance-screen and reproduction JSON SHA-256 values."
+  ],
+  "negative_controls": [
+    "Removing one ID from the issue roster fails exact count/hash validation.",
+    "Replacing a member with an existing member fails uniqueness/hash validation.",
+    "Removing one ID from the peer workload cohorts fails the exact partition-to-baseline check.",
+    "Removing or duplicating an acceptance criterion fails the exact criterion inventory check."
+  ],
+  "run_one_sha256": "bfab5dfe7b6195f9e37d191a887bfe4e18a03bfb0a28e6e6e75f3e73faee2d37",
+  "run_two_sha256": "bfab5dfe7b6195f9e37d191a887bfe4e18a03bfb0a28e6e6e75f3e73faee2d37"
+}

@@ -1,0 +1,13 @@
+{
+  "method_id": "source-role-crosswalk",
+  "kind": "source",
+  "outcome": "passed",
+  "positive_controls": [
+    "All 215 issue IDs resolve to exact pinned source shapeIDs and source names after reversible UTF-8/Latin-1 comparison repair.",
+    "The 2025 CNTIG/OCHA official layer yields unique source-name plus Atlas-region matches for 213/215 IDs."
+  ],
+  "negative_controls": [
+    "The two same-named Guézon features in Guemon remain ambiguous under name plus region; the packet does not fabricate a department assignment.",
+    "All 215 source-role claims are Departments while the official layer's corresponding field is Sous-Prefecture; disagreement is retained as a correction finding."
+  ]
+}
