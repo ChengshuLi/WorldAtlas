@@ -1,0 +1,150 @@
+{
+  "parent_issue": 71,
+  "created_at_local_date": "2026-10-04",
+  "created_followups": [
+    {
+      "issue": 817,
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/817",
+      "title": "Reconcile geoBoundaries Turkey ADM2 release count against its 2021 metadata",
+      "scope": "One whole country-level source release, not Atlas member geometry. Exact pinned release GeoJSON has 973 features; exact pinned metadata says 999.",
+      "subject_ids": [
+        "source:geoBoundaries:TUR:ADM2:release-9469f09592ced973a3448cf66b6100b741b64c0d"
+      ],
+      "depends_on": [
+        71,
+        72
+      ],
+      "owned_path": "data/regional-review/tur-adm2-release-completeness-20261004/",
+      "status": "blocked",
+      "reason_for_dependency": "Country-wide source discrepancy intersects Turkey source evidence used in active batches #71 and #72; serialize source comparison after both are merged."
+    },
+    {
+      "issue": 818,
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/818",
+      "title": "Reconcile Cyprus six district geometries to official DLS district source",
+      "subject_ids": [
+        "gb:CYP:ADM1:96831152B33829437974548",
+        "gb:CYP:ADM1:96831152B51101341403775",
+        "gb:CYP:ADM1:96831152B68245934251938",
+        "gb:CYP:ADM1:96831152B734989497708",
+        "gb:CYP:ADM1:96831152B8781315468855",
+        "gb:CYP:ADM1:96831152B93704515643255"
+      ],
+      "depends_on": [
+        71
+      ],
+      "owned_path": "data/regional-review/cyprus-dls-district-crosswalk-issue71/",
+      "status": "blocked",
+      "reason_for_dependency": "Exact six district subject IDs are embedded in the authoritative issue contract; wait for #71 source packet merge."
+    },
+    {
+      "issue": 819,
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/819",
+      "title": "Resolve 2010 Greek island municipality to 2021 census-unit crosswalk for packet 1",
+      "subject_ids": [
+        "gb:GRC:ADM3:53547021B10109746206606",
+        "gb:GRC:ADM3:53547021B14104981349473",
+        "gb:GRC:ADM3:53547021B1583318227364",
+        "gb:GRC:ADM3:53547021B27725910379906",
+        "gb:GRC:ADM3:53547021B33259065854290",
+        "gb:GRC:ADM3:53547021B47933499934509",
+        "gb:GRC:ADM3:53547021B47996092529292",
+        "gb:GRC:ADM3:53547021B48314635979132",
+        "gb:GRC:ADM3:53547021B51237961476559",
+        "gb:GRC:ADM3:53547021B5655608109078",
+        "gb:GRC:ADM3:53547021B57223359042947",
+        "gb:GRC:ADM3:53547021B65639562394227",
+        "gb:GRC:ADM3:53547021B66988262983744",
+        "gb:GRC:ADM3:53547021B72748856763578",
+        "gb:GRC:ADM3:53547021B75170445936702",
+        "gb:GRC:ADM3:53547021B79831596850386",
+        "gb:GRC:ADM3:53547021B81123909455737",
+        "gb:GRC:ADM3:53547021B84204057813712",
+        "gb:GRC:ADM3:53547021B9865954519717"
+      ],
+      "depends_on": [
+        71
+      ],
+      "owned_path": "data/regional-review/greece-east-aegean-2021-crosswalk-issue71/",
+      "status": "blocked",
+      "reason_for_dependency": "Exact 19 source subject IDs and release pins are embedded in the authoritative issue contract; wait for #71 source packet merge."
+    },
+    {
+      "issue": 820,
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/820",
+      "title": "Establish sourced geographic roles for four Cyprus special map units",
+      "subject_ids": [
+        "CYN+00?",
+        "ESB-5132",
+        "WSB-5133",
+        "country-CNM"
+      ],
+      "depends_on": [
+        71
+      ],
+      "owned_path": "data/regional-review/cyprus-special-map-unit-role-issue71/",
+      "status": "blocked",
+      "reason_for_dependency": "These source-role subjects are the four special-map-unit IDs in #71; wait for its Natural Earth evidence packet merge."
+    },
+    {
+      "issue": 821,
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/821",
+      "title": "Reconcile Istanbul's 39 official districts to the incomplete Atlas roster",
+      "subject_ids": [
+        "gb:TUR:ADM2:54988432B94516152709384",
+        "gb:TUR:ADM2:54988432B54271266334519",
+        "gb:TUR:ADM2:54988432B29112177447975",
+        "gb:TUR:ADM2:54988432B58079099572479",
+        "gb:TUR:ADM2:54988432B82480836109015",
+        "gb:TUR:ADM2:54988432B60297346715567",
+        "gb:TUR:ADM2:54988432B64089683735003",
+        "gb:TUR:ADM2:54988432B71616500059418",
+        "gb:TUR:ADM2:54988432B67026781349893",
+        "gb:TUR:ADM2:54988432B97960602645981",
+        "gb:TUR:ADM2:54988432B66082608132209",
+        "gb:TUR:ADM2:54988432B7974453528026",
+        "gb:TUR:ADM2:54988432B5885906722527",
+        "gb:TUR:ADM2:54988432B6587538084917",
+        "gb:TUR:ADM2:54988432B26216305629532",
+        "gb:TUR:ADM2:54988432B71345383711908",
+        "gb:TUR:ADM2:54988432B77006112817305",
+        "gb:TUR:ADM2:54988432B45752355908824",
+        "gb:TUR:ADM2:54988432B2777192469074",
+        "gb:TUR:ADM2:54988432B93840376788897",
+        "gb:TUR:ADM2:54988432B39641834885080",
+        "gb:TUR:ADM2:54988432B66869796973700",
+        "gb:TUR:ADM2:54988432B45078999476524",
+        "gb:TUR:ADM2:54988432B89638439219394",
+        "gb:TUR:ADM2:54988432B47187297633278",
+        "gb:TUR:ADM2:54988432B28761186895791",
+        "gb:TUR:ADM2:54988432B88005070896558",
+        "gb:TUR:ADM2:54988432B44792581222483",
+        "gb:TUR:ADM2:54988432B50977665989913",
+        "gb:TUR:ADM2:54988432B49369799231556",
+        "gb:TUR:ADM2:54988432B79652739540199",
+        "gb:TUR:ADM2:54988432B76021463807070",
+        "gb:TUR:ADM2:54988432B80643331900802",
+        "gb:TUR:ADM2:54988432B1936830285057",
+        "gb:TUR:ADM2:54988432B38360360890356",
+        "gb:TUR:ADM2:54988432B51380550593874",
+        "gb:TUR:ADM2:54988432B49471063177420",
+        "gb:TUR:ADM2:54988432B79162079631621",
+        "gb:TUR:ADM2:54988432B10954011235531"
+      ],
+      "depends_on": [
+        71,
+        72,
+        817
+      ],
+      "owned_path": "data/regional-review/istanbul-district-roster-reconciliation-20261004/",
+      "status": "blocked",
+      "finding": "Official current province roster has 39 districts; 7 exact source IDs are present in the baseline and 32 other unique pinned 2021 source features are absent. Exact parent/geometry crosswalk and any identity proposal remain for review."
+    }
+  ],
+  "coordination_note": "The source-release discrepancy #817 is serialized after Turkey batches #71 and #72. Istanbul-specific issue #821 depends on both batches and #817 so neither the whole-country release reconciliation nor the provincial exact-ID crosswalk runs concurrently.",
+  "non_findings": [
+    "None of these follow-ups approves a region or authorizes an identity/footprint/hierarchy edit.",
+    "No outcome was marked justified or correction-needed solely from source counts, labels, or geometric overlap.",
+    "The Turkey metadata difference does not identify 26 missing administrative units."
+  ]
+}
