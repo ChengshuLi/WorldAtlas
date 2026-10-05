@@ -1,0 +1,725 @@
+{
+  "issue": 443,
+  "snapshot_updated_at": "2026-10-05T10:08:37Z",
+  "scope_location_count": 215,
+  "scope_member_location_ids_sha256_declared": "4f96e5e590933b231a062818b7d921655fe37667e10f487cc2a4e729b6baebdf",
+  "pinned_release": {
+    "id": "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+    "version": 5,
+    "hierarchy_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+    "footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286"
+  },
+  "pinned_region_id": "framework:region:southern-south-america:c6bb0f01446e",
+  "pinned_scope_sha256s": {
+    "macro_certificate": "979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e",
+    "frozen_region_geometry": "b6d1cc0a41110da332ecca2a4f08519f1d97e7810757d84189cd44642e048798",
+    "frozen_region_member_ids": "4447e260a67aeb468ab19584e45868fc3470dc4c0e989bdac21aa99589502e9c",
+    "hierarchy": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+    "footprints": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286"
+  },
+  "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/ARG/ADM2/geoBoundaries-ARG-ADM2.geojson",
+  "source_commit": "9469f09",
+  "source_uncompressed_bytes": 69702323,
+  "source_sha256_uncompressed": "f35dae5a257302dea5bd1549ae135baf82e7ee7491918854c3db9bbdec890177",
+  "source_metadata_file_sha256": "17452b82df4498c1b29a4489bd78709cef922b453579b1a47010dfd2524a7ce2",
+  "source_feature_count": 525,
+  "source_unique_shape_ids": 525,
+  "source_metadata_admUnitCount": 526,
+  "source_metadata_boundary_year": "2020",
+  "source_metadata_canonical_role": "departments",
+  "source_metadata_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+  "parent_adm1_source": {
+    "source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/ARG/ADM1/geoBoundaries-ARG-ADM1.geojson",
+    "source_year": "2006",
+    "source_role": "Province",
+    "source_license": "Creative Commons Attribution 2.5 Generic",
+    "source_uncompressed_bytes": 201505,
+    "source_sha256_uncompressed": "b5d13177b09ad3347b617a83252cc77bc985f3c70802d4d7a8b50d3fbe5adba6",
+    "source_metadata_sha256": "328f5cbf32c674fc4d8a58553909e501634ee46edcc5044cfa076783d3e6feed",
+    "source_feature_count": 23,
+    "source_metadata_feature_count": 23,
+    "repository_register_expected_sha256": "7cc9b00ba139e57f59611993d96d07eb84d955ed5bd6bd6f1dcb864e1baf549c",
+    "scoped_parent_exact_source_name_matches": 13,
+    "scoped_parent_count": 14,
+    "official_georef_response_sha256": "d6a47fd439a347b4a2da5689b6cde68a3dc3de776d2c33ad32a58d58d82ca944",
+    "official_georef_jurisdiction_count": 24,
+    "official_jurisdictions_absent_from_2006_source": [
+      "Entre Ríos",
+      "La Rioja"
+    ],
+    "2006_source_names_not_in_current_official_list": [
+      "La Roja"
+    ]
+  },
+  "repository_register_expected_source_sha256": "cedee8710e49d9017327fc1d4b2dc536e95a82317dc94c3bac8d9404af6bf771",
+  "baseline_input_hashes": {
+    "data/geography/part-0.json": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+    "data/geography/part-28.json": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+    "data/semantic-report.json": "266c4f0f6e91381a26bfa6868d3c0df22b30140fa7f8551977be10b423295831",
+    "data/administrative-sources.json": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+  },
+  "subject_source_matches": 214,
+  "subject_source_name_mismatches": [],
+  "direct_subject_count": 214,
+  "direct_subjects_by_area_code": {
+    "AGW": 162,
+    "AGE": 52
+  },
+  "scoped_province_count": 14,
+  "province_name_correction_candidates": [
+    "framework:province:ciudad-de-buenos-aires:bd2311b3ca38",
+    "framework:province:la-roja:f24d29a5d9d5"
+  ],
+  "geometry_metrics_source_only": {
+    "Polygon": 208,
+    "MultiPolygon": 6,
+    "other": 0,
+    "empty": 0,
+    "open_rings": 0,
+    "ring_count": 285,
+    "vertices": 523213
+  },
+  "multipart_subjects_source_only": [
+    {
+      "id": "gb:ARG:ADM2:61730980B19808130857277",
+      "name": "San Cosme",
+      "parent_id": "framework:province:corrientes:a04006099866",
+      "component_count": 6,
+      "component_bounds_lon_lat": [
+        [
+          -58.70791741346066,
+          -27.51970005012778,
+          -58.30372619609734,
+          -27.27044525804882
+        ],
+        [
+          -58.43112572783195,
+          -27.280658802427244,
+          -58.42036826665901,
+          -27.267756159303516
+        ],
+        [
+          -58.615092072396266,
+          -27.316851832358765,
+          -58.6070970834356,
+          -27.312426033248634
+        ],
+        [
+          -58.42168534598588,
+          -27.283202264086032,
+          -58.413120388553835,
+          -27.280978213653615
+        ],
+        [
+          -58.44170847925855,
+          -27.2708449630608,
+          -58.43646900865153,
+          -27.265638036126635
+        ],
+        [
+          -58.46334545929533,
+          -27.273030986430946,
+          -58.45695723118783,
+          -27.270776749120927
+        ]
+      ]
+    },
+    {
+      "id": "gb:ARG:ADM2:61730980B30289947598516",
+      "name": "Capital",
+      "parent_id": "framework:province:misiones:2c036a9d514b",
+      "component_count": 3,
+      "component_bounds_lon_lat": [
+        [
+          -56.058637529063105,
+          -27.757046516528597,
+          -55.6086578368902,
+          -27.324261579453612
+        ],
+        [
+          -55.9603619124389,
+          -27.343296408422848,
+          -55.92418622144982,
+          -27.333643962865686
+        ],
+        [
+          -56.005098904716824,
+          -27.340358708127162,
+          -55.99620186617538,
+          -27.33700133527604
+        ]
+      ]
+    },
+    {
+      "id": "gb:ARG:ADM2:61730980B54493504343974",
+      "name": "Ituzaingó",
+      "parent_id": "framework:province:corrientes:a04006099866",
+      "component_count": 29,
+      "component_bounds_lon_lat": [
+        [
+          -57.690650940239934,
+          -28.59565353345397,
+          -55.81390996872426,
+          -27.30619542720124
+        ],
+        [
+          -57.03206553908906,
+          -27.596437528919164,
+          -56.72542373937593,
+          -27.42205773387805
+        ],
+        [
+          -56.784003995659255,
+          -27.592286340977466,
+          -56.69941760802039,
+          -27.519874376321273
+        ],
+        [
+          -56.957770643908866,
+          -27.583765768263532,
+          -56.87575149492663,
+          -27.515795794536025
+        ],
+        [
+          -56.70668404442102,
+          -27.580895826447406,
+          -56.68586492385656,
+          -27.545000853475734
+        ],
+        [
+          -56.37248465907631,
+          -27.538533328035914,
+          -56.356879296640486,
+          -27.514221313265416
+        ],
+        [
+          -56.94472914695577,
+          -27.55729731006481,
+          -56.92936146616772,
+          -27.535839869846033
+        ],
+        [
+          -56.931005057947516,
+          -27.53881695431311,
+          -56.90781994111302,
+          -27.529816675811944
+        ],
+        [
+          -56.92108741736067,
+          -27.573743730352252,
+          -56.899074192340166,
+          -27.563079254095864
+        ],
+        [
+          -56.95481542827092,
+          -27.525300980383648,
+          -56.938747405616,
+          -27.514896380754852
+        ],
+        [
+          -56.344300379058105,
+          -27.508498818187878,
+          -56.320702023718184,
+          -27.495473202956724
+        ],
+        [
+          -56.775645531266626,
+          -27.576334503048457,
+          -56.75617951786181,
+          -27.568299822026805
+        ],
+        [
+          -56.7723209131125,
+          -27.5766317631957,
+          -56.753639296037356,
+          -27.569648942081056
+        ],
+        [
+          -56.73310224647212,
+          -27.592714165249543,
+          -56.715879179906345,
+          -27.57928373205616
+        ],
+        [
+          -56.73278768790064,
+          -27.533507678767382,
+          -56.72533124973259,
+          -27.51970635658888
+        ],
+        [
+          -56.76483463919891,
+          -27.59494614414213,
+          -56.74912226046329,
+          -27.59030444357829
+        ],
+        [
+          -56.94678494956832,
+          -27.54414916410498,
+          -56.93389210672676,
+          -27.532691923191514
+        ],
+        [
+          -56.705354378798724,
+          -27.563564664427986,
+          -56.700637847162994,
+          -27.552224906599893
+        ],
+        [
+          -56.732540131072966,
+          -27.54313966271031,
+          -56.72760562952174,
+          -27.533383900066756
+        ],
+        [
+          -56.87459897438341,
+          -27.589860017849293,
+          -56.86223518354864,
+          -27.582496617931355
+        ],
+        [
+          -56.866247276999815,
+          -27.595152652107398,
+          -56.8551973378451,
+          -27.59110529067502
+        ],
+        [
+          -56.789466506273214,
+          -27.576244120897996,
+          -56.78148019503819,
+          -27.571654703469605
+        ],
+        [
+          -56.71182086004895,
+          -27.581948788787898,
+          -56.70563192588217,
+          -27.575079071686798
+        ],
+        [
+          -56.90774879184756,
+          -27.542215736227313,
+          -56.90312323619391,
+          -27.5356628646566
+        ],
+        [
+          -56.768080820055694,
+          -27.570178953970032,
+          -56.76104729165541,
+          -27.566517055687832
+        ],
+        [
+          -56.94624540074742,
+          -27.5346756177684,
+          -56.93788507504554,
+          -27.530745702774762
+        ],
+        [
+          -56.741974303763804,
+          -27.562543151586656,
+          -56.73606421744099,
+          -27.558564179533086
+        ],
+        [
+          -56.693715863469855,
+          -27.574417619975854,
+          -56.68959395097519,
+          -27.56944692825482
+        ],
+        [
+          -56.9340646712962,
+          -27.529134085970295,
+          -56.92751179996342,
+          -27.52686949088353
+        ]
+      ]
+    },
+    {
+      "id": "gb:ARG:ADM2:61730980B76052784863315",
+      "name": "Itatí",
+      "parent_id": "framework:province:corrientes:a04006099866",
+      "component_count": 22,
+      "component_bounds_lon_lat": [
+        [
+          -58.6739177061944,
+          -27.954027175425285,
+          -57.74236297610158,
+          -27.259025335665864
+        ],
+        [
+          -57.830534696346206,
+          -27.32199513926123,
+          -57.76877307894204,
+          -27.30240613184173
+        ],
+        [
+          -57.79808783484638,
+          -27.32820469108708,
+          -57.74151992786869,
+          -27.320030927799703
+        ],
+        [
+          -58.22309970889333,
+          -27.271512687099026,
+          -58.170483827718705,
+          -27.256236016946517
+        ],
+        [
+          -58.33573079093163,
+          -27.273654104034648,
+          -58.30300855627135,
+          -27.261592447532635
+        ],
+        [
+          -58.17800164238023,
+          -27.26606452422596,
+          -58.138565779273804,
+          -27.255864262266492
+        ],
+        [
+          -58.22543478065972,
+          -27.263103543930487,
+          -58.18383884389245,
+          -27.254899918974143
+        ],
+        [
+          -57.83933472582011,
+          -27.3186367154239,
+          -57.82128334069715,
+          -27.297413528129255
+        ],
+        [
+          -58.312138318658505,
+          -27.272371828578635,
+          -58.291524649087705,
+          -27.26493793713157
+        ],
+        [
+          -57.818483114090135,
+          -27.325336039399552,
+          -57.78412961972227,
+          -27.319983601204797
+        ],
+        [
+          -58.34571480713652,
+          -27.274866044589405,
+          -58.33221030231632,
+          -27.26626706176213
+        ],
+        [
+          -58.24408102028234,
+          -27.262934803788465,
+          -58.2239966398736,
+          -27.25396603430179
+        ],
+        [
+          -58.10004043596296,
+          -27.26667118072385,
+          -58.08511424030611,
+          -27.259796560195362
+        ],
+        [
+          -57.82047724646011,
+          -27.32904428302254,
+          -57.80260062228747,
+          -27.324321508356036
+        ],
+        [
+          -57.78682279589353,
+          -27.33315396377013,
+          -57.7690978046459,
+          -27.328054129829294
+        ],
+        [
+          -58.20073175443848,
+          -27.273360312379335,
+          -58.1845331194362,
+          -27.2681338197638
+        ],
+        [
+          -58.33515358024246,
+          -27.266324758226453,
+          -58.324073075910206,
+          -27.260726809662053
+        ],
+        [
+          -58.29953193688294,
+          -27.26011544444868,
+          -58.286417246098836,
+          -27.255635618661856
+        ],
+        [
+          -58.169861078732815,
+          -27.27458715505006,
+          -58.16414022432123,
+          -27.269644677936807
+        ],
+        [
+          -58.361280441578906,
+          -27.27500629432141,
+          -58.349031210197396,
+          -27.271760046729085
+        ],
+        [
+          -58.19979047722591,
+          -27.27943080682677,
+          -58.1908633702753,
+          -27.275957285913673
+        ],
+        [
+          -58.2677128315784,
+          -27.261463165528575,
+          -58.26221585260697,
+          -27.259652256207808
+        ]
+      ]
+    },
+    {
+      "id": "gb:ARG:ADM2:61730980B94998770553919",
+      "name": "General Paz",
+      "parent_id": "framework:province:corrientes:a04006099866",
+      "component_count": 2,
+      "component_bounds_lon_lat": [
+        [
+          -58.30405425994078,
+          -28.00932312048143,
+          -57.2252120963252,
+          -27.40943253213941
+        ],
+        [
+          -57.239298310597526,
+          -27.4652409536448,
+          -57.22144062111445,
+          -27.455784966808874
+        ]
+      ]
+    },
+    {
+      "id": "gb:ARG:ADM2:61730980B95294752297782",
+      "name": "Berón de Astrada",
+      "parent_id": "framework:province:corrientes:a04006099866",
+      "component_count": 10,
+      "component_bounds_lon_lat": [
+        [
+          -57.87595367431646,
+          -27.651056290200565,
+          -57.38770835076452,
+          -27.32556236239824
+        ],
+        [
+          -57.59341454504208,
+          -27.43883722629385,
+          -57.4041920068334,
+          -27.38392017153022
+        ],
+        [
+          -57.47295059300242,
+          -27.43899281342114,
+          -57.448189316424916,
+          -27.432084151079955
+        ],
+        [
+          -57.55316894413182,
+          -27.427786739229454,
+          -57.5391170895208,
+          -27.419532980096278
+        ],
+        [
+          -57.45480596634624,
+          -27.431947724676167,
+          -57.441777305420246,
+          -27.427513888388933
+        ],
+        [
+          -57.48783963793237,
+          -27.439456451443004,
+          -57.47980208140364,
+          -27.43611736797729
+        ],
+        [
+          -57.54839404176556,
+          -27.4298331253509,
+          -57.540208495878595,
+          -27.42621784287063
+        ],
+        [
+          -57.56456049641942,
+          -27.416940890640664,
+          -57.55460141565017,
+          -27.410460666429266
+        ],
+        [
+          -57.61219732589294,
+          -27.383708978840517,
+          -57.605789578292615,
+          -27.380984726338642
+        ],
+        [
+          -57.479294390435996,
+          -27.440269696990153,
+          -57.47547446998029,
+          -27.438086884634377
+        ]
+      ]
+    }
+  ],
+  "city_aggregate_source_members": [
+    {
+      "id": "gb:ARG:ADM2:61730980B82567739160952",
+      "name": "Lanús",
+      "overlap_from_pinned_audit": 0.52746,
+      "named_parent_match_from_pinned_audit": false
+    },
+    {
+      "id": "gb:ARG:ADM2:61730980B92536449887038",
+      "name": "Comuna 8",
+      "overlap_from_pinned_audit": 1.0,
+      "named_parent_match_from_pinned_audit": false
+    },
+    {
+      "id": "gb:ARG:ADM2:61730980B497821979952",
+      "name": "Avellaneda",
+      "overlap_from_pinned_audit": 0.53273,
+      "named_parent_match_from_pinned_audit": true
+    },
+    {
+      "id": "gb:ARG:ADM2:61730980B27244915898287",
+      "name": "Comuna 9",
+      "overlap_from_pinned_audit": 1.0,
+      "named_parent_match_from_pinned_audit": false
+    },
+    {
+      "id": "gb:ARG:ADM2:61730980B82066929031844",
+      "name": "Comuna 4",
+      "overlap_from_pinned_audit": 1.0,
+      "named_parent_match_from_pinned_audit": true
+    },
+    {
+      "id": "gb:ARG:ADM2:61730980B96499416001790",
+      "name": "Comuna 7",
+      "overlap_from_pinned_audit": 1.0,
+      "named_parent_match_from_pinned_audit": true
+    },
+    {
+      "id": "gb:ARG:ADM2:61730980B55355191537575",
+      "name": "Comuna 10",
+      "overlap_from_pinned_audit": 1.0,
+      "named_parent_match_from_pinned_audit": false
+    },
+    {
+      "id": "gb:ARG:ADM2:61730980B98128397219365",
+      "name": "Comuna 5",
+      "overlap_from_pinned_audit": 1.0,
+      "named_parent_match_from_pinned_audit": true
+    },
+    {
+      "id": "gb:ARG:ADM2:61730980B491501502306",
+      "name": "Comuna 6",
+      "overlap_from_pinned_audit": 1.0,
+      "named_parent_match_from_pinned_audit": true
+    },
+    {
+      "id": "gb:ARG:ADM2:61730980B39033896534626",
+      "name": "Comuna 3",
+      "overlap_from_pinned_audit": 1.0,
+      "named_parent_match_from_pinned_audit": true
+    },
+    {
+      "id": "gb:ARG:ADM2:61730980B33319795319357",
+      "name": "Comuna 1",
+      "overlap_from_pinned_audit": 0.95074,
+      "named_parent_match_from_pinned_audit": true
+    },
+    {
+      "id": "gb:ARG:ADM2:61730980B31104759078199",
+      "name": "Comuna 11",
+      "overlap_from_pinned_audit": 1.0,
+      "named_parent_match_from_pinned_audit": false
+    },
+    {
+      "id": "gb:ARG:ADM2:61730980B90079701589370",
+      "name": "Comuna 15",
+      "overlap_from_pinned_audit": 1.0,
+      "named_parent_match_from_pinned_audit": true
+    },
+    {
+      "id": "gb:ARG:ADM2:61730980B26508052382857",
+      "name": "Comuna 2",
+      "overlap_from_pinned_audit": 1.0,
+      "named_parent_match_from_pinned_audit": true
+    },
+    {
+      "id": "gb:ARG:ADM2:61730980B11409583290546",
+      "name": "Comuna 14",
+      "overlap_from_pinned_audit": 1.0,
+      "named_parent_match_from_pinned_audit": true
+    },
+    {
+      "id": "gb:ARG:ADM2:61730980B70807838850882",
+      "name": "Comuna 12",
+      "overlap_from_pinned_audit": 1.0,
+      "named_parent_match_from_pinned_audit": true
+    },
+    {
+      "id": "gb:ARG:ADM2:61730980B46645672865610",
+      "name": "Comuna 13",
+      "overlap_from_pinned_audit": 0.97907,
+      "named_parent_match_from_pinned_audit": true
+    }
+  ],
+  "natural_earth_pinned_source": {
+    "upstream_commit": "ca96624a56bd078437bca8184e78163e5039ad19",
+    "github_blob_sha": "4a8438f98ac7dfec7dc1739b1eaf91398ad33f22",
+    "source_sha256_uncompressed": "22d0e3ad85eb3e27f17cabf8ba2d50e554fbc27a87796ff891d958185da62fb5",
+    "source_uncompressed_bytes": 40726851,
+    "feature": {
+      "adm1_code": "ARG-5493",
+      "diss_me": 5493,
+      "name": "Ciudad de Buenos Aires",
+      "name_en": "Buenos Aires",
+      "admin": "Argentina",
+      "type_en": "Federal District",
+      "postal": "DF",
+      "gn_name": "Ciudad Autonoma de Buenos Aires",
+      "wikidataid": "Q1486"
+    },
+    "license": "Public domain per Natural Earth terms; attribution appreciated but not required",
+    "city_boundary_diagnostic": {
+      "atlas_geometry_type": "Polygon",
+      "atlas_exterior_vertex_count_including_closure": 29,
+      "atlas_exterior_bbox_lon_lat": [
+        -58.5304,
+        -34.7455,
+        -58.2794,
+        -34.5278
+      ],
+      "natural_earth_geometry_type": "Polygon",
+      "natural_earth_exterior_vertex_count_including_closure": 18,
+      "natural_earth_exterior_bbox_lon_lat": [
+        -58.560532,
+        -34.774928,
+        -58.315031,
+        -34.52158
+      ],
+      "atlas_vertices_inside_natural_earth_exterior_ring": 18,
+      "atlas_vertices_tested": 28,
+      "natural_earth_vertices_inside_atlas_exterior_ring": 6,
+      "natural_earth_vertices_tested": 17,
+      "method_limit": "Planar lon/lat ray casting of exterior vertices only. This is not a polygon overlay, topology validation, geodesic comparison, or legal-boundary determination; differing results can reflect vintage or delineation differences."
+    }
+  },
+  "city_members_total": 17,
+  "city_members_official_caba_comunas": 15,
+  "city_members_outside_caba_named_by_geoBoundaries": [
+    "Lanús",
+    "Avellaneda"
+  ],
+  "limitations": [
+    "Ring closure and source geometry type are syntactic checks, not geometry validity, overlap, hole, boundary correctness or completeness checks.",
+    "The exact pinned geoBoundaries source reports 525 features while its companion metadata reports 526; an omitted countrywide unit is not identified by this packet.",
+    "Natural Earth commit ca96624 is a pinned public-domain source with a matching ARG-5493 Federal District feature, but its exterior ring and bbox differ from the Atlas city geometry. Vertex containment diagnostics are not a full overlay and do not establish which boundary is legally correct or whether Atlas used that exact upstream geometry.",
+    "The official IGN 2017 GeoJSON link in its retained metadata returned HTTP 404 on 2026-10-05; current official INDEC department layer has no specified license in its published metadata and was not redistributed.",
+    "The semantic-report city membership overlap values are preserved as prior Atlas audit output and were not recalculated here.",
+    "The current official Georef API response verifies jurisdiction names/count only, not provincial boundary geometry. Its raw response is retained at the official URL with a retrieval hash.",
+    "The pinned 2006 ADM1 parent source has 23 features and one fewer unit than the 24 jurisdictions in the current official Georef list; name comparison finds no Entre Ríos feature and a La Roja feature where the official list has La Rioja.",
+    "Custom Argentina Northwest area purpose requires an explicit Atlas reference framework; official COFEMA groups NOA (5 provinces) and Cuyo (4) separately, while this packet's 162 units span both groups."
+  ]
+}

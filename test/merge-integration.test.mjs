@@ -59,7 +59,7 @@ function fixture() {
   f.options = () => ({api:f.api,repo,number:2,expectedHead:head,policy:{version:1,mode:'enforce-new',activation_time:'2100-01-01T00:00:00Z'},
     candidateSleep:async()=>{},
     evidenceCheck:async()=>{f.evidenceReads=(f.evidenceReads??0)+1;if(f.staleReview)throw Error('Missing independent exact-head review');return {status:'legacy'};}});
-  f.complete = extra => completeIntegration({...f.options(),integrationResult:'success',testedBase:base,testedCandidate:candidate,...extra});
+  f.complete = extra => completeIntegration({...f.options(),integrationResult:'success',geographyResult:'success',testedBase:base,testedCandidate:candidate,...extra});
   return f;
 }
 
@@ -110,7 +110,7 @@ test('workflow separates untrusted candidate tests from write credentials and se
   assert.match(integration,/permissions:\n      contents: read/);
   assert.doesNotMatch(integration,/GH_TOKEN|secrets\.|contents: write|issues: write|pull-requests: write/);
   assert.match(integration,/persist-credentials: false/);assert.match(integration,/node scripts\/run-integration-tests.mjs/);assert.match(integration,/run: npm run build:hosted/);
-  assert.match(yaml,/needs: \[prepare, integration\]/);
+  assert.match(yaml,/needs: \[prepare, integration, geography\]/);
 });
 
 test('commit status changing during final review prevents the merge', async () => {
@@ -486,4 +486,18 @@ test('cleanup stops on time or inventory call budget without starting deletion a
     number:i+10,state:'open',head:{ref:'engineering/other',repo:{full_name:paged.repo}},base:{ref:'main',repo:{full_name:paged.repo}}})));
   const result=await cleanupMergedHead(paged);assert.equal(result.status,'pending');assert.match(result.reason,/budget/);
   assert.equal(paged.deletes.length,0);assert.equal(paged.reads.length,10);
+});
+
+
+test('fresh geography success is required even when application proof is reusable', async()=>{
+ for(const geographyResult of [undefined,'failure','cancelled','skipped']) {
+  const f=fixture();addTrustedProof(f);
+  assert.ok((await prepareIntegration(f.options())).proof);
+  await assert.rejects(f.complete({integrationResult:'skipped',proofRunId:12,proofRunAttempt:1,geographyResult}),/Trusted combined geography check/);
+  assert.equal(f.writes.length,0);
+ }
+});
+test('fresh geography success is recorded against exact combined commits',async()=>{
+ const f=fixture();const result=await f.complete();
+ assert.deepEqual(result.geography,{status:'passed',trusted_code_commit:f.base,candidate_commit:f.candidate});
 });

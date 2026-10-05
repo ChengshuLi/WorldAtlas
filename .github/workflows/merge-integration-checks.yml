@@ -33,6 +33,72 @@ jobs:
             echo 'profile=full' >> "$GITHUB_OUTPUT"
             echo 'shards=[0,1,2]' >> "$GITHUB_OUTPUT"
           fi
+  geography:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      # Trusted baseline code reads candidate blobs; candidate code never runs.
+      - name: Checkout trusted geographic checker
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            scripts
+            src
+            .github
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Install trusted geographic dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Check proposed geography with trusted baseline code
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GEOGRAPHY_BASELINE: ${{ github.event.pull_request.base.sha }}
+          GEOGRAPHY_CANDIDATE: ${{ github.event.pull_request.head.sha }}
+        run: |
+          if test -f scripts/run-geographic-check.py; then
+            python -I -B scripts/run-geographic-check.py --fetch --out geography-check.json
+          else
+            # Only this named activation branch can report bootstrap absence,
+            # and only after trusted API code proves it changes no live data.
+            node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import {githubAPI, githubPages} from './scripts/issue-claim-contract.mjs';
+          const event = JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8'));
+          const repo = process.env.GITHUB_REPOSITORY, number = event.pull_request?.number;
+          if (!/^[-\w.]+\/[-\w.]+$/.test(repo ?? '') || !Number.isSafeInteger(number)) throw Error('Invalid bootstrap event');
+          const api = githubAPI(process.env.GH_TOKEN), root = `/repos/${repo}`;
+          const pr = await api(`${root}/pulls/${number}`);
+          if (pr.head.sha !== process.env.GEOGRAPHY_CANDIDATE ||
+              pr.head.ref !== 'engineering/geographic-gate-920-20261005-local04' ||
+              pr.head.repo?.full_name !== repo || pr.base.ref !== 'main' ||
+              !Number.isSafeInteger(pr.changed_files) || pr.changed_files < 1 || pr.changed_files > 3000) {
+            throw Error('Geographic checker unavailable outside the bounded activation PR');
+          }
+          const files = await githubPages(api, `${root}/pulls/${number}/files`);
+          if (files.length !== pr.changed_files || new Set(files.map(f => f.filename)).size !== files.length ||
+              files.some(f => [f.filename, f.previous_filename].filter(Boolean).some(name => name.startsWith('data/')))) {
+            throw Error('Bootstrap cannot waive changed live data or an incomplete inventory');
+          }
+          fs.writeFileSync('geography-check.json', JSON.stringify({status: 'bootstrap-unavailable',
+            geometry_validated: false, live_data_changed: false, head_sha: pr.head.sha,
+            limits: ['Only the named activation PR; the combined check becomes mandatory after merge.']}) + '\n');
+          NODE
+          fi
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: proposed-geography-${{ github.event.pull_request.number }}
+          path: geography-check.json
+          retention-days: 30
   regression:
     needs: profile
     runs-on: ubuntu-latest
