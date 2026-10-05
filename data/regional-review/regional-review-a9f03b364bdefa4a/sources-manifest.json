@@ -136,6 +136,19 @@
       "finding_or_limit": "Fields ECOZONE_ID, ECOPROVINCE_ID and official English/French names; OGL Canada via linked item. Raw JSON is retained losslessly in deterministic gzip to keep diff hygiene.",
       "uncompressed_sha256": "2b66b3768de4891b14ac11114cfb55daef4aa7d823bb1599b7d504605d208535",
       "uncompressed_bytes": 13503
+    },
+    {
+      "path": "sources/resolve-scoped-ecoregions-0-417-418.geojson.gz",
+      "title": "RESOLVE/Esri GeoJSON source geometry for exact scoped feature IDs 0, 417 and 418",
+      "url": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer/0/query?where=ECO_ID%20IN%20(0%2C417%2C418)&outFields=*&returnGeometry=true&outSR=4326&f=geojson",
+      "license_or_reuse": "CC BY 4.0 as declared per source feature/item",
+      "source_vintage": "RESOLVE Ecoregions of the World 2017; service dataLastEditDate 2022-01-27; retrieved 2026-10-05T06:01Z",
+      "retrieved_utc": "2026-10-05T06:01Z",
+      "sha256": "dd3b90100f2917d3cc3b4e1b81769674292594003f496acee0e8f73ab7b4299b",
+      "bytes": 9209353,
+      "uncompressed_sha256": "a6918a9961fa6be51802a904ea052ea1ad52d0944e27288d51e9146b6ce1ff52",
+      "uncompressed_bytes": 44945438,
+      "finding_or_limit": "Retains exactly the three claimed native physical source geometries. Original names are Rock and Ice, Kalaallit Nunaat Arctic steppe and Kalaallit Nunaat High Arctic tundra. The parent item extent ends at 70 degrees north; this source cannot substantiate land/ice geography north of that extent. Atlas members are portions and require their own territory/clipping analysis."
     }
   ]
 }

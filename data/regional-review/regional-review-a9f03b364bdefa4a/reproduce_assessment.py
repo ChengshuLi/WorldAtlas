@@ -120,6 +120,14 @@ def main():
         raise SystemExit("AAFC geometries differ at six-decimal-degree ring-normalized screening precision")
     gb_doc = json.loads((PACKET / "sources/geoboundaries-GRL-ADM1-9469f09.geojson").read_text())
     gb_by_id = {f["properties"]["shapeID"]: f for f in gb_doc["features"]}
+    resolve_bytes = gzip.decompress((PACKET / "sources/resolve-scoped-ecoregions-0-417-418.geojson.gz").read_bytes())
+    resolve_doc = json.loads(resolve_bytes)
+    resolve_by_id = {str(f["properties"]["ECO_ID"]): f for f in resolve_doc["features"]}
+    if set(resolve_by_id) != {"0", "417", "418"}:
+        raise SystemExit("RESOLVE retained source query does not contain the exact three scoped source features")
+    resolve_item = json.loads((PACKET / "sources/resolve-item-metadata.json").read_text())
+    if resolve_item.get("extent", [None, None])[1][1] != 70:
+        raise SystemExit("RESOLVE item extent changed; revisit the high-Arctic coverage finding")
     rows = []
     for location_id in scope["member_location_ids"]:
         if location_id not in features:
@@ -139,6 +147,27 @@ def main():
         source_row = aafc.get(source.rsplit(":", 1)[-1]) if source and source.startswith("aafc:ecoregion:") else None
         ecoprov_row = ecoprov.get(round(float(source_row["ECOPROVINCE_ID"]), 1)) if source_row else None
         gb_row = gb_by_id.get(metadata.get("original_id")) if source == "gb:GRL:ADM1" else None
+        resolve_row = resolve_by_id.get(source.rsplit(":", 1)[-1]) if source and source.startswith("resolve:") else None
+        member_ids = metadata.get("source_member_ids", [])
+        member_crosswalk = {"status": "not-applicable", "source_member_ids": member_ids}
+        identity_finding = "source identifier maps to a retained AAFC feature" if source_row else "unverified against a retained named source feature"
+        if resolve_row:
+            member_features = [gb_by_id.get(member_id.rsplit(":", 1)[-1]) for member_id in member_ids if member_id.startswith("gb:GRL:ADM1:")]
+            source_member_id = metadata.get("original_id")
+            expected_id = "gb:GRL:ADM1:" + str(source_member_id)
+            resolve_name = resolve_row["properties"]["ECO_NAME"]
+            member_name = member_features[0]["properties"]["shapeName"] if len(member_features) == 1 and member_features[0] else None
+            expected_name = (member_name + " · " + resolve_name) if member_name else None
+            member_valid = (len(member_ids) == 1 and member_ids[0] == expected_id and len(member_features) == 1
+                            and member_features[0] is not None and props.get("name") == expected_name)
+            member_crosswalk = {"status": "verified" if member_valid else "unverified", "source_member_ids": member_ids,
+                                "original_id": source_member_id, "retained_geoBoundaries_name": member_name,
+                                "expected_derived_name": expected_name, "resolve_source_name": resolve_name}
+            identity_finding = "source feature and derived territorial member/name crosswalk verified" if member_valid else "source membership/name crosswalk unverified"
+        elif gb_row:
+            identity_finding = "retained geoBoundaries original ID and source name verified" if props.get("name") == gb_row["properties"]["shapeName"] else "retained geoBoundaries source name mismatch"
+        elif source_row:
+            identity_finding = "retained AAFC ecoregion ID and source name verified" if props.get("name", "").endswith(source_row["ECOREGION_NAME_EN"]) else "retained AAFC source name mismatch"
         if source_row:
             parent_matches = bool(ecoprov_row and units.get(props.get("parent_id"), {}).get("name") == ecoprov_row["ECOPROVINCE_NAME_EN"])
             assessment = "Location {} ({}) in parent province {}: AAFC ecoregion {} ({}) has source ecoprovince ID {} ({}); the parent name {} the official ecoprovince name. This supports the child's ecological lineage, while this jurisdiction-assigned portion's exact territorial clipping, island completeness and local granularity remain unverified (follow-up #887).".format(
@@ -154,6 +183,13 @@ def main():
                 location_id, props.get("reference_owner"), source or "missing", props.get("name"), source_inventory["component_count"], atlas_inventory["component_count"],
                 source_inventory["vertex_count"], atlas_inventory["vertex_count"],
                 "match" if props.get("name") == gb_row["properties"]["shapeName"] else "differ",
+            )
+        elif resolve_row:
+            source_name = resolve_row["properties"]["ECO_NAME"]
+            atlas_piece_count = sum(1 for item in scope["member_location_ids"] if features[item][0]["properties"].get("metadata", {}).get("source_id") == source)
+            assessment = "Greenland location {} ({}) is a portion of RESOLVE {} ({}) with {} atlas pieces in this scope; its native source geometry has {} components and {} vertices. This is a physical ecoregion source; the source item ends at 70 degrees north, so it cannot demonstrate this or neighboring Arctic locations' completeness above that latitude (follow-up #888).".format(
+                location_id, props.get("reference_owner"), source, source_name, atlas_piece_count,
+                geometry_inventory(resolve_row["geometry"])["component_count"], geometry_inventory(resolve_row["geometry"])["vertex_count"],
             )
         else:
             assessment = "Greenland location {} ({}) named {} cites RESOLVE source {}; its retained item metadata describes physical ecoregions but the item extent ends at 70 degrees north. This specific portion's source geometry, class meaning and completeness cannot be checked from that item snapshot (follow-up #888).".format(
@@ -192,10 +228,14 @@ def main():
             "location_basis": metadata.get("location_basis"),
             "original_id": metadata.get("original_id"),
             "source_member_ids": metadata.get("source_member_ids", []),
+            "source_member_crosswalk": member_crosswalk,
             "geoBoundaries_source_name": gb_row["properties"]["shapeName"] if gb_row else None,
             "geoBoundaries_source_geometry_inventory": geometry_inventory(gb_row["geometry"]) if gb_row else None,
             "geoBoundaries_name_matches": props.get("name") == gb_row["properties"]["shapeName"] if gb_row else None,
             "geoBoundaries_geometry_matches_screen": canonical_polygons(feature["geometry"]) == canonical_polygons(gb_row["geometry"]) if gb_row else None,
+            "resolve_source_name": resolve_row["properties"]["ECO_NAME"] if resolve_row else None,
+            "resolve_source_geometry_inventory": geometry_inventory(resolve_row["geometry"]) if resolve_row else None,
+            "resolve_source_license": resolve_row["properties"].get("LICENSE") if resolve_row else None,
             "parent_overlap_claim": metadata.get("hierarchy_overlap"),
             "reference_territory_overlap_claim": metadata.get("geographic_overlap"),
             "parent_chain": chain,
@@ -206,7 +246,7 @@ def main():
             "parent_name_matches_official_ecoprovince": props.get("parent_id") and units.get(props.get("parent_id"), {}).get("name") == ecoprov_row.get("ECOPROVINCE_NAME_EN") if ecoprov_row else None,
             "aafc_current_source_feature_present": bool(source_row),
             "classification": "insufficient-evidence",
-            "source_identity_finding": "supported" if source else "missing source identity",
+            "source_identity_finding": identity_finding if source else "missing source identity",
             "assessment": assessment,
             "confidence": "insufficient evidence for geographic correctness",
         })
@@ -223,6 +263,9 @@ def main():
     gb_rows = [row for row in rows if row["source_id"] == "gb:GRL:ADM1"]
     if len(gb_rows) != 2 or any(not row["geoBoundaries_name_matches"] for row in gb_rows):
         raise SystemExit("The two scoped Greenland geoBoundaries records did not match their pinned source identities")
+    resolve_rows = [row for row in rows if row["source_id"].startswith("resolve:")]
+    if len(resolve_rows) != 9 or any(row["source_member_crosswalk"]["status"] != "verified" for row in resolve_rows):
+        raise SystemExit("Derived Greenland RESOLVE rows do not all map their original IDs, source-member IDs and names to retained geoBoundaries features")
 
     province_members = {}
     for row in rows:
@@ -245,9 +288,10 @@ def main():
             )
         else:
             grl_names = sorted({row["geoBoundaries_source_name"] for row in member_rows if row["geoBoundaries_source_name"]})
+            physical_names = sorted({row["resolve_source_name"] for row in member_rows if row["resolve_source_name"]})
             grl_sources = sorted({row["source_id"] for row in member_rows})
-            finding = "Province {} ({}), children {}: the {} scoped locations trace to Greenland source identities {}; matching retained geoBoundaries names are {}. This supports the named-source relationship for the listed children, but source/atlas boundary transformation, whether the group is administrative versus physical, and complete coverage require further review (follow-up #888).".format(
-                unit_id, unit["name"], ", ".join(sorted(entry["location_ids"])), len(member_rows), ", ".join(grl_sources), ", ".join(grl_names) if grl_names else "none directly represented"
+            finding = "Province {} ({}), children {}: the {} scoped locations trace to Greenland identities {}; geoBoundaries name match(es): {}; RESOLVE physical classes represented: {}. This supports the listed lineage but source/atlas boundary transformation, administrative versus physical tier fit, and coverage completeness remain open (follow-up #888).".format(
+                unit_id, unit["name"], ", ".join(sorted(entry["location_ids"])), len(member_rows), ", ".join(grl_sources), ", ".join(grl_names) if grl_names else "none directly represented", ", ".join(physical_names) if physical_names else "none"
             )
         province_assessment.append({
             "id": unit_id, "name": unit["name"], "parent_area_id": unit.get("parent_id"),
