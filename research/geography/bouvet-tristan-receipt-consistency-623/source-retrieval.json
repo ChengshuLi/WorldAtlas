@@ -1,0 +1,13 @@
+{
+  "url": "https://www.tristandc.com/settlement.php",
+  "effective_url": "https://www.tristandc.com/settlement.php",
+  "retrieved_at": "2026-10-04T23:48:59Z",
+  "http_status": 200,
+  "bytes": 15516,
+  "sha256": "7a5940df57e7fe521e771f4e195385f3eb6901a71e0102b43b571d5fa90ddeee",
+  "hash_kind": "response-body-bytes",
+  "original_response_bytes_retained": false,
+  "terms_status": "unknown; page inspected for this bounded receipt but HTML is not redistributed",
+  "restoration": "curl --fail --location --silent --show-error --output /tmp/tristan-settlement-current.html https://www.tristandc.com/settlement.php && wc -c /tmp/tristan-settlement-current.html && shasum -a 256 /tmp/tristan-settlement-current.html",
+  "limit": "A new 2026-10-04 response is a separate observation, not a recovery or repair of the malformed 63-character historical digest."
+}
