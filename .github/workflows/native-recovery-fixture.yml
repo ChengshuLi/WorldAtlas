@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - scripts/current-postgres-recovery.mjs
+      - scripts/compact-recovery-profile.mjs
       - scripts/test-current-postgres-recovery-native.mjs
       - .github/workflows/native-recovery-fixture.yml
 permissions:

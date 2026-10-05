@@ -5,6 +5,8 @@ import {randomUUID,randomBytes,createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
 import {recoveryImage,readRecoveryInventory,assertRestoredInventory,isolatedRestoreSQL,isolatedOriginalChecks,isolatedRecoveryBootstrapSQL,isolatedDatabaseACLList,isolatedDatabaseACLSQL,restoreIsolatedDatabaseACL} from './current-postgres-recovery.mjs';
 import {storageExportV2Contract} from '../hosted/storage-export-v2-contract.js';
+import {compactRecoveryProfile,recoveryForwardContract} from './compact-recovery-profile.mjs';
+import {rehearseCompactMembershipStorage} from './compact-membership-storage.mjs';
 const sha=x=>createHash('sha256').update(x).digest('hex');
 const native=(args,input)=>execFileSync('docker',args,{input,timeout:180000,maxBuffer:64*1024*1024,stdio:['pipe','pipe','pipe']});
 let name;const receipt={version:1,fixture_only:true,production_access:false,image:recoveryImage,status:'failed'};
@@ -13,6 +15,21 @@ async function start(){name='atlas-sql-fixture-'+randomUUID();native(['run','-d'
 const command=(args,input)=>native(['exec','-i',name,...args],input);
 const sql=value=>command(['psql','-X','-Atq','-U','postgres','-d','neondb','-v','ON_ERROR_STOP=1'],value);
 const query=async value=>JSON.parse(sql('SET ROLE neondb_owner; SELECT coalesce(json_agg(row_to_json(q)),\'[]\'::json) FROM ('+value+') q;').toString());
+// One real native session owns the rehearsal transaction and advisory lock.
+// Independent CLI round trips would not preserve that transaction.
+async function compactFixture({failAfterCopy=false}={}){
+ const child=spawn('docker',['exec','-i',name,'psql','-X','-Atq','-U','postgres','-d','neondb','-v','ON_ERROR_STOP=1'],{stdio:['pipe','pipe','pipe']});
+ child.stdin.on('error',()=>{});let sessionError='';child.stderr.on('data',chunk=>{sessionError=(sessionError+chunk).slice(-4096);});
+ let pending,buffer='',closed=false;
+ const finished=new Promise(resolve=>child.once('close',()=>{closed=true;resolve();}));
+ const rejectPending=()=>{if(pending){clearTimeout(pending.timer);pending.reject(Error('fixture native session failed: '+sessionError));pending=null;}};
+ child.on('error',rejectPending);child.on('close',rejectPending);
+ child.stdout.on('data',chunk=>{buffer+=chunk;const at=pending?buffer.indexOf(pending.marker+'\n'):-1;if(at>=0){const value=buffer.slice(0,at).trim(),row=pending;buffer=buffer.slice(at+row.marker.length+1);pending=null;clearTimeout(row.timer);row.resolve(value);}});
+ const exec=value=>new Promise((resolve,reject)=>{if(closed||child.stdin.destroyed){reject(Error('fixture native session already closed'));return;}assert.ok(!pending);const marker='end_'+randomUUID().replaceAll('-','');pending={marker,resolve,reject,timer:setTimeout(()=>{child.kill();rejectPending();},180000)};child.stdin.write(value+';\n\\echo '+marker+'\n');});
+ const tx={exec,query:async(value,params=[])=>{assert.deepEqual(params,[]);if(!/^\s*(SELECT|WITH)\b/i.test(value)){await exec(value);return {rows:[]};}return {rows:JSON.parse(await exec("SELECT coalesce(json_agg(row_to_json(q)),'[]'::json) FROM ("+value+') q'))};}};
+ try{await exec('SET ROLE neondb_owner');await rehearseCompactMembershipStorage({transaction:async callback=>{await exec('BEGIN');try{const result=await callback(tx);await exec('COMMIT');return result;}catch(error){try{await exec('ROLLBACK');}catch{}throw error;}}},{copyOnServer:true,afterCopy:failAfterCopy?tx=>tx.query('SELECT 1/0'):undefined});}
+ finally{if(!closed&&!child.stdin.destroyed)child.stdin.end('\\q\n');await finished;}
+}
 try{
  await start();command(['psql','-X','-U','postgres','-d','postgres','-v','ON_ERROR_STOP=1'],isolatedRecoveryBootstrapSQL);
  sql('GRANT ALL ON DATABASE neondb TO neon_superuser; ALTER DEFAULT PRIVILEGES FOR ROLE cloud_admin IN SCHEMA public GRANT ALL ON TABLES TO neon_superuser WITH GRANT OPTION; ALTER DEFAULT PRIVILEGES FOR ROLE cloud_admin IN SCHEMA public GRANT ALL ON SEQUENCES TO neon_superuser WITH GRANT OPTION;');
@@ -51,7 +68,50 @@ cleanup();await start();command(['psql','-X','-U','postgres','-d','postgres','-v
  const aclDirectory=fs.mkdtempSync('/tmp/atlas-acl-fixture-');try{receipt.database_acl_recovery=restoreIsolatedDatabaseACL(name,dump,aclDirectory);assert.equal(receipt.database_acl_recovery.archive_sha256,sha(dump));}finally{fs.rmSync(aclDirectory,{recursive:true});}
  sql(isolatedOriginalChecks(fs.readFileSync('postgres/schema.sql')));const restored=await readRecoveryInventory(query);assertRestoredInventory(before,restored,after);assert.equal(acl(),originalACL);receipt.database_and_provider_default_acls_preserved=true;
  assert.equal((await query('SELECT metadata FROM atlas_attribute_records'))[0].metadata,'{ "original" : "claim" }');assert.equal((await query('SELECT metadata FROM atlas_names'))[0].metadata,'{ "original" : "name" }');assert.equal((await query('SELECT counts FROM atlas_ingestions'))[0].counts,'{ "original" : 1 }');
- sql('SET ROLE neondb_owner; REVOKE SELECT ON atlas_ingestions FROM worldatlas_app;');const corrupted=await readRecoveryInventory(query);assert.throws(()=>assertRestoredInventory(before,corrupted,after));
+ // Current compact profile: synthetic rows only, not a geographic certificate.
+ // Disable only isolated fixture USER guards while installing raw test data;
+ // constraints/FKs remain active, and all guards are re-enabled before capture.
+ sql(`SET ROLE neondb_owner;
+ ALTER TABLE atlas_entities DISABLE TRIGGER USER; ALTER TABLE atlas_geographic_releases DISABLE TRIGGER USER; ALTER TABLE atlas_geographic_memberships DISABLE TRIGGER USER;
+ INSERT INTO atlas_entities(id,kind,name,source_id,is_example) VALUES('fixture-root','continent','Fixture root','fixture-source',1),('fixture-leaf','location','Fixture leaf','fixture-source',1);
+ INSERT INTO atlas_geographic_releases(id,source_id,version,reference_date,hierarchy_sha256,footprints_sha256,membership_sha256,location_ids_sha256,changes_sha256,expected_counts) VALUES('fixture-release','fixture-source',1,'synthetic',repeat('a',64),repeat('b',64),repeat('c',64),repeat('d',64),repeat('e',64),'{}');
+ INSERT INTO atlas_geographic_memberships(release_id,entity_id,parent_id,reference_name,active,source_id,evidence) VALUES('fixture-release','fixture-root',NULL,'Root',1,'fixture-source','{ "raw" : 1 }'),('fixture-release','fixture-leaf','fixture-root',NULL,0,'fixture-source','{"raw":1}');
+ ALTER TABLE atlas_entities ENABLE TRIGGER USER; ALTER TABLE atlas_geographic_releases ENABLE TRIGGER USER; ALTER TABLE atlas_geographic_memberships ENABLE TRIGGER USER;
+ ALTER TABLE worldatlas_schema_migrations DISABLE TRIGGER USER; TRUNCATE worldatlas_schema_migrations; ALTER TABLE worldatlas_schema_migrations ENABLE TRIGGER USER;`);
+ for(const pin of storageExportV2Contract.postgres_migrations.slice(1)){
+  const id=pin.path.split('/').at(-1).replace('.sql',''),contract=await recoveryForwardContract(query,id);
+  sql(`SET ROLE neondb_owner; INSERT INTO worldatlas_schema_migrations VALUES('${id}','${pin.sha256}','${storageExportV2Contract.postgres_migrations[0].sha256}',repeat('c',64),repeat('d',64),'${contract}',123456789);`);
+ }
+ const failedSessionStarted=Date.now();await assert.rejects(()=>compactFixture({failAfterCopy:true}),/fixture native session failed/);assert.ok(Date.now()-failedSessionStarted<10000);
+ assert.equal((await query("SELECT to_regclass('public.worldatlas_membership_rows')::text name"))[0].name,null);receipt.compact_failed_session_rolled_back_and_closed=true;
+ await compactFixture();
+ await assert.rejects(()=>readRecoveryInventory(query,{profile:compactRecoveryProfile}),/incomplete-owner-and-factual-inventory/);
+ sql('SET ROLE neondb_owner; DROP TABLE worldatlas_memberships_original_v1;');
+ const compactBefore=await readRecoveryInventory(query,{profile:compactRecoveryProfile});
+ assert.equal(compactBefore.collections.geographic_memberships.count,2);
+ assert.equal(compactBefore.compact_storage.physical.worldatlas_membership_evidence.count,2);
+ const compactDump=command(['pg_dump','-U','postgres','-d','neondb','--format=custom','--schema=public']);
+ const compactAfter=await readRecoveryInventory(query,{profile:compactRecoveryProfile});
+ cleanup();await start();command(['psql','-X','-U','postgres','-d','postgres','-v','ON_ERROR_STOP=1'],isolatedRecoveryBootstrapSQL);sql('DROP SCHEMA public;');
+ command(['psql','-X','-U','postgres','-d','neondb','--single-transaction','-v','ON_ERROR_STOP=1'],isolatedRestoreSQL(command(['pg_restore','--file=-'],compactDump)));
+ const compactACLDirectory=fs.mkdtempSync('/tmp/atlas-compact-acl-fixture-');try{restoreIsolatedDatabaseACL(name,compactDump,compactACLDirectory);}finally{fs.rmSync(compactACLDirectory,{recursive:true});}
+ sql(isolatedOriginalChecks(fs.readFileSync('postgres/schema.sql')));
+ const compactRestored=await readRecoveryInventory(query,{profile:compactRecoveryProfile});
+ for(const row of compactRestored.sequence_permissions.filter(row=>row.name.startsWith('worldatlas_membership_')))assert.deepEqual(row.acl.map(grant=>grant.privilege),['SELECT','UPDATE','USAGE']);
+ // Bounded fixture-only diagnostics contain hashes/state, never real source data.
+ for(const key of Object.keys(compactBefore))if(key!=='identity'&&JSON.stringify(compactBefore[key])!==JSON.stringify(compactRestored[key])){
+  const summarize=value=>key==='compact_storage'?{catalog_sha256:sha(JSON.stringify(value.catalog)),physical:value.physical,sequences:value.sequences}:value;
+  console.log('compact fixture parity difference '+key+' '+JSON.stringify({before:summarize(compactBefore[key]),restored:summarize(compactRestored[key])}).slice(0,12000));
+ }
+ assertRestoredInventory(compactBefore,compactRestored,compactAfter);
+ assert.deepEqual((await query('SELECT evidence FROM atlas_geographic_memberships ORDER BY entity_id')).map(row=>row.evidence),['{"raw":1}','{ "raw" : 1 }']);
+ const badSequence=structuredClone(compactRestored);badSequence.compact_storage.sequences.worldatlas_membership_evidence_key_seq.last_value++;
+ assert.throws(()=>assertRestoredInventory(compactBefore,badSequence,compactAfter));
+ sql('SET ROLE neondb_owner; GRANT SELECT ON worldatlas_membership_evidence TO worldatlas_app;');
+ await assert.rejects(()=>readRecoveryInventory(query,{profile:compactRecoveryProfile}),/Compact private storage privileges are exposed/);
+ sql('SET ROLE neondb_owner; REVOKE SELECT ON worldatlas_membership_evidence FROM worldatlas_app;');
+ receipt.compact={status:'passed',profile:compactRecoveryProfile,dump:{bytes:compactDump.length,sha256:sha(compactDump)},catalog_sha256:compactBefore.catalog_sha256,logical_memberships:compactBefore.collections.geographic_memberships,physical:compactBefore.compact_storage.physical,sequences:compactBefore.compact_storage.sequences,raw_spelling_preserved:true,retained_original_rejected:true,private_acl_corruption_rejected:true,sequence_corruption_rejected:true};
+ sql('SET ROLE neondb_owner; REVOKE SELECT ON atlas_ingestions FROM worldatlas_app;');const corrupted=await readRecoveryInventory(query,{profile:compactRecoveryProfile});assert.throws(()=>assertRestoredInventory(compactBefore,corrupted,compactAfter));
  // A fresh target must reject a truncated native archive, not certify a partial restore.
  cleanup();await start();command(['psql','-X','-U','postgres','-d','postgres','-v','ON_ERROR_STOP=1'],isolatedRecoveryBootstrapSQL);sql('DROP SCHEMA public;');assert.throws(()=>command(['pg_restore','-U','postgres','-d','neondb','--single-transaction','--exit-on-error'],dump.subarray(0,Math.floor(dump.length/2))));
  Object.assign(receipt,{status:'passed',catalog_sha256:before.catalog_sha256,dump:{bytes:dump.length,sha256:sha(dump)},collections:before.collections,owner_registry_sha256:before.owner_registry_sha256,raw_text_preserved:true,table_acl_corruption_rejected:true,truncated_archive_rejected:true});

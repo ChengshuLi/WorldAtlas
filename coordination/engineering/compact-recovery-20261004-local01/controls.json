@@ -1,0 +1,29 @@
+{
+  "method_id": "compact-native-recovery",
+  "kind": "code",
+  "outcome": "passed",
+  "positive_controls": [
+    "Original window, reservation and encrypted envelope continue passing",
+    "Exact compact-only base2 marker and Cloudflare delivery/window pass",
+    "Physical projection includes raw evidence and native dictionary keys"
+  ],
+  "negative_controls": [
+    "Unknown/transitional profile and migration inventory rejected",
+    "Changed public/private pins and counts rejected",
+    "Unsettled/unclean/wrong-delivery records and changed marker rejected",
+    "Public mutations not returning read-only rejection fail",
+    "Changed physical digest, sequence position and view/function ACL inventories rejected"
+  ],
+  "limits": [
+    "Local/native results are synthetic fixture controls, not current production recovery certification",
+    "Current production backup/isolated restore/recipient decryption remain publisher acceptance under parent51"
+  ],
+  "native_fixture": {
+    "outcome": "passed",
+    "run_url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37263053473",
+    "tested_head": "09cf867c3927529a33194d1004adf0f79607ab90",
+    "receipt_path": "coordination/engineering/compact-recovery-20261004-local01/native-fixture-receipt.json",
+    "recipe_path": "scripts/test-current-postgres-recovery-native.mjs",
+    "recipe_sha256": "c2807cd2eb1cc0f917bac3ff1459fe8526da8582cae3096a4cf2161fab95b727"
+  }
+}

@@ -1,0 +1,192 @@
+{
+  "version": 1,
+  "fixture_only": true,
+  "production_access": false,
+  "image": "postgres@sha256:77f585114c32fbca283dc835b0596f4e52b51b4c6662d7810b2f4084f60a1873",
+  "status": "passed",
+  "session_lock_loss_and_release_detected": true,
+  "production_sized_archive_transport": true,
+  "large_toc_stdin_probe": {
+    "status": "failed",
+    "code": "EPIPE",
+    "exit_status": 0
+  },
+  "database_acl_requires_create_listing": true,
+  "timed_out_named_client_absence_confirmed": true,
+  "database_acl_recovery": {
+    "input": "unchanged-isolated-tmpfs-file",
+    "archive_bytes": 23920720,
+    "archive_sha256": "4c9b8af43cce76e8a2f4c74daf3f2a4f2830c726e39ef909ed3790f2da7350ea",
+    "archive_readback_verified": true
+  },
+  "database_and_provider_default_acls_preserved": true,
+  "compact_failed_session_rolled_back_and_closed": true,
+  "compact": {
+    "status": "passed",
+    "profile": "compact-only-v4-base2",
+    "dump": {
+      "bytes": 23949524,
+      "sha256": "81ca80b33a71f43a1e95c57c9b74aaf730119ccd058e127d3a0a91ed333ef016"
+    },
+    "catalog_sha256": "037677e0a754be6aae3322922afdac57cd85c46e4bb1d7b0f261d7314494f550",
+    "logical_memberships": {
+      "count": 2,
+      "ordered_rows_sha256": "07c76fdfd2ed0f3839dc931162d631418293066454d3aeccfb3132608494080e",
+      "hash_kind": "sha256-pg-json-text-row-digests-c-key-order-v1"
+    },
+    "physical": {
+      "worldatlas_membership_release_keys": {
+        "count": 1,
+        "ordered_rows_sha256": "1afe0fc0530d272cecc29646f5248233f489c866383056d46616394a73735774",
+        "hash_kind": "sha256-pg-json-text-row-digests-numeric-key-order-v1"
+      },
+      "worldatlas_membership_entity_keys": {
+        "count": 2,
+        "ordered_rows_sha256": "ec44d83b4ad31ba81dfd3d2545a2d5e9974460f9eca6554f561cddee3793d85a",
+        "hash_kind": "sha256-pg-json-text-row-digests-numeric-key-order-v1"
+      },
+      "worldatlas_membership_source_keys": {
+        "count": 1,
+        "ordered_rows_sha256": "1e04e7d701d5418ee9b3bb701cade9f8d2a88bf011b3deb30d42e499594d6a09",
+        "hash_kind": "sha256-pg-json-text-row-digests-numeric-key-order-v1"
+      },
+      "worldatlas_membership_evidence": {
+        "count": 2,
+        "ordered_rows_sha256": "9d491ab714c3ef0c1104b008b95f513c42a61662053b7b0b100299ea78743637",
+        "hash_kind": "sha256-pg-json-text-row-digests-numeric-key-order-v1"
+      },
+      "worldatlas_membership_rows": {
+        "count": 2,
+        "ordered_rows_sha256": "f2bd0205f998aacc91ff5c22f991d5465b9a5a5a5e9b42f5446eb5f4e1eaf437",
+        "hash_kind": "sha256-pg-json-text-row-digests-numeric-key-order-v1"
+      }
+    },
+    "sequences": {
+      "worldatlas_membership_release_keys_key_seq": {
+        "last_value": 1,
+        "is_called": true
+      },
+      "worldatlas_membership_entity_keys_key_seq": {
+        "last_value": 2,
+        "is_called": true
+      },
+      "worldatlas_membership_source_keys_key_seq": {
+        "last_value": 1,
+        "is_called": true
+      },
+      "worldatlas_membership_evidence_key_seq": {
+        "last_value": 2,
+        "is_called": true
+      }
+    },
+    "raw_spelling_preserved": true,
+    "retained_original_rejected": true,
+    "private_acl_corruption_rejected": true,
+    "sequence_corruption_rejected": true
+  },
+  "catalog_sha256": "9079e934e313d3f40a0f239664762d0d1053f020bfda4746b14ed56b155729db",
+  "dump": {
+    "bytes": 23920720,
+    "sha256": "4c9b8af43cce76e8a2f4c74daf3f2a4f2830c726e39ef909ed3790f2da7350ea"
+  },
+  "collections": {
+    "sources": {
+      "count": 5201,
+      "ordered_rows_sha256": "2221e5fc2edb8b09a00f1158e88c7792c818f10e13beb62f0170942b9fc4964e"
+    },
+    "entity_types": {
+      "count": 6,
+      "ordered_rows_sha256": "0dc7090c12425d1ec038b28dfc4730dd8f7d2e299443e5cf2f655ded4c7cafc3"
+    },
+    "entities": {
+      "count": 6,
+      "ordered_rows_sha256": "741ed543f0d54179e4ca1cf5cd573167c42276c5726f6e81c340cbd2d6a48d08"
+    },
+    "categories": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "records": {
+      "count": 1,
+      "ordered_rows_sha256": "b170b317a8f5dc6826fb1c39aaf8a5064d1bc82de7602b7f95f4529f4f99c6c2"
+    },
+    "names": {
+      "count": 1,
+      "ordered_rows_sha256": "8631b3b2ab862b8480465a4405806e9828dfa781214fdaf440a85584fd94dbec"
+    },
+    "relationships": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "media": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "media_links": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "retirements": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "ingestions": {
+      "count": 1,
+      "ordered_rows_sha256": "e3d468bad61351124e0d7062cca7b26979acef3badea1b1163bea4ededea83b0"
+    },
+    "geographic_releases": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "geographic_memberships": {
+      "count": 0,
+      "ordered_rows_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "sha256-pg-json-text-row-digests-c-key-order-v1"
+    },
+    "geographic_changes": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "temporal_geography_validations": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "geographic_membership_records": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "geographic_existence_records": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "temporal_geography_retirements": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "footprint_versions": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "footprint_version_objects": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "footprint_selection_validations": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "geographic_footprint_records": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "footprint_retirements": {
+      "count": 0,
+      "ordered_rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    }
+  },
+  "owner_registry_sha256": "77c2318bf6bdc5f60b915ec9e92ea5bd9a74fba0a16ec9a2b47a20d8265c854a",
+  "raw_text_preserved": true,
+  "table_acl_corruption_rejected": true,
+  "truncated_archive_rejected": true,
+  "isolated_targets_removed": true
+}

@@ -3,12 +3,14 @@ import path from 'node:path';
 import {execFileSync,spawn} from 'node:child_process';
 import {createHash,randomUUID} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
-import {storageExportV2Contract,storageExportV2Definitions,storageExportV2Collections,v2MarkerIdentity} from '../hosted/storage-export-v2-contract.js';
+import {storageExportV2Contract,storageExportV2Definitions,storageExportV2Collections} from '../hosted/storage-export-v2-contract.js';
 import {storageCatalogV2} from '../hosted/storage-export-v2.js';
 import {storageRowsHashV2Ordered} from './restore-postgres-storage-v2.mjs';
 import {readClaim,workSpec,githubPages,githubAPI} from './issue-claim-contract.mjs';
 import {expectedNeonProjectId,verifyNeonProject} from './verify-neon-project.mjs';
 import {backupRecipientFingerprint,sealRecoveryBackup} from './recovery-backup-envelope.mjs';
+import {originalRecoveryProfile,compactRecoveryProfile,compactRecoveryTables,recoveryProfileForMarker,readCompactRecoveryStorage,verifyCompactRecoveryRegistry} from './compact-recovery-profile.mjs';
+import {readPublicationState,marker as publicationMarker} from './publication-plan.mjs';
 
 export const recoveryImage='postgres@sha256:77f585114c32fbca283dc835b0596f4e52b51b4c6662d7810b2f4084f60a1873';
 export const recoveryWorkflow='.github/workflows/current-postgres-recovery.yml';
@@ -41,14 +43,46 @@ export function validateRecoveryWindow(window,claim,{head,toolSHA,now=Date.now()
   need(/^[a-f0-9]{64}$/.test(window.reservation_scope_sha256??'')&&sha(JSON.stringify(spec))===window.reservation_scope_sha256,'changed-operation-scope');
   need(/^https:\/\/github\.com\/ChengshuLi\/WorldAtlas\/issues\/(51|714)#issuecomment-[1-9]\d*$/.test(operation.handoff_receipt_url??'')&&handoffReceipt?.html_url===operation.handoff_receipt_url&&handoffReceipt.user?.type==='User'&&['OWNER','MEMBER','COLLABORATOR'].includes(handoffReceipt.author_association)&&String(handoffReceipt.body??'').trim().length>0,'missing-authorized-implementation-handoff');
  }
- need(window.site?.project_id==='appgprj_6abdf87277c08191bce4a22b8dfb25db'&&Number.isSafeInteger(window.site.version)&&window.site.version>0&&typeof window.site.deployment_id==='string'&&window.site.deployment_id.startsWith('appgdep_'),'unpinned-site-window');
+ if(window.hosting!==undefined){
+  const host=window.hosting;
+  need(window.site===undefined&&host?.kind==='cloudflare'&&host.origin==='https://worldatlas-explorer.chengshu-worldatlas.workers.dev'&&/^[a-f0-9-]{36}$/.test(host.worker_version??'')&&Number.isSafeInteger(host.deployment_id)&&host.deployment_id>0&&/^[a-f0-9]{40}$/.test(host.primary_commit??'')&&/^[a-f0-9]{64}$/.test(host.package_inventory_sha256??'')&&/^https:\/\/github\.com\/ChengshuLi\/WorldAtlas\/issues\/[1-9]\d*#issuecomment-[1-9]\d*$/.test(host.acceptance_url??'')&&/^https:\/\/github\.com\/ChengshuLi\/WorldAtlas\/issues\/[1-9]\d*#issuecomment-[1-9]\d*$/.test(host.result_url??''),'unpinned-cloudflare-window');
+  need(Number.isSafeInteger(window.registry_deployment_id)&&window.registry_deployment_id>0&&/^[a-f0-9-]{36}$/.test(window.operation_id??''),'unregistered-recovery-window');
+ }else need(window.site?.project_id==='appgprj_6abdf87277c08191bce4a22b8dfb25db'&&Number.isSafeInteger(window.site.version)&&window.site.version>0&&typeof window.site.deployment_id==='string'&&window.site.deployment_id.startsWith('appgdep_'),'unpinned-site-window');
  need(window.read_only===true&&window.drain_verified===true&&window.restore_writes_operator===window.operator_worker_id&&typeof window.rollback_receipt_url==='string'&&window.rollback_receipt_url.startsWith('https://github.com/ChengshuLi/WorldAtlas/'),'unsettled-maintenance-window');
- const marker=window.source_marker;
- need(marker?.version===2&&marker.backend==='postgres'&&marker.read_only===true&&!marker.legacy_projection&&Number.isSafeInteger(marker.revision)&&marker.revision>=0&&same(marker.contract,storageExportV2Contract),'unsupported-source-contract');
- need(['fingerprint','catalog_sha256','geographic_releases_sha256','footprint_versions_sha256'].every(k=>/^[a-f0-9]{64}$/.test(marker[k]??'')),'incomplete-source-hashes');
- need(same(Object.keys(marker.counts??{}).sort(),[...storageExportV2Collections].sort())&&storageExportV2Collections.every(k=>Number.isSafeInteger(marker.counts[k])&&marker.counts[k]>=0),'incomplete-source-counts');
- need(marker.catalog_sha256===storageExportV2Contract.postgres_catalog_sha256&&sha(JSON.stringify(v2MarkerIdentity(marker)))===marker.fingerprint,'invalid-source-marker');
+ recoveryProfileForMarker(window.source_marker);
  return window;
+}
+
+/** Existing Site windows remain historical attestations. New Cloudflare windows
+ * bind the actual provider delivery, not an invented Site version. */
+export async function verifyRecoveryHosting(window,api,fetcher=fetch){
+ if(window.hosting===undefined)return {kind:'site',publisher_attested:true};
+ const host=window.hosting,prefix='/repos/'+repo;
+ const deployment=await api(prefix+'/deployments/'+host.deployment_id),op=deployment.payload?.worldatlas_cloudflare;
+ need(deployment.environment==='worldatlas-cloudflare-public'&&deployment.task==='worldatlas-cloudflare-public'&&op?.primary_commit===host.primary_commit&&op.package_inventory_sha256===host.package_inventory_sha256&&op.read_only===true&&op.public_reads===true&&op.database_writes===false,'hosting-delivery-registry-mismatch');
+ const statuses=(await githubPages(api,prefix+'/deployments/'+host.deployment_id+'/statuses')).sort((a,b)=>b.id-a.id);
+ need(statuses[0]?.state==='success'&&statuses[0].log_url===host.result_url,'hosting-delivery-unsettled');
+ const comment=await api(prefix+'/issues/comments/'+host.result_url.match(/issuecomment-(\d+)$/)[1]);
+ need(comment.html_url===host.result_url&&comment.user?.type==='User'&&['OWNER','MEMBER','COLLABORATOR'].includes(comment.author_association),'untrusted-hosting-result');
+ const result=publicationMarker(comment.body,'worldatlas-cloudflare-result:v1');
+ need(result.deployment_id===host.deployment_id&&result.operation_id===op.operation_id&&result.primary_commit===host.primary_commit&&result.worker_version===host.worker_version&&result.state==='verified'&&result.cleanup_confirmed===true&&result.public_reads===true&&result.database_writes_enabled===false&&result.acceptance_url===host.acceptance_url,'unverified-hosting-result');
+ const state=await readPublicationState(api);
+ need(state.unsettled.length===1&&state.unsettled[0].deployment_id===window.registry_deployment_id,'overlapping-publisher-recovery');
+ const registered=state.unsettled[0];
+ need(registered.operation_id===window.operation_id&&registered.kind==='recovery'&&registered.publisher_worker_id===window.operator_worker_id&&registered.primary_commit===window.primary_main_commit&&registered.issues.includes(window.reservation_issue??51),'recovery-operation-mismatch');
+ for(const other of (await githubPages(api,prefix+'/deployments')).filter(d=>d.environment.startsWith('worldatlas-cloudflare'))){
+  const states=(await githubPages(api,prefix+'/deployments/'+other.id+'/statuses')).sort((a,b)=>b.id-a.id);
+  need(['success','failure','error'].includes(states[0]?.state),'overlapping-cloudflare-operation');
+ }
+ const version=window.source_marker.version===4?4:2;
+ const response=await fetcher(host.origin+'/api/storage/v'+version+'/export-marker',{redirect:'error',signal:AbortSignal.timeout(30000)});
+ const observed=await boundedOwnerJSON(response);
+ need(same(observed,window.source_marker),'served-recovery-marker-drift');
+ for(const method of ['POST','PUT','PATCH','DELETE']){
+  const probe=await fetcher(host.origin+'/api/records/import',{method,redirect:'error',signal:AbortSignal.timeout(15000)});
+  need(probe.status===503,'public-recovery-writes-enabled');try{await probe.body?.cancel();}catch{}
+ }
+ return {kind:'cloudflare',worker_version:host.worker_version,deployment_id:host.deployment_id,source_fingerprint:observed.fingerprint,public_mutations_rejected:true};
 }
 
 /** Load fresh canonical reservations and the bounded publisher operation scope.
@@ -83,11 +117,17 @@ export function tableReadSQL(collection){
 }
 const inventorySQL="SELECT table_name FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE' ORDER BY table_name";
 const registrySQL='SELECT migration_id,file_sha256,core_schema_sha256,source_snapshot_fingerprint,base_guards_sha256,installed_contract_sha256,applied_at FROM worldatlas_schema_migrations ORDER BY migration_id COLLATE "C"';
+// pg_dump omits explicit ACL arrays equal to the object default. Native restore
+// may therefore use NULL for the exact same grants. Compare every expanded
+// grant/grantor/grantee/grant option in stable role-name order, not array spelling.
+const canonicalACL=(acl,owner,type)=>`(SELECT coalesce(json_agg(row_to_json(grants) ORDER BY grantor COLLATE "C",grantee COLLATE "C",privilege COLLATE "C",grantable),'[]'::json) FROM
+ (SELECT pg_get_userbyid(a.grantor) grantor,CASE WHEN a.grantee=0 THEN 'PUBLIC' ELSE pg_get_userbyid(a.grantee) END grantee,a.privilege_type privilege,a.is_grantable grantable
+ FROM aclexplode(coalesce(${acl},acldefault('${type}'::"char",${owner}))) a) grants)`;
 const permissionSQL=`SELECT c.relname object_name,c.relkind object_kind,pg_get_userbyid(c.relowner) owner,
  has_table_privilege('worldatlas_app',c.oid,'SELECT') app_select,has_table_privilege('worldatlas_app',c.oid,'INSERT') app_insert,
  has_table_privilege('worldatlas_app',c.oid,'UPDATE') app_update,has_table_privilege('worldatlas_app',c.oid,'DELETE') app_delete,
- has_table_privilege('worldatlas_app',c.oid,'TRUNCATE') app_truncate,c.relacl::text acl
- FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='public' AND c.relkind='r' ORDER BY c.relname`;
+ has_table_privilege('worldatlas_app',c.oid,'TRUNCATE') app_truncate,${canonicalACL('c.relacl','c.relowner','r')} acl
+ FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='public' AND c.relkind IN ('r','v') ORDER BY c.relname`;
 
 /** Native PostgreSQL JSON scalar spelling is used only for comparison between
  * the same source and isolated native major. Raw evidence remains TEXT; each
@@ -97,12 +137,15 @@ export function nativeMembershipDigestSQL(){
  return `SELECT count(*)::bigint rows,encode(sha256(convert_to(coalesce(string_agg(encode(sha256(convert_to(row_to_json(q)::text,'UTF8')),'hex'),'' ORDER BY ${order}),''),'UTF8')),'hex') ordered_rows_sha256 FROM (${tableReadSQL('geographic_memberships')}) q`;
 }
 
-export async function readRecoveryInventory(query,{directory}={}){
- const names=await query(inventorySQL),expected=[...storageExportV2Collections.map(k=>storageExportV2Definitions[k].table),'worldatlas_schema_migrations'].sort();
+export async function readRecoveryInventory(query,{directory,profile=originalRecoveryProfile}={}){
+ need([originalRecoveryProfile,compactRecoveryProfile].includes(profile),'unsupported-recovery-profile');
+ const compact=profile===compactRecoveryProfile;
+ const names=await query(inventorySQL),expected=[...storageExportV2Collections.filter(k=>!compact||k!=='geographic_memberships').map(k=>storageExportV2Definitions[k].table),'worldatlas_schema_migrations',...(compact?Object.keys(compactRecoveryTables):[])].sort();
  need(same(names.map(r=>r.table_name),expected),'incomplete-owner-and-factual-inventory');
  const identity=(await query("SELECT current_database() database_name,current_user role_name,current_schema() schema_name,current_setting('server_version_num') version"))[0];
  need(identity?.role_name==='neondb_owner'&&identity.schema_name==='public'&&/^18\d{4}$/.test(String(identity.version)),'unexpected-postgres-owner-or-version');
- const catalog=await storageCatalogV2({dialect:'postgres',prepare:sql=>({all:async()=>({results:await query(sql)})})});
+ const compactStorage=compact?await readCompactRecoveryStorage(query):null;
+ const catalog=compactStorage?.catalog??await storageCatalogV2({dialect:'postgres',prepare:sql=>({all:async()=>({results:await query(sql)})})});
  const proofs={};let revision=0;
  for(const collection of storageExportV2Collections){
   const metrics=(await query(`SELECT count(*) rows,coalesce(sum(octet_length(row_to_json(q)::text)),0) bytes,coalesce(max(octet_length(row_to_json(q)::text)),0) largest FROM (${tableReadSQL(collection)}) q`))[0];
@@ -122,13 +165,17 @@ export async function readRecoveryInventory(query,{directory}={}){
   if(directory)fs.writeFileSync(path.join(directory,collection+'.json'),JSON.stringify(rows)+'\n',{flag:'wx',mode:0o600});
  }
  const registry=await query(registrySQL);need(registry.length>0,'missing-owner-registry-state');
+ if(compact)await verifyCompactRecoveryRegistry(query,registry);
  const permissions=await query(permissionSQL),privateRegistry=permissions.find(r=>r.object_name==='worldatlas_schema_migrations');
  need(privateRegistry?.owner==='neondb_owner'&&!privateRegistry.app_select&&!privateRegistry.app_insert&&!privateRegistry.app_update&&!privateRegistry.app_delete&&!privateRegistry.app_truncate,'owner-registry-exposed');
  const sequence=await query('SELECT last_value,is_called FROM atlas_ingestions_rowid_seq');
  need(sequence.length===1&&Number.isSafeInteger(sequence[0].last_value)&&sequence[0].last_value>=revision,'invalid-ingestion-sequence');
  const database_acl=await query("SELECT datacl::text acl FROM pg_database WHERE datname=current_database()");
  const default_acls=await query("SELECT pg_get_userbyid(d.defaclrole) role_name,n.nspname schema_name,d.defaclobjtype object_type,d.defaclacl::text acl FROM pg_default_acl d LEFT JOIN pg_namespace n ON n.oid=d.defaclnamespace WHERE n.nspname='public' ORDER BY role_name,object_type");
- return {database_acl,default_acls,identity,revision,catalog_sha256:sha(JSON.stringify(catalog)),collections:proofs,owner_registry:registry,owner_registry_sha256:sha(JSON.stringify(registry)),permissions,sequence};
+ // acldefault uses lowercase 's' for sequences; uppercase 'S' is a foreign server.
+ const sequence_permissions=await query(`SELECT c.relname name,pg_get_userbyid(c.relowner) owner,${canonicalACL('c.relacl','c.relowner','s')} acl,has_sequence_privilege('worldatlas_app',c.oid,'USAGE') app_usage,has_sequence_privilege('worldatlas_app',c.oid,'SELECT') app_select,has_sequence_privilege('worldatlas_app',c.oid,'UPDATE') app_update FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='public' AND c.relkind='S' ORDER BY c.relname`);
+ const function_permissions=await query(`SELECT p.proname name,pg_get_function_identity_arguments(p.oid) arguments,pg_get_userbyid(p.proowner) owner,${canonicalACL('p.proacl','p.proowner','f')} acl,p.prosecdef security_definer,p.proconfig settings FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname='public' AND p.prokind IN ('f','p') ORDER BY p.proname,arguments`);
+ return {database_acl,default_acls,identity,revision,catalog_sha256:sha(JSON.stringify(catalog)),collections:proofs,owner_registry:registry,owner_registry_sha256:sha(JSON.stringify(registry)),permissions,sequence,sequence_permissions,function_permissions,...(compact?{profile,compact_storage:compactStorage}:{} )};
 }
 
 // pg_restore clears search_path, but frozen PL/pgSQL helpers resolve public
@@ -235,6 +282,8 @@ export function isolatedOriginalChecks(schema){
 }
 
 export function assertCurrentInventory(inventory,marker){
+ const profile=recoveryProfileForMarker(marker);
+ need(profile===compactRecoveryProfile?inventory.profile===profile:inventory.profile===undefined,'source-profile-drift');
  need(inventory.identity.database_name==='neondb'&&inventory.revision===marker.revision&&inventory.catalog_sha256===marker.catalog_sha256,'source-identity-or-catalog-drift');
  need(storageExportV2Collections.every(k=>inventory.collections[k].count===marker.counts[k]),'source-count-drift');
  need(inventory.collections.geographic_releases.ordered_rows_sha256===marker.geographic_releases_sha256&&inventory.collections.footprint_versions.ordered_rows_sha256===marker.footprint_versions_sha256,'source-release-drift');
@@ -324,7 +373,8 @@ export async function runCurrentPostgresRecovery({env=process.env,fetcher=fetch,
   const window=validateRecoveryWindow(requestedWindow,claim,{head:env.GITHUB_SHA,toolSHA,...reservation});
   need(comment.html_url==='https://github.com/'+repo+'/issues/'+window.queue+'#issuecomment-'+comment.id,'window-tracking-issue-mismatch');
   need(window.operator_github_login===comment.user.login,'publisher-author-binding-required');
-  receipt.window_comment_id=comment.id;receipt.claim_id=claim.claim_id;receipt.reservation_issue=claim.issue_number;receipt.source_marker=window.source_marker;receipt.site=window.site;receipt.github={head:env.GITHUB_SHA,run_id:env.GITHUB_RUN_ID,run_attempt:env.GITHUB_RUN_ATTEMPT};save(receiptFile,receipt,secrets);
+  receipt.window_comment_id=comment.id;receipt.claim_id=claim.claim_id;receipt.reservation_issue=claim.issue_number;receipt.source_marker=window.source_marker;receipt.site=window.site;receipt.hosting=window.hosting;receipt.github={head:env.GITHUB_SHA,run_id:env.GITHUB_RUN_ID,run_attempt:env.GITHUB_RUN_ATTEMPT};save(receiptFile,receipt,secrets);
+  stage='verify-hosting-and-registry';receipt.hosting_start=await verifyRecoveryHosting(window,api,fetcher);
   stage='verify-production-metadata';receipt.project=await verifyNeonProject({apiKey:env.NEON_API_KEY,projectId:expectedNeonProjectId,fetchImpl:fetcher});
   need(receipt.project.branch.id===branchId&&receipt.project.project.configured_postgres_major===18,'production-branch-or-major-changed');
   const get=async suffix=>boundedOwnerJSON(await fetcher('https://console.neon.tech/api/v2/projects/'+expectedNeonProjectId+suffix,{headers:{Authorization:'Bearer '+env.NEON_API_KEY},redirect:'error',signal:AbortSignal.timeout(15000)}));
@@ -335,7 +385,8 @@ export async function runCurrentPostgresRecovery({env=process.env,fetcher=fetch,
   stage='shared-source-lock';lock=await holdSourceLock(connection,readers);releaseProbe=async()=>{const result=(await rawSourceQuery(`SELECT exists(SELECT 1 FROM pg_locks WHERE locktype='advisory' AND pid=${lock.pid} AND classid=807245315 AND objid=1 AND objsubid=2 AND granted) held`))[0];need(result?.held===false,'source-lock-release-unconfirmed');};receipt.source_lock={key:[807245315,1],backend_pid:lock.pid,kind:'session-level; no open transaction'};
   const sourceQuery=async sql=>{need(lock.alive(),'source-lock-session-lost');const held=(await rawSourceQuery(`SELECT exists(SELECT 1 FROM pg_locks WHERE locktype='advisory' AND pid=${lock.pid} AND classid=807245315 AND objid=1 AND objsubid=2 AND granted) held`))[0];need(held?.held===true,'source-lock-lost');const rows=await rawSourceQuery(sql);need(lock.alive(),'source-lock-session-lost');return rows;};
   const capture=path.join(output,'original-rows');fs.mkdirSync(capture,{mode:0o700});
-  stage='current-source-inventory';const before=await readRecoveryInventory(sourceQuery,{directory:capture});assertCurrentInventory(before,window.source_marker);save(path.join(output,'source-inventory.json'),before,secrets);
+  const profile=recoveryProfileForMarker(window.source_marker);
+  stage='current-source-inventory';const before=await readRecoveryInventory(sourceQuery,{directory:capture,profile});assertCurrentInventory(before,window.source_marker);save(path.join(output,'source-inventory.json'),before,secrets);
   stage='current-native-dump';await sourceQuery('SELECT 1 lock_checkpoint');const dumpStarted=Date.now(),dump=client(['pg_dump','--format=custom','--schema=public','--no-owner','--lock-wait-timeout=5000'],undefined,maxDump);
   await sourceQuery('SELECT 1 lock_checkpoint');need(dump.length>5&&dump.subarray(0,5).toString()==='PGDMP'&&!secrets.some(s=>s&&dump.includes(Buffer.from(s))),'invalid-or-unsafe-native-dump');
   fs.writeFileSync(path.join(output,'current-public-schema.dump'),dump,{flag:'wx',mode:0o600});receipt.dump={bytes:dump.length,sha256:sha(dump),duration_ms:Date.now()-dumpStarted,owner_registry_included:true,acl_included:true};save(receiptFile,receipt,secrets);
@@ -354,17 +405,18 @@ export async function runCurrentPostgresRecovery({env=process.env,fetcher=fetch,
   stage='actual-current-native-restore-apply';
   await nativeRestoreFromFile(['exec','-i',target,'psql','-X','-U','postgres','-d','neondb','--single-transaction','-v','ON_ERROR_STOP=1'],expanded);stage='actual-current-native-database-acl';receipt.database_acl_recovery=restoreIsolatedDatabaseACL(target,readback,output);targetExec(['psql','-X','-U','postgres','-d','neondb','-v','ON_ERROR_STOP=1'],isolatedOriginalChecks(fs.readFileSync('postgres/schema.sql')));receipt.isolated_original_checks_revalidated=true;receipt.restore_duration_ms=Date.now()-restoreStarted;receipt.dump.local_readback_verified=true;
   receipt.isolated_target_filesystem_before_readback=isolatedFilesystemUsage(targetExec(['df','-Pk','/var/lib/postgresql']).toString());save(receiptFile,receipt,secrets);
-  stage='restored-target-inventory';const targetQuery=queryJSON(sql=>targetExec(['psql','-X','-Atq','-U','postgres','-d','neondb','-v','ON_ERROR_STOP=1','-v','VERBOSITY=sqlstate'],'SET ROLE neondb_owner; '+sql),secrets),restored=await readRecoveryInventory(targetQuery);
-  stage='final-source-inventory';const after=await readRecoveryInventory(sourceQuery);assertCurrentInventory(after,window.source_marker);assertRestoredInventory(before,restored,after);
+  stage='restored-target-inventory';const targetQuery=queryJSON(sql=>targetExec(['psql','-X','-Atq','-U','postgres','-d','neondb','-v','ON_ERROR_STOP=1','-v','VERBOSITY=sqlstate'],'SET ROLE neondb_owner; '+sql),secrets),restored=await readRecoveryInventory(targetQuery,{profile});
+  stage='final-source-inventory';const after=await readRecoveryInventory(sourceQuery,{profile});assertCurrentInventory(after,window.source_marker);assertRestoredInventory(before,restored,after);
+  stage='final-hosting-and-registry';receipt.hosting_end=await verifyRecoveryHosting(window,api,fetcher);
   const finalReservation=await loadRecoveryReservation(window,api);
   validateRecoveryWindow(window,finalReservation.claim,{head:env.GITHUB_SHA,toolSHA,phase:'end',...finalReservation});
-  save(path.join(output,'restored-inventory.json'),restored,secrets);save(path.join(output,'after-inventory.json'),after,secrets);receipt.status='verified';receipt.collections=before.collections;receipt.owner_registry_sha256=before.owner_registry_sha256;receipt.catalog_sha256=before.catalog_sha256;receipt.owner_registry_private=true;
+  save(path.join(output,'restored-inventory.json'),restored,secrets);save(path.join(output,'after-inventory.json'),after,secrets);receipt.status='verified';receipt.collections=before.collections;receipt.owner_registry_sha256=before.owner_registry_sha256;receipt.catalog_sha256=before.catalog_sha256;receipt.owner_registry_private=true;if(before.compact_storage)receipt.compact_storage={profile,public_sha256:before.compact_storage.catalog.public_sha256,private_sha256:before.compact_storage.catalog.private_sha256,physical:before.compact_storage.physical,sequences:before.compact_storage.sequences};
  }catch(error){receipt.status='failed';receipt.failure_stage=stage;receipt.native_error_code=/^[a-z0-9-]{1,100}$/.test(error?.message??'')?error.message:'native-command-failed';receipt.error_code='bounded-current-recovery-'+stage+'-failed';}
  finally{
   if(lock){try{lock.close();await releaseProbe();receipt.source_lock_cleanup='database-lock-absence-and-reader-removal-confirmed';}catch{receipt.status='failed';receipt.source_lock_cleanup='unconfirmed';}}
   for(const reader of readers){try{removeOwnedContainer(reader);}catch{receipt.status='failed';(receipt.retained_source_readers??=[]).push(reader);}}
   if(target){try{receipt.isolated_target_filesystem_after_readback=isolatedFilesystemUsage(native(['exec',target,'df','-Pk','/var/lib/postgresql']).toString());}catch{}try{removeOwnedContainer(target);receipt.isolated_target_cleanup='removed-and-absence-confirmed';}catch{receipt.status='failed';receipt.isolated_target_cleanup='failed';receipt.retained_target_name=target;}}
-  receipt.duration_ms=Date.now()-started;receipt.completed_at_utc=new Date().toISOString();receipt.limitations=['Logical public-schema recovery; not verified provider-managed backup or server-global recovery.','Source role passwords, managed role memberships, provider secrets and private runtime bindings are excluded; restore through unchanged provider/Sites setup and documented private credential handoff.','Isolated roles are NOLOGIN, with inert cloud_admin/neon_superuser placeholders and isolated neondb database; original owner/database/default ACL statements are restored as the isolated superuser; table owners/ACLs and effective table privileges are compared. Membership rows use a bounded native ordered row-digest inventory; original raw bytes are retained in the dump, not duplicated as an unbounded client JSON array. Schema/sequence/function/domain/default ACLs are retained in the original dump but not separately compared.','Publisher Site read-only/drain attestation is authenticated by queue author/dispatch actor; Actions does not independently access private Site. Worker IDs are cooperative identities, not separate security principals.','Registered object bytes are the separate414-object proof from PR711; no R2 objects are written.','Publisher must settle maintenance and prove restored writes separately; this tool never changes Site/read-only state.','Artifacts/local copies have limited retention; preserve original dump/rows and receipts before expiry.'];save(receiptFile,receipt,secrets);
+  receipt.duration_ms=Date.now()-started;receipt.completed_at_utc=new Date().toISOString();receipt.limitations=['Logical public-schema recovery; not verified provider-managed backup or server-global recovery.','Source role passwords, managed role memberships, provider secrets and private runtime bindings are excluded; restore through unchanged provider/Sites setup and documented private credential handoff.','Isolated roles are NOLOGIN, with inert cloud_admin/neon_superuser placeholders and isolated neondb database; original owner/database/default ACL statements are restored as the isolated superuser; table owners/ACLs and effective table privileges are compared. Membership rows use a bounded native ordered row-digest inventory; original raw bytes are retained in the dump, not duplicated as an unbounded client JSON array. Public sequence/function owner ACLs and default/database ACLs are compared; compact dictionary sequence values, private DDL/ACLs and physical rows are compared under their exact profile. Server globals and provider role credentials remain excluded.','Historical Site read-only/drain attestation is authenticated by queue author/dispatch actor; Actions does not independently access private Site. Cloudflare windows additionally verify the actual public marker/mutation guards and retained successful delivery/result registry at start and end. Worker IDs are cooperative identities, not separate security principals.','Registered object bytes are the separate414-object proof from PR711; no R2 objects are written.','Publisher must settle maintenance and prove restored writes separately; this tool never changes hosting/read-only state.','Artifacts/local copies have limited retention; preserve original dump/rows and receipts before expiry.'];save(receiptFile,receipt,secrets);
  }
  return receipt;
 }
