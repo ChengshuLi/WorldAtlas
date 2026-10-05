@@ -4,7 +4,8 @@ import {storageExportV2Contract} from './storage-export-v2-contract.js';
 import {storageExportV3Contract} from './storage-export-v3-contract.js';
 import {compactMembershipCatalog} from './membership-storage-profile.js';
 const logicalContract=base=>base===3?storageExportV3Contract:storageExportV2Contract;
-export const storageCatalogV4=db=>compactMembershipCatalog(db);
+// Keep fresh start/end catalog checks within the Worker request budget.
+export const storageCatalogV4=db=>compactMembershipCatalog(db,{batchMetadata:true});
 import {v4MarkerIdentity} from './storage-export-v4-contract.js';
 const identifiers=columns=>columns.map(column=>'"'+column+'"').join(',');
 const maxBytes=8*1024*1024;

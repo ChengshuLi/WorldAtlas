@@ -1,0 +1,23 @@
+{
+  "method_id": "bounded-export-catalog",
+  "kind": "code",
+  "outcome": "passed",
+  "command": "node --test test/compact-membership-profile.test.mjs",
+  "positive_controls": [
+    "Exact bounded first-page equality to unbatched export",
+    "Complete cursor paging matches ordered original membership rows",
+    "Both base contracts and restricted app-role logical collections"
+  ],
+  "negative_controls": [
+    "Unbatched path exceeds injected request budget",
+    "Malformed cursor rejected",
+    "Private column privileges and disabled guards rejected",
+    "Metadata transaction failure rejected",
+    "New private privilege exposure after page read rejected"
+  ],
+  "limits": [
+    "Local PostgreSQL controls run in PGlite, not native Cloudflare runtime.",
+    "Actual native Neon read-only diagnostics are separately recorded on issue #872.",
+    "No new production deployment or original archive recovery certification."
+  ]
+}

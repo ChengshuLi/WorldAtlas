@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "issue": 872,
+  "lane": "engineering",
+  "worker_id": "engineering-export-pages-20261004-local01",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "f9a1dfa98b664dcf322806c843e82ab29d2b7935",
+    "files": [
+      {
+        "path": "hosted/membership-storage-profile.js",
+        "bytes": 8557,
+        "sha256": "db5b2cb9a7a92b0958abc75babc9f6eb9588f67333fc6d4834a658d938e02985",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "hosted/storage-export-v4.js",
+        "bytes": 7557,
+        "sha256": "b8d240cbf9d87fd299b959bfecc0967e9dd37b3748ceda7de33f0cc1b1021166",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/compact-membership-profile.test.mjs",
+        "bytes": 14925,
+        "sha256": "d40155e6b32024128c05dd1a4fd707a78f1e93d97b2525866dce99180aefa8de",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "hosted/membership-storage-profile.js",
+      "bytes": 8819,
+      "sha256": "e2d8b37b963f9562d9a1094ff801fb7ef9585541bc50fcc8b0ca3810ffd7c737",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "hosted/storage-export-v4.js",
+      "bytes": 7651,
+      "sha256": "a0232f5b7f6a31151e2d836341ca27bd1018a0c4bbad8db9d58a6ca8f7f43843",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/compact-membership-profile.test.mjs",
+      "bytes": 19406,
+      "sha256": "c46840be21e79cd388665fcc001da6cac4099f7d3501bad9e734330cfd3b282d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/export-pages-20261004-local01/README.md",
+      "bytes": 2352,
+      "sha256": "fe431e5e926afd3d9505f772e954a7e383803922920571a7d80d940d41bc0bf9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/export-pages-20261004-local01/controls.json",
+      "bytes": 936,
+      "sha256": "4b70ad63c5b5065d4aba4e29835ec4ff56025b1b01c5ea909886b2f0a530fbdc",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "bounded-export-catalog",
+      "kind": "code",
+      "description": "Preserve exact catalog SQL and guards using ordered read-only transaction batches and fresh catalog checks at both page boundaries.",
+      "software": "Node24 and locked PostgreSQL/Neon adapter; isolated PGlite fixture",
+      "units": "Correctness controls; no production runtime performance certification"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "bounded-export-catalog",
+      "kind": "code",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/export-pages-20261004-local01/controls.json"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "change_receipts": [
+    {
+      "path": "hosted/membership-storage-profile.js",
+      "status": "modified",
+      "original_sha256": "db5b2cb9a7a92b0958abc75babc9f6eb9588f67333fc6d4834a658d938e02985"
+    },
+    {
+      "path": "hosted/storage-export-v4.js",
+      "status": "modified",
+      "original_sha256": "b8d240cbf9d87fd299b959bfecc0967e9dd37b3748ceda7de33f0cc1b1021166"
+    },
+    {
+      "path": "test/compact-membership-profile.test.mjs",
+      "status": "modified",
+      "original_sha256": "d40155e6b32024128c05dd1a4fd707a78f1e93d97b2525866dce99180aefa8de"
+    },
+    {
+      "path": "coordination/engineering/export-pages-20261004-local01/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/export-pages-20261004-local01/controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/export-pages-20261004-local01/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "node --test test/compact-membership-profile.test.mjs",
+    "node scripts/evidence-quality.mjs coordination/engineering/export-pages-20261004-local01/evidence-quality.json"
+  ]
+}

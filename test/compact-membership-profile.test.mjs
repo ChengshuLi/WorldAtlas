@@ -6,6 +6,7 @@ import {importBatch} from '../hosted/records.js';
 import {stageGeographicRelease,finalizeGeographicRelease,geographicMembershipPage,geographicMembershipHash,geographicLocationIdsHash,geographicChangesHash} from '../hosted/geographic-releases.js';
 import {rehearseCompactMembershipStorage,rehearseCompactMembershipRollback} from '../scripts/compact-membership-storage.mjs';
 import {compactMembershipCatalog} from '../hosted/membership-storage-profile.js';
+import {createPostgresDatabase} from '../hosted/postgres-adapter.js';
 import {exportStorageMarkerV4,exportStoragePageV4} from '../hosted/storage-export-v4.js';
 import {storageCatalogV2} from '../hosted/storage-export-v2.js';
 import {storageCatalogV3} from '../hosted/storage-export-v3.js';
@@ -147,4 +148,73 @@ test('V4 export resumes durable pages after interruption and adapts to bounded 4
   const manifest=await exportHostedStorageV4({origin:'https://example.org',output,token:'isolated-no-log',fetcher,concurrency:1});assert.equal(manifest.collections.geographic_memberships.count,36);assert.ok(oversized);assert.ok(pages>countBefore);
   assert.ok(manifest.collections.geographic_memberships.parts.length>1);
  }finally{await f.close();fs.rmSync(output,{recursive:true});}
+});
+
+// Count driver invocations rather than SQL statements: a Neon HTTP transaction
+// sends all of its ordered SELECT statements in one external request.
+function requestBudgetDatabase(engine,{budget=50,batch=true,afterQuery}={}){
+ const counts={requests:0,selects:0,batches:0};
+ const request=()=>{if(++counts.requests>budget)throw Error('Isolated external request budget exceeded');};
+ const query=async(sql,args=[])=>{assert.match(sql,/^SELECT\b/i);counts.selects++;const result=await engine.query(sql,args);await afterQuery?.(sql);return result;};
+ const db=createPostgresDatabase({
+  query:async(sql,args)=>{request();return query(sql,args);},
+  transaction:async(statements,options)=>{request();counts.batches++;assert.equal(options.isolationLevel,'Serializable');return engine.transaction(async tx=>{
+   const results=[];for(const statement of statements){assert.match(statement.query,/^SELECT\b/i);counts.selects++;results.push(await tx.query(statement.query,statement.params));}return results;
+  });}
+ });
+ if(!batch)delete db.batch;
+ return {db,counts};
+}
+
+test('V4 metadata batching preserves exact pages and checks under a bounded external request budget',async()=>{
+ const f=await fixture();try{
+  await forward(f,3);await rehearseCompactMembershipStorage(f.engine);await f.engine.exec('DROP TABLE worldatlas_memberships_original_v1');
+  const legacy=requestBudgetDatabase(f.engine,{budget:100,batch:false});
+  const expected=await exportStoragePageV4(legacy.db,'geographic_memberships',{limit:7});
+  const boundedLegacy=requestBudgetDatabase(f.engine,{batch:false});
+  await assert.rejects(exportStoragePageV4(boundedLegacy.db,'geographic_memberships',{limit:7}),/temporarily unavailable/);
+  assert.equal(boundedLegacy.counts.requests,51);
+  const candidate=requestBudgetDatabase(f.engine);
+  assert.deepEqual(await exportStoragePageV4(candidate.db,'geographic_memberships',{limit:7}),expected);
+  assert.equal(candidate.counts.selects,legacy.counts.selects);
+  assert.equal(legacy.counts.requests,52);assert.equal(candidate.counts.requests,34);assert.equal(candidate.counts.batches,4);
+  const all=[];let cursor='';do{
+   const page=await exportStoragePageV4(requestBudgetDatabase(f.engine).db,'geographic_memberships',{limit:7,cursor});
+   all.push(...page.records);cursor=page.next_cursor;
+  }while(cursor);
+  assert.deepEqual(all,(await f.engine.query('SELECT * FROM atlas_geographic_memberships ORDER BY release_id,entity_id')).rows);
+  await assert.rejects(exportStoragePageV4(requestBudgetDatabase(f.engine).db,'geographic_memberships',{cursor:'invalid'}),/cursor/);
+ }finally{await f.close();}
+});
+
+test('batched V4 catalog remains fail closed for ACL exposure, disabled guards and failed transactions',async()=>{
+ const f=await fixture();try{
+  await forward(f,3);await rehearseCompactMembershipStorage(f.engine);
+  for(const mutation of ['GRANT SELECT(raw) ON worldatlas_membership_evidence TO worldatlas_app','ALTER TABLE worldatlas_membership_rows DISABLE TRIGGER worldatlas_membership_immutable']){
+   await assert.rejects(f.engine.transaction(async tx=>{
+    await tx.query(mutation);
+    const db=createPostgresDatabase({query:(sql,args)=>tx.query(sql,args),transaction:async statements=>{
+     const results=[];for(const item of statements)results.push(await tx.query(item.query,item.params));return results;
+    }});
+    await exportStoragePageV4(db,'geographic_memberships');
+   }),/privileges are exposed|Unverified compact owner or guards/);
+   assert.equal((await compactMembershipCatalog(f.db)).profile,'retained-original');
+  }
+  const db={...f.db,batch:async()=>{throw Error('Controlled metadata transaction failure');}};
+  await assert.rejects(exportStorageMarkerV4(db),/Controlled metadata transaction failure/);
+ }finally{await f.close();}
+});
+
+test('V4 batching rechecks private privileges after reading a page',async()=>{
+ const f=await fixture();try{
+  await forward(f,3);await rehearseCompactMembershipStorage(f.engine);
+  let injected=false;
+  const {db}=requestBudgetDatabase(f.engine,{afterQuery:async sql=>{
+   if(!injected&&sql.startsWith('SELECT "release_id","entity_id"')){
+    injected=true;await f.engine.exec('GRANT SELECT(raw) ON worldatlas_membership_evidence TO worldatlas_app');
+   }
+  }});
+  await assert.rejects(exportStoragePageV4(db,'geographic_memberships'),/privileges are exposed/);
+  assert.equal(injected,true);
+ }finally{await f.close();}
 });
