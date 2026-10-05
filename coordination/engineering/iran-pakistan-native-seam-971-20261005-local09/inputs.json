@@ -1,0 +1,238 @@
+{
+  "baseline_commit": "bfa1c56ef72c1bc3a9d1fcf8263d073a966bf46f",
+  "baseline_files": [
+    {
+      "bytes": 944,
+      "hash_kind": "file-bytes",
+      "path": "data/world-index.json",
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+    },
+    {
+      "bytes": 10164089,
+      "hash_kind": "file-bytes",
+      "path": "data/hierarchy.json",
+      "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+    },
+    {
+      "bytes": 271171,
+      "hash_kind": "file-bytes",
+      "path": "data/canonical-grid/manifest.json",
+      "sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6"
+    },
+    {
+      "bytes": 206,
+      "hash_kind": "file-bytes",
+      "path": "data/geographic-releases/current-manifest.json",
+      "sha256": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81"
+    },
+    {
+      "bytes": 169082,
+      "hash_kind": "file-bytes",
+      "path": "data/geographic-releases/releases-v6-gzip.json.gz",
+      "sha256": "96f4e6b1894ecce4c1f3f2be690ebfceec9fde2ec094c886ddffca96c62e4a16"
+    },
+    {
+      "bytes": 5131824,
+      "hash_kind": "file-bytes",
+      "path": "data/geography/part-11.json",
+      "sha256": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f"
+    },
+    {
+      "bytes": 4945828,
+      "hash_kind": "file-bytes",
+      "path": "data/geography/part-17.json",
+      "sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db"
+    },
+    {
+      "bytes": 3642057,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v2/components-000.json.gz",
+      "sha256": "115179a2e6ddda1a74e41d088c97643a56479deaaa0cb880b93a07fcd731e76f"
+    },
+    {
+      "bytes": 26701,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v2/report.json",
+      "sha256": "69aa2c4cc0a949d66938344cb80e526fe77b68661b93fd0b3be7830e2e18e478"
+    },
+    {
+      "bytes": 16811,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/pilots-v1/report.json",
+      "sha256": "a30d6007324b63699a587100ccd4484dcabea54ddd75c8a92fd831c629410794"
+    },
+    {
+      "bytes": 38613,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/report.json",
+      "sha256": "ba7a4b190683f8436109b6159359727a2300053ac42a96dcdd53ebef7f092b20"
+    },
+    {
+      "bytes": 42234,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/coordinated-followups.json",
+      "sha256": "f4a4a0d61aa0c3adca06cd372eb3e6284959cf7a3d809d73ab4c0cb8b33686ca"
+    },
+    {
+      "bytes": 25462,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/protocol-snapshots/issue-115.json",
+      "sha256": "4a6d0d7fa00b5d9d18c6569f715702d8bb6b70036ef7a9d2c05dc33b08d78913"
+    },
+    {
+      "bytes": 29218,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/protocol-snapshots/issue-121.json",
+      "sha256": "e839964d70375d9b4612dfab6ac9d787664e7ac069799483f2d4461573e214e9"
+    },
+    {
+      "bytes": 7090,
+      "hash_kind": "file-bytes",
+      "path": "scripts/evidence/immutable.py",
+      "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd"
+    },
+    {
+      "bytes": 5264,
+      "hash_kind": "file-bytes",
+      "path": "scripts/evidence/geometry.py",
+      "sha256": "944541968fcdf065b9c4b6105be227c3e0e14b6a20916f4fa21f851338c7a305"
+    },
+    {
+      "bytes": 1953,
+      "hash_kind": "file-bytes",
+      "path": "scripts/ellipsoidal_area.py",
+      "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12"
+    },
+    {
+      "bytes": 4376,
+      "hash_kind": "file-bytes",
+      "path": "scripts/prepare.mjs",
+      "sha256": "3a934b9236b2c8dd70b8aafed61c1b5528663366e4fc5df127a5841b501c0bfd"
+    },
+    {
+      "bytes": 8419,
+      "hash_kind": "file-bytes",
+      "path": "scripts/reconcile-topology.py",
+      "sha256": "1739883a9ada57e346f12c009beb4c14091429e810ec7cc77f8b01e8bd3ae763"
+    },
+    {
+      "bytes": 146,
+      "hash_kind": "file-bytes",
+      "path": "requirements.txt",
+      "sha256": "1c3f3b9598e474af751e25ff0839cbf5c4a9931a59b4ffaaff1a56c6e2f0e2c9"
+    }
+  ],
+  "component_feature_sha256": "6818febcdc866f0ca1af716843023815f711b4f248614bd29f65e9ef78bcb286",
+  "component_path": "coordination/engineering/geographic-components-946-20261005-local06/components-v2/components-000.json.gz",
+  "current_subject_files": {
+    "IRN": "data/geography/part-11.json",
+    "PAK": "data/geography/part-17.json"
+  },
+  "limits": [
+    "Retained component is a diagnostic coverage candidate, not confirmed dry land.",
+    "Native geoBoundaries source years differ: IRN 2017, PAK 2019; snapshot build dates are not coordinate observation dates.",
+    "Current OSM snapshot has separately versioned ways/nodes; no common-date source equivalence or geographic authority approval.",
+    "Exact source-member crosswalk and source coverage comparisons do not assign territory or approve a repair.",
+    "Dated water pilot encoding, registration, sampling and observation limits remain unchanged; physical classification unknown.",
+    "Current native-coordinate polygon differences include preparation/vintage differences; no attribution to a specific preparation stage without replay.",
+    "No changes to core geography, identities, history, release, certificates, provider, live database or deployment."
+  ],
+  "native_files": {
+    "IRN": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-ADM2-native.geojson",
+    "PAK": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-ADM2-native.geojson"
+  },
+  "osm_file": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/osm-panjgur-relation-3229274-full.json",
+  "source_files": [
+    {
+      "bytes": 16649405,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-ADM2-native.geojson",
+      "sha256": "6f95cb3e108907663846f1e7479d07714fe95b5c3e0adf44ad94d27b8b42ff7a"
+    },
+    {
+      "bytes": 4316,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-CITATION-AND-USE-geoBoundaries.txt",
+      "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+    },
+    {
+      "bytes": 864,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-geoBoundaries-IRN-ADM2-metaData.json",
+      "sha256": "02f1671f06a4a1e62834fb45105622008d6aa3127189ad7440774d00d6602301"
+    },
+    {
+      "bytes": 133,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-original-lfs-pointer.txt",
+      "sha256": "b6628169366bebe8b8e6fc643073c0706a43033e4f251d3f648ca116342e1206"
+    },
+    {
+      "bytes": 1082661,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-ADM2-native.geojson",
+      "sha256": "108eeaa75a6de678f022e0b6d8fd8ab4c93e4b4d1a9c6a28995afe7c0731182c"
+    },
+    {
+      "bytes": 4316,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-CITATION-AND-USE-geoBoundaries.txt",
+      "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+    },
+    {
+      "bytes": 801,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-geoBoundaries-PAK-ADM2-metaData.json",
+      "sha256": "2d5077f656aae8202338520cc02f594e243eb425efbb44e4f32fca7d41868d88"
+    },
+    {
+      "bytes": 132,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-original-lfs-pointer.txt",
+      "sha256": "a459290c3cf4a81239d325c6d6526a347719020a0df846b8a47c15a281907b06"
+    },
+    {
+      "bytes": 745,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/osm-current-anchor-admin-post-receipt.json",
+      "sha256": "b7ee776e3bf48434fa7afb49e4b158b1ed6a2076428a6461889a13fd6cd67d87"
+    },
+    {
+      "bytes": 11624,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/osm-current-anchor-admin-post-response.json",
+      "sha256": "08121f8c214debee07924486849167ece649408d46a3d74096067b36358ff162"
+    },
+    {
+      "bytes": 741,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/osm-panjgur-relation-3229274-full-receipt.json",
+      "sha256": "4c27c75a41998b9244995e55be8e95e186e57696fa655a9f5dcb3ae4cfe02c6f"
+    },
+    {
+      "bytes": 346713,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/osm-panjgur-relation-3229274-full.json",
+      "sha256": "7057f7488622c5a5c086b094205978fffe5d25ca514a89a72f2d45c1f0ff31be"
+    },
+    {
+      "bytes": 2393,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/receipts.json",
+      "sha256": "333321d22555c48287901c561db9f761ec0b5b81226379b21aea62f2d4ebf21f"
+    },
+    {
+      "bytes": 1406,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/scout-retrievals.json",
+      "sha256": "f5ccb5b02825991bd225786b6ccf6f6e7c01a788968c71ac4f314cb3b7bf38ba"
+    },
+    {
+      "bytes": 303,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/scout-scope.json",
+      "sha256": "72f5c01576f4c499e40cd43af0f4e1f1faa1c867bd32708fa1ab3bce60cdb05a"
+    }
+  ],
+  "version": 1
+}

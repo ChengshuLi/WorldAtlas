@@ -1,0 +1,32 @@
+[
+  {
+    "path": "IRN-ADM2-native.geojson",
+    "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/IRN/ADM2/geoBoundaries-IRN-ADM2.geojson",
+    "bytes": 16649405,
+    "sha256": "6f95cb3e108907663846f1e7479d07714fe95b5c3e0adf44ad94d27b8b42ff7a",
+    "retrieved_utc": "2026-10-05T14:46:35.386463+00:00",
+    "original": true
+  },
+  {
+    "path": "PAK-ADM2-native.geojson",
+    "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/PAK/ADM2/geoBoundaries-PAK-ADM2.geojson",
+    "bytes": 1082661,
+    "sha256": "108eeaa75a6de678f022e0b6d8fd8ab4c93e4b4d1a9c6a28995afe7c0731182c",
+    "retrieved_utc": "2026-10-05T14:46:35.978343+00:00",
+    "original": true
+  },
+  {
+    "path": "osm-panjgur-20261004.json",
+    "endpoint": "https://overpass-api.de/api/interpreter",
+    "query": "[out:json][date:\"2026-10-04T19:59:06Z\"][timeout:25];relation(3229274);(._;>>;);out body;",
+    "status": "unavailable",
+    "error": "HTTP Error 504: Gateway Timeout"
+  },
+  {
+    "path": "osm-panjgur-20170701.json",
+    "endpoint": "https://overpass-api.de/api/interpreter",
+    "query": "[out:json][date:\"2017-07-01T00:00:00Z\"][timeout:25];relation(3229274);(._;>>;);out body;",
+    "status": "unavailable",
+    "error": "HTTP Error 504: Gateway Timeout"
+  }
+]
