@@ -1,0 +1,597 @@
+{
+  "version": 1,
+  "issue": 999,
+  "lane": "geography",
+  "worker_id": "worldatlas-geography-427-20261005-a64f10",
+  "subject_ids": [
+    "gb:XKX:ADM1:2360587B5118871504069",
+    "gb:XKX:ADM1:2360587B74553771763221",
+    "gb:XKX:ADM1:2360587B95703323116719"
+  ],
+  "subject_ids_sha256": "6835945afc9cacb186ba67e2c39d9c85a5821ac3d4794d2491da9ae55e8299bb",
+  "baseline": {
+    "commit": "96f2a6d201236ba62f471535db240b123de60c09",
+    "files": [
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geographic-releases/current-manifest.json",
+        "bytes": 206,
+        "sha256": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/macro-foundation/current-membership-inventory.json.gz",
+        "bytes": 2404397,
+        "sha256": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/macro-foundation/review-index.json",
+        "bytes": 2383,
+        "sha256": "31dfd5cbfd8f3def829f655e7ddd855d2d2865e5ac63f9d1a97d1c08782910cf",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/macro-foundation/regional-handoffs.json.gz",
+        "bytes": 71286,
+        "sha256": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/macro-foundation/macro-certificate.json",
+        "bytes": 38959,
+        "sha256": "f50f70fcb0756712ab7a7a388bc8cada093080518f07d3a6f7329758980ea81b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/macro-foundation/approved-boundary-decisions.json",
+        "bytes": 634171,
+        "sha256": "b67d5a3bcf8101cffb089c0262286378a80bb642cd6dde33f7721419227e3f18",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/source-manifest.json",
+        "bytes": 6787,
+        "sha256": "fded0febc8ef8d934b1f7358755b3102ec8043cc027a88ad8106dec8247b7f56",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/gb/gb-XKX-ADM1.geojson",
+        "bytes": 1898578,
+        "sha256": "9b07b08fe0f9ca5a26ddb6de2008ac235b38ffaf069063df9851711c2d358315",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/gb/XKX-ADM1-geoBoundaries-XKX-ADM1-metaData.json",
+        "bytes": 799,
+        "sha256": "a912dcaefa1096a6c0af067af9723b2a67c32f5b0147b8198f99751eb591b49c",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/gb/XKX-ADM1-CITATION-AND-USE-geoBoundaries.txt",
+        "bytes": 4316,
+        "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-28.json",
+        "bytes": 6613963,
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "data/world-index.json": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "data/hierarchy.json": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "data/geographic-releases/current-manifest.json": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81",
+      "data/administrative-sources.json": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "data/macro-foundation/current-membership-inventory.json.gz": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+      "data/macro-foundation/review-index.json": "31dfd5cbfd8f3def829f655e7ddd855d2d2865e5ac63f9d1a97d1c08782910cf",
+      "data/macro-foundation/regional-handoffs.json.gz": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
+      "data/macro-foundation/macro-certificate.json": "f50f70fcb0756712ab7a7a388bc8cada093080518f07d3a6f7329758980ea81b",
+      "data/macro-foundation/approved-boundary-decisions.json": "b67d5a3bcf8101cffb089c0262286378a80bb642cd6dde33f7721419227e3f18"
+    },
+    "pin_files": {
+      "data/world-index.json": "data/world-index.json",
+      "data/hierarchy.json": "data/hierarchy.json",
+      "data/geographic-releases/current-manifest.json": "data/geographic-releases/current-manifest.json",
+      "data/administrative-sources.json": "data/administrative-sources.json",
+      "data/macro-foundation/current-membership-inventory.json.gz": "data/macro-foundation/current-membership-inventory.json.gz",
+      "data/macro-foundation/review-index.json": "data/macro-foundation/review-index.json",
+      "data/macro-foundation/regional-handoffs.json.gz": "data/macro-foundation/regional-handoffs.json.gz",
+      "data/macro-foundation/macro-certificate.json": "data/macro-foundation/macro-certificate.json",
+      "data/macro-foundation/approved-boundary-decisions.json": "data/macro-foundation/approved-boundary-decisions.json"
+    },
+    "subject_files": {
+      "gb:XKX:ADM1:2360587B5118871504069": "data/geography/part-28.json",
+      "gb:XKX:ADM1:2360587B74553771763221": "data/geography/part-28.json",
+      "gb:XKX:ADM1:2360587B95703323116719": "data/geography/part-28.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "geoboundaries-xkx-adm1",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/XKX/ADM1/geoBoundaries-XKX-ADM1.geojson",
+      "role": "Pinned original seven-feature geoBoundaries source and metadata, as retained in parent issue #422 evidence",
+      "vintage": "boundary represented in 2021; source updated 2023-01-19; built 2023-12-12; repository commit 2023-12-13",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "geoBoundaries product notice says CC BY 4.0 but asks individual files to honor source metadata; source metadata says CC BY-SA 2.0 and cites OpenStreetMap; OSM data is ODbL; source-service terms are separate. Exact chain unresolved."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "SOURCE_RESTORATION.md gives immutable commit, exact raw media URL, file size/hash, LFS OID, original source manifest path and restoration checks. Source bytes already exist in the immutable #422 baseline; not duplicated here.",
+      "limit": "No OSM snapshot/database ID, relation IDs, or proof of exact historical source/service terms. Do not redistribute a new copy or assert license compatibility.",
+      "temporal_status": "reference",
+      "observed_sha256": "9b07b08fe0f9ca5a26ddb6de2008ac235b38ffaf069063df9851711c2d358315"
+    },
+    {
+      "id": "kas-statistical-regions-2022",
+      "url": "https://askapi.rks-gov.net/Custom/baa59b95-af3f-4117-8c84-edc9ef401bf7.pdf",
+      "role": "Kosovo Agency of Statistics primary classification proposal and municipality/region membership tables",
+      "vintage": "April 2022; NUTS III statistical-region proposal",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Official public statistical PDF; no explicit data/vector reuse license was found. Only a factual names/count/membership extract is retained."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "SOURCE_RESTORATION.md gives exact PDF URL, retrieval SHA-256, and pages 4-7; compare to kas-statistical-regions.json.",
+      "limit": "Proposal names and municipality membership do not prove polygon equivalence or provide boundary vectors.",
+      "temporal_status": "reference",
+      "observed_sha256": "aa322791fa3d683e8f054c57551437e754846b5094f4b413879011c152a6cb0f"
+    },
+    {
+      "id": "kosovo-municipal-boundary-law",
+      "url": "https://gzk.rks-gov.net/ActDetail.aspx?ActID=107377",
+      "role": "Official Gazette consolidated Law 03/L-041, municipal role and cadastral boundary framework",
+      "vintage": "Original law published 2008-06-02; consolidated official record published 2025-07-08",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Official legal text used as a factual/legal source; no boundary-data reuse license is asserted."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "SOURCE_RESTORATION.md records consolidated HTML URL and response SHA-256; original law record is also linked with its retrieved response hash.",
+      "limit": "Statutory municipal/cadastral-zone provisions do not supply a reusable present-day vector layer or establish the seven-source geometry.",
+      "temporal_status": "reference",
+      "observed_sha256": "4d45a816aaef692e52d037b121cb49f1a4cbcbb81f6fcc4332aa01583e2ba246"
+    },
+    {
+      "id": "kas-census-2024",
+      "url": "https://askapi.rks-gov.net/Custom/5f6ee57f-f5e1-4cac-86d4-6e68447a0f91.pdf",
+      "role": "Official KAS final census report and KCA-attributed municipality boundary map",
+      "vintage": "2024 census, reference moment 2024-04-05; report retrieved 2026-10-05",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Official public statistical report/map; no explicit reuse license for map/vector was established."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "SOURCE_RESTORATION.md gives exact PDF URL and retrieved SHA-256.",
+      "limit": "Map labels credit KCA for municipal boundaries but the PDF is not machine-readable official geometry and grants no inferred vector reuse permission.",
+      "temporal_status": "reference",
+      "observed_sha256": "efe9dad731595df9ac5e5a87d2dd9fd76308db92713476251a5e3f9bec74a909"
+    },
+    {
+      "id": "openstreetmap-copyright",
+      "url": "https://www.openstreetmap.org/copyright",
+      "role": "OpenStreetMap Foundation public data-license notice",
+      "vintage": "Current notice retrieved 2026-10-05; the 2021 source vintage is separately recorded",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "This page documents OSM data terms and is not a grant for the geoBoundaries/OSM-Boundaries combined artifact."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "SOURCE_RESTORATION.md records URL and exact HTTP body SHA-256; page states OSM data is ODbL 1.0 and separately documents are CC BY-SA 2.0.",
+      "limit": "A current general license notice cannot establish the exact underlying OSM snapshot or the downstream rights chain.",
+      "temporal_status": "reference",
+      "observed_sha256": "8798f9e206b1a0b419f1d554cedd69b7cc3562fd5775424435716622cd4a5905"
+    },
+    {
+      "id": "osm-foundation-license-change",
+      "url": "https://osmfoundation.org/wiki/Licence/About_The_License_Change",
+      "role": "OSM Foundation official data-license history",
+      "vintage": "2012 transition; page retrieved 2026-10-05",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Historical licensing notice; not the source geometry license itself."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "SOURCE_RESTORATION.md records immutable retrieval URL and exact response SHA-256.",
+      "limit": "Confirms the general 2012 data-license transition, not the exact underlying source snapshot/contributor history.",
+      "temporal_status": "reference",
+      "observed_sha256": "03afcd647173e16ef8d21a19c117b4d4cadf514012c9ea2dc8355f5b0345b693"
+    },
+    {
+      "id": "osm-boundaries-download-documentation",
+      "url": "https://osm-boundaries.com/about/documentation",
+      "role": "OSM-Boundaries service documentation and download/vintage/license description",
+      "vintage": "Current indexed documentation retrieved 2026-10-05",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "The indexed page says downloaded data follows OSM licensing; the exact applicability of service terms remains unresolved."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "SOURCE_RESTORATION.md provides the page URL; direct HTTPS retrieval returned HTTP 403, so re-fetch if accessible and preserve response hash.",
+      "limit": "Direct page response not obtained/hashed; exact historical OSM-Boundaries database identifier and source vintage are absent. Account/credit gated exports were not accessed.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "osm-boundaries-site-terms",
+      "url": "https://osm-boundaries.com/about/contact",
+      "role": "OSM-Boundaries current website terms concerning reuse of site material",
+      "vintage": "Current indexed page retrieved 2026-10-05",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Indexed terms reserve website material and bar reproduction/redistribution; their scope relative to underlying ODbL data and the historic export is unresolved."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "SOURCE_RESTORATION.md provides page URL and indexed-content description; direct HTTPS retrieval returned HTTP 403 and no response hash.",
+      "limit": "No legal interpretation or compatibility result; historical terms at source-download date were not archived.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "geoboundaries-license-api-documentation",
+      "url": "https://www.geoboundaries.org/api.html",
+      "role": "geoBoundaries primary API field and general gbOpen license documentation",
+      "vintage": "Current documentation retrieved 2026-10-05",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "General documentation says gbOpen is typically CC BY 4.0 compliant and defines boundaryLicense as source license; it is not a specific license resolution for this Kosovo artifact."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "SOURCE_RESTORATION.md records exact URL and response SHA-256.",
+      "limit": "General product terms direct users to source-specific terms; no final ODbL/CC-BY/OSM-Boundaries determination.",
+      "temporal_status": "reference",
+      "observed_sha256": "b60cb9a2de8e2a1bcd82b1c53264de665a1c5f0e6a66b66c3c8206d10bd3baff"
+    },
+    {
+      "id": "kosovo-cadastral-agency-geoportal",
+      "url": "https://geoportal.rks-gov.net/portal/main",
+      "role": "Potential official KCA administrative-unit geospatial source",
+      "vintage": "Public portal accessed 2026-10-05; no layer source vintage available",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "No explicit dataset reuse terms or downloadable boundary source was found in the attempted endpoints."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "SOURCE_RESTORATION.md records portal URL and attempted candidate REST endpoints; retry discovery through official KCA data catalog/metadata when available.",
+      "limit": "Candidate ArcGIS REST endpoint paths returned the Angular application shell rather than machine-readable service metadata; no boundary export or license retrieved.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "worldatlas-issue-baseline",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/96f2a6d201236ba62f471535db240b123de60c09",
+      "role": "Pinned Atlas subject, parent and area reference baseline",
+      "vintage": "Commit 96f2a6d201236ba62f471535db240b123de60c09",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Repository baseline is internal identity evidence; no general reuse claim is made."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "SOURCE_RESTORATION.md and evidence manifest name exact immutable commit and every read file path/hash.",
+      "limit": "Atlas reference assignment is not independent territorial or political evidence.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "issue-999-scope-contract",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/999",
+      "role": "Authoritative issue contract for the exact three-subject source-only work item",
+      "vintage": "Issue contract captured 2026-10-05",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Project-scope metadata, not a geographic data reuse grant."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "The exact GitHub API response snapshot is retained at github-issue-contract.json; re-fetch the issue through the GitHub API for current labels/comments.",
+      "limit": "Defines task scope and input pins only; does not establish any geographic fact.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "issue-1008-scope-contract",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1008",
+      "role": "Disjoint source-follow-up scope for the other four IDs in the same seven-feature collection",
+      "vintage": "Issue contract captured 2026-10-05; dependencies #421 and #999",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Project-scope metadata, not a geographic data reuse grant."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "The API-derived exact four-ID scope and dependency summary is retained in related-scope-1008.json; re-fetch issue 1008 through the GitHub API for current status.",
+      "limit": "Defines adjacent task ownership only; does not establish any geographic fact.",
+      "temporal_status": "reference"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/followup-kosovo-422-district-source-20261005/RESEARCH.md",
+      "bytes": 10722,
+      "sha256": "2c5a0da5ae2a1a064332034d704e4a30dc27be3a228a5e587e911d08de839fd9",
+      "hash_kind": "file-bytes",
+      "role": "research-report"
+    },
+    {
+      "path": "data/regional-review/followup-kosovo-422-district-source-20261005/SOURCE_RESTORATION.md",
+      "bytes": 7511,
+      "sha256": "2c8327c8ac2435854051248345d24050f26b8b59de87895cb6ae997f4dc5f70a",
+      "hash_kind": "file-bytes",
+      "role": "source-restoration-instructions"
+    },
+    {
+      "path": "data/regional-review/followup-kosovo-422-district-source-20261005/kas-statistical-regions.json",
+      "bytes": 1811,
+      "sha256": "0f33913b6a36b057ecc9d51cbe7e14c11954fc1d3a89565eb63a64ffb4be6fff",
+      "hash_kind": "file-bytes",
+      "role": "source-extract"
+    },
+    {
+      "path": "data/regional-review/followup-kosovo-422-district-source-20261005/reproduce.py",
+      "bytes": 10463,
+      "sha256": "a94aa07904aa002e02070cd9c9a6b54660a3e0fa8611a5985d104fa859bcec99",
+      "hash_kind": "file-bytes",
+      "role": "reproduction-script"
+    },
+    {
+      "path": "data/regional-review/followup-kosovo-422-district-source-20261005/source-crosswalk.json",
+      "bytes": 10417,
+      "sha256": "7339a45153c1a7e6f7c594b6c87be2f8b6294e7407ec63ab2598c839bb4cc5e7",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "data/regional-review/followup-kosovo-422-district-source-20261005/github-issue-contract.json",
+      "bytes": 8820,
+      "sha256": "7ebb5e4717b08375ed0dfde5d077624c4b54b7c5f9a4b3d2524bff145c450163",
+      "hash_kind": "file-bytes",
+      "role": "issue-999-scope-contract"
+    },
+    {
+      "path": "data/regional-review/followup-kosovo-422-district-source-20261005/related-scope-1008.json",
+      "bytes": 886,
+      "sha256": "3399a1e217b2c6c585db2070cdb799cb882eb5951af7d8d9a5d404da26157f03",
+      "hash_kind": "file-bytes",
+      "role": "related-issue-scope-contract"
+    },
+    {
+      "path": "data/regional-review/followup-kosovo-422-district-source-20261005/pr-body.txt",
+      "bytes": 12,
+      "sha256": "623c476cad3011feaf5ce87e3daa0145b4e0284efc6396cfeec0c98f2dbc2fe9",
+      "hash_kind": "file-bytes",
+      "role": "pr-body"
+    }
+  ],
+  "methods": [
+    {
+      "id": "kosovo-source-role-and-identity-review",
+      "kind": "source",
+      "description": "Reproduce exact shape-ID/Atlas-ID/name/parent crosswalk for the pinned complete seven-feature geoBoundaries collection; compare the KAS named 7-region/38-municipality fact table; inspect legal and license records. No polygon overlay or legal determination is performed.",
+      "software": "Python 3.8.5; Git; SHA-256",
+      "units": "features, shape IDs, region labels, municipality names, parent references, whole-file bytes"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "xkx-source-features",
+      "value": 7,
+      "unit": "features",
+      "vintage": "baseline",
+      "input_sha256": "9b07b08fe0f9ca5a26ddb6de2008ac235b38ffaf069063df9851711c2d358315",
+      "evaluation_commit": "96f2a6d201236ba62f471535db240b123de60c09"
+    },
+    {
+      "id": "xkx-source-metadata-admUnitCount",
+      "value": 48,
+      "unit": "metadata-reported units",
+      "vintage": "baseline",
+      "input_sha256": "a912dcaefa1096a6c0af067af9723b2a67c32f5b0147b8198f99751eb591b49c",
+      "evaluation_commit": "96f2a6d201236ba62f471535db240b123de60c09"
+    },
+    {
+      "id": "kas-statistical-regions-2022",
+      "value": 7,
+      "unit": "regions",
+      "vintage": "baseline",
+      "input_sha256": "0f33913b6a36b057ecc9d51cbe7e14c11954fc1d3a89565eb63a64ffb4be6fff",
+      "evaluation_commit": "96f2a6d201236ba62f471535db240b123de60c09"
+    },
+    {
+      "id": "kas-administrative-municipalities-2022",
+      "value": 38,
+      "unit": "municipalities",
+      "vintage": "baseline",
+      "input_sha256": "0f33913b6a36b057ecc9d51cbe7e14c11954fc1d3a89565eb63a64ffb4be6fff",
+      "evaluation_commit": "96f2a6d201236ba62f471535db240b123de60c09"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "xkx-source-features",
+      "value": 7,
+      "unit": "features"
+    },
+    {
+      "metric_id": "xkx-source-metadata-admUnitCount",
+      "value": 48,
+      "unit": "metadata-reported units"
+    },
+    {
+      "metric_id": "kas-statistical-regions-2022",
+      "value": 7,
+      "unit": "regions"
+    },
+    {
+      "metric_id": "kas-administrative-municipalities-2022",
+      "value": 38,
+      "unit": "municipalities"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "xkx-source-features",
+      "path": "data/regional-review/followup-kosovo-422-district-source-20261005/source-crosswalk.json",
+      "json_pointer": "/source_feature_count"
+    },
+    {
+      "metric_id": "xkx-source-metadata-admUnitCount",
+      "path": "data/regional-review/followup-kosovo-422-district-source-20261005/source-crosswalk.json",
+      "json_pointer": "/metadata_admUnitCount"
+    },
+    {
+      "metric_id": "kas-statistical-regions-2022",
+      "path": "data/regional-review/followup-kosovo-422-district-source-20261005/source-crosswalk.json",
+      "json_pointer": "/official_statistical_region_count"
+    },
+    {
+      "metric_id": "kas-administrative-municipalities-2022",
+      "path": "data/regional-review/followup-kosovo-422-district-source-20261005/source-crosswalk.json",
+      "json_pointer": "/official_administrative_municipality_count"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "The exact upstream payload contains seven unique district-named features while the same immutable metadata reports 48 admin units and canonical Municipalities. The reason for 48 is undocumented.",
+      "status": "supported",
+      "source_ids": [
+        "geoboundaries-xkx-adm1"
+      ]
+    },
+    {
+      "text": "KAS distinguishes 38 administrative municipalities from seven non-administrative statistical/economic groupings and names 38 members in its proposed seven regions.",
+      "status": "supported",
+      "source_ids": [
+        "kas-statistical-regions-2022",
+        "kosovo-municipal-boundary-law"
+      ]
+    },
+    {
+      "text": "All seven geoBoundaries district labels match one KAS proposed statistical region label; this is a name-level crosswalk only and not polygon equivalence.",
+      "status": "supported",
+      "source_ids": [
+        "geoboundaries-xkx-adm1",
+        "kas-statistical-regions-2022"
+      ]
+    },
+    {
+      "text": "The Atlas currently labels the source role Municipalities and assigns all seven district features to same-name single-child province references under the pinned Yugoslavia area label. The exact three #999 IDs are the Prishtina, Ferizaj and Gjilan subset; the other four belong to #1008. These reference fields do not validate current legal or historical territorial meaning.",
+      "status": "supported",
+      "source_ids": [
+        "worldatlas-issue-baseline",
+        "geoboundaries-xkx-adm1",
+        "issue-999-scope-contract",
+        "issue-1008-scope-contract"
+      ]
+    },
+    {
+      "text": "No lawful machine-readable official boundary vector or explicit reuse terms were established, so the geometry relationship between the 2021 geoBoundaries features and current official statistical/municipal boundaries remains unverified.",
+      "status": "unresolved",
+      "source_ids": [
+        "kosovo-cadastral-agency-geoportal",
+        "kas-census-2024",
+        "kosovo-municipal-boundary-law"
+      ]
+    },
+    {
+      "text": "The license chain and historical OSM-derived source database cannot be adjudicated from the original metadata, present public license statements and available OSM-Boundaries indexed pages. No compatibility or incompatibility conclusion is supported.",
+      "status": "unresolved",
+      "source_ids": [
+        "geoboundaries-xkx-adm1",
+        "openstreetmap-copyright",
+        "osm-foundation-license-change",
+        "osm-boundaries-download-documentation",
+        "osm-boundaries-site-terms",
+        "geoboundaries-license-api-documentation"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 data/regional-review/followup-kosovo-422-district-source-20261005/reproduce.py --root .",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/evidence-quality.mjs data/regional-review/followup-kosovo-422-district-source-20261005/evidence-quality.json",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/check-handoff-scope.mjs --branch geography/kosovo-districts-source-999-20261005-r1 --base origin/main --issue-file data/regional-review/followup-kosovo-422-district-source-20261005/github-issue-contract.json"
+  ],
+  "change_receipts": [
+    {
+      "path": "data/regional-review/followup-kosovo-422-district-source-20261005/RESEARCH.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-kosovo-422-district-source-20261005/SOURCE_RESTORATION.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-kosovo-422-district-source-20261005/kas-statistical-regions.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-kosovo-422-district-source-20261005/reproduce.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-kosovo-422-district-source-20261005/source-crosswalk.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-kosovo-422-district-source-20261005/github-issue-contract.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-kosovo-422-district-source-20261005/related-scope-1008.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-kosovo-422-district-source-20261005/pr-body.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/followup-kosovo-422-district-source-20261005/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}
