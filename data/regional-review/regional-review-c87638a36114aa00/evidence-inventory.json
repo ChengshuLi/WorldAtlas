@@ -543,8 +543,8 @@
   "packet_outputs": [
     {
       "path": "data/regional-review/regional-review-c87638a36114aa00/README.md",
-      "bytes": 977,
-      "sha256": "a5f76e2d9541d232ad4e85ec8a4d9b2f88018da0c98d23c18273d26db2193c22"
+      "bytes": 1098,
+      "sha256": "6b6a9a6688fe46af2155c2eda935cc7be14b3a835137d128cf625d4715c43a25"
     },
     {
       "path": "data/regional-review/regional-review-c87638a36114aa00/SOURCES.md",
@@ -553,13 +553,13 @@
     },
     {
       "path": "data/regional-review/regional-review-c87638a36114aa00/findings.md",
-      "bytes": 9300,
-      "sha256": "f0ac28c87a5e0f7b2fe3b9cd0baa472313b3158c48e6760a32c2b73308e676de"
+      "bytes": 10618,
+      "sha256": "725fb422b1f9db72c1ede1d54f320b6928e265d2d5c51ae5c6ee942859d2c01b"
     },
     {
       "path": "data/regional-review/regional-review-c87638a36114aa00/location-assessments.csv",
-      "bytes": 68519,
-      "sha256": "b55d1df6f4ba02d82b008d3b039ed740df1445613c61f47c1ab0254ba21b4bd9"
+      "bytes": 94427,
+      "sha256": "048a1409f387b5f2849ea6b3248050fd05d942b48ad70d47b17076034be6002f"
     },
     {
       "path": "data/regional-review/regional-review-c87638a36114aa00/province-review.csv",
@@ -568,13 +568,14 @@
     },
     {
       "path": "data/regional-review/regional-review-c87638a36114aa00/reproduce.py",
-      "bytes": 8220,
-      "sha256": "f9abc120e46dc0c30742674065e75879d4fdf94da66375aae1ed9fedee553580"
+      "bytes": 12795,
+      "sha256": "dbd2696b9f74511586280768c0f0194cd99c15ef6266acef8d6e1ae844e39fea"
     }
   ],
   "scope_sha256": "a079a3eae5616a0fd1e1bf62580b44382de6438f14db51810a91f2848d412822",
   "limitations": [
     "No geospatial overlay or legal boundary validation",
+    "Source-geometry metrics are structural screens only; bbox proxy is not actual area or boundary evidence",
     "NSI 2024 municipality polygons not retained; restoration instructions and exact hashes are supplied; upstream geometry reuse rights unresolved",
     "No regional approval or import authorization"
   ]

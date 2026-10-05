@@ -20,6 +20,23 @@ def norm(value):
  value=unicodedata.normalize("NFKD",str(value or "")).encode("ascii","ignore").decode().lower()
  return re.sub(r"[^a-z0-9]","",value)
 def load_features(path): return json.loads(path.read_text())["features"]
+def coordinate_pairs(value):
+ if isinstance(value,(list,tuple)) and value and all(isinstance(x,(int,float)) for x in value[:2]):
+  yield value[0],value[1]
+ elif isinstance(value,(list,tuple)):
+  for child in value: yield from coordinate_pairs(child)
+def feature_metrics(features):
+ types=[]; components=0; rings=0; vertices=[]; names=[]; multi_source=len(features)>1
+ for feature in features:
+  geom=feature.get("geometry") or {}; typ=geom.get("type","");coords=geom.get("coordinates",[]); types.append(typ)
+  if typ=="Polygon": components+=1;rings+=len(coords)
+  elif typ=="MultiPolygon": components+=len(coords);rings+=sum(len(poly) for poly in coords)
+  vertices.extend(coordinate_pairs(coords));names.append(feature.get("properties",{}).get("shapeName",""))
+ bbox=None;area=None
+ if vertices:
+  xs=[x for x,y in vertices];ys=[y for x,y in vertices];bbox=[min(xs),min(ys),max(xs),max(ys)]
+  area=(bbox[2]-bbox[0])*111.32*max(0.0,__import__("math").cos(__import__("math").radians((bbox[1]+bbox[3])/2)))*(bbox[3]-bbox[1])*111.32
+ return {"geometry_types":";".join(types),"components":components,"rings":rings,"vertices":len(vertices),"bbox":bbox,"bbox_area":area,"multi_source":multi_source,"names":names}
 base=[]
 for path in sorted((REPO/"data/geography").glob("part-*.json")): base.extend(load_features(path))
 baseline={f["properties"]["id"]:f for f in base}
@@ -40,24 +57,62 @@ print("source_features",json.dumps({k:len(v) for k,v in by_iso.items()},sort_key
 # Exact identity linkage and structural screening only.
 rows=[]
 source_maps={k:{f["properties"].get("shapeID"):f["properties"] for f in v} for k,v in by_iso.items()}
+source_feature_maps={k:{f["properties"].get("shapeID"):f for f in v} for k,v in by_iso.items()}
+all_name_counts={k:{} for k in by_iso}
+for iso,features in by_iso.items():
+ for feature in features:
+  nm=norm(feature["properties"].get("shapeName",""))
+  all_name_counts[iso][nm]=all_name_counts[iso].get(nm,0)+1
+parent_counts={}
+for ident in IDS:
+ parent=baseline[ident]["properties"].get("parent_id","")
+ parent_counts[parent]=parent_counts.get(parent,0)+1
 for ident in sorted(IDS):
  f=baseline[ident]; q=f["properties"]; m=q.get("metadata",{}); iso=m.get("source_id","").split(":")[1]
  member_ids=m.get("source_member_ids") or (["gb:"+iso+":"+m.get("administrative_level","")+":"+m.get("original_id","")] if m.get("original_id") else [])
- source_names=[]; missing=[]
+ source_names=[]; missing=[]; source_features=[]
  for member in member_ids:
   bits=member.split(":"); sid=bits[-1]
   sp=source_maps.get(iso,{}).get(sid)
   if sp is None: missing.append(member)
-  else: source_names.append(sp.get("shapeName",""))
+  else:
+   source_names.append(sp.get("shapeName",""))
+   source_features.append(source_feature_maps[iso][sid])
  status="insufficient-evidence"; flag="source polygon correctness and current completeness not independently established"
  if iso=="ALB": flag="source metadata says District / rrethe, not the current 61-municipality tier; source restoration and correct tier remain unresolved"
  if iso=="BGR": flag="municipality identity and parent need official roster comparison; polygon accuracy/currentness remain unresolved"
+ if iso=="ALB" and ident=="gb:ALB:ADM2:67620474B90792074310011":
+  status="correction-needed"; flag="same source name Kuçovë appears on another scoped feature in Berat; this feature is parented to Korçë and carries Korçë search aliases/topology conflicts in the Atlas record. Resolve source identity/name and parent against authoritative historic/current sources; do not infer a replacement from overlap alone"
  if iso=="BIH" and ident=="gb:BIH:ADM3:43093233B26529153732630":
   status="correction-needed"; flag="official RS 2024 list identifies this named municipality in the City of Istočno Sarajevo, whose constituents are RS local units; Atlas parent is Sarajevo Canton"
  if iso=="BGR" and q.get("name") in ("Ruzhinsi","Georgi Bamyanovo","Strumyarni"):
   status="correction-needed"; flag="source English name did not exact-match retained NSI 2024 English-name roster in the performed comparison; likely spelling/transliteration or identity issue requires authoritative resolution; exact NSI source archive/hash/restoration steps in SOURCES.md"
  if missing: flag += "; original source member not found in pinned source file"
- rows.append({"id":ident,"name":q.get("name",""),"country":iso,"parent_id":q.get("parent_id",""),"source_id":m.get("source_id",""),"source_member_ids":";".join(member_ids),"source_names":";".join(source_names),"missing_source_ids":";".join(missing),"assessment":status,"finding":flag,"boundary_status":"insufficient-evidence"})
+ geo=feature_metrics(source_features)
+ duplicate_count=max([all_name_counts[iso].get(norm(name),0) for name in source_names] or [0])
+ flags=[]
+ if any(feature.get("geometry",{}).get("type")=="MultiPolygon" for feature in source_features): flags.append("source-feature-encodes-multiple-polygon-components")
+ if geo["multi_source"]: flags.append("atlas-record-aggregates-multiple-source-features")
+ if duplicate_count>1: flags.append("source-name-repeats-in-full-source-layer")
+ if geo["rings"]>geo["components"]: flags.append("source-has-interior-or-additional-rings")
+ rows.append({"id":ident,"name":q.get("name",""),"country":iso,"parent_id":q.get("parent_id",""),"atlas_parent_scope_count":parent_counts.get(q.get("parent_id",""),0),"source_id":m.get("source_id",""),"source_member_ids":";".join(member_ids),"source_names":";".join(source_names),"source_name_feature_count":duplicate_count,"source_name_group_parent_count":0,"source_geometry_types":geo["geometry_types"],"source_polygon_components":geo["components"],"source_ring_count":geo["rings"],"source_vertex_count":geo["vertices"],"source_wgs84_bbox":json.dumps(geo["bbox"],separators=(",",":")) if geo["bbox"] else "","source_bbox_approx_sqkm":round(geo["bbox_area"],2) if geo["bbox_area"] is not None else "","screening_flags":";".join(flags),"missing_source_ids":";".join(missing),"assessment":status,"finding":flag,"boundary_status":"insufficient-evidence"})
+# Repeated source labels across distinct parent contexts need disambiguation; they do not establish duplicate geography.
+source_name_parents={}
+for row in rows:
+ for source_name in set(filter(None,row["source_names"].split(";"))):
+  source_name_parents.setdefault(norm(source_name),set()).add(row["parent_id"])
+for row in rows:
+ groups=[source_name_parents.get(norm(name),set()) for name in row["source_names"].split(";") if name]
+ row["source_name_group_parent_count"]=max([len(x) for x in groups] or [0])
+ if row["source_name_feature_count"]>1 and row["source_name_group_parent_count"]>1:
+  row["screening_flags"] += (";" if row["screening_flags"] else "")+"repeated-source-name-across-different-atlas-parent-contexts"
+# Relative envelope screening flags are diagnostic prompts, never area estimates or boundary proof.
+for iso in by_iso:
+ areas=[r["source_bbox_approx_sqkm"] for r in rows if r["country"]==iso and isinstance(r["source_bbox_approx_sqkm"],(int,float)) and r["source_bbox_approx_sqkm"]>0]
+ median=sorted(areas)[len(areas)//2] if areas else 0
+ for r in rows:
+  if r["country"]==iso and median and isinstance(r["source_bbox_approx_sqkm"],(int,float)) and r["source_bbox_approx_sqkm"]>=5*median:
+   r["screening_flags"] += (";" if r["screening_flags"] else "")+"source-bbox-at-least-5x-country-scope-median"
 for iso,features in by_iso.items():
  sourceids={f["properties"].get("shapeID") for f in features}
  scoped=[r for r in rows if r["country"]==iso]
