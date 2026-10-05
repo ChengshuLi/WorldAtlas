@@ -1,0 +1,38 @@
+{
+  "issue": 78,
+  "review_scope": "exact 64-ID Bangladesh packet; no geographic or record edits",
+  "findings": [
+    {
+      "id": "bgd-current-division-names",
+      "status": "correction-needed",
+      "follow_up_issue": 883,
+      "subjects": ["framework:province:chittagong:ac7093d66f26", "framework:province:rajshani:56b6a7e691b9", "framework:province:barisal:253f950224c6"],
+      "recommendations": {"Chittagong":"Chattogram", "Rajshani":"Rajshahi", "Barisal":"Barishal"},
+      "evidence": "Bangladesh National Portal division-list page, inspected 2026-10-05; current official spelling shown as Chattogram, Rajshahi and Barishal. Pinned 2020 geoBoundaries ADM1 retains the older Atlas spellings. Portal bytes could not be lawfully/technically retained (HTTP 403; reuse terms unverified); restoration URL and limits are in source-inventory.json.",
+      "engineering_handoff": "Preserve the three existing province IDs and exact member IDs. Restore/revalidate the official roster source, update only supported display names through the standard correction workflow, and preserve predecessor spellings and release history. This packet does not edit names."
+    },
+    {
+      "id": "bgd-district-division-parent-crosswalk",
+      "status": "insufficient-evidence",
+      "follow_up_issue": 884,
+      "subjects": ["all 64 issue-owned gb:BGD:ADM2 IDs", "all eight Bangladesh province groups"],
+      "evidence": "The official portal groups districts under divisions, but the inspected page bytes are not retained and the 2020 geoBoundaries source lacks a district-to-division property. No legal instrument or current authoritative boundary/parent crosswalk was retained. Geometry containment is not accepted as legal parent proof.",
+      "engineering_handoff": "Obtain a lawful, dated current official district/division roster or administrative gazette and a permissibly reusable authoritative boundary layer; crosswalk every exact ID before proposing any parent or footprint change. Coordinate the complete area with the #77 integration owner."
+    },
+    {
+      "id": "bgd-boundary-and-coastal-completeness",
+      "status": "insufficient-evidence",
+      "follow_up_issue": 884,
+      "subjects": ["all 64 issue-owned gb:BGD:ADM2 IDs", "framework:area:bangladesh:d6ecdc832a37"],
+      "evidence": "The pinned source metadata reports boundary year 2020 and cites BBS/OCHA, while the linked HDX dataset is described as boundaries as of 2015. Neither proves legal effective dates, exact borders, topology, island/coastal completeness or a nonpolitical definition for the Atlas area. Source-geometry component counts are only a screen.",
+      "engineering_handoff": "Restore permissible official BBS/OCHA source lineage and compare vintages, legal effective dates, district/island rosters, neighboring country granularity, and coast/island coverage. Do not alter shared regional envelopes or treat numerical source tiers as equivalent geographic tiers."
+    }
+  ],
+  "unresolved": [
+    "District legal boundary correctness and source positional accuracy.",
+    "Current complete district-to-division crosswalk and source effective dates.",
+    "Island, coastal, riverine and disconnected-territory completeness.",
+    "Bangladesh's suitability as the issue's full area purpose beyond an administrative national grouping.",
+    "Neighboring-region granularity and any regional integration implications."
+  ]
+}

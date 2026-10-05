@@ -1,0 +1,57 @@
+{
+  "scope_count": 64,
+  "checks": [
+    {
+      "risk": "fragmented-city territories",
+      "screen": "All 64 source records are ADM2/district features; no city/municipal role attribute is provided.",
+      "result": "unresolved",
+      "reason": "District polygons can contain urban jurisdictions; the source does not expose city corporate territories or city-specific splits."
+    },
+    {
+      "risk": "province-sized locations",
+      "screen": "Uniform source administrative role is district; ADM1 contains eight divisions.",
+      "result": "no source-tier anomaly observed",
+      "reason": "No feature is coded ADM1, but exact district-to-division parent and boundary overlay remain unverified."
+    },
+    {
+      "risk": "anonymous administrative remainders",
+      "screen": "0 of 64 source names are empty; 0 repeated shapeName values.",
+      "result": "no source-name anomaly observed"
+    },
+    {
+      "risk": "disconnected territories",
+      "screen": "20 of 64 source geometries are MultiPolygon.",
+      "result": "unresolved",
+      "reason": "Component counts cannot distinguish islands, river channels, detached administrative fragments or geometry artifacts."
+    },
+    {
+      "risk": "omitted islands/coastal land",
+      "screen": "Complete 64-feature provider roster and current official portal count observed.",
+      "result": "unresolved",
+      "reason": "Count agreement does not prove named-island, low-tide or coastline completeness."
+    },
+    {
+      "risk": "repeated tiers",
+      "screen": "64 unique source IDs, all source ADM2/district; eight source ADM1/division features.",
+      "result": "no duplicate source IDs or source tiers observed"
+    },
+    {
+      "risk": "oversized groups",
+      "screen": "Atlas province memberships range from 4 to 13 district IDs; each province matches an ADM1 source name/count.",
+      "result": "unresolved",
+      "reason": "A count range is not a sourced standard for appropriate scale or geographic purpose."
+    },
+    {
+      "risk": "weak parents",
+      "screen": "All 64 Atlas IDs have a province parent; ADM1 names/counts match retained Atlas division groups.",
+      "result": "insufficient evidence",
+      "reason": "Current official labels differ for three divisions; exact legal district-to-division lineage was not verified."
+    },
+    {
+      "risk": "inconsistent neighboring units",
+      "screen": "No adjacent-region district roster or source inspection is included in the issue's declared subject scope.",
+      "result": "unresolved",
+      "reason": "Do not infer cross-border granularity from ADM numbers; neighboring-region review remains open."
+    }
+  ]
+}

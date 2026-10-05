@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "issue": 78,
+  "retrieved_utc": "2026-10-05",
+  "baseline_commit": "ddf9a8d02e808f40099d55878a301478c8c5eb64",
+  "baseline": {
+    "path": "data/macro-foundation/current-membership-projection.json.gz",
+    "sha256": "c9f66e9801b6b29d9c72f806b33bff2a5025a74cf061b95d693ade8dbcc4fbc9",
+    "role": "current main location and parent inventory",
+    "pin_note": "Verify this exact hash from the baseline commit; it is not an ancestor source-geometry claim."
+  },
+  "sources": [
+    {
+      "source_id": "gb:BGD:ADM2",
+      "title": "geoBoundaries Bangladesh ADM2",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BGD/ADM2/geoBoundaries-BGD-ADM2.geojson",
+      "release": "geoBoundaries repository commit 9469f09",
+      "role": "district",
+      "vintage": "2020",
+      "source_attribution": "Bangladesh Bureau of Statistics (BBS), OCHA ROAP",
+      "source_data_update": "2023-01-19 (provider metadata)",
+      "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "license_source": "https://data.humdata.org/dataset/administrative-boundaries-of-bangladesh-as-of-2015",
+      "feature_count": 64,
+      "geometry_path": "sources/geoboundaries-9469f09/BGD-ADM2/geoBoundaries-BGD-ADM2.geojson",
+      "metadata_path": "sources/geoboundaries-9469f09/BGD-ADM2/geoBoundaries-BGD-ADM2-metaData.json",
+      "citation_file": null,
+      "citation_file_note": "Provider's advertised layer-specific citation file URL returned HTTP 404; use provider citation guidance and attribute source, release and license above.",
+      "files": [
+        {"path":"sources/geoboundaries-9469f09/BGD-ADM2/geoBoundaries-BGD-ADM2.geojson","sha256":"54379ccc77f6f59dab3569ecc5f9b3850dbed2d65a5f43a034bdf92179f5621b"},
+        {"path":"sources/geoboundaries-9469f09/BGD-ADM2/geoBoundaries-BGD-ADM2-metaData.json","sha256":"ddab6cab37c5cfe5af273e9e784897c7f1a55ab4820d37b13c7824046a1dc5e5"}
+      ]
+    },
+    {
+      "source_id": "gb:BGD:ADM1",
+      "title": "geoBoundaries Bangladesh ADM1",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/BGD/ADM1/geoBoundaries-BGD-ADM1.geojson",
+      "release": "geoBoundaries repository commit 9469f09",
+      "role": "division",
+      "vintage": "2020",
+      "source_attribution": "Bangladesh Bureau of Statistics (BBS), OCHA ROAP",
+      "source_data_update": "2023-01-19 (provider metadata)",
+      "license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "license_source": "https://data.humdata.org/dataset/administrative-boundaries-of-bangladesh-as-of-2015",
+      "feature_count": 8,
+      "geometry_path": "sources/geoboundaries-9469f09/BGD-ADM1/geoBoundaries-BGD-ADM1.geojson",
+      "metadata_path": "sources/geoboundaries-9469f09/BGD-ADM1/geoBoundaries-BGD-ADM1-metaData.json",
+      "files": [
+        {"path":"sources/geoboundaries-9469f09/BGD-ADM1/geoBoundaries-BGD-ADM1.geojson","sha256":"f25f782a3b6eeece96e4218094380e2d02e2ac560c1eb125f59bd7229a1ca348"},
+        {"path":"sources/geoboundaries-9469f09/BGD-ADM1/geoBoundaries-BGD-ADM1-metaData.json","sha256":"abfbc48646c33992401bbd6cd569f3a05f5e3195dbfd36a47c71645d67089162"}
+      ]
+    }
+  ],
+  "official_roster_inspection": {
+    "source": "Bangladesh National Portal, District list",
+    "url": "https://bangladesh.gov.bd/views/district-list/District-List/",
+    "retrieved": "2026-10-05",
+    "observed": "Portal reports 8 divisions and 64 districts and presents district names under each division.",
+    "raw_retention": "Not retained: direct retrieval returned HTTP 403 and the portal page reuse terms were not established. Restore from the URL and revalidate before relying on exact labels or making a correction.",
+    "role": "current official roster cross-check; not a boundary source"
+  },
+  "division_roster_inspection": {
+    "source": "Bangladesh National Portal, Division list",
+    "url": "https://bangladesh.gov.bd/site/view/division-list/division-list",
+    "retrieved": "2026-10-05",
+    "observed": "Portal lists Chattogram, Rajshahi, Khulna, Barishal, Sylhet, Dhaka, Rangpur and Mymensingh.",
+    "raw_retention": "Not retained: direct retrieval returned HTTP 403 and page reuse terms were not established.",
+    "role": "current official naming cross-check; not a boundary source"
+  },
+  "limitations": [
+    "The cited geoBoundaries metadata points to a Humanitarian Data Exchange dataset described as administrative boundaries as of 2015 while the provider boundaryYear is 2020. This does not establish when each line was surveyed or legally effective.",
+    "A full 64-feature source roster and a current portal roster do not demonstrate exact boundary correctness, complete offshore/island coverage, topology or a universal geographic-purpose definition.",
+    "The source ADM1/ADM2 shapes lack an independently verified legal parent crosswalk in this packet; geometry-based assignment was not used as proof of administrative parentage."
+  ]
+}
