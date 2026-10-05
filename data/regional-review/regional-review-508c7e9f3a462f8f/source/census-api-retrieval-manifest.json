@@ -1,0 +1,42 @@
+[
+  {
+    "vintage": 2018,
+    "file": "census-2018/counties-layer-metadata.json",
+    "retrieved_at": "2026-10-05T06:14:19-07:00",
+    "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2018/MapServer/84?f=pjson",
+    "bytes": 9479,
+    "sha256": "2d3b72f3957787cae0f8ae5a77bafd0b9603f8d6a5b4db2a700898e179e855c6",
+    "license_basis": "U.S. Census Bureau employee work; Census public access policy states such works generally are not subject to U.S. copyright",
+    "accessed_by": "direct Census REST API"
+  },
+  {
+    "vintage": 2018,
+    "file": "census-2018/texas-counties.geojson",
+    "retrieved_at": "2026-10-05T06:14:19-07:00",
+    "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2018/MapServer/84/query?where=STATE+%3D+%2748%27&outFields=GEOID%2CSTATE%2CCOUNTY%2CNAME%2CBASENAME%2CLSADC%2CFUNCSTAT%2CCOUNTYNS%2CAREALAND%2CAREAWATER&returnGeometry=true&outSR=4326&f=geojson",
+    "bytes": 24618140,
+    "sha256": "309151b2ea2bfcad71698f7c3b82a52fc92cb3a59c29ee040d22ec7263b34cc7",
+    "license_basis": "U.S. Census Bureau employee work; Census public access policy states such works generally are not subject to U.S. copyright",
+    "accessed_by": "direct Census REST API"
+  },
+  {
+    "vintage": 2025,
+    "file": "census-2025/counties-layer-metadata.json",
+    "retrieved_at": "2026-10-05T06:14:54-07:00",
+    "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/39?f=pjson",
+    "bytes": 7515,
+    "sha256": "0c64a04e01055622c957ef56f9b8fd35c99c4bcc78c2fa1bba11e716d6a72f31",
+    "license_basis": "U.S. Census Bureau employee work; Census public access policy states such works generally are not subject to U.S. copyright",
+    "accessed_by": "direct Census REST API"
+  },
+  {
+    "vintage": 2025,
+    "file": "census-2025/texas-counties.geojson",
+    "retrieved_at": "2026-10-05T06:14:54-07:00",
+    "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/39/query?where=STATE+%3D+%2748%27&outFields=GEOID%2CSTATE%2CCOUNTY%2CNAME%2CBASENAME%2CLSADC%2CFUNCSTAT%2CCOUNTYNS%2CAREALAND%2CAREAWATER&returnGeometry=true&outSR=4326&f=geojson",
+    "bytes": 24740001,
+    "sha256": "efc43054c4a7f555ba1a1cf26e6315e5562005635152a9a41795152fe0eec0d6",
+    "license_basis": "U.S. Census Bureau employee work; Census public access policy states such works generally are not subject to U.S. copyright",
+    "accessed_by": "direct Census REST API"
+  }
+]

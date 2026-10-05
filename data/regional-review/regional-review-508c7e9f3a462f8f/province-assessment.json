@@ -1,0 +1,37 @@
+{
+  "subject_id": "framework:province:texas:d326ad9fd3b4",
+  "name": "Texas",
+  "level": "province",
+  "parent_id": "framework:area:west-south-central:1e780b4bc1dd",
+  "source": "gb:USA:ADM1",
+  "source_basis": "Named source administrative unit grouped within this geographic area",
+  "source_children": 254,
+  "current_member_count": 254,
+  "member_roster_equals_issue_scope": true,
+  "current_framework_status": "retained-reference",
+  "semantic_review_action": "open",
+  "boundary_review_status": "open",
+  "higher_parent": {
+    "id": "framework:area:west-south-central:1e780b4bc1dd",
+    "name": "West South Central",
+    "current_child_count": 4,
+    "classification": "justified-as-Census-division-container; its boundaries are not certified by this packet"
+  },
+  "claim_classification": {
+    "administrative_meaning": "justified",
+    "current_member_roster": "justified",
+    "province_boundary": "insufficient-evidence",
+    "overall": "insufficient-evidence"
+  },
+  "supporting_facts": [
+    "Official Texas government identifies 254 counties; Texas constitutional article V section 18 establishes county government structure.",
+    "Current v6 province membership contains the exact 254 issue member IDs.",
+    "Current hierarchy identifies this Texas province as a retained reference grouped under West South Central; its existing source is gb:USA:ADM1."
+  ],
+  "unresolved": [
+    "Hierarchy metadata retains this state grouping and has semantic/boundary review open.",
+    "The current outer Texas/USA boundary was not independently compared to a dated authoritative state boundary in this county packet.",
+    "Although the group has 254 county children, the Texas Census guide identifies county subdivisions as statistical CCDs without legal county-government function; no extra county-subdivision tier is justified by child count alone.",
+    "No child-cluster or sovereign grouping certification is made."
+  ]
+}
