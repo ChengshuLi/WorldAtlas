@@ -1,0 +1,44 @@
+# Source inventory and restoration
+
+All retrieval dates below are 2026-10-05 UTC. The source records are inputs to a bounded research packet, not approval. The packet's source scripts compare exact IDs without modifying the Atlas dataset.
+
+## geoBoundaries South Africa ADM3
+
+- Source: geoBoundaries v3 `gbOpen`, `ZAF`, `ADM3`, commit `9469f09`, file `releaseData/gbOpen/ZAF/ADM3/geoBoundaries-ZAF-ADM3.geojson`.
+- Exact original URL: <https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/ZAF/ADM3/geoBoundaries-ZAF-ADM3.geojson>. The issue's original GitHub raw URL is preserved in `issue-436-scope.json`.
+- Sidecar source metadata is retained at `geoboundaries-zaf-adm3/geoBoundaries-ZAF-ADM3-metaData.json`. It identifies boundary year 2020, canonical role “Local municipality”, source OCHA ROSEA and South African Municipal Demarcation Board, CC BY 3.0 IGO, source data update 2023-01-19, build date 2023-12-12, and 213 ADM3 features. The sidecar's source URL has a malformed `https//` scheme; the GitHub commit URL above is the working pinned restoration URL.
+- Exact original download: 50,705,428 bytes, SHA-256 `74e489fd4370972403950719026a317abba443668cea7d49f4b36c61637958f1`. This exceeds the premerge 32 MiB input bound as one file. Its LFS pointer and source SHA are retained; the 213 original feature objects and their properties/geometries are preserved in two content-preserving GeoJSON FeatureCollection partitions, each below 32 MiB. The partition checksums are `9bf1c731ab636ceb7adfbf94ce9ce10fa911fe107fe5356a05e0ded79888dc5a` and `6faa04142bdfbfa8126c8fe65693f8536543f4dc3c423d543d3f324d9677f126`. The canonical compact, sorted-key serialization of the full FeatureCollection (type, CRS and all 213 features) hashes to `46410c04181b8eaf342653905245646a00c1ff9f26d194eff7adb5d1c0a8b544`; the reproduction ledger separately hashes the canonical feature array as `b756c896d287cef5b1eaac98296879b9464837c1d5c3ca945d3c56313630715f`. The reproduction command independently confirms all 213 feature objects, CRS metadata, properties and coordinates match the restored original.
+- License: CC BY 3.0 IGO as declared by the retained geoBoundaries sidecar. Attribution: geoBoundaries; source attribution in the sidecar: OCHA ROSEA and the South African Municipal Demarcation Board.
+- Restore the one-file original from the exact URL above and verify the original SHA before using it as a byte-identical source. To recreate retained feature partitions, run `partition_source.py --input <restored-original.geojson> --output-dir <directory>`; the script verifies the original whole-file SHA, feature IDs/count, part sizes and deterministic partition hashes.
+
+## geoBoundaries South Africa ADM2
+
+- Pinned source: same geoBoundaries commit and country, file `releaseData/gbOpen/ZAF/ADM2/geoBoundaries-ZAF-ADM2.geojson`.
+- URL: <https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/ZAF/ADM2/geoBoundaries-ZAF-ADM2.geojson>.
+- Metadata sidecar and entire original GeoJSON are retained: geometry SHA-256 `6cc504ad835b37823da687a3fd3f0cab63608a6c8a5ad906e1011f1554bbbbdd` (32,530,325 bytes); metadata SHA-256 `2494abde693528d94b11e4130b2250b10f9d485153ce4ffafe1e683ef71a7331` (960 bytes). Sidecar states 52 features, 2020, canonical role “District municipality”, source update 2023-01-19 and CC BY 3.0 IGO. All 48 owned parent source IDs/names resolve uniquely in this file. The generic ADM2 role requires independent review for the seven metro cases.
+- Attribute the file to geoBoundaries/OCHA ROSEA/South African MDB under CC BY 3.0 IGO. A matching feature does not prove the present legal boundary.
+
+## Statistics South Africa (Stats SA), Census 2022 Provinces at a glance
+
+- Report 03-01-43, retrieved from <https://census.statssa.gov.za/assets/documents/2022/Provinces_at_a_Glance.pdf>.
+- Retrieved source PDF size 2,614,496 bytes; SHA-256 `ae03e2d95153d9885e9b1cf956f19c807f94627da1331f82f18ac3d6e5ae10b4`. The source PDF is not distributed in this packet because its stated data-processing permission does not clearly grant redistribution. `reproduce_statsa.py` fetches it into local scratch using verified TLS and checks this exact SHA before extracting anything.
+- Pages 50–51 (PDF pages 57–58) document district name and boundary changes from 2011–2018. Pages 52–69 (PDF pages 60–77) summarize local changes, mergers and boundary re-determinations. Pages 71–78 (PDF pages 80–87) contain a 213-row table of municipality codes, province, Category A/B, municipality name, district code/name and reported area. The row extraction is reproduced by `reproduce_statsa.py`; output is Stats SA data processed independently for this review.
+- The publication states users may apply/process data with source acknowledgement and independent-processing attribution; its basic or processed data may not be sold without prior permission. Attribution is Statistics South Africa (Stats SA), *Census 2022 Provinces at a glance*, Report 03-01-43 (2023). Preserve these terms with any reuse.
+- It supplies names, codes, categories, district assignments and tabulated areas, not authoritative boundary coordinates. A 2022 census table is not a current geometry file.
+
+## South African Government and Constitution
+
+- South African Government, “Local government”: <https://www.gov.za/about-government/government-system/local-government>, retrieved 2026-10-05. It reports eight metropolitan, 44 district and 205 local municipalities, and points to the Municipal Structures Act's Category A/B/C framework. This supports semantic context, not specific coordinates.
+- Constitution of South Africa, Chapter 7, section 155: <https://www.justice.gov.za/legislation/constitution/chp07.html>, retrieved 2026-10-05. It defines Category A municipalities as having exclusive executive and legislative authority, Category B as sharing authority with Category C, and Category C as covering more than one municipality. Stats SA's 2022 municipal table supplies the subject-level current categories.
+
+## South African Municipal Demarcation Board REST layer (inspection only)
+
+- Official service metadata: <https://nspdr.dlrrd.gov.za/server/rest/services/NationalDatasets/MunicipalDemarcationBoard/MapServer/3?f=pjson>, layer 3 “Local Municipality”, queried 2026-10-05. Metadata download SHA-256 `db564f8e209ab43fce0e17443672bbfd3a7514a087cdea36e01cf54e0e053fb3` (6,479 bytes).
+- Attributes request: <https://nspdr.dlrrd.gov.za/server/rest/services/NationalDatasets/MunicipalDemarcationBoard/MapServer/3/query?where=1%3D1&outFields=%2A&returnGeometry=false&f=json>. Retrieved response SHA-256 `a93cd4e1def553c7071fda12f404091c557ac4c38f69d3130457a267a56b80b9` (63,665 bytes; 213 rows). The count request returned 213; response SHA-256 `2442feead157a19987b03bf0e8a091cbc0267bad51d1b73ba773298cd4c6df70` (13 bytes).
+- The rows' `Timestamp` field is 1471392000000 ms since epoch (2016-08-17) for all 213 records. The service describes a Municipal Demarcation Board source and displays copyright text but does not specify an explicit reuse license or unambiguous data-vintage meaning for `Timestamp`. The responses are therefore **not retained** and are not used as current boundary evidence. Restore only by requesting the exact documented endpoints over verified TLS; recheck current terms, metadata and timestamp meanings before reuse. These hashes attest to the inspected response bytes, not to continuing availability.
+
+## Scope and baseline records
+
+- `issue-436-scope.json` is the exact machine-readable scope string extracted from issue #436 on 2026-10-05; SHA-256 `90a4d40af9a9dcb53bd7c7d206c2f3251a59da6bf987a4be3784ee68d7aa7188`.
+- `issue-435-eastern-cape-complement.json` contains only the 17 South African ADM3 IDs in #435's partial Eastern Cape area, not the other subjects owned by that packet. It records source issue URL, retrieval date, full #435 scope hash, count and IDs. Those IDs are distinct from #436's 16 Eastern Cape members.
+- Atlas baseline is commit `93c901e1c0b44073233fd3d48d403985a0cf2c52`; containing geography file `data/geography/part-28.json`, SHA-256 `2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d`. The global hierarchy SHA in the issue scope is retained there; the exact hierarchy file and parent rows are not changed.

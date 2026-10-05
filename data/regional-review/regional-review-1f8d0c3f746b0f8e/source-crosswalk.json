@@ -1,0 +1,4794 @@
+{
+  "baseline_main": "93c901e1c0b44073233fd3d48d403985a0cf2c52",
+  "issue": 436,
+  "scope_sha256": "90a4d40af9a9dcb53bd7c7d206c2f3251a59da6bf987a4be3784ee68d7aa7188",
+  "baseline_part_28_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+  "pinned_adm3_sha256": "74e489fd4370972403950719026a317abba443668cea7d49f4b36c61637958f1",
+  "source_partition_sha256": {
+    "geoBoundaries-ZAF-ADM3-part-01-of-02.geojson": "9bf1c731ab636ceb7adfbf94ce9ce10fa911fe107fe5356a05e0ded79888dc5a",
+    "geoBoundaries-ZAF-ADM3-part-02-of-02.geojson": "6faa04142bdfbfa8126c8fe65693f8536543f4dc3c423d543d3f324d9677f126"
+  },
+  "canonical_source_features_sha256": "b756c896d287cef5b1eaac98296879b9464837c1d5c3ca945d3c56313630715f",
+  "source_feature_count": 213,
+  "scope_count": 196,
+  "unique_ids": 196,
+  "valid_geometry_pair_count": 196,
+  "topological_geometry_match_count": 0,
+  "relative_area_difference_max": 0.01215004,
+  "source_multipart_count": 4,
+  "atlas_multipart_count": 6,
+  "component_count_mismatch_count": 8,
+  "component_count_mismatches": [
+    {
+      "id": "gb:ZAF:ADM3:15628383B175155379368",
+      "name": "Ba-Phalaborwa",
+      "source_components": 1,
+      "atlas_components": 2
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B22918874206511",
+      "name": "Saldanha Bay",
+      "source_components": 7,
+      "atlas_components": 1
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B23048095503212",
+      "name": "Mkhondo",
+      "source_components": 1,
+      "atlas_components": 2
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B41108868323970",
+      "name": "Swartland",
+      "source_components": 2,
+      "atlas_components": 1
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B46845171983587",
+      "name": "Thabazimbi",
+      "source_components": 1,
+      "atlas_components": 2
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B5837125139106",
+      "name": "Jozini",
+      "source_components": 1,
+      "atlas_components": 3
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B63173838521780",
+      "name": "Bushbuckridge",
+      "source_components": 1,
+      "atlas_components": 2
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B80696664936096",
+      "name": "Overstrand",
+      "source_components": 3,
+      "atlas_components": 1
+    }
+  ],
+  "rows": [
+    {
+      "id": "gb:ZAF:ADM3:15628383B10231305979692",
+      "name": "Ubuntu",
+      "parent_id": "framework:province:pixley-ka-seme:98fe4964a4d9",
+      "shapeID": "15628383B10231305979692",
+      "source_shapeName": "Ubuntu",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        20395.134122
+      ],
+      "source_component_areas_km2": [
+        20393.19205
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 20395.134,
+      "source_area_km2": 20393.192,
+      "relative_area_difference": 9.523e-05,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B10857408054288",
+      "name": "Dikgatlong",
+      "parent_id": "framework:province:frances-baard:d0cb018a1a82",
+      "shapeID": "15628383B10857408054288",
+      "source_shapeName": "Dikgatlong",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        7320.554549
+      ],
+      "source_component_areas_km2": [
+        7315.78439
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 7320.555,
+      "source_area_km2": 7315.784,
+      "relative_area_difference": 0.00065204,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B11467516641790",
+      "name": "Mhlontlo",
+      "parent_id": "framework:province:o-r-tambo:5dbfc6d96f9e",
+      "shapeID": "15628383B11467516641790",
+      "source_shapeName": "Mhlontlo",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        2882.640258
+      ],
+      "source_component_areas_km2": [
+        2880.265039
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 2882.64,
+      "source_area_km2": 2880.265,
+      "relative_area_difference": 0.00082465,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B11748786271617",
+      "name": "Ngwathe",
+      "parent_id": "framework:province:fezile-dabi:5a6ae9aa1a0e",
+      "shapeID": "15628383B11748786271617",
+      "source_shapeName": "Ngwathe",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        7052.666651
+      ],
+      "source_component_areas_km2": [
+        7055.009536
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 7052.667,
+      "source_area_km2": 7055.01,
+      "relative_area_difference": 0.00033209,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B13242049883763",
+      "name": "uMhlathuze",
+      "parent_id": "framework:province:uthungulu:1776dde21479",
+      "shapeID": "15628383B13242049883763",
+      "source_shapeName": "uMhlathuze",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1237.956709
+      ],
+      "source_component_areas_km2": [
+        1233.369852
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1237.957,
+      "source_area_km2": 1233.37,
+      "relative_area_difference": 0.00371896,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B13551745181443",
+      "name": "Kamiesberg",
+      "parent_id": "framework:province:namakwa:45177040906e",
+      "shapeID": "15628383B13551745181443",
+      "source_shapeName": "Kamiesberg",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        14208.955218
+      ],
+      "source_component_areas_km2": [
+        14208.434153
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 14208.955,
+      "source_area_km2": 14208.434,
+      "relative_area_difference": 3.667e-05,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B13555669719826",
+      "name": "Dr Nkosazana Dlamini Zuma",
+      "parent_id": "framework:province:sisonke:526acef41329",
+      "shapeID": "15628383B13555669719826",
+      "source_shapeName": "Dr Nkosazana Dlamini Zuma",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        3594.977435
+      ],
+      "source_component_areas_km2": [
+        3601.918367
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 3594.977,
+      "source_area_km2": 3601.918,
+      "relative_area_difference": 0.00192701,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B13881296162767",
+      "name": "Mogale City",
+      "parent_id": "framework:province:west-rand:239a112f119d",
+      "shapeID": "15628383B13881296162767",
+      "source_shapeName": "Mogale City",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1349.161527
+      ],
+      "source_component_areas_km2": [
+        1342.162559
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1349.162,
+      "source_area_km2": 1342.163,
+      "relative_area_difference": 0.00521469,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B14963180798708",
+      "name": "Magareng",
+      "parent_id": "framework:province:frances-baard:d0cb018a1a82",
+      "shapeID": "15628383B14963180798708",
+      "source_shapeName": "Magareng",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1541.775248
+      ],
+      "source_component_areas_km2": [
+        1546.380162
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1541.775,
+      "source_area_km2": 1546.38,
+      "relative_area_difference": 0.00297787,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B15412398369676",
+      "name": "Matatiele",
+      "parent_id": "framework:province:alfred-nzo:58dfe56360b7",
+      "shapeID": "15628383B15412398369676",
+      "source_shapeName": "Matatiele",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        4354.856747
+      ],
+      "source_component_areas_km2": [
+        4352.308406
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 4354.857,
+      "source_area_km2": 4352.308,
+      "relative_area_difference": 0.00058551,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B15418766532839",
+      "name": "City of Johannesburg",
+      "parent_id": "framework:province:city-of-johannesburg:1f26acf0d480",
+      "shapeID": "15628383B15418766532839",
+      "source_shapeName": "City of Johannesburg",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1640.934622
+      ],
+      "source_component_areas_km2": [
+        1644.931153
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1640.935,
+      "source_area_km2": 1644.931,
+      "relative_area_difference": 0.0024296,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B15882687938841",
+      "name": "Elias Motsoaledi",
+      "parent_id": "framework:province:sekhukhune:bd568a599444",
+      "shapeID": "15628383B15882687938841",
+      "source_shapeName": "Elias Motsoaledi",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        3707.137446
+      ],
+      "source_component_areas_km2": [
+        3713.326416
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 3707.137,
+      "source_area_km2": 3713.326,
+      "relative_area_difference": 0.00166669,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B15970578895860",
+      "name": "Greater Kokstad",
+      "parent_id": "framework:province:sisonke:526acef41329",
+      "shapeID": "15628383B15970578895860",
+      "source_shapeName": "Greater Kokstad",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        2678.899174
+      ],
+      "source_component_areas_km2": [
+        2679.72747
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 2678.899,
+      "source_area_km2": 2679.727,
+      "relative_area_difference": 0.0003091,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B16370705883263",
+      "name": "Nketoana",
+      "parent_id": "framework:province:thabo-mofutsanyane:93c14c120fea",
+      "shapeID": "15628383B16370705883263",
+      "source_shapeName": "Nketoana",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        5616.111148
+      ],
+      "source_component_areas_km2": [
+        5611.119464
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 5616.111,
+      "source_area_km2": 5611.119,
+      "relative_area_difference": 0.00088961,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B16733887405757",
+      "name": "Mfolozi",
+      "parent_id": "framework:province:uthungulu:1776dde21479",
+      "shapeID": "15628383B16733887405757",
+      "source_shapeName": "Mfolozi",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1296.082476
+      ],
+      "source_component_areas_km2": [
+        1299.802958
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1296.082,
+      "source_area_km2": 1299.803,
+      "relative_area_difference": 0.00286234,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B1738846702003",
+      "name": "Umzimkhulu",
+      "parent_id": "framework:province:sisonke:526acef41329",
+      "shapeID": "15628383B1738846702003",
+      "source_shapeName": "Umzimkhulu",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        2441.313178
+      ],
+      "source_component_areas_km2": [
+        2435.56933
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 2441.313,
+      "source_area_km2": 2435.569,
+      "relative_area_difference": 0.00235832,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B175155379368",
+      "name": "Ba-Phalaborwa",
+      "parent_id": "framework:province:mopani:4ae13b6228b0",
+      "shapeID": "15628383B175155379368",
+      "source_shapeName": "Ba-Phalaborwa",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 2,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        7480.954248,
+        0.0
+      ],
+      "source_component_areas_km2": [
+        7489.2624
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 7480.954,
+      "source_area_km2": 7489.262,
+      "relative_area_difference": 0.00110934,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B17638662829865",
+      "name": "Greater Tubatse/Fetakgomo",
+      "parent_id": "framework:province:sekhukhune:bd568a599444",
+      "shapeID": "15628383B17638662829865",
+      "source_shapeName": "Greater Tubatse/Fetakgomo",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        5691.263106
+      ],
+      "source_component_areas_km2": [
+        5693.478294
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 5691.263,
+      "source_area_km2": 5693.478,
+      "relative_area_difference": 0.00038907,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B17721277899206",
+      "name": "Kgetlengrivier",
+      "parent_id": "framework:province:bojanala:18abe27e693f",
+      "shapeID": "15628383B17721277899206",
+      "source_shapeName": "Kgetlengrivier",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        3970.555122
+      ],
+      "source_component_areas_km2": [
+        3973.094336
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 3970.555,
+      "source_area_km2": 3973.094,
+      "relative_area_difference": 0.0006391,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B17742819019912",
+      "name": "Theewaterskloof",
+      "parent_id": "framework:province:overberg:c1fdba620591",
+      "shapeID": "15628383B17742819019912",
+      "source_shapeName": "Theewaterskloof",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        3260.539361
+      ],
+      "source_component_areas_km2": [
+        3259.146423
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 3260.539,
+      "source_area_km2": 3259.146,
+      "relative_area_difference": 0.00042739,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B17839761001340",
+      "name": "Ventersdorp/Tlokwe",
+      "parent_id": "framework:province:dr-kenneth-kaunda:28fb7500c130",
+      "shapeID": "15628383B17839761001340",
+      "source_shapeName": "Ventersdorp/Tlokwe",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        6405.519971
+      ],
+      "source_component_areas_km2": [
+        6398.082708
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 6405.52,
+      "source_area_km2": 6398.083,
+      "relative_area_difference": 0.00116242,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B18474910363829",
+      "name": "Masilonyana",
+      "parent_id": "framework:province:lejweleputswa:e3440773b899",
+      "shapeID": "15628383B18474910363829",
+      "source_shapeName": "Masilonyana",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        6620.957405
+      ],
+      "source_component_areas_km2": [
+        6617.823634
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 6620.957,
+      "source_area_km2": 6617.824,
+      "relative_area_difference": 0.00047353,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B18572395899182",
+      "name": "Local Municipality of Madibeng",
+      "parent_id": "framework:province:bojanala:18abe27e693f",
+      "shapeID": "15628383B18572395899182",
+      "source_shapeName": "Local Municipality of Madibeng",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        3719.039462
+      ],
+      "source_component_areas_km2": [
+        3720.088866
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 3719.039,
+      "source_area_km2": 3720.089,
+      "relative_area_difference": 0.00028209,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B18669934425704",
+      "name": "Ndwedwe",
+      "parent_id": "framework:province:ilembe:fcdf78f64810",
+      "shapeID": "15628383B18669934425704",
+      "source_shapeName": "Ndwedwe",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1095.969008
+      ],
+      "source_component_areas_km2": [
+        1092.911022
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1095.969,
+      "source_area_km2": 1092.911,
+      "relative_area_difference": 0.00279802,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B1879233030807",
+      "name": "Kheis",
+      "parent_id": "framework:province:z-f-mgcawu:03214189e0d2",
+      "shapeID": "15628383B1879233030807",
+      "source_shapeName": "Kheis",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        11105.560811
+      ],
+      "source_component_areas_km2": [
+        11107.06544
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 11105.561,
+      "source_area_km2": 11107.065,
+      "relative_area_difference": 0.00013547,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B20102527858320",
+      "name": "Msukaligwa",
+      "parent_id": "framework:province:gert-sibande:25e1c555ea5d",
+      "shapeID": "15628383B20102527858320",
+      "source_shapeName": "Msukaligwa",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        6019.687937
+      ],
+      "source_component_areas_km2": [
+        6015.665335
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 6019.688,
+      "source_area_km2": 6015.665,
+      "relative_area_difference": 0.00066869,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B20343011275792",
+      "name": "Siyancuma",
+      "parent_id": "framework:province:pixley-ka-seme:98fe4964a4d9",
+      "shapeID": "15628383B20343011275792",
+      "source_shapeName": "Siyancuma",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        16754.381378
+      ],
+      "source_component_areas_km2": [
+        16752.681929
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 16754.381,
+      "source_area_km2": 16752.682,
+      "relative_area_difference": 0.00010144,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B20937674647485",
+      "name": "Kgatelopele",
+      "parent_id": "framework:province:z-f-mgcawu:03214189e0d2",
+      "shapeID": "15628383B20937674647485",
+      "source_shapeName": "Kgatelopele",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        2478.648357
+      ],
+      "source_component_areas_km2": [
+        2478.456455
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 2478.648,
+      "source_area_km2": 2478.456,
+      "relative_area_difference": 7.743e-05,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B21359415323699",
+      "name": "Ngquza Hill",
+      "parent_id": "framework:province:o-r-tambo:5dbfc6d96f9e",
+      "shapeID": "15628383B21359415323699",
+      "source_shapeName": "Ngquza Hill",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        2483.316982
+      ],
+      "source_component_areas_km2": [
+        2476.830049
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 2483.317,
+      "source_area_km2": 2476.83,
+      "relative_area_difference": 0.00261905,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B22315624477969",
+      "name": "Prince Albert",
+      "parent_id": "framework:province:central-karoo:6a0ac65b4e70",
+      "shapeID": "15628383B22315624477969",
+      "source_shapeName": "Prince Albert",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        8153.007478
+      ],
+      "source_component_areas_km2": [
+        8152.903894
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 8153.007,
+      "source_area_km2": 8152.904,
+      "relative_area_difference": 1.271e-05,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B22398881151445",
+      "name": "Richtersveld",
+      "parent_id": "framework:province:namakwa:45177040906e",
+      "shapeID": "15628383B22398881151445",
+      "source_shapeName": "Richtersveld",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        9578.098996
+      ],
+      "source_component_areas_km2": [
+        9607.674595
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 9578.099,
+      "source_area_km2": 9607.675,
+      "relative_area_difference": 0.00307833,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B22507296568616",
+      "name": "Chief Albert Luthuli",
+      "parent_id": "framework:province:gert-sibande:25e1c555ea5d",
+      "shapeID": "15628383B22507296568616",
+      "source_shapeName": "Chief Albert Luthuli",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        5558.572322
+      ],
+      "source_component_areas_km2": [
+        5559.397494
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 5558.572,
+      "source_area_km2": 5559.397,
+      "relative_area_difference": 0.00014843,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B22599792684232",
+      "name": "Mangaung",
+      "parent_id": "framework:province:mangaung:0aee230efb34",
+      "shapeID": "15628383B22599792684232",
+      "source_shapeName": "Mangaung",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        9877.211972
+      ],
+      "source_component_areas_km2": [
+        9886.310428
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 9877.212,
+      "source_area_km2": 9886.31,
+      "relative_area_difference": 0.00092031,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B22918874206511",
+      "name": "Saldanha Bay",
+      "parent_id": "framework:province:west-coast:310dfff0ccbd",
+      "shapeID": "15628383B22918874206511",
+      "source_shapeName": "Saldanha Bay",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 7,
+      "atlas_component_areas_km2": [
+        2016.585415
+      ],
+      "source_component_areas_km2": [
+        2013.940223,
+        0.447258,
+        0.403588,
+        0.202942,
+        0.195494,
+        0.128991,
+        0.04964
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 2016.585,
+      "source_area_km2": 2015.368,
+      "relative_area_difference": 0.000604,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B22921038758267",
+      "name": "Amahlathi",
+      "parent_id": "framework:province:amathole:ff83893516cc",
+      "shapeID": "15628383B22921038758267",
+      "source_shapeName": "Amahlathi",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        4503.10832
+      ],
+      "source_component_areas_km2": [
+        4505.47782
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 4503.108,
+      "source_area_km2": 4505.478,
+      "relative_area_difference": 0.00052592,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B23037579047030",
+      "name": "Umzumbe",
+      "parent_id": "framework:province:ugu:444e600bbee9",
+      "shapeID": "15628383B23037579047030",
+      "source_shapeName": "Umzumbe",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1235.76221
+      ],
+      "source_component_areas_km2": [
+        1220.92789
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1235.762,
+      "source_area_km2": 1220.928,
+      "relative_area_difference": 0.01215004,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B23048095503212",
+      "name": "Mkhondo",
+      "parent_id": "framework:province:gert-sibande:25e1c555ea5d",
+      "shapeID": "15628383B23048095503212",
+      "source_shapeName": "Mkhondo",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 2,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        4878.4314,
+        0.0
+      ],
+      "source_component_areas_km2": [
+        4882.163449
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 4878.431,
+      "source_area_km2": 4882.163,
+      "relative_area_difference": 0.00076443,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B23629152206602",
+      "name": "King Sabata Dalindyebo",
+      "parent_id": "framework:province:o-r-tambo:5dbfc6d96f9e",
+      "shapeID": "15628383B23629152206602",
+      "source_shapeName": "King Sabata Dalindyebo",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        3010.669964
+      ],
+      "source_component_areas_km2": [
+        3018.929715
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 3010.67,
+      "source_area_km2": 3018.93,
+      "relative_area_difference": 0.00273599,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B23729286231059",
+      "name": "George",
+      "parent_id": "framework:province:eden:84d8d728de8a",
+      "shapeID": "15628383B23729286231059",
+      "source_shapeName": "George",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        5197.611082
+      ],
+      "source_component_areas_km2": [
+        5191.010536
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 5197.611,
+      "source_area_km2": 5191.011,
+      "relative_area_difference": 0.00127153,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B23770618200301",
+      "name": "Mandeni",
+      "parent_id": "framework:province:ilembe:fcdf78f64810",
+      "shapeID": "15628383B23770618200301",
+      "source_shapeName": "Mandeni",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        545.697155
+      ],
+      "source_component_areas_km2": [
+        545.481347
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 545.697,
+      "source_area_km2": 545.481,
+      "relative_area_difference": 0.00039563,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B24950367245541",
+      "name": "Oudtshoorn",
+      "parent_id": "framework:province:eden:84d8d728de8a",
+      "shapeID": "15628383B24950367245541",
+      "source_shapeName": "Oudtshoorn",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        3534.926633
+      ],
+      "source_component_areas_km2": [
+        3540.424761
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 3534.927,
+      "source_area_km2": 3540.425,
+      "relative_area_difference": 0.00155296,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B24995614588179",
+      "name": "Merafong City",
+      "parent_id": "framework:province:west-rand:239a112f119d",
+      "shapeID": "15628383B24995614588179",
+      "source_shapeName": "Merafong City",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1631.689933
+      ],
+      "source_component_areas_km2": [
+        1630.543646
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1631.69,
+      "source_area_km2": 1630.544,
+      "relative_area_difference": 0.00070301,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B27105653038875",
+      "name": "Phumelela",
+      "parent_id": "framework:province:thabo-mofutsanyane:93c14c120fea",
+      "shapeID": "15628383B27105653038875",
+      "source_shapeName": "Phumelela",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        8190.798295
+      ],
+      "source_component_areas_km2": [
+        8195.956225
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 8190.798,
+      "source_area_km2": 8195.956,
+      "relative_area_difference": 0.00062933,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B2775886496345",
+      "name": "Ephraim Mogale",
+      "parent_id": "framework:province:sekhukhune:bd568a599444",
+      "shapeID": "15628383B2775886496345",
+      "source_shapeName": "Ephraim Mogale",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        2016.752476
+      ],
+      "source_component_areas_km2": [
+        2011.305805
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 2016.752,
+      "source_area_km2": 2011.306,
+      "relative_area_difference": 0.00270803,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B27786336068400",
+      "name": "Setsoto",
+      "parent_id": "framework:province:thabo-mofutsanyane:93c14c120fea",
+      "shapeID": "15628383B27786336068400",
+      "source_shapeName": "Setsoto",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        5434.88537
+      ],
+      "source_component_areas_km2": [
+        5431.404484
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 5434.885,
+      "source_area_km2": 5431.404,
+      "relative_area_difference": 0.00064088,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B27888516952282",
+      "name": "Sol Plaatjie",
+      "parent_id": "framework:province:frances-baard:d0cb018a1a82",
+      "shapeID": "15628383B27888516952282",
+      "source_shapeName": "Sol Plaatjie",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        3138.062937
+      ],
+      "source_component_areas_km2": [
+        3145.390924
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 3138.063,
+      "source_area_km2": 3145.391,
+      "relative_area_difference": 0.00232975,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B28198425114752",
+      "name": "Swellendam",
+      "parent_id": "framework:province:overberg:c1fdba620591",
+      "shapeID": "15628383B28198425114752",
+      "source_shapeName": "Swellendam",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        3834.386409
+      ],
+      "source_component_areas_km2": [
+        3835.098816
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 3834.386,
+      "source_area_km2": 3835.099,
+      "relative_area_difference": 0.00018576,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B29698007895414",
+      "name": "Emthanjeni",
+      "parent_id": "framework:province:pixley-ka-seme:98fe4964a4d9",
+      "shapeID": "15628383B29698007895414",
+      "source_shapeName": "Emthanjeni",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        13476.814821
+      ],
+      "source_component_areas_km2": [
+        13472.487936
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 13476.815,
+      "source_area_km2": 13472.488,
+      "relative_area_difference": 0.00032116,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B29870836441497",
+      "name": "Nyandeni",
+      "parent_id": "framework:province:o-r-tambo:5dbfc6d96f9e",
+      "shapeID": "15628383B29870836441497",
+      "source_shapeName": "Nyandeni",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        2479.49933
+      ],
+      "source_component_areas_km2": [
+        2474.010505
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 2479.499,
+      "source_area_km2": 2474.011,
+      "relative_area_difference": 0.00221859,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B30127802260453",
+      "name": "Mbombela",
+      "parent_id": "framework:province:ehlanzeni:e5bc042aafc4",
+      "shapeID": "15628383B30127802260453",
+      "source_shapeName": "Mbombela",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        7141.791572
+      ],
+      "source_component_areas_km2": [
+        7141.451283
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 7141.792,
+      "source_area_km2": 7141.451,
+      "relative_area_difference": 4.765e-05,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B32392853457814",
+      "name": "KwaDukuza",
+      "parent_id": "framework:province:ilembe:fcdf78f64810",
+      "shapeID": "15628383B32392853457814",
+      "source_shapeName": "KwaDukuza",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        736.508354
+      ],
+      "source_component_areas_km2": [
+        734.959732
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 736.508,
+      "source_area_km2": 734.96,
+      "relative_area_difference": 0.00210709,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B32940385818298",
+      "name": "Mamusa",
+      "parent_id": "framework:province:dr-ruth-segomotsi-mompati:b07b7cab3e73",
+      "shapeID": "15628383B32940385818298",
+      "source_shapeName": "Mamusa",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        3616.956437
+      ],
+      "source_component_areas_km2": [
+        3614.358141
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 3616.956,
+      "source_area_km2": 3614.358,
+      "relative_area_difference": 0.00071888,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B33735276955904",
+      "name": "Emfuleni",
+      "parent_id": "framework:province:sedibeng:08675bbed45e",
+      "shapeID": "15628383B33735276955904",
+      "source_shapeName": "Emfuleni",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        964.21252
+      ],
+      "source_component_areas_km2": [
+        965.894115
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 964.213,
+      "source_area_km2": 965.894,
+      "relative_area_difference": 0.00174097,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B34503575796370",
+      "name": "Laingsburg",
+      "parent_id": "framework:province:central-karoo:6a0ac65b4e70",
+      "shapeID": "15628383B34503575796370",
+      "source_shapeName": "Laingsburg",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        8783.654659
+      ],
+      "source_component_areas_km2": [
+        8784.482343
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 8783.655,
+      "source_area_km2": 8784.482,
+      "relative_area_difference": 9.422e-05,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B34666752536015",
+      "name": "Nqutu",
+      "parent_id": "framework:province:umzinyathi:f3278d399787",
+      "shapeID": "15628383B34666752536015",
+      "source_shapeName": "Nqutu",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1947.319456
+      ],
+      "source_component_areas_km2": [
+        1962.255631
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1947.319,
+      "source_area_km2": 1962.256,
+      "relative_area_difference": 0.00761174,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B35491227383110",
+      "name": "Tswaing",
+      "parent_id": "framework:province:ngaka-modiri-molema:933be279d8e3",
+      "shapeID": "15628383B35491227383110",
+      "source_shapeName": "Tswaing",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        5873.177335
+      ],
+      "source_component_areas_km2": [
+        5874.954484
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 5873.177,
+      "source_area_km2": 5874.954,
+      "relative_area_difference": 0.0003025,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B3612135390382",
+      "name": "Maluti a Phofung",
+      "parent_id": "framework:province:thabo-mofutsanyane:93c14c120fea",
+      "shapeID": "15628383B3612135390382",
+      "source_shapeName": "Maluti a Phofung",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        4344.477586
+      ],
+      "source_component_areas_km2": [
+        4337.664068
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 4344.478,
+      "source_area_km2": 4337.664,
+      "relative_area_difference": 0.00157078,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B36762535834519",
+      "name": "Hessequa",
+      "parent_id": "framework:province:eden:84d8d728de8a",
+      "shapeID": "15628383B36762535834519",
+      "source_shapeName": "Hessequa",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        5725.13858
+      ],
+      "source_component_areas_km2": [
+        5732.63454
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 5725.139,
+      "source_area_km2": 5732.635,
+      "relative_area_difference": 0.00130759,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B3812939933350",
+      "name": "Nkomazi",
+      "parent_id": "framework:province:ehlanzeni:e5bc042aafc4",
+      "shapeID": "15628383B3812939933350",
+      "source_shapeName": "Nkomazi",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        4780.998811
+      ],
+      "source_component_areas_km2": [
+        4786.855005
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 4780.999,
+      "source_area_km2": 4786.855,
+      "relative_area_difference": 0.00122339,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B38357797168546",
+      "name": "uMshwathi",
+      "parent_id": "framework:province:umgungundlovu:a703b62c55ed",
+      "shapeID": "15628383B38357797168546",
+      "source_shapeName": "uMshwathi",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1859.763004
+      ],
+      "source_component_areas_km2": [
+        1865.577747
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1859.763,
+      "source_area_km2": 1865.578,
+      "relative_area_difference": 0.00311686,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B4021169730913",
+      "name": "Midvaal",
+      "parent_id": "framework:province:sedibeng:08675bbed45e",
+      "shapeID": "15628383B4021169730913",
+      "source_shapeName": "Midvaal",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1723.166503
+      ],
+      "source_component_areas_km2": [
+        1722.475127
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1723.167,
+      "source_area_km2": 1722.475,
+      "relative_area_difference": 0.00040139,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B41108868323970",
+      "name": "Swartland",
+      "parent_id": "framework:province:west-coast:310dfff0ccbd",
+      "shapeID": "15628383B41108868323970",
+      "source_shapeName": "Swartland",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 2,
+      "atlas_component_areas_km2": [
+        3695.423467
+      ],
+      "source_component_areas_km2": [
+        3704.746183,
+        2.59825
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 3695.423,
+      "source_area_km2": 3707.344,
+      "relative_area_difference": 0.0032155,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B41203661454034",
+      "name": "Thulamela",
+      "parent_id": "framework:province:vhembe:a128b7e5659a",
+      "shapeID": "15628383B41203661454034",
+      "source_shapeName": "Thulamela",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        2641.038658
+      ],
+      "source_component_areas_km2": [
+        2641.67009
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 2641.039,
+      "source_area_km2": 2641.67,
+      "relative_area_difference": 0.00023903,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B41355720683916",
+      "name": "Letsemeng",
+      "parent_id": "framework:province:xhariep:cec6bd15892d",
+      "shapeID": "15628383B41355720683916",
+      "source_shapeName": "Letsemeng",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        9827.666379
+      ],
+      "source_component_areas_km2": [
+        9828.492333
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 9827.666,
+      "source_area_km2": 9828.492,
+      "relative_area_difference": 8.404e-05,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B41752648432939",
+      "name": "Langeberg",
+      "parent_id": "framework:province:cape-winelands:9a9b08c29249",
+      "shapeID": "15628383B41752648432939",
+      "source_shapeName": "Langeberg",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        4519.680469
+      ],
+      "source_component_areas_km2": [
+        4517.549067
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 4519.68,
+      "source_area_km2": 4517.549,
+      "relative_area_difference": 0.0004718,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B42598503726448",
+      "name": "Khâi-Ma",
+      "parent_id": "framework:province:namakwa:45177040906e",
+      "shapeID": "15628383B42598503726448",
+      "source_shapeName": "Khâi-Ma",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        15699.366474
+      ],
+      "source_component_areas_km2": [
+        15714.830566
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 15699.366,
+      "source_area_km2": 15714.831,
+      "relative_area_difference": 0.00098404,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B42702955327338",
+      "name": "Ubuhlebezwe",
+      "parent_id": "framework:province:sisonke:526acef41329",
+      "shapeID": "15628383B42702955327338",
+      "source_shapeName": "Ubuhlebezwe",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1660.30239
+      ],
+      "source_component_areas_km2": [
+        1668.90602
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1660.302,
+      "source_area_km2": 1668.906,
+      "relative_area_difference": 0.00515525,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B43101438913708",
+      "name": "Ngqushwa",
+      "parent_id": "framework:province:amathole:ff83893516cc",
+      "shapeID": "15628383B43101438913708",
+      "source_shapeName": "Ngqushwa",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        2120.228105
+      ],
+      "source_component_areas_km2": [
+        2114.702
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 2120.228,
+      "source_area_km2": 2114.702,
+      "relative_area_difference": 0.00261318,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B43349124035682",
+      "name": "Mbhashe",
+      "parent_id": "framework:province:amathole:ff83893516cc",
+      "shapeID": "15628383B43349124035682",
+      "source_shapeName": "Mbhashe",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        3303.00144
+      ],
+      "source_component_areas_km2": [
+        3302.514051
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 3303.001,
+      "source_area_km2": 3302.514,
+      "relative_area_difference": 0.00014758,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B43736937905361",
+      "name": "Greater Tzaneen",
+      "parent_id": "framework:province:mopani:4ae13b6228b0",
+      "shapeID": "15628383B43736937905361",
+      "source_shapeName": "Greater Tzaneen",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        2894.849715
+      ],
+      "source_component_areas_km2": [
+        2896.637277
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 2894.85,
+      "source_area_km2": 2896.637,
+      "relative_area_difference": 0.00061712,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B44296191907272",
+      "name": "Ntabankulu",
+      "parent_id": "framework:province:alfred-nzo:58dfe56360b7",
+      "shapeID": "15628383B44296191907272",
+      "source_shapeName": "Ntabankulu",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1373.288047
+      ],
+      "source_component_areas_km2": [
+        1384.522003
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1373.288,
+      "source_area_km2": 1384.522,
+      "relative_area_difference": 0.00811396,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B44304939530750",
+      "name": "Phokwane",
+      "parent_id": "framework:province:frances-baard:d0cb018a1a82",
+      "shapeID": "15628383B44304939530750",
+      "source_shapeName": "Phokwane",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        823.462819
+      ],
+      "source_component_areas_km2": [
+        828.109037
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 823.463,
+      "source_area_km2": 828.109,
+      "relative_area_difference": 0.00561064,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B44998866357068",
+      "name": "Kareeberg",
+      "parent_id": "framework:province:pixley-ka-seme:98fe4964a4d9",
+      "shapeID": "15628383B44998866357068",
+      "source_shapeName": "Kareeberg",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        17701.382408
+      ],
+      "source_component_areas_km2": [
+        17700.760917
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 17701.382,
+      "source_area_km2": 17700.761,
+      "relative_area_difference": 3.511e-05,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B45262568422847",
+      "name": "Msinga",
+      "parent_id": "framework:province:umzinyathi:f3278d399787",
+      "shapeID": "15628383B45262568422847",
+      "source_shapeName": "Msinga",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        2382.716545
+      ],
+      "source_component_areas_km2": [
+        2375.152233
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 2382.717,
+      "source_area_km2": 2375.152,
+      "relative_area_difference": 0.00318477,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B45277998127708",
+      "name": "Cape Agulhas",
+      "parent_id": "framework:province:overberg:c1fdba620591",
+      "shapeID": "15628383B45277998127708",
+      "source_shapeName": "Cape Agulhas",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        3466.071238
+      ],
+      "source_component_areas_km2": [
+        3470.630762
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 3466.071,
+      "source_area_km2": 3470.631,
+      "relative_area_difference": 0.00131375,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B45801429507111",
+      "name": "Greater Giyani",
+      "parent_id": "framework:province:mopani:4ae13b6228b0",
+      "shapeID": "15628383B45801429507111",
+      "source_shapeName": "Greater Giyani",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        4176.031777
+      ],
+      "source_component_areas_km2": [
+        4171.598757
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 4176.032,
+      "source_area_km2": 4171.599,
+      "relative_area_difference": 0.00106267,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B46275674627540",
+      "name": "Beaufort West",
+      "parent_id": "framework:province:central-karoo:6a0ac65b4e70",
+      "shapeID": "15628383B46275674627540",
+      "source_shapeName": "Beaufort West",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        21916.948868
+      ],
+      "source_component_areas_km2": [
+        21916.603945
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 21916.949,
+      "source_area_km2": 21916.604,
+      "relative_area_difference": 1.574e-05,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B46768042592549",
+      "name": "Breede Valley",
+      "parent_id": "framework:province:cape-winelands:9a9b08c29249",
+      "shapeID": "15628383B46768042592549",
+      "source_shapeName": "Breede Valley",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        3835.336208
+      ],
+      "source_component_areas_km2": [
+        3833.988948
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 3835.336,
+      "source_area_km2": 3833.989,
+      "relative_area_difference": 0.0003514,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B46845171983587",
+      "name": "Thabazimbi",
+      "parent_id": "framework:province:waterberg:0756c71357b8",
+      "shapeID": "15628383B46845171983587",
+      "source_shapeName": "Thabazimbi",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 2,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        11186.932907,
+        0.0
+      ],
+      "source_component_areas_km2": [
+        11190.144787
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 11186.933,
+      "source_area_km2": 11190.145,
+      "relative_area_difference": 0.00028703,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B47394950220829",
+      "name": "Ratlou",
+      "parent_id": "framework:province:ngaka-modiri-molema:933be279d8e3",
+      "shapeID": "15628383B47394950220829",
+      "source_shapeName": "Ratlou",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        4853.963197
+      ],
+      "source_component_areas_km2": [
+        4883.554763
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 4853.963,
+      "source_area_km2": 4883.555,
+      "relative_area_difference": 0.00605943,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B48291536006426",
+      "name": "Inkosi Langalibalele",
+      "parent_id": "framework:province:uthukela:c91c7874014a",
+      "shapeID": "15628383B48291536006426",
+      "source_shapeName": "Inkosi Langalibalele",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        3392.053262
+      ],
+      "source_component_areas_km2": [
+        3398.756044
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 3392.053,
+      "source_area_km2": 3398.756,
+      "relative_area_difference": 0.00197213,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B48775744068307",
+      "name": "Mthonjaneni",
+      "parent_id": "framework:province:uthungulu:1776dde21479",
+      "shapeID": "15628383B48775744068307",
+      "source_shapeName": "Mthonjaneni",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1638.576997
+      ],
+      "source_component_areas_km2": [
+        1638.701843
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1638.577,
+      "source_area_km2": 1638.702,
+      "relative_area_difference": 7.619e-05,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B4913573600740",
+      "name": "Bergrivier",
+      "parent_id": "framework:province:west-coast:310dfff0ccbd",
+      "shapeID": "15628383B4913573600740",
+      "source_shapeName": "Bergrivier",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        4416.990698
+      ],
+      "source_component_areas_km2": [
+        4407.041569
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 4416.991,
+      "source_area_km2": 4407.042,
+      "relative_area_difference": 0.00225755,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B49239152180339",
+      "name": "Mohokare",
+      "parent_id": "framework:province:xhariep:cec6bd15892d",
+      "shapeID": "15628383B49239152180339",
+      "source_shapeName": "Mohokare",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        8775.600098
+      ],
+      "source_component_areas_km2": [
+        8775.761901
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 8775.6,
+      "source_area_km2": 8775.762,
+      "relative_area_difference": 1.844e-05,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B49434551949748",
+      "name": "Emalahleni",
+      "parent_id": "framework:province:nkangala:d926ae17cc99",
+      "shapeID": "15628383B49434551949748",
+      "source_shapeName": "Emalahleni",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        2680.36161
+      ],
+      "source_component_areas_km2": [
+        2677.609294
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 2680.362,
+      "source_area_km2": 2677.609,
+      "relative_area_difference": 0.0010279,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B50034412175971",
+      "name": "Ulundi",
+      "parent_id": "framework:province:zululand:3addbd77de8c",
+      "shapeID": "15628383B50034412175971",
+      "source_shapeName": "Ulundi",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        3252.829219
+      ],
+      "source_component_areas_km2": [
+        3250.291488
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 3252.829,
+      "source_area_km2": 3250.291,
+      "relative_area_difference": 0.00078077,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B50612573820544",
+      "name": "Mafikeng",
+      "parent_id": "framework:province:ngaka-modiri-molema:933be279d8e3",
+      "shapeID": "15628383B50612573820544",
+      "source_shapeName": "Mafikeng",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        3646.607621
+      ],
+      "source_component_areas_km2": [
+        3645.821648
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 3646.608,
+      "source_area_km2": 3645.822,
+      "relative_area_difference": 0.00021558,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B50977513509488",
+      "name": "Ditsobotla",
+      "parent_id": "framework:province:ngaka-modiri-molema:933be279d8e3",
+      "shapeID": "15628383B50977513509488",
+      "source_shapeName": "Ditsobotla",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        6380.363031
+      ],
+      "source_component_areas_km2": [
+        6386.608503
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 6380.363,
+      "source_area_km2": 6386.609,
+      "relative_area_difference": 0.0009779,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B51643995484882",
+      "name": "Port St Johns",
+      "parent_id": "framework:province:o-r-tambo:5dbfc6d96f9e",
+      "shapeID": "15628383B51643995484882",
+      "source_shapeName": "Port St Johns",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1293.754982
+      ],
+      "source_component_areas_km2": [
+        1291.199516
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1293.755,
+      "source_area_km2": 1291.2,
+      "relative_area_difference": 0.00197914,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B51783858104799",
+      "name": "Victor Khanye",
+      "parent_id": "framework:province:nkangala:d926ae17cc99",
+      "shapeID": "15628383B51783858104799",
+      "source_shapeName": "Victor Khanye",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1569.382865
+      ],
+      "source_component_areas_km2": [
+        1567.775441
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1569.383,
+      "source_area_km2": 1567.775,
+      "relative_area_difference": 0.00102529,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B53437482814779",
+      "name": "Big Five Hlabisa",
+      "parent_id": "framework:province:umkhanyakude:35d6c9dc188f",
+      "shapeID": "15628383B53437482814779",
+      "source_shapeName": "Big Five Hlabisa",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        3468.827829
+      ],
+      "source_component_areas_km2": [
+        3466.137948
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 3468.828,
+      "source_area_km2": 3466.138,
+      "relative_area_difference": 0.00077605,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B53438128232803",
+      "name": "Witzenberg",
+      "parent_id": "framework:province:cape-winelands:9a9b08c29249",
+      "shapeID": "15628383B53438128232803",
+      "source_shapeName": "Witzenberg",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        10752.196007
+      ],
+      "source_component_areas_km2": [
+        10753.149117
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 10752.196,
+      "source_area_km2": 10753.149,
+      "relative_area_difference": 8.864e-05,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B53462234009854",
+      "name": "Thembisile",
+      "parent_id": "framework:province:nkangala:d926ae17cc99",
+      "shapeID": "15628383B53462234009854",
+      "source_shapeName": "Thembisile",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        2395.940618
+      ],
+      "source_component_areas_km2": [
+        2384.364075
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 2395.941,
+      "source_area_km2": 2384.364,
+      "relative_area_difference": 0.00485519,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B53706266463889",
+      "name": "Musina",
+      "parent_id": "framework:province:vhembe:a128b7e5659a",
+      "shapeID": "15628383B53706266463889",
+      "source_shapeName": "Musina",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        10340.234776
+      ],
+      "source_component_areas_km2": [
+        10346.50714
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 10340.235,
+      "source_area_km2": 10346.507,
+      "relative_area_difference": 0.00060623,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B53810498400879",
+      "name": "Stellenbosch",
+      "parent_id": "framework:province:cape-winelands:9a9b08c29249",
+      "shapeID": "15628383B53810498400879",
+      "source_shapeName": "Stellenbosch",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        831.219474
+      ],
+      "source_component_areas_km2": [
+        830.888173
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 831.219,
+      "source_area_km2": 830.888,
+      "relative_area_difference": 0.00039873,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B54089772316442",
+      "name": "Mafube",
+      "parent_id": "framework:province:fezile-dabi:5a6ae9aa1a0e",
+      "shapeID": "15628383B54089772316442",
+      "source_shapeName": "Mafube",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        3979.33877
+      ],
+      "source_component_areas_km2": [
+        3971.297417
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 3979.339,
+      "source_area_km2": 3971.297,
+      "relative_area_difference": 0.00202487,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B54507106575148",
+      "name": "Moqhaka",
+      "parent_id": "framework:province:fezile-dabi:5a6ae9aa1a0e",
+      "shapeID": "15628383B54507106575148",
+      "source_shapeName": "Moqhaka",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        7923.731831
+      ],
+      "source_component_areas_km2": [
+        7924.565602
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 7923.732,
+      "source_area_km2": 7924.566,
+      "relative_area_difference": 0.00010521,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B54808640674561",
+      "name": "Umdoni",
+      "parent_id": "framework:province:ugu:444e600bbee9",
+      "shapeID": "15628383B54808640674561",
+      "source_shapeName": "Umdoni",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        988.486213
+      ],
+      "source_component_areas_km2": [
+        993.551306
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 988.486,
+      "source_area_km2": 993.551,
+      "relative_area_difference": 0.00509797,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B54951115928747",
+      "name": "Maruleng",
+      "parent_id": "framework:province:mopani:4ae13b6228b0",
+      "shapeID": "15628383B54951115928747",
+      "source_shapeName": "Maruleng",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        3564.364174
+      ],
+      "source_component_areas_km2": [
+        3562.603136
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 3564.364,
+      "source_area_km2": 3562.603,
+      "relative_area_difference": 0.00049431,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B55646829528137",
+      "name": "The Msunduzi",
+      "parent_id": "framework:province:umgungundlovu:a703b62c55ed",
+      "shapeID": "15628383B55646829528137",
+      "source_shapeName": "The Msunduzi",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        754.179582
+      ],
+      "source_component_areas_km2": [
+        751.094122
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 754.18,
+      "source_area_km2": 751.094,
+      "relative_area_difference": 0.00410795,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B5643651506202",
+      "name": "Alfred Duma",
+      "parent_id": "framework:province:uthukela:c91c7874014a",
+      "shapeID": "15628383B5643651506202",
+      "source_shapeName": "Alfred Duma",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        3762.365435
+      ],
+      "source_component_areas_km2": [
+        3764.471991
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 3762.365,
+      "source_area_km2": 3764.472,
+      "relative_area_difference": 0.00055959,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B56565941834020",
+      "name": "Mossel Bay",
+      "parent_id": "framework:province:eden:84d8d728de8a",
+      "shapeID": "15628383B56565941834020",
+      "source_shapeName": "Mossel Bay",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        2015.150762
+      ],
+      "source_component_areas_km2": [
+        2001.036733
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 2015.151,
+      "source_area_km2": 2001.037,
+      "relative_area_difference": 0.00705336,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B56796644270272",
+      "name": "Endumeni",
+      "parent_id": "framework:province:umzinyathi:f3278d399787",
+      "shapeID": "15628383B56796644270272",
+      "source_shapeName": "Endumeni",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1612.691289
+      ],
+      "source_component_areas_km2": [
+        1610.233968
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1612.691,
+      "source_area_km2": 1610.234,
+      "relative_area_difference": 0.00152606,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B57251515863423",
+      "name": "Karoo Hoogland",
+      "parent_id": "framework:province:namakwa:45177040906e",
+      "shapeID": "15628383B57251515863423",
+      "source_shapeName": "Karoo Hoogland",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        30232.582199
+      ],
+      "source_component_areas_km2": [
+        30230.283129
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 30232.582,
+      "source_area_km2": 30230.283,
+      "relative_area_difference": 7.605e-05,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B57700102928675",
+      "name": "Lekwa-Teemane",
+      "parent_id": "framework:province:dr-ruth-segomotsi-mompati:b07b7cab3e73",
+      "shapeID": "15628383B57700102928675",
+      "source_shapeName": "Lekwa-Teemane",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        3657.445053
+      ],
+      "source_component_areas_km2": [
+        3653.633803
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 3657.445,
+      "source_area_km2": 3653.634,
+      "relative_area_difference": 0.00104314,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B57924236425168",
+      "name": "Dipaleseng",
+      "parent_id": "framework:province:gert-sibande:25e1c555ea5d",
+      "shapeID": "15628383B57924236425168",
+      "source_shapeName": "Dipaleseng",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        2641.064489
+      ],
+      "source_component_areas_km2": [
+        2644.81429
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 2641.064,
+      "source_area_km2": 2644.814,
+      "relative_area_difference": 0.00141779,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B58344705808288",
+      "name": "Drakenstein",
+      "parent_id": "framework:province:cape-winelands:9a9b08c29249",
+      "shapeID": "15628383B58344705808288",
+      "source_shapeName": "Drakenstein",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1540.886376
+      ],
+      "source_component_areas_km2": [
+        1537.699469
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1540.886,
+      "source_area_km2": 1537.699,
+      "relative_area_difference": 0.00207252,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B5837125139106",
+      "name": "Jozini",
+      "parent_id": "framework:province:umkhanyakude:35d6c9dc188f",
+      "shapeID": "15628383B5837125139106",
+      "source_shapeName": "Jozini",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 3,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        3445.695007,
+        0.017127,
+        0.0
+      ],
+      "source_component_areas_km2": [
+        3442.245829
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 3445.712,
+      "source_area_km2": 3442.246,
+      "relative_area_difference": 0.00100699,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B588317222273",
+      "name": "Cederberg",
+      "parent_id": "framework:province:west-coast:310dfff0ccbd",
+      "shapeID": "15628383B588317222273",
+      "source_shapeName": "Cederberg",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        8000.903337
+      ],
+      "source_component_areas_km2": [
+        8007.475622
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 8000.903,
+      "source_area_km2": 8007.476,
+      "relative_area_difference": 0.00082077,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B5927961612819",
+      "name": "Mbizana",
+      "parent_id": "framework:province:alfred-nzo:58dfe56360b7",
+      "shapeID": "15628383B5927961612819",
+      "source_shapeName": "Mbizana",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        2412.797632
+      ],
+      "source_component_areas_km2": [
+        2415.488358
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 2412.798,
+      "source_area_km2": 2415.488,
+      "relative_area_difference": 0.00111395,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B59802674221222",
+      "name": "Rand West City",
+      "parent_id": "framework:province:west-rand:239a112f119d",
+      "shapeID": "15628383B59802674221222",
+      "source_shapeName": "Rand West City",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1114.537241
+      ],
+      "source_component_areas_km2": [
+        1114.716696
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1114.537,
+      "source_area_km2": 1114.717,
+      "relative_area_difference": 0.00016099,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B60178842862169",
+      "name": "eThekwini",
+      "parent_id": "framework:province:ethekwini:1e9f351c2363",
+      "shapeID": "15628383B60178842862169",
+      "source_shapeName": "eThekwini",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        2555.687278
+      ],
+      "source_component_areas_km2": [
+        2555.919344
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 2555.687,
+      "source_area_km2": 2555.919,
+      "relative_area_difference": 9.08e-05,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B60744679242137",
+      "name": "Moretele",
+      "parent_id": "framework:province:bojanala:18abe27e693f",
+      "shapeID": "15628383B60744679242137",
+      "source_shapeName": "Moretele",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1496.069306
+      ],
+      "source_component_areas_km2": [
+        1497.856227
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1496.069,
+      "source_area_km2": 1497.856,
+      "relative_area_difference": 0.00119299,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B61432920624348",
+      "name": "Ramotshere Moiloa",
+      "parent_id": "framework:province:ngaka-modiri-molema:933be279d8e3",
+      "shapeID": "15628383B61432920624348",
+      "source_shapeName": "Ramotshere Moiloa",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        7312.376724
+      ],
+      "source_component_areas_km2": [
+        7322.652241
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 7312.377,
+      "source_area_km2": 7322.652,
+      "relative_area_difference": 0.00140325,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B61631469274814",
+      "name": "Siyathemba",
+      "parent_id": "framework:province:pixley-ka-seme:98fe4964a4d9",
+      "shapeID": "15628383B61631469274814",
+      "source_shapeName": "Siyathemba",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        14729.256249
+      ],
+      "source_component_areas_km2": [
+        14726.840093
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 14729.256,
+      "source_area_km2": 14726.84,
+      "relative_area_difference": 0.00016406,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B61836669217179",
+      "name": "Maphumulo",
+      "parent_id": "framework:province:ilembe:fcdf78f64810",
+      "shapeID": "15628383B61836669217179",
+      "source_shapeName": "Maphumulo",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        897.497965
+      ],
+      "source_component_areas_km2": [
+        895.909741
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 897.498,
+      "source_area_km2": 895.91,
+      "relative_area_difference": 0.00177275,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B61881803671589",
+      "name": "Ekurhuleni",
+      "parent_id": "framework:province:ekurhuleni:d24ce669a666",
+      "shapeID": "15628383B61881803671589",
+      "source_shapeName": "Ekurhuleni",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1970.773271
+      ],
+      "source_component_areas_km2": [
+        1975.357907
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1970.773,
+      "source_area_km2": 1975.358,
+      "relative_area_difference": 0.00232091,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B62442804941170",
+      "name": "Maquassi Hills",
+      "parent_id": "framework:province:dr-kenneth-kaunda:28fb7500c130",
+      "shapeID": "15628383B62442804941170",
+      "source_shapeName": "Maquassi Hills",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        4666.120994
+      ],
+      "source_component_areas_km2": [
+        4670.615992
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 4666.121,
+      "source_area_km2": 4670.616,
+      "relative_area_difference": 0.0009624,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B63173838521780",
+      "name": "Bushbuckridge",
+      "parent_id": "framework:province:ehlanzeni:e5bc042aafc4",
+      "shapeID": "15628383B63173838521780",
+      "source_shapeName": "Bushbuckridge",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 2,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        10228.442461,
+        0.0
+      ],
+      "source_component_areas_km2": [
+        10248.208829
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 10228.442,
+      "source_area_km2": 10248.209,
+      "relative_area_difference": 0.00192876,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B63481411965292",
+      "name": "Moses Kotane",
+      "parent_id": "framework:province:bojanala:18abe27e693f",
+      "shapeID": "15628383B63481411965292",
+      "source_shapeName": "Moses Kotane",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        5728.420108
+      ],
+      "source_component_areas_km2": [
+        5726.229637
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 5728.42,
+      "source_area_km2": 5726.23,
+      "relative_area_difference": 0.00038253,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B6389010886764",
+      "name": "Nongoma",
+      "parent_id": "framework:province:zululand:3addbd77de8c",
+      "shapeID": "15628383B6389010886764",
+      "source_shapeName": "Nongoma",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        2170.942445
+      ],
+      "source_component_areas_km2": [
+        2182.114573
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 2170.942,
+      "source_area_km2": 2182.115,
+      "relative_area_difference": 0.00511986,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B65289064858217",
+      "name": "Emadlangeni",
+      "parent_id": "framework:province:amajuba:69c482d37144",
+      "shapeID": "15628383B65289064858217",
+      "source_shapeName": "Emadlangeni",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        3539.663789
+      ],
+      "source_component_areas_km2": [
+        3539.315799
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 3539.664,
+      "source_area_km2": 3539.316,
+      "relative_area_difference": 9.832e-05,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B66088030322014",
+      "name": "Matzikama",
+      "parent_id": "framework:province:west-coast:310dfff0ccbd",
+      "shapeID": "15628383B66088030322014",
+      "source_shapeName": "Matzikama",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        12985.101882
+      ],
+      "source_component_areas_km2": [
+        12981.447672
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 12985.102,
+      "source_area_km2": 12981.448,
+      "relative_area_difference": 0.00028149,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B66727705229747",
+      "name": "Naledi",
+      "parent_id": "framework:province:dr-ruth-segomotsi-mompati:b07b7cab3e73",
+      "shapeID": "15628383B66727705229747",
+      "source_shapeName": "Naledi",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        7038.941123
+      ],
+      "source_component_areas_km2": [
+        7029.793462
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 7038.941,
+      "source_area_km2": 7029.793,
+      "relative_area_difference": 0.00130127,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B68393982164111",
+      "name": "eDumbe",
+      "parent_id": "framework:province:zululand:3addbd77de8c",
+      "shapeID": "15628383B68393982164111",
+      "source_shapeName": "eDumbe",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1941.290767
+      ],
+      "source_component_areas_km2": [
+        1942.760748
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1941.291,
+      "source_area_km2": 1942.761,
+      "relative_area_difference": 0.00075665,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B6898714257611",
+      "name": "Mpofana",
+      "parent_id": "framework:province:umgungundlovu:a703b62c55ed",
+      "shapeID": "15628383B6898714257611",
+      "source_shapeName": "Mpofana",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1762.433729
+      ],
+      "source_component_areas_km2": [
+        1756.601183
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1762.434,
+      "source_area_km2": 1756.601,
+      "relative_area_difference": 0.00332036,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B69661172902968",
+      "name": "Umzimvubu",
+      "parent_id": "framework:province:alfred-nzo:58dfe56360b7",
+      "shapeID": "15628383B69661172902968",
+      "source_shapeName": "Umzimvubu",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        2579.949951
+      ],
+      "source_component_areas_km2": [
+        2578.900247
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 2579.95,
+      "source_area_km2": 2578.9,
+      "relative_area_difference": 0.00040704,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B69683886729369",
+      "name": "Mtubatuba",
+      "parent_id": "framework:province:umkhanyakude:35d6c9dc188f",
+      "shapeID": "15628383B69683886729369",
+      "source_shapeName": "Mtubatuba",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1968.016491
+      ],
+      "source_component_areas_km2": [
+        1969.833469
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1968.016,
+      "source_area_km2": 1969.833,
+      "relative_area_difference": 0.0009224,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B70327245637461",
+      "name": "Bitou",
+      "parent_id": "framework:province:eden:84d8d728de8a",
+      "shapeID": "15628383B70327245637461",
+      "source_shapeName": "Bitou",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        988.668411
+      ],
+      "source_component_areas_km2": [
+        991.860632
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 988.668,
+      "source_area_km2": 991.861,
+      "relative_area_difference": 0.00321842,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B7049738786767",
+      "name": "Abaqulusi",
+      "parent_id": "framework:province:zululand:3addbd77de8c",
+      "shapeID": "15628383B7049738786767",
+      "source_shapeName": "Abaqulusi",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        4311.455506
+      ],
+      "source_component_areas_km2": [
+        4313.758109
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 4311.456,
+      "source_area_km2": 4313.758,
+      "relative_area_difference": 0.00053378,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B70767103982228",
+      "name": "Emakhazeni",
+      "parent_id": "framework:province:nkangala:d926ae17cc99",
+      "shapeID": "15628383B70767103982228",
+      "source_shapeName": "Emakhazeni",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        4731.278801
+      ],
+      "source_component_areas_km2": [
+        4735.586477
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 4731.279,
+      "source_area_km2": 4735.586,
+      "relative_area_difference": 0.00090964,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B70795112074447",
+      "name": "uMuziwabantu",
+      "parent_id": "framework:province:ugu:444e600bbee9",
+      "shapeID": "15628383B70795112074447",
+      "source_shapeName": "uMuziwabantu",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1080.965643
+      ],
+      "source_component_areas_km2": [
+        1089.473948
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1080.966,
+      "source_area_km2": 1089.474,
+      "relative_area_difference": 0.00780955,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B70995166326216",
+      "name": "Bela-Bela",
+      "parent_id": "framework:province:waterberg:0756c71357b8",
+      "shapeID": "15628383B70995166326216",
+      "source_shapeName": "Bela-Bela",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        3401.345034
+      ],
+      "source_component_areas_km2": [
+        3406.194774
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 3401.345,
+      "source_area_km2": 3406.195,
+      "relative_area_difference": 0.0014238,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B72969932115434",
+      "name": "Umsobomvu",
+      "parent_id": "framework:province:pixley-ka-seme:98fe4964a4d9",
+      "shapeID": "15628383B72969932115434",
+      "source_shapeName": "Umsobomvu",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        6812.765666
+      ],
+      "source_component_areas_km2": [
+        6813.490347
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 6812.766,
+      "source_area_km2": 6813.49,
+      "relative_area_difference": 0.00010636,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B73156190774193",
+      "name": "Dannhauser",
+      "parent_id": "framework:province:amajuba:69c482d37144",
+      "shapeID": "15628383B73156190774193",
+      "source_shapeName": "Dannhauser",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1712.875528
+      ],
+      "source_component_areas_km2": [
+        1707.312654
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1712.876,
+      "source_area_km2": 1707.313,
+      "relative_area_difference": 0.00325826,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B7332879576770",
+      "name": "Great Kei",
+      "parent_id": "framework:province:amathole:ff83893516cc",
+      "shapeID": "15628383B7332879576770",
+      "source_shapeName": "Great Kei",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1699.698483
+      ],
+      "source_component_areas_km2": [
+        1699.883712
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1699.698,
+      "source_area_km2": 1699.884,
+      "relative_area_difference": 0.00010897,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B73981426352220",
+      "name": "Lesedi",
+      "parent_id": "framework:province:sedibeng:08675bbed45e",
+      "shapeID": "15628383B73981426352220",
+      "source_shapeName": "Lesedi",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1476.673776
+      ],
+      "source_component_areas_km2": [
+        1484.392135
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1476.674,
+      "source_area_km2": 1484.392,
+      "relative_area_difference": 0.00519968,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B74534237927019",
+      "name": "Collins Chabane",
+      "parent_id": "framework:province:vhembe:a128b7e5659a",
+      "shapeID": "15628383B74534237927019",
+      "source_shapeName": "Collins Chabane",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        4996.579036
+      ],
+      "source_component_areas_km2": [
+        5003.574864
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 4996.579,
+      "source_area_km2": 5003.575,
+      "relative_area_difference": 0.00139817,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B74708406235770",
+      "name": "Knysna",
+      "parent_id": "framework:province:eden:84d8d728de8a",
+      "shapeID": "15628383B74708406235770",
+      "source_shapeName": "Knysna",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1104.551158
+      ],
+      "source_component_areas_km2": [
+        1108.770538
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1104.551,
+      "source_area_km2": 1108.771,
+      "relative_area_difference": 0.00380546,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B76119886441371",
+      "name": "Kannaland",
+      "parent_id": "framework:province:eden:84d8d728de8a",
+      "shapeID": "15628383B76119886441371",
+      "source_shapeName": "Kannaland",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        4769.382988
+      ],
+      "source_component_areas_km2": [
+        4765.372994
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 4769.383,
+      "source_area_km2": 4765.373,
+      "relative_area_difference": 0.00084149,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B7678060115213",
+      "name": "Makhuduthamaga",
+      "parent_id": "framework:province:sekhukhune:bd568a599444",
+      "shapeID": "15628383B7678060115213",
+      "source_shapeName": "Makhuduthamaga",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        2109.320668
+      ],
+      "source_component_areas_km2": [
+        2109.614264
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 2109.321,
+      "source_area_km2": 2109.614,
+      "relative_area_difference": 0.00013917,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B77142145531518",
+      "name": "Lekwa",
+      "parent_id": "framework:province:gert-sibande:25e1c555ea5d",
+      "shapeID": "15628383B77142145531518",
+      "source_shapeName": "Lekwa",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        4561.027764
+      ],
+      "source_component_areas_km2": [
+        4556.934977
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 4561.028,
+      "source_area_km2": 4556.935,
+      "relative_area_difference": 0.00089814,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B77297968052391",
+      "name": "Tsantsabane",
+      "parent_id": "framework:province:z-f-mgcawu:03214189e0d2",
+      "shapeID": "15628383B77297968052391",
+      "source_shapeName": "Tsantsabane",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        18288.753955
+      ],
+      "source_component_areas_km2": [
+        18289.976311
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 18288.754,
+      "source_area_km2": 18289.976,
+      "relative_area_difference": 6.683e-05,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B78103499968670",
+      "name": "Lepele-Nkumpi",
+      "parent_id": "framework:province:capricorn:828e52379480",
+      "shapeID": "15628383B78103499968670",
+      "source_shapeName": "Lepele-Nkumpi",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        3487.720912
+      ],
+      "source_component_areas_km2": [
+        3484.268194
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 3487.721,
+      "source_area_km2": 3484.268,
+      "relative_area_difference": 0.00099094,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B7897519412969",
+      "name": "uMlalazi",
+      "parent_id": "framework:province:uthungulu:1776dde21479",
+      "shapeID": "15628383B7897519412969",
+      "source_shapeName": "uMlalazi",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        2214.181233
+      ],
+      "source_component_areas_km2": [
+        2213.941126
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 2214.181,
+      "source_area_km2": 2213.941,
+      "relative_area_difference": 0.00010845,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B79703818366198",
+      "name": "Kagisano/Molopo",
+      "parent_id": "framework:province:dr-ruth-segomotsi-mompati:b07b7cab3e73",
+      "shapeID": "15628383B79703818366198",
+      "source_shapeName": "Kagisano/Molopo",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        23804.978853
+      ],
+      "source_component_areas_km2": [
+        23827.208465
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 23804.979,
+      "source_area_km2": 23827.208,
+      "relative_area_difference": 0.00093295,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B79754077720638",
+      "name": "Dr JS Moroka",
+      "parent_id": "framework:province:nkangala:d926ae17cc99",
+      "shapeID": "15628383B79754077720638",
+      "source_shapeName": "Dr JS Moroka",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1419.502306
+      ],
+      "source_component_areas_km2": [
+        1416.467503
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1419.502,
+      "source_area_km2": 1416.468,
+      "relative_area_difference": 0.00214251,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B79900485911991",
+      "name": "Govan Mbeki",
+      "parent_id": "framework:province:gert-sibande:25e1c555ea5d",
+      "shapeID": "15628383B79900485911991",
+      "source_shapeName": "Govan Mbeki",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        2954.126966
+      ],
+      "source_component_areas_km2": [
+        2954.690636
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 2954.127,
+      "source_area_km2": 2954.691,
+      "relative_area_difference": 0.00019077,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B80610561870669",
+      "name": "Nala",
+      "parent_id": "framework:province:lejweleputswa:e3440773b899",
+      "shapeID": "15628383B80610561870669",
+      "source_shapeName": "Nala",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        4130.374651
+      ],
+      "source_component_areas_km2": [
+        4128.794321
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 4130.375,
+      "source_area_km2": 4128.794,
+      "relative_area_difference": 0.00038276,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B80696664936096",
+      "name": "Overstrand",
+      "parent_id": "framework:province:overberg:c1fdba620591",
+      "shapeID": "15628383B80696664936096",
+      "source_shapeName": "Overstrand",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 3,
+      "atlas_component_areas_km2": [
+        1677.494812
+      ],
+      "source_component_areas_km2": [
+        1674.106056,
+        0.412446,
+        0.078587
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1677.495,
+      "source_area_km2": 1674.597,
+      "relative_area_difference": 0.0017304,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B80921072750836",
+      "name": "City of Tshwane",
+      "parent_id": "framework:province:city-of-tshwane:5adb165f60ef",
+      "shapeID": "15628383B80921072750836",
+      "source_shapeName": "City of Tshwane",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        6304.830617
+      ],
+      "source_component_areas_km2": [
+        6297.834586
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 6304.831,
+      "source_area_km2": 6297.835,
+      "relative_area_difference": 0.00111086,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B81102328331389",
+      "name": "Mkhambathini",
+      "parent_id": "framework:province:umgungundlovu:a703b62c55ed",
+      "shapeID": "15628383B81102328331389",
+      "source_shapeName": "Mkhambathini",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        875.15177
+      ],
+      "source_component_areas_km2": [
+        868.478792
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 875.152,
+      "source_area_km2": 868.479,
+      "relative_area_difference": 0.00768352,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B81360864143836",
+      "name": "Gamagara",
+      "parent_id": "framework:province:john-taolo-gaetsewe:f02d4e59ca6a",
+      "shapeID": "15628383B81360864143836",
+      "source_shapeName": "Gamagara",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        2647.594947
+      ],
+      "source_component_areas_km2": [
+        2647.909245
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 2647.595,
+      "source_area_km2": 2647.909,
+      "relative_area_difference": 0.0001187,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B81566829241164",
+      "name": "Matjhabeng",
+      "parent_id": "framework:province:lejweleputswa:e3440773b899",
+      "shapeID": "15628383B81566829241164",
+      "source_shapeName": "Matjhabeng",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        5688.133322
+      ],
+      "source_component_areas_km2": [
+        5690.419568
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 5688.133,
+      "source_area_km2": 5690.42,
+      "relative_area_difference": 0.00040177,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B81730914179068",
+      "name": "Greater Taung",
+      "parent_id": "framework:province:dr-ruth-segomotsi-mompati:b07b7cab3e73",
+      "shapeID": "15628383B81730914179068",
+      "source_shapeName": "Greater Taung",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        5638.087013
+      ],
+      "source_component_areas_km2": [
+        5638.757976
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 5638.087,
+      "source_area_km2": 5638.758,
+      "relative_area_difference": 0.00011899,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B81788636322257",
+      "name": "Okhahlamba",
+      "parent_id": "framework:province:uthukela:c91c7874014a",
+      "shapeID": "15628383B81788636322257",
+      "source_shapeName": "Okhahlamba",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        3977.673953
+      ],
+      "source_component_areas_km2": [
+        3970.981255
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 3977.674,
+      "source_area_km2": 3970.981,
+      "relative_area_difference": 0.0016854,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B82081482790652",
+      "name": "Dr Pixley Ka Isaka Seme",
+      "parent_id": "framework:province:gert-sibande:25e1c555ea5d",
+      "shapeID": "15628383B82081482790652",
+      "source_shapeName": "Dr Pixley Ka Isaka Seme",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        5218.920584
+      ],
+      "source_component_areas_km2": [
+        5227.210618
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 5218.921,
+      "source_area_km2": 5227.211,
+      "relative_area_difference": 0.00158594,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B82450102835076",
+      "name": "Umvoti",
+      "parent_id": "framework:province:umzinyathi:f3278d399787",
+      "shapeID": "15628383B82450102835076",
+      "source_shapeName": "Umvoti",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        2704.567384
+      ],
+      "source_component_areas_km2": [
+        2704.706134
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 2704.567,
+      "source_area_km2": 2704.706,
+      "relative_area_difference": 5.13e-05,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B83069245545305",
+      "name": "uPhongolo",
+      "parent_id": "framework:province:zululand:3addbd77de8c",
+      "shapeID": "15628383B83069245545305",
+      "source_shapeName": "uPhongolo",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        3121.694444
+      ],
+      "source_component_areas_km2": [
+        3110.057297
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 3121.694,
+      "source_area_km2": 3110.057,
+      "relative_area_difference": 0.00374178,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B83278814134603",
+      "name": "Blouberg",
+      "parent_id": "framework:province:capricorn:828e52379480",
+      "shapeID": "15628383B83278814134603",
+      "source_shapeName": "Blouberg",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        9536.573721
+      ],
+      "source_component_areas_km2": [
+        9539.882368
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 9536.574,
+      "source_area_km2": 9539.882,
+      "relative_area_difference": 0.00034682,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B8341083957996",
+      "name": "Rustenburg",
+      "parent_id": "framework:province:bojanala:18abe27e693f",
+      "shapeID": "15628383B8341083957996",
+      "source_shapeName": "Rustenburg",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        3413.740679
+      ],
+      "source_component_areas_km2": [
+        3416.121316
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 3413.741,
+      "source_area_km2": 3416.121,
+      "relative_area_difference": 0.00069688,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B83650063742596",
+      "name": "Thaba Chweu",
+      "parent_id": "framework:province:ehlanzeni:e5bc042aafc4",
+      "shapeID": "15628383B83650063742596",
+      "source_shapeName": "Thaba Chweu",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        5723.106622
+      ],
+      "source_component_areas_km2": [
+        5719.064263
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 5723.107,
+      "source_area_km2": 5719.064,
+      "relative_area_difference": 0.00070682,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B84137500673583",
+      "name": "Hantam",
+      "parent_id": "framework:province:namakwa:45177040906e",
+      "shapeID": "15628383B84137500673583",
+      "source_shapeName": "Hantam",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        39080.379937
+      ],
+      "source_component_areas_km2": [
+        39084.706153
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 39080.38,
+      "source_area_km2": 39084.706,
+      "relative_area_difference": 0.00011069,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B84414150036036",
+      "name": "Polokwane",
+      "parent_id": "framework:province:capricorn:828e52379480",
+      "shapeID": "15628383B84414150036036",
+      "source_shapeName": "Polokwane",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        5053.224423
+      ],
+      "source_component_areas_km2": [
+        5053.874014
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 5053.224,
+      "source_area_km2": 5053.874,
+      "relative_area_difference": 0.00012853,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B84884961472226",
+      "name": "Makhado",
+      "parent_id": "framework:province:vhembe:a128b7e5659a",
+      "shapeID": "15628383B84884961472226",
+      "source_shapeName": "Makhado",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        7605.234977
+      ],
+      "source_component_areas_km2": [
+        7605.056526
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 7605.235,
+      "source_area_km2": 7605.057,
+      "relative_area_difference": 2.346e-05,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B84967339349714",
+      "name": "Thembelihle",
+      "parent_id": "framework:province:pixley-ka-seme:98fe4964a4d9",
+      "shapeID": "15628383B84967339349714",
+      "source_shapeName": "Thembelihle",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        8024.03325
+      ],
+      "source_component_areas_km2": [
+        8023.097529
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 8024.033,
+      "source_area_km2": 8023.098,
+      "relative_area_difference": 0.00011663,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B85017454632042",
+      "name": "uMngeni",
+      "parent_id": "framework:province:umgungundlovu:a703b62c55ed",
+      "shapeID": "15628383B85017454632042",
+      "source_shapeName": "uMngeni",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1516.351243
+      ],
+      "source_component_areas_km2": [
+        1519.590842
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1516.351,
+      "source_area_km2": 1519.591,
+      "relative_area_difference": 0.00213189,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B85184421345333",
+      "name": "Buffalo City",
+      "parent_id": "framework:province:buffalo-city:e317895b3489",
+      "shapeID": "15628383B85184421345333",
+      "source_shapeName": "Buffalo City",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        2757.468743
+      ],
+      "source_component_areas_km2": [
+        2750.282466
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 2757.469,
+      "source_area_km2": 2750.282,
+      "relative_area_difference": 0.00261292,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B85816100363009",
+      "name": "Umhlabuyalingana",
+      "parent_id": "framework:province:umkhanyakude:35d6c9dc188f",
+      "shapeID": "15628383B85816100363009",
+      "source_shapeName": "Umhlabuyalingana",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        4977.700334
+      ],
+      "source_component_areas_km2": [
+        4977.134787
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 4977.7,
+      "source_area_km2": 4977.135,
+      "relative_area_difference": 0.00011363,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B86009182191517",
+      "name": "Dawid Kruiper",
+      "parent_id": "framework:province:z-f-mgcawu:03214189e0d2",
+      "shapeID": "15628383B86009182191517",
+      "source_shapeName": "Dawid Kruiper",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        44191.937497
+      ],
+      "source_component_areas_km2": [
+        44231.237167
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 44191.937,
+      "source_area_km2": 44231.237,
+      "relative_area_difference": 0.0008885,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B86066615117516",
+      "name": "Impendle",
+      "parent_id": "framework:province:umgungundlovu:a703b62c55ed",
+      "shapeID": "15628383B86066615117516",
+      "source_shapeName": "Impendle",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1620.790576
+      ],
+      "source_component_areas_km2": [
+        1609.570229
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1620.791,
+      "source_area_km2": 1609.57,
+      "relative_area_difference": 0.00697102,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B87112813359476",
+      "name": "Steve Tshwete",
+      "parent_id": "framework:province:nkangala:d926ae17cc99",
+      "shapeID": "15628383B87112813359476",
+      "source_shapeName": "Steve Tshwete",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        3967.991688
+      ],
+      "source_component_areas_km2": [
+        3976.453319
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 3967.992,
+      "source_area_km2": 3976.453,
+      "relative_area_difference": 0.00212793,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B87581242557684",
+      "name": "Joe Morolong",
+      "parent_id": "framework:province:john-taolo-gaetsewe:f02d4e59ca6a",
+      "shapeID": "15628383B87581242557684",
+      "source_shapeName": "Joe Morolong",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        20174.013339
+      ],
+      "source_component_areas_km2": [
+        20179.741395
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 20174.013,
+      "source_area_km2": 20179.741,
+      "relative_area_difference": 0.00028385,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B87612584942124",
+      "name": "Mnquma",
+      "parent_id": "framework:province:amathole:ff83893516cc",
+      "shapeID": "15628383B87612584942124",
+      "source_shapeName": "Mnquma",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        3135.566738
+      ],
+      "source_component_areas_km2": [
+        3137.261405
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 3135.567,
+      "source_area_km2": 3137.261,
+      "relative_area_difference": 0.00054017,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B88632116880655",
+      "name": "Lephalale",
+      "parent_id": "framework:province:waterberg:0756c71357b8",
+      "shapeID": "15628383B88632116880655",
+      "source_shapeName": "Lephalale",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        13773.448959
+      ],
+      "source_component_areas_km2": [
+        13794.060519
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 13773.449,
+      "source_area_km2": 13794.061,
+      "relative_area_difference": 0.00149423,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B88999037487897",
+      "name": "Metsimaholo",
+      "parent_id": "framework:province:fezile-dabi:5a6ae9aa1a0e",
+      "shapeID": "15628383B88999037487897",
+      "source_shapeName": "Metsimaholo",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1718.841843
+      ],
+      "source_component_areas_km2": [
+        1717.097726
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1718.842,
+      "source_area_km2": 1717.098,
+      "relative_area_difference": 0.00101574,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B89728652792601",
+      "name": "Tokologo",
+      "parent_id": "framework:province:lejweleputswa:e3440773b899",
+      "shapeID": "15628383B89728652792601",
+      "source_shapeName": "Tokologo",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        9334.293085
+      ],
+      "source_component_areas_km2": [
+        9325.860054
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 9334.293,
+      "source_area_km2": 9325.86,
+      "relative_area_difference": 0.00090426,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B9095746706118",
+      "name": "Nama Khoi",
+      "parent_id": "framework:province:namakwa:45177040906e",
+      "shapeID": "15628383B9095746706118",
+      "source_shapeName": "Nama Khoi",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        17982.127216
+      ],
+      "source_component_areas_km2": [
+        17990.405477
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 17982.127,
+      "source_area_km2": 17990.405,
+      "relative_area_difference": 0.00046015,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B92780608982812",
+      "name": "Greater Letaba",
+      "parent_id": "framework:province:mopani:4ae13b6228b0",
+      "shapeID": "15628383B92780608982812",
+      "source_shapeName": "Greater Letaba",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1891.29635
+      ],
+      "source_component_areas_km2": [
+        1890.896981
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1891.296,
+      "source_area_km2": 1890.897,
+      "relative_area_difference": 0.00021121,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B93031826303928",
+      "name": "Kai Garib",
+      "parent_id": "framework:province:z-f-mgcawu:03214189e0d2",
+      "shapeID": "15628383B93031826303928",
+      "source_shapeName": "Kai Garib",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        26373.460729
+      ],
+      "source_component_areas_km2": [
+        26376.782949
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 26373.461,
+      "source_area_km2": 26376.783,
+      "relative_area_difference": 0.00012595,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B93091970558511",
+      "name": "Ray Nkonyeni",
+      "parent_id": "framework:province:ugu:444e600bbee9",
+      "shapeID": "15628383B93091970558511",
+      "source_shapeName": "Ray Nkonyeni",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1483.897252
+      ],
+      "source_component_areas_km2": [
+        1487.086564
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1483.897,
+      "source_area_km2": 1487.087,
+      "relative_area_difference": 0.00214467,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B94123430351076",
+      "name": "Molemole",
+      "parent_id": "framework:province:capricorn:828e52379480",
+      "shapeID": "15628383B94123430351076",
+      "source_shapeName": "Molemole",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        3623.061271
+      ],
+      "source_component_areas_km2": [
+        3627.431561
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 3623.061,
+      "source_area_km2": 3627.432,
+      "relative_area_difference": 0.00120479,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B94614350175878",
+      "name": "Richmond",
+      "parent_id": "framework:province:umgungundlovu:a703b62c55ed",
+      "shapeID": "15628383B94614350175878",
+      "source_shapeName": "Richmond",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1230.091636
+      ],
+      "source_component_areas_km2": [
+        1231.364641
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1230.092,
+      "source_area_km2": 1231.365,
+      "relative_area_difference": 0.00103382,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B9479695775145",
+      "name": "Modimolle/Mookgophong",
+      "parent_id": "framework:province:waterberg:0756c71357b8",
+      "shapeID": "15628383B9479695775145",
+      "source_shapeName": "Modimolle/Mookgophong",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        10368.710631
+      ],
+      "source_component_areas_km2": [
+        10366.807376
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 10368.711,
+      "source_area_km2": 10366.807,
+      "relative_area_difference": 0.00018359,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B95844669523964",
+      "name": "Ga-Segonyana",
+      "parent_id": "framework:province:john-taolo-gaetsewe:f02d4e59ca6a",
+      "shapeID": "15628383B95844669523964",
+      "source_shapeName": "Ga-Segonyana",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        4493.637561
+      ],
+      "source_component_areas_km2": [
+        4494.805781
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 4493.638,
+      "source_area_km2": 4494.806,
+      "relative_area_difference": 0.0002599,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B95865124382580",
+      "name": "City of Cape Town",
+      "parent_id": "framework:province:city-of-cape-town:63ba6948ea87",
+      "shapeID": "15628383B95865124382580",
+      "source_shapeName": "City of Cape Town",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 2,
+      "source_polygon_components": 2,
+      "atlas_component_areas_km2": [
+        2442.340394,
+        3.746295
+      ],
+      "source_component_areas_km2": [
+        2440.487951,
+        5.18176
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 2446.087,
+      "source_area_km2": 2445.67,
+      "relative_area_difference": 0.0001705,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B95874570647832",
+      "name": "Kopanong",
+      "parent_id": "framework:province:xhariep:cec6bd15892d",
+      "shapeID": "15628383B95874570647832",
+      "source_shapeName": "Kopanong",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        15653.702501
+      ],
+      "source_component_areas_km2": [
+        15645.420629
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 15653.703,
+      "source_area_km2": 15645.421,
+      "relative_area_difference": 0.00052935,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B97037373759717",
+      "name": "Tswelopele",
+      "parent_id": "framework:province:lejweleputswa:e3440773b899",
+      "shapeID": "15628383B97037373759717",
+      "source_shapeName": "Tswelopele",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        6520.211988
+      ],
+      "source_component_areas_km2": [
+        6524.073125
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 6520.212,
+      "source_area_km2": 6524.073,
+      "relative_area_difference": 0.00059183,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B97169336353078",
+      "name": "Renosterberg",
+      "parent_id": "framework:province:pixley-ka-seme:98fe4964a4d9",
+      "shapeID": "15628383B97169336353078",
+      "source_shapeName": "Renosterberg",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        5527.172227
+      ],
+      "source_component_areas_km2": [
+        5528.869967
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 5527.172,
+      "source_area_km2": 5528.87,
+      "relative_area_difference": 0.00030707,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B97834380912632",
+      "name": "Nkandla",
+      "parent_id": "framework:province:uthungulu:1776dde21479",
+      "shapeID": "15628383B97834380912632",
+      "source_shapeName": "Nkandla",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1826.052168
+      ],
+      "source_component_areas_km2": [
+        1827.579039
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1826.052,
+      "source_area_km2": 1827.579,
+      "relative_area_difference": 0.00083546,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B98466320732904",
+      "name": "Dihlabeng",
+      "parent_id": "framework:province:thabo-mofutsanyane:93c14c120fea",
+      "shapeID": "15628383B98466320732904",
+      "source_shapeName": "Dihlabeng",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        4858.536663
+      ],
+      "source_component_areas_km2": [
+        4867.504099
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 4858.537,
+      "source_area_km2": 4867.504,
+      "relative_area_difference": 0.00184231,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B98666839265379",
+      "name": "Mogalakwena",
+      "parent_id": "framework:province:waterberg:0756c71357b8",
+      "shapeID": "15628383B98666839265379",
+      "source_shapeName": "Mogalakwena",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        6151.43543
+      ],
+      "source_component_areas_km2": [
+        6156.174314
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 6151.435,
+      "source_area_km2": 6156.174,
+      "relative_area_difference": 0.00076978,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B98865365427996",
+      "name": "Raymond Mhlaba",
+      "parent_id": "framework:province:amathole:ff83893516cc",
+      "shapeID": "15628383B98865365427996",
+      "source_shapeName": "Raymond Mhlaba",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        6348.911469
+      ],
+      "source_component_areas_km2": [
+        6357.326011
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 6348.911,
+      "source_area_km2": 6357.326,
+      "relative_area_difference": 0.0013236,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B98897135095916",
+      "name": "Mantsopa",
+      "parent_id": "framework:province:thabo-mofutsanyane:93c14c120fea",
+      "shapeID": "15628383B98897135095916",
+      "source_shapeName": "Mantsopa",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        4285.915392
+      ],
+      "source_component_areas_km2": [
+        4290.586803
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 4285.915,
+      "source_area_km2": 4290.587,
+      "relative_area_difference": 0.00108876,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B99550328665914",
+      "name": "Newcastle",
+      "parent_id": "framework:province:amajuba:69c482d37144",
+      "shapeID": "15628383B99550328665914",
+      "source_shapeName": "Newcastle",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        1856.490957
+      ],
+      "source_component_areas_km2": [
+        1855.793583
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 1856.491,
+      "source_area_km2": 1855.794,
+      "relative_area_difference": 0.00037578,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    },
+    {
+      "id": "gb:ZAF:ADM3:15628383B99813197331106",
+      "name": "City of Matlosana",
+      "parent_id": "framework:province:dr-kenneth-kaunda:28fb7500c130",
+      "shapeID": "15628383B99813197331106",
+      "source_shapeName": "City of Matlosana",
+      "source_shapeType": "ADM3",
+      "atlas_geometry_valid": true,
+      "source_geometry_valid": true,
+      "atlas_polygon_components": 1,
+      "source_polygon_components": 1,
+      "atlas_component_areas_km2": [
+        3604.768261
+      ],
+      "source_component_areas_km2": [
+        3602.251738
+      ],
+      "source_topologically_equals_atlas": false,
+      "atlas_area_km2": 3604.768,
+      "source_area_km2": 3602.252,
+      "relative_area_difference": 0.0006986,
+      "boundary_status": "insufficient-evidence",
+      "reason": "The pinned 2020 feature is a traceable comparison source, but the stored Atlas polygon differs and neither source establishes current legal boundary or completeness."
+    }
+  ]
+}
