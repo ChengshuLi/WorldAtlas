@@ -1,0 +1,184 @@
+{
+  "retrieval_date_utc": "2026-10-05",
+  "repository_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+  "baseline_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+  "baseline_inputs": [
+    {
+      "path": "data/world-index.json",
+      "bytes": 944,
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+    },
+    {
+      "path": "data/hierarchy.json",
+      "bytes": 10164089,
+      "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+    },
+    {
+      "path": "data/administrative-sources.json",
+      "bytes": 661416,
+      "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+    },
+    {
+      "path": "data/macro-foundation/macro-certificate.json",
+      "bytes": 38959,
+      "sha256": "f50f70fcb0756712ab7a7a388bc8cada093080518f07d3a6f7329758980ea81b"
+    },
+    {
+      "path": "data/macro-foundation/regional-handoffs.json.gz",
+      "bytes": 71286,
+      "sha256": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a"
+    },
+    {
+      "path": "data/macro-foundation/current-membership-inventory.json.gz",
+      "bytes": 2404397,
+      "sha256": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab"
+    },
+    {
+      "path": "data/geographic-releases/release-5.json.gz",
+      "bytes": 1904,
+      "sha256": "23e84c82b59b74fa6de65e5e5571f4fdb81399ce8b159f0483a3bc2e4e9dbda9"
+    },
+    {
+      "path": "data/geography/part-15.json",
+      "bytes": 5180426,
+      "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df"
+    },
+    {
+      "path": "data/geography/part-20.json",
+      "bytes": 6570767,
+      "sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f"
+    },
+    {
+      "path": "data/geography/part-22.json",
+      "bytes": 4746385,
+      "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+    },
+    {
+      "path": "data/geography/part-28.json",
+      "bytes": 6613963,
+      "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+    }
+  ],
+  "assets": [
+    {
+      "path": "source/gb/MKD-ADM2-CITATION-AND-USE-geoBoundaries.txt",
+      "bytes": 4316,
+      "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+      "lfs_oid": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+    },
+    {
+      "path": "source/gb/MKD-ADM2-geoBoundaries-MKD-ADM2-metaData.json",
+      "bytes": 988,
+      "sha256": "596f6646f659023b3e4be7f62a076ae69c6401c09682b8197088d241b510cd82",
+      "lfs_oid": "596f6646f659023b3e4be7f62a076ae69c6401c09682b8197088d241b510cd82"
+    },
+    {
+      "path": "source/gb/MKD-ADM2-geoBoundaries-MKD-ADM2-metaData.txt",
+      "bytes": 1147,
+      "sha256": "6450fa01446c30f488adb6b4b4e0e6fef15781ca3cd274a4d01d3bbf304faf69",
+      "lfs_oid": "6450fa01446c30f488adb6b4b4e0e6fef15781ca3cd274a4d01d3bbf304faf69"
+    },
+    {
+      "path": "source/gb/MNE-ADM1-CITATION-AND-USE-geoBoundaries.txt",
+      "bytes": 4316,
+      "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+      "lfs_oid": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+    },
+    {
+      "path": "source/gb/MNE-ADM1-geoBoundaries-MNE-ADM1-metaData.json",
+      "bytes": 852,
+      "sha256": "729d689e73a5d5204cde77f4df995dfb7f8faf9aeee73180419cd9760c7ab924",
+      "lfs_oid": "729d689e73a5d5204cde77f4df995dfb7f8faf9aeee73180419cd9760c7ab924"
+    },
+    {
+      "path": "source/gb/MNE-ADM1-geoBoundaries-MNE-ADM1-metaData.txt",
+      "bytes": 1012,
+      "sha256": "27c329781c83fdaae5b756c48e229e1fd0f6954fa1fdc0f704b01450fa93ebb6",
+      "lfs_oid": "27c329781c83fdaae5b756c48e229e1fd0f6954fa1fdc0f704b01450fa93ebb6"
+    },
+    {
+      "path": "source/gb/ROU-ADM1-CITATION-AND-USE-geoBoundaries.txt",
+      "bytes": 4316,
+      "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+      "lfs_oid": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+    },
+    {
+      "path": "source/gb/ROU-ADM1-geoBoundaries-ROU-ADM1-metaData.json",
+      "bytes": 861,
+      "sha256": "ffbe05c013dabcff41f69c0691e9dbd9e8468b331244d6d67dd139b8ec7298fd",
+      "lfs_oid": "ffbe05c013dabcff41f69c0691e9dbd9e8468b331244d6d67dd139b8ec7298fd"
+    },
+    {
+      "path": "source/gb/ROU-ADM1-geoBoundaries-ROU-ADM1-metaData.txt",
+      "bytes": 1017,
+      "sha256": "3f3cb327c11513eb96b9149fc3df78f1434d1f225e4d5f0b346c8e0c3ca774d1",
+      "lfs_oid": "3f3cb327c11513eb96b9149fc3df78f1434d1f225e4d5f0b346c8e0c3ca774d1"
+    },
+    {
+      "path": "source/gb/SRB-ADM2-CITATION-AND-USE-geoBoundaries.txt",
+      "bytes": 4316,
+      "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+      "lfs_oid": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+    },
+    {
+      "path": "source/gb/SRB-ADM2-geoBoundaries-SRB-ADM2-metaData.json",
+      "bytes": 851,
+      "sha256": "65d65d75249a6b766fc5e7bc0d856d1cca9ea67d04b53db1a151678891c11312",
+      "lfs_oid": "65d65d75249a6b766fc5e7bc0d856d1cca9ea67d04b53db1a151678891c11312"
+    },
+    {
+      "path": "source/gb/SRB-ADM2-geoBoundaries-SRB-ADM2-metaData.txt",
+      "bytes": 1013,
+      "sha256": "182b9aa53c7d03298ba5a1b6153c1aa09ad8c8b608bdbf104be8629970e8bb2a",
+      "lfs_oid": "182b9aa53c7d03298ba5a1b6153c1aa09ad8c8b608bdbf104be8629970e8bb2a"
+    },
+    {
+      "path": "source/gb/XKX-ADM1-CITATION-AND-USE-geoBoundaries.txt",
+      "bytes": 4316,
+      "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+      "lfs_oid": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+    },
+    {
+      "path": "source/gb/XKX-ADM1-geoBoundaries-XKX-ADM1-metaData.json",
+      "bytes": 799,
+      "sha256": "a912dcaefa1096a6c0af067af9723b2a67c32f5b0147b8198f99751eb591b49c",
+      "lfs_oid": "a912dcaefa1096a6c0af067af9723b2a67c32f5b0147b8198f99751eb591b49c"
+    },
+    {
+      "path": "source/gb/XKX-ADM1-geoBoundaries-XKX-ADM1-metaData.txt",
+      "bytes": 959,
+      "sha256": "1e12553626692741bf36cb88285e699a83a6e060460a0712502a145481adf1c2",
+      "lfs_oid": "1e12553626692741bf36cb88285e699a83a6e060460a0712502a145481adf1c2"
+    },
+    {
+      "path": "source/gb/gb-MKD-ADM2.geojson",
+      "bytes": 426003,
+      "sha256": "0a0d7340810fb353c3faa37ab9afea20830ce6124083ffe6321182277da61d01",
+      "lfs_oid": "0a0d7340810fb353c3faa37ab9afea20830ce6124083ffe6321182277da61d01"
+    },
+    {
+      "path": "source/gb/gb-MNE-ADM1.geojson",
+      "bytes": 610015,
+      "sha256": "9674292fbc0a50c68c6584a2ae23fae768e76cc796bdb7e3e009c0197aec6ae3",
+      "lfs_oid": "9674292fbc0a50c68c6584a2ae23fae768e76cc796bdb7e3e009c0197aec6ae3"
+    },
+    {
+      "path": "source/gb/gb-ROU-ADM1.geojson",
+      "bytes": 32428002,
+      "sha256": "e70d8bedfcaad1b99f387b044f7e7563102b98ccee982496a092178d05f22387",
+      "lfs_oid": "e70d8bedfcaad1b99f387b044f7e7563102b98ccee982496a092178d05f22387"
+    },
+    {
+      "path": "source/gb/gb-SRB-ADM2.geojson",
+      "bytes": 1653192,
+      "sha256": "f94ba868818e4f87dd24bc97aeaf37732cc23f6744facd1010cd91d2349fc884",
+      "lfs_oid": "f94ba868818e4f87dd24bc97aeaf37732cc23f6744facd1010cd91d2349fc884"
+    },
+    {
+      "path": "source/gb/gb-XKX-ADM1.geojson",
+      "bytes": 1898578,
+      "sha256": "9b07b08fe0f9ca5a26ddb6de2008ac235b38ffaf069063df9851711c2d358315",
+      "lfs_oid": "9b07b08fe0f9ca5a26ddb6de2008ac235b38ffaf069063df9851711c2d358315"
+    }
+  ]
+}
