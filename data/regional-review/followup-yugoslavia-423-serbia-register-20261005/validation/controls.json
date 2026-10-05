@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "controls": [
+    {
+      "method_id": "crosswalk",
+      "kind": "code",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/followup-yugoslavia-423-serbia-register-20261005/validation/controls.json",
+      "check": "declared 67 unique issue IDs accepted",
+      "passed": true
+    },
+    {
+      "method_id": "crosswalk",
+      "kind": "code",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/followup-yugoslavia-423-serbia-register-20261005/validation/controls.json",
+      "check": "67-ID scope with one removed rejected",
+      "passed": true
+    },
+    {
+      "method_id": "crosswalk",
+      "kind": "code",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/followup-yugoslavia-423-serbia-register-20261005/validation/controls.json",
+      "check": "duplicate candidate rejected as non-unique",
+      "passed": true
+    }
+  ]
+}
