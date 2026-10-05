@@ -1,0 +1,96 @@
+{
+  "retrieved_on": "2026-10-05",
+  "baseline_commit": "062e0585025359c596a887e5a10d3e25479aff21",
+  "sources": [
+    {
+      "id": "geoboundaries-chn-adm2-2017",
+      "role_in_packet": "Original source record for the 203 direct gb:CHN:ADM2 subjects; exact source records joined by the source shapeID preserved in each Atlas ID.",
+      "vintage_claim": "2017 (as declared by the Atlas source metadata and geoBoundaries CHN ADM2 source endpoint).",
+      "license_claim": "Open Data Commons Public Domain Dedication and License (PDDL) v1.0 in retained Atlas feature metadata; geoBoundaries data license is independent from the license for any upstream administrative source data.",
+      "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "entrypoint": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/CHN/ADM2/geoBoundaries-CHN-ADM2.geojson",
+      "retained_bytes_path": "data/regional-review/regional-review-9b38f58111efd323/sources/geoboundaries-chn-adm2-2017.geojson",
+      "retained_at_baseline": true,
+      "sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
+      "bytes": 7618692,
+      "features": 2391,
+      "reuse_and_limits": "Reuse the byte-identical retained source in the cited earlier evidence packet; do not duplicate or rewrite its bytes. The 2017 file alone does not prove current official role, county names, parent assignments, current boundaries, completeness of all Chinese county units, or boundary correctness. Its shapeGroup is country-level and does not supply the prefecture parents asserted by Atlas. Restoration must retrieve the immutable upstream commit URL and verify the SHA-256 above; if GitHub returns an LFS pointer, use the matching media.githubusercontent.com object and verify the same hash."
+    },
+    {
+      "id": "resolve-ecoregions-item-metadata",
+      "role_in_packet": "Independent source/item metadata explaining the 17 ArcGIS-derived Atlas subdivisions and their ecological rather than administrative semantics.",
+      "entrypoint": "https://www.arcgis.com/sharing/rest/content/items/37ea320eebb647c6838c23f72abae5ef?f=json",
+      "retained_bytes_path": "data/regional-review/regional-review-524d77d4d47b77c6/sources/resolve-ecoregions-item.json",
+      "retrieved_on": "2026-10-05",
+      "sha256": "23863490caa9384aa9658f1ba0ba4a0b2493e5d2759effe0f5b24792ba26406e",
+      "bytes": 8638,
+      "claims_observed": ["title RESOLVE Ecoregions and Biomes", "owner esri_landscape2", "service type Feature Service", "licenseInfo links Creative Commons Attribution 4.0 International", "accessInformation RESOLVE, Esri", "description says ecosystems use natural rather than political boundaries", "description attributes the global ecoregion work to RESOLVE and Dinerstein et al. (2017) and links DOI 10.1093/biosci/bix014", "snippet says updated in 2017 and depicts 846 terrestrial ecoregions"],
+      "limits": "The ArcGIS item was modified after its claimed 2017 dataset vintage. Item metadata alone does not prove the historical 2017 service bytes, the exact county-clipping operation, or that the Atlas fragments cover the source ecoregions or counties without gaps/overlap. Follow CC BY attribution and the underlying cited source terms."
+    },
+    {
+      "id": "resolve-ecoregions-item-data",
+      "role_in_packet": "ArcGIS item configuration; identifies the query layer and ECO_NAME popup field used to request the five named source features.",
+      "entrypoint": "https://www.arcgis.com/sharing/rest/content/items/37ea320eebb647c6838c23f72abae5ef/data?f=json",
+      "retained_bytes_path": "data/regional-review/regional-review-524d77d4d47b77c6/sources/resolve-ecoregions-item-data.json",
+      "retrieved_on": "2026-10-05",
+      "sha256": "07ebea5c4a70c20b929508acb0bbb929e2f841d145b9c45f2c044ec6953fbb9c",
+      "bytes": 3277,
+      "limits": "Configuration only; not source polygon evidence."
+    },
+    {
+      "id": "resolve-ecoregions-scoped-live-response",
+      "role_in_packet": "Full live source geometries for the five named ecoregions used in the 17 ecological subdivision labels; retained unmodified as returned in GeoJSON.",
+      "entrypoint": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer/0/query?where=ECO_NAME+IN+%28%27Central+Tibetan+Plateau+alpine+steppe%27%2C%27Rock+and+Ice%27%2C%27Karakoram-West+Tibetan+Plateau+alpine+steppe%27%2C%27North+Tibetan+Plateau-Kunlun+Mountains+alpine+desert%27%2C%27Tibetan+Plateau+alpine+shrublands+and+meadows%27%29&outFields=*&returnGeometry=true&outSR=4326&f=geojson",
+      "service_definition": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer/0",
+      "retained_bytes_path": "data/regional-review/regional-review-524d77d4d47b77c6/sources/resolve-ecoregions-scoped-live-20261005.geojson",
+      "retrieved_on": "2026-10-05",
+      "sha256": "49e2ae4c56ada9359babda39cb0c49a9ef13b641dc9b7d0f673b44a416d30a38",
+      "bytes": 43230525,
+      "feature_count": 5,
+      "feature_ecoregion_ids_and_names": [[750, "Central Tibetan Plateau alpine steppe"], [0, "Rock and Ice"], [754, "Karakoram-West Tibetan Plateau alpine steppe"], [759, "North Tibetan Plateau-Kunlun Mountains alpine desert"], [768, "Tibetan Plateau alpine shrublands and meadows"]],
+      "license_and_attribution": "ArcGIS item licenseInfo states CC BY 4.0; attribution listed as RESOLVE, Esri; the item description links Dinerstein et al. 2017, DOI 10.1093/biosci/bix014.",
+      "limits": "A live response retrieved in 2026 does not establish the exact 2017 source vintage. The global feature geometries are retained as ecological reference only; they were not overlaid with the Atlas fragments in this packet and do not establish an administrative boundary or fragmentation rule. Restore from the exact query URL and verify SHA-256 before using as a byte-identical source."
+    },
+    {
+      "id": "issue-frozen-region-baseline",
+      "role_in_packet": "Authoritative task scope and frozen macro envelope/member identifiers, preserved verbatim in scope.json from the actual GitHub issue.",
+      "entrypoint": "https://github.com/ChengshuLi/WorldAtlas/issues/450",
+      "retained_bytes_path": "data/regional-review/regional-review-524d77d4d47b77c6/scope.json",
+      "claims": "The issue pins Southwest China region v5, member ID hash f3e4fbb9fdbbaebfa32e5378e4de3e544dc0b026dee66c2da23ff0027ea7745c and envelope hash e69e116403c2726df809c8c2197d8d8ba14d8d3d2895a6684d643d4f6db7fd79. The current baseline handoff inventory reproduces this frozen region scope.",
+      "unresolved_pin": "The issue macro-certificate SHA-256 979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e does not equal the current baseline data/macro-foundation/macro-certificate.json SHA-256 f50f70fcb0756712ab7a7a388bc8cada093080518f07d3a6f7329758980ea81b. The baseline certificate is version 6 and must not silently replace the issue's v5 pin. Exact historical v5 certificate bytes were not located in this work packet."
+    },
+    {
+      "id": "sichuan-current-county-count",
+      "role_in_packet": "Official current count context for the full Sichuan area inventory; discrepancy screening only, not a per-unit map crosswalk.",
+      "entrypoint": "https://www.scspc.gov.cn/jyjd/202604/152661.html",
+      "retained_bytes_path": "data/regional-review/regional-review-524d77d4d47b77c6/sources/sichuan-2026-county-count.html",
+      "retrieved_on": "2026-10-05",
+      "sha256": "28fe67db51904b7a5c90e9d725296227f1cb80eaf7f6b1b89f134dc4203d49f9",
+      "bytes": 12027,
+      "claim": "Sichuan People's Congress decision adopted 2026-04-01 states 183 county/city/district-level units.",
+      "limits": "The source is a total count, not a list of the 183 units or boundary evidence. The packet's full Sichuan area inventory has 158 member locations. The count difference does not identify omitted or excess units and can reflect different definitions/vintages; obtain an authoritative unit-by-unit code/map crosswalk. License/redistribution terms are not stated on the captured page; retain for factual evidence and cite/restore from the official URL."
+    },
+    {
+      "id": "xizang-2026-first-half-administrative-code-table",
+      "role_in_packet": "Official current county-level code and name roster for comparison with the exact Xizang workload, not a boundary source.",
+      "entrypoint": "https://mzt.xizang.gov.cn/zxzx/tzgg/202607/t20260729_551733.html",
+      "retained_bytes_path": "data/regional-review/regional-review-524d77d4d47b77c6/sources/xizang-2026-first-half-administrative-codes.html",
+      "retrieved_on": "2026-10-05",
+      "sha256": "b746b510993af9133ad769d5eecdafaf1cb9d44d6762bb3de8474ed57162dcf9",
+      "bytes": 594387,
+      "claims": "Published 2026-07-29, states that the attached table is current through 2026-06-30; extraction of distinct six-digit 54xxxx codes from the retained source finds 82 total province/prefecture/county codes, of which 74 are county-level rows (codes not ending in 00).",
+      "limits": "This confirms a current official code roster exists and gives a count, but the packet did not crosswalk each Atlas pinyin/transliteration name to an official Chinese name/code, nor compare polygons. Issue inventory lists 90 Xizang members; its 17 ecological fragments resolve to five underlying 2017 source ADM2 IDs, so the 73 direct Atlas IDs plus five represented source IDs yield 78 distinct candidate 2017 source IDs. The numerical difference of four from the current official roster is a discrepancy requiring dated identity/crosswalk work, not proof of a specific missing/extra unit. The page provides no clear reuse license; cite and restore from the official URL."
+    },
+    {
+      "id": "yunnan-2026-administrative-code-table",
+      "role_in_packet": "Official current code/name table surfaced for Yunnan; cached/indexed text was inspected, but exact response bytes could not be retrieved in this session.",
+      "entrypoint": "https://ynmz.yn.gov.cn/index.php/cms/gongshigonggao/12323.html",
+      "retrieved_on": "2026-10-05",
+      "source_published_on": "2026-08-03",
+      "sha256": null,
+      "bytes": null,
+      "license": "Not determined; official public information page with no reuse statement established in this inspection.",
+      "limits": "The direct host request timed out; search index content identifies the official Yunnan Civil Affairs Department table and includes extensive county/township codes, but no complete retained copy or hash is available here. Do not use a count or crosswalk from the partial indexed extract. Restore from the exact official URL, save the full response only after reviewing source/reuse terms, hash the bytes, then match the exact 85 owned Yunnan IDs and the full 125-member Atlas Yunnan inventory to official county-level names/codes."
+    }
+  ]
+}
