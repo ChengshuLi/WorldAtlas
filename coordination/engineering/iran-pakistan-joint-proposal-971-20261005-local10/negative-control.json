@@ -1,0 +1,16 @@
+{
+  "checks": [
+    "uncovered source stripe rejected rather than nearest-filled",
+    "contradictory positive-area sources rejected",
+    "missing affected neighbor rejected",
+    "invalid source rejected without geometry repair",
+    "source hole remains unsupported and rejected",
+    "changed shared coordinate rejected without snapping",
+    "different shared source version rejected",
+    "absent shared source evidence rejected",
+    "invalid projection yields unknown rather than coverage predicates or repaired shapes"
+  ],
+  "kind": "negative-control",
+  "method_id": "joint-source-candidate",
+  "outcome": "passed"
+}

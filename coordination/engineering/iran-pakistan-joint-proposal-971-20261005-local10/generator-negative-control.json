@@ -1,0 +1,16 @@
+{
+  "checks": [
+    "actual CLI wrong registry hash rejected before output",
+    "actual CLI existing output refused with original bytes preserved",
+    "actual CLI altered source hash rejected against immutable negative-control Git commit"
+  ],
+  "errors": {
+    "overwrite": "ValueError: Refuse to overwrite existing output",
+    "wrong_registry": "ValueError: Registry pin differs from command",
+    "wrong_source": "ValueError: Baseline input hash/size mismatch: coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-saravan-relation-6555069-full.json"
+  },
+  "kind": "negative-control",
+  "method_id": "immutable-joint-candidate",
+  "negative_control_commit": "6f2e88585c028e22952ec18170e54ed419698aae",
+  "outcome": "passed"
+}
