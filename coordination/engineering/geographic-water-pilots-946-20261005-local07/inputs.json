@@ -1,0 +1,185 @@
+{
+  "component_input_commit": "4877ef4e99528615daf657a376b7605d1657f817",
+  "component_report": {
+    "bytes": 26701,
+    "hash_kind": "file-bytes",
+    "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v2/report.json",
+    "sha256": "69aa2c4cc0a949d66938344cb80e526fe77b68661b93fd0b3be7830e2e18e478"
+  },
+  "original_geography_evaluation_commit": "5f6ab02338a07fd4b3d1cf82d58b96bc84b70312",
+  "pilots": [
+    {
+      "anchor": [
+        63.207727681,
+        26.8032
+      ],
+      "aoi": null,
+      "component_feature_sha256": "6818febcdc866f0ca1af716843023815f711b4f248614bd29f65e9ef78bcb286",
+      "component_file": {
+        "bytes": 3642057,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v2/components-000.json.gz",
+        "sha256": "115179a2e6ddda1a74e41d088c97643a56479deaaa0cb880b93a07fcd731e76f",
+        "uncompressed_bytes": 16775947,
+        "uncompressed_sha256": "0bfa4da8a3d0a6bb1866e917da0937d408c86bb0f293cb91d1f30985f5ab413f"
+      },
+      "component_id": "gap:10c95e9f3b4b8d93b3ce3145916de2de656527cc706a5f64b323aa680406cefb",
+      "name": "iran-pakistan",
+      "source_paths": [
+        "coordination/engineering/geographic-water-pilots-946-20261005-local07/sources/2017_01-0000200000-0000960000.tif",
+        "coordination/engineering/geographic-water-pilots-946-20261005-local07/sources/2017_07-0000200000-0000960000.tif"
+      ]
+    },
+    {
+      "anchor": [
+        -6.936597423006788,
+        39.864256315736014
+      ],
+      "aoi": [
+        -6.95,
+        39.85,
+        -6.92,
+        39.88
+      ],
+      "component_feature_sha256": "cc5206d9cc5d93c957080fcb2424ba3bba758bb6b9a64ee77fb00f15afd9508f",
+      "component_file": {
+        "bytes": 3640001,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v2/components-004.json.gz",
+        "sha256": "c8726499e2d34c89b45fcf5d4c725b9583d2cb14319736580c032d460c04cb54",
+        "uncompressed_bytes": 16776852,
+        "uncompressed_sha256": "65f2af624321492c509355e5d6e9835ecb5480117c8e6e2766d2ba7532194801"
+      },
+      "component_id": "gap:ad2052defbeba8e89287bcc4344e641225c6579f9afd584497b381fe8fd8eedc",
+      "name": "portugal-spain",
+      "source_paths": [
+        "coordination/engineering/geographic-water-pilots-946-20261005-local07/sources/2020_01-0000160000-0000680000.tif",
+        "coordination/engineering/geographic-water-pilots-946-20261005-local07/sources/2020_07-0000160000-0000680000.tif"
+      ]
+    }
+  ],
+  "references": [
+    {
+      "bytes": 1142853,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/sources/DataUsersGuidev2024_v.5.pdf",
+      "sha256": "94aebddbb2d66bcbacea14326d84d0b9d9401c8ef95bc48b42991448f36b839b"
+    },
+    {
+      "bytes": 540,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/sources/copyright.txt",
+      "sha256": "8a21a4c6c31a378cf73ec5d99b94edfb022e26383cf74defba991957f1d0f9c5"
+    },
+    {
+      "bytes": 82680,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/sources/data-access.html",
+      "sha256": "bc07b9e5b6a7627d5c2082d9e314e90ed039359cce74c19f8fc71f8414228b7d"
+    }
+  ],
+  "scope": "Two bounded dated diagnostic pilots. No complete global or full-shape water adjudication. Original FTP semantics inferred from published monthly-history schema; raw byte counts retained.",
+  "sources": [
+    {
+      "attribution": "Source: EC JRC/Google",
+      "bytes": 26546492,
+      "encoding_basis": "Data Users Guide v5, page 15: Monthly Water History 0=no observations, 1=not water, 2=water; GEE schema. FTP lacks embedded class labels. Applying that schema to conforming byte values is an explicitly retained inference.",
+      "hash_kind": "file-bytes",
+      "kind": "original-whole-file",
+      "licence": "CC-BY-4.0",
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/sources/2017_01-0000200000-0000960000.tif",
+      "product": "MonthlyHistory FTP VER5-0; not labelled GSW v1.5",
+      "response_headers": {
+        "Accept-Ranges": "bytes",
+        "Connection": "close",
+        "Content-Length": "26546492",
+        "Content-Type": "image/tiff",
+        "Date": "Mon, 05 Oct 2026 13:13:37 GMT",
+        "ETag": "\"195113c-5975efc42a070\"",
+        "Last-Modified": "Fri, 15 Nov 2019 09:11:38 GMT",
+        "Server": "Apache",
+        "Via": "1.1 cidportal.jrc.ec.europa.eu"
+      },
+      "retrieved_utc": "2026-10-05T13:13:41Z",
+      "sha256": "175054bf6155aa561d520e659191bb31932da5fd74187fb1f6d03fa11f2ded69",
+      "source_month": "2017-01",
+      "url": "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GSWE/MonthlyHistory/VER5-0/tiles/2017/2017_01/2017_01-0000200000-0000960000.tif"
+    },
+    {
+      "attribution": "Source: EC JRC/Google",
+      "bytes": 16072250,
+      "encoding_basis": "Data Users Guide v5, page 15: Monthly Water History 0=no observations, 1=not water, 2=water; GEE schema. FTP lacks embedded class labels. Applying that schema to conforming byte values is an explicitly retained inference.",
+      "hash_kind": "file-bytes",
+      "kind": "original-whole-file",
+      "licence": "CC-BY-4.0",
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/sources/2017_07-0000200000-0000960000.tif",
+      "product": "MonthlyHistory FTP VER5-0; not labelled GSW v1.5",
+      "response_headers": {
+        "Accept-Ranges": "bytes",
+        "Connection": "close",
+        "Content-Length": "16072250",
+        "Content-Type": "image/tiff",
+        "Date": "Mon, 05 Oct 2026 13:13:42 GMT",
+        "ETag": "\"f53e3a-5b60aa47929b5\"",
+        "Last-Modified": "Wed, 09 Dec 2020 16:35:08 GMT",
+        "Server": "Apache",
+        "Via": "1.1 cidportal.jrc.ec.europa.eu"
+      },
+      "retrieved_utc": "2026-10-05T13:13:55Z",
+      "sha256": "99a6109ea3df7d53c2eaf03cc5193013e21d761db963744e36e329aa36baf834",
+      "source_month": "2017-07",
+      "url": "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GSWE/MonthlyHistory/VER5-0/tiles/2017/2017_07/2017_07-0000200000-0000960000.tif"
+    },
+    {
+      "attribution": "Source: EC JRC/Google",
+      "bytes": 11454941,
+      "encoding_basis": "Data Users Guide v5, page 15: Monthly Water History 0=no observations, 1=not water, 2=water; GEE schema. FTP lacks embedded class labels. Applying that schema to conforming byte values is an explicitly retained inference.",
+      "hash_kind": "file-bytes",
+      "kind": "original-whole-file",
+      "licence": "CC-BY-4.0",
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/sources/2020_01-0000160000-0000680000.tif",
+      "product": "MonthlyHistory FTP VER5-0; not labelled GSW v1.5",
+      "response_headers": {
+        "Accept-Ranges": "bytes",
+        "Connection": "close",
+        "Content-Length": "11454941",
+        "Content-Type": "image/tiff",
+        "Date": "Mon, 05 Oct 2026 13:13:55 GMT",
+        "ETag": "\"aec9dd-5bff011e79840\"",
+        "Last-Modified": "Wed, 14 Apr 2021 15:04:57 GMT",
+        "Server": "Apache",
+        "Via": "1.1 cidportal.jrc.ec.europa.eu"
+      },
+      "retrieved_utc": "2026-10-05T13:13:58Z",
+      "sha256": "ebed30e6ffdb01e96ce11ae69d569a483376317898c77bfb862d38f5e3fcaefb",
+      "source_month": "2020-01",
+      "url": "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GSWE/MonthlyHistory/VER5-0/tiles/2020/2020_01/2020_01-0000160000-0000680000.tif"
+    },
+    {
+      "attribution": "Source: EC JRC/Google",
+      "bytes": 13230639,
+      "encoding_basis": "Data Users Guide v5, page 15: Monthly Water History 0=no observations, 1=not water, 2=water; GEE schema. FTP lacks embedded class labels. Applying that schema to conforming byte values is an explicitly retained inference.",
+      "hash_kind": "file-bytes",
+      "kind": "original-whole-file",
+      "licence": "CC-BY-4.0",
+      "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/sources/2020_07-0000160000-0000680000.tif",
+      "product": "MonthlyHistory FTP VER5-0; not labelled GSW v1.5",
+      "response_headers": {
+        "Accept-Ranges": "bytes",
+        "Connection": "close",
+        "Content-Length": "13230639",
+        "Content-Type": "image/tiff",
+        "Date": "Mon, 05 Oct 2026 13:13:59 GMT",
+        "ETag": "\"c9e22f-5bffe04b32140\"",
+        "Last-Modified": "Thu, 15 Apr 2021 07:43:25 GMT",
+        "Server": "Apache",
+        "Via": "1.1 cidportal.jrc.ec.europa.eu"
+      },
+      "retrieved_utc": "2026-10-05T13:14:01Z",
+      "sha256": "3532877fc304ee3a8242d8d3a0b21b5b46aaf14810b12c5fb14b52645b1f664c",
+      "source_month": "2020-07",
+      "url": "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GSWE/MonthlyHistory/VER5-0/tiles/2020/2020_07/2020_07-0000160000-0000680000.tif"
+    }
+  ],
+  "version": "worldatlas-water-pilot-inputs-v1"
+}
