@@ -567,8 +567,8 @@
     },
     {
       "path": "data/regional-review/regional-review-aa0be1f8b58caec6/reproduce.py",
-      "bytes": 13510,
-      "sha256": "b379ca1d0589ff9c3dc3411a4e82aa10c20b97f1ec521a2cf00b7e2873837b17",
+      "bytes": 13575,
+      "sha256": "e599425c4978c7242a28ee1101db456c6f1b3b882cfe59322d0ee04529b3db4b",
       "hash_kind": "file-bytes",
       "role": "reproduction-code"
     },
@@ -633,9 +633,9 @@
     {
       "id": "roster-crosswalk",
       "kind": "code",
-      "description": "Crosswalk all exact issue IDs and all 265 retained 2019 feature records against official NSI EKATTE names/codes, using the Atlas district-parent chain and explicit old-source English spelling aliases; write local gitignored row-level results.",
+      "description": "Crosswalk all exact issue IDs and all 265 retained 2019 feature records against official NSI EKATTE names/codes, selecting districts by the Atlas parent name and applying explicit old-source English spelling aliases; write local gitignored row-level results.",
       "software": "Python 3 standard library; pinned source files",
-      "units": "one row per source shape; municipality codes and district parent codes; WGS84 min/max longitude/latitude for bbox diagnostics (not geometry validation)"
+      "units": "one row per source shape; municipality codes and matched district-parent names; WGS84 min/max longitude/latitude for bbox diagnostics (not geometry validation)"
     }
   ],
   "metrics": [],

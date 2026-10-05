@@ -30,7 +30,7 @@ BASELINE_PATH = PACKET / "source/baseline-inputs.json"
 
 # geoBoundaries' 2019 Latin spellings differ from NSI's official English
 # transliteration in these cases. Each is matched only with its municipality
-# code and district parent, never by name alone.
+# municipality code and name-matched district parent; Atlas parent IDs are not compared to EKATTE district codes.
 ALIASES = {
     "dolna mitropoliya": "dolna mitropolia",
     "dobrichka": "dobrich selska",
