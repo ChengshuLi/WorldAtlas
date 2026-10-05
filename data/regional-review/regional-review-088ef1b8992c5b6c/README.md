@@ -1,0 +1,39 @@
+# Issue #468 evidence packet
+
+Read-only geography research for the exact 221 IDs owned by #468. The packet remains evidence/proposal only; it changes no shared geography or records and grants no regional, country-interior, publication, or historical-import approval.
+
+## Findings
+
+- Scope is preserved verbatim in `issue-scope-pinned.json`: 204 Burkina Faso IDs and 17 Côte d’Ivoire IDs across 28 province scopes. Both country-area scopes are partial: 204/351 and 17/510 according to the issue's own scope pins.
+- Per-ID and per-province dispositions are in `derived-analysis.json`. All 17 Côte d’Ivoire rows are correction-needed source-role candidates: the retained official CNTIG/OCHA service has one exact normalized `admin3Name` + Cavally `admin1Name` match for every issue name, including Bédi-Gaozon, and its fields identify admin3 as sub-prefecture and admin2 as department. Its `admin2Name` gives the direct department for each row. These are current cross-source name/parent candidates, not official code/ID assignments or legal boundary certification; the service is reference-vintage 2018–2023 with last data edit 2025-04-11, and DGAT reports 509 created (475 open) sub-prefectures versus 510 features in both compared layers.
+- All 204 Burkina Faso rows remain insufficient-evidence: the 2007 351-feature source matches their labels after reversible decoding, but there is no official shapeID-to-current-commune code bridge. The official 2019 INSD report states 351 communes; a hash-verified extraction of its Annex 6 yields 342 rows, so the extract is incomplete and unmatched names are not reported as absent. The PDF itself is restoration-only because no reuse license was identified.
+- Twenty-seven Burkina Faso province groupings remain insufficient-evidence because the dated overlay is not a current legal parent crosswalk. The Cavally grouping is justified as an Atlas region grouping: all 17 scoped units match official CNTIG/OCHA `admin1Name=Cavally`, and the pinned 2016 source identifies Cavally as a region. Those same rows separately map to four direct departments; Cavally is not asserted as the direct parent. The complete per-group evidence is in `derived-analysis.json`.
+- All 221 Atlas names match source names after the reversible text decode. The largest-overlap ADM2 source label matches the Atlas parent name for all 221 rows. This supports only a diagnostic comparison: BFA ADM2 is 2017, CIV ADM2 is 2016, and neither carries the needed current per-feature legal crosswalk.
+- The 204 BFA source shapes have three repeated national source names among the scoped members: Boussouma appears twice in the issue subset (two IDs) and Namissiguima repeats elsewhere in the national source. Atlas geometries for Reo (4 components), Boromo (2), and Tougan (3) differ from singlepart 2007 counterparts. Boromo (about 4,978 km²) and Tibga (about 2,894 km²) also cover over half of their largest-overlap 2017 province comparator; this is a size-based research flag, not evidence of an error. #854 carries these unit-level questions; no correction is assumed.
+- `acceptance-screen.json` records individual evidence coverage or unresolved limits for the issue's concerns about city extents, province-sized units, generic remainders, disconnected parts, omitted islands/completeness, repeated tiers, oversized groups, parent strength, and neighboring units. Its open screens explicitly remain work; no structural pass is described as geographic approval.
+- WGS84 source/Atlas IoU is min `0.868125926`, median `0.980369630`, max `0.997175245`. Identical-polygon and translated-polygon controls yield IoU 1 and 0. These calculations screen geometry agreement only.
+
+## Reproduction
+
+From repository root, install the pinned tools into a temporary directory with Python 3.12, then run the reproduction:
+
+```sh
+python3.12 -m pip install --target /tmp/worldatlas-evidence-deps shapely==2.1.2 pyproj==3.7.2 pypdf==6.19.0 pdfplumber==0.11.7
+python3.12 data/regional-review/regional-review-088ef1b8992c5b6c/extract_baseline.py
+PYTHONPATH="/tmp/worldatlas-evidence-deps:scripts" python3.12 data/regional-review/regional-review-088ef1b8992c5b6c/evidence/extract_insd_commune_roster.py --source-pdf /path/to/restored/INSD-local-poverty-2019-report.pdf
+python3.12 data/regional-review/regional-review-088ef1b8992c5b6c/build_source_receipts.py
+PYTHONPATH="/tmp/worldatlas-evidence-deps:scripts" python3.12 data/regional-review/regional-review-088ef1b8992c5b6c/reproduce_scope.py
+```
+
+The actual runtime used for this run and two-run output hash are recorded in `reproduction-run.json`. The geographic calculations use `scripts/evidence/geometry.py` (`worldatlas-evidence-geometry-v1`, longitude-first EPSG:4326, WGS84 straight-source-edge ellipsoidal area) and the repository's `scripts/ellipsoidal_area.py`. Restore the official INSD PDF from the URL and verify the hash in `source-receipts.json` before running the extractor. It refuses to call its 342 parsed rows a complete 351-row roster.
+
+## Inputs, methods, and handoffs
+
+- `baseline-start.json`, `baseline-receipt.json`, `baseline-members.geojson.gz`, `baseline-parent-context.json`, and `baseline-source-lineage.json` pin extraction to fresh-main acceptance baseline `80fb0e7744809438d02881f8d3435d9efb71d2e8`; source/member inventory hashes are enumerated in `baseline-feature-inventory.csv`.
+- `sources/` contains the retained geoBoundaries original files and metadata for BFA ADM3/ADM2 and CIV ADM3/ADM2. The official INSD and Ministry 2026 PDFs were inspected from their official URLs but are not redistributed because reuse terms were not identified. Exact previously inspected byte sizes and SHA-256 values and restoration instructions appear in `source-receipts.json`; the INSD extractor accepts a restored temporary PDF path and verifies the hash before extraction.
+- `evidence/source-review-notes.md` records territorial meaning, source vintage/license, neighboring level, scope completeness, parent relationships, methods, uncertainty and the proposed correction/follow-up boundaries.
+- The AfDB 2019 report's complete original PDF could not be retrieved from its official host (HTTP 403/502). Its indexed exact roster text is preserved locally in `civ-cavally-2019-project-roster.csv` and `civ-roster-provenance.md`; these artifacts state the unavailable upstream hash, source restoration instruction, and limit. The #469 CNTIG/OCHA service is reused read-only at its pinned owned path. Across all 17, its polygons have WGS84 ellipsoidal-area IoU 0.999999987–0.999999998 (median 0.999999994) against the 2021 geoBoundaries polygons. This is a geometry comparison only; the inspected 2026 project report is documented with restoration instructions because no reuse license was identified.
+- Follow-up A: [#854](https://github.com/ChengshuLi/WorldAtlas/issues/854) owns the official-code/parent/geometry crosswalk for the exact 204 BFA IDs, including the three repeated source names and three multipart discrepancies; it is blocked on #468.
+- Follow-up B: [#855](https://github.com/ChengshuLi/WorldAtlas/issues/855) owns the exact 17 CIV IDs' official code/ID/legal status crosswalk and reconciliation of geometry vintage and 509/475-versus-510 completeness; it is blocked on #468 and coordinates with #841 and disjoint #832 before any shared 510-feature source-role change. CNTIG/OCHA uniquely supports all 17 names and department parent labels, including Bédi-Gaozon; statutory codes, legal continuity, completeness and boundary authority remain unresolved.
+
+Source facts and limits are detailed in the cited official records and retrieval register. The official macro handoff keeps the enclosing fixed West Africa envelope while explicitly marking regional interiors unapproved and location-attribute imports not ready.

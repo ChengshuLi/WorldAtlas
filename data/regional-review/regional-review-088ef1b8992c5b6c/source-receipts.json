@@ -1,0 +1,227 @@
+{
+  "derived_research_artifacts": [
+    {
+      "bytes": 4762,
+      "description": "per-concern review screen for the issue's 9 geographic acceptance risks; records candidate IDs and explicit limits",
+      "path": "data/regional-review/regional-review-088ef1b8992c5b6c/acceptance-screen.json",
+      "sha256": "9b2e049d5722f41db044c0edfd9d617a3cd7a62eb2564bd9121e68d27d29fd1b"
+    },
+    {
+      "bytes": 10195,
+      "description": "text extraction of commune/province/region rows; 342 parsed rows versus report-stated 351; incomplete and not used for absence claims",
+      "path": "data/regional-review/regional-review-088ef1b8992c5b6c/evidence/bfa-insd-2019-commune-roster.csv",
+      "sha256": "6c42229c7f557c48ddb2f0a5d0bb670aedbe0da2e18345007fae9358bebef2ad"
+    },
+    {
+      "bytes": 1270,
+      "description": "17-row extract from the official indexed AfDB text; source PDF unavailable here; preserve uncertainty",
+      "path": "data/regional-review/regional-review-088ef1b8992c5b6c/evidence/civ-cavally-2019-project-roster.csv",
+      "sha256": "b2c1e3cd04c6dc87ad1e7c564b75b0c20f0586954fc785b8d76a87925823ee3e"
+    },
+    {
+      "bytes": 12770,
+      "description": "worker analysis and source outcome limits",
+      "path": "data/regional-review/regional-review-088ef1b8992c5b6c/evidence/source-review-notes.md",
+      "sha256": "9c59fc0948ee38064656e12f3f493c8d1aa042ca2b847be35b43f79d96b856d0"
+    },
+    {
+      "bytes": 4099,
+      "description": "transcribed source passage, direct retrieval outcomes, restoration instruction",
+      "path": "data/regional-review/regional-review-088ef1b8992c5b6c/evidence/civ-roster-provenance.md",
+      "sha256": "9a0a9fceba31ddab519f9c308845428c25b4dadbbf942856ae2854f58203ede3"
+    },
+    {
+      "bytes": 133,
+      "description": "identical-polygon positive control for the WGS84 ellipsoidal-area intersection-over-union method",
+      "path": "data/regional-review/regional-review-088ef1b8992c5b6c/evidence/controls/geometry-positive-control.json",
+      "sha256": "b7fc68691f339a73803ed5cf353620e74dfcbfe2745bada2ff54333b0b4dac87"
+    },
+    {
+      "bytes": 143,
+      "description": "translated disjoint-polygon negative control for the WGS84 ellipsoidal-area intersection-over-union method",
+      "path": "data/regional-review/regional-review-088ef1b8992c5b6c/evidence/controls/geometry-negative-control.json",
+      "sha256": "268cf6f2e05cd4bca0f74e58a6ec1b869e880728f4a82b2bb7b39a726e08b0d8"
+    }
+  ],
+  "issue_number": 468,
+  "retrieval_snapshot_utc": "2026-10-05",
+  "sources": [
+    {
+      "bytes": 4840718,
+      "feature_count": 351,
+      "license": "Public Domain (geoBoundaries metadata; license detail references source pop-up)",
+      "path": "data/regional-review/regional-review-088ef1b8992c5b6c/sources/geoboundaries-9469f09/geoBoundaries-BFA-ADM3.geojson",
+      "provenance": "retrieved 2026-10-05 in this packet from media.githubusercontent.com; LFS raw pointer was not used as content",
+      "retrieved_at_utc": "2026-10-05",
+      "role": "commune/local administrative unit; canonical source tier blank",
+      "sha256": "6f4d9351318bd29ace3e56d17fdcd26d74a798f47abc3c5674605b083d34cf12",
+      "source_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/BFA/ADM3/geoBoundaries-BFA-ADM3.geojson",
+      "source_vintage": "2007",
+      "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d"
+    },
+    {
+      "boundary_id": "BFA-ADM3-42667915",
+      "bytes": 893,
+      "license": "as stated in metadata",
+      "path": "data/regional-review/regional-review-088ef1b8992c5b6c/sources/geoboundaries-9469f09/geoBoundaries-BFA-ADM3-metaData.json",
+      "provenance": "retrieved 2026-10-05 in this packet from media.githubusercontent.com; LFS raw pointer was not used as content",
+      "retrieved_at_utc": "2026-10-05",
+      "role": "source metadata",
+      "sha256": "b559ada1ddb95c401556801cfef3b444c49d96590a736ec914e1d66f97469dae",
+      "source_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/BFA/ADM3/geoBoundaries-BFA-ADM3-metaData.json",
+      "source_vintage": "2007",
+      "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d"
+    },
+    {
+      "bytes": 2228501,
+      "feature_count": 45,
+      "license": "CC BY 4.0",
+      "path": "data/regional-review/regional-review-088ef1b8992c5b6c/sources/geoboundaries-9469f09/geoBoundaries-BFA-ADM2.geojson",
+      "provenance": "retrieved 2026-10-05 in this packet from media.githubusercontent.com; comparator vintage",
+      "retrieved_at_utc": "2026-10-05",
+      "role": "Province",
+      "sha256": "aea17813a774c47f3ee0ccc0f39906116d9e0b48add0c8adf091998281f723b0",
+      "source_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/BFA/ADM2/geoBoundaries-BFA-ADM2.geojson",
+      "source_vintage": "2017",
+      "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d"
+    },
+    {
+      "boundary_id": "BFA-ADM2-67063806",
+      "bytes": 864,
+      "license": "as stated in metadata",
+      "path": "data/regional-review/regional-review-088ef1b8992c5b6c/sources/geoboundaries-9469f09/geoBoundaries-BFA-ADM2-metaData.json",
+      "provenance": "retrieved 2026-10-05 in this packet from media.githubusercontent.com; comparator vintage",
+      "retrieved_at_utc": "2026-10-05",
+      "role": "source metadata",
+      "sha256": "5a436248cca65ac8e892856f91c9f6361fb5cf08151fba0d3b06a3eda0628a94",
+      "source_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/BFA/ADM2/geoBoundaries-BFA-ADM2-metaData.json",
+      "source_vintage": "2017",
+      "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d"
+    },
+    {
+      "bytes": 7813996,
+      "feature_count": 510,
+      "license": "CC BY 3.0 IGO",
+      "path": "data/regional-review/regional-review-088ef1b8992c5b6c/sources/geoboundaries-9469f09/geoBoundaries-CIV-ADM3.geojson",
+      "provenance": "retained original from merged #470 packet; upstream bytes/hash match that packet's receipt; retrieved upstream at 2026-10-05T02:06:34Z",
+      "retrieved_at_utc": "2026-10-05T02:06:34Z",
+      "role": "Departments (geoBoundaries layer-level label; row-level role unresolved)",
+      "sha256": "7bf038dd0c666f76f5638289cf80991997a7f26e891578b57222d939e11b9da8",
+      "source_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/CIV/ADM3/geoBoundaries-CIV-ADM3.geojson",
+      "source_vintage": "2021",
+      "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d"
+    },
+    {
+      "boundary_id": "CIV-ADM3-97208781",
+      "bytes": 957,
+      "license": "as stated in metadata",
+      "path": "data/regional-review/regional-review-088ef1b8992c5b6c/sources/geoboundaries-9469f09/geoBoundaries-CIV-ADM3-metaData.json",
+      "provenance": "retained original from merged #470 packet; upstream bytes/hash match that packet's receipt; retrieved upstream at 2026-10-05T02:06:34Z",
+      "retrieved_at_utc": "2026-10-05T02:06:34Z",
+      "role": "source metadata",
+      "sha256": "6e335f347fb1209e5dc3006ac7788cb9d0354d4f21534175e67d7a2d86066452",
+      "source_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/CIV/ADM3/geoBoundaries-CIV-ADM3-metaData.json",
+      "source_vintage": "2021",
+      "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d"
+    },
+    {
+      "bytes": 2810302,
+      "feature_count": 33,
+      "license": "CC BY 4.0",
+      "path": "data/regional-review/regional-review-088ef1b8992c5b6c/sources/geoboundaries-9469f09/geoBoundaries-CIV-ADM2.geojson",
+      "provenance": "retained original from merged #470 packet; upstream bytes/hash match that packet's receipt; retrieved upstream at 2026-10-05T02:10:18Z",
+      "retrieved_at_utc": "2026-10-05T02:10:18Z",
+      "role": "régions de Côte d'Ivoire",
+      "sha256": "a9035b8f759e54ae5f6c1289a7b06711d6cd4f0e9545f83e319388304e1a1403",
+      "source_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2.geojson",
+      "source_vintage": "2016",
+      "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d"
+    },
+    {
+      "boundary_id": "CIV-ADM2-98640826",
+      "bytes": 905,
+      "license": "as stated in metadata",
+      "path": "data/regional-review/regional-review-088ef1b8992c5b6c/sources/geoboundaries-9469f09/geoBoundaries-CIV-ADM2-metaData.json",
+      "provenance": "retained original from merged #470 packet; upstream bytes/hash match that packet's receipt; retrieved upstream at 2026-10-05T02:10:18Z",
+      "retrieved_at_utc": "2026-10-05T02:10:18Z",
+      "role": "source metadata",
+      "sha256": "d7246f239e6cdef768672085ef422270edf22b3083e868e09d6d5b507121a84e",
+      "source_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/CIV/ADM2/geoBoundaries-CIV-ADM2-metaData.json",
+      "source_vintage": "2016",
+      "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d"
+    },
+    {
+      "bytes": 6738415,
+      "license": "CC BY for Intergovernmental Organisations (metadata states CNTIG copyright; no version number stated)",
+      "path": "data/regional-review/regional-review-ab07a23bcfd9b1db/sources/cntig-ocha-subprefectures-query-2025.geojson",
+      "provenance": "read-only reuse from #469 owned path; exact source bytes and hash verified against #469 source manifest",
+      "retrieved_at_utc": "2026-10-05",
+      "role": "official CNTIG/OCHA admin1 region, admin2 department, admin3 sub-prefecture cross-source comparator; original retained in merged #469 packet",
+      "sha256": "11deee85b6d41698d371846b0fd57cac6ad7b28a723e686c1ab6a0e149c3065e",
+      "source_url": "https://services-eu1.arcgis.com/HApVBfqpU6uDawrd/ArcGIS/rest/services/SP/FeatureServer/14",
+      "source_vintage": "reference period 2018-08-06 through 2023-09-20; service last data edit 2025-04-11"
+    },
+    {
+      "bytes": 12980,
+      "license": "CC BY for Intergovernmental Organisations (metadata states CNTIG copyright; no version number stated)",
+      "path": "data/regional-review/regional-review-ab07a23bcfd9b1db/sources/cntig-ocha-subprefectures-layer-metadata.json",
+      "provenance": "read-only reuse from #469 owned path; exact source bytes and hash verified against #469 source manifest",
+      "retrieved_at_utc": "2026-10-05",
+      "role": "official layer schema, source and license metadata",
+      "sha256": "49855a9332d87b143f04e9914559867475fda45b28f6a186af864e3a02134868",
+      "source_url": "https://services-eu1.arcgis.com/HApVBfqpU6uDawrd/ArcGIS/rest/services/SP/FeatureServer/14",
+      "source_vintage": "layer metadata for service data last edited 2025-04-11"
+    }
+  ],
+  "unavailable_sources": [
+    {
+      "bytes": 5721087,
+      "required_restoration": "Retrieve the official PDF to a temporary local path, verify this exact SHA-256, then run evidence/extract_insd_commune_roster.py --source-pdf PATH. The report's Annex 6 states 351 communes; the pinned extraction method recovers only 342, and nonmatches are not absence evidence.",
+      "retrieved_at_utc": "2026-10-05",
+      "sha256": "6e7c672523bd633189646e953a22586da0cb3b7940b4545478cad242649eb55a",
+      "source_url": "https://www.insd.bf/sites/default/files/2024-10/EHCVM%202021_Rapport_IPM.pdf",
+      "status": "original inspected for Annex 6; no reuse license identified; not redistributed"
+    },
+    {
+      "bytes": 10779871,
+      "required_restoration": "Retrieve the official final report to a temporary path, verify this exact SHA-256, then inspect printed pages 72 and 81. Use only its described project footprint; it is not a complete territory roster.",
+      "retrieved_at_utc": "2026-10-05",
+      "sha256": "b848d76f0508647665131d5f9a6ffa7ac2d64a42758754543e467d0d570610fd",
+      "source_url": "https://eauxetforets.gouv.ci/sites/default/files/communique/clean_rapport_final_pif2_eiesa_agro-foret_scio_20260306-1.pdf",
+      "status": "original inspected for printed pages 72 and 81; no reuse license identified; not redistributed"
+    },
+    {
+      "bytes": null,
+      "required_restoration": "Fetch the exact final report from the official AfDB URL, verify title/date/page/wording, then record upstream hash and byte count before using it as a retained original.",
+      "retrieved_at_utc": "2026-10-05",
+      "sha256": null,
+      "source_url": "https://www.afdb.org/sites/default/files/ci_projet_appui_psgouv_rapport_final_cges_25oct19.pdf",
+      "status": "indexed official text inspected; direct binary retrieval returned HTTP 403 (alternate ESA host returned HTTP 502)"
+    },
+    {
+      "bytes": null,
+      "required_restoration": "Retain the original Ministry order and verify its date, appointment, spelling and department relationship.",
+      "retrieved_at_utc": "2026-10-05 (prior inspection)",
+      "sha256": null,
+      "source_url": "https://interieur.gouv.ci/uploads/publications/175397417134.pdf",
+      "status": "official indexed ministry source reported; direct PDF retrieval blocked"
+    },
+    {
+      "bytes": null,
+      "required_restoration": "Retrieve original 2021 census tables and inspect the exact Cavally departmental/sous-prefecture roster.",
+      "retrieved_at_utc": "2026-10-05 (prior inspection)",
+      "sha256": null,
+      "source_url": "https://rp2021.anstat.ci/wp-content/uploads/2023/09/TABLEAUX-11_DE-BASES_RP-RELIGION.pdf",
+      "status": "direct request returned 403 / Cloudflare HTML; not treated as table evidence"
+    },
+    {
+      "bytes": null,
+      "required_restoration": "Retrieve all pages for department and sous-prefecture endpoints and preserve response bytes/hash and retrieval parameters.",
+      "retrieved_at_utc": "2026-10-05 (prior inspection)",
+      "sha256": null,
+      "source_url": "https://www.anstat.ci/public/api",
+      "status": "official API request returned 403; no rows retained"
+    }
+  ],
+  "version": 1
+}

@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "method": "worldatlas-evidence-geometry-v1 + source roster extraction",
+  "runs": 2,
+  "run_one_sha256": "101070f62284eddda209345d8fecf03d2e31ebe45cb4574f5aeb936d252eb112",
+  "run_two_sha256": "101070f62284eddda209345d8fecf03d2e31ebe45cb4574f5aeb936d252eb112",
+  "equal": true,
+  "python": "3.12.14",
+  "shapely": "2.1.2",
+  "pyproj": "3.7.2",
+  "pypdf": "6.19.0",
+  "pdfplumber": "0.11.7",
+  "commands": [
+    "extract_baseline.py",
+    "evidence/extract_insd_commune_roster.py --source-pdf <restored PDF with exact recorded SHA-256>",
+    "build_source_receipts.py",
+    "reproduce_scope.py (run twice; output hash equal)"
+  ],
+  "baseline_commit": "80fb0e7744809438d02881f8d3435d9efb71d2e8",
+  "branch_head": "1232d03d2d9a5e1118c0d5239092c879a9539990",
+  "current_origin_main": "ef3751e772a2f4d7b0328f4926d12cf06c27cae8",
+  "branch_head_before_packet": "ef3751e772a2f4d7b0328f4926d12cf06c27cae8",
+  "shared_read_only_input": {
+    "path": "data/regional-review/regional-review-ab07a23bcfd9b1db/sources/cntig-ocha-subprefectures-query-2025.geojson",
+    "sha256": "11deee85b6d41698d371846b0fd57cac6ad7b28a723e686c1ab6a0e149c3065e",
+    "metadata_sha256": "49855a9332d87b143f04e9914559867475fda45b28f6a186af864e3a02134868"
+  },
+  "result": {
+    "scope_count": 221,
+    "civ_current_unique_name_region_matches": 17,
+    "civ_shared_wgs84_iou_min_median_max": [
+      0.999999987278904,
+      0.9999999938228891,
+      0.9999999978458902
+    ],
+    "classifications": {
+      "correction-needed": 17,
+      "insufficient-evidence": 204,
+      "justified": 0
+    },
+    "limits": [
+      "Government PDFs with no identified reuse terms are restoration-only and not redistributed",
+      "Côte d’Ivoire statutory codes and legal boundary authority unresolved",
+      "DGAT count 509 created / 475 open versus 510-feature sources unresolved",
+      "Burkina Faso source name/code lineage unresolved",
+      "342 rows extracted from the 351-stated-row INSD report"
+    ],
+    "province_group_classifications": {
+      "justified": 1,
+      "correction-needed": 0,
+      "insufficient-evidence": 27
+    },
+    "size_flags": [
+      "Boromo: 4977.6 km2, 71.7% of 2017 ADM2 comparator area",
+      "Tibga: 2893.7 km2, 56.7% of 2017 ADM2 comparator area"
+    ]
+  }
+}
