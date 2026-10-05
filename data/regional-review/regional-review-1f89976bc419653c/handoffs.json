@@ -1,0 +1,16 @@
+{
+  "parent_issue": 462,
+  "recorded_utc": "2026-10-05T05:15:56Z",
+  "items": [
+    {"issue": 875, "title": "Correct Chad ecological-fragment source roles and predecessor lineage", "status": "blocked", "depends_on": [462], "subject_count": 17},
+    {"issue": 876, "title": "Resolve Wayi source-vintage and parent crosswalk", "status": "blocked", "depends_on": [462], "subject_count": 1},
+    {"issue": 877, "title": "Crosswalk six Bangui arrondissement boundary vintages", "status": "blocked", "depends_on": [462], "subject_count": 6},
+    {"issue": 878, "title": "Crosswalk 20 DRC ADM2 city and territory roles", "status": "blocked", "depends_on": [462], "subject_count": 20},
+    {"issue": 879, "title": "Crosswalk Congo 2007 district and commune source roles", "status": "blocked", "depends_on": [462], "subject_count": 46}
+  ],
+  "limits": [
+    "Issue contracts, not this index, are authoritative for exact subjects and pins.",
+    "All children remain blocked until the parent packet is reviewed and merged.",
+    "None authorizes geography changes, regional approval, publication, or historical imports."
+  ]
+}

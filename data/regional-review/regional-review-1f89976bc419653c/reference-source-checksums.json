@@ -1,0 +1,126 @@
+{
+  "version": 1,
+  "retrieved_utc_date": "2026-10-05",
+  "sources": [
+    {
+      "source": "UN SALB Central African Republic",
+      "url": "https://salb.un.org/en/data/caf",
+      "retrieved_utc_date": "2026-10-05",
+      "http_status": 200,
+      "response_bytes": 54192,
+      "response_sha256": "628fc5fe910a23112436588a9c192d77af349e40714e65a12e47b530b24da3d3",
+      "retention": "Exact response not retained because no local redistribution rights assessment was made; response hash and byte count are retrieval provenance only. Restore from the URL."
+    },
+    {
+      "source": "UN SALB Democratic Republic of the Congo",
+      "url": "https://salb.un.org/en/data/cod",
+      "retrieved_utc_date": "2026-10-05",
+      "http_status": 200,
+      "response_bytes": 66297,
+      "response_sha256": "00e079dee2797510642b93670576d193e0be6a55ed50bfe410724d6808b04311",
+      "retention": "Exact response not retained because no local redistribution rights assessment was made; response hash and byte count are retrieval provenance only. Restore from the URL."
+    },
+    {
+      "source": "UN SALB Republic of the Congo",
+      "url": "https://salb.un.org/en/data/cog",
+      "retrieved_utc_date": "2026-10-05",
+      "http_status": 200,
+      "response_bytes": 51987,
+      "response_sha256": "42d7c62d6cb65f9990d96b4f6636e88b31763105696e0e26e43f2de175773688",
+      "retention": "Exact response not retained because no local redistribution rights assessment was made; response hash and byte count are retrieval provenance only. Restore from the URL."
+    },
+    {
+      "source": "UN SALB country inventory",
+      "url": "https://salb.un.org/en/data",
+      "retrieved_utc_date": "2026-10-05",
+      "http_status": 200,
+      "response_bytes": 89524,
+      "response_sha256": "60c4020c43e6b545423db629c5c19367044064541d0e6873a2602ac3271f762d",
+      "retention": "Exact response not retained because no local redistribution rights assessment was made; response hash and byte count are retrieval provenance only. Restore from the URL."
+    },
+    {
+      "source": "UN CEDAW CAR report",
+      "url": "https://digitallibrary.un.org/record/755696/files/A_HRC_WG.6_17_CAF_1-EN.pdf?registerDownload=1&version=1&withMetadata=0&withWatermark=0",
+      "retrieved_utc_date": "2026-10-05",
+      "http_status": 202,
+      "response_bytes": 0,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retention": "Source page/report not retained. The exact response hash records the attempted/current response, not an archived reproducible copy; restore from the URL. For 202/0-byte UN PDF responses, the digest is the empty HTTP response and is not evidence content."
+    },
+    {
+      "source": "UN CEDAW Chad report",
+      "url": "https://digitallibrary.un.org/record/711369/files/CEDAW_C_TCD_1-4-EN.pdf",
+      "retrieved_utc_date": "2026-10-05",
+      "http_status": 202,
+      "response_bytes": 0,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retention": "Source page/report not retained. The exact response hash records the attempted/current response, not an archived reproducible copy; restore from the URL. For 202/0-byte UN PDF responses, the digest is the empty HTTP response and is not evidence content."
+    },
+    {
+      "source": "UT Libraries 2007 Congo catalog",
+      "url": "https://geodata-prod.lib.utexas.edu/catalog/stanford-hz799nq4536",
+      "retrieved_utc_date": "2026-10-05",
+      "http_status": 200,
+      "response_bytes": 17364,
+      "response_sha256": "4b0d0cab5dacf9df14b1c0bff77437b155a515a1c4e8d9b4f1e94fc79f13b08c",
+      "retention": "Exact response not retained because no local redistribution rights assessment was made; response hash and byte count are retrieval provenance only. Restore from the URL."
+    },
+    {
+      "source": "U.S. Embassy Republic of Congo geography",
+      "url": "https://ambacongo-us.org/about-congo/geography",
+      "retrieved_utc_date": "2026-10-05",
+      "http_status": 200,
+      "response_bytes": 57985,
+      "response_sha256": "e127682db01cec735e7958b69c45b62716a24cd93a8772213dfbdc52bb0133ef",
+      "retention": "Exact response not retained because no local redistribution rights assessment was made; response hash and byte count are retrieval provenance only. Restore from the URL."
+    },
+    {
+      "source": "DRC Ministry Interior province and territory page",
+      "url": "https://interieur.gouv.cd/ministere/territoires",
+      "retrieved_utc_date": "2026-10-05",
+      "http_status": 200,
+      "response_bytes": 105622,
+      "response_sha256": "bafc4b70de91be6a5d546596bc5f5ca0daee3258f137da19aded1e639b9d9940",
+      "retention": "Exact response not retained because no local redistribution rights assessment was made; response hash and byte count are retrieval provenance only. Restore from the URL."
+    },
+    {
+      "source": "UN SALB COD 2018-2024 attribute feature layer metadata",
+      "url": "https://geoservices.un.org/arcgis/rest/services/Hosted/SALB_COD/FeatureServer/5?f=pjson",
+      "retrieved_utc": "2026-10-05T05:06:33.834309+00:00",
+      "http_status": 200,
+      "response_bytes": 12068,
+      "response_sha256": "17d367f5d728ab06b689cefec6b2c48d42ca547c32d9aeeaa9f1feeef6ea661a",
+      "retention": "Metadata response not retained separately; restoration URL provided. Crosswalk retained only selected attributes, not geometry."
+    },
+    {
+      "source": "UN SALB COD 2018-2024 full attribute-only query (no geometry)",
+      "url": "https://geoservices.un.org/arcgis/rest/services/Hosted/SALB_COD/FeatureServer/5/query?where=1%3D1&outFields=*&returnGeometry=false&f=json",
+      "retrieved_utc": "2026-10-05T05:06:33.834309+00:00",
+      "http_status": 200,
+      "response_bytes": 75065,
+      "response_sha256": "83e22dfccb38947df6a9e322675b39ff7dd72f45340bf295f06392a18f1cab77",
+      "retention": "Raw 219-row response not retained; exact retrieval hash and restoration URL preserved. Only selected 20-row attribute crosswalk is in current-crosswalks.json."
+    },
+    {
+      "source": "UN SALB Terms of Use 2021",
+      "url": "https://salb.un.org/sites/default/files/wysiwyg_uploads/docs_uploads/TermsOfUseSALB2021.pdf",
+      "retrieved_utc": "2026-10-05T05:06:33.834309+00:00",
+      "http_status": 200,
+      "response_bytes": 116142,
+      "response_sha256": "aaac013743486c9f4be986e236fdba6b3a4ac0ff00921cecc171c42778544381",
+      "retention": "PDF not retained; exact response hash, retrieval URL, and material terms summarized in source-register.json and README. No SALB geometry is retained."
+    }
+  ],
+  "unretrieved_urls": [
+    {
+      "source": "DRC laws copied at Leganet",
+      "url": "https://www.leganet.cd/Legislation/Droit%20Public/Administration.ter/L.08.16.17.10.2008.htm",
+      "limitation": "TLS certificate validation failed in direct retrieval; not retained. Refer only as statutory discovery aid until validated source text is acquired."
+    },
+    {
+      "source": "DRC 2010 territorial law",
+      "url": "https://www.leganet.cd/Legislation/Droit%20Public/Administration.ter/Loi.10.011.18.05.2010.pdf",
+      "limitation": "TLS certificate validation failed in direct retrieval; not retained. Refer only as statutory discovery aid until validated source text is acquired."
+    }
+  ]
+}
