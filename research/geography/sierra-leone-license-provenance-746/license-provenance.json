@@ -1,0 +1,1006 @@
+{
+  "audit_merge_commit": "e570f16236928fd5c5e359ab96e81399b55ccb26",
+  "baseline_commit": "f92b1774aedcaaaf72ac0fe4cc45857dd641d7d1",
+  "counts": {
+    "sierra_leone_original_license_mismatches": 12,
+    "sierra_leone_subjects": 12,
+    "togo_context_license_matches": 37,
+    "togo_context_rows": 37
+  },
+  "input_hashes": {
+    "acquisition": {
+      "bytes": 95398,
+      "path": "data/regional-review/regional-review-9d08839e1cdb0c8f/sources/acquisition.json",
+      "sha256": "afc2540734a85b20f64a0c6f3911b6d9fbac557ac257794cdee3a4389ee6490b"
+    },
+    "assessment": {
+      "bytes": 170408,
+      "path": "data/regional-review/regional-review-9d08839e1cdb0c8f/assessment.json",
+      "sha256": "c64eda7c325dfc4fb399fb7c00b112d09083917aa0d774df5343ea65153c39f9"
+    },
+    "assessment_csv": {
+      "bytes": 82468,
+      "path": "data/regional-review/regional-review-9d08839e1cdb0c8f/assessment.csv",
+      "sha256": "849e89a9b89138e0bef924293ab64f0e43cfb8e6048837f372aac860c65ff089"
+    },
+    "atlas_part": {
+      "bytes": 4746385,
+      "path": "data/geography/part-22.json",
+      "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+    },
+    "builder": {
+      "bytes": 26511,
+      "path": "data/regional-review/regional-review-9d08839e1cdb0c8f/build_assessment.py",
+      "sha256": "632e7156cdaea606f7a04a746461161005e6b4cfb9b380302b2294028f68e937"
+    },
+    "hierarchy": {
+      "bytes": 10164089,
+      "path": "data/hierarchy.json",
+      "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+    },
+    "scope": {
+      "bytes": 42689,
+      "path": "data/regional-review/regional-review-9d08839e1cdb0c8f/scope.json",
+      "sha256": "e9a44d16f4fb94164cfb1a9c2c4b36b70c6125306ae25a0f8799cbef4c7e7e91"
+    },
+    "sle_metadata": {
+      "bytes": 722,
+      "path": "data/regional-review/regional-review-9d08839e1cdb0c8f/sources/geoboundaries-SLE-adm2-current-api-metadata.json.gz",
+      "sha256": "3bb0c1e1a6858bb1246cb4359da2932b135387fb5e295f1549e86f99d6539d39"
+    },
+    "tgo_metadata": {
+      "bytes": 690,
+      "path": "data/regional-review/regional-review-9d08839e1cdb0c8f/sources/geoboundaries-TGO-adm2-current-api-metadata.json.gz",
+      "sha256": "03db75c6ceff800161aa092b4071c106ebe4512729a167350b3311f71acd282e"
+    },
+    "world_index": {
+      "bytes": 944,
+      "path": "data/world-index.json",
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+    }
+  },
+  "issue_number": 784,
+  "sierra_leone_rows": [
+    {
+      "boundary_source_url": "data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries",
+      "corrected_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "correction_kind": "country-bound metadata provenance supersession",
+      "country": "SLE",
+      "id": "gb:SLE:ADM2:65957751B248885957650",
+      "legal_license_opinion": false,
+      "license_source": "data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries",
+      "name": "Kailahun",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:eastern:b993a0a52562",
+        "framework:area:sierra-leone:e5f76d291dd1",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:eastern:b993a0a52562",
+      "represented_vintage": "2017",
+      "source_admin_level": "ADM2",
+      "source_id": "gb:SLE:ADM2",
+      "source_name": "Government of Sierra Leone, OCHA ROWCA",
+      "source_role": "Districts"
+    },
+    {
+      "boundary_source_url": "data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries",
+      "corrected_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "correction_kind": "country-bound metadata provenance supersession",
+      "country": "SLE",
+      "id": "gb:SLE:ADM2:65957751B2614126839094",
+      "legal_license_opinion": false,
+      "license_source": "data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries",
+      "name": "Pujehun",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:southern:32f16c029cda",
+        "framework:area:sierra-leone:e5f76d291dd1",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:southern:32f16c029cda",
+      "represented_vintage": "2017",
+      "source_admin_level": "ADM2",
+      "source_id": "gb:SLE:ADM2",
+      "source_name": "Government of Sierra Leone, OCHA ROWCA",
+      "source_role": "Districts"
+    },
+    {
+      "boundary_source_url": "data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries",
+      "corrected_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "correction_kind": "country-bound metadata provenance supersession",
+      "country": "SLE",
+      "id": "gb:SLE:ADM2:65957751B29483301504535",
+      "legal_license_opinion": false,
+      "license_source": "data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries",
+      "name": "Bombali",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:northern:6611b338a991",
+        "framework:area:sierra-leone:e5f76d291dd1",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:northern:6611b338a991",
+      "represented_vintage": "2017",
+      "source_admin_level": "ADM2",
+      "source_id": "gb:SLE:ADM2",
+      "source_name": "Government of Sierra Leone, OCHA ROWCA",
+      "source_role": "Districts"
+    },
+    {
+      "boundary_source_url": "data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries",
+      "corrected_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "correction_kind": "country-bound metadata provenance supersession",
+      "country": "SLE",
+      "id": "gb:SLE:ADM2:65957751B35726846399821",
+      "legal_license_opinion": false,
+      "license_source": "data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries",
+      "name": "Moyamba",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:southern:32f16c029cda",
+        "framework:area:sierra-leone:e5f76d291dd1",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:southern:32f16c029cda",
+      "represented_vintage": "2017",
+      "source_admin_level": "ADM2",
+      "source_id": "gb:SLE:ADM2",
+      "source_name": "Government of Sierra Leone, OCHA ROWCA",
+      "source_role": "Districts"
+    },
+    {
+      "boundary_source_url": "data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries",
+      "corrected_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "correction_kind": "country-bound metadata provenance supersession",
+      "country": "SLE",
+      "id": "gb:SLE:ADM2:65957751B39294828597109",
+      "legal_license_opinion": false,
+      "license_source": "data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries",
+      "name": "Kono",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:eastern:b993a0a52562",
+        "framework:area:sierra-leone:e5f76d291dd1",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:eastern:b993a0a52562",
+      "represented_vintage": "2017",
+      "source_admin_level": "ADM2",
+      "source_id": "gb:SLE:ADM2",
+      "source_name": "Government of Sierra Leone, OCHA ROWCA",
+      "source_role": "Districts"
+    },
+    {
+      "boundary_source_url": "data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries",
+      "corrected_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "correction_kind": "country-bound metadata provenance supersession",
+      "country": "SLE",
+      "id": "gb:SLE:ADM2:65957751B39959109464342",
+      "legal_license_opinion": false,
+      "license_source": "data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries",
+      "name": "Tonkolili",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:northern:6611b338a991",
+        "framework:area:sierra-leone:e5f76d291dd1",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:northern:6611b338a991",
+      "represented_vintage": "2017",
+      "source_admin_level": "ADM2",
+      "source_id": "gb:SLE:ADM2",
+      "source_name": "Government of Sierra Leone, OCHA ROWCA",
+      "source_role": "Districts"
+    },
+    {
+      "boundary_source_url": "data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries",
+      "corrected_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "correction_kind": "country-bound metadata provenance supersession",
+      "country": "SLE",
+      "id": "gb:SLE:ADM2:65957751B6503620183485",
+      "legal_license_opinion": false,
+      "license_source": "data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries",
+      "name": "Kenema",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:eastern:b993a0a52562",
+        "framework:area:sierra-leone:e5f76d291dd1",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:eastern:b993a0a52562",
+      "represented_vintage": "2017",
+      "source_admin_level": "ADM2",
+      "source_id": "gb:SLE:ADM2",
+      "source_name": "Government of Sierra Leone, OCHA ROWCA",
+      "source_role": "Districts"
+    },
+    {
+      "boundary_source_url": "data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries",
+      "corrected_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "correction_kind": "country-bound metadata provenance supersession",
+      "country": "SLE",
+      "id": "gb:SLE:ADM2:65957751B7874629800584",
+      "legal_license_opinion": false,
+      "license_source": "data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries",
+      "name": "Kambia",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:northern:6611b338a991",
+        "framework:area:sierra-leone:e5f76d291dd1",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:northern:6611b338a991",
+      "represented_vintage": "2017",
+      "source_admin_level": "ADM2",
+      "source_id": "gb:SLE:ADM2",
+      "source_name": "Government of Sierra Leone, OCHA ROWCA",
+      "source_role": "Districts"
+    },
+    {
+      "boundary_source_url": "data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries",
+      "corrected_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "correction_kind": "country-bound metadata provenance supersession",
+      "country": "SLE",
+      "id": "gb:SLE:ADM2:65957751B90425188102960",
+      "legal_license_opinion": false,
+      "license_source": "data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries",
+      "name": "Bonthe",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:southern:32f16c029cda",
+        "framework:area:sierra-leone:e5f76d291dd1",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:southern:32f16c029cda",
+      "represented_vintage": "2017",
+      "source_admin_level": "ADM2",
+      "source_id": "gb:SLE:ADM2",
+      "source_name": "Government of Sierra Leone, OCHA ROWCA",
+      "source_role": "Districts"
+    },
+    {
+      "boundary_source_url": "data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries",
+      "corrected_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "correction_kind": "country-bound metadata provenance supersession",
+      "country": "SLE",
+      "id": "gb:SLE:ADM2:65957751B90762568654783",
+      "legal_license_opinion": false,
+      "license_source": "data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries",
+      "name": "Port Loko",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:northern:6611b338a991",
+        "framework:area:sierra-leone:e5f76d291dd1",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:northern:6611b338a991",
+      "represented_vintage": "2017",
+      "source_admin_level": "ADM2",
+      "source_id": "gb:SLE:ADM2",
+      "source_name": "Government of Sierra Leone, OCHA ROWCA",
+      "source_role": "Districts"
+    },
+    {
+      "boundary_source_url": "data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries",
+      "corrected_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "correction_kind": "country-bound metadata provenance supersession",
+      "country": "SLE",
+      "id": "gb:SLE:ADM2:65957751B93581480515289",
+      "legal_license_opinion": false,
+      "license_source": "data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries",
+      "name": "Bo",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:southern:32f16c029cda",
+        "framework:area:sierra-leone:e5f76d291dd1",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:southern:32f16c029cda",
+      "represented_vintage": "2017",
+      "source_admin_level": "ADM2",
+      "source_id": "gb:SLE:ADM2",
+      "source_name": "Government of Sierra Leone, OCHA ROWCA",
+      "source_role": "Districts"
+    },
+    {
+      "boundary_source_url": "data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries",
+      "corrected_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "correction_kind": "country-bound metadata provenance supersession",
+      "country": "SLE",
+      "id": "gb:SLE:ADM2:65957751B98964407864499",
+      "legal_license_opinion": false,
+      "license_source": "data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries",
+      "name": "Koinadugu",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:northern:6611b338a991",
+        "framework:area:sierra-leone:e5f76d291dd1",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:northern:6611b338a991",
+      "represented_vintage": "2017",
+      "source_admin_level": "ADM2",
+      "source_id": "gb:SLE:ADM2",
+      "source_name": "Government of Sierra Leone, OCHA ROWCA",
+      "source_role": "Districts"
+    }
+  ],
+  "source_snapshots": {
+    "SLE": {
+      "admin_level": "ADM2",
+      "boundary_source_url": "data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries",
+      "detailed_license_field": "nan",
+      "feature_count_declared": 14,
+      "gzip_bytes": 722,
+      "gzip_sha256": "3bb0c1e1a6858bb1246cb4359da2932b135387fb5e295f1549e86f99d6539d39",
+      "license_source": "data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries",
+      "metadata_declared_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+      "metadata_path": "data/regional-review/regional-review-9d08839e1cdb0c8f/sources/geoboundaries-SLE-adm2-current-api-metadata.json.gz",
+      "metadata_url": "https://www.geoboundaries.org/api/current/gbOpen/SLE/ADM2/",
+      "represented_vintage": "2017",
+      "role": "Districts",
+      "source": "Government of Sierra Leone, OCHA ROWCA",
+      "uncompressed_bytes": 1803,
+      "uncompressed_sha256": "d386ac779d773189dc97b523d1c3933f58465bcc9b53837f380c901e34f8ed0f"
+    },
+    "TGO": {
+      "admin_level": "ADM2",
+      "boundary_source_url": "wambachers-osm.website/boundaries/",
+      "detailed_license_field": "nan",
+      "feature_count_declared": 37,
+      "gzip_bytes": 690,
+      "gzip_sha256": "03db75c6ceff800161aa092b4071c106ebe4512729a167350b3311f71acd282e",
+      "license_source": "www.openstreetmap.org/copyright",
+      "metadata_declared_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "metadata_path": "data/regional-review/regional-review-9d08839e1cdb0c8f/sources/geoboundaries-TGO-adm2-current-api-metadata.json.gz",
+      "metadata_url": "https://www.geoboundaries.org/api/current/gbOpen/TGO/ADM2/",
+      "represented_vintage": "2017",
+      "role": "Prefectures",
+      "source": "OpenStreetMap, Wambacher",
+      "uncompressed_bytes": 1685,
+      "uncompressed_sha256": "b67c11ff5b39f1fa3b7fcddd11cf3b159b3924ffaf4ea02d9632de0fa9a01200"
+    },
+    "acquired_at_utc_date": "2026-10-04"
+  },
+  "source_terms_and_scope_limit": [
+    "The retained geoBoundaries metadata declares the exact license label recorded here; this packet does not independently adjudicate legal licensing.",
+    "Sierra Leone and Togo metadata snapshots are retained in the original #479 packet and are pinned by compressed and uncompressed SHA-256; no source archive is recopied or rewritten.",
+    "The SLE metadata says represented year 2017, source Government of Sierra Leone, OCHA ROWCA, role Districts, and declares CC BY 3.0 IGO. Its detailed license field is `nan`; the license-source field points to the recorded HDX dataset.",
+    "The TGO metadata says represented year 2017, source OpenStreetMap, Wambacher, role Prefectures, and declares CC BY-SA 2.0. Its value is read-only comparison context, not a source for Sierra Leone.",
+    "This correction supersedes only the inherited license-provenance field for the 12 SLE rows. It changes no names, IDs, parents, geometries, settlement counts, boundaries, or original records and is not a license legal opinion."
+  ],
+  "supersedes": {
+    "issue": 479,
+    "original_assessment_sha256": "c64eda7c325dfc4fb399fb7c00b112d09083917aa0d774df5343ea65153c39f9",
+    "original_builder_sha256": "632e7156cdaea606f7a04a746461161005e6b4cfb9b380302b2294028f68e937",
+    "original_packet": "data/regional-review/regional-review-9d08839e1cdb0c8f/",
+    "pr": 746,
+    "scope_is_unchanged": true,
+    "supersedes_license_provenance_only": true
+  },
+  "togo_read_only_context": [
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B12249670822801",
+      "license_match": true,
+      "name": "Dankpen",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:kara-region:ee69c0644ac1",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:kara-region:ee69c0644ac1",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B12598387573686",
+      "license_match": true,
+      "name": "Bassar",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:kara-region:ee69c0644ac1",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:kara-region:ee69c0644ac1",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B13855645397073",
+      "license_match": true,
+      "name": "Yoto",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:maritime-region:344e2ce7b3ed",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:maritime-region:344e2ce7b3ed",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B14222633765071",
+      "license_match": true,
+      "name": "Tchaoudjo",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:centrale-region:2d117383854f",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:centrale-region:2d117383854f",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B17532793096074",
+      "license_match": true,
+      "name": "Tchamba",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:centrale-region:2d117383854f",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:centrale-region:2d117383854f",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B17683608517106",
+      "license_match": true,
+      "name": "Oti",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:savanes-region:87f1fa258c6b",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:savanes-region:87f1fa258c6b",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B24632394959352",
+      "license_match": true,
+      "name": "Sotouboua",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:centrale-region:2d117383854f",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:centrale-region:2d117383854f",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B28886338508193",
+      "license_match": true,
+      "name": "Danyi",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:plateaux-region:475553e356da",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:plateaux-region:475553e356da",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B30245465113687",
+      "license_match": true,
+      "name": "Keran",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:kara-region:ee69c0644ac1",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:kara-region:ee69c0644ac1",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B4042875560778",
+      "license_match": true,
+      "name": "Kloto",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:plateaux-region:475553e356da",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:plateaux-region:475553e356da",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B41562196478781",
+      "license_match": true,
+      "name": "Ave",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:maritime-region:344e2ce7b3ed",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:maritime-region:344e2ce7b3ed",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B43007755983133",
+      "license_match": true,
+      "name": "Vo",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:maritime-region:344e2ce7b3ed",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:maritime-region:344e2ce7b3ed",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B43372711183576",
+      "license_match": true,
+      "name": "Est-Mono",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:plateaux-region:475553e356da",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:plateaux-region:475553e356da",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B44378348729827",
+      "license_match": true,
+      "name": "Kozah",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:kara-region:ee69c0644ac1",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:kara-region:ee69c0644ac1",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B44610096966608",
+      "license_match": true,
+      "name": "Zio",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:maritime-region:344e2ce7b3ed",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:maritime-region:344e2ce7b3ed",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B44914344892125",
+      "license_match": true,
+      "name": "Binah",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:kara-region:ee69c0644ac1",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:kara-region:ee69c0644ac1",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B47682688566924",
+      "license_match": true,
+      "name": "Plaine de Mô",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:centrale-region:2d117383854f",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:centrale-region:2d117383854f",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B4810153335262",
+      "license_match": true,
+      "name": "Tone",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:savanes-region:87f1fa258c6b",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:savanes-region:87f1fa258c6b",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B48376088277440",
+      "license_match": true,
+      "name": "Wawa",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:plateaux-region:475553e356da",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:plateaux-region:475553e356da",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B48471181858151",
+      "license_match": true,
+      "name": "Ogou",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:plateaux-region:475553e356da",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:plateaux-region:475553e356da",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B49010054481747",
+      "license_match": true,
+      "name": "Akébou",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:plateaux-region:475553e356da",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:plateaux-region:475553e356da",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B59402294179516",
+      "license_match": true,
+      "name": "Golfe",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:maritime-region:344e2ce7b3ed",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:maritime-region:344e2ce7b3ed",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B59731994726086",
+      "license_match": true,
+      "name": "Assoli",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:kara-region:ee69c0644ac1",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:kara-region:ee69c0644ac1",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B61332506890313",
+      "license_match": true,
+      "name": "Lacs",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:maritime-region:344e2ce7b3ed",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:maritime-region:344e2ce7b3ed",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B64184766281932",
+      "license_match": true,
+      "name": "Haho",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:plateaux-region:475553e356da",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:plateaux-region:475553e356da",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B64387003159978",
+      "license_match": true,
+      "name": "Cinkassé",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:savanes-region:87f1fa258c6b",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:savanes-region:87f1fa258c6b",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B67578860005589",
+      "license_match": true,
+      "name": "Moyen-Mono",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:plateaux-region:475553e356da",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:plateaux-region:475553e356da",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B83789166363061",
+      "license_match": true,
+      "name": "Blitta",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:centrale-region:2d117383854f",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:centrale-region:2d117383854f",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B89112535430785",
+      "license_match": true,
+      "name": "Tandjouare",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:savanes-region:87f1fa258c6b",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:savanes-region:87f1fa258c6b",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B89390870579143",
+      "license_match": true,
+      "name": "Doufelgou",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:kara-region:ee69c0644ac1",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:kara-region:ee69c0644ac1",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B89691125732498",
+      "license_match": true,
+      "name": "Lome Commune",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:maritime-region:344e2ce7b3ed",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:maritime-region:344e2ce7b3ed",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B91306020007274",
+      "license_match": true,
+      "name": "Kpélé",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:plateaux-region:475553e356da",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:plateaux-region:475553e356da",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B9516770320708",
+      "license_match": true,
+      "name": "Kpendjal",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:savanes-region:87f1fa258c6b",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:savanes-region:87f1fa258c6b",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B95177776630805",
+      "license_match": true,
+      "name": "Anié",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:plateaux-region:475553e356da",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:plateaux-region:475553e356da",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B95494992900514",
+      "license_match": true,
+      "name": "Bas-Mono",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:maritime-region:344e2ce7b3ed",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:maritime-region:344e2ce7b3ed",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B97066679611380",
+      "license_match": true,
+      "name": "Amou",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:plateaux-region:475553e356da",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:plateaux-region:475553e356da",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    },
+    {
+      "country": "TGO",
+      "id": "gb:TGO:ADM2:56601680B98633254865748",
+      "license_match": true,
+      "name": "Agou",
+      "original_assessment_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "parent_chain": [
+        "framework:province:plateaux-region:475553e356da",
+        "framework:area:togo:9c5c94028666",
+        "framework:region:west-tropical-africa:ba6e06497098",
+        "framework:subcontinent:western-africa:6280a2b17f17",
+        "framework:continent:africa:d14fc0b285b2"
+      ],
+      "parent_id": "framework:province:plateaux-region:475553e356da",
+      "source_metadata_license": "Creative Commons Attribution-ShareAlike 2.0"
+    }
+  ],
+  "unresolved": [
+    "No new boundary or legal administrative-status review is performed.",
+    "The source metadata label and attribution URL are reported as retained; detailed license terms are not independently adjudicated.",
+    "The corrected metadata attribution does not resolve the original packet's physical land/island, source completeness, statutory-role, or regional-approval limitations."
+  ],
+  "version": 1
+}

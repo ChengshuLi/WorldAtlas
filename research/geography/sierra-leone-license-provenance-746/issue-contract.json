@@ -1,0 +1,73 @@
+{
+  "audit_merge_commit": "e570f16236928fd5c5e359ab96e81399b55ccb26",
+  "baseline_commit": "f92b1774aedcaaaf72ac0fe4cc45857dd641d7d1",
+  "baseline_paths": {
+    "acquisition": "data/regional-review/regional-review-9d08839e1cdb0c8f/sources/acquisition.json",
+    "assessment": "data/regional-review/regional-review-9d08839e1cdb0c8f/assessment.json",
+    "assessment_csv": "data/regional-review/regional-review-9d08839e1cdb0c8f/assessment.csv",
+    "atlas_part": "data/geography/part-22.json",
+    "builder": "data/regional-review/regional-review-9d08839e1cdb0c8f/build_assessment.py",
+    "hierarchy": "data/hierarchy.json",
+    "scope": "data/regional-review/regional-review-9d08839e1cdb0c8f/scope.json",
+    "sle_metadata": "data/regional-review/regional-review-9d08839e1cdb0c8f/sources/geoboundaries-SLE-adm2-current-api-metadata.json.gz",
+    "tgo_metadata": "data/regional-review/regional-review-9d08839e1cdb0c8f/sources/geoboundaries-TGO-adm2-current-api-metadata.json.gz",
+    "world_index": "data/world-index.json"
+  },
+  "branch": "geography/sierra-leone-license-provenance-746",
+  "claim_id": "330a58d7-1e38-4788-8e5d-0febabca9280",
+  "issue_body_sha256": "1af65fd9309afbeaf394ded056a1566ad2d533a5f9c784486e5960b01efc5036",
+  "issue_contract": {
+    "manifest_path": "research/geography/sierra-leone-license-provenance-746/evidence-quality.json",
+    "pins": {
+      "assessment_csv_sha256": "849e89a9b89138e0bef924293ab64f0e43cfb8e6048837f372aac860c65ff089",
+      "assessment_sha256": "c64eda7c325dfc4fb399fb7c00b112d09083917aa0d774df5343ea65153c39f9",
+      "builder_sha256": "632e7156cdaea606f7a04a746461161005e6b4cfb9b380302b2294028f68e937",
+      "scope_sha256": "e9a44d16f4fb94164cfb1a9c2c4b36b70c6125306ae25a0f8799cbef4c7e7e91",
+      "sle_metadata_gzip_sha256": "3bb0c1e1a6858bb1246cb4359da2932b135387fb5e295f1549e86f99d6539d39",
+      "tgo_metadata_gzip_sha256": "03db75c6ceff800161aa092b4071c106ebe4512729a167350b3311f71acd282e"
+    },
+    "review_kind": "source",
+    "subject_ids": [
+      "gb:SLE:ADM2:65957751B248885957650",
+      "gb:SLE:ADM2:65957751B2614126839094",
+      "gb:SLE:ADM2:65957751B29483301504535",
+      "gb:SLE:ADM2:65957751B35726846399821",
+      "gb:SLE:ADM2:65957751B39294828597109",
+      "gb:SLE:ADM2:65957751B39959109464342",
+      "gb:SLE:ADM2:65957751B6503620183485",
+      "gb:SLE:ADM2:65957751B7874629800584",
+      "gb:SLE:ADM2:65957751B90425188102960",
+      "gb:SLE:ADM2:65957751B90762568654783",
+      "gb:SLE:ADM2:65957751B93581480515289",
+      "gb:SLE:ADM2:65957751B98964407864499"
+    ]
+  },
+  "issue_number": 784,
+  "issue_title": "Correct Sierra Leone license provenance inherited from Togo in PR746",
+  "issue_url": "https://github.com/ChengshuLi/WorldAtlas/issues/784",
+  "owned_path": "research/geography/sierra-leone-license-provenance-746/",
+  "pins": {
+    "assessment_csv_sha256": "849e89a9b89138e0bef924293ab64f0e43cfb8e6048837f372aac860c65ff089",
+    "assessment_sha256": "c64eda7c325dfc4fb399fb7c00b112d09083917aa0d774df5343ea65153c39f9",
+    "builder_sha256": "632e7156cdaea606f7a04a746461161005e6b4cfb9b380302b2294028f68e937",
+    "scope_sha256": "e9a44d16f4fb94164cfb1a9c2c4b36b70c6125306ae25a0f8799cbef4c7e7e91",
+    "sle_metadata_gzip_sha256": "3bb0c1e1a6858bb1246cb4359da2932b135387fb5e295f1549e86f99d6539d39",
+    "tgo_metadata_gzip_sha256": "03db75c6ceff800161aa092b4071c106ebe4512729a167350b3311f71acd282e"
+  },
+  "scope_members_sha256": "edfce15d54de72fdb37b44582c3c0b9b081d553880b7b14da0912a09fbb9a798",
+  "subject_ids": [
+    "gb:SLE:ADM2:65957751B248885957650",
+    "gb:SLE:ADM2:65957751B2614126839094",
+    "gb:SLE:ADM2:65957751B29483301504535",
+    "gb:SLE:ADM2:65957751B35726846399821",
+    "gb:SLE:ADM2:65957751B39294828597109",
+    "gb:SLE:ADM2:65957751B39959109464342",
+    "gb:SLE:ADM2:65957751B6503620183485",
+    "gb:SLE:ADM2:65957751B7874629800584",
+    "gb:SLE:ADM2:65957751B90425188102960",
+    "gb:SLE:ADM2:65957751B90762568654783",
+    "gb:SLE:ADM2:65957751B93581480515289",
+    "gb:SLE:ADM2:65957751B98964407864499"
+  ],
+  "worker_id": "geo-1c67a91d-3251-4b37-9b39-afca30545bad"
+}
