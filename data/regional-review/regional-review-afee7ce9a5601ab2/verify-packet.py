@@ -14,6 +14,12 @@ ids=scope['member_location_ids']; assert len(ids)==215 and len(set(ids))==215
 rows=list(csv.DictReader((PACKET/'unit-review.csv').open()))
 assert len(rows)==215 and {r['id'] for r in rows}==set(ids)
 assert len({r['parent_id'] for r in rows})==32
+allowed={'justified','correction-needed','insufficient-evidence'}
+assert all(r.get('acceptance_disposition') in allowed and r.get('disposition_basis') for r in rows)
+parent_rows=list(csv.DictReader((PACKET/'parent-review.csv').open()))
+assert len(parent_rows)==32 and {r['parent_id'] for r in parent_rows}=={r['parent_id'] for r in rows}
+assert {r['parent_id'] for r in parent_rows}=={r['id'] for r in scope['province_scopes']}
+assert all(r.get('acceptance_disposition') in allowed and r.get('evidence_basis') and r.get('source_limit') for r in parent_rows)
 cross=list(csv.DictReader((PACKET/'pry-source-crosswalk.csv').open()))
 assert len(cross)==247 and len({r['source_shape_id'] for r in cross})==247
 assert sum(r['mapping_type']=='individual native location' for r in cross)==241
@@ -49,4 +55,4 @@ assert links==['Closes #446']
 for q in PACKET.rglob('*'):
  if q.is_symlink(): raise AssertionError(f'symlink not allowed: {q}')
  if q.is_file(): assert q.stat().st_size<=32*1024*1024, f'file exceeds retention ceiling: {q}'
-print(json.dumps({'verification':'passed','scope_members':len(ids),'distinct_parents':32,'paraguay_source_records':247,'paraguay_native':241,'paraguay_aggregate_members':6,'uruguay_name_matches':19,'retained_originals_hash_verified':2,'baseline_blobs_verified':len(base['files']),'controlled_reference':'Closes #446'},sort_keys=True))
+print(json.dumps({'verification':'passed','scope_members':len(ids),'distinct_parents':32,'disposition_counts':dict(__import__('collections').Counter(r['acceptance_disposition'] for r in rows)),'paraguay_source_records':247,'paraguay_native':241,'paraguay_aggregate_members':6,'uruguay_name_matches':19,'retained_originals_hash_verified':2,'baseline_blobs_verified':len(base['files']),'controlled_reference':'Closes #446'},sort_keys=True))

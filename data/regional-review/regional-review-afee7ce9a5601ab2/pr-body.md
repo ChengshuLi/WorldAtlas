@@ -20,3 +20,6 @@ Closes #446
 ## Bounded follow-ups
 
 Created five exact-scope, blocked follow-ups dependent on #446: geography research #926 (Paraguay legal-vintage reconciliation), #927 (contested Artigas records), #928 (ice-field source provenance); engineering #929 (San Juan multipart topology) and #930 (Asunción city/district semantics). Machine-readable IDs, current status and URLs are retained in `follow-up-issues.json`. These are future work handoffs; this packet does not certify or complete them.
+
+
+Per-location acceptance dispositions have now been added for all 215 subjects, and all 32 scoped parents have a separate disposition ledger. Counts are 18 justified (Uruguay department identity/tier only), 1 correction-needed (icefield administrative parent/type interpretation), and 196 insufficient-evidence (Paraguay current/legal status and contested Artigas); none of these labels certifies polygon boundary correctness.

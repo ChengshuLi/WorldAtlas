@@ -6,7 +6,8 @@ Issue #446, branch base `702a55f8e03a2442a153eb1176919feaf84eb115`, packet ID `r
 
 - `issue-scope-pinned.json`, `issue-scope-pin.json`, and `scope.json` preserve the issue and its exact machine scope.
 - `baseline-files.json` pins the actual baseline blobs used for identity, hierarchy, release and part checks.
-- `unit-review.csv` provides one disposition/evidence note per scoped location, including names, parents, source vintage, role, license and geometry type.
+- `unit-review.csv` provides one explicit acceptance disposition and evidence basis per scoped location, alongside source role, vintage, license and geometry type.
+- `parent-review.csv` assesses all 32 exact scoped parents, preserving partial-area coverage and boundary limits.
 - `pry-source-crosswalk.csv` links all records in the exact original Paraguay source to their current base representation.
 - `source-inventory.json` records exact source hashes, retrieval dates, terms and restoration instructions.
 - `ury-gb-2017.geojson` and `ury-igm-current.geojson` are byte-preserved original GeoJSON responses. Their source terms and hashes are in the inventory.
