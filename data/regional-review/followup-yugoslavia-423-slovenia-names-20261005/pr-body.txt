@@ -1,0 +1,6 @@
+Verify the exact 53 Slovenia municipality IDs against GURS historical RPE records at 2017-01-01 and 2017-07-01. The public `SI.GURS.RPE:OBCINE_H` service resolves one effective feature per code/date for all 53; names are stable between dates and match current GURS, while all 53 Atlas reference spellings differ. The packet retains the 899-record attribute-only WFS response, request, exact SHA-256, license/attribution terms, per-ID records and reproducible interval joins. It recommends ID-preserving engineering name corrections conditional on official Slovene being the product's intended display name, preserving previous strings as alias/provenance until source lineage is checked. No core geography is edited; no geometry, neighbor granularity or regional approval is certified. The earlier Article 130 access interpretation is withdrawn and corrected.
+
+Evidence: `data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/evidence-quality.json`
+Verification: reproducer resolves 53/53 exact IDs at both dates, verifies all current GURS names against 2017 names, records every discrepancy and source feature ID; evidence-quality and actual issue-owned scope checks are run before submission.
+
+Closes #1016
