@@ -19,6 +19,22 @@ import {rehearseCompactMembershipStorage,rehearseCompactMembershipRollback,compa
 const repo='ChengshuLi/WorldAtlas',branchId='br-summer-butterfly-ar8qikk5',workflow='.github/workflows/compact-membership-production.yml';
 const sha=b=>createHash('sha256').update(b).digest('hex'),need=(v,code)=>{if(!v)throw Error(code);};
 const phaseSet=['apply','verify','retire','rollback'];
+// DROP removes legacy foreign-key triggers and locks their parent tables until
+// COMMIT. A separate application connection cannot read those parents in the
+// owner transaction. Keep the oracle/preflight inside, then prove reads outside.
+export async function commitMembershipRetirement(engine,{prepare,authorize,onCommitted,afterCommit}){
+ const parity=await engine.transaction(async tx=>{
+  await tx.query('LOCK TABLE atlas_geographic_memberships,worldatlas_membership_rows,worldatlas_memberships_original_v1 IN SHARE ROW EXCLUSIVE MODE');
+  const value=await prepare(tx);
+  await authorize('before-drop');
+  await tx.query('DROP TABLE worldatlas_memberships_original_v1');
+  await authorize('before-commit');
+  return value;
+ });
+ onCommitted(); // Persist that DROP committed, even if the later proof fails.
+ await afterCommit();
+ return parity;
+}
 export function checkOriginalMembershipIndexes(indexes){
  const expected={geographic_membership_page:'(release_id, active, entity_id)',geographic_membership_parent:'(release_id, active, parent_id, entity_id)'};
  need([1,2,3].includes(indexes.length),'unknown-original-index-inventory');
@@ -120,9 +136,28 @@ export async function runCompactMembershipProduction({env=process.env,fetcher=fe
   }else{
    stage='compact-preflight';const profile=await compactMembershipCatalog(db);need(profile.base_version===2,'unsupported-live-forward-base');receipt.profile=profile.profile;
    if(window.phase==='retire'){
-    need(profile.profile==='retained-original','original-heap-not-retained');stage='full-original-parity-before-retirement';receipt.parity=await engine.transaction(async tx=>{await tx.query('LOCK TABLE atlas_geographic_memberships,worldatlas_membership_rows,worldatlas_memberships_original_v1 IN SHARE ROW EXCLUSIVE MODE');await verifyCompactMembershipRuntime({query:tx.query},forwardMigrationDefinitions.slice(0,2));const current=await freshReservation();validateCompactProductionWindow(window,current.claim,current.issue,{head:env.GITHUB_SHA,toolSHA:sha(fs.readFileSync(fileURLToPath(import.meta.url))),phase:'end'});const value=await compactMembershipParity(tx);let plan;if(window.database_only===true){plan=await originalMembershipAPIPlan(tx.query);receipt.api_function_parity_before_retirement=await appProof(plan);need(receipt.api_function_parity_before_retirement.status==='verified','unverified-runtime-api-retirement');}
-     const beforeDrop=await freshReservation();validateCompactProductionWindow(window,beforeDrop.claim,beforeDrop.issue,{head:env.GITHUB_SHA,toolSHA:sha(fs.readFileSync(fileURLToPath(import.meta.url))),phase:'end'});
-     await tx.query('DROP TABLE worldatlas_memberships_original_v1');if(plan)receipt.api_function_parity_after_retirement=await appProof(plan);const beforeCommit=await freshReservation();validateCompactProductionWindow(window,beforeCommit.claim,beforeCommit.issue,{head:env.GITHUB_SHA,toolSHA:sha(fs.readFileSync(fileURLToPath(import.meta.url))),phase:'end'});return value;});receipt.original_heap_retired=true;
+    need(profile.profile==='retained-original','original-heap-not-retained');
+    let plan;
+    receipt.parity=await commitMembershipRetirement(engine,{
+     prepare:async tx=>{
+      stage='full-original-parity-before-retirement';
+      await verifyCompactMembershipRuntime({query:tx.query},forwardMigrationDefinitions.slice(0,2));
+      const current=await freshReservation();validateCompactProductionWindow(window,current.claim,current.issue,{head:env.GITHUB_SHA,toolSHA:sha(fs.readFileSync(fileURLToPath(import.meta.url))),phase:'end'});
+      const value=await compactMembershipParity(tx);
+      if(window.database_only===true){
+       stage='application-api-before-retirement';plan=await originalMembershipAPIPlan(tx.query);
+       receipt.api_function_parity_before_retirement=await appProof(plan);
+       need(receipt.api_function_parity_before_retirement.status==='verified','unverified-runtime-api-retirement');
+      }
+      return value;
+     },
+     authorize:async point=>{
+      stage='retirement-'+point;
+      const current=await freshReservation();validateCompactProductionWindow(window,current.claim,current.issue,{head:env.GITHUB_SHA,toolSHA:sha(fs.readFileSync(fileURLToPath(import.meta.url))),phase:'end'});
+     },
+     onCommitted:()=>{receipt.original_heap_retired=true;stage='application-api-after-retirement-commit';save();},
+     afterCommit:async()=>{if(plan)receipt.api_function_parity_after_retirement=await appProof(plan);}
+    });
    }
    if(window.phase!=='rollback')receipt.runtime=await verifyCompactMembershipRuntime({query:tx.query},forwardMigrationDefinitions.slice(0,2));
   }
@@ -138,7 +173,7 @@ export async function runCompactMembershipProduction({env=process.env,fetcher=fe
     else receipt.original_index_recovery={status:'compact-switch-committed; use verified explicit rollback before retirement'};
    }catch{receipt.original_index_recovery={status:'unsettled; original facts retained, measured index restoration or apply retry required'};}
   }
-  receipt.failure_stage=stage;receipt.error_code=/^[a-z0-9-]{1,100}$/.test(error.message)?error.message:'compact-production-operation-failed';}
+  receipt.failure_stage=stage;if(/^[0-9A-Z]{5}$/.test(error.code??''))receipt.sqlstate=error.code;receipt.error_code=/^[a-z0-9-]{1,100}$/.test(error.message)?error.message:'compact-production-operation-failed';}
  finally{
   if(appClient)appClient.release();if(appPool)await appPool.end();
   if(client){if(locked)try{receipt.lock_released=(await client.query('SELECT pg_advisory_unlock(807245315,1) unlocked')).rows[0].unlocked===true;}catch{receipt.lock_released=false;}client.release();}if(pool)await pool.end();if(locked&&!receipt.lock_released)receipt.status='failed';receipt.completed_at_utc=new Date().toISOString();receipt.limits=['Database-only windows verify pinned original API functions through an actual readonly application login, never claim deployed HTTP delivery or restored writes.','Live Site read-only/drain/API parity and private backup recipient recovery are authenticated publisher attestations; Actions verifies the successful native recovery run and source fingerprint.','Before retirement, rollback requires no new writes; after verified old heap retirement, disaster restoration uses the preserved original native backup in an isolated/provider-approved target.','Provider logical accounting may lag relation changes; failed capacity verification requires a subsequent verify, not deletion of factual rows.'];save();
