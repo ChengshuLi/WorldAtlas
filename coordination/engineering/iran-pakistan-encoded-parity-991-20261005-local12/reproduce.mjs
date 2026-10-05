@@ -57,7 +57,7 @@ async function main(){
  const bounds=JSON.parse(gunzipSync(boundsRaw)),owners=new Map(bounds.map((r,n)=>{if(r.index!==n+1)throw Error('Noncontiguous owner inventory');return[r.id,r];}));
  if(owners.size!==bounds.length||bounds.length!==manifest.stats.locations)throw Error('Incomplete original owner inventory');
  const staged=JSON.parse(read(registry.prior_packet+'/results-v1/staged-neighbors.json'));
- const originalFeatures=new Map(['data/geography/part-11.json','data/geography/part-17.json'].flatMap(p=>JSON.parse(read(p))).map(f=>[f.id,f]));
+ const originalFeatures=new Map(['data/geography/part-11.json','data/geography/part-17.json'].flatMap(p=>JSON.parse(read(p)).features).map(f=>[f.id,f]));
  const ordered=v=>Array.isArray(v)?v.map(ordered):v&&typeof v==='object'?Object.fromEntries(Object.keys(v).sort().map(k=>[k,ordered(v[k])])):v;
  for(const f of staged.baseline)if(JSON.stringify(ordered(originalFeatures.get(f.id)))!==JSON.stringify(ordered(f)))throw Error('Staged baseline differs from original whole subject feature');
  for(const f of staged.baseline){const r=owners.get(f.id);if(!r||r.index!==staged.owner_indices[f.id]||r.province_id!==f.properties.parent_id)throw Error('Original owner/parent crosswalk differs');}
