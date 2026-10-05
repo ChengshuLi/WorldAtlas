@@ -764,7 +764,7 @@
     },
     {
       "id": "niger-ins-2012",
-      "url": "https://www.stat-niger.org/statistique/file/Annuaires_Statistiques/Projections_demographiques_2012_2026.html/",
+      "url": "https://www.stat-niger.org/projections/",
       "role": "National census-based statistical reference for region/department/commune labels",
       "vintage": "2012 census / 2012-2026 projection horizon",
       "retrieved_at": "2026-10-04 America/Los_Angeles",
@@ -773,9 +773,9 @@
         "terms": "Official page contains census-derived statistical rows; no explicit redistribution terms reviewed."
       },
       "retention": "restoration-only",
-      "verification": "unverified",
-      "restoration": "The historical captured body has SHA256 a8833e9460c1fb42c0647c42b99b518144ca34923e8e1de3296bae1ee153b6a7. Both tested official routes currently return non-table bodies; recover the historical capture from the reviewer private cache or another lawful archive and verify that SHA before parsing.",
-      "limit": "Historical source capture and crosswalk were substantively reviewed, but the exact HTML cannot currently be restored from the official endpoint. Census/statistical reference is not a current legal gazetteer or boundary source.",
+      "verification": "verified",
+      "restoration": "Fetch https://www.stat-niger.org/projections/ and verify SHA256 a8833e9460c1fb42c0647c42b99b518144ca34923e8e1de3296bae1ee153b6a7 (64074 bytes). The older nested file route and mistaken nested /statistique/file/Annuaires_Statistiques/projections/ route return non-table content.",
+      "limit": "Current root endpoint reproduces the exact captured body, but the roster remains a dated statistical reference rather than current legal or polygon evidence.",
       "temporal_status": "reference"
     },
     {
@@ -1017,8 +1017,8 @@
   "outputs": [
     {
       "path": "data/regional-review/regional-review-f834434be524dfdb/README.md",
-      "bytes": 9951,
-      "sha256": "bd3d83eb7aa4d855e9c060ff2fc2655e2e752a62eb88f7599bcaae21bcfc9086",
+      "bytes": 9863,
+      "sha256": "bea6d8cdf39f2c1169414daf10e88ff3d51ff062272fad107eac9df71a36d9ee",
       "hash_kind": "file-bytes"
     },
     {
@@ -1071,8 +1071,8 @@
     },
     {
       "path": "data/regional-review/regional-review-f834434be524dfdb/niger-ins-crosswalk.json",
-      "bytes": 93752,
-      "sha256": "59ac0651ac43d91e1efd06664c5990ae31ee930495a78268ee960e4a7c73c059",
+      "bytes": 93643,
+      "sha256": "58a71fae25a5ecb236b69926f2c300e6eeb189e6d6752a3809cc0a591eaeecd5",
       "hash_kind": "file-bytes"
     },
     {
@@ -1095,8 +1095,8 @@
     },
     {
       "path": "data/regional-review/regional-review-f834434be524dfdb/reproduce_niger_ins_crosswalk.py",
-      "bytes": 7078,
-      "sha256": "7300c66f4e869197b0ea8eb706bc3bb5be724c2c527cdc35a0524816d9b9a48b",
+      "bytes": 6970,
+      "sha256": "040efe0142faf1f58f73d751188a6968df7d95580219eed294982b302610aebb",
       "hash_kind": "file-bytes"
     },
     {
@@ -1113,8 +1113,8 @@
     },
     {
       "path": "data/regional-review/regional-review-f834434be524dfdb/sources.json",
-      "bytes": 11125,
-      "sha256": "5b39139605645035c166c4b731126535e6caf4bc41f7e1a2bed778923f7016f8",
+      "bytes": 11196,
+      "sha256": "b02395599631839fc6c5209d8bc8e61aac1a5c10e7027c493496c4a43493e6d5",
       "hash_kind": "file-bytes"
     },
     {
@@ -1225,7 +1225,7 @@
       "unit": "subjects",
       "vintage": "baseline",
       "evaluation_commit": "0c6232db2b2f9531a479f0c752f66c4d12013f3b",
-      "input_sha256": "59ac0651ac43d91e1efd06664c5990ae31ee930495a78268ee960e4a7c73c059"
+      "input_sha256": "58a71fae25a5ecb236b69926f2c300e6eeb189e6d6752a3809cc0a591eaeecd5"
     },
     {
       "id": "niger-ins-official-spelling-or-role-alias-confirmed",
@@ -1233,7 +1233,7 @@
       "unit": "subjects",
       "vintage": "baseline",
       "evaluation_commit": "0c6232db2b2f9531a479f0c752f66c4d12013f3b",
-      "input_sha256": "59ac0651ac43d91e1efd06664c5990ae31ee930495a78268ee960e4a7c73c059"
+      "input_sha256": "58a71fae25a5ecb236b69926f2c300e6eeb189e6d6752a3809cc0a591eaeecd5"
     },
     {
       "id": "niger-ins-official-name-candidate-parent-unresolved",
@@ -1241,7 +1241,7 @@
       "unit": "subjects",
       "vintage": "baseline",
       "evaluation_commit": "0c6232db2b2f9531a479f0c752f66c4d12013f3b",
-      "input_sha256": "59ac0651ac43d91e1efd06664c5990ae31ee930495a78268ee960e4a7c73c059"
+      "input_sha256": "58a71fae25a5ecb236b69926f2c300e6eeb189e6d6752a3809cc0a591eaeecd5"
     },
     {
       "id": "niger-parent-max-overlap-ge-0p9999",
@@ -1313,7 +1313,7 @@
       "unit": "subjects",
       "vintage": "baseline",
       "evaluation_commit": "0c6232db2b2f9531a479f0c752f66c4d12013f3b",
-      "input_sha256": "5b39139605645035c166c4b731126535e6caf4bc41f7e1a2bed778923f7016f8"
+      "input_sha256": "b02395599631839fc6c5209d8bc8e61aac1a5c10e7027c493496c4a43493e6d5"
     }
   ],
   "metric_bindings": [

@@ -138,9 +138,9 @@ def main():
         counts[row["resolution"]] = counts.get(row["resolution"], 0) + 1
     output = {"version": 1,
               "source": {"title": "INS Niger Projections démographiques 2012–2026",
-                         "url": "https://www.stat-niger.org/statistique/file/Annuaires_Statistiques/Projections_demographiques_2012_2026.html/",
+                         "url": "https://www.stat-niger.org/projections/",
                          "sha256": INS_SHA256, "extracted_rows": len(official),
-                         "retrieval_limit": "Current official routes may return non-table landing content; recover the exact hash-pinned historical body before rerunning."},
+                         "retrieval_limit": "Verify the exact body hash; the older nested routes currently return non-table content."},
               "method": "Python standard-library HTMLParser extracts three source columns. Normalize Unicode accents/punctuation and join source feature name plus Atlas parent slug to INS commune and department; apply explicit spelling and special-city arrondissement aliases. Duplicate names use the parent label.",
               "summary": counts, "scoped_rows": sorted(rows, key=lambda row: row["id"])}
     Path(args.output).write_text(json.dumps(output, ensure_ascii=False, indent=2) + "\n")

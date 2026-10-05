@@ -6,16 +6,24 @@
   },
   "niger_ins_2012": {
     "title": "INS Niger, Projections démographiques du Niger 2012–2026",
-    "url": "https://www.stat-niger.org/statistique/file/Annuaires_Statistiques/Projections_demographiques_2012_2026.html/",
+    "url": "https://www.stat-niger.org/projections/",
     "retrieved": "2026-10-04 America/Los_Angeles",
-    "local_evidence": "The exact retrieved body was captured to the reviewer private source cache; the evidence packet retains the extracted scoped crosswalk and the body SHA, not the full HTML.",
+    "local_evidence": "The exact official HTML is not committed; it is currently retrievable from the canonical root route. The scoped row crosswalk and exact body digest are retained.",
     "bytes": 64074,
     "sha256": "a8833e9460c1fb42c0647c42b99b518144ca34923e8e1de3296bae1ee153b6a7",
     "claims_used": "Census 4 (2012) base; reference organized by region, department and commune; 266 rows; four special city departments contain arrondissement-level entries.",
-    "limit": "A body matching the historical source hash was captured and reviewed, but is no longer restorable from either currently tested public route. The scoped row crosswalk is retained; full rerun needs recovery of the historical body. Statistical labels are not a current legal gazetteer or independent boundary source.",
-    "canonical_route": "https://www.stat-niger.org/statistique/file/Annuaires_Statistiques/projections/",
-    "restoration": "The 2026-10-04 captured 64074-byte HTML body is identified by SHA256 a8833e9460c1fb42c0647c42b99b518144ca34923e8e1de3296bae1ee153b6a7. The original and canonical routes were re-probed on 2026-10-04 and returned HTTP 200 but non-table landing bodies (respectively SHA256 8afe4c8eb0173ffb23685ed401c7b1e6442b2b2bb790f719b5194d8d7dd96fec and ee97a333234e421384a0fe740145ae0c965443d80312cd941225c05b2b1c5dcb). Recover the captured historical body from the private review cache or another source before rerunning; the current routes do not restore the expected hash.",
+    "limit": "The current root route restores the captured hash and supports full reproduction. The old nested paths do not. Census/statistical labels are not a current legal gazetteer or independent boundary source.",
+    "canonical_route": "https://www.stat-niger.org/projections/",
+    "restoration": "Fetch https://www.stat-niger.org/projections/ and verify the 64074-byte response SHA256 a8833e9460c1fb42c0647c42b99b518144ca34923e8e1de3296bae1ee153b6a7 before parsing. The older /statistique/file/Annuaires_Statistiques/Projections_demographiques_2012_2026.html/ path and the nested /statistique/file/Annuaires_Statistiques/projections/ path currently return non-table landing responses; use the root canonical route.",
     "current_probe": [
+      {
+        "url": "https://www.stat-niger.org/projections/",
+        "retrieved": "2026-10-04 America/Los_Angeles",
+        "http_status": 200,
+        "bytes": 64074,
+        "sha256": "a8833e9460c1fb42c0647c42b99b518144ca34923e8e1de3296bae1ee153b6a7",
+        "contains_projection_table": true
+      },
       {
         "url": "https://www.stat-niger.org/statistique/file/Annuaires_Statistiques/Projections_demographiques_2012_2026.html/",
         "retrieved": "2026-10-04 America/Los_Angeles",
@@ -32,7 +40,8 @@
         "sha256": "ee97a333234e421384a0fe740145ae0c965443d80312cd941225c05b2b1c5dcb",
         "contains_projection_table": false
       }
-    ]
+    ],
+    "captured_as_url": "https://www.stat-niger.org/statistique/file/Annuaires_Statistiques/Projections_demographiques_2012_2026.html/"
   },
   "niger_geoboundaries_adm3": {
     "source_id": "NER-ADM3-39565319",
