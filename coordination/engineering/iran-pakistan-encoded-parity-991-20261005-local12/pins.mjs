@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+import {execFileSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
+const commit=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
+const read=p=>execFileSync('git',['show',commit+':'+p],{maxBuffer:32*1024*1024});
+const prior='coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11';
+const manifest=JSON.parse(read('data/canonical-grid/manifest.json'));
+const paths=['data/canonical-grid/manifest.json','data/canonical-grid/bounds.json.gz','data/canonical-grid/province-membership.bin.gz','data/hierarchy.json','data/geographic-releases/current-manifest.json','data/geographic-releases/releases-v6-gzip.json.gz',...manifest.parts.map(p=>'data/canonical-grid/'+p.path),'src/pixel-grid.js','src/pixel-ownership.js','src/ownership-codec.js','src/ownership-assets.js',prior+'/compile.mjs',prior+'/results-v1/staged-neighbors.json',prior+'/results-v2/compiled.json'];
+const files=paths.map(path=>{const raw=read(path);return{path,bytes:raw.length,sha256:createHash('sha256').update(raw).digest('hex'),hash_kind:'file-bytes'};});
+fs.writeFileSync(new URL('./inputs.json',import.meta.url),JSON.stringify({version:1,baseline_commit:commit,baseline_files:files,prior_packet:prior},null,2)+'\n',{flag:'wx'});
+console.log(JSON.stringify({files:files.length,bytes:files.reduce((n,f)=>n+f.bytes,0)}));

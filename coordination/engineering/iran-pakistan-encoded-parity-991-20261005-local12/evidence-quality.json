@@ -1,0 +1,925 @@
+{
+  "version": 1,
+  "issue": 991,
+  "lane": "engineering",
+  "worker_id": "engineering-coverage-gaps-907-20261005-local01",
+  "subject_ids": [
+    "gb:IRN:ADM2:26516999B17111396986996",
+    "gb:IRN:ADM2:26516999B21476392712465",
+    "gb:IRN:ADM2:26516999B32263338072182",
+    "gb:IRN:ADM2:26516999B69171350042189",
+    "gb:IRN:ADM2:26516999B84118019171575",
+    "gb:PAK:ADM2:60131773B27830056943813",
+    "gb:PAK:ADM2:60131773B36839649837975",
+    "gb:PAK:ADM2:60131773B42304807802578",
+    "gb:PAK:ADM2:60131773B78019453337506",
+    "gb:PAK:ADM2:60131773B83658797775488",
+    "gb:PAK:ADM2:60131773B90188516769392"
+  ],
+  "subject_ids_sha256": "95fbefa53e01535e0688c88f76e7e6fd081ae1648775eee4e754e953b1cba6ff",
+  "baseline": {
+    "commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+    "files": [
+      {
+        "path": "data/canonical-grid/manifest.json",
+        "bytes": 271171,
+        "sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/bounds.json.gz",
+        "bytes": 2663523,
+        "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/province-membership.bin.gz",
+        "bytes": 67912,
+        "sha256": "01f42b69ca969090d10c42d6a1311215a19ce436b0f3e720f7f873f4a18f90da",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geographic-releases/current-manifest.json",
+        "bytes": 206,
+        "sha256": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geographic-releases/releases-v6-gzip.json.gz",
+        "bytes": 169082,
+        "sha256": "96f4e6b1894ecce4c1f3f2be690ebfceec9fde2ec094c886ddffca96c62e4a16",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/rows-0.bin.gz",
+        "bytes": 306617,
+        "sha256": "ccb40c24a466f76dbae209241add4e51590aff13dedc6ac88d269dff603222b7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-0.bin.gz",
+        "bytes": 984227,
+        "sha256": "78dd8e523ab5f809d27424d858684254c3b6140a9ae166e3199d972c75490579",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-1048576.bin.gz",
+        "bytes": 999685,
+        "sha256": "f57e081df7b66707e668d6fd63c9348475f1d0f1e8cdb485a9c7b47c1f85841d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-2097152.bin.gz",
+        "bytes": 967449,
+        "sha256": "783cb6cb1530d6c47fdff996a6a953888ff679db032782ce942a520789985a74",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-3145728.bin.gz",
+        "bytes": 903450,
+        "sha256": "6484550d934140fbc9c206d6c2120886893025e1d971525469df48ff86e974cc",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-4194304.bin.gz",
+        "bytes": 868320,
+        "sha256": "c359170f0f0e70f8a3942e42ebe3a0057913448465c50522437b4bfd9b94a7ab",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-5242880.bin.gz",
+        "bytes": 868736,
+        "sha256": "0041e97fd61b7be67f603be6f1297ae226251920c7d7d5486c01f94fa7cea8ba",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-6291456.bin.gz",
+        "bytes": 851907,
+        "sha256": "0511351709091ccf9239249c2c6a45f22bb8040267606d25d7bf1e4b72b36a4c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-7340032.bin.gz",
+        "bytes": 847603,
+        "sha256": "707859a809ab0a1f0bb1a49e9f49af5d303b9c980c15f4102cd9f2181cc5f91b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-8388608.bin.gz",
+        "bytes": 851567,
+        "sha256": "6ae021f663b920eec520af96d203b8b3e6e42a354c71e4df3c6436b366fdfb9b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-9437184.bin.gz",
+        "bytes": 850870,
+        "sha256": "23798a543d527f09a91dc6318a6371c0933f4a3fde9bff328d81c88677a6b09b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-10485760.bin.gz",
+        "bytes": 855366,
+        "sha256": "5ce7b4a4fb25b17bc8407c0f501675a2919042c9df8197d6cd6e098f48fa3042",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-11534336.bin.gz",
+        "bytes": 874057,
+        "sha256": "c1c29cc0afbd4e9621d89fa0ea9489d6222dadfbc7237090c568fcefa6e3be7a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-12582912.bin.gz",
+        "bytes": 878373,
+        "sha256": "74b6ab70904adae95bbdf2d25ffc8b8c1bff2591e7381881985f6fde605df14c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-13631488.bin.gz",
+        "bytes": 867334,
+        "sha256": "c00f4ba975f4a0b9a6cc06da3345104a1d83165ccd622c7ef3395f7b8ab0b684",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-14680064.bin.gz",
+        "bytes": 868010,
+        "sha256": "fcbee22b54a016710b2846e50282a50b3a2e38e647e0df3090ad0d118747be33",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-15728640.bin.gz",
+        "bytes": 876800,
+        "sha256": "17ee1610de5d5e517312174857d87b0b7d05852a0bdaeb866232038f76490e0e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-16777216.bin.gz",
+        "bytes": 846142,
+        "sha256": "91bdc5ba507bfdd9e60a0389ab44c265de370e29a11eae3c037080a1cbb62e0e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-17825792.bin.gz",
+        "bytes": 826976,
+        "sha256": "14e6fdc962d7955651a03cb2e0b669045579869ece72833d2a428f4d8f606c18",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-18874368.bin.gz",
+        "bytes": 816574,
+        "sha256": "7178ec92fc7f75ccd2a64f9c7623f1b2a9a16f903f923bcfb15e5287aba682cf",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-19922944.bin.gz",
+        "bytes": 813015,
+        "sha256": "c83af421c188448e7047e4b9515115e4c9af6ed25fc180d58bbb8f716da59220",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-20971520.bin.gz",
+        "bytes": 792509,
+        "sha256": "80f9c5e6b3aff320055e0127b053b4ff83255cc3e9bc14b59df248ae5bd6e5b2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-22020096.bin.gz",
+        "bytes": 789933,
+        "sha256": "3053349f2e7d42d4e188213c88aefb798de5859acdcc3b614adbbafb50e42e38",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-23068672.bin.gz",
+        "bytes": 788537,
+        "sha256": "381d5cb5cedeb1c64d5a1a070b14a6e3b6f119e294c3f3d881accadb878f7108",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-24117248.bin.gz",
+        "bytes": 787553,
+        "sha256": "926696080abea36b749bf7998e0608d508bf309f7f9119cc4983699d9108908a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-25165824.bin.gz",
+        "bytes": 805367,
+        "sha256": "e9bf9e3c162796fbe390012f18fa3c2145b5e575a275bf801d72f561cf0ef564",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-26214400.bin.gz",
+        "bytes": 836032,
+        "sha256": "250e61ddf871be144f3ede48ac37be600cd76bc44915ce558052e63842651ced",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-27262976.bin.gz",
+        "bytes": 823674,
+        "sha256": "3dd86fb5a6f71f5f3750a57c64fa4a7e8bf9e5007b8c547fc9f4f0c5d0ec8bcb",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-28311552.bin.gz",
+        "bytes": 820986,
+        "sha256": "9a93bacb4674dcb70ca711469cb1096bc41dbd0bfcfe6aa8667b7087056f1ecc",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-29360128.bin.gz",
+        "bytes": 806408,
+        "sha256": "3812061560d37ae030779445a05094dce3e5d5e0e70e73ad8ee7572ebcd44eb7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-30408704.bin.gz",
+        "bytes": 808695,
+        "sha256": "80d1b7e81b6de917379c5538a4623072f02018ec62b7e7229f7188c3b0d81e68",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-31457280.bin.gz",
+        "bytes": 832892,
+        "sha256": "863ce7fff601a93db02edd1531009d164d54c3cd21490b54fe8681955767e53e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-32505856.bin.gz",
+        "bytes": 858311,
+        "sha256": "9a038a8c295cb214a4cbdaff5e8bc1f405f22c8eb46049ed458aa82e966af515",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-33554432.bin.gz",
+        "bytes": 879781,
+        "sha256": "69c9a9aa7dc2e5dded441b546dbd0f9e71bccfeef7b6a6ce9c72830753512b1b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-34603008.bin.gz",
+        "bytes": 868501,
+        "sha256": "6a3faf3247af3280b4c5b0e9d5f296d77db9702a372d6ba7b7967fe6d4af163b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-35651584.bin.gz",
+        "bytes": 894561,
+        "sha256": "2de73434360f3fec6dfc31421d9f3ad3f07929fbc473e08f604bf9a1864c237b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-36700160.bin.gz",
+        "bytes": 892222,
+        "sha256": "e1d45c40e94a9477ef884d4e7442f660e82ad6d2068a3d6c19ec011fdb4e9d50",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-37748736.bin.gz",
+        "bytes": 880210,
+        "sha256": "fe61aae60194057c7a5553c3e04e5f7e51d4ffe4518e8fd9c00a1b18a3fa77b7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-38797312.bin.gz",
+        "bytes": 869877,
+        "sha256": "82d918007b85f938959c096c392b052a1b7ad9f9abe422d3fb826abb58f3e6e9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-39845888.bin.gz",
+        "bytes": 873657,
+        "sha256": "bc6181fac8db4a6862442c2b6d4c4afa3ffd7d5b693f37b8212219e5b86fdeb1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-40894464.bin.gz",
+        "bytes": 888592,
+        "sha256": "2c21ede414723b33348928dec98bc20c268ffe41075ede4d77212a40de2c4ee4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-41943040.bin.gz",
+        "bytes": 896691,
+        "sha256": "d06e5a56232678e63d5bd701f4a787ae2e880dfac6e3b21a8c0221061d15331c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-42991616.bin.gz",
+        "bytes": 890514,
+        "sha256": "5d4a53ca4fbecb41a22ade83be1f51d555515b99e3e9127fc590e6acd5cdd3c1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-44040192.bin.gz",
+        "bytes": 876779,
+        "sha256": "0a1415d515299ddd89185c384efa480b49e16e5cd91cc7008a3e196b236bb215",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-45088768.bin.gz",
+        "bytes": 883441,
+        "sha256": "d8104a36685a1a81d13c0c03f826a3ecdb4da7dd9438cc0bf4da1b0226f03dcd",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-46137344.bin.gz",
+        "bytes": 884832,
+        "sha256": "6ff7413c2df6409f94fb227c743a0abfb3ee022089dff2e4e1feb92bf802d652",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-47185920.bin.gz",
+        "bytes": 899858,
+        "sha256": "3d8ae24e2a33273bb6d9697cf2614b5188fd218b3348125c1990f3c0a613c7da",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-48234496.bin.gz",
+        "bytes": 878691,
+        "sha256": "6de3f0243cae91e3063cb632b5896b7750145a58424f2c6709ab91d118f3b827",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-49283072.bin.gz",
+        "bytes": 903386,
+        "sha256": "fcc3d15b486338c48b20870d59762ade92c835d61c55afe90d73296a630259d2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-50331648.bin.gz",
+        "bytes": 877379,
+        "sha256": "df458b0b5688a78f8f1c9d2e46a79556df3900e62bd760b48c3f80c1e31290f7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-51380224.bin.gz",
+        "bytes": 859555,
+        "sha256": "73a2f7f4ab57d0a3518f9223ec495587b7f561afd3757c8608aa7bf4a8487942",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-52428800.bin.gz",
+        "bytes": 848454,
+        "sha256": "415af8c2b57737017c0191a044024955dccb8b1ca743cc7334a9d7d1615f9688",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-53477376.bin.gz",
+        "bytes": 822915,
+        "sha256": "db67f32c964150e752c5fe2d2ea53c9841b2920fd20e45183e650b3a0eb31919",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-54525952.bin.gz",
+        "bytes": 798580,
+        "sha256": "a82bfc28b4398ebe4febafbe2b939b7a70a9989c4aa9ee522c75ebb28cdddd3b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-55574528.bin.gz",
+        "bytes": 813323,
+        "sha256": "f3d4b03696fed6e6230258a7f96793a4b8cfdff74c778b234caa6b0347c700f9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/ownership/runs-56623104.bin.gz",
+        "bytes": 852661,
+        "sha256": "919dc5a1fd22715dea336587a8cbc22653fea70a9bf1219fd90e1d534114327c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "src/pixel-grid.js",
+        "bytes": 3617,
+        "sha256": "320cc48796d5d3aaf07bb096441346abbe44ed4fab66df08ee003620ce5870a9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "src/pixel-ownership.js",
+        "bytes": 6134,
+        "sha256": "da8e0b4f05e5ce390b47713030bffeefb7ea0df2700f7c358a9ebe77fe92586f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "src/ownership-codec.js",
+        "bytes": 2948,
+        "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "src/ownership-assets.js",
+        "bytes": 4148,
+        "sha256": "b14470b088208ac66d6ed564b063100c1e58d4d191d441b5e7c5d031eed5864c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/compile.mjs",
+        "bytes": 9108,
+        "sha256": "0c9b3569f99ea87e4b8b97228763a15b8e7c842a809265dffbb59de652b74b3a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v1/staged-neighbors.json",
+        "bytes": 152156,
+        "sha256": "8cde9abc927bd3477dd60dc024332307d46206a3b26d1373d53d3b91ba0908db",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v2/compiled.json",
+        "bytes": 10637,
+        "sha256": "6719f0c4e1b91d1734abf3fd9777790e4397de6a0af35a738af7891b0177c84a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-11.json",
+        "bytes": 5131824,
+        "sha256": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-17.json",
+        "bytes": 4945828,
+        "sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "canonical_grid": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+      "hierarchy": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+    },
+    "pin_files": {
+      "canonical_grid": "data/canonical-grid/manifest.json",
+      "hierarchy": "data/hierarchy.json"
+    },
+    "subject_files": {
+      "gb:IRN:ADM2:26516999B17111396986996": "data/geography/part-11.json",
+      "gb:IRN:ADM2:26516999B21476392712465": "data/geography/part-11.json",
+      "gb:IRN:ADM2:26516999B32263338072182": "data/geography/part-11.json",
+      "gb:IRN:ADM2:26516999B69171350042189": "data/geography/part-11.json",
+      "gb:IRN:ADM2:26516999B84118019171575": "data/geography/part-11.json",
+      "gb:PAK:ADM2:60131773B27830056943813": "data/geography/part-17.json",
+      "gb:PAK:ADM2:60131773B36839649837975": "data/geography/part-17.json",
+      "gb:PAK:ADM2:60131773B42304807802578": "data/geography/part-17.json",
+      "gb:PAK:ADM2:60131773B78019453337506": "data/geography/part-17.json",
+      "gb:PAK:ADM2:60131773B83658797775488": "data/geography/part-17.json",
+      "gb:PAK:ADM2:60131773B90188516769392": "data/geography/part-17.json"
+    }
+  },
+  "sources": [
+    {
+      "files": [
+        {
+          "bytes": 545,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-saravan-relation-6555069-full-receipt.json",
+          "role": "retained-ancestor-original-source",
+          "sha256": "9380679cf9037eb6f522499218ad32c4457b77b3ea104765ce8aaca63d2b0f4b"
+        },
+        {
+          "bytes": 894050,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-saravan-relation-6555069-full.json",
+          "role": "retained-ancestor-original-source",
+          "sha256": "abf435a64b61fd7f678f149adee6468d99e14edc769ec6e8e43d464ec6ed579d"
+        }
+      ],
+      "id": "osm-saravan-relation-6555069",
+      "license": {
+        "status": "redistributable",
+        "terms": "OpenStreetMap ODbL 1.0; OpenStreetMap and contributors attribution. Authority, historical date and mixed-source installation unapproved."
+      },
+      "retention": "retained",
+      "retrieved_at": "2026-10-05",
+      "role": "current-original-administrative-api-reference-and-retrieval-receipt",
+      "temporal_status": "reference",
+      "url": "https://api.openstreetmap.org/api/0.6/relation/6555069/full.json",
+      "verification": "unverified",
+      "vintage": "2026-10-05 retrieval; original per-element versions/timestamps retained independently"
+    },
+    {
+      "files": [
+        {
+          "bytes": 383,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-way-239441239-relations-receipt.json",
+          "role": "retained-ancestor-original-source",
+          "sha256": "6cdb39e6c89c2ac787baf8b5b24d52955bd3bb9b8014f702c8959065e9ce6e20"
+        },
+        {
+          "bytes": 96398,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-way-239441239-relations.json",
+          "role": "retained-ancestor-original-source",
+          "sha256": "7e7c08b25918ad750468365a9fa45b07e2d961931daa600180fe6e1a7f588908"
+        }
+      ],
+      "id": "osm-way-239441239",
+      "license": {
+        "status": "redistributable",
+        "terms": "OpenStreetMap ODbL 1.0; OpenStreetMap and contributors attribution. Authority, historical date and mixed-source installation unapproved."
+      },
+      "retention": "retained",
+      "retrieved_at": "2026-10-05",
+      "role": "current-original-administrative-api-reference-and-retrieval-receipt",
+      "temporal_status": "reference",
+      "url": "https://api.openstreetmap.org/api/0.6/way/239441239/relations.json",
+      "verification": "unverified",
+      "vintage": "2026-10-05 retrieval; original per-element versions/timestamps retained independently"
+    },
+    {
+      "files": [
+        {
+          "bytes": 383,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-way-239453665-relations-receipt.json",
+          "role": "retained-ancestor-original-source",
+          "sha256": "de2eb36653926ba83930e6ce82b93fbec4c5565f5c081a528d91a1a28a641d7f"
+        },
+        {
+          "bytes": 96398,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-way-239453665-relations.json",
+          "role": "retained-ancestor-original-source",
+          "sha256": "bbd63239e335cb4795076ffe70a4a0f5994b3eb1f2439fe2dd517e3392312db3"
+        }
+      ],
+      "id": "osm-way-239453665",
+      "license": {
+        "status": "redistributable",
+        "terms": "OpenStreetMap ODbL 1.0; OpenStreetMap and contributors attribution. Authority, historical date and mixed-source installation unapproved."
+      },
+      "retention": "retained",
+      "retrieved_at": "2026-10-05",
+      "role": "current-original-administrative-api-reference-and-retrieval-receipt",
+      "temporal_status": "reference",
+      "url": "https://api.openstreetmap.org/api/0.6/way/239453665/relations.json",
+      "verification": "unverified",
+      "vintage": "2026-10-05 retrieval; original per-element versions/timestamps retained independently"
+    },
+    {
+      "files": [
+        {
+          "bytes": 346713,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/osm-panjgur-relation-3229274-full.json",
+          "role": "retained-ancestor-original-source",
+          "sha256": "7057f7488622c5a5c086b094205978fffe5d25ca514a89a72f2d45c1f0ff31be"
+        },
+        {
+          "bytes": 741,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/osm-panjgur-relation-3229274-full-receipt.json",
+          "role": "retained-ancestor-original-source",
+          "sha256": "4c27c75a41998b9244995e55be8e95e186e57696fa655a9f5dcb3ae4cfe02c6f"
+        }
+      ],
+      "id": "osm-panjgur-ancestor-source",
+      "license": {
+        "status": "redistributable",
+        "terms": "OpenStreetMap ODbL 1.0; OpenStreetMap and contributors attribution."
+      },
+      "retention": "retained",
+      "retrieved_at": "2026-10-05",
+      "role": "pinned-ancestor-original-source",
+      "temporal_status": "reference",
+      "url": "https://api.openstreetmap.org/api/0.6/relation/3229274/full.json",
+      "verification": "unverified",
+      "vintage": "Prior packet original retrieval with per-element versions/timestamps"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/README.md",
+      "bytes": 2713,
+      "sha256": "302b02d36403bb6fa673dbc03916c322b34db48a278f34d9ce6ed61444c89fd5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/cli-negative.json",
+      "bytes": 2754,
+      "sha256": "293a588294a12ade0229b0d40d432b5250b63d4a25dea4298f9aed5bc6a65d85",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/controls.mjs",
+      "bytes": 2332,
+      "sha256": "970c930e3d5cb10767cc949d26dbc619420a094a83e04d277c276dbf4454d04f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/failed-container-v1.json",
+      "bytes": 472,
+      "sha256": "d039674dd41c0e0234ad74070368f01dd33479c65232d281ae90d85fd0d0b5e2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/inputs.json",
+      "bytes": 15684,
+      "sha256": "d2465467bd1e9ce8f0b3fa8d01529507b57844e46ea98d1c1e21fe8c1af89618",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/negative-control.json",
+      "bytes": 138,
+      "sha256": "c9212870b99a5a3e8d6e764333b0bf0545804c94eb34a85e39d8dc9ac41e32c4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/pins.mjs",
+      "bytes": 1368,
+      "sha256": "bf3d7f927893f9d5ccf0478d55c41d303d20f7e8e37a18c826f85764d5ddeeed",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/positive-control.json",
+      "bytes": 138,
+      "sha256": "fea165ba6cb05b2d712360a85bab3c5dcd414855243055ddede27307f80e1eec",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/reproduce.mjs",
+      "bytes": 9111,
+      "sha256": "923133cd4aad800bd1d470b17c33bf33e9394a5ed979d5c1b5c19d9f814cd2ed",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/reproducibility-v3.json",
+      "bytes": 261,
+      "sha256": "0be46ea076569635d8406384521470ce104eb238af8e112e3aed1e19c41bd683",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/reproducibility.json",
+      "bytes": 261,
+      "sha256": "cc502b879952c1be13543da0fbd1e744746ac86807de93016d8cae3234e51143",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/results-v1/parity.json",
+      "bytes": 7704,
+      "sha256": "408d21d8a50c65ef30f81ef64dac773f44f7e907be13004d70837636930f3417",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/results-v2/parity.json",
+      "bytes": 7809,
+      "sha256": "e919a54fd18f5383bcb85098c4a8a6572f8d7cd438893fb8784b606661e2675f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/results-v3/parity.json",
+      "bytes": 7809,
+      "sha256": "f93de06fe26076c3cc95bffbfd33780e33fad0256c993778c4a619664eab2906",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "original-encoded-baseline-parity",
+      "kind": "generator",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "description": "Pinned original partition decoding with actual application loader; exhaustive native run accounting/owner-province context, immutable release/whole before-feature checks and complete affected-cell comparison with retained full RLE. No geometry modification or territorial approval.",
+      "software": "Node24;Git;unchanged application ownership-assets/pixel-grid/pixel-ownership/ownership-codec and prior caseIndex;gzip",
+      "units": "integer owner/cell/run counts; exact whole-file and decoded-word hashes"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "original-encoded-baseline-parity",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/positive-control.json"
+    },
+    {
+      "method_id": "original-encoded-baseline-parity",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/negative-control.json"
+    },
+    {
+      "method_id": "original-encoded-baseline-parity",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/reproducibility-v3.json"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "partition_count",
+      "value": 56,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "4ef06ee7318d680a5deab15ee005a9356915bde1",
+      "input_sha256": "d2465467bd1e9ce8f0b3fa8d01529507b57844e46ea98d1c1e21fe8c1af89618",
+      "scope": "Original partitions and original before-feature identity verified globally; native-versus-reconstructed drawing comparison bounded to inherited affected rectangle. No factual/geographic approval or installation."
+    },
+    {
+      "id": "owner_count",
+      "value": 49625,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "4ef06ee7318d680a5deab15ee005a9356915bde1",
+      "input_sha256": "d2465467bd1e9ce8f0b3fa8d01529507b57844e46ea98d1c1e21fe8c1af89618",
+      "scope": "Original partitions and original before-feature identity verified globally; native-versus-reconstructed drawing comparison bounded to inherited affected rectangle. No factual/geographic approval or installation."
+    },
+    {
+      "id": "rows",
+      "value": 262166,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "4ef06ee7318d680a5deab15ee005a9356915bde1",
+      "input_sha256": "d2465467bd1e9ce8f0b3fa8d01529507b57844e46ea98d1c1e21fe8c1af89618",
+      "scope": "Original partitions and original before-feature identity verified globally; native-versus-reconstructed drawing comparison bounded to inherited affected rectangle. No factual/geographic approval or installation."
+    },
+    {
+      "id": "runs",
+      "value": 28809329,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "4ef06ee7318d680a5deab15ee005a9356915bde1",
+      "input_sha256": "d2465467bd1e9ce8f0b3fa8d01529507b57844e46ea98d1c1e21fe8c1af89618",
+      "scope": "Original partitions and original before-feature identity verified globally; native-versus-reconstructed drawing comparison bounded to inherited affected rectangle. No factual/geographic approval or installation."
+    },
+    {
+      "id": "owned_cells",
+      "value": 13854413484,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "4ef06ee7318d680a5deab15ee005a9356915bde1",
+      "input_sha256": "d2465467bd1e9ce8f0b3fa8d01529507b57844e46ea98d1c1e21fe8c1af89618",
+      "scope": "Original partitions and original before-feature identity verified globally; native-versus-reconstructed drawing comparison bounded to inherited affected rectangle. No factual/geographic approval or installation."
+    },
+    {
+      "id": "decoded_bytes",
+      "value": 232571960,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "4ef06ee7318d680a5deab15ee005a9356915bde1",
+      "input_sha256": "d2465467bd1e9ce8f0b3fa8d01529507b57844e46ea98d1c1e21fe8c1af89618",
+      "scope": "Original partitions and original before-feature identity verified globally; native-versus-reconstructed drawing comparison bounded to inherited affected rectangle. No factual/geographic approval or installation."
+    },
+    {
+      "id": "inspected_cells",
+      "value": 4257008,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "4ef06ee7318d680a5deab15ee005a9356915bde1",
+      "input_sha256": "d2465467bd1e9ce8f0b3fa8d01529507b57844e46ea98d1c1e21fe8c1af89618",
+      "scope": "Original partitions and original before-feature identity verified globally; native-versus-reconstructed drawing comparison bounded to inherited affected rectangle. No factual/geographic approval or installation."
+    },
+    {
+      "id": "baseline_discrepancies",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "4ef06ee7318d680a5deab15ee005a9356915bde1",
+      "input_sha256": "d2465467bd1e9ce8f0b3fa8d01529507b57844e46ea98d1c1e21fe8c1af89618",
+      "scope": "Original partitions and original before-feature identity verified globally; native-versus-reconstructed drawing comparison bounded to inherited affected rectangle. No factual/geographic approval or installation."
+    },
+    {
+      "id": "candidate_changed_cells",
+      "value": 953,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "4ef06ee7318d680a5deab15ee005a9356915bde1",
+      "input_sha256": "d2465467bd1e9ce8f0b3fa8d01529507b57844e46ea98d1c1e21fe8c1af89618",
+      "scope": "Original partitions and original before-feature identity verified globally; native-versus-reconstructed drawing comparison bounded to inherited affected rectangle. No factual/geographic approval or installation."
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "partition_count",
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/results-v3/parity.json",
+      "json_pointer": "/partition_count"
+    },
+    {
+      "metric_id": "owner_count",
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/results-v3/parity.json",
+      "json_pointer": "/owner_count"
+    },
+    {
+      "metric_id": "rows",
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/results-v3/parity.json",
+      "json_pointer": "/accounting/rows"
+    },
+    {
+      "metric_id": "runs",
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/results-v3/parity.json",
+      "json_pointer": "/accounting/runs"
+    },
+    {
+      "metric_id": "owned_cells",
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/results-v3/parity.json",
+      "json_pointer": "/accounting/owned_cells"
+    },
+    {
+      "metric_id": "decoded_bytes",
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/results-v3/parity.json",
+      "json_pointer": "/accounting/decoded_bytes"
+    },
+    {
+      "metric_id": "inspected_cells",
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/results-v3/parity.json",
+      "json_pointer": "/inspected_cells"
+    },
+    {
+      "metric_id": "baseline_discrepancies",
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/results-v3/parity.json",
+      "json_pointer": "/baseline_parity/cells"
+    },
+    {
+      "metric_id": "candidate_changed_cells",
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/results-v3/parity.json",
+      "json_pointer": "/candidate_changes/cells"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "Original encoded-grid parity is supported only for the complete affected rectangle; original global partitions/row-run/owner/province and immutable release contexts were checked. The candidate remains uninstalled with geographic/source uncertainties unresolved.",
+      "status": "unresolved",
+      "source_ids": [
+        "osm-saravan-relation-6555069",
+        "osm-way-239441239",
+        "osm-way-239453665",
+        "osm-panjgur-ancestor-source"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "node coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/reproduce.mjs --repo . --commit 4ef06ee7318d680a5deab15ee005a9356915bde1 --registry '{\"path\":\"coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/inputs.json\",\"bytes\":15684,\"sha256\":\"d2465467bd1e9ce8f0b3fa8d01529507b57844e46ea98d1c1e21fe8c1af89618\"}' --registry-sha256 d2465467bd1e9ce8f0b3fa8d01529507b57844e46ea98d1c1e21fe8c1af89618 --out FRESH_FINAL_RESULT.json",
+    "node coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/controls.mjs"
+  ],
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/cli-negative.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/controls.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/failed-container-v1.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/inputs.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/pins.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/reproduce.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/reproducibility-v3.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/results-v1/parity.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/results-v2/parity.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-encoded-parity-991-20261005-local12/results-v3/parity.json",
+      "status": "added"
+    }
+  ],
+  "rendered_tables": []
+}
