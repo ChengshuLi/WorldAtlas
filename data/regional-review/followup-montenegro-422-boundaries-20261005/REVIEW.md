@@ -1,0 +1,44 @@
+# Montenegro municipal boundary follow-up (#996)
+
+Research packet dated 2026-10-05. Baseline is fresh `origin/main` commit `b6cfaada43a1e0472cd833d16733d1fd6065eaec`; all 23 issue IDs occur exactly once in `data/geography/part-15.json`. No shared geography or IDs were edited.
+
+## Result
+
+The best lawful, scope-relevant official geometry source was **not obtainable** from inspected public pages. The Water Information System presents an official municipality-territory layer, but inspected pages did not disclose download/API geometry, vintage, lineage or reuse terms. The Cadastre and State Property Administration portal advertises official search/display plus an INSPIRE/ISO metadata catalogue and Spatial Units Register route, but the required native, dated geometry was not exposed. Exact restoration requests and the evidence limits are in `source-manifest.json`. No screenshot or undocumented endpoint is treated as geometry evidence.
+
+The retained comparator is the 2017 geoBoundaries MNE ADM1 OSM/Wambacher payload copied from the merged #422 evidence packet. It contains the exact 23 shape IDs and official-name equivalents in the 2017 MONSTAT roster, but it is not confirmed as legal/cadastral geometry. Its source metadata lists 2017, OpenStreetMap/Wambacher, ODbL 1.0, canonical unknown, and 23 units. Exact retained bytes are SHA-256 `9674292fbc0a50c68c6584a2ae23fae768e76cc796bdb7e3e009c0197aec6ae3`; the separate catalog digest `c9afe5300b402f75cf13b5d65341d849afd631af32b220be3f74c883cab36833` does not match payload bytes and remains uninterpreted. Six source features are coastal municipalities. The feature set has 22 Polygon and one MultiPolygon (Herceg Novi, two components), and no interior rings. Those structural facts cannot establish island/coast completeness, legal line position or topology against an authoritative reference.
+
+`comparison.json` gives exact per-ID/source-name crosswalks, stored prior WGS84 straight-source-edge ellipsoidal area results and official reported-area differences for every municipality. This issue reuses the #422 measurements; it does not claim an independent geometry measurement. The 2017 table is the closest same-roster/same-period official comparator found, and attributes data to the Real Estate Directorate. It lists 23 municipalities as of December 2015. Its municipality figures sum to **13,969 km²**, which is **157 km² more** than that chapter's stated 13,812 km² national area; MONSTAT does not explain that discrepancy. The amount equals Gusinje's published 157 km² and Plav changes from 486 km² in the 2017 report to 326 km² in the later table. This is consistent with (but does not prove) the 2017 Plav value including Gusinje. It is a hypothesis for official clarification, not a boundary-overlap finding.
+
+Area-only anomaly triage includes 2017 report vs retained geometry: Plav +158.216784 km², Petnjica +73.749994 km², Bar −29.149 km², Andrijevica −60.989 km², Berane −65.000 km², Kotor +40.000 km² and Nikšić +42.000 km². Do not infer which polygon is correct from these differences. Many other units are close or differ materially; all 23 values are preserved in the output.
+
+MONSTAT's 2021 yearbook reports the 24-unit roster as of December 2018. Its country-minus-municipality total difference is 226 km², expressly attributed to Montenegro's part of Lake Skadar. It says Tuzi's 246 km² is temporary/approximate pending Podgorica–Tuzi demarcation. This is a different roster and vintage, so comparisons against all 23 old shapes are triage only. The 2017 chapter notes Lake Skadar is 369.7 km² total, 147.9 km² in Albania, touching Bar, Podgorica and Cetinje; it does not provide municipal water/shoreline geometry or a per-unit completeness check.
+
+The current Ministry of Public Administration roster dataset (catalog last updated 2025-05-30) has 25 local-government entries, including Tuzi and Zeta; its retained JSON is CC BY according to the catalog (version unspecified). It is a names/contacts roster, not geometry. A 2024 ministry statement said Podgorica/Tuzi and Podgorica/Zeta demarcation processes remained open. The latest inspected ministry statement (2026-02-26) says unresolved Podgorica–Tuzi questions were agreed to be referred to arbitration. No completed arbitration outcome or final linework was established here. Zeta boundaries depend on the Podgorica/Tuzi demarcation per the 2024 statement.
+
+## Parent and neighboring granularity
+
+The 2017 national yearbook describes 23 municipalities and 1,307 settlements (58 urban settlements, census 2011); settlements are finer units and are not substitutes for municipal units. Each of the 23 Atlas features currently has a distinct `framework:province:<municipality>` parent wrapper marked `province`, with exactly one child. The source supports the municipality entity roster, but no source examined supports a separate province tier whose every unit is identical to one municipality. Recommend engineering review the one-child duplicate-tier hierarchy and preserve all 23 subject IDs in any future source replacement. Do not change hierarchy or geography in this research packet. Montenegro remains the geographic country parent; the semantic/legal role of the repeated singleton province wrappers is unresolved.
+
+## Bounded handoffs
+
+1. **Cadastre/source owner:** request the official 2017 and current native vector snapshots and code/name/settlement crosswalk from the Real Estate Administration Spatial Units Register. Obtain legal effective dates/acts, survey lineage, islands and multipart component inventory, coastal/water conventions, metadata and explicit reuse/derivative rights. Ask separately for the final Podgorica/Tuzi and Podgorica/Zeta demarcation records and arbitration outcome. Restore original bytes only if redistribution is authorized; otherwise retain the request/response and explicit restoration route.
+2. **Geography geometry reviewer:** after source bytes and terms are obtained, compare all 23 IDs with the 2017 OSM/Wambacher polygons and official snapshot, including overlay/topology, border adjacency, multipart/island and coastline checks; report per-unit findings and controls. Until then no geometry change is supported.
+3. **Hierarchy engineering:** assess whether the 23 singleton `province` wrappers are semantically justified, propose ID-preserving parent/role correction only with authoritative administrative-tier evidence. Do not equate municipality and province based solely on identical footprints.
+4. **Data quality follow-up:** ask MONSTAT/Real Estate Directorate to explain the 157 km² 2017 table-vs-national discrepancy and Plav/Gusinje area vintage. Keep the mismatch as a question, not a correction.
+
+## Limits and disposition
+
+No authoritative municipal geometry bytes or reusable boundary license were recovered; no geometry overlay against official linework was possible. The exact 2017 layer date, source legal basis, positional accuracy and completeness remain unknown. The 2017 and 2018 area tables do not verify lines. Current Tuzi/Podgorica arbitration completion is unknown from sources inspected; no current boundary outcome is asserted. The research resolves the acceptance requirement for an explicit official-source restoration path and supplies per-unit reproducible comparison results, but **does not certify any municipality boundary, validate the Montenegro region, authorize import/publication, or establish historical applicability**. The source restoration and hierarchy questions remain explicit engineering handoffs.
+
+## Sources
+
+Full URLs, exact source byte hashes or retained payload hashes, reuse status, retrieval date and restoration instructions are recorded in `source-manifest.json`. Primary references:
+
+- [MONSTAT Statistical Yearbook 2017, chapter 1](https://monstat.org/userfiles/file/publikacije/godisnjak%202017/1.pdf), table 1-2, p. 18.
+- [MONSTAT Statistical Yearbook 2021, chapter 1](https://monstat.org/uploads/files/publikacije/godisnjak%202021/1.pdf), table 1-2 and footnotes, p. 18.
+- [Ministry current municipality roster catalog](https://opendata.gov.me/en/dataset/lista-opstina-crne-gore).
+- [Water Information System geoportal](https://wis.gov.me/geoportal).
+- [Cadastre and State Property Administration geoportal](https://geoportal.co.me/geoportal/geoportal_eng.html); [Real Estate Administration service index](https://www.gov.me/en/article/services).
+- [Ministry statement on Podgorica–Tuzi demarcation, 2026-02-26](https://www.gov.me/cyr/clanak/mju-u-mandatu-ministra-dukaja-proces-razgranicenja-izmedu-tuzi-i-podgorice-vodilo-nepristrasno-otvoreno-i-transparentno); [2024 statement](https://www.gov.me/clanak/saopstenje-ministarstva-javne-uprave-2).
+- [geoBoundaries immutable source commit 9469f09592ced973a3448cf66b6100b741b64c0d](https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/MNE/ADM1).

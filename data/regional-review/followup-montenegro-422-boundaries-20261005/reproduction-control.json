@@ -1,0 +1,12 @@
+{
+  "method_id": "source-crosswalk-and-area-comparison",
+  "kind": "reproducibility",
+  "outcome": "passed",
+  "run_one_sha256": "0f26b5da1f7f4e9f68ff8a9e2ff0cdaaf6b0bd15c182f3db63209de1c04ba4f2",
+  "run_two_sha256": "0f26b5da1f7f4e9f68ff8a9e2ff0cdaaf6b0bd15c182f3db63209de1c04ba4f2",
+  "runs": 2,
+  "baseline_commit": "b6cfaada43a1e0472cd833d16733d1fd6065eaec",
+  "positive_control": "23 exact issue subjects each found once in the pinned world index, matched to a pinned original source feature and one 2017 official municipality-area table row.",
+  "negative_control": "The unmatched-name guard raises before writing results if an exact normalized municipality name is absent; no fuzzy/nearest-name fallback is enabled.",
+  "scope_and_pin_controls": "All nine issue pins hash from the immutable baseline commit; every subject is confirmed in its actual world-index containing part."
+}
