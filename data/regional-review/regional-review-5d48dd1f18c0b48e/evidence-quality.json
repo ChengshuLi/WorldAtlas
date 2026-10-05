@@ -337,6 +337,16 @@
       "status": "added"
     },
     {
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/geographic-overlay-negative-control.json",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/geographic-overlay-positive-control.json",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
       "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/geographic-screen.json",
       "previous_path": null,
       "status": "added"
@@ -357,7 +367,27 @@
       "status": "added"
     },
     {
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/neighbor-tier-negative-control.json",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/neighbor-tier-positive-control.json",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
       "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/packet-generator-controls.json",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/packet-generator-negative-control.json",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/packet-generator-positive-control.json",
       "previous_path": null,
       "status": "added"
     },
@@ -462,6 +492,7 @@
       "crs": "EPSG:4326",
       "description": "Diagnostic source/current and child/parent polygon overlays with positive identity and negative disjoint controls; no geometry is changed and overlaps do not establish legal boundaries.",
       "distance_method": "WGS84 inverse geodesic",
+      "helper_version": "worldatlas-evidence-geometry-v1",
       "id": "geographic-overlay",
       "kind": "geography",
       "software": "Python 3.12.14; Shapely 2.1.2; pyproj 3.7.2; scripts/evidence/geometry.py worldatlas-evidence-geometry-v1",
@@ -475,14 +506,31 @@
       "units": "source cohorts and WGS84 m2"
     },
     {
-      "description": "Deterministically materialize exact roster, one assessment per location and parent, and control receipts.",
+      "description": "Deterministically materialize exact roster, one assessment per location and parent, and control receipts. Uses the shared immutable evidence helper for canonical receipt serialization; source extraction and domain assessments remain packet-specific.",
+      "helper_version": "worldatlas-evidence-preparation-v1",
       "id": "packet-generators",
       "kind": "generator",
-      "software": "Python 3.12 standard library and pinned geometry dependencies",
+      "software": "Python 3.12 standard library; scripts/evidence/immutable.py",
       "units": "IDs, parent groups, SHA-256"
     }
   ],
-  "metric_bindings": [],
+  "metric_bindings": [
+    {
+      "json_pointer": "/scope_location_count",
+      "metric_id": "scoped-locations",
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/subject-assessments.json"
+    },
+    {
+      "json_pointer": "/province_assessment_count",
+      "metric_id": "scoped-parents",
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/subject-assessments.json"
+    },
+    {
+      "json_pointer": "/classification_counts/insufficient-evidence",
+      "metric_id": "insufficient-evidence",
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/subject-assessments.json"
+    }
+  ],
   "metrics": [
     {
       "evaluation_commit": "fdab75892d979b995a1d20f311006aeeddb770b5",
@@ -511,10 +559,10 @@
   ],
   "outputs": [
     {
-      "bytes": 3240,
+      "bytes": 3686,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/README.md",
-      "sha256": "a13713f53c627d9034b8d6c24ef2c30450d77cc488b12f488d59d35dc32170f4"
+      "sha256": "4c93c69ab14209e6519cc37f445ca5f33c64bc69b59d874d0d2b56bf9924ad91"
     },
     {
       "bytes": 10827,
@@ -535,10 +583,22 @@
       "sha256": "a7d36619c794ce4a9a02f1cd3a13aaa0d60b22e46cdacaac9168608acb41d362"
     },
     {
-      "bytes": 9700,
+      "bytes": 11079,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/build_evidence_manifest.py",
-      "sha256": "39f2ed14873a27bd2d700d646af36cbd0d72b39143f3091f3f91029bc56b0630"
+      "sha256": "ab05e2bb1646ceabf3924f22a5bf491dd0eecec91cde78267c6b50254563d69b"
+    },
+    {
+      "bytes": 159,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/geographic-overlay-negative-control.json",
+      "sha256": "da9826c364c8007f57afd4c37d7f68fec46819a465c489eb789dc23bcf514c5b"
+    },
+    {
+      "bytes": 160,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/geographic-overlay-positive-control.json",
+      "sha256": "1cf0711d05c5cad69f7c3526f9018d95a2a2972b3ea3f0193a4e4c7e5fe5d13b"
     },
     {
       "bytes": 299350,
@@ -547,10 +607,10 @@
       "sha256": "19005d9d03abc0e5c155b7cc8820449dae2982379856e2cb53f5ea21701c83af"
     },
     {
-      "bytes": 560,
+      "bytes": 539,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/geometry-controls.json",
-      "sha256": "59a3d800a614a94ede2627a1c86a4e40821707dad42a1a89e95c317baaeb778d"
+      "sha256": "c24ebd2e0fc2c3abb99d3efff570c2db14868d4057bd66c0d52076291a667da5"
     },
     {
       "bytes": 29424,
@@ -565,16 +625,40 @@
       "sha256": "de6e80efb41ba7d91e5daf049aef8127852264e46dc9737c370b610f48e0ed02"
     },
     {
-      "bytes": 551,
+      "bytes": 176,
       "hash_kind": "file-bytes",
-      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/packet-generator-controls.json",
-      "sha256": "b10f9953acf45d3cef08e5084c22c5e0a1e65541539dc4eae4c1f67f2c843b2c"
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/neighbor-tier-negative-control.json",
+      "sha256": "5595bce8180b016770ac743364378a0ce48e9e32ed1e9ca8432530737b7da9be"
     },
     {
-      "bytes": 4021,
+      "bytes": 201,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/neighbor-tier-positive-control.json",
+      "sha256": "8f8a125ab8248c9d381cc7a0dfb6187cf6750db829eaa76eb071172e188e546c"
+    },
+    {
+      "bytes": 285,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/packet-generator-controls.json",
+      "sha256": "3e71ebae13222060355235ecd9d7afe2c0b2589368830379beb202a57251fd15"
+    },
+    {
+      "bytes": 150,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/packet-generator-negative-control.json",
+      "sha256": "bb047a110693bddc195cb288d65c6dfc98e62bdc893f77075f03c9f876233258"
+    },
+    {
+      "bytes": 205,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/packet-generator-positive-control.json",
+      "sha256": "ca5010254d39450d2e444b5662c6bf916e3cb84fc9ab140dd71ec299f81ca7af"
+    },
+    {
+      "bytes": 8107,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/packet_controls.py",
-      "sha256": "90c05dc0d39bc61363e5e8b1b1cae6ddc3b9485abd8556623500ee0fc20299a8"
+      "sha256": "3d36bcc06e2f177327e9beabe9f441610e25dc1d9fc6a982ef504d004922ff20"
     },
     {
       "bytes": 5874,
@@ -583,10 +667,10 @@
       "sha256": "63b515926657b21d5401674e5c94aecac1e538d6fa79eb10566b1d9e188f4c65"
     },
     {
-      "bytes": 1397,
+      "bytes": 1593,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/reproducibility.json",
-      "sha256": "330f152f28394c7f9a948d94f9b1e01a3410d366ce8a5fec6b18978b56c7baf0"
+      "sha256": "79121a36e915e42480e565908f92d6190f09ac488a32c22d07c183b1af0d541e"
     },
     {
       "bytes": 261581,
@@ -595,10 +679,10 @@
       "sha256": "8425fc84190b976e787e5f4cbaf630a31b00ea0d2ee8aa76f18dbe511e6a9349"
     },
     {
-      "bytes": 1088,
+      "bytes": 1053,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/regional-review-5d48dd1f18c0b48e/source-crosswalk-controls.json",
-      "sha256": "2d0818c054c97341150e3ea6b3078165aa439a9c1807174a59f9d38ed4eaa4db"
+      "sha256": "387f3165c4d82c18c06d6a719eb84c1fdec4d53d516f47e5d7feff2c9aacba83"
     },
     {
       "bytes": 5399,
@@ -1054,14 +1138,44 @@
       "outcome": "passed"
     },
     {
-      "evidence_path": "data/regional-review/regional-review-5d48dd1f18c0b48e/geometry-controls.json",
-      "kind": "geography",
+      "evidence_path": "data/regional-review/regional-review-5d48dd1f18c0b48e/geographic-overlay-positive-control.json",
+      "kind": "positive-control",
       "method_id": "geographic-overlay",
       "outcome": "passed"
     },
     {
-      "evidence_path": "data/regional-review/regional-review-5d48dd1f18c0b48e/packet-generator-controls.json",
-      "kind": "generator",
+      "evidence_path": "data/regional-review/regional-review-5d48dd1f18c0b48e/geographic-overlay-negative-control.json",
+      "kind": "negative-control",
+      "method_id": "geographic-overlay",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/regional-review-5d48dd1f18c0b48e/neighbor-tier-positive-control.json",
+      "kind": "positive-control",
+      "method_id": "neighbor-tier-screen",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/regional-review-5d48dd1f18c0b48e/neighbor-tier-negative-control.json",
+      "kind": "negative-control",
+      "method_id": "neighbor-tier-screen",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/regional-review-5d48dd1f18c0b48e/packet-generator-positive-control.json",
+      "kind": "positive-control",
+      "method_id": "packet-generators",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/regional-review-5d48dd1f18c0b48e/packet-generator-negative-control.json",
+      "kind": "negative-control",
+      "method_id": "packet-generators",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/regional-review-5d48dd1f18c0b48e/reproducibility.json",
+      "kind": "reproducibility",
       "method_id": "packet-generators",
       "outcome": "passed"
     }

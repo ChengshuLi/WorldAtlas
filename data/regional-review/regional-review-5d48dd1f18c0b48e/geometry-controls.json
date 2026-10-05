@@ -1,11 +1,1 @@
-{
-  "helper_version": "worldatlas-evidence-geometry-v1",
-  "issue": 467,
-  "method_limit": "Shapely 2.1.2 planar lon/lat polygon intersection; each resulting polygon numerator and source-polygon denominator measured with the shared WGS84 straight-source-edge ellipsoidal area helper. This is a diagnostic overlay and not a survey-grade or same-vintage boundary proof.",
-  "negative_control_disjoint_overlap": 0.0,
-  "outcome": "passed",
-  "positive_control_identical_overlap": 1.0,
-  "subject_count": 224,
-  "valid_single_polygon_count": 224,
-  "version": 1
-}
+{"helper_version":"worldatlas-evidence-geometry-v1","issue":467,"method_limit":"Shapely 2.1.2 planar lon/lat polygon intersection; each resulting polygon numerator and source-polygon denominator measured with the shared WGS84 straight-source-edge ellipsoidal area helper. This is a diagnostic overlay and not a survey-grade or same-vintage boundary proof.","negative_control_disjoint_polygon_overlap":0.0,"outcome":"passed","positive_control_identical_polygon_overlap":1.0,"subject_count":224,"valid_single_polygon_count":224,"version":1}
