@@ -1,0 +1,156 @@
+{
+  "access_date_utc": "2026-10-05",
+  "references": [
+    {
+      "access": "official DGAT HTML successfully fetched over HTTPS",
+      "bytes": 83361,
+      "finding": "Page cites Law 2014-451 and states the current/evolutionary territorial organization: 31 regions, 108 departments, 509 sub-prefectures (475 open), 8,576 villages; two autonomous districts. It says regions, departments, sub-prefectures and communes are created by presidential decree.",
+      "id": "civ_dgat",
+      "retrieved_at_utc": [
+        "2026-10-05T01:50:09Z",
+        "2026-10-05T01:50:12Z"
+      ],
+      "sha256": "858f4edcec70cfd921e0bef80082d8641dba6d5865c7606de482eb28bdbfa827",
+      "url": "https://dgat.interieur.gouv.ci/creation-de-circonscriptions-administratives/"
+    },
+    {
+      "access": "official page verified with Web connector; direct Python urllib request returned HTTP 403",
+      "finding": "Official API docs show 2021 census/reference records: sous-prefectures endpoint total_count 526 with cod_dep/cod_sp/nom_sp/annee fields; department endpoint total_count 111 with cod_dep/nom_dep/cod_reg/annee. Public API hostname could not be reached for row-level exact matching in this environment.",
+      "id": "anstat_api_docs",
+      "retrieval_date_utc": "2026-10-05",
+      "sha256": null,
+      "url": "https://anstat.ci/public/api"
+    },
+    {
+      "access": "official page verified with Web connector; direct Python urllib request returned HTTP 403",
+      "finding": "ANStat states information/data on its site use CC BY 4.0 with citation.",
+      "id": "anstat_terms",
+      "retrieval_date_utc": "2026-10-05",
+      "sha256": null,
+      "url": "https://www.anstat.ci/privacy"
+    },
+    {
+      "access": "official PDF fetch successful over HTTPS",
+      "bytes": 3055164,
+      "finding": "2024 Population and Housing Census preliminary report supports current eight-LGA census framework.",
+      "id": "gambia_2024_census_preliminary",
+      "retention": "restoration-only, checksum provided, unknown redistribution terms",
+      "retrieved_at_utc": [
+        "2026-10-04T18:29:04Z",
+        "2026-10-04T18:29:05Z"
+      ],
+      "sha256": "4277026e8648d41aaca9f60be8e90ee0182aa76863bdc74821307f18d902a5b7",
+      "url": "https://www.gbosdata.org/downloads-file/544-2024-gphc-preliminary-report"
+    },
+    {
+      "access": "official PDF fetch successful over HTTPS",
+      "bytes": 1769769,
+      "finding": "GBoS distinguishes the eight local-government areas used for census/surveys from sectoral “regions”.",
+      "id": "gambia_compendium",
+      "retention": "restoration-only; unknown redistribution terms, retained as exact restoration URL and checksum",
+      "retrieved_at_utc": [
+        "2026-10-05T01:50:13Z",
+        "2026-10-05T01:50:14Z"
+      ],
+      "sha256": "297fd66d140f838e207d4031fa3a7dc582c6e1225c0ba56e2ceeeabdecc2ef7c",
+      "url": "https://www.gbosdata.org/downloads-file/228-the-gambia-compendium-of-statistical-concepts"
+    },
+    {
+      "access": "official StatsBank download; file birth/modification timestamp window and exact re-fetch checksums recorded",
+      "bytes": 27390495,
+      "finding": "Districts_261.zip contained 261 records. The official Census Atlas also provides Districts_271.zip and a topology package; 261 is the District Assemblies layer used here.",
+      "id": "ghana_2021_gss_districts_261",
+      "nested_bytes": 12152417,
+      "nested_member_path": "Geo FIles/Districts_261.zip",
+      "nested_sha256": "967c474c1642e8c02e98a48c240d7fde2213b87f2e821ede5ff4877d7581b9f0",
+      "retention": "restoration-only; no redistributed GSS bytes in packet because no terms were located",
+      "retrieved_at_utc": [
+        "2026-10-04T18:28:49Z",
+        "2026-10-04T18:29:04Z"
+      ],
+      "reverified_at_utc": [
+        "2026-10-04T18:50:26Z",
+        "2026-10-04T18:50:39Z"
+      ],
+      "sha256": "a37f1f556283f825194b5a4251f17526e98a2797b273d604e0022a35f67518bb",
+      "url": "https://statsbank.statsghana.gov.gh/assets/geofiles.zip"
+    },
+    {
+      "access": "official Ghana Statistical Service catalog reference",
+      "finding": "Census primary context. Direct linked alternate PDF URL checked on 2026-10-05 returned 404; restore through catalog page.",
+      "id": "ghana_2021_general_report",
+      "sha256": null,
+      "url": "https://microdata.statsghana.gov.gh/index.php/catalog/110"
+    },
+    {
+      "access": "immutable source pin already embedded in atlas source metadata",
+      "finding": "Atlas Banjul aggregation cites undated Natural Earth admin-1 state/province layer; semantic report retains source/license details. Nine geoBoundaries source members are separately enumerated in the baseline.",
+      "id": "natural_earth_gambia_reference",
+      "sha256": null,
+      "url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19"
+    },
+    {
+      "access": "official GSS StatsBank PDF fetched with HTTPS curl; not retained in packet because redistribution terms were not located",
+      "bytes": 1509085,
+      "finding": "GSS user guide v1.3 describes Ghana geography as regions and districts, with some metro areas subdivided into sub-metros; this is statistical granularity context, not a statutory boundary instrument.",
+      "id": "ghana_gss_user_guide",
+      "retention": "restoration-only",
+      "retrieved_at_utc": [
+        "2026-10-04T19:07:37Z",
+        "2026-10-04T19:07:39Z"
+      ],
+      "sha256": "27724d551ded9f89010bca60dbe91077c275732143c31aba82dc4c9d80d50deb",
+      "url": "https://statsbank.statsghana.gov.gh/Resources/userguide/statsbank_userguide_1.3.pdf"
+    }
+  ],
+  "unredistributable_or_restore_only": {
+    "gambia_census_2024": {
+      "bytes": 3055164,
+      "retention": "restoration-only; unknown redistribution terms, retained as exact restoration URL and checksum",
+      "retrieval_window_utc": [
+        "2026-10-04T18:29:04Z",
+        "2026-10-04T18:29:05Z"
+      ],
+      "sha256": "4277026e8648d41aaca9f60be8e90ee0182aa76863bdc74821307f18d902a5b7",
+      "url": "https://www.gbosdata.org/downloads-file/544-2024-gphc-preliminary-report"
+    },
+    "gambia_compendium": {
+      "bytes": 1769769,
+      "retention": "restoration-only; unknown redistribution terms, retained as exact restoration URL and checksum",
+      "retrieval_completed_at_utc": "2026-10-05T01:50:14Z",
+      "retrieval_started_at_utc": "2026-10-05T01:50:13Z",
+      "sha256": "297fd66d140f838e207d4031fa3a7dc582c6e1225c0ba56e2ceeeabdecc2ef7c",
+      "url": "https://www.gbosdata.org/downloads-file/228-the-gambia-compendium-of-statistical-concepts"
+    },
+    "ghana_gss_geofiles": {
+      "accessibility_note": "Downloaded over HTTPS; Python SSL context lacked issuer trust in a later check, but curl validated its own trust store and downloaded matching bytes.",
+      "bytes": 27390495,
+      "nested_bytes": 12152417,
+      "nested_member_path": "Geo FIles/Districts_261.zip",
+      "nested_sha256": "967c474c1642e8c02e98a48c240d7fde2213b87f2e821ede5ff4877d7581b9f0",
+      "re-fetch_retrieval_window_utc": [
+        "2026-10-04T18:50:26Z",
+        "2026-10-04T18:50:39Z"
+      ],
+      "re-fetch_sha256": "a37f1f556283f825194b5a4251f17526e98a2797b273d604e0022a35f67518bb",
+      "retention": "restoration-only; not copied into repository because no redistribution terms were located; restore from URL and verify both hashes",
+      "retrieval_window_utc": [
+        "2026-10-04T18:28:49Z",
+        "2026-10-04T18:29:04Z"
+      ],
+      "sha256": "a37f1f556283f825194b5a4251f17526e98a2797b273d604e0022a35f67518bb",
+      "url": "https://statsbank.statsghana.gov.gh/assets/geofiles.zip"
+    },
+    "ghana_gss_user_guide": {
+      "bytes": 1509085,
+      "retention": "restoration-only; no verified redistribution terms",
+      "retrieval_window_utc": [
+        "2026-10-04T19:07:37Z",
+        "2026-10-04T19:07:39Z"
+      ],
+      "sha256": "27724d551ded9f89010bca60dbe91077c275732143c31aba82dc4c9d80d50deb",
+      "url": "https://statsbank.statsghana.gov.gh/Resources/userguide/statsbank_userguide_1.3.pdf"
+    }
+  },
+  "version": 1
+}

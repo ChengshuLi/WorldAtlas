@@ -1,0 +1,218 @@
+{
+  "version": 1,
+  "issue": 822,
+  "lane": "engineering",
+  "worker_id": "engineering-cloudflare-20261004-01a10934",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+    "files": [
+      {
+        "path": "hosted/cloudflare-access.js",
+        "bytes": 1754,
+        "sha256": "4a3f5ab9dc73c1256f9ca2b21c455f808983cebdc3f135155e172665adb027fa",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/build-cloudflare.mjs",
+        "bytes": 1779,
+        "sha256": "911fd507b010f0658e8c692c360a43caaa632d4ad3e79d17d27d243a7dc52b1b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/cloudflare-access.test.mjs",
+        "bytes": 4361,
+        "sha256": "f4fd30999610621e4152d0c88a8bc2190254b80b4d59aa5ee12141f678679d17",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/CLOUDFLARE_HOSTING.md",
+        "bytes": 5329,
+        "sha256": "3647188bec2b15d80cb53eeec0932d1bea0b50540b269e39b5b5f5bafa5e68fb",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "hosted/cloudflare-access.js",
+      "bytes": 2066,
+      "sha256": "c5d1d250a03ba6d62cacbc2709ed7e2a80325287e1bb77bcf38bbe260ac83f23",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/build-cloudflare.mjs",
+      "bytes": 1930,
+      "sha256": "020ddc2b8463e2ce4bddf4c4ee9e8e58d5026f4ad35608884330a94363b6abcc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/cloudflare-access.test.mjs",
+      "bytes": 5757,
+      "sha256": "2521b3936f477f210a85b4c60864f11b7cab746d2d8cf0e606c3e72a1285850c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/CLOUDFLARE_HOSTING.md",
+      "bytes": 6308,
+      "sha256": "c732b77b5b3a662dd73c0613680e5b41c9c7e29e124a401b7275420917460897",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-public-822/dry-run.log",
+      "bytes": 1288,
+      "sha256": "8749c8992e397483dcbeb8d59e96e72dc06acbf0ccb221a8cb3f953d06d254d2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-public-822/targeted-tests.log",
+      "bytes": 985,
+      "sha256": "20329cf00dff10bc027e6326e7de2379797a5b671098ad9d63349391f5325642",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-public-822/retained-client-inventory.json",
+      "bytes": 87720,
+      "sha256": "9609a49c1938b222326df315400ccf89ba2a6557dd201e09f587e65376254114",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-public-822/positive-control.json",
+      "bytes": 208,
+      "sha256": "94042c25a2b341308634fb6780e805a7ab48764d287969b87038c2c5c5853e75",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-public-822/negative-control.json",
+      "bytes": 225,
+      "sha256": "0617e85ce2c34f0e150dd8eb342648a4e7e12d2af701b468883e658975f65b0c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-public-822/temporal-hydration.json",
+      "bytes": 515,
+      "sha256": "f16689a70fb28b4a48b98580e2aa280e96049f55395af9abde3803d789cc62eb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-public-822/README.md",
+      "bytes": 1893,
+      "sha256": "23dd1dfafa0fd82ccabe46e981e9fb4585e4e59430a35c8d78614c21551cbc8d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-public-822/captured-temporal-diagnosis.json",
+      "bytes": 2085,
+      "sha256": "1d20a810408f7264997b0ca5fef988ed427f8aaed2f60341856c26c6e8e3c7e1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-public-822/replay-temporal-diagnosis.mjs",
+      "bytes": 1068,
+      "sha256": "2b518b5bef0461f89b2e69216f7811be6e88709c93c7a524f7f95de0a265af7b",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "public-host-controls",
+      "kind": "code",
+      "description": "Real atlas routing controls for explicit public read-only mode, private default preservation, Wrangler bundle validation; matched captured temporal loader and mismatch rejection.",
+      "software": "Node24, jose6.2.12, Wrangler4.146",
+      "units": "boolean security and loader controls"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/cloudflare-access.test.mjs test/content-backend.test.mjs",
+    "node node_modules/wrangler/bin/wrangler.js deploy --dry-run --config dist/cloudflare/wrangler.json",
+    "node coordination/engineering/cloudflare-public-822/replay-temporal-diagnosis.mjs"
+  ],
+  "change_receipts": [
+    {
+      "path": "hosted/cloudflare-access.js",
+      "status": "modified",
+      "original_sha256": "4a3f5ab9dc73c1256f9ca2b21c455f808983cebdc3f135155e172665adb027fa"
+    },
+    {
+      "path": "scripts/build-cloudflare.mjs",
+      "status": "modified",
+      "original_sha256": "911fd507b010f0658e8c692c360a43caaa632d4ad3e79d17d27d243a7dc52b1b"
+    },
+    {
+      "path": "test/cloudflare-access.test.mjs",
+      "status": "modified",
+      "original_sha256": "f4fd30999610621e4152d0c88a8bc2190254b80b4d59aa5ee12141f678679d17"
+    },
+    {
+      "path": "docs/CLOUDFLARE_HOSTING.md",
+      "status": "modified",
+      "original_sha256": "3647188bec2b15d80cb53eeec0932d1bea0b50540b269e39b5b5f5bafa5e68fb"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-public-822/dry-run.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-public-822/targeted-tests.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-public-822/retained-client-inventory.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-public-822/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-public-822/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-public-822/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-public-822/temporal-hydration.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-public-822/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-public-822/captured-temporal-diagnosis.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/cloudflare-public-822/replay-temporal-diagnosis.mjs",
+      "status": "added"
+    }
+  ],
+  "metric_bindings": [],
+  "validation": [
+    {
+      "method_id": "public-host-controls",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/cloudflare-public-822/positive-control.json"
+    },
+    {
+      "method_id": "public-host-controls",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/cloudflare-public-822/negative-control.json"
+    }
+  ]
+}

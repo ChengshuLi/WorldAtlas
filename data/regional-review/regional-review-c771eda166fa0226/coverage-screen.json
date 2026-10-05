@@ -1,0 +1,1839 @@
+{
+  "checks_not_established": [
+    "No national authoritative island/coastline inventory or high-water/low-water boundary reference was inspected.",
+    "No full-country current statutory boundary layer was retained for Gambia, Ghana or Côte d’Ivoire.",
+    "Adjacent country boundary geometry was not independently crosswalked in this packet.",
+    "Source feature counts and location chains do not establish completeness.",
+    "The existing scope partly covers Ghana and Côte d’Ivoire; outside-packet source IDs may belong to other issues."
+  ],
+  "exact_scope_only": true,
+  "fragmented_city_or_aggregate": {
+    "atlas_vs_nine_source_member_union": {
+      "atlas_area_fraction": 0.9739110092226474,
+      "atlas_area_km2": 245.82842036303643,
+      "iou": 0.945864286683123,
+      "reference_area_fraction": 0.9704533215543637,
+      "reference_area_km2": 246.70429752139526
+    },
+    "lga_intersections": [
+      {
+        "atlas_area_fraction": 0.7543619264888437,
+        "iou": 0.10162719828103917,
+        "lga_area_fraction": 0.10510536801563844,
+        "name": "Brikama",
+        "source_id": "31243875B88426941804625"
+      },
+      {
+        "atlas_area_fraction": 0.2046287904722327,
+        "iou": 0.20246351178205368,
+        "lga_area_fraction": 0.9503321108758587,
+        "name": "Kanifing",
+        "source_id": "31243875B42421745591684"
+      },
+      {
+        "atlas_area_fraction": 0.026021078816470554,
+        "iou": 0.025710327140839543,
+        "lga_area_fraction": 0.6828294666212577,
+        "name": "Banjul",
+        "source_id": "31243875B86288540800273"
+      }
+    ],
+    "method": "EPSG:6933 equal-area polygon intersection; exact nine source_member_ids converted from their gb:GMB:ADM2:<shapeID> identifiers; original geometries unchanged",
+    "natural_earth_record": {
+      "dbf_fields": [
+        {
+          "name": "featurecla",
+          "type": "C",
+          "width": 24
+        },
+        {
+          "name": "scalerank",
+          "type": "N",
+          "width": 2
+        },
+        {
+          "name": "adm1_code",
+          "type": "C",
+          "width": 9
+        },
+        {
+          "name": "diss_me",
+          "type": "N",
+          "width": 5
+        },
+        {
+          "name": "iso_3166_2",
+          "type": "C",
+          "width": 8
+        },
+        {
+          "name": "wikipedia",
+          "type": "C",
+          "width": 84
+        },
+        {
+          "name": "iso_a2",
+          "type": "C",
+          "width": 2
+        },
+        {
+          "name": "adm0_sr",
+          "type": "N",
+          "width": 1
+        },
+        {
+          "name": "name",
+          "type": "C",
+          "width": 44
+        },
+        {
+          "name": "name_alt",
+          "type": "C",
+          "width": 129
+        },
+        {
+          "name": "name_local",
+          "type": "C",
+          "width": 66
+        },
+        {
+          "name": "type",
+          "type": "C",
+          "width": 38
+        },
+        {
+          "name": "type_en",
+          "type": "C",
+          "width": 27
+        },
+        {
+          "name": "code_local",
+          "type": "C",
+          "width": 5
+        },
+        {
+          "name": "code_hasc",
+          "type": "C",
+          "width": 8
+        },
+        {
+          "name": "note",
+          "type": "C",
+          "width": 114
+        },
+        {
+          "name": "hasc_maybe",
+          "type": "C",
+          "width": 13
+        },
+        {
+          "name": "region",
+          "type": "C",
+          "width": 43
+        },
+        {
+          "name": "region_cod",
+          "type": "C",
+          "width": 15
+        },
+        {
+          "name": "provnum_ne",
+          "type": "N",
+          "width": 5
+        },
+        {
+          "name": "gadm_level",
+          "type": "N",
+          "width": 2
+        },
+        {
+          "name": "check_me",
+          "type": "N",
+          "width": 2
+        },
+        {
+          "name": "datarank",
+          "type": "N",
+          "width": 2
+        },
+        {
+          "name": "abbrev",
+          "type": "C",
+          "width": 9
+        },
+        {
+          "name": "postal",
+          "type": "C",
+          "width": 3
+        },
+        {
+          "name": "area_sqkm",
+          "type": "N",
+          "width": 1
+        },
+        {
+          "name": "sameascity",
+          "type": "N",
+          "width": 3
+        },
+        {
+          "name": "labelrank",
+          "type": "N",
+          "width": 2
+        },
+        {
+          "name": "name_len",
+          "type": "N",
+          "width": 2
+        },
+        {
+          "name": "mapcolor9",
+          "type": "N",
+          "width": 1
+        },
+        {
+          "name": "mapcolor13",
+          "type": "N",
+          "width": 2
+        },
+        {
+          "name": "fips",
+          "type": "C",
+          "width": 5
+        },
+        {
+          "name": "fips_alt",
+          "type": "C",
+          "width": 9
+        },
+        {
+          "name": "woe_id",
+          "type": "N",
+          "width": 9
+        },
+        {
+          "name": "woe_label",
+          "type": "C",
+          "width": 64
+        },
+        {
+          "name": "woe_name",
+          "type": "C",
+          "width": 44
+        },
+        {
+          "name": "latitude",
+          "type": "N",
+          "width": 14
+        },
+        {
+          "name": "longitude",
+          "type": "N",
+          "width": 15
+        },
+        {
+          "name": "sov_a3",
+          "type": "C",
+          "width": 3
+        },
+        {
+          "name": "adm0_a3",
+          "type": "C",
+          "width": 3
+        },
+        {
+          "name": "adm0_label",
+          "type": "N",
+          "width": 2
+        },
+        {
+          "name": "admin",
+          "type": "C",
+          "width": 36
+        },
+        {
+          "name": "geonunit",
+          "type": "C",
+          "width": 40
+        },
+        {
+          "name": "gu_a3",
+          "type": "C",
+          "width": 3
+        },
+        {
+          "name": "gn_id",
+          "type": "N",
+          "width": 8
+        },
+        {
+          "name": "gn_name",
+          "type": "C",
+          "width": 72
+        },
+        {
+          "name": "gns_id",
+          "type": "N",
+          "width": 8
+        },
+        {
+          "name": "gns_name",
+          "type": "C",
+          "width": 80
+        },
+        {
+          "name": "gn_level",
+          "type": "N",
+          "width": 2
+        },
+        {
+          "name": "gn_region",
+          "type": "C",
+          "width": 1
+        },
+        {
+          "name": "gn_a1_code",
+          "type": "C",
+          "width": 10
+        },
+        {
+          "name": "region_sub",
+          "type": "C",
+          "width": 41
+        },
+        {
+          "name": "sub_code",
+          "type": "C",
+          "width": 5
+        },
+        {
+          "name": "gns_level",
+          "type": "N",
+          "width": 3
+        },
+        {
+          "name": "gns_lang",
+          "type": "C",
+          "width": 3
+        },
+        {
+          "name": "gns_adm1",
+          "type": "C",
+          "width": 4
+        },
+        {
+          "name": "gns_region",
+          "type": "C",
+          "width": 4
+        },
+        {
+          "name": "min_label",
+          "type": "N",
+          "width": 4
+        },
+        {
+          "name": "max_label",
+          "type": "N",
+          "width": 4
+        },
+        {
+          "name": "min_zoom",
+          "type": "N",
+          "width": 4
+        },
+        {
+          "name": "wikidataid",
+          "type": "C",
+          "width": 9
+        },
+        {
+          "name": "name_ar",
+          "type": "C",
+          "width": 85
+        },
+        {
+          "name": "name_bn",
+          "type": "C",
+          "width": 134
+        },
+        {
+          "name": "name_de",
+          "type": "C",
+          "width": 50
+        },
+        {
+          "name": "name_en",
+          "type": "C",
+          "width": 47
+        },
+        {
+          "name": "name_es",
+          "type": "C",
+          "width": 44
+        },
+        {
+          "name": "name_fr",
+          "type": "C",
+          "width": 47
+        },
+        {
+          "name": "name_el",
+          "type": "C",
+          "width": 85
+        },
+        {
+          "name": "name_hi",
+          "type": "C",
+          "width": 134
+        },
+        {
+          "name": "name_hu",
+          "type": "C",
+          "width": 47
+        },
+        {
+          "name": "name_id",
+          "type": "C",
+          "width": 46
+        },
+        {
+          "name": "name_it",
+          "type": "C",
+          "width": 47
+        },
+        {
+          "name": "name_ja",
+          "type": "C",
+          "width": 96
+        },
+        {
+          "name": "name_ko",
+          "type": "C",
+          "width": 54
+        },
+        {
+          "name": "name_nl",
+          "type": "C",
+          "width": 46
+        },
+        {
+          "name": "name_pl",
+          "type": "C",
+          "width": 45
+        },
+        {
+          "name": "name_pt",
+          "type": "C",
+          "width": 43
+        },
+        {
+          "name": "name_ru",
+          "type": "C",
+          "width": 85
+        },
+        {
+          "name": "name_sv",
+          "type": "C",
+          "width": 41
+        },
+        {
+          "name": "name_tr",
+          "type": "C",
+          "width": 44
+        },
+        {
+          "name": "name_vi",
+          "type": "C",
+          "width": 71
+        },
+        {
+          "name": "name_zh",
+          "type": "C",
+          "width": 61
+        },
+        {
+          "name": "ne_id",
+          "type": "N",
+          "width": 10
+        },
+        {
+          "name": "name_he",
+          "type": "C",
+          "width": 63
+        },
+        {
+          "name": "name_uk",
+          "type": "C",
+          "width": 89
+        },
+        {
+          "name": "name_ur",
+          "type": "C",
+          "width": 103
+        },
+        {
+          "name": "name_fa",
+          "type": "C",
+          "width": 92
+        },
+        {
+          "name": "name_zht",
+          "type": "C",
+          "width": 61
+        },
+        {
+          "name": "FCLASS_ISO",
+          "type": "C",
+          "width": 12
+        },
+        {
+          "name": "FCLASS_US",
+          "type": "C",
+          "width": 12
+        },
+        {
+          "name": "FCLASS_FR",
+          "type": "C",
+          "width": 1
+        },
+        {
+          "name": "FCLASS_RU",
+          "type": "C",
+          "width": 12
+        },
+        {
+          "name": "FCLASS_ES",
+          "type": "C",
+          "width": 12
+        },
+        {
+          "name": "FCLASS_CN",
+          "type": "C",
+          "width": 18
+        },
+        {
+          "name": "FCLASS_TW",
+          "type": "C",
+          "width": 12
+        },
+        {
+          "name": "FCLASS_IN",
+          "type": "C",
+          "width": 12
+        },
+        {
+          "name": "FCLASS_NP",
+          "type": "C",
+          "width": 12
+        },
+        {
+          "name": "FCLASS_PK",
+          "type": "C",
+          "width": 12
+        },
+        {
+          "name": "FCLASS_DE",
+          "type": "C",
+          "width": 12
+        },
+        {
+          "name": "FCLASS_GB",
+          "type": "C",
+          "width": 12
+        },
+        {
+          "name": "FCLASS_BR",
+          "type": "C",
+          "width": 12
+        },
+        {
+          "name": "FCLASS_IL",
+          "type": "C",
+          "width": 12
+        },
+        {
+          "name": "FCLASS_PS",
+          "type": "C",
+          "width": 12
+        },
+        {
+          "name": "FCLASS_SA",
+          "type": "C",
+          "width": 12
+        },
+        {
+          "name": "FCLASS_EG",
+          "type": "C",
+          "width": 12
+        },
+        {
+          "name": "FCLASS_MA",
+          "type": "C",
+          "width": 1
+        },
+        {
+          "name": "FCLASS_PT",
+          "type": "C",
+          "width": 12
+        },
+        {
+          "name": "FCLASS_AR",
+          "type": "C",
+          "width": 12
+        },
+        {
+          "name": "FCLASS_JP",
+          "type": "C",
+          "width": 12
+        },
+        {
+          "name": "FCLASS_KO",
+          "type": "C",
+          "width": 12
+        },
+        {
+          "name": "FCLASS_VN",
+          "type": "C",
+          "width": 12
+        },
+        {
+          "name": "FCLASS_TR",
+          "type": "C",
+          "width": 1
+        },
+        {
+          "name": "FCLASS_ID",
+          "type": "C",
+          "width": 12
+        },
+        {
+          "name": "FCLASS_PL",
+          "type": "C",
+          "width": 1
+        },
+        {
+          "name": "FCLASS_GR",
+          "type": "C",
+          "width": 12
+        },
+        {
+          "name": "FCLASS_IT",
+          "type": "C",
+          "width": 12
+        },
+        {
+          "name": "FCLASS_NL",
+          "type": "C",
+          "width": 1
+        },
+        {
+          "name": "FCLASS_SE",
+          "type": "C",
+          "width": 12
+        },
+        {
+          "name": "FCLASS_BD",
+          "type": "C",
+          "width": 12
+        },
+        {
+          "name": "FCLASS_UA",
+          "type": "C",
+          "width": 12
+        },
+        {
+          "name": "FCLASS_TLC",
+          "type": "C",
+          "width": 12
+        }
+      ],
+      "feature_count": 4596,
+      "feature_index_zero_based": 1964,
+      "limits": [
+        "Natural Earth is an undated modern reference and not an authoritative statutory city delimitation.",
+        "Its broad admin-1 city feature is a comparative source record; it does not establish which LGA or statutory parent Atlas should encode."
+      ],
+      "natural_earth_vs_atlas_city": {
+        "first_geometry_area_fraction": 0.7619370187020394,
+        "iou": 0.5379395392079404,
+        "second_geometry_area_fraction": 0.6466211799126634
+      },
+      "natural_earth_vs_nine_geoBoundaries_member_union": {
+        "first_geometry_area_fraction": 0.7667645980497033,
+        "iou": 0.5415884787293476,
+        "second_geometry_area_fraction": 0.6484078740297169
+      },
+      "target_attributes": {
+        "adm0_a3": "GMB",
+        "adm1_code": "GMB-2153",
+        "admin": "Gambia",
+        "name": "Banjul",
+        "name_long": null,
+        "ne_id": "1159311545",
+        "type": "Independent City",
+        "type_en": "Independent City"
+      },
+      "upstream_commit": "ca96624a56bd078437bca8184e78163e5039ad19",
+      "upstream_layer": "10m_cultural/ne_10m_admin_1_states_provinces"
+    },
+    "nine_declared_source_members": 9,
+    "notes": [
+      "This tests only whether the atlas aggregation footprint follows its declared nine district members. It does not establish an official city or metropolitan boundary.",
+      "The 2020 geoBoundaries source is licensed CC BY 4.0; official district-level Gambia geometry was not independently located."
+    ],
+    "per_source_member": [
+      {
+        "name": "Kombo North",
+        "shape_id": "56634734B65078205245432",
+        "source_id": "gb:GMB:ADM2:56634734B65078205245432"
+      },
+      {
+        "name": "Serrekunda East",
+        "shape_id": "56634734B18055278254530",
+        "source_id": "gb:GMB:ADM2:56634734B18055278254530"
+      },
+      {
+        "name": "Serrekunda Central",
+        "shape_id": "56634734B31410801409584",
+        "source_id": "gb:GMB:ADM2:56634734B31410801409584"
+      },
+      {
+        "name": "Serrekunda West",
+        "shape_id": "56634734B71497134195207",
+        "source_id": "gb:GMB:ADM2:56634734B71497134195207"
+      },
+      {
+        "name": "Jeshwang",
+        "shape_id": "56634734B33214654746760",
+        "source_id": "gb:GMB:ADM2:56634734B33214654746760"
+      },
+      {
+        "name": "Banjul South",
+        "shape_id": "56634734B29168541437208",
+        "source_id": "gb:GMB:ADM2:56634734B29168541437208"
+      },
+      {
+        "name": "Banjul North",
+        "shape_id": "56634734B93236052329958",
+        "source_id": "gb:GMB:ADM2:56634734B93236052329958"
+      },
+      {
+        "name": "Banjul Central",
+        "shape_id": "56634734B44527271765824",
+        "source_id": "gb:GMB:ADM2:56634734B44527271765824"
+      },
+      {
+        "name": "Bakau",
+        "shape_id": "56634734B97208940932189",
+        "source_id": "gb:GMB:ADM2:56634734B97208940932189"
+      }
+    ],
+    "source_layer_partition": {
+      "aggregate_member_source_count": 9,
+      "complete_partition": true,
+      "duplicate_source_ids": [],
+      "extra_atlas_source_ids": [],
+      "source_feature_count": 48,
+      "standalone_scoped_source_count": 39,
+      "union_member_count": 48,
+      "unrepresented_source_ids": []
+    }
+  },
+  "geometry_components": {
+    "CIV": {
+      "maximum_atlas_polygon_components": 2,
+      "multipolygon_subjects": [
+        {
+          "component_count": 2,
+          "geometry_type": "MultiPolygon",
+          "id": "gb:CIV:ADM3:97208781B44830369126951",
+          "name": "Tagadi"
+        }
+      ],
+      "scoped_subject_count": 63,
+      "unassessed_island_and_coast_completeness": "not assessed by source ID or feature counts"
+    },
+    "GHA": {
+      "maximum_atlas_polygon_components": 2,
+      "multipolygon_subjects": [
+        {
+          "component_count": 2,
+          "geometry_type": "MultiPolygon",
+          "id": "gb:GHA:ADM2:2480657B30283206314404",
+          "name": "Bosome Freho"
+        },
+        {
+          "component_count": 2,
+          "geometry_type": "MultiPolygon",
+          "id": "gb:GHA:ADM2:2480657B76140913943028",
+          "name": "Sissala West"
+        },
+        {
+          "component_count": 2,
+          "geometry_type": "MultiPolygon",
+          "id": "gb:GHA:ADM2:2480657B9523556036154",
+          "name": "Lambussie-karni"
+        }
+      ],
+      "scoped_subject_count": 113,
+      "unassessed_island_and_coast_completeness": "not assessed by source ID or feature counts"
+    },
+    "GMB": {
+      "maximum_atlas_polygon_components": 2,
+      "multipolygon_subjects": [
+        {
+          "component_count": 2,
+          "geometry_type": "MultiPolygon",
+          "id": "gb:GMB:ADM2:56634734B33233148834926",
+          "name": "Kantora"
+        },
+        {
+          "component_count": 2,
+          "geometry_type": "MultiPolygon",
+          "id": "gb:GMB:ADM2:56634734B99377934241318",
+          "name": "Jarra East"
+        }
+      ],
+      "scoped_subject_count": 39,
+      "unassessed_island_and_coast_completeness": "not assessed by source ID or feature counts"
+    }
+  },
+  "issue": 471,
+  "province_scale_screen": {
+    "CIV": {
+      "child_to_named_parent_area_ratio_max": 0.4112523719398879,
+      "child_to_named_parent_area_ratio_median": 0.036416346314319815,
+      "child_to_named_parent_area_ratio_min": 0.005100217506060902,
+      "exploratory_over_half_parent_flags": [],
+      "name_remainder_flags": [],
+      "note": "Large relative area and name flags are review screens only; unit role cannot be inferred from area."
+    },
+    "GHA": {
+      "child_to_named_parent_area_ratio_max": 0.27969795942726045,
+      "child_to_named_parent_area_ratio_median": 0.04892911038087373,
+      "child_to_named_parent_area_ratio_min": 0.0008809364842912607,
+      "exploratory_over_half_parent_flags": [],
+      "name_remainder_flags": [],
+      "note": "Large relative area and name flags are review screens only; unit role cannot be inferred from area."
+    },
+    "GMB": {
+      "child_to_named_parent_area_ratio_max": 0.4539430975699748,
+      "child_to_named_parent_area_ratio_median": 0.14115801340962836,
+      "child_to_named_parent_area_ratio_min": 0.0076289692689669045,
+      "exploratory_over_half_parent_flags": [],
+      "name_remainder_flags": [],
+      "note": "Large relative area and name flags are review screens only; unit role cannot be inferred from area."
+    }
+  },
+  "source_parent_screens": {
+    "CIV": {
+      "atlas_geometry_to_source_iou_below_0_95": [
+        {
+          "id": "gb:CIV:ADM3:97208781B63205701205338",
+          "iou": 0.9362297975812205,
+          "name": "Kalamon"
+        },
+        {
+          "id": "gb:CIV:ADM3:97208781B65381845190725",
+          "iou": 0.903280769851515,
+          "name": "Pinda-Boroko"
+        },
+        {
+          "id": "gb:CIV:ADM3:97208781B91897638290034",
+          "iou": 0.8626769955062427,
+          "name": "Tiapoum"
+        }
+      ],
+      "atlas_source_name_mismatches": [
+        {
+          "atlas_name": "Yézimala",
+          "id": "gb:CIV:ADM3:97208781B15964204979396",
+          "source_name": "YÃ©zimala"
+        },
+        {
+          "atlas_name": "Ondéfidouo",
+          "id": "gb:CIV:ADM3:97208781B37258007368527",
+          "source_name": "OndÃ©fidouo"
+        },
+        {
+          "atlas_name": "Téhini",
+          "id": "gb:CIV:ADM3:97208781B57047388148626",
+          "source_name": "TÃ©hini"
+        },
+        {
+          "atlas_name": "Ayamé",
+          "id": "gb:CIV:ADM3:97208781B68600842439416",
+          "source_name": "AyamÃ©"
+        },
+        {
+          "atlas_name": "Sominassé",
+          "id": "gb:CIV:ADM3:97208781B76044710432300",
+          "source_name": "SominassÃ©"
+        },
+        {
+          "atlas_name": "Gouméré",
+          "id": "gb:CIV:ADM3:97208781B77504268957760",
+          "source_name": "GoumÃ©rÃ©"
+        },
+        {
+          "atlas_name": "Niamoué",
+          "id": "gb:CIV:ADM3:97208781B82500342331657",
+          "source_name": "NiamouÃ©"
+        },
+        {
+          "atlas_name": "Etuéboué",
+          "id": "gb:CIV:ADM3:97208781B82570572908019",
+          "source_name": "EtuÃ©bouÃ©"
+        },
+        {
+          "atlas_name": "Sandégué",
+          "id": "gb:CIV:ADM3:97208781B86317411086703",
+          "source_name": "SandÃ©guÃ©"
+        },
+        {
+          "atlas_name": "Noé",
+          "id": "gb:CIV:ADM3:97208781B89868914654464",
+          "source_name": "NoÃ©"
+        },
+        {
+          "atlas_name": "Kouassi-Datékro",
+          "id": "gb:CIV:ADM3:97208781B90063766766045",
+          "source_name": "Kouassi-DatÃ©kro"
+        },
+        {
+          "atlas_name": "Tchèdio",
+          "id": "gb:CIV:ADM3:97208781B90491093538124",
+          "source_name": "TchÃ¨dio"
+        },
+        {
+          "atlas_name": "Maféré",
+          "id": "gb:CIV:ADM3:97208781B91989706835532",
+          "source_name": "MafÃ©rÃ©"
+        },
+        {
+          "atlas_name": "Tankessé",
+          "id": "gb:CIV:ADM3:97208781B9334040832693",
+          "source_name": "TankessÃ©"
+        },
+        {
+          "atlas_name": "Sapli-Sépingo",
+          "id": "gb:CIV:ADM3:97208781B97085651698819",
+          "source_name": "Sapli-SÃ©pingo"
+        },
+        {
+          "atlas_name": "Assuéfry",
+          "id": "gb:CIV:ADM3:97208781B99641967481238",
+          "source_name": "AssuÃ©fry"
+        }
+      ],
+      "named_parent_source_matches": 63,
+      "note": "A parent-name match, source-layer containment, exact label, or overlap measure alone does not establish current parent geography.",
+      "parent_name_mismatches": [],
+      "source_child_coverage_below_0_95": []
+    },
+    "GHA": {
+      "atlas_geometry_to_source_iou_below_0_95": [
+        {
+          "id": "gb:GHA:ADM2:2480657B10806173713075",
+          "iou": 0.8423476200771185,
+          "name": "Old Tafo Municipal"
+        },
+        {
+          "id": "gb:GHA:ADM2:2480657B14484334363928",
+          "iou": 0.9470620345373175,
+          "name": "Atwima Nwabiagya North"
+        },
+        {
+          "id": "gb:GHA:ADM2:2480657B14749544754301",
+          "iou": 0.9470021894578626,
+          "name": "Atwima Kwanwoma"
+        },
+        {
+          "id": "gb:GHA:ADM2:2480657B26017273678273",
+          "iou": 0.9463848424060212,
+          "name": "Obuasi East"
+        },
+        {
+          "id": "gb:GHA:ADM2:2480657B3368374944964",
+          "iou": 0.8951816489563594,
+          "name": "Sekondi Takoradi Metropolis"
+        },
+        {
+          "id": "gb:GHA:ADM2:2480657B44306962794399",
+          "iou": 0.868225205933059,
+          "name": "Jaman North"
+        },
+        {
+          "id": "gb:GHA:ADM2:2480657B47912218033723",
+          "iou": 0.9469542750032446,
+          "name": "Afigya Kwabre North"
+        },
+        {
+          "id": "gb:GHA:ADM2:2480657B48966175900279",
+          "iou": 0.8973923775048449,
+          "name": "Suame Municipal"
+        },
+        {
+          "id": "gb:GHA:ADM2:2480657B49181902253284",
+          "iou": 0.9334186364309903,
+          "name": "Effia Kwesimintsim Municipal"
+        },
+        {
+          "id": "gb:GHA:ADM2:2480657B53382680619634",
+          "iou": 0.9450217541903984,
+          "name": "Juaben Municipal"
+        },
+        {
+          "id": "gb:GHA:ADM2:2480657B53854728613413",
+          "iou": 0.804142014524703,
+          "name": "Kumasi Metropolitan"
+        },
+        {
+          "id": "gb:GHA:ADM2:2480657B60556198830817",
+          "iou": 0.9328956878715757,
+          "name": "Kwabre East"
+        },
+        {
+          "id": "gb:GHA:ADM2:2480657B67032672358324",
+          "iou": 0.7744641313100001,
+          "name": "Asokore Mampong Municipal"
+        },
+        {
+          "id": "gb:GHA:ADM2:2480657B70835976798974",
+          "iou": 0.8783534926318278,
+          "name": "Oforikrom Municipal"
+        },
+        {
+          "id": "gb:GHA:ADM2:2480657B76140913943028",
+          "iou": 0.89621123966872,
+          "name": "Sissala West"
+        },
+        {
+          "id": "gb:GHA:ADM2:2480657B91188187265148",
+          "iou": 0.8814724236482148,
+          "name": "Asokwa  Municipal"
+        },
+        {
+          "id": "gb:GHA:ADM2:2480657B92670413622569",
+          "iou": 0.9456123536714599,
+          "name": "Adansi North"
+        },
+        {
+          "id": "gb:GHA:ADM2:2480657B94630675221037",
+          "iou": 0.9210298168687743,
+          "name": "Kwadaso Municipal"
+        },
+        {
+          "id": "gb:GHA:ADM2:2480657B9523556036154",
+          "iou": 0.9270438361136079,
+          "name": "Lambussie-karni"
+        }
+      ],
+      "atlas_source_name_mismatches": [],
+      "named_parent_source_matches": 113,
+      "note": "A parent-name match, source-layer containment, exact label, or overlap measure alone does not establish current parent geography.",
+      "parent_name_mismatches": [],
+      "source_child_coverage_below_0_95": [
+        {
+          "child_covered_by_parent_fraction": 0.9095873627389359,
+          "id": "gb:GHA:ADM2:2480657B13145859726554",
+          "name": "Wassa Amenfi West",
+          "parent_name": "Western Region"
+        },
+        {
+          "child_covered_by_parent_fraction": 0.9389211464476296,
+          "id": "gb:GHA:ADM2:2480657B15542052325310",
+          "name": "Offinso North",
+          "parent_name": "Ashanti Region"
+        },
+        {
+          "child_covered_by_parent_fraction": 0.9114516057180698,
+          "id": "gb:GHA:ADM2:2480657B2337940648547",
+          "name": "Asunafo South",
+          "parent_name": "Ahafo Region"
+        },
+        {
+          "child_covered_by_parent_fraction": 0.9289786766923968,
+          "id": "gb:GHA:ADM2:2480657B28564915274944",
+          "name": "Ejura-sekyedumase",
+          "parent_name": "Ashanti Region"
+        },
+        {
+          "child_covered_by_parent_fraction": 0.9405345324508355,
+          "id": "gb:GHA:ADM2:2480657B35206472883168",
+          "name": "Wa West",
+          "parent_name": "Upper West Region"
+        },
+        {
+          "child_covered_by_parent_fraction": 0.9186435814416579,
+          "id": "gb:GHA:ADM2:2480657B38880944597072",
+          "name": "Nkoranza South",
+          "parent_name": "Bono East Region"
+        },
+        {
+          "child_covered_by_parent_fraction": 0.9167897960772818,
+          "id": "gb:GHA:ADM2:2480657B39079904074923",
+          "name": "Asante Akim South",
+          "parent_name": "Ashanti Region"
+        },
+        {
+          "child_covered_by_parent_fraction": 0.855649969059295,
+          "id": "gb:GHA:ADM2:2480657B44306962794399",
+          "name": "Jaman North",
+          "parent_name": "Bono Region"
+        },
+        {
+          "child_covered_by_parent_fraction": 0.8987832770626936,
+          "id": "gb:GHA:ADM2:2480657B57037677938762",
+          "name": "Asutifi South",
+          "parent_name": "Ahafo Region"
+        },
+        {
+          "child_covered_by_parent_fraction": 0.867881193889207,
+          "id": "gb:GHA:ADM2:2480657B6504340506710",
+          "name": "Ahafo Ano North",
+          "parent_name": "Ashanti Region"
+        },
+        {
+          "child_covered_by_parent_fraction": 0.9350024459273792,
+          "id": "gb:GHA:ADM2:2480657B66384530229883",
+          "name": "Sawla-tuna-kalba",
+          "parent_name": "Savannah Region"
+        },
+        {
+          "child_covered_by_parent_fraction": 0.9112544080145834,
+          "id": "gb:GHA:ADM2:2480657B68079094729511",
+          "name": "Tano North Municipal",
+          "parent_name": "Ahafo Region"
+        },
+        {
+          "child_covered_by_parent_fraction": 0.8596505103707871,
+          "id": "gb:GHA:ADM2:2480657B69696031481498",
+          "name": "North Gonja",
+          "parent_name": "Savannah Region"
+        },
+        {
+          "child_covered_by_parent_fraction": 0.8880530106850314,
+          "id": "gb:GHA:ADM2:2480657B75157144819377",
+          "name": "Techiman North",
+          "parent_name": "Bono East Region"
+        },
+        {
+          "child_covered_by_parent_fraction": 0.9055676937710645,
+          "id": "gb:GHA:ADM2:2480657B76140913943028",
+          "name": "Sissala West",
+          "parent_name": "Upper West Region"
+        },
+        {
+          "child_covered_by_parent_fraction": 0.8705670359467425,
+          "id": "gb:GHA:ADM2:2480657B78695952433486",
+          "name": "Techiman Municipal",
+          "parent_name": "Bono East Region"
+        },
+        {
+          "child_covered_by_parent_fraction": 0.88257279202052,
+          "id": "gb:GHA:ADM2:2480657B7921909152770",
+          "name": "Wassa East",
+          "parent_name": "Western Region"
+        },
+        {
+          "child_covered_by_parent_fraction": 0.882249184533001,
+          "id": "gb:GHA:ADM2:2480657B7981851544250",
+          "name": "Tano South Municipal",
+          "parent_name": "Ahafo Region"
+        },
+        {
+          "child_covered_by_parent_fraction": 0.9476608939788523,
+          "id": "gb:GHA:ADM2:2480657B98266466330064",
+          "name": "Asutifi North",
+          "parent_name": "Ahafo Region"
+        },
+        {
+          "child_covered_by_parent_fraction": 0.9298270554809837,
+          "id": "gb:GHA:ADM2:2480657B99130964172058",
+          "name": "Shama",
+          "parent_name": "Western Region"
+        }
+      ]
+    },
+    "GMB": {
+      "atlas_geometry_to_source_iou_below_0_95": [
+        {
+          "id": "gb:GMB:ADM2:56634734B11412565261125",
+          "iou": 0.9301422487844159,
+          "name": "Kiang East"
+        },
+        {
+          "id": "gb:GMB:ADM2:56634734B1390118495461",
+          "iou": 0.9370978362325013,
+          "name": "Kombo South"
+        },
+        {
+          "id": "gb:GMB:ADM2:56634734B22755125769096",
+          "iou": 0.8817902729194381,
+          "name": "Janjanbureh"
+        },
+        {
+          "id": "gb:GMB:ADM2:56634734B42615963496738",
+          "iou": 0.9330446283991407,
+          "name": "Foni Kansala"
+        },
+        {
+          "id": "gb:GMB:ADM2:56634734B57962636272806",
+          "iou": 0.9170501483536575,
+          "name": "Upper Saloum"
+        },
+        {
+          "id": "gb:GMB:ADM2:56634734B6993374345684",
+          "iou": 0.9194317888152815,
+          "name": "Jarra central"
+        },
+        {
+          "id": "gb:GMB:ADM2:56634734B7386392108855",
+          "iou": 0.9006284699580832,
+          "name": "Foni Jarrol"
+        },
+        {
+          "id": "gb:GMB:ADM2:56634734B81557661921178",
+          "iou": 0.9435462669822272,
+          "name": "Niamina West"
+        },
+        {
+          "id": "gb:GMB:ADM2:56634734B85088174381509",
+          "iou": 0.9116979216715639,
+          "name": "Nianija"
+        },
+        {
+          "id": "gb:GMB:ADM2:56634734B99377934241318",
+          "iou": 0.879291773482438,
+          "name": "Jarra East"
+        }
+      ],
+      "atlas_source_name_mismatches": [],
+      "named_parent_source_matches": 39,
+      "note": "A parent-name match, source-layer containment, exact label, or overlap measure alone does not establish current parent geography.",
+      "parent_name_mismatches": [],
+      "source_child_coverage_below_0_95": []
+    }
+  },
+  "source_remainders": {
+    "CIV": {
+      "note": "Outside the exact packet member roster; counts do not distinguish another issue packet from a true source gap.",
+      "retained_source_layer_features": 510,
+      "scope_represented_source_shapeids": 63,
+      "source_layer_remainder_ids": [
+        "97208781B10157612193250",
+        "97208781B11201436549173",
+        "97208781B11679432118840",
+        "97208781B11870825623553",
+        "97208781B11881347899246",
+        "97208781B11884428331085",
+        "97208781B11986933289454",
+        "97208781B12116179323626",
+        "97208781B1322111589364",
+        "97208781B13680132316718",
+        "97208781B1379540722875",
+        "97208781B1399761331342",
+        "97208781B14254656136001",
+        "97208781B14596017267906",
+        "97208781B15477288261625",
+        "97208781B15527909642797",
+        "97208781B15600823847155",
+        "97208781B15863916548956",
+        "97208781B16015063034438",
+        "97208781B16018492421537",
+        "97208781B16408365293694",
+        "97208781B16639903346083",
+        "97208781B16751050333349",
+        "97208781B16758756962040",
+        "97208781B16898116601135",
+        "97208781B16930806216989",
+        "97208781B1707251989423",
+        "97208781B1715413200145",
+        "97208781B17699415259608",
+        "97208781B178154763625",
+        "97208781B18063913769186",
+        "97208781B18518562733679",
+        "97208781B19103881325711",
+        "97208781B19515924162950",
+        "97208781B19823152407028",
+        "97208781B19825786139148",
+        "97208781B20006459179310",
+        "97208781B20053123627263",
+        "97208781B20317620952294",
+        "97208781B203326147101",
+        "97208781B20963127841960",
+        "97208781B21141232410562",
+        "97208781B21322023716675",
+        "97208781B21338986524927",
+        "97208781B21606803060639",
+        "97208781B21607473362482",
+        "97208781B21764011959320",
+        "97208781B2185814868766",
+        "97208781B22284721457010",
+        "97208781B22300824819671",
+        "97208781B22737260062304",
+        "97208781B22798337209941",
+        "97208781B22861051576242",
+        "97208781B23079594703579",
+        "97208781B23215003256161",
+        "97208781B23251034005882",
+        "97208781B23290172923267",
+        "97208781B23550250249751",
+        "97208781B23818188516926",
+        "97208781B2387604003307",
+        "97208781B24033618063873",
+        "97208781B24130476822111",
+        "97208781B24372000323584",
+        "97208781B24776569113623",
+        "97208781B25279176896097",
+        "97208781B25502414115375",
+        "97208781B25597152544157",
+        "97208781B25597988917018",
+        "97208781B26245806980112",
+        "97208781B27027001967971",
+        "97208781B27222280957683",
+        "97208781B27892391401093",
+        "97208781B27932736709238",
+        "97208781B27967605702911",
+        "97208781B28133579789332",
+        "97208781B28465230267782",
+        "97208781B28521728070732",
+        "97208781B28545570267730",
+        "97208781B28641331162674",
+        "97208781B28654380135847",
+        "97208781B28905823015626",
+        "97208781B29147870022770",
+        "97208781B29449216598442",
+        "97208781B29516824292901",
+        "97208781B29653055980954",
+        "97208781B29740741694616",
+        "97208781B2989374620490",
+        "97208781B30126836635493",
+        "97208781B30212631503759",
+        "97208781B30290349067993",
+        "97208781B30724080876058",
+        "97208781B30751485488304",
+        "97208781B3079412783519",
+        "97208781B30808765710658",
+        "97208781B31211302068608",
+        "97208781B31348963651867",
+        "97208781B31361191321140",
+        "97208781B31382860893954",
+        "97208781B31383292827998",
+        "97208781B31416047203036",
+        "97208781B3196658918480",
+        "97208781B32002050219213",
+        "97208781B32048607078538",
+        "97208781B32055240503834",
+        "97208781B32587209316404",
+        "97208781B32740797067717",
+        "97208781B32897076856851",
+        "97208781B33171781573209",
+        "97208781B33562053387529",
+        "97208781B34110304150550",
+        "97208781B34302401196100",
+        "97208781B34317634099596",
+        "97208781B3483924164565",
+        "97208781B35260491286339",
+        "97208781B35455974626275",
+        "97208781B35854712916985",
+        "97208781B35895182030990",
+        "97208781B3606600851093",
+        "97208781B36505394590974",
+        "97208781B36615310729722",
+        "97208781B36647530542882",
+        "97208781B36866823088106",
+        "97208781B37198405051995",
+        "97208781B37695921546316",
+        "97208781B3802885033047",
+        "97208781B38203482147219",
+        "97208781B38480613701828",
+        "97208781B38638087447723",
+        "97208781B38640006000416",
+        "97208781B38768578841882",
+        "97208781B38790553549950",
+        "97208781B39149646617437",
+        "97208781B39432625011597",
+        "97208781B39607176636925",
+        "97208781B39655410650168",
+        "97208781B40000292769847",
+        "97208781B40427177679824",
+        "97208781B40514532245434",
+        "97208781B40820422658221",
+        "97208781B40882713966094",
+        "97208781B40976580928226",
+        "97208781B41024287314014",
+        "97208781B41403758936369",
+        "97208781B41763889641511",
+        "97208781B4184958263815",
+        "97208781B41857222319985",
+        "97208781B42620911035869",
+        "97208781B43224194617882",
+        "97208781B43338094607108",
+        "97208781B43339459578505",
+        "97208781B43470191854221",
+        "97208781B43836402688143",
+        "97208781B43915365556699",
+        "97208781B43928365345606",
+        "97208781B43936330423339",
+        "97208781B44087097373944",
+        "97208781B4464418924677",
+        "97208781B44672956904122",
+        "97208781B45405159990692",
+        "97208781B45506149812248",
+        "97208781B45617967233218",
+        "97208781B45665733877126",
+        "97208781B45913635973305",
+        "97208781B46095565828075",
+        "97208781B46150013792583",
+        "97208781B46163807011872",
+        "97208781B4624637694591",
+        "97208781B46630915241510",
+        "97208781B47018033416586",
+        "97208781B47770005211444",
+        "97208781B47883054619316",
+        "97208781B48051259717159",
+        "97208781B48140615002975",
+        "97208781B48237415241068",
+        "97208781B48399580961882",
+        "97208781B48697705911242",
+        "97208781B48786101651194",
+        "97208781B48788955670746",
+        "97208781B48922341726519",
+        "97208781B48953714576562",
+        "97208781B48966333598317",
+        "97208781B49059605853173",
+        "97208781B49124498000731",
+        "97208781B49129051138126",
+        "97208781B49334729964673",
+        "97208781B49542155600351",
+        "97208781B49585973755977",
+        "97208781B49832021990145",
+        "97208781B50164001504088",
+        "97208781B50465941006768",
+        "97208781B50490375195384",
+        "97208781B50496152560806",
+        "97208781B50700511028321",
+        "97208781B50923022989376",
+        "97208781B51614326256418",
+        "97208781B51676309593302",
+        "97208781B52115081200622",
+        "97208781B52171204994385",
+        "97208781B52276278133000",
+        "97208781B52376651385402",
+        "97208781B52517887147937",
+        "97208781B52533939884880",
+        "97208781B5266533926639",
+        "97208781B53164727477852",
+        "97208781B5332127061288",
+        "97208781B53429941504482",
+        "97208781B53457013095353",
+        "97208781B53484495974838",
+        "97208781B5350148227657",
+        "97208781B53843590338352",
+        "97208781B54206211363924",
+        "97208781B55329246973167",
+        "97208781B55365319431945",
+        "97208781B55506405816748",
+        "97208781B55669020793109",
+        "97208781B55985343841314",
+        "97208781B55997589958985",
+        "97208781B56137498964327",
+        "97208781B56555456967170",
+        "97208781B57260927219017",
+        "97208781B57280370247049",
+        "97208781B57359259361249",
+        "97208781B57438439336764",
+        "97208781B57512097691474",
+        "97208781B57590190495425",
+        "97208781B57871349224874",
+        "97208781B57939143035682",
+        "97208781B57958341366588",
+        "97208781B58009091671711",
+        "97208781B58294459424011",
+        "97208781B58627232923774",
+        "97208781B59108895157812",
+        "97208781B59224814545140",
+        "97208781B59572608879127",
+        "97208781B59587922748093",
+        "97208781B59630716168640",
+        "97208781B60092807239991",
+        "97208781B60216025334520",
+        "97208781B6028709527752",
+        "97208781B60350436539807",
+        "97208781B60578758839066",
+        "97208781B61036311049699",
+        "97208781B61225441868759",
+        "97208781B61535562407480",
+        "97208781B61560981812956",
+        "97208781B62025844267730",
+        "97208781B62035240784515",
+        "97208781B62047130957829",
+        "97208781B62243133182249",
+        "97208781B62420471656370",
+        "97208781B62487661802726",
+        "97208781B6251674116205",
+        "97208781B62623606131378",
+        "97208781B62716107578377",
+        "97208781B6285694181313",
+        "97208781B63139432837933",
+        "97208781B63321427393049",
+        "97208781B63836344729549",
+        "97208781B63862796465730",
+        "97208781B63887713977042",
+        "97208781B64068803945948",
+        "97208781B64110027733651",
+        "97208781B64561630595214",
+        "97208781B64680323145016",
+        "97208781B65006749613232",
+        "97208781B65130428918282",
+        "97208781B6542724937692",
+        "97208781B65534247378742",
+        "97208781B65961840813050",
+        "97208781B66139148706712",
+        "97208781B66266340076843",
+        "97208781B66525471000473",
+        "97208781B66565295768879",
+        "97208781B66824130892640",
+        "97208781B66840708299350",
+        "97208781B66855166995146",
+        "97208781B66947853400658",
+        "97208781B67178086415785",
+        "97208781B67300902404476",
+        "97208781B67419213060364",
+        "97208781B68318458790910",
+        "97208781B68380869601743",
+        "97208781B68406481714739",
+        "97208781B69011450381491",
+        "97208781B69071023984953",
+        "97208781B69168251085893",
+        "97208781B6953247789659",
+        "97208781B6959194004825",
+        "97208781B69882029195929",
+        "97208781B7000693746900",
+        "97208781B70336843007688",
+        "97208781B70502192334682",
+        "97208781B7051126132716",
+        "97208781B70701813262699",
+        "97208781B71177898338975",
+        "97208781B71195816645295",
+        "97208781B71549231984623",
+        "97208781B71573544716856",
+        "97208781B71601594873451",
+        "97208781B71648428513367",
+        "97208781B71726194632813",
+        "97208781B71736324673926",
+        "97208781B71756364423359",
+        "97208781B72338404024633",
+        "97208781B72545992461001",
+        "97208781B72611779505128",
+        "97208781B72651309888103",
+        "97208781B72675916521522",
+        "97208781B72810703779687",
+        "97208781B72948044564142",
+        "97208781B73186434972039",
+        "97208781B73574978712089",
+        "97208781B73752491662600",
+        "97208781B74042578927029",
+        "97208781B74615681916174",
+        "97208781B74683699682903",
+        "97208781B7480480215844",
+        "97208781B74814593631378",
+        "97208781B74973421178114",
+        "97208781B75221340068098",
+        "97208781B75364742852651",
+        "97208781B75995991347444",
+        "97208781B76112163078618",
+        "97208781B76272002773218",
+        "97208781B76467317158120",
+        "97208781B76519329112770",
+        "97208781B76565601953115",
+        "97208781B76700241510024",
+        "97208781B76890827547883",
+        "97208781B77036551275855",
+        "97208781B77111576932283",
+        "97208781B77308155963342",
+        "97208781B77366019963794",
+        "97208781B77455893735950",
+        "97208781B77609296005763",
+        "97208781B77759478483923",
+        "97208781B7777067502261",
+        "97208781B78034360246985",
+        "97208781B78060189704403",
+        "97208781B78151965585725",
+        "97208781B78348521469186",
+        "97208781B78500814896153",
+        "97208781B78554116184397",
+        "97208781B78766542901998",
+        "97208781B79194903239642",
+        "97208781B79203093857015",
+        "97208781B79422301254172",
+        "97208781B79477211978774",
+        "97208781B79507402496729",
+        "97208781B79661375005677",
+        "97208781B79712024726161",
+        "97208781B80176496097675",
+        "97208781B81065183839398",
+        "97208781B8113546039676",
+        "97208781B81251785358251",
+        "97208781B81484527004172",
+        "97208781B81749948691742",
+        "97208781B82011274263183",
+        "97208781B82581088736791",
+        "97208781B83358965655365",
+        "97208781B83584951776256",
+        "97208781B84002326611864",
+        "97208781B84038892786796",
+        "97208781B84299212231717",
+        "97208781B84405559218834",
+        "97208781B84606142520905",
+        "97208781B85414361529191",
+        "97208781B85455704698498",
+        "97208781B8549979726306",
+        "97208781B85694674600174",
+        "97208781B86378961288934",
+        "97208781B869242666794",
+        "97208781B86951637293939",
+        "97208781B87038499547210",
+        "97208781B87136240192209",
+        "97208781B87226277819358",
+        "97208781B8731034225583",
+        "97208781B87334603869884",
+        "97208781B87701466318780",
+        "97208781B87716043914490",
+        "97208781B87892295743738",
+        "97208781B88400045889930",
+        "97208781B88410375487944",
+        "97208781B88629083279882",
+        "97208781B88647580296607",
+        "97208781B88736597708911",
+        "97208781B88805595698457",
+        "97208781B88939397987752",
+        "97208781B89076629063657",
+        "97208781B89198916212226",
+        "97208781B90176693202183",
+        "97208781B90560776224811",
+        "97208781B90766231304998",
+        "97208781B90821978333326",
+        "97208781B90938490822483",
+        "97208781B91018472576079",
+        "97208781B91374675547",
+        "97208781B91375892980153",
+        "97208781B91471046110409",
+        "97208781B91634343233886",
+        "97208781B91843295710316",
+        "97208781B92135089583219",
+        "97208781B92357866929473",
+        "97208781B9239515198778",
+        "97208781B92580155287860",
+        "97208781B9258660541315",
+        "97208781B92601313486978",
+        "97208781B92717938417659",
+        "97208781B93209963538851",
+        "97208781B93228770374476",
+        "97208781B9335734538553",
+        "97208781B93409827095779",
+        "97208781B93496848452999",
+        "97208781B93578745835366",
+        "97208781B93587581829975",
+        "97208781B93671619897970",
+        "97208781B94169592532596",
+        "97208781B94228979198814",
+        "97208781B94303292204767",
+        "97208781B94690200048660",
+        "97208781B94724054903487",
+        "97208781B94880520389430",
+        "97208781B95001641226886",
+        "97208781B95034651247808",
+        "97208781B9590758772947",
+        "97208781B96399202877003",
+        "97208781B96611595288452",
+        "97208781B97160176401755",
+        "97208781B97431591500121",
+        "97208781B97512845453301",
+        "97208781B97630223221041",
+        "97208781B97851533032092",
+        "97208781B97931087454423",
+        "97208781B97941677137453",
+        "97208781B98005497287274",
+        "97208781B98093202323568",
+        "97208781B98644002829591",
+        "97208781B9869807611775",
+        "97208781B9893828972421",
+        "97208781B99008253798247",
+        "97208781B9904966968609",
+        "97208781B99219769012955",
+        "97208781B99390674922981",
+        "97208781B99403018415653",
+        "97208781B99583832672895",
+        "97208781B99788682390598",
+        "97208781B99989752666504"
+      ],
+      "source_shapeids_outside_this_issue_packet": 447
+    },
+    "GHA": {
+      "note": "Outside the exact packet member roster; counts do not distinguish another issue packet from a true source gap.",
+      "retained_source_layer_features": 260,
+      "scope_represented_source_shapeids": 113,
+      "source_layer_remainder_ids": [
+        "2480657B1027184338147",
+        "2480657B11085167902059",
+        "2480657B11620193732867",
+        "2480657B11720749290533",
+        "2480657B12570528382412",
+        "2480657B13680530894334",
+        "2480657B14989848452061",
+        "2480657B15531990631346",
+        "2480657B16330149254954",
+        "2480657B16553972090858",
+        "2480657B18075285363234",
+        "2480657B19171272300465",
+        "2480657B19246099956301",
+        "2480657B19364380807593",
+        "2480657B20036139360918",
+        "2480657B20464126159243",
+        "2480657B20696154785284",
+        "2480657B20833842549797",
+        "2480657B22323593180175",
+        "2480657B22724340600972",
+        "2480657B2289284937660",
+        "2480657B23952932171735",
+        "2480657B24635332146555",
+        "2480657B24752518727633",
+        "2480657B24956698199939",
+        "2480657B2570339807900",
+        "2480657B2595733520620",
+        "2480657B26264719340764",
+        "2480657B26285365473669",
+        "2480657B26321648161032",
+        "2480657B26354408705676",
+        "2480657B27215926841583",
+        "2480657B27395942809935",
+        "2480657B27736636353654",
+        "2480657B29295475961782",
+        "2480657B29980074443403",
+        "2480657B30493820921",
+        "2480657B3117094904377",
+        "2480657B31989943834082",
+        "2480657B32538733435540",
+        "2480657B34044169329977",
+        "2480657B35012095074914",
+        "2480657B35240131522033",
+        "2480657B35357833911053",
+        "2480657B35637781657714",
+        "2480657B36155100412367",
+        "2480657B36678414015123",
+        "2480657B37277876999120",
+        "2480657B39319620746428",
+        "2480657B39435178884870",
+        "2480657B39710750100206",
+        "2480657B39800519073464",
+        "2480657B41485746076017",
+        "2480657B42193515445029",
+        "2480657B42231307300111",
+        "2480657B42374646075926",
+        "2480657B42813544323317",
+        "2480657B44214183650816",
+        "2480657B44541331554905",
+        "2480657B45105521184723",
+        "2480657B45731574572143",
+        "2480657B47242267083805",
+        "2480657B4921606442052",
+        "2480657B50723205918173",
+        "2480657B50810028950834",
+        "2480657B5172435396617",
+        "2480657B52907018957478",
+        "2480657B5340678211162",
+        "2480657B53762921220630",
+        "2480657B54074930978119",
+        "2480657B54162505201867",
+        "2480657B54302337253194",
+        "2480657B54607197552612",
+        "2480657B56307698722921",
+        "2480657B56494255769768",
+        "2480657B5704764806917",
+        "2480657B57614018833162",
+        "2480657B57636315193797",
+        "2480657B57712569843933",
+        "2480657B59311092791004",
+        "2480657B60779202001283",
+        "2480657B63323125119927",
+        "2480657B63581433334614",
+        "2480657B6434141016984",
+        "2480657B6503151283934",
+        "2480657B65169023596143",
+        "2480657B66034837272834",
+        "2480657B66464396810782",
+        "2480657B66646573774103",
+        "2480657B6669757606157",
+        "2480657B67017614982997",
+        "2480657B68256913631937",
+        "2480657B68278489034036",
+        "2480657B6837938265733",
+        "2480657B68408124911047",
+        "2480657B69717792501029",
+        "2480657B70680953475259",
+        "2480657B71012260699376",
+        "2480657B72113427832631",
+        "2480657B72362309510067",
+        "2480657B72410528378772",
+        "2480657B73071492710762",
+        "2480657B73751367479109",
+        "2480657B74011824532465",
+        "2480657B74414618551217",
+        "2480657B74727980909537",
+        "2480657B7526405183619",
+        "2480657B76285553918092",
+        "2480657B76540044095481",
+        "2480657B7709388821831",
+        "2480657B77450065295387",
+        "2480657B77934780741907",
+        "2480657B78318361422462",
+        "2480657B78422611914106",
+        "2480657B78562505377679",
+        "2480657B79217814678772",
+        "2480657B79468660523811",
+        "2480657B79730913179219",
+        "2480657B80684943588404",
+        "2480657B81401264659986",
+        "2480657B81635079362570",
+        "2480657B81968156308620",
+        "2480657B83789922051105",
+        "2480657B84792930556748",
+        "2480657B85535261310615",
+        "2480657B8553529614763",
+        "2480657B86034404720136",
+        "2480657B87039075961323",
+        "2480657B87566941811639",
+        "2480657B88791559733000",
+        "2480657B89828953333594",
+        "2480657B90334619080238",
+        "2480657B90617621807510",
+        "2480657B92273702685271",
+        "2480657B92948775681515",
+        "2480657B93484130612637",
+        "2480657B94460481801793",
+        "2480657B94892111901595",
+        "2480657B95199515281033",
+        "2480657B96271436146347",
+        "2480657B96734395613726",
+        "2480657B96936068561499",
+        "2480657B97498759939018",
+        "2480657B98999442599484",
+        "2480657B99246651758289",
+        "2480657B99533750399286",
+        "2480657B9973692574538"
+      ],
+      "source_shapeids_outside_this_issue_packet": 147
+    },
+    "GMB": {
+      "note": "Outside the exact packet member roster; counts do not distinguish another issue packet from a true source gap.",
+      "retained_source_layer_features": 48,
+      "scope_represented_source_shapeids": 48,
+      "source_layer_remainder_ids": [],
+      "source_shapeids_outside_this_issue_packet": 0
+    }
+  },
+  "subject_count": 216
+}

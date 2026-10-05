@@ -58,9 +58,31 @@ test('Cloudflare config protects assets and never provisions or migrates D1', ()
   assert.equal(config.vars.ATLAS_CONTENT_BACKEND, 'postgres');
   assert.equal(config.vars.ATLAS_READ_ONLY, '1');
   assert.equal(config.vars.ATLAS_ACCESS_AUD, '');
+  assert.equal(config.vars.ATLAS_PUBLIC_READ_ONLY, '0');
+  assert.equal(cloudflareConfig({publicReadOnly: true}).vars.ATLAS_PUBLIC_READ_ONLY, '1');
+  assert.equal(cloudflareConfig({publicReadOnly: 'true'}).vars.ATLAS_PUBLIC_READ_ONLY, '0');
   assert.equal(config.r2_buckets[0].bucket_name, 'worldatlas-archives');
   assert.equal('d1_databases' in config, false);
   assert.equal('DATABASE_URL' in config.vars, false);
+});
+
+test('explicit public mode permits real assets/API reads and always blocks writes', async () => {
+  let calls = 0;
+  const worker = protectedWorker({fetch(request, actualEnv, ctx) {
+    calls++; assert.equal(actualEnv.ATLAS_READ_ONLY, '1'); assert.equal(ctx, 'context');
+    return atlas.fetch(request, actualEnv, ctx);
+  }}, {keys: () => {throw Error('Public reads must not request JWT keys');}});
+  const publicEnv = {ATLAS_PUBLIC_READ_ONLY: '1', ATLAS_READ_ONLY: '0', ASSETS: {fetch: () => new Response('asset')}};
+  assert.equal(await (await worker.fetch(req('/'), publicEnv, 'context')).text(), 'asset');
+  assert.equal((await (await worker.fetch(req('/api/classifications'), publicEnv, 'context')).json()).version, 1);
+  for (const method of ['POST', 'PUT', 'PATCH', 'DELETE']) {
+    assert.equal((await worker.fetch(req('/api/records/import', undefined, method), publicEnv, 'context')).status, 503);
+  }
+  assert.equal(calls, 2);
+  for (const flag of [undefined, '', 'true', '0', 1]) {
+    assert.equal((await worker.fetch(req('/api/classifications'), {...publicEnv, ATLAS_PUBLIC_READ_ONLY: flag})).status, 503);
+  }
+  assert.equal(calls, 2);
 });
 
 test('authenticated wrapper preserves the real atlas API and static asset routing', async () => {
