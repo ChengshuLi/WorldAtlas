@@ -1,0 +1,13 @@
+{
+  "method_id": "packet-generator",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "control": "Original 213-feature source and retained partition inputs yield byte-identical complete source crosswalk results",
+  "canonical_result_sha256": "65e403b35d293a8d7a85d79a9699498b9f915eda65f152575f2bad35456ddb17",
+  "partition_source_sha256": {
+    "geoBoundaries-ZAF-ADM3-part-01-of-02.geojson": "9bf1c731ab636ceb7adfbf94ce9ce10fa911fe107fe5356a05e0ded79888dc5a",
+    "geoBoundaries-ZAF-ADM3-part-02-of-02.geojson": "6faa04142bdfbfa8126c8fe65693f8536543f4dc3c423d543d3f324d9677f126"
+  },
+  "subject_rows": 196,
+  "valid_geometry_pairs": 196
+}

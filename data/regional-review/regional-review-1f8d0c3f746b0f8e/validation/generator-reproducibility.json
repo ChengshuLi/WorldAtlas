@@ -1,0 +1,17 @@
+{
+  "method_id": "packet-generator",
+  "kind": "reproducibility",
+  "outcome": "passed",
+  "run_one_sha256": "65e403b35d293a8d7a85d79a9699498b9f915eda65f152575f2bad35456ddb17",
+  "run_two_sha256": "65e403b35d293a8d7a85d79a9699498b9f915eda65f152575f2bad35456ddb17",
+  "outputs_equal": true,
+  "generated_packet_files_sha256": {
+    "source-crosswalk.json": "65e403b35d293a8d7a85d79a9699498b9f915eda65f152575f2bad35456ddb17",
+    "statsa-review.tsv": "acacfdc6b386e5655e62ff4d75be3beee7581a71c1ed83169965e552ff445d8b",
+    "statsa-screening-summary.json": "5f11b4ee796c105fafee0cab7e08898fcdd208171703f6ae7939bbcb8cdb02af",
+    "unit-measurements.json": "5809648cc2ccfa94dbc458f8d0f489675ae295dcb2648f44625d09709bbb53ea",
+    "parent-review.json": "555dcf5183a84c389a44a0949523b7ae45ce5758792a2a4410be40103c8712bd"
+  },
+  "summary_stdout_sha256": "5f11b4ee796c105fafee0cab7e08898fcdd208171703f6ae7939bbcb8cdb02af",
+  "output_equality": "source crosswalk original-vs-partitions equals; Stats SA run-two stdout equals retained summary output"
+}

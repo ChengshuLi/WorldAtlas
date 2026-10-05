@@ -1,0 +1,9 @@
+{
+  "method_id": "packet-generator",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "control": "Partition generator rejects substituted source bytes before parsing or emitting parts",
+  "substitute_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+  "exit_code": 1,
+  "diagnostic": "Original ADM3 file SHA-256 mismatch"
+}
