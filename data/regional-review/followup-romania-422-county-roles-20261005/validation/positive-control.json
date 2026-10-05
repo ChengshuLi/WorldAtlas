@@ -1,0 +1,13 @@
+{
+  "method_id": "romania-42-unit-source-and-parent-crosswalk",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "source_feature_count": 42,
+  "issue_subject_count": 42,
+  "official_role_counts": {
+    "county": 41,
+    "Bucharest Municipality": 1
+  },
+  "singleton_parent_count": 42,
+  "assertion": "All 42 source shape IDs map uniquely to the exact 42 issue IDs; 41 match the official county roster and one matches the legally distinct Bucharest Municipality; all listed parent nodes are same-name province singletons. This does not validate polygon accuracy."
+}
