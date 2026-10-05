@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "issue": 429,
+  "baseline_commit": "f7b45a2d491ced539ca520979e182bcec9e0e90b",
+  "shapely_version": "2.0.7",
+  "all_pinned_baseline_and_retained_source_bytes_verified": true,
+  "baseline_input_pin_count": 9,
+  "retained_source_pin_count": 28,
+  "issue_scope_count": 268,
+  "scope_ids_sha256_newline_joined": "3e8d528a1889b9e3b598206718acdfc133dc8cbc5b2b862d81946975ca0982ef",
+  "matched_atlas_features": 268,
+  "matched_geoBoundaries_2018_source_features": 268,
+  "matched_TIGERweb_2025_features": 268,
+  "matched_TIGERweb_2026_features": 268,
+  "matched_TIGERweb_2026_area_attribute_features": 268,
+  "province_scope_summary_rows": 5,
+  "province_scope_summary_matches_current_membership": 3,
+  "all_current_land_water_attributes_match_exact_geoid": true,
+  "largest_county_land_share_by_state": [
+    {
+      "state": "Florida",
+      "name": "Collier",
+      "geoid": "12021",
+      "land_area_share": 0.03721755
+    },
+    {
+      "state": "North Carolina",
+      "name": "Robeson",
+      "geoid": "37155",
+      "land_area_share": 0.01948255
+    },
+    {
+      "state": "South Carolina",
+      "name": "Horry",
+      "geoid": "45051",
+      "land_area_share": 0.03768827
+    },
+    {
+      "state": "West Virginia",
+      "name": "Randolph",
+      "geoid": "54083",
+      "land_area_share": 0.04324631
+    }
+  ],
+  "counties_where_reported_water_area_exceeds_land_area": 7,
+  "median_water_to_land_area_ratio_all_scoped_counties": 0.01683409,
+  "median_water_to_land_area_ratio_under_0_95_overlap_screen": 0.35735898,
+  "Census_TIGERweb_2025_national_count": 3235,
+  "Census_TIGERweb_2026_national_count": 3235,
+  "state_counts": {
+    "Florida": 67,
+    "North Carolina": 100,
+    "South Carolina": 46,
+    "West Virginia": 55
+  },
+  "parent_counts": [
+    {
+      "name": "Florida",
+      "id": "framework:province:florida:b4fb65ca8dfe",
+      "count": 67
+    },
+    {
+      "name": "North Carolina",
+      "id": "framework:province:north-carolina:fec219a0870e",
+      "count": 100
+    },
+    {
+      "name": "South Carolina",
+      "id": "framework:province:south-carolina:2f069d91e59d",
+      "count": 46
+    },
+    {
+      "name": "West Virginia",
+      "id": "framework:province:west-virginia:4c9dc6438fb1",
+      "count": 55
+    }
+  ],
+  "all_names_and_state_parents_match": true,
+  "all_source_roles_are_USA_ADM2_counties": true,
+  "all_geometries_valid_before_repair": true,
+  "multipart_2018_feature_count": 9,
+  "multipart_2026_feature_count": 3,
+  "maximum_source_polygon_parts": 9,
+  "maximum_TIGERweb_2026_polygon_parts": 3,
+  "multipart_screen_limit": "Multiple polygon parts can reflect islands or source cuts; part counts do not establish missing/extra territory.",
+  "original_issue_West_Virginia_partition": "scope metadata records 54+1 under two old IDs; all 55 current children resolve to one current province parent",
+  "invalid_geometry_ids": [],
+  "planar_epsg4326_iou_2018_to_2026": {
+    "minimum": 0.2850468239424246,
+    "p25": 0.980302302922529,
+    "median": 0.9886071202946821,
+    "p75": 0.9930686814907593,
+    "maximum": 0.9992751565368818
+  },
+  "planar_epsg4326_iou_2018_to_2025": {
+    "minimum": 0.2850468239424246,
+    "median": 0.9886071202946821,
+    "maximum": 0.9992751565368818
+  },
+  "planar_epsg4326_iou_2025_to_2026": {
+    "minimum": 0.9949754139872545,
+    "median": 1.0,
+    "maximum": 1.0
+  },
+  "under_0_95_overlap_screen_count": 57,
+  "under_0_95_state_counts": {
+    "Florida": 35,
+    "North Carolina": 16,
+    "South Carolina": 6
+  },
+  "under_0_95_ids": [
+    "gb:USA:ADM2:52423323B11454809492263",
+    "gb:USA:ADM2:52423323B12833551098527",
+    "gb:USA:ADM2:52423323B12945765623889",
+    "gb:USA:ADM2:52423323B1474651347139",
+    "gb:USA:ADM2:52423323B15178674781049",
+    "gb:USA:ADM2:52423323B17101546722120",
+    "gb:USA:ADM2:52423323B18388852349045",
+    "gb:USA:ADM2:52423323B23187437311114",
+    "gb:USA:ADM2:52423323B24644642941407",
+    "gb:USA:ADM2:52423323B27439582532785",
+    "gb:USA:ADM2:52423323B2908823577252",
+    "gb:USA:ADM2:52423323B30660787387820",
+    "gb:USA:ADM2:52423323B33793433125252",
+    "gb:USA:ADM2:52423323B35059140048006",
+    "gb:USA:ADM2:52423323B36348632800300",
+    "gb:USA:ADM2:52423323B38780973615632",
+    "gb:USA:ADM2:52423323B39160011861592",
+    "gb:USA:ADM2:52423323B39402203079771",
+    "gb:USA:ADM2:52423323B44157144266829",
+    "gb:USA:ADM2:52423323B44461654915973",
+    "gb:USA:ADM2:52423323B44486980116087",
+    "gb:USA:ADM2:52423323B45505395463487",
+    "gb:USA:ADM2:52423323B46156622998042",
+    "gb:USA:ADM2:52423323B47137025507841",
+    "gb:USA:ADM2:52423323B48942229676406",
+    "gb:USA:ADM2:52423323B49658569394047",
+    "gb:USA:ADM2:52423323B51150866941712",
+    "gb:USA:ADM2:52423323B51894454867093",
+    "gb:USA:ADM2:52423323B55479715593619",
+    "gb:USA:ADM2:52423323B57598865741188",
+    "gb:USA:ADM2:52423323B57626365826979",
+    "gb:USA:ADM2:52423323B58777265344291",
+    "gb:USA:ADM2:52423323B58883260045522",
+    "gb:USA:ADM2:52423323B59284003127327",
+    "gb:USA:ADM2:52423323B60614723714205",
+    "gb:USA:ADM2:52423323B60640707975629",
+    "gb:USA:ADM2:52423323B64112119736585",
+    "gb:USA:ADM2:52423323B68904174883849",
+    "gb:USA:ADM2:52423323B70070544976743",
+    "gb:USA:ADM2:52423323B7185899041346",
+    "gb:USA:ADM2:52423323B74651487208839",
+    "gb:USA:ADM2:52423323B7621511423784",
+    "gb:USA:ADM2:52423323B76675634203570",
+    "gb:USA:ADM2:52423323B76793643920341",
+    "gb:USA:ADM2:52423323B80488084984098",
+    "gb:USA:ADM2:52423323B83657020181819",
+    "gb:USA:ADM2:52423323B84079682288186",
+    "gb:USA:ADM2:52423323B84884093129235",
+    "gb:USA:ADM2:52423323B90270003054506",
+    "gb:USA:ADM2:52423323B92612294973993",
+    "gb:USA:ADM2:52423323B94618395838075",
+    "gb:USA:ADM2:52423323B9469904891992",
+    "gb:USA:ADM2:52423323B96529923169881",
+    "gb:USA:ADM2:52423323B97123089850170",
+    "gb:USA:ADM2:52423323B97274503585716",
+    "gb:USA:ADM2:52423323B98740457076881",
+    "gb:USA:ADM2:52423323B9967886911021"
+  ],
+  "screen_limit": "Overlap is planar in EPSG:4326 and prioritizes inspection only. Differences may reflect boundary vintage, generalized shorelines, and water extents; TIGER statistical boundaries disclaim jurisdictional determinations. Neither high nor low overlap alone justifies correction or approval.",
+  "output": "individual-assessments.csv",
+  "output_sha256": "b059517318b123da0e41f3457ef44b4c322c8f9c0f00842437eb284ca42b4873",
+  "province_assessments_output": "province-assessments.csv",
+  "province_assessments_sha256": "c233ef4030ddb6882e6b281d35e5e39bf5634ef95885552ce657eb6e6bc7cccb"
+}
