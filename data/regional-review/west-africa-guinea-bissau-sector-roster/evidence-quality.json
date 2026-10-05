@@ -46,7 +46,7 @@
   ],
   "subject_ids_sha256": "e019ccbc7d300050962b0920ccff7782d991bcee1b70ed776ca5bf6543e943a1",
   "baseline": {
-    "commit": "6b60f1598b7b1f222b671cb57e12561fd3c3fb93",
+    "commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344",
     "files": [
       {
         "path": "data/regional-review/regional-review-1deb892647c1aa26/scope.json",
@@ -73,6 +73,13 @@
         "path": "data/geography/part-9.json",
         "bytes": 5729632,
         "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-1deb892647c1aa26/reproduction/subject-assessments.csv",
+        "bytes": 163958,
+        "sha256": "142fb1e558300db05873b972e22fcae2e5c38305954ddcd046eea8126b602c4d",
         "hash_kind": "file-bytes",
         "role": "original-source"
       }
@@ -140,8 +147,8 @@
       },
       "retention": "restoration-only",
       "verification": "verified",
-      "restoration": "Download exact item URL; require 411079 bytes and SHA-256 4c758eb2cb41f796ac12b58676a85eda509f622a51ad05a91cdef8572304e7b9. Layer metadata: https://geoservices.un.org/arcgis/rest/services/Hosted/SALB_GNB/FeatureServer/0?f=pjson",
-      "limit": "Restricted original geometry is not redistributed; source completeness is disclaimed by SALB terms, and its 2021 roster conflicts with the 2025 government count.",
+      "restoration": "Download exact item URL; require 411079 bytes and SHA-256 4c758eb2cb41f796ac12b58676a85eda509f622a51ad05a91cdef8572304e7b9. Layer metadata: https://geoservices.un.org/arcgis/rest/services/Hosted/SALB_GNB/FeatureServer/0?f=pjson A later independent retrieval found the URL changed: 410290 bytes, SHA-256 aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28. Do not treat those bytes as this snapshot; the exact 2026-10-05 bytes are not presently restorable from the cited endpoint.",
+      "limit": "Restricted original geometry is not redistributed; source completeness is disclaimed by SALB terms, and its 2021 roster conflicts with the 2025 government count. Independent reviewer retrieval found the item URL now returns 410290 bytes with SHA-256 aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28, not this 2026-10-05 snapshot; the exact restricted geometry cannot currently be restored from that URL.",
       "temporal_status": "reference"
     },
     {
@@ -239,20 +246,36 @@
       "restoration": "Fetch canonical PDF; sources.json records 116142 bytes and SHA-256 aaac013743486c9f4be986e236fdba6b3a4ac0ff00921cecc171c42778544381.",
       "limit": "Terms confirm SALB use is non-commercial with attribution and no geometry/content changes without contributor consent.",
       "temporal_status": "reference"
+    },
+    {
+      "id": "issue-472-subject-assessments",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/4a1fc6777fe766dca2c0698362a06f06a44f9344/data/regional-review/regional-review-1deb892647c1aa26/reproduction/subject-assessments.csv",
+      "role": "prior research ledger supplying exact geoBoundaries source IDs, declared parent IDs/names, source vintage and license fields used row by row",
+      "vintage": "parent packet pinned at commit 4a1fc6777fe766dca2c0698362a06f06a44f9344",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "Derived from the pinned geoBoundaries ODbL 1.0 source; retain source attribution and share-alike obligations. The file is already retained in the repository parent packet."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Read data/regional-review/regional-review-1deb892647c1aa26/reproduction/subject-assessments.csv at immutable commit 4a1fc6777fe766dca2c0698362a06f06a44f9344; require 163958 bytes and SHA-256 142fb1e558300db05873b972e22fcae2e5c38305954ddcd046eea8126b602c4d.",
+      "limit": "This prior packet analysis is not independent legal verification of the parent assignments; its source derivation is separately identified in issue #472.",
+      "temporal_status": "reference"
     }
   ],
   "outputs": [
     {
       "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/README.md",
-      "bytes": 9531,
-      "sha256": "d5006caa2262a547677894916cd83d12196e412c8e26e37fbfca7834543cf4d7",
+      "bytes": 10904,
+      "sha256": "a871f272751a0737d550724cb9d05655a6968245fe1f5c7a6d643513e37b7c0e",
       "hash_kind": "file-bytes",
       "role": "research-packet"
     },
     {
       "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/reproduce.py",
-      "bytes": 10494,
-      "sha256": "1f4ecc9bcb8db30359194d1260061c90f55edd02c4c28effdd631f4b46f26bfb",
+      "bytes": 12479,
+      "sha256": "f6f3ab3eaf151cc2e1f7a2035fc2e97dae18e810062a1ae2a6dd203705f41f62",
       "hash_kind": "file-bytes",
       "role": "reproduction-code"
     },
@@ -261,19 +284,19 @@
       "bytes": 26127,
       "sha256": "949ce2e49da9dc271580e3bf17e6474f10ca8f929a68e75de046a944140f527b",
       "hash_kind": "file-bytes",
-      "role": "reproduction-output"
+      "role": "generated-table"
     },
     {
       "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/salb-roster.csv",
       "bytes": 20793,
       "sha256": "e8b091ce9b5ff0ccfc196b5573728bd1afacaec4416d9c0493648ffa0c435f83",
       "hash_kind": "file-bytes",
-      "role": "reproduction-output"
+      "role": "source-ledger"
     },
     {
       "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
-      "bytes": 744,
-      "sha256": "13c7c31c9a2ff6414f9c87a1b287173818c9f27c50c1d1b9bc667887f12b056c",
+      "bytes": 6564,
+      "sha256": "4a99777bff3e958c233fe42fdcd681350d81ac6e90cc133b65072f60fde11a59",
       "hash_kind": "file-bytes",
       "role": "result-ledger"
     },
@@ -293,10 +316,17 @@
     },
     {
       "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/sources.json",
-      "bytes": 5476,
-      "sha256": "c5fe862eed497757a4ca50207ddf3cb034f1644279133a5d78aba15eec221601",
+      "bytes": 6236,
+      "sha256": "17a761be3a781a8826427f177254988ea7231fe4b3f39411aa43bc58593ec859",
       "hash_kind": "file-bytes",
       "role": "source-register"
+    },
+    {
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary-metrics.csv",
+      "bytes": 6596,
+      "sha256": "80a41b67b5202f989a3e5500c48bc8d61edafd9dbc0d67093452bbc56bb7e63e",
+      "hash_kind": "file-bytes",
+      "role": "generated-table"
     }
   ],
   "methods": [
@@ -332,57 +362,681 @@
       "id": "old_subjects_2017",
       "value": 39,
       "unit": "subjects",
-      "vintage": "archived",
-      "input_sha256": "13c7c31c9a2ff6414f9c87a1b287173818c9f27c50c1d1b9bc667887f12b056c",
-      "evaluation_commit": "6b60f1598b7b1f222b671cb57e12561fd3c3fb93"
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
     },
     {
       "id": "salb_features",
       "value": 39,
       "unit": "features",
-      "vintage": "archived",
-      "input_sha256": "13c7c31c9a2ff6414f9c87a1b287173818c9f27c50c1d1b9bc667887f12b056c",
-      "evaluation_commit": "6b60f1598b7b1f222b671cb57e12561fd3c3fb93"
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
     },
     {
       "id": "salb_regional_sectors",
       "value": 38,
       "unit": "sectors",
-      "vintage": "archived",
-      "input_sha256": "13c7c31c9a2ff6414f9c87a1b287173818c9f27c50c1d1b9bc667887f12b056c",
-      "evaluation_commit": "6b60f1598b7b1f222b671cb57e12561fd3c3fb93"
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
     },
     {
       "id": "salb_autonomous_sector",
       "value": 1,
       "unit": "sectors",
-      "vintage": "archived",
-      "input_sha256": "13c7c31c9a2ff6414f9c87a1b287173818c9f27c50c1d1b9bc667887f12b056c",
-      "evaluation_commit": "6b60f1598b7b1f222b671cb57e12561fd3c3fb93"
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
     },
     {
       "id": "screen_review_required",
       "value": 18,
       "unit": "rows",
-      "vintage": "archived",
-      "input_sha256": "13c7c31c9a2ff6414f9c87a1b287173818c9f27c50c1d1b9bc667887f12b056c",
-      "evaluation_commit": "6b60f1598b7b1f222b671cb57e12561fd3c3fb93"
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
     },
     {
       "id": "screen_consistent",
       "value": 21,
       "unit": "rows",
-      "vintage": "archived",
-      "input_sha256": "13c7c31c9a2ff6414f9c87a1b287173818c9f27c50c1d1b9bc667887f12b056c",
-      "evaluation_commit": "6b60f1598b7b1f222b671cb57e12561fd3c3fb93"
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
     },
     {
       "id": "nc4_count_gap",
       "value": 2,
       "unit": "sectors",
-      "vintage": "archived",
-      "input_sha256": "13c7c31c9a2ff6414f9c87a1b287173818c9f27c50c1d1b9bc667887f12b056c",
-      "evaluation_commit": "6b60f1598b7b1f222b671cb57e12561fd3c3fb93"
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B11561761851968_old_area_covered_by_top_pct",
+      "value": 94.3638,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B11561761851968_salb_top_area_covered_by_old_pct",
+      "value": 95.2613,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B12793543239296_old_area_covered_by_top_pct",
+      "value": 97.3689,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B12793543239296_salb_top_area_covered_by_old_pct",
+      "value": 97.2789,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B15077734082289_old_area_covered_by_top_pct",
+      "value": 78.4799,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B15077734082289_salb_top_area_covered_by_old_pct",
+      "value": 57.8585,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B15408487636665_old_area_covered_by_top_pct",
+      "value": 96.6747,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B15408487636665_salb_top_area_covered_by_old_pct",
+      "value": 79.1131,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B16168252486838_old_area_covered_by_top_pct",
+      "value": 99.8086,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B16168252486838_salb_top_area_covered_by_old_pct",
+      "value": 98.2761,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B168355566476_old_area_covered_by_top_pct",
+      "value": 89.1615,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B168355566476_salb_top_area_covered_by_old_pct",
+      "value": 97.433,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B24413703823033_old_area_covered_by_top_pct",
+      "value": 65.9801,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B24413703823033_salb_top_area_covered_by_old_pct",
+      "value": 90.3878,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B30693048438959_old_area_covered_by_top_pct",
+      "value": 77.1791,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B30693048438959_salb_top_area_covered_by_old_pct",
+      "value": 99.1626,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B31772276876031_old_area_covered_by_top_pct",
+      "value": 88.7969,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B31772276876031_salb_top_area_covered_by_old_pct",
+      "value": 99.756,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B37452641895852_old_area_covered_by_top_pct",
+      "value": 94.0664,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B37452641895852_salb_top_area_covered_by_old_pct",
+      "value": 91.8114,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B37576476310465_old_area_covered_by_top_pct",
+      "value": 69.1117,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B37576476310465_salb_top_area_covered_by_old_pct",
+      "value": 65.8567,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B38974563194217_old_area_covered_by_top_pct",
+      "value": 48.4808,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B38974563194217_salb_top_area_covered_by_old_pct",
+      "value": 94.4943,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B4319146558278_old_area_covered_by_top_pct",
+      "value": 64.2906,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B4319146558278_salb_top_area_covered_by_old_pct",
+      "value": 99.9986,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B44985576134462_old_area_covered_by_top_pct",
+      "value": 87.1749,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B44985576134462_salb_top_area_covered_by_old_pct",
+      "value": 57.1607,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B47112439721810_old_area_covered_by_top_pct",
+      "value": 52.6985,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B47112439721810_salb_top_area_covered_by_old_pct",
+      "value": 32.7755,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B47480576799194_old_area_covered_by_top_pct",
+      "value": 95.396,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B47480576799194_salb_top_area_covered_by_old_pct",
+      "value": 93.8192,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B48763126228848_old_area_covered_by_top_pct",
+      "value": 88.3603,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B48763126228848_salb_top_area_covered_by_old_pct",
+      "value": 95.0582,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B49812801634354_old_area_covered_by_top_pct",
+      "value": 97.611,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B49812801634354_salb_top_area_covered_by_old_pct",
+      "value": 99.3416,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B51179315853055_old_area_covered_by_top_pct",
+      "value": 95.564,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B51179315853055_salb_top_area_covered_by_old_pct",
+      "value": 83.0832,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B53615250576563_old_area_covered_by_top_pct",
+      "value": 93.2282,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B53615250576563_salb_top_area_covered_by_old_pct",
+      "value": 95.4198,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B57644193184055_old_area_covered_by_top_pct",
+      "value": 98.3674,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B57644193184055_salb_top_area_covered_by_old_pct",
+      "value": 97.8443,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B57740331915335_old_area_covered_by_top_pct",
+      "value": 98.4603,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B57740331915335_salb_top_area_covered_by_old_pct",
+      "value": 66.2408,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B59106895169358_old_area_covered_by_top_pct",
+      "value": 77.4864,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B59106895169358_salb_top_area_covered_by_old_pct",
+      "value": 75.2064,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B65296626482863_old_area_covered_by_top_pct",
+      "value": 77.1996,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B65296626482863_salb_top_area_covered_by_old_pct",
+      "value": 98.7234,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B65471558325414_old_area_covered_by_top_pct",
+      "value": 94.4034,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B65471558325414_salb_top_area_covered_by_old_pct",
+      "value": 97.0666,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B65726406107890_old_area_covered_by_top_pct",
+      "value": 84.7666,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B65726406107890_salb_top_area_covered_by_old_pct",
+      "value": 99.4588,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B65757043009502_old_area_covered_by_top_pct",
+      "value": 93.0527,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B65757043009502_salb_top_area_covered_by_old_pct",
+      "value": 94.0306,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B66751603958816_old_area_covered_by_top_pct",
+      "value": 78.6428,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B66751603958816_salb_top_area_covered_by_old_pct",
+      "value": 92.5933,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B71925291750028_old_area_covered_by_top_pct",
+      "value": 82.9678,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B71925291750028_salb_top_area_covered_by_old_pct",
+      "value": 96.2649,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B76388735674013_old_area_covered_by_top_pct",
+      "value": 95.825,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B76388735674013_salb_top_area_covered_by_old_pct",
+      "value": 95.5032,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B77006902429960_old_area_covered_by_top_pct",
+      "value": 69.7557,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B77006902429960_salb_top_area_covered_by_old_pct",
+      "value": 29.9141,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B8216177448850_old_area_covered_by_top_pct",
+      "value": 77.6016,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B8216177448850_salb_top_area_covered_by_old_pct",
+      "value": 58.9273,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B91246233663569_old_area_covered_by_top_pct",
+      "value": 92.2272,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B91246233663569_salb_top_area_covered_by_old_pct",
+      "value": 99.2846,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B91994517778696_old_area_covered_by_top_pct",
+      "value": 89.652,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B91994517778696_salb_top_area_covered_by_old_pct",
+      "value": 98.5734,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B9524670555472_old_area_covered_by_top_pct",
+      "value": 85.8005,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B9524670555472_salb_top_area_covered_by_old_pct",
+      "value": 88.0456,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B95678269815128_old_area_covered_by_top_pct",
+      "value": 88.1563,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B95678269815128_salb_top_area_covered_by_old_pct",
+      "value": 99.0783,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B97576906537580_old_area_covered_by_top_pct",
+      "value": 98.626,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B97576906537580_salb_top_area_covered_by_old_pct",
+      "value": 99.5091,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B98496568253651_old_area_covered_by_top_pct",
+      "value": 83.916,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B98496568253651_salb_top_area_covered_by_old_pct",
+      "value": 45.4652,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B99052541590952_old_area_covered_by_top_pct",
+      "value": 59.9562,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
+    },
+    {
+      "id": "crosswalk_13655514B99052541590952_salb_top_area_covered_by_old_pct",
+      "value": 35.5924,
+      "unit": "percent",
+      "vintage": "current",
+      "input_sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
+      "evaluation_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344"
     }
   ],
   "metric_bindings": [
@@ -420,6 +1074,396 @@
       "metric_id": "nc4_count_gap",
       "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
       "json_pointer": "/salb_regional_sector_difference_vs_2025_nc4"
+    },
+    {
+      "metric_id": "crosswalk_13655514B11561761851968_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B11561761851968_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B11561761851968_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B11561761851968_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B12793543239296_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B12793543239296_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B12793543239296_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B12793543239296_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B15077734082289_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B15077734082289_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B15077734082289_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B15077734082289_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B15408487636665_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B15408487636665_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B15408487636665_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B15408487636665_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B16168252486838_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B16168252486838_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B16168252486838_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B16168252486838_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B168355566476_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B168355566476_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B168355566476_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B168355566476_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B24413703823033_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B24413703823033_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B24413703823033_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B24413703823033_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B30693048438959_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B30693048438959_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B30693048438959_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B30693048438959_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B31772276876031_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B31772276876031_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B31772276876031_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B31772276876031_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B37452641895852_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B37452641895852_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B37452641895852_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B37452641895852_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B37576476310465_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B37576476310465_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B37576476310465_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B37576476310465_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B38974563194217_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B38974563194217_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B38974563194217_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B38974563194217_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B4319146558278_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B4319146558278_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B4319146558278_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B4319146558278_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B44985576134462_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B44985576134462_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B44985576134462_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B44985576134462_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B47112439721810_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B47112439721810_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B47112439721810_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B47112439721810_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B47480576799194_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B47480576799194_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B47480576799194_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B47480576799194_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B48763126228848_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B48763126228848_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B48763126228848_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B48763126228848_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B49812801634354_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B49812801634354_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B49812801634354_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B49812801634354_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B51179315853055_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B51179315853055_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B51179315853055_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B51179315853055_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B53615250576563_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B53615250576563_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B53615250576563_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B53615250576563_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B57644193184055_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B57644193184055_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B57644193184055_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B57644193184055_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B57740331915335_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B57740331915335_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B57740331915335_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B57740331915335_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B59106895169358_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B59106895169358_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B59106895169358_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B59106895169358_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B65296626482863_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B65296626482863_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B65296626482863_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B65296626482863_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B65471558325414_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B65471558325414_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B65471558325414_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B65471558325414_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B65726406107890_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B65726406107890_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B65726406107890_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B65726406107890_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B65757043009502_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B65757043009502_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B65757043009502_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B65757043009502_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B66751603958816_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B66751603958816_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B66751603958816_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B66751603958816_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B71925291750028_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B71925291750028_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B71925291750028_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B71925291750028_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B76388735674013_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B76388735674013_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B76388735674013_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B76388735674013_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B77006902429960_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B77006902429960_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B77006902429960_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B77006902429960_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B8216177448850_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B8216177448850_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B8216177448850_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B8216177448850_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B91246233663569_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B91246233663569_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B91246233663569_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B91246233663569_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B91994517778696_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B91994517778696_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B91994517778696_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B91994517778696_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B9524670555472_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B9524670555472_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B9524670555472_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B9524670555472_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B95678269815128_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B95678269815128_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B95678269815128_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B95678269815128_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B97576906537580_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B97576906537580_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B97576906537580_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B97576906537580_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B98496568253651_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B98496568253651_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B98496568253651_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B98496568253651_salb_top_area_covered_by_old_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B99052541590952_old_area_covered_by_top_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B99052541590952_old_area_covered_by_top_pct"
+    },
+    {
+      "metric_id": "crosswalk_13655514B99052541590952_salb_top_area_covered_by_old_pct",
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary.json",
+      "json_pointer": "/crosswalk_metric_values/crosswalk_13655514B99052541590952_salb_top_area_covered_by_old_pct"
     }
   ],
   "summaries": [
@@ -457,6 +1501,396 @@
       "metric_id": "nc4_count_gap",
       "value": 2,
       "unit": "sectors"
+    },
+    {
+      "metric_id": "crosswalk_13655514B11561761851968_old_area_covered_by_top_pct",
+      "value": 94.3638,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B11561761851968_salb_top_area_covered_by_old_pct",
+      "value": 95.2613,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B12793543239296_old_area_covered_by_top_pct",
+      "value": 97.3689,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B12793543239296_salb_top_area_covered_by_old_pct",
+      "value": 97.2789,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B15077734082289_old_area_covered_by_top_pct",
+      "value": 78.4799,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B15077734082289_salb_top_area_covered_by_old_pct",
+      "value": 57.8585,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B15408487636665_old_area_covered_by_top_pct",
+      "value": 96.6747,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B15408487636665_salb_top_area_covered_by_old_pct",
+      "value": 79.1131,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B16168252486838_old_area_covered_by_top_pct",
+      "value": 99.8086,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B16168252486838_salb_top_area_covered_by_old_pct",
+      "value": 98.2761,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B168355566476_old_area_covered_by_top_pct",
+      "value": 89.1615,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B168355566476_salb_top_area_covered_by_old_pct",
+      "value": 97.433,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B24413703823033_old_area_covered_by_top_pct",
+      "value": 65.9801,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B24413703823033_salb_top_area_covered_by_old_pct",
+      "value": 90.3878,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B30693048438959_old_area_covered_by_top_pct",
+      "value": 77.1791,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B30693048438959_salb_top_area_covered_by_old_pct",
+      "value": 99.1626,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B31772276876031_old_area_covered_by_top_pct",
+      "value": 88.7969,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B31772276876031_salb_top_area_covered_by_old_pct",
+      "value": 99.756,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B37452641895852_old_area_covered_by_top_pct",
+      "value": 94.0664,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B37452641895852_salb_top_area_covered_by_old_pct",
+      "value": 91.8114,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B37576476310465_old_area_covered_by_top_pct",
+      "value": 69.1117,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B37576476310465_salb_top_area_covered_by_old_pct",
+      "value": 65.8567,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B38974563194217_old_area_covered_by_top_pct",
+      "value": 48.4808,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B38974563194217_salb_top_area_covered_by_old_pct",
+      "value": 94.4943,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B4319146558278_old_area_covered_by_top_pct",
+      "value": 64.2906,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B4319146558278_salb_top_area_covered_by_old_pct",
+      "value": 99.9986,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B44985576134462_old_area_covered_by_top_pct",
+      "value": 87.1749,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B44985576134462_salb_top_area_covered_by_old_pct",
+      "value": 57.1607,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B47112439721810_old_area_covered_by_top_pct",
+      "value": 52.6985,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B47112439721810_salb_top_area_covered_by_old_pct",
+      "value": 32.7755,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B47480576799194_old_area_covered_by_top_pct",
+      "value": 95.396,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B47480576799194_salb_top_area_covered_by_old_pct",
+      "value": 93.8192,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B48763126228848_old_area_covered_by_top_pct",
+      "value": 88.3603,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B48763126228848_salb_top_area_covered_by_old_pct",
+      "value": 95.0582,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B49812801634354_old_area_covered_by_top_pct",
+      "value": 97.611,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B49812801634354_salb_top_area_covered_by_old_pct",
+      "value": 99.3416,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B51179315853055_old_area_covered_by_top_pct",
+      "value": 95.564,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B51179315853055_salb_top_area_covered_by_old_pct",
+      "value": 83.0832,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B53615250576563_old_area_covered_by_top_pct",
+      "value": 93.2282,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B53615250576563_salb_top_area_covered_by_old_pct",
+      "value": 95.4198,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B57644193184055_old_area_covered_by_top_pct",
+      "value": 98.3674,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B57644193184055_salb_top_area_covered_by_old_pct",
+      "value": 97.8443,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B57740331915335_old_area_covered_by_top_pct",
+      "value": 98.4603,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B57740331915335_salb_top_area_covered_by_old_pct",
+      "value": 66.2408,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B59106895169358_old_area_covered_by_top_pct",
+      "value": 77.4864,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B59106895169358_salb_top_area_covered_by_old_pct",
+      "value": 75.2064,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B65296626482863_old_area_covered_by_top_pct",
+      "value": 77.1996,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B65296626482863_salb_top_area_covered_by_old_pct",
+      "value": 98.7234,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B65471558325414_old_area_covered_by_top_pct",
+      "value": 94.4034,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B65471558325414_salb_top_area_covered_by_old_pct",
+      "value": 97.0666,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B65726406107890_old_area_covered_by_top_pct",
+      "value": 84.7666,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B65726406107890_salb_top_area_covered_by_old_pct",
+      "value": 99.4588,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B65757043009502_old_area_covered_by_top_pct",
+      "value": 93.0527,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B65757043009502_salb_top_area_covered_by_old_pct",
+      "value": 94.0306,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B66751603958816_old_area_covered_by_top_pct",
+      "value": 78.6428,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B66751603958816_salb_top_area_covered_by_old_pct",
+      "value": 92.5933,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B71925291750028_old_area_covered_by_top_pct",
+      "value": 82.9678,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B71925291750028_salb_top_area_covered_by_old_pct",
+      "value": 96.2649,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B76388735674013_old_area_covered_by_top_pct",
+      "value": 95.825,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B76388735674013_salb_top_area_covered_by_old_pct",
+      "value": 95.5032,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B77006902429960_old_area_covered_by_top_pct",
+      "value": 69.7557,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B77006902429960_salb_top_area_covered_by_old_pct",
+      "value": 29.9141,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B8216177448850_old_area_covered_by_top_pct",
+      "value": 77.6016,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B8216177448850_salb_top_area_covered_by_old_pct",
+      "value": 58.9273,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B91246233663569_old_area_covered_by_top_pct",
+      "value": 92.2272,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B91246233663569_salb_top_area_covered_by_old_pct",
+      "value": 99.2846,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B91994517778696_old_area_covered_by_top_pct",
+      "value": 89.652,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B91994517778696_salb_top_area_covered_by_old_pct",
+      "value": 98.5734,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B9524670555472_old_area_covered_by_top_pct",
+      "value": 85.8005,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B9524670555472_salb_top_area_covered_by_old_pct",
+      "value": 88.0456,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B95678269815128_old_area_covered_by_top_pct",
+      "value": 88.1563,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B95678269815128_salb_top_area_covered_by_old_pct",
+      "value": 99.0783,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B97576906537580_old_area_covered_by_top_pct",
+      "value": 98.626,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B97576906537580_salb_top_area_covered_by_old_pct",
+      "value": 99.5091,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B98496568253651_old_area_covered_by_top_pct",
+      "value": 83.916,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B98496568253651_salb_top_area_covered_by_old_pct",
+      "value": 45.4652,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B99052541590952_old_area_covered_by_top_pct",
+      "value": 59.9562,
+      "unit": "percent"
+    },
+    {
+      "metric_id": "crosswalk_13655514B99052541590952_salb_top_area_covered_by_old_pct",
+      "value": 35.5924,
+      "unit": "percent"
     }
   ],
   "conclusions": [
@@ -539,6 +1973,1000 @@
     {
       "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/evidence-quality.json",
       "status": "added"
+    },
+    {
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary-metrics.csv",
+      "status": "added"
+    }
+  ],
+  "rendered_tables": [
+    {
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/crosswalk-screen.csv",
+      "rows": [
+        {
+          "metric_id": "crosswalk_13655514B11561761851968_old_area_covered_by_top_pct",
+          "line": 2,
+          "template": "gb:GNB:ADM2:13655514B11561761851968,13655514B11561761851968,Setor de Bula,2017,Open Data Commons Open Database License 1.0,framework:province:cacheu:8c70976871f9,Cacheu,GNB004002:Bula [GNB004:Cacheu],GNB004002,Bula,GNB004,Cacheu,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},95.2613,GNB004002:Bula (94.4% old);GNB004001:Bigene (2.3% old);GNB002002:Quinhamel (2.0% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B11561761851968_salb_top_area_covered_by_old_pct",
+          "line": 2,
+          "template": "gb:GNB:ADM2:13655514B11561761851968,13655514B11561761851968,Setor de Bula,2017,Open Data Commons Open Database License 1.0,framework:province:cacheu:8c70976871f9,Cacheu,GNB004002:Bula [GNB004:Cacheu],GNB004002,Bula,GNB004,Cacheu,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,94.3638,{value},GNB004002:Bula (94.4% old);GNB004001:Bigene (2.3% old);GNB002002:Quinhamel (2.0% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B12793543239296_old_area_covered_by_top_pct",
+          "line": 3,
+          "template": "gb:GNB:ADM2:13655514B12793543239296,13655514B12793543239296,Setor de Quebo,2017,Open Data Commons Open Database License 1.0,framework:province:tombali:692952bab6f4,Tombali,GNB009005:Quebo [GNB009:Tombali],GNB009005,Quebo,GNB009,Tombali,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},97.2789,GNB009005:Quebo (97.4% old);GNB001006:Xitole (2.2% old);GNB005001:Boé (0.3% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B12793543239296_salb_top_area_covered_by_old_pct",
+          "line": 3,
+          "template": "gb:GNB:ADM2:13655514B12793543239296,13655514B12793543239296,Setor de Quebo,2017,Open Data Commons Open Database License 1.0,framework:province:tombali:692952bab6f4,Tombali,GNB009005:Quebo [GNB009:Tombali],GNB009005,Quebo,GNB009,Tombali,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,97.3689,{value},GNB009005:Quebo (97.4% old);GNB001006:Xitole (2.2% old);GNB005001:Boé (0.3% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B15077734082289_old_area_covered_by_top_pct",
+          "line": 4,
+          "template": "gb:GNB:ADM2:13655514B15077734082289,13655514B15077734082289,Setor de Bafata,2017,Open Data Commons Open Database License 1.0,framework:province:bafata:def125bd4ee9,Bafatá,GNB001001:Bafatá [GNB001:Bafatá],GNB001001,Bafatá,GNB001,Bafatá,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},57.8585,GNB001001:Bafatá (78.5% old);GNB001003:Contuboel (20.4% old);GNB005002:Gabú (0.8% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B15077734082289_salb_top_area_covered_by_old_pct",
+          "line": 4,
+          "template": "gb:GNB:ADM2:13655514B15077734082289,13655514B15077734082289,Setor de Bafata,2017,Open Data Commons Open Database License 1.0,framework:province:bafata:def125bd4ee9,Bafatá,GNB001001:Bafatá [GNB001:Bafatá],GNB001001,Bafatá,GNB001,Bafatá,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,78.4799,{value},GNB001001:Bafatá (78.5% old);GNB001003:Contuboel (20.4% old);GNB005002:Gabú (0.8% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B15408487636665_old_area_covered_by_top_pct",
+          "line": 5,
+          "template": "gb:GNB:ADM2:13655514B15408487636665,13655514B15408487636665,Setor de Madina do Bo˒,2017,Open Data Commons Open Database License 1.0,framework:province:gabu:1496fb36508d,Gabu,none,GNB005001,Boé,GNB005,Gabú,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},79.1131,GNB005001:Boé (96.7% old);GNB005002:Gabú (0.5% old);GNB009005:Quebo (0.0% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B15408487636665_salb_top_area_covered_by_old_pct",
+          "line": 5,
+          "template": "gb:GNB:ADM2:13655514B15408487636665,13655514B15408487636665,Setor de Madina do Bo˒,2017,Open Data Commons Open Database License 1.0,framework:province:gabu:1496fb36508d,Gabu,none,GNB005001,Boé,GNB005,Gabú,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,96.6747,{value},GNB005001:Boé (96.7% old);GNB005002:Gabú (0.5% old);GNB009005:Quebo (0.0% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B16168252486838_old_area_covered_by_top_pct",
+          "line": 6,
+          "template": "gb:GNB:ADM2:13655514B16168252486838,13655514B16168252486838,Setor de Pirada,2017,Open Data Commons Open Database License 1.0,framework:province:gabu:1496fb36508d,Gabu,GNB005003:Pirada [GNB005:Gabú],GNB005003,Pirada,GNB005,Gabú,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},98.2761,GNB005003:Pirada (99.8% old);GNB005005:Sonaco (0.1% old);GNB005002:Gabú (0.0% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B16168252486838_salb_top_area_covered_by_old_pct",
+          "line": 6,
+          "template": "gb:GNB:ADM2:13655514B16168252486838,13655514B16168252486838,Setor de Pirada,2017,Open Data Commons Open Database License 1.0,framework:province:gabu:1496fb36508d,Gabu,GNB005003:Pirada [GNB005:Gabú],GNB005003,Pirada,GNB005,Gabú,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,99.8086,{value},GNB005003:Pirada (99.8% old);GNB005005:Sonaco (0.1% old);GNB005002:Gabú (0.0% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B168355566476_old_area_covered_by_top_pct",
+          "line": 7,
+          "template": "gb:GNB:ADM2:13655514B168355566476,13655514B168355566476,Setor de Bambadinca,2017,Open Data Commons Open Database License 1.0,framework:province:bafata:def125bd4ee9,Bafatá,GNB001002:Bambadinca [GNB001:Bafatá],GNB001002,Bambadinca,GNB001,Bafatá,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},97.4330,GNB001002:Bambadinca (89.2% old);GNB007003:Fulacunda (10.1% old);GNB001006:Xitole (0.0% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B168355566476_salb_top_area_covered_by_old_pct",
+          "line": 7,
+          "template": "gb:GNB:ADM2:13655514B168355566476,13655514B168355566476,Setor de Bambadinca,2017,Open Data Commons Open Database License 1.0,framework:province:bafata:def125bd4ee9,Bafatá,GNB001002:Bambadinca [GNB001:Bafatá],GNB001002,Bambadinca,GNB001,Bafatá,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,89.1615,{value},GNB001002:Bambadinca (89.2% old);GNB007003:Fulacunda (10.1% old);GNB001006:Xitole (0.0% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B24413703823033_old_area_covered_by_top_pct",
+          "line": 8,
+          "template": "gb:GNB:ADM2:13655514B24413703823033,13655514B24413703823033,Setor de Catie,2017,Open Data Commons Open Database License 1.0,framework:province:tombali:692952bab6f4,Tombali,none,GNB009003,Catió,GNB009,Tombali,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},90.3878,GNB009003:Catió (66.0% old);GNB009004:Komo (24.8% old);GNB009001:Bedanda (4.7% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B24413703823033_salb_top_area_covered_by_old_pct",
+          "line": 8,
+          "template": "gb:GNB:ADM2:13655514B24413703823033,13655514B24413703823033,Setor de Catie,2017,Open Data Commons Open Database License 1.0,framework:province:tombali:692952bab6f4,Tombali,none,GNB009003,Catió,GNB009,Tombali,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,65.9801,{value},GNB009003:Catió (66.0% old);GNB009004:Komo (24.8% old);GNB009001:Bedanda (4.7% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B30693048438959_old_area_covered_by_top_pct",
+          "line": 9,
+          "template": "gb:GNB:ADM2:13655514B30693048438959,13655514B30693048438959,Setor de Empada,2017,Open Data Commons Open Database License 1.0,framework:province:quinara:a0e3b196a3a4,Quinara,GNB007002:Empada [GNB007:Quinara],GNB007002,Empada,GNB007,Quinara,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},99.1626,GNB007002:Empada (77.2% old);GNB009003:Catió (6.5% old);GNB007001:Buba (0.3% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B30693048438959_salb_top_area_covered_by_old_pct",
+          "line": 9,
+          "template": "gb:GNB:ADM2:13655514B30693048438959,13655514B30693048438959,Setor de Empada,2017,Open Data Commons Open Database License 1.0,framework:province:quinara:a0e3b196a3a4,Quinara,GNB007002:Empada [GNB007:Quinara],GNB007002,Empada,GNB007,Quinara,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,77.1791,{value},GNB007002:Empada (77.2% old);GNB009003:Catió (6.5% old);GNB007001:Buba (0.3% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B31772276876031_old_area_covered_by_top_pct",
+          "line": 10,
+          "template": "gb:GNB:ADM2:13655514B31772276876031,13655514B31772276876031,Setor de Mansoa,2017,Open Data Commons Open Database License 1.0,framework:province:oio:e1a310d50098,Oio,GNB006004:Mansôa [GNB006:Oio],GNB006004,Mansôa,GNB006,Oio,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},99.7560,GNB006004:Mansôa (88.8% old);GNB001002:Bambadinca (0.5% old);GNB006003:Mansaba (0.3% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B31772276876031_salb_top_area_covered_by_old_pct",
+          "line": 10,
+          "template": "gb:GNB:ADM2:13655514B31772276876031,13655514B31772276876031,Setor de Mansoa,2017,Open Data Commons Open Database License 1.0,framework:province:oio:e1a310d50098,Oio,GNB006004:Mansôa [GNB006:Oio],GNB006004,Mansôa,GNB006,Oio,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,88.7969,{value},GNB006004:Mansôa (88.8% old);GNB001002:Bambadinca (0.5% old);GNB006003:Mansaba (0.3% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B37452641895852_old_area_covered_by_top_pct",
+          "line": 11,
+          "template": "gb:GNB:ADM2:13655514B37452641895852,13655514B37452641895852,Setor de Buba,2017,Open Data Commons Open Database License 1.0,framework:province:quinara:a0e3b196a3a4,Quinara,GNB007001:Buba [GNB007:Quinara],GNB007001,Buba,GNB007,Quinara,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},91.8114,GNB007001:Buba (94.1% old);GNB001006:Xitole (1.6% old);GNB009001:Bedanda (0.5% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B37452641895852_salb_top_area_covered_by_old_pct",
+          "line": 11,
+          "template": "gb:GNB:ADM2:13655514B37452641895852,13655514B37452641895852,Setor de Buba,2017,Open Data Commons Open Database License 1.0,framework:province:quinara:a0e3b196a3a4,Quinara,GNB007001:Buba [GNB007:Quinara],GNB007001,Buba,GNB007,Quinara,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,94.0664,{value},GNB007001:Buba (94.1% old);GNB001006:Xitole (1.6% old);GNB009001:Bedanda (0.5% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B37576476310465_old_area_covered_by_top_pct",
+          "line": 12,
+          "template": "gb:GNB:ADM2:13655514B37576476310465,13655514B37576476310465,Setor de Tite,2017,Open Data Commons Open Database License 1.0,framework:province:quinara:a0e3b196a3a4,Quinara,GNB007004:Tite [GNB007:Quinara],GNB003001,Bolama,GNB003,Bolama/Bijagós,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},65.8567,GNB003001:Bolama (69.1% old);GNB007004:Tite (1.7% old);GNB007003:Fulacunda (0.6% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B37576476310465_salb_top_area_covered_by_old_pct",
+          "line": 12,
+          "template": "gb:GNB:ADM2:13655514B37576476310465,13655514B37576476310465,Setor de Tite,2017,Open Data Commons Open Database License 1.0,framework:province:quinara:a0e3b196a3a4,Quinara,GNB007004:Tite [GNB007:Quinara],GNB003001,Bolama,GNB003,Bolama/Bijagós,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,69.1117,{value},GNB003001:Bolama (69.1% old);GNB007004:Tite (1.7% old);GNB007003:Fulacunda (0.6% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B38974563194217_old_area_covered_by_top_pct",
+          "line": 13,
+          "template": "gb:GNB:ADM2:13655514B38974563194217,13655514B38974563194217,Bissau Autonomous Sector,2017,Open Data Commons Open Database License 1.0,framework:province:bissau:8673c43d44f4,Bissau,GNB008001:Sector Autônomo de Bissau [GNB008:Sector Autonomo de Bissau],GNB008001,Sector Autônomo de Bissau,GNB008,Sector Autonomo de Bissau,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},94.4943,GNB008001:Sector Autônomo de Bissau (48.5% old);GNB006005:Nhacra (2.2% old);GNB002001:Prabis (0.1% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B38974563194217_salb_top_area_covered_by_old_pct",
+          "line": 13,
+          "template": "gb:GNB:ADM2:13655514B38974563194217,13655514B38974563194217,Bissau Autonomous Sector,2017,Open Data Commons Open Database License 1.0,framework:province:bissau:8673c43d44f4,Bissau,GNB008001:Sector Autônomo de Bissau [GNB008:Sector Autonomo de Bissau],GNB008001,Sector Autônomo de Bissau,GNB008,Sector Autonomo de Bissau,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,48.4808,{value},GNB008001:Sector Autônomo de Bissau (48.5% old);GNB006005:Nhacra (2.2% old);GNB002001:Prabis (0.1% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B4319146558278_old_area_covered_by_top_pct",
+          "line": 14,
+          "template": "gb:GNB:ADM2:13655514B4319146558278,13655514B4319146558278,Setor de Galomaro,2017,Open Data Commons Open Database License 1.0,framework:province:bafata:def125bd4ee9,Bafatá,none,GNB001004,Galomaro/Cosse,GNB001,Bafatá,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},99.9986,GNB001004:Galomaro/Cosse (64.3% old);GNB001001:Bafatá (33.7% old);GNB001002:Bambadinca (1.5% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B4319146558278_salb_top_area_covered_by_old_pct",
+          "line": 14,
+          "template": "gb:GNB:ADM2:13655514B4319146558278,13655514B4319146558278,Setor de Galomaro,2017,Open Data Commons Open Database License 1.0,framework:province:bafata:def125bd4ee9,Bafatá,none,GNB001004,Galomaro/Cosse,GNB001,Bafatá,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,64.2906,{value},GNB001004:Galomaro/Cosse (64.3% old);GNB001001:Bafatá (33.7% old);GNB001002:Bambadinca (1.5% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B44985576134462_old_area_covered_by_top_pct",
+          "line": 15,
+          "template": "gb:GNB:ADM2:13655514B44985576134462,13655514B44985576134462,Setor de Uno,2017,Open Data Commons Open Database License 1.0,framework:province:bolama:08258e19a5c1,Bolama,GNB003004:Uno [GNB003:Bolama/Bijagós],GNB003004,Uno,GNB003,Bolama/Bijagós,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},57.1607,GNB003004:Uno (87.2% old);GNB003002:Bubaque (5.7% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B44985576134462_salb_top_area_covered_by_old_pct",
+          "line": 15,
+          "template": "gb:GNB:ADM2:13655514B44985576134462,13655514B44985576134462,Setor de Uno,2017,Open Data Commons Open Database License 1.0,framework:province:bolama:08258e19a5c1,Bolama,GNB003004:Uno [GNB003:Bolama/Bijagós],GNB003004,Uno,GNB003,Bolama/Bijagós,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,87.1749,{value},GNB003004:Uno (87.2% old);GNB003002:Bubaque (5.7% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B47112439721810_old_area_covered_by_top_pct",
+          "line": 16,
+          "template": "gb:GNB:ADM2:13655514B47112439721810,13655514B47112439721810,Setor de Nhacra,2017,Open Data Commons Open Database License 1.0,framework:province:oio:e1a310d50098,Oio,GNB006005:Nhacra [GNB006:Oio],GNB006001,Bissorã,GNB006,Oio,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},32.7755,GNB006001:Bissorã (52.7% old);GNB006005:Nhacra (35.6% old);GNB004002:Bula (0.3% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B47112439721810_salb_top_area_covered_by_old_pct",
+          "line": 16,
+          "template": "gb:GNB:ADM2:13655514B47112439721810,13655514B47112439721810,Setor de Nhacra,2017,Open Data Commons Open Database License 1.0,framework:province:oio:e1a310d50098,Oio,GNB006005:Nhacra [GNB006:Oio],GNB006001,Bissorã,GNB006,Oio,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,52.6985,{value},GNB006001:Bissorã (52.7% old);GNB006005:Nhacra (35.6% old);GNB004002:Bula (0.3% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B47480576799194_old_area_covered_by_top_pct",
+          "line": 17,
+          "template": "gb:GNB:ADM2:13655514B47480576799194,13655514B47480576799194,Setor de Sonaco,2017,Open Data Commons Open Database License 1.0,framework:province:gabu:1496fb36508d,Gabu,GNB005005:Sonaco [GNB005:Gabú],GNB005005,Sonaco,GNB005,Gabú,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},93.8192,GNB005005:Sonaco (95.4% old);GNB001003:Contuboel (2.0% old);GNB005003:Pirada (1.4% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B47480576799194_salb_top_area_covered_by_old_pct",
+          "line": 17,
+          "template": "gb:GNB:ADM2:13655514B47480576799194,13655514B47480576799194,Setor de Sonaco,2017,Open Data Commons Open Database License 1.0,framework:province:gabu:1496fb36508d,Gabu,GNB005005:Sonaco [GNB005:Gabú],GNB005005,Sonaco,GNB005,Gabú,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,95.3960,{value},GNB005005:Sonaco (95.4% old);GNB001003:Contuboel (2.0% old);GNB005003:Pirada (1.4% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B48763126228848_old_area_covered_by_top_pct",
+          "line": 18,
+          "template": "gb:GNB:ADM2:13655514B48763126228848,13655514B48763126228848,Setor de Bedanda,2017,Open Data Commons Open Database License 1.0,framework:province:tombali:692952bab6f4,Tombali,GNB009001:Bedanda [GNB009:Tombali],GNB009001,Bedanda,GNB009,Tombali,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},95.0582,GNB009001:Bedanda (88.4% old);GNB009002:Cacine (1.7% old);GNB009003:Catió (0.2% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B48763126228848_salb_top_area_covered_by_old_pct",
+          "line": 18,
+          "template": "gb:GNB:ADM2:13655514B48763126228848,13655514B48763126228848,Setor de Bedanda,2017,Open Data Commons Open Database License 1.0,framework:province:tombali:692952bab6f4,Tombali,GNB009001:Bedanda [GNB009:Tombali],GNB009001,Bedanda,GNB009,Tombali,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,88.3603,{value},GNB009001:Bedanda (88.4% old);GNB009002:Cacine (1.7% old);GNB009003:Catió (0.2% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B49812801634354_old_area_covered_by_top_pct",
+          "line": 19,
+          "template": "gb:GNB:ADM2:13655514B49812801634354,13655514B49812801634354,Setor de Mansaba,2017,Open Data Commons Open Database License 1.0,framework:province:oio:e1a310d50098,Oio,GNB006003:Mansaba [GNB006:Oio],GNB006003,Mansaba,GNB006,Oio,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},99.3416,GNB006003:Mansaba (97.6% old);GNB006002:Farim (2.4% old);GNB006004:Mansôa (0.0% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B49812801634354_salb_top_area_covered_by_old_pct",
+          "line": 19,
+          "template": "gb:GNB:ADM2:13655514B49812801634354,13655514B49812801634354,Setor de Mansaba,2017,Open Data Commons Open Database License 1.0,framework:province:oio:e1a310d50098,Oio,GNB006003:Mansaba [GNB006:Oio],GNB006003,Mansaba,GNB006,Oio,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,97.6110,{value},GNB006003:Mansaba (97.6% old);GNB006002:Farim (2.4% old);GNB006004:Mansôa (0.0% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B51179315853055_old_area_covered_by_top_pct",
+          "line": 20,
+          "template": "gb:GNB:ADM2:13655514B51179315853055,13655514B51179315853055,Contuboel,2017,Open Data Commons Open Database License 1.0,framework:province:bafata:def125bd4ee9,Bafatá,GNB001003:Contuboel [GNB001:Bafatá],GNB001003,Contuboel,GNB001,Bafatá,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},83.0832,GNB001003:Contuboel (95.6% old);GNB005005:Sonaco (3.4% old);GNB005003:Pirada (0.5% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B51179315853055_salb_top_area_covered_by_old_pct",
+          "line": 20,
+          "template": "gb:GNB:ADM2:13655514B51179315853055,13655514B51179315853055,Contuboel,2017,Open Data Commons Open Database License 1.0,framework:province:bafata:def125bd4ee9,Bafatá,GNB001003:Contuboel [GNB001:Bafatá],GNB001003,Contuboel,GNB001,Bafatá,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,95.5640,{value},GNB001003:Contuboel (95.6% old);GNB005005:Sonaco (3.4% old);GNB005003:Pirada (0.5% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B53615250576563_old_area_covered_by_top_pct",
+          "line": 21,
+          "template": "gb:GNB:ADM2:13655514B53615250576563,13655514B53615250576563,Setor de Prabis,2017,Open Data Commons Open Database License 1.0,framework:province:biombo:5213c731892e,Biombo,GNB002001:Prabis [GNB002:Biombo],GNB002001,Prabis,GNB002,Biombo,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},95.4198,GNB002001:Prabis (93.2% old);GNB002003:Safim (2.1% old);GNB002002:Quinhamel (0.4% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B53615250576563_salb_top_area_covered_by_old_pct",
+          "line": 21,
+          "template": "gb:GNB:ADM2:13655514B53615250576563,13655514B53615250576563,Setor de Prabis,2017,Open Data Commons Open Database License 1.0,framework:province:biombo:5213c731892e,Biombo,GNB002001:Prabis [GNB002:Biombo],GNB002001,Prabis,GNB002,Biombo,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,93.2282,{value},GNB002001:Prabis (93.2% old);GNB002003:Safim (2.1% old);GNB002002:Quinhamel (0.4% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B57644193184055_old_area_covered_by_top_pct",
+          "line": 22,
+          "template": "gb:GNB:ADM2:13655514B57644193184055,13655514B57644193184055,Setor de Farim,2017,Open Data Commons Open Database License 1.0,framework:province:oio:e1a310d50098,Oio,GNB006002:Farim [GNB006:Oio],GNB006002,Farim,GNB006,Oio,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},97.8443,GNB006002:Farim (98.4% old);GNB006003:Mansaba (0.3% old);GNB001003:Contuboel (0.0% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B57644193184055_salb_top_area_covered_by_old_pct",
+          "line": 22,
+          "template": "gb:GNB:ADM2:13655514B57644193184055,13655514B57644193184055,Setor de Farim,2017,Open Data Commons Open Database License 1.0,framework:province:oio:e1a310d50098,Oio,GNB006002:Farim [GNB006:Oio],GNB006002,Farim,GNB006,Oio,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,98.3674,{value},GNB006002:Farim (98.4% old);GNB006003:Mansaba (0.3% old);GNB001003:Contuboel (0.0% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B57740331915335_old_area_covered_by_top_pct",
+          "line": 23,
+          "template": "gb:GNB:ADM2:13655514B57740331915335,13655514B57740331915335,Setor de Bissora,2017,Open Data Commons Open Database License 1.0,framework:province:oio:e1a310d50098,Oio,GNB006001:Bissorã [GNB006:Oio],GNB006001,Bissorã,GNB006,Oio,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},66.2408,GNB006001:Bissorã (98.5% old);GNB004001:Bigene (0.9% old);GNB006002:Farim (0.4% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B57740331915335_salb_top_area_covered_by_old_pct",
+          "line": 23,
+          "template": "gb:GNB:ADM2:13655514B57740331915335,13655514B57740331915335,Setor de Bissora,2017,Open Data Commons Open Database License 1.0,framework:province:oio:e1a310d50098,Oio,GNB006001:Bissorã [GNB006:Oio],GNB006001,Bissorã,GNB006,Oio,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,98.4603,{value},GNB006001:Bissorã (98.5% old);GNB004001:Bigene (0.9% old);GNB006002:Farim (0.4% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B59106895169358_old_area_covered_by_top_pct",
+          "line": 24,
+          "template": "gb:GNB:ADM2:13655514B59106895169358,13655514B59106895169358,Setor de Caravela,2017,Open Data Commons Open Database License 1.0,framework:province:bolama:08258e19a5c1,Bolama,GNB003003:Caravela [GNB003:Bolama/Bijagós],GNB003003,Caravela,GNB003,Bolama/Bijagós,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},75.2064,GNB003003:Caravela (77.5% old);GNB003004:Uno (6.0% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B59106895169358_salb_top_area_covered_by_old_pct",
+          "line": 24,
+          "template": "gb:GNB:ADM2:13655514B59106895169358,13655514B59106895169358,Setor de Caravela,2017,Open Data Commons Open Database License 1.0,framework:province:bolama:08258e19a5c1,Bolama,GNB003003:Caravela [GNB003:Bolama/Bijagós],GNB003003,Caravela,GNB003,Bolama/Bijagós,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,77.4864,{value},GNB003003:Caravela (77.5% old);GNB003004:Uno (6.0% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B65296626482863_old_area_covered_by_top_pct",
+          "line": 25,
+          "template": "gb:GNB:ADM2:13655514B65296626482863,13655514B65296626482863,Setor de Gabv,2017,Open Data Commons Open Database License 1.0,framework:province:gabu:1496fb36508d,Gabu,none,GNB005002,Gabú,GNB005,Gabú,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},98.7234,GNB005002:Gabú (77.2% old);GNB005001:Boé (22.5% old);GNB005004:Pitche (0.2% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B65296626482863_salb_top_area_covered_by_old_pct",
+          "line": 25,
+          "template": "gb:GNB:ADM2:13655514B65296626482863,13655514B65296626482863,Setor de Gabv,2017,Open Data Commons Open Database License 1.0,framework:province:gabu:1496fb36508d,Gabu,none,GNB005002,Gabú,GNB005,Gabú,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,77.1996,{value},GNB005002:Gabú (77.2% old);GNB005001:Boé (22.5% old);GNB005004:Pitche (0.2% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B65471558325414_old_area_covered_by_top_pct",
+          "line": 26,
+          "template": "gb:GNB:ADM2:13655514B65471558325414,13655514B65471558325414,Setor de Xitole,2017,Open Data Commons Open Database License 1.0,framework:province:bafata:def125bd4ee9,Bafatá,GNB001006:Xitole [GNB001:Bafatá],GNB001006,Xitole,GNB001,Bafatá,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},97.0666,GNB001006:Xitole (94.4% old);GNB007001:Buba (4.9% old);GNB009005:Quebo (0.4% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B65471558325414_salb_top_area_covered_by_old_pct",
+          "line": 26,
+          "template": "gb:GNB:ADM2:13655514B65471558325414,13655514B65471558325414,Setor de Xitole,2017,Open Data Commons Open Database License 1.0,framework:province:bafata:def125bd4ee9,Bafatá,GNB001006:Xitole [GNB001:Bafatá],GNB001006,Xitole,GNB001,Bafatá,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,94.4034,{value},GNB001006:Xitole (94.4% old);GNB007001:Buba (4.9% old);GNB009005:Quebo (0.4% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B65726406107890_old_area_covered_by_top_pct",
+          "line": 27,
+          "template": "gb:GNB:ADM2:13655514B65726406107890,13655514B65726406107890,Setor de Gamamundo,2017,Open Data Commons Open Database License 1.0,framework:province:bafata:def125bd4ee9,Bafatá,none,GNB001005,Gamamudo/Ganadu,GNB001,Bafatá,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},99.4588,GNB001005:Gamamudo/Ganadu (84.8% old);GNB001003:Contuboel (12.0% old);GNB001001:Bafatá (3.2% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B65726406107890_salb_top_area_covered_by_old_pct",
+          "line": 27,
+          "template": "gb:GNB:ADM2:13655514B65726406107890,13655514B65726406107890,Setor de Gamamundo,2017,Open Data Commons Open Database License 1.0,framework:province:bafata:def125bd4ee9,Bafatá,none,GNB001005,Gamamudo/Ganadu,GNB001,Bafatá,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,84.7666,{value},GNB001005:Gamamudo/Ganadu (84.8% old);GNB001003:Contuboel (12.0% old);GNB001001:Bafatá (3.2% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B65757043009502_old_area_covered_by_top_pct",
+          "line": 28,
+          "template": "gb:GNB:ADM2:13655514B65757043009502,13655514B65757043009502,Setor de Safim,2017,Open Data Commons Open Database License 1.0,framework:province:biombo:5213c731892e,Biombo,GNB002003:Safim [GNB002:Biombo],GNB002003,Safim,GNB002,Biombo,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},94.0306,GNB002003:Safim (93.1% old);GNB008001:Sector Autônomo de Bissau (2.7% old);GNB006005:Nhacra (2.5% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B65757043009502_salb_top_area_covered_by_old_pct",
+          "line": 28,
+          "template": "gb:GNB:ADM2:13655514B65757043009502,13655514B65757043009502,Setor de Safim,2017,Open Data Commons Open Database License 1.0,framework:province:biombo:5213c731892e,Biombo,GNB002003:Safim [GNB002:Biombo],GNB002003,Safim,GNB002,Biombo,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,93.0527,{value},GNB002003:Safim (93.1% old);GNB008001:Sector Autônomo de Bissau (2.7% old);GNB006005:Nhacra (2.5% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B66751603958816_old_area_covered_by_top_pct",
+          "line": 29,
+          "template": "gb:GNB:ADM2:13655514B66751603958816,13655514B66751603958816,Setor de Quinh,2017,Open Data Commons Open Database License 1.0,framework:province:biombo:5213c731892e,Biombo,none,GNB002002,Quinhamel,GNB002,Biombo,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},92.5933,GNB002002:Quinhamel (78.6% old);GNB004002:Bula (3.1% old);GNB002001:Prabis (1.4% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B66751603958816_salb_top_area_covered_by_old_pct",
+          "line": 29,
+          "template": "gb:GNB:ADM2:13655514B66751603958816,13655514B66751603958816,Setor de Quinh,2017,Open Data Commons Open Database License 1.0,framework:province:biombo:5213c731892e,Biombo,none,GNB002002,Quinhamel,GNB002,Biombo,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,78.6428,{value},GNB002002:Quinhamel (78.6% old);GNB004002:Bula (3.1% old);GNB002001:Prabis (1.4% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B71925291750028_old_area_covered_by_top_pct",
+          "line": 30,
+          "template": "gb:GNB:ADM2:13655514B71925291750028,13655514B71925291750028,Setor de Cacine,2017,Open Data Commons Open Database License 1.0,framework:province:tombali:692952bab6f4,Tombali,GNB009002:Cacine [GNB009:Tombali],GNB009002,Cacine,GNB009,Tombali,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},96.2649,GNB009002:Cacine (83.0% old);GNB009001:Bedanda (0.0% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B71925291750028_salb_top_area_covered_by_old_pct",
+          "line": 30,
+          "template": "gb:GNB:ADM2:13655514B71925291750028,13655514B71925291750028,Setor de Cacine,2017,Open Data Commons Open Database License 1.0,framework:province:tombali:692952bab6f4,Tombali,GNB009002:Cacine [GNB009:Tombali],GNB009002,Cacine,GNB009,Tombali,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,82.9678,{value},GNB009002:Cacine (83.0% old);GNB009001:Bedanda (0.0% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B76388735674013_old_area_covered_by_top_pct",
+          "line": 31,
+          "template": "gb:GNB:ADM2:13655514B76388735674013,13655514B76388735674013,Setor de Bigene,2017,Open Data Commons Open Database License 1.0,framework:province:cacheu:8c70976871f9,Cacheu,GNB004001:Bigene [GNB004:Cacheu],GNB004001,Bigene,GNB004,Cacheu,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},95.5032,GNB004001:Bigene (95.8% old);GNB006001:Bissorã (0.7% old);GNB004006:São Domingos (0.2% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B76388735674013_salb_top_area_covered_by_old_pct",
+          "line": 31,
+          "template": "gb:GNB:ADM2:13655514B76388735674013,13655514B76388735674013,Setor de Bigene,2017,Open Data Commons Open Database License 1.0,framework:province:cacheu:8c70976871f9,Cacheu,GNB004001:Bigene [GNB004:Cacheu],GNB004001,Bigene,GNB004,Cacheu,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,95.8250,{value},GNB004001:Bigene (95.8% old);GNB006001:Bissorã (0.7% old);GNB004006:São Domingos (0.2% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B77006902429960_old_area_covered_by_top_pct",
+          "line": 32,
+          "template": "gb:GNB:ADM2:13655514B77006902429960,13655514B77006902429960,Setor de Bolama,2017,Open Data Commons Open Database License 1.0,framework:province:bolama:08258e19a5c1,Bolama,GNB003001:Bolama [GNB003:Bolama/Bijagós],GNB003001,Bolama,GNB003,Bolama/Bijagós,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},29.9141,GNB003001:Bolama (69.8% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B77006902429960_salb_top_area_covered_by_old_pct",
+          "line": 32,
+          "template": "gb:GNB:ADM2:13655514B77006902429960,13655514B77006902429960,Setor de Bolama,2017,Open Data Commons Open Database License 1.0,framework:province:bolama:08258e19a5c1,Bolama,GNB003001:Bolama [GNB003:Bolama/Bijagós],GNB003001,Bolama,GNB003,Bolama/Bijagós,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,69.7557,{value},GNB003001:Bolama (69.8% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B8216177448850_old_area_covered_by_top_pct",
+          "line": 33,
+          "template": "gb:GNB:ADM2:13655514B8216177448850,13655514B8216177448850,Setor de Caiv,2017,Open Data Commons Open Database License 1.0,framework:province:cacheu:8c70976871f9,Cacheu,none,GNB004004,Caió,GNB004,Cacheu,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},58.9273,GNB004004:Caió (77.6% old);GNB004003:Cacheu/Calequisse (0.2% old);GNB004005:Canchungo (0.0% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B8216177448850_salb_top_area_covered_by_old_pct",
+          "line": 33,
+          "template": "gb:GNB:ADM2:13655514B8216177448850,13655514B8216177448850,Setor de Caiv,2017,Open Data Commons Open Database License 1.0,framework:province:cacheu:8c70976871f9,Cacheu,none,GNB004004,Caió,GNB004,Cacheu,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,77.6016,{value},GNB004004:Caió (77.6% old);GNB004003:Cacheu/Calequisse (0.2% old);GNB004005:Canchungo (0.0% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B91246233663569_old_area_covered_by_top_pct",
+          "line": 34,
+          "template": "gb:GNB:ADM2:13655514B91246233663569,13655514B91246233663569,Setor de Canghungo,2017,Open Data Commons Open Database License 1.0,framework:province:cacheu:8c70976871f9,Cacheu,none,GNB004005,Canchungo,GNB004,Cacheu,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},99.2846,GNB004005:Canchungo (92.2% old);GNB002002:Quinhamel (2.4% old);GNB004002:Bula (1.4% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B91246233663569_salb_top_area_covered_by_old_pct",
+          "line": 34,
+          "template": "gb:GNB:ADM2:13655514B91246233663569,13655514B91246233663569,Setor de Canghungo,2017,Open Data Commons Open Database License 1.0,framework:province:cacheu:8c70976871f9,Cacheu,none,GNB004005,Canchungo,GNB004,Cacheu,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,92.2272,{value},GNB004005:Canchungo (92.2% old);GNB002002:Quinhamel (2.4% old);GNB004002:Bula (1.4% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B91994517778696_old_area_covered_by_top_pct",
+          "line": 35,
+          "template": "gb:GNB:ADM2:13655514B91994517778696,13655514B91994517778696,Setor de Sto Domingos,2017,Open Data Commons Open Database License 1.0,framework:province:cacheu:8c70976871f9,Cacheu,none,GNB004006,São Domingos,GNB004,Cacheu,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},98.5734,GNB004006:São Domingos (89.7% old);GNB004003:Cacheu/Calequisse (0.1% old);GNB004001:Bigene (0.0% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B91994517778696_salb_top_area_covered_by_old_pct",
+          "line": 35,
+          "template": "gb:GNB:ADM2:13655514B91994517778696,13655514B91994517778696,Setor de Sto Domingos,2017,Open Data Commons Open Database License 1.0,framework:province:cacheu:8c70976871f9,Cacheu,none,GNB004006,São Domingos,GNB004,Cacheu,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,89.6520,{value},GNB004006:São Domingos (89.7% old);GNB004003:Cacheu/Calequisse (0.1% old);GNB004001:Bigene (0.0% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B9524670555472_old_area_covered_by_top_pct",
+          "line": 36,
+          "template": "gb:GNB:ADM2:13655514B9524670555472,13655514B9524670555472,Setor de Fulacunda,2017,Open Data Commons Open Database License 1.0,framework:province:quinara:a0e3b196a3a4,Quinara,GNB007003:Fulacunda [GNB007:Quinara],GNB007003,Fulacunda,GNB007,Quinara,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},88.0456,GNB007003:Fulacunda (85.8% old);GNB001002:Bambadinca (0.2% old);GNB007001:Buba (0.1% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B9524670555472_salb_top_area_covered_by_old_pct",
+          "line": 36,
+          "template": "gb:GNB:ADM2:13655514B9524670555472,13655514B9524670555472,Setor de Fulacunda,2017,Open Data Commons Open Database License 1.0,framework:province:quinara:a0e3b196a3a4,Quinara,GNB007003:Fulacunda [GNB007:Quinara],GNB007003,Fulacunda,GNB007,Quinara,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,85.8005,{value},GNB007003:Fulacunda (85.8% old);GNB001002:Bambadinca (0.2% old);GNB007001:Buba (0.1% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B95678269815128_old_area_covered_by_top_pct",
+          "line": 37,
+          "template": "gb:GNB:ADM2:13655514B95678269815128,13655514B95678269815128,Setor de Cacheu,2017,Open Data Commons Open Database License 1.0,framework:province:cacheu:8c70976871f9,Cacheu,none,GNB004003,Cacheu/Calequisse,GNB004,Cacheu,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},99.0783,GNB004003:Cacheu/Calequisse (88.2% old);GNB004001:Bigene (2.0% old);GNB004006:São Domingos (0.9% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B95678269815128_salb_top_area_covered_by_old_pct",
+          "line": 37,
+          "template": "gb:GNB:ADM2:13655514B95678269815128,13655514B95678269815128,Setor de Cacheu,2017,Open Data Commons Open Database License 1.0,framework:province:cacheu:8c70976871f9,Cacheu,none,GNB004003,Cacheu/Calequisse,GNB004,Cacheu,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,88.1563,{value},GNB004003:Cacheu/Calequisse (88.2% old);GNB004001:Bigene (2.0% old);GNB004006:São Domingos (0.9% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B97576906537580_old_area_covered_by_top_pct",
+          "line": 38,
+          "template": "gb:GNB:ADM2:13655514B97576906537580,13655514B97576906537580,Setor de Pitche,2017,Open Data Commons Open Database License 1.0,framework:province:gabu:1496fb36508d,Gabu,GNB005004:Pitche [GNB005:Gabú],GNB005004,Pitche,GNB005,Gabú,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},99.5091,GNB005004:Pitche (98.6% old);GNB005001:Boé (0.3% old);GNB005002:Gabú (0.0% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B97576906537580_salb_top_area_covered_by_old_pct",
+          "line": 38,
+          "template": "gb:GNB:ADM2:13655514B97576906537580,13655514B97576906537580,Setor de Pitche,2017,Open Data Commons Open Database License 1.0,framework:province:gabu:1496fb36508d,Gabu,GNB005004:Pitche [GNB005:Gabú],GNB005004,Pitche,GNB005,Gabú,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,98.6260,{value},GNB005004:Pitche (98.6% old);GNB005001:Boé (0.3% old);GNB005002:Gabú (0.0% old),screen-consistent-name-and-parent,candidate name/parent/overlap screens agree; legal boundary and completeness not established",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B98496568253651_old_area_covered_by_top_pct",
+          "line": 39,
+          "template": "gb:GNB:ADM2:13655514B98496568253651,13655514B98496568253651,Setor de Bubaque,2017,Open Data Commons Open Database License 1.0,framework:province:bolama:08258e19a5c1,Bolama,GNB003002:Bubaque [GNB003:Bolama/Bijagós],GNB003002,Bubaque,GNB003,Bolama/Bijagós,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},45.4652,GNB003002:Bubaque (83.9% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B98496568253651_salb_top_area_covered_by_old_pct",
+          "line": 39,
+          "template": "gb:GNB:ADM2:13655514B98496568253651,13655514B98496568253651,Setor de Bubaque,2017,Open Data Commons Open Database License 1.0,framework:province:bolama:08258e19a5c1,Bolama,GNB003002:Bubaque [GNB003:Bolama/Bijagós],GNB003002,Bubaque,GNB003,Bolama/Bijagós,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,83.9160,{value},GNB003002:Bubaque (83.9% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B99052541590952_old_area_covered_by_top_pct",
+          "line": 40,
+          "template": "gb:GNB:ADM2:13655514B99052541590952,13655514B99052541590952,Setor de Boe,2017,Open Data Commons Open Database License 1.0,framework:province:cacheu:8c70976871f9,Cacheu,GNB005001:Boé [GNB005:Gabú],GNB004004,Caió,GNB004,Cacheu,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,{value},35.5924,GNB004004:Caió (60.0% old);GNB004005:Canchungo (1.5% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B99052541590952_salb_top_area_covered_by_old_pct",
+          "line": 40,
+          "template": "gb:GNB:ADM2:13655514B99052541590952,13655514B99052541590952,Setor de Boe,2017,Open Data Commons Open Database License 1.0,framework:province:cacheu:8c70976871f9,Cacheu,GNB005001:Boé [GNB005:Gabú],GNB004004,Caió,GNB004,Cacheu,valid 2016-01-01 through last verification/update 2021-09-02,restricted: non-commercial only; attribute DGGC and SALB/United Nations; no geometry/content changes without contributor consent,59.9562,{value},GNB004004:Caió (60.0% old);GNB004005:Canchungo (1.5% old),review-required-name-parent-or-vintage,\"cross-vintage name, parent or overlap screen requires source resolution; area rank does not establish identity\"",
+          "decimals": 4
+        }
+      ]
+    },
+    {
+      "path": "data/regional-review/west-africa-guinea-bissau-sector-roster/summary-metrics.csv",
+      "rows": [
+        {
+          "metric_id": "old_subjects_2017",
+          "line": 2,
+          "template": "old_subjects_2017,{value},subjects",
+          "decimals": 0
+        },
+        {
+          "metric_id": "salb_features",
+          "line": 3,
+          "template": "salb_features,{value},features",
+          "decimals": 0
+        },
+        {
+          "metric_id": "salb_regional_sectors",
+          "line": 4,
+          "template": "salb_regional_sectors,{value},sectors",
+          "decimals": 0
+        },
+        {
+          "metric_id": "salb_autonomous_sector",
+          "line": 5,
+          "template": "salb_autonomous_sector,{value},sectors",
+          "decimals": 0
+        },
+        {
+          "metric_id": "screen_review_required",
+          "line": 6,
+          "template": "screen_review_required,{value},rows",
+          "decimals": 0
+        },
+        {
+          "metric_id": "screen_consistent",
+          "line": 7,
+          "template": "screen_consistent,{value},rows",
+          "decimals": 0
+        },
+        {
+          "metric_id": "nc4_count_gap",
+          "line": 8,
+          "template": "nc4_count_gap,{value},sectors",
+          "decimals": 0
+        },
+        {
+          "metric_id": "crosswalk_13655514B11561761851968_old_area_covered_by_top_pct",
+          "line": 9,
+          "template": "crosswalk_13655514B11561761851968_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B11561761851968_salb_top_area_covered_by_old_pct",
+          "line": 10,
+          "template": "crosswalk_13655514B11561761851968_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B12793543239296_old_area_covered_by_top_pct",
+          "line": 11,
+          "template": "crosswalk_13655514B12793543239296_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B12793543239296_salb_top_area_covered_by_old_pct",
+          "line": 12,
+          "template": "crosswalk_13655514B12793543239296_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B15077734082289_old_area_covered_by_top_pct",
+          "line": 13,
+          "template": "crosswalk_13655514B15077734082289_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B15077734082289_salb_top_area_covered_by_old_pct",
+          "line": 14,
+          "template": "crosswalk_13655514B15077734082289_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B15408487636665_old_area_covered_by_top_pct",
+          "line": 15,
+          "template": "crosswalk_13655514B15408487636665_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B15408487636665_salb_top_area_covered_by_old_pct",
+          "line": 16,
+          "template": "crosswalk_13655514B15408487636665_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B16168252486838_old_area_covered_by_top_pct",
+          "line": 17,
+          "template": "crosswalk_13655514B16168252486838_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B16168252486838_salb_top_area_covered_by_old_pct",
+          "line": 18,
+          "template": "crosswalk_13655514B16168252486838_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B168355566476_old_area_covered_by_top_pct",
+          "line": 19,
+          "template": "crosswalk_13655514B168355566476_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B168355566476_salb_top_area_covered_by_old_pct",
+          "line": 20,
+          "template": "crosswalk_13655514B168355566476_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B24413703823033_old_area_covered_by_top_pct",
+          "line": 21,
+          "template": "crosswalk_13655514B24413703823033_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B24413703823033_salb_top_area_covered_by_old_pct",
+          "line": 22,
+          "template": "crosswalk_13655514B24413703823033_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B30693048438959_old_area_covered_by_top_pct",
+          "line": 23,
+          "template": "crosswalk_13655514B30693048438959_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B30693048438959_salb_top_area_covered_by_old_pct",
+          "line": 24,
+          "template": "crosswalk_13655514B30693048438959_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B31772276876031_old_area_covered_by_top_pct",
+          "line": 25,
+          "template": "crosswalk_13655514B31772276876031_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B31772276876031_salb_top_area_covered_by_old_pct",
+          "line": 26,
+          "template": "crosswalk_13655514B31772276876031_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B37452641895852_old_area_covered_by_top_pct",
+          "line": 27,
+          "template": "crosswalk_13655514B37452641895852_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B37452641895852_salb_top_area_covered_by_old_pct",
+          "line": 28,
+          "template": "crosswalk_13655514B37452641895852_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B37576476310465_old_area_covered_by_top_pct",
+          "line": 29,
+          "template": "crosswalk_13655514B37576476310465_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B37576476310465_salb_top_area_covered_by_old_pct",
+          "line": 30,
+          "template": "crosswalk_13655514B37576476310465_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B38974563194217_old_area_covered_by_top_pct",
+          "line": 31,
+          "template": "crosswalk_13655514B38974563194217_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B38974563194217_salb_top_area_covered_by_old_pct",
+          "line": 32,
+          "template": "crosswalk_13655514B38974563194217_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B4319146558278_old_area_covered_by_top_pct",
+          "line": 33,
+          "template": "crosswalk_13655514B4319146558278_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B4319146558278_salb_top_area_covered_by_old_pct",
+          "line": 34,
+          "template": "crosswalk_13655514B4319146558278_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B44985576134462_old_area_covered_by_top_pct",
+          "line": 35,
+          "template": "crosswalk_13655514B44985576134462_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B44985576134462_salb_top_area_covered_by_old_pct",
+          "line": 36,
+          "template": "crosswalk_13655514B44985576134462_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B47112439721810_old_area_covered_by_top_pct",
+          "line": 37,
+          "template": "crosswalk_13655514B47112439721810_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B47112439721810_salb_top_area_covered_by_old_pct",
+          "line": 38,
+          "template": "crosswalk_13655514B47112439721810_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B47480576799194_old_area_covered_by_top_pct",
+          "line": 39,
+          "template": "crosswalk_13655514B47480576799194_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B47480576799194_salb_top_area_covered_by_old_pct",
+          "line": 40,
+          "template": "crosswalk_13655514B47480576799194_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B48763126228848_old_area_covered_by_top_pct",
+          "line": 41,
+          "template": "crosswalk_13655514B48763126228848_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B48763126228848_salb_top_area_covered_by_old_pct",
+          "line": 42,
+          "template": "crosswalk_13655514B48763126228848_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B49812801634354_old_area_covered_by_top_pct",
+          "line": 43,
+          "template": "crosswalk_13655514B49812801634354_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B49812801634354_salb_top_area_covered_by_old_pct",
+          "line": 44,
+          "template": "crosswalk_13655514B49812801634354_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B51179315853055_old_area_covered_by_top_pct",
+          "line": 45,
+          "template": "crosswalk_13655514B51179315853055_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B51179315853055_salb_top_area_covered_by_old_pct",
+          "line": 46,
+          "template": "crosswalk_13655514B51179315853055_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B53615250576563_old_area_covered_by_top_pct",
+          "line": 47,
+          "template": "crosswalk_13655514B53615250576563_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B53615250576563_salb_top_area_covered_by_old_pct",
+          "line": 48,
+          "template": "crosswalk_13655514B53615250576563_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B57644193184055_old_area_covered_by_top_pct",
+          "line": 49,
+          "template": "crosswalk_13655514B57644193184055_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B57644193184055_salb_top_area_covered_by_old_pct",
+          "line": 50,
+          "template": "crosswalk_13655514B57644193184055_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B57740331915335_old_area_covered_by_top_pct",
+          "line": 51,
+          "template": "crosswalk_13655514B57740331915335_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B57740331915335_salb_top_area_covered_by_old_pct",
+          "line": 52,
+          "template": "crosswalk_13655514B57740331915335_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B59106895169358_old_area_covered_by_top_pct",
+          "line": 53,
+          "template": "crosswalk_13655514B59106895169358_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B59106895169358_salb_top_area_covered_by_old_pct",
+          "line": 54,
+          "template": "crosswalk_13655514B59106895169358_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B65296626482863_old_area_covered_by_top_pct",
+          "line": 55,
+          "template": "crosswalk_13655514B65296626482863_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B65296626482863_salb_top_area_covered_by_old_pct",
+          "line": 56,
+          "template": "crosswalk_13655514B65296626482863_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B65471558325414_old_area_covered_by_top_pct",
+          "line": 57,
+          "template": "crosswalk_13655514B65471558325414_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B65471558325414_salb_top_area_covered_by_old_pct",
+          "line": 58,
+          "template": "crosswalk_13655514B65471558325414_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B65726406107890_old_area_covered_by_top_pct",
+          "line": 59,
+          "template": "crosswalk_13655514B65726406107890_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B65726406107890_salb_top_area_covered_by_old_pct",
+          "line": 60,
+          "template": "crosswalk_13655514B65726406107890_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B65757043009502_old_area_covered_by_top_pct",
+          "line": 61,
+          "template": "crosswalk_13655514B65757043009502_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B65757043009502_salb_top_area_covered_by_old_pct",
+          "line": 62,
+          "template": "crosswalk_13655514B65757043009502_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B66751603958816_old_area_covered_by_top_pct",
+          "line": 63,
+          "template": "crosswalk_13655514B66751603958816_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B66751603958816_salb_top_area_covered_by_old_pct",
+          "line": 64,
+          "template": "crosswalk_13655514B66751603958816_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B71925291750028_old_area_covered_by_top_pct",
+          "line": 65,
+          "template": "crosswalk_13655514B71925291750028_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B71925291750028_salb_top_area_covered_by_old_pct",
+          "line": 66,
+          "template": "crosswalk_13655514B71925291750028_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B76388735674013_old_area_covered_by_top_pct",
+          "line": 67,
+          "template": "crosswalk_13655514B76388735674013_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B76388735674013_salb_top_area_covered_by_old_pct",
+          "line": 68,
+          "template": "crosswalk_13655514B76388735674013_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B77006902429960_old_area_covered_by_top_pct",
+          "line": 69,
+          "template": "crosswalk_13655514B77006902429960_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B77006902429960_salb_top_area_covered_by_old_pct",
+          "line": 70,
+          "template": "crosswalk_13655514B77006902429960_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B8216177448850_old_area_covered_by_top_pct",
+          "line": 71,
+          "template": "crosswalk_13655514B8216177448850_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B8216177448850_salb_top_area_covered_by_old_pct",
+          "line": 72,
+          "template": "crosswalk_13655514B8216177448850_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B91246233663569_old_area_covered_by_top_pct",
+          "line": 73,
+          "template": "crosswalk_13655514B91246233663569_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B91246233663569_salb_top_area_covered_by_old_pct",
+          "line": 74,
+          "template": "crosswalk_13655514B91246233663569_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B91994517778696_old_area_covered_by_top_pct",
+          "line": 75,
+          "template": "crosswalk_13655514B91994517778696_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B91994517778696_salb_top_area_covered_by_old_pct",
+          "line": 76,
+          "template": "crosswalk_13655514B91994517778696_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B9524670555472_old_area_covered_by_top_pct",
+          "line": 77,
+          "template": "crosswalk_13655514B9524670555472_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B9524670555472_salb_top_area_covered_by_old_pct",
+          "line": 78,
+          "template": "crosswalk_13655514B9524670555472_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B95678269815128_old_area_covered_by_top_pct",
+          "line": 79,
+          "template": "crosswalk_13655514B95678269815128_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B95678269815128_salb_top_area_covered_by_old_pct",
+          "line": 80,
+          "template": "crosswalk_13655514B95678269815128_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B97576906537580_old_area_covered_by_top_pct",
+          "line": 81,
+          "template": "crosswalk_13655514B97576906537580_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B97576906537580_salb_top_area_covered_by_old_pct",
+          "line": 82,
+          "template": "crosswalk_13655514B97576906537580_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B98496568253651_old_area_covered_by_top_pct",
+          "line": 83,
+          "template": "crosswalk_13655514B98496568253651_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B98496568253651_salb_top_area_covered_by_old_pct",
+          "line": 84,
+          "template": "crosswalk_13655514B98496568253651_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B99052541590952_old_area_covered_by_top_pct",
+          "line": 85,
+          "template": "crosswalk_13655514B99052541590952_old_area_covered_by_top_pct,{value},percent",
+          "decimals": 4
+        },
+        {
+          "metric_id": "crosswalk_13655514B99052541590952_salb_top_area_covered_by_old_pct",
+          "line": 86,
+          "template": "crosswalk_13655514B99052541590952_salb_top_area_covered_by_old_pct,{value},percent",
+          "decimals": 4
+        }
+      ]
     }
   ]
 }

@@ -91,7 +91,13 @@ fields are included for both source rosters, together with exact IDs/parents.
 
 The SALB web page exposes a general administrative-data validity range of
 2000-01-01 to its last update, while the service layer metadata specifically
-describes this layer's validity as 2016-01-01 to 2021-09-02. This packet uses
+describes this layer's validity as 2016-01-01 to 2021-09-02. An independent
+reviewer later found that the official GeoJSON item URL returned 410,290 bytes
+with a different SHA-256 (`aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28`), rather than this retrieval's
+411,079-byte snapshot. The exact restricted snapshot is not redistributed and
+is no longer restorable from the endpoint response observed during review.
+Current endpoint bytes must not be substituted into this reproduction; a new
+snapshot would require fresh temporal/source review and outputs. This packet uses
 the more specific layer metadata for the 39-row roster and records the page
 range as a page-level discrepancy, not as an inferred geometry start date.
 The endpoint's copyrightText credits MITC/DGGC and the SALB programme, United
@@ -110,15 +116,26 @@ against the recorded digest before relying on it.
 
 ## Reproduction
 
-Install the versions from the repository `requirements.txt` in a disposable
-environment. Run from the repository root:
+This reproduction was run with Python 3 and Shapely 2.0.7, pyproj 3.5.0, and
+NumPy 1.24.4. The script enforces those exact versions. They differ from the
+repository's general preparation pins in `requirements.txt`; the configured
+package mirror did not offer the repository's newer versions during this
+review, so the general preparation environment was not used for this run.
+Run in a disposable environment containing the three versions above from the
+repository root:
 
 ```sh
 python data/regional-review/west-africa-guinea-bissau-sector-roster/reproduce.py /path/to/restored-salb.geojson --output data/regional-review/west-africa-guinea-bissau-sector-roster/crosswalk-screen.csv
 ```
 
-The script rejects a SALB byte mismatch and source roster counts other than
-39. It uses the shared geography helper and verifies positive and negative
+The script rejects either a SALB or geoBoundaries byte mismatch, rejects
+runtime-version mismatches, and rejects source roster counts other than 39.
+The #472 `subject-assessments.csv` used for Atlas parent/source metadata is
+pinned by commit, exact byte count, and SHA-256 in the evidence manifest. The
+numeric measurements in `crosswalk-screen.csv` and all aggregate metrics are
+bound to `summary.json` and enumerated in `summary-metrics.csv`; exact rendered
+line templates are recorded in the evidence manifest. `salb-roster.csv` is a
+full-row-hash-bound source ID and neighbor ledger. It uses the shared geography helper and verifies positive and negative
 known-geometry controls before writing outputs. The saved outputs can be
 byte-compared with a rerun. The control shapes are synthetic and establish
 method behavior only, not source correctness.

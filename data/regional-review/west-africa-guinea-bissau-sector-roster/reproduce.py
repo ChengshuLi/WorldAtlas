@@ -14,6 +14,7 @@ import collections
 import unicodedata
 from pathlib import Path
 import sys
+from importlib.metadata import version
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "scripts"))
 
@@ -22,6 +23,8 @@ from evidence.geometry import ownership_overlap
 
 
 EXPECTED_SALB_SHA256 = "4c758eb2cb41f796ac12b58676a85eda509f622a51ad05a91cdef8572304e7b9"
+EXPECTED_OLD_SHA256 = "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680"
+EXPECTED_PACKAGES = {"shapely": "2.0.7", "pyproj": "3.5.0", "numpy": "1.24.4"}
 PARENT_PACKET = Path(__file__).resolve().parents[1] / "regional-review-1deb892647c1aa26"
 OLD = PARENT_PACKET / "sources/geoboundaries-9469f09/GNB-geoBoundaries-GNB-ADM2.geojson"
 ASSESSED = PARENT_PACKET / "reproduction/subject-assessments.csv"
@@ -50,9 +53,16 @@ def main():
     parser.add_argument("--output", type=Path, default=Path("crosswalk-screen.csv"))
     parser.add_argument("--roster-output", type=Path, default=Path("salb-roster.csv"))
     args = parser.parse_args()
+    for package, expected in EXPECTED_PACKAGES.items():
+        installed = version(package)
+        if installed != expected:
+            raise SystemExit(f"{package} version mismatch: expected {expected}, got {installed}")
     digest = sha(args.salb_geojson)
     if digest != EXPECTED_SALB_SHA256:
         raise SystemExit(f"SALB SHA-256 mismatch: {digest}")
+    old_digest = sha(OLD)
+    if old_digest != EXPECTED_OLD_SHA256:
+        raise SystemExit(f"geoBoundaries SHA-256 mismatch: {old_digest}")
     old_doc = json.loads(OLD.read_text(encoding="utf-8"))
     salb_doc = json.loads(args.salb_geojson.read_text(encoding="utf-8"))
     with open(ASSESSED, newline="", encoding="utf-8") as stream:
@@ -126,12 +136,31 @@ def main():
         "salb_features_by_adm1_name": dict(sorted(salb_parents.items())),
         "input_sha256": {"salb_geojson": digest, "geoboundaries_geojson": sha(OLD)},
         "helper": "worldatlas-evidence-geometry-v1",
+        "crosswalk_metric_values": {
+            f"crosswalk_{row['source_id']}_{field}": float(row[field])
+            for row in rows for field in ("old_area_covered_by_top_pct", "salb_top_area_covered_by_old_pct")
+        },
     }
     summary["salb_regional_sector_difference_vs_2025_nc4"] = summary["salb_regional_sector_count"] - 36
     summary["validation"] = {"positive_control": positive_ok, "negative_control": negative_ok}
     summary_path = args.output.parent / "summary.json"
     summary_path.write_text(json.dumps(summary, sort_keys=True, separators=(",", ":")) + "\n", encoding="utf-8")
-    print(f"SALB sha256={digest}; old geoBoundaries sha256={sha(OLD)}; rows={len(rows)}; outputs={args.output},{args.roster_output},{summary_path}")
+    metrics_path = args.output.parent / "summary-metrics.csv"
+    metrics = [
+        ("old_geoboundaries_subject_count", summary["old_geoboundaries_subject_count"], "subjects"),
+        ("salb_adm2_count", summary["salb_adm2_count"], "features"),
+        ("salb_regional_sector_count", summary["salb_regional_sector_count"], "sectors"),
+        ("salb_autonomous_sector_count", summary["salb_autonomous_sector_count"], "sectors"),
+        ("atlas_parent_vs_overlap_candidate_review_rows", summary["atlas_parent_vs_overlap_candidate_review_rows"], "rows"),
+        ("atlas_parent_vs_overlap_candidate_consistent_rows", summary["atlas_parent_vs_overlap_candidate_consistent_rows"], "rows"),
+        ("salb_regional_sector_difference_vs_2025_nc4", summary["salb_regional_sector_difference_vs_2025_nc4"], "sectors"),
+    ]
+    metrics.extend((metric_id, value, "percent") for metric_id, value in sorted(summary["crosswalk_metric_values"].items()))
+    with open(metrics_path, "w", newline="", encoding="utf-8") as stream:
+        writer = csv.writer(stream, lineterminator="\n")
+        writer.writerow(["metric_id", "value", "unit"])
+        writer.writerows(metrics)
+    print(f"SALB sha256={digest}; old geoBoundaries sha256={old_digest}; rows={len(rows)}; outputs={args.output},{args.roster_output},{summary_path},{metrics_path}")
 
 
 if __name__ == "__main__":

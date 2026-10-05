@@ -13,7 +13,15 @@
       "source_contributor": "MITC / Direcção Geral de Geografia e Cadastro, Guinea-Bissau; SALB programme, United Nations",
       "temporal_validity": "2016-01-01 through last verification/update 2021-09-02",
       "completeness": "39 features returned by service; SALB terms disclaim completeness and warranty; 2025 government source reports a conflicting 36 sectors under regions",
-      "retention": "restoration-only; bytes must be fetched from the URL and verified by SHA-256; this packet does not redistribute SALB geometries"
+      "retention": "restoration-only; bytes must be fetched from the URL and verified by SHA-256; this packet does not redistribute SALB geometries",
+      "current_endpoint_observation": {
+        "observed_by": "independent reviewer and author API retrieval",
+        "observed_date": "2026-10-05",
+        "bytes": 410290,
+        "sha256": "aa5bcf549d10140e372012484c355a4f794fa304a87f225c7d95d3ebafc4cd28",
+        "feature_count": 39,
+        "finding": "The cited item URL no longer restores the pinned snapshot; this packet does not claim current endpoint reproducibility."
+      }
     },
     {
       "id": "salb-layer-metadata",
@@ -51,7 +59,13 @@
       "sha256": "8839091ee5599651642efc6f8ac65d82a4f40e779bd38debedfd417649bfc680",
       "license": "Open Data Commons Open Database License 1.0",
       "source_vintage": "2017",
-      "notes": "Source metadata describes OSM/Wambacher-derived boundaries. Original feature IDs and bytes are preserved in the #472 parent packet."
+      "notes": "Source metadata describes OSM/Wambacher-derived boundaries. Original feature IDs and bytes are preserved in the #472 parent packet.",
+      "assessment_input": {
+        "path": "data/regional-review/regional-review-1deb892647c1aa26/reproduction/subject-assessments.csv",
+        "commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344",
+        "bytes": 163958,
+        "sha256": "142fb1e558300db05873b972e22fcae2e5c38305954ddcd046eea8126b602c4d"
+      }
     },
     {
       "id": "salb-country-page",
