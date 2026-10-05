@@ -33,7 +33,7 @@ The source `evidence-index.json` lists byte lengths and SHA-256 values for all r
 
 ## Required engineering handoff and unresolved items
 
-- Create/track a bounded engineering correction for the Fairfax Atlas aggregate: preserve both source IDs and their distinct Census identities (51600 Fairfax city and 51059 Fairfax County), separate the units without assigning a legal-boundary claim, and independently verify parent links, geometries, downstream IDs and source lineage before any canonical edit. No core geography was changed in this packet.
+- Bounded engineering follow-up [#976](https://github.com/ChengshuLi/WorldAtlas/issues/976) now tracks the Fairfax Atlas aggregate correction: preserve both source IDs and their distinct Census identities (51600 Fairfax city and 51059 Fairfax County), separate the units without assigning a legal-boundary claim, and independently verify parent links, geometries, downstream IDs and source lineage before any canonical edit. #976 depends on this source packet and requires a no-change blocker outcome if the evidence is insufficient. No core geography was changed in this packet.
 - Continue the broader raw-source hash-lineage issue in #954. The current packet reproduces its raw GeoJSON hash discrepancy, but cannot determine what serialization or artifact the catalog's expected hash denotes.
 - Resolve the 34 source-to-2018-cartographic, 63 source-to-current-TIGER and 19 Atlas-to-source diagnostic differences under blocked follow-up #968. Confirm dated source lineage, transformations and shoreline/water treatment; do not make boundary edits from these scores alone.
 - No source proves legal boundaries, coastal completeness, offshore/island completeness, or authorization to publish/import the regional geometry.
