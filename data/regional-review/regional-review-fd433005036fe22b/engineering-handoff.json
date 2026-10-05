@@ -44,10 +44,20 @@
     {
       "count": 1,
       "name": "Rivadavia",
-      "current_province_code": "86",
-      "current_parent_name": "Salta",
-      "current_parent_id_candidate": "framework:province:salta:7e3f9095353a",
-      "recommendation": "Coordinate the candidate move into existing Salta under Argentina Northwest with Southern South America integration #441 and Northwest neighbor review #943. The cross-area membership cannot be changed one-sided in #442."
+      "status": "unresolved-source-conflict",
+      "ign_capture_reported_province_code": "86",
+      "ign_capture_reported_parent_name": "Salta",
+      "code_table_finding": "Official Argentina code table assigns 86 to Santiago del Estero and 66 to Salta.",
+      "georef_candidates": [
+        "06679 (Buenos Aires)",
+        "50084 (Mendoza)",
+        "66133 (Salta)",
+        "70084 (San Juan)",
+        "86154 (Santiago del Estero)"
+      ],
+      "expected_frozen_parent": "Córdoba (province code 14)",
+      "recommendation": "Do not move or relabel from name matching. The previous IGN code/name pair conflicts with the official code table and the licensed Georef capture, which supplies no Córdoba candidate. Reconcile the IGN attributes and identify a dated authoritative source/crosswalk for the frozen Córdoba feature; coordinate cross-area decision with #441 and #943 before any parent or area change.",
+      "source": "Georef crosswalk vintages/2026-10-05-georef-cc-by4/georef-crosswalk.jsonl; official province code table https://www.argentina.gob.ar/normativa/recurso/85332/res71-2003clasifgeograf/htm"
     },
     {
       "count": 9,

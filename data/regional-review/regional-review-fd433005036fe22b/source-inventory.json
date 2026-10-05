@@ -26,7 +26,10 @@
       "represented_vintage": "2020",
       "source_data_update_date": "2023-01-19",
       "build_date": "2023-12-12",
-      "stated_upstream_sources": ["Instituto Geografico Nacional", "UNHCR, OCHA ROLAC"],
+      "stated_upstream_sources": [
+        "Instituto Geografico Nacional",
+        "UNHCR, OCHA ROLAC"
+      ],
       "license": "CC BY 3.0 IGO",
       "metadata_adm_unit_count": 526,
       "retrieved_feature_count": 525,
@@ -77,7 +80,11 @@
       "publication_vintage": "2025-10",
       "retrieval_date": "2026-10-05",
       "license": "No license statement located in the consulted document",
-      "findings": ["Provinces/CABA are first-level jurisdictions.", "Departments/partidos are second-level political-administrative areas described as exhaustive within each jurisdiction.", "Local governments are third-level and may cross departments or fail to cover an entire province."]
+      "findings": [
+        "Provinces/CABA are first-level jurisdictions.",
+        "Departments/partidos are second-level political-administrative areas described as exhaustive within each jurisdiction.",
+        "Local governments are third-level and may cross departments or fail to cover an entire province."
+      ]
     },
     {
       "id": "IGN-units-territoriales-visor",
@@ -86,7 +93,10 @@
       "role": "Official institutional explanation of national territorial cartography and the legal/source limits for some represented boundaries",
       "retrieval_date": "2026-10-05",
       "license": "No reuse license recorded in the consulted page",
-      "findings": ["IGN describes official cartography as based on inputs from competent authorities.", "It warns that some legal limits lack an instrument defining them or are described too vaguely to represent precisely."]
+      "findings": [
+        "IGN describes official cartography as based on inputs from competent authorities.",
+        "It warns that some legal limits lack an instrument defining them or are described too vaguely to represent precisely."
+      ]
     },
     {
       "id": "INDEC-GeoNode-departments",
@@ -100,8 +110,8 @@
     },
     {
       "id": "TDWG-WGSRPD-2001",
-    "title": "Brummitt, World Geographic Scheme for Recording Plant Distributions, Edition 2",
-    "url": "https://www.tdwg.org/standards/wgsrpd/",
+      "title": "Brummitt, World Geographic Scheme for Recording Plant Distributions, Edition 2",
+      "url": "https://www.tdwg.org/standards/wgsrpd/",
       "primary_document": "https://github.com/tdwg/wgsrpd/blob/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/SecondEdGeog.htm",
       "vintage": "2001-08",
       "role": "Authoritative semantic description of botanical geographic Level 3 and political Level 4 units",
@@ -131,7 +141,36 @@
           "restoration": "Fetch the exact raw path at repository commit 52da7828aba9d461dd133c27b3bd7a4407161f54 and verify the listed byte count and SHA-256. The nine AGE rows omit Santa Fe; row AGS-SF places it under the neighboring Argentina South Level 3 area (AGS). The table is retained by restoration instructions, not redistributed, because no reuse license was located."
         }
       ],
-      "findings": ["Level 3 is a botanical-country scale that can disregard purely political boundaries.", "Level 4 basic recording units recognize political integrity.", "The pinned Level 3 table identifies AGE as Argentina Northeast.", "The pinned Level 4 table lists nine AGE members: Buenos Aires, Chaco, Corrientes, Córdoba, Argentina Distrito Federal, Entre Ríos, Formosa, La Pampa, and Misiones.", "Santa Fe appears as AGS-SF under AGS (Argentina South), not under AGE."]
+      "findings": [
+        "Level 3 is a botanical-country scale that can disregard purely political boundaries.",
+        "Level 4 basic recording units recognize political integrity.",
+        "The pinned Level 3 table identifies AGE as Argentina Northeast.",
+        "The pinned Level 4 table lists nine AGE members: Buenos Aires, Chaco, Corrientes, Córdoba, Argentina Distrito Federal, Entre Ríos, Formosa, La Pampa, and Misiones.",
+        "Santa Fe appears as AGS-SF under AGS (Argentina South), not under AGE."
+      ]
+    },
+    {
+      "id": "Georef-v2-departamentos-2026-10-05",
+      "title": "Argentina official Georef v2 complete departments GeoJSON capture",
+      "url": "https://apis.datos.gob.ar/georef/api/v2.0/departamentos.geojson",
+      "documentation_url": "https://www.argentina.gob.ar/georef/descarga-de-la-base-completa",
+      "data_origins_url": "https://www.argentina.gob.ar/georef/origen-de-los-datos",
+      "license_terms_url": "https://www.argentina.gob.ar/georef/condiciones-de-uso-y-licencia",
+      "role": "Licensed countrywide current-service name, INDEC code, parent, and geometry cross-check; supplemental to the previously captured IGN service",
+      "retrieval_date": "2026-10-05",
+      "exact_retrieval_time_recorded": false,
+      "represented_vintage": null,
+      "vintage_limit": "Documentation describes periodic updates but gives no vintage/date for this response; retrieval date is not source vintage.",
+      "license": "CC BY 4.0 per official Georef terms; attribution: Servicio Georef – argentina.gob.ar/georef; mention modifications and responsible use.",
+      "geometry_origin": "Georef documentation identifies IGN as the origin for department geometry; not an independent legal-boundary source.",
+      "capture_file": "data/regional-review/regional-review-fd433005036fe22b/vintages/2026-10-05-georef-cc-by4/departamentos.geojson",
+      "capture_feature_count": 529,
+      "capture_unique_ids": 529,
+      "capture_file_bytes": 1193417,
+      "capture_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "crosswalk": "data/regional-review/regional-review-fd433005036fe22b/vintages/2026-10-05-georef-cc-by4/georef-crosswalk.jsonl",
+      "crosswalk_scope_sha256": "63f3030ff6c3903e9578994651bf1a316c689d2568d263ed4813dd7171423ee6",
+      "use_limit": "Current-service administrative identity cross-check only. Does not establish complete roster for a historical date, all detached components/islands, legal boundaries, or release suitability. Earlier row classifications unchanged."
     }
   ]
 }
