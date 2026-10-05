@@ -1,0 +1,128 @@
+{
+  "findings": [
+    {
+      "citations": [
+        "https://minat.gov.cm/presentation/services-locaux/",
+        "https://nada.stat.cm/index.php/catalog/189/download/1759"
+      ],
+      "confidence": "High for retained source bytes and source/Atlas IDs, observed names, cited official hierarchy statements and reproducible area differences; unresolved for 20 identities/parents and all current legal geometry.",
+      "evidence": [
+        "source-inventory.json",
+        "official-cmr-parent-crosswalk.csv",
+        "location-assessments.json",
+        "province-assessments.json",
+        "source-screen-results.json"
+      ],
+      "finding": "The pinned 2017 geoBoundaries CMR ADM3 metadata identifies OpenStreetMap/Wambacher as its source and leaves canonical role blank. Official MINAT describes 360 arrondissements under 58 departments; the official 2021 ECAM 5 nomenclature says it covers 360 councils whose boundaries correspond to the 360 subdivisions and explains a region→division→subdivision code hierarchy. All 134 scoped source feature IDs are present. The Atlas names exactly match 101 raw source names; the other 33 become exact after reversing a UTF-8-as-Latin-1 mojibake transform. The retained official-list crosswalk yields 114 unique normalized source-name/Atlas-parent matches and 20 requiring reconciliation. One direct tier signal is source/official Soulèdé-Roua in Mayo-Tsanaga while its Atlas parent is the broader Extrême-Nord group; four other unmatched rows carry Atlas parent Kadei versus official Kadey. A duplicate official six-digit code 010101 appears for two scoped names (Ngaoundéré I and Bélel). These are source-parent/code reconciliation findings, not a blanket assertion that the Atlas features are legally wrong.",
+      "followup_issue": 898,
+      "id": "CMR-ROLE-CROSSWALK-001",
+      "recommendation": "Create a blocked, exact-134-subject crosswalk follow-up to acquire/verify current official unit lists and boundary data, resolve all 20 rows and duplicate code use, establish source-to-Atlas geometry lineage, and give engineering a cited ID-preserving parent/geometry handoff only where evidence supports a correction. Coordinate the complementary 226 Cameroon locations owned by #460 during #465 integration.",
+      "severity": "high",
+      "subjects": "All 134 scoped gb:CMR:ADM3 locations and 37 scoped Cameroon-related parent groupings"
+    },
+    {
+      "citations": [
+        "https://minat.gov.cm/presentation/services-locaux/",
+        "https://nada.stat.cm/index.php/catalog/189/download/1759"
+      ],
+      "confidence": "High for computed geometry/area differences under the recorded helper method; unresolved for boundary correctness.",
+      "evidence": [
+        "sources/geoBoundaries-CMR-ADM3.geojson",
+        "source-geometry-screen.csv",
+        "source-screen-results.json",
+        "reproduce.py"
+      ],
+      "finding": "All 134 pinned-source polygons and current Atlas subject polygons pass the shared v1 WGS84 polygon/ellipsoidal-area helper; none is byte/equality-identical as a GeoJSON geometry. Areas differ by more than 1% for 19 subjects and more than 5% for four: Gari-Gombo (-11.6707%; symmetric difference 12.0525%), Zina (-13.3126%; 14.0233%), Kousséri (-5.2244%; 9.6114%), and Kolofata (-6.7815%; 7.4864%). The 2017 OSM-derived source and Atlas polygons may differ due to generalization or another recorded preparation step; no official current polygon source establishes which is correct. The area/symmetric-difference screen is a diagnostic comparison, not a legal-boundary error test.",
+      "followup_issue": 898,
+      "id": "CMR-GEOMETRY-LINEAGE-002",
+      "recommendation": "The scoped CMR follow-up should trace the immutable 2017 feature bytes through the current Atlas simplification/derivation and compare material differences with legally authoritative current source geometry. Preserve original IDs and both geometries; do not replace geometry based only on this screen.",
+      "severity": "high",
+      "subjects": "All 134 scoped Cameroon geometries"
+    },
+    {
+      "citations": [
+        "https://justice.gouv.cf/actualites/190/bruxelles-discours-du-ministre-detat-charge-de-la-justice-garde-des-sceaux-dr-arnaud",
+        "https://www.gouvernement.cf/article/56/la-republique-centrafricaine",
+        "https://www.wipo.int/wipolex/en/legislation/details/7437"
+      ],
+      "confidence": "High for source ID/name/count/license metadata and the cited current-law statements; unresolved for exact affected unit parents and legal boundary changes.",
+      "evidence": [
+        "sources/geoBoundaries-CAF-ADM3.geojson",
+        "sources/geoboundaries-CAF-ADM3-metadata.json",
+        "source-inventory.json",
+        "location-assessments.json",
+        "area-assessments.json"
+      ],
+      "finding": "The pinned 2018 ACTED/OCHA source contains 175 ADM3 features called Municipalities and licensed CC BY 3.0 IGO; all 92 scoped IDs and names match that retained source. A 2025 Central African Republic Ministry of Justice statement says laws 21.001 (2021) and 23.004 (2023) redefined administrative circumscription and territorial limits and reports 20 prefectures, 72 sub-prefectures and 175 communes functioning. A second official government page reports 16 prefectures, 72 sub-prefectures and 175 communes without dating its figures. The law-era evidence plus conflicting official count pages means a 2018 name/count match cannot establish current legal identities, parents, completeness or boundaries for these 92 units.",
+      "followup_issue": 899,
+      "id": "CAF-LEGAL-CROSSWALK-003",
+      "recommendation": "Create a blocked follow-up for exactly these 92 IDs to obtain the 2021/2023 legal texts, a current official 175-commune list/parent crosswalk and law-era boundary evidence. Keep it disjoint from #462's other 83 IDs and #877's six Bangui-specific geometry handoff; integrate the 175-unit reconciliation at #465.",
+      "severity": "high",
+      "subjects": "All 92 scoped gb:CAF:ADM3 locations and their scoped parent groupings"
+    },
+    {
+      "citations": [
+        "https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen"
+      ],
+      "confidence": "High for recorded old hashes, current pinned download bytes and geometry inequality; unresolved whether cache hashes refer to another provider/API representation or changed source vintage.",
+      "evidence": [
+        "source-inventory.json",
+        "data/geographic-decisions/africa.json at baseline bb7e3321dd65413c4029fc9fb85ccb1da1d0d43f",
+        "source-geometry-screen.csv"
+      ],
+      "finding": "The prior Africa inspection records cache digests e368af… for .cache/geoboundaries/CAF-ADM3.json and a1b065… for .cache/geoboundaries/CMR-ADM3.json. Those old cache files are absent from the pinned baseline. The exact immutable geoBoundaries-release byte files reacquired for this packet hash to 276a9a… (CAF) and 9d0ff9… (CMR). The new complete collections contain the same scoped feature IDs/names, but all Atlas polygon geometries differ from the acquired release polygons. The old cache hash semantics and geometry preparation lineage are not established by similarity of names/IDs.",
+      "followup_issues": [
+        898,
+        899
+      ],
+      "id": "SOURCE-CACHE-LINEAGE-004",
+      "recommendation": "Keep both old digests and newly retained whole-file hashes as separate vintages. The country-specific follow-ups should recover the old cache bytes or document the digest convention, then trace how the current simplified Atlas features were derived without replacing historical source or geometry claims.",
+      "severity": "medium",
+      "subjects": "The CAF ADM3 and CMR ADM3 original source collections; 226 scoped subjects"
+    },
+    {
+      "citations": [
+        "https://minat.gov.cm/presentation/services-locaux/",
+        "https://nada.stat.cm/index.php/catalog/189/download/1759",
+        "https://justice.gouv.cf/actualites/190/bruxelles-discours-du-ministre-detat-charge-de-la-justice-garde-des-sceaux-dr-arnaud"
+      ],
+      "confidence": "High for issue-pinned scope counts and current hierarchy links; area purpose, full country completeness, and neighboring granularity unresolved.",
+      "evidence": [
+        "issue-scope.json",
+        "area-assessments.json",
+        "province-assessments.json",
+        "source-inventory.json"
+      ],
+      "finding": "This issue owns 134 of Cameroon’s 360 Atlas locations; #460 owns the complementary 226. It owns 92 of the Central African Republic’s 175; #462 owns the complementary 83. These exact workload counts reconcile numerically but do not certify a country/area partition, coast/island completeness, source coverage, or province purpose. The 57 full scoped province groupings span different source semantics: local Cameroon subdivision/council territories versus CAR municipalities/communes. All province groups with a Cameroon official-name/parent discrepancy are flagged correction-needed; the other province rows and both partial areas remain insufficient-evidence. Integration belongs to #465 and must synthesize the companion packets and shared parent decisions.",
+      "id": "AREA-PURPOSE-NEIGHBOR-SCALE-005",
+      "integration_issue": 465,
+      "recommendation": "At #465 integration, combine only the exact disjoint subjects from #460, #461 and #462, compare every full parent against source-backed purpose and neighboring tier, and explicitly resolve named urban, disconnected/coastal/island, and source-coverage questions before regional acceptance.",
+      "severity": "high",
+      "subjects": "Cameroon 134/360 and Central African Republic 92/175 area subsets; all 57 scoped province groups"
+    },
+    {
+      "citations": [
+        "https://minat.gov.cm/presentation/services-locaux/",
+        "https://nada.stat.cm/index.php/catalog/189/download/1759",
+        "https://justice.gouv.cf/actualites/190/bruxelles-discours-du-ministre-detat-charge-de-la-justice-garde-des-sceaux-dr-arnaud"
+      ],
+      "confidence": "High for source/Atlas component counts and computed area/symmetric-difference metrics under the recorded method; unresolved for legal role, fragmentation purpose, completeness, and boundary correctness.",
+      "evidence": [
+        "source-geometry-screen.csv",
+        "source-screen-results.json",
+        "location-assessments.json",
+        "source-inventory.json"
+      ],
+      "finding": "The complete scoped set was examined for geometry type/component counts and relative ellipsoidal area. The retained 2017 Cameroon source has 1 multipolygon among 134 scoped features; current Atlas has 6, with component counts changing on 5 IDs. Four Cameroon subjects exceed a 5% absolute area delta; three also have multipart geometry, and symmetric difference exceeds 10% for two. The scoped CAR source/Atlas geometries are all single-part; 4 of 92 CAR areas differ by more than 1%, none exceeds 5%. Largest scoped Cameroon polygons range to about 14,613 km²; the largest scoped CAR polygon is about 7,306 km². These are scale/fragmentation screening observations only. No current official boundary polygons or authoritative city-fragment crosswalk were obtained, so multipart splits may reflect lawful islands/disconnected territory, source differences, generalization, or error, and large local units cannot be judged province-sized by area alone.",
+      "followup_issues": [
+        898,
+        899
+      ],
+      "id": "CMR-FRAGMENTATION-SCALE-006",
+      "recommendation": "Country follow-ups should explicitly check city-fragmentation and disconnected/coastal/island status against law-era unit lists and authoritative polygons. Preserve the observed parts and both geometry vintages; do not infer correction or official completeness from component counts or area.",
+      "severity": "medium",
+      "subjects": "All 226 scoped geometries; multi-component observations are listed by exact ID in source-geometry-screen.csv and location-assessments.json"
+    }
+  ],
+  "packet_status": "Initial scoped source/semantic review; Central Africa is not certified and no location import is authorized."
+}

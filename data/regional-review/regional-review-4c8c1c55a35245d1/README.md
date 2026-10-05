@@ -1,0 +1,31 @@
+# Central Africa interior batch 2: source review
+
+This packet covers exactly 226 existing Atlas locations: 134 Cameroon IDs and 92 Central African Republic (CAF) IDs from issue #461. It is a scoped research packet. It does not certify either country, their shared region, legal boundaries, coverage, or suitability for historical imports. No geometry, parent, ID, or production data was changed.
+
+## Cameroon (CMR)
+
+The retained geoBoundaries ADM3 snapshot represents 2017 and identifies OpenStreetMap/Wambacher as its source; its canonical-boundary role is blank. The 2021 Cameroon National Institute of Statistics ECAM 5 administrative nomenclature describes 360 councils corresponding to 360 subdivisions, gives region/division/subdivision codes, and lists names and parents. The Ministry of Territorial Administration also describes 10 regions, 58 departments, and 360 arrondissements ([MINAT](https://minat.gov.cm/presentation/services-locaux/); [ECAM 5 PDF](https://nada.stat.cm/index.php/catalog/189/download/1759)). This is hierarchy/count evidence, not a present-day legal polygon source.
+
+All 134 scoped source IDs were found. The 101 exact source/Atlas names and 33 reversible UTF-8-as-Latin-1 repairs are recorded per location. In the extracted official-list crosswalk, 114 names and Atlas parent labels match after accent-insensitive normalization; 20 require reconciliation. Four scoped source/official identity questions include Atlas parent `Kadei` against official `Kadey`, and `Soulèdé-Roua` appears under official `Mayo-Tsanaga` while Atlas currently assigns its parent to the broader `Extrême-Nord`. The official listing prints code `010101` for both Ngaoundéré I and Bélel; this duplicate is not treated as a unique key. The full row-level findings and extracted code/name/parent evidence are in `official-cmr-parent-crosswalk.csv`.
+
+Every one of the 134 source polygons differs exactly from its current Atlas polygon. Nineteen have absolute ellipsoidal area delta above 1%; four exceed 5%: Gari-Gombo, Zina, Kousséri, and Kolofata. The source has one multipart geometry and the Atlas has six, with component counts changing on five IDs. The largest scoped source polygon is about 14,613 km²; this flags scale for review but cannot establish that a local administrative unit is too large. Symmetric-difference measures are also retained. These are diagnostic screens only; neither source is established as the current legal boundary. The 2021 crosswalk is not a current boundary dataset. A country-specific follow-up for the exact 134 subjects is [#898](https://github.com/ChengshuLi/WorldAtlas/issues/898); it covers legal crosswalk, size, city-fragment, and disconnected/island checks.
+
+## Central African Republic (CAF)
+
+The retained geoBoundaries ADM3 metadata calls the 2018 ACTED/OCHA layer “Municipalities” and reports 175 features under CC BY 3.0 IGO. All 92 scoped IDs and names are present in that source. All scoped CAF source and Atlas geometries are single-part; four areas differ by more than 1% and none by more than 5%. The largest scoped source polygon is about 7,306 km². These observations do not verify city fragmentation, size suitability, island/coastline treatment, or legal limits. A 2025 Ministry of Justice statement cites territorial laws 21.001 (2021) and 23.004 (2023), and describes 20 prefectures, 72 sub-prefectures, and 175 functioning communes. An undated government portal instead reports 16 prefectures, 72 sub-prefectures, and 175 communes ([Justice Ministry](https://justice.gouv.cf/actualites/190/bruxelles-discours-du-ministre-detat-charge-de-la-justice-garde-des-sceaux-dr-arnaud); [government portal](https://www.gouvernement.cf/article/56/la-republique-centrafricaine)). This conflict, plus the newer laws, prevents using 2018 names/counts as proof of current identities, parents, completeness, or boundaries. Current official laws, a dated unit/parent crosswalk, and boundary evidence remain outstanding. Follow-up [#899](https://github.com/ChengshuLi/WorldAtlas/issues/899) covers exactly these 92 IDs, disjoint from #462's 83 CAF locations and #877's six Bangui-specific subjects.
+
+## Vintage and source lineage
+
+At the pinned baseline, `data/geographic-decisions/africa.json` records old cache digests for CAF and CMR. Those cached bytes are absent from that baseline, so the historical hashes cannot be compared to the retained complete upstream files. The packet records both old digests and the exact newly acquired immutable geoBoundaries release bytes separately. Similar IDs and names do not prove those bytes are the same vintage or explain Atlas geometry preparation. Cameroon source data is ODbL 1.0 (review database obligations before downstream reuse); CAF source metadata reports CC BY 3.0 IGO. See `source-inventory.json` for byte hashes, dates, restoration steps, attribution and limits. Official pages/PDF are cited and restoration instructions retained; the PDF is not redistributed because its reuse terms were not identified.
+
+## Reproduction and interpretation
+
+From repository root, run:
+
+```sh
+PYTHONPATH=scripts python3 data/regional-review/regional-review-4c8c1c55a35245d1/reproduce.py
+```
+
+The script reads the exact issue-pinned scope and source files in this packet and reads baseline Atlas data from commit `bb7e3321dd65413c4029fc9fb85ccb1da1d0d43f`. It writes only the issue-owned packet outputs. It verifies the 226 ID set, raw source association, crosswalk roster and its stated name/parent matches, and computes per-feature polygon/area comparison screens with the shared v1 evidence geometry helper (WGS84 longitude/latitude; ellipsoidal area). Runtime versions and method limits are recorded in `evidence-quality.json`. Geometry comparisons do not adjudicate legal correctness. Counts do not establish geographic completeness, contiguity, island/coastline treatment, adjacency, or suitable neighboring granularity.
+
+`location-assessments.json`, `province-assessments.json`, and `area-assessments.json` preserve the review status per subject/group. Crosswalk mismatches are marked `correction_needed` as reconciliation work; all remaining subjects remain `insufficient_evidence`. `findings.json` and `follow-up-recommendations.json` specify unresolved work and engineering handoffs. No regional or historical-use approval is requested or implied.
