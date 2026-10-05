@@ -32,6 +32,8 @@ for ft in old:
 out=OWN/'findings/scoped-multipart-components.csv'
 with out.open('w',encoding='utf-8',newline='') as f:
  w=csv.DictWriter(f,fieldnames=list(rows[0]));w.writeheader();w.writerows(rows)
-summary={'features':len({r['source_shape_id'] for r in rows}),'component_rows':len(rows),'interior_rings':sum(r['interior_ring_count'] for r in rows)}
+summary={'features':len({r['source_shape_id'] for r in rows}),'component_rows':len(rows),'interior_rings':sum(r['interior_ring_count'] for r in rows),
+ 'components_by_shape_id':{r['source_shape_id']:r['component_count'] for r in rows if r['component_number']==1},
+ 'interior_rings_by_shape_id':{r['source_shape_id']:sum(x['interior_ring_count'] for x in rows if x['source_shape_id']==r['source_shape_id']) for r in rows if r['component_number']==1}}
 (OWN/'findings/component-summary.json').write_text(json.dumps(summary,indent=2,sort_keys=True)+'\n',encoding='utf-8')
 print(json.dumps(summary,indent=2))

@@ -121,6 +121,7 @@ summary={
  'scoped_same_normalized_name_candidates':sum(x['same_normalized_name_candidate_count'] > 0 for x in out_rows),
  'scoped_unique_same_normalized_name_candidates':sum(x['same_normalized_name_candidate_count'] == 1 for x in out_rows),
  'scoped_exact_same_name_candidate_geometry_symdiff_gt_5pct':sum(x['same_normalized_name_candidate_count'] == 1 and float(x['best_same_name_candidate_symmetric_difference_share']) > .05 for x in out_rows),
+ 'priority_top_share_by_source_id':{x['source_2020_shape_id']:float(x['top_share_of_old_area']) for x in out_rows if x['source_2020_name'] in {'Vicente López','General Manuel Belgrano','Pomán','Itatí'}},
  'scoped_current_source_overlap_pairs_gt_1sqm':len(scoped_current_pair_overlaps),
  'scoped_current_source_overlap_pairs_over_1hectare':sum(v['overlap_area_m2']>=10000 for v in scoped_current_pair_overlaps.values()),
  'scoped_geometry_type_counts':dict(Counter(x['source_2020_geometry_type'] for x in out_rows)),

@@ -1,6 +1,6 @@
 {
   "baseline": {
-    "commit": "2ac65414166764713eafa8238f1b28211a57344e",
+    "commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
     "files": [
       {
         "bytes": 206,
@@ -363,6 +363,10 @@
       "status": "added"
     },
     {
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/categorize-tabular-findings.py",
+      "status": "added"
+    },
+    {
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/evidence-quality.json",
       "status": "added"
     },
@@ -436,6 +440,10 @@
     },
     {
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/reproduce-components.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/reproduce-parent-review.py",
       "status": "added"
     },
     {
@@ -548,12 +556,14 @@
     }
   ],
   "commands": [
-    "python3 data/regional-review/argentina-adm2-source-revalidation-443/build-evidence-manifest.py",
     "python3 data/regional-review/argentina-adm2-source-revalidation-443/prepare-scoped-2020.py",
     "python3 data/regional-review/argentina-adm2-source-revalidation-443/validate-controls.py",
     "PYTHONPATH=/path/to/env/site-packages python3 data/regional-review/argentina-adm2-source-revalidation-443/reproduce-spatial.py",
     "PYTHONPATH=/path/to/env/site-packages python3 data/regional-review/argentina-adm2-source-revalidation-443/reproduce-components.py",
     "PYTHONPATH=/path/to/env/site-packages python3 data/regional-review/argentina-adm2-source-revalidation-443/reproduce-province-crosswalk.py",
+    "PYTHONPATH=/path/to/env/site-packages python3 data/regional-review/argentina-adm2-source-revalidation-443/reproduce-parent-review.py",
+    "python3 data/regional-review/argentina-adm2-source-revalidation-443/categorize-tabular-findings.py",
+    "python3 data/regional-review/argentina-adm2-source-revalidation-443/build-evidence-manifest.py",
     "node scripts/evidence-quality.mjs data/regional-review/argentina-adm2-source-revalidation-443/evidence-quality.json /Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/be05f9605dc494617f8d0542b51cfae32864dbeebc4aa4c3467a4a283f36114b/work"
   ],
   "conclusions": [
@@ -625,142 +635,67 @@
   "metric_bindings": [
     {
       "json_pointer": "/metrics/0/value",
-      "metric_id": "table:2006-adm1-to-current-province-overlay.csv:2:old_intersecting_feature_count:02",
+      "metric_id": "table:2006-adm1-to-current-province-overlay.csv:2:record_count:-",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/metrics.json"
     },
     {
       "json_pointer": "/metrics/1/value",
-      "metric_id": "table:2006-adm1-to-current-province-overlay.csv:2:top_old_share_of_current_area:02",
+      "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:record_count:-",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/metrics.json"
     },
     {
       "json_pointer": "/metrics/2/value",
-      "metric_id": "table:2006-adm1-to-current-province-overlay.csv:2:old_union_coverage_of_current:02",
+      "metric_id": "table:scoped-current-georef-positive-area-overlaps.csv:2:record_count:-",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/metrics.json"
     },
     {
       "json_pointer": "/metrics/3/value",
-      "metric_id": "table:2006-adm1-to-current-province-overlay.csv:2:union_symmetric_difference_share:02",
+      "metric_id": "table:scoped-multipart-components.csv:2:record_count:-",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/metrics.json"
     },
     {
       "json_pointer": "/metrics/4/value",
-      "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:source_2020_component_count:gb:ARG:ADM2:61730980B10036181744679",
+      "metric_id": "table:scoped-parent-review.csv:2:record_count:-",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/metrics.json"
     },
     {
       "json_pointer": "/metrics/5/value",
-      "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:source_2020_hole_count:gb:ARG:ADM2:61730980B10036181744679",
-      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/metrics.json"
-    },
-    {
-      "json_pointer": "/metrics/6/value",
-      "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:old_area_km2_equal_area:gb:ARG:ADM2:61730980B10036181744679",
-      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/metrics.json"
-    },
-    {
-      "json_pointer": "/metrics/7/value",
-      "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:current_intersecting_feature_count:gb:ARG:ADM2:61730980B10036181744679",
-      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/metrics.json"
-    },
-    {
-      "json_pointer": "/metrics/8/value",
-      "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:top_share_of_old_area:gb:ARG:ADM2:61730980B10036181744679",
-      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/metrics.json"
-    },
-    {
-      "json_pointer": "/metrics/9/value",
-      "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:current_union_coverage_of_old:gb:ARG:ADM2:61730980B10036181744679",
-      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/metrics.json"
-    },
-    {
-      "json_pointer": "/metrics/10/value",
-      "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:current_overlap_excess_share:gb:ARG:ADM2:61730980B10036181744679",
-      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/metrics.json"
-    },
-    {
-      "json_pointer": "/metrics/11/value",
-      "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:same_normalized_name_candidate_count:gb:ARG:ADM2:61730980B10036181744679",
-      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/metrics.json"
-    },
-    {
-      "json_pointer": "/metrics/12/value",
-      "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:best_same_name_candidate_share_of_old_area:gb:ARG:ADM2:61730980B10036181744679",
-      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/metrics.json"
-    },
-    {
-      "json_pointer": "/metrics/13/value",
-      "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:best_same_name_candidate_symmetric_difference_share:gb:ARG:ADM2:61730980B10036181744679",
-      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/metrics.json"
-    },
-    {
-      "json_pointer": "/metrics/14/value",
-      "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:over_1sqm_sliver_count:gb:ARG:ADM2:61730980B10036181744679",
-      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/metrics.json"
-    },
-    {
-      "json_pointer": "/metrics/15/value",
-      "metric_id": "table:scoped-current-georef-positive-area-overlaps.csv:2:overlap_area_m2:02056-06427",
-      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/metrics.json"
-    },
-    {
-      "json_pointer": "/metrics/16/value",
-      "metric_id": "table:scoped-multipart-components.csv:2:component_number:gb:ARG:ADM2:61730980B19808130857277",
-      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/metrics.json"
-    },
-    {
-      "json_pointer": "/metrics/17/value",
-      "metric_id": "table:scoped-multipart-components.csv:2:component_count:gb:ARG:ADM2:61730980B19808130857277",
-      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/metrics.json"
-    },
-    {
-      "json_pointer": "/metrics/18/value",
-      "metric_id": "table:scoped-multipart-components.csv:2:component_area_km2:gb:ARG:ADM2:61730980B19808130857277",
-      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/metrics.json"
-    },
-    {
-      "json_pointer": "/metrics/19/value",
-      "metric_id": "table:scoped-multipart-components.csv:2:interior_ring_count:gb:ARG:ADM2:61730980B19808130857277",
-      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/metrics.json"
-    },
-    {
-      "json_pointer": "/metrics/20/value",
-      "metric_id": "table:scoped-parent-review.csv:2:scoped_parent_review_children_from_443:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
-      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/metrics.json"
-    },
-    {
-      "json_pointer": "/metrics/21/value",
-      "metric_id": "table:scoped-parent-review.csv:2:direct_adm2_subjects_in_944:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
-      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/metrics.json"
-    },
-    {
-      "json_pointer": "/metrics/22/value",
-      "metric_id": "table:scoped-parent-review.csv:2:current_georef_exact_name_match_count:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
-      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/metrics.json"
-    },
-    {
-      "json_pointer": "/metrics/23/value",
-      "metric_id": "table:scoped-parent-review.csv:2:2006_feature_count:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
-      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/metrics.json"
-    },
-    {
-      "json_pointer": "/metrics/24/value",
-      "metric_id": "table:scoped-parent-review.csv:2:current_national_province_count:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
-      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/metrics.json"
-    },
-    {
-      "json_pointer": "/metrics/25/value",
-      "metric_id": "table:scoped-parent-review.csv:2:old_2006_top_overlap_share_of_current:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
-      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/metrics.json"
-    },
-    {
-      "json_pointer": "/metrics/26/value",
-      "metric_id": "table:scoped-parent-review.csv:2:old_2006_union_coverage_of_current:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
+      "metric_id": "table:scoped-2020-internal-overlaps.csv:2:record_count:-",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/metrics.json"
     },
     {
       "json_pointer": "/component_rows",
       "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/component_rows",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json"
+    },
+    {
+      "json_pointer": "/components_by_shape_id/61730980B19808130857277",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/components_by_shape_id/61730980B19808130857277",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json"
+    },
+    {
+      "json_pointer": "/components_by_shape_id/61730980B30289947598516",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/components_by_shape_id/61730980B30289947598516",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json"
+    },
+    {
+      "json_pointer": "/components_by_shape_id/61730980B54493504343974",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/components_by_shape_id/61730980B54493504343974",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json"
+    },
+    {
+      "json_pointer": "/components_by_shape_id/61730980B76052784863315",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/components_by_shape_id/61730980B76052784863315",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json"
+    },
+    {
+      "json_pointer": "/components_by_shape_id/61730980B94998770553919",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/components_by_shape_id/61730980B94998770553919",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json"
+    },
+    {
+      "json_pointer": "/components_by_shape_id/61730980B95294752297782",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/components_by_shape_id/61730980B95294752297782",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json"
     },
     {
@@ -771,6 +706,36 @@
     {
       "json_pointer": "/interior_rings",
       "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/interior_rings",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json"
+    },
+    {
+      "json_pointer": "/interior_rings_by_shape_id/61730980B19808130857277",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/interior_rings_by_shape_id/61730980B19808130857277",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json"
+    },
+    {
+      "json_pointer": "/interior_rings_by_shape_id/61730980B30289947598516",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/interior_rings_by_shape_id/61730980B30289947598516",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json"
+    },
+    {
+      "json_pointer": "/interior_rings_by_shape_id/61730980B54493504343974",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/interior_rings_by_shape_id/61730980B54493504343974",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json"
+    },
+    {
+      "json_pointer": "/interior_rings_by_shape_id/61730980B76052784863315",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/interior_rings_by_shape_id/61730980B76052784863315",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json"
+    },
+    {
+      "json_pointer": "/interior_rings_by_shape_id/61730980B94998770553919",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/interior_rings_by_shape_id/61730980B94998770553919",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json"
+    },
+    {
+      "json_pointer": "/interior_rings_by_shape_id/61730980B95294752297782",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/interior_rings_by_shape_id/61730980B95294752297782",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json"
     },
     {
@@ -906,6 +871,21 @@
     {
       "json_pointer": "/invalid_scoped_old_geometry_count",
       "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/invalid_scoped_old_geometry_count",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json"
+    },
+    {
+      "json_pointer": "/priority_top_share_by_source_id/61730980B14767108287685",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/priority_top_share_by_source_id/61730980B14767108287685",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json"
+    },
+    {
+      "json_pointer": "/priority_top_share_by_source_id/61730980B47006381015187",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/priority_top_share_by_source_id/61730980B47006381015187",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json"
+    },
+    {
+      "json_pointer": "/priority_top_share_by_source_id/61730980B76052784863315",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/priority_top_share_by_source_id/61730980B76052784863315",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json"
     },
     {
@@ -1056,223 +1036,55 @@
   ],
   "metrics": [
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
-      "id": "table:2006-adm1-to-current-province-overlay.csv:2:old_intersecting_feature_count:02",
-      "input_sha256": "b5d13177b09ad3347b617a83252cc77bc985f3c70802d4d7a8b50d3fbe5adba6",
-      "unit": "count",
-      "value": 1,
-      "vintage": "current"
-    },
-    {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
-      "id": "table:2006-adm1-to-current-province-overlay.csv:2:top_old_share_of_current_area:02",
-      "input_sha256": "b5d13177b09ad3347b617a83252cc77bc985f3c70802d4d7a8b50d3fbe5adba6",
-      "unit": "share",
-      "value": 0.32302312,
-      "vintage": "current"
-    },
-    {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
-      "id": "table:2006-adm1-to-current-province-overlay.csv:2:old_union_coverage_of_current:02",
-      "input_sha256": "b5d13177b09ad3347b617a83252cc77bc985f3c70802d4d7a8b50d3fbe5adba6",
-      "unit": "share",
-      "value": 0.32302312,
-      "vintage": "current"
-    },
-    {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
-      "id": "table:2006-adm1-to-current-province-overlay.csv:2:union_symmetric_difference_share:02",
-      "input_sha256": "b5d13177b09ad3347b617a83252cc77bc985f3c70802d4d7a8b50d3fbe5adba6",
-      "unit": "share",
-      "value": 4.962269304,
-      "vintage": "current"
-    },
-    {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
-      "id": "table:scoped-2020-to-current-georef-overlay.csv:2:source_2020_component_count:gb:ARG:ADM2:61730980B10036181744679",
-      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
-      "unit": "count",
-      "value": 1,
-      "vintage": "current"
-    },
-    {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
-      "id": "table:scoped-2020-to-current-georef-overlay.csv:2:source_2020_hole_count:gb:ARG:ADM2:61730980B10036181744679",
-      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
-      "unit": "count",
-      "value": 0,
-      "vintage": "current"
-    },
-    {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
-      "id": "table:scoped-2020-to-current-georef-overlay.csv:2:old_area_km2_equal_area:gb:ARG:ADM2:61730980B10036181744679",
-      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
-      "unit": "km2",
-      "value": 1688.642115,
-      "vintage": "current"
-    },
-    {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
-      "id": "table:scoped-2020-to-current-georef-overlay.csv:2:current_intersecting_feature_count:gb:ARG:ADM2:61730980B10036181744679",
-      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
-      "unit": "count",
-      "value": 6,
-      "vintage": "current"
-    },
-    {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
-      "id": "table:scoped-2020-to-current-georef-overlay.csv:2:top_share_of_old_area:gb:ARG:ADM2:61730980B10036181744679",
-      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
-      "unit": "share",
-      "value": 0.991939813,
-      "vintage": "current"
-    },
-    {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
-      "id": "table:scoped-2020-to-current-georef-overlay.csv:2:current_union_coverage_of_old:gb:ARG:ADM2:61730980B10036181744679",
-      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
-      "unit": "share",
-      "value": 0.998245481,
-      "vintage": "current"
-    },
-    {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
-      "id": "table:scoped-2020-to-current-georef-overlay.csv:2:current_overlap_excess_share:gb:ARG:ADM2:61730980B10036181744679",
-      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
-      "unit": "share",
-      "value": 0.001326724,
-      "vintage": "current"
-    },
-    {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
-      "id": "table:scoped-2020-to-current-georef-overlay.csv:2:same_normalized_name_candidate_count:gb:ARG:ADM2:61730980B10036181744679",
-      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
-      "unit": "count",
-      "value": 1,
-      "vintage": "current"
-    },
-    {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
-      "id": "table:scoped-2020-to-current-georef-overlay.csv:2:best_same_name_candidate_share_of_old_area:gb:ARG:ADM2:61730980B10036181744679",
-      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
-      "unit": "share",
-      "value": 0.991939813,
-      "vintage": "current"
-    },
-    {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
-      "id": "table:scoped-2020-to-current-georef-overlay.csv:2:best_same_name_candidate_symmetric_difference_share:gb:ARG:ADM2:61730980B10036181744679",
-      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
-      "unit": "share",
-      "value": 0.016935645,
-      "vintage": "current"
-    },
-    {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
-      "id": "table:scoped-2020-to-current-georef-overlay.csv:2:over_1sqm_sliver_count:gb:ARG:ADM2:61730980B10036181744679",
-      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
-      "unit": "count",
-      "value": 0,
-      "vintage": "current"
-    },
-    {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
-      "id": "table:scoped-current-georef-positive-area-overlaps.csv:2:overlap_area_m2:02056-06427",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
-      "unit": "m2",
-      "value": 2336.356529571676,
-      "vintage": "current"
-    },
-    {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
-      "id": "table:scoped-multipart-components.csv:2:component_number:gb:ARG:ADM2:61730980B19808130857277",
-      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
-      "unit": "count",
-      "value": 1,
-      "vintage": "current"
-    },
-    {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
-      "id": "table:scoped-multipart-components.csv:2:component_count:gb:ARG:ADM2:61730980B19808130857277",
-      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
-      "unit": "count",
-      "value": 6,
-      "vintage": "current"
-    },
-    {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
-      "id": "table:scoped-multipart-components.csv:2:component_area_km2:gb:ARG:ADM2:61730980B19808130857277",
-      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
-      "unit": "km2",
-      "value": 591.191768,
-      "vintage": "current"
-    },
-    {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
-      "id": "table:scoped-multipart-components.csv:2:interior_ring_count:gb:ARG:ADM2:61730980B19808130857277",
-      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
-      "unit": "count",
-      "value": 0,
-      "vintage": "current"
-    },
-    {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
-      "id": "table:scoped-parent-review.csv:2:scoped_parent_review_children_from_443:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
-      "input_sha256": "b5d13177b09ad3347b617a83252cc77bc985f3c70802d4d7a8b50d3fbe5adba6",
-      "unit": "count",
-      "value": 10,
-      "vintage": "current"
-    },
-    {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
-      "id": "table:scoped-parent-review.csv:2:direct_adm2_subjects_in_944:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
-      "input_sha256": "b5d13177b09ad3347b617a83252cc77bc985f3c70802d4d7a8b50d3fbe5adba6",
-      "unit": "count",
-      "value": 10,
-      "vintage": "current"
-    },
-    {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
-      "id": "table:scoped-parent-review.csv:2:current_georef_exact_name_match_count:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
-      "input_sha256": "b5d13177b09ad3347b617a83252cc77bc985f3c70802d4d7a8b50d3fbe5adba6",
-      "unit": "count",
-      "value": 1,
-      "vintage": "current"
-    },
-    {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
-      "id": "table:scoped-parent-review.csv:2:2006_feature_count:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
-      "input_sha256": "b5d13177b09ad3347b617a83252cc77bc985f3c70802d4d7a8b50d3fbe5adba6",
-      "unit": "count",
-      "value": 23,
-      "vintage": "current"
-    },
-    {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
-      "id": "table:scoped-parent-review.csv:2:current_national_province_count:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "table:2006-adm1-to-current-province-overlay.csv:2:record_count:-",
       "input_sha256": "b5d13177b09ad3347b617a83252cc77bc985f3c70802d4d7a8b50d3fbe5adba6",
       "unit": "count",
       "value": 24,
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
-      "id": "table:scoped-parent-review.csv:2:old_2006_top_overlap_share_of_current:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
-      "input_sha256": "b5d13177b09ad3347b617a83252cc77bc985f3c70802d4d7a8b50d3fbe5adba6",
-      "unit": "share",
-      "value": 0.32302312,
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "table:scoped-2020-to-current-georef-overlay.csv:2:record_count:-",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
+      "unit": "count",
+      "value": 214,
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
-      "id": "table:scoped-parent-review.csv:2:old_2006_union_coverage_of_current:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
-      "input_sha256": "b5d13177b09ad3347b617a83252cc77bc985f3c70802d4d7a8b50d3fbe5adba6",
-      "unit": "share",
-      "value": 0.32302312,
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "table:scoped-current-georef-positive-area-overlaps.csv:2:record_count:-",
+      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "unit": "count",
+      "value": 484,
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "table:scoped-multipart-components.csv:2:record_count:-",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
+      "unit": "count",
+      "value": 72,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "table:scoped-parent-review.csv:2:record_count:-",
+      "input_sha256": "c08f750e2a86a07e2818b0c6216d4da5f0a19f774590be23a0d79a85b8352980",
+      "unit": "count",
+      "value": 14,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "table:scoped-2020-internal-overlaps.csv:2:record_count:-",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
+      "unit": "count",
+      "value": 0,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/component_rows",
       "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "count",
@@ -1280,7 +1092,55 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/components_by_shape_id/61730980B19808130857277",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
+      "unit": "count",
+      "value": 6,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/components_by_shape_id/61730980B30289947598516",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
+      "unit": "count",
+      "value": 3,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/components_by_shape_id/61730980B54493504343974",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
+      "unit": "count",
+      "value": 29,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/components_by_shape_id/61730980B76052784863315",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
+      "unit": "count",
+      "value": 22,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/components_by_shape_id/61730980B94998770553919",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
+      "unit": "count",
+      "value": 2,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/components_by_shape_id/61730980B95294752297782",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
+      "unit": "count",
+      "value": 10,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/features",
       "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "count",
@@ -1288,7 +1148,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/interior_rings",
       "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "count",
@@ -1296,7 +1156,55 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/interior_rings_by_shape_id/61730980B19808130857277",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
+      "unit": "count",
+      "value": 0,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/interior_rings_by_shape_id/61730980B30289947598516",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
+      "unit": "count",
+      "value": 0,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/interior_rings_by_shape_id/61730980B54493504343974",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
+      "unit": "count",
+      "value": 0,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/interior_rings_by_shape_id/61730980B76052784863315",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
+      "unit": "count",
+      "value": 5,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/interior_rings_by_shape_id/61730980B94998770553919",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
+      "unit": "count",
+      "value": 0,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/interior_rings_by_shape_id/61730980B95294752297782",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
+      "unit": "count",
+      "value": 0,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-negative.json:/expected_area",
       "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "count",
@@ -1304,7 +1212,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-negative.json:/observed_area",
       "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "ratio-or-source-value",
@@ -1312,7 +1220,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json:/expected_share",
       "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "ratio-or-source-value",
@@ -1320,7 +1228,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json:/observed_share",
       "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "ratio-or-source-value",
@@ -1328,7 +1236,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json:/current_feature_count",
       "input_sha256": "b5d13177b09ad3347b617a83252cc77bc985f3c70802d4d7a8b50d3fbe5adba6",
       "unit": "count",
@@ -1336,7 +1244,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json:/geometry_types_old/MultiPolygon",
       "input_sha256": "b5d13177b09ad3347b617a83252cc77bc985f3c70802d4d7a8b50d3fbe5adba6",
       "unit": "count",
@@ -1344,7 +1252,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json:/geometry_types_old/Polygon",
       "input_sha256": "b5d13177b09ad3347b617a83252cc77bc985f3c70802d4d7a8b50d3fbe5adba6",
       "unit": "count",
@@ -1352,7 +1260,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json:/invalid_current",
       "input_sha256": "b5d13177b09ad3347b617a83252cc77bc985f3c70802d4d7a8b50d3fbe5adba6",
       "unit": "count",
@@ -1360,7 +1268,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json:/invalid_old",
       "input_sha256": "b5d13177b09ad3347b617a83252cc77bc985f3c70802d4d7a8b50d3fbe5adba6",
       "unit": "count",
@@ -1368,7 +1276,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json:/old_count_below_99pct_current_coverage",
       "input_sha256": "b5d13177b09ad3347b617a83252cc77bc985f3c70802d4d7a8b50d3fbe5adba6",
       "unit": "count",
@@ -1376,7 +1284,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json:/old_feature_count",
       "input_sha256": "b5d13177b09ad3347b617a83252cc77bc985f3c70802d4d7a8b50d3fbe5adba6",
       "unit": "count",
@@ -1384,7 +1292,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json:/old_unique_id_count",
       "input_sha256": "b5d13177b09ad3347b617a83252cc77bc985f3c70802d4d7a8b50d3fbe5adba6",
       "unit": "count",
@@ -1392,7 +1300,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/source-partition-negative.json:/expected_count",
       "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "count",
@@ -1400,7 +1308,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/source-partition-negative.json:/mutated_count",
       "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "count",
@@ -1408,7 +1316,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/source-partition-positive.json:/expected_count",
       "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "count",
@@ -1416,7 +1324,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/source-partition-positive.json:/observed_count",
       "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "count",
@@ -1424,7 +1332,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/source-partition-summary.json:/national_features",
       "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "count",
@@ -1432,7 +1340,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/source-partition-summary.json:/partition_bytes",
       "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "count",
@@ -1440,7 +1348,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/source-partition-summary.json:/restored_bytes",
       "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "count",
@@ -1448,7 +1356,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/source-partition-summary.json:/scoped_features",
       "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "count",
@@ -1456,7 +1364,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/current_categories/Comuna",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1464,7 +1372,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/current_categories/Departamento",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1472,7 +1380,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/current_categories/Partido",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1480,7 +1388,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/current_feature_count",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1488,7 +1396,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/empty_scoped_old_geometry_count",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1496,7 +1404,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/invalid_current_geometry_count",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1504,7 +1412,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/invalid_scoped_old_geometry_count",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1512,7 +1420,31 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/priority_top_share_by_source_id/61730980B14767108287685",
+      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "unit": "ratio-or-source-value",
+      "value": 0.852828872,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/priority_top_share_by_source_id/61730980B47006381015187",
+      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "unit": "ratio-or-source-value",
+      "value": 0.875492712,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/priority_top_share_by_source_id/61730980B76052784863315",
+      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "unit": "ratio-or-source-value",
+      "value": 0.739947994,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_2020_feature_count",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1520,7 +1452,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_2020_internal_overlap_pairs_gt_1sqm",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1528,7 +1460,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_2020_internal_overlap_pairs_over_1hectare",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1536,7 +1468,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_component_count_total",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1544,7 +1476,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_current_source_overlap_pairs_gt_1sqm",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1552,7 +1484,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_current_source_overlap_pairs_over_1hectare",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1560,7 +1492,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_exact_normalized_top_name_matches",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1568,7 +1500,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_exact_same_name_candidate_geometry_symdiff_gt_5pct",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1576,7 +1508,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_geometry_type_counts/MultiPolygon",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1584,7 +1516,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_geometry_type_counts/Polygon",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1592,7 +1524,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_geometry_types/MultiPolygon",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1600,7 +1532,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_geometry_types/Polygon",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1608,7 +1540,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_interior_ring_count_total",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1616,7 +1548,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_old_feature_count",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1624,7 +1556,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_same_normalized_name_candidates",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1632,7 +1564,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_top_province_counts/Buenos Aires",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1640,7 +1572,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_top_province_counts/Catamarca",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1648,7 +1580,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_top_province_counts/Corrientes",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1656,7 +1588,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_top_province_counts/Jujuy",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1664,7 +1596,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_top_province_counts/La Rioja",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1672,7 +1604,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_top_province_counts/Mendoza",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1680,7 +1612,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_top_province_counts/Misiones",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1688,7 +1620,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_top_province_counts/Salta",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1696,7 +1628,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_top_province_counts/San Juan",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1704,7 +1636,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_top_province_counts/San Luis",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1712,7 +1644,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_top_province_counts/Santiago del Estero",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1720,7 +1652,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_top_province_counts/Tucumán",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1728,7 +1660,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_unique_same_normalized_name_candidates",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1736,7 +1668,7 @@
       "vintage": "current"
     },
     {
-      "evaluation_commit": "2ac65414166764713eafa8238f1b28211a57344e",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_unique_shapeID_count",
       "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
       "unit": "count",
@@ -1746,21 +1678,28 @@
   ],
   "outputs": [
     {
-      "bytes": 12733,
+      "bytes": 13638,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/README.md",
       "role": "research-output",
-      "sha256": "59e41a703322b6c1d6a1b18aa57ca035884039680183e23c2f7aee7843726615"
+      "sha256": "9a3d66414894bd81b9ba578fce3d682dcebdfdab022ee3803088eccba6d2c8c5"
     },
     {
-      "bytes": 23898,
+      "bytes": 23119,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/build-evidence-manifest.py",
       "role": "reproduction-code",
-      "sha256": "b0b18dc0c3549636b0029436e2c476b198e27fc288f0c6520212bacb4abecc70"
+      "sha256": "6754906fccea114784d80327a824a4285e317600653a0a6d90e4b2bd4da21113"
     },
     {
-      "bytes": 8883,
+      "bytes": 6148,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/categorize-tabular-findings.py",
+      "role": "reproduction-code",
+      "sha256": "42fc8d7418322e09c580cbb4fcb4d26c11161c78d6fe170520af14a44100408a"
+    },
+    {
+      "bytes": 8801,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/2006-adm1-to-current-province-overlay.csv",
       "rendered_tables": [
@@ -1770,43 +1709,22 @@
             {
               "decimals": 0,
               "line": 2,
-              "metric_id": "table:2006-adm1-to-current-province-overlay.csv:2:old_intersecting_feature_count:02",
+              "metric_id": "table:2006-adm1-to-current-province-overlay.csv:2:record_count:-",
               "scale": 1,
-              "template": "02,Ciudad Autónoma de Buenos Aires,{value},Ciudad Autónoma de Buenos Aires,19177384B49506124846693,0.323023120,0.323023120,4.962269304,\"[{\"\"name\"\":\"\"Ciudad Autónoma de Buenos Aires\"\",\"\"shapeID\"\":\"\"19177384B49506124846693\"\"}]\""
-            },
-            {
-              "decimals": 9,
-              "line": 2,
-              "metric_id": "table:2006-adm1-to-current-province-overlay.csv:2:top_old_share_of_current_area:02",
-              "scale": 1,
-              "template": "02,Ciudad Autónoma de Buenos Aires,1,Ciudad Autónoma de Buenos Aires,19177384B49506124846693,{value},0.323023120,4.962269304,\"[{\"\"name\"\":\"\"Ciudad Autónoma de Buenos Aires\"\",\"\"shapeID\"\":\"\"19177384B49506124846693\"\"}]\""
-            },
-            {
-              "decimals": 9,
-              "line": 2,
-              "metric_id": "table:2006-adm1-to-current-province-overlay.csv:2:old_union_coverage_of_current:02",
-              "scale": 1,
-              "template": "02,Ciudad Autónoma de Buenos Aires,1,Ciudad Autónoma de Buenos Aires,19177384B49506124846693,0.323023120,{value},4.962269304,\"[{\"\"name\"\":\"\"Ciudad Autónoma de Buenos Aires\"\",\"\"shapeID\"\":\"\"19177384B49506124846693\"\"}]\""
-            },
-            {
-              "decimals": 9,
-              "line": 2,
-              "metric_id": "table:2006-adm1-to-current-province-overlay.csv:2:union_symmetric_difference_share:02",
-              "scale": 1,
-              "template": "02,Ciudad Autónoma de Buenos Aires,1,Ciudad Autónoma de Buenos Aires,19177384B49506124846693,0.323023120,0.323023120,{value},\"[{\"\"name\"\":\"\"Ciudad Autónoma de Buenos Aires\"\",\"\"shapeID\"\":\"\"19177384B49506124846693\"\"}]\""
+              "template": "summary,{value},,,,,,,,,"
             }
           ]
         }
       ],
       "role": "generated-table",
-      "sha256": "b29ea869f250cf2ccf66f8b537127446e2154f687226bfe89d4073a43bc5b1ba"
+      "sha256": "16adfe36c248dd3d318e3d1205b83b05e07ccec740c5bbc9992a84dbe251101c"
     },
     {
-      "bytes": 67,
+      "bytes": 550,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json",
       "role": "measurement-result",
-      "sha256": "0d099daf60b427aded81c67689f3b77ea772b8656156fad9692b93cf99f0daa4"
+      "sha256": "42f4f7376ff6fff503546d3611c944a74443f29c5b5a3894c03768c990f40d33"
     },
     {
       "bytes": 4684,
@@ -1816,11 +1734,11 @@
       "sha256": "a5853f964bb214f3ee46373d2d07db8691292fe4af2f939df5fc18e869133569"
     },
     {
-      "bytes": 33609,
+      "bytes": 31651,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/metrics.json",
       "role": "measurement-result",
-      "sha256": "1ad22492a700466c9af291555db0d3b241387c83f9798a0e2cf46fe57c40da06"
+      "sha256": "dbb3fddb4328802e6082e7bcd9cd13e49f2734f296b246221e453157c89ea176"
     },
     {
       "bytes": 207,
@@ -1844,14 +1762,28 @@
       "sha256": "eb59cd50bf3afe3e8066cf64c5c6ea3bd95565c9ee0cccacb348dc559f83680c"
     },
     {
-      "bytes": 71,
+      "bytes": 35,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/scoped-2020-internal-overlaps.csv",
-      "role": "measurement-result",
-      "sha256": "04e45a45a89812b2358b8ff36f15a072a68e6bf623df330cca5f29b67472e3eb"
+      "rendered_tables": [
+        {
+          "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/scoped-2020-internal-overlaps.csv",
+          "rows": [
+            {
+              "decimals": 0,
+              "line": 2,
+              "metric_id": "table:scoped-2020-internal-overlaps.csv:2:record_count:-",
+              "scale": 1,
+              "template": "summary,{value}"
+            }
+          ]
+        }
+      ],
+      "role": "generated-table",
+      "sha256": "25b8bf23e187cb7f7006e4bb512f2ff2ad089e7cee01a0c361be23167252655c"
     },
     {
-      "bytes": 366407,
+      "bytes": 366609,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/scoped-2020-to-current-georef-overlay.csv",
       "rendered_tables": [
@@ -1861,88 +1793,18 @@
             {
               "decimals": 0,
               "line": 2,
-              "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:source_2020_component_count:gb:ARG:ADM2:61730980B10036181744679",
+              "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:record_count:-",
               "scale": 1,
-              "template": "gb:ARG:ADM2:61730980B10036181744679,Graneros,framework:province:tucuman:13e5687d0f21,61730980B10036181744679,Graneros,ADM2,Polygon,{value},0,True,1688.642115,6,90035,Graneros,Tucumán,Departamento,0.991939813,0.998245481,0.001326724,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90042\"\",\"\"name\"\":\"\"Juan Bautista Alberdi\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",1,90035,Tucumán,0.991939813,0.016935645,\"[{\"\"id\"\":\"\"90035\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",0,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"}]\",Overlay screen only. Georef is a current statistical/unit-normalization layer; positive-area winners do not establish legal boundary lineage or resolve 2020 vintage change."
-            },
-            {
-              "decimals": 0,
-              "line": 2,
-              "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:source_2020_hole_count:gb:ARG:ADM2:61730980B10036181744679",
-              "scale": 1,
-              "template": "gb:ARG:ADM2:61730980B10036181744679,Graneros,framework:province:tucuman:13e5687d0f21,61730980B10036181744679,Graneros,ADM2,Polygon,1,{value},True,1688.642115,6,90035,Graneros,Tucumán,Departamento,0.991939813,0.998245481,0.001326724,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90042\"\",\"\"name\"\":\"\"Juan Bautista Alberdi\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",1,90035,Tucumán,0.991939813,0.016935645,\"[{\"\"id\"\":\"\"90035\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",0,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"}]\",Overlay screen only. Georef is a current statistical/unit-normalization layer; positive-area winners do not establish legal boundary lineage or resolve 2020 vintage change."
-            },
-            {
-              "decimals": 6,
-              "line": 2,
-              "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:old_area_km2_equal_area:gb:ARG:ADM2:61730980B10036181744679",
-              "scale": 1,
-              "template": "gb:ARG:ADM2:61730980B10036181744679,Graneros,framework:province:tucuman:13e5687d0f21,61730980B10036181744679,Graneros,ADM2,Polygon,1,0,True,{value},6,90035,Graneros,Tucumán,Departamento,0.991939813,0.998245481,0.001326724,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90042\"\",\"\"name\"\":\"\"Juan Bautista Alberdi\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",1,90035,Tucumán,0.991939813,0.016935645,\"[{\"\"id\"\":\"\"90035\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",0,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"}]\",Overlay screen only. Georef is a current statistical/unit-normalization layer; positive-area winners do not establish legal boundary lineage or resolve 2020 vintage change."
-            },
-            {
-              "decimals": 0,
-              "line": 2,
-              "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:current_intersecting_feature_count:gb:ARG:ADM2:61730980B10036181744679",
-              "scale": 1,
-              "template": "gb:ARG:ADM2:61730980B10036181744679,Graneros,framework:province:tucuman:13e5687d0f21,61730980B10036181744679,Graneros,ADM2,Polygon,1,0,True,1688.642115,{value},90035,Graneros,Tucumán,Departamento,0.991939813,0.998245481,0.001326724,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90042\"\",\"\"name\"\":\"\"Juan Bautista Alberdi\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",1,90035,Tucumán,0.991939813,0.016935645,\"[{\"\"id\"\":\"\"90035\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",0,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"}]\",Overlay screen only. Georef is a current statistical/unit-normalization layer; positive-area winners do not establish legal boundary lineage or resolve 2020 vintage change."
-            },
-            {
-              "decimals": 9,
-              "line": 2,
-              "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:top_share_of_old_area:gb:ARG:ADM2:61730980B10036181744679",
-              "scale": 1,
-              "template": "gb:ARG:ADM2:61730980B10036181744679,Graneros,framework:province:tucuman:13e5687d0f21,61730980B10036181744679,Graneros,ADM2,Polygon,1,0,True,1688.642115,6,90035,Graneros,Tucumán,Departamento,{value},0.998245481,0.001326724,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90042\"\",\"\"name\"\":\"\"Juan Bautista Alberdi\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",1,90035,Tucumán,0.991939813,0.016935645,\"[{\"\"id\"\":\"\"90035\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",0,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"}]\",Overlay screen only. Georef is a current statistical/unit-normalization layer; positive-area winners do not establish legal boundary lineage or resolve 2020 vintage change."
-            },
-            {
-              "decimals": 9,
-              "line": 2,
-              "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:current_union_coverage_of_old:gb:ARG:ADM2:61730980B10036181744679",
-              "scale": 1,
-              "template": "gb:ARG:ADM2:61730980B10036181744679,Graneros,framework:province:tucuman:13e5687d0f21,61730980B10036181744679,Graneros,ADM2,Polygon,1,0,True,1688.642115,6,90035,Graneros,Tucumán,Departamento,0.991939813,{value},0.001326724,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90042\"\",\"\"name\"\":\"\"Juan Bautista Alberdi\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",1,90035,Tucumán,0.991939813,0.016935645,\"[{\"\"id\"\":\"\"90035\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",0,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"}]\",Overlay screen only. Georef is a current statistical/unit-normalization layer; positive-area winners do not establish legal boundary lineage or resolve 2020 vintage change."
-            },
-            {
-              "decimals": 9,
-              "line": 2,
-              "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:current_overlap_excess_share:gb:ARG:ADM2:61730980B10036181744679",
-              "scale": 1,
-              "template": "gb:ARG:ADM2:61730980B10036181744679,Graneros,framework:province:tucuman:13e5687d0f21,61730980B10036181744679,Graneros,ADM2,Polygon,1,0,True,1688.642115,6,90035,Graneros,Tucumán,Departamento,0.991939813,0.998245481,{value},\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90042\"\",\"\"name\"\":\"\"Juan Bautista Alberdi\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",1,90035,Tucumán,0.991939813,0.016935645,\"[{\"\"id\"\":\"\"90035\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",0,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"}]\",Overlay screen only. Georef is a current statistical/unit-normalization layer; positive-area winners do not establish legal boundary lineage or resolve 2020 vintage change."
-            },
-            {
-              "decimals": 0,
-              "line": 2,
-              "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:same_normalized_name_candidate_count:gb:ARG:ADM2:61730980B10036181744679",
-              "scale": 1,
-              "template": "gb:ARG:ADM2:61730980B10036181744679,Graneros,framework:province:tucuman:13e5687d0f21,61730980B10036181744679,Graneros,ADM2,Polygon,1,0,True,1688.642115,6,90035,Graneros,Tucumán,Departamento,0.991939813,0.998245481,0.001326724,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90042\"\",\"\"name\"\":\"\"Juan Bautista Alberdi\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",{value},90035,Tucumán,0.991939813,0.016935645,\"[{\"\"id\"\":\"\"90035\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",0,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"}]\",Overlay screen only. Georef is a current statistical/unit-normalization layer; positive-area winners do not establish legal boundary lineage or resolve 2020 vintage change."
-            },
-            {
-              "decimals": 9,
-              "line": 2,
-              "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:best_same_name_candidate_share_of_old_area:gb:ARG:ADM2:61730980B10036181744679",
-              "scale": 1,
-              "template": "gb:ARG:ADM2:61730980B10036181744679,Graneros,framework:province:tucuman:13e5687d0f21,61730980B10036181744679,Graneros,ADM2,Polygon,1,0,True,1688.642115,6,90035,Graneros,Tucumán,Departamento,0.991939813,0.998245481,0.001326724,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90042\"\",\"\"name\"\":\"\"Juan Bautista Alberdi\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",1,90035,Tucumán,{value},0.016935645,\"[{\"\"id\"\":\"\"90035\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",0,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"}]\",Overlay screen only. Georef is a current statistical/unit-normalization layer; positive-area winners do not establish legal boundary lineage or resolve 2020 vintage change."
-            },
-            {
-              "decimals": 9,
-              "line": 2,
-              "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:best_same_name_candidate_symmetric_difference_share:gb:ARG:ADM2:61730980B10036181744679",
-              "scale": 1,
-              "template": "gb:ARG:ADM2:61730980B10036181744679,Graneros,framework:province:tucuman:13e5687d0f21,61730980B10036181744679,Graneros,ADM2,Polygon,1,0,True,1688.642115,6,90035,Graneros,Tucumán,Departamento,0.991939813,0.998245481,0.001326724,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90042\"\",\"\"name\"\":\"\"Juan Bautista Alberdi\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",1,90035,Tucumán,0.991939813,{value},\"[{\"\"id\"\":\"\"90035\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",0,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"}]\",Overlay screen only. Georef is a current statistical/unit-normalization layer; positive-area winners do not establish legal boundary lineage or resolve 2020 vintage change."
-            },
-            {
-              "decimals": 0,
-              "line": 2,
-              "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:over_1sqm_sliver_count:gb:ARG:ADM2:61730980B10036181744679",
-              "scale": 1,
-              "template": "gb:ARG:ADM2:61730980B10036181744679,Graneros,framework:province:tucuman:13e5687d0f21,61730980B10036181744679,Graneros,ADM2,Polygon,1,0,True,1688.642115,6,90035,Graneros,Tucumán,Departamento,0.991939813,0.998245481,0.001326724,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90042\"\",\"\"name\"\":\"\"Juan Bautista Alberdi\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",1,90035,Tucumán,0.991939813,0.016935645,\"[{\"\"id\"\":\"\"90035\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",{value},\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"}]\",Overlay screen only. Georef is a current statistical/unit-normalization layer; positive-area winners do not establish legal boundary lineage or resolve 2020 vintage change."
+              "template": "summary,{value},,,,,,,,,,,,,,,,,,,,,,,,,,,"
             }
           ]
         }
       ],
       "role": "generated-table",
-      "sha256": "e837627b1a406b2e8e44adff27cd9179b21c31401c6faab3fa781c0559190f79"
+      "sha256": "0d9c8c89cd5131bce1c712b66e6f0caf4b1a083fd73b7e257eb484d6b7ff47d2"
     },
     {
-      "bytes": 152155,
+      "bytes": 152918,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/scoped-current-georef-positive-area-overlaps.csv",
       "rendered_tables": [
@@ -1950,20 +1812,20 @@
           "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/scoped-current-georef-positive-area-overlaps.csv",
           "rows": [
             {
-              "decimals": 12,
+              "decimals": 0,
               "line": 2,
-              "metric_id": "table:scoped-current-georef-positive-area-overlaps.csv:2:overlap_area_m2:02056-06427",
+              "metric_id": "table:scoped-current-georef-positive-area-overlaps.csv:2:record_count:-",
               "scale": 1,
-              "template": "Comuna 8,Ciudad Autónoma de Buenos Aires,Comuna,La Matanza,Buenos Aires,Partido,{value},02056,06427,gb:ARG:ADM2:61730980B21366789082443,\"Positive-area intersection inside at least one reviewed 2020 footprint; possible current-source overlap or vintage offset, not adjudicated.\""
+              "template": "summary,{value},,,,,,,,,,,"
             }
           ]
         }
       ],
       "role": "generated-table",
-      "sha256": "0c9493531556c1cd03f6d4389e1cf1f51a7e7e5d8ef0a868d2b623209872812d"
+      "sha256": "93737206e9a306121717ff5559eef324a82ec0883ca8eb0c89f26780d3a2a64c"
     },
     {
-      "bytes": 27585,
+      "bytes": 28302,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/scoped-multipart-components.csv",
       "rendered_tables": [
@@ -1973,39 +1835,18 @@
             {
               "decimals": 0,
               "line": 2,
-              "metric_id": "table:scoped-multipart-components.csv:2:component_number:gb:ARG:ADM2:61730980B19808130857277",
+              "metric_id": "table:scoped-multipart-components.csv:2:record_count:-",
               "scale": 1,
-              "template": "gb:ARG:ADM2:61730980B19808130857277,San Cosme,61730980B19808130857277,{value},6,591.191768,0,\"[{\"\"id\"\":\"\"18133\"\",\"\"name\"\":\"\"San Cosme\"\",\"\"province\"\":\"\"Corrientes\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"18021\"\",\"\"name\"\":\"\"Capital\"\",\"\"province\"\":\"\"Corrientes\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"18140\"\",\"\"name\"\":\"\"San Luis del Palmar\"\",\"\"province\"\":\"\"Corrientes\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"22014\"\",\"\"name\"\":\"\"Bermejo\"\",\"\"province\"\":\"\"Chaco\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"18077\"\",\"\"name\"\":\"\"Itatí\"\",\"\"province\"\":\"\"Corrientes\"\",\"\"category\"\":\"\"Departamento\"\"}]\",Recorded source component and current statistical-layer overlays; component existence does not establish island/exclave identity or completeness."
-            },
-            {
-              "decimals": 0,
-              "line": 2,
-              "metric_id": "table:scoped-multipart-components.csv:2:component_count:gb:ARG:ADM2:61730980B19808130857277",
-              "scale": 1,
-              "template": "gb:ARG:ADM2:61730980B19808130857277,San Cosme,61730980B19808130857277,1,{value},591.191768,0,\"[{\"\"id\"\":\"\"18133\"\",\"\"name\"\":\"\"San Cosme\"\",\"\"province\"\":\"\"Corrientes\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"18021\"\",\"\"name\"\":\"\"Capital\"\",\"\"province\"\":\"\"Corrientes\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"18140\"\",\"\"name\"\":\"\"San Luis del Palmar\"\",\"\"province\"\":\"\"Corrientes\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"22014\"\",\"\"name\"\":\"\"Bermejo\"\",\"\"province\"\":\"\"Chaco\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"18077\"\",\"\"name\"\":\"\"Itatí\"\",\"\"province\"\":\"\"Corrientes\"\",\"\"category\"\":\"\"Departamento\"\"}]\",Recorded source component and current statistical-layer overlays; component existence does not establish island/exclave identity or completeness."
-            },
-            {
-              "decimals": 6,
-              "line": 2,
-              "metric_id": "table:scoped-multipart-components.csv:2:component_area_km2:gb:ARG:ADM2:61730980B19808130857277",
-              "scale": 1,
-              "template": "gb:ARG:ADM2:61730980B19808130857277,San Cosme,61730980B19808130857277,1,6,{value},0,\"[{\"\"id\"\":\"\"18133\"\",\"\"name\"\":\"\"San Cosme\"\",\"\"province\"\":\"\"Corrientes\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"18021\"\",\"\"name\"\":\"\"Capital\"\",\"\"province\"\":\"\"Corrientes\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"18140\"\",\"\"name\"\":\"\"San Luis del Palmar\"\",\"\"province\"\":\"\"Corrientes\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"22014\"\",\"\"name\"\":\"\"Bermejo\"\",\"\"province\"\":\"\"Chaco\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"18077\"\",\"\"name\"\":\"\"Itatí\"\",\"\"province\"\":\"\"Corrientes\"\",\"\"category\"\":\"\"Departamento\"\"}]\",Recorded source component and current statistical-layer overlays; component existence does not establish island/exclave identity or completeness."
-            },
-            {
-              "decimals": 0,
-              "line": 2,
-              "metric_id": "table:scoped-multipart-components.csv:2:interior_ring_count:gb:ARG:ADM2:61730980B19808130857277",
-              "scale": 1,
-              "template": "gb:ARG:ADM2:61730980B19808130857277,San Cosme,61730980B19808130857277,1,6,591.191768,{value},\"[{\"\"id\"\":\"\"18133\"\",\"\"name\"\":\"\"San Cosme\"\",\"\"province\"\":\"\"Corrientes\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"18021\"\",\"\"name\"\":\"\"Capital\"\",\"\"province\"\":\"\"Corrientes\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"18140\"\",\"\"name\"\":\"\"San Luis del Palmar\"\",\"\"province\"\":\"\"Corrientes\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"22014\"\",\"\"name\"\":\"\"Bermejo\"\",\"\"province\"\":\"\"Chaco\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"18077\"\",\"\"name\"\":\"\"Itatí\"\",\"\"province\"\":\"\"Corrientes\"\",\"\"category\"\":\"\"Departamento\"\"}]\",Recorded source component and current statistical-layer overlays; component existence does not establish island/exclave identity or completeness."
+              "template": "summary,{value},,,,,,,,"
             }
           ]
         }
       ],
       "role": "generated-table",
-      "sha256": "1dbd24efd5d65c33374a57000dc5dd423118ca6f0a2c1c2ccd8754ad97695895"
+      "sha256": "4226be6b750ee8f79c2709828e14ee630b3e6e1d3374349e40eb99ce3efeb286"
     },
     {
-      "bytes": 4395,
+      "bytes": 4421,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/scoped-parent-review.csv",
       "rendered_tables": [
@@ -2015,57 +1856,15 @@
             {
               "decimals": 0,
               "line": 2,
-              "metric_id": "table:scoped-parent-review.csv:2:scoped_parent_review_children_from_443:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
+              "metric_id": "table:scoped-parent-review.csv:2:record_count:-",
               "scale": 1,
-              "template": "framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651,Ciudad Autónoma de Buenos Aires,Ciudad Autónoma de Buenos Aires,{value},10,02,1,Polygon,19177384B49506124846693,Ciudad Autónoma de Buenos Aires,True,23,24,Ciudad Autónoma de Buenos Aires,0.32302312,0.32302312,Name identity and current geometry crosswalk only; old source outline has no legal currentness certification."
-            },
-            {
-              "decimals": 0,
-              "line": 2,
-              "metric_id": "table:scoped-parent-review.csv:2:direct_adm2_subjects_in_944:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
-              "scale": 1,
-              "template": "framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651,Ciudad Autónoma de Buenos Aires,Ciudad Autónoma de Buenos Aires,10,{value},02,1,Polygon,19177384B49506124846693,Ciudad Autónoma de Buenos Aires,True,23,24,Ciudad Autónoma de Buenos Aires,0.32302312,0.32302312,Name identity and current geometry crosswalk only; old source outline has no legal currentness certification."
-            },
-            {
-              "decimals": 0,
-              "line": 2,
-              "metric_id": "table:scoped-parent-review.csv:2:current_georef_exact_name_match_count:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
-              "scale": 1,
-              "template": "framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651,Ciudad Autónoma de Buenos Aires,Ciudad Autónoma de Buenos Aires,10,10,02,{value},Polygon,19177384B49506124846693,Ciudad Autónoma de Buenos Aires,True,23,24,Ciudad Autónoma de Buenos Aires,0.32302312,0.32302312,Name identity and current geometry crosswalk only; old source outline has no legal currentness certification."
-            },
-            {
-              "decimals": 0,
-              "line": 2,
-              "metric_id": "table:scoped-parent-review.csv:2:2006_feature_count:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
-              "scale": 1,
-              "template": "framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651,Ciudad Autónoma de Buenos Aires,Ciudad Autónoma de Buenos Aires,10,10,02,1,Polygon,19177384B49506124846693,Ciudad Autónoma de Buenos Aires,True,{value},24,Ciudad Autónoma de Buenos Aires,0.32302312,0.32302312,Name identity and current geometry crosswalk only; old source outline has no legal currentness certification."
-            },
-            {
-              "decimals": 0,
-              "line": 2,
-              "metric_id": "table:scoped-parent-review.csv:2:current_national_province_count:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
-              "scale": 1,
-              "template": "framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651,Ciudad Autónoma de Buenos Aires,Ciudad Autónoma de Buenos Aires,10,10,02,1,Polygon,19177384B49506124846693,Ciudad Autónoma de Buenos Aires,True,23,{value},Ciudad Autónoma de Buenos Aires,0.32302312,0.32302312,Name identity and current geometry crosswalk only; old source outline has no legal currentness certification."
-            },
-            {
-              "decimals": 8,
-              "line": 2,
-              "metric_id": "table:scoped-parent-review.csv:2:old_2006_top_overlap_share_of_current:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
-              "scale": 1,
-              "template": "framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651,Ciudad Autónoma de Buenos Aires,Ciudad Autónoma de Buenos Aires,10,10,02,1,Polygon,19177384B49506124846693,Ciudad Autónoma de Buenos Aires,True,23,24,Ciudad Autónoma de Buenos Aires,{value},0.32302312,Name identity and current geometry crosswalk only; old source outline has no legal currentness certification."
-            },
-            {
-              "decimals": 8,
-              "line": 2,
-              "metric_id": "table:scoped-parent-review.csv:2:old_2006_union_coverage_of_current:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
-              "scale": 1,
-              "template": "framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651,Ciudad Autónoma de Buenos Aires,Ciudad Autónoma de Buenos Aires,10,10,02,1,Polygon,19177384B49506124846693,Ciudad Autónoma de Buenos Aires,True,23,24,Ciudad Autónoma de Buenos Aires,0.32302312,{value},Name identity and current geometry crosswalk only; old source outline has no legal currentness certification."
+              "template": "summary,{value},,,,,,,,,,,,,,,"
             }
           ]
         }
       ],
       "role": "generated-table",
-      "sha256": "ea16a1768fa114a89670caef806e7c908fa989e83da3a8c95982a86ce0781130"
+      "sha256": "864a8c76ace1f17b4927e3d703e2ccb5b426a1cf9ca452f196d5086839d55bc1"
     },
     {
       "bytes": 245,
@@ -2089,11 +1888,11 @@
       "sha256": "18095de6266368ff37d292364a054401f5cdcf20845bf5af8f4a88fe6a6439fa"
     },
     {
-      "bytes": 12705,
+      "bytes": 12880,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json",
       "role": "measurement-result",
-      "sha256": "ce983e6a5ff0fb35fb0e1d660c565b42cbb4339f29cf2c37f94c775a8741d220"
+      "sha256": "e30fff338f6093cf3b78731e02fc122e2b76632943c4af2a10560cc276701ff9"
     },
     {
       "bytes": 1999,
@@ -2103,11 +1902,18 @@
       "sha256": "1ebb1aacc8326c14ac0fced8c071e6361d9d70640fcf0785248c9423cbc4c022"
     },
     {
-      "bytes": 2643,
+      "bytes": 2942,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/reproduce-components.py",
       "role": "reproduction-code",
-      "sha256": "7f0813afc951a1bed5b78bde05efea8861e857b9f64ec1c1367a16e9edd003eb"
+      "sha256": "259ee2566f3412def992670479abbe99e12c175b1406947af7319e5ef49bbe5d"
+    },
+    {
+      "bytes": 4261,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/reproduce-parent-review.py",
+      "role": "reproduction-code",
+      "sha256": "bcb4a5a7de5b0df75b9ee5a07d1991d2cc6da6c3ff9b221b733f563abdb02d61"
     },
     {
       "bytes": 3916,
@@ -2117,11 +1923,11 @@
       "sha256": "daf648c600247d95f7f0b1716e6ca87916f3e1d35c9e4f22f083a012618935b5"
     },
     {
-      "bytes": 12782,
+      "bytes": 12989,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/reproduce-spatial.py",
       "role": "reproduction-code",
-      "sha256": "e314012cd050db9f065548ec6ce03b1c5e5f221d52abf0d9941c0cd8b527be90"
+      "sha256": "0905be0483fb1ef6f25ca28aac44b231a28a1cac9e135431c11d29eabda0be61"
     },
     {
       "bytes": 13885,
@@ -2236,30 +2042,21 @@
         {
           "decimals": 0,
           "line": 2,
-          "metric_id": "table:2006-adm1-to-current-province-overlay.csv:2:old_intersecting_feature_count:02",
+          "metric_id": "table:2006-adm1-to-current-province-overlay.csv:2:record_count:-",
           "scale": 1,
-          "template": "02,Ciudad Autónoma de Buenos Aires,{value},Ciudad Autónoma de Buenos Aires,19177384B49506124846693,0.323023120,0.323023120,4.962269304,\"[{\"\"name\"\":\"\"Ciudad Autónoma de Buenos Aires\"\",\"\"shapeID\"\":\"\"19177384B49506124846693\"\"}]\""
-        },
+          "template": "summary,{value},,,,,,,,,"
+        }
+      ]
+    },
+    {
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/scoped-2020-internal-overlaps.csv",
+      "rows": [
         {
-          "decimals": 9,
+          "decimals": 0,
           "line": 2,
-          "metric_id": "table:2006-adm1-to-current-province-overlay.csv:2:top_old_share_of_current_area:02",
+          "metric_id": "table:scoped-2020-internal-overlaps.csv:2:record_count:-",
           "scale": 1,
-          "template": "02,Ciudad Autónoma de Buenos Aires,1,Ciudad Autónoma de Buenos Aires,19177384B49506124846693,{value},0.323023120,4.962269304,\"[{\"\"name\"\":\"\"Ciudad Autónoma de Buenos Aires\"\",\"\"shapeID\"\":\"\"19177384B49506124846693\"\"}]\""
-        },
-        {
-          "decimals": 9,
-          "line": 2,
-          "metric_id": "table:2006-adm1-to-current-province-overlay.csv:2:old_union_coverage_of_current:02",
-          "scale": 1,
-          "template": "02,Ciudad Autónoma de Buenos Aires,1,Ciudad Autónoma de Buenos Aires,19177384B49506124846693,0.323023120,{value},4.962269304,\"[{\"\"name\"\":\"\"Ciudad Autónoma de Buenos Aires\"\",\"\"shapeID\"\":\"\"19177384B49506124846693\"\"}]\""
-        },
-        {
-          "decimals": 9,
-          "line": 2,
-          "metric_id": "table:2006-adm1-to-current-province-overlay.csv:2:union_symmetric_difference_share:02",
-          "scale": 1,
-          "template": "02,Ciudad Autónoma de Buenos Aires,1,Ciudad Autónoma de Buenos Aires,19177384B49506124846693,0.323023120,0.323023120,{value},\"[{\"\"name\"\":\"\"Ciudad Autónoma de Buenos Aires\"\",\"\"shapeID\"\":\"\"19177384B49506124846693\"\"}]\""
+          "template": "summary,{value}"
         }
       ]
     },
@@ -2269,79 +2066,9 @@
         {
           "decimals": 0,
           "line": 2,
-          "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:source_2020_component_count:gb:ARG:ADM2:61730980B10036181744679",
+          "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:record_count:-",
           "scale": 1,
-          "template": "gb:ARG:ADM2:61730980B10036181744679,Graneros,framework:province:tucuman:13e5687d0f21,61730980B10036181744679,Graneros,ADM2,Polygon,{value},0,True,1688.642115,6,90035,Graneros,Tucumán,Departamento,0.991939813,0.998245481,0.001326724,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90042\"\",\"\"name\"\":\"\"Juan Bautista Alberdi\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",1,90035,Tucumán,0.991939813,0.016935645,\"[{\"\"id\"\":\"\"90035\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",0,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"}]\",Overlay screen only. Georef is a current statistical/unit-normalization layer; positive-area winners do not establish legal boundary lineage or resolve 2020 vintage change."
-        },
-        {
-          "decimals": 0,
-          "line": 2,
-          "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:source_2020_hole_count:gb:ARG:ADM2:61730980B10036181744679",
-          "scale": 1,
-          "template": "gb:ARG:ADM2:61730980B10036181744679,Graneros,framework:province:tucuman:13e5687d0f21,61730980B10036181744679,Graneros,ADM2,Polygon,1,{value},True,1688.642115,6,90035,Graneros,Tucumán,Departamento,0.991939813,0.998245481,0.001326724,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90042\"\",\"\"name\"\":\"\"Juan Bautista Alberdi\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",1,90035,Tucumán,0.991939813,0.016935645,\"[{\"\"id\"\":\"\"90035\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",0,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"}]\",Overlay screen only. Georef is a current statistical/unit-normalization layer; positive-area winners do not establish legal boundary lineage or resolve 2020 vintage change."
-        },
-        {
-          "decimals": 6,
-          "line": 2,
-          "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:old_area_km2_equal_area:gb:ARG:ADM2:61730980B10036181744679",
-          "scale": 1,
-          "template": "gb:ARG:ADM2:61730980B10036181744679,Graneros,framework:province:tucuman:13e5687d0f21,61730980B10036181744679,Graneros,ADM2,Polygon,1,0,True,{value},6,90035,Graneros,Tucumán,Departamento,0.991939813,0.998245481,0.001326724,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90042\"\",\"\"name\"\":\"\"Juan Bautista Alberdi\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",1,90035,Tucumán,0.991939813,0.016935645,\"[{\"\"id\"\":\"\"90035\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",0,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"}]\",Overlay screen only. Georef is a current statistical/unit-normalization layer; positive-area winners do not establish legal boundary lineage or resolve 2020 vintage change."
-        },
-        {
-          "decimals": 0,
-          "line": 2,
-          "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:current_intersecting_feature_count:gb:ARG:ADM2:61730980B10036181744679",
-          "scale": 1,
-          "template": "gb:ARG:ADM2:61730980B10036181744679,Graneros,framework:province:tucuman:13e5687d0f21,61730980B10036181744679,Graneros,ADM2,Polygon,1,0,True,1688.642115,{value},90035,Graneros,Tucumán,Departamento,0.991939813,0.998245481,0.001326724,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90042\"\",\"\"name\"\":\"\"Juan Bautista Alberdi\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",1,90035,Tucumán,0.991939813,0.016935645,\"[{\"\"id\"\":\"\"90035\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",0,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"}]\",Overlay screen only. Georef is a current statistical/unit-normalization layer; positive-area winners do not establish legal boundary lineage or resolve 2020 vintage change."
-        },
-        {
-          "decimals": 9,
-          "line": 2,
-          "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:top_share_of_old_area:gb:ARG:ADM2:61730980B10036181744679",
-          "scale": 1,
-          "template": "gb:ARG:ADM2:61730980B10036181744679,Graneros,framework:province:tucuman:13e5687d0f21,61730980B10036181744679,Graneros,ADM2,Polygon,1,0,True,1688.642115,6,90035,Graneros,Tucumán,Departamento,{value},0.998245481,0.001326724,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90042\"\",\"\"name\"\":\"\"Juan Bautista Alberdi\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",1,90035,Tucumán,0.991939813,0.016935645,\"[{\"\"id\"\":\"\"90035\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",0,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"}]\",Overlay screen only. Georef is a current statistical/unit-normalization layer; positive-area winners do not establish legal boundary lineage or resolve 2020 vintage change."
-        },
-        {
-          "decimals": 9,
-          "line": 2,
-          "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:current_union_coverage_of_old:gb:ARG:ADM2:61730980B10036181744679",
-          "scale": 1,
-          "template": "gb:ARG:ADM2:61730980B10036181744679,Graneros,framework:province:tucuman:13e5687d0f21,61730980B10036181744679,Graneros,ADM2,Polygon,1,0,True,1688.642115,6,90035,Graneros,Tucumán,Departamento,0.991939813,{value},0.001326724,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90042\"\",\"\"name\"\":\"\"Juan Bautista Alberdi\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",1,90035,Tucumán,0.991939813,0.016935645,\"[{\"\"id\"\":\"\"90035\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",0,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"}]\",Overlay screen only. Georef is a current statistical/unit-normalization layer; positive-area winners do not establish legal boundary lineage or resolve 2020 vintage change."
-        },
-        {
-          "decimals": 9,
-          "line": 2,
-          "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:current_overlap_excess_share:gb:ARG:ADM2:61730980B10036181744679",
-          "scale": 1,
-          "template": "gb:ARG:ADM2:61730980B10036181744679,Graneros,framework:province:tucuman:13e5687d0f21,61730980B10036181744679,Graneros,ADM2,Polygon,1,0,True,1688.642115,6,90035,Graneros,Tucumán,Departamento,0.991939813,0.998245481,{value},\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90042\"\",\"\"name\"\":\"\"Juan Bautista Alberdi\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",1,90035,Tucumán,0.991939813,0.016935645,\"[{\"\"id\"\":\"\"90035\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",0,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"}]\",Overlay screen only. Georef is a current statistical/unit-normalization layer; positive-area winners do not establish legal boundary lineage or resolve 2020 vintage change."
-        },
-        {
-          "decimals": 0,
-          "line": 2,
-          "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:same_normalized_name_candidate_count:gb:ARG:ADM2:61730980B10036181744679",
-          "scale": 1,
-          "template": "gb:ARG:ADM2:61730980B10036181744679,Graneros,framework:province:tucuman:13e5687d0f21,61730980B10036181744679,Graneros,ADM2,Polygon,1,0,True,1688.642115,6,90035,Graneros,Tucumán,Departamento,0.991939813,0.998245481,0.001326724,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90042\"\",\"\"name\"\":\"\"Juan Bautista Alberdi\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",{value},90035,Tucumán,0.991939813,0.016935645,\"[{\"\"id\"\":\"\"90035\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",0,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"}]\",Overlay screen only. Georef is a current statistical/unit-normalization layer; positive-area winners do not establish legal boundary lineage or resolve 2020 vintage change."
-        },
-        {
-          "decimals": 9,
-          "line": 2,
-          "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:best_same_name_candidate_share_of_old_area:gb:ARG:ADM2:61730980B10036181744679",
-          "scale": 1,
-          "template": "gb:ARG:ADM2:61730980B10036181744679,Graneros,framework:province:tucuman:13e5687d0f21,61730980B10036181744679,Graneros,ADM2,Polygon,1,0,True,1688.642115,6,90035,Graneros,Tucumán,Departamento,0.991939813,0.998245481,0.001326724,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90042\"\",\"\"name\"\":\"\"Juan Bautista Alberdi\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",1,90035,Tucumán,{value},0.016935645,\"[{\"\"id\"\":\"\"90035\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",0,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"}]\",Overlay screen only. Georef is a current statistical/unit-normalization layer; positive-area winners do not establish legal boundary lineage or resolve 2020 vintage change."
-        },
-        {
-          "decimals": 9,
-          "line": 2,
-          "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:best_same_name_candidate_symmetric_difference_share:gb:ARG:ADM2:61730980B10036181744679",
-          "scale": 1,
-          "template": "gb:ARG:ADM2:61730980B10036181744679,Graneros,framework:province:tucuman:13e5687d0f21,61730980B10036181744679,Graneros,ADM2,Polygon,1,0,True,1688.642115,6,90035,Graneros,Tucumán,Departamento,0.991939813,0.998245481,0.001326724,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90042\"\",\"\"name\"\":\"\"Juan Bautista Alberdi\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",1,90035,Tucumán,0.991939813,{value},\"[{\"\"id\"\":\"\"90035\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",0,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"}]\",Overlay screen only. Georef is a current statistical/unit-normalization layer; positive-area winners do not establish legal boundary lineage or resolve 2020 vintage change."
-        },
-        {
-          "decimals": 0,
-          "line": 2,
-          "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:over_1sqm_sliver_count:gb:ARG:ADM2:61730980B10036181744679",
-          "scale": 1,
-          "template": "gb:ARG:ADM2:61730980B10036181744679,Graneros,framework:province:tucuman:13e5687d0f21,61730980B10036181744679,Graneros,ADM2,Polygon,1,0,True,1688.642115,6,90035,Graneros,Tucumán,Departamento,0.991939813,0.998245481,0.001326724,\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90042\"\",\"\"name\"\":\"\"Juan Bautista Alberdi\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",1,90035,Tucumán,0.991939813,0.016935645,\"[{\"\"id\"\":\"\"90035\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"}]\",{value},\"[{\"\"id\"\":\"\"90035\"\",\"\"name\"\":\"\"Graneros\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90091\"\",\"\"name\"\":\"\"Simoca\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"86084\"\",\"\"name\"\":\"\"Guasayán\"\",\"\"province\"\":\"\"Santiago del Estero\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"90049\"\",\"\"name\"\":\"\"La Cocha\"\",\"\"province\"\":\"\"Tucumán\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"10098\"\",\"\"name\"\":\"\"Santa Rosa\"\",\"\"province\"\":\"\"Catamarca\"\",\"\"category\"\":\"\"Departamento\"\"}]\",Overlay screen only. Georef is a current statistical/unit-normalization layer; positive-area winners do not establish legal boundary lineage or resolve 2020 vintage change."
+          "template": "summary,{value},,,,,,,,,,,,,,,,,,,,,,,,,,,"
         }
       ]
     },
@@ -2349,11 +2076,11 @@
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/scoped-current-georef-positive-area-overlaps.csv",
       "rows": [
         {
-          "decimals": 12,
+          "decimals": 0,
           "line": 2,
-          "metric_id": "table:scoped-current-georef-positive-area-overlaps.csv:2:overlap_area_m2:02056-06427",
+          "metric_id": "table:scoped-current-georef-positive-area-overlaps.csv:2:record_count:-",
           "scale": 1,
-          "template": "Comuna 8,Ciudad Autónoma de Buenos Aires,Comuna,La Matanza,Buenos Aires,Partido,{value},02056,06427,gb:ARG:ADM2:61730980B21366789082443,\"Positive-area intersection inside at least one reviewed 2020 footprint; possible current-source overlap or vintage offset, not adjudicated.\""
+          "template": "summary,{value},,,,,,,,,,,"
         }
       ]
     },
@@ -2363,30 +2090,9 @@
         {
           "decimals": 0,
           "line": 2,
-          "metric_id": "table:scoped-multipart-components.csv:2:component_number:gb:ARG:ADM2:61730980B19808130857277",
+          "metric_id": "table:scoped-multipart-components.csv:2:record_count:-",
           "scale": 1,
-          "template": "gb:ARG:ADM2:61730980B19808130857277,San Cosme,61730980B19808130857277,{value},6,591.191768,0,\"[{\"\"id\"\":\"\"18133\"\",\"\"name\"\":\"\"San Cosme\"\",\"\"province\"\":\"\"Corrientes\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"18021\"\",\"\"name\"\":\"\"Capital\"\",\"\"province\"\":\"\"Corrientes\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"18140\"\",\"\"name\"\":\"\"San Luis del Palmar\"\",\"\"province\"\":\"\"Corrientes\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"22014\"\",\"\"name\"\":\"\"Bermejo\"\",\"\"province\"\":\"\"Chaco\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"18077\"\",\"\"name\"\":\"\"Itatí\"\",\"\"province\"\":\"\"Corrientes\"\",\"\"category\"\":\"\"Departamento\"\"}]\",Recorded source component and current statistical-layer overlays; component existence does not establish island/exclave identity or completeness."
-        },
-        {
-          "decimals": 0,
-          "line": 2,
-          "metric_id": "table:scoped-multipart-components.csv:2:component_count:gb:ARG:ADM2:61730980B19808130857277",
-          "scale": 1,
-          "template": "gb:ARG:ADM2:61730980B19808130857277,San Cosme,61730980B19808130857277,1,{value},591.191768,0,\"[{\"\"id\"\":\"\"18133\"\",\"\"name\"\":\"\"San Cosme\"\",\"\"province\"\":\"\"Corrientes\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"18021\"\",\"\"name\"\":\"\"Capital\"\",\"\"province\"\":\"\"Corrientes\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"18140\"\",\"\"name\"\":\"\"San Luis del Palmar\"\",\"\"province\"\":\"\"Corrientes\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"22014\"\",\"\"name\"\":\"\"Bermejo\"\",\"\"province\"\":\"\"Chaco\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"18077\"\",\"\"name\"\":\"\"Itatí\"\",\"\"province\"\":\"\"Corrientes\"\",\"\"category\"\":\"\"Departamento\"\"}]\",Recorded source component and current statistical-layer overlays; component existence does not establish island/exclave identity or completeness."
-        },
-        {
-          "decimals": 6,
-          "line": 2,
-          "metric_id": "table:scoped-multipart-components.csv:2:component_area_km2:gb:ARG:ADM2:61730980B19808130857277",
-          "scale": 1,
-          "template": "gb:ARG:ADM2:61730980B19808130857277,San Cosme,61730980B19808130857277,1,6,{value},0,\"[{\"\"id\"\":\"\"18133\"\",\"\"name\"\":\"\"San Cosme\"\",\"\"province\"\":\"\"Corrientes\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"18021\"\",\"\"name\"\":\"\"Capital\"\",\"\"province\"\":\"\"Corrientes\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"18140\"\",\"\"name\"\":\"\"San Luis del Palmar\"\",\"\"province\"\":\"\"Corrientes\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"22014\"\",\"\"name\"\":\"\"Bermejo\"\",\"\"province\"\":\"\"Chaco\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"18077\"\",\"\"name\"\":\"\"Itatí\"\",\"\"province\"\":\"\"Corrientes\"\",\"\"category\"\":\"\"Departamento\"\"}]\",Recorded source component and current statistical-layer overlays; component existence does not establish island/exclave identity or completeness."
-        },
-        {
-          "decimals": 0,
-          "line": 2,
-          "metric_id": "table:scoped-multipart-components.csv:2:interior_ring_count:gb:ARG:ADM2:61730980B19808130857277",
-          "scale": 1,
-          "template": "gb:ARG:ADM2:61730980B19808130857277,San Cosme,61730980B19808130857277,1,6,591.191768,{value},\"[{\"\"id\"\":\"\"18133\"\",\"\"name\"\":\"\"San Cosme\"\",\"\"province\"\":\"\"Corrientes\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"18021\"\",\"\"name\"\":\"\"Capital\"\",\"\"province\"\":\"\"Corrientes\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"18140\"\",\"\"name\"\":\"\"San Luis del Palmar\"\",\"\"province\"\":\"\"Corrientes\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"22014\"\",\"\"name\"\":\"\"Bermejo\"\",\"\"province\"\":\"\"Chaco\"\",\"\"category\"\":\"\"Departamento\"\"},{\"\"id\"\":\"\"18077\"\",\"\"name\"\":\"\"Itatí\"\",\"\"province\"\":\"\"Corrientes\"\",\"\"category\"\":\"\"Departamento\"\"}]\",Recorded source component and current statistical-layer overlays; component existence does not establish island/exclave identity or completeness."
+          "template": "summary,{value},,,,,,,,"
         }
       ]
     },
@@ -2396,51 +2102,9 @@
         {
           "decimals": 0,
           "line": 2,
-          "metric_id": "table:scoped-parent-review.csv:2:scoped_parent_review_children_from_443:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
+          "metric_id": "table:scoped-parent-review.csv:2:record_count:-",
           "scale": 1,
-          "template": "framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651,Ciudad Autónoma de Buenos Aires,Ciudad Autónoma de Buenos Aires,{value},10,02,1,Polygon,19177384B49506124846693,Ciudad Autónoma de Buenos Aires,True,23,24,Ciudad Autónoma de Buenos Aires,0.32302312,0.32302312,Name identity and current geometry crosswalk only; old source outline has no legal currentness certification."
-        },
-        {
-          "decimals": 0,
-          "line": 2,
-          "metric_id": "table:scoped-parent-review.csv:2:direct_adm2_subjects_in_944:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
-          "scale": 1,
-          "template": "framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651,Ciudad Autónoma de Buenos Aires,Ciudad Autónoma de Buenos Aires,10,{value},02,1,Polygon,19177384B49506124846693,Ciudad Autónoma de Buenos Aires,True,23,24,Ciudad Autónoma de Buenos Aires,0.32302312,0.32302312,Name identity and current geometry crosswalk only; old source outline has no legal currentness certification."
-        },
-        {
-          "decimals": 0,
-          "line": 2,
-          "metric_id": "table:scoped-parent-review.csv:2:current_georef_exact_name_match_count:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
-          "scale": 1,
-          "template": "framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651,Ciudad Autónoma de Buenos Aires,Ciudad Autónoma de Buenos Aires,10,10,02,{value},Polygon,19177384B49506124846693,Ciudad Autónoma de Buenos Aires,True,23,24,Ciudad Autónoma de Buenos Aires,0.32302312,0.32302312,Name identity and current geometry crosswalk only; old source outline has no legal currentness certification."
-        },
-        {
-          "decimals": 0,
-          "line": 2,
-          "metric_id": "table:scoped-parent-review.csv:2:2006_feature_count:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
-          "scale": 1,
-          "template": "framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651,Ciudad Autónoma de Buenos Aires,Ciudad Autónoma de Buenos Aires,10,10,02,1,Polygon,19177384B49506124846693,Ciudad Autónoma de Buenos Aires,True,{value},24,Ciudad Autónoma de Buenos Aires,0.32302312,0.32302312,Name identity and current geometry crosswalk only; old source outline has no legal currentness certification."
-        },
-        {
-          "decimals": 0,
-          "line": 2,
-          "metric_id": "table:scoped-parent-review.csv:2:current_national_province_count:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
-          "scale": 1,
-          "template": "framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651,Ciudad Autónoma de Buenos Aires,Ciudad Autónoma de Buenos Aires,10,10,02,1,Polygon,19177384B49506124846693,Ciudad Autónoma de Buenos Aires,True,23,{value},Ciudad Autónoma de Buenos Aires,0.32302312,0.32302312,Name identity and current geometry crosswalk only; old source outline has no legal currentness certification."
-        },
-        {
-          "decimals": 8,
-          "line": 2,
-          "metric_id": "table:scoped-parent-review.csv:2:old_2006_top_overlap_share_of_current:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
-          "scale": 1,
-          "template": "framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651,Ciudad Autónoma de Buenos Aires,Ciudad Autónoma de Buenos Aires,10,10,02,1,Polygon,19177384B49506124846693,Ciudad Autónoma de Buenos Aires,True,23,24,Ciudad Autónoma de Buenos Aires,{value},0.32302312,Name identity and current geometry crosswalk only; old source outline has no legal currentness certification."
-        },
-        {
-          "decimals": 8,
-          "line": 2,
-          "metric_id": "table:scoped-parent-review.csv:2:old_2006_union_coverage_of_current:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
-          "scale": 1,
-          "template": "framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651,Ciudad Autónoma de Buenos Aires,Ciudad Autónoma de Buenos Aires,10,10,02,1,Polygon,19177384B49506124846693,Ciudad Autónoma de Buenos Aires,True,23,24,Ciudad Autónoma de Buenos Aires,0.32302312,{value},Name identity and current geometry crosswalk only; old source outline has no legal currentness certification."
+          "template": "summary,{value},,,,,,,,,,,,,,,"
         }
       ]
     }
@@ -2821,144 +2485,69 @@
   "subject_ids_sha256": "d1bc2104602f18ee013e25d795d0e5235147cde36e9e88a0e0f174a6683613d4",
   "summaries": [
     {
-      "metric_id": "table:2006-adm1-to-current-province-overlay.csv:2:old_intersecting_feature_count:02",
-      "unit": "count",
-      "value": 1
-    },
-    {
-      "metric_id": "table:2006-adm1-to-current-province-overlay.csv:2:top_old_share_of_current_area:02",
-      "unit": "share",
-      "value": 0.32302312
-    },
-    {
-      "metric_id": "table:2006-adm1-to-current-province-overlay.csv:2:old_union_coverage_of_current:02",
-      "unit": "share",
-      "value": 0.32302312
-    },
-    {
-      "metric_id": "table:2006-adm1-to-current-province-overlay.csv:2:union_symmetric_difference_share:02",
-      "unit": "share",
-      "value": 4.962269304
-    },
-    {
-      "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:source_2020_component_count:gb:ARG:ADM2:61730980B10036181744679",
-      "unit": "count",
-      "value": 1
-    },
-    {
-      "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:source_2020_hole_count:gb:ARG:ADM2:61730980B10036181744679",
-      "unit": "count",
-      "value": 0
-    },
-    {
-      "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:old_area_km2_equal_area:gb:ARG:ADM2:61730980B10036181744679",
-      "unit": "km2",
-      "value": 1688.642115
-    },
-    {
-      "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:current_intersecting_feature_count:gb:ARG:ADM2:61730980B10036181744679",
-      "unit": "count",
-      "value": 6
-    },
-    {
-      "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:top_share_of_old_area:gb:ARG:ADM2:61730980B10036181744679",
-      "unit": "share",
-      "value": 0.991939813
-    },
-    {
-      "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:current_union_coverage_of_old:gb:ARG:ADM2:61730980B10036181744679",
-      "unit": "share",
-      "value": 0.998245481
-    },
-    {
-      "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:current_overlap_excess_share:gb:ARG:ADM2:61730980B10036181744679",
-      "unit": "share",
-      "value": 0.001326724
-    },
-    {
-      "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:same_normalized_name_candidate_count:gb:ARG:ADM2:61730980B10036181744679",
-      "unit": "count",
-      "value": 1
-    },
-    {
-      "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:best_same_name_candidate_share_of_old_area:gb:ARG:ADM2:61730980B10036181744679",
-      "unit": "share",
-      "value": 0.991939813
-    },
-    {
-      "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:best_same_name_candidate_symmetric_difference_share:gb:ARG:ADM2:61730980B10036181744679",
-      "unit": "share",
-      "value": 0.016935645
-    },
-    {
-      "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:over_1sqm_sliver_count:gb:ARG:ADM2:61730980B10036181744679",
-      "unit": "count",
-      "value": 0
-    },
-    {
-      "metric_id": "table:scoped-current-georef-positive-area-overlaps.csv:2:overlap_area_m2:02056-06427",
-      "unit": "m2",
-      "value": 2336.356529571676
-    },
-    {
-      "metric_id": "table:scoped-multipart-components.csv:2:component_number:gb:ARG:ADM2:61730980B19808130857277",
-      "unit": "count",
-      "value": 1
-    },
-    {
-      "metric_id": "table:scoped-multipart-components.csv:2:component_count:gb:ARG:ADM2:61730980B19808130857277",
-      "unit": "count",
-      "value": 6
-    },
-    {
-      "metric_id": "table:scoped-multipart-components.csv:2:component_area_km2:gb:ARG:ADM2:61730980B19808130857277",
-      "unit": "km2",
-      "value": 591.191768
-    },
-    {
-      "metric_id": "table:scoped-multipart-components.csv:2:interior_ring_count:gb:ARG:ADM2:61730980B19808130857277",
-      "unit": "count",
-      "value": 0
-    },
-    {
-      "metric_id": "table:scoped-parent-review.csv:2:scoped_parent_review_children_from_443:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
-      "unit": "count",
-      "value": 10
-    },
-    {
-      "metric_id": "table:scoped-parent-review.csv:2:direct_adm2_subjects_in_944:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
-      "unit": "count",
-      "value": 10
-    },
-    {
-      "metric_id": "table:scoped-parent-review.csv:2:current_georef_exact_name_match_count:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
-      "unit": "count",
-      "value": 1
-    },
-    {
-      "metric_id": "table:scoped-parent-review.csv:2:2006_feature_count:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
-      "unit": "count",
-      "value": 23
-    },
-    {
-      "metric_id": "table:scoped-parent-review.csv:2:current_national_province_count:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
+      "metric_id": "table:2006-adm1-to-current-province-overlay.csv:2:record_count:-",
       "unit": "count",
       "value": 24
     },
     {
-      "metric_id": "table:scoped-parent-review.csv:2:old_2006_top_overlap_share_of_current:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
-      "unit": "share",
-      "value": 0.32302312
+      "metric_id": "table:scoped-2020-to-current-georef-overlay.csv:2:record_count:-",
+      "unit": "count",
+      "value": 214
     },
     {
-      "metric_id": "table:scoped-parent-review.csv:2:old_2006_union_coverage_of_current:framework:province:ciudad-autonoma-de-buenos-aires:64e45f3ee651",
-      "unit": "share",
-      "value": 0.32302312
+      "metric_id": "table:scoped-current-georef-positive-area-overlaps.csv:2:record_count:-",
+      "unit": "count",
+      "value": 484
+    },
+    {
+      "metric_id": "table:scoped-multipart-components.csv:2:record_count:-",
+      "unit": "count",
+      "value": 72
+    },
+    {
+      "metric_id": "table:scoped-parent-review.csv:2:record_count:-",
+      "unit": "count",
+      "value": 14
+    },
+    {
+      "metric_id": "table:scoped-2020-internal-overlaps.csv:2:record_count:-",
+      "unit": "count",
+      "value": 0
     },
     {
       "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/component_rows",
       "unit": "count",
       "value": 72
+    },
+    {
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/components_by_shape_id/61730980B19808130857277",
+      "unit": "count",
+      "value": 6
+    },
+    {
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/components_by_shape_id/61730980B30289947598516",
+      "unit": "count",
+      "value": 3
+    },
+    {
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/components_by_shape_id/61730980B54493504343974",
+      "unit": "count",
+      "value": 29
+    },
+    {
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/components_by_shape_id/61730980B76052784863315",
+      "unit": "count",
+      "value": 22
+    },
+    {
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/components_by_shape_id/61730980B94998770553919",
+      "unit": "count",
+      "value": 2
+    },
+    {
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/components_by_shape_id/61730980B95294752297782",
+      "unit": "count",
+      "value": 10
     },
     {
       "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/features",
@@ -2969,6 +2558,36 @@
       "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/interior_rings",
       "unit": "count",
       "value": 5
+    },
+    {
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/interior_rings_by_shape_id/61730980B19808130857277",
+      "unit": "count",
+      "value": 0
+    },
+    {
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/interior_rings_by_shape_id/61730980B30289947598516",
+      "unit": "count",
+      "value": 0
+    },
+    {
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/interior_rings_by_shape_id/61730980B54493504343974",
+      "unit": "count",
+      "value": 0
+    },
+    {
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/interior_rings_by_shape_id/61730980B76052784863315",
+      "unit": "count",
+      "value": 5
+    },
+    {
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/interior_rings_by_shape_id/61730980B94998770553919",
+      "unit": "count",
+      "value": 0
+    },
+    {
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json:/interior_rings_by_shape_id/61730980B95294752297782",
+      "unit": "count",
+      "value": 0
     },
     {
       "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-negative.json:/expected_area",
@@ -3104,6 +2723,21 @@
       "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/invalid_scoped_old_geometry_count",
       "unit": "count",
       "value": 0
+    },
+    {
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/priority_top_share_by_source_id/61730980B14767108287685",
+      "unit": "ratio-or-source-value",
+      "value": 0.852828872
+    },
+    {
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/priority_top_share_by_source_id/61730980B47006381015187",
+      "unit": "ratio-or-source-value",
+      "value": 0.875492712
+    },
+    {
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/priority_top_share_by_source_id/61730980B76052784863315",
+      "unit": "ratio-or-source-value",
+      "value": 0.739947994
     },
     {
       "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_2020_feature_count",

@@ -4,7 +4,7 @@ import csv, hashlib, io, json, pathlib, subprocess
 ROOT=pathlib.Path(__file__).resolve().parents[3]
 OWN=ROOT/'data/regional-review/argentina-adm2-source-revalidation-443'
 PACKET='data/regional-review/argentina-adm2-source-revalidation-443'
-BASE='2ac65414166764713eafa8238f1b28211a57344e'
+BASE='c881d662da6cbba6f6bc7f988af57ab7dc98c0a4'
 OUT=OWN/'findings'
 
 def sha_bytes(b): return hashlib.sha256(b).hexdigest()
@@ -25,29 +25,28 @@ assert len(subject_ids)==214 and len(set(subject_ids))==214
 subject_digest=sha_bytes(json.dumps(subject_ids,separators=(',',':'),ensure_ascii=False).encode())
 assert subject_digest=='d1bc2104602f18ee013e25d795d0e5235147cde36e9e88a0e0f174a6683613d4'
 
-# Keep the manifest within the trusted 1 MiB manifest budget. Each nonempty generated
-# table binds one representative row per numeric column; compact summary/control JSON
-# binds every reported numeric leaf. Full per-subject tables remain retained and are
-# independently reproducible from the pinned inputs and scripts.
+# Every generated CSV has categorical detail rows and one numeric summary row. Bind that
+# complete numeric row; JSON result reports bind every numeric leaf to its real pointer.
 metric_rows=[]; metric_bindings=[]; summaries=[]; rendered_by_path={}
 source_hash={
  'adm2':sha_bytes((OWN/'source/geoBoundaries-2020-scoped-214.geojson').read_bytes()),
  'adm1':sha_bytes((OWN/'source/geoBoundaries-2006/geoBoundaries-ARG-ADM1-2006.geojson').read_bytes()),
  'departments':sha_bytes((OWN/'source/Georef-current/departamentos.geojson').read_bytes()),
- 'provinces':sha_bytes((OWN/'source/Georef-current/provincias.geojson').read_bytes())}
-columns={
- '2006-adm1-to-current-province-overlay.csv':{'old_intersecting_feature_count':'count','top_old_share_of_current_area':'share','top_old_shape_id':'skip','old_union_coverage_of_current':'share','union_symmetric_difference_share':'share'},
- 'scoped-2020-to-current-georef-overlay.csv':{'source_2020_component_count':'count','source_2020_hole_count':'count','old_area_km2_equal_area':'km2','current_intersecting_feature_count':'count','top_share_of_old_area':'share','current_union_coverage_of_old':'share','current_overlap_excess_share':'share','same_normalized_name_candidate_count':'count','best_same_name_candidate_share_of_old_area':'share','best_same_name_candidate_symmetric_difference_share':'share','over_1sqm_sliver_count':'count'},
- 'scoped-current-georef-positive-area-overlaps.csv':{'overlap_area_m2':'m2'},
- 'scoped-multipart-components.csv':{'component_number':'count','component_count':'count','component_area_km2':'km2','interior_ring_count':'count'},
- 'scoped-parent-review.csv':{'scoped_parent_review_children_from_443':'count','direct_adm2_subjects_in_944':'count','current_georef_exact_name_match_count':'count','2006_feature_count':'count','current_national_province_count':'count','old_2006_top_overlap_share_of_current':'share','old_2006_union_coverage_of_current':'share'},
- 'scoped-2020-internal-overlaps.csv':{'intersection_area_m2':'m2'}}
+ 'provinces':sha_bytes((OWN/'source/Georef-current/provincias.geojson').read_bytes()),
+ 'parent_scope':sha_bytes(subprocess.check_output(['git','-C',str(ROOT),'show',f'{BASE}:data/regional-review/regional-review-7cf674a63057d43f/findings/scoped-province-review.csv']))}
+columns={filename:{'record_count':'count'} for filename in (
+ '2006-adm1-to-current-province-overlay.csv',
+ 'scoped-2020-to-current-georef-overlay.csv',
+ 'scoped-current-georef-positive-area-overlaps.csv',
+ 'scoped-multipart-components.csv',
+ 'scoped-parent-review.csv',
+ 'scoped-2020-internal-overlaps.csv')}
 table_input={
  '2006-adm1-to-current-province-overlay.csv':source_hash['adm1'],
  'scoped-2020-to-current-georef-overlay.csv':source_hash['adm2'],
  'scoped-current-georef-positive-area-overlaps.csv':source_hash['departments'],
  'scoped-multipart-components.csv':source_hash['adm2'],
- 'scoped-parent-review.csv':source_hash['adm1'],
+ 'scoped-parent-review.csv':source_hash['parent_scope'],
  'scoped-2020-internal-overlaps.csv':source_hash['adm2']}
 for filename, numeric_cols in columns.items():
     path=OUT/filename
@@ -55,7 +54,7 @@ for filename, numeric_cols in columns.items():
         reader=csv.DictReader(f); headers=reader.fieldnames; rows=list(reader)
     raw_lines=path.read_text(encoding='utf-8').splitlines()
     table_rows=[]
-    for row_index,row in enumerate(rows[:1],start=2):
+    for row_index,row in enumerate(rows,start=2):
         for col,unit in numeric_cols.items():
             if col not in row or not row[col]: continue
             try: value=float(row[col])
@@ -194,12 +193,14 @@ manifest={
   {'status':'unresolved','text':'The advertised licensed 2017 IGN boundary data was not retrievable; its metadata PDF does not provide overlay geometry.', 'source_ids':['ign-interdepartmental-metadata-2017']}],
  'stages':{'research':'complete','implementation':'proposed','geographic_approval':'not-requested'},
  'commands':[
-  'python3 data/regional-review/argentina-adm2-source-revalidation-443/build-evidence-manifest.py',
   'python3 data/regional-review/argentina-adm2-source-revalidation-443/prepare-scoped-2020.py',
   'python3 data/regional-review/argentina-adm2-source-revalidation-443/validate-controls.py',
   'PYTHONPATH=/path/to/env/site-packages python3 data/regional-review/argentina-adm2-source-revalidation-443/reproduce-spatial.py',
   'PYTHONPATH=/path/to/env/site-packages python3 data/regional-review/argentina-adm2-source-revalidation-443/reproduce-components.py',
   'PYTHONPATH=/path/to/env/site-packages python3 data/regional-review/argentina-adm2-source-revalidation-443/reproduce-province-crosswalk.py',
+  'PYTHONPATH=/path/to/env/site-packages python3 data/regional-review/argentina-adm2-source-revalidation-443/reproduce-parent-review.py',
+  'python3 data/regional-review/argentina-adm2-source-revalidation-443/categorize-tabular-findings.py',
+  'python3 data/regional-review/argentina-adm2-source-revalidation-443/build-evidence-manifest.py',
   'node scripts/evidence-quality.mjs data/regional-review/argentina-adm2-source-revalidation-443/evidence-quality.json '+str(ROOT)]}
 # Keep source/changes registered one time and reject any write outside the exact owned prefix.
 manifest['outputs']=sorted(outputs,key=lambda x:x['path'])
