@@ -114,9 +114,9 @@
         "S3",
         "S8"
       ],
-      "result": "The EPSG:6933 screen finds 22 multipart Atlas shapes, 35 of 227 scoped native Greek 2010 source features without a same-layer shared land edge, and 90 baseline/source IoUs below 0.95. Oraiokastro combines two native source features. The source has no unnamed feature among scoped rows.",
-      "limit": "Natural island separation explains some no-edge cases but does not prove island inventory completeness. The threshold is descriptive, not an acceptance threshold. No legal current boundary, city-fragment inventory, or independent settlement/island catalog was obtained.",
-      "handoff": "Restore licensed official municipality/settlement/island evidence. Screen exact multi-components and the named city areas against that authority; do not infer missing or correct geography from neighbor count, shape size or IoU."
+      "result": "The EPSG:6933 screen finds 22 multipart Atlas shapes, 35 of 227 scoped native Greek 2010 source features without a same-layer shared land edge, and 90 baseline/source IoUs below 0.95. Oraiokastro combines two native source features. The source has no unnamed feature among scoped rows. Neighbor packet #422 separately recorded a 2019 State Statistical Office roster crosswalk for 80 North Macedonia municipalities against 84 legacy polygons, but did not establish the legal epoch/current boundary geometry.",
+      "limit": "Natural island separation explains some no-edge cases but does not prove island inventory completeness. The threshold is descriptive, not an acceptance threshold. #422's 2016 HDX/RIMWGE geometry and 2019 roster do not supply an authoritative current Greece/Kosovo-adjacent boundary comparison. No legal current boundary, city-fragment inventory, or independent settlement/island catalog was obtained for these exact subjects.",
+      "handoff": "Use the merged #422 neighbor packet as a source-era roster lead only; do not infer the present Greek/Kosovo boundary or transfer any IDs from it. Restore licensed official municipality/settlement/island evidence. Screen exact multi-components and the named city areas against that authority; do not infer missing or correct geography from neighbor count, shape size or IoU."
     },
     {
       "id": "F-AREA-PURPOSE",
@@ -147,7 +147,7 @@
     },
     {
       "issue": 1006,
-      "relation": "blocked exact 306-Atlas-ID Greece 2010-to-current municipality roster/crosswalk follow-up from #420 and #421; excludes the separate 19 IDs owned by #819"
+      "relation": "blocked exact 306-Atlas-ID Greece 2010-to-current municipality roster/crosswalk follow-up from #420 and #421; #420/PR #1004 is complete; excludes the separate 19 IDs owned by #819; its merged Hellenic Data Service catalog record pins SHA256 db4f5afc615bc5302544538c5f04d98647bc0c03a4bcbf335bfe96dfe3a378aa and records HTTP 404 for the linked candidate boundary ZIP"
     },
     {
       "issue": 1008,

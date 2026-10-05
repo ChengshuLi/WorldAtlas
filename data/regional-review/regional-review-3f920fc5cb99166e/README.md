@@ -22,6 +22,8 @@ The retained XKX ADM1 archive is the exact 2023-built release asset at GeoBounda
 
 Fragmented city/municipality extents, parent containment, neighboring 2021 municipal granularity and omitted islands are not certified. Oraiokastro is a single Atlas multipart record assembled from two source IDs/features both called Oraiokastro; that is preserved explicitly. The source has no anonymous names among scoped rows. No official census polygons were copied because the existing Greece packet records unresolved reuse terms. ELSTAT states its 2021 Kallikratis boundary files are census-only, prepared for its purposes, and not proof of administrative boundaries. The prior Greece screen covers 19 different IDs; it is not substituted for this packet’s 226-member audit.
 
+After this packet’s baseline pin, neighbor packet #422 merged in PR #1009. That packet crosswalks 84 legacy North Macedonia polygons to 80 State Statistical Office 2019 municipality codes (79 one-to-one plus five Kichevo-related polygons) and reports eight statistical-region parents. Its source geometry has a 2016 vintage; the roster crosswalk does not establish current legal boundaries or any Greek/Kosovo-adjacent border. It is useful neighbor-vintage context only.
+
 ## Retained and restoration-only sources
 
 `source-inventory.json` records exact byte counts, SHA-256s, upstream release URLs, retrieval date, vintage, license statements, attribution, and limits. The GeoBoundaries `all.zip` bundles are retained under their published attribution/licensing instructions, including the bundled citation/use file. The Greek ADM3 original remains in its earlier packet, unchanged. Official law, ministry, census and ELSTAT pages are cited and dated but not copied because redistribution terms were not established here; their exact official URLs and restore instructions are listed. ELSTAT’s predecessor-scope source archives are also intentionally not duplicated or treated as independent boundary authority.
@@ -50,7 +52,7 @@ No shared hierarchy, grid, ID, location geometry, live data, regional handoff, r
 
 ## Bounded handoffs
 
-- [#1006](https://github.com/ChengshuLi/WorldAtlas/issues/1006) is blocked on #420/#421 and covers exactly 306 Greek Atlas locations for a current legal roster and 2010-to-current identity crosswalk; #819's 19 separate IDs remain excluded.
+- [#1006](https://github.com/ChengshuLi/WorldAtlas/issues/1006) is blocked on #421 (batch 5 #420 completed through PR #1004) and covers exactly 306 Greek Atlas locations for a current legal roster and 2010-to-current identity crosswalk; #819's 19 separate IDs remain excluded. Batch 5's merged evidence pins Hellenic Data Service catalog metadata (`db4f5afc615bc5302544538c5f04d98647bc0c03a4bcbf335bfe96dfe3a378aa`) but reports HTTP 404 for the linked candidate Kallikratis boundary ZIP; this is a restoration lead/gap, not current roster or usable geometry evidence.
 - [#1007](https://github.com/ChengshuLi/WorldAtlas/issues/1007) is blocked on #421 and covers Mount Anthos/Aghion Oros plus the Poros, Ydra and Elafonisos location/parent questions.
 - [#1008](https://github.com/ChengshuLi/WorldAtlas/issues/1008) is blocked on #421 and shared source work #999, and covers only the four batch 6 Kosovo district IDs/parents.
 
