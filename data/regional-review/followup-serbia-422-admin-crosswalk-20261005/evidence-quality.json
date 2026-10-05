@@ -85,7 +85,7 @@
   ],
   "subject_ids_sha256": "2703ef360a3e7b6a45c0cef972fdb26952743f58e164f462a3585777c7388e16",
   "baseline": {
-    "commit": "d55795e4c0ad01527029db0bd1d774124a12a61a",
+    "commit": "c944e017796005726150abef19763db9ffd07154",
     "files": [
       {
         "path": "data/administrative-sources.json",
@@ -511,7 +511,7 @@
     {
       "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/source/baseline-inputs.json",
       "bytes": 5151,
-      "sha256": "0b3925e4e6bf7699de605e41df597f850e0586fe606aa769eb737b3dacb12969",
+      "sha256": "28190b710815d10e4f56b7837b66cd8faa62dae1025f5059d17ce0648d342a3a",
       "hash_kind": "file-bytes",
       "role": "analysis, reproducibility or handoff output"
     },
@@ -525,7 +525,7 @@
     {
       "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/source/issue-scope.json",
       "bytes": 5989,
-      "sha256": "f52ff95614e3a2ec78d2f6f258d57b8d16d9d880fc7f3135863e4fb547f52c63",
+      "sha256": "62087e1b184aa1cd6afd84c379e1c3cb2a2449fbe5e74d151192164911b49da0",
       "hash_kind": "file-bytes",
       "role": "analysis, reproducibility or handoff output"
     },
@@ -609,7 +609,7 @@
       "unit": "subjects",
       "vintage": "archived",
       "input_sha256": "75a7236c08c13b43bebc12a797456de74bfa9e1dd6f352a821efbce271cd4d62",
-      "evaluation_commit": "d55795e4c0ad01527029db0bd1d774124a12a61a"
+      "evaluation_commit": "c944e017796005726150abef19763db9ffd07154"
     },
     {
       "id": "unique_current_name_matches",
@@ -617,7 +617,7 @@
       "unit": "subjects",
       "vintage": "current",
       "input_sha256": "3a7790a65c77a537da848a66c71ba1495c5e0bdfe1021587979a551dcb7ebafa",
-      "evaluation_commit": "d55795e4c0ad01527029db0bd1d774124a12a61a"
+      "evaluation_commit": "c944e017796005726150abef19763db9ffd07154"
     },
     {
       "id": "current_parent_rosters_exact",
@@ -625,7 +625,7 @@
       "unit": "parent partitions",
       "vintage": "current",
       "input_sha256": "3a7790a65c77a537da848a66c71ba1495c5e0bdfe1021587979a551dcb7ebafa",
-      "evaluation_commit": "d55795e4c0ad01527029db0bd1d774124a12a61a"
+      "evaluation_commit": "c944e017796005726150abef19763db9ffd07154"
     },
     {
       "id": "scoped_subjects",
@@ -633,7 +633,7 @@
       "unit": "subjects",
       "vintage": "archived",
       "input_sha256": "f94ba868818e4f87dd24bc97aeaf37732cc23f6744facd1010cd91d2349fc884",
-      "evaluation_commit": "d55795e4c0ad01527029db0bd1d774124a12a61a"
+      "evaluation_commit": "c944e017796005726150abef19763db9ffd07154"
     },
     {
       "id": "scoped_city_municipality_rows",
@@ -641,7 +641,7 @@
       "unit": "urban-municipality register rows",
       "vintage": "current",
       "input_sha256": "3a7790a65c77a537da848a66c71ba1495c5e0bdfe1021587979a551dcb7ebafa",
-      "evaluation_commit": "d55795e4c0ad01527029db0bd1d774124a12a61a"
+      "evaluation_commit": "c944e017796005726150abef19763db9ffd07154"
     }
   ],
   "metric_bindings": [
@@ -777,19 +777,7 @@
   ],
   "change_receipts": [
     {
-      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/REVIEW.md",
-      "status": "added"
-    },
-    {
       "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/evidence-quality.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/reproduce.py",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/source-issue-998.json",
       "status": "added"
     },
     {
@@ -797,63 +785,7 @@
       "status": "added"
     },
     {
-      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/source/claim-receipt.json",
-      "status": "added"
-    },
-    {
       "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/source/issue-scope.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/derived/parent-completeness.csv",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/derived/parent-completeness.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/derived/parent-summary.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/derived/reproduction-summary.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/derived/scoped-city-urban-municipalities.csv",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/derived/sors-2017-roster-normalized.csv",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/derived/sors-current-roster-normalized.csv",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/derived/subject-crosswalk.csv",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/geoBoundaries-SRB-ADM2-2017.geojson",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/sors-administrative-areas-regions-2017.pdf",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/sors-cities-municipalities-2017.xls",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/sors-cities-municipalities-current-2026-10-05.xlsx",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/sors-retrieval.json",
       "status": "added"
     }
   ]
