@@ -97,6 +97,7 @@ cleanup();await start();command(['psql','-X','-U','postgres','-d','postgres','-v
  const compactACLDirectory=fs.mkdtempSync('/tmp/atlas-compact-acl-fixture-');try{restoreIsolatedDatabaseACL(name,compactDump,compactACLDirectory);}finally{fs.rmSync(compactACLDirectory,{recursive:true});}
  sql(isolatedOriginalChecks(fs.readFileSync('postgres/schema.sql')));
  const compactRestored=await readRecoveryInventory(query,{profile:compactRecoveryProfile});
+ for(const row of compactRestored.sequence_permissions.filter(row=>row.name.startsWith('worldatlas_membership_')))assert.deepEqual(row.acl.map(grant=>grant.privilege),['SELECT','UPDATE','USAGE']);
  // Bounded fixture-only diagnostics contain hashes/state, never real source data.
  for(const key of Object.keys(compactBefore))if(key!=='identity'&&JSON.stringify(compactBefore[key])!==JSON.stringify(compactRestored[key])){
   const summarize=value=>key==='compact_storage'?{catalog_sha256:sha(JSON.stringify(value.catalog)),physical:value.physical,sequences:value.sequences}:value;
