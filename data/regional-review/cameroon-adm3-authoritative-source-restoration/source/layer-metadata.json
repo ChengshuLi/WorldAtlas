@@ -1,0 +1,262 @@
+{
+ "currentVersion": 10.9,
+ "id": 148,
+ "name": "Arrondissements",
+ "type": "Feature Layer",
+ "description": "Limites des espaces territoriaux regroupant plusieurs villages, placés sous l'autorité des Sous-Prefets.Le Cameroun compte 359 arrondissementset représente une vue globale des communes et ne correspond pas aux limites officielles. Il n'existe pas un processus légale de validation de ces données.  Les information presentees sont donc produites par l'INC  et les descriptifs sont faits à base des cartes topographiques ( fond INC) à l'échelle de 1:200 000",
+ "geometryType": "esriGeometryPolygon",
+ "sourceSpatialReference": {
+  "wkid": 4034,
+  "latestWkid": 4034
+ },
+ "copyrightText": "Ce jeu de données est produit par l'Institut National de Cartographie. Ce jeu de données est sous licence Creative Commons Attribution 4.0 License international (CC-BY), http://creativecommons.org/licenses/by/4.0/",
+ "parentLayer": null,
+ "subLayers": [],
+ "minScale": 0,
+ "maxScale": 0,
+ "drawingInfo": {
+  "renderer": {
+   "type": "uniqueValue",
+   "field1": "type_",
+   "field2": null,
+   "field3": null,
+   "defaultSymbol": {
+    "type": "esriSFS",
+    "style": "esriSFSSolid",
+    "color": [
+     204,
+     197,
+     252,
+     255
+    ],
+    "outline": {
+     "type": "esriSLS",
+     "style": "esriSLSSolid",
+     "color": [
+      110,
+      110,
+      110,
+      255
+     ],
+     "width": 0.4
+    }
+   },
+   "defaultLabel": "<all other values>",
+   "uniqueValueInfos": [
+    {
+     "symbol": {
+      "type": "esriSFS",
+      "style": "esriSFSSolid",
+      "color": [
+       208,
+       247,
+       235,
+       255
+      ],
+      "outline": {
+       "type": "esriSLS",
+       "style": "esriSLSSolid",
+       "color": [
+        110,
+        110,
+        110,
+        255
+       ],
+       "width": 0.4
+      }
+     },
+     "value": "1110500",
+     "label": "Arrondissement",
+     "description": ""
+    }
+   ],
+   "fieldDelimiter": ","
+  },
+  "transparency": 0,
+  "labelingInfo": null
+ },
+ "defaultVisibility": true,
+ "extent": {
+  "xmin": 945630.19400545,
+  "ymin": 184060.48795776698,
+  "xmax": 1802095.3864619026,
+  "ymax": 1468642.0649195611,
+  "spatialReference": {
+   "wkid": 102100,
+   "latestWkid": 3857
+  }
+ },
+ "hasAttachments": false,
+ "htmlPopupType": "esriServerHTMLPopupTypeAsHTMLText",
+ "displayField": "desc_type",
+ "typeIdField": "type_",
+ "subtypeFieldName": "type_",
+ "subtypeField": "type_",
+ "defaultSubtypeCode": 1110500,
+ "fields": [
+  {
+   "name": "objectid",
+   "type": "esriFieldTypeOID",
+   "alias": "OBJECTID",
+   "domain": null
+  },
+  {
+   "name": "type_",
+   "type": "esriFieldTypeInteger",
+   "alias": "Type d'arondissement",
+   "domain": null
+  },
+  {
+   "name": "desc_type",
+   "type": "esriFieldTypeString",
+   "alias": "Description",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "nom_arr",
+   "type": "esriFieldTypeString",
+   "alias": "Nom d'arrondissement",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "nom_dep",
+   "type": "esriFieldTypeString",
+   "alias": "Nom du département",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "nom_reg",
+   "type": "esriFieldTypeString",
+   "alias": "Nom de la région",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "code_arr",
+   "type": "esriFieldTypeString",
+   "alias": "Code",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "population",
+   "type": "esriFieldTypeInteger",
+   "alias": "Population",
+   "domain": null
+  },
+  {
+   "name": "sup_adm_ha",
+   "type": "esriFieldTypeInteger",
+   "alias": "Superficie administrative (ha)",
+   "domain": null
+  },
+  {
+   "name": "sup_sig_ha",
+   "type": "esriFieldTypeInteger",
+   "alias": "Superficie SIG (ha)",
+   "domain": null
+  },
+  {
+   "name": "last_edited_date",
+   "type": "esriFieldTypeDate",
+   "alias": "Date de derniere mise à jour",
+   "length": 8,
+   "domain": null
+  },
+  {
+   "name": "shape",
+   "type": "esriFieldTypeGeometry",
+   "alias": "shape",
+   "domain": null
+  }
+ ],
+ "geometryField": {
+  "name": "shape",
+  "type": "esriFieldTypeGeometry",
+  "alias": "shape"
+ },
+ "indexes": [
+  {
+   "name": "FDO_objectid",
+   "fields": "objectid",
+   "isAscending": true,
+   "isUnique": true,
+   "description": ""
+  },
+  {
+   "name": "FDO_shape",
+   "fields": "shape",
+   "isAscending": true,
+   "isUnique": false,
+   "description": ""
+  }
+ ],
+ "types": [
+  {
+   "domains": {},
+   "id": 1110500,
+   "name": "Arrondissement"
+  }
+ ],
+ "subtypes": [
+  {
+   "domains": {},
+   "defaultValues": {
+    "type_": null,
+    "desc_type": "Arrondissement",
+    "nom_arr": null,
+    "nom_dep": null,
+    "nom_reg": null,
+    "code_arr": null,
+    "population": null,
+    "sup_adm_ha": null,
+    "sup_sig_ha": null,
+    "last_edited_user": null,
+    "last_edited_date": null,
+    "created_user": null,
+    "created_date": null,
+    "globalid": null
+   },
+   "code": 1110500,
+   "name": "Arrondissement"
+  }
+ ],
+ "relationships": [],
+ "canModifyLayer": true,
+ "canScaleSymbols": false,
+ "hasLabels": false,
+ "capabilities": "Map,Query,Data",
+ "maxRecordCount": 1000,
+ "supportsStatistics": true,
+ "supportsAdvancedQueries": true,
+ "supportedQueryFormats": "JSON, geoJSON",
+ "isDataVersioned": false,
+ "ownershipBasedAccessControlForFeatures": {"allowOthersToQuery": true},
+ "useStandardizedQueries": true,
+ "advancedQueryCapabilities": {
+  "useStandardizedQueries": true,
+  "supportsStatistics": true,
+  "supportsHavingClause": true,
+  "supportsCountDistinct": true,
+  "supportsOrderBy": true,
+  "supportsDistinct": true,
+  "supportsPagination": true,
+  "supportsTrueCurve": true,
+  "supportsReturningQueryExtent": true,
+  "supportsQueryWithDistance": true,
+  "supportsSqlExpression": true
+ },
+ "supportsDatumTransformation": true,
+ "hasGeometryProperties": true,
+ "geometryProperties": {
+  "shapeAreaFieldName": "shape_Area",
+  "shapeLengthFieldName": "shape_Length",
+  "units": "esriDecimalDegrees"
+ },
+ "dateFieldsTimeReference": null,
+ "supportsCoordinatesQuantization": true,
+ "serviceItemId": "e5f1692899794bdb9703a97eeaa733d3"
+}

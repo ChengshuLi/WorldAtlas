@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "scope_issue": 897,
+  "scope_subject_count": 226,
+  "purpose": "Sourced parent corrections for engineering review only. This packet changes no hierarchy, feature IDs, polygons, release pins, imports, or publication state.",
+  "proposals": [
+    {
+      "subject_id": "gb:CMR:ADM3:9386221B56027412894684",
+      "atlas_name": "Yaoundé I",
+      "current_parent_label": "Lekie",
+      "current_parent_id": "framework:province:lekie:a3d2e04da16c",
+      "proposed_parent_label": "Mfoundi",
+      "proposed_parent_id": "framework:province:mfoundi:93d34314f8de",
+      "evidence": "MINDDEVEL mayoral order and OCHA geometry candidate",
+      "ocha_spatial_candidate": {
+        "adm3_pcode": "CM002007001",
+        "adm3_name": "Yaounde 1er",
+        "adm2_name": "Mfoundi",
+        "iou": 1.0
+      },
+      "geometry_action": "none; preserve current subject ID and geometry",
+      "status": "engineering-review-required"
+    },
+    {
+      "subject_id": "gb:CMR:ADM3:9386221B66762903352612",
+      "atlas_name": "Yaoundé II",
+      "current_parent_label": "Lekie",
+      "current_parent_id": "framework:province:lekie:a3d2e04da16c",
+      "proposed_parent_label": "Mfoundi",
+      "proposed_parent_id": "framework:province:mfoundi:93d34314f8de",
+      "evidence": "MINDDEVEL mayoral order and OCHA geometry candidate",
+      "ocha_spatial_candidate": {
+        "adm3_pcode": "CM002007002",
+        "adm3_name": "Yaounde 2e",
+        "adm2_name": "Mfoundi",
+        "iou": 1.0
+      },
+      "geometry_action": "none; preserve current subject ID and geometry",
+      "status": "engineering-review-required"
+    },
+    {
+      "subject_id": "gb:CMR:ADM3:9386221B47531248617039",
+      "atlas_name": "Yaoundé V",
+      "current_parent_label": "Mefou-et-Afamba",
+      "current_parent_id": "framework:province:mefou-et-afamba:a68b8b581d3e",
+      "proposed_parent_label": "Mfoundi",
+      "proposed_parent_id": "framework:province:mfoundi:93d34314f8de",
+      "evidence": "MINDDEVEL mayoral order and OCHA geometry candidate",
+      "ocha_spatial_candidate": {
+        "adm3_pcode": "CM002007005",
+        "adm3_name": "Yaounde 5e",
+        "adm2_name": "Mfoundi",
+        "iou": 0.99999976
+      },
+      "geometry_action": "none; preserve current subject ID and geometry",
+      "status": "engineering-review-required"
+    },
+    {
+      "subject_id": "gb:CMR:ADM3:9386221B18291950390240",
+      "atlas_name": "Yaoundé VII",
+      "current_parent_label": "Lekie",
+      "current_parent_id": "framework:province:lekie:a3d2e04da16c",
+      "proposed_parent_label": "Mfoundi",
+      "proposed_parent_id": "framework:province:mfoundi:93d34314f8de",
+      "evidence": "MINDDEVEL mayoral order and OCHA geometry candidate",
+      "ocha_spatial_candidate": {
+        "adm3_pcode": "CM002007007",
+        "adm3_name": "Yaounde 7e",
+        "adm2_name": "Mfoundi",
+        "iou": 0.99999999
+      },
+      "geometry_action": "none; preserve current subject ID and geometry",
+      "status": "engineering-review-required"
+    },
+    {
+      "subject_id": "gb:CMR:ADM3:9386221B20641552566497",
+      "atlas_name": "Ebolowa II",
+      "current_parent_label": "Sud",
+      "current_parent_id": "framework:province:sud:4bc02d1bb69e",
+      "proposed_parent_label": "Mvila",
+      "proposed_parent_id": "framework:province:mvila:4a2ca8db7f05",
+      "evidence": "MINAT South roster, Prime Minister decrees and MINDDEVEL Mvila roster",
+      "ocha_spatial_candidate": {
+        "adm3_pcode": "CM009002004",
+        "adm3_name": "Ebolowa 2e",
+        "adm2_name": "Mvila",
+        "iou": 1.0
+      },
+      "geometry_action": "none; preserve current subject ID and geometry",
+      "status": "engineering-review-required"
+    }
+  ],
+  "follow_up": "Validate the proposed parent relationships against the active hierarchy and adjacent granularity policy before any engineering change; make a separate scoped implementation issue/PR."
+}
