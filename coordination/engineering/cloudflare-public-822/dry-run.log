@@ -1,0 +1,16 @@
+
+ ⛅️ wrangler 4.146.0 (update available 4.147.0)
+───────────────────────────────────────────────
+✨ Read 521 files from the assets directory /Users/chengshuli/world-atlas-workspace/WorldAtlas-cloudflare-public/dist/client
+Total Upload: 497.10 KiB / gzip: 129.25 KiB
+Your Worker has access to the following bindings:
+Binding                                                                        Resource                  
+env.BUCKET (worldatlas-archives)                                               R2 Bucket                 
+env.ASSETS                                                                     Assets                    
+env.ATLAS_CONTENT_BACKEND ("postgres")                                         Environment Variable      
+env.ATLAS_READ_ONLY ("1")                                                      Environment Variable      
+env.ATLAS_ACCESS_TEAM_DOMAIN ("chengshu-worldatlas.cloudflareaccess....")      Environment Variable      
+env.ATLAS_ACCESS_AUD ("7febaeea334b4e452186aa2f30c4f731ae43d...")              Environment Variable      
+env.ATLAS_PUBLIC_READ_ONLY ("1")                                               Environment Variable      
+
+--dry-run: exiting now.
