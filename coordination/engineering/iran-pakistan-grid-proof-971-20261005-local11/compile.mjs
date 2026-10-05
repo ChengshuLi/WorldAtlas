@@ -35,6 +35,8 @@ function encodedRoundtrip(packed){
 
 export function inspect(staged){
   if(staged.size!==GRID_WIDTH)throw Error('Pinned application width differs from baseline grid');
+  const oldIds=staged.baseline.map(f=>f.id).sort(),newIds=staged.candidate.map(f=>f.id).sort();
+  if(new Set(oldIds).size!==oldIds.length||!same(oldIds,newIds)||!same(oldIds,Object.keys(staged.owner_indices).sort()))throw Error('Incomplete or duplicate neighbor inventory');
   const bbox=staged.bbox,total=bbox.width*bbox.height;
   if(!Number.isSafeInteger(total)||total<1||total>16000000)throw Error('Unbounded pixel inspection');
   const before=caseIndex(staged.baseline,staged.owner_indices),after=caseIndex(staged.candidate,staged.owner_indices);
