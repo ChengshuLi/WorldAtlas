@@ -23,3 +23,6 @@ Created five exact-scope, blocked follow-ups dependent on #446: geography resear
 
 
 Per-location acceptance dispositions have now been added for all 215 subjects, and all 32 scoped parents have a separate disposition ledger. Counts are 18 justified (Uruguay department identity/tier only), 1 correction-needed (icefield administrative parent/type interpretation), and 196 insufficient-evidence (Paraguay current/legal status and contested Artigas); none of these labels certifies polygon boundary correctness.
+
+
+Source restoration is explicit in the child contracts: the original Paraguay ADM2 geometry is not retained because it is 45,589,273 bytes. Issues #926 and #929 require restoring its immutable source URL and verifying the exact SHA-256 before crosswalking or geometry review; the file remains outside the packet due to the 32 MiB limit.
