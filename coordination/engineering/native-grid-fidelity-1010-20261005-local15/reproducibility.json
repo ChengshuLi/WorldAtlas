@@ -355,5 +355,6 @@
   "limits": [
     "Whole-byte equality excludes runtime observations; pinned Node/Darwin environment, not cross-platform inverse Math proof.",
     "No geographic authority, source completeness or water approval."
-  ]
+  ],
+  "catalog_serialization": "UTF-8 compact JSON array of products sorted by ASCII relative path; descriptor keys in order path,bytes,sha256; no spaces; one trailing LF (0x0a). SHA256 of these exact bytes."
 }

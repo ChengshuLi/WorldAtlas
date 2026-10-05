@@ -94,3 +94,9 @@ The old roster-export vintages and metadata correction preserve identical
 mathematical findings, domains, counters and boundary diagnostics in every part.
 They are not relabeled as the later execution. Timing and peak RSS observations
 are retained separately and do not enter deterministic scientific hashes.
+
+The aggregate catalog digest in `reproducibility.json` uses the path-sorted
+`products` array, each descriptor's keys ordered `path`, `bytes`, `sha256`, compact
+JSON with no spaces, UTF-8 and exactly one trailing LF. The recipe is
+`sha256((json.dumps(products, separators=(',', ':')) + '\n').encode('utf-8'))`.
+Individual whole-file hashes remain separately recorded and must all match.
