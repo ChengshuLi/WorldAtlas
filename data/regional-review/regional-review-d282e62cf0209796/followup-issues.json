@@ -1,0 +1,105 @@
+{
+  "baseline_commit": "c944e017796005726150abef19763db9ffd07154",
+  "basis": "These bounded child issues formalize the unresolved findings in semantic-findings.md. They do not certify issue #423, its area, or the Southeastern Europe region. The area-purpose integration remains a handoff to umbrella #415.",
+  "created_at": "2026-10-05",
+  "issues": [
+    {
+      "depends_on": [
+        423
+      ],
+      "issue": 1016,
+      "owned_path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/",
+      "parent_ids": [],
+      "readiness_at_creation": "blocked",
+      "state_at_creation": "open",
+      "subject_count": 53,
+      "subject_ids_sha256": "7d6ba219e247bac7ea2f25287309483615b567bef62f258bdaf45f8904b775f2",
+      "title": "Verify 53 Slovenia municipality names against date-specific official registers from #423",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1016"
+    },
+    {
+      "depends_on": [
+        423,
+        998
+      ],
+      "issue": 1017,
+      "non_overlap_checked_against_issue_998": {
+        "intersection_count": 0,
+        "other_subject_count": 78
+      },
+      "owned_path": "data/regional-review/followup-yugoslavia-423-serbia-register-20261005/",
+      "parent_ids": [],
+      "readiness_at_creation": "blocked",
+      "reusable_merged_source_packet": {
+        "baseline_commit": "c944e017796005726150abef19763db9ffd07154",
+        "intersection_with_issue_423_serbia_subjects": 0,
+        "issue": 998,
+        "merged_commit": "e5393834c715396a60967d366523712edd5d1b65",
+        "pull_request": 1014,
+        "reuse_limit": "Country-level SORS source evidence only. PR #1014 does not establish the role/current boundary correspondence of this issue’s 67 IDs or retain a dated RGA geometry extract and reuse terms.",
+        "sources": [
+          {
+            "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/sors-cities-municipalities-2017.xls",
+            "retrieved_at": "2026-10-05",
+            "sha256": "75a7236c08c13b43bebc12a797456de74bfa9e1dd6f352a821efbce271cd4d62",
+            "vintage": "2017-12-31"
+          },
+          {
+            "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/sors-cities-municipalities-current-2026-10-05.xlsx",
+            "retrieved_at": "2026-10-05",
+            "sha256": "3a7790a65c77a537da848a66c71ba1495c5e0bdfe1021587979a551dcb7ebafa",
+            "vintage": "current-state file without explicit date"
+          },
+          {
+            "path": "data/regional-review/followup-serbia-422-admin-crosswalk-20261005/sources/derived/subject-crosswalk.csv",
+            "role": "derived crosswalk for #998 exact 78 IDs",
+            "sha256": "a5a01d678c51cf273aa5afd8194d10c1b103176f8fe30ac50d0ccc9e69ec2751"
+          }
+        ],
+        "subject_count": 78
+      },
+      "state_at_creation": "open",
+      "subject_count": 67,
+      "subject_ids_sha256": "9370149c4c25d346e98b7d09b91970c339ff0def4d0d6432734c22c2c6718b16",
+      "title": "Crosswalk the 67 Serbia ADM2 members from #423 to dated official registers",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1017"
+    },
+    {
+      "depends_on": [
+        423
+      ],
+      "issue": 1018,
+      "owned_path": "data/regional-review/followup-yugoslavia-423-parent-tiers-20261005/",
+      "parent_count": 17,
+      "parent_ids": [
+        "framework:province:ankaran-ancarano:3995388bc628",
+        "framework:province:bor-district:bcc3f7cd47cb",
+        "framework:province:branicevo-district:8cca74a50478",
+        "framework:province:izola-isola:bc2149bec285",
+        "framework:province:jablanica-district:e84aa5c8e2dd",
+        "framework:province:nisava-district:ac978fa5e54b",
+        "framework:province:pcinja-district:c70e78a0f661",
+        "framework:province:piran-pirano:1d929956088b",
+        "framework:province:pirot-district:ce075dca01df",
+        "framework:province:podunavlje-district:2b58b07c63e8",
+        "framework:province:pomoravlje-district:21d27b2672d2",
+        "framework:province:rasina-district:e0e6fad35903",
+        "framework:province:south-banat-district:b205db771f84",
+        "framework:province:toplica-district:05291e06d303",
+        "framework:province:vzhodna:d0d1788c155c",
+        "framework:province:zahodna-slovenija:52f5c9765039",
+        "framework:province:zajecar-district:9380a7a06e84"
+      ],
+      "parent_ids_sha256": "b1d32d76e397b2f72861b41c63158d9e9e47ddf0789f9b8f6285f24e851a6c16",
+      "readiness_at_creation": "blocked",
+      "state_at_creation": "open",
+      "subject_count": 278,
+      "subject_ids_sha256": "e5db7702819affa14cb1d75948102332e5c50ec148212ef1e1d7393f2693b471",
+      "title": "Resolve the 17 Yugoslavia packet parent tiers and coastal singleton semantics",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1018"
+    }
+  ],
+  "parent_issue": 423,
+  "source_packet_pr": 992,
+  "version": 1
+}

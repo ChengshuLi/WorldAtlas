@@ -1,0 +1,216 @@
+{
+  "acceptance_checks": [
+    {
+      "finding": "Two multi-part source geometries are identified above, but Serbia's per-feature current role is unresolved and neither source category nor a full authoritative overlay establishes city-territory fragmentation.",
+      "follow_up_issue": 1018,
+      "status": "insufficient-evidence",
+      "topic": "fragmented city territories"
+    },
+    {
+      "finding": "ADM2 source level and Atlas Municipality labels do not establish relative territory size; no complete, comparable official extent or area assessment is retained.",
+      "follow_up_issue": 1018,
+      "status": "insufficient-evidence",
+      "topic": "province-sized locations"
+    },
+    {
+      "finding": "No names match the recorded term screen; the sample and name screen cannot establish absence of unrepresented remainder units.",
+      "follow_up_issue": 1017,
+      "status": "lexically-screened-only",
+      "topic": "anonymous administrative remainders"
+    },
+    {
+      "finding": "Two MultiPolygon source records (four components total) are identified; component topology, attribution, and current-boundary correspondence were not validated.",
+      "follow_up_issue": 1018,
+      "status": "insufficient-evidence",
+      "topic": "disconnected territories"
+    },
+    {
+      "finding": "The 278 rows are a partial Yugoslavia-area workload, not a complete national island inventory; omissions cannot be assessed from these sources. Complete-region integration in #415 must reconcile named-land and neighboring-packet coverage.",
+      "follow_up_issue": 415,
+      "status": "insufficient-evidence",
+      "topic": "omitted islands"
+    },
+    {
+      "finding": "The 17 parents mix Serbian administrative districts, Slovenia NUTS2 cohesion regions, and three same-municipality coastal singleton parents. Their tier compatibility and complete hierarchy require a source-backed decision.",
+      "follow_up_issue": 1018,
+      "status": "correction-candidate",
+      "topic": "repeated or inconsistent tiers"
+    },
+    {
+      "finding": "Packet parent counts vary from 3-8 for scoped Serbian districts to 61/147 for Slovenia cohesion regions; different roles and partial membership prevent a correctness inference.",
+      "follow_up_issue": 1018,
+      "status": "screened-incomplete",
+      "topic": "oversized groups"
+    },
+    {
+      "finding": "All 17 exact parents are individually assessed; the three one-child coastal records duplicate their municipality identities, while source completeness and geometry compatibility remain unresolved.",
+      "follow_up_issue": 1018,
+      "status": "correction-candidate",
+      "topic": "weak parents"
+    },
+    {
+      "finding": "Hodoš is outside this issue's scope, belongs to #424, and remains an integration question for #415; Serbia/SVN parent tiers also differ in meaning.",
+      "follow_up_issue": 415,
+      "status": "handoff",
+      "topic": "neighboring granularity"
+    }
+  ],
+  "anonymous_remainder_name_screen": {
+    "finding": "No scoped source names match this lexical screen. It does not establish completeness or exclude unnamed/unrepresented remainders outside this issue's 278-ID sample.",
+    "matched_source_names": [],
+    "pattern": "other|remainder|unassigned|unknown|non[- ]?municip|remaining"
+  },
+  "baseline_commit": "c944e017796005726150abef19763db9ffd07154",
+  "inputs": {
+    "neighboring-context.json": {
+      "hash_kind": "file-bytes",
+      "sha256": "90aec87f5c7ade3be6466d57a88d8ca09f18d826c670fabf835031a143e3a575"
+    },
+    "province-assessments.json": {
+      "hash_kind": "file-bytes",
+      "sha256": "78b10090eae768d21158ae3c5d60e3b03833b860e2ebe47a4d234e1778e4611f"
+    },
+    "scope.json": {
+      "hash_kind": "file-bytes",
+      "sha256": "7456674ffc3ede4604fd243aaece1dbbb80868f5d3de08efa6868a8574f7884e"
+    },
+    "source/geoboundaries-9469f09/geoBoundaries-SRB-ADM2.geojson": {
+      "hash_kind": "file-bytes",
+      "sha256": "f94ba868818e4f87dd24bc97aeaf37732cc23f6744facd1010cd91d2349fc884"
+    },
+    "source/geoboundaries-9469f09/geoBoundaries-SVN-ADM2.geojson": {
+      "hash_kind": "file-bytes",
+      "sha256": "b5e2bb260cd78a05e16a457d85cc3fce83b9ad7f65cbefc7feae6f4b836a97fe"
+    },
+    "unit-assessments.json": {
+      "hash_kind": "file-bytes",
+      "sha256": "98e3d72e5f497b71488e1a233a457d6be31e675de196e6ee7595b1e06a0529c1"
+    }
+  },
+  "issue": 423,
+  "limitations": [
+    "Geometry-type and lexical screens are not authoritative role, completeness, or boundary evidence.",
+    "The Serbian 67 current territorial roles and official current boundaries remain unresolved.",
+    "All 278 boundary-equivalence findings remain insufficient-evidence.",
+    "The issue owns only a partial set of Yugoslavia area members; integration belongs to #415 and Hodoš data ownership remains with #424."
+  ],
+  "method": "Exact issue IDs joined by retained geoBoundaries shapeID; count GeoJSON Polygon/MultiPolygon components and scoped parent-member counts; apply a documented lexical screen to source names. No boundary overlay or legal-role inference.",
+  "parent_size_screen": {
+    "finding": "The two Slovenia cohesion-region parents have 147 and 61 scoped children; the 12 Serbian district parents have 3-8 scoped children each; three coastal municipality-duplicating parents are singletons. Counts are packet membership only and do not establish full parent rosters or comparable administrative tiers.",
+    "parents": [
+      {
+        "name": "Ankaran / Ancarano",
+        "packet_member_count": 1,
+        "parent_id": "framework:province:ankaran-ancarano:3995388bc628"
+      },
+      {
+        "name": "Bor District",
+        "packet_member_count": 4,
+        "parent_id": "framework:province:bor-district:bcc3f7cd47cb"
+      },
+      {
+        "name": "Branicevo District",
+        "packet_member_count": 8,
+        "parent_id": "framework:province:branicevo-district:8cca74a50478"
+      },
+      {
+        "name": "Izola / Isola",
+        "packet_member_count": 1,
+        "parent_id": "framework:province:izola-isola:bc2149bec285"
+      },
+      {
+        "name": "Jablanica District",
+        "packet_member_count": 6,
+        "parent_id": "framework:province:jablanica-district:e84aa5c8e2dd"
+      },
+      {
+        "name": "Nisava District",
+        "packet_member_count": 7,
+        "parent_id": "framework:province:nisava-district:ac978fa5e54b"
+      },
+      {
+        "name": "Pcinja District",
+        "packet_member_count": 7,
+        "parent_id": "framework:province:pcinja-district:c70e78a0f661"
+      },
+      {
+        "name": "Piran / Pirano",
+        "packet_member_count": 1,
+        "parent_id": "framework:province:piran-pirano:1d929956088b"
+      },
+      {
+        "name": "Pirot District",
+        "packet_member_count": 4,
+        "parent_id": "framework:province:pirot-district:ce075dca01df"
+      },
+      {
+        "name": "Podunavlje District",
+        "packet_member_count": 3,
+        "parent_id": "framework:province:podunavlje-district:2b58b07c63e8"
+      },
+      {
+        "name": "Pomoravlje District",
+        "packet_member_count": 6,
+        "parent_id": "framework:province:pomoravlje-district:21d27b2672d2"
+      },
+      {
+        "name": "Rasina District",
+        "packet_member_count": 6,
+        "parent_id": "framework:province:rasina-district:e0e6fad35903"
+      },
+      {
+        "name": "South Banat District",
+        "packet_member_count": 8,
+        "parent_id": "framework:province:south-banat-district:b205db771f84"
+      },
+      {
+        "name": "Toplica District",
+        "packet_member_count": 4,
+        "parent_id": "framework:province:toplica-district:05291e06d303"
+      },
+      {
+        "name": "Vzhodna",
+        "packet_member_count": 147,
+        "parent_id": "framework:province:vzhodna:d0d1788c155c"
+      },
+      {
+        "name": "Zahodna Slovenija",
+        "packet_member_count": 61,
+        "parent_id": "framework:province:zahodna-slovenija:52f5c9765039"
+      },
+      {
+        "name": "Zajecar District",
+        "packet_member_count": 4,
+        "parent_id": "framework:province:zajecar-district:9380a7a06e84"
+      }
+    ]
+  },
+  "scope": {
+    "location_count": 278,
+    "member_location_ids_sha256": "e5db7702819affa14cb1d75948102332e5c50ec148212ef1e1d7393f2693b471",
+    "parent_count": 17,
+    "source_rows_joined": 278
+  },
+  "source_geometry_type_screen": {
+    "counts": {
+      "MultiPolygon": 2,
+      "Polygon": 276
+    },
+    "finding": "Two Slovenia ADM2 source features have two Polygon components each. This flags disconnected geometry for source review; it does not show that either feature is an urban city, an island, complete, or legally equivalent to the current territory.",
+    "multipolygon_features": [
+      {
+        "location_id": "gb:SVN:ADM2:79292919B28674460961917",
+        "parent_id": "framework:province:vzhodna:d0d1788c155c",
+        "polygon_components": 2,
+        "source_name": "Zagorje ob Savi"
+      },
+      {
+        "location_id": "gb:SVN:ADM2:79292919B31119784706660",
+        "parent_id": "framework:province:zahodna-slovenija:52f5c9765039",
+        "polygon_components": 2,
+        "source_name": "Gorenja vas-Poljane"
+      }
+    ]
+  },
+  "version": 1
+}
