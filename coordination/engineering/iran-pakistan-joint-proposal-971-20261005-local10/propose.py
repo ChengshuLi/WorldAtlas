@@ -10,13 +10,33 @@ import sys
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / 'scripts'))
 from shapely import union_all
-from shapely.geometry import shape, mapping, LineString
+from shapely.geometry import shape, mapping, LineString, MultiPolygon, GeometryCollection
 from evidence.immutable import Baseline, canonical_json, sha256
 
 PREVIOUS = 'coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/reproduce.py'
 spec = importlib.util.spec_from_file_location('reviewed_native_comparison', ROOT / PREVIOUS)
 native = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(native)
+
+
+def separate_polygonal_result(geometry):
+    """Separate representations by geometry type, preserving every remainder."""
+    polygons, other = [], []
+    def collect(g):
+        if g.is_empty:
+            return
+        if g.geom_type == 'Polygon':
+            polygons.append(g)
+        elif g.geom_type in ('MultiPolygon', 'GeometryCollection'):
+            for child in g.geoms:
+                collect(child)
+        else:
+            other.append(g)
+    collect(geometry)
+    if not polygons:
+        raise ValueError('No areal candidate polygon')
+    candidate = polygons[0] if len(polygons) == 1 else MultiPolygon(polygons)
+    return native.valid_polygon(candidate), GeometryCollection(other)
 
 
 def build_candidate(component, current, sources):
@@ -34,8 +54,9 @@ def build_candidate(component, current, sources):
     existing_union = union_all(list(current.values()))
     additions = {country: component.intersection(g).difference(existing_union)
                  for country, g in sources.items()}
-    candidates = {country: native.valid_polygon(current[country].union(addition))
-                  for country, addition in additions.items()}
+    joined = {country: current[country].union(addition) for country, addition in additions.items()}
+    split = {country: separate_polygonal_result(geometry) for country, geometry in joined.items()}
+    candidates = {country: pieces[0] for country, pieces in split.items()}
     proof = {}
     for country, candidate in candidates.items():
         change = candidate.difference(current[country])
@@ -45,6 +66,8 @@ def build_candidate(component, current, sources):
             'lost_existing_coverage': native.measured_geometry(current[country].difference(candidate)),
             'added_outside_component': native.measured_geometry(change.difference(component)),
             'added_outside_named_source': native.measured_geometry(change.difference(sources[country])),
+            'nonpolygon_join_remnants': native.measured_geometry(split[country][1]),
+            'full_union_before_representation_separation': native.measured_geometry(joined[country]),
             'candidate_valid': candidate.is_valid}
     combined = union_all(list(candidates.values()))
     prior_overlap = current['IRN'].intersection(current['PAK'])

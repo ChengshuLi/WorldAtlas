@@ -1,7 +1,7 @@
 import copy
 import json
-from shapely.geometry import Polygon, box, shape
-from propose import build_candidate, source_agreement
+from shapely.geometry import Polygon, box, shape, GeometryCollection, LineString
+from propose import build_candidate, source_agreement, separate_polygonal_result
 
 
 def rejects(callback):
@@ -65,6 +65,11 @@ def main():
     checks.append('different shared source version rejected')
     rejects(lambda: source_agreement(original, {'elements': []}))
     checks.append('absent shared source evidence rejected')
+    tiny = box(0, 0, 1e-8, 1e-8)
+    line = LineString([(1, 1), (2, 2)])
+    polygon, residual = separate_polygonal_result(GeometryCollection([tiny, line]))
+    assert polygon.equals(tiny) and residual.equals(line)
+    checks.append('all tiny areal geometry and nonpolygon remnants retained in separate representations')
     print(json.dumps({'method_id': 'joint-source-candidate', 'kind': 'positive-control',
                       'outcome': 'passed', 'check_count': len(checks), 'checks': checks}, sort_keys=True))
 
