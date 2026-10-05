@@ -118,6 +118,22 @@ class RegressionControls(unittest.TestCase):
         self.assertEqual(result['geometry_errors'][0]['location_id'], 'land')
         self.assertIsNone(result['regressions'])
 
+    def test_malformed_candidate_retains_actionable_raw_geometry(self):
+        before = features(land=box(0, 0, 1, 1))
+        after = features(land=box(0, 0, 1, 1))
+        del after['land']['geometry']['coordinates']
+        result = gate.compare(before, after)
+        self.assertEqual(result['status'], 'blocked-invalid-or-unsupported-geometry')
+        error = result['geometry_errors'][0]
+        self.assertEqual(error['location_id'], 'land')
+        self.assertEqual(error['vintage'], 'candidate')
+        self.assertEqual(error['original_geometry'], {'type': 'Polygon'})
+
+    def test_unpinned_commit_is_rejected_before_git_read(self):
+        for commit in ['HEAD', '--output=bad', '0' * 39]:
+            with self.assertRaisesRegex(ValueError, 'immutable 40-character'):
+                gate.snapshot(ROOT, commit)
+
     def test_deletion_and_replacement_preserve_union(self):
         before = features(old=box(0, 0, 1, 1), other=box(1, 0, 2, 1))
         after = features(new=box(0, 0, 1, 1), other=box(1, 0, 2, 1))
@@ -215,5 +231,44 @@ class RegressionControls(unittest.TestCase):
             self.assertEqual(out.read_bytes(), original)
 
 
+def receipt_run(directory):
+    """Run real controls and retain deterministic results in a new directory."""
+    class Result(unittest.TextTestResult):
+        def addSuccess(self, test):
+            super().addSuccess(test)
+            self.successes = getattr(self, 'successes', []) + [test._testMethodName]
+
+    result = unittest.TextTestRunner(resultclass=Result).run(
+        unittest.defaultTestLoader.loadTestsFromTestCase(RegressionControls))
+    if not result.wasSuccessful() or result.skipped:
+        return 1
+    directory = pathlib.Path(directory)
+    if any(p.is_symlink() for p in [directory, *directory.absolute().parents]):
+        raise ValueError('Symlink receipt destination')
+    directory.mkdir()  # Exclusive: never refresh original control evidence.
+    controls = sorted(result.successes)
+    files = [gate.descriptor(name, (ROOT / name).read_bytes()) for name in
+             ['scripts/check-geographic-regression.py', 'test/geographic-regression.py']]
+    summary = {'method_id': 'geographic-regression', 'tests': result.testsRun,
+        'failures': len(result.failures), 'errors': len(result.errors), 'skipped': len(result.skipped),
+        'outcome': 'passed', 'controls': controls, 'executed_files': files,
+        'software': {'shapely': gate.shapely.__version__, 'geos': gate.shapely.geos_version_string}}
+    (directory / 'results.json').write_bytes(gate.canonical_json(summary))
+    negative = {'test_valid_joint_boundary_move', 'test_existing_gap_and_overlap_are_not_new_regressions',
+        'test_output_is_independent_of_location_input_order', 'test_deletion_and_replacement_preserve_union',
+        'test_islands_holes_and_intentional_water_change_still_require_review'}
+    for kind in ['positive-control', 'negative-control']:
+        selected = [name for name in controls if (name in negative) == (kind == 'negative-control')]
+        value = {**summary, 'kind': kind, 'controls': selected,
+            'limits': ['Synthetic diagnostic controls only; mixed lake/deletion cases also exercise positive failures. No geography approval.']}
+        (directory / (kind + '.json')).write_bytes(gate.canonical_json(value))
+    return 0
+
+
 if __name__ == '__main__':
+    if '--receipts' in sys.argv:
+        import argparse
+        parser = argparse.ArgumentParser()
+        parser.add_argument('--receipts', required=True)
+        sys.exit(receipt_run(parser.parse_args().receipts))
     unittest.main()

@@ -81,7 +81,9 @@ def snapshot(repo, commit):
         value = read(name)
         pins[name] = files[name]['sha256']
         # Pointer bytes are insufficient: preserve the immutable pointed-to release too.
-        if name.endswith('current-manifest.json') and isinstance(value, dict) and value.get('path'):
+        if name.endswith('current-manifest.json'):
+            if not isinstance(value, dict) or not isinstance(value.get('path'), str) or not re.fullmatch('[a-f0-9]{64}', value.get('sha256', '')):
+                raise ValueError('Incomplete geographic release pointer')
             pointed = safe_path(value['path'])
             if not pointed.startswith('data/'):
                 pointed = 'data/geographic-releases/' + pointed
@@ -112,8 +114,9 @@ def prepare(features, vintage):
             # Shared versioned method unwraps short edges, aligns holes and splits
             # the date line. Unsupported/invalid geometry cannot be MakeValid'd.
             result[identity] = canonical_land(shape(features[identity]['geometry']))
-        except (ValueError, shapely.errors.GEOSException, TypeError) as error:
-            errors.append({'vintage': vintage, 'location_id': identity, 'reason': str(error)})
+        except (ValueError, shapely.errors.ShapelyError, TypeError, KeyError, AttributeError) as error:
+            errors.append({'vintage': vintage, 'location_id': identity, 'reason': str(error),
+                           'original_geometry': features[identity]['geometry']})
     return result, errors
 
 
@@ -208,6 +211,7 @@ def inspect(repo, baseline_commit, candidate_commit):
         result[vintage] = {key: snap[key] for key in ['commit', 'files', 'pins']}
         result[vintage]['locations'] = [{'location_id': i, 'containing_file': snap['containing'][i],
             'original_geometry_sha256': geometry_hash(snap['features'][i]),
+            'original_geometry': snap['features'][i]['geometry'],
             'properties': snap['features'][i].get('properties', {})} for i in identities if i in snap['features']]
     return {'version': 1, 'method_id': VERSION, 'geometry_helper': METHOD,
         'software': {'shapely': shapely.__version__, 'geos': shapely.geos_version_string},
