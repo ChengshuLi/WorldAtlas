@@ -1,0 +1,794 @@
+{
+  "version": 1,
+  "issue": 946,
+  "lane": "engineering",
+  "worker_id": "engineering-coverage-gaps-907-20261005-local01",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+    "files": [
+      {
+        "path": "coordination/engineering/coverage-gaps-907-20261005-local01/global-v3/candidates-000.geojson.gz",
+        "bytes": 1709205,
+        "sha256": "0edeaaf6aa30c6a2e76332ef61d8d045a280b1d5b75dea3ace2d006eff4b9861",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "coordination/engineering/coverage-gaps-907-20261005-local01/global-v3/candidates-001.geojson.gz",
+        "bytes": 1861738,
+        "sha256": "4aebb81d295436cd9af01df5b4c24763e34b5cf427952aac37d9cfaacb7794a3",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "coordination/engineering/coverage-gaps-907-20261005-local01/global-v3/candidates-002.geojson.gz",
+        "bytes": 1832440,
+        "sha256": "fa744817bd1fec4ec8e1bd988e61a175dd9ba42ef1944370b346ef6e9887b035",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "coordination/engineering/coverage-gaps-907-20261005-local01/global-v3/candidates-003.geojson.gz",
+        "bytes": 1873760,
+        "sha256": "a35ca8ab012433a99d960b792c6cf3e8e01a3a457929e2d43fdeebf36a8efb4f",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "coordination/engineering/coverage-gaps-907-20261005-local01/global-v3/candidates-004.geojson.gz",
+        "bytes": 1799116,
+        "sha256": "cdab5c929c42c82f9111e77880aacc8046435429ac5bf6cc159aa5c2dc4139b4",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "coordination/engineering/coverage-gaps-907-20261005-local01/global-v3/candidates-005.geojson.gz",
+        "bytes": 2076238,
+        "sha256": "e88de9b13b0751138bfc509d36ce9c923ee64c465dc431218de512cd89a40d55",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "coordination/engineering/coverage-gaps-907-20261005-local01/global-v3/candidates-006.geojson.gz",
+        "bytes": 1295485,
+        "sha256": "097933cc6172d3955e0f1a6f89215bc13f568c7fcfc3e06e16039b91eb0b44cc",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "coordination/engineering/coverage-gaps-907-20261005-local01/global-v3/report.json",
+        "bytes": 12965,
+        "sha256": "3a52c875e5bb4d39a56faa5ad04785e6be5d0e0f8c9eac97500a7a23ca399ae0",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "coordination/engineering/coverage-gaps-907-20261005-local01/sources/natural-earth-lakes.geojson.gz",
+        "bytes": 1565161,
+        "sha256": "a57bd38b23b57d884853c3e8e6da1a4a24c9ca40dd1edb8e9b2de4db70c0656f",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/coverage-gaps-907-20261005-local01/sources/receipt.json",
+        "bytes": 669,
+        "sha256": "55f4399d4bc54bbaed8bdd28be665f6cb27bfcb4b0db5dd144a950bb25fe38fb",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/canonical-grid/manifest.json",
+        "bytes": 271171,
+        "sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/macro-loose-ends-v5-additions.json",
+        "bytes": 11393,
+        "sha256": "8f49c003f2277593041f3526c97b58252599cd53f20abf27fd6a6eb62cfdb5d1",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-1.json",
+        "bytes": 8060108,
+        "sha256": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-10.json",
+        "bytes": 5144571,
+        "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-11.json",
+        "bytes": 5131824,
+        "sha256": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-12.json",
+        "bytes": 4489493,
+        "sha256": "24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-13.json",
+        "bytes": 5709487,
+        "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-14.json",
+        "bytes": 4355198,
+        "sha256": "c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-15.json",
+        "bytes": 5180426,
+        "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-16.json",
+        "bytes": 5213846,
+        "sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-17.json",
+        "bytes": 4945828,
+        "sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-18.json",
+        "bytes": 4909063,
+        "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-19.json",
+        "bytes": 4583022,
+        "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-2.json",
+        "bytes": 6259307,
+        "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-20.json",
+        "bytes": 6570767,
+        "sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-21.json",
+        "bytes": 6737781,
+        "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-22.json",
+        "bytes": 4746385,
+        "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-23.json",
+        "bytes": 4962410,
+        "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-24.json",
+        "bytes": 4816899,
+        "sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-25.json",
+        "bytes": 4525239,
+        "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-26.json",
+        "bytes": 4608983,
+        "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-27.json",
+        "bytes": 4863162,
+        "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-28.json",
+        "bytes": 6613963,
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-29.json",
+        "bytes": 12932167,
+        "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-3.json",
+        "bytes": 5153118,
+        "sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-30.json",
+        "bytes": 11979437,
+        "sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-31.json",
+        "bytes": 10086485,
+        "sha256": "44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-32.json",
+        "bytes": 10211739,
+        "sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-33.json",
+        "bytes": 607984,
+        "sha256": "d928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-4.json",
+        "bytes": 4835479,
+        "sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-5.json",
+        "bytes": 5226173,
+        "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-6.json",
+        "bytes": 4607953,
+        "sha256": "dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-7.json",
+        "bytes": 4257402,
+        "sha256": "1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-8.json",
+        "bytes": 5097739,
+        "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/part-9.json",
+        "bytes": 5729632,
+        "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/geography/source-restoration-additions.json",
+        "bytes": 1573576,
+        "sha256": "04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "data/macro-foundation/retained-inspections/retained-geographic-sources/namibia/manifest.json.gz",
+        "bytes": 3241,
+        "sha256": "71ac7d75f7d1ed5992893f6a983e839773f6ec2423baee33017bebbc8b3788ec",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/macro-foundation/retained-inspections/retained-geographic-sources/namibia/natural-earth-land.geojson.gz.gz",
+        "bytes": 3570430,
+        "sha256": "2e2e5ea6e81c5ca8ed2f28c1002ed11f01a54354cdb42771bf39e78d88569b68",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "requirements.txt",
+        "bytes": 146,
+        "sha256": "1c3f3b9598e474af751e25ff0839cbf5c4a9931a59b4ffaaff1a56c6e2f0e2c9",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "scripts/audit-geographic-gaps.py",
+        "bytes": 13954,
+        "sha256": "94a00cd246aa7b2ec375d459c46c5a046603b67932ac9dc24011c9f1091d51ee",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "scripts/evidence/geometry.py",
+        "bytes": 5264,
+        "sha256": "944541968fcdf065b9c4b6105be227c3e0e14b6a20916f4fa21f851338c7a305",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      },
+      {
+        "path": "scripts/evidence/immutable.py",
+        "bytes": 7090,
+        "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd",
+        "hash_kind": "file-bytes",
+        "role": "immutable-input"
+      }
+    ],
+    "pins": {},
+    "pin_files": {}
+  },
+  "sources": [
+    {
+      "id": "natural-earth-physical-land",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_land.geojson",
+      "role": "inherited-coarse-physical-reference",
+      "vintage": "Pinned upstream ca96624a56bd078437bca8184e78163e5039ad19; original audit modern reference",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "Natural Earth public domain"
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Original bytes remain in the ancestor-main retained paths with whole-file baseline pins in this manifest; read their ordinary Git blobs at c881d662da6cbba6f6bc7f988af57ab7dc98c0a4. No new duplicate original source is added.",
+      "limit": "This PR checks inherited bytes and exact candidate connectivity; it does not independently certify detailed hydrology, target-year suitability or province ownership. Original native source/evaluation hashes remain in the pinned audit report."
+    },
+    {
+      "id": "natural-earth-major-water",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_lakes.geojson",
+      "role": "inherited-coarse-physical-reference",
+      "vintage": "Pinned upstream ca96624a56bd078437bca8184e78163e5039ad19; original audit modern reference",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "Natural Earth public domain"
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Original bytes remain in the ancestor-main retained paths with whole-file baseline pins in this manifest; read their ordinary Git blobs at c881d662da6cbba6f6bc7f988af57ab7dc98c0a4. No new duplicate original source is added.",
+      "limit": "This PR checks inherited bytes and exact candidate connectivity; it does not independently certify detailed hydrology, target-year suitability or province ownership. Original native source/evaluation hashes remain in the pinned audit report."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/accounting.json",
+      "bytes": 12520,
+      "sha256": "703d2dd808a2d7b4683e566ae805194ee63a6381e2fd818a338ae4d893081a03",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-audit-output"
+    },
+    {
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v1/components-000.json.gz",
+      "bytes": 3642057,
+      "sha256": "115179a2e6ddda1a74e41d088c97643a56479deaaa0cb880b93a07fcd731e76f",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-audit-output",
+      "uncompressed_bytes": 16775947,
+      "uncompressed_sha256": "0bfa4da8a3d0a6bb1866e917da0937d408c86bb0f293cb91d1f30985f5ab413f"
+    },
+    {
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v1/components-001.json.gz",
+      "bytes": 3640717,
+      "sha256": "9324d13b87071d37d0f1cb643d239d8d83e9b3abf067b7e1e9d37501f15a3c7a",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-audit-output",
+      "uncompressed_bytes": 16776459,
+      "uncompressed_sha256": "1336e3535e82b3333b7ea49f2ec4bfa3fb5d4b02434f57a3b7f33587733771c6"
+    },
+    {
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v1/components-002.json.gz",
+      "bytes": 3641390,
+      "sha256": "c888d5c2a56b4ea9b9aa918ed86febe3ea3be26af25e7837c249c4a89e8cd5a3",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-audit-output",
+      "uncompressed_bytes": 16776862,
+      "uncompressed_sha256": "dd5fb4b391652b687b806e54473f4d9a34e945ddc8942a93900a8f78a18f6844"
+    },
+    {
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v1/components-003.json.gz",
+      "bytes": 3646898,
+      "sha256": "4ea1ee607170ba06b5d1bc73f4d308c4621ac04e5209b97ceac88964fe4bf7b2",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-audit-output",
+      "uncompressed_bytes": 16777097,
+      "uncompressed_sha256": "22ac46d507226ab3d5015d2ebe1c158adec139fcb9d517ad016504e41db4a820"
+    },
+    {
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v1/components-004.json.gz",
+      "bytes": 3640001,
+      "sha256": "c8726499e2d34c89b45fcf5d4c725b9583d2cb14319736580c032d460c04cb54",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-audit-output",
+      "uncompressed_bytes": 16776852,
+      "uncompressed_sha256": "65f2af624321492c509355e5d6e9835ecb5480117c8e6e2766d2ba7532194801"
+    },
+    {
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v1/components-005.json.gz",
+      "bytes": 3639962,
+      "sha256": "bcef735556b4962290b70f7ec93a98daf49cbb3602eebef20f0ca4e736d231f1",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-audit-output",
+      "uncompressed_bytes": 16776933,
+      "uncompressed_sha256": "64208d8cd7f595921de7ffff9a72b39dfa25cf1b78282c9147310714d8b2749f"
+    },
+    {
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v1/components-006.json.gz",
+      "bytes": 2982501,
+      "sha256": "019b2c3b4c01348486c8370925c9ecde36ded64c5eb0a2812f756c948b580c1d",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-audit-output",
+      "uncompressed_bytes": 13766970,
+      "uncompressed_sha256": "1d01df616dcb21442b757ad539da621d1f65f48524a5646f661a9b354ffcd99c"
+    },
+    {
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v1/contacts-000.json.gz",
+      "bytes": 413635,
+      "sha256": "cd2a3702b68519bcac2e0508b2457dab26d3518c32a5c595658aa0c658c71074",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-audit-output",
+      "uncompressed_bytes": 1533844,
+      "uncompressed_sha256": "bd8a6dd9d3ed8eb2b96526f8019d28f91b2b1656008871b0ce7fcc10883b6b65"
+    },
+    {
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v1/fragment-sources-000.json.gz",
+      "bytes": 2546902,
+      "sha256": "27c1b812356f64bfd7552c0398bc0d85c16c8751cecf8608615b62e34dee10b5",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-audit-output",
+      "uncompressed_bytes": 16777156,
+      "uncompressed_sha256": "ee8b10f05eac10eaa9de20532bd7f208118bb859f39dd7b9a8f939ff5928cc87"
+    },
+    {
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v1/fragment-sources-001.json.gz",
+      "bytes": 1743218,
+      "sha256": "8e61c54f525251d11e2948e0c803923896eab34f3d2a02604e2366d2e7cca227",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-audit-output",
+      "uncompressed_bytes": 11441894,
+      "uncompressed_sha256": "da55a1ad28851c3f933fe68e74d21d5fd54cc08211eb048eacbb7dfdb9f3a317"
+    },
+    {
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v1/report.json",
+      "bytes": 26687,
+      "sha256": "da01cdf094d46f3d09f94faa0569a554e65d66a952ec66643f7bf66974cbc4bf",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-audit-output"
+    },
+    {
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/negative-control.json",
+      "bytes": 952,
+      "sha256": "2c71fe7720f310e3076d2231f70ceb877fd01a6061d3a421d99604133af6be24",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-audit-output"
+    },
+    {
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/positive-control.json",
+      "bytes": 882,
+      "sha256": "b2be8d49d1d68fcd6f8fbf11daca9c23d440e83ffdf04fc2b04b7f91e76b5457",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-audit-output"
+    },
+    {
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/reproducibility.json",
+      "bytes": 2077,
+      "sha256": "62b5e63ad1d4c25a50f4d56b7c9094652dde5db12424668646863ad8e3ba1ab7",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-audit-output"
+    },
+    {
+      "path": "docs/GEOGRAPHIC_GAP_COMPONENTS.md",
+      "bytes": 3997,
+      "sha256": "d654b3d532dc780d70e25345056c0d29c62f2af075b2999713677ac6a3ed71d9",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-audit-output"
+    },
+    {
+      "path": "scripts/geographic_components.py",
+      "bytes": 6623,
+      "sha256": "04e8115e367edec10459ada8ccae003b4b99159636888e2d6e9109841df408fb",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-audit-output"
+    },
+    {
+      "path": "scripts/refine-geographic-components.py",
+      "bytes": 7888,
+      "sha256": "aa830911fc54df2f03dcfa37cbc9797d20c2466b5a0a922ffed280e99b90fa00",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-audit-output"
+    },
+    {
+      "path": "test/geographic-components.py",
+      "bytes": 9708,
+      "sha256": "0b72d12100b2cf0e01c5981dc319c461d3101bd4e094d0df36a1d75e85cc720a",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-audit-output"
+    },
+    {
+      "path": "test/geographic-components.test.mjs",
+      "bytes": 504,
+      "sha256": "57ec652bc0dd17d6bb5e339fa793fdbc75448099a4f0e120801d28293808a7fd",
+      "hash_kind": "file-bytes",
+      "role": "implementation-or-audit-output"
+    }
+  ],
+  "methods": [
+    {
+      "id": "exact-component-refinement",
+      "kind": "generator",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "description": "Immutable whole-file pinned reads, exact positive-length polygon connectivity with point ambiguity, original-coordinate dateline comparison, lossless source bindings and deterministic bounded partitions. Existing area values are retained, not newly measured.",
+      "software": "Python3.12;Shapely2.1.2/GEOS3.13.1;Git;unchanged immutable preparation helper",
+      "units": "fragment/component/contact counts; original lon/lat geometry"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "retained_fragments",
+      "value": 98324,
+      "unit": "count",
+      "vintage": "baseline",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "input_sha256": "3a52c875e5bb4d39a56faa5ad04785e6be5d0e0f8c9eac97500a7a23ca399ae0",
+      "scope": "Candidate-code refinement of the retained audit whose original evaluation commit remains 5f6ab02338a07fd4b3d1cf82d58b96bc84b70312. All 41 original input files match this baseline; these are diagnostic counts, not confirmed missing-land defects."
+    },
+    {
+      "id": "exact_components",
+      "value": 96532,
+      "unit": "count",
+      "vintage": "baseline",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "input_sha256": "3a52c875e5bb4d39a56faa5ad04785e6be5d0e0f8c9eac97500a7a23ca399ae0",
+      "scope": "Candidate-code refinement of the retained audit whose original evaluation commit remains 5f6ab02338a07fd4b3d1cf82d58b96bc84b70312. All 41 original input files match this baseline; these are diagnostic counts, not confirmed missing-land defects."
+    },
+    {
+      "id": "point_contact_ambiguities",
+      "value": 3073,
+      "unit": "count",
+      "vintage": "baseline",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "input_sha256": "3a52c875e5bb4d39a56faa5ad04785e6be5d0e0f8c9eac97500a7a23ca399ae0",
+      "scope": "Candidate-code refinement of the retained audit whose original evaluation commit remains 5f6ab02338a07fd4b3d1cf82d58b96bc84b70312. All 41 original input files match this baseline; these are diagnostic counts, not confirmed missing-land defects."
+    },
+    {
+      "id": "input_overlaps",
+      "value": 0,
+      "unit": "count",
+      "vintage": "baseline",
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "input_sha256": "3a52c875e5bb4d39a56faa5ad04785e6be5d0e0f8c9eac97500a7a23ca399ae0",
+      "scope": "Candidate-code refinement of the retained audit whose original evaluation commit remains 5f6ab02338a07fd4b3d1cf82d58b96bc84b70312. All 41 original input files match this baseline; these are diagnostic counts, not confirmed missing-land defects."
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "retained_fragments",
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v1/report.json",
+      "json_pointer": "/fragment_count"
+    },
+    {
+      "metric_id": "exact_components",
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v1/report.json",
+      "json_pointer": "/component_count"
+    },
+    {
+      "metric_id": "point_contact_ambiguities",
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v1/report.json",
+      "json_pointer": "/contact_counts/point-only-ambiguous"
+    },
+    {
+      "metric_id": "input_overlaps",
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v1/report.json",
+      "json_pointer": "/contact_counts/positive-area-input-overlap"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [],
+  "validation": [
+    {
+      "method_id": "exact-component-refinement",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/geographic-components-946-20261005-local06/positive-control.json"
+    },
+    {
+      "method_id": "exact-component-refinement",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/geographic-components-946-20261005-local06/negative-control.json"
+    },
+    {
+      "method_id": "exact-component-refinement",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/geographic-components-946-20261005-local06/reproducibility.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/accounting.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v1/components-000.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v1/components-001.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v1/components-002.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v1/components-003.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v1/components-004.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v1/components-005.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v1/components-006.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v1/contacts-000.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v1/fragment-sources-000.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v1/fragment-sources-001.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v1/report.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-components-946-20261005-local06/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "docs/GEOGRAPHIC_GAP_COMPONENTS.md",
+      "status": "added"
+    },
+    {
+      "path": "scripts/geographic_components.py",
+      "status": "added"
+    },
+    {
+      "path": "scripts/refine-geographic-components.py",
+      "status": "added"
+    },
+    {
+      "path": "test/geographic-components.py",
+      "status": "added"
+    },
+    {
+      "path": "test/geographic-components.test.mjs",
+      "status": "added"
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "proposed",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "python -I -B test/geographic-components.py",
+    "python -I -B scripts/refine-geographic-components.py --commit c881d662da6cbba6f6bc7f988af57ab7dc98c0a4 --report coordination/engineering/coverage-gaps-907-20261005-local01/global-v3/report.json --report-bytes 12965 --report-sha256 3a52c875e5bb4d39a56faa5ad04785e6be5d0e0f8c9eac97500a7a23ca399ae0 --out .cache/your-unused-components-run"
+  ],
+  "limits": [
+    "Connectivity is exact for the retained continuous polygons; no snapping or sliver cutoff.",
+    "Point-only contacts remain distinct components and explicitly ambiguous.",
+    "Dateline components retain original coordinates as potentially disconnected planar MultiPolygon.",
+    "Measured area is a sum of original measured fragments, not a newly certified physical area.",
+    "Three blocked tiles and all original measurement failures remain unresolved.",
+    "Nearby locations are inherited diagnostics, not certified neighbors or an administrative assignment.",
+    "Independent detailed water classification and canonical integer-grid comparison remain outstanding.",
+    "Reference is Natural Earth 1:10m physical land, not detailed hydrography or a complete island inventory.",
+    "Every result is a candidate: rivers, reservoirs, coast and source vintages remain unverified.",
+    "No political affiliation, boundary repair, geographic approval or deployment.",
+    "Tile fragments are not globally connected component counts; joining and actual canonical-grid comparison remain separate checks.",
+    "Antarctica/south of 60S and north of the Mercator limit are excluded; this is a declared-domain audit.",
+    "Nearest location uses planar degrees for identification only, never a claimed physical distance or adjacency."
+  ]
+}
