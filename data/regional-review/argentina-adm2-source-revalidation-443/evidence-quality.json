@@ -636,22 +636,22 @@
       "helper_version": "worldatlas-evidence-preparation-v1",
       "id": "source-partition",
       "kind": "generator",
-      "software": "Python 3.8.5; stdlib gzip/json/hashlib; geoBoundaries upstream commit 9469f09",
+      "software": "Python 3.12.14; stdlib gzip/json/hashlib; geoBoundaries upstream commit 9469f09",
       "units": "features, bytes and SHA-256"
     },
     {
       "description": "Project longitude/latitude WGS84 polygons into EPSG:6933 with always_xy; run equal-area Shapely overlay at positive area >1 m2 without geometry repair. Produce the exact scoped 2020/current department candidate, overlap, parent and component ledgers plus the 2006 ADM1/current-province comparison.",
       "id": "polygon-overlay",
       "kind": "measurement",
-      "software": "Python 3.8.5; Shapely 2.0.7; GEOS 3.11.4; pyproj 3.5.0; PROJ 9.2.0; NumPy 1.24.4",
+      "software": "Python 3.12.14; Shapely 2.1.2; GEOS 3.13.1; pyproj 3.7.2; PROJ 9.5.1; NumPy 2.3.5",
       "units": "m2, km2, component counts, interior rings and dimensionless area shares"
     },
     {
-      "description": "Convert all detailed numeric overlay outputs to categorical per-subject findings and retain one exact numeric row count per output table.",
+      "description": "Convert all detailed numeric overlay outputs to categorical per-subject findings using exact raw/detail field allowlists and categorical value validation; retain one exact numeric row count per output table.",
       "helper_version": "worldatlas-evidence-preparation-v1",
       "id": "categorical-table-generation",
       "kind": "generator",
-      "software": "Python 3.8.5 standard library",
+      "software": "Python 3.12.14 standard library",
       "units": "detail rows and categorical classes"
     }
   ],
@@ -1844,25 +1844,25 @@
   ],
   "outputs": [
     {
-      "bytes": 13546,
+      "bytes": 13949,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/README.md",
       "role": "research-output",
-      "sha256": "59cf7eb3ad6bed35216e750a46dcccbfd18db4ef610d9ae00dab629d2f3bd129"
+      "sha256": "072d6303e6d707d9052f084bece9d4c865d54298c3eb348ed47487abd16ca79a"
     },
     {
-      "bytes": 24720,
+      "bytes": 24795,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/build-evidence-manifest.py",
       "role": "reproduction-code",
-      "sha256": "cb70bd4c59112d60383ac23b06479a0e8f3452a8870bfeb926e11c182e56d925"
+      "sha256": "17100313862bca3446b75db0fcd9c1921ad200a86d9311fccf55626c55bc5c41"
     },
     {
-      "bytes": 7823,
+      "bytes": 15859,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/categorize-tabular-findings.py",
       "role": "reproduction-code",
-      "sha256": "e60d53f355f38a3741b3f453a4001c31c61620573358f5abbacd5fe6bd5021eb"
+      "sha256": "1d07c2bb5202d095f64dc0bf05749338cd49eb40d27cd527316d6da535b58bcc"
     },
     {
       "bytes": 8801,
@@ -1883,28 +1883,28 @@
         }
       ],
       "role": "generated-table",
-      "sha256": "16adfe36c248dd3d318e3d1205b83b05e07ccec740c5bbc9992a84dbe251101c"
+      "sha256": "a328935626dce53acdd673cc5bc40009c3c6cb60362d3f5d897131ffae164c43"
     },
     {
       "bytes": 561,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/categorical-table-generation-reproducibility.json",
       "role": "measurement-result",
-      "sha256": "748719a8b827309fb2513d6ba7792accc645258dc5a36e5461379a8fc6ad4081"
+      "sha256": "92f121e8f37b9c57a4052469612a6dfdc3364998f0d93200cce0d4a32d0ceb31"
     },
     {
-      "bytes": 197,
+      "bytes": 301,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/categorical-table-negative.json",
       "role": "measurement-result",
-      "sha256": "ce7664c5e20e3196f025c739690d65e1cc02af3e41743ea04e8c5facf27641db"
+      "sha256": "cd39dc0e20edb331499ec5e5f2c7bd0a94591c686b89f9f6d9c363472ae57dfd"
     },
     {
-      "bytes": 198,
+      "bytes": 246,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/categorical-table-positive.json",
       "role": "measurement-result",
-      "sha256": "a7f40a866e6718ddd15403fff1f85a44ec822b5cadbc3b6fca412a0a496016ed"
+      "sha256": "f374bd79f3cad6fb1b2bc128c4429a2807561ffba25051a1fb503fcf99a9a2b5"
     },
     {
       "bytes": 550,
@@ -1949,7 +1949,7 @@
       "sha256": "eb59cd50bf3afe3e8066cf64c5c6ea3bd95565c9ee0cccacb348dc559f83680c"
     },
     {
-      "bytes": 35,
+      "bytes": 89,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/scoped-2020-internal-overlaps.csv",
       "rendered_tables": [
@@ -1961,13 +1961,13 @@
               "line": 2,
               "metric_id": "table:scoped-2020-internal-overlaps.csv:2:record_count:-",
               "scale": 1,
-              "template": "summary,{value}"
+              "template": "summary,{value},,,,,"
             }
           ]
         }
       ],
       "role": "generated-table",
-      "sha256": "25b8bf23e187cb7f7006e4bb512f2ff2ad089e7cee01a0c361be23167252655c"
+      "sha256": "0258e158ee044695a9bd8e87ff915db06db5496ba40d302badd19da933cf644c"
     },
     {
       "bytes": 366609,
@@ -2030,7 +2030,7 @@
         }
       ],
       "role": "generated-table",
-      "sha256": "4226be6b750ee8f79c2709828e14ee630b3e6e1d3374349e40eb99ce3efeb286"
+      "sha256": "f5ade160dc9c7b5c179a21e98777ec9b2a90d80b0c3f847d0d1d652d0eacc316"
     },
     {
       "bytes": 4421,
@@ -2257,7 +2257,7 @@
           "line": 2,
           "metric_id": "table:scoped-2020-internal-overlaps.csv:2:record_count:-",
           "scale": 1,
-          "template": "summary,{value}"
+          "template": "summary,{value},,,,,"
         }
       ]
     },
