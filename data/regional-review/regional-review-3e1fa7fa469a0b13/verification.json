@@ -1,0 +1,49 @@
+{
+  "baseline_commit": "f9a1dfa98b664dcf322806c843e82ab29d2b7935",
+  "date": "2026-10-04 America/Los_Angeles",
+  "individual_scope_checks": {
+    "all_source_ids_unique_in_baseline_and_retained_release": true,
+    "assessment_rows": 30,
+    "classifications": {
+      "insufficient-evidence": 30
+    },
+    "multipart_subjects": 0,
+    "province_parent_counts": {
+      "Ağrı": 8,
+      "Hakkâri": 5,
+      "Iğdır": 4,
+      "Van": 13
+    },
+    "source_geometry_type": "all 30 Polygon"
+  },
+  "issue_scope": {
+    "count": 30,
+    "ids_equal_issue_body": true,
+    "issue_member_location_ids_sha256": "a1ae27720aaea5dc9d34b2cdd8dac7650c2ea40f77de45bfaec2053941a400ba"
+  },
+  "limits": [
+    "No authoritative, licensed current boundary geometry found for exact four provinces during this review.",
+    "Official dynamic roster HTML was not retained; source-register records date, restoration URL, exact inspected fact and unavailable hash honestly.",
+    "Reproduction and negative controls establish source-byte, membership and parent integrity only, not geographic correctness, source completeness or tier approval."
+  ],
+  "negative_control": {
+    "control": "temporary wrong expected source SHA-256",
+    "result": "passed; builder raised AssertionError on retained-source hash before parsing/writing outputs",
+    "temporary_file_removed": true
+  },
+  "ownership_scope_check": {
+    "branch": "geography/regional-review-3e1fa7fa469a0b13",
+    "owned_path": "data/regional-review/regional-review-3e1fa7fa469a0b13/",
+    "result": "passed on committed changes after commit; see PR/CI exact head",
+    "tool": "scripts/check-handoff-scope.mjs"
+  },
+  "positive_reproduction": {
+    "identical_output_sha256": {
+      "assessment.csv": "9308e417b61d582646a199b635e92ce9fc1e53f8afe307180a5e4e26314a0832",
+      "scope.json": "f7d27e3088bb0915a7fee169a55d68d62e312e56b6c830fb01384d324b390b2d"
+    },
+    "run_one_stdout": "{\"assessment_sha256\": \"9308e417b61d582646a199b635e92ce9fc1e53f8afe307180a5e4e26314a0832\", \"scope_sha256\": \"f7d27e3088bb0915a7fee169a55d68d62e312e56b6c830fb01384d324b390b2d\", \"source_features\": 973, \"source_sha256\": \"a88007de2cf14f14e06da390aab8861442c7a8332ef8e70865d78e0d9b549d78\", \"subjects\": 30}",
+    "run_two_stdout": "{\"assessment_sha256\": \"9308e417b61d582646a199b635e92ce9fc1e53f8afe307180a5e4e26314a0832\", \"scope_sha256\": \"f7d27e3088bb0915a7fee169a55d68d62e312e56b6c830fb01384d324b390b2d\", \"source_features\": 973, \"source_sha256\": \"a88007de2cf14f14e06da390aab8861442c7a8332ef8e70865d78e0d9b549d78\", \"subjects\": 30}",
+    "runs": 2
+  }
+}

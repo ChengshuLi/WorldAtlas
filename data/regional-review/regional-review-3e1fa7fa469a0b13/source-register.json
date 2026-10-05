@@ -1,0 +1,105 @@
+{
+  "baseline_commit": "f9a1dfa98b664dcf322806c843e82ab29d2b7935",
+  "follow_up_issues": [
+    75,
+    817,
+    874,
+    76
+  ],
+  "generated_outputs": {
+    "assessment.csv": "9308e417b61d582646a199b635e92ce9fc1e53f8afe307180a5e4e26314a0832",
+    "build_review.py": "82b979990e387845591d94aa482bfffe52f7ac29a188e1f3b4505f40843c9ae2",
+    "scope.json": "f7d27e3088bb0915a7fee169a55d68d62e312e56b6c830fb01384d324b390b2d",
+    "verification.json": "6ca54c5c1c752dcd0a1c2f2f444666bfa2a951be035a7bb8ee3be7e58ed41765"
+  },
+  "issue": 75,
+  "limitations": [
+    "The four official roster pages were inspected as live web representations; no raw dynamic-page bytes were retained, so no content hash is claimed for them.",
+    "Administrative names and district-office rosters do not establish legal boundaries, geometry, completeness, or atlas tier purpose.",
+    "The geoBoundaries source count mismatch is national and owned by existing issue #817."
+  ],
+  "packet": "regional-review:3e1fa7fa469a0b13",
+  "sources": [
+    {
+      "findings": {
+        "difference": 26,
+        "grouping_field": "shapeGroup=TUR; no immediate province parent code",
+        "metadata_admUnitCount": 999,
+        "source_feature_count": 973
+      },
+      "id": "gb:TUR:ADM2",
+      "license": "Open Data Commons Open Database License 1.0 (metadata)",
+      "metadata_path": "data/regional-review/regional-review-ef67318527f5f3a3/sources/geoBoundaries-TUR-ADM2-metaData.json",
+      "metadata_sha256": "ace87195676281a6b58bc822a275646b71dbdca42ca4b7445bc928730596fdc7",
+      "metadata_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/TUR/ADM2/geoBoundaries-TUR-ADM2.metaData.json",
+      "original_path": "data/regional-review/regional-review-ef67318527f5f3a3/sources/geoBoundaries-TUR-ADM2.geojson.gz",
+      "original_sha256": "a88007de2cf14f14e06da390aab8861442c7a8332ef8e70865d78e0d9b549d78",
+      "release_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "restoration_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/TUR/ADM2/geoBoundaries-TUR-ADM2.geojson",
+      "retrieved": "2026-10-04 America/Los_Angeles (prior packet)",
+      "role": "Turkish district boundaries (metadata role)",
+      "uncompressed_sha256": "8e7594ab12d916e3b93f920475a300c364dfb94a0e40bfa6d55f43aff0c7fd97",
+      "vintage": "2021"
+    },
+    {
+      "content_sha256": null,
+      "id": "agri-valiligi-protocol-roster",
+      "inspected_fact": "Lists Diyadin, Doğubayazıt, Eleşkirt, Hamur, Patnos, Taşlıçay and Tutak kaymakams; the Atlas Ağrı merkez record is the central district entry not represented as a separate district kaymakam in this table.",
+      "raw_bytes_retained": false,
+      "restoration": "Retrieve the official page anew; verify its updated date and the seven named district offices. The dynamic HTML response was not retained or hashed.",
+      "retrieved": "2026-10-04 America/Los_Angeles",
+      "role": "Current provincial protocol and district kaymakam roster (administrative names only)",
+      "url": "https://www.agri.gov.tr/agri-il-protokol-listesi"
+    },
+    {
+      "content_sha256": null,
+      "id": "van-valiligi-administrators",
+      "inspected_fact": "Lists all 13 Van district kaymakams, including all scoped district names: Bahçesaray, Başkale, Çaldıran, Çatak, Edremit, Erciş, Gevaş, Gürpınar, İpekyolu, Muradiye, Özalp, Saray and Tuşba.",
+      "raw_bytes_retained": false,
+      "restoration": "Retrieve the official administrators page anew and verify its district roster; the dynamic HTML response was not retained or hashed.",
+      "retrieved": "2026-10-04 America/Los_Angeles",
+      "role": "Current provincial district administrators (administrative names only)",
+      "url": "https://van.gov.tr/yoneticilerimiz"
+    },
+    {
+      "content_sha256": null,
+      "id": "igdir-valiligi-district-roster",
+      "inspected_fact": "The official page labels the list Iğdır İlçeleri and names Aralık, Karakoyunlu, Merkez and Tuzluca.",
+      "raw_bytes_retained": false,
+      "restoration": "Retrieve the official page anew and verify the Iğdır İlçeleri roster; the dynamic HTML response was not retained or hashed.",
+      "retrieved": "2026-10-04 America/Los_Angeles",
+      "role": "Current province district roster (administrative names only)",
+      "url": "https://www.igdir.gov.tr/"
+    },
+    {
+      "content_sha256": null,
+      "id": "hakkari-valiligi-district-roster",
+      "inspected_fact": "Official notices identify Merkez, Çukurca, Şemdinli, Yüksekova and Derecik as Hakkâri districts; the Valilik page labels its section Hakkari İlçeleri.",
+      "raw_bytes_retained": false,
+      "restoration": "Retrieve the official Valilik page and current official notices anew, confirm all five names, and retain only if reuse terms permit; current dynamic page bodies were not retained or hashed.",
+      "retrieved": "2026-10-04 America/Los_Angeles",
+      "role": "Current province district roster (administrative names only)",
+      "url": "https://www.hakkari.gov.tr/"
+    },
+    {
+      "content_sha256": null,
+      "id": "hgm-turkey-boundaries-terms",
+      "inspected_fact": "HGM says displayed province/district/village limits are indicatively derived for display, do not carry official status, and reuse/distribution is free only outside commercial activity with attribution.",
+      "raw_bytes_retained": false,
+      "restoration": "Reinspect the product page and terms. Do not retain/distribute its boundary download under this evidence packet; any future use requires separate license review and does not establish legal boundaries.",
+      "retrieved": "2026-10-04 America/Los_Angeles",
+      "role": "Official Turkish mapping agency product description and reuse terms (not a boundary source for this review)",
+      "url": "https://www.harita.gov.tr/urun/turkiye-mulki-idare-sinirlari/232"
+    },
+    {
+      "content_sha256": null,
+      "id": "agri-valiligi-provincial-center-context",
+      "inspected_fact": "The official notice refers to seven districts and the provincial center, supporting the distinction between Ağrı merkez and seven named district administrations; it does not describe the center boundary.",
+      "raw_bytes_retained": false,
+      "restoration": "Retrieve the official article anew; verify its date and wording. The live HTML response was not retained or hashed.",
+      "retrieved": "2026-10-04 America/Los_Angeles",
+      "role": "Provincial administrative context (not a boundary source)",
+      "url": "https://www.agri.gov.tr/agrida-meyve-yetistiriciligi-ve-gelistirmesi-projesi-hayata-gecti"
+    }
+  ]
+}
