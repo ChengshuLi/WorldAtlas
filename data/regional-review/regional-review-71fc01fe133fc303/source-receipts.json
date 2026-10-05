@@ -1,0 +1,165 @@
+{
+  "retrieved_at_utc": "2026-10-05T02:44:39Z",
+  "baseline_files": [
+    {
+      "path": "data/world-index.json",
+      "bytes": 944,
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "baseline_commit": "ec5c642f2986d0671488e5d2134e73b62f1de906"
+    },
+    {
+      "path": "data/hierarchy.json",
+      "bytes": 10164089,
+      "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "baseline_commit": "ec5c642f2986d0671488e5d2134e73b62f1de906"
+    },
+    {
+      "path": "data/granularity-review-evidence.json",
+      "bytes": 7371203,
+      "sha256": "8cdcaef1e62eb46b6e75141ee8825e8f4df987d8d70ec18e1ec5537a61114dc7",
+      "baseline_commit": "ec5c642f2986d0671488e5d2134e73b62f1de906"
+    },
+    {
+      "path": "data/macro-foundation/regional-handoffs.json.gz",
+      "bytes": 71286,
+      "sha256": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
+      "baseline_commit": "ec5c642f2986d0671488e5d2134e73b62f1de906"
+    },
+    {
+      "path": "data/macro-foundation/current-membership-inventory.json.gz",
+      "bytes": 2404397,
+      "sha256": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+      "baseline_commit": "ec5c642f2986d0671488e5d2134e73b62f1de906"
+    }
+  ],
+  "scope_file": {
+    "path": "data/regional-review/regional-review-71fc01fe133fc303/scope.json",
+    "bytes": 23529,
+    "sha256": "89a2fa28a042bf14ccb5ff48d70d882f0fe7e8c87f07ba2b7edc86a63523b82b",
+    "retrieved_from_issue": 73
+  },
+  "official_references": [
+    {
+      "name": "TurkStat, Türkiye in Statistics 2021, table 1.2",
+      "url": "https://www.tuik.gov.tr/media/announcements/istatistiklerle_turkiye_2021.pdf",
+      "retrieved_at_utc": "2026-10-05T02:44:09Z",
+      "bytes": 16476693,
+      "sha256": "c1d9181614e729bc219f229b101ca19a67b32936c3eaf85e58ca11b1ccc2047e",
+      "license_or_terms": "Reuse terms not stated in the retained publication; raw PDF not committed.",
+      "use_in_packet": "Inspected table says 81 provinces and 922 districts for 2019-2021; footnote excludes province centers/central districts from district count. Provides a national count convention, not a unit roster or geometry.",
+      "raw_copy_retained_in_git": false,
+      "restoration_instruction": "Retrieve from the exact URL, inspect its current version and reuse terms, and verify the whole-file SHA-256 before relying on it."
+    },
+    {
+      "name": "Law No. 5442, Provincial Administration Law, consolidated PDF",
+      "url": "https://www.mevzuat.gov.tr/mevzuatmetin/1.3.5442.pdf",
+      "retrieved_at_utc": "2026-10-05T02:44:28Z",
+      "bytes": 311484,
+      "sha256": "b827fd9a4800e1703394fc77229bb0aca393bee1afdd2260ebf63bf4113c5fc9",
+      "license_or_terms": "Reuse terms not stated; raw legal PDF not committed.",
+      "use_in_packet": "Article 1 establishes central-administration nesting from Turkey to provinces to districts (and then bucaks); Article 2 states that province/district establishment, abolition, name, attachment, center, and boundary changes are made by law. General hierarchy only; not a 2021 crosswalk.",
+      "raw_copy_retained_in_git": false,
+      "restoration_instruction": "Retrieve from the exact URL, inspect its current version and reuse terms, and verify the whole-file SHA-256 before relying on it."
+    },
+    {
+      "name": "Interior Ministry, Governors and District Governors live directory",
+      "url": "https://www.icisleri.gov.tr/valilikler",
+      "retrieved_at_utc": "2026-10-05T02:44:26Z",
+      "bytes": 509506,
+      "sha256": "81c2421251251aeb3da81ec4d231653bcc1aae7a23417b820ad7f647ef0750d3",
+      "license_or_terms": "Reuse terms not stated; raw current HTML not committed.",
+      "use_in_packet": "Current page describes information for 81 provincial governorships and 922 district governorships; current-vintage corroboration only, no 2021 roster.",
+      "raw_copy_retained_in_git": false,
+      "restoration_instruction": "Retrieve from the exact URL, inspect its current version and reuse terms, and verify the whole-file SHA-256 before relying on it."
+    },
+    {
+      "name": "TurkStat ABPRS 2021 metadata and bulletin",
+      "url": "https://veriportali.tuik.gov.tr/tr/press/45866/metadata",
+      "alternate_url": "https://veriportali.tuik.gov.tr/Bulten/Index?dil=2&p=45500",
+      "retrieved_at_utc": "2026-10-05",
+      "bytes": null,
+      "sha256": null,
+      "license_or_terms": "Not established; no original response retained.",
+      "use_in_packet": "Reference-date context states 2021 ABPRS reference date is 2021-12-31. Not a legal unit roster or boundary source.",
+      "raw_copy_retained_in_git": false,
+      "restoration_instruction": "Reopen the exact official TurkStat URLs and verify the reference date before reuse."
+    },
+    {
+      "name": "HGM 2022 administrative-boundary vector availability notice",
+      "url": "https://www.harita.gov.tr/haber/ulkemize-ait-il-ve-ilce-sinirlari-ile-il-ve-ilce-yerlesim-noktalarini-iceren-vektor-verilerle-il-ve-ilce-yuz-olcumleri-bilgileri-internet-sitemizin-indirilebilir-verilerdosyalar-kisminda-ucretsiz-olarak-kullanima-sunulmustur/195",
+      "published": "2022-12-15",
+      "retrieved_at_utc": "2026-10-05",
+      "bytes": null,
+      "sha256": null,
+      "license_or_terms": "Product reuse terms differ by HGM product; no current product copy was used.",
+      "use_in_packet": "HGM states the displayed province/district vector boundaries are indicative/display data and not official. This limits HGM as a legal boundary authority.",
+      "raw_copy_retained_in_git": false,
+      "restoration_instruction": "Open the HGM notice and linked product terms before any reuse."
+    },
+    {
+      "name": "TBMM official English translation of Constitution Article 126",
+      "url": "https://www5.tbmm.gov.tr/develop/owa/anayasaeng.maddeler?p3=126",
+      "retrieved_at_utc": "2026-10-05",
+      "bytes": null,
+      "sha256": null,
+      "license_or_terms": "No raw page retained.",
+      "use_in_packet": "Official Parliament page confirms provinces are divided into lower levels of administrative districts in the central-administration structure.",
+      "raw_copy_retained_in_git": false,
+      "restoration_instruction": "Restore the official page and verify current translation before reuse."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/regional-review-71fc01fe133fc303/district-assessments.json",
+      "bytes": 484489,
+      "sha256": "e18f32077a8c17f1ebb103c8927bf39f16998ef654e015c92576f249c30be1b6",
+      "reproduced_twice_identically": true
+    }
+  ],
+  "retained_source_files": [
+    {
+      "path": "data/regional-review/regional-review-c24563b50d8731b3/sources/geoboundaries-9469f09/geoBoundaries-TUR-ADM2.geojson",
+      "bytes": 16115778,
+      "sha256": "8e7594ab12d916e3b93f920475a300c364dfb94a0e40bfa6d55f43aff0c7fd97",
+      "upstream_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/TUR/ADM2/geoBoundaries-TUR-ADM2.geojson",
+      "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "upstream_retrieved_at_utc": "2026-10-05T01:22:49Z",
+      "license": "Open Data Commons Open Database License 1.0; OpenStreetMap contributors",
+      "source_description": "2021-referenced OSM-derived ADM2; updated 2023-01-19; built 2023-12-12; source metadata count 999",
+      "retained_from": "merged issue #72 packet; referenced at fresh-main baseline, no duplicate copy in issue #73"
+    },
+    {
+      "path": "data/regional-review/regional-review-c24563b50d8731b3/sources/geoboundaries-9469f09/geoBoundaries-TUR-ADM2-metaData.json",
+      "bytes": 812,
+      "sha256": "ace87195676281a6b58bc822a275646b71dbdca42ca4b7445bc928730596fdc7",
+      "upstream_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/TUR/ADM2/geoBoundaries-TUR-ADM2-metaData.json",
+      "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "upstream_retrieved_at_utc": "2026-10-05T01:22:50Z",
+      "license": "Metadata declares ODbL 1.0",
+      "source_description": "Provenance metadata for the 973-feature retained ADM2 file",
+      "retained_from": "merged issue #72 packet; referenced at fresh-main baseline, no duplicate copy in issue #73"
+    },
+    {
+      "path": "data/regional-review/regional-review-c24563b50d8731b3/sources/geoboundaries-9469f09/ADM1/geoBoundaries-TUR-ADM1.geojson",
+      "bytes": 10128401,
+      "sha256": "01697a1722cf62db3b5f4e78ae73e7972edae52d2254ccfffa9163fc6cdbc918",
+      "upstream_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/TUR/ADM1/geoBoundaries-TUR-ADM1.geojson",
+      "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "upstream_retrieved_at_utc": "2026-10-05T01:25:42Z",
+      "license": "Creative Commons Attribution-ShareAlike 2.0; OpenStreetMap contributors",
+      "source_description": "2021-referenced 81-province comparison layer; updated 2023-08-31; built 2023-12-12",
+      "retained_from": "merged issue #72 packet; referenced at fresh-main baseline, no duplicate copy in issue #73"
+    },
+    {
+      "path": "data/regional-review/regional-review-c24563b50d8731b3/sources/geoboundaries-9469f09/ADM1/geoBoundaries-TUR-ADM1-metaData.json",
+      "bytes": 791,
+      "sha256": "d83917dba5bcf4a54d7b07aa9c9c656becf6fd5bed7e58ddb19ea27df0d98a11",
+      "upstream_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/TUR/ADM1/geoBoundaries-TUR-ADM1-metaData.json",
+      "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "upstream_retrieved_at_utc": "2026-10-05T01:25:43Z",
+      "license": "Metadata declares CC BY-SA 2.0",
+      "source_description": "Provenance metadata for the 81-feature ADM1 layer",
+      "retained_from": "merged issue #72 packet; referenced at fresh-main baseline, no duplicate copy in issue #73"
+    }
+  ]
+}
