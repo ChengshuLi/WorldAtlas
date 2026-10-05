@@ -1,0 +1,35 @@
+{
+  "observed_at": "2026-10-05T07:12:32.284Z",
+  "primary_commit": "4a1fc6777fe766dca2c0698362a06f06a44f9344",
+  "worker_version": "f46f5cdd-58f5-41cd-abee-cb5b41c2106d",
+  "provider_deployment_id": "de99de3e-4dd1-4c01-9728-f3b29a979565",
+  "versions": [
+    {
+      "version_id": "f46f5cdd-58f5-41cd-abee-cb5b41c2106d",
+      "percentage": 100
+    }
+  ],
+  "assets": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "bytes": 462,
+      "sha256": "5fba1d5becd55c8aaa22a6bd917b2142d8ae4d59221f5d09bb60f63ee04a7b35"
+    },
+    {
+      "path": "assets/index-C3pmC4rP.css",
+      "status": 200,
+      "bytes": 31457,
+      "sha256": "3719753e6385f4d59f7271b56c6b439d40905c4777bc202cb05b17796ce1db39"
+    },
+    {
+      "path": "assets/index-D-52J2_Y.js",
+      "status": 200,
+      "bytes": 360425,
+      "sha256": "43670696440b787d6d07d2469f0bbbb4dc4fd94e9ff10053e7d0802206a71d02"
+    }
+  ],
+  "limits": [
+    "Bounded independent provider and anonymous asset readback during sequential isolated acceptance; no provider mutation or credential output."
+  ]
+}
