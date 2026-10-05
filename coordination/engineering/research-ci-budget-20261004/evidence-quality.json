@@ -1,0 +1,221 @@
+{
+  "version": 1,
+  "issue": 828,
+  "lane": "engineering",
+  "worker_id": "engineering-research-ci-main-20261004",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "ec5c642f2986d0671488e5d2134e73b62f1de906",
+    "files": [
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 22692,
+        "sha256": "c884a5a99edb63e927a5c7e8fa5a79cd890f2f031db06cc5ce5c1bc54d83c8af",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/integration-profile.mjs",
+        "bytes": 2279,
+        "sha256": "152d36ba548b95c00a1dc57d1e1c90822ce29d82de4297604f54b7de2a4bbfac",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/integration-proof.test.mjs",
+        "bytes": 11862,
+        "sha256": "6a0f397609ef873ed6b451a6399c30d63c4f65e3bc951d4876cc62ee6f67f82c",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/research-ci-budget-20261004/claim.json",
+      "bytes": 828,
+      "sha256": "a23e406b116e421d27fd500d9f2ba43d6a3a0f7042e82566bb43205a2e58dd45",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/research-ci-budget-20261004/feature-v1/claim.json",
+      "bytes": 828,
+      "sha256": "a23e406b116e421d27fd500d9f2ba43d6a3a0f7042e82566bb43205a2e58dd45",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/research-ci-budget-20261004/feature-v1/evidence-quality.json",
+      "bytes": 6471,
+      "sha256": "e1485c0eebe85184d8c11d5a84421e315bc0921f810ca243ac8e08614b59e10d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/research-ci-budget-20261004/feature-v1/negative-control.json",
+      "bytes": 302,
+      "sha256": "4909d680e47301c83eddcf9fd716172859e91e4fc90d1dfa8988899312278925",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/research-ci-budget-20261004/feature-v1/positive-control.json",
+      "bytes": 302,
+      "sha256": "8e2be1bdaad5b26c03737647a89b543c55ac13b0d57d5409a5f77387f325f5f6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/research-ci-budget-20261004/feature-v1/real-pr-823-profile.json",
+      "bytes": 3345,
+      "sha256": "38f1c87a001740ea772a1deaa4c09aa383a495a34f5e3213b6e8802bbf897a53",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/research-ci-budget-20261004/feature-v1/validation.txt",
+      "bytes": 1244,
+      "sha256": "c49e73296f1c028d8379bd3e577ff95de505bedfa8abafc906a90e1d61f28a27",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/research-ci-budget-20261004/negative-control.json",
+      "bytes": 238,
+      "sha256": "d046356df610bcef7c4e1336b74261a3fbdaf5013575cc050b431b0d8286d18e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/research-ci-budget-20261004/positive-control.json",
+      "bytes": 248,
+      "sha256": "365aaf104953921d2dc34d7ba2f156b89cc3dfcd6bb6b9c9ebaeaf30fdd0c45c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/research-ci-budget-20261004/real-pr-823-profile.json",
+      "bytes": 3345,
+      "sha256": "38f1c87a001740ea772a1deaa4c09aa383a495a34f5e3213b6e8802bbf897a53",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/research-ci-budget-20261004/validation.txt",
+      "bytes": 803,
+      "sha256": "b4ea15ba562e055785ccf836067f3bbe36b2857e9de130a55a11012a3703f422",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "bytes": 23242,
+      "sha256": "c56bd371e61c4a75f51ce4b735b3acf6b12a49832097b73d3694ed2a2f25f868",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/integration-profile.mjs",
+      "bytes": 2448,
+      "sha256": "934eb9f1d10d57deedf34cf8f739e7f78ee7d91896420aa1f96b532b3e31ce62",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/integration-proof.test.mjs",
+      "bytes": 13075,
+      "sha256": "e59809c11453491f02a8cf64f7ed9ff5dc9b0f353afb51856263317bbaa8dc24",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "ci-control-selection",
+      "kind": "code",
+      "description": "Focused control tests verify selector applicability, conservative application/runtime fallback and package scope contracts. Archived feature evidence is explicitly labeled.",
+      "software": "Node 24; GNU tar 1.35",
+      "units": "test applicability"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "INTEGRATION_PROFILE=evidence INTEGRATION_SHARD=0 node scripts/run-integration-tests.mjs",
+    "node scripts/evidence-quality.mjs coordination/engineering/research-ci-budget-20261004/evidence-quality.json",
+    "git diff --check"
+  ],
+  "validation": [
+    {
+      "method_id": "ci-control-selection",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/research-ci-budget-20261004/positive-control.json"
+    },
+    {
+      "method_id": "ci-control-selection",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/research-ci-budget-20261004/negative-control.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/research-ci-budget-20261004/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/research-ci-budget-20261004/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/research-ci-budget-20261004/feature-v1/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/research-ci-budget-20261004/feature-v1/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/research-ci-budget-20261004/feature-v1/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/research-ci-budget-20261004/feature-v1/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/research-ci-budget-20261004/feature-v1/real-pr-823-profile.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/research-ci-budget-20261004/feature-v1/validation.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/research-ci-budget-20261004/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/research-ci-budget-20261004/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/research-ci-budget-20261004/real-pr-823-profile.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/research-ci-budget-20261004/validation.txt",
+      "status": "added"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "status": "modified",
+      "original_sha256": "c884a5a99edb63e927a5c7e8fa5a79cd890f2f031db06cc5ce5c1bc54d83c8af"
+    },
+    {
+      "path": "scripts/integration-profile.mjs",
+      "status": "modified",
+      "original_sha256": "152d36ba548b95c00a1dc57d1e1c90822ce29d82de4297604f54b7de2a4bbfac"
+    },
+    {
+      "path": "test/integration-proof.test.mjs",
+      "status": "modified",
+      "original_sha256": "6a0f397609ef873ed6b451a6399c30d63c4f65e3bc951d4876cc62ee6f67f82c"
+    }
+  ]
+}
