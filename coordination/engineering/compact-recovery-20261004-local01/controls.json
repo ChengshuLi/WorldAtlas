@@ -1,0 +1,21 @@
+{
+  "method_id": "compact-native-recovery",
+  "kind": "code",
+  "outcome": "passed",
+  "positive_controls": [
+    "Original window, reservation and encrypted envelope continue passing",
+    "Exact compact-only base2 marker and Cloudflare delivery/window pass",
+    "Physical projection includes raw evidence and native dictionary keys"
+  ],
+  "negative_controls": [
+    "Unknown/transitional profile and migration inventory rejected",
+    "Changed public/private pins and counts rejected",
+    "Unsettled/unclean/wrong-delivery records and changed marker rejected",
+    "Public mutations not returning read-only rejection fail",
+    "Changed physical digest, sequence position and view/function ACL inventories rejected"
+  ],
+  "limits": [
+    "Local unit controls use isolated fixture objects; native PostgreSQL fixture still pending",
+    "No current production capture/restore/recipient-decrypt proof from these source tests"
+  ]
+}

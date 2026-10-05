@@ -1,0 +1,7 @@
+# Compact native recovery compatibility
+
+Issue #851 owns source compatibility and isolated fixtures. This change does not certify a new production backup or close parent #51. Original backup custody and all historical receipts remain unchanged.
+
+The original profile remains strict. The compact-only base2 profile checks exact reviewed public/private catalogs, forward registry contracts, logical raw memberships, every private physical table, dictionary sequence state and table/view/function/sequence owner ACLs. Unknown and transitional profiles fail closed. Cloudflare windows bind the real settled delivery and one native recovery operation, reread the actual public marker and reject public mutations at start/end, retaining historical Site windows without fabricated identity.
+
+Focused unit and encryption controls passed locally. The native fixture exercises original and compact dump/isolated restore, whitespace-distinct raw JSON, private ACL/sequence corruption, original-retention rejection, session lock loss, named-client cleanup and truncated archives. Its native execution is still pending at this initial draft; no native success or production-scale acceptance is claimed here. Native results will be retained before review/integration. Source sessions remain read-only; native fixture writes stay in network-none disposable containers. No billing, restore-window, production data, R2 or website deployment changes.

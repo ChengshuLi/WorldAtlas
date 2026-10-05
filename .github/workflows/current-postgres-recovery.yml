@@ -10,6 +10,7 @@ on:
 permissions:
   contents: read
   issues: read
+  deployments: read
 concurrency:
   group: neon-storage-owner-maintenance
   cancel-in-progress: false

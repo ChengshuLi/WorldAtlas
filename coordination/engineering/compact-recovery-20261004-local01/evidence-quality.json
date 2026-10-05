@@ -1,0 +1,202 @@
+{
+  "version": 1,
+  "issue": 851,
+  "lane": "engineering",
+  "worker_id": "engineering-compact-recovery-20261004-local01",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "f92b1774aedcaaaf72ac0fe4cc45857dd641d7d1",
+    "files": [
+      {
+        "path": ".github/workflows/current-postgres-recovery.yml",
+        "bytes": 1900,
+        "sha256": "f894ccf0f6ab1e0c58e6c75629e9e0c199b2526688b670d6594563e05c9f5df8",
+        "hash_kind": "file-bytes",
+        "role": "previous-implementation"
+      },
+      {
+        "path": ".github/workflows/native-recovery-fixture.yml",
+        "bytes": 803,
+        "sha256": "290f52ad0c5952fe8b10173e199cc545182f6b6bbcb059ccbd9ab7fcba357fc1",
+        "hash_kind": "file-bytes",
+        "role": "previous-implementation"
+      },
+      {
+        "path": "docs/CURRENT_POSTGRES_RECOVERY.md",
+        "bytes": 11208,
+        "sha256": "d53c7ae838792d85dbada9c83c364795443b189240d15ab52906c83230e06e7d",
+        "hash_kind": "file-bytes",
+        "role": "previous-implementation"
+      },
+      {
+        "path": "scripts/current-postgres-recovery.mjs",
+        "bytes": 42042,
+        "sha256": "bd6024257aaa0a8b8571f97fa97cadb08a0cd84fd3611b81cc7e55c90d93fdc8",
+        "hash_kind": "file-bytes",
+        "role": "previous-implementation"
+      },
+      {
+        "path": "scripts/test-current-postgres-recovery-native.mjs",
+        "bytes": 10378,
+        "sha256": "41034d3fd018f7eb02217c878c55de1673bf057a2b26c6fb1ae09ead7248423a",
+        "hash_kind": "file-bytes",
+        "role": "previous-implementation"
+      },
+      {
+        "path": "test/current-postgres-recovery.test.mjs",
+        "bytes": 18678,
+        "sha256": "0a18ecb7b13c9725ef6251546f2fd96d10d964d4df53f13b934e13708854c0c4",
+        "hash_kind": "file-bytes",
+        "role": "previous-implementation"
+      }
+    ],
+    "pins": {},
+    "pin_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": ".github/workflows/current-postgres-recovery.yml",
+      "bytes": 1920,
+      "sha256": "3c6283b2a504c16659d8815e10b83dd46002eb0805b891db9d60d83499f9970d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": ".github/workflows/native-recovery-fixture.yml",
+      "bytes": 848,
+      "sha256": "741b5478a5eedee4ece651ed48a8d39c219d5e793a088328ff5650f145c1e127",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/CURRENT_POSTGRES_RECOVERY.md",
+      "bytes": 13508,
+      "sha256": "c7e65d1ac68605f6ba148420a78af83025b8cca04ab12f50409040231a3db1f1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/current-postgres-recovery.mjs",
+      "bytes": 48187,
+      "sha256": "d2a462d082a38be289082d29ca9c3cf7bd111ee01d2afdd683d00c76be646213",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/test-current-postgres-recovery-native.mjs",
+      "bytes": 17155,
+      "sha256": "d5b9eb7358f615160c755bc8a75a5db7bddfe417f5fc6f2ae1d3798d841188dc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/current-postgres-recovery.test.mjs",
+      "bytes": 24271,
+      "sha256": "2b96e135a6457c545d5fa26f8849b4ad34bf47a6dc9aec8777eeccb86d08f8dc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/compact-recovery-profile.mjs",
+      "bytes": 8849,
+      "sha256": "fdb179807cf3ced1fe9fcaca4f83a0fd1016118b00785f3ba91f54c1713d3b37",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/compact-recovery-profile.test.mjs",
+      "bytes": 3390,
+      "sha256": "f0ac8015b5ab18806f26d45d70fc003221d3962d35b558f71b8557ff94a68ee2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/compact-recovery-20261004-local01/README.md",
+      "bytes": 1433,
+      "sha256": "31c5bfbc21fc5e8d5a0dada6d3e71d9efc8191e255e9a945b1182f229e2d8163",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/compact-recovery-20261004-local01/controls.json",
+      "bytes": 935,
+      "sha256": "82bb3b6a6e62b7b805ccaaee769fbdf8ad01e8cd0bdd7bcc33f032e06a6d6151",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "compact-native-recovery",
+      "kind": "code",
+      "description": "Exact known compact/native recovery profile, full raw/ACL/sequence inventories and explicit current-host attestation while retaining legacy backup windows.",
+      "software": "Node24 and pinned native PostgreSQL18 fixture",
+      "units": "Source correctness controls; not production recovery certification"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "compact-native-recovery",
+      "kind": "code",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/compact-recovery-20261004-local01/controls.json"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "change_receipts": [
+    {
+      "path": ".github/workflows/current-postgres-recovery.yml",
+      "status": "modified",
+      "original_sha256": "f894ccf0f6ab1e0c58e6c75629e9e0c199b2526688b670d6594563e05c9f5df8"
+    },
+    {
+      "path": ".github/workflows/native-recovery-fixture.yml",
+      "status": "modified",
+      "original_sha256": "290f52ad0c5952fe8b10173e199cc545182f6b6bbcb059ccbd9ab7fcba357fc1"
+    },
+    {
+      "path": "docs/CURRENT_POSTGRES_RECOVERY.md",
+      "status": "modified",
+      "original_sha256": "d53c7ae838792d85dbada9c83c364795443b189240d15ab52906c83230e06e7d"
+    },
+    {
+      "path": "scripts/current-postgres-recovery.mjs",
+      "status": "modified",
+      "original_sha256": "bd6024257aaa0a8b8571f97fa97cadb08a0cd84fd3611b81cc7e55c90d93fdc8"
+    },
+    {
+      "path": "scripts/test-current-postgres-recovery-native.mjs",
+      "status": "modified",
+      "original_sha256": "41034d3fd018f7eb02217c878c55de1673bf057a2b26c6fb1ae09ead7248423a"
+    },
+    {
+      "path": "test/current-postgres-recovery.test.mjs",
+      "status": "modified",
+      "original_sha256": "0a18ecb7b13c9725ef6251546f2fd96d10d964d4df53f13b934e13708854c0c4"
+    },
+    {
+      "path": "scripts/compact-recovery-profile.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/compact-recovery-profile.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-recovery-20261004-local01/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-recovery-20261004-local01/controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/compact-recovery-20261004-local01/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "node --test test/compact-recovery-profile.test.mjs test/current-postgres-recovery.test.mjs test/recovery-backup-envelope.test.mjs",
+    "node scripts/test-current-postgres-recovery-native.mjs"
+  ]
+}
