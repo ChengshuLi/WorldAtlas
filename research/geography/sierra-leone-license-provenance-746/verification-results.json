@@ -1,0 +1,22 @@
+{
+  "equal_runs": true,
+  "identity_preservation": "all 12 subject IDs, names, and direct parent IDs match the pinned canonical partition",
+  "kind": "source",
+  "limits": [
+    "Metadata-declared licensing is not independently adjudicated.",
+    "No boundary or regional approval is established."
+  ],
+  "method_id": "country-license-provenance",
+  "negative_controls": {
+    "foreign_country_metadata_rejected": true,
+    "injected_togo_license_rejected_for_sle": true
+  },
+  "outcome": "passed",
+  "run_one_sha256": "df8144b83c788a6236cc19b04a61fc78728182294d03660e7b41cd8a5e43186f",
+  "run_two_sha256": "df8144b83c788a6236cc19b04a61fc78728182294d03660e7b41cd8a5e43186f",
+  "scope": {
+    "sierra_leone_subjects": 12,
+    "togo_context_rows": 37
+  },
+  "version": 1
+}
