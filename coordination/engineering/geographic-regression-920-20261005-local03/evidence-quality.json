@@ -286,22 +286,43 @@
   "sources": [],
   "outputs": [
     {
+      "path": "coordination/engineering/geographic-regression-920-20261005-local03/controls-v2/negative-control.json",
+      "bytes": 921,
+      "sha256": "f421b4d88818237cb03046e4117054ac114be2559f9749f72161f0753bf84c54",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/geographic-regression-920-20261005-local03/controls-v2/positive-control.json",
+      "bytes": 1495,
+      "sha256": "18325932841a3dd3aa98a97f369a37546d65635a623b279e6c15faa9c428f999",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/geographic-regression-920-20261005-local03/controls-v2/results.json",
+      "bytes": 1598,
+      "sha256": "11ce7dbf30882571c5fb9b9c9a066e6c09b7a4d33958e560b7e663da22695413",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "coordination/engineering/geographic-regression-920-20261005-local03/controls/negative-control.json",
       "bytes": 921,
       "sha256": "253fe7b4c7ae6706456cddbddf0cad28e6bc0ccb1cd73dffabef37256f4db8cd",
-      "hash_kind": "file-bytes"
+      "hash_kind": "file-bytes",
+      "role": "archived-review-receipt"
     },
     {
       "path": "coordination/engineering/geographic-regression-920-20261005-local03/controls/positive-control.json",
       "bytes": 1364,
       "sha256": "27e3db216737eeedd3e09811e1441248ac7d396d8e04d800ef0a1e3ffa05683a",
-      "hash_kind": "file-bytes"
+      "hash_kind": "file-bytes",
+      "role": "archived-review-receipt"
     },
     {
       "path": "coordination/engineering/geographic-regression-920-20261005-local03/controls/results.json",
       "bytes": 1467,
       "sha256": "8efa6e3d01797bf229fd35adc82d845fdaefaf76644449aed0bf3313f55d8d20",
-      "hash_kind": "file-bytes"
+      "hash_kind": "file-bytes",
+      "role": "archived-review-receipt"
     },
     {
       "path": "coordination/engineering/geographic-regression-920-20261005-local03/normalization-control.json",
@@ -310,10 +331,17 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "coordination/engineering/geographic-regression-920-20261005-local03/reproducibility-v2.json",
+      "bytes": 717,
+      "sha256": "8ba62ce4dfd22020a72dfd2dc49bc89807d521c24d619426b401fddd59f16cc1",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "coordination/engineering/geographic-regression-920-20261005-local03/reproducibility.json",
       "bytes": 585,
       "sha256": "0ddae9c2321604d9df4132ba6b0edd5d5de8685b475dec6e730ca8cd52892324",
-      "hash_kind": "file-bytes"
+      "hash_kind": "file-bytes",
+      "role": "archived-review-receipt"
     },
     {
       "path": "coordination/engineering/geographic-regression-920-20261005-local03/unchanged-main.json",
@@ -323,26 +351,26 @@
     },
     {
       "path": "docs/GEOGRAPHIC_REGRESSION.md",
-      "bytes": 3710,
-      "sha256": "1a874070ae7ec9f7fa6538b46ba614cd2edfbf87b7a7d03f076da72990dec0d4",
+      "bytes": 3922,
+      "sha256": "c7b30e38fb8761366841e092e126b262a4a0dc1345c5723f50c7e3ac14be9506",
       "hash_kind": "file-bytes"
     },
     {
       "path": "scripts/check-geographic-regression.py",
-      "bytes": 13402,
-      "sha256": "2f3bdf856cc0928e22fadd12a7a9402363ce22502c0f4376285f3695689fd591",
+      "bytes": 13813,
+      "sha256": "84e58e6ce2b81dca64d4cc4e25e98d899325345447d3bd5ce8306d1474bf8d9e",
       "hash_kind": "file-bytes"
     },
     {
       "path": "test/geographic-regression.py",
-      "bytes": 16138,
-      "sha256": "6fd83e28f8e93e0c56a5d02958b3066b1d4a0103d5583c9da937f4a81248a910",
+      "bytes": 17833,
+      "sha256": "2e8dcee007aa7a17ab05daafce4614b7cd0d4bc74b9620b68deb5b5af60432c5",
       "hash_kind": "file-bytes"
     },
     {
       "path": "test/geographic-regression.test.mjs",
       "bytes": 510,
-      "sha256": "a591e08b6a97b864dcb91c8a1d3556904f18920d199aa8d313b22c7a91d7c04f",
+      "sha256": "f379c1f355f0b1d0492515e543da55b0dd67172b5edcdd04694d50b019c482af",
       "hash_kind": "file-bytes"
     }
   ],
@@ -363,7 +391,7 @@
   "metrics": [
     {
       "id": "controls",
-      "value": 18,
+      "value": 20,
       "unit": "tests",
       "vintage": "baseline",
       "input_sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
@@ -389,7 +417,7 @@
   "metric_bindings": [
     {
       "metric_id": "controls",
-      "path": "coordination/engineering/geographic-regression-920-20261005-local03/controls/results.json",
+      "path": "coordination/engineering/geographic-regression-920-20261005-local03/controls-v2/results.json",
       "json_pointer": "/tests"
     },
     {
@@ -406,7 +434,7 @@
   "summaries": [
     {
       "metric_id": "controls",
-      "value": 18,
+      "value": 20,
       "unit": "tests"
     },
     {
@@ -437,9 +465,22 @@
     "node --test test/geographic-regression.test.mjs",
     "python test/geographic-regression.py --receipts NEW_CONTROL_DIRECTORY",
     "python scripts/check-geographic-regression.py --baseline 7e6296f4222aee680f6d5ec9279b8d982a9779a5 --candidate 7e6296f4222aee680f6d5ec9279b8d982a9779a5 --out NEW_REPORT.json",
-    "Baseline normalization reproduction: import the detector, call snapshot(repo, baseline), then prepare(snapshot[\"features\"], \"baseline\"); preserve location count, errors and the actual snapshot input_files, as in normalization-control.json."
+    "Baseline normalization reproduction: import the detector, call snapshot(repo, baseline), then prepare(snapshot[\"features\"], \"baseline\"); preserve location count, errors and the actual snapshot input_files, as in normalization-control.json.",
+    "Current control vintage is controls-v2; prior controls/reproducibility are archived review history. Unchanged inventories must validate geometry before success."
   ],
   "change_receipts": [
+    {
+      "path": "coordination/engineering/geographic-regression-920-20261005-local03/controls-v2/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-regression-920-20261005-local03/controls-v2/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-regression-920-20261005-local03/controls-v2/results.json",
+      "status": "added"
+    },
     {
       "path": "coordination/engineering/geographic-regression-920-20261005-local03/controls/negative-control.json",
       "status": "added"
@@ -458,6 +499,10 @@
     },
     {
       "path": "coordination/engineering/geographic-regression-920-20261005-local03/normalization-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-regression-920-20261005-local03/reproducibility-v2.json",
       "status": "added"
     },
     {
@@ -490,19 +535,19 @@
       "method_id": "geographic-regression",
       "kind": "positive-control",
       "outcome": "passed",
-      "evidence_path": "coordination/engineering/geographic-regression-920-20261005-local03/controls/positive-control.json"
+      "evidence_path": "coordination/engineering/geographic-regression-920-20261005-local03/controls-v2/positive-control.json"
     },
     {
       "method_id": "geographic-regression",
       "kind": "negative-control",
       "outcome": "passed",
-      "evidence_path": "coordination/engineering/geographic-regression-920-20261005-local03/controls/negative-control.json"
+      "evidence_path": "coordination/engineering/geographic-regression-920-20261005-local03/controls-v2/negative-control.json"
     },
     {
       "method_id": "geographic-regression",
       "kind": "reproducibility",
       "outcome": "passed",
-      "evidence_path": "coordination/engineering/geographic-regression-920-20261005-local03/reproducibility.json"
+      "evidence_path": "coordination/engineering/geographic-regression-920-20261005-local03/reproducibility-v2.json"
     }
   ]
 }

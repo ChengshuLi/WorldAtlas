@@ -129,6 +129,30 @@ class RegressionControls(unittest.TestCase):
         self.assertEqual(error['vintage'], 'candidate')
         self.assertEqual(error['original_geometry'], {'type': 'Polygon'})
 
+    def test_unchanged_invalid_geometry_is_not_a_successful_fast_path(self):
+        invalid = features(land=Polygon([(0, 0), (1, 1), (0, 1), (1, 0), (0, 0)]))
+        result = gate.compare(invalid, invalid)
+        self.assertEqual(result['changed_location_ids'], [])
+        self.assertEqual(result['status'], 'blocked-invalid-or-unsupported-geometry')
+        self.assertIsNone(result['regressions'])
+        self.assertEqual({error['vintage'] for error in result['geometry_errors']}, {'baseline', 'candidate'})
+
+    def test_same_invalid_commit_cli_fails_and_reports_original_location(self):
+        with tempfile.TemporaryDirectory(prefix='geography-gate-control-') as directory:
+            root = pathlib.Path(directory).resolve()
+            invalid = features(land=Polygon([(0, 0), (1, 1), (0, 1), (1, 0), (0, 0)]))
+            commit = self.fixture(root, invalid)
+            out = root / 'result.json'
+            result = subprocess.run([sys.executable, str(ROOT / 'scripts/check-geographic-regression.py'),
+                '--repo', str(root), '--baseline', commit, '--candidate', commit, '--out', str(out)], capture_output=True, text=True)
+            self.assertEqual(result.returncode, 1, result.stderr)
+            report = json.loads(out.read_bytes())
+            self.assertEqual(report['status'], 'blocked-invalid-or-unsupported-geometry')
+            for vintage in ['baseline', 'candidate']:
+                self.assertEqual(report[vintage]['locations'][0]['location_id'], 'land')
+                self.assertEqual(gate.canonical_json(report[vintage]['locations'][0]['original_geometry']),
+                                 gate.canonical_json(invalid['land']['geometry']))
+
     def test_unpinned_commit_is_rejected_before_git_read(self):
         for commit in ['HEAD', '--output=bad', '0' * 39]:
             with self.assertRaisesRegex(ValueError, 'immutable 40-character'):

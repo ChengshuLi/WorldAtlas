@@ -30,6 +30,10 @@ areas are compared in source-coordinate space; the report labels square degrees
 explicitly and does not describe them as square metres. Unsupported geometry is
 reported rather than silently reinterpreted.
 
+An unchanged inventory still passes geometry validation before success. Already
+validated baseline shapes can be reused for byte-identical candidate geometries;
+invalid shapes are never reused as valid results.
+
 For changed footprints, all locations enter the neighbor index. The detector
 compares the union of affected baseline and candidate locations, reporting each
 piece of previously covered geometry that becomes uncovered. It also compares

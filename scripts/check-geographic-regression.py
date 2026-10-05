@@ -107,13 +107,16 @@ def polygon_parts(geometry):
             yield from polygon_parts(member)
 
 
-def prepare(features, vintage):
+def prepare(features, vintage, validated=None, original=None):
     result, errors = {}, []
     for identity in sorted(features):
         try:
             # Shared versioned method unwraps short edges, aligns holes and splits
             # the date line. Unsupported/invalid geometry cannot be MakeValid'd.
-            result[identity] = canonical_land(shape(features[identity]['geometry']))
+            if validated is not None and identity in validated and identity in original and geometry_hash(features[identity]) == geometry_hash(original[identity]):
+                result[identity] = validated[identity]
+            else:
+                result[identity] = canonical_land(shape(features[identity]['geometry']))
         except (ValueError, shapely.errors.ShapelyError, TypeError, KeyError, AttributeError) as error:
             errors.append({'vintage': vintage, 'location_id': identity, 'reason': str(error),
                            'original_geometry': features[identity]['geometry']})
@@ -150,10 +153,10 @@ def compare(before_features, after_features):
     base = {'changed_location_ids': changed, 'affected_neighbor_ids': [],
             'geometry_errors': [], 'findings': {'type': 'FeatureCollection', 'features': []},
             'coverage_gained': {'type': 'FeatureCollection', 'features': []}}
-    if not changed:
-        return {**base, 'status': 'no-footprint-change', 'regressions': 0}
     before, before_errors = prepare(before_features, 'baseline')
-    after, after_errors = prepare(after_features, 'candidate')
+    if not changed and not before_errors:
+        return {**base, 'status': 'no-footprint-change', 'regressions': 0}
+    after, after_errors = prepare(after_features, 'candidate', before, before_features)
     errors = before_errors + after_errors
     if errors:
         return {**base, 'status': 'blocked-invalid-or-unsupported-geometry',
@@ -207,7 +210,8 @@ def inspect(repo, baseline_commit, candidate_commit):
     candidate = baseline if baseline_commit == candidate_commit else snapshot(repo, candidate_commit)
     result = compare(baseline['features'], candidate['features'])
     for vintage, snap in [('baseline', baseline), ('candidate', candidate)]:
-        identities = sorted(set(result['changed_location_ids']) | set(result['affected_neighbor_ids']))
+        identities = sorted(set(result['changed_location_ids']) | set(result['affected_neighbor_ids']) |
+                            {error['location_id'] for error in result['geometry_errors']})
         result[vintage] = {key: snap[key] for key in ['commit', 'files', 'pins']}
         result[vintage]['locations'] = [{'location_id': i, 'containing_file': snap['containing'][i],
             'original_geometry_sha256': geometry_hash(snap['features'][i]),
