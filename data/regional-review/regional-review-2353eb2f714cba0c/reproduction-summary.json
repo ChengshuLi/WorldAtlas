@@ -1,0 +1,74 @@
+{
+  "geometry_method": {
+    "version": "worldatlas-evidence-geometry-v1",
+    "axis_order": "longitude-latitude",
+    "crs": "EPSG:4326",
+    "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+    "area_units": "m2",
+    "distance_method": "WGS84 inverse geodesic",
+    "distance_units": "m"
+  },
+  "scope_ids": 160,
+  "issue_scope_member_ids_sha256": "e03b2b567db7291d721e86fb706d66a91f47c3d001835ec932aa6d8f79ddd0b6",
+  "atlas_rows": 160,
+  "source_members_in_scope": 161,
+  "crosswalk_rows": 161,
+  "mapped_to_census2018": 161,
+  "source_to_2026_tiger_iou_below_0_95": 63,
+  "geoboundaries_to_2018_cartographic_iou_below_0_95": 34,
+  "counts_by_state_2018": {
+    "DE": 3,
+    "DC": 1,
+    "MD": 24,
+    "VA": 133
+  },
+  "counts_by_state_2026": {
+    "DE": 3,
+    "DC": 1,
+    "MD": 24,
+    "VA": 133
+  },
+  "underlying_tiger_lsadc_counts": {
+    "06": 121,
+    "25": 39,
+    "00": 1
+  },
+  "south_atlantic_current_units": 588,
+  "source_geoboundaries_multipolygon_features_in_scope": 7,
+  "atlas_rows_with_multiple_source_parts": 8,
+  "atlas_multipolygon_rows": 5,
+  "sibling_issue_area_member_counts": {
+    "428": 159,
+    "429": 268,
+    "430": 160
+  },
+  "sibling_issue_member_id_intersections": {
+    "428-429": 0,
+    "428-430": 0,
+    "429-430": 0
+  },
+  "regional_atlas_units": 587,
+  "current_census_units": 588,
+  "duplicate_names": {
+    "Baltimore": [
+      "24005",
+      "24510"
+    ],
+    "Fairfax": [
+      "51600",
+      "51059"
+    ],
+    "Franklin": [
+      "51620",
+      "51067"
+    ],
+    "Richmond": [
+      "51159",
+      "51760"
+    ],
+    "Roanoke": [
+      "51770",
+      "51161"
+    ]
+  }
+}
