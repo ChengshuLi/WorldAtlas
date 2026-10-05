@@ -12,5 +12,6 @@ test('camera smoothing is time based, bounded and converges without a final snap
   assert.ok(Math.abs(one-two)<1e-12);
   assert.ok(one>2&&one<8);
   assert.ok(nextZoom(8,2,16)<8);
+  assert.equal(nextZoom(2,8,-1),2);
   assert.equal(nextZoom(2,2.0001,16),2.0001);
 });

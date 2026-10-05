@@ -5,7 +5,7 @@ export function wheelPixels(event, height) {
 }
 
 export function nextZoom(current, target, elapsed) {
-  const next = current + (target - current) * (1 - Math.exp(-elapsed / 45));
+  const next = current + (target - current) * (1 - Math.exp(-Math.max(0,elapsed) / 45));
   return Math.abs(target - next) < 0.001 ? target : next;
 }
 
