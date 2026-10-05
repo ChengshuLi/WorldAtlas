@@ -20,7 +20,9 @@ def main():
     candidate, proof = build_candidate(component, current, sources)
     assert candidate['IRN'].equals(box(0, 0, 1.5, 1))
     assert candidate['PAK'].equals(box(1.5, 0, 3, 1))
-    assert proof['candidate_covers_entire_component'] and proof['new_neighbor_overlap']['empty']
+    assert proof['candidate_covers_entire_component']
+    assert not proof['new_neighbor_overlap']['positive_native_coordinate_area_flag']
+    assert shape(proof['new_neighbor_overlap']['geometry']).geom_type == 'LineString'
     checks.append('bilateral source intersections close known full component')
     for country in current:
         assert proof['neighbors'][country]['lost_existing_coverage']['empty']
