@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "issue": 451,
+  "assessed_at": "2026-10-05",
+  "scope_ids_sha256": "10b58b246ff29fa56cb5f8f91105042f87b5d4fb72c297f4afbd09f85e6401c6",
+  "scope_count": 40,
+  "full_area_id": "framework:area:yunnan:549da74775b1",
+  "full_area_inventory_count": 125,
+  "owned_area_members": 40,
+  "area_assessment": {
+    "disposition": "insufficient-evidence",
+    "supported_role": "Yunnan is represented in the retained Natural Earth 2022-vintage Admin-1 table as a first-order Province grouped in that dataset's Southwest China region. The 2025 Yunnan Civil Affairs roster independently identifies the four scoped children as prefecture-level jurisdictions within Yunnan. This supports a candidate area-purpose interpretation in which the Yunnan area groups province-level territory above prefecture-level provinces.",
+    "not_established": [
+      "That the Atlas six-tier area/province distinction is the intended or correct custom semantic tier for Yunnan.",
+      "That all 125 frozen Atlas members are a complete or current representation of Yunnan's territory.",
+      "That the source polygons or union agree with official Yunnan boundaries, or that all islands/disconnected parts are represented.",
+      "That the 2017 source's Yunnan feature roster is current: official Yunnan reports 129 county-level units at 2025-09-30, while the frozen inventory and 2017 layer contain 125. This is a dated cross-vintage reconciliation signal only, not proof that four territories are omitted."
+    ],
+    "neighboring_granularity": {
+      "source_defined_region": "Natural Earth Admin-1, version 5.1.1 as stated in its retained README, attributes five first-order China units to Southwest China: Chongqing Municipality, Guizhou Province, Sichuan Province, Tibet Autonomous Region, and Yunnan Province.",
+      "interpretation": "This is coherent source-defined first-order grouping with different first-order legal types. Natural Earth describes its Admin-1 product as a generalized/de facto reference; it does not establish the Atlas macro convention or current legal boundaries.",
+      "evidence_reference": "sources/pr2-source-access-register.json#natural-earth-admin1-southwest-china"
+    },
+    "evidence_references": [
+      "sources/pr2-source-access-register.json#natural-earth-admin1-southwest-china",
+      "sources/pr2-source-access-register.json#yunnan-civil-affairs-administrative-setup",
+      "sources/pr2-source-access-register.json#yunnan-local-administrative-code-standards-release"
+    ]
+  },
+  "parent_assessments": [
+    {
+      "id": "framework:province:honghe-hani-and-yi-autonomous-prefecture:bf2f208cb205",
+      "name": "Honghe Hani and Yi Autonomous Prefecture",
+      "atlas_owned_member_count": 13,
+      "official_2025_count": 13,
+      "official_2025_composition": "4 county-level cities, 6 counties, 3 autonomous counties",
+      "disposition": "insufficient-evidence",
+      "supported": "Current official parent and roster count/name basis at 2025-09-30; all 13 scoped source labels have row-level assessments in the preserved assessment.json.",
+      "unresolved": "The 2017 source has no parent code; the 2020 greatest-overlap assignment lineage and 2017/current geometry crosswalk remain unverified. Current count agreement alone does not validate membership or boundaries."
+    },
+    {
+      "id": "framework:province:qujing:63ef078a8d2a",
+      "name": "Qujing",
+      "atlas_owned_member_count": 8,
+      "official_2025_count": 9,
+      "official_2025_composition": "3 districts, 1 county-level city, 5 counties",
+      "disposition": "correction-needed",
+      "supported": "Official current roster identifies Qilin, Zhanyi and Malong districts, Xuanwei City, and five counties; the 1997 official Qujing history states the former county-level Qujing City was divided into Qilin and Zhanyi districts.",
+      "unresolved": "The 2017 source contains Qujingshi and the eight-member Atlas parent lacks an explicit Qilin or Zhanyi name. No ID/geometry should be reassigned from count or resemblance. Identity/crosswalk is assigned to blocked #914; no authorized source polygon crosswalk is available."
+    },
+    {
+      "id": "framework:province:zhaotong:c5d5d89a10c1",
+      "name": "Zhaotong",
+      "atlas_owned_member_count": 11,
+      "official_2025_count": 11,
+      "official_2025_composition": "1 county-level city, 1 district, 9 counties",
+      "disposition": "insufficient-evidence",
+      "supported": "Current official parent and roster count/name basis at 2025-09-30; all 11 scoped source labels have row-level assessments in the preserved assessment.json.",
+      "unresolved": "The 2017 source's Zhaotongshi name conflicts with the current list's Zhaoyang District, and Ludingshi does not appear where Ludian County is listed. Equal counts do not resolve identity, parent lineage, or boundary geometry; see #914 and #915."
+    },
+    {
+      "id": "framework:province:wenshan-zhuang-and-miao-autonomous-prefecture:769019fc316e",
+      "name": "Wenshan Zhuang and Miao Autonomous Prefecture",
+      "atlas_owned_member_count": 8,
+      "official_2025_count": 8,
+      "official_2025_composition": "1 county-level city, 7 counties",
+      "disposition": "correction-needed",
+      "supported": "Current official parent and roster count/name basis at 2025-09-30.",
+      "unresolved": "The source labels Wenshanxian and Jianshanxian; the current roster includes Wenshan City and Yanshan County. Prior official history places the Wenshan county-to-city change in 2010, before the layer's declared 2017 vintage. Neither spelling similarity nor count equality proves same territory. Resolve identity and geometry under #914/#915."
+    }
+  ],
+  "integration_handoff": {
+    "owner": "Southwest China integration issue #448",
+    "finding": "The official 2025 Yunnan-wide count of 129 county-level units differs from the pinned 2017 geoBoundaries Yunnan subset/inventory count of 125. Cross-vintage administrative changes and the questionable Qujing/Zhaotong/Wenshan identities prevent interpretation as a four-unit omission count.",
+    "required_action": "At integration, reconcile the whole Yunnan roster across all workload packets using official codes, dated changes and source-to-polygon maps. Preserve exact IDs and avoid adding, deleting, merging, or reparenting geography from aggregate counts alone."
+  },
+  "limits": [
+    "Source roster page and code-standard PDF response bytes were inaccessible from this runtime; source register preserves official URLs, dates, access limits, facts used and concrete restoration instructions without pretending a hash exists.",
+    "The 2017 geoBoundaries layer's per-record source/license links are malformed and point to third-party source leads. Its derivative file declares PDDL, but original-source authority/license chain remains unresolved.",
+    "All 40 scoped boundary comparisons are recorded separately as source-to-Atlas lineage checks, not official boundary validation or regional approval."
+  ]
+}
