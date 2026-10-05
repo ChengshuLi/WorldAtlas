@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "issue": 463,
+  "retrieved_utc_date": "2026-10-05",
+  "command": "python3 data/regional-review/regional-review-42fc12dc97387a2a/reproduce.py",
+  "baseline_commit": "b7aab8b8d353eb3510cf7323da7bc2dcde10147b",
+  "packet_sha256": {
+    "scope.json": "89258524a9cb9099d65501130b0ea60b0d181194a54b598569d6bdbb9e6468ae",
+    "issue-context.json": "dc0af48625cfd41e7af44e3e087bddc220b8e5055b6ca634073dd5cbaf522302",
+    "baseline-unit-inventory.json": "0b431078cdb9ce49d4a034f60231311c9e485c0331a3c117f47d043fc116cb86",
+    "source-inventory.json": "daadfb10f27c79df4f08e46e37030216301036cfaec2c9cadc52abbba7df9290",
+    "reproduce.py": "9f8d28515dc888c54a92101bf04cde5b2d2d7f0cda9a338466efe9e860569dd5",
+    "location-assessments.json": "ab0a26cb4f6f09ad99b668e59ab7907694e88ed8abafebaf95562ef675515578",
+    "province-assessments.json": "e94eda6d62242345c2fb2695d54dd657eaa3afd1dad5ba083cb195119f3e48e1",
+    "area-assessments.json": "7f0f8ec9d09639b2ef80b1fac31c71e70843e58c3eb12d3d545c4000184dac00",
+    "source-geometry-screen.json": "cdc6261b7365339d9a3ed2e914c832f572a4cf58068a5ed57091ee424b756980",
+    "findings.json": "0ddc676ca82e18088aabd2dc1309e817ba649bb4c501bb272e0205ea5faf3393"
+  },
+  "retained_source_sha256": {
+    "sources/geoboundaries-9469f09/COD-ADM2.geojson": "7e6a8509a3b40ad7256245f021cfa757a71582f1e0ec6ed8a30e48c6ab888a54",
+    "sources/geoboundaries-9469f09/COD-CITATION-AND-USE.txt": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+    "sources/geoboundaries-9469f09/COD-geoBoundaries-api-current-metadata.json": "66af6d69724e4f4c009768e9856f350f263283aae3cd1617458036924916ad46",
+    "sources/geoboundaries-9469f09/GAB-ADM2.geojson": "244d4936746c39ffa9c7805a1359df33743e6356ded0c941381f8980e3b3c156",
+    "sources/geoboundaries-9469f09/GAB-CITATION-AND-USE.txt": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+    "sources/geoboundaries-9469f09/GAB-geoBoundaries-api-current-metadata.json": "d619c961fb370aa56104cf2f04047a614ca610b8bd92745eac7ee08ea71986c9",
+    "sources/geoboundaries-9469f09/GNQ-ADM2.geojson": "63be99f8ac57da01d985b04e3bc70557d05ed91216262ec9e5ee20452c60ef6e",
+    "sources/geoboundaries-9469f09/GNQ-CITATION-AND-USE.txt": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+    "sources/geoboundaries-9469f09/GNQ-geoBoundaries-api-current-metadata.json": "3acab021e70ef601313e127da3677e25cba1d28883cb6ab0dd69cc4ecf213e6b"
+  },
+  "result": "PASS: exact 227 issue IDs resolve uniquely; 38 province and 5 area workload memberships reconcile to baseline parent links. Geometry screen found source multipart compositions (1 GAB, 3 GNQ) for review. 225 insufficient-evidence and 2 correction-needed. No topology, boundary, or legal correctness is implied."
+}

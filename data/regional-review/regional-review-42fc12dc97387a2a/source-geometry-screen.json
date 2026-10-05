@@ -1,0 +1,4595 @@
+{
+  "version": 1,
+  "issue": 463,
+  "source_release": "geoBoundaries commit 9469f09",
+  "scope_sha256": "89258524a9cb9099d65501130b0ea60b0d181194a54b598569d6bdbb9e6468ae",
+  "summary": {
+    "COD": {
+      "scoped_features": 169,
+      "geometry_types": {
+        "Polygon": 169
+      },
+      "multipart_ids": [],
+      "empty_geometries": [],
+      "shapeType_values": {
+        "ADM2": 169
+      },
+      "unnamed_features": []
+    },
+    "GAB": {
+      "scoped_features": 30,
+      "geometry_types": {
+        "Polygon": 29,
+        "MultiPolygon": 1
+      },
+      "multipart_ids": [
+        "gb:GAB:ADM2:22940354B80874584292882"
+      ],
+      "empty_geometries": [],
+      "shapeType_values": {
+        "ADM2": 30
+      },
+      "unnamed_features": []
+    },
+    "GNQ": {
+      "scoped_features": 28,
+      "geometry_types": {
+        "Polygon": 25,
+        "MultiPolygon": 3
+      },
+      "multipart_ids": [
+        "gb:GNQ:ADM2:11065452B22787327477805",
+        "gb:GNQ:ADM2:11065452B23490115173263",
+        "gb:GNQ:ADM2:11065452B47830871634702"
+      ],
+      "empty_geometries": [],
+      "shapeType_values": {
+        "ADM2": 28
+      },
+      "unnamed_features": []
+    }
+  },
+  "per_location_screen": [
+    {
+      "id": "gb:COD:ADM2:63176286B10859728267394",
+      "shapeName": "Businga",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1015,
+        "bbox_lonlat": [
+          19.887876376000065,
+          2.816828074000057,
+          22.11736715400008,
+          4.069271009000033
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B11141066261470",
+      "shapeName": "Kibombo",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1866,
+        "bbox_lonlat": [
+          24.73053041600008,
+          -4.998853944999951,
+          26.11211183900008,
+          -3.164614317999963
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B11863220768150",
+      "shapeName": "Malemba-Nkulu",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 902,
+        "bbox_lonlat": [
+          25.995929254000032,
+          -8.78127499599998,
+          27.854200408000054,
+          -7.339121130999956
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B11990771214401",
+      "shapeName": "Bulungu",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 2,
+        "coordinate_vertex_count": 764,
+        "bbox_lonlat": [
+          18.12079228600004,
+          -5.415128655999979,
+          19.25368524000004,
+          -3.978822230999981
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B12311619160810",
+      "shapeName": "Kwamouth",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 651,
+        "bbox_lonlat": [
+          15.901928378000036,
+          -4.222882380999977,
+          17.38089,
+          -3.015430872999957
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B12691977822681",
+      "shapeName": "Bukama",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1017,
+        "bbox_lonlat": [
+          25.478295840000044,
+          -9.722583025999938,
+          26.832536924000067,
+          -7.943611852999936
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B12710938610069",
+      "shapeName": "Beni",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 32,
+        "bbox_lonlat": [
+          29.35417343900008,
+          0.376408663000063,
+          29.552191149000066,
+          0.585494808000021
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B12881144084902",
+      "shapeName": "Lubao",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 681,
+        "bbox_lonlat": [
+          24.515938748000053,
+          -6.320305425999948,
+          26.27047707400004,
+          -4.83528707399995
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B13611321695248",
+      "shapeName": "Miabi",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 485,
+        "bbox_lonlat": [
+          23.131418412000073,
+          -6.606917862999978,
+          23.522249860000045,
+          -5.97834998999997
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B14204108243102",
+      "shapeName": "Lukolela",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 289,
+        "bbox_lonlat": [
+          16.503999840000063,
+          -2.00126634999998,
+          17.810309880000034,
+          -0.555500224999946
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B14336347527587",
+      "shapeName": "Lubutu",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1127,
+        "bbox_lonlat": [
+          26.033574060000035,
+          -1.417379584999935,
+          27.841009074000056,
+          -0.013799981999966
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B14719092717616",
+      "shapeName": "Aru",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 3,
+        "coordinate_vertex_count": 454,
+        "bbox_lonlat": [
+          30.11187816000006,
+          2.380618401000049,
+          30.935951129000046,
+          3.674989803000074
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B15680618396169",
+      "shapeName": "Mahagi",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 434,
+        "bbox_lonlat": [
+          30.125604252000073,
+          1.75899941800003,
+          31.305220572000053,
+          2.891498772000034
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B16264123188485",
+      "shapeName": "Makanza",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 248,
+        "bbox_lonlat": [
+          18.171011880000037,
+          0.489439280000056,
+          19.908050040000035,
+          2.039426977000062
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B16720510237815",
+      "shapeName": "Libenge",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 973,
+        "bbox_lonlat": [
+          18.420999840000036,
+          2.752000014000032,
+          19.518646319000027,
+          4.776902079000024
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B16885288794784",
+      "shapeName": "Kaniama",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 990,
+        "bbox_lonlat": [
+          23.64009120000003,
+          -8.790466998999932,
+          24.668084880000038,
+          -6.901215943999944
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B17504702690240",
+      "shapeName": "Kailo",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 2,
+        "coordinate_vertex_count": 896,
+        "bbox_lonlat": [
+          24.59838988000007,
+          -3.35308284499996,
+          26.873699482000063,
+          -1.76607510599996
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B17770065929195",
+      "shapeName": "Butembo",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 55,
+        "bbox_lonlat": [
+          29.18893766900004,
+          0.060648161000074,
+          29.365308218000052,
+          0.214710575000026
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B1925057871065",
+      "shapeName": "Punia",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1271,
+        "bbox_lonlat": [
+          25.80860505000004,
+          -2.27134231499997,
+          27.756249061000062,
+          -1.142540899999972
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B19501088760626",
+      "shapeName": "Ilebo",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 938,
+        "bbox_lonlat": [
+          20.032970040000066,
+          -5.904392919999964,
+          21.112520036000035,
+          -4.207380440999941
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B20411552692002",
+      "shapeName": "Aba",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 24,
+        "bbox_lonlat": [
+          30.191901784000038,
+          3.815266871000063,
+          30.283043761000044,
+          3.90284770300002
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B20425932648522",
+      "shapeName": "Bagata",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1218,
+        "bbox_lonlat": [
+          16.47774054200005,
+          -4.566558585999928,
+          18.864938160000065,
+          -3.293640056999948
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B20601319898864",
+      "shapeName": "Kalima",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 66,
+        "bbox_lonlat": [
+          26.494021670000052,
+          -2.585456757999964,
+          26.621730781000053,
+          -2.436240151999925
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B21708239892428",
+      "shapeName": "Fizi",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 2,
+        "coordinate_vertex_count": 1669,
+        "bbox_lonlat": [
+          27.822326400000065,
+          -5.010333578999962,
+          29.389075535000075,
+          -3.54183494199998
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B21856672762157",
+      "shapeName": "Bolobo",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 241,
+        "bbox_lonlat": [
+          16.172301960000027,
+          -3.179001784999969,
+          16.71372995300004,
+          -2.123000024999953
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B23528212594514",
+      "shapeName": "Dekese",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 631,
+        "bbox_lonlat": [
+          20.62527552000006,
+          -4.158080092999967,
+          22.221348832000047,
+          -2.309602926999958
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B23998883625218",
+      "shapeName": "Dibaya",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 2,
+        "coordinate_vertex_count": 673,
+        "bbox_lonlat": [
+          22.39434,
+          -6.952023493999945,
+          23.280121440000073,
+          -5.826850986999943
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B2433914913285",
+      "shapeName": "Tshilenge",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 2,
+        "coordinate_vertex_count": 423,
+        "bbox_lonlat": [
+          23.416509922000046,
+          -6.771739313999944,
+          23.844359852000025,
+          -6.158070119999934
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B24678106401017",
+      "shapeName": "Ango",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1758,
+        "bbox_lonlat": [
+          24.693163107000032,
+          3.50458074200003,
+          27.294703920000075,
+          5.386098078000032
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B24830189223330",
+      "shapeName": "Lodja",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 351,
+        "bbox_lonlat": [
+          22.99615018700007,
+          -4.214345795999975,
+          23.980685400000027,
+          -2.819256951999932
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B25314267977171",
+      "shapeName": "Moba",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 2,
+        "coordinate_vertex_count": 834,
+        "bbox_lonlat": [
+          28.395438840000054,
+          -8.395491714999935,
+          30.793141277000075,
+          -6.41299909199995
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B25642850349509",
+      "shapeName": "Rutshuru",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1412,
+        "bbox_lonlat": [
+          28.94383769800004,
+          -1.476577232999944,
+          29.683941360000063,
+          -0.445430069999929
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B25992661497472",
+      "shapeName": "Dibaya-Lubwe",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 26,
+        "bbox_lonlat": [
+          19.845222291000027,
+          -4.170450595999966,
+          19.879445348000047,
+          -4.139990019999971
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B26674316015082",
+      "shapeName": "Sandoa",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1035,
+        "bbox_lonlat": [
+          21.79406510800004,
+          -10.103665472999978,
+          24.575339160000055,
+          -8.662805738999964
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B28359889537852",
+      "shapeName": "Mwene-Ditu",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 24,
+        "bbox_lonlat": [
+          23.406521760000032,
+          -7.043411625999966,
+          23.552982,
+          -6.931357152999965
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B28648737127916",
+      "shapeName": "Shabunda",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 4395,
+        "bbox_lonlat": [
+          26.810649209000076,
+          -4.022388088999946,
+          28.377258480000023,
+          -1.991221049999979
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B30130216174864",
+      "shapeName": "Isangi",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 2,
+        "coordinate_vertex_count": 400,
+        "bbox_lonlat": [
+          23.57615122900006,
+          -0.389587433999964,
+          25.043785787000047,
+          1.109569978000025
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B30356596276779",
+      "shapeName": "Budjala",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 697,
+        "bbox_lonlat": [
+          19.125467376000074,
+          2.003682154000046,
+          20.91630347200004,
+          3.188351887000067
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B30844666641598",
+      "shapeName": "Lusambo",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 776,
+        "bbox_lonlat": [
+          22.905082440000058,
+          -5.849516937999965,
+          24.199672320000047,
+          -4.168828936999944
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B31000864957103",
+      "shapeName": "Kamina",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1943,
+        "bbox_lonlat": [
+          23.97303216000006,
+          -10.129914962999976,
+          25.934268839000026,
+          -7.140366979999953
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B3160723083670",
+      "shapeName": "Kabare",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1303,
+        "bbox_lonlat": [
+          28.20557991900006,
+          -2.699925734999965,
+          29.011974320000036,
+          -2.126422
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B32367911689095",
+      "shapeName": "Kikwit",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 26,
+        "bbox_lonlat": [
+          18.751197240000067,
+          -5.106998598999951,
+          18.86147316000006,
+          -5.007686509999928
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B3271137171664",
+      "shapeName": "Ingende",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 636,
+        "bbox_lonlat": [
+          18.48948480100006,
+          -1.424721183999964,
+          20.283819323000046,
+          -0.012479000999974
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B33283671139480",
+      "shapeName": "Mwenga",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 2,
+        "coordinate_vertex_count": 2681,
+        "bbox_lonlat": [
+          27.69696756700006,
+          -3.997756448999951,
+          28.892153121000035,
+          -2.776784407999969
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B33291186627226",
+      "shapeName": "Niangara",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 819,
+        "bbox_lonlat": [
+          27.243498035000073,
+          2.936301399000058,
+          28.541935369000043,
+          4.067087999000023
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B33518015273847",
+      "shapeName": "Dilolo",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 2,
+        "coordinate_vertex_count": 797,
+        "bbox_lonlat": [
+          22.17399984000008,
+          -11.250999904999958,
+          24.405428018000066,
+          -9.827094952999971
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B33968238717987",
+      "shapeName": "Walikale",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1133,
+        "bbox_lonlat": [
+          27.227144235000026,
+          -2.065770154999939,
+          29.068933320000042,
+          -0.102374997999959
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B34424841963647",
+      "shapeName": "Nyunzu",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 625,
+        "bbox_lonlat": [
+          27.04859176700006,
+          -6.709237046999931,
+          28.613659131000077,
+          -5.010024599999952
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B35677174574617",
+      "shapeName": "Kamituga",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 17,
+        "bbox_lonlat": [
+          28.174202627000057,
+          -3.079733016999967,
+          28.20964942200004,
+          -3.043943343999956
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B35852451405101",
+      "shapeName": "Kamiji",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 314,
+        "bbox_lonlat": [
+          23.02002327400004,
+          -6.918317538999929,
+          23.446678115000054,
+          -6.458352856999966
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B36790783393673",
+      "shapeName": "Namoya",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 18,
+        "bbox_lonlat": [
+          27.551597351000055,
+          -4.028203970999925,
+          27.605008637000026,
+          -3.993422491999979
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B36806520086654",
+      "shapeName": "Bomongo",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 531,
+        "bbox_lonlat": [
+          17.70305879600005,
+          -0.563609840999959,
+          19.44981967900003,
+          2.126355960000069
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B37254158064276",
+      "shapeName": "Masi-Manimba",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1291,
+        "bbox_lonlat": [
+          17.46816446400004,
+          -5.886736636999956,
+          18.660713400000077,
+          -4.139123988999927
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B37259268611319",
+      "shapeName": "Kiri",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 604,
+        "bbox_lonlat": [
+          18.389740836000044,
+          -2.711942882999949,
+          19.953706320000038,
+          -0.736009000999957
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B37681851712476",
+      "shapeName": "Tshikapa",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 23,
+        "bbox_lonlat": [
+          20.766835077000053,
+          -6.456435416999966,
+          20.867403731000024,
+          -6.370130095999968
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B40120828568077",
+      "shapeName": "Kamonia",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 2,
+        "coordinate_vertex_count": 1065,
+        "bbox_lonlat": [
+          19.680137280000054,
+          -7.298904902999936,
+          21.78754992000006,
+          -5.734112792999952
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B4112889633509",
+      "shapeName": "Oshwe",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 882,
+        "bbox_lonlat": [
+          18.845443449000072,
+          -4.39898003299993,
+          21.023272080000027,
+          -1.894833717999973
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B41140464701712",
+      "shapeName": "Kapanga",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 699,
+        "bbox_lonlat": [
+          21.74474988000003,
+          -9.341049827999939,
+          23.729001480000022,
+          -7.637219954999978
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B4133354906354",
+      "shapeName": "Befale",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 925,
+        "bbox_lonlat": [
+          20.295061258000032,
+          -0.043898859999956,
+          22.27827780000007,
+          1.235635907000074
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B42701779698156",
+      "shapeName": "Uvira",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 2049,
+        "bbox_lonlat": [
+          28.78231937700008,
+          -3.659085894999976,
+          29.261057295000057,
+          -2.738000686999953
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B4277783159614",
+      "shapeName": "Monkoto",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1234,
+        "bbox_lonlat": [
+          19.433271240000067,
+          -2.53238725999995,
+          22.22416835300004,
+          -0.664700005999975
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B43218121140485",
+      "shapeName": "Yahuma",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 976,
+        "bbox_lonlat": [
+          22.247272536000025,
+          -0.559477629999947,
+          23.80376978700008,
+          2.162040018000027
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B43464771754704",
+      "shapeName": "Gemena",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 810,
+        "bbox_lonlat": [
+          19.071382523000068,
+          2.785063171000047,
+          20.28579984000004,
+          4.084996032000049
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B45383896961526",
+      "shapeName": "Goma",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 247,
+        "bbox_lonlat": [
+          29.142489478000073,
+          -1.700714779999942,
+          29.25236313700003,
+          -1.610430841999971
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B45916106821058",
+      "shapeName": "Lubero",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1294,
+        "bbox_lonlat": [
+          27.796598902000028,
+          -0.82210122999993,
+          29.757820560000027,
+          0.697827821000033
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B47500153281287",
+      "shapeName": "Watsa",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1087,
+        "bbox_lonlat": [
+          28.311552204000066,
+          2.055721547000076,
+          30.194191440000054,
+          3.483996404000038
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B47747519497786",
+      "shapeName": "Kaoze",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 19,
+        "bbox_lonlat": [
+          29.754476347000036,
+          -7.064573717999963,
+          29.79905617600008,
+          -7.028520119999939
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B48725841971461",
+      "shapeName": "Opala",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 488,
+        "bbox_lonlat": [
+          23.255262360000074,
+          -1.98155486099995,
+          25.14873489200005,
+          0.560907790000044
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B48907865482387",
+      "shapeName": "Kalehe",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1258,
+        "bbox_lonlat": [
+          28.151163102000055,
+          -2.485033070999975,
+          29.144135165000023,
+          -1.583625224999935
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B49026377824569",
+      "shapeName": "Yangambi",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 20,
+        "bbox_lonlat": [
+          24.44713024200007,
+          0.765925236000044,
+          24.515588926000078,
+          0.814498677000074
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B49230128630829",
+      "shapeName": "Lubefu",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 796,
+        "bbox_lonlat": [
+          23.699760094000055,
+          -5.410459437999975,
+          25.020515441000043,
+          -3.967078112999957
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B49430673132917",
+      "shapeName": "Bokungu",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 984,
+        "bbox_lonlat": [
+          21.35372004000004,
+          -1.916803809999976,
+          23.038645108000026,
+          0.120239007000066
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B50098701443330",
+      "shapeName": "Bosobolo",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 690,
+        "bbox_lonlat": [
+          19.01400012000005,
+          3.896280140000044,
+          20.405000159000053,
+          5.146000019000041
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B50174012793828",
+      "shapeName": "Bafwasende",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1733,
+        "bbox_lonlat": [
+          25.351345233000075,
+          -0.596174361999942,
+          28.15446742300003,
+          2.194203169000048
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B50481715267247",
+      "shapeName": "Pweto",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1666,
+        "bbox_lonlat": [
+          27.613114993000067,
+          -9.772993639999981,
+          29.668592489000048,
+          -7.622684627999945
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B52056185132037",
+      "shapeName": "Sakania",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 725,
+        "bbox_lonlat": [
+          27.671411273000047,
+          -13.455998171999966,
+          29.810979771000063,
+          -11.742916729999934
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B52252759567832",
+      "shapeName": "Baraka",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 29,
+        "bbox_lonlat": [
+          29.081415753000044,
+          -4.096744534999971,
+          29.101097113000037,
+          -4.08254866599998
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B52782039621830",
+      "shapeName": "Lubudi",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1395,
+        "bbox_lonlat": [
+          24.980811062000043,
+          -11.228708990999962,
+          27.187976578000075,
+          -9.487193049999973
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B53001735211155",
+      "shapeName": "Bolomba",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1026,
+        "bbox_lonlat": [
+          18.28182996000004,
+          -0.274469593999925,
+          20.576999159000025,
+          1.458082602000047
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B531915432051",
+      "shapeName": "Kabongo",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1128,
+        "bbox_lonlat": [
+          24.593393160000062,
+          -8.044420895999963,
+          26.485657615000036,
+          -6.144040962999952
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B5322857834849",
+      "shapeName": "Ngandajika",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 652,
+        "bbox_lonlat": [
+          23.72792230400006,
+          -7.058724981999944,
+          24.932419425000035,
+          -6.344085019999966
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B53648445078824",
+      "shapeName": "Yumbi",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 126,
+        "bbox_lonlat": [
+          16.242000120000057,
+          -2.33057823799993,
+          16.69180860000006,
+          -1.862831923999977
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B53748739739840",
+      "shapeName": "Zongo",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 62,
+        "bbox_lonlat": [
+          18.54600012000003,
+          3.968717758000025,
+          18.867956400000025,
+          4.386677960000043
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B53815785774290",
+      "shapeName": "Idiofa",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 3,
+        "coordinate_vertex_count": 990,
+        "bbox_lonlat": [
+          18.672884280000062,
+          -5.754991612999959,
+          20.190670514000033,
+          -3.65910049799993
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B5401694360976",
+      "shapeName": "Mambasa",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1142,
+        "bbox_lonlat": [
+          27.44698965400005,
+          0.519618274000038,
+          29.999998876000063,
+          2.543720945000075
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B54443714119434",
+      "shapeName": "Kutu",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 822,
+        "bbox_lonlat": [
+          16.963059960000066,
+          -3.67035547699993,
+          19.051949880000052,
+          -2.279214957999955
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B55213243416233",
+      "shapeName": "Isiro",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 18,
+        "bbox_lonlat": [
+          27.597281396000028,
+          2.727791970000055,
+          27.67776174900007,
+          2.806380487000069
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B55306571020797",
+      "shapeName": "Ariwara",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 15,
+        "bbox_lonlat": [
+          30.69460219900003,
+          3.124185802000056,
+          30.71899991400005,
+          3.148863940000069
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B55618881730154",
+      "shapeName": "Lisala",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1013,
+        "bbox_lonlat": [
+          19.813551892000078,
+          1.850149868000074,
+          21.814903435000076,
+          3.24745000300004
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B55786633055845",
+      "shapeName": "Kungu",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 695,
+        "bbox_lonlat": [
+          18.065000160000068,
+          1.902330831000029,
+          19.332880198000055,
+          3.195371822000027
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B56364191841329",
+      "shapeName": "Djolu",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 846,
+        "bbox_lonlat": [
+          21.564141480000046,
+          -0.403650915999947,
+          23.356514479000055,
+          1.762617137000063
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B57018267641486",
+      "shapeName": "Mutshatsha",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 2,
+        "coordinate_vertex_count": 1013,
+        "bbox_lonlat": [
+          24.107479202000036,
+          -11.739346717999979,
+          25.94726987100006,
+          -9.98063007099995
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B58583497580401",
+      "shapeName": "Kabalo",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 705,
+        "bbox_lonlat": [
+          25.930319974000042,
+          -6.709754869999927,
+          28.02236724000005,
+          -5.659450282999956
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B59059722008658",
+      "shapeName": "Likasi",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 62,
+        "bbox_lonlat": [
+          26.630732845000068,
+          -11.045499802999927,
+          26.87957234600003,
+          -10.879744809999977
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B5937777491698",
+      "shapeName": "Mangai",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 21,
+        "bbox_lonlat": [
+          19.510826215000066,
+          -4.079135047999955,
+          19.552546390000032,
+          -4.040418706999958
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B59505490488503",
+      "shapeName": "Mushie",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 544,
+        "bbox_lonlat": [
+          16.432235280000043,
+          -3.046019957999931,
+          17.950345895000055,
+          -2.001420047999943
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B59821830207387",
+      "shapeName": "Basankusu",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 632,
+        "bbox_lonlat": [
+          19.271251867000046,
+          0.352310075000048,
+          20.714799240000048,
+          1.75673082000003
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B62322725812229",
+      "shapeName": "Kabeya-Kamwanga",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 518,
+        "bbox_lonlat": [
+          22.948618320000037,
+          -6.359276891999968,
+          23.48106516000007,
+          -5.696641427999964
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B62559292775761",
+      "shapeName": "Masisi",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1086,
+        "bbox_lonlat": [
+          28.51448148000003,
+          -1.781854615999976,
+          29.223621054000034,
+          -0.970158074999972
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B62585085359897",
+      "shapeName": "Kindu",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 22,
+        "bbox_lonlat": [
+          25.854858360000037,
+          -3.042149208999945,
+          25.974161640000034,
+          -2.908146718999944
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B63969135863157",
+      "shapeName": "Lukalaba",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 17,
+        "bbox_lonlat": [
+          23.637951087000033,
+          -6.497561133999966,
+          23.672305529000027,
+          -6.467099752999957
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B64695958976401",
+      "shapeName": "Mitwaba",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 805,
+        "bbox_lonlat": [
+          26.266005919000065,
+          -10.149551716999952,
+          27.990812520000077,
+          -8.076213393999979
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B64827262038855",
+      "shapeName": "Bukavu",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1000,
+        "bbox_lonlat": [
+          28.793694274000075,
+          -2.561168640999938,
+          28.89289502200006,
+          -2.454914896999981
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B65133649587609",
+      "shapeName": "Djugu",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 2,
+        "coordinate_vertex_count": 505,
+        "bbox_lonlat": [
+          29.623022475000027,
+          1.348378100000048,
+          31.034947819000024,
+          2.416821
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B65160793690884",
+      "shapeName": "Demba",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 714,
+        "bbox_lonlat": [
+          21.624192781000033,
+          -5.853948576999926,
+          22.847974200000067,
+          -4.619617992999963
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B65216379244562",
+      "shapeName": "Bunia",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 33,
+        "bbox_lonlat": [
+          30.21931131100007,
+          1.484349001000055,
+          30.299465843000064,
+          1.597809491000021
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B65571818133367",
+      "shapeName": "Katako-Kombe",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1070,
+        "bbox_lonlat": [
+          23.523387480000054,
+          -4.384357849999958,
+          25.112398662000032,
+          -2.362520264999944
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B66669834222633",
+      "shapeName": "Lupatapata",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 514,
+        "bbox_lonlat": [
+          23.36404680000004,
+          -6.419030040999928,
+          23.767210027000033,
+          -5.627717441999948
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B68044599971787",
+      "shapeName": "Poko",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1247,
+        "bbox_lonlat": [
+          26.124521022000067,
+          1.941191297000046,
+          27.705703491000065,
+          4.02407000300002
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B68262610189121",
+      "shapeName": "Bikoro",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 351,
+        "bbox_lonlat": [
+          17.49952440000004,
+          -1.479804369999954,
+          18.870999840000025,
+          -0.022540289999938
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B68411895895174",
+      "shapeName": "Idjwi",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 291,
+        "bbox_lonlat": [
+          28.928893437000056,
+          -2.29752795099995,
+          29.24266053300005,
+          -1.634003670999959
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B68796769615290",
+      "shapeName": "Inongo",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 820,
+        "bbox_lonlat": [
+          16.637024160000067,
+          -2.760826704999943,
+          19.305081720000032,
+          -1.102775359999953
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B69142293994365",
+      "shapeName": "Bambesa",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 2,
+        "coordinate_vertex_count": 1011,
+        "bbox_lonlat": [
+          25.121720228000072,
+          2.202856069000063,
+          26.555340306000062,
+          3.740649899000061
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B6958016734749",
+      "shapeName": "Kalemie",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 624,
+        "bbox_lonlat": [
+          28.032369209000024,
+          -7.132655875999944,
+          29.654977165000048,
+          -5.007911855999964
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B69668932062204",
+      "shapeName": "Luebo",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 609,
+        "bbox_lonlat": [
+          20.833986251000056,
+          -6.141717645999961,
+          21.97726235500005,
+          -5.043253068999945
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B6974395638231",
+      "shapeName": "Dungu",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1443,
+        "bbox_lonlat": [
+          26.92889856000005,
+          2.800664554000036,
+          29.840767037000035,
+          5.206706715000053
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B7033307846906",
+      "shapeName": "Lubumbashi",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 75,
+        "bbox_lonlat": [
+          27.299956680000037,
+          -11.830315138999936,
+          27.636063470000067,
+          -11.481627102999937
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B70348427219396",
+      "shapeName": "Luilu",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 2,
+        "coordinate_vertex_count": 904,
+        "bbox_lonlat": [
+          23.170541400000047,
+          -7.979630917999941,
+          24.158144160000063,
+          -6.644847973999958
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B7058717383424",
+      "shapeName": "Kananga",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 199,
+        "bbox_lonlat": [
+          22.246510690000036,
+          -6.043728544999965,
+          22.68401142700003,
+          -5.748107923999953
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B70684258400559",
+      "shapeName": "Buta",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1417,
+        "bbox_lonlat": [
+          24.166262520000032,
+          2.16769208200003,
+          25.921026191000067,
+          3.502820066000027
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B70830242214620",
+      "shapeName": "Dingila",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 16,
+        "bbox_lonlat": [
+          26.05317797300006,
+          3.632183208000072,
+          26.095550693000064,
+          3.669758242000057
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B71096802464930",
+      "shapeName": "Nioki",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 26,
+        "bbox_lonlat": [
+          17.637433619000035,
+          -2.727764,
+          17.713376165000057,
+          -2.666242747999945
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B71176382547280",
+      "shapeName": "Gungu",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1359,
+        "bbox_lonlat": [
+          18.29872116000007,
+          -6.391374708999933,
+          20.203800001000047,
+          -5.144025000999932
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B72804638257173",
+      "shapeName": "Yakoma",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 796,
+        "bbox_lonlat": [
+          21.257963292000056,
+          2.94434427300007,
+          23.533071473000064,
+          4.240000073000033
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B74212537268608",
+      "shapeName": "Manono",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1163,
+        "bbox_lonlat": [
+          26.006155920000026,
+          -8.41234187599997,
+          28.776650760000052,
+          -6.429913921999969
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B74390580243640",
+      "shapeName": "Tshimbulu",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 16,
+        "bbox_lonlat": [
+          22.831297937000045,
+          -6.503352363999966,
+          22.88907546300004,
+          -6.454897269999947
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B75279003671986",
+      "shapeName": "Kipushi",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 2,
+        "coordinate_vertex_count": 690,
+        "bbox_lonlat": [
+          27.204674400000044,
+          -12.286999112999979,
+          28.523561576000077,
+          -10.958344033999936
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B75372177576839",
+      "shapeName": "Irumu",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 587,
+        "bbox_lonlat": [
+          29.289916076000054,
+          0.788718135000067,
+          30.600011765000033,
+          1.745089829000051
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B75664078742838",
+      "shapeName": "Dimbelenge",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 732,
+        "bbox_lonlat": [
+          22.34762388000007,
+          -5.850137983999957,
+          23.758402320000073,
+          -4.198861077999936
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B75913983063727",
+      "shapeName": "Ikela",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 818,
+        "bbox_lonlat": [
+          22.33871644800007,
+          -2.087790005999977,
+          24.44404425500005,
+          0.114618198000073
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B76187105234082",
+      "shapeName": "Kolwezi",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 29,
+        "bbox_lonlat": [
+          25.409616120000067,
+          -10.805169208999928,
+          25.55907732000003,
+          -10.701718169999936
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B7674321742221",
+      "shapeName": "Bumba",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 754,
+        "bbox_lonlat": [
+          21.644220236000024,
+          2.017523415000028,
+          23.57976922100005,
+          3.333329792000029
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B76945459106625",
+      "shapeName": "Bandundu",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 100,
+        "bbox_lonlat": [
+          17.338650120000068,
+          -3.439808014999926,
+          17.56292472000007,
+          -3.191730175999965
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B77262619841164",
+      "shapeName": "Kasenga",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1544,
+        "bbox_lonlat": [
+          26.979945577000024,
+          -11.371813678999956,
+          28.69703850800005,
+          -9.362699966999969
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B77587123851522",
+      "shapeName": "Mobayi-Mbongo",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 617,
+        "bbox_lonlat": [
+          20.355352312000036,
+          3.583395003000021,
+          21.96501637600005,
+          4.677000035000049
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B77592742780307",
+      "shapeName": "Kole",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 3,
+        "coordinate_vertex_count": 812,
+        "bbox_lonlat": [
+          21.830955558000028,
+          -4.54838489499997,
+          23.444790798000042,
+          -2.300831470999981
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B77771623677962",
+      "shapeName": "Aketi",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1333,
+        "bbox_lonlat": [
+          22.574490840000067,
+          2.075696118000053,
+          24.866647157000045,
+          3.771401079000043
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B77918114228452",
+      "shapeName": "Boende",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1297,
+        "bbox_lonlat": [
+          19.822960459000058,
+          -1.200458000999959,
+          21.945887275000075,
+          0.213557199000036
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B77989779607321",
+      "shapeName": "Ubundu",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1185,
+        "bbox_lonlat": [
+          24.370482173000028,
+          -2.111983788999964,
+          26.763713752000058,
+          0.921478651000029
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B78021290688444",
+      "shapeName": "Kabinda",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 905,
+        "bbox_lonlat": [
+          23.955644817000064,
+          -6.808639950999975,
+          25.46685241600005,
+          -5.341916800999968
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B79011641071296",
+      "shapeName": "Mbuji-Mayi",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 101,
+        "bbox_lonlat": [
+          23.530777920000048,
+          -6.17250999099997,
+          23.68386,
+          -6.050338274999945
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B79209138861399",
+      "shapeName": "Rungu",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 2,
+        "coordinate_vertex_count": 884,
+        "bbox_lonlat": [
+          26.89323603100007,
+          1.89602801500007,
+          28.50456457100006,
+          3.319128927000065
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B80144027802447",
+      "shapeName": "Tshumbe",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 17,
+        "bbox_lonlat": [
+          22.672372292000034,
+          -4.06829406099996,
+          22.72154005400006,
+          -4.021495921999929
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B80368275017521",
+      "shapeName": "Bondo",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1600,
+        "bbox_lonlat": [
+          22.445219767000026,
+          3.393649915000026,
+          25.544853291000038,
+          5.112823972000058
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B81146580347594",
+      "shapeName": "Luiza",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 999,
+        "bbox_lonlat": [
+          21.65364046700006,
+          -7.89598998799994,
+          23.273662320000028,
+          -6.507227149999949
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B82661241826895",
+      "shapeName": "Mbandaka",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 117,
+        "bbox_lonlat": [
+          18.101364492000073,
+          -0.245066956999949,
+          18.394729701000074,
+          0.076501721000056
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B83227238071318",
+      "shapeName": "Katanda",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 567,
+        "bbox_lonlat": [
+          23.63889996000006,
+          -6.412180011999965,
+          24.174755280000056,
+          -5.741802948999975
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B83726148102259",
+      "shapeName": "Basoko",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 778,
+        "bbox_lonlat": [
+          22.680869779000034,
+          0.958079058000067,
+          25.170073372000047,
+          2.396248575000072
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B83745324886444",
+      "shapeName": "Banalia",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 591,
+        "bbox_lonlat": [
+          24.30218767300005,
+          0.616458403000024,
+          26.626225590000047,
+          2.364362086000028
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B84034630662614",
+      "shapeName": "Kambove",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 2,
+        "coordinate_vertex_count": 861,
+        "bbox_lonlat": [
+          25.48400004000007,
+          -12.00899964399997,
+          27.541030680000063,
+          -10.460966907999932
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B84996923503616",
+      "shapeName": "Nyiragongo",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 56,
+        "bbox_lonlat": [
+          29.153130231000034,
+          -1.662286821999942,
+          29.485937294000053,
+          -1.437764180999977
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B8564391110970",
+      "shapeName": "Walungu",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1651,
+        "bbox_lonlat": [
+          28.313406420000035,
+          -2.998746878999953,
+          29.040616902000068,
+          -2.542896773999928
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B85649689551019",
+      "shapeName": "Mweka",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 938,
+        "bbox_lonlat": [
+          20.627049959000033,
+          -5.343679828999939,
+          22.535791191000044,
+          -3.957090088999962
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B85957320837216",
+      "shapeName": "Kabambare",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 2669,
+        "bbox_lonlat": [
+          26.899645321000037,
+          -5.019724850999978,
+          28.803514509000024,
+          -3.818476352999937
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B86170870415972",
+      "shapeName": "Oïcha",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 2,
+        "coordinate_vertex_count": 653,
+        "bbox_lonlat": [
+          28.998751756000047,
+          -0.152484588999926,
+          29.992673706000062,
+          0.954199083000049
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B86504731111535",
+      "shapeName": "Bongandanga",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 863,
+        "bbox_lonlat": [
+          19.20853095700005,
+          0.725617568000075,
+          22.491285479000055,
+          2.21626006200006
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B88012685356826",
+      "shapeName": "Kasongo",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 2258,
+        "bbox_lonlat": [
+          25.65714466600008,
+          -5.001118463999944,
+          27.14405544600004,
+          -3.35308284499996
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B89784390033972",
+      "shapeName": "Lomela",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 623,
+        "bbox_lonlat": [
+          22.10278642800006,
+          -3.096044517999928,
+          24.69430830700003,
+          -1.697475019999956
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B90330150002289",
+      "shapeName": "Kongolo",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 340,
+        "bbox_lonlat": [
+          26.103601268000034,
+          -5.865590847999954,
+          27.732099240000025,
+          -4.99952056799998
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B9060730940258",
+      "shapeName": "Mongwalu",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 25,
+        "bbox_lonlat": [
+          30.22004056600008,
+          1.803473885000074,
+          30.25092597400004,
+          1.83348326600003
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B90733061522477",
+      "shapeName": "Ingbokolo",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 19,
+        "bbox_lonlat": [
+          30.74437146200006,
+          3.376639931000057,
+          30.792251626000052,
+          3.421141137000063
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B9358277012481",
+      "shapeName": "Bena-Dibele",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 17,
+        "bbox_lonlat": [
+          22.876656672000024,
+          -4.254485740999939,
+          22.937919770000065,
+          -4.199029516999929
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B93910554563220",
+      "shapeName": "Kisangani",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 217,
+        "bbox_lonlat": [
+          24.861998011000026,
+          0.123820630000068,
+          25.521005993000074,
+          0.963287557000058
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B94121502354965",
+      "shapeName": "Faradje",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 2,
+        "coordinate_vertex_count": 744,
+        "bbox_lonlat": [
+          29.348120685000026,
+          2.584316571000045,
+          30.57982499700006,
+          4.387492725000072
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B96753486418064",
+      "shapeName": "Kasaji",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 23,
+        "bbox_lonlat": [
+          23.433970826000063,
+          -10.377416971999935,
+          23.474523833000035,
+          -10.344760095999959
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B97272919542005",
+      "shapeName": "Kazumba",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 958,
+        "bbox_lonlat": [
+          21.40045992000006,
+          -7.099007001999951,
+          22.484437800000023,
+          -5.702978260999942
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B98159467986291",
+      "shapeName": "Wamba",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 592,
+        "bbox_lonlat": [
+          27.194740809000052,
+          1.443248183000037,
+          28.37385554100007,
+          2.748506023000061
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B98421000452360",
+      "shapeName": "Gbadolite",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 169,
+        "bbox_lonlat": [
+          20.624000033000073,
+          4.062416603000031,
+          21.078746641000066,
+          4.445999916000062
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:COD:ADM2:63176286B98681964412172",
+      "shapeName": "Pangi",
+      "shapeType": "ADM2",
+      "shapeGroup": "COD",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1553,
+        "bbox_lonlat": [
+          25.87987059200003,
+          -3.933706594999933,
+          27.142025580000052,
+          -2.329862937999962
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GAB:ADM2:22940354B10433800471916",
+      "shapeName": "Komo-Mondah",
+      "shapeType": "ADM2",
+      "shapeGroup": "GAB",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 150,
+        "bbox_lonlat": [
+          9.3143385401915,
+          0.184810911694285,
+          9.960100836284596,
+          0.661764427985986
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GAB:ADM2:22940354B18924798450478",
+      "shapeName": "Louetsi-Wano",
+      "shapeType": "ADM2",
+      "shapeGroup": "GAB",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 93,
+        "bbox_lonlat": [
+          11.388949605340088,
+          -2.41886221741737,
+          11.74311668528685,
+          -1.914321744652739
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GAB:ADM2:22940354B22341987955952",
+      "shapeName": "Ogoulou",
+      "shapeType": "ADM2",
+      "shapeGroup": "GAB",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 255,
+        "bbox_lonlat": [
+          11.14690722818608,
+          -2.04841400720062,
+          12.040423631545423,
+          -0.591396788131192
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GAB:ADM2:22940354B22587364924270",
+      "shapeName": "Etimbouè",
+      "shapeType": "ADM2",
+      "shapeGroup": "GAB",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 572,
+        "bbox_lonlat": [
+          8.924410143913065,
+          -2.27467406125885,
+          10.363721604068814,
+          -1.076817734450856
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GAB:ADM2:22940354B24104320747688",
+      "shapeName": "Okano",
+      "shapeType": "ADM2",
+      "shapeGroup": "GAB",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 214,
+        "bbox_lonlat": [
+          10.823075223342926,
+          0.252257046125806,
+          12.325684670711041,
+          1.235460840645317
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GAB:ADM2:22940354B25852434445694",
+      "shapeName": "Douigni",
+      "shapeType": "ADM2",
+      "shapeGroup": "GAB",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 101,
+        "bbox_lonlat": [
+          10.580224426715972,
+          -2.703140883045251,
+          11.300855076300763,
+          -2.192641240700652
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GAB:ADM2:22940354B34091756215614",
+      "shapeName": "Mongo",
+      "shapeType": "ADM2",
+      "shapeGroup": "GAB",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 180,
+        "bbox_lonlat": [
+          10.812445903155947,
+          -3.749247671742637,
+          12.045238045999099,
+          -2.823296922914608
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GAB:ADM2:22940354B35468012310479",
+      "shapeName": "Basse-Banio",
+      "shapeType": "ADM2",
+      "shapeGroup": "GAB",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 131,
+        "bbox_lonlat": [
+          10.304640906652594,
+          -3.644967971894346,
+          11.156190515979574,
+          -2.80095114248121
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GAB:ADM2:22940354B37590085186432",
+      "shapeName": "Mougoutsi",
+      "shapeType": "ADM2",
+      "shapeGroup": "GAB",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 120,
+        "bbox_lonlat": [
+          10.58023989955177,
+          -3.09987816074846,
+          11.336085682008672,
+          -2.405211893713897
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GAB:ADM2:22940354B39129548134605",
+      "shapeName": "Louetsi-Bibaka",
+      "shapeType": "ADM2",
+      "shapeGroup": "GAB",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 111,
+        "bbox_lonlat": [
+          11.949911580055414,
+          -2.438081643253213,
+          12.533433883766747,
+          -1.791646911475709
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GAB:ADM2:22940354B4497534497521",
+      "shapeName": "Woleu",
+      "shapeType": "ADM2",
+      "shapeGroup": "GAB",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 187,
+        "bbox_lonlat": [
+          11.332829609199166,
+          0.929666678374531,
+          12.487853568787216,
+          1.849262836510718
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GAB:ADM2:22940354B45576072672451",
+      "shapeName": "Ogoouè et Lacs",
+      "shapeType": "ADM2",
+      "shapeGroup": "GAB",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 288,
+        "bbox_lonlat": [
+          9.583075593463889,
+          -1.237675374219123,
+          10.86763500205376,
+          -0.287656921129951
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GAB:ADM2:22940354B46648613640917",
+      "shapeName": "Ndolou",
+      "shapeType": "ADM2",
+      "shapeGroup": "GAB",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 186,
+        "bbox_lonlat": [
+          9.893756275132034,
+          -1.940609509920876,
+          10.630524372102116,
+          -1.10270908935297
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GAB:ADM2:22940354B47630022104782",
+      "shapeName": "Libreville",
+      "shapeType": "ADM2",
+      "shapeGroup": "GAB",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 35,
+        "bbox_lonlat": [
+          9.372794939934579,
+          0.349913278674933,
+          9.52391010886447,
+          0.551294981378362
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GAB:ADM2:22940354B49823101443356",
+      "shapeName": "Komo",
+      "shapeType": "ADM2",
+      "shapeGroup": "GAB",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 325,
+        "bbox_lonlat": [
+          9.788564524233436,
+          -0.404500411664628,
+          10.982252656135245,
+          0.840416805591133
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GAB:ADM2:22940354B65697742744176",
+      "shapeName": "Abanga-Bignè",
+      "shapeType": "ADM2",
+      "shapeGroup": "GAB",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 243,
+        "bbox_lonlat": [
+          10.21316324768577,
+          -0.683976363018701,
+          11.56821375036435,
+          0.264959547345256
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GAB:ADM2:22940354B67008732943825",
+      "shapeName": "Mougalaba",
+      "shapeType": "ADM2",
+      "shapeGroup": "GAB",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 124,
+        "bbox_lonlat": [
+          10.444858626124756,
+          -2.299736799408627,
+          11.089443679981912,
+          -1.789449448633093
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GAB:ADM2:22940354B67631152101375",
+      "shapeName": "Haut-Ntem",
+      "shapeType": "ADM2",
+      "shapeGroup": "GAB",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 364,
+        "bbox_lonlat": [
+          11.71388219780522,
+          1.217596721011887,
+          13.301568938855496,
+          2.309713770773953
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GAB:ADM2:22940354B73947944893462",
+      "shapeName": "Tsamba-Magotsi",
+      "shapeType": "ADM2",
+      "shapeGroup": "GAB",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 330,
+        "bbox_lonlat": [
+          10.384517259064296,
+          -1.852853199715355,
+          11.27090100257925,
+          -0.514410982680658
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GAB:ADM2:22940354B74005862204828",
+      "shapeName": "Ndougou",
+      "shapeType": "ADM2",
+      "shapeGroup": "GAB",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 297,
+        "bbox_lonlat": [
+          9.583371573839088,
+          -3.009618332220214,
+          10.644620786408604,
+          -1.892703620975283
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GAB:ADM2:22940354B74910664495270",
+      "shapeName": "Boumi-Louetsi",
+      "shapeType": "ADM2",
+      "shapeGroup": "GAB",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 173,
+        "bbox_lonlat": [
+          11.55730588765664,
+          -2.450030696959061,
+          12.235372664416957,
+          -1.573257573777937
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GAB:ADM2:22940354B77871710228177",
+      "shapeName": "Haut-Komo",
+      "shapeType": "ADM2",
+      "shapeGroup": "GAB",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 56,
+        "bbox_lonlat": [
+          10.378715203743695,
+          0.651548947925676,
+          10.998838795973711,
+          0.998456058200588
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GAB:ADM2:22940354B80874584292882",
+      "shapeName": "Bendjè",
+      "shapeType": "ADM2",
+      "shapeGroup": "GAB",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "MultiPolygon",
+        "component_count": 2,
+        "ring_count": 2,
+        "coordinate_vertex_count": 375,
+        "bbox_lonlat": [
+          8.699776638780918,
+          -1.371320035191445,
+          9.973731795785795,
+          -0.300979420363888
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GAB:ADM2:22940354B82512793469031",
+      "shapeName": "Ntem",
+      "shapeType": "ADM2",
+      "shapeGroup": "GAB",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 86,
+        "bbox_lonlat": [
+          11.334678935484533,
+          1.824518043472949,
+          11.926779947736463,
+          2.311365030371917
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GAB:ADM2:22940354B88632619890778",
+      "shapeName": "Haute-Banio",
+      "shapeType": "ADM2",
+      "shapeGroup": "GAB",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 85,
+        "bbox_lonlat": [
+          10.91782225429364,
+          -3.99105205770627,
+          11.472831863699582,
+          -3.354763467360101
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GAB:ADM2:22940354B91533016002313",
+      "shapeName": "Komo-Ocèan",
+      "shapeType": "ADM2",
+      "shapeGroup": "GAB",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 229,
+        "bbox_lonlat": [
+          9.311018577745187,
+          -0.58075515801599,
+          9.910094861288883,
+          0.347487252234941
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GAB:ADM2:22940354B92057182831829",
+      "shapeName": "Doutsita",
+      "shapeType": "ADM2",
+      "shapeGroup": "GAB",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 122,
+        "bbox_lonlat": [
+          11.181719556512348,
+          -3.340354183298871,
+          12.063502160696203,
+          -2.498346225298008
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GAB:ADM2:22940354B92204383956845",
+      "shapeName": "Dola",
+      "shapeType": "ADM2",
+      "shapeGroup": "GAB",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 138,
+        "bbox_lonlat": [
+          11.033743956818228,
+          -2.692054138887329,
+          11.68525125344263,
+          -1.9491142869947
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GAB:ADM2:22940354B97081518304262",
+      "shapeName": "Douya-Onoyè",
+      "shapeType": "ADM2",
+      "shapeGroup": "GAB",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 171,
+        "bbox_lonlat": [
+          10.787953452689749,
+          -2.05500284790304,
+          11.353831702671016,
+          -1.170773128177302
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GAB:ADM2:22940354B97736756734811",
+      "shapeName": "Noya",
+      "shapeType": "ADM2",
+      "shapeGroup": "GAB",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 141,
+        "bbox_lonlat": [
+          9.55065529810355,
+          0.460291377545104,
+          10.429958949845684,
+          1.060482941834323
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GNQ:ADM2:11065452B13026737962858",
+      "shapeName": "BITICA",
+      "shapeType": "ADM2",
+      "shapeGroup": "GNQ",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 447,
+        "bbox_lonlat": [
+          9.379741579009423,
+          1.208767977808651,
+          10.109925992195132,
+          1.509838014107907
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GNQ:ADM2:11065452B18175278434840",
+      "shapeName": "EVINAYONG",
+      "shapeType": "ADM2",
+      "shapeGroup": "GNQ",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 996,
+        "bbox_lonlat": [
+          10.107694473133863,
+          1.124261425879247,
+          10.770518027004352,
+          1.592579122938538
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GNQ:ADM2:11065452B197102371645",
+      "shapeName": "MALABO",
+      "shapeType": "ADM2",
+      "shapeGroup": "GNQ",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 237,
+        "bbox_lonlat": [
+          8.6095720025534,
+          3.565461016768693,
+          8.824952974908888,
+          3.783976030955119
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GNQ:ADM2:11065452B22787327477805",
+      "shapeName": "COGO",
+      "shapeType": "ADM2",
+      "shapeGroup": "GNQ",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "MultiPolygon",
+        "component_count": 4,
+        "ring_count": 4,
+        "coordinate_vertex_count": 2125,
+        "bbox_lonlat": [
+          9.34235053284368,
+          0.924119048741308,
+          10.262441966321651,
+          1.409191029022101
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GNQ:ADM2:11065452B23490115173263",
+      "shapeName": "ELOBEY GRANDE",
+      "shapeType": "ADM2",
+      "shapeGroup": "GNQ",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "MultiPolygon",
+        "component_count": 2,
+        "ring_count": 2,
+        "coordinate_vertex_count": 96,
+        "bbox_lonlat": [
+          9.49979203449865,
+          0.969186792071249,
+          9.51404102074445,
+          0.99291899960722
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GNQ:ADM2:11065452B27397509806446",
+      "shapeName": "AÑISOC",
+      "shapeType": "ADM2",
+      "shapeGroup": "GNQ",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 633,
+        "bbox_lonlat": [
+          10.664059031482722,
+          1.562894232124286,
+          11.023192825184228,
+          1.972783968550653
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GNQ:ADM2:11065452B28626668585382",
+      "shapeName": "NIEFANG",
+      "shapeType": "ADM2",
+      "shapeGroup": "GNQ",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 125,
+        "bbox_lonlat": [
+          9.980996969486078,
+          1.578139977664847,
+          10.395294991857877,
+          2.181807057041621
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GNQ:ADM2:11065452B2915005607236",
+      "shapeName": "MONGOMOYEN",
+      "shapeType": "ADM2",
+      "shapeGroup": "GNQ",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 438,
+        "bbox_lonlat": [
+          10.940268471424794,
+          1.504794190878932,
+          11.207475010064773,
+          1.776522637574964
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GNQ:ADM2:11065452B35658646165921",
+      "shapeName": "MICOMISENG",
+      "shapeType": "ADM2",
+      "shapeGroup": "GNQ",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 150,
+        "bbox_lonlat": [
+          10.49788502603491,
+          1.93141594073279,
+          11.036299987567812,
+          2.172478856343708
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GNQ:ADM2:11065452B3926826010895",
+      "shapeName": "NKUE",
+      "shapeType": "ADM2",
+      "shapeGroup": "GNQ",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 431,
+        "bbox_lonlat": [
+          10.375398439591512,
+          1.913085072926824,
+          10.632544589216264,
+          2.129406028498281
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GNQ:ADM2:11065452B42024070816207",
+      "shapeName": "ELOBEY CHICO",
+      "shapeType": "ADM2",
+      "shapeGroup": "GNQ",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 49,
+        "bbox_lonlat": [
+          9.515123651381204,
+          0.995241038003792,
+          9.522054843812871,
+          1.004191405689576
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GNQ:ADM2:11065452B43435483695389",
+      "shapeName": "NSOC NSOMO",
+      "shapeType": "ADM2",
+      "shapeGroup": "GNQ",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 276,
+        "bbox_lonlat": [
+          10.921321991218216,
+          1.753618504062085,
+          11.247099975952201,
+          2.118041988797598
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GNQ:ADM2:11065452B47830871634702",
+      "shapeName": "ANNOBON",
+      "shapeType": "ADM2",
+      "shapeGroup": "GNQ",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "MultiPolygon",
+        "component_count": 2,
+        "ring_count": 2,
+        "coordinate_vertex_count": 568,
+        "bbox_lonlat": [
+          5.616197635017985,
+          -1.464578202757545,
+          5.657813313748262,
+          -1.398376969924754
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GNQ:ADM2:11065452B58050641555743",
+      "shapeName": "NSORK",
+      "shapeType": "ADM2",
+      "shapeGroup": "GNQ",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 733,
+        "bbox_lonlat": [
+          10.96116499708318,
+          1.000012943850005,
+          11.336620874505988,
+          1.52526657450759
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GNQ:ADM2:11065452B59369715507709",
+      "shapeName": "MACHINDA",
+      "shapeType": "ADM2",
+      "shapeGroup": "GNQ",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 233,
+        "bbox_lonlat": [
+          9.913924017159513,
+          1.671574375729887,
+          10.052366993869493,
+          2.200319064133127
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GNQ:ADM2:11065452B6027875666302",
+      "shapeName": "EBEBIYIN",
+      "shapeType": "ADM2",
+      "shapeGroup": "GNQ",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 366,
+        "bbox_lonlat": [
+          10.993494518720556,
+          1.760882541608341,
+          11.402382530332797,
+          2.197526932916409
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GNQ:ADM2:11065452B61336086634219",
+      "shapeName": "AYENE",
+      "shapeType": "ADM2",
+      "shapeGroup": "GNQ",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 402,
+        "bbox_lonlat": [
+          10.522870999151797,
+          1.559571958488176,
+          10.817770001252997,
+          2.021497012298641
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GNQ:ADM2:11065452B63780080368940",
+      "shapeName": "CORISCO",
+      "shapeType": "ADM2",
+      "shapeGroup": "GNQ",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 155,
+        "bbox_lonlat": [
+          9.303056449023519,
+          0.888900182248268,
+          9.345263026343787,
+          0.936246439806112
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GNQ:ADM2:11065452B68125244133984",
+      "shapeName": "BANEY",
+      "shapeType": "ADM2",
+      "shapeGroup": "GNQ",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 253,
+        "bbox_lonlat": [
+          8.754444022916086,
+          3.525978983356715,
+          8.937879030420403,
+          3.763255005363382
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GNQ:ADM2:11065452B69220194361963",
+      "shapeName": "LUBA",
+      "shapeType": "ADM2",
+      "shapeGroup": "GNQ",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 456,
+        "bbox_lonlat": [
+          8.418744023671831,
+          3.2074530042198,
+          8.754444022916086,
+          3.614544967372716
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GNQ:ADM2:11065452B69337055746076",
+      "shapeName": "MBINI",
+      "shapeType": "ADM2",
+      "shapeGroup": "GNQ",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 430,
+        "bbox_lonlat": [
+          9.575979068027483,
+          1.468677019501731,
+          10.114330983836524,
+          1.712760358914394
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GNQ:ADM2:11065452B69866248222639",
+      "shapeName": "RIABA",
+      "shapeType": "ADM2",
+      "shapeGroup": "GNQ",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 281,
+        "bbox_lonlat": [
+          8.658497002713162,
+          3.230507972176231,
+          8.854915970212009,
+          3.589387999912695
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GNQ:ADM2:11065452B74289865102960",
+      "shapeName": "NKIMI",
+      "shapeType": "ADM2",
+      "shapeGroup": "GNQ",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 567,
+        "bbox_lonlat": [
+          10.306950730587007,
+          1.672727006538624,
+          10.619299980380042,
+          2.172698290342285
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GNQ:ADM2:11065452B87560810385120",
+      "shapeName": "BICURGA",
+      "shapeType": "ADM2",
+      "shapeGroup": "GNQ",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 109,
+        "bbox_lonlat": [
+          10.061133022163348,
+          1.356664297139362,
+          10.590756344844573,
+          1.741460028262702
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GNQ:ADM2:11065452B89932418637458",
+      "shapeName": "ACONIBE",
+      "shapeType": "ADM2",
+      "shapeGroup": "GNQ",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 1316,
+        "bbox_lonlat": [
+          10.710756811771505,
+          1.073285014745708,
+          11.16567087058622,
+          1.604335431106016
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GNQ:ADM2:11065452B93144755032170",
+      "shapeName": "ACURENAM",
+      "shapeType": "ADM2",
+      "shapeGroup": "GNQ",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 814,
+        "bbox_lonlat": [
+          10.21033738460809,
+          1.000098865052132,
+          10.976528017030653,
+          1.235388024897245
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GNQ:ADM2:11065452B93694652116414",
+      "shapeName": "MONGOMO",
+      "shapeType": "ADM2",
+      "shapeGroup": "GNQ",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 986,
+        "bbox_lonlat": [
+          11.069963589709605,
+          1.439340765131542,
+          11.40637650185223,
+          1.81063247347297
+        ],
+        "empty": false
+      }
+    },
+    {
+      "id": "gb:GNQ:ADM2:11065452B98139425844484",
+      "shapeName": "BATA",
+      "shapeType": "ADM2",
+      "shapeGroup": "GNQ",
+      "shapeISO": "",
+      "geometry": {
+        "geometry_type": "Polygon",
+        "component_count": 1,
+        "ring_count": 1,
+        "coordinate_vertex_count": 809,
+        "bbox_lonlat": [
+          9.66319995332321,
+          1.65959004007436,
+          9.933283275512741,
+          2.344830232760669
+        ],
+        "empty": false
+      }
+    }
+  ],
+  "method": "Directly count GeoJSON Polygon/MultiPolygon coordinate components/rings/vertices and compute lon/lat coordinate bounds for each scoped source feature. This does not test geometry validity, topology, disputed boundaries, or legal territory; polygon components can represent islands/coastline as well as disconnected administrative territory."
+}

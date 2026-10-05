@@ -1,0 +1,21 @@
+{
+  "issue_number": 463,
+  "title": "Review Central Africa interior batch 4: Congo, Equatorial Guinea, Gabon + 2 more existing areas",
+  "url": "https://github.com/ChengshuLi/WorldAtlas/issues/463",
+  "snapshot_date_utc": "2026-10-05",
+  "issue_created_at": "2026-10-02T21:53:51Z",
+  "work_contract": {
+    "max_prs": 2,
+    "depends_on": [
+      33,
+      36
+    ],
+    "scope": "Review-only geographic evidence packet regional-review:42fc12dc97387a2a for framework:region:west-central-tropical-africa:1b603899aaf3: exactly 227 pinned member locations; owned scoped evidence only; stage sourced bounded correction children",
+    "mode": "geography",
+    "owned_paths": [
+      "data/regional-review/regional-review-42fc12dc97387a2a/"
+    ]
+  },
+  "acceptance_text": "Acceptance:\n- Document every scoped location and province; classify justified/correction-needed/insufficient-evidence individually.\n- Research actual source geographic role, source vintage, completeness, license, semantic tier suitability and traceable citations; ADM number alone cannot justify a tier.\n- Review fragmented city territories, province-sized locations, anonymous administrative remainders, disconnected territories, omitted islands, repeated tiers, oversized groups, weak parents and inconsistent neighboring units.\n- Cover every scoped area purpose, referencing other packet scopes where only part of an area is owned.\n- Give sourced correction recommendations and explicit unresolved gaps; create bounded correction/source-restoration followups. Never close source gaps by structure checks or unsupported exceptions.\n- Preserve approved outer scopes and coordinate shared parent/source predecessor edits. No geographic or record changes in initial review.\n- Two PR budget applies to this evidence packet; if new work exceeds it split bounded children. Completion of initial review does not certify the regional branch or enable imports.\n\n",
+  "retained_source_metadata_text": "Retained source metadata to independently verify (identical metadata grouped; exact source/entity IDs remain in the scope JSON):\n- 1 source/entity IDs, 169 scoped locations: roles=['territory, city']; vintage=['2019']; license=['Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)']; entry points=['https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/COD/ADM2/geoBoundaries-COD-ADM2.geojson']\n- 1 source/entity IDs, 30 scoped locations: roles=['Department']; vintage=['2018']; license=['Creative Commons Attribution 3.0 License']; entry points=['https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/GAB/ADM2/geoBoundaries-GAB-ADM2.geojson']\n- 1 source/entity IDs, 28 scoped locations: roles=['District']; vintage=['2013']; license=['Creative Commons Attribution 4.0 International (CC BY 4.0)']; entry points=['https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/GNQ/ADM2/geoBoundaries-GNQ-ADM2.geojson']\n\nDerived atlas-unit IDs are not independent source collections. Reconstruct their original source membership/role from retained inputs and independently verify it. Province subset membership is recoverable from the exact location list and pinned index; duplicated location lists were omitted from province summaries.\n\n"
+}
