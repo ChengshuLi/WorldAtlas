@@ -1,0 +1,2057 @@
+{
+  "notice": "Derived scoped extract; geometry omitted. Extracted from DGU INSPIRE GML using municipality/city 3rdOrder names and county parent titles. DGU open data terms require source attribution and a modification statement.",
+  "attribution": "State Geodetic Administration (DGU), Republic of Croatia, Open Data. Source dataset: INSPIRE Administrative Units, GML 3.2.1, ETRS89/LAEA.",
+  "modification_statement": "Only scoped Croatia name/code/level/parent/date metadata is retained; geometries and out-of-scope units are omitted. No extracted name/code/level/parent/date value was edited.",
+  "retrieved_at": "2026-10-05",
+  "source_url": "https://geoportal.dgu.hr/services/atom/INSPIRE_Administrative_Units_(AU).zip",
+  "source_atom_url": "https://geoportal.dgu.hr/services/atom/au/xml",
+  "archive_sha256": "4a6b9f23e438861f2462b0d6aa06bd4140112e82947a4cdee06ce7a3b40ae23f",
+  "archive_bytes": 208774354,
+  "gml_member_name": "AdministrativeUnit.gml",
+  "gml_member_bytes": 600770112,
+  "gml_member_sha256": "add049ecfb0355f0d64f912b99ba79021ad0f0d5f1cb2434ec5b1187a7446d69",
+  "gml_features_returned": 50192,
+  "gml_declared_number_returned": 10000,
+  "gml_features_matched": 50192,
+  "gml_return_count_consistent": false,
+  "gml_time_stamp": "2026-10-04T04:27:14.428Z",
+  "gml_next_page_url": "http://geoserver-inspire-wfs-services.geoserver-inspire:8080/geoserver-inspire-wfs/au/wfs?TYPENAME=au%3AAdministrativeUnit&RESULTTYPE=results&REQUEST=GetFeature&OUTPUTFORMAT=application%2Fgml%2Bxml%3B%20version%3D3.2&SRSNAME=http%3A%2F%2Fwww.opengis.net%2Fdef%2Fcrs%2FEPSG%2F0%2F3035&VERSION=2.0.0&COUNT=10000&SERVICE=WFS&STARTINDEX=10000",
+  "gml_3rd_order_in_returned_page": 556,
+  "scope_rows": [
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B10389356844797",
+      "geoBoundaries_name": "Općina Sibinj",
+      "atlas_parent_province": "Brod-Posavina",
+      "official_matches": [
+        {
+          "official_name": "Sibinj",
+          "national_code": "03883",
+          "inspire_local_id": "JLS.0052000363",
+          "dgu_gml_id": "AdministrativeUnit.2187340716",
+          "level": "3rdOrder",
+          "parent_title": "Brodsko-posavska županija",
+          "valid_from": "2025-10-14T13:25:58.357Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B11999988634347",
+      "geoBoundaries_name": "Općina Čepin",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Čepin",
+          "national_code": "00655",
+          "inspire_local_id": "JLS.0052000079",
+          "dgu_gml_id": "AdministrativeUnit.2185941209",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B12927097418582",
+      "geoBoundaries_name": "Općina Marijanci",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Marijanci",
+          "national_code": "02577",
+          "inspire_local_id": "JLS.0052000246",
+          "dgu_gml_id": "AdministrativeUnit.2186738642",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-10-06T10:40:13.646Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B14439003612860",
+      "geoBoundaries_name": "Grad Valpovo",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Valpovo",
+          "national_code": "04715",
+          "inspire_local_id": "JLS.0052000432",
+          "dgu_gml_id": "AdministrativeUnit.2187902888",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-10-23T12:04:08.740Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B14451556641636",
+      "geoBoundaries_name": "Općina Semeljci",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Semeljci",
+          "national_code": "03867",
+          "inspire_local_id": "JLS.0052000361",
+          "dgu_gml_id": "AdministrativeUnit.2187339143",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-10-14T13:25:58.357Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B15048547422283",
+      "geoBoundaries_name": "Općina Tompojevci",
+      "atlas_parent_province": "Vukovar-Syrmia",
+      "official_matches": [
+        {
+          "official_name": "Tompojevci",
+          "national_code": "04561",
+          "inspire_local_id": "JLS.0052000419",
+          "dgu_gml_id": "AdministrativeUnit.2187883011",
+          "level": "3rdOrder",
+          "parent_title": "Vukovarsko-srijemska županija",
+          "valid_from": "2025-10-23T12:04:08.740Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B15513479001073",
+      "geoBoundaries_name": "Grad Donji Miholjac",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Donji Miholjac",
+          "national_code": "00868",
+          "inspire_local_id": "JLS.0052000098",
+          "dgu_gml_id": "AdministrativeUnit.2186043764",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B15575297558867",
+      "geoBoundaries_name": "Grad Otok",
+      "atlas_parent_province": "Vukovar-Syrmia",
+      "official_matches": [
+        {
+          "official_name": "Otok",
+          "national_code": "05355",
+          "inspire_local_id": "JLS.0052000489",
+          "dgu_gml_id": "AdministrativeUnit.2186771056",
+          "level": "3rdOrder",
+          "parent_title": "Vukovarsko-srijemska županija",
+          "valid_from": "2025-10-06T10:40:13.646Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B15965971514853",
+      "geoBoundaries_name": "Općina Bogdanovci",
+      "atlas_parent_province": "Vukovar-Syrmia",
+      "official_matches": [
+        {
+          "official_name": "Bogdanovci",
+          "national_code": "00264",
+          "inspire_local_id": "JLS.0052000046",
+          "dgu_gml_id": "AdministrativeUnit.2185929112",
+          "level": "3rdOrder",
+          "parent_title": "Vukovarsko-srijemska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B16662645858011",
+      "geoBoundaries_name": "Grad Slatina",
+      "atlas_parent_province": "Virovitica-Podravina",
+      "official_matches": [
+        {
+          "official_name": "Slatina",
+          "national_code": "03956",
+          "inspire_local_id": "JLS.0052000369",
+          "dgu_gml_id": "AdministrativeUnit.2187345747",
+          "level": "3rdOrder",
+          "parent_title": "Virovitičko-podravska županija",
+          "valid_from": "2025-10-14T13:25:58.357Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B16839252431518",
+      "geoBoundaries_name": "Općina Magdenovac",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": []
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B1743176018928",
+      "geoBoundaries_name": "Općina Velika",
+      "atlas_parent_province": "Požega-Slavonia",
+      "official_matches": [
+        {
+          "official_name": "Velika",
+          "national_code": "04758",
+          "inspire_local_id": "JLS.0052000436",
+          "dgu_gml_id": "AdministrativeUnit.2187905278",
+          "level": "3rdOrder",
+          "parent_title": "Požeško-slavonska županija",
+          "valid_from": "2025-10-23T12:04:08.740Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B17483768714043",
+      "geoBoundaries_name": "Općina Stara Gradiška",
+      "atlas_parent_province": "Brod-Posavina",
+      "official_matches": [
+        {
+          "official_name": "Stara Gradiška",
+          "national_code": "04120",
+          "inspire_local_id": "JLS.0052000381",
+          "dgu_gml_id": "AdministrativeUnit.2186016789",
+          "level": "3rdOrder",
+          "parent_title": "Brodsko-posavska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B18726828740882",
+      "geoBoundaries_name": "Općina Vrpolje",
+      "atlas_parent_province": "Brod-Posavina",
+      "official_matches": [
+        {
+          "official_name": "Vrpolje",
+          "national_code": "05142",
+          "inspire_local_id": "JLS.0052000471",
+          "dgu_gml_id": "AdministrativeUnit.2187928851",
+          "level": "3rdOrder",
+          "parent_title": "Brodsko-posavska županija",
+          "valid_from": "2025-10-23T12:04:08.740Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B22178609594619",
+      "geoBoundaries_name": "Općina Čeminac",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Čeminac",
+          "national_code": "00647",
+          "inspire_local_id": "JLS.0052000078",
+          "dgu_gml_id": "AdministrativeUnit.2185940877",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B24164746489600",
+      "geoBoundaries_name": "Općina Špišić Bukovica",
+      "atlas_parent_province": "Virovitica-Podravina",
+      "official_matches": [
+        {
+          "official_name": "Špišić Bukovica",
+          "national_code": "04499",
+          "inspire_local_id": "JLS.0052000413",
+          "dgu_gml_id": "AdministrativeUnit.2187366084",
+          "level": "3rdOrder",
+          "parent_title": "Virovitičko-podravska županija",
+          "valid_from": "2025-10-14T13:25:58.357Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B24260279509820",
+      "geoBoundaries_name": "Općina Feričanci",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Feričanci",
+          "national_code": "01163",
+          "inspire_local_id": "JLS.0052000125",
+          "dgu_gml_id": "AdministrativeUnit.2185956873",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B24774966075284",
+      "geoBoundaries_name": "Općina Cernik",
+      "atlas_parent_province": "Brod-Posavina",
+      "official_matches": [
+        {
+          "official_name": "Cernik",
+          "national_code": "00469",
+          "inspire_local_id": "JLS.0052000062",
+          "dgu_gml_id": "AdministrativeUnit.2185934700",
+          "level": "3rdOrder",
+          "parent_title": "Brodsko-posavska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B24975499368578",
+      "geoBoundaries_name": "Općina Nuštar",
+      "atlas_parent_province": "Vukovar-Syrmia",
+      "official_matches": [
+        {
+          "official_name": "Nuštar",
+          "national_code": "02941",
+          "inspire_local_id": "JLS.0052000277",
+          "dgu_gml_id": "AdministrativeUnit.2186760774",
+          "level": "3rdOrder",
+          "parent_title": "Vukovarsko-srijemska županija",
+          "valid_from": "2025-10-06T10:40:13.646Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B25260827937370",
+      "geoBoundaries_name": "Općina Čačinci",
+      "atlas_parent_province": "Virovitica-Podravina",
+      "official_matches": [
+        {
+          "official_name": "Čačinci",
+          "national_code": "00566",
+          "inspire_local_id": "JLS.0052000072",
+          "dgu_gml_id": "AdministrativeUnit.2185938249",
+          "level": "3rdOrder",
+          "parent_title": "Virovitičko-podravska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B26001092776755",
+      "geoBoundaries_name": "Općina Jarmina",
+      "atlas_parent_province": "Vukovar-Syrmia",
+      "official_matches": [
+        {
+          "official_name": "Jarmina",
+          "national_code": "01660",
+          "inspire_local_id": "JLS.0052000167",
+          "dgu_gml_id": "AdministrativeUnit.2185972171",
+          "level": "3rdOrder",
+          "parent_title": "Vukovarsko-srijemska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B26041090574045",
+      "geoBoundaries_name": "Grad Županja",
+      "atlas_parent_province": "Vukovar-Syrmia",
+      "official_matches": [
+        {
+          "official_name": "Županja",
+          "national_code": "05347",
+          "inspire_local_id": "JLS.0052000488",
+          "dgu_gml_id": "AdministrativeUnit.2187940305",
+          "level": "3rdOrder",
+          "parent_title": "Vukovarsko-srijemska županija",
+          "valid_from": "2025-10-23T12:04:08.740Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B29255129304529",
+      "geoBoundaries_name": "Općina Bilje",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Bilje",
+          "national_code": "00213",
+          "inspire_local_id": "JLS.0052000041",
+          "dgu_gml_id": "AdministrativeUnit.2185927706",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B30030645114958",
+      "geoBoundaries_name": "Općina Podgorač",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Podgorač",
+          "national_code": "03409",
+          "inspire_local_id": "JLS.0052000319",
+          "dgu_gml_id": "AdministrativeUnit.2186894154",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-10-08T15:19:34.660Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B31216963896423",
+      "geoBoundaries_name": "Općina Gunja",
+      "atlas_parent_province": "Vukovar-Syrmia",
+      "official_matches": [
+        {
+          "official_name": "Gunja",
+          "national_code": "01414",
+          "inspire_local_id": "JLS.0052000148",
+          "dgu_gml_id": "AdministrativeUnit.2185966073",
+          "level": "3rdOrder",
+          "parent_title": "Vukovarsko-srijemska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B3136007807850",
+      "geoBoundaries_name": "Općina Ivankovo",
+      "atlas_parent_province": "Vukovar-Syrmia",
+      "official_matches": [
+        {
+          "official_name": "Ivankovo",
+          "national_code": "01597",
+          "inspire_local_id": "JLS.0052000162",
+          "dgu_gml_id": "AdministrativeUnit.2185970249",
+          "level": "3rdOrder",
+          "parent_title": "Vukovarsko-srijemska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B31858684565742",
+      "geoBoundaries_name": "Općina Donja Motičina",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Donja Motičina",
+          "national_code": "05762",
+          "inspire_local_id": "JLS.0052000528",
+          "dgu_gml_id": "AdministrativeUnit.2196974320",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2026-09-22T15:05:53.004Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B32410067293519",
+      "geoBoundaries_name": "Općina Vođinci",
+      "atlas_parent_province": "Vukovar-Syrmia",
+      "official_matches": [
+        {
+          "official_name": "Vođinci",
+          "national_code": "05843",
+          "inspire_local_id": "JLS.0052000534",
+          "dgu_gml_id": "AdministrativeUnit.2187923679",
+          "level": "3rdOrder",
+          "parent_title": "Vukovarsko-srijemska županija",
+          "valid_from": "2025-10-23T12:04:08.740Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B3290816141888",
+      "geoBoundaries_name": "Općina Stari Jankovci",
+      "atlas_parent_province": "Vukovar-Syrmia",
+      "official_matches": [
+        {
+          "official_name": "Stari Jankovci",
+          "national_code": "04146",
+          "inspire_local_id": "JLS.0052000383",
+          "dgu_gml_id": "AdministrativeUnit.2187349056",
+          "level": "3rdOrder",
+          "parent_title": "Vukovarsko-srijemska županija",
+          "valid_from": "2025-10-14T13:25:58.357Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B32929341461785",
+      "geoBoundaries_name": "Općina Stari Mikanovci",
+      "atlas_parent_province": "Vukovar-Syrmia",
+      "official_matches": [
+        {
+          "official_name": "Stari Mikanovci",
+          "national_code": "04154",
+          "inspire_local_id": "JLS.0052000384",
+          "dgu_gml_id": "AdministrativeUnit.2187349544",
+          "level": "3rdOrder",
+          "parent_title": "Vukovarsko-srijemska županija",
+          "valid_from": "2025-10-14T13:25:58.357Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B34927547742350",
+      "geoBoundaries_name": "Općina Cerna",
+      "atlas_parent_province": "Vukovar-Syrmia",
+      "official_matches": [
+        {
+          "official_name": "Cerna",
+          "national_code": "00442",
+          "inspire_local_id": "JLS.0052000061",
+          "dgu_gml_id": "AdministrativeUnit.2185934500",
+          "level": "3rdOrder",
+          "parent_title": "Vukovarsko-srijemska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B36185360982273",
+      "geoBoundaries_name": "Općina Viljevo",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Viljevo",
+          "national_code": "04855",
+          "inspire_local_id": "JLS.0052000444",
+          "dgu_gml_id": "AdministrativeUnit.2187911438",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-10-23T12:04:08.740Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B36448464890668",
+      "geoBoundaries_name": "Općina Rešetari",
+      "atlas_parent_province": "Brod-Posavina",
+      "official_matches": [
+        {
+          "official_name": "Rešetari",
+          "national_code": "03727",
+          "inspire_local_id": "JLS.0052000348",
+          "dgu_gml_id": "AdministrativeUnit.2187328688",
+          "level": "3rdOrder",
+          "parent_title": "Brodsko-posavska županija",
+          "valid_from": "2025-10-14T13:25:58.357Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B37019412799713",
+      "geoBoundaries_name": "Općina Levanjska Varoš",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Levanjska Varoš",
+          "national_code": "02305",
+          "inspire_local_id": "JLS.0052000223",
+          "dgu_gml_id": "AdministrativeUnit.2186175323",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-09-18T13:29:17.648Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B38008088244386",
+      "geoBoundaries_name": "Općina Gradište",
+      "atlas_parent_province": "Vukovar-Syrmia",
+      "official_matches": [
+        {
+          "official_name": "Gradište",
+          "national_code": "01376",
+          "inspire_local_id": "JLS.0052000144",
+          "dgu_gml_id": "AdministrativeUnit.2185965067",
+          "level": "3rdOrder",
+          "parent_title": "Vukovarsko-srijemska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B38569390414051",
+      "geoBoundaries_name": "Općina Drenje",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Drenje",
+          "national_code": "00949",
+          "inspire_local_id": "JLS.0052000105",
+          "dgu_gml_id": "AdministrativeUnit.2185949881",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B38954624880770",
+      "geoBoundaries_name": "Općina Nova Kapela",
+      "atlas_parent_province": "Brod-Posavina",
+      "official_matches": [
+        {
+          "official_name": "Nova Kapela",
+          "national_code": "02852",
+          "inspire_local_id": "JLS.0052000269",
+          "dgu_gml_id": "AdministrativeUnit.2186754535",
+          "level": "3rdOrder",
+          "parent_title": "Brodsko-posavska županija",
+          "valid_from": "2025-10-06T10:40:13.646Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B39006440291220",
+      "geoBoundaries_name": "Općina Brestovac",
+      "atlas_parent_province": "Požega-Slavonia",
+      "official_matches": [
+        {
+          "official_name": "Brestovac",
+          "national_code": "00353",
+          "inspire_local_id": "JLS.0052000052",
+          "dgu_gml_id": "AdministrativeUnit.2185931330",
+          "level": "3rdOrder",
+          "parent_title": "Požeško-slavonska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B39404743089423",
+      "geoBoundaries_name": "Općina Bebrina",
+      "atlas_parent_province": "Brod-Posavina",
+      "official_matches": [
+        {
+          "official_name": "Bebrina",
+          "national_code": "00108",
+          "inspire_local_id": "JLS.0052000031",
+          "dgu_gml_id": "AdministrativeUnit.2185924572",
+          "level": "3rdOrder",
+          "parent_title": "Brodsko-posavska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B40031909993405",
+      "geoBoundaries_name": "Općina Šodolovci",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Šodolovci",
+          "national_code": "06149",
+          "inspire_local_id": "JLS.0052000561",
+          "dgu_gml_id": "AdministrativeUnit.2187881949",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-10-23T12:04:08.740Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B41528643481489",
+      "geoBoundaries_name": "Općina Suhopolje",
+      "atlas_parent_province": "Virovitica-Podravina",
+      "official_matches": [
+        {
+          "official_name": "Suhopolje",
+          "national_code": "04243",
+          "inspire_local_id": "JLS.0052000391",
+          "dgu_gml_id": "AdministrativeUnit.2187352597",
+          "level": "3rdOrder",
+          "parent_title": "Virovitičko-podravska županija",
+          "valid_from": "2025-10-14T13:25:58.357Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B41964845768137",
+      "geoBoundaries_name": "Općina Satnica Đakovačka",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Satnica Đakovačka",
+          "national_code": "03816",
+          "inspire_local_id": "JLS.0052000357",
+          "dgu_gml_id": "AdministrativeUnit.2187337456",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-10-14T13:25:58.357Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B42043584359745",
+      "geoBoundaries_name": "Općina Gorjani",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Gorjani",
+          "national_code": "01244",
+          "inspire_local_id": "JLS.0052000133",
+          "dgu_gml_id": "AdministrativeUnit.2186041588",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B43077810410693",
+      "geoBoundaries_name": "Općina Velika Kopanica",
+      "atlas_parent_province": "Brod-Posavina",
+      "official_matches": [
+        {
+          "official_name": "Velika Kopanica",
+          "national_code": "04766",
+          "inspire_local_id": "JLS.0052000437",
+          "dgu_gml_id": "AdministrativeUnit.2187907424",
+          "level": "3rdOrder",
+          "parent_title": "Brodsko-posavska županija",
+          "valid_from": "2025-10-23T12:04:08.740Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B43178780205592",
+      "geoBoundaries_name": "Općina Gornja Vrba",
+      "atlas_parent_province": "Brod-Posavina",
+      "official_matches": [
+        {
+          "official_name": "Gornja Vrba",
+          "national_code": "05690",
+          "inspire_local_id": "JLS.0052000521",
+          "dgu_gml_id": "AdministrativeUnit.2186033302",
+          "level": "3rdOrder",
+          "parent_title": "Brodsko-posavska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B43548041333920",
+      "geoBoundaries_name": "Općina Čađavica",
+      "atlas_parent_province": "Virovitica-Podravina",
+      "official_matches": [
+        {
+          "official_name": "Čađavica",
+          "national_code": "00574",
+          "inspire_local_id": "JLS.0052000073",
+          "dgu_gml_id": "AdministrativeUnit.2185938823",
+          "level": "3rdOrder",
+          "parent_title": "Virovitičko-podravska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B44296742675796",
+      "geoBoundaries_name": "Općina Vladislavci",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Vladislavci",
+          "national_code": "05797",
+          "inspire_local_id": "JLS.0052000530",
+          "dgu_gml_id": "AdministrativeUnit.2187921593",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-10-23T12:04:08.740Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B44648318365963",
+      "geoBoundaries_name": "Općina Jakšić",
+      "atlas_parent_province": "Požega-Slavonia",
+      "official_matches": [
+        {
+          "official_name": "Jakšić",
+          "national_code": "01643",
+          "inspire_local_id": "JLS.0052000165",
+          "dgu_gml_id": "AdministrativeUnit.2185971363",
+          "level": "3rdOrder",
+          "parent_title": "Požeško-slavonska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B44898918819613",
+      "geoBoundaries_name": "Općina Oriovac",
+      "atlas_parent_province": "Brod-Posavina",
+      "official_matches": [
+        {
+          "official_name": "Oriovac",
+          "national_code": "03093",
+          "inspire_local_id": "JLS.0052000291",
+          "dgu_gml_id": "AdministrativeUnit.2186767407",
+          "level": "3rdOrder",
+          "parent_title": "Brodsko-posavska županija",
+          "valid_from": "2025-10-06T10:40:13.646Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B4506197395448",
+      "geoBoundaries_name": "Općina Babina Greda",
+      "atlas_parent_province": "Vukovar-Syrmia",
+      "official_matches": [
+        {
+          "official_name": "Babina Greda",
+          "national_code": "00035",
+          "inspire_local_id": "JLS.0052000024",
+          "dgu_gml_id": "AdministrativeUnit.2185922884",
+          "level": "3rdOrder",
+          "parent_title": "Vukovarsko-srijemska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B46895953999476",
+      "geoBoundaries_name": "Općina Zdenci",
+      "atlas_parent_province": "Virovitica-Podravina",
+      "official_matches": [
+        {
+          "official_name": "Zdenci",
+          "national_code": "05240",
+          "inspire_local_id": "JLS.0052000480",
+          "dgu_gml_id": "AdministrativeUnit.2187936086",
+          "level": "3rdOrder",
+          "parent_title": "Virovitičko-podravska županija",
+          "valid_from": "2025-10-23T12:04:08.740Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B48067545354715",
+      "geoBoundaries_name": "Općina Kneževi Vinogradi",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Kneževi Vinogradi",
+          "national_code": "01953",
+          "inspire_local_id": "JLS.0052000192",
+          "dgu_gml_id": "AdministrativeUnit.2185978005",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B48811452522993",
+      "geoBoundaries_name": "Općina Petlovac",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Petlovac",
+          "national_code": "03255",
+          "inspire_local_id": "JLS.0052000305",
+          "dgu_gml_id": "AdministrativeUnit.2186886159",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-10-08T15:19:34.660Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B49003275948554",
+      "geoBoundaries_name": "Općina Gradina",
+      "atlas_parent_province": "Virovitica-Podravina",
+      "official_matches": [
+        {
+          "official_name": "Gradina",
+          "national_code": "01368",
+          "inspire_local_id": "JLS.0052000143",
+          "dgu_gml_id": "AdministrativeUnit.2185964583",
+          "level": "3rdOrder",
+          "parent_title": "Virovitičko-podravska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B49513223272085",
+      "geoBoundaries_name": "Općina Drenovci",
+      "atlas_parent_province": "Vukovar-Syrmia",
+      "official_matches": [
+        {
+          "official_name": "Drenovci",
+          "national_code": "00922",
+          "inspire_local_id": "JLS.0052000104",
+          "dgu_gml_id": "AdministrativeUnit.2185949417",
+          "level": "3rdOrder",
+          "parent_title": "Vukovarsko-srijemska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B4953229938014",
+      "geoBoundaries_name": "Općina Gornji Bogićevci",
+      "atlas_parent_province": "Brod-Posavina",
+      "official_matches": [
+        {
+          "official_name": "Gornji Bogićevci",
+          "national_code": "01279",
+          "inspire_local_id": "JLS.0052000135",
+          "dgu_gml_id": "AdministrativeUnit.2185960053",
+          "level": "3rdOrder",
+          "parent_title": "Brodsko-posavska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B52937699579834",
+      "geoBoundaries_name": "Općina Tovarnik",
+      "atlas_parent_province": "Vukovar-Syrmia",
+      "official_matches": [
+        {
+          "official_name": "Tovarnik",
+          "national_code": "04596",
+          "inspire_local_id": "JLS.0052000422",
+          "dgu_gml_id": "AdministrativeUnit.2187884761",
+          "level": "3rdOrder",
+          "parent_title": "Vukovarsko-srijemska županija",
+          "valid_from": "2025-10-23T12:04:08.740Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B52972755512061",
+      "geoBoundaries_name": "Općina Vuka",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Vuka",
+          "national_code": "05177",
+          "inspire_local_id": "JLS.0052000473",
+          "dgu_gml_id": "AdministrativeUnit.2187929869",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-10-23T12:04:08.740Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B5342757734737",
+      "geoBoundaries_name": "Općina Klakar",
+      "atlas_parent_province": "Brod-Posavina",
+      "official_matches": [
+        {
+          "official_name": "Klakar",
+          "national_code": "01856",
+          "inspire_local_id": "JLS.0052000184",
+          "dgu_gml_id": "AdministrativeUnit.2185975907",
+          "level": "3rdOrder",
+          "parent_title": "Brodsko-posavska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B54914345410648",
+      "geoBoundaries_name": "Općina Voćin",
+      "atlas_parent_province": "Virovitica-Podravina",
+      "official_matches": [
+        {
+          "official_name": "Voćin",
+          "national_code": "04995",
+          "inspire_local_id": "JLS.0052000457",
+          "dgu_gml_id": "AdministrativeUnit.2187921782",
+          "level": "3rdOrder",
+          "parent_title": "Virovitičko-podravska županija",
+          "valid_from": "2025-10-23T12:04:08.740Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B55009736004667",
+      "geoBoundaries_name": "Grad Beli Manastir",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Beli Manastir",
+          "national_code": "00132",
+          "inspire_local_id": "JLS.0052000034",
+          "dgu_gml_id": "AdministrativeUnit.2185925996",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B55576861905827",
+      "geoBoundaries_name": "Općina Trnava",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Trnava",
+          "national_code": "04618",
+          "inspire_local_id": "JLS.0052000424",
+          "dgu_gml_id": "AdministrativeUnit.2187885917",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-10-23T12:04:08.740Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B55665753142928",
+      "geoBoundaries_name": "Grad Ilok",
+      "atlas_parent_province": "Vukovar-Syrmia",
+      "official_matches": [
+        {
+          "official_name": "Ilok",
+          "national_code": "01546",
+          "inspire_local_id": "JLS.0052000158",
+          "dgu_gml_id": "AdministrativeUnit.2185968179",
+          "level": "3rdOrder",
+          "parent_title": "Vukovarsko-srijemska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B55937535966272",
+      "geoBoundaries_name": "Grad Našice",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Našice",
+          "national_code": "02780",
+          "inspire_local_id": "JLS.0052000263",
+          "dgu_gml_id": "AdministrativeUnit.2196970821",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2026-09-22T15:05:53.004Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B56245481834825",
+      "geoBoundaries_name": "Općina Slavonski Šamac",
+      "atlas_parent_province": "Brod-Posavina",
+      "official_matches": [
+        {
+          "official_name": "Slavonski Šamac",
+          "national_code": "03972",
+          "inspire_local_id": "JLS.0052000371",
+          "dgu_gml_id": "AdministrativeUnit.2186015397",
+          "level": "3rdOrder",
+          "parent_title": "Brodsko-posavska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B57122337341822",
+      "geoBoundaries_name": "Grad Lipik",
+      "atlas_parent_province": "Požega-Slavonia",
+      "official_matches": [
+        {
+          "official_name": "Lipik",
+          "national_code": "02313",
+          "inspire_local_id": "JLS.0052000224",
+          "dgu_gml_id": "AdministrativeUnit.2186175735",
+          "level": "3rdOrder",
+          "parent_title": "Požeško-slavonska županija",
+          "valid_from": "2025-09-18T13:29:17.648Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B57149227016444",
+      "geoBoundaries_name": "Općina Negoslavci",
+      "atlas_parent_province": "Vukovar-Syrmia",
+      "official_matches": [
+        {
+          "official_name": "Negoslavci",
+          "national_code": "06122",
+          "inspire_local_id": "JLS.0052000560",
+          "dgu_gml_id": "AdministrativeUnit.2186751451",
+          "level": "3rdOrder",
+          "parent_title": "Vukovarsko-srijemska županija",
+          "valid_from": "2025-10-06T10:40:13.646Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B57794033999299",
+      "geoBoundaries_name": "Općina Staro Petrovo Selo",
+      "atlas_parent_province": "Brod-Posavina",
+      "official_matches": [
+        {
+          "official_name": "Staro Petrovo Selo",
+          "national_code": "04189",
+          "inspire_local_id": "JLS.0052000386",
+          "dgu_gml_id": "AdministrativeUnit.2187349746",
+          "level": "3rdOrder",
+          "parent_title": "Brodsko-posavska županija",
+          "valid_from": "2025-10-14T13:25:58.357Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B58405997999475",
+      "geoBoundaries_name": "Općina Bošnjaci",
+      "atlas_parent_province": "Vukovar-Syrmia",
+      "official_matches": [
+        {
+          "official_name": "Bošnjaci",
+          "national_code": "00329",
+          "inspire_local_id": "JLS.0052000049",
+          "dgu_gml_id": "AdministrativeUnit.2185930602",
+          "level": "3rdOrder",
+          "parent_title": "Vukovarsko-srijemska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B59356492227203",
+      "geoBoundaries_name": "Općina Nova Bukovica",
+      "atlas_parent_province": "Virovitica-Podravina",
+      "official_matches": [
+        {
+          "official_name": "Nova Bukovica",
+          "national_code": "02836",
+          "inspire_local_id": "JLS.0052000267",
+          "dgu_gml_id": "AdministrativeUnit.2186753751",
+          "level": "3rdOrder",
+          "parent_title": "Virovitičko-podravska županija",
+          "valid_from": "2025-10-06T10:40:13.646Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B60516813250107",
+      "geoBoundaries_name": "Općina Strizivojna",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Strizivojna",
+          "national_code": "04219",
+          "inspire_local_id": "JLS.0052000388",
+          "dgu_gml_id": "AdministrativeUnit.2187351179",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-10-14T13:25:58.357Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B6051759172794",
+      "geoBoundaries_name": "Općina Nijemci",
+      "atlas_parent_province": "Vukovar-Syrmia",
+      "official_matches": [
+        {
+          "official_name": "Nijemci",
+          "national_code": "02950",
+          "inspire_local_id": "JLS.0052000278",
+          "dgu_gml_id": "AdministrativeUnit.2186752738",
+          "level": "3rdOrder",
+          "parent_title": "Vukovarsko-srijemska županija",
+          "valid_from": "2025-10-06T10:40:13.646Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B61145138123050",
+      "geoBoundaries_name": "Općina Đurđenovac",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Đurđenovac",
+          "national_code": "01066",
+          "inspire_local_id": "JLS.0052000117",
+          "dgu_gml_id": "AdministrativeUnit.2185953361",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B61207176090747",
+      "geoBoundaries_name": "Općina Oprisavci",
+      "atlas_parent_province": "Brod-Posavina",
+      "official_matches": [
+        {
+          "official_name": "Oprisavci",
+          "national_code": "03034",
+          "inspire_local_id": "JLS.0052000286",
+          "dgu_gml_id": "AdministrativeUnit.2186765237",
+          "level": "3rdOrder",
+          "parent_title": "Brodsko-posavska županija",
+          "valid_from": "2025-10-06T10:40:13.646Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B61227700521917",
+      "geoBoundaries_name": "Općina Vrbanja",
+      "atlas_parent_province": "Vukovar-Syrmia",
+      "official_matches": [
+        {
+          "official_name": "Vrbanja",
+          "national_code": "05053",
+          "inspire_local_id": "JLS.0052000462",
+          "dgu_gml_id": "AdministrativeUnit.2187924910",
+          "level": "3rdOrder",
+          "parent_title": "Vukovarsko-srijemska županija",
+          "valid_from": "2025-10-23T12:04:08.740Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B62336327656145",
+      "geoBoundaries_name": "Grad Požega",
+      "atlas_parent_province": "Požega-Slavonia",
+      "official_matches": [
+        {
+          "official_name": "Požega",
+          "national_code": "03514",
+          "inspire_local_id": "JLS.0052000330",
+          "dgu_gml_id": "AdministrativeUnit.2186921312",
+          "level": "3rdOrder",
+          "parent_title": "Požeško-slavonska županija",
+          "valid_from": "2025-10-10T10:27:18.212Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B62489498403929",
+      "geoBoundaries_name": "Općina Viškovci",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Viškovci",
+          "national_code": "04944",
+          "inspire_local_id": "JLS.0052000453",
+          "dgu_gml_id": "AdministrativeUnit.2187919837",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-10-23T12:04:08.740Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B63893464410920",
+      "geoBoundaries_name": "Općina Okućani",
+      "atlas_parent_province": "Brod-Posavina",
+      "official_matches": [
+        {
+          "official_name": "Okučani",
+          "national_code": "02992",
+          "inspire_local_id": "JLS.0052000282",
+          "dgu_gml_id": "AdministrativeUnit.2186763130",
+          "level": "3rdOrder",
+          "parent_title": "Brodsko-posavska županija",
+          "valid_from": "2025-10-06T10:40:13.646Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B64631398606645",
+      "geoBoundaries_name": "Općina Antunovac",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Antunovac",
+          "national_code": "00027",
+          "inspire_local_id": "JLS.0052000023",
+          "dgu_gml_id": "AdministrativeUnit.2185922504",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B6465181675011",
+      "geoBoundaries_name": "Općina Brodski Stupnik",
+      "atlas_parent_province": "Brod-Posavina",
+      "official_matches": [
+        {
+          "official_name": "Brodski Stupnik",
+          "national_code": "00396",
+          "inspire_local_id": "JLS.0052000056",
+          "dgu_gml_id": "AdministrativeUnit.2185933206",
+          "level": "3rdOrder",
+          "parent_title": "Brodsko-posavska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B64830075520803",
+      "geoBoundaries_name": "Općina Ernestinovo",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Ernestinovo",
+          "national_code": "01112",
+          "inspire_local_id": "JLS.0052000121",
+          "dgu_gml_id": "AdministrativeUnit.2185955425",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B65505055615012",
+      "geoBoundaries_name": "Općina Popovac",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Popovac",
+          "national_code": "03468",
+          "inspire_local_id": "JLS.0052000325",
+          "dgu_gml_id": "AdministrativeUnit.2186918585",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-10-10T10:27:18.212Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B65879216122628",
+      "geoBoundaries_name": "Općina Dragalić",
+      "atlas_parent_province": "Brod-Posavina",
+      "official_matches": [
+        {
+          "official_name": "Dragalić",
+          "national_code": "05681",
+          "inspire_local_id": "JLS.0052000520",
+          "dgu_gml_id": "AdministrativeUnit.2186033294",
+          "level": "3rdOrder",
+          "parent_title": "Brodsko-posavska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B66523854826517",
+      "geoBoundaries_name": "Općina Lovas",
+      "atlas_parent_province": "Vukovar-Syrmia",
+      "official_matches": [
+        {
+          "official_name": "Lovas",
+          "national_code": "02399",
+          "inspire_local_id": "JLS.0052000230",
+          "dgu_gml_id": "AdministrativeUnit.2186179426",
+          "level": "3rdOrder",
+          "parent_title": "Vukovarsko-srijemska županija",
+          "valid_from": "2025-09-18T13:29:17.648Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B68731238698366",
+      "geoBoundaries_name": "Grad Pleternica",
+      "atlas_parent_province": "Požega-Slavonia",
+      "official_matches": [
+        {
+          "official_name": "Pleternica",
+          "national_code": "03344",
+          "inspire_local_id": "JLS.0052000314",
+          "dgu_gml_id": "AdministrativeUnit.2186006373",
+          "level": "3rdOrder",
+          "parent_title": "Požeško-slavonska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B69762243971062",
+      "geoBoundaries_name": "Općina Tordinci",
+      "atlas_parent_province": "Vukovar-Syrmia",
+      "official_matches": [
+        {
+          "official_name": "Tordinci",
+          "national_code": "04588",
+          "inspire_local_id": "JLS.0052000421",
+          "dgu_gml_id": "AdministrativeUnit.2187884107",
+          "level": "3rdOrder",
+          "parent_title": "Vukovarsko-srijemska županija",
+          "valid_from": "2025-10-23T12:04:08.740Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B70056994658196",
+      "geoBoundaries_name": "Grad Slavonski Brod",
+      "atlas_parent_province": "Brod-Posavina",
+      "official_matches": [
+        {
+          "official_name": "Slavonski Brod",
+          "national_code": "03964",
+          "inspire_local_id": "JLS.0052000370",
+          "dgu_gml_id": "AdministrativeUnit.2186015079",
+          "level": "3rdOrder",
+          "parent_title": "Brodsko-posavska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B70626061375791",
+      "geoBoundaries_name": "Općina Andrijaševci",
+      "atlas_parent_province": "Vukovar-Syrmia",
+      "official_matches": [
+        {
+          "official_name": "Andrijaševci",
+          "national_code": "00019",
+          "inspire_local_id": "JLS.0052000022",
+          "dgu_gml_id": "AdministrativeUnit.2185922196",
+          "level": "3rdOrder",
+          "parent_title": "Vukovarsko-srijemska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B71738480637812",
+      "geoBoundaries_name": "Općina Sikirevci",
+      "atlas_parent_province": "Brod-Posavina",
+      "official_matches": [
+        {
+          "official_name": "Sikirevci",
+          "national_code": "05703",
+          "inspire_local_id": "JLS.0052000522",
+          "dgu_gml_id": "AdministrativeUnit.2187341229",
+          "level": "3rdOrder",
+          "parent_title": "Brodsko-posavska županija",
+          "valid_from": "2025-10-14T13:25:58.357Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B72049313505597",
+      "geoBoundaries_name": "Općina Bizovac",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Bizovac",
+          "national_code": "00230",
+          "inspire_local_id": "JLS.0052000043",
+          "dgu_gml_id": "AdministrativeUnit.2185928532",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B72735115431411",
+      "geoBoundaries_name": "Grad Pakrac",
+      "atlas_parent_province": "Požega-Slavonia",
+      "official_matches": [
+        {
+          "official_name": "Pakrac",
+          "national_code": "03182",
+          "inspire_local_id": "JLS.0052000300",
+          "dgu_gml_id": "AdministrativeUnit.2186883070",
+          "level": "3rdOrder",
+          "parent_title": "Požeško-slavonska županija",
+          "valid_from": "2025-10-08T15:19:34.660Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B72862341717783",
+      "geoBoundaries_name": "Općina Markušica",
+      "atlas_parent_province": "Vukovar-Syrmia",
+      "official_matches": [
+        {
+          "official_name": "Markušica",
+          "national_code": "06106",
+          "inspire_local_id": "JLS.0052000559",
+          "dgu_gml_id": "AdministrativeUnit.2186739739",
+          "level": "3rdOrder",
+          "parent_title": "Vukovarsko-srijemska županija",
+          "valid_from": "2025-10-06T10:40:13.646Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B73480888178056",
+      "geoBoundaries_name": "Grad Vinkovci",
+      "atlas_parent_province": "Vukovar-Syrmia",
+      "official_matches": [
+        {
+          "official_name": "Vinkovci",
+          "national_code": "04871",
+          "inspire_local_id": "JLS.0052000446",
+          "dgu_gml_id": "AdministrativeUnit.2187912245",
+          "level": "3rdOrder",
+          "parent_title": "Vukovarsko-srijemska županija",
+          "valid_from": "2025-10-23T12:04:08.740Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B74230403119288",
+      "geoBoundaries_name": "Grad Đakovo",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Đakovo",
+          "national_code": "01031",
+          "inspire_local_id": "JLS.0052000114",
+          "dgu_gml_id": "AdministrativeUnit.2186043216",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B74644549803644",
+      "geoBoundaries_name": "Grad Orahovica",
+      "atlas_parent_province": "Virovitica-Podravina",
+      "official_matches": [
+        {
+          "official_name": "Orahovica",
+          "national_code": "03077",
+          "inspire_local_id": "JLS.0052000289",
+          "dgu_gml_id": "AdministrativeUnit.2186766205",
+          "level": "3rdOrder",
+          "parent_title": "Virovitičko-podravska županija",
+          "valid_from": "2025-10-06T10:40:13.646Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B76274053108570",
+      "geoBoundaries_name": "Općina Erdut",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Erdut",
+          "national_code": "01104",
+          "inspire_local_id": "JLS.0052000120",
+          "dgu_gml_id": "AdministrativeUnit.2185954973",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B76380389567485",
+      "geoBoundaries_name": "Općina Kaptol",
+      "atlas_parent_province": "Požega-Slavonia",
+      "official_matches": [
+        {
+          "official_name": "Kaptol",
+          "national_code": "01775",
+          "inspire_local_id": "JLS.0052000177",
+          "dgu_gml_id": "AdministrativeUnit.2185973857",
+          "level": "3rdOrder",
+          "parent_title": "Požeško-slavonska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B76899821887034",
+      "geoBoundaries_name": "Grad Osijek",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Osijek",
+          "national_code": "03123",
+          "inspire_local_id": "JLS.0052000294",
+          "dgu_gml_id": "AdministrativeUnit.2186768737",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-10-06T10:40:13.646Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B7892972817029",
+      "geoBoundaries_name": "Općina Privlaka",
+      "atlas_parent_province": "Vukovar-Syrmia",
+      "official_matches": [
+        {
+          "official_name": "Privlaka",
+          "national_code": "05835",
+          "inspire_local_id": "JLS.0052000533",
+          "dgu_gml_id": "AdministrativeUnit.2186937469",
+          "level": "3rdOrder",
+          "parent_title": "Vukovarsko-srijemska županija",
+          "valid_from": "2025-10-10T10:27:18.212Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B79245749905340",
+      "geoBoundaries_name": "Općina Trpinja",
+      "atlas_parent_province": "Vukovar-Syrmia",
+      "official_matches": [
+        {
+          "official_name": "Trpinja",
+          "national_code": "04642",
+          "inspire_local_id": "JLS.0052000427",
+          "dgu_gml_id": "AdministrativeUnit.2187887865",
+          "level": "3rdOrder",
+          "parent_title": "Vukovarsko-srijemska županija",
+          "valid_from": "2025-10-23T12:04:08.740Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B7992413155148",
+      "geoBoundaries_name": "Općina Petrijevci",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Petrijevci",
+          "national_code": "03271",
+          "inspire_local_id": "JLS.0052000307",
+          "dgu_gml_id": "AdministrativeUnit.2186887140",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-10-08T15:19:34.660Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B80759559879279",
+      "geoBoundaries_name": "Grad Nova Gradiška",
+      "atlas_parent_province": "Brod-Posavina",
+      "official_matches": [
+        {
+          "official_name": "Nova Gradiška",
+          "national_code": "02844",
+          "inspire_local_id": "JLS.0052000268",
+          "dgu_gml_id": "AdministrativeUnit.2186754047",
+          "level": "3rdOrder",
+          "parent_title": "Brodsko-posavska županija",
+          "valid_from": "2025-10-06T10:40:13.646Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B82415776508744",
+      "geoBoundaries_name": "Općina Bukovlje",
+      "atlas_parent_province": "Brod-Posavina",
+      "official_matches": [
+        {
+          "official_name": "Bukovlje",
+          "national_code": "05673",
+          "inspire_local_id": "JLS.0052000519",
+          "dgu_gml_id": "AdministrativeUnit.2186037489",
+          "level": "3rdOrder",
+          "parent_title": "Brodsko-posavska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B83402908252082",
+      "geoBoundaries_name": "Općina Gundinci",
+      "atlas_parent_province": "Brod-Posavina",
+      "official_matches": [
+        {
+          "official_name": "Gundinci",
+          "national_code": "01406",
+          "inspire_local_id": "JLS.0052000147",
+          "dgu_gml_id": "AdministrativeUnit.2185965847",
+          "level": "3rdOrder",
+          "parent_title": "Brodsko-posavska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B83840905876894",
+      "geoBoundaries_name": "Općina Darda",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Darda",
+          "national_code": "00663",
+          "inspire_local_id": "JLS.0052000080",
+          "dgu_gml_id": "AdministrativeUnit.2185941625",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B83936306331720",
+      "geoBoundaries_name": "Grad Belišće",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Belišće",
+          "national_code": "00167",
+          "inspire_local_id": "JLS.0052000036",
+          "dgu_gml_id": "AdministrativeUnit.2185926348",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B8432957809699",
+      "geoBoundaries_name": "Općina Davor",
+      "atlas_parent_province": "Brod-Posavina",
+      "official_matches": [
+        {
+          "official_name": "Davor",
+          "national_code": "00680",
+          "inspire_local_id": "JLS.0052000082",
+          "dgu_gml_id": "AdministrativeUnit.2185942349",
+          "level": "3rdOrder",
+          "parent_title": "Brodsko-posavska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B84675166182844",
+      "geoBoundaries_name": "Općina Jagodnjak",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Jagodnjak",
+          "national_code": "06092",
+          "inspire_local_id": "JLS.0052000558",
+          "dgu_gml_id": "AdministrativeUnit.2186035209",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B8503989103231",
+      "geoBoundaries_name": "Općina Pitomača",
+      "atlas_parent_province": "Virovitica-Podravina",
+      "official_matches": [
+        {
+          "official_name": "Pitomača",
+          "national_code": "03328",
+          "inspire_local_id": "JLS.0052000312",
+          "dgu_gml_id": "AdministrativeUnit.2186918017",
+          "level": "3rdOrder",
+          "parent_title": "Virovitičko-podravska županija",
+          "valid_from": "2025-10-10T10:27:18.212Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B86189890542862",
+      "geoBoundaries_name": "Grad Virovitica",
+      "atlas_parent_province": "Virovitica-Podravina",
+      "official_matches": [
+        {
+          "official_name": "Virovitica",
+          "national_code": "04910",
+          "inspire_local_id": "JLS.0052000450",
+          "dgu_gml_id": "AdministrativeUnit.2187914404",
+          "level": "3rdOrder",
+          "parent_title": "Virovitičko-podravska županija",
+          "valid_from": "2025-10-23T12:04:08.740Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B8759707529392",
+      "geoBoundaries_name": "Općina Štitar",
+      "atlas_parent_province": "Vukovar-Syrmia",
+      "official_matches": [
+        {
+          "official_name": "Štitar",
+          "national_code": "06289",
+          "inspire_local_id": "JLS.0052104985",
+          "dgu_gml_id": "AdministrativeUnit.2187367184",
+          "level": "3rdOrder",
+          "parent_title": "Vukovarsko-srijemska županija",
+          "valid_from": "2025-10-14T13:25:58.357Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B87886165170898",
+      "geoBoundaries_name": "Općina Mikleuš",
+      "atlas_parent_province": "Virovitica-Podravina",
+      "official_matches": [
+        {
+          "official_name": "Mikleuš",
+          "national_code": "02666",
+          "inspire_local_id": "JLS.0052000254",
+          "dgu_gml_id": "AdministrativeUnit.2186744110",
+          "level": "3rdOrder",
+          "parent_title": "Virovitičko-podravska županija",
+          "valid_from": "2025-10-06T10:40:13.646Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B88862880534747",
+      "geoBoundaries_name": "Općina Koška",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Koška",
+          "national_code": "02054",
+          "inspire_local_id": "JLS.0052000202",
+          "dgu_gml_id": "AdministrativeUnit.2185980167",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B89475493983587",
+      "geoBoundaries_name": "Općina Punitovci",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Punitovci",
+          "national_code": "03611",
+          "inspire_local_id": "JLS.0052000339",
+          "dgu_gml_id": "AdministrativeUnit.2186939895",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-10-10T10:27:18.212Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B89625197673395",
+      "geoBoundaries_name": "Općina Garčin",
+      "atlas_parent_province": "Brod-Posavina",
+      "official_matches": [
+        {
+          "official_name": "Garčin",
+          "national_code": "01180",
+          "inspire_local_id": "JLS.0052000127",
+          "dgu_gml_id": "AdministrativeUnit.2186037581",
+          "level": "3rdOrder",
+          "parent_title": "Brodsko-posavska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B91155858559517",
+      "geoBoundaries_name": "Općina Donji Andrijevci",
+      "atlas_parent_province": "Brod-Posavina",
+      "official_matches": [
+        {
+          "official_name": "Donji Andrijevci",
+          "national_code": "00817",
+          "inspire_local_id": "JLS.0052000093",
+          "dgu_gml_id": "AdministrativeUnit.2185946343",
+          "level": "3rdOrder",
+          "parent_title": "Brodsko-posavska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B91823539843565",
+      "geoBoundaries_name": "Općina Podcrkavlje",
+      "atlas_parent_province": "Brod-Posavina",
+      "official_matches": [
+        {
+          "official_name": "Podcrkavlje",
+          "national_code": "03387",
+          "inspire_local_id": "JLS.0052000317",
+          "dgu_gml_id": "AdministrativeUnit.2186893294",
+          "level": "3rdOrder",
+          "parent_title": "Brodsko-posavska županija",
+          "valid_from": "2025-10-08T15:19:34.660Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B93268034393591",
+      "geoBoundaries_name": "Općina Borovo",
+      "atlas_parent_province": "Vukovar-Syrmia",
+      "official_matches": [
+        {
+          "official_name": "Borovo",
+          "national_code": "00299",
+          "inspire_local_id": "JLS.0052000047",
+          "dgu_gml_id": "AdministrativeUnit.2185929636",
+          "level": "3rdOrder",
+          "parent_title": "Vukovarsko-srijemska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B94093317954750",
+      "geoBoundaries_name": "Općina Crnac",
+      "atlas_parent_province": "Virovitica-Podravina",
+      "official_matches": [
+        {
+          "official_name": "Crnac",
+          "national_code": "00540",
+          "inspire_local_id": "JLS.0052000070",
+          "dgu_gml_id": "AdministrativeUnit.2185937397",
+          "level": "3rdOrder",
+          "parent_title": "Virovitičko-podravska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B94141520470755",
+      "geoBoundaries_name": "Grad Kutjevo",
+      "atlas_parent_province": "Požega-Slavonia",
+      "official_matches": [
+        {
+          "official_name": "Kutjevo",
+          "national_code": "02216",
+          "inspire_local_id": "JLS.0052000215",
+          "dgu_gml_id": "AdministrativeUnit.2186170150",
+          "level": "3rdOrder",
+          "parent_title": "Požeško-slavonska županija",
+          "valid_from": "2025-09-18T13:29:17.648Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B96153319262415",
+      "geoBoundaries_name": "Općina Lukač",
+      "atlas_parent_province": "Virovitica-Podravina",
+      "official_matches": [
+        {
+          "official_name": "Lukač",
+          "national_code": "02453",
+          "inspire_local_id": "JLS.0052000235",
+          "dgu_gml_id": "AdministrativeUnit.2186181800",
+          "level": "3rdOrder",
+          "parent_title": "Virovitičko-podravska županija",
+          "valid_from": "2025-09-18T13:29:17.648Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B96352283273979",
+      "geoBoundaries_name": "Općina Draž",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Draž",
+          "national_code": "00914",
+          "inspire_local_id": "JLS.0052000103",
+          "dgu_gml_id": "AdministrativeUnit.2185948993",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B9657091356146",
+      "geoBoundaries_name": "Općina Podravska Moslavina",
+      "atlas_parent_province": "Osijek-Baranja",
+      "official_matches": [
+        {
+          "official_name": "Podravska Moslavina",
+          "national_code": "02712",
+          "inspire_local_id": "JLS.0052000258",
+          "dgu_gml_id": "AdministrativeUnit.2186894666",
+          "level": "3rdOrder",
+          "parent_title": "Osječko-baranjska županija",
+          "valid_from": "2025-10-08T15:19:34.660Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B97394950444246",
+      "geoBoundaries_name": "Općina Vrbje",
+      "atlas_parent_province": "Brod-Posavina",
+      "official_matches": [
+        {
+          "official_name": "Vrbje",
+          "national_code": "05061",
+          "inspire_local_id": "JLS.0052000463",
+          "dgu_gml_id": "AdministrativeUnit.2187925206",
+          "level": "3rdOrder",
+          "parent_title": "Brodsko-posavska županija",
+          "valid_from": "2025-10-23T12:04:08.740Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B97822559400822",
+      "geoBoundaries_name": "Općina Sopje",
+      "atlas_parent_province": "Virovitica-Podravina",
+      "official_matches": [
+        {
+          "official_name": "Sopje",
+          "national_code": "04073",
+          "inspire_local_id": "JLS.0052000377",
+          "dgu_gml_id": "AdministrativeUnit.2187347162",
+          "level": "3rdOrder",
+          "parent_title": "Virovitičko-podravska županija",
+          "valid_from": "2025-10-14T13:25:58.357Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B98601476985561",
+      "geoBoundaries_name": "Općina Čaglin",
+      "atlas_parent_province": "Požega-Slavonia",
+      "official_matches": [
+        {
+          "official_name": "Čaglin",
+          "national_code": "00582",
+          "inspire_local_id": "JLS.0052000074",
+          "dgu_gml_id": "AdministrativeUnit.2185939115",
+          "level": "3rdOrder",
+          "parent_title": "Požeško-slavonska županija",
+          "valid_from": "2025-09-16T15:05:44.721Z"
+        }
+      ]
+    },
+    {
+      "atlas_location_id": "gb:HRV:ADM2:41942358B99857264420093",
+      "geoBoundaries_name": "Grad Vukovar",
+      "atlas_parent_province": "Vukovar-Syrmia",
+      "official_matches": [
+        {
+          "official_name": "Vukovar",
+          "national_code": "05185",
+          "inspire_local_id": "JLS.0052000474",
+          "dgu_gml_id": "AdministrativeUnit.2187930021",
+          "level": "3rdOrder",
+          "parent_title": "Vukovarsko-srijemska županija",
+          "valid_from": "2025-10-23T12:04:08.740Z"
+        }
+      ]
+    }
+  ],
+  "near_name_candidates": {
+    "gb:HRV:ADM2:41942358B16839252431518": [
+      {
+        "official_name": "Magadenovac",
+        "national_code": "05789",
+        "inspire_local_id": "JLS.0052000529",
+        "dgu_gml_id": "AdministrativeUnit.2186724457",
+        "level": "3rdOrder",
+        "parent_title": "Osječko-baranjska županija",
+        "valid_from": "2025-10-06T10:40:13.646Z"
+      }
+    ]
+  }
+}

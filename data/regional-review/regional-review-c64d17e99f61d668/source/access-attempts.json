@@ -1,0 +1,61 @@
+{
+  "review_date": "2026-10-05",
+  "policy": "A failed catalog download proves only the observed endpoint outcome, not that no official source exists. No error response is treated as a substitute for missing source geometry.",
+  "attempts": [
+    {
+      "source": "Hellenic Data Service Kallikratis SHP resource",
+      "url": "https://data.hellenicdataservice.gr/dataset/63786e9f-7be9-4d1e-99c9-48ff45d0962f/resource/775927f2-8872-4787-9b04-5ec3e6813562/download/oria_dhmwn_kallikraths.zip",
+      "method": "HTTPS GET via curl -L --fail",
+      "outcome": "HTTP 404 Not Found",
+      "retrieval_date": "2026-10-05",
+      "retained_payload": false,
+      "related_retained_evidence": "source/official-greece/helix-package-show.json",
+      "scope": "This exact catalog resource URL was unavailable in this request."
+    },
+    {
+      "source": "Greek Ministry Law 3852/2010 PDF",
+      "url": "https://www.ypes.gr/UserFiles/f0ff9297-f516-40ff-a70e-eca84e2ec9b9/N_KALLIKRATIS.pdf",
+      "method": "HTTPS GET via curl -L --fail",
+      "outcome": "HTTP 403 Forbidden",
+      "retrieval_date": "2026-10-05",
+      "retained_payload": false,
+      "scope": "The official document is cited as a source route; no PDF bytes were retained."
+    },
+    {
+      "source": "Region of Central Greece 325-municipality list",
+      "url": "https://www.pste.gov.gr/en/dimi/",
+      "method": "HTTPS GET via curl -L --fail; official web-page open attempt",
+      "outcome": "HTTP 403 Forbidden",
+      "retrieval_date": "2026-10-05",
+      "retained_payload": false,
+      "scope": "The official regional page is cited as a source route; no page body was retained."
+    },
+    {
+      "source": "GEODATA.gov.gr CKAN Kallikratis package",
+      "url": "https://geodata.gov.gr/api/3/action/package_show?id=oria-demon-kallikrates",
+      "method": "HTTPS request with bounded connection timeout",
+      "outcome": "Connection timed out before response; official web-open attempt also failed to fetch the catalog page",
+      "retrieval_date": "2026-10-05",
+      "retained_payload": false,
+      "scope": "No claim that the catalog or service is permanently unavailable."
+    },
+    {
+      "source": "Croatian DGU INSPIRE ATOM feed",
+      "url": "https://geoportal.dgu.hr/services/atom/au/xml",
+      "method": "HTTPS GET via curl -L",
+      "outcome": "HTTP 200; feed retained",
+      "retrieval_date": "2026-10-05",
+      "retained_payload": true,
+      "retained_path": "source/official-croatia/dgu-inspire-administrative-units-atom.xml"
+    },
+    {
+      "source": "Croatian DGU INSPIRE AU archive",
+      "url": "https://geoportal.dgu.hr/services/atom/INSPIRE_Administrative_Units_(AU).zip",
+      "method": "HTTPS HEAD and GET; full GML streamed for the scoped crosswalk",
+      "outcome": "HTTP 200. Response payload 208774354 bytes; ATOM link advertised length 219327549. GML member contains 50192 wfs:member elements and a SHA-256 retained in the DGU extract. Its FeatureCollection header inconsistently declares numberReturned=10000 and exposes a next-page URL despite the actual member count equaling numberMatched=50192.",
+      "retrieval_date": "2026-10-05",
+      "retained_payload": false,
+      "reason": "Archive and GML exceed repository evidence-file guidance; exact archive/member hashes, scoped attributed extract and restoration script are retained."
+    }
+  ]
+}
