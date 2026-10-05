@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:georss="http://www.georss.org/georss" xml:lang="hr">
+    <title>Upravne jedinice</title>
+    <subtitle>Izvor koji uključuje podatke o sljedećim prostornim jedinicama: država, županije, gradovi i općine, naselja, statistički i popisni krugovi.</subtitle>
+    <link href="http://inspire.ec.europa.eu/featureconcept/AdministrativeUnit" rel="describedby" type="text/html"/>
+    <link href="https://geoportal.dgu.hr/services/atom/au/xml" rel="self" type="application/atom+xml" hreflang="hr" title="Ovaj dokument"/>
+    <link href="https://geoportal.dgu.hr/services/atom/au/en.xml" rel="alternate" type="application/atom+xml" hreflang="en" title="Ovaj dokument na engleskom jeziku"/>
+    <link href="https://geoportal.dgu.hr/services/atom/xml" rel="up" type="application/atom+xml" hreflang="hr" title="Dokument usluge preuzimanja"/>
+    <id>https://geoportal.dgu.hr/services/atom/au/xml</id>
+    <rights>ograničenje javnog pristupa prema članku 13 stavku 1 točki (e) INSPIRE Direktive</rights>
+    <updated>2026-10-05T05:33:51.000000+02:00</updated>
+    <author>
+        <name>Državna geodetska uprava</name>
+        <email>irena.magdic@dgu.hr</email>
+    </author>
+    <entry>
+        <title>Upravne jedinice u INSPIRE GML 3.2.1 formatu u ETRS89/LAEA projekciji u komprimiranoj zip datoteci</title>
+        <link href="https://geoportal.dgu.hr/services/atom/INSPIRE_Administrative_Units_(AU).zip" rel="alternate" type="application/x-gmz" hreflang="hr" title="Upravne jedinice na području cijele Republike Hrvatske u INSPIRE GML 3.2.1 formatu u ETRS89/LAEA projekciji u komprimiranoj zip datoteci. Sadržaj skupa podataka je na hrvatskom jeziku." length="219327549"/>
+        <id>https://geoportal.dgu.hr/services/atom/INSPIRE_Administrative_Units_(AU).zip</id>
+        <updated>2026-10-04T06:31:47.000000+02:00</updated>
+        <polygon>42.3982 13.2858 46.5321 13.2858 46.5321 19.6392 42.3982 19.6392 42.3982 13.2858</polygon>
+        <category term="http://www.opengis.net/def/crs/EPSG/0/3035" label="ETRS89/LAEA"/>
+    </entry>
+</feed>
