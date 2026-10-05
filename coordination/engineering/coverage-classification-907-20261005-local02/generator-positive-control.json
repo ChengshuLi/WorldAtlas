@@ -1,0 +1,11 @@
+{
+  "method_id": "reference-classification",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "checks": [
+    "Cell-center scanlines preserve a polygon hole and half-open edges",
+    "Water overrides land; blocked intervals carve unknown; identical sparse compilations match",
+    "Two full preparation processes produce identical manifest and every compressed part"
+  ],
+  "command": "python3 test/coverage-classification.py"
+}

@@ -44,3 +44,16 @@ test('symbolic links cannot silently omit archive content',async t=>{
  const {source,destination}=await fixture(t);await fs.symlink('../migration-receipt.json',path.join(source,'prior-archives/old/link'));
  await assert.rejects(packageOwnershipHistory({source,destination,hosted:true}),/symbolic link/);
 });
+
+test('hosted receipt compression preserves exact original bytes with explicit transport proof',async t=>{
+ const {source,destination}=await fixture(t),original=Buffer.from(JSON.stringify({evidence:'retained',rows:Array(100).fill('original record')}));
+ await fs.writeFile(path.join(source,'candidate-recovery.json'),original);
+ const manifest=await packageOwnershipHistory({source,destination,hosted:true,compactReceipts:true});
+ assert.equal(manifest.version,2);assert.equal(manifest.transports.length,1);
+ const row=manifest.transports[0];assert.equal(row.source.sha256,sha(original));assert.equal(row.deployment.path,'candidate-recovery.json.gz');
+ assert.deepEqual(await fs.readFile(path.join(source,'candidate-recovery.json')),original);
+ const {gunzipSync}=await import('node:zlib');assert.deepEqual(gunzipSync(await fs.readFile(path.join(destination,row.deployment.path))),original);
+ await verifyOwnershipDelivery({source,destination,manifest});
+ await fs.writeFile(path.join(destination,row.deployment.path),'corrupt');
+ await assert.rejects(verifyOwnershipDelivery({source,destination,manifest}),/deployed inventory or hash changed/);
+});

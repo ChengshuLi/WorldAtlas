@@ -1,0 +1,16 @@
+{
+  "method_id": "classification-ui",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "checks": [
+    "Both renderer hatch palettes observed through actual GPU framebuffer and Canvas ImageData",
+    "Gap/water clicks, physical-source context, ordinary selection, 14 style changes, camera changes without ownership recompilation/uploads",
+    "GPU context loss/restoration reloads classification separately",
+    "Immutable global prepared-product sample controls: Iran/Pakistan and Portugal/Spain reference land; Lake Superior reference water",
+    "Actual hosted package: all 14 modes, years 1444/2021/2026, Iran/Pakistan canonical gap click with two source links, missing-product fallback and unchanged ownership/classification upload counters"
+  ],
+  "commands": [
+    "node --test test/coverage-classification.test.mjs test/coverage-browser.test.mjs test/coverage-product.test.mjs test/pixel-ownership.test.mjs",
+    "node --test --test-name-pattern='packaged coverage' test/compact-ownership.test.mjs"
+  ]
+}

@@ -1,5 +1,7 @@
 import L from 'leaflet';
 import {GRID_ZOOM,createGridIndex,borderKind,borderStyle,viewStride} from './pixel-grid.js';
+import {pickOwnership} from './pixel-ownership.js';
+import {coverageExplanation,coverageText,coverageContent} from './coverage-classification.js';
 import {updateLocationMetadata} from './pixel-metadata.js';
 const colorCache=new Map();
 function rgb(css){
@@ -15,7 +17,7 @@ function rgb(css){
 }
 
 export class PixelCanvasLayer extends L.Layer {
-  constructor(features,options){super();this.index=createGridIndex(features);this.options=options;this.frame=null;this.sequence=0;this.jobs=new Map();this.worker=new Worker(new URL('./pixel-worker.js',import.meta.url),{type:'module'});this.worker.onmessage=({data})=>{this.jobs.get(data.request)?.(data);this.jobs.delete(data.request);};if(options.ownership){this.worker.postMessage({type:'precompiled',grid:options.ownership});}else this.sendIndex('locations',this.index);this.provinceIds=[null,...this.index.map(x=>x.feature.properties.parent_id)];}
+  constructor(features,options){super();this.index=createGridIndex(features);this.options=options;this.frame=null;this.sequence=0;this.jobs=new Map();this.worker=new Worker(new URL('./pixel-worker.js',import.meta.url),{type:'module'});this.worker.onmessage=({data})=>{this.jobs.get(data.request)?.(data);this.jobs.delete(data.request);};if(options.ownership){this.worker.postMessage({type:'precompiled',grid:options.ownership});}else this.sendIndex('locations',this.index);if(options.coverage)this.worker.postMessage({type:'coverage',grid:options.coverage.grid});this.provinceIds=[null,...this.index.map(x=>x.feature.properties.parent_id)];}
   sendIndex(type,index){const slim=index.map(({index,polygons,bounds})=>({index,polygons,bounds}));this.worker.postMessage({type,index:slim},slim.flatMap(i=>i.polygons.flatMap(p=>p.map(r=>r.buffer))));}
   onAdd(map){
     this.map=map;this.canvas=L.DomUtil.create('canvas','atlas-pixel-canvas leaflet-layer leaflet-zoom-animated');this.canvas.setAttribute('aria-label','Pixel world map');
@@ -60,7 +62,7 @@ export class PixelCanvasLayer extends L.Layer {
       if(!this.map || request!==this.sequence)return;
       this.frame={key,x,y,width,height,stride,...result};
     }
-    const frame=this.frame,{ids,political}=frame;
+    const frame=this.frame,{ids,political,physical}=frame;
     const low=document.createElement('canvas');low.width=width;low.height=height;const ctx=low.getContext('2d'),pixels=ctx.createImageData(width,height);
     const locationColors=[],politicalColors=[],groups=[];
     for(let i=0;i<ids.length;i++){
@@ -77,6 +79,22 @@ export class PixelCanvasLayer extends L.Layer {
     this.origin=this.map.unproject(L.point(x,y),GRID_ZOOM);this.drawZoom=zoom;
     const point=this.map.latLngToLayerPoint(this.origin);L.DomUtil.setTransform(this.canvas,point,1);
     const out=this.canvas.getContext('2d');out.scale(dpr,dpr);out.imageSmoothingEnabled=false;out.drawImage(low,0,0,screenW,screenH);
+    if(physical){
+      const mask=document.createElement('canvas');mask.width=width;mask.height=height;
+      const maskContext=mask.getContext('2d'),maskPixels=maskContext.createImageData(width,height);let gaps=0;
+      for(let i=0;i<ids.length;i++)if(!ids[i]&&physical[i]===1){maskPixels.data[i*4+3]=255;gaps++;}
+      if(gaps){
+        maskContext.putImageData(maskPixels,0,0);
+        const overlay=document.createElement('canvas');overlay.width=this.canvas.width;overlay.height=this.canvas.height;
+        const overlayContext=overlay.getContext('2d');overlayContext.scale(dpr,dpr);overlayContext.imageSmoothingEnabled=false;
+        overlayContext.drawImage(mask,0,0,screenW,screenH);overlayContext.globalCompositeOperation='source-in';
+        const tile=document.createElement('canvas');tile.width=8;tile.height=8;
+        const tileContext=tile.getContext('2d'),tilePixels=tileContext.createImageData(8,8);
+        for(let y=0;y<8;y++)for(let x=0;x<8;x++)tilePixels.data.set((x+y)%8<2?[170,79,36,255]:[247,223,179,255],(y*8+x)*4);
+        tileContext.putImageData(tilePixels,0,0);overlayContext.fillStyle=overlayContext.createPattern(tile,'repeat');overlayContext.fillRect(0,0,screenW,screenH);
+        out.drawImage(overlay,0,0,screenW,screenH);
+      }
+    }
     const paths={location:new Path2D(),province:new Path2D(),coast:new Path2D(),group:new Path2D(),selected:new Path2D()};
     const selected=this.options.selected();
     const edge=(a,b,x1,y1,x2,y2,pa,pb)=>{
@@ -104,10 +122,12 @@ export class PixelCanvasLayer extends L.Layer {
   pick(latlng){
     if(!this.frame)return null;
     const p=this.map.project(latlng,GRID_ZOOM),f=this.frame;
+    if(this.options.ownership)return this.index[pickOwnership(this.options.ownership,p.x,p.y)-1]?.feature||null;
     const col=Math.floor((p.x-f.x)/f.stride),row=Math.floor((p.y-f.y)/f.stride);
     if(col<0 || row<0 || col>=f.width || row>=f.height)return null;
     return this.index[f.ids[row*f.width+col]-1]?.feature || null;
   }
-  hover(event){const f=this.pick(event.latlng);if(!f){this.tooltip.remove();return;}const text=document.createElement('span');text.textContent=this.options.label?.(f)||f.properties.name;this.tooltip.setContent(text).setLatLng(event.latlng).addTo(this.map);}
-  click(event){const f=this.pick(event.latlng);if(f)this.options.select(f.id);}
+  coverageInfo(latlng){return coverageExplanation(this.options.coverage,this.map.project(latlng,GRID_ZOOM),latlng);}
+  hover(event){const f=this.pick(event.latlng);const text=document.createElement('span');text.textContent=f?(this.options.label?.(f)||f.properties.name):coverageText(this.coverageInfo(event.latlng));this.tooltip.setContent(text).setLatLng(event.latlng).addTo(this.map);}
+  click(event){const f=this.pick(event.latlng);if(f){this.map.closePopup();this.options.select(f.id);}else L.popup().setLatLng(event.latlng).setContent(coverageContent(this.coverageInfo(event.latlng))).openOn(this.map);}
 }

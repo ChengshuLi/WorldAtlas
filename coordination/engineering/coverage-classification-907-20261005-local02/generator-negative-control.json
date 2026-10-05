@@ -1,0 +1,11 @@
+{
+  "method_id": "reference-classification",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "checks": [
+    "Corrupt original-source checksum rejected",
+    "Bounded gzip decompression rejects oversized decoded source",
+    "Unknown interval never becomes land or major water"
+  ],
+  "command": "python3 test/coverage-classification.py"
+}

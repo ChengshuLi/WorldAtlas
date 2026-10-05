@@ -1,0 +1,10 @@
+{
+  "method_id": "classification-ui",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "checks": [
+    "Missing coverage renders no hatch and explains uncertainty in GPU/Canvas",
+    "Stale release/footprint/grid, corrupt compressed/decoded data, unsafe paths, over-budget allocations, invalid classes and overlapping runs rejected",
+    "Ocean, invalid-reference tiles and Antarctica remain unknown; no location identity fabricated"
+  ]
+}

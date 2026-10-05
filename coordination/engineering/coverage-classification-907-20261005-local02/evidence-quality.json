@@ -1,0 +1,699 @@
+{
+  "version": 1,
+  "issue": 907,
+  "lane": "engineering",
+  "worker_id": "engineering-coverage-gaps-907-20261005-local01",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "759f50d2b65e481513bf58d40c3d7d67e2371fb1",
+    "files": [
+      {
+        "path": "data/canonical-grid/manifest.json",
+        "bytes": 271171,
+        "sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geographic-releases/index.json",
+        "bytes": 225846,
+        "sha256": "f7d2fd73cdffa5e73ed68033f3c97732a106423106c9a21315c3365187feeebd",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geographic-releases/current-manifest.json",
+        "bytes": 206,
+        "sha256": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/ownership-history/candidate-recovery.json",
+        "bytes": 8663175,
+        "sha256": "ef1ea9fd924e56069a8a5d083162e3780206e19bdd43dd2e34be406d3b6fe524",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/macro-foundation/retained-inspections/retained-geographic-sources/namibia/manifest.json.gz",
+        "bytes": 3241,
+        "sha256": "71ac7d75f7d1ed5992893f6a983e839773f6ec2423baee33017bebbc8b3788ec",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/macro-foundation/retained-inspections/retained-geographic-sources/namibia/natural-earth-land.geojson.gz.gz",
+        "bytes": 3570430,
+        "sha256": "2e2e5ea6e81c5ca8ed2f28c1002ed11f01a54354cdb42771bf39e78d88569b68",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/coverage-gaps-907-20261005-local01/sources/receipt.json",
+        "bytes": 669,
+        "sha256": "55f4399d4bc54bbaed8bdd28be665f6cb27bfcb4b0db5dd144a950bb25fe38fb",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/coverage-gaps-907-20261005-local01/sources/natural-earth-lakes.geojson.gz",
+        "bytes": 1565161,
+        "sha256": "a57bd38b23b57d884853c3e8e6da1a4a24c9ca40dd1edb8e9b2de4db70c0656f",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geographic-releases/releases-v6-gzip.json.gz",
+        "bytes": 169082,
+        "sha256": "96f4e6b1894ecce4c1f3f2be690ebfceec9fde2ec094c886ddffca96c62e4a16",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {},
+    "pin_files": {},
+    "subject_files": {}
+  },
+  "sources": [
+    {
+      "license": {
+        "status": "redistributable",
+        "terms": "Natural Earth public domain; https://www.naturalearthdata.com/about/terms-of-use/"
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "id": "natural-earth-land",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_land.geojson",
+      "role": "Coarse physical-land reference, original retained hash verified; not detailed hydrography",
+      "vintage": "Pinned ca96624a56bd078437bca8184e78163e5039ad19; undated modern reference",
+      "retrieved_at": "2026-10-05 retained-byte verification; original retrieval date not independently established",
+      "files": [
+        {
+          "bytes": 3570430,
+          "hash_kind": "file-bytes",
+          "path": "data/macro-foundation/retained-inspections/retained-geographic-sources/namibia/natural-earth-land.geojson.gz.gz",
+          "sha256": "2e2e5ea6e81c5ca8ed2f28c1002ed11f01a54354cdb42771bf39e78d88569b68"
+        }
+      ]
+    },
+    {
+      "license": {
+        "status": "redistributable",
+        "terms": "Natural Earth public domain; https://www.naturalearthdata.com/about/terms-of-use/"
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "id": "natural-earth-lakes",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_lakes.geojson",
+      "role": "Major lake/reservoir reference exclusion; two invalid original polygons block affected tiles; small waters remain unresolved",
+      "vintage": "Pinned ca96624a56bd078437bca8184e78163e5039ad19; modern reference, not year-specific hydrology",
+      "retrieved_at": "2026-10-05",
+      "files": [
+        {
+          "path": "coordination/engineering/coverage-gaps-907-20261005-local01/sources/natural-earth-lakes.geojson.gz",
+          "bytes": 1565161,
+          "sha256": "a57bd38b23b57d884853c3e8e6da1a4a24c9ca40dd1edb8e9b2de4db70c0656f",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "coordination/engineering/coverage-gaps-907-20261005-local01/sources/receipt.json",
+          "bytes": 669,
+          "sha256": "55f4399d4bc54bbaed8bdd28be665f6cb27bfcb4b0db5dd144a950bb25fe38fb",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "path": "coordination/engineering/coverage-classification-907-20261005-local02/generator-negative-control.json",
+      "bytes": 347,
+      "sha256": "2ec33618132b0adce3e542436a641fe3366262fc916ef8d675fd204142c5256d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/coverage-classification-907-20261005-local02/generator-positive-control.json",
+      "bytes": 435,
+      "sha256": "5b43cfa8856f3c21d334b77e2d1a9c0cf519bca80da932e0d8c69d964c3d447d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/coverage-classification-907-20261005-local02/packaged-build.json",
+      "bytes": 96902,
+      "sha256": "6e6b59c52e739851587582637f253b0472fe2cdf5848ff64f2281b36812fb555",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/coverage-classification-907-20261005-local02/product-measurements.json",
+      "bytes": 249,
+      "sha256": "beca7cfb91db1f074e2a2e10446a62a167b56adbf8a5fdd9e8a8a7b0902d3d77",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/coverage-classification-907-20261005-local02/reproducibility.json",
+      "bytes": 2209,
+      "sha256": "e2b457bf533a6b04f23992da47dccaf5d49cb734e6b8fafbba43917f356b673f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/coverage-classification-907-20261005-local02/ui-negative-control.json",
+      "bytes": 446,
+      "sha256": "745d1de25aa5034230ca034748c865398ab6e9d3665c28f0d2fb6a74c3330449",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/coverage-classification-907-20261005-local02/ui-positive-control.json",
+      "bytes": 1020,
+      "sha256": "433caa32e23c179baed0e232a7bdb24656d7502230847f6f40b50975b50bdf03",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/coverage-classification/manifest.json",
+      "bytes": 4921,
+      "sha256": "be2a88a8ae0a9516ea116ccc378fb3d06663d327b0dde2c05b1cb72be4c8d5ed",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/coverage-classification/rows-0.bin.gz",
+      "bytes": 197404,
+      "sha256": "fe22d673af6150f5eb6891995ddf87d3b19cacd963194f9f95e4333750961b89",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/coverage-classification/runs-0.bin.gz",
+      "bytes": 962839,
+      "sha256": "e0d39c8e75372ddfd3d602019960a13ab95ba8c07722c1f089dbe99c1e756f93",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/coverage-classification/runs-1048576.bin.gz",
+      "bytes": 974502,
+      "sha256": "e7a2f63cd4bf1f49a5d58c89f0f227b56c476bb4fe64d5500a8901278b9b5b88",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/coverage-classification/runs-2097152.bin.gz",
+      "bytes": 945123,
+      "sha256": "9e39fbf19fc30325fe042b4bf2d93bd522b3f31524447592630c1f1f5e0ef0e3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/coverage-classification/runs-3145728.bin.gz",
+      "bytes": 918272,
+      "sha256": "0517d15be35f3c2fa88244fcab9758f8ef0603f6699a87e416a2ce87d21b80e9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/coverage-classification/runs-4194304.bin.gz",
+      "bytes": 921147,
+      "sha256": "311349333e016170ebf105291fd2e6d096261014f0162e11d40e01e0f0a18d5b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/coverage-classification/runs-5242880.bin.gz",
+      "bytes": 895070,
+      "sha256": "51e838a3277570fbc02c3a2da7272bb086a1dbc25239fc95249b873e50248923",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/coverage-classification/runs-6291456.bin.gz",
+      "bytes": 914965,
+      "sha256": "bf0db6a93fa40574fcd52f4802b021d6750c05a4f601565b694bda654a69684f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/coverage-classification/runs-7340032.bin.gz",
+      "bytes": 974283,
+      "sha256": "4803961d4353b5c85e52effa00205bd7cbf2055153cb6a49c0be01af9a40eb73",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/coverage-classification/runs-8388608.bin.gz",
+      "bytes": 980306,
+      "sha256": "633cb2bb48d1bbc19db6a3bffab2bc44378125dc011c3863288907e1d2466963",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/coverage-classification/runs-9437184.bin.gz",
+      "bytes": 757101,
+      "sha256": "4fead58c9f9012b0e9705f7d7f7439d2ca047f8a74881d686cb43637059446db",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/COVERAGE_CLASSIFICATION.md",
+      "bytes": 3486,
+      "sha256": "2208353ed4707fd3425616185c29d0014a61f06ce2b7904a77ddf3dcd334dbf6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/build-static.mjs",
+      "bytes": 14609,
+      "sha256": "d68c27fb2730425ff10c1c703bac8628205a30d5494703b2a3117fd6b6f3282d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/package-ownership-history.mjs",
+      "bytes": 5904,
+      "sha256": "e1c93bc99d5003d6b9a08e00cebef4faab12dd1351077ed098876450227a0fb1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/prepare-coverage-classification.py",
+      "bytes": 11340,
+      "sha256": "7765ae6476dca636690143c0db2b98ecfea3106a7f1a1bc0b5d92261eecbe1e3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/coverage-classification.js",
+      "bytes": 7378,
+      "sha256": "469e64633f322c0610193f284ece49aea0671384a635a708fa27d69d1047b4c4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/data-client.js",
+      "bytes": 20071,
+      "sha256": "716d308799c95012ffe066f402100c22fa056f91e858e5214d55bd04fee1f252",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/main.js",
+      "bytes": 36020,
+      "sha256": "415cc50275e953a30877bae6394572942fc033bb98dfc7fb9902bd128f3a43f1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/pixel-canvas-layer.js",
+      "bytes": 10640,
+      "sha256": "d48d145ed727c25060a9e6ce2782c59328c9e7cae562888f59efed828a7d647f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/pixel-gpu.js",
+      "bytes": 8734,
+      "sha256": "3c1bac4ee42f3962cf6dc1b69b6ce0f0f1b4315618fb52447865a348d9a118f2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/pixel-layer.js",
+      "bytes": 7864,
+      "sha256": "ebc4b9bcae59ed0393b9329949836e61d8eb627b511f93630a89e579cdfa7d2b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/pixel-worker.js",
+      "bytes": 1047,
+      "sha256": "473717f97835b0fbd2d73320785319f019076c197f22aad71cac002c8c27d158",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/compact-ownership.test.mjs",
+      "bytes": 13932,
+      "sha256": "7e88d260c4ea8cf32d5393659c06ea6f354b1fa0ced19723b28b01ac19423670",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/coverage-browser.mjs",
+      "bytes": 5867,
+      "sha256": "7ee660c4ba6c51ed91afca215cb4ccddc750fc3ff47cb482328db24c1fb25bed",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/coverage-browser.test.mjs",
+      "bytes": 458,
+      "sha256": "024cb270a3d3d15d7de6127fa8b342901912539e040e1090f51abab61b52ccfe",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/coverage-classification.py",
+      "bytes": 2061,
+      "sha256": "459d861df7cc2d365d216932f77405e63a9fde7f95d131b5f5aac50dabfce519",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/coverage-classification.test.mjs",
+      "bytes": 4835,
+      "sha256": "203d9fcf53bd0673dd8c3c83adb69c79a9971675edfe3677817fe3774b6e5cd0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/coverage-product.test.mjs",
+      "bytes": 1477,
+      "sha256": "ca8444003dfd32b8a0bbc7eaf6c731b944722e0190bc95d3880f03a966e460fd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/ownership-delivery.test.mjs",
+      "bytes": 6014,
+      "sha256": "873cd494786233b47e6818ea0e0918e462c67ab471e3fe388010c8cd6f78a9f1",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "reference-classification",
+      "kind": "generator",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "description": "Sparse cell-center physical classification from immutable Git source and release/grid pins; water overrides land; invalid water source tiles remain unknown; no location geometry changes",
+      "software": "Python3.12.14, Shapely2.1.2/GEOS3.13.1, numpy2.3.5, zlib1.2.12",
+      "units": "canonical cell IDs 0 unknown/1 reference land/2 reference major water"
+    },
+    {
+      "id": "classification-ui",
+      "kind": "code",
+      "description": "Bounded verified physical product loading; independent GPU/Canvas hatch, coordinates/source explanations, unknown fallback and cached ownership; lossless receipt transport",
+      "software": "Node24; isolated Playwright Chromium; existing application renderers",
+      "units": "classes, bytes, UI controls"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "compressed_classification_bytes",
+      "value": 9441012,
+      "unit": "bytes",
+      "vintage": "baseline",
+      "input_sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+      "evaluation_commit": "759f50d2b65e481513bf58d40c3d7d67e2371fb1"
+    },
+    {
+      "id": "decoded_classification_bytes",
+      "value": 43237576,
+      "unit": "bytes",
+      "vintage": "baseline",
+      "input_sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+      "evaluation_commit": "759f50d2b65e481513bf58d40c3d7d67e2371fb1"
+    },
+    {
+      "id": "land_cells",
+      "value": 13684441654,
+      "unit": "cells",
+      "vintage": "baseline",
+      "input_sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+      "evaluation_commit": "759f50d2b65e481513bf58d40c3d7d67e2371fb1"
+    },
+    {
+      "id": "major_water_cells",
+      "value": 138791686,
+      "unit": "cells",
+      "vintage": "baseline",
+      "input_sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+      "evaluation_commit": "759f50d2b65e481513bf58d40c3d7d67e2371fb1"
+    },
+    {
+      "id": "blocked_tiles",
+      "value": 3,
+      "unit": "tiles",
+      "vintage": "baseline",
+      "input_sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+      "evaluation_commit": "759f50d2b65e481513bf58d40c3d7d67e2371fb1"
+    },
+    {
+      "id": "package_tar_bytes",
+      "value": 263946240,
+      "unit": "bytes",
+      "vintage": "baseline",
+      "input_sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+      "evaluation_commit": "759f50d2b65e481513bf58d40c3d7d67e2371fb1"
+    },
+    {
+      "id": "package_target_bytes",
+      "value": 264241152,
+      "unit": "bytes",
+      "vintage": "baseline",
+      "input_sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+      "evaluation_commit": "759f50d2b65e481513bf58d40c3d7d67e2371fb1"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "compressed_classification_bytes",
+      "path": "coordination/engineering/coverage-classification-907-20261005-local02/product-measurements.json",
+      "json_pointer": "/compressed_classification_bytes"
+    },
+    {
+      "metric_id": "decoded_classification_bytes",
+      "path": "coordination/engineering/coverage-classification-907-20261005-local02/product-measurements.json",
+      "json_pointer": "/decoded_classification_bytes"
+    },
+    {
+      "metric_id": "land_cells",
+      "path": "coordination/engineering/coverage-classification-907-20261005-local02/product-measurements.json",
+      "json_pointer": "/land_cells"
+    },
+    {
+      "metric_id": "major_water_cells",
+      "path": "coordination/engineering/coverage-classification-907-20261005-local02/product-measurements.json",
+      "json_pointer": "/major_water_cells"
+    },
+    {
+      "metric_id": "blocked_tiles",
+      "path": "coordination/engineering/coverage-classification-907-20261005-local02/product-measurements.json",
+      "json_pointer": "/blocked_tiles"
+    },
+    {
+      "metric_id": "package_tar_bytes",
+      "path": "coordination/engineering/coverage-classification-907-20261005-local02/product-measurements.json",
+      "json_pointer": "/package_tar_bytes"
+    },
+    {
+      "metric_id": "package_target_bytes",
+      "path": "coordination/engineering/coverage-classification-907-20261005-local02/product-measurements.json",
+      "json_pointer": "/package_target_bytes"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "Reference-supported missing coverage is distinguishable from water-looking background without assigning a location. Physical references are coarse/modern; detailed water and coordinated repairs remain unresolved. Deployment deferred by user; no production acceptance or geographic approval claimed.",
+      "status": "unresolved",
+      "source_ids": [
+        "natural-earth-land",
+        "natural-earth-lakes"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "proposed",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "python3 scripts/prepare-coverage-classification.py --geography-commit 759f50d2b65e481513bf58d40c3d7d67e2371fb1 --out NEW_OUTPUT_DIRECTORY",
+    "node --test test/coverage-classification.test.mjs test/coverage-browser.test.mjs test/coverage-product.test.mjs test/ownership-delivery.test.mjs",
+    "node scripts/build-hosted.mjs"
+  ],
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/coverage-classification-907-20261005-local02/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/coverage-classification-907-20261005-local02/generator-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/coverage-classification-907-20261005-local02/generator-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/coverage-classification-907-20261005-local02/packaged-build.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/coverage-classification-907-20261005-local02/product-measurements.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/coverage-classification-907-20261005-local02/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/coverage-classification-907-20261005-local02/ui-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/coverage-classification-907-20261005-local02/ui-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/coverage-classification/manifest.json",
+      "status": "added"
+    },
+    {
+      "path": "data/coverage-classification/rows-0.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "data/coverage-classification/runs-0.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "data/coverage-classification/runs-1048576.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "data/coverage-classification/runs-2097152.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "data/coverage-classification/runs-3145728.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "data/coverage-classification/runs-4194304.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "data/coverage-classification/runs-5242880.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "data/coverage-classification/runs-6291456.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "data/coverage-classification/runs-7340032.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "data/coverage-classification/runs-8388608.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "data/coverage-classification/runs-9437184.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "docs/COVERAGE_CLASSIFICATION.md",
+      "status": "added"
+    },
+    {
+      "path": "scripts/build-static.mjs",
+      "status": "modified",
+      "original_sha256": "4349be4bb1e58337ec05b09aa7655f6fb8b326cb49662c22d3ba81b7293bc267"
+    },
+    {
+      "path": "scripts/package-ownership-history.mjs",
+      "status": "modified",
+      "original_sha256": "0b92bd379e625b49bd9c7f2eb61bac70b8742f090019af902bc9c3edb181f928"
+    },
+    {
+      "path": "scripts/prepare-coverage-classification.py",
+      "status": "added"
+    },
+    {
+      "path": "src/coverage-classification.js",
+      "status": "added"
+    },
+    {
+      "path": "src/data-client.js",
+      "status": "modified",
+      "original_sha256": "fbfc9a83a3373b3323a1c03f836e7676f0535d4cfdfd524d5cfd8be9c610afb0"
+    },
+    {
+      "path": "src/main.js",
+      "status": "modified",
+      "original_sha256": "5e45f3419696516de7821b77c9cfd9d0682f47f48ae29c54c8d37a305f0259ac"
+    },
+    {
+      "path": "src/pixel-canvas-layer.js",
+      "status": "modified",
+      "original_sha256": "8c94181f24f73ce9c735e924e1c9b314f3703797f5a869fe3f6ae59be7811b48"
+    },
+    {
+      "path": "src/pixel-gpu.js",
+      "status": "modified",
+      "original_sha256": "868dc35f51b0f0cfc04d7a0a7b1ad65a0f38c26fcebeac2b6c2f66503ef23b8a"
+    },
+    {
+      "path": "src/pixel-layer.js",
+      "status": "modified",
+      "original_sha256": "78df4421cb0262a2dbc813f565f68673f1afbd5a8d72b1746d918441d6ed793d"
+    },
+    {
+      "path": "src/pixel-worker.js",
+      "status": "modified",
+      "original_sha256": "dd4eff4cbed8a6dca3009347dbfe505c6c89649ccb5c76e22c1cf98921c94eff"
+    },
+    {
+      "path": "test/compact-ownership.test.mjs",
+      "status": "modified",
+      "original_sha256": "489752619dda02efaf2af0b3f29d60f3c1ec4a88cd3d0fe9a0f76565ddb79986"
+    },
+    {
+      "path": "test/coverage-browser.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/coverage-browser.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/coverage-classification.py",
+      "status": "added"
+    },
+    {
+      "path": "test/coverage-classification.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/coverage-product.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/ownership-delivery.test.mjs",
+      "status": "modified",
+      "original_sha256": "35228a03cbd373c9e25a12f44248f72f5f9eeb2ba1f67c866734e0c7601bd2a1"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "reference-classification",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/coverage-classification-907-20261005-local02/reproducibility.json"
+    },
+    {
+      "method_id": "reference-classification",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/coverage-classification-907-20261005-local02/generator-positive-control.json"
+    },
+    {
+      "method_id": "reference-classification",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/coverage-classification-907-20261005-local02/generator-negative-control.json"
+    },
+    {
+      "method_id": "classification-ui",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/coverage-classification-907-20261005-local02/ui-positive-control.json"
+    },
+    {
+      "method_id": "classification-ui",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/coverage-classification-907-20261005-local02/ui-negative-control.json"
+    }
+  ],
+  "rendered_tables": []
+}

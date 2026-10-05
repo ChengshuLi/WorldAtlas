@@ -1,6 +1,7 @@
 import {compileOwnership,sampleOwnership,samplePackedOwnership} from './pixel-ownership.js';
-let packed=null,locations=null,political=null,compilations=0,compileMs=0;
+let coverage=null,packed=null,locations=null,political=null,compilations=0,compileMs=0;
 self.onmessage=({data})=>{
+  if(data.type==='coverage'){coverage=data.grid;return;}
   if(data.type==='precompiled'){packed=data.grid;return;}
   if(data.type==='locations'||data.type==='political'){
     const started=performance.now();
@@ -12,5 +13,6 @@ self.onmessage=({data})=>{
   }
   const {request,frame}=data;
   const ids=packed?samplePackedOwnership(packed,frame):sampleOwnership(locations,frame),claims=political?sampleOwnership(political,frame):null;
-  self.postMessage({request,ids,political:claims,compilations,compileMs},[ids.buffer,...(claims?[claims.buffer]:[])]);
+  const physical=coverage?samplePackedOwnership(coverage,frame):null;
+  self.postMessage({request,ids,physical,political:claims,compilations,compileMs},[ids.buffer,...(claims?[claims.buffer]:[]),...(physical?[physical.buffer]:[])]);
 };

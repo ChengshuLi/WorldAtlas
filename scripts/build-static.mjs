@@ -9,6 +9,7 @@ import {shuffleOwnershipBytes} from '../src/ownership-codec.js';
 import {prepareEvidenceBundle} from './prepare-evidence-bundle.mjs';
 import {packageOwnershipHistory} from './package-ownership-history.mjs';
 import {packageReferenceBundle} from './package-reference-bundle.mjs';
+import {loadCoverageClassification} from '../src/coverage-classification.js';
 import {packageStartupOwnership} from './package-startup-ownership.mjs';
 import {readGeographicReleaseManifest} from './read-geographic-release-manifest.mjs';
 import { createHash } from 'node:crypto';
@@ -79,11 +80,22 @@ try {
   for(let i=0;i<reference.temporal.history.length;i+=5000){const path=`geography/history-${i/5000}.json.gz`;temporalHistoryParts.push(path);await fs.writeFile(`dist/${path}`,gzipSync(JSON.stringify(reference.temporal.history.slice(i,i+5000))));}
   const geographicRelease=readGeographicReleaseManifest('data/geographic-releases').releases.at(-1);
   if(geographicRelease.hierarchy_sha256!==createHash('sha256').update(await fs.readFile('data/hierarchy.json')).digest('hex')||geographicRelease.footprints_sha256!==checkPrepared(reference.features))throw Error('Reference release does not match prepared map assets');
+  let coverageClassification=null;
+  const coveragePath='data/coverage-classification/manifest.json';
+  if(await fs.access(coveragePath).then(()=>true,()=>false)){
+    if(!fixedGrid)throw Error('Physical classification requires canonical grid');
+    coverageClassification=JSON.parse(await fs.readFile(coveragePath));
+    const canonicalHash=createHash('sha256').update(await fs.readFile(fixedGridPath)).digest('hex');
+    await loadCoverageClassification(coverageClassification,{...fixedGrid,release_id:geographicRelease.id,canonical_grid_sha256:canonicalHash},async url=>new Response(await fs.readFile('data/'+url.replace(/^\.\//,''))));
+    pixelMap.canonical_grid_sha256=canonicalHash;
+    await fs.mkdir('dist/coverage-classification',{recursive:true});
+    for(const part of coverageClassification.parts)await fs.copyFile('data/'+part.path,'dist/'+part.path);
+  }
   const referenceBundle=await packageReferenceBundle({source:'data/reference-attributes',destination:'dist/reference-attributes',expectedFootprints:geographicRelease.footprints_sha256});
-  await fs.writeFile('dist/atlas-geography.json', JSON.stringify({referenceAttributes:referenceBundle.descriptor,contentCapabilities:{mapSnapshots:1,datedGeography:1,datedFootprints:0,storageExport:2},type:reference.type,sourceQualityReviews:reference.sourceQualityReviews,reference_release:geographicRelease,preparedEvidence:{footprints_sha256:preparedEvidence.footprints_sha256,hierarchy_sha256:preparedEvidence.hierarchy_sha256,index_sha256:createHash('sha256').update(await fs.readFile('data/prepared-evidence/index.json')).digest('hex')},pixelMissing:reference.pixelMissing,units:reference.units,temporal:{history:[],links:reference.temporal.links},entityParts,temporalHistoryParts,parts:catalogParts,geometryParts:parts,pixelMap}));
+  await fs.writeFile('dist/atlas-geography.json', JSON.stringify({coverageClassification,referenceAttributes:referenceBundle.descriptor,contentCapabilities:{mapSnapshots:1,datedGeography:1,datedFootprints:0,storageExport:2},type:reference.type,sourceQualityReviews:reference.sourceQualityReviews,reference_release:geographicRelease,preparedEvidence:{footprints_sha256:preparedEvidence.footprints_sha256,hierarchy_sha256:preparedEvidence.hierarchy_sha256,index_sha256:createHash('sha256').update(await fs.readFile('data/prepared-evidence/index.json')).digest('hex')},pixelMissing:reference.pixelMissing,units:reference.units,temporal:{history:[],links:reference.temporal.links},entityParts,temporalHistoryParts,parts:catalogParts,geometryParts:parts,pixelMap}));
   await fs.writeFile('dist/atlas-history.json.gz',gzipSync(JSON.stringify(history)));
   await fs.writeFile('dist/environment-classifications.json',JSON.stringify({version:1,unknown:null,attributes:environmentClassifications}));
-  await packageOwnershipHistory({source:'data/ownership-history',destination:'dist/ownership-history',hosted:process.env.ATLAS_HOSTED_BUILD==='1'});
+  await packageOwnershipHistory({source:'data/ownership-history',destination:'dist/ownership-history',hosted:process.env.ATLAS_HOSTED_BUILD==='1',compactReceipts:true});
   await fs.cp('data/ownership-runtime','dist/ownership-runtime',{recursive:true});
   // Complete original reference rows/index are pinned inside the new bundle.
   // Originals remain in data and prior published vintages; never prune them.

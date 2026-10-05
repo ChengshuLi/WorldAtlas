@@ -102,3 +102,56 @@ test('real WebGL framebuffer agrees for legacy/compact holes, odd runs, maximum 
   assert.deepEqual(result.results,[{version:1,mismatches:0,error:0},{version:2,mismatches:0,error:0}]);assert.deepEqual(result.high.pixel,[193,71,29,255]);assert.equal(result.high.error,0);assert.equal(result.high.size,262144);assert.equal(result.high.navigationOwnershipUploads,0);console.log(JSON.stringify(result));
  }finally{try{await browser?.close();}finally{await server.close();}}
 });
+
+test('packaged coverage supports all modes, gap explanations and unavailable-reference fallback', {timeout:180000},async()=>{
+ const {createServer:serve}=await import('node:http'),{projectCell,GRID_ZOOM}=await import('../src/pixel-grid.js');
+ const path=await import('node:path'),root=path.resolve('dist/client');
+ const server=serve((request,response)=>{
+  const pathname=decodeURIComponent(new URL(request.url,'http://localhost').pathname),file=path.resolve(root,'.'+(pathname==='/'?'/index.html':pathname));
+  if(!file.startsWith(root+path.sep)||!fs.existsSync(file)||!fs.statSync(file).isFile()){response.writeHead(404);response.end();return;}
+  response.setHeader('Content-Type',file.endsWith('.js')?'text/javascript':file.endsWith('.css')?'text/css':file.endsWith('.html')?'text/html':'application/octet-stream');fs.createReadStream(file).pipe(response);
+ });
+ await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));const base=`http://127.0.0.1:${server.address().port}`,browser=await chromium.launch();
+ try{
+  for(const unavailable of [false,true]){
+   const page=await browser.newPage({viewport:{width:1440,height:1080}}),errors=[];
+   page.on('pageerror',error=>errors.push(error.message));
+   await page.route('**/*',route=>{
+    const url=new URL(route.request().url());
+    if(url.origin!==base)return route.abort();
+    if(url.pathname.startsWith('/api/')||(unavailable&&url.pathname.startsWith('/coverage-classification/')))return route.fulfill({status:503,json:{error:'Isolated unavailable-service control'}});
+    return route.continue();
+   });
+   await page.goto(base);
+   await page.waitForFunction(()=>document.querySelector('.atlas-pixel-canvas')?.dataset.rendered==='true',null,{timeout:60000});
+   await page.locator('#loading').waitFor({state:'hidden',timeout:60000});
+   assert.equal(await page.locator('.atlas-pixel-canvas').getAttribute('data-renderer'),'webgl2');
+   const before=await page.locator('.atlas-pixel-canvas').evaluate(canvas=>({...canvas.dataset}));
+   assert.equal(before.coverageUploads,unavailable?'0':'2');
+   for(const year of ['1444','2021','2026']){
+    await page.locator('#year-input').fill(year);await page.locator('#year-form button').click();
+    await page.locator('#loading').waitFor({state:'hidden',timeout:60000});
+    assert.match(await page.locator('#map-year').textContent(),new RegExp(year==='1444'?'1,444':year==='2021'?'2,021':'2,026'));
+   }
+   for(const mode of ['owner','population','culture','religion','rank','topography','vegetation','climate','location','province','area','region','subcontinent','continent']){
+    await page.locator(`[data-mode="${mode}"]`).click();assert.equal(await page.locator(`[data-mode="${mode}"]`).getAttribute('aria-pressed'),'true');
+   }
+   await page.locator('#search').fill('Panjgur');
+   await page.locator('[data-result]').filter({hasText:'Panjgur'}).first().click();
+   await page.waitForTimeout(600);
+   const point=projectCell(63.207727681,26.8032);
+   const cursor=await page.locator('.atlas-pixel-canvas').evaluate((canvas,{point,gridZoom})=>{
+    const [x,y,zoom]=canvas.dataset.frame.split('/').map(Number),box=canvas.getBoundingClientRect(),scale=2**(zoom-gridZoom);
+    return {x:box.x+(point[0]-x)*scale,y:box.y+(point[1]-y)*scale};
+   },{point,gridZoom:GRID_ZOOM});
+   assert.ok(cursor.x>0&&cursor.x<1440&&cursor.y>0&&cursor.y<1080,JSON.stringify(cursor));
+   await page.mouse.move(cursor.x,cursor.y);await page.mouse.wheel(0,-800);await page.waitForTimeout(900);await page.mouse.click(cursor.x,cursor.y);
+   const popup=page.locator('.leaflet-popup-content').last();await popup.waitFor();
+   assert.match(await popup.textContent(),unavailable?/Unverified geographic coverage/:/Possible geographic coverage gap/);
+   if(!unavailable)assert.equal(await popup.locator('a').count(),2);
+   const after=await page.locator('.atlas-pixel-canvas').evaluate(canvas=>({...canvas.dataset}));
+   assert.equal(after.compilations,before.compilations);assert.equal(after.ownershipUploads,before.ownershipUploads);assert.equal(after.coverageUploads,before.coverageUploads);
+   assert.deepEqual(errors,[]);await page.close();
+  }
+ }finally{await browser.close();await new Promise(resolve=>server.close(resolve));}
+});
