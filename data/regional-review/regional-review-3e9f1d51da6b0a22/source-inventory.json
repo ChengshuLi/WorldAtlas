@@ -1,0 +1,184 @@
+{
+  "version": 1,
+  "captured_on": "2026-10-05",
+  "sources": [
+    {
+      "id": "geoboundaries-argentina-adm2-v2020",
+      "role": "original-baseline-source",
+      "vintage": "2020",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/ARG/ADM2/geoBoundaries-ARG-ADM2.geojson",
+      "commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "sha256": "cedee8710e49d9017327fc1d4b2dc536e95a82317dc94c3bac8d9404af6bf771",
+      "bytes": 69702323,
+      "license": "CC BY 3.0 IGO per retained source metadata",
+      "retention": "restoration-only; source exceeds 32 MiB bound",
+      "reuse_note": "Only the named immutable source commit is suitable for reconstructing the baseline."
+    },
+    {
+      "id": "geoboundaries-chile-adm3-v2020",
+      "role": "original-baseline-source",
+      "vintage": "2020",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/CHL/ADM3/geoBoundaries-CHL-ADM3.geojson",
+      "commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "sha256": "f6852723bc6d44d4813086fe9df750e7228e1925a72284e3d2b65ed44e2aa99a",
+      "bytes": 171783952,
+      "license": "CC BY 3.0 IGO per retained source metadata",
+      "retention": "restoration-only; source exceeds 32 MiB bound",
+      "reuse_note": "Only the named immutable source commit is suitable for reconstructing the baseline."
+    },
+    {
+      "id": "ign-anida-argentina-departments-2026-capture",
+      "role": "current-official-comparison-source",
+      "vintage": "service result retrieved 2026-10-05; source vintage not stated",
+      "url": "https://ide.ign.gob.ar/geoservicios/rest/services/ANIDA/org_politica/MapServer/270/query?where=CODPROV+IN+%28%2726%27%2C%2758%27%2C%2762%27%2C%2778%27%2C%2794%27%29&outFields=CODPROV%2CCODDEPTO%2CCODINDEC%2CFNA%2CNAM%2CTipo_de_Un%2CTipo_de_di&returnGeometry=true&outSR=4326&maxAllowableOffset=0.001&geometryPrecision=5&f=geojson",
+      "sha256": "3f2b63b4499b01a67274142ec66814997207591090e402ca7bf208b1ac3fc2f3",
+      "bytes": 1420162,
+      "feature_count": 56,
+      "license": "not stated in inspected current layer metadata",
+      "retention": "restoration-only; retrieve exact response and verify digest before reproduction",
+      "restore_to": "source-cache/ign-argentina-south-generalized.geojson",
+      "note": "Response was generalized at 0.001 degree max offset and five decimal places. No un-generalized geometry is represented."
+    },
+    {
+      "id": "subdere-chile-dpa-2023",
+      "role": "current-official-comparison-source",
+      "vintage": "2023-08-03 DPA",
+      "url": "https://ide.subdere.gov.cl/descargas/SHP/Limite_DPA_03082023.rar",
+      "sha256": "4c8dd01ca4ca7d8b111dac78b88cc8ac64c1af7b8ebe0c85a21eaab337ae3fd3",
+      "bytes": 262380302,
+      "commune_records": 345,
+      "province_records": 56,
+      "license": "not stated in downloaded metadata",
+      "retention": "restoration-only; original archive not redistributed",
+      "restore_to": "source-cache/subdere-dpa-2023.rar",
+      "required_members": [
+        "DPA_2023/COMUNAS/COMUNAS_v1.shp",
+        "DPA_2023/PROVINCIAS/PROVINCIAS_v1.shp",
+        "DPA_2023/DOCUMENTACION/Metadato_DPA2023_SIRGASCHILE_v2.docx",
+        "DPA_2023/DOCUMENTACION/CAMBIOS_DPA_2023_v1.docx"
+      ],
+      "note": "Metadata describes 1:50,000 SIRGAS-Chile geographic data, joint institutional production, and exclusion of Chilean Antarctic territory."
+    },
+    {
+      "id": "argentina-law-1186",
+      "role": "legal-administrative-source",
+      "vintage": "2017; in force per official provincial norm page checked 2026-10-05",
+      "url": "https://www.argentina.gob.ar/normativa/provincial/ley-1186-123456789-0abc-defg-186-1000vvorpyel/actualizacion",
+      "license": "official text; no separate reuse license assessed",
+      "finding": "Tierra del Fuego province is divided into Río Grande, Tolhuin, Ushuaia, Antártida Argentina, and Islas del Atlántico Sur."
+    },
+    {
+      "id": "wgsrpd-level-3",
+      "role": "regional-system-description",
+      "url": "https://github.com/tdwg/wgsrpd",
+      "finding": "WGSRPD botanical units are intended for botanical use and may not follow purely political factors; area interpretation requires separate review."
+    },
+    {
+      "id": "subdere-marchihue-marchigue-name-variant",
+      "role": "official-commune-name-reference",
+      "vintage": "page checked 2026-10-05",
+      "url": "https://www.subdere.gov.cl/divisi%C3%B3n-administrativa-de-chile/gobierno-regional-de-ohiggins/provincia-de-cardenal-caro/marchihue",
+      "corroborating_url": "https://www.bcn.cl/siit/reportescomunales/comunas_v.html?idcom=6204",
+      "license": "not applicable to spelling citation; page data reuse not assessed",
+      "finding": "Subdere says Marchihue is also written Marchigüe and places the commune in Provincia de Cardenal Caro, O’Higgins."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/regional-review-3e9f1d51da6b0a22/geometry-summary.json",
+      "sha256": "fb88fc759a67cc4faa7f0ceeeb2fa1766b5037190af3c89005894d463b177838",
+      "bytes": 3496,
+      "role": "generated-comparison-summary"
+    },
+    {
+      "path": "data/regional-review/regional-review-3e9f1d51da6b0a22/geometry-comparisons.jsonl",
+      "sha256": "b4fdfc99a2c0cb8143b46fa4f05feea2ac0147d3fe48725bbd94bb0584f030bc",
+      "bytes": 132284,
+      "role": "generated-per-location-geometry-results"
+    },
+    {
+      "path": "data/regional-review/regional-review-3e9f1d51da6b0a22/location-assessments.jsonl",
+      "sha256": "46c4d893ff18cfe0016a33e930d82089533f82e9c836e3f85a712c77378c6b18",
+      "bytes": 182516,
+      "role": "generated-disposition-and-parent-ledger"
+    },
+    {
+      "path": "data/regional-review/regional-review-3e9f1d51da6b0a22/RESEARCH.md",
+      "sha256": "a6bd4ede57076fad66e63134e2461f01c2ad536adc41301ce28c21b395f0c0da",
+      "bytes": 13550,
+      "role": "research-narrative"
+    }
+  ],
+  "baseline_inputs": [
+    {
+      "path": "data/world-index.json",
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "bytes": 944
+    },
+    {
+      "path": "data/hierarchy.json",
+      "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "bytes": 10164089
+    },
+    {
+      "path": "data/geography/part-0.json",
+      "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+      "bytes": 8539839
+    },
+    {
+      "path": "data/geography/part-2.json",
+      "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf",
+      "bytes": 6259307
+    }
+  ],
+  "baseline_commit": "d6a860ae2cff80af4ca0604bbc26e90dee56fc3b",
+  "packet_control_files": [
+    {
+      "path": "data/regional-review/regional-review-3e9f1d51da6b0a22/scope.json",
+      "sha256": "a535a3cb46a0530902006caf7d4141bf7e13f321823e9ea8a9e9eb0cb38163df",
+      "bytes": 21541,
+      "role": "issue-pinned-scope"
+    },
+    {
+      "path": "data/regional-review/regional-review-3e9f1d51da6b0a22/issue-scope-pinned.json",
+      "sha256": "edacddbdc76639dc77f882b6629b1918d99a5a2de98b5c428cc4589b67edf40b",
+      "bytes": 32277,
+      "role": "retrieved-public-issue-snapshot"
+    }
+  ],
+  "reproduction_methods": [
+    {
+      "path": "data/regional-review/regional-review-3e9f1d51da6b0a22/compare-boundaries.py",
+      "sha256": "43fb0617bce9f86181a74d3fdd252280ea0e4167676b9b80df9d9b6125e04fc9",
+      "bytes": 8811,
+      "role": "measurement-method; Python 3, PyShp 2.4.2, Shapely 2.0.7; planar lon/lat IoU at 0.001 degrees"
+    },
+    {
+      "path": "data/regional-review/regional-review-3e9f1d51da6b0a22/build-assessments.py",
+      "sha256": "b8b57aac81b9b4f007dbb50c0d078708b77142116374a43428ac0faf2da3360a",
+      "bytes": 8234,
+      "role": "generator; deterministic exact-scope disposition and parent ledger"
+    }
+  ],
+  "verification": {
+    "executed_on": "2026-10-05",
+    "scope_and_evidence_check": "passed",
+    "source_bytes_check": "passed for IGN query response and Subdere archive before private scratch cleanup",
+    "source_features": "IGN 56; Subdere communes 345 and provinces 56",
+    "geometry_reproduction": {
+      "two_identical_runs_sha256_before_jsonl_serialization": "5f1d33c08a270348a10db3417cfc3d46dd5af5841a3c5591f012fa35051ac898",
+      "final_summary_sha256": "fb88fc759a67cc4faa7f0ceeeb2fa1766b5037190af3c89005894d463b177838",
+      "final_jsonl_records_sha256": "b4fdfc99a2c0cb8143b46fa4f05feea2ac0147d3fe48725bbd94bb0584f030bc",
+      "note": "The two full source-backed runs preceded a deterministic format-only conversion from a pretty JSON container to one-record-per-line output; per-record measurements and summary values were retained unchanged."
+    },
+    "assessment_generator": {
+      "two_identical_runs_sha256": "46c4d893ff18cfe0016a33e930d82089533f82e9c836e3f85a712c77378c6b18",
+      "note": "Two consecutive runs of build-assessments.py generated identical exact-scope assessment bytes."
+    },
+    "limits": [
+      "Geometry metrics are triage only, not legal boundary tests.",
+      "Official IGN current layer vintage and reuse terms were not stated.",
+      "Subdere source redistribution terms were not stated in inspected metadata."
+    ]
+  }
+}
