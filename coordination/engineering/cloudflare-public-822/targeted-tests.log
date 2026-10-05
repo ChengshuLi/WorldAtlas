@@ -1,0 +1,17 @@
+✔ all static and API paths fail closed before the app can access data (23.660541ms)
+✔ forged, expired, wrong-issuer/audience and incomplete JWTs never reach the app (7.363583ms)
+✔ authenticated reads route normally and writes require explicit cutover (3.642958ms)
+✔ Cloudflare config protects assets and never provisions or migrates D1 (0.218541ms)
+✔ explicit public mode permits real assets/API reads and always blocks writes (1.515833ms)
+✔ authenticated wrapper preserves the real atlas API and static asset routing (2.428458ms)
+✔ backend cutover is explicit and cannot expose credentials or silently return D1 (1.658125ms)
+✔ transfer maintenance blocks every API mutation before touching a database or object bucket (89.527542ms)
+✔ PostgreSQL diagnostics and raw export routes use the selected backend and retain honest quota status (1330.57575ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1697.287209

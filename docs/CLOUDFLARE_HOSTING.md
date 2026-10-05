@@ -1,5 +1,9 @@
 # Cloudflare hosting with existing Neon
 
+For a public website, explicitly build with `ATLAS_PUBLIC_READ_ONLY=1`. This permits anonymous reads and forces read-only behavior even if `ATLAS_READ_ONLY=0` is accidentally configured. Private JWT protection remains the default for every other value. Deploy the reviewed public package before removing the corresponding Cloudflare Access application; otherwise the edge login still applies. Preserve the previous private configuration for rollback.
+
+Before accepting either access mode, compare the static `atlas-geography.json` reference release with the live temporal snapshot's release ID, hierarchy hash and footprint hash. Exercise the combined historical loader, including inline temporal pages. HTTP 200 responses alone do not establish matching releases; staged static release6 and published Neon release5 are incompatible. Serve the verified published release's matching assets or complete its separately authorized publication; never weaken the loader's pin checks.
+
 The alternative build deploys the hosted atlas API and fixed map assets to the user's Cloudflare account. Neon remains the existing PostgreSQL project, with the existing runtime role and schema. No database provisioning, schema migrations or content imports run during this build or deployment. The Sites build remains available for rollback.
 
 ## Build and private access
