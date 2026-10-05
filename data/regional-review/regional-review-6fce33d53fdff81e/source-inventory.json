@@ -1,0 +1,87 @@
+{
+  "retrieved_utc_date": "2026-10-05",
+  "sources": [
+    {
+      "id": "geoboundaries-usa-adm2-2018",
+      "role": "Retained original 2018-vintage Atlas source evidence for all 216 issue members; not a separate authoritative legal boundary reference.",
+      "landing_and_exact_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.geojson",
+      "resolved_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "path": "sources/geoboundaries-2018/geoBoundaries-USA-ADM2.geojson",
+      "retrieved_bytes": 10500644,
+      "retrieved_sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43",
+      "published_source_vintage": "2018; GeoBoundaries source metadata build date Dec 12, 2023",
+      "declared_license": "Public Domain in GeoBoundaries administrative-sources.json; source description says US Census Bureau MAF/TIGER. The source file's distributed metadata does not establish exact federal product, vintage extraction method, or whether each boundary is authoritative.",
+      "completeness": "3,233 features in nationwide GeoJSON. This is the exact retrieved artifact, not proof that all 2018 US county-equivalent entities are present.",
+      "hash_discrepancy": "The repository administrative-sources.json entry gb:USA:ADM2 records 16249e8d795aaded6a72910a8c72115a073814b25ee902d61ccc9a9490c6641a. That value does not equal the bytes retrieved from the entry's own gjDownloadURL at pinned commit 9469f09. Meaning/serialization/source-revision of the catalog hash is unresolved; do not change the shared registry or interpret the new artifact hash as an approved replacement.",
+      "license_url": "https://www.census.gov/programs-surveys/geography/technical-documentation/complete-technical-documentation/tiger-geo-line.html"
+    },
+    {
+      "id": "census-tiger-2025-us-counties",
+      "role": "Independent official current-era county-equivalent source; full national archive used to validate an eight-county coastal discrepancy sample; 8 exact original geometries are retained as a small excerpt.",
+      "landing_url": "https://www.census.gov/geographies/mapping-files/2025/geo/tiger-line-file.html",
+      "archive_source_url": "https://www2.census.gov/geo/tiger/TIGER2025/COUNTY/tl_2025_us_county.zip",
+      "vintage": "Legal boundaries/names as of 2025-01-01; released 2025-09-23.",
+      "license": "U.S. federal public-domain work. Census requests attribution and documents the no-warranty/statistical-use limitation; TIGER lines are not legal land descriptions or a determination of jurisdiction.",
+      "full_archive_bytes": 83989800,
+      "full_archive_sha256": "9c6e9d9076abce2670d1de255de3710c35ecca00a7005d88e012dec52d95f763",
+      "full_archive_storage": "The 83,989,800-byte national archive is preserved outside the repository checkout at /Users/chengshuli/world-atlas-workspace/WorldAtlas-geography-432-private-originals/tl_2025_us_county.zip. Restore from the exact source_url and verify this SHA-256 if unavailable.",
+      "retained_excerpt": "sources/census-tiger-2025/counties-coastal-sample-2025.geojson",
+      "excerpt_bytes": 503479,
+      "excerpt_sha256": "8ee2607cad936795ea7914d0851260de95dfdc3a2a066687e62949a068c4aad5",
+      "excerpt_geoids": [
+        "05001",
+        "22023",
+        "22045",
+        "22057",
+        "22075",
+        "22087",
+        "22101",
+        "22109",
+        "22113"
+      ],
+      "documentation_path": "sources/census-tiger-2025/TGRSHP2025_TechDoc.pdf",
+      "documentation_sha256": "21476bdba82fe8072f8994ae59bda484260d1b932c13f31991f6414f8e04d551",
+      "extractor": "sources/census-tiger-2025/extract_sample.py; pyshp==2.3.1; archive entry tl_2025_us_county.shp/.dbf; nine exact GEOIDs retained."
+    },
+    {
+      "id": "census-tigerweb-counties-2026",
+      "role": "Official Census county/parish equivalent names, state/county codes, parent relationships, and TIGERweb geometry for the 216 issue members.",
+      "layer_metadata_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/1?f=pjson",
+      "feature_query_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/1/query?where=STATE+IN+%28%2705%27%2C%2722%27%2C%2740%27%29%26outFields=%2A%26returnGeometry=true%26outSR=4326%26f=geojson%26orderByFields=STATE%2CCOUNTY",
+      "published_source_vintage": "TIGERweb layer metadata describes counties and equivalents at January 1, 2026. Retrieved 2026-10-05. Live service; exact raw response is retained.",
+      "data_path": "sources/census-tigerweb-2026/counties-ar-la-ok-2026.geojson",
+      "bytes": 26222701,
+      "sha256": "d0b1012ad2c7f8a4841e08f455a1359eb85402b045667e58282e7e2dc34eb7db",
+      "retrieval_receipt": "sources/census-tigerweb-2026/retrieval-receipt.json",
+      "license": "U.S. Census Bureau federal source; public-domain status attributed to U.S. government work; cite Census Bureau. TIGER statistical-boundary limitations apply.",
+      "completeness": "Query returns the 216 counties/parishes in Arkansas, Louisiana and Oklahoma as served by layer 1; state counts 75/64/77. Query is not a nationwide completeness test."
+    },
+    {
+      "id": "census-tigerweb-state-parents-2026",
+      "role": "Official state names and Census region/division codes for the three owned parents and the Texas neighboring state.",
+      "query_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/0/query?where=STATE+IN+%28%2705%27%2C%2722%27%2C%2740%27%2C%2748%27%29&outFields=GEOID%2CNAME%2CSTUSAB%2CREGION%2CDIVISION&returnGeometry=false&f=geojson&orderByFields=GEOID",
+      "data_path": "sources/census-tigerweb-2026/state-parents-division-query.geojson",
+      "sha256": "1dde0ce06216f16303f45948fe0bd74118a626b98dce6cb3ddbc00687466e560",
+      "retrieval_receipt": "sources/census-tigerweb-2026/state-parents-division-retrieval.json",
+      "license": "U.S. Census Bureau federal source; exact query response retained."
+    }
+  ],
+  "primary_references": [
+    {
+      "claim": "Census Division 7 / West South Central consists of Arkansas, Louisiana, Oklahoma, Texas; Region 3.",
+      "url": "https://www.census.gov/programs-surveys/economic-census/geographies/levels/2022-levels.html"
+    },
+    {
+      "claim": "2025 TIGER/Line is as of January 1, 2025 and released September 23, 2025.",
+      "url": "https://www.census.gov/geographies/mapping-files/2025/geo/tiger-line-file.html"
+    },
+    {
+      "claim": "Counties and equivalents are primary state legal divisions for Census presentation; Louisiana parishes are county equivalents; records have state/county codes; product reflects available governmental unit boundaries and is not a jurisdictional/legal land-description determination.",
+      "url": "https://www2.census.gov/geo/pdfs/maps-data/data/tiger/tgrshp2025/TGRSHP2025_TechDoc.pdf"
+    },
+    {
+      "claim": "U.S. Census Bureau is the data source and U.S. government work is public domain (17 USC 105).",
+      "url": "https://www2.census.gov/geo/pdfs/maps-data/data/tiger/tgrshp2025/TGRSHP2025_TechDoc.pdf"
+    }
+  ]
+}

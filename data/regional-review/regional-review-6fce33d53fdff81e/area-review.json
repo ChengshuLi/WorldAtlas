@@ -1,0 +1,21 @@
+{
+  "name": "West South Central",
+  "framework_area_id": "framework:area:west-south-central:1e780b4bc1dd",
+  "issue_owned_count": 216,
+  "full_area_count": 470,
+  "scope_fraction": 0.4595744680851064,
+  "classification": "insufficient-evidence",
+  "official_grouping": "Census Region 3 / Division 7 includes Arkansas (05), Louisiana (22), Oklahoma (40), and Texas (48).",
+  "scope_boundary": "Only Arkansas, Louisiana, and Oklahoma reviewed here. Texas is the separate #431 packet; combined membership, area interior, and neighbor agreement remain unreviewed.",
+  "child_scope_counts": {
+    "Arkansas": 75,
+    "Louisiana": 64,
+    "Oklahoma": 77,
+    "Texas_outside_issue_431": 254
+  },
+  "findings": [
+    "The Census TIGERweb state layer query returns precisely the four official division members; all report DIVISION=7.",
+    "The #432 three-state issue subset accounts for 216 of the 470 full-area locations; this matches 75+64+77 but is a scope reconciliation only.",
+    "This does not establish area interiors, overall source completeness, or region certification."
+  ]
+}

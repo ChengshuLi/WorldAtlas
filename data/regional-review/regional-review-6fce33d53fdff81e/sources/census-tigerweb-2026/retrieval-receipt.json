@@ -1,0 +1,47 @@
+{
+  "county_query": {
+    "bytes": 26222701,
+    "content_type": "application/geo+json;charset=UTF-8",
+    "feature_count": 216,
+    "final_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/1/query?where=STATE+IN+%28%2705%27%2C%2722%27%2C%2740%27%29&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&orderByFields=STATE%2CCOUNTY",
+    "last_modified": null,
+    "parameters": {
+      "f": "geojson",
+      "orderByFields": "STATE,COUNTY",
+      "outFields": "*",
+      "outSR": "4326",
+      "returnGeometry": "true",
+      "where": "STATE IN ('05','22','40')"
+    },
+    "retrieved_utc_date": "2026-10-05",
+    "service_endpoint": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/1/query",
+    "sha256": "d0b1012ad2c7f8a4841e08f455a1359eb85402b045667e58282e7e2dc34eb7db",
+    "state_counts": {
+      "05": 75,
+      "22": 64,
+      "40": 77
+    },
+    "status": 200,
+    "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/1/query?where=STATE+IN+%28%2705%27%2C%2722%27%2C%2740%27%29&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson&orderByFields=STATE%2CCOUNTY"
+  },
+  "layer_metadata": {
+    "bytes": 7463,
+    "content_type": "text/plain;charset=UTF-8",
+    "final_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/1?f=pjson",
+    "last_modified": null,
+    "retrieved_utc_date": "2026-10-05",
+    "sha256": "2d3d122db59e0f4171d4ac8972dff969b42567bc7239f90a67412fd3616a1b59",
+    "status": 200,
+    "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/1?f=pjson"
+  },
+  "service_metadata": {
+    "bytes": 26044,
+    "content_type": "text/plain;charset=UTF-8",
+    "final_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer?f=pjson",
+    "last_modified": null,
+    "retrieved_utc_date": "2026-10-05",
+    "sha256": "f11dced0ed9c9283a1c9d21bfc6f677417dc908733b61322220d5053b215dc5e",
+    "status": 200,
+    "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer?f=pjson"
+  }
+}
