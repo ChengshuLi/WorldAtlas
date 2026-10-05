@@ -1,0 +1,424 @@
+{
+  "version": 1,
+  "issue": 71,
+  "issue_url": "https://github.com/ChengshuLi/WorldAtlas/issues/71",
+  "legacy_evidence_policy": "Issue #71 predates the 2026-10-04 evidence-quality enforcement; this bounded whole-file index binds the exact scope, source snapshots, methods, generated result files and limits for the required independent review.",
+  "author_worker_id": "codex-01a10948-7d38-75d0-bc01-4cc28ea41f49",
+  "branch": "geography/regional-review-ef67318527f5f3a3",
+  "baseline_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+  "baseline_files_read_by_reproduction": [
+    {
+      "path": "data/geography/part-0.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 8539839,
+      "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3"
+    },
+    {
+      "path": "data/geography/part-1.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 8060108,
+      "sha256": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7"
+    },
+    {
+      "path": "data/geography/part-10.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 5144571,
+      "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+    },
+    {
+      "path": "data/geography/part-11.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 5131824,
+      "sha256": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f"
+    },
+    {
+      "path": "data/geography/part-12.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 4489493,
+      "sha256": "24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7"
+    },
+    {
+      "path": "data/geography/part-13.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 5709487,
+      "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1"
+    },
+    {
+      "path": "data/geography/part-14.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 4355198,
+      "sha256": "c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0"
+    },
+    {
+      "path": "data/geography/part-15.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 5180426,
+      "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df"
+    },
+    {
+      "path": "data/geography/part-16.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 5213846,
+      "sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797"
+    },
+    {
+      "path": "data/geography/part-17.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 4945828,
+      "sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db"
+    },
+    {
+      "path": "data/geography/part-18.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 4909063,
+      "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123"
+    },
+    {
+      "path": "data/geography/part-19.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 4583022,
+      "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269"
+    },
+    {
+      "path": "data/geography/part-2.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 6259307,
+      "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf"
+    },
+    {
+      "path": "data/geography/part-20.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 6570767,
+      "sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f"
+    },
+    {
+      "path": "data/geography/part-21.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 6737781,
+      "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7"
+    },
+    {
+      "path": "data/geography/part-22.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 4746385,
+      "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+    },
+    {
+      "path": "data/geography/part-23.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 4962410,
+      "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2"
+    },
+    {
+      "path": "data/geography/part-24.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 4816899,
+      "sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c"
+    },
+    {
+      "path": "data/geography/part-25.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 4525239,
+      "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394"
+    },
+    {
+      "path": "data/geography/part-26.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 4608983,
+      "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632"
+    },
+    {
+      "path": "data/geography/part-27.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 4863162,
+      "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758"
+    },
+    {
+      "path": "data/geography/part-28.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 6613963,
+      "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+    },
+    {
+      "path": "data/geography/part-29.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 12932167,
+      "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a"
+    },
+    {
+      "path": "data/geography/part-3.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 5153118,
+      "sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617"
+    },
+    {
+      "path": "data/geography/part-30.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 11979437,
+      "sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a"
+    },
+    {
+      "path": "data/geography/part-31.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 10086485,
+      "sha256": "44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e"
+    },
+    {
+      "path": "data/geography/part-32.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 10211739,
+      "sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64"
+    },
+    {
+      "path": "data/geography/part-33.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 607984,
+      "sha256": "d928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe"
+    },
+    {
+      "path": "data/geography/part-4.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 4835479,
+      "sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c"
+    },
+    {
+      "path": "data/geography/part-5.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 5226173,
+      "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc"
+    },
+    {
+      "path": "data/geography/part-6.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 4607953,
+      "sha256": "dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a"
+    },
+    {
+      "path": "data/geography/part-7.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 4257402,
+      "sha256": "1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387"
+    },
+    {
+      "path": "data/geography/part-8.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 5097739,
+      "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1"
+    },
+    {
+      "path": "data/geography/part-9.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 5729632,
+      "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6"
+    },
+    {
+      "path": "data/hierarchy.json",
+      "git_commit": "7ffd4e35364ec8246b9add7459378b3f971fcd72",
+      "bytes": 10164089,
+      "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+    }
+  ],
+  "scope": {
+    "member_count": 226,
+    "member_location_ids_sha256": "fa5d537c9e9fe645e3a601f6a995bfd7e1d7cbf0a3d5135b066e529384cc4db1",
+    "region_release": {
+      "id": "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+      "version": 5,
+      "hierarchy_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+      "footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286"
+    },
+    "frozen_region_geometry_sha256": "505db3089243e5bcd2ba2ea86099d9e993186cf9cad18b0030bfd098252e4f86",
+    "frozen_region_member_ids_sha256": "c192f338b815c029ea0c8338cbf153686a11bfd5e102d733272417f290ae85eb",
+    "macro_certificate_sha256": "979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e",
+    "location_classification_counts": {
+      "justified": 0,
+      "correction-needed": 0,
+      "insufficient-evidence": 226
+    },
+    "area_and_province_scope_classification_counts": {
+      "justified": 0,
+      "correction-needed": 1,
+      "insufficient-evidence": 29
+    }
+  },
+  "review_outcome": "All 226 assigned locations are insufficient-evidence. The Istanbul province workload is correction-needed because an official current roster lists 39 districts and the baseline contains only 7. No region completeness/tier approval or automatic addition of the other 32 candidates.",
+  "source_inventory_path": "data/regional-review/regional-review-ef67318527f5f3a3/source-files.json",
+  "files": [
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/README.md",
+      "bytes": 13351,
+      "sha256": "56908ab2be477884767be1510f4b79f50ff5ea383c2aa190d53742b44d641a24"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/assessment.csv",
+      "bytes": 360234,
+      "sha256": "8bbc80a5673867a307377b414e69898a52050b32ad067de3fc2a929dc174afc5"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/build_review.py",
+      "bytes": 20943,
+      "sha256": "e17b6a3bb07cf6767df016b0355bf80d2e435f0c13dcf6b768076efc2279294e"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/checks/build_review_index.py",
+      "bytes": 3637,
+      "sha256": "4c58c4535b1e8c723f5330a70edde7bd8b45ca9ec34207534bf84139b19b323b"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/checks/verify_packet.py",
+      "bytes": 3591,
+      "sha256": "90be3b9987b08cd9d18e0106c7dba778fe2237e063158e1a361c3b14e70804df"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/claim-receipt.json",
+      "bytes": 653,
+      "sha256": "82a44ef8803360206bc59ffa631bc95909f6cba045691e2fcff6562b776ee9ca"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/compare_greece_2021.py",
+      "bytes": 4252,
+      "sha256": "c12a77e2b8a68f8b36d6bd06cd24f5a32de297b5a4c19fedded94d241751bee3"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/follow-up-recommendations.json",
+      "bytes": 6879,
+      "sha256": "3e4154077f6c58a0780bfe7cc66938394a0bb18ae07f7f1693a2428dcac07665"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/geometry-components.csv",
+      "bytes": 51284,
+      "sha256": "4c1522692d4f67281c6a9a6c67bfb1ef7d751b36df7f115ee68c6058364ea39d"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/greece-2021-crosswalk-provenance.json",
+      "bytes": 1379,
+      "sha256": "ef83c14d992e7bd7a4e6819df870e1e02d6d8836c789b958f44da02b1b1a76e8"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/greece-2021-crosswalk-screen.csv",
+      "bytes": 11779,
+      "sha256": "2a313a58034eb9732978fb1f33733ddf2ee47be24ef7205cf96e8d204a1c1767"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/issue-71-api.json",
+      "bytes": 39302,
+      "sha256": "fe44a932f6863ca27e7d885a19b2401eb09a8d75ca87000d25dcbe79b1e7b680"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/istanbul-completeness.csv",
+      "bytes": 20985,
+      "sha256": "1b1c11784a91012ecb55017366f36c0b0299c5fbfad3111365201e35dfd0a4d3"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/neighbor-edge-screen.csv",
+      "bytes": 53832,
+      "sha256": "1556efad5b571b43d32cf8403f6c4fb7729772e68425a96b3bfe08d0f7be0023"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/neighbor_edge_screen.py",
+      "bytes": 2327,
+      "sha256": "a4ff81639d404ecddaf70c0a86c49776a39ea8b968937ae34a4634112dfbee33"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/province-scale-screen.csv",
+      "bytes": 8545,
+      "sha256": "6258bdac8470e2c76ef12055409abbf5b84c70f2a1f7d1874989e414cafcd8c1"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/scope-assessment.csv",
+      "bytes": 7137,
+      "sha256": "77f7af4f6e40ed19e716ac3600ee7e016f3336f42d18aa3035f29f46a5f2c762"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/scope.json",
+      "bytes": 31781,
+      "sha256": "73a25f94e2b487206084304fad6a36aed9c4455aa7a211319f2715f797a7c364"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/screen_istanbul_roster.py",
+      "bytes": 1334,
+      "sha256": "42cd1c50a47f05c73a0459c8187f1dcd93d71f5bba56eeb89797593b48f94614"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/source-files.json",
+      "bytes": 7620,
+      "sha256": "b4bd861f4cb99751266f3a653fb1c4aef1eb7aecbe499648d046ba4799a384f2"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/source-inventory.json",
+      "bytes": 4607,
+      "sha256": "982da74cd0d3fd42786f9432849d69e632a2c3aae96fd5609cbff0b5898ea9bd"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/sources/cyprus-dls-districts.geojson",
+      "bytes": 4287408,
+      "sha256": "09e39b4c47d91affafe4a21a224e8bd87fc1a5d035dda5fe31b94bc1e4b672f7"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/sources/cyprus-dls-layer-metadata.json",
+      "bytes": 6399,
+      "sha256": "b71956e986eee6a16b2e8b0dca3c336c165107f109d3477104cef342323ddd2d"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/sources/geoBoundaries-CYP-ADM1-metaData.json",
+      "bytes": 853,
+      "sha256": "bd5c369611b2925340d63785536b0a4123235e06877d58c9afd24d908cd80f6a"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/sources/geoBoundaries-CYP-ADM1.geojson.gz",
+      "bytes": 164050,
+      "sha256": "76d4aa0aae8ae3b3d6269c30f38f7e2e33c8294d1f3e11d265714d0b638d6be9"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/sources/geoBoundaries-GRC-ADM3-metaData.json",
+      "bytes": 889,
+      "sha256": "0c0956d301dd1e04cb2586e27237e91d4509c9ecdb3471210989315cda013d2d"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/sources/geoBoundaries-GRC-ADM3.geojson.gz",
+      "bytes": 519962,
+      "sha256": "c0c518f1b87a09b52776accff437a4aae5c82061cc0127342305f777b56ac7b2"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/sources/geoBoundaries-TUR-ADM2-metaData.json",
+      "bytes": 812,
+      "sha256": "ace87195676281a6b58bc822a275646b71dbdca42ca4b7445bc928730596fdc7"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/sources/geoBoundaries-TUR-ADM2.geojson.gz",
+      "bytes": 4667032,
+      "sha256": "a88007de2cf14f14e06da390aab8861442c7a8332ef8e70865d78e0d9b549d78"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/sources/istanbul-official-district-roster.json",
+      "bytes": 4455,
+      "sha256": "145652fae7edf200ea748e200d58017aba5908f64fdfbf78bfdb0770f7189f1d"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/sources/ne_10m_admin_0_countries.zip",
+      "bytes": 4930492,
+      "sha256": "ce1ac7036499a0edd641fbc093cd209a98f96a49d2eca8480aaacad35138a7f6"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/sources/ne_10m_admin_0_map_units.zip",
+      "bytes": 5003719,
+      "sha256": "45bebe2aaf8bf42b9daf4428594925bcb11eabd32fe9dc6e0acf681438053eb5"
+    },
+    {
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/sources/ne_10m_admin_1_states_provinces.zip",
+      "bytes": 14909524,
+      "sha256": "efc59726337323058f9446210adc96673179cd344e053666ee3d28cb58ba2b05"
+    }
+  ],
+  "independent_review_must_inspect": [
+    "all 226 subject rows and exact source feature IDs",
+    "actual source vintage, role, completeness, license and parent information",
+    "Cyprus baseline vs geoBoundaries vs official DLS crosswalk limitations",
+    "Greek 2010 to ELSTAT 2021 census crosswalk method and license caveat",
+    "Turkey ADM2 973 versus metadata 999 source-level count discrepancy",
+    "official Istanbul 39-name to pinned source ID join: 7 present and 32 absent",
+    "Natural Earth four map-unit meanings and limits",
+    "component/scale/neighbor screens and their non-certification limits",
+    "issue #71 acceptance, the five blocked follow-ups and preserved pins"
+  ]
+}

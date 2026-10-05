@@ -1,0 +1,24 @@
+{
+  "sources": [
+    {
+      "dataset": "municipality",
+      "page": "https://www.statistics.gr/digital-cartographical-data",
+      "retrieval_date": "2026-10-04",
+      "local_source_file_not_retained": "Terms for these census-use shapefiles were not clear; restore from official page and compare the pinned SHA-256 before relying on this screen.",
+      "sha256": "b16817eb6f1a2c2527a598c3d7e6c0a16a4bc017f756d64ceedcb963d96d1174",
+      "bytes": 2596449
+    },
+    {
+      "dataset": "regional_unit",
+      "page": "https://www.statistics.gr/digital-cartographical-data",
+      "retrieval_date": "2026-10-04",
+      "local_source_file_not_retained": "Terms for these census-use shapefiles were not clear; restore from official page and compare the pinned SHA-256 before relying on this screen.",
+      "sha256": "0619b183eb0d9b3b420fc4ed6d312049681a19c8bed04ddd5b5aa6722ee82713",
+      "bytes": 1970290
+    }
+  ],
+  "transform": "EPSG:4326 baseline/source GeoJSON -> EPSG:2100; ELSTAT supplied .prj is EPSG:2100",
+  "threshold": "Record every 2021 unit covering >1% of legacy subject planar area. Shares use area in each geometry as denominator.",
+  "warning": "ELSTAT states its 2021 Kallikratis/census boundaries are for statistical use and do not certify legal administrative limits. No intersection score chooses a parent or transfers an identity.",
+  "output_rows": 40
+}

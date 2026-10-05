@@ -1,0 +1,120 @@
+{
+  "retrieval_date": "2026-10-04",
+  "retrieval_timezone": "America/Los_Angeles",
+  "geoBoundaries_release": "9469f09592ced973a3448cf66b6100b741b64c0d",
+  "files": [
+    {
+      "path": "sources/geoBoundaries-CYP-ADM1.geojson.gz",
+      "sha256": "76d4aa0aae8ae3b3d6269c30f38f7e2e33c8294d1f3e11d265714d0b638d6be9",
+      "raw_geojson_sha256": "ef9ff9388a98aa0b12f31a1245dd4d579a926276f9813602e709697b6bb9ac0c",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/CYP/ADM1/geoBoundaries-CYP-ADM1.geojson",
+      "license": "ODbL 1.0 per pinned metadata"
+    },
+    {
+      "path": "sources/geoBoundaries-CYP-ADM1-metaData.json",
+      "sha256": "bd5c369611b2925340d63785536b0a4123235e06877d58c9afd24d908cd80f6a",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/CYP/ADM1/geoBoundaries-CYP-ADM1.metaData.json",
+      "license": "Metadata for ODbL source; see original source field"
+    },
+    {
+      "path": "sources/geoBoundaries-GRC-ADM3.geojson.gz",
+      "sha256": "c0c518f1b87a09b52776accff437a4aae5c82061cc0127342305f777b56ac7b2",
+      "raw_geojson_sha256": "15c68b18cbf96f3c3c5021df38353b2d407adb2d1dc06c7165ee158da81fb3f6",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/GRC/ADM3/geoBoundaries-GRC-ADM3.geojson",
+      "license": "CC0 1.0 declared; pinned metadata separately cites some input sources as CC BY 3.0"
+    },
+    {
+      "path": "sources/geoBoundaries-GRC-ADM3-metaData.json",
+      "sha256": "0c0956d301dd1e04cb2586e27237e91d4509c9ecdb3471210989315cda013d2d",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/GRC/ADM3/geoBoundaries-GRC-ADM3.metaData.json",
+      "license": "See CC0/CC BY conflict above"
+    },
+    {
+      "path": "sources/geoBoundaries-TUR-ADM2.geojson.gz",
+      "sha256": "a88007de2cf14f14e06da390aab8861442c7a8332ef8e70865d78e0d9b549d78",
+      "raw_geojson_sha256": "8e7594ab12d916e3b93f920475a300c364dfb94a0e40bfa6d55f43aff0c7fd97",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/TUR/ADM2/geoBoundaries-TUR-ADM2.geojson",
+      "license": "ODbL 1.0 per pinned metadata"
+    },
+    {
+      "path": "sources/geoBoundaries-TUR-ADM2-metaData.json",
+      "sha256": "ace87195676281a6b58bc822a275646b71dbdca42ca4b7445bc928730596fdc7",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/TUR/ADM2/geoBoundaries-TUR-ADM2.metaData.json",
+      "license": "Metadata for ODbL source; see original source field"
+    },
+    {
+      "path": "sources/cyprus-dls-districts.geojson",
+      "sha256": "09e39b4c47d91affafe4a21a224e8bd87fc1a5d035dda5fe31b94bc1e4b672f7",
+      "bytes": 4287408,
+      "retrieved": "2026-10-04",
+      "url": "https://eservices.dls.moi.gov.cy/arcgis/rest/services/National/AdminBoundaries_Indexes_EN/MapServer/10/query?where=1%3D1&outFields=*&returnGeometry=true&f=geojson",
+      "authority": "Cyprus Department of Lands and Surveys official district service; the official open-data catalogue lists the administrative-boundary dataset under CC BY 4.0; catalogue temporal coverage 2016. Service exact asset has no independent license field."
+    },
+    {
+      "path": "sources/ne_10m_admin_0_map_units.zip",
+      "sha256": "45bebe2aaf8bf42b9daf4428594925bcb11eabd32fe9dc6e0acf681438053eb5",
+      "url": "https://naturalearth.s3.amazonaws.com/10m_cultural/ne_10m_admin_0_map_units.zip",
+      "version": "5.1.1",
+      "license": "Public domain",
+      "record_count": 298
+    },
+    {
+      "path": "sources/cyprus-dls-layer-metadata.json",
+      "sha256": "b71956e986eee6a16b2e8b0dca3c336c165107f109d3477104cef342323ddd2d",
+      "url": "https://eservices.dls.moi.gov.cy/arcgis/rest/services/National/AdminBoundaries_Indexes_EN/MapServer/10?f=pjson",
+      "retrieved": "2026-10-04",
+      "source_role": "Official DLS Feature Layer named Districts; fields DIST_CODE and DIST_NM_E"
+    },
+    {
+      "path": "sources/ne_10m_admin_0_countries.zip",
+      "sha256": "ce1ac7036499a0edd641fbc093cd209a98f96a49d2eca8480aaacad35138a7f6",
+      "url": "https://naturalearth.s3.amazonaws.com/10m_cultural/ne_10m_admin_0_countries.zip",
+      "version": "5.1.1",
+      "license": "Public domain"
+    },
+    {
+      "path": "sources/ne_10m_admin_1_states_provinces.zip",
+      "sha256": "efc59726337323058f9446210adc96673179cd344e053666ee3d28cb58ba2b05",
+      "url": "https://naturalearth.s3.amazonaws.com/10m_cultural/ne_10m_admin_1_states_provinces.zip",
+      "version": "5.1.1",
+      "license": "Public domain"
+    },
+    {
+      "path": "ELSTAT DHMOI_2021.zip (not retained)",
+      "sha256": "b16817eb6f1a2c2527a598c3d7e6c0a16a4bc017f756d64ceedcb963d96d1174",
+      "bytes": 2596449,
+      "url": "https://www.statistics.gr/digital-cartographical-data",
+      "license": "not established from source metadata; restore/verify before reuse"
+    },
+    {
+      "path": "ELSTAT PERIF_ENOT_2021.zip (not retained)",
+      "sha256": "0619b183eb0d9b3b420fc4ed6d312049681a19c8bed04ddd5b5aa6722ee82713",
+      "bytes": 1970290,
+      "url": "https://www.statistics.gr/digital-cartographical-data",
+      "license": "not established from source metadata; restore/verify before reuse"
+    },
+    {
+      "path": "geoBoundaries TUR ADM1 pinned source (not retained)",
+      "sha256": "01697a1722cf62db3b5f4e78ae73e7972edae52d2254ccfffa9163fc6cdbc918",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/TUR/ADM1/geoBoundaries-TUR-ADM1.geojson",
+      "limitation": "Exact parent layer is restorable and its raw SHA-256 is recorded, but the release lacks its metadata sibling (404), so its license/authority metadata could not be tied to these pinned bytes. Do not use its geometry until rights and source profile are resolved."
+    },
+    {
+      "path": "sources/istanbul-official-district-roster.json",
+      "sha256": "145652fae7edf200ea748e200d58017aba5908f64fdfbf78bfdb0770f7189f1d",
+      "official_page_url": "https://istanbul.ktb.gov.tr/TR-276146/ilceler.html",
+      "official_page_response_sha256": "262ed96cd19f30f29179ba333d2d9f7e7b00502aa945972a693ea3e8a9ec3f9c",
+      "retrieved_date": "2026-10-04",
+      "publisher": "Republic of Türkiye Ministry of Culture and Tourism, İstanbul Provincial Directorate",
+      "retention": "A concise names-and-links roster is retained; the original page HTML is not retained. Restore the cited official page; exact fetched page-response hash is recorded for provenance.",
+      "terms": "Original source HTML is not retained; only factual names and direct official detail URLs are retained. Review source-owner terms before additional reuse."
+    },
+    {
+      "path": "İstanbul Metropolitan Municipality jurisdiction page (not retained)",
+      "official_page_url": "https://ibb.istanbul/ibb/belediye-hakkinda/yetki-alani/",
+      "official_page_response_sha256": "810f28d91b6c49dcb3fc6bc99ab29f8160c09a31a92f212f7527b9787bb7061f",
+      "retrieved_date": "2026-10-04",
+      "finding": "İBB states the current count is 39 districts and notes the 2012 Law 6360 administrative changes. Page HTML is not retained; restore from its official URL for further legal/source work."
+    }
+  ]
+}
