@@ -17,9 +17,9 @@
     "reproduce_scope.py (run twice; output hash equal)"
   ],
   "baseline_commit": "80fb0e7744809438d02881f8d3435d9efb71d2e8",
-  "branch_head": "1232d03d2d9a5e1118c0d5239092c879a9539990",
-  "current_origin_main": "ef3751e772a2f4d7b0328f4926d12cf06c27cae8",
-  "branch_head_before_packet": "ef3751e772a2f4d7b0328f4926d12cf06c27cae8",
+  "branch_head": "f92b1774aedcaaaf72ac0fe4cc45857dd641d7d1",
+  "current_origin_main": "f92b1774aedcaaaf72ac0fe4cc45857dd641d7d1",
+  "branch_head_before_packet": "f92b1774aedcaaaf72ac0fe4cc45857dd641d7d1",
   "shared_read_only_input": {
     "path": "data/regional-review/regional-review-ab07a23bcfd9b1db/sources/cntig-ocha-subprefectures-query-2025.geojson",
     "sha256": "11deee85b6d41698d371846b0fd57cac6ad7b28a723e686c1ab6a0e149c3065e",
@@ -54,5 +54,7 @@
       "Boromo: 4977.6 km2, 71.7% of 2017 ADM2 comparator area",
       "Tibga: 2893.7 km2, 56.7% of 2017 ADM2 comparator area"
     ]
-  }
+  },
+  "evaluation_commit": "f92b1774aedcaaaf72ac0fe4cc45857dd641d7d1",
+  "evaluation_note": "The exact scoped Atlas roster remains pinned to baseline_commit 80fb0e7; the shared CNTIG input and derived official-layer measurements are evaluated against PR base f92b177, where the input exists."
 }
