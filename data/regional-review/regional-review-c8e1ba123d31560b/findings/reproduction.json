@@ -1,0 +1,231 @@
+{
+  "baseline_commit": "e5393834c715396a60967d366523712edd5d1b65",
+  "baseline_hashes": {
+    "current-manifest.json": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81",
+    "current-membership-inventory.json.gz": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+    "hierarchy.json": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+    "part-28.json": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+    "regional-handoffs.json.gz": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
+    "world-index.json": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+  },
+  "hierarchy_parent_chain": [
+    {
+      "child_count": 1,
+      "id": "framework:area:falkland-is:aa9151e086ab",
+      "level": "area",
+      "name": "Falkland Islands",
+      "parent_id": "framework:region:south-atlantic-islands:8be064d49c48",
+      "review_reasons": [
+        "Correction supports the stated source identity/parent/name only; child granularity and independent footprint completion remain open."
+      ]
+    },
+    {
+      "child_count": 1,
+      "id": "framework:area:south-georgia:2cb092c9700c",
+      "level": "area",
+      "name": "South Georgia and the South Sandwich Islands",
+      "parent_id": "framework:region:south-atlantic-islands:8be064d49c48",
+      "review_reasons": [
+        "Correction supports the stated source identity/parent/name only; child granularity and independent footprint completion remain open."
+      ]
+    },
+    {
+      "child_count": 1,
+      "id": "framework:province:falkland-islands:5308efe57fb0",
+      "level": "province",
+      "name": "Falkland Islands",
+      "parent_id": "framework:area:falkland-is:aa9151e086ab",
+      "review_reasons": [
+        "Single-child tier: geographic role requires individual review",
+        "Previous reference grouping retained; semantic tier review outstanding",
+        "single-location province; assess whether adjacent tiers are coextensive",
+        "declared parent source lacks geoBoundaries canonical registry; investigate source-specific role",
+        "parent canonical role unknown or unavailable; no ADM-number tier inference",
+        "Every local member requires independent granularity, source-date and footprint review; parent source role and valid union do not approve children."
+      ]
+    },
+    {
+      "child_count": 1,
+      "id": "framework:province:south-georgia-and-the-south-sandwich-islands:170c3c7a36d3",
+      "level": "province",
+      "name": "South Georgia and the South Sandwich Islands",
+      "parent_id": "framework:area:south-georgia:2cb092c9700c",
+      "review_reasons": [
+        "Single-child tier: geographic role requires individual review",
+        "Previous reference grouping retained; semantic tier review outstanding",
+        "single-location province; assess whether adjacent tiers are coextensive",
+        "declared parent source lacks geoBoundaries canonical registry; investigate source-specific role",
+        "parent canonical role unknown or unavailable; no ADM-number tier inference",
+        "Every local member requires independent granularity, source-date and footprint review; parent source role and valid union do not approve children."
+      ]
+    },
+    {
+      "child_count": 2,
+      "id": "framework:region:south-atlantic-islands:8be064d49c48",
+      "level": "region",
+      "name": "South American Atlantic Islands",
+      "parent_id": "framework:subcontinent:southern-south-america:37612476d887",
+      "review_reasons": [
+        "Previous reference grouping retained; semantic tier review outstanding",
+        "Macro-geographic membership and country-independent tier purpose require a documented boundary convention; source botanical membership alone cannot close this tier."
+      ]
+    },
+    {
+      "child_count": 2,
+      "id": "framework:subcontinent:southern-south-america:37612476d887",
+      "level": "subcontinent",
+      "name": "Southern South America",
+      "parent_id": "framework:continent:south-america:bbda637e3435",
+      "review_reasons": []
+    }
+  ],
+  "issue": 402,
+  "issue_member_ids": [
+    "FLK-5152",
+    "atlas:coverage:SGS+00?"
+  ],
+  "issue_member_ids_sha256": "9287e354f6ea5b356f49bfe286af1a049142b297bff0c21cd0ef772c2277b1d7",
+  "locations": [
+    {
+      "all_rings_match_up_to_rotation_direction_at_6dp": false,
+      "atlas_geometry": {
+        "bbox": [
+          -61.3182,
+          -52.4065,
+          -57.7343,
+          -51.03
+        ],
+        "canonical_sha256": "8f33e0cd83272dc7234d1431ce0d5dea4cc26c6e56845ce8874cc2d3a412a886",
+        "components": 15,
+        "positions": 733,
+        "rings": 15,
+        "type": "MultiPolygon"
+      },
+      "atlas_name": "Falkland Islands",
+      "atlas_reference_evidence": {
+        "classification": "Disputed",
+        "note": "Admin. by U.K.; Claimed by Argentina",
+        "reference_territory": "Falkland Islands",
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "uncertainty": true
+      },
+      "atlas_reference_owner": "Falkland Islands",
+      "atlas_reference_polity": "Falkland Islands",
+      "geometry_structurally_equal": false,
+      "location_id": "FLK-5152",
+      "parent_id": "framework:province:falkland-islands:5308efe57fb0",
+      "properties_of_source_feature": {
+        "adm1_code": "FLK-5152",
+        "admin": "Falkland Islands",
+        "homepart": null,
+        "iso_3166_2": "FK-X01~",
+        "name": "Falkland Islands",
+        "postal": null,
+        "region": null,
+        "region_cod": null,
+        "region_sub": null,
+        "type": null,
+        "type_en": null
+      },
+      "source_admin": "Falkland Islands",
+      "source_geometry": {
+        "bbox": [
+          -61.318186,
+          -52.406523,
+          -57.734283,
+          -51.027765
+        ],
+        "canonical_sha256": "dbbebb1b7b4c26d1109c7af17dbf6d220d39a27ea30a67e57cf1c41810ad7882",
+        "components": 15,
+        "positions": 1340,
+        "rings": 15,
+        "type": "MultiPolygon"
+      },
+      "source_id": "FLK-5152",
+      "source_name": "Falkland Islands",
+      "source_type": "MultiPolygon"
+    },
+    {
+      "all_rings_match_up_to_rotation_direction_at_6dp": true,
+      "atlas_geometry": {
+        "bbox": [
+          -42.119008,
+          -59.472752,
+          -26.239329,
+          -53.457127
+        ],
+        "canonical_sha256": "787527eb32694c0c186e9e37aff938135dfac4518bcefdf1278f98dfe8d02a51",
+        "components": 17,
+        "positions": 627,
+        "rings": 17,
+        "type": "MultiPolygon"
+      },
+      "atlas_name": "South Georgia and the South Sandwich Islands",
+      "atlas_reference_evidence": {
+        "classification": "Dependency",
+        "note": null,
+        "reference_territory": "South Georgia and the Islands",
+        "source": "Natural Earth pinned administrative and sovereignty reference; dates vary",
+        "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+        "uncertainty": false
+      },
+      "atlas_reference_owner": "South Georgia and the Islands",
+      "atlas_reference_polity": "United Kingdom",
+      "geometry_structurally_equal": false,
+      "location_id": "atlas:coverage:SGS+00?",
+      "parent_id": "framework:province:south-georgia-and-the-south-sandwich-islands:170c3c7a36d3",
+      "properties_of_source_feature": {
+        "adm1_code": "SGS+00?",
+        "admin": "South Georgia and the Islands",
+        "homepart": null,
+        "iso_3166_2": "GS-X01~",
+        "name": "South Georgia and the South Sandwich Islands",
+        "postal": null,
+        "region": null,
+        "region_cod": null,
+        "region_sub": null,
+        "type": null,
+        "type_en": null
+      },
+      "source_admin": "South Georgia and the Islands",
+      "source_geometry": {
+        "bbox": [
+          -42.119008,
+          -59.472752,
+          -26.239329,
+          -53.457127
+        ],
+        "canonical_sha256": "ba52b13c7d72b3a53e30d989d318c9be26bdb314a79f77f5cc16b2cae0bf68fe",
+        "components": 17,
+        "positions": 627,
+        "rings": 17,
+        "type": "MultiPolygon"
+      },
+      "source_id": "SGS+00?",
+      "source_name": "South Georgia and the South Sandwich Islands",
+      "source_type": "MultiPolygon"
+    }
+  ],
+  "natural_earth": {
+    "archive_bytes": 12210503,
+    "archive_sha256": "20777a70803489a26b57194f4626797a84784c2ee66b3f56da3d6ea72fc4849c",
+    "commit": "ca96624a56bd078437bca8184e78163e5039ad19",
+    "commit_date": "2022-06-02T07:25:00Z",
+    "feature_count": 4596,
+    "selected_feature_collection_sha256": "b9ed3430a7502507f616c2f3b4727ec3bdb124d0441ed88b97b247d02faf5f8b",
+    "uncompressed_bytes": 40726851,
+    "uncompressed_sha256": "22d0e3ad85eb3e27f17cabf8ba2d50e554fbc27a87796ff891d958185da62fb5"
+  },
+  "regional_envelope": {
+    "geometry_sha256": "44299446b3981599220b0e4983b6c4b4c9e3ada26b1fe3b621ab63eb75c3d978",
+    "location_attribute_imports_ready": false,
+    "locations": 2,
+    "member_location_ids_sha256": "a6117459619d04d17c286cba99e752bf8cf7c2e189630cf59d40a8c527dcf892",
+    "name": "South American Atlantic Islands",
+    "parent_id": "framework:subcontinent:southern-south-america:37612476d887",
+    "publication_verified": false,
+    "region_own_boundary_approved": true,
+    "regional_interiors_approved": false
+  }
+}

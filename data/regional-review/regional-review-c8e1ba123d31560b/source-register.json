@@ -1,0 +1,77 @@
+{
+  "issue": 402,
+  "retrieved_utc": "2026-10-05",
+  "baseline_commit": "e5393834c715396a60967d366523712edd5d1b65",
+  "owned_member_ids": ["FLK-5152", "atlas:coverage:SGS+00?"],
+  "sources": [
+    {
+      "id": "natural-earth-admin1-arg-5493-2022-06-02",
+      "title": "Natural Earth 1:10m Admin-1 states/provinces",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_admin_1_states_provinces.geojson",
+      "repository_commit": "ca96624a56bd078437bca8184e78163e5039ad19",
+      "commit_date": "2022-06-02T07:25:00Z",
+      "upstream_blob_sha": "4a8438f98ac7dfec7dc1739b1eaf91398ad33f22",
+      "retained_archive": "data/regional-review/regional-review-7cf674a63057d43f/source/NaturalEarth-ca96624/ne_10m_admin_1_states_provinces.geojson.gz",
+      "archive_bytes": 12210503,
+      "archive_sha256": "20777a70803489a26b57194f4626797a84784c2ee66b3f56da3d6ea72fc4849c",
+      "uncompressed_bytes": 40726851,
+      "uncompressed_sha256": "22d0e3ad85eb3e27f17cabf8ba2d50e554fbc27a87796ff891d958185da62fb5",
+      "extracted_in_scope_features": "source/natural-earth-selected-features.geojson",
+      "license": "Public domain; https://www.naturalearthdata.com/about/terms-of-use/",
+      "limitations": "Natural Earth disclaims completeness and accuracy warranties. Pinned 10m reference, not legal boundary survey."
+    },
+    {
+      "id": "south-georgia-order-1985-449",
+      "title": "South Georgia and South Sandwich Islands Order 1985, SI 1985/449",
+      "url": "https://www.legislation.gov.uk/uksi/1985/449/pdfs/uksi_19850449_en.pdf",
+      "retrieved_utc": "2026-10-05",
+      "retained": "source/south-georgia-order-1985.pdf",
+      "bytes": 1605113,
+      "sha256": "fa761f8cf4e90eb28beb467d806b14c447fd64fe29515c563ab1e81d6cabf610",
+      "license": "Open Government Licence v3.0; reuse terms https://legislation.github.io/data-documentation/reuse-licence.html",
+      "use": "Sections 2–3 describe coordinate-delimited islands/territories and the separate BOT; not a coastline dataset."
+    },
+    {
+      "id": "gsgssi-official-about-gis-protected-features-laws",
+      "urls": ["https://gov.gs/about-sgssi/", "https://gov.gs/gis/", "https://gov.gs/wp-content/uploads/2023/10/Description-of-the-protected-features.pdf", "https://laws.gov.gs/1985-onwards-laws/"],
+      "retrieval": "Attempted 2026-10-05 via verified HTTPS; local CA chain verification failed for gov.gs/laws.gov.gs.",
+      "retained": false,
+      "response_hash": null,
+      "license": "not identified; do not redistribute; restore from official URLs",
+      "use": "Official territorial role, Argentine claim, island/rock descriptions, 2016–17 GIS update statement, and 1985 separation context. Exact page byte provenance remains an explicit gap."
+    },
+    {
+      "id": "falkland-government-geography-and-camp",
+      "urls": ["https://www.falklands.gov.fk/our-home", "https://www.falklands.gov.fk/22-visiting-the-falkland-islands/visiting-the-falklands-list/277-camp"],
+      "retrieved_utc": "2026-10-05",
+      "response_hashes": "source/remote-response-hashes.json",
+      "license": "not identified; do not redistribute; restore from official URLs",
+      "use": "Government description of Overseas Territory/self-government and island count; Camp is countryside/outside Stanley, not a province tier."
+    },
+    {
+      "id": "argentina-official-sovereignty-claim",
+      "urls": ["https://www.argentina.gob.ar/defensa/malvinas", "https://www.argentina.gob.ar/noticias/comunicado-oficial-numero-157"],
+      "retrieved_utc": "2026-10-05",
+      "response_hashes": "source/remote-response-hashes.json",
+      "license": "not identified; do not redistribute; restore from official URLs",
+      "use": "Evidence of Argentina's current official claim; not an adjudication of sovereignty."
+    },
+    {
+      "id": "un-treaty-depositary-xxvii-7",
+      "url": "https://treaties.un.org/pages/ViewDetailsIII.aspx?Temp=mtdsg3&chapter=27&clang=_en&mtdsg_no=XXVII-7&src=TREATY",
+      "retrieved_utc": "2026-10-05",
+      "response_hashes": "source/remote-response-hashes.json",
+      "license": "not identified; do not redistribute; restore from official URL",
+      "use": "Depositary note records Argentine notification/reaffirmation; do not imply a UN adjudication or that Malvinas resolutions separately decide SGSSI."
+    },
+    {
+      "id": "natural-earth-terms",
+      "url": "https://www.naturalearthdata.com/about/terms-of-use/",
+      "retrieved_utc": "2026-10-05",
+      "response_hashes": "source/remote-response-hashes.json",
+      "license": "Natural Earth states all versions are public domain; no credit required, attribution encouraged."
+    }
+  ],
+  "missing_policy_profiles": ["FLK", "SGS"],
+  "policy_followup": "No source suitability decision may be inferred from the absent policy profiles; identify those omissions explicitly in a bounded policy follow-up."
+}
