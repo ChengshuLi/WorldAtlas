@@ -107,6 +107,61 @@ export async function cleanupCandidate(options, reference, expectedSHA) {
   await options.api(route, 'DELETE');
   return {status: 'deleted', reference};
 }
+// Cleanup is best-effort after an independently confirmed merge. GitHub's
+// delete-ref endpoint has no SHA compare-and-swap: workers must never reuse or
+// push to merged head branches. Recheck the ref immediately before deletion.
+export async function cleanupMergedHead({api: rawAPI, repo, number, expectedHead, cleanupNow = () => performance.now()}) {
+  const started = cleanupNow();
+  let calls = 0;
+  const api = async (...args) => {
+    // No abandoned Promise.race: await each bounded GitHub request, then stop.
+    // The production adapter limits a single request to 20 seconds. A request
+    // already in progress can finish after this 30-second cleanup budget.
+    need(calls < 10 && cleanupNow() - started < 30000, 'Head cleanup API/time budget exhausted');
+    calls++;
+    const result = await rawAPI(...args);
+    need(cleanupNow() - started < 30000, 'Head cleanup time budget exhausted');
+    return result;
+  };
+  let reference;
+  const retained = reason => ({status: 'retained', ...(reference ? {reference} : {}), reason});
+  try {
+    need(/^[-\w.]+\/[-\w.]+$/.test(repo ?? '') && Number.isSafeInteger(number) && number > 0 && commitID(expectedHead),
+      'Invalid merged-head cleanup request');
+    const pr = await api(`${root(repo)}/pulls/${number}`);
+    if (pr.merged !== true || pr.state !== 'closed' || !commitID(pr.merge_commit_sha) || pr.head?.sha !== expectedHead)
+      return retained('PR is not confirmed merged at the expected head');
+    if (pr.head.repo?.full_name !== repo) return retained('Head belongs to another or unavailable repository');
+    reference = pr.head.ref;
+    if (typeof reference !== 'string' || !/^(?:engineering|geography|research)\/[a-zA-Z0-9][a-zA-Z0-9._/-]*$/.test(reference) ||
+        reference.includes('..') || reference.includes('//') || reference.endsWith('/') || reference.endsWith('.lock'))
+      return retained('Not an ordinary worker lane head branch');
+    const metadata = await api(root(repo));
+    need(typeof metadata.default_branch === 'string' && metadata.default_branch.length > 0, 'Default branch unavailable');
+    if (reference === metadata.default_branch) return retained('Default branch');
+    const encoded = encodeURIComponent(reference);
+    let branch;
+    try { branch = await api(`${root(repo)}/branches/${encoded}`); }
+    catch (error) { if (/\(HTTP 404\)$/.test(error.message)) return {status: 'absent', reference}; throw error; }
+    if (branch.protected !== false) return retained('Protected or unknown branch protection');
+    if (branch.commit?.sha !== expectedHead) return retained('Branch advanced beyond the merged PR head');
+    const open = await githubPages(api, `${root(repo)}/pulls?state=open`);
+    need(open.every(row => Number.isSafeInteger(row.number) && row.state === 'open' &&
+      typeof row.head?.ref === 'string' && typeof row.head.repo?.full_name === 'string' &&
+      typeof row.base?.ref === 'string' && typeof row.base.repo?.full_name === 'string'), 'Incomplete open PR identities');
+    if (open.some(row => (row.head.repo.full_name === repo && row.head.ref === reference) ||
+      (row.base.repo.full_name === repo && row.base.ref === reference)))
+      return retained('Another open PR uses this branch as head or base');
+    let current;
+    try { current = await api(`${root(repo)}/git/ref/heads/${encoded}`); }
+    catch (error) { if (/\(HTTP 404\)$/.test(error.message)) return {status: 'absent', reference}; throw error; }
+    if (current.object?.sha !== expectedHead) return retained('Head ref changed before deletion');
+    await api(`${root(repo)}/git/refs/heads/${encoded}`, 'DELETE');
+    return {status: 'deleted', reference, expected_head: expectedHead};
+  } catch (error) {
+    return {status: 'pending', ...(reference ? {reference} : {}), reason: error.message};
+  }
+}
 export async function createCandidate(options, state) {
   const reference = preparedBranch(options), {api, repo} = options;
   try { await api(`${root(repo)}/git/refs`, 'POST', {ref: `refs/heads/${reference}`, sha: state.base}); }
@@ -248,7 +303,8 @@ export async function completeIntegration(options) {
   need(options.integrationResult === 'success' || options.integrationResult === 'skipped',
     'Integration tests failed or were cancelled; no merge performed');
   const state = await inspectMerge(options);
-  if (state.replayed) return {accepted: true, replayed: true, merge_commit: state.pr.merge_commit_sha};
+  if (state.replayed) return {accepted: true, replayed: true, merge_commit: state.pr.merge_commit_sha,
+    head_cleanup: await cleanupMergedHead(options)};
   need(options.integrationResult === 'success' || (options.integrationResult === 'skipped' && options.proofRunId),
     'An open PR requires successful isolated integration tests or revalidated trusted proof');
   need(state.base === options.testedBase, 'Main advanced after integration tests; resubmit unchanged head');
@@ -282,5 +338,6 @@ export async function completeIntegration(options) {
   });
   need(merged.merged, 'GitHub did not merge the PR');
   return {accepted: true, merge_commit: merged.sha, title: state.pr.title, github_issue: state.issue.number,
-    tested_base: state.base, tested_candidate: options.testedCandidate, reviewed_head: state.pr.head.sha, evidence: state.evidence, proof};
+    tested_base: state.base, tested_candidate: options.testedCandidate, reviewed_head: state.pr.head.sha, evidence: state.evidence, proof,
+    head_cleanup: await cleanupMergedHead(options)};
 }
