@@ -1,0 +1,23 @@
+{
+  "actual_cli_checks": [
+    {
+      "case": "output-overwrite",
+      "exit_code": 1,
+      "stderr_sha256": "dbca9be860a12feba008bc918554504e0e9fc104ce1f472d7925cec51f25e4e3"
+    },
+    {
+      "case": "wrong-registry-sha",
+      "exit_code": 1,
+      "output_created": false,
+      "stderr_sha256": "73dca19ec1517e039fb51f3b48a2732b642725deb5bd5a47deb319d5ae9182bc"
+    }
+  ],
+  "actual_command": "python -I -B test/geographic-grid.py",
+  "assertions": "Encoded/decoded hash mismatch, missing/unlisted partition, whole row accounting, overlaps inside/across partitions, strict integer offsets, max native owner including unsampled words, thin/subpixel uncertainty, invalid geometry, nonfinite input; no MakeValid or snapping.",
+  "exit_code": 0,
+  "kind": "negative-control",
+  "method_id": "immutable-native-grid-triage",
+  "outcome": "passed",
+  "stderr_sha256": "6a7f5b5397b18d6af66babd2a3e809e000dcd7e7d818f6e7d8370c1dc62b4d95",
+  "tests_run": 23
+}

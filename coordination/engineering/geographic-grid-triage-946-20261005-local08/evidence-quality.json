@@ -1,0 +1,1213 @@
+{
+  "baseline": {
+    "commit": "44d699c44e0e61402e39d6e1270a2af903801d8b",
+    "files": [
+      {
+        "bytes": 271171,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/manifest.json",
+        "role": "immutable-input",
+        "sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6"
+      },
+      {
+        "bytes": 2663523,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/bounds.json.gz",
+        "role": "immutable-input",
+        "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f"
+      },
+      {
+        "bytes": 10164089,
+        "hash_kind": "file-bytes",
+        "path": "data/hierarchy.json",
+        "role": "immutable-input",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      {
+        "bytes": 944,
+        "hash_kind": "file-bytes",
+        "path": "data/world-index.json",
+        "role": "immutable-input",
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+      },
+      {
+        "bytes": 206,
+        "hash_kind": "file-bytes",
+        "path": "data/geographic-releases/current-manifest.json",
+        "role": "immutable-input",
+        "sha256": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81"
+      },
+      {
+        "bytes": 169082,
+        "hash_kind": "file-bytes",
+        "path": "data/geographic-releases/releases-v6-gzip.json.gz",
+        "role": "immutable-input",
+        "sha256": "96f4e6b1894ecce4c1f3f2be690ebfceec9fde2ec094c886ddffca96c62e4a16"
+      },
+      {
+        "bytes": 26701,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v2/report.json",
+        "role": "immutable-input",
+        "sha256": "69aa2c4cc0a949d66938344cb80e526fe77b68661b93fd0b3be7830e2e18e478"
+      },
+      {
+        "bytes": 16811,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/geographic-water-pilots-946-20261005-local07/pilots-v1/report.json",
+        "role": "immutable-input",
+        "sha256": "a30d6007324b63699a587100ccd4484dcabea54ddd75c8a92fd831c629410794"
+      },
+      {
+        "bytes": 306617,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/rows-0.bin.gz",
+        "role": "immutable-input",
+        "sha256": "ccb40c24a466f76dbae209241add4e51590aff13dedc6ac88d269dff603222b7"
+      },
+      {
+        "bytes": 984227,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-0.bin.gz",
+        "role": "immutable-input",
+        "sha256": "78dd8e523ab5f809d27424d858684254c3b6140a9ae166e3199d972c75490579"
+      },
+      {
+        "bytes": 999685,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-1048576.bin.gz",
+        "role": "immutable-input",
+        "sha256": "f57e081df7b66707e668d6fd63c9348475f1d0f1e8cdb485a9c7b47c1f85841d"
+      },
+      {
+        "bytes": 967449,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-2097152.bin.gz",
+        "role": "immutable-input",
+        "sha256": "783cb6cb1530d6c47fdff996a6a953888ff679db032782ce942a520789985a74"
+      },
+      {
+        "bytes": 903450,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-3145728.bin.gz",
+        "role": "immutable-input",
+        "sha256": "6484550d934140fbc9c206d6c2120886893025e1d971525469df48ff86e974cc"
+      },
+      {
+        "bytes": 868320,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-4194304.bin.gz",
+        "role": "immutable-input",
+        "sha256": "c359170f0f0e70f8a3942e42ebe3a0057913448465c50522437b4bfd9b94a7ab"
+      },
+      {
+        "bytes": 868736,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-5242880.bin.gz",
+        "role": "immutable-input",
+        "sha256": "0041e97fd61b7be67f603be6f1297ae226251920c7d7d5486c01f94fa7cea8ba"
+      },
+      {
+        "bytes": 851907,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-6291456.bin.gz",
+        "role": "immutable-input",
+        "sha256": "0511351709091ccf9239249c2c6a45f22bb8040267606d25d7bf1e4b72b36a4c"
+      },
+      {
+        "bytes": 847603,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-7340032.bin.gz",
+        "role": "immutable-input",
+        "sha256": "707859a809ab0a1f0bb1a49e9f49af5d303b9c980c15f4102cd9f2181cc5f91b"
+      },
+      {
+        "bytes": 851567,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-8388608.bin.gz",
+        "role": "immutable-input",
+        "sha256": "6ae021f663b920eec520af96d203b8b3e6e42a354c71e4df3c6436b366fdfb9b"
+      },
+      {
+        "bytes": 850870,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-9437184.bin.gz",
+        "role": "immutable-input",
+        "sha256": "23798a543d527f09a91dc6318a6371c0933f4a3fde9bff328d81c88677a6b09b"
+      },
+      {
+        "bytes": 855366,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-10485760.bin.gz",
+        "role": "immutable-input",
+        "sha256": "5ce7b4a4fb25b17bc8407c0f501675a2919042c9df8197d6cd6e098f48fa3042"
+      },
+      {
+        "bytes": 874057,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-11534336.bin.gz",
+        "role": "immutable-input",
+        "sha256": "c1c29cc0afbd4e9621d89fa0ea9489d6222dadfbc7237090c568fcefa6e3be7a"
+      },
+      {
+        "bytes": 878373,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-12582912.bin.gz",
+        "role": "immutable-input",
+        "sha256": "74b6ab70904adae95bbdf2d25ffc8b8c1bff2591e7381881985f6fde605df14c"
+      },
+      {
+        "bytes": 867334,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-13631488.bin.gz",
+        "role": "immutable-input",
+        "sha256": "c00f4ba975f4a0b9a6cc06da3345104a1d83165ccd622c7ef3395f7b8ab0b684"
+      },
+      {
+        "bytes": 868010,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-14680064.bin.gz",
+        "role": "immutable-input",
+        "sha256": "fcbee22b54a016710b2846e50282a50b3a2e38e647e0df3090ad0d118747be33"
+      },
+      {
+        "bytes": 876800,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-15728640.bin.gz",
+        "role": "immutable-input",
+        "sha256": "17ee1610de5d5e517312174857d87b0b7d05852a0bdaeb866232038f76490e0e"
+      },
+      {
+        "bytes": 846142,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-16777216.bin.gz",
+        "role": "immutable-input",
+        "sha256": "91bdc5ba507bfdd9e60a0389ab44c265de370e29a11eae3c037080a1cbb62e0e"
+      },
+      {
+        "bytes": 826976,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-17825792.bin.gz",
+        "role": "immutable-input",
+        "sha256": "14e6fdc962d7955651a03cb2e0b669045579869ece72833d2a428f4d8f606c18"
+      },
+      {
+        "bytes": 816574,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-18874368.bin.gz",
+        "role": "immutable-input",
+        "sha256": "7178ec92fc7f75ccd2a64f9c7623f1b2a9a16f903f923bcfb15e5287aba682cf"
+      },
+      {
+        "bytes": 813015,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-19922944.bin.gz",
+        "role": "immutable-input",
+        "sha256": "c83af421c188448e7047e4b9515115e4c9af6ed25fc180d58bbb8f716da59220"
+      },
+      {
+        "bytes": 792509,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-20971520.bin.gz",
+        "role": "immutable-input",
+        "sha256": "80f9c5e6b3aff320055e0127b053b4ff83255cc3e9bc14b59df248ae5bd6e5b2"
+      },
+      {
+        "bytes": 789933,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-22020096.bin.gz",
+        "role": "immutable-input",
+        "sha256": "3053349f2e7d42d4e188213c88aefb798de5859acdcc3b614adbbafb50e42e38"
+      },
+      {
+        "bytes": 788537,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-23068672.bin.gz",
+        "role": "immutable-input",
+        "sha256": "381d5cb5cedeb1c64d5a1a070b14a6e3b6f119e294c3f3d881accadb878f7108"
+      },
+      {
+        "bytes": 787553,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-24117248.bin.gz",
+        "role": "immutable-input",
+        "sha256": "926696080abea36b749bf7998e0608d508bf309f7f9119cc4983699d9108908a"
+      },
+      {
+        "bytes": 805367,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-25165824.bin.gz",
+        "role": "immutable-input",
+        "sha256": "e9bf9e3c162796fbe390012f18fa3c2145b5e575a275bf801d72f561cf0ef564"
+      },
+      {
+        "bytes": 836032,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-26214400.bin.gz",
+        "role": "immutable-input",
+        "sha256": "250e61ddf871be144f3ede48ac37be600cd76bc44915ce558052e63842651ced"
+      },
+      {
+        "bytes": 823674,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-27262976.bin.gz",
+        "role": "immutable-input",
+        "sha256": "3dd86fb5a6f71f5f3750a57c64fa4a7e8bf9e5007b8c547fc9f4f0c5d0ec8bcb"
+      },
+      {
+        "bytes": 820986,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-28311552.bin.gz",
+        "role": "immutable-input",
+        "sha256": "9a93bacb4674dcb70ca711469cb1096bc41dbd0bfcfe6aa8667b7087056f1ecc"
+      },
+      {
+        "bytes": 806408,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-29360128.bin.gz",
+        "role": "immutable-input",
+        "sha256": "3812061560d37ae030779445a05094dce3e5d5e0e70e73ad8ee7572ebcd44eb7"
+      },
+      {
+        "bytes": 808695,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-30408704.bin.gz",
+        "role": "immutable-input",
+        "sha256": "80d1b7e81b6de917379c5538a4623072f02018ec62b7e7229f7188c3b0d81e68"
+      },
+      {
+        "bytes": 832892,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-31457280.bin.gz",
+        "role": "immutable-input",
+        "sha256": "863ce7fff601a93db02edd1531009d164d54c3cd21490b54fe8681955767e53e"
+      },
+      {
+        "bytes": 858311,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-32505856.bin.gz",
+        "role": "immutable-input",
+        "sha256": "9a038a8c295cb214a4cbdaff5e8bc1f405f22c8eb46049ed458aa82e966af515"
+      },
+      {
+        "bytes": 879781,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-33554432.bin.gz",
+        "role": "immutable-input",
+        "sha256": "69c9a9aa7dc2e5dded441b546dbd0f9e71bccfeef7b6a6ce9c72830753512b1b"
+      },
+      {
+        "bytes": 868501,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-34603008.bin.gz",
+        "role": "immutable-input",
+        "sha256": "6a3faf3247af3280b4c5b0e9d5f296d77db9702a372d6ba7b7967fe6d4af163b"
+      },
+      {
+        "bytes": 894561,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-35651584.bin.gz",
+        "role": "immutable-input",
+        "sha256": "2de73434360f3fec6dfc31421d9f3ad3f07929fbc473e08f604bf9a1864c237b"
+      },
+      {
+        "bytes": 892222,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-36700160.bin.gz",
+        "role": "immutable-input",
+        "sha256": "e1d45c40e94a9477ef884d4e7442f660e82ad6d2068a3d6c19ec011fdb4e9d50"
+      },
+      {
+        "bytes": 880210,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-37748736.bin.gz",
+        "role": "immutable-input",
+        "sha256": "fe61aae60194057c7a5553c3e04e5f7e51d4ffe4518e8fd9c00a1b18a3fa77b7"
+      },
+      {
+        "bytes": 869877,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-38797312.bin.gz",
+        "role": "immutable-input",
+        "sha256": "82d918007b85f938959c096c392b052a1b7ad9f9abe422d3fb826abb58f3e6e9"
+      },
+      {
+        "bytes": 873657,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-39845888.bin.gz",
+        "role": "immutable-input",
+        "sha256": "bc6181fac8db4a6862442c2b6d4c4afa3ffd7d5b693f37b8212219e5b86fdeb1"
+      },
+      {
+        "bytes": 888592,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-40894464.bin.gz",
+        "role": "immutable-input",
+        "sha256": "2c21ede414723b33348928dec98bc20c268ffe41075ede4d77212a40de2c4ee4"
+      },
+      {
+        "bytes": 896691,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-41943040.bin.gz",
+        "role": "immutable-input",
+        "sha256": "d06e5a56232678e63d5bd701f4a787ae2e880dfac6e3b21a8c0221061d15331c"
+      },
+      {
+        "bytes": 890514,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-42991616.bin.gz",
+        "role": "immutable-input",
+        "sha256": "5d4a53ca4fbecb41a22ade83be1f51d555515b99e3e9127fc590e6acd5cdd3c1"
+      },
+      {
+        "bytes": 876779,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-44040192.bin.gz",
+        "role": "immutable-input",
+        "sha256": "0a1415d515299ddd89185c384efa480b49e16e5cd91cc7008a3e196b236bb215"
+      },
+      {
+        "bytes": 883441,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-45088768.bin.gz",
+        "role": "immutable-input",
+        "sha256": "d8104a36685a1a81d13c0c03f826a3ecdb4da7dd9438cc0bf4da1b0226f03dcd"
+      },
+      {
+        "bytes": 884832,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-46137344.bin.gz",
+        "role": "immutable-input",
+        "sha256": "6ff7413c2df6409f94fb227c743a0abfb3ee022089dff2e4e1feb92bf802d652"
+      },
+      {
+        "bytes": 899858,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-47185920.bin.gz",
+        "role": "immutable-input",
+        "sha256": "3d8ae24e2a33273bb6d9697cf2614b5188fd218b3348125c1990f3c0a613c7da"
+      },
+      {
+        "bytes": 878691,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-48234496.bin.gz",
+        "role": "immutable-input",
+        "sha256": "6de3f0243cae91e3063cb632b5896b7750145a58424f2c6709ab91d118f3b827"
+      },
+      {
+        "bytes": 903386,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-49283072.bin.gz",
+        "role": "immutable-input",
+        "sha256": "fcc3d15b486338c48b20870d59762ade92c835d61c55afe90d73296a630259d2"
+      },
+      {
+        "bytes": 877379,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-50331648.bin.gz",
+        "role": "immutable-input",
+        "sha256": "df458b0b5688a78f8f1c9d2e46a79556df3900e62bd760b48c3f80c1e31290f7"
+      },
+      {
+        "bytes": 859555,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-51380224.bin.gz",
+        "role": "immutable-input",
+        "sha256": "73a2f7f4ab57d0a3518f9223ec495587b7f561afd3757c8608aa7bf4a8487942"
+      },
+      {
+        "bytes": 848454,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-52428800.bin.gz",
+        "role": "immutable-input",
+        "sha256": "415af8c2b57737017c0191a044024955dccb8b1ca743cc7334a9d7d1615f9688"
+      },
+      {
+        "bytes": 822915,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-53477376.bin.gz",
+        "role": "immutable-input",
+        "sha256": "db67f32c964150e752c5fe2d2ea53c9841b2920fd20e45183e650b3a0eb31919"
+      },
+      {
+        "bytes": 798580,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-54525952.bin.gz",
+        "role": "immutable-input",
+        "sha256": "a82bfc28b4398ebe4febafbe2b939b7a70a9989c4aa9ee522c75ebb28cdddd3b"
+      },
+      {
+        "bytes": 813323,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-55574528.bin.gz",
+        "role": "immutable-input",
+        "sha256": "f3d4b03696fed6e6230258a7f96793a4b8cfdff74c778b234caa6b0347c700f9"
+      },
+      {
+        "bytes": 852661,
+        "hash_kind": "file-bytes",
+        "path": "data/canonical-grid/ownership/runs-56623104.bin.gz",
+        "role": "immutable-input",
+        "sha256": "919dc5a1fd22715dea336587a8cbc22653fea70a9bf1219fd90e1d534114327c"
+      },
+      {
+        "bytes": 3642057,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v2/components-000.json.gz",
+        "role": "immutable-input",
+        "sha256": "115179a2e6ddda1a74e41d088c97643a56479deaaa0cb880b93a07fcd731e76f",
+        "uncompressed_bytes": 16775947,
+        "uncompressed_sha256": "0bfa4da8a3d0a6bb1866e917da0937d408c86bb0f293cb91d1f30985f5ab413f"
+      },
+      {
+        "bytes": 3640717,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v2/components-001.json.gz",
+        "role": "immutable-input",
+        "sha256": "9324d13b87071d37d0f1cb643d239d8d83e9b3abf067b7e1e9d37501f15a3c7a",
+        "uncompressed_bytes": 16776459,
+        "uncompressed_sha256": "1336e3535e82b3333b7ea49f2ec4bfa3fb5d4b02434f57a3b7f33587733771c6"
+      },
+      {
+        "bytes": 3641390,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v2/components-002.json.gz",
+        "role": "immutable-input",
+        "sha256": "c888d5c2a56b4ea9b9aa918ed86febe3ea3be26af25e7837c249c4a89e8cd5a3",
+        "uncompressed_bytes": 16776862,
+        "uncompressed_sha256": "dd5fb4b391652b687b806e54473f4d9a34e945ddc8942a93900a8f78a18f6844"
+      },
+      {
+        "bytes": 3646898,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v2/components-003.json.gz",
+        "role": "immutable-input",
+        "sha256": "4ea1ee607170ba06b5d1bc73f4d308c4621ac04e5209b97ceac88964fe4bf7b2",
+        "uncompressed_bytes": 16777097,
+        "uncompressed_sha256": "22ac46d507226ab3d5015d2ebe1c158adec139fcb9d517ad016504e41db4a820"
+      },
+      {
+        "bytes": 3640001,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v2/components-004.json.gz",
+        "role": "immutable-input",
+        "sha256": "c8726499e2d34c89b45fcf5d4c725b9583d2cb14319736580c032d460c04cb54",
+        "uncompressed_bytes": 16776852,
+        "uncompressed_sha256": "65f2af624321492c509355e5d6e9835ecb5480117c8e6e2766d2ba7532194801"
+      },
+      {
+        "bytes": 3639962,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v2/components-005.json.gz",
+        "role": "immutable-input",
+        "sha256": "bcef735556b4962290b70f7ec93a98daf49cbb3602eebef20f0ca4e736d231f1",
+        "uncompressed_bytes": 16776933,
+        "uncompressed_sha256": "64208d8cd7f595921de7ffff9a72b39dfa25cf1b78282c9147310714d8b2749f"
+      },
+      {
+        "bytes": 2982501,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v2/components-006.json.gz",
+        "role": "immutable-input",
+        "sha256": "019b2c3b4c01348486c8370925c9ecde36ded64c5eb0a2812f756c948b580c1d",
+        "uncompressed_bytes": 13766970,
+        "uncompressed_sha256": "1d01df616dcb21442b757ad539da621d1f65f48524a5646f661a9b354ffcd99c"
+      },
+      {
+        "bytes": 5131824,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-11.json",
+        "role": "immutable-input",
+        "sha256": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f"
+      },
+      {
+        "bytes": 4945828,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-17.json",
+        "role": "immutable-input",
+        "sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db"
+      },
+      {
+        "bytes": 4909063,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-18.json",
+        "role": "immutable-input",
+        "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123"
+      },
+      {
+        "bytes": 4583022,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-19.json",
+        "role": "immutable-input",
+        "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269"
+      },
+      {
+        "bytes": 4525239,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-25.json",
+        "role": "immutable-input",
+        "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394"
+      },
+      {
+        "bytes": 6613963,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-28.json",
+        "role": "immutable-input",
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+      },
+      {
+        "bytes": 12932167,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-29.json",
+        "role": "immutable-input",
+        "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a"
+      },
+      {
+        "bytes": 5729632,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-9.json",
+        "role": "immutable-input",
+        "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6"
+      },
+      {
+        "bytes": 7090,
+        "hash_kind": "file-bytes",
+        "path": "scripts/evidence/immutable.py",
+        "role": "immutable-input",
+        "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd"
+      },
+      {
+        "bytes": 146,
+        "hash_kind": "file-bytes",
+        "path": "requirements.txt",
+        "role": "immutable-input",
+        "sha256": "1c3f3b9598e474af751e25ff0839cbf5c4a9931a59b4ffaaff1a56c6e2f0e2c9"
+      },
+      {
+        "bytes": 3617,
+        "hash_kind": "file-bytes",
+        "path": "src/pixel-grid.js",
+        "role": "immutable-input",
+        "sha256": "320cc48796d5d3aaf07bb096441346abbe44ed4fab66df08ee003620ce5870a9"
+      },
+      {
+        "bytes": 6134,
+        "hash_kind": "file-bytes",
+        "path": "src/pixel-ownership.js",
+        "role": "immutable-input",
+        "sha256": "da8e0b4f05e5ce390b47713030bffeefb7ea0df2700f7c358a9ebe77fe92586f"
+      },
+      {
+        "bytes": 4148,
+        "hash_kind": "file-bytes",
+        "path": "src/ownership-assets.js",
+        "role": "immutable-input",
+        "sha256": "b14470b088208ac66d6ed564b063100c1e58d4d191d441b5e7c5d031eed5864c"
+      }
+    ],
+    "pin_files": {},
+    "pins": {}
+  },
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/coordinated-followups.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/inputs.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/protocol-snapshots/issue-115.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/protocol-snapshots/issue-121.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/protocol-snapshots/issue-242.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/protocol-snapshots/issue-243.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/report.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/samples-000.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/samples-001.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/samples-002.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/samples-003.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/samples-004.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/samples-005.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/samples-006.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/samples-007.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/samples-008.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/samples-009.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/samples-010.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/samples-011.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/samples-012.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/samples-013.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "docs/GEOGRAPHIC_GRID_TRIAGE.md",
+      "status": "added"
+    },
+    {
+      "path": "scripts/geographic_grid.py",
+      "status": "added"
+    },
+    {
+      "path": "scripts/triage-geographic-grid.py",
+      "status": "added"
+    },
+    {
+      "path": "test/geographic-grid.py",
+      "status": "added"
+    },
+    {
+      "path": "test/geographic-grid.test.mjs",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "python -I -B test/geographic-grid.py",
+    "python -I -B scripts/triage-geographic-grid.py --input-commit 9e03d07ea03f15993aec730bf0cc7fbec6e09de0 --inputs coordination/engineering/geographic-grid-triage-946-20261005-local08/inputs.json --inputs-bytes 64337 --inputs-sha256 ae609d1312be34a15d34f2c5b7915292a568465acab729f44036f8d4400d338d --out .cache/your-unused-grid-run"
+  ],
+  "conclusions": [],
+  "issue": 946,
+  "lane": "engineering",
+  "limits": [
+    "One native cell per component; all other cells remain unchecked.",
+    "This does not exhaustively discover raster-only gaps outside retained components.",
+    "Owned-cell discrepancies are separated from projection/interpolation effects.",
+    "All original blocked tiles and measurement failures remain unresolved.",
+    "Nearby IDs are inherited diagnostics; only pilot current contacts are extracted.",
+    "Selected current footprints are derived atlas data, not native-provider approval.",
+    "Point contacts and every positive-area numerical intersection are retained as flags.",
+    "Frozen water-pilot source, date, encoding and registration limits remain unchanged.",
+    "No source-backed boundary repair, administrative assignment, release or deployment.",
+    "Original GitHub API issue snapshots are protocol evidence, not geographic sources or research-worker approval.",
+    "Coordinated follow-ups are staged investigations, not completed native source-backed repairs."
+  ],
+  "methods": [
+    {
+      "description": "Immutable whole original native grid integrity and one-cell-per-retained-component diagnostic; separate native vs app-projected edge interpretation; exact selected current-footprint pilot contacts and retained original issue-member snapshots. No source-backed factual approval.",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "id": "immutable-native-grid-triage",
+      "kind": "generator",
+      "software": "Python3.12;NumPy2.3.5;Shapely2.1.2;GEOS3.13.1;committed requirements.txt",
+      "units": "Native grid cell/index and diagnostic counts; longitude then latitude EPSG4326; app Mercator vertices; no new physical area or distance measurements."
+    }
+  ],
+  "metric_bindings": [
+    {
+      "json_pointer": "/component_count",
+      "metric_id": "component_count",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/report.json"
+    },
+    {
+      "json_pointer": "/fragment_count",
+      "metric_id": "fragment_count",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/report.json"
+    },
+    {
+      "json_pointer": "/grid_original_parts_verified",
+      "metric_id": "grid_original_parts_verified",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/report.json"
+    },
+    {
+      "json_pointer": "/sample_counts/centre-in-gap-owned-discrepancy",
+      "metric_id": "sample_counts-centre-in-gap-owned-discrepancy",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/report.json"
+    },
+    {
+      "json_pointer": "/sample_counts/centre-in-gap-unassigned",
+      "metric_id": "sample_counts-centre-in-gap-unassigned",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/report.json"
+    },
+    {
+      "json_pointer": "/sample_counts/representative-cell-centre-outside-gap-owned",
+      "metric_id": "sample_counts-representative-cell-centre-outside-gap-owned",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/report.json"
+    },
+    {
+      "json_pointer": "/sample_counts/representative-cell-centre-outside-gap-unassigned",
+      "metric_id": "sample_counts-representative-cell-centre-outside-gap-unassigned",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/report.json"
+    },
+    {
+      "json_pointer": "/sample_counts/unknown-no-strict-representative-point",
+      "metric_id": "sample_counts-unknown-no-strict-representative-point",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/report.json"
+    },
+    {
+      "json_pointer": "/shape_interpretation_counts/projection-interpolation-explains-owned-cell",
+      "metric_id": "shape_interpretation_counts-projection-interpolation-explains-owned-cell",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/report.json"
+    },
+    {
+      "json_pointer": "/priority_counts/blocked-or-unmeasured",
+      "metric_id": "priority_counts-blocked-or-unmeasured",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/report.json"
+    },
+    {
+      "json_pointer": "/priority_counts/interior-multiple-nearby-unassigned-sample",
+      "metric_id": "priority_counts-interior-multiple-nearby-unassigned-sample",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/report.json"
+    },
+    {
+      "json_pointer": "/priority_counts/other-retained-candidate",
+      "metric_id": "priority_counts-other-retained-candidate",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/report.json"
+    },
+    {
+      "json_pointer": "/priority_counts/sampling-unknown",
+      "metric_id": "priority_counts-sampling-unknown",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/report.json"
+    }
+  ],
+  "metrics": [
+    {
+      "evaluation_commit": "9e03d07ea03f15993aec730bf0cc7fbec6e09de0",
+      "id": "component_count",
+      "input_sha256": "69aa2c4cc0a949d66938344cb80e526fe77b68661b93fd0b3be7830e2e18e478",
+      "scope": "Frozen diagnostic at stated registry-input commit against separately pinned reference geography; one representative native cell per component, all other cells unchecked. Counts are not confirmed defect totals.",
+      "unit": "count",
+      "value": 96532,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "9e03d07ea03f15993aec730bf0cc7fbec6e09de0",
+      "id": "fragment_count",
+      "input_sha256": "69aa2c4cc0a949d66938344cb80e526fe77b68661b93fd0b3be7830e2e18e478",
+      "scope": "Frozen diagnostic at stated registry-input commit against separately pinned reference geography; one representative native cell per component, all other cells unchecked. Counts are not confirmed defect totals.",
+      "unit": "count",
+      "value": 98324,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "9e03d07ea03f15993aec730bf0cc7fbec6e09de0",
+      "id": "grid_original_parts_verified",
+      "input_sha256": "69aa2c4cc0a949d66938344cb80e526fe77b68661b93fd0b3be7830e2e18e478",
+      "scope": "Frozen diagnostic at stated registry-input commit against separately pinned reference geography; one representative native cell per component, all other cells unchecked. Counts are not confirmed defect totals.",
+      "unit": "count",
+      "value": 56,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "9e03d07ea03f15993aec730bf0cc7fbec6e09de0",
+      "id": "sample_counts-centre-in-gap-owned-discrepancy",
+      "input_sha256": "69aa2c4cc0a949d66938344cb80e526fe77b68661b93fd0b3be7830e2e18e478",
+      "scope": "Frozen diagnostic at stated registry-input commit against separately pinned reference geography; one representative native cell per component, all other cells unchecked. Counts are not confirmed defect totals.",
+      "unit": "count",
+      "value": 9,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "9e03d07ea03f15993aec730bf0cc7fbec6e09de0",
+      "id": "sample_counts-centre-in-gap-unassigned",
+      "input_sha256": "69aa2c4cc0a949d66938344cb80e526fe77b68661b93fd0b3be7830e2e18e478",
+      "scope": "Frozen diagnostic at stated registry-input commit against separately pinned reference geography; one representative native cell per component, all other cells unchecked. Counts are not confirmed defect totals.",
+      "unit": "count",
+      "value": 66424,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "9e03d07ea03f15993aec730bf0cc7fbec6e09de0",
+      "id": "sample_counts-representative-cell-centre-outside-gap-owned",
+      "input_sha256": "69aa2c4cc0a949d66938344cb80e526fe77b68661b93fd0b3be7830e2e18e478",
+      "scope": "Frozen diagnostic at stated registry-input commit against separately pinned reference geography; one representative native cell per component, all other cells unchecked. Counts are not confirmed defect totals.",
+      "unit": "count",
+      "value": 24204,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "9e03d07ea03f15993aec730bf0cc7fbec6e09de0",
+      "id": "sample_counts-representative-cell-centre-outside-gap-unassigned",
+      "input_sha256": "69aa2c4cc0a949d66938344cb80e526fe77b68661b93fd0b3be7830e2e18e478",
+      "scope": "Frozen diagnostic at stated registry-input commit against separately pinned reference geography; one representative native cell per component, all other cells unchecked. Counts are not confirmed defect totals.",
+      "unit": "count",
+      "value": 3979,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "9e03d07ea03f15993aec730bf0cc7fbec6e09de0",
+      "id": "sample_counts-unknown-no-strict-representative-point",
+      "input_sha256": "69aa2c4cc0a949d66938344cb80e526fe77b68661b93fd0b3be7830e2e18e478",
+      "scope": "Frozen diagnostic at stated registry-input commit against separately pinned reference geography; one representative native cell per component, all other cells unchecked. Counts are not confirmed defect totals.",
+      "unit": "count",
+      "value": 1916,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "9e03d07ea03f15993aec730bf0cc7fbec6e09de0",
+      "id": "shape_interpretation_counts-projection-interpolation-explains-owned-cell",
+      "input_sha256": "69aa2c4cc0a949d66938344cb80e526fe77b68661b93fd0b3be7830e2e18e478",
+      "scope": "Frozen diagnostic at stated registry-input commit against separately pinned reference geography; one representative native cell per component, all other cells unchecked. Counts are not confirmed defect totals.",
+      "unit": "count",
+      "value": 9,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "9e03d07ea03f15993aec730bf0cc7fbec6e09de0",
+      "id": "priority_counts-blocked-or-unmeasured",
+      "input_sha256": "69aa2c4cc0a949d66938344cb80e526fe77b68661b93fd0b3be7830e2e18e478",
+      "scope": "Frozen diagnostic at stated registry-input commit against separately pinned reference geography; one representative native cell per component, all other cells unchecked. Counts are not confirmed defect totals.",
+      "unit": "count",
+      "value": 5,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "9e03d07ea03f15993aec730bf0cc7fbec6e09de0",
+      "id": "priority_counts-interior-multiple-nearby-unassigned-sample",
+      "input_sha256": "69aa2c4cc0a949d66938344cb80e526fe77b68661b93fd0b3be7830e2e18e478",
+      "scope": "Frozen diagnostic at stated registry-input commit against separately pinned reference geography; one representative native cell per component, all other cells unchecked. Counts are not confirmed defect totals.",
+      "unit": "count",
+      "value": 12883,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "9e03d07ea03f15993aec730bf0cc7fbec6e09de0",
+      "id": "priority_counts-other-retained-candidate",
+      "input_sha256": "69aa2c4cc0a949d66938344cb80e526fe77b68661b93fd0b3be7830e2e18e478",
+      "scope": "Frozen diagnostic at stated registry-input commit against separately pinned reference geography; one representative native cell per component, all other cells unchecked. Counts are not confirmed defect totals.",
+      "unit": "count",
+      "value": 81733,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "9e03d07ea03f15993aec730bf0cc7fbec6e09de0",
+      "id": "priority_counts-sampling-unknown",
+      "input_sha256": "69aa2c4cc0a949d66938344cb80e526fe77b68661b93fd0b3be7830e2e18e478",
+      "scope": "Frozen diagnostic at stated registry-input commit against separately pinned reference geography; one representative native cell per component, all other cells unchecked. Counts are not confirmed defect totals.",
+      "unit": "count",
+      "value": 1911,
+      "vintage": "archived"
+    }
+  ],
+  "outputs": [
+    {
+      "bytes": 42234,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/coordinated-followups.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "f4a4a0d61aa0c3adca06cd372eb3e6284959cf7a3d809d73ab4c0cb8b33686ca"
+    },
+    {
+      "bytes": 64337,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/inputs.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "ae609d1312be34a15d34f2c5b7915292a568465acab729f44036f8d4400d338d"
+    },
+    {
+      "bytes": 958,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/negative-control.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "45b36266b314347299a5161b258f4d03d042e932f40953a066d07c5058c1766a"
+    },
+    {
+      "bytes": 544,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/positive-control.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "46eb97fd97741d9c56ec9a8efc7f00934f5d86a82482db1968b085ea9fae4a2c"
+    },
+    {
+      "bytes": 25462,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/protocol-snapshots/issue-115.json",
+      "role": "original-protocol-api-response",
+      "sha256": "4a6d0d7fa00b5d9d18c6569f715702d8bb6b70036ef7a9d2c05dc33b08d78913"
+    },
+    {
+      "bytes": 29218,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/protocol-snapshots/issue-121.json",
+      "role": "original-protocol-api-response",
+      "sha256": "e839964d70375d9b4612dfab6ac9d787664e7ac069799483f2d4461573e214e9"
+    },
+    {
+      "bytes": 33791,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/protocol-snapshots/issue-242.json",
+      "role": "original-protocol-api-response",
+      "sha256": "1aada25d8fa110c7e271bc2d3d40dfb0adf7e6872dd4db92cd79c9a05ed67975"
+    },
+    {
+      "bytes": 38213,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/protocol-snapshots/issue-243.json",
+      "role": "original-protocol-api-response",
+      "sha256": "62e69dbc9144a64813ffe0ff24926c382b42fc7d895df838b9a50a447632e7cd"
+    },
+    {
+      "bytes": 2808,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/reproducibility.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "f2c28b1ad52ac839b6b61c0a3b1b944ea12c89074bdc966f2f74ad90f9c3097c"
+    },
+    {
+      "bytes": 38613,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/report.json",
+      "role": "implementation-or-audit-output",
+      "sha256": "ba7a4b190683f8436109b6159359727a2300053ac42a96dcdd53ebef7f092b20"
+    },
+    {
+      "bytes": 1689245,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/samples-000.json.gz",
+      "role": "implementation-or-audit-output",
+      "sha256": "11a8c8fe3a225f0202f1a3a3a761f69a4262f19a15814e0874a19287e7297440",
+      "uncompressed_bytes": 8387741,
+      "uncompressed_sha256": "586f3c305287ae5e0732906eaf5eef163ab901296fa30b8dda2f82ffd0e86e6a"
+    },
+    {
+      "bytes": 1687134,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/samples-001.json.gz",
+      "role": "implementation-or-audit-output",
+      "sha256": "4b838031e8f4576bfb0dbc44eb919797f2cedf07d0f79a6ac3844ca61d784b1e",
+      "uncompressed_bytes": 8387526,
+      "uncompressed_sha256": "3eb172484c5c5fbc34abbd05993b719886b8d17f097e515674da8ee2559ac440"
+    },
+    {
+      "bytes": 1689397,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/samples-002.json.gz",
+      "role": "implementation-or-audit-output",
+      "sha256": "ab03a5c876e550cee86689afa80608b2dbd5c3523a9cd8db19a65d4305cc4a56",
+      "uncompressed_bytes": 8387869,
+      "uncompressed_sha256": "eb5fc8140533531d42a44dac9f18ea9756f827d83306ce1ee3651582acd8365b"
+    },
+    {
+      "bytes": 1688089,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/samples-003.json.gz",
+      "role": "implementation-or-audit-output",
+      "sha256": "21fe138bee5c3d55c6241e4b4f8a4c0b70faa31dc48e6509af7ebe785044ad77",
+      "uncompressed_bytes": 8388350,
+      "uncompressed_sha256": "c811cc11a3bfdb9e6d815fc47e7ec0094f78af2d18bc155f7c2d1f7ade995655"
+    },
+    {
+      "bytes": 1686877,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/samples-004.json.gz",
+      "role": "implementation-or-audit-output",
+      "sha256": "76361e1836917159489f0ae8d07b832d979715a3877d36f72dc10b31eb140f3b",
+      "uncompressed_bytes": 8388079,
+      "uncompressed_sha256": "dd71cbc600a6c7af324a8e2d5285c390cd30556b6a168cc85ded9f7ff5a3530e"
+    },
+    {
+      "bytes": 1688927,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/samples-005.json.gz",
+      "role": "implementation-or-audit-output",
+      "sha256": "9c80d1dcf87689c39a1824b1bf1e282da99f4785ce35f3807465e82b944de8a9",
+      "uncompressed_bytes": 8388250,
+      "uncompressed_sha256": "2247702a28b47e1d07e5b85f2f5304a7a7a7b17484cb5821197a07f3ab09a86d"
+    },
+    {
+      "bytes": 1688256,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/samples-006.json.gz",
+      "role": "implementation-or-audit-output",
+      "sha256": "1a189076cfcc51dd375b2c0398b54bb1a3bcfcf31968c63fc9c9308bb95bf18a",
+      "uncompressed_bytes": 8388408,
+      "uncompressed_sha256": "881960a0ad96ae10ba14d14c3dd25c9eb20c6d4ed622318fc858a684d63e935a"
+    },
+    {
+      "bytes": 1687664,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/samples-007.json.gz",
+      "role": "implementation-or-audit-output",
+      "sha256": "caf37153862b6215c0e5f282bdc444476841e2c94ebfd4397aec48272ac33440",
+      "uncompressed_bytes": 8388601,
+      "uncompressed_sha256": "d7dd27d7c99edbbd1bca0c10a643caa373c68ac388a7774efba409e1dd2cc31e"
+    },
+    {
+      "bytes": 1688885,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/samples-008.json.gz",
+      "role": "implementation-or-audit-output",
+      "sha256": "ca54fc1f0fa8d7d686936fb26e0e297653c8b2cadc02feea8f4f88a5c5a45c23",
+      "uncompressed_bytes": 8387560,
+      "uncompressed_sha256": "9d7c4f6eb024c09f0bef8c648d5675f31e80206273d06a5533b0870cda4cf435"
+    },
+    {
+      "bytes": 1688697,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/samples-009.json.gz",
+      "role": "implementation-or-audit-output",
+      "sha256": "4246a204482d86ce2cca1a4baa6b57e7cd64242c10ee8d27d9f95ab332ae5e12",
+      "uncompressed_bytes": 8387727,
+      "uncompressed_sha256": "cffcc9158a40213e5e502d3aedba2e4c60f1ff141992c1de49911939fae6d146"
+    },
+    {
+      "bytes": 1688456,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/samples-010.json.gz",
+      "role": "implementation-or-audit-output",
+      "sha256": "07d2fd7fe76c0371641564413ba73d7716602f18146684f6362a1a76ab858d4a",
+      "uncompressed_bytes": 8388278,
+      "uncompressed_sha256": "ff6080674bd2e6d732f0835acc551dd55101c4f7d07c821aa71d82812a007e0d"
+    },
+    {
+      "bytes": 1687988,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/samples-011.json.gz",
+      "role": "implementation-or-audit-output",
+      "sha256": "cb20693ddc9e804ebabcbb35a976c1cc5f753ff804eb4093a5c95f9fb7a1b6c3",
+      "uncompressed_bytes": 8387823,
+      "uncompressed_sha256": "7e39429108d3dec65544c01d9754fd58cb68b00e834febda6137b8d5988a6e1a"
+    },
+    {
+      "bytes": 1689893,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/samples-012.json.gz",
+      "role": "implementation-or-audit-output",
+      "sha256": "f3546382d58b3b56104e29acd08bfd52555abb49e41a100bcbb2532dbd1a5697",
+      "uncompressed_bytes": 8388225,
+      "uncompressed_sha256": "fcd44381f1ddc6d5243b7ba4175d857d7ce62a7e17ba42866383c13027189c7e"
+    },
+    {
+      "bytes": 80596,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/samples-013.json.gz",
+      "role": "implementation-or-audit-output",
+      "sha256": "4cfab7c9920333e8c620bd905f880a24f264ffb70da18a0438c5ef2985d45b30",
+      "uncompressed_bytes": 395936,
+      "uncompressed_sha256": "e0b40e7f82ee61c79fc7a9554ec84ddf696c3c67e9878de5581292eb4618d0e4"
+    },
+    {
+      "bytes": 4343,
+      "hash_kind": "file-bytes",
+      "path": "docs/GEOGRAPHIC_GRID_TRIAGE.md",
+      "role": "implementation-or-audit-output",
+      "sha256": "68679bb59d1c8333363c9f939923da95ffa0713b2fd479330a178c59c433daf0"
+    },
+    {
+      "bytes": 10751,
+      "hash_kind": "file-bytes",
+      "path": "scripts/geographic_grid.py",
+      "role": "implementation-or-audit-output",
+      "sha256": "74b3f06feedf9c10d1626e11378f1ec4ab92b283e05d1ffd510e90f8c2df7fdf"
+    },
+    {
+      "bytes": 16052,
+      "hash_kind": "file-bytes",
+      "path": "scripts/triage-geographic-grid.py",
+      "role": "implementation-or-audit-output",
+      "sha256": "ba1d29868bf372782ade1ebb1335c8e90f9a0be2058db04158ad4c51755123c5"
+    },
+    {
+      "bytes": 7984,
+      "hash_kind": "file-bytes",
+      "path": "test/geographic-grid.py",
+      "role": "implementation-or-audit-output",
+      "sha256": "79ad9ccd0671f38c632cc496bd8f03882e38f2bdeba134c2b07dd0c71e88ee0e"
+    },
+    {
+      "bytes": 487,
+      "hash_kind": "file-bytes",
+      "path": "test/geographic-grid.test.mjs",
+      "role": "implementation-or-audit-output",
+      "sha256": "01b2f72b72eebcf7a5c6f0d2db722d4cac50e3d26fe7c9c1fbf130a26b9a109c"
+    }
+  ],
+  "sources": [],
+  "stages": {
+    "geographic_approval": "not-requested",
+    "implementation": "proposed",
+    "research": "partial"
+  },
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "summaries": [],
+  "validation": [
+    {
+      "evidence_path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/positive-control.json",
+      "kind": "positive-control",
+      "method_id": "immutable-native-grid-triage",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/negative-control.json",
+      "kind": "negative-control",
+      "method_id": "immutable-native-grid-triage",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/reproducibility.json",
+      "kind": "reproducibility",
+      "method_id": "immutable-native-grid-triage",
+      "outcome": "passed"
+    }
+  ],
+  "version": 1,
+  "worker_id": "engineering-coverage-gaps-907-20261005-local01"
+}

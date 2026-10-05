@@ -1,0 +1,10 @@
+{
+  "actual_command": "python -I -B test/geographic-grid.py",
+  "assertions": "Native packing, half-open run endpoints, row resets, partition splits, finite projection/inverse axis, exact size, holes, dateline MultiPolygon, projection interpretation; actual all-original run/row verification in frozen global result.",
+  "exit_code": 0,
+  "kind": "positive-control",
+  "method_id": "immutable-native-grid-triage",
+  "outcome": "passed",
+  "stderr_sha256": "6a7f5b5397b18d6af66babd2a3e809e000dcd7e7d818f6e7d8370c1dc62b4d95",
+  "tests_run": 23
+}
