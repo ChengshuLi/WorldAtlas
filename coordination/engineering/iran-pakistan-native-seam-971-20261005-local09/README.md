@@ -32,7 +32,7 @@ Current OpenStreetMap originals retain ODbL 1.0/OpenStreetMap and contributors a
 
 ## Reproduce offline
 
-Install the committed pinned Python requirements (the comparison itself uses NumPy, Shapely and pyproj). Fetch `refs/pull/PR_NUMBER/head` to restore input bootstrap `a10c45aceb27be8d35ec06419c25c5d7cbfa2632` if it is absent locally. All original sources are committed; reproduction needs no provider/browser/live connection.
+Install the committed pinned Python requirements (the comparison itself uses NumPy, Shapely and pyproj). Fetch `refs/pull/985/head` to restore input bootstrap `a10c45aceb27be8d35ec06419c25c5d7cbfa2632` if it is absent locally. All original sources are committed; reproduction needs no provider/browser/live connection.
 
 Use a fresh output filename. Run the following from the repository root, replacing the output destination only:
 
