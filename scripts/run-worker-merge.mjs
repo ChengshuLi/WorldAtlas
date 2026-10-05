@@ -23,6 +23,7 @@ try {
     fs.appendFileSync(process.env.GITHUB_OUTPUT, `candidate_ref=${state.candidate_ref ?? ''}\nproof_attempt=${state.proof?.run_attempt ?? ''}\nproof_run=${state.proof?.run_id ?? ''}\ncandidate=${state.candidate ?? ''}\nbase=${state.base ?? ''}\nprofile=${state.profile ?? 'evidence'}\nshards=${JSON.stringify(state.profile === 'full' ? [0,1,2] : [0])}\n`);
   } else {
     const completed = await completeIntegration({...options, integrationResult: process.env.INTEGRATION_RESULT,
+      geographyResult: process.env.GEOGRAPHY_RESULT,
       proofRunAttempt: process.env.PROOF_RUN_ATTEMPT ? Number(process.env.PROOF_RUN_ATTEMPT) : undefined,
       proofRunId: process.env.PROOF_RUN_ID ? Number(process.env.PROOF_RUN_ID) : undefined,
       testedBase: process.env.TESTED_BASE, testedCandidate: process.env.TESTED_CANDIDATE});
