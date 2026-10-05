@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "retrieval_date_utc": "2026-10-05",
+  "geoBoundaries": {
+    "repository": "https://github.com/wmgeolab/geoBoundaries",
+    "commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+    "commit_date": "2023-12-13",
+    "release": "gbOpen",
+    "citation": "Runfola D, Anderson A, Baier H, Crittenden M, Dowker E, Fuhrig S, et al. (2020), geoBoundaries: A global database of political administrative boundaries, PLoS ONE 15(4): e0231866; cite geoBoundaries and the source cited in layer metadata.",
+    "assets": [
+      {
+        "id": "gab-adm2",
+        "path": "sources/gabon-adm2-2018.geojson",
+        "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/GAB/ADM2/geoBoundaries-GAB-ADM2.geojson",
+        "retrieved_utc": "2026-10-05T04:34:27Z",
+        "bytes": 420216,
+        "sha256": "244d4936746c39ffa9c7805a1359df33743e6356ded0c941381f8980e3b3c156",
+        "vintage": "2018",
+        "level": "ADM2",
+        "metadata": "49 features; canonical role Department; source geoBoundaries, Wikimedia; sourceDataUpdateDate 2023-01-19; built 2023-12-12; CC BY 3.0. The metadata's boundarySourceURL is a Wikimedia page and does not identify the underlying official legal geometry authority."
+      },
+      {
+        "id": "gab-adm2-metadata",
+        "path": "sources/gabon-adm2-metadata-2018.json",
+        "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/GAB/ADM2/geoBoundaries-GAB-ADM2-metaData.json",
+        "retrieved_utc": "2026-10-05T04:34:27Z",
+        "bytes": 812,
+        "sha256": "e142691aab2e85cf331e3db7d2413fd9aff89333b7c957c8601b60073e2740b1",
+        "license": "CC BY 3.0"
+      },
+      {
+        "id": "gab-adm1-parent-context",
+        "path": "sources/gabon-adm1.geojson",
+        "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/GAB/ADM1/geoBoundaries-GAB-ADM1.geojson",
+        "retrieved_utc": "2026-10-05T04:34:28Z",
+        "bytes": 110212,
+        "sha256": "25cc43172c48f975b308847ec16ed7e7c0fe8f99c4c8479bb1fd13a176158312",
+        "vintage": "2005",
+        "level": "ADM1",
+        "metadata": "9 provinces; source geoBoundaries, Wikipedia; built 2023-12-12; CC BY-SA 3.0 Unported, with creator ChrL attribution requested. This is older comparison context, not a contemporaneous boundary authority for the 2018 ADM2 source."
+      },
+      {
+        "id": "gab-adm1-metadata",
+        "path": "sources/gabon-adm1-metadata.json",
+        "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/GAB/ADM1/geoBoundaries-GAB-ADM1-metaData.json",
+        "retrieved_utc": "2026-10-05T04:34:28Z",
+        "bytes": 921,
+        "sha256": "9f4e67e94210cadf5a1dc238e8778243a42b781153fddc88279272a6481ea2a7",
+        "license": "CC BY-SA 3.0 Unported"
+      },
+      {
+        "id": "stp-adm1",
+        "path": "sources/sao-tome-principe-adm1-2017.geojson",
+        "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/STP/ADM1/geoBoundaries-STP-ADM1.geojson",
+        "retrieved_utc": "2026-10-05T04:34:28Z",
+        "bytes": 82460,
+        "sha256": "8f2e653711b0bd533030bc4b9479d696c2535b48be6970ac1f499357b5226368",
+        "vintage": "2017",
+        "level": "ADM1",
+        "metadata": "Two named features; canonical role blank; source OpenStreetMap, Wambacher; source-data update marked 2023-01-19; built 2023-12-12; ODbL 1.0. Source named provinces do not establish current statutory role."
+      },
+      {
+        "id": "stp-adm1-metadata",
+        "path": "sources/sao-tome-principe-adm1-metadata-2017.json",
+        "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/STP/ADM1/geoBoundaries-STP-ADM1-metaData.json",
+        "retrieved_utc": "2026-10-05T04:34:28Z",
+        "bytes": 852,
+        "sha256": "3e44416284f0211074022c000faeed9d6eec3b7d6b6b6f0113dc44084f8ddeac",
+        "license": "ODbL 1.0"
+      }
+    ],
+    "attribution_and_license": "Attribution: geoBoundaries (Runfola et al. 2020; geoboundaries.org), with source-level attributions to Wikimedia/Wikipedia contributor ChrL and OpenStreetMap/Wambacher as applicable. The Gabon ADM1 source has CC BY-SA 3.0; STP database has ODbL 1.0. Retained originals are unchanged. Downstream republication of the ODbL database or a derivative database requires separate license review; no atlas data are changed here."
+  }
+}

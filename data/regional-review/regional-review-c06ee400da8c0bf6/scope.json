@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "issue": 464,
+  "batch_id": "regional-review:c06ee400da8c0bf6",
+  "region_id": "framework:region:west-central-tropical-africa:1b603899aaf3",
+  "baseline_commit": "b7aab8b8d353eb3510cf7323da7bc2dcde10147b",
+  "baseline_files": [
+    {"path":"data/world-index.json","sha256":"a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"},
+    {"path":"data/hierarchy.json","sha256":"568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"},
+    {"path":"data/macro-foundation/regional-handoffs.json.gz","sha256":"29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a"}
+  ],
+  "issue_declared_release": {
+    "id": "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+    "version": 5,
+    "hierarchy_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+    "footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286",
+    "macro_certificate_sha256": "979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e",
+    "frozen_region_geometry_sha256": "ae399148c3d3e530f0ff90ed3c94ad0545412bd53d3f46b7e82250ef7c88c413",
+    "frozen_region_member_ids_sha256": "f1b7eba6daab3bbbd04c9beb4ee0aeadb833f93a9dbcb106aea1a25acac52ea3"
+  },
+  "owned_path": "data/regional-review/regional-review-c06ee400da8c0bf6/",
+  "source_inputs": [
+    {
+      "path": "sources/gabon-adm2-2018.geojson",
+      "sha256": "244d4936746c39ffa9c7805a1359df33743e6356ded0c941381f8980e3b3c156",
+      "license": "Creative Commons Attribution 3.0 License"
+    },
+    {
+      "path": "sources/gabon-adm2-metadata-2018.json",
+      "sha256": "e142691aab2e85cf331e3db7d2413fd9aff89333b7c957c8601b60073e2740b1",
+      "license": "Creative Commons Attribution 3.0 License"
+    },
+    {
+      "path": "sources/gabon-adm1.geojson",
+      "sha256": "25cc43172c48f975b308847ec16ed7e7c0fe8f99c4c8479bb1fd13a176158312",
+      "license": "Creative Commons Attribution-ShareAlike 3.0 Unported"
+    },
+    {
+      "path": "sources/gabon-adm1-metadata.json",
+      "sha256": "9f4e67e94210cadf5a1dc238e8778243a42b781153fddc88279272a6481ea2a7",
+      "license": "Creative Commons Attribution-ShareAlike 3.0 Unported"
+    },
+    {
+      "path": "sources/sao-tome-principe-adm1-2017.geojson",
+      "sha256": "8f2e653711b0bd533030bc4b9479d696c2535b48be6970ac1f499357b5226368",
+      "license": "Open Data Commons Open Database License 1.0"
+    },
+    {
+      "path": "sources/sao-tome-principe-adm1-metadata-2017.json",
+      "sha256": "3e44416284f0211074022c000faeed9d6eec3b7d6b6b6f0113dc44084f8ddeac",
+      "license": "Open Data Commons Open Database License 1.0"
+    }
+  ],
+  "subjects": [
+    {"id":"gb:GAB:ADM2:22940354B11019670045233","source_name":"Bayi-Brikolo","parent_id":"framework:province:haut-ogooue:4f53426cfe1a","parent_name":"Haut-Ogooué"},
+    {"id":"gb:GAB:ADM2:22940354B13456808053161","source_name":"Lolo-Bouenguidi","parent_id":"framework:province:ogooue-lolo:cbcc0e4ebf91","parent_name":"Ogooué-Lolo"},
+    {"id":"gb:GAB:ADM2:22940354B15845982668686","source_name":"Mvoung","parent_id":"framework:province:ogooue-ivindo:f86169440bd3","parent_name":"Ogooué-Ivindo"},
+    {"id":"gb:GAB:ADM2:22940354B21315660080276","source_name":"Ivindo","parent_id":"framework:province:ogooue-ivindo:f86169440bd3","parent_name":"Ogooué-Ivindo"},
+    {"id":"gb:GAB:ADM2:22940354B21912666573849","source_name":"Lèkoni-Lèkori","parent_id":"framework:province:haut-ogooue:4f53426cfe1a","parent_name":"Haut-Ogooué"},
+    {"id":"gb:GAB:ADM2:22940354B21948278538135","source_name":"Djouori-Agnili","parent_id":"framework:province:haut-ogooue:4f53426cfe1a","parent_name":"Haut-Ogooué"},
+    {"id":"gb:GAB:ADM2:22940354B21970441224980","source_name":"Lèbombi-Leyou","parent_id":"framework:province:haut-ogooue:4f53426cfe1a","parent_name":"Haut-Ogooué"},
+    {"id":"gb:GAB:ADM2:22940354B26580795617541","source_name":"Offouè-Onoyè","parent_id":"framework:province:ogooue-lolo:cbcc0e4ebf91","parent_name":"Ogooué-Lolo"},
+    {"id":"gb:GAB:ADM2:22940354B37639469829308","source_name":"Mpassa","parent_id":"framework:province:haut-ogooue:4f53426cfe1a","parent_name":"Haut-Ogooué"},
+    {"id":"gb:GAB:ADM2:22940354B44244492121045","source_name":"Lèkoko","parent_id":"framework:province:haut-ogooue:4f53426cfe1a","parent_name":"Haut-Ogooué"},
+    {"id":"gb:GAB:ADM2:22940354B47016566751071","source_name":"Lombo-Bouenguidi","parent_id":"framework:province:ogooue-lolo:cbcc0e4ebf91","parent_name":"Ogooué-Lolo"},
+    {"id":"gb:GAB:ADM2:22940354B50404497002370","source_name":"Mouloundou","parent_id":"framework:province:ogooue-lolo:cbcc0e4ebf91","parent_name":"Ogooué-Lolo"},
+    {"id":"gb:GAB:ADM2:22940354B60180935649619","source_name":"Sèbè-Brikolo","parent_id":"framework:province:haut-ogooue:4f53426cfe1a","parent_name":"Haut-Ogooué"},
+    {"id":"gb:GAB:ADM2:22940354B6249741247917","source_name":"Plateaux","parent_id":"framework:province:haut-ogooue:4f53426cfe1a","parent_name":"Haut-Ogooué"},
+    {"id":"gb:GAB:ADM2:22940354B62509297980866","source_name":"Djouè","parent_id":"framework:province:haut-ogooue:4f53426cfe1a","parent_name":"Haut-Ogooué"},
+    {"id":"gb:GAB:ADM2:22940354B86386728493807","source_name":"Zadiè","parent_id":"framework:province:ogooue-ivindo:f86169440bd3","parent_name":"Ogooué-Ivindo"},
+    {"id":"gb:GAB:ADM2:22940354B94372756375204","source_name":"Lèkabi-Lèwolo","parent_id":"framework:province:haut-ogooue:4f53426cfe1a","parent_name":"Haut-Ogooué"},
+    {"id":"gb:GAB:ADM2:22940354B97125723234680","source_name":"Lopè","parent_id":"framework:province:ogooue-ivindo:f86169440bd3","parent_name":"Ogooué-Ivindo"},
+    {"id":"gb:GAB:ADM2:22940354B99015789882932","source_name":"Ogoouè-Lètili","parent_id":"framework:province:haut-ogooue:4f53426cfe1a","parent_name":"Haut-Ogooué"},
+    {"id":"gb:STP:ADM1:19237168B40253326356618","source_name":"São Tomé Province","parent_id":"framework:province:sao-tome-province:4b696869dc61","parent_name":"São Tomé Province"},
+    {"id":"gb:STP:ADM1:19237168B82261817076051","source_name":"Príncipe Province","parent_id":"framework:province:principe-province:c09206cf27ff","parent_name":"Príncipe Province"}
+  ]
+}

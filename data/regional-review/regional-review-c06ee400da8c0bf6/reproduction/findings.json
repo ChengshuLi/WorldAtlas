@@ -1,0 +1,813 @@
+{
+  "area_assessments": [
+    {
+      "classification": "insufficient-evidence",
+      "finding": "This partial packet does not establish nationwide source completeness; 49 geoBoundaries ADM2 features differ from a separate official 2016 aggregate count of 48 departments.",
+      "full_area_location_count": 49,
+      "id": "framework:area:gabon:f2df9b08a122",
+      "name": "Gabon",
+      "purpose": "Country-level grouping of Gabon locations; this packet covers only 19 department IDs in Haut-Ogooué, Ogooué-Ivindo and Ogooué-Lolo. Other Gabon subjects belong to sibling Central Africa review scopes (#460–#463).",
+      "scoped_subject_count": 19
+    },
+    {
+      "classification": "insufficient-evidence",
+      "finding": "The regional grouping purpose and full seven-member island coverage are outside this packet's two exact source subjects; no regional or named-island completeness conclusion is made.",
+      "full_area_location_count": 7,
+      "id": "framework:area:gulf-of-guinea-is:38986b297bde",
+      "name": "Gulf of Guinea Islands",
+      "purpose": "Regional island grouping; this packet assesses the São Tomé and Príncipe ADM1-derived island features only. The other five area members remain in sibling Central Africa review scopes (#460–#463).",
+      "scoped_subject_count": 2
+    }
+  ],
+  "baseline_commit": "b7aab8b8d353eb3510cf7323da7bc2dcde10147b",
+  "baseline_pins": {
+    "data/hierarchy.json": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+    "data/macro-foundation/regional-handoffs.json.gz": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
+    "data/world-index.json": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+  },
+  "classifications": {
+    "correction-needed": 2,
+    "insufficient-evidence": 19,
+    "justified": 0
+  },
+  "findings": [
+    {
+      "child_land_share_inside_old_parent": 0.95707618,
+      "classification": "insufficient-evidence",
+      "comparison_parent_source": "geoBoundaries GAB ADM1 2005, CC BY-SA 3.0",
+      "finding": "The 2018 source Department name and province roster entry match, but parent geometry is only screening evidence against a 2005 source ADM1; current legal boundary lineage/completeness is not independently established.",
+      "geometry_method": {
+        "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+        "area_units": "m2",
+        "axis_order": "longitude-latitude",
+        "crs": "EPSG:4326",
+        "distance_method": "WGS84 inverse geodesic",
+        "distance_units": "m",
+        "version": "worldatlas-evidence-geometry-v1"
+      },
+      "id": "gb:GAB:ADM2:22940354B11019670045233",
+      "limits": [
+        "ADM2/ADM1 vintages differ by 13 years",
+        "area overlap does not prove legal parentage or boundaries",
+        "official HTML has no byte-exact retained hash",
+        "the nationwide 49-versus-48 source count is not resolved by this scoped review"
+      ],
+      "name": "Bayi-Brikolo",
+      "official_roster_match_basis": "2018 Gabon Interior Ministry province-to-department listing; normalized name comparison only",
+      "official_roster_name_match": true,
+      "parent_id": "framework:province:haut-ogooue:4f53426cfe1a",
+      "parent_name": "Haut-Ogooué",
+      "source_level": "ADM2",
+      "source_license": "CC BY 3.0",
+      "source_role": "Department (geoBoundaries metadata)",
+      "source_vintage": "2018"
+    },
+    {
+      "child_land_share_inside_old_parent": 0.960499563,
+      "classification": "insufficient-evidence",
+      "comparison_parent_source": "geoBoundaries GAB ADM1 2005, CC BY-SA 3.0",
+      "finding": "The 2018 source Department name and province roster entry match, but parent geometry is only screening evidence against a 2005 source ADM1; current legal boundary lineage/completeness is not independently established.",
+      "geometry_method": {
+        "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+        "area_units": "m2",
+        "axis_order": "longitude-latitude",
+        "crs": "EPSG:4326",
+        "distance_method": "WGS84 inverse geodesic",
+        "distance_units": "m",
+        "version": "worldatlas-evidence-geometry-v1"
+      },
+      "id": "gb:GAB:ADM2:22940354B13456808053161",
+      "limits": [
+        "ADM2/ADM1 vintages differ by 13 years",
+        "area overlap does not prove legal parentage or boundaries",
+        "official HTML has no byte-exact retained hash",
+        "the nationwide 49-versus-48 source count is not resolved by this scoped review"
+      ],
+      "name": "Lolo-Bouenguidi",
+      "official_roster_match_basis": "2018 Gabon Interior Ministry province-to-department listing; normalized name comparison only",
+      "official_roster_name_match": true,
+      "parent_id": "framework:province:ogooue-lolo:cbcc0e4ebf91",
+      "parent_name": "Ogooué-Lolo",
+      "source_level": "ADM2",
+      "source_license": "CC BY 3.0",
+      "source_role": "Department (geoBoundaries metadata)",
+      "source_vintage": "2018"
+    },
+    {
+      "child_land_share_inside_old_parent": 0.986857902,
+      "classification": "insufficient-evidence",
+      "comparison_parent_source": "geoBoundaries GAB ADM1 2005, CC BY-SA 3.0",
+      "finding": "The 2018 source Department name and province roster entry match, but parent geometry is only screening evidence against a 2005 source ADM1; current legal boundary lineage/completeness is not independently established.",
+      "geometry_method": {
+        "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+        "area_units": "m2",
+        "axis_order": "longitude-latitude",
+        "crs": "EPSG:4326",
+        "distance_method": "WGS84 inverse geodesic",
+        "distance_units": "m",
+        "version": "worldatlas-evidence-geometry-v1"
+      },
+      "id": "gb:GAB:ADM2:22940354B15845982668686",
+      "limits": [
+        "ADM2/ADM1 vintages differ by 13 years",
+        "area overlap does not prove legal parentage or boundaries",
+        "official HTML has no byte-exact retained hash",
+        "the nationwide 49-versus-48 source count is not resolved by this scoped review"
+      ],
+      "name": "Mvoung",
+      "official_roster_match_basis": "2018 Gabon Interior Ministry province-to-department listing; normalized name comparison only",
+      "official_roster_name_match": true,
+      "parent_id": "framework:province:ogooue-ivindo:f86169440bd3",
+      "parent_name": "Ogooué-Ivindo",
+      "source_level": "ADM2",
+      "source_license": "CC BY 3.0",
+      "source_role": "Department (geoBoundaries metadata)",
+      "source_vintage": "2018"
+    },
+    {
+      "child_land_share_inside_old_parent": 0.967488462,
+      "classification": "insufficient-evidence",
+      "comparison_parent_source": "geoBoundaries GAB ADM1 2005, CC BY-SA 3.0",
+      "finding": "The 2018 source Department name and province roster entry match, but parent geometry is only screening evidence against a 2005 source ADM1; current legal boundary lineage/completeness is not independently established.",
+      "geometry_method": {
+        "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+        "area_units": "m2",
+        "axis_order": "longitude-latitude",
+        "crs": "EPSG:4326",
+        "distance_method": "WGS84 inverse geodesic",
+        "distance_units": "m",
+        "version": "worldatlas-evidence-geometry-v1"
+      },
+      "id": "gb:GAB:ADM2:22940354B21315660080276",
+      "limits": [
+        "ADM2/ADM1 vintages differ by 13 years",
+        "area overlap does not prove legal parentage or boundaries",
+        "official HTML has no byte-exact retained hash",
+        "the nationwide 49-versus-48 source count is not resolved by this scoped review"
+      ],
+      "name": "Ivindo",
+      "official_roster_match_basis": "2018 Gabon Interior Ministry province-to-department listing; normalized name comparison only",
+      "official_roster_name_match": true,
+      "parent_id": "framework:province:ogooue-ivindo:f86169440bd3",
+      "parent_name": "Ogooué-Ivindo",
+      "source_level": "ADM2",
+      "source_license": "CC BY 3.0",
+      "source_role": "Department (geoBoundaries metadata)",
+      "source_vintage": "2018"
+    },
+    {
+      "child_land_share_inside_old_parent": 1.0,
+      "classification": "insufficient-evidence",
+      "comparison_parent_source": "geoBoundaries GAB ADM1 2005, CC BY-SA 3.0",
+      "finding": "The 2018 source Department name and province roster entry match, but parent geometry is only screening evidence against a 2005 source ADM1; current legal boundary lineage/completeness is not independently established.",
+      "geometry_method": {
+        "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+        "area_units": "m2",
+        "axis_order": "longitude-latitude",
+        "crs": "EPSG:4326",
+        "distance_method": "WGS84 inverse geodesic",
+        "distance_units": "m",
+        "version": "worldatlas-evidence-geometry-v1"
+      },
+      "id": "gb:GAB:ADM2:22940354B21912666573849",
+      "limits": [
+        "ADM2/ADM1 vintages differ by 13 years",
+        "area overlap does not prove legal parentage or boundaries",
+        "official HTML has no byte-exact retained hash",
+        "the nationwide 49-versus-48 source count is not resolved by this scoped review"
+      ],
+      "name": "Lèkoni-Lèkori",
+      "official_roster_match_basis": "2018 Gabon Interior Ministry province-to-department listing; normalized name comparison only",
+      "official_roster_name_match": true,
+      "parent_id": "framework:province:haut-ogooue:4f53426cfe1a",
+      "parent_name": "Haut-Ogooué",
+      "source_level": "ADM2",
+      "source_license": "CC BY 3.0",
+      "source_role": "Department (geoBoundaries metadata)",
+      "source_vintage": "2018"
+    },
+    {
+      "child_land_share_inside_old_parent": 1.0,
+      "classification": "insufficient-evidence",
+      "comparison_parent_source": "geoBoundaries GAB ADM1 2005, CC BY-SA 3.0",
+      "finding": "The 2018 source Department name and province roster entry match, but parent geometry is only screening evidence against a 2005 source ADM1; current legal boundary lineage/completeness is not independently established.",
+      "geometry_method": {
+        "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+        "area_units": "m2",
+        "axis_order": "longitude-latitude",
+        "crs": "EPSG:4326",
+        "distance_method": "WGS84 inverse geodesic",
+        "distance_units": "m",
+        "version": "worldatlas-evidence-geometry-v1"
+      },
+      "id": "gb:GAB:ADM2:22940354B21948278538135",
+      "limits": [
+        "ADM2/ADM1 vintages differ by 13 years",
+        "area overlap does not prove legal parentage or boundaries",
+        "official HTML has no byte-exact retained hash",
+        "the nationwide 49-versus-48 source count is not resolved by this scoped review"
+      ],
+      "name": "Djouori-Agnili",
+      "official_roster_match_basis": "2018 Gabon Interior Ministry province-to-department listing; normalized name comparison only",
+      "official_roster_name_match": true,
+      "parent_id": "framework:province:haut-ogooue:4f53426cfe1a",
+      "parent_name": "Haut-Ogooué",
+      "source_level": "ADM2",
+      "source_license": "CC BY 3.0",
+      "source_role": "Department (geoBoundaries metadata)",
+      "source_vintage": "2018"
+    },
+    {
+      "child_land_share_inside_old_parent": 0.986875805,
+      "classification": "insufficient-evidence",
+      "comparison_parent_source": "geoBoundaries GAB ADM1 2005, CC BY-SA 3.0",
+      "finding": "The 2018 source Department name and province roster entry match, but parent geometry is only screening evidence against a 2005 source ADM1; current legal boundary lineage/completeness is not independently established.",
+      "geometry_method": {
+        "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+        "area_units": "m2",
+        "axis_order": "longitude-latitude",
+        "crs": "EPSG:4326",
+        "distance_method": "WGS84 inverse geodesic",
+        "distance_units": "m",
+        "version": "worldatlas-evidence-geometry-v1"
+      },
+      "id": "gb:GAB:ADM2:22940354B21970441224980",
+      "limits": [
+        "ADM2/ADM1 vintages differ by 13 years",
+        "area overlap does not prove legal parentage or boundaries",
+        "official HTML has no byte-exact retained hash",
+        "the nationwide 49-versus-48 source count is not resolved by this scoped review"
+      ],
+      "name": "Lèbombi-Leyou",
+      "official_roster_match_basis": "2018 Gabon Interior Ministry province-to-department listing; normalized name comparison only",
+      "official_roster_name_match": true,
+      "parent_id": "framework:province:haut-ogooue:4f53426cfe1a",
+      "parent_name": "Haut-Ogooué",
+      "source_level": "ADM2",
+      "source_license": "CC BY 3.0",
+      "source_role": "Department (geoBoundaries metadata)",
+      "source_vintage": "2018"
+    },
+    {
+      "child_land_share_inside_old_parent": 0.89197866,
+      "classification": "insufficient-evidence",
+      "comparison_parent_source": "geoBoundaries GAB ADM1 2005, CC BY-SA 3.0",
+      "finding": "The 2018 source Department name and province roster entry match, but parent geometry is only screening evidence against a 2005 source ADM1; current legal boundary lineage/completeness is not independently established.",
+      "geometry_method": {
+        "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+        "area_units": "m2",
+        "axis_order": "longitude-latitude",
+        "crs": "EPSG:4326",
+        "distance_method": "WGS84 inverse geodesic",
+        "distance_units": "m",
+        "version": "worldatlas-evidence-geometry-v1"
+      },
+      "id": "gb:GAB:ADM2:22940354B26580795617541",
+      "limits": [
+        "ADM2/ADM1 vintages differ by 13 years",
+        "area overlap does not prove legal parentage or boundaries",
+        "official HTML has no byte-exact retained hash",
+        "the nationwide 49-versus-48 source count is not resolved by this scoped review"
+      ],
+      "name": "Offouè-Onoyè",
+      "official_roster_match_basis": "2018 Gabon Interior Ministry province-to-department listing; normalized name comparison only",
+      "official_roster_name_match": true,
+      "parent_id": "framework:province:ogooue-lolo:cbcc0e4ebf91",
+      "parent_name": "Ogooué-Lolo",
+      "source_level": "ADM2",
+      "source_license": "CC BY 3.0",
+      "source_role": "Department (geoBoundaries metadata)",
+      "source_vintage": "2018"
+    },
+    {
+      "child_land_share_inside_old_parent": 0.971673412,
+      "classification": "insufficient-evidence",
+      "comparison_parent_source": "geoBoundaries GAB ADM1 2005, CC BY-SA 3.0",
+      "finding": "The 2018 source Department name and province roster entry match, but parent geometry is only screening evidence against a 2005 source ADM1; current legal boundary lineage/completeness is not independently established.",
+      "geometry_method": {
+        "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+        "area_units": "m2",
+        "axis_order": "longitude-latitude",
+        "crs": "EPSG:4326",
+        "distance_method": "WGS84 inverse geodesic",
+        "distance_units": "m",
+        "version": "worldatlas-evidence-geometry-v1"
+      },
+      "id": "gb:GAB:ADM2:22940354B37639469829308",
+      "limits": [
+        "ADM2/ADM1 vintages differ by 13 years",
+        "area overlap does not prove legal parentage or boundaries",
+        "official HTML has no byte-exact retained hash",
+        "the nationwide 49-versus-48 source count is not resolved by this scoped review"
+      ],
+      "name": "Mpassa",
+      "official_roster_match_basis": "2018 Gabon Interior Ministry province-to-department listing; normalized name comparison only",
+      "official_roster_name_match": true,
+      "parent_id": "framework:province:haut-ogooue:4f53426cfe1a",
+      "parent_name": "Haut-Ogooué",
+      "source_level": "ADM2",
+      "source_license": "CC BY 3.0",
+      "source_role": "Department (geoBoundaries metadata)",
+      "source_vintage": "2018"
+    },
+    {
+      "child_land_share_inside_old_parent": 0.980101641,
+      "classification": "insufficient-evidence",
+      "comparison_parent_source": "geoBoundaries GAB ADM1 2005, CC BY-SA 3.0",
+      "finding": "The 2018 source Department name and province roster entry match, but parent geometry is only screening evidence against a 2005 source ADM1; current legal boundary lineage/completeness is not independently established.",
+      "geometry_method": {
+        "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+        "area_units": "m2",
+        "axis_order": "longitude-latitude",
+        "crs": "EPSG:4326",
+        "distance_method": "WGS84 inverse geodesic",
+        "distance_units": "m",
+        "version": "worldatlas-evidence-geometry-v1"
+      },
+      "id": "gb:GAB:ADM2:22940354B44244492121045",
+      "limits": [
+        "ADM2/ADM1 vintages differ by 13 years",
+        "area overlap does not prove legal parentage or boundaries",
+        "official HTML has no byte-exact retained hash",
+        "the nationwide 49-versus-48 source count is not resolved by this scoped review"
+      ],
+      "name": "Lèkoko",
+      "official_roster_match_basis": "2018 Gabon Interior Ministry province-to-department listing; normalized name comparison only",
+      "official_roster_name_match": true,
+      "parent_id": "framework:province:haut-ogooue:4f53426cfe1a",
+      "parent_name": "Haut-Ogooué",
+      "source_level": "ADM2",
+      "source_license": "CC BY 3.0",
+      "source_role": "Department (geoBoundaries metadata)",
+      "source_vintage": "2018"
+    },
+    {
+      "child_land_share_inside_old_parent": 0.912952012,
+      "classification": "insufficient-evidence",
+      "comparison_parent_source": "geoBoundaries GAB ADM1 2005, CC BY-SA 3.0",
+      "finding": "The 2018 source Department name and province roster entry match, but parent geometry is only screening evidence against a 2005 source ADM1; current legal boundary lineage/completeness is not independently established.",
+      "geometry_method": {
+        "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+        "area_units": "m2",
+        "axis_order": "longitude-latitude",
+        "crs": "EPSG:4326",
+        "distance_method": "WGS84 inverse geodesic",
+        "distance_units": "m",
+        "version": "worldatlas-evidence-geometry-v1"
+      },
+      "id": "gb:GAB:ADM2:22940354B47016566751071",
+      "limits": [
+        "ADM2/ADM1 vintages differ by 13 years",
+        "area overlap does not prove legal parentage or boundaries",
+        "official HTML has no byte-exact retained hash",
+        "the nationwide 49-versus-48 source count is not resolved by this scoped review"
+      ],
+      "name": "Lombo-Bouenguidi",
+      "official_roster_match_basis": "2018 Gabon Interior Ministry province-to-department listing; normalized name comparison only",
+      "official_roster_name_match": true,
+      "parent_id": "framework:province:ogooue-lolo:cbcc0e4ebf91",
+      "parent_name": "Ogooué-Lolo",
+      "source_level": "ADM2",
+      "source_license": "CC BY 3.0",
+      "source_role": "Department (geoBoundaries metadata)",
+      "source_vintage": "2018"
+    },
+    {
+      "child_land_share_inside_old_parent": 0.979350353,
+      "classification": "insufficient-evidence",
+      "comparison_parent_source": "geoBoundaries GAB ADM1 2005, CC BY-SA 3.0",
+      "finding": "The source's 2018 Department name does not match the 2018 Ministry roster under lossless accent/punctuation normalization; no authoritative dated alias or code crosswalk was found.",
+      "geometry_method": {
+        "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+        "area_units": "m2",
+        "axis_order": "longitude-latitude",
+        "crs": "EPSG:4326",
+        "distance_method": "WGS84 inverse geodesic",
+        "distance_units": "m",
+        "version": "worldatlas-evidence-geometry-v1"
+      },
+      "id": "gb:GAB:ADM2:22940354B50404497002370",
+      "limits": [
+        "ADM2/ADM1 vintages differ by 13 years",
+        "area overlap does not prove legal parentage or boundaries",
+        "official HTML has no byte-exact retained hash",
+        "the nationwide 49-versus-48 source count is not resolved by this scoped review"
+      ],
+      "name": "Mouloundou",
+      "official_roster_match_basis": "2018 Gabon Interior Ministry province-to-department listing; normalized name comparison only",
+      "official_roster_name_match": false,
+      "parent_id": "framework:province:ogooue-lolo:cbcc0e4ebf91",
+      "parent_name": "Ogooué-Lolo",
+      "source_level": "ADM2",
+      "source_license": "CC BY 3.0",
+      "source_role": "Department (geoBoundaries metadata)",
+      "source_vintage": "2018"
+    },
+    {
+      "child_land_share_inside_old_parent": 0.969957692,
+      "classification": "insufficient-evidence",
+      "comparison_parent_source": "geoBoundaries GAB ADM1 2005, CC BY-SA 3.0",
+      "finding": "The 2018 source Department name and province roster entry match, but parent geometry is only screening evidence against a 2005 source ADM1; current legal boundary lineage/completeness is not independently established.",
+      "geometry_method": {
+        "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+        "area_units": "m2",
+        "axis_order": "longitude-latitude",
+        "crs": "EPSG:4326",
+        "distance_method": "WGS84 inverse geodesic",
+        "distance_units": "m",
+        "version": "worldatlas-evidence-geometry-v1"
+      },
+      "id": "gb:GAB:ADM2:22940354B60180935649619",
+      "limits": [
+        "ADM2/ADM1 vintages differ by 13 years",
+        "area overlap does not prove legal parentage or boundaries",
+        "official HTML has no byte-exact retained hash",
+        "the nationwide 49-versus-48 source count is not resolved by this scoped review"
+      ],
+      "name": "Sèbè-Brikolo",
+      "official_roster_match_basis": "2018 Gabon Interior Ministry province-to-department listing; normalized name comparison only",
+      "official_roster_name_match": true,
+      "parent_id": "framework:province:haut-ogooue:4f53426cfe1a",
+      "parent_name": "Haut-Ogooué",
+      "source_level": "ADM2",
+      "source_license": "CC BY 3.0",
+      "source_role": "Department (geoBoundaries metadata)",
+      "source_vintage": "2018"
+    },
+    {
+      "child_land_share_inside_old_parent": 0.982276434,
+      "classification": "insufficient-evidence",
+      "comparison_parent_source": "geoBoundaries GAB ADM1 2005, CC BY-SA 3.0",
+      "finding": "The 2018 source Department name and province roster entry match, but parent geometry is only screening evidence against a 2005 source ADM1; current legal boundary lineage/completeness is not independently established.",
+      "geometry_method": {
+        "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+        "area_units": "m2",
+        "axis_order": "longitude-latitude",
+        "crs": "EPSG:4326",
+        "distance_method": "WGS84 inverse geodesic",
+        "distance_units": "m",
+        "version": "worldatlas-evidence-geometry-v1"
+      },
+      "id": "gb:GAB:ADM2:22940354B6249741247917",
+      "limits": [
+        "ADM2/ADM1 vintages differ by 13 years",
+        "area overlap does not prove legal parentage or boundaries",
+        "official HTML has no byte-exact retained hash",
+        "the nationwide 49-versus-48 source count is not resolved by this scoped review"
+      ],
+      "name": "Plateaux",
+      "official_roster_match_basis": "2018 Gabon Interior Ministry province-to-department listing; normalized name comparison only",
+      "official_roster_name_match": true,
+      "parent_id": "framework:province:haut-ogooue:4f53426cfe1a",
+      "parent_name": "Haut-Ogooué",
+      "source_level": "ADM2",
+      "source_license": "CC BY 3.0",
+      "source_role": "Department (geoBoundaries metadata)",
+      "source_vintage": "2018"
+    },
+    {
+      "child_land_share_inside_old_parent": 0.971032835,
+      "classification": "insufficient-evidence",
+      "comparison_parent_source": "geoBoundaries GAB ADM1 2005, CC BY-SA 3.0",
+      "finding": "The 2018 source Department name and province roster entry match, but parent geometry is only screening evidence against a 2005 source ADM1; current legal boundary lineage/completeness is not independently established.",
+      "geometry_method": {
+        "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+        "area_units": "m2",
+        "axis_order": "longitude-latitude",
+        "crs": "EPSG:4326",
+        "distance_method": "WGS84 inverse geodesic",
+        "distance_units": "m",
+        "version": "worldatlas-evidence-geometry-v1"
+      },
+      "id": "gb:GAB:ADM2:22940354B62509297980866",
+      "limits": [
+        "ADM2/ADM1 vintages differ by 13 years",
+        "area overlap does not prove legal parentage or boundaries",
+        "official HTML has no byte-exact retained hash",
+        "the nationwide 49-versus-48 source count is not resolved by this scoped review"
+      ],
+      "name": "Djouè",
+      "official_roster_match_basis": "2018 Gabon Interior Ministry province-to-department listing; normalized name comparison only",
+      "official_roster_name_match": true,
+      "parent_id": "framework:province:haut-ogooue:4f53426cfe1a",
+      "parent_name": "Haut-Ogooué",
+      "source_level": "ADM2",
+      "source_license": "CC BY 3.0",
+      "source_role": "Department (geoBoundaries metadata)",
+      "source_vintage": "2018"
+    },
+    {
+      "child_land_share_inside_old_parent": 0.951343633,
+      "classification": "insufficient-evidence",
+      "comparison_parent_source": "geoBoundaries GAB ADM1 2005, CC BY-SA 3.0",
+      "finding": "The 2018 source Department name and province roster entry match, but parent geometry is only screening evidence against a 2005 source ADM1; current legal boundary lineage/completeness is not independently established.",
+      "geometry_method": {
+        "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+        "area_units": "m2",
+        "axis_order": "longitude-latitude",
+        "crs": "EPSG:4326",
+        "distance_method": "WGS84 inverse geodesic",
+        "distance_units": "m",
+        "version": "worldatlas-evidence-geometry-v1"
+      },
+      "id": "gb:GAB:ADM2:22940354B86386728493807",
+      "limits": [
+        "ADM2/ADM1 vintages differ by 13 years",
+        "area overlap does not prove legal parentage or boundaries",
+        "official HTML has no byte-exact retained hash",
+        "the nationwide 49-versus-48 source count is not resolved by this scoped review"
+      ],
+      "name": "Zadiè",
+      "official_roster_match_basis": "2018 Gabon Interior Ministry province-to-department listing; normalized name comparison only",
+      "official_roster_name_match": true,
+      "parent_id": "framework:province:ogooue-ivindo:f86169440bd3",
+      "parent_name": "Ogooué-Ivindo",
+      "source_level": "ADM2",
+      "source_license": "CC BY 3.0",
+      "source_role": "Department (geoBoundaries metadata)",
+      "source_vintage": "2018"
+    },
+    {
+      "child_land_share_inside_old_parent": 1.0,
+      "classification": "insufficient-evidence",
+      "comparison_parent_source": "geoBoundaries GAB ADM1 2005, CC BY-SA 3.0",
+      "finding": "The 2018 source Department name and province roster entry match, but parent geometry is only screening evidence against a 2005 source ADM1; current legal boundary lineage/completeness is not independently established.",
+      "geometry_method": {
+        "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+        "area_units": "m2",
+        "axis_order": "longitude-latitude",
+        "crs": "EPSG:4326",
+        "distance_method": "WGS84 inverse geodesic",
+        "distance_units": "m",
+        "version": "worldatlas-evidence-geometry-v1"
+      },
+      "id": "gb:GAB:ADM2:22940354B94372756375204",
+      "limits": [
+        "ADM2/ADM1 vintages differ by 13 years",
+        "area overlap does not prove legal parentage or boundaries",
+        "official HTML has no byte-exact retained hash",
+        "the nationwide 49-versus-48 source count is not resolved by this scoped review"
+      ],
+      "name": "Lèkabi-Lèwolo",
+      "official_roster_match_basis": "2018 Gabon Interior Ministry province-to-department listing; normalized name comparison only",
+      "official_roster_name_match": true,
+      "parent_id": "framework:province:haut-ogooue:4f53426cfe1a",
+      "parent_name": "Haut-Ogooué",
+      "source_level": "ADM2",
+      "source_license": "CC BY 3.0",
+      "source_role": "Department (geoBoundaries metadata)",
+      "source_vintage": "2018"
+    },
+    {
+      "child_land_share_inside_old_parent": 0.970314954,
+      "classification": "insufficient-evidence",
+      "comparison_parent_source": "geoBoundaries GAB ADM1 2005, CC BY-SA 3.0",
+      "finding": "The 2018 source Department name and province roster entry match, but parent geometry is only screening evidence against a 2005 source ADM1; current legal boundary lineage/completeness is not independently established.",
+      "geometry_method": {
+        "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+        "area_units": "m2",
+        "axis_order": "longitude-latitude",
+        "crs": "EPSG:4326",
+        "distance_method": "WGS84 inverse geodesic",
+        "distance_units": "m",
+        "version": "worldatlas-evidence-geometry-v1"
+      },
+      "id": "gb:GAB:ADM2:22940354B97125723234680",
+      "limits": [
+        "ADM2/ADM1 vintages differ by 13 years",
+        "area overlap does not prove legal parentage or boundaries",
+        "official HTML has no byte-exact retained hash",
+        "the nationwide 49-versus-48 source count is not resolved by this scoped review"
+      ],
+      "name": "Lopè",
+      "official_roster_match_basis": "2018 Gabon Interior Ministry province-to-department listing; normalized name comparison only",
+      "official_roster_name_match": true,
+      "parent_id": "framework:province:ogooue-ivindo:f86169440bd3",
+      "parent_name": "Ogooué-Ivindo",
+      "source_level": "ADM2",
+      "source_license": "CC BY 3.0",
+      "source_role": "Department (geoBoundaries metadata)",
+      "source_vintage": "2018"
+    },
+    {
+      "child_land_share_inside_old_parent": 0.946282614,
+      "classification": "insufficient-evidence",
+      "comparison_parent_source": "geoBoundaries GAB ADM1 2005, CC BY-SA 3.0",
+      "finding": "The 2018 source Department name and province roster entry match, but parent geometry is only screening evidence against a 2005 source ADM1; current legal boundary lineage/completeness is not independently established.",
+      "geometry_method": {
+        "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+        "area_units": "m2",
+        "axis_order": "longitude-latitude",
+        "crs": "EPSG:4326",
+        "distance_method": "WGS84 inverse geodesic",
+        "distance_units": "m",
+        "version": "worldatlas-evidence-geometry-v1"
+      },
+      "id": "gb:GAB:ADM2:22940354B99015789882932",
+      "limits": [
+        "ADM2/ADM1 vintages differ by 13 years",
+        "area overlap does not prove legal parentage or boundaries",
+        "official HTML has no byte-exact retained hash",
+        "the nationwide 49-versus-48 source count is not resolved by this scoped review"
+      ],
+      "name": "Ogoouè-Lètili",
+      "official_roster_match_basis": "2018 Gabon Interior Ministry province-to-department listing; normalized name comparison only",
+      "official_roster_name_match": true,
+      "parent_id": "framework:province:haut-ogooue:4f53426cfe1a",
+      "parent_name": "Haut-Ogooué",
+      "source_level": "ADM2",
+      "source_license": "CC BY 3.0",
+      "source_role": "Department (geoBoundaries metadata)",
+      "source_vintage": "2018"
+    },
+    {
+      "classification": "correction-needed",
+      "finding": "The source's 'Province' display label and the atlas one-child province parent do not represent the official current administrative roles: São Tomé is an island containing six districts, while Príncipe is an autonomous region. A geographic island grouping may still be useful, but its role/tier and same-footprint parent purpose need a sourced engineering decision.",
+      "id": "gb:STP:ADM1:19237168B40253326356618",
+      "limits": [
+        "official primary district-level boundary geometry was not obtained",
+        "two source features do not prove all small-island coverage",
+        "official INE PDF reuse license not identified; exact source hashes and restoration URLs are retained, not the PDFs",
+        "ODbL 1.0 downstream database obligations need review"
+      ],
+      "name": "São Tomé Province",
+      "official_role_context": "INE 2012 describes six districts on São Tomé and one autonomous region (Príncipe); Príncipe autonomous status dates from 1996. INE 2017 treats R.A.P. separately from the six São Tomé districts.",
+      "official_roster_name_match": null,
+      "parent_id": "framework:province:sao-tome-province:4b696869dc61",
+      "parent_name": "São Tomé Province",
+      "source_level": "ADM1",
+      "source_license": "ODbL 1.0",
+      "source_role": "blank canonical role; metadata calls feature a named island-level local administrative territory",
+      "source_vintage": "2017"
+    },
+    {
+      "classification": "correction-needed",
+      "finding": "The source's 'Province' display label and the atlas one-child province parent do not represent the official current administrative roles: São Tomé is an island containing six districts, while Príncipe is an autonomous region. A geographic island grouping may still be useful, but its role/tier and same-footprint parent purpose need a sourced engineering decision.",
+      "id": "gb:STP:ADM1:19237168B82261817076051",
+      "limits": [
+        "official primary district-level boundary geometry was not obtained",
+        "two source features do not prove all small-island coverage",
+        "official INE PDF reuse license not identified; exact source hashes and restoration URLs are retained, not the PDFs",
+        "ODbL 1.0 downstream database obligations need review"
+      ],
+      "name": "Príncipe Province",
+      "official_role_context": "INE 2012 describes six districts on São Tomé and one autonomous region (Príncipe); Príncipe autonomous status dates from 1996. INE 2017 treats R.A.P. separately from the six São Tomé districts.",
+      "official_roster_name_match": null,
+      "parent_id": "framework:province:principe-province:c09206cf27ff",
+      "parent_name": "Príncipe Province",
+      "source_level": "ADM1",
+      "source_license": "ODbL 1.0",
+      "source_role": "blank canonical role; metadata calls feature a named island-level local administrative territory",
+      "source_vintage": "2017"
+    }
+  ],
+  "geometry_helper_version": "worldatlas-evidence-geometry-v1",
+  "geometry_method_limit": "WGS84 land overlap from helper v1; only a cross-vintage screen, not a boundary or completeness conclusion",
+  "issue": 464,
+  "official_source_limits": [
+    "Gabon government pages were inspected through rendered text, not retrieved as original bytes; no original hash is claimed.",
+    "INE PDFs were downloaded for inspection; no PDF bytes are redistributed because license terms were not identified. Their restoration URLs, byte lengths, and exact SHA-256 values are in official-context.json."
+  ],
+  "parent_assessments": [
+    {
+      "classification": "insufficient-evidence",
+      "finding": "The retained Gabon province grouping has source roster support for this scoped department subset, but its comparison ADM1 geometry is from 2005, thirteen years older than the 2018 children. The national 49-versus-48 count discrepancy and official same-vintage boundaries remain unresolved.",
+      "id": "framework:province:haut-ogooue:4f53426cfe1a",
+      "limits": [
+        "subset roster support does not establish full province completeness",
+        "ADM1 reference geometry is 2005 versus ADM2 2018",
+        "official same-vintage boundary crosswalk unavailable",
+        "national source count is 49 versus a separate 2016 official count of 48"
+      ],
+      "name": "Haut-Ogooué",
+      "subjects": [
+        "gb:GAB:ADM2:22940354B11019670045233",
+        "gb:GAB:ADM2:22940354B21912666573849",
+        "gb:GAB:ADM2:22940354B21948278538135",
+        "gb:GAB:ADM2:22940354B21970441224980",
+        "gb:GAB:ADM2:22940354B37639469829308",
+        "gb:GAB:ADM2:22940354B44244492121045",
+        "gb:GAB:ADM2:22940354B60180935649619",
+        "gb:GAB:ADM2:22940354B6249741247917",
+        "gb:GAB:ADM2:22940354B62509297980866",
+        "gb:GAB:ADM2:22940354B94372756375204",
+        "gb:GAB:ADM2:22940354B99015789882932"
+      ]
+    },
+    {
+      "classification": "insufficient-evidence",
+      "finding": "The retained Gabon province grouping has source roster support for this scoped department subset, but its comparison ADM1 geometry is from 2005, thirteen years older than the 2018 children. The national 49-versus-48 count discrepancy and official same-vintage boundaries remain unresolved.",
+      "id": "framework:province:ogooue-ivindo:f86169440bd3",
+      "limits": [
+        "subset roster support does not establish full province completeness",
+        "ADM1 reference geometry is 2005 versus ADM2 2018",
+        "official same-vintage boundary crosswalk unavailable",
+        "national source count is 49 versus a separate 2016 official count of 48"
+      ],
+      "name": "Ogooué-Ivindo",
+      "subjects": [
+        "gb:GAB:ADM2:22940354B15845982668686",
+        "gb:GAB:ADM2:22940354B21315660080276",
+        "gb:GAB:ADM2:22940354B86386728493807",
+        "gb:GAB:ADM2:22940354B97125723234680"
+      ]
+    },
+    {
+      "classification": "insufficient-evidence",
+      "finding": "The retained Gabon province grouping has source roster support for this scoped department subset, but its comparison ADM1 geometry is from 2005, thirteen years older than the 2018 children. The national 49-versus-48 count discrepancy and official same-vintage boundaries remain unresolved.",
+      "id": "framework:province:ogooue-lolo:cbcc0e4ebf91",
+      "limits": [
+        "subset roster support does not establish full province completeness",
+        "ADM1 reference geometry is 2005 versus ADM2 2018",
+        "official same-vintage boundary crosswalk unavailable",
+        "national source count is 49 versus a separate 2016 official count of 48"
+      ],
+      "name": "Ogooué-Lolo",
+      "subjects": [
+        "gb:GAB:ADM2:22940354B13456808053161",
+        "gb:GAB:ADM2:22940354B26580795617541",
+        "gb:GAB:ADM2:22940354B47016566751071",
+        "gb:GAB:ADM2:22940354B50404497002370"
+      ]
+    },
+    {
+      "classification": "correction-needed",
+      "finding": "The one-child province grouping duplicates the named island-level source feature, while INE describes six districts on São Tomé and an autonomous region containing one district on Príncipe. The island grouping may have geographic value, but province-tier purpose and same-footprint duplication need an engineering decision.",
+      "id": "framework:province:principe-province:c09206cf27ff",
+      "limits": [
+        "official current-role context does not establish the grouping's geographic purpose",
+        "no authoritative district/island boundary geometry was obtained",
+        "single-child same-footprint grouping purpose remains unresolved"
+      ],
+      "name": "Príncipe Province",
+      "subjects": [
+        "gb:STP:ADM1:19237168B82261817076051"
+      ]
+    },
+    {
+      "classification": "correction-needed",
+      "finding": "The one-child province grouping duplicates the named island-level source feature, while INE describes six districts on São Tomé and an autonomous region containing one district on Príncipe. The island grouping may have geographic value, but province-tier purpose and same-footprint duplication need an engineering decision.",
+      "id": "framework:province:sao-tome-province:4b696869dc61",
+      "limits": [
+        "official current-role context does not establish the grouping's geographic purpose",
+        "no authoritative district/island boundary geometry was obtained",
+        "single-child same-footprint grouping purpose remains unresolved"
+      ],
+      "name": "São Tomé Province",
+      "subjects": [
+        "gb:STP:ADM1:19237168B40253326356618"
+      ]
+    }
+  ],
+  "source_files": {
+    "sources/gabon-adm1-metadata.json": "9f4e67e94210cadf5a1dc238e8778243a42b781153fddc88279272a6481ea2a7",
+    "sources/gabon-adm1.geojson": "25cc43172c48f975b308847ec16ed7e7c0fe8f99c4c8479bb1fd13a176158312",
+    "sources/gabon-adm2-2018.geojson": "244d4936746c39ffa9c7805a1359df33743e6356ded0c941381f8980e3b3c156",
+    "sources/gabon-adm2-metadata-2018.json": "e142691aab2e85cf331e3db7d2413fd9aff89333b7c957c8601b60073e2740b1",
+    "sources/sao-tome-principe-adm1-2017.geojson": "8f2e653711b0bd533030bc4b9479d696c2535b48be6970ac1f499357b5226368",
+    "sources/sao-tome-principe-adm1-metadata-2017.json": "3e44416284f0211074022c000faeed9d6eec3b7d6b6b6f0113dc44084f8ddeac"
+  },
+  "source_release_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+  "subject_count": 21,
+  "subject_ids_sha256": "eb11560dde25be380235d54c7f8e58c8ceb7e0b0cceabce46920bf64e584b7f3",
+  "unresolved_handoffs": [
+    {
+      "area": "Gabon",
+      "issue": 866,
+      "question": "2018 department-to-province crosswalk against same-vintage official boundaries; resolve Mouloundou/Mulundu and source 49 versus official 48 counts.",
+      "subjects": [
+        "gb:GAB:ADM2:22940354B11019670045233",
+        "gb:GAB:ADM2:22940354B13456808053161",
+        "gb:GAB:ADM2:22940354B15845982668686",
+        "gb:GAB:ADM2:22940354B21315660080276",
+        "gb:GAB:ADM2:22940354B21912666573849",
+        "gb:GAB:ADM2:22940354B21948278538135",
+        "gb:GAB:ADM2:22940354B21970441224980",
+        "gb:GAB:ADM2:22940354B26580795617541",
+        "gb:GAB:ADM2:22940354B37639469829308",
+        "gb:GAB:ADM2:22940354B44244492121045",
+        "gb:GAB:ADM2:22940354B47016566751071",
+        "gb:GAB:ADM2:22940354B50404497002370",
+        "gb:GAB:ADM2:22940354B60180935649619",
+        "gb:GAB:ADM2:22940354B6249741247917",
+        "gb:GAB:ADM2:22940354B62509297980866",
+        "gb:GAB:ADM2:22940354B86386728493807",
+        "gb:GAB:ADM2:22940354B94372756375204",
+        "gb:GAB:ADM2:22940354B97125723234680",
+        "gb:GAB:ADM2:22940354B99015789882932"
+      ],
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/866"
+    },
+    {
+      "area": "São Tomé and Príncipe",
+      "issue": 865,
+      "question": "Find authoritative current island/district boundary geometry and decide whether island-level geographic groupings belong at province tier; verify associated small-island coverage.",
+      "subjects": [
+        "gb:STP:ADM1:19237168B40253326356618",
+        "gb:STP:ADM1:19237168B82261817076051"
+      ],
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/865"
+    }
+  ],
+  "version": 1
+}

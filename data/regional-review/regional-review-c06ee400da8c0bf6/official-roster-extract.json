@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "extraction_type": "worker transcription of named units from cited official sources; not an original source file",
+  "retrieved_utc": "2026-10-05",
+  "source_hash": null,
+  "hash_limit": "Gabon Ministry page HTML could not be retrieved directly from this environment (timeout); the official page was inspected through the web rendering. This transcription is not presented as a hash of the source bytes.",
+  "gabon_ministry_2018": {
+    "url": "https://www.interieur.gouv.ga/decoupage-administratif",
+    "publication_date": "2018-01-06",
+    "units": [
+      {
+        "province": "Haut-Ogooué",
+        "count": 11,
+        "departments": ["Mpassa", "Lébombi Léyou", "Djouori Agnili", "Plateaux", "Lékabi Léwolo", "Lékoni Lékori", "Sébé Brikolo", "Djoué", "Bayi Brikolo", "Ogooué Létili", "Lékoko"]
+      },
+      {
+        "province": "Ogooué-Ivindo",
+        "count": 4,
+        "departments": ["Ivindo", "Zadié", "Mvoung", "Lopé"]
+      },
+      {
+        "province": "Ogooué-Lolo",
+        "count": 4,
+        "departments": ["Lolo Bouénguidi", "Mulundu", "Lombo Bouénguidi", "Offoué Onoyé"]
+      }
+    ],
+    "method": "Name comparison applies Unicode NFKD, casefolding, and punctuation/whitespace removal. This detects accent/hyphen variants but does not establish legal aliases or boundary identity."
+  },
+  "gabon_ministry_territorial_counts": {
+    "url": "https://interieur.gouv.ga/decoupage-territorial/",
+    "publication_date": "2018-01-06",
+    "underlying_source": "DGAT May 2016",
+    "national_counts": {"provinces": 9, "departments": 48},
+    "scoped_parent_counts": {"Haut-Ogooué": 11, "Ogooué-Ivindo": 4, "Ogooué-Lolo": 4},
+    "legal_reference_named": "Law No. 14/96 of 15 April 1996, reorganizing the territory of the Gabonese Republic"
+  }
+}
