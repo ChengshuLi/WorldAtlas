@@ -1,0 +1,26 @@
+{
+  "source_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+  "source_bytes": 1193417,
+  "source_feature_count": 529,
+  "source_unique_ids": 529,
+  "scope_count": 241,
+  "scope_ids_sha256": "63f3030ff6c3903e9578994651bf1a316c689d2568d263ed4813dd7171423ee6",
+  "candidate_status_counts": {
+    "ambiguous-name-no-expected-province-match": 2,
+    "no-normalized-name-or-explicit-alias-match": 1,
+    "unique-name-and-expected-province": 223,
+    "unique-name-other-province": 15
+  },
+  "prior_assessment_counts": {
+    "correction-needed": 36,
+    "insufficient-evidence": 205
+  },
+  "rows_with_unique_expected_province_candidate": 223,
+  "rows_with_no_candidate": 1,
+  "limitations": [
+    "The service describes periodic updates but does not publish a precise data vintage for this response.",
+    "Georef documents IGN as the geometry origin for departments; this is not an independent legal-boundary source.",
+    "A department feature matching name and parent code does not establish inclusion of every offshore/island component, feature completeness, legal limit, or suitability for release.",
+    "This is a names/codes/parent crosswalk; prior geographic classifications are copied verbatim and not upgraded."
+  ]
+}
