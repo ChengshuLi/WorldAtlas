@@ -321,7 +321,7 @@
       "id": "subject-geometry-comparison",
       "kind": "geography",
       "helper_version": "worldatlas-evidence-geometry-v1",
-      "description": "Compare retained Natural Earth source rows to ancestor-main atlas geometries by normalized RFC 7946 geometry object hashes, coordinate counts, bounds and parent chain. EPSG:4326 longitude-latitude coordinates; no boundary suitability inference.",
+      "description": "Compare retained Natural Earth source rows to ancestor-main atlas geometries by canonical JSON object hashes (sorted keys, compact encoding; coordinate/ring order retained), coordinate counts, bounds and parent chain. EPSG:4326 longitude-latitude coordinates; no boundary suitability inference.",
       "software": "Python 3.12; pyshp 2.3.1; Shapely 2.1.2; PyProj 3.7.2; shared geometry.py",
       "units": "coordinate pairs; degrees; SHA-256",
       "axis_order": "longitude-latitude",
