@@ -1,0 +1,11 @@
+# Preserve captured source bytes exactly; receipts contain the original HTTP hashes.
+*.geojson -text -diff
+*.html -text -diff
+*.txt -text -diff
+*.zip binary
+*.lfs-pointer -text -diff
+LICENSE -text -diff
+*.json text eol=lf
+*.csv text eol=lf
+*.md text eol=lf
+*.py text eol=lf

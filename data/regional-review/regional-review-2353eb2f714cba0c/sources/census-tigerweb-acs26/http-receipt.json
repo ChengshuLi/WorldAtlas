@@ -1,0 +1,20 @@
+{
+  "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2026/MapServer/82/query?where=STATE%20IN%20(%2710%27%2C%2711%27%2C%2724%27%2C%2751%27)&outFields=GEOID%2CSTATE%2CCOUNTY%2CCOUNTYNS%2CBASENAME%2CNAME%2CLSADC%2CFUNCSTAT%2CCOUNTYCC%2CAREALAND%2CAREAWATER&returnGeometry=true&outSR=4326&f=geojson",
+  "retrieved_utc": "2026-10-05T13:33:50.648205+00:00",
+  "http_status": 200,
+  "headers": {
+    "Cache-Control": "max-age=0,must-revalidate",
+    "Content-Security-Policy": "script-src 'self';",
+    "Strict-Transport-Security": "max-age=31536000",
+    "X-Content-Type-Options": "nosniff",
+    "Vary": "Origin",
+    "ETag": "\"1784720359\"",
+    "Content-Type": "application/geo+json;charset=UTF-8",
+    "Date": "Mon, 05 Oct 2026 13:33:16 GMT",
+    "Connection": "close",
+    "Set-Cookie": "TS01d8b8de=01283c52a422db1b5d474cf7e928f3a7c15c54ebe9592fe10c1a202d52b0f7796b10d5daab8b0c0d00f73cb0549bfb40af7aa4e2d7; Path=/; Domain=.tigerweb.geo.census.gov; Secure; HttpOnly",
+    "Transfer-Encoding": "chunked"
+  },
+  "bytes": 25579234,
+  "sha256": "e1bddef75112c6839cb4c226f790fe74efbb1a7111a5a74e9ac91299484c409d"
+}

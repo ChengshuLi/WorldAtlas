@@ -1,0 +1,26 @@
+{
+  "positive-control": {
+    "method_id": "source-identity-and-geometry-screen",
+    "kind": "positive-control",
+    "outcome": "passed",
+    "evidence": "160 unique declared Atlas IDs; 161 source IDs mapped one-to-one to Census GEOIDs; Fairfax maps to 51600 and 51059 separately",
+    "fairfax_geoids": [
+      "51059",
+      "51600"
+    ]
+  },
+  "negative-control": {
+    "method_id": "source-identity-and-geometry-screen",
+    "kind": "negative-control",
+    "outcome": "passed",
+    "evidence": "a deliberately duplicated roster is rejected by the uniqueness control; swapped (45,10) axis result differs from expected (10,45) Web Mercator control by over 1,000 km",
+    "expected_xy_m": [
+      1113194.9079,
+      5621521.4862
+    ],
+    "swapped_xy_m": [
+      5009377.0857,
+      1118889.9749
+    ]
+  }
+}
