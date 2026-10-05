@@ -1,0 +1,135 @@
+{
+  "version": 1,
+  "issue": 815,
+  "lane": "engineering",
+  "worker_id": "engineering-geo-ci-main-20261004",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "1702310fec4fcbdc61c60052fb65a12f796f0603",
+    "files": [
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 22347,
+        "sha256": "94bdae4d911b5a6e840c7561003ddc00c4ab5437071ff4c71a1559b9bfa9ebaa",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/check-integration-profile.mjs",
+        "bytes": 709,
+        "sha256": "4450b488715da6af41360ea14997f5aa0641d153011ecbc0ca6f5e556254c213",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/integration-proof.test.mjs",
+        "bytes": 6673,
+        "sha256": "abb055b17c4b3837dc183f6ea3a0c942625c2c98ac418e292ff69cf3186a8697",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/integration-profile.mjs",
+        "bytes": 2279,
+        "sha256": "152d36ba548b95c00a1dc57d1e1c90822ce29d82de4297604f54b7de2a4bbfac",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/issue-claim-contract.mjs",
+        "bytes": 10407,
+        "sha256": "3ea8f8b74b540de23e50cc339eabc868e5b727f2197bfdf5e477a55d7b94df74",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/workflows/merge-integration-checks.yml",
+        "bytes": 3503,
+        "sha256": "7008cf863c34289821742dee2fb03c3d85d67299a728345d19a7c3dd5fce1471",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "bytes": 22692,
+      "sha256": "c884a5a99edb63e927a5c7e8fa5a79cd890f2f031db06cc5ce5c1bc54d83c8af",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/check-integration-profile.mjs",
+      "bytes": 2796,
+      "sha256": "f42347e8e517b4054cb61d8344547ff4ca7a33c9570c59eecf140e84b2708bdd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/integration-proof.test.mjs",
+      "bytes": 11862,
+      "sha256": "6a0f397609ef873ed6b451a6399c30d63c4f65e3bc951d4876cc62ee6f67f82c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/geography-ci-profile-20261004/claim.json",
+      "bytes": 825,
+      "sha256": "ed02b6ffdc9fca8969c72c7c9c13035e3c1a4b6e4faac5821283a911022eb361",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/geography-ci-profile-20261004/validation.txt",
+      "bytes": 864,
+      "sha256": "6484f2b3df3584399197e36c9088e1b2b8e433e34774821f0e824e41a6bb71a3",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "profile-caller-reservation-regression",
+      "kind": "code",
+      "description": "Exercise actual CI caller-to-classifier ownership transfer with paginated read-only API fixtures and positive/negative claim and scope controls. Run actual focused suite with existing test inventory.",
+      "software": "Node24, Git, existing trusted reservation/profile contracts",
+      "units": "profiles, shards, canonical scopes and complete inventories"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/integration-proof.test.mjs test/merge-integration.test.mjs test/issue-claims.test.mjs",
+    "INTEGRATION_PROFILE=evidence INTEGRATION_SHARD=0 node scripts/run-integration-tests.mjs",
+    "git diff --check"
+  ],
+  "change_receipts": [
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "status": "modified",
+      "original_sha256": "94bdae4d911b5a6e840c7561003ddc00c4ab5437071ff4c71a1559b9bfa9ebaa"
+    },
+    {
+      "path": "scripts/check-integration-profile.mjs",
+      "status": "modified",
+      "original_sha256": "4450b488715da6af41360ea14997f5aa0641d153011ecbc0ca6f5e556254c213"
+    },
+    {
+      "path": "test/integration-proof.test.mjs",
+      "status": "modified",
+      "original_sha256": "abb055b17c4b3837dc183f6ea3a0c942625c2c98ac418e292ff69cf3186a8697"
+    },
+    {
+      "path": "coordination/engineering/geography-ci-profile-20261004/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geography-ci-profile-20261004/validation.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geography-ci-profile-20261004/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}

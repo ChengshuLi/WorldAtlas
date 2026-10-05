@@ -98,3 +98,74 @@ test('full proof refuses missing, failed, cancelled or skipped Node installation
     assert.equal(await integrationProof(f.options),null);
   }
 });
+
+// Exercise the actual PR CI caller, not just the pure classifier. Omitting its
+// reservation argument previously forced every geography PR to full regression.
+import {selectIntegrationProfile} from '../scripts/check-integration-profile.mjs';
+function geographyProfileFixture() {
+  const repo = 'owner/repo', prefix = `/repos/${repo}`, now = Date.parse('2026-10-04T20:00:00Z');
+  const branch = 'geography/regional-review-example', owned = 'data/regional-review/regional-review-example/';
+  const claim = {version:1, active:true, issue_number:472, worker_id:'geo-worker',
+    claim_id:'unique-claim', branch, mode:'geography', expires_at:new Date(now + 3600000).toISOString(), owned_paths:[owned]};
+  const spec = {max_prs:2, depends_on:[], mode:'geography', scope:'Inspect exact retained source subjects', owned_paths:[owned]};
+  const issue = {number:472,state:'open',labels:['type:geography','kind:work-item','status:ready'],
+    body:'<!-- worldatlas-work:v1\n'+JSON.stringify(spec)+'\n-->'};
+  const pr = {number:814,state:'open',head:{sha:'a'.repeat(40),ref:branch},base:{repo:{full_name:repo}},body:'Closes #472',changed_files:1};
+  const event = {repository:{full_name:repo},pull_request:structuredClone(pr)};
+  const files = [{filename:owned+'reproduction/findings.json',status:'added'}], calls = [];
+  const comments = () => [{id:1,user:{login:'github-actions[bot]'},body:'**Worker reservation:** claimed\n\n<!-- worldatlas-claim:v1\n'+JSON.stringify(claim)+'\n-->'}];
+  const f = {repo,prefix,now,claim,spec,issue,pr,event,files,calls,comments};
+  f.api = async route => {
+    calls.push(route);
+    if (route === prefix+'/pulls/814') return structuredClone(pr);
+    if (route === prefix+'/pulls/814/files?per_page=100&page=1') return structuredClone(files);
+    if (route === prefix+'/issues/472') return {...structuredClone(issue),body:'<!-- worldatlas-work:v1\n'+JSON.stringify(spec)+'\n-->'};
+    if (route === prefix+'/issues/472/comments?per_page=100&page=1') return f.comments();
+    throw Error('Unexpected API request '+route);
+  };
+  return f;
+}
+const select = f => selectIntegrationProfile({event:f.event,repo:f.repo,api:f.api,now:f.now});
+test('actual PR selector passes verified geography ownership and selects one evidence shard', async()=>{
+  const f=geographyProfileFixture();assert.deepEqual(await select(f),{profile:'evidence',shards:[0]});
+  assert.ok(f.calls.includes(f.prefix+'/issues/472/comments?per_page=100&page=1'));
+});
+for (const [label,change] of [
+  ['missing claim',f=>f.comments=()=>[]],['released claim',f=>f.claim.active=false],
+  ['expired claim',f=>f.claim.expires_at=new Date(f.now).toISOString()],
+  ['wrong branch',f=>f.claim.branch='geography/another'],['wrong issue',f=>f.claim.issue_number=473],
+  ['wrong lane',f=>f.claim.mode='engineering'],['closed issue',f=>f.issue.state='closed'],
+  ['blocked issue',f=>f.issue.labels.push('status:blocked')],
+  ['changed owned scope',f=>f.spec.owned_paths=['research/geography/another/']],
+  ['unsafe prefixes',f=>{f.spec.owned_paths=['data/'];f.claim.owned_paths=['data/'];}],
+  ['stale PR head',f=>f.pr.head.sha='b'.repeat(40)],
+  ['incomplete file list',f=>f.pr.changed_files=2],
+  ['duplicate file inventory',f=>{f.files.push({...f.files[0]});f.pr.changed_files=2;}],
+  ['missing issue reference',f=>f.pr.body='No issue']
+]) test('actual PR selector rejects '+label,async()=>{const f=geographyProfileFixture();change(f);await assert.rejects(()=>select(f));});
+test('actual PR selector defaults full for files and rename origins outside geography scope',async()=>{
+  for(const file of [{filename:'src/attributes.js'},{filename:'data/regional-review/another/findings.json'},
+    {filename:'data/regional-review/regional-review-example/renamed.json',previous_filename:'src/attributes.js'}]){
+    const f=geographyProfileFixture();f.files[0]=file;assert.deepEqual(await select(f),{profile:'full',shards:[0,1,2]});
+  }
+});
+test('geography ownership read paginates canonical comments and changed files',async()=>{
+  const f=geographyProfileFixture(),api=f.api;
+  const rows=Array.from({length:101},(_,i)=>({filename:f.claim.owned_paths[0]+i+'.json'}));f.pr.changed_files=101;
+  f.api=async route=>{
+    if(route.includes('/files?'))return rows.slice(route.endsWith('page=1')?0:100,route.endsWith('page=1')?100:101);
+    if(route.includes('/comments?'))return route.endsWith('page=1')?Array.from({length:100},()=>({user:{login:'untrusted'},body:'No canonical ownership'})):f.comments();
+    return api(route);
+  };
+  assert.deepEqual(await select(f),{profile:'evidence',shards:[0]});
+});
+test('non-geography selectors preserve existing profiles without requesting geography ownership',async()=>{
+  for(const [branch,filename,profile] of [
+    ['engineering/example','docs/WORKER_COORDINATION.md','evidence'],
+    ['engineering/example','src/attributes.js','full'],
+    ['research/example','research/campaigns/example/sources.json','evidence']
+  ]){
+    const f=geographyProfileFixture();f.pr.head.ref=branch;f.event.pull_request.head.ref=branch;f.files[0]={filename};
+    assert.equal((await select(f)).profile,profile);assert.equal(f.calls.some(route=>route.includes('/issues/')),false);
+  }
+});
