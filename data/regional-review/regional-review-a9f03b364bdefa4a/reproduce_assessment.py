@@ -25,8 +25,24 @@ def canonical_ring(points):
         return ()
 
     def rotate_min(values):
-        start = min(range(len(values)), key=lambda i: values[i:] + values[:i])
-        return tuple(values[start:] + values[:start])
+        doubled = values + values
+        size, left, right, offset = len(values), 0, 1, 0
+        while left < size and right < size and offset < size:
+            a, b = doubled[left + offset], doubled[right + offset]
+            if a == b:
+                offset += 1
+                continue
+            if a > b:
+                left += offset + 1
+                if left <= right:
+                    left = right + 1
+            else:
+                right += offset + 1
+                if right <= left:
+                    right = left + 1
+            offset = 0
+        start = min(left, right)
+        return tuple(doubled[start:start + size])
 
     return min(rotate_min(ring), rotate_min(list(reversed(ring))))
 
@@ -53,6 +69,25 @@ def geometry_inventory(geometry):
 
 def main():
     scope = json.loads((PACKET / "scope.json").read_text())
+    expected_world_index = "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+    expected_hierarchy_file = "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+    if sha(DATA / "world-index.json") != expected_world_index or sha(DATA / "hierarchy.json") != expected_hierarchy_file:
+        raise SystemExit("Baseline geography pins changed; do not refresh this packet against a different baseline")
+    if scope["release"]["hierarchy_sha256"] != "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d" or scope["release"]["id"] != "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e":
+        raise SystemExit("Pinned scope release mismatch")
+    manifest = json.loads((PACKET / "sources-manifest.json").read_text())
+    for source in manifest["sources"]:
+        if not source.get("path"):
+            if not source.get("url") or source.get("sha256") is not None:
+                raise SystemExit("A restoration-only source needs a URL and no claimed retained-byte hash")
+            continue
+        source_path = PACKET / source["path"]
+        if sha(source_path) != source["sha256"] or source_path.stat().st_size != source["bytes"]:
+            raise SystemExit("Retained source hash/length mismatch: " + source["path"])
+        if source.get("uncompressed_sha256"):
+            decoded = gzip.decompress(source_path.read_bytes())
+            if hashlib.sha256(decoded).hexdigest() != source["uncompressed_sha256"] or len(decoded) != source["uncompressed_bytes"]:
+                raise SystemExit("Retained uncompressed source hash/length mismatch: " + source["path"])
     index = json.loads((DATA / "world-index.json").read_text())
     units = {u["id"]: u for u in json.loads((DATA / "hierarchy.json").read_text())}
     features = {}
@@ -65,6 +100,8 @@ def main():
 
     aafc_doc = json.loads((PACKET / "sources/aafc-terrestrial-ecoregions-v2.2.geojson").read_text())
     aafc = {str(f["properties"]["ECOREGION_ID"]): f["properties"] for f in aafc_doc["features"]}
+    ecoprov_doc = json.loads((PACKET / "sources/aafc-ecoprovinces-baseline-arcgis-layer0.geojson").read_text())
+    ecoprov = {round(float(f["properties"]["ECOPROVINCE_ID"]), 1): f["properties"] for f in ecoprov_doc["features"]}
     layer_doc = json.loads((PACKET / "sources/aafc-baseline-arcgis-layer0.geojson").read_text())
     layer_groups, v22_groups = {}, {}
     for feature in layer_doc["features"]:
@@ -100,7 +137,40 @@ def main():
             parent = unit.get("parent_id")
         source = metadata.get("source_id")
         source_row = aafc.get(source.rsplit(":", 1)[-1]) if source and source.startswith("aafc:ecoregion:") else None
+        ecoprov_row = ecoprov.get(round(float(source_row["ECOPROVINCE_ID"]), 1)) if source_row else None
         gb_row = gb_by_id.get(metadata.get("original_id")) if source == "gb:GRL:ADM1" else None
+        if source_row:
+            parent_matches = bool(ecoprov_row and units.get(props.get("parent_id"), {}).get("name") == ecoprov_row["ECOPROVINCE_NAME_EN"])
+            assessment = "Location {} ({}) in parent province {}: AAFC ecoregion {} ({}) has source ecoprovince ID {} ({}); the parent name {} the official ecoprovince name. This supports the child's ecological lineage, while this jurisdiction-assigned portion's exact territorial clipping, island completeness and local granularity remain unverified (follow-up #887).".format(
+                location_id, props.get("reference_owner"), props.get("parent_id"),
+                source_row["ECOREGION_ID"], source_row["ECOREGION_NAME_EN"], source_row["ECOPROVINCE_ID"],
+                ecoprov_row["ECOPROVINCE_NAME_EN"] if ecoprov_row else "unresolved ecoprovince name",
+                "matches" if parent_matches else "does not match",
+            )
+        elif gb_row:
+            source_inventory = geometry_inventory(gb_row["geometry"])
+            atlas_inventory = geometry_inventory(feature["geometry"])
+            assessment = "Greenland location {} ({}) from source {} names {}; the source/atlas component counts are {}/{} and vertex counts are {}/{}. Names {}. Boundary generalization, municipality/park role and physical-tier fit remain unverified (follow-up #888).".format(
+                location_id, props.get("reference_owner"), source or "missing", props.get("name"), source_inventory["component_count"], atlas_inventory["component_count"],
+                source_inventory["vertex_count"], atlas_inventory["vertex_count"],
+                "match" if props.get("name") == gb_row["properties"]["shapeName"] else "differ",
+            )
+        else:
+            assessment = "Greenland location {} ({}) named {} cites RESOLVE source {}; its retained item metadata describes physical ecoregions but the item extent ends at 70 degrees north. This specific portion's source geometry, class meaning and completeness cannot be checked from that item snapshot (follow-up #888).".format(
+                location_id, props.get("reference_owner"), props.get("name"), source
+            )
+        review_flags = []
+        inventory = geometry_inventory(feature["geometry"]) if feature.get("geometry") else None
+        if inventory and inventory["component_count"] > 1:
+            review_flags.append("{} disconnected geometry components require source-level island/fragment review".format(inventory["component_count"]))
+        if inventory and inventory["hole_ring_count"]:
+            review_flags.append("{} interior rings require a source-backed explanation".format(inventory["hole_ring_count"]))
+        if source_row:
+            related = [other for other in scope["member_location_ids"] if features[other][0]["properties"].get("metadata", {}).get("source_id") == source]
+            if len(related) > 1:
+                review_flags.append("source ecoregion {} is represented by {} jurisdiction/area-specific atlas pieces; split and neighboring-scale correctness are unverified".format(source_row["ECOREGION_ID"], len(related)))
+        if not metadata.get("hierarchy_overlap"):
+            review_flags.append("no numeric source-to-parent overlap claim is retained on this location")
         geometry_bytes = json.dumps(feature.get("geometry"), sort_keys=True, separators=(",", ":")).encode()
         rows.append({
             "id": location_id,
@@ -108,6 +178,7 @@ def main():
             "reference_owner": props.get("reference_owner"),
             "geometry_type": feature.get("geometry", {}).get("type"),
             "geometry_inventory": geometry_inventory(feature["geometry"]) if feature.get("geometry") else None,
+            "review_flags": review_flags,
             "geometry_sha256": hashlib.sha256(geometry_bytes).hexdigest(),
             "baseline_part": part,
             "baseline_part_sha256": part_hashes[part],
@@ -131,10 +202,12 @@ def main():
             "aafc_current_name_en": source_row.get("ECOREGION_NAME_EN") if source_row else None,
             "aafc_ecozone_id": source_row.get("ECOZONE_ID") if source_row else None,
             "aafc_ecoprovince_id": source_row.get("ECOPROVINCE_ID") if source_row else None,
+            "aafc_ecoprovince_name_en": ecoprov_row.get("ECOPROVINCE_NAME_EN") if ecoprov_row else None,
+            "parent_name_matches_official_ecoprovince": props.get("parent_id") and units.get(props.get("parent_id"), {}).get("name") == ecoprov_row.get("ECOPROVINCE_NAME_EN") if ecoprov_row else None,
             "aafc_current_source_feature_present": bool(source_row),
             "classification": "insufficient-evidence",
             "source_identity_finding": "supported" if source else "missing source identity",
-            "assessment": "source lineage identified; boundary, completeness, named-subdivision semantics, and neighboring granularity remain unverified",
+            "assessment": assessment,
             "confidence": "insufficient evidence for geographic correctness",
         })
 
@@ -157,14 +230,34 @@ def main():
             if parent.get("type") == "province" or ":province:" in parent["id"]:
                 province_members.setdefault(parent["id"], {"name": parent["name"], "location_ids": []})["location_ids"].append(row["id"])
                 break
-    province_assessment = [{
-        "id": unit_id,
-        "name": entry["name"],
-        "scoped_location_count": len(entry["location_ids"]),
-        "location_ids": sorted(entry["location_ids"]),
-        "classification": "insufficient-evidence",
-        "finding": "The parent label is traceable in the pinned hierarchy; its geographic definition, boundary, completeness, distinctness from neighboring provinces, and suitability beneath the area require source-level review.",
-    } for unit_id, entry in sorted(province_members.items())]
+    province_assessment = []
+    for unit_id, entry in sorted(province_members.items()):
+        unit = units[unit_id]
+        member_rows = [row for row in rows if row["id"] in entry["location_ids"]]
+        aa_ids = sorted({str(row["source_id"].rsplit(":", 1)[-1]) for row in member_rows if row["source_id"].startswith("aafc:")}, key=lambda x: int(x))
+        aa_names = sorted({row["aafc_ecoprovince_name_en"] for row in member_rows if row["aafc_ecoprovince_name_en"]})
+        aa_ep_ids = sorted({str(round(float(row["aafc_ecoprovince_id"]), 1)) for row in member_rows if row["aafc_ecoprovince_id"] is not None})
+        source_ids = sorted({row["source_id"] for row in member_rows})
+        if aa_names:
+            matching = aa_names == [unit["name"]]
+            finding = "Province {} ({}), children {}: the {} assigned AAFC ecoregion IDs {} map to official ecoprovince ID(s) {} and name(s) {}. The parent label {} the official source name, supporting source identity and tier naming; exact parent geometry containment, completeness and territory clipping remain unverified (follow-up #887).".format(
+                unit_id, unit["name"], ", ".join(sorted(entry["location_ids"])), len(aa_ids), ", ".join(aa_ids), ", ".join(aa_ep_ids), ", ".join(aa_names), "matches" if matching else "does not match"
+            )
+        else:
+            grl_names = sorted({row["geoBoundaries_source_name"] for row in member_rows if row["geoBoundaries_source_name"]})
+            grl_sources = sorted({row["source_id"] for row in member_rows})
+            finding = "Province {} ({}), children {}: the {} scoped locations trace to Greenland source identities {}; matching retained geoBoundaries names are {}. This supports the named-source relationship for the listed children, but source/atlas boundary transformation, whether the group is administrative versus physical, and complete coverage require further review (follow-up #888).".format(
+                unit_id, unit["name"], ", ".join(sorted(entry["location_ids"])), len(member_rows), ", ".join(grl_sources), ", ".join(grl_names) if grl_names else "none directly represented"
+            )
+        province_assessment.append({
+            "id": unit_id, "name": unit["name"], "parent_area_id": unit.get("parent_id"),
+            "basis": unit.get("metadata", {}).get("basis"), "framework_status": unit.get("metadata", {}).get("framework_status"),
+            "source": unit.get("metadata", {}).get("source"), "scoped_location_count": len(entry["location_ids"]),
+            "location_ids": sorted(entry["location_ids"]), "source_ids": source_ids,
+            "aafc_ecoregion_ids": aa_ids, "official_ecoprovince_names": aa_names,
+            "official_ecoprovince_ids": aa_ep_ids,
+            "classification": "insufficient-evidence", "finding": finding,
+        })
     area_assessment = [{
         "id": area["id"], "name": area["name"],
         "owned_scope_count": area["owned_member_location_count"],
