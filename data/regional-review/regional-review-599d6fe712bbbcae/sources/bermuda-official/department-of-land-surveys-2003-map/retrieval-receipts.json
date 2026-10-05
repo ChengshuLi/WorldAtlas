@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "records": [
+    {
+      "source_id": "bermuda-official-lands-surveys-basemap-2012",
+      "requested_url": "https://tiles.arcgis.com/tiles/YFNj7IqppWGZsn5o/arcgis/rest/services/basemap_2012/MapServer?f=pjson",
+      "final_url": "https://tiles.arcgis.com/tiles/YFNj7IqppWGZsn5o/arcgis/rest/services/basemap_2012/MapServer?f=pjson",
+      "retrieved_utc": "2026-10-05T15:00:33.893643+00:00",
+      "http_status": 200,
+      "content_type": "application/json;charset=utf-8",
+      "bytes": 10631,
+      "sha256": "63225b36fe0c9d888abeb74c0bf68ef23f4bc1020fdcbed7c68a31e2e50d7d17",
+      "retained": true,
+      "retained_path": "bermuda-official/department-of-land-surveys-2003-map/map-service-metadata.json",
+      "scope": "service/layer metadata only; no feature queries, tiles or geometry downloaded",
+      "reuse_terms": "Copyright metadata identifies Bermuda Department of Land Surveys and conversion by Kevin Mayall, Locus Ltd.; no geometry reuse license established. Retain metadata as source-discovery evidence only."
+    },
+    {
+      "source_id": "bermuda-official-lands-surveys-basemap-2012-layer-list",
+      "requested_url": "https://tiles.arcgis.com/tiles/YFNj7IqppWGZsn5o/arcgis/rest/services/basemap_2012/MapServer/layers?f=pjson",
+      "final_url": "https://tiles.arcgis.com/tiles/YFNj7IqppWGZsn5o/arcgis/rest/services/basemap_2012/MapServer/layers?f=pjson",
+      "retrieved_utc": "2026-10-05T15:00:34.398659+00:00",
+      "http_status": 200,
+      "content_type": "application/json;charset=utf-8",
+      "bytes": 167870,
+      "sha256": "befa30037f9ca175f6bbad6ea2eca0359f82c0f6d09d6a8248b6917af8fc05e4",
+      "retained": true,
+      "retained_path": "bermuda-official/department-of-land-surveys-2003-map/map-service-layer-list-metadata.json",
+      "scope": "service/layer metadata only; no feature queries, tiles or geometry downloaded",
+      "reuse_terms": "Copyright metadata identifies Bermuda Department of Land Surveys and conversion by Kevin Mayall, Locus Ltd.; no geometry reuse license established. Retain metadata as source-discovery evidence only."
+    }
+  ]
+}

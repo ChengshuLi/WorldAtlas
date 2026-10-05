@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "records": [
+    {
+      "source_id": "tigerweb-acs26-states-layer-80-metadata",
+      "requested_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2026/MapServer/80?f=pjson",
+      "final_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2026/MapServer/80?f=pjson",
+      "retrieved_utc": "2026-10-05T14:58:11.120824+00:00",
+      "http_status": 200,
+      "content_type": "text/plain;charset=UTF-8",
+      "bytes": 7708,
+      "sha256": "f995e30536d4c49fa5426255b2eccb48702b72ae9b27d1a83b8e7ff3325429c4",
+      "retained": true,
+      "retained_path": "census-tigerweb-acs26/states-layer-80-metadata.json",
+      "reuse_terms": "U.S. Census Bureau public service metadata; public domain."
+    },
+    {
+      "source_id": "tigerweb-acs26-state-01",
+      "requested_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2026/MapServer/80/query?where=STATE%20%3D%20%2701%27&outFields=GEOID%2CSTATE%2CSTATENS%2CBASENAME%2CNAME%2CLSADC%2CFUNCSTAT%2CAREALAND%2CAREAWATER&returnGeometry=true&outSR=4326&f=geojson",
+      "final_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2026/MapServer/80/query?where=STATE%20%3D%20%2701%27&outFields=GEOID%2CSTATE%2CSTATENS%2CBASENAME%2CNAME%2CLSADC%2CFUNCSTAT%2CAREALAND%2CAREAWATER&returnGeometry=true&outSR=4326&f=geojson",
+      "retrieved_utc": "2026-10-05T14:58:13.052279+00:00",
+      "http_status": 200,
+      "content_type": "application/geo+json;charset=UTF-8",
+      "bytes": 556688,
+      "sha256": "ae175e36ca908c1e3bf4a7ac95059f071fa6a803b9608213b89c26aa2fb505c6",
+      "retained": true,
+      "feature_count": 1,
+      "retained_path": "census-tigerweb-acs26/states-state-01.geojson",
+      "reuse_terms": "U.S. Census Bureau federal work and public service response; public domain. TIGERweb ACS26 States layer, 2026-01-01 vintage."
+    },
+    {
+      "source_id": "tigerweb-acs26-state-28",
+      "requested_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2026/MapServer/80/query?where=STATE%20%3D%20%2728%27&outFields=GEOID%2CSTATE%2CSTATENS%2CBASENAME%2CNAME%2CLSADC%2CFUNCSTAT%2CAREALAND%2CAREAWATER&returnGeometry=true&outSR=4326&f=geojson",
+      "final_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2026/MapServer/80/query?where=STATE%20%3D%20%2728%27&outFields=GEOID%2CSTATE%2CSTATENS%2CBASENAME%2CNAME%2CLSADC%2CFUNCSTAT%2CAREALAND%2CAREAWATER&returnGeometry=true&outSR=4326&f=geojson",
+      "retrieved_utc": "2026-10-05T14:58:15.572705+00:00",
+      "http_status": 200,
+      "content_type": "application/geo+json;charset=UTF-8",
+      "bytes": 1049179,
+      "sha256": "93489b6ab2d19953a742b70a21781a106db226a2d4da3806be8f6bda05385a97",
+      "retained": true,
+      "feature_count": 1,
+      "retained_path": "census-tigerweb-acs26/states-state-28.geojson",
+      "reuse_terms": "U.S. Census Bureau federal work and public service response; public domain. TIGERweb ACS26 States layer, 2026-01-01 vintage."
+    },
+    {
+      "source_id": "tigerweb-acs26-state-47",
+      "requested_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2026/MapServer/80/query?where=STATE%20%3D%20%2747%27&outFields=GEOID%2CSTATE%2CSTATENS%2CBASENAME%2CNAME%2CLSADC%2CFUNCSTAT%2CAREALAND%2CAREAWATER&returnGeometry=true&outSR=4326&f=geojson",
+      "final_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2026/MapServer/80/query?where=STATE%20%3D%20%2747%27&outFields=GEOID%2CSTATE%2CSTATENS%2CBASENAME%2CNAME%2CLSADC%2CFUNCSTAT%2CAREALAND%2CAREAWATER&returnGeometry=true&outSR=4326&f=geojson",
+      "retrieved_utc": "2026-10-05T14:58:18.052146+00:00",
+      "http_status": 200,
+      "content_type": "application/geo+json;charset=UTF-8",
+      "bytes": 1178497,
+      "sha256": "d53e45db344b51f538862d556af6458395b19367444288178644ae4ff1ba4d34",
+      "retained": true,
+      "feature_count": 1,
+      "retained_path": "census-tigerweb-acs26/states-state-47.geojson",
+      "reuse_terms": "U.S. Census Bureau federal work and public service response; public domain. TIGERweb ACS26 States layer, 2026-01-01 vintage."
+    }
+  ]
+}

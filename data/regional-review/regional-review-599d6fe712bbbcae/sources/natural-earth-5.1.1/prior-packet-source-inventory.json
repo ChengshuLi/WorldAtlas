@@ -1,0 +1,86 @@
+{
+  "generated_by": "build_review.py",
+  "scope_count": 226,
+  "pinned_issue_member_location_ids_sha256": "fa5d537c9e9fe645e3a601f6a995bfd7e1d7cbf0a3d5135b066e529384cc4db1",
+  "local_ordered_id_json_sha256": "6e35ca3991bb74a9583dd246e6e38e647e53c3b9ac784c5f6e0a32bbe4f273ff",
+  "macro_release": {
+    "id": "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+    "version": 5,
+    "hierarchy_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+    "footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286"
+  },
+  "frozen_region_geometry_sha256": "505db3089243e5bcd2ba2ea86099d9e993186cf9cad18b0030bfd098252e4f86",
+  "frozen_region_member_ids_sha256": "c192f338b815c029ea0c8338cbf153686a11bfd5e102d733272417f290ae85eb",
+  "macro_certificate_sha256": "979afaf22e10dc936ecfe80a8cd288b2ef33d8c7bf509aba9fae4255e3d94d6e",
+  "source_profiles": [
+    {
+      "source_id": "gb:CYP:ADM1",
+      "feature_count": 6,
+      "pinned_metadata_count": 6,
+      "count_matches": true,
+      "year": "2017",
+      "canonical_role": "",
+      "source": "OpenStreetMap, Wambacher",
+      "license": "Open Data Commons Open Database License 1.0",
+      "license_detail": "Open Data Commons Open Database License 1.0",
+      "license_source": "https//www.openstreetmap.org/copyright",
+      "build_date": "Dec 12, 2023",
+      "data_update": "Thu Jan 19 07:31:04 2023",
+      "retrieval_utc": "2026-10-04",
+      "release_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "geojson_gzip_sha256": "76d4aa0aae8ae3b3d6269c30f38f7e2e33c8294d1f3e11d265714d0b638d6be9",
+      "metadata_sha256": "bd5c369611b2925340d63785536b0a4123235e06877d58c9afd24d908cd80f6a",
+      "metadata_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/CYP/ADM1/geoBoundaries-CYP-ADM1.metaData.json"
+    },
+    {
+      "source_id": "gb:GRC:ADM3",
+      "feature_count": 326,
+      "pinned_metadata_count": 326,
+      "count_matches": true,
+      "year": "2010",
+      "canonical_role": "municipality",
+      "source": "geoBoundaries, Wikimedia Commons",
+      "license": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+      "license_detail": "source 2 and 3-Creative Commons Attribution 3.0 License",
+      "license_source": "https//commons.wikimedia.org/wiki/File",
+      "build_date": "Dec 12, 2023",
+      "data_update": "Fri Feb 10 14:46:07 2023",
+      "retrieval_utc": "2026-10-04",
+      "release_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "geojson_gzip_sha256": "c0c518f1b87a09b52776accff437a4aae5c82061cc0127342305f777b56ac7b2",
+      "metadata_sha256": "0c0956d301dd1e04cb2586e27237e91d4509c9ecdb3471210989315cda013d2d",
+      "metadata_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/GRC/ADM3/geoBoundaries-GRC-ADM3.metaData.json"
+    },
+    {
+      "source_id": "gb:TUR:ADM2",
+      "feature_count": 973,
+      "pinned_metadata_count": 999,
+      "count_matches": false,
+      "year": "2021",
+      "canonical_role": "Districts",
+      "source": "OpenStreetMap, OSM Boundaries",
+      "license": "Open Data Commons Open Database License 1.0",
+      "license_detail": "",
+      "license_source": "https//www.openstreetmap.org/copyright",
+      "build_date": "Dec 12, 2023",
+      "data_update": "Thu Jan 19 07:31:04 2023",
+      "retrieval_utc": "2026-10-04",
+      "release_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "geojson_gzip_sha256": "a88007de2cf14f14e06da390aab8861442c7a8332ef8e70865d78e0d9b549d78",
+      "metadata_sha256": "ace87195676281a6b58bc822a275646b71dbdca42ca4b7445bc928730596fdc7",
+      "metadata_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/TUR/ADM2/geoBoundaries-TUR-ADM2.metaData.json"
+    }
+  ],
+  "classification_summary": {
+    "justified": 0,
+    "correction-needed": 0,
+    "insufficient-evidence": 226
+  },
+  "limits": [
+    "Area uses EPSG:6933 equal-area projection; area screens are not tier approval.",
+    "No settlement census or complete island inventory is supplied by these administrative layers.",
+    "geoBoundaries Turkey ADM2 pinned GeoJSON count differs from its own pinned metadata.",
+    "Greek source role/vintage/license do not establish current island municipality identities.",
+    "For special Natural Earth entries, classification and label are map-unit portrayals rather than legal determinations."
+  ]
+}
