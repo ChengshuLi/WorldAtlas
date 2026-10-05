@@ -1,0 +1,29 @@
+{
+  "script_sha256": "246a603f27f40a1953e6281b8607cfb5a6cecb1edd535504cb93c2093eb30947",
+  "inputs": {
+    "scope": "d5e59efc04a0486851440d7cefd8e449932bb257de9f6b0741594cec3a49a4e9",
+    "source_inventory": "cf52bbca312d39fff17b9a23221ddf2bb28bc0d24c712e4b164b01a347406c62",
+    "adm2": "54379ccc77f6f59dab3569ecc5f9b3850dbed2d65a5f43a034bdf92179f5621b",
+    "adm1": "f25f782a3b6eeece96e4218094380e2d02e2ac560c1eb125f59bd7229a1ca348"
+  },
+  "outputs": {
+    "baseline-unit-inventory.json": "d541c26ff9f2050f5c590ae07d5b4d30327d35b1221dbb092b370c956d3ca3e7",
+    "location-assessments.json": "b08dd668360a79e8da93fca091f31f7087d1169f2a98f98ae3284e397b404e53",
+    "province-assessments.json": "eaa92f149a973a74d9a09ca27f9644b0f6f2d20d8430906edaa479aa35eb5b6d",
+    "source-geometry-screen.json": "5cd54b6833b3ac50700b7b21216b05e63c445b9d66e654ba5ff84297f704776d",
+    "scope-risk-screen.json": "afeaa263936edca65c76c5bcba10f8a311217b702025b6e4e2a14a32029b2c15",
+    "area-assessment.json": "cb6f1bd1130fa538d9be4894537ff2b883a75df7f4b39ef7639b1850a142d82c"
+  },
+  "source_roster_ids": 64,
+  "issue_ids": 64,
+  "province_count": 8,
+  "checks": [
+    "unique 64-ID issue scope",
+    "complete one-to-one scope-to-ADM2 native ID resolution",
+    "unique full ADM1/ADM2 source IDs",
+    "source SHA-256 pins",
+    "all province memberships partition 64 scoped IDs",
+    "negative fabricated ID rejection",
+    "duplicate scope ID rejection"
+  ]
+}
