@@ -1,0 +1,1426 @@
+{
+  "version": 1,
+  "issue": 980,
+  "lane": "geography",
+  "worker_id": "worldatlas-geography-431-20261005-r1-7fca",
+  "owned_path": "data/regional-review/coastal-reference-check-428/",
+  "subject_ids": [
+    "gb:USA:ADM2:52423323B68249799438553",
+    "gb:USA:ADM2:52423323B35006791438696",
+    "gb:USA:ADM2:52423323B58673559392327",
+    "gb:USA:ADM2:52423323B71362647483761",
+    "gb:USA:ADM2:52423323B31615661575159",
+    "gb:USA:ADM2:52423323B40186233786127",
+    "gb:USA:ADM2:52423323B93853380479562",
+    "gb:USA:ADM2:52423323B62158301450735"
+  ],
+  "subject_ids_sha256": "24cd732f4d8f0b7abdab633fef4d0166da778451c209e7a94adf9168a3a215d3",
+  "baseline": {
+    "commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+    "files": [
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geographic-releases/current-manifest.json",
+        "bytes": 206,
+        "sha256": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/macro-foundation/current-membership-inventory.json.gz",
+        "bytes": 2404397,
+        "sha256": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/macro-foundation/review-index.json",
+        "bytes": 2383,
+        "sha256": "31dfd5cbfd8f3def829f655e7ddd855d2d2865e5ac63f9d1a97d1c08782910cf",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/macro-foundation/regional-handoffs.json.gz",
+        "bytes": 71286,
+        "sha256": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/macro-foundation/macro-certificate.json",
+        "bytes": 38959,
+        "sha256": "f50f70fcb0756712ab7a7a388bc8cada093080518f07d3a6f7329758980ea81b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/macro-foundation/approved-boundary-decisions.json",
+        "bytes": 634171,
+        "sha256": "b67d5a3bcf8101cffb089c0262286378a80bb642cd6dde33f7721419227e3f18",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-25.json",
+        "bytes": 4525239,
+        "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-26.json",
+        "bytes": 4608983,
+        "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-27.json",
+        "bytes": 4863162,
+        "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-28.json",
+        "bytes": 6613963,
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-29.json",
+        "bytes": 12932167,
+        "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pin_files": {
+      "data/world-index.json": "data/world-index.json",
+      "data/hierarchy.json": "data/hierarchy.json",
+      "data/geographic-releases/current-manifest.json": "data/geographic-releases/current-manifest.json",
+      "data/administrative-sources.json": "data/administrative-sources.json",
+      "data/macro-foundation/current-membership-inventory.json.gz": "data/macro-foundation/current-membership-inventory.json.gz",
+      "data/macro-foundation/review-index.json": "data/macro-foundation/review-index.json",
+      "data/macro-foundation/regional-handoffs.json.gz": "data/macro-foundation/regional-handoffs.json.gz",
+      "data/macro-foundation/macro-certificate.json": "data/macro-foundation/macro-certificate.json",
+      "data/macro-foundation/approved-boundary-decisions.json": "data/macro-foundation/approved-boundary-decisions.json",
+      "data/geography/part-25.json": "data/geography/part-25.json",
+      "data/geography/part-26.json": "data/geography/part-26.json",
+      "data/geography/part-27.json": "data/geography/part-27.json",
+      "data/geography/part-28.json": "data/geography/part-28.json",
+      "data/geography/part-29.json": "data/geography/part-29.json"
+    },
+    "pins": {
+      "data/world-index.json": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "data/hierarchy.json": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "data/geographic-releases/current-manifest.json": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81",
+      "data/administrative-sources.json": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "data/macro-foundation/current-membership-inventory.json.gz": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+      "data/macro-foundation/review-index.json": "31dfd5cbfd8f3def829f655e7ddd855d2d2865e5ac63f9d1a97d1c08782910cf",
+      "data/macro-foundation/regional-handoffs.json.gz": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
+      "data/macro-foundation/macro-certificate.json": "f50f70fcb0756712ab7a7a388bc8cada093080518f07d3a6f7329758980ea81b",
+      "data/macro-foundation/approved-boundary-decisions.json": "b67d5a3bcf8101cffb089c0262286378a80bb642cd6dde33f7721419227e3f18",
+      "data/geography/part-25.json": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394",
+      "data/geography/part-26.json": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632",
+      "data/geography/part-27.json": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758",
+      "data/geography/part-28.json": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "data/geography/part-29.json": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a"
+    },
+    "subject_files": {
+      "gb:USA:ADM2:52423323B58673559392327": "data/geography/part-26.json",
+      "gb:USA:ADM2:52423323B31615661575159": "data/geography/part-26.json",
+      "gb:USA:ADM2:52423323B93853380479562": "data/geography/part-26.json",
+      "gb:USA:ADM2:52423323B40186233786127": "data/geography/part-26.json",
+      "gb:USA:ADM2:52423323B62158301450735": "data/geography/part-26.json",
+      "gb:USA:ADM2:52423323B68249799438553": "data/geography/part-27.json",
+      "gb:USA:ADM2:52423323B35006791438696": "data/geography/part-27.json",
+      "gb:USA:ADM2:52423323B71362647483761": "data/geography/part-27.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "geoboundaries-usa-adm2-2018",
+      "url": "https://www.geoboundaries.org/api/current/gbOpen/USA/ADM2/",
+      "role": "2018 county polygons / source granularity / declared licensing",
+      "vintage": "2018",
+      "retrieved_at": "2026-10-05T14:21:00Z",
+      "license": {
+        "status": "redistributable",
+        "terms": "Upstream metadata declares Public Domain; preserve attribution and exact upstream restoration instructions."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "limit": "National 2018 admin-shape layer; not a dispositive legal county-line or coastal completeness authority. Source catalog lineage discrepancy is separately owned by #981.",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-528e53393a4376b4/source/geoBoundaries-USA-ADM2.geojson",
+          "bytes": 10500644,
+          "sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "data/regional-review/regional-review-528e53393a4376b4/source/geoBoundaries-USA-ADM2-metaData.json",
+          "bytes": 939,
+          "sha256": "a4d2a82a1cd434960b6ed49531bff3330d0881674eea9dc8711e1ad6bf049b9f",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "data/regional-review/regional-review-528e53393a4376b4/source/geoBoundaries-USA-ADM2.geojson.lfs-pointer",
+          "bytes": 133,
+          "sha256": "bce3f45df8a08d5f2475eaa44717eab79f9f57dababa22378c5d62f5bbabc1dd",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "data/regional-review/regional-review-528e53393a4376b4/source/geoBoundaries-USA-ADM2-metaData.json.lfs-pointer",
+          "bytes": 128,
+          "sha256": "c312a38735f5b437262981afae4ea72f49c6d1608c4aefd7fef4e345de493d21",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "data/regional-review/regional-review-528e53393a4376b4/source/geoBoundaries-restoration.json",
+          "bytes": 1215,
+          "sha256": "79e1152972030b7e581249673ce396aa47168f068b2e39d15b06affe3759b5e9",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "data/regional-review/regional-review-528e53393a4376b4/source/geoBoundaries-commit.json",
+          "bytes": 140,
+          "sha256": "ab4db83f94ab4c34910c9848e8e5b3ed3e0627b6e23f567b7a9260f55b0ccaca",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "data/regional-review/regional-review-528e53393a4376b4/source/authorities/restoration-instructions.md",
+          "bytes": 1214,
+          "sha256": "d49c8e51e94c21202e509ce06e1d56c63519de094bc394138891c1b55bcd3325",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        }
+      ]
+    },
+    {
+      "id": "census-tigerweb-2018",
+      "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2018/MapServer/84",
+      "role": "Georgia/Kentucky county and equivalent statistical geometry, metadata and exact query receipt",
+      "vintage": "January 1, 2018 vintage",
+      "retrieved_at": "2026-10-05T14:21:09.552Z",
+      "license": {
+        "status": "redistributable",
+        "terms": "U.S. federal Census source; public domain with Census citation; see retained parent Census access policy."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "limit": "Statistical/reference geometry, not legal adjudication; 2018 and 2025 TIGER include the same three self-intersecting Georgia reference rings.",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-528e53393a4376b4/source/census-2018/georgia-kentucky-counties.geojson",
+          "bytes": 28167517,
+          "sha256": "aab25c2227638b0048020747f8dd82b019ddd6f26100585c35533c5036cc7219",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "data/regional-review/regional-review-528e53393a4376b4/source/census-2018/counties-layer-metadata.json",
+          "bytes": 9479,
+          "sha256": "2d3b72f3957787cae0f8ae5a77bafd0b9603f8d6a5b4db2a700898e179e855c6",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "data/regional-review/regional-review-528e53393a4376b4/source/census-2018/retrieval.json",
+          "bytes": 1258,
+          "sha256": "6a08fb82346503576ea08d925cf99a3ee965614648c31ad7a7bbfebd5b526fc3",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        }
+      ]
+    },
+    {
+      "id": "census-tigerweb-2025",
+      "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/39",
+      "role": "Georgia/Kentucky county and equivalent statistical geometry, metadata and exact query receipt",
+      "vintage": "January 1, 2025 vintage",
+      "retrieved_at": "2026-10-05T14:21:50.061Z",
+      "license": {
+        "status": "redistributable",
+        "terms": "U.S. federal Census source; public domain with Census citation; see retained parent Census access policy."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "limit": "Statistical/reference geometry, not legal adjudication; 2018 and 2025 TIGER include the same three self-intersecting Georgia reference rings.",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-528e53393a4376b4/source/census-2025/georgia-kentucky-counties.geojson",
+          "bytes": 28996536,
+          "sha256": "e5296a323ee4c38afdf7c54a32e67b77c2e98647a6535cb2464b699fb8740105",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "data/regional-review/regional-review-528e53393a4376b4/source/census-2025/counties-layer-metadata.json",
+          "bytes": 7515,
+          "sha256": "0c64a04e01055622c957ef56f9b8fd35c99c4bcc78c2fa1bba11e716d6a72f31",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "data/regional-review/regional-review-528e53393a4376b4/source/census-2025/retrieval.json",
+          "bytes": 1257,
+          "sha256": "e83f34af5ce7e4c7662e63fa8da85818f070d52a92356a248efe2fb7025f98ef",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        }
+      ]
+    },
+    {
+      "id": "census-tigerweb-current-2026",
+      "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Current/MapServer/82",
+      "role": "Exact eight-county current Census TIGERweb response and layer metadata",
+      "vintage": "Counties (or statistically equivalent entities); January 1, 2026 vintage",
+      "retrieved_at": "2026-10-05T15:32:01.777Z",
+      "license": {
+        "status": "redistributable",
+        "terms": "U.S. federal Census source; public domain with Census citation; retained Census documentation requests statistical-use/no-warranty context when repackaging TIGER/Line."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "limit": "Current TIGERweb statistical reference layer, not legal boundary survey; no guarantee of complete island/coastal convention.",
+      "files": [
+        {
+          "path": "data/regional-review/coastal-reference-check-428/source/census-2026/eight-counties.geojson",
+          "bytes": 873257,
+          "sha256": "c09e62479268b4ee8b986a66768d5dea821b4e667d9d446a78d5304076c2e717",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "data/regional-review/coastal-reference-check-428/source/census-2026/counties-layer-metadata.json",
+          "bytes": 7490,
+          "sha256": "61b0ec3c9b54aa09e202fadc6018b9617cffe4629eee7f602baee3d65336093d",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "data/regional-review/coastal-reference-check-428/source/census-2026/retrieval.json",
+          "bytes": 1667,
+          "sha256": "cd79c623be64ada8940df6b036c20418f8af20ca833553d275bef8b640f10ad0",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        }
+      ]
+    },
+    {
+      "id": "census-georgia-change-notes-2011-2025",
+      "url": "https://www.census.gov/programs-surveys/geography/technical-documentation/boundary-change-notes.html",
+      "role": "Selected Georgia county and subcounty change-note history, completeness caveat",
+      "vintage": "2011\u20132025 notes accessed 2026-10-05",
+      "retrieved_at": "2026-10-05T15:33:02.965Z",
+      "license": {
+        "status": "redistributable",
+        "terms": "U.S. federal Census source; public domain with Census citation."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "limit": "Selected reported changes only; Census warns the notes are not exhaustive and dates do not always identify first affected yearly product.",
+      "files": [
+        {
+          "path": "data/regional-review/coastal-reference-check-428/source/census-change-notes/st13_ga_gcn_2011_2013.txt",
+          "bytes": 4222,
+          "sha256": "fa76664bf500c5fbf7c74811748e023618716512b08697a798f00904436b846a",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "data/regional-review/coastal-reference-check-428/source/census-change-notes/st13_ga_gcn_2014_2020.txt",
+          "bytes": 15788,
+          "sha256": "54b5f7992be4b74b463a2abf329453e6440fadd0e73c83b17633b583f9595d6a",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "data/regional-review/coastal-reference-check-428/source/census-change-notes/st13_ga_gcn_2021.txt",
+          "bytes": 762,
+          "sha256": "472f28ea64ce740501697d5eb75145256459c9b1b53914848837e0e5f0e7e064",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "data/regional-review/coastal-reference-check-428/source/census-change-notes/st13_ga_gcn_2022.txt",
+          "bytes": 757,
+          "sha256": "86d3b3007e2a6dce4ed86970463ea066468336a9ccbb7fd3b64d50c0fcdcf3b0",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "data/regional-review/coastal-reference-check-428/source/census-change-notes/st13_ga_gcn_2023.txt",
+          "bytes": 928,
+          "sha256": "930fa100f46125fbf03e62cf539377b989863e94eba19e483239f69a045c7ca7",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "data/regional-review/coastal-reference-check-428/source/census-change-notes/st13_ga_gcn_2024.txt",
+          "bytes": 385,
+          "sha256": "0bf8af139b584bf9f8b752007cd3903b3bd02bab67823d536338ce78247ef254",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "data/regional-review/coastal-reference-check-428/source/census-change-notes/st13_ga_gcn_2025.txt",
+          "bytes": 769,
+          "sha256": "28d44384df05d098fab1d3c5f984194792a907d760c4f5083b5416cc8c51326b",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "data/regional-review/coastal-reference-check-428/source/census-change-notes/retrieval.json",
+          "bytes": 4181,
+          "sha256": "8e56944dc4c6e46f7656356b0bc45705499f12e8f97b19f100ef086eef4e4dea",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        }
+      ]
+    },
+    {
+      "id": "census-2025-tiger-and-geography-codes-authorities",
+      "url": "https://www2.census.gov/geo/pdfs/maps-data/data/tiger/tgrshp2025/TGRSHP2025_TechDoc.pdf",
+      "role": "Census technical documentation, source limitations, statistical/legal distinction, unit definitions and LSADC tier",
+      "vintage": "2025 documentation / 2026-10-05 retrieval",
+      "retrieved_at": "2026-10-05T15:37:57.073Z",
+      "license": {
+        "status": "redistributable",
+        "terms": "U.S. federal Census source; public domain with Census citation."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "limit": "TIGER/Line documentation describes data concepts and limitations; it does not adjudicate the eight legal Georgia county boundaries.",
+      "files": [
+        {
+          "path": "data/regional-review/coastal-reference-check-428/source/authorities/tiger-line-2025-techdoc.pdf",
+          "bytes": 4598419,
+          "sha256": "21476bdba82fe8072f8994ae59bda484260d1b932c13f31991f6414f8e04d551",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "data/regional-review/coastal-reference-check-428/source/authorities/census-lsad-codes.html.gz",
+          "bytes": 34708,
+          "sha256": "206c90414d8f1ee9f71eb40549a3a5523bd56bf9ac58bdcfa19544fd01628fd0",
+          "hash_kind": "file-bytes",
+          "role": "original-source",
+          "uncompressed_sha256": "fba9fba0d532efda03722e4da41551af421d0a7a4477baca83c57c44ed564ba7",
+          "uncompressed_bytes": 346788
+        },
+        {
+          "path": "data/regional-review/coastal-reference-check-428/source/authorities/census-boundary-change-notes.html.gz",
+          "bytes": 38444,
+          "sha256": "e3660e0c7fa549540d9aa2d92a7d27e43e5e307bd2df31a57ad80e5a30d955d1",
+          "hash_kind": "file-bytes",
+          "role": "original-source",
+          "uncompressed_sha256": "c421e81199bf984435fe6d74eaebeb962ac1f0461e4882ea089ea37172edfab5",
+          "uncompressed_bytes": 380163
+        },
+        {
+          "path": "data/regional-review/coastal-reference-check-428/source/authorities/retrieval.json",
+          "bytes": 2401,
+          "sha256": "68cfd4cf9f3d30cedea39033c80c1dd2a6d59df38fd83417ef7cfa80f46af78e",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        }
+      ]
+    },
+    {
+      "id": "georgia-county-boundary-law-2025",
+      "url": "https://georgiacommons.org/code/36-1-1",
+      "role": "General Georgia county boundary laws and line-change/dispute procedures, \u00a7\u00a736-1-1, 36-1-2, 36-3-1, 36-3-25",
+      "vintage": "Official Code of Georgia Annotated 2025 supplement; section responses accessed 2026-10-05",
+      "retrieved_at": "2026-10-05T15:46:30.855Z",
+      "license": {
+        "status": "unknown",
+        "terms": "CC0 applies to statutory text; original full HTML contains Code annotations whose license is not confirmed. Only public statutory excerpts are retained."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Restore from the four exact URLs and verify against response sizes/SHA-256 in data/regional-review/coastal-reference-check-428/source/georgia-law/retrieval.json; official state Code/session laws are linked by the General Assembly.",
+      "limit": "Third-party transcription of public statutory text, not the official publisher; general framework does not resolve exact present coastal county lines."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/coastal-reference-check-428/REPRODUCTION.md",
+      "bytes": 4285,
+      "sha256": "43362eab945a2a836df8f2250ee3725e818d12b11c733a05da8c71a86f38de42",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/claim.json",
+      "bytes": 596,
+      "sha256": "8ce8e8852e20bc650d422f56de994035076e23606139323c795e1cc185ba5551",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/findings.md",
+      "bytes": 11580,
+      "sha256": "af53020e1d26a068c19e3ed7a05506ca73c34b01bdd8189ddf611cbf3e00844e",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/issue-snapshot.json",
+      "bytes": 5104,
+      "sha256": "8e0a2825091163792b2960265f659a3db5c2c182bee92923ac3a090408c4b186",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/reproduce.py",
+      "bytes": 7292,
+      "sha256": "215935f65f7ab75f42731ae3203e3c40cec24193c6ed90e4c8908d943ce290d6",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "bytes": 23719,
+      "sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/scope.json",
+      "bytes": 800,
+      "sha256": "9a1943f3f3fc2f6bf7b03871006b6e4ad6a26e2fbbf9392ae3c1463e80550483",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/source/fetch-authority.mjs",
+      "bytes": 1886,
+      "sha256": "88df518261cfd74a824a4109eb0a04e16b7ba9fe1bd036f5f120c6b5073e4476",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/source/fetch-change-notes.mjs",
+      "bytes": 2150,
+      "sha256": "7f0417c74fddcc07d4d7acb8b5dcd593c5c17b9d4b8f727d940b683af6d10878",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/source/fetch-eight.mjs",
+      "bytes": 2827,
+      "sha256": "9ad8c8b6458a2dcd62c2f3b9da3a3c7d4261a000e7c3dc03659de8ce123b8683",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/source/fetch-georgia-law.mjs",
+      "bytes": 1201,
+      "sha256": "0d48d80b77a0e82a801340c60489f33e7825cdba4bad97e624d44579802ed988",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/source/georgia-law/restoration-instructions.md",
+      "bytes": 1260,
+      "sha256": "5629adf5a02f7d08dfe5e3bd229f91e1db6f3afda6161809443a5cd2cff5c07c",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/source/georgia-law/retrieval.json",
+      "bytes": 3118,
+      "sha256": "bbd5f34425e9fbf904b9fb9bef2a6669b8a04a7bde811a1242ea85e58bb9bff7",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/source/georgia-law/statutory-excerpts.md",
+      "bytes": 1176,
+      "sha256": "5d85d2f734ab0d2bbd81d4e6727f45c331ef50c417fecb014140278768a89d80",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/runs/positive-control.json",
+      "bytes": 338,
+      "sha256": "dbd213cac843e68602918f702bb2d2851d759aa943fa64b0dd8b2bd28b79637d",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/runs/negative-control.json",
+      "bytes": 449,
+      "sha256": "1bdd6b1c790e9ea10fb262efe191b8fdb19492e2cc1f30e367d89815b7564a1e",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    }
+  ],
+  "methods": [
+    {
+      "id": "census-eight-county-equal-area-screen",
+      "kind": "measurement",
+      "description": "Measure each unchanged original Atlas and TIGER polygon pair with equal-area EPSG:6933 planar overlays. Only temporary in-memory Shapely make_valid clones are used for invalid TIGER comparators; the shared helper v1 lon/lat transform control is recorded separately. This statistical measurement does not establish legal boundaries.",
+      "software": "Python 3.12.14; Shapely 2.1.2; pyproj 3.7.2; NumPy 2.3.5; pyproj Transformer always_xy",
+      "units": "Equal-area IoU dimensionless; projected area km2; 2025 TIGER/Line documentation specifies area attributes in m2, inferred for matching 2026 TIGERweb fields whose layer metadata omits units",
+      "axis_order": "longitude-latitude",
+      "crs": "EPSG:4326 input / EPSG:6933 equal-area calculation",
+      "area_method": "EPSG:6933 equal-area planar polygon overlay for comparative diagnostics; source area attributes retained as published; water convention unresolved",
+      "distance_method": "Not measured"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "Chatham:atlas_to_tiger_2018",
+      "value": 0.770335987,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Chatham:atlas_to_tiger_2025",
+      "value": 0.770335987,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Chatham:atlas_to_tiger_2026",
+      "value": 0.770335987,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Chatham:tiger_2018_to_tiger_2025",
+      "value": 1.0,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Chatham:tiger_2025_to_tiger_2026",
+      "value": 1.0,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Glynn:atlas_to_tiger_2018",
+      "value": 0.787632113,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Glynn:atlas_to_tiger_2025",
+      "value": 0.787636823,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Glynn:atlas_to_tiger_2026",
+      "value": 0.787636823,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Glynn:tiger_2018_to_tiger_2025",
+      "value": 0.999994261,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Glynn:tiger_2025_to_tiger_2026",
+      "value": 1.0,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "McIntosh:atlas_to_tiger_2018",
+      "value": 0.834332645,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "McIntosh:atlas_to_tiger_2025",
+      "value": 0.834334728,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "McIntosh:atlas_to_tiger_2026",
+      "value": 0.834334728,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "McIntosh:tiger_2018_to_tiger_2025",
+      "value": 0.999997495,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "McIntosh:tiger_2025_to_tiger_2026",
+      "value": 1.0,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Camden:atlas_to_tiger_2018",
+      "value": 0.864182534,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Camden:atlas_to_tiger_2025",
+      "value": 0.864182534,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Camden:atlas_to_tiger_2026",
+      "value": 0.864182534,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Camden:tiger_2018_to_tiger_2025",
+      "value": 1.0,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Camden:tiger_2025_to_tiger_2026",
+      "value": 1.0,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Liberty:atlas_to_tiger_2018",
+      "value": 0.883335278,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Liberty:atlas_to_tiger_2025",
+      "value": 0.883319346,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Liberty:atlas_to_tiger_2026",
+      "value": 0.883319346,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Liberty:tiger_2018_to_tiger_2025",
+      "value": 0.99998317,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Liberty:tiger_2025_to_tiger_2026",
+      "value": 1.0,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Schley:atlas_to_tiger_2018",
+      "value": 0.981944596,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Schley:atlas_to_tiger_2025",
+      "value": 0.981944596,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Schley:atlas_to_tiger_2026",
+      "value": 0.981944596,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Schley:tiger_2018_to_tiger_2025",
+      "value": 1.0,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Schley:tiger_2025_to_tiger_2026",
+      "value": 1.0,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Pike:atlas_to_tiger_2018",
+      "value": 0.982322654,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Pike:atlas_to_tiger_2025",
+      "value": 0.982322674,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Pike:atlas_to_tiger_2026",
+      "value": 0.982322674,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Pike:tiger_2018_to_tiger_2025",
+      "value": 0.99999998,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Pike:tiger_2025_to_tiger_2026",
+      "value": 1.0,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Terrell:atlas_to_tiger_2018",
+      "value": 0.988874986,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Terrell:atlas_to_tiger_2025",
+      "value": 0.988874986,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Terrell:atlas_to_tiger_2026",
+      "value": 0.988874986,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Terrell:tiger_2018_to_tiger_2025",
+      "value": 0.999999991,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Terrell:tiger_2025_to_tiger_2026",
+      "value": 1.0,
+      "unit": "equal-area IoU fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Chatham:tiger2026-minus-atlas-share-of-areawater",
+      "value": 0.718162,
+      "unit": "fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Glynn:tiger2026-minus-atlas-share-of-areawater",
+      "value": 0.726641,
+      "unit": "fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "McIntosh:tiger2026-minus-atlas-share-of-areawater",
+      "value": 0.655579,
+      "unit": "fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Camden:tiger2026-minus-atlas-share-of-areawater",
+      "value": 0.675648,
+      "unit": "fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    },
+    {
+      "id": "Liberty:tiger2026-minus-atlas-share-of-areawater",
+      "value": 0.769853,
+      "unit": "fraction",
+      "vintage": "baseline",
+      "evaluation_commit": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+      "input_sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "Chatham:atlas_to_tiger_2026",
+      "unit": "equal-area IoU fraction",
+      "value": 0.770335987
+    },
+    {
+      "metric_id": "Schley:atlas_to_tiger_2026",
+      "unit": "equal-area IoU fraction",
+      "value": 0.981944596
+    },
+    {
+      "metric_id": "Pike:atlas_to_tiger_2026",
+      "unit": "equal-area IoU fraction",
+      "value": 0.982322674
+    },
+    {
+      "metric_id": "Terrell:atlas_to_tiger_2026",
+      "unit": "equal-area IoU fraction",
+      "value": 0.988874986
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "Eight GEOIDs each map one-to-one to the eight scoped Atlas ADM2 records, Census STATE 13, expected names and stable Georgia parent; 2026 County/Eq. LSADC 06 and FUNCSTAT A support identity and tier only.",
+      "status": "supported",
+      "source_ids": [
+        "census-tigerweb-current-2026",
+        "census-2025-tiger-and-geography-codes-authorities",
+        "geoboundaries-usa-adm2-2018"
+      ]
+    },
+    {
+      "text": "Coastal five Atlas/Census IoU gaps are stable from 2018 through 2026 and projected excess area is a substantial fraction of Census AREAWATER, consistent with water-extent convention differences; exact territorial boundary and shoreline completeness remain unresolved.",
+      "status": "unresolved",
+      "source_ids": [
+        "census-tigerweb-2018",
+        "census-tigerweb-2025",
+        "census-tigerweb-current-2026",
+        "census-2025-tiger-and-geography-codes-authorities"
+      ]
+    },
+    {
+      "text": "Schley, Pike, and Terrell original Census references are invalid self-intersecting rings in 2018, 2025, and 2026; Atlas geometries are valid. This diagnoses the comparator, not Atlas correctness.",
+      "status": "supported",
+      "source_ids": [
+        "census-tigerweb-2018",
+        "census-tigerweb-2025",
+        "census-tigerweb-current-2026"
+      ]
+    },
+    {
+      "text": "No scoped county entity appears in the retained selected Georgia change notes; this absence does not prove no legal or shoreline change because Census notes are selected and non-exhaustive.",
+      "status": "unresolved",
+      "source_ids": [
+        "census-georgia-change-notes-2011-2025"
+      ]
+    },
+    {
+      "text": "No engineering geometry correction can be substantiated without a legal Georgia county boundary source that defines offshore water/island treatment and a valid reference for the three invalid comparator rows.",
+      "status": "unresolved",
+      "source_ids": [
+        "census-2025-tiger-and-geography-codes-authorities",
+        "census-tigerweb-current-2026",
+        "geoboundaries-usa-adm2-2018"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3.12 -m venv .venv-geography",
+    "./.venv-geography/bin/python -m pip install -r data/regional-review/regional-review-528e53393a4376b4/source/reproduction-requirements.txt",
+    "./.venv-geography/bin/python data/regional-review/coastal-reference-check-428/reproduce.py",
+    "node scripts/evidence-quality.mjs data/regional-review/coastal-reference-check-428/evidence-quality.json"
+  ],
+  "change_receipts": [
+    {
+      "path": "data/regional-review/coastal-reference-check-428/REPRODUCTION.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/findings.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/issue-snapshot.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/reproduce.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/scope.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/source/authorities/census-boundary-change-notes.html.gz",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/source/authorities/census-lsad-codes.html.gz",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/source/authorities/retrieval.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/source/authorities/tiger-line-2025-techdoc.pdf",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/source/census-2026/counties-layer-metadata.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/source/census-2026/eight-counties.geojson",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/source/census-2026/retrieval.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/source/census-change-notes/retrieval.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/source/census-change-notes/st13_ga_gcn_2011_2013.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/source/census-change-notes/st13_ga_gcn_2014_2020.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/source/census-change-notes/st13_ga_gcn_2021.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/source/census-change-notes/st13_ga_gcn_2022.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/source/census-change-notes/st13_ga_gcn_2023.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/source/census-change-notes/st13_ga_gcn_2024.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/source/census-change-notes/st13_ga_gcn_2025.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/source/fetch-authority.mjs",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/source/fetch-change-notes.mjs",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/source/fetch-eight.mjs",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/source/fetch-georgia-law.mjs",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/source/georgia-law/restoration-instructions.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/source/georgia-law/retrieval.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/source/georgia-law/statutory-excerpts.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/runs/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-check-428/runs/negative-control.json",
+      "status": "added"
+    }
+  ],
+  "validation": [
+    {
+      "evidence_path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "kind": "measurement",
+      "method_id": "census-eight-county-equal-area-screen",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/coastal-reference-check-428/source/census-2026/retrieval.json",
+      "kind": "source",
+      "method_id": "exact-eight-geoid-and-service-vintage-check",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/coastal-reference-check-428/source/census-change-notes/retrieval.json",
+      "kind": "source",
+      "method_id": "all-retained-georgia-change-notes-hashed",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/coastal-reference-check-428/runs/positive-control.json",
+      "kind": "positive-control",
+      "method_id": "census-eight-county-equal-area-screen",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/coastal-reference-check-428/runs/negative-control.json",
+      "kind": "negative-control",
+      "method_id": "census-eight-county-equal-area-screen",
+      "outcome": "passed"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "Chatham:atlas_to_tiger_2018",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/0/iou/atlas_to_tiger_2018"
+    },
+    {
+      "metric_id": "Chatham:atlas_to_tiger_2025",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/0/iou/atlas_to_tiger_2025"
+    },
+    {
+      "metric_id": "Chatham:atlas_to_tiger_2026",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/0/iou/atlas_to_tiger_2026"
+    },
+    {
+      "metric_id": "Chatham:tiger_2018_to_tiger_2025",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/0/iou/tiger_2018_to_tiger_2025"
+    },
+    {
+      "metric_id": "Chatham:tiger_2025_to_tiger_2026",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/0/iou/tiger_2025_to_tiger_2026"
+    },
+    {
+      "metric_id": "Glynn:atlas_to_tiger_2018",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/1/iou/atlas_to_tiger_2018"
+    },
+    {
+      "metric_id": "Glynn:atlas_to_tiger_2025",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/1/iou/atlas_to_tiger_2025"
+    },
+    {
+      "metric_id": "Glynn:atlas_to_tiger_2026",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/1/iou/atlas_to_tiger_2026"
+    },
+    {
+      "metric_id": "Glynn:tiger_2018_to_tiger_2025",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/1/iou/tiger_2018_to_tiger_2025"
+    },
+    {
+      "metric_id": "Glynn:tiger_2025_to_tiger_2026",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/1/iou/tiger_2025_to_tiger_2026"
+    },
+    {
+      "metric_id": "McIntosh:atlas_to_tiger_2018",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/2/iou/atlas_to_tiger_2018"
+    },
+    {
+      "metric_id": "McIntosh:atlas_to_tiger_2025",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/2/iou/atlas_to_tiger_2025"
+    },
+    {
+      "metric_id": "McIntosh:atlas_to_tiger_2026",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/2/iou/atlas_to_tiger_2026"
+    },
+    {
+      "metric_id": "McIntosh:tiger_2018_to_tiger_2025",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/2/iou/tiger_2018_to_tiger_2025"
+    },
+    {
+      "metric_id": "McIntosh:tiger_2025_to_tiger_2026",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/2/iou/tiger_2025_to_tiger_2026"
+    },
+    {
+      "metric_id": "Camden:atlas_to_tiger_2018",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/3/iou/atlas_to_tiger_2018"
+    },
+    {
+      "metric_id": "Camden:atlas_to_tiger_2025",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/3/iou/atlas_to_tiger_2025"
+    },
+    {
+      "metric_id": "Camden:atlas_to_tiger_2026",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/3/iou/atlas_to_tiger_2026"
+    },
+    {
+      "metric_id": "Camden:tiger_2018_to_tiger_2025",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/3/iou/tiger_2018_to_tiger_2025"
+    },
+    {
+      "metric_id": "Camden:tiger_2025_to_tiger_2026",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/3/iou/tiger_2025_to_tiger_2026"
+    },
+    {
+      "metric_id": "Liberty:atlas_to_tiger_2018",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/4/iou/atlas_to_tiger_2018"
+    },
+    {
+      "metric_id": "Liberty:atlas_to_tiger_2025",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/4/iou/atlas_to_tiger_2025"
+    },
+    {
+      "metric_id": "Liberty:atlas_to_tiger_2026",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/4/iou/atlas_to_tiger_2026"
+    },
+    {
+      "metric_id": "Liberty:tiger_2018_to_tiger_2025",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/4/iou/tiger_2018_to_tiger_2025"
+    },
+    {
+      "metric_id": "Liberty:tiger_2025_to_tiger_2026",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/4/iou/tiger_2025_to_tiger_2026"
+    },
+    {
+      "metric_id": "Schley:atlas_to_tiger_2018",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/5/iou/atlas_to_tiger_2018"
+    },
+    {
+      "metric_id": "Schley:atlas_to_tiger_2025",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/5/iou/atlas_to_tiger_2025"
+    },
+    {
+      "metric_id": "Schley:atlas_to_tiger_2026",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/5/iou/atlas_to_tiger_2026"
+    },
+    {
+      "metric_id": "Schley:tiger_2018_to_tiger_2025",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/5/iou/tiger_2018_to_tiger_2025"
+    },
+    {
+      "metric_id": "Schley:tiger_2025_to_tiger_2026",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/5/iou/tiger_2025_to_tiger_2026"
+    },
+    {
+      "metric_id": "Pike:atlas_to_tiger_2018",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/6/iou/atlas_to_tiger_2018"
+    },
+    {
+      "metric_id": "Pike:atlas_to_tiger_2025",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/6/iou/atlas_to_tiger_2025"
+    },
+    {
+      "metric_id": "Pike:atlas_to_tiger_2026",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/6/iou/atlas_to_tiger_2026"
+    },
+    {
+      "metric_id": "Pike:tiger_2018_to_tiger_2025",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/6/iou/tiger_2018_to_tiger_2025"
+    },
+    {
+      "metric_id": "Pike:tiger_2025_to_tiger_2026",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/6/iou/tiger_2025_to_tiger_2026"
+    },
+    {
+      "metric_id": "Terrell:atlas_to_tiger_2018",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/7/iou/atlas_to_tiger_2018"
+    },
+    {
+      "metric_id": "Terrell:atlas_to_tiger_2025",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/7/iou/atlas_to_tiger_2025"
+    },
+    {
+      "metric_id": "Terrell:atlas_to_tiger_2026",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/7/iou/atlas_to_tiger_2026"
+    },
+    {
+      "metric_id": "Terrell:tiger_2018_to_tiger_2025",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/7/iou/tiger_2018_to_tiger_2025"
+    },
+    {
+      "metric_id": "Terrell:tiger_2025_to_tiger_2026",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/7/iou/tiger_2025_to_tiger_2026"
+    },
+    {
+      "metric_id": "Chatham:tiger2026-minus-atlas-share-of-areawater",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/0/atlas_2018_2026_difference_km2/tiger_minus_atlas_as_share_of_census_areawater"
+    },
+    {
+      "metric_id": "Glynn:tiger2026-minus-atlas-share-of-areawater",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/1/atlas_2018_2026_difference_km2/tiger_minus_atlas_as_share_of_census_areawater"
+    },
+    {
+      "metric_id": "McIntosh:tiger2026-minus-atlas-share-of-areawater",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/2/atlas_2018_2026_difference_km2/tiger_minus_atlas_as_share_of_census_areawater"
+    },
+    {
+      "metric_id": "Camden:tiger2026-minus-atlas-share-of-areawater",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/3/atlas_2018_2026_difference_km2/tiger_minus_atlas_as_share_of_census_areawater"
+    },
+    {
+      "metric_id": "Liberty:tiger2026-minus-atlas-share-of-areawater",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "json_pointer": "/rows/4/atlas_2018_2026_difference_km2/tiger_minus_atlas_as_share_of_census_areawater"
+    }
+  ]
+}

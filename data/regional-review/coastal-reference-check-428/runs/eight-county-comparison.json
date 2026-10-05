@@ -1,0 +1,777 @@
+{
+  "baseline": "5391a5a2cc5bc3386d30e8c816de3f9388e70d99",
+  "projection": "EPSG:6933; always_xy; lon/lat source",
+  "shared_helper_version": "worldatlas-evidence-geometry-v1",
+  "shared_helper_axis_control_EPSG3857_lon10_lat45_m": [
+    1113194.9079327357,
+    5621521.486192066
+  ],
+  "scope_count": 8,
+  "source_hashes": {
+    "data/regional-review/regional-review-528e53393a4376b4/source/census-2018/georgia-kentucky-counties.geojson": "aab25c2227638b0048020747f8dd82b019ddd6f26100585c35533c5036cc7219",
+    "data/regional-review/regional-review-528e53393a4376b4/source/census-2025/georgia-kentucky-counties.geojson": "e5296a323ee4c38afdf7c54a32e67b77c2e98647a6535cb2464b699fb8740105",
+    "data/regional-review/coastal-reference-check-428/source/census-2026/eight-counties.geojson": "c09e62479268b4ee8b986a66768d5dea821b4e667d9d446a78d5304076c2e717"
+  },
+  "rows": [
+    {
+      "geoid": "13051",
+      "subject_id": "gb:USA:ADM2:52423323B68249799438553",
+      "name": "Chatham",
+      "atlas_attributes": {
+        "name": "Chatham",
+        "parent_id": "framework:province:georgia:99c5fb82481b",
+        "source_id": "gb:USA:ADM2",
+        "source_role": "Counties",
+        "administrative_level": "ADM2",
+        "reference_year": "2018",
+        "source_shape_id": "52423323B68249799438553"
+      },
+      "source_attributes": {
+        "tiger_2018": {
+          "GEOID": "13051",
+          "STATE": "13",
+          "COUNTY": "051",
+          "NAME": "Chatham County",
+          "BASENAME": "Chatham",
+          "LSADC": "06",
+          "FUNCSTAT": "A",
+          "COUNTYNS": "01694477",
+          "AREALAND": 1121786258,
+          "AREAWATER": 509839331
+        },
+        "tiger_2025": {
+          "GEOID": "13051",
+          "STATE": "13",
+          "COUNTY": "051",
+          "NAME": "Chatham County",
+          "BASENAME": "Chatham",
+          "LSADC": "06",
+          "FUNCSTAT": "A",
+          "COUNTYNS": "01694477",
+          "AREALAND": 1120936692,
+          "AREAWATER": 510688902
+        },
+        "tiger_2026": {
+          "GEOID": "13051",
+          "STATE": "13",
+          "COUNTY": "051",
+          "NAME": "Chatham County",
+          "BASENAME": "Chatham",
+          "LSADC": "06",
+          "FUNCSTAT": "A",
+          "COUNTYNS": "01694477",
+          "AREALAND": 1120936692,
+          "AREAWATER": 510688902
+        }
+      },
+      "validity": {
+        "atlas": {
+          "valid": true,
+          "reason": "Valid Geometry"
+        },
+        "tiger_2018": {
+          "valid": true,
+          "reason": "Valid Geometry"
+        },
+        "tiger_2025": {
+          "valid": true,
+          "reason": "Valid Geometry"
+        },
+        "tiger_2026": {
+          "valid": true,
+          "reason": "Valid Geometry"
+        }
+      },
+      "components": {
+        "atlas": 1,
+        "tiger_2018": 1,
+        "tiger_2025": 1,
+        "tiger_2026": 1
+      },
+      "equal_area_area_km2": {
+        "atlas": 1275.216,
+        "tiger_2018": 1631.628,
+        "tiger_2025": 1631.628,
+        "tiger_2026": 1631.628
+      },
+      "atlas_2018_2026_difference_km2": {
+        "atlas_minus_tiger_2026": 10.345,
+        "tiger_minus_atlas": 366.757,
+        "tiger_minus_atlas_as_share_of_census_areawater": 0.718162
+      },
+      "iou": {
+        "atlas_to_tiger_2018": 0.770335987,
+        "atlas_to_tiger_2025": 0.770335987,
+        "atlas_to_tiger_2026": 0.770335987,
+        "tiger_2018_to_tiger_2025": 1.0,
+        "tiger_2025_to_tiger_2026": 1.0
+      },
+      "interpretation": "IoU is a repeatable statistical geometry screen only; repaired geometries exist in memory only; neither validates legal lines or proves coastal completeness."
+    },
+    {
+      "geoid": "13127",
+      "subject_id": "gb:USA:ADM2:52423323B35006791438696",
+      "name": "Glynn",
+      "atlas_attributes": {
+        "name": "Glynn",
+        "parent_id": "framework:province:georgia:99c5fb82481b",
+        "source_id": "gb:USA:ADM2",
+        "source_role": "Counties",
+        "administrative_level": "ADM2",
+        "reference_year": "2018",
+        "source_shape_id": "52423323B35006791438696"
+      },
+      "source_attributes": {
+        "tiger_2018": {
+          "GEOID": "13127",
+          "STATE": "13",
+          "COUNTY": "127",
+          "NAME": "Glynn County",
+          "BASENAME": "Glynn",
+          "LSADC": "06",
+          "FUNCSTAT": "A",
+          "COUNTYNS": "01671513",
+          "AREALAND": 1086855587,
+          "AREAWATER": 429107116
+        },
+        "tiger_2025": {
+          "GEOID": "13127",
+          "STATE": "13",
+          "COUNTY": "127",
+          "NAME": "Glynn County",
+          "BASENAME": "Glynn",
+          "LSADC": "06",
+          "FUNCSTAT": "A",
+          "COUNTYNS": "01671513",
+          "AREALAND": 1086814724,
+          "AREAWATER": 429147364
+        },
+        "tiger_2026": {
+          "GEOID": "13127",
+          "STATE": "13",
+          "COUNTY": "127",
+          "NAME": "Glynn County",
+          "BASENAME": "Glynn",
+          "LSADC": "06",
+          "FUNCSTAT": "A",
+          "COUNTYNS": "01671513",
+          "AREALAND": 1086814724,
+          "AREAWATER": 429147364
+        }
+      },
+      "validity": {
+        "atlas": {
+          "valid": true,
+          "reason": "Valid Geometry"
+        },
+        "tiger_2018": {
+          "valid": true,
+          "reason": "Valid Geometry"
+        },
+        "tiger_2025": {
+          "valid": true,
+          "reason": "Valid Geometry"
+        },
+        "tiger_2026": {
+          "valid": true,
+          "reason": "Valid Geometry"
+        }
+      },
+      "components": {
+        "atlas": 1,
+        "tiger_2018": 1,
+        "tiger_2025": 1,
+        "tiger_2026": 1
+      },
+      "equal_area_area_km2": {
+        "atlas": 1216.948,
+        "tiger_2018": 1515.963,
+        "tiger_2025": 1515.963,
+        "tiger_2026": 1515.963
+      },
+      "atlas_2018_2026_difference_km2": {
+        "atlas_minus_tiger_2026": 12.821,
+        "tiger_minus_atlas": 311.836,
+        "tiger_minus_atlas_as_share_of_census_areawater": 0.726641
+      },
+      "iou": {
+        "atlas_to_tiger_2018": 0.787632113,
+        "atlas_to_tiger_2025": 0.787636823,
+        "atlas_to_tiger_2026": 0.787636823,
+        "tiger_2018_to_tiger_2025": 0.999994261,
+        "tiger_2025_to_tiger_2026": 1.0
+      },
+      "interpretation": "IoU is a repeatable statistical geometry screen only; repaired geometries exist in memory only; neither validates legal lines or proves coastal completeness."
+    },
+    {
+      "geoid": "13191",
+      "subject_id": "gb:USA:ADM2:52423323B58673559392327",
+      "name": "McIntosh",
+      "atlas_attributes": {
+        "name": "McIntosh",
+        "parent_id": "framework:province:georgia:99c5fb82481b",
+        "source_id": "gb:USA:ADM2",
+        "source_role": "Counties",
+        "administrative_level": "ADM2",
+        "reference_year": "2018",
+        "source_shape_id": "52423323B58673559392327"
+      },
+      "source_attributes": {
+        "tiger_2018": {
+          "GEOID": "13191",
+          "STATE": "13",
+          "COUNTY": "191",
+          "NAME": "McIntosh County",
+          "BASENAME": "McIntosh",
+          "LSADC": "06",
+          "FUNCSTAT": "A",
+          "COUNTYNS": "00356886",
+          "AREALAND": 1117201522,
+          "AREAWATER": 369165150
+        },
+        "tiger_2025": {
+          "GEOID": "13191",
+          "STATE": "13",
+          "COUNTY": "191",
+          "NAME": "McIntosh County",
+          "BASENAME": "McIntosh",
+          "LSADC": "06",
+          "FUNCSTAT": "A",
+          "COUNTYNS": "00356886",
+          "AREALAND": 1117184385,
+          "AREAWATER": 369178543
+        },
+        "tiger_2026": {
+          "GEOID": "13191",
+          "STATE": "13",
+          "COUNTY": "191",
+          "NAME": "McIntosh County",
+          "BASENAME": "McIntosh",
+          "LSADC": "06",
+          "FUNCSTAT": "A",
+          "COUNTYNS": "00356886",
+          "AREALAND": 1117184385,
+          "AREAWATER": 369178543
+        }
+      },
+      "validity": {
+        "atlas": {
+          "valid": true,
+          "reason": "Valid Geometry"
+        },
+        "tiger_2018": {
+          "valid": true,
+          "reason": "Valid Geometry"
+        },
+        "tiger_2025": {
+          "valid": true,
+          "reason": "Valid Geometry"
+        },
+        "tiger_2026": {
+          "valid": true,
+          "reason": "Valid Geometry"
+        }
+      },
+      "components": {
+        "atlas": 1,
+        "tiger_2018": 1,
+        "tiger_2025": 1,
+        "tiger_2026": 1
+      },
+      "equal_area_area_km2": {
+        "atlas": 1249.388,
+        "tiger_2018": 1486.368,
+        "tiger_2025": 1486.364,
+        "tiger_2026": 1486.364
+      },
+      "atlas_2018_2026_difference_km2": {
+        "atlas_minus_tiger_2026": 5.05,
+        "tiger_minus_atlas": 242.026,
+        "tiger_minus_atlas_as_share_of_census_areawater": 0.655579
+      },
+      "iou": {
+        "atlas_to_tiger_2018": 0.834332645,
+        "atlas_to_tiger_2025": 0.834334728,
+        "atlas_to_tiger_2026": 0.834334728,
+        "tiger_2018_to_tiger_2025": 0.999997495,
+        "tiger_2025_to_tiger_2026": 1.0
+      },
+      "interpretation": "IoU is a repeatable statistical geometry screen only; repaired geometries exist in memory only; neither validates legal lines or proves coastal completeness."
+    },
+    {
+      "geoid": "13039",
+      "subject_id": "gb:USA:ADM2:52423323B71362647483761",
+      "name": "Camden",
+      "atlas_attributes": {
+        "name": "Camden",
+        "parent_id": "framework:province:georgia:99c5fb82481b",
+        "source_id": "gb:USA:ADM2",
+        "source_role": "Counties",
+        "administrative_level": "ADM2",
+        "reference_year": "2018",
+        "source_shape_id": "52423323B71362647483761"
+      },
+      "source_attributes": {
+        "tiger_2018": {
+          "GEOID": "13039",
+          "STATE": "13",
+          "COUNTY": "039",
+          "NAME": "Camden County",
+          "BASENAME": "Camden",
+          "LSADC": "06",
+          "FUNCSTAT": "A",
+          "COUNTYNS": "01671316",
+          "AREALAND": 1632622505,
+          "AREAWATER": 392508756
+        },
+        "tiger_2025": {
+          "GEOID": "13039",
+          "STATE": "13",
+          "COUNTY": "039",
+          "NAME": "Camden County",
+          "BASENAME": "Camden",
+          "LSADC": "06",
+          "FUNCSTAT": "A",
+          "COUNTYNS": "01671316",
+          "AREALAND": 1632398666,
+          "AREAWATER": 392732537
+        },
+        "tiger_2026": {
+          "GEOID": "13039",
+          "STATE": "13",
+          "COUNTY": "039",
+          "NAME": "Camden County",
+          "BASENAME": "Camden",
+          "LSADC": "06",
+          "FUNCSTAT": "A",
+          "COUNTYNS": "01671316",
+          "AREALAND": 1632398666,
+          "AREAWATER": 392732537
+        }
+      },
+      "validity": {
+        "atlas": {
+          "valid": true,
+          "reason": "Valid Geometry"
+        },
+        "tiger_2018": {
+          "valid": true,
+          "reason": "Valid Geometry"
+        },
+        "tiger_2025": {
+          "valid": true,
+          "reason": "Valid Geometry"
+        },
+        "tiger_2026": {
+          "valid": true,
+          "reason": "Valid Geometry"
+        }
+      },
+      "components": {
+        "atlas": 1,
+        "tiger_2018": 1,
+        "tiger_2025": 1,
+        "tiger_2026": 1
+      },
+      "equal_area_area_km2": {
+        "atlas": 1771.003,
+        "tiger_2018": 2025.129,
+        "tiger_2025": 2025.129,
+        "tiger_2026": 2025.129
+      },
+      "atlas_2018_2026_difference_km2": {
+        "atlas_minus_tiger_2026": 11.223,
+        "tiger_minus_atlas": 265.349,
+        "tiger_minus_atlas_as_share_of_census_areawater": 0.675648
+      },
+      "iou": {
+        "atlas_to_tiger_2018": 0.864182534,
+        "atlas_to_tiger_2025": 0.864182534,
+        "atlas_to_tiger_2026": 0.864182534,
+        "tiger_2018_to_tiger_2025": 1.0,
+        "tiger_2025_to_tiger_2026": 1.0
+      },
+      "interpretation": "IoU is a repeatable statistical geometry screen only; repaired geometries exist in memory only; neither validates legal lines or proves coastal completeness."
+    },
+    {
+      "geoid": "13179",
+      "subject_id": "gb:USA:ADM2:52423323B31615661575159",
+      "name": "Liberty",
+      "atlas_attributes": {
+        "name": "Liberty",
+        "parent_id": "framework:province:georgia:99c5fb82481b",
+        "source_id": "gb:USA:ADM2",
+        "source_role": "Counties",
+        "administrative_level": "ADM2",
+        "reference_year": "2018",
+        "source_shape_id": "52423323B31615661575159"
+      },
+      "source_attributes": {
+        "tiger_2018": {
+          "GEOID": "13179",
+          "STATE": "13",
+          "COUNTY": "179",
+          "NAME": "Liberty County",
+          "BASENAME": "Liberty",
+          "LSADC": "06",
+          "FUNCSTAT": "A",
+          "COUNTYNS": "00357095",
+          "AREALAND": 1337654103,
+          "AREAWATER": 222884791
+        },
+        "tiger_2025": {
+          "GEOID": "13179",
+          "STATE": "13",
+          "COUNTY": "179",
+          "NAME": "Liberty County",
+          "BASENAME": "Liberty",
+          "LSADC": "06",
+          "FUNCSTAT": "A",
+          "COUNTYNS": "00357095",
+          "AREALAND": 1337631993,
+          "AREAWATER": 222884807
+        },
+        "tiger_2026": {
+          "GEOID": "13179",
+          "STATE": "13",
+          "COUNTY": "179",
+          "NAME": "Liberty County",
+          "BASENAME": "Liberty",
+          "LSADC": "06",
+          "FUNCSTAT": "A",
+          "COUNTYNS": "00357095",
+          "AREALAND": 1337631993,
+          "AREAWATER": 222884807
+        }
+      },
+      "validity": {
+        "atlas": {
+          "valid": true,
+          "reason": "Valid Geometry"
+        },
+        "tiger_2018": {
+          "valid": true,
+          "reason": "Valid Geometry"
+        },
+        "tiger_2025": {
+          "valid": true,
+          "reason": "Valid Geometry"
+        },
+        "tiger_2026": {
+          "valid": true,
+          "reason": "Valid Geometry"
+        }
+      },
+      "components": {
+        "atlas": 1,
+        "tiger_2018": 1,
+        "tiger_2025": 1,
+        "tiger_2026": 1
+      },
+      "equal_area_area_km2": {
+        "atlas": 1400.806,
+        "tiger_2018": 1560.537,
+        "tiger_2025": 1560.515,
+        "tiger_2026": 1560.515
+      },
+      "atlas_2018_2026_difference_km2": {
+        "atlas_minus_tiger_2026": 11.879,
+        "tiger_minus_atlas": 171.589,
+        "tiger_minus_atlas_as_share_of_census_areawater": 0.769853
+      },
+      "iou": {
+        "atlas_to_tiger_2018": 0.883335278,
+        "atlas_to_tiger_2025": 0.883319346,
+        "atlas_to_tiger_2026": 0.883319346,
+        "tiger_2018_to_tiger_2025": 0.99998317,
+        "tiger_2025_to_tiger_2026": 1.0
+      },
+      "interpretation": "IoU is a repeatable statistical geometry screen only; repaired geometries exist in memory only; neither validates legal lines or proves coastal completeness."
+    },
+    {
+      "geoid": "13249",
+      "subject_id": "gb:USA:ADM2:52423323B40186233786127",
+      "name": "Schley",
+      "atlas_attributes": {
+        "name": "Schley",
+        "parent_id": "framework:province:georgia:99c5fb82481b",
+        "source_id": "gb:USA:ADM2",
+        "source_role": "Counties",
+        "administrative_level": "ADM2",
+        "reference_year": "2018",
+        "source_shape_id": "52423323B40186233786127"
+      },
+      "source_attributes": {
+        "tiger_2018": {
+          "GEOID": "13249",
+          "STATE": "13",
+          "COUNTY": "249",
+          "NAME": "Schley County",
+          "BASENAME": "Schley",
+          "LSADC": "06",
+          "FUNCSTAT": "A",
+          "COUNTYNS": "00344129",
+          "AREALAND": 432291202,
+          "AREAWATER": 2369649
+        },
+        "tiger_2025": {
+          "GEOID": "13249",
+          "STATE": "13",
+          "COUNTY": "249",
+          "NAME": "Schley County",
+          "BASENAME": "Schley",
+          "LSADC": "06",
+          "FUNCSTAT": "A",
+          "COUNTYNS": "00344129",
+          "AREALAND": 432291199,
+          "AREAWATER": 2369649
+        },
+        "tiger_2026": {
+          "GEOID": "13249",
+          "STATE": "13",
+          "COUNTY": "249",
+          "NAME": "Schley County",
+          "BASENAME": "Schley",
+          "LSADC": "06",
+          "FUNCSTAT": "A",
+          "COUNTYNS": "00344129",
+          "AREALAND": 432291199,
+          "AREAWATER": 2369649
+        }
+      },
+      "validity": {
+        "atlas": {
+          "valid": true,
+          "reason": "Valid Geometry"
+        },
+        "tiger_2018": {
+          "valid": false,
+          "reason": "Ring Self-intersection[-84.3632159999735 32.3976489999987]"
+        },
+        "tiger_2025": {
+          "valid": false,
+          "reason": "Ring Self-intersection[-84.3632159999735 32.3976489999987]"
+        },
+        "tiger_2026": {
+          "valid": false,
+          "reason": "Ring Self-intersection[-84.3632159999735 32.3976489999987]"
+        }
+      },
+      "components": {
+        "atlas": 1,
+        "tiger_2018": 1,
+        "tiger_2025": 1,
+        "tiger_2026": 1
+      },
+      "equal_area_area_km2": {
+        "atlas": 435.693,
+        "tiger_2018": 434.661,
+        "tiger_2025": 434.661,
+        "tiger_2026": 434.661
+      },
+      "atlas_2018_2026_difference_km2": {
+        "atlas_minus_tiger_2026": 4.481,
+        "tiger_minus_atlas": 3.448,
+        "tiger_minus_atlas_as_share_of_census_areawater": 1.455158
+      },
+      "iou": {
+        "atlas_to_tiger_2018": 0.981944596,
+        "atlas_to_tiger_2025": 0.981944596,
+        "atlas_to_tiger_2026": 0.981944596,
+        "tiger_2018_to_tiger_2025": 1.0,
+        "tiger_2025_to_tiger_2026": 1.0
+      },
+      "interpretation": "IoU is a repeatable statistical geometry screen only; repaired geometries exist in memory only; neither validates legal lines or proves coastal completeness."
+    },
+    {
+      "geoid": "13231",
+      "subject_id": "gb:USA:ADM2:52423323B93853380479562",
+      "name": "Pike",
+      "atlas_attributes": {
+        "name": "Pike",
+        "parent_id": "framework:province:georgia:99c5fb82481b",
+        "source_id": "gb:USA:ADM2",
+        "source_role": "Counties",
+        "administrative_level": "ADM2",
+        "reference_year": "2018",
+        "source_shape_id": "52423323B93853380479562"
+      },
+      "source_attributes": {
+        "tiger_2018": {
+          "GEOID": "13231",
+          "STATE": "13",
+          "COUNTY": "231",
+          "NAME": "Pike County",
+          "BASENAME": "Pike",
+          "LSADC": "06",
+          "FUNCSTAT": "A",
+          "COUNTYNS": "00346482",
+          "AREALAND": 559660500,
+          "AREAWATER": 8595984
+        },
+        "tiger_2025": {
+          "GEOID": "13231",
+          "STATE": "13",
+          "COUNTY": "231",
+          "NAME": "Pike County",
+          "BASENAME": "Pike",
+          "LSADC": "06",
+          "FUNCSTAT": "A",
+          "COUNTYNS": "00346482",
+          "AREALAND": 559693451,
+          "AREAWATER": 8563009
+        },
+        "tiger_2026": {
+          "GEOID": "13231",
+          "STATE": "13",
+          "COUNTY": "231",
+          "NAME": "Pike County",
+          "BASENAME": "Pike",
+          "LSADC": "06",
+          "FUNCSTAT": "A",
+          "COUNTYNS": "00346482",
+          "AREALAND": 559693451,
+          "AREAWATER": 8563009
+        }
+      },
+      "validity": {
+        "atlas": {
+          "valid": true,
+          "reason": "Valid Geometry"
+        },
+        "tiger_2018": {
+          "valid": false,
+          "reason": "Ring Self-intersection[-84.2986650004244 32.9996709997893]"
+        },
+        "tiger_2025": {
+          "valid": false,
+          "reason": "Ring Self-intersection[-84.2986650004244 32.9996709997893]"
+        },
+        "tiger_2026": {
+          "valid": false,
+          "reason": "Ring Self-intersection[-84.2986650004244 32.9996709997893]"
+        }
+      },
+      "components": {
+        "atlas": 1,
+        "tiger_2018": 1,
+        "tiger_2025": 1,
+        "tiger_2026": 1
+      },
+      "equal_area_area_km2": {
+        "atlas": 569.869,
+        "tiger_2018": 568.257,
+        "tiger_2025": 568.257,
+        "tiger_2026": 568.257
+      },
+      "atlas_2018_2026_difference_km2": {
+        "atlas_minus_tiger_2026": 5.881,
+        "tiger_minus_atlas": 4.268,
+        "tiger_minus_atlas_as_share_of_census_areawater": 0.498454
+      },
+      "iou": {
+        "atlas_to_tiger_2018": 0.982322654,
+        "atlas_to_tiger_2025": 0.982322674,
+        "atlas_to_tiger_2026": 0.982322674,
+        "tiger_2018_to_tiger_2025": 0.99999998,
+        "tiger_2025_to_tiger_2026": 1.0
+      },
+      "interpretation": "IoU is a repeatable statistical geometry screen only; repaired geometries exist in memory only; neither validates legal lines or proves coastal completeness."
+    },
+    {
+      "geoid": "13273",
+      "subject_id": "gb:USA:ADM2:52423323B62158301450735",
+      "name": "Terrell",
+      "atlas_attributes": {
+        "name": "Terrell",
+        "parent_id": "framework:province:georgia:99c5fb82481b",
+        "source_id": "gb:USA:ADM2",
+        "source_role": "Counties",
+        "administrative_level": "ADM2",
+        "reference_year": "2018",
+        "source_shape_id": "52423323B62158301450735"
+      },
+      "source_attributes": {
+        "tiger_2018": {
+          "GEOID": "13273",
+          "STATE": "13",
+          "COUNTY": "273",
+          "NAME": "Terrell County",
+          "BASENAME": "Terrell",
+          "LSADC": "06",
+          "FUNCSTAT": "A",
+          "COUNTYNS": "00352238",
+          "AREALAND": 869695791,
+          "AREAWATER": 4951325
+        },
+        "tiger_2025": {
+          "GEOID": "13273",
+          "STATE": "13",
+          "COUNTY": "273",
+          "NAME": "Terrell County",
+          "BASENAME": "Terrell",
+          "LSADC": "06",
+          "FUNCSTAT": "A",
+          "COUNTYNS": "00352238",
+          "AREALAND": 869695797,
+          "AREAWATER": 4951325
+        },
+        "tiger_2026": {
+          "GEOID": "13273",
+          "STATE": "13",
+          "COUNTY": "273",
+          "NAME": "Terrell County",
+          "BASENAME": "Terrell",
+          "LSADC": "06",
+          "FUNCSTAT": "A",
+          "COUNTYNS": "00352238",
+          "AREALAND": 869695797,
+          "AREAWATER": 4951325
+        }
+      },
+      "validity": {
+        "atlas": {
+          "valid": true,
+          "reason": "Valid Geometry"
+        },
+        "tiger_2018": {
+          "valid": false,
+          "reason": "Ring Self-intersection[-84.3052039999726 31.6910580002751]"
+        },
+        "tiger_2025": {
+          "valid": false,
+          "reason": "Ring Self-intersection[-84.3052039999726 31.6910580002751]"
+        },
+        "tiger_2026": {
+          "valid": false,
+          "reason": "Ring Self-intersection[-84.3052039999726 31.6910580002751]"
+        }
+      },
+      "components": {
+        "atlas": 1,
+        "tiger_2018": 1,
+        "tiger_2025": 1,
+        "tiger_2026": 1
+      },
+      "equal_area_area_km2": {
+        "atlas": 872.605,
+        "tiger_2018": 874.647,
+        "tiger_2025": 874.647,
+        "tiger_2026": 874.647
+      },
+      "atlas_2018_2026_difference_km2": {
+        "atlas_minus_tiger_2026": 3.866,
+        "tiger_minus_atlas": 5.908,
+        "tiger_minus_atlas_as_share_of_census_areawater": 1.193208
+      },
+      "iou": {
+        "atlas_to_tiger_2018": 0.988874986,
+        "atlas_to_tiger_2025": 0.988874986,
+        "atlas_to_tiger_2026": 0.988874986,
+        "tiger_2018_to_tiger_2025": 0.999999991,
+        "tiger_2025_to_tiger_2026": 1.0
+      },
+      "interpretation": "IoU is a repeatable statistical geometry screen only; repaired geometries exist in memory only; neither validates legal lines or proves coastal completeness."
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "source_id": "census-tigerweb-2026-counties-layer-82",
+  "layer_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Current/MapServer/82",
+  "metadata_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Current/MapServer/82?f=pjson",
+  "query_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Current/MapServer/82/query?where=GEOID+IN+%28%2713051%27%2C%2713127%27%2C%2713191%27%2C%2713039%27%2C%2713179%27%2C%2713249%27%2C%2713231%27%2C%2713273%27%29&outFields=GEOID%2CSTATE%2CCOUNTY%2CNAME%2CBASENAME%2CLSADC%2CFUNCSTAT%2CCOUNTYNS%2CAREALAND%2CAREAWATER&returnGeometry=true&outSR=4326&f=geojson",
+  "retrieval_started_at": "2026-10-05T15:31:59.042Z",
+  "query_started_at": "2026-10-05T15:31:59.565Z",
+  "retrieval_completed_at": "2026-10-05T15:32:01.777Z",
+  "http_status": 200,
+  "content_type": "application/geo+json;charset=UTF-8",
+  "etag": "\"1784720359\"",
+  "last_modified": null,
+  "returned_feature_count": 8,
+  "geoids": [
+    "13039",
+    "13051",
+    "13127",
+    "13179",
+    "13191",
+    "13231",
+    "13249",
+    "13273"
+  ],
+  "metadata_sha256": "56df6e7d6cff8fe1e082bbdc10109cc2c7c22a134f5dfca1899f93d9bd98337d",
+  "metadata_bytes": 7489,
+  "response_sha256": "c09e62479268b4ee8b986a66768d5dea821b4e667d9d446a78d5304076c2e717",
+  "response_bytes": 873257,
+  "description": "Counties (or statistically equivalent entities); January 1, 2026 vintage",
+  "copyright_text": "Source: U.S. Census Bureau",
+  "limitation": "Census TIGERweb statistical reference geometry; no legal line adjudication and no guarantee that every island/shoreline convention matches Atlas."
+}
