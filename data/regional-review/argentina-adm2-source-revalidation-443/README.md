@@ -39,17 +39,12 @@ From repository root, Python `3.8.5`, Shapely `2.0.7` / GEOS `3.11.4`, pyproj `3
 
 ```sh
 python3 -m pip install Shapely==2.0.7 pyproj==3.5.0
-python3 data/regional-review/argentina-adm2-source-revalidation-443/prepare-scoped-2020.py
-python3 data/regional-review/argentina-adm2-source-revalidation-443/validate-controls.py
-python3 data/regional-review/argentina-adm2-source-revalidation-443/reproduce-spatial.py
-python3 data/regional-review/argentina-adm2-source-revalidation-443/reproduce-components.py
-python3 data/regional-review/argentina-adm2-source-revalidation-443/reproduce-province-crosswalk.py
-python3 data/regional-review/argentina-adm2-source-revalidation-443/reproduce-parent-review.py
-python3 data/regional-review/argentina-adm2-source-revalidation-443/categorize-tabular-findings.py
+python3 data/regional-review/argentina-adm2-source-revalidation-443/reproduce-all.py
 python3 data/regional-review/argentina-adm2-source-revalidation-443/build-evidence-manifest.py
+node scripts/evidence-quality.mjs data/regional-review/argentina-adm2-source-revalidation-443/evidence-quality.json
 ```
 
-These scripts do not access the network or write outside the owned directory. `categorize-tabular-findings.py` adds one count row whose rendered numeric value is bound in the evidence ledger and converts the per-subject detail rows to categorical classes. The numeric summaries retain exact aggregate values and priority measurements, while names, IDs, neighboring candidates, holes, multipart component identities, and affected-subject lists remain in the detail tables. Controls cover exact subject roster retention, rejection of a one-subject omission, an analytic 50% overlap, and a zero-area shared-edge case. The CSV/JSON findings, upstream API responses/pointers, response headers, copied lawful original metadata/PDF, and source hashes are retained next to this README. See `source-register.json` and `evidence-quality.json` for per-file hashes and source/licensing details.
+These scripts do not access the network or write outside the owned directory. The full offline reproduction runs the source extraction, source/geometry controls, six detailed overlay reports, and categorical table renderer twice and records equal output hashes. Each CSV has a bound numeric count row and categorical subject details. Numeric summaries retain exact aggregate values and priority measurements, while names, IDs, neighboring candidates, holes, multipart component identities, and affected-subject lists remain in the detail tables. Geometry controls include a lon/lat `(10°, 20°)` transform to EPSG:6933 checked against the independent WGS 84 ellipsoidal formula; the negative control verifies the swapped-axis result is rejected. EPSG:6933's authority parameters are recorded at [epsg.io/6933](https://epsg.io/6933). Other controls cover the exact subject roster, rejection of a one-subject omission, an analytic 50% overlap, and a zero-area shared-edge case. The CSV/JSON findings, upstream API responses/pointers, response headers, copied lawful original metadata/PDF, and source hashes are retained next to this README. See `source-register.json` and `evidence-quality.json` for per-file hashes and source/licensing details.
 
 ## Status
 

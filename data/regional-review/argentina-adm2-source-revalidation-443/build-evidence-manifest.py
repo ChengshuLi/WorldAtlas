@@ -33,6 +33,8 @@ source_hash={
  'adm1':sha_bytes((OWN/'source/geoBoundaries-2006/geoBoundaries-ARG-ADM1-2006.geojson').read_bytes()),
  'departments':sha_bytes((OWN/'source/Georef-current/departamentos.geojson').read_bytes()),
  'provinces':sha_bytes((OWN/'source/Georef-current/provincias.geojson').read_bytes()),
+ 'controls':sha_bytes((OWN/'validate-controls.py').read_bytes()),
+ 'adm2_archive':sha_bytes(subprocess.check_output(['git','-C',str(ROOT),'show',f'{BASE}:data/regional-review/regional-review-7cf674a63057d43f/source/geoBoundaries-ARG/geoBoundaries-ARG-ADM2.geojson.gz'])),
  'parent_scope':sha_bytes(subprocess.check_output(['git','-C',str(ROOT),'show',f'{BASE}:data/regional-review/regional-review-7cf674a63057d43f/findings/scoped-province-review.csv']))}
 columns={filename:{'record_count':'count'} for filename in (
  '2006-adm1-to-current-province-overlay.csv',
@@ -83,7 +85,7 @@ def add_json_metrics(file_rel):
         if isinstance(value,(int,float)):
             metric_id=f'json:{file_rel}:{pointer or "/"}'
             # Hash the substantive source most directly responsible for this report.
-            inp=source_hash['departments'] if 'spatial-reproduction-summary' in file_rel else source_hash['adm1'] if 'province-crosswalk' in file_rel else source_hash['adm2']
+            inp=metric_input(file_rel, pointer)
             metric_rows.append({'id':metric_id,'value':value,'unit':'count' if isinstance(value,int) else 'ratio-or-source-value','vintage':'current','input_sha256':inp,'evaluation_commit':BASE})
             metric_bindings.append({'metric_id':metric_id,'path':file_rel,'json_pointer':pointer})
             summaries.append({'metric_id':metric_id,'value':value,'unit':'count' if isinstance(value,int) else 'ratio-or-source-value'})
@@ -92,6 +94,23 @@ def add_json_metrics(file_rel):
         elif isinstance(value,list):
             for i,v in enumerate(value):walk(v,pointer+'/'+str(i))
     walk(data)
+
+def metric_input(file_rel, pointer):
+    name=pathlib.Path(file_rel).name
+    if name in {'polygon-overlay-positive.json','polygon-overlay-negative.json','source-partition-positive.json','source-partition-negative.json'}:
+        return source_hash['controls']
+    if name=='source-partition-summary.json':
+        return source_hash['adm2_archive'] if pointer in {'/national_features','/restored_bytes'} else source_hash['adm2']
+    if name=='spatial-reproduction-summary.json':
+        current_fields={'/current_feature_count','/invalid_current_geometry_count',
+                        '/scoped_current_source_overlap_pairs_gt_1sqm','/scoped_current_source_overlap_pairs_over_1hectare'}
+        return source_hash['departments'] if pointer in current_fields or pointer.startswith('/current_categories/') or pointer.startswith('/scoped_top_province_counts/') else source_hash['adm2']
+    if name=='province-crosswalk-summary.json':
+        return source_hash['provinces'] if pointer in {'/current_feature_count','/invalid_current'} else source_hash['adm1']
+    if name=='component-summary.json':
+        return source_hash['adm2']
+    return source_hash['adm2']
+
 json_reports=[f'{PACKET}/findings/{p.name}' for p in sorted(OUT.glob('*.json')) if p.name!='metrics.json']
 for p in json_reports:add_json_metrics(p)
 metrics={'version':1,'issue':944,'baseline_commit':BASE,'subject_ids_sha256':subject_digest,'metrics':metric_rows}
@@ -174,16 +193,21 @@ manifest={
  'baseline':{'commit':BASE,'files':baseline_files,'pins':pins,'pin_files':pin_files,'subject_files':{sid:'data/geography/part-0.json' for sid in subject_ids}},
  'sources':sources,'outputs':outputs,
  'methods':[
-  {'id':'source-partition','kind':'measurement','description':'Restore/hash the pinned full 2020 ADM2 object, verify the complete 525-feature/unique-ID roster, and extract exactly the issue-scoped 214 IDs from the retained #443 scope.','software':'Python 3.8.5; stdlib gzip/json/hashlib; geoBoundaries upstream commit 9469f09','units':'features, bytes and SHA-256'},
-  {'id':'polygon-overlay','kind':'measurement','description':'Project longitude/latitude WGS84 polygons into EPSG:6933 with always_xy; run equal-area Shapely overlay at positive area >1 m2 without geometry repair. Produce the exact scoped 2020/current department candidate, overlap, parent and component ledgers plus the 2006 ADM1/current-province comparison.','software':'Python 3.8.5; Shapely 2.0.7; GEOS 3.11.4; pyproj 3.5.0; PROJ 9.2.0; NumPy 1.24.4','units':'m2, km2, component counts, interior rings and dimensionless area shares'}],
+  {'id':'source-partition','kind':'generator','helper_version':'worldatlas-evidence-preparation-v1','description':'Restore/hash the pinned full 2020 ADM2 object, verify its 525-feature/unique-ID roster, and extract exactly the issue-scoped 214 IDs from retained #443 scope.','software':'Python 3.8.5; stdlib gzip/json/hashlib; geoBoundaries upstream commit 9469f09','units':'features, bytes and SHA-256'},
+  {'id':'polygon-overlay','kind':'measurement','description':'Project longitude/latitude WGS84 polygons into EPSG:6933 with always_xy; run equal-area Shapely overlay at positive area >1 m2 without geometry repair. Produce the exact scoped 2020/current department candidate, overlap, parent and component ledgers plus the 2006 ADM1/current-province comparison.','software':'Python 3.8.5; Shapely 2.0.7; GEOS 3.11.4; pyproj 3.5.0; PROJ 9.2.0; NumPy 1.24.4','units':'m2, km2, component counts, interior rings and dimensionless area shares'},
+  {'id':'categorical-table-generation','kind':'generator','helper_version':'worldatlas-evidence-preparation-v1','description':'Convert all detailed numeric overlay outputs to categorical per-subject findings and retain one exact numeric row count per output table.','software':'Python 3.8.5 standard library','units':'detail rows and categorical classes'}],
  'metrics':metric_rows,'metric_bindings':metric_bindings,'summaries':summaries,
  'change_receipts':receipts,
  'rendered_tables':[t for d in outputs for t in d.get('rendered_tables',[])],
  'validation':[
   {'method_id':'source-partition','kind':'positive-control','outcome':'passed','evidence_path':f'{PACKET}/findings/source-partition-positive.json'},
   {'method_id':'source-partition','kind':'negative-control','outcome':'passed','evidence_path':f'{PACKET}/findings/source-partition-negative.json'},
+  {'method_id':'source-partition','kind':'reproducibility','outcome':'passed','evidence_path':f'{PACKET}/findings/source-partition-reproducibility.json'},
   {'method_id':'polygon-overlay','kind':'positive-control','outcome':'passed','evidence_path':f'{PACKET}/findings/polygon-overlay-positive.json'},
-  {'method_id':'polygon-overlay','kind':'negative-control','outcome':'passed','evidence_path':f'{PACKET}/findings/polygon-overlay-negative.json'}],
+  {'method_id':'polygon-overlay','kind':'negative-control','outcome':'passed','evidence_path':f'{PACKET}/findings/polygon-overlay-negative.json'},
+  {'method_id':'categorical-table-generation','kind':'positive-control','outcome':'passed','evidence_path':f'{PACKET}/findings/categorical-table-positive.json'},
+  {'method_id':'categorical-table-generation','kind':'negative-control','outcome':'passed','evidence_path':f'{PACKET}/findings/categorical-table-negative.json'},
+  {'method_id':'categorical-table-generation','kind':'reproducibility','outcome':'passed','evidence_path':f'{PACKET}/findings/categorical-table-generation-reproducibility.json'}],
  'conclusions':[
   {'status':'supported','text':'The exact geoBoundaries 2020 ADM2 LFS object matches the retained raw object; the raw source has 525 unique shape IDs while its metadata declares 526.', 'source_ids':['geoboundaries-arg-adm2-2020-scoped-214']},
   {'status':'supported','text':'The exact geoBoundaries 2006 ADM1 object has 23 unique features, including La Roja and no Entre Ríos feature label; the current official Georef province source has 24 names.', 'source_ids':['geoboundaries-arg-adm1-2006','datos-argentina-georef-provinces-current']},
@@ -193,15 +217,9 @@ manifest={
   {'status':'unresolved','text':'The advertised licensed 2017 IGN boundary data was not retrievable; its metadata PDF does not provide overlay geometry.', 'source_ids':['ign-interdepartmental-metadata-2017']}],
  'stages':{'research':'complete','implementation':'proposed','geographic_approval':'not-requested'},
  'commands':[
-  'python3 data/regional-review/argentina-adm2-source-revalidation-443/prepare-scoped-2020.py',
-  'python3 data/regional-review/argentina-adm2-source-revalidation-443/validate-controls.py',
-  'PYTHONPATH=/path/to/env/site-packages python3 data/regional-review/argentina-adm2-source-revalidation-443/reproduce-spatial.py',
-  'PYTHONPATH=/path/to/env/site-packages python3 data/regional-review/argentina-adm2-source-revalidation-443/reproduce-components.py',
-  'PYTHONPATH=/path/to/env/site-packages python3 data/regional-review/argentina-adm2-source-revalidation-443/reproduce-province-crosswalk.py',
-  'PYTHONPATH=/path/to/env/site-packages python3 data/regional-review/argentina-adm2-source-revalidation-443/reproduce-parent-review.py',
-  'python3 data/regional-review/argentina-adm2-source-revalidation-443/categorize-tabular-findings.py',
+  'python3 data/regional-review/argentina-adm2-source-revalidation-443/reproduce-all.py',
   'python3 data/regional-review/argentina-adm2-source-revalidation-443/build-evidence-manifest.py',
-  'node scripts/evidence-quality.mjs data/regional-review/argentina-adm2-source-revalidation-443/evidence-quality.json '+str(ROOT)]}
+  'node scripts/evidence-quality.mjs data/regional-review/argentina-adm2-source-revalidation-443/evidence-quality.json']}
 # Keep source/changes registered one time and reject any write outside the exact owned prefix.
 manifest['outputs']=sorted(outputs,key=lambda x:x['path'])
 manifest['change_receipts']=sorted(receipts,key=lambda x:x['path'])

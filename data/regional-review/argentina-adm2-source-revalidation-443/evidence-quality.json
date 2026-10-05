@@ -375,6 +375,18 @@
       "status": "added"
     },
     {
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/categorical-table-generation-reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/categorical-table-negative.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/categorical-table-positive.json",
+      "status": "added"
+    },
+    {
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json",
       "status": "added"
     },
@@ -427,6 +439,10 @@
       "status": "added"
     },
     {
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/source-partition-reproducibility.json",
+      "status": "added"
+    },
+    {
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/source-partition-summary.json",
       "status": "added"
     },
@@ -436,6 +452,10 @@
     },
     {
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/prepare-scoped-2020.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/reproduce-all.py",
       "status": "added"
     },
     {
@@ -556,15 +576,9 @@
     }
   ],
   "commands": [
-    "python3 data/regional-review/argentina-adm2-source-revalidation-443/prepare-scoped-2020.py",
-    "python3 data/regional-review/argentina-adm2-source-revalidation-443/validate-controls.py",
-    "PYTHONPATH=/path/to/env/site-packages python3 data/regional-review/argentina-adm2-source-revalidation-443/reproduce-spatial.py",
-    "PYTHONPATH=/path/to/env/site-packages python3 data/regional-review/argentina-adm2-source-revalidation-443/reproduce-components.py",
-    "PYTHONPATH=/path/to/env/site-packages python3 data/regional-review/argentina-adm2-source-revalidation-443/reproduce-province-crosswalk.py",
-    "PYTHONPATH=/path/to/env/site-packages python3 data/regional-review/argentina-adm2-source-revalidation-443/reproduce-parent-review.py",
-    "python3 data/regional-review/argentina-adm2-source-revalidation-443/categorize-tabular-findings.py",
+    "python3 data/regional-review/argentina-adm2-source-revalidation-443/reproduce-all.py",
     "python3 data/regional-review/argentina-adm2-source-revalidation-443/build-evidence-manifest.py",
-    "node scripts/evidence-quality.mjs data/regional-review/argentina-adm2-source-revalidation-443/evidence-quality.json /Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/be05f9605dc494617f8d0542b51cfae32864dbeebc4aa4c3467a4a283f36114b/work"
+    "node scripts/evidence-quality.mjs data/regional-review/argentina-adm2-source-revalidation-443/evidence-quality.json"
   ],
   "conclusions": [
     {
@@ -618,9 +632,10 @@
   "lane": "geography",
   "methods": [
     {
-      "description": "Restore/hash the pinned full 2020 ADM2 object, verify the complete 525-feature/unique-ID roster, and extract exactly the issue-scoped 214 IDs from the retained #443 scope.",
+      "description": "Restore/hash the pinned full 2020 ADM2 object, verify its 525-feature/unique-ID roster, and extract exactly the issue-scoped 214 IDs from retained #443 scope.",
+      "helper_version": "worldatlas-evidence-preparation-v1",
       "id": "source-partition",
-      "kind": "measurement",
+      "kind": "generator",
       "software": "Python 3.8.5; stdlib gzip/json/hashlib; geoBoundaries upstream commit 9469f09",
       "units": "features, bytes and SHA-256"
     },
@@ -630,6 +645,14 @@
       "kind": "measurement",
       "software": "Python 3.8.5; Shapely 2.0.7; GEOS 3.11.4; pyproj 3.5.0; PROJ 9.2.0; NumPy 1.24.4",
       "units": "m2, km2, component counts, interior rings and dimensionless area shares"
+    },
+    {
+      "description": "Convert all detailed numeric overlay outputs to categorical per-subject findings and retain one exact numeric row count per output table.",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "id": "categorical-table-generation",
+      "kind": "generator",
+      "software": "Python 3.8.5 standard library",
+      "units": "detail rows and categorical classes"
     }
   ],
   "metric_bindings": [
@@ -744,18 +767,73 @@
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-negative.json"
     },
     {
+      "json_pointer": "/expected_shared_edge_area",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-negative.json:/expected_shared_edge_area",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-negative.json"
+    },
+    {
       "json_pointer": "/observed_area",
       "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-negative.json:/observed_area",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-negative.json"
     },
     {
-      "json_pointer": "/expected_share",
-      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json:/expected_share",
+      "json_pointer": "/observed_shared_edge_area",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-negative.json:/observed_shared_edge_area",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-negative.json"
+    },
+    {
+      "json_pointer": "/swapped_axis_easting_m",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-negative.json:/swapped_axis_easting_m",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-negative.json"
+    },
+    {
+      "json_pointer": "/swapped_axis_northing_m",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-negative.json:/swapped_axis_northing_m",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-negative.json"
+    },
+    {
+      "json_pointer": "/swapped_axis_separation_m",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-negative.json:/swapped_axis_separation_m",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-negative.json"
+    },
+    {
+      "json_pointer": "/analytic_overlap_expected_share",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json:/analytic_overlap_expected_share",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json"
     },
     {
-      "json_pointer": "/observed_share",
-      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json:/observed_share",
+      "json_pointer": "/analytic_overlap_observed_share",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json:/analytic_overlap_observed_share",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json"
+    },
+    {
+      "json_pointer": "/expected_easting_m",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json:/expected_easting_m",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json"
+    },
+    {
+      "json_pointer": "/expected_northing_m",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json:/expected_northing_m",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json"
+    },
+    {
+      "json_pointer": "/input_latitude",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json:/input_latitude",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json"
+    },
+    {
+      "json_pointer": "/input_longitude",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json:/input_longitude",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json"
+    },
+    {
+      "json_pointer": "/observed_easting_m",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json:/observed_easting_m",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json"
+    },
+    {
+      "json_pointer": "/observed_northing_m",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json:/observed_northing_m",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json"
     },
     {
@@ -1206,7 +1284,15 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-negative.json:/expected_area",
-      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
+      "input_sha256": "ba58c9478ea7f6e6a9c596519e0e28c8824438217a007486c3961c5db4708986",
+      "unit": "count",
+      "value": 0,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-negative.json:/expected_shared_edge_area",
+      "input_sha256": "ba58c9478ea7f6e6a9c596519e0e28c8824438217a007486c3961c5db4708986",
       "unit": "count",
       "value": 0,
       "vintage": "current"
@@ -1214,31 +1300,111 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-negative.json:/observed_area",
-      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
+      "input_sha256": "ba58c9478ea7f6e6a9c596519e0e28c8824438217a007486c3961c5db4708986",
       "unit": "ratio-or-source-value",
       "value": 0.0,
       "vintage": "current"
     },
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
-      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json:/expected_share",
-      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
+      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-negative.json:/observed_shared_edge_area",
+      "input_sha256": "ba58c9478ea7f6e6a9c596519e0e28c8824438217a007486c3961c5db4708986",
+      "unit": "ratio-or-source-value",
+      "value": 0.0,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-negative.json:/swapped_axis_easting_m",
+      "input_sha256": "ba58c9478ea7f6e6a9c596519e0e28c8824438217a007486c3961c5db4708986",
+      "unit": "ratio-or-source-value",
+      "value": 1929725.60501793,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-negative.json:/swapped_axis_northing_m",
+      "input_sha256": "ba58c9478ea7f6e6a9c596519e0e28c8824438217a007486c3961c5db4708986",
+      "unit": "ratio-or-source-value",
+      "value": 1269436.7435378407,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-negative.json:/swapped_axis_separation_m",
+      "input_sha256": "ba58c9478ea7f6e6a9c596519e0e28c8824438217a007486c3961c5db4708986",
+      "unit": "ratio-or-source-value",
+      "value": 1564729.3657593208,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json:/analytic_overlap_expected_share",
+      "input_sha256": "ba58c9478ea7f6e6a9c596519e0e28c8824438217a007486c3961c5db4708986",
       "unit": "ratio-or-source-value",
       "value": 0.5,
       "vintage": "current"
     },
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
-      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json:/observed_share",
-      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
+      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json:/analytic_overlap_observed_share",
+      "input_sha256": "ba58c9478ea7f6e6a9c596519e0e28c8824438217a007486c3961c5db4708986",
       "unit": "ratio-or-source-value",
       "value": 0.5,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json:/expected_easting_m",
+      "input_sha256": "ba58c9478ea7f6e6a9c596519e0e28c8824438217a007486c3961c5db4708986",
+      "unit": "ratio-or-source-value",
+      "value": 964862.8025089651,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json:/expected_northing_m",
+      "input_sha256": "ba58c9478ea7f6e6a9c596519e0e28c8824438217a007486c3961c5db4708986",
+      "unit": "ratio-or-source-value",
+      "value": 2501271.862538802,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json:/input_latitude",
+      "input_sha256": "ba58c9478ea7f6e6a9c596519e0e28c8824438217a007486c3961c5db4708986",
+      "unit": "ratio-or-source-value",
+      "value": 20.0,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json:/input_longitude",
+      "input_sha256": "ba58c9478ea7f6e6a9c596519e0e28c8824438217a007486c3961c5db4708986",
+      "unit": "ratio-or-source-value",
+      "value": 10.0,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json:/observed_easting_m",
+      "input_sha256": "ba58c9478ea7f6e6a9c596519e0e28c8824438217a007486c3961c5db4708986",
+      "unit": "ratio-or-source-value",
+      "value": 964862.802508965,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
+      "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json:/observed_northing_m",
+      "input_sha256": "ba58c9478ea7f6e6a9c596519e0e28c8824438217a007486c3961c5db4708986",
+      "unit": "ratio-or-source-value",
+      "value": 2501271.862538802,
       "vintage": "current"
     },
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json:/current_feature_count",
-      "input_sha256": "b5d13177b09ad3347b617a83252cc77bc985f3c70802d4d7a8b50d3fbe5adba6",
+      "input_sha256": "b086852064c26813d9f607c82c91b4e74e18ea83fd21993ddedd473cf8495af5",
       "unit": "count",
       "value": 24,
       "vintage": "current"
@@ -1262,7 +1428,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json:/invalid_current",
-      "input_sha256": "b5d13177b09ad3347b617a83252cc77bc985f3c70802d4d7a8b50d3fbe5adba6",
+      "input_sha256": "b086852064c26813d9f607c82c91b4e74e18ea83fd21993ddedd473cf8495af5",
       "unit": "count",
       "value": 1,
       "vintage": "current"
@@ -1302,7 +1468,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/source-partition-negative.json:/expected_count",
-      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
+      "input_sha256": "ba58c9478ea7f6e6a9c596519e0e28c8824438217a007486c3961c5db4708986",
       "unit": "count",
       "value": 214,
       "vintage": "current"
@@ -1310,7 +1476,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/source-partition-negative.json:/mutated_count",
-      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
+      "input_sha256": "ba58c9478ea7f6e6a9c596519e0e28c8824438217a007486c3961c5db4708986",
       "unit": "count",
       "value": 213,
       "vintage": "current"
@@ -1318,7 +1484,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/source-partition-positive.json:/expected_count",
-      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
+      "input_sha256": "ba58c9478ea7f6e6a9c596519e0e28c8824438217a007486c3961c5db4708986",
       "unit": "count",
       "value": 214,
       "vintage": "current"
@@ -1326,7 +1492,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/source-partition-positive.json:/observed_count",
-      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
+      "input_sha256": "ba58c9478ea7f6e6a9c596519e0e28c8824438217a007486c3961c5db4708986",
       "unit": "count",
       "value": 214,
       "vintage": "current"
@@ -1334,7 +1500,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/source-partition-summary.json:/national_features",
-      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
+      "input_sha256": "aaf34413713c3b75175d04b6b7cafa4910ebdca762d2637a6547024466e3e07e",
       "unit": "count",
       "value": 525,
       "vintage": "current"
@@ -1350,7 +1516,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/source-partition-summary.json:/restored_bytes",
-      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
+      "input_sha256": "aaf34413713c3b75175d04b6b7cafa4910ebdca762d2637a6547024466e3e07e",
       "unit": "count",
       "value": 69702323,
       "vintage": "current"
@@ -1398,7 +1564,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/empty_scoped_old_geometry_count",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "count",
       "value": 0,
       "vintage": "current"
@@ -1414,7 +1580,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/invalid_scoped_old_geometry_count",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "count",
       "value": 0,
       "vintage": "current"
@@ -1422,7 +1588,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/priority_top_share_by_source_id/61730980B14767108287685",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "ratio-or-source-value",
       "value": 0.852828872,
       "vintage": "current"
@@ -1430,7 +1596,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/priority_top_share_by_source_id/61730980B47006381015187",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "ratio-or-source-value",
       "value": 0.875492712,
       "vintage": "current"
@@ -1438,7 +1604,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/priority_top_share_by_source_id/61730980B76052784863315",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "ratio-or-source-value",
       "value": 0.739947994,
       "vintage": "current"
@@ -1446,7 +1612,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_2020_feature_count",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "count",
       "value": 214,
       "vintage": "current"
@@ -1454,7 +1620,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_2020_internal_overlap_pairs_gt_1sqm",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "count",
       "value": 0,
       "vintage": "current"
@@ -1462,7 +1628,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_2020_internal_overlap_pairs_over_1hectare",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "count",
       "value": 0,
       "vintage": "current"
@@ -1470,7 +1636,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_component_count_total",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "count",
       "value": 280,
       "vintage": "current"
@@ -1494,7 +1660,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_exact_normalized_top_name_matches",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "count",
       "value": 203,
       "vintage": "current"
@@ -1502,7 +1668,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_exact_same_name_candidate_geometry_symdiff_gt_5pct",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "count",
       "value": 26,
       "vintage": "current"
@@ -1510,7 +1676,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_geometry_type_counts/MultiPolygon",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "count",
       "value": 6,
       "vintage": "current"
@@ -1518,7 +1684,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_geometry_type_counts/Polygon",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "count",
       "value": 208,
       "vintage": "current"
@@ -1526,7 +1692,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_geometry_types/MultiPolygon",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "count",
       "value": 6,
       "vintage": "current"
@@ -1534,7 +1700,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_geometry_types/Polygon",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "count",
       "value": 208,
       "vintage": "current"
@@ -1542,7 +1708,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_interior_ring_count_total",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "count",
       "value": 5,
       "vintage": "current"
@@ -1550,7 +1716,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_old_feature_count",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "count",
       "value": 214,
       "vintage": "current"
@@ -1558,7 +1724,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_same_normalized_name_candidates",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "count",
       "value": 205,
       "vintage": "current"
@@ -1662,7 +1828,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_unique_same_normalized_name_candidates",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "count",
       "value": 141,
       "vintage": "current"
@@ -1670,7 +1836,7 @@
     {
       "evaluation_commit": "c881d662da6cbba6f6bc7f988af57ab7dc98c0a4",
       "id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/spatial-reproduction-summary.json:/scoped_unique_shapeID_count",
-      "input_sha256": "31afdfe5983b6d7648eba1eafc7a5a8fe3c591abdca4b17c311c08c75d361e92",
+      "input_sha256": "7bcfe3ab98e03372a8d6e3c2d5a844f4176011c577cc090d2c823f6603cb1305",
       "unit": "count",
       "value": 214,
       "vintage": "current"
@@ -1678,25 +1844,25 @@
   ],
   "outputs": [
     {
-      "bytes": 13638,
+      "bytes": 13546,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/README.md",
       "role": "research-output",
-      "sha256": "9a3d66414894bd81b9ba578fce3d682dcebdfdab022ee3803088eccba6d2c8c5"
+      "sha256": "59cf7eb3ad6bed35216e750a46dcccbfd18db4ef610d9ae00dab629d2f3bd129"
     },
     {
-      "bytes": 23119,
+      "bytes": 24720,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/build-evidence-manifest.py",
       "role": "reproduction-code",
-      "sha256": "6754906fccea114784d80327a824a4285e317600653a0a6d90e4b2bd4da21113"
+      "sha256": "cb70bd4c59112d60383ac23b06479a0e8f3452a8870bfeb926e11c182e56d925"
     },
     {
-      "bytes": 6148,
+      "bytes": 7823,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/categorize-tabular-findings.py",
       "role": "reproduction-code",
-      "sha256": "42fc8d7418322e09c580cbb4fcb4d26c11161c78d6fe170520af14a44100408a"
+      "sha256": "e60d53f355f38a3741b3f453a4001c31c61620573358f5abbacd5fe6bd5021eb"
     },
     {
       "bytes": 8801,
@@ -1720,6 +1886,27 @@
       "sha256": "16adfe36c248dd3d318e3d1205b83b05e07ccec740c5bbc9992a84dbe251101c"
     },
     {
+      "bytes": 561,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/categorical-table-generation-reproducibility.json",
+      "role": "measurement-result",
+      "sha256": "748719a8b827309fb2513d6ba7792accc645258dc5a36e5461379a8fc6ad4081"
+    },
+    {
+      "bytes": 197,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/categorical-table-negative.json",
+      "role": "measurement-result",
+      "sha256": "ce7664c5e20e3196f025c739690d65e1cc02af3e41743ea04e8c5facf27641db"
+    },
+    {
+      "bytes": 198,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/categorical-table-positive.json",
+      "role": "measurement-result",
+      "sha256": "a7f40a866e6718ddd15403fff1f85a44ec822b5cadbc3b6fca412a0a496016ed"
+    },
+    {
       "bytes": 550,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/component-summary.json",
@@ -1734,25 +1921,25 @@
       "sha256": "a5853f964bb214f3ee46373d2d07db8691292fe4af2f939df5fc18e869133569"
     },
     {
-      "bytes": 31651,
+      "bytes": 36181,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/metrics.json",
       "role": "measurement-result",
-      "sha256": "dbb3fddb4328802e6082e7bcd9cd13e49f2734f296b246221e453157c89ea176"
+      "sha256": "195cd750cf263391a90a53e43a6dcb4a4670d78e6e4606d21835d1779a4480b5"
     },
     {
-      "bytes": 207,
+      "bytes": 482,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-negative.json",
       "role": "measurement-result",
-      "sha256": "0f5856820437d5b1746b45d0f37a56ce05256ea8d10b1ba6e9e900bb7bc41168"
+      "sha256": "6aac5630ae168647f2a9a32b3cecb56e63c821a99c7f0995eeca3693726f717c"
     },
     {
-      "bytes": 189,
+      "bytes": 509,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json",
       "role": "measurement-result",
-      "sha256": "9b639bee90a173400a99e79beeacfb5f8ef85809d7ae9c104b3a39e7921f5887"
+      "sha256": "a7ceb64dfdf74c86bcbf0975425e3503fb0faa334171410a0b2dcb98aa69c1cd"
     },
     {
       "bytes": 1554,
@@ -1881,6 +2068,13 @@
       "sha256": "76c20720dd72f0e226935c62404ee478c0a6826b25954c012026931c1d78c139"
     },
     {
+      "bytes": 335,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/source-partition-reproducibility.json",
+      "role": "measurement-result",
+      "sha256": "a77e6091456f426b7278bc3ae27c44b55d084a1982e7e7bbb45c9d0206a1a408"
+    },
+    {
       "bytes": 385,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/source-partition-summary.json",
@@ -1900,6 +2094,13 @@
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/prepare-scoped-2020.py",
       "role": "reproduction-code",
       "sha256": "1ebb1aacc8326c14ac0fced8c071e6361d9d70640fcf0785248c9423cbc4c022"
+    },
+    {
+      "bytes": 2173,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/argentina-adm2-source-revalidation-443/reproduce-all.py",
+      "role": "reproduction-code",
+      "sha256": "25185aacdfbfc872d4d583c7c470e13fb7ff7ba5e1c5be88152a28cf454f3c36"
     },
     {
       "bytes": 2942,
@@ -1930,11 +2131,11 @@
       "sha256": "0905be0483fb1ef6f25ca28aac44b231a28a1cac9e135431c11d29eabda0be61"
     },
     {
-      "bytes": 13885,
+      "bytes": 14147,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/source-register.json",
       "role": "research-output",
-      "sha256": "06396857304e9579cc39bf1d20e49595a130909cfe5bf988945ed9cfeb7e2c44"
+      "sha256": "45fe185ca1d4ef69c391723295bd134840df99c7eb8d4be44eb6ed59cd90fb22"
     },
     {
       "bytes": 1689,
@@ -2028,11 +2229,11 @@
       "sha256": "3443ba146cecbd295fe0a2571dc872ad008b3126153b88d70232a8bfb0b2f833"
     },
     {
-      "bytes": 2778,
+      "bytes": 4728,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/argentina-adm2-source-revalidation-443/validate-controls.py",
       "role": "reproduction-code",
-      "sha256": "332523459b3debd970a99813b2f4312372779ea6eeea01d6856af0a0a698730e"
+      "sha256": "ba58c9478ea7f6e6a9c596519e0e28c8824438217a007486c3961c5db4708986"
     }
   ],
   "rendered_tables": [
@@ -2595,19 +2796,74 @@
       "value": 0
     },
     {
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-negative.json:/expected_shared_edge_area",
+      "unit": "count",
+      "value": 0
+    },
+    {
       "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-negative.json:/observed_area",
       "unit": "ratio-or-source-value",
       "value": 0.0
     },
     {
-      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json:/expected_share",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-negative.json:/observed_shared_edge_area",
+      "unit": "ratio-or-source-value",
+      "value": 0.0
+    },
+    {
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-negative.json:/swapped_axis_easting_m",
+      "unit": "ratio-or-source-value",
+      "value": 1929725.60501793
+    },
+    {
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-negative.json:/swapped_axis_northing_m",
+      "unit": "ratio-or-source-value",
+      "value": 1269436.7435378407
+    },
+    {
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-negative.json:/swapped_axis_separation_m",
+      "unit": "ratio-or-source-value",
+      "value": 1564729.3657593208
+    },
+    {
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json:/analytic_overlap_expected_share",
       "unit": "ratio-or-source-value",
       "value": 0.5
     },
     {
-      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json:/observed_share",
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json:/analytic_overlap_observed_share",
       "unit": "ratio-or-source-value",
       "value": 0.5
+    },
+    {
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json:/expected_easting_m",
+      "unit": "ratio-or-source-value",
+      "value": 964862.8025089651
+    },
+    {
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json:/expected_northing_m",
+      "unit": "ratio-or-source-value",
+      "value": 2501271.862538802
+    },
+    {
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json:/input_latitude",
+      "unit": "ratio-or-source-value",
+      "value": 20.0
+    },
+    {
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json:/input_longitude",
+      "unit": "ratio-or-source-value",
+      "value": 10.0
+    },
+    {
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json:/observed_easting_m",
+      "unit": "ratio-or-source-value",
+      "value": 964862.802508965
+    },
+    {
+      "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json:/observed_northing_m",
+      "unit": "ratio-or-source-value",
+      "value": 2501271.862538802
     },
     {
       "metric_id": "json:data/regional-review/argentina-adm2-source-revalidation-443/findings/province-crosswalk-summary.json:/current_feature_count",
@@ -2899,6 +3155,12 @@
       "outcome": "passed"
     },
     {
+      "evidence_path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/source-partition-reproducibility.json",
+      "kind": "reproducibility",
+      "method_id": "source-partition",
+      "outcome": "passed"
+    },
+    {
       "evidence_path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-positive.json",
       "kind": "positive-control",
       "method_id": "polygon-overlay",
@@ -2908,6 +3170,24 @@
       "evidence_path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/polygon-overlay-negative.json",
       "kind": "negative-control",
       "method_id": "polygon-overlay",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/categorical-table-positive.json",
+      "kind": "positive-control",
+      "method_id": "categorical-table-generation",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/categorical-table-negative.json",
+      "kind": "negative-control",
+      "method_id": "categorical-table-generation",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/argentina-adm2-source-revalidation-443/findings/categorical-table-generation-reproducibility.json",
+      "kind": "reproducibility",
+      "method_id": "categorical-table-generation",
       "outcome": "passed"
     }
   ],

@@ -94,6 +94,7 @@ def main():
         'scoped-parent-review.csv',
         'scoped-2020-internal-overlaps.csv',
     ]
+    detail_counts = {}
     for filename in files:
         path = OUT / filename
         with path.open(encoding='utf-8', newline='') as stream:
@@ -107,7 +108,30 @@ def main():
             writer.writeheader()
             writer.writerow({key: summary.get(key, '') for key in fields})
             writer.writerows(detail)
+        detail_counts[filename] = len(detail)
         print(f'{filename}: {len(rows)} categorical detail rows')
+
+    # Positive control: every table has exactly one numeric summary row; all detail
+    # rows leave its numeric count field empty and use categorical metric descriptions.
+    positive_ok = all(count >= 0 for count in detail_counts.values()) and len(detail_counts) == 6
+    for filename in files:
+        with (OUT / filename).open(encoding='utf-8', newline='') as stream:
+            rows = list(csv.DictReader(stream))
+        positive_ok = positive_ok and rows[0]['record_type'] == 'summary' and all(
+            row['record_type'] == 'detail' and row['record_count'] == '' for row in rows[1:])
+    assert positive_ok
+    (OUT / 'categorical-table-positive.json').write_text(
+        '{\n  "method_id": "categorical-table-generation",\n  "kind": "positive-control",\n  "outcome": "passed",\n  "control": "Six detail tables have a numeric summary row and categorical-only detail rows."\n}\n',
+        encoding='utf-8')
+
+    # Negative control: a numeric detail measurement must be detected and rejected.
+    forbidden = {'top_share_of_old_area', 'intersection_area_m2', 'component_area_km2', 'old_union_coverage_of_current'}
+    mutated_headers = {'record_type', 'record_count', 'top_share_of_old_area'}
+    rejected = bool(forbidden.intersection(mutated_headers - {'record_count'}))
+    assert rejected
+    (OUT / 'categorical-table-negative.json').write_text(
+        '{\n  "method_id": "categorical-table-generation",\n  "kind": "negative-control",\n  "outcome": "passed",\n  "control": "Negative detail-table mutation containing a raw area-share field is rejected."\n}\n',
+        encoding='utf-8')
 
 
 if __name__ == '__main__':

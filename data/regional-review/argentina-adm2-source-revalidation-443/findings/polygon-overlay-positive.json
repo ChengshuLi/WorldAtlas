@@ -1,8 +1,14 @@
 {
-  "control": "Analytic equal-plane 50% overlap",
-  "expected_share": 0.5,
+  "analytic_overlap_expected_share": 0.5,
+  "analytic_overlap_observed_share": 0.5,
+  "control": "Asymmetric longitude/latitude to EPSG:6933 coordinates match independent ellipsoidal formula",
+  "expected_easting_m": 964862.8025089651,
+  "expected_northing_m": 2501271.862538802,
+  "input_latitude": 20.0,
+  "input_longitude": 10.0,
   "kind": "positive-control",
   "method_id": "polygon-overlay",
-  "observed_share": 0.5,
+  "observed_easting_m": 964862.802508965,
+  "observed_northing_m": 2501271.862538802,
   "outcome": "passed"
 }
