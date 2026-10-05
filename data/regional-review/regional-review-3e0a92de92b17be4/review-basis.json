@@ -17,8 +17,8 @@
     },
     {
       "path": "findings.md",
-      "sha256": "66a524b813044121a3c9fad2c21eabb402cbb1418659c525e29c873d30ee9c69",
-      "bytes": 16541
+      "sha256": "ad914e9e97d7d814a6d6b23f48acbb372f98e7571266be1559b423dd34339718",
+      "bytes": 17677
     },
     {
       "path": "issue-418-api-snapshot.json",
@@ -32,13 +32,13 @@
     },
     {
       "path": "reproduce-source-review.py",
-      "sha256": "4796a01575fdddeb7bf8cd011a89f3722734054e29768e095cbc5a412b0d28a4",
-      "bytes": 13851
+      "sha256": "e6fcbc332cf9bf3c586c72b5fbb6d16a11e46da72ad2869f00c5ded19a9dc7fc",
+      "bytes": 14782
     },
     {
       "path": "reproduction.json",
-      "sha256": "d71aa6c7ee19f2049e5767cb35d14cd985489894f79743712cc83f5fb49a47ed",
-      "bytes": 3598
+      "sha256": "fa06ae7af0e3f07d24efc15885bf961b6738c688ecdec561a5d6b0556ce16bd5",
+      "bytes": 4053
     },
     {
       "path": "scope-from-issue.json",
@@ -47,8 +47,8 @@
     },
     {
       "path": "subject-review.csv",
-      "sha256": "0eb0e193076ddb1a6777d624bed3173fe1f0cc7cd138063dbf0a8214bca60827",
-      "bytes": 102021
+      "sha256": "9dcb0636fee990d24025c8c2047dd03056ecbc249af5cc6d8f324b6b628b46b2",
+      "bytes": 102130
     }
   ],
   "pinned_baseline_inputs": [
@@ -112,9 +112,9 @@
   "reproduction": "reproduce-source-review.py verifies input hashes, exact issue ID set, direct parents and source IDs; parses the DZS workbook; then writes subject-review.csv and reproduction.json.",
   "result_limits": [
     "No Croatia polygon boundary is certified.",
-    "185 name/type matches are conditional on county inferred from existing Atlas parent alias; parent assignment is not independently verified by the source.",
-    "Nineteen island labels require authoritative physical-island and legal-host attribution.",
-    "Eleven DZS roster units are absent from this packet scope only, not proven absent from the whole atlas.",
+    "185 exact normalized name/type matches and three additional name candidates (two island labels); all are conditional on county inferred from the existing Atlas parent alias, which is not independently verified.",
+    "Nineteen island labels require authoritative physical-island, legal-host, and municipality-extent attribution; two normalize to DZS town/municipality names (Krk and Cres) without proving feature identity or extent.",
+    "Eleven DZS roster units are not exact name matches in this packet scope; two have island-label name candidates and nine have no name candidate. These are scope-level findings, not proof of whole-atlas omissions.",
     "Grad Zagreb Natural Earth source vintage and extraction remain unpinned.",
     "Yugoslavia area parent is a historical grouping; combined parent decision belongs to regional integration."
   ]

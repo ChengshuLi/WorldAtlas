@@ -176,7 +176,6 @@ def main() -> None:
     county_summary = {}
     missing_units = {}
     children_by_parent: dict[str, list[str]] = defaultdict(list)
-    candidate_names = set()
     for member in source_ids:
         parent_id, parent_name = parents[member]
         children_by_parent[parent_name].append(member)
@@ -184,13 +183,19 @@ def main() -> None:
         dzs_county = COUNTY_NAMES[parent_name]
         official_units = roster[dzs_county]
         matched_names = set()
+        candidate_names = set()
         for member in sorted(children):
             source_name = features[member]["shapeName"]
             match = next((name for name in official_units
                           if normalized_name(name) == normalized_name(source_name)), None)
-            if source_name.startswith("Otok "):
+            if source_name.startswith("Otok ") and match:
                 assessment = "correction-needed"
-                role = "island-labeled feature does not directly match a DZS 2021 town/municipality name within the inherited parent county; legal host/identity unresolved"
+                role = f"island-labeled feature normalizes to DZS 2021 local-government name {match!r}; name correspondence does not establish that the feature is the municipality extent or verify legal host, identity, parent, or boundary"
+                roster_match = "candidate"
+                candidate_names.add(match)
+            elif source_name.startswith("Otok "):
+                assessment = "correction-needed"
+                role = "island-labeled feature has no normalized DZS 2021 town/municipality name match within the inherited parent county; legal host/identity unresolved"
                 roster_match = "no"
             elif match:
                 assessment = "insufficient-evidence"
@@ -229,7 +234,7 @@ def main() -> None:
             "probable_name_candidates": len(official_units.intersection(candidate_names)),
             "unmatched_source_features": len(children) - len(matched_names) - len(candidate_names),
             "roster_units_not_exactly_matched_in_this_issue_scope": len(absent),
-            "roster_units_not_matched_even_as_candidates": len(absent_with_candidates),
+            "roster_units_not_represented_even_by_name_candidate_in_this_issue_scope": len(absent_with_candidates),
         }
         if absent_with_candidates:
             missing_units[parent_name] = absent_with_candidates
@@ -259,6 +264,7 @@ def main() -> None:
         "source_feature_joins": len(source_ids.intersection(features)),
         "roster_matches_conditional_on_inherited_parent": sum(row["inherited_parent_county_dzs_2021_roster_match"] == "yes" for row in report_rows),
         "probable_name_candidates_conditional_on_inherited_parent": sum(row["inherited_parent_county_dzs_2021_roster_match"] == "candidate" for row in report_rows),
+        "island_label_name_candidates_conditional_on_inherited_parent": sum(row["inherited_parent_county_dzs_2021_roster_match"] == "candidate" and row["territorial_role_finding"].startswith("island-labeled feature") for row in report_rows),
         "island_label_correction_candidates": sum(row["territorial_role_finding"].startswith("island-labeled feature") for row in report_rows),
         "overall_status_counts": dict(Counter(row["overall_assessment"] for row in report_rows)),
         "county_summary": county_summary,
@@ -268,6 +274,7 @@ def main() -> None:
             "DGU's official INSPIRE Administrative Units feed carries an explicit public-access restriction; its polygon archive was not downloaded.",
         ],
         "boundary_verification": "No scoped Croatia polygon is certified by this reproduction.",
+        "roster_name_matches_are_not_extent_or_identity_proof": "Two island-labeled source features normalize to DZS local-government names (Krk and Cres); feature identity and geometry still require authoritative review.",
     }
     (HERE / "reproduction.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(summary, ensure_ascii=False, indent=2))
