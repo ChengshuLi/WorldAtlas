@@ -1,0 +1,48 @@
+{
+  "started_at": "2026-10-05T07:02:30.377Z",
+  "completed_at": "2026-10-05T07:02:31.046Z",
+  "origin": "https://worldatlas-explorer.chengshu-worldatlas.workers.dev",
+  "method": "Independent bounded anonymous GET requests after publisher rollback; no user browser, write credential, billing or database mutation",
+  "rows": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "sha256": "441c9e2d4e4a28fdfdb30ef75cdce64a8f677f57019e1c0fd1d9df9b0f5d5083",
+      "expected_sha256": "441c9e2d4e4a28fdfdb30ef75cdce64a8f677f57019e1c0fd1d9df9b0f5d5083",
+      "matches_previous": true
+    },
+    {
+      "path": "assets/index-CpJmYV9E.js",
+      "status": 200,
+      "sha256": "1a21dccf6c3336e71c25f7266548d640c98ce535ca4d26bf2f4b150970b388ab",
+      "expected_sha256": "1a21dccf6c3336e71c25f7266548d640c98ce535ca4d26bf2f4b150970b388ab",
+      "matches_previous": true
+    },
+    {
+      "path": "assets/index-bXIaIiI7.css",
+      "status": 200,
+      "sha256": "f57c2d3ba92874734ee9da5c9dc4417d6615ebb05105729334b6f3f1c5b09f0a",
+      "expected_sha256": "f57c2d3ba92874734ee9da5c9dc4417d6615ebb05105729334b6f3f1c5b09f0a",
+      "matches_previous": true
+    },
+    {
+      "path": "/api/geography/release",
+      "status": 503,
+      "body": {
+        "error": "Atlas storage is temporarily unavailable"
+      }
+    },
+    {
+      "path": "/api/map/snapshot?year=2022&limit=1",
+      "status": 503,
+      "body": {
+        "error": "Atlas storage is temporarily unavailable"
+      }
+    }
+  ],
+  "limits": [
+    "Asset matches verify prior served UI, not live wheel improvement",
+    "HTTP503 confirms unavailability but does not identify the exhausted Neon allowance",
+    "No live wheel, year/mode or data-integrity acceptance claimed"
+  ]
+}

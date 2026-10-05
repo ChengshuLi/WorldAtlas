@@ -1,0 +1,13 @@
+{
+  "observed_at": "2026-10-05T06:59:16.440Z",
+  "before_worker": "2a01cf68-a1f8-4870-b1ac-ff7aa4a494d8",
+  "restored_worker": "2c711f51-eb21-43d2-9047-d50d6714c02b",
+  "provider_deployment_id": "5a30a63a-1d92-4bff-af13-4bde89a58e03",
+  "percentage": 100,
+  "api_status": 503,
+  "api_error": {
+    "error": "Atlas storage is temporarily unavailable"
+  },
+  "reason": "Native Neon app-role SELECT1 independently returned HTTP402 quota exceeded; API acceptance unavailable, not certified successful. Rollback restores prior code/assets, not Neon quota.",
+  "production_sql_writes": 0
+}

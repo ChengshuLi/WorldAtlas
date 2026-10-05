@@ -1,0 +1,204 @@
+{
+  "version": 1,
+  "issue": 886,
+  "lane": "engineering",
+  "worker_id": "engineering-cloudflare-wheel-886-20261004-01a10934",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "59f0e6b155d17e42880e0750c19aa9789f70b7d2",
+    "files": [
+      {
+        "path": "src/wheel-zoom.js",
+        "bytes": 3116,
+        "sha256": "65d8fb02a6beb04a9e917d962f240bca48daa2872a8417260dd5d1c04a247f19",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "src/main.js",
+        "bytes": 35483,
+        "sha256": "5e45f3419696516de7821b77c9cfd9d0682f47f48ae29c54c8d37a305f0259ac",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "src/pixel-layer.js",
+        "bytes": 7305,
+        "sha256": "78df4421cb0262a2dbc813f565f68673f1afbd5a8d72b1746d918441d6ed793d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "src/pixel-canvas-layer.js",
+        "bytes": 8739,
+        "sha256": "8c94181f24f73ce9c735e924e1c9b314f3703797f5a869fe3f6ae59be7811b48",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "src/pixel-grid.js",
+        "bytes": 3617,
+        "sha256": "320cc48796d5d3aaf07bb096441346abbe44ed4fab66df08ee003620ce5870a9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "src/pixel-ownership.js",
+        "bytes": 6134,
+        "sha256": "da8e0b4f05e5ce390b47713030bffeefb7ea0df2700f7c358a9ebe77fe92586f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "src/style.css",
+        "bytes": 16086,
+        "sha256": "521732f6c73f093310ba72dada0398d8993efbe0f8ac03e6dd9ef5944ba98687",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/manifest.json",
+        "bytes": 271171,
+        "sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/benchmark-wheel-zoom.mjs",
+        "bytes": 7906,
+        "sha256": "576072d674d8be7aa79dd64f95a648ce234833d74dbc29a4210521cb74363ea4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/verify-wheel-app.mjs",
+        "bytes": 4389,
+        "sha256": "a2ee6c209b3c38ff67cc91947d965cc1bead4147901a06a0b17bad09d9654ec3",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {}
+  },
+  "sources": [
+    {
+      "id": "wheel-publication-failure",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/886#issuecomment-5989673505",
+      "role": "Original user-owned publisher failure/rollback receipts and failed-settled comment; no live performance acceptance",
+      "vintage": "2026-10-05 failed operation 2a2ac472-32ef-45db-ae9c-746a52fa6ee1",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "User-owned operational receipts; minimal provider error text retained as failure evidence"
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "coordination/engineering/wheel-zoom-886-delivery/neon-quota-failure.json",
+          "bytes": 211,
+          "sha256": "9313c58c2855483e16d432b90f2c9da9e2d44e9d473770689784f8840b93ac0e",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "coordination/engineering/wheel-zoom-886-delivery/rollback-readback.json",
+          "bytes": 584,
+          "sha256": "5b6b1475b48be4ac4f70558b16ecc220fb417a85460442ce11d2d33dd920e01f",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "coordination/engineering/wheel-zoom-886-delivery/publisher-failure-comment.md",
+          "bytes": 2464,
+          "sha256": "97bc05ea322c6547d74c16bb522a892f5b106f596e9d76a6fe7ffa3d96e7cb15",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "coordination/engineering/wheel-zoom-886-delivery/publisher-result-comment.md",
+          "bytes": 1044,
+          "sha256": "d462c825e32e0aa03db6896de09f04c13c5a9cdb897f05d9733c203a2cb2f817",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/README.md",
+      "bytes": 3950,
+      "sha256": "2fafde1b07e7cecfad84130acb2217121240699734fa667e572cacc5819fd52f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/claim.json",
+      "bytes": 837,
+      "sha256": "b2ee3157413cc3785a4d775b93292ae9ed1b1563c809ad63e659872adb96c406",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/independent-public-readback.json",
+      "bytes": 1749,
+      "sha256": "486bfcba4281507562a0d6fcb7637b745f91f00d1f9be54b7cc5e9d38e135d9a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/quota-identification.json",
+      "bytes": 772,
+      "sha256": "ab0aed5cfab47bd353360926839fbe7730e388fee4861189249dc8674ccb1b0e",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "delivery-checkpoint",
+      "kind": "source",
+      "description": "Retain original sanitized operation/rollback receipts and GitHub result bytes, independently compare anonymous served HTML/JS/CSS hashes to the prior publication and capture unavailable release/snapshot responses. This is failure/provenance review, not a wheel benchmark or data-integrity certificate.",
+      "software": "Node24 bounded HTTP GET and GitHub API; no user browser/profile, production write, billing action or management-key assumption",
+      "units": "HTTP state and byte hashes"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "partial",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/independent-public-readback.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/neon-quota-failure.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/publisher-failure-comment.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/publisher-result-comment.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/quota-identification.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/rollback-readback.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/wheel-zoom-886-delivery/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "validation": [],
+  "commands": [
+    "node scripts/evidence-quality.mjs coordination/engineering/wheel-zoom-886-delivery/evidence-quality.json",
+    "Restore Neon quota externally, then follow README fresh-publication and live-acceptance gates; do not replay failed operation as success"
+  ]
+}
