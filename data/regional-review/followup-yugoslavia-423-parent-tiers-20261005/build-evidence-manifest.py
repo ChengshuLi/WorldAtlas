@@ -68,10 +68,10 @@ def m(i,v,u,sha_,n=None,d=None):
  x={'id':i,'value':v,'unit':u,'vintage':'baseline','input_sha256':sha_,'evaluation_commit':BASE}
  if n is not None:x.update(numerator=n,denominator=d)
  M.append(x)
-m('scope-locations',278,'location IDs',pins['issue_423_scope'])
-m('scope-parents',17,'parent IDs',pins['issue_423_parent_assessments'])
-m('scoped-serbian-children',67,'location IDs',pins['issue_423_unit_assessments'])
-m('scoped-slovenian-children',211,'location IDs',pins['issue_423_unit_assessments'])
+m('scope-locations',278,'location IDs',pins[scope_path])
+m('scope-parents',17,'parent IDs',pins[prov_path])
+m('scoped-serbian-children',67,'location IDs',pins[unit_path])
+m('scoped-slovenian-children',211,'location IDs',pins[unit_path])
 for k,v in P['source_collection_counts'].items():
  layer=k.split('-'); path=f'{SRC}/geoboundaries-9469f09/geoBoundaries-{layer[0]}-{layer[1]}.geojson';m('features-'+k,v['feature_count'],'features',B[path]['sha256'])
 GURS=G['current_GURS_region_municipality_geometry'];m('GURS-current-municipalities',212,'features',B[f'{SRC}/gurs-municipal-boundaries.geojson']['sha256'])
