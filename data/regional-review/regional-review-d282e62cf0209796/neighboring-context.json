@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "issue": 423,
+  "finding": "Hodoš is outside this packet scope and belongs to #424. That issue identifies it as the sole Yugoslavia member of a same-name singleton area under Southeastern Europe. This cross-packet status is an integration question; do not merge it into framework:area:yugoslavia or edit its parent from #423.",
+  "location_id": "gb:SVN:ADM2:79292919B24353346281842",
+  "geoBoundaries_name": "Hodoj",
+  "owning_issue": 424,
+  "integration_issue": 415,
+  "evidence": "GitHub issue API snapshots and release membership inventories; confirm current ownership again during #415 integration.",
+  "recommendation": "#415 should decide whether packet #424 singleton linkage reflects intended area semantics; preserve #424 as data owner."
+}
