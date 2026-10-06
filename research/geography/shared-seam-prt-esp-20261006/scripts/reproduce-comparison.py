@@ -337,7 +337,7 @@ def main():
         if actual_sha != record["sha256"]:
             raise RuntimeError(f"IGN item hash changed after receipt: {path.name}")
         feature = json_file(path)
-        if feature.get("id") not in (None, native_id) and feature.get("properties", {}).get("gid") != native_id:
+        if feature.get("id") is not None and str(feature.get("id")) != native_id and str(feature.get("properties", {}).get("gid")) != native_id:
             raise RuntimeError(f"IGN native item identity mismatch: {native_id}")
         ign_items[native_id] = feature
         record["response_path"] = str(path.relative_to(ROOT))
