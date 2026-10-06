@@ -2,7 +2,7 @@
   "schema": "coastal-input-guards:v1",
   "source_issue": 1152,
   "source_issue_baseline": "360f2058a39081319c65ecc68fc6b0a060600e41",
-  "verified_branch_base": "0bf17acf0f02b7ac2e6eff3fea3171237aad0a59",
+  "verified_branch_base": "a32ae163473a42ed28d7bedf7e9930414beb54f8",
   "verification": "Issue-declared whole-file pins; all 57 matched in the fresh branch checkout before reproduction. The branch-base hashes must be independently rechecked by the reproducer.",
   "inputs": [
     {
@@ -351,7 +351,7 @@
   "reproduction_program": {
     "path": "data/regional-review/coastal-reference-reproduction-980/reproduce.py",
     "bytes": 15728,
-    "sha256": "2dacd0244c7d7a2048bab3cffb04ad5cbb12c46cb70cceb068d4f8b8a7ea9b7a",
+    "sha256": "8264a18ad7078386b0fc837ae1230bb065db329341a68eacaab369aa40002656",
     "note": "Candidate executable hash, recorded in advance and verified before every run; the issue-declared immutable input/helper pins remain the 57 entries below."
   }
 }
