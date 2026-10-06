@@ -1,0 +1,103 @@
+{
+  "retrieved_date_local": "2026-10-05",
+  "retrieved_timezone": "America/Los_Angeles",
+  "sources": [
+    {
+      "id": "natural-earth-admin1",
+      "title": "Natural Earth 1:10m Admin 1 – states and provinces",
+      "repository": "https://github.com/nvkelso/natural-earth-vector",
+      "commit": "ca96624a56bd078437bca8184e78163e5039ad19",
+      "commit_date": "2022-06-02T07:25:00Z",
+      "path": "geojson/ne_10m_admin_1_states_provinces.geojson",
+      "source_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_admin_1_states_provinces.geojson",
+      "sha256_full_source": "22d0e3ad85eb3e27f17cabf8ba2d50e554fbc27a87796ff891d958185da62fb5",
+      "retained_path": "natural-earth/ne_10m_admin_1_scoped-admin-features.json",
+      "sha256_retained_extract": "dd3f4a5683c713fd89c00b41748d89771f905ef236feaacb7887818085f3d96e",
+      "extract_rule": "all exact source features whose properties.admin is Cook Islands, French Polynesia, Pitcairn Islands, or United States Minor Outlying Islands; 25 features retained including neighboring source units",
+      "license": "Public domain",
+      "license_url": "https://www.naturalearthdata.com/about/terms-of-use/",
+      "scope_limit": "1:10m cartographic/admin source, 2022 source commit; not an authoritative current shoreline survey and not proof of island completeness"
+    },
+    {
+      "id": "natural-earth-admin0-map-units",
+      "title": "Natural Earth 1:10m Admin 0 map units",
+      "repository": "https://github.com/nvkelso/natural-earth-vector",
+      "commit": "ca96624a56bd078437bca8184e78163e5039ad19",
+      "path": "geojson/ne_10m_admin_0_map_units.geojson",
+      "source_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_admin_0_map_units.geojson",
+      "sha256_full_source": "57da82be755f4afccd8f3b14251bb2752f5df1395f47d2d86f817470c4a48862",
+      "retained_path": "natural-earth/ne_10m_admin_0_map_units.geojson",
+      "license": "Public domain",
+      "scope_limit": "neighbor/sovereignty context only; map-unit outlines do not establish individual-island coastline or administrative role"
+    },
+    {
+      "id": "natural-earth-land",
+      "title": "Natural Earth 1:10m land",
+      "repository": "https://github.com/nvkelso/natural-earth-vector",
+      "commit": "ca96624a56bd078437bca8184e78163e5039ad19",
+      "path": "geojson/ne_10m_land.geojson",
+      "source_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_land.geojson",
+      "sha256_full_source": "1ac90796408bc6ad6911d69448485d3c4dbf2190370080368a09976e1c9f7416",
+      "retained_path": "natural-earth/ne_10m_land.geojson",
+      "license": "Public domain",
+      "scope_limit": "generalized world land polygons; no local territory/ownership semantics"
+    },
+    {
+      "id": "natural-earth-minor-islands",
+      "title": "Natural Earth 1:10m minor islands",
+      "repository": "https://github.com/nvkelso/natural-earth-vector",
+      "commit": "ca96624a56bd078437bca8184e78163e5039ad19",
+      "path": "geojson/ne_10m_minor_islands.geojson",
+      "source_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_minor_islands.geojson",
+      "sha256_full_source": "8c933ca7a4760256bdc46408355706e39764b0fa01c160c28888b90b4faec29f",
+      "retained_path": "natural-earth/ne_10m_minor_islands.geojson",
+      "license": "Public domain",
+      "scope_limit": "generalized and scale-filtered; not a complete island inventory or legal territory reference"
+    },
+    {
+      "id": "geoboundaries-chl-adm3",
+      "title": "geoBoundaries CHL ADM3 source metadata and Isla de Pascua feature",
+      "repository": "https://github.com/wmgeolab/geoBoundaries",
+      "commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "source_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/CHL/ADM3/geoBoundaries-CHL-ADM3.geojson",
+      "lfs_pointer_url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/CHL/ADM3/geoBoundaries-CHL-ADM3.geojson",
+      "lfs_object_sha256": "f3833ce1965394ae705e3793b50bdd007775b43da604251871deffed04f3bffd",
+      "lfs_object_size": 171783952,
+      "retained_pointer_sha256": "ef3f8c417d9b67799682610a43040c111ccf0dd3daf30d4e51776cf65d5a764a",
+      "metadata_path": "geoboundaries/CHL/geoBoundaries-CHL-ADM3-metaData.json",
+      "metadata_sha256": "658356bb413f8b284b260360d1309527781e1b0c46027e1ae0a4c58da1c99409",
+      "feature_path": "geoboundaries/CHL/geoBoundaries-CHL-ADM3-Isla-de-Pascua-feature.json",
+      "feature_sha256": "fb0ea671f05a6334ec7a867ca5cb46fcedb63c5b3cc25a39115f5879c73986cb",
+      "license": "CC BY 3.0 IGO, per metadata",
+      "declared_vintage": "2020 boundary; metadata source-data update 2023-01-19; built 2023-12-12",
+      "attribution": "BCN Chile, OCHA ROLAC, geoBoundaries",
+      "scope_limit": "Retained exact source feature; not the 171.8 MB nationwide file. Restore with pinned LFS object and verify oid before re-extracting shapeID 31580391B33082267781919."
+    },
+    {
+      "id": "geoboundaries-kir-adm1",
+      "title": "geoBoundaries KIR ADM1 source dataset and Line Islands feature",
+      "repository": "https://github.com/wmgeolab/geoBoundaries",
+      "commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "source_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/KIR/ADM1/geoBoundaries-KIR-ADM1.geojson",
+      "lfs_pointer_url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/KIR/ADM1/geoBoundaries-KIR-ADM1.geojson",
+      "lfs_object_sha256": "93a0914dc2572951a72cae1aef5145bc056180d75b96812c770bff06e8d8e86f",
+      "lfs_object_size": 805741,
+      "metadata_path": "geoboundaries/KIR/geoBoundaries-KIR-ADM1-metaData.json",
+      "metadata_sha256": "e611d682fb3eb7e64176ac9753942321819a847443c1d3c87f8885e1b981211c",
+      "dataset_path": "geoboundaries/KIR/geoBoundaries-KIR-ADM1.geojson",
+      "dataset_sha256": "93a0914dc2572951a72cae1aef5145bc056180d75b96812c770bff06e8d8e86f",
+      "license": "ODbL 1.0; source metadata attributes dataset to OpenStreetMap and Wambacher, 2023-01-19 source-data update",
+      "scope_limit": "ADM1 canonical role is blank; source metadata lists 3 group features. OSM-derived grouping polygons are not self-authenticating legal boundaries. Keep ODbL attribution/derivative obligations."
+    },
+    {
+      "id": "cook-source-predecessor",
+      "title": "Merged WorldAtlas #502/#512 Cook Islands correction packet retained predecessor extracts",
+      "source_path": "data/macro-improvements/cook-restoration/original-natural-earth-features.json.gz",
+      "sha256_archive": "6bc85e9a4bd0ad873f184f09b163fb87745326aada47ca3127f1a42e78bf6bf3",
+      "full_source_commit": "ca96624a56bd078437bca8184e78163e5039ad19",
+      "full_source_sha256": "22d0e3ad85eb3e27f17cabf8ba2d50e554fbc27a87796ff891d958185da62fb5",
+      "license": "Public domain Natural Earth source; downstream correction packet also cites ODbL OSM land evidence and preserves attribution",
+      "scope_limit": "Prior packet proves bounded label/physical-identity corrections and source history for COK-4951/4956; it does not establish completeness for all 11 Cook scoped footprints."
+    }
+  ]
+}

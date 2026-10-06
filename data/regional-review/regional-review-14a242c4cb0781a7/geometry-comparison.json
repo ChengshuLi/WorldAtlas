@@ -1,0 +1,741 @@
+{
+  "method": {
+    "version": "worldatlas-evidence-geometry-v1",
+    "axis_order": "longitude-latitude",
+    "crs": "EPSG:4326",
+    "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+    "area_units": "m2",
+    "distance_method": "WGS84 inverse geodesic",
+    "distance_units": "m"
+  },
+  "helper_version": "worldatlas-evidence-geometry-v1",
+  "source_commit": "ca96624a56bd078437bca8184e78163e5039ad19",
+  "source_file_sha256": "22d0e3ad85eb3e27f17cabf8ba2d50e554fbc27a87796ff891d958185da62fb5",
+  "geometry_input_files": [
+    "data/geography/part-2.json",
+    "data/geography/part-13.json",
+    "data/geography/part-28.json"
+  ],
+  "outcome_limits": [
+    "Different outlines show the atlas and comparator are not identical; they do not establish which outline is correct.",
+    "Atolls may be encoded as lagoon-enclosing administrative polygons while the atlas may store dry-land unions; coordinate overlap cannot decide between these semantics.",
+    "Refuge/protected-area polygons include submerged territory and are not appropriate island-land comparators.",
+    "The tiny remote geoBoundaries component near Sala y G\u00f3mez matters as a named legal territory even though it contributes little land area.",
+    "For Pitcairn, the source is a four-island parent group, not Henderson's dedicated validated shoreline."
+  ],
+  "observations": [
+    {
+      "location_id": "COK-4950",
+      "current_name": "Atiu",
+      "comparator_source_name": "Atiu",
+      "comparison_kind": "same-name Natural Earth admin1 comparator; diagnostic only",
+      "current_geometry_type": "Polygon",
+      "source_geometry_type": "MultiPolygon",
+      "current_parts": 1,
+      "source_parts": 3,
+      "current_valid": true,
+      "source_valid": true,
+      "intersection_over_union": 0.97903719,
+      "source_component_coverage": 0.98014778,
+      "current_component_coverage": 0.99884399,
+      "intersection_area_m2": 20554772.582,
+      "source_area_m2": 20971095.349,
+      "current_area_m2": 20578561.665,
+      "current_bounds_lonlat": [
+        -158.1352,
+        -20.0197,
+        -158.0783,
+        -19.9728
+      ],
+      "source_bounds_lonlat": [
+        -158.297353,
+        -20.019708,
+        -158.078318,
+        -19.810642
+      ],
+      "warning": "WGS84 ellipsoidal overlap diagnostic using the shared helper; not a completeness proof or coastline accuracy score; Pitcairn compares against a broader parent group"
+    },
+    {
+      "location_id": "COK-4951",
+      "current_name": "Manuae",
+      "comparator_source_name": "Aitutaki",
+      "comparison_kind": "same-name Natural Earth admin1 comparator; diagnostic only",
+      "current_geometry_type": "MultiPolygon",
+      "source_geometry_type": "Polygon",
+      "current_parts": 7,
+      "source_parts": 1,
+      "current_valid": true,
+      "source_valid": true,
+      "intersection_over_union": 0.06746425,
+      "source_component_coverage": 0.19108058,
+      "current_component_coverage": 0.09443521,
+      "intersection_area_m2": 629422.164,
+      "source_area_m2": 3294014.323,
+      "current_area_m2": 6665121.458,
+      "current_bounds_lonlat": [
+        -158.971237,
+        -19.287965,
+        -158.913084,
+        -19.252432
+      ],
+      "source_bounds_lonlat": [
+        -158.955556,
+        -19.26922,
+        -158.91808,
+        -19.24212
+      ],
+      "warning": "WGS84 ellipsoidal overlap diagnostic using the shared helper; not a completeness proof or coastline accuracy score; Pitcairn compares against a broader parent group"
+    },
+    {
+      "location_id": "COK-4952",
+      "current_name": "Mangaia",
+      "comparator_source_name": "Mangaia",
+      "comparison_kind": "same-name Natural Earth admin1 comparator; diagnostic only",
+      "current_geometry_type": "Polygon",
+      "source_geometry_type": "Polygon",
+      "current_parts": 1,
+      "source_parts": 1,
+      "current_valid": true,
+      "source_valid": true,
+      "intersection_over_union": 0.94373287,
+      "source_component_coverage": 0.94383672,
+      "current_component_coverage": 0.99988343,
+      "intersection_area_m2": 36477794.086,
+      "source_area_m2": 38648416.032,
+      "current_area_m2": 36482046.804,
+      "current_bounds_lonlat": [
+        -157.9687,
+        -21.9389,
+        -157.8899,
+        -21.8775
+      ],
+      "source_bounds_lonlat": [
+        -157.968699,
+        -21.938897,
+        -157.887074,
+        -21.877537
+      ],
+      "warning": "WGS84 ellipsoidal overlap diagnostic using the shared helper; not a completeness proof or coastline accuracy score; Pitcairn compares against a broader parent group"
+    },
+    {
+      "location_id": "COK-4953",
+      "current_name": "Rarotonga",
+      "comparator_source_name": "Rarotonga",
+      "comparison_kind": "same-name Natural Earth admin1 comparator; diagnostic only",
+      "current_geometry_type": "Polygon",
+      "source_geometry_type": "Polygon",
+      "current_parts": 1,
+      "source_parts": 1,
+      "current_valid": true,
+      "source_valid": true,
+      "intersection_over_union": 0.95629527,
+      "source_component_coverage": 0.96313376,
+      "current_component_coverage": 0.99262997,
+      "intersection_area_m2": 61798886.163,
+      "source_area_m2": 64164385.645,
+      "current_area_m2": 62257727.488,
+      "current_bounds_lonlat": [
+        -159.8388,
+        -21.2543,
+        -159.736,
+        -21.1861
+      ],
+      "source_bounds_lonlat": [
+        -159.846262,
+        -21.254327,
+        -159.736033,
+        -21.18613
+      ],
+      "warning": "WGS84 ellipsoidal overlap diagnostic using the shared helper; not a completeness proof or coastline accuracy score; Pitcairn compares against a broader parent group"
+    },
+    {
+      "location_id": "COK-4954",
+      "current_name": "Mitiaro",
+      "comparator_source_name": "Mitiaro",
+      "comparison_kind": "same-name Natural Earth admin1 comparator; diagnostic only",
+      "current_geometry_type": "Polygon",
+      "source_geometry_type": "Polygon",
+      "current_parts": 1,
+      "source_parts": 1,
+      "current_valid": true,
+      "source_valid": true,
+      "intersection_over_union": 0.871844,
+      "source_component_coverage": 0.882511,
+      "current_component_coverage": 0.98632575,
+      "intersection_area_m2": 17811491.968,
+      "source_area_m2": 20182742.149,
+      "current_area_m2": 18058427.467,
+      "current_bounds_lonlat": [
+        -157.7396,
+        -19.8422,
+        -157.708,
+        -19.7672
+      ],
+      "source_bounds_lonlat": [
+        -157.742136,
+        -19.85589,
+        -157.707224,
+        -19.767185
+      ],
+      "warning": "WGS84 ellipsoidal overlap diagnostic using the shared helper; not a completeness proof or coastline accuracy score; Pitcairn compares against a broader parent group"
+    },
+    {
+      "location_id": "COK-4955",
+      "current_name": "Mauke",
+      "comparator_source_name": "Mauke",
+      "comparison_kind": "same-name Natural Earth admin1 comparator; diagnostic only",
+      "current_geometry_type": "Polygon",
+      "source_geometry_type": "Polygon",
+      "current_parts": 1,
+      "source_parts": 1,
+      "current_valid": true,
+      "source_valid": true,
+      "intersection_over_union": 0.8840959,
+      "source_component_coverage": 0.88475741,
+      "current_component_coverage": 0.99915502,
+      "intersection_area_m2": 11183556.924,
+      "source_area_m2": 12640252.295,
+      "current_area_m2": 11193014.799,
+      "current_bounds_lonlat": [
+        -157.3494,
+        -20.1757,
+        -157.3128,
+        -20.1417
+      ],
+      "source_bounds_lonlat": [
+        -157.349355,
+        -20.179132,
+        -157.312815,
+        -20.137384
+      ],
+      "warning": "WGS84 ellipsoidal overlap diagnostic using the shared helper; not a completeness proof or coastline accuracy score; Pitcairn compares against a broader parent group"
+    },
+    {
+      "location_id": "COK-4956",
+      "current_name": "Aitutaki",
+      "comparator_source_name": "Palmerston",
+      "comparison_kind": "same-name Natural Earth admin1 comparator; diagnostic only",
+      "current_geometry_type": "MultiPolygon",
+      "source_geometry_type": "Polygon",
+      "current_parts": 28,
+      "source_parts": 1,
+      "current_valid": true,
+      "source_valid": true,
+      "intersection_over_union": 0.55477794,
+      "source_component_coverage": 0.80522522,
+      "current_component_coverage": 0.64076504,
+      "intersection_area_m2": 11714562.237,
+      "source_area_m2": 14548180.955,
+      "current_area_m2": 18282149.347,
+      "current_bounds_lonlat": [
+        -159.838122,
+        -18.951072,
+        -159.727528,
+        -18.823852
+      ],
+      "source_bounds_lonlat": [
+        -159.802317,
+        -18.887953,
+        -159.761383,
+        -18.828953
+      ],
+      "warning": "WGS84 ellipsoidal overlap diagnostic using the shared helper; not a completeness proof or coastline accuracy score; Pitcairn compares against a broader parent group"
+    },
+    {
+      "location_id": "COK-4959",
+      "current_name": "Pukapuka",
+      "comparator_source_name": "Pukapuka",
+      "comparison_kind": "same-name Natural Earth admin1 comparator; diagnostic only",
+      "current_geometry_type": "Polygon",
+      "source_geometry_type": "Polygon",
+      "current_parts": 1,
+      "source_parts": 1,
+      "current_valid": true,
+      "source_valid": true,
+      "intersection_over_union": 0.47443024,
+      "source_component_coverage": 0.47447341,
+      "current_component_coverage": 0.99980827,
+      "intersection_area_m2": 668396.933,
+      "source_area_m2": 1408713.153,
+      "current_area_m2": 668525.111,
+      "current_bounds_lonlat": [
+        -165.8245,
+        -10.8891,
+        -165.8118,
+        -10.8801
+      ],
+      "source_bounds_lonlat": [
+        -165.824534,
+        -10.891534,
+        -165.807688,
+        -10.880141
+      ],
+      "warning": "WGS84 ellipsoidal overlap diagnostic using the shared helper; not a completeness proof or coastline accuracy score; Pitcairn compares against a broader parent group"
+    },
+    {
+      "location_id": "COK-4960",
+      "current_name": "Rakahanga",
+      "comparator_source_name": "Rakahanga",
+      "comparison_kind": "same-name Natural Earth admin1 comparator; diagnostic only",
+      "current_geometry_type": "Polygon",
+      "source_geometry_type": "Polygon",
+      "current_parts": 1,
+      "source_parts": 1,
+      "current_valid": true,
+      "source_valid": true,
+      "intersection_over_union": 0.49317492,
+      "source_component_coverage": 0.4937315,
+      "current_component_coverage": 0.99771942,
+      "intersection_area_m2": 707061.899,
+      "source_area_m2": 1432077.761,
+      "current_area_m2": 708678.093,
+      "current_bounds_lonlat": [
+        -161.088,
+        -10.0446,
+        -161.0756,
+        -10.0351
+      ],
+      "source_bounds_lonlat": [
+        -161.088002,
+        -10.04461,
+        -161.070058,
+        -10.027439
+      ],
+      "warning": "WGS84 ellipsoidal overlap diagnostic using the shared helper; not a completeness proof or coastline accuracy score; Pitcairn compares against a broader parent group"
+    },
+    {
+      "location_id": "COK-4961",
+      "current_name": "Manihiki",
+      "comparator_source_name": "Manihiki",
+      "comparison_kind": "same-name Natural Earth admin1 comparator; diagnostic only",
+      "current_geometry_type": "MultiPolygon",
+      "source_geometry_type": "Polygon",
+      "current_parts": 84,
+      "source_parts": 1,
+      "current_valid": true,
+      "source_valid": true,
+      "intersection_over_union": 0.0,
+      "source_component_coverage": 0.0,
+      "current_component_coverage": 0.0,
+      "intersection_area_m2": 0.0,
+      "source_area_m2": 2423003.367,
+      "current_area_m2": 5304426.19,
+      "current_bounds_lonlat": [
+        -161.038255,
+        -10.462782,
+        -160.953779,
+        -10.370467
+      ],
+      "source_bounds_lonlat": [
+        -160.996409,
+        -10.422784,
+        -160.9381,
+        -10.371515
+      ],
+      "warning": "WGS84 ellipsoidal overlap diagnostic using the shared helper; not a completeness proof or coastline accuracy score; Pitcairn compares against a broader parent group"
+    },
+    {
+      "location_id": "COK-4962",
+      "current_name": "Penrhyn",
+      "comparator_source_name": "Penrhyn",
+      "comparison_kind": "same-name Natural Earth admin1 comparator; diagnostic only",
+      "current_geometry_type": "Polygon",
+      "source_geometry_type": "Polygon",
+      "current_parts": 1,
+      "source_parts": 1,
+      "current_valid": true,
+      "source_valid": true,
+      "intersection_over_union": 0.87262358,
+      "source_component_coverage": 0.87468162,
+      "current_component_coverage": 0.9973109,
+      "intersection_area_m2": 9988539.114,
+      "source_area_m2": 11419628.449,
+      "current_area_m2": 10015471.762,
+      "current_bounds_lonlat": [
+        -158.0029,
+        -8.9807,
+        -157.9407,
+        -8.9467
+      ],
+      "source_bounds_lonlat": [
+        -158.00829,
+        -8.980727,
+        -157.940745,
+        -8.94671
+      ],
+      "warning": "WGS84 ellipsoidal overlap diagnostic using the shared helper; not a completeness proof or coastline accuracy score; Pitcairn compares against a broader parent group"
+    },
+    {
+      "location_id": "PCN+00?",
+      "current_name": "Henderson Island",
+      "comparator_source_name": "Pitcairn Islands 4-island admin1 group",
+      "comparison_kind": "parent-group comparison only, not a Henderson shoreline",
+      "current_geometry_type": "Polygon",
+      "source_geometry_type": "MultiPolygon",
+      "current_parts": 1,
+      "source_parts": 4,
+      "current_valid": true,
+      "source_valid": true,
+      "intersection_over_union": 0.90435058,
+      "source_component_coverage": 0.9050104,
+      "current_component_coverage": 0.99919446,
+      "intersection_area_m2": 38526298.967,
+      "source_area_m2": 42570006.802,
+      "current_area_m2": 38557358.42,
+      "current_bounds_lonlat": [
+        -128.3502,
+        -24.4137,
+        -128.2902,
+        -24.3243
+      ],
+      "source_bounds_lonlat": [
+        -130.753082,
+        -25.077081,
+        -124.778066,
+        -23.924412
+      ],
+      "warning": "WGS84 ellipsoidal overlap diagnostic using the shared helper; not a completeness proof or coastline accuracy score; Pitcairn compares against a broader parent group"
+    },
+    {
+      "location_id": "PYF-4963",
+      "current_name": "Windward Islands",
+      "comparator_source_name": "Windward Islands",
+      "comparison_kind": "same-name Natural Earth admin1 comparator; diagnostic only",
+      "current_geometry_type": "MultiPolygon",
+      "source_geometry_type": "MultiPolygon",
+      "current_parts": 2,
+      "source_parts": 4,
+      "current_valid": true,
+      "source_valid": true,
+      "intersection_over_union": 0.99119615,
+      "source_component_coverage": 0.99285029,
+      "current_component_coverage": 0.99832197,
+      "intersection_area_m2": 1149428597.71,
+      "source_area_m2": 1157705855.847,
+      "current_area_m2": 1151360620.397,
+      "current_bounds_lonlat": [
+        -149.9444,
+        -17.8691,
+        -149.1491,
+        -17.4645
+      ],
+      "source_bounds_lonlat": [
+        -150.655263,
+        -17.869073,
+        -149.149119,
+        -16.982192
+      ],
+      "warning": "WGS84 ellipsoidal overlap diagnostic using the shared helper; not a completeness proof or coastline accuracy score; Pitcairn compares against a broader parent group"
+    },
+    {
+      "location_id": "PYF-4964",
+      "current_name": "Leeward Islands",
+      "comparator_source_name": "Leeward Islands",
+      "comparison_kind": "same-name Natural Earth admin1 comparator; diagnostic only",
+      "current_geometry_type": "MultiPolygon",
+      "source_geometry_type": "MultiPolygon",
+      "current_parts": 5,
+      "source_parts": 8,
+      "current_valid": true,
+      "source_valid": true,
+      "intersection_over_union": 0.93869408,
+      "source_component_coverage": 0.94212084,
+      "current_component_coverage": 0.99614012,
+      "intersection_area_m2": 307813962.086,
+      "source_area_m2": 326724502.193,
+      "current_area_m2": 309006690.348,
+      "current_bounds_lonlat": [
+        -151.7845,
+        -16.9026,
+        -150.9791,
+        -16.4723
+      ],
+      "source_bounds_lonlat": [
+        -154.536977,
+        -16.902927,
+        -150.978383,
+        -15.789321
+      ],
+      "warning": "WGS84 ellipsoidal overlap diagnostic using the shared helper; not a completeness proof or coastline accuracy score; Pitcairn compares against a broader parent group"
+    },
+    {
+      "location_id": "PYF-4965",
+      "current_name": "Tuamotu-Gambier",
+      "comparator_source_name": "Tuamotu-Gambier",
+      "comparison_kind": "same-name Natural Earth admin1 comparator; diagnostic only",
+      "current_geometry_type": "MultiPolygon",
+      "source_geometry_type": "MultiPolygon",
+      "current_parts": 25,
+      "source_parts": 65,
+      "current_valid": true,
+      "source_valid": true,
+      "intersection_over_union": 0.72237308,
+      "source_component_coverage": 0.72736937,
+      "current_component_coverage": 0.99058066,
+      "intersection_area_m2": 484267467.31,
+      "source_area_m2": 665779298.225,
+      "current_area_m2": 488872321.185,
+      "current_bounds_lonlat": [
+        -148.6479,
+        -23.1388,
+        -134.9506,
+        -14.408
+      ],
+      "source_bounds_lonlat": [
+        -148.690663,
+        -23.138767,
+        -134.942983,
+        -14.164972
+      ],
+      "warning": "WGS84 ellipsoidal overlap diagnostic using the shared helper; not a completeness proof or coastline accuracy score; Pitcairn compares against a broader parent group"
+    },
+    {
+      "location_id": "PYF-4966",
+      "current_name": "Austral Islands",
+      "comparator_source_name": "Austral Islands",
+      "comparison_kind": "same-name Natural Earth admin1 comparator; diagnostic only",
+      "current_geometry_type": "MultiPolygon",
+      "source_geometry_type": "MultiPolygon",
+      "current_parts": 4,
+      "source_parts": 4,
+      "current_valid": true,
+      "source_valid": true,
+      "intersection_over_union": 0.9489328,
+      "source_component_coverage": 0.95149598,
+      "current_component_coverage": 0.99716922,
+      "intersection_area_m2": 106443550.583,
+      "source_area_m2": 111869679.405,
+      "current_area_m2": 106745724.534,
+      "current_bounds_lonlat": [
+        -151.397,
+        -27.6412,
+        -144.2838,
+        -22.4225
+      ],
+      "source_bounds_lonlat": [
+        -151.397043,
+        -27.641209,
+        -144.283762,
+        -22.422459
+      ],
+      "warning": "WGS84 ellipsoidal overlap diagnostic using the shared helper; not a completeness proof or coastline accuracy score; Pitcairn compares against a broader parent group"
+    },
+    {
+      "location_id": "PYF-4967",
+      "current_name": "Marquesas Islands",
+      "comparator_source_name": "Marquesas Islands",
+      "comparison_kind": "same-name Natural Earth admin1 comparator; diagnostic only",
+      "current_geometry_type": "MultiPolygon",
+      "source_geometry_type": "MultiPolygon",
+      "current_parts": 7,
+      "source_parts": 7,
+      "current_valid": true,
+      "source_valid": true,
+      "intersection_over_union": 0.97983561,
+      "source_component_coverage": 0.98485533,
+      "current_component_coverage": 0.99482511,
+      "intersection_area_m2": 1058167345.336,
+      "source_area_m2": 1074439371.788,
+      "current_area_m2": 1063671724.736,
+      "current_bounds_lonlat": [
+        -140.7278,
+        -10.5505,
+        -138.6202,
+        -7.9501
+      ],
+      "source_bounds_lonlat": [
+        -140.727773,
+        -10.55047,
+        -138.620229,
+        -7.950128
+      ],
+      "warning": "WGS84 ellipsoidal overlap diagnostic using the shared helper; not a completeness proof or coastline accuracy score; Pitcairn compares against a broader parent group"
+    },
+    {
+      "location_id": "UMI-5171",
+      "current_name": "Baker Island",
+      "comparator_source_name": "Baker Island",
+      "comparison_kind": "same-name Natural Earth admin1 comparator; diagnostic only",
+      "current_geometry_type": "Polygon",
+      "source_geometry_type": "MultiPolygon",
+      "current_parts": 1,
+      "source_parts": 2,
+      "current_valid": true,
+      "source_valid": true,
+      "intersection_over_union": 0.49114104,
+      "source_component_coverage": 0.50425278,
+      "current_component_coverage": 0.94971933,
+      "intersection_area_m2": 360522.62,
+      "source_area_m2": 714964.067,
+      "current_area_m2": 379609.648,
+      "current_bounds_lonlat": [
+        -176.4858,
+        0.1903,
+        -176.4769,
+        0.1975
+      ],
+      "source_bounds_lonlat": [
+        -176.485829,
+        0.190334,
+        -176.459177,
+        0.225898
+      ],
+      "warning": "WGS84 ellipsoidal overlap diagnostic using the shared helper; not a completeness proof or coastline accuracy score; Pitcairn compares against a broader parent group"
+    },
+    {
+      "location_id": "UMI-5172",
+      "current_name": "Howland Island",
+      "comparator_source_name": "Howland Island",
+      "comparison_kind": "same-name Natural Earth admin1 comparator; diagnostic only",
+      "current_geometry_type": "Polygon",
+      "source_geometry_type": "Polygon",
+      "current_parts": 1,
+      "source_parts": 1,
+      "current_valid": true,
+      "source_valid": true,
+      "intersection_over_union": 0.73920783,
+      "source_component_coverage": 0.74146939,
+      "current_component_coverage": 0.99589077,
+      "intersection_area_m2": 355094.926,
+      "source_area_m2": 478907.062,
+      "current_area_m2": 356560.113,
+      "current_bounds_lonlat": [
+        -176.6405,
+        0.7902,
+        -176.6361,
+        0.8034
+      ],
+      "source_bounds_lonlat": [
+        -176.640492,
+        0.790188,
+        -176.636098,
+        0.806952
+      ],
+      "warning": "WGS84 ellipsoidal overlap diagnostic using the shared helper; not a completeness proof or coastline accuracy score; Pitcairn compares against a broader parent group"
+    },
+    {
+      "location_id": "UMI-5173",
+      "current_name": "Jarvis Island",
+      "comparator_source_name": "Jarvis Island",
+      "comparison_kind": "same-name Natural Earth admin1 comparator; diagnostic only",
+      "current_geometry_type": "Polygon",
+      "source_geometry_type": "Polygon",
+      "current_parts": 1,
+      "source_parts": 1,
+      "current_valid": true,
+      "source_valid": true,
+      "intersection_over_union": 0.9916605,
+      "source_component_coverage": 0.99709792,
+      "current_component_coverage": 0.99453097,
+      "intersection_area_m2": 2330106.757,
+      "source_area_m2": 2336888.588,
+      "current_area_m2": 2342920.26,
+      "current_bounds_lonlat": [
+        -160.03,
+        -0.3888,
+        -160.0089,
+        -0.3725
+      ],
+      "source_bounds_lonlat": [
+        -160.029978,
+        -0.388767,
+        -160.008901,
+        -0.372491
+      ],
+      "warning": "WGS84 ellipsoidal overlap diagnostic using the shared helper; not a completeness proof or coastline accuracy score; Pitcairn compares against a broader parent group"
+    },
+    {
+      "location_id": "UMI-5178",
+      "current_name": "Palmyra Atoll",
+      "comparator_source_name": "Palmyra Atoll",
+      "comparison_kind": "same-name Natural Earth admin1 comparator; diagnostic only",
+      "current_geometry_type": "Polygon",
+      "source_geometry_type": "Polygon",
+      "current_parts": 1,
+      "source_parts": 1,
+      "current_valid": true,
+      "source_valid": true,
+      "intersection_over_union": 0.52107346,
+      "source_component_coverage": 0.55848101,
+      "current_component_coverage": 0.88609747,
+      "intersection_area_m2": 3938007.968,
+      "source_area_m2": 7051283.586,
+      "current_area_m2": 4444215.355,
+      "current_bounds_lonlat": [
+        -162.0911,
+        5.8716,
+        -162.0609,
+        5.8872
+      ],
+      "source_bounds_lonlat": [
+        -162.103627,
+        5.869371,
+        -162.057607,
+        5.890245
+      ],
+      "warning": "WGS84 ellipsoidal overlap diagnostic using the shared helper; not a completeness proof or coastline accuracy score; Pitcairn compares against a broader parent group"
+    },
+    {
+      "location_id": "gb:CHL:ADM3:31580391B33082267781919",
+      "current_name": "Isla de Pascua",
+      "comparator_source_name": "Isla de Pascua exact geoBoundaries feature",
+      "comparison_kind": "exact source feature (geoBoundaries CHL ADM3)",
+      "current_geometry_type": "Polygon",
+      "source_geometry_type": "MultiPolygon",
+      "current_parts": 1,
+      "source_parts": 166,
+      "current_valid": true,
+      "source_valid": true,
+      "intersection_over_union": 0.95086851,
+      "source_component_coverage": 0.96128625,
+      "current_component_coverage": 0.98873118,
+      "intersection_area_m2": 157503328.27,
+      "source_area_m2": 163846439.016,
+      "current_area_m2": 159298433.516,
+      "current_bounds_lonlat": [
+        -109.4499,
+        -27.1968,
+        -109.2277,
+        -27.0564
+      ],
+      "source_bounds_lonlat": [
+        -109.454916,
+        -27.2023,
+        -105.360062,
+        -26.469933
+      ],
+      "warning": "WGS84 ellipsoidal overlap diagnostic using the shared helper; not a completeness proof or coastline accuracy score; Pitcairn compares against a broader parent group"
+    },
+    {
+      "location_id": "gb:KIR:ADM1:97431129B35506555718846",
+      "current_name": "Line Islands",
+      "comparator_source_name": "Line Islands exact geoBoundaries feature",
+      "comparison_kind": "exact source feature (geoBoundaries KIR ADM1)",
+      "current_geometry_type": "MultiPolygon",
+      "source_geometry_type": "MultiPolygon",
+      "current_parts": 5,
+      "source_parts": 5,
+      "current_valid": true,
+      "source_valid": true,
+      "intersection_over_union": 0.91455069,
+      "source_component_coverage": 0.93279079,
+      "current_component_coverage": 0.97906624,
+      "intersection_area_m2": 551397592.922,
+      "source_area_m2": 591126754.412,
+      "current_area_m2": 563187219.73,
+      "current_bounds_lonlat": [
+        -160.4085,
+        1.6933,
+        -157.1645,
+        4.6993
+      ],
+      "source_bounds_lonlat": [
+        -160.410449,
+        1.693279,
+        -157.163694,
+        4.699344
+      ],
+      "warning": "WGS84 ellipsoidal overlap diagnostic using the shared helper; not a completeness proof or coastline accuracy score; Pitcairn compares against a broader parent group"
+    }
+  ]
+}
