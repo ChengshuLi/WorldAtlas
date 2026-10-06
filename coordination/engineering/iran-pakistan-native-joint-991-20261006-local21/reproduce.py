@@ -102,8 +102,10 @@ def main():
     args = parser.parse_args()
     # Refuse execution of unstaged/unpinned producer code before creating outputs.
     producer = []
-    for name in ('reproduce.py', 'exact_arrangement.py', 'exact_faces_v2.py', 'exact_collinear_v3.py'):
-        path = PREFIX + '/' + name
+    paths = [PREFIX + '/' + name for name in
+             ('reproduce.py', 'exact_arrangement.py', 'exact_faces_v2.py', 'exact_collinear_v3.py')]
+    paths += ['scripts/evidence/immutable.py', 'scripts/evidence/geometry.py', 'scripts/ellipsoidal_area.py']
+    for path in paths:
         raw = read(args.evaluation_commit, path)
         if raw != (ROOT / path).read_bytes():
             raise ValueError('Producer differs from execution pin: ' + path)
@@ -211,7 +213,9 @@ def main():
             raise ValueError('Output exceeds evidence bound')
         with (output / name).open('xb') as stream:
             stream.write(raw)
-    print(json.dumps({'output': str(output.relative_to(ROOT)), 'summaries': summaries,
+    print(json.dumps({'output': str(output.relative_to(ROOT)),
+                      'summaries': {k: {name: v for name, v in record.items() if name != 'exact_assigned_area'}
+                                    for k, record in summaries.items()},
                       'unknown_faces': result['unknown_component_faces'], 'noding': noding}))
 
 
