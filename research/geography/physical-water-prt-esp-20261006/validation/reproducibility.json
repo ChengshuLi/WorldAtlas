@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "method_id": "apa-wfd-line-geometry-intersection",
+  "kind": "reproducibility",
+  "outcome": "passed",
+  "execution": {
+    "clock_check_before_command_at_utc": "2026-10-06T15:04:45Z",
+    "clock_check_after_command_at_utc": "2026-10-06T15:04:52Z",
+    "per_run_exact_timestamps": "not captured; both runs occurred between the recorded checks",
+    "producer_commit": "494f13a3f4e188cd9e81a9de3d46aca0a5f775f8",
+    "producer_commit_committed_at_utc": "2026-10-06T15:04:37Z",
+    "producer_script": "research/geography/physical-water-prt-esp-20261006/reproduction/compare_apa_wfd_component.py",
+    "producer_script_sha256": "4fc85b6c035ff4a0d4d64a20cdfa449732768703c62d9d7d886146d7b32f8cb3",
+    "git_status_before_runs": "clean",
+    "git_status_after_runs": "only the two declared run output files were modified by this execution",
+    "working_directory": "repository root",
+    "commands": [
+      "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/physical-water-prt-esp-20261006/reproduction/compare_apa_wfd_component.py research/geography/physical-water-prt-esp-20261006/reproduction/run-1.json",
+      "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/physical-water-prt-esp-20261006/reproduction/compare_apa_wfd_component.py research/geography/physical-water-prt-esp-20261006/reproduction/run-2.json",
+      "cmp research/geography/physical-water-prt-esp-20261006/reproduction/run-1.json research/geography/physical-water-prt-esp-20261006/reproduction/run-2.json"
+    ],
+    "runtime": {
+      "python": "3.12.14",
+      "shapely": "2.1.2",
+      "geos": "3.13.1",
+      "pyproj": "3.7.2",
+      "proj": "9.5.1"
+    },
+    "inputs": [
+      {
+        "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v2/components-004.json.gz",
+        "sha256": "c8726499e2d34c89b45fcf5d4c725b9583d2cb14319736580c032d460c04cb54"
+      },
+      {
+        "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-wfd-explicit-full-aoi-page-0.xml",
+        "sha256": "41c231afc90b3a0b66025440215d4d4451ff64f4b1ceb4cab8ba89f6a2c4c52c"
+      },
+      {
+        "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-wfd-explicit-full-aoi-page-1.xml",
+        "sha256": "c1379a198ee0d12d4533171f0bf3c473cf2c6fbbe88cbb9083bb8bfbaca36576"
+      },
+      {
+        "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-wfd-explicit-full-aoi-hits.xml",
+        "sha256": "0f863cd1ca30661979d2f571a37a1ce1425d7a6c5a25b006cb9a3317962c5a5b"
+      }
+    ],
+    "outputs": [
+      {
+        "path": "research/geography/physical-water-prt-esp-20261006/reproduction/run-1.json",
+        "sha256": "9b377c27879dd2d1b2faf4a25f256dff6d2025430a0a5a7251003cac5a282992"
+      },
+      {
+        "path": "research/geography/physical-water-prt-esp-20261006/reproduction/run-2.json",
+        "sha256": "9b377c27879dd2d1b2faf4a25f256dff6d2025430a0a5a7251003cac5a282992"
+      }
+    ]
+  },
+  "run_one_sha256": "9b377c27879dd2d1b2faf4a25f256dff6d2025430a0a5a7251003cac5a282992",
+  "run_two_sha256": "9b377c27879dd2d1b2faf4a25f256dff6d2025430a0a5a7251003cac5a282992",
+  "scope_limit": "This receipt proves post-commit reproducibility of the source-line coincidence computation against the pinned response and component bytes. It does not validate source completeness beyond the stated receipts, positional accuracy, wetness, channel width, physical water area, or ownership."
+}

@@ -1,0 +1,19 @@
+HTTP/1.1 200 
+Date: Tue, 06 Oct 2026 14:43:20 GMT
+Server: Apache
+Access-Control-Allow-Headers: Authorization
+Strict-Transport-Security: max-age=63072000; includeSubDomains
+X-Content-Type-Options: nosniff
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: HEAD,DELETE,POST,GET,OPTIONS,PUT
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+API-Version: 1.0.1
+Link: <https://wmts.mapama.gob.es/sig-api/ogc/features/v1/collections/?f=application%2Fjson>; rel="self"; type="application/json"; title="This document"
+Link: <https://wmts.mapama.gob.es/sig-api/ogc/features/v1/collections/?f=application%2Fx-yaml>; rel="alternate"; type="application/x-yaml"; title="This document as application/x-yaml"
+Link: <https://wmts.mapama.gob.es/sig-api/ogc/features/v1/collections/?f=text%2Fhtml>; rel="alternate"; type="text/html"; title="This document as text/html"
+Content-Type: application/json
+Transfer-Encoding: chunked
+strict-transport-security: max-age=31536000;includesubdomains;preload
+x-content-type-options: nosniff
+
