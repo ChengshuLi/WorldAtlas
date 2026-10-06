@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "issue": 83,
+  "review_stage": "initial scoped source/semantic review; not a regional approval",
+  "items": [
+    {
+      "key": "mp-2023-district-parentage",
+      "status": "needs-bounded-child",
+      "subjects": [
+        {
+          "id": "atlas:local:IND:7132399B38776901339777",
+          "name": "Maihar",
+          "legacy_parent": "Satna",
+          "candidate_parent": "Maihar"
+        },
+        {
+          "id": "atlas:local:IND:7132399B57369514987979",
+          "name": "Amarpatan",
+          "legacy_parent": "Satna",
+          "candidate_parent": "Maihar"
+        },
+        {
+          "id": "atlas:local:IND:7132399B49243836531958",
+          "name": "Ramnagar",
+          "legacy_parent": "Satna",
+          "candidate_parent": "Maihar"
+        },
+        {
+          "id": "atlas:local:IND:7132399B76128567554742",
+          "name": "Mauganj",
+          "legacy_parent": "Rewa",
+          "candidate_parent": "Mauganj"
+        },
+        {
+          "id": "atlas:local:IND:7132399B48283436920757",
+          "name": "Hanumana",
+          "legacy_parent": "Rewa",
+          "candidate_parent": "Mauganj"
+        },
+        {
+          "id": "atlas:local:IND:7132399B83071462288470",
+          "name": "Naigarhi",
+          "legacy_parent": "Rewa",
+          "candidate_parent": "Mauganj"
+        }
+      ],
+      "evidence": [
+        {
+          "source": "https://maihar.nic.in/en/about-district/",
+          "fact": "Official district page says Maihar separated from Satna in 2023 and its district contains Maihar, Amarpatan and Ramnagar tehsils; page snapshot hash and restoration instructions in source-inventory.json."
+        },
+        {
+          "source": "https://zenodo.org/records/10067487",
+          "fact": "Third-party archival copy of MP Revenue order; text says Mauganj district was formed from Mauganj, Naigarhi and Hanumana tehsils. Government Gazette authentication remains open."
+        },
+        {
+          "source": "https://mpdistricts.nic.in/",
+          "fact": "Official MP district portal lists current Maihar and Mauganj district identities, but does not establish their legal polygons."
+        }
+      ],
+      "engineering_handoff": "Coordinate with Central India integration to create/identify stable Maihar and Mauganj province identities and propose the six parent changes only after official Gazette authentication and current licensed boundary correspondence. Preserve all location IDs and source lineage; do not infer or edit footprints from tehsil names alone.",
+      "unresolved": "Obtain first-party Gazette/order bytes, exact legal effective dates, current tehsil boundary datasets and their terms, and exact source-to-current polygon crosswalks. Revalidate adjacent districts and sibling issue scopes before integrating.",
+      "child_issue": "https://github.com/ChengshuLi/WorldAtlas/issues/1102"
+    },
+    {
+      "key": "up-current-display-label-crosswalk",
+      "status": "recommend-label-review",
+      "subjects": [
+        {
+          "id": "atlas:local:IND:7132399B98935795866687",
+          "source_name": "Mahroni",
+          "current_roster_name": "Mahruni",
+          "district": "Lalitpur"
+        },
+        {
+          "id": "atlas:local:IND:7132399B17043910309774",
+          "source_name": "Tahrauli",
+          "current_roster_name": "Tehroli",
+          "district": "Jhansi"
+        },
+        {
+          "id": "atlas:local:IND:7132399B52255887408358",
+          "source_name": "Sawayajpur",
+          "current_roster_name": "Swayjpur",
+          "district": "Hardoi"
+        },
+        {
+          "id": "atlas:local:IND:7132399B71736761540502",
+          "source_name": "Naraini",
+          "current_roster_name": "Nraini",
+          "district": "Banda"
+        }
+      ],
+      "engineering_handoff": "Review official current spelling for display metadata while preserving source names, IDs, and lineage. Do not merge identities or change geometry based on roster strings.",
+      "unresolved": "Current roster API names are not a legal footprint crosswalk; confirm spelling/identity against a licensed stable source before implementation."
+    },
+    {
+      "key": "mp-seoni-display-label-candidate",
+      "status": "recommend-label-review",
+      "subjects": [
+        {
+          "id": "atlas:local:IND:7132399B90178850580504",
+          "source_name": "Seoni",
+          "current_roster_name": "Seoni Rural",
+          "district": "Seoni"
+        }
+      ],
+      "evidence": [
+        {
+          "source": "https://seoni.nic.in/en/tehsil/",
+          "fact": "The current official district tehsil table has eight exact name matches and one residual (Seoni→Seoni Rural) against the nine exact issue-owned members; retrieved 2026-10-06, response SHA-256 and restoration instructions are in source-inventory.json."
+        }
+      ],
+      "engineering_handoff": "Review current official display spelling and stable identity while preserving the location ID and 2018 source lineage. Do not infer or change the footprint from a roster name.",
+      "unresolved": "The same page claims 8 tahsils but its table contains 9 tehsil rows; obtain the current legal notification, stable identifier and lawful current boundary source before implementation."
+    },
+    {
+      "key": "up-two-name-crosswalk-ambiguities",
+      "status": "source-restoration-needed",
+      "subjects": [
+        {
+          "location_ids": [
+            "atlas:local:IND:7132399B50726720159904",
+            "atlas:local:IND:7132399B9648135161270"
+          ],
+          "district": "Kanpur Nagar",
+          "candidates": [
+            "Kanpur→Kanpur Sadar",
+            "Narwal→Narval"
+          ]
+        },
+        {
+          "location_ids": [
+            "atlas:local:IND:7132399B3933262245335",
+            "atlas:local:IND:7132399B45612828863454"
+          ],
+          "district": "Kheri",
+          "candidates": [
+            "Lakhimpur→Lakhimpur Kheri",
+            "Mohammdi→Mohammadi"
+          ]
+        }
+      ],
+      "unresolved": "Two residual names in each district prevent a unique roster-only crosswalk. Obtain legal orders, stable LGD identifiers and licensed current boundary data before recommending either label or parent change."
+    },
+    {
+      "key": "2018-adm3-coverage-and-27-footprint-differences",
+      "status": "source-restoration-needed",
+      "subjects": "All 229 exact #83 members; see reproduction-results.json",
+      "unresolved": "Resolve the nationwide 6,822-versus-6,836 source count discrepancy; inspect and explain all 27 topological source/Atlas mismatches using current authorized boundaries and a reproducible diagnostic. A topology difference alone is not proof of incorrectness."
+    }
+  ]
+}

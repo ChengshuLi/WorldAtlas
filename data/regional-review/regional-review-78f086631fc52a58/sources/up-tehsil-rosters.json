@@ -1,0 +1,604 @@
+{
+  "version": 1,
+  "source": "Government of Uttar Pradesh Board of Revenue, DARMS public get_tehsils selector endpoint",
+  "retrieved_at_utc": "2026-10-06T07:43:30Z",
+  "license_status": "Page/API-specific reuse terms were not identified; preserve exact retrieval URLs and response hashes as restoration instructions. Names/codes below are a derived roster aid, not redistributed raw responses.",
+  "scope": "All 17 UP parent districts with scoped members in #83",
+  "districts": [
+    {
+      "district_selector_name": "Agra",
+      "district_code": "146",
+      "url": "https://revenuedarms.up.gov.in/get_tehsils?distCode=146",
+      "response_sha256": "b7ea5ed850e2b69827f27f81563549db19748cf4d0cb7c9d6cd0fa01d85c37c8",
+      "response_bytes": 476,
+      "tehsil_count": 6,
+      "tehsils": [
+        {
+          "code": "00766",
+          "name": "Agra",
+          "native_name": "आगरा"
+        },
+        {
+          "code": "00765",
+          "name": "Etmadpur",
+          "native_name": "एत्मादपुर"
+        },
+        {
+          "code": "00767",
+          "name": "Kiraoli",
+          "native_name": "किरावली"
+        },
+        {
+          "code": "00768",
+          "name": "Kheragarh",
+          "native_name": "खेरागढ़"
+        },
+        {
+          "code": "00769",
+          "name": "Fatehabad",
+          "native_name": "फतेहाबाद"
+        },
+        {
+          "code": "00770",
+          "name": "Bah",
+          "native_name": "बाह"
+        }
+      ]
+    },
+    {
+      "district_selector_name": "Firozabad",
+      "district_code": "147",
+      "url": "https://revenuedarms.up.gov.in/get_tehsils?distCode=147",
+      "response_sha256": "d1c2550245892f5ca92d06480cf641a9c177ed78ab88d4b0b8d3a17240648f48",
+      "response_bytes": 429,
+      "tehsil_count": 5,
+      "tehsils": [
+        {
+          "code": "00773",
+          "name": "Jasrana",
+          "native_name": "जसराना"
+        },
+        {
+          "code": "00771",
+          "name": "Tundla",
+          "native_name": "टूण्डला"
+        },
+        {
+          "code": "00772",
+          "name": "Firozabad",
+          "native_name": "फिरोजाबाद"
+        },
+        {
+          "code": "00774",
+          "name": "Shikohabad",
+          "native_name": "शिकोहावाद"
+        },
+        {
+          "code": "01040",
+          "name": "Sirsaganj",
+          "native_name": "सिरसागंज"
+        }
+      ]
+    },
+    {
+      "district_selector_name": "Lalitpur",
+      "district_code": "167",
+      "url": "https://revenuedarms.up.gov.in/get_tehsils?distCode=167",
+      "response_sha256": "20a86b6abd4d5ce3928f22177a348561badfa8f317265573d7678fb1d8b3cf9c",
+      "response_bytes": 396,
+      "tehsil_count": 5,
+      "tehsils": [
+        {
+          "code": "00861",
+          "name": "Talbehat",
+          "native_name": "तालबेहट"
+        },
+        {
+          "code": "01046",
+          "name": "Pali",
+          "native_name": "पाली"
+        },
+        {
+          "code": "01047",
+          "name": "Madawara",
+          "native_name": "मडावरा"
+        },
+        {
+          "code": "00863",
+          "name": "Mahruni",
+          "native_name": "महरौनी"
+        },
+        {
+          "code": "00862",
+          "name": "Lalitpur",
+          "native_name": "ललितपुर"
+        }
+      ]
+    },
+    {
+      "district_selector_name": "Jhansi",
+      "district_code": "166",
+      "url": "https://revenuedarms.up.gov.in/get_tehsils?distCode=166",
+      "response_sha256": "6ecbf3fa74139fff6aef5fd8c904e42e4bc6a06cfd7d4de3ac47a9e1eb669128",
+      "response_bytes": 393,
+      "tehsil_count": 5,
+      "tehsils": [
+        {
+          "code": "00857",
+          "name": "Garautha",
+          "native_name": "गरौठा"
+        },
+        {
+          "code": "00860",
+          "name": "Jhansi",
+          "native_name": "झांसी"
+        },
+        {
+          "code": "00858",
+          "name": "Tehroli",
+          "native_name": "टहरौली"
+        },
+        {
+          "code": "00859",
+          "name": "Mauranipur",
+          "native_name": "मऊरानीपुर"
+        },
+        {
+          "code": "00856",
+          "name": "Moth",
+          "native_name": "मोंठ"
+        }
+      ]
+    },
+    {
+      "district_selector_name": "Mainpuri",
+      "district_code": "148",
+      "url": "https://revenuedarms.up.gov.in/get_tehsils?distCode=148",
+      "response_sha256": "10c7c74256c2d196fbae781244702a0564da8f3ce0a5af79ea8d0f7af7582460",
+      "response_bytes": 469,
+      "tehsil_count": 6,
+      "tehsils": [
+        {
+          "code": "00776",
+          "name": "Karhal",
+          "native_name": "करहल"
+        },
+        {
+          "code": "01033",
+          "name": "Kishni",
+          "native_name": "किशनी"
+        },
+        {
+          "code": "01054",
+          "name": "Kurawali",
+          "native_name": "कुरावली"
+        },
+        {
+          "code": "01044",
+          "name": "Ghiror",
+          "native_name": "घिरोर"
+        },
+        {
+          "code": "00777",
+          "name": "Bhogaon ",
+          "native_name": "भोगांव"
+        },
+        {
+          "code": "00775",
+          "name": "Mainpuri",
+          "native_name": "मैनपुरी"
+        }
+      ]
+    },
+    {
+      "district_selector_name": "Etawah",
+      "district_code": "161",
+      "url": "https://revenuedarms.up.gov.in/get_tehsils?distCode=161",
+      "response_sha256": "1cf7cb8743aa1d309af6ff7540dc8aa31b8eb2312bc62cfc48def553c23594d8",
+      "response_bytes": 470,
+      "tehsil_count": 6,
+      "tehsils": [
+        {
+          "code": "00838",
+          "name": "Etawah",
+          "native_name": "इटावा"
+        },
+        {
+          "code": "00840",
+          "name": "Chakarnagar",
+          "native_name": "चकरनगर"
+        },
+        {
+          "code": "00836",
+          "name": "Jaswantnagar",
+          "native_name": "जसवंतनगर"
+        },
+        {
+          "code": "01013",
+          "name": "Takha",
+          "native_name": "ताखा"
+        },
+        {
+          "code": "00839",
+          "name": "Bharthana",
+          "native_name": "भरथना"
+        },
+        {
+          "code": "00837",
+          "name": "Saifai",
+          "native_name": "सैफई"
+        }
+      ]
+    },
+    {
+      "district_selector_name": "Jalaun",
+      "district_code": "165",
+      "url": "https://revenuedarms.up.gov.in/get_tehsils?distCode=165",
+      "response_sha256": "bcdb13e9bbf8cc38832da1516d9e129e53d0197817ee5af7ae494b1c84624462",
+      "response_bytes": 369,
+      "tehsil_count": 5,
+      "tehsils": [
+        {
+          "code": "00854",
+          "name": "Orai",
+          "native_name": "उरई"
+        },
+        {
+          "code": "00853",
+          "name": "Kalpi",
+          "native_name": "कालपी"
+        },
+        {
+          "code": "00855",
+          "name": "Konch",
+          "native_name": "कोंच"
+        },
+        {
+          "code": "00852",
+          "name": "Jalaun",
+          "native_name": "जालौन"
+        },
+        {
+          "code": "00851",
+          "name": "Madhogarh",
+          "native_name": "माधौगढ़"
+        }
+      ]
+    },
+    {
+      "district_selector_name": "Auraya",
+      "district_code": "162",
+      "url": "https://revenuedarms.up.gov.in/get_tehsils?distCode=162",
+      "response_sha256": "eb1295e8fb9f64f56f9f22c4bf4ae25adead481fb2142239279d923eacff0634",
+      "response_bytes": 235,
+      "tehsil_count": 3,
+      "tehsils": [
+        {
+          "code": "01026",
+          "name": "Ajitmal",
+          "native_name": "अजीतमल"
+        },
+        {
+          "code": "00842",
+          "name": "Auraiya",
+          "native_name": "औरैया"
+        },
+        {
+          "code": "00841",
+          "name": "Bidhuna",
+          "native_name": "बिधूना"
+        }
+      ]
+    },
+    {
+      "district_selector_name": "Kannauj",
+      "district_code": "160",
+      "url": "https://revenuedarms.up.gov.in/get_tehsils?distCode=160",
+      "response_sha256": "8f9f597d0cc982ed167b59c6ef80d3ef40559f4ee97dbc286386ac882c6b7461",
+      "response_bytes": 318,
+      "tehsil_count": 4,
+      "tehsils": [
+        {
+          "code": "00834",
+          "name": "Kannauj",
+          "native_name": "कन्नौज"
+        },
+        {
+          "code": "00833",
+          "name": "Chhibramau",
+          "native_name": "छिबरामऊ"
+        },
+        {
+          "code": "00835",
+          "name": "Tirwa",
+          "native_name": "तिर्वा"
+        },
+        {
+          "code": "01061",
+          "name": "Haseran",
+          "native_name": "हसेरन"
+        }
+      ]
+    },
+    {
+      "district_selector_name": "Mahoba",
+      "district_code": "169",
+      "url": "https://revenuedarms.up.gov.in/get_tehsils?distCode=169",
+      "response_sha256": "232b73e5e3dcfa73197036e943353aaeede98ea66a9fa4c40ddffcb59a5f2abb",
+      "response_bytes": 241,
+      "tehsil_count": 3,
+      "tehsils": [
+        {
+          "code": "00868",
+          "name": "Kulpahar",
+          "native_name": "कुलपहाङ"
+        },
+        {
+          "code": "00869",
+          "name": "Charkhari",
+          "native_name": "चरखारी"
+        },
+        {
+          "code": "00870",
+          "name": "Mahoba ",
+          "native_name": "महोबा"
+        }
+      ]
+    },
+    {
+      "district_selector_name": "Hamirpur",
+      "district_code": "168",
+      "url": "https://revenuedarms.up.gov.in/get_tehsils?distCode=168",
+      "response_sha256": "66b79fa9e49c653a57919c22bb255c373e5d35d7308c9f7057786472a169b286",
+      "response_bytes": 302,
+      "tehsil_count": 4,
+      "tehsils": [
+        {
+          "code": "00867",
+          "name": "Maudaha",
+          "native_name": "मौदहा"
+        },
+        {
+          "code": "00865",
+          "name": "Rath",
+          "native_name": "राठ"
+        },
+        {
+          "code": "00866",
+          "name": "Sarila",
+          "native_name": "सरीला"
+        },
+        {
+          "code": "00864",
+          "name": "Hamirpur",
+          "native_name": "हमीरपुर"
+        }
+      ]
+    },
+    {
+      "district_selector_name": "Kanpurdehat",
+      "district_code": "163",
+      "url": "https://revenuedarms.up.gov.in/get_tehsils?distCode=163",
+      "response_sha256": "40cc9c29944068394dfe3f40c7cf3f2e8a4a5edeb62d2a6ab47c258264be583a",
+      "response_bytes": 498,
+      "tehsil_count": 6,
+      "tehsils": [
+        {
+          "code": "00845",
+          "name": "Akbarpur",
+          "native_name": "अकबरपुर"
+        },
+        {
+          "code": "00844",
+          "name": "Derapur",
+          "native_name": "डेरापुर"
+        },
+        {
+          "code": "00846",
+          "name": "Bhognipur",
+          "native_name": "भोगनीपुर"
+        },
+        {
+          "code": "01050",
+          "name": "Maitha",
+          "native_name": "मैथा"
+        },
+        {
+          "code": "00843",
+          "name": "Rasulabad",
+          "native_name": "रसूलाबाद"
+        },
+        {
+          "code": "00847",
+          "name": "Sikandra",
+          "native_name": "सिकन्दरा"
+        }
+      ]
+    },
+    {
+      "district_selector_name": "Kanpurnagar",
+      "district_code": "164",
+      "url": "https://revenuedarms.up.gov.in/get_tehsils?distCode=164",
+      "response_sha256": "bd1bdf0ac9aadb2fc5c34505cbc6a0db3de042f55d31d9b96974dcbd93387639",
+      "response_bytes": 333,
+      "tehsil_count": 4,
+      "tehsils": [
+        {
+          "code": "00849",
+          "name": "Kanpur Sadar",
+          "native_name": "कानपुर सदर"
+        },
+        {
+          "code": "00850",
+          "name": "Ghatampur",
+          "native_name": "घाटमपुर"
+        },
+        {
+          "code": "01049",
+          "name": "Narval",
+          "native_name": "नरवल"
+        },
+        {
+          "code": "00848",
+          "name": "Bilhaur",
+          "native_name": "बिल्हौर"
+        }
+      ]
+    },
+    {
+      "district_selector_name": "Hardoi",
+      "district_code": "155",
+      "url": "https://revenuedarms.up.gov.in/get_tehsils?distCode=155",
+      "response_sha256": "e6a4dbda5ac6d474e2d242968e2f2d533c8f539c7eee3c6d99483a578c279562",
+      "response_bytes": 412,
+      "tehsil_count": 5,
+      "tehsils": [
+        {
+          "code": "00812",
+          "name": "Bilgram",
+          "native_name": "बिलग्राम"
+        },
+        {
+          "code": "00809",
+          "name": "Shahabad",
+          "native_name": "शाहाबाद"
+        },
+        {
+          "code": "00813",
+          "name": "Sandila",
+          "native_name": "सण्डीला"
+        },
+        {
+          "code": "00810",
+          "name": "Swayjpur",
+          "native_name": "सवायजपुर"
+        },
+        {
+          "code": "00811",
+          "name": "Hardoi",
+          "native_name": "हरदोई"
+        }
+      ]
+    },
+    {
+      "district_selector_name": "Unnao",
+      "district_code": "156",
+      "url": "https://revenuedarms.up.gov.in/get_tehsils?distCode=156",
+      "response_sha256": "138b0e70f04aae2296e5e13a4d809af76482e428a9a3288f8ca609b0422e63f2",
+      "response_bytes": 480,
+      "tehsil_count": 6,
+      "tehsils": [
+        {
+          "code": "00816",
+          "name": "Unnao",
+          "native_name": "उन्नाव"
+        },
+        {
+          "code": "00817",
+          "name": "Purwa ",
+          "native_name": "पुरवा"
+        },
+        {
+          "code": "01038",
+          "name": "Bangarmau",
+          "native_name": "बांगरमऊ"
+        },
+        {
+          "code": "00818",
+          "name": "Bighapur",
+          "native_name": "बीघापुर"
+        },
+        {
+          "code": "00814",
+          "name": "Safipur",
+          "native_name": "सफीपुर"
+        },
+        {
+          "code": "00815",
+          "name": "Hasanganj",
+          "native_name": "हसनगंज"
+        }
+      ]
+    },
+    {
+      "district_selector_name": "Banda",
+      "district_code": "170",
+      "url": "https://revenuedarms.up.gov.in/get_tehsils?distCode=170",
+      "response_sha256": "e74cad162d7ece4081d2afa99323904d3d102a3e70fbf835a6bf98e0da61a4b8",
+      "response_bytes": 382,
+      "tehsil_count": 5,
+      "tehsils": [
+        {
+          "code": "00873",
+          "name": "Atarra",
+          "native_name": "अतर्रा"
+        },
+        {
+          "code": "00874",
+          "name": "Nraini",
+          "native_name": "नरैनी"
+        },
+        {
+          "code": "01029",
+          "name": "Pailani",
+          "native_name": "पैलानी"
+        },
+        {
+          "code": "00872",
+          "name": "Baberu",
+          "native_name": "बबेरू"
+        },
+        {
+          "code": "00871",
+          "name": "Banda",
+          "native_name": "बाँदा"
+        }
+      ]
+    },
+    {
+      "district_selector_name": "Kheri",
+      "district_code": "153",
+      "url": "https://revenuedarms.up.gov.in/get_tehsils?distCode=153",
+      "response_sha256": "7802694de848b523d30a0aa6f7f277ef7f366a970b18183b70b5d92fd97176a0",
+      "response_bytes": 592,
+      "tehsil_count": 7,
+      "tehsils": [
+        {
+          "code": "00799",
+          "name": "Gola Gokaran Nath",
+          "native_name": "गोला"
+        },
+        {
+          "code": "00802",
+          "name": "Dhaurahara",
+          "native_name": "धौरहरा"
+        },
+        {
+          "code": "00797",
+          "name": "Nighasan",
+          "native_name": "निंघासन"
+        },
+        {
+          "code": "00798",
+          "name": "Palia",
+          "native_name": "पलिया"
+        },
+        {
+          "code": "01030",
+          "name": "Mitauli",
+          "native_name": "मितौली"
+        },
+        {
+          "code": "00800",
+          "name": "Mohammadi",
+          "native_name": "मोहम्मदी"
+        },
+        {
+          "code": "00801",
+          "name": "Lakhimpur Kheri",
+          "native_name": "लखीमपुर खीरी"
+        }
+      ]
+    }
+  ]
+}
