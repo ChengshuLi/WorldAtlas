@@ -27,3 +27,5 @@ Update — 2026-10-06 04:12 America/Los_Angeles:
 - Actual runtime preparation completed all 51 century buckets. Complete decoded interval/evidence validation is now running; not yet reported passed. Distinct engineering review of ownership preparation/history is also running.
 
 Build/context integration, final source custody/review, complete offline render checks, final PR and worldwide remaining acceptance still require work. No install or deployment performed.
+
+Final runtime readback completed successfully: all 51 buckets, 6,833,855 source intervals and 7,411,411 transported interval copies have exact dates, owners, statuses and evidence values. Footprints and source index pins match. The transport copies are scoped bucket references, not additional factual claims or expanded intervals. Receipt: repaired-ownership-runtime-verification-v1.json. Ownership independent review and final build integration remain pending.
