@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import collections
-import gzip
 import hashlib
 import json
 import re
@@ -59,7 +58,7 @@ api_features = {}
 for year in ("2018", "2025"):
     collection = json.loads((BASE / f"source/census-{year}/texas-counties.geojson").read_text())
     assert collection["type"] == "FeatureCollection" and len(collection["features"]) == 254
-    key = "GEOID" if year == "2018" else "GEOID"
+    key = "GEOID"
     by_geoid = {f["properties"][key]: f for f in collection["features"]}
     assert len(by_geoid) == 254
     assert all(f["geometry"]["type"] == "Polygon" for f in collection["features"])
@@ -104,7 +103,7 @@ with out.open("w") as f:
 summary = {
     "issue": 1138,
     "scope_count": len(SCOPE),
-    "scope_subject_ids_sha256_lf_sorted": scope_hash,
+    "scope_subject_ids_sha256_json_sorted": scope_hash,
     "source_rows": len(rows),
     "tigerweb_2018_query_features": 254,
     "tigerweb_2018_geometry_type_counts": {"Polygon": 254},
