@@ -178,6 +178,10 @@ def atlas_index():
         for feature in doc["features"]:
             p = feature.get("properties", {})
             meta = p.get("metadata", {})
+            if p.get("id"):
+                index.setdefault(p["id"], []).append((feature, path))
+            if meta.get("original_id"):
+                index.setdefault(meta["original_id"], []).append((feature, path))
             for source_id in meta.get("source_member_ids", []):
                 index.setdefault(source_id, []).append((feature, path))
     return index, parts
@@ -234,6 +238,7 @@ def compare():
                           "source_type": original.get("properties", {}).get("shapeType"),
                           "source_feature_sha256_canonical_json": original_digest,
                           "atlas_feature_id": props.get("id"), "atlas_source_member_ids": metadata.get("source_member_ids", []),
+                          "atlas_original_id": metadata.get("original_id"),
                           "atlas_source_geography_sha256": metadata.get("source_geography_sha256"),
                           "atlas_feature_sha256_canonical_json": atlas_digest,
                           "atlas_feature_path": str(current_path.relative_to(ROOT)),

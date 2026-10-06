@@ -1,0 +1,11 @@
+{
+  "status": "failed-partial-comparison",
+  "actual_execution_sha": "c17c9446fb89dcab66758baacd041427b5240649",
+  "run_label": "run-1-attempt-3",
+  "error_type": "ValueError",
+  "error": "subject membership/crosswalk incomplete",
+  "cause": "Current Atlas ADM2 subject identities are stored directly in properties.id and their native source keys are metadata.original_id. The initial source-member index only indexed metadata.source_member_ids; all ten ADM3 subjects were matched and measured before the first ADM2 miss.",
+  "subjects_partially_measured": 10,
+  "partial_extract_files": 20,
+  "treatment": "Preserved all partial original/current feature extracts under failed-crosswalk-partial-extracts. These are diagnostics only and are not used in final results. Updated indexing to crosswalk both current feature IDs and original source IDs."
+}
