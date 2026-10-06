@@ -916,6 +916,78 @@
       "units": "Deterministic JSON bytes; two complete final runs have equal SHA-256."
     }
   ],
+  "metric_bindings": [
+    {
+      "json_pointer": "/derived_counts/selected_components",
+      "metric_id": "selected_components",
+      "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/overlay-v1.json"
+    },
+    {
+      "json_pointer": "/derived_counts/fragment_bindings",
+      "metric_id": "fragment_bindings",
+      "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/overlay-v1.json"
+    },
+    {
+      "json_pointer": "/derived_counts/positive_area_eco_overlap_components",
+      "metric_id": "positive_area_eco_overlap_components",
+      "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/overlay-v1.json"
+    },
+    {
+      "json_pointer": "/derived_counts/zero_area_eco_boundary_components",
+      "metric_id": "zero_area_eco_boundary_components",
+      "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/overlay-v1.json"
+    },
+    {
+      "json_pointer": "/derived_counts/component_contact_rows_in_scope",
+      "metric_id": "component_contact_rows_in_scope",
+      "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/overlay-v1.json"
+    },
+    {
+      "json_pointer": "/derived_counts/point_only_component_contact_rows",
+      "metric_id": "point_only_component_contact_rows",
+      "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/overlay-v1.json"
+    },
+    {
+      "json_pointer": "/derived_counts/shared_edge_component_contact_rows",
+      "metric_id": "shared_edge_component_contact_rows",
+      "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/overlay-v1.json"
+    },
+    {
+      "json_pointer": "/derived_counts/geoBoundaries_full_reference_abu_dhabi_intersections",
+      "metric_id": "geoBoundaries_full_reference_abu_dhabi_intersections",
+      "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/overlay-v1.json"
+    },
+    {
+      "json_pointer": "/derived_counts/geoBoundaries_dubai_source_intersections",
+      "metric_id": "geoBoundaries_dubai_source_intersections",
+      "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/overlay-v1.json"
+    },
+    {
+      "json_pointer": "/derived_counts/current_atlas_abudhabi_subject_intersections",
+      "metric_id": "current_atlas_abudhabi_subject_intersections",
+      "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/overlay-v1.json"
+    },
+    {
+      "json_pointer": "/derived_counts/independently_supported_water_components",
+      "metric_id": "independently_supported_water_components",
+      "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/overlay-v1.json"
+    },
+    {
+      "json_pointer": "/derived_counts/unknown_causal_class_components",
+      "metric_id": "unknown_causal_class_components",
+      "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/overlay-v1.json"
+    },
+    {
+      "json_pointer": "/derived_counts/geoBoundaries_simplified_abu_dhabi_source_intersections",
+      "metric_id": "geoBoundaries_simplified_abu_dhabi_source_intersections",
+      "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/overlay-v1.json"
+    },
+    {
+      "json_pointer": "/derived_counts/original_detector_fragment_features",
+      "metric_id": "original_detector_fragment_features",
+      "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/overlay-v1.json"
+    }
+  ],
   "metrics": [
     {
       "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
@@ -1044,10 +1116,10 @@
       "sha256": "7559fbbad71ffc9ec6627770495e23f9071083ceb3fadc0f2214e461deac4538"
     },
     {
-      "bytes": 1532588,
+      "bytes": 1533195,
       "hash_kind": "file-bytes",
       "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/overlay-v1.json",
-      "sha256": "d1e7d720786b5de8fad844e2af477311851ce126107dd97ea90ce77018cf3d5b"
+      "sha256": "ecc114b785b1771861b9d2480d8e5cb43a94b405d719fa9b107d6b10039da0ea"
     },
     {
       "bytes": 2259,
@@ -1056,16 +1128,16 @@
       "sha256": "c5760f1eddf62c849a0dd9a8808a130ff14d52484fc3d49ea7d4f18c8f9200c0"
     },
     {
-      "bytes": 13630,
+      "bytes": 15145,
       "hash_kind": "file-bytes",
       "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/reproduce-overlay.py",
-      "sha256": "035ac56f62f470b1708072a0f94a0cdd6b2a66be095e28a29ac0f2a679913fba"
+      "sha256": "27465f38e6724e4ab6926317aea1e0b4ab66fb304785916c3bc0fcfd07e1f1a7"
     },
     {
       "bytes": 653,
       "hash_kind": "file-bytes",
       "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/reproducibility-v1.json",
-      "sha256": "e00aae96678e9974b1421e51856b13b35546554647e3793b9493aa6ea24a5188"
+      "sha256": "a0b2f4738b7c5ff5336cbe62d06dda405c699bbd0413ac663ff4fd739f6c258d"
     },
     {
       "bytes": 4993,
