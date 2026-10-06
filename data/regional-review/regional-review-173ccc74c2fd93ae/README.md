@@ -48,3 +48,11 @@ The same file inventories all 51 framework parents and all three areas, retainin
 - Created bounded Hainan source-restoration follow-up [#1053](https://github.com/ChengshuLi/WorldAtlas/issues/1053), scoped to the exact 18 frozen Hainan subject IDs with a required evidence-quality manifest and geometry review. It covers the roster discrepancy, current boundary/source retrieval, and row-level parent/name crosswalk; it does not add an unpinned Wuzhishan feature.
 - A reviewer should inspect the 200 row assessments, all captured originals and hashes, the 2017 source declaration, and the official sources/restoration limitations. This packet must remain `Refs #408`, not `Closes #408`.
 - No official current GIS boundary source covering the whole issue was retained. Until those sources are recovered, all 200 rows remain insufficient-evidence for current legal boundary and neighbor correctness.
+
+## PR2 supplement: Guangdong and Guangxi current rosters
+
+The second bounded packet adds official 2025 current-roster evidence for the 92 Guangdong and 88 Guangxi geoBoundaries rows, per-row parent/name crosswalk leads, and a source-role review for 30 rows named after current prefecture-level cities despite the retained source County Level declaration. See findings/pr2-current-roster-addendum.md and source/pr2-source-register.json.
+
+The official Guangxi roster makes two source-specific concerns actionable: Long'an County is listed under Nanning while the Atlas groups the 2017 Longanxian row under Chongzuo; two distinct Zhaopingxian shapes occur under Hezhou and Wuzhou while the current roster lists Zhaoping under Hezhou only. These are source/code/boundary crosswalk leads, not permission to change a parent or geometry. Candidate same-toponym status changes are recorded without promoting any prior insufficient-evidence row classification.
+
+The exact 180-row Guangdong/Guangxi code and boundary restoration follow-up is #1063. The official Guangdong page, roster image, and map-portal shell were hashed during inspection but removed because redistribution terms were not established; the exact URLs, byte counts, hashes, and restoration instructions are in the source register. The Guangxi official host's expired TLS certificate prevented retention or hashing of the original page bytes. No current legal GIS layer or its reuse terms were recovered.

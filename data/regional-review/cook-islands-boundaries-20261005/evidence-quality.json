@@ -1,0 +1,677 @@
+{
+  "version": 1,
+  "issue": 1058,
+  "lane": "geography",
+  "worker_id": "01a10947-7d6e-7ba2-98a1-a9f91dedabfc",
+  "subject_ids": [
+    "COK-4950",
+    "COK-4951",
+    "COK-4952",
+    "COK-4953",
+    "COK-4954",
+    "COK-4955",
+    "COK-4956",
+    "COK-4959",
+    "COK-4960",
+    "COK-4961",
+    "COK-4962"
+  ],
+  "subject_ids_sha256": "9a9a233d2dccf30cc65d4646b6527d9383f4127da000eac3c4214c179e7158e7",
+  "baseline": {
+    "commit": "548c5f89f00271050823076a84695bb41e1b8454",
+    "files": [
+      {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/geography/part-1.json",
+        "bytes": 8060108,
+        "sha256": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/geography/part-10.json",
+        "bytes": 5144571,
+        "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/geography/part-11.json",
+        "bytes": 5131824,
+        "sha256": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/geography/part-12.json",
+        "bytes": 4489493,
+        "sha256": "24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/geography/part-13.json",
+        "bytes": 5709487,
+        "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/geography/part-14.json",
+        "bytes": 4355198,
+        "sha256": "c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/geography/part-15.json",
+        "bytes": 5180426,
+        "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/geography/part-16.json",
+        "bytes": 5213846,
+        "sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/geography/part-17.json",
+        "bytes": 4945828,
+        "sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/geography/part-18.json",
+        "bytes": 4909063,
+        "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/geography/part-19.json",
+        "bytes": 4583022,
+        "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/geography/part-2.json",
+        "bytes": 6259307,
+        "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/geography/part-20.json",
+        "bytes": 6570767,
+        "sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/geography/part-21.json",
+        "bytes": 6737781,
+        "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/geography/part-22.json",
+        "bytes": 4746385,
+        "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/geography/part-23.json",
+        "bytes": 4962410,
+        "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/geography/part-24.json",
+        "bytes": 4816899,
+        "sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/geography/part-25.json",
+        "bytes": 4525239,
+        "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/geography/part-26.json",
+        "bytes": 4608983,
+        "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/geography/part-27.json",
+        "bytes": 4863162,
+        "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/geography/part-28.json",
+        "bytes": 6613963,
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/geography/part-29.json",
+        "bytes": 12932167,
+        "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/geography/part-3.json",
+        "bytes": 5153118,
+        "sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/geography/part-30.json",
+        "bytes": 11979437,
+        "sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/geography/part-31.json",
+        "bytes": 10086485,
+        "sha256": "44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/geography/part-32.json",
+        "bytes": 10211739,
+        "sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/geography/part-33.json",
+        "bytes": 607984,
+        "sha256": "d928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/geography/part-4.json",
+        "bytes": 4835479,
+        "sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/geography/part-5.json",
+        "bytes": 5226173,
+        "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/geography/part-6.json",
+        "bytes": 4607953,
+        "sha256": "dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/geography/part-7.json",
+        "bytes": 4257402,
+        "sha256": "1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/geography/part-8.json",
+        "bytes": 5097739,
+        "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/geography/part-9.json",
+        "bytes": 5729632,
+        "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6",
+        "hash_kind": "file-bytes",
+        "role": "pinned-geography-inventory"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes",
+        "role": "pinned-baseline"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/source/natural-earth/ne_10m_admin_1_scoped-admin-features.json",
+        "bytes": 96517,
+        "sha256": "dd3f4a5683c713fd89c00b41748d89771f905ef236feaacb7887818085f3d96e",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/source/natural-earth/ne_10m_admin_1_cook-islands-features.json",
+        "bytes": 29915,
+        "sha256": "144a0ab135623ff0903ea3fd99480c548813752d5bd128c9266b3e21c29fa007",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {
+      "data/geography/part-28.json": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "data/hierarchy.json": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "data/regional-review/regional-review-14a242c4cb0781a7/source/natural-earth/ne_10m_admin_1_scoped-admin-features.json": "dd3f4a5683c713fd89c00b41748d89771f905ef236feaacb7887818085f3d96e"
+    },
+    "pin_files": {
+      "data/geography/part-28.json": "data/geography/part-28.json",
+      "data/hierarchy.json": "data/hierarchy.json",
+      "data/regional-review/regional-review-14a242c4cb0781a7/source/natural-earth/ne_10m_admin_1_scoped-admin-features.json": "data/regional-review/regional-review-14a242c4cb0781a7/source/natural-earth/ne_10m_admin_1_scoped-admin-features.json"
+    },
+    "subject_files": {
+      "COK-4950": "data/geography/part-28.json",
+      "COK-4951": "data/geography/part-28.json",
+      "COK-4952": "data/geography/part-28.json",
+      "COK-4953": "data/geography/part-28.json",
+      "COK-4954": "data/geography/part-28.json",
+      "COK-4955": "data/geography/part-28.json",
+      "COK-4956": "data/geography/part-28.json",
+      "COK-4959": "data/geography/part-28.json",
+      "COK-4960": "data/geography/part-28.json",
+      "COK-4961": "data/geography/part-28.json",
+      "COK-4962": "data/geography/part-28.json"
+    },
+    "part_inventory": "Every ordinary data/geography/part-N.json file at baseline commit, byte-hashed and parsed for feature names."
+  },
+  "sources": [
+    {
+      "id": "cook-marae-moana-island-roster",
+      "url": "https://www.maraemoana.gov.ck/biodiversity/",
+      "role": "Official physical-island and landform roster",
+      "vintage": "Page accessed 2026-10-05; population column is vintage 2011",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "No applicable dataset/page redistribution license was established from inspected material."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Citation/restoration only; no page bytes copied.",
+      "limit": "Roster names and landform categories; not boundary geometry.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "cook-pa-enua-governance",
+      "url": "https://www.pmoffice.gov.ck/our-work/pa-enua/",
+      "role": "Official Island Government structure",
+      "vintage": "Page accessed 2026-10-05; Act period 2012–13",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "No applicable dataset/page redistribution license was established from inspected material."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Restore from official page; cite only because reuse terms were not established.",
+      "limit": "Ten inhabited outer-island government units; combines Pukapuka/Nassau and does not define physical boundaries.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "cook-shipping-policy-2026",
+      "url": "https://www.mfem.gov.ck/post/cook-islands-government-releases-domestic-shipping-policy",
+      "role": "Official domestic shipping service schedule",
+      "vintage": "Approved 2026-06-04; six-month operating schedule",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "No applicable dataset/page redistribution license was established from inspected material."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Restore official policy page; cite only.",
+      "limit": "Service geography only, not island or statutory boundaries.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "cook-survey-boundary-custodian",
+      "url": "https://www.justice.gov.ck/survey/",
+      "role": "Official survey/land-boundary custodian statement",
+      "vintage": "Page accessed 2026-10-05",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "No applicable dataset/page redistribution license was established from inspected material."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Restore official Survey page; request official boundary data and its use terms.",
+      "limit": "Ministry identifies Land Administration as repository and primary source; page exposes no machine-readable nationwide island-boundary release.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "cook-takutea-assessment-2020",
+      "url": "https://environment.gov.ck/wp-content/uploads/2022/06/36.-Mokoero-Takutea-Terrestrial-Assessment-Report-2020.pdf",
+      "role": "Official environmental assessment for Takutea",
+      "vintage": "Assessment vintage 2020; PDF published at URL in 2022",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "No applicable dataset/page redistribution license was established from inspected material."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Restore cited PDF; attribution/reuse terms were not established, so do not redistribute.",
+      "limit": "Physical/island and custodianship context; not shoreline geometry.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "cook-linz-pacific-topo",
+      "url": "https://www.linz.govt.nz/products-services/maps/antarctic-pacific-and-nz-offshore-islands-maps/pacific-region-maps",
+      "role": "Official island-specific topographic map catalog and terms",
+      "vintage": "Cook Islands Topo25 Pacific series v1.00; update series dated September 2014",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "Creative Commons Attribution 4.0 International per LINZ page."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Restore each island GeoTIFF from LINZ product page and retain attribution under CC BY 4.0; map image bytes were not retrievable here.",
+      "limit": "Map index/scale and terms inspected, but no map pixels or individual source-file hashes are available.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "cook-linz-pacific-update-history",
+      "url": "https://www.linz.govt.nz/products-services/maps/antarctic-pacific-and-nz-offshore-islands-maps/pacific-region-maps/pacific-islands-update-history",
+      "role": "Official LINZ map series update history",
+      "vintage": "Topo25 Pacific update series September 2014; version 1.00",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "No applicable dataset/page redistribution license was established from inspected material."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Restore from LINZ update history; cite only.",
+      "limit": "Series vintage does not provide layer acquisition dates or completeness certification.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "cookgeo-portal",
+      "url": "https://cookgeo.gov.ck/",
+      "role": "Official government geospatial portal/service documentation",
+      "vintage": "Portal inspected 2026-10-05; API access attempt 2026-10-05 returned HTTP 403",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "No applicable dataset/page redistribution license was established from inspected material."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Restore through portal dataset search/metadata or CSW/WFS/WCS; obtain per-dataset license and capture vintage before reuse.",
+      "limit": "No layer inventory or original data bytes obtained.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "cookgov-lidar-launch-2026",
+      "url": "https://www.pmoffice.gov.ck/2026/09/25/cook-islands-maps-its-own-islands-with-new-national-lidar-data/",
+      "role": "Official national LiDAR project announcement",
+      "vintage": "Published 2026-09-25",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "No applicable dataset/page redistribution license was established from inspected material."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Restore announcement and request linked CookGeo dataset metadata/terms.",
+      "limit": "Describes elevation/imagery/topobathymetry; does not give dataset license, capture dates, exact island inventory or downloadable geometry hash.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "cookgeo-coverage-note",
+      "url": "https://ici.gov.ck/cook-islands-geoportal/",
+      "role": "Government coverage summary for LiDAR products",
+      "vintage": "Page inspected 2026-10-05",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "No applicable dataset/page redistribution license was established from inspected material."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Restore ICI page; cite only.",
+      "limit": "Says 14 of 15 islands but does not identify which island is missing.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "natural-earth-admin1-2022",
+      "url": "https://github.com/nvkelso/natural-earth-vector/commit/ca96624a56bd078437bca8184e78163e5039ad19",
+      "role": "Pinned generalized Admin 1 comparison source",
+      "vintage": "Commit ca96624a56bd078437bca8184e78163e5039ad19 dated 2022-06-02; Natural Earth 1:10m",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "Natural Earth vector data are public domain; retain the pinned commit and file hashes."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Fetch the raw source URL in source-notes.json; verify global source SHA-256 22d0e3ad85eb3e27f17cabf8ba2d50e554fbc27a87796ff891d958185da62fb5, extract exact admin names, then verify retained subset SHA-256 dd3f4a5683c713fd89c00b41748d89771f905ef236feaacb7887818085f3d96e.",
+      "limit": "Public domain generalized reference cartography; ADM1 feature labels do not establish local legal tier or exhaustive physical-island extent.",
+      "temporal_status": "reference"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/cook-islands-boundaries-20261005/README.md",
+      "bytes": 7310,
+      "sha256": "5259996aacf46463769a9a72b5a879016470d2629ca2ca71832645bbeb73f356",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/cook-islands-boundaries-20261005/subject-crosswalk.csv",
+      "bytes": 4571,
+      "sha256": "9ce974f24db29fb28073ec04d39ae497ea5e66d44d922a7894c333eca2934aed",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/cook-islands-boundaries-20261005/neighbor-screen.json",
+      "bytes": 1923,
+      "sha256": "124366f42119c0902289b73a79299d6705c0ac664ff617c4912bf14fea462386",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/cook-islands-boundaries-20261005/source-notes.json",
+      "bytes": 8512,
+      "sha256": "dd4985e6af9f722845e7903aac6225b06068b782714f90897b6afe4e3d8b73a2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/cook-islands-boundaries-20261005/references.md",
+      "bytes": 9001,
+      "sha256": "af4d11ec0c794221b55a413c982202828240d7b79fe3b57f2d2847554b077da7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/cook-islands-boundaries-20261005/verify.py",
+      "bytes": 8043,
+      "sha256": "e2107c2ee9d4ded1de5f02b864375f6fdd2166b34402dc5644244dcf4e4ea9be",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/cook-islands-boundaries-20261005/scope-controls.json",
+      "bytes": 5475,
+      "sha256": "74aece60c902e2ad71992e679c0e9172a65148c6beebcbe3fba34a85b181b3e5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/cook-islands-boundaries-20261005/positive-control.json",
+      "bytes": 353,
+      "sha256": "4d8dc5ca5d1a18b55954c9c6a46e70415533616346105dc6c21a8b3f7726b8e0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/cook-islands-boundaries-20261005/negative-control.json",
+      "bytes": 232,
+      "sha256": "928d449b53b004f18c8f61fb5051f542f4c815d5b64ea3cac597fd9a47d1a5ff",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "baseline-crosswalk",
+      "kind": "code",
+      "description": "Read-only exact subject, current parent, Natural Earth row identity/geometry structure, and named-island roster reconciliation across every pinned data/geography/part-N.json file. No spatial overlap or coastline completeness inference.",
+      "software": "Python 3.7.3 standard library; Git object reader; exact baseline commit",
+      "units": "IDs, names, parent IDs, polygon parts, source rows"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "The eleven exact IDs remain physical island/atoll records with their current parent IDs preserved. Governance and shipping groups have different scope from physical island identities.",
+      "status": "supported",
+      "source_ids": [
+        "cook-marae-moana-island-roster",
+        "cook-pa-enua-governance",
+        "cook-shipping-policy-2026"
+      ]
+    },
+    {
+      "text": "No authoritative current island-scale boundary source with verified dataset vintage, complete named-land roster, license and retrievable bytes was available to establish coastline completeness. The eleven existing outlines remain unresolved, and this packet does not propose geometry or parent changes.",
+      "status": "unresolved",
+      "source_ids": [
+        "cook-survey-boundary-custodian",
+        "cook-linz-pacific-topo",
+        "cookgeo-portal",
+        "cookgov-lidar-launch-2026",
+        "cookgeo-coverage-note",
+        "natural-earth-admin1-2022"
+      ]
+    },
+    {
+      "text": "The national roster names Nassau, Palmerston, Suwarrow and Takutea, with no Cook Islands-owned location feature in any baseline geography part file. Same-name Palmerston and Nassau features in Australia and the United States are foreign homonyms and not Cook Islands coverage; separate issue scope is needed to assess stable identities/parents and Takutea administrative versus physical semantics.",
+      "status": "supported",
+      "source_ids": [
+        "cook-marae-moana-island-roster",
+        "cook-pa-enua-governance",
+        "cook-linz-pacific-topo"
+      ]
+    },
+    {
+      "text": "Atiu has a three-part generalized Natural Earth feature while the current physical Atiu record is one polygon. Takutea is separately identified 22 km northwest of Atiu. The comparison does not support adding Takutea to Atiu geometry or resolving the remaining component discrepancy.",
+      "status": "unresolved",
+      "source_ids": [
+        "natural-earth-admin1-2022",
+        "cook-takutea-assessment-2020",
+        "cook-linz-pacific-topo"
+      ]
+    },
+    {
+      "text": "Bounded follow-up: request CookGeo and Ministry of Justice dataset metadata, precise vintages, exact per-island component inventories and reuse terms; restore LINZ GeoTIFFs for licensed visual comparison; create a separate coverage task for the four named missing islands.",
+      "status": "supported",
+      "source_ids": [
+        "cook-survey-boundary-custodian",
+        "cook-linz-pacific-topo",
+        "cookgeo-portal",
+        "cookgov-lidar-launch-2026",
+        "cookgeo-coverage-note"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 data/regional-review/cook-islands-boundaries-20261005/verify.py",
+    "node scripts/evidence-quality.mjs data/regional-review/cook-islands-boundaries-20261005/evidence-quality.json",
+    "node scripts/check-handoff-scope.mjs --issue-file ISSUE.json --body-file PR_BODY.md"
+  ],
+  "validation": [
+    {
+      "method_id": "baseline-crosswalk",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/cook-islands-boundaries-20261005/positive-control.json"
+    },
+    {
+      "method_id": "baseline-crosswalk",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/cook-islands-boundaries-20261005/negative-control.json"
+    },
+    {
+      "method_id": "baseline-crosswalk",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/cook-islands-boundaries-20261005/scope-controls.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "data/regional-review/cook-islands-boundaries-20261005/README.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/cook-islands-boundaries-20261005/subject-crosswalk.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/cook-islands-boundaries-20261005/neighbor-screen.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/cook-islands-boundaries-20261005/source-notes.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/cook-islands-boundaries-20261005/references.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/cook-islands-boundaries-20261005/verify.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/cook-islands-boundaries-20261005/scope-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/cook-islands-boundaries-20261005/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/cook-islands-boundaries-20261005/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/cook-islands-boundaries-20261005/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}

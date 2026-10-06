@@ -1,0 +1,126 @@
+{
+  "retrieved_local_date": "2026-10-05",
+  "retrieved_timezone": "America/Los_Angeles",
+  "baseline_commit": "548c5f89f00271050823076a84695bb41e1b8454",
+  "baseline_pins": {
+    "data/geography/part-28.json": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+    "data/hierarchy.json": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+    "data/regional-review/regional-review-14a242c4cb0781a7/source/natural-earth/ne_10m_admin_1_scoped-admin-features.json": "dd3f4a5683c713fd89c00b41748d89771f905ef236feaacb7887818085f3d96e"
+  },
+  "retained_originals": [
+    {
+      "path": "data/regional-review/regional-review-14a242c4cb0781a7/source/natural-earth/ne_10m_admin_1_scoped-admin-features.json",
+      "sha256": "dd3f4a5683c713fd89c00b41748d89771f905ef236feaacb7887818085f3d96e",
+      "role": "Natural Earth 1:10m Admin 1 source subset for Cook Islands, French Polynesia, Pitcairn and U.S. Minor Outlying Islands, including comparison neighbors",
+      "source_commit": "ca96624a56bd078437bca8184e78163e5039ad19",
+      "source_commit_date": "2022-06-02T07:25:00Z",
+      "license": "Public domain",
+      "source_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_admin_1_states_provinces.geojson",
+      "full_original_sha256": "22d0e3ad85eb3e27f17cabf8ba2d50e554fbc27a87796ff891d958185da62fb5",
+      "restoration": "Fetch the pinned raw GeoJSON URL, verify the stated full-file SHA-256, select exact features with properties.admin in [Cook Islands, French Polynesia, Pitcairn Islands, United States Minor Outlying Islands], and verify the retained subset SHA-256. Existing retained subset is under the linked #405 packet."
+    },
+    {
+      "path": "data/regional-review/regional-review-14a242c4cb0781a7/source/natural-earth/ne_10m_admin_1_cook-islands-features.json",
+      "sha256": "144a0ab135623ff0903ea3fd99480c548813752d5bd128c9266b3e21c29fa007",
+      "role": "Retained scoped Cook Islands Admin 1 feature extraction from the pinned 2022 Natural Earth source",
+      "source_commit": "ca96624a56bd078437bca8184e78163e5039ad19",
+      "license": "Public domain",
+      "source_url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_admin_1_states_provinces.geojson",
+      "restoration": "Restore full pinned Natural Earth GeoJSON and extract the exact Cook Islands features by `properties.admin`; compare this retained subset and its hash before reuse."
+    }
+  ],
+  "official_sources": [
+    {
+      "id": "cook-marae-moana-island-roster",
+      "url": "https://www.maraemoana.gov.ck/biodiversity/",
+      "accessed": "2026-10-05",
+      "source_claim": "Official Marae Moana page identifies fifteen Cook Islands islands, describes island forms, and lists the fifteen names. Its population column is vintage 2011.",
+      "reuse": "No page/data reuse license was established; retain a citation/restoration instruction only, not copied page bytes or imagery.",
+      "hash": null
+    },
+    {
+      "id": "cook-pa-enua-governance",
+      "url": "https://www.pmoffice.gov.ck/our-work/pa-enua/",
+      "accessed": "2026-10-05",
+      "source_claim": "Office of the Prime Minister describes Island Governments under the Island Government Act and names ten inhabited outer-island government units, including combined Pukapuka/Nassau.",
+      "reuse": "No page reuse license established; cite only.",
+      "hash": null
+    },
+    {
+      "id": "cook-shipping-policy-2026",
+      "url": "https://www.mfem.gov.ck/post/cook-islands-government-releases-domestic-shipping-policy",
+      "accessed": "2026-10-05",
+      "source_claim": "Policy approved 2026-06-04; the six-month government schedule lists Northern and Southern Group shipping destinations. It is service geography only.",
+      "reuse": "No page reuse license established; cite only.",
+      "hash": null
+    },
+    {
+      "id": "cook-survey-boundary-custodian",
+      "url": "https://www.justice.gov.ck/survey/",
+      "accessed": "2026-10-05",
+      "source_claim": "The Ministry of Justice says Land Administration is the repository and primary source for all official Cook Islands land boundaries and manages survey information/datasets.",
+      "reuse": "No page reuse license established; cite only. The page exposes no reusable nationwide digital boundary file.",
+      "hash": null
+    },
+    {
+      "id": "cook-takutea-assessment-2020",
+      "url": "https://environment.gov.ck/wp-content/uploads/2022/06/36.-Mokoero-Takutea-Terrestrial-Assessment-Report-2020.pdf",
+      "accessed": "2026-10-05",
+      "source_claim": "Cook Islands environment report describes Takutea as a separate uninhabited island 22 km northwest of Atiu, with custodianship and landowners tied to Atiu. It is ecological context, not boundary geometry.",
+      "reuse": "Citation only; no license was established for redistributing the report PDF.",
+      "hash": null
+    },
+    {
+      "id": "cook-linz-pacific-topo",
+      "url": "https://www.linz.govt.nz/products-services/maps/antarctic-pacific-and-nz-offshore-islands-maps/pacific-region-maps",
+      "accessed": "2026-10-05",
+      "source_claim": "LINZ page lists island-specific Cook Islands TIFF/GeoTIFF map sheets and states CC BY 4.0 reuse; ten of these eleven subjects are 1:25,000, with Penryn/Penrhyn at 1:50,000.",
+      "reuse": "Creative Commons Attribution 4.0 International per LINZ page. The map originals were not retrieved, so no output is derived from their pixels and no individual map byte hash is available.",
+      "hash": null
+    },
+    {
+      "id": "cook-linz-pacific-update-history",
+      "url": "https://www.linz.govt.nz/products-services/maps/antarctic-pacific-and-nz-offshore-islands-maps/pacific-region-maps/pacific-islands-update-history",
+      "accessed": "2026-10-05",
+      "source_claim": "LINZ lists Topo25 Pacific series maintenance in September 2014 and version 1.00 for the Cook Islands sheets.",
+      "reuse": "Citation only; page is a restoration instruction. It identifies an older map vintage, not a current shoreline data update.",
+      "hash": null
+    },
+    {
+      "id": "cookgeo-portal",
+      "url": "https://cookgeo.gov.ck/",
+      "accessed": "2026-10-05",
+      "source_claim": "Official Cook Islands Geoportal describes itself as government geospatial data portal with maps, datasets and imagery. Public developer page describes OGC WFS/WCS and CSW access.",
+      "reuse": "Dataset-level license unknown. Portal web API requests returned HTTP 403 from this execution environment; no source bytes were retained. Restore through the portal/CSW and verify per-dataset terms before reuse.",
+      "hash": null
+    },
+    {
+      "id": "cookgov-lidar-launch-2026",
+      "url": "https://www.pmoffice.gov.ck/2026/09/25/cook-islands-maps-its-own-islands-with-new-national-lidar-data/",
+      "accessed": "2026-10-05",
+      "source_claim": "Official 2026-09-25 launch article says LiDAR measures land and nearshore seabed, provides high-resolution elevation, digital surface models, imagery and topobathymetry, and places data on CookGeo for access/use by agencies and partners.",
+      "reuse": "Article license for redistribution not established; cite only. It does not state dataset-specific licenses, capture vintages, exact 14-island inventory, or open geometry exports.",
+      "hash": null
+    },
+    {
+      "id": "cookgeo-coverage-note",
+      "url": "https://ici.gov.ck/cook-islands-geoportal/",
+      "accessed": "2026-10-05",
+      "source_claim": "Infrastructure Cook Islands says LiDAR data products have been developed for 14 of the 15 Cook Islands; it does not identify the missing island in the public page text.",
+      "reuse": "Article license for redistribution not established; cite only. Do not infer the unlisted island.",
+      "hash": null
+    }
+  ],
+  "failed_source_access": [
+    {
+      "url": "https://cookgeo.gov.ck/api/v2/datasets/?page=1&page_size=100",
+      "attempted": "2026-10-05",
+      "result": "HTTP 403; no dataset metadata or original source bytes received"
+    },
+    {
+      "url": "https://cookgeo.gov.ck/geoserver/ows?request=GetCapabilities&service=WFS&version=1.1.0",
+      "attempted": "2026-10-05",
+      "result": "API response was XML capabilities; direct environment request returned HTTP 403 and the web extraction tool cannot parse application/xml. No layer inventory or source bytes received."
+    }
+  ]
+}

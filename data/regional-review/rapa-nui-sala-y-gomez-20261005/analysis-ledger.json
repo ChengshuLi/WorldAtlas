@@ -1,0 +1,64 @@
+{
+  "baseline_commit": "249e396178cfc160fd547ec4487c5d94832fc9af",
+  "metrics": [
+    {
+      "evaluation_commit": "249e396178cfc160fd547ec4487c5d94832fc9af",
+      "id": "salas_y_gomez_source_component_area",
+      "input_sha256": "fb0ea671f05a6334ec7a867ca5cb46fcedb63c5b3cc25a39115f5879c73986cb",
+      "unit": "m2",
+      "value": 162819.52066396928,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "249e396178cfc160fd547ec4487c5d94832fc9af",
+      "id": "salas_y_gomez_current_atlas_intersection",
+      "input_sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf",
+      "unit": "m2",
+      "value": 0.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "249e396178cfc160fd547ec4487c5d94832fc9af",
+      "id": "current_atlas_polygon_area",
+      "input_sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf",
+      "unit": "m2",
+      "value": 159298433.5159299,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "249e396178cfc160fd547ec4487c5d94832fc9af",
+      "id": "decree_coordinate_distance_from_current_atlas_point",
+      "input_sha256": "db6381c381deee54231877bd7cd33a37d0c67db008de7d5d13980308e4d56c58",
+      "unit": "m",
+      "value": 402952.8037618872,
+      "vintage": "baseline",
+      "input_note": "Retained legal-fact-extracts.json binds the official decree coordinate; Atlas representative point is read from the hash-pinned part-2 baseline input."
+    },
+    {
+      "evaluation_commit": "249e396178cfc160fd547ec4487c5d94832fc9af",
+      "id": "largest_source_island_current_overlap",
+      "input_sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf",
+      "unit": "m2",
+      "value": 157498033.438303,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "249e396178cfc160fd547ec4487c5d94832fc9af",
+      "id": "full_geoboundaries_feature_area",
+      "input_sha256": "fb0ea671f05a6334ec7a867ca5cb46fcedb63c5b3cc25a39115f5879c73986cb",
+      "unit": "m2",
+      "value": 163846439.0158006,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "249e396178cfc160fd547ec4487c5d94832fc9af",
+      "id": "full_source_feature_atlas_overlap",
+      "input_sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf",
+      "unit": "m2",
+      "value": 157503328.27021995,
+      "vintage": "baseline"
+    }
+  ],
+  "subject_id": "gb:CHL:ADM3:31580391B33082267781919",
+  "version": 1
+}

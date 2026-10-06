@@ -1,41 +1,14 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {researchPath, researchPacket, packageResearchInputs} from './package-research-inputs.mjs';
+import {loadPackageInputs, readPackageInputs, packagePathRequired, safePackagePath, validatePackageInputs} from './package-inputs.mjs';
 
-// These controls neither produce nor enter the deployment archive. New scripts,
-// including this classifier, remain full until their purpose is reviewed here.
-const controls = new Set([
-  'check-handoff-scope', 'check-linked-github-issue', 'check-pr-evidence',
-  'evidence-quality', 'evidence-policy', 'premerge-evidence', 'issue-claim-contract',
-  'issue-lease', 'run-issue-claim', 'worker-result', 'queue-pr-merge',
-  'queue-readiness-audit', 'merge-integration', 'run-worker-merge',
-  'run-integration-tests', 'integration-profile', 'check-integration-profile',
-  'integration-proof',
-].map(name => `scripts/${name}.mjs`));
-const controlTests = new Set([
-  'handoff-scope', 'issue-claims', 'worker-result', 'regional-research-gate',
-  'geography-worker-lane', 'evidence-quality', 'premerge-evidence',
-  'trusted-workflow-checkouts', 'merge-integration', 'merge-integration-client',
-  'merge-integration-entrypoint', 'integration-profile', 'integration-proof',
-].map(name => `test/${name}.test.mjs`));
-const controlWorkflows = new Set([
-  'issue-claims', 'worker-merge', 'handoff-scope', 'queue-readiness-audit',
-  'merge-integration-checks',
-].map(name => `.github/workflows/${name}.yml`));
-
-export function packageIndependentPath(file) {
-  if (typeof file !== 'string' || file.includes('\\') || /[\x00-\x1f\x7f]/.test(file) ||
-      file.split('/').some(part => !part || part === '.' || part === '..')) return false;
-  return controls.has(file) || controlTests.has(file) || controlWorkflows.has(file) ||
-    /^docs\/.+\.(?:md|txt)$/.test(file) || /^[^/]+\.md$/.test(file) ||
-    /^coordination\/engineering\/[a-z0-9][a-z0-9-]{0,63}\/.+\.(?:json|log|md|txt)$/.test(file);
-}
-
-export function classifyBudgetFiles(files, researchInputs) {
-  const referencedPackets = new Set(researchInputs instanceof Set ? [...researchInputs].map(researchPacket).filter(Boolean) : []);
-  const independent = file => packageIndependentPath(file) ||
-    (researchPath(file) && researchInputs instanceof Set && !referencedPackets.has(researchPacket(file)));
+export function classifyBudgetFiles(files, definition = loadPackageInputs()) {
+  validatePackageInputs(definition);
+  const independent = file => {
+    if (!safePackagePath(file) || file.endsWith('/')) throw Error('Invalid changed-file path');
+    return !packagePathRequired(file, definition);
+  };
   if (!Array.isArray(files)) throw Error('Missing changed-file inventory');
   const paths = new Set();
   for (const file of files) {
@@ -48,9 +21,9 @@ export function classifyBudgetFiles(files, researchInputs) {
       // Include rename/copy origins even when the destination is a receipt.
       if (!independent(file.previous_filename)) return {full: true, reason: 'Package-relevant original path', paths: [...paths, file.previous_filename]};
     }
-    if (!independent(file.filename)) return {full: true, reason: 'Unknown or package-relevant path', paths: [...paths]};
+    if (!independent(file.filename)) return {full: true, reason: 'Declared package input or verification path', paths: [...paths]};
   }
-  return {full: false, reason: 'Only explicit package-independent paths', paths: [...paths]};
+  return {full: false, reason: 'No declared package input or verification path changed', paths: [...paths]};
 }
 
 const commit = value => /^[a-f0-9]{40}$/.test(value ?? '') && !/^0+$/.test(value);
@@ -91,17 +64,10 @@ export async function deploymentBudgetProfile({event, eventName, repository, api
       if (event.after !== event.before && comparison.commits?.at(-1)?.sha !== event.after) throw Error('Push head unavailable in comparison');
       files = comparison.files;
     } else throw Error('Unsupported event');
-    const paths = files.flatMap(file => [file?.filename, file?.previous_filename].filter(value => value !== undefined));
-    // Do not fetch package manifests for documentation-only or already-full work.
-    // A base inventory is sufficient: changing any non-research build manifest
-    // is full, while changing a research-hosted manifest is caught as an input.
-    let inputs;
-    if (paths.some(researchPath) && paths.every(file => packageIndependentPath(file) || researchPath(file))) {
-      inputs = await packageResearchInputs({route, base, api});
-    }
-    return {version: 1, event: eventName, ...classifyBudgetFiles(files, inputs)};
+    const definition = await readPackageInputs({route, base, api});
+    return {version: 2, event: eventName, ...classifyBudgetFiles(files, definition)};
   } catch (error) {
-    return {version: 1, event: eventName, full: true,
+    return {version: 2, event: eventName, full: true,
       reason: error instanceof Error ? error.message : 'Inventory lookup failed', paths: [], fallback: true};
   }
 }
@@ -121,7 +87,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   try {
     result = await deploymentBudgetProfile({event: JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8')),
       eventName: process.env.GITHUB_EVENT_NAME, repository: process.env.GITHUB_REPOSITORY, api: githubBudgetAPI});
-  } catch { result = {version: 1, full: true, reason: 'Classifier inputs unavailable', paths: [], fallback: true}; }
+  } catch { result = {version: 2, full: true, reason: 'Classifier inputs unavailable', paths: [], fallback: true}; }
   fs.mkdirSync('.cache', {recursive: true});
   fs.writeFileSync('.cache/deployment-budget-scope.json', JSON.stringify(result, null, 2) + '\n');
   fs.appendFileSync(process.env.GITHUB_OUTPUT, `full=${result.full}\n`);

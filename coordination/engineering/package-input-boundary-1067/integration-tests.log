@@ -1,0 +1,43 @@
+✔ all static and API paths fail closed before the app can access data (52.888458ms)
+✔ forged, expired, wrong-issuer/audience and incomplete JWTs never reach the app (16.949625ms)
+✔ authenticated reads route normally and writes require explicit cutover (6.447208ms)
+✔ Cloudflare config protects assets and never provisions or migrates D1 (0.244917ms)
+✔ explicit public mode permits real assets/API reads and always blocks writes (1.682916ms)
+✔ authenticated wrapper preserves the real atlas API and static asset routing (2.395625ms)
+✔ successful full and focused workflows prove exact tree and pinned current attempt (3.264708ms)
+✔ head metadata without explicit reviewed-head checkout never proves tested tree (1.342958ms)
+✔ different complete tree or modified approved workflow/runner always falls back (0.850833ms)
+✔ wrong head/event/repository/PR/path and incomplete or failed run cannot prove coverage (1.8445ms)
+✔ missing/extra shard and skipped or incomplete required steps never count as successful coverage (1.928625ms)
+✔ final pinned run reread rejects revoked proof (0.404083ms)
+✔ explicit coordination allowlist defaults full for unknown/application/data/schema/import/deploy/rename impact (0.778792ms)
+✔ final proof pins attempt and refuses a later successful rerun or missing/invalid attempt (0.749541ms)
+✔ focused proof accepts complete controls without installing Node dependencies (1.843792ms)
+✔ full proof refuses missing, failed, cancelled or skipped Node installation in any shard (10.442084ms)
+✔ actual PR selector passes verified geography ownership and selects one evidence shard (10.418292ms)
+✔ actual PR selector rejects missing claim (1.232875ms)
+✔ actual PR selector rejects released claim (0.564833ms)
+✔ actual PR selector rejects expired claim (0.668958ms)
+✔ actual PR selector rejects wrong branch (0.853625ms)
+✔ actual PR selector rejects wrong issue (0.315375ms)
+✔ actual PR selector rejects wrong lane (0.592875ms)
+✔ actual PR selector rejects closed issue (2.880292ms)
+✔ actual PR selector rejects blocked issue (3.252958ms)
+✔ actual PR selector rejects changed owned scope (0.549375ms)
+✔ actual PR selector rejects unsafe prefixes (0.28875ms)
+✔ actual PR selector rejects stale PR head (0.17025ms)
+✔ actual PR selector rejects incomplete file list (0.170583ms)
+✔ actual PR selector rejects duplicate file inventory (0.282792ms)
+✔ actual PR selector rejects missing issue reference (0.19875ms)
+✔ actual PR selector defaults full for files and rename origins outside geography scope (2.79875ms)
+✔ geography ownership read paginates canonical comments and changed files (0.326791ms)
+✔ non-geography selectors preserve existing profiles without requesting geography ownership (0.169167ms)
+✔ package CI coordination paths use focused tests while builders and runners stay full (0.078708ms)
+ℹ tests 35
+ℹ suites 0
+ℹ pass 35
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 405.455375

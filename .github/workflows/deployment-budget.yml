@@ -30,7 +30,8 @@ jobs:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             scripts/classify-deployment-budget.mjs
-            scripts/package-research-inputs.mjs
+            scripts/package-inputs.mjs
+            .github/package-inputs.json
             package.json
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
         with:
@@ -82,14 +83,22 @@ jobs:
         if: needs.classify.outputs.full != 'false'
       - run: python -m pip install -r requirements.txt
         if: needs.classify.outputs.full != 'false'
-      - run: node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs
+      - run: node --test test/deployment-budget.test.mjs test/deployment-budget-scope.test.mjs test/package-inputs.test.mjs test/package-build.test.mjs
         if: needs.classify.outputs.full != 'false'
       - name: Build and enforce archive/file reserves without publishing
         if: needs.classify.outputs.full != 'false'
         run: npm run build:hosted
       - name: Record package rebuild inapplicability
         if: needs.classify.outputs.full == 'false'
-        run: echo 'Package rebuild inapplicable to explicit package-independent coordination/documentation/receipt or unpublished research paths; package inputs and budget controls are unchanged, so their unit tests and compilation are inapplicable. No current package size measurement is claimed.' >> "$GITHUB_STEP_SUMMARY"
+        run: echo 'No declared package input or verification path changed; package unit tests and compilation are inapplicable. No current package size measurement is claimed.' >> "$GITHUB_STEP_SUMMARY"
+      - name: Retain declared input build receipt
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: package-input-build
+          path: .cache/package-input-build.json
+          include-hidden-files: true
+          if-no-files-found: ignore
       - name: Retain exact file and archive accounting
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

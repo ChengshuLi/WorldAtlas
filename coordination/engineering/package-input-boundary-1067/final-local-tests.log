@@ -1,0 +1,99 @@
+✔ all static and API paths fail closed before the app can access data (22.230625ms)
+✔ forged, expired, wrong-issuer/audience and incomplete JWTs never reach the app (5.546042ms)
+✔ authenticated reads route normally and writes require explicit cutover (2.925042ms)
+✔ Cloudflare config protects assets and never provisions or migrates D1 (0.228584ms)
+✔ explicit public mode permits real assets/API reads and always blocks writes (1.78275ms)
+✔ authenticated wrapper preserves the real atlas API and static asset routing (1.474583ms)
+✔ package applicability comes only from the enforced declaration (26.057041ms)
+✔ renamed or copied runtime origins cannot hide behind documentation or receipt destinations (4.966875ms)
+✔ PR inventory exhausts pages and catches a relevant path on a later page (3.258792ms)
+✔ PR missing pages, changed heads, unavailable lookup and malformed inventories default full (1.511666ms)
+✔ push before/after comparison includes rename origins and fails full for missing or capped inventories (2.407625ms)
+✔ API failures use bounded authenticated read-only requests (0.31825ms)
+✔ workflow keeps trusted bootstrap fallback and runs package checks only when their inputs can change (40.809ms)
+✔ promoting research is explicit and exact, without freezing implementation bytes (2.256292ms)
+✔ unavailable or altered declaration bytes conservatively require the package build (0.548959ms)
+✔ successful full and focused workflows prove exact tree and pinned current attempt (2.001167ms)
+✔ head metadata without explicit reviewed-head checkout never proves tested tree (0.178ms)
+✔ different complete tree or modified approved workflow/runner always falls back (0.506041ms)
+✔ wrong head/event/repository/PR/path and incomplete or failed run cannot prove coverage (0.806875ms)
+✔ missing/extra shard and skipped or incomplete required steps never count as successful coverage (0.96875ms)
+✔ final pinned run reread rejects revoked proof (0.1995ms)
+✔ explicit coordination allowlist defaults full for unknown/application/data/schema/import/deploy/rename impact (0.305708ms)
+✔ final proof pins attempt and refuses a later successful rerun or missing/invalid attempt (0.206834ms)
+✔ focused proof accepts complete controls without installing Node dependencies (0.123375ms)
+✔ full proof refuses missing, failed, cancelled or skipped Node installation in any shard (0.512ms)
+✔ actual PR selector passes verified geography ownership and selects one evidence shard (6.969625ms)
+✔ actual PR selector rejects missing claim (0.794708ms)
+✔ actual PR selector rejects released claim (0.22325ms)
+✔ actual PR selector rejects expired claim (0.361083ms)
+✔ actual PR selector rejects wrong branch (0.203791ms)
+✔ actual PR selector rejects wrong issue (0.123792ms)
+✔ actual PR selector rejects wrong lane (0.3675ms)
+✔ actual PR selector rejects closed issue (0.182167ms)
+✔ actual PR selector rejects blocked issue (0.703916ms)
+✔ actual PR selector rejects changed owned scope (0.516959ms)
+✔ actual PR selector rejects unsafe prefixes (0.241417ms)
+✔ actual PR selector rejects stale PR head (0.075292ms)
+✔ actual PR selector rejects incomplete file list (0.063ms)
+✔ actual PR selector rejects duplicate file inventory (0.073375ms)
+✔ actual PR selector rejects missing issue reference (0.068208ms)
+✔ actual PR selector defaults full for files and rename origins outside geography scope (1.192917ms)
+✔ geography ownership read paginates canonical comments and changed files (0.243958ms)
+✔ non-geography selectors preserve existing profiles without requesting geography ownership (0.139125ms)
+✔ package CI coordination paths use focused tests while builders and runners stay full (0.070917ms)
+✔ only declared files enter the source image; unrelated research cannot alter artifact bytes (97.473709ms)
+node:fs:622
+  return binding.open(
+                 ^
+
+Error: ENOENT: no such file or directory, open 'research/paper.json'
+    at Object.openSync (node:fs:622:18)
+    at Object.readFileSync (node:fs:488:35)
+    at file:///private/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/atlas-package-boundary-GW3ze1/.cache/package-input-image-r8uPX9/scripts/build-static-inner.mjs:1:30
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'research/paper.json'
+}
+
+Node.js v24.19.0
+node:internal/modules/esm/resolve:271
+    throw new ERR_MODULE_NOT_FOUND(
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/private/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/atlas-package-boundary-mQBVxG/.cache/package-input-image-nGOzCe/research/secret.mjs' imported from /private/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/atlas-package-boundary-mQBVxG/.cache/package-input-image-nGOzCe/scripts/build-static-inner.mjs
+    at finalizeResolution (node:internal/modules/esm/resolve:271:11)
+    at moduleResolve (node:internal/modules/esm/resolve:865:10)
+    at defaultResolve (node:internal/modules/esm/resolve:992:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:701:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:721:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:759:56)
+    at #resolve (node:internal/modules/esm/loader:683:17)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:603:35)
+    at node:internal/modules/esm/loader:632:32
+    at TracingChannel.tracePromise (node:diagnostics_channel:362:14) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///private/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/atlas-package-boundary-mQBVxG/.cache/package-input-image-nGOzCe/research/secret.mjs'
+}
+
+Node.js v24.19.0
+✔ undeclared reads and imports fail before replacing caller outputs and clean the image (77.331708ms)
+✔ explicit research promotion makes the same read available (36.051667ms)
+✔ input symlinks, including ancestor aliases, cannot expose undeclared files (4.820333ms)
+✔ missing mandatory inputs fail; optional absent inputs are allowed (4.218917ms)
+✔ dependency links must stay within the installed dependency tree (3.233833ms)
+✔ output and cache ancestor links are rejected (3.752042ms)
+✔ private builder requires the actual declared image identity (0.241834ms)
+✔ declaration uses literal paths, precise directory membership and approved outputs (8.685625ms)
+ℹ tests 53
+ℹ suites 0
+ℹ pass 53
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 286.470625
