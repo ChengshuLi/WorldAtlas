@@ -404,3 +404,45 @@ for(const failingAsset of ['index','bucket'])test(`late old ownership ${failingA
  const repeated=await loader.loadOwnershipHistory(1951);
  assert.deepEqual([indexReads,bucketReads],reads);assert.equal(current[0].value,'Label 2');assert.equal(repeated[0].value,'Label 2');
 }));
+
+test('selected native geography waits for exact normative latitude bytes alongside decoded ownership', async () => withLoader(async loader => {
+ const original=JSON.parse(fs.readFileSync(new URL('../coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/manifest.json',import.meta.url)));
+ const reference={id:original.geographic_release,footprints_sha256:original.footprints_sha256,hierarchy_sha256:original.hierarchy_sha256};
+ const table=fs.readFileSync(new URL('../'+original.native_latitudes.path,import.meta.url));
+ const rows=new Uint32Array(original.size*2),rowBytes=Buffer.from(rows.buffer);
+ const pixelMap={...original,runWords:0,native_latitudes:{...original.native_latitudes,transport_path:'native-v1/native-row-latitudes.f64le.gz'},
+  parts:[{kind:'rows',path:'native-v1/ownership/rows-0.bin.gz',offset:0,words:rows.length,encoding:'uint32-le',decoded_sha256:createHash('sha256').update(rowBytes).digest('hex')}]};
+ let releaseTable,complete=false;
+ global.fetch=async url=>{
+  if(url==='./atlas-geography.json')return Response.json({units:[],parts:[],pixelMap,reference_release:reference});
+  if(url==='./native-v1/ownership/rows-0.bin.gz')return new Response(rowBytes);
+  assert.equal(url,'./native-v1/native-row-latitudes.f64le.gz');
+  return new Promise(resolve=>{releaseTable=()=>resolve(new Response(table));});
+ };
+ const pending=loader.loadGeography().then(value=>{complete=true;return value;});
+ await new Promise(setImmediate);assert.equal(complete,false);
+ releaseTable();const result=await pending;
+ assert.equal(result.ownership.method,original.method);assert.deepEqual(result.ownership.rows,rows);
+ assert.equal(result.nativeLatitudes.length,original.size);
+ assert.ok(result.nativeLatitudes[0]>85&&result.nativeLatitudes.at(-1)<-85);
+}));
+
+test('selected native geography rejects mixed source releases and unavailable declared physical classification', async () => {
+ const original=JSON.parse(fs.readFileSync(new URL('../coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/manifest.json',import.meta.url)));
+ const reference={id:original.geographic_release,footprints_sha256:original.footprints_sha256,hierarchy_sha256:original.hierarchy_sha256};
+ const table=fs.readFileSync(new URL('../'+original.native_latitudes.path,import.meta.url));
+ const rows=new Uint32Array(original.size*2),rowBytes=Buffer.from(rows.buffer);
+ const pixelMap={...original,runWords:0,native_latitudes:{...original.native_latitudes,transport_path:'native-v1/native-row-latitudes.f64le.gz'},
+  parts:[{kind:'rows',path:'rows',offset:0,words:rows.length,encoding:'uint32-le'}]};
+ for(const mismatch of [true,false])await withLoader(async loader=>{
+  global.fetch=async url=>{
+   if(url==='./atlas-geography.json')return Response.json({units:[],parts:[],pixelMap,
+    reference_release:mismatch?{...reference,id:'geography:wrong'}:reference,
+    ...(mismatch?{}:{coverageClassification:{kind:'unavailable-physical-classifier'}})});
+   if(url==='./rows')return new Response(rowBytes);
+   if(url==='./native-v1/native-row-latitudes.f64le.gz')return new Response(table);
+   throw Error('Unexpected undeclared transport');
+  };
+  await assert.rejects(loader.loadGeography(),mismatch?/reference release/:/coverage classification/);
+ });
+});

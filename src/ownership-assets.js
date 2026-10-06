@@ -1,10 +1,13 @@
+// Exploratory method-aware loader; original loader unchanged.
+import {ownershipMetadata} from './ownership-method.js';
 import {unshuffleOwnershipBytes,decodeOwnershipVarints} from './ownership-codec.js';
 // Versioned static ownership assets. Uint32 words are encoded little-endian.
-export async function loadOwnershipAssets(manifest,fetcher=fetch){
+export async function loadOwnershipAssets(manifest,fetcher=fetch,options={}){
+  const metadata=ownershipMetadata(manifest,options);
   if(manifest.version!==1&&manifest.version!==2)throw new Error('Unsupported ownership asset version');
   const coordinateBits=Math.ceil(Math.log2(manifest.size)),wordsPerRun=manifest.version===2?2:4;
   if(!Number.isInteger(manifest.size)||manifest.size<2||manifest.size>2**31||!Number.isSafeInteger(manifest.runWords)||manifest.runWords<0||manifest.runWords%wordsPerRun||(manifest.version===2&&manifest.coordinateBits!==coordinateBits)||!Array.isArray(manifest.parts))throw Error('Invalid ownership manifest');
-  const output={version:manifest.version,coordinateBits,size:manifest.size,rows:new Uint32Array(manifest.size*2),runs:new Uint32Array(manifest.runWords)};
+  const output={...metadata,coordinateBits,rows:new Uint32Array(manifest.size*2),runs:new Uint32Array(manifest.runWords)};
   for(const kind of ['rows','runs']){
     let offset=0;
     for(const part of manifest.parts.filter(p=>p.kind===kind).sort((a,b)=>a.offset-b.offset)){
