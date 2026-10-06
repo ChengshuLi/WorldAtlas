@@ -1,6 +1,8 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import {readPinnedBuildFile} from './native-ownership/read-pinned-build-file.mjs';
+import {inPackageImage,readPinnedBuildFile} from './native-ownership/read-pinned-build-file.mjs';
+import {safePackagePath,containsPackagePath,loadPackageInputs} from './package-inputs.mjs';
+import {repositoryReader} from './evidence-quality.mjs';
 import {createHash} from 'node:crypto';
 import {ownershipMetadata, NATIVE_METHOD} from '../src/ownership-method.js';
 import {requireVerifiedNativeSelection} from './native-ownership/require-verified-selection.mjs';
@@ -11,8 +13,21 @@ const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 // candidate. The legacy default and all original release products remain intact.
 export async function selectBuildOwnership({manifestPath = 'data/canonical-grid/manifest.json',
   expectedSha256, expectedReference, requireNative = false} = {}) {
-  const bytes = await fs.readFile(manifestPath);
+  const packaged = inPackageImage();
+  let definition;
+  if(packaged){
+    definition=loadPackageInputs(process.cwd());
+    if(!safePackagePath(manifestPath)||!containsPackagePath(definition.inputs,manifestPath))
+      throw Error('Selected grid manifest must be a declared package input');
+  }
+  const bytes = packaged?repositoryReader(process.cwd())(manifestPath,'candidate'):await fs.readFile(manifestPath);
   const manifest = JSON.parse(bytes), sha256 = digest(bytes);
+  if(packaged){
+    for(const part of [...(manifest.parts??[]),...(manifest.bounds?.path?[manifest.bounds]:[])]){
+      if(!safePackagePath(part.path)||!containsPackagePath(definition.inputs,path.posix.join(path.posix.dirname(manifestPath),part.path)))
+        throw Error('Selected grid asset must be a declared package input');
+    }
+  }
   const native = manifest.method === NATIVE_METHOD;
   if (requireNative && !native) throw Error('Explicit native build cannot select legacy ownership');
   if (expectedSha256 && sha256 !== expectedSha256) throw Error('Selected grid manifest checksum mismatch');
