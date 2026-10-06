@@ -12,12 +12,13 @@ from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
 from pyproj import Transformer
-from shapely.geometry import LineString, Point, shape
+from shapely.geometry import LineString, Point, box, shape
 
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCES = ROOT / "sources" / "dgt-trocos"
 OUTPUT = ROOT / "outputs" / "dgt-segment-proximity.json"
+ISSUE = ROOT / "sources" / "issue-1197.json"
 TRANSFORM = Transformer.from_crs("OGC:CRS84", "EPSG:25829", always_xy=True)
 CELLS = [
     {"cell_id": "cell126077/99248", "key": "cell126077-99248", "lon": -6.873431337396909, "lat": 40.002191593667014, "preview_member_match": "both"},
@@ -46,11 +47,8 @@ def metric(point_lon: float, point_lat: float, feature: dict) -> float:
     return point.distance(line)
 
 
-def load_case(cell: dict) -> tuple[dict, dict, dict]:
-    path = SOURCES / f"{cell['key']}.json"
-    raw = path.read_bytes()
+def check_context(cell: dict, raw: bytes, receipt: dict) -> tuple[dict, dict]:
     data = json.loads(raw)
-    receipt = json.loads((SOURCES / f"{cell['key']}.receipt.json").read_text(encoding="utf-8"))
     query = parse_qs(urlparse(receipt["request_url"]).query)
     if hashlib.sha256(raw).hexdigest() != receipt.get("sha256") or receipt.get("http_status") != 200:
         raise ValueError(f"Source response hash/status mismatch for {cell['cell_id']}")
@@ -78,10 +76,38 @@ def load_case(cell: dict) -> tuple[dict, dict, dict]:
     }
     if any(props.get(key) != value for key, value in required.items()):
         raise ValueError(f"Source context mismatch for {cell['cell_id']}")
+    geometry = shape(feature["geometry"])
+    if not geometry.intersects(box(*expected_bbox)):
+        raise ValueError(f"Returned line does not intersect requested BBOX for {cell['cell_id']}")
+    return feature, props
+
+
+def check_issue_snapshot() -> None:
+    issue = json.loads(ISSUE.read_text(encoding="utf-8"))
+    body = issue["body"]
+    import re
+    rows = re.findall(r"- (both|neither): (cell\d+/\d+) \(([-\d.]+),([-\d.]+)\)", body)
+    actual = [(cell_id, float(lon), float(lat), match) for match, cell_id, lon, lat in rows]
+    expected = [(c["cell_id"], c["lon"], c["lat"], c["preview_member_match"]) for c in CELLS]
+    if issue.get("number") != 1197 or actual != expected:
+        raise ValueError("Issue snapshot does not bind the exact six IDs, coordinates and preview labels")
+    contract = body.split("<!-- worldatlas-work:v1\n", 1)[1].split("\n-->", 1)[0]
+    metadata = json.loads(contract)
+    eq = metadata["evidence_quality"]
+    if metadata.get("mode") != "geography" or metadata.get("owned_paths") != ["research/geography/prt-esp-six-cell-authority-20261006/"] or eq.get("review_kind") != "source":
+        raise ValueError("Issue work contract does not match this source assessment")
+
+
+def load_case(cell: dict) -> tuple[dict, dict, dict]:
+    path = SOURCES / f"{cell['key']}.json"
+    raw = path.read_bytes()
+    receipt = json.loads((SOURCES / f"{cell['key']}.receipt.json").read_text(encoding="utf-8"))
+    feature, props = check_context(cell, raw, receipt)
     return feature, props, receipt
 
 
 def analyze() -> dict:
+    check_issue_snapshot()
     if len(CELLS) != 6 or len({cell["cell_id"] for cell in CELLS}) != 6:
         raise ValueError("The exact six unique issue cells are required")
     rows = []
@@ -117,6 +143,7 @@ def analyze() -> dict:
             "center_to_source_segment_distance_m": distance,
             "assessment": "dgt_defined_portugal_spain_line_reference_nearby; exact_center_side_and_owner_unresolved",
         })
+    distances = [row["center_to_source_segment_distance_m"] for row in rows]
     return {
         "version": 1,
         "method": "Transform each exact CRS84 candidate center and complete returned DGT source LineString to EPSG:25829 using pyproj always_xy; measure planar point-to-line distance with Shapely. No snapping, buffer, polygon-owner inference, or grid modification.",
@@ -124,11 +151,13 @@ def analyze() -> dict:
         "source_collection_vintage_note": "The collection title is CAOP2025; its API temporal extent reports 2000-10-30 through 2007-10-30. The DGT CAOP2025 page says this edition was approved 2026-01-28 and published 2026-02-18. Individual returned line features contain no validity/publication date. Preserve this metadata conflict; do not assign the line geometry a fabricated effective date.",
         "source_crs": "OGC:CRS84 longitude,latitude",
         "analysis_crs": "EPSG:25829 ETRS89 / UTM zone 29N metres",
+        "coordinate_operation": {"description": TRANSFORM.description, "nominal_accuracy_m": TRANSFORM.accuracy},
         "source_role_limit": "A DGT national administrative-cartography line records a Portugal#Espanha first-order land limit with state Definido. Proximity supports a nearby official reference only; it does not establish exact-centre side, state attribution, bilateral instrument identity, or physical wetness.",
         "distance_rounding": "Unrounded calculation is retained; prose may round for display only.",
         "rows": rows,
         "controls": controls,
-        "overall_assessment": "All six centers are within 10.3 m of a DGT segment reported as a defined Portugal-Spain first-order land-limit line. The five dual-member preview matches and the one no-member preview result remain source/geometry conflicts; no owner or repair is inferred.",
+        "distance_summary_m": {"minimum": min(distances), "maximum": max(distances)},
+        "overall_assessment": f"All six centers are within {max(distances):.3f} m of a DGT segment reported as a defined Portugal-Spain first-order land-limit line. The five dual-member preview matches and the one no-member preview result remain source/geometry conflicts; no owner or repair is inferred.",
     }
 
 

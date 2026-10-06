@@ -1,0 +1,56 @@
+{
+  "all_negative_mutations_rejected": true,
+  "controls": [
+    {
+      "case": "changed source bytes/hash",
+      "outcome": "rejected"
+    },
+    {
+      "case": "omitted feature",
+      "outcome": "rejected"
+    },
+    {
+      "case": "extra feature",
+      "outcome": "rejected"
+    },
+    {
+      "case": "mismatched native ID",
+      "outcome": "rejected"
+    },
+    {
+      "case": "line outside requested BBOX",
+      "outcome": "rejected"
+    },
+    {
+      "case": "mismatched request BBOX",
+      "outcome": "rejected"
+    },
+    {
+      "case": "altered issue centre",
+      "outcome": "rejected"
+    },
+    {
+      "case": "feature-level validity date absent",
+      "outcome": "unknown-retained"
+    },
+    {
+      "case": "feature positional accuracy absent",
+      "outcome": "unknown-retained"
+    },
+    {
+      "case": "collection vintage conflict preserved",
+      "outcome": "unknown-retained"
+    },
+    {
+      "case": "planning geometry is not wetness; no wetness field produced",
+      "outcome": "unknown-retained"
+    },
+    {
+      "case": "provider unavailability retained in prior packet; no substitute claim",
+      "outcome": "unknown-retained"
+    }
+  ],
+  "owner_or_wetness_inference": "none",
+  "validator": "check_context + issue snapshot check",
+  "version": 1
+}
