@@ -20,6 +20,10 @@
   "baseline_registry_path": "data/administrative-sources.json",
   "baseline_registry_sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
   "producer_source_selection": "The pinned administrative.py sets simplifiedGeometryGeoJSON to rule['source_url'].replace('.geojson','_simplified.geojson'), fetches that property, and hashes the cache bytes into administrative-sources.json.",
-  "verification_status": "Pointer and whole simplified LFS bytes must both be independently verified before source use.",
-  "geographic_limit": "Source is an administrative municipality geometry dataset; it is not itself a bilateral legal boundary record."
+  "verification_status": "verified",
+  "geographic_limit": "Source is an administrative municipality geometry dataset; it is not itself a bilateral legal boundary record.",
+  "retrieved_on": "2026-10-06",
+  "verified_lfs_object_sha256": "e5bfa1c3889ea763ca2bb82c7f1e8ff9eff715dcb99ce405293a03de7ac85862",
+  "verified_lfs_object_bytes": 18613175,
+  "verification_limit": "Verified pointer and complete whole simplified LFS object; remains administrative source geometry, not bilateral legal boundary evidence."
 }

@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "status": "whole response retained as independently gzip-compressed contiguous ordered byte partitions; decompression and concatenation reproduce the exact response receipt SHA-256",
+  "original_response_path": "ign-administrativeunit-bbox-discovery-only.json",
+  "original_bytes": 136542585,
+  "original_sha256": "112b21ea6e3afd1503558bde7a4c771378ed458dd1f41dd8a6021a17205704f0",
+  "partition_size_limit_bytes": 32000000,
+  "part_count": 5,
+  "parts": [
+    {
+      "path": "part-001.bin.gz",
+      "offset": 0,
+      "bytes": 32000000,
+      "sha256": "6e22fc224a69ec24fa66e29b4c6b2e1efbe56cdc79206bdefc90fe7082777895",
+      "compression": "gzip; independent chunk; mtime=0",
+      "stored_bytes": 2143539,
+      "stored_sha256": "8c0a7e0cfac3758cdea89e86d6af2e328d503a1ac5d6f34258208314fdc442e8"
+    },
+    {
+      "path": "part-002.bin.gz",
+      "offset": 32000000,
+      "bytes": 32000000,
+      "sha256": "7711885ed22cdb692033c8e7aba6edf4f5f48aec04e852f84a2714e595fd24d4",
+      "compression": "gzip; independent chunk; mtime=0",
+      "stored_bytes": 2271713,
+      "stored_sha256": "4040d48d8f4a7f9e600bf4336e1ec92bc7e41d9776b8aef9b6fde66694cef185"
+    },
+    {
+      "path": "part-003.bin.gz",
+      "offset": 64000000,
+      "bytes": 32000000,
+      "sha256": "aa6a6f23b1887ceff8429f3ac1bd3f7fbb638bb08f6db8602ac619661f731421",
+      "compression": "gzip; independent chunk; mtime=0",
+      "stored_bytes": 2138104,
+      "stored_sha256": "9f4e0358dc7b5b3f34bf3055a9c221055df23df41099d480a12ee1f224b6aeb5"
+    },
+    {
+      "path": "part-004.bin.gz",
+      "offset": 96000000,
+      "bytes": 32000000,
+      "sha256": "bfbd6788339a168a680d60188a06f6d36cd752d597c128627834bc9cb0e4f4e7",
+      "compression": "gzip; independent chunk; mtime=0",
+      "stored_bytes": 2199813,
+      "stored_sha256": "5cfd6c3eb38b02056843ad1fa1026c002970b49963db476a14ce4052a2a7a650"
+    },
+    {
+      "path": "part-005.bin.gz",
+      "offset": 128000000,
+      "bytes": 8542585,
+      "sha256": "a17e48f16916b9ca4cb014f2a1924cc98e25f9ac2d96e5d0eda7e14d9afd2388",
+      "compression": "gzip; independent chunk; mtime=0",
+      "stored_bytes": 587376,
+      "stored_sha256": "f23c7966e43bf976f08b1a8f2a4cd38a415b52fec7370cc615f981d63430e00e"
+    }
+  ],
+  "stored_bytes_total": 9340545,
+  "compression": "gzip per part"
+}
