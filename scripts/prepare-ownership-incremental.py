@@ -284,7 +284,7 @@ def prepare(before_path,after_path,before_boundaries,after_boundaries,receipt_pa
   mapping=[[id,old_positions.get(id),new_positions.get(id),'reused' if id in reused else 'removed' if id in removed else 'added' if id in added else 'changed',fingerprints['before'].get(id),fingerprints['after'].get(id)] for id in sorted(set(before)|set(after))]
   mapping_part=write_gzip(work/'location-identity-map.json.gz',mapping)
   archive={'original_index_sha256':sha(ownership/'index.json'),'original_index':index,'parts':removed_parts,'rule':'Lineage-only preservation. No owner/history assignment transfers from removed or changed IDs.'};(work/'archive-index.json').write_text(dump(archive))
-  previous=index.get('incremental_preparation',{});previous_names=['prior-archives','migration-receipt.json','location-identity-map.json.gz']
+  previous=index.get('incremental_preparation',{});previous_names=['prior-archives','migration-receipt.json','location-identity-map.json.gz','historical-diagnostics.json']
   if previous.get('archive_path'):
    previous_names.append(previous['archive_path']);previous_names.extend(p['path'] for p in load(safe_path(ownership,previous['archive_path']))['parts'])
   retained_archives=retain_prior_archives(ownership,work,index,previous_names)
@@ -303,7 +303,12 @@ def prepare(before_path,after_path,before_boundaries,after_boundaries,receipt_pa
   if published_footprint_hash(feature_snapshot(before_path))!=bh or published_footprint_hash(feature_snapshot(after_path))!=ah:raise ValueError('Snapshot footprints changed during preparation')
   if boundary_versions(before_boundaries,helpers.canonical,before)[1]!=bvh or boundary_versions(after_boundaries,helpers.canonical,after)[1]!=avh:raise ValueError('Dated footprint input changed during preparation')
   if sha(receipt_path)!=dictionary['incremental_preparation']['migration_receipt_sha256'] or sha(ownership/'index.json')!=dictionary['incremental_preparation']['original_index_sha256']:raise ValueError('Source/migration receipt changed during preparation')
-  (work/'index.json').write_text(dump(dictionary));shutil.copyfile(receipt_path,work/'migration-receipt.json');db.close();(work/'lookup.sqlite').unlink();shutil.copytree(work,output)
+  (work/'index.json').write_text(dump(dictionary))
+  diagnostics=[]
+  for name in ['candidate-recovery.json','threshold-refinement.json']:
+   if (work/name).exists():diagnostics.append({'path':name,'sha256':sha(work/name),'bytes':(work/name).stat().st_size,'original_diagnostic_footprints_sha256':load(work/name).get('footprints_sha256'),'scope':'Preserved historical diagnostic; not current repaired-footprint validation or an input filter for changed-ID derivation.'})
+  if diagnostics:(work/'historical-diagnostics.json').write_text(dump({'version':1,'current_ownership_index_sha256':sha(work/'index.json'),'current_footprints_sha256':ah,'diagnostics':diagnostics,'original_bytes_preserved':True,'installed':False,'published':False}))
+  shutil.copyfile(receipt_path,work/'migration-receipt.json');db.close();(work/'lookup.sqlite').unlink();shutil.copytree(work,output)
  return dictionary
 
 def validate_evidence(rows,index):
