@@ -77,6 +77,17 @@ def checked_context(feature, archived, nodes, owner):
             'physical_interpretation': 'unknown', 'source_authority_status': 'not-independently-approved'}
 
 
+def geometry_values(geometry):
+    """Exact decoded binary64 coordinate values, retaining signed zero and structure."""
+    def coordinates(value):
+        if isinstance(value, list):
+            return [coordinates(v) for v in value]
+        if type(value) not in (float, int):
+            raise ValueError('Unexpected nonnumeric source coordinate')
+        return float(value).hex()
+    return {'type': geometry['type'], 'coordinates': coordinates(geometry['coordinates'])}
+
+
 def negative_controls(feature, archived, nodes, owner):
     """Reject corrupted actual input bindings, including self-consistent stale metadata."""
     trials = []
@@ -157,7 +168,7 @@ def run(output):
         raise ValueError('Successor world-index changed; complete new world closure required')
     if selected.reader.read('data/hierarchy.json') != frozen.read('data/hierarchy.json'):
         raise ValueError('Successor hierarchy changed; complete new hierarchy closure required')
-    contexts, changed, aliases = [], [], []
+    contexts, changed, geometry_changed, representation_changed, aliases = [], [], [], [], []
     control_input = None
     seen = set()
     for part in world['parts']:
@@ -185,7 +196,17 @@ def run(output):
             current_feature = current[identity] if current is not None else feature
             current_hash = sha256(canonical_json(current_feature))
             is_changed = current_hash != row['original_feature_sha256']
-            row['selected_successor_applicability'] = 'changed-feature' if is_changed else 'byte-identical-feature'
+            geometry_changed_here = geometry_values(feature['geometry']) != geometry_values(current_feature['geometry'])
+            if geometry_changed_here:
+                geometry_changed.append(identity)
+            if is_changed and not geometry_changed_here:
+                representation_changed.append(identity)
+            if {k: v for k, v in feature.items() if k != 'geometry'} != {k: v for k, v in current_feature.items() if k != 'geometry'}:
+                raise ValueError('Unexpected successor identity/source/hierarchy metadata change')
+            row['selected_successor_applicability'] = (
+                'changed-coordinate-values' if geometry_changed_here else
+                'changed-json-representation-exact-binary64-values' if is_changed else
+                'identical-canonical-feature-bytes')
             if is_changed:
                 changed.append(identity)
                 row['selected_successor_context'] = {
@@ -197,7 +218,7 @@ def run(output):
     if seen != set(archived) or seen != set(owners) or len(seen) != 49625:
         raise ValueError('Missing archived/current/owner contexts')
     declared_changed = current_release['successor_geometry']['changed_ids']
-    if sorted(changed) != sorted(declared_changed):
+    if sorted(geometry_changed) != sorted(declared_changed):
         raise ValueError('Whole-source current changes differ from release declared roster')
     # Reuse the existing deterministic shard producer, rather than introduce another format.
     spec = importlib.util.spec_from_file_location('original_priorities', ROOT / 'scripts/build-physical-gap-priorities.py')
@@ -211,6 +232,8 @@ def run(output):
                 'outcome': 'passed', 'context_count': len(contexts),
                 'complete_original_feature_bijection': True, 'complete_owner_bijection': True,
                 'complete_current_source_bijection': True, 'changed_ids': sorted(changed),
+                'changed_coordinate_value_ids': sorted(geometry_changed),
+                'representation_only_changed_ids': sorted(representation_changed),
                 'native_statistics_produced': False}
     (target / 'positive-controls.json').write_bytes(canonical_json(positive))
     report = {
@@ -220,6 +243,8 @@ def run(output):
         'selected_inputs': list(selected.pins.values()), 'outputs': outputs,
         'context_count': len(contexts), 'archived_context_count': len(archived),
         'ordered_owner_count': len(owners), 'selected_changed_ids': sorted(changed),
+        'selected_coordinate_value_changed_ids': sorted(geometry_changed),
+        'selected_representation_only_changed_ids': sorted(representation_changed),
         'selected_unchanged_count': len(contexts) - len(changed),
         'frozen_native_candidate': {k: candidate[k] for k in ('method', 'size', 'geographic_release', 'footprints_sha256', 'hierarchy_sha256')},
         'frozen_canonical_grid': {k: grid[k] for k in ('size', 'footprints_sha256', 'hierarchy_sha256')},
