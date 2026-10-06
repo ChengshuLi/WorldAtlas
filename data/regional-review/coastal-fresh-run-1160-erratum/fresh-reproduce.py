@@ -284,6 +284,27 @@ def _write_exclusive(destination: Path, content: bytes, created: list, writer=No
         (writer or (lambda output, data: output.write(data)))(stream, content)
 
 
+def _remove_created(created: list):
+    # Device/inode identity covers partial files whose full hash was never
+    # completed and preserves any replacement or concurrent file.
+    for path, device, inode in reversed(created):
+        try:
+            current = path.lstat()
+            if stat.S_ISREG(current.st_mode) and current.st_dev == device and current.st_ino == inode:
+                path.unlink()
+        except OSError:
+            pass
+
+
+def publish_single_exclusive(destination: Path, content: bytes, writer=None):
+    created = []
+    try:
+        _write_exclusive(destination, content, created, writer)
+    except Exception:
+        _remove_created(created)
+        raise
+
+
 def publish_products(target: Path, products: dict[str, bytes], receipt: dict, writer=None):
     ordinary_path(target)
     if target.exists() or target.is_symlink():
@@ -298,16 +319,7 @@ def publish_products(target: Path, products: dict[str, bytes], receipt: dict, wr
         receipt_bytes = canonical_json(receipt)
         _write_exclusive(receipt_path, receipt_bytes, created, writer)
     except Exception:
-        # Remove only the exact regular files created by this invocation.
-        # Device/inode identity also covers partial files whose full hash was
-        # never completed. Preserve any replacement or concurrent file.
-        for path, device, inode in reversed(created):
-            try:
-                current = path.lstat()
-                if stat.S_ISREG(current.st_mode) and current.st_dev == device and current.st_ino == inode:
-                    path.unlink()
-            except OSError:
-                pass
+        _remove_created(created)
         try:
             target.rmdir()
         except OSError:
@@ -401,8 +413,7 @@ def verify_pair(run_one: str, run_two: str, summary_id: str = "two-run-summary")
                             for name in PRODUCTS],
                "runs": records}
     out = ROOT / f"{summary_id}.json"
-    with out.open("xb") as stream:
-        stream.write(canonical_json(summary))
+    publish_single_exclusive(out, canonical_json(summary))
     print(json.dumps({"summary": str(out.relative_to(REPO)), "sha256": sha256(out.read_bytes()),
                       "baseline_products_match": True, "run_products_byte_identical": True}, indent=2))
 
@@ -463,6 +474,16 @@ def run_controls():
             raise Refusal("partial-write fixture unexpectedly completed")
         if partial.exists() or partial.is_symlink():
             raise Refusal("failed publication left its own partial output behind")
+        partial_summary = Path(tmp) / "partial-summary.json"
+        try:
+            publish_single_exclusive(partial_summary, b"summary-fixture", fail_after_partial_write)
+        except OSError as error:
+            if str(error) != "simulated write interruption":
+                raise
+        else:
+            raise Refusal("partial summary fixture unexpectedly completed")
+        if partial_summary.exists() or partial_summary.is_symlink():
+            raise Refusal("failed summary publication left its own partial file behind")
     # Positive controls execute the real immutable preflight and both original
     # scientific controls without publishing an output vintage.
     pins = load_pin_index()
@@ -476,6 +497,7 @@ def run_controls():
     return {"unsafe_names_rejected": len(rejected_ids), "changed_input_rejected": True,
             "stale_registry_rejected": True, "existing_target_sentinel_preserved": True,
             "partial_write_cleanup_verified": True,
+            "partial_summary_cleanup_verified": True,
             "exact_pinned_inputs_admitted": admission["input_count"],
             "four_positive_products_match_baseline": sorted(products)}
 
