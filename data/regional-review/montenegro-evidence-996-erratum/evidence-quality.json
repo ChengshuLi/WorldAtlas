@@ -547,73 +547,116 @@
   "change_receipts": [
     {
       "path": "data/regional-review/montenegro-evidence-996-erratum/RESEARCH.md",
-      "previous_path": null,
       "status": "added"
     },
     {
       "path": "data/regional-review/montenegro-evidence-996-erratum/evidence-quality.json",
-      "previous_path": null,
       "status": "added"
     },
     {
       "path": "data/regional-review/montenegro-evidence-996-erratum/reproduce.py",
-      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/montenegro-evidence-996-erratum/reproducibility-control-anchored-v2.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/montenegro-evidence-996-erratum/reproducibility-control-anchored.json",
       "status": "added"
     },
     {
       "path": "data/regional-review/montenegro-evidence-996-erratum/reproducibility-control.json",
-      "previous_path": null,
       "status": "added"
     },
     {
       "path": "data/regional-review/montenegro-evidence-996-erratum/reservation.json",
-      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v2/run-1/comparison.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v2/run-1/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v2/run-1/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v2/run-2/comparison.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v2/run-2/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v2/run-2/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored/run-1/comparison.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored/run-1/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored/run-1/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored/run-2/comparison.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored/run-2/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored/run-2/positive-control.json",
       "status": "added"
     },
     {
       "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/final/run-1/comparison.json",
-      "previous_path": null,
       "status": "added"
     },
     {
       "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/final/run-1/negative-control.json",
-      "previous_path": null,
       "status": "added"
     },
     {
       "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/final/run-1/positive-control.json",
-      "previous_path": null,
       "status": "added"
     },
     {
       "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/final/run-2/comparison.json",
-      "previous_path": null,
       "status": "added"
     },
     {
       "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/final/run-2/negative-control.json",
-      "previous_path": null,
       "status": "added"
     },
     {
       "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/final/run-2/positive-control.json",
-      "previous_path": null,
       "status": "added"
     },
     {
       "path": "data/regional-review/montenegro-evidence-996-erratum/source-manifest.json",
-      "previous_path": null,
       "status": "added"
     },
     {
       "path": "data/regional-review/montenegro-evidence-996-erratum/source/issue-1172-api-response.json",
-      "previous_path": null,
       "status": "added"
     }
   ],
   "commands": [
-    "python data/regional-review/montenegro-evidence-996-erratum/reproduce.py run --output-dir data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/final/run-1",
-    "python data/regional-review/montenegro-evidence-996-erratum/reproduce.py run --output-dir data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/final/run-2",
+    "python data/regional-review/montenegro-evidence-996-erratum/reproduce.py run --output-dir data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v2/run-1",
+    "python data/regional-review/montenegro-evidence-996-erratum/reproduce.py run --output-dir data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v2/run-2",
     "python data/regional-review/montenegro-evidence-996-erratum/reproduce.py finalize"
   ],
   "conclusions": [
@@ -650,7 +693,7 @@
       "description": "Checks complete retained/baseline file bytes before reading, verifies all 23 source identities/parents, reproduces the original area/name crosswalk, changes only the wrong provenance path, exercises drift controls, and writes to new exclusive output directories.",
       "id": "montenegro-996-whole-input-reproduction",
       "kind": "measurement",
-      "software": "Python 3.12.14; Git git version 2.39.5 (Apple Git-154); SHA-256; standard-library JSON/GZIP",
+      "software": "Python 3.8.5; Git git version 2.39.5 (Apple Git-154); SHA-256; standard-library JSON/GZIP",
       "units": "whole-file bytes, identities, reported square kilometres (km²); no fresh boundary measurement"
     },
     {
@@ -665,27 +708,27 @@
     {
       "json_pointer": "/summary/issue_subject_count",
       "metric_id": "scope.subjects",
-      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/final/run-2/comparison.json"
+      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v2/run-2/comparison.json"
     },
     {
       "json_pointer": "/summary/atlas_singleton_parent_count",
       "metric_id": "scope.parents",
-      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/final/run-2/comparison.json"
+      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v2/run-2/comparison.json"
     },
     {
       "json_pointer": "/summary/unique_subject_containing_files",
       "metric_id": "scope.containing_files",
-      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/final/run-2/comparison.json"
+      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v2/run-2/comparison.json"
     },
     {
       "json_pointer": "/summary/matched_2017_official_names",
       "metric_id": "source.matches_2017",
-      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/final/run-2/comparison.json"
+      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v2/run-2/comparison.json"
     },
     {
       "json_pointer": "/summary/retained_2017_features",
       "metric_id": "source.retained_2017_shapes",
-      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/final/run-2/comparison.json"
+      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v2/run-2/comparison.json"
     }
   ],
   "metrics": [
@@ -732,22 +775,22 @@
   ],
   "outputs": [
     {
-      "bytes": 4932,
+      "bytes": 4895,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/montenegro-evidence-996-erratum/RESEARCH.md",
-      "sha256": "7edd5cf56f56dd5164b9ada9f2577ad53b7ac646fa9ad592f33d7d8309eedd61"
+      "sha256": "f9c1d681f7792295971e9191ad4f4730bf792237e8f40bb01c8cf3b2ce7f86d8"
     },
     {
-      "bytes": 47791,
+      "bytes": 50889,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/montenegro-evidence-996-erratum/reproduce.py",
-      "sha256": "aa79d8e93f79359621fff1853b8951775adaa9e316c1de5295bf6975e85a81fa"
+      "sha256": "42051680eade8c798da219c4480f4377b8ad56ba316321b7b9b9ae87216fb7b1"
     },
     {
-      "bytes": 550,
+      "bytes": 562,
       "hash_kind": "file-bytes",
-      "path": "data/regional-review/montenegro-evidence-996-erratum/reproducibility-control.json",
-      "sha256": "971a99bc7dc18b8d90fa30c2b4b3212fdf77083f65615e36b48dbf616db5f0f1"
+      "path": "data/regional-review/montenegro-evidence-996-erratum/reproducibility-control-anchored-v2.json",
+      "sha256": "0144ad6b69101cdd3eba3546a20b4995e32e3ae0fc86e4ecb2ee202687190111"
     },
     {
       "bytes": 924,
@@ -758,37 +801,37 @@
     {
       "bytes": 30811,
       "hash_kind": "file-bytes",
-      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/final/run-1/comparison.json",
+      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v2/run-1/comparison.json",
       "sha256": "8b5acd06c9d269979287277d498e6e9405543d46a681149a327062abe63f782b"
     },
     {
-      "bytes": 2219,
+      "bytes": 2653,
       "hash_kind": "file-bytes",
-      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/final/run-1/negative-control.json",
-      "sha256": "e9d27a5e2e2eed799a915e9ed4a8f5974257f4fd6737c9d82a79bbbc6a84b503"
+      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v2/run-1/negative-control.json",
+      "sha256": "90451622ca0c4cc0ad3a8f280888a8995be8a975a950ff2df4d05954500b305e"
     },
     {
       "bytes": 309,
       "hash_kind": "file-bytes",
-      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/final/run-1/positive-control.json",
+      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v2/run-1/positive-control.json",
       "sha256": "fd602d48561fdc0587d90c668a42bcc8197c31d82e3db8cfb1c7db67b552beb6"
     },
     {
       "bytes": 30811,
       "hash_kind": "file-bytes",
-      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/final/run-2/comparison.json",
+      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v2/run-2/comparison.json",
       "sha256": "8b5acd06c9d269979287277d498e6e9405543d46a681149a327062abe63f782b"
     },
     {
-      "bytes": 2219,
+      "bytes": 2653,
       "hash_kind": "file-bytes",
-      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/final/run-2/negative-control.json",
-      "sha256": "e9d27a5e2e2eed799a915e9ed4a8f5974257f4fd6737c9d82a79bbbc6a84b503"
+      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v2/run-2/negative-control.json",
+      "sha256": "90451622ca0c4cc0ad3a8f280888a8995be8a975a950ff2df4d05954500b305e"
     },
     {
       "bytes": 309,
       "hash_kind": "file-bytes",
-      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/final/run-2/positive-control.json",
+      "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v2/run-2/positive-control.json",
       "sha256": "fd602d48561fdc0587d90c668a42bcc8197c31d82e3db8cfb1c7db67b552beb6"
     },
     {
@@ -806,7 +849,7 @@
   ],
   "rendered_tables": [],
   "reproduction": {
-    "complete_phase_bytes_including_issue_receipt_code_probe_and_output_reserve": 220651057,
+    "complete_phase_bytes_including_issue_receipt_code_probe_and_output_reserve": 220654155,
     "corrected_existing_input": "data/regional-review/regional-review-3c4fe25a21fa428d/source/area-assessments.json",
     "evidence_manifest_descriptor_count": 78,
     "issue_contract_snapshot": {
@@ -844,21 +887,43 @@
       {
         "outputs": {
           "comparison.json": "8b5acd06c9d269979287277d498e6e9405543d46a681149a327062abe63f782b",
-          "negative-control.json": "e9d27a5e2e2eed799a915e9ed4a8f5974257f4fd6737c9d82a79bbbc6a84b503",
+          "negative-control.json": "90451622ca0c4cc0ad3a8f280888a8995be8a975a950ff2df4d05954500b305e",
           "positive-control.json": "fd602d48561fdc0587d90c668a42bcc8197c31d82e3db8cfb1c7db67b552beb6"
         },
-        "run_dir": "runs/2026-10-06/final/run-1"
+        "run_dir": "runs/2026-10-06/anchored-v2/run-1"
       },
       {
         "outputs": {
           "comparison.json": "8b5acd06c9d269979287277d498e6e9405543d46a681149a327062abe63f782b",
-          "negative-control.json": "e9d27a5e2e2eed799a915e9ed4a8f5974257f4fd6737c9d82a79bbbc6a84b503",
+          "negative-control.json": "90451622ca0c4cc0ad3a8f280888a8995be8a975a950ff2df4d05954500b305e",
           "positive-control.json": "fd602d48561fdc0587d90c668a42bcc8197c31d82e3db8cfb1c7db67b552beb6"
         },
-        "run_dir": "runs/2026-10-06/final/run-2"
+        "run_dir": "runs/2026-10-06/anchored-v2/run-2"
       }
     ],
     "runs_byte_identical": true,
+    "superseded_control": {
+      "path": "data/regional-review/montenegro-evidence-996-erratum/reproducibility-control-anchored.json",
+      "reason": "Intermediate manifest finalization listed generated bytecode and duplicated the manifest receipt; the corrected v2 control and manifest are authoritative."
+    },
+    "superseded_runs": [
+      {
+        "reason": "Superseded because the initial PR-head runner did not authenticate its own committed Git blob before producing outputs.",
+        "run_dir": "runs/2026-10-06/final/run-1"
+      },
+      {
+        "reason": "Superseded because the initial PR-head runner did not authenticate its own committed Git blob before producing outputs.",
+        "run_dir": "runs/2026-10-06/final/run-2"
+      },
+      {
+        "reason": "Superseded because an intermediate finalized manifest accidentally included generated Python bytecode and duplicated manifest receipts; the independent runner outputs remain retained.",
+        "run_dir": "runs/2026-10-06/anchored/run-1"
+      },
+      {
+        "reason": "Superseded because an intermediate finalized manifest accidentally included generated Python bytecode and duplicated manifest receipts; the independent runner outputs remain retained.",
+        "run_dir": "runs/2026-10-06/anchored/run-2"
+      }
+    ],
     "version": 1,
     "whole_input_pins_checked": 63,
     "whole_input_raw_bytes": 218470766
@@ -1059,19 +1124,19 @@
   ],
   "validation": [
     {
-      "evidence_path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/final/run-2/positive-control.json",
+      "evidence_path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v2/run-2/positive-control.json",
       "kind": "positive-control",
       "method_id": "montenegro-996-whole-input-reproduction",
       "outcome": "passed"
     },
     {
-      "evidence_path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/final/run-2/negative-control.json",
+      "evidence_path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v2/run-2/negative-control.json",
       "kind": "negative-control",
       "method_id": "montenegro-996-whole-input-reproduction",
       "outcome": "passed"
     },
     {
-      "evidence_path": "data/regional-review/montenegro-evidence-996-erratum/reproducibility-control.json",
+      "evidence_path": "data/regional-review/montenegro-evidence-996-erratum/reproducibility-control-anchored-v2.json",
       "kind": "reproducibility",
       "method_id": "montenegro-996-whole-input-reproduction",
       "outcome": "passed"
