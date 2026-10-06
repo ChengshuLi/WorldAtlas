@@ -7,6 +7,7 @@ import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {gzipSync,gunzipSync} from 'node:zlib';
 import {readGeographicReleaseManifest,decodeGeographicReleaseBatch} from '../../../scripts/read-geographic-release-manifest.mjs';
+import {geographicMembershipHash} from '../../../hosted/geographic-releases.js';
 import {requirePlainExecution,committedPreparationFiles,candidateBudget} from '../../../scripts/native-ownership/native-preparation-guards.mjs';
 
 requirePlainExecution();
@@ -18,7 +19,7 @@ const out=path.resolve(root,options['--out']??prefix+'/repacked-release-v1');
 assert.ok(out.startsWith(path.join(root,prefix)+path.sep)&&!fs.existsSync(out),'Fresh owned output required');
 for(let parent=path.dirname(out);parent!==root;parent=path.dirname(parent)){assert.ok(parent.startsWith(root+path.sep));const stat=fs.lstatSync(parent);assert.ok(stat.isDirectory()&&!stat.isSymbolicLink());}
 const head=execFileSync('git',['-C',root,'rev-parse','HEAD'],{encoding:'utf8'}).trim();
-const producer=committedPreparationFiles(root,head,[prefix+'/repack-successor-batches.mjs','scripts/read-geographic-release-manifest.mjs','scripts/native-ownership/native-preparation-guards.mjs','package.json','package-lock.json']);
+const producer=committedPreparationFiles(root,head,[prefix+'/repack-successor-batches.mjs','scripts/read-geographic-release-manifest.mjs','scripts/native-ownership/native-preparation-guards.mjs','hosted/geographic-releases.js','package.json','package-lock.json']);
 const ledger=candidateBudget([]),inputs=new Map(),outputs=[];
 const MAX=32*1024*1024,PAYLOAD_LIMIT=900000,sha=raw=>createHash('sha256').update(raw).digest('hex');
 const originalCommit='d0cc67eac85038159f88a673acbc39b77ab7461d';
@@ -71,6 +72,7 @@ for(const descriptor of memberships){
   originalBatches.push({...descriptor,bytes:raw.length,payload_bytes:decoded.length,rows:payload.memberships.length,ingestion_id:payload.ingestion_id});rows.push(...payload.memberships);
 }
 assert.equal(rows.length,84833,'Complete ordered successor membership inventory required');
+assert.equal(await geographicMembershipHash(rows),release.membership_sha256,'Actual independent release membership contract must match');
 const rowJSON=rows.map(row=>JSON.stringify(row));
 function orderedHash(items){const hash=createHash('sha256').update('[');items.forEach((item,i)=>{if(i)hash.update(',');hash.update(item);});return hash.update(']').digest('hex');}
 const orderedRowsHash=orderedHash(rowJSON),releaseJSON=JSON.stringify(release);
@@ -100,10 +102,17 @@ for(let i=0;i<rows.length;i++){
   group.push(rows[i]);groupBytes+=bytes;
 }
 flush();assert.equal(start,rows.length);assert.ok(newDescriptors.length<memberships.length);
-const next={...registry,batches:[...retained,...newDescriptors]};
+// Keep the source/release/membership/changes import ordering, replacing only
+// the old membership span with its complete new span.
+let inserted=false;
+const next={...registry,batches:registry.batches.flatMap(part=>{
+  if(!removedNames.has(part.path))return [part];
+  if(inserted)return [];
+  inserted=true;return newDescriptors;
+})};
 for(const key of Object.keys(registry).filter(k=>k!=='batches'))assert.equal(JSON.stringify(next[key]),JSON.stringify(registry[key]),'Registry field JSON bytes changed: '+key);
 assert.equal(JSON.stringify(next.releases.at(-1)),releaseJSON);assert.deepEqual(next.batches.slice(0,prior.batches.length),prior.batches);
-assert.deepEqual(next.batches.slice(prior.batches.length,retained.length),successor.filter(p=>!removedNames.has(p.path)));
+assert.deepEqual(next.batches.filter(p=>!newDescriptors.some(n=>n.path===p.path)),retained);
 const registryName='releases-v7-repacked-gzip.json.gz',nextDecoded=Buffer.from(JSON.stringify(next));assert.ok(nextDecoded.length<=MAX);
 const registryProduct=write(registryName,gzipSync(nextDecoded,{level:9}));
 const nextPointer={...pointer,path:registryName,sha256:registryProduct.sha256};
@@ -112,6 +121,19 @@ assert.deepEqual(readGeographicReleaseManifest(out),next,'Actual pointer/registr
 const readback=[];
 for(const descriptor of newDescriptors){const payload=JSON.parse(decodeGeographicReleaseBatch(fs.readFileSync(path.join(out,descriptor.path)),descriptor));for(const row of payload.memberships)readback.push(JSON.stringify(row));}
 assert.equal(readback.length,rows.length);assert.equal(orderedHash(readback),orderedRowsHash);for(let i=0;i<rows.length;i++)assert.equal(readback[i],rowJSON[i]);
+assert.equal(await geographicMembershipHash(readback.map(row=>JSON.parse(row))),release.membership_sha256);
+const controls=[];
+const corrupt=Buffer.from(fs.readFileSync(path.join(out,newDescriptors[0].path)));corrupt[corrupt.length-1]^=1;
+assert.throws(()=>decodeGeographicReleaseBatch(corrupt,newDescriptors[0]),/hash mismatch/);
+controls.push('Altered compressed bytes rejected by the existing release decoder');
+const altered=readback.map(row=>JSON.parse(row));altered[0]={...altered[0],parent_id:'deliberately-wrong-parent-control'};
+assert.notEqual(await geographicMembershipHash(altered),release.membership_sha256);
+controls.push('Changed parent in otherwise well-formed rows rejected by the independent release membership hash');
+assert.notEqual(orderedHash(readback.slice(1)),orderedRowsHash);
+assert.notEqual(orderedHash([readback[1],readback[0],...readback.slice(2)]),orderedRowsHash);
+controls.push('Omitted or reordered rows rejected by complete ordered-row comparison');
+write('positive-control.json',Buffer.from(JSON.stringify({method_id:'lossless-release-transport-repack',kind:'positive',outcome:'passed',memberships:rows.length,ordered_membership_rows_sha256:orderedRowsHash,release_membership_sha256:release.membership_sha256})+'\n'));
+write('negative-control.json',Buffer.from(JSON.stringify({method_id:'lossless-release-transport-repack',kind:'negative',outcome:'passed',controls})+'\n'));
 // Recheck every unchanged actual source input after generation. No source data,
 // original batch, source definition or predecessor manifest is overwritten.
 for(const pin of inputs.values())if(pin.commit===head&&!producer.some(p=>p.path===pin.path))assert.equal(sha(fs.readFileSync(path.join(root,pin.path))),pin.sha256,'An actual source changed during repack');
