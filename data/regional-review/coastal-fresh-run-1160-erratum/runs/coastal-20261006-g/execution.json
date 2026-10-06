@@ -1,0 +1,54 @@
+{
+  "schema": "coastal-fresh-execution:v1",
+  "issue": 1218,
+  "run_id": "coastal-20261006-g",
+  "started_at": "2026-10-06T21:25:09.755559+00:00",
+  "completed_at": "2026-10-06T21:25:18.763887+00:00",
+  "command": "python3.12 data/regional-review/coastal-fresh-run-1160-erratum/fresh-reproduce.py --run-id coastal-20261006-g",
+  "checkout_head": "2114f9d4d63f6405f694dfdf94e2db5fc48297e9",
+  "input_inventory_sha256": "99d6b1ac1551160e46d58076dbfe0269973bc518e5037f371622e9903005b8c9",
+  "prior_program_sha256": "be7d84a1d75663c5169dca35cd530018f17d079b3f24e0527a08b190cb1c4493",
+  "program_sha256": "45caf0e018c6c69d75a0b875faab0d1f8356400d1f5c0ed94e9e32b9164f229e",
+  "python": "3.12.14",
+  "shapely": "2.1.2",
+  "pyproj": "3.7.2",
+  "products": [
+    {
+      "path": "admission.json",
+      "bytes": 12061,
+      "sha256": "1e2a4d71f1badcae12ed1f71e102c132ff6a30be12ca7b35f3e36eecc4dd3e47",
+      "historical_baseline_sha256": "1e2a4d71f1badcae12ed1f71e102c132ff6a30be12ca7b35f3e36eecc4dd3e47",
+      "matches_historical_baseline": true
+    },
+    {
+      "path": "eight-county-comparison.json",
+      "bytes": 24799,
+      "sha256": "2c2fe3fd099df52623226597fa98b27b3eac23c0febed3b6d82aa1cb16d85251",
+      "historical_baseline_sha256": "2c2fe3fd099df52623226597fa98b27b3eac23c0febed3b6d82aa1cb16d85251",
+      "matches_historical_baseline": true
+    },
+    {
+      "path": "positive-control.json",
+      "bytes": 332,
+      "sha256": "a339194e98f952d122c03504c33e52b95c888b3ce808c64573be976f7e5013e9",
+      "historical_baseline_sha256": "a339194e98f952d122c03504c33e52b95c888b3ce808c64573be976f7e5013e9",
+      "matches_historical_baseline": true
+    },
+    {
+      "path": "negative-control.json",
+      "bytes": 383,
+      "sha256": "4225c2cd188ac41de8032926c1c5eb34d42af7baa58e7438ddf58abbd8cbf0c8",
+      "historical_baseline_sha256": "4225c2cd188ac41de8032926c1c5eb34d42af7baa58e7438ddf58abbd8cbf0c8",
+      "matches_historical_baseline": true
+    }
+  ],
+  "admission": {
+    "input_count": 67,
+    "issue_input_count": 57,
+    "ordinary_input_bytes": 266165452,
+    "gzip_decoded_bytes": 726951,
+    "reserve_bytes": 200000,
+    "admitted_phase_bytes": 267092403,
+    "registry_part_count": 36
+  }
+}

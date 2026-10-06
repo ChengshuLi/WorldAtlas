@@ -1,0 +1,494 @@
+{
+  "schema": "coastal-fresh-run-input-pins:v1",
+  "issue": 1218,
+  "baseline_commit": "a37ad37b94168f9b458617489a702bbb72afbd3d",
+  "fresh_main_commit": "bd3b4ab860f11320717c354b10378c9972726373",
+  "upstream_input_baseline_commit": "72029cd16057199be441058c69dd783604541100",
+  "subject_ids": [
+    "gb:USA:ADM2:52423323B68249799438553",
+    "gb:USA:ADM2:52423323B35006791438696",
+    "gb:USA:ADM2:52423323B58673559392327",
+    "gb:USA:ADM2:52423323B71362647483761",
+    "gb:USA:ADM2:52423323B31615661575159",
+    "gb:USA:ADM2:52423323B40186233786127",
+    "gb:USA:ADM2:52423323B93853380479562",
+    "gb:USA:ADM2:52423323B62158301450735"
+  ],
+  "issue_pins": {
+    "input_1": "8f49c003f2277593041f3526c97b58252599cd53f20abf27fd6a6eb62cfdb5d1",
+    "input_2": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+    "input_3": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7",
+    "input_4": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2",
+    "input_5": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f",
+    "input_6": "24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7",
+    "input_7": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1",
+    "input_8": "c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0",
+    "input_9": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df",
+    "input_10": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797",
+    "input_11": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db",
+    "input_12": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123",
+    "input_13": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269",
+    "input_14": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf",
+    "input_15": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f",
+    "input_16": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7",
+    "input_17": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3",
+    "input_18": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2",
+    "input_19": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c",
+    "input_20": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394",
+    "input_21": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632",
+    "input_22": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758",
+    "input_23": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+    "input_24": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a",
+    "input_25": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617",
+    "input_26": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a",
+    "input_27": "44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e",
+    "input_28": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64",
+    "input_29": "d928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe",
+    "input_30": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+    "input_31": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc",
+    "input_32": "dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a",
+    "input_33": "1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387",
+    "input_34": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1",
+    "input_35": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6",
+    "input_36": "04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9",
+    "input_37": "43362eab945a2a836df8f2250ee3725e818d12b11c733a05da8c71a86f38de42",
+    "input_38": "af53020e1d26a068c19e3ed7a05506ca73c34b01bdd8189ddf611cbf3e00844e",
+    "input_39": "215935f65f7ab75f42731ae3203e3c40cec24193c6ed90e4c8908d943ce290d6",
+    "input_40": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c",
+    "input_41": "1bdd6b1c790e9ea10fb262efe191b8fdb19492e2cc1f30e367d89815b7564a1e",
+    "input_42": "dbd213cac843e68602918f702bb2d2851d759aa943fa64b0dd8b2bd28b79637d",
+    "input_43": "9a1943f3f3fc2f6bf7b03871006b6e4ad6a26e2fbbf9392ae3c1463e80550483",
+    "input_44": "e3660e0c7fa549540d9aa2d92a7d27e43e5e307bd2df31a57ad80e5a30d955d1",
+    "input_45": "206c90414d8f1ee9f71eb40549a3a5523bd56bf9ac58bdcfa19544fd01628fd0",
+    "input_46": "68cfd4cf9f3d30cedea39033c80c1dd2a6d59df38fd83417ef7cfa80f46af78e",
+    "input_47": "21476bdba82fe8072f8994ae59bda484260d1b932c13f31991f6414f8e04d551",
+    "input_48": "61b0ec3c9b54aa09e202fadc6018b9617cffe4629eee7f602baee3d65336093d",
+    "input_49": "c09e62479268b4ee8b986a66768d5dea821b4e667d9d446a78d5304076c2e717",
+    "input_50": "cd79c623be64ada8940df6b036c20418f8af20ca833553d275bef8b640f10ad0",
+    "input_51": "aab25c2227638b0048020747f8dd82b019ddd6f26100585c35533c5036cc7219",
+    "input_52": "e5296a323ee4c38afdf7c54a32e67b77c2e98647a6535cb2464b699fb8740105",
+    "input_53": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+    "input_54": "1c3f3b9598e474af751e25ff0839cbf5c4a9931a59b4ffaaff1a56c6e2f0e2c9",
+    "input_55": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12",
+    "input_56": "944541968fcdf065b9c4b6105be227c3e0e14b6a20916f4fa21f851338c7a305",
+    "input_57": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd"
+  },
+  "inputs": [
+    {
+      "id": "input_1",
+      "path": "data/geography/macro-loose-ends-v5-additions.json",
+      "sha256": "8f49c003f2277593041f3526c97b58252599cd53f20abf27fd6a6eb62cfdb5d1",
+      "bytes": 11393
+    },
+    {
+      "id": "input_2",
+      "path": "data/geography/part-0.json",
+      "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+      "bytes": 8539839
+    },
+    {
+      "id": "input_3",
+      "path": "data/geography/part-1.json",
+      "sha256": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7",
+      "bytes": 8060108
+    },
+    {
+      "id": "input_4",
+      "path": "data/geography/part-10.json",
+      "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2",
+      "bytes": 5144571
+    },
+    {
+      "id": "input_5",
+      "path": "data/geography/part-11.json",
+      "sha256": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f",
+      "bytes": 5131824
+    },
+    {
+      "id": "input_6",
+      "path": "data/geography/part-12.json",
+      "sha256": "24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7",
+      "bytes": 4489493
+    },
+    {
+      "id": "input_7",
+      "path": "data/geography/part-13.json",
+      "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1",
+      "bytes": 5709487
+    },
+    {
+      "id": "input_8",
+      "path": "data/geography/part-14.json",
+      "sha256": "c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0",
+      "bytes": 4355198
+    },
+    {
+      "id": "input_9",
+      "path": "data/geography/part-15.json",
+      "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df",
+      "bytes": 5180426
+    },
+    {
+      "id": "input_10",
+      "path": "data/geography/part-16.json",
+      "sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797",
+      "bytes": 5213846
+    },
+    {
+      "id": "input_11",
+      "path": "data/geography/part-17.json",
+      "sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db",
+      "bytes": 4945828
+    },
+    {
+      "id": "input_12",
+      "path": "data/geography/part-18.json",
+      "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123",
+      "bytes": 4909063
+    },
+    {
+      "id": "input_13",
+      "path": "data/geography/part-19.json",
+      "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269",
+      "bytes": 4583022
+    },
+    {
+      "id": "input_14",
+      "path": "data/geography/part-2.json",
+      "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf",
+      "bytes": 6259307
+    },
+    {
+      "id": "input_15",
+      "path": "data/geography/part-20.json",
+      "sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f",
+      "bytes": 6570767
+    },
+    {
+      "id": "input_16",
+      "path": "data/geography/part-21.json",
+      "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7",
+      "bytes": 6737781
+    },
+    {
+      "id": "input_17",
+      "path": "data/geography/part-22.json",
+      "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3",
+      "bytes": 4746385
+    },
+    {
+      "id": "input_18",
+      "path": "data/geography/part-23.json",
+      "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2",
+      "bytes": 4962410
+    },
+    {
+      "id": "input_19",
+      "path": "data/geography/part-24.json",
+      "sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c",
+      "bytes": 4816899
+    },
+    {
+      "id": "input_20",
+      "path": "data/geography/part-25.json",
+      "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394",
+      "bytes": 4525239
+    },
+    {
+      "id": "input_21",
+      "path": "data/geography/part-26.json",
+      "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632",
+      "bytes": 4608983
+    },
+    {
+      "id": "input_22",
+      "path": "data/geography/part-27.json",
+      "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758",
+      "bytes": 4863162
+    },
+    {
+      "id": "input_23",
+      "path": "data/geography/part-28.json",
+      "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "bytes": 6613963
+    },
+    {
+      "id": "input_24",
+      "path": "data/geography/part-29.json",
+      "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a",
+      "bytes": 12932167
+    },
+    {
+      "id": "input_25",
+      "path": "data/geography/part-3.json",
+      "sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617",
+      "bytes": 5153118
+    },
+    {
+      "id": "input_26",
+      "path": "data/geography/part-30.json",
+      "sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a",
+      "bytes": 11979437
+    },
+    {
+      "id": "input_27",
+      "path": "data/geography/part-31.json",
+      "sha256": "44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e",
+      "bytes": 10086485
+    },
+    {
+      "id": "input_28",
+      "path": "data/geography/part-32.json",
+      "sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64",
+      "bytes": 10211739
+    },
+    {
+      "id": "input_29",
+      "path": "data/geography/part-33.json",
+      "sha256": "d928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe",
+      "bytes": 607984
+    },
+    {
+      "id": "input_30",
+      "path": "data/geography/part-4.json",
+      "sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+      "bytes": 4835479
+    },
+    {
+      "id": "input_31",
+      "path": "data/geography/part-5.json",
+      "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc",
+      "bytes": 5226173
+    },
+    {
+      "id": "input_32",
+      "path": "data/geography/part-6.json",
+      "sha256": "dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a",
+      "bytes": 4607953
+    },
+    {
+      "id": "input_33",
+      "path": "data/geography/part-7.json",
+      "sha256": "1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387",
+      "bytes": 4257402
+    },
+    {
+      "id": "input_34",
+      "path": "data/geography/part-8.json",
+      "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1",
+      "bytes": 5097739
+    },
+    {
+      "id": "input_35",
+      "path": "data/geography/part-9.json",
+      "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6",
+      "bytes": 5729632
+    },
+    {
+      "id": "input_36",
+      "path": "data/geography/source-restoration-additions.json",
+      "sha256": "04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9",
+      "bytes": 1573576
+    },
+    {
+      "id": "input_37",
+      "path": "data/regional-review/coastal-reference-check-428/REPRODUCTION.md",
+      "sha256": "43362eab945a2a836df8f2250ee3725e818d12b11c733a05da8c71a86f38de42",
+      "bytes": 4285
+    },
+    {
+      "id": "input_38",
+      "path": "data/regional-review/coastal-reference-check-428/findings.md",
+      "sha256": "af53020e1d26a068c19e3ed7a05506ca73c34b01bdd8189ddf611cbf3e00844e",
+      "bytes": 11580
+    },
+    {
+      "id": "input_39",
+      "path": "data/regional-review/coastal-reference-check-428/reproduce.py",
+      "sha256": "215935f65f7ab75f42731ae3203e3c40cec24193c6ed90e4c8908d943ce290d6",
+      "bytes": 7292
+    },
+    {
+      "id": "input_40",
+      "path": "data/regional-review/coastal-reference-check-428/runs/eight-county-comparison.json",
+      "sha256": "a98e0ff95014bc77b986fcab5d77b831f8bc9e639fb7eb7ec6a702e3e8d6651c",
+      "bytes": 23719
+    },
+    {
+      "id": "input_41",
+      "path": "data/regional-review/coastal-reference-check-428/runs/negative-control.json",
+      "sha256": "1bdd6b1c790e9ea10fb262efe191b8fdb19492e2cc1f30e367d89815b7564a1e",
+      "bytes": 449
+    },
+    {
+      "id": "input_42",
+      "path": "data/regional-review/coastal-reference-check-428/runs/positive-control.json",
+      "sha256": "dbd213cac843e68602918f702bb2d2851d759aa943fa64b0dd8b2bd28b79637d",
+      "bytes": 338
+    },
+    {
+      "id": "input_43",
+      "path": "data/regional-review/coastal-reference-check-428/scope.json",
+      "sha256": "9a1943f3f3fc2f6bf7b03871006b6e4ad6a26e2fbbf9392ae3c1463e80550483",
+      "bytes": 800
+    },
+    {
+      "id": "input_44",
+      "path": "data/regional-review/coastal-reference-check-428/source/authorities/census-boundary-change-notes.html.gz",
+      "sha256": "e3660e0c7fa549540d9aa2d92a7d27e43e5e307bd2df31a57ad80e5a30d955d1",
+      "bytes": 38444
+    },
+    {
+      "id": "input_45",
+      "path": "data/regional-review/coastal-reference-check-428/source/authorities/census-lsad-codes.html.gz",
+      "sha256": "206c90414d8f1ee9f71eb40549a3a5523bd56bf9ac58bdcfa19544fd01628fd0",
+      "bytes": 34708
+    },
+    {
+      "id": "input_46",
+      "path": "data/regional-review/coastal-reference-check-428/source/authorities/retrieval.json",
+      "sha256": "68cfd4cf9f3d30cedea39033c80c1dd2a6d59df38fd83417ef7cfa80f46af78e",
+      "bytes": 2401
+    },
+    {
+      "id": "input_47",
+      "path": "data/regional-review/coastal-reference-check-428/source/authorities/tiger-line-2025-techdoc.pdf",
+      "sha256": "21476bdba82fe8072f8994ae59bda484260d1b932c13f31991f6414f8e04d551",
+      "bytes": 4598419
+    },
+    {
+      "id": "input_48",
+      "path": "data/regional-review/coastal-reference-check-428/source/census-2026/counties-layer-metadata.json",
+      "sha256": "61b0ec3c9b54aa09e202fadc6018b9617cffe4629eee7f602baee3d65336093d",
+      "bytes": 7490
+    },
+    {
+      "id": "input_49",
+      "path": "data/regional-review/coastal-reference-check-428/source/census-2026/eight-counties.geojson",
+      "sha256": "c09e62479268b4ee8b986a66768d5dea821b4e667d9d446a78d5304076c2e717",
+      "bytes": 873257
+    },
+    {
+      "id": "input_50",
+      "path": "data/regional-review/coastal-reference-check-428/source/census-2026/retrieval.json",
+      "sha256": "cd79c623be64ada8940df6b036c20418f8af20ca833553d275bef8b640f10ad0",
+      "bytes": 1667
+    },
+    {
+      "id": "input_51",
+      "path": "data/regional-review/regional-review-528e53393a4376b4/source/census-2018/georgia-kentucky-counties.geojson",
+      "sha256": "aab25c2227638b0048020747f8dd82b019ddd6f26100585c35533c5036cc7219",
+      "bytes": 28167517
+    },
+    {
+      "id": "input_52",
+      "path": "data/regional-review/regional-review-528e53393a4376b4/source/census-2025/georgia-kentucky-counties.geojson",
+      "sha256": "e5296a323ee4c38afdf7c54a32e67b77c2e98647a6535cb2464b699fb8740105",
+      "bytes": 28996536
+    },
+    {
+      "id": "input_53",
+      "path": "data/world-index.json",
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "bytes": 944
+    },
+    {
+      "id": "input_54",
+      "path": "requirements.txt",
+      "sha256": "1c3f3b9598e474af751e25ff0839cbf5c4a9931a59b4ffaaff1a56c6e2f0e2c9",
+      "bytes": 146
+    },
+    {
+      "id": "input_55",
+      "path": "scripts/ellipsoidal_area.py",
+      "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12",
+      "bytes": 1953
+    },
+    {
+      "id": "input_56",
+      "path": "scripts/evidence/geometry.py",
+      "sha256": "944541968fcdf065b9c4b6105be227c3e0e14b6a20916f4fa21f851338c7a305",
+      "bytes": 5264
+    },
+    {
+      "id": "input_57",
+      "path": "scripts/evidence/immutable.py",
+      "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd",
+      "bytes": 7090
+    }
+  ],
+  "prior_program": {
+    "path": "data/regional-review/coastal-reference-reproduction-980/reproduce.py",
+    "bytes": 15859,
+    "sha256": "be7d84a1d75663c5169dca35cd530018f17d079b3f24e0527a08b190cb1c4493"
+  },
+  "prior_input_inventory": {
+    "path": "data/regional-review/coastal-reference-reproduction-980/expected-inputs.json",
+    "bytes": 12266,
+    "sha256": "fdcc56ba18706f1427683c09d95492145ffa8b96d490816667e8612d2c0600a0"
+  },
+  "historical_outputs": [
+    {
+      "path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/admission.json",
+      "bytes": 12061,
+      "sha256": "1e2a4d71f1badcae12ed1f71e102c132ff6a30be12ca7b35f3e36eecc4dd3e47",
+      "run": "run-one",
+      "product": "admission.json"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
+      "bytes": 24799,
+      "sha256": "2c2fe3fd099df52623226597fa98b27b3eac23c0febed3b6d82aa1cb16d85251",
+      "run": "run-one",
+      "product": "eight-county-comparison.json"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/positive-control.json",
+      "bytes": 332,
+      "sha256": "a339194e98f952d122c03504c33e52b95c888b3ce808c64573be976f7e5013e9",
+      "run": "run-one",
+      "product": "positive-control.json"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/negative-control.json",
+      "bytes": 383,
+      "sha256": "4225c2cd188ac41de8032926c1c5eb34d42af7baa58e7438ddf58abbd8cbf0c8",
+      "run": "run-one",
+      "product": "negative-control.json"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-reproduction-980/runs/run-two/admission.json",
+      "bytes": 12061,
+      "sha256": "1e2a4d71f1badcae12ed1f71e102c132ff6a30be12ca7b35f3e36eecc4dd3e47",
+      "run": "run-two",
+      "product": "admission.json"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-reproduction-980/runs/run-two/eight-county-comparison.json",
+      "bytes": 24799,
+      "sha256": "2c2fe3fd099df52623226597fa98b27b3eac23c0febed3b6d82aa1cb16d85251",
+      "run": "run-two",
+      "product": "eight-county-comparison.json"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-reproduction-980/runs/run-two/positive-control.json",
+      "bytes": 332,
+      "sha256": "a339194e98f952d122c03504c33e52b95c888b3ce808c64573be976f7e5013e9",
+      "run": "run-two",
+      "product": "positive-control.json"
+    },
+    {
+      "path": "data/regional-review/coastal-reference-reproduction-980/runs/run-two/negative-control.json",
+      "bytes": 383,
+      "sha256": "4225c2cd188ac41de8032926c1c5eb34d42af7baa58e7438ddf58abbd8cbf0c8",
+      "run": "run-two",
+      "product": "negative-control.json"
+    }
+  ],
+  "limits": {
+    "max_individual_bytes": 33554432,
+    "max_complete_phase_bytes": 268435456,
+    "reserve_bytes": 200000,
+    "decompression": "gzip inputs are hashed as original bytes and bounded after full decode"
+  }
+}
