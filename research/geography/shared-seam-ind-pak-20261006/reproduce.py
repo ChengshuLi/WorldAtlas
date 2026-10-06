@@ -22,7 +22,11 @@ import pyproj
 ROOT = Path(__file__).resolve().parents[3]
 PACKET = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "scripts"))
+from evidence import immutable  # noqa: E402
 from evidence.geometry import METHOD, land_area_m2, distance_m  # noqa: E402
+
+if immutable.VERSION != "worldatlas-evidence-preparation-v1":
+    raise RuntimeError("Unsupported immutable evidence preparation helper")
 
 SOURCE_COMMIT = "9469f09592ced973a3448cf66b6100b741b64c0d"
 BASELINE_COMMIT = "c603befd3aaf4da90d59b12378e1e0739331efba"
@@ -60,7 +64,7 @@ def sha(data: bytes) -> str:
 
 
 def stable(obj) -> bytes:
-    return (json.dumps(obj, ensure_ascii=False, separators=(",", ":")) + "\n").encode()
+    return immutable.canonical_json(obj)
 
 
 def fragment_sha(feature) -> str:
@@ -282,7 +286,23 @@ def run_geometry_controls():
     }
     if not all(checks.values()):
         raise ValueError(f"analytic geometry control failed: {checks}; failures={failures}")
-    receipt = {"method_id": "seam-analytic-geometry-controls", "kind": "geography", "outcome": "passed",
+    positive_names = {"geometry_collection_retains_polygon_and_measures_its_positive_area",
+                      "disconnected_multipolygon_measures_both_components", "polygon_hole_reduces_area_without_repair",
+                      "tiny_positive_polygon_is_not_cut_off", "line_length_uses_wgs84_inverse_geodesic"}
+    negative_names = {"geometry_collection_retains_line_and_point_remnants",
+                      "true_line_and_point_have_zero_area_and_are_retained",
+                      "invalid_polygon_is_explicit_unknown_not_zero"}
+    write_json(PACKET / "geometry-positive-control.json", {
+        "method_id": "seam-geometry-measurement", "kind": "positive-control", "outcome": "passed",
+        "checks": {name: value for name, value in checks.items() if name in positive_names},
+        "geometry_controls_sha256": sha(stable({"checks": checks, "measured": {"shell_area_m2": shell_area,
+            "geometry_collection_area_m2": gc_area, "multipolygon_area_m2": multi_area,
+            "hole_area_m2": hole_area, "tiny_polygon_area_m2": tiny_area, "line_length_m": tiny_length}}))})
+    write_json(PACKET / "geometry-negative-control.json", {
+        "method_id": "seam-geometry-measurement", "kind": "negative-control", "outcome": "passed",
+        "checks": {name: value for name, value in checks.items() if name in negative_names},
+        "expected_invalid_geometry_errors": failures})
+    receipt = {"method_id": "seam-geometry-measurement", "kind": "geography", "outcome": "passed",
                "schema": "geo4-shared-seam-geometry-controls-v1", "status": "passed",
                "method": METHOD, "checks": checks,
                "measured": {"shell_area_m2": shell_area, "geometry_collection_area_m2": gc_area,
@@ -454,12 +474,27 @@ def compare(geometry_controls):
         "status": "passed"}
     if not all(controls["positive"].values()) or not all(controls["negative"].values()):
         raise ValueError("one or more scientific positive/negative controls failed")
-    source_controls = {"method_id": "seam-native-source-and-fragment-controls", "kind": "source", "outcome": "passed",
+    source_controls = {"method_id": "seam-source-crosswalk", "kind": "source", "outcome": "passed",
                        "positive": controls["positive"], "negative": controls["negative"],
                        "source_crosswalk_sha256": sha((PACKET / "source-crosswalk.json").read_bytes()),
                        "gap_readback_sha256": sha((PACKET / "inputs/original-input-envelope-readback.json").read_bytes()),
                        "fragment_identities": FRAGMENTS}
     write_json(PACKET / "source-controls.json", source_controls)
+    write_json(PACKET / "source-positive-control.json", {
+        "method_id": "seam-source-crosswalk", "kind": "positive-control", "outcome": "passed",
+        "checks": controls["positive"], "source_crosswalk_sha256": source_controls["source_crosswalk_sha256"]})
+    write_json(PACKET / "source-negative-control.json", {
+        "method_id": "seam-source-crosswalk", "kind": "negative-control", "outcome": "passed",
+        "checks": controls["negative"], "source_controls_sha256": sha(stable(source_controls))})
+    write_json(PACKET / "generator-positive-control.json", {
+        "method_id": "seam-evidence-generator", "kind": "positive-control", "outcome": "passed",
+        "complete_subject_count": len(crosswalk), "full_fragment_count": len(seam_rows),
+        "source_controls_sha256": sha(stable(source_controls))})
+    write_json(PACKET / "generator-negative-control.json", {
+        "method_id": "seam-evidence-generator", "kind": "negative-control", "outcome": "passed",
+        "tampered_fragment_rejected": controls["negative"]["tampered_fragment_digest_rejected_by_exact_expected_digest"],
+        "invalid_geometry_remains_unknown": json.loads((PACKET / "geometry-controls.json").read_text())[
+            "checks"]["invalid_polygon_is_explicit_unknown_not_zero"]})
     write_json(PACKET / "controls.json", controls)
     return seam, crosswalk, comparison_rows, current_part_receipts, component_ledger
 
@@ -478,7 +513,7 @@ def main():
         if run_one != run_two or one != two or one.get("actual_execution_sha") != head:
             raise SystemExit("two-run byte/field/execution-commit reproducibility check failed")
         write_json(PACKET / "two-run-reproducibility.json", {
-            "method_id": "seam-two-complete-run-reproducibility", "kind": "generator", "outcome": "passed",
+            "method_id": "seam-evidence-generator", "kind": "reproducibility", "outcome": "passed",
             "schema": "geo4-two-run-reproducibility-v1", "actual_execution_sha": head,
             "run_one_sha256": sha(run_one), "run_two_sha256": sha(run_two),
             "complete_file_bytes_equal": True, "all_fields_equal": True,
@@ -491,7 +526,7 @@ def main():
     code_hash = sha(Path(__file__).read_bytes())
     code_inputs = []
     for rel in ("research/geography/shared-seam-ind-pak-20261006/reproduce.py",
-                "scripts/evidence/geometry.py", "scripts/ellipsoidal_area.py"):
+                "scripts/evidence/geometry.py", "scripts/evidence/immutable.py", "scripts/ellipsoidal_area.py"):
         raw = (ROOT / rel).read_bytes()
         code_inputs.append({"path": rel, "bytes": len(raw), "sha256": sha(raw)})
     pinned_inputs = {}
@@ -510,7 +545,13 @@ def main():
               "validation_evidence": {
                   "aggregate_controls_sha256": sha((PACKET / "controls.json").read_bytes()),
                   "geometry_controls_sha256": sha((PACKET / "geometry-controls.json").read_bytes()),
-                  "source_controls_sha256": sha((PACKET / "source-controls.json").read_bytes())},
+                  "source_controls_sha256": sha((PACKET / "source-controls.json").read_bytes()),
+                  "geometry_positive_control_sha256": sha((PACKET / "geometry-positive-control.json").read_bytes()),
+                  "geometry_negative_control_sha256": sha((PACKET / "geometry-negative-control.json").read_bytes()),
+                  "source_positive_control_sha256": sha((PACKET / "source-positive-control.json").read_bytes()),
+                  "source_negative_control_sha256": sha((PACKET / "source-negative-control.json").read_bytes()),
+                  "generator_positive_control_sha256": sha((PACKET / "generator-positive-control.json").read_bytes()),
+                  "generator_negative_control_sha256": sha((PACKET / "generator-negative-control.json").read_bytes())},
               "current_source_parts": parts,
               "inputs": {"original_source_custody_sha256": sha((PACKET / "sources/source-custody.json").read_bytes()),
                          "gap_readback_sha256": sha((PACKET / "inputs/original-input-envelope-readback.json").read_bytes())}}
