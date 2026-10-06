@@ -41,7 +41,7 @@ test('validated geometry-only successor preserves physical assets and records bo
   const before=[feature('a',0,1),feature('b',2,3)],after=[feature('a',0,1.25),before[1]];
   const oldHash=footprintHash(before),newHash=footprintHash(after);
   const predecessor={...context.release,footprints_sha256:oldHash};
-  const successor={...predecessor,id:'geography:test-successor',previous_release_id:predecessor.id,footprints_sha256:newHash};
+  const successor={...predecessor,id:'geography:test-successor',footprints_sha256:newHash};
   const receipt={version:1,geometry_stage_validated:true,historical_claims_transferred:false,
     before_footprints_sha256:oldHash,after_footprints_sha256:newHash,
     changed_ids:['a'],removed_ids:[],added_ids:[],reused_ids:['b'],
@@ -52,6 +52,8 @@ test('validated geometry-only successor preserves physical assets and records bo
   const directory=await fs.mkdtemp('.cache/coverage-transition-test-');
   try {
     const raw=Buffer.from(JSON.stringify(receipt));
+    successor.metadata={predecessor_release_id:predecessor.id,geometry_migration:{
+      sha256:digest(raw),before_footprints_sha256:oldHash,after_footprints_sha256:newHash,history_transfer:false}};
     await fs.writeFile(directory+'/migration-receipt.json',raw);
     await fs.writeFile(directory+'/index.json',JSON.stringify({
       before_footprints_sha256:oldHash,after_footprints_sha256:newHash,history_transfer:false,
@@ -77,7 +79,7 @@ test('validated geometry-only successor preserves physical assets and records bo
     const altered=validate();altered.changedIds.add('b');
     assert.throws(()=>rebindCoverageManifest(physical,{...migrationContext,geometryValidation:altered}),/unmodified/);
     assert.throws(()=>rebindCoverageManifest(physical,{...migrationContext,
-      release:{...successor,previous_release_id:'geography:wrong-predecessor'}}),/retained-identity/);
+      release:{...successor,metadata:{...successor.metadata,predecessor_release_id:'geography:wrong-predecessor'}}}),/retained-identity/);
     assert.throws(()=>rebindCoverageManifest(physical,{...migrationContext,
       selectedGrid:{...migrationContext.selectedGrid,size:selectedGrid.size+1}}));
     const corrupted=[after[0],feature('b',2,3.1)];
