@@ -1,0 +1,16 @@
+import {readFileSync, writeFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+const root='data/regional-review/regional-review-626fdf640aab94e2';
+const bytes=readFileSync(`${root}/sources/geoboundaries-rus-adm1-2017-original.geojson`);
+const actual=createHash('sha256').update(bytes).digest('hex');
+const expected='b86ab28823569a4ec881091b0c8608ae31194cb2b195943b8b34fbd56f492320';
+if(actual!==expected)throw new Error(`ADM1 source SHA mismatch: ${actual}`);
+const data=JSON.parse(bytes.toString('utf8'));
+const scope=JSON.parse(readFileSync(`${root}/baseline/issue-scope.json`,'utf8'));
+const lineage=JSON.parse(readFileSync(`${root}/findings/current-lineage.json`,'utf8'));
+const wanted=new Set(scope.province_scopes.map(p=>p.name));
+const selected=data.features.filter(f=>wanted.has(f.properties?.shapeName));
+if(data.features.length!==83||selected.length!==7)throw new Error(JSON.stringify({total:data.features.length,selected:selected.map(f=>f.properties?.shapeName)}));
+writeFileSync(`${root}/sources/geoboundaries-rus-adm1-2017-scoped-parent-features.geojson`,JSON.stringify({type:data.type,crs:data.crs,features:selected})+'\n');
+writeFileSync(`${root}/findings/parent-crosswalk.json`,JSON.stringify({version:1,issue:395,source_sha256:actual,source_feature_count:data.features.length,metadata_unit_count:Number(JSON.parse(readFileSync(`${root}/sources/geoboundaries-rus-adm1-2017-metadata.json`,'utf8')).admUnitCount),selected_parent_count:selected.length,rows:scope.province_scopes.map(p=>{const f=selected.find(x=>x.properties.shapeName===p.name);const members=lineage.rows.filter(x=>x.properties?.parent_id===p.id);return {province_id:p.id,province_name:p.name,source_shape_id:f.properties.shapeID,source_shape_name:f.properties.shapeName,province_full_location_count:p.full_province_locations,issue_scope_member_count:members.length,native_adm2_member_count:members.filter(x=>x.properties.metadata.source_id==='gb:RUS:ADM2').length,ecoregion_fragment_count:members.filter(x=>x.properties.metadata.source_id?.startsWith('resolve:')).length,partial:p.partial};})},null,2)+'\n');
+console.log(JSON.stringify({source_sha256:actual,source_bytes:bytes.length,source_feature_count:data.features.length,metadata_count:83,selected_parent_count:selected.length,parents:selected.map(f=>({name:f.properties.shapeName,id:f.properties.shapeID,geometry_type:f.geometry.type,components:f.geometry.type==='MultiPolygon'?f.geometry.coordinates.length:1}))},null,2));
