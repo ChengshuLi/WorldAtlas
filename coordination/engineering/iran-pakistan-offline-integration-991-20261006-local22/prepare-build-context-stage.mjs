@@ -20,6 +20,7 @@ const aliases=[],seen=new Map();
 for(const snapshot of original.immutable_snapshots.filter(pin=>['data/geography/part-11.json','data/geography/part-17.json','data/geographic-releases/current-manifest.json'].includes(pin.path))){
  const name=output+'/snapshots/'+snapshot.path,raw=execFileSync('git',['show',snapshot.commit+':'+snapshot.path],{maxBuffer:32*1024*1024});
  if(raw.length!==snapshot.bytes||sha(raw)!==snapshot.sha256)throw Error('Original snapshot differs');
+ const sourcePin={commit:snapshot.commit,path:snapshot.path,bytes:raw.length,sha256:sha(raw)};inputs.push(sourcePin);budget.add(sourcePin);
  if(!seen.has(name)){fs.mkdirSync(path.dirname(name),{recursive:true});fs.writeFileSync(name,raw,{flag:'wx'});budget.add({bytes:raw.length});products.push({path:name,bytes:raw.length,sha256:sha(raw)});seen.set(name,true);}
  aliases.push({commit:snapshot.commit,original_path:snapshot.path,path:name,bytes:snapshot.bytes,sha256:snapshot.sha256});
 }
@@ -29,8 +30,6 @@ const native_proposal=pin('coordination/engineering/iran-pakistan-native-joint-9
 const geometry_manifest=pin(prefix+'/release-proof-v3/index.json'),geometry=JSON.parse(fs.readFileSync(geometry_manifest.path));
 const geometry_files=Object.entries(geometry.files).map(([name,p])=>pin(path.posix.dirname(geometry_manifest.path)+'/'+(p.archive_path??name)));
 const releases=pin(prefix+'/successor-release-v1/releases-v7-gzip.json.gz');
-const releaseProof=JSON.parse(fs.readFileSync(prefix+'/repaired-context-verification-v2.json'));
-const binding=JSON.parse(fs.readFileSync(prefix+'/successor-verification-v2.json'));
 // IDs come from the actual full source release registry, not diagnostic wording.
 const {gunzipSync}=await import('node:zlib');const registry=JSON.parse(gunzipSync(fs.readFileSync(releases.path)));
 const stage={version:1,issue:991,kind:'retained-identity-context-migration-v1',execution_commit:head,
