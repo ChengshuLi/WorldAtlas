@@ -586,15 +586,3 @@ test('candidate waiting rechecks changed claim/check/review/head after caching i
   assert.equal(blobs,1);assert.equal(f.writes.length,0);
  }
 });
-
-
-test('trusted queue rejects a new final-budget partial PR before candidate integration without a handoff',async()=>{
- const f=fixture();
- f.repo='ChengshuLi/WorldAtlas';f.pr.head.repo.full_name=f.repo;
- f.issue.created_at='2026-10-07T00:00:00Z';
- f.issue.body=f.issue.body.replace('"max_prs":3','"max_prs":1');
- f.pr.body='Refs #1';
- const options={...f.options(),repo:f.repo,api:(route,...args)=>f.api(route.replace('/repos/'+f.repo,'/repos/owner/repo'),...args)};
- await assert.rejects(prepareIntegration(options),/last partial PR|Last partial PR/);
- assert.equal(f.writes.length,0);assert.equal(f.evidenceReads??0,0);
-});

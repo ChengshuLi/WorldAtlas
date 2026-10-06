@@ -1,4 +1,5 @@
 import {laneForBranch,validateIssueMetadata,validateIssuePRBody,validateGeographyOwnedPaths} from './check-handoff-scope.mjs';
+import {evidenceRequirement} from './evidence-policy.mjs';
 import {assertResearchImportsReady} from './research-import-gate.mjs';
 
 export const claimMarker='worldatlas-claim:v1';
@@ -17,6 +18,53 @@ function checkLaneMode(branch,spec){
  const {lane}=laneForBranch(branch);
  if(lane==='engineering'&&spec.mode!=='engineering'||lane==='geography'&&spec.mode!=='geography'||lane==='research'&&!['source-only','content'].includes(spec.mode))throw Error('Scope mode must agree with the issue lane');
 }
+export function readinessDependencyIds(spec,geographyGate){
+ const ids=new Set(spec?.depends_on??[]);
+ if(spec?.mode==='content'){
+  if(geographyGate?.version===2){
+   assertResearchImportsReady(geographyGate,{regionIds:spec.region_ids});
+   ids.add(geographyGate.macro_boundaries.approval_issue);
+   for(const id of spec.region_ids)ids.add(geographyGate.regions.find(r=>r.region_id===id).approval_issue);
+  }else ids.add(7);
+ }
+ return [...ids];
+}
+export function activeIssueBlockers(comments){
+ const latest=new Map();
+ for(const c of [...comments].sort((a,b)=>a.id-b.id))for(const match of String(c.body??'').matchAll(/<!-- worldatlas-blocker:v1\s*\n([\s\S]*?)\n-->/g)){
+  const value=JSON.parse(match[1]);
+  if(!value.id||typeof value.active!=='boolean'||!value.reason)throw Error('Malformed blocker marker; inspect original issue');
+  latest.set(value.id,value);
+ }
+ return [...latest.values()].filter(x=>x.active);
+}
+// Shared mechanical eligibility; no scientific approval or label mutation.
+export function assertIssueReadiness({issue,branch,dependencies=[],prs=[],otherIssues=[],comments=[],geographyGate=null,evidencePolicy,requireReady=true,allowExhausted=false}) {
+ validateIssueMetadata(branch,issue);
+ const spec=workSpec(issue.body);checkLaneMode(branch,spec);
+ const labels=(issue.labels??[]).map(x=>typeof x==='string'?x:x.name);
+ const kinds=labels.filter(x=>x.startsWith('kind:'));
+ if(kinds.length!==1||kinds[0]!=='kind:work-item'||(requireReady&&(!labels.includes('status:ready')||labels.includes('status:blocked'))))throw Error('Only reviewed ready work items may be claimed; split umbrellas or resolve blockers first');
+ evidenceRequirement(issue,spec,evidencePolicy,branch);
+ if(activeIssueBlockers(comments).length)throw Error('Explicit unresolved issue blocker; review its resume condition before readying or claiming');
+ if(spec.depends_on.some(id=>!dependencies.some(d=>d.number===id&&d.state==='closed'&&!d.pull_request)))throw Error('A dependency is still open or missing');
+ if(!allowExhausted&&prs.filter(p=>p.merged_at).length>=spec.max_prs)throw Error('PR budget exhausted; review acceptance, reuse bounded remaining work or record an explicit wait');
+ if(spec.mode==='geography')for(const other of otherIssues){
+  if(other.number===issue.number||other.state!=='open'||other.pull_request)continue;
+  const otherLabels=(other.labels??[]).map(x=>typeof x==='string'?x:x.name);
+  if(!otherLabels.includes('type:geography')||otherLabels.includes('kind:umbrella'))continue;
+  let owned;try{owned=workSpec(other.body).owned_paths;}catch{throw Error(`Cannot verify geography ownership: invalid open issue #${other.number}`);}
+  if(owned?.some(q=>spec.owned_paths.some(p=>p.startsWith(q)||q.startsWith(p))))throw Error(`Geography ownership conflicts with open issue #${other.number}`);
+ }
+ if(spec.mode==='content'){
+  if(geographyGate?.version===2){
+   const approved=assertResearchImportsReady(geographyGate,{regionIds:spec.region_ids});
+   const required=[geographyGate.macro_boundaries.approval_issue,...spec.region_ids.map(id=>geographyGate.regions.find(r=>r.region_id===id).approval_issue)];
+   if(approved.release_id!==spec.geographic_release||required.some(id=>!dependencies.some(d=>d.number===id&&d.state==='closed')))throw Error('Published macro and regional approval dependencies must be complete before content claims');
+  }else if(!geographyGate?.ready_for_location_attributes||!geographyGate.semantic_complete||geographyGate.approved_release?.release_id!==spec.geographic_release||!dependencies.some(d=>d.number===7&&d.state==='closed'))throw Error('Worldwide hierarchy approval is required before location-content imports');
+ }
+ return spec;
+}
 export function readClaim(comments){
  const canonical=comments.filter(c=>c.user?.login==='github-actions[bot]'&&c.body?.startsWith('**Worker reservation:**'));
  if(canonical.length>1)throw Error('Multiple canonical claims require operator repair');
@@ -32,7 +80,7 @@ export function renderClaim(claim){
  const state={...claim};delete state.comment_id;
  return `**Worker reservation:** ${claim.active?'claimed':'released'} · ${claim.worker_id}\n\nBranch: \`${claim.branch}\` · lease expires: ${claim.expires_at} · live work pending: ${Boolean(claim.live_work)}\n\n<!-- ${claimMarker}\n${JSON.stringify(state)}\n-->`;
 }
-export function transitionClaim({issue,comments,prs=[],dependencies=[],request,geographyGate=null,now=Date.now()}){
+export function transitionClaim({issue,comments,prs=[],dependencies=[],request,geographyGate=null,otherIssues=[],evidencePolicy,now=Date.now()}){
  const {action,worker_id,claim_id,branch,request_id}=request;
  if(!['claim','renew','release','recover'].includes(action)||!/^[-a-zA-Z0-9_:.]{1,100}$/.test(worker_id??'')||!/^[-a-zA-Z0-9]{16,100}$/.test(claim_id??'')||!/^[-a-zA-Z0-9]{16,100}$/.test(request_id??''))throw Error('Invalid claim action or unique worker/request IDs');
  const lane=laneForBranch(branch),current=readClaim(comments);
@@ -45,23 +93,11 @@ export function transitionClaim({issue,comments,prs=[],dependencies=[],request,g
   if(openPR||current.live_work)throw Error('Preserve the active PR/live operation; finish or hand over before release');
   return {claim:{...current,active:false,request_id,released_at:new Date(now).toISOString()},previous:current};
  }
- validateIssueMetadata(branch,issue);
- const spec=workSpec(issue.body);
- checkLaneMode(branch,spec);
+ const spec=assertIssueReadiness({issue,branch,dependencies,prs,otherIssues,comments,geographyGate,evidencePolicy,
+  allowExhausted:action==='renew'&&branch===current?.branch});
  if(spec.production_operation&&(spec.mode!=='engineering'||!Number.isSafeInteger(spec.production_operation.source_issue)||spec.production_operation.source_issue<1||![714,spec.production_operation.source_issue].includes(spec.production_operation.queue)||spec.production_operation.publisher_worker_id!==worker_id))throw Error('Production-only child reservations belong to their designated publisher');
  if(spec.mode==='geography'&&request.live_work)throw Error('Geography workers stage evidence only and cannot reserve live operations');
  if(current?.active&&own&&spec.mode==='geography'&&JSON.stringify(current.owned_paths)!==JSON.stringify(spec.owned_paths))throw Error('Geography ownership changed; preserve the work and coordinate release/reclaim before expanding scope');
- if(labels.includes('kind:umbrella')||!labels.includes('kind:work-item')||!labels.includes('status:ready')||labels.includes('status:blocked'))throw Error('Only reviewed ready work items may be claimed; split umbrellas or resolve blockers first');
- if(spec.depends_on.some(id=>!dependencies.some(d=>d.number===id&&d.state==='closed')))throw Error('A dependency is still open or missing');
- if(spec.mode==='content'){
-  if(geographyGate?.version===2){
-   const approved=assertResearchImportsReady(geographyGate,{regionIds:spec.region_ids});
-   const required=[geographyGate.macro_boundaries.approval_issue,...spec.region_ids.map(id=>geographyGate.regions.find(r=>r.region_id===id).approval_issue)];
-   if(approved.release_id!==spec.geographic_release||required.some(id=>!dependencies.some(d=>d.number===id&&d.state==='closed')))throw Error('Published macro and regional approval dependencies must be complete before content claims');
-  }else if(!geographyGate?.ready_for_location_attributes||!geographyGate.semantic_complete||geographyGate.approved_release?.release_id!==spec.geographic_release||!dependencies.some(d=>d.number===7&&d.state==='closed'))throw Error('Worldwide hierarchy approval is required before location-content imports');
- }
- const merged=prs.filter(p=>p.merged_at).length;
- if(merged>=spec.max_prs&&!(action==='renew'&&branch===current?.branch))throw Error('PR budget exhausted; split remaining scope rather than monopolizing the issue');
  if(action==='renew'){
   if(!current?.active||!own)throw Error('Only the current holder may renew or change branch');
   if(branch!==current.branch&&(openPR||current.live_work))throw Error('Merge/close the previous PR and complete live work before rotating branches');

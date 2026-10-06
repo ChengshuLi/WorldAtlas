@@ -2,9 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
-import {workSpec, readClaim, githubPages, githubAPI} from './issue-claim-contract.mjs';
-import {evidenceRequirement} from './evidence-policy.mjs';
-import {readQueueDisposition, dispositionReferences} from './queue-disposition.mjs';
+import {workSpec, readClaim, githubPages, githubAPI, assertIssueReadiness} from './issue-claim-contract.mjs';
 import {validateIssuePRBody} from './check-handoff-scope.mjs';
 
 const types = new Set(['type:engineering', 'type:geography', 'type:history-research']);
@@ -30,7 +28,7 @@ export function commentBlockers(comments) {
   return {active:[...latest.values()].filter(x=>x.active), warnings};
 }
 
-export function assessIssue(issue, {dependencies=[], comments=[], prs=[], dispositionIssues=[], evidencePolicy, now=Date.now()}={}) {
+export function assessIssue(issue, {dependencies=[], comments=[], prs=[], now=Date.now()}={}) {
   const labels=labelsOf(issue), findings=[];
   const add=(code,details)=>findings.push({issue:issue.number,code,details});
   if (issue.pull_request || issue.state!=='open') return {findings,scope:null,claim:null};
@@ -43,29 +41,20 @@ export function assessIssue(issue, {dependencies=[], comments=[], prs=[], dispos
   }
   let scope=null, claim=null;
   try { scope=workSpec(issue.body); } catch (e) { add('invalid-scope',e.message); }
-  if (scope) {
-    try { evidenceRequirement(issue,scope,evidencePolicy); } catch(e) { add('invalid-evidence-contract',e.message); }
-  }
   if (scope && lanes.length===1 && ({engineering:'type:engineering',geography:'type:geography','source-only':'type:history-research',content:'type:history-research'}[scope.mode]!==lanes[0])) add('lane-mode','Issue type and scope mode disagree');
   try { claim=readClaim(comments); } catch(e) { add('invalid-claim',e.message); }
   const open=scope?.depends_on.filter(id=>!dependencies.some(d=>d.number===id && d.state==='closed')) ?? [];
   if (labels.includes('status:ready') && (open.length || labels.includes('status:blocked'))) add('ready-blocked',{open_dependencies:open,blocked_label:labels.includes('status:blocked')});
   const blockers=commentBlockers(comments);
-  if (blockers.active.length) {
-    add('explicit-blocker',blockers.active);
-    if(labels.includes('status:ready'))add('ready-explicit-blocker','Review readiness against the recorded active blocker');
-  }
+  if (blockers.active.length) add('explicit-blocker',blockers.active);
   if (blockers.warnings.length) add('comment-review',blockers.warnings);
   const openPRs=prs.filter(p=>p.state==='open');
   if (openPRs.length) add('open-pr',openPRs.map(p=>({number:p.number,branch:p.head?.ref})));
   if (claim?.active) add(Date.parse(claim.expires_at)<=now?'expired-claim':'active-claim',{worker:claim.worker_id,branch:claim.branch,expires_at:claim.expires_at,live_work:Boolean(claim.live_work)});
   if (claim?.live_work) add('live-operation','Coordinate the existing holder; do not recover automatically');
   if (labels.includes('status:claimed')!==Boolean(claim?.active)) add('claim-label-drift','Canonical bot claim and convenience label differ');
-  if (scope && prs.filter(p=>p.merged_at).length>=scope.max_prs) {
-    const disposition=readQueueDisposition(comments,{issue,scope,prs,relatedIssues:dispositionIssues});
-    if (disposition.error) add('invalid-disposition',disposition.error);
-    add(disposition.value ? 'pr-budget-review' : 'pr-budget', disposition.value ?? 'Budget exhausted: review each acceptance criterion, close only if satisfied, otherwise link bounded remaining-work issues');
-  }
+  if (scope && prs.filter(p=>p.merged_at).length>=scope.max_prs) add('pr-budget','Review original acceptance: close only if complete; otherwise reuse bounded continuation or preserve an explicit wait');
+  if(scope)try {assertIssueReadiness({issue,branch:({engineering:'engineering',geography:'geography','source-only':'research',content:'research'}[scope.mode])+'/readiness',dependencies,prs,comments,requireReady:false});}catch(e){add('eligibility-rejection',e.message);}
   if (scope && !open.length && !claim?.active && !openPRs.length && !blockers.active.length) {
     if (labels.includes('status:blocked')) add('review-blocked','Declared dependencies closed; inspect semantic/source/publication and comment blockers before changing status');
     else if (!labels.includes('status:ready')) add('review-missing-ready','Candidate for human triage; dependency closure alone is not approval');
@@ -81,11 +70,10 @@ async function boundedMap(items, fn, concurrency=4) {
   }));
   return output;
 }
-export async function auditQueue({api,repo,previous=null,evidencePolicy,targetIssue=null,now=Date.now()}) {
+export async function auditQueue({api,repo,previous=null,now=Date.now()}) {
   if (!/^[-\w.]+\/[-\w.]+$/.test(repo)) throw Error('Invalid repository');
   if (previous && (previous.version!==1 || previous.repository!==repo || previous.status!=='complete')) throw Error('Previous checkpoint must be a complete audit of this repository');
-  if(targetIssue!==null && (!Number.isSafeInteger(targetIssue) || targetIssue<1 || previous))throw Error('Targeted audit needs a positive issue number and no global checkpoint');
-  const report={version:1,repository:repo,status:'incomplete',observed_at:new Date(now).toISOString(),last_successful_coverage:previous?.last_successful_coverage ?? null,findings:[],failures:[],new_findings:[],resolved_findings:[],issue_snapshots:[]};
+  const report={version:1,repository:repo,status:'incomplete',observed_at:new Date(now).toISOString(),last_successful_coverage:previous?.last_successful_coverage ?? null,findings:[],failures:[],new_findings:[],resolved_findings:[]};
   const base=`/repos/${repo}`;
   let issues, pulls;
   try { [issues,pulls]=await Promise.all([githubPages(api,`${base}/issues?state=open`),githubPages(api,`${base}/pulls?state=open`)]); }
@@ -99,8 +87,7 @@ export async function auditQueue({api,repo,previous=null,evidencePolicy,targetIs
     if (!dependencyCache.has(id)) dependencyCache.set(id,api(`${base}/issues/${id}`));
     return dependencyCache.get(id);
   };
-  const candidates=issues.filter(x=>!x.pull_request && (targetIssue===null || x.number===targetIssue || (()=>{try{return workSpec(x.body).depends_on.includes(targetIssue);}catch{return false;}})()));
-  report.coverage=targetIssue===null ? {kind:'full'} : {kind:'targeted',trigger_issue:targetIssue,issue_numbers:candidates.map(issue=>issue.number)};
+  const candidates=issues.filter(x=>!x.pull_request);
   const assessments=await boundedMap(candidates,async issue=>{
     try {
       let scope; try {scope=workSpec(issue.body);} catch {scope=null;}
@@ -115,25 +102,15 @@ export async function auditQueue({api,repo,previous=null,evidencePolicy,targetIs
       }
       const fetched=await Promise.all([...ids].map(id=>api(`${base}/pulls/${id}`)));
       const prs=fetched.filter(pr=>{try{return validateIssuePRBody(pr.body).github_issue===issue.number;}catch{return false;}});
-      const dispositionIssues=scope && prs.filter(pr=>pr.merged_at).length>=scope.max_prs ? await Promise.all(dispositionReferences(comments).map(getDependency)) : [];
-      return {issue,...assessIssue(issue,{dependencies,comments,prs,dispositionIssues,evidencePolicy,now})};
+      return {issue,...assessIssue(issue,{dependencies,comments,prs,now})};
     } catch(e) {report.failures.push({issue:issue.number,error:e.message});return null;}
   });
-  for (const row of assessments.filter(Boolean)) {
-    report.findings.push(...row.findings);
-    report.issue_snapshots.push({number:row.issue.number,triage_present:labelsOf(row.issue).includes('coordination:triage-needed'),updated_at:row.issue.updated_at,body_sha256:digest(row.issue.body??''),labels:labelsOf(row.issue).filter(label=>label!=='coordination:triage-needed').sort()});
-  }
-  const assessed=new Map(assessments.filter(Boolean).map(row=>[row.issue.number,row]));
-  const owned=issues.filter(issue=>!issue.pull_request).flatMap(issue=>{
-    if(assessed.has(issue.number))return assessed.get(issue.number).scope?.mode==='geography' ? [assessed.get(issue.number)] : [];
-    try {const scope=workSpec(issue.body);return scope.mode==='geography' ? [{issue,scope,claim:null}] : [];}catch{return [];}
-  });
+  for (const row of assessments.filter(Boolean)) report.findings.push(...row.findings);
+  const owned=assessments.filter(x=>x?.scope?.mode==='geography');
   for(let i=0;i<owned.length;i++)for(let j=i+1;j<owned.length;j++) {
     const a=owned[i],b=owned[j];
     const overlap=a.scope.owned_paths.filter(p=>b.scope.owned_paths.some(q=>p.startsWith(q)||q.startsWith(p)));
-    if(overlap.length) for(const [row,other] of [[a,b],[b,a]]) {
-      if(assessed.has(row.issue.number)) report.findings.push({issue:row.issue.number,code:'ownership-overlap',details:{other_issue:other.issue.number,paths:overlap,workers:[row.claim?.worker_id??null,other.claim?.worker_id??null]}});
-    }
+    if(overlap.length) report.findings.push({issue:a.issue.number,code:'ownership-overlap',details:{other_issue:b.issue.number,paths:overlap,workers:[a.claim?.worker_id??null,b.claim?.worker_id??null]}});
   }
   report.findings.sort((a,b)=>a.issue-b.issue || a.code.localeCompare(b.code));
   report.findings=report.findings.map(x=>({...x,fingerprint:digest(x)}));

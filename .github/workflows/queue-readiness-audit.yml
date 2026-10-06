@@ -1,11 +1,9 @@
 name: Queue readiness audit
 on:
-  schedule:
-    - cron: '17 * * * *'
   workflow_dispatch:
 permissions:
   contents: read
-  issues: write
+  issues: read
   pull-requests: read
 concurrency:
   group: queue-readiness-audit
@@ -22,7 +20,6 @@ jobs:
           sparse-checkout: |
             scripts
             src
-            .github
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
         with:
           node-version: '24'
@@ -36,14 +33,6 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: node scripts/queue-readiness-audit.mjs "$GITHUB_REPOSITORY" queue-readiness-report.json .queue-audit/previous.json
-      - name: Flag original issues needing triage
-        if: always()
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          if test -f queue-readiness-report.json; then
-            node scripts/queue-triage-flags.mjs queue-readiness-report.json
-          fi
       - name: Preserve successful checkpoint
         run: |
           mkdir -p .queue-audit

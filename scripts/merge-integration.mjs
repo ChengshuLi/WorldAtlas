@@ -1,7 +1,6 @@
 import {collectGeographicApproval, bindingHash} from './geographic-adjudication-api.mjs';
 import {integrationProfile} from './integration-profile.mjs';
 import {integrationProof} from './integration-proof.mjs';
-import {checkBudgetHandoff} from './queue-budget-handoff.mjs';
 import {githubPages, linkedPulls, verifyClaimForPR, workSpec} from './issue-claim-contract.mjs';
 import {validateIssuePRBody, validateLanePaths} from './check-handoff-scope.mjs';
 import {checkPremergeEvidence} from './premerge-evidence.mjs';
@@ -229,7 +228,6 @@ export async function inspectMerge({api, repo, number, expectedHead, policy, evi
   const reservation = verifyClaimForPR({branch: pr.head.ref, issue,
     comments: await githubPages(api, `${root(repo)}/issues/${github_issue}/comments`),
     prs: await linkedPulls(api, repo, github_issue)});
-  await checkBudgetHandoff({api,repo,issue,pr});
   const files = await githubPages(api, `${root(repo)}/pulls/${number}/files`);
   need(files.length === pr.changed_files, 'Incomplete PR file inventory');
   validateLanePaths(pr.head.ref, files.flatMap(file => [file.filename, ...(file.previous_filename ? [file.previous_filename] : [])]),
@@ -366,7 +364,6 @@ export async function completeIntegration(options) {
   verifyClaimForPR({branch: currentPR.head.ref, issue: currentIssue,
     comments: await githubPages(options.api, `${root(options.repo)}/issues/${state.issue.number}/comments`),
     prs: await linkedPulls(options.api, options.repo, state.issue.number)});
-  await checkBudgetHandoff({api:options.api,repo:options.repo,issue:currentIssue,pr:currentPR});
   checkCurrentChecks(await githubPages(options.api, `${root(options.repo)}/commits/${state.pr.head.sha}/check-runs`),
     {evidenceRequired: options.policy.mode === 'enforce-new' && evidenceRequirement(currentIssue, workSpec(currentIssue.body), options.policy, currentPR.head.ref).required});
   const freshStatuses = await options.api(`${root(options.repo)}/commits/${state.pr.head.sha}/status`);

@@ -4,7 +4,7 @@ import {createHash} from 'node:crypto';
 import {memoizeImmutableGitBlobs} from '../scripts/immutable-git-blobs.mjs';
 import {sha256, subjectsHash} from '../scripts/evidence-quality.mjs';
 import {evidenceRequirement} from '../scripts/evidence-policy.mjs';
-import {validatePremergeManifest, validateReviewReceipt, checkPremergeEvidence, GEOMETRY_VERSION} from '../scripts/premerge-evidence.mjs';
+import {validatePremergeManifest, validateReviewReceipt, checkPremergeEvidence, GEOMETRY_VERSION, reviewContractBinding, reviewBindingRequired} from '../scripts/premerge-evidence.mjs';
 
 const commit = 'a'.repeat(40), head = 'b'.repeat(40), branch = 'engineering/synthetic';
 const manifestPath = 'coordination/engineering/synthetic/evidence-quality.json';
@@ -224,4 +224,26 @@ test('fresh remote review, head, tree/path and reservation checks reject after i
  const api=memoizeImmutableGitBlobs(async(...args)=>truncated&&args[0].includes('/git/trees/')?{truncated:true,tree:[]}:remote.api(...args));
  await checkPremergeEvidence({...f,api,repo:'test/repo',policy});truncated=true;
  await assert.rejects(checkPremergeEvidence({...f,api,repo:'test/repo',policy}),/Incomplete/);
+});
+
+test('acceptance/disposition binding invalidates substantive changes but preserves JSON formatting and progress comments',()=>{
+ const f=fixture();f.pr.body='Refs #100\nImplemented scoped repair; remaining production acceptance waits for Publisher.';
+ const binding=reviewContractBinding(f.issue,f.pr),r={...receipt(f),...binding};
+ review(f,r,{issue:f.issue,requireContractBinding:true});
+ const reformatted={...f.issue,body:f.issue.body.replace(JSON.stringify(f.spec),JSON.stringify(f.spec,null,2))};
+ assert.deepEqual(reviewContractBinding(reformatted,f.pr),binding);
+ assert.deepEqual(reviewContractBinding({...f.issue,comments:1000},f.pr),binding);
+ for(const change of [()=>f.issue.body+='\nAcceptance now requires publication.',()=>f.pr.body=f.pr.body.replace('Refs','Closes')]){
+  const beforeIssue=f.issue.body,beforePR=f.pr.body;change();
+  assert.throws(()=>review(f,r,{issue:f.issue,requireContractBinding:true}),/contract or PR disposition changed/);
+  f.issue.body=beforeIssue;f.pr.body=beforePR;
+ }
+ assert.throws(()=>review(f,receipt(f),{issue:f.issue,requireContractBinding:true}),/contract or PR disposition changed/);
+ review(f,receipt(f),{issue:f.issue,requireContractBinding:false});
+});
+test('binding activation preserves existing PRs and rejects unknown activation timestamps',()=>{
+ const p={...policy,review_contract_activation_time:'2026-10-06T20:45:00Z'};
+ assert.equal(reviewBindingRequired({created_at:'2026-10-06T20:44:00Z'},p),false);
+ assert.equal(reviewBindingRequired({created_at:'2026-10-06T20:45:00Z'},p),true);
+ assert.throws(()=>reviewBindingRequired({},p),/timestamp/);
 });

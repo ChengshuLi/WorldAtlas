@@ -1,7 +1,7 @@
 import {renderWorkerResult} from './worker-result.mjs';
 import {assertResearchImportsReady} from './research-import-gate.mjs';
 import fs from 'node:fs';
-import {githubAPI,githubPages,linkedPulls,transitionClaim,renderClaim,workSpec,canonicalIssueNumber} from './issue-claim-contract.mjs';
+import {githubAPI,githubPages,linkedPulls,transitionClaim,renderClaim,workSpec,canonicalIssueNumber,readinessDependencyIds,readClaim} from './issue-claim-contract.mjs';
 import {evidenceRequirement,loadEvidencePolicy} from './evidence-policy.mjs';
 
 const event=JSON.parse(fs.readFileSync(process.env.GITHUB_EVENT_PATH,'utf8')),input=event.inputs??{},repo=process.env.GITHUB_REPOSITORY;
@@ -14,16 +14,14 @@ try{
  const spec=input.action==='release'?null:workSpec(issue.body);
  if(spec&&loadEvidencePolicy().mode==='enforce-new')evidenceRequirement(issue,spec,undefined,input.branch);
  const geographyGate=spec?.mode==='content'?JSON.parse(fs.readFileSync('data/research-geography-gate.json','utf8')):null;
- const ids=new Set(spec?.depends_on??[]);
- if(spec?.mode==='content'){
-  if(geographyGate.version===2){
-   assertResearchImportsReady(geographyGate,{regionIds:spec.region_ids});
-   ids.add(geographyGate.macro_boundaries.approval_issue);
-   for(const id of spec.region_ids)ids.add(geographyGate.regions.find(r=>r.region_id===id).approval_issue);
-  }else ids.add(7);
- }
+ const ids=readinessDependencyIds(spec,geographyGate);
  const dependencies=await Promise.all([...ids].map(id=>api(`/repos/${repo}/issues/${id}`)));
- const next=transitionClaim({issue,comments,prs,dependencies,geographyGate,request:{...input,live_work:input.live_work==='true'}}),claim=next.claim;
+ const otherIssues=spec?.mode==='geography'?await githubPages(api,`/repos/${repo}/issues?state=open&labels=type%3Ageography`):[];
+ const freshIssue=await api(`/repos/${repo}/issues/${number}`);
+ const freshComments=await githubPages(api,`/repos/${repo}/issues/${number}/comments`);
+ const snapshot=value=>JSON.stringify([value.state,value.body,value.updated_at,(value.labels??[]).map(x=>x.name??x).sort()]);
+ if(snapshot(freshIssue)!==snapshot(issue)||JSON.stringify(readClaim(freshComments))!==JSON.stringify(readClaim(comments)))throw Error('Issue or canonical ownership changed during claim; reread before retry');
+ const next=transitionClaim({issue,comments,prs,dependencies,geographyGate,otherIssues,request:{...input,live_work:input.live_work==='true'}}),claim=next.claim;
  // The canonical bot comment is authority; labels are a repairable display projection.
  if(claim.comment_id)await api(`/repos/${repo}/issues/comments/${claim.comment_id}`,'PATCH',{body:renderClaim(claim)});
  else claim.comment_id=(await api(`/repos/${repo}/issues/${number}/comments`,'POST',{body:renderClaim(claim)})).id;

@@ -44,3 +44,7 @@ For owner maintenance, post intent on the issue and record operational context, 
 GitHub issue comments hold dated progress, completion evidence and next actions. Preserve original raised/recorded/completed dates; unknown earlier dates remain unknown. Human work dates use America/Los_Angeles; original machine receipts keep UTC. GitHub creation dates for migrated issues describe the migration, not the original work.
 
 End with the issue, exact branch/commit/PR, completed scope, deployment state, receipt paths, blockers and next action. Push all necessary inputs and receipts; another thread has no access to your cache/workspace. See [the immutable pre-Issues archive](archive/pre-github-issues-20261002/README.md) for original work records, not current status.
+
+## Issue lifecycle accuracy
+
+Read [ISSUE_LIFECYCLE.md](ISSUE_LIFECYCLE.md). Authors reconcile original acceptance and next actions before moving on; reviewers check closure/continuation independently of merging. Dependency owners maintain direct dependents. Between jobs review up to three neglected unclaimed same-lane readiness problems. Use shared read-only readiness checks before readying and claiming; preserve scientific/publication gates and canonical ownership. Existing chats refresh before their next job; Main handles exceptional decisions.

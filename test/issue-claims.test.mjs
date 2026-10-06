@@ -6,7 +6,7 @@ import {assertResearchImportsReady,assertResearchBundleApproved} from '../script
 
 const now=Date.parse('2026-10-02T12:00:00Z');
 const spec={max_prs:3,depends_on:[],scope:'A bounded code repair',mode:'engineering'};
-const issue=(extra={})=>({number:22,state:'open',body:`Scope\n<!-- worldatlas-work:v1\n${JSON.stringify(spec)}\n-->`,labels:['type:engineering','kind:work-item','status:ready'],...extra});
+const issue=(extra={})=>({number:22,created_at:'2026-10-01T00:00:00Z',state:'open',body:`Scope\n<!-- worldatlas-work:v1\n${JSON.stringify(spec)}\n-->`,labels:['type:engineering','kind:work-item','status:ready'],...extra});
 const request=(extra={})=>({action:'claim',worker_id:'thread-a',claim_id:'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',request_id:'rrrrrrrr-rrrr-rrrr-rrrr-rrrrrrrrrrrr',branch:'engineering/repair-a',...extra});
 const comment=claim=>({id:101,user:{login:'github-actions[bot]'},body:renderClaim(claim)});
 const first=()=>transitionClaim({issue:issue(),comments:[],request:request(),now}).claim;

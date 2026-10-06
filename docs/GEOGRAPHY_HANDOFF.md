@@ -28,3 +28,7 @@ node scripts/check-handoff-scope.mjs --branch geography/JOB-ID --base origin/mai
 Trusted CI reads ownership from GitHub, not a PR-authored declaration. Submit validated PRs through the serialized squash merge queue. Release the completed claim after merge and start a fresh branch for the next unclaimed geography issue. Post milestone/source/validation evidence to the issue and report every 30 minutes during sustained work. A blocker requires a durable issue handover with exact branch, inputs, findings and next action; do not silently abandon or broaden the scope.
 
 Public source research and local proposals need repository/public-internet access, not Site or Neon credentials. Geography does not perform live imports, execute migrations, publish, update branch certificates or rewrite research gates. Location-attribute imports still require engineering's complete published regional certificate with exact permitted subjects and current release pins; this lane introduces no additional import authorization.
+
+## Issue lifecycle accuracy
+
+Read [ISSUE_LIFECYCLE.md](ISSUE_LIFECYCLE.md). Authors reconcile original acceptance and next actions before moving on; reviewers check closure/continuation independently of merging. Dependency owners maintain direct dependents. Between jobs review up to three neglected unclaimed same-lane readiness problems. Use shared read-only readiness checks before readying and claiming; preserve scientific/publication gates and canonical ownership. Existing chats refresh before their next job; Main handles exceptional decisions.
