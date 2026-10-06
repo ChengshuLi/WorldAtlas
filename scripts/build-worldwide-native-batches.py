@@ -23,6 +23,7 @@ from physical_gap_priority import (ORDER_NAMES, attach_rank_positions,
     validate_rank_positions)
 from worldwide_native_observations import component_probe, observe_probes, full_owner_counts
 from worldwide_gap_source_context import issue_rosters, administrative_product_context
+from worldwide_gap_operational_batches import operational_batches, dispatch_candidates
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 C = 'cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1'
@@ -346,11 +347,13 @@ def main():
         g['acceptance']=['Classify every member with evidence and explicit unknowns.','Preserve all complete contact subjects and shared source closure.','Unknown is acceptable in evidence collection, not evidence of global repair completion.','Reuse archived closed predecessors and coexist with broader regional semantic reviews.']
         batches.append(g)
     validate_batch_membership(batches,component_ids)
+    operational=operational_batches(batches)
     for record in investigations:
         annotations[record['component']]['rank_positions']=record['rank_positions']
         annotations[record['component']]['investigation_orders']=record['investigation_orders']
     outputs['complete-investigation-annotations']=write_parts(out,'complete-investigation-annotations',[annotations[i] for i in sorted(annotations)])
     outputs['batches']=write_parts(out,'batches',batches)
+    outputs['operational-batches']=write_parts(out,'operational-batches',operational)
     outputs['source-product-contexts']=write_parts(out,'source-product-contexts',source_rows)
     outputs['issue-rosters']=write_parts(out,'issue-rosters',strong)
     outputs['weaker-issue-context']=write_parts(out,'weaker-issue-context',weaker)
@@ -358,6 +361,7 @@ def main():
     report={'version':'worldatlas-worldwide-native-batches-v1','executed_code_commit':code_commit,
         'frozen_measurement_commit':C,'accepted_inventory_commit':M,'accepted_context_commit':H,
         'component_count':len(component_ids),'context_count':len(contexts),'batch_count':len(batches),
+        'operational_batch_count':len(operational),
         'complete_component_roster_sha256':sha256(canonical_json(sorted(component_ids))),
         'complete_context_roster_sha256':sha256(canonical_json(sorted(contexts))),
         'inputs':list(inputs.pins.values()),'outputs':outputs,'native_cohorts':grid_reports,
@@ -367,7 +371,7 @@ def main():
             'view':'Read every original investigation, authenticate row_index/file/row hashes, then join its one annotation and referenced native observation/validated issue rosters by exact component ID. Original fields remain available at their archived vintage; annotations carry the new triage/rank/batch assessment.',
             'annotation_roster_sha256':sha256(canonical_json(sorted(annotations))),
             'original_fields_preserved':True,'original_context_transport':'All original fields preserved in accepted full expanded contexts; ordinary preservation proof accompanies final evidence.'},
-        'prioritized_dispatch_candidates':[{'batch':b['id'],'responsible_role':b['responsible_role'],'component_count':b['component_count'],'best_rank':b['best_rank'],'existing_related_issues':b['existing_related_issues'],'eligibility':'requires canonical issue scope and live claim check; not auto-approved'} for b in sorted(batches,key=lambda b:(b['best_rank']['measured_impact'],b['id']))[:20]],
+        'prioritized_dispatch_candidates':dispatch_candidates(operational),
         'all_state_issue_snapshot':{**descriptor(str(issue_path.relative_to(ROOT)),issue_encoded),
             'uncompressed_bytes':len(issue_raw),'uncompressed_sha256':sha256(issue_raw),
             'pages':len(pages),'strong_rosters':len(strong),'weaker_rosters':len(weaker),
