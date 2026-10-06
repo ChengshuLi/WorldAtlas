@@ -12,7 +12,7 @@ The legacy area routine can cancel opposite-signed parts of a valid multipart po
 
 This is a like-for-like correction of the archived PyProj geodesic-edge comparison method. Its square-metre intermediate values are diagnostic inputs to the historical IoU/coverage results, not canonical land-area estimates. The shared geography helper's straight-source-edge area method is a distinct calculation and would not reproduce the baseline comparison values.
 
-The archived #908 evidence manifest declared no numeric metrics, bindings or summaries. This packet binds all 2,486 numeric values in the 226 archived crosswalk rows, all 678 independently recomputed scores, 14 aggregate counts, source-tier inventories, and numeric controls to exact JSON pointers. Metrics retain baseline vintage and the immutable #908 merge as evaluation commit. These are historical-source comparisons, not current administrative measurements.
+The archived #908 evidence manifest declared no numeric metrics, bindings or summaries. This packet preserves all 2,486 numeric values in the original 226-row crosswalk and verifies the legacy program reproduces that entire file byte-for-byte. It binds all 678 independently recomputed scores, 14 aggregate counts, source-tier inventories and numeric controls to exact JSON pointers. Metrics retain baseline vintage and the immutable #908 merge as evaluation commit. These are historical-source comparisons, not current administrative measurements.
 
 ## Source meaning, vintage and limits
 
