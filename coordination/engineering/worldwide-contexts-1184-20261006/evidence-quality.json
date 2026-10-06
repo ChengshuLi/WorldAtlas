@@ -748,6 +748,10 @@
     {
       "path": "coordination/engineering/worldwide-contexts-1184-20261006/evidence-quality.json",
       "status": "added"
+    },
+    {
+      "path": "coordination/engineering/worldwide-contexts-1184-20261006/verification/helper-import-custody.json",
+      "status": "added"
     }
   ],
   "commands": [
@@ -1280,6 +1284,12 @@
       "hash_kind": "file-bytes",
       "path": "test/worldwide-contexts-1184.py",
       "sha256": "4d59eb0caffdfa9042b9f6c3dc68eb9d0a9292a0f061032296e45ce41920a512"
+    },
+    {
+      "bytes": 1436,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/worldwide-contexts-1184-20261006/verification/helper-import-custody.json",
+      "sha256": "46f29674ed5b27aaad123fa6922ce172a4768a193d5f0a2a110e0e7b37bf31b4"
     }
   ],
   "sources": [
@@ -1342,6 +1352,58 @@
       "url": "https://github.com/ChengshuLi/WorldAtlas/commit/79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
       "verification": "unverified",
       "vintage": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f; separate from frozen cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1"
+    },
+    {
+      "files": [
+        {
+          "bytes": 17403,
+          "hash_kind": "file-bytes",
+          "path": "scripts/physical_gap_priority.py",
+          "sha256": "26ff1467cef85a0a30c21334ad9c2a6be4a0d635bae50ca4940086853773ab28"
+        },
+        {
+          "bytes": 7090,
+          "hash_kind": "file-bytes",
+          "path": "scripts/evidence/immutable.py",
+          "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd"
+        },
+        {
+          "bytes": 16410,
+          "hash_kind": "file-bytes",
+          "path": "scripts/build-physical-gap-priorities.py",
+          "sha256": "bac8f2777178ca14b6db624ad58a41975d296c9931d747842c4b76971d36bc19"
+        },
+        {
+          "bytes": 1652,
+          "hash_kind": "file-bytes",
+          "path": "scripts/physical_component_contacts.py",
+          "sha256": "2d7be839084ca4929980abadd7a618acc6b77d8ac8f02a58582c44c8161664f2"
+        },
+        {
+          "bytes": 8799,
+          "hash_kind": "file-bytes",
+          "path": "scripts/physical_gap_crosswalk.py",
+          "sha256": "0e9cb04cecdab62fed2e9102340b87926224916b02e929049f279110cf9d180f"
+        },
+        {
+          "bytes": 11971,
+          "hash_kind": "file-bytes",
+          "path": "scripts/physical_gap_audit.py",
+          "sha256": "d0854276b311354160cc8b4ceaae052857bb102f4dd2e61ddaa2de0f8482819d"
+        }
+      ],
+      "id": "unchanged-executed-context-helper-import-closure",
+      "license": {
+        "status": "redistributable",
+        "terms": "Existing ordinary repository code, retained without changes."
+      },
+      "retention": "retained",
+      "retrieved_at": "2026-10-06",
+      "role": "Whole executed deterministic/immutable/hierarchy helpers and transitively imported original priority/contact/crosswalk/audit modules; no gap geometry method was executed in this context stage",
+      "temporal_status": "reference",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/commit/3ef751c3c214628cb15163c71b627042150f3cf4",
+      "verification": "verified",
+      "vintage": "Actual executed 3ef751c3c214628cb15163c71b627042150f3cf4; whole bytes independently equal candidate e5e496d4c447a7eece168ecc792a8103da4713a8"
     }
   ],
   "stages": {
