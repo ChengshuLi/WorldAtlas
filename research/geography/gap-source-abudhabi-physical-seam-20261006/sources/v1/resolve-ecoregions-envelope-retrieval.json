@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "source_id": "resolve-ecoregions:spatial-envelope:abudhabi",
+  "source_name": "RESOLVE Ecoregions and Biomes, Biomes and Ecoregions 2017",
+  "retrieved_at_utc": "2026-10-06T20:01:31Z",
+  "request_url": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer/0/query?where=1%3D1&geometry=%7B%22xmin%22%3A52.50693%2C%22ymin%22%3A23.19281%2C%22xmax%22%3A55.70492%2C%22ymax%22%3A24.84999%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=*&returnGeometry=true&outSR=4326&f=geojson",
+  "final_url": "same as request_url",
+  "status": 200,
+  "response_date": "Tue, 06 Oct 2026 20:01:31 GMT",
+  "retained_path": "research/geography/gap-source-abudhabi-physical-seam-20261006/sources/v1/resolve-ecoregions-abu-dhabi-envelope.geojson",
+  "retained_file_bytes": 17899469,
+  "retained_sha256": "5a7c0583209df1145fb542d595b122b90147ac2e62c0f5dc442f8909f7d67c65",
+  "feature_count": 5,
+  "feature_keys": [
+    {
+      "service_feature_id": 6,
+      "ECO_ID": 722,
+      "ECO_NAME": "Al-Hajar foothill xeric woodlands and shrublands",
+      "LICENSE": "CC-BY 4.0"
+    },
+    {
+      "service_feature_id": 38,
+      "ECO_ID": 810,
+      "ECO_NAME": "Arabian sand desert",
+      "LICENSE": "CC-BY 4.0"
+    },
+    {
+      "service_feature_id": 826,
+      "ECO_ID": 840,
+      "ECO_NAME": "South Arabian plains and plateau desert",
+      "LICENSE": "CC-BY 4.0"
+    },
+    {
+      "service_feature_id": 331,
+      "ECO_ID": 320,
+      "ECO_NAME": "Indus River Delta-Arabian Sea mangroves",
+      "LICENSE": "CC-BY 4.0"
+    },
+    {
+      "service_feature_id": 825,
+      "ECO_ID": 811,
+      "ECO_NAME": "Arabian-Persian Gulf coastal plain desert",
+      "LICENSE": "CC-BY 4.0"
+    }
+  ],
+  "source_crs": {
+    "type": "name",
+    "properties": {
+      "name": "EPSG:4326"
+    }
+  },
+  "source_layer_metadata_path": "research/geography/gap-source-abudhabi-physical-seam-20261006/sources/v1/resolve-ecoregions-layer-metadata.json",
+  "layer_metadata_sha256": "d1feffd594812affdc08e089607bab2ed76e256ba7748784d37536797a777d4e",
+  "license": "RESOLVE feature properties state CC-BY 4.0; item attribution RESOLVE, Esri",
+  "attribution": "RESOLVE, Esri",
+  "limitations": [
+    "Current hosted service response; not a frozen 2017 snapshot.",
+    "The envelope request returned five whole ecoregion features, including ECO_ID 810 and 811.",
+    "Service OBJECTID values (38 and 825) are not the Atlas stored source IDs (resolve:810 and resolve:811). The earlier erroneous OBJECTID 810/811 request resolved unrelated Yucat\u00e1n and Yunnan features; its unchanged raw bytes are retained as a negative identity control.",
+    "Geometry comparison is in stored EPSG:4326 coordinate space with no buffering, snapping, or inferred water class."
+  ]
+}
