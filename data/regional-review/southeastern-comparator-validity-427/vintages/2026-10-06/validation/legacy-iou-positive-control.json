@@ -1,0 +1,19 @@
+{
+  "fixtures": [
+    {
+      "both_inputs_valid": true,
+      "geoid": "01089",
+      "legacy_iou_finite_and_in_unit_range": true,
+      "same_state": true
+    },
+    {
+      "both_inputs_valid": true,
+      "geoid": "47093",
+      "legacy_iou_finite_and_in_unit_range": true,
+      "same_state": true
+    }
+  ],
+  "kind": "positive-control",
+  "method_id": "legacy-iou",
+  "outcome": "passed"
+}
