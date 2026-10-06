@@ -42,8 +42,8 @@ def check(rows: list[list[str]]) -> bool:
     if not rows or rows[0][0] != "Number of administrative area units as of January 1, 2025":
         return False
     row = next((r for r in rows if r and r[0] == "GBAO"), None)
-    # Columns are region, total units, towns, towns under republican/regional submission,
-    # colonies, districts, jamoats. These are counts only, not boundary features.
+    # Preserve the publisher's literal English headers. Do not infer administrative
+    # classes from a possibly translated or ambiguous column label.
     if row is None or row[1:] != ["7", "1", "1", "-", "4", "42"]:
         return False
     return not any("geometry" in cell.lower() or "boundary coordinates" in cell.lower()
@@ -75,12 +75,19 @@ def main() -> None:
         "decoded_zip_member_bytes_sum": decoded_member_bytes,
         "source_title": title,
         "reference_date": "2025-01-01",
-        "gbao_counts": {"all_administrative_units": 7, "districts": 4, "jamoats": 42},
-        "positive_control": "official workbook title and GBAO row parsed exactly",
-        "negative_control": "altered GBAO unit count rejected by the same table assertion",
+        "gbao_row": {
+            "Regions": 7,
+            "Towns_total": 1,
+            "Towns_of_which_republican_and_regional_submission": 1,
+            "Districts": "-",
+            "Colonies": 4,
+            "Number_of_jamoats": 42,
+        },
+        "positive_control": "official workbook title, literal headers and GBAO cells parsed exactly",
+        "negative_control": "mutated GBAO cell under literal Regions header rejected by the same table assertion",
         "negative_control_passed": negative_mutation_rejected,
         "geometry_present": False,
-        "interpretation_limit": "Administrative statistics only; no entity-level outline or geometry inference.",
+        "interpretation_limit": "Raw publisher column labels and values only; no reclassification into districts/towns or entity-level geometry inference.",
     }
     print(json.dumps(result, ensure_ascii=False, sort_keys=True, separators=(",", ":")))
 
