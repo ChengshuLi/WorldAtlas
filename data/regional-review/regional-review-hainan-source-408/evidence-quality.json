@@ -1,0 +1,462 @@
+{
+  "version": 1,
+  "issue": 1053,
+  "lane": "geography",
+  "worker_id": "01a10947-b3d7-7812-8b2f-c5a47e88ccb2",
+  "subject_ids": [
+    "gb:CHN:ADM2:17275852B2295538790743",
+    "gb:CHN:ADM2:17275852B38709981190197",
+    "gb:CHN:ADM2:17275852B38939963469829",
+    "gb:CHN:ADM2:17275852B41190306193582",
+    "gb:CHN:ADM2:17275852B42599245130625",
+    "gb:CHN:ADM2:17275852B50589627480209",
+    "gb:CHN:ADM2:17275852B53008264931106",
+    "gb:CHN:ADM2:17275852B70320302334749",
+    "gb:CHN:ADM2:17275852B72819681774342",
+    "gb:CHN:ADM2:17275852B7979903099841",
+    "gb:CHN:ADM2:17275852B80309702523612",
+    "gb:CHN:ADM2:17275852B82960244806798",
+    "gb:CHN:ADM2:17275852B85583949591367",
+    "gb:CHN:ADM2:17275852B86431238150342",
+    "gb:CHN:ADM2:17275852B87782309196497",
+    "gb:CHN:ADM2:17275852B88042861362346",
+    "gb:CHN:ADM2:17275852B93743910489906",
+    "gb:CHN:ADM2:17275852B98891327369808"
+  ],
+  "subject_ids_sha256": "e9f54d318be85e24e06e1eab2576ebf1f61e9f070c53d4315107e98d03b34df5",
+  "baseline": {
+    "commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+    "files": [
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-4.json",
+        "bytes": 4835479,
+        "sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-365cbd6478904888/source/geoBoundaries-CHN-ADM2.geojson",
+        "bytes": 7618692,
+        "sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {
+      "baseline:data/hierarchy.json": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "baseline:data/geography/part-4.json": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+      "baseline:data/regional-review/regional-review-365cbd6478904888/source/geoBoundaries-CHN-ADM2.geojson": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34"
+    },
+    "pin_files": {
+      "baseline:data/hierarchy.json": "data/hierarchy.json",
+      "baseline:data/geography/part-4.json": "data/geography/part-4.json",
+      "baseline:data/regional-review/regional-review-365cbd6478904888/source/geoBoundaries-CHN-ADM2.geojson": "data/regional-review/regional-review-365cbd6478904888/source/geoBoundaries-CHN-ADM2.geojson"
+    },
+    "subject_files": {
+      "gb:CHN:ADM2:17275852B2295538790743": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B38709981190197": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B38939963469829": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B41190306193582": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B42599245130625": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B50589627480209": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B53008264931106": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B70320302334749": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B72819681774342": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B7979903099841": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B80309702523612": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B82960244806798": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B85583949591367": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B86431238150342": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B87782309196497": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B88042861362346": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B93743910489906": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B98891327369808": "data/geography/part-4.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "geoboundaries-2017",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CHN/ADM2/geoBoundaries-CHN-ADM2.geojson",
+      "role": "Pinned 2017 geometry identity/name/vintage input; not current legal boundary authority",
+      "vintage": "2017 reference",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Repository metadata claims ODbL/PDDL public-domain terms, but upstream provenance and reuse chain were not independently cleared; no new copy is redistributed."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2017,
+        "to": 2018
+      },
+      "restoration": "Use exact repository-retained baseline file data/regional-review/regional-review-365cbd6478904888/source/geoBoundaries-CHN-ADM2.geojson at baseline commit 0463152556158926681120155ec2e6fd7d0d8c7f, SHA-256 2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34. Its original pinned upstream path is the URL above.",
+      "limit": "Byte identity verified against this repository file; original upstream release provenance/license chain and source legal-boundary semantics are not independently verified."
+    },
+    {
+      "id": "hainan-yearbook-2024",
+      "url": "https://stats.hainan.gov.cn/tjj/tjsu/ndsj/2024/202412/P020250116308974141111.pdf",
+      "role": "Official current administrative roster and role/count table (table 1-1)",
+      "vintage": "2023 administrative divisions; Yearbook 2024",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Official PDF direct retrieval returned HTTP 403; no copy retained, reuse terms not inspected."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Restore the exact PDF from this URL or the Hainan Statistics Bureau 2024 yearbook archive; inspect terms and record page/table citation and whole-file SHA-256 before reuse. The indexed extract exposed table 1-1, 2023 date, category totals and listed names.",
+      "limit": "Search-index extract only; no raw bytes, page layout, or exact response hash. It supports administrative roster leads, not geometry."
+    },
+    {
+      "id": "hainan-gov-current-roster",
+      "url": "https://www.hainan.gov.cn/hainan/?aria=1",
+      "role": "Current provincial government city/county directory, cross-check on roster completeness",
+      "vintage": "Current website as indexed 2026-10-05",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Page reuse terms were not inspected; no content copied."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Restore the provincial government overview and its Administrative Regions section through this URL; retain exact page bytes/hash only after confirming terms.",
+      "limit": "Index lists 19 subordinate city/county names; page body timed out in direct access. No geometry evidence."
+    },
+    {
+      "id": "haikou-2002-state-council",
+      "url": "https://zh.wikisource.org/zh-hans/国务院关于同意海南省调整海口市行政区划的批复",
+      "role": "Transcribed State Council adjustment decision for Qiongshan/Haikou identity history",
+      "vintage": "2002 State Council Gazette decision, Guo Han [2002] No. 92",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "No transcript bytes retained; authoritative Gazette terms not evaluated."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2002,
+        "to": 2003
+      },
+      "restoration": "Restore the official State Council Gazette 2002 issue 32 decision; the URL is a readable transcription locator. Verify decision wording and hash official bytes before future migration work.",
+      "limit": "Search-indexed legal transcription and current official roster cross-check only; exact official Gazette bytes not obtained."
+    },
+    {
+      "id": "hainan-official-map-catalog",
+      "url": "https://www.webmap.cn/tempStore.do?dataId=12364&method=siteDetail&sss=&storeId=81",
+      "role": "Official public-interest standard-map catalog restoration route; not a vector GIS layer",
+      "vintage": "2023 Hainan public-interest standard-map catalog record",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Catalog indicates maps are free to download/use but individual map terms and current GIS access were not verified."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Follow the Ministry of Natural Resources-hosted National Geomatics Center catalog record and Hainan Surveying and Mapping authority portal http://hism.mnr.gov.cn/sjkf/hndt/; obtain individual file URLs, review terms and hash each official asset.",
+      "limit": "Catalog direct request returned HTTP 418; Hainan mapping portal host did not resolve. No map payload or current redistributable boundary GIS bytes could be verified."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/regional-review-hainan-source-408/README.md",
+      "bytes": 10584,
+      "sha256": "026d9b3a71a31f29cb866e32a09a5f0db0e8ecffcb4416edf6b5d01a9a6d83d2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-hainan-source-408/findings/hainan-18-crosswalk.csv",
+      "bytes": 28037,
+      "sha256": "4c33b8f40263625a04f4a305356c668c8817a5af62c4781ad6d0725bfe4ea9e7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-hainan-source-408/findings/reproduction-summary.json",
+      "bytes": 2325,
+      "sha256": "dbedbf0a588b0bafe50b51029604b80135c4b2bc8c3b34f8718770ed05c2462a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-hainan-source-408/reproduce_hainan.py",
+      "bytes": 14364,
+      "sha256": "11d423b339d5af27405f4881ba8b21ad7146fe2e7d7f6b38bd289a9bb1bf0316",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-hainan-source-408/findings/positive-edge-control.json",
+      "bytes": 169,
+      "sha256": "be70d2aea0c955ff32260f6be14f8862ed4d4c04552b5284a38e3575b3122c01",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-hainan-source-408/findings/negative-point-control.json",
+      "bytes": 162,
+      "sha256": "cf8d5a3d1f7c3fb83da9878fce07a9e64006526a0ea7edb180b39c6eb6df70b8",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "official-roster-crosswalk",
+      "description": "Compare frozen source names and atlas parent IDs with the current indexed official Hainan yearbook roster; preserve city tier and obsolete identity uncertainty.",
+      "software": "Python 3.12 standard library; manual official-source inspection",
+      "units": "administrative names, roles and units; no coordinate conversion",
+      "kind": "source"
+    },
+    {
+      "id": "reproduce-frozen-inventory",
+      "kind": "code",
+      "description": "Read immutable pinned Atlas/source files, perform the exact 18-ID join, apply the disclosed administrative crosswalk, and write new issue-owned ledger outputs without changing geographic source data.",
+      "software": "Python 3.7 standard library",
+      "units": "IDs, names, administrative roles and output rows"
+    },
+    {
+      "id": "exact-edge-screen",
+      "kind": "measurement",
+      "description": "Reproduce source joins, ring closure/range checks, and orientation-insensitive full-coordinate-pair edge equality; do not treat exact contacts as topology validation.",
+      "software": "Python 3.12 standard library; reproduce_hainan.py",
+      "units": "coordinates in degrees, vertex/edge/polygon counts; no area/distance calculation",
+      "axis_order": "longitude-latitude",
+      "crs": "RFC 7946 GeoJSON longitude/latitude (EPSG:4326 interpretation)",
+      "area_method": "Not computed.",
+      "distance_method": "Not computed."
+    }
+  ],
+  "metrics": [
+    {
+      "id": "frozen_subject_rows",
+      "value": 18,
+      "unit": "subjects",
+      "input_sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
+      "evaluation_commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+      "vintage": "baseline"
+    },
+    {
+      "id": "unique_source_joins",
+      "value": 18,
+      "unit": "features",
+      "input_sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
+      "evaluation_commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+      "vintage": "baseline"
+    },
+    {
+      "id": "polygon_components",
+      "value": 18,
+      "unit": "components",
+      "input_sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
+      "evaluation_commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+      "vintage": "baseline"
+    },
+    {
+      "id": "exterior_vertices",
+      "value": 1243,
+      "unit": "vertices",
+      "input_sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
+      "evaluation_commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+      "vintage": "baseline"
+    },
+    {
+      "id": "interior_rings",
+      "value": 0,
+      "unit": "rings",
+      "input_sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
+      "evaluation_commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+      "vintage": "baseline"
+    },
+    {
+      "id": "exact_neighbor_pairs",
+      "value": 38,
+      "unit": "pairs",
+      "input_sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
+      "evaluation_commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+      "vintage": "baseline"
+    },
+    {
+      "id": "exact_shared_segments",
+      "value": 362,
+      "unit": "segments",
+      "input_sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
+      "evaluation_commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+      "vintage": "baseline"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "frozen_subject_rows",
+      "value": 18,
+      "unit": "subjects"
+    },
+    {
+      "metric_id": "unique_source_joins",
+      "value": 18,
+      "unit": "features"
+    },
+    {
+      "metric_id": "polygon_components",
+      "value": 18,
+      "unit": "components"
+    },
+    {
+      "metric_id": "exterior_vertices",
+      "value": 1243,
+      "unit": "vertices"
+    },
+    {
+      "metric_id": "interior_rings",
+      "value": 0,
+      "unit": "rings"
+    },
+    {
+      "metric_id": "exact_neighbor_pairs",
+      "value": 38,
+      "unit": "pairs"
+    },
+    {
+      "metric_id": "exact_shared_segments",
+      "value": 362,
+      "unit": "segments"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "The frozen IDs join one-to-one to the repository-retained 2017 geoBoundaries snapshot; this does not establish present-day legal identity or boundaries.",
+      "status": "supported",
+      "source_ids": [
+        "geoboundaries-2017"
+      ]
+    },
+    {
+      "text": "The indexed 2023 official roster and frozen scope identify Wuzhishan as outside scope and a historical Qiongshan record inside the scope; preserve both as explicit follow-ups, without extending this subject list.",
+      "status": "supported",
+      "source_ids": [
+        "hainan-yearbook-2024",
+        "haikou-2002-state-council"
+      ]
+    },
+    {
+      "text": "The current legal GIS boundary bytes, reuse terms, island/coastal completeness and present-day topology remain unresolved.",
+      "status": "unresolved",
+      "source_ids": [
+        "hainan-official-map-catalog",
+        "hainan-yearbook-2024"
+      ]
+    },
+    {
+      "text": "The Wenchang model parent currently points to the Sansha framework node while the official roster identifies Wenchang as a distinct county-level city directly administered by Hainan; submit a sourced engineering handoff.",
+      "status": "supported",
+      "source_ids": [
+        "hainan-yearbook-2024",
+        "geoboundaries-2017"
+      ]
+    },
+    {
+      "text": "The exact-edge screen finds vintage neighbor contacts only; it cannot resolve the current Haikou/Qiongshan/District, Wenchang/Sansha, Dongfang, Danzhou or Sanya geometry concerns.",
+      "status": "unresolved",
+      "source_ids": [
+        "geoboundaries-2017",
+        "hainan-official-map-catalog"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 data/regional-review/regional-review-hainan-source-408/reproduce_hainan.py",
+    "node scripts/evidence-quality.mjs data/regional-review/regional-review-hainan-source-408/evidence-quality.json"
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "frozen_subject_rows",
+      "path": "data/regional-review/regional-review-hainan-source-408/findings/reproduction-summary.json",
+      "json_pointer": "/crosswalk_rows"
+    },
+    {
+      "metric_id": "unique_source_joins",
+      "path": "data/regional-review/regional-review-hainan-source-408/findings/reproduction-summary.json",
+      "json_pointer": "/unique_source_joins"
+    },
+    {
+      "metric_id": "polygon_components",
+      "path": "data/regional-review/regional-review-hainan-source-408/findings/reproduction-summary.json",
+      "json_pointer": "/geometry_structure/polygon_components"
+    },
+    {
+      "metric_id": "exterior_vertices",
+      "path": "data/regional-review/regional-review-hainan-source-408/findings/reproduction-summary.json",
+      "json_pointer": "/geometry_structure/exterior_vertices"
+    },
+    {
+      "metric_id": "interior_rings",
+      "path": "data/regional-review/regional-review-hainan-source-408/findings/reproduction-summary.json",
+      "json_pointer": "/geometry_structure/interior_rings"
+    },
+    {
+      "metric_id": "exact_neighbor_pairs",
+      "path": "data/regional-review/regional-review-hainan-source-408/findings/reproduction-summary.json",
+      "json_pointer": "/exact_shared_edge_screen/neighbor_pairs_detected"
+    },
+    {
+      "metric_id": "exact_shared_segments",
+      "path": "data/regional-review/regional-review-hainan-source-408/findings/reproduction-summary.json",
+      "json_pointer": "/exact_shared_edge_screen/shared_segments"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "exact-edge-screen",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/regional-review-hainan-source-408/findings/positive-edge-control.json"
+    },
+    {
+      "method_id": "exact-edge-screen",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/regional-review-hainan-source-408/findings/negative-point-control.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "data/regional-review/regional-review-hainan-source-408/README.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-hainan-source-408/findings/hainan-18-crosswalk.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-hainan-source-408/findings/reproduction-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-hainan-source-408/reproduce_hainan.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-hainan-source-408/findings/positive-edge-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-hainan-source-408/findings/negative-point-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-hainan-source-408/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}
