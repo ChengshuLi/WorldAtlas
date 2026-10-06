@@ -6,7 +6,7 @@ base='e205b7427c006cfea9acb5435f0aa08aace22266'
 report=json.loads((p/'priorities-v2/report.json').read_bytes())
 validation=json.loads((p/'complete-world-validation-v2.json').read_bytes())
 assert validation['components']==95174 and validation['native_contexts']==49625 and validation['unmeasured_fragments']==5
-log=pathlib.Path('.cache/priority-controls-34.tap').read_bytes()
+log=(p/'controls-34.tap').read_bytes()
 (p/'controls-34.tap').write_bytes(log)
 for kind,controls in [('positive-control',['27 analytic investigation controls and unchanged complete semantic record; actual transcript retained.','Complete-world original/native/source/contact/legacy-water/grid binding validation retained separately.']),('negative-control',['Six semantic alteration controls reject contact omission, source binding redirection, unknown omission, invented scope, promoted surface and altered original known area.','27 analytic suite includes tiny/nonmeasured originals, point versus edge contact, incomplete partitions/ranks, missing ancestry and unmatched old operation failures.'])]:
  row={'method_id':'physical-gap-priorities','kind':kind,'outcome':'passed','controls':controls,'log_sha256':hashlib.sha256(log).hexdigest(),'limits':['Synthetic controls do not independently approve factual geography; complete original semantic gate is recorded separately.']}

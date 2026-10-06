@@ -914,8 +914,8 @@
   "outputs": [
     {
       "path": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/build-evidence-manifest.py",
-      "bytes": 9354,
-      "sha256": "21b9f493afd67e32caa909f07e4e2b67ae4a1447c822f3f7446912e5f2f49af7",
+      "bytes": 9559,
+      "sha256": "697982bd10d2df8673695e7660f585a776c3cf17ac64f86d6edc608971750af5",
       "hash_kind": "file-bytes"
     },
     {
@@ -1833,9 +1833,21 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "scripts/run-integration-tests.mjs",
+      "bytes": 6448,
+      "sha256": "77a752349e8c9544e6f320e7a2484831380e15b5e5100a5a3c9feaca7921e54e",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "scripts/validate-physical-gap-priorities.py",
       "bytes": 14434,
       "sha256": "ea8961692e93e638fc1c5445383acdfecc5ac9c87dfb207683b26d708bfff008",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/native-regression-inputs.test.mjs",
+      "bytes": 2543,
+      "sha256": "948baef10ac263ed4c15cfb564ac77cb1c8fcd98a96007632e63765dc79eeb65",
       "hash_kind": "file-bytes"
     },
     {
@@ -2635,8 +2647,18 @@
       "status": "added"
     },
     {
+      "path": "scripts/run-integration-tests.mjs",
+      "status": "modified",
+      "original_sha256": "da653cc17c0f4acfbcc5bf50739412513426621e70349c7116b0665409523419"
+    },
+    {
       "path": "scripts/validate-physical-gap-priorities.py",
       "status": "added"
+    },
+    {
+      "path": "test/native-regression-inputs.test.mjs",
+      "status": "modified",
+      "original_sha256": "da561dd49b5f1f3288c808a85e86c99529fbac555b86d2afe97e4e3ff13e4815"
     },
     {
       "path": "test/physical-gap-priority-controls.py",
