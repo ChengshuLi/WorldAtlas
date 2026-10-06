@@ -97,13 +97,17 @@ def reconstruct(original, delta, key=lambda r: r['id']):
 
 
 def tile_equal(before, after, old_members, new_members, old_unknowns, new_unknowns):
+    for query_rows, bindings in ((before,old_members),(after,new_members)):
+        for kind, identities in query_rows.items():
+            if kind not in bindings or len(identities)!=len(set(identities)) or any(i not in bindings[kind] for i in identities):
+                raise ValueError('Declared tile member missing or duplicated')
     return (canonical_json(before) == canonical_json(after)
             and canonical_json(old_unknowns) == canonical_json(new_unknowns)
             and all(old_members[k][i] == new_members[k][i]
                     for k in before for i in before[k]))
 
 
-def component_lineage(old_components, new_components, fragment_links):
+def component_lineage(old_components, new_components, fragment_links, unknown_links=()):
     old_by_fragment, new_by_fragment = membership_from_records(old_components), membership_from_records(new_components)
     links = defaultdict(set)
     for old_id, new_id in fragment_links:
@@ -114,6 +118,11 @@ def component_lineage(old_components, new_components, fragment_links):
     for a, values in links.items():
         for b in values:
             reverse[b].add(a)
+    unknown_old, unknown_new = set(), set()
+    for a,b in unknown_links:
+        if a not in old_by_fragment or b not in new_by_fragment:
+            raise ValueError('Unknown lineage member absent')
+        unknown_old.add(old_by_fragment[a]);unknown_new.add(new_by_fragment[b])
     def side(records, matches, original):
         rows = []
         for r in records:
@@ -122,7 +131,8 @@ def component_lineage(old_components, new_components, fragment_links):
                          'fragment_ids': [b['id'] for b in r['properties']['fragment_bindings']],
                          'unmeasured_fragment_ids': r['properties']['unmeasured_fragment_ids'],
                          'counterparts': targets,
-                         'relation': ('removed' if original else 'new') if not targets else
+                         'relation': 'unknown-overlay' if r['id'] in (unknown_old if original else unknown_new) else
+                                     ('removed' if original else 'new') if not targets else
                                      'split' if original and len(targets) > 1 else
                                      'merged' if not original and len(targets) > 1 else 'linked'})
         return rows
@@ -349,10 +359,11 @@ def run(repo, selected, output):
     overlay['component_ledger_scope'] = 'Only exact overlay fragment bindings; full original/current component ledger follows separately.'
     links = [(i,i) for i in sorted(retained)] + [(p['old_fragment'],p['new_fragment']) for p in overlay['fragment_pairs']
               if p.get('intersection_planar_area',0)>0 and p['status']=='checked']
+    unknown_links = [(p['old_fragment'],p['new_fragment']) for p in overlay['fragment_pairs'] if p['status']!='checked']
     lineage = {'retained_full_record_count':len(retained),
                'retained_full_record_ids_sha256':digest(canonical_json(sorted(retained))),
                'retained_rule':'All original IDs absent from fragment removed_ids retain their identical full canonical feature bytes.',
-               'changed_fragment_overlay':overlay, 'components':component_lineage(old_components,new_components,links),
+               'changed_fragment_overlay':overlay, 'components':component_lineage(old_components,new_components,links,unknown_links),
                'original_unmeasured_fragment_ids':sorted(f['id'] for f in fragments if f['properties'].get('area_m2') is None),
                'current_unmeasured_fragment_ids':sorted(f['id'] for f in new_fragments if f['properties'].get('area_m2') is None)}
     output.mkdir(parents=True)

@@ -49,6 +49,8 @@ class SuccessorControls(unittest.TestCase):
         order=copy.deepcopy(before);order['locations'].reverse()
         self.assertFalse(tile_equal(before,order,members,members,[],[]))
         self.assertFalse(tile_equal(before,before,members,members,[],[{'cause':'unknown'}]))
+        missing=copy.deepcopy(members);del missing['locations']['a']
+        with self.assertRaisesRegex(ValueError,'Declared tile member missing'):tile_equal(before,before,members,missing,[],[])
 
     def test_lossless_deletion_upsert_and_ordinal_churn(self):
         old=[feature('old:0'),feature('old:1',3),feature('stable',5)]
@@ -92,6 +94,9 @@ class SuccessorControls(unittest.TestCase):
         self.assertEqual([r['relation'] for r in rows['current']],['merged','linked','new'])
         self.assertEqual(rows['original'][0]['unmeasured_fragment_ids'],['a','b'])
         with self.assertRaisesRegex(ValueError,'Lineage member absent'):component_lineage(old,new,[('missing','aa')])
+        uncertain=component_lineage(old,new,[],[('a','aa')])
+        self.assertEqual(uncertain['original'][0]['relation'],'unknown-overlay')
+        self.assertEqual(uncertain['current'][0]['relation'],'unknown-overlay')
 
 
 if __name__=='__main__':unittest.main()
