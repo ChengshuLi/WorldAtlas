@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "command": "python3 data/regional-review/regional-review-f4badb23f78b69b7/reproduce.py",
+  "evaluation_base_commit": "bd2c2aeed9fcaa0b209a4bec1fe18b7129bb7f60",
+  "runs": 2,
+  "run_one_sha256_by_output": {
+    "location-assessments.csv": "f0dfaaff5748bd333e730161b426ada6f769462df6fd0042fddee724018fa65e",
+    "province-review.csv": "7778497b7c516cd98d4f4772eaa08756419a6a928d3a0a278c619992f3326852"
+  },
+  "run_two_sha256_by_output": {
+    "location-assessments.csv": "f0dfaaff5748bd333e730161b426ada6f769462df6fd0042fddee724018fa65e",
+    "province-review.csv": "7778497b7c516cd98d4f4772eaa08756419a6a928d3a0a278c619992f3326852"
+  },
+  "outputs": {
+    "location-assessments.csv": {
+      "bytes": 131489,
+      "sha256": "f0dfaaff5748bd333e730161b426ada6f769462df6fd0042fddee724018fa65e"
+    },
+    "province-review.csv": {
+      "bytes": 1121,
+      "sha256": "7778497b7c516cd98d4f4772eaa08756419a6a928d3a0a278c619992f3326852"
+    }
+  },
+  "result": "both runs produced identical row-level CSV hashes; identity/scope checks passed, geography limits remain as reported",
+  "checked_utc": "2026-10-06T00:20:29Z"
+}

@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "research_date": "2026-10-05",
+  "scope_path": "data/regional-review/regional-review-f4badb23f78b69b7/scope.json",
+  "scope_location_count": 223,
+  "source_files": [
+    {
+      "path": "source/geoboundaries/MOZ/geoBoundaries-MOZ-ADM2.geojson",
+      "release": "geoBoundaries source release; upstream commit 9469f09592ced973a3448cf66b6100b741b64c0d",
+      "vintage": "2019",
+      "retrieved_at": "2026-10-05 UTC",
+      "declared_license_or_rights": "Creative Commons Attribution 3.0 IGO (metadata assertion; permission chain unresolved)",
+      "restoration_url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/MOZ/ADM2/geoBoundaries-MOZ-ADM2.geojson",
+      "bytes": 24879690,
+      "sha256": "5f04bb75bcb08092451f8626f7113830abfe726c1fad5309107309ab6cceab65"
+    },
+    {
+      "path": "source/geoboundaries/MOZ/geoBoundaries-MOZ-ADM2-metaData.json",
+      "release": "geoBoundaries source release; upstream commit 9469f09592ced973a3448cf66b6100b741b64c0d",
+      "vintage": "2019",
+      "retrieved_at": "2026-10-05 UTC",
+      "declared_license_or_rights": "metadata file, provenance/licence declaration only",
+      "restoration_url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/MOZ/ADM2/geoBoundaries-MOZ-ADM2-metaData.json",
+      "bytes": 950,
+      "sha256": "0dad350d40953d779e728c14d931548226290b05565f4068ee8e0ce366a0c1ef"
+    },
+    {
+      "path": "source/geoboundaries/ZMB/geoBoundaries-ZMB-ADM2.geojson",
+      "release": "geoBoundaries source release; upstream commit 9469f09592ced973a3448cf66b6100b741b64c0d",
+      "vintage": "2020",
+      "retrieved_at": "2026-10-05 UTC",
+      "declared_license_or_rights": "CC BY 4.0 (metadata assertion)",
+      "restoration_url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/ZMB/ADM2/geoBoundaries-ZMB-ADM2.geojson",
+      "bytes": 35998492,
+      "sha256": "ff4a4c8a92f7416b8457f423b339f2623b10f59410339911a0427fcee8434f17"
+    },
+    {
+      "path": "source/geoboundaries/ZMB/geoBoundaries-ZMB-ADM2-metaData.json",
+      "release": "geoBoundaries source release; upstream commit 9469f09592ced973a3448cf66b6100b741b64c0d",
+      "vintage": "2020",
+      "retrieved_at": "2026-10-05 UTC",
+      "declared_license_or_rights": "metadata file, provenance/licence declaration only",
+      "restoration_url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/ZMB/ADM2/geoBoundaries-ZMB-ADM2-metaData.json",
+      "bytes": 829,
+      "sha256": "a2deeb0dc00bc1f8b7b1a5be7668be1f4139ccaf65b2acd0efc0783237a9011b"
+    },
+    {
+      "path": "source/zambia-grid3-2022/zambia-administrative-boundaries-2022.geojson",
+      "release": "ArcGIS item 58c57f0ae33249bd8948dbf253f4e49e; Zambia districts 2022",
+      "vintage": "2022",
+      "retrieved_at": "2026-10-05T23:59:48Z",
+      "declared_license_or_rights": "CC BY 4.0 (item/service assertion)",
+      "restoration_url": "https://www.arcgis.com/home/item.html?id=58c57f0ae33249bd8948dbf253f4e49e",
+      "bytes": 31192016,
+      "sha256": "8044d6ae8fc109993cf3bd3541704a071edc1330b9cf21e5316721b382cf0ccd"
+    }
+  ],
+  "authority_limits": [
+    "The original INE 2017 ArcGIS geometry service states its database belongs exclusively to INE; no geometry from that service was retained.",
+    "The geoBoundaries Mozambique metadata asserts CC BY 3.0 IGO but its upstream license chain and current source grant remain unverified.",
+    "Source hashes establish byte identity only; they do not establish publisher identity, legal currentness, completeness, territorial meaning or boundary accuracy."
+  ]
+}
