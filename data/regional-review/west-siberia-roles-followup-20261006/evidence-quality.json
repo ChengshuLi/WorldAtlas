@@ -67,6 +67,34 @@
         "hash_kind": "file-bytes"
       },
       {
+        "path": "data/regional-review/regional-review-626fdf640aab94e2/sources/geoboundaries-commit-9469f09.json",
+        "bytes": 331076,
+        "sha256": "5f1b2549c5741c6708fae329dc3fe25c0bdb3185dfca34575fe8bffdf22da6ce",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-626fdf640aab94e2/sources/geoboundaries-rus-adm1-2017-metadata.json",
+        "bytes": 856,
+        "sha256": "5c8f45f4965693016d70e08dae4c195d614644eed8c8fa3dca5948c9d89b84a1",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-626fdf640aab94e2/sources/geoboundaries-rus-adm1-2017-scoped-parent-features.geojson",
+        "bytes": 3124983,
+        "sha256": "4dab95fa1bbb8aa0ffeeecca9bc269ece139aab4368faff8ed2d0890c05d6602",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-626fdf640aab94e2/sources/geoboundaries-rus-adm2-2017-metadata.json",
+        "bytes": 815,
+        "sha256": "2064a236e3473d76adf00729b4482a22ffefae22a40364a4cfe78ef43ce3c672",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
         "path": "data/regional-review/regional-review-626fdf640aab94e2/sources/geoboundaries-rus-adm2-2017-scoped-original-features.geojson",
         "bytes": 7590020,
         "sha256": "7eb4cba61f0d17bfacb634c08aff3ec4873ece62734d518b51614bf061a5a129",
@@ -81,9 +109,51 @@
         "role": "original-source"
       },
       {
+        "path": "data/regional-review/regional-review-626fdf640aab94e2/sources/arcgis-item-37ea320eebb647c6838c23f72abae5ef.json",
+        "bytes": 9587,
+        "sha256": "9ccbb076714184b4565ca6546f988aca1fad7afabf17191f920f3da64ba85340",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-626fdf640aab94e2/sources/resolve-ecoregions-layer-0.json",
+        "bytes": 37257,
+        "sha256": "d1feffd594812affdc08e089607bab2ed76e256ba7748784d37536797a777d4e",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-626fdf640aab94e2/sources/resolve-ecoregions-eco-id-query.json",
+        "bytes": 6209,
+        "sha256": "cc42c18d35c06b794914ccbfe11ebe8c74d39c26c5b7ae3e35ad9935c187f998",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-626fdf640aab94e2/sources/resolve-ecoregions-2017-features.geojson",
+        "bytes": 4755917,
+        "sha256": "aed773990a041f91cc457912627718a1d5da55b8d854719ba13630a18d49af59",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
         "path": "data/regional-review/regional-review-626fdf640aab94e2/sources/resolve-ecoregions-by-eco-id.geojson",
         "bytes": 185538,
         "sha256": "95557a6db0dffeda4786e3961a2daf3aa977160adf09dbada2ec73cc8305a3b3",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-626fdf640aab94e2/sources/mchs-yamal-current-region.html",
+        "bytes": 91038,
+        "sha256": "a73397b83e44731675ce5ddda196f29a752696975840b03524344674c9de22fa",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-626fdf640aab94e2/sources/mchs-yamal-district-islands.html",
+        "bytes": 104060,
+        "sha256": "b325387ce5f8e18217aaf822afef33e2c8969c8b85b6fae64672abf5303fe723",
         "hash_kind": "file-bytes",
         "role": "original-source"
       }
@@ -284,14 +354,22 @@
       "vintage": "Original packet HTML capture 2026-10-05 23:10:05 PDT; current official page search extraction crawled two days before 2026-10-06.",
       "retrieved_at": "2026-10-05",
       "license": {
-        "status": "unknown",
+        "status": "redistributable",
         "terms": "CC BY 4.0 page footer, as recorded in the parent packet."
       },
-      "retention": "restoration-only",
-      "verification": "unverified",
-      "restoration": "Use the record-specific direct URL and instructions in sources/source-register.json; acquire through verified TLS, preserve terms, final URL, date, byte length and SHA-256.",
+      "retention": "retained",
+      "verification": "verified",
+      "restoration": "For this packet, inspect the retained source file `sources/mchs-yamal-current-region.html`; its SHA-256 is recorded above. Original upstream page: https://89.mchs.gov.ru/glavnoe-upravlenie/harakteristika-subekta.",
       "limit": "A municipality roster does not supply a component-by-component municipal boundary; the MChS island statement covers some islands only.",
-      "temporal_status": "reference"
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/west-siberia-roles-followup-20261006/sources/mchs-yamal-current-region.html",
+          "bytes": 91038,
+          "sha256": "a73397b83e44731675ce5ddda196f29a752696975840b03524344674c9de22fa",
+          "hash_kind": "file-bytes"
+        }
+      ]
     },
     {
       "id": "khanty-mansi-63oz-municipal-boundaries-law",
@@ -356,13 +434,37 @@
       "restoration": "Find and retrieve the primary legislature/publisher text and verify all current amendments.",
       "limit": "Secondary lead only. It is not used to assert current territorial facts.",
       "temporal_status": "reference"
+    },
+    {
+      "id": "yamal-nenets-mchs-islands-note",
+      "url": "https://89.mchs.gov.ru/deyatelnost/press-centr/novosti/3921938",
+      "role": "Official MChS note supporting only the limited statement that some islands in internal sea waters belong to municipal-district territories.",
+      "vintage": "Original packet HTML capture 2026-10-05 23:10:07 PDT.",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "CC BY 4.0 page footer, as recorded in parent packet."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "restoration": "For this packet, inspect retained source file `sources/mchs-yamal-district-islands.html`; its SHA-256 is recorded above. Original upstream page URL is listed here.",
+      "limit": "Supports only the limited island-membership statement; it does not validate all multipart components, boundaries, or complete current membership.",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/west-siberia-roles-followup-20261006/sources/mchs-yamal-district-islands.html",
+          "bytes": 104060,
+          "sha256": "b325387ce5f8e18217aaf822afef33e2c8969c8b85b6fae64672abf5303fe723",
+          "hash_kind": "file-bytes"
+        }
+      ]
     }
   ],
   "outputs": [
     {
       "path": "data/regional-review/west-siberia-roles-followup-20261006/README.md",
-      "bytes": 5147,
-      "sha256": "97934008de8222f1103bb1acbbcda1982abbfc5fd94bc99856808a36319aa8be",
+      "bytes": 5273,
+      "sha256": "be33849f54a0580283291b76d9062c76cbe12e487e4ad841e42dde322e8a2021",
       "hash_kind": "file-bytes"
     },
     {
@@ -373,14 +475,14 @@
     },
     {
       "path": "data/regional-review/west-siberia-roles-followup-20261006/findings/followup-assessments.json",
-      "bytes": 105840,
-      "sha256": "05ad7a208d2be3531d9be343bcb51d0c02349152ae69c84bfd9b5cb185e8bb47",
+      "bytes": 105972,
+      "sha256": "7fa0d983d07534ffe068cdf056a102eb033d1c268466c4a1605d405b2c0630b0",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/west-siberia-roles-followup-20261006/findings/reproduction-result.json",
       "bytes": 247,
-      "sha256": "9653dbbc5a4557b345662bbc8c184b22f09a7be5c7c3fce562d100bede287776",
+      "sha256": "82a3375b9b9d20ec4ae1a2dfae1d6d230f48acaa7c2daa8831e14ba7cd08f85c",
       "hash_kind": "file-bytes"
     },
     {
@@ -397,14 +499,14 @@
     },
     {
       "path": "data/regional-review/west-siberia-roles-followup-20261006/sources/source-register.json",
-      "bytes": 14404,
-      "sha256": "f2d07729cb1929dcceeefc93dbf3392a117f79bc9957e7cb27995f85377e5169",
+      "bytes": 16272,
+      "sha256": "17c48b10b490c79c489ffedefcbdbe0c68065157f936a9a275cfd14275d1ca81",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/west-siberia-roles-followup-20261006/reproduce-followup.py",
-      "bytes": 13806,
-      "sha256": "6d5c0e0d04b5903a2ce6729ea5b824572927a87a430c495e089e3b8baa10df77",
+      "bytes": 13840,
+      "sha256": "145ac6073637a03d1e05f88debbab34a92e3978def08169ae6d2717c99096c94",
       "hash_kind": "file-bytes"
     },
     {
@@ -437,7 +539,7 @@
       "value": 11,
       "unit": "subjects",
       "vintage": "baseline",
-      "input_sha256": "05ad7a208d2be3531d9be343bcb51d0c02349152ae69c84bfd9b5cb185e8bb47",
+      "input_sha256": "7fa0d983d07534ffe068cdf056a102eb033d1c268466c4a1605d405b2c0630b0",
       "evaluation_commit": "00664f04790641a9e0c0b29535823076ed243b93"
     },
     {
@@ -445,7 +547,7 @@
       "value": 25,
       "unit": "subjects",
       "vintage": "baseline",
-      "input_sha256": "05ad7a208d2be3531d9be343bcb51d0c02349152ae69c84bfd9b5cb185e8bb47",
+      "input_sha256": "7fa0d983d07534ffe068cdf056a102eb033d1c268466c4a1605d405b2c0630b0",
       "evaluation_commit": "00664f04790641a9e0c0b29535823076ed243b93"
     },
     {
@@ -453,7 +555,7 @@
       "value": 9,
       "unit": "subjects",
       "vintage": "baseline",
-      "input_sha256": "05ad7a208d2be3531d9be343bcb51d0c02349152ae69c84bfd9b5cb185e8bb47",
+      "input_sha256": "7fa0d983d07534ffe068cdf056a102eb033d1c268466c4a1605d405b2c0630b0",
       "evaluation_commit": "00664f04790641a9e0c0b29535823076ed243b93"
     }
   ],
@@ -508,7 +610,8 @@
         "altai-krai-rosstat-municipal-list",
         "novosibirsk-oblast-rosstat-list",
         "omsk-oblast-rosstat-list",
-        "yamal-nenets-mchs-profile"
+        "yamal-nenets-mchs-profile",
+        "yamal-nenets-mchs-islands-note"
       ]
     },
     {
@@ -581,6 +684,14 @@
     },
     {
       "path": "data/regional-review/west-siberia-roles-followup-20261006/reproduce-followup.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/sources/mchs-yamal-current-region.html",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/sources/mchs-yamal-district-islands.html",
       "status": "added"
     },
     {

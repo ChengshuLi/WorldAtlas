@@ -54,7 +54,7 @@ def source_refs(row, category):
             "Altai Krai": ["altai-krai-rosstat-municipal-list"],
             "Novosibirsk Oblast": ["novosibirsk-oblast-rosstat-list"],
             "Omsk Oblast": ["omsk-oblast-rosstat-list"],
-            "Yamalo-Nenets Autonomous Okrug": ["yamal-nenets-mchs-profile"],
+            "Yamalo-Nenets Autonomous Okrug": ["yamal-nenets-mchs-profile", "yamal-nenets-mchs-islands-note"],
         }.get(province, [])
     return refs
 
