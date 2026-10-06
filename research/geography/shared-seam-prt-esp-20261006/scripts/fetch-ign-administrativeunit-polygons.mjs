@@ -143,6 +143,8 @@ for (const name of names) {
     queryRecord = codeQueryRecord;
     query = nameQuery;
     collection.features = [candidate];
+    collection.numberMatched = 1;
+    collection.numberReturned = 1;
     resolution = 'unique complete native feature by nationalcode crosswalk; exact nameunit query returned zero';
   }
   if (collection.numberMatched !== 1 || collection.numberReturned !== 1 || collection.features?.length !== 1) {
