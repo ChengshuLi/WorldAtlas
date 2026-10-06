@@ -1,0 +1,61 @@
+{
+  "detail": "Every complete-file/source/vintage/baseline/predecessor-code and committed-runner drift fixture was rejected before a report could be written.",
+  "fixtures": [
+    {
+      "fixture_bytes": 1129,
+      "fixture_sha256": "8f9bb98cd69c2bd6a0162ef581795a65f4154c1d22e9340971624d38d7c22310",
+      "name": "Plav +1 km2 complete transcription",
+      "outcome": "passed",
+      "rejection": "complete-file SHA-256 mismatch: Plav +1 km2 complete transcription"
+    },
+    {
+      "fixture_bytes": 8249,
+      "fixture_sha256": "51391999e4254cd55edd5e8426f8a75507b96300da9a8ab2a9dd956a66f9e1d6",
+      "name": "wrong source vintage",
+      "outcome": "passed",
+      "rejection": "complete-file SHA-256 mismatch: wrong source vintage"
+    },
+    {
+      "fixture_bytes": 610015,
+      "fixture_sha256": "0224cc891d1beca837d536fea7d776f823cbde67b005c6d68e5c5b56f99fe3c7",
+      "name": "changed comparison geometry source",
+      "outcome": "passed",
+      "rejection": "complete-file SHA-256 mismatch: changed comparison geometry source"
+    },
+    {
+      "fixture_bytes": 5180426,
+      "fixture_sha256": "6f7f8d53fe8c34ff345b75a36af857f39ea38f3885b620d30b929d631f6a1c43",
+      "name": "changed immutable baseline context",
+      "outcome": "passed",
+      "rejection": "complete-file SHA-256 mismatch: changed immutable baseline context"
+    },
+    {
+      "fixture_bytes": 14060,
+      "fixture_sha256": "7b92e6b49dddd845467af63cb966b4479db6ed51fab7ac64f1a2eadcefc68425",
+      "name": "changed original reproduction code",
+      "outcome": "passed",
+      "rejection": "complete-file SHA-256 mismatch: changed original reproduction code"
+    },
+    {
+      "fixture_bytes": 59849,
+      "fixture_sha256": "82ff260923ed9635cd1331faf26f3d0095e619a76c19af88b01f89c3697ddf9b",
+      "name": "changed additive runner code pinned at 9d6d4c66fff31de860eadee29c1b0a119099d65e",
+      "outcome": "passed",
+      "rejection": "complete-file SHA-256 mismatch: changed additive runner code pinned at 9d6d4c66fff31de860eadee29c1b0a119099d65e"
+    },
+    {
+      "name": "unmatched municipality name",
+      "outcome": "passed",
+      "rejection": "No exact normalized official municipality name: Not a Municipality in Montenegro"
+    }
+  ],
+  "kind": "negative-control",
+  "method_id": "montenegro-996-whole-input-reproduction",
+  "outcome": "passed",
+  "output_directory_absent_during_controls": true,
+  "runner_code_pin": {
+    "commit": "9d6d4c66fff31de860eadee29c1b0a119099d65e",
+    "path": "data/regional-review/montenegro-evidence-996-erratum/reproduce.py",
+    "sha256": "bc765853b9fdf63e57846368dc82ec3bee27f7da07c46ad9a55f79adf2408baf"
+  }
+}
