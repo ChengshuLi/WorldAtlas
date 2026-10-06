@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "retrieved_at": "2026-10-06",
+  "subjects": [
+    {
+      "subject_id": "gb:CHN:ADM2:17275852B723995182906",
+      "atlas_source_name": "Tashenkuergantajike",
+      "atlas_original_id": "17275852B723995182906",
+      "official_name_native": "塔什库尔干塔吉克自治县",
+      "romanized_name": "Tashkurgan Tajik Autonomous County",
+      "tier": "county-level (Atlas source role: County Level)",
+      "parent_name_native": "喀什地区",
+      "parent_romanized_name": "Kashgar Prefecture",
+      "official_code": "653131",
+      "official_code_vintage": "2010 official Xinjiang code list",
+      "identity_sources": ["xjhb-county-portal", "xinjiang-2010-code-list"],
+      "geometry_source": "geoBoundaries gbOpen CHN ADM2, reference year 2017 in Atlas source metadata; not a current official geometry",
+      "limits": ["Atlas label is source transliteration, not official English name", "2010 code is historical and not verified as current", "government portal identity does not establish boundary geometry or international boundary"]
+    },
+    {
+      "subject_id": "gb:CHN:ADM2:17275852B99352197075157",
+      "atlas_source_name": "Anketaoxian",
+      "atlas_original_id": "17275852B99352197075157",
+      "official_name_native": "阿克陶县",
+      "romanized_name": "Akto County",
+      "tier": "county-level (Atlas source role: County Level)",
+      "parent_name_native": "克孜勒苏柯尔克孜自治州",
+      "parent_romanized_name": "Kizilsu Kyrgyz Autonomous Prefecture",
+      "official_code": "653022",
+      "official_code_vintage": "2010 official Xinjiang code list",
+      "identity_sources": ["xjakt-county-overview", "xinjiang-2010-code-list"],
+      "geometry_source": "geoBoundaries gbOpen CHN ADM2, reference year 2017 in Atlas source metadata; not a current official geometry",
+      "limits": ["Atlas label is source transliteration, not official English name", "2010 code is historical and not verified as current", "government portal identity does not establish boundary geometry or international boundary"]
+    },
+    {
+      "subject_id": "gb:TJK:ADM2:16282066B16686410577714",
+      "atlas_source_name": "Murghob District",
+      "atlas_original_id": "16282066B16686410577714",
+      "official_name_native": "ноҳияи Мурғоб",
+      "romanized_name": "Murghob District (also rendered Murghab)",
+      "tier": "district (Atlas source role: District)",
+      "parent_name_native": "Вилояти Мухтори Кӯҳистони Бадахшон",
+      "parent_romanized_name": "Gorno-Badakhshan Autonomous Region",
+      "official_code": null,
+      "official_code_vintage": null,
+      "identity_sources": ["tajik-president-2026-gbao-record", "tajik-stat-admin-units-2025"],
+      "geometry_source": "geoBoundaries gbOpen TJK ADM2, reference year 2017 in Atlas source metadata; not a current official geometry",
+      "limits": ["Official 2025 statistics workbook counts administrative units but does not identify or draw district boundaries", "No current administrative code was established from inspected official sources", "identity evidence does not establish boundary geometry or international boundary"]
+    }
+  ],
+  "inherited_fragment": {
+    "issue": 1096,
+    "feature_id": "physical-gap:1418:402:f3681f4c89a36c563d6e41c6868c8cc03164f7296be7b3c71fce2bd16cba88cb",
+    "full_feature_sha256": "d17c07b3c8fcb44cf2c667f91342efbb29e2e3f81565fedb32146c13333736f3",
+    "source_commit": "c603befd3aaf4da90d59b12378e1e0739331efba",
+    "bounds": [74.12567552657974, 38.0722, 74.8665, 38.6624],
+    "role": "inherited immutable feature-level reference only; no geometry recalculation in this child"
+  }
+}
