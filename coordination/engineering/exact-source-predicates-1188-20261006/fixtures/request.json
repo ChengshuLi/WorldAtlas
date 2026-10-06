@@ -1,0 +1,134 @@
+{
+  "collections": {
+    "first": {
+      "member_ids": [
+        "first-0",
+        "first-1"
+      ],
+      "provider_id": "fixture-first"
+    },
+    "gap": {
+      "member_ids": [
+        "gap-0"
+      ],
+      "provider_id": "fixture-gap"
+    },
+    "second": {
+      "member_ids": [
+        "second-0"
+      ],
+      "provider_id": "fixture-second"
+    }
+  },
+  "context": {
+    "axis_order": [
+      "x",
+      "y"
+    ],
+    "coordinate_encoding": "IEEE754-binary64",
+    "crs": "local:test-cartesian",
+    "numeric_vintage": "analytic-binary64-v1"
+  },
+  "files": [
+    {
+      "bytes": 190,
+      "context": {
+        "axis_order": [
+          "x",
+          "y"
+        ],
+        "coordinate_encoding": "IEEE754-binary64",
+        "crs": "local:test-cartesian",
+        "numeric_vintage": "analytic-binary64-v1"
+      },
+      "path": "gap.json",
+      "provider_id": "fixture-gap",
+      "role": "gap",
+      "sha256": "d56a32fe5011c9fe7d1e0295b8a643ef6cdd25202779976cd536c5ae12eb8bab"
+    },
+    {
+      "bytes": 386,
+      "context": {
+        "axis_order": [
+          "x",
+          "y"
+        ],
+        "coordinate_encoding": "IEEE754-binary64",
+        "crs": "local:test-cartesian",
+        "numeric_vintage": "analytic-binary64-v1"
+      },
+      "path": "first.json",
+      "provider_id": "fixture-first",
+      "role": "first",
+      "sha256": "d5bfd53612ecb658616ed5e4efda26f70ffe99971110ee3c45d27bc389d974ae"
+    },
+    {
+      "bytes": 209,
+      "context": {
+        "axis_order": [
+          "x",
+          "y"
+        ],
+        "coordinate_encoding": "IEEE754-binary64",
+        "crs": "local:test-cartesian",
+        "numeric_vintage": "analytic-binary64-v1"
+      },
+      "path": "second.json",
+      "provider_id": "fixture-second",
+      "role": "second",
+      "sha256": "5019fd2badda6f4c4c8b749fa08ce76026be2722a820f10ec8279e356987b3a2"
+    }
+  ],
+  "points": [
+    {
+      "id": "first",
+      "xy": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "second",
+      "xy": [
+        3,
+        1
+      ]
+    },
+    {
+      "id": "both",
+      "xy": [
+        2,
+        1
+      ]
+    },
+    {
+      "id": "neither",
+      "xy": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": "gap-boundary",
+      "xy": [
+        0,
+        2
+      ]
+    },
+    {
+      "id": "member-boundary",
+      "xy": [
+        1.5,
+        1
+      ]
+    },
+    {
+      "id": "outside",
+      "xy": [
+        5,
+        1
+      ]
+    }
+  ],
+  "version": 1
+}
