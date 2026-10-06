@@ -352,6 +352,7 @@ def main():
 
     dgt_receipt = json_file(API / "response-receipt.json")
     ign_receipt = json_file(API / "ign-native-items/response-receipt.json")
+    ign_polygon_receipt = json_file(API / "ign-administrativeunit-native-items/response-receipt.json")
     discovery_record = json_file(API / "ign-bbox-discovery-receipt.json")
     if dgt_receipt.get("status") == "failed":
         raise RuntimeError("DGT source receipt is failed")
@@ -367,12 +368,16 @@ def main():
         "dgt_queryables": API / "dgt-municipios-queryables.json",
         "ign_collection": API / "ign-administrativeboundary-collection.json",
         "ign_queryables": API / "ign-administrativeboundary-queryables.json",
+        "ign_collection_index": API / "ign-collections.json",
+        "ign_adminunit_collection": API / "ign-administrativeunit-collection.json",
+        "ign_adminunit_queryables": API / "ign-administrativeunit-queryables.json",
     }
     for key, path in api_docs.items():
         hashes[key] = {"path": str(path.relative_to(ROOT)), "bytes": path.stat().st_size, "sha256": sha256_path(path)}
     for key, path in {
         "dgt_response_receipt": API / "response-receipt.json",
         "ign_native_items_receipt": API / "ign-native-items/response-receipt.json",
+        "ign_adminunit_items_receipt": API / "ign-administrativeunit-native-items/response-receipt.json",
         "ign_discovery_receipt": API / "ign-bbox-discovery-receipt.json",
     }.items():
         hashes[key] = {"path": str(path.relative_to(ROOT)), "bytes": path.stat().st_size, "sha256": sha256_path(path)}
@@ -411,6 +416,41 @@ def main():
         record["response_path"] = str(path.relative_to(ROOT))
         record["response_bytes"] = path.stat().st_size
         hashes["ign_" + native_id] = {"path": str(path.relative_to(ROOT)), "bytes": path.stat().st_size, "sha256": actual_sha}
+
+    if ign_polygon_receipt.get("returned_native_item_count") != 7:
+        raise RuntimeError("IGN administrativeunit direct item count differs from the retained eight-name audit")
+    ign_polygon_features = {}
+    ign_polygon_crosswalk = []
+    for record in ign_polygon_receipt["records"]:
+        query_rel = record["query_response"]["path"]
+        query_path = API / query_rel
+        query_hash = sha256_path(query_path)
+        if query_hash != record["query_response"]["sha256"]:
+            raise RuntimeError(f"IGN administrativeunit name-response bytes changed: {query_path.name}")
+        hashes["ign_adminunit_query_" + normalize_name(record["nameunit"]).replace(" ", "_")] = {"path": str(query_path.relative_to(ROOT)), "bytes": query_path.stat().st_size, "sha256": query_hash}
+        query_receipt_path = query_path.with_name(query_path.stem + "-receipt.json")
+        hashes["ign_adminunit_query_receipt_" + normalize_name(record["nameunit"]).replace(" ", "_")] = {"path": str(query_receipt_path.relative_to(ROOT)), "bytes": query_receipt_path.stat().st_size, "sha256": sha256_path(query_receipt_path)}
+        if record.get("native_item_response") is None:
+            ign_polygon_crosswalk.append({"requested_nameunit": record["nameunit"], "resolution": record["resolution"], "candidate_ids": record.get("candidates", []), "query_response_path": str(query_path.relative_to(ROOT))})
+            continue
+        item_rel = record["native_item_response"]["path"]
+        item_path = API / item_rel
+        item_sha = sha256_path(item_path)
+        if item_sha != record["native_item_response"]["sha256"]:
+            raise RuntimeError(f"IGN administrativeunit direct feature bytes changed: {item_path.name}")
+        feature = json_file(item_path)
+        native_id = str(record["gid"])
+        if str(feature.get("id")) != native_id or feature.get("properties", {}).get("nameunit") != record["nameunit"] or feature.get("properties", {}).get("country") != "ES" or not feature.get("geometry"):
+            raise RuntimeError(f"IGN administrativeunit native identity/full geometry mismatch: {native_id}")
+        ign_polygon_features[normalize_name(record["nameunit"])] = (native_id, feature, item_path, record)
+        item_receipt_path = item_path.with_name(item_path.stem + "-receipt.json")
+        hashes["ign_adminunit_" + native_id] = {"path": str(item_path.relative_to(ROOT)), "bytes": item_path.stat().st_size, "sha256": item_sha}
+        hashes["ign_adminunit_receipt_" + native_id] = {"path": str(item_receipt_path.relative_to(ROOT)), "bytes": item_receipt_path.stat().st_size, "sha256": sha256_path(item_receipt_path)}
+        ign_polygon_crosswalk.append({"requested_nameunit": record["nameunit"], "resolution": record["resolution"], "native_id": native_id, "nameunit": feature["properties"]["nameunit"], "nationalcode": feature["properties"].get("nationalcode"), "nationallevelname": feature["properties"].get("nationallevelname"), "response_path": str(item_path.relative_to(ROOT)), "response_receipt": record["native_item_response"]})
+
+    ign_adminunit_collection = json_file(API / "ign-administrativeunit-collection.json")
+    if ign_adminunit_collection.get("storageCRS") != "http://www.opengis.net/def/crs/OGC/1.3/CRS84":
+        raise RuntimeError("IGN administrativeunit storage CRS changed from the pinned service metadata")
 
     part19 = json_file(pin_paths["baseline_part19"])
     part28 = json_file(pin_paths["baseline_part28"])
@@ -539,6 +579,9 @@ def main():
         "spanish_exact_55_raw_members": [(identity, esp_raw_features[identity]["geometry"]) for identity in sorted(member_ids)],
         "spanish_exact_55_baseline_simplified_members": [(identity, esp_simple_features[identity]["geometry"]) for identity in sorted(member_ids)],
         "spanish_three_current_atlas_districts": [(subject, shape(current[subject]["geometry"])) for subject in spanish_subjects],
+        "spanish_eight_ign_border_member_raw_polygons": [],
+        "spanish_eight_ign_border_member_baseline_simplified_polygons": [],
+        "spanish_seven_returned_ign_administrativeunit_polygons": [(native_id, shape(feature["geometry"])) for native_id, feature, _, _ in ign_polygon_features.values()],
         "portugal_four_geoboundaries_raw_municipalities": [(subject, shape(prt_raw_features[subject]["geometry"])) for subject in portuguese_subjects],
         "portugal_four_geoboundaries_baseline_simplified_municipalities": [(subject, shape(prt_simple_features[subject]["geometry"])) for subject in portuguese_subjects],
         "portugal_four_dgt_caop2025_municipalities": [(subject, shape(dgt_items[subject][0]["geometry"])) for subject in portuguese_subjects],
@@ -546,7 +589,41 @@ def main():
         "combined_seven_current_atlas_subjects": [(subject, geom) for subject, geom in current_geometries.items()],
         "combined_2018_spanish_raw_and_caop2025_portuguese": [(identity, esp_raw_features[identity]["geometry"]) for identity in sorted(member_ids)] + [(subject, shape(dgt_items[subject][0]["geometry"])) for subject in portuguese_subjects],
     }
+    border_member_ids = []
+    for native_id in IGN_BORDER_IDS:
+        properties = ign_items[native_id]["properties"]
+        name_key = normalize_name(properties.get("name_boundary", "").split("#", 1)[0])
+        matches = member_name_index.get(name_key, [])
+        if len(matches) != 1:
+            raise RuntimeError(f"IGN border line does not have a unique exact-seven-roster source member crosswalk: {native_id}")
+        border_member_ids.extend(matches)
+    if len(set(border_member_ids)) != 8:
+        raise RuntimeError("Eight IGN municipal line items did not crosswalk to eight distinct exact Spanish source members")
+    coverage_inputs["spanish_eight_ign_border_member_raw_polygons"] = [(identity, esp_raw_features[identity]["geometry"]) for identity in border_member_ids]
+    coverage_inputs["spanish_eight_ign_border_member_baseline_simplified_polygons"] = [(identity, esp_simple_features[identity]["geometry"]) for identity in border_member_ids]
+    coverage_inputs["combined_seven_returned_ign_and_four_caop_polygons"] = [(native_id, shape(feature["geometry"])) for native_id, feature, _, _ in ign_polygon_features.values()] + [(subject, shape(dgt_items[subject][0]["geometry"])) for subject in portuguese_subjects]
     gap_coverage = {name: gap_coverage_record(gap_projected, members) for name, members in coverage_inputs.items()}
+    gap_coverage["spanish_seven_returned_ign_administrativeunit_polygons"]["requested_member_count"] = 8
+    gap_coverage["spanish_seven_returned_ign_administrativeunit_polygons"]["missing_nameunit"] = [row["nameunit"] for row in ign_polygon_crosswalk if row.get("native_id") is None]
+    gap_coverage["combined_seven_returned_ign_and_four_caop_polygons"]["missing_spanish_nameunit"] = [row["nameunit"] for row in ign_polygon_crosswalk if row.get("native_id") is None]
+
+    ign_lines = [projected(shape(ign_items[native_id]["geometry"])) for native_id in IGN_BORDER_IDS]
+    ign_line_union = ign_lines[0]
+    for line in ign_lines[1:]:
+        ign_line_union = ign_line_union.union(line)
+    ign_line_intersection = gap_projected.intersection(ign_line_union)
+    ign_line_boundary_contact = gap_projected.boundary.intersection(ign_line_union)
+    ign_line_gap_coverage = {
+        "native_line_item_count": len(IGN_BORDER_IDS),
+        "total_unique_line_length_m": metric(ign_line_union.length),
+        "line_length_inside_gap_polygon_m": metric(ign_line_intersection.length),
+        "gap_polygon_boundary_contact_length_m": metric(ign_line_boundary_contact.length),
+        "gap_intersection_geometry_type": ign_line_intersection.geom_type,
+        "gap_intersection_parts": geometry_parts(ign_line_intersection),
+        "boundary_contact_geometry_type": ign_line_boundary_contact.geom_type,
+        "boundary_contact_parts": geometry_parts(ign_line_boundary_contact),
+        "operation_errors": [],
+    }
 
     # Pairwise measurements only. Names and identifiers establish the crosswalk;
     # distances never assign ownership or resolve a disputed boundary.
@@ -586,6 +663,19 @@ def main():
             "spanish_member_relations": [],
             "portugal_caop_relations": [],
         }
+        if native_id in IGN_BORDER_IDS:
+            polygon_match = ign_polygon_features.get(normalize_name(spanish_name))
+            line_row["ign_administrativeunit_polygon_crosswalk"] = ({
+                "resolution": "unique exact normalized nameunit match",
+                "native_id": polygon_match[0],
+                "nameunit": polygon_match[1]["properties"].get("nameunit"),
+                "nationalcode": polygon_match[1]["properties"].get("nationalcode"),
+                "nationallevelname": polygon_match[1]["properties"].get("nationallevelname"),
+                "geometry": geometry_record(shape(polygon_match[1]["geometry"])),
+                "line_to_polygon_boundary": safe_geometry_metrics(line_projected, projected(shape(polygon_match[1]["geometry"]).boundary)),
+                "native_response": polygon_match[3]["native_item_response"],
+            } if polygon_match else {"resolution": "no exact nameunit item returned by IGN administrativeunit query", "requested_nameunit": spanish_name,
+                "query_response": next(row["query_response_path"] for row in ign_polygon_crosswalk if row["requested_nameunit"] == spanish_name)})
         for identity in matched_ids:
             source_geom = esp_raw_features[identity]["geometry"]
             metric_pair = safe_geometry_metrics(line_projected, projected(source_geom.boundary) if source_geom else None)
@@ -626,6 +716,7 @@ def main():
             "prt_baseline_simplified": {"release_commit": "90a1d5290ede3adc147c5a2351472fd000412e72", "vintage": "2020", "license": "CC0 1.0", "role": "whole source file consumed by the baseline administrative importer"},
             "portugal_current_admin": {"product": dgt_collection.get("title"), "description": dgt_collection.get("description"), "service_temporal_extent": dgt_collection.get("extent", {}).get("temporal"), "geometry_crs_default": "OGC:CRS84 as declared by OGC API Features", "license": "CC BY 4.0 per DGT official open-data terms", "metadata_route": "https://ogcapi.dgterritorio.gov.pt/collections/municipios?f=json", "product_page": "https://www.dgterritorio.gov.pt/atividades/cartografia/cartografia-tematica/caop?language=pt", "reuse_terms": "https://www.dgterritorio.gov.pt/dados-abertos"},
             "spain_admin_line_service": {"product": collection.get("title"), "description": collection.get("description"), "date_boundary_per_item": "record field", "geometry_crs_default": "OGC:CRS84 as declared by OGC API Features", "license": "CC BY 4.0 with mandatory attribution per linked IGN license", "license_url": next((link.get("href") for link in collection.get("links", []) if link.get("rel") == "license"), None), "metadata_route": "https://api-features.ign.es/collections/administrativeboundary?f=json"},
+            "spain_admin_polygon_service": {"product": ign_adminunit_collection.get("title"), "description": ign_adminunit_collection.get("description"), "collection_id": ign_adminunit_collection.get("id"), "metadata_catalog_id": "spaignLLM", "storage_crs": ign_adminunit_collection.get("storageCRS"), "feature_crs_list": ign_adminunit_collection.get("crs"), "returned_geometry_policy": "Complete direct item geometries in collection storage CRS84; no bbox or output CRS parameter", "license": "CC BY 4.0 with mandatory attribution per linked IGN license", "version_status": "Current API snapshot; collection response declares no represented publication vintage or feature validity date", "metadata_route": "https://api-features.ign.es/collections/administrativeunit?f=json"},
         },
         "baseline_source_member_counts": {
             "Spanish_subjects": {subject: len(ids) for subject, ids in member_groups.items()},
@@ -645,6 +736,7 @@ def main():
         },
         "portuguese_subject_crosswalk_and_comparison": subject_rows,
         "spanish_source_member_crosswalk": esp_member_rows,
+        "ign_administrativeunit_municipality_crosswalk": ign_polygon_crosswalk,
         "ign_selected_line_items": line_rows,
         "ign_country_level_status_control": {
             "native_id": IGN_COUNTRY_ID,
@@ -669,6 +761,7 @@ def main():
         "full_gap": gap_source,
         "gap_to_subject_geometry_comparisons": gap_relation_rows,
         "full_gap_areal_coverage_and_boundary_contacts": gap_coverage,
+        "ign_selected_line_geometry_overlay": ign_line_gap_coverage,
         "physical_water_evidence": {
             "status": "not established",
             "explanation": "The retained geoBoundaries administrative polygons, CAOP municipal polygons, and IGN administrative-boundary line records are not physical water/shoreline or seasonal-channel observations. No dated hydrographic source for the exact gap was retained.",
@@ -679,14 +772,15 @@ def main():
                 "The 2018 Spanish ADM3 native source contains every member linked from the three exact Atlas districts; all eight selected Spain–Portugal municipal line items are separately preserved by native IGN ID and named member crosswalk.",
                 "The four exact Portugal Atlas municipalities crosswalk by native geoBoundaries IDs/names to complete CAOP2025 municipality items.",
                 "The selected IGN municipality rows carry line-level `legalstatus=agreed`, item dates, `accuracy` method 3 and per-record source URLs; the country-level Spain–Portugal row carries an explicitly unpopulated legal-status field.",
+                "IGN exposes a distinct current `administrativeunit` polygon collection; exact nameunit queries returned complete direct municipality polygons for seven of the eight Spanish municipalities named by the selected border-line items. The full-gap coverage ledger measures those seven separately from line contacts and the 2018 Spanish source-member coverage.",
             ],
             "unresolved": [
-                "The IGN line-level `agreed` attribute and CAOP2025 administrative polygons do not by themselves establish one mutually authoritative bilateral international boundary or its adopted coordinate realization.",
-                "The exact point-by-point bilateral boundary instrument/registered cross-border line coordinates and a source crosswalk linking that legal record to both countries' current administrative units remain unestablished by the retained responses.",
+                "The exact nameunit query for the eighth named Spanish border municipality, Zarza la Mayor, returned zero features from the IGN administrativeunit collection. The selected 2022 border-line feature is retained, but there is no matched IGN polygon item for this area in the retrieved exact-name set.",
+                "The exact point-by-point bilateral boundary instrument/registered cross-border line coordinates and a complete cross-provider crosswalk linking that record to both countries' current administrative units remain unestablished by the retained responses; item-level `agreed` status is not treated as bilateral authority.",
                 "The CAOP2025 collection metadata reports a 2000–2007 temporal extent despite its CAOP2025 title; the DGT product version page and direct item features must be considered alongside that metadata discrepancy.",
-                "Physical water/land position, seasonal channel movement, and any consequence for the limited-AOI pilot remain unknown.",
+                "Physical water/land position, seasonal channel movement, datum/registration history, and any consequence for the limited-AOI pilot remain unknown; no dated physical-water source was retained.",
             ],
-            "recommendation": "Keep this exact source seam unresolved for engineering integration; use the retained official line features only as dated diagnostics. Request the bilateral legal boundary record/coordinate annex and explicit source-member crosswalk before proposing any seam geometry change. This packet makes no ownership, water/dry-land, or map-repair claim."
+            "recommendation": "The retained sources support a limited, explicitly labeled modern administrative reference comparison using unchanged CAOP2025 Portuguese municipality polygons and seven retrieved IGN Spanish municipality polygons, with the Zarza la Mayor polygon unavailable in the exact-name query. Do not close or assign that missing section from line contacts or proximity. The packet does not propose a single complete, mutually authoritative seam or any engineering geometry edit; preserve the area-coverage/residual ledger, line contacts, and missing polygon record as separate evidence. This packet makes no ownership or water/dry-land claim."
         }
     }
     destination = output_dir / "report.json"
