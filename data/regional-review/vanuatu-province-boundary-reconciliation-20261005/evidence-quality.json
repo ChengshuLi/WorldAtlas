@@ -1,0 +1,988 @@
+{
+  "baseline": {
+    "commit": "a32ae163473a42ed28d7bedf7e9930414beb54f8",
+    "files": [
+      {
+        "bytes": 944,
+        "hash_kind": "file-bytes",
+        "path": "data/world-index.json",
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+      },
+      {
+        "bytes": 661416,
+        "hash_kind": "file-bytes",
+        "path": "data/administrative-sources.json",
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+      },
+      {
+        "bytes": 6613963,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-28.json",
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+      },
+      {
+        "bytes": 2826,
+        "hash_kind": "file-bytes",
+        "path": "data/validation/macro-publication-v5.json",
+        "sha256": "aae3967fde4f5bf92b3cb0b42c490c6c6a5921c7421dcdc9533f242afbd6a674"
+      },
+      {
+        "bytes": 10164089,
+        "hash_kind": "file-bytes",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      {
+        "bytes": 1094439,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/sources/vanuatu-2017-adm1.geojson",
+        "sha256": "69f44b96d0690310c67a4a430488fb7a02d028bdec8bbc755436cdfb90962c8d"
+      },
+      {
+        "bytes": 9302,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/source-acquisition.json",
+        "sha256": "8ca953420a96d12200f4ca56d5b91abf5aafe276918a36c1745dae72bfd42d2c"
+      },
+      {
+        "bytes": 12313,
+        "hash_kind": "file-bytes",
+        "path": "scripts/administrative.py",
+        "sha256": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22"
+      }
+    ],
+    "pin_files": {
+      "geography_part_28": "data/geography/part-28.json",
+      "macro_publication_v5": "data/validation/macro-publication-v5.json",
+      "source_registry": "data/administrative-sources.json",
+      "world_index": "data/world-index.json"
+    },
+    "pins": {
+      "geography_part_28": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "macro_publication_v5": "aae3967fde4f5bf92b3cb0b42c490c6c6a5921c7421dcdc9533f242afbd6a674",
+      "source_registry": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "world_index": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+    },
+    "subject_files": {
+      "gb:VUT:ADM1:32282491B17169683382430": "data/geography/part-28.json",
+      "gb:VUT:ADM1:32282491B5439526076152": "data/geography/part-28.json",
+      "gb:VUT:ADM1:32282491B61228346728599": "data/geography/part-28.json",
+      "gb:VUT:ADM1:32282491B7486560380604": "data/geography/part-28.json",
+      "gb:VUT:ADM1:32282491B78905986242135": "data/geography/part-28.json",
+      "gb:VUT:ADM1:32282491B8417950609019": "data/geography/part-28.json"
+    }
+  },
+  "change_receipts": [
+    {
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/README.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduce.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/validate.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/source-inventory.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/checks/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/checks/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/checks/reproducibility.json",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 data/regional-review/vanuatu-province-boundary-reconciliation-20261005/validate.py",
+    "node scripts/evidence-quality.mjs data/regional-review/vanuatu-province-boundary-reconciliation-20261005/evidence-quality.json",
+    "node --test test/evidence-quality.test.mjs",
+    "python test/evidence-geography.py && python test/ellipsoidal-area.py"
+  ],
+  "conclusions": [
+    {
+      "source_ids": [
+        "dla-provinces",
+        "dla-area-councils"
+      ],
+      "status": "supported",
+      "text": "DLA evidence supports the six-unit Vanuatu provincial tier and broad island-group identity; exact legal geography is not certified."
+    },
+    {
+      "source_ids": [
+        "geoboundaries-vut-adm1-2017"
+      ],
+      "status": "supported",
+      "text": "Pinned 2017 OSM-derived source identity, ODbL license and exact upstream LFS data object were reconciled to retained bytes, but the administrative-registry digest remains unreconciled because its generated cache input is not present in the baseline."
+    },
+    {
+      "source_ids": [
+        "decentralization-act-cap230",
+        "duap-municipalities",
+        "dla-profile-torba",
+        "dla-profile-sanma",
+        "dla-profile-penama",
+        "dla-profile-malampa",
+        "dla-profile-shefa",
+        "dla-profile-tafea"
+      ],
+      "status": "unresolved",
+      "text": "Current legal boundary-defining Orders, precise municipality exclusions and island completeness have not been established for any of the six subjects."
+    },
+    {
+      "source_ids": [
+        "dla-area-councils",
+        "ocha-spc-adm2-context"
+      ],
+      "status": "unresolved",
+      "text": "DLA ADM2 roster (71) and OCHA/SPC 2018 neighboring tier (66, blank license metadata) differ in apparent granularity; no verified crosswalk or provincial boundary inference is available."
+    }
+  ],
+  "issue": 912,
+  "lane": "geography",
+  "methods": [
+    {
+      "description": "Verify exact indexed six-subject roster and matching source native IDs/names, plus absent-ID and wrong-name controls.",
+      "id": "identity-and-scope",
+      "kind": "code",
+      "software": "Python 3.13; repository immutable.py",
+      "units": "IDs/features"
+    },
+    {
+      "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+      "axis_order": "longitude-latitude",
+      "crs": "EPSG:4326",
+      "description": "Canonicalize source and Atlas MultiPolygon geometries using shared repository helper without repair; calculate intersection/union Jaccard and symmetric difference.",
+      "distance_method": "WGS84 inverse geodesic",
+      "helper_version": "worldatlas-evidence-geometry-v1",
+      "id": "geodesic-overlap-screen",
+      "kind": "geography",
+      "software": "Python 3.13; Shapely 2.1.2; pyproj 3.7.2; repository geometry.py and ellipsoidal_area.py",
+      "units": "ratio and km2"
+    },
+    {
+      "description": "Run the baseline-only reproduction twice and compare whole-file output hashes.",
+      "id": "deterministic-reproduction",
+      "kind": "code",
+      "software": "Python 3.13 bundled runtime",
+      "units": "SHA-256 byte digests"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "json_pointer": "/subjects/0/jaccard",
+      "metric_id": "shefa-province:jaccard",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/0/symmetric_difference_km2",
+      "metric_id": "shefa-province:symmetric-difference",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/0/atlas_area_km2",
+      "metric_id": "shefa-province:atlas-area",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/0/source_area_km2",
+      "metric_id": "shefa-province:source-area",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/1/jaccard",
+      "metric_id": "malampa:jaccard",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/1/symmetric_difference_km2",
+      "metric_id": "malampa:symmetric-difference",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/1/atlas_area_km2",
+      "metric_id": "malampa:atlas-area",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/1/source_area_km2",
+      "metric_id": "malampa:source-area",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/2/jaccard",
+      "metric_id": "tafea:jaccard",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/2/symmetric_difference_km2",
+      "metric_id": "tafea:symmetric-difference",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/2/atlas_area_km2",
+      "metric_id": "tafea:atlas-area",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/2/source_area_km2",
+      "metric_id": "tafea:source-area",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/3/jaccard",
+      "metric_id": "sanma:jaccard",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/3/symmetric_difference_km2",
+      "metric_id": "sanma:symmetric-difference",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/3/atlas_area_km2",
+      "metric_id": "sanma:atlas-area",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/3/source_area_km2",
+      "metric_id": "sanma:source-area",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/4/jaccard",
+      "metric_id": "penama:jaccard",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/4/symmetric_difference_km2",
+      "metric_id": "penama:symmetric-difference",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/4/atlas_area_km2",
+      "metric_id": "penama:atlas-area",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/4/source_area_km2",
+      "metric_id": "penama:source-area",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/5/jaccard",
+      "metric_id": "torba:jaccard",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/5/symmetric_difference_km2",
+      "metric_id": "torba:symmetric-difference",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/5/atlas_area_km2",
+      "metric_id": "torba:atlas-area",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/5/source_area_km2",
+      "metric_id": "torba:source-area",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    }
+  ],
+  "metrics": [
+    {
+      "evaluation_commit": "a32ae163473a42ed28d7bedf7e9930414beb54f8",
+      "id": "shefa-province:jaccard",
+      "input_sha256": "69f44b96d0690310c67a4a430488fb7a02d028bdec8bbc755436cdfb90962c8d",
+      "unit": "ratio",
+      "value": 0.9466236776638437,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a32ae163473a42ed28d7bedf7e9930414beb54f8",
+      "id": "shefa-province:symmetric-difference",
+      "input_sha256": "69f44b96d0690310c67a4a430488fb7a02d028bdec8bbc755436cdfb90962c8d",
+      "unit": "km2",
+      "value": 80.96586367437172,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a32ae163473a42ed28d7bedf7e9930414beb54f8",
+      "id": "shefa-province:atlas-area",
+      "input_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "unit": "km2",
+      "value": 1458.2245656516661,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a32ae163473a42ed28d7bedf7e9930414beb54f8",
+      "id": "shefa-province:source-area",
+      "input_sha256": "69f44b96d0690310c67a4a430488fb7a02d028bdec8bbc755436cdfb90962c8d",
+      "unit": "km2",
+      "value": 1494.5841033012307,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a32ae163473a42ed28d7bedf7e9930414beb54f8",
+      "id": "malampa:jaccard",
+      "input_sha256": "69f44b96d0690310c67a4a430488fb7a02d028bdec8bbc755436cdfb90962c8d",
+      "unit": "ratio",
+      "value": 0.9710152683566264,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a32ae163473a42ed28d7bedf7e9930414beb54f8",
+      "id": "malampa:symmetric-difference",
+      "input_sha256": "69f44b96d0690310c67a4a430488fb7a02d028bdec8bbc755436cdfb90962c8d",
+      "unit": "km2",
+      "value": 81.89064899328518,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a32ae163473a42ed28d7bedf7e9930414beb54f8",
+      "id": "malampa:atlas-area",
+      "input_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "unit": "km2",
+      "value": 2778.652388941386,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a32ae163473a42ed28d7bedf7e9930414beb54f8",
+      "id": "malampa:source-area",
+      "input_sha256": "69f44b96d0690310c67a4a430488fb7a02d028bdec8bbc755436cdfb90962c8d",
+      "unit": "km2",
+      "value": 2790.062943232212,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a32ae163473a42ed28d7bedf7e9930414beb54f8",
+      "id": "tafea:jaccard",
+      "input_sha256": "69f44b96d0690310c67a4a430488fb7a02d028bdec8bbc755436cdfb90962c8d",
+      "unit": "ratio",
+      "value": 0.9744589489460257,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a32ae163473a42ed28d7bedf7e9930414beb54f8",
+      "id": "tafea:symmetric-difference",
+      "input_sha256": "69f44b96d0690310c67a4a430488fb7a02d028bdec8bbc755436cdfb90962c8d",
+      "unit": "km2",
+      "value": 42.15064037608147,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a32ae163473a42ed28d7bedf7e9930414beb54f8",
+      "id": "tafea:atlas-area",
+      "input_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "unit": "km2",
+      "value": 1623.6599217456253,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a32ae163473a42ed28d7bedf7e9930414beb54f8",
+      "id": "tafea:source-area",
+      "input_sha256": "69f44b96d0690310c67a4a430488fb7a02d028bdec8bbc755436cdfb90962c8d",
+      "unit": "km2",
+      "value": 1634.8085304132726,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a32ae163473a42ed28d7bedf7e9930414beb54f8",
+      "id": "sanma:jaccard",
+      "input_sha256": "69f44b96d0690310c67a4a430488fb7a02d028bdec8bbc755436cdfb90962c8d",
+      "unit": "ratio",
+      "value": 0.981439639771609,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a32ae163473a42ed28d7bedf7e9930414beb54f8",
+      "id": "sanma:symmetric-difference",
+      "input_sha256": "69f44b96d0690310c67a4a430488fb7a02d028bdec8bbc755436cdfb90962c8d",
+      "unit": "km2",
+      "value": 79.04345226369858,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a32ae163473a42ed28d7bedf7e9930414beb54f8",
+      "id": "sanma:atlas-area",
+      "input_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "unit": "km2",
+      "value": 4208.600903901816,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a32ae163473a42ed28d7bedf7e9930414beb54f8",
+      "id": "sanma:source-area",
+      "input_sha256": "69f44b96d0690310c67a4a430488fb7a02d028bdec8bbc755436cdfb90962c8d",
+      "unit": "km2",
+      "value": 4229.803720390602,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a32ae163473a42ed28d7bedf7e9930414beb54f8",
+      "id": "penama:jaccard",
+      "input_sha256": "69f44b96d0690310c67a4a430488fb7a02d028bdec8bbc755436cdfb90962c8d",
+      "unit": "ratio",
+      "value": 0.9644719082140254,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a32ae163473a42ed28d7bedf7e9930414beb54f8",
+      "id": "penama:symmetric-difference",
+      "input_sha256": "69f44b96d0690310c67a4a430488fb7a02d028bdec8bbc755436cdfb90962c8d",
+      "unit": "km2",
+      "value": 43.23318812149238,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a32ae163473a42ed28d7bedf7e9930414beb54f8",
+      "id": "penama:atlas-area",
+      "input_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "unit": "km2",
+      "value": 1193.8927329258443,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a32ae163473a42ed28d7bedf7e9930414beb54f8",
+      "id": "penama:source-area",
+      "input_sha256": "69f44b96d0690310c67a4a430488fb7a02d028bdec8bbc755436cdfb90962c8d",
+      "unit": "km2",
+      "value": 1196.6207818109756,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a32ae163473a42ed28d7bedf7e9930414beb54f8",
+      "id": "torba:jaccard",
+      "input_sha256": "69f44b96d0690310c67a4a430488fb7a02d028bdec8bbc755436cdfb90962c8d",
+      "unit": "ratio",
+      "value": 0.9362145371038632,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a32ae163473a42ed28d7bedf7e9930414beb54f8",
+      "id": "torba:symmetric-difference",
+      "input_sha256": "69f44b96d0690310c67a4a430488fb7a02d028bdec8bbc755436cdfb90962c8d",
+      "unit": "km2",
+      "value": 55.74858137619853,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a32ae163473a42ed28d7bedf7e9930414beb54f8",
+      "id": "torba:atlas-area",
+      "input_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "unit": "km2",
+      "value": 836.226140270703,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "a32ae163473a42ed28d7bedf7e9930414beb54f8",
+      "id": "torba:source-area",
+      "input_sha256": "69f44b96d0690310c67a4a430488fb7a02d028bdec8bbc755436cdfb90962c8d",
+      "unit": "km2",
+      "value": 856.0280001321944,
+      "vintage": "baseline"
+    }
+  ],
+  "outputs": [
+    {
+      "bytes": 5463,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/README.md",
+      "sha256": "b786549e11b15ed9704b61d1b871c2d0c803dcbd619cf048d938ef84eca5c5b8"
+    },
+    {
+      "bytes": 7222,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduce.py",
+      "sha256": "07376c68f0a79c69c2b30290c0d8e455f0e56f74d06f46a45bb814aed87276c9"
+    },
+    {
+      "bytes": 2738,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/validate.py",
+      "sha256": "a0a949eeaf60cdd68e69c91a51bd28b5b1cbdaff64de5d49166a23c16560189f"
+    },
+    {
+      "bytes": 8967,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json",
+      "sha256": "66c8a66ee5ed6e5c06468e5d51b4ffc9aa25c533577e57f691402ec99b990a3a"
+    },
+    {
+      "bytes": 11512,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/source-inventory.json",
+      "sha256": "c296b2029a30c23aaf3f1a90456da3ad978c71cc6eddac6faa60a518a4615775"
+    },
+    {
+      "bytes": 652,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/checks/positive-control.json",
+      "sha256": "2bc367c267b28553a58ba86b7a7ec12f04d6c9876a2d42dddae6a9214d31672f"
+    },
+    {
+      "bytes": 325,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/checks/negative-control.json",
+      "sha256": "cee53a60a796484686281489f747f50ee96f978969d7b12919b4c20b0aff8f03"
+    },
+    {
+      "bytes": 429,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/checks/reproducibility.json",
+      "sha256": "93e4187448ea6cb2999483e33c63412aec0459a06c6c42f24e63979db1270551"
+    }
+  ],
+  "sources": [
+    {
+      "id": "dla-provinces",
+      "license": {
+        "status": "unknown",
+        "terms": "No reuse license located; restoration-only"
+      },
+      "limit": "Lists six named provinces and island groups in a table. Introductory paragraph says six but omits Shefa from its following enumeration, an internal inconsistency.",
+      "restoration": "Retrieve original bytes from https://dla.gov.vu/index.php/about-us/provinces, verify SHA-256 3853804bbd53d4d58953942a8cf1cb3cf855b838a90b4fd92980ec52a5ac929d, then inspect the cited facts. No source payload retained.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "Lists six named provinces and island groups in a table. Introductory paragraph says six but omits Shefa from its following enumeration, an internal inconsistency.",
+      "temporal_status": "reference",
+      "url": "https://dla.gov.vu/index.php/about-us/provinces",
+      "verification": "verified",
+      "vintage": "page states written 2024-10-29; retrieved 2026-10-06"
+    },
+    {
+      "id": "dla-area-councils",
+      "license": {
+        "status": "unknown",
+        "terms": "No reuse license located; restoration-only"
+      },
+      "limit": "Lists 71 named area councils: Torba 9, Sanma 11, Penama 10, Malampa 10, Shefa 19, Tafea 12. This is a subordinate governance roster, not provincial boundary authority or proof of island coverage.",
+      "restoration": "Retrieve original bytes from https://dla.gov.vu/index.php/about-us/area-councils, verify SHA-256 b5c11f57513f06b68590693fd51fbc9c4367c99a0bffe934f54b82fa9141c584, then inspect the cited facts. No source payload retained.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "Lists 71 named area councils: Torba 9, Sanma 11, Penama 10, Malampa 10, Shefa 19, Tafea 12. This is a subordinate governance roster, not provincial boundary authority or proof of island coverage.",
+      "temporal_status": "reference",
+      "url": "https://dla.gov.vu/index.php/about-us/area-councils",
+      "verification": "verified",
+      "vintage": "page states written 2024-10-28; retrieved 2026-10-06"
+    },
+    {
+      "id": "dla-provincial-profile-index",
+      "license": {
+        "status": "unknown",
+        "terms": "No redistribution permission located; PDF originals not retained"
+      },
+      "limit": "Links six official provincial profiles with maps and governance information. Asset modified labels are not treated as map-data vintages.",
+      "restoration": "Retrieve original bytes from https://dla.gov.vu/index.php/resources/provincial-profiles, verify SHA-256 b3fc3b715fa253ec55bbb58b743b803f891445446b7a2a18701b6edf7b202ae7, then inspect the cited facts. No source payload retained.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "Links six official provincial profiles with maps and governance information. Asset modified labels are not treated as map-data vintages.",
+      "temporal_status": "reference",
+      "url": "https://dla.gov.vu/index.php/resources/provincial-profiles",
+      "verification": "verified",
+      "vintage": "web assets show modified 2026-11-02; profile text says published 2023 and updated 2025-02-28; retrieved 2026-10-06"
+    },
+    {
+      "id": "dla-decentralization-brochure",
+      "license": {
+        "status": "unknown",
+        "terms": "No redistribution permission located; restoration-only"
+      },
+      "limit": "Graphic shows six provinces and an Area Councils (71) heading, but its per-province labels are Torba 9, Sanma 11, Penama 10, Malampa 19, Shefa 19 and Tafea 12 (sum 80). This conflicts internally with the heading and DLA current area-council roster (Malampa list is 10). Do not use graphic count as geometry or temporal proof.",
+      "restoration": "Retrieve original bytes from https://dla.gov.vu/images/brochures/DLA%20Brochure.pdf, verify SHA-256 4f5965faaf9139111ac31f2ee67a20d3a32c82c237fb0e3430209f27d767aba3, then inspect the cited facts. No source payload retained.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "Graphic shows six provinces and an Area Councils (71) heading, but its per-province labels are Torba 9, Sanma 11, Penama 10, Malampa 19, Shefa 19 and Tafea 12 (sum 80). This conflicts internally with the heading and DLA current area-council roster (Malampa list is 10). Do not use graphic count as geometry or temporal proof.",
+      "temporal_status": "reference",
+      "url": "https://dla.gov.vu/images/brochures/DLA%20Brochure.pdf",
+      "verification": "verified",
+      "vintage": "DLA gallery lists modified 2024-10-27; retrieved 2026-10-06"
+    },
+    {
+      "id": "dla-profile-torba",
+      "license": {
+        "status": "unknown",
+        "terms": "No redistribution permission located; restoration-only"
+      },
+      "limit": "Island/council group list and map; profile-era council count 7 differs from current DLA roster count 9.",
+      "restoration": "Retrieve original bytes from https://dla.gov.vu/images/provincial-profiles/Torba%20Provincial%20Profile.pdf, verify SHA-256 2ab870f1b6429035b99d1577909826ad3ae570bee1d563756a3b905740044713, then inspect the cited facts. No source payload retained.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "Island/council group list and map; profile-era council count 7 differs from current DLA roster count 9.",
+      "temporal_status": "reference",
+      "url": "https://dla.gov.vu/images/provincial-profiles/Torba%20Provincial%20Profile.pdf",
+      "verification": "verified",
+      "vintage": "Profile text published 2023, updated 2025-02-28; internal area-council count is older than current roster"
+    },
+    {
+      "id": "dla-profile-sanma",
+      "license": {
+        "status": "unknown",
+        "terms": "No redistribution permission located; restoration-only"
+      },
+      "limit": "Identifies Santo and Malo/Aore groupings; current council names further subdivide Santo and Malo and do not identify Aore as a separate council.",
+      "restoration": "Retrieve original bytes from https://dla.gov.vu/images/provincial-profiles/Sanma%20Provincial%20Profile.pdf, verify SHA-256 40220e95482a7304dd8e85ad5f49a4de0620e9d2adf3b0f12b5a8275957d695a, then inspect the cited facts. No source payload retained.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "Identifies Santo and Malo/Aore groupings; current council names further subdivide Santo and Malo and do not identify Aore as a separate council.",
+      "temporal_status": "reference",
+      "url": "https://dla.gov.vu/images/provincial-profiles/Sanma%20Provincial%20Profile.pdf",
+      "verification": "verified",
+      "vintage": "Profile text published 2023, updated 2025-02-28"
+    },
+    {
+      "id": "dla-profile-penama",
+      "license": {
+        "status": "unknown",
+        "terms": "No redistribution permission located; restoration-only"
+      },
+      "limit": "Official profile and map inspected; text extraction was unavailable in this workflow. Current DLA roster lists Pentecost, Maewo and Ambae councils but is not exact linework.",
+      "restoration": "Retrieve original bytes from https://dla.gov.vu/images/provincial-profiles/Penama%20Provincial%20Profile.pdf, verify SHA-256 c9991806042f162efbe3cb01e24c8057bbb00997e615e22a5388f471874a2fe2, then inspect the cited facts. No source payload retained.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "Official profile and map inspected; text extraction was unavailable in this workflow. Current DLA roster lists Pentecost, Maewo and Ambae councils but is not exact linework.",
+      "temporal_status": "reference",
+      "url": "https://dla.gov.vu/images/provincial-profiles/Penama%20Provincial%20Profile.pdf",
+      "verification": "verified",
+      "vintage": "Profile text published 2023, updated 2025-02-28"
+    },
+    {
+      "id": "dla-profile-malampa",
+      "license": {
+        "status": "unknown",
+        "terms": "No redistribution permission located; restoration-only"
+      },
+      "limit": "Profile and current roster support Malekula, Ambrym and Paama groupings with further Malekula/Ambrym subdivision; no authoritative current boundary geometry located.",
+      "restoration": "Retrieve original bytes from https://dla.gov.vu/images/provincial-profiles/Malampa%20Provincial%20Profile.pdf, verify SHA-256 623e08e0097f16791c1ebfa316e6884285bdeee4adcfe263d11dd838a24973fb, then inspect the cited facts. No source payload retained.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "Profile and current roster support Malekula, Ambrym and Paama groupings with further Malekula/Ambrym subdivision; no authoritative current boundary geometry located.",
+      "temporal_status": "reference",
+      "url": "https://dla.gov.vu/images/provincial-profiles/Malampa%20Provincial%20Profile.pdf",
+      "verification": "verified",
+      "vintage": "Profile text published 2023, updated 2025-02-28"
+    },
+    {
+      "id": "dla-profile-shefa",
+      "license": {
+        "status": "unknown",
+        "terms": "No redistribution permission located; restoration-only"
+      },
+      "limit": "Lists Efate, Epi, Emae, Tongoa, Tongariki/Buninga, Makira/Mataso, Emau and Moso/Lelepa groupings; older council count differs from current DLA roster of 19. Municipality carve-out is material.",
+      "restoration": "Retrieve original bytes from https://dla.gov.vu/images/provincial-profiles/Shefa%20Provincial%20Profile.pdf, verify SHA-256 42919a25d9e85634e20116ca81f05d90842edbbe95a25225279aadeabd05ef18, then inspect the cited facts. No source payload retained.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "Lists Efate, Epi, Emae, Tongoa, Tongariki/Buninga, Makira/Mataso, Emau and Moso/Lelepa groupings; older council count differs from current DLA roster of 19. Municipality carve-out is material.",
+      "temporal_status": "reference",
+      "url": "https://dla.gov.vu/images/provincial-profiles/Shefa%20Provincial%20Profile.pdf",
+      "verification": "verified",
+      "vintage": "Profile text published 2023, updated 2025-02-28; profile-era counts differ from current roster"
+    },
+    {
+      "id": "dla-profile-tafea",
+      "license": {
+        "status": "unknown",
+        "terms": "No redistribution permission located; restoration-only"
+      },
+      "limit": "Profile names Erromango, Tanna, Aniwa, Futuna and Aneityum; current roster also distinguishes Tanna councils. Municipality carve-out is material.",
+      "restoration": "Retrieve original bytes from https://dla.gov.vu/images/provincial-profiles/Tafea%20Provincial%20Profile.pdf, verify SHA-256 e0126e7ad7871ef62494e272873fff654cd0fc542237749f877b371d120bfb50, then inspect the cited facts. No source payload retained.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "Profile names Erromango, Tanna, Aniwa, Futuna and Aneityum; current roster also distinguishes Tanna councils. Municipality carve-out is material.",
+      "temporal_status": "reference",
+      "url": "https://dla.gov.vu/images/provincial-profiles/Tafea%20Provincial%20Profile.pdf",
+      "verification": "verified",
+      "vintage": "Profile text published 2023, updated 2025-02-28"
+    },
+    {
+      "id": "decentralization-act-cap230",
+      "license": {
+        "status": "unknown",
+        "terms": "No redistribution permission located; restoration-only"
+      },
+      "limit": "Section 3 permits the Prime Minister by Order to declare/name/define or alter province-region boundaries; s4A permits Ministerial Orders dividing provinces into area-council divisions; s34 excludes municipalities from provincial regions. The consulted Act is authority context, not the current province-defining Orders or boundary geometries.",
+      "restoration": "Retrieve original bytes from https://dla.gov.vu/images/legislation/Decentralization%20Act%20CAP%20230.pdf, verify SHA-256 da6b31fa9387e2b8725f79eecc2ecb27a717ee5d799ca8ea7fabecc96f8a9cc6, then inspect the cited facts. No source payload retained.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "Section 3 permits the Prime Minister by Order to declare/name/define or alter province-region boundaries; s4A permits Ministerial Orders dividing provinces into area-council divisions; s34 excludes municipalities from provincial regions. The consulted Act is authority context, not the current province-defining Orders or boundary geometries.",
+      "temporal_status": "reference",
+      "url": "https://dla.gov.vu/images/legislation/Decentralization%20Act%20CAP%20230.pdf",
+      "verification": "verified",
+      "vintage": "Consolidated edition 2025"
+    },
+    {
+      "id": "dla-decentralization-plan",
+      "license": {
+        "status": "unknown",
+        "terms": "No redistribution permission located; restoration-only"
+      },
+      "limit": "Page 22 points to appendices on existing provincial administrative and customary boundaries; planning context only, not exact legal Orders or polygon data.",
+      "restoration": "Retrieve original bytes from https://dla.gov.vu/images/policies/5.%20Final%2010%20years%20Decentralisation%20Implementation%20Plan.pdf, verify SHA-256 d26608ac1d901b84a59a6c8c76556183445ea48147a9f35c5ee708b7731293c4, then inspect the cited facts. No source payload retained.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "Page 22 points to appendices on existing provincial administrative and customary boundaries; planning context only, not exact legal Orders or polygon data.",
+      "temporal_status": "reference",
+      "url": "https://dla.gov.vu/images/policies/5.%20Final%2010%20years%20Decentralisation%20Implementation%20Plan.pdf",
+      "verification": "verified",
+      "vintage": "2018-2028 plan"
+    },
+    {
+      "id": "duap-municipalities",
+      "license": {
+        "status": "unknown",
+        "terms": "No reuse license located; restoration-only"
+      },
+      "limit": "Identifies Port Vila, Luganville and Lenakel as the three municipalities and says municipalities manage their boundaries. Exact current boundary geometry was not established.",
+      "restoration": "Retrieve original bytes from https://duap.gov.vu/index.php/what-we-do/municipalities, verify SHA-256 a41c2be2d52bd757252811457b99471336dcea99f46aa5874e8b0db85b0c1329, then inspect the cited facts. No source payload retained.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "Identifies Port Vila, Luganville and Lenakel as the three municipalities and says municipalities manage their boundaries. Exact current boundary geometry was not established.",
+      "temporal_status": "reference",
+      "url": "https://duap.gov.vu/index.php/what-we-do/municipalities",
+      "verification": "verified",
+      "vintage": "Current page, retrieval 2026-10-06"
+    },
+    {
+      "id": "duap-port-vila-planning-map",
+      "license": {
+        "status": "unknown",
+        "terms": "No redistribution permission located; restoration-only"
+      },
+      "limit": "DUAP links a Port Vila planning map. The retrieved PDF object is hashed but its cartography and legal status were not reviewed; it is a follow-up lead only and cannot define the municipal exclusion here.",
+      "restoration": "Retrieve original bytes from https://duap.gov.vu/images/docs/Map%20of%20Port%20Vila.pdf, verify SHA-256 06d8279b33f2cccae377f3c08f79148ed837426057fb2d4f3788d27cad11c938, then inspect the cited facts. No source payload retained.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "DUAP links a Port Vila planning map. The retrieved PDF object is hashed but its cartography and legal status were not reviewed; it is a follow-up lead only and cannot define the municipal exclusion here.",
+      "temporal_status": "reference",
+      "url": "https://duap.gov.vu/images/docs/Map%20of%20Port%20Vila.pdf",
+      "verification": "verified",
+      "vintage": "DUAP listing title: Existing MAP of Port Vila (2016-2030); map payload hashed but map contents/effective legal status not examined"
+    },
+    {
+      "id": "ocha-spc-adm2-context",
+      "license": {
+        "status": "unknown",
+        "terms": "Unknown; no use/redistribution assumed; restoration-only"
+      },
+      "limit": "Neighboring ADM2 tier context only; no five-feature difference is interpreted as temporal change without a one-to-one crosswalk.",
+      "restoration": "Retrieve original bytes from https://services.arcgis.com/Zoi8xtp32kQcxoKu/arcgis/rest/services/vut_admbnda_adm2_spc_20180824/FeatureServer/0?f=pjson, verify SHA-256 b414fa6d3821fd9d45c6a87f074f0359c791370c68f3579341a7c24abfb1aebe, then inspect the cited facts. No source payload retained.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-05 (retained prior evidence)",
+      "role": "Neighboring ADM2 tier context only; no five-feature difference is interpreted as temporal change without a one-to-one crosswalk.",
+      "temporal_status": "reference",
+      "url": "https://services.arcgis.com/Zoi8xtp32kQcxoKu/arcgis/rest/services/vut_admbnda_adm2_spc_20180824/FeatureServer/0?f=pjson",
+      "verification": "verified",
+      "vintage": "2018-08-24 service name; 66 feature count; metadata license blank"
+    },
+    {
+      "id": "geoboundaries-vut-adm1-2017",
+      "license": {
+        "status": "redistributable",
+        "terms": "Open Data Commons Open Database License 1.0; source attribution and applicable share-alike duties apply. Original exact bytes are retained in the immutable baseline under prior issue #454."
+      },
+      "limit": "This is OSM-derived historical comparison geometry, not a legal current boundary source and not proof of completeness. Registry digest 63e187… maps to an unretained importer cache object and remains unreconciled.",
+      "restoration": "Fetch pinned GeoJSON/LFS object at commit 9469f09592ced973a3448cf66b6100b741b64c0d; verify oid 69f44b96d0690310c67a4a430488fb7a02d028bdec8bbc755436cdfb90962c8d and 1,094,439 bytes. Matching bytes already exist in baseline file data/regional-review/regional-review-1aa97b490604ea4e/sources/vanuatu-2017-adm1.geojson.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "Pinned source cohort identity, source vintage and license context; only comparison geometry",
+      "temporal_status": "reference",
+      "url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/VUT/ADM1/geoBoundaries-VUT-ADM1.geojson",
+      "verification": "verified",
+      "vintage": "2017 boundary year; data update 2023-01-19; build 2023-12-12"
+    }
+  ],
+  "stages": {
+    "geographic_approval": "unapproved",
+    "implementation": "not-proposed",
+    "research": "partial"
+  },
+  "subject_ids": [
+    "gb:VUT:ADM1:32282491B17169683382430",
+    "gb:VUT:ADM1:32282491B5439526076152",
+    "gb:VUT:ADM1:32282491B61228346728599",
+    "gb:VUT:ADM1:32282491B7486560380604",
+    "gb:VUT:ADM1:32282491B78905986242135",
+    "gb:VUT:ADM1:32282491B8417950609019"
+  ],
+  "subject_ids_sha256": "1b50b68d9249b37e2ace0bba1bf70515c4460db8eced6b0298f31b699d44f839",
+  "summaries": [
+    {
+      "metric_id": "shefa-province:jaccard",
+      "text": "Shefa Province jaccard diagnostic: 0.946624 ratio; not a correctness criterion.",
+      "unit": "ratio",
+      "value": 0.9466236776638437
+    },
+    {
+      "metric_id": "shefa-province:symmetric-difference",
+      "text": "Shefa Province symmetric difference diagnostic: 80.9659 km2; not a correctness criterion.",
+      "unit": "km2",
+      "value": 80.96586367437172
+    },
+    {
+      "metric_id": "shefa-province:atlas-area",
+      "text": "Shefa Province atlas area diagnostic: 1458.22 km2; not a correctness criterion.",
+      "unit": "km2",
+      "value": 1458.2245656516661
+    },
+    {
+      "metric_id": "shefa-province:source-area",
+      "text": "Shefa Province source area diagnostic: 1494.58 km2; not a correctness criterion.",
+      "unit": "km2",
+      "value": 1494.5841033012307
+    },
+    {
+      "metric_id": "malampa:jaccard",
+      "text": "Malampa jaccard diagnostic: 0.971015 ratio; not a correctness criterion.",
+      "unit": "ratio",
+      "value": 0.9710152683566264
+    },
+    {
+      "metric_id": "malampa:symmetric-difference",
+      "text": "Malampa symmetric difference diagnostic: 81.8906 km2; not a correctness criterion.",
+      "unit": "km2",
+      "value": 81.89064899328518
+    },
+    {
+      "metric_id": "malampa:atlas-area",
+      "text": "Malampa atlas area diagnostic: 2778.65 km2; not a correctness criterion.",
+      "unit": "km2",
+      "value": 2778.652388941386
+    },
+    {
+      "metric_id": "malampa:source-area",
+      "text": "Malampa source area diagnostic: 2790.06 km2; not a correctness criterion.",
+      "unit": "km2",
+      "value": 2790.062943232212
+    },
+    {
+      "metric_id": "tafea:jaccard",
+      "text": "Tafea jaccard diagnostic: 0.974459 ratio; not a correctness criterion.",
+      "unit": "ratio",
+      "value": 0.9744589489460257
+    },
+    {
+      "metric_id": "tafea:symmetric-difference",
+      "text": "Tafea symmetric difference diagnostic: 42.1506 km2; not a correctness criterion.",
+      "unit": "km2",
+      "value": 42.15064037608147
+    },
+    {
+      "metric_id": "tafea:atlas-area",
+      "text": "Tafea atlas area diagnostic: 1623.66 km2; not a correctness criterion.",
+      "unit": "km2",
+      "value": 1623.6599217456253
+    },
+    {
+      "metric_id": "tafea:source-area",
+      "text": "Tafea source area diagnostic: 1634.81 km2; not a correctness criterion.",
+      "unit": "km2",
+      "value": 1634.8085304132726
+    },
+    {
+      "metric_id": "sanma:jaccard",
+      "text": "Sanma jaccard diagnostic: 0.98144 ratio; not a correctness criterion.",
+      "unit": "ratio",
+      "value": 0.981439639771609
+    },
+    {
+      "metric_id": "sanma:symmetric-difference",
+      "text": "Sanma symmetric difference diagnostic: 79.0435 km2; not a correctness criterion.",
+      "unit": "km2",
+      "value": 79.04345226369858
+    },
+    {
+      "metric_id": "sanma:atlas-area",
+      "text": "Sanma atlas area diagnostic: 4208.6 km2; not a correctness criterion.",
+      "unit": "km2",
+      "value": 4208.600903901816
+    },
+    {
+      "metric_id": "sanma:source-area",
+      "text": "Sanma source area diagnostic: 4229.8 km2; not a correctness criterion.",
+      "unit": "km2",
+      "value": 4229.803720390602
+    },
+    {
+      "metric_id": "penama:jaccard",
+      "text": "Penama jaccard diagnostic: 0.964472 ratio; not a correctness criterion.",
+      "unit": "ratio",
+      "value": 0.9644719082140254
+    },
+    {
+      "metric_id": "penama:symmetric-difference",
+      "text": "Penama symmetric difference diagnostic: 43.2332 km2; not a correctness criterion.",
+      "unit": "km2",
+      "value": 43.23318812149238
+    },
+    {
+      "metric_id": "penama:atlas-area",
+      "text": "Penama atlas area diagnostic: 1193.89 km2; not a correctness criterion.",
+      "unit": "km2",
+      "value": 1193.8927329258443
+    },
+    {
+      "metric_id": "penama:source-area",
+      "text": "Penama source area diagnostic: 1196.62 km2; not a correctness criterion.",
+      "unit": "km2",
+      "value": 1196.6207818109756
+    },
+    {
+      "metric_id": "torba:jaccard",
+      "text": "Torba jaccard diagnostic: 0.936215 ratio; not a correctness criterion.",
+      "unit": "ratio",
+      "value": 0.9362145371038632
+    },
+    {
+      "metric_id": "torba:symmetric-difference",
+      "text": "Torba symmetric difference diagnostic: 55.7486 km2; not a correctness criterion.",
+      "unit": "km2",
+      "value": 55.74858137619853
+    },
+    {
+      "metric_id": "torba:atlas-area",
+      "text": "Torba atlas area diagnostic: 836.226 km2; not a correctness criterion.",
+      "unit": "km2",
+      "value": 836.226140270703
+    },
+    {
+      "metric_id": "torba:source-area",
+      "text": "Torba source area diagnostic: 856.028 km2; not a correctness criterion.",
+      "unit": "km2",
+      "value": 856.0280001321944
+    }
+  ],
+  "validation": [
+    {
+      "evidence_path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/checks/positive-control.json",
+      "kind": "positive-control",
+      "method_id": "geodesic-overlap-screen",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/checks/negative-control.json",
+      "kind": "negative-control",
+      "method_id": "geodesic-overlap-screen",
+      "outcome": "passed"
+    }
+  ],
+  "version": 1,
+  "worker_id": "01a10947-b3d7-7812-8b2f-c5a47e88ccb2"
+}
