@@ -120,6 +120,7 @@ export async function validateContextInputStage({root=process.cwd(),readFile,
  return {status:'verified',manifest_path:manifestPath,manifest_sha256:sha256(readFile(manifestPath,'candidate')),
   checked_files:bytes.checked.length,locations:features.length,vertices:original.vertices,
   source_files:original.sourceFiles.length,footprints_sha256:result.footprints_sha256,
+  source_inventory:original.sourceFiles,
   owner_sha256:result.owner_sha256,limits:bytes.limits,scientific_approval:false};
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url))
