@@ -72,6 +72,13 @@ async function settled(page){
   await page.waitForFunction(()=>document.querySelector('.atlas-pixel-canvas')?.dataset.rendered==='true',null,{timeout:120000});
   // Leaflet camera animations can finish after the loading indicator.
   await page.waitForFunction(()=>!document.querySelector('#map.leaflet-zoom-anim,#map .leaflet-zoom-anim,#map .leaflet-pan-anim'));
+  // Canvas moves its prior cached image immediately, then samples the new view
+  // asynchronously. Wait for that new view rather than treating the cache as it.
+  await page.waitForFunction(()=>{
+    const canvas=document.querySelector('.atlas-pixel-canvas');
+    const transform=new DOMMatrixReadOnly(getComputedStyle(canvas).transform);
+    return Math.abs(transform.a-1)<1e-6&&Math.abs(transform.d-1)<1e-6;
+  });
   await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
 }
 async function gpuOwners(page){
