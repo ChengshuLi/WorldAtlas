@@ -1,0 +1,168 @@
+{
+  "method_id": "deterministic-report-reproduction",
+  "kind": "code",
+  "outcome": "passed",
+  "schema": "coastal-fresh-two-run:v1",
+  "issue": 1218,
+  "run_ids": [
+    "coastal-20261006-c",
+    "coastal-20261006-d"
+  ],
+  "distinct_run_ids": true,
+  "baseline_products_match": true,
+  "run_products_byte_identical": true,
+  "products": [
+    {
+      "path": "admission.json",
+      "run_one_sha256": "1e2a4d71f1badcae12ed1f71e102c132ff6a30be12ca7b35f3e36eecc4dd3e47",
+      "run_two_sha256": "1e2a4d71f1badcae12ed1f71e102c132ff6a30be12ca7b35f3e36eecc4dd3e47",
+      "historical_sha256": "1e2a4d71f1badcae12ed1f71e102c132ff6a30be12ca7b35f3e36eecc4dd3e47"
+    },
+    {
+      "path": "eight-county-comparison.json",
+      "run_one_sha256": "2c2fe3fd099df52623226597fa98b27b3eac23c0febed3b6d82aa1cb16d85251",
+      "run_two_sha256": "2c2fe3fd099df52623226597fa98b27b3eac23c0febed3b6d82aa1cb16d85251",
+      "historical_sha256": "2c2fe3fd099df52623226597fa98b27b3eac23c0febed3b6d82aa1cb16d85251"
+    },
+    {
+      "path": "positive-control.json",
+      "run_one_sha256": "a339194e98f952d122c03504c33e52b95c888b3ce808c64573be976f7e5013e9",
+      "run_two_sha256": "a339194e98f952d122c03504c33e52b95c888b3ce808c64573be976f7e5013e9",
+      "historical_sha256": "a339194e98f952d122c03504c33e52b95c888b3ce808c64573be976f7e5013e9"
+    },
+    {
+      "path": "negative-control.json",
+      "run_one_sha256": "4225c2cd188ac41de8032926c1c5eb34d42af7baa58e7438ddf58abbd8cbf0c8",
+      "run_two_sha256": "4225c2cd188ac41de8032926c1c5eb34d42af7baa58e7438ddf58abbd8cbf0c8",
+      "historical_sha256": "4225c2cd188ac41de8032926c1c5eb34d42af7baa58e7438ddf58abbd8cbf0c8"
+    }
+  ],
+  "runs": [
+    {
+      "run_id": "coastal-20261006-c",
+      "execution": {
+        "schema": "coastal-fresh-execution:v1",
+        "issue": 1218,
+        "run_id": "coastal-20261006-c",
+        "started_at": "2026-10-06T21:05:48.049581+00:00",
+        "completed_at": "2026-10-06T21:05:58.314973+00:00",
+        "command": "python3.12 data/regional-review/coastal-fresh-run-1160-erratum/fresh-reproduce.py --run-id coastal-20261006-c",
+        "checkout_head": "bd3b4ab860f11320717c354b10378c9972726373",
+        "input_inventory_sha256": "99d6b1ac1551160e46d58076dbfe0269973bc518e5037f371622e9903005b8c9",
+        "prior_program_sha256": "be7d84a1d75663c5169dca35cd530018f17d079b3f24e0527a08b190cb1c4493",
+        "program_sha256": "8056de6c044f7a19bb7e84d015ec98f9000861e6e4e19d6222762e216952c371",
+        "python": "3.12.14",
+        "shapely": "2.1.2",
+        "pyproj": "3.7.2",
+        "products": [
+          {
+            "path": "admission.json",
+            "bytes": 12061,
+            "sha256": "1e2a4d71f1badcae12ed1f71e102c132ff6a30be12ca7b35f3e36eecc4dd3e47",
+            "historical_baseline_sha256": "1e2a4d71f1badcae12ed1f71e102c132ff6a30be12ca7b35f3e36eecc4dd3e47",
+            "matches_historical_baseline": true
+          },
+          {
+            "path": "eight-county-comparison.json",
+            "bytes": 24799,
+            "sha256": "2c2fe3fd099df52623226597fa98b27b3eac23c0febed3b6d82aa1cb16d85251",
+            "historical_baseline_sha256": "2c2fe3fd099df52623226597fa98b27b3eac23c0febed3b6d82aa1cb16d85251",
+            "matches_historical_baseline": true
+          },
+          {
+            "path": "positive-control.json",
+            "bytes": 332,
+            "sha256": "a339194e98f952d122c03504c33e52b95c888b3ce808c64573be976f7e5013e9",
+            "historical_baseline_sha256": "a339194e98f952d122c03504c33e52b95c888b3ce808c64573be976f7e5013e9",
+            "matches_historical_baseline": true
+          },
+          {
+            "path": "negative-control.json",
+            "bytes": 383,
+            "sha256": "4225c2cd188ac41de8032926c1c5eb34d42af7baa58e7438ddf58abbd8cbf0c8",
+            "historical_baseline_sha256": "4225c2cd188ac41de8032926c1c5eb34d42af7baa58e7438ddf58abbd8cbf0c8",
+            "matches_historical_baseline": true
+          }
+        ],
+        "admission": {
+          "input_count": 67,
+          "issue_input_count": 57,
+          "ordinary_input_bytes": 266165452,
+          "gzip_decoded_bytes": 726951,
+          "reserve_bytes": 200000,
+          "admitted_phase_bytes": 267092403,
+          "registry_part_count": 36
+        }
+      },
+      "product_sha256": {
+        "admission.json": "1e2a4d71f1badcae12ed1f71e102c132ff6a30be12ca7b35f3e36eecc4dd3e47",
+        "eight-county-comparison.json": "2c2fe3fd099df52623226597fa98b27b3eac23c0febed3b6d82aa1cb16d85251",
+        "positive-control.json": "a339194e98f952d122c03504c33e52b95c888b3ce808c64573be976f7e5013e9",
+        "negative-control.json": "4225c2cd188ac41de8032926c1c5eb34d42af7baa58e7438ddf58abbd8cbf0c8"
+      }
+    },
+    {
+      "run_id": "coastal-20261006-d",
+      "execution": {
+        "schema": "coastal-fresh-execution:v1",
+        "issue": 1218,
+        "run_id": "coastal-20261006-d",
+        "started_at": "2026-10-06T21:08:21.883256+00:00",
+        "completed_at": "2026-10-06T21:08:34.915372+00:00",
+        "command": "python3.12 data/regional-review/coastal-fresh-run-1160-erratum/fresh-reproduce.py --run-id coastal-20261006-d",
+        "checkout_head": "bd3b4ab860f11320717c354b10378c9972726373",
+        "input_inventory_sha256": "99d6b1ac1551160e46d58076dbfe0269973bc518e5037f371622e9903005b8c9",
+        "prior_program_sha256": "be7d84a1d75663c5169dca35cd530018f17d079b3f24e0527a08b190cb1c4493",
+        "program_sha256": "8056de6c044f7a19bb7e84d015ec98f9000861e6e4e19d6222762e216952c371",
+        "python": "3.12.14",
+        "shapely": "2.1.2",
+        "pyproj": "3.7.2",
+        "products": [
+          {
+            "path": "admission.json",
+            "bytes": 12061,
+            "sha256": "1e2a4d71f1badcae12ed1f71e102c132ff6a30be12ca7b35f3e36eecc4dd3e47",
+            "historical_baseline_sha256": "1e2a4d71f1badcae12ed1f71e102c132ff6a30be12ca7b35f3e36eecc4dd3e47",
+            "matches_historical_baseline": true
+          },
+          {
+            "path": "eight-county-comparison.json",
+            "bytes": 24799,
+            "sha256": "2c2fe3fd099df52623226597fa98b27b3eac23c0febed3b6d82aa1cb16d85251",
+            "historical_baseline_sha256": "2c2fe3fd099df52623226597fa98b27b3eac23c0febed3b6d82aa1cb16d85251",
+            "matches_historical_baseline": true
+          },
+          {
+            "path": "positive-control.json",
+            "bytes": 332,
+            "sha256": "a339194e98f952d122c03504c33e52b95c888b3ce808c64573be976f7e5013e9",
+            "historical_baseline_sha256": "a339194e98f952d122c03504c33e52b95c888b3ce808c64573be976f7e5013e9",
+            "matches_historical_baseline": true
+          },
+          {
+            "path": "negative-control.json",
+            "bytes": 383,
+            "sha256": "4225c2cd188ac41de8032926c1c5eb34d42af7baa58e7438ddf58abbd8cbf0c8",
+            "historical_baseline_sha256": "4225c2cd188ac41de8032926c1c5eb34d42af7baa58e7438ddf58abbd8cbf0c8",
+            "matches_historical_baseline": true
+          }
+        ],
+        "admission": {
+          "input_count": 67,
+          "issue_input_count": 57,
+          "ordinary_input_bytes": 266165452,
+          "gzip_decoded_bytes": 726951,
+          "reserve_bytes": 200000,
+          "admitted_phase_bytes": 267092403,
+          "registry_part_count": 36
+        }
+      },
+      "product_sha256": {
+        "admission.json": "1e2a4d71f1badcae12ed1f71e102c132ff6a30be12ca7b35f3e36eecc4dd3e47",
+        "eight-county-comparison.json": "2c2fe3fd099df52623226597fa98b27b3eac23c0febed3b6d82aa1cb16d85251",
+        "positive-control.json": "a339194e98f952d122c03504c33e52b95c888b3ce808c64573be976f7e5013e9",
+        "negative-control.json": "4225c2cd188ac41de8032926c1c5eb34d42af7baa58e7438ddf58abbd8cbf0c8"
+      }
+    }
+  ]
+}

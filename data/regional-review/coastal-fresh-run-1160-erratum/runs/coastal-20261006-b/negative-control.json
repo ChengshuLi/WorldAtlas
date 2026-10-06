@@ -1,0 +1,15 @@
+{
+  "method_id": "coastal-comparison-guarded-screen",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "description": "Swapped longitude/latitude axis order is rejected by a >1,000 km projected-coordinate separation.",
+  "correct_xy_m": [
+    964862.802509,
+    5180102.328839
+  ],
+  "swapped_xy_m": [
+    4341882.61129,
+    1269436.743538
+  ],
+  "separation_m": 5166968.948
+}
