@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "retrieved_date_utc": "2026-10-06",
+  "sources": [
+    {
+      "id": "census-cartographic-boundary-description",
+      "url": "https://cdn.www.census.gov/programs-surveys/geography/technical-documentation/naming-convention/cartographic-boundary-file.html",
+      "final_url": "https://cdn.www.census.gov/programs-surveys/geography/technical-documentation/naming-convention/cartographic-boundary-file.html",
+      "http_status": 200,
+      "retained_path": "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/sources/census-official/cartographic-boundary-file-description.html",
+      "bytes": 365191,
+      "sha256": "37afe5c5409332dd5908f18e3263bb3a9fb6fc230a5518ee3fc0c042358a844d",
+      "license": "U.S. federal government work; public domain; cite Census Bureau."
+    },
+    {
+      "id": "census-tiger-line-2025-legal-disclaimer",
+      "url": "https://www2.census.gov/geo/pdfs/maps-data/data/tiger/tgrshp2025/TGRSHP2025_TechDoc.pdf",
+      "final_url": "https://www2.census.gov/geo/pdfs/maps-data/data/tiger/tgrshp2025/TGRSHP2025_TechDoc.pdf",
+      "http_status": 200,
+      "retained_path": "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/sources/census-official/tiger-line-2025-technical-documentation.pdf",
+      "bytes": 4598419,
+      "sha256": "21476bdba82fe8072f8994ae59bda484260d1b932c13f31991f6414f8e04d551",
+      "license": "U.S. federal government work; public domain; cite Census Bureau.",
+      "locator": "Chapter 1, Legal Disclaimer, Citation Information and Contact"
+    }
+  ],
+  "prior_retained_source_receipt_paths": [
+    "data/regional-review/regional-review-599d6fe712bbbcae/sources/geoboundaries-2018/http-receipt.json",
+    "data/regional-review/regional-review-599d6fe712bbbcae/sources/geoboundaries-2018/lfs-content-receipts.json",
+    "data/regional-review/regional-review-599d6fe712bbbcae/sources/census-2018-cartographic-boundaries/http-receipt.json",
+    "data/regional-review/regional-review-599d6fe712bbbcae/census-tigerweb-state-retrieval-receipts.json"
+  ],
+  "limits": [
+    "Census comparator data are statistical/cartographic representations and do not establish legal boundaries or exhaustive offshore coverage."
+  ]
+}
