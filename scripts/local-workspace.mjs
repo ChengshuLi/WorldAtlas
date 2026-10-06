@@ -1,3 +1,4 @@
+import {assertAuthorWorkerIdentity} from './worker-identity.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import {execFileSync} from 'node:child_process';
@@ -189,6 +190,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
       else options[key] = args[index + 1];
     }
     if (options['reserve-gib']) options.reserveGiB = Number(options['reserve-gib']);
+    if (action === 'allocate' && (options.slot ?? 'work') === 'work') assertAuthorWorkerIdentity(options.worker);
     const manager = workspaceManager(process.cwd());
     if (!['report', 'check', 'allocate', 'release'].includes(action)) throw Error('Choose report, check, allocate or release');
     console.log(JSON.stringify(manager[action](options), null, 2));

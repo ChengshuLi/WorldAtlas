@@ -1,0 +1,291 @@
+{
+  "version": 1,
+  "issue": 1050,
+  "lane": "engineering",
+  "worker_id": "01a10843-da4b-7fc1-a482-d3186bc6334d",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "a57085b7a5cfdbe3c1e0e4b0cd2e07c6240899fc",
+    "files": [
+      {
+        "path": "AGENTS.md",
+        "bytes": 7904,
+        "sha256": "25c68ea54dd61dd7a1116d624393d198acbd6b6339dff01a644b15f54abd03b2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/LOCAL_WORKSPACES.md",
+        "bytes": 7908,
+        "sha256": "4c05c85b0979da7760170771a879f2e5a99606223fae7674bdd005081ca3e3f5",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 25378,
+        "sha256": "c6ce3287ad451b7f93d677eee73d3330f9952c57c94cc6a61a11248a506a5e0b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/AUDITOR.txt",
+        "bytes": 7251,
+        "sha256": "14730e609fd32f4362d91eac1086940947f3ebaf32f746df32668c4ef908d0a8",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/ENGINEERING.txt",
+        "bytes": 9967,
+        "sha256": "f1e01e14e11a79438b2d818e79c6309181e3f74b39c9fa0a22b0d29d261d4fb3",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/GEOGRAPHY.txt",
+        "bytes": 7452,
+        "sha256": "dfbf1ed85fef74768c89d800fa1bea3f2be1eb8efaa2e1388472a2444e580ccb",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/ISSUE_CREATION.txt",
+        "bytes": 4490,
+        "sha256": "94ab3953914fbb84ec569ad6942ccc61251b690d2bcc47bbec4310e23cf34d61",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/LUNA_HISTORY.txt",
+        "bytes": 8297,
+        "sha256": "d0301512a965bf71e03beb7ec393aa733274af9b1c9cc03ea12ad02a09bfa944",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/PUBLISHER.txt",
+        "bytes": 5173,
+        "sha256": "4f0e45f9c67052e1a02212fc33b18895ecd2067281b2a3c56308397048805066",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/issue-lease.mjs",
+        "bytes": 3304,
+        "sha256": "581a7e76984cf656742e8689478a4b7d43a595c4469d686b25050ad6b3f3e42e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/local-workspace.mjs",
+        "bytes": 13238,
+        "sha256": "1d95aa9ff4aa12c0f62f3496dbf022499f3cef770200ff476e3e1a777cdf96cb",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 8400,
+      "sha256": "a2fef1fd82e7b39244501fa7f39bdd2aee7c28291d8bbb30c720df75b06831e3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/LOCAL_WORKSPACES.md",
+      "bytes": 9514,
+      "sha256": "d99838bb409cd2d67c09188cc3610b7c357ed035a33852abd228e687e4bbda38",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "bytes": 26965,
+      "sha256": "a6afd008a9c94839d2b8a73346a64d81c3225c14ebb798c7be00e9023dffabcc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/AUDITOR.txt",
+      "bytes": 8839,
+      "sha256": "a3c132621f1e0388fdd0c4a4bdd81faacf9fd1cd6415a018a9b7963949abbee9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/ENGINEERING.txt",
+      "bytes": 11555,
+      "sha256": "ab0c3f8391a09bb8722d6dc417f91c0c5becb13b35febdfb2fb6dd5d6413085d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/GEOGRAPHY.txt",
+      "bytes": 9040,
+      "sha256": "610db7ae7e92de892eec9667215516b67487ce01bfae6d56828626e096fa829a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/ISSUE_CREATION.txt",
+      "bytes": 6078,
+      "sha256": "475720dd84fe18c5128e69a6bbf7d8d8ae6053959809c20e13144077df378f68",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/LUNA_HISTORY.txt",
+      "bytes": 9885,
+      "sha256": "558d2e24bb717b55f1c470cca4a8fe0838caa00dd50d852519dd762c05ef3872",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/PUBLISHER.txt",
+      "bytes": 6761,
+      "sha256": "c395ce9761de9b9a108f24f80d4948e0974c576ea51d14a966372b8e741d10bc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/issue-lease.mjs",
+      "bytes": 3454,
+      "sha256": "5c6784a212607eece10bcb820f3713ccff38fc484d231879729bbb848f1a7d8d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/local-workspace.mjs",
+      "bytes": 13418,
+      "sha256": "a9dc16ea7b2be5987a4d1c26d3d44aea363094e32bca9508f47ff9134355677e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/worker-identity.mjs",
+      "bytes": 548,
+      "sha256": "e31ef3d286c3250f7f69e23f455edd896cfa96b8eb6438026aa4374da57128bd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/worker-identity.test.mjs",
+      "bytes": 3141,
+      "sha256": "8aeec6d702f48d09f3791b6548657c4e2781393fdf0986a56fab586c37a471a6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/chat-worker-identity-1050/positive-control.json",
+      "bytes": 394,
+      "sha256": "d8f7a5759b24640d1cddf111765620e7f6e6eb4663d29f47fed516fb1c39ba86",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/chat-worker-identity-1050/claim.json",
+      "bytes": 827,
+      "sha256": "cdc2b4de8ebed74c1ff1c40d3f45550926a293e9bdc3c87536057cee59f49db5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/chat-worker-identity-1050/negative-control.json",
+      "bytes": 384,
+      "sha256": "bcd81b9fd801170857e9f88ac3575b18ba4f8d1215b6fc7fb4983ce6f38cd017",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "AGENTS.md",
+      "status": "modified",
+      "original_sha256": "25c68ea54dd61dd7a1116d624393d198acbd6b6339dff01a644b15f54abd03b2"
+    },
+    {
+      "path": "docs/LOCAL_WORKSPACES.md",
+      "status": "modified",
+      "original_sha256": "4c05c85b0979da7760170771a879f2e5a99606223fae7674bdd005081ca3e3f5"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "status": "modified",
+      "original_sha256": "c6ce3287ad451b7f93d677eee73d3330f9952c57c94cc6a61a11248a506a5e0b"
+    },
+    {
+      "path": "docs/prompts/AUDITOR.txt",
+      "status": "modified",
+      "original_sha256": "14730e609fd32f4362d91eac1086940947f3ebaf32f746df32668c4ef908d0a8"
+    },
+    {
+      "path": "docs/prompts/ENGINEERING.txt",
+      "status": "modified",
+      "original_sha256": "f1e01e14e11a79438b2d818e79c6309181e3f74b39c9fa0a22b0d29d261d4fb3"
+    },
+    {
+      "path": "docs/prompts/GEOGRAPHY.txt",
+      "status": "modified",
+      "original_sha256": "dfbf1ed85fef74768c89d800fa1bea3f2be1eb8efaa2e1388472a2444e580ccb"
+    },
+    {
+      "path": "docs/prompts/ISSUE_CREATION.txt",
+      "status": "modified",
+      "original_sha256": "94ab3953914fbb84ec569ad6942ccc61251b690d2bcc47bbec4310e23cf34d61"
+    },
+    {
+      "path": "docs/prompts/LUNA_HISTORY.txt",
+      "status": "modified",
+      "original_sha256": "d0301512a965bf71e03beb7ec393aa733274af9b1c9cc03ea12ad02a09bfa944"
+    },
+    {
+      "path": "docs/prompts/PUBLISHER.txt",
+      "status": "modified",
+      "original_sha256": "4f0e45f9c67052e1a02212fc33b18895ecd2067281b2a3c56308397048805066"
+    },
+    {
+      "path": "scripts/issue-lease.mjs",
+      "status": "modified",
+      "original_sha256": "581a7e76984cf656742e8689478a4b7d43a595c4469d686b25050ad6b3f3e42e"
+    },
+    {
+      "path": "scripts/local-workspace.mjs",
+      "status": "modified",
+      "original_sha256": "1d95aa9ff4aa12c0f62f3496dbf022499f3cef770200ff476e3e1a777cdf96cb"
+    },
+    {
+      "path": "scripts/worker-identity.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/worker-identity.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/chat-worker-identity-1050/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/chat-worker-identity-1050/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/chat-worker-identity-1050/negative-control.json",
+      "status": "added"
+    }
+  ],
+  "methods": [
+    {
+      "id": "chat-identity-controls",
+      "kind": "code",
+      "description": "Execute identity helper and real CLI boundaries with no Git/gh executable, and existing checkout lifecycle tests. Negative tests reject copied IDs before side effects; positive tests preserve matching identity, outside-Codex fallback, legacy maintenance and independent review.",
+      "software": "Node 24 node:test",
+      "units": "CLI exit behavior and filesystem state"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "chat-identity-controls",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/chat-worker-identity-1050/positive-control.json"
+    },
+    {
+      "method_id": "chat-identity-controls",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/chat-worker-identity-1050/negative-control.json"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "node --test test/worker-identity.test.mjs test/local-workspace.test.mjs test/queue-pr-merge.test.mjs"
+  ]
+}
