@@ -1,0 +1,147 @@
+{
+  "issue": 1136,
+  "retrieved_utc_date": "2026-10-06",
+  "sources": [
+    {
+      "id": "BWA-STATSBOTS-2022",
+      "title": "Statistics Botswana, Population and Housing Census 2022 — Administrative and Technical Report, Version 2",
+      "url": "https://www.statsbots.org.bw/sites/default/files/publications/Population%20and%20Housing%20Census%202022-Administrative%20and%20Technical%20Report%20Version%202.pdf",
+      "role": "official census operations and roster nomenclature; not statute/boundary certification",
+      "vintage": "2022 PHC; report version 2 published 2025-07-28; server Last-Modified 2025-08-27",
+      "retrieved_at": "2026-10-06T13:00:33Z",
+      "bytes": 1753665,
+      "sha256": "eca23da4cb3dfa1dcc1df8b53d6abe5a0790db3dc3c95a329e7f80bd9caf0034",
+      "license": "Statistics Botswana terms permit reuse of statistical data with acknowledgement; the report publication remains copyrighted.",
+      "retention": "checksum-and-restoration-instructions; not redistributed",
+      "restoration": "GET the exact URL, save response body without transformation, verify 1,753,665 bytes and SHA-256 above; if changed, preserve as a new dated vintage. Cite Statistics Botswana.",
+      "findings": "Section 14.6/Table 4 (report p.36) names 28 census districts and separate Sub-District/Admin Authority descriptions. Table 4 differentiates City/Town, district, census district and next-tier authority names. It does not establish all current legal polygons."
+    },
+    {
+      "id": "BWA-STATSBOTS-TERMS",
+      "title": "Statistics Botswana Terms of Use",
+      "url": "https://www.statsbots.org.bw/terms-use",
+      "role": "copyright and attribution terms",
+      "vintage": "accessed 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "license": "Statistical data free to reuse with source acknowledgement; publication copyright retained.",
+      "retention": "URL-and-finding only",
+      "restoration": "Open official terms page and confirm the then-current statistical data/publication clauses before redistribution."
+    },
+    {
+      "id": "BWA-GOV-DSM-ACCESS",
+      "title": "Government of Botswana, Maps and Geospatial Data",
+      "url": "https://www.gov.bw/land-management/maps-and-geospatial-data?page=1",
+      "role": "authoritative access path for survey and mapping data layers",
+      "vintage": "accessed 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "license": "Access/reuse license for a requested layer not established; page indicates request/fee route through Department of Surveys and Mapping.",
+      "retention": "URL-and-finding only",
+      "restoration": "Request dated BWA district/subdistrict boundary layer, metadata, source vintage, coordinate reference, completeness, legal basis and written redistribution/adaptation license from Department of Surveys and Mapping; archive response and exact bytes/hashes."
+    },
+    {
+      "id": "BWA-MBR-ESRI-2025",
+      "title": "Esri / Michael Bauer Research Botswana Subdistrict Boundaries item",
+      "url": "https://www.arcgis.com/home/item.html?id=fad4c62442ca40f49d7ac5f8b28aaaaf",
+      "role": "public item metadata for a current commercial/reference product; not downloadable evidence",
+      "vintage": "2025 product; item updated 2025-10-31",
+      "retrieved_at": "2026-10-06",
+      "license": "Esri Master License; metadata says offline export is not permitted and access requires subscription/registered developer account.",
+      "retention": "metadata-only reference",
+      "restoration": "Use public item metadata only. Do not export, scrape, or redistribute the boundary layer. Seek vendor permission or an independent open official source."
+    },
+    {
+      "id": "BWA-RCMRD-2015",
+      "title": "Retained geoBoundaries/RCMRD BWA ADM2 source as supplied in ancestor packet",
+      "url": "https://www.geoboundaries.org/",
+      "role": "original geometry evidence, source-reported by geoBoundaries as RCMRD 2015; all 25 features retained for reproducibility",
+      "vintage": "2015; geoBoundaries pinned source commit 9469f09592ced973a3448cf66b6100b741b64c0d",
+      "retrieved_at": "ancestor packet; retained bytes rehashed 2026-10-06",
+      "bytes": 219907,
+      "sha256": "466b6a2c45c81ade313403f7cfe004325079bbaa0cd06c97e7bc5c5b5c43db5e",
+      "license": "source metadata reports Public Domain. RCMRD portal terms allow access/copy/use with license assessment; original metadata and provenance must travel with geometry.",
+      "retention": "lawful source bytes copied unchanged from prior committed evidence",
+      "restoration": "Compare exact bytes to this checksum and inspect companion original geoBoundaries metadata and the source-specific RCMRD license provenance before redistribution. Treat 2015 as historical vintage."
+    },
+    {
+      "id": "LSO-GOV-2022",
+      "title": "Government of Lesotho, Third National Communication, Chapter 2",
+      "url": "https://www.gov.ls/wp-content/uploads/2022/03/Third-National-Communication.pdf",
+      "role": "official national context and administrative/council tier counts; figure 2.3 map attribution to Lesotho Meteorological Services",
+      "vintage": "2022",
+      "retrieved_at": "2026-10-06",
+      "license": "publication copyright/reuse not stated in captured page",
+      "retention": "restoration-only; no complete bytes/hash retained",
+      "restoration": "Official URL declared 26,096,689 bytes; earlier bounded HTTPS transfer timed out at 3,538,464 bytes; local TLS chain validation failed. Retry standard verified HTTPS or request official copy/clearance, never disable certificate checks. Record complete byte count/hash before any full-text redistribution.",
+      "finding": "Reports ten administrative districts, 80 constituencies and 124 community councils; useful tiers/counts but not district polygon law."
+    },
+    {
+      "id": "LSO-DELIMITATION-2022",
+      "title": "Government of Lesotho Gazette Extraordinary, Legal Notice No. 37 of 2022 — Constituency Delimitation Order",
+      "url": "https://www.gov.ls/wp-content/uploads/2022/04/Constituency-Delimitation-Order.pdf",
+      "role": "official legal source for 80 electoral constituencies and map-sheet precedence",
+      "vintage": "2022 order based on census available in 2018",
+      "retrieved_at": "2026-10-06",
+      "license": "no redistribution license identified in the instrument",
+      "retention": "restoration-only",
+      "restoration": "Retrieve exact official PDF, verify bytes and hash. Order states district aggregation is for election convenience; deposited individual constituency maps and schedule prevail in conflict. These are electoral boundaries, not substitutes for district/admin maps."
+    },
+    {
+      "id": "LSO-IEC-MAPS-2025",
+      "title": "Independent Electoral Commission Lesotho constituency maps",
+      "url": "https://iec.org.ls/constituency-maps/",
+      "role": "official election constituency maps; not community council/district boundary source",
+      "vintage": "page/download date shown 2025-07-05",
+      "retrieved_at": "2026-10-06",
+      "license": "reuse terms not established",
+      "retention": "URL-and-finding only",
+      "restoration": "Retain map links, download dates, file sizes and exact checksums only after verifying terms. Electoral function cannot prove district-tier geometry."
+    },
+    {
+      "id": "LSO-SALB-2024",
+      "title": "UN SALB Lesotho administrative level 1 validated data metadata",
+      "url": "https://salb.un.org/en/data/lso",
+      "role": "nationally validated district-layer source metadata; SALB methodology says contributor supplied and nationally validated",
+      "vintage": "temporal validity 1990 onward; dataset last updated 2024-06-24",
+      "retrieved_at": "2026-10-06",
+      "license": "UN SALB Terms of Use 2021: noncommercial use, UN and contributor attribution; no geometry/content changes without contributor consent; no warranty. Contributor permission not documented.",
+      "retention": "metadata-only; geometry not redistributed",
+      "restoration": "Request current contributor data and explicit reuse/adaptation permission from Lesotho National Geospatial Information Authority / Department of Lands, Surveys and Physical Planning and SALB; retain source version and exact bytes after authorization."
+    },
+    {
+      "id": "LSO-SALB-TERMS",
+      "title": "UN SALB Terms of Use (2021)",
+      "url": "https://salb.un.org/sites/default/files/wysiwyg_uploads/docs_uploads/TermsOfUseSALB2021.pdf",
+      "role": "dataset reuse restrictions",
+      "vintage": "2021 terms",
+      "retrieved_at": "2026-10-06",
+      "license": "noncommercial; attribution required; geometry/content modification requires contributor consent",
+      "retention": "URL-and-findings only",
+      "restoration": "Re-read live terms and obtain contributor consent before adapting/redistributing geometry."
+    },
+    {
+      "id": "LSO-GB-2017",
+      "title": "Retained geoBoundaries/OSM LSO ADM1 input from prior packet",
+      "url": "https://www.geoboundaries.org/",
+      "role": "original 2017 district polygon input; OSM-derived, secondary to official/national source",
+      "vintage": "2017",
+      "retrieved_at": "ancestor packet; exact bytes rehashed 2026-10-06",
+      "bytes": 1229492,
+      "sha256": "d2402f2fd99b06d894237e652f70d3e163b4e0cf5f95bb8e2227a1d5f3162a19",
+      "license": "ODbL 1.0 as declared by source metadata; attribution/share-alike obligations apply to database use.",
+      "retention": "lawful source bytes copied unchanged from prior committed evidence",
+      "restoration": "Verify bytes, inspect original geoBoundaries metadata and comply with ODbL if database use is made. Never elevate the 2017 OSM-derived boundaries to current statutory authority by name matching."
+    },
+    {
+      "id": "LSO-DRWS-REST",
+      "title": "Department of Rural Water Supply ArcGIS Lesotho Boundaries MapServer",
+      "url": "https://drws.gov.ls/server/rest/services/LesothoBoundaries/MapServer",
+      "role": "potential district/community-council boundary service; access blocked",
+      "vintage": "unknown",
+      "retrieved_at": "2026-10-06T13:00:33Z",
+      "license": "unknown; metadata attribution and license fields were unavailable",
+      "retention": "exact 80-byte application-error response retained",
+      "restoration": "Request authenticated service metadata/access from Department of Rural Water Supply, source vintage and attribution/license; the captured response is HTTP 200 with ArcGIS application error 499 Token Required, not service metadata."
+    }
+  ],
+  "scope_limit": "Source evidence does not certify any region, legal boundary, publication or import."
+}
