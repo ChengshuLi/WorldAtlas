@@ -106,6 +106,10 @@ test('real WebGL framebuffer agrees for legacy/compact holes, odd runs, maximum 
 test('packaged coverage supports all modes, gap explanations and unavailable-reference fallback', {timeout:180000},async()=>{
  const {createServer:serve}=await import('node:http'),{projectCell,GRID_ZOOM}=await import('../src/pixel-grid.js');
  const path=await import('node:path'),root=path.resolve('dist/client');
+ // Use the retained Portugal–Spain gap. The former Saravan–Panjgur probe
+ // now has a reviewed location owner and must not open a coverage-gap popup.
+ const point=projectCell(-6.936928247,39.864122024);
+ assert.equal(pickOwnership(readPublished(),...point),0,'Gap popup probe must remain unassigned in the actual packaged grid');
  const server=serve((request,response)=>{
   const pathname=decodeURIComponent(new URL(request.url,'http://localhost').pathname),file=path.resolve(root,'.'+(pathname==='/'?'/index.html':pathname));
   if(!file.startsWith(root+path.sep)||!fs.existsSync(file)||!fs.statSync(file).isFile()){response.writeHead(404);response.end();return;}
@@ -136,10 +140,9 @@ test('packaged coverage supports all modes, gap explanations and unavailable-ref
    for(const mode of ['owner','population','culture','religion','rank','topography','vegetation','climate','location','province','area','region','subcontinent','continent']){
     await page.locator(`[data-mode="${mode}"]`).click();assert.equal(await page.locator(`[data-mode="${mode}"]`).getAttribute('aria-pressed'),'true');
    }
-   await page.locator('#search').fill('Panjgur');
-   await page.locator('[data-result]').filter({hasText:'Panjgur'}).first().click();
+   await page.locator('#search').fill('Idanha');
+   await page.locator('[data-result]').filter({hasText:'Idanha'}).first().click();
    await page.waitForTimeout(600);
-   const point=projectCell(63.207727681,26.8032);
    const cursor=await page.locator('.atlas-pixel-canvas').evaluate((canvas,{point,gridZoom})=>{
     const [x,y,zoom]=canvas.dataset.frame.split('/').map(Number),box=canvas.getBoundingClientRect(),scale=2**(zoom-gridZoom);
     return {x:box.x+(point[0]-x)*scale,y:box.y+(point[1]-y)*scale};
