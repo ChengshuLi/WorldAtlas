@@ -6,6 +6,7 @@ import {createServer} from 'vite';
 import {chromium} from '@playwright/test';
 import {compileOwnership,packOwnership,pickOwnership,ownershipRun,samplePackedOwnership} from '../src/pixel-ownership.js';
 import {loadOwnershipAssets} from '../src/ownership-assets.js';
+import {NATIVE_METHOD} from '../src/ownership-method.js';
 import {shuffleOwnershipBytes,unshuffleOwnershipBytes,encodeOwnershipVarints,decodeOwnershipVarints} from '../src/ownership-codec.js';
 
 function readPublished(){
@@ -103,15 +104,20 @@ test('real WebGL framebuffer agrees for legacy/compact holes, odd runs, maximum 
  }finally{try{await browser?.close();}finally{await server.close();}}
 });
 
-test('packaged coverage supports all modes, gap explanations and unavailable-reference fallback', {timeout:180000},async()=>{
+test('packaged coverage supports all modes, gap explanations and unavailable-reference policy', {timeout:180000},async()=>{
  const {createServer:serve}=await import('node:http'),{projectCell,GRID_ZOOM}=await import('../src/pixel-grid.js');
  const path=await import('node:path'),root=path.resolve('dist/client');
+ // Use the retained Portugal–Spain gap. The former Saravan–Panjgur probe
+ // now has a reviewed location owner and must not open a coverage-gap popup.
+ const point=projectCell(-6.936928247,39.864122024);
+ assert.equal(pickOwnership(readPublished(),...point),0,'Gap popup probe must remain unassigned in the actual packaged grid');
+ const native=JSON.parse(fs.readFileSync(path.join(root,'atlas-geography.json'))).pixelMap.method===NATIVE_METHOD;
  const server=serve((request,response)=>{
   const pathname=decodeURIComponent(new URL(request.url,'http://localhost').pathname),file=path.resolve(root,'.'+(pathname==='/'?'/index.html':pathname));
   if(!file.startsWith(root+path.sep)||!fs.existsSync(file)||!fs.statSync(file).isFile()){response.writeHead(404);response.end();return;}
   response.setHeader('Content-Type',file.endsWith('.js')?'text/javascript':file.endsWith('.css')?'text/css':file.endsWith('.html')?'text/html':'application/octet-stream');fs.createReadStream(file).pipe(response);
  });
- await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));const base=`http://127.0.0.1:${server.address().port}`,browser=await chromium.launch();
+ await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));const base=`http://127.0.0.1:${server.address().port}`,browser=await chromium.launch({args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
  try{
   for(const unavailable of [false,true]){
    const page=await browser.newPage({viewport:{width:1440,height:1080}}),errors=[];
@@ -123,7 +129,14 @@ test('packaged coverage supports all modes, gap explanations and unavailable-ref
     return route.continue();
    });
    await page.goto(base);
-   await page.waitForFunction(()=>document.querySelector('.atlas-pixel-canvas')?.dataset.rendered==='true',null,{timeout:60000});
+   if(unavailable&&native){
+    // The native generation requires its complete pinned classification input.
+    // A failed stream must not publish a partial map or a false gap fallback.
+    await page.waitForFunction(()=>document.querySelector('#loading')?.textContent.includes('Atlas could not load. Check the server and reload the page.'));
+    assert.equal(await page.locator('.atlas-pixel-canvas').count(),0);
+    assert.deepEqual(errors,[]);await page.close();continue;
+   }
+   await page.waitForFunction(()=>document.querySelector('.atlas-pixel-canvas')?.dataset.rendered==='true',null,{timeout:60000}).catch(error=>{error.message+='; page errors: '+JSON.stringify(errors);throw error;});
    await page.locator('#loading').waitFor({state:'hidden',timeout:60000});
    assert.equal(await page.locator('.atlas-pixel-canvas').getAttribute('data-renderer'),'webgl2');
    const before=await page.locator('.atlas-pixel-canvas').evaluate(canvas=>({...canvas.dataset}));
@@ -136,10 +149,9 @@ test('packaged coverage supports all modes, gap explanations and unavailable-ref
    for(const mode of ['owner','population','culture','religion','rank','topography','vegetation','climate','location','province','area','region','subcontinent','continent']){
     await page.locator(`[data-mode="${mode}"]`).click();assert.equal(await page.locator(`[data-mode="${mode}"]`).getAttribute('aria-pressed'),'true');
    }
-   await page.locator('#search').fill('Panjgur');
-   await page.locator('[data-result]').filter({hasText:'Panjgur'}).first().click();
+   await page.locator('#search').fill('Idanha');
+   await page.locator('[data-result]').filter({hasText:'Idanha'}).first().click();
    await page.waitForTimeout(600);
-   const point=projectCell(63.207727681,26.8032);
    const cursor=await page.locator('.atlas-pixel-canvas').evaluate((canvas,{point,gridZoom})=>{
     const [x,y,zoom]=canvas.dataset.frame.split('/').map(Number),box=canvas.getBoundingClientRect(),scale=2**(zoom-gridZoom);
     return {x:box.x+(point[0]-x)*scale,y:box.y+(point[1]-y)*scale};
