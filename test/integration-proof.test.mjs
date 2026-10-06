@@ -1,10 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
 import {integrationProof, PROOF_PATHS, WORKFLOW_PATH} from '../scripts/integration-proof.mjs';
 import {integrationProfile, COORDINATION_PATHS} from '../scripts/integration-profile.mjs';
 
 function fixture(profile = 'full') {
-  const entries = new Map(PROOF_PATHS.map(path=>[path,{sha:path,mode:'100644',type:'blob'}]));
+  const workflow='ref: ${{ github.event.pull_request.head.sha }}\nname: Complete regression shard\nname: Build hosted assets';
+  const workflowRaw=Buffer.from(workflow), workflowOID=createHash('sha1').update(`blob ${workflowRaw.length}\0`).update(workflowRaw).digest('hex');
+  const entries = new Map(PROOF_PATHS.map(path=>[path,{sha:path===WORKFLOW_PATH?workflowOID:path,mode:'100644',type:'blob'}]));
   const tree = {object:{tree:{sha:'exact-complete-tree'}}, entries};
   const run = {id:12,run_attempt:1,head_sha:'head',event:'pull_request',path:WORKFLOW_PATH,
     repository:{full_name:'owner/repo'},head_repository:{full_name:'owner/repo'},
@@ -13,9 +16,9 @@ function fixture(profile = 'full') {
     ...(profile === 'full' ? [0,1,2] : [0]).map(shard=>({name:`regression (${shard})`,status:'completed',conclusion:'success',
       steps:['Checkout reviewed head','Install browser dependencies only for tests that use Playwright','Complete regression shard',
         ...(profile==='full'?['Install Node dependencies','Install Python dependencies',...(shard===0?['Build hosted assets']:[])]:[])].map(name=>({name,status:'completed',conclusion:'success'}))}))];
-  const f = {run,jobs,workflow:'ref: ${{ github.event.pull_request.head.sha }}\nname: Complete regression shard\nname: Build hosted assets'};
+  const f = {run,jobs,workflow};
   f.options = {repo:'owner/repo',number:2,head:'head',profile,baseline:tree,authored:structuredClone(tree),candidate:structuredClone(tree),api:async route=>{
-    if(route.includes('/git/blobs/')) return {content:Buffer.from(f.workflow).toString('base64')};
+    if(route.includes('/git/blobs/')) return {sha:workflowOID,size:Buffer.byteLength(f.workflow),encoding:'base64',content:Buffer.from(f.workflow).toString('base64')};
     if(route.includes('/jobs')) return {jobs:f.jobs};
     if(route.includes('/actions/runs/12')) return f.run;
     if(route.includes('/actions/workflows/')) return {workflow_runs:[f.run]};

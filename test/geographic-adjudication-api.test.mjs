@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';
 import fs from 'node:fs';
+import {createHash} from 'node:crypto';
 import path from 'node:path';
 import {gunzipSync} from 'node:zlib';
 import {bindingHash} from '../scripts/geographic-adjudication-api.mjs';
@@ -48,7 +49,7 @@ function fixture({mutation=()=>{}, secondReview=null, changeClaim=false, changeC
  const manifestRaw=Buffer.from(JSON.stringify(manifest));receipt.manifest_sha256=sha256(manifestRaw);receipt.evidence_hashes=[...new Set([...manifest.baseline.files,...manifest.outputs,...manifest.sources.flatMap(row=>row.files??[])].map(row=>row.sha256))];receipt.geographic_adjudications={version:1,decisions:[decision]};
  const files=[{filename:dossierPath,status:'added'},{filename:manifestPath,status:'added'}];
  const candidate=new Map([['README.md',baselineRaw],[retainedPath,sourceRaw],[dossierPath,dossierRaw],[manifestPath,manifestRaw]]), baseline=new Map([['README.md',baselineRaw],[retainedPath,sourceRaw]]);
- const blobs=new Map(),tree=map=>({truncated:false,tree:[...map].map(([path,raw])=>{const oid=sha256(raw).slice(0,40);blobs.set(oid,raw);return {path,sha:oid,size:raw.length,type:'blob',mode:'100644'};})});
+ const blobs=new Map(),tree=map=>({truncated:false,tree:[...map].map(([path,raw])=>{const oid=createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');blobs.set(oid,raw);return {path,sha:oid,size:raw.length,type:'blob',mode:'100644'};})});
  const candidateTree=tree(candidate),baseTree=tree(baseline);let reviewReads=0,claimReads=0,issueReads=0;
  const calls=[];
  const api=async(route,method='GET')=>{
@@ -65,7 +66,7 @@ function fixture({mutation=()=>{}, secondReview=null, changeClaim=false, changeC
   if(name===`/repos/${repo}/git/commits/${head}`) return {tree:{sha:'2'.repeat(40)}};
   if(name===`/repos/${repo}/git/trees/${'1'.repeat(40)}`) return baseTree;
   if(name===`/repos/${repo}/git/trees/${'2'.repeat(40)}`) return candidateTree;
-  const oid=name.split('/git/blobs/')[1];if(oid&&blobs.has(oid))return {encoding:'base64',content:blobs.get(oid).toString('base64')};
+  const oid=name.split('/git/blobs/')[1];if(oid&&blobs.has(oid))return {sha:oid,size:blobs.get(oid).length,encoding:'base64',content:blobs.get(oid).toString('base64')};
   throw Error(`Unexpected synthetic API route ${route}`);
  };
  return {api,calls,pr,manifest,receipt,dossier,decision,run:()=>collectGeographicApproval({api,repo,number:32,expectedHead:head})};

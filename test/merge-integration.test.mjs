@@ -157,7 +157,9 @@ test('parallel full-regression shards cover each unit file once and focused prof
 
 function addTrustedProof(f) {
   const original=f.api;
-  const entries = [...f.authored, ...PROOF_PATHS.map(path=>({path,sha:path,type:'blob',mode:'100644'}))];
+  const workflowRaw=fs.readFileSync('.github/workflows/merge-integration-checks.yml');
+  const workflowOID=createHash('sha1').update(`blob ${workflowRaw.length}\0`).update(workflowRaw).digest('hex');
+  const entries = [...f.authored, ...PROOF_PATHS.map(path=>({path,sha:path===WORKFLOW_PATH?workflowOID:path,type:'blob',mode:'100644'}))];
   f.authored=entries;
   const run={id:12,run_attempt:1,head_sha:f.head,event:'pull_request',path:WORKFLOW_PATH,
     repository:{full_name:f.repo},head_repository:{full_name:f.repo},status:'completed',conclusion:'success',
@@ -166,7 +168,7 @@ function addTrustedProof(f) {
   const api=async(route,method,body)=>{
     if(route.endsWith('/git/commits/'+f.head) || route.endsWith('/git/commits/'+f.base)) return {tree:{sha:'authored'}};
     if(route.endsWith('/git/commits/'+f.candidate)) return {tree:{sha:'authored'},parents:[{sha:f.base},{sha:f.head}]};
-    if(route.includes('/git/blobs/')) return {content:Buffer.from(fs.readFileSync('.github/workflows/merge-integration-checks.yml')).toString('base64')};
+    if(route.includes('/git/blobs/')) return {sha:workflowOID,size:workflowRaw.length,encoding:'base64',content:workflowRaw.toString('base64')};
     if(route.includes('/actions/workflows/')) return {workflow_runs:[run]};
     if(route.endsWith('/actions/runs/12')) return run;
     if(route.includes('/jobs')) return {jobs:[{name:'profile',status:'completed',conclusion:'success'},

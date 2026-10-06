@@ -51,6 +51,18 @@
         "hash_kind": "file-bytes"
       },
       {
+        "path": "test/geographic-adjudication-api.test.mjs",
+        "bytes": 15809,
+        "sha256": "faeded9906f336684f50efb44cdfdfaed11f6f211b9ea22ee9914a8d7c9bb833",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/integration-proof.test.mjs",
+        "bytes": 13199,
+        "sha256": "d5fff3bb6474c9c9212c4c886362e0beafe165adfc77993b3d570d9ec373b312",
+        "hash_kind": "file-bytes"
+      },
+      {
         "path": "test/merge-integration-client.test.mjs",
         "bytes": 4771,
         "sha256": "f30653d0583c49830f3ae525c0f4b32f5fa544516c2df42df4843ceb5a5dfc6c",
@@ -105,15 +117,21 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "coordination/engineering/1174-integration-scheduler/fixture-repair-receipt.json",
+      "bytes": 1020,
+      "sha256": "aade2426a88906b918b57f2cad427ed8d9e71a0a5e2ecdb2ef3cfbf402a71740",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "coordination/engineering/1174-integration-scheduler/immutable-negative-control.json",
-      "bytes": 995,
-      "sha256": "93b59791f4eb586ecbd9eeeb1279a620c69fcb1124e8fd75a0da6e25a63b425c",
+      "bytes": 1187,
+      "sha256": "eaae1f52b20df70b1ccc602ff45417fa8605476202639dc7854a224ed37ea3e0",
       "hash_kind": "file-bytes"
     },
     {
       "path": "coordination/engineering/1174-integration-scheduler/immutable-positive-control.json",
-      "bytes": 1144,
-      "sha256": "3cc52979664d7bf094f398417eb0054c2ae214657498cd4ba805318b3c9adf59",
+      "bytes": 1313,
+      "sha256": "1aa69c348eb07376016a7dff025614d19f23c4dee78688ae377108716d7c58de",
       "hash_kind": "file-bytes"
     },
     {
@@ -138,6 +156,12 @@
       "path": "coordination/engineering/1174-integration-scheduler/test-results-diagnostic.txt",
       "bytes": 11224,
       "sha256": "684bbca64bcc111474b2be79f44142d63b31eb4ce18db40cf1fdc4d4d173f593",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/1174-integration-scheduler/test-results-fixture.txt",
+      "bytes": 14860,
+      "sha256": "4b123d749be622808afd97ebd45d7a6633da1f05e660c5bb70c163798c0af983",
       "hash_kind": "file-bytes"
     },
     {
@@ -195,9 +219,21 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "test/geographic-adjudication-api.test.mjs",
+      "bytes": 15936,
+      "sha256": "bbe3ed22ad083a3b8017cd29b0e218b967a1865f241ac0ceca135a7048ae58a7",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "test/immutable-git-blobs.test.mjs",
       "bytes": 7724,
       "sha256": "89c241544100e5f439b30127c7b560ca02c5b62cf4dc153c23a23347bbf4d0f3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/integration-proof.test.mjs",
+      "bytes": 13507,
+      "sha256": "358799f4f405b0739fc6c89cca87c12a50bc3c3d26100319e4697bb7c100e0ae",
       "hash_kind": "file-bytes"
     },
     {
@@ -214,8 +250,8 @@
     },
     {
       "path": "test/merge-integration.test.mjs",
-      "bytes": 39381,
-      "sha256": "a2c5ce84b82863a7551e771f7df95ab0dc40265a18b9e9b47dd1c8c0246a93b9",
+      "bytes": 39605,
+      "sha256": "6f52d99d965a943e25ad130865419eb3bd84c86ff28c3b6f86e8aef6d21c021f",
       "hash_kind": "file-bytes"
     },
     {
@@ -226,8 +262,8 @@
     },
     {
       "path": "test/premerge-evidence.test.mjs",
-      "bytes": 19260,
-      "sha256": "a7a6c0844dc4c3ed39218692133e2c2288d934751598dafc2f0e56fe179bef55",
+      "bytes": 19368,
+      "sha256": "429687cbdd4673a5f0f3b44d53993af28c1c4cfd9285d0f01ceba0869de6605a",
       "hash_kind": "file-bytes"
     },
     {
@@ -257,6 +293,10 @@
       "status": "added"
     },
     {
+      "path": "coordination/engineering/1174-integration-scheduler/fixture-repair-receipt.json",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/1174-integration-scheduler/immutable-negative-control.json",
       "status": "added"
     },
@@ -278,6 +318,10 @@
     },
     {
       "path": "coordination/engineering/1174-integration-scheduler/test-results-diagnostic.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/1174-integration-scheduler/test-results-fixture.txt",
       "status": "added"
     },
     {
@@ -322,8 +366,18 @@
       "original_sha256": "3de24f87fdd7af8aa0b6638619833d9837ac07861b54b9d1d46ce2baa3b57e88"
     },
     {
+      "path": "test/geographic-adjudication-api.test.mjs",
+      "status": "modified",
+      "original_sha256": "faeded9906f336684f50efb44cdfdfaed11f6f211b9ea22ee9914a8d7c9bb833"
+    },
+    {
       "path": "test/immutable-git-blobs.test.mjs",
       "status": "added"
+    },
+    {
+      "path": "test/integration-proof.test.mjs",
+      "status": "modified",
+      "original_sha256": "d5fff3bb6474c9c9212c4c886362e0beafe165adfc77993b3d570d9ec373b312"
     },
     {
       "path": "test/merge-integration-client.test.mjs",
@@ -407,6 +461,7 @@
     "geographic_approval": "not-requested"
   },
   "commands": [
-    "node --test test/immutable-git-blobs.test.mjs test/merge-scheduler.test.mjs test/merge-integration.test.mjs test/merge-integration-client.test.mjs test/merge-integration-entrypoint.test.mjs test/trusted-workflow-checkouts.test.mjs test/worker-result.test.mjs test/premerge-evidence.test.mjs test/issue-claims.test.mjs"
+    "node --test test/immutable-git-blobs.test.mjs test/merge-scheduler.test.mjs test/merge-integration.test.mjs test/merge-integration-client.test.mjs test/merge-integration-entrypoint.test.mjs test/trusted-workflow-checkouts.test.mjs test/worker-result.test.mjs test/premerge-evidence.test.mjs test/issue-claims.test.mjs",
+    "PYTHON=<existing pinned Python with Shapely2.1.2> node --test test/immutable-git-blobs.test.mjs test/merge-scheduler.test.mjs test/merge-integration.test.mjs test/merge-integration-client.test.mjs test/merge-integration-entrypoint.test.mjs test/trusted-workflow-checkouts.test.mjs test/worker-result.test.mjs test/premerge-evidence.test.mjs test/issue-claims.test.mjs test/integration-proof.test.mjs test/geographic-adjudication-api.test.mjs"
   ]
 }

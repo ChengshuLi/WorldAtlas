@@ -185,11 +185,11 @@ test('trusted hosted gate checks a new limited prior-evidence registry and still
   f.files=[{filename:registryFile,status:'added'},{filename:manifestFile,status:'added'}];
   f.manifest.change_receipts=f.files.map(file=>({path:file.filename,status:'added'}));
   const raw=new Map([[manifestFile,Buffer.from(JSON.stringify(f.manifest))],['prior-audit.json',prior],[registryFile,registry]]);
-  const tree=[...raw].map(([path,bytes])=>({path,type:'blob',mode:'100644',sha:sha256(bytes),size:bytes.length}));
+  const tree=[...raw].map(([path,bytes])=>({path,type:'blob',mode:'100644',sha:createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex'),size:bytes.length}));
   const api=async route=>{
     if(route.includes('/git/commits/'))return {tree:{sha:'tree'}};
     if(route.includes('/git/trees/'))return {truncated:false,tree};
-    if(route.includes('/git/blobs/')){const row=tree.find(row=>row.sha===route.split('/').pop());return {encoding:'base64',content:raw.get(row.path).toString('base64')};}
+    if(route.includes('/git/blobs/')){const row=tree.find(row=>row.sha===route.split('/').pop());return {sha:row.sha,size:raw.get(row.path).length,encoding:'base64',content:raw.get(row.path).toString('base64')};}
     if(route.includes('/compare/'))return {status:'ahead'};
     throw Error('Unexpected route');
   };

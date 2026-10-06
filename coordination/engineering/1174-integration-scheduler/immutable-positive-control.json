@@ -4,7 +4,8 @@
   "outcome": "passed",
   "test_cases": [
     "root-format 1479 blob requests become 474 verified immutable fetches across three authority passes",
-    "actual unchanged remote premerge evidence and exact-head review validate twice with only three blob fetches"
+    "actual unchanged remote premerge evidence and exact-head review validate twice with only three blob fetches",
+    "final merge rechecks actual latest source authority: none"
   ],
   "transcript": "coordination/engineering/1174-integration-scheduler/test-results-cache.txt",
   "limits": [
@@ -19,5 +20,6 @@
     "raw_bytes": 235417555,
     "largest_blob_bytes": 14322993,
     "mode": "Synthetic distribution matches read-only real-OID count/aggregate/largest payload without copying geographic bytes."
-  }
+  },
+  "fixture_transcript": "coordination/engineering/1174-integration-scheduler/test-results-fixture.txt"
 }
