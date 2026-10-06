@@ -330,3 +330,6 @@ cancel or dispatch a duplicate. A terminal result settles its FIFO ticket and
 cannot be recovered by rerunning just that final job under the resolved ticket.
 Local controls demonstrate pacing and rejection, not hosted quota recovery;
 record actual same-token hosted observations separately when those conditions occur.
+
+
+Queue maintenance: read docs/QUEUE_READINESS_AUDIT.md. Before spending an issue's last allowed partial PR, map every original acceptance criterion to durable satisfied evidence or an existing/new bounded remaining-work issue. Deduplicate against open and closed issues, retain completed children, and include the required worldatlas-queue-disposition:v1 marker in the last partial PR body. Never just label a budget-exhausted issue blocked and abandon its remainder or increase its budget. After verified merge, record the reviewed acceptance mapping and actual merge SHA on the original issue, then release safely or rotate only within the remaining budget. Source-unavailable results can complete an initial research task only where its acceptance explicitly permits them; they do not approve boundaries, imports or publication. Genuine remaining source/correction/production tasks retain separate explicit gates. Main / issue creation reviews coordination:triage-needed on original issues; workers preserve other claims and checkpoints.

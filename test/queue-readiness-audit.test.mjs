@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {assessIssue,auditQueue,commentBlockers} from '../scripts/queue-readiness-audit.mjs';
 import {renderClaim} from '../scripts/issue-claim-contract.mjs';
 const spec={max_prs:2,depends_on:[],mode:'engineering',scope:'bounded correction'};
-const issue=(number=1,labels=['type:engineering','kind:work-item'],s=spec)=>({number,state:'open',labels,body:`<!-- worldatlas-work:v1\n${JSON.stringify(s)}\n-->`});
+const issue=(number=1,labels=['type:engineering','kind:work-item'],s=spec)=>({number,state:'open',created_at:'2020-01-01T00:00:00Z',labels,body:`<!-- worldatlas-work:v1\n${JSON.stringify(s)}\n-->`});
 const codes=r=>r.findings.map(x=>x.code);
 test('missing readiness is a review candidate, not permission',()=>{
  assert.deepEqual(codes(assessIssue(issue())),['review-missing-ready']);
@@ -56,4 +56,23 @@ test('failed reads preserve checkpoint and never report false resolutions',async
  const f=fixture([issue()],{fail:true}),r=await auditQueue({api:f.api,repo:'a/b',previous:prev});
  assert.equal(r.status,'incomplete');assert.equal(r.last_successful_coverage,'earlier');assert.equal(r.resolved_findings.length,0);
  await assert.rejects(auditQueue({api:f.api,repo:'a/b',previous:{...prev,repository:'wrong/repo'}}),/checkpoint/);
+});
+test('dependency-close audit inspects the dependent and skips unrelated histories without resolving global findings',async()=>{
+ const rows=[issue(1,['type:engineering','kind:work-item','status:blocked'],{...spec,depends_on:[2]}),issue(3)];
+ const f=fixture(rows),baseAPI=f.api;
+ const api=route=>route.split('?')[0].endsWith('/issues/2')?Promise.resolve({number:2,state:'closed'}):baseAPI(route);
+ const report=await auditQueue({api,repo:'a/b',targetIssue:2});
+ assert.equal(report.status,'complete');assert.equal(report.inspected_issues,1);
+ assert.deepEqual(report.coverage,{kind:'targeted',trigger_issue:2,issue_numbers:[1]});
+ assert(report.findings.some(row=>row.issue===1 && row.code==='review-blocked'));
+ assert(!f.calls.some(route=>route.includes('/issues/3/comments')));
+ await assert.rejects(auditQueue({api,repo:'a/b',targetIssue:2,previous:{version:1,repository:'a/b',status:'complete'}}),/no global checkpoint/);
+});
+test('targeted readiness checks still inspect global ownership declarations',async()=>{
+ const a=issue(1,['type:geography','kind:work-item'],{...spec,mode:'geography',owned_paths:['data/regional-review/shared/']});
+ const b={...a,number:2};const f=fixture([a,b]);
+ const report=await auditQueue({api:f.api,repo:'a/b',targetIssue:1});
+ assert(report.findings.some(row=>row.issue===1 && row.code==='ownership-overlap' && row.details.other_issue===2));
+ assert(!report.findings.some(row=>row.issue===2));
+ assert(!f.calls.some(route=>route.includes('/issues/2/comments')));
 });

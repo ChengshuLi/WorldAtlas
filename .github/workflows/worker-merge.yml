@@ -225,6 +225,11 @@ jobs:
           GEOGRAPHY_REPORT_SHA256: ${{ needs.geography.outputs.report_sha256 }}
           GEOGRAPHY_ARTIFACT_NAME: ${{ needs.geography.outputs.artifact_name }}
         run: node scripts/run-worker-merge.mjs
+      - name: Refresh affected queue after a confirmed merge
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/queue-readiness-event.mjs merge
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:

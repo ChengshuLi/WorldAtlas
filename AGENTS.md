@@ -42,3 +42,7 @@ Read [LOCAL_WORKSPACES.md](docs/LOCAL_WORKSPACES.md) before allocating local aut
 ## Evidence and independent review
 
 Follow `docs/PREMERGE_EVIDENCE_REVIEW.md` and the authoritative `.github/evidence-policy.json`. New work after activation declares exact subjects/pins and its owned manifest in the issue contract; legacy scopes remain preserved. Prepare versioned whole-file evidence, immutable scientific helper results and honest source/publication limits. Request a distinct worker's substantive review tied to the exact PR head; never self-review under a second worker ID. The queue rechecks evidence and review; green CI alone does not approve geography or authorize imports.
+
+## Queue freshness
+
+Read docs/QUEUE_READINESS_AUDIT.md. Main / issue creation reviews `coordination:triage-needed` on original issues before refreshing the ready queue. Workers record acceptance-to-evidence/follow-up handoffs before their last partial PR and after merge; exhausted budgets require triage, never abandonment. An initial research review may finish with explicit unknowns only where its original acceptance allows this. Preserve separate scientific, correction, publication and operator gates, active ownership and checkpoints. No additional readiness ledger is maintained; Auditor #726 retains quality review.

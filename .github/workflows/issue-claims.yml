@@ -57,6 +57,11 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: node scripts/run-issue-claim.mjs
+      - name: Refresh queue after an accepted release
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/queue-readiness-event.mjs claim
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: claim-${{ inputs.request_id }}
