@@ -1,0 +1,645 @@
+{
+  "version": 1,
+  "issue": 1170,
+  "lane": "geography",
+  "worker_id": "01a10947-7d6e-7ba2-98a1-a9f91dedabfc",
+  "subject_ids": [
+    "gb:XKX:ADM1:2360587B5118871504069",
+    "gb:XKX:ADM1:2360587B74553771763221",
+    "gb:XKX:ADM1:2360587B95703323116719"
+  ],
+  "subject_ids_sha256": "6835945afc9cacb186ba67e2c39d9c85a5821ac3d4794d2491da9ae55e8299bb",
+  "baseline": {
+    "commit": "0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15",
+    "files": [
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geographic-releases/current-manifest.json",
+        "bytes": 206,
+        "sha256": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/macro-foundation/current-membership-inventory.json.gz",
+        "bytes": 2404397,
+        "sha256": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/macro-foundation/review-index.json",
+        "bytes": 2383,
+        "sha256": "31dfd5cbfd8f3def829f655e7ddd855d2d2865e5ac63f9d1a97d1c08782910cf",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/macro-foundation/regional-handoffs.json.gz",
+        "bytes": 71286,
+        "sha256": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/macro-foundation/macro-certificate.json",
+        "bytes": 38959,
+        "sha256": "f50f70fcb0756712ab7a7a388bc8cada093080518f07d3a6f7329758980ea81b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/macro-foundation/approved-boundary-decisions.json",
+        "bytes": 634171,
+        "sha256": "b67d5a3bcf8101cffb089c0262286378a80bb642cd6dde33f7721419227e3f18",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/source-manifest.json",
+        "bytes": 6787,
+        "sha256": "fded0febc8ef8d934b1f7358755b3102ec8043cc027a88ad8106dec8247b7f56",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/gb/gb-XKX-ADM1.geojson",
+        "bytes": 1898578,
+        "sha256": "9b07b08fe0f9ca5a26ddb6de2008ac235b38ffaf069063df9851711c2d358315",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/gb/XKX-ADM1-geoBoundaries-XKX-ADM1-metaData.json",
+        "bytes": 799,
+        "sha256": "a912dcaefa1096a6c0af067af9723b2a67c32f5b0147b8198f99751eb591b49c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/gb/XKX-ADM1-CITATION-AND-USE-geoBoundaries.txt",
+        "bytes": 4316,
+        "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-28.json",
+        "bytes": 6613963,
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/followup-kosovo-422-district-source-20261005/RESEARCH.md",
+        "bytes": 10722,
+        "sha256": "2c5a0da5ae2a1a064332034d704e4a30dc27be3a228a5e587e911d08de839fd9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/followup-kosovo-422-district-source-20261005/SOURCE_RESTORATION.md",
+        "bytes": 7511,
+        "sha256": "2c8327c8ac2435854051248345d24050f26b8b59de87895cb6ae997f4dc5f70a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/followup-kosovo-422-district-source-20261005/evidence-quality.json",
+        "bytes": 29169,
+        "sha256": "9d1f6193c6fd4e7450440a0a7096ffb74b6fba042af0187caa18f39589a0ff74",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/followup-kosovo-422-district-source-20261005/github-issue-contract.json",
+        "bytes": 8820,
+        "sha256": "7ebb5e4717b08375ed0dfde5d077624c4b54b7c5f9a4b3d2524bff145c450163",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/followup-kosovo-422-district-source-20261005/kas-statistical-regions.json",
+        "bytes": 1811,
+        "sha256": "0f33913b6a36b057ecc9d51cbe7e14c11954fc1d3a89565eb63a64ffb4be6fff",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/followup-kosovo-422-district-source-20261005/pr-body.txt",
+        "bytes": 765,
+        "sha256": "867659401c677e32437d37f44e9234ca15ef6966abcb86289159bd1dc6ed3dc8",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/followup-kosovo-422-district-source-20261005/related-scope-1008.json",
+        "bytes": 886,
+        "sha256": "3399a1e217b2c6c585db2070cdb799cb882eb5951af7d8d9a5d404da26157f03",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/followup-kosovo-422-district-source-20261005/reproduce.py",
+        "bytes": 10463,
+        "sha256": "a94aa07904aa002e02070cd9c9a6b54660a3e0fa8611a5985d104fa859bcec99",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/followup-kosovo-422-district-source-20261005/source-crosswalk.json",
+        "bytes": 10417,
+        "sha256": "7339a45153c1a7e6f7c594b6c87be2f8b6294e7407ec63ab2598c839bb4cc5e7",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "96f2a6d201236ba62f471535db240b123de60c09:data/world-index.json": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "96f2a6d201236ba62f471535db240b123de60c09:data/hierarchy.json": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "96f2a6d201236ba62f471535db240b123de60c09:data/geographic-releases/current-manifest.json": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81",
+      "96f2a6d201236ba62f471535db240b123de60c09:data/administrative-sources.json": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "96f2a6d201236ba62f471535db240b123de60c09:data/macro-foundation/current-membership-inventory.json.gz": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+      "96f2a6d201236ba62f471535db240b123de60c09:data/macro-foundation/review-index.json": "31dfd5cbfd8f3def829f655e7ddd855d2d2865e5ac63f9d1a97d1c08782910cf",
+      "96f2a6d201236ba62f471535db240b123de60c09:data/macro-foundation/regional-handoffs.json.gz": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
+      "96f2a6d201236ba62f471535db240b123de60c09:data/macro-foundation/macro-certificate.json": "f50f70fcb0756712ab7a7a388bc8cada093080518f07d3a6f7329758980ea81b",
+      "96f2a6d201236ba62f471535db240b123de60c09:data/macro-foundation/approved-boundary-decisions.json": "b67d5a3bcf8101cffb089c0262286378a80bb642cd6dde33f7721419227e3f18",
+      "96f2a6d201236ba62f471535db240b123de60c09:data/regional-review/regional-review-3c4fe25a21fa428d/source/source-manifest.json": "fded0febc8ef8d934b1f7358755b3102ec8043cc027a88ad8106dec8247b7f56",
+      "96f2a6d201236ba62f471535db240b123de60c09:data/regional-review/regional-review-3c4fe25a21fa428d/source/gb/gb-XKX-ADM1.geojson": "9b07b08fe0f9ca5a26ddb6de2008ac235b38ffaf069063df9851711c2d358315",
+      "96f2a6d201236ba62f471535db240b123de60c09:data/regional-review/regional-review-3c4fe25a21fa428d/source/gb/XKX-ADM1-geoBoundaries-XKX-ADM1-metaData.json": "a912dcaefa1096a6c0af067af9723b2a67c32f5b0147b8198f99751eb591b49c",
+      "96f2a6d201236ba62f471535db240b123de60c09:data/regional-review/regional-review-3c4fe25a21fa428d/source/gb/XKX-ADM1-CITATION-AND-USE-geoBoundaries.txt": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+      "96f2a6d201236ba62f471535db240b123de60c09:data/geography/part-28.json": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15:data/regional-review/followup-kosovo-422-district-source-20261005/RESEARCH.md": "2c5a0da5ae2a1a064332034d704e4a30dc27be3a228a5e587e911d08de839fd9",
+      "0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15:data/regional-review/followup-kosovo-422-district-source-20261005/SOURCE_RESTORATION.md": "2c8327c8ac2435854051248345d24050f26b8b59de87895cb6ae997f4dc5f70a",
+      "0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15:data/regional-review/followup-kosovo-422-district-source-20261005/evidence-quality.json": "9d1f6193c6fd4e7450440a0a7096ffb74b6fba042af0187caa18f39589a0ff74",
+      "0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15:data/regional-review/followup-kosovo-422-district-source-20261005/github-issue-contract.json": "7ebb5e4717b08375ed0dfde5d077624c4b54b7c5f9a4b3d2524bff145c450163",
+      "0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15:data/regional-review/followup-kosovo-422-district-source-20261005/kas-statistical-regions.json": "0f33913b6a36b057ecc9d51cbe7e14c11954fc1d3a89565eb63a64ffb4be6fff",
+      "0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15:data/regional-review/followup-kosovo-422-district-source-20261005/pr-body.txt": "867659401c677e32437d37f44e9234ca15ef6966abcb86289159bd1dc6ed3dc8",
+      "0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15:data/regional-review/followup-kosovo-422-district-source-20261005/related-scope-1008.json": "3399a1e217b2c6c585db2070cdb799cb882eb5951af7d8d9a5d404da26157f03",
+      "0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15:data/regional-review/followup-kosovo-422-district-source-20261005/reproduce.py": "a94aa07904aa002e02070cd9c9a6b54660a3e0fa8611a5985d104fa859bcec99",
+      "0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15:data/regional-review/followup-kosovo-422-district-source-20261005/source-crosswalk.json": "7339a45153c1a7e6f7c594b6c87be2f8b6294e7407ec63ab2598c839bb4cc5e7"
+    },
+    "pin_files": {
+      "96f2a6d201236ba62f471535db240b123de60c09:data/world-index.json": "data/world-index.json",
+      "96f2a6d201236ba62f471535db240b123de60c09:data/hierarchy.json": "data/hierarchy.json",
+      "96f2a6d201236ba62f471535db240b123de60c09:data/geographic-releases/current-manifest.json": "data/geographic-releases/current-manifest.json",
+      "96f2a6d201236ba62f471535db240b123de60c09:data/administrative-sources.json": "data/administrative-sources.json",
+      "96f2a6d201236ba62f471535db240b123de60c09:data/macro-foundation/current-membership-inventory.json.gz": "data/macro-foundation/current-membership-inventory.json.gz",
+      "96f2a6d201236ba62f471535db240b123de60c09:data/macro-foundation/review-index.json": "data/macro-foundation/review-index.json",
+      "96f2a6d201236ba62f471535db240b123de60c09:data/macro-foundation/regional-handoffs.json.gz": "data/macro-foundation/regional-handoffs.json.gz",
+      "96f2a6d201236ba62f471535db240b123de60c09:data/macro-foundation/macro-certificate.json": "data/macro-foundation/macro-certificate.json",
+      "96f2a6d201236ba62f471535db240b123de60c09:data/macro-foundation/approved-boundary-decisions.json": "data/macro-foundation/approved-boundary-decisions.json",
+      "96f2a6d201236ba62f471535db240b123de60c09:data/regional-review/regional-review-3c4fe25a21fa428d/source/source-manifest.json": "data/regional-review/regional-review-3c4fe25a21fa428d/source/source-manifest.json",
+      "96f2a6d201236ba62f471535db240b123de60c09:data/regional-review/regional-review-3c4fe25a21fa428d/source/gb/gb-XKX-ADM1.geojson": "data/regional-review/regional-review-3c4fe25a21fa428d/source/gb/gb-XKX-ADM1.geojson",
+      "96f2a6d201236ba62f471535db240b123de60c09:data/regional-review/regional-review-3c4fe25a21fa428d/source/gb/XKX-ADM1-geoBoundaries-XKX-ADM1-metaData.json": "data/regional-review/regional-review-3c4fe25a21fa428d/source/gb/XKX-ADM1-geoBoundaries-XKX-ADM1-metaData.json",
+      "96f2a6d201236ba62f471535db240b123de60c09:data/regional-review/regional-review-3c4fe25a21fa428d/source/gb/XKX-ADM1-CITATION-AND-USE-geoBoundaries.txt": "data/regional-review/regional-review-3c4fe25a21fa428d/source/gb/XKX-ADM1-CITATION-AND-USE-geoBoundaries.txt",
+      "96f2a6d201236ba62f471535db240b123de60c09:data/geography/part-28.json": "data/geography/part-28.json",
+      "0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15:data/regional-review/followup-kosovo-422-district-source-20261005/RESEARCH.md": "data/regional-review/followup-kosovo-422-district-source-20261005/RESEARCH.md",
+      "0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15:data/regional-review/followup-kosovo-422-district-source-20261005/SOURCE_RESTORATION.md": "data/regional-review/followup-kosovo-422-district-source-20261005/SOURCE_RESTORATION.md",
+      "0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15:data/regional-review/followup-kosovo-422-district-source-20261005/evidence-quality.json": "data/regional-review/followup-kosovo-422-district-source-20261005/evidence-quality.json",
+      "0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15:data/regional-review/followup-kosovo-422-district-source-20261005/github-issue-contract.json": "data/regional-review/followup-kosovo-422-district-source-20261005/github-issue-contract.json",
+      "0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15:data/regional-review/followup-kosovo-422-district-source-20261005/kas-statistical-regions.json": "data/regional-review/followup-kosovo-422-district-source-20261005/kas-statistical-regions.json",
+      "0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15:data/regional-review/followup-kosovo-422-district-source-20261005/pr-body.txt": "data/regional-review/followup-kosovo-422-district-source-20261005/pr-body.txt",
+      "0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15:data/regional-review/followup-kosovo-422-district-source-20261005/related-scope-1008.json": "data/regional-review/followup-kosovo-422-district-source-20261005/related-scope-1008.json",
+      "0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15:data/regional-review/followup-kosovo-422-district-source-20261005/reproduce.py": "data/regional-review/followup-kosovo-422-district-source-20261005/reproduce.py",
+      "0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15:data/regional-review/followup-kosovo-422-district-source-20261005/source-crosswalk.json": "data/regional-review/followup-kosovo-422-district-source-20261005/source-crosswalk.json"
+    },
+    "subject_files": {
+      "gb:XKX:ADM1:2360587B5118871504069": "data/geography/part-28.json",
+      "gb:XKX:ADM1:2360587B74553771763221": "data/geography/part-28.json",
+      "gb:XKX:ADM1:2360587B95703323116719": "data/geography/part-28.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "geoboundaries-xkx-adm1-2021",
+      "url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d",
+      "role": "Pinned seven-feature district-named source collection, metadata and upstream citation/use note retained in parent #422 evidence",
+      "vintage": "Boundary represented in 2021; source-data update 2023-01-19; build 2023-12-12; upstream commit 2023-12-13",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "geoBoundaries product notice says CC BY 4.0 but directs users to file metadata; this file metadata says CC BY-SA 2.0 and cites OSM. Exact OSM snapshot and service terms are missing; reuse unresolved."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Original whole bytes are pinned in the #422 source packet at the immutable baseline commit listed in baseline.files; see its SOURCE_RESTORATION.md for exact media URL, size, SHA-256 and restoration checks. No duplicate geometry copy is made here.",
+      "limit": "Seven records, 48 reported admUnitCount, and the original metadata do not establish legal administrative meaning or polygon equivalence. OSM vintage, relation IDs and exact service/source rights remain unresolved.",
+      "temporal_status": "reference",
+      "observed_sha256": "9b07b08fe0f9ca5a26ddb6de2008ac235b38ffaf069063df9851711c2d358315"
+    },
+    {
+      "id": "kosovo-statistical-regions-2022",
+      "url": "https://askapi.rks-gov.net/Custom/baa59b95-af3f-4117-8c84-edc9ef401bf7.pdf",
+      "role": "KAS classification report, April 2022, pages 4–7: 38 municipalities and seven non-administrative NUTS III proposal regions with membership tables",
+      "vintage": "Published 2022-04; retrieval receipt dated 2026-10-05",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Official statistical PDF; redistribution terms were not authenticated. Original body is not retained."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Retrieve exact URL and require SHA-256 aa322791fa3d683e8f054c57551437e754846b5094f4b413879011c152a6cb0f before relying on the prior packet’s cited pages.",
+      "limit": "No machine-readable region-boundary vector or reuse license; name and membership evidence cannot prove polygon equivalence. Prior retrieval body is not retained.",
+      "temporal_status": "reference",
+      "observed_sha256": "aa322791fa3d683e8f054c57551437e754846b5094f4b413879011c152a6cb0f"
+    },
+    {
+      "id": "kosovo-municipal-law-2008-2025",
+      "url": "https://gzk.rks-gov.net/ActDetail.aspx?ActID=107377",
+      "role": "Official Gazette consolidated Law 03/L-041 record; original 2008 publication also cited in parent research",
+      "vintage": "Original law 2008-06-02; consolidated record published 2025-07-08; retrieval receipt 2026-10-05",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Official legal record; no reuse terms were established. Retrieved HTML body is not retained."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Retrieve current consolidated record and compare its response hash with prior receipt 4d45a816aaef692e52d037b121cb49f1a4cbcbb81; original record restoration URL/hash is in parent SOURCE_RESTORATION.md.",
+      "limit": "Establishes legal municipal/cadastral-zone framework, not present-day boundaries or polygon coordinates.",
+      "temporal_status": "reference",
+      "observed_sha256": "4d45a816aaef692e52d037b121cb49f1a4cbcbb81"
+    },
+    {
+      "id": "kca-boundary-publication-context",
+      "url": "https://geoportal.rks-gov.net/portal/main",
+      "role": "Kosovo Cadastral Agency geoportal and the KCA 2024 boundary credit in the KAS census map, as cited in parent research",
+      "vintage": "Geoportal inspected 2026-10-05; KAS census publication vintage 2024",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "No actual boundary asset or reuse terms retrieved."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Inspect the official portal and obtain a dated machine-readable municipal vector and explicit reuse terms; prior guessed REST URLs returned the application shell rather than JSON.",
+      "limit": "Portal availability and map credit do not establish access to geometry, boundary vintage, or reuse permission.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "osm-rights-context",
+      "url": "https://www.openstreetmap.org/copyright",
+      "role": "OSMF copyright page and source metadata rights context for the OSM-derived geoBoundaries payload",
+      "vintage": "Rights page response retrieved 2026-10-05; OSM data license history records transition in 2012",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "OSM data is identified as ODbL 1.0 and documentation as CC BY-SA 2.0, but exact source database vintage and derived-file chain are missing."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Prior packet records response SHA-256 879f8e206e1a0b419f1d554cedd69b7cc3562fd5775424435716622cd4a5905; retrieve/hash a new vintage before relying on current page terms.",
+      "limit": "Cannot determine the precise obligations for this geometry without its source snapshot, relation IDs, service terms, and exact historical chain.",
+      "temporal_status": "reference",
+      "observed_sha256": "879f8e206e1a0b419f1d554cedd69b7cc3562fd5775424435716622cd4a5905"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/claim-receipt.json",
+      "bytes": 949,
+      "sha256": "8c986abfca3eb2188b1ff05b08bd953eb38338c76a2c04cd7c5d7b9ba1870065",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/issue-scope-snapshot.json",
+      "bytes": 19844,
+      "sha256": "e42f804bce3b4286f73d5e09f479cd82de063d475982ec9c8501135c5ecd18fa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/pinned-inputs.json",
+      "bytes": 6115,
+      "sha256": "5fe937bbd7ff6d2dafe0d8dd84757a79e0a55171e4e281b36fdc081b2af6285a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/reproduce_guarded.py",
+      "bytes": 10433,
+      "sha256": "44dcf3ba2610b24af318b0147eeb5913852585c66651ab7988fc506d20d7131c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/control-evidence.json",
+      "bytes": 3149,
+      "sha256": "793c713f2e82e0033a548376cd0ef720422fbef553adcad922830f14e03092b9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/reproducibility-evidence.json",
+      "bytes": 543,
+      "sha256": "b2c32934f41b5a4b64ed86f2b52f340583f71d030a65a5d6bc81af3f63c48868",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/source-review-evidence.json",
+      "bytes": 1095,
+      "sha256": "df4f30ded16d72820faeeb5ff8f7474031159b1dc41ac588302335bd954e54ce",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/RESEARCH.md",
+      "bytes": 9432,
+      "sha256": "b44e3c3e60e2688fd7ad2e71a0e7ee62b63ccf7e594a0084b2a43df9ad26e7b9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/run-1-source-crosswalk.json",
+      "bytes": 10417,
+      "sha256": "7339a45153c1a7e6f7c594b6c87be2f8b6294e7407ec63ab2598c839bb4cc5e7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/run-2-source-crosswalk.json",
+      "bytes": 10417,
+      "sha256": "7339a45153c1a7e6f7c594b6c87be2f8b6294e7407ec63ab2598c839bb4cc5e7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/run-3-source-crosswalk.json",
+      "bytes": 10417,
+      "sha256": "7339a45153c1a7e6f7c594b6c87be2f8b6294e7407ec63ab2598c839bb4cc5e7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/current-claim-receipt.json",
+      "hash_kind": "file-bytes",
+      "bytes": 934,
+      "sha256": "3bdb5e6f925718c31be0bfd4a500423d1a9ebd5256795ca70f5615e9a176ea05"
+    },
+    {
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/run-4-source-crosswalk.json",
+      "hash_kind": "file-bytes",
+      "bytes": 10417,
+      "sha256": "7339a45153c1a7e6f7c594b6c87be2f8b6294e7407ec63ab2598c839bb4cc5e7"
+    }
+  ],
+  "methods": [
+    {
+      "id": "whole-input-guard",
+      "kind": "code",
+      "description": "Retrieve every issue-declared input from its immutable Git commit and reject unless exact whole-file byte count and SHA-256 match before output creation; descriptor list is itself pinned by the runner.",
+      "software": "Python 3.7-compatible stdlib runner; Git; evidence validator Node.js 24",
+      "units": "file bytes and SHA-256"
+    },
+    {
+      "id": "staged-history-reproduction",
+      "kind": "generator",
+      "description": "Execute the exact hash-verified historical reproducer against a private temporary copy; compare output byte count and full SHA-256 with the retained immutable report; use exclusive output creation.",
+      "software": "Python 3; Git immutable blob reader; pinned historical reproduce.py",
+      "units": "bytes and SHA-256"
+    },
+    {
+      "id": "negative-controls",
+      "kind": "code",
+      "description": "Inject synthetic KAS name drift, other transcription drift, historical code drift, wrong baseline and wrong packet path into the reader boundary; check rejection before output. Also run the old script in an isolated tree to reproduce its acceptance of the synthetic name.",
+      "software": "Python stdlib and pinned historical runner",
+      "units": "control outcomes"
+    },
+    {
+      "id": "scope-and-provenance-review",
+      "kind": "source",
+      "description": "Reinspect frozen issue subject roster, seven-feature/source metadata crosswalk, KAS membership transcription, prior source restoration assessment and neighboring layer metadata; report names as name-only correspondence.",
+      "software": "Pinned Git blobs, JSON parser, SHA-256",
+      "units": "source IDs, features, region and municipality name counts"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "pinned_source_feature_count",
+      "value": 7,
+      "unit": "features",
+      "vintage": "baseline",
+      "input_sha256": "7339a45153c1a7e6f7c594b6c87be2f8b6294e7407ec63ab2598c839bb4cc5e7",
+      "evaluation_commit": "0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15"
+    },
+    {
+      "id": "issue_999_subject_count",
+      "value": 3,
+      "unit": "features",
+      "vintage": "baseline",
+      "input_sha256": "7339a45153c1a7e6f7c594b6c87be2f8b6294e7407ec63ab2598c839bb4cc5e7",
+      "evaluation_commit": "0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15"
+    },
+    {
+      "id": "issue_1008_read_only_context_count",
+      "value": 4,
+      "unit": "features",
+      "vintage": "baseline",
+      "input_sha256": "7339a45153c1a7e6f7c594b6c87be2f8b6294e7407ec63ab2598c839bb4cc5e7",
+      "evaluation_commit": "0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15"
+    },
+    {
+      "id": "kas_statistical_regions",
+      "value": 7,
+      "unit": "regions",
+      "vintage": "baseline",
+      "input_sha256": "7339a45153c1a7e6f7c594b6c87be2f8b6294e7407ec63ab2598c839bb4cc5e7",
+      "evaluation_commit": "0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15"
+    },
+    {
+      "id": "kas_unique_municipality_names",
+      "value": 38,
+      "unit": "names",
+      "vintage": "baseline",
+      "input_sha256": "7339a45153c1a7e6f7c594b6c87be2f8b6294e7407ec63ab2598c839bb4cc5e7",
+      "evaluation_commit": "0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15"
+    },
+    {
+      "id": "crosswalk_report_bytes",
+      "value": 10417,
+      "unit": "bytes",
+      "vintage": "baseline",
+      "input_sha256": "b2c32934f41b5a4b64ed86f2b52f340583f71d030a65a5d6bc81af3f63c48868",
+      "evaluation_commit": "0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "pinned_source_feature_count",
+      "value": 7,
+      "unit": "features"
+    },
+    {
+      "metric_id": "issue_999_subject_count",
+      "value": 3,
+      "unit": "features"
+    },
+    {
+      "metric_id": "issue_1008_read_only_context_count",
+      "value": 4,
+      "unit": "features"
+    },
+    {
+      "metric_id": "kas_statistical_regions",
+      "value": 7,
+      "unit": "regions"
+    },
+    {
+      "metric_id": "kas_unique_municipality_names",
+      "value": 38,
+      "unit": "names"
+    },
+    {
+      "metric_id": "crosswalk_report_bytes",
+      "value": 10417,
+      "unit": "bytes"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "pinned_source_feature_count",
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/run-1-source-crosswalk.json",
+      "json_pointer": "/source_feature_count"
+    },
+    {
+      "metric_id": "issue_999_subject_count",
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/run-1-source-crosswalk.json",
+      "json_pointer": "/issue_subject_count"
+    },
+    {
+      "metric_id": "issue_1008_read_only_context_count",
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/reproducibility-evidence.json",
+      "json_pointer": "/read_only_context_count"
+    },
+    {
+      "metric_id": "kas_statistical_regions",
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/reproducibility-evidence.json",
+      "json_pointer": "/official_statistical_region_count"
+    },
+    {
+      "metric_id": "kas_unique_municipality_names",
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/reproducibility-evidence.json",
+      "json_pointer": "/municipality_name_count"
+    },
+    {
+      "metric_id": "crosswalk_report_bytes",
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/reproducibility-evidence.json",
+      "json_pointer": "/report_bytes"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "staged-history-reproduction",
+      "kind": "generator",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/kosovo-district-reproduction-999-erratum/reproducibility-evidence.json",
+      "run_one_sha256": "7339a45153c1a7e6f7c594b6c87be2f8b6294e7407ec63ab2598c839bb4cc5e7",
+      "run_two_sha256": "7339a45153c1a7e6f7c594b6c87be2f8b6294e7407ec63ab2598c839bb4cc5e7"
+    },
+    {
+      "method_id": "negative-controls",
+      "kind": "code",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/kosovo-district-reproduction-999-erratum/control-evidence.json"
+    },
+    {
+      "method_id": "scope-and-provenance-review",
+      "kind": "source",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/kosovo-district-reproduction-999-erratum/source-review-evidence.json"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "The exact three #999 identities are present in the pinned Atlas part and are a disjoint subset of the seven-feature source collection; the other four source identities remain #1008 read-only contexts.",
+      "status": "supported",
+      "source_ids": [
+        "geoboundaries-xkx-adm1-2021"
+      ]
+    },
+    {
+      "text": "KAS April 2022 describes 38 administrative municipalities and seven non-administrative proposed statistical groupings; the shared names support correspondence only, not polygon equivalence.",
+      "status": "supported",
+      "source_ids": [
+        "kosovo-statistical-regions-2022"
+      ]
+    },
+    {
+      "text": "The current territorial meaning of the source polygons, their equivalence to KAS groupings, and the exact reuse compatibility of the OSM-derived source remain unresolved.",
+      "status": "unresolved",
+      "source_ids": [
+        "geoboundaries-xkx-adm1-2021",
+        "kosovo-statistical-regions-2022",
+        "osm-rights-context",
+        "kca-boundary-publication-context"
+      ]
+    },
+    {
+      "text": "This erratum prevents changed pinned inputs and historical report overwrites during this reproduction; it does not correct or approve Atlas geography.",
+      "status": "supported",
+      "source_ids": [
+        "geoboundaries-xkx-adm1-2021"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "change_receipts": [
+    {
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/claim-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/issue-scope-snapshot.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/pinned-inputs.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/reproduce_guarded.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/control-evidence.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/reproducibility-evidence.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/source-review-evidence.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/RESEARCH.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/run-1-source-crosswalk.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/run-2-source-crosswalk.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/run-3-source-crosswalk.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/current-claim-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/run-4-source-crosswalk.json",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "python3 data/regional-review/kosovo-district-reproduction-999-erratum/reproduce_guarded.py --root . --self-test --output data/regional-review/kosovo-district-reproduction-999-erratum/run-1-source-crosswalk.json",
+    "python3 data/regional-review/kosovo-district-reproduction-999-erratum/reproduce_guarded.py --root . --output data/regional-review/kosovo-district-reproduction-999-erratum/run-2-source-crosswalk.json",
+    "python3 data/regional-review/kosovo-district-reproduction-999-erratum/reproduce_guarded.py --root . --output data/regional-review/kosovo-district-reproduction-999-erratum/run-3-source-crosswalk.json",
+    "node scripts/evidence-quality.mjs data/regional-review/kosovo-district-reproduction-999-erratum/evidence-quality.json .",
+    "python3 data/regional-review/kosovo-district-reproduction-999-erratum/reproduce_guarded.py --root . --self-test --output data/regional-review/kosovo-district-reproduction-999-erratum/run-4-source-crosswalk.json"
+  ]
+}
