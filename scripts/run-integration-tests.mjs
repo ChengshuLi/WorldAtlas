@@ -16,7 +16,12 @@ export const NATIVE_REGRESSION_COMMITS = [
   '35d2d3ff48957d34ee8d4329824b268ecadc6d3c',
   // Original physical-water input for the before-water audit. Invalid water
   // remains diagnostic; regression only restores its immutable source bytes.
-  'ff566eab31ef072084c548f67dee8ee727ab3d47'
+  'ff566eab31ef072084c548f67dee8ee727ab3d47',
+  // Complete archived execution code is independently compared with original Git.
+  'e67eeafc1aa130aa5c1a6d1222d39116625fd003',
+  '8b61b9303553f2068f18ad5a000d4cba14059547',
+  'b6e0d0d21cfd6dde68c3c292c9513d3a24896a11',
+  '85571b6ef23f5565f08693a542fa7dad20c651b8'
 ];
 export function prepareNativeRegressionInputs(profile,{exists=fs.existsSync,run=spawnSync}={}) {
   if(profile!=='full'||!exists('scripts/native-ownership/validate-context-input-stage.mjs'))return {applicable:false,fetched:[]};

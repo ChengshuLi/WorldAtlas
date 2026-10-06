@@ -1,0 +1,11 @@
+{
+  "evidence_path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/controls-v1.tap.json",
+  "kind": "positive-control",
+  "method_id": "physical-discovery",
+  "outcome": "passed",
+  "scope": "Retained uncertain lake overlap, invalid water/land, holes, tiny shapes, remnants, tile-edge shore, original clipping keys, internal-land seam exclusion and antimeridian contacts.",
+  "tests": [
+    "test/physical-gap-audit.py",
+    "test/geographic-gaps.py"
+  ]
+}
