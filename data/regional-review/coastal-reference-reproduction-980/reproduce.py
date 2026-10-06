@@ -19,7 +19,7 @@ REPO = ROOT.parents[2]
 sys.path.insert(0, str(REPO))
 sys.path.insert(0, str(REPO / "scripts"))
 INPUTS = ROOT / "expected-inputs.json"
-BASE = "a32ae163473a42ed28d7bedf7e9930414beb54f8"
+BASE = "301b19178f940a9f6e8bf3d17901c96bc1d8a3c7"
 SUBJECTS = {
     "13051": ("gb:USA:ADM2:52423323B68249799438553", "Chatham"),
     "13127": ("gb:USA:ADM2:52423323B35006791438696", "Glynn"),
@@ -201,9 +201,9 @@ def compute():
             "atlas_2018_2026_difference_km2": {
                 "atlas_minus_tiger_2026": round(projected["atlas"].difference(projected["tiger_2026"]).area / 1e6, 3),
                 "tiger_minus_atlas": round(projected["tiger_2026"].difference(projected["atlas"]).area / 1e6, 3),
-                "tiger_minus_atlas_as_share_of_census_areawater": round(projected["tiger_2026"].difference(projected["atlas"]).area / features["tiger_2026"]["properties"]["AREAWATER"], 6)},
+                "tiger_minus_atlas_over_census_areawater_if_areawater_m2": round(projected["tiger_2026"].difference(projected["atlas"]).area / features["tiger_2026"]["properties"]["AREAWATER"], 6)},
             "iou": {f"{a}_to_{b}": round(iou(projected[a], projected[b]), 9) for a, b in [("atlas", "tiger_2018"), ("atlas", "tiger_2025"), ("atlas", "tiger_2026"), ("tiger_2018", "tiger_2025"), ("tiger_2025", "tiger_2026")]},
-            "interpretation": "IoU is a repeatable statistical geometry screen only; repaired geometries exist in memory only; neither validates legal lines or proves coastal completeness."})
+            "interpretation": "IoU is a repeatable statistical geometry screen only; repaired geometries exist in memory only; neither validates legal lines or proves coastal completeness. The AREAWATER quotient is conditional on an undocumented m² denominator and is not established as a dimensionless share."})
 
     if len(rows) != 8 or {r["subject_id"] for r in rows} != expected_atlas:
         raise Refusal("computed roster differs from exact eight issue subjects")

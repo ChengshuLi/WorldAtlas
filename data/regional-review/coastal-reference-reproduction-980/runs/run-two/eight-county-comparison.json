@@ -1,5 +1,5 @@
 {
-  "baseline": "a32ae163473a42ed28d7bedf7e9930414beb54f8",
+  "baseline": "301b19178f940a9f6e8bf3d17901c96bc1d8a3c7",
   "projection": "EPSG:6933; always_xy; lon/lat source",
   "shared_helper_version": "worldatlas-evidence-geometry-v1",
   "shared_helper_axis_control_EPSG3857_lon10_lat45_m": [
@@ -97,7 +97,7 @@
       "atlas_2018_2026_difference_km2": {
         "atlas_minus_tiger_2026": 10.345,
         "tiger_minus_atlas": 366.757,
-        "tiger_minus_atlas_as_share_of_census_areawater": 0.718162
+        "tiger_minus_atlas_over_census_areawater_if_areawater_m2": 0.718162
       },
       "iou": {
         "atlas_to_tiger_2018": 0.770335987,
@@ -106,7 +106,7 @@
         "tiger_2018_to_tiger_2025": 1.0,
         "tiger_2025_to_tiger_2026": 1.0
       },
-      "interpretation": "IoU is a repeatable statistical geometry screen only; repaired geometries exist in memory only; neither validates legal lines or proves coastal completeness."
+      "interpretation": "IoU is a repeatable statistical geometry screen only; repaired geometries exist in memory only; neither validates legal lines or proves coastal completeness. The AREAWATER quotient is conditional on an undocumented m\u00b2 denominator and is not established as a dimensionless share."
     },
     {
       "geoid": "13127",
@@ -192,7 +192,7 @@
       "atlas_2018_2026_difference_km2": {
         "atlas_minus_tiger_2026": 12.821,
         "tiger_minus_atlas": 311.836,
-        "tiger_minus_atlas_as_share_of_census_areawater": 0.726641
+        "tiger_minus_atlas_over_census_areawater_if_areawater_m2": 0.726641
       },
       "iou": {
         "atlas_to_tiger_2018": 0.787632113,
@@ -201,7 +201,7 @@
         "tiger_2018_to_tiger_2025": 0.999994261,
         "tiger_2025_to_tiger_2026": 1.0
       },
-      "interpretation": "IoU is a repeatable statistical geometry screen only; repaired geometries exist in memory only; neither validates legal lines or proves coastal completeness."
+      "interpretation": "IoU is a repeatable statistical geometry screen only; repaired geometries exist in memory only; neither validates legal lines or proves coastal completeness. The AREAWATER quotient is conditional on an undocumented m\u00b2 denominator and is not established as a dimensionless share."
     },
     {
       "geoid": "13191",
@@ -287,7 +287,7 @@
       "atlas_2018_2026_difference_km2": {
         "atlas_minus_tiger_2026": 5.05,
         "tiger_minus_atlas": 242.026,
-        "tiger_minus_atlas_as_share_of_census_areawater": 0.655579
+        "tiger_minus_atlas_over_census_areawater_if_areawater_m2": 0.655579
       },
       "iou": {
         "atlas_to_tiger_2018": 0.834332645,
@@ -296,7 +296,7 @@
         "tiger_2018_to_tiger_2025": 0.999997495,
         "tiger_2025_to_tiger_2026": 1.0
       },
-      "interpretation": "IoU is a repeatable statistical geometry screen only; repaired geometries exist in memory only; neither validates legal lines or proves coastal completeness."
+      "interpretation": "IoU is a repeatable statistical geometry screen only; repaired geometries exist in memory only; neither validates legal lines or proves coastal completeness. The AREAWATER quotient is conditional on an undocumented m\u00b2 denominator and is not established as a dimensionless share."
     },
     {
       "geoid": "13039",
@@ -382,7 +382,7 @@
       "atlas_2018_2026_difference_km2": {
         "atlas_minus_tiger_2026": 11.223,
         "tiger_minus_atlas": 265.349,
-        "tiger_minus_atlas_as_share_of_census_areawater": 0.675648
+        "tiger_minus_atlas_over_census_areawater_if_areawater_m2": 0.675648
       },
       "iou": {
         "atlas_to_tiger_2018": 0.864182534,
@@ -391,7 +391,7 @@
         "tiger_2018_to_tiger_2025": 1.0,
         "tiger_2025_to_tiger_2026": 1.0
       },
-      "interpretation": "IoU is a repeatable statistical geometry screen only; repaired geometries exist in memory only; neither validates legal lines or proves coastal completeness."
+      "interpretation": "IoU is a repeatable statistical geometry screen only; repaired geometries exist in memory only; neither validates legal lines or proves coastal completeness. The AREAWATER quotient is conditional on an undocumented m\u00b2 denominator and is not established as a dimensionless share."
     },
     {
       "geoid": "13179",
@@ -477,7 +477,7 @@
       "atlas_2018_2026_difference_km2": {
         "atlas_minus_tiger_2026": 11.879,
         "tiger_minus_atlas": 171.589,
-        "tiger_minus_atlas_as_share_of_census_areawater": 0.769853
+        "tiger_minus_atlas_over_census_areawater_if_areawater_m2": 0.769853
       },
       "iou": {
         "atlas_to_tiger_2018": 0.883335278,
@@ -486,7 +486,7 @@
         "tiger_2018_to_tiger_2025": 0.99998317,
         "tiger_2025_to_tiger_2026": 1.0
       },
-      "interpretation": "IoU is a repeatable statistical geometry screen only; repaired geometries exist in memory only; neither validates legal lines or proves coastal completeness."
+      "interpretation": "IoU is a repeatable statistical geometry screen only; repaired geometries exist in memory only; neither validates legal lines or proves coastal completeness. The AREAWATER quotient is conditional on an undocumented m\u00b2 denominator and is not established as a dimensionless share."
     },
     {
       "geoid": "13249",
@@ -572,7 +572,7 @@
       "atlas_2018_2026_difference_km2": {
         "atlas_minus_tiger_2026": 4.481,
         "tiger_minus_atlas": 3.448,
-        "tiger_minus_atlas_as_share_of_census_areawater": 1.455158
+        "tiger_minus_atlas_over_census_areawater_if_areawater_m2": 1.455158
       },
       "iou": {
         "atlas_to_tiger_2018": 0.981944596,
@@ -581,7 +581,7 @@
         "tiger_2018_to_tiger_2025": 1.0,
         "tiger_2025_to_tiger_2026": 1.0
       },
-      "interpretation": "IoU is a repeatable statistical geometry screen only; repaired geometries exist in memory only; neither validates legal lines or proves coastal completeness."
+      "interpretation": "IoU is a repeatable statistical geometry screen only; repaired geometries exist in memory only; neither validates legal lines or proves coastal completeness. The AREAWATER quotient is conditional on an undocumented m\u00b2 denominator and is not established as a dimensionless share."
     },
     {
       "geoid": "13231",
@@ -667,7 +667,7 @@
       "atlas_2018_2026_difference_km2": {
         "atlas_minus_tiger_2026": 5.881,
         "tiger_minus_atlas": 4.268,
-        "tiger_minus_atlas_as_share_of_census_areawater": 0.498454
+        "tiger_minus_atlas_over_census_areawater_if_areawater_m2": 0.498454
       },
       "iou": {
         "atlas_to_tiger_2018": 0.982322654,
@@ -676,7 +676,7 @@
         "tiger_2018_to_tiger_2025": 0.99999998,
         "tiger_2025_to_tiger_2026": 1.0
       },
-      "interpretation": "IoU is a repeatable statistical geometry screen only; repaired geometries exist in memory only; neither validates legal lines or proves coastal completeness."
+      "interpretation": "IoU is a repeatable statistical geometry screen only; repaired geometries exist in memory only; neither validates legal lines or proves coastal completeness. The AREAWATER quotient is conditional on an undocumented m\u00b2 denominator and is not established as a dimensionless share."
     },
     {
       "geoid": "13273",
@@ -762,7 +762,7 @@
       "atlas_2018_2026_difference_km2": {
         "atlas_minus_tiger_2026": 3.866,
         "tiger_minus_atlas": 5.908,
-        "tiger_minus_atlas_as_share_of_census_areawater": 1.193208
+        "tiger_minus_atlas_over_census_areawater_if_areawater_m2": 1.193208
       },
       "iou": {
         "atlas_to_tiger_2018": 0.988874986,
@@ -771,7 +771,7 @@
         "tiger_2018_to_tiger_2025": 0.999999991,
         "tiger_2025_to_tiger_2026": 1.0
       },
-      "interpretation": "IoU is a repeatable statistical geometry screen only; repaired geometries exist in memory only; neither validates legal lines or proves coastal completeness."
+      "interpretation": "IoU is a repeatable statistical geometry screen only; repaired geometries exist in memory only; neither validates legal lines or proves coastal completeness. The AREAWATER quotient is conditional on an undocumented m\u00b2 denominator and is not established as a dimensionless share."
     }
   ]
 }

@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "baseline_commit": "a32ae163473a42ed28d7bedf7e9930414beb54f8",
-  "report_sha256": "aca740525eb0b2551683007f2aaaa27e2f0c9184d044dcb9b84b160e33c0e9c8",
+  "baseline_commit": "301b19178f940a9f6e8bf3d17901c96bc1d8a3c7",
+  "report_sha256": "04146a5a6cef95a6fe1fc20dd175bddd839c555440413d750b42d8b13a9d6b46",
   "metric_count": 177,
   "bindings": [
     {
@@ -10,7 +10,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/0/equal_area_area_km2/atlas",
       "value": 1275.216,
-      "unit": "km\u00b2",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -43,7 +43,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/0/equal_area_area_km2/tiger_2018",
       "value": 1631.628,
-      "unit": "km\u00b2",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -76,7 +76,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/0/equal_area_area_km2/tiger_2025",
       "value": 1631.628,
-      "unit": "km\u00b2",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -109,7 +109,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/0/equal_area_area_km2/tiger_2026",
       "value": 1631.628,
-      "unit": "km\u00b2",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -142,7 +142,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/0/atlas_2018_2026_difference_km2/atlas_minus_tiger_2026",
       "value": 10.345,
-      "unit": "km\u00b2 or dimensionless share",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -175,7 +175,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/0/atlas_2018_2026_difference_km2/tiger_minus_atlas",
       "value": 366.757,
-      "unit": "km\u00b2 or dimensionless share",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -203,12 +203,12 @@
       "native_containing_file": "data/geography/part-27.json"
     },
     {
-      "metric_id": "screen:gb:USA:ADM2:52423323B68249799438553:rows:0:atlas_2018_2026_difference_km2:tiger_minus_atlas_as_share_of_census_areawater",
+      "metric_id": "screen:gb:USA:ADM2:52423323B68249799438553:rows:0:atlas_2018_2026_difference_km2:tiger_minus_atlas_over_census_areawater_if_areawater_m2",
       "subject_id": "gb:USA:ADM2:52423323B68249799438553",
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
-      "json_pointer": "/rows/0/atlas_2018_2026_difference_km2/tiger_minus_atlas_as_share_of_census_areawater",
+      "json_pointer": "/rows/0/atlas_2018_2026_difference_km2/tiger_minus_atlas_over_census_areawater_if_areawater_m2",
       "value": 0.718162,
-      "unit": "km\u00b2 or dimensionless share",
+      "unit": "conditional m² / Census 2026 AREAWATER (source unit undeclared; not established dimensionless)",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -241,7 +241,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/0/iou/atlas_to_tiger_2018",
       "value": 0.770335987,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -274,7 +274,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/0/iou/atlas_to_tiger_2025",
       "value": 0.770335987,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -307,7 +307,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/0/iou/atlas_to_tiger_2026",
       "value": 0.770335987,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -340,7 +340,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/0/iou/tiger_2018_to_tiger_2025",
       "value": 1.0,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -373,7 +373,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/0/iou/tiger_2025_to_tiger_2026",
       "value": 1.0,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -736,7 +736,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/1/equal_area_area_km2/atlas",
       "value": 1216.948,
-      "unit": "km\u00b2",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -769,7 +769,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/1/equal_area_area_km2/tiger_2018",
       "value": 1515.963,
-      "unit": "km\u00b2",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -802,7 +802,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/1/equal_area_area_km2/tiger_2025",
       "value": 1515.963,
-      "unit": "km\u00b2",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -835,7 +835,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/1/equal_area_area_km2/tiger_2026",
       "value": 1515.963,
-      "unit": "km\u00b2",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -868,7 +868,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/1/atlas_2018_2026_difference_km2/atlas_minus_tiger_2026",
       "value": 12.821,
-      "unit": "km\u00b2 or dimensionless share",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -901,7 +901,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/1/atlas_2018_2026_difference_km2/tiger_minus_atlas",
       "value": 311.836,
-      "unit": "km\u00b2 or dimensionless share",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -929,12 +929,12 @@
       "native_containing_file": "data/geography/part-27.json"
     },
     {
-      "metric_id": "screen:gb:USA:ADM2:52423323B35006791438696:rows:1:atlas_2018_2026_difference_km2:tiger_minus_atlas_as_share_of_census_areawater",
+      "metric_id": "screen:gb:USA:ADM2:52423323B35006791438696:rows:1:atlas_2018_2026_difference_km2:tiger_minus_atlas_over_census_areawater_if_areawater_m2",
       "subject_id": "gb:USA:ADM2:52423323B35006791438696",
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
-      "json_pointer": "/rows/1/atlas_2018_2026_difference_km2/tiger_minus_atlas_as_share_of_census_areawater",
+      "json_pointer": "/rows/1/atlas_2018_2026_difference_km2/tiger_minus_atlas_over_census_areawater_if_areawater_m2",
       "value": 0.726641,
-      "unit": "km\u00b2 or dimensionless share",
+      "unit": "conditional m² / Census 2026 AREAWATER (source unit undeclared; not established dimensionless)",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -967,7 +967,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/1/iou/atlas_to_tiger_2018",
       "value": 0.787632113,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -1000,7 +1000,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/1/iou/atlas_to_tiger_2025",
       "value": 0.787636823,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -1033,7 +1033,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/1/iou/atlas_to_tiger_2026",
       "value": 0.787636823,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -1066,7 +1066,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/1/iou/tiger_2018_to_tiger_2025",
       "value": 0.999994261,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -1099,7 +1099,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/1/iou/tiger_2025_to_tiger_2026",
       "value": 1.0,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -1462,7 +1462,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/2/equal_area_area_km2/atlas",
       "value": 1249.388,
-      "unit": "km\u00b2",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -1495,7 +1495,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/2/equal_area_area_km2/tiger_2018",
       "value": 1486.368,
-      "unit": "km\u00b2",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -1528,7 +1528,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/2/equal_area_area_km2/tiger_2025",
       "value": 1486.364,
-      "unit": "km\u00b2",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -1561,7 +1561,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/2/equal_area_area_km2/tiger_2026",
       "value": 1486.364,
-      "unit": "km\u00b2",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -1594,7 +1594,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/2/atlas_2018_2026_difference_km2/atlas_minus_tiger_2026",
       "value": 5.05,
-      "unit": "km\u00b2 or dimensionless share",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -1627,7 +1627,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/2/atlas_2018_2026_difference_km2/tiger_minus_atlas",
       "value": 242.026,
-      "unit": "km\u00b2 or dimensionless share",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -1655,12 +1655,12 @@
       "native_containing_file": "data/geography/part-26.json"
     },
     {
-      "metric_id": "screen:gb:USA:ADM2:52423323B58673559392327:rows:2:atlas_2018_2026_difference_km2:tiger_minus_atlas_as_share_of_census_areawater",
+      "metric_id": "screen:gb:USA:ADM2:52423323B58673559392327:rows:2:atlas_2018_2026_difference_km2:tiger_minus_atlas_over_census_areawater_if_areawater_m2",
       "subject_id": "gb:USA:ADM2:52423323B58673559392327",
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
-      "json_pointer": "/rows/2/atlas_2018_2026_difference_km2/tiger_minus_atlas_as_share_of_census_areawater",
+      "json_pointer": "/rows/2/atlas_2018_2026_difference_km2/tiger_minus_atlas_over_census_areawater_if_areawater_m2",
       "value": 0.655579,
-      "unit": "km\u00b2 or dimensionless share",
+      "unit": "conditional m² / Census 2026 AREAWATER (source unit undeclared; not established dimensionless)",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -1693,7 +1693,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/2/iou/atlas_to_tiger_2018",
       "value": 0.834332645,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -1726,7 +1726,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/2/iou/atlas_to_tiger_2025",
       "value": 0.834334728,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -1759,7 +1759,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/2/iou/atlas_to_tiger_2026",
       "value": 0.834334728,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -1792,7 +1792,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/2/iou/tiger_2018_to_tiger_2025",
       "value": 0.999997495,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -1825,7 +1825,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/2/iou/tiger_2025_to_tiger_2026",
       "value": 1.0,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -2188,7 +2188,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/3/equal_area_area_km2/atlas",
       "value": 1771.003,
-      "unit": "km\u00b2",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -2221,7 +2221,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/3/equal_area_area_km2/tiger_2018",
       "value": 2025.129,
-      "unit": "km\u00b2",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -2254,7 +2254,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/3/equal_area_area_km2/tiger_2025",
       "value": 2025.129,
-      "unit": "km\u00b2",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -2287,7 +2287,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/3/equal_area_area_km2/tiger_2026",
       "value": 2025.129,
-      "unit": "km\u00b2",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -2320,7 +2320,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/3/atlas_2018_2026_difference_km2/atlas_minus_tiger_2026",
       "value": 11.223,
-      "unit": "km\u00b2 or dimensionless share",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -2353,7 +2353,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/3/atlas_2018_2026_difference_km2/tiger_minus_atlas",
       "value": 265.349,
-      "unit": "km\u00b2 or dimensionless share",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -2381,12 +2381,12 @@
       "native_containing_file": "data/geography/part-27.json"
     },
     {
-      "metric_id": "screen:gb:USA:ADM2:52423323B71362647483761:rows:3:atlas_2018_2026_difference_km2:tiger_minus_atlas_as_share_of_census_areawater",
+      "metric_id": "screen:gb:USA:ADM2:52423323B71362647483761:rows:3:atlas_2018_2026_difference_km2:tiger_minus_atlas_over_census_areawater_if_areawater_m2",
       "subject_id": "gb:USA:ADM2:52423323B71362647483761",
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
-      "json_pointer": "/rows/3/atlas_2018_2026_difference_km2/tiger_minus_atlas_as_share_of_census_areawater",
+      "json_pointer": "/rows/3/atlas_2018_2026_difference_km2/tiger_minus_atlas_over_census_areawater_if_areawater_m2",
       "value": 0.675648,
-      "unit": "km\u00b2 or dimensionless share",
+      "unit": "conditional m² / Census 2026 AREAWATER (source unit undeclared; not established dimensionless)",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -2419,7 +2419,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/3/iou/atlas_to_tiger_2018",
       "value": 0.864182534,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -2452,7 +2452,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/3/iou/atlas_to_tiger_2025",
       "value": 0.864182534,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -2485,7 +2485,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/3/iou/atlas_to_tiger_2026",
       "value": 0.864182534,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -2518,7 +2518,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/3/iou/tiger_2018_to_tiger_2025",
       "value": 1.0,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -2551,7 +2551,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/3/iou/tiger_2025_to_tiger_2026",
       "value": 1.0,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-27.json",
@@ -2914,7 +2914,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/4/equal_area_area_km2/atlas",
       "value": 1400.806,
-      "unit": "km\u00b2",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -2947,7 +2947,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/4/equal_area_area_km2/tiger_2018",
       "value": 1560.537,
-      "unit": "km\u00b2",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -2980,7 +2980,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/4/equal_area_area_km2/tiger_2025",
       "value": 1560.515,
-      "unit": "km\u00b2",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -3013,7 +3013,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/4/equal_area_area_km2/tiger_2026",
       "value": 1560.515,
-      "unit": "km\u00b2",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -3046,7 +3046,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/4/atlas_2018_2026_difference_km2/atlas_minus_tiger_2026",
       "value": 11.879,
-      "unit": "km\u00b2 or dimensionless share",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -3079,7 +3079,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/4/atlas_2018_2026_difference_km2/tiger_minus_atlas",
       "value": 171.589,
-      "unit": "km\u00b2 or dimensionless share",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -3107,12 +3107,12 @@
       "native_containing_file": "data/geography/part-26.json"
     },
     {
-      "metric_id": "screen:gb:USA:ADM2:52423323B31615661575159:rows:4:atlas_2018_2026_difference_km2:tiger_minus_atlas_as_share_of_census_areawater",
+      "metric_id": "screen:gb:USA:ADM2:52423323B31615661575159:rows:4:atlas_2018_2026_difference_km2:tiger_minus_atlas_over_census_areawater_if_areawater_m2",
       "subject_id": "gb:USA:ADM2:52423323B31615661575159",
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
-      "json_pointer": "/rows/4/atlas_2018_2026_difference_km2/tiger_minus_atlas_as_share_of_census_areawater",
+      "json_pointer": "/rows/4/atlas_2018_2026_difference_km2/tiger_minus_atlas_over_census_areawater_if_areawater_m2",
       "value": 0.769853,
-      "unit": "km\u00b2 or dimensionless share",
+      "unit": "conditional m² / Census 2026 AREAWATER (source unit undeclared; not established dimensionless)",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -3145,7 +3145,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/4/iou/atlas_to_tiger_2018",
       "value": 0.883335278,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -3178,7 +3178,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/4/iou/atlas_to_tiger_2025",
       "value": 0.883319346,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -3211,7 +3211,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/4/iou/atlas_to_tiger_2026",
       "value": 0.883319346,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -3244,7 +3244,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/4/iou/tiger_2018_to_tiger_2025",
       "value": 0.99998317,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -3277,7 +3277,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/4/iou/tiger_2025_to_tiger_2026",
       "value": 1.0,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -3640,7 +3640,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/5/equal_area_area_km2/atlas",
       "value": 435.693,
-      "unit": "km\u00b2",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -3673,7 +3673,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/5/equal_area_area_km2/tiger_2018",
       "value": 434.661,
-      "unit": "km\u00b2",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -3706,7 +3706,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/5/equal_area_area_km2/tiger_2025",
       "value": 434.661,
-      "unit": "km\u00b2",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -3739,7 +3739,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/5/equal_area_area_km2/tiger_2026",
       "value": 434.661,
-      "unit": "km\u00b2",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -3772,7 +3772,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/5/atlas_2018_2026_difference_km2/atlas_minus_tiger_2026",
       "value": 4.481,
-      "unit": "km\u00b2 or dimensionless share",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -3805,7 +3805,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/5/atlas_2018_2026_difference_km2/tiger_minus_atlas",
       "value": 3.448,
-      "unit": "km\u00b2 or dimensionless share",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -3833,12 +3833,12 @@
       "native_containing_file": "data/geography/part-26.json"
     },
     {
-      "metric_id": "screen:gb:USA:ADM2:52423323B40186233786127:rows:5:atlas_2018_2026_difference_km2:tiger_minus_atlas_as_share_of_census_areawater",
+      "metric_id": "screen:gb:USA:ADM2:52423323B40186233786127:rows:5:atlas_2018_2026_difference_km2:tiger_minus_atlas_over_census_areawater_if_areawater_m2",
       "subject_id": "gb:USA:ADM2:52423323B40186233786127",
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
-      "json_pointer": "/rows/5/atlas_2018_2026_difference_km2/tiger_minus_atlas_as_share_of_census_areawater",
+      "json_pointer": "/rows/5/atlas_2018_2026_difference_km2/tiger_minus_atlas_over_census_areawater_if_areawater_m2",
       "value": 1.455158,
-      "unit": "km\u00b2 or dimensionless share",
+      "unit": "conditional m² / Census 2026 AREAWATER (source unit undeclared; not established dimensionless)",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -3871,7 +3871,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/5/iou/atlas_to_tiger_2018",
       "value": 0.981944596,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -3904,7 +3904,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/5/iou/atlas_to_tiger_2025",
       "value": 0.981944596,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -3937,7 +3937,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/5/iou/atlas_to_tiger_2026",
       "value": 0.981944596,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -3970,7 +3970,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/5/iou/tiger_2018_to_tiger_2025",
       "value": 1.0,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -4003,7 +4003,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/5/iou/tiger_2025_to_tiger_2026",
       "value": 1.0,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -4366,7 +4366,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/6/equal_area_area_km2/atlas",
       "value": 569.869,
-      "unit": "km\u00b2",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -4399,7 +4399,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/6/equal_area_area_km2/tiger_2018",
       "value": 568.257,
-      "unit": "km\u00b2",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -4432,7 +4432,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/6/equal_area_area_km2/tiger_2025",
       "value": 568.257,
-      "unit": "km\u00b2",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -4465,7 +4465,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/6/equal_area_area_km2/tiger_2026",
       "value": 568.257,
-      "unit": "km\u00b2",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -4498,7 +4498,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/6/atlas_2018_2026_difference_km2/atlas_minus_tiger_2026",
       "value": 5.881,
-      "unit": "km\u00b2 or dimensionless share",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -4531,7 +4531,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/6/atlas_2018_2026_difference_km2/tiger_minus_atlas",
       "value": 4.268,
-      "unit": "km\u00b2 or dimensionless share",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -4559,12 +4559,12 @@
       "native_containing_file": "data/geography/part-26.json"
     },
     {
-      "metric_id": "screen:gb:USA:ADM2:52423323B93853380479562:rows:6:atlas_2018_2026_difference_km2:tiger_minus_atlas_as_share_of_census_areawater",
+      "metric_id": "screen:gb:USA:ADM2:52423323B93853380479562:rows:6:atlas_2018_2026_difference_km2:tiger_minus_atlas_over_census_areawater_if_areawater_m2",
       "subject_id": "gb:USA:ADM2:52423323B93853380479562",
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
-      "json_pointer": "/rows/6/atlas_2018_2026_difference_km2/tiger_minus_atlas_as_share_of_census_areawater",
+      "json_pointer": "/rows/6/atlas_2018_2026_difference_km2/tiger_minus_atlas_over_census_areawater_if_areawater_m2",
       "value": 0.498454,
-      "unit": "km\u00b2 or dimensionless share",
+      "unit": "conditional m² / Census 2026 AREAWATER (source unit undeclared; not established dimensionless)",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -4597,7 +4597,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/6/iou/atlas_to_tiger_2018",
       "value": 0.982322654,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -4630,7 +4630,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/6/iou/atlas_to_tiger_2025",
       "value": 0.982322674,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -4663,7 +4663,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/6/iou/atlas_to_tiger_2026",
       "value": 0.982322674,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -4696,7 +4696,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/6/iou/tiger_2018_to_tiger_2025",
       "value": 0.99999998,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -4729,7 +4729,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/6/iou/tiger_2025_to_tiger_2026",
       "value": 1.0,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -5092,7 +5092,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/7/equal_area_area_km2/atlas",
       "value": 872.605,
-      "unit": "km\u00b2",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -5125,7 +5125,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/7/equal_area_area_km2/tiger_2018",
       "value": 874.647,
-      "unit": "km\u00b2",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -5158,7 +5158,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/7/equal_area_area_km2/tiger_2025",
       "value": 874.647,
-      "unit": "km\u00b2",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -5191,7 +5191,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/7/equal_area_area_km2/tiger_2026",
       "value": 874.647,
-      "unit": "km\u00b2",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -5224,7 +5224,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/7/atlas_2018_2026_difference_km2/atlas_minus_tiger_2026",
       "value": 3.866,
-      "unit": "km\u00b2 or dimensionless share",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -5257,7 +5257,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/7/atlas_2018_2026_difference_km2/tiger_minus_atlas",
       "value": 5.908,
-      "unit": "km\u00b2 or dimensionless share",
+      "unit": "km²",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -5285,12 +5285,12 @@
       "native_containing_file": "data/geography/part-26.json"
     },
     {
-      "metric_id": "screen:gb:USA:ADM2:52423323B62158301450735:rows:7:atlas_2018_2026_difference_km2:tiger_minus_atlas_as_share_of_census_areawater",
+      "metric_id": "screen:gb:USA:ADM2:52423323B62158301450735:rows:7:atlas_2018_2026_difference_km2:tiger_minus_atlas_over_census_areawater_if_areawater_m2",
       "subject_id": "gb:USA:ADM2:52423323B62158301450735",
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
-      "json_pointer": "/rows/7/atlas_2018_2026_difference_km2/tiger_minus_atlas_as_share_of_census_areawater",
+      "json_pointer": "/rows/7/atlas_2018_2026_difference_km2/tiger_minus_atlas_over_census_areawater_if_areawater_m2",
       "value": 1.193208,
-      "unit": "km\u00b2 or dimensionless share",
+      "unit": "conditional m² / Census 2026 AREAWATER (source unit undeclared; not established dimensionless)",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -5323,7 +5323,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/7/iou/atlas_to_tiger_2018",
       "value": 0.988874986,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -5356,7 +5356,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/7/iou/atlas_to_tiger_2025",
       "value": 0.988874986,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -5389,7 +5389,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/7/iou/atlas_to_tiger_2026",
       "value": 0.988874986,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -5422,7 +5422,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/7/iou/tiger_2018_to_tiger_2025",
       "value": 0.999999991,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
@@ -5455,7 +5455,7 @@
       "report_path": "data/regional-review/coastal-reference-reproduction-980/runs/run-one/eight-county-comparison.json",
       "json_pointer": "/rows/7/iou/tiger_2025_to_tiger_2026",
       "value": 1.0,
-      "unit": "IoU fraction",
+      "unit": "dimensionless ratio",
       "input_bindings": [
         {
           "path": "data/geography/part-26.json",
