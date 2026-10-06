@@ -52,9 +52,14 @@ def issue_rosters(pages):
               'work_role':'archived-closed-predecessor-context' if issue['state']=='closed' else 'open-related-work-needs-live-claim-check',
               'source_authority_status':'not-established-by-membership','repair_scope_status':'not-established-by-subject-intersection'}
         matches=re.findall(r'<!-- worldatlas-work:v1\s*([\s\S]*?)\s*-->',body)
+        if len(matches)>1:
+            rejected.append({**base,'kind':'machine-contract','reason':'Duplicate machine contract markers'})
         if len(matches)==1:
           try:
-            spec=json.loads(matches[0]);ids=spec.get('evidence_quality',{}).get('subject_ids',[])
+            spec=json.loads(matches[0])
+            if not isinstance(spec,dict) or not isinstance(spec.get('evidence_quality',{}),dict):
+                raise ValueError('Machine contract and evidence_quality must be objects')
+            ids=spec.get('evidence_quality',{}).get('subject_ids',[])
             if not isinstance(ids,list)or any(not isinstance(x,str)or not x for x in ids)or len(ids)!=len(set(ids)):
                 raise ValueError('Invalid authoritative machine subject roster')
             if ids:strong.append({**base,'kind':'machine-contract','subject_ids':ids,'body_json_pointer':'/evidence_quality/subject_ids',

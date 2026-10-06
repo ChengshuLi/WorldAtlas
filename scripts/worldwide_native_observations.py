@@ -10,11 +10,13 @@ def component_probe(feature,size,latitudes):
     row={'component':feature['id'],'sample_scope':'one representative point and one native cell centre; remaining cells unchecked',
          'whole_component_physical_interpretation':'unknown','administrative_assignment':None,
          'native_multiplicity_status':'not-stored-by-first-winner-grid','cell':None,
-         'native_cell_centre_strictly_inside':None,'cell_centre_lonlat':None,'representative_lonlat':None}
+         'native_cell_centre_strictly_inside':None,'cell_centre_lonlat':None,'representative_lonlat':None,
+         'original_extent_lonlat':None}
     try:
         geom=shape(feature['geometry'])
         if geom.is_empty or geom.geom_type not in ('Polygon','MultiPolygon') or not geom.is_valid:
             return {**row,'probe_status':'unknown-invalid-empty-or-nonpolygon-geometry'}
+        row['original_extent_lonlat']=list(geom.bounds)
         point=geom.representative_point();row['representative_lonlat']=[point.x,point.y]
         if not geom.contains(point):return {**row,'probe_status':'unknown-no-strict-representative-point'}
         px,py=project(point.x,point.y,size);x,y=math.floor(px),math.floor(py)

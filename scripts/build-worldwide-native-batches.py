@@ -9,11 +9,13 @@ import copy
 import gzip
 import importlib.util
 import json
+import math
 import pathlib
 import platform
 import subprocess
 import sys
 import numpy as np
+import shapely
 from evidence.immutable import canonical_json, descriptor, deterministic_gzip, sha256
 from geographic_grid import CanonicalGrid
 from physical_gap_priority import (ORDER_NAMES, attach_rank_positions,
@@ -32,6 +34,37 @@ CP = 'coordination/engineering/worldwide-contexts-1184-20261006/run-one/'
 PP = 'coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/'
 OWNED = 'coordination/engineering/worldwide-native-batches-1184-20261006/'
 MAX = 32 * 1024 * 1024
+
+def verify_runtime(versions):
+    expected={'python':'3.12.14','numpy':'2.3.5','shapely':'2.1.2','geos':'3.13.1'}
+    if versions!=expected:raise ValueError('Pinned scientific runtime differs')
+
+def verify_native_binding(manifest, context_report, label, latitude_count):
+    expected=context_report['frozen_native_candidate'] if label=='frozen-reviewed-native' else context_report['selected_release']
+    expected_release=expected['geographic_release'] if label=='frozen-reviewed-native' else expected['id']
+    if (manifest['geographic_release']!=expected_release
+            or manifest['footprints_sha256']!=expected['footprints_sha256']
+            or manifest['hierarchy_sha256']!=expected['hierarchy_sha256']):
+        raise ValueError('Exact cohort release/footprint/hierarchy binding differs')
+    size=context_report['frozen_native_candidate']['size']
+    if manifest['size']!=size or latitude_count!=size or manifest['coordinateBits']!=math.ceil(math.log2(size)):
+        raise ValueError('Exact common probe/latitude/native coordinate domain differs')
+
+def executed_code_equal(path, committed_bytes):
+    import stat
+    if not stat.S_ISREG(path.lstat().st_mode) or path.is_symlink() or path.read_bytes()!=committed_bytes:
+        raise ValueError('Executed project code differs from committed custody: '+str(path))
+
+def authenticate_executed_code(inputs,commit):
+    paths={pathlib.Path(__file__).resolve()}
+    for module in list(sys.modules.values()):
+        file=getattr(module,'__file__',None)
+        if file:
+            path=pathlib.Path(file).resolve()
+            if path.is_relative_to(ROOT/'scripts') and path.suffix=='.py':paths.add(path)
+    for path in sorted(paths):
+        executed_code_equal(path,inputs.read(commit,str(path.relative_to(ROOT))))
+    return sorted(str(p.relative_to(ROOT)) for p in paths)
 
 class Inputs:
     """Whole ordinary Git blobs, a bounded transport cache and full decoded pins."""
@@ -117,6 +150,21 @@ def validate_batch_membership(batches,ids):
         if b['component_ids_sha256']!=sha256(canonical_json(b['component_ids'])):
             raise ValueError('Changed complete batch roster hash')
 
+def observation_overlay(original,current):
+    before={r['component']:r for r in original};after={r['component']:r for r in current}
+    if len(before)!=len(original) or set(before)!=set(after) or len(after)!=len(current):
+        raise ValueError('Comparison overlay requires the complete identical component roster')
+    changed=[after[i] for i in sorted(after) if canonical_json(before[i])!=canonical_json(after[i])]
+    overlay={'complete_component_ids_sha256':sha256(canonical_json(sorted(before))),
+        'component_count':len(before),'original_rows_sha256':sha256(canonical_json([before[i] for i in sorted(before)])),
+        'current_rows_sha256':sha256(canonical_json([after[i] for i in sorted(after)])),
+        'changed_rows':changed,'unchanged_count':len(before)-len(changed)}
+    replay=dict(before)
+    for row in changed:replay[row['component']]=row
+    if canonical_json([replay[i] for i in sorted(replay)])!=canonical_json([after[i] for i in sorted(after)]):
+        raise ValueError('Full observation overlay reconstruction differs')
+    return overlay
+
 def source_family(context):
     metadata=context['original_metadata']
     if context['id'].startswith('atlas:physical:'):
@@ -152,6 +200,8 @@ def classify(record,observation,contexts):
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--output',required=True);parser.add_argument('--issues',required=True)
     args=parser.parse_args();out=ROOT/args.output
+    software={'python':platform.python_version(),'numpy':np.__version__,'shapely':shapely.__version__,'geos':shapely.geos_version_string}
+    verify_runtime(software)
     if not args.output.startswith(OWNED) or out.exists():raise ValueError('Fresh owned complete-output directory required')
     out.mkdir(parents=True);inputs=Inputs()
     inventory=inputs.json(M,IP+'report.json');context_report=inputs.json(H,CP+'report.json')
@@ -172,6 +222,7 @@ def main():
     owner_ids=[None]+[r['id'] for r in ordered]
     hierarchy=inputs.read(C,'data/hierarchy.json');hierarchy_hash=sha256(hierarchy)
     code_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT).decode().strip()
+    executed_modules=authenticate_executed_code(inputs,code_commit)
     for p in ('scripts/build-worldwide-native-batches.py','scripts/worldwide_native_observations.py',
               'scripts/worldwide_gap_source_context.py','scripts/physical_gap_priority.py',
               'scripts/geographic_grid.py','scripts/evidence/immutable.py',
@@ -212,6 +263,7 @@ def main():
     outputs={};grid_reports={};frozen_observations=None
     for label,commit,gridroot in [('frozen-reviewed-native',N,root),('selected-repository-native',M,'data/native-ownership/repaired-v7')]:
         manifest=inputs.json(commit,gridroot+'/manifest.json')
+        verify_native_binding(manifest,context_report,label,len(latitudes))
         if manifest['method']!='native-linear-evenodd-first-owner-v1' or manifest['hierarchy_sha256']!=hierarchy_hash or manifest['native_latitudes']!=latpin:
             raise ValueError('Native rule/source binding differs')
         # Source custody hashes and release applicability come from accepted PR1.
@@ -222,7 +274,10 @@ def main():
         grid=CanonicalGrid(GridSource(inputs,commit,gridroot,manifest),adapted,gridroot,max_owner_id=len(owner_ids)-1)
         observations,counts=observe_probes(geometry_probes,grid,owner_ids)
         owners,accounting=full_owner_counts(grid,owner_ids)
-        outputs[label]=write_parts(out,label,observations)
+        if label=='frozen-reviewed-native':outputs[label]=write_parts(out,label,observations)
+        else:
+            overlay=observation_overlay(list(frozen_observations.values()),observations)
+            outputs[label+'-complete-overlay']=write_parts(out,label+'-complete-overlay',[overlay])
         outputs[label+'-owner-counts']=write_parts(out,label+'-owner-counts',owners)
         grid_reports[label]={'manifest_commit':commit,'manifest_path':gridroot+'/manifest.json',
             'release':manifest['geographic_release'],'footprints_sha256':manifest['footprints_sha256'],
@@ -232,16 +287,16 @@ def main():
         if label=='frozen-reviewed-native':frozen_observations={r['component']:r for r in observations}
         del grid,owners,observations
         print('complete native cohort',label,counts,flush=True)
-    prior=inputs.json(C,PP+'report.json');investigations=[];groups={};triage_counts=Counter()
+    prior=inputs.json(C,PP+'report.json');investigations=[];annotations={};groups={};triage_counts=Counter()
     for d in prior['outputs']['investigations']:
-        for archived in inputs.json(C,d['path'],d):
+        for ordinal,archived in enumerate(inputs.json(C,d['path'],d)):
             identity=archived['component']
             if identity not in frozen_observations:raise ValueError('Original investigation absent from complete cohort')
             record=copy.deepcopy(archived)
             record['archived_investigation_row_sha256']=sha256(canonical_json(archived))
             links=related_issue_scopes(record['distinct_contact_ids'],record['positive_length_neighbor_ids'],subject_sets,compiled)
             for link in links:
-                link['declaration_provenance']=[{k:v for k,v in r.items() if k!='subject_ids'} for r in roster_by_issue[link['issue']]]
+                link['declaration_roster_indices']=[n for n,r in enumerate(strong) if r['issue']==link['issue']]
             record['current_issue_subject_joins']=links
             record['native_observation']=frozen_observations[identity]
             record['investigation_orders']=investigation_ranks(record,contexts)
@@ -250,6 +305,11 @@ def main():
             record['actionable_batch_id']=bid
             record['cause_triage']={'observed_bucket':key['observed_scope_bucket'],'cause_status':'unknown',
                 'processing_clues_are_hypotheses':True,'source_family_references':[sha256(canonical_json(f)) for f in families]}
+            annotations[identity]={'component':identity,'original_investigation':{'commit':C,'path':d['path'],
+                'file_sha256':d['sha256'],'row_index':ordinal,'row_sha256':sha256(canonical_json(archived))},
+                'native_observation_reference':{'family':'frozen-reviewed-native','component':identity,
+                    'row_sha256':sha256(canonical_json(frozen_observations[identity]))},
+                'current_issue_subject_joins':links,'actionable_batch_id':bid,'cause_triage':record['cause_triage']}
             triage_counts[key['observed_scope_bucket']]+=1
             group=groups.setdefault(bid,{'id':bid,'grouping':key,'component_ids':[],'contact_ids':set(),
                 'edge_neighbor_ids':set(),'existing_related_issues':set(),'source_families':{},'best_rank':{}})
@@ -267,13 +327,21 @@ def main():
         for field in ('contact_ids','edge_neighbor_ids','existing_related_issues'):g[field]=sorted(g[field])
         g['source_families']=[g['source_families'][h] for h in sorted(g['source_families'])]
         g['best_rank']={name:min(rank_by_id[c][name] for c in g['component_ids']) for name in ORDER_NAMES}
+        extents=[frozen_observations[c]['original_extent_lonlat'] for c in g['component_ids'] if frozen_observations[c]['original_extent_lonlat'] is not None]
+        g['original_member_extent_references']={'family':'frozen-reviewed-native','field':'original_extent_lonlat','missing_extent_component_ids':[c for c in g['component_ids'] if frozen_observations[c]['original_extent_lonlat'] is None]}
+        g['aggregate_extent_lonlat']=None if not extents else [min(e[0] for e in extents),min(e[1] for e in extents),max(e[2] for e in extents),max(e[3] for e in extents)]
+        g['aggregate_extent_scope']='bounding envelope of recorded member extents; dateline or disconnected membership may span a broad region'
+        g['responsible_role']='engineering-processing-reproduction' if g['grouping']['work_kind']=='processing-reproduction-and-source-comparison' else 'GEO-source-research'
         g['research_question']='Authenticate consumed source product and neighboring contact geometry/vintages; distinguish source mismatch, recorded processing, genuine water and unresolved evidence. No fill or owner assignment.'
         g['engineering_question']='Reproduce recorded recipe for this full coordinated source/contact family; demonstrate exact before/after geometry and native-cell scope before any proposed repair.'
         g['dispatch_status']='triaged-backlog-needs-canonical-scope-and-live-claim-check'
         g['acceptance']=['Classify every member with evidence and explicit unknowns.','Preserve all complete contact subjects and shared source closure.','Unknown is acceptable in evidence collection, not evidence of global repair completion.','Reuse archived closed predecessors and coexist with broader regional semantic reviews.']
         batches.append(g)
     validate_batch_membership(batches,component_ids)
-    outputs['investigations']=write_parts(out,'investigations',sorted(investigations,key=lambda r:r['component']))
+    for record in investigations:
+        annotations[record['component']]['rank_positions']=record['rank_positions']
+        annotations[record['component']]['investigation_orders']=record['investigation_orders']
+    outputs['complete-investigation-annotations']=write_parts(out,'complete-investigation-annotations',[annotations[i] for i in sorted(annotations)])
     outputs['batches']=write_parts(out,'batches',batches)
     outputs['source-product-contexts']=write_parts(out,'source-product-contexts',source_rows)
     outputs['issue-rosters']=write_parts(out,'issue-rosters',strong)
@@ -286,11 +354,17 @@ def main():
         'complete_context_roster_sha256':sha256(canonical_json(sorted(contexts))),
         'inputs':list(inputs.pins.values()),'outputs':outputs,'native_cohorts':grid_reports,
         'triage_counts':dict(sorted(triage_counts.items())),'rank_views':queues,
+        'executed_project_modules':executed_modules,
+        'complete_investigation_view':{'count':len(investigations),'original_complete_rows':prior['outputs']['investigations'],
+            'view':'Read every original investigation, authenticate row_index/file/row hashes, then join its one annotation and referenced native observation/validated issue rosters by exact component ID. Original fields remain available at their archived vintage; annotations carry the new triage/rank/batch assessment.',
+            'annotation_roster_sha256':sha256(canonical_json(sorted(annotations))),
+            'original_fields_preserved':True,'original_context_transport':'All original fields preserved in accepted full expanded contexts; ordinary preservation proof accompanies final evidence.'},
+        'prioritized_dispatch_candidates':[{'batch':b['id'],'responsible_role':b['responsible_role'],'component_count':b['component_count'],'best_rank':b['best_rank'],'existing_related_issues':b['existing_related_issues'],'eligibility':'requires canonical issue scope and live claim check; not auto-approved'} for b in sorted(batches,key=lambda b:(b['best_rank']['measured_impact'],b['id']))[:20]],
         'all_state_issue_snapshot':{**descriptor(str(issue_path.relative_to(ROOT)),issue_encoded),
             'uncompressed_bytes':len(issue_raw),'uncompressed_sha256':sha256(issue_raw),
             'pages':len(pages),'strong_rosters':len(strong),'weaker_rosters':len(weaker),
             'atomic_snapshot':False,'live_claim_eligibility':'not-established-by-issue-snapshot'},
-        'software':{'python':platform.python_version(),'numpy':np.__version__},
+        'software':software,
         'limits':['No whole component, surface, water, administrative or source authority inferred from one cell.',
             'Frozen reviewed native materialization was not the runtime-selected legacy grid.',
             'Selected repository native comparison uses frozen component geometry; successor cohort pending accepted complete successor handoff.',
