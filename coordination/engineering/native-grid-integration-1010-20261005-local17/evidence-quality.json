@@ -632,12 +632,6 @@
       "hash_kind": "file-bytes"
     },
     {
-      "path": ".github/workflows/merge-integration-checks.yml",
-      "bytes": 7914,
-      "sha256": "c9dac833b96316938bc8398c716ed815a18a58bf4bed63a85e611e3ab8165303",
-      "hash_kind": "file-bytes"
-    },
-    {
       "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/README.md",
       "bytes": 3970,
       "sha256": "1f6d4069ad714c247ab805c85478561729110b790786bacfa994860631eb4605",
@@ -2054,6 +2048,18 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/shared-regression-inputs-v1/README.md",
+      "bytes": 1529,
+      "sha256": "3e1e13484d8e2fd3d2261b8268da614ca5d67febedfee8c94878fc6d28ebcbf5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/shared-regression-inputs-v1/tests.txt",
+      "bytes": 4008,
+      "sha256": "18f2e4181dd873e8934e0047f94b6b5f6d5293bc92d3afcac9a83fbc84237aee",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/source-digest-v1/README.md",
       "bytes": 2639,
       "sha256": "0c247f27b9e5c3f7391f87bdba44992df22b41fa752a2947383043a03a98f533",
@@ -2201,6 +2207,12 @@
       "path": "scripts/rebind-coverage-manifest.mjs",
       "bytes": 1703,
       "sha256": "e9eae349685ea07f106303f749aaa6179c5dbd4fd243b12004059a3c3a05697c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/run-integration-tests.mjs",
+      "bytes": 5581,
+      "sha256": "2689963b076ee1d9911f784042a9f9a7ef19070aff3935c3cb3c87d7a2354e7a",
       "hash_kind": "file-bytes"
     },
     {
@@ -2357,6 +2369,12 @@
       "path": "test/native-preparation.test.mjs",
       "bytes": 15757,
       "sha256": "71a901c3eeb620ce8305af4ffe468659d9079b69df632394b1b853141d51015e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/native-regression-inputs.test.mjs",
+      "bytes": 2066,
+      "sha256": "da561dd49b5f1f3288c808a85e86c99529fbac555b86d2afe97e4e3ff13e4815",
       "hash_kind": "file-bytes"
     },
     {
@@ -2556,11 +2574,6 @@
       "path": ".github/package-inputs.json",
       "status": "modified",
       "original_sha256": "0045715bb35811bcc1438a90440c31d5c627ea898547cd0c965a68b25e6be3d7"
-    },
-    {
-      "path": ".github/workflows/merge-integration-checks.yml",
-      "status": "modified",
-      "original_sha256": "e970aaf6eb797b298892707a938a237e40977c63962e8fa840588dcf2cf411b8"
     },
     {
       "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/README.md",
@@ -3339,6 +3352,14 @@
       "status": "added"
     },
     {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/shared-regression-inputs-v1/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/shared-regression-inputs-v1/tests.txt",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/source-digest-v1/README.md",
       "status": "added"
     },
@@ -3443,6 +3464,11 @@
     {
       "path": "scripts/rebind-coverage-manifest.mjs",
       "status": "added"
+    },
+    {
+      "path": "scripts/run-integration-tests.mjs",
+      "status": "modified",
+      "original_sha256": "cbcae6e5b9fbea0050a9fc3a82b6bb429b450d7d45a9b5b9dcbf01093e383a2f"
     },
     {
       "path": "scripts/select-build-ownership.mjs",
@@ -3556,6 +3582,10 @@
       "path": "test/native-preparation.test.mjs",
       "status": "modified",
       "original_sha256": "848496de8425d3c25ca90fdc571e170e0df69ea9d017a5d7319aa1390b48bf7f"
+    },
+    {
+      "path": "test/native-regression-inputs.test.mjs",
+      "status": "added"
     },
     {
       "path": "test/native-renderer.mjs",
