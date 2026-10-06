@@ -386,7 +386,8 @@
       "kind": "generator",
       "description": "Execute the exact hash-verified historical reproducer against a private temporary copy; compare output byte count and full SHA-256 with the retained immutable report; use exclusive output creation.",
       "software": "Python 3; Git immutable blob reader; pinned historical reproduce.py",
-      "units": "bytes and SHA-256"
+      "units": "bytes and SHA-256",
+      "helper_version": "worldatlas-evidence-preparation-v1"
     },
     {
       "id": "negative-controls",
