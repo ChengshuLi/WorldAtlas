@@ -1,0 +1,218 @@
+{
+  "issue": 1008,
+  "limits": [
+    {
+      "sources": [
+        "geoBoundaries-xkx-adm1",
+        "kas-2022-regions"
+      ],
+      "statement": "For each of the four names, the pinned 2021-representative seven-feature source has a same-name record as KAS's 2022 proposal for a Level III non-administrative region, and KAS lists multiple municipalities in each region.",
+      "status": "supported"
+    },
+    {
+      "sources": [
+        "geoBoundaries-xkx-adm1",
+        "kca-boundary-authority"
+      ],
+      "statement": "Whether each source polygon geometrically equals the matching KAS region, one or more current legal municipalities, or another boundary construction. No comparable lawful boundary vector was obtained.",
+      "status": "unresolved"
+    },
+    {
+      "sources": [
+        "kosovo-consolidated-law",
+        "kosovo-original-law",
+        "kas-2022-regions",
+        "kca-boundary-authority"
+      ],
+      "statement": "The current-municipality identity of each individual polygon, especially whether Mitrovica includes both North and South municipalities; current law supports distinct legal municipalities but does not furnish comparable vector geometry.",
+      "status": "unresolved"
+    },
+    {
+      "sources": [
+        "atlas-pinned-records",
+        "kas-2022-regions"
+      ],
+      "statement": "Whether existing same-name province nodes represent legal parents; each is a retained single-child container whose evidence is derived from the same source feature.",
+      "status": "unresolved"
+    },
+    {
+      "sources": [
+        "geoBoundaries-xkx-adm1",
+        "osm-license-record",
+        "prior-source-restoration"
+      ],
+      "statement": "Original OSM snapshot, source relation IDs, explanation for metadata count 48, and reuse compatibility of this exact service-derived feature set.",
+      "status": "unresolved"
+    }
+  ],
+  "subjects": [
+    {
+      "atlas_name": "District of Mitrovica",
+      "engineering_handoff": "Coordinate all seven Kosovo feature IDs across #999 and #1008 with the regional integrator before changing source-role resolution, parent semantics, area/code assignments or geometry. Obtain a lawful KCA municipal vector and explicit reuse terms; aggregate its 38 municipality polygons by the KAS 2022 table and compare with documented CRS, precision and per-region disagreement results.",
+      "kas_2022_proposal": {
+        "administrative_region": false,
+        "member_count": 7,
+        "member_municipalities": [
+          "Mitrovicë",
+          "Mitrovica e Veriut",
+          "Leposaviq",
+          "Skenderaj",
+          "Vushtrri",
+          "Zubin Potok",
+          "Zveçan"
+        ],
+        "region_name": "Mitrovicë"
+      },
+      "municipality_identity": "unresolved: label uniquely matches a proposed non-administrative statistical region and also a municipality in that group; no authorized same-vintage municipal vector was compared to this feature geometry",
+      "parent": {
+        "child_count": 1,
+        "id": "framework:province:district-of-mitrovica:f4149a641a12",
+        "level": "province",
+        "name": "District of Mitrovica",
+        "status": "provisional same-name single-child container; legal parent purpose unresolved"
+      },
+      "polygon_identity": "unresolved: name/membership correspondence is not a geometric boundary match; historical polygon lineage does not identify OSM relations or source snapshot",
+      "source_feature": {
+        "name": "District of Mitrovica",
+        "same_id_in_atlas": true,
+        "shape_id": "2360587B11570115914955",
+        "source_group": "XKX",
+        "source_type": "ADM1"
+      },
+      "source_metadata": {
+        "adm_unit_count": "48",
+        "boundary_license": "Creative Commons Attribution-ShareAlike 2.0",
+        "boundary_source": "Open Street Map",
+        "boundary_year": "2021",
+        "build_date": "Dec 12, 2023",
+        "canonical": "Municipalities",
+        "source_data_update_date": "Thu Jan 19 07:31:04 2023"
+      },
+      "subject_id": "gb:XKX:ADM1:2360587B11570115914955"
+    },
+    {
+      "atlas_name": "District of Peja",
+      "engineering_handoff": "Coordinate all seven Kosovo feature IDs across #999 and #1008 with the regional integrator before changing source-role resolution, parent semantics, area/code assignments or geometry. Obtain a lawful KCA municipal vector and explicit reuse terms; aggregate its 38 municipality polygons by the KAS 2022 table and compare with documented CRS, precision and per-region disagreement results.",
+      "kas_2022_proposal": {
+        "administrative_region": false,
+        "member_count": 4,
+        "member_municipalities": [
+          "Deçan",
+          "Istog",
+          "Klinë",
+          "Pejë"
+        ],
+        "region_name": "Pejë"
+      },
+      "municipality_identity": "unresolved: label uniquely matches a proposed non-administrative statistical region and also a municipality in that group; no authorized same-vintage municipal vector was compared to this feature geometry",
+      "parent": {
+        "child_count": 1,
+        "id": "framework:province:district-of-peja:68d54986d0ba",
+        "level": "province",
+        "name": "District of Peja",
+        "status": "provisional same-name single-child container; legal parent purpose unresolved"
+      },
+      "polygon_identity": "unresolved: name/membership correspondence is not a geometric boundary match; historical polygon lineage does not identify OSM relations or source snapshot",
+      "source_feature": {
+        "name": "District of Peja",
+        "same_id_in_atlas": true,
+        "shape_id": "2360587B15813948402025",
+        "source_group": "XKX",
+        "source_type": "ADM1"
+      },
+      "source_metadata": {
+        "adm_unit_count": "48",
+        "boundary_license": "Creative Commons Attribution-ShareAlike 2.0",
+        "boundary_source": "Open Street Map",
+        "boundary_year": "2021",
+        "build_date": "Dec 12, 2023",
+        "canonical": "Municipalities",
+        "source_data_update_date": "Thu Jan 19 07:31:04 2023"
+      },
+      "subject_id": "gb:XKX:ADM1:2360587B15813948402025"
+    },
+    {
+      "atlas_name": "District of Prizren",
+      "engineering_handoff": "Coordinate all seven Kosovo feature IDs across #999 and #1008 with the regional integrator before changing source-role resolution, parent semantics, area/code assignments or geometry. Obtain a lawful KCA municipal vector and explicit reuse terms; aggregate its 38 municipality polygons by the KAS 2022 table and compare with documented CRS, precision and per-region disagreement results.",
+      "kas_2022_proposal": {
+        "administrative_region": false,
+        "member_count": 4,
+        "member_municipalities": [
+          "Dragash",
+          "Prizren",
+          "Suharekë",
+          "Mamushë"
+        ],
+        "region_name": "Prizren"
+      },
+      "municipality_identity": "unresolved: label uniquely matches a proposed non-administrative statistical region and also a municipality in that group; no authorized same-vintage municipal vector was compared to this feature geometry",
+      "parent": {
+        "child_count": 1,
+        "id": "framework:province:district-of-prizren:5ea331ce3ec0",
+        "level": "province",
+        "name": "District of Prizren",
+        "status": "provisional same-name single-child container; legal parent purpose unresolved"
+      },
+      "polygon_identity": "unresolved: name/membership correspondence is not a geometric boundary match; historical polygon lineage does not identify OSM relations or source snapshot",
+      "source_feature": {
+        "name": "District of Prizren",
+        "same_id_in_atlas": true,
+        "shape_id": "2360587B89959345704230",
+        "source_group": "XKX",
+        "source_type": "ADM1"
+      },
+      "source_metadata": {
+        "adm_unit_count": "48",
+        "boundary_license": "Creative Commons Attribution-ShareAlike 2.0",
+        "boundary_source": "Open Street Map",
+        "boundary_year": "2021",
+        "build_date": "Dec 12, 2023",
+        "canonical": "Municipalities",
+        "source_data_update_date": "Thu Jan 19 07:31:04 2023"
+      },
+      "subject_id": "gb:XKX:ADM1:2360587B89959345704230"
+    },
+    {
+      "atlas_name": "District of Gjakova",
+      "engineering_handoff": "Coordinate all seven Kosovo feature IDs across #999 and #1008 with the regional integrator before changing source-role resolution, parent semantics, area/code assignments or geometry. Obtain a lawful KCA municipal vector and explicit reuse terms; aggregate its 38 municipality polygons by the KAS 2022 table and compare with documented CRS, precision and per-region disagreement results.",
+      "kas_2022_proposal": {
+        "administrative_region": false,
+        "member_count": 4,
+        "member_municipalities": [
+          "Gjakovë",
+          "Rahovec",
+          "Malishevë",
+          "Junik"
+        ],
+        "region_name": "Gjakovë"
+      },
+      "municipality_identity": "unresolved: label uniquely matches a proposed non-administrative statistical region and also a municipality in that group; no authorized same-vintage municipal vector was compared to this feature geometry",
+      "parent": {
+        "child_count": 1,
+        "id": "framework:province:district-of-gjakova:86f71e89a8e2",
+        "level": "province",
+        "name": "District of Gjakova",
+        "status": "provisional same-name single-child container; legal parent purpose unresolved"
+      },
+      "polygon_identity": "unresolved: name/membership correspondence is not a geometric boundary match; historical polygon lineage does not identify OSM relations or source snapshot",
+      "source_feature": {
+        "name": "District of Gjakova",
+        "same_id_in_atlas": true,
+        "shape_id": "2360587B9056373484571",
+        "source_group": "XKX",
+        "source_type": "ADM1"
+      },
+      "source_metadata": {
+        "adm_unit_count": "48",
+        "boundary_license": "Creative Commons Attribution-ShareAlike 2.0",
+        "boundary_source": "Open Street Map",
+        "boundary_year": "2021",
+        "build_date": "Dec 12, 2023",
+        "canonical": "Municipalities",
+        "source_data_update_date": "Thu Jan 19 07:31:04 2023"
+      },
+      "subject_id": "gb:XKX:ADM1:2360587B9056373484571"
+    }
+  ],
+  "version": 1
+}
