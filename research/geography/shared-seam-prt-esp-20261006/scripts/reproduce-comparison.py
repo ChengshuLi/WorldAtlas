@@ -230,6 +230,25 @@ def polygon_difference_metrics(left, right):
     return result
 
 
+def geometry_parts(geom):
+    """Expose each direct overlay fragment, including tiny and nonpolygon parts."""
+    if geom is None:
+        return []
+    parts = list(geom.geoms) if hasattr(geom, "geoms") else [geom]
+    return [
+        {
+            "index": index,
+            "geometry_type": part.geom_type,
+            "is_empty": bool(part.is_empty),
+            "area_m2": metric(part.area),
+            "length_m": metric(part.length),
+            "coordinate_count": geometry_record(part)["coordinate_count"],
+            "bounds_m": [metric(value) for value in part.bounds] if not part.is_empty else None,
+        }
+        for index, part in enumerate(parts)
+    ]
+
+
 def normalize_name(value):
     normalized = unicodedata.normalize("NFKD", value or "")
     return "".join(character for character in normalized if not unicodedata.combining(character)).casefold()
@@ -519,7 +538,7 @@ def main():
         current_projected = projected(current_geom)
         try:
             intersection = gap_projected.intersection(current_projected)
-            relation.update({"overlap_area_m2": metric(intersection.area), "distance_m": metric(gap_projected.distance(current_projected)), "intersection_geometry_type": intersection.geom_type, "intersection_is_empty": bool(intersection.is_empty), "intersection_coordinate_count": geometry_record(intersection)["coordinate_count"], "intersection_fragment_count": len(intersection.geoms) if hasattr(intersection, "geoms") else (0 if intersection.is_empty else 1)})
+            relation.update({"overlap_area_m2": metric(intersection.area), "distance_m": metric(gap_projected.distance(current_projected)), "intersection_geometry_type": intersection.geom_type, "intersection_is_empty": bool(intersection.is_empty), "intersection_coordinate_count": geometry_record(intersection)["coordinate_count"], "intersection_fragment_count": len(intersection.geoms) if hasattr(intersection, "geoms") else (0 if intersection.is_empty else 1), "intersection_parts": geometry_parts(intersection)})
         except Exception as error:
             relation["operation_errors"].append(f"intersection/distance: {type(error).__name__}: {error}")
         gap_relation_rows.append(relation)
