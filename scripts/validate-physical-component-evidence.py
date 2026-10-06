@@ -14,6 +14,8 @@ from physical_component_custody import validate, describe, ordinary_read, OWNED
 from physical_gap_crosswalk import membership, VERSION
 from physical_component_contacts import component_contacts
 from geographic_components import components
+import shapely
+from shapely.geometry import mapping, shape
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 SOURCE_REPO = ROOT
@@ -26,6 +28,25 @@ NEW = 'coordination/engineering/physical-gap-audit-1005-20261005-local18/detecti
 def require(condition, message):
     if not condition:
         raise ValueError(message)
+
+
+def require_exact_reconstruction(original, rebuilt, message):
+    require(len(original) == len(rebuilt), message + ': different complete row count')
+    for number, (a, b) in enumerate(zip(original, rebuilt)):
+        if canonical_json(a) == canonical_json(b):
+            continue
+        diagnostic = {'row': number, 'software': {'shapely': shapely.__version__,
+                      'geos': shapely.geos_version_string},
+                      'original': a, 'rebuilt': b,
+                      'metadata_equal': canonical_json({k: v for k, v in a.items() if k != 'geometry'}) ==
+                                        canonical_json({k: v for k, v in b.items() if k != 'geometry'})}
+        if 'geometry' in a and 'geometry' in b:
+            ga, gb = shape(a['geometry']), shape(b['geometry'])
+            diagnostic.update(exact_point_sets_equal=ga.equals(gb),
+                              normalized_coordinate_bytes_equal=canonical_json(mapping(ga.normalize())) ==
+                                                                canonical_json(mapping(gb.normalize())),
+                              original_area=ga.area, rebuilt_area=gb.area)
+        raise ValueError(message + ': ' + canonical_json(diagnostic).decode()[:16000])
 
 
 def validate_science(index_path=INDEX):
@@ -98,12 +119,10 @@ def validate_science(index_path=INDEX):
     rebuilt_members = membership(new, rebuilt)
     for contact in contacts:
         contact['components'] = [rebuilt_members[i] for i in contact['fragments']]
-    require(len(rows['new_contacts']) == len(contacts) and
-            all(canonical_json(a) == canonical_json(b) for a, b in zip(rows['new_contacts'], contacts)),
-            'Complete original edge/point/dateline contact roster changed')
-    require(len(new_records) == len(rebuilt) and
-            all(canonical_json(a) == canonical_json(b) for a, b in zip(new_records, rebuilt)),
-            'Complete exact connected component shapes changed')
+    require_exact_reconstruction(rows['new_contacts'], contacts,
+                                 'Complete original edge/point/dateline contact roster changed')
+    require_exact_reconstruction(new_records, rebuilt,
+                                 'Complete exact connected component shapes changed')
     for name, value in [('old_fragments', len(old)), ('new_fragments', len(new)), ('old_components', len(old_records)),
                         ('new_components', len(new_records)), ('fragment_pairs', len(rows['fragment_pairs'])),
                         ('component_links', len(rows['component_links'])), ('new_remnants_preserved_in_original_bundles', len(remnants))]:
