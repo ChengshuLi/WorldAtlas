@@ -1,0 +1,237 @@
+{
+  "git_lfs_pointer": "Each source Git tree entry is a pointer whose Git blob SHA-1, declared LFS object SHA-256 and byte count are independently verified.",
+  "license_reading": "IND boundary metadata names ODbL 1.0; PAK boundary metadata names Public Domain. The project LICENSE says individual data files use license(s) identified in their metadata.",
+  "metadata_files": [
+    {
+      "bytes": 895,
+      "metadata": {
+        "admUnitCount": "6836",
+        "boundaryCanonical": "Sub-District",
+        "boundaryID": "IND-ADM3-7132399",
+        "boundaryISO": "IND",
+        "boundaryLicense": "Open Data Commons Open Database License 1.0",
+        "boundarySource": "Pathways Data Pvt. Ltd., lgdirectory.gov.in",
+        "boundarySourceURL": "https//geonode.pathwaysdata.com/layers/geonode",
+        "boundaryType": "ADM3",
+        "boundaryYear": "2018",
+        "buildDate": "Dec 12, 2023",
+        "licenseDetail": "Open Data Commons Open Database License 1.0",
+        "licenseSource": "https//geonode.pathwaysdata.com/layers/geonode",
+        "maxAreaSqKM": "85051.81277335284",
+        "maxPerimeterLengthKM": "2653.130600951277",
+        "maxVertices": "8835",
+        "meanAreaSqKM": "479.4245844821178",
+        "meanPerimeterLengthKM": "128.2812701256823",
+        "meanVertices": "350.0",
+        "minAreaSqKM": "0.31138441243146636",
+        "minPerimeterLengthKM": "2.7378104650164663",
+        "minVertices": "7",
+        "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023"
+      },
+      "path": "sources/upstream-metadata/geoBoundaries-IND-ADM3-metaData.json",
+      "retrieved_at_utc": "2026-10-06T07:23:11Z",
+      "sha256": "061f7c25425f86c00c7f555ef8a5549ab949010806a45ca7757a21e8fe1275d9",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/IND/ADM3/geoBoundaries-IND-ADM3-metaData.json"
+    },
+    {
+      "bytes": 889,
+      "metadata": {
+        "admUnitCount": "736",
+        "boundaryCanonical": "District",
+        "boundaryID": "IND-ADM2-76128533",
+        "boundaryISO": "IND",
+        "boundaryLicense": "Open Data Commons Open Database License 1.0",
+        "boundarySource": "Pathways Data Pvt. Ltd., lgdirectory.gov.in",
+        "boundarySourceURL": "https//geonode.pathwaysdata.com/layers/geonode",
+        "boundaryType": "ADM2",
+        "boundaryYear": "2021",
+        "buildDate": "Dec 12, 2023",
+        "licenseDetail": "Open Data Commons Open Database License 1.0",
+        "licenseSource": "https//geonode.pathwaysdata.com/layers/geonode",
+        "maxAreaSqKM": "85793.49211691093",
+        "maxPerimeterLengthKM": "2615.169476353606",
+        "maxVertices": "41402",
+        "meanAreaSqKM": "4449.7088250729",
+        "meanPerimeterLengthKM": "463.023708502529",
+        "meanVertices": "2716.0",
+        "minAreaSqKM": "8.884805375450998",
+        "minPerimeterLengthKM": "26.029156654808403",
+        "minVertices": "71",
+        "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023"
+      },
+      "path": "sources/upstream-metadata/geoBoundaries-IND-ADM2-metaData.json",
+      "retrieved_at_utc": "2026-10-06T07:23:11Z",
+      "sha256": "656a9800da6c69a02bae980349eb44ac83ab3a452e894fc782230fa22cdd1a2c",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/IND/ADM2/geoBoundaries-IND-ADM2-metaData.json"
+    },
+    {
+      "bytes": 801,
+      "metadata": {
+        "admUnitCount": "126",
+        "boundaryCanonical": "Districts",
+        "boundaryID": "PAK-ADM2-60131773",
+        "boundaryISO": "PAK",
+        "boundaryLicense": "Public Domain",
+        "boundarySource": "geoBoundaries, Wikipedia",
+        "boundarySourceURL": "https//commons.wikimedia.org/wiki/File",
+        "boundaryType": "ADM2",
+        "boundaryYear": "2019",
+        "buildDate": "Dec 12, 2023",
+        "licenseDetail": "",
+        "licenseSource": "https//creativecommons.org/share-your-work/public-domain/",
+        "maxAreaSqKM": "47392.7544668222",
+        "maxPerimeterLengthKM": "1305.8110585782663",
+        "maxVertices": "491",
+        "meanAreaSqKM": "6952.850798785284",
+        "meanPerimeterLengthKM": "455.5823824110282",
+        "meanVertices": "190.0",
+        "minAreaSqKM": "727.0270127206826",
+        "minPerimeterLengthKM": "139.36897903697349",
+        "minVertices": "58",
+        "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023"
+      },
+      "path": "sources/upstream-metadata/geoBoundaries-PAK-ADM2-metaData.json",
+      "retrieved_at_utc": "2026-10-06T07:23:11Z",
+      "sha256": "2d5077f656aae8202338520cc02f594e243eb425efbb44e4f32fca7d41868d88",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/PAK/ADM2/geoBoundaries-PAK-ADM2-metaData.json"
+    }
+  ],
+  "partition_policy": {
+    "interpretation": "Parts are contiguous original byte ranges, not parsed/reformatted or feature-level extracts.",
+    "kind": "lossless-fixed-offset-byte-partition",
+    "part_bytes": 16000000
+  },
+  "project_license_file": {
+    "bytes": 14362,
+    "path": "sources/upstream-metadata/geoBoundaries-LICENSE",
+    "retrieved_at_utc": "2026-10-06T07:23:11Z",
+    "sha256": "f3e5a21600528018a566fe0020a8b433f542bd67920c6804aac8929b598035bd",
+    "url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/LICENSE"
+  },
+  "retrieved_at_utc": "2026-10-06T07:23:11Z",
+  "sources": [
+    {
+      "boundary_year": "2018",
+      "bytes": 40040002,
+      "country": "IND",
+      "decoded_bytes": 40040002,
+      "encoded_bytes": 40040002,
+      "file_name": "geoBoundaries-IND-ADM3_simplified.geojson",
+      "github_git_blob_sha1": "c2947eafd9bfcc60e2835e05f182927e6186c815",
+      "github_lfs_oid_sha256": "4ea6807d0a0c5aac0b46ee8e31ed7c30fbec273b44345bba1e4a2bb5f299f5fb",
+      "id": "gb:IND:ADM3:simplified:2018",
+      "lfs_pointer_bytes": 133,
+      "lfs_pointer_sha256": "1e33b187ba2d93fc3bc3979463e21c82375023ebede836434391913ad74fdb87",
+      "parts": [
+        {
+          "bytes": 16000000,
+          "offset": 0,
+          "path": "sources/original-byte-parts/ind-adm3-simplified-000.source-bytes",
+          "sha256": "bdf7b2f0ce20ae29958a64b9e6a62aba598842264878548493ab950f0a6c0d39"
+        },
+        {
+          "bytes": 16000000,
+          "offset": 16000000,
+          "path": "sources/original-byte-parts/ind-adm3-simplified-001.source-bytes",
+          "sha256": "9bdef298e45f3ed0d31c8435118b20157e8c5b211d8d33edfa131136cfecf2b8"
+        },
+        {
+          "bytes": 8040002,
+          "offset": 32000000,
+          "path": "sources/original-byte-parts/ind-adm3-simplified-002.source-bytes",
+          "sha256": "17e63a2aca477d4abf318a189bd701e016d8b19ebe23d6d75600b4f083a770e7"
+        }
+      ],
+      "retention": "complete original bytes partitioned at fixed offsets; byte-for-byte reassembly verified",
+      "retrieval_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/IND/ADM3/geoBoundaries-IND-ADM3_simplified.geojson",
+      "retrieved_at_utc": "2026-10-06T07:23:11Z",
+      "sha256": "4ea6807d0a0c5aac0b46ee8e31ed7c30fbec273b44345bba1e4a2bb5f299f5fb",
+      "source_content_encoding": "identity (uncompressed GeoJSON); decoded bytes equal original bytes",
+      "tier": "ADM3",
+      "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "upstream_path": "releaseData/gbOpen/IND/ADM3/geoBoundaries-IND-ADM3_simplified.geojson",
+      "upstream_repository": "https://github.com/wmgeolab/geoBoundaries"
+    },
+    {
+      "boundary_year": "2021",
+      "bytes": 48317735,
+      "country": "IND",
+      "decoded_bytes": 48317735,
+      "encoded_bytes": 48317735,
+      "file_name": "geoBoundaries-IND-ADM2.geojson",
+      "github_git_blob_sha1": "e968822bc8d5f29cf4ffe00ffdd48f7b312bd0bc",
+      "github_lfs_oid_sha256": "8bef6929fd65432e7dc775e7c44473e84efff064ebddbfd6b834e6291546db40",
+      "id": "gb:IND:ADM2:2021",
+      "lfs_pointer_bytes": 133,
+      "lfs_pointer_sha256": "0c823495fedbc1817f12b9e50cedcfe915143ef6d8752dfad6451e85917ca2f6",
+      "parts": [
+        {
+          "bytes": 16000000,
+          "offset": 0,
+          "path": "sources/original-byte-parts/ind-adm2-000.source-bytes",
+          "sha256": "fdf070599f9e9e0e8cd2ecbb126d3493fa8c304e6430fc231c1fbf0e317c1b8e"
+        },
+        {
+          "bytes": 16000000,
+          "offset": 16000000,
+          "path": "sources/original-byte-parts/ind-adm2-001.source-bytes",
+          "sha256": "2bf8c6cb9041940cb5f9480a82f9336f5cc185b195adb5ef3be0e6893ab71bd7"
+        },
+        {
+          "bytes": 16000000,
+          "offset": 32000000,
+          "path": "sources/original-byte-parts/ind-adm2-002.source-bytes",
+          "sha256": "bb23d131fa048a604b4823c4312f275ef19abda42eeb4fb90d0ea7b46ac895dc"
+        },
+        {
+          "bytes": 317735,
+          "offset": 48000000,
+          "path": "sources/original-byte-parts/ind-adm2-003.source-bytes",
+          "sha256": "5af7eb09744c2784a9a0f18beb794d93643289c1b1521f2e0ad2787b3d18e544"
+        }
+      ],
+      "retention": "complete original bytes partitioned at fixed offsets; byte-for-byte reassembly verified",
+      "retrieval_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/IND/ADM2/geoBoundaries-IND-ADM2.geojson",
+      "retrieved_at_utc": "2026-10-06T07:23:11Z",
+      "sha256": "8bef6929fd65432e7dc775e7c44473e84efff064ebddbfd6b834e6291546db40",
+      "source_content_encoding": "identity (uncompressed GeoJSON); decoded bytes equal original bytes",
+      "tier": "ADM2",
+      "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "upstream_path": "releaseData/gbOpen/IND/ADM2/geoBoundaries-IND-ADM2.geojson",
+      "upstream_repository": "https://github.com/wmgeolab/geoBoundaries"
+    },
+    {
+      "boundary_year": "2019",
+      "bytes": 1082661,
+      "country": "PAK",
+      "decoded_bytes": 1082661,
+      "encoded_bytes": 1082661,
+      "file_name": "geoBoundaries-PAK-ADM2.geojson",
+      "github_git_blob_sha1": "782c1025c3dc150116801f9d2f2587b7043340c4",
+      "github_lfs_oid_sha256": "108eeaa75a6de678f022e0b6d8fd8ab4c93e4b4d1a9c6a28995afe7c0731182c",
+      "id": "gb:PAK:ADM2:2019",
+      "lfs_pointer_bytes": 132,
+      "lfs_pointer_sha256": "a459290c3cf4a81239d325c6d6526a347719020a0df846b8a47c15a281907b06",
+      "parts": [
+        {
+          "bytes": 1082661,
+          "offset": 0,
+          "path": "sources/original-byte-parts/pak-adm2-000.source-bytes",
+          "sha256": "108eeaa75a6de678f022e0b6d8fd8ab4c93e4b4d1a9c6a28995afe7c0731182c"
+        }
+      ],
+      "retention": "complete original bytes partitioned at fixed offsets; byte-for-byte reassembly verified",
+      "retrieval_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/PAK/ADM2/geoBoundaries-PAK-ADM2.geojson",
+      "retrieved_at_utc": "2026-10-06T07:23:11Z",
+      "sha256": "108eeaa75a6de678f022e0b6d8fd8ab4c93e4b4d1a9c6a28995afe7c0731182c",
+      "source_content_encoding": "identity (uncompressed GeoJSON); decoded bytes equal original bytes",
+      "tier": "ADM2",
+      "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "upstream_path": "releaseData/gbOpen/PAK/ADM2/geoBoundaries-PAK-ADM2.geojson",
+      "upstream_repository": "https://github.com/wmgeolab/geoBoundaries"
+    }
+  ],
+  "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+  "upstream_repository": "https://github.com/wmgeolab/geoBoundaries",
+  "version": "worldatlas-source-custody-v1"
+}
