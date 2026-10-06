@@ -1038,7 +1038,100 @@
     "PYTHONDONTWRITEBYTECODE=1 python3 data/regional-review/southern-south-america-batch3-validation-20261006/validate_batch3.py",
     "node scripts/evidence-quality.mjs data/regional-review/southern-south-america-batch3-validation-20261006/evidence-quality.json ."
   ],
-  "change_receipts": [],
+  "change_receipts": [
+    {
+      "path": "data/regional-review/southern-south-america-batch3-validation-20261006/README.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-south-america-batch3-validation-20261006/adversarial-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-south-america-batch3-validation-20261006/baseline-feature-bindings.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-south-america-batch3-validation-20261006/claim-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-south-america-batch3-validation-20261006/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-south-america-batch3-validation-20261006/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-south-america-batch3-validation-20261006/source-provenance-findings.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-south-america-batch3-validation-20261006/source/issue-1122-api-2026-10-06.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-south-america-batch3-validation-20261006/source/lfs-arg-adm2-geojson.github-api.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-south-america-batch3-validation-20261006/source/lfs-arg-adm2-geojson.lfs-pointer",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-south-america-batch3-validation-20261006/source/lfs-arg-adm2-metadata-json.github-api.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-south-america-batch3-validation-20261006/source/lfs-arg-adm2-metadata-json.lfs-pointer",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-south-america-batch3-validation-20261006/source/lfs-arg-adm2-metadata-txt.github-api.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-south-america-batch3-validation-20261006/source/lfs-arg-adm2-metadata-txt.lfs-pointer",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-south-america-batch3-validation-20261006/source/lfs-chl-adm3-geojson.github-api.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-south-america-batch3-validation-20261006/source/lfs-chl-adm3-geojson.lfs-pointer",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-south-america-batch3-validation-20261006/source/lfs-chl-adm3-metadata-json.github-api.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-south-america-batch3-validation-20261006/source/lfs-chl-adm3-metadata-json.lfs-pointer",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-south-america-batch3-validation-20261006/source/lfs-chl-adm3-metadata-txt.github-api.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-south-america-batch3-validation-20261006/source/lfs-chl-adm3-metadata-txt.lfs-pointer",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-south-america-batch3-validation-20261006/source/upstream-lfs-pointer-records.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-south-america-batch3-validation-20261006/validate_batch3.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-south-america-batch3-validation-20261006/verification-results.json",
+      "status": "added"
+    }
+  ],
   "metric_bindings": [
     {
       "metric_id": "argentina-adm2-count",
