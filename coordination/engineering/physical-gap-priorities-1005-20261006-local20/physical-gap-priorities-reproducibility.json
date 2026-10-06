@@ -1,0 +1,24 @@
+{
+  "method_id": "physical-gap-priorities",
+  "kind": "reproducibility",
+  "outcome": "passed",
+  "run_one_sha256": "37771e01b199663d7c0944367a57c5285ee610fd0737d94ca3fa3c70b614a0ab",
+  "run_two_sha256": "37771e01b199663d7c0944367a57c5285ee610fd0737d94ca3fa3c70b614a0ab",
+  "runs": [
+    {
+      "prefix": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2",
+      "complete_product_files": 53
+    },
+    {
+      "prefix": "coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v3",
+      "complete_product_files": 53
+    }
+  ],
+  "report_comparison": "Every actual report field equal after normalization solely of its own output prefix.",
+  "recipe": "Family insertion order then complete part order; UTF8 basename, zero byte, unsigned8byte bigendian rawlength, complete unchanged encodedbytes.",
+  "executed_code_commit": "bf9e8a6580e997d82d0414235e3a0d2a81e1e24a",
+  "input_commit": "bf9e8a6580e997d82d0414235e3a0d2a81e1e24a",
+  "limits": [
+    "Diagnostics only; no source approval, geography repair or delivery."
+  ]
+}
