@@ -4,7 +4,7 @@
   "evaluation_base_commit": "762d7b5a568ca845d85a98a4d188678c126a5d58",
   "pinned_issue_baseline_commit": "1451fb0788892ff9db6415e6ce6704bdd13d8f9a",
   "run_command": "python3 data/regional-review/regional-review-173ccc74c2fd93ae/reproduce-scope.py",
-  "script_sha256": "720aa0e9eee29b86e4d6cf7b8c5c1b27ec1b3af5300f0c166fb88ead1b51a7fb",
+  "script_sha256": "266c7cef7562f4e3f4c4101b3feaca3db5b1e5ea191448ec211dd33e23f0828f",
   "issue_snapshot_sha256": "d0936345559e682327194f3a90bec520b94e5abc5f60bf19d011cffcf07eb59b",
   "issue_body_sha256": "6506ef8bb824f1180466982f4a72d03b5e9a2b549885b1149ef860798f0cedc8",
   "scope_file_sha256": "bcd5e42829407d2e6db402e6a721eacfa6d6fbc14f3f77633398082096ea1f0d",
@@ -31,7 +31,9 @@
     "status": "passed_with_explicit_geographic_limits",
     "per-row-parent-area-classification_inventory": "passed; all 200 rows, 51 parents, 3 areas classified with explicit reasons",
     "reproducible_two_run_output_sha256": "079ae0e08f2741ba76492334ea1bb539bd458fa9438cff734133f7fcf59e3f2d",
-    "geographic_failure_mode_checklist": "passed; fragmented units, province-scale, anonymous remainder, disconnected units, omissions, tiers, oversized groups, weak parents, neighbors and single-child groups dispositioned with limits"
+    "geographic_failure_mode_checklist": "passed; fragmented units, province-scale, anonymous remainder, disconnected units, omissions, tiers, oversized groups, weak parents, neighbors and single-child groups dispositioned with limits",
+    "current_main_evaluation_pinned": "passed; output records scope.current_main_comparison.main_commit and helper verifies current hierarchy bytes against pinned commit",
+    "caller_head_independence": "passed; exact helper output remains stable when run at caller HEAD because evaluation commit is pinned"
   },
   "summary": {
     "scoped_ids": 200,

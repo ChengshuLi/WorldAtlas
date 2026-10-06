@@ -400,7 +400,15 @@ def main():
     if mac["natural_earth_admin1_member_ids"] != ["MAC+00?"]:
         raise AssertionError("MAC Natural Earth member does not resolve to the retained Macau admin1 row")
 
-    current_hierarchy_hash = sha(pathlib.Path("data/hierarchy.json").read_bytes())
+    current_hierarchy_bytes = pathlib.Path("data/hierarchy.json").read_bytes()
+    current_hierarchy_hash = sha(current_hierarchy_bytes)
+    evaluation_commit = scope["current_main_comparison"]["main_commit"]
+    evaluation_hierarchy_bytes = subprocess.run(
+        ["git", "show", f"{evaluation_commit}:data/hierarchy.json"],
+        check=True, stdout=subprocess.PIPE,
+    ).stdout
+    if sha(evaluation_hierarchy_bytes) != scope["current_main_comparison"]["current_hierarchy_sha256"] or current_hierarchy_hash != scope["current_main_comparison"]["current_hierarchy_sha256"]:
+        raise AssertionError("current hierarchy differs from the explicitly pinned evaluation-main commit")
     source_meta = read_json(SOURCE_META_PATH)
     parent_assessments = []
     for parent_id, spec in sorted(parent_scope.items(), key=lambda item: item[1]["name"]):
@@ -461,7 +469,7 @@ def main():
         "scope_issue_body_sha256": scope["issue_body_sha256"],
         "pinned_scope_release": scope["release"],
         "pinned_v5_baseline_commit": BASELINE,
-        "current_evaluation_commit": subprocess.run(["git", "rev-parse", "HEAD"], check=True, stdout=subprocess.PIPE, text=True).stdout.strip(),
+        "current_evaluation_commit": evaluation_commit,
         "issue_ordered_member_digest": digest,
         "scope_count": len(ids),
         "unique_scope_count": len(set(ids)),

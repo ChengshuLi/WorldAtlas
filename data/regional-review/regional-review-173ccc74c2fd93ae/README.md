@@ -4,7 +4,7 @@
 
 ## Frozen scope and reproduction
 
-Issue #408 is frozen to geography release v5 at commit `1451fb0788892ff9db6415e6ce6704bdd13d8f9a`; release ID `geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e`. The ordered compact-JSON ID digest is `3bbf3ce4482e0ecc865b3cb8828ba7adb061b605ee1e0061d44ab379d93deea6`. The current main release is v6, so this packet preserves the issue's v5 hierarchy, footprint, macro certificate, handoff, projection, envelope, and release-catalog pins rather than silently changing its baseline.
+Issue #408 is frozen to geography release v5 at commit `1451fb0788892ff9db6415e6ce6704bdd13d8f9a`; release ID `geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e`. The ordered compact-JSON ID digest is `3bbf3ce4482e0ecc865b3cb8828ba7adb061b605ee1e0061d44ab379d93deea6`. The current main release is v6, so this packet preserves the issue's v5 hierarchy, footprint, macro certificate, handoff, projection, envelope, and release-catalog pins rather than silently changing its baseline. Current-main comparisons are independently pinned to commit `762d7b5a568ca845d85a98a4d188678c126a5d58` and its hierarchy SHA; the helper checks those bytes before evaluation and records that commit instead of recording the caller's moving `HEAD`.
 
 From repository root, run:
 
