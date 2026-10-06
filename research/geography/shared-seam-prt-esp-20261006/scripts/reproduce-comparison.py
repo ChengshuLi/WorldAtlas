@@ -604,8 +604,8 @@ def main():
     coverage_inputs["combined_seven_returned_ign_and_four_caop_polygons"] = [(native_id, shape(feature["geometry"])) for native_id, feature, _, _ in ign_polygon_features.values()] + [(subject, shape(dgt_items[subject][0]["geometry"])) for subject in portuguese_subjects]
     gap_coverage = {name: gap_coverage_record(gap_projected, members) for name, members in coverage_inputs.items()}
     gap_coverage["spanish_seven_returned_ign_administrativeunit_polygons"]["requested_member_count"] = 8
-    gap_coverage["spanish_seven_returned_ign_administrativeunit_polygons"]["missing_nameunit"] = [row["nameunit"] for row in ign_polygon_crosswalk if row.get("native_id") is None]
-    gap_coverage["combined_seven_returned_ign_and_four_caop_polygons"]["missing_spanish_nameunit"] = [row["nameunit"] for row in ign_polygon_crosswalk if row.get("native_id") is None]
+    gap_coverage["spanish_seven_returned_ign_administrativeunit_polygons"]["missing_nameunit"] = [row["requested_nameunit"] for row in ign_polygon_crosswalk if row.get("native_id") is None]
+    gap_coverage["combined_seven_returned_ign_and_four_caop_polygons"]["missing_spanish_nameunit"] = [row["requested_nameunit"] for row in ign_polygon_crosswalk if row.get("native_id") is None]
 
     ign_lines = [projected(shape(ign_items[native_id]["geometry"])) for native_id in IGN_BORDER_IDS]
     ign_line_union = ign_lines[0]
