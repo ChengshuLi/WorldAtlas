@@ -1,0 +1,165 @@
+{
+  "version": 1,
+  "scope": {
+    "issue": 1108,
+    "parent_issue": 1097,
+    "subject_count": 16,
+    "subject_ids": [
+      "atlas:local:IND:7132399B1507487316620",
+      "atlas:local:IND:7132399B19493089186258",
+      "atlas:local:IND:7132399B23352295489123",
+      "atlas:local:IND:7132399B25679382819073",
+      "atlas:local:IND:7132399B27106528401514",
+      "atlas:local:IND:7132399B38242062299143",
+      "atlas:local:IND:7132399B49490689811564",
+      "atlas:local:IND:7132399B516102083904",
+      "atlas:local:IND:7132399B78390472834442",
+      "atlas:local:IND:7132399B91194549462935",
+      "gb:IND:ADM2:76128533B7291413308870",
+      "gb:PAK:ADM2:60131773B1682888309057",
+      "gb:PAK:ADM2:60131773B44072502651200",
+      "gb:PAK:ADM2:60131773B44161758981040",
+      "gb:PAK:ADM2:60131773B62209958986210",
+      "gb:PAK:ADM2:60131773B87869837926518"
+    ],
+    "fragment_baseline_commit": "c603befd3aaf4da90d59b12378e1e0739331efba",
+    "full_gap_fragments": [
+      {
+        "id": "physical-gap:1274:1:bc2dfd4d6bfe071a9bea0d15adc0e4cc62e9962f2c6418395802962a579cade1",
+        "full_feature_sha256": "370a3a380760f6dd02c5c588e69385d65b3afd4cd9703cbc578596989302a730"
+      },
+      {
+        "id": "physical-gap:1346:2:eb4771cfae78b61aea03e2285006660025febfe0051a97abc63e812e210bd64f",
+        "full_feature_sha256": "d16ac5ffccab3c818261a7835797831b87a1fba5115332a651eda7eb9c54c273"
+      }
+    ],
+    "scope_warning": "These subjects and feature pins define the retained research scope; they do not establish SoI source membership or boundary ownership."
+  },
+  "retrieval": {
+    "retrieved_on": "2026-10-06",
+    "product_page": "https://surveyofindia.gov.in/pages/administrative-boundary-data-base-abdb-",
+    "rar_url": "https://surveyofindia.gov.in/documents/State_District_Subdistrict_PAN%20INDIA.rar",
+    "metadata_url": "https://surveyofindia.gov.in/documents/Metadata_ABDB.zip",
+    "rar_response_headers_observed": {
+      "http_status": 200,
+      "accept_ranges": "bytes",
+      "content_length": 202524438,
+      "last_modified": "2026-05-12",
+      "completeness": "headers only; no complete transfer"
+    },
+    "failed_transfer": {
+      "status": "incomplete and removed after receipt was recorded",
+      "encoded_bytes_at_stop": 57877142,
+      "sha256_at_stop": "db59c0872614b401211de9526d5784dc4ab87c40eab4e665bb34891ff4ed04ba",
+      "advertised_encoded_bytes": 202524438,
+      "verified_as_original": false,
+      "archive_integrity_checked": false,
+      "decoded_size_known": false
+    },
+    "metadata_zip_local_only": {
+      "encoded_bytes": 38879,
+      "sha256": "1a14716b73f00fc8391f2708a7975c2f2c1ad4a4e91aafb6dce6546a039e9514",
+      "outer_member_count": 4,
+      "outer_decoded_member_bytes": 46328,
+      "nested_xlsx_decoded_bytes": 146660,
+      "all_inflation_layers_decoded_bytes": 192988,
+      "retained_in_managed_slot": true,
+      "included_in_packet": false,
+      "restoration_note": "A complete official-source copy is retained in the measured private slot. It reverified at 38,879 encoded bytes and SHA-256 1a14716b73f00fc8391f2708a7975c2f2c1ad4a4e91aafb6dce6546a039e9514; no copy is included in Git."
+    },
+    "final_audit_runs": {
+      "execution_commit": "02b73312bbc091861d6ddd20674ede81598e8d33",
+      "execution_code_sha256": "dd0cfa43268137c659fb8c4ab8d5e490db887eec9161a9c3e2d4cd0a30c41b81",
+      "run_one_path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/runs/metadata-audit-run-3.json",
+      "run_two_path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/runs/metadata-audit-run-4.json",
+      "run_one_sha256": "a6d9f88e7156bc2a5d5023675243a48ccab196f38126a42472c43f891b5fa9a7",
+      "run_two_sha256": "a6d9f88e7156bc2a5d5023675243a48ccab196f38126a42472c43f891b5fa9a7",
+      "complete_bytes_identical": true,
+      "superseded_runs": [
+        "research/geography/shared-seam-ind-pak-soi-abdb-2026/runs/metadata-audit-run-1.json",
+        "research/geography/shared-seam-ind-pak-soi-abdb-2026/runs/metadata-audit-run-2.json"
+      ],
+      "superseded_reason": "Those actual earlier runs preserved metadata facts, but their mutation/truncation fields compared bytes to constants instead of exercising the acceptance gate."
+    }
+  },
+  "metadata_profiles": [
+    {
+      "product_id": "SOI/ABDB/VECTOR/50000/2025/DISTRICT/INDIA",
+      "title": "District boundaries of India",
+      "edition": "2025",
+      "metadata_publication_date": "2026-05-06",
+      "creation_extent": "2022-2025",
+      "scale_denominator": 50000,
+      "plotted_accuracy_m": 12.5,
+      "horizontal_rmse_m": 12.5,
+      "horizontal_crs": "LCC-WGS84 / EPSG:7755",
+      "formats": [
+        "Shapefile",
+        "Geodatabase"
+      ],
+      "access_constraints": "copyright",
+      "use_constraints": "copyright",
+      "lineage_summary": "Metadata describes SoI 1:50,000-scale source material and a verification step; source wording omitted."
+    },
+    {
+      "product_id": "SOI/ABDB/VECTOR/50000/2025/SUBDISTRICT/INDIA",
+      "title": "Subdistrict boundaries of India",
+      "edition": "2025",
+      "metadata_publication_date": "2026-05-06",
+      "creation_extent": "2022-2025",
+      "scale_denominator": 50000,
+      "plotted_accuracy_m": 12.5,
+      "horizontal_rmse_m": 12.5,
+      "horizontal_crs": "LCC-WGS84 / EPSG:7755",
+      "formats": [
+        "Shapefile",
+        "Geodatabase"
+      ],
+      "access_constraints": "copyright",
+      "use_constraints": "copyright",
+      "lineage_summary": "Metadata describes SoI 1:50,000-scale source material and a verification step; source wording omitted."
+    }
+  ],
+  "terms_assessment": {
+    "status": "unresolved",
+    "reason": "The official sources do not establish clear product-specific permission to republish the complete source RAR and metadata archive in this public repository.",
+    "evidence": [
+      {
+        "url": "https://onlinemaps.surveyofindia.gov.in/FAQs.aspx",
+        "observed": "The FAQ says ABDB downloads are free to all users and Quick Access datasets require no login.",
+        "scope_limit": "Access terms do not by themselves grant public redistribution permission."
+      },
+      {
+        "url": "https://onlinemaps.surveyofindia.gov.in/GeospatialGuidelines.aspx",
+        "observed": "The 2021 guidelines describe broad dissemination/sharing/distribution rights and identify SoI boundary data as freely downloadable, with display/printing permitted.",
+        "scope_limit": "No product-specific redistribution license for these exact archive files was found."
+      },
+      {
+        "url": "https://surveyofindia.gov.in/pages/copyright-policy",
+        "observed": "The current policy requires written permission for reproducing SoI website material.",
+        "scope_limit": "Applicability to the linked geospatial archive is not clearly resolved by this research."
+      },
+      {
+        "url": "https://onlinemaps.surveyofindia.gov.in/addtocart.aspx",
+        "observed": "Portal checkout text restricts sharing downloaded data with foreign recipients except where applicable law permits.",
+        "scope_limit": "The text is presented in account checkout; its applicability to no-login Quick Access is unclear."
+      },
+      {
+        "url": "https://surveyofindia.gov.in/pages/terms-and-conditions",
+        "observed": "General website terms were checked.",
+        "scope_limit": "They do not supply explicit product-specific redistribution permission."
+      }
+    ],
+    "missing_evidence": "Written SoI confirmation, a product-specific license, or authoritative interpretation explicitly permitting this full-source public repository redistribution."
+  },
+  "identity_and_geometry": {
+    "official_national_product_available": true,
+    "feature_level_soi_ids_or_names_verified": false,
+    "subject_to_soi_feature_crosswalk": "unresolved",
+    "reason": "The metadata ZIP describes countrywide products but does not supply an inspectable feature roster; the complete RAR was not acquired or inspected.",
+    "legal_boundary_alignment": "not assessed",
+    "physical_water_land": "not assessed",
+    "disputed_affiliation": "not inferred",
+    "geometry_comparison": "not performed"
+  }
+}
