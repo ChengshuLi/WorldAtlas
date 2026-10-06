@@ -1,0 +1,205 @@
+{
+  "version": 1,
+  "retrieved_at": "2026-10-05",
+  "scope_count": 207,
+  "source_hashes": {
+    "GRC-ADM3": "15c68b18cbf96f3c3c5021df38353b2d407adb2d1dc06c7165ee158da81fb3f6",
+    "HRV-ADM2": "68a317129a0c295fd8baf7acc0f31ffefdf65ff2f1f62f8ed90a765cc57cf01e"
+  },
+  "official_croatia_archive_sha256": "4a6b9f23e438861f2462b0d6aa06bd4140112e82947a4cdee06ce7a3b40ae23f",
+  "official_croatia_archive_bytes": 208774354,
+  "official_croatia_gml_member": "AdministrativeUnit.gml",
+  "official_croatia_gml_member_sha256": "add049ecfb0355f0d64f912b99ba79021ad0f0d5f1cb2434ec5b1187a7446d69",
+  "official_croatia_gml_member_bytes": 600770112,
+  "official_croatia_features_returned": 50192,
+  "official_croatia_features_matched": 50192,
+  "official_croatia_number_returned_declared": 10000,
+  "official_croatia_return_count_consistent": false,
+  "official_croatia_next_page_url": "http://geoserver-inspire-wfs-services.geoserver-inspire:8080/geoserver-inspire-wfs/au/wfs?TYPENAME=au%3AAdministrativeUnit&RESULTTYPE=results&REQUEST=GetFeature&OUTPUTFORMAT=application%2Fgml%2Bxml%3B%20version%3D3.2&SRSNAME=http%3A%2F%2Fwww.opengis.net%2Fdef%2Fcrs%2FEPSG%2F0%2F3035&VERSION=2.0.0&COUNT=10000&SERVICE=WFS&STARTINDEX=10000",
+  "croatia_unique_name_county_matches": 126,
+  "croatia_unmatched_or_ambiguous": {
+    "gb:HRV:ADM2:41942358B16839252431518": []
+  },
+  "official_dgu_3rd_order_count_in_returned_page": 556,
+  "croatia_near_name_candidates": {
+    "gb:HRV:ADM2:41942358B16839252431518": [
+      {
+        "official_name": "Magadenovac",
+        "national_code": "05789",
+        "inspire_local_id": "JLS.0052000529",
+        "dgu_gml_id": "AdministrativeUnit.2186724457",
+        "level": "3rdOrder",
+        "parent_title": "Osječko-baranjska županija",
+        "valid_from": "2025-10-06T10:40:13.646Z"
+      }
+    ]
+  },
+  "croatia_ministry_2013_exact_matches": 126,
+  "croatia_ministry_2013_roster_rows": 556,
+  "geometry_hash_comparison": {
+    "GRC": {
+      "source_equals_current": 0,
+      "different": 80,
+      "topology_reconciled_count": 7,
+      "topology_conflict_counts": {
+        "1": 1,
+        "2": 5,
+        "3": 0,
+        "4": 1
+      }
+    },
+    "HRV": {
+      "source_equals_current": 0,
+      "different": 127,
+      "topology_reconciled_count": 39,
+      "topology_conflict_counts": {
+        "1": 26,
+        "2": 9,
+        "3": 4,
+        "4": 0
+      }
+    }
+  },
+  "geometry_triage": {
+    "GRC": {
+      "multipolygon_units": 10,
+      "multipart_units": 10,
+      "units_with_holes": 0,
+      "highest_vertex_counts": [
+        {
+          "id": "gb:GRC:ADM3:53547021B25533689161556",
+          "name": "Missolonghi",
+          "vertices": 265
+        },
+        {
+          "id": "gb:GRC:ADM3:53547021B2383377581877",
+          "name": "Grevena",
+          "vertices": 245
+        },
+        {
+          "id": "gb:GRC:ADM3:53547021B73635162331197",
+          "name": "Elassona",
+          "vertices": 244
+        },
+        {
+          "id": "gb:GRC:ADM3:53547021B4893314686518",
+          "name": "Corfu",
+          "vertices": 225
+        },
+        {
+          "id": "gb:GRC:ADM3:53547021B47804939064948",
+          "name": "Meteora",
+          "vertices": 218
+        }
+      ]
+    },
+    "HRV": {
+      "multipolygon_units": 3,
+      "multipart_units": 3,
+      "units_with_holes": 1,
+      "highest_vertex_counts": [
+        {
+          "id": "gb:HRV:ADM2:41942358B48067545354715",
+          "name": "Općina Kneževi Vinogradi",
+          "vertices": 1081
+        },
+        {
+          "id": "gb:HRV:ADM2:41942358B57122337341822",
+          "name": "Grad Lipik",
+          "vertices": 804
+        },
+        {
+          "id": "gb:HRV:ADM2:41942358B98601476985561",
+          "name": "Općina Čaglin",
+          "vertices": 742
+        },
+        {
+          "id": "gb:HRV:ADM2:41942358B29255129304529",
+          "name": "Općina Bilje",
+          "vertices": 709
+        },
+        {
+          "id": "gb:HRV:ADM2:41942358B83936306331720",
+          "name": "Grad Belišće",
+          "vertices": 610
+        }
+      ]
+    }
+  },
+  "greece_source_duplicate_names": [
+    {
+      "name": "oraiokastro",
+      "ids": [
+        "gb:GRC:ADM3:53547021B25127242481922",
+        "gb:GRC:ADM3:53547021B15452068412187"
+      ]
+    }
+  ],
+  "croatia_scoped_future_begin_lifespan": {},
+  "province_inventory": [
+    {
+      "id": "framework:province:pozega-slavonia:9c0b252675e1",
+      "name": "Požega-Slavonia",
+      "scoped_count": 10,
+      "full_scope": true
+    },
+    {
+      "id": "framework:province:virovitica-podravina:05b25891ba1e",
+      "name": "Virovitica-Podravina",
+      "scoped_count": 16,
+      "full_scope": true
+    },
+    {
+      "id": "framework:province:brod-posavina:ed1f1a57cc5b",
+      "name": "Brod-Posavina",
+      "scoped_count": 28,
+      "full_scope": true
+    },
+    {
+      "id": "framework:province:osijek-baranja:150cf19feca3",
+      "name": "Osijek-Baranja",
+      "scoped_count": 42,
+      "full_scope": true
+    },
+    {
+      "id": "framework:province:vukovar-syrmia:063bde629720",
+      "name": "Vukovar-Syrmia",
+      "scoped_count": 31,
+      "full_scope": true
+    },
+    {
+      "id": "framework:province:ionion-nison:17caee4b2d41",
+      "name": "Ionion Nison",
+      "scoped_count": 7,
+      "full_scope": true
+    },
+    {
+      "id": "framework:province:ipeiroy:f91ecb34b826",
+      "name": "Ipeiroy",
+      "scoped_count": 18,
+      "full_scope": true
+    },
+    {
+      "id": "framework:province:dytikis-makedonias:4aec7fe79eb8",
+      "name": "Dytikis Makedonias",
+      "scoped_count": 12,
+      "full_scope": true
+    },
+    {
+      "id": "framework:province:dytikis-elladas:c29b17158488",
+      "name": "Dytikis Elladas",
+      "scoped_count": 18,
+      "full_scope": true
+    },
+    {
+      "id": "framework:province:thessalias:d6fab7543c73",
+      "name": "Thessalias",
+      "scoped_count": 25,
+      "full_scope": true
+    }
+  ],
+  "ministry_2013_source_sha256": "1f60a60b90e875cf59dd69de2fff64a1550a699165251ff665ed039fa67a3ac0",
+  "ministry_2013_csv_sha256": "13dc42e534606c785be49008746e16eb7c553999b1675058bdaac0612262ea71",
+  "interpretation": "Per-location boundary classifications remain insufficient-evidence pending source-vintage polygon comparison. Croatian identity/role is crosswalked by DGU 3rdOrder name and county; this does not validate the 2021 polygons. Greek identity/count sources do not establish the 80 exact boundaries. All 207 current Atlas coordinate sequences differ from their archived geoBoundaries source coordinates; serialized differences are a warning only, not a measured territorial discrepancy."
+}
+row_count 207 croatia_unique_name_county_matches 126 official_dgu_3rd_order_count 556

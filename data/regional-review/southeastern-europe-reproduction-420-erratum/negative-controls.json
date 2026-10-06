@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "issue": 1161,
+  "method_id": "bounded-reproduction",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "checked_at": "2026-10-06T15:09:54Z",
+  "baseline_commit": "96f2a6d201236ba62f471535db240b123de60c09",
+  "runner_sha256": "6d9669bfee4baca0c9e9f76a3ac0aff84cb089cbe217cb60c3d84d9dd32d980c",
+  "controls": [
+    {
+      "control": "altered Atlas geometry bytes",
+      "rejected": true,
+      "reason": "whole-file input differs from pinned bytes: data/geography/part-9.json"
+    },
+    {
+      "control": "altered source metadata bytes",
+      "rejected": true,
+      "reason": "whole-file input differs from pinned bytes: data/regional-review/regional-review-c64d17e99f61d668/source/geoboundaries-9469f09/GRC/ADM3/geoBoundaries-GRC-ADM3-metaData.json"
+    },
+    {
+      "control": "altered source bytes",
+      "rejected": true,
+      "reason": "whole-file input differs from pinned bytes: data/regional-review/regional-review-c64d17e99f61d668/source/geoboundaries-9469f09/GRC/ADM3/geoBoundaries-GRC-ADM3.geojson"
+    },
+    {
+      "control": "altered legacy reproduction code",
+      "rejected": true,
+      "reason": "whole-file input differs from pinned bytes: data/regional-review/regional-review-c64d17e99f61d668/reproduce_crosswalk.py"
+    },
+    {
+      "control": "wrong immutable baseline",
+      "rejected": true,
+      "reason": "wrong immutable input baseline: expected 96f2a6d201236ba62f471535db240b123de60c09, got 0000000000000000000000000000000000000000"
+    },
+    {
+      "control": "duplicate Atlas subject identity",
+      "rejected": true,
+      "reason": "Atlas subject multiplicity/scope mismatch: wrong={'gb:GRC:ADM3:53547021B10735873642885': 2}, extras=[]"
+    },
+    {
+      "control": "duplicate source subject identity",
+      "rejected": true,
+      "reason": "source subject multiplicity/scope mismatch: wrong={'gb:GRC:ADM3:53547021B10735873642885': 2}, extras=[]"
+    },
+    {
+      "control": "duplicate native source feature ID",
+      "rejected": true,
+      "reason": "duplicate source IDs in complete GRC-ADM3 layer"
+    },
+    {
+      "control": "existing output directory",
+      "rejected": true,
+      "existing_bytes_unchanged": true,
+      "error_tail": "gs.run_id), ensure_ascii=False, indent=2))\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/data/regional-review/southeastern-europe-reproduction-420-erratum/reproduce-crosswalk.py\", line 260, in run\n    raise EvidenceError(f\"refusing to reuse existing output directory: {output_dir.relative_to(root)}\")\n__main__.EvidenceError: refusing to reuse existing output directory: runs/run-author-b\n"
+    }
+  ],
+  "control_count": 9,
+  "all_rejected": true
+}
