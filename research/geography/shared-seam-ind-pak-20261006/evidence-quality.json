@@ -1060,14 +1060,14 @@
     "PYTHONDONTWRITEBYTECODE=1 /Users/chengshuli/world-atlas-workspace/private-publisher-checks-20261004/shared-runtime/python-3.12.14-arm64-8358191609611765/bin/python3 -B research/geography/shared-seam-ind-pak-20261006/reproduce.py --run runs/run-1.json",
     "PYTHONDONTWRITEBYTECODE=1 /Users/chengshuli/world-atlas-workspace/private-publisher-checks-20261004/shared-runtime/python-3.12.14-arm64-8358191609611765/bin/python3 -B research/geography/shared-seam-ind-pak-20261006/reproduce.py --run runs/run-2.json",
     "Verify runs/run-1.json and runs/run-2.json complete-file SHA-256 and all-field equality against two-run-reproducibility.json; both record actual_execution_sha 4e35869912bc5a7e0b222a3751219347443a34dc.",
-    "python3.12 -m pip install --target research/geography/shared-seam-ind-pak-20261006/.cache/rasterio-runtime rasterio==1.5.2 numpy==2.5.3",
-    "PYTHONPATH=research/geography/shared-seam-ind-pak-20261006/.cache/rasterio-runtime python3.12 research/geography/shared-seam-ind-pak-20261006/follow-up-v2/reproduce_current_main.py run-1",
-    "PYTHONPATH=research/geography/shared-seam-ind-pak-20261006/.cache/rasterio-runtime python3.12 research/geography/shared-seam-ind-pak-20261006/follow-up-v2/reproduce_current_main.py run-2",
-    "PYTHONPATH=research/geography/shared-seam-ind-pak-20261006/.cache/rasterio-runtime python3.12 research/geography/shared-seam-ind-pak-20261006/follow-up-v2/sample_worldcover_2021.py",
-    "Verify follow-up-v2/current-main-reproducibility.json and follow-up-v2/worldcover-reproducibility.json; both compare complete output-file SHA-256 values from two identical runs.",
-    "PYTHONDONTWRITEBYTECODE=1 python3.12 research/geography/shared-seam-ind-pak-20261006/follow-up-v2/build_neighbor_parent_context.py run-1",
-    "PYTHONDONTWRITEBYTECODE=1 python3.12 research/geography/shared-seam-ind-pak-20261006/follow-up-v2/build_neighbor_parent_context.py run-2",
-    "Verify follow-up-v2/parent-context-reproducibility.json complete-file equality for both current-main outputs."
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 -m pip install --target research/geography/shared-seam-ind-pak-20261006/.cache/rasterio-runtime rasterio==1.5.2 numpy==2.5.3",
+    "PYTHONPATH=research/geography/shared-seam-ind-pak-20261006/.cache/rasterio-runtime /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/shared-seam-ind-pak-20261006/follow-up-v2/reproduce_current_main.py run-1",
+    "PYTHONPATH=research/geography/shared-seam-ind-pak-20261006/.cache/rasterio-runtime /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/shared-seam-ind-pak-20261006/follow-up-v2/reproduce_current_main.py run-2",
+    "PYTHONPATH=research/geography/shared-seam-ind-pak-20261006/.cache/rasterio-runtime /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/shared-seam-ind-pak-20261006/follow-up-v2/sample_worldcover_2021.py",
+    "Verify follow-up-v2/current-main-reproducibility.json and follow-up-v2/worldcover-reproducibility.json; each compares complete output-file SHA-256 values from identical runs.",
+    "PYTHONDONTWRITEBYTECODE=1 /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/shared-seam-ind-pak-20261006/follow-up-v2/build_neighbor_parent_context.py run-1",
+    "PYTHONDONTWRITEBYTECODE=1 /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/shared-seam-ind-pak-20261006/follow-up-v2/build_neighbor_parent_context.py run-2",
+    "Verify follow-up-v2/parent-context-reproducibility.json complete-file equality for both runs at actual execution SHA 8bdb5e95201048f48ed3a0fc520ea8f42e7108ba."
   ],
   "conclusions": [
     {
@@ -1103,7 +1103,7 @@
         "esa-worldcover-2021-v200"
       ],
       "status": "unresolved",
-      "text": "Physical land-versus-water status is unverified and no disputed affiliation is assigned. Natural Earth provides incomplete, modern major-lake context; WorldCover is unqueried."
+      "text": "Natural Earth provides incomplete, modern major-lake context. WorldCover 2021 labels are sampled as a limited land-cover proxy; local surface status and disputed affiliation remain unverified."
     },
     {
       "source_ids": [
@@ -1112,7 +1112,7 @@
         "gb:PAK:ADM2:2019"
       ],
       "status": "supported",
-      "text": "On fresh main baseline 0f08ca8c451e71bb3b06cb5fb82988e92d3048ab, all 16 current subject geometry digests still equal the previously retained current feature digests; the two complete fragments still measure 2362541936.078026 m2, contact no original geoBoundaries source features, and have 18 contacts to current Atlas features. This validates freshness of the earlier exact comparison inputs."
+      "text": "On fresh main baseline fc328993bb8c0690b3b4687d193c7f0887bd5b17, all 16 current subject geometry digests still equal the previously retained current feature digests; the two complete fragments still measure 2362541936.078026 m2, contact no original geoBoundaries source features, and have 18 contacts to current Atlas features. This validates freshness of the earlier exact comparison inputs."
     },
     {
       "source_ids": [
@@ -1143,11 +1143,11 @@
   ],
   "follow_up_v2": {
     "claim_id": "4e3862a2-6e6d-4773-aadb-c46236a3436e",
-    "current_main_execution_sha": null,
+    "current_main_execution_sha": "8bdb5e95201048f48ed3a0fc520ea8f42e7108ba",
     "fresh_main_base": "fc328993bb8c0690b3b4687d193c7f0887bd5b17",
     "preserves_prior_packet": true,
     "worker_id": "01a10948-7d38-75d0-bc01-4cc28ea41f49",
-    "worldcover_execution_sha": null
+    "worldcover_execution_sha": "d045ed49536c393b3064771bca41562d273a379e"
   },
   "issue": 1097,
   "lane": "geography",
@@ -1289,72 +1289,72 @@
       "vintage": "archived"
     },
     {
-      "evaluation_commit": "0f08ca8c451e71bb3b06cb5fb82988e92d3048ab",
+      "evaluation_commit": "fc328993bb8c0690b3b4687d193c7f0887bd5b17",
       "id": "fresh-main-fragment-area",
-      "input_sha256": "86afe3a4a5e0318eb6052b3632ba7154eeaaecb8f4211e5172bcc2a35af3c054",
+      "input_sha256": "9799bfa330325eb60b45cf284ce87ea50d12171c7353333e70c38e29704f7327",
       "unit": "m2",
       "value": 2362541936.078026,
-      "vintage": "archived"
+      "vintage": "current"
     },
     {
-      "evaluation_commit": "0f08ca8c451e71bb3b06cb5fb82988e92d3048ab",
+      "evaluation_commit": "fc328993bb8c0690b3b4687d193c7f0887bd5b17",
       "id": "fresh-main-source-contact-count",
-      "input_sha256": "86afe3a4a5e0318eb6052b3632ba7154eeaaecb8f4211e5172bcc2a35af3c054",
+      "input_sha256": "9799bfa330325eb60b45cf284ce87ea50d12171c7353333e70c38e29704f7327",
       "unit": "positive-length contacts",
       "value": 0,
-      "vintage": "archived"
+      "vintage": "current"
     },
     {
-      "evaluation_commit": "0f08ca8c451e71bb3b06cb5fb82988e92d3048ab",
+      "evaluation_commit": "fc328993bb8c0690b3b4687d193c7f0887bd5b17",
       "id": "fresh-main-atlas-contact-count",
-      "input_sha256": "86afe3a4a5e0318eb6052b3632ba7154eeaaecb8f4211e5172bcc2a35af3c054",
+      "input_sha256": "9799bfa330325eb60b45cf284ce87ea50d12171c7353333e70c38e29704f7327",
       "unit": "positive-length contacts",
       "value": 18,
-      "vintage": "archived"
+      "vintage": "current"
     },
     {
-      "evaluation_commit": "0f08ca8c451e71bb3b06cb5fb82988e92d3048ab",
+      "evaluation_commit": "fc328993bb8c0690b3b4687d193c7f0887bd5b17",
       "id": "fresh-main-unchanged-subject-geometries",
-      "input_sha256": "86afe3a4a5e0318eb6052b3632ba7154eeaaecb8f4211e5172bcc2a35af3c054",
+      "input_sha256": "9799bfa330325eb60b45cf284ce87ea50d12171c7353333e70c38e29704f7327",
       "unit": "subjects",
       "value": 16,
-      "vintage": "archived"
+      "vintage": "current"
     },
     {
-      "evaluation_commit": "0f08ca8c451e71bb3b06cb5fb82988e92d3048ab",
+      "evaluation_commit": "fc328993bb8c0690b3b4687d193c7f0887bd5b17",
       "id": "worldcover-1274-class80-pixels",
-      "input_sha256": "a8cf14df7e2c789e46d8833f94d8a26e76c0cf90dc27a2c732426214fe73068d",
+      "input_sha256": "21f70a8f089d832e3c92939cc30f5cdc98d8c4d3c0a2e931058173920cdda2d5",
       "unit": "pixels",
       "value": 25191,
-      "vintage": "archived"
+      "vintage": "current"
     },
     {
       "denominator": 24898828,
-      "evaluation_commit": "0f08ca8c451e71bb3b06cb5fb82988e92d3048ab",
+      "evaluation_commit": "fc328993bb8c0690b3b4687d193c7f0887bd5b17",
       "id": "worldcover-1274-class80-fraction",
-      "input_sha256": "a8cf14df7e2c789e46d8833f94d8a26e76c0cf90dc27a2c732426214fe73068d",
+      "input_sha256": "21f70a8f089d832e3c92939cc30f5cdc98d8c4d3c0a2e931058173920cdda2d5",
       "numerator": 25191,
       "unit": "fraction",
       "value": 0.001011734367577462,
-      "vintage": "archived"
+      "vintage": "current"
     },
     {
-      "evaluation_commit": "0f08ca8c451e71bb3b06cb5fb82988e92d3048ab",
+      "evaluation_commit": "fc328993bb8c0690b3b4687d193c7f0887bd5b17",
       "id": "worldcover-1346-class80-pixels",
-      "input_sha256": "a8cf14df7e2c789e46d8833f94d8a26e76c0cf90dc27a2c732426214fe73068d",
+      "input_sha256": "21f70a8f089d832e3c92939cc30f5cdc98d8c4d3c0a2e931058173920cdda2d5",
       "unit": "pixels",
       "value": 116742,
-      "vintage": "archived"
+      "vintage": "current"
     },
     {
       "denominator": 6654945,
-      "evaluation_commit": "0f08ca8c451e71bb3b06cb5fb82988e92d3048ab",
+      "evaluation_commit": "fc328993bb8c0690b3b4687d193c7f0887bd5b17",
       "id": "worldcover-1346-class80-fraction",
-      "input_sha256": "a8cf14df7e2c789e46d8833f94d8a26e76c0cf90dc27a2c732426214fe73068d",
+      "input_sha256": "21f70a8f089d832e3c92939cc30f5cdc98d8c4d3c0a2e931058173920cdda2d5",
       "numerator": 116742,
       "unit": "fraction",
       "value": 0.017542143473762744,
-      "vintage": "archived"
+      "vintage": "current"
     }
   ],
   "outputs": [
@@ -2052,7 +2052,7 @@
       "bytes": 5748,
       "hash_kind": "file-bytes",
       "path": "research/geography/shared-seam-ind-pak-20261006/follow-up-v2/README.md",
-      "sha256": "604a0692ed982839c6f46d0c57eb480791e663c7156358e2b8ad4be2818ecbcd"
+      "sha256": "82d4516cc691133354c1dc50531bb58888b43dc32ffa3c5d46a050e5f17f13db"
     },
     {
       "bytes": 625,
@@ -2064,37 +2064,37 @@
       "bytes": 7339,
       "hash_kind": "file-bytes",
       "path": "research/geography/shared-seam-ind-pak-20261006/follow-up-v2/reproduce_current_main.py",
-      "sha256": "9d5537b4eab0275549fed42f1984e72cfe0f8abcaac49e81fe68c3dc710081c8"
+      "sha256": "ccc439d7088ddee1c866fecd859594b23a6d051003a988df4fdea994a5f98cf8"
     },
     {
-      "bytes": 7518,
+      "bytes": 7698,
       "hash_kind": "file-bytes",
       "path": "research/geography/shared-seam-ind-pak-20261006/follow-up-v2/sample_worldcover_2021.py",
-      "sha256": "0b9bc0d5e783661c2c2e7cbcf823eb30ed8055d4d795722ce97b4ca9eb9ebc77"
+      "sha256": "8a6ae90dd8da34997c3fcfbf4c81b3defc33f083047d171941ec890e3f1f0110"
     },
     {
       "bytes": 28121,
       "hash_kind": "file-bytes",
       "path": "research/geography/shared-seam-ind-pak-20261006/follow-up-v2/run-1.json",
-      "sha256": "86afe3a4a5e0318eb6052b3632ba7154eeaaecb8f4211e5172bcc2a35af3c054"
+      "sha256": "9799bfa330325eb60b45cf284ce87ea50d12171c7353333e70c38e29704f7327"
     },
     {
       "bytes": 28121,
       "hash_kind": "file-bytes",
       "path": "research/geography/shared-seam-ind-pak-20261006/follow-up-v2/run-2.json",
-      "sha256": "86afe3a4a5e0318eb6052b3632ba7154eeaaecb8f4211e5172bcc2a35af3c054"
+      "sha256": "9799bfa330325eb60b45cf284ce87ea50d12171c7353333e70c38e29704f7327"
     },
     {
       "bytes": 9489,
       "hash_kind": "file-bytes",
       "path": "research/geography/shared-seam-ind-pak-20261006/follow-up-v2/worldcover-window-summary.json",
-      "sha256": "a8cf14df7e2c789e46d8833f94d8a26e76c0cf90dc27a2c732426214fe73068d"
+      "sha256": "21f70a8f089d832e3c92939cc30f5cdc98d8c4d3c0a2e931058173920cdda2d5"
     },
     {
       "bytes": 454,
       "hash_kind": "file-bytes",
       "path": "research/geography/shared-seam-ind-pak-20261006/follow-up-v2/current-main-reproducibility.json",
-      "sha256": "13477c17a6ad7d9bf51de07469a043e70d6a03b5e8acfe77e44d26b449806653"
+      "sha256": "364a9715bcb5be6d07a18d4cf4c7265d7fbf3e473bd2d10f6f49281dc03f08ca"
     },
     {
       "bytes": 941,
@@ -2124,7 +2124,7 @@
       "bytes": 850,
       "hash_kind": "file-bytes",
       "path": "research/geography/shared-seam-ind-pak-20261006/follow-up-v2/worldcover-reproducibility.json",
-      "sha256": "db75c067d2e040aa5eb3756c7c21836e7401bd4124d78ccb59549d9eef9b4838"
+      "sha256": "baaa371395200e494862ee03a96b8dc0ea4ed946e2463c598cfc7bbc20435ba1"
     },
     {
       "bytes": 107968,
@@ -2136,25 +2136,25 @@
       "bytes": 6063,
       "hash_kind": "file-bytes",
       "path": "research/geography/shared-seam-ind-pak-20261006/follow-up-v2/build_neighbor_parent_context.py",
-      "sha256": "dbefb71ec4a00f717bae63b4208ee1759e4d78ac115ffc79175ed87cddbb29dd"
+      "sha256": "3a010f23835cda5d1ea52fa78049e2c512c789a41b5fed0aea99dd82e800d237"
     },
     {
       "bytes": 14734,
       "hash_kind": "file-bytes",
       "path": "research/geography/shared-seam-ind-pak-20261006/follow-up-v2/parent-context-run-1.json",
-      "sha256": "ad5168673fd4e49575fe621fab5aae1c732b15954ee55c73d2c01cd9c36ed9f1"
+      "sha256": "aec8e9b3789937d39b986bdfbad33614a644e7bb65f897a6e3b62e938c6de926"
     },
     {
       "bytes": 14734,
       "hash_kind": "file-bytes",
       "path": "research/geography/shared-seam-ind-pak-20261006/follow-up-v2/parent-context-run-2.json",
-      "sha256": "ad5168673fd4e49575fe621fab5aae1c732b15954ee55c73d2c01cd9c36ed9f1"
+      "sha256": "aec8e9b3789937d39b986bdfbad33614a644e7bb65f897a6e3b62e938c6de926"
     },
     {
       "bytes": 533,
       "hash_kind": "file-bytes",
       "path": "research/geography/shared-seam-ind-pak-20261006/follow-up-v2/parent-context-reproducibility.json",
-      "sha256": "21751c72eb15e77cd62f9088e89b1d68d86270379bf2cdbcdb77e792ccd9bc9c"
+      "sha256": "f6fdff2ae7a0852d9e82f96733a89128d382fafd73d8a3cca2f7c0715d096cbc"
     },
     {
       "bytes": 5903,
@@ -2291,7 +2291,7 @@
         "status": "redistributable",
         "terms": "Creative Commons Attribution 4.0 International (CC BY 4.0), as stated by ESA product documentation."
       },
-      "limit": "No raster pixels support this packet. The global 10 m tiles exceed the existing evidence bounds; WorldCover is a land-cover product, not an administrative or legal water/sovereignty determination. Map vintage 2021 differs from all three administrative source vintages.",
+      "limit": "Earlier pinned comparator not queried; excluded from current findings. The separate 2021 v200 follow-up sample is a limited land-cover indicator, not water/sovereignty determination.",
       "restoration": "Use ESA official release and data-access documentation at the cited URLs; original raster pixels were not fetched or queried in this bounded source packet.",
       "retention": "restoration-only",
       "retrieved_at": "2026-10-06 product metadata citation; no pixels retrieved",
