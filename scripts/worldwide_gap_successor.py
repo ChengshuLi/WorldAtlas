@@ -79,11 +79,11 @@ def overlay_neighbors(rows, changed_shapes):
     west_tree,east_tree=STRtree([g for _,g in west]),STRtree([g for _,g in east])
     chosen=set()
     for g in changed_shapes:
-        chosen.update(int(i) for i in tree.query(g,predicate='intersects'))
+        chosen.update(int(i) for i in tree.query(g))
         if g.bounds[2]==180:
-            chosen.update(west[int(i)][0] for i in west_tree.query(g,predicate='intersects'))
+            chosen.update(west[int(i)][0] for i in west_tree.query(g))
         if g.bounds[0]==-180:
-            chosen.update(east[int(i)][0] for i in east_tree.query(g,predicate='intersects'))
+            chosen.update(east[int(i)][0] for i in east_tree.query(g))
     return [rows[i] for i in sorted(chosen)]
 
 
