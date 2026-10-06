@@ -124,3 +124,17 @@ for field in ('id','footprints_sha256','hierarchy_sha256'):
 malformed=copy.deepcopy(valid);malformed['batch_id']=1
 assert issue_rosters([[{'number':1,'state':'open','body':body(malformed)}]])[2]
 print('Valid closed regional source predecessor retained; malformed typed release and batch fields rejected with provenance')
+pin={'path':'original.json.gz','sha256':'a'*64};original={'component':'a'}
+annotation={'component':'a','original_investigation':{'commit':p.C,'path':pin['path'],'file_sha256':pin['sha256'],'row_index':0},'native_observation_reference':{'family':'frozen-reviewed-native','component':'a'}}
+p.verify_annotation_original(annotation,original,pin,0)
+for field,value in [('commit','wrong'),('path','wrong'),('file_sha256','wrong'),('row_index',1)]:
+    bad=copy.deepcopy(annotation);bad['original_investigation'][field]=value
+    try:p.verify_annotation_original(bad,original,pin,0)
+    except ValueError:pass
+    else:raise AssertionError('Original investigation reference mutation escaped '+field)
+for field,value in [('family','selected-repository-native'),('component','b')]:
+    bad=copy.deepcopy(annotation);bad['native_observation_reference'][field]=value
+    try:p.verify_annotation_original(bad,original,pin,0)
+    except ValueError:pass
+    else:raise AssertionError('Native reference cohort/identity mutation escaped '+field)
+print('Complete original annotation identity/index/vintage/native-family controls PASS')

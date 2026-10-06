@@ -85,6 +85,14 @@ def main():
     current_lineage=reconstruct(original_lineage,product('component-lineage-current-delta.json.gz'))
     if {r['id']for r in original_lineage}!={c['id']for c in old_components}or{r['id']for r in current_lineage}!={c['id']for c in current_components}:
         raise ValueError('Complete original/current identity lineage closure differs')
+    for features,lineage in ((old_components,original_lineage),(current_components,current_lineage)):
+        by_id={f['id']:f for f in features}
+        for row in lineage:
+            feature=by_id[row['id']]
+            if (row['full_feature_sha256']!=sha256(canonical_json(feature))
+                    or row['fragment_ids']!=sorted(b['id']for b in feature['properties']['fragment_bindings'])
+                    or row['unmeasured_fragment_ids']!=feature['properties']['unmeasured_fragment_ids']):
+                raise ValueError('Complete lineage feature/fragment/unknown binding differs')
     product('fragment-lineage.json.gz');product('tile-queries.json.gz');product('source-custody.json')
     context_report=inputs.json(base.H,base.CP+'report.json')
     contexts={c['id']:c for c in rows(inputs,base.H,context_report['outputs'])}
@@ -137,7 +145,7 @@ def main():
         for ordinal,row in enumerate(inputs.json(base.C,pin['path'],pin)):
             annotation=by_annotation[row['component']];base.verify_annotation_original(annotation,row,pin,ordinal)
             original_records[row['component']]=row
-    if len(original_records)!=95174or set(original_records)!=set(by_annotation):raise ValueError('Complete original annotation bijection differs')
+    if len(original_records)!=95174 or set(original_records)!=set(by_annotation):raise ValueError('Complete original annotation bijection differs')
     issue_pin=frozen['all_state_issue_snapshot'];pages=inputs.json(args.frozen_commit,issue_pin['path'],issue_pin)
     strong,weak,rejected=issue_rosters(pages);subjects=defaultdict(set)
     for roster in strong:subjects[roster['issue']].update(roster['subject_ids'])
@@ -157,7 +165,11 @@ def main():
     for component in sorted(current_components,key=lambda c:c['id']):
         identity=component['id'];record=copy.deepcopy(original_records.get(identity,new_records.get(identity)))
         if not record or record['component']!=identity:raise ValueError('Current investigation omitted or redirected')
-        key,families=base.classify(record,observed[identity],current_contexts);bid='gap-source-batch:'+sha256(canonical_json(key))[:24]
+        key,families=base.classify(record,observed[identity],current_contexts)
+        for family in families:
+            family['vintage']=base.M;family['original_recipe_metadata_vintage']=base.C
+        key['source_families']=sorted({sha256(canonical_json(f))for f in families})
+        bid='gap-source-batch:'+sha256(canonical_json(key))[:24]
         record['investigation_orders']=investigation_ranks(record,current_contexts)
         record['current_native_reference']={'component':identity,'family':'selected-current-native-delta'}
         record['current_actionable_batch_id']=bid;record['current_observed_scope_bucket']=key['observed_scope_bucket']

@@ -171,7 +171,8 @@ def verify_annotation_original(annotation,original,pin,ordinal):
     if (annotation['component']!=original['component']
             or reference['path']!=pin['path'] or reference['file_sha256']!=pin['sha256']
             or type(reference['row_index'])is not int or reference['row_index']!=ordinal
-            or reference['commit']!=C or annotation['native_observation_reference']['component']!=original['component']):
+            or reference['commit']!=C or annotation['native_observation_reference']['component']!=original['component']
+            or annotation['native_observation_reference']['family']!='frozen-reviewed-native'):
         raise ValueError('Complete annotation original-file/index/identity binding differs')
 
 def source_family(context):
