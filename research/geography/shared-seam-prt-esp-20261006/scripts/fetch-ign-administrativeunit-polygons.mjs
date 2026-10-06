@@ -95,7 +95,9 @@ const records = [];
 for (const name of names) {
   const params = new URLSearchParams({nameunit: name, limit: '10', f: 'json'});
   const queryUrl = `https://api-features.ign.es/collections/administrativeunit/items?${params}`;
-  const nameQuery = await existingName(discoveryDir, name) ?? await get(queryUrl);
+  const nameQuery = await existingName(discoveryDir, name) ??
+    (name === 'Zarza la Mayor' ? await existing(discoveryDir, 'ign-administrativeunit-no-match-6.json') : null) ??
+    await get(queryUrl);
   if (nameQuery.receipt.http_status !== 200) throw new Error(`Name query failed (${nameQuery.receipt.http_status}): ${name}`);
   const collection = JSON.parse(nameQuery.bytes.toString('utf8'));
   let query = nameQuery;
