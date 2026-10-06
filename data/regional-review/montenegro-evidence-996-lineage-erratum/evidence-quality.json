@@ -1,0 +1,518 @@
+{
+  "version": 1,
+  "issue": 1207,
+  "lane": "geography",
+  "worker_id": "01a10948-7d3d-7812-8b2f-c5a47e41f49",
+  "subject_ids": [
+    "gb:MNE:ADM1:59799669B12564288388297",
+    "gb:MNE:ADM1:59799669B20110685483927",
+    "gb:MNE:ADM1:59799669B20319020653405",
+    "gb:MNE:ADM1:59799669B20349667855259",
+    "gb:MNE:ADM1:59799669B22511566400758",
+    "gb:MNE:ADM1:59799669B28207041867492",
+    "gb:MNE:ADM1:59799669B41052051546873",
+    "gb:MNE:ADM1:59799669B48420505719641",
+    "gb:MNE:ADM1:59799669B58100018961631",
+    "gb:MNE:ADM1:59799669B59523358081802",
+    "gb:MNE:ADM1:59799669B66678983232609",
+    "gb:MNE:ADM1:59799669B74362705567987",
+    "gb:MNE:ADM1:59799669B75560777931070",
+    "gb:MNE:ADM1:59799669B7591395216485",
+    "gb:MNE:ADM1:59799669B78864851615199",
+    "gb:MNE:ADM1:59799669B79583520985931",
+    "gb:MNE:ADM1:59799669B80293643035426",
+    "gb:MNE:ADM1:59799669B84579627936880",
+    "gb:MNE:ADM1:59799669B88193558767116",
+    "gb:MNE:ADM1:59799669B91583747266461",
+    "gb:MNE:ADM1:59799669B93063361678836",
+    "gb:MNE:ADM1:59799669B93779420845023",
+    "gb:MNE:ADM1:59799669B9703090978387"
+  ],
+  "subject_ids_sha256": "a3247490b6758e44570b1288cce6f352f6e59a52a8934e55f9dd452ed82b1757",
+  "baseline": {
+    "commit": "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1",
+    "files": [
+      {
+        "path": "data/regional-review/montenegro-evidence-996-erratum/RESEARCH.md",
+        "bytes": 5639,
+        "sha256": "396e2f51743ba175ce18864e97a8aa197c9d9e5a437485b3f1529b35544d6862",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/montenegro-evidence-996-erratum/evidence-quality.json",
+        "bytes": 401114,
+        "sha256": "61e2b2c5cac4b4c49a9d1a0b13d0b2c57c96251dee98b31a2a0913b259dc4ef7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/montenegro-evidence-996-erratum/reproduce.py",
+        "bytes": 63028,
+        "sha256": "da9bfc13d9e747169d7f4ba2c39aa5fdaf9437d7661f7c4a6dc22271015cd047",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/montenegro-evidence-996-erratum/reproducibility-control-anchored-v10.json",
+        "bytes": 1133,
+        "sha256": "9e52517764bb90f43a9b5445352966bf06b1ebe476e23edf00bfa78c81709eff",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/montenegro-evidence-996-erratum/reproducibility-control-anchored-v9.json",
+        "bytes": 1131,
+        "sha256": "adb0afdbdfbf7e660a5e39c755af172a7c15a112f9267547ec875154587064ff",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v10/run-1/comparison.json",
+        "bytes": 30811,
+        "sha256": "8b5acd06c9d269979287277d498e6e9405543d46a681149a327062abe63f782b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v10/run-1/negative-control.json",
+        "bytes": 2653,
+        "sha256": "651a315d295cf471470a8db11265ade91c1ed0f04b4ac2d7f048d539d84aa8e1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v10/run-1/positive-control.json",
+        "bytes": 309,
+        "sha256": "fd602d48561fdc0587d90c668a42bcc8197c31d82e3db8cfb1c7db67b552beb6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v10/run-2/comparison.json",
+        "bytes": 30811,
+        "sha256": "8b5acd06c9d269979287277d498e6e9405543d46a681149a327062abe63f782b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v10/run-2/negative-control.json",
+        "bytes": 2653,
+        "sha256": "651a315d295cf471470a8db11265ade91c1ed0f04b4ac2d7f048d539d84aa8e1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v10/run-2/positive-control.json",
+        "bytes": 309,
+        "sha256": "fd602d48561fdc0587d90c668a42bcc8197c31d82e3db8cfb1c7db67b552beb6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-1/comparison.json",
+        "bytes": 30811,
+        "sha256": "8b5acd06c9d269979287277d498e6e9405543d46a681149a327062abe63f782b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-1/negative-control.json",
+        "bytes": 2653,
+        "sha256": "c4ea43a20b48236fc5fe8183dbbdad2dd1f50c08608cee7df92da831092ef590",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-1/positive-control.json",
+        "bytes": 309,
+        "sha256": "fd602d48561fdc0587d90c668a42bcc8197c31d82e3db8cfb1c7db67b552beb6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-2/comparison.json",
+        "bytes": 30811,
+        "sha256": "8b5acd06c9d269979287277d498e6e9405543d46a681149a327062abe63f782b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-2/negative-control.json",
+        "bytes": 2653,
+        "sha256": "c4ea43a20b48236fc5fe8183dbbdad2dd1f50c08608cee7df92da831092ef590",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-2/positive-control.json",
+        "bytes": 309,
+        "sha256": "fd602d48561fdc0587d90c668a42bcc8197c31d82e3db8cfb1c7db67b552beb6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-15.json",
+        "bytes": 5180426,
+        "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/evidence-quality.json": "61e2b2c5cac4b4c49a9d1a0b13d0b2c57c96251dee98b31a2a0913b259dc4ef7",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/reproduce.py": "da9bfc13d9e747169d7f4ba2c39aa5fdaf9437d7661f7c4a6dc22271015cd047",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/RESEARCH.md": "396e2f51743ba175ce18864e97a8aa197c9d9e5a437485b3f1529b35544d6862",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/reproducibility-control-anchored-v9.json": "adb0afdbdfbf7e660a5e39c755af172a7c15a112f9267547ec875154587064ff",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/reproducibility-control-anchored-v10.json": "9e52517764bb90f43a9b5445352966bf06b1ebe476e23edf00bfa78c81709eff",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-1/comparison.json": "8b5acd06c9d269979287277d498e6e9405543d46a681149a327062abe63f782b",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-1/positive-control.json": "fd602d48561fdc0587d90c668a42bcc8197c31d82e3db8cfb1c7db67b552beb6",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-1/negative-control.json": "c4ea43a20b48236fc5fe8183dbbdad2dd1f50c08608cee7df92da831092ef590",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-2/comparison.json": "8b5acd06c9d269979287277d498e6e9405543d46a681149a327062abe63f782b",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-2/positive-control.json": "fd602d48561fdc0587d90c668a42bcc8197c31d82e3db8cfb1c7db67b552beb6",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-2/negative-control.json": "c4ea43a20b48236fc5fe8183dbbdad2dd1f50c08608cee7df92da831092ef590",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v10/run-1/comparison.json": "8b5acd06c9d269979287277d498e6e9405543d46a681149a327062abe63f782b",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v10/run-1/positive-control.json": "fd602d48561fdc0587d90c668a42bcc8197c31d82e3db8cfb1c7db67b552beb6",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v10/run-1/negative-control.json": "651a315d295cf471470a8db11265ade91c1ed0f04b4ac2d7f048d539d84aa8e1",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v10/run-2/comparison.json": "8b5acd06c9d269979287277d498e6e9405543d46a681149a327062abe63f782b",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v10/run-2/positive-control.json": "fd602d48561fdc0587d90c668a42bcc8197c31d82e3db8cfb1c7db67b552beb6",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v10/run-2/negative-control.json": "651a315d295cf471470a8db11265ade91c1ed0f04b4ac2d7f048d539d84aa8e1",
+      "b6cfaada43a1e0472cd833d16733d1fd6065eaec:data/geography/part-15.json": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df",
+      "b6cfaada43a1e0472cd833d16733d1fd6065eaec:data/hierarchy.json": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "b6cfaada43a1e0472cd833d16733d1fd6065eaec:data/world-index.json": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+    },
+    "pin_files": {
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/RESEARCH.md": "data/regional-review/montenegro-evidence-996-erratum/RESEARCH.md",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/evidence-quality.json": "data/regional-review/montenegro-evidence-996-erratum/evidence-quality.json",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/reproduce.py": "data/regional-review/montenegro-evidence-996-erratum/reproduce.py",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/reproducibility-control-anchored-v10.json": "data/regional-review/montenegro-evidence-996-erratum/reproducibility-control-anchored-v10.json",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/reproducibility-control-anchored-v9.json": "data/regional-review/montenegro-evidence-996-erratum/reproducibility-control-anchored-v9.json",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v10/run-1/comparison.json": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v10/run-1/comparison.json",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v10/run-1/negative-control.json": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v10/run-1/negative-control.json",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v10/run-1/positive-control.json": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v10/run-1/positive-control.json",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v10/run-2/comparison.json": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v10/run-2/comparison.json",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v10/run-2/negative-control.json": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v10/run-2/negative-control.json",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v10/run-2/positive-control.json": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v10/run-2/positive-control.json",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-1/comparison.json": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-1/comparison.json",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-1/negative-control.json": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-1/negative-control.json",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-1/positive-control.json": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-1/positive-control.json",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-2/comparison.json": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-2/comparison.json",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-2/negative-control.json": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-2/negative-control.json",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-2/positive-control.json": "data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-2/positive-control.json",
+      "b6cfaada43a1e0472cd833d16733d1fd6065eaec:data/geography/part-15.json": "data/geography/part-15.json",
+      "b6cfaada43a1e0472cd833d16733d1fd6065eaec:data/hierarchy.json": "data/hierarchy.json",
+      "b6cfaada43a1e0472cd833d16733d1fd6065eaec:data/world-index.json": "data/world-index.json"
+    },
+    "subject_files": {
+      "gb:MNE:ADM1:59799669B12564288388297": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B20110685483927": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B20319020653405": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B20349667855259": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B22511566400758": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B28207041867492": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B41052051546873": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B48420505719641": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B58100018961631": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B59523358081802": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B66678983232609": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B74362705567987": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B75560777931070": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B7591395216485": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B78864851615199": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B79583520985931": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B80293643035426": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B84579627936880": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B88193558767116": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B91583747266461": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B93063361678836": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B93779420845023": "data/geography/part-15.json",
+      "gb:MNE:ADM1:59799669B9703090978387": "data/geography/part-15.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "issue-1207-contract",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1207",
+      "role": "Authoritative bounded work-item contract and exact source identity roster",
+      "vintage": "Accepted public issue scope read 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "GitHub issue text; no separate reuse/license assessment. The retained snapshot contains only the declared machine contract, exact subject IDs, and declared pin list."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Restore https://api.github.com/repos/ChengshuLi/WorldAtlas/issues/1207 and compare its `worldatlas-work:v1` fields with issue-scope-snapshot.json.",
+      "limit": "This authorizes only the stated 23-record metadata-lineage erratum; it is not geographic approval."
+    },
+    {
+      "id": "worldatlas-1179-retained-evidence",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1/data/regional-review/montenegro-evidence-996-erratum/RESEARCH.md",
+      "role": "Pinned predecessor research and evidence manifest documenting source provenance, retained lineage and unresolved geographic findings",
+      "vintage": "Immutable merge b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1; exact whole-file inputs listed in this manifest",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Repository evidence is retained for this scoped lineage audit only; no third-party geometry or official-source PDF is copied. Separate source reuse limits remain as stated in predecessor records."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Retrieve the listed whole-file evidence from the immutable merge and verify each manifest hash before inspection.",
+      "limit": "Establishes what predecessor evidence says and how the manifest selects runs; it does not independently validate external source truth or legal boundaries."
+    },
+    {
+      "id": "geoboundaries-mne-adm1-2017",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/MNE/ADM1/geoBoundaries-MNE-ADM1.geojson",
+      "role": "Prior packet attribution for comparison polygons only; not official legal-boundary evidence",
+      "vintage": "2017 GeoBoundaries metadata; exact capture/effective date unknown",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "Predecessor source inventory records ODbL 1.0; attribute OpenStreetMap and Wambacher and comply with share-alike terms."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "unknown",
+      "restoration": "Restore the pinned-version payload at the cited URL and verify SHA-256 9674292fbc0a50c68c6584a2ae23fae768e76cc796bdb7e3e009c0197aec6ae3 (610015 bytes); the retained location in the earlier regional source packet is data/regional-review/followup-montenegro-422-boundaries-20261005/source/gb-MNE-ADM1-geoBoundaries-2017.geojson.",
+      "limit": "This 1207 run does not include or rehash the geometry payload. Legal basis, effective date, accuracy, island/coast/water completeness and official status remain unestablished."
+    },
+    {
+      "id": "montenegro-current-municipality-roster",
+      "url": "https://data.gov.me/dataset/1a0689c9-2ea3-4adb-85eb-2ba6a88f6980/resource/bc7d04d9-2632-4d96-a778-fa1f5f3a2ccb/download/lokalne_samouprave.json",
+      "role": "Prior packet record of current local-government names/contacts, not geometry or settlement hierarchy",
+      "vintage": "Catalog last updated 2025-05-30; 25 entries",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "Predecessor catalog records CC BY, version unspecified; attribution required."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Restore the exact catalog resource and verify SHA-256 cd4e94fd3236fc9b3f7bea043fd8dcda6bcbd72d9b3157f3ff1b417650e8a64a (4375 bytes); earlier retained file: data/regional-review/followup-montenegro-422-boundaries-20261005/source/current-municipalities-2025.json.",
+      "limit": "Roster counts/names do not establish polygons, effective dates, parentage or geometric completeness; not rehashed in this work."
+    },
+    {
+      "id": "monstat-2017-table-1-2",
+      "url": "https://monstat.org/userfiles/file/publikacije/godisnjak%202017/1.pdf",
+      "role": "Historical municipality names and reported areas attributed to Real Estate Directorate",
+      "vintage": "2017 publication; table reports areas as of December 2015",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "No explicit reuse/redistribution license identified in predecessor source inspection."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "unknown",
+      "restoration": "Restore the exact PDF, verify SHA-256 4d6e1d5226ecb81b3a39b54d4ef89e55b097b2dc1ef384dc16d14d959fd9fb89, inspect chapter 1 table 1-2, PDF page 18 and neighboring notes.",
+      "limit": "Prior research reports the 23-unit sum is 13969 km², 157 km² above the stated 13812 km² national figure; unexplained. Aggregate values do not establish boundaries. PDF not restored here."
+    },
+    {
+      "id": "monstat-2021-table-1-2",
+      "url": "https://monstat.org/uploads/files/publikacije/godisnjak%202021/1.pdf",
+      "role": "Later reported municipality roster and area caveats",
+      "vintage": "2021 publication; values as of December 2018, post-Tuzi 24-unit roster",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "No explicit reuse/redistribution license identified in predecessor source inspection."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "unknown",
+      "restoration": "Restore the exact PDF, verify SHA-256 fd3d06010564bc9d252cc2d199f0d52d2dc20010611067a84863d41d1cf14466, inspect table 1-2 and footnotes, PDF page 18.",
+      "limit": "Predecessor record says Tuzi 246 km² is temporary/approximate pending demarcation and 226 km² difference is attributed to Lake Skadar; aggregate areas do not validate polygons. PDF not restored here."
+    },
+    {
+      "id": "montenegro-wis-municipality-layer",
+      "url": "https://wis.gov.me/geoportal",
+      "role": "Official water-portal municipal-territory restoration lead",
+      "vintage": "Layer vintage unknown; prior page observation 2026-10-05",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "No reuse terms located in the predecessor research."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "unknown",
+      "restoration": "Request the native Opštine > Teritorija vector, endpoint, metadata, lineage, dated snapshot and written terms from the responsible authority.",
+      "limit": "Prior inspection reported no downloadable/API geometry, exposed vintage, lineage or reuse terms; not independently inspected here."
+    },
+    {
+      "id": "montenegro-cadastre-spatial-units",
+      "url": "https://geoportal.co.me/geoportal/geoportal_eng.html",
+      "role": "Official Cadastre/Spatial Units Register restoration lead",
+      "vintage": "Portal observed 2026-10-05; required snapshots unavailable in predecessor review",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Confirm redistribution/adaptation terms with the authority before any reuse."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "unknown",
+      "restoration": "Request comparable dated 2017/current vectors, effective dates/legal acts, settlement parentage, all polygon pieces/islands, water conventions, lineage and written terms through the Spatial Units Register.",
+      "limit": "The earlier review found no retained historical snapshot, complete geometry or license; not independently inspected here."
+    },
+    {
+      "id": "montenegro-tuzi-demarcation-status",
+      "url": "https://www.gov.me/cyr/clanak/mju-u-mandatu-ministra-dukaja-proces-razgranicenja-izmedu-tuzi-i-podgorice-vodilo-nepristrasno-otvoreno-i-transparentno",
+      "role": "Official process-status lead for Tuzi/Podgorica demarcation",
+      "vintage": "2026-02-26 ministry statement; predecessor also cites 2024-03-13 status",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "No explicit reuse terms established in predecessor records."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "unknown",
+      "restoration": "Restore exact ministry statement and date, its 2024 predecessor, and any binding later arbitration outcome and boundary artifact.",
+      "limit": "Prior review reports referral of questions to arbitration, not a verified result; no geometry. Not independently inspected here."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/montenegro-evidence-996-lineage-erratum/issue-scope-snapshot.json",
+      "bytes": 6087,
+      "sha256": "4555f40de1427681c9f7717af6dca01a1777a2d9d12b511e1cae361ed15a3261",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "data/regional-review/montenegro-evidence-996-lineage-erratum/RESEARCH.md",
+      "bytes": 7214,
+      "sha256": "a8b67fbe8802ed745f931ca57efa8d6bca23016ff937f854e42c6c8f1c89d8d1",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "data/regional-review/montenegro-evidence-996-lineage-erratum/reproduce.py",
+      "bytes": 13929,
+      "sha256": "332f6f4c6b96cc2ae2114ee40c9eea503734ef668b363e68cf3876535c01cd73",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "data/regional-review/montenegro-evidence-996-lineage-erratum/lineage-correction.json",
+      "bytes": 20308,
+      "sha256": "01dfc43c3afedfec9d6aae543acdaca48f463d45189c13c519f6fcecf6feff1e",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "data/regional-review/montenegro-evidence-996-lineage-erratum/lineage-control.json",
+      "bytes": 708,
+      "sha256": "e589dcaa36d340839d959877e5163b99d4ec93e5c2b89a6c7e2e01fdb1f2c885",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "data/regional-review/montenegro-evidence-996-lineage-erratum/runs/2026-10-06/run-1/result.json",
+      "bytes": 29143,
+      "sha256": "94d0266afe8328babe12edeef0ed9d325ad2a5ec4fefb265165c50689c2ee0d5",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "data/regional-review/montenegro-evidence-996-lineage-erratum/runs/2026-10-06/run-2/result.json",
+      "bytes": 29143,
+      "sha256": "94d0266afe8328babe12edeef0ed9d325ad2a5ec4fefb265165c50689c2ee0d5",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "At the immutable #1179 merge, both anchored-v10 runs are selected as active and also listed as superseded; the superseded-control path points to v10 with a v9 explanation, while validation selects that same v10 control. This is a lineage contradiction.",
+      "status": "supported",
+      "source_ids": [
+        "worldatlas-1179-retained-evidence"
+      ]
+    },
+    {
+      "text": "The issue-declared 23 scoped IDs each occur once in the pinned part-15 record. Their retained metadata identifies 2017 gb:MNE:ADM1 Municipality comparison records, each linked to a distinct province-level Atlas framework parent with child_count 1, retained-reference status and open boundary review. This describes retained identities/context only.",
+      "status": "supported",
+      "source_ids": [
+        "issue-1207-contract",
+        "worldatlas-1179-retained-evidence"
+      ]
+    },
+    {
+      "text": "Official legal municipal boundaries, current and historical completeness, settlement parentage, neighboring granularity, island/coast/water treatment, current Tuzi/Podgorica and Podgorica/Zeta outcomes, and reuse clearance for restoration-only official sources remain unverified. The 23-subject scope is not a current national completeness claim.",
+      "status": "unresolved",
+      "source_ids": [
+        "geoboundaries-mne-adm1-2017",
+        "montenegro-current-municipality-roster",
+        "monstat-2017-table-1-2",
+        "monstat-2021-table-1-2",
+        "montenegro-wis-municipality-layer",
+        "montenegro-cadastre-spatial-units",
+        "montenegro-tuzi-demarcation-status"
+      ]
+    }
+  ],
+  "methods": [
+    {
+      "id": "immutable-lineage-selection",
+      "kind": "source",
+      "description": "Read only exact Git blobs from the declared commits; verify all 20 issue-declared whole-file hashes; identify active/superseded run intersection, control references and the committed finalizer strings; construct a consistent successor selector while preserving contradictory source fields verbatim.",
+      "software": "Python 3.12.14 standard library (hashlib, json, subprocess, pathlib)",
+      "units": "exact repository paths, commit IDs and whole-file SHA-256 values"
+    },
+    {
+      "id": "scoped-record-context",
+      "kind": "source",
+      "description": "Match the issue exact 23 native feature IDs once each in the pinned part-15; inspect only retained source-role/vintage/license metadata and read-only Atlas parent identity/status fields. No geometry is recomputed.",
+      "software": "Python 3.12.14 standard library json; retained repository inputs",
+      "units": "feature identities, source metadata values and recorded parent review fields"
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 data/regional-review/montenegro-evidence-996-lineage-erratum/reproduce.py run --output-dir data/regional-review/montenegro-evidence-996-lineage-erratum/runs/2026-10-06/run-1",
+    "python3 data/regional-review/montenegro-evidence-996-lineage-erratum/reproduce.py run --output-dir data/regional-review/montenegro-evidence-996-lineage-erratum/runs/2026-10-06/run-2",
+    "python3 data/regional-review/montenegro-evidence-996-lineage-erratum/reproduce.py finalize",
+    "node scripts/evidence-quality.mjs data/regional-review/montenegro-evidence-996-lineage-erratum/evidence-quality.json"
+  ],
+  "change_receipts": [
+    {
+      "path": "data/regional-review/montenegro-evidence-996-lineage-erratum/issue-scope-snapshot.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/montenegro-evidence-996-lineage-erratum/RESEARCH.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/montenegro-evidence-996-lineage-erratum/reproduce.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/montenegro-evidence-996-lineage-erratum/lineage-correction.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/montenegro-evidence-996-lineage-erratum/lineage-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/montenegro-evidence-996-lineage-erratum/runs/2026-10-06/run-1/result.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/montenegro-evidence-996-lineage-erratum/runs/2026-10-06/run-2/result.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/montenegro-evidence-996-lineage-erratum/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "metric_bindings": [],
+  "rendered_tables": []
+}

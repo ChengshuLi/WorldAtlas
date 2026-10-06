@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "issue": 1207,
+  "title": "Correct contradictory authoritative/superseded Montenegro #1179 reproduction lineage",
+  "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1207",
+  "retrieved_at": "2026-10-06T20:04:10Z",
+  "scope": "Add an immutable authority/supersession erratum for the exact 23 Montenegro #996 subjects. Correct the contradictory retained v9/v10 lineage in #1179 without modifying its historical packet, original sources, geography, hierarchy or published records. No official-source restoration or new geographic conclusions.",
+  "max_prs": 1,
+  "depends_on": [
+    1172
+  ],
+  "owned_paths": [
+    "data/regional-review/montenegro-evidence-996-lineage-erratum/"
+  ],
+  "evidence_quality": {
+    "version": 1,
+    "manifest_path": "data/regional-review/montenegro-evidence-996-lineage-erratum/evidence-quality.json",
+    "subject_ids": [
+      "gb:MNE:ADM1:59799669B12564288388297",
+      "gb:MNE:ADM1:59799669B20110685483927",
+      "gb:MNE:ADM1:59799669B20319020653405",
+      "gb:MNE:ADM1:59799669B20349667855259",
+      "gb:MNE:ADM1:59799669B22511566400758",
+      "gb:MNE:ADM1:59799669B28207041867492",
+      "gb:MNE:ADM1:59799669B41052051546873",
+      "gb:MNE:ADM1:59799669B48420505719641",
+      "gb:MNE:ADM1:59799669B58100018961631",
+      "gb:MNE:ADM1:59799669B59523358081802",
+      "gb:MNE:ADM1:59799669B66678983232609",
+      "gb:MNE:ADM1:59799669B74362705567987",
+      "gb:MNE:ADM1:59799669B75560777931070",
+      "gb:MNE:ADM1:59799669B7591395216485",
+      "gb:MNE:ADM1:59799669B78864851615199",
+      "gb:MNE:ADM1:59799669B79583520985931",
+      "gb:MNE:ADM1:59799669B80293643035426",
+      "gb:MNE:ADM1:59799669B84579627936880",
+      "gb:MNE:ADM1:59799669B88193558767116",
+      "gb:MNE:ADM1:59799669B91583747266461",
+      "gb:MNE:ADM1:59799669B93063361678836",
+      "gb:MNE:ADM1:59799669B93779420845023",
+      "gb:MNE:ADM1:59799669B9703090978387"
+    ],
+    "pins": {
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/evidence-quality.json": "61e2b2c5cac4b4c49a9d1a0b13d0b2c57c96251dee98b31a2a0913b259dc4ef7",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/reproduce.py": "da9bfc13d9e747169d7f4ba2c39aa5fdaf9437d7661f7c4a6dc22271015cd047",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/RESEARCH.md": "396e2f51743ba175ce18864e97a8aa197c9d9e5a437485b3f1529b35544d6862",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/reproducibility-control-anchored-v9.json": "adb0afdbdfbf7e660a5e39c755af172a7c15a112f9267547ec875154587064ff",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/reproducibility-control-anchored-v10.json": "9e52517764bb90f43a9b5445352966bf06b1ebe476e23edf00bfa78c81709eff",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-1/comparison.json": "8b5acd06c9d269979287277d498e6e9405543d46a681149a327062abe63f782b",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-1/positive-control.json": "fd602d48561fdc0587d90c668a42bcc8197c31d82e3db8cfb1c7db67b552beb6",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-1/negative-control.json": "c4ea43a20b48236fc5fe8183dbbdad2dd1f50c08608cee7df92da831092ef590",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-2/comparison.json": "8b5acd06c9d269979287277d498e6e9405543d46a681149a327062abe63f782b",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-2/positive-control.json": "fd602d48561fdc0587d90c668a42bcc8197c31d82e3db8cfb1c7db67b552beb6",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-2/negative-control.json": "c4ea43a20b48236fc5fe8183dbbdad2dd1f50c08608cee7df92da831092ef590",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v10/run-1/comparison.json": "8b5acd06c9d269979287277d498e6e9405543d46a681149a327062abe63f782b",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v10/run-1/positive-control.json": "fd602d48561fdc0587d90c668a42bcc8197c31d82e3db8cfb1c7db67b552beb6",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v10/run-1/negative-control.json": "651a315d295cf471470a8db11265ade91c1ed0f04b4ac2d7f048d539d84aa8e1",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v10/run-2/comparison.json": "8b5acd06c9d269979287277d498e6e9405543d46a681149a327062abe63f782b",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v10/run-2/positive-control.json": "fd602d48561fdc0587d90c668a42bcc8197c31d82e3db8cfb1c7db67b552beb6",
+      "b4e110df5a0a0953e91bf9abc89dccdb0b05e6e1:data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v10/run-2/negative-control.json": "651a315d295cf471470a8db11265ade91c1ed0f04b4ac2d7f048d539d84aa8e1",
+      "b6cfaada43a1e0472cd833d16733d1fd6065eaec:data/geography/part-15.json": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df",
+      "b6cfaada43a1e0472cd833d16733d1fd6065eaec:data/hierarchy.json": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "b6cfaada43a1e0472cd833d16733d1fd6065eaec:data/world-index.json": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+    },
+    "review_kind": "source"
+  }
+}

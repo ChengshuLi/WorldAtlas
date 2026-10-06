@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "kind": "lineage-reproducibility",
+  "outcome": "passed",
+  "runs": [
+    {
+      "path": "runs/2026-10-06/run-1/result.json",
+      "sha256": "94d0266afe8328babe12edeef0ed9d325ad2a5ec4fefb265165c50689c2ee0d5"
+    },
+    {
+      "path": "runs/2026-10-06/run-2/result.json",
+      "sha256": "94d0266afe8328babe12edeef0ed9d325ad2a5ec4fefb265165c50689c2ee0d5"
+    }
+  ],
+  "byte_identical": true,
+  "pin_count": 20,
+  "input_raw_bytes": 15952596,
+  "runner_sha256": "332f6f4c6b96cc2ae2114ee40c9eea503734ef668b363e68cf3876535c01cd73",
+  "positive_controls": 1,
+  "negative_controls": 2,
+  "both_negative_controls_rejected": true,
+  "old_packet_modified": false,
+  "scope_subject_count": 23
+}
