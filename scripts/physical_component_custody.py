@@ -9,19 +9,38 @@ import io
 import json
 import pathlib
 import subprocess
+import stat
 
-from evidence.immutable import canonical_json, descriptor, sha256, safe_path, MAX_FILE_BYTES
+from evidence.immutable import Baseline, canonical_json, descriptor, sha256, safe_path, MAX_FILE_BYTES
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 OWNED = 'coordination/engineering/physical-gap-components-1005-20261005-local19/'
 VERSION = 'worldatlas-component-whole-file-custody-v1'
+EXECUTED_PATHS = ['scripts/build-physical-gap-components.py', 'scripts/physical_gap_crosswalk.py',
+                  'scripts/geographic_components.py', 'scripts/physical_gap_audit.py', 'scripts/evidence/immutable.py']
+
+
+def ordinary_read(root, path):
+    root = pathlib.Path(root)
+    path = safe_path(path)
+    target = root / path
+    require_paths = [target, *list(target.parents)[:len(path.split('/')) - 1]]
+    if root.is_symlink() or any(p.is_symlink() for p in require_paths):
+        raise ValueError('Complete ordinary path required; symlinked ancestor')
+    info = target.stat()
+    if not stat.S_ISREG(info.st_mode) or info.st_size > MAX_FILE_BYTES:
+        raise ValueError('Complete ordinary bounded file required')
+    raw = target.read_bytes()
+    if len(raw) != info.st_size:
+        raise ValueError('Whole file changed during read')
+    return raw
 
 
 def describe(path, raw):
     row = descriptor(path, raw)
     if len(raw) > MAX_FILE_BYTES:
         raise ValueError('Whole encoded file exceeds unchanged limit')
-    if path.endswith('.json.gz'):
+    if path.endswith(('.json.gz', '.geojson.gz')):
         with gzip.GzipFile(fileobj=io.BytesIO(raw)) as stream:
             decoded = stream.read(MAX_FILE_BYTES + 1)
         if len(decoded) > MAX_FILE_BYTES:
@@ -33,19 +52,22 @@ def describe(path, raw):
 def validate(root, index):
     if index['version'] != VERSION:
         raise ValueError('Unexpected whole-file custody version')
+    generations = index['generations']
+    if (len(generations) != 3 or len({g['prefix'] for g in generations}) != 3
+            or sorted(g['status'] for g in generations) != ['complete', 'complete', 'incomplete']):
+        raise ValueError('Require two distinct complete runs and original incomplete trial')
     payloads = {p['path']: p for p in index['payloads']}
     if len(payloads) != len(index['payloads']):
         raise ValueError('Duplicate physical payload')
-    aliases, used = {}, set()
+    aliases, used, raw_payloads = {}, set(), {}
     for alias in index['aliases']:
         original = safe_path(alias['original']['path'])
         target = safe_path(alias['payload'])
         if original in aliases or target not in payloads:
             raise ValueError('Duplicate alias or missing payload')
-        p = root / target
-        if p.is_symlink() or not p.is_file():
-            raise ValueError('Complete ordinary payload required')
-        raw = p.read_bytes()
+        if target not in raw_payloads:
+            raw_payloads[target] = ordinary_read(root, target)
+        raw = raw_payloads[target]
         original_encoded = {k: v for k, v in alias['original'].items() if not k.startswith('uncompressed_')}
         if descriptor(target, raw) != payloads[target] or descriptor(original, raw) != original_encoded:
             raise ValueError('Redirected or changed whole-file alias')
@@ -63,6 +85,9 @@ def validate(root, index):
         if entry not in aliases:
             raise ValueError('Missing original execution report')
         report = json.loads(aliases[entry])
+        for key in ('input_commit', 'executed_code_commit'):
+            if report.get(key) != generation.get(key):
+                raise ValueError('Original execution/report commit binding changed')
         rows = [r for family in report['outputs'].values() for r in family] if generation['status'] == 'complete' else report['outputs_preserved']
         inventory = [r['path'] for r in rows] + [entry]
         if inventory != generation['inventory'] or any(not p.startswith(prefix) for p in inventory):
@@ -80,6 +105,23 @@ def validate(root, index):
             if code['path'] not in aliases or descriptor(code['path'], aliases[code['path']]) != code:
                 raise ValueError('Missing complete executed source code')
             expected.add(code['path'])
+        if generation['code']:
+            prefix_code = OWNED + 'executed-code/' + report['executed_code_commit'] + '/'
+            original_code = []
+            for code in generation['code']:
+                if not code['path'].startswith(prefix_code):
+                    raise ValueError('Executed source alias is outside original vintage')
+                original_code.append({**code, 'path': code['path'][len(prefix_code):]})
+            if [c['path'] for c in original_code] != EXECUTED_PATHS:
+                raise ValueError('Incomplete original executed source roster')
+            baseline = Baseline(ROOT, report['executed_code_commit'], original_code)
+            for code in generation['code']:
+                if aliases[code['path']] != baseline.read(code['path'][len(prefix_code):]):
+                    raise ValueError('Executed source code differs from immutable Git')
+            if generation['status'] == 'complete' and original_code != report['code_inputs']:
+                raise ValueError('Incomplete original executed source roster')
+        else:
+            raise ValueError('Missing original executed source roster')
         if generation['status'] == 'complete':
             # Compare actual preserved bytes, not regeneration or hashes alone.
             normalized = json.loads(aliases[entry].replace(prefix.encode(), b'GENERATION/'))

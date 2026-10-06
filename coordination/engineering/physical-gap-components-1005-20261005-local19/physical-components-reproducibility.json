@@ -1,0 +1,25 @@
+{
+  "method_id": "physical-components",
+  "kind": "reproducibility",
+  "outcome": "passed",
+  "run_one_sha256": "ff581b90d5175255538497cfbdbcdc7eab951b30b19513d46a9d67fd46ab52d7",
+  "run_two_sha256": "ff581b90d5175255538497cfbdbcdc7eab951b30b19513d46a9d67fd46ab52d7",
+  "runs": [
+    {
+      "prefix": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v2",
+      "sha256": "ff581b90d5175255538497cfbdbcdc7eab951b30b19513d46a9d67fd46ab52d7",
+      "complete_product_files": 48
+    },
+    {
+      "prefix": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v3",
+      "sha256": "ff581b90d5175255538497cfbdbcdc7eab951b30b19513d46a9d67fd46ab52d7",
+      "complete_product_files": 48
+    }
+  ],
+  "recipe": "Actual report.outputs family order and entry order; each frame UTF8 basename, zero byte, raw length unsigned8byte bigendian, unchanged complete encoded bytes. All report fields also equal after replacing only their own output-generation prefix, independently checked by custody validator.",
+  "executed_code_commit": "6ed6406f9fad4c7c468b06a376346b216cb50db7",
+  "input_commit": "c603befd3aaf4da90d59b12378e1e0739331efba",
+  "limits": [
+    "Diagnostic numerical correspondence only; no source approval, factual repairs or delivery."
+  ]
+}
