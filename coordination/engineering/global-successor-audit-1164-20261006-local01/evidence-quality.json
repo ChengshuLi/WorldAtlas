@@ -1,0 +1,173 @@
+{
+  "version": 1,
+  "issue": 1164,
+  "lane": "engineering",
+  "worker_id": "01a11028-e91d-7fa1-bf6a-32390106d41d",
+  "subject_ids": [
+    "gb:IRN:ADM2:26516999B17111396986996",
+    "gb:PAK:ADM2:60131773B78019453337506"
+  ],
+  "subject_ids_sha256": "0c405b5930054180f3bf0244d221b947ac40e5924412bffaa25c893517f7ca16",
+  "baseline": {
+    "commit": "a32ae163473a42ed28d7bedf7e9930414beb54f8",
+    "files": [
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 27530,
+        "sha256": "228efbc07476a0bd4defad5d0d59c96836da81bba399f8c2e1395a5303e760ae",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/LOCAL_WORKSPACES.md",
+        "bytes": 9514,
+        "sha256": "d99838bb409cd2d67c09188cc3610b7c357ed035a33852abd228e687e4bbda38",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/PREMERGE_EVIDENCE_REVIEW.md",
+        "bytes": 15510,
+        "sha256": "7f3ea5ed2f80f009942213dc1f25d20b7a22924f952229e11545571af6a9ae4b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/evidence/immutable.py",
+        "bytes": 7090,
+        "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/physical_gap_audit.py",
+        "bytes": 11971,
+        "sha256": "d0854276b311354160cc8b4ceaae052857bb102f4dd2e61ddaa2de0f8482819d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/geographic_components.py",
+        "bytes": 7096,
+        "sha256": "f2c47489d3f618175fd60570d6287f91b6bad1e05529d37208c1d96d63f38439",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/manifest.json",
+        "bytes": 271171,
+        "sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/report.json",
+        "bytes": 492083,
+        "sha256": "230a49dbb3feab482d2946a7a4c75b9b8069acd841fc2609f2251cf6d2d58330",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "canonical_grid": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+      "hierarchy": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "original_detector_report": "230a49dbb3feab482d2946a7a4c75b9b8069acd841fc2609f2251cf6d2d58330"
+    },
+    "pin_files": {
+      "canonical_grid": "data/canonical-grid/manifest.json",
+      "hierarchy": "data/hierarchy.json",
+      "original_detector_report": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/report.json"
+    }
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "scripts/physical_gap_successor.py",
+      "bytes": 21113,
+      "sha256": "fa9cce011e08c6cc6cdceed57c4b087a4043fc1f47a55deb08499ad33f03160a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/physical-gap-successor.py",
+      "bytes": 21541,
+      "sha256": "83973d8bad4081c05b0e4b4e91c648d22d551f930ace7356b0bce936d9c70231",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/physical-gap-successor.test.mjs",
+      "bytes": 507,
+      "sha256": "afa65d4bdc6b7d5ee957e6134736b6141b8aa04a92157698de30d321de0aa1e8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/PHYSICAL_GAP_SUCCESSORS.md",
+      "bytes": 3695,
+      "sha256": "1ececa1956cda345c0ba1cb08b144796083f41094afc0720a4166128be011ed9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/global-successor-audit-1164-20261006-local01/claim.json",
+      "bytes": 740,
+      "sha256": "c7fcc7b9de7a453e14b27c1550839fd3ce386db607d63cfbd3b005e530173b93",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/global-successor-audit-1164-20261006-local01/validation.txt",
+      "bytes": 1814,
+      "sha256": "930ebb25671577558dce261b0f1715da93d65d89a89bb06cb44b24950be67a17",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "immutable-successor-tile-reuse-plan",
+      "kind": "code",
+      "description": "Validate exact source/execution byte closures, per-layer query order and geometry/metadata operands; produce an explicit preview reuse/recompute plan with unknown preservation and gzip restoration controls.",
+      "software": "Python 3.12.14, Node 24.19.0, Git",
+      "units": "immutable files, tile IDs, ordered geometry and metadata operands, whole output bytes"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "partial",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "python3 -B test/physical-gap-successor.py (Python 3.12.14): 31 passed",
+    "node --test test/physical-gap-successor.test.mjs (Node 24.19.0, Python 3.12.14): 1 passed; wrapper runs 31 controls",
+    "git diff --check: passed",
+    "npm test: attempted in sparse checkout; not a valid complete-suite result due missing installed dependencies and excluded data/source paths"
+  ],
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/global-successor-audit-1164-20261006-local01/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "scripts/physical_gap_successor.py",
+      "status": "added"
+    },
+    {
+      "path": "test/physical-gap-successor.py",
+      "status": "added"
+    },
+    {
+      "path": "test/physical-gap-successor.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "docs/PHYSICAL_GAP_SUCCESSORS.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-successor-audit-1164-20261006-local01/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/global-successor-audit-1164-20261006-local01/validation.txt",
+      "status": "added"
+    }
+  ]
+}

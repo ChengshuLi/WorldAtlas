@@ -1,0 +1,33 @@
+Generic immutable successor/reuse framework, initial engineering stage
+Branch: engineering/global-successor-audit-1164-20261006-local01
+Base: a32ae163473a42ed28d7bedf7e9930414beb54f8
+Author worker: 01a11028-e91d-7fa1-bf6a-32390106d41d
+
+Passed with Python 3.12.14:
+  python3 -B test/physical-gap-successor.py
+  Result: 31 controls passed. Controls cover complete/omitted/tampered byte closures,
+  encoded and nested gzip restoration, source/execution commit bindings, code/runtime/
+  domain changes, layered query order and metadata changes, release/hierarchy/native
+  provenance changes, checked/unchecked output completeness, unknown retention,
+  tiny/line/point remnants, forced recompute, new tiles, and complete preview accounting.
+
+Passed with Node 24.19.0 and Python 3.12.14:
+  node --test test/physical-gap-successor.test.mjs
+  Result: wrapper passed; it ran the same 31 Python controls.
+
+Passed:
+  git diff --check
+  Direct local `validatePremergeManifest()` self-check against the authoritative
+  issue contract, the declared seven-added-file packet inventory, manifest
+  bytes, source pins, and output descriptors: passed, 7 change rows and 0
+  metrics. This is a local premerge simulation, not the trusted remote PR gate.
+
+Attempted broader `npm test` on the intentionally sparse managed checkout. It did not
+complete as a valid project-suite result: unrelated baseline tests lacked installed
+Node dependencies (including `jose` and `@electric-sql/pglite`), Python Shapely, and
+source/data paths excluded from this sparse checkout. This is recorded as an
+environmental limitation, not a pass. No package installation or data writes were
+performed.
+
+No worldwide successor run, source acquisition, geometry repair, native status
+refresh, or installed/current dataset assertion is included in this stage.
