@@ -29,7 +29,7 @@ export async function validateBuildContextStage({root=process.cwd(),expectedRefe
   return {receipt};
  }
  const ordinary=readFile??repositoryReader(root),stageRaw=ordinary(stagePath,'candidate'),stage=JSON.parse(stageRaw);
- fail(stage.version===1&&stage.issue===991&&stage.kind==='retained-identity-context-migration-v1'&&!stage.input_stages,
+ fail(stage.version===1&&Number.isSafeInteger(stage.issue)&&stage.issue>0&&stage.lane==='engineering'&&stage.kind==='retained-identity-context-migration-v1'&&!stage.input_stages,
   'Unsupported build context migration stage');
  fail(stage.original_stage?.path===CONTEXT_STAGE_PATH,'Wrong mandatory original context stage');
  assert.deepEqual(stage.validator_sources.map(p=>p.path).sort(),[...BUILD_CONTEXT_VALIDATOR_SOURCES].sort(),
@@ -44,15 +44,14 @@ export async function validateBuildContextStage({root=process.cwd(),expectedRefe
  for(const pin of stage.validator_sources)read(pin);
  const originalManifest=JSON.parse(read(stage.original_stage));
  const oldSnapshots=new Map(originalManifest.immutable_snapshots.map(pin=>[pin.commit+':'+pin.path,pin]));
- const aliases=new Map(),allowed=new Set(['data/geography/part-11.json','data/geography/part-17.json','data/geographic-releases/current-manifest.json']);
+ const aliases=new Map(),allowed=new Set(originalManifest.baseline.files.filter(pin=>pin.path.startsWith('data/geography/')).map(pin=>pin.path));
+ allowed.add('data/geographic-releases/current-manifest.json');
  for(const alias of stage.original_snapshot_overrides){
   const key=alias.commit+':'+alias.original_path,pin=oldSnapshots.get(key);
   fail(pin&&allowed.has(alias.original_path)&&alias.bytes===pin.bytes&&alias.sha256===pin.sha256&&!aliases.has(key),
    'Invalid or duplicate original context snapshot override');
   aliases.set(key,alias);read({path:alias.path,bytes:alias.bytes,sha256:alias.sha256});
  }
- assert.deepEqual([...aliases.keys()].sort(),[...oldSnapshots].filter(([,pin])=>allowed.has(pin.path)).map(([key])=>key).sort(),
-  'Original changed-input snapshots are incomplete');
  const registry=JSON.parse(gunzipSync(read(stage.releases),{maxOutputLength:32*1024*1024}));
  const predecessor=registry.releases.at(-2),release=registry.releases.at(-1);
  fail(predecessor?.id===stage.predecessor_release_id&&release?.id===stage.successor_release_id,
@@ -66,7 +65,11 @@ export async function validateBuildContextStage({root=process.cwd(),expectedRefe
   return readPinnedBuildFile({root,commit:pin.commit,path:pin.path,snapshotPath:pin.snapshot_path,sha256:pin.sha256,bytes:pin.bytes});
  };
  // Keep the existing complete original-source stage mandatory and unchanged.
- const originalReceipt=await validateContextInputStage({root,readFile:originalReader,expectedReference:predecessor});
+ const candidates=JSON.parse(read(stage.native_proposal));
+ const originalReceipt=await validateContextInputStage({root,readFile:originalReader,expectedReference:predecessor,subjectIds:Object.keys(candidates)});
+ const changedSourceParts=new Set([...originalReceipt.subject_source_parts,'data/geographic-releases/current-manifest.json']);
+ assert.deepEqual([...aliases.keys()].sort(),[...oldSnapshots].filter(([,pin])=>changedSourceParts.has(pin.path)).map(([key])=>key).sort(),
+  'Original changed-input snapshots are incomplete or outside the exact subjects');
  const decodeContext=pin=>{
   const inputs=JSON.parse(read(pin)),dir=path.posix.dirname(pin.path),features=[];
   for(const part of inputs.parts){safeEvidencePath(part.path);fail(/^part-[0-9]+\.json\.gz$/.test(part.path),'Unsafe migrated context part');
@@ -77,7 +80,7 @@ export async function validateBuildContextStage({root=process.cwd(),expectedRefe
   return {inputs,features};
  };
  fail(stage.before_context.path===path.posix.dirname(CONTEXT_STAGE_PATH)+'/inputs.json','Wrong original compact context input');
- const before=decodeContext(stage.before_context),after=decodeContext(stage.after_context),candidates=JSON.parse(read(stage.native_proposal));
+ const before=decodeContext(stage.before_context),after=decodeContext(stage.after_context);
  assert.equal(before.inputs.footprints_sha256,originalReceipt.footprints_sha256);assert.equal(before.inputs.owner_sha256,originalReceipt.owner_sha256);
  const geometryManifest=JSON.parse(read(stage.geometry_manifest)),base=path.posix.dirname(stage.geometry_manifest.path);
  const geometryPins=Object.entries(geometryManifest.files).map(([name,pin])=>({path:path.posix.normalize(base+'/'+(pin.archive_path??name)),bytes:pin.bytes,sha256:pin.sha256}));

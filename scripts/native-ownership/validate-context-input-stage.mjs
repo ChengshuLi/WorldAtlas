@@ -13,7 +13,7 @@ import {inPackageImage,readPinnedBuildFile} from './read-pinned-build-file.mjs';
 export const CONTEXT_STAGE_PATH='coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/evidence-quality.json';
 const need=(ok,message)=>{if(!ok)throw Error(message);};
 export async function validateContextInputStage({root=process.cwd(),readFile,
-  manifestPath=CONTEXT_STAGE_PATH,expectedReference,loadSource=loadNativeSourceInputs}={}) {
+  manifestPath=CONTEXT_STAGE_PATH,expectedReference,loadSource=loadNativeSourceInputs,subjectIds=[]}={}) {
  safeEvidencePath(manifestPath);
  const ordinary=readFile??repositoryReader(root);
  const manifest=JSON.parse(ordinary(manifestPath,'candidate'));
@@ -117,10 +117,13 @@ export async function validateContextInputStage({root=process.cwd(),readFile,
  }
  need(inputs.installation_ready===false&&proof.installation_ready===false&&proof.scientific_approval===false,
   'Context transform cannot grant installation or factual approval');
+ need(Array.isArray(subjectIds)&&new Set(subjectIds).size===subjectIds.length&&subjectIds.every(id=>typeof id==='string'&&original.roster.some(f=>f.id===id)),
+  'Invalid or absent original context migration subject');
+ const subjectSourceParts=[...new Set(original.roster.filter(f=>subjectIds.includes(f.id)).map(f=>f.path))].sort();
  return {status:'verified',manifest_path:manifestPath,manifest_sha256:sha256(readFile(manifestPath,'candidate')),
   checked_files:bytes.checked.length,locations:features.length,vertices:original.vertices,
   source_files:original.sourceFiles.length,footprints_sha256:result.footprints_sha256,
-  source_inventory:original.sourceFiles,
+  source_inventory:original.sourceFiles,subject_source_parts:subjectSourceParts,
   owner_sha256:result.owner_sha256,limits:bytes.limits,scientific_approval:false};
 }
 if(process.argv[1]&&path.resolve(process.argv[1])===fileURLToPath(import.meta.url))
