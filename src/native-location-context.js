@@ -2,6 +2,7 @@ import {nativePolygonIntervals, NATIVE_GRID_METHOD} from './native-grid.js';
 import {nativeRuntimeIndex} from './native-runtime.js';
 import {coverageRow} from '../scripts/audit-grid-intervals.mjs';
 import {LATITUDE_DIGEST} from './ownership-method.js';
+import {nativeSourceDigest} from './native-source-digest.js';
 
 const digest = async bytes => Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', bytes)),
   byte => byte.toString(16).padStart(2, '0')).join('');
@@ -52,8 +53,8 @@ export async function compileNativeLocationContext({referenceFeatures, features,
   const raw = new Uint8Array(latitudes.length * 8), tableView = new DataView(raw.buffer);
   latitudes.forEach((value, y) => tableView.setFloat64(y * 8, value, true));
   if (await digest(raw) !== LATITUDE_DIGEST) throw Error('Native context latitude rule changed');
-  const originalContent = JSON.stringify(referenceFeatures.map(f => [f.id, f.geometry]).sort((a, b) => a[0].localeCompare(b[0])));
-  if (await digest(new TextEncoder().encode(originalContent)) !== base.footprints_sha256)
+  const sourceDigest = await nativeSourceDigest(referenceFeatures, {signal, onProgress});
+  if (sourceDigest.sha256 !== base.footprints_sha256)
     throw Error('Native context reference source bytes changed');
   const referenceOwners = referenceFeatures.map(f => [f.pixelIndex, f.id]).sort((a, b) => a[0] - b[0]);
   if (await digest(new TextEncoder().encode(JSON.stringify(referenceOwners))) !== base.reference_owner_sha256)
@@ -157,5 +158,5 @@ export async function compileNativeLocationContext({referenceFeatures, features,
   }
   return {grid: {version: 2, coordinateBits: 19, size: base.size, method: NATIVE_GRID_METHOD, rows, runs},
     context, accounting: {rows: base.size, recomputedRows, reusedRows: base.size - recomputedRows,
-      ownerMapping: context.owners, rule: 'exact-native-affected-rows-and-stable-reference-reuse-v1'}};
+      sourceDigest, ownerMapping: context.owners, rule: 'exact-native-affected-rows-and-stable-reference-reuse-v1'}};
 }

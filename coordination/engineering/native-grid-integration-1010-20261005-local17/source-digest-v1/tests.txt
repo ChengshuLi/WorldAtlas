@@ -1,0 +1,20 @@
+✔ native selection waits for matching worker result and terminates after ready (4.643625ms)
+✔ selection abort stops actual worker lifecycle and ignores late result (1.674958ms)
+✔ malformed grid, changed display identity, worker failure and callback failure reject without ready map (3.853ms)
+✔ dated removal, replacement, holes and additions equal complete native compilation over every canonical row/run (1191.310292ms)
+✔ dated metadata changes reuse all native reference rows with explicit dense identity mapping (347.269084ms)
+✔ changed source, original owner mapping, duplicate IDs, malformed geometry and cancellation reject without partial output (45.214375ms)
+✔ streamed reuse coalesces adjacent fragments without changing dense owners or untouched gaps (287.2455ms)
+✔ streamed source digest equals original whole JSON bytes including Unicode, ordering and numeric edge cases (56.764792ms)
+✔ source changes alter digest and cancellation/callback errors never return a partial digest (15.149875ms)
+✔ actual year-selection code retains coherent old date until changed native grid is ready (8.865875ms)
+✔ an old native result cannot replace a newer selected year even if worker completion ignores abort (2.298ms)
+✔ same-count identity replacement loads native source geometry and prepares a new display mapping (1.400417ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2335.0735
