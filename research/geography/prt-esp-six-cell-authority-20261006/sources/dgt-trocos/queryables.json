@@ -1,0 +1,45 @@
+{
+    "type":"object",
+    "title":"CAOP2025 Tro\u00e7os",
+    "properties":{
+        "geometry":{
+            "format":"geometry-any",
+            "x-ogc-role":"primary-geometry"
+        },
+        "identificador":{
+            "title":"identificador",
+            "type":"string",
+            "x-ogc-role":"id"
+        },
+        "ea_direita":{
+            "title":"ea_direita",
+            "type":"string"
+        },
+        "ea_esquerda":{
+            "title":"ea_esquerda",
+            "type":"string"
+        },
+        "paises":{
+            "title":"paises",
+            "type":"string"
+        },
+        "estado_limite_admin":{
+            "title":"estado_limite_admin",
+            "type":"string"
+        },
+        "significado_linha":{
+            "title":"significado_linha",
+            "type":"string"
+        },
+        "nivel_limite_admin":{
+            "title":"nivel_limite_admin",
+            "type":"string"
+        },
+        "comprimento_km":{
+            "title":"comprimento_km",
+            "type":"number"
+        }
+    },
+    "$schema":"http://json-schema.org/draft/2019-09/schema",
+    "$id":"https://ogcapi.dgterritorio.gov.pt/collections/trocos/queryables?f=json"
+}
