@@ -17,7 +17,7 @@ if(!out.startsWith(path.join(root,prefix)+path.sep)||fs.existsSync(out))throw Er
 const head=execFileSync('git',['-C',root,'rev-parse','HEAD'],{encoding:'utf8'}).trim(),digest=raw=>createHash('sha256').update(raw).digest('hex');
 const producer=committedPreparationFiles(root,head,['package.json',prefix+'/prepare-repaired-context.mjs',
   'scripts/native-ownership/compact-context-inputs.mjs','scripts/native-ownership/native-preparation-guards.mjs',
-  'src/native-runtime.js','src/native-grid.js']);
+  'src/native-runtime.js','src/native-grid.js','scripts/native-ownership/compile-native-ownership.mjs','scripts/audit-grid-intervals.mjs']);
 const inputs=[],baseline='d0cc67eac85038159f88a673acbc39b77ab7461d';
 function read(commit,name,expected){
   const raw=execFileSync('git',['-C',root,'show',commit+':'+name],{maxBuffer:32*1024*1024});
@@ -40,7 +40,7 @@ const migration=JSON.parse(read(head,prefix+'/release-proof-v3/migration-receipt
 const validation=JSON.parse(read(head,prefix+'/release-proof-v3/validation.json'));
 const releaseRaw=read(head,prefix+'/successor-release-v1/releases-v7-gzip.json.gz'),release=JSON.parse(gunzipSync(releaseRaw)).releases.at(-1);
 if(!isDeepStrictEqual(Object.keys(geometry).sort(),[...migration.changed_ids].sort())||!validation.exact_staged_original_archive_checked||
-  release.footprints_sha256!==migration.after_footprints_sha256||release.metadata.predecessor_release_id!==old.original_release)throw Error('Reviewed shape/release linkage differs');
+  migration.before_footprints_sha256!==old.footprints_sha256||release.footprints_sha256!==migration.after_footprints_sha256||release.metadata.predecessor_release_id!==old.original_release)throw Error('Reviewed shape/release linkage differs');
 const changed=features.map(f=>geometry[f.id]?{...f,geometry:geometry[f.id]}:f);
 const compact=compactContextInputs(changed,bounds,release.footprints_sha256);
 if(compact.owner_sha256!==old.owner_sha256||changed.filter((f,i)=>!isDeepStrictEqual(f,features[i])).length!==2)throw Error('Context identity or non-target geometry changed');
