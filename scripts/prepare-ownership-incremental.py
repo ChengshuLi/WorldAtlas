@@ -42,7 +42,15 @@ def feature_snapshot(path):
  raw=load(path)
  if isinstance(raw,list):features=raw
  elif 'features' in raw:features=raw['features']
- elif 'parts' in raw:features=[f for part in raw['parts'] for f in load(safe_path(path.parent,part))['features']]
+ elif 'parts' in raw:
+  features=[]
+  for part in raw['parts']:
+   name=part if isinstance(part,str) else part['path'];asset=safe_path(path.parent,name)
+   if isinstance(part,dict) and (sha(asset)!=part['sha256'] or asset.stat().st_size!=part['bytes']):raise ValueError('Snapshot shard checksum/size mismatch')
+   body=load(asset)
+   if isinstance(body,list):features.extend(body)
+   elif isinstance(body,dict) and isinstance(body.get('features'),list):features.extend(body['features'])
+   else:raise ValueError('Snapshot shard must contain features or an explicit feature array')
  else:raise ValueError('Expected explicit FeatureCollection/list or world-index manifest')
  result={}
  for f in features:
