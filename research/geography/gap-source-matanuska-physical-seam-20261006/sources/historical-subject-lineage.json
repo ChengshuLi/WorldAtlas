@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "baseline_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+  "baseline_file": {
+    "path": "data/geography/part-26.json",
+    "bytes": 4608983,
+    "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632"
+  },
+  "source_id_formula_verified_from_script": {
+    "commit": "4bdba3d40acc2d725e4aeb54c3b9aab559a91469",
+    "path": "scripts/refine-remote.py",
+    "bytes": 7440,
+    "sha256": "6a6a5258328aa1153d567d9a98b90339421700d491f36fbdca216d3e0cbc2726",
+    "git_blob": "c5db9115604b6c82318a68ca008df7a21688bc93",
+    "formula": "atlas:physical: + first 20 hex of SHA256(original administrative feature ID + \":\" + str(ECO_ID))",
+    "source_key": "resolve:ECO_ID"
+  },
+  "features": [
+    {
+      "feature_index": 1290,
+      "id": "atlas:physical:2a15134ff18942dc8e5e",
+      "feature_sha256": "cee91e815491393e734b513c62cb560af851aee307bcb5833970b52ba5fbf6a3",
+      "recorded_source_id": "resolve:405",
+      "recorded_source_member_ids": [
+        "gb:USA:ADM2:52423323B34523976645917"
+      ],
+      "recorded_reference_year": "2018",
+      "recorded_coastline_adjustments": [
+        {
+          "area_km2": 6.1798,
+          "distance_band_degrees": 0.001
+        },
+        {
+          "area_km2": 7.0373,
+          "distance_band_degrees": 0.001
+        },
+        {
+          "area_km2": 3.0161,
+          "distance_band_degrees": 0.001
+        },
+        {
+          "area_km2": 1.7829,
+          "distance_band_degrees": 0.005
+        },
+        {
+          "area_km2": 13.9898,
+          "distance_band_degrees": 0.005
+        },
+        {
+          "area_km2": 6.4415,
+          "distance_band_degrees": 0.01
+        },
+        {
+          "area_km2": 8.3827,
+          "distance_band_degrees": 0.025
+        },
+        {
+          "area_km2": 0.7213,
+          "distance_band_degrees": 0.05
+        }
+      ]
+    },
+    {
+      "feature_index": 1291,
+      "id": "atlas:physical:6efac055720ebe84d7c2",
+      "feature_sha256": "6bf63ebcef20f9e3fbf5eaf4b39f140fc41c1abe15f4f827867aa7936d24fc42",
+      "recorded_source_id": "resolve:371",
+      "recorded_source_member_ids": [
+        "gb:USA:ADM2:52423323B34523976645917"
+      ],
+      "recorded_reference_year": "2018",
+      "recorded_coastline_adjustments": [
+        {
+          "area_km2": 6.1798,
+          "distance_band_degrees": 0.001
+        },
+        {
+          "area_km2": 7.0373,
+          "distance_band_degrees": 0.001
+        },
+        {
+          "area_km2": 3.0161,
+          "distance_band_degrees": 0.001
+        },
+        {
+          "area_km2": 1.7829,
+          "distance_band_degrees": 0.005
+        },
+        {
+          "area_km2": 13.9898,
+          "distance_band_degrees": 0.005
+        },
+        {
+          "area_km2": 6.4415,
+          "distance_band_degrees": 0.01
+        },
+        {
+          "area_km2": 8.3827,
+          "distance_band_degrees": 0.025
+        },
+        {
+          "area_km2": 0.7213,
+          "distance_band_degrees": 0.05
+        }
+      ]
+    },
+    {
+      "feature_index": 1293,
+      "id": "atlas:physical:a20d41a6587ce2e2996b",
+      "feature_sha256": "ce78f301aebe50145f0fbac232247bd9633fee53fa5e9f61043df5258f00c5ff",
+      "recorded_source_id": "resolve:0",
+      "recorded_source_member_ids": [
+        "gb:USA:ADM2:52423323B34523976645917"
+      ],
+      "recorded_reference_year": "2018",
+      "recorded_coastline_adjustments": [
+        {
+          "area_km2": 6.1798,
+          "distance_band_degrees": 0.001
+        },
+        {
+          "area_km2": 7.0373,
+          "distance_band_degrees": 0.001
+        },
+        {
+          "area_km2": 3.0161,
+          "distance_band_degrees": 0.001
+        },
+        {
+          "area_km2": 1.7829,
+          "distance_band_degrees": 0.005
+        },
+        {
+          "area_km2": 13.9898,
+          "distance_band_degrees": 0.005
+        },
+        {
+          "area_km2": 6.4415,
+          "distance_band_degrees": 0.01
+        },
+        {
+          "area_km2": 8.3827,
+          "distance_band_degrees": 0.025
+        },
+        {
+          "area_km2": 0.7213,
+          "distance_band_degrees": 0.05
+        }
+      ]
+    }
+  ],
+  "interpretation_limit": "The source_id values match the recorded stable-ID formula and the source_member_ids point to one inherited ADM2 feature. Identical recorded coastline-adjustment bands are process metadata, not independent proof that a specific operation caused any exact gap or that source geometry is correct."
+}
