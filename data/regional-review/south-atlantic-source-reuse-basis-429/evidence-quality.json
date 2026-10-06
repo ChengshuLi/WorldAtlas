@@ -864,8 +864,153 @@
       "units": "records; whole-file SHA-256"
     }
   ],
-  "metrics": [],
-  "summaries": [],
+  "metrics": [
+    {
+      "id": "census_2018_cbf_dbf_record_count",
+      "value": 3233,
+      "unit": "records",
+      "vintage": "baseline",
+      "input_sha256": "aaa866af327754e1b80aa87bfb97b04a7209f4f871075aef84affb8f0b3afe67",
+      "evaluation_commit": "dab6ef29468eb97226f642783127720444f299c9"
+    },
+    {
+      "id": "county_admin_role_assessments",
+      "value": 268,
+      "unit": "records",
+      "vintage": "baseline",
+      "input_sha256": "e69458d74688645a3fdde4a7dfba15cf2b13310bb2cb15df13860d566ebb15f3",
+      "evaluation_commit": "dab6ef29468eb97226f642783127720444f299c9"
+    },
+    {
+      "id": "geoboundaries_feature_count",
+      "value": 3233,
+      "unit": "records",
+      "vintage": "baseline",
+      "input_sha256": "e69458d74688645a3fdde4a7dfba15cf2b13310bb2cb15df13860d566ebb15f3",
+      "evaluation_commit": "dab6ef29468eb97226f642783127720444f299c9"
+    },
+    {
+      "id": "issue_pin_count",
+      "value": 12,
+      "unit": "records",
+      "vintage": "baseline",
+      "input_sha256": "e69458d74688645a3fdde4a7dfba15cf2b13310bb2cb15df13860d566ebb15f3",
+      "evaluation_commit": "dab6ef29468eb97226f642783127720444f299c9"
+    },
+    {
+      "id": "pinned_atlas_geography_matches",
+      "value": 268,
+      "unit": "records",
+      "vintage": "baseline",
+      "input_sha256": "e69458d74688645a3fdde4a7dfba15cf2b13310bb2cb15df13860d566ebb15f3",
+      "evaluation_commit": "dab6ef29468eb97226f642783127720444f299c9"
+    },
+    {
+      "id": "scoped_census_name_state_unique_matches",
+      "value": 268,
+      "unit": "records",
+      "vintage": "baseline",
+      "input_sha256": "e69458d74688645a3fdde4a7dfba15cf2b13310bb2cb15df13860d566ebb15f3",
+      "evaluation_commit": "dab6ef29468eb97226f642783127720444f299c9"
+    },
+    {
+      "id": "scoped_geoboundaries_feature_matches",
+      "value": 268,
+      "unit": "records",
+      "vintage": "baseline",
+      "input_sha256": "e69458d74688645a3fdde4a7dfba15cf2b13310bb2cb15df13860d566ebb15f3",
+      "evaluation_commit": "dab6ef29468eb97226f642783127720444f299c9"
+    },
+    {
+      "id": "subject_count",
+      "value": 268,
+      "unit": "records",
+      "vintage": "baseline",
+      "input_sha256": "e69458d74688645a3fdde4a7dfba15cf2b13310bb2cb15df13860d566ebb15f3",
+      "evaluation_commit": "dab6ef29468eb97226f642783127720444f299c9"
+    },
+    {
+      "id": "unique_census_2018_geoids",
+      "value": 268,
+      "unit": "records",
+      "vintage": "baseline",
+      "input_sha256": "e69458d74688645a3fdde4a7dfba15cf2b13310bb2cb15df13860d566ebb15f3",
+      "evaluation_commit": "dab6ef29468eb97226f642783127720444f299c9"
+    },
+    {
+      "id": "unique_source_shape_ids",
+      "value": 268,
+      "unit": "records",
+      "vintage": "baseline",
+      "input_sha256": "e69458d74688645a3fdde4a7dfba15cf2b13310bb2cb15df13860d566ebb15f3",
+      "evaluation_commit": "dab6ef29468eb97226f642783127720444f299c9"
+    },
+    {
+      "id": "unique_subject_count",
+      "value": 268,
+      "unit": "records",
+      "vintage": "baseline",
+      "input_sha256": "e69458d74688645a3fdde4a7dfba15cf2b13310bb2cb15df13860d566ebb15f3",
+      "evaluation_commit": "dab6ef29468eb97226f642783127720444f299c9"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "census_2018_cbf_dbf_record_count",
+      "value": 3233,
+      "unit": "records"
+    },
+    {
+      "metric_id": "county_admin_role_assessments",
+      "value": 268,
+      "unit": "records"
+    },
+    {
+      "metric_id": "geoboundaries_feature_count",
+      "value": 3233,
+      "unit": "records"
+    },
+    {
+      "metric_id": "issue_pin_count",
+      "value": 12,
+      "unit": "records"
+    },
+    {
+      "metric_id": "pinned_atlas_geography_matches",
+      "value": 268,
+      "unit": "records"
+    },
+    {
+      "metric_id": "scoped_census_name_state_unique_matches",
+      "value": 268,
+      "unit": "records"
+    },
+    {
+      "metric_id": "scoped_geoboundaries_feature_matches",
+      "value": 268,
+      "unit": "records"
+    },
+    {
+      "metric_id": "subject_count",
+      "value": 268,
+      "unit": "records"
+    },
+    {
+      "metric_id": "unique_census_2018_geoids",
+      "value": 268,
+      "unit": "records"
+    },
+    {
+      "metric_id": "unique_source_shape_ids",
+      "value": 268,
+      "unit": "records"
+    },
+    {
+      "metric_id": "unique_subject_count",
+      "value": 268,
+      "unit": "records"
+    }
+  ],
   "conclusions": [
     {
       "text": "The 2018 geoBoundaries metadata states Public Domain for the underlying Census file, while project license and product citation include separate derivative and attribution statements; scope of any derivative claim for this exact file remains unresolved.",
@@ -994,7 +1139,63 @@
       "status": "added"
     }
   ],
-  "metric_bindings": [],
+  "metric_bindings": [
+    {
+      "metric_id": "census_2018_cbf_dbf_record_count",
+      "path": "data/regional-review/south-atlantic-source-reuse-basis-429/reproduction-summary.json",
+      "json_pointer": "/census_2018_cbf_dbf_record_count"
+    },
+    {
+      "metric_id": "county_admin_role_assessments",
+      "path": "data/regional-review/south-atlantic-source-reuse-basis-429/reproduction-summary.json",
+      "json_pointer": "/county_admin_role_assessments"
+    },
+    {
+      "metric_id": "geoboundaries_feature_count",
+      "path": "data/regional-review/south-atlantic-source-reuse-basis-429/reproduction-summary.json",
+      "json_pointer": "/geoboundaries_feature_count"
+    },
+    {
+      "metric_id": "issue_pin_count",
+      "path": "data/regional-review/south-atlantic-source-reuse-basis-429/reproduction-summary.json",
+      "json_pointer": "/issue_pin_count"
+    },
+    {
+      "metric_id": "pinned_atlas_geography_matches",
+      "path": "data/regional-review/south-atlantic-source-reuse-basis-429/reproduction-summary.json",
+      "json_pointer": "/pinned_atlas_geography_matches"
+    },
+    {
+      "metric_id": "scoped_census_name_state_unique_matches",
+      "path": "data/regional-review/south-atlantic-source-reuse-basis-429/reproduction-summary.json",
+      "json_pointer": "/scoped_census_name_state_unique_matches"
+    },
+    {
+      "metric_id": "scoped_geoboundaries_feature_matches",
+      "path": "data/regional-review/south-atlantic-source-reuse-basis-429/reproduction-summary.json",
+      "json_pointer": "/scoped_geoboundaries_feature_matches"
+    },
+    {
+      "metric_id": "subject_count",
+      "path": "data/regional-review/south-atlantic-source-reuse-basis-429/reproduction-summary.json",
+      "json_pointer": "/subject_count"
+    },
+    {
+      "metric_id": "unique_census_2018_geoids",
+      "path": "data/regional-review/south-atlantic-source-reuse-basis-429/reproduction-summary.json",
+      "json_pointer": "/unique_census_2018_geoids"
+    },
+    {
+      "metric_id": "unique_source_shape_ids",
+      "path": "data/regional-review/south-atlantic-source-reuse-basis-429/reproduction-summary.json",
+      "json_pointer": "/unique_source_shape_ids"
+    },
+    {
+      "metric_id": "unique_subject_count",
+      "path": "data/regional-review/south-atlantic-source-reuse-basis-429/reproduction-summary.json",
+      "json_pointer": "/unique_subject_count"
+    }
+  ],
   "validation": [
     {
       "method_id": "county-product-source-crosswalk",
