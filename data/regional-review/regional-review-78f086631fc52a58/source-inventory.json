@@ -1,0 +1,183 @@
+{
+  "version": 1,
+  "retrieved_at_utc": "2026-10-06T07:39:52Z",
+  "baseline_commit": "f8b778a9b357f259efbc3268e347f5c186509a9e",
+  "inputs": [
+    {
+      "path": "data/geographic-decisions/asia.json",
+      "sha256": "a66b5e57b1c8c54dc9480360c61e0f91752c6fc6a0b710dfdf5131abc9dd6807",
+      "bytes": 10723935
+    },
+    {
+      "path": "data/geography/part-30.json",
+      "sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a",
+      "bytes": 11979437
+    },
+    {
+      "path": "data/geography/part-31.json",
+      "sha256": "44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e",
+      "bytes": 10086485
+    },
+    {
+      "path": "data/geography/part-32.json",
+      "sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64",
+      "bytes": 10211739
+    },
+    {
+      "path": "data/geography/part-33.json",
+      "sha256": "d928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe",
+      "bytes": 607984
+    },
+    {
+      "path": "data/global-sources/IND-ADM3-metadata.json",
+      "sha256": "f7bb99ddfcadaa1091c4b634b48c8843ee9d8b636af4f6da1cefccb0d424fc33",
+      "bytes": 2206
+    },
+    {
+      "path": "data/global-sources/IND-ADM3.geojson.gz",
+      "sha256": "211a72c2c80bb60d10214944fa8cc4764e9ba888116e802ce6d87084872f5301",
+      "bytes": 13794274
+    },
+    {
+      "path": "data/hierarchy.json",
+      "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "bytes": 10164089
+    },
+    {
+      "path": "data/regional-review/regional-review-78f086631fc52a58/sources/live-issue-83.json",
+      "sha256": "124c7229df1883e16e343e56736fe6028c59ff3f0d8874b7744dc41b165be7d0",
+      "bytes": 42433,
+      "role": "fresh GitHub API snapshot used for scope validation"
+    },
+    {
+      "path": "data/regional-review/regional-review-78f086631fc52a58/sources/mp-tehsil-rosters-recheck.json",
+      "sha256": "17919d229e69e81355c64b14ebbbc53eec40d53fc366cec11406eb22b2c42081",
+      "bytes": 15794
+    },
+    {
+      "path": "data/regional-review/regional-review-78f086631fc52a58/sources/mp-tehsil-rosters.json",
+      "sha256": "0673261f22a3196a88cab9b6f3d2dc004f0ec734cce857d03f47b6eea5a6a656",
+      "bytes": 13778,
+      "role": "preserved first discovery pass; superseded for current roster summary by canonical URL recheck"
+    },
+    {
+      "path": "data/regional-review/regional-review-78f086631fc52a58/sources/up-tehsil-rosters.json",
+      "sha256": "23e01fcd5788cbc8edb2374e8cb62709e997c13859fa1179cf2dfddaa7f4e38e",
+      "bytes": 16631
+    }
+  ],
+  "sources": [
+    {
+      "id": "geoBoundaries IND ADM3 2018",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/IND/ADM3/geoBoundaries-IND-ADM3_simplified.geojson",
+      "role": "retained historical administrative source",
+      "vintage": "2018 boundary vintage; metadata updated 2023-01-19; built 2023-12-12",
+      "license": "Open Data Commons Open Database License 1.0",
+      "status": "retained in repository; original compressed bytes not modified",
+      "publisher_claims": {
+        "source": "Pathways Data Pvt. Ltd., lgdirectory.gov.in",
+        "canonical_role": "Sub-District",
+        "declared_feature_count": "6836",
+        "declared_uncompressed_sha256": "4ea6807d0a0c5aac0b46ee8e31ed7c30fbec273b44345bba1e4a2bb5f299f5fb"
+      },
+      "license_obligations_note": "Metadata asserts ODbL 1.0. Preserve upstream attribution and share-alike database obligations if derived database material is redistributed; this issue does not republish or alter the source."
+    },
+    {
+      "id": "Census of India 2011 Administrative Atlas: Uttar Pradesh Vol I",
+      "url": "https://www.censusindia.gov.in/nada/index.php/catalog/49",
+      "role": "official historical administrative context up to sub-district level",
+      "vintage": "2011 jurisdiction; published 2012-06",
+      "license": {
+        "status": "restoration-only",
+        "terms": "No reuse terms assessed in this packet; do not redistribute download."
+      },
+      "restoration": "Open official catalog; retrieve AA_2011_Uttar_Pradesh_vol1.pdf and verify catalog identity, bytes and terms before reuse.",
+      "alternate_catalog_labels": [
+        "Census of India 2011 Administrative Atlas: Uttar Pradesh, Vol I"
+      ]
+    },
+    {
+      "id": "UP Board of Revenue DARMS tehsil selectors (17 scoped districts)",
+      "url": "https://revenuedarms.up.gov.in/get_tehsils?distCode={districtCode}",
+      "role": "current tehsil name/code roster by current district",
+      "vintage": "response retrieved 2026-10-06; source-side compilation/update date not stated",
+      "license": {
+        "status": "restoration-only",
+        "terms": "No page/API-specific reuse terms identified; original response bytes not retained."
+      },
+      "restoration": "Use district selector on https://revenuedarms.up.gov.in/public_report?distCode=146&tehsilCode=00768 and call GET /get_tehsils?distCode=<exact code>; exact 17 district codes, response SHA-256 values, response byte sizes, and derived rosters are in sources/up-tehsil-rosters.json. Verify current response and reuse terms before redistribution. The returned roster does not provide legal boundary geometry."
+    },
+    {
+      "id": "UP Atlas of Rivers (cGanga/NMCG, Dec 2022)",
+      "url": "https://jjm.up.gov.in/Content/Doc/17.%20Uttar-Pradesh-Atlas-Report_Final-Version.pdf",
+      "role": "neighboring current-granularity and official tehsil-boundary map context",
+      "vintage": "December 2022, version 14; document identifies SOI as source of tehsil-boundary map and reports 310 tehsils",
+      "license": {
+        "status": "restoration-only",
+        "terms": "Document carries cGanga/NMCG 2022 copyright; no redistribution license identified."
+      },
+      "restoration": "Restore the 284-page report from official JJM UP path; check pp. 28-29 for district/tehsil boundary maps, source attribution (SOI), and vintage. PDF is a statewide map context, not a legal polygon download or a 2026 roster."
+    },
+    {
+      "id": "Official Maihar District Administration About District",
+      "url": "https://maihar.nic.in/en/about-district/",
+      "role": "current district formation and membership source",
+      "vintage": "page last updated 2026-09-28; observed 2026-10-06",
+      "response_sha256": "5a07157c0a441a5b6f5d5a4c7862ba06382875bb583f3f199f365d70316db8d0",
+      "response_bytes": 109160,
+      "license": {
+        "status": "restoration-only",
+        "terms": "No page-specific reuse license identified; raw HTML not retained."
+      },
+      "restoration": "Fetch exact URL and verify SHA-256. Page states Maihar separated from Satna in 2023 and lists Maihar, Amarpatan, Ramnagar as three tehsils."
+    },
+    {
+      "id": "Madhya Pradesh Revenue Department order forming Mauganj district (hosted mirror)",
+      "url": "https://zenodo.org/records/10067487/files/govOrder20231103-002310.pdf?download=1",
+      "role": "government order copy for district reorganization / parent recommendation",
+      "vintage": "MP Revenue Department order dated 2023-08-13; hosted on Zenodo by a third-party researcher; source authentication pending",
+      "response_sha256": "054541f599b555895e29729389da9328dbd29e70c2180622981426917ee214e2",
+      "response_bytes": 2185555,
+      "license": {
+        "status": "restoration-only",
+        "terms": "Zenodo record does not declare a license; no reuse terms verified."
+      },
+      "restoration": "Restore DOI 10.5281/zenodo.10067487 and verify the embedded order against the official Madhya Pradesh Gazette / Revenue Department. Search state gazette by F.Rev/6/0006/2023/VII/Sec-7. The reproduced order text says Mauganj district comprises Mauganj, Naigarhi and Hanumana tehsils and Rewa retains nine named tehsils; do not treat the mirror as an authenticated gazette polygon."
+    },
+    {
+      "id": "Madhya Pradesh District Portal",
+      "url": "https://mpdistricts.nic.in/",
+      "role": "official current district inventory including Maihar and Mauganj",
+      "vintage": "site observed 2026-10-06; page edition not stated",
+      "license": {
+        "status": "restoration-only",
+        "terms": "No page-specific reuse license identified."
+      },
+      "restoration": "Open current MP District Portal and inspect district list. The list confirms these current district names but does not determine district boundaries or complete subdistrict membership."
+    },
+    {
+      "id": "MP NIC tehsil-page recheck (18 owned districts)",
+      "url": "https://mpdistricts.nic.in/ and linked district NIC tehsil pages; exact page URLs in sources/mp-tehsil-rosters-recheck.json",
+      "role": "Current administrative roster context and district-level semantic cross-check; not legal boundary evidence",
+      "vintage": "Live official pages observed 2026-10-06; individual publication dates were not consistently supplied",
+      "license": {
+        "status": "restoration-only",
+        "terms": "No page-specific reuse terms identified; original HTML bytes were not retained. Derived name rows are limited to research, with each fetched response hash and exact URL recorded."
+      },
+      "retrieval_date": "2026-10-06",
+      "response_hashes_path": "data/regional-review/regional-review-78f086631fc52a58/sources/mp-tehsil-rosters-recheck.json",
+      "response_sha256": "d53b3f81715e837ffb5768c96c4ce8ec0fd5898123ecc12c1643015b93706d11",
+      "result": "Canonical URL recheck attempted all 18 owned Madhya Pradesh district scopes. Fourteen pages returned HTTP 200; nine returned tehsil tables suitable for roster-level comparison. Several pages were unavailable, empty, document-only, or internally inconsistent. Seoni lists nine rows but says there are eight tahsils. Rewa Division currently lists 9 Rewa, 10 Satna, 7 Sidhi, 6 Singrauli and 3 Mauganj entries; Maihar entries remain listed in Satna on this page despite the separate Maihar district page.",
+      "limits": "Tehsil labels/counts do not identify current legal footprints; this partial, inconsistent publication set cannot establish province completeness or boundary identity. Keep all unmatched names and incomplete pages unresolved."
+    },
+    {
+      "id": "live-github-issue-83-scope-cross-check",
+      "url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/issues/83",
+      "role": "Current scope and open-state cross-check via GitHub REST issue API",
+      "retrieval_date": "2026-10-06T08:23:55Z",
+      "response_sha256": "124c7229df1883e16e343e56736fe6028c59ff3f0d8874b7744dc41b165be7d0",
+      "limits": "The GitHub issue body hash differs from the preserved claim-time snapshot, but the current worldatlas-work contract and all exact 229 member IDs match issue-scope.json. The original archived hash is not overwritten."
+    }
+  ],
+  "research_note": "Source hashes support restoration and provenance; they do not make the legacy 2018 source complete/current. For the MP administrative changes, one government page is primary (Maihar); the Mauganj order copy is from a third-party repository and requires official Gazette verification."
+}

@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "retrieved_at_utc": "2026-10-06T07:56:46Z",
+  "scope": "Exact source and semantic review for issue #83; official-source response bytes were hashed but not retained where no reuse terms were found.",
+  "sources": [
+    {
+      "id": "up-darms-current-tehsil-rosters",
+      "url_template": "https://revenuedarms.up.gov.in/get_tehsils?distCode={districtCode}",
+      "owner": "Government of Uttar Pradesh, Board of Revenue",
+      "role": "Current district-specific tehsil roster and selector codes",
+      "retrieval_date": "2026-10-06",
+      "vintage_limit": "The endpoint response does not state a publication/edition date; it is a live response observed on retrieval date.",
+      "license": "No page/API-specific reuse terms identified; original response bytes not retained.",
+      "hashes": "One SHA-256 per exact district response is stored in sources/up-tehsil-rosters.json.",
+      "result": "All 17 scoped Uttar Pradesh district groups have matching issue-scope and DARMS tehsil counts (85/85 total). Four groups produce a unique unmatched label remainder; Kanpur Nagar and Kheri each have two unresolved unmatched names.",
+      "limits": "Names and selector codes do not provide legal boundaries or establish footprints. Count/name agreement is not geographic completeness."
+    },
+    {
+      "id": "up-atlas-of-rivers-2022",
+      "url": "https://jjm.up.gov.in/Content/Doc/17.%20Uttar-Pradesh-Atlas-Report_Final-Version.pdf",
+      "owner": "cGanga and National Mission for Clean Ganga, Government of India",
+      "role": "UP neighboring granularity and historical boundary-map source context",
+      "retrieval_date": "2026-10-06",
+      "response_sha256": "a1a03d8858ce7494d3c9447cf8bfa819eb8eb4f04a16e7ec3d9fe1c2faae14ef",
+      "observed_source_vintage": "December 2022, version 14; pages 28–29 depict state district/tehsil boundaries and attribute tehsil boundaries to Survey of India. The document states 310 tehsils.",
+      "license": "Copyright cGanga/NMCG 2022; no redistribution license identified; PDF not retained.",
+      "restoration": "Restore from this exact JJM UP URL. Recheck the file hash, PDF title/version, printed pages 28–29, source attribution, and copyright/usage terms.",
+      "limits": "A statewide map and 2022 count are not a 2026 legal polygon dataset, do not yield a complete roster for the 85 owned subjects, and do not establish exact correspondence to the 2018 ADM3 source."
+    },
+    {
+      "id": "maihar-district-administration",
+      "url": "https://maihar.nic.in/en/about-district/",
+      "owner": "Maihar District Administration, Government of Madhya Pradesh (NIC-hosted)",
+      "role": "Current Maihar formation and tehsil membership claim",
+      "retrieval_date": "2026-10-06",
+      "response_sha256": "5a07157c0a441a5b6f5d5a4c7862ba06382875bb583f3f199f365d70316db8d0",
+      "response_bytes": 109160,
+      "observed_page_date": "Last updated 2026-09-28",
+      "inspected_fact": "Page says the district separated from Satna in 2023 and lists Maihar, Amarpatan, and Ramnagar as its three tehsils.",
+      "license": "No page-specific reuse terms identified; raw HTML not retained.",
+      "restoration": "Retrieve the exact URL and verify whole-response SHA-256 before reuse.",
+      "limits": "This is strong current parent/membership evidence, not an official legal polygon or a source-to-2018 footprint crosswalk."
+    },
+    {
+      "id": "mauganj-revenue-order-copy",
+      "url": "https://zenodo.org/records/10067487/files/govOrder20231103-002310.pdf?download=1",
+      "owner": "Madhya Pradesh Revenue Department order; copy deposited by a third party on Zenodo",
+      "role": "Candidate 2023 order establishing new Mauganj district composition",
+      "retrieval_date": "2026-10-06",
+      "response_sha256": "054541f599b555895e29729389da9328dbd29e70c2180622981426917ee214e2",
+      "response_bytes": 2185555,
+      "observed_order_date": "2023-08-13",
+      "observed_text": "The retrieved order copy says new Mauganj district comprises Mauganj, Naigarhi, and Hanumana tehsils and says nine tehsils remain in Rewa.",
+      "license": "The Zenodo record did not declare reuse terms; the PDF was not retained. Host and authenticity are third-party; the order's official Gazette source has not yet been verified.",
+      "restoration": "Restore DOI 10.5281/zenodo.10067487; search the Government of Madhya Pradesh Gazette/Revenue Department for order F.Rev/6/0006/2023/VII/Sec-7; authenticate both text and publication/effective date, then record the official-source URL/hash.",
+      "limits": "Treat parent assignments for Mauganj, Hanumana, and Naigarhi as correction-needed candidates until first-party Gazette recovery and current legal boundary correspondence."
+    },
+    {
+      "id": "mp-district-portal",
+      "url": "https://mpdistricts.nic.in/",
+      "owner": "Government of Madhya Pradesh district portal",
+      "role": "Current district identity inventory",
+      "retrieval_date": "2026-10-06",
+      "response_sha256": "6e13eef2f99ffe837c5145fe53fc215334b3b704a4c9214a68fd3a3d5943a447",
+      "observed_fact": "Portal lists Maihar and Mauganj as current Madhya Pradesh district identities.",
+      "license": "No page-specific reuse terms identified; response bytes not retained.",
+      "restoration": "Retrieve the exact URL and verify SHA-256 and current list.",
+      "limits": "District names do not establish district polygons, dates, complete tehsil rosters, or correspondence to 2018 boundaries."
+    },
+    {
+      "id": "census-of-india-2011-up-administrative-atlas-catalog",
+      "url": "https://www.censusindia.gov.in/nada/index.php/catalog/49",
+      "owner": "Office of the Registrar General & Census Commissioner, India",
+      "role": "Historical UP jurisdiction and subdistrict-level boundary-change context",
+      "retrieval_date": "2026-10-06",
+      "response_sha256": "2de9eacd131fcd678eeb0bed34c774c5b83b11bff715c4489a36c24dfcf8fd89",
+      "observed_source_vintage": "Census 2011; publication record June 2012",
+      "license": "No reuse terms assessed; catalog PDF not retained.",
+      "restoration": "Restore AA_2011_Uttar_Pradesh_vol1.pdf from the official Census of India catalog; verify catalog title, author, file hash, and reuse terms.",
+      "limits": "Historical rather than current, and not a present-day polygon source."
+    },
+    {
+      "id": "retained-geoboundaries-ind-adm3",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/IND/ADM3/geoBoundaries-IND-ADM3_simplified.geojson",
+      "owner": "geoBoundaries / Pathways Data Pvt. Ltd. / LG Directory, according to retained source metadata",
+      "role": "2018 Sub-District source and Atlas lineage",
+      "retrieval_date": "Source was already retained on baseline; metadata says data update 2023-01-19, build 2023-12-12.",
+      "compressed_sha256": "211a72c2c80bb60d10214944fa8cc4764e9ba888116e802ce6d87084872f5301",
+      "uncompressed_sha256": "4ea6807d0a0c5aac0b46ee8e31ed7c30fbec273b44345bba1e4a2bb5f299f5fb",
+      "license": "Source metadata asserts Open Data Commons Open Database License 1.0; honor attribution and share-alike obligations for derivative database redistribution.",
+      "restoration": "Original compressed bytes and metadata remain unmodified at data/global-sources/IND-ADM3.geojson.gz and data/global-sources/IND-ADM3-metadata.json.",
+      "limits": "6822 retained features vs 6836 declared; 14-feature discrepancy unresolved. Vintage 2018 cannot certify current boundaries."
+    },
+    {
+      "id": "mp-current-district-tehsil-pages-recheck",
+      "url": "https://mpdistricts.nic.in/ and official NIC-linked pages; exact per-page URLs are retained in sources/mp-tehsil-rosters-recheck.json",
+      "owner": "Government of Madhya Pradesh district administrations / National Informatics Centre hosted sites",
+      "role": "Current tehsil roster context for the exact 18 Madhya Pradesh district scopes",
+      "retrieval_date": "2026-10-06",
+      "vintage_limit": "Live HTML pages; most have no stated publication/edition date. Some are unavailable, stale, incomplete, or internally inconsistent.",
+      "license": "No page-specific reuse terms identified; HTML response bytes are not retained.",
+      "hashes": "One response SHA-256 and byte count per successful exact URL, plus preserved first discovery file hash 0673261f22a3196a88cab9b6f3d2dc004f0ec734cce857d03f47b6eea5a6a656; all are retained in sources/mp-tehsil-rosters-recheck.json and sources/mp-tehsil-rosters.json. Errors are retained for unavailable pages.",
+      "result": "Seoni’s tehsil table lists nine names, including Seoni Rural and Seoni Nagar, while page text claims eight tahsils. The Rewa Division tehsil table gives current lists but still includes Maihar under Satna; a separate current Maihar administration page identifies Maihar district and its three tehsils. Treat this as conflicting page material, not a legal crosswalk.",
+      "restoration": "Open the exact linked NIC page URLs in sources/mp-tehsil-rosters-recheck.json, save legally retainable official source material with response date/hash, and verify the district notifications and current legal maps with the MP Revenue Department or Gazette.",
+      "limits": "Roster membership and spelling do not establish current boundary identity, complete administrative coverage, legal effective date or reuse rights."
+    }
+  ]
+}
