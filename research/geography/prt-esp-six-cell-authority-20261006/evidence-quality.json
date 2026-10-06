@@ -1,0 +1,783 @@
+{
+  "version": 1,
+  "issue": 1197,
+  "lane": "geography",
+  "worker_id": "01a112b9-e2b7-7d03-8000-eb2890649612",
+  "subject_ids": [
+    "atlas:district:ESP-1003:a5622946",
+    "atlas:district:ESP-1004:a5622946",
+    "atlas:district:ESP-1010:a5622946",
+    "gb:PRT:ADM2:2272694B24025236019409",
+    "gb:PRT:ADM2:2272694B40601521893357",
+    "gb:PRT:ADM2:2272694B64876814145037",
+    "gb:PRT:ADM2:2272694B74999887486897"
+  ],
+  "subject_ids_sha256": "1fc4ba624de8a5fa76ea70785b91636f2d6039287e02858595cfac9fac271733",
+  "baseline": {
+    "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+    "files": [
+      {
+        "path": "data/canonical-grid/manifest.json",
+        "bytes": 271171,
+        "sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-19.json",
+        "bytes": 4583022,
+        "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-28.json",
+        "bytes": 6613963,
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/shared-seam-prt-esp-20261006/README.md",
+        "bytes": 10738,
+        "sha256": "77d31f80df8ac189ba81ef1bbae61f830e46c1e98e2b5e31014458fa691e7ed8",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/physical-water-prt-esp-20261006/source-assessment.md",
+        "bytes": 9278,
+        "sha256": "f52e5252bb2179ac3031f527b118fc14fcbd3f52822dd8a0ed7e1d2a064c4a70",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "research/geography/physical-water-prt-esp-20261006/evidence-quality.json",
+        "bytes": 44072,
+        "sha256": "1be625024d00ef2a42834513631fa0f8d8e71dda430f2b652e1acdc78700bb0b",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {
+      "canonical_grid": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+      "hierarchy": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+    },
+    "pin_files": {
+      "canonical_grid": "data/canonical-grid/manifest.json",
+      "hierarchy": "data/hierarchy.json"
+    },
+    "subject_files": {
+      "atlas:district:ESP-1003:a5622946": "data/geography/part-28.json",
+      "atlas:district:ESP-1004:a5622946": "data/geography/part-28.json",
+      "atlas:district:ESP-1010:a5622946": "data/geography/part-28.json",
+      "gb:PRT:ADM2:2272694B24025236019409": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B40601521893357": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B64876814145037": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B74999887486897": "data/geography/part-19.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "dgt-caop2025-trocos",
+      "url": "https://ogcapi.dgterritorio.gov.pt/collections/trocos?f=json",
+      "role": "Official DGT CAOP2025 Troços collection metadata and six complete exact-centre BBOX feature responses with HTTP headers, request receipts and complete retrieval/hash inventory.",
+      "vintage": "Collection title CAOP2025; API temporal extent 2000-10-30 to 2007-10-30; retrieved 2026-10-06. Individual records have no validity date.",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "redistributable",
+        "terms": "DGT open-data terms CC BY 4.0; attribute Direção-Geral do Território (DGT): https://www.dgterritorio.gov.pt/dados-abertos."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "limit": "DGT line status is national administrative/cartographic reference. The collection title conflicts with its temporal extent; no feature-level validity or positional-accuracy field is present. The response does not prove exact-centre side, bilateral instrument identity or ownership.",
+      "files": [
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/cell125663-99573.failure.txt",
+          "bytes": 352,
+          "sha256": "fdb3e9f4e5f02c190a5d17b8d6d695043f3ff2a6f29b91a8514bf31410d3bd4b",
+          "hash_kind": "file-bytes",
+          "role": "failed-request-record"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/cell125663-99573.headers.txt",
+          "bytes": 278,
+          "sha256": "25db87b814c5ec19dcbb197e45b3af1b6017b8a10b02a5362c3a1cbb5a28e309",
+          "hash_kind": "file-bytes",
+          "role": "response-headers"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/cell125663-99573.json",
+          "bytes": 15176,
+          "sha256": "c3b4a8a976f94aade6586f35584de99ef77749f94d6e9dd3077e783e89a4e939",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/cell125663-99573.receipt.json",
+          "bytes": 656,
+          "sha256": "6448441161acf77726a47043e77ba659370cdccd8ec6f1bb6aea2b88a07f5660",
+          "hash_kind": "file-bytes",
+          "role": "response-receipt"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/cell125752-99584.failure.txt",
+          "bytes": 352,
+          "sha256": "32ac5ad9fbbfa4245fd96c7f27f32c0d1a187194d2f7e55ea1224f3f71de7cb6",
+          "hash_kind": "file-bytes",
+          "role": "failed-request-record"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/cell125752-99584.headers.txt",
+          "bytes": 278,
+          "sha256": "39f575186fd3a6506dd5e5c59927a213ff50d39cfefb39bffd0936b18fe2a642",
+          "hash_kind": "file-bytes",
+          "role": "response-headers"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/cell125752-99584.json",
+          "bytes": 15176,
+          "sha256": "fb68ee03d75802f96d0123d0c9b2975254820ab9f996507452a26962e1acc76f",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/cell125752-99584.receipt.json",
+          "bytes": 656,
+          "sha256": "2509f345ff4385ce1551f88ee4f0ed67bf6694419f9f3d60af768b00e7079493",
+          "hash_kind": "file-bytes",
+          "role": "response-receipt"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/cell125754-99583.failure.txt",
+          "bytes": 351,
+          "sha256": "3e0c86a10382c1f54e61c87eddad891e397f2d49733372ef190e0202633f3ca5",
+          "hash_kind": "file-bytes",
+          "role": "failed-request-record"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/cell125754-99583.headers.txt",
+          "bytes": 278,
+          "sha256": "71e38af04a5a9ac8aa6f72add4624d84dad71ff508ae501da177883ddc0df23f",
+          "hash_kind": "file-bytes",
+          "role": "response-headers"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/cell125754-99583.json",
+          "bytes": 15172,
+          "sha256": "e3e5706c95f1ce5bf839e2180f5cdcaa0d751879072c554c7fa9278cfa2d3d81",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/cell125754-99583.receipt.json",
+          "bytes": 655,
+          "sha256": "3b2f29ca494f659f8dc091199f735fa4e336d5a3a1ec5bc3d045b5e44d8965aa",
+          "hash_kind": "file-bytes",
+          "role": "response-receipt"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/cell126053-99322.failure.txt",
+          "bytes": 354,
+          "sha256": "12ec5797bff9a5456adc51831f358ccbce27bc8436f6f9ed7293681e9b59215a",
+          "hash_kind": "file-bytes",
+          "role": "failed-request-record"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/cell126053-99322.headers.txt",
+          "bytes": 278,
+          "sha256": "b17383909a2ba93367ba2d292bdd4db57c9d6380bc8c0f652f92bf1c799b98eb",
+          "hash_kind": "file-bytes",
+          "role": "response-headers"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/cell126053-99322.json",
+          "bytes": 46806,
+          "sha256": "e59adc0c3a497bce96f41a83269bac3b2768567f84a457b527b67d82fe6856e3",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/cell126053-99322.receipt.json",
+          "bytes": 657,
+          "sha256": "367a4c8fdb6db0ed3d97159c93b651ac0d2e35df1aa945759b4859d9e7058ba1",
+          "hash_kind": "file-bytes",
+          "role": "response-receipt"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/cell126068-99272.failure.txt",
+          "bytes": 352,
+          "sha256": "a196c0fa95bd728b327b4888752c0e64a332fb583df6297fea1ddf51e5fb4b17",
+          "hash_kind": "file-bytes",
+          "role": "failed-request-record"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/cell126068-99272.headers.txt",
+          "bytes": 278,
+          "sha256": "b3605a23b886a6523d6dcd5393ce62998b8195f4a1fccae42621147edf041d4b",
+          "hash_kind": "file-bytes",
+          "role": "response-headers"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/cell126068-99272.json",
+          "bytes": 46802,
+          "sha256": "e92b1d28da2f6654f6156dc1dda7df90bfdb38309169326b80cc56aba125c9e5",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/cell126068-99272.receipt.json",
+          "bytes": 656,
+          "sha256": "43d74bf1e69e34358cb4e9096ed7ef23f1490e801f1476b308426aa5f11e9b9e",
+          "hash_kind": "file-bytes",
+          "role": "response-receipt"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/cell126077-99248.failure.txt",
+          "bytes": 353,
+          "sha256": "fb4878fd5fd471959715fc20a40bcecb3675b1815b7068f445472f1e5a04caf6",
+          "hash_kind": "file-bytes",
+          "role": "failed-request-record"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/cell126077-99248.headers.txt",
+          "bytes": 278,
+          "sha256": "b23ef3eead77ad4aa14a5615f6a5f468be040d8a6a3d0f92c508bedcea6bc667",
+          "hash_kind": "file-bytes",
+          "role": "response-headers"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/cell126077-99248.json",
+          "bytes": 46806,
+          "sha256": "1672620c614a195e0d0fe353749e148d65a0475a463c6f7b69432b28ccc8be00",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/cell126077-99248.receipt.json",
+          "bytes": 657,
+          "sha256": "57ab6ffdaf047e1647eb5c7e4dccf0ed11338e29a71cfea89b84664a28f4f148",
+          "hash_kind": "file-bytes",
+          "role": "response-receipt"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/collection.failure.txt",
+          "bytes": 250,
+          "sha256": "cddc0f2faf98b967ee34ae6be24676efd9d3e400780140ee4e263520579d5474",
+          "hash_kind": "file-bytes",
+          "role": "failed-request-record"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/collection.headers.txt",
+          "bytes": 216,
+          "sha256": "46ceda3b54a1d9aaec9549621ba3682bdaf83345f1476bb3db702c48be8064b0",
+          "hash_kind": "file-bytes",
+          "role": "response-headers"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/collection.json",
+          "bytes": 5043,
+          "sha256": "da7a217a0e5415ca7de68ad75c8bcd30dda91743cd0c6e933c88753086eaf71d",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/collection.receipt.json",
+          "bytes": 537,
+          "sha256": "e29d4eb4684c26bbe946f2fcd2a309db916808babe7a10eab5f56609934cce5c",
+          "hash_kind": "file-bytes",
+          "role": "response-receipt"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/queryables.failure.txt",
+          "bytes": 260,
+          "sha256": "93dd1f5f73f6a4253f0856c7626a0385253281cdf7e9977e16441d1d07b8ecf8",
+          "hash_kind": "file-bytes",
+          "role": "failed-request-record"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/queryables.headers.txt",
+          "bytes": 223,
+          "sha256": "1e2d9e99371930082a59b0d2cf9446022ac276a93e56717ea9507e3ccd6db25f",
+          "hash_kind": "file-bytes",
+          "role": "response-headers"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/queryables.json",
+          "bytes": 1198,
+          "sha256": "7fa53677c9807293de30615526a32e5237e01e52983f0c410f233c227bb11e57",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/queryables.receipt.json",
+          "bytes": 548,
+          "sha256": "359c4e4c014b64f0c4f557e32b2e60aaeb1bd80ea1dfca70af38c1a233b21bda",
+          "hash_kind": "file-bytes",
+          "role": "response-receipt"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/response-index.json",
+          "bytes": 11871,
+          "sha256": "c6f0c1111c50b9b06aba3f48b11b383479b5486a14851c9f90e5e02524128a1a",
+          "hash_kind": "file-bytes",
+          "role": "source-record"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/schema.failure.txt",
+          "bytes": 257,
+          "sha256": "5ffc2e8894b90029b48ca4e8e7da72c9edca54c3c9c163fdce13121f0ac4b1ec",
+          "hash_kind": "file-bytes",
+          "role": "failed-request-record"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/schema.headers.txt",
+          "bytes": 222,
+          "sha256": "a4a9f51739698e34c44426b739320c99ea44a2138e066cd3990acf0f575744bd",
+          "hash_kind": "file-bytes",
+          "role": "response-headers"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/schema.json",
+          "bytes": 887,
+          "sha256": "1d36e973c411d68a9c834aeea4d4dde67d9bc6586873523c03cdc0d301a6e5a1",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/dgt-trocos/schema.receipt.json",
+          "bytes": 535,
+          "sha256": "dcc294054cc2511ae18227daac2e1e7ab4fa33194f5bc6aedaa2c9e936de31a6",
+          "hash_kind": "file-bytes",
+          "role": "response-receipt"
+        }
+      ]
+    },
+    {
+      "id": "dgt-caop-authority-and-vintage",
+      "url": "https://www.dgterritorio.gov.pt/atividades/cartografia/cartografia-tematica/caop?language=pt",
+      "role": "Official DGT statement of CAOP2025 approval/publication dates, scope, source origins, DGT function, Assembly competence and current edition changes.",
+      "vintage": "CAOP2025 approved 2026-01-28 and published 2026-02-18; page accessed 2026-10-06.",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Official DGT page cited only; page text was not copied or redistributed and a separate website-text reuse license was not assessed."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Inspect the official CAOP2025 page URL; DGT open-data reuse terms are documented at https://www.dgterritorio.gov.pt/dados-abertos.",
+      "limit": "The CAOP page describes administrative/cartographic product authority and heterogeneous origins; it does not bind the six queried lines to a bilateral treaty or define the exact side of each centre."
+    },
+    {
+      "id": "dgt-border-cartographic-conventions",
+      "url": "https://www.dgterritorio.gov.pt/recart/UNIDADES%20ADMINISTRATIVAS/Fronteira.html",
+      "role": "Official DGT CartTop field definitions for border-line states and official DGT 1:50,000 mapping conventions for country lines and watercourses.",
+      "vintage": "Official CartTop specification and 1:50,000 technical specification pages inspected 2026-10-06.",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Official DGT cartographic documentation is cited, not copied into this packet; separate document reuse terms not confirmed."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Inspect https://www.dgterritorio.gov.pt/recart/UNIDADES%20ADMINISTRATIVAS/Fronteira.html and https://www.dgterritorio.gov.pt/sites/default/files/ficheiros-cartografia/Especificacoes_Tecnicas_SCN50K.pdf.",
+      "limit": "Cartographic conventions are not a positional-accuracy estimate for CAOP2025 Troços source geometries and do not by themselves prove a treaty line or territorial side."
+    },
+    {
+      "id": "un-boundary-treaty-1864",
+      "url": "https://treaties.un.org/doc/Publication/UNTS/Volume%201288/volume-1288-II-906-English.pdf",
+      "role": "Official UN Treaty Series English translation of the 1864 Spain–Portugal boundary treaty and its annexes; Article XXI describes the named river reaches and main-stream boundary rule.",
+      "vintage": "Treaty signed 1864-09-29; entered into force 1866-05-19; official UNTS page inspected 2026-10-06.",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Official treaty text cited only; no PDF/extract was retained or redistributed and reuse terms were not independently established."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "restoration": "Open the official UN Treaty Series PDF URL, pages 281-282, Article XXI.",
+      "limit": "The returned DGT features have not been linked point-by-point to the treaty route, border monuments, or a later bilateral coordinate realization; this treaty cannot assign these six exact centres."
+    },
+    {
+      "id": "prior-physical-water-evidence-1163",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/main/research/geography/physical-water-prt-esp-20261006/source-assessment.md",
+      "role": "Previously merged source appraisal for APA/SNIAmb and MITECO hydrography and the dated independent water-observation follow-up; prior evidence explicitly distinguishes WFD planning lines from present wetness.",
+      "vintage": "Research completed 2026-10-06; retained on base main before this campaign.",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Existing WorldAtlas evidence linked by path/URL and pinned in this manifest baseline; no duplicated source bytes."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Read the pinned baseline file research/geography/physical-water-prt-esp-20261006/source-assessment.md and its evidence-quality.json.",
+      "limit": "The existing APA/MITECO/WFD responses do not establish point-level present wetness at any of the six native centres; no JRC monthly point test was executed."
+    },
+    {
+      "id": "issue-1197-preview-scope",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1197",
+      "role": "Issue-authored exact native-cell IDs, candidate-preview coordinates and prior `both`/`neither` member-match observations.",
+      "vintage": "Open issue last updated 2026-10-05; assessed 2026-10-06.",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Public WorldAtlas issue cited for scope; issue text was not copied as a source file or redistributed."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Inspect the exact issue body and its worldatlas-work:v1 contract at https://github.com/ChengshuLi/WorldAtlas/issues/1197.",
+      "limit": "Candidate preview membership is not independently recomputed here and is not installed grid output, boundary authority, or an ownership result."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/prt-esp-six-cell-authority-20261006/README.md",
+      "bytes": 1623,
+      "sha256": "d3685aafe50225622f308f578e7ba163ad48237b51a81cb4add2e043b4310206",
+      "hash_kind": "file-bytes",
+      "role": "analysis-output"
+    },
+    {
+      "path": "research/geography/prt-esp-six-cell-authority-20261006/source-assessment.md",
+      "bytes": 10345,
+      "sha256": "27ade743706f1aca18c48f92cdf117168912b559e17e38e278bfdfa1344c8773",
+      "hash_kind": "file-bytes",
+      "role": "generated-table"
+    },
+    {
+      "path": "research/geography/prt-esp-six-cell-authority-20261006/scripts/measure_dgt_segment_proximity.py",
+      "bytes": 8228,
+      "sha256": "442f9ff4b0fda02b918ab0829c0b72a2baaf1ae31ca82a3fdcdf18ad430f4ecf",
+      "hash_kind": "file-bytes",
+      "role": "measurement-code"
+    },
+    {
+      "path": "research/geography/prt-esp-six-cell-authority-20261006/outputs/dgt-segment-proximity.json",
+      "bytes": 7967,
+      "sha256": "0747feb23ad44617f4974a357d3c0c1faed45dbd6c04ff8a62b8ceed0edd0c0e",
+      "hash_kind": "file-bytes",
+      "role": "analysis-output"
+    },
+    {
+      "path": "research/geography/prt-esp-six-cell-authority-20261006/outputs/run-1.json",
+      "bytes": 7967,
+      "sha256": "0747feb23ad44617f4974a357d3c0c1faed45dbd6c04ff8a62b8ceed0edd0c0e",
+      "hash_kind": "file-bytes",
+      "role": "analysis-output"
+    },
+    {
+      "path": "research/geography/prt-esp-six-cell-authority-20261006/outputs/run-2.json",
+      "bytes": 7967,
+      "sha256": "0747feb23ad44617f4974a357d3c0c1faed45dbd6c04ff8a62b8ceed0edd0c0e",
+      "hash_kind": "file-bytes",
+      "role": "analysis-output"
+    },
+    {
+      "path": "research/geography/prt-esp-six-cell-authority-20261006/validation/positive-control.json",
+      "bytes": 1449,
+      "sha256": "f27541c85a0a92c6a71cace79e6767527af4ef6ba6a2537c33175eadd19b71be",
+      "hash_kind": "file-bytes",
+      "role": "analysis-output"
+    },
+    {
+      "path": "research/geography/prt-esp-six-cell-authority-20261006/validation/negative-control.json",
+      "bytes": 2082,
+      "sha256": "26287077b64f80bfae281a60a479b160216892cf1486509021338b5a66da4a32",
+      "hash_kind": "file-bytes",
+      "role": "analysis-output"
+    },
+    {
+      "path": "research/geography/prt-esp-six-cell-authority-20261006/validation/reproducibility.json",
+      "bytes": 871,
+      "sha256": "0120ee81bd2e9372ec017b0d14138d97a3c1ca1d19d29f72def36daf2227a8a9",
+      "hash_kind": "file-bytes",
+      "role": "analysis-output"
+    }
+  ],
+  "methods": [
+    {
+      "id": "official-dgt-source-custody",
+      "kind": "source",
+      "description": "Read the official DGT collection/queryable/schema metadata and preserve each full returned feature response, exact bounded query URL, HTTP headers, client failure attempts, response-count/hash receipt and source context. No live write or mutation calls.",
+      "software": "curl 8.7.1 with default TLS validation; Python 3.12.14 standard library SHA-256; official DGT pages read through web retrieval",
+      "units": "whole response bytes, native feature IDs and source attributes"
+    },
+    {
+      "id": "dgt-defined-segment-point-distance-epsg25829",
+      "kind": "measurement",
+      "description": "Validate each exact issue centre, its response hash/status, exact centered CRS84 BBOX, one matched/returned feature, expected native DGT ID and source property context. Transform every coordinate of the complete returned line and the candidate centre from OGC:CRS84 to EPSG:25829 with PyProj always_xy, then measure direct Shapely point-to-LineString distance. Do not clip/repair/snap/buffer or infer side, ownership, or wetness.",
+      "software": "Python 3.12.14; PyProj 3.7.2 / PROJ 9.5.1; Shapely 2.1.2 / GEOS 3.13.1",
+      "units": "metres; source OGC:CRS84 longitude/latitude; metric CRS EPSG:25829 (ETRS89 / UTM zone 29N)"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "distance-cell-126077-99248",
+      "value": 0.9889990669671463,
+      "unit": "m",
+      "vintage": "current",
+      "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+      "input_sha256": "1672620c614a195e0d0fe353749e148d65a0475a463c6f7b69432b28ccc8be00"
+    },
+    {
+      "id": "distance-cell-126068-99272",
+      "value": 0.11120456561184491,
+      "unit": "m",
+      "vintage": "current",
+      "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+      "input_sha256": "e92b1d28da2f6654f6156dc1dda7df90bfdb38309169326b80cc56aba125c9e5"
+    },
+    {
+      "id": "distance-cell-126053-99322",
+      "value": 10.263659905924813,
+      "unit": "m",
+      "vintage": "current",
+      "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+      "input_sha256": "e59adc0c3a497bce96f41a83269bac3b2768567f84a457b527b67d82fe6856e3"
+    },
+    {
+      "id": "distance-cell-125754-99583",
+      "value": 1.5053113741638948,
+      "unit": "m",
+      "vintage": "current",
+      "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+      "input_sha256": "e3e5706c95f1ce5bf839e2180f5cdcaa0d751879072c554c7fa9278cfa2d3d81"
+    },
+    {
+      "id": "distance-cell-125752-99584",
+      "value": 1.8357409596390173,
+      "unit": "m",
+      "vintage": "current",
+      "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+      "input_sha256": "fb68ee03d75802f96d0123d0c9b2975254820ab9f996507452a26962e1acc76f"
+    },
+    {
+      "id": "distance-cell-125663-99573",
+      "value": 0.9526413596537169,
+      "unit": "m",
+      "vintage": "current",
+      "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+      "input_sha256": "c3b4a8a976f94aade6586f35584de99ef77749f94d6e9dd3077e783e89a4e939"
+    },
+    {
+      "id": "minimum-center-to-line-distance",
+      "value": 0.11120456561184491,
+      "unit": "m",
+      "vintage": "current",
+      "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+      "input_sha256": "e92b1d28da2f6654f6156dc1dda7df90bfdb38309169326b80cc56aba125c9e5"
+    },
+    {
+      "id": "maximum-center-to-line-distance",
+      "value": 10.263659905924813,
+      "unit": "m",
+      "vintage": "current",
+      "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+      "input_sha256": "e59adc0c3a497bce96f41a83269bac3b2768567f84a457b527b67d82fe6856e3"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "distance-cell-126077-99248",
+      "path": "research/geography/prt-esp-six-cell-authority-20261006/outputs/dgt-segment-proximity.json",
+      "json_pointer": "/rows/0/center_to_source_segment_distance_m"
+    },
+    {
+      "metric_id": "distance-cell-126068-99272",
+      "path": "research/geography/prt-esp-six-cell-authority-20261006/outputs/dgt-segment-proximity.json",
+      "json_pointer": "/rows/1/center_to_source_segment_distance_m"
+    },
+    {
+      "metric_id": "distance-cell-126053-99322",
+      "path": "research/geography/prt-esp-six-cell-authority-20261006/outputs/dgt-segment-proximity.json",
+      "json_pointer": "/rows/2/center_to_source_segment_distance_m"
+    },
+    {
+      "metric_id": "distance-cell-125754-99583",
+      "path": "research/geography/prt-esp-six-cell-authority-20261006/outputs/dgt-segment-proximity.json",
+      "json_pointer": "/rows/3/center_to_source_segment_distance_m"
+    },
+    {
+      "metric_id": "distance-cell-125752-99584",
+      "path": "research/geography/prt-esp-six-cell-authority-20261006/outputs/dgt-segment-proximity.json",
+      "json_pointer": "/rows/4/center_to_source_segment_distance_m"
+    },
+    {
+      "metric_id": "distance-cell-125663-99573",
+      "path": "research/geography/prt-esp-six-cell-authority-20261006/outputs/dgt-segment-proximity.json",
+      "json_pointer": "/rows/5/center_to_source_segment_distance_m"
+    },
+    {
+      "metric_id": "minimum-center-to-line-distance",
+      "path": "research/geography/prt-esp-six-cell-authority-20261006/outputs/dgt-segment-proximity.json",
+      "json_pointer": "/rows/1/center_to_source_segment_distance_m"
+    },
+    {
+      "metric_id": "maximum-center-to-line-distance",
+      "path": "research/geography/prt-esp-six-cell-authority-20261006/outputs/dgt-segment-proximity.json",
+      "json_pointer": "/rows/2/center_to_source_segment_distance_m"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "distance-cell-126077-99248",
+      "value": 0.9889990669671463,
+      "unit": "m"
+    },
+    {
+      "metric_id": "distance-cell-126068-99272",
+      "value": 0.11120456561184491,
+      "unit": "m"
+    },
+    {
+      "metric_id": "distance-cell-126053-99322",
+      "value": 10.263659905924813,
+      "unit": "m"
+    },
+    {
+      "metric_id": "distance-cell-125754-99583",
+      "value": 1.5053113741638948,
+      "unit": "m"
+    },
+    {
+      "metric_id": "distance-cell-125752-99584",
+      "value": 1.8357409596390173,
+      "unit": "m"
+    },
+    {
+      "metric_id": "distance-cell-125663-99573",
+      "value": 0.9526413596537169,
+      "unit": "m"
+    },
+    {
+      "metric_id": "minimum-center-to-line-distance",
+      "value": 0.11120456561184491,
+      "unit": "m"
+    },
+    {
+      "metric_id": "maximum-center-to-line-distance",
+      "value": 10.263659905924813,
+      "unit": "m"
+    }
+  ],
+  "rendered_tables": [
+    {
+      "path": "research/geography/prt-esp-six-cell-authority-20261006/source-assessment.md",
+      "rows": [
+        {
+          "metric_id": "distance-cell-126077-99248",
+          "line": 11,
+          "template": "| `cell126077/99248` | -6.873431337396909, 40.002191593667014 | both | `d9492c5b-a667-11ee-a363-a76e0bcee2d6` | `Definido` | {value} m |",
+          "decimals": 3
+        },
+        {
+          "metric_id": "distance-cell-126068-99272",
+          "line": 12,
+          "template": "| `cell126068/99272` | -6.885789919364072, 39.97694180898698 | both | `d9492c5b-a667-11ee-a363-a76e0bcee2d6` | `Definido` | {value} m |",
+          "decimals": 3
+        },
+        {
+          "metric_id": "distance-cell-126053-99322",
+          "line": 13,
+          "template": "| `cell126053/99322` | -6.906387555975982, 39.92430811747299 | both | `d9492c5b-a667-11ee-a363-a76e0bcee2d6` | `Definido` | {value} m |",
+          "decimals": 3
+        },
+        {
+          "metric_id": "distance-cell-125754-99583",
+          "line": 14,
+          "template": "| `cell125754/99583` | -7.31696711244021, 39.64890317423009 | both | `d95df7ee-a667-11ee-a363-773b75e2e95a` | `Definido` | {value} m |",
+          "decimals": 3
+        },
+        {
+          "metric_id": "distance-cell-125752-99584",
+          "line": 15,
+          "template": "| `cell125752/99584` | -7.31971346398845, 39.64784586349555 | both | `d95df7ee-a667-11ee-a363-773b75e2e95a` | `Definido` | {value} m |",
+          "decimals": 3
+        },
+        {
+          "metric_id": "distance-cell-125663-99573",
+          "line": 16,
+          "template": "| `cell125663/99573` | -7.441926107885848, 39.659475392270686 | neither | `d95df7ee-a667-11ee-a363-773b75e2e95a` | `Definido` | {value} m |",
+          "decimals": 3
+        }
+      ]
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "dgt-defined-segment-point-distance-epsg25829",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/prt-esp-six-cell-authority-20261006/validation/positive-control.json"
+    },
+    {
+      "method_id": "dgt-defined-segment-point-distance-epsg25829",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/prt-esp-six-cell-authority-20261006/validation/negative-control.json"
+    },
+    {
+      "method_id": "dgt-defined-segment-point-distance-epsg25829",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "research/geography/prt-esp-six-cell-authority-20261006/validation/reproducibility.json"
+    }
+  ],
+  "conclusions": [
+    {
+      "status": "supported",
+      "source_ids": [
+        "dgt-caop2025-trocos"
+      ],
+      "text": "For each of the six exact issue centres, a complete DGT source feature returned from its matching neighbourhood query is marked `Portugal#Espanha`, `Definido`, `Limite em Terra`, and `1ª Ordem`; retained measurements place the centre 0.111–10.264 m from the returned segment coordinates."
+    },
+    {
+      "status": "unresolved",
+      "source_ids": [
+        "dgt-caop2025-trocos",
+        "dgt-caop-authority-and-vintage",
+        "dgt-border-cartographic-conventions",
+        "un-boundary-treaty-1864",
+        "issue-1197-preview-scope"
+      ],
+      "text": "The exact side of each segment and sovereign authority of each centre remain unresolved. The DGT source has no feature-level validity or accuracy field, the collection extent conflicts with the edition title/current approval page, side-code semantics have not been linked to sovereignty, and no point-by-point bilateral coordinate realization was retained."
+    },
+    {
+      "status": "unresolved",
+      "source_ids": [
+        "prior-physical-water-evidence-1163",
+        "dgt-caop2025-trocos"
+      ],
+      "text": "Present wetness and shoreline position at each centre remain unresolved. DGT administrative lines are not water observations; prior APA/MITECO WFD geometries are planning/reference data and no dated independent water observation was tested at these centres."
+    },
+    {
+      "status": "unresolved",
+      "source_ids": [
+        "issue-1197-preview-scope",
+        "dgt-caop2025-trocos"
+      ],
+      "text": "The five dual-member candidate-preview matches and one no-member candidate-preview result remain preview/source conflicts; none implies an owner and the no-member centre must not be filled by proximity."
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "PYTHONDONTWRITEBYTECODE=1 Python 3.12.14 -B research/geography/prt-esp-six-cell-authority-20261006/scripts/measure_dgt_segment_proximity.py (two invocations after producer commit 5ae6e04d1fa0459ac788f2aefc47a97a70b4fa8a)",
+    "cmp research/geography/prt-esp-six-cell-authority-20261006/outputs/run-1.json research/geography/prt-esp-six-cell-authority-20261006/outputs/run-2.json",
+    "node scripts/evidence-quality.mjs research/geography/prt-esp-six-cell-authority-20261006/evidence-quality.json",
+    "node scripts/check-handoff-scope.mjs --branch geography/prt-esp-six-cell-authority-1197-20261006 --base origin/main --pr-body-file /tmp/geo-1197-pr-body.md --issue-file /tmp/geo-1197.json",
+    "git diff --check"
+  ]
+}
