@@ -1,0 +1,203 @@
+{
+  "version": 1,
+  "issue": 264,
+  "retrieved_at": "2026-10-05 America/Los_Angeles",
+  "upstream_geoBoundaries_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+  "baseline_main_commit": "8e1162e3e364cebdec700ec796e2730379494922",
+  "scope": {
+    "locations": 186,
+    "states": [
+      "Iowa",
+      "Minnesota"
+    ],
+    "area": "West North Central (partial 186/618 locations; 2/7 states)"
+  },
+  "sources": [
+    {
+      "source_id": "geoboundaries-usa-adm2",
+      "url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.geojson",
+      "role": "U.S. counties; geoBoundaries gbOpen ADM2, sourced from Census MAF/TIGER; canonical role Counties",
+      "vintage": "2018; source data updated 2023-01-19; release built 2023-12-12",
+      "retrieved_at": "2026-10-05 America/Los_Angeles",
+      "license_terms": "Underlying Census work is marked Public Domain in pinned release metadata. geoBoundaries derivative attribution under CC BY 4.0 is required by its retained citation/use notice.",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/geoBoundaries-USA-ADM2-full-pinned.geojson",
+          "bytes": 10500644,
+          "sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/geoboundaries-source-metadata.json",
+          "bytes": 939,
+          "sha256": "a4d2a82a1cd434960b6ed49531bff3330d0881674eea9dc8711e1ad6bf049b9f",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/geoboundaries-citation-use.txt",
+          "bytes": 4316,
+          "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/geoboundaries-github-directory.json",
+          "bytes": 23389,
+          "sha256": "d5bd7df080c39aa6b2fb96db808725bbd6da2953df535358ed4558dcc58637cb",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/geoboundaries-release-commit.json",
+          "bytes": 331076,
+          "sha256": "5f1b2549c5741c6708fae329dc3fe25c0bdb3185dfca34575fe8bffdf22da6ce",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "source_id": "geoboundaries-usa-adm1",
+      "url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/USA/ADM1/geoBoundaries-USA-ADM1.geojson",
+      "role": "U.S. states; geoBoundaries gbOpen ADM1, sourced from Census MAF/TIGER; canonical role States",
+      "vintage": "2018; source data updated 2023-01-19; release built 2023-12-12",
+      "retrieved_at": "2026-10-05 America/Los_Angeles",
+      "license_terms": "Underlying Census work is marked Public Domain in pinned release metadata. geoBoundaries derivative attribution under CC BY 4.0 applies; Census attribution retained.",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/geoBoundaries-USA-ADM1-full-pinned.geojson",
+          "bytes": 13282737,
+          "sha256": "d4f7426c7ba3c49b958b7219fc1503409bab2948efe5917998101d921d77bcf1",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/geoboundaries-adm1-metadata.json",
+          "bytes": 943,
+          "sha256": "7b7f8ad3e6b160b6196ad4c2c9a29a8087c0d61521352ae599d8311d1560b006",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/geoboundaries-adm1-directory.json",
+          "bytes": 23389,
+          "sha256": "74f3ff3919d46ba93d84a57cfda8d900891556111282f26c463d17e7fc8fe397",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "source_id": "census-cartographic-2018",
+      "url": "https://www.census.gov/geographies/mapping-files/2018/geo/carto-boundary-file.html",
+      "role": "National county/state cartographic shapefiles and Census division state list",
+      "vintage": "2018 1:500,000 generalized cartographic map product",
+      "retrieved_at": "2026-10-05 America/Los_Angeles",
+      "license_terms": "U.S. federal work; Public Domain; Census source credit. Census warns product is simplified, may omit small areas, and is not for area/perimeter or precise geographic relationships.",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/census-cartographic-counties-2018-500k.zip",
+          "bytes": 11530479,
+          "sha256": "aaa866af327754e1b80aa87bfb97b04a7209f4f871075aef84affb8f0b3afe67",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/census-cartographic-states-2018-500k.zip",
+          "bytes": 3304931,
+          "sha256": "b37b0aede4378d85adc6fcdbd7ef67a3e2449b82025a499ddbe8a857dada8a5d",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/census-regions-divisions-official-list.txt",
+          "bytes": 1646,
+          "sha256": "e1dc8034c199ca06ee77dbf30956499329e393b7a387d63916494aeb2e47a1d3",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "source_id": "census-tigerweb-2018",
+      "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2018/MapServer",
+      "role": "2018 county and state feature layers queried for STATE codes 19 and 27",
+      "vintage": "January 1, 2018 statistical geography vintage",
+      "retrieved_at": "2026-10-05 America/Los_Angeles",
+      "license_terms": "U.S. Census Bureau federal data; Public Domain; Census source credit. Statistical depiction is not a legal-jurisdiction determination.",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/census-tigerweb-counties-2018-ia-mn.geojson.gz",
+          "bytes": 4165395,
+          "sha256": "e2ae20ee7e49cf351e38cdc96f61f836d72f7ef1c3843ee55ca5607412995303",
+          "hash_kind": "file-bytes",
+          "uncompressed_bytes": 12570078,
+          "uncompressed_sha256": "958bf9b9668aa702a04a31bdb43b9f8f9e9a0b535673595d0b00e9d232493a01"
+        },
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/census-tigerweb-states-2018-ia-mn.geojson",
+          "bytes": 2618595,
+          "sha256": "1709674e8843b52cb6638bf0d598ab2623f4853fb4be0bd59945eaaa9e5aa90a",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/tigerweb-layer-counties-2018.json",
+          "bytes": 9479,
+          "sha256": "2d3b72f3957787cae0f8ae5a77bafd0b9603f8d6a5b4db2a700898e179e855c6",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/tigerweb-layer-states-2018.json",
+          "bytes": 8975,
+          "sha256": "5d0085dce02992222952e6e15b79477650a9520bba582eae7d7baca647f6dbf2",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/tigerweb-map-2018.json",
+          "bytes": 32297,
+          "sha256": "8f319aa60ab4356f667e4d51cfbecd427a5408d1eaed0ad56c8eff4950cf8c32",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "source_id": "census-tigerweb-2026",
+      "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Current/MapServer",
+      "role": "Current county and state feature layers queried for STATE codes 19 and 27",
+      "vintage": "January 1, 2026 current statistical geography vintage",
+      "retrieved_at": "2026-10-05 America/Los_Angeles",
+      "license_terms": "U.S. Census Bureau federal data; Public Domain; Census source credit. Statistical depiction is not a legal-jurisdiction determination.",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/census-tigerweb-counties-current-ia-mn.geojson.gz",
+          "bytes": 4226338,
+          "sha256": "f49988bcb219a9fe795a8ecb093770187cebab1fa667c06e744ceb006ee0d870",
+          "hash_kind": "file-bytes",
+          "uncompressed_bytes": 12748711,
+          "uncompressed_sha256": "a0b42ac75ef94d8b4cf46f0ac0c5da4fc2fcfef6b9e07d8e90652dee5e8b683c"
+        },
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/census-tigerweb-states-current-ia-mn.geojson",
+          "bytes": 2631111,
+          "sha256": "acd3c43b4ff99763c149fc6dc0d301745d55f63969da8ac2138677259535826a",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/tigerweb-layer-counties-current-2026.json",
+          "bytes": 7489,
+          "sha256": "56df6e7d6cff8fe1e082bbdc10109cc2c7c22a134f5dfca1899f93d9bd98337d",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/tigerweb-layer-states-current-2026.json",
+          "bytes": 7708,
+          "sha256": "f995e30536d4c49fa5426255b2eccb48702b72ae9b27d1a83b8e7ff3325429c4",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/tigerweb-map-current-2026.json",
+          "bytes": 30379,
+          "sha256": "64893416c78d48961db5bb33bb1eace218e387b0c027ec569219899d81ccda70",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    }
+  ],
+  "interpretive_limits": [
+    "2018 1:500,000 Census Cartographic Boundary Files are simplified small-scale map products; not authoritative for precise area or geographic relationships.",
+    "Statistical boundaries do not establish legal authority, ownership, or jurisdiction.",
+    "TIGERweb comparison cannot by itself resolve Minnesota county water/land representation or classify tiny polygon pieces.",
+    "geoBoundaries release metadata identifies Public Domain source data; retain the geoBoundaries CC BY attribution required for derivative products."
+  ]
+}

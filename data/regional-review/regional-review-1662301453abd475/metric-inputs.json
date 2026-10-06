@@ -1,0 +1,158 @@
+{
+  "version": 1,
+  "baseline_commit": "8e1162e3e364cebdec700ec796e2730379494922",
+  "baseline_files": [
+    {
+      "path": "data/geography/part-25.json",
+      "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394"
+    },
+    {
+      "path": "data/geography/part-26.json",
+      "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632"
+    },
+    {
+      "path": "data/geography/part-27.json",
+      "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758"
+    },
+    {
+      "path": "data/hierarchy.json",
+      "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+    },
+    {
+      "path": "data/world-index.json",
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+    }
+  ],
+  "retained_sources": [
+    {
+      "source_id": "geoboundaries-usa-adm2",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/geoBoundaries-USA-ADM2-full-pinned.geojson",
+          "sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43"
+        },
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/geoboundaries-source-metadata.json",
+          "sha256": "a4d2a82a1cd434960b6ed49531bff3330d0881674eea9dc8711e1ad6bf049b9f"
+        },
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/geoboundaries-citation-use.txt",
+          "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+        },
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/geoboundaries-github-directory.json",
+          "sha256": "d5bd7df080c39aa6b2fb96db808725bbd6da2953df535358ed4558dcc58637cb"
+        },
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/geoboundaries-release-commit.json",
+          "sha256": "5f1b2549c5741c6708fae329dc3fe25c0bdb3185dfca34575fe8bffdf22da6ce"
+        }
+      ]
+    },
+    {
+      "source_id": "geoboundaries-usa-adm1",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/geoBoundaries-USA-ADM1-full-pinned.geojson",
+          "sha256": "d4f7426c7ba3c49b958b7219fc1503409bab2948efe5917998101d921d77bcf1"
+        },
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/geoboundaries-adm1-metadata.json",
+          "sha256": "7b7f8ad3e6b160b6196ad4c2c9a29a8087c0d61521352ae599d8311d1560b006"
+        },
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/geoboundaries-adm1-directory.json",
+          "sha256": "74f3ff3919d46ba93d84a57cfda8d900891556111282f26c463d17e7fc8fe397"
+        }
+      ]
+    },
+    {
+      "source_id": "census-cartographic-2018",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/census-cartographic-counties-2018-500k.zip",
+          "sha256": "aaa866af327754e1b80aa87bfb97b04a7209f4f871075aef84affb8f0b3afe67"
+        },
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/census-cartographic-states-2018-500k.zip",
+          "sha256": "b37b0aede4378d85adc6fcdbd7ef67a3e2449b82025a499ddbe8a857dada8a5d"
+        },
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/census-regions-divisions-official-list.txt",
+          "sha256": "e1dc8034c199ca06ee77dbf30956499329e393b7a387d63916494aeb2e47a1d3"
+        }
+      ]
+    },
+    {
+      "source_id": "census-tigerweb-2018",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/census-tigerweb-counties-2018-ia-mn.geojson.gz",
+          "sha256": "e2ae20ee7e49cf351e38cdc96f61f836d72f7ef1c3843ee55ca5607412995303"
+        },
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/census-tigerweb-states-2018-ia-mn.geojson",
+          "sha256": "1709674e8843b52cb6638bf0d598ab2623f4853fb4be0bd59945eaaa9e5aa90a"
+        },
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/tigerweb-layer-counties-2018.json",
+          "sha256": "2d3b72f3957787cae0f8ae5a77bafd0b9603f8d6a5b4db2a700898e179e855c6"
+        },
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/tigerweb-layer-states-2018.json",
+          "sha256": "5d0085dce02992222952e6e15b79477650a9520bba582eae7d7baca647f6dbf2"
+        },
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/tigerweb-map-2018.json",
+          "sha256": "8f319aa60ab4356f667e4d51cfbecd427a5408d1eaed0ad56c8eff4950cf8c32"
+        }
+      ]
+    },
+    {
+      "source_id": "census-tigerweb-2026",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/census-tigerweb-counties-current-ia-mn.geojson.gz",
+          "sha256": "f49988bcb219a9fe795a8ecb093770187cebab1fa667c06e744ceb006ee0d870"
+        },
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/census-tigerweb-states-current-ia-mn.geojson",
+          "sha256": "acd3c43b4ff99763c149fc6dc0d301745d55f63969da8ac2138677259535826a"
+        },
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/tigerweb-layer-counties-current-2026.json",
+          "sha256": "56df6e7d6cff8fe1e082bbdc10109cc2c7c22a134f5dfca1899f93d9bd98337d"
+        },
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/tigerweb-layer-states-current-2026.json",
+          "sha256": "f995e30536d4c49fa5426255b2eccb48702b72ae9b27d1a83b8e7ff3325429c4"
+        },
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/source/tigerweb-map-current-2026.json",
+          "sha256": "64893416c78d48961db5bb33bb1eace218e387b0c027ec569219899d81ccda70"
+        }
+      ]
+    }
+  ],
+  "reproduction_script": {
+    "path": "data/regional-review/regional-review-1662301453abd475/reproduce.py",
+    "bytes": 14321,
+    "sha256": "754f3111ffc3044c0276f3483cedf80ebacc6fdb8c83625f899455eaeb48c407",
+    "hash_kind": "file-bytes"
+  },
+  "results": {
+    "path": "data/regional-review/regional-review-1662301453abd475/geometry-and-membership-results.json",
+    "bytes": 599666,
+    "sha256": "42228b70e581b4d6a949e934b33a3cc66a2331f3c685c1c56f54dabbf97c381b",
+    "hash_kind": "file-bytes"
+  },
+  "method": {
+    "version": "worldatlas-evidence-geometry-v1",
+    "axis_order": "longitude-latitude",
+    "crs": "EPSG:4326",
+    "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+    "area_units": "m2",
+    "distance_method": "WGS84 inverse geodesic",
+    "distance_units": "m"
+  }
+}
