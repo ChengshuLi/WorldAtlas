@@ -1,0 +1,59 @@
+{
+  "issue": 396,
+  "legal_source_retention": "Law 104-OZ compiled reference PDF inspected but not redistributed; hash, size, host, title, and restoration instructions in RESTORE.md. Retrieved reference laws and their source-quality limitations are described in README.md and individual-assessment.json.",
+  "observed_geojson_feature_count": 2327,
+  "retained_derivative_notice": "The exact 34-feature subset is extracted from the ODbL source; ODbL attribution/license obligations apply.",
+  "retained_source_files": [
+    {
+      "bytes": 498,
+      "path": "source/ODBL-NOTICE.txt",
+      "sha256": "32f47ffae4e114435e408c1a3a6fd9d5ea5968ef987c0c04648435577dc1fbde"
+    },
+    {
+      "bytes": 2437,
+      "path": "source/RESTORE.md",
+      "sha256": "1c038324c0ce73d391fffccccc292e6e7783886d63e598294cb17f8691a05b25"
+    },
+    {
+      "bytes": 134,
+      "path": "source/geoBoundaries-RUS-ADM2-2017.lfs-pointer.txt",
+      "sha256": "6609b634d6d9edc73715ddeb1518fc2de293f7142a9ecc283c4f58283fdb4fa7"
+    },
+    {
+      "bytes": 815,
+      "path": "source/geoBoundaries-RUS-ADM2-metadata.json",
+      "sha256": "2064a236e3473d76adf00729b4482a22ffefae22a40364a4cfe78ef43ce3c672"
+    },
+    {
+      "bytes": 303566,
+      "path": "source/geoboundaries-9469f09-commit.json",
+      "sha256": "3443ba146cecbd295fe0a2571dc872ad008b3126153b88d70232a8bfb0b2f833"
+    },
+    {
+      "bytes": 14631,
+      "path": "source/issue-396-api-response.json",
+      "sha256": "a7b32346986a90c780bc35738e527af1f7f76dddbd8c42f736bd60996ba1a4ea"
+    },
+    {
+      "bytes": 771921,
+      "path": "source/issue-396-scoped-geoboundaries-features.geojson",
+      "sha256": "5f02fac322a423dba305ddb4786a257a20a9b7b6df0aba88000d7315cb421d2b"
+    }
+  ],
+  "retrieved": "2026-10-05 America/Los_Angeles",
+  "source": "geoBoundaries gbOpen RUS ADM2, pinned commit 9469f09",
+  "source_collection_object": {
+    "bytes": 120489189,
+    "restoration": "Fetch URL at pinned commit, verify LFS OID/hash; detailed steps in RESTORE.md. Full file deliberately not committed.",
+    "sha256": "74012237384e53061aa63b6e20b9be24f94facfe615b52bbe72e62a81fa68ff0",
+    "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/RUS/ADM2/geoBoundaries-RUS-ADM2.geojson"
+  },
+  "source_license": "Open Data Commons Open Database License 1.0",
+  "source_metadata_reported": {
+    "admin_unit_count": 2328,
+    "boundary_year": 2017,
+    "build_date": "2023-12-12",
+    "source_data_update": "2023-03-03"
+  },
+  "version": 1
+}

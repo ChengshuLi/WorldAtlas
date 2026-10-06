@@ -1,0 +1,467 @@
+{
+  "baseline": {
+    "commit": "f1a6c0abc29de7bf7b7a081a8a9864b0450c0427",
+    "files": [
+      {
+        "bytes": 944,
+        "hash_kind": "file-bytes",
+        "path": "data/world-index.json",
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+      },
+      {
+        "bytes": 6570767,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-20.json",
+        "sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f"
+      },
+      {
+        "bytes": 6737781,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-21.json",
+        "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7"
+      },
+      {
+        "bytes": 10164089,
+        "hash_kind": "file-bytes",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      }
+    ],
+    "pin_files": {
+      "hierarchy_file_sha256": "data/hierarchy.json"
+    },
+    "pins": {
+      "hierarchy_file_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+    },
+    "subject_files": {
+      "gb:RUS:ADM2:50074027B1492213945391": "data/geography/part-20.json",
+      "gb:RUS:ADM2:50074027B15875512450628": "data/geography/part-21.json",
+      "gb:RUS:ADM2:50074027B18065649680617": "data/geography/part-20.json",
+      "gb:RUS:ADM2:50074027B18536602285327": "data/geography/part-21.json",
+      "gb:RUS:ADM2:50074027B19670057495733": "data/geography/part-21.json",
+      "gb:RUS:ADM2:50074027B23127585958078": "data/geography/part-20.json",
+      "gb:RUS:ADM2:50074027B240190989633": "data/geography/part-21.json",
+      "gb:RUS:ADM2:50074027B25441119122085": "data/geography/part-20.json",
+      "gb:RUS:ADM2:50074027B30265298325170": "data/geography/part-20.json",
+      "gb:RUS:ADM2:50074027B36203097899253": "data/geography/part-21.json",
+      "gb:RUS:ADM2:50074027B38623141020563": "data/geography/part-21.json",
+      "gb:RUS:ADM2:50074027B38959530986524": "data/geography/part-20.json",
+      "gb:RUS:ADM2:50074027B40188766482905": "data/geography/part-21.json",
+      "gb:RUS:ADM2:50074027B43295410391390": "data/geography/part-20.json",
+      "gb:RUS:ADM2:50074027B45476358417172": "data/geography/part-21.json",
+      "gb:RUS:ADM2:50074027B45605769470318": "data/geography/part-21.json",
+      "gb:RUS:ADM2:50074027B47936450781023": "data/geography/part-21.json",
+      "gb:RUS:ADM2:50074027B51538172041047": "data/geography/part-21.json",
+      "gb:RUS:ADM2:50074027B53133560580416": "data/geography/part-21.json",
+      "gb:RUS:ADM2:50074027B54038498434692": "data/geography/part-20.json",
+      "gb:RUS:ADM2:50074027B56335043300988": "data/geography/part-21.json",
+      "gb:RUS:ADM2:50074027B58317509577397": "data/geography/part-20.json",
+      "gb:RUS:ADM2:50074027B63547042930047": "data/geography/part-20.json",
+      "gb:RUS:ADM2:50074027B67807179286813": "data/geography/part-21.json",
+      "gb:RUS:ADM2:50074027B68857930512633": "data/geography/part-21.json",
+      "gb:RUS:ADM2:50074027B69615341677340": "data/geography/part-20.json",
+      "gb:RUS:ADM2:50074027B75899917936695": "data/geography/part-21.json",
+      "gb:RUS:ADM2:50074027B80918234910176": "data/geography/part-21.json",
+      "gb:RUS:ADM2:50074027B81404523922595": "data/geography/part-21.json",
+      "gb:RUS:ADM2:50074027B81878047899134": "data/geography/part-21.json",
+      "gb:RUS:ADM2:50074027B85685002230937": "data/geography/part-21.json",
+      "gb:RUS:ADM2:50074027B86929320275974": "data/geography/part-20.json",
+      "gb:RUS:ADM2:50074027B94992557454451": "data/geography/part-20.json",
+      "gb:RUS:ADM2:50074027B99284789446769": "data/geography/part-21.json"
+    }
+  },
+  "change_receipts": [
+    {
+      "path": "data/regional-review/regional-review-82307d5498a4432a/README.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-82307d5498a4432a/findings/current-main-subject-join.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-82307d5498a4432a/findings/individual-assessment.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-82307d5498a4432a/findings/source-geometry-screen.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-82307d5498a4432a/findings/source-roster.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-82307d5498a4432a/reproduction/audit_source_geometry.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-82307d5498a4432a/reproduction/extract_issue_subjects.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-82307d5498a4432a/reproduction/extract_law_text.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-82307d5498a4432a/reproduction/review_current_subjects.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-82307d5498a4432a/reproduction/validate_packet.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-82307d5498a4432a/source/ODBL-NOTICE.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-82307d5498a4432a/source/RESTORE.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-82307d5498a4432a/source/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-82307d5498a4432a/source/geoBoundaries-RUS-ADM2-2017.lfs-pointer.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-82307d5498a4432a/source/geoBoundaries-RUS-ADM2-metadata.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-82307d5498a4432a/source/geoboundaries-9469f09-commit.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-82307d5498a4432a/source/issue-396-api-response.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-82307d5498a4432a/source/issue-396-scoped-geoboundaries-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-82307d5498a4432a/source/source-manifest.json",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "python3 data/regional-review/regional-review-82307d5498a4432a/reproduction/validate_packet.py",
+    "python3 data/regional-review/regional-review-82307d5498a4432a/reproduction/review_current_subjects.py",
+    "Restore pinned geoBoundaries LFS object per source/RESTORE.md, verify SHA-256, then run reproduction/extract_issue_subjects.py."
+  ],
+  "conclusions": [
+    {
+      "source_ids": [
+        "geoboundaries-rus-adm2-2017"
+      ],
+      "status": "supported",
+      "text": "Pinned source extract and current Atlas records reproduce all 34 scoped IDs with no missing/duplicate IDs; this establishes roster agreement only."
+    },
+    {
+      "source_ids": [
+        "geoboundaries-rus-adm2-2017",
+        "kemerovo-law-46-oz-2024",
+        "kemerovo-law-47-oz-2024",
+        "kemerovo-law-45-oz-2025",
+        "kemerovo-admin-territorial-law-215-oz"
+      ],
+      "status": "supported",
+      "text": "Collection-wide Raion label is insufficient to classify every feature, and post-2017 municipal mergers mean multiple scoped source entities cannot automatically be treated as distinct current municipalities."
+    },
+    {
+      "source_ids": [
+        "geoboundaries-rus-adm2-2017",
+        "kemerovo-admin-territorial-law-215-oz",
+        "kemerovo-municipal-law-104-oz"
+      ],
+      "status": "unresolved",
+      "text": "Current legal administrative role, exact boundaries, completeness, and feature-level parent suitability remain unresolved for all 34 subjects."
+    },
+    {
+      "source_ids": [
+        "geoboundaries-rus-adm2-2017"
+      ],
+      "status": "unresolved",
+      "text": "geoBoundaries metadata count 2328 differs from GeoJSON count 2327; reason unresolved."
+    }
+  ],
+  "issue": 396,
+  "lane": "geography",
+  "methods": [
+    {
+      "description": "Extract the exact 34 issue IDs from the pinned LFS source; reproduce against retained 34-feature extract; join them to records in all 36 immutable current-main index parts. Direct source/Atlas hashes differ after coordinate rounding and simplification; method does not adjudicate boundary accuracy.",
+      "id": "source-id-reproduction",
+      "kind": "code",
+      "software": "Python 3 bundled runtime; Git blobs at baseline f1a6c0abc29de7bf7b7a081a8a9864b0450c0427",
+      "units": "unique feature IDs; whole-file SHA-256; coordinate positions (example only)"
+    },
+    {
+      "description": "Inspect geoBoundaries metadata and feature names; inspect regional Law 215-OZ reference, consolidated 104-OZ copy and indexed text of Laws 46-OZ, 47-OZ and 45-OZ. No current legal polygon overlay performed.",
+      "id": "legal-source-review",
+      "kind": "source",
+      "software": "Manual source inspection and web search, 2026-10-05 America/Los_Angeles",
+      "units": "named legal entities and effective dates; no geographic measurement"
+    }
+  ],
+  "metric_bindings": [],
+  "metrics": [],
+  "outputs": [
+    {
+      "bytes": 10657,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-82307d5498a4432a/README.md",
+      "sha256": "a4a3c4a397a65bf6ffeaf67048505fbcdbd195dfe89124b9490454fab4169f82"
+    },
+    {
+      "bytes": 34833,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-82307d5498a4432a/findings/current-main-subject-join.json",
+      "sha256": "65b69c176adcae771729f3a96d9cf728b35776e721c78ba015458922c6c0502a"
+    },
+    {
+      "bytes": 48681,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-82307d5498a4432a/findings/individual-assessment.json",
+      "sha256": "8aa7409e1c8da82d2a475b3f3b1712520da00b4d6a8ea25ac3cd425a75ed82b2"
+    },
+    {
+      "bytes": 16943,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-82307d5498a4432a/findings/source-geometry-screen.json",
+      "sha256": "504fc495801f65dfc357a7b09a6c26ecd7e55b9e330c66e925f8b438c9d26ab6"
+    },
+    {
+      "bytes": 6124,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-82307d5498a4432a/findings/source-roster.json",
+      "sha256": "9d4057936facafc22381da1a2e70e620dd547f648f671a6a8f49c091a05ba7a6"
+    },
+    {
+      "bytes": 2633,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-82307d5498a4432a/reproduction/audit_source_geometry.py",
+      "sha256": "aec59b9d6461493a1e1223de8a401a9ca5ba84331d3d57174a29b4aaf8210883"
+    },
+    {
+      "bytes": 2183,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-82307d5498a4432a/reproduction/extract_issue_subjects.py",
+      "sha256": "30dc6b6770ec7080f73f632e25006fe8cfcc632e7490dd86ea93f51b6e5ea0dc"
+    },
+    {
+      "bytes": 538,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-82307d5498a4432a/reproduction/extract_law_text.py",
+      "sha256": "d3b7cd997f2882d7c7ddc7238862a22d53cbdce262cf53fd6aa91b697d771ad6"
+    },
+    {
+      "bytes": 5450,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-82307d5498a4432a/reproduction/review_current_subjects.py",
+      "sha256": "c7d290682f51680eb06b32eb078c4dbf57e43a0b03302e27907d998ee52e7d9e"
+    },
+    {
+      "bytes": 2039,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-82307d5498a4432a/reproduction/validate_packet.py",
+      "sha256": "7b8ce35cc43f70d15079799352ea6a7b4fe9d4ac63872f24de53fdc2cbfc2076"
+    },
+    {
+      "bytes": 498,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-82307d5498a4432a/source/ODBL-NOTICE.txt",
+      "sha256": "32f47ffae4e114435e408c1a3a6fd9d5ea5968ef987c0c04648435577dc1fbde"
+    },
+    {
+      "bytes": 2437,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-82307d5498a4432a/source/RESTORE.md",
+      "sha256": "1c038324c0ce73d391fffccccc292e6e7783886d63e598294cb17f8691a05b25"
+    },
+    {
+      "bytes": 134,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-82307d5498a4432a/source/geoBoundaries-RUS-ADM2-2017.lfs-pointer.txt",
+      "sha256": "6609b634d6d9edc73715ddeb1518fc2de293f7142a9ecc283c4f58283fdb4fa7"
+    },
+    {
+      "bytes": 815,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-82307d5498a4432a/source/geoBoundaries-RUS-ADM2-metadata.json",
+      "sha256": "2064a236e3473d76adf00729b4482a22ffefae22a40364a4cfe78ef43ce3c672"
+    },
+    {
+      "bytes": 303566,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-82307d5498a4432a/source/geoboundaries-9469f09-commit.json",
+      "sha256": "3443ba146cecbd295fe0a2571dc872ad008b3126153b88d70232a8bfb0b2f833"
+    },
+    {
+      "bytes": 14631,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-82307d5498a4432a/source/issue-396-api-response.json",
+      "sha256": "a7b32346986a90c780bc35738e527af1f7f76dddbd8c42f736bd60996ba1a4ea"
+    },
+    {
+      "bytes": 2523,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-82307d5498a4432a/source/source-manifest.json",
+      "sha256": "1ff4c01794202f7e5c12a794cf47479c6c63242f62f73c571c5b561432765876"
+    }
+  ],
+  "sources": [
+    {
+      "files": [
+        {
+          "bytes": 771921,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/regional-review-82307d5498a4432a/source/issue-396-scoped-geoboundaries-features.geojson",
+          "sha256": "5f02fac322a423dba305ddb4786a257a20a9b7b6df0aba88000d7315cb421d2b"
+        }
+      ],
+      "id": "geoboundaries-rus-adm2-2017",
+      "license": {
+        "status": "redistributable",
+        "terms": "Open Data Commons Open Database License 1.0; attribution and applicable share-alike obligations apply"
+      },
+      "limit": "Layer-level ADM2 and canonical Raion metadata do not establish feature-specific legal role or current boundaries; full object reports 2328 while file has 2327 features.",
+      "restoration": "Full 120,489,189-byte LFS object restoration URL and verified OID are in source/RESTORE.md and the LFS pointer.",
+      "retention": "retained",
+      "retrieved_at": "2026-10-05 America/Los_Angeles",
+      "role": "Pinned source collection and exact scoped original feature extract",
+      "temporal_status": "reference",
+      "url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09/releaseData/gbOpen/RUS/ADM2",
+      "verification": "verified",
+      "vintage": "boundaryYear 2017; source data update 2023-03-03; build 2023-12-12"
+    },
+    {
+      "id": "kemerovo-admin-territorial-law-215-oz",
+      "license": {
+        "status": "unknown",
+        "terms": "Reference archive; reuse terms for hosted consolidation not established"
+      },
+      "limit": "Secondary archive and not a verified current consolidated legal register.",
+      "restoration": "Use RESTORE.md to retrieve regional archive, then verify effective version and official publication/register.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-05 America/Los_Angeles",
+      "role": "Regional administrative-territorial definitions and register reference",
+      "temporal_status": "reference",
+      "url": "https://www.kemer-gov.ru/doc/12311",
+      "verification": "unverified",
+      "vintage": "Law adopted 2007, later amendments; current register snapshot not retained"
+    },
+    {
+      "id": "kemerovo-municipal-law-104-oz",
+      "license": {
+        "status": "unknown",
+        "terms": "Third-party compilation terms for hosted PDF unclear; PDF not redistributed"
+      },
+      "limit": "Secondary-hosted consolidated copy; no legal boundary overlay was run.",
+      "restoration": "Document title, portal, inspected PDF hash/size and text-extraction hash are in source/RESTORE.md. Retrieve and verify official promulgation before boundary use.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-05 America/Los_Angeles",
+      "role": "Consolidated municipal status and boundary-description reference",
+      "temporal_status": "reference",
+      "url": "https://mgis42.ru/",
+      "verification": "unverified",
+      "vintage": "Consolidated through 2025-05-05 (inspected copy)"
+    },
+    {
+      "id": "kemerovo-law-46-oz-2024",
+      "license": {
+        "status": "unknown",
+        "terms": "Public legal text; reuse terms not separately evaluated"
+      },
+      "limit": "Publication title identified from portal indexing; no official text or boundary data retained.",
+      "restoration": "Official publication ID and URL are recorded in README.md and source/RESTORE.md; portal fetch timed out during this research.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-05 America/Los_Angeles",
+      "role": "Official publication of the 2024 Leninsk-Kuznetsky/Polysaevo merger law",
+      "temporal_status": "reference",
+      "url": "https://publication.pravo.gov.ru/document/4200202405070003",
+      "verification": "unverified",
+      "vintage": "Effective 2024-05-07"
+    },
+    {
+      "id": "kemerovo-law-47-oz-2024",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms not established"
+      },
+      "limit": "Not official promulgator (page disclaims official publication); specific current legal category/name changes need official-source confirmation, and boundary correspondence remains unverified.",
+      "restoration": "Secondary page URL and official-source verification requirement are in README.md and source/RESTORE.md.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-05 America/Los_Angeles",
+      "role": "Secondary legal text describing 2024 municipal status changes and mergers; includes Mezhdurechensk status continuity and municipal-okrug reorganizations",
+      "temporal_status": "reference",
+      "url": "https://kemerovo-pravo.ru/zakon/2024/05/06/n-47-oz/",
+      "verification": "unverified",
+      "vintage": "Effective 2024-06-01"
+    },
+    {
+      "id": "kemerovo-law-45-oz-2025",
+      "license": {
+        "status": "unknown",
+        "terms": "Public legal text; reuse terms not separately evaluated"
+      },
+      "limit": "No original text or current legal boundary dataset retained; 2017 polygon crosswalk unresolved.",
+      "restoration": "Official publication ID and URL are in README.md and source/RESTORE.md; portal fetch timed out during this research.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-05 America/Los_Angeles",
+      "role": "Official publication of Tashtagol municipal reorganization law",
+      "temporal_status": "reference",
+      "url": "https://publication.pravo.gov.ru/document/4200202504250005",
+      "verification": "unverified",
+      "vintage": "2025-04-23 act; conversion of municipalities within Tashtagol district"
+    }
+  ],
+  "stages": {
+    "geographic_approval": "unapproved",
+    "implementation": "proposed",
+    "research": "complete"
+  },
+  "subject_ids": [
+    "gb:RUS:ADM2:50074027B1492213945391",
+    "gb:RUS:ADM2:50074027B15875512450628",
+    "gb:RUS:ADM2:50074027B18065649680617",
+    "gb:RUS:ADM2:50074027B18536602285327",
+    "gb:RUS:ADM2:50074027B19670057495733",
+    "gb:RUS:ADM2:50074027B23127585958078",
+    "gb:RUS:ADM2:50074027B240190989633",
+    "gb:RUS:ADM2:50074027B25441119122085",
+    "gb:RUS:ADM2:50074027B30265298325170",
+    "gb:RUS:ADM2:50074027B36203097899253",
+    "gb:RUS:ADM2:50074027B38623141020563",
+    "gb:RUS:ADM2:50074027B38959530986524",
+    "gb:RUS:ADM2:50074027B40188766482905",
+    "gb:RUS:ADM2:50074027B43295410391390",
+    "gb:RUS:ADM2:50074027B45476358417172",
+    "gb:RUS:ADM2:50074027B45605769470318",
+    "gb:RUS:ADM2:50074027B47936450781023",
+    "gb:RUS:ADM2:50074027B51538172041047",
+    "gb:RUS:ADM2:50074027B53133560580416",
+    "gb:RUS:ADM2:50074027B54038498434692",
+    "gb:RUS:ADM2:50074027B56335043300988",
+    "gb:RUS:ADM2:50074027B58317509577397",
+    "gb:RUS:ADM2:50074027B63547042930047",
+    "gb:RUS:ADM2:50074027B67807179286813",
+    "gb:RUS:ADM2:50074027B68857930512633",
+    "gb:RUS:ADM2:50074027B69615341677340",
+    "gb:RUS:ADM2:50074027B75899917936695",
+    "gb:RUS:ADM2:50074027B80918234910176",
+    "gb:RUS:ADM2:50074027B81404523922595",
+    "gb:RUS:ADM2:50074027B81878047899134",
+    "gb:RUS:ADM2:50074027B85685002230937",
+    "gb:RUS:ADM2:50074027B86929320275974",
+    "gb:RUS:ADM2:50074027B94992557454451",
+    "gb:RUS:ADM2:50074027B99284789446769"
+  ],
+  "subject_ids_sha256": "389cd366b1ec7f67f531a4d37deecb70cef6f2ba1b751a5e74e3b540ab78a8dd",
+  "summaries": [],
+  "version": 1,
+  "worker_id": "01a10947-7d6e-7ba2-98a1-a9f91dedabfc"
+}
