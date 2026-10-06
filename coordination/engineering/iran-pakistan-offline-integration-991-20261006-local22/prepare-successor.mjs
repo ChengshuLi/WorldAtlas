@@ -16,7 +16,7 @@ const [migrationName,outName]=process.argv.slice(2),out=path.resolve(root,outNam
 if(!migrationName?.startsWith(prefix+'/')||!out.startsWith(path.join(root,prefix)+path.sep)||fs.existsSync(out))throw Error('Committed migration and fresh owned output required');
 const head=execFileSync('git',['-C',root,'rev-parse','HEAD'],{encoding:'utf8'}).trim(),digest=raw=>createHash('sha256').update(raw).digest('hex');
 const producer=committedPreparationFiles(root,head,['package.json',prefix+'/prepare-successor.mjs','scripts/read-geographic-release-manifest.mjs',
-  'hosted/geographic-releases.js','hosted/store.js','scripts/native-ownership/native-preparation-guards.mjs']);
+  'hosted/geographic-releases.js','scripts/native-ownership/native-preparation-guards.mjs']);
 const migrationRaw=execFileSync('git',['-C',root,'show',head+':'+migrationName],{maxBuffer:32*1024*1024});
 if(!migrationRaw.equals(fs.readFileSync(path.join(root,migrationName))))throw Error('Commit migration evidence before preparing release');
 const migration=JSON.parse(migrationRaw),validationName=path.posix.dirname(migrationName)+'/validation.json';
@@ -84,7 +84,7 @@ write('release-7.json.gz',{release,ingestion_id:'geographic-release:'+id},'/api/
 let batch=[],first=0;
 for(const row of rows){
   const trial={release_id:id,memberships:[...batch,row],ingestion_id:id+':memberships:'+first};
-  if(Buffer.byteLength(JSON.stringify(trial))>900000){write(`7-memberships-${first}.json.gz`,{release_id:id,memberships:batch,ingestion_id:id+':memberships:'+first},'/api/geography/stage');first+=batch.length;batch=[];}
+  if(batch.length>=250||Buffer.byteLength(JSON.stringify(trial))>900000){write(`7-memberships-${first}.json.gz`,{release_id:id,memberships:batch,ingestion_id:id+':memberships:'+first},'/api/geography/stage');first+=batch.length;batch=[];}
   batch.push(row);
 }
 if(batch.length)write(`7-memberships-${first}.json.gz`,{release_id:id,memberships:batch,ingestion_id:id+':memberships:'+first},'/api/geography/stage');
