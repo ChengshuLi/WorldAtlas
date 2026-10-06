@@ -1,19 +1,20 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import {execFileSync} from 'node:child_process';
+import {readPinnedBuildFile} from './native-ownership/read-pinned-build-file.mjs';
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 import {ownershipMetadata} from '../src/ownership-method.js';
 
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 
-// Resolve the exact reviewed Git input, not a mutable working-tree substitute.
+// Resolve the exact reviewed byte pin from Git or a declared package snapshot.
 // Preserve its provenance and attach a separate deployment transport address.
 export async function packageNativeLatitudes({manifest, expectedReference, destination}) {
   const metadata = ownershipMetadata(manifest, {requireNative: true, expectedReference});
   const input = metadata.native_latitudes;
-  const bytes = execFileSync('git', ['show', `${input.commit}:${input.path}`],
-    {maxBuffer: 32 * 1024 * 1024});
+  let bytes;
+  try{bytes=readPinnedBuildFile({commit:input.commit,path:input.path,sha256:input.sha256,bytes:input.bytes});}
+  catch(cause){throw Error('Pinned native latitude input changed or unavailable',{cause});}
   if (bytes.length !== input.bytes || digest(bytes) !== input.sha256)
     throw Error('Pinned native latitude input changed');
   const decoded = gunzipSync(bytes, {maxOutputLength: input.decoded_bytes});

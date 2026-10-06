@@ -1,5 +1,6 @@
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
+import {inPackageImage,readPinnedBuildFile} from './read-pinned-build-file.mjs';
 import registry from './verified-candidates.json' with {type:'json'};
 import {NATIVE_METHOD} from '../../src/ownership-method.js';
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -42,6 +43,11 @@ export function requireVerifiedNativeSelection(manifest, manifestSha256, repo = 
     pin.role !== 'reviewed-exhaustive-native-rule-comparison' || pin.installation_approval !== false ||
     !/^coordination\/engineering\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9_.-]+\.json$/.test(pin.path))
     throw Error('Native selection requires a reviewed exhaustive comparison registration');
+  if(inPackageImage(repo)){
+    const bytes=readPinnedBuildFile({root:repo,commit:pin.commit,path:pin.path,sha256:pin.sha256});
+    validateNativeSelectionReceipt(manifest,manifestSha256,JSON.parse(bytes));
+    return {...pin,manifest_sha256:manifestSha256};
+  }
   const tree = execFileSync('git', ['-C', repo, 'ls-tree', '-z', pin.commit, '--', pin.path], {encoding:'utf8'});
   if (!/^100644 blob /.test(tree) || tree.slice(tree.indexOf('\t') + 1) !== pin.path + '\0')
     throw Error('Native comparison receipt must be an immutable ordinary blob');

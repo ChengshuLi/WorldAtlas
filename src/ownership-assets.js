@@ -4,6 +4,8 @@ import {unshuffleOwnershipBytes,decodeOwnershipVarints} from './ownership-codec.
 // Versioned static ownership assets. Uint32 words are encoded little-endian.
 export async function loadOwnershipAssets(manifest,fetcher=fetch,options={}){
   const metadata=ownershipMetadata(manifest,options);
+  // Preserve the decoded legacy grid shape; runWords is transport metadata.
+  if(manifest.method===undefined)delete metadata.runWords;
   if(manifest.version!==1&&manifest.version!==2)throw new Error('Unsupported ownership asset version');
   const coordinateBits=Math.ceil(Math.log2(manifest.size)),wordsPerRun=manifest.version===2?2:4;
   if(!Number.isInteger(manifest.size)||manifest.size<2||manifest.size>2**31||!Number.isSafeInteger(manifest.runWords)||manifest.runWords<0||manifest.runWords%wordsPerRun||(manifest.version===2&&manifest.coordinateBits!==coordinateBits)||!Array.isArray(manifest.parts))throw Error('Invalid ownership manifest');

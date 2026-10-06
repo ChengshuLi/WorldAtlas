@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import {execFileSync} from 'node:child_process';
+import {readPinnedBuildFile} from './native-ownership/read-pinned-build-file.mjs';
 import {createHash} from 'node:crypto';
 import {ownershipMetadata, NATIVE_METHOD} from '../src/ownership-method.js';
 import {requireVerifiedNativeSelection} from './native-ownership/require-verified-selection.mjs';
@@ -29,7 +29,7 @@ export async function selectBuildOwnership({manifestPath = 'data/canonical-grid/
       !/^[a-f0-9]{40}$/.test(pin.commit ?? '') || pin.path !== 'data/canonical-grid/bounds.json.gz' ||
       pin.sha256 !== manifest.bounds?.sha256)
       throw Error('Native grid requires immutable original bounds context');
-    bounds = execFileSync('git', ['show', `${pin.commit}:${pin.path}`], {maxBuffer: 32 * 1024 * 1024});
+    bounds = readPinnedBuildFile({commit:pin.commit,path:pin.path,sha256:pin.sha256});
   } else {
     if (manifest.bounds?.path !== 'bounds.json.gz') throw Error('Unsupported original bounds path');
     bounds = await fs.readFile(path.join(path.dirname(manifestPath), manifest.bounds.path));

@@ -2,17 +2,12 @@
 import {execFileSync} from 'node:child_process';import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 const digest=raw=>createHash('sha256').update(raw).digest('hex');
-export async function loadNativeSourceInputs(repo,commit,{readFile}={}){
+export async function loadNativeSourceInputs(repo,commit){
  if(!/^[a-f0-9]{40}$/.test(commit??''))throw Error('Immutable data commit required');
  const files=new Map();
  function read(name){
   if(!/^data\/[a-zA-Z0-9_./-]+$/.test(name)||name.split('/').some(p=>!p||p==='.'||p==='..'))
    throw Error('Unsafe native input path');
-  if(readFile){
-   const raw=Buffer.from(readFile(name,commit));
-   if(raw.length>32*1024*1024)throw Error('Original exceeds per-file byte budget');
-   files.set(name,{path:name,bytes:raw.length,sha256:digest(raw)});return raw;
-  }
   const tree=execFileSync('git',['-C',repo,'ls-tree','-z',commit,'--',name],{encoding:'utf8'});
   if(!tree.startsWith('100644 ')&&!tree.startsWith('100755 '))throw Error('Original must be an ordinary blob');
   if(tree.slice(tree.indexOf('\t')+1)!==name+'\0')throw Error('Original path differs');

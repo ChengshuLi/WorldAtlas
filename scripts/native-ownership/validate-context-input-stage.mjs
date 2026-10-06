@@ -8,13 +8,34 @@ import {fileURLToPath} from 'node:url';
 import {validateEvidence, repositoryReader, sha256, safeEvidencePath} from '../evidence-quality.mjs';
 import {loadNativeSourceInputs} from './native-only-inputs.mjs';
 import {compactContextInputs} from './compact-context-inputs.mjs';
+import {inPackageImage,readPinnedBuildFile} from './read-pinned-build-file.mjs';
 
 export const CONTEXT_STAGE_PATH='coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/evidence-quality.json';
 const need=(ok,message)=>{if(!ok)throw Error(message);};
-export async function validateContextInputStage({root=process.cwd(),readFile=repositoryReader(root),
+export async function validateContextInputStage({root=process.cwd(),readFile,
   manifestPath=CONTEXT_STAGE_PATH,expectedReference,loadSource=loadNativeSourceInputs}={}) {
  safeEvidencePath(manifestPath);
- const manifest=JSON.parse(readFile(manifestPath,'candidate'));
+ const ordinary=readFile??repositoryReader(root);
+ const manifest=JSON.parse(ordinary(manifestPath,'candidate'));
+ {
+  need(Array.isArray(manifest.immutable_snapshots),'Missing declared immutable package snapshots');
+  const snapshots=new Map();
+  const commits=new Set([manifest.baseline.commit,manifest.transform.original_commit,manifest.transform.generator_commit,manifest.transform.readback_commit]);
+  for(const pin of manifest.immutable_snapshots){
+   safeEvidencePath(pin.path);safeEvidencePath(pin.snapshot_path);
+   need(commits.has(pin.commit)&&manifest.baseline.files.some(f=>f.path===pin.path&&f.sha256===pin.sha256&&f.bytes===pin.bytes),
+    'Package snapshot lacks original byte binding');
+   need(pin.snapshot_path===pin.path||manifest.outputs.some(f=>f.path===pin.snapshot_path&&f.sha256===pin.sha256&&f.bytes===pin.bytes),
+    'Package code snapshot is not declared');
+   const key=pin.commit+':'+pin.path;need(!snapshots.has(key),'Duplicate immutable package snapshot');snapshots.set(key,pin);
+  }
+  if(!readFile&&inPackageImage(root))readFile=(name,vintage)=>{
+   if(vintage==='candidate')return ordinary(name,vintage);
+   const pin=snapshots.get(vintage+':'+name);need(pin,'Missing immutable package snapshot');
+   return readPinnedBuildFile({root,commit:vintage,path:name,snapshotPath:pin.snapshot_path,sha256:pin.sha256,bytes:pin.bytes});
+  };
+ };
+ readFile??=ordinary;
  need(manifest.issue===1010&&manifest.lane==='engineering','Wrong native context stage scope');
  need(manifest.transform?.kind==='original-native-to-compact-context-v1'&&!manifest.input_stages,
   'Unsupported or recursive context stage');
@@ -38,7 +59,15 @@ export async function validateContextInputStage({root=process.cwd(),readFile=rep
   assert.deepEqual(inventory.map(f=>f.path).sort(),[...commonCode,'scripts/native-ownership/'+entry].sort(),
    'Incomplete or duplicate executed context code closure');
  }
- const original=await loadSource(root,inputs.baseline_commit);
+ const expectedSnapshots=new Set([
+  ...manifest.baseline.files.map(f=>manifest.baseline.commit+':'+f.path),
+  ...inputs.source_files.map(f=>inputs.baseline_commit+':'+f.path),
+  ...inputs.executed_sources.map(f=>inputs.execution_commit+':'+f.path),
+  ...proof.executed_sources.map(f=>proof.verification_commit+':'+f.path)
+ ]);
+ assert.deepEqual(manifest.immutable_snapshots.map(f=>f.commit+':'+f.path).sort(),[...expectedSnapshots].sort(),
+  'Incomplete immutable package snapshot inventory');
+ const original=await loadSource(root,inputs.baseline_commit,{readFile});
  assert.deepEqual(inputs.source_files,original.sourceFiles);
  assert.deepEqual(proof.source_files,original.sourceFiles);
  for(const source of original.sourceFiles){
