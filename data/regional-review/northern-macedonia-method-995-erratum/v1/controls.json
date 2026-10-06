@@ -1,0 +1,36 @@
+{
+  "negative_code_control": {
+    "details": "altered expected runner SHA-256 rejected before any output is written",
+    "kind": "negative-control",
+    "method_id": "retained-source-area-comparison",
+    "outcome": "passed"
+  },
+  "negative_input_control": {
+    "details": "corrupted immutable input bytes rejected by exact size/SHA256 check",
+    "kind": "negative-control",
+    "method_id": "retained-source-area-comparison",
+    "outcome": "passed"
+  },
+  "negative_output_control": {
+    "details": "pre-existing output path rejected; original bytes remained unchanged",
+    "kind": "negative-control",
+    "method_id": "retained-source-area-comparison",
+    "outcome": "passed"
+  },
+  "positive_control": {
+    "details": "84 exact scoped pairs, 84 nonzero residuals, two byte-identical outputs",
+    "kind": "positive-control",
+    "method_id": "retained-source-area-comparison",
+    "outcome": "passed"
+  },
+  "reproducibility": {
+    "kind": "reproducibility",
+    "method_id": "retained-source-area-comparison",
+    "outcome": "passed",
+    "run_one_bytes": 21617,
+    "run_one_sha256": "d3d23c61368d3db4fb5acf049cfaff9f3533a1da7c37c5b96d02070d50b3fef3",
+    "run_two_bytes": 21617,
+    "run_two_sha256": "d3d23c61368d3db4fb5acf049cfaff9f3533a1da7c37c5b96d02070d50b3fef3"
+  },
+  "version": 1
+}
