@@ -1,0 +1,12 @@
+{
+  "method_id": "native-planar-validity",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "evidence": "native-topology-v1.json",
+  "controls": {
+    "negative_crossing": "Self-intersection[4 4]",
+    "negative_overlapping_parts": "Self-intersection[8 8]",
+    "positive_hole": "Valid Geometry"
+  },
+  "scope": "Positive native hole and negative crossed ring/overlapping parts, read-only GEOS validity; no repair."
+}

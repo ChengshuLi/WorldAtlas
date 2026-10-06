@@ -1,0 +1,13 @@
+{
+  "method_id": "native-canonical-row-comparison",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "command": "node --test --test-reporter=tap test/native-grid.test.mjs",
+  "exit_code": 0,
+  "evidence": "controls-test-output.txt",
+  "tests_passed": 8,
+  "scope": "Actual application collinear gap; independent orientation all-cell oracle; holes/islands/overlap/true omissions; exact ties; partitioning; dateline/polar; tiny features; malformed arguments.",
+  "limits": [
+    "Numerical/source preservation controls do not establish physical water or geography truth."
+  ]
+}
