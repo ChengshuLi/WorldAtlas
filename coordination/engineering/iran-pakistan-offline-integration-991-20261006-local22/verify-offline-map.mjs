@@ -77,9 +77,14 @@ async function settled(page){
   await page.waitForFunction(()=>{
     const canvas=document.querySelector('.atlas-pixel-canvas');
     const transform=new DOMMatrixReadOnly(getComputedStyle(canvas).transform);
-    return Math.abs(transform.a-1)<1e-6&&Math.abs(transform.d-1)<1e-6;
+    const rect=canvas.getBoundingClientRect(),map=document.querySelector('#map').getBoundingClientRect();
+    // A translated cache also has scale 1. It is current only once the newly
+    // sampled viewport covers the map again (Canvas pads its frame by 2 cells).
+    return Math.abs(transform.a-1)<1e-6&&Math.abs(transform.d-1)<1e-6&&
+      rect.left<=map.left+1&&rect.top<=map.top+1&&rect.right>=map.right-1&&rect.bottom>=map.bottom-1;
   });
   await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+  await page.waitForFunction(()=>!document.querySelector('#map.leaflet-zoom-anim,#map .leaflet-zoom-anim,#map .leaflet-pan-anim'));
 }
 async function gpuOwners(page){
   return page.evaluate(cells=>{
@@ -182,13 +187,17 @@ try{
           const nearest=camera.samples.find(c=>c.x===anchor.x&&c.y===anchor.y);
           assert.ok(nearest,'Both renderers must focus the same supported geographic cell');
           await page.mouse.move(...center);await page.mouse.down();
-          await page.mouse.move(center[0]+center[0]-nearest.screen[0],center[1]+center[1]-nearest.screen[1],{steps:12});await page.mouse.up();await settled(page);
+          // One actual drag update gives Leaflet one velocity sample, so its
+          // public drag-end path skips inertia. Twelve fast updates add a fling
+          // beyond this computed anchor; later zooms amplify that camera error.
+          await page.mouse.move(center[0]+center[0]-nearest.screen[0],center[1]+center[1]-nearest.screen[1],{steps:1});await page.mouse.up();await settled(page);
           for(let step=0;step<8;step++){
             camera=await screenSamples(page,renderer,eligible);if(camera.scale>=4)break;
             const frame=await page.locator('.atlas-pixel-canvas').getAttribute('data-frame');await page.locator('#zoom-in').click();
             await page.waitForFunction(old=>document.querySelector('.atlas-pixel-canvas').dataset.frame!==old,frame);await settled(page);
           }
         }
+        camera=await screenSamples(page,renderer,eligible);
         assert.ok(camera.scale>=4&&camera.samples.length,'Independent click probes require visible cells at least four screen pixels wide');
         const probes=[camera.samples[0],camera.samples[Math.floor(camera.samples.length/2)],camera.samples.at(-1)];
         const picks=[];
