@@ -2,7 +2,7 @@
 
 **Issue:** #1152; bounded follow-up to #980 / PR #988
 **Research date:** 2026-10-06 UTC
-**Current branch/evidence baseline:** `301b19178f940a9f6e8bf3d17901c96bc1d8a3c7` (rebased from the initial fresh-main base `a32ae163473a42ed28d7bedf7e9930414beb54f8`; all 57 issue-declared input hashes were rechecked unchanged).
+**Current branch/evidence baseline:** `72029cd16057199be441058c69dd783604541100` (rebased from the initial fresh-main base `a32ae163473a42ed28d7bedf7e9930414beb54f8`; all 57 issue-declared input hashes were rechecked unchanged after each base advance).
 **Scope:** exactly eight existing Georgia county IDs; no geometry edits or legal boundary determination.
 **Owned path:** `data/regional-review/coastal-reference-reproduction-980/`
 

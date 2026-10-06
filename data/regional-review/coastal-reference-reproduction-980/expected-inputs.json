@@ -2,7 +2,7 @@
   "schema": "coastal-input-guards:v1",
   "source_issue": 1152,
   "source_issue_baseline": "360f2058a39081319c65ecc68fc6b0a060600e41",
-  "verified_branch_base": "301b19178f940a9f6e8bf3d17901c96bc1d8a3c7",
+  "verified_branch_base": "72029cd16057199be441058c69dd783604541100",
   "verification": "Issue-declared whole-file pins; all 57 matched in the fresh branch checkout before reproduction. The branch-base hashes must be independently rechecked by the reproducer.",
   "inputs": [
     {
@@ -351,6 +351,6 @@
   "reproduction_program": {
     "path": "data/regional-review/coastal-reference-reproduction-980/reproduce.py",
     "bytes": 15859,
-    "sha256": "c1dc7d94a66b463ea781f4acfb6cb31584d7ead3b951198abae1ae9893272946"
+    "sha256": "be7d84a1d75663c5169dca35cd530018f17d079b3f24e0527a08b190cb1c4493"
   }
 }

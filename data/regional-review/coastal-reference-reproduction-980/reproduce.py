@@ -19,7 +19,7 @@ REPO = ROOT.parents[2]
 sys.path.insert(0, str(REPO))
 sys.path.insert(0, str(REPO / "scripts"))
 INPUTS = ROOT / "expected-inputs.json"
-BASE = "301b19178f940a9f6e8bf3d17901c96bc1d8a3c7"
+BASE = "72029cd16057199be441058c69dd783604541100"
 SUBJECTS = {
     "13051": ("gb:USA:ADM2:52423323B68249799438553", "Chatham"),
     "13127": ("gb:USA:ADM2:52423323B35006791438696", "Glynn"),
