@@ -1,0 +1,21 @@
+{
+  "method_id": "bounded-reproduction",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "checks": [
+    "61 exact baseline inputs verified",
+    "207 subjects occur exactly once in Atlas and the respective source layer",
+    "all 34 pinned Atlas geometry parts consumed",
+    "fresh isolated staged execution completed",
+    "output matches the retained historical crosswalk"
+  ],
+  "run_ids": [
+    "run-author-b",
+    "run-author-c"
+  ],
+  "output_sha256": [
+    "5c231dddec6314f50dbf18df3a55f5bd2fe0d74b7ddd51189650d2914fe749ec",
+    "5c231dddec6314f50dbf18df3a55f5bd2fe0d74b7ddd51189650d2914fe749ec"
+  ],
+  "historical_sha256": "5c231dddec6314f50dbf18df3a55f5bd2fe0d74b7ddd51189650d2914fe749ec"
+}
