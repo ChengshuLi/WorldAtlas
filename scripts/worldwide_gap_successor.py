@@ -369,7 +369,8 @@ def run(repo, selected, output):
         (output/name).parent.mkdir(parents=True,exist_ok=True);(output/name).write_bytes(raw)
         products.append({**descriptor(name,raw),'uncompressed_bytes':len(decode(raw)),'uncompressed_sha256':digest(decode(raw))})
     emit('source-custody.json',custody)
-    emit('source-feature-bindings.json.gz',feature_proof)
+    for start in range(0,len(feature_proof),10000):
+        emit(f'source-feature-bindings-{start//10000:02d}.json.gz',feature_proof[start:start+10000])
     emit('tile-queries.json.gz',tile_rows)
     for name,delta in deltas.items():
         emit(name+'-delta.json.gz',delta)
