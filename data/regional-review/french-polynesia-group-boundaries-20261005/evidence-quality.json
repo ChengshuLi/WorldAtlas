@@ -865,13 +865,13 @@
   "validation": [
     {
       "method_id": "daf-island-crosswalk-and-geometry-v1",
-      "kind": "geography",
+      "kind": "positive-control",
       "outcome": "passed",
       "evidence_path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/positive-controls.json"
     },
     {
       "method_id": "daf-island-crosswalk-and-geometry-v1",
-      "kind": "geography",
+      "kind": "negative-control",
       "outcome": "passed",
       "evidence_path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/negative-controls.json"
     }
