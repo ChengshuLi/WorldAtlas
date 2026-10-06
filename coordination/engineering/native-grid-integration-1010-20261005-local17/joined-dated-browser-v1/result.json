@@ -1,0 +1,34 @@
+{
+  "kind": "joined-native-dated-worker-renderer-control",
+  "main_source_sha256": "d13cf96832af5b4553e4f63b77a2482692a5ed9aa6fbd9e9812040f4fbe2aa3a",
+  "observations": [
+    {
+      "renderer": "gpu",
+      "actual_main_year_and_rebuild": true,
+      "actual_browser_native_worker": true,
+      "removed_ID_and_changed_geometry": true,
+      "real_hole_preserved": true,
+      "same_count_ID_replacement": true,
+      "dense_ID_pick_and_palette": true,
+      "stale_year_canceled": true,
+      "reference_restored": true,
+      "worker_cleanup": true
+    },
+    {
+      "renderer": "canvas",
+      "actual_main_year_and_rebuild": true,
+      "actual_browser_native_worker": true,
+      "removed_ID_and_changed_geometry": true,
+      "real_hole_preserved": true,
+      "same_count_ID_replacement": true,
+      "dense_ID_pick_and_palette": true,
+      "stale_year_canceled": true,
+      "reference_restored": true,
+      "worker_cleanup": true
+    }
+  ],
+  "limits": [
+    "Synthetic bounded localhost fixture; actual main year/rebuild functions, worker/client and renderers; other UI and data endpoints isolated.",
+    "Software WebGL2 and Canvas correctness only, not broad dated-boundary or device performance, factual geography or delivery."
+  ]
+}
