@@ -11,7 +11,7 @@ import tempfile
 import unittest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
 from evidence.exact_predicates import (DiagnosticError, MAX_SEGMENTS, context, diagnose,
-                                      point, prepare_geometry, geometry_state, ring_state, segment_certificate)
+                                      point, prepare_geometry, geometry_state, ring_state, segment_certificate, read_inputs, original_segment)
 
 CONTEXT = {'crs': 'local:test-cartesian', 'axis_order': ['x', 'y'],
            'numeric_vintage': 'analytic-binary64-v1', 'coordinate_encoding': 'IEEE754-binary64'}
@@ -117,6 +117,14 @@ class Predicates(unittest.TestCase):
             self.assertEqual(points['outside']['status'], 'outside-gap')
             self.assertNotIn('owner', json.dumps(result))
             self.assertEqual(request, before)
+            prepared, _ = read_inputs(Path(directory), request)
+            reference = {'role': 'first', 'member_id': 'first-0', 'source_sha256': request['files'][1]['sha256'],
+                         'polygon_index': 0, 'ring_index': 0, 'segment_index': 0}
+            resolved = original_segment(prepared, reference, CONTEXT)
+            self.assertEqual(resolved['endpoints'], [[.5, .5], [2.5, .5]])
+            for key, value in [('source_sha256', '0' * 64), ('segment_index', -1), ('member_id', 'missing')]:
+                changed = dict(reference); changed[key] = value
+                with self.assertRaises(DiagnosticError): original_segment(prepared, changed, CONTEXT)
             self.assertEqual(result['geometry_acceptance'], 'not-assessed')
 
     def test_byte_vertex_member_crs_vintage_and_unknown_negative_controls(self):
@@ -128,6 +136,9 @@ class Predicates(unittest.TestCase):
             changed = copy.deepcopy(request); changed['collections']['first']['member_ids'].pop()
             self.assertEqual(diagnose(root, changed)['reason'], 'omitted-duplicate-or-altered-member-closure')
             raw = (root / 'first.json').read_bytes(); doc = json.loads(raw)
+            omitted = copy.deepcopy(doc); omitted['features'][0]['geometry']['coordinates'][0].pop(1)
+            (root / 'first.json').write_text(json.dumps(omitted))
+            self.assertEqual(diagnose(root, request)['reason'], 'original-byte-pin-mismatch')
             doc['features'][0]['geometry']['coordinates'][0][1][0] = 2.6
             (root / 'first.json').write_text(json.dumps(doc))
             self.assertEqual(diagnose(root, request)['reason'], 'original-byte-pin-mismatch')

@@ -219,6 +219,15 @@ def segment_certificate(first, second, exported=None):
     return result
 
 
+def unique_json_object(pairs):
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            reject('duplicate-json-object-key')
+        result[key] = value
+    return result
+
+
 def read_inputs(root, request):
     """Whole-byte custody plus complete original FeatureCollection member closure."""
     declared_context = context(request.get('context'))
@@ -255,7 +264,7 @@ def read_inputs(root, request):
         if descriptor.get('provider_id') != collections[role].get('provider_id'):
             reject('provider-closure-mismatch', 'unknown')
         try:
-            doc = json.loads(raw)
+            doc = json.loads(raw, object_pairs_hook=unique_json_object)
         except (ValueError, UnicodeError):
             reject('invalid-source-json')
         if not isinstance(doc, dict):

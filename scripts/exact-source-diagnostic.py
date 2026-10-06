@@ -3,7 +3,7 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
-from evidence.exact_predicates import MAX_FILE_BYTES, DiagnosticError, diagnose, segment_certificate, read_inputs, original_segment
+from evidence.exact_predicates import MAX_FILE_BYTES, DiagnosticError, diagnose, segment_certificate, read_inputs, original_segment, unique_json_object
 
 
 def run(root, request_path, output):
@@ -11,7 +11,7 @@ def run(root, request_path, output):
     if not request_path.is_file() or request_path.stat().st_size > MAX_FILE_BYTES:
         raise ValueError('Missing or oversized request')
     raw = request_path.read_bytes()
-    request = json.loads(raw)
+    request = json.loads(raw, object_pairs_hook=unique_json_object)
     if not isinstance(request, dict) or request.get('version') != 1:
         raise ValueError('Expected version 1 request')
     certificates = request.get('crossings', [])
