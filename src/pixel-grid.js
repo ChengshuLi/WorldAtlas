@@ -7,8 +7,9 @@ export function projectCell(lon,lat){
   const s=Math.sin(Math.max(-85.05112878,Math.min(85.05112878,lat))*Math.PI/180);
   return [(lon+180)/360*GRID_WIDTH,(.5-Math.log((1+s)/(1-s))/(4*Math.PI))*GRID_WIDTH];
 }
-export function createGridIndex(features){
-  return [...features].sort((a,b)=>a.pixelIndex&&b.pixelIndex?a.pixelIndex-b.pixelIndex:a.id.localeCompare(b.id)).map((feature,index)=>{
+export function createGridIndex(features,{ordered=false}={}){
+  const orderedFeatures=ordered?[...features]:[...features].sort((a,b)=>a.pixelIndex&&b.pixelIndex?a.pixelIndex-b.pixelIndex:a.id.localeCompare(b.id));
+  return orderedFeatures.map((feature,index)=>{
     if(!feature.geometry&&feature.gridBounds)return {feature,index:index+1,polygons:[],bounds:feature.gridBounds};
     let minX=Infinity,minY=Infinity,maxX=-Infinity,maxY=-Infinity;
     const raw=feature.geometry.type==='Polygon'?[feature.geometry.coordinates]:feature.geometry.coordinates;

@@ -14,6 +14,9 @@ import { PixelLayer } from './pixel-layer.js';
 import {installWheelZoom} from './wheel-zoom.js';
 import {locationInventoryChanged,boundaryFootprintsChanged} from './pixel-metadata.js';
 import { GRID_ZOOM } from './pixel-grid.js';
+import {NATIVE_METHOD} from './ownership-method.js';
+import {nativeDisplayContext} from './native-location-context.js';
+import {prepareNativeLocationContext} from './native-context-client.js';
 const $ = selector => document.querySelector(selector);
 const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const labels = { owner:'Political', culture:'Culture', religion:'Religion', population:'Population', rank:'Location rank', topography:'Topography', vegetation:'Vegetation', climate:'Climate', ...Object.fromEntries(levels.map(l => [l,l[0].toUpperCase()+l.slice(1)])) };
@@ -139,11 +142,12 @@ function select(id, zoom = false) {
   layers.get(id)?.bringToFront();
   if (zoom) map.fitBounds(layers.get(id).getBounds(), {padding:[60,60], maxZoom:13});
 }
-function rebuildGeometry() {
+function rebuildGeometry(preparedNative) {
   if (geoLayer) map.removeLayer(geoLayer);
-  geoLayer=new PixelLayer(data.features.map(f=>({...f,geometry:boundaries.get(f.id)?.geometry || f.geometry})),{
+  geoLayer=new PixelLayer(preparedNative?.features??data.features.map(f=>({...f,geometry:boundaries.get(f.id)?.geometry || f.geometry})),{
     coverage:referenceData.coverage,
-    ownership:!boundaries.size&&data.features.length===referenceData.features.length?referenceData.ownership:null,
+    ownership:preparedNative?.grid??(!boundaries.size&&!locationInventoryChanged(referenceData.features,data.features)?referenceData.ownership:null),
+    orderedOwners:!!preparedNative,
     color,selected:()=>selected,select:id=>select(id),locationBorders:()=>true,
     politicalColor:f=>categoryColor(f.properties.name),
     borderKey:f=>mode==='owner'?(state(f).category_ids?.owner??null):['area','region','subcontinent','continent'].includes(mode)?value(f):null,
@@ -178,18 +182,30 @@ async function loadYear(next) {
     const result=await loadSnapshot(next, $('#examples').checked, signal);
     const temporalReference=result.evidenceUnavailable?{...referenceData,temporal:{...referenceData.temporal,history:[]}}:result.temporalHistoryComplete?{...referenceData,temporal:{...referenceData.temporal,history:result.temporal_history}}:result.temporal_history?.length?{...referenceData,temporal:{...referenceData.temporal,history:[...(referenceData.temporal.history||[]),...result.temporal_history]}}:referenceData;
     let resolved=resolveTemporal(temporalReference,next,$('#examples').checked);
-    if(result.boundaries.length||resolved.features.length!==referenceData.features.length){await ensureGeometry(referenceData,signal);resolved=resolveTemporal(temporalReference,next,$('#examples').checked);}
+    if(result.boundaries.length||locationInventoryChanged(referenceData.features,resolved.features)){await ensureGeometry(referenceData,signal);resolved=resolveTemporal(temporalReference,next,$('#examples').checked);}
+    const nextBoundaries=new Map(result.boundaries.map(b=>[b.location_id,b]));
+    const changed=boundaryFootprintsChanged(boundaries,nextBoundaries)||locationInventoryChanged(data.features,resolved.features);
+    let preparedNative;
+    if(changed&&referenceData.ownership?.method===NATIVE_METHOD){
+      const effective=resolved.features.map(f=>({...f,geometry:nextBoundaries.get(f.id)?.geometry??f.geometry}));
+      const context=nativeDisplayContext(referenceData.features,effective);
+      if(!nextBoundaries.size&&!locationInventoryChanged(referenceData.features,resolved.features)){
+        preparedNative={grid:referenceData.ownership,features:context.features};
+      }else{
+        $('#loading').textContent=`Preparing geographic boundaries for ${formatYear(next)}…`;
+        const prepared=await prepareNativeLocationContext({referenceFeatures:referenceData.features,features:effective,
+          base:referenceData.ownership,latitudes:referenceData.nativeLatitudes},{signal});
+        preparedNative={grid:prepared.grid,features:prepared.context.features};
+      }
+    }
     signal.throwIfAborted();year=next;temporal=resolved;
-    const previousFeatures=data.features;
     data={...referenceData,units:temporal.units,features:temporal.features};
     parents=new Map(data.units.map(u=>[u.id,u]));features=new Map(data.features.map(f=>[f.id,f]));
     for(const e of temporal.entities.values())if(e.kind==='settlement'&&features.has(e.parent_id)){const p=features.get(e.parent_id).properties;p.settlement_search=[...(p.settlement_search||[]),...e.search_names];}
     polities=[];
     states=resolveAttributes(data.features,year,{states:result.states,records:result.attributes||[],temporal,examples:$('#examples').checked,evidenceAvailable:!result.evidenceUnavailable,referenceBaselines:result.referenceBaselines||[],referenceContexts:result.referenceContexts});
-    const nextBoundaries=new Map(result.boundaries.map(b=>[b.location_id,b]));
-    const changed=boundaryFootprintsChanged(boundaries,nextBoundaries)||locationInventoryChanged(previousFeatures,data.features);
     boundaries=nextBoundaries;
-    if(changed)rebuildGeometry();
+    if(changed)rebuildGeometry(preparedNative);
     else geoLayer.updateMetadata(data.features);
     $('#results').innerHTML='';
     render(); $('#loading').hidden=true;

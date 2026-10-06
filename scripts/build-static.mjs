@@ -81,6 +81,7 @@ try {
   }
   if(fixedGrid?.version===2){const transport=await packageStartupOwnership({manifest:fixedGrid,source:selectedGrid.source,destination:'dist'});Object.assign(pixelMap,transport.pixelMap);}
   if(fixedGrid?.method){const latitude=await packageNativeLatitudes({manifest:fixedGrid,expectedReference:geographicRelease,destination:'dist'});pixelMap.native_latitudes=latitude.native_latitudes;}
+  if(fixedGrid?.method)pixelMap.reference_owner_sha256=createHash('sha256').update(JSON.stringify(gridIndex.map(item=>[item.index,item.feature.id]))).digest('hex');
   const catalog=gridIndex.map(({feature,index,bounds})=>({...feature,geometry:null,pixelIndex:index,gridBounds:bounds}));
   const catalogParts=[];
   for(let i=0;i<catalog.length;i+=1500){const path=`geography/catalog-${i/1500}.json.gz`;catalogParts.push(path);await fs.writeFile(`dist/${path}`,gzipSync(JSON.stringify(catalog.slice(i,i+1500)),{level:9}));}

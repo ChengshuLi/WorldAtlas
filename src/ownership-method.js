@@ -30,6 +30,10 @@ export function ownershipMetadata(manifest, {requireNative = false, expectedRefe
     output.footprints_sha256 = manifest.footprints_sha256;
     output.hierarchy_sha256 = manifest.hierarchy_sha256;
     output.geographic_release = manifest.geographic_release;
+    if (manifest.reference_owner_sha256 !== undefined) {
+      if (!hash(manifest.reference_owner_sha256)) throw Error('Invalid native reference owner mapping');
+      output.reference_owner_sha256 = manifest.reference_owner_sha256;
+    }
     output.method = NATIVE_METHOD;
     output.native_latitudes = {...latitude};
   }
