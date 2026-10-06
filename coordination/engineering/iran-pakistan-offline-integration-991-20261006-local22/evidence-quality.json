@@ -680,6 +680,13 @@
       }
     },
     {
+      "path": "coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22/packaged-coverage-regression-verification-v1.json",
+      "bytes": 3005,
+      "sha256": "7d3020fde52873c494100cc91a19e6bc589ab2cf7feafd2e25b5c7cb0f05460b",
+      "hash_kind": "file-bytes",
+      "role": "candidate-whole-file"
+    },
+    {
       "path": "coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22/physical-binding-v1/verification.json",
       "bytes": 15246,
       "sha256": "f8215ee06e649b8477ed93b1f9f6883d499b0ec4459287f133061dd3cb642fb6",
@@ -5157,6 +5164,13 @@
       }
     },
     {
+      "path": "test/compact-ownership.test.mjs",
+      "bytes": 15017,
+      "sha256": "46dd960151af4457f202fe422387cbe0c5229f87bdf4bca66099f6dc74f17795",
+      "hash_kind": "file-bytes",
+      "role": "candidate-whole-file"
+    },
+    {
       "path": "test/coverage-product.test.mjs",
       "bytes": 1888,
       "sha256": "cf76fb9cc76bdc587eca5a84afef5e9c558357c7e06b24df3125f0f3a65d5713",
@@ -5339,6 +5353,10 @@
     },
     {
       "path": "coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22/ownership-delivery-verification-v1.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22/packaged-coverage-regression-verification-v1.json",
       "status": "added"
     },
     {
@@ -6776,6 +6794,11 @@
       "original_sha256": "d13cf96832af5b4553e4f63b77a2482692a5ed9aa6fbd9e9812040f4fbe2aa3a"
     },
     {
+      "path": "test/compact-ownership.test.mjs",
+      "status": "modified",
+      "original_sha256": "7e88d260c4ea8cf32d5393659c06ea6f354b1fa0ced19723b28b01ac19423670"
+    },
+    {
       "path": "test/coverage-product.test.mjs",
       "status": "modified",
       "original_sha256": "ca8444003dfd32b8a0bbc7eaf6c731b944722e0190bc95d3880f03a966e460fd"
@@ -6929,10 +6952,10 @@
     "geographic_approval": "unapproved"
   },
   "commands": [
-    "node coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22/prepare-final-evidence.mjs --worker-id 01a10893-2a57-72e0-aa08-5c36088d5206 --replace-manifest b21cb266f455a8b1229894733e9be8d8b63019c42486613db7701b89ee5872d4"
+    "node coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22/prepare-final-evidence.mjs --worker-id 01a10893-2a57-72e0-aa08-5c36088d5206 --replace-manifest bdba9a84e77199252d88eb010bd40805b52d36c7b6965db61bef0b341c8ee20f"
   ],
   "preparation": {
-    "execution_commit": "5c7f39647d6f795f4f7701a2fc767aff8f8e9afb",
+    "execution_commit": "2c4dbd90a0ec5290b323b07cb0a0a1eb7dffd009",
     "prototype_archive_commit": "a6c966993e8e5c48912fa8ac9dc0b720f71130bb",
     "producer": [
       {
@@ -7002,10 +7025,10 @@
       }
     ],
     "previous_manifest": {
-      "commit": "5c7f39647d6f795f4f7701a2fc767aff8f8e9afb",
+      "commit": "2c4dbd90a0ec5290b323b07cb0a0a1eb7dffd009",
       "path": "coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22/evidence-quality.json",
-      "bytes": 326930,
-      "sha256": "b21cb266f455a8b1229894733e9be8d8b63019c42486613db7701b89ee5872d4"
+      "bytes": 335097,
+      "sha256": "bdba9a84e77199252d88eb010bd40805b52d36c7b6965db61bef0b341c8ee20f"
     },
     "runtime": {
       "node": "v24.19.0",
@@ -7015,19 +7038,19 @@
     "trusted_validator_baseline": "e4edec12c7238be7a803cd01bf264ee0ac840aea",
     "validation_scope": "Local exact-file fixture using trusted PR-base validators; not a GitHub contract check, independent review, factual approval or deployment",
     "descriptor_budget": {
-      "accounted_bytes": 190991934,
-      "accounted_descriptors": 398,
+      "accounted_bytes": 191009956,
+      "accounted_descriptors": 400,
       "reserved_review_bytes": 131072,
       "reserved_review_descriptors": 16,
       "limit_bytes": 268435456,
       "limit_descriptors": 512,
       "limits_include_reserve": true
     },
-    "trusted_remote_reader_bytes": 265516308,
+    "trusted_remote_reader_bytes": 265548262,
     "original_change_bytes_included": true,
     "local_selfcheck": {
       "status": "limited",
-      "changed_files_checked": 376,
+      "changed_files_checked": 378,
       "metric_bindings_checked": 3,
       "limits": [
         "osm-saravan-relation-6555069: Original retrieval dates and element timestamps are retained independently. ODbL attribution remains required; this engineering integration does not establish source authority, historical membership, a supported interval, unknown-cell water status, or publication approval.",
