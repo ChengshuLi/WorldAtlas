@@ -12,6 +12,7 @@ from collections import defaultdict
 import shapely
 from shapely.geometry import mapping, shape, box
 from shapely.strtree import STRtree
+from shapely.affinity import translate
 from evidence.immutable import canonical_json, deterministic_gzip
 from evidence.geometry import land_area_m2
 from geographic_components import components
@@ -35,6 +36,8 @@ def coordinate_bytes(value):
         number = float(value)
         if not math.isfinite(number):
             raise ValueError('Nonfinite coordinate')
+        if isinstance(value,int) and int(number)!=value:
+            raise ValueError('Coordinate integer cannot convert exactly to binary64')
         return b'd' + struct.pack('>d', number)
     if isinstance(value, (list, tuple)):
         return b'[' + struct.pack('>Q', len(value)) + b''.join(coordinate_bytes(x) for x in value) + b']'
@@ -43,6 +46,58 @@ def coordinate_bytes(value):
     if isinstance(value, str):
         return b's' + canonical_json(value)
     raise ValueError('Unsupported geometry member')
+
+
+def numeric_metadata_bytes(value):
+    """Typed JSON relation allowing only exactly represented numeric spelling."""
+    if value is None:
+        return b'n'
+    if isinstance(value,bool):
+        return b't' if value else b'f'
+    if isinstance(value,(int,float)):
+        number=float(value)
+        if not math.isfinite(number):
+            raise ValueError('Nonfinite numeric metadata')
+        if isinstance(value,int) and int(number)!=value:
+            return b'i'+canonical_json(value)
+        return b'd'+struct.pack('>d',number)
+    if isinstance(value,str):
+        return b's'+canonical_json(value)
+    if isinstance(value,list):
+        return b'['+struct.pack('>Q',len(value))+b''.join(numeric_metadata_bytes(x) for x in value)+b']'
+    if isinstance(value,dict):
+        return b'{'+b''.join(canonical_json(k)+numeric_metadata_bytes(value[k]) for k in sorted(value))+b'}'
+    raise ValueError('Unsupported source metadata member')
+
+
+def overlay_neighbors(rows, changed_shapes):
+    """Complete ordinary and exact wrapped-seam intersection candidates."""
+    geometries=[shape(f['geometry']) for f in rows]
+    tree=STRtree(geometries)
+    west=[(i,translate(g,xoff=360)) for i,g in enumerate(geometries) if g.bounds[0]==-180]
+    east=[(i,translate(g,xoff=-360)) for i,g in enumerate(geometries) if g.bounds[2]==180]
+    west_tree,east_tree=STRtree([g for _,g in west]),STRtree([g for _,g in east])
+    chosen=set()
+    for g in changed_shapes:
+        chosen.update(int(i) for i in tree.query(g,predicate='intersects'))
+        if g.bounds[2]==180:
+            chosen.update(west[int(i)][0] for i in west_tree.query(g,predicate='intersects'))
+        if g.bounds[0]==-180:
+            chosen.update(east[int(i)][0] for i in east_tree.query(g,predicate='intersects'))
+    return [rows[i] for i in sorted(chosen)]
+
+
+def overlay_links(pairs):
+    links,unknown=[] ,[]
+    for p in pairs:
+        ids=(p['old_fragment'],p['new_fragment'])
+        if p['status']!='checked' or p.get('equality_overlay_disagreement'):
+            unknown.append(ids)
+        elif p.get('intersection_planar_area',0)>0:
+            links.append(ids)
+        elif p.get('kind') in ('identical-coordinates','equal-point-set'):
+            unknown.append(ids)
+    return links,unknown
 
 
 def keyed(rows):
@@ -253,16 +308,23 @@ def run(repo, selected, output):
         raise ValueError('Current source identity roster changed outside this integration')
     for identity in sorted(old_features):
         a, b = old_features[identity], current_features[identity]
-        metadata_equal = canonical_json({k:v for k,v in a.items() if k != 'geometry'}) == canonical_json({k:v for k,v in b.items() if k != 'geometry'})
-        if not metadata_equal:
-            raise ValueError('Unexpected source feature metadata change')
+        ma,mb={k:v for k,v in a.items() if k!='geometry'},{k:v for k,v in b.items() if k!='geometry'}
+        metadata_equal=canonical_json(ma)==canonical_json(mb)
+        metadata_numeric_equal=numeric_metadata_bytes(ma)==numeric_metadata_bytes(mb)
+        if not metadata_numeric_equal:
+            raise ValueError('Source metadata semantic change outside declared integration')
         feature_proof.append({'id': identity, 'original_feature_sha256': digest(canonical_json(a)),
                               'current_feature_sha256': digest(canonical_json(b)),
                               'original_geometry_sha256': digest(canonical_json(a['geometry'])),
                               'current_geometry_sha256': digest(canonical_json(b['geometry'])),
                               'original_binary64_sha256': digest(coordinate_bytes(a['geometry'])),
                               'current_binary64_sha256': digest(coordinate_bytes(b['geometry'])),
-                              'metadata_equal': metadata_equal})
+                              'original_metadata_sha256':digest(canonical_json(ma)),
+                              'current_metadata_sha256':digest(canonical_json(mb)),
+                              'original_numeric_metadata_sha256':digest(numeric_metadata_bytes(ma)),
+                              'current_numeric_metadata_sha256':digest(numeric_metadata_bytes(mb)),
+                              'metadata_canonical_equal':metadata_equal,
+                              'metadata_numeric_equal':metadata_numeric_equal})
     def read_features(row, path=None):
         raw = verify(blob(ARTIFACT, path or row['path']), {**row, 'path': path or row['path']})
         decoded = decode(raw)
@@ -345,21 +407,13 @@ def run(repo, selected, output):
     old_changed = [f for f in fragments if f['id'] not in retained]
     new_changed = [f for f in new_fragments if f['id'] not in retained]
     changed_shapes = [shape(f['geometry']) for f in old_changed + new_changed]
-    def neighbors(rows):
-        geometries = [shape(f['geometry']) for f in rows]
-        tree = STRtree(geometries)
-        chosen = set()
-        for g in changed_shapes:
-            chosen.update(int(i) for i in tree.query(g, predicate='intersects'))
-        return [rows[i] for i in sorted(chosen)]
-    old_overlay, new_overlay = neighbors(fragments), neighbors(new_fragments)
+    old_overlay,new_overlay=overlay_neighbors(fragments,changed_shapes),overlay_neighbors(new_fragments,changed_shapes)
     overlay = crosswalk(old_overlay,new_overlay,
                         overlay_membership_view(old_components,old_overlay),
                         overlay_membership_view(new_components,new_overlay))
     overlay['component_ledger_scope'] = 'Only exact overlay fragment bindings; full original/current component ledger follows separately.'
-    links = [(i,i) for i in sorted(retained)] + [(p['old_fragment'],p['new_fragment']) for p in overlay['fragment_pairs']
-              if p.get('intersection_planar_area',0)>0 and p['status']=='checked']
-    unknown_links = [(p['old_fragment'],p['new_fragment']) for p in overlay['fragment_pairs'] if p['status']!='checked']
+    changed_links,unknown_links=overlay_links(overlay['fragment_pairs'])
+    links=[(i,i) for i in sorted(retained)]+changed_links
     lineage = {'retained_full_record_count':len(retained),
                'retained_full_record_ids_sha256':digest(canonical_json(sorted(retained))),
                'retained_rule':'All original IDs absent from fragment removed_ids retain their identical full canonical feature bytes.',
@@ -402,6 +456,7 @@ def run(repo, selected, output):
                'deltas':{k:{x:v for x,v in d.items() if x not in ('upsert_records','removed_ids')} for k,d in deltas.items()},
                'source_canonical_feature_changes':sum(r['original_feature_sha256']!=r['current_feature_sha256'] for r in feature_proof),
                'source_binary64_geometry_changes':sum(r['original_binary64_sha256']!=r['current_binary64_sha256'] for r in feature_proof),
+               'source_canonical_metadata_changes':sum(not r['metadata_canonical_equal'] for r in feature_proof),
                'complete_ancestor_products':frozen['complete_products'],'products':products,
                'limits':frozen['limits']+['Current input is explicitly selected79ff; no later release claims.',
                                         'Exact binary64 equality does not imply raw JSON identity.',

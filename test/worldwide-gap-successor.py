@@ -6,6 +6,8 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / 'scripts'))
 from worldwide_gap_successor import (coordinate_bytes, record_delta, reconstruct,
                                      tile_equal, component_lineage, overlay_membership_view,
                                      contact_key, validate_selected, SELECTED)
+from worldwide_gap_successor import numeric_metadata_bytes,overlay_links,overlay_neighbors
+from shapely.geometry import box,mapping
 from evidence.immutable import canonical_json
 
 
@@ -20,6 +22,27 @@ def component(identity, ids):
 
 
 class SuccessorControls(unittest.TestCase):
+    def test_metadata_representation_preserves_exact_json_semantics(self):
+        self.assertEqual(numeric_metadata_bytes({'overlap':1}),numeric_metadata_bytes({'overlap':1.0}))
+        for a,b in [(9007199254740993,9007199254740992.0),(True,1),(None,'null'),(-0.0,0.0),([1,2],[2,1]),([[1]],[1])]:
+            self.assertNotEqual(numeric_metadata_bytes(a),numeric_metadata_bytes(b))
+
+    def test_equality_overlay_disagreement_remains_unknown(self):
+        old=[component('old',['a'])];new=[component('new',['b'])]
+        for kind,flag in [('identical-coordinates',True),('equal-point-set',True),('equal-point-set',False)]:
+            pair={'old_fragment':'a','new_fragment':'b','status':'checked','kind':kind,
+                  'intersection_planar_area':0,'equality_overlay_disagreement':flag}
+            links,unknown=overlay_links([pair]);self.assertEqual(links,[]);self.assertEqual(unknown,[('a','b')])
+            ledger=component_lineage(old,new,links,unknown)
+            self.assertEqual(ledger['original'][0]['relation'],'unknown-overlay')
+            self.assertEqual(ledger['current'][0]['relation'],'unknown-overlay')
+
+    def test_exact_wrapped_dateline_neighbor_closure(self):
+        west={'id':'west','geometry':mapping(box(-180,0,-179,1))}
+        east={'id':'east','geometry':mapping(box(179,0,180,1))}
+        self.assertEqual({r['id'] for r in overlay_neighbors([west,east],[box(179,0,180,1)])},{'west','east'})
+        self.assertEqual({r['id'] for r in overlay_neighbors([west,east],[box(-180,0,-179,1)])},{'west','east'})
+
     def test_numeric_representation_is_not_raw_identity(self):
         a={'type':'Point','coordinates':[1,2]}; b={'type':'Point','coordinates':[1.0,2.0]}
         self.assertNotEqual(canonical_json(a),canonical_json(b))
