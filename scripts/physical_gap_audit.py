@@ -161,7 +161,12 @@ class Detector:
     def __init__(self, inputs):
         self.inputs = inputs
         self.land_tree = STRtree(inputs['land'])
-        self.land_boundaries = [g.boundary for g in inputs['land']]
+        physical_union = union_all(inputs['land'])
+        if not physical_union.is_valid:
+            raise ValueError('Original physical union is invalid; do not repair or certify its shoreline')
+        boundary = physical_union.boundary
+        self.shorelines = list(atoms(boundary)) if boundary is not None else []
+        self.shore_tree = STRtree(self.shorelines)
         self.location_tree = STRtree(inputs['locations'])
         self.water_tree = STRtree(inputs['water'])
 
@@ -190,7 +195,8 @@ class Detector:
                                      'geometry': mapping(residue)})
         # Original shoreline survives even when it exactly coincides with a tile
         # edge. Boundaries created by clipping are never promoted to coastline.
-        shore = union_all([self.land_boundaries[i].intersection(tile) for i in land_indices])
+        shore = union_all([self.shorelines[int(i)].intersection(tile)
+                           for i in self.shore_tree.query(tile, predicate='intersects')])
         return {'status': 'checked', 'bounds': list(bounds), 'candidates': candidates,
                 'residues': residues, 'physical_shore': shore,
                 'missing_geometry_sha256': hashlib.sha256(canonical_json(mapping(missing))).hexdigest(),

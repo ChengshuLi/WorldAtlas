@@ -105,6 +105,12 @@ class BeforeWaterControls(unittest.TestCase):
             detector = Detector(inputs([], invalid_land=[bad]))
             self.assertEqual(detector.tile((90, 30, 95, 35))['status'], 'unchecked')
 
+    def test_internal_reference_feature_seam_is_not_shore(self):
+        detector = Detector(inputs([box(0, 0, 1, 2), box(1, 0, 2, 2)]))
+        shore = detector.tile((0.5, 0.5, 1.5, 1.5))['physical_shore']
+        self.assertTrue(shore.is_empty)
+        self.assertTrue(detector.tile((0, 0, 2, 2))['physical_shore'].equals(box(0, 0, 2, 2).boundary))
+
 
 if __name__ == '__main__':
     unittest.main()

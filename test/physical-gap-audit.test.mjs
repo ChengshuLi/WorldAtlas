@@ -7,5 +7,5 @@ test('before-water audit retains gaps, unknown water, tiny shapes and all residu
     encoding: 'utf8', env: process.env, timeout: 120000
   });
   assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
-  assert.match(result.stderr, /Ran 11 tests/);
+  assert.match(result.stderr, /Ran 12 tests/);
 });
