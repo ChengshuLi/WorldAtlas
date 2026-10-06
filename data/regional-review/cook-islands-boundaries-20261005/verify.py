@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
-"""Check the bounded Cook Islands source crosswalk against pinned baseline bytes.
+"""Check Cook Islands source crosswalk against exact, pinned baseline bytes.
 
-This verifies identity, ownership, source-row selection and recorded geometry
-structure only. It does not calculate area or establish coastline accuracy.
+This verifies source identity, parents, part structure and the full named-island
+roster screen. It does not calculate overlap or establish coastline accuracy.
 """
 import csv
 import hashlib
 import json
+import re
+import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -24,8 +26,12 @@ FEATURE_FILE = "data/regional-review/regional-review-14a242c4cb0781a7/source/nat
 COOK_SOURCE = "data/regional-review/regional-review-14a242c4cb0781a7/source/natural-earth/ne_10m_admin_1_cook-islands-features.json"
 
 
-def sha(path):
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+def git_bytes(commit, rel):
+    return subprocess.check_output(["git", "-C", str(ROOT), "show", commit + ":" + rel])
+
+
+def sha(data):
+    return hashlib.sha256(data).hexdigest()
 
 
 def geometry_parts(feature):
@@ -34,46 +40,76 @@ def geometry_parts(feature):
         return 1
     if geom["type"] == "MultiPolygon":
         return len(geom["coordinates"])
-    raise AssertionError(f"non-polygon geometry for {feature.get('id')}")
+    raise AssertionError("non-polygon geometry for " + str(feature.get("id")))
 
 
-def load_features(path):
-    data = json.loads(path.read_text(encoding="utf-8"))
-    return {feature.get("id") or feature["properties"].get("id") or feature["properties"].get("adm1_code"): feature for feature in data["features"]}
+def load_features(data):
+    obj = json.loads(data.decode("utf-8"))
+    return {feature.get("id") or feature["properties"].get("id") or feature["properties"].get("adm1_code"): feature for feature in obj["features"]}
 
 
 def main():
-    for rel, digest in EXPECTED_PINS.items():
-        actual = sha(ROOT / rel)
-        assert actual == digest, f"pinned baseline changed: {rel}: {actual}"
+    manifest = json.loads((OWN / "evidence-quality.json").read_text(encoding="utf-8"))
+    baseline = manifest["baseline"]["commit"]
+    descriptors = {item["path"]: item for item in manifest["baseline"]["files"]}
+    geography_paths = subprocess.check_output(
+        ["git", "-C", str(ROOT), "ls-tree", "-r", "--name-only", baseline, "data/geography"],
+        universal_newlines=True).splitlines()
+    part_paths = sorted(path for path in geography_paths if re.fullmatch(r"data/geography/part-\d+\.json", path))
+    declared_parts = sorted(path for path in descriptors if re.fullmatch(r"data/geography/part-\d+\.json", path))
+    assert part_paths == declared_parts, "manifest must inventory every baseline part file"
 
-    current = load_features(ROOT / "data/geography/part-28.json")
-    hierarchy = {item["id"]: item for item in json.loads((ROOT / "data/hierarchy.json").read_text())}
-    scoped_source = load_features(ROOT / FEATURE_FILE)
-    cook_source = load_features(ROOT / COOK_SOURCE)
+    current = None
+    cook_islands_names = set()
+    foreign_homonyms = []
+    for rel in part_paths:
+        raw = git_bytes(baseline, rel)
+        desc = descriptors[rel]
+        assert len(raw) == desc["bytes"] and sha(raw) == desc["sha256"], "baseline part bytes differ: " + rel
+        features = load_features(raw)
+        for feature in features.values():
+            props = feature["properties"]
+            name = props.get("name")
+            owner = props.get("reference_owner")
+            if owner == "Cook Islands":
+                cook_islands_names.add(name)
+            elif name in ("Nassau", "Palmerston", "Suwarrow", "Takutea"):
+                foreign_homonyms.append({"part": rel, "id": feature.get("id") or props.get("id"),
+                                         "name": name, "reference_owner": owner})
+        if rel == "data/geography/part-28.json":
+            current = features
+    assert current is not None
+
+    for rel, digest in EXPECTED_PINS.items():
+        raw = git_bytes(baseline, rel)
+        assert sha(raw) == digest, "pinned baseline changed: " + rel
+        assert rel in descriptors and descriptors[rel]["sha256"] == digest
+
+    hierarchy = {item["id"]: item for item in json.loads(git_bytes(baseline, "data/hierarchy.json").decode("utf-8"))}
+    scoped_source = load_features(git_bytes(baseline, FEATURE_FILE))
+    cook_source = load_features(git_bytes(baseline, COOK_SOURCE))
     with (OWN / "subject-crosswalk.csv").open(newline="", encoding="utf-8") as stream:
         rows = list(csv.DictReader(stream))
 
     assert [row["subject_id"] for row in rows] == ISSUE_IDS, "crosswalk must preserve exact ordered issue scope"
-    assert len(set(ISSUE_IDS)) == len(ISSUE_IDS)
     result = []
     for row in rows:
         ident = row["subject_id"]
-        assert ident in current, f"missing current baseline feature: {ident}"
-        assert ident in scoped_source and ident in cook_source, f"missing retained source row: {ident}"
+        assert ident in current, "missing current baseline feature: " + ident
+        assert ident in scoped_source and ident in cook_source, "missing retained source row: " + ident
         now, source = current[ident], cook_source[ident]
         props = now["properties"]
-        assert props["name"] == row["name"], f"current name mismatch: {ident}"
-        assert props["parent_id"] == row["current_parent_id"], f"current parent changed: {ident}"
+        assert props["name"] == row["name"], "current name mismatch: " + ident
+        assert props["parent_id"] == row["current_parent_id"], "current parent changed: " + ident
         parent = hierarchy.get(props["parent_id"])
-        assert parent and parent["name"] == row["current_parent_name"], f"parent label mismatch: {ident}"
-        assert now["geometry"]["type"] == row["current_geometry"], f"current geometry type mismatch: {ident}"
-        assert str(geometry_parts(now)) == row["current_components"], f"current component summary mismatch: {ident}"
+        assert parent and parent["name"] == row["current_parent_name"], "parent label mismatch: " + ident
+        assert now["geometry"]["type"] == row["current_geometry"], "current geometry type mismatch: " + ident
+        assert str(geometry_parts(now)) == row["current_components"], "current component summary mismatch: " + ident
         source_props = source["properties"]
         assert source_props["adm1_code"] == row["natural_earth_source_id"]
-        assert source_props["name"] == row["natural_earth_source_name"], f"source name mismatch: {ident}"
-        assert source["geometry"]["type"] == row["natural_earth_geometry"], f"source geometry type mismatch: {ident}"
-        assert str(geometry_parts(source)) == row["natural_earth_components"], f"source part summary mismatch: {ident}"
+        assert source_props["name"] == row["natural_earth_source_name"], "source name mismatch: " + ident
+        assert source["geometry"]["type"] == row["natural_earth_geometry"], "source geometry type mismatch: " + ident
+        assert str(geometry_parts(source)) == row["natural_earth_components"], "source part summary mismatch: " + ident
         result.append({"subject_id": ident, "parent_id": props["parent_id"],
                        "current_geometry": now["geometry"]["type"], "current_parts": geometry_parts(now),
                        "source_id": source_props["adm1_code"], "source_name": source_props["name"],
@@ -81,28 +117,25 @@ def main():
 
     roster = json.loads((OWN / "neighbor-screen.json").read_text(encoding="utf-8"))
     assert roster["issue_subject_ids"] == ISSUE_IDS
-    present_names = {feature["properties"].get("name") for feature in current.values()}
-    missing = sorted(set(roster["official_roster"]) - present_names)
-    assert missing == ["Nassau", "Palmerston", "Suwarrow", "Takutea"], f"neighbor roster changed: {missing}"
-    assert missing == roster["roster_names_missing_from_current_location_parts"]
+    missing = sorted(set(roster["official_roster"]) - cook_islands_names)
+    assert missing == ["Nassau", "Palmerston", "Suwarrow", "Takutea"], "Cook Islands owner roster changed: " + str(missing)
+    assert missing == roster["cook_islands_roster_names_missing_from_current_location_parts"]
+    assert foreign_homonyms, "expected name-collision controls for unrepresented Cook Islands islands"
 
-    # Positive control: the source Atiu row must expose its distinct multipart representation.
     atiu = next(row for row in result if row["subject_id"] == "COK-4950")
     assert atiu["source_geometry"] == "MultiPolygon" and atiu["source_parts"] == 3
     assert atiu["current_geometry"] == "Polygon" and atiu["current_parts"] == 1
-
-    # Negative control: an out-of-scope, misidentified ID must fail the roster guard.
     wrong_scope = ISSUE_IDS[:-1] + ["COK-4963"]
     try:
         assert wrong_scope == ISSUE_IDS, "subject set mismatch"
     except AssertionError:
-        negative_control = "passed: substituted PYF-4963 rejected by exact ordered roster"
+        negative_control = "passed: substituted COK-4963 rejected by exact ordered roster"
     else:
         raise AssertionError("negative control failed to reject a swapped subject")
 
-    print(json.dumps({"status": "passed", "baseline_pins": EXPECTED_PINS,
-                      "subjects_checked": len(result), "subjects": result,
-                      "neighbor_missing": missing,
+    print(json.dumps({"status": "passed", "baseline_commit": baseline, "baseline_part_files_checked": len(part_paths),
+                      "baseline_pins": EXPECTED_PINS, "subjects_checked": len(result), "subjects": result,
+                      "cook_islands_roster_missing_across_all_parts": missing, "foreign_homonyms": sorted(foreign_homonyms, key=lambda row: (row["name"], row["reference_owner"] or "", row["id"])),
                       "positive_control": "passed: Atiu source/current component structures differ and are reported",
                       "negative_control": negative_control,
                       "limits": ["No coastline comparison or land completeness claim", "Shape/component diagnostics are not geographic approval"]},

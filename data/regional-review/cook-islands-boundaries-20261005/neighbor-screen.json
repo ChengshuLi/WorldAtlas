@@ -4,8 +4,62 @@
   "roster_source": "Marae Moana official biodiversity page, Cook Islands 15-island roster; see references.md",
   "roster_retrieved_local": "2026-10-05 America/Los_Angeles",
   "roster_vintage": "Page undated; population column explicitly 2011; island roster treated as current-page descriptive reference, not a legal boundary list",
-  "official_roster": ["Aitutaki", "Atiu", "Mangaia", "Mauke", "Manihiki", "Manuae", "Mitiaro", "Nassau", "Palmerston", "Penrhyn", "Pukapuka", "Rakahanga", "Rarotonga", "Suwarrow", "Takutea"],
-  "issue_subject_ids": ["COK-4950", "COK-4951", "COK-4952", "COK-4953", "COK-4954", "COK-4955", "COK-4956", "COK-4959", "COK-4960", "COK-4961", "COK-4962"],
-  "roster_names_missing_from_current_location_parts": ["Nassau", "Palmerston", "Suwarrow", "Takutea"],
-  "disposition": "Neighboring-granularity and atlas-coverage handoff only. This issue cannot add locations or invent IDs. Separate source and engineering scope is required."
+  "official_roster": [
+    "Aitutaki",
+    "Atiu",
+    "Mangaia",
+    "Mauke",
+    "Manihiki",
+    "Manuae",
+    "Mitiaro",
+    "Nassau",
+    "Palmerston",
+    "Penrhyn",
+    "Pukapuka",
+    "Rakahanga",
+    "Rarotonga",
+    "Suwarrow",
+    "Takutea"
+  ],
+  "issue_subject_ids": [
+    "COK-4950",
+    "COK-4951",
+    "COK-4952",
+    "COK-4953",
+    "COK-4954",
+    "COK-4955",
+    "COK-4956",
+    "COK-4959",
+    "COK-4960",
+    "COK-4961",
+    "COK-4962"
+  ],
+  "disposition": "Neighboring-granularity and atlas-coverage handoff only. This issue cannot add locations or invent IDs. Separate source and engineering scope is required.",
+  "cook_islands_roster_names_missing_from_current_location_parts": [
+    "Nassau",
+    "Palmerston",
+    "Suwarrow",
+    "Takutea"
+  ],
+  "scope_rule": "A same-name feature is counted only when reference_owner is Cook Islands. Other-country homonyms are recorded as collisions and do not represent Cook Islands islands.",
+  "foreign_homonyms": [
+    {
+      "part": "data/geography/part-1.json",
+      "id": "gb:AUS:ADM2:25037944B38638552543628",
+      "name": "Palmerston",
+      "reference_owner": "Australia"
+    },
+    {
+      "part": "data/geography/part-26.json",
+      "id": "gb:USA:ADM2:52423323B42354579566723",
+      "name": "Nassau",
+      "reference_owner": "United States"
+    },
+    {
+      "part": "data/geography/part-26.json",
+      "id": "gb:USA:ADM2:52423323B49658569394047",
+      "name": "Nassau",
+      "reference_owner": "United States"
+    }
+  ]
 }

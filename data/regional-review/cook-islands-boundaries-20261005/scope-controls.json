@@ -2,10 +2,12 @@
   "method_id": "baseline-crosswalk",
   "kind": "reproducibility",
   "outcome": "passed",
-  "run_one_sha256": "7acdedd3d36a051b12f858af2818f0f0bc20fa29e97db406fa5de5233c3929a4",
-  "run_two_sha256": "7acdedd3d36a051b12f858af2818f0f0bc20fa29e97db406fa5de5233c3929a4",
+  "run_one_sha256": "20366d4651bb1c7cbf1985fe9a9128ab2cee6070fecf92814d33a02acb929570",
+  "run_two_sha256": "20366d4651bb1c7cbf1985fe9a9128ab2cee6070fecf92814d33a02acb929570",
   "verification_output": {
     "status": "passed",
+    "baseline_commit": "548c5f89f00271050823076a84695bb41e1b8454",
+    "baseline_part_files_checked": 34,
     "baseline_pins": {
       "data/geography/part-28.json": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
       "data/hierarchy.json": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
@@ -124,14 +126,34 @@
         "source_parts": 1
       }
     ],
-    "neighbor_missing": [
+    "cook_islands_roster_missing_across_all_parts": [
       "Nassau",
       "Palmerston",
       "Suwarrow",
       "Takutea"
     ],
+    "foreign_homonyms": [
+      {
+        "part": "data/geography/part-26.json",
+        "id": "gb:USA:ADM2:52423323B42354579566723",
+        "name": "Nassau",
+        "reference_owner": "United States of America"
+      },
+      {
+        "part": "data/geography/part-26.json",
+        "id": "gb:USA:ADM2:52423323B49658569394047",
+        "name": "Nassau",
+        "reference_owner": "United States of America"
+      },
+      {
+        "part": "data/geography/part-1.json",
+        "id": "gb:AUS:ADM2:25037944B38638552543628",
+        "name": "Palmerston",
+        "reference_owner": "Australia"
+      }
+    ],
     "positive_control": "passed: Atiu source/current component structures differ and are reported",
-    "negative_control": "passed: substituted PYF-4963 rejected by exact ordered roster",
+    "negative_control": "passed: substituted COK-4963 rejected by exact ordered roster",
     "limits": [
       "No coastline comparison or land completeness claim",
       "Shape/component diagnostics are not geographic approval"
