@@ -1,0 +1,45 @@
+
+> world-atlas@0.1.0 build:hosted /Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/95d1b4085772baecd05ed0b9a632eddfdf8ff0cfeea54ec7ffe4b5517bd81ca5/work
+> node scripts/build-hosted.mjs
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 43 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                             0.46 kB │ gzip:   0.30 kB
+dist/assets/pixel-gpu-worker-DOOaZKfq.js    2.33 kB
+dist/assets/pixel-worker-CRnmADsw.js        2.68 kB
+dist/assets/index-C3pmC4rP.css             31.46 kB │ gzip:  10.63 kB
+dist/assets/index-BE61e_p-.js             368.39 kB │ gzip: 111.94 kB
+✓ built in 900ms
+Static atlas ready: 49625 polygons and 4 dated records.
+file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/95d1b4085772baecd05ed0b9a632eddfdf8ff0cfeea54ec7ffe4b5517bd81ca5/work/scripts/deployment-budget.mjs:119
+    tar.on('close', code => code === 0 ? resolve() : reject(Error(`Deployment tar failed (${code}): ${stderr}`)));
+                                                            ^
+
+Error: Deployment tar failed (1): tar: Option --sort=name is not supported
+Usage:
+  List:    tar -tf <archive-filename>
+  Extract: tar -xf <archive-filename>
+  Create:  tar -cf <archive-filename> [filenames...]
+  Help:    tar --help
+
+    at ChildProcess.<anonymous> (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/95d1b4085772baecd05ed0b9a632eddfdf8ff0cfeea54ec7ffe4b5517bd81ca5/work/scripts/deployment-budget.mjs:119:61)
+    at ChildProcess.emit (node:events:509:28)
+    at maybeClose (node:internal/child_process:1141:16)
+    at Socket.<anonymous> (node:internal/child_process:498:11)
+    at Socket.emit (node:events:509:28)
+    at Pipe.<anonymous> (node:net:355:12)
+
+Node.js v24.19.0
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! world-atlas@0.1.0 build:hosted: `node scripts/build-hosted.mjs`
+npm ERR! Exit status 1
+npm ERR! 
+npm ERR! Failed at the world-atlas@0.1.0 build:hosted script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /Users/chengshuli/.npm/_logs/2026-10-06T03_24_43_403Z-debug.log

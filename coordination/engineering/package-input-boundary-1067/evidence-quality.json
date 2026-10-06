@@ -1,0 +1,519 @@
+{
+  "version": 1,
+  "issue": 1067,
+  "lane": "engineering",
+  "worker_id": "01a10843-da4b-7fc1-a482-d3186bc6334d",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "bfeac76c8cffdc7b22729b2b7e2325d0838cae50",
+    "files": [
+      {
+        "path": ".github/workflows/deployment-budget.yml",
+        "bytes": 4186,
+        "sha256": "13a61934dda1face51746199f8b87c37fd02851e22e03ccfdfa5f2057afd571f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 26965,
+        "sha256": "a6afd008a9c94839d2b8a73346a64d81c3225c14ebb798c7be00e9023dffabcc",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/ENGINEERING.txt",
+        "bytes": 11555,
+        "sha256": "ab0c3f8391a09bb8722d6dc417f91c0c5becb13b35febdfb2fb6dd5d6413085d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/GEOGRAPHY.txt",
+        "bytes": 9040,
+        "sha256": "610db7ae7e92de892eec9667215516b67487ce01bfae6d56828626e096fa829a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/LUNA_HISTORY.txt",
+        "bytes": 9885,
+        "sha256": "558d2e24bb717b55f1c470cca4a8fe0838caa00dd50d852519dd762c05ef3872",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/PUBLISHER.txt",
+        "bytes": 6761,
+        "sha256": "c395ce9761de9b9a108f24f80d4948e0974c576ea51d14a966372b8e741d10bc",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/build-cloudflare.mjs",
+        "bytes": 1930,
+        "sha256": "020ddc2b8463e2ce4bddf4c4ee9e8e58d5026f4ad35608884330a94363b6abcc",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/build-hosted.mjs",
+        "bytes": 2414,
+        "sha256": "6d6a9b38d3a96ca759606ef44e91240aee25db8534a238eeb18c17d1f41371db",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/build-static.mjs",
+        "bytes": 14609,
+        "sha256": "d68c27fb2730425ff10c1c703bac8628205a30d5494703b2a3117fd6b6f3282d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/classify-deployment-budget.mjs",
+        "bytes": 7961,
+        "sha256": "e8d0f10149792116dbcbabd39afbed41ae80884d2ccd6b62854044a4ec827db4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/integration-profile.mjs",
+        "bytes": 2448,
+        "sha256": "934eb9f1d10d57deedf34cf8f739e7f78ee7d91896420aa1f96b532b3e31ce62",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/package-research-inputs.mjs",
+        "bytes": 17116,
+        "sha256": "d13313766bcdbeb8de2d3d5f909d6ad3a21e52b320f1ee8ec258afd6e234ef40",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/deployment-budget-scope.test.mjs",
+        "bytes": 18613,
+        "sha256": "391b2337f002a3b5e55f93e9a92251158237f9a2e1831baf077acd75d0a52061",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/integration-proof.test.mjs",
+        "bytes": 13075,
+        "sha256": "e59809c11453491f02a8cf64f7ed9ff5dc9b0f353afb51856263317bbaa8dc24",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": ".github/package-inputs.json",
+      "bytes": 6791,
+      "sha256": "0045715bb35811bcc1438a90440c31d5c627ea898547cd0c965a68b25e6be3d7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": ".github/workflows/deployment-budget.yml",
+      "bytes": 4473,
+      "sha256": "658526950edf4ed8fe90ad5ab5b96e2d5862af32904b511ba4f4abf94f5c859c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/package-input-boundary-1067/README.md",
+      "bytes": 1780,
+      "sha256": "3ae67c5fbb85532467565f7cff75951ca5a49c9f040e6fabdba83ec3fae051b1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/package-input-boundary-1067/baseline-hosted.log",
+      "bytes": 2293,
+      "sha256": "8c8d72614950f277b0ab79de671239223d727a21e1bdae9abc851f6fd2918a74",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/package-input-boundary-1067/boundary-tests.log",
+      "bytes": 3814,
+      "sha256": "94da8d90f64c47910ee51ed2880a6a79a921401d395c4042de284e6c61212364",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/package-input-boundary-1067/claim.json",
+      "bytes": 829,
+      "sha256": "556719f42807d411b8c435ce541e31247407b1eeb4f88bc6dc2f7b7cac71e949",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/package-input-boundary-1067/client-parity.json",
+      "bytes": 221,
+      "sha256": "ce327d85cfa726f2ea7087a22d720f955bf60fc507da2d0a5e704e47e23d638e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/package-input-boundary-1067/cloudflare-build.log",
+      "bytes": 899,
+      "sha256": "f3fcc3febe7f5a1e478724a092ca9d4a293cc923c63460a0443b374f5eba6197",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/package-input-boundary-1067/cloudflare-input-build.json",
+      "bytes": 6419,
+      "sha256": "d83a826fb59cb162b1c216c33151cc17d8cf52f2875ce9e4dfdf4010093c277c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/package-input-boundary-1067/final-local-tests.log",
+      "bytes": 6692,
+      "sha256": "d5bb1c7e50cfe12b9c2be5923490468caab250eee09c203f89de1b10d40aa8e9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/package-input-boundary-1067/initial-research-inputs.json",
+      "bytes": 1908,
+      "sha256": "3e3f9c9e7d2ab76859ca673c123f6d9ddcb7a6408156a4f5dffa2d0c3c0cb4cd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/package-input-boundary-1067/integration-tests.log",
+      "bytes": 3006,
+      "sha256": "175e80f1248192a6f357571769509a52d1acba7937f3eefa6cc83fa74548742c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/package-input-boundary-1067/negative-control.json",
+      "bytes": 382,
+      "sha256": "41ffb0a52843fab751051fdf11b6943a9abe392295e6c0a0347c0edac04af182",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/package-input-boundary-1067/negative-control.log",
+      "bytes": 2480,
+      "sha256": "2a2dcf97eff0965eadc39e6913c4a6ec57aeb0b93eab866d7d63892e1ec66398",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/package-input-boundary-1067/positive-control.json",
+      "bytes": 376,
+      "sha256": "fc8a1005effbbc4b9e3c330c0af050bd2cd52aedd9fd005679eb6893ee03423c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/package-input-boundary-1067/positive-control.log",
+      "bytes": 385,
+      "sha256": "4276a544f9e84baa401b2310df4dbd8dd8a9e3523bdf20e17e6456a7d0777616",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/PACKAGE_INPUTS.md",
+      "bytes": 3559,
+      "sha256": "d6fd76fef65b2c3743f2634cd8aa15abdce034c46656e0b9b1f426b6b3eba89e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "bytes": 27530,
+      "sha256": "228efbc07476a0bd4defad5d0d59c96836da81bba399f8c2e1395a5303e760ae",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/ENGINEERING.txt",
+      "bytes": 12030,
+      "sha256": "ed0a9bb00e22a31cf36e93c6c68d0e08c04ae40c2719b75144dfb96b4970e6aa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/GEOGRAPHY.txt",
+      "bytes": 9515,
+      "sha256": "e00a98b9bd7288982d3e2ed2310ceaac6c47cfc185c4f1edcebe25e3713387cb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/LUNA_HISTORY.txt",
+      "bytes": 10360,
+      "sha256": "9db6e71b24d25e257d1e43d6a12021d0cdd60ab2c63404c905da6cd48d8ae40b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/PUBLISHER.txt",
+      "bytes": 7236,
+      "sha256": "df132b9ee73b48bb4c2d5b9cdea35e6ccb21ec79e9efa5573fba4112d8f1c02a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/build-cloudflare-inner.mjs",
+      "bytes": 2016,
+      "sha256": "4d0c0bf75efd6b4cb22bc2522473993b24c7b06274058b8c479d306f14144b3f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/build-cloudflare.mjs",
+      "bytes": 312,
+      "sha256": "bb77e1416afb93611e91cbe169acba063852139f8fccbc9fecb8a3317f194d11",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/build-hosted-inner.mjs",
+      "bytes": 2498,
+      "sha256": "fb554ed350b45642e048c234d6907c8f9fc7683f36636f08739aa375875097aa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/build-hosted.mjs",
+      "bytes": 86,
+      "sha256": "35b99f851756322aaa95a9f6d21b7c93c6edfeeb9253ad259554819bbdcd89b3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/build-static-inner.mjs",
+      "bytes": 14687,
+      "sha256": "15dfbda8ebcaf2e2aee175a9ad5db3b16d7517211b2bb837f526a2ec6651d1dc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/build-static.mjs",
+      "bytes": 86,
+      "sha256": "e74f685f89313b2129ad2dd194adb13d65b86ceb00df67e58bb3e3a8f6a82c24",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/classify-deployment-budget.mjs",
+      "bytes": 5793,
+      "sha256": "ff0821618996397b8367e48db0df17faa8d7127527867ba4005086fd2371b6a1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/integration-profile.mjs",
+      "bytes": 2409,
+      "sha256": "2cefd701766b677ed63624404f4046eba7facee940a421234bb619dbf4c3df10",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/package-build.mjs",
+      "bytes": 7015,
+      "sha256": "bf6feb5a493cfe538262f4e46a735960a9abc26079a3fea21b64a0f532fcd022",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/package-inputs.mjs",
+      "bytes": 3021,
+      "sha256": "b34b30e1d8bb1661558d2ec891ca4eb23f43d1844750dc3d600ff76a90a88a2e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/deployment-budget-scope.test.mjs",
+      "bytes": 10581,
+      "sha256": "1c9d01740f9692085b4ea4f41332575572c6740b290f8e84055c6bb913aecea8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/integration-proof.test.mjs",
+      "bytes": 13199,
+      "sha256": "d5fff3bb6474c9c9212c4c886362e0beafe165adfc77993b3d570d9ec373b312",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/package-build.test.mjs",
+      "bytes": 6082,
+      "sha256": "83766d6d8b88b1ee917abd823bed521c50e0ef6778ffe9eebb92027d7797f3d9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/package-inputs.test.mjs",
+      "bytes": 1435,
+      "sha256": "2d538a5387c5249337929cc3e57e81e47b3a67bdc09bb075b3a5e20c89aa111b",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "declared-package-boundary",
+      "kind": "code",
+      "description": "One literal declaration controls physical build source images and trusted-base CI applicability; child filesystem/import controls prove omitted inputs fail and explicit promotion succeeds.",
+      "software": "Node 24 and existing build dependencies",
+      "units": "build applicability and input availability"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "declared-package-boundary",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/package-input-boundary-1067/positive-control.json"
+    },
+    {
+      "method_id": "declared-package-boundary",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/package-input-boundary-1067/negative-control.json"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/package-build.test.mjs test/package-inputs.test.mjs test/deployment-budget-scope.test.mjs test/integration-proof.test.mjs test/cloudflare-access.test.mjs",
+    "npm run build:cloudflare",
+    "npm run build:hosted (baseline builds package; GNU tar measurement unavailable on macOS; Ubuntu CI required)"
+  ],
+  "change_receipts": [
+    {
+      "path": ".github/package-inputs.json",
+      "status": "added"
+    },
+    {
+      "path": ".github/workflows/deployment-budget.yml",
+      "status": "modified",
+      "original_sha256": "13a61934dda1face51746199f8b87c37fd02851e22e03ccfdfa5f2057afd571f"
+    },
+    {
+      "path": "coordination/engineering/package-input-boundary-1067/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/package-input-boundary-1067/baseline-hosted.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/package-input-boundary-1067/boundary-tests.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/package-input-boundary-1067/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/package-input-boundary-1067/client-parity.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/package-input-boundary-1067/cloudflare-build.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/package-input-boundary-1067/cloudflare-input-build.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/package-input-boundary-1067/final-local-tests.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/package-input-boundary-1067/initial-research-inputs.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/package-input-boundary-1067/integration-tests.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/package-input-boundary-1067/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/package-input-boundary-1067/negative-control.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/package-input-boundary-1067/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/package-input-boundary-1067/positive-control.log",
+      "status": "added"
+    },
+    {
+      "path": "docs/PACKAGE_INPUTS.md",
+      "status": "added"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "status": "modified",
+      "original_sha256": "a6afd008a9c94839d2b8a73346a64d81c3225c14ebb798c7be00e9023dffabcc"
+    },
+    {
+      "path": "docs/prompts/ENGINEERING.txt",
+      "status": "modified",
+      "original_sha256": "ab0c3f8391a09bb8722d6dc417f91c0c5becb13b35febdfb2fb6dd5d6413085d"
+    },
+    {
+      "path": "docs/prompts/GEOGRAPHY.txt",
+      "status": "modified",
+      "original_sha256": "610db7ae7e92de892eec9667215516b67487ce01bfae6d56828626e096fa829a"
+    },
+    {
+      "path": "docs/prompts/LUNA_HISTORY.txt",
+      "status": "modified",
+      "original_sha256": "558d2e24bb717b55f1c470cca4a8fe0838caa00dd50d852519dd762c05ef3872"
+    },
+    {
+      "path": "docs/prompts/PUBLISHER.txt",
+      "status": "modified",
+      "original_sha256": "c395ce9761de9b9a108f24f80d4948e0974c576ea51d14a966372b8e741d10bc"
+    },
+    {
+      "path": "scripts/build-cloudflare-inner.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/build-cloudflare.mjs",
+      "status": "modified",
+      "original_sha256": "020ddc2b8463e2ce4bddf4c4ee9e8e58d5026f4ad35608884330a94363b6abcc"
+    },
+    {
+      "path": "scripts/build-hosted-inner.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/build-hosted.mjs",
+      "status": "modified",
+      "original_sha256": "6d6a9b38d3a96ca759606ef44e91240aee25db8534a238eeb18c17d1f41371db"
+    },
+    {
+      "path": "scripts/build-static-inner.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/build-static.mjs",
+      "status": "modified",
+      "original_sha256": "d68c27fb2730425ff10c1c703bac8628205a30d5494703b2a3117fd6b6f3282d"
+    },
+    {
+      "path": "scripts/classify-deployment-budget.mjs",
+      "status": "modified",
+      "original_sha256": "e8d0f10149792116dbcbabd39afbed41ae80884d2ccd6b62854044a4ec827db4"
+    },
+    {
+      "path": "scripts/integration-profile.mjs",
+      "status": "modified",
+      "original_sha256": "934eb9f1d10d57deedf34cf8f739e7f78ee7d91896420aa1f96b532b3e31ce62"
+    },
+    {
+      "path": "scripts/package-build.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/package-inputs.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/package-research-inputs.mjs",
+      "status": "removed",
+      "original_sha256": "d13313766bcdbeb8de2d3d5f909d6ad3a21e52b320f1ee8ec258afd6e234ef40",
+      "reason": "Frozen reader fingerprints are replaced by the declaration and physical source-image builder; original implementation remains in immutable Git history."
+    },
+    {
+      "path": "test/deployment-budget-scope.test.mjs",
+      "status": "modified",
+      "original_sha256": "391b2337f002a3b5e55f93e9a92251158237f9a2e1831baf077acd75d0a52061"
+    },
+    {
+      "path": "test/integration-proof.test.mjs",
+      "status": "modified",
+      "original_sha256": "e59809c11453491f02a8cf64f7ed9ff5dc9b0f353afb51856263317bbaa8dc24"
+    },
+    {
+      "path": "test/package-build.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/package-inputs.test.mjs",
+      "status": "added"
+    }
+  ]
+}
