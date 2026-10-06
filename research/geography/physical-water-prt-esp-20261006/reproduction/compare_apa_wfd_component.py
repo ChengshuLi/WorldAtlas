@@ -15,6 +15,7 @@ SHARD = ROOT / 'coordination/engineering/geographic-components-946-20261005-loca
 TARGET = 'gap:ad2052defbeba8e89287bcc4344e641225c6579f9afd584497b381fe8fd8eedc'
 PAGE0 = OWNED / 'sources/official-api-responses/apa-wfd-explicit-full-aoi-page-0.xml'
 PAGE1 = OWNED / 'sources/official-api-responses/apa-wfd-explicit-full-aoi-page-1.xml'
+HITS = OWNED / 'sources/official-api-responses/apa-wfd-explicit-full-aoi-hits.xml'
 OUT = pathlib.Path(sys.argv[1]) if len(sys.argv) > 1 else OWNED / 'reproduction/apa-wfd-full-component-comparison.json'
 NS = {'wfs':'http://www.opengis.net/wfs/2.0','gml':'http://www.opengis.net/gml/3.2'}
 
@@ -60,6 +61,11 @@ def main():
     coord_count=len(gap.exterior.coords)+sum(len(r.coords) for r in gap.interiors)
     if not gap.is_valid: raise RuntimeError('target component polygon is invalid; no repair attempted')
     root0, members0=parse_page(PAGE0); root1, members1=parse_page(PAGE1)
+    hits_root=ET.parse(HITS).getroot()
+    hits_matched=hits_root.attrib.get('numberMatched')
+    hits_returned=int(hits_root.attrib.get('numberReturned','-1'))
+    if hits_matched != str(len(members0)) or hits_returned != 0:
+        raise RuntimeError(f'explicit bounded hits response disagrees with feature pages: matched={hits_matched}, returned={hits_returned}, page0={len(members0)}')
     ids=[fid for fid,_ in members0]
     if len(ids)!=len(set(ids)): raise RuntimeError('duplicate native feature IDs on page 0')
     if members1: raise RuntimeError('page 1 not exhausted')
@@ -83,9 +89,9 @@ def main():
       'component_input':{'path':'coordination/engineering/geographic-components-946-20261005-local06/components-v2/components-004.json.gz','sha256':shard_sha,'source_crs':'OGC:CRS84 longitude,latitude'},
       'target_component_geometry':{'type':gap.geom_type,'is_valid':gap.is_valid,'coordinate_count_including_closed_ring':coord_count,'bounds_crs84':list(gap.bounds)},
       'analysis_crs':'EPSG:25829 ETRS89 / UTM zone 29N',
-      'source':{'dataset':'APA/SNIAmb AM.WaterBodyForWFD','native_crs':'EPSG:4326, GML coordinates parsed latitude then longitude','page0_sha256':sha(PAGE0),'page1_sha256':sha(PAGE1),'page0_timestamp':root0.attrib.get('timeStamp'),'page1_timestamp':root1.attrib.get('timeStamp'),'page0_numberReturned':int(root0.attrib.get('numberReturned','-1')),'page0_numberMatched':root0.attrib.get('numberMatched'),'page1_numberReturned':int(root1.attrib.get('numberReturned','-1')),'page1_numberMatched':root1.attrib.get('numberMatched'),'unique_native_members':len(ids),'native_ids':ids},
+      'source':{'dataset':'APA/SNIAmb AM.WaterBodyForWFD','native_crs':'EPSG:4326, GML coordinates parsed latitude then longitude','page0_sha256':sha(PAGE0),'page1_sha256':sha(PAGE1),'hits_sha256':sha(HITS),'hits_numberMatched':hits_matched,'hits_numberReturned':hits_returned,'hits_timestamp':hits_root.attrib.get('timeStamp'),'page0_timestamp':root0.attrib.get('timeStamp'),'page1_timestamp':root1.attrib.get('timeStamp'),'page0_numberReturned':int(root0.attrib.get('numberReturned','-1')),'page0_numberMatched':root0.attrib.get('numberMatched'),'page1_numberReturned':int(root1.attrib.get('numberReturned','-1')),'page1_numberMatched':root1.attrib.get('numberMatched'),'unique_native_members':len(ids),'native_ids':ids},
       'comparison':{'members_with_nonempty_intersection':len(records),'sum_of_per_member_line_intersection_lengths_m':total_length,'unique_union_line_length_inside_component_m':unique_union_length,'intersections':records},
-      'limitations':['Provider reports numberMatched=unknown on vector pages; separate hits query reported 59, page 0 returned 59 and subsequent page returned 0. Page timestamps differ, so this is not a stable transactional snapshot.','WFD river features are water-planning objects, not observations of surface wetness or measured channel polygons.','Line coincidence cannot establish channel width, wetted extent, whole-cell water, land/water proportions, administrative ownership, or legal boundary.','This result covers the full retained gap component, not only the administrative comparison residual.']
+      'limitations':['Provider reports numberMatched=unknown on feature pages; a separately timestamped exact full-component hits request reports 59, page 0 returned 59 and subsequent page returned 0. This cross-snapshot agreement is conditional, not a stable transactional snapshot.','WFD river features are water-planning objects, not observations of surface wetness or measured channel polygons.','Line coincidence cannot establish channel width, wetted extent, whole-cell water, land/water proportions, administrative ownership, or legal boundary.','This result covers the full retained gap component, not only the administrative comparison residual.']
     }
     OUT.write_text(json.dumps(result,indent=2,ensure_ascii=False)+'\n')
     print(json.dumps({'output':str(OUT),'sha256':sha(OUT),'member_count':len(ids),'intersecting_members':len(records),'length_m':total_length},indent=2))

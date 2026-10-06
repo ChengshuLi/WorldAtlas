@@ -7,14 +7,24 @@
       "url": "https://inspire.apambiente.pt/getogc/services/INSPIRE/AM_WaterBodyForWFD_WFDRiver/MapServer/WFSServer?service=WFS&version=2.0.0&request=GetFeature&typeNames=INSPIRE_AM_WaterBodyForWFD_WFDRiver:AM.WaterBodyForWFD&bbox=39.6412,-7.5432,40.0666,-6.8665,urn:ogc:def:crs:EPSG::4326&count=100&startIndex=0",
       "body": "apa-wfd-explicit-full-aoi-page-0.xml",
       "headers": "apa-wfd-explicit-full-aoi-page-0.headers.txt",
-      "meaning": "Full component bounding envelope; EPSG:4326 native axis order latitude,longitude; 59 returned."
+      "retrieved_at": "2026-10-06T14:49:54Z",
+      "meaning": "Full component bounding envelope; EPSG:4326 native axis order latitude,longitude; 59 returned; numberMatched unknown."
     },
     {
       "source": "APA WFD AM.WaterBodyForWFD WFS 2.0 page 1 exhaustion",
       "url": "https://inspire.apambiente.pt/getogc/services/INSPIRE/AM_WaterBodyForWFD_WFDRiver/MapServer/WFSServer?service=WFS&version=2.0.0&request=GetFeature&typeNames=INSPIRE_AM_WaterBodyForWFD_WFDRiver:AM.WaterBodyForWFD&bbox=39.6412,-7.5432,40.0666,-6.8665,urn:ogc:def:crs:EPSG::4326&count=100&startIndex=59",
       "body": "apa-wfd-explicit-full-aoi-page-1.xml",
       "headers": "apa-wfd-explicit-full-aoi-page-1.headers.txt",
-      "meaning": "Exhaustion check; 0 returned."
+      "retrieved_at": "2026-10-06T14:49:56Z",
+      "meaning": "Exhaustion check; 0 returned; numberMatched unknown."
+    },
+    {
+      "source": "APA WFD AM.WaterBodyForWFD WFS 2.0 explicit hits count",
+      "url": "https://inspire.apambiente.pt/getogc/services/INSPIRE/AM_WaterBodyForWFD_WFDRiver/MapServer/WFSServer?service=WFS&version=2.0.0&request=GetFeature&typeNames=INSPIRE_AM_WaterBodyForWFD_WFDRiver:AM.WaterBodyForWFD&bbox=39.6412,-7.5432,40.0666,-6.8665,urn:ogc:def:crs:EPSG::4326&resultType=hits",
+      "body": "apa-wfd-explicit-full-aoi-hits.xml",
+      "headers": "apa-wfd-explicit-full-aoi-hits.headers.txt",
+      "retrieved_at": "2026-10-06T15:04:03Z",
+      "meaning": "Bounded count-only response; numberMatched=59; numberReturned=0."
     },
     {
       "source": "MITECO vector WFS candidate GetCapabilities",
@@ -36,7 +46,14 @@
       "meaning": "121863-byte full response, 30 collections; no water/hydrography collection."
     }
   ],
-  "pagination_and_completeness": "APA WFD feature page0 returns 59; page1 at startIndex=59 returns 0; separate hits response reports 59. Page numberMatched remains unknown, and pages can be snapshots at different timestamps, so bounded completeness is conditional, not transactional proof.",
+  "unattributed_legacy_responses": [
+    {
+      "body": "apa-wfd-all-hits.xml",
+      "headers": "apa_wfd_all_hits.headers.txt",
+      "limit": "Exact original request URL/parameter trace was not retained in the prior preflight. Body is retained for transparency but is not used as the exact-request hit receipt; use the new explicitly receipted full-component `resultType=hits` response above."
+    }
+  ],
+  "pagination_and_completeness": "APA WFD feature pages return 59 then 0; a fresh explicit full-component hits request reports 59. Each has a separate timestamp and feature pages say numberMatched=unknown, so bounded completeness is conditional and not a transactional snapshot.",
   "header_handling": "HTTP headers retained where available. Set-Cookie transient ASP.NET session values were removed from two MITECO header receipts; response bodies are unchanged.",
   "inventory": [
     {
@@ -126,6 +143,20 @@
       "path": "apa-wfd-cap.xml",
       "bytes": 14517,
       "sha256": "6967b11ec832960d75067ca98a90edfb736077cf632c105e3e9f0ad41735c803"
+    },
+    {
+      "path": "apa-wfd-explicit-full-aoi-hits.headers.txt",
+      "bytes": 457,
+      "sha256": "51ca3c41de4f47c85b676294eeff2aca6e61b933cdad87bd42afe3b8ce4651ae",
+      "http_status": 200,
+      "http_date": "Tue, 06 Oct 2026 15:04:03 GMT",
+      "content_type": "application/xml",
+      "set_cookie_header_redacted": false
+    },
+    {
+      "path": "apa-wfd-explicit-full-aoi-hits.xml",
+      "bytes": 965,
+      "sha256": "0f863cd1ca30661979d2f571a37a1ce1425d7a6c5a25b006cb9a3317962c5a5b"
     },
     {
       "path": "apa-wfd-explicit-full-aoi-page-0.headers.txt",
