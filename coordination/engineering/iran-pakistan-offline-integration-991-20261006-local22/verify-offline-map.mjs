@@ -42,6 +42,7 @@ assert.equal(atlas.pixelMap.canonical_grid_sha256,expected.native);assert.equal(
 assert.equal(atlas.preparedEvidence.footprints_sha256,expected.footprints);
 assert.ok(atlas.nativeContextInputStage&&atlas.gridVerification,'Mandatory actual build context/selection receipts must be present');
 const subjects=[{id:'gb:IRN:ADM2:26516999B17111396986996',query:'Saravan'},{id:'gb:PAK:ADM2:60131773B78019453337506',query:'Panjgur'}];
+assert.deepEqual(Object.keys(atlas.boundarySourceReviews).sort(),subjects.map(s=>s.id).sort(),'Mixed boundary provenance must cover exactly the migrated reference subjects');
 const targets=new Map(subjects.map(s=>[s.id,s]));
 for(const name of atlas.parts)for(const f of parsed(name))if(targets.has(f.id))Object.assign(targets.get(f.id),{name:f.properties.name,pixelIndex:f.pixelIndex,gridBounds:f.gridBounds});
 const candidates=blob('coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v3/candidates.json');
@@ -173,6 +174,7 @@ try{
       await page.goto(base,{waitUntil:'domcontentloaded'});
       await page.waitForFunction(()=>window.__testedAtlasSHA||window.__testedAtlasError,null,{timeout:120000});
       assert.equal(await page.evaluate(()=>window.__testedAtlasSHA),sha(atlasBytes),'Browser consumed the exact built atlas manifest');await settled(page);
+      await page.locator('.leaflet-control-attribution a[href="https://www.openstreetmap.org/copyright"]').waitFor({state:'visible'});
       const startup=await page.locator('.atlas-pixel-canvas').evaluate(c=>({...c.dataset}));
       if(renderer==='webgl2'){assert.equal(startup.renderer,'webgl2');assert.equal(startup.precompiled,'true');assert.equal(startup.compilations,'0');assert.equal(startup.coverageUploads,'2','The complete checksum-validated physical grid must be uploaded');assert.deepEqual(await gpuOwners(page),cells.map(c=>c.owner),'Actual uploaded GPU native ownership covers all 954 supported additions');}
       else {assert.equal(await page.locator('.atlas-pixel-canvas').evaluate(c=>!!c.getContext('2d')),true);assert.equal(startup.compilations,'0');}
@@ -182,6 +184,9 @@ try{
         assert.equal(await page.locator('#details').getAttribute('data-profile-key'),subject.id+':2026');
         assert.equal(await page.locator('.profile-name-context').textContent(),'Present-day reference: '+subject.name);
         assert.equal(await page.locator('.breadcrumbs [data-unit]').count(),6);
+        const boundaryReview=await page.locator('.boundary-source-review').textContent();
+        const source=atlas.boundarySourceReviews[subject.id];
+        for(const expected of [source.source,source.vintage,source.license,source.policy.retained_base,source.policy.outside_component,...source.policy.unknown])assert.ok(boundaryReview.includes(expected),'Actual location profile must show the pinned mixed source and its uncertainty');
         const values=await page.locator('.profile-attributes dd').allTextContents();assert.equal(values.length,8);
         const environments=[];
         for(let i=5;i<8;i++){assert.ok(values[i].trim()&&!values[i].includes('Unknown'),'Recomputed environmental reference must be visible');assert.equal(await page.locator('.profile-attributes dd').nth(i).locator('.reference-badge').textContent(),'Reference');environments.push(values[i]);}
