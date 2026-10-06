@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "retrieval_date_utc": "2026-10-06",
+  "references": [
+    {
+      "source_id": "ZMB-ZAMSTATS-2022-ANALYTICAL-REPORT",
+      "title": "2022 Census National Analytical Report",
+      "publisher": "Zambia Statistics Agency (ZamStats)",
+      "restoration_url": "https://www.zamstats.gov.zm/wp-content/uploads/2025/08/2022-Census-National-Analytical-Report.pdf",
+      "retrieved_at_utc": "2026-10-06",
+      "file_retained": false,
+      "bytes": 8229873,
+      "sha256": "a686618b54df833d9b7959b1e617fc8c249aaa439d1180eb33a767815300e700",
+      "inspected_location": "PDF page 24; printed page 2; chapter 1, sections 1.0\u20131.1",
+      "finding": "Zambia had ten provinces and 116 districts at the 2022 census date.",
+      "license": "No redistribution license verified; source not committed. Restore from publisher URL and verify the SHA-256 before reuse."
+    },
+    {
+      "source_id": "MOZ-INE-2024-PROVINCIAL-YEARBOOK-LEADS",
+      "title": "INE 2024 province statistical yearbooks",
+      "publisher": "Instituto Nacional de Estat\u00edstica (INE), Mozambique",
+      "restoration_urls": [
+        "https://www.ine.gov.mz/documents/20119/334662/anuario-estatistico-provincia-manica-2024.pdf",
+        "https://www.ine.gov.mz/documents/20119/334659/Anu%C3%A1rio%20Estatistico_Provincia%20de%20Sofala_2024.pdf/56529f80-ac52-2dbc-3e6a-eb8dfa0d30f0?download=true&t=1751964515631&version=1.0",
+        "https://www.ine.gov.mz/documents/20119/334665/Anu%C3%A1rio%20Estat%C3%ADstico%20-Prov%C3%ADncia%20de%20Inhambane%2C%202024.pdf/b7e9086f-9700-44ef-d2fc-a327b57e8852?download=true&t=1750676295896&version=1.0",
+        "https://ine.gov.mz/documents/20119/334644/Anuario%20Estatistico%20Provincial%20Niassa%202024.pdf/762b7598-23f3-2948-acee-d28736f5f05f?download=true&t=1751536048634&version=1.0",
+        "https://ine.gov.mz/o/adaptive-media/image/340725/Preview-1000x0/Anuario%2B2025%2BZambezia-2024_101751.pdf?t=1751286065530",
+        "https://www.ine.gov.mz/documents/20119/334647/ANUARIO_ESTATISTICO_PROVINCIAL_CABO_DELGADO_2025.pdf/83a3f6a4-06f4-87b0-1c03-d46969945a89?download=true&t=1753700111320&version=1.0",
+        "https://www.ine.gov.mz/documents/20119/334650/Anu%C3%A1rio%20Estat%C3%ADstico%20Prov%C3%ADncia%20de%20Nampula%202024.pdf/d8f2bf53-fbe9-af23-358f-148c4d184564?download=true&t=1751285084904&version=1.0"
+      ],
+      "retrieval_attempt_date_utc": "2026-10-06",
+      "bytes": null,
+      "sha256": null,
+      "outcome": "Each direct publisher-hosted URL timed out before any response bytes could be retrieved. Search index/catalog pages expose the yearbook titles and date only; no provincial roster assertions from these documents are relied on in province-assessments.csv.",
+      "license": "Not verified; treat only as restoration leads. No document bytes are retained or redistributed."
+    },
+    {
+      "source_id": "MOZ-INE-ILHA-ADMIN-MAP-2017",
+      "title": "Mapa do distrito de Ilha de Mo\u00e7ambique",
+      "publisher": "Instituto Nacional de Estat\u00edstica, Mozambique",
+      "restoration_url": "https://www.ine.gov.mz/documents/20119/108531/Ilha%20de%20Mocambique.pdf",
+      "retrieval_date_utc": "2026-10-06",
+      "file_retained": false,
+      "bytes": null,
+      "sha256": null,
+      "finding": "INE search-indexed map metadata reports source INE 2017 and shows a district context with the Ilha island plus mainland settlement L\u00fambu and neighboring Mossuril; the direct file timed out before bytes were retrieved. Contextual island-risk lead only, not boundary approval.",
+      "license": "Not verified; no file retained."
+    },
+    {
+      "source_id": "MOZ-GOV-VISIT-QUIRIMBAS",
+      "title": "Arquip\u00e9lago das Quirimbas",
+      "publisher": "Visit Mozambique (government tourism portal)",
+      "restoration_url": "https://www.visitmozambique.gov.mz/onde-ir/ilhas/arquipelago-das-quirimbas/",
+      "retrieval_date_utc": "2026-10-06",
+      "file_retained": false,
+      "bytes": null,
+      "sha256": null,
+      "finding": "Government tourism page identifies Ibo among the Quirimbas islands; contextual island-risk lead only. It does not establish Ibo administrative boundaries or the district roster.",
+      "license": "Not verified; web result only; no file retained."
+    },
+    {
+      "source_id": "ZMB-NOR-CHILUBI-ADMIN",
+      "title": "Chilubi District \u2013 Northern Provincial Administration",
+      "publisher": "Northern Province Administration, Government of Zambia",
+      "restoration_url": "https://www.nor.gov.zm/?page_id=1620",
+      "retrieval_date_utc": "2026-10-06",
+      "file_retained": false,
+      "bytes": null,
+      "sha256": null,
+      "finding": "Provincial Administration page places the district administration on Chilubi Island and describes the lake/island setting; contextual island-risk lead only. Direct download was rejected by local TLS certificate verification; TLS verification was not bypassed.",
+      "license": "Not independently verified; web result only; no file retained."
+    },
+    {
+      "source_id": "ZMB-CHILUBI-COUNCIL",
+      "title": "Chilubi Town Council",
+      "publisher": "Chilubi Town Council, Government of Zambia",
+      "restoration_url": "https://www.chilubicouncil.gov.zm/",
+      "retrieval_date_utc": "2026-10-06",
+      "file_retained": false,
+      "bytes": null,
+      "sha256": null,
+      "finding": "Council page states its headquarters are on Chilubi Island in Lake Bangweulu; contextual district role/island lead only. Direct download was rejected by local TLS certificate verification; TLS verification was not bypassed.",
+      "license": "Not independently verified; web result only; no file retained."
+    },
+    {
+      "source_id": "MOZ-INE-2017-CENSUS-CATALOG",
+      "title": "2017 Census INE microdata catalog",
+      "publisher": "Instituto Nacional de Estat\u00edstica, Mozambique",
+      "restoration_url": "https://mozdata.ine.gov.mz/index.php/catalog/24",
+      "retrieval_date_utc": "2026-10-06",
+      "file_retained": false,
+      "bytes": null,
+      "sha256": null,
+      "finding": "The catalog reports 161 districts in the 2017 census and seven municipal districts in Maputo City; direct page retrieval timed out during phase 2. Treat as a dated count lead only.",
+      "license": "Not verified; no file retained."
+    },
+    {
+      "source_id": "MOZ-INE-2026-CENSUS-CARTOGRAPHY-ANNOUNCEMENT",
+      "title": "INE avan\u00e7a com a cartografia censit\u00e1ria para o Censo 2027",
+      "publisher": "Instituto Nacional de Estat\u00edstica, Mozambique",
+      "restoration_url": "https://ine.gov.mz/en/b/ine-avanca-com-a-cartografia-censitaria-para-o-censo-2027",
+      "retrieval_date_utc": "2026-10-06",
+      "file_retained": false,
+      "bytes": null,
+      "sha256": null,
+      "finding": "INE search-index result describes current 2027 census cartography over 161 districts; direct page retrieval timed out, so this is a restoration lead, not verified current roster evidence.",
+      "license": "Not verified; no file retained."
+    }
+  ],
+  "limits": [
+    "The ZamStats source hash identifies the exact downloaded PDF bytes but the PDF is not redistributed; it must be restored and rehashed before reuse.",
+    "The INE yearbook links are research leads with no verified source hashes. They do not resolve the 159/161 Mozambique roster discrepancy or any province parent.",
+    "Official island-context web pages help identify Chilubi, Ilha de Mo\u00e7ambique and Ibo as specific geographic risk subjects; those unretained pages/PDF have no whole-file hash and do not support a boundary finding.",
+    "INE catalog and cartography pages supporting the 161-district count were not fetched as whole bytes and have no hashes; use them only as dated leads until restored, hashed and inspected under #1042."
+  ]
+}

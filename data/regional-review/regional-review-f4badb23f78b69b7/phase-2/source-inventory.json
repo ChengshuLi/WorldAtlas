@@ -1,0 +1,123 @@
+{
+  "version": 1,
+  "research_date": "2026-10-06",
+  "phase": "2",
+  "scope_path": "scope.json",
+  "source_files": [
+    {
+      "path": "phase-2/source/issue-411-api-snapshot.json",
+      "release": "GitHub REST issue snapshot #411",
+      "vintage": "Issue snapshot retrieved 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "declared_license_or_rights": "Coordination metadata; GitHub issue body is not geographic authority",
+      "bytes": 28848,
+      "sha256": "ee18f4cf2eae44938033278f3a4d7d874fd913d944fb596a4090a02e482d532f",
+      "restoration_url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/issues/411"
+    },
+    {
+      "path": "phase-2/source/reference-records.json",
+      "release": "Source retrieval and reference record ledger",
+      "vintage": "Research metadata for phase 2",
+      "retrieved_at": "2026-10-06",
+      "declared_license_or_rights": "Author-authored record; includes only restoration URLs, hashes and access limits",
+      "bytes": 7821,
+      "sha256": "79a3eceabe80bd42a111dfb67a792023caa31be541fdc05456b466282ab28d50"
+    },
+    {
+      "path": "phase-2/source/zambia-2022/arcgis-item-58c57f0ae33249bd8948dbf253f4e49e.json",
+      "release": "ArcGIS item metadata 58c57f0ae33249bd8948dbf253f4e49e",
+      "vintage": "2022 layer item; modified 2024-03-26",
+      "retrieved_at": "2026-10-06",
+      "declared_license_or_rights": "CC BY 4.0 item assertion; includes attribution and item license statement",
+      "restoration_url": "https://www.arcgis.com/sharing/rest/content/items/58c57f0ae33249bd8948dbf253f4e49e?f=pjson",
+      "bytes": 4262,
+      "sha256": "1c85c4883563deea201a30389b4cb7890c17d0da243c3985360bba0df79c3e39"
+    },
+    {
+      "path": "phase-2/source/zambia-2022/arcgis-layer-0-schema.json",
+      "release": "ArcGIS FeatureServer layer 0 schema",
+      "vintage": "district boundary layer, title/vintage 2022",
+      "retrieved_at": "2026-10-06",
+      "declared_license_or_rights": "Derived metadata for CC BY 4.0 item; field schema only",
+      "restoration_url": "https://services2.arcgis.com/YS3PRtw1PxtVqnE7/arcgis/rest/services/NSDI_Zambia___Administrative_Boundaries_Districts_2022_(Published_by_GRID3)/FeatureServer/0?f=pjson",
+      "bytes": 13949,
+      "sha256": "bfd41862147ade902508b8a799e364f55d1b689951227808c88563ff29915aab"
+    },
+    {
+      "path": "phase-2/source/zambia-2022/arcgis-service-root.json",
+      "release": "ArcGIS FeatureServer root metadata for item 58c57f0ae33249bd8948dbf253f4e49e",
+      "vintage": "district boundary service, title/vintage 2022",
+      "retrieved_at": "2026-10-06",
+      "declared_license_or_rights": "Derived metadata for CC BY 4.0 item; layer inventory only",
+      "restoration_url": "https://services2.arcgis.com/YS3PRtw1PxtVqnE7/arcgis/rest/services/NSDI_Zambia___Administrative_Boundaries_Districts_2022_(Published_by_GRID3)/FeatureServer?f=pjson",
+      "bytes": 4387,
+      "sha256": "e092d805e476e1e0b49ed6bcea2b1d731f90fa4dfdbbc11153207f3e8cbbe06e"
+    },
+    {
+      "path": "source/geoboundaries/MOZ/geoBoundaries-MOZ-ADM2-metaData.json",
+      "release": "geoBoundaries source release; upstream commit 9469f09592ced973a3448cf66b6100b741b64c0d",
+      "vintage": "2019",
+      "retrieved_at": "2026-10-05 UTC",
+      "declared_license_or_rights": "metadata file, provenance/licence declaration only",
+      "restoration_url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/MOZ/ADM2/geoBoundaries-MOZ-ADM2-metaData.json",
+      "bytes": 950,
+      "sha256": "0dad350d40953d779e728c14d931548226290b05565f4068ee8e0ce366a0c1ef"
+    },
+    {
+      "path": "source/geoboundaries/MOZ/geoBoundaries-MOZ-ADM2.geojson",
+      "release": "geoBoundaries source release; upstream commit 9469f09592ced973a3448cf66b6100b741b64c0d",
+      "vintage": "2019",
+      "retrieved_at": "2026-10-05 UTC",
+      "declared_license_or_rights": "Creative Commons Attribution 3.0 IGO (metadata assertion; permission chain unresolved)",
+      "restoration_url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/MOZ/ADM2/geoBoundaries-MOZ-ADM2.geojson",
+      "bytes": 24879690,
+      "sha256": "5f04bb75bcb08092451f8626f7113830abfe726c1fad5309107309ab6cceab65"
+    },
+    {
+      "path": "source/geoboundaries/ZMB/geoBoundaries-ZMB-ADM2-metaData.json",
+      "release": "geoBoundaries source release; upstream commit 9469f09592ced973a3448cf66b6100b741b64c0d",
+      "vintage": "2020",
+      "retrieved_at": "2026-10-05 UTC",
+      "declared_license_or_rights": "metadata file, provenance/licence declaration only",
+      "restoration_url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/ZMB/ADM2/geoBoundaries-ZMB-ADM2-metaData.json",
+      "bytes": 829,
+      "sha256": "a2deeb0dc00bc1f8b7b1a5be7668be1f4139ccaf65b2acd0efc0783237a9011b"
+    },
+    {
+      "path": "source/geoboundaries/ZMB/geoBoundaries-ZMB-ADM2.geojson",
+      "release": "geoBoundaries source release; upstream commit 9469f09592ced973a3448cf66b6100b741b64c0d",
+      "vintage": "2020",
+      "retrieved_at": "2026-10-05 UTC",
+      "declared_license_or_rights": "CC BY 4.0 (metadata assertion)",
+      "restoration_url": "https://raw.githubusercontent.com/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/ZMB/ADM2/geoBoundaries-ZMB-ADM2.geojson",
+      "bytes": 35998492,
+      "sha256": "ff4a4c8a92f7416b8457f423b339f2623b10f59410339911a0427fcee8434f17"
+    },
+    {
+      "path": "source/zambia-grid3-2022/zambia-administrative-boundaries-2022.geojson",
+      "release": "ArcGIS item 58c57f0ae33249bd8948dbf253f4e49e; Zambia districts 2022",
+      "vintage": "2022",
+      "retrieved_at": "2026-10-05T23:59:48Z",
+      "declared_license_or_rights": "CC BY 4.0 (item/service assertion)",
+      "restoration_url": "https://www.arcgis.com/home/item.html?id=58c57f0ae33249bd8948dbf253f4e49e",
+      "bytes": 31192016,
+      "sha256": "8044d6ae8fc109993cf3bd3541704a071edc1330b9cf21e5316721b382cf0ccd"
+    }
+  ],
+  "external_references": [
+    {
+      "source_id": "ZMB-ZAMSTATS-2022-ANALYTICAL-REPORT",
+      "path": "source/reference-records.json#/references/0",
+      "bytes": 8229873,
+      "sha256": "a686618b54df833d9b7959b1e617fc8c249aaa439d1180eb33a767815300e700",
+      "retained": false,
+      "restoration_url": "https://www.zamstats.gov.zm/wp-content/uploads/2025/08/2022-Census-National-Analytical-Report.pdf",
+      "retrieved_at": "2026-10-06",
+      "finding_location": "PDF p.24 / printed p.2",
+      "license": "not verified; do not redistribute"
+    }
+  ],
+  "unverified_reference_ids": [
+    "MOZ-INE-2024-PROVINCIAL-YEARBOOK-LEADS"
+  ]
+}

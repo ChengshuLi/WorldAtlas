@@ -25,3 +25,15 @@ The script checks that all 223 frozen issue IDs are unique, each joins to exactl
 - `source/`: lawful pinned-source originals, source metadata, claim receipt, and issue snapshots. The exclusive-ownership INE live service geometry was not retained.
 
 Polygon part, vertex, and ring counts are structural descriptions. They do not certify valid topology or a correct real-world boundary.
+
+## Phase 2: province and regional-risk review
+
+`phase-2/province-assessments.csv` individually assesses all 16 province groups in the exact issue scope. It records the scope-member names, source-vintage and role findings, source-parent roster evidence where available, classification, and explicit limitations. `phase-2/zambia-province-roster.csv` gives the full 2022 official source roster by province, including Eastern as source context outside this issue's scope. `phase-2/zambia-source-area-screen.csv` ranks the official layer's supplied `Area_km` values by province as a screening lead, not an independent area measurement. `phase-2/geographic-risk-review.csv` addresses each regional-risk category in the issue acceptance. The exact source hashes, restoration links and access limits are in `phase-2/source-inventory.json` and `phase-2/source/reference-records.json`. Unresolved full-Mozambique roster/license work is tracked in #1042, disputed Zambia parentage in #1043, and OSG/GRID3 `FEATURE_TY` / `Area_km` interpretation in #1048.
+
+Run from the repository root:
+
+```sh
+python3 data/regional-review/regional-review-f4badb23f78b69b7/phase-2/reproduce.py
+```
+
+This reproduces the province and risk tables, confirms the full 116-name Zambia crosswalk and checks that #411's 38 Mozambique IDs and #412's 121 Mozambique IDs are disjoint and reconcile to the 159-ID frozen area scope. It does not validate geometric correctness, current Mozambique completeness, or legal parentage.
