@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "revalidation_algorithm_sha256": "8d189cfd2bcd720a5cbe0115006920088c4a21a325940e048a9c6ae72f9a8b77",
+  "revalidation_algorithm_sha256": "004c68f60d9e9b40d32616156b23c55b827ad9d4722c923d01552ff002d9ef6c",
   "scope": "Revalidation of immutable dated evidence against a revised reference geographic release; no historical membership or claim transfer",
   "historical_membership_assigned": false,
   "records": 396,
@@ -10,7 +10,7 @@
     "location_index_sha256": "030ced5223b9be0e42f686d9cb4697887296c408be44e724ba6810123bec6c97"
   },
   "revalidated_geography": {
-    "footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286",
+    "footprints_sha256": "6ea7c3613759d7b747c800c399b70c1be24e1f6aea21fc81c389cfdcc78d3eb1",
     "hierarchy_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
     "location_index_sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
   },
@@ -65,7 +65,14 @@
       "path": "data/macro-improvements/loose-ends-v5/evidence/aggregate-source-receipt.json.gz",
       "sha256": "3eeaf8355b2b6c4ac2ee52d667ec4935d47efa1b6fcdee47735c7fd679d4ceab"
     },
-    {"path":"data/engineering/hierarchy-crosswalk-20261003-a9c2/migration-receipt.json.gz","sha256":"a87cb569e4394aa5ac4b722dc41625d8310e8c994a35b14b7eeafbe5a1c32f0f"}
+    {
+      "path": "data/engineering/hierarchy-crosswalk-20261003-a9c2/migration-receipt.json.gz",
+      "sha256": "a87cb569e4394aa5ac4b722dc41625d8310e8c994a35b14b7eeafbe5a1c32f0f"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22/release-proof-v3/index.json",
+      "sha256": "67c5a2508055fe49abff3d4e5484c7f29b31b0bec9cc120f83881115d5cf48fb"
+    }
   ],
   "entities": [
     {
@@ -3249,13 +3256,13 @@
     "installer_sha256": "e2cc8b49a8d26bc00585952f5cac191b7061423f26e1e69706b83e2d19d135d2"
   },
   "prior_revalidation": {
-    "sha256": "bf79181582ffbf9432dbf9b24b6f8bdc39b20a90006316faf71a70ae2f39d535",
-    "archive_path": "data/reference-migrations/global-macro-reference-v6/before/demographic-evidence/revalidation.json.archive.gz",
-    "archive_sha256": "643422350d6ae514d044d5b050c32f8751efc357e66d06b9ce9a7c942ecf73e0",
+    "sha256": "8ee5149eb37b0e617a65099117b8b1412f615955070a08a54e9bc174ffece244",
+    "archive_path": "data/reference-migrations/retained-seam-v7/demographic-evidence-revalidation.json.archive.gz",
+    "archive_sha256": "0707566a958b08610e653a203fb95a23e5a59b2a0d8e0ae3050a93324cd74e58",
     "compression": "gzip",
     "revalidated_geography": {
       "footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286",
-      "hierarchy_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+      "hierarchy_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
       "location_index_sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
     }
   }

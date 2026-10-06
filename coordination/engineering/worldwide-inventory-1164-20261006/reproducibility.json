@@ -1,0 +1,35 @@
+{
+  "method_id": "existing-world-inventory",
+  "kind": "reproducibility",
+  "outcome": "passed",
+  "run_one_sha256": "a5423b1e62b5a0793b83999d87d1f6d50916db482cf2ec74973f75555c2bda6c",
+  "run_two_sha256": "a5423b1e62b5a0793b83999d87d1f6d50916db482cf2ec74973f75555c2bda6c",
+  "executed_code_commit": "6dba91220dff2875f99169d3eb0116bd46c8624a",
+  "all_output_files": [
+    {
+      "file": "decoded-custody.json",
+      "bytes": 9899,
+      "run_one_sha256": "ddfd448a53e1b8a3293fdfdf8304aa08d40cfc527c48d001d463ff58e549290b",
+      "run_two_sha256": "ddfd448a53e1b8a3293fdfdf8304aa08d40cfc527c48d001d463ff58e549290b"
+    },
+    {
+      "file": "identity-lineage.json.gz",
+      "bytes": 498,
+      "run_one_sha256": "d2e645baa6095649ef5644ada3c689c40ddfc5eab67358cd5788e10cf2a4825a",
+      "run_two_sha256": "d2e645baa6095649ef5644ada3c689c40ddfc5eab67358cd5788e10cf2a4825a"
+    },
+    {
+      "file": "report.json",
+      "bytes": 73547,
+      "run_one_sha256": "a5423b1e62b5a0793b83999d87d1f6d50916db482cf2ec74973f75555c2bda6c",
+      "run_two_sha256": "a5423b1e62b5a0793b83999d87d1f6d50916db482cf2ec74973f75555c2bda6c"
+    },
+    {
+      "file": "tile-queries.json.gz",
+      "bytes": 570355,
+      "run_one_sha256": "5f49131db37712023323ef398d376b0000d9f59f1edef8a3d2bdd0714dde474a",
+      "run_two_sha256": "5f49131db37712023323ef398d376b0000d9f59f1edef8a3d2bdd0714dde474a"
+    }
+  ],
+  "distinct_run_directories": true
+}

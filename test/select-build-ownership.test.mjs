@@ -4,7 +4,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
-import {selectBuildOwnership} from '../scripts/select-build-ownership.mjs';
+import {selectBuildOwnership,readBuildOwnershipSelection} from '../scripts/select-build-ownership.mjs';
 const candidate = 'coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/manifest.json';
 const bytes = await fs.readFile(candidate), manifest = JSON.parse(bytes);
 const sha256 = createHash('sha256').update(bytes).digest('hex');
@@ -45,4 +45,16 @@ test('legacy recovery selection retains original grid bytes and does not reinter
   assert.equal(selected.verification,null);
   assert.equal(selected.source,'data/canonical-grid');
   await assert.rejects(selectBuildOwnership({requireNative:true}),/cannot select legacy/);
+});
+
+test('ordinary build selects its committed release, while explicit candidates remain checksum pinned',async()=>{
+  assert.deepEqual(await readBuildOwnershipSelection({root,env:{}}),{manifestPath:'data/canonical-grid/manifest.json',requireNative:false});
+  await fs.mkdir(path.join(root,'data'));
+  const selection={version:1,method:manifest.method,manifest_path:candidate,sha256,release_id:reference.id};
+  await fs.writeFile(path.join(root,'data/ownership-selection.json'),JSON.stringify(selection));
+  assert.deepEqual(await readBuildOwnershipSelection({root,env:{}}),{manifestPath:candidate,expectedSha256:sha256,requireNative:true,releaseId:reference.id});
+  await assert.rejects(readBuildOwnershipSelection({root,env:{ATLAS_NATIVE_GRID_MANIFEST:candidate}}),/both manifest and checksum/);
+  assert.equal((await readBuildOwnershipSelection({root,env:{ATLAS_NATIVE_GRID_MANIFEST:candidate,ATLAS_NATIVE_GRID_SHA256:sha256}})).requireNative,true);
+  await fs.writeFile(path.join(root,'data/ownership-selection.json'),JSON.stringify({...selection,manifest_path:'../escape.json'}));
+  await assert.rejects(readBuildOwnershipSelection({root,env:{}}),/Invalid committed/);
 });

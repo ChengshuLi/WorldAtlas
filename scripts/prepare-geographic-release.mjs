@@ -15,6 +15,19 @@ const json=value=>JSON.stringify(value);
 
 const canonical=value=>Array.isArray(value)?value.map(canonical):value&&typeof value==='object'?Object.fromEntries(Object.keys(value).sort().map(k=>[k,canonical(value[k])])):value;
 const contentHash=value=>sha(json(canonical(value)));
+// Only a completed full-world reconstruction may cross into build reuse.
+// Capture every disposition/relationship/receipt used by downstream consumers;
+// callers cannot replace that check with a self-authored boolean or mutate it.
+const validatedGeometryResults = new WeakMap();
+const geometryValidationBinding = result => contentHash({
+ proofs:result.proofs.map(p=>({manifest_sha256:p.manifest_sha256,receipt_sha256:p.receipt_sha256,receipt:p.receipt})),
+ pairs:result.pairs,changed:[...result.changedIds].sort(),retired:[...result.retiredIds].sort(),added:[...result.addedIds].sort()
+});
+export function requireValidatedGeometryMigrations(result) {
+ if(!result||!validatedGeometryResults.has(result)||validatedGeometryResults.get(result)!==geometryValidationBinding(result))
+  throw Error('Require an unmodified result of complete geometry migration validation');
+ return result;
+}
 export function metadataRelationshipEvidence(pair){
  const evidence={receipt_sha256:pair.receipt_sha256,relationship:pair.relationship};
  if(Buffer.byteLength(json(pair.source_evidence))<=4096)evidence.source_evidence=pair.source_evidence;
@@ -97,7 +110,9 @@ export function validateGeometryMigrations({features,baselineIds,baselineFootpri
  }
  if(!equalIds(new Set(state.keys()),new Set(baselineIds)))throw Error('Location migration requires a separately validated footprint/identity crosswalk');
  if(footprintHash([...state.values()])!==baselineFootprints)throw Error('Names/membership-only release changed the pinned pre-migration location footprints');
- return {proofs,baselineFeatures:[...state.values()],pairs:proofs.flatMap(p=>p.pairs.map(row=>({...row,manifest_sha256:p.manifest_sha256,receipt_sha256:p.receipt_sha256,before_footprints_sha256:p.receipt.before_footprints_sha256,after_footprints_sha256:p.receipt.after_footprints_sha256}))),changedIds:new Set(proofs.flatMap(p=>[...p.changed])),retiredIds:new Set(proofs.flatMap(p=>[...p.removed])),addedIds:new Set(proofs.flatMap(p=>[...p.added]))};
+ const result={proofs,baselineFeatures:[...state.values()],pairs:proofs.flatMap(p=>p.pairs.map(row=>({...row,manifest_sha256:p.manifest_sha256,receipt_sha256:p.receipt_sha256,before_footprints_sha256:p.receipt.before_footprints_sha256,after_footprints_sha256:p.receipt.after_footprints_sha256}))),changedIds:new Set(proofs.flatMap(p=>[...p.changed])),retiredIds:new Set(proofs.flatMap(p=>[...p.removed])),addedIds:new Set(proofs.flatMap(p=>[...p.added]))};
+ validatedGeometryResults.set(result,geometryValidationBinding(result));
+ return result;
 }
 
 const identity=row=>({id:row.id,name:row.name,parent_id:row.parent_id,kind:row.level??row.kind});
