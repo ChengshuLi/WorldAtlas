@@ -1,0 +1,111 @@
+{
+  "version": 1,
+  "issue": 1096,
+  "reviewed_at": "2026-10-06",
+  "scope": "Official-source and source-access review for the existing three-subject China–Tajikistan shared-seam packet. No boundary coordinates were derived.",
+  "retrieval_and_retention": "Source response bodies were fetched directly over TLS from the cited official HTTPS pages on 2026-10-06, byte-counted and SHA-256 hashed, then removed from the working tree because clear republication rights for those exact response bytes were not established. Restore from each canonical URL, retain response headers, and verify the listed response-body SHA-256 before reuse. These hashes identify the fetched representations and may change if a live page changes.",
+  "sources": [
+    {
+      "source_id": "china-mfa-2010-demarcation-treaty-index",
+      "title": "China MFA list of treaties signed in 2010, item 25",
+      "url": "https://www.mfa.gov.cn/web/wjb_673085/zfxxgk_674865/gknrlb/tywj/tyqk/201104/t20110402_9277075.shtml",
+      "final_response_url": "https://www.mfa.gov.cn/web/system/index_17321.shtml",
+      "retrieved_at": "2026-10-06",
+      "response_date_header": "Tue, 06 Oct 2026 11:21:57 GMT",
+      "response_sha256": "271ba2a8c23eedf158d1b6ac23bde1b061e75afc15256424f3297312c5e3288d",
+      "response_bytes": 54156,
+      "reuse": "unknown for this exact page response; restoration-only",
+      "restoration": "GET the canonical URL with normal TLS certificate validation, follow redirects, retain response headers separately, and verify the final-body byte count and SHA-256. Do not disable TLS validation.",
+      "inspected_finding": "Item 25 names the China–Tajikistan border demarcation protocol and records signing on 2010-04-27 in Beijing.",
+      "limits": "Treaty catalog record only; it contains no seam-matched map, marker list or coordinates. Page response may be revised."
+    },
+    {
+      "source_id": "china-mfa-2012-border-regime-agreement",
+      "title": "Agreement between China and Tajikistan on the Regime of the China–Tajikistan State Border",
+      "url": "https://www.mfa.gov.cn/wjb_673085/zfxxgk_674865/gknrlb/tywj/tyqk/201704/P020210830177996111732.pdf",
+      "retrieved_at": "2026-10-06",
+      "response_date_header": "Tue, 06 Oct 2026 11:21:57 GMT",
+      "last_modified_header": "Fri, 07 Nov 2025 03:13:35 GMT",
+      "etag_header": "\"690d63df-404e8\"",
+      "response_sha256": "cd912d9bd3ca5975d8d072b1da680fb6cda057367b56c2f427a0f3d13b9a91c0",
+      "response_bytes": 263400,
+      "reuse": "unknown for republication of this exact PDF; restoration-only",
+      "restoration": "GET the canonical official HTTPS URL with normal TLS certificate validation; retain response headers separately; verify byte count and SHA-256 before analysis. Do not disable TLS validation.",
+      "inspected_findings": [
+        {
+          "location": "Articles 1–3, PDF pages 1–4",
+          "finding": "Boundary-marker coordinates are recorded in demarcation or joint-inspection documents; Article 3 identifies the 2010-04-27 protocol and future joint-inspection records as establishing line direction and marker locations."
+        },
+        {
+          "location": "Article 6, PDF page 5",
+          "finding": "The agreement addresses seasonal rivers on the boundary and water bodies crossing the boundary and their shores."
+        },
+        {
+          "location": "Annex 6, PDF page 31",
+          "finding": "Lists border-area administrative units including Tashkurgan Tajik Autonomous County, Akto County and Murghab District. This contextual annex was not used to infer exact source-member-to-local-line correspondence."
+        },
+        {
+          "location": "Annex 9, PDF page 34",
+          "finding": "Describes border-representative sectors between the China–Tajikistan–Kyrgyzstan and China–Tajikistan–Afghanistan junctions and names Karasu/Kulma meeting stations."
+        }
+      ],
+      "limits": "The inspected agreement cites the separate 2010 protocol and other demarcation/joint-inspection records; this accessible text does not supply their seam-matched map sheets, marker coordinates or local surface observations. It does not locate the legal line relative to the retained fragment."
+    },
+    {
+      "source_id": "esa-worldcover-2021-access-page",
+      "title": "ESA WorldCover data access and license information",
+      "url": "https://esa-worldcover.org/en/data-access",
+      "retrieved_at": "2026-10-06",
+      "response_date_header": "Tue, 25 Aug 2026 20:10:41 GMT (cached response header; not treated as retrieval time)",
+      "response_sha256": "7645b74f70102799bad26dc751706f630cfee7e3e3d60bc25f343053a7a57d5e",
+      "response_bytes": 49866,
+      "reuse": "access-page response reuse unknown; page states underlying WorldCover 2021 v200 product is CC BY 4.0; restoration-only",
+      "restoration": "GET the canonical official HTTPS access page with normal TLS validation and verify current representation against the recorded hash; a changed hash requires a new vintage before reliance.",
+      "inspected_finding": "The page describes WorldCover 2021 v200 as a 10 m land-cover product under CC BY 4.0 with attribution/citation, and warns that 2020 and 2021 products use different algorithm versions.",
+      "limits": "Not a pixel analysis or ground truth. One 2021 classification cannot locate the demarcated line, characterize seasonal water or establish present surface status; do not infer interannual change from cross-version differences."
+    },
+    {
+      "source_id": "tajik-mfa-state-border-summary-current-review",
+      "title": "Tajikistan MFA, State Border of the Republic of Tajikistan with the People’s Republic of China",
+      "url": "https://mfa.tj/en/main/view/150/state-border-of-the-republic-of-tajikistan-with-the-peoples-republic-of-china",
+      "retrieved_at": "2026-10-06",
+      "response_date_header": "Tue, 06 Oct 2026 16:02:41 GMT",
+      "response_sha256": "cac128ca36d0110a9ee9abda469aaf23d03f132ead31d73807dca8ee6af11181",
+      "response_bytes": 41864,
+      "reuse": "unknown for exact page response; restoration-only",
+      "restoration": "GET the cited official HTTPS page with normal TLS validation; retain response headers separately and verify byte count and SHA-256. Do not disable TLS validation.",
+      "inspected_finding": "The page reports delimitation/demarcation issues resolved, lists the 1999 and 2002 agreements and 2010 demarcation protocol, and locates Kulma crossing in Murghab.",
+      "limits": "Official summary, not a demarcation map or coordinate register; it does not establish local line position or candidate physical surface."
+    }
+  ],
+  "subject_assessment": [
+    {
+      "subject_id": "gb:CHN:ADM2:17275852B723995182906",
+      "name": "Tashenkuergantajike",
+      "source_role": "2017 generalized administrative source member, as established in retained native-versus-derived comparison",
+      "line_position": "unresolved: no retrieved official map sheet or marker-coordinate record was matched to this subject or candidate fragment",
+      "surface": "unresolved: no local multi-date land/water or terrain evidence assessed"
+    },
+    {
+      "subject_id": "gb:CHN:ADM2:17275852B99352197075157",
+      "name": "Anketaoxian",
+      "source_role": "2017 generalized administrative source member, as established in retained native-versus-derived comparison",
+      "line_position": "unresolved: no retrieved official map sheet or marker-coordinate record was matched to this subject or candidate fragment",
+      "surface": "unresolved: no local multi-date land/water or terrain evidence assessed"
+    },
+    {
+      "subject_id": "gb:TJK:ADM2:16282066B16686410577714",
+      "name": "Murghob District",
+      "source_role": "2017 generalized administrative source member, as established in retained native-versus-derived comparison",
+      "line_position": "unresolved: no retrieved official map sheet or marker-coordinate record was matched to this subject or candidate fragment",
+      "surface": "unresolved: no local multi-date land/water or terrain evidence assessed"
+    }
+  ],
+  "engineering_and_research_handoff": [
+    "Request the official 2010 demarcation protocol with map sheets/coordinate schedules, plus relevant joint-inspection marker register and current inspection records; identify the segment and preserve authority, datum, scale, vintage and reuse terms.",
+    "Only after obtaining those records, compare their line/coordinates to the immutable fragment under independent geospatial review; do not infer the line from generalized ADM2 boundaries or annex administrative names.",
+    "Assess physical surface separately using licensed multi-date imagery plus suitable terrain and seasonal-hydrology sources; record dates, resolution and uncertainty. WorldCover 2021 v200 is a possible coarse lead, not a result.",
+    "A Tajik chronicle PDF endpoint was attempted but its presented TLS certificate hostname did not match the requested host; it was not fetched or analyzed. No certificate validation bypass was used."
+  ],
+  "decision": "The bilateral legal framework and separate authoritative demarcation-record chain are better documented, but the local demarcated line and candidate physical surface remain unresolved. Preserve the current bounded no-correction proposal; do not infer ownership, dry land or boundary location."
+}

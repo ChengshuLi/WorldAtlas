@@ -2,7 +2,7 @@
   "version": 1,
   "issue": 1096,
   "lane": "geography",
-  "worker_id": "01a1100f-38f0-7402-bdf6-8486137da3f9",
+  "worker_id": "01a10947-b3d7-7812-8b2f-c5a47e88ccb2",
   "subject_ids": [
     "gb:CHN:ADM2:17275852B723995182906",
     "gb:CHN:ADM2:17275852B99352197075157",
@@ -805,13 +805,77 @@
       "restoration": "Re-fetch from the official linked record; save an exact-date citation if this source is required for later boundary placement.",
       "limit": "Generalized audit candidate is not proof of dry land, boundary placement or ownership.",
       "temporal_status": "reference"
+    },
+    {
+      "id": "china-mfa-2010-demarcation-treaty-index",
+      "url": "https://www.mfa.gov.cn/web/wjb_673085/zfxxgk_674865/gknrlb/tywj/tyqk/201104/t20110402_9277075.shtml",
+      "role": "Official China MFA 2010 treaty catalog record for the bilateral border-demarcation protocol",
+      "vintage": "2010 treaty catalog; response retrieved 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Official treaty index; reuse rights for exact page response not stated."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Direct HTTPS retrieval with standard TLS verification; response SHA-256 271ba2a8c23eedf158d1b6ac23bde1b061e75afc15256424f3297312c5e3288d, 54156 bytes, HTTP date Tue, 06 Oct 2026 11:21:57 GMT. Restore from cited URL, preserve headers and verify exact bytes; do not bypass TLS.",
+      "limit": "Catalog is not the protocol, map, coordinate schedule or seam evidence.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "china-mfa-2012-border-regime-agreement",
+      "url": "https://www.mfa.gov.cn/wjb_673085/zfxxgk_674865/gknrlb/tywj/tyqk/201704/P020210830177996111732.pdf",
+      "role": "Official bilateral border-regime agreement; Articles 1\u20133, 6 and Annexes 6, 9 inspected",
+      "vintage": "Agreement signed 2012-06-05; official PDF response retrieved 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Official bilateral text; republication license for exact PDF bytes not stated."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Direct HTTPS retrieval with standard TLS verification; response SHA-256 cd912d9bd3ca5975d8d072b1da680fb6cda057367b56c2f427a0f3d13b9a91c0, 263400 bytes, HTTP date Tue, 06 Oct 2026 11:21:57 GMT; Last-Modified Fri, 07 Nov 2025 03:13:35 GMT; ETag \"690d63df-404e8\". Restore from cited URL, preserve headers and verify exact bytes; do not bypass TLS.",
+      "limit": "Does not contain this segment\u2019s matched map, coordinates, later inspection record or surface observations.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "esa-worldcover-2021-access-page",
+      "url": "https://esa-worldcover.org/en/data-access",
+      "role": "Official ESA WorldCover access and license information page",
+      "vintage": "WorldCover 2021 v200; access page retrieved 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Access-page response reuse not stated; page says underlying 2021 v200 product is CC BY 4.0 with attribution."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Direct HTTPS retrieval with standard TLS verification; response SHA-256 7645b74f70102799bad26dc751706f630cfee7e3e3d60bc25f343053a7a57d5e, 49866 bytes, HTTP date Tue, 25 Aug 2026 20:10:41 GMT (cached header; retrieval date independently recorded). Restore from cited URL, preserve headers and verify exact bytes; do not bypass TLS.",
+      "limit": "No pixels acquired or analyzed; one-year product is not ground truth, seasonality or boundary location.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "tajik-mfa-state-border-summary-current-review",
+      "url": "https://mfa.tj/en/main/view/150/state-border-of-the-republic-of-tajikistan-with-the-peoples-republic-of-china",
+      "role": "Official Tajik MFA summary rechecked during this review",
+      "vintage": "Official summary; response retrieved 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Official page; reuse rights for exact response not stated."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Direct HTTPS retrieval with standard TLS verification; response SHA-256 cac128ca36d0110a9ee9abda469aaf23d03f132ead31d73807dca8ee6af11181, 41864 bytes, HTTP date Tue, 06 Oct 2026 16:02:41 GMT. Restore from cited URL, preserve headers and verify exact bytes; do not bypass TLS.",
+      "limit": "Summary has no local map/coordinate register or candidate surface classification.",
+      "temporal_status": "reference"
     }
   ],
   "outputs": [
     {
       "path": "research/geography/shared-seam-chn-tjk-20261005/README.md",
-      "bytes": 7474,
-      "sha256": "ad6209d88d79e138de0cbd545059733992d07d4af92f8ac3e50961dc5f2fecfb",
+      "bytes": 10417,
+      "sha256": "04bf5cd519e778070f21ac863cda47bb478c806809e92c7a1fd9a715ff782112",
       "hash_kind": "file-bytes"
     },
     {
@@ -1016,6 +1080,12 @@
       "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/run-two-20261006/source-crosswalk.json",
       "bytes": 12287,
       "sha256": "3f1a0d03a2538e20265237f892daa147a6c90eaff8711b58f1ad8bf5f67c601a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/official-sources-20261006/bilateral-authority-review.json",
+      "bytes": 9401,
+      "sha256": "62dd5147bf6c6f403bb3fcf38b4eee57eef33c6a2895f050c01fc65ee070b103",
       "hash_kind": "file-bytes"
     }
   ],
@@ -1443,6 +1513,24 @@
         "geoboundaries-chn-adm2",
         "geoboundaries-tjk-adm2"
       ]
+    },
+    {
+      "text": "Official bilateral records place the 2010 demarcation protocol and future joint-inspection coordinate records in the authority chain for marker location; the inspected 2012 agreement also expressly addresses seasonal boundary rivers and crossing waters. This identifies missing record types but does not locate the local line or classify the fragment.",
+      "status": "supported",
+      "source_ids": [
+        "china-mfa-2010-demarcation-treaty-index",
+        "china-mfa-2012-border-regime-agreement",
+        "tajik-mfa-state-border-summary-current-review"
+      ]
+    },
+    {
+      "text": "The official demarcation map/coordinate record for this segment and its physical land/water status remain unresolved. The 2012 agreement refers to separate protocol/joint-inspection records not retrieved here; WorldCover 2021 v200 was reviewed only as an access-page lead, not analyzed.",
+      "status": "unresolved",
+      "source_ids": [
+        "china-mfa-2012-border-regime-agreement",
+        "tajik-mfa-state-border-summary-current-review",
+        "esa-worldcover-2021-access-page"
+      ]
     }
   ],
   "validation": [
@@ -1468,166 +1556,16 @@
   "change_receipts": [
     {
       "path": "research/geography/shared-seam-chn-tjk-20261005/README.md",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/compare-seam.py",
-      "status": "added"
+      "status": "modified",
+      "original_sha256": "ad6209d88d79e138de0cbd545059733992d07d4af92f8ac3e50961dc5f2fecfb"
     },
     {
       "path": "research/geography/shared-seam-chn-tjk-20261005/evidence-quality.json",
-      "status": "added"
+      "status": "modified",
+      "original_sha256": "e3147ad381dc70be67eb4595412838bf6635f5e1fdab9f73d3851f085881a71d"
     },
     {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/sources/CHN-CITATION-AND-USE.txt.gz",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/sources/geoBoundaries-CHN-ADM2-metaData.json.gz",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/sources/geoBoundaries-CHN-ADM2.geojson.gz",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/sources/geoBoundaries-TJK-ADM2-metaData.json.gz",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/sources/geoBoundaries-TJK-ADM2.geojson.gz",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/final-one-20261006/comparison.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/final-one-20261006/input-envelope-readback.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/final-one-20261006/negative-control.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/final-one-20261006/positive-control.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/final-one-20261006/source-crosswalk.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/final-one-r2-20261006/comparison.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/final-one-r2-20261006/input-envelope-readback.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/final-one-r2-20261006/negative-control.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/final-one-r2-20261006/positive-control.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/final-one-r2-20261006/source-crosswalk.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/final-two-20261006/comparison.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/final-two-20261006/input-envelope-readback.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/final-two-20261006/negative-control.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/final-two-20261006/positive-control.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/final-two-20261006/source-crosswalk.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/final-two-r2-20261006/comparison.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/final-two-r2-20261006/input-envelope-readback.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/final-two-r2-20261006/negative-control.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/final-two-r2-20261006/positive-control.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/final-two-r2-20261006/source-crosswalk.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/repro-20261006/reproducibility.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/repro-final-20261006/reproducibility.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/repro-final-r2-20261006/reproducibility.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/run-one-20261006/comparison.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/run-one-20261006/input-envelope-readback.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/run-one-20261006/negative-control.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/run-one-20261006/positive-control.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/run-one-20261006/source-crosswalk.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/run-two-20261006/comparison.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/run-two-20261006/input-envelope-readback.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/run-two-20261006/negative-control.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/run-two-20261006/positive-control.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/run-two-20261006/source-crosswalk.json",
+      "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/official-sources-20261006/bilateral-authority-review.json",
       "status": "added"
     }
   ],
