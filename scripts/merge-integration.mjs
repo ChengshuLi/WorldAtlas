@@ -334,7 +334,7 @@ export async function completeIntegration(options) {
     'An open PR requires successful isolated integration tests or revalidated trusted proof');
   need(state.base === options.testedBase, 'Main advanced after integration tests; resubmit unchanged head');
   need(typeof options.geographyReportLoader === 'function', 'Missing trusted geography report loader');
-  const geography = await options.geographyReportLoader();
+  const geography = await options.geographyReportLoader({api: options.api});
   need(geography?.version === 1 && geography.method_id === 'worldatlas-trusted-geography-check-v1' &&
     geography.baseline_commit === state.base && geography.trusted_code_commit === state.base &&
     geography.candidate_commit === options.testedCandidate && geography.candidate_code_executed === false &&

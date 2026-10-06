@@ -5,6 +5,7 @@ import {waitForFinalCapacity, capacityObservation, finalRequestBound, inventoryF
   boundedFinalAPI, finalRequestBudget, beginFinalPlanning} from '../scripts/final-capacity.mjs';
 import {memoizeImmutableGitBlobs} from '../scripts/immutable-git-blobs.mjs';
 import {githubAPI, renderClaim} from '../scripts/issue-claim-contract.mjs';
+import {loadGeographicReport} from '../scripts/geographic-report-artifact.mjs';
 import {inspectMerge, completeIntegration} from '../scripts/merge-integration.mjs';
 import {sha256, subjectsHash} from '../scripts/evidence-quality.mjs';
 import {assertAdmission, queueBody, executionTitle} from '../scripts/merge-scheduler.mjs';
@@ -118,11 +119,11 @@ function fixture() {
     policy: {version: 1, mode: 'enforce-new', activation_time: '2026-01-01T00:00:00Z'}, testedBase: base,
     artifactRunId: 12, finalAdmission: api => assertAdmission({api, repo, request, attempt: 1, runId: 12}),
     capacityTiming: {...clock(), sleep: async () => {f.phase = 'after';}}});
-  f.complete = () => completeIntegration({...f.options(), finalCapacity: true, integrationResult: 'success',
+  f.complete = (extra = {}) => completeIntegration({...f.options(), finalCapacity: true, integrationResult: 'success',
     geographyResult: 'success', testedCandidate: f.candidate,
     geographyReportLoader: async () => ({version: 1, method_id: 'worldatlas-trusted-geography-check-v1', baseline_commit: f.base,
       trusted_code_commit: f.base, candidate_commit: f.candidate, candidate_code_executed: false, published: false,
-      source_approval: false, gate_status: 'passed', status: 'not-applicable'})});
+      source_approval: false, gate_status: 'passed', status: 'not-applicable'}), ...extra});
   return f;
 }
 
@@ -225,4 +226,24 @@ test('same-token success capacity metadata never logs arbitrary bodies or header
     const output = JSON.stringify(records); assert.equal(output.includes(token), false); assert.equal(output.includes('Authorization'), false);
     assert.equal(records[0].remaining, 1400); assert.equal(records[0].reserved, false);
   } finally {globalThis.fetch = fetchOriginal;}
+});
+
+ test('real geographic artifact adapter cannot grow pagination outside final paid-call guard', async () => {
+  const f = fixture(), original = f.api; let loading = false, artifactCalls = 0, downloads = 0;
+  f.api = async (...args) => {
+    if (loading && args[0].includes('/artifacts?')) {
+      artifactCalls++;
+      return {total_count: 10000, artifacts: Array.from({length: 100}, (_, i) => ({id: i + 1, name: 'other'}))};
+    }
+    return original(...args);
+  };
+  await assert.rejects(f.complete({geographyReportLoader: async ({api}) => {
+    assert.equal(typeof api, 'function'); assert.notEqual(api, f.api);
+    loading = true;
+    return loadGeographicReport({api, repo: f.options().repo, runId: 12,
+      artifactName: 'geography-durable-capacity-ticket-12', expectedHash: 'a'.repeat(64), token: 'fixture-token',
+      fetchImpl: async () => {downloads++; throw Error('Unexpected download');}});
+  }}), /inventory grew beyond safe request bound/);
+  assert.ok(artifactCalls > 0 && artifactCalls < 100); assert.equal(downloads, 0);
+  assert.equal(f.writes.filter(row => row.method === 'PUT').length, 0);
 });

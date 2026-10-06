@@ -43,6 +43,12 @@
         "bytes": 5550,
         "sha256": "3fbe2f6d27916b76bff697290db0b11a1771b15f751614478980085f4cbcbf33",
         "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/merge-integration.test.mjs",
+        "bytes": 39605,
+        "sha256": "6f52d99d965a943e25ad130865419eb3bd84c86ff28c3b6f86e8aef6d21c021f",
+        "hash_kind": "file-bytes"
       }
     ],
     "pins": {},
@@ -57,6 +63,12 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "coordination/engineering/1183-final-capacity/adapter-controls.txt",
+      "bytes": 8216,
+      "sha256": "ed2aa958588990f7f5551daba8d569047dbc38d52cfc2edb4540b31ca052ddce",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "coordination/engineering/1183-final-capacity/controls.txt",
       "bytes": 17030,
       "sha256": "32767e1c58af39e1cad4ce8d3befd7d9981fa1bcb341eaffcc3be2c431c6f711",
@@ -64,8 +76,8 @@
     },
     {
       "path": "coordination/engineering/1183-final-capacity/handoff.md",
-      "bytes": 2598,
-      "sha256": "92a9c9e70c9f56b24fe5a40235483c36ec732a56a53102948c7f8f388eb9706f",
+      "bytes": 2889,
+      "sha256": "9ccff95174b4377bef402b29f4758c5a19f939eeb8830568f57166fffa2a18b2",
       "hash_kind": "file-bytes"
     },
     {
@@ -106,20 +118,26 @@
     },
     {
       "path": "scripts/merge-integration.mjs",
-      "bytes": 27030,
-      "sha256": "9677cefc259b8be24600f9816ccff3f31cc938912988852a65d57e99425179ba",
+      "bytes": 27048,
+      "sha256": "5f664eedd5628f058e79ded1654aeb37e5fd3e72161d14f116f1770325b83d1b",
       "hash_kind": "file-bytes"
     },
     {
       "path": "scripts/run-worker-merge.mjs",
-      "bytes": 6283,
-      "sha256": "f667be9011b58cbd80611fe796bd9938be83fdb61ad8b3879620f0026f4a147f",
+      "bytes": 6321,
+      "sha256": "f19fdad80e06d0a6cdef9a76ebaf770de5ee39224f4329725924220667425905",
       "hash_kind": "file-bytes"
     },
     {
       "path": "test/final-capacity.test.mjs",
-      "bytes": 18160,
-      "sha256": "a4818faa8dc0c9e5bd279377b0a7c69eea40dc9be0bbad4b3702a940ed2bff68",
+      "bytes": 19377,
+      "sha256": "d2332f242fb8abae511a72534ae428f3bd6b37d2fbe3930a97530f8756933e83",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/merge-integration.test.mjs",
+      "bytes": 39654,
+      "sha256": "dc77e9a279f1887ede11d3d23552e3d09521d28b868228be2ca4b202fbfbd9c5",
       "hash_kind": "file-bytes"
     }
   ],
@@ -170,6 +188,10 @@
       "path": ".github/workflows/worker-merge.yml",
       "status": "modified",
       "original_sha256": "c57608daf9a3dbf9d1ae6bf73e1a3a57aa23d500de4bc4fe7464fcb092714edf"
+    },
+    {
+      "path": "coordination/engineering/1183-final-capacity/adapter-controls.txt",
+      "status": "added"
     },
     {
       "path": "coordination/engineering/1183-final-capacity/controls.txt",
@@ -223,6 +245,11 @@
     {
       "path": "test/final-capacity.test.mjs",
       "status": "added"
+    },
+    {
+      "path": "test/merge-integration.test.mjs",
+      "status": "modified",
+      "original_sha256": "6f52d99d965a943e25ad130865419eb3bd84c86ff28c3b6f86e8aef6d21c021f"
     }
   ]
 }

@@ -38,7 +38,7 @@ try {
       capacityObserver: observation => {result.final_capacity = observation; console.log(JSON.stringify(observation));},
       geographyResult: process.env.GEOGRAPHY_RESULT,
       geographyReportHash: process.env.GEOGRAPHY_REPORT_SHA256,
-      geographyReportLoader: () => loadGeographicReport({api, repo, runId: process.env.GITHUB_RUN_ID,
+      geographyReportLoader: ({api: reportAPI = api} = {}) => loadGeographicReport({api: reportAPI, repo, runId: process.env.GITHUB_RUN_ID,
         artifactName: process.env.GEOGRAPHY_ARTIFACT_NAME, expectedHash: process.env.GEOGRAPHY_REPORT_SHA256,
         token: process.env.GH_TOKEN}),
       proofRunAttempt: process.env.PROOF_RUN_ATTEMPT ? Number(process.env.PROOF_RUN_ATTEMPT) : undefined,

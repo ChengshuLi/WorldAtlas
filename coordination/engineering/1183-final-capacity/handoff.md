@@ -13,7 +13,10 @@ The original full validators and SHA-guarded merge remain mandatory.
 
 Actual local validation:180 controls passed,0 skipped, including23 capacity
 controls and17 real Git/native geography controls. The retained transcript
-contains actual results. The source input required for geographic API controls is
+contains actual results. After the artifact callback audit,86 relevant controls
+passed0skips, including24 capacity controls and the real adapter growing-page
+negative check; adapter-controls.txt retains this final result. The callback now
+receives the paced API and zero-argument existing loaders remain compatible. The source input required for geographic API controls is
 coordination/engineering/coverage-gaps-907-20261005-local01/sources/natural-earth-lakes.geojson.gz,
 plus data/research-geography-gate.json. Python3.12.14/Shapely2.1.2/GEOS3.13.1
 was reused read-only from an existing pinned runtime; no install was performed.
