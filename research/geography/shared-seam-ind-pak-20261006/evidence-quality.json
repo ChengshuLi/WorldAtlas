@@ -1,0 +1,1504 @@
+{
+  "version": 1,
+  "issue": 1097,
+  "lane": "geography",
+  "worker_id": "01a11013-8ab3-7691-9548-082b89a5a25a",
+  "subject_ids": [
+    "atlas:local:IND:7132399B1507487316620",
+    "atlas:local:IND:7132399B19493089186258",
+    "atlas:local:IND:7132399B23352295489123",
+    "atlas:local:IND:7132399B25679382819073",
+    "atlas:local:IND:7132399B27106528401514",
+    "atlas:local:IND:7132399B38242062299143",
+    "atlas:local:IND:7132399B49490689811564",
+    "atlas:local:IND:7132399B516102083904",
+    "atlas:local:IND:7132399B78390472834442",
+    "atlas:local:IND:7132399B91194549462935",
+    "gb:IND:ADM2:76128533B7291413308870",
+    "gb:PAK:ADM2:60131773B1682888309057",
+    "gb:PAK:ADM2:60131773B44072502651200",
+    "gb:PAK:ADM2:60131773B44161758981040",
+    "gb:PAK:ADM2:60131773B62209958986210",
+    "gb:PAK:ADM2:60131773B87869837926518"
+  ],
+  "subject_ids_sha256": "ba16e82eef4bf35c153533bd2a6b142f9054d5fb6682e677edceb822aa2da2c3",
+  "baseline": {
+    "commit": "c603befd3aaf4da90d59b12378e1e0739331efba",
+    "files": [
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-000.bytes.gz",
+        "bytes": 84441,
+        "sha256": "48740ba9a934daacedcae4214566bb27cfb90853c2daa8b33dfc9395a56c394c",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 271171,
+        "uncompressed_sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-001.bytes.gz",
+        "bytes": 174,
+        "sha256": "d2bd3bff618b55fcf45355e635e6162f65a689db4b16993b606350c46a9e295e",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 206,
+        "uncompressed_sha256": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-002.bytes.gz",
+        "bytes": 168778,
+        "sha256": "245af9df92a445dd89bd026bfa4d84790111ed870d3d69adb7fe392fed959996",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 169082,
+        "uncompressed_sha256": "96f4e6b1894ecce4c1f3f2be690ebfceec9fde2ec094c886ddffca96c62e4a16"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-003.bytes.gz",
+        "bytes": 3489,
+        "sha256": "730abd1ce028a2996b235d633c32bede32bd47e9599a179d4cbd19e2bba260ed",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 11393,
+        "uncompressed_sha256": "8f49c003f2277593041f3526c97b58252599cd53f20abf27fd6a6eb62cfdb5d1"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-004.bytes.gz",
+        "bytes": 1763736,
+        "sha256": "bd5301f48cde58f03591e8b7c271f7529a6f7ae97dde3440ac042ee03a408c68",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8539839,
+        "uncompressed_sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-005.bytes.gz",
+        "bytes": 1496086,
+        "sha256": "83a27fd2412c9f87b1a0ae3eeb1629d0f428d44b70b4af41221bf576882e6b29",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8060108,
+        "uncompressed_sha256": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-006.bytes.gz",
+        "bytes": 712073,
+        "sha256": "779216c953e6f54f130b236399a6fccec4a91b9a4c8ba6cc448e8b56b01f011b",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 5144571,
+        "uncompressed_sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-007.bytes.gz",
+        "bytes": 752471,
+        "sha256": "04e746ffce5df833810b2b0576854a61949b127149514793a89cc4fa2b3ed4bb",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 5131824,
+        "uncompressed_sha256": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-008.bytes.gz",
+        "bytes": 498281,
+        "sha256": "a12342a5e0aed6eb9fea1e5341a1e6b52bfc75ffe79ce176c513c885aaba29fc",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4489493,
+        "uncompressed_sha256": "24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-009.bytes.gz",
+        "bytes": 874837,
+        "sha256": "4308334c1b666704d9096874971c4dcde71fc10d469fbda535437e02dcf960cf",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 5709487,
+        "uncompressed_sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-010.bytes.gz",
+        "bytes": 424054,
+        "sha256": "438e36ee23f4f3cd5832e7a53f33f948cdf6e0c41bed47714ccbcf1865540586",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4355198,
+        "uncompressed_sha256": "c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-011.bytes.gz",
+        "bytes": 747413,
+        "sha256": "3b51b6344d624e3fc5a65a9b4ca61a98fc7389b5daa4a97d57bfe97a635159ec",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 5180426,
+        "uncompressed_sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-012.bytes.gz",
+        "bytes": 769666,
+        "sha256": "6e82570e5dbcf0984058a18cbb93318a9864440904b8ec03219793eb37eac764",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 5213846,
+        "uncompressed_sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-013.bytes.gz",
+        "bytes": 643149,
+        "sha256": "df1764c00503601e30495bbe1bb787fa94d6731a628f5927c35d2f4bff899504",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4945828,
+        "uncompressed_sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-014.bytes.gz",
+        "bytes": 691563,
+        "sha256": "346d8c2f998181e4697bbfe0b185fe2912cb45de56b33ecc4c1e4aace50fff33",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4909063,
+        "uncompressed_sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-015.bytes.gz",
+        "bytes": 525680,
+        "sha256": "1233d305b9f31f98e7338ccca3c6db664d26dc89ce89fa614d6e5c5ecec411d5",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4583022,
+        "uncompressed_sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-016.bytes.gz",
+        "bytes": 1072562,
+        "sha256": "2fa7e62a01bc00de5be34c9fdc9131ccdc97ccf75aaf2809bd769a45a0ac1565",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 6259307,
+        "uncompressed_sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-017.bytes.gz",
+        "bytes": 1320331,
+        "sha256": "ad2718182d3873d342faebb4baa311b09fff1bbea33ffce6a352ed5d0aa11cdd",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 6570767,
+        "uncompressed_sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-018.bytes.gz",
+        "bytes": 1366624,
+        "sha256": "dbd854c873953032a2393abd013d8339960c917b423a2d1b4eebf54c6658119d",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 6737781,
+        "uncompressed_sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-019.bytes.gz",
+        "bytes": 583076,
+        "sha256": "65f004c4e2847caf06e230f9befce7393dc7f1833bd4e6d53f75721d90d2dd43",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4746385,
+        "uncompressed_sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-020.bytes.gz",
+        "bytes": 697387,
+        "sha256": "781f5a9acb0b5f7360187d070a5a1fb3b3d1caedd67beccebbdc5255755cd609",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4962410,
+        "uncompressed_sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-021.bytes.gz",
+        "bytes": 628297,
+        "sha256": "06ac5f796da313a69dc91e69199d50880f0f48f4c47c2df0f16585b85b4da23d",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4816899,
+        "uncompressed_sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-022.bytes.gz",
+        "bytes": 544083,
+        "sha256": "c32f9679b2b2d70e2afc3b3d596d5b739ffca421ebcc06e09f2407fdab0c546e",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4525239,
+        "uncompressed_sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-023.bytes.gz",
+        "bytes": 607156,
+        "sha256": "96611c98a6c481e1edfd70e28ddc8d91a811b033eec6a393a526673af9933d33",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4608983,
+        "uncompressed_sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-024.bytes.gz",
+        "bytes": 675022,
+        "sha256": "136a4b8e87f447b5913657fa33f17cdf5cab00bc6c59ee4540a579cdd962d435",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4863162,
+        "uncompressed_sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-025.bytes.gz",
+        "bytes": 1249169,
+        "sha256": "f918f4ff484bf4184cbff11c6baf88473ea58b187c939b925263be79d293beea",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 6613963,
+        "uncompressed_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-026.bytes.gz",
+        "bytes": 3400149,
+        "sha256": "7f3b041570ff703b353dc5d8940c95dbf54b9610fc0fce0831940a1c0fe28e91",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 12932167,
+        "uncompressed_sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-027.bytes.gz",
+        "bytes": 746003,
+        "sha256": "12e88551e6bbb2da829867275f2b3b23a51fbd3fb1e82cdef51bc44ef37cf5f7",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 5153118,
+        "uncompressed_sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-028.bytes.gz",
+        "bytes": 3445252,
+        "sha256": "9a3853ebbd9bb90e0469bb68f0ddf1afd1342631389ab4b12c655eac19c98d46",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 11979437,
+        "uncompressed_sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-029.bytes.gz",
+        "bytes": 3287318,
+        "sha256": "6ba6cd683c9701f78cdb94c15b090b86c18966fac1f4e5a9a35889e32207f8bc",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 10086485,
+        "uncompressed_sha256": "44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-030.bytes.gz",
+        "bytes": 3336091,
+        "sha256": "1219ae2f8acb59793df14e17963784e7ee26d6311d86c55ce6723698871ade1e",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 10211739,
+        "uncompressed_sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-031.bytes.gz",
+        "bytes": 199876,
+        "sha256": "d935987e747ebdde5755ba4a9aef7ad49af38049a3f878bd11841ed24659119a",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 607984,
+        "uncompressed_sha256": "d928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-032.bytes.gz",
+        "bytes": 649710,
+        "sha256": "da997994b0a26f0ef36e000c51621ad4a4e7e5c06c60d8f837f204becf546dd4",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4835479,
+        "uncompressed_sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-033.bytes.gz",
+        "bytes": 758321,
+        "sha256": "644d09b362737afefe91e83e9fb9869b383e8ab3f618ddb8fa9048afdbbfdefa",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 5226173,
+        "uncompressed_sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-034.bytes.gz",
+        "bytes": 528230,
+        "sha256": "20da85b307b5873bfb358692828db256ac35e9870b6be5a07bca7a06c52331b0",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4607953,
+        "uncompressed_sha256": "dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-035.bytes.gz",
+        "bytes": 438842,
+        "sha256": "17141188aa14dc7507a1aef044f78bc6f1fe129c650bd47073e1efa2cf76e190",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4257402,
+        "uncompressed_sha256": "1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-036.bytes.gz",
+        "bytes": 729761,
+        "sha256": "a7fe234925269403c2fadf098457d2b006cf3a9ca3ac5275d064254221a06063",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 5097739,
+        "uncompressed_sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-037.bytes.gz",
+        "bytes": 969564,
+        "sha256": "5edc4891c723f5592bad52beddfac02eec235a8f5f4844643317c4c7d66bb66c",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 5729632,
+        "uncompressed_sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-038.bytes.gz",
+        "bytes": 462615,
+        "sha256": "c8c1d239141a46fa23d8767c6905a3eebe3d19ffcd0f1b88f74d4de03a478875",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1573576,
+        "uncompressed_sha256": "04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-039.bytes.gz",
+        "bytes": 1009011,
+        "sha256": "6d4aa6da80fa631e099c93bc000da24a6f02b471f0e4ff4e8724d54d2d5fc396",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 10164089,
+        "uncompressed_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-040.bytes.gz",
+        "bytes": 3264,
+        "sha256": "23e232b96f4fb4c1f905f31d03bddc91c5e31ae51962f4956052c8bd28fdc52d",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 3241,
+        "uncompressed_sha256": "71ac7d75f7d1ed5992893f6a983e839773f6ec2423baee33017bebbc8b3788ec"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-041.bytes.gz",
+        "bytes": 3571538,
+        "sha256": "accf1f463cde7d6c5b1c53bc00a11aeb677bc141507bcde7f079cccadebf5913",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 3570430,
+        "uncompressed_sha256": "2e2e5ea6e81c5ca8ed2f28c1002ed11f01a54354cdb42771bf39e78d88569b68"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-042.bytes.gz",
+        "bytes": 180,
+        "sha256": "750f489351f1ed9981792a8b653371e8c7df4030d6f78eb4df517e30d8321966",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 944,
+        "uncompressed_sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-043.bytes.gz",
+        "bytes": 1565659,
+        "sha256": "575a37c712548339867c61a837d430839a90cf9b6d0fff41e7930afab05df303",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1565161,
+        "uncompressed_sha256": "a57bd38b23b57d884853c3e8e6da1a4a24c9ca40dd1edb8e9b2de4db70c0656f"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/original-044.bytes.gz",
+        "bytes": 432,
+        "sha256": "6341d3e325a7513bb06953e6b56145498760cc94c0ad87cd6946e985f7f8a9cf",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 669,
+        "uncompressed_sha256": "55f4399d4bc54bbaed8bdd28be665f6cb27bfcb4b0db5dd144a950bb25fe38fb"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/report.json",
+        "bytes": 492083,
+        "sha256": "230a49dbb3feab482d2946a7a4c75b9b8069acd841fc2609f2251cf6d2d58330",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-008.geojson.gz",
+        "bytes": 1161752,
+        "sha256": "20ecf84ad85b3fb74514e4633c5b0c0d94d59b20e0a4ef2829348fb1e9f75f77",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8387297,
+        "uncompressed_sha256": "45a0a16bf4340220d10f8bd3826309508850b7c4b945f5911fd2fe3d3de66042"
+      },
+      {
+        "path": "scripts/evidence/geometry.py",
+        "bytes": 5264,
+        "sha256": "944541968fcdf065b9c4b6105be227c3e0e14b6a20916f4fa21f851338c7a305",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/evidence/immutable.py",
+        "bytes": 7090,
+        "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/ellipsoidal_area.py",
+        "bytes": 1953,
+        "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/manifest.json",
+        "bytes": 271171,
+        "sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-11.json",
+        "bytes": 5131824,
+        "sha256": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-17.json",
+        "bytes": 4945828,
+        "sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-30.json",
+        "bytes": 11979437,
+        "sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-31.json",
+        "bytes": 10086485,
+        "sha256": "44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-32.json",
+        "bytes": 10211739,
+        "sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "canonical_grid": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+      "hierarchy": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "world_index": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+    },
+    "pin_files": {
+      "canonical_grid": "data/canonical-grid/manifest.json",
+      "hierarchy": "data/hierarchy.json",
+      "world_index": "data/world-index.json"
+    },
+    "subject_files": {
+      "atlas:local:IND:7132399B1507487316620": "data/geography/part-30.json",
+      "atlas:local:IND:7132399B19493089186258": "data/geography/part-30.json",
+      "atlas:local:IND:7132399B23352295489123": "data/geography/part-30.json",
+      "atlas:local:IND:7132399B25679382819073": "data/geography/part-30.json",
+      "atlas:local:IND:7132399B27106528401514": "data/geography/part-30.json",
+      "atlas:local:IND:7132399B38242062299143": "data/geography/part-31.json",
+      "atlas:local:IND:7132399B49490689811564": "data/geography/part-31.json",
+      "atlas:local:IND:7132399B516102083904": "data/geography/part-31.json",
+      "atlas:local:IND:7132399B78390472834442": "data/geography/part-32.json",
+      "atlas:local:IND:7132399B91194549462935": "data/geography/part-32.json",
+      "gb:IND:ADM2:76128533B7291413308870": "data/geography/part-11.json",
+      "gb:PAK:ADM2:60131773B1682888309057": "data/geography/part-17.json",
+      "gb:PAK:ADM2:60131773B44072502651200": "data/geography/part-17.json",
+      "gb:PAK:ADM2:60131773B44161758981040": "data/geography/part-17.json",
+      "gb:PAK:ADM2:60131773B62209958986210": "data/geography/part-17.json",
+      "gb:PAK:ADM2:60131773B87869837926518": "data/geography/part-17.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "gb:IND:ADM3:simplified:2018",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/IND/ADM3/geoBoundaries-IND-ADM3_simplified.geojson",
+      "role": "Original IND ADM3 boundary source; exact native members used for the issue crosswalk.",
+      "vintage": "2018 simplified IND ADM3; source metadata update 2023-01-19; build 2023-12-12",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "redistributable",
+        "terms": "Open Data Commons Open Database License 1.0 as stated in pinned geoBoundaries metadata; source attribution/ODbL obligations apply."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "research/geography/shared-seam-ind-pak-20261006/sources/original-byte-parts/ind-adm3-simplified-000.source-bytes",
+          "bytes": 16000000,
+          "sha256": "bdf7b2f0ce20ae29958a64b9e6a62aba598842264878548493ab950f0a6c0d39",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-ind-pak-20261006/sources/original-byte-parts/ind-adm3-simplified-001.source-bytes",
+          "bytes": 16000000,
+          "sha256": "9bdef298e45f3ed0d31c8435118b20157e8c5b211d8d33edfa131136cfecf2b8",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-ind-pak-20261006/sources/original-byte-parts/ind-adm3-simplified-002.source-bytes",
+          "bytes": 8040002,
+          "sha256": "17e63a2aca477d4abf318a189bd701e016d8b19ebe23d6d75600b4f083a770e7",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "description": "Pinned geoBoundaries commit 9469f09592ced973a3448cf66b6100b741b64c0d, path releaseData/gbOpen/IND/ADM3/geoBoundaries-IND-ADM3_simplified.geojson; GitHub pointer blob SHA-1 c2947eafd9bfcc60e2835e05f182927e6186c815; LFS OID SHA-256 4ea6807d0a0c5aac0b46ee8e31ed7c30fbec273b44345bba1e4a2bb5f299f5fb; complete identity-encoded original 40040002 bytes and 40040002 decoded bytes, whole-file SHA-256 4ea6807d0a0c5aac0b46ee8e31ed7c30fbec273b44345bba1e4a2bb5f299f5fb. Original is retained as ordered contiguous fixed-offset raw byte parts; independently concatenate and verify full source SHA-256/LFS OID. This is lossless partitioning, not feature extraction or an oversize waiver."
+    },
+    {
+      "id": "gb:IND:ADM2:2021",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/IND/ADM2/geoBoundaries-IND-ADM2.geojson",
+      "role": "Original IND ADM2 boundary source; exact native members used for the issue crosswalk.",
+      "vintage": "2021 IND ADM2; source metadata update 2023-01-19; build 2023-12-12",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "redistributable",
+        "terms": "Open Data Commons Open Database License 1.0 as stated in pinned geoBoundaries metadata; source attribution/ODbL obligations apply."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "research/geography/shared-seam-ind-pak-20261006/sources/original-byte-parts/ind-adm2-000.source-bytes",
+          "bytes": 16000000,
+          "sha256": "fdf070599f9e9e0e8cd2ecbb126d3493fa8c304e6430fc231c1fbf0e317c1b8e",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-ind-pak-20261006/sources/original-byte-parts/ind-adm2-001.source-bytes",
+          "bytes": 16000000,
+          "sha256": "2bf8c6cb9041940cb5f9480a82f9336f5cc185b195adb5ef3be0e6893ab71bd7",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-ind-pak-20261006/sources/original-byte-parts/ind-adm2-002.source-bytes",
+          "bytes": 16000000,
+          "sha256": "bb23d131fa048a604b4823c4312f275ef19abda42eeb4fb90d0ea7b46ac895dc",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-ind-pak-20261006/sources/original-byte-parts/ind-adm2-003.source-bytes",
+          "bytes": 317735,
+          "sha256": "5af7eb09744c2784a9a0f18beb794d93643289c1b1521f2e0ad2787b3d18e544",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "description": "Pinned geoBoundaries commit 9469f09592ced973a3448cf66b6100b741b64c0d, path releaseData/gbOpen/IND/ADM2/geoBoundaries-IND-ADM2.geojson; GitHub pointer blob SHA-1 e968822bc8d5f29cf4ffe00ffdd48f7b312bd0bc; LFS OID SHA-256 8bef6929fd65432e7dc775e7c44473e84efff064ebddbfd6b834e6291546db40; complete identity-encoded original 48317735 bytes and 48317735 decoded bytes, whole-file SHA-256 8bef6929fd65432e7dc775e7c44473e84efff064ebddbfd6b834e6291546db40. Original is retained as ordered contiguous fixed-offset raw byte parts; independently concatenate and verify full source SHA-256/LFS OID. This is lossless partitioning, not feature extraction or an oversize waiver."
+    },
+    {
+      "id": "gb:PAK:ADM2:2019",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/PAK/ADM2/geoBoundaries-PAK-ADM2.geojson",
+      "role": "Original PAK ADM2 boundary source; exact native members used for the issue crosswalk.",
+      "vintage": "2019 PAK ADM2; source metadata update 2023-01-19; build 2023-12-12",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "redistributable",
+        "terms": "Public Domain as stated in pinned geoBoundaries metadata."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "research/geography/shared-seam-ind-pak-20261006/sources/original-byte-parts/pak-adm2-000.source-bytes",
+          "bytes": 1082661,
+          "sha256": "108eeaa75a6de678f022e0b6d8fd8ab4c93e4b4d1a9c6a28995afe7c0731182c",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "description": "Pinned geoBoundaries commit 9469f09592ced973a3448cf66b6100b741b64c0d, path releaseData/gbOpen/PAK/ADM2/geoBoundaries-PAK-ADM2.geojson; GitHub pointer blob SHA-1 782c1025c3dc150116801f9d2f2587b7043340c4; LFS OID SHA-256 108eeaa75a6de678f022e0b6d8fd8ab4c93e4b4d1a9c6a28995afe7c0731182c; complete identity-encoded original 1082661 bytes and 1082661 decoded bytes, whole-file SHA-256 108eeaa75a6de678f022e0b6d8fd8ab4c93e4b4d1a9c6a28995afe7c0731182c. Original is retained whole."
+    },
+    {
+      "id": "natural-earth-lakes",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_lakes.geojson",
+      "role": "Inherited coarse major lake/reservoir reference, identified as context only.",
+      "vintage": "Pinned ca96624a56bd078437bca8184e78163e5039ad19; modern and not year-specific",
+      "retrieved_at": "2026-10-05 retained-byte receipt in original input envelope",
+      "license": {
+        "status": "redistributable",
+        "terms": "Natural Earth public domain; https://www.naturalearthdata.com/about/terms-of-use/"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Original gzip source bytes are retained as original-043.bytes.gz in the pinned complete original input envelope at baseline c603. The nested source hash/size is documented in the inherited input receipt; the final seam run did not classify the fragments against this source.",
+      "limit": "Major lakes/reservoirs only; known invalid original polygons block affected tiles, small waters are unresolved, and this reference is modern rather than year-specific."
+    },
+    {
+      "id": "esa-worldcover-2021-v200",
+      "url": "https://esa-worldcover.org/en/data-access",
+      "role": "Official independently dated land-cover comparator for future physical-surface verification.",
+      "vintage": "ESA WorldCover 2021 v200; released 2022-10-28; DOI 10.5281/zenodo.7254221",
+      "retrieved_at": "2026-10-06 product metadata citation; no pixels retrieved",
+      "license": {
+        "status": "redistributable",
+        "terms": "Creative Commons Attribution 4.0 International (CC BY 4.0), as stated by ESA product documentation."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Use ESA official release and data-access documentation at the cited URLs; original raster pixels were not fetched or queried in this bounded source packet.",
+      "limit": "No raster pixels support this packet. The global 10 m tiles exceed the existing evidence bounds; WorldCover is a land-cover product, not an administrative or legal water/sovereignty determination. Map vintage 2021 differs from all three administrative source vintages."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/README.md",
+      "bytes": 4679,
+      "sha256": "ed61399db16b69931d3f1da1efcad6c6b8698653e4edd6489ef9e0da5d0d7f22",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/assessment.json",
+      "bytes": 4375,
+      "sha256": "428c495f5c81841a638373f33a57f48c921cfd0e034fc0e693694514b5222394",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/comparisons/original-vs-current.json",
+      "bytes": 28883,
+      "sha256": "3668507f375c458ac07c82bc349c1822be036289ee3b4c43845dc425e9f26be9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/controls.json",
+      "bytes": 481,
+      "sha256": "a10a8ddbf8858e60e5ad8c06f23718370fd46e1226175b28509a81cee8112ced",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/generator-negative-control.json",
+      "bytes": 159,
+      "sha256": "eb0ef829e129adc7f4baa7f0732e74a5703dfe13a39aaf14a27da7519bf77c86",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/generator-positive-control.json",
+      "bytes": 229,
+      "sha256": "9ab74123a9afee4ab3c656256d6f28917dd362ef4caf80ffc5dcec445c637f00",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/geometry-controls.json",
+      "bytes": 1801,
+      "sha256": "10ddc1c2ae125e35b75f54d56cf3af7ea9f8c06e1401debada01b3fba6a5c5e7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/geometry-negative-control.json",
+      "bytes": 683,
+      "sha256": "2f9e4b80ac5debbbae7e1e47bf08d27a55cae5a60ddaa1e27adba51dfebc5e44",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/geometry-positive-control.json",
+      "bytes": 463,
+      "sha256": "22c96e6d67ff91ce2210592ca82b0a63e5e9018fe7e966acdc5a07f986363cec",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/inputs/original-input-envelope-readback.json",
+      "bytes": 25464,
+      "sha256": "5d21f3fbe8bfdc47950595d5c3b3acd9c5ff375ad0a6ebd1fa1c406b7b0881dc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/reproduce.py",
+      "bytes": 35870,
+      "sha256": "0f57b88f51057cd8cf8ebc3c9f4071bb355ed56bb94c6336d41e9af139c99fcb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/runs/run-1.json",
+      "bytes": 1317853,
+      "sha256": "7ba90935d928ec9ff87b718f809a7e933e66b4d19df0fa76e094f46ed01ae13f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/runs/run-2.json",
+      "bytes": 1317853,
+      "sha256": "7ba90935d928ec9ff87b718f809a7e933e66b4d19df0fa76e094f46ed01ae13f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/source-controls.json",
+      "bytes": 954,
+      "sha256": "fc19e3c202b2d770f6be86026d16974b6ec5841ca32f5f05284f664a6caf415d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/source-crosswalk.json",
+      "bytes": 14118,
+      "sha256": "47e61aed7a745d2ae88a2111244bc4a5d0f0c16e0236d508583cc42c30e81532",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/source-negative-control.json",
+      "bytes": 326,
+      "sha256": "bc64e7c7fb803b6f3a121075cee4bf29e8c08e88886bd939c90d5f90c25824e2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/source-positive-control.json",
+      "bytes": 388,
+      "sha256": "9eb7dad064433207ee91078aabaa02a7fb317942b675a7afc7cfa476ddc0997b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/current-features/60131773B1682888309057.geojson",
+      "bytes": 5744,
+      "sha256": "73882922b16ce260056d7fb3a5295971299290a9f216be00cabed0ea1c3f81c9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/current-features/60131773B44072502651200.geojson",
+      "bytes": 5753,
+      "sha256": "e3c5f36bd05f38132c349a008e455437a13e7b28e2269f906799cfbeea27310f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/current-features/60131773B44161758981040.geojson",
+      "bytes": 3901,
+      "sha256": "d19849685d87065d8ab5bf529d583a6cd3e529c1ee060a0488a0af07c4b2b39d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/current-features/60131773B62209958986210.geojson",
+      "bytes": 5119,
+      "sha256": "eefbbeaa5fcecc0fbd5018bfc4707c7ae378c2553cefbcbc7b16bcda9d018e17",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/current-features/60131773B87869837926518.geojson",
+      "bytes": 4760,
+      "sha256": "e8b52b22c6a239229ea0dd64a54f67e897c8d35c0f40125d4014378b259ab9c1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/current-features/7132399B1507487316620.geojson",
+      "bytes": 12726,
+      "sha256": "b8cc7121148b8bd7701a06f99f71a488544b989419a0ae5e907d46e9f067fd82",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/current-features/7132399B19493089186258.geojson",
+      "bytes": 6921,
+      "sha256": "3e2a4cd8ae2f5d3aa15643f2145a7610e31a9bfafd3a06492d7fec55aae9599f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/current-features/7132399B23352295489123.geojson",
+      "bytes": 4729,
+      "sha256": "6402061681ab26153c3aee20262e86680aa7bdc730fda55798324ff5da7e3189",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/current-features/7132399B25679382819073.geojson",
+      "bytes": 10542,
+      "sha256": "98fa45cef2b7fbd548d4d9cff732fa00305ab9eecb42d772eb56c21cf26a14e6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/current-features/7132399B27106528401514.geojson",
+      "bytes": 16442,
+      "sha256": "52763cf1383deeee379c1fbecaadd8477679afe301d33689c88c5016978dadb0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/current-features/7132399B38242062299143.geojson",
+      "bytes": 14154,
+      "sha256": "89f1e58dec77df93a47c826bae70981e1f9a7f06cc8bc1446454ffe37a67d45a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/current-features/7132399B49490689811564.geojson",
+      "bytes": 8962,
+      "sha256": "f1ce65ed8409664836d0490ff265676f554a9d63df71c957eea0c971c32f2c47",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/current-features/7132399B516102083904.geojson",
+      "bytes": 8814,
+      "sha256": "48f166eb5461eaf118017ab1fd525b1fca90bbe818353b345896fad76bd6c82b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/current-features/7132399B78390472834442.geojson",
+      "bytes": 6096,
+      "sha256": "bf46300283eb66712b5b19c85f85aa832f585969d27bb7852e926f0b205084bd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/current-features/7132399B91194549462935.geojson",
+      "bytes": 10171,
+      "sha256": "1889f38f072c881c06ca57d69bbfa808d208099ef96680cd4c086c9fe89ccd7a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/current-features/76128533B7291413308870.geojson",
+      "bytes": 4839,
+      "sha256": "3883c73e6009cbcee04e25bb132ea7de8ae30e7219f3af245e4f86816504c096",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/original-features/60131773B1682888309057.geojson",
+      "bytes": 15419,
+      "sha256": "8d4806155bcccb977fc8e9a49f3c415a75f94bc4f32aebf4a82b7253e7d80bad",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/original-features/60131773B44072502651200.geojson",
+      "bytes": 5541,
+      "sha256": "4d6a059619a53f4cda11ac0280ff20dfc4832c860084505def294a4e213a41f9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/original-features/60131773B44161758981040.geojson",
+      "bytes": 6845,
+      "sha256": "7b09ccbb3225707b5f91e4717427823306f75bcf14dd1dd1eccb28c95da8503e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/original-features/60131773B62209958986210.geojson",
+      "bytes": 10528,
+      "sha256": "89e8b198f969b9fa79fe374aaa1a9f8218a7ed6f34728a27e3db3d0dc4d4549c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/original-features/60131773B87869837926518.geojson",
+      "bytes": 10836,
+      "sha256": "1189a96d18d5f1d74c3f4903307ed4ee7e27ba9476c487cd540529a7e3e0fea1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/original-features/7132399B1507487316620.geojson",
+      "bytes": 11310,
+      "sha256": "15d12f43cfdbaeb635dbf7c8f8469bbf12524461e0bbac86d622300e31f35983",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/original-features/7132399B19493089186258.geojson",
+      "bytes": 5428,
+      "sha256": "0c57633e24c04e03bd32977f514701216ea71cfbcedb9a7e4f0825a48e918a50",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/original-features/7132399B23352295489123.geojson",
+      "bytes": 3501,
+      "sha256": "543b197796c6bf1e64f7572108fff79672e5a5c776e2ed341ecab63ace80bf10",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/original-features/7132399B25679382819073.geojson",
+      "bytes": 9484,
+      "sha256": "4b327cd7d40a72ca0c84c9c3e1310edcba193a0aad52139e91655f46b5322d76",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/original-features/7132399B27106528401514.geojson",
+      "bytes": 14739,
+      "sha256": "d8a770b8effe274aed74cd0b839a7a09ce67894286ca8f35d5fae3c8790753fd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/original-features/7132399B38242062299143.geojson",
+      "bytes": 13048,
+      "sha256": "175129aa272680e8362542c1d33ee3624492cd2aac9fc8ddb0d22fbbc0898bea",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/original-features/7132399B49490689811564.geojson",
+      "bytes": 7385,
+      "sha256": "44239abf139689e02783f1c53f94fa82f33f710971ba6fd5146a8ba61d461c75",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/original-features/7132399B516102083904.geojson",
+      "bytes": 7265,
+      "sha256": "23cc2c0a8d05b2e52832aeecc6321001dfd9f566c93d546cb3adc6532a7cf781",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/original-features/7132399B78390472834442.geojson",
+      "bytes": 4538,
+      "sha256": "c47bc1e405dfbee2843c643c61abcd602beca418e7e86ec755bacec6118a86ff",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/original-features/7132399B91194549462935.geojson",
+      "bytes": 8494,
+      "sha256": "94e0f9d02cef49de6270d67ab99c91e64e807944b0f955aa79ec788298d53d0a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/original-features/76128533B7291413308870.geojson",
+      "bytes": 53533,
+      "sha256": "fc58c340743b9f2aff88225b2bba77ced18b9c22d552b0426f10f53dbd6be61e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/physical-gap-fragments/1274-1.geojson",
+      "bytes": 14845,
+      "sha256": "370a3a380760f6dd02c5c588e69385d65b3afd4cd9703cbc578596989302a730",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/physical-gap-fragments/1346-2.geojson",
+      "bytes": 6824,
+      "sha256": "d16ac5ffccab3c818261a7835797831b87a1fba5115332a651eda7eb9c54c273",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/source-custody.json",
+      "bytes": 11774,
+      "sha256": "0e75f5d99564cd8aa2db6036a55edec10b782b3f23d17017fd954f85257037e5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/upstream-metadata/geoBoundaries-IND-ADM2-metaData.json",
+      "bytes": 889,
+      "sha256": "656a9800da6c69a02bae980349eb44ac83ab3a452e894fc782230fa22cdd1a2c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/upstream-metadata/geoBoundaries-IND-ADM3-metaData.json",
+      "bytes": 895,
+      "sha256": "061f7c25425f86c00c7f555ef8a5549ab949010806a45ca7757a21e8fe1275d9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/upstream-metadata/geoBoundaries-LICENSE",
+      "bytes": 14362,
+      "sha256": "f3e5a21600528018a566fe0020a8b433f542bd67920c6804aac8929b598035bd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/upstream-metadata/geoBoundaries-PAK-ADM2-metaData.json",
+      "bytes": 801,
+      "sha256": "2d5077f656aae8202338520cc02f594e243eb425efbb44e4f32fca7d41868d88",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/sources/worldcover-comparator.json",
+      "bytes": 1147,
+      "sha256": "bac9e960ab71f95113a66f2ea1af4ae796b610223e837e679b0243a8d71ab8b2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/stage_sources.py",
+      "bytes": 8962,
+      "sha256": "c7db341b99fabd0d245bf06a50a9bcfc2fcd8c2f916589637131d00eaf984c61",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/failed-crosswalk-attempt.json",
+      "bytes": 850,
+      "sha256": "31d10aa9024482b9daa1930fd81dbd384829c0894f49dae8b9c14227385a5069",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/failed-crosswalk-partial-extracts/current-features/7132399B1507487316620.geojson",
+      "bytes": 12726,
+      "sha256": "d998b294bf955bc3588761348ea2f5c01e28f355d7d9cf5a13742db3d5ca9e0a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/failed-crosswalk-partial-extracts/current-features/7132399B19493089186258.geojson",
+      "bytes": 6921,
+      "sha256": "8836c05bb64eb59519f40f8bc386bf84d3d38b144a07a728f1979434eba707f6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/failed-crosswalk-partial-extracts/current-features/7132399B23352295489123.geojson",
+      "bytes": 4729,
+      "sha256": "b3dd23c20f51080c38993e43870500b97e492c5eb5524ca395ccced1ed8d6791",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/failed-crosswalk-partial-extracts/current-features/7132399B25679382819073.geojson",
+      "bytes": 10542,
+      "sha256": "6a0120df682f6208a3871b2ff782d4c6f680ce7237c033fda3f4c34781a1eca5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/failed-crosswalk-partial-extracts/current-features/7132399B27106528401514.geojson",
+      "bytes": 16442,
+      "sha256": "6d768daae722a88ee599985a27048097bedcfa5d8cdacdf0c725240aabbcd143",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/failed-crosswalk-partial-extracts/current-features/7132399B38242062299143.geojson",
+      "bytes": 14154,
+      "sha256": "7a7a86ce57dd885561c00212b6d94ae9928a3d2763d193a27917685f8eaca6f1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/failed-crosswalk-partial-extracts/current-features/7132399B49490689811564.geojson",
+      "bytes": 8962,
+      "sha256": "812ddaeb990b3d7c8d2a5df6eef9db9a2b4340a5622fbcf67c04df3e6d41aae7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/failed-crosswalk-partial-extracts/current-features/7132399B516102083904.geojson",
+      "bytes": 8814,
+      "sha256": "9748d1878358bc03b8e5a361fa705349bd4b487b68f4c5489cf744c0aa7af8d1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/failed-crosswalk-partial-extracts/current-features/7132399B78390472834442.geojson",
+      "bytes": 6096,
+      "sha256": "4fe9bd9586e9dca897ad65bde53af7fa93a94cc599227cac2570a309db8381e0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/failed-crosswalk-partial-extracts/current-features/7132399B91194549462935.geojson",
+      "bytes": 10171,
+      "sha256": "2849a165b55d3770f5990e2b95ea9e57175190c27d5438211e5f93ceb037dc31",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/failed-crosswalk-partial-extracts/original-features/7132399B1507487316620.geojson",
+      "bytes": 11310,
+      "sha256": "dfba31d41d04dfd8d7e564a45182e75d289e1b2ee39b7808a1a1ba99575043d9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/failed-crosswalk-partial-extracts/original-features/7132399B19493089186258.geojson",
+      "bytes": 5428,
+      "sha256": "0ec5bda25386d22777a85865df3f22753aca6365e0930427e4ec691d20805414",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/failed-crosswalk-partial-extracts/original-features/7132399B23352295489123.geojson",
+      "bytes": 3501,
+      "sha256": "3c92d0dc74358cf753a1a0f6d8baddd2b9846e05feb2a7a10eb3653daa22f3e2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/failed-crosswalk-partial-extracts/original-features/7132399B25679382819073.geojson",
+      "bytes": 9484,
+      "sha256": "75c1e14204c65392682fa8a621e1ca39752dedb6798b52566908d6157370c376",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/failed-crosswalk-partial-extracts/original-features/7132399B27106528401514.geojson",
+      "bytes": 14739,
+      "sha256": "9b16cb515619e54456f4202211c21357fc517808f85c041f16e123c3c89afef2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/failed-crosswalk-partial-extracts/original-features/7132399B38242062299143.geojson",
+      "bytes": 13048,
+      "sha256": "e2ef83e9774df5b310c2a5900bc53f72720cf15069d229076cde634f0ee5ebca",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/failed-crosswalk-partial-extracts/original-features/7132399B49490689811564.geojson",
+      "bytes": 7385,
+      "sha256": "803f99b9acecf75b22e0d045073ee9d5dfc96995354caab460277d477fe2091a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/failed-crosswalk-partial-extracts/original-features/7132399B516102083904.geojson",
+      "bytes": 7265,
+      "sha256": "bd4ec43c1d2db7d66107b2201732b8e46349d94f086a7e791d98c9170d6f6fa0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/failed-crosswalk-partial-extracts/original-features/7132399B78390472834442.geojson",
+      "bytes": 4538,
+      "sha256": "d695e01ac75e8a340ae055cd71e92c6ea46281cdd63d89de28bc13dd543f87b4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/failed-crosswalk-partial-extracts/original-features/7132399B91194549462935.geojson",
+      "bytes": 8494,
+      "sha256": "414ca9ea37268adc7ccdfc7d32f583b7f779a7391a2eb1ba86ed4b5647363b9c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/failed-fragment-index-attempt.json",
+      "bytes": 744,
+      "sha256": "11c0d2c5dd83c449f42faa66ddcfbb904be240583f2e6f91407cd1e4949652db",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/failed-import-attempt.json",
+      "bytes": 779,
+      "sha256": "cc11264f264c4002510b4f2ab197bdfc1e3599821b13e44c38c187bfda919384",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/pre-helper-schema/README.md",
+      "bytes": 487,
+      "sha256": "bde05bd280347c47e41a15d7333ec9988f08916a15087f64e9f5844b8f4ac56d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/pre-helper-schema/comparison-superseded.json",
+      "bytes": 28883,
+      "sha256": "d4e599dbafba523fb143f0ed39495566e4bc4ad697c4cafa6e9f106c77727693",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/pre-helper-schema/controls-superseded.json",
+      "bytes": 481,
+      "sha256": "5fbf43d45317cb3fd39e09deec0e409bd4339e3fb0c4efad87440fbcb5ac923e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/pre-helper-schema/geometry-controls-superseded.json",
+      "bytes": 1807,
+      "sha256": "1b067f4fe2544bf6d233960b5a1a8d0e76f8aecee97c2396987652992ab3b46c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/pre-helper-schema/run-1-superseded.json",
+      "bytes": 1320902,
+      "sha256": "241f59b5ff629d5afd2b107fa4391da9ecae89de90971045671363f6488c9c41",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/pre-helper-schema/run-2-superseded.json",
+      "bytes": 1320902,
+      "sha256": "241f59b5ff629d5afd2b107fa4391da9ecae89de90971045671363f6488c9c41",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/pre-helper-schema/source-controls-superseded.json",
+      "bytes": 973,
+      "sha256": "f31cbf5fd11410d766ebd48dae6dff69f64a6c219465d2d7a96a153449e5fead",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/pre-helper-schema/two-run-superseded.json",
+      "bytes": 568,
+      "sha256": "d78fbec6ebb9514298af86e087498db02cbbe8f93036609d65ee87e92e06660d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/pre-remnant-correction/README.md",
+      "bytes": 647,
+      "sha256": "f772809c93082d8bf3cba28f3031f612168b62aa9b8df7b0b6b32989638adf9a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/pre-remnant-correction/controls-superseded.json",
+      "bytes": 387,
+      "sha256": "6f9350919c67ab6ecfc72cbe32b8e5478ad36b4c75422c9088e9b9c137f5b06b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/pre-remnant-correction/original-vs-current-superseded.json",
+      "bytes": 18045,
+      "sha256": "31a4249d148cb2177d38fad18fbbc63cf720d50e80684364c556717417c824de",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/pre-remnant-correction/run-1-superseded.json",
+      "bytes": 36890,
+      "sha256": "efa86b3487cc4e30edeea35661b33c66213fdcaf851415c7d0f9c4749256d2c9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/pre-remnant-correction/run-2-superseded.json",
+      "bytes": 36890,
+      "sha256": "efa86b3487cc4e30edeea35661b33c66213fdcaf851415c7d0f9c4749256d2c9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/pre-scoped-inputs/README.md",
+      "bytes": 654,
+      "sha256": "cad2521e4a6565b2ad6105c0cea1cc38eae1650c3d4e5439fd0414ca91b48cdf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/pre-scoped-inputs/controls.json.superseded",
+      "bytes": 481,
+      "sha256": "a10a8ddbf8858e60e5ad8c06f23718370fd46e1226175b28509a81cee8112ced",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/pre-scoped-inputs/generator-negative-control.json.superseded",
+      "bytes": 159,
+      "sha256": "eb0ef829e129adc7f4baa7f0732e74a5703dfe13a39aaf14a27da7519bf77c86",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/pre-scoped-inputs/generator-positive-control.json.superseded",
+      "bytes": 229,
+      "sha256": "9ab74123a9afee4ab3c656256d6f28917dd362ef4caf80ffc5dcec445c637f00",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/pre-scoped-inputs/geometry-controls.json.superseded",
+      "bytes": 1801,
+      "sha256": "10ddc1c2ae125e35b75f54d56cf3af7ea9f8c06e1401debada01b3fba6a5c5e7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/pre-scoped-inputs/geometry-negative-control.json.superseded",
+      "bytes": 683,
+      "sha256": "2f9e4b80ac5debbbae7e1e47bf08d27a55cae5a60ddaa1e27adba51dfebc5e44",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/pre-scoped-inputs/geometry-positive-control.json.superseded",
+      "bytes": 463,
+      "sha256": "22c96e6d67ff91ce2210592ca82b0a63e5e9018fe7e966acdc5a07f986363cec",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/pre-scoped-inputs/original-vs-current.json.superseded",
+      "bytes": 28883,
+      "sha256": "3668507f375c458ac07c82bc349c1822be036289ee3b4c43845dc425e9f26be9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/pre-scoped-inputs/run-1.json.superseded",
+      "bytes": 1321642,
+      "sha256": "37a494c30cdcfa557d3c71fdf6fec24ae9402c2d6d496e6e9e570917cb831dae",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/pre-scoped-inputs/run-2.json.superseded",
+      "bytes": 1321642,
+      "sha256": "37a494c30cdcfa557d3c71fdf6fec24ae9402c2d6d496e6e9e570917cb831dae",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/pre-scoped-inputs/source-controls.json.superseded",
+      "bytes": 954,
+      "sha256": "fc19e3c202b2d770f6be86026d16974b6ec5841ca32f5f05284f664a6caf415d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/pre-scoped-inputs/source-negative-control.json.superseded",
+      "bytes": 326,
+      "sha256": "bc64e7c7fb803b6f3a121075cee4bf29e8c08e88886bd939c90d5f90c25824e2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/pre-scoped-inputs/source-positive-control.json.superseded",
+      "bytes": 388,
+      "sha256": "9eb7dad064433207ee91078aabaa02a7fb317942b675a7afc7cfa476ddc0997b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/pre-scoped-inputs/two-run-reproducibility.json.superseded",
+      "bytes": 560,
+      "sha256": "614b5663f916257a1afa00baad594b80f5f222181a21d4da328541b854fba702",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/pre-validation-schema/README.md",
+      "bytes": 680,
+      "sha256": "822bc705c5ce7fc9444db8797d66a635289e519e43c3caa036a1866502ee261b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/pre-validation-schema/comparison-superseded.json",
+      "bytes": 28883,
+      "sha256": "d4e599dbafba523fb143f0ed39495566e4bc4ad697c4cafa6e9f106c77727693",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/pre-validation-schema/controls-superseded.json",
+      "bytes": 481,
+      "sha256": "dc3d99dbb6b9a4aea6e910589db897e202ee6a282923e9ef261e7c5da76057fb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/pre-validation-schema/geometry-controls-superseded.json",
+      "bytes": 1723,
+      "sha256": "88ca68c89890ee670946de87d36dae9205f95efda738a7c8a75dd85d5f253a20",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/pre-validation-schema/run-1-superseded.json",
+      "bytes": 1320682,
+      "sha256": "6fda768d36b5535cf2c69993f8db563458e6177bbd0f2cf341937d947ea5e42e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/trials/pre-validation-schema/run-2-superseded.json",
+      "bytes": 1320682,
+      "sha256": "6fda768d36b5535cf2c69993f8db563458e6177bbd0f2cf341937d947ea5e42e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-20261006/two-run-reproducibility.json",
+      "bytes": 560,
+      "sha256": "5943cdfe3c7eb64862d6a0ff795fd2cbc56fcc69b5f5bcb5f418e03f3273af62",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "seam-source-crosswalk",
+      "kind": "source",
+      "description": "Restore exact native feature identities from complete pinned originals and map the 16 issue IDs via source shapeID/original_id lineage; no name/proximity fallback. Verify full source bytes, feature membership and both full-fragment identities.",
+      "software": "Python 3.12.14; exact generator commit 4e35869912bc5a7e0b222a3751219347443a34dc",
+      "units": "native feature identities and SHA-256 digests"
+    },
+    {
+      "id": "seam-geometry-measurement",
+      "kind": "geography",
+      "helper_version": "worldatlas-evidence-geometry-v1",
+      "description": "Compare exact source/current subject geometry and complete fragments. Measure polygon atoms on WGS84 ellipsoid, preserve line/point remnants and tiny positives, and report invalid-operation failures as unknown.",
+      "software": "Python 3.12.14; Shapely 2.1.2; pyproj 3.7.2",
+      "units": "square metres and metres",
+      "axis_order": "longitude-latitude",
+      "crs": "EPSG:4326",
+      "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+      "distance_method": "WGS84 inverse geodesic"
+    },
+    {
+      "id": "seam-evidence-generator",
+      "kind": "generator",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "description": "Generate complete deterministic source/fragment comparison and evidence ledgers from pinned bytes; rerun twice at the exact committed code SHA and compare complete output bytes and fields.",
+      "software": "Python 3.12.14; Shapely 2.1.2; pyproj 3.7.2",
+      "units": "whole-file bytes, square metres, metres, counts"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "combined-fragment-area",
+      "value": 2362541936.078026,
+      "unit": "m2",
+      "vintage": "baseline",
+      "evaluation_commit": "c603befd3aaf4da90d59b12378e1e0739331efba",
+      "input_sha256": "20ecf84ad85b3fb74514e4633c5b0c0d94d59b20e0a4ef2829348fb1e9f75f77"
+    },
+    {
+      "id": "source-fragment-contact-count",
+      "value": 0,
+      "unit": "positive-length contacts",
+      "vintage": "baseline",
+      "evaluation_commit": "c603befd3aaf4da90d59b12378e1e0739331efba",
+      "input_sha256": "20ecf84ad85b3fb74514e4633c5b0c0d94d59b20e0a4ef2829348fb1e9f75f77"
+    },
+    {
+      "id": "atlas-fragment-contact-count",
+      "value": 18,
+      "unit": "positive-length contacts",
+      "vintage": "baseline",
+      "evaluation_commit": "c603befd3aaf4da90d59b12378e1e0739331efba",
+      "input_sha256": "20ecf84ad85b3fb74514e4633c5b0c0d94d59b20e0a4ef2829348fb1e9f75f77"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "combined-fragment-area",
+      "value": 2362541936.078026,
+      "unit": "m2"
+    },
+    {
+      "metric_id": "source-fragment-contact-count",
+      "value": 0,
+      "unit": "positive-length contacts"
+    },
+    {
+      "metric_id": "atlas-fragment-contact-count",
+      "value": 18,
+      "unit": "positive-length contacts"
+    }
+  ],
+  "conclusions": [
+    {
+      "status": "supported",
+      "text": "All 16 exact issue subjects map to original members in the pinned IND ADM3 simplified 2018, IND ADM2 2021, and PAK ADM2 2019 sources.",
+      "source_ids": [
+        "gb:IND:ADM3:simplified:2018",
+        "gb:IND:ADM2:2021",
+        "gb:PAK:ADM2:2019"
+      ]
+    },
+    {
+      "status": "supported",
+      "text": "At pinned Atlas baseline c603befd3aaf4da90d59b12378e1e0739331efba, the two complete fragments have 0 original-source positive-length contacts and 18 selected-current-feature contacts; the combined fragment measurement is 2362541936.078026 m2.",
+      "source_ids": [
+        "gb:IND:ADM3:simplified:2018",
+        "gb:IND:ADM2:2021",
+        "gb:PAK:ADM2:2019"
+      ]
+    },
+    {
+      "status": "unresolved",
+      "text": "The measured source/current boundary difference does not isolate the contribution from source simplification, tier/year differences, or Atlas reconciliation.",
+      "source_ids": [
+        "gb:IND:ADM3:simplified:2018",
+        "gb:IND:ADM2:2021",
+        "gb:PAK:ADM2:2019"
+      ]
+    },
+    {
+      "status": "unresolved",
+      "text": "Physical land-versus-water status is unverified and no disputed affiliation is assigned. Natural Earth provides incomplete, modern major-lake context; WorldCover is unqueried.",
+      "source_ids": [
+        "natural-earth-lakes",
+        "esa-worldcover-2021-v200"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "PYTHONDONTWRITEBYTECODE=1 /Users/chengshuli/world-atlas-workspace/private-publisher-checks-20261004/shared-runtime/python-3.12.14-arm64-8358191609611765/bin/python3 -B research/geography/shared-seam-ind-pak-20261006/reproduce.py --run runs/run-1.json",
+    "PYTHONDONTWRITEBYTECODE=1 /Users/chengshuli/world-atlas-workspace/private-publisher-checks-20261004/shared-runtime/python-3.12.14-arm64-8358191609611765/bin/python3 -B research/geography/shared-seam-ind-pak-20261006/reproduce.py --run runs/run-2.json",
+    "Verify runs/run-1.json and runs/run-2.json complete-file SHA-256 and all-field equality against two-run-reproducibility.json; both record actual_execution_sha 4e35869912bc5a7e0b222a3751219347443a34dc."
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "combined-fragment-area",
+      "path": "research/geography/shared-seam-ind-pak-20261006/runs/run-1.json",
+      "json_pointer": "/seam/combined_fragment_area_m2"
+    },
+    {
+      "metric_id": "source-fragment-contact-count",
+      "path": "research/geography/shared-seam-ind-pak-20261006/runs/run-1.json",
+      "json_pointer": "/seam/source_contact_count"
+    },
+    {
+      "metric_id": "atlas-fragment-contact-count",
+      "path": "research/geography/shared-seam-ind-pak-20261006/runs/run-1.json",
+      "json_pointer": "/seam/atlas_contact_count"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "seam-source-crosswalk",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/shared-seam-ind-pak-20261006/source-positive-control.json"
+    },
+    {
+      "method_id": "seam-source-crosswalk",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/shared-seam-ind-pak-20261006/source-negative-control.json"
+    },
+    {
+      "method_id": "seam-geometry-measurement",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/shared-seam-ind-pak-20261006/geometry-positive-control.json"
+    },
+    {
+      "method_id": "seam-geometry-measurement",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/shared-seam-ind-pak-20261006/geometry-negative-control.json"
+    },
+    {
+      "method_id": "seam-evidence-generator",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/shared-seam-ind-pak-20261006/generator-positive-control.json"
+    },
+    {
+      "method_id": "seam-evidence-generator",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/shared-seam-ind-pak-20261006/generator-negative-control.json"
+    },
+    {
+      "method_id": "seam-evidence-generator",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "research/geography/shared-seam-ind-pak-20261006/two-run-reproducibility.json"
+    }
+  ],
+  "change_receipts": []
+}

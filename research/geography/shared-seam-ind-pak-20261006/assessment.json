@@ -1,0 +1,51 @@
+{
+  "schema": "geo4-shared-seam-assessment-v1",
+  "scope": {
+    "issue": 1097,
+    "subjects": 16,
+    "source_layers": [
+      "gb:IND:ADM3:simplified:2018",
+      "gb:IND:ADM2:2021",
+      "gb:PAK:ADM2:2019"
+    ],
+    "physical_gap_fragments": [
+      "physical-gap:1274:1:bc2dfd4d6bfe071a9bea0d15adc0e4cc62e9962f2c6418395802962a579cade1",
+      "physical-gap:1346:2:eb4771cfae78b61aea03e2285006660025febfe0051a97abc63e812e210bd64f"
+    ],
+    "atlas_baseline_commit": "c603befd3aaf4da90d59b12378e1e0739331efba",
+    "source_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+    "actual_execution_commit": "4e35869912bc5a7e0b222a3751219347443a34dc"
+  },
+  "findings": [
+    {
+      "status": "supported",
+      "finding": "All 16 issue subjects map to one exact native source member each. The ten IND ADM3 simplified source IDs match the independently retained source features; the IND ADM2 and five PAK ADM2 current IDs resolve through the recorded original_id/source shapeID lineage. No name or proximity fallback was used.",
+      "evidence": ["source-crosswalk.json", "sources/source-custody.json", "runs/run-1.json"]
+    },
+    {
+      "status": "supported",
+      "finding": "The source vintages are distinct: IND ADM3 simplified is labeled 2018, IND ADM2 2021, and PAK ADM2 2019. geoBoundaries metadata separately records a source-data update date of 2023-01-19 and build date of 2023-12-12; neither is treated as a shared observation date. Metadata unit-count declarations differ from feature counts for the two Indian source files (6836 vs 6822; 736 vs 735).",
+      "evidence": ["source-crosswalk.json", "sources/source-custody.json"]
+    },
+    {
+      "status": "supported",
+      "finding": "For the two retained complete physical-gap fragments, the pinned Atlas baseline comparison records zero positive-length contact with the three original source layers and 18 contacts with the selected current Atlas features. The two fragments' combined measured area is 2362541936.078026 square metres under the stated WGS84 ellipsoidal measurement method. These are baseline-vintage geometry measurements, not a present-main result.",
+      "evidence": ["runs/run-1.json", "comparisons/original-vs-current.json", "geometry-controls.json", "two-run-reproducibility.json"]
+    },
+    {
+      "status": "unresolved",
+      "finding": "The comparison establishes a geometric difference but does not isolate whether it arose from source simplification, differing administrative tier or year, Atlas reconciliation, or a combination. The source vintages are not contemporaneous and the run does not support causal attribution.",
+      "evidence": ["source-crosswalk.json", "runs/run-1.json"]
+    },
+    {
+      "status": "unresolved",
+      "finding": "Land-versus-water status remains unknown. ESA WorldCover 2021 v200 is recorded as an unqueried official land-cover comparator, and the inherited Natural Earth 10m lake reference is incomplete and not year-specific. No disputed affiliation or administrative owner is inferred for either fragment.",
+      "evidence": ["sources/worldcover-comparator.json", "runs/run-1.json"]
+    }
+  ],
+  "methods_and_limits": {
+    "measurement": "Original polygon atoms are measured with the repository's pinned EPSG:4326 longitude-latitude WGS84 straight-source-edge ellipsoidal integral; distance uses the WGS84 inverse geodesic. Topological overlays are performed by the pinned helper in longitude/latitude coordinates. Geometry collections and all polygon, line and point remnants are retained; invalid operations are explicit unknowns. No snapping, buffering, MakeValid, area cutoff, owner fill, or disputed-affiliation inference is used.",
+    "whole_source_restoration": "The two Indian source objects exceed 32 MiB in both encoded and decoded form. Their complete original bytes are held in fixed-offset contiguous parts, each with exact offsets, lengths and hashes. Reassembly is checked against whole-source SHA-256 and the geoBoundaries Git LFS OID; the parts are not feature extracts or substitute originals. The PAK source is retained whole. See sources/source-custody.json.",
+    "scope_limit": "This packet compares exactly the 16 requested subjects and two original full fragments. It does not resolve physical surface or legal affiliation, approve geography, repair Atlas data, or close the broader gap goal."
+  }
+}
