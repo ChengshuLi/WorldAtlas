@@ -1,0 +1,1026 @@
+{
+  "baseline": {
+    "commit": "f1a6c0abc29de7bf7b7a081a8a9864b0450c0427",
+    "files": [
+      {
+        "bytes": 6613963,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-28.json",
+        "role": "baseline-pin",
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+      },
+      {
+        "bytes": 10164089,
+        "hash_kind": "file-bytes",
+        "path": "data/hierarchy.json",
+        "role": "baseline-pin",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      {
+        "bytes": 96517,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/source/natural-earth/ne_10m_admin_1_scoped-admin-features.json",
+        "role": "baseline-pin",
+        "sha256": "dd3f4a5683c713fd89c00b41748d89771f905ef236feaacb7887818085f3d96e"
+      }
+    ],
+    "pin_files": {
+      "data/geography/part-28.json": "data/geography/part-28.json",
+      "data/hierarchy.json": "data/hierarchy.json",
+      "data/regional-review/regional-review-14a242c4cb0781a7/source/natural-earth/ne_10m_admin_1_scoped-admin-features.json": "data/regional-review/regional-review-14a242c4cb0781a7/source/natural-earth/ne_10m_admin_1_scoped-admin-features.json"
+    },
+    "pins": {
+      "data/geography/part-28.json": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "data/hierarchy.json": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "data/regional-review/regional-review-14a242c4cb0781a7/source/natural-earth/ne_10m_admin_1_scoped-admin-features.json": "dd3f4a5683c713fd89c00b41748d89771f905ef236feaacb7887818085f3d96e"
+    },
+    "subject_files": {
+      "UMI-5171": "data/geography/part-28.json",
+      "UMI-5172": "data/geography/part-28.json",
+      "UMI-5173": "data/geography/part-28.json",
+      "UMI-5178": "data/geography/part-28.json"
+    }
+  },
+  "change_receipts": [
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/LICENSE-OSM.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/README.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/references.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/requirements.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/source/provenance.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/data-gov/baker-island-u-s-pacific-islands-um0502.html",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/data-gov/howland-island-u-s-pacific-islands-um0503.html",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/data-gov/jarvis-island-u-s-pacific-islands-um0504.html",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/data-gov/noaa-ngs-cusp.html",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/data-gov/palmyra-atoll-us-pacific-islands-um0501.html",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/noaa-inport/60798-full-list.html",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/noaa-inport/60799-full-list.html",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/noaa-inport/60800-full-list.html",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/noaa-inport/60801-full-list.html",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/noaa-inport/60812-cusp-full-list.html",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/noaa-ngs/CUSP-Pacific_Islands.http-headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/noaa-ngs/CUSP-Pacific_Islands.zip",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/noaa-ngs/UM0501-report.pdf",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/noaa-ngs/UM0501.zip",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/noaa-ngs/UM0502-report.pdf",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/noaa-ngs/UM0502.zip",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/noaa-ngs/UM0503-report.pdf",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/noaa-ngs/UM0503.zip",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/noaa-ngs/UM0504-report.pdf",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/noaa-ngs/UM0504.zip",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/noaa-ngs/nsde-more.html",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/openstreetmap-overpass-20261005.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/openstreetmap-overpass-query.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/validation/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/validation/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/validation/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/verify.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/verify_twice.py",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "Set PYTHONPATH to an isolated target containing the exact data/regional-review/umi-island-land-boundaries-20261005/requirements.txt packages plus scripts/; run python3.12 data/regional-review/umi-island-land-boundaries-20261005/verify_twice.py from repository root.",
+    "node scripts/evidence-quality.mjs data/regional-review/umi-island-land-boundaries-20261005/evidence-quality.json",
+    "node scripts/check-handoff-scope.mjs --branch geography/umi-dryland-1061-20261006 --base origin/main --pr-body-file /tmp/umi1061-pr-body.md --issue-file /tmp/umi1061-issue.json"
+  ],
+  "conclusions": [
+    {
+      "source_ids": [
+        "noaa-cusp-pacific-islands",
+        "noaa-ngs-umi-project-surveys"
+      ],
+      "status": "supported",
+      "text": "NOAA NGS CUSP is a lawful publicly downloadable current-product candidate in this scope, but its metadata says regional source completeness may be partial and the catalog inconsistently marks the dataset non-public. Three sites retain 2004\u20132005 line vintages; Palmyra includes 2022\u20132023 lines with blank source IDs."
+    },
+    {
+      "source_ids": [
+        "noaa-cusp-pacific-islands",
+        "noaa-ngs-umi-project-surveys"
+      ],
+      "status": "supported",
+      "text": "Atlas subject geometries materially diverge from CUSP/archived NOAA shoreline linework under the recorded bounded polygonization method; this supports an engineering reconciliation handoff, not an exact substitute polygon or automatic correction."
+    },
+    {
+      "source_ids": [
+        "fws-palmyra-atoll-refuge",
+        "openstreetmap-site-screen",
+        "noaa-cusp-pacific-islands"
+      ],
+      "status": "unresolved",
+      "text": "No inspected authoritative source provides a current, complete Palmyra named-islet/cay roster tied to reusable land vertices and lagoon membership. Point labels and polygon/component counts remain incomplete screens."
+    },
+    {
+      "source_ids": [
+        "fws-baker-island-refuge",
+        "fws-howland-island-refuge",
+        "fws-jarvis-island-refuge",
+        "fws-palmyra-atoll-refuge"
+      ],
+      "status": "supported",
+      "text": "FWS refuge/monument extents include substantial marine/submerged areas for these sites and must not be treated as dry-land footprints."
+    },
+    {
+      "source_ids": [
+        "fws-palmyra-atoll-refuge",
+        "fws-jarvis-island-refuge"
+      ],
+      "status": "supported",
+      "text": "Current geographic area ancestry physically groups Palmyra/Jarvis under Line Islands while pinned source features retain U.S. Minor Outlying Islands reference ownership; physical grouping does not establish Kiribati sovereignty."
+    }
+  ],
+  "issue": 1061,
+  "lane": "geography",
+  "methods": [
+    {
+      "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+      "area_units": "m2",
+      "axis_order": "longitude-latitude",
+      "crs": "EPSG:4326",
+      "description": "Filter exact source line attributes in four fixed site windows, node/unary-union and polygonize without topology repair; intersect resulting diagnostic polygons with baseline subject polygons and compare exact source-archive linework. Small line component totals and polygonization areas do not certify complete island/cay/lagoon membership.",
+      "distance_method": "WGS84 inverse geodesic",
+      "distance_units": "m",
+      "helper_version": "worldatlas-evidence-geometry-v1",
+      "id": "site-outline-comparison",
+      "kind": "geography",
+      "software": "Python 3.12.14; numpy 2.3.5; pyproj 3.7.2; PyShp 2.3.1; Shapely 2.1.2; committed scripts/evidence/geometry.py and scripts/ellipsoidal_area.py",
+      "units": "WGS84 ellipsoidal square metres; fractional polygonized-area intersections; source line feature records"
+    },
+    {
+      "description": "Review NOAA source dates, product completeness/uses/license metadata, FWS dry-land/refuge distinction, and OSM license/name screen for the exact four pinned subjects; preserve physical group ancestors separately from U.S. reference-owner metadata.",
+      "id": "territorial-and-source-review",
+      "kind": "source",
+      "software": "NOAA NGS CUSP and project archives; NOAA InPort; Data.gov; USFWS official web sources; Overpass API snapshot; inspection date 2026-10-05",
+      "units": "source records, administrative/physical role statements and documented limits"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "json_pointer": "/sites/UMI-5171/noaa_cusp/natural_mhw_line_records_intersecting_site_window",
+      "metric_id": "cusp_mhw_records_UMI-5171",
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/results.json"
+    },
+    {
+      "json_pointer": "/sites/UMI-5171/noaa_project_archive/natural_mhw_records",
+      "metric_id": "project_mhw_records_UMI-5171",
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/results.json"
+    },
+    {
+      "json_pointer": "/sites/UMI-5171/noaa_cusp_vs_project_archive/project_area_covered_by_cusp_fraction",
+      "metric_id": "cusp_archived_source_overlap_UMI-5171",
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/results.json"
+    },
+    {
+      "json_pointer": "/sites/UMI-5171/area_overlay_diagnostics/noaa_cusp/intersection_over_union",
+      "metric_id": "atlas_cusp_iou_UMI-5171",
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/results.json"
+    },
+    {
+      "json_pointer": "/sites/UMI-5172/noaa_cusp/natural_mhw_line_records_intersecting_site_window",
+      "metric_id": "cusp_mhw_records_UMI-5172",
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/results.json"
+    },
+    {
+      "json_pointer": "/sites/UMI-5172/noaa_project_archive/natural_mhw_records",
+      "metric_id": "project_mhw_records_UMI-5172",
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/results.json"
+    },
+    {
+      "json_pointer": "/sites/UMI-5172/noaa_cusp_vs_project_archive/project_area_covered_by_cusp_fraction",
+      "metric_id": "cusp_archived_source_overlap_UMI-5172",
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/results.json"
+    },
+    {
+      "json_pointer": "/sites/UMI-5172/area_overlay_diagnostics/noaa_cusp/intersection_over_union",
+      "metric_id": "atlas_cusp_iou_UMI-5172",
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/results.json"
+    },
+    {
+      "json_pointer": "/sites/UMI-5173/noaa_cusp/natural_mhw_line_records_intersecting_site_window",
+      "metric_id": "cusp_mhw_records_UMI-5173",
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/results.json"
+    },
+    {
+      "json_pointer": "/sites/UMI-5173/noaa_project_archive/natural_mhw_records",
+      "metric_id": "project_mhw_records_UMI-5173",
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/results.json"
+    },
+    {
+      "json_pointer": "/sites/UMI-5173/noaa_cusp_vs_project_archive/project_area_covered_by_cusp_fraction",
+      "metric_id": "cusp_archived_source_overlap_UMI-5173",
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/results.json"
+    },
+    {
+      "json_pointer": "/sites/UMI-5173/area_overlay_diagnostics/noaa_cusp/intersection_over_union",
+      "metric_id": "atlas_cusp_iou_UMI-5173",
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/results.json"
+    },
+    {
+      "json_pointer": "/sites/UMI-5178/noaa_cusp/natural_mhw_line_records_intersecting_site_window",
+      "metric_id": "cusp_mhw_records_UMI-5178",
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/results.json"
+    },
+    {
+      "json_pointer": "/sites/UMI-5178/noaa_project_archive/natural_mhw_records",
+      "metric_id": "project_mhw_records_UMI-5178",
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/results.json"
+    },
+    {
+      "json_pointer": "/sites/UMI-5178/noaa_cusp_vs_project_archive/project_area_covered_by_cusp_fraction",
+      "metric_id": "cusp_archived_source_overlap_UMI-5178",
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/results.json"
+    },
+    {
+      "json_pointer": "/sites/UMI-5178/area_overlay_diagnostics/noaa_cusp/intersection_over_union",
+      "metric_id": "atlas_cusp_iou_UMI-5178",
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/results.json"
+    },
+    {
+      "json_pointer": "/sites/UMI-5178/openstreetmap_screen/named_node_count_screen_only",
+      "metric_id": "osm_palmyra_named_point_records",
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/results.json"
+    },
+    {
+      "json_pointer": "/sites/UMI-5178/osm_named_point_to_noaa_screen/inside_polygonized_cusp_count_diagnostic",
+      "metric_id": "osm_palmyra_labels_in_cusp_polygons",
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/results.json"
+    }
+  ],
+  "metrics": [
+    {
+      "evaluation_commit": "f1a6c0abc29de7bf7b7a081a8a9864b0450c0427",
+      "id": "cusp_mhw_records_UMI-5171",
+      "input_sha256": "2244e2795991e6d3ed0d56caf516abbc1f088ea6d56be954c49071f06b4109e8",
+      "unit": "line-records-in-fixed-site-window",
+      "value": 1,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "f1a6c0abc29de7bf7b7a081a8a9864b0450c0427",
+      "id": "project_mhw_records_UMI-5171",
+      "input_sha256": "f7530a4e36b7a4d8b6809f892b5b85daccfc1ee30d46761dbec5ae326640b14b",
+      "unit": "archived-project-line-records-in-fixed-site-window",
+      "value": 1,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "f1a6c0abc29de7bf7b7a081a8a9864b0450c0427",
+      "id": "cusp_archived_source_overlap_UMI-5171",
+      "input_sha256": "2244e2795991e6d3ed0d56caf516abbc1f088ea6d56be954c49071f06b4109e8",
+      "unit": "fraction-of-archived-polygonized-line-area",
+      "value": 0.999999969,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "f1a6c0abc29de7bf7b7a081a8a9864b0450c0427",
+      "id": "atlas_cusp_iou_UMI-5171",
+      "input_sha256": "2244e2795991e6d3ed0d56caf516abbc1f088ea6d56be954c49071f06b4109e8",
+      "unit": "polygonized-outline-intersection-over-union",
+      "value": 0.229337501,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "f1a6c0abc29de7bf7b7a081a8a9864b0450c0427",
+      "id": "cusp_mhw_records_UMI-5172",
+      "input_sha256": "2244e2795991e6d3ed0d56caf516abbc1f088ea6d56be954c49071f06b4109e8",
+      "unit": "line-records-in-fixed-site-window",
+      "value": 1,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "f1a6c0abc29de7bf7b7a081a8a9864b0450c0427",
+      "id": "project_mhw_records_UMI-5172",
+      "input_sha256": "bd297e40aa37b4971f068f2f33c077c71c92044e527223e1ea7f459cddbc0ec8",
+      "unit": "archived-project-line-records-in-fixed-site-window",
+      "value": 1,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "f1a6c0abc29de7bf7b7a081a8a9864b0450c0427",
+      "id": "cusp_archived_source_overlap_UMI-5172",
+      "input_sha256": "2244e2795991e6d3ed0d56caf516abbc1f088ea6d56be954c49071f06b4109e8",
+      "unit": "fraction-of-archived-polygonized-line-area",
+      "value": 0.999999965,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "f1a6c0abc29de7bf7b7a081a8a9864b0450c0427",
+      "id": "atlas_cusp_iou_UMI-5172",
+      "input_sha256": "2244e2795991e6d3ed0d56caf516abbc1f088ea6d56be954c49071f06b4109e8",
+      "unit": "polygonized-outline-intersection-over-union",
+      "value": 0.0,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "f1a6c0abc29de7bf7b7a081a8a9864b0450c0427",
+      "id": "cusp_mhw_records_UMI-5173",
+      "input_sha256": "2244e2795991e6d3ed0d56caf516abbc1f088ea6d56be954c49071f06b4109e8",
+      "unit": "line-records-in-fixed-site-window",
+      "value": 2,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "f1a6c0abc29de7bf7b7a081a8a9864b0450c0427",
+      "id": "project_mhw_records_UMI-5173",
+      "input_sha256": "b05cd97aed19de50017fcb1aabe8b945d745380661199e1f1230c4bf667f7a5e",
+      "unit": "archived-project-line-records-in-fixed-site-window",
+      "value": 2,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "f1a6c0abc29de7bf7b7a081a8a9864b0450c0427",
+      "id": "cusp_archived_source_overlap_UMI-5173",
+      "input_sha256": "2244e2795991e6d3ed0d56caf516abbc1f088ea6d56be954c49071f06b4109e8",
+      "unit": "fraction-of-archived-polygonized-line-area",
+      "value": 0.999999982,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "f1a6c0abc29de7bf7b7a081a8a9864b0450c0427",
+      "id": "atlas_cusp_iou_UMI-5173",
+      "input_sha256": "2244e2795991e6d3ed0d56caf516abbc1f088ea6d56be954c49071f06b4109e8",
+      "unit": "polygonized-outline-intersection-over-union",
+      "value": 0.024469462,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "f1a6c0abc29de7bf7b7a081a8a9864b0450c0427",
+      "id": "cusp_mhw_records_UMI-5178",
+      "input_sha256": "2244e2795991e6d3ed0d56caf516abbc1f088ea6d56be954c49071f06b4109e8",
+      "unit": "line-records-in-fixed-site-window",
+      "value": 55,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "f1a6c0abc29de7bf7b7a081a8a9864b0450c0427",
+      "id": "project_mhw_records_UMI-5178",
+      "input_sha256": "44cd5871e337efe8bbf0cbeec2a58a1d15669bf3cb482f4b10bc0d5b2e76cc0c",
+      "unit": "archived-project-line-records-in-fixed-site-window",
+      "value": 61,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "f1a6c0abc29de7bf7b7a081a8a9864b0450c0427",
+      "id": "cusp_archived_source_overlap_UMI-5178",
+      "input_sha256": "2244e2795991e6d3ed0d56caf516abbc1f088ea6d56be954c49071f06b4109e8",
+      "unit": "fraction-of-archived-polygonized-line-area",
+      "value": 0.898436716,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "f1a6c0abc29de7bf7b7a081a8a9864b0450c0427",
+      "id": "atlas_cusp_iou_UMI-5178",
+      "input_sha256": "2244e2795991e6d3ed0d56caf516abbc1f088ea6d56be954c49071f06b4109e8",
+      "unit": "polygonized-outline-intersection-over-union",
+      "value": 0.096435835,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "f1a6c0abc29de7bf7b7a081a8a9864b0450c0427",
+      "id": "osm_palmyra_named_point_records",
+      "input_sha256": "7d6837c275b40829c78ec6887247ba288e2733846c6c55985b68c26a288d4840",
+      "unit": "named-point-records-in-fixed-window",
+      "value": 16,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "f1a6c0abc29de7bf7b7a081a8a9864b0450c0427",
+      "id": "osm_palmyra_labels_in_cusp_polygons",
+      "input_sha256": "7d6837c275b40829c78ec6887247ba288e2733846c6c55985b68c26a288d4840",
+      "unit": "OSM-label-points-inside-polygonized-CUSP-diagnostic",
+      "value": 11,
+      "vintage": "current"
+    }
+  ],
+  "outputs": [
+    {
+      "bytes": 633,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/LICENSE-OSM.txt",
+      "role": "license",
+      "sha256": "6caed3da5e7fee84c2486fb6013b4c3ebdb139af40e9a52aa6a7115bc9106e66"
+    },
+    {
+      "bytes": 8273,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/README.md",
+      "role": "documentation",
+      "sha256": "c1e84ecfac774e8c1a4a37b6ac7b9b5dc80201f1e3e28bd19f0fd2d1754803d9"
+    },
+    {
+      "bytes": 8165,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/references.md",
+      "role": "documentation",
+      "sha256": "f049c2d23cd3d1b941715b0670ab06daccbfe726d23ae8a3d027fecc7d990061"
+    },
+    {
+      "bytes": 55,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/requirements.txt",
+      "role": "requirements",
+      "sha256": "9c878b170fb2977fba4fbdb2c288063c52a974b3d99ee692c9d5e37d6f5fcb75"
+    },
+    {
+      "bytes": 15068,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/results.json",
+      "role": "measurement-result",
+      "sha256": "893bf77dbebb58be2e267847e08b0aea0ee0c82d6d3d1743a6a87298f48768fa"
+    },
+    {
+      "bytes": 16675,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/source/provenance.json",
+      "role": "source-index",
+      "sha256": "431da26d80d9979f3114f4cb32a855e950b02d6e82379ccb7f1b6875c069a3a5"
+    },
+    {
+      "bytes": 122,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/validation/negative-control.json",
+      "role": "control-result",
+      "sha256": "0a304edd6ba984ebc01e66c7aeefb25548dd8806e3812c638e080f2dcf91221f"
+    },
+    {
+      "bytes": 225,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/validation/positive-control.json",
+      "role": "control-result",
+      "sha256": "3c227a8a09d7401c1a5d0dbb85ea4675273930b7e0877498d6b99aa42ee73259"
+    },
+    {
+      "bytes": 252,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/validation/reproducibility.json",
+      "role": "reproducibility-result",
+      "sha256": "720be5d52ad6c3a33314d8c040aaad8d0bdea5431c8724603d99935c08601e5b"
+    },
+    {
+      "bytes": 16786,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/verify.py",
+      "role": "code",
+      "sha256": "c90c37539ebd409a51ec23ff788f9f631a33c81a9f836bf91bf5c342959ca509"
+    },
+    {
+      "bytes": 878,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/umi-island-land-boundaries-20261005/verify_twice.py",
+      "role": "code",
+      "sha256": "e7654c4c88c17f56cf1289e8b2eed6c3dbca9317506e0bddfb9e0174e24b9175"
+    }
+  ],
+  "sources": [
+    {
+      "files": [
+        {
+          "bytes": 6878171,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/noaa-ngs/CUSP-Pacific_Islands.zip",
+          "role": "original-source",
+          "sha256": "2244e2795991e6d3ed0d56caf516abbc1f088ea6d56be954c49071f06b4109e8"
+        },
+        {
+          "bytes": 422,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/noaa-ngs/CUSP-Pacific_Islands.http-headers.txt",
+          "role": "original-source",
+          "sha256": "cabe2939205c49a2efc2cb964699edf9583808424038e222bb158e74d13c82e7"
+        },
+        {
+          "bytes": 13927,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/noaa-ngs/nsde-more.html",
+          "role": "original-source",
+          "sha256": "77a3045b5e975473921ca295acac8e43736f0e9f1b35115086393fe8c811e7c4"
+        },
+        {
+          "bytes": 65844,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/noaa-inport/60812-cusp-full-list.html",
+          "role": "original-source",
+          "sha256": "cfbc8995b068e24e3f9dc7287c53f6602f5f94ea2d7814dd9cad11a712f842a7"
+        },
+        {
+          "bytes": 133350,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/data-gov/noaa-ngs-cusp.html",
+          "role": "original-source",
+          "sha256": "a5223f607ca5c98b23549db78fceafc9a1c676622e04c2093e0cfa27474b32c6"
+        }
+      ],
+      "id": "noaa-cusp-pacific-islands",
+      "license": {
+        "status": "redistributable",
+        "terms": "Data.gov metadata states CC0 1.0; it also states accessLevel non-public while the NOAA NSDE distribution is publicly downloadable. NOAA InPort says no access restriction, disclaims warranty, says not for litigation, and requests NOAA credit. Preserve this catalog/access inconsistency."
+      },
+      "limit": "NOAA completeness metadata says the source collection may not include a complete shoreline; the CUSP archive vintage is not a feature observation date; 2022-2023 Palmyra feature rows have blank source IDs.",
+      "retention": "retained",
+      "retrieved_at": "2026-10-05 America/Los_Angeles",
+      "role": "Current-product regional shoreline candidate and product metadata",
+      "temporal_status": "unknown",
+      "url": "https://geodesy.noaa.gov/dist_shoreline/Pacific_Islands.zip",
+      "verification": "verified",
+      "vintage": "Pacific Islands regional distribution fetched 2026-10-05; HTTP Last-Modified 2026-08-05; individual feature dates retained in results.json"
+    },
+    {
+      "files": [
+        {
+          "bytes": 129110,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/noaa-ngs/UM0501.zip",
+          "role": "original-source",
+          "sha256": "44cd5871e337efe8bbf0cbeec2a58a1d15669bf3cb482f4b10bc0d5b2e76cc0c"
+        },
+        {
+          "bytes": 112353,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/noaa-ngs/UM0501-report.pdf",
+          "role": "original-source",
+          "sha256": "c26da4a48f8f44cf417f6e890583dcb25e0ba558e9c10b15aa393de7c7de8718"
+        },
+        {
+          "bytes": 11540,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/noaa-ngs/UM0502.zip",
+          "role": "original-source",
+          "sha256": "f7530a4e36b7a4d8b6809f892b5b85daccfc1ee30d46761dbec5ae326640b14b"
+        },
+        {
+          "bytes": 102421,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/noaa-ngs/UM0502-report.pdf",
+          "role": "original-source",
+          "sha256": "fac5da2ffe07f0e9684b9c7e1817e5d464cc66daa79fbab9136b3151562fc662"
+        },
+        {
+          "bytes": 11388,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/noaa-ngs/UM0503.zip",
+          "role": "original-source",
+          "sha256": "bd297e40aa37b4971f068f2f33c077c71c92044e527223e1ea7f459cddbc0ec8"
+        },
+        {
+          "bytes": 77511,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/noaa-ngs/UM0503-report.pdf",
+          "role": "original-source",
+          "sha256": "ff755281e4b8993cbb29a0c7dee5ea48cf2aec14d514f81f052a1d367cc94f9a"
+        },
+        {
+          "bytes": 14280,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/noaa-ngs/UM0504.zip",
+          "role": "original-source",
+          "sha256": "b05cd97aed19de50017fcb1aabe8b945d745380661199e1f1230c4bf667f7a5e"
+        },
+        {
+          "bytes": 78206,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/noaa-ngs/UM0504-report.pdf",
+          "role": "original-source",
+          "sha256": "81d7f800831aa8e5ea1ec9b987e60ddef9039d55218c5f56752dda8748ec3383"
+        },
+        {
+          "bytes": 54760,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/noaa-inport/60798-full-list.html",
+          "role": "original-source",
+          "sha256": "4a0c03ec0c1ad0367107330d33acc103ac53249d437db2fbacbc3319f8bc6a6a"
+        },
+        {
+          "bytes": 54758,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/noaa-inport/60799-full-list.html",
+          "role": "original-source",
+          "sha256": "f447d7465121ea5bb26620230541ecc50227eddb07ff8270e453e3d09260b468"
+        },
+        {
+          "bytes": 54575,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/noaa-inport/60800-full-list.html",
+          "role": "original-source",
+          "sha256": "e2a7ab14a464b37f4107cb3dd04e4c6ad1725dae631dd34a6da85ad06d25d841"
+        },
+        {
+          "bytes": 54768,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/noaa-inport/60801-full-list.html",
+          "role": "original-source",
+          "sha256": "75624c0508f1e42b887bbfdd14ac0e5e8a3020bddbd7285c18e0834a8102cfbc"
+        },
+        {
+          "bytes": 139572,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/data-gov/palmyra-atoll-us-pacific-islands-um0501.html",
+          "role": "original-source",
+          "sha256": "54e32f94fd5e6f39737dd10bc0fe7ba5512a05ebe2237561844e78737aa1cb6a"
+        },
+        {
+          "bytes": 139585,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/data-gov/baker-island-u-s-pacific-islands-um0502.html",
+          "role": "original-source",
+          "sha256": "946851a4f9e10c7197e25636f5230a9275e5b7f546890e32288cde386f975506"
+        },
+        {
+          "bytes": 139630,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/data-gov/howland-island-u-s-pacific-islands-um0503.html",
+          "role": "original-source",
+          "sha256": "b3ff9b3814dd77f6b8c6510428f2e5ba036eb0fd856c33e3b8646d5e51671bb9"
+        },
+        {
+          "bytes": 139604,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/data-gov/jarvis-island-u-s-pacific-islands-um0504.html",
+          "role": "original-source",
+          "sha256": "c648c69407d9f1a80a79a8b7a72f48133f6f3d04161cc2e3e165ff07c00d4fe7"
+        }
+      ],
+      "id": "noaa-ngs-umi-project-surveys",
+      "license": {
+        "status": "redistributable",
+        "terms": "Each corresponding Data.gov record lists CC0 1.0 and non-public accessLevel; NGS directly serves each ZIP and its InPort record reports no access constraints, not for litigation, no warranty and request for NOAA credit."
+      },
+      "limit": "Historical source imagery, accuracy and project neatlines are specific to each report; NOAA states the neatline or rectangular data management extent does not prove complete surveyed coverage.",
+      "retention": "retained",
+      "retrieved_at": "2026-10-05 America/Los_Angeles",
+      "role": "Four site-specific NOAA shoreline project archives, completion reports and metadata records",
+      "supported_interval": {
+        "from": 2001,
+        "to": 2006
+      },
+      "temporal_status": "historical",
+      "url": "https://www.fisheries.noaa.gov/inport/item/60798",
+      "verification": "verified",
+      "vintage": "UM0501 2001-12-15; UM0502 2004-04; UM0503 2005-05; UM0504 2004-03"
+    },
+    {
+      "files": [
+        {
+          "bytes": 222268,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/openstreetmap-overpass-20261005.json",
+          "role": "original-source",
+          "sha256": "7d6837c275b40829c78ec6887247ba288e2733846c6c55985b68c26a288d4840"
+        },
+        {
+          "bytes": 1680,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/umi-island-land-boundaries-20261005/sources/openstreetmap-overpass-query.txt",
+          "role": "original-source",
+          "sha256": "20c6804f199f6e2ffffbf75ae4fdbe46ec3135aec1e70d0808f9413e8fcb0d9d"
+        }
+      ],
+      "id": "openstreetmap-site-screen",
+      "license": {
+        "status": "redistributable",
+        "terms": "Open Database License 1.0; \u00a9 OpenStreetMap contributors; attribution and share-alike apply to the retained extract and its OSM-derived diagnostic values. See LICENSE-OSM.txt."
+      },
+      "limit": "Community-maintained and not authoritative. The original initial Overpass POST body was not retained; saved query is a reproducible equivalent tag/window query, not byte-identical request evidence. Named labels or coastline polygons do not establish completeness.",
+      "retention": "retained",
+      "retrieved_at": "2026-10-05 America/Los_Angeles",
+      "role": "Independent community-mapped coastline and named-island screen",
+      "temporal_status": "reference",
+      "url": "https://overpass-api.de/api/interpreter",
+      "verification": "verified",
+      "vintage": "OSM database snapshot 2026-10-06T04:08:02Z"
+    },
+    {
+      "id": "fws-baker-island-refuge",
+      "license": {
+        "status": "unknown",
+        "terms": "The live page may include mixed-media content; its rights could not be established for a whole-page copy. The page was not retained; restore from its cited official URL."
+      },
+      "limit": "Descriptive/refuge source; gives no current dry-land geometry or complete neighboring-member inventory.",
+      "restoration": "Open the official FWS URL and verify the current refuge acreage, physical island description, and page date.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-05 America/Los_Angeles",
+      "role": "Official island/refuge identity and terrestrial-versus-submerged context",
+      "temporal_status": "reference",
+      "url": "https://www.fws.gov/refuge/baker-island",
+      "verification": "verified",
+      "vintage": "FWS page inspected 2026-10-05"
+    },
+    {
+      "id": "fws-howland-island-refuge",
+      "license": {
+        "status": "unknown",
+        "terms": "The live page may include mixed-media content; its rights could not be established for a whole-page copy. The page was not retained; restore from its cited official URL."
+      },
+      "limit": "Descriptive/refuge source; gives no current dry-land geometry or complete member inventory.",
+      "restoration": "Open the official FWS URL and verify current refuge acreage and the fringing reef description.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-05 America/Los_Angeles",
+      "role": "Official island/refuge identity and terrestrial-versus-submerged context",
+      "temporal_status": "reference",
+      "url": "https://www.fws.gov/refuge/howland-island/about-us",
+      "verification": "verified",
+      "vintage": "FWS page inspected 2026-10-05"
+    },
+    {
+      "id": "fws-jarvis-island-refuge",
+      "license": {
+        "status": "unknown",
+        "terms": "The live page may include mixed-media content; its rights could not be established for a whole-page copy. The page was not retained; restore from its cited official URL."
+      },
+      "limit": "Descriptive/refuge source; the large marine extent is not a dry-land outline.",
+      "restoration": "Open the official FWS URL and verify current terrestrial/submerged acreage and monument extent.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-05 America/Los_Angeles",
+      "role": "Official island/refuge identity and marine monument context",
+      "temporal_status": "reference",
+      "url": "https://www.fws.gov/refuge/jarvis-island/about-us",
+      "verification": "verified",
+      "vintage": "FWS page inspected 2026-10-05"
+    },
+    {
+      "id": "fws-palmyra-atoll-refuge",
+      "license": {
+        "status": "unknown",
+        "terms": "The live page may include mixed-media content; its rights could not be established for a whole-page copy. The page was not retained; restore from its cited official URL."
+      },
+      "limit": "Current page gives an approximate islet count and several lagoons, but no complete stable named roster or reusable current land vertices.",
+      "restoration": "Open the official FWS URL; review its dated about/refuge descriptions and follow source links for any roster or map.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-05 America/Los_Angeles",
+      "role": "Official atoll/islet/lagoon and marine refuge context",
+      "temporal_status": "reference",
+      "url": "https://www.fws.gov/refuge/palmyra-atoll",
+      "verification": "verified",
+      "vintage": "FWS page inspected 2026-10-05"
+    },
+    {
+      "id": "fws-palmyra-2013-restoration-release",
+      "license": {
+        "status": "unknown",
+        "terms": "Page not retained due mixed-media whole-page rights uncertainty; factual citation is restorable from the official URL."
+      },
+      "limit": "Historical narrative count is not a current exhaustive land inventory.",
+      "restoration": "Open the cited 2013 FWS news release and verify publication date and the stated 25-islet/580-acre framing.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-05 America/Los_Angeles",
+      "role": "Historical Palmyra islet and land-area count context",
+      "supported_interval": {
+        "from": 2013,
+        "to": 2014
+      },
+      "temporal_status": "historical",
+      "url": "https://www.fws.gov/story/2013-01/native-species-expected-rebound-palmyra-atoll",
+      "verification": "verified",
+      "vintage": "Published 2013-01-28"
+    },
+    {
+      "id": "fws-palmyra-rat-eradication-feis",
+      "license": {
+        "status": "unknown",
+        "terms": "PDF not retained; restoration only because reuse terms were not verified for the full document."
+      },
+      "limit": "Historical pre-restoration description, not a current named roster.",
+      "restoration": "Open the cited official PDF and verify the historical approximate 54-islet/three-lagoon statement and document date.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-05 America/Los_Angeles",
+      "role": "Historical Palmyra atoll morphology/count context",
+      "supported_interval": {
+        "from": 2011,
+        "to": 2012
+      },
+      "temporal_status": "historical",
+      "url": "https://www.fws.gov/sites/default/files/documents/FINAL%20-PalmyraRatEradicationFEIS-complete.pdf",
+      "verification": "verified",
+      "vintage": "Final environmental impact statement inspected 2026-10-05"
+    }
+  ],
+  "stages": {
+    "geographic_approval": "unapproved",
+    "implementation": "proposed",
+    "research": "complete"
+  },
+  "subject_ids": [
+    "UMI-5171",
+    "UMI-5172",
+    "UMI-5173",
+    "UMI-5178"
+  ],
+  "subject_ids_sha256": "440ebdd6dfa964ba6a8b897215b72699d7193e09004fab04fbb8c1c021bbaf93",
+  "summaries": [
+    {
+      "metric_id": "cusp_mhw_records_UMI-5171",
+      "unit": "line-records-in-fixed-site-window",
+      "value": 1
+    },
+    {
+      "metric_id": "project_mhw_records_UMI-5171",
+      "unit": "archived-project-line-records-in-fixed-site-window",
+      "value": 1
+    },
+    {
+      "metric_id": "cusp_archived_source_overlap_UMI-5171",
+      "unit": "fraction-of-archived-polygonized-line-area",
+      "value": 0.999999969
+    },
+    {
+      "metric_id": "atlas_cusp_iou_UMI-5171",
+      "unit": "polygonized-outline-intersection-over-union",
+      "value": 0.229337501
+    },
+    {
+      "metric_id": "cusp_mhw_records_UMI-5172",
+      "unit": "line-records-in-fixed-site-window",
+      "value": 1
+    },
+    {
+      "metric_id": "project_mhw_records_UMI-5172",
+      "unit": "archived-project-line-records-in-fixed-site-window",
+      "value": 1
+    },
+    {
+      "metric_id": "cusp_archived_source_overlap_UMI-5172",
+      "unit": "fraction-of-archived-polygonized-line-area",
+      "value": 0.999999965
+    },
+    {
+      "metric_id": "atlas_cusp_iou_UMI-5172",
+      "unit": "polygonized-outline-intersection-over-union",
+      "value": 0.0
+    },
+    {
+      "metric_id": "cusp_mhw_records_UMI-5173",
+      "unit": "line-records-in-fixed-site-window",
+      "value": 2
+    },
+    {
+      "metric_id": "project_mhw_records_UMI-5173",
+      "unit": "archived-project-line-records-in-fixed-site-window",
+      "value": 2
+    },
+    {
+      "metric_id": "cusp_archived_source_overlap_UMI-5173",
+      "unit": "fraction-of-archived-polygonized-line-area",
+      "value": 0.999999982
+    },
+    {
+      "metric_id": "atlas_cusp_iou_UMI-5173",
+      "unit": "polygonized-outline-intersection-over-union",
+      "value": 0.024469462
+    },
+    {
+      "metric_id": "cusp_mhw_records_UMI-5178",
+      "unit": "line-records-in-fixed-site-window",
+      "value": 55
+    },
+    {
+      "metric_id": "project_mhw_records_UMI-5178",
+      "unit": "archived-project-line-records-in-fixed-site-window",
+      "value": 61
+    },
+    {
+      "metric_id": "cusp_archived_source_overlap_UMI-5178",
+      "unit": "fraction-of-archived-polygonized-line-area",
+      "value": 0.898436716
+    },
+    {
+      "metric_id": "atlas_cusp_iou_UMI-5178",
+      "unit": "polygonized-outline-intersection-over-union",
+      "value": 0.096435835
+    },
+    {
+      "metric_id": "osm_palmyra_named_point_records",
+      "unit": "named-point-records-in-fixed-window",
+      "value": 16
+    },
+    {
+      "metric_id": "osm_palmyra_labels_in_cusp_polygons",
+      "unit": "OSM-label-points-inside-polygonized-CUSP-diagnostic",
+      "value": 11
+    }
+  ],
+  "validation": [
+    {
+      "evidence_path": "data/regional-review/umi-island-land-boundaries-20261005/validation/positive-control.json",
+      "kind": "positive-control",
+      "method_id": "site-outline-comparison",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/umi-island-land-boundaries-20261005/validation/negative-control.json",
+      "kind": "negative-control",
+      "method_id": "site-outline-comparison",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/umi-island-land-boundaries-20261005/validation/reproducibility.json",
+      "kind": "reproducibility",
+      "method_id": "site-outline-comparison",
+      "outcome": "passed"
+    }
+  ],
+  "version": 1,
+  "worker_id": "01a10948-7d38-75d0-bc01-4cc28ea41f49"
+}

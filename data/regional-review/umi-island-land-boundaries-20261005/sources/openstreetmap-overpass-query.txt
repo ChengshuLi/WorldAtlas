@@ -1,0 +1,28 @@
+[out:json][timeout:90];
+(
+  way["natural"="coastline"](-0.42,-160.06,-0.32,-159.94);
+  way["place"~"^(island|islet|atoll)$"](-0.42,-160.06,-0.32,-159.94);
+  way["natural"~"^(island|islet|atoll)$"](-0.42,-160.06,-0.32,-159.94);
+  relation["place"~"^(island|islet|atoll)$"](-0.42,-160.06,-0.32,-159.94);
+  relation["natural"~"^(island|islet|atoll)$"](-0.42,-160.06,-0.32,-159.94);
+  node["place"~"^(island|islet)$"](-0.42,-160.06,-0.32,-159.94);
+  way["natural"="coastline"](0.16,-176.53,0.24,-176.43);
+  way["place"~"^(island|islet|atoll)$"](0.16,-176.53,0.24,-176.43);
+  way["natural"~"^(island|islet|atoll)$"](0.16,-176.53,0.24,-176.43);
+  relation["place"~"^(island|islet|atoll)$"](0.16,-176.53,0.24,-176.43);
+  relation["natural"~"^(island|islet|atoll)$"](0.16,-176.53,0.24,-176.43);
+  node["place"~"^(island|islet)$"](0.16,-176.53,0.24,-176.43);
+  way["natural"="coastline"](0.76,-176.66,0.85,-176.58);
+  way["place"~"^(island|islet|atoll)$"](0.76,-176.66,0.85,-176.58);
+  way["natural"~"^(island|islet|atoll)$"](0.76,-176.66,0.85,-176.58);
+  relation["place"~"^(island|islet|atoll)$"](0.76,-176.66,0.85,-176.58);
+  relation["natural"~"^(island|islet|atoll)$"](0.76,-176.66,0.85,-176.58);
+  node["place"~"^(island|islet)$"](0.76,-176.66,0.85,-176.58);
+  way["natural"="coastline"](5.84,-162.13,5.92,-162.03);
+  way["place"~"^(island|islet|atoll)$"](5.84,-162.13,5.92,-162.03);
+  way["natural"~"^(island|islet|atoll)$"](5.84,-162.13,5.92,-162.03);
+  relation["place"~"^(island|islet|atoll)$"](5.84,-162.13,5.92,-162.03);
+  relation["natural"~"^(island|islet|atoll)$"](5.84,-162.13,5.92,-162.03);
+  node["place"~"^(island|islet)$"](5.84,-162.13,5.92,-162.03);
+);
+out meta geom;
