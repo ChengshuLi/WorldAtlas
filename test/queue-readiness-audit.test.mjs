@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {assessIssue,auditQueue,commentBlockers} from '../scripts/queue-readiness-audit.mjs';
 import {renderClaim} from '../scripts/issue-claim-contract.mjs';
 const spec={max_prs:2,depends_on:[],mode:'engineering',scope:'bounded correction'};
-const issue=(number=1,labels=['type:engineering','kind:work-item'],s=spec)=>({number,state:'open',labels,body:`<!-- worldatlas-work:v1\n${JSON.stringify(s)}\n-->`});
+const issue=(number=1,labels=['type:engineering','kind:work-item'],s=spec)=>({number,created_at:'2026-10-01T00:00:00Z',state:'open',labels,body:`<!-- worldatlas-work:v1\n${JSON.stringify(s)}\n-->`});
 const codes=r=>r.findings.map(x=>x.code);
 test('missing readiness is a review candidate, not permission',()=>{
  assert.deepEqual(codes(assessIssue(issue())),['review-missing-ready']);

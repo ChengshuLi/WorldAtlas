@@ -57,3 +57,7 @@ Before ending, push every source note, input, bundle and receipt needed by a fre
 <!-- RESEARCH-CAMPAIGNS:END -->
 
 </div>
+
+## Issue lifecycle accuracy
+
+Read [ISSUE_LIFECYCLE.md](ISSUE_LIFECYCLE.md). Authors reconcile original acceptance and next actions before moving on; reviewers check closure/continuation independently of merging. Dependency owners maintain direct dependents. Between jobs review up to three neglected unclaimed same-lane readiness problems. Use shared read-only readiness checks before readying and claiming; preserve scientific/publication gates and canonical ownership. Existing chats refresh before their next job; Main handles exceptional decisions.

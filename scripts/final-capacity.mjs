@@ -2,7 +2,7 @@ import {performance} from 'node:perf_hooks';
 import {safeEvidencePath, sha256} from './evidence-quality.mjs';
 import {evidenceRequirement} from './evidence-policy.mjs';
 import {githubPages, workSpec} from './issue-claim-contract.mjs';
-import {validateReviewReceipt} from './premerge-evidence.mjs';
+import {validateReviewReceipt, reviewBindingRequired} from './premerge-evidence.mjs';
 import {IMMUTABLE_CACHE_BYTES, IMMUTABLE_CACHE_ENTRIES} from './immutable-git-blobs.mjs';
 
 export const CAPACITY_WAIT_MS = 61 * 60 * 1000;
@@ -81,8 +81,9 @@ export async function inventoryFinalEvidence({api, repo, pr, issue, reservation,
     try {
       // Empty limits intentionally cannot approve limited evidence. This early
       // rejection checks known bindings; the full validator computes limits later.
-      validateReviewReceipt(receipt, {pr, manifest, manifestHash: sha256(raw), files, limits: [],
-        author: reservation.worker_id, reviewKind: requirement.quality.review_kind}); accepted = true;
+      validateReviewReceipt(receipt, {pr, issue, manifest, manifestHash: sha256(raw), files, limits: [],
+        author: reservation.worker_id, reviewKind: requirement.quality.review_kind,
+        requireContractBinding: reviewBindingRequired(pr, policy)}); accepted = true;
     } catch { /* Another current receipt may bind this exact inventory. */ }
   }
   need(accepted, 'Missing current exact-head review before costly evidence');

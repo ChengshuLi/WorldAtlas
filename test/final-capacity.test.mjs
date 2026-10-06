@@ -9,6 +9,7 @@ import {loadGeographicReport} from '../scripts/geographic-report-artifact.mjs';
 import {inspectMerge, completeIntegration} from '../scripts/merge-integration.mjs';
 import {sha256, subjectsHash} from '../scripts/evidence-quality.mjs';
 import {assertAdmission, queueBody, executionTitle} from '../scripts/merge-scheduler.mjs';
+import {reviewContractBinding} from '../scripts/premerge-evidence.mjs';
 
 const quota = (remaining, reset = 2, limit = 2000) => ({resources: {core: {remaining, reset, limit}}});
 function clock() {
@@ -136,6 +137,21 @@ test('real tree/path/vintage inventory includes nonadded originals and verified 
   assert.equal(next.original_count, 1); assert.equal(next.blob_calls, 3);
   f.truncated = true;
   await assert.rejects(inventoryFinalEvidence({...options, pr: f.pr, issue: f.issue, files: f.files, reservation: {worker_id: 'author'}}), /complete trees/);
+});
+test('costly evidence inventory requires current issue and disposition bindings after activation', async () => {
+  const f = fixture(), options = f.options();
+  f.pr.created_at = '2026-10-07T00:00:00Z';
+  options.policy.review_contract_activation_time = '2026-10-06T20:45:00Z';
+  const inventory = () => inventoryFinalEvidence({...options, pr: f.pr, issue: f.issue, files: f.files, reservation: {worker_id: 'author'}});
+  await assert.rejects(inventory(), /Missing current exact-head review/);
+  Object.assign(f.review, reviewContractBinding(f.issue, f.pr));
+  assert.equal((await inventory()).blob_calls, 3);
+  f.issue.body += '\nUnfinished production acceptance';
+  await assert.rejects(inventory(), /Missing current exact-head review/);
+  Object.assign(f.review, reviewContractBinding(f.issue, f.pr));
+  f.pr.body = 'Closes #1183';
+  await assert.rejects(inventory(), /Missing current exact-head review/);
+  assert.equal(f.writes.length, 0);
 });
 test('capacity wait preserves same live ticket and invokes fresh FIFO authority', async () => {
   const f = fixture(); let admissionReads = 0;

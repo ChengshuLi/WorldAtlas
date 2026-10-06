@@ -1,0 +1,683 @@
+{
+  "version": 1,
+  "issue": 1210,
+  "lane": "engineering",
+  "worker_id": "01a10843-da4b-7fc1-a482-d3186bc6334d",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "f120991846104a8126b522b12b6af278450fe20e",
+    "files": [
+      {
+        "path": ".github/evidence-policy.json",
+        "bytes": 225,
+        "sha256": "69310e9dfbc92a7bfc954f6374a13dafb47a12ea53e27406cfd89138fc87463b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": ".github/workflows/queue-readiness-audit.yml",
+        "bytes": 1842,
+        "sha256": "aaf0c273be31b7e1bf6fc3845af96ad1a1c8e68e3116a784d9cd204e109e2981",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "AGENTS.md",
+        "bytes": 8400,
+        "sha256": "a2fef1fd82e7b39244501fa7f39bdd2aee7c28291d8bbb30c720df75b06831e3",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/ENGINEERING_HANDOFF.md",
+        "bytes": 8776,
+        "sha256": "bbe5b02184ba618d701263500e1100979db050717c05c3f708141dbf5a5b2c07",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/GEOGRAPHY_HANDOFF.md",
+        "bytes": 5534,
+        "sha256": "6c6d7cca9cc8e3d37a485fd31b9b341edd278a498c8a0cfd3594d0f8f00a76b0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/HISTORY_HANDOFF.md",
+        "bytes": 7850,
+        "sha256": "22f6fabd79d9963fe18afd8505b39e9441034e307153b05ca81b37bd18000434",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/ISSUE_CREATION_HANDOFF.md",
+        "bytes": 4581,
+        "sha256": "3d8bd77b769a6e2e9b2c67d7e47e42aba6205a011753281c5b46fe1327691852",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/PREMERGE_EVIDENCE_REVIEW.md",
+        "bytes": 15510,
+        "sha256": "7f3ea5ed2f80f009942213dc1f25d20b7a22924f952229e11545571af6a9ae4b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/PUBLICATION_HANDOFF.md",
+        "bytes": 12006,
+        "sha256": "1d24fab230fa1a8e73d59aef23d93866af31015894f02fe55e48fe40f153b168",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/QUEUE_READINESS_AUDIT.md",
+        "bytes": 2717,
+        "sha256": "e3b09de98861f53560176b7e772ff66f8a857369e348446cf7620daedc4ceded",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 38368,
+        "sha256": "11ad15af17f374349da376ec36c4e68f6c8f3188c7719b5fff0363e3cac4a3e4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/AUDITOR.txt",
+        "bytes": 8839,
+        "sha256": "a3c132621f1e0388fdd0c4a4bdd81faacf9fd1cd6415a018a9b7963949abbee9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/ENGINEERING.txt",
+        "bytes": 12030,
+        "sha256": "ed0a9bb00e22a31cf36e93c6c68d0e08c04ae40c2719b75144dfb96b4970e6aa",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/GEOGRAPHY.txt",
+        "bytes": 9515,
+        "sha256": "e00a98b9bd7288982d3e2ed2310ceaac6c47cfc185c4f1edcebe25e3713387cb",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/ISSUE_CREATION.txt",
+        "bytes": 6078,
+        "sha256": "475720dd84fe18c5128e69a6bbf7d8d8ae6053959809c20e13144077df378f68",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/LUNA_HISTORY.txt",
+        "bytes": 10360,
+        "sha256": "9db6e71b24d25e257d1e43d6a12021d0cdd60ab2c63404c905da6cd48d8ae40b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/check-handoff-scope.mjs",
+        "bytes": 6972,
+        "sha256": "c4f838076f63ad82c09d4e4a202f70e17e8495fe92938668aa6746f78c4083cb",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/evidence-policy.mjs",
+        "bytes": 2126,
+        "sha256": "a6b2d154c234d16321ab1841a69b681a739b45ac63e98bbeb6def295e1c6c11f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/final-capacity.mjs",
+        "bytes": 19048,
+        "sha256": "139028f6924ce2c7d69d2d6a76f536bb5dbd62dca525a01e683bb9a72a2f4ae3",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/geographic-adjudication-api.mjs",
+        "bytes": 12270,
+        "sha256": "49866b00bd4646f3978be31fc70233002cc973d767562191c276302f5e7f27ca",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/issue-claim-contract.mjs",
+        "bytes": 11922,
+        "sha256": "ad168cb536b3aec404e524d6dac9a0986975a72aee63dc54a29ba956a7fef916",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/premerge-evidence.mjs",
+        "bytes": 15641,
+        "sha256": "16dd92136c3966bece9f78b5acfe21b51f04c4325e5b1e16e84ce27dba7d3e4c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/queue-readiness-audit.mjs",
+        "bytes": 9771,
+        "sha256": "0a20df35a83d10bbf24bc2c8b5dcd07d5196ae212e517061e218abcfc766a58a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/run-issue-claim.mjs",
+        "bytes": 3827,
+        "sha256": "60a3fe737da086a103595961e0bed97d5c014397746d440948234d348c4700a5",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/validate-evidence-partition-review.mjs",
+        "bytes": 6948,
+        "sha256": "5b0cd81c9cfc86299707a8132a076bd5deb754f03bd5038a06f13b8fe167168d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/final-capacity.test.mjs",
+        "bytes": 19377,
+        "sha256": "d2332f242fb8abae511a72534ae428f3bd6b37d2fbe3930a97530f8756933e83",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/geographic-adjudication-api.test.mjs",
+        "bytes": 15936,
+        "sha256": "bbe3ed22ad083a3b8017cd29b0e218b967a1865f241ac0ceca135a7048ae58a7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/geography-worker-lane.test.mjs",
+        "bytes": 8614,
+        "sha256": "3a1303c3e0b840faae27546f527784b52907ae9209cdd02fe39aa786079b6b67",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/handoff-scope.test.mjs",
+        "bytes": 6782,
+        "sha256": "4c0b26e4382d27076a5800dca380c1edb44111124ae811dcb643575506d6c0ac",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/issue-claims.test.mjs",
+        "bytes": 11460,
+        "sha256": "913b79308618fe57c3f707eb115648983eb8f8ff32ade60f07c6718b398c4243",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/premerge-evidence.test.mjs",
+        "bytes": 19368,
+        "sha256": "429687cbdd4673a5f0f3b44d53993af28c1c4cfd9285d0f01ceba0869de6605a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/queue-readiness-audit.test.mjs",
+        "bytes": 5336,
+        "sha256": "6561c8e8fcf57cee0e7b12286ade0f877ff129f6ce083eda3143f56f8f9b5712",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/regional-research-gate.test.mjs",
+        "bytes": 8032,
+        "sha256": "b188ca857f49d84a24c96ea36ca311e558a849532ab27f8cd76b625c49c176d9",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "scripts/queue-readiness-audit.mjs": "0a20df35a83d10bbf24bc2c8b5dcd07d5196ae212e517061e218abcfc766a58a",
+      "scripts/issue-claim-contract.mjs": "ad168cb536b3aec404e524d6dac9a0986975a72aee63dc54a29ba956a7fef916",
+      "scripts/evidence-policy.mjs": "a6b2d154c234d16321ab1841a69b681a739b45ac63e98bbeb6def295e1c6c11f"
+    },
+    "pin_files": {
+      "scripts/queue-readiness-audit.mjs": "scripts/queue-readiness-audit.mjs",
+      "scripts/issue-claim-contract.mjs": "scripts/issue-claim-contract.mjs",
+      "scripts/evidence-policy.mjs": "scripts/evidence-policy.mjs"
+    }
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": ".github/evidence-policy.json",
+      "bytes": 286,
+      "sha256": "ea67d5b8cea88fb6aa5e48366923e06cc06f10977ba320684e8fd04a21d659c2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": ".github/workflows/queue-readiness-audit.yml",
+      "bytes": 1805,
+      "sha256": "7abf63b06e48694a5a8a22f87eadae940471b686bf7a33658f78084b66989ca7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "AGENTS.md",
+      "bytes": 8939,
+      "sha256": "af462db59f343cfb05708180141d8bc5e8b34d7197b4e7fccbf1cac84b7c069d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/queue-readiness-1210-20261006/compatibility-controls.txt",
+      "bytes": 6687,
+      "sha256": "28ffd25c85d5e52332685927ee7089e95c472a22b9c26c513c803cad615950ee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/queue-readiness-1210-20261006/controls.txt",
+      "bytes": 17679,
+      "sha256": "c9e623d5d5b1230b7b40e9662af1e37d563a0a1b620ec0e5ad5b70c48ccf091f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/queue-readiness-1210-20261006/handoff.md",
+      "bytes": 3399,
+      "sha256": "a8b91ffa787e27d43f4d8e6b7633080151f24ad8a4f40954fc3608c69be13085",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/queue-readiness-1210-20261006/live-readiness.json",
+      "bytes": 508,
+      "sha256": "3d238887b424efb32830892a3a571c8979aeccfb6ab8b40dd9b5e87bb1b4baf5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/ENGINEERING_HANDOFF.md",
+      "bytes": 9330,
+      "sha256": "ae1e4fe58e0fe8b8fa3018378a9c814338d42e01040635d662265d92b81e720c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/GEOGRAPHY_HANDOFF.md",
+      "bytes": 6088,
+      "sha256": "9f52b9cd6b249561ce93354cd6474da5cdde75ef25100ebc0dc123471e249f13",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/HISTORY_HANDOFF.md",
+      "bytes": 8404,
+      "sha256": "d3d7384850b4092b7f56d83764e7d732aa8587446cba6986a3557833a69b98c0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/ISSUE_CREATION_HANDOFF.md",
+      "bytes": 5135,
+      "sha256": "9d3b6a5ccf15df9e0ae74b22a647136b28c56d39970c235632f8d07bd76833fd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/ISSUE_LIFECYCLE.md",
+      "bytes": 7737,
+      "sha256": "685b98452e0aba201ca4ee13056a841ba4d8895f6977590f10852b5544e2c6ae",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/PREMERGE_EVIDENCE_REVIEW.md",
+      "bytes": 16791,
+      "sha256": "133bd70416028375e4b1923432fb3d6bc51dcf88ae032758f6cbc9711608e6ef",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/PUBLICATION_HANDOFF.md",
+      "bytes": 12352,
+      "sha256": "de80cfb66d0f93871f5d85f32bbc8e18c0286b1d60d3304af41a01f28f0dca48",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/QUEUE_READINESS_AUDIT.md",
+      "bytes": 1807,
+      "sha256": "5c3c8ed521a6602f5a67f2b516bc9f10c795cf65c54a5fd015e6bedde72cafcc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "bytes": 38922,
+      "sha256": "7f02e356200709555ccf2a99586f9c03dd2672d30d7581a590a804e8a35a71b6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/AUDITOR.txt",
+      "bytes": 9845,
+      "sha256": "c2f6a038edddca322fdfe0d02ec19fb7e9a0e1d7aab85e62b1b98b6e23c4fd9a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/ENGINEERING.txt",
+      "bytes": 12857,
+      "sha256": "ee50ebf35e21bafa146cbb091f318d60a4885e35901f4cb6e4b4ac723a578459",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/GEOGRAPHY.txt",
+      "bytes": 10342,
+      "sha256": "39bc9bba9418fd2f47aa7c1e6d94337fba77dd12a9ed0e0a1b97a2ec29ea00e7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/ISSUE_CREATION.txt",
+      "bytes": 6905,
+      "sha256": "9d31e446187fb899a533f3a3af01e48e47b81dcd4cc6c831110380a059ede75f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/LUNA_HISTORY.txt",
+      "bytes": 11187,
+      "sha256": "8e1b3d9cb59ba435d83cfce72bcc0004cb41059f3928331a34a5dbd18574ee53",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/check-handoff-scope.mjs",
+      "bytes": 7069,
+      "sha256": "6a1903e87f42794cbf53f18b151042c40fed9ff4850f311b86fff788d34c73aa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/final-capacity.mjs",
+      "bytes": 19145,
+      "sha256": "949ea298d2d5ef5f07d3392c42c955bf86cc97faedb23f0d1d71abf7157d0880",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/geographic-adjudication-api.mjs",
+      "bytes": 12389,
+      "sha256": "ce0357365f791064971067e1e7a9a74e10dbe65e8437dfe3a0c64e708f86a7e8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/issue-claim-contract.mjs",
+      "bytes": 14530,
+      "sha256": "6e7cdac9e6d87d5ea3e78c697fd34797b00ddcb9b1ba1b6e8cb91f8c93bc410c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/premerge-evidence.mjs",
+      "bytes": 17277,
+      "sha256": "8826542beb803c8cb223b91f6ba47ee13639386e7945ec2b287286c1c7887dbd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/queue-readiness-audit.mjs",
+      "bytes": 10131,
+      "sha256": "cda6a68cdb2466004a60300a5723858f07009ef93c849dac5b3851fa74e7f077",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/review-issue-readiness.mjs",
+      "bytes": 4496,
+      "sha256": "359ad62c2601f120e3d10462e208f26c4c0ff06a41e2215fc91cb941eaee8231",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/run-issue-claim.mjs",
+      "bytes": 4757,
+      "sha256": "1f79b67ad5caee35acab3c315095f52f940ec54e1950ef36c8aa78232b989a23",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/validate-evidence-partition-review.mjs",
+      "bytes": 7113,
+      "sha256": "9c2c7603ca5f285af16cd7464438c6190586b5caa0c0b12fdf9f9e5b6e39dd8a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/claim-readiness-races.test.mjs",
+      "bytes": 3831,
+      "sha256": "fc7a10bf8b73ddbbb2ffa24e46b7bd1f1c095aa4ba46f24b86211ac0c0b95857",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/final-capacity.test.mjs",
+      "bytes": 20398,
+      "sha256": "749dc81b6004b81c0eec73b2723671fbfe40c8392cf6aff7e5c05dbac8041d06",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/geographic-adjudication-api.test.mjs",
+      "bytes": 16099,
+      "sha256": "aee05daafed344f4312ed6eaff7fa8d411a0bc01b515c207108bd56398865523",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/geography-worker-lane.test.mjs",
+      "bytes": 8645,
+      "sha256": "5cb4597a8aa3a5338aabfcd92e2ccbffcc59580d59a62d393cb3cf5e66663dd1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/handoff-scope.test.mjs",
+      "bytes": 7745,
+      "sha256": "81558c2f6d989bd7cabcf4802b85deb66e961dd047ed40118635d8d2dce59048",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/issue-claims.test.mjs",
+      "bytes": 11494,
+      "sha256": "12e1f845eeb426d2ec53d96e34bc104044aef16129e5915c3619e306578fcc00",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/issue-readiness.test.mjs",
+      "bytes": 7059,
+      "sha256": "7b60246a15e09e9ac62c071cfff90060d34f1a785accaed2be64ecec39dc0c83",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/premerge-evidence.test.mjs",
+      "bytes": 21028,
+      "sha256": "576da9a8dbebecd8bde556b5f25e3d6078812bf1571a70a58c81aec8d0e137fc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/queue-readiness-audit.test.mjs",
+      "bytes": 5370,
+      "sha256": "490b4a3ce1f4ce79152ac8975a99931bf9bf5dffbf87813112e040222b34b4f5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/regional-research-gate.test.mjs",
+      "bytes": 8066,
+      "sha256": "9919ebaef9afe818c6ba38f44e62c49ab086f37a766a54efcb937cdbfde8b262",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "lifecycle-controls",
+      "kind": "code",
+      "description": "Shared eligibility, snapshot and review-binding positive/negative controls plus existing evidence, claim, lane and integration regressions; actual output in controls.txt",
+      "software": "Node 24",
+      "units": "assertions"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "PYTHON=/tmp/worldatlas-422-venv/bin/python node --test test/claim-readiness-races.test.mjs test/issue-readiness.test.mjs test/issue-claims.test.mjs test/queue-readiness-audit.test.mjs test/premerge-evidence.test.mjs test/merge-integration.test.mjs test/handoff-scope.test.mjs test/worker-result.test.mjs test/geography-worker-lane.test.mjs test/regional-research-gate.test.mjs test/geographic-adjudication-api.test.mjs test/final-capacity.test.mjs test/evidence-partition-review.test.mjs"
+  ],
+  "change_receipts": [
+    {
+      "path": ".github/evidence-policy.json",
+      "status": "modified",
+      "original_sha256": "69310e9dfbc92a7bfc954f6374a13dafb47a12ea53e27406cfd89138fc87463b"
+    },
+    {
+      "path": ".github/workflows/queue-readiness-audit.yml",
+      "status": "modified",
+      "original_sha256": "aaf0c273be31b7e1bf6fc3845af96ad1a1c8e68e3116a784d9cd204e109e2981"
+    },
+    {
+      "path": "AGENTS.md",
+      "status": "modified",
+      "original_sha256": "a2fef1fd82e7b39244501fa7f39bdd2aee7c28291d8bbb30c720df75b06831e3"
+    },
+    {
+      "path": "coordination/engineering/queue-readiness-1210-20261006/compatibility-controls.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/queue-readiness-1210-20261006/controls.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/queue-readiness-1210-20261006/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/queue-readiness-1210-20261006/handoff.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/queue-readiness-1210-20261006/live-readiness.json",
+      "status": "added"
+    },
+    {
+      "path": "docs/ENGINEERING_HANDOFF.md",
+      "status": "modified",
+      "original_sha256": "bbe5b02184ba618d701263500e1100979db050717c05c3f708141dbf5a5b2c07"
+    },
+    {
+      "path": "docs/GEOGRAPHY_HANDOFF.md",
+      "status": "modified",
+      "original_sha256": "6c6d7cca9cc8e3d37a485fd31b9b341edd278a498c8a0cfd3594d0f8f00a76b0"
+    },
+    {
+      "path": "docs/HISTORY_HANDOFF.md",
+      "status": "modified",
+      "original_sha256": "22f6fabd79d9963fe18afd8505b39e9441034e307153b05ca81b37bd18000434"
+    },
+    {
+      "path": "docs/ISSUE_CREATION_HANDOFF.md",
+      "status": "modified",
+      "original_sha256": "3d8bd77b769a6e2e9b2c67d7e47e42aba6205a011753281c5b46fe1327691852"
+    },
+    {
+      "path": "docs/ISSUE_LIFECYCLE.md",
+      "status": "added"
+    },
+    {
+      "path": "docs/PREMERGE_EVIDENCE_REVIEW.md",
+      "status": "modified",
+      "original_sha256": "7f3ea5ed2f80f009942213dc1f25d20b7a22924f952229e11545571af6a9ae4b"
+    },
+    {
+      "path": "docs/PUBLICATION_HANDOFF.md",
+      "status": "modified",
+      "original_sha256": "1d24fab230fa1a8e73d59aef23d93866af31015894f02fe55e48fe40f153b168"
+    },
+    {
+      "path": "docs/QUEUE_READINESS_AUDIT.md",
+      "status": "modified",
+      "original_sha256": "e3b09de98861f53560176b7e772ff66f8a857369e348446cf7620daedc4ceded"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "status": "modified",
+      "original_sha256": "11ad15af17f374349da376ec36c4e68f6c8f3188c7719b5fff0363e3cac4a3e4"
+    },
+    {
+      "path": "docs/prompts/AUDITOR.txt",
+      "status": "modified",
+      "original_sha256": "a3c132621f1e0388fdd0c4a4bdd81faacf9fd1cd6415a018a9b7963949abbee9"
+    },
+    {
+      "path": "docs/prompts/ENGINEERING.txt",
+      "status": "modified",
+      "original_sha256": "ed0a9bb00e22a31cf36e93c6c68d0e08c04ae40c2719b75144dfb96b4970e6aa"
+    },
+    {
+      "path": "docs/prompts/GEOGRAPHY.txt",
+      "status": "modified",
+      "original_sha256": "e00a98b9bd7288982d3e2ed2310ceaac6c47cfc185c4f1edcebe25e3713387cb"
+    },
+    {
+      "path": "docs/prompts/ISSUE_CREATION.txt",
+      "status": "modified",
+      "original_sha256": "475720dd84fe18c5128e69a6bbf7d8d8ae6053959809c20e13144077df378f68"
+    },
+    {
+      "path": "docs/prompts/LUNA_HISTORY.txt",
+      "status": "modified",
+      "original_sha256": "9db6e71b24d25e257d1e43d6a12021d0cdd60ab2c63404c905da6cd48d8ae40b"
+    },
+    {
+      "path": "scripts/check-handoff-scope.mjs",
+      "status": "modified",
+      "original_sha256": "c4f838076f63ad82c09d4e4a202f70e17e8495fe92938668aa6746f78c4083cb"
+    },
+    {
+      "path": "scripts/final-capacity.mjs",
+      "status": "modified",
+      "original_sha256": "139028f6924ce2c7d69d2d6a76f536bb5dbd62dca525a01e683bb9a72a2f4ae3"
+    },
+    {
+      "path": "scripts/geographic-adjudication-api.mjs",
+      "status": "modified",
+      "original_sha256": "49866b00bd4646f3978be31fc70233002cc973d767562191c276302f5e7f27ca"
+    },
+    {
+      "path": "scripts/issue-claim-contract.mjs",
+      "status": "modified",
+      "original_sha256": "ad168cb536b3aec404e524d6dac9a0986975a72aee63dc54a29ba956a7fef916"
+    },
+    {
+      "path": "scripts/premerge-evidence.mjs",
+      "status": "modified",
+      "original_sha256": "16dd92136c3966bece9f78b5acfe21b51f04c4325e5b1e16e84ce27dba7d3e4c"
+    },
+    {
+      "path": "scripts/queue-readiness-audit.mjs",
+      "status": "modified",
+      "original_sha256": "0a20df35a83d10bbf24bc2c8b5dcd07d5196ae212e517061e218abcfc766a58a"
+    },
+    {
+      "path": "scripts/review-issue-readiness.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/run-issue-claim.mjs",
+      "status": "modified",
+      "original_sha256": "60a3fe737da086a103595961e0bed97d5c014397746d440948234d348c4700a5"
+    },
+    {
+      "path": "scripts/validate-evidence-partition-review.mjs",
+      "status": "modified",
+      "original_sha256": "5b0cd81c9cfc86299707a8132a076bd5deb754f03bd5038a06f13b8fe167168d"
+    },
+    {
+      "path": "test/claim-readiness-races.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/final-capacity.test.mjs",
+      "status": "modified",
+      "original_sha256": "d2332f242fb8abae511a72534ae428f3bd6b37d2fbe3930a97530f8756933e83"
+    },
+    {
+      "path": "test/geographic-adjudication-api.test.mjs",
+      "status": "modified",
+      "original_sha256": "bbe3ed22ad083a3b8017cd29b0e218b967a1865f241ac0ceca135a7048ae58a7"
+    },
+    {
+      "path": "test/geography-worker-lane.test.mjs",
+      "status": "modified",
+      "original_sha256": "3a1303c3e0b840faae27546f527784b52907ae9209cdd02fe39aa786079b6b67"
+    },
+    {
+      "path": "test/handoff-scope.test.mjs",
+      "status": "modified",
+      "original_sha256": "4c0b26e4382d27076a5800dca380c1edb44111124ae811dcb643575506d6c0ac"
+    },
+    {
+      "path": "test/issue-claims.test.mjs",
+      "status": "modified",
+      "original_sha256": "913b79308618fe57c3f707eb115648983eb8f8ff32ade60f07c6718b398c4243"
+    },
+    {
+      "path": "test/issue-readiness.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/premerge-evidence.test.mjs",
+      "status": "modified",
+      "original_sha256": "429687cbdd4673a5f0f3b44d53993af28c1c4cfd9285d0f01ceba0869de6605a"
+    },
+    {
+      "path": "test/queue-readiness-audit.test.mjs",
+      "status": "modified",
+      "original_sha256": "6561c8e8fcf57cee0e7b12286ade0f877ff129f6ce083eda3143f56f8f9b5712"
+    },
+    {
+      "path": "test/regional-research-gate.test.mjs",
+      "status": "modified",
+      "original_sha256": "b188ca857f49d84a24c96ea36ca311e558a849532ab27f8cd76b625c49c176d9"
+    }
+  ],
+  "metric_bindings": []
+}

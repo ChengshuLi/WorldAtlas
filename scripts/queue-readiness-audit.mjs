@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createHash} from 'node:crypto';
-import {workSpec, readClaim, githubPages, githubAPI} from './issue-claim-contract.mjs';
+import {workSpec, readClaim, githubPages, githubAPI, assertIssueReadiness} from './issue-claim-contract.mjs';
 import {validateIssuePRBody} from './check-handoff-scope.mjs';
 
 const types = new Set(['type:engineering', 'type:geography', 'type:history-research']);
@@ -53,7 +53,8 @@ export function assessIssue(issue, {dependencies=[], comments=[], prs=[], now=Da
   if (claim?.active) add(Date.parse(claim.expires_at)<=now?'expired-claim':'active-claim',{worker:claim.worker_id,branch:claim.branch,expires_at:claim.expires_at,live_work:Boolean(claim.live_work)});
   if (claim?.live_work) add('live-operation','Coordinate the existing holder; do not recover automatically');
   if (labels.includes('status:claimed')!==Boolean(claim?.active)) add('claim-label-drift','Canonical bot claim and convenience label differ');
-  if (scope && prs.filter(p=>p.merged_at).length>=scope.max_prs) add('pr-budget','Merged PR budget exhausted; split remaining scope');
+  if (scope && prs.filter(p=>p.merged_at).length>=scope.max_prs) add('pr-budget','Review original acceptance: close only if complete; otherwise reuse bounded continuation or preserve an explicit wait');
+  if(scope)try {assertIssueReadiness({issue,branch:({engineering:'engineering',geography:'geography','source-only':'research',content:'research'}[scope.mode])+'/readiness',dependencies,prs,comments,requireReady:false});}catch(e){add('eligibility-rejection',e.message);}
   if (scope && !open.length && !claim?.active && !openPRs.length && !blockers.active.length) {
     if (labels.includes('status:blocked')) add('review-blocked','Declared dependencies closed; inspect semantic/source/publication and comment blockers before changing status');
     else if (!labels.includes('status:ready')) add('review-missing-ready','Candidate for human triage; dependency closure alone is not approval');

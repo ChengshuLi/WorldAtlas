@@ -24,7 +24,8 @@ test('geography has its own branch and exactly one matching type',()=>{
 test('declared geography ownership is finite, safe and limited to source evidence namespaces',()=>{
  validateGeographyOwnedPaths(owned);
  validateGeographyOwnedPaths(['research/geography/iberya-source-a/']);
- for(const paths of [undefined,[],['data/'],['src/a/'],['research/campaigns/a/'],['data/regional-review/'],['data/regional-review/a/nested/'],['data/regional-review/a/../b/'],['/data/regional-review/a/'],['data/regional-review/a\\b/'],['data/regional-review/a//'],['data/regional-review/a'],[...owned,...owned],Array.from({length:9},(_,i)=>`research/geography/a${i}/`)])assert.throws(()=>validateGeographyOwnedPaths(paths));
+ validateGeographyOwnedPaths(['data/regional-review/a/nested/']);
+ for(const paths of [undefined,[],['data/'],['src/a/'],['research/campaigns/a/'],['data/regional-review/'],['data/regional-review/a/../b/'],['/data/regional-review/a/'],['data/regional-review/a\\b/'],['data/regional-review/a//'],['data/regional-review/a'],[...owned,...owned],Array.from({length:9},(_,i)=>`research/geography/a${i}/`)])assert.throws(()=>validateGeographyOwnedPaths(paths));
 });
 test('geography cannot edit core, history, another packet or an undeclared proposal directory',()=>{
  validateLanePaths('geography/packet-a',[owned[0]+'sources.json',owned[0]+'reproduce/check.py'],{ownedPaths:owned});

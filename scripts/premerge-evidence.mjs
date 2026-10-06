@@ -100,12 +100,34 @@ export function validatePremergeManifest(manifest, {readFile, files, manifestPat
   return {...result, change_files_checked: files.length, metric_bindings_checked: bindings.length};
 }
 
+// Bind the reviewed acceptance contract and PR disposition, independently of
+// progress comments. JSON formatting/order and prose whitespace are immaterial.
+function stable(value){return Array.isArray(value)?value.map(stable):value&&typeof value==='object'?Object.fromEntries(Object.keys(value).sort().map(key=>[key,stable(value[key])])):value;}
+const normalize=body=>String(body??'').replace(/\s+/g,' ').trim();
+export function reviewContractBinding(issue,pr){
+ const prose=String(issue.body??'').replace(/<!-- worldatlas-work:v1\s*\n([\s\S]*?)\n-->/g,'');
+ return {issue_contract_sha256:sha256(JSON.stringify({issue:issue.number,scope:stable(workSpec(issue.body)),acceptance:normalize(prose)})),
+  pr_body_sha256:sha256(normalize(pr.body))};
+}
+export function reviewBindingRequired(pr,policy){
+ if(!policy.review_contract_activation_time)return false;
+ const activation=Date.parse(policy.review_contract_activation_time),created=Date.parse(pr.created_at);
+ need(Number.isFinite(activation)&&Number.isFinite(created),'Missing review-binding activation/PR timestamp');
+ return created>=activation;
+}
+
 /** Cooperative worker identities, not a security boundary between shared-account operators. */
-export function validateReviewReceipt(receipt, {pr, manifest, manifestHash, files, limits, author, reviewKind = 'code'}) {
+export function validateReviewReceipt(receipt, {pr, manifest, manifestHash, files, limits, author, reviewKind = 'code', issue, requireContractBinding = false}) {
   need(receipt?.version === 1 && receipt.pr_number === pr.number && receipt.head_sha === pr.head.sha &&
     receipt.manifest_sha256 === manifestHash && receipt.author_worker_id === author &&
     typeof receipt.reviewer_worker_id === 'string' && receipt.reviewer_worker_id.trim() && receipt.reviewer_worker_id !== author,
     'Review must bind exact head, manifest and a distinct worker identity');
+  if(requireContractBinding||receipt.issue_contract_sha256||receipt.pr_body_sha256){
+    need(issue,'Review contract binding needs the authoritative issue');
+    const binding=reviewContractBinding(issue,pr);
+    need(receipt.issue_contract_sha256===binding.issue_contract_sha256&&receipt.pr_body_sha256===binding.pr_body_sha256,
+      'Issue acceptance contract or PR disposition changed; obtain renewed exact-head review');
+  }
   const expectedFiles = [...new Set(files.flatMap(file => [file.filename, file.previous_filename].filter(Boolean)))].sort();
   need(JSON.stringify([...(receipt.inspected_files ?? [])].sort()) === JSON.stringify(expectedFiles), 'Review omitted changed/renamed files');
   const hashes = [...new Set([...manifest.baseline.files, ...manifest.outputs, ...manifest.sources.flatMap(source => source.files ?? [])].map(file => file.sha256))].sort();
@@ -192,7 +214,7 @@ export async function checkPremergeEvidence({api, repo, pr, issue, reservation, 
       const candidates = [...latest.values()].sort((a, b) => b.comment.id - a.comment.id);
       need(candidates.length, 'Missing independent exact-head review receipt');
       result.review = validateReviewReceipt(candidates[0].receipt, {pr, manifest, manifestHash: result.manifest_sha256, files,
-        limits: checked.limits, author: reservation.worker_id, reviewKind: requirement.quality.review_kind});
+        limits: checked.limits, author: reservation.worker_id, reviewKind: requirement.quality.review_kind, issue, requireContractBinding:reviewBindingRequired(pr,policy)});
       result.review.comment_id = candidates[0].comment.id;
     }
     return result;

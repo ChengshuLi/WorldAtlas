@@ -20,3 +20,7 @@ This role captures requests and keeps the queue readable. It does not implement 
 Examples: `gh issue list --repo ChengshuLi/WorldAtlas --state all`; then `gh issue create --repo ChengshuLi/WorldAtlas --title "Concrete title" --label type:engineering --body-file /path/to/body.md`. Prefer body files or structured API arguments so literal source text/newlines remain intact. Never include credentials.
 
 Start from current main to read the instructions. GitHub access to the repository is required; live Site/Neon credentials are unnecessary for this role. If the issue itself requests changes to these instructions, send that implementation to an engineering issue/PR.
+
+## Issue lifecycle accuracy
+
+Read [ISSUE_LIFECYCLE.md](ISSUE_LIFECYCLE.md). Authors reconcile original acceptance and next actions before moving on; reviewers check closure/continuation independently of merging. Dependency owners maintain direct dependents. Between jobs review up to three neglected unclaimed same-lane readiness problems. Use shared read-only readiness checks before readying and claiming; preserve scientific/publication gates and canonical ownership. Existing chats refresh before their next job; Main handles exceptional decisions.

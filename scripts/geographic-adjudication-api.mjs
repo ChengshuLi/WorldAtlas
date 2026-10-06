@@ -2,7 +2,7 @@
 import {githubPages, linkedPulls, verifyClaimForPR, workSpec} from './issue-claim-contract.mjs';
 import {validateIssuePRBody, validateLanePaths} from './check-handoff-scope.mjs';
 import {evidenceRequirement, loadEvidencePolicy} from './evidence-policy.mjs';
-import {checkPremergeEvidence, validateReviewReceipt} from './premerge-evidence.mjs';
+import {checkPremergeEvidence, validateReviewReceipt, reviewBindingRequired} from './premerge-evidence.mjs';
 import {safeEvidencePath, sha256} from './evidence-quality.mjs';
 
 export const METHOD = 'worldatlas-geographic-water-adjudication-v1';
@@ -146,8 +146,9 @@ export async function collectGeographicApproval({api, repo, number, expectedHead
     'Source reservation changed during validation');
   const {receipt, comment} = latestReviews(await githubPages(api, `/repos/${repo}/issues/${number}/comments`), expectedHead);
   need(comment.id === checked.review.comment_id, 'Source decision changed during byte validation; rerun same head');
-  validateReviewReceipt(receipt, {pr, manifest, manifestHash: checked.manifest_sha256, files,
-    limits: checked.limits, author: reservation.worker_id, reviewKind: requirement.quality.review_kind});
+  validateReviewReceipt(receipt, {pr: freshPR, issue: freshIssue, manifest, manifestHash: checked.manifest_sha256, files,
+    limits: checked.limits, author: reservation.worker_id, reviewKind: requirement.quality.review_kind,
+    requireContractBinding: reviewBindingRequired(freshPR, policy)});
   for (const name of ['source', 'geometry']) need(receipt.domains?.[name] &&
     ['accepted', 'accepted-with-limits'].includes(receipt.domains[name].outcome) &&
     typeof receipt.domains[name].scope === 'string' && receipt.domains[name].scope.trim(), 'Missing substantive source/geometry review');
