@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "issue": 408,
+  "baseline_commit": "1451fb0788892ff9db6415e6ce6704bdd13d8f9a",
+  "scope_member_location_ids_sha256": "3bbf3ce4482e0ecc865b3cb8828ba7adb061b605ee1e0061d44ab379d93deea6",
+  "source": {
+    "path": "data/regional-review/regional-review-365cbd6478904888/source/geoBoundaries-CHN-ADM2.geojson",
+    "bytes": 7618692,
+    "sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
+    "join_key": "properties.shapeID",
+    "matched_unique_rows": 180
+  },
+  "counts": {
+    "scope_members": 200,
+    "guangdong_source_rows": 92,
+    "guangxi_source_rows": 88,
+    "crosswalk_rows": 180,
+    "candidate_ids": 26,
+    "prefecture_name_role_leads": 30
+  },
+  "outputs": [
+    {
+      "path": "data/regional-review/regional-review-173ccc74c2fd93ae/findings/pr2-current-roster-crosswalk.csv",
+      "bytes": 41572,
+      "sha256": "80aed14f6efb61d81ca3b5667d8fe779f8cf04da333ad01048eef159a54a6d65"
+    },
+    {
+      "path": "data/regional-review/regional-review-173ccc74c2fd93ae/findings/pr2-source-role-review.json",
+      "bytes": 13338,
+      "sha256": "1017524e23a73e009a3b0cbf7a5bf2fbed4fa671bb5b544afb299ca0d97e17e7"
+    },
+    {
+      "path": "data/regional-review/regional-review-173ccc74c2fd93ae/findings/pr2-candidate-ids.json",
+      "bytes": 1362,
+      "sha256": "c85b1019d114ef5f138cf8977746a932a500887c5b2a885f3c3684ecd8ee3fd5"
+    }
+  ],
+  "limits": [
+    "Reproduction proves roster and source identity joins only; it does not prove current administrative codes, boundaries, completeness, legal meaning, or license."
+  ]
+}
