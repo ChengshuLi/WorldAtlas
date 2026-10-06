@@ -25,7 +25,7 @@ python3 data/regional-review/south-atlantic-source-reuse-basis-429/reproduce.py 
 python3 data/regional-review/south-atlantic-source-reuse-basis-429/reproduce.py runs/run-two.json
 ```
 
-The command verifies all 12 issue-pinned input files at the immutable #977 baseline, exact scope identity, retained GeoBoundaries source IDs/metadata, the Census CBF DBF record count and one-to-one name/state crosswalk for all 268 subjects. It writes deterministic, scoped output and positive/negative control evidence only in this directory. `reproducibility.json` records matching output hashes from two independent runs.
+The command verifies all 12 issue-pinned input files at the immutable #977 baseline, exact scope identity, retained GeoBoundaries source IDs/metadata, the Census CBF DBF record count and one-to-one name/state crosswalk for all 268 subjects. It writes deterministic, scoped output and positive/negative control evidence only in this directory. The negative control calls the same `build_crosswalk` validator with a duplicate roster, an unknown source shapeID override, and an invalid state parent; all three must be rejected. `reproducibility.json` records matching output hashes from two independent runs.
 
 ## Engineering handoff and limits
 

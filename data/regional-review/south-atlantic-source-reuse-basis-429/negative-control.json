@@ -1,10 +1,10 @@
 {
-  "assertion": "Duplicate roster input, an invented source ID, and a deliberately invalid state code do not pass the scoped identity checks.",
+  "assertion": "The production crosswalk validator rejects a duplicate roster, an unknown source shapeID override, and a subject assessment with an invalid state parent.",
   "duplicate_subject_rejected": true,
   "evidence_path": "data/regional-review/south-atlantic-source-reuse-basis-429/negative-control.json",
   "kind": "negative-control",
   "method_id": "county-product-source-crosswalk",
   "outcome": "passed",
   "unknown_source_id_rejected": true,
-  "wrong_state_match_count": 0
+  "wrong_state_rejected": true
 }

@@ -62,6 +62,60 @@ def parse_dbf(data):
     return record_count, rows
 
 
+def build_crosswalk(expected, by_id, feature_map, cbf_index, state_fips, source_id_overrides=None):
+    """Validate and resolve one complete roster through the same production path used by controls."""
+    source_id_overrides = source_id_overrides or {}
+    if len(set(expected)) != len(expected):
+        raise ValueError("Subject roster contains duplicate IDs")
+    crosswalk = []
+    for atlas_id in expected:
+        assessment = by_id.get(atlas_id)
+        if assessment is None:
+            raise ValueError("Subject lacks prior assessment: " + atlas_id)
+        native_id = source_id_overrides.get(atlas_id, atlas_id.rsplit(":", 1)[1])
+        feature = feature_map.get(native_id)
+        if feature is None or feature.get("properties", {}).get("shapeGroup") != "USA":
+            raise ValueError("Subject does not resolve uniquely to USA source: " + atlas_id)
+        properties = feature["properties"]
+        if properties.get("shapeName") != assessment["source_name"]:
+            raise ValueError("Source name differs for " + atlas_id)
+        if (assessment["source_role"] != "ADM2" or assessment["atlas_admin_role"] != "Counties" or
+                assessment["semantic_role_finding"] != "justified" or
+                assessment["identity_and_parent_finding"] != "justified"):
+            raise ValueError("Prior subject-level county role/parent finding differs for " + atlas_id)
+        fips = state_fips.get(assessment["parent_name"])
+        if fips is None:
+            raise ValueError("Unexpected state parent: " + assessment["parent_name"])
+        matches = cbf_index.get((fips, assessment["source_name"]), [])
+        if len(matches) != 1:
+            raise ValueError("Census 2018 name/state match is not unique for " + atlas_id)
+        cbf = matches[0]
+        geoid = cbf["GEOID"]
+        if geoid != fips + cbf["COUNTYFP"]:
+            raise ValueError("Census GEOID disagrees with state/county components")
+        crosswalk.append({
+            "atlas_id": atlas_id,
+            "source_id": "gb:USA:ADM2",
+            "source_shape_id": native_id,
+            "source_name": properties["shapeName"],
+            "source_role": assessment["source_role"],
+            "atlas_admin_role": assessment["atlas_admin_role"],
+            "prior_role_finding": assessment["semantic_role_finding"],
+            "prior_identity_parent_finding": assessment["identity_and_parent_finding"],
+            "parent_state": assessment["parent_name"],
+            "census_2018_statefp": fips,
+            "census_2018_countyfp": cbf["COUNTYFP"],
+            "census_2018_geoid": geoid,
+            "census_2018_name": cbf["NAME"],
+            "census_match_count": 1,
+        })
+    if len({row["source_shape_id"] for row in crosswalk}) != len(expected):
+        raise ValueError("Scoped source feature IDs are not unique")
+    if len({row["census_2018_geoid"] for row in crosswalk}) != len(expected):
+        raise ValueError("Scoped 2018 Census GEOIDs are not unique")
+    return crosswalk
+
+
 def main():
     contract = json.loads((PACKET / "issue-1143-contract.json").read_text(encoding="utf-8"))
     expected = contract["issue"]["machine_contract"]["evidence_quality"]["subject_ids"]
@@ -128,51 +182,24 @@ def main():
 
     state_fips = {"Florida": "12", "North Carolina": "37",
                   "South Carolina": "45", "West Virginia": "54"}
-    crosswalk = []
-    for atlas_id in expected:
-        assessment = by_id[atlas_id]
-        native_id = atlas_id.rsplit(":", 1)[1]
-        feature = feature_map.get(native_id)
-        if feature is None or feature.get("properties", {}).get("shapeGroup") != "USA":
-            raise ValueError("Subject does not resolve uniquely to USA source: " + atlas_id)
-        properties = feature["properties"]
-        if properties.get("shapeName") != assessment["source_name"]:
-            raise ValueError("Source name differs for " + atlas_id)
-        if (assessment["source_role"] != "ADM2" or assessment["atlas_admin_role"] != "Counties" or
-                assessment["semantic_role_finding"] != "justified" or
-                assessment["identity_and_parent_finding"] != "justified"):
-            raise ValueError("Prior subject-level county role/parent finding differs for " + atlas_id)
-        fips = state_fips.get(assessment["parent_name"])
-        if fips is None:
-            raise ValueError("Unexpected state parent: " + assessment["parent_name"])
-        matches = cbf_index.get((fips, assessment["source_name"]), [])
-        if len(matches) != 1:
-            raise ValueError("Census 2018 name/state match is not unique for " + atlas_id)
-        cbf = matches[0]
-        geoid = cbf["GEOID"]
-        if geoid != fips + cbf["COUNTYFP"]:
-            raise ValueError("Census GEOID disagrees with state/county components")
-        crosswalk.append({
-            "atlas_id": atlas_id,
-            "source_id": "gb:USA:ADM2",
-            "source_shape_id": native_id,
-            "source_name": properties["shapeName"],
-            "source_role": assessment["source_role"],
-            "atlas_admin_role": assessment["atlas_admin_role"],
-            "prior_role_finding": assessment["semantic_role_finding"],
-            "prior_identity_parent_finding": assessment["identity_and_parent_finding"],
-            "parent_state": assessment["parent_name"],
-            "census_2018_statefp": fips,
-            "census_2018_countyfp": cbf["COUNTYFP"],
-            "census_2018_geoid": geoid,
-            "census_2018_name": cbf["NAME"],
-            "census_match_count": 1,
-        })
+    crosswalk = build_crosswalk(expected, by_id, feature_map, cbf_index, state_fips)
 
-    if len({row["source_shape_id"] for row in crosswalk}) != 268:
-        raise ValueError("Scoped source feature IDs are not unique")
-    if len({row["census_2018_geoid"] for row in crosswalk}) != 268:
-        raise ValueError("Scoped 2018 Census GEOIDs are not unique")
+    def rejects(call):
+        try:
+            call()
+        except ValueError:
+            return True
+        return False
+
+    duplicate_subject_rejected = rejects(lambda: build_crosswalk(
+        expected + [expected[0]], by_id, feature_map, cbf_index, state_fips))
+    unknown_source_id_rejected = rejects(lambda: build_crosswalk(
+        expected, by_id, feature_map, cbf_index, state_fips,
+        {expected[0]: "NOT-A-SOURCE-ID"}))
+    wrong_parent_assessments = dict(by_id)
+    wrong_parent_assessments[expected[0]] = dict(by_id[expected[0]], parent_name="Not a state")
+    wrong_state_rejected = rejects(lambda: build_crosswalk(
+        expected, wrong_parent_assessments, feature_map, cbf_index, state_fips))
 
     digest_ledger = {
         "version": 1,
@@ -232,14 +259,14 @@ def main():
     negative = {
         "method_id": "county-product-source-crosswalk", "kind": "negative-control", "outcome": "passed",
         "evidence_path": "data/regional-review/south-atlantic-source-reuse-basis-429/negative-control.json",
-        "duplicate_subject_rejected": len(set(expected + [expected[0]])) != len(expected + [expected[0]]),
-        "unknown_source_id_rejected": "NOT-A-SOURCE-ID" not in feature_map,
-        "wrong_state_match_count": len(cbf_index.get(("00", by_id[expected[0]]["source_name"]), [])),
-        "assertion": "Duplicate roster input, an invented source ID, and a deliberately invalid state code do not pass the scoped identity checks.",
+        "duplicate_subject_rejected": duplicate_subject_rejected,
+        "unknown_source_id_rejected": unknown_source_id_rejected,
+        "wrong_state_rejected": wrong_state_rejected,
+        "assertion": "The production crosswalk validator rejects a duplicate roster, an unknown source shapeID override, and a subject assessment with an invalid state parent.",
     }
     if not positive["subject_count"] == positive["matched_source_ids"] == positive["unique_census_name_state_matches"] == 268:
         raise ValueError("Positive control failed")
-    if not negative["duplicate_subject_rejected"] or not negative["unknown_source_id_rejected"] or negative["wrong_state_match_count"] != 0:
+    if not negative["duplicate_subject_rejected"] or not negative["unknown_source_id_rejected"] or not negative["wrong_state_rejected"]:
         raise ValueError("Negative control failed")
     for name, result in (("positive-control.json", positive), ("negative-control.json", negative)):
         (PACKET / name).write_text(json.dumps(result, ensure_ascii=False, sort_keys=True, indent=2) + "\n", encoding="utf-8")
