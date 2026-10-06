@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "baseline_commit": "249e396178cfc160fd547ec4487c5d94832fc9af",
+  "paths": ["data/geography"],
+  "method": "git grep -i -E 'sala(s)? y g[óo]mez|motu motiro hiva' BASELINE -- data/geography",
+  "matched_lines": 0,
+  "interpretation": "No separately named Atlas location for Isla Salas y Gómez or Motu Motiro Hiva was found. This is a label search, not a claim that all differently named or unnamed maritime records were exhaustively spatially reviewed.",
+  "scoped_subject_parent": {
+    "subject_id": "gb:CHL:ADM3:31580391B33082267781919",
+    "current_name": "Isla de Pascua",
+    "parent_id": "framework:province:easter-island-province:56a8d02c6b29",
+    "parent_semantic_review": "open"
+  }
+}

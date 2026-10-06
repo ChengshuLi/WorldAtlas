@@ -1,0 +1,12 @@
+{
+  "baseline_commit": "249e396178cfc160fd547ec4487c5d94832fc9af",
+  "kind": "reproducibility",
+  "method_id": "packet-code",
+  "note": "Two consecutive executions of verify.py with the restored and SHA-verified official DPA 2022 archives produced byte-identical geometry-results.json; both runs also generated identical control records.",
+  "outcome": "passed",
+  "output_bytes": 7446,
+  "output_path": "geometry-results.json",
+  "run_one_sha256": "b53e5c44d213b8b66c572a123bb5f6ab5b9760ccb77244f8fafeec7304b9ed1d",
+  "run_two_sha256": "b53e5c44d213b8b66c572a123bb5f6ab5b9760ccb77244f8fafeec7304b9ed1d",
+  "runs": 2
+}

@@ -1,0 +1,749 @@
+{
+  "baseline": {
+    "commit": "249e396178cfc160fd547ec4487c5d94832fc9af",
+    "files": [
+      {
+        "bytes": 6259307,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-2.json",
+        "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf"
+      },
+      {
+        "bytes": 6613963,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-28.json",
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+      },
+      {
+        "bytes": 10164089,
+        "hash_kind": "file-bytes",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      {
+        "bytes": 944,
+        "hash_kind": "file-bytes",
+        "path": "data/world-index.json",
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+      },
+      {
+        "bytes": 206,
+        "hash_kind": "file-bytes",
+        "path": "data/geographic-releases/current-manifest.json",
+        "sha256": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81"
+      },
+      {
+        "bytes": 816165,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/source/geoboundaries/CHL/geoBoundaries-CHL-ADM3-Isla-de-Pascua-feature.json",
+        "sha256": "fb0ea671f05a6334ec7a867ca5cb46fcedb63c5b3cc25a39115f5879c73986cb"
+      },
+      {
+        "bytes": 983,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/source/geoboundaries/CHL/geoBoundaries-CHL-ADM3-metaData.json",
+        "sha256": "658356bb413f8b284b260360d1309527781e1b0c46027e1ae0a4c58da1c99409"
+      },
+      {
+        "bytes": 7642,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/source/provenance.json",
+        "sha256": "1935a8ae202c64fa1b84ddaad772efb305131263febdddc9e5f2d3ccc43c5eb9"
+      },
+      {
+        "bytes": 9529,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/references.md",
+        "sha256": "11675afde0bcd41d9cee6471f4b46003a2ddd679192676412563ed9a35833146"
+      },
+      {
+        "bytes": 11746,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/scope.json",
+        "sha256": "122274d0c0e4e13a29167e2f1bf2cd4c9eaef04a2fc97e0c05762a3471657383"
+      },
+      {
+        "bytes": 31799,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/location-assessments.csv",
+        "sha256": "64c92cc0aa411dc58b377c65f47c63dca8b148b08c3872c2a9f59bf793baae57"
+      },
+      {
+        "bytes": 5164,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/area-assessments.csv",
+        "sha256": "dc08e6a656e420ef00c6d07ffd10b26474c40252bb06fc81c4c7044bdaa10707"
+      },
+      {
+        "bytes": 1052,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/geometry-controls.json",
+        "sha256": "c686d154be67e2463b28e5828a5d75db446f834213904ed159dfcd42de360bce"
+      },
+      {
+        "bytes": 26550,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/geometry-comparison.json",
+        "sha256": "e6e9b208e6f3ccbe5c2dfcd78cb2852cd341e32c92ea2546b70454e6299812d0"
+      },
+      {
+        "bytes": 879,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/geocode-screen.json",
+        "sha256": "3f1a540ea0898df35ffba733dda8af81cf1287ebbfa5169d9dfd251b6166c4e9"
+      }
+    ],
+    "pin_files": {
+      "data/geographic-releases/current-manifest.json": "data/geographic-releases/current-manifest.json",
+      "data/geography/part-2.json": "data/geography/part-2.json",
+      "data/geography/part-28.json": "data/geography/part-28.json",
+      "data/hierarchy.json": "data/hierarchy.json",
+      "data/regional-review/regional-review-14a242c4cb0781a7/source/geoboundaries/CHL/geoBoundaries-CHL-ADM3-Isla-de-Pascua-feature.json": "data/regional-review/regional-review-14a242c4cb0781a7/source/geoboundaries/CHL/geoBoundaries-CHL-ADM3-Isla-de-Pascua-feature.json",
+      "data/world-index.json": "data/world-index.json"
+    },
+    "pins": {
+      "data/geographic-releases/current-manifest.json": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81",
+      "data/geography/part-2.json": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf",
+      "data/geography/part-28.json": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "data/hierarchy.json": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "data/regional-review/regional-review-14a242c4cb0781a7/source/geoboundaries/CHL/geoBoundaries-CHL-ADM3-Isla-de-Pascua-feature.json": "fb0ea671f05a6334ec7a867ca5cb46fcedb63c5b3cc25a39115f5879c73986cb",
+      "data/world-index.json": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+    },
+    "subject_files": {
+      "gb:CHL:ADM3:31580391B33082267781919": "data/geography/part-2.json"
+    }
+  },
+  "change_receipts": [
+    {
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/README.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/analysis-ledger.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/code-negative.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/code-positive.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/geometry-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/geometry-negative.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/geometry-positive.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/geometry-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/neighbor-search.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/official-dpa-negative.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/official-dpa-positive.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/references.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/source-negative.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/source-positive.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/source/baseline-input-paths.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/source/claim-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/source/geoboundaries/CHL/geoBoundaries-CHL-ADM3-Isla-de-Pascua-feature.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/source/geoboundaries/CHL/geoBoundaries-CHL-ADM3-metaData.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/source/issue-1052-api-snapshot.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/source/legal-fact-extracts.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/source/provenance.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/verify.py",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "python3.12 -m pip install --target data/regional-review/rapa-nui-sala-y-gomez-20261005/.scratch/pydeps -r data/regional-review/regional-review-14a242c4cb0781a7/requirements-review.txt",
+    "PYTHONPATH=scripts:scripts/evidence:data/regional-review/rapa-nui-sala-y-gomez-20261005/.scratch/pydeps python3.12 data/regional-review/rapa-nui-sala-y-gomez-20261005/verify.py --official-dpa-dir data/regional-review/rapa-nui-sala-y-gomez-20261005/source/chile-dpa-2022"
+  ],
+  "conclusions": [
+    {
+      "source_ids": [
+        "chile-law-16441",
+        "chile-decree-324",
+        "geoboundaries-chl-adm3",
+        "ide-minagri-2022-polygon"
+      ],
+      "status": "supported",
+      "text": "Law 16,441 and Decree 324 place Isla Salas y Gómez within the Isla de Pascua administrative unit; the retained geoBoundaries source includes its separate land component."
+    },
+    {
+      "source_ids": [
+        "chile-law-16441",
+        "chile-decree-324",
+        "geoboundaries-chl-adm3",
+        "ide-minagri-2022-polygon"
+      ],
+      "status": "supported",
+      "text": "The current Atlas footprint omits the source component at the official decree coordinate; a same-ID, same-parent engineering addition of only this component is supported, with the existing Rapa Nui representative point preserved."
+    },
+    {
+      "source_ids": [
+        "geoboundaries-chl-adm3",
+        "chile-law-16441"
+      ],
+      "status": "unresolved",
+      "text": "The issue-declared part-28 baseline pin does not contain the exact subject; the packet uses its actual part-2 containing file and preserves the contract mismatch for issue-owner correction."
+    },
+    {
+      "source_ids": [
+        "geoboundaries-chl-adm3",
+        "ide-minagri-page",
+        "ide-minagri-2022-polygon"
+      ],
+      "status": "unresolved",
+      "text": "The parent province semantic review, remaining local shoreline differences, and legal reuse terms for the IDE MINAGRI archive remain unresolved and outside this correction handoff."
+    }
+  ],
+  "issue": 1052,
+  "lane": "geography",
+  "methods": [
+    {
+      "description": "Check exact retained native shapeID, source name, boundary type, canonical unit label, source lineage, update/build dates and license. Select the remote source component by coverage of the official Decreto 324 coordinate, not component order or component count.",
+      "id": "source-crosswalk",
+      "kind": "source",
+      "software": "Python 3.12.14 standard library; immutable Git blobs at pinned baseline",
+      "units": "native feature IDs, source metadata, longitude/latitude coordinates"
+    },
+    {
+      "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+      "axis_order": "longitude-latitude",
+      "crs": "EPSG:4326",
+      "description": "Compare only the exact source component covering the decree coordinate with the current Atlas feature; compute WGS84 land areas/intersection and geodesic distance using the shared helper. The mainland intersection and axis-order point are positive controls; the remote component’s zero current overlap is a negative inclusion control.",
+      "distance_method": "WGS84 inverse geodesic",
+      "helper_version": "worldatlas-evidence-geometry-v1",
+      "id": "geodesic-overlays",
+      "kind": "geography",
+      "software": "Python 3.12.14; NumPy 2.3.5; Shapely 2.1.2; pyproj 3.7.2; worldatlas-evidence-geometry-v1",
+      "units": "m² and metres"
+    },
+    {
+      "description": "Restore the two cited official RAR archives by URL and exact hash; parse the EPSG:32712 line/polygon SHP and DBF records without repairing geometry; transform with explicit longitude-first pyproj and confirm the decree coordinate is within the polygon layer and the nearby offshore negative point is outside. Raw source files are not redistributed because reuse terms are unstated.",
+      "id": "official-dpa-2022",
+      "kind": "source",
+      "software": "Python 3.12.14 standard library; pyproj 3.7.2; Shapely 2.1.2; bsdtar 3.7",
+      "units": "feature records, EPSG:32712 coordinates, WGS84 longitude/latitude"
+    },
+    {
+      "description": "Read exact file bytes from the immutable commit; assert the subject exists once in actual part-2 and zero times in issue-pinned part-28; verify parent and source identity; write deterministic JSON outputs only under the owned evidence directory.",
+      "id": "packet-code",
+      "kind": "code",
+      "software": "Python 3.12.14; Git; Node.js 24 for evidence validation",
+      "units": "file identities, features, bytes and SHA-256"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "json_pointer": "/metrics/0/value",
+      "metric_id": "salas_y_gomez_source_component_area",
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/analysis-ledger.json"
+    },
+    {
+      "json_pointer": "/metrics/1/value",
+      "metric_id": "salas_y_gomez_current_atlas_intersection",
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/analysis-ledger.json"
+    },
+    {
+      "json_pointer": "/metrics/2/value",
+      "metric_id": "current_atlas_polygon_area",
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/analysis-ledger.json"
+    },
+    {
+      "json_pointer": "/metrics/3/value",
+      "metric_id": "decree_coordinate_distance_from_current_atlas_point",
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/analysis-ledger.json"
+    },
+    {
+      "json_pointer": "/metrics/4/value",
+      "metric_id": "largest_source_island_current_overlap",
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/analysis-ledger.json"
+    },
+    {
+      "json_pointer": "/metrics/5/value",
+      "metric_id": "full_geoboundaries_feature_area",
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/analysis-ledger.json"
+    },
+    {
+      "json_pointer": "/metrics/6/value",
+      "metric_id": "full_source_feature_atlas_overlap",
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/analysis-ledger.json"
+    }
+  ],
+  "metrics": [
+    {
+      "evaluation_commit": "249e396178cfc160fd547ec4487c5d94832fc9af",
+      "id": "salas_y_gomez_source_component_area",
+      "input_sha256": "fb0ea671f05a6334ec7a867ca5cb46fcedb63c5b3cc25a39115f5879c73986cb",
+      "unit": "m2",
+      "value": 162819.52066396928,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "249e396178cfc160fd547ec4487c5d94832fc9af",
+      "id": "salas_y_gomez_current_atlas_intersection",
+      "input_sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf",
+      "unit": "m2",
+      "value": 0.0,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "249e396178cfc160fd547ec4487c5d94832fc9af",
+      "id": "current_atlas_polygon_area",
+      "input_sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf",
+      "unit": "m2",
+      "value": 159298433.5159299,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "249e396178cfc160fd547ec4487c5d94832fc9af",
+      "id": "decree_coordinate_distance_from_current_atlas_point",
+      "input_note": "Retained legal-fact-extracts.json binds the official decree coordinate; Atlas representative point is read from the hash-pinned part-2 baseline input.",
+      "input_sha256": "db6381c381deee54231877bd7cd33a37d0c67db008de7d5d13980308e4d56c58",
+      "unit": "m",
+      "value": 402952.8037618872,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "249e396178cfc160fd547ec4487c5d94832fc9af",
+      "id": "largest_source_island_current_overlap",
+      "input_sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf",
+      "unit": "m2",
+      "value": 157498033.438303,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "249e396178cfc160fd547ec4487c5d94832fc9af",
+      "id": "full_geoboundaries_feature_area",
+      "input_sha256": "fb0ea671f05a6334ec7a867ca5cb46fcedb63c5b3cc25a39115f5879c73986cb",
+      "unit": "m2",
+      "value": 163846439.0158006,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "249e396178cfc160fd547ec4487c5d94832fc9af",
+      "id": "full_source_feature_atlas_overlap",
+      "input_sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf",
+      "unit": "m2",
+      "value": 157503328.27021995,
+      "vintage": "baseline"
+    }
+  ],
+  "outputs": [
+    {
+      "bytes": 5929,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/README.md",
+      "sha256": "b59be376d6130413ca9a68e4c3d2072ce1a8ef0e377ed0103e4b2678c0300231"
+    },
+    {
+      "bytes": 2475,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/analysis-ledger.json",
+      "sha256": "80c0e6fede7c5606510402642c53ff8c5bc8d03c56a686021955d963ecb500ab"
+    },
+    {
+      "bytes": 164,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/code-negative.json",
+      "sha256": "d0183ca2df92cf056659c24686d3fec2e2ea4979174c53ebd14eb9062a817bde"
+    },
+    {
+      "bytes": 175,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/code-positive.json",
+      "sha256": "8e0fc117a70e11dbd7897ac06593c0f418c784c4e09bfb6fa385c08013a7e77d"
+    },
+    {
+      "bytes": 353,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/geometry-controls.json",
+      "sha256": "d39cfedeb81584af2689fee746b1aa057bf464712270183ad122686bef61c7de"
+    },
+    {
+      "bytes": 211,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/geometry-negative.json",
+      "sha256": "0bd82f4c1dc3b829de11315f41ffd6b17add9264fa52384f514eb301fc165401"
+    },
+    {
+      "bytes": 295,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/geometry-positive.json",
+      "sha256": "4f8814c74fdfbc5e479ff69d71292156eb60cf872d4f55c77db24084464d9722"
+    },
+    {
+      "bytes": 7446,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/geometry-results.json",
+      "sha256": "b53e5c44d213b8b66c572a123bb5f6ab5b9760ccb77244f8fafeec7304b9ed1d"
+    },
+    {
+      "bytes": 717,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/neighbor-search.json",
+      "sha256": "105818cbf0364d1b7551d35b31966b13dcdc37880172ffb27540307f7a8cacd4"
+    },
+    {
+      "bytes": 227,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/official-dpa-negative.json",
+      "sha256": "86942edb31efeb43f66403ae7bcbb769d82fc1bab68f38ba23f8ef7e2b977aa7"
+    },
+    {
+      "bytes": 156,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/official-dpa-positive.json",
+      "sha256": "60b128886fee31a55db92b1bc83ea8b0605c2d8cb08955e6e6a7b7f154573b8c"
+    },
+    {
+      "bytes": 4917,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/references.md",
+      "sha256": "9881f4ebbbd5009450f7020d1642d0bf694b929758eb8632f185bcf1a5c5cc33"
+    },
+    {
+      "bytes": 619,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/reproducibility.json",
+      "sha256": "f1451606c1e99a159aa2437c3b8877ff3c847b1c189471bc63aa3f979966ea89"
+    },
+    {
+      "bytes": 195,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/source-negative.json",
+      "sha256": "a14bbe835c1d73300e7118f6ef7fec8636c78cf1e163fdaaee99ce4ff5d36d7b"
+    },
+    {
+      "bytes": 150,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/source-positive.json",
+      "sha256": "31b551d87ba2036af2c090caee0a385e116ef7374f00b92f5da2a2d10f7ffd54"
+    },
+    {
+      "bytes": 4328,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/source/baseline-input-paths.json",
+      "sha256": "3461a7a3fd86cf6456de7bf5b1767bdeed908f14cf163b72dc407d8c385bdf44"
+    },
+    {
+      "bytes": 922,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/source/claim-receipt.json",
+      "sha256": "f8c824719d2185a983719e304f86f8e39aef70bca4d534cd68f8895637c3d6c0"
+    },
+    {
+      "bytes": 9444,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/source/issue-1052-api-snapshot.json",
+      "sha256": "b8d5b6bbb6c5dac6bda9d04f506c1f7bc479a6418b016dc8c47cd5596b022462"
+    },
+    {
+      "bytes": 2110,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/source/legal-fact-extracts.json",
+      "sha256": "db6381c381deee54231877bd7cd33a37d0c67db008de7d5d13980308e4d56c58"
+    },
+    {
+      "bytes": 6401,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/source/provenance.json",
+      "sha256": "07c9266aa9f8df24a7c0892b8ea17bbabecf58f2114a1f17a81b9798923e8f51"
+    },
+    {
+      "bytes": 16598,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/verify.py",
+      "sha256": "2ad4f84132759a6a94c24dd34d46c17250310535132cc8f8dc02587dd6b8e55e"
+    }
+  ],
+  "rendered_tables": [],
+  "sources": [
+    {
+      "files": [
+        {
+          "bytes": 816165,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/source/geoboundaries/CHL/geoBoundaries-CHL-ADM3-Isla-de-Pascua-feature.json",
+          "role": "original-source",
+          "sha256": "fb0ea671f05a6334ec7a867ca5cb46fcedb63c5b3cc25a39115f5879c73986cb"
+        },
+        {
+          "bytes": 983,
+          "hash_kind": "file-bytes",
+          "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/source/geoboundaries/CHL/geoBoundaries-CHL-ADM3-metaData.json",
+          "role": "original-source",
+          "sha256": "658356bb413f8b284b260360d1309527781e1b0c46027e1ae0a4c58da1c99409"
+        }
+      ],
+      "id": "geoboundaries-chl-adm3",
+      "license": {
+        "status": "redistributable",
+        "terms": "CC BY 3.0 IGO per retained geoBoundaries metadata; attribute BCN Chile, OCHA ROLAC and geoBoundaries."
+      },
+      "limit": "Dated administrative source feature, not an exact contemporary geodetic shoreline survey. Only the legally named Salas y Gómez component is proposed here.",
+      "restoration": "Full source LFS object SHA-256/OID f3833ce1965394ae705e3793b50bdd007775b43da604251871deffed04f3bffd (171783952 bytes), pinned commit and target shapeID are in source/provenance.json; retained one-feature extraction is unchanged.",
+      "retention": "retained",
+      "retrieved_at": "2026-10-05",
+      "role": "Exact 2020 geoBoundaries CHL ADM3 feature and metadata; BCN/OCHA ROLAC source lineage",
+      "temporal_status": "reference",
+      "url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d",
+      "verification": "verified",
+      "vintage": "2020 boundary; source update 2023-01-19; build 2023-12-12; commit 9469f09592ced973a3448cf66b6100b741b64c0d"
+    },
+    {
+      "id": "chile-law-16441",
+      "license": {
+        "status": "unknown",
+        "terms": "Official law page; no separate reuse terms asserted; no law-page bytes redistributed."
+      },
+      "limit": "1984-05-18 version response is hashed in source/legal-fact-extracts.json; current landing and original 1966 version were inspected but not separately hashed.",
+      "restoration": "Open the exact official BCN LeyChile URL and the version link in references.md; confirm article 1 language on one commune-subdelegation and both islands.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-05",
+      "role": "Chile Law 16,441, article 1",
+      "temporal_status": "reference",
+      "url": "https://www.bcn.cl/leychile/navegar?i=28472",
+      "verification": "verified",
+      "vintage": "1966 enactment; inspected text versions to 2022"
+    },
+    {
+      "id": "chile-decree-324",
+      "license": {
+        "status": "unknown",
+        "terms": "Official decree page; no separate reuse terms asserted; no decree-page bytes redistributed."
+      },
+      "limit": "The local legacy route returned a moved-page redirect, not the decree body; content inspected via primary source reader.",
+      "restoration": "Open the exact BCN LeyChile decree URL and inspect recitals/articles 1–2 for official name, coordinate and commune/province relationship.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-05",
+      "role": "Chile Decree 324",
+      "temporal_status": "reference",
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=85342",
+      "verification": "verified",
+      "vintage": "1991-04-04"
+    },
+    {
+      "id": "bcn-commune-2024",
+      "license": {
+        "status": "unknown",
+        "terms": "Official report; no separate reuse terms asserted; HTML not redistributed. Response bytes and hash recorded in source/legal-fact-extracts.json."
+      },
+      "limit": "Rounded commune area does not establish detached land membership.",
+      "restoration": "Fetch the official report URL; compare exact response size/hash in source/legal-fact-extracts.json.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-05",
+      "role": "BCN Isla de Pascua 2024 commune report",
+      "temporal_status": "reference",
+      "url": "https://www.bcn.cl/siit/reportescomunales/comunas_v.html?anno=2024&idcom=5201",
+      "verification": "verified",
+      "vintage": "2024"
+    },
+    {
+      "id": "ide-minagri-page",
+      "license": {
+        "status": "unknown",
+        "terms": "Official landing page gives no license; response hash and restoration links are recorded; page bytes not redistributed."
+      },
+      "limit": "Page calls polygon layer district-level; source row uses commune code/name.",
+      "restoration": "Fetch the official page and compare response size/hash in source/provenance.json.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-05",
+      "role": "IDE MINAGRI/ODEPA 2022 DPA download metadata",
+      "temporal_status": "reference",
+      "url": "https://ide.minagri.gob.cl/descarga-de-capas-shp/limites/",
+      "verification": "verified",
+      "vintage": "2022 layer listing, page retrieved 2026-10-05"
+    },
+    {
+      "id": "ide-minagri-2022-line",
+      "license": {
+        "status": "unknown",
+        "terms": "The official landing page gives no redistribution license; preserve restoration URL and archive hash, and do not redistribute the archive."
+      },
+      "limit": "Official page does not state reuse terms; product scale and line semantics are not a standalone complete legal polygon definition.",
+      "restoration": "Fetch https://ide.minagri.gob.cl/wp-content/uploads/DESCARGAS/CAPAS/LIMITES/DIVA_ODEPA/ipascua_comulin_2022.rar; verify SHA-256 994031d5b6a76706112966c4ba1764458a4775502cd7fb4d0615b20029a0208a and 121481 bytes; extract with bsdtar -xf and pass the containing directory to verify.py --official-dpa-dir.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-05",
+      "role": "IDE MINAGRI/ODEPA Isla de Pascua administrative line layer 2022",
+      "temporal_status": "reference",
+      "url": "https://ide.minagri.gob.cl/wp-content/uploads/DESCARGAS/CAPAS/LIMITES/DIVA_ODEPA/ipascua_comulin_2022.rar",
+      "verification": "verified",
+      "vintage": "2022 / 1:50,000"
+    },
+    {
+      "id": "ide-minagri-2022-polygon",
+      "license": {
+        "status": "unknown",
+        "terms": "The official landing page gives no redistribution license; preserve restoration URL and archive hash, and do not redistribute the archive."
+      },
+      "limit": "Portal calls the product a district-level polygon; the DBF uses commune code/name and only one feature. Treat as geographic corroboration with tier ambiguity, not sole legal definition.",
+      "restoration": "Fetch https://ide.minagri.gob.cl/wp-content/uploads/DESCARGAS/CAPAS/LIMITES/DIVA_ODEPA/ipascua_comupol_2022.rar; verify SHA-256 0f95b0eaa7f4f9b34eb12375404384f26fa4ed90c625423fabd89560bb0583ce and 126871 bytes; extract with bsdtar -xf and pass the containing directory to verify.py --official-dpa-dir.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-05",
+      "role": "IDE MINAGRI/ODEPA Isla de Pascua DPA polygon layer 2022",
+      "temporal_status": "reference",
+      "url": "https://ide.minagri.gob.cl/wp-content/uploads/DESCARGAS/CAPAS/LIMITES/DIVA_ODEPA/ipascua_comupol_2022.rar",
+      "verification": "verified",
+      "vintage": "2022 / 1:50,000"
+    }
+  ],
+  "stages": {
+    "geographic_approval": "unapproved",
+    "implementation": "proposed",
+    "research": "complete"
+  },
+  "subject_ids": [
+    "gb:CHL:ADM3:31580391B33082267781919"
+  ],
+  "subject_ids_sha256": "2ae13797e7e0ea0e5d3658318f5fc0d30942fc7a8475b97627f4aaab4d9ec1e2",
+  "summaries": [
+    {
+      "metric_id": "salas_y_gomez_source_component_area",
+      "unit": "m2",
+      "value": 162819.52066396928
+    },
+    {
+      "metric_id": "salas_y_gomez_current_atlas_intersection",
+      "unit": "m2",
+      "value": 0.0
+    },
+    {
+      "metric_id": "current_atlas_polygon_area",
+      "unit": "m2",
+      "value": 159298433.5159299
+    },
+    {
+      "metric_id": "decree_coordinate_distance_from_current_atlas_point",
+      "unit": "m",
+      "value": 402952.8037618872
+    },
+    {
+      "metric_id": "largest_source_island_current_overlap",
+      "unit": "m2",
+      "value": 157498033.438303
+    },
+    {
+      "metric_id": "full_geoboundaries_feature_area",
+      "unit": "m2",
+      "value": 163846439.0158006
+    },
+    {
+      "metric_id": "full_source_feature_atlas_overlap",
+      "unit": "m2",
+      "value": 157503328.27021995
+    }
+  ],
+  "validation": [
+    {
+      "evidence_path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/source-positive.json",
+      "kind": "positive-control",
+      "method_id": "source-crosswalk",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/source-negative.json",
+      "kind": "negative-control",
+      "method_id": "source-crosswalk",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/geometry-positive.json",
+      "kind": "positive-control",
+      "method_id": "geodesic-overlays",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/geometry-negative.json",
+      "kind": "negative-control",
+      "method_id": "geodesic-overlays",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/official-dpa-positive.json",
+      "kind": "positive-control",
+      "method_id": "official-dpa-2022",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/official-dpa-negative.json",
+      "kind": "negative-control",
+      "method_id": "official-dpa-2022",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/code-positive.json",
+      "kind": "positive-control",
+      "method_id": "packet-code",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/code-negative.json",
+      "kind": "negative-control",
+      "method_id": "packet-code",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/reproducibility.json",
+      "kind": "reproducibility",
+      "method_id": "packet-code",
+      "outcome": "passed"
+    }
+  ],
+  "version": 1,
+  "worker_id": "01a10948-7d38-75d0-bc01-4cc28ea41f49"
+}

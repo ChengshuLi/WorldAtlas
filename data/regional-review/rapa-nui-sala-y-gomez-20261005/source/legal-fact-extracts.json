@@ -1,0 +1,43 @@
+{
+  "retrieved_date_local": "2026-10-05",
+  "retrieved_timezone": "America/Los_Angeles",
+  "sources": [
+    {
+      "id": "law-16441",
+      "url": "https://www.bcn.cl/leychile/navegar?i=28472",
+      "version_url": "https://www.bcn.cl/leychile/navegar?idNorma=28472&idVersion=1984-05-18",
+      "inspected_article": "Article 1",
+      "fact": "The text says the Isla de Pascua department includes the territories of Easter Island and Sala y Gómez, and has one commune-subdelegation of the same name.",
+      "text_response_sha256": "4ff75cdc3dade5550d6eee84a015e513a646a920e50ffce12cdea8cf379e9131",
+      "sha256_limit": "1984-05-18 version response retrieved and hashed; current landing page and 1966 version inspected but not separately retained or hashed.",
+      "text_response_bytes": 9602
+    },
+    {
+      "id": "decree-324",
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=85342",
+      "date": "1991-04-04",
+      "inspected_articles": [
+        "recitals",
+        "1",
+        "2"
+      ],
+      "official_name": "Isla Salas y Gómez",
+      "official_coordinate_lon_lat": [
+        -105.3652777778,
+        -26.4713888889
+      ],
+      "fact": "The decree says the island forms part of Isla de Pascua commune and province, gives the coordinate, and establishes the official spelling Isla Salas y Gómez.",
+      "text_response_sha256": null,
+      "sha256_limit": "Official text inspected via primary-source reader. Shell URLs redirected to the new BCN route without retrieving the decree response; no source-body hash is asserted."
+    },
+    {
+      "id": "bcn-commune-2024",
+      "url": "https://www.bcn.cl/siit/reportescomunales/comunas_v.html?anno=2024&idcom=5201",
+      "date": "2024 report",
+      "fact": "Lists Isla de Pascua commune under Valparaíso Region and Isla de Pascua Province; displayed surface 163.6 km2.",
+      "response_bytes": 408603,
+      "response_sha256": "fbeacf7121c2102e9f1d8a6b275346fe0afab1cb685f8f88f32efdccee4aff58",
+      "limit": "The reported area is rounded/compiled and does not resolve an individual detached island boundary."
+    }
+  ]
+}
