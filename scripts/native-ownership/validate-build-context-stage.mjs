@@ -64,6 +64,17 @@ export async function validateBuildContextStage({root=process.cwd(),expectedRefe
   if(alias)return read({path:alias.path,bytes:alias.bytes,sha256:alias.sha256});
   return readPinnedBuildFile({root,commit:pin.commit,path:pin.path,snapshotPath:pin.snapshot_path,sha256:pin.sha256,bytes:pin.bytes});
  };
+ const sourceCommit=originalManifest.transform.original_commit;
+ const originalPointer=JSON.parse(originalReader('data/geographic-releases/current-manifest.json',sourceCommit));
+ const registryPin=oldSnapshots.get(sourceCommit+':data/geographic-releases/'+originalPointer.path);
+ fail(registryPin&&stage.predecessor_registry.path===registryPin.snapshot_path&&stage.predecessor_registry.bytes===registryPin.bytes&&
+  stage.predecessor_registry.sha256===registryPin.sha256&&registryPin.sha256===originalPointer.sha256,
+  'Unbound original release registry');
+ const originalRegistry=JSON.parse(gunzipSync(read(stage.predecessor_registry),{maxOutputLength:32*1024*1024}));
+ assert.equal(registry.version,originalRegistry.version);assert.equal(registry.original_catalog_sha256,originalRegistry.original_catalog_sha256);
+ assert.deepEqual(registry.releases.slice(0,-1),originalRegistry.releases,'Original release records changed');
+ assert.deepEqual(registry.batches.slice(0,originalRegistry.batches.length),originalRegistry.batches,'Original release batch records changed');
+ assert.deepEqual(registry.sources_batches.slice(0,originalRegistry.sources_batches.length),originalRegistry.sources_batches,'Original source batches changed');
  // Keep the existing complete original-source stage mandatory and unchanged.
  const candidates=JSON.parse(read(stage.native_proposal));
  const originalReceipt=await validateContextInputStage({root,readFile:originalReader,expectedReference:predecessor,subjectIds:Object.keys(candidates)});

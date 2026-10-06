@@ -34,11 +34,15 @@ for(const p of [before_context,after_context])for(const part of JSON.parse(fs.re
 const geometry_manifest=pin(prefix+'/release-proof-v3/index.json'),geometry=JSON.parse(fs.readFileSync(geometry_manifest.path));
 const geometry_files=Object.entries(geometry.files).map(([name,p])=>pin(path.posix.dirname(geometry_manifest.path)+'/'+(p.archive_path??name)));
 const releases=pin(prefix+'/successor-release-v1/releases-v7-gzip.json.gz');
+const originalPointerPin=original.immutable_snapshots.find(p=>p.commit===original.transform.original_commit&&p.path==='data/geographic-releases/current-manifest.json');
+const originalPointer=JSON.parse(execFileSync('git',['show',originalPointerPin.commit+':'+originalPointerPin.path]));
+const originalRegistryPin=original.immutable_snapshots.find(p=>p.commit===original.transform.original_commit&&p.path==='data/geographic-releases/'+originalPointer.path);
+const predecessor_registry=pin(originalRegistryPin.snapshot_path);
 // IDs come from the actual full source release registry, not diagnostic wording.
 const {gunzipSync}=await import('node:zlib');const registry=JSON.parse(gunzipSync(fs.readFileSync(releases.path)));
 const stage={version:1,issue:991,lane:'engineering',kind:'retained-identity-context-migration-v1',execution_commit:head,
  validator_sources:code.filter(p=>BUILD_CONTEXT_VALIDATOR_SOURCES.includes(p.path)),original_stage,
- original_snapshot_overrides:aliases,before_context,after_context,native_proposal,geometry_manifest,geometry_files,releases,
+ original_snapshot_overrides:aliases,before_context,after_context,native_proposal,geometry_manifest,geometry_files,releases,predecessor_registry,
  predecessor_release_id:registry.releases.at(-2).id,successor_release_id:registry.releases.at(-1).id,
  installed:false,published:false,scientific_approval:false};
 const raw=Buffer.from(JSON.stringify(stage)+'\n');budget.add({bytes:raw.length});fs.writeFileSync(output+'/manifest.json',raw,{flag:'wx'});products.push({path:output+'/manifest.json',bytes:raw.length,sha256:sha(raw)});

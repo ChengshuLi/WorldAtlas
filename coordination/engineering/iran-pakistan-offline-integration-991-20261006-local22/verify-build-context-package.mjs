@@ -9,11 +9,11 @@ import {pathToFileURL} from 'node:url';
 import {committedPreparationFiles,requirePlainExecution} from '../../../scripts/native-ownership/native-preparation-guards.mjs';
 requirePlainExecution();
 const root=process.cwd(),prefix='coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22',head=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
-const image=path.join(root,'.cache/reference-repair-991/build-context-image-v2');
+const image=path.join(root,'.cache/reference-repair-991/build-context-image-v3');
 if(fs.existsSync(image))throw Error('Fresh context image required');
 const producer=committedPreparationFiles(root,head,['package.json',prefix+'/verify-build-context-package.mjs','scripts/native-ownership/native-preparation-guards.mjs']);
-const stagePath=prefix+'/migrated-build-context-v3/manifest.json',stage=JSON.parse(fs.readFileSync(stagePath)),old=JSON.parse(fs.readFileSync(stage.original_stage.path));
-const inputs=new Set([stagePath,...stage.validator_sources.map(p=>p.path),stage.original_stage.path,stage.before_context.path,stage.after_context.path,stage.native_proposal.path,stage.geometry_manifest.path,stage.releases.path,...stage.geometry_files.map(p=>p.path),...stage.original_snapshot_overrides.map(p=>p.path)]);
+const stagePath=prefix+'/migrated-build-context-v4/manifest.json',stage=JSON.parse(fs.readFileSync(stagePath)),old=JSON.parse(fs.readFileSync(stage.original_stage.path));
+const inputs=new Set([stagePath,...stage.validator_sources.map(p=>p.path),stage.original_stage.path,stage.before_context.path,stage.after_context.path,stage.native_proposal.path,stage.geometry_manifest.path,stage.releases.path,stage.predecessor_registry.path,...stage.geometry_files.map(p=>p.path),...stage.original_snapshot_overrides.map(p=>p.path)]);
 for(const manifest of [stage.before_context,stage.after_context])for(const part of JSON.parse(fs.readFileSync(manifest.path)).parts)inputs.add(path.posix.dirname(manifest.path)+'/'+part.path);
 for(const pin of old.immutable_snapshots)inputs.add(pin.snapshot_path);
 for(const pin of old.outputs)inputs.add(pin.path);
@@ -36,5 +36,5 @@ try{
  for(const [name,mutate] of cases){const value=JSON.parse(initial);mutate(value);fs.writeFileSync(stagePath,JSON.stringify(value));await assert.rejects(()=>validateBuildContextStage({root:image,stagePath,expectedReference}));controls.push(name);}
  fs.writeFileSync(stagePath,initial);
  const report={execution_commit:head,producer,image_inventory:inventory,package_has_git:false,replaced_current_inputs:['data/geography/part-11.json','data/geography/part-17.json','data/geographic-releases/current-manifest.json'],original_snapshot_aliases_validated:true,receipt:result.receipt,negative_controls:controls,installed:false,published:false};
- fs.writeFileSync(path.join(root,prefix,'migrated-build-context-package-verification-v2.json'),JSON.stringify(report)+'\n',{flag:'wx'});console.log(JSON.stringify({locations:49625,package_has_git:false,negative_controls:controls.length,migration_budget:result.receipt.budget}));
+ fs.writeFileSync(path.join(root,prefix,'migrated-build-context-package-verification-v3.json'),JSON.stringify(report)+'\n',{flag:'wx'});console.log(JSON.stringify({locations:49625,package_has_git:false,negative_controls:controls.length,migration_budget:result.receipt.budget}));
 }finally{process.chdir(originalCwd);delete process.env.WORLDATLAS_PACKAGE_STAGE;}
