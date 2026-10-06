@@ -15,10 +15,10 @@ CACHE=PACKET/".cache/worldcover-2021-v200"
 BASE="https://esa-worldcover.s3.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_{}_Map.tif"
 TILES=["N27E069","N27E072","N30E069","N30E072"]
 EXPECTED={
- "N27E069":(105024722,"f023ee9f015c9382dcf312c68b0133f42d0cebb72ba5f48c23a646b37b7becda","\"39e8b075d5a0e635c191d03c547fdf98-13\""),
- "N27E072":(108754189,"d5701719d5f34ad89ab56feb5eeb873eb1468535b9b1e3d280ce4253955e0ff7","\"bb4d52dce7d39d4ec21ae1a3cdaabb0d-13\""),
- "N30E069":(150596996,"393c2c77ee3c001b91c7094ec4013d9365500ab2bfbc4eb1e48416a0757d05ee","\"e0fd9757315ad1e3e425070bf6f8c9f9-18\""),
- "N30E072":(122839390,"54c7fcb36c475831bc74767a817f3221b4058d4f05cde4a86181ed83f072e957","\"b4c7d164e8a9950c2078c47e2958f6d2-15\""),
+ "N27E069":(105024722,"f023ee9f015c9382dcf312c68b0133f42d0cebb72ba5f48c23a646b37b7becda","\"39e8b075d5a0e635c191d03c547fdf98-13\"","Wed, 26 Oct 2022 12:42:50 GMT"),
+ "N27E072":(108754189,"d5701719d5f34ad89ab56feb5eeb873eb1468535b9b1e3d280ce4253955e0ff7","\"bb4d52dce7d39d4ec21ae1a3cdaabb0d-13\"","Wed, 26 Oct 2022 12:44:44 GMT"),
+ "N30E069":(150596996,"393c2c77ee3c001b91c7094ec4013d9365500ab2bfbc4eb1e48416a0757d05ee","\"e0fd9757315ad1e3e425070bf6f8c9f9-18\"","Wed, 26 Oct 2022 12:48:04 GMT"),
+ "N30E072":(122839390,"54c7fcb36c475831bc74767a817f3221b4058d4f05cde4a86181ed83f072e957","\"b4c7d164e8a9950c2078c47e2958f6d2-15\"","Wed, 26 Oct 2022 12:47:34 GMT"),
 }
 RELEASED="2022-10-28"
 
@@ -59,8 +59,8 @@ def main():
      if not block: break
      out.write(block)
   actual_sha=sha(local)
-  if (local.stat().st_size,actual_sha,head.get("etag")) != EXPECTED[tile]:
-   raise ValueError(f"WorldCover source object identity mismatch for {tile}: size/hash/ETag differ")
+  if (local.stat().st_size,actual_sha,head.get("etag"),head.get("last-modified")) != EXPECTED[tile]:
+   raise ValueError(f"WorldCover source object identity mismatch for {tile}: size/hash/ETag/Last-Modified differ")
   tile_record={"tile":tile,"url":url,"retrieved_date_utc":time.strftime("%Y-%m-%d",time.gmtime()),
     "bytes":local.stat().st_size,"sha256":actual_sha,"etag":head.get("etag"),"last_modified":head.get("last-modified"),
     "content_type":head.get("content-type"),"retention":"full tile is reproducibly downloadable from the cited public ESA WorldCover v200 S3 URL; kept in ignored local evidence cache because each original COG exceeds the 32 MiB retained-file bound"}
