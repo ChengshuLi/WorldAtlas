@@ -77,3 +77,14 @@ test('a conflicting geography owner added during preflight cannot be reported el
  const result=await reviewIssueReadiness({api,repo:'owner/repo',number:1});
  assert.equal(result.coverage,'incomplete');assert.equal(result.eligible,false);assert.match(result.findings.join(),/ownership changed/);
 });
+
+
+test('narrow geography scopes remain disjoint but conflict with enclosing reservations',()=>{
+ const geo={...spec,mode:'geography',depends_on:[],owned_paths:['data/regional-review/packet/nukunonu/']};
+ const value={...issue(geo),labels:['type:geography','kind:work-item','status:ready']};
+ const other={...value,number:3,body:`<!-- worldatlas-work:v1\n${JSON.stringify({...geo,owned_paths:['data/regional-review/packet/bounty/']})}\n-->`};
+ const x={issue:value,otherIssues:[other],comments:[],branch:'geography/repair'};
+ assertIssueReadiness(x);transitionClaim({...x,request:{...request,branch:x.branch}});
+ other.body=`<!-- worldatlas-work:v1\n${JSON.stringify({...geo,owned_paths:['data/regional-review/packet/']})}\n-->`;
+ assert.throws(()=>assertIssueReadiness(x),/ownership conflicts/);assert.throws(()=>transitionClaim({...x,request:{...request,branch:x.branch}}),/ownership conflicts/);
+});

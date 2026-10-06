@@ -105,6 +105,12 @@
         "hash_kind": "file-bytes"
       },
       {
+        "path": "scripts/check-handoff-scope.mjs",
+        "bytes": 6972,
+        "sha256": "c4f838076f63ad82c09d4e4a202f70e17e8495fe92938668aa6746f78c4083cb",
+        "hash_kind": "file-bytes"
+      },
+      {
         "path": "scripts/evidence-policy.mjs",
         "bytes": 2126,
         "sha256": "a6b2d154c234d16321ab1841a69b681a739b45ac63e98bbeb6def295e1c6c11f",
@@ -132,6 +138,12 @@
         "path": "scripts/run-issue-claim.mjs",
         "bytes": 3827,
         "sha256": "60a3fe737da086a103595961e0bed97d5c014397746d440948234d348c4700a5",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/handoff-scope.test.mjs",
+        "bytes": 6782,
+        "sha256": "4c0b26e4382d27076a5800dca380c1edb44111124ae811dcb643575506d6c0ac",
         "hash_kind": "file-bytes"
       },
       {
@@ -192,8 +204,8 @@
     },
     {
       "path": "coordination/engineering/queue-readiness-1210-20261006/controls.txt",
-      "bytes": 11637,
-      "sha256": "2c901924abb00c07ce575c342e4dced05c9f6e78b6e7fa1d5cfa70e1ef00b9fb",
+      "bytes": 11830,
+      "sha256": "b07dc9216ec4f319b5139e74746e810d0eec7be96f2ac51bd19ddfb38c353d64",
       "hash_kind": "file-bytes"
     },
     {
@@ -234,8 +246,8 @@
     },
     {
       "path": "docs/ISSUE_LIFECYCLE.md",
-      "bytes": 7464,
-      "sha256": "fcf326bf76db429f46326639659a10208388f5d3dc81c0ad5fc819970f89bf36",
+      "bytes": 7737,
+      "sha256": "685b98452e0aba201ca4ee13056a841ba4d8895f6977590f10852b5544e2c6ae",
       "hash_kind": "file-bytes"
     },
     {
@@ -293,6 +305,12 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "scripts/check-handoff-scope.mjs",
+      "bytes": 7069,
+      "sha256": "6a1903e87f42794cbf53f18b151042c40fed9ff4850f311b86fff788d34c73aa",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "scripts/issue-claim-contract.mjs",
       "bytes": 14530,
       "sha256": "6e7cdac9e6d87d5ea3e78c697fd34797b00ddcb9b1ba1b6e8cb91f8c93bc410c",
@@ -329,6 +347,12 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "test/handoff-scope.test.mjs",
+      "bytes": 7745,
+      "sha256": "81558c2f6d989bd7cabcf4802b85deb66e961dd047ed40118635d8d2dce59048",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "test/issue-claims.test.mjs",
       "bytes": 11494,
       "sha256": "12e1f845eeb426d2ec53d96e34bc104044aef16129e5915c3619e306578fcc00",
@@ -336,8 +360,8 @@
     },
     {
       "path": "test/issue-readiness.test.mjs",
-      "bytes": 6157,
-      "sha256": "d1ab1486e5247e665ba7e228328eac6eb9229908ad099341ad35ef726ff98654",
+      "bytes": 7059,
+      "sha256": "7b60246a15e09e9ac62c071cfff90060d34f1a785accaed2be64ecec39dc0c83",
       "hash_kind": "file-bytes"
     },
     {
@@ -479,6 +503,11 @@
       "original_sha256": "9db6e71b24d25e257d1e43d6a12021d0cdd60ab2c63404c905da6cd48d8ae40b"
     },
     {
+      "path": "scripts/check-handoff-scope.mjs",
+      "status": "modified",
+      "original_sha256": "c4f838076f63ad82c09d4e4a202f70e17e8495fe92938668aa6746f78c4083cb"
+    },
+    {
       "path": "scripts/issue-claim-contract.mjs",
       "status": "modified",
       "original_sha256": "ad168cb536b3aec404e524d6dac9a0986975a72aee63dc54a29ba956a7fef916"
@@ -505,6 +534,11 @@
     {
       "path": "test/claim-readiness-races.test.mjs",
       "status": "added"
+    },
+    {
+      "path": "test/handoff-scope.test.mjs",
+      "status": "modified",
+      "original_sha256": "4c0b26e4382d27076a5800dca380c1edb44111124ae811dcb643575506d6c0ac"
     },
     {
       "path": "test/issue-claims.test.mjs",

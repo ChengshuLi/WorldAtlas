@@ -112,3 +112,5 @@ Copy-ready refresh:
 > preserve waits/publisher-needed, reuse genuine bounded follow-ups, and never take over
 > an expired claim automatically. Report adoption with actual issue handoff/dependency
 > evidence. Do not restart paused work or perform unapproved production operations.
+
+Geography ownership may name a safe subdirectory inside an owned packet or campaign. Preserve that narrower scope: repairing a contract must not grant its worker the whole enclosing packet. Enclosing and nested scopes conflict; sibling subdirectories can remain disjoint.

@@ -9,7 +9,7 @@ export function laneForBranch(branch){
  return {lane:match[1],id:match[2]};
 }
 export function validateGeographyOwnedPaths(ownedPaths){
- if(!Array.isArray(ownedPaths)||ownedPaths.length<1||ownedPaths.length>8||new Set(ownedPaths).size!==ownedPaths.length||ownedPaths.some(prefix=>typeof prefix!=='string'||!/^(data\/regional-review|research\/geography)\/[a-z0-9][a-z0-9-]{0,63}\/$/.test(prefix)))throw Error('Geography needs 1–8 distinct declared owned_paths under data/regional-review/<packet-id>/ or research/geography/<campaign-id>/');
+ if(!Array.isArray(ownedPaths)||ownedPaths.length<1||ownedPaths.length>8||new Set(ownedPaths).size!==ownedPaths.length||ownedPaths.some(prefix=>typeof prefix!=='string'||prefix.length>512||!/^(data\/regional-review|research\/geography)\/[a-z0-9][a-z0-9-]{0,63}\/(?:[a-z0-9][a-z0-9-]{0,63}\/){0,8}$/.test(prefix)))throw Error('Geography needs 1–8 distinct declared owned_paths under data/regional-review/<packet-id>/ or research/geography/<campaign-id>/, optionally narrowed to safe subdirectories');
  return [...ownedPaths];
 }
 export function validateLanePaths(branch,paths,{ownedPaths}={}){

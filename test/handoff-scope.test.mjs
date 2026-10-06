@@ -53,3 +53,11 @@ test('remote issue validation reads only the event repository and requires succe
  assert.equal(requests,2);
  await assert.rejects(checkLinkedIssue({branch:'research/japan',event,token:'test-only',fetchIssue:async()=>({ok:false,status:404})}),/HTTP 404/);
 });
+
+
+test('geography may own narrower subdirectories without acquiring sibling or parent files',()=>{
+ const ownedPaths=['data/regional-review/packet/nukunonu/','research/geography/campaign/evidence/'];
+ validateLanePaths('geography/repair',['data/regional-review/packet/nukunonu/findings.json','research/geography/campaign/evidence/receipt.json'],{ownedPaths});
+ for(const file of ['data/regional-review/packet/README.md','data/regional-review/packet/bounty/findings.json','research/geography/campaign/other/receipt.json'])assert.throws(()=>validateLanePaths('geography/repair',[file],{ownedPaths}),/declared owned_paths/);
+ for(const prefix of ['data/regional-review/packet/../other/','data/regional-review/packet//nested/','data/regional-review/packet/./nested/','data/regional-review/packet/nested','data/regional-review/packet/nested.json/','data/geography/packet/nested/'])assert.throws(()=>validateLanePaths('geography/repair',[],{ownedPaths:[prefix]}));
+});
