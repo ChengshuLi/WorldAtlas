@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "question": "What source and recorded processing evidence is available for the 134 archived detector-vintage Abu Dhabi seam components?",
+  "immutable_baseline_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+  "current_subject_file": {
+    "path": "data/geography/part-0.json",
+    "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+    "bytes": 8539839,
+    "features": [
+      {
+        "id": "atlas:physical:a2735e777a9d1037bd3a",
+        "json_pointer": "/features/430",
+        "feature_sha256": "f184b2393fdcaaedf663391b173bd52e268b00c0bda3bdbc861be6a09dcfd03a",
+        "source_id": "resolve:810",
+        "source_member_ids": ["gb:ARE:ADM1:86790563B99975224300185"],
+        "reference_year": "2017"
+      },
+      {
+        "id": "atlas:physical:cbea9d242259efda3120",
+        "json_pointer": "/features/432",
+        "feature_sha256": "4c1b35b61ef3bc04b3e854bce4f0855c9d443e234b22f8943f7614f41f4601ca",
+        "source_id": "resolve:811",
+        "source_member_ids": ["gb:ARE:ADM1:86790563B99975224300185"],
+        "reference_year": "2017"
+      }
+    ]
+  },
+  "recorded_adjustment_bands_degrees": [0.001, 0.005, 0.01, 0.025, 0.05],
+  "recorded_adjustments_for_each_physical_subject": [
+    {"area_km2":0.8732,"distance_band_degrees":0.001},
+    {"area_km2":52.5598,"distance_band_degrees":0.001},
+    {"area_km2":17.8934,"distance_band_degrees":0.001},
+    {"area_km2":71.7246,"distance_band_degrees":0.001},
+    {"area_km2":5.5974,"distance_band_degrees":0.001},
+    {"area_km2":0.0182,"distance_band_degrees":0.005},
+    {"area_km2":14.163,"distance_band_degrees":0.005},
+    {"area_km2":25.0746,"distance_band_degrees":0.005},
+    {"area_km2":45.4899,"distance_band_degrees":0.005},
+    {"area_km2":15.7421,"distance_band_degrees":0.01},
+    {"area_km2":12.7042,"distance_band_degrees":0.01},
+    {"area_km2":67.7019,"distance_band_degrees":0.025},
+    {"area_km2":12.0773,"distance_band_degrees":0.025},
+    {"area_km2":32.9328,"distance_band_degrees":0.05}
+  ],
+  "identity_rule": {
+    "stable_id": "SHA256(original administrative member feature ID + ':' + str(source ECO_ID))[:20], prefixed atlas:physical:",
+    "resolution": "Atlas IDs resolve to ECO_ID 810 and 811. Current service ObjectID values 38 and 825 are separate row identifiers. The deliberately wrong ObjectID 810/811 selection returns ECO_ID 519 and 643; it is only a negative identity control."
+  },
+  "recorded_processing_code": {
+    "path": "scripts/refine-remote.py",
+    "commit": "f120991846104a8126b522b12b6af278450fe20e",
+    "also_identical_at_commit": "4bdba3d40acc2d725e4aeb54c3b9aab559a91469",
+    "bytes": 7440,
+    "whole_file_sha256": "6a6a5258328aa1153d567d9a98b90339421700d491f36fbdca216d3e0cbc2726",
+    "observed_operations": [
+      "make_valid on source shapes and output intersections/differences",
+      "simplify(.001, preserve_topology=True) on source features in longitude/latitude coordinates",
+      "intersection/difference using grid_size=1e-8",
+      "skip empty or estimated area <5 km2 source intersections; require at least two >=500 km2 pieces for subdivision unless anonymous",
+      "for residuals, attempt buffers at .001,.005,.01,.025,.05,.1 degrees and record adjustments",
+      "retain source district on significant uncovered area or insufficient source coverage rather than assign a distant polygon"
+    ],
+    "interpretation_limit": "These are generator rules and plausible processing mechanisms. Shared district adjustment metadata, current source geometry matches, and exact component contacts do not prove which operation caused any selected residual."
+  },
+  "historical_source_bytes": {
+    "status": "unavailable-in-pinned-repository",
+    "prior_input_locator": "<repo>/.cache/semantic/resolve-ecoregions.geojson",
+    "hash": "not recorded in immutable Git inputs inspected",
+    "current_retrieval": "sources/v1/resolve-ecoregions-abu-dhabi-envelope.geojson",
+    "current_sha256": "5a7c0583209df1145fb542d595b122b90147ac2e62c0f5dc442f8909f7d67c65",
+    "limit": "Current 2026 hosted response matches ECO_ID/name identity but cannot authenticate the historical .cache source bytes or effective date."
+  },
+  "administrative_source": {
+    "dataset": "geoBoundaries gbOpen ARE ADM1",
+    "release_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+    "retained_sha256": "f6f0097b183518b7ddedd48c60b7e864e222156d2f0227bd345f271c2dd3d873",
+    "relevant_source_feature_ids": ["86790563B99975224300185", "86790563B34058819691262"],
+    "license": "ODbL 1.0; preserve OpenStreetMap/Wambacher attribution/share-alike",
+    "vintage_limit": "Registry says boundary year 2017; effective survey date is not independently verified."
+  },
+  "final_assessment": "Per-component causal classification is unknown for all 134; see overlay-v1.json. Current source footprints intersect, but historical source equivalence and processing causality are not established; no independent water/ice evidence was found."
+}

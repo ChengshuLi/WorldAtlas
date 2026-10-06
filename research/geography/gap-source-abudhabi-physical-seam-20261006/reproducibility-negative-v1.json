@@ -1,0 +1,12 @@
+{
+  "checks": [
+    {
+      "control": "altered_generated_output",
+      "guard": "Generated output SHA-256 mismatch",
+      "outcome": "rejected-as-required"
+    }
+  ],
+  "kind": "negative-control",
+  "method_id": "overlay-reproducibility",
+  "outcome": "passed"
+}

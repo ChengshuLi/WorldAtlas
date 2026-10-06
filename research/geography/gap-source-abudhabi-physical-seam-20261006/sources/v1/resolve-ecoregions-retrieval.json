@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "source_id": "resolve-ecoregions:OBJECTID:810,811",
+  "source_name": "RESOLVE Ecoregions and Biomes, Biomes and Ecoregions 2017",
+  "retrieved_at_utc": "2026-10-06T19:59:30.264Z",
+  "request_url": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer/0/query?where=OBJECTID%20IN%20(810%2C811)&outFields=*&returnGeometry=true&outSR=4326&f=geojson&returnExceededLimitFeatures=false",
+  "final_url": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer/0/query?where=OBJECTID%20IN%20(810%2C811)&outFields=*&returnGeometry=true&outSR=4326&f=geojson&returnExceededLimitFeatures=false",
+  "status": 200,
+  "response_headers": {
+    "content-type": "application/json; charset=utf-8",
+    "etag": "sd27828_1008146058",
+    "last-modified": "Tue, 03 Mar 2026 21:16:59 GMT",
+    "date": "Tue, 06 Oct 2026 19:59:30 GMT"
+  },
+  "retained_path": "research/geography/gap-source-abudhabi-physical-seam-20261006/sources/v1/resolve-ecoregions-objectid-810-811.geojson",
+  "retained_file_bytes": 110026,
+  "retained_sha256": "762258c269762252047f26086ffa74158a91994a615c2a117831851a4cd84371",
+  "feature_count": 2,
+  "features": [
+    {
+      "attributes": {
+        "FID": 805,
+        "OBJECTID": 810,
+        "ECO_NAME": "Yucat\u00e1n moist forests",
+        "BIOME_NUM": 1,
+        "BIOME_NAME": "Tropical & Subtropical Moist Broadleaf Forests",
+        "REALM": "Neotropic",
+        "ECO_BIOME_": "NO01",
+        "NNH": 2,
+        "ECO_ID": 519,
+        "SHAPE_LENG": 27.741104614,
+        "NNH_NAME": "Nature Could Reach Half Protected",
+        "COLOR": "#6C9400",
+        "COLOR_BIO": "#38A700",
+        "COLOR_NNH": "#7BC141",
+        "LICENSE": "CC-BY 4.0",
+        "Shape__Area": 5.968649511211538,
+        "Shape__Length": 27.741104616408165
+      },
+      "geometry_type": "MultiPolygon",
+      "crs": "EPSG:4326"
+    },
+    {
+      "attributes": {
+        "FID": 806,
+        "OBJECTID": 811,
+        "ECO_NAME": "Yunnan Plateau subtropical evergreen forests",
+        "BIOME_NUM": 1,
+        "BIOME_NAME": "Tropical & Subtropical Moist Broadleaf Forests",
+        "REALM": "Palearctic",
+        "ECO_BIOME_": "PA01",
+        "NNH": 4,
+        "ECO_ID": 643,
+        "SHAPE_LENG": 29.7124087047,
+        "NNH_NAME": "Nature Imperiled",
+        "COLOR": "#5AA500",
+        "COLOR_BIO": "#38A700",
+        "COLOR_NNH": "#EE1E23",
+        "LICENSE": "CC-BY 4.0",
+        "Shape__Area": 21.52938439263562,
+        "Shape__Length": 29.712408699565824
+      },
+      "geometry_type": "Polygon",
+      "crs": "EPSG:4326"
+    }
+  ],
+  "spatial_reference": {
+    "wkid": 4326,
+    "latestWkid": 4326
+  },
+  "request_scope": "Negative identity control only: selecting current service OBJECTID values 810 and 811, which the response shows are Yucat\u00e1n moist forests (ECO_ID 519) and Yunnan Plateau evergreen forests (ECO_ID 643). Not Abu Dhabi evidence.",
+  "license": "Creative Commons Attribution 4.0 International",
+  "attribution": "RESOLVE, Esri",
+  "limitations": [
+    "Portal item describes the dataset as 2017 ecoregions (846 terrestrial ecological regions), not administrative boundaries.",
+    "The response is the current hosted feature-service response for the source item; it is not a frozen 2017 service snapshot unless independently versioned.",
+    "This request has no temporal/version parameter; retain retrieval date and do not silently treat current bytes as immutable original 2017 bytes.",
+    "Correction: OBJECTID is not Atlas ECO_ID. This response is retained unchanged as a negative identity control and must not be interpreted as selecting Arabian sand desert/coastal plain source features."
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "issue": 1206,
+  "status": "bounded source assessment complete; engineering cause remains unresolved",
+  "archived_roster_sha256": "b7af8568f5972dd935d8cc85d16c19f349938ea6810b6b2b391c92d4a1b9df94",
+  "archived_component_count": 134,
+  "affected_contact_subjects": [
+    "atlas:physical:a2735e777a9d1037bd3a",
+    "atlas:physical:cbea9d242259efda3120",
+    "gb:ARE:ADM1:86790563B34058819691262"
+  ],
+  "ecoregion_source_features": [
+    {"ECO_ID":810,"name":"Arabian sand desert","current_service_objectid":38},
+    {"ECO_ID":811,"name":"Arabian-Persian Gulf coastal plain desert","current_service_objectid":825},
+    {"ECO_ID":722,"name":"Al-Hajar foothill xeric woodlands and shrublands"},
+    {"ECO_ID":840,"name":"South Arabian plains and plateau desert"},
+    {"ECO_ID":320,"name":"Indus River Delta-Arabian Sea mangroves"}
+  ],
+  "admin_source_features": ["86790563B99975224300185 (Abu Dhabi)", "86790563B34058819691262 (Dubai)"],
+  "findings": {
+    "current_named_ecoregion_intersection_components": 134,
+    "positive_area_intersection_components": 132,
+    "zero_area_boundary_components": 2,
+    "archived_component_contact_rows": 51,
+    "point_only_ambiguous_rows": 45,
+    "shared_edge_rows": 6,
+    "archived_old_gap_new_component_link_rows": 202,
+    "component_link_kinds": {
+      "identical-coordinate-only": 128,
+      "point-only-contact": 68,
+      "identical-coordinate-and-positive-length-contact": 6
+    },
+    "original_abu_dhabi_admin_intersections": 134,
+    "original_dubai_admin_intersections": 1,
+    "independently_supported_water_ice_components": 0
+  },
+  "source_finding": "All component geometries intersect current named RESOLVE and pinned Atlas physical surfaces; the full seven-feature 2017 geoBoundaries geometry also intersects Abu Dhabi for all components, with one component intersecting Dubai. This supports source-footprint contact, not historical byte equivalence or causal attribution.",
+  "unknowns": [
+    "Original .cache/semantic/resolve-ecoregions.geojson bytes and their full-file hash are absent from the pinned baseline.",
+    "Historical effective dates and exact per-component causal role of simplification, precision grid, piece threshold, and recorded coastline adjustment bands remain unverified.",
+    "No independent water/ice evidence supports classification for any component."
+  ],
+  "engineering_next_step": "Compare a historically authenticated RESOLVE source snapshot and precise archived adjusted outputs/operation receipts against per-component intersection/contact and old-gap/new-component link records before proposing any repair. Keep all 134 components and all three contact subjects in scope; do not infer water, assign owners, or fill by nearest feature.",
+  "coexistence": "Issue #160 has the 230-location overlapping legacy registry; this packet does not repeat its regional hierarchy/name audit. No immutable full regional source-review packet was available in the pinned checkout; coordinate this bounded source finding with the root worker before any shared correction.",
+  "campaign_context": "Preliminary milestone-2 source evidence for #1202; archived detector-vintage results are not the final native #1184 queue or a release approval.",
+  "output_path": "research/geography/gap-source-abudhabi-physical-seam-20261006/overlay-v1.json"
+}

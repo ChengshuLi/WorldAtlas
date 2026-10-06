@@ -1,0 +1,37 @@
+{
+  "checks": [
+    {
+      "control": "changed-source-bytes",
+      "guard": "Source whole-file SHA-256 mismatch",
+      "outcome": "rejected-as-required"
+    },
+    {
+      "control": "omitted-component",
+      "guard": "Exact component roster count/uniqueness mismatch",
+      "outcome": "rejected-as-required"
+    },
+    {
+      "control": "omitted-contact-row",
+      "guard": "Complete selected contact inventory mismatch",
+      "outcome": "rejected-as-required"
+    },
+    {
+      "control": "omitted-component-link",
+      "guard": "Complete selected old-gap/new-component link inventory mismatch",
+      "outcome": "rejected-as-required"
+    },
+    {
+      "control": "historical-vintage-laundering",
+      "guard": "Current service bytes cannot be labelled as a historical snapshot",
+      "outcome": "rejected-as-required"
+    },
+    {
+      "control": "altered-selector-transform",
+      "guard": "Simplified download URL does not follow the pinned selector transform",
+      "outcome": "rejected-as-required"
+    }
+  ],
+  "kind": "negative-control",
+  "method_id": "exact-source-overlay",
+  "outcome": "passed"
+}

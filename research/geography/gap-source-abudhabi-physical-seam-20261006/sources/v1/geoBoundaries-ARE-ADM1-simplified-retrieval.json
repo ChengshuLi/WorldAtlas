@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "source_id": "gb:ARE:ADM1:simplified",
+  "source_name": "geoBoundaries gbOpen ARE ADM1 simplified GeoJSON",
+  "retrieved_at_utc": "2026-10-06T20:45:43Z",
+  "request_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/ARE/ADM1/geoBoundaries-ARE-ADM1_simplified.geojson",
+  "final_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/ARE/ADM1/geoBoundaries-ARE-ADM1_simplified.geojson",
+  "status": 200,
+  "headers": {
+    "etag": "\"3d5094daf190b9df5a4888694517692e9271b98cb161450b8f3c103602e18c6c\"",
+    "date": "Tue, 06 Oct 2026 20:45:43 GMT"
+  },
+  "retained_path": "research/geography/gap-source-abudhabi-physical-seam-20261006/sources/v1/geoBoundaries-ARE-ADM1-simplified-9469f09.geojson",
+  "retained_file_bytes": 204734,
+  "retained_sha256": "3d5094daf190b9df5a4888694517692e9271b98cb161450b8f3c103602e18c6c",
+  "feature_count": 7,
+  "feature_ids": [
+    "86790563B99975224300185",
+    "86790563B64154191217223",
+    "86790563B34058819691262",
+    "86790563B19626210530202",
+    "86790563B13183784590468",
+    "86790563B63760912918903",
+    "86790563B60151525742092"
+  ],
+  "source_crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "pinned_atlas_registry": {
+    "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+    "path": "data/administrative-sources.json",
+    "entry_sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+    "registry_geometry_product_sha256": "3d5094daf190b9df5a4888694517692e9271b98cb161450b8f3c103602e18c6c",
+    "field": "simplifiedGeometryGeoJSON",
+    "boundaryYearRepresented": "2017",
+    "boundarySource": "OpenStreetMap, Wambacher",
+    "boundaryLicense": "Open Data Commons Open Database License 1.0"
+  },
+  "license": "Open Data Commons Open Database License 1.0",
+  "attribution": "geoBoundaries gbOpen; underlying boundary source: OpenStreetMap, Wambacher. Preserve attribution and share-alike obligations.",
+  "limitations": [
+    "This is the exact simplifiedGeometryGeoJSON product named by the pinned Atlas registry and its whole-file byte hash matches that registry value.",
+    "Registry boundary year is 2017; the upstream survey/effective date is not independently verified.",
+    "The distinct full unsimplified GeoJSON is separately retained at SHA256 f6f0097b183518b7ddedd48c60b7e864e222156d2f0227bd345f271c2dd3d873; it is not represented as the same Atlas geometry input."
+  ]
+}
