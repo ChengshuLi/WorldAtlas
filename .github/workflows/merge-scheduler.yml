@@ -1,0 +1,76 @@
+name: Durable worker merge admission
+run-name: 'queue #${{ inputs.pr_number }} ${{ inputs.request_id }}'
+on:
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        type: string
+        required: true
+      expected_head:
+        type: string
+        required: true
+      request_id:
+        type: string
+        required: true
+  workflow_run:
+    workflows: ['Serialize worker PR merges']
+    types: [completed]
+  schedule:
+    - cron: '*/5 * * * *'
+permissions: {}
+jobs:
+  register:
+    if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: main
+          persist-credentials: false
+          sparse-checkout: |
+            scripts
+            src
+            .github
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24'
+      - name: Retain FIFO request independently of execution concurrency
+        env:
+          GH_TOKEN: ${{ github.token }}
+          QUEUE_PHASE: register
+        run: node scripts/run-merge-scheduler.mjs
+  schedule:
+    needs: register
+    if: always() && github.ref == 'refs/heads/main' && (needs.register.result == 'success' || needs.register.result == 'skipped')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: worldatlas-merge-admission
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+      actions: write
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          ref: main
+          persist-credentials: false
+          sparse-checkout: |
+            scripts
+            src
+            .github
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24'
+      - name: Recover durable oldest request after confirmed execution completion
+        env:
+          GH_TOKEN: ${{ github.token }}
+          QUEUE_PHASE: schedule
+        run: node scripts/run-merge-scheduler.mjs

@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {createHash} from 'node:crypto';
 import os from 'node:os';
 import path from 'node:path';
 import {integrationTestFiles, integrationNeedsBrowser, prepareIntegrationTests} from '../scripts/run-integration-tests.mjs';
@@ -108,7 +109,7 @@ test('latest failed or pending check replaces old success', () => {
 test('workflow separates untrusted candidate tests from write credentials and serializes the lifecycle', () => {
   const yaml=fs.readFileSync(new URL('../.github/workflows/worker-merge.yml',import.meta.url),'utf8');
   const integration=yaml.split('  integration:\n')[1].split('  merge:\n')[0];
-  assert.match(yaml.split('  merge:\n')[1],/concurrency:\n      group: worldatlas-main-integrate/);
+  assert.match(yaml.split('jobs:')[0],/concurrency:\n  group: worldatlas-main-integrate/);
   assert.doesNotMatch(integration,/concurrency:/);
   assert.match(integration,/permissions:\n      contents: read/);
   assert.doesNotMatch(integration,/GH_TOKEN|secrets\.|contents: write|issues: write|pull-requests: write/);
@@ -156,7 +157,9 @@ test('parallel full-regression shards cover each unit file once and focused prof
 
 function addTrustedProof(f) {
   const original=f.api;
-  const entries = [...f.authored, ...PROOF_PATHS.map(path=>({path,sha:path,type:'blob',mode:'100644'}))];
+  const workflowRaw=fs.readFileSync('.github/workflows/merge-integration-checks.yml');
+  const workflowOID=createHash('sha1').update(`blob ${workflowRaw.length}\0`).update(workflowRaw).digest('hex');
+  const entries = [...f.authored, ...PROOF_PATHS.map(path=>({path,sha:path===WORKFLOW_PATH?workflowOID:path,type:'blob',mode:'100644'}))];
   f.authored=entries;
   const run={id:12,run_attempt:1,head_sha:f.head,event:'pull_request',path:WORKFLOW_PATH,
     repository:{full_name:f.repo},head_repository:{full_name:f.repo},status:'completed',conclusion:'success',
@@ -165,7 +168,7 @@ function addTrustedProof(f) {
   const api=async(route,method,body)=>{
     if(route.endsWith('/git/commits/'+f.head) || route.endsWith('/git/commits/'+f.base)) return {tree:{sha:'authored'}};
     if(route.endsWith('/git/commits/'+f.candidate)) return {tree:{sha:'authored'},parents:[{sha:f.base},{sha:f.head}]};
-    if(route.includes('/git/blobs/')) return {content:Buffer.from(fs.readFileSync('.github/workflows/merge-integration-checks.yml')).toString('base64')};
+    if(route.includes('/git/blobs/')) return {sha:workflowOID,size:workflowRaw.length,encoding:'base64',content:workflowRaw.toString('base64')};
     if(route.includes('/actions/workflows/')) return {workflow_runs:[run]};
     if(route.endsWith('/actions/runs/12')) return run;
     if(route.includes('/jobs')) return {jobs:[{name:'profile',status:'completed',conclusion:'success'},
@@ -545,4 +548,41 @@ test('trusted geography outputs bind attempted artifact digest through the privi
  assert.match(runner,/runId: process\.env\.GITHUB_RUN_ID/);
  assert.match(runner,/expectedHash: process\.env\.GEOGRAPHY_REPORT_SHA256/);
  assert.doesNotMatch(workflow,/actions\/download-artifact/,'privileged job must not extract an unverified archive');
+});
+
+
+test('known stale tested base or head rejects before expensive evidence/tree inspection', async()=>{
+ const stale=fixture();stale.base=sha('d');
+ await assert.rejects(stale.complete(),/resubmit unchanged head/);
+ assert.equal(stale.evidenceReads??0,0);assert.equal(stale.writes.length,0);
+ const changed=fixture();changed.pr.head.sha=sha('e');
+ await assert.rejects(changed.complete(),/head changed/);
+ assert.equal(changed.evidenceReads??0,0);assert.equal(changed.mainReads,0);assert.equal(changed.writes.length,0);
+ const eligible=fixture();await eligible.complete();assert.ok(eligible.evidenceReads>0);assert.equal(eligible.writes.length,1);
+});
+
+
+test('candidate waiting rechecks changed claim/check/review/head after caching immutable evidence',async()=>{
+ for(const changed of ['claim','check','review','head']) {
+  const f=fixture(),origin=f.api,raw=Buffer.from('immutable evidence'),oid=createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
+  let candidates=0,blobs=0;
+  f.api=async(route,...rest)=>{
+   if(route.endsWith('/git/blobs/'+oid)){blobs++;return {sha:oid,size:raw.length,encoding:'base64',content:raw.toString('base64')};}
+   const value=await origin(route,...rest);
+   if(route.endsWith('/git/commits/'+f.candidate)&&++candidates===1)return {...value,parents:[{sha:sha('d')},{sha:f.head}]};
+   return value;
+  };
+  const options=f.options();options.evidenceCheck=async({api})=>{
+   await api('/repos/owner/repo/git/blobs/'+oid);
+   if(f.staleReview)throw Error('Missing independent exact-head review');return {status:'legacy'};
+  };
+  options.candidateSleep=async()=>{
+   if(changed==='claim')f.claim.expires_at='2000-01-01T00:00:00Z';
+   if(changed==='check')f.checks[0].conclusion='failure';
+   if(changed==='review')f.staleReview=true;
+   if(changed==='head')f.pr.head.sha=sha('e');
+  };
+  await assert.rejects(prepareIntegration(options),changed==='claim'?/unexpired claim/:changed==='check'?/trusted scope/:changed==='review'?/exact-head review/:/head changed/);
+  assert.equal(blobs,1);assert.equal(f.writes.length,0);
+ }
 });

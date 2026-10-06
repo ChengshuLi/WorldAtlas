@@ -173,3 +173,122 @@ packages only for the `full` profile. Full proof still requires successful Node
 and Python installation, applicable browser setup and the actual hosted build;
 focused proof requires every focused control to execute successfully with zero
 skipped tests. A skipped dependency-install step is not application coverage.
+
+## Durable FIFO integration admission
+
+Issue #1174 identified an actual starvation path: a long engineering request tested
+main `72029…` while unrelated source merges advanced it to `1f971…` and `9a824…`.
+The final base guard correctly rejected that candidate. Independent testing plus
+final-only serialization allowed this to repeat indefinitely. The observed HTTP
+403 failures have no established cause and are separate from this scheduling bug.
+
+`queue-pr-merge.mjs` now submits to `merge-scheduler.yml`. A trusted registration
+job appends a bot-authored immutable request to its PR, retaining the exact head
+and request ID. Registration runs outside execution concurrency. The short
+serialized scheduler chooses the oldest unresolved open-PR request by comment ID,
+then dispatches `worker-merge.yml` only when a complete live-run inventory is empty.
+The entire admitted preparation, regression and final merge lifecycle holds
+`worldatlas-main-integrate`; source authors continue research and submit normally.
+Both preparation and final merge require that same FIFO ticket and dispatch
+attempt. All existing reviewed-head, authority, evidence, test, candidate-parent,
+base and SHA-guarded squash checks remain mandatory.
+
+GitHub retains only one pending concurrency run. A replaced scheduler tick loses
+no requests because their registrations already exist outside that group.
+Completed worker runs trigger a scheduler tick; five-minute scheduled ticks also
+recover cancelled execution, failed notification and ambiguous dispatch. Live,
+queued, requested, waiting and pending executions of any age prevent redispatch;
+observation expiry never implies completion. Each execution attempt is recorded
+before dispatch, cancellation/conclusion observations remain on the PR, and an
+absent dispatch gets two minutes to appear. At most three execution attempts are
+automatic. Exhaustion produces a durable rejection and advances FIFO; inspect the
+receipts and submit a new unchanged-head request after correcting the transient
+condition. A failed test or authority rejection is terminal; changed heads require
+new review and a new request. Main advancement remains a rejection requiring a
+fresh tested candidate with the same reviewed head. Closing a PR withdraws its
+request; its registrations/results remain preserved on the closed PR.
+
+The CLI observes for 65 minutes, then reports its request ID without cancelling
+anything. Resume observation/idempotent registration using
+`--request-id ORIGINAL-REQUEST-ID`; duplicates retain the original FIFO ticket.
+Existing author checkouts can contain the old helper. After rollout, invoke the
+updated helper from the trusted primary checkout by its absolute path, keeping
+the current working directory in your managed author slot so verified local
+cleanup targets that slot. Keep the same `--pr` and exact reviewed `--head`; do
+not merge main into or rewrite a reviewed source branch merely to update a CLI.
+The old direct `worker-merge.yml` entry lacks durable FIFO admission and is
+rejected; refresh saved queue commands to use the new helper.
+Never infer a merge from timeout, a candidate SHA or workflow success: the exact
+bot result must agree with the actual merged PR/head/squash commit.
+
+Progress is bounded by the finite tickets ahead of a request and each execution's
+existing job timeouts plus at most three recovery attempts; new arrivals cannot
+jump ahead. GitHub runner and scheduled-event availability remain external
+requirements: ticks can be delayed, and these are cooperative admission controls,
+not a platform availability guarantee. A queue workflow failure keeps the request
+and receipts visible and must be inspected rather than reported as a merge.
+
+For initial rollout, the integrator coordinates the currently live request and
+waits for it to settle. Temporarily disabling the old worker-merge workflow can
+hold new dispatches without cancelling live work; do not disable it before the
+scheduler PR's own normal integration is dispatched. Record deferred authors'
+request IDs/heads and re-enable immediately after actual merge confirmation.
+Disabling workflow triggers is separate from cancelling a run; still enumerate
+and settle all queued, requested, waiting, pending and in-progress runs. Retain
+cancelled/coalesced old request IDs and exact PR heads for unchanged-head
+resubmission. The enable/dispatch/disable window is cooperative rather than
+atomic: enumerate racing admissions, preserve them and let them settle. Record
+and restore prior workflow availability. Leave research and PR checks enabled.
+The new scheduler then recovers registrations under ordinary exact-head rules.
+No direct merge, manual research stop, provider operation or publication is part
+of this procedure. Only the coordinating integrator performs this reversible
+admission hold; workers do not independently toggle shared workflow availability.
+
+### Immutable blob reuse during repeated authority checks
+
+The root #1150/head `405f75ce2280dc44172ba596b9ee08513abe437c` workload
+contains 400 descriptors and 92 original changed-file loads. Its remote reader
+makes 493 blob requests per evidence pass, and an isolated fallback can perform
+three full authority/evidence passes (1,479 blob requests). Read-only Git object
+inventory finds 474 distinct OIDs totaling 235,417,555 raw bytes, with a largest
+blob of 14,322,993 bytes. These are request-workload measurements, not geographic
+approval. GitHub documents a default GITHUB_TOKEN limit of
+[1,000 requests per hour per repository](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api).
+That limit is compatible with the observed fanout and denials; it does not prove
+the cause of the earlier HTTP403 results without their actual message/headers.
+
+Each prepare/final execution now memoizes only successful immutable Git blob
+GETs keyed by repository and requested OID. Before admission the helper requires
+base64 encoding, complete canonical encoding, exact response/full-byte size, and
+the Git blob SHA1 computed from its header and full content to match the requested
+OID. Unsupported, incomplete, mismatched and failed responses never enter the
+cache. The cache holds at most 512 entries and 272 MiB of raw payload accounting;
+base64 storage is at most four-thirds of that bound plus response metadata.
+Overflow stays uncached without evicting the useful first scan. Existing evidence
+file/total/descriptor budgets remain mandatory and unchanged. This size retains
+the known 474-blob workload across repeated checks without cache thrashing.
+
+Every commit/tree/path/vintage binding and every PR, issue, reservation, review,
+check, status and ancestry comparison is freshly read. Changed OIDs fetch new
+bytes; cached blob bytes do not cache a validation result or extend authority.
+Separate jobs/requests do not share this in-memory cache. Controls model the actual
+workload count/aggregate/largest payload size and prove 1,479 requested reads use
+474 verified fetches while changed OIDs/tree modes/head/claim/check/review still
+reject. The cache neither skips a byte check nor accepts an untested candidate.
+
+Actual API denials remain failures. Merge receipts retain only HTTP status,
+sanitized API message and allowlisted numeric rate remaining/reset/retry-after
+and GitHub request ID when available; original denial and notification denial are
+separate. Tokens, authentication headers, cookies and complete bodies/header maps
+are never retained. Inspect this evidence before attributing any future denial
+or choosing a retry; observation expiry alone still cannot restart live work.
+
+
+For bootstrap observability, the existing PR regression profile job has a static
+failure-only diagnostic. It makes one read-only current-repository PR GET with
+the same job token and a 20-second request timeout, emits only the sanitized
+message/status and allowlisted rate/request fields, and leaves the original job
+failure intact. It explicitly redacts the known token as well as token prefixes
+and Bearer values. This later same-token probe describes its own response, not an
+inferred original response. The trusted-base selector still owns the actual
+profile/coverage decision; a successful probe cannot substitute for validation.

@@ -1,5 +1,6 @@
 import {loadGeographicReport} from './geographic-report-artifact.mjs';
 import fs from 'node:fs';
+import {assertAdmission} from './merge-scheduler.mjs';
 import {renderWorkerResult} from './worker-result.mjs';
 import {githubAPI} from './issue-claim-contract.mjs';
 import {loadEvidencePolicy} from './evidence-policy.mjs';
@@ -14,8 +15,12 @@ if (!['prepare','merge'].includes(phase) || !Number.isSafeInteger(number) || num
 const api = githubAPI(process.env.GH_TOKEN), options = {api, repo, number, expectedHead: input.expected_head, policy: loadEvidencePolicy(),
   prepareFallback: process.env.PREPARE_FALLBACK === 'true',
   integrationRequestId: input.request_id + (process.env.GITHUB_RUN_ID ? `-${process.env.GITHUB_RUN_ID}` : '')};
-let result = {accepted: false, request_id: input.request_id, pr_number: number, phase};
+let result = {accepted: false, request_id: input.request_id, pr_number: number, phase, ...(input.queue_attempt ? {queue_attempt: Number(input.queue_attempt)} : {})};
 try {
+  if (process.env.QUEUE_ADMISSION === 'required') {
+    await assertAdmission({api, repo, request: {pr_number: number, expected_head: input.expected_head, request_id: input.request_id},
+      attempt: Number(input.queue_attempt), runId: process.env.GITHUB_RUN_ID});
+  }
   if (phase === 'prepare') {
     const state = await prepareIntegration(options);
     result = {...result, status: state.replayed ? 'already-merged' : 'testing',
@@ -36,6 +41,7 @@ try {
   }
 } catch (error) {
   result.reason = error.message;
+  if (error.github) result.api_error = error.github;
   if (error.candidateCleanup) result.candidate_cleanup = error.candidateCleanup;
   if (error.candidateDiagnostics) result.candidate_diagnostics = error.candidateDiagnostics;
   result.status = /conflict|changes reviewed bytes|substantive review/.test(error.message) ? 'intervention-required' : 'not-merged';
@@ -54,6 +60,7 @@ console.log(JSON.stringify(result));
 try { await api(`/repos/${repo}/issues/${number}/comments`, 'POST', {body: renderWorkerResult('merge', result)}); }
 catch (error) {
   result.notification_error = error.message;
+  if (error.github) result.notification_api_error = error.github;
   // Failed preparation notification prevents the downstream final job from
   // running, so dispose of a confirmed owned candidate here rather than leak it.
   if (phase === 'prepare' && result.candidate_ref) {

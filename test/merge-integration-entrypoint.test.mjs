@@ -28,6 +28,7 @@ test('actual trusted entry point preserves the original rejection before a denie
   assert.notEqual(result.status,0);assert.match(result.stderr,/POST.*HTTP 403/);
   assert.equal(receipt.accepted,false);assert.equal(receipt.status,'not-merged');
   assert.match(receipt.reason,/GET.*HTTP 418/);assert.match(summary,/GET.*HTTP 418/);
+  assert.equal(receipt.api_error.http_status,418);assert.equal(receipt.notification_api_error.http_status,403);
 });
 test('actual trusted entry point retains its preparation receipt before successful notification',()=>{
   const {result,receipt}=run();assert.equal(result.status,0,result.stderr);

@@ -1,0 +1,15 @@
+{
+  "method_id": "queue-controls",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "test_cases": [
+    "pending execution cancellation recovers same request and keeps every attempt receipt",
+    "observation timeout does not restart live queued/waiting/old executions",
+    "changed head and failed tests settle rejected requests and allow next ticket",
+    "known stale tested base or head rejects before expensive evidence/tree inspection"
+  ],
+  "transcript": "coordination/engineering/1174-integration-scheduler/test-results.txt",
+  "limits": [
+    "Controlled mocked GitHub API/workflow tests; no hosted scheduler execution is claimed before merge."
+  ]
+}

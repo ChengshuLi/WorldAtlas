@@ -1,0 +1,25 @@
+{
+  "method_id": "immutable-blobs",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "test_cases": [
+    "root-format 1479 blob requests become 474 verified immutable fetches across three authority passes",
+    "actual unchanged remote premerge evidence and exact-head review validate twice with only three blob fetches",
+    "final merge rechecks actual latest source authority: none"
+  ],
+  "transcript": "coordination/engineering/1174-integration-scheduler/test-results-cache.txt",
+  "limits": [
+    "Synthetic byte workload and mocked read-only API/workflow controls; no live scheduler execution or geographic approval claimed."
+  ],
+  "workload_reference": {
+    "head": "405f75ce2280dc44172ba596b9ee08513abe437c",
+    "manifest_path": "coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22/evidence-quality.json",
+    "manifest_sha256": "80aafc71b6e29b59536ec35a58e6716ba7811220f132a0749575a3ccd57a09a0",
+    "modeled_requested_reads": 1479,
+    "verified_fetches": 474,
+    "raw_bytes": 235417555,
+    "largest_blob_bytes": 14322993,
+    "mode": "Synthetic distribution matches read-only real-OID count/aggregate/largest payload without copying geographic bytes."
+  },
+  "fixture_transcript": "coordination/engineering/1174-integration-scheduler/test-results-fixture.txt"
+}

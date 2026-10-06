@@ -1,0 +1,23 @@
+{
+  "kind": "hosted-regression-repair",
+  "failed_head": "03223c2fd43aaa36ddb30df336c2d606976b2b29",
+  "run_id": 37493015752,
+  "run_attempt": 2,
+  "failed_job": 112373083900,
+  "failed_tests": [
+    "final merge rechecks actual latest source authority: none",
+    "final merge rechecks actual latest source authority: withdraw",
+    "final merge rechecks actual latest source authority: replace-limits"
+  ],
+  "reason": "Incomplete synthetic Git-blob fixtures rejected by strict production blob integrity verifier",
+  "repair": "Test fixtures now use Git SHA1(header plus bytes) and complete sha/size/encoding/content metadata. Production integrity checks and authority assertions unchanged.",
+  "local_controls": {
+    "tests": 157,
+    "passed": 157,
+    "skipped": 0,
+    "transcript": "coordination/engineering/1174-integration-scheduler/test-results-fixture.txt"
+  },
+  "limits": [
+    "Local controls do not substitute for fresh-head full hosted regression checks. Earlier head failed and is not accepted."
+  ]
+}
