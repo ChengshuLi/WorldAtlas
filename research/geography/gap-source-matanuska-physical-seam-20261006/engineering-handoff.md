@@ -36,3 +36,5 @@ Completed #486, #601, and #605 packets remain read only context. This issue does
 * `results/controls/` — positive closure, four negative controls, and two run reproduction receipt.
 * `sources/resolve-ecoid-0-receipt.json` — incomplete source response scope, hash and restoration URL.
 * `sources/historical-subject-lineage.json` — exact baseline subject feature hashes and recorded source tokens.
+
+Source registration limit: retained source metadata provides CRS/axis order but no authoritative XY resolution/tolerance or positional accuracy. Coordinate values are preserved; no registration adjustment was attempted. Cross-source alignment quality therefore remains unresolved.

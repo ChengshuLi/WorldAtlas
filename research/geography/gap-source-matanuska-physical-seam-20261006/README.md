@@ -35,6 +35,10 @@ These are geometric observations in the source coordinate plane, not physical ar
 
 Because the complete ECO_ID 0 geometry was not available under the unchanged byte cap, the physical class of components whose proposed explanation depends on Rock and Ice remains unresolved. Likewise, polygon intersection or coverage alone does not establish an administrative owner or a source lineage. The output is evidence for the bounded source question only; it is not a global geometry correction or the later #1184 native-grid approval.
 
+## Coordinate precision and registration
+
+The retained geoBoundaries and ArcGIS service metadata identify coordinate reference systems and axis order, but do not report an authoritative XY resolution/tolerance or positional accuracy/registration value for these selected geometries. The selected coordinate values are preserved byte-for-byte in the pinned captures; no rounding, reprojection, snapping, or registration adjustment was applied. Consequently, the planar predicates describe the supplied coordinate values only and do not establish alignment accuracy between the two sources.
+
 ## Reproduction
 
 Run `reproduce-source-overlays.py` with Python 3.12, Shapely 2.1.2, and the pinned baseline commit available in the Git object database. The script checks the complete 282-member roster, custody payload hashes, source feature IDs, exact contact closure, and then writes the selected component geometries and full ledger. All derived output paths are new files under this issue-owned directory.

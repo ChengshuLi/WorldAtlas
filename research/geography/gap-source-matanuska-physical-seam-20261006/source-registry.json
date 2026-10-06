@@ -17,7 +17,14 @@
       "retained_source_features": "sources/geoboundaries-usa-adm2-selected.geojson",
       "crs": "OGC CRS84; longitude-latitude",
       "temporal_status": "historical",
-      "limitation": "Source boundary vintage; not a contemporary jurisdictional assertion."
+      "limitation": "Source boundary vintage; not a contemporary jurisdictional assertion.",
+      "retained_source_bytes": 7360,
+      "retained_source_sha256": "9a3bd8495e29927c9496e162c1a2eacc7d2195765105d283a70ad713cfc56bdb",
+      "coordinate_precision_and_registration": {
+        "published_xy_resolution_or_tolerance": "not reported in retained source metadata",
+        "published_positional_accuracy_or_registration": "not reported in retained source metadata",
+        "coordinate_representation": "retained source coordinate values are preserved byte-for-byte in the pinned captures; no rounding, reprojection, or registration adjustment was applied"
+      }
     },
     {
       "id": "resolve-ecoregions-biomes-2017",
@@ -38,7 +45,14 @@
       ],
       "unavailable_geometry_id": "0",
       "temporal_status": "reference",
-      "limitation": "ECO_ID 0 returned an incomplete HTTP 200 response beyond the 32 MiB cap; partial body discarded. See sources/resolve-ecoid-0-receipt.json. No geometry retained for it. An inherited item URL with trailing 2 was independently queried and returned CONT_0001; see the retained response."
+      "limitation": "ECO_ID 0 returned an incomplete HTTP 200 response beyond the 32 MiB cap; partial body discarded. See sources/resolve-ecoid-0-receipt.json. No geometry retained for it. An inherited item URL with trailing 2 was independently queried and returned CONT_0001; see the retained response.",
+      "retained_source_bytes": 297498,
+      "retained_source_sha256": "68a060237b35bd6914959df3de86c42b7c0caf1955213020f97bb616ab5a60fe",
+      "coordinate_precision_and_registration": {
+        "published_xy_resolution_or_tolerance": "not reported in retained source metadata",
+        "published_positional_accuracy_or_registration": "not reported in retained source metadata",
+        "coordinate_representation": "retained source coordinate values are preserved byte-for-byte in the pinned captures; no rounding, reprojection, or registration adjustment was applied"
+      }
     }
   ],
   "excluded_sources": [

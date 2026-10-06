@@ -9,6 +9,7 @@ OUT=RUN/'controls'
 OUT.mkdir(parents=True,exist_ok=True)
 sys.path.insert(0,str(ROOT/'scripts'))
 from physical_component_contacts import component_contacts
+from source_input_integrity import verify_source_bytes
 
 def sha(raw): return hashlib.sha256(raw).hexdigest()
 def write(name,value):
@@ -30,8 +31,15 @@ write('reproducibility.json',{'method_id':'source-overlay-analysis','kind':'repr
 
 source_path=PACKET/'sources/resolve-ecoregions-2017-ecoids-371-405.geojson'
 source_raw=source_path.read_bytes(); expected=sha(source_raw); changed=bytearray(source_raw);changed[0]^=1
-if sha(bytes(changed))==expected: raise SystemExit('Changed-source hash negative did not detect mutation')
-write('negative-changed-source-hash.json',{'method_id':'source-overlay-analysis','kind':'negative-control','outcome':'passed','control':'one source byte changed in memory','expected_sha256':expected,'changed_sha256':sha(bytes(changed)),'rejected':'whole-file source pin mismatch'})
+registry=json.loads((PACKET/'source-registry.json').read_bytes())
+resolve_source=next(source for source in registry['sources'] if source['id']=='resolve-ecoregions-biomes-2017')
+try:
+    verify_source_bytes('sources/resolve-ecoregions-2017-ecoids-371-405.geojson',bytes(changed),resolve_source)
+except ValueError as error:
+    rejected=str(error)
+else:
+    raise SystemExit('Changed-source negative was accepted by the producer source-pin guard')
+write('negative-changed-source-hash.json',{'method_id':'source-overlay-analysis','kind':'negative-control','outcome':'passed','control':'one source byte changed in memory and passed through the exact whole-file guard used by the producer','expected_bytes':len(source_raw),'observed_bytes':len(changed),'expected_sha256':expected,'changed_sha256':sha(bytes(changed)),'rejected':rejected})
 
 ledger=json.loads((one/'source-overlay-ledger.json').read_bytes())
 component_ids=sorted(row['component'] for row in ledger['components'])

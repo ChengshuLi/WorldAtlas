@@ -4,6 +4,7 @@ import argparse, gzip, hashlib, json, pathlib, subprocess, sys
 from shapely.geometry import shape, mapping
 sys.path.insert(0,str(pathlib.Path(__file__).resolve().parents[3]/'scripts'))
 from physical_component_contacts import component_contacts
+from source_input_integrity import verify_source_bytes
 
 ROOT=pathlib.Path(__file__).resolve().parents[3]
 PACKET=ROOT/'research/geography/gap-source-matanuska-physical-seam-20261006'
@@ -85,8 +86,14 @@ if len(contact_ledger)!=282 or any(r['status']!='complete-recorded-contacts' for
 if sum(len(r['fragment_contacts']) for r in contact_ledger)!=283: raise SystemExit('Expected exact 283 fragment bindings')
 
 # Retain only the two source ADM2 features and the two exact RESOLVE ecoregion features.
-gb=json.loads((PACKET/'sources/geoboundaries-usa-adm2-selected.geojson').read_bytes())
-resolve=json.loads((PACKET/'sources/resolve-ecoregions-2017-ecoids-371-405.geojson').read_bytes())
+registry=json.loads((PACKET/'source-registry.json').read_bytes())
+source_by_id={source['id']:source for source in registry['sources']}
+gb_path='sources/geoboundaries-usa-adm2-selected.geojson'
+resolve_path='sources/resolve-ecoregions-2017-ecoids-371-405.geojson'
+gb_raw=verify_source_bytes(gb_path,(PACKET/gb_path).read_bytes(),source_by_id['geoboundaries-us-adm2-2018'])
+resolve_raw=verify_source_bytes(resolve_path,(PACKET/resolve_path).read_bytes(),source_by_id['resolve-ecoregions-biomes-2017'])
+gb=json.loads(gb_raw)
+resolve=json.loads(resolve_raw)
 admin={f['properties']['shapeID']:shape(f['geometry']) for f in gb['features']}
 eco={str(f['properties']['ECO_ID']):shape(f['geometry']) for f in resolve['features']}
 if set(admin)!={'52423323B34523976645917','52423323B25289890288494'} or set(eco)!={'371','405'}: raise SystemExit('Selected sources have unexpected IDs')
