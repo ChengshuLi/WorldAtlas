@@ -50,6 +50,8 @@ source_files={k:[candidate_descriptor(f'{PACKET}/{x}','original-source') for x i
 retained={f['path'] for rows in source_files.values() for f in rows}
 manifest_path=f'{PACKET}/evidence-quality.json'
 changed=subprocess.check_output(['git','diff','--name-only',BASE,'HEAD'],text=True).splitlines()
+changed+=subprocess.check_output(['git','diff','--cached','--name-only',BASE],text=True).splitlines()
+changed+=subprocess.check_output(['git','diff','--name-only'],text=True).splitlines()
 changed+=subprocess.check_output(['git','ls-files','--others','--exclude-standard'],text=True).splitlines()
 changed=sorted(set(changed+[manifest_path]))
 outputs=[]
