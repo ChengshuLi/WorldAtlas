@@ -14,7 +14,7 @@
   ],
   "subject_ids_sha256": "1fc4ba624de8a5fa76ea70785b91636f2d6039287e02858595cfac9fac271733",
   "baseline": {
-    "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+    "commit": "f120991846104a8126b522b12b6af278450fe20e",
     "files": [
       {
         "path": "data/canonical-grid/manifest.json",
@@ -436,6 +436,29 @@
       "temporal_status": "reference",
       "restoration": "Inspect the exact issue body and its worldatlas-work:v1 contract at https://github.com/ChengshuLi/WorldAtlas/issues/1197.",
       "limit": "Candidate preview membership is not independently recomputed here and is not installed grid output, boundary authority, or an ownership result."
+    },
+    {
+      "id": "issue-1197-exact-snapshot",
+      "url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/issues/1197",
+      "role": "Immutable issue-authored contract snapshot binding the six exact cell IDs, coordinates, preview labels and worker scope.",
+      "vintage": "Retrieved 2026-10-06; issue content at retrieval time.",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Public issue API response retained solely as assessment input; reuse terms not established."
+      },
+      "retention": "bounded-original",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/issue-1197.json",
+          "bytes": 10101,
+          "sha256": "3ab3dd3bfb734875593d457a6d5a2d85a1e9e572bdf48b2b5a38a0607c8eac39",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "limit": "Binds scope only; issue-authored preview labels do not establish installed geometry, legal ownership or physical wetness."
     }
   ],
   "outputs": [
@@ -448,36 +471,36 @@
     },
     {
       "path": "research/geography/prt-esp-six-cell-authority-20261006/source-assessment.md",
-      "bytes": 10345,
-      "sha256": "27ade743706f1aca18c48f92cdf117168912b559e17e38e278bfdfa1344c8773",
+      "bytes": 11067,
+      "sha256": "810cc944202ae275901ffd270f90681458b6680cd0c597f4c045d9a7ed4c6513",
       "hash_kind": "file-bytes",
       "role": "generated-table"
     },
     {
       "path": "research/geography/prt-esp-six-cell-authority-20261006/scripts/measure_dgt_segment_proximity.py",
-      "bytes": 8228,
-      "sha256": "442f9ff4b0fda02b918ab0829c0b72a2baaf1ae31ca82a3fdcdf18ad430f4ecf",
+      "bytes": 9947,
+      "sha256": "08fc56c0d90e9fb6005a73857df369186a699cd08d0190e20bba56e92507db91",
       "hash_kind": "file-bytes",
       "role": "measurement-code"
     },
     {
       "path": "research/geography/prt-esp-six-cell-authority-20261006/outputs/dgt-segment-proximity.json",
-      "bytes": 7967,
-      "sha256": "0747feb23ad44617f4974a357d3c0c1faed45dbd6c04ff8a62b8ceed0edd0c0e",
+      "bytes": 8189,
+      "sha256": "b970ea334851e09788412408e6b66eccb293cac706c00abecd8b545fea31a368",
       "hash_kind": "file-bytes",
       "role": "analysis-output"
     },
     {
       "path": "research/geography/prt-esp-six-cell-authority-20261006/outputs/run-1.json",
-      "bytes": 7967,
-      "sha256": "0747feb23ad44617f4974a357d3c0c1faed45dbd6c04ff8a62b8ceed0edd0c0e",
+      "bytes": 8189,
+      "sha256": "b970ea334851e09788412408e6b66eccb293cac706c00abecd8b545fea31a368",
       "hash_kind": "file-bytes",
       "role": "analysis-output"
     },
     {
       "path": "research/geography/prt-esp-six-cell-authority-20261006/outputs/run-2.json",
-      "bytes": 7967,
-      "sha256": "0747feb23ad44617f4974a357d3c0c1faed45dbd6c04ff8a62b8ceed0edd0c0e",
+      "bytes": 8189,
+      "sha256": "b970ea334851e09788412408e6b66eccb293cac706c00abecd8b545fea31a368",
       "hash_kind": "file-bytes",
       "role": "analysis-output"
     },
@@ -501,6 +524,27 @@
       "sha256": "0120ee81bd2e9372ec017b0d14138d97a3c1ca1d19d29f72def36daf2227a8a9",
       "hash_kind": "file-bytes",
       "role": "analysis-output"
+    },
+    {
+      "path": "research/geography/prt-esp-six-cell-authority-20261006/scripts/validate_source_context_controls.py",
+      "hash_kind": "file-bytes",
+      "bytes": 3720,
+      "sha256": "5275e02fb6715e6c39c8cb5b37afe566bce3163a3310a0aa57f87e5b65d7ec3d",
+      "role": "validation-code"
+    },
+    {
+      "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/issue-1197.json",
+      "hash_kind": "file-bytes",
+      "bytes": 10101,
+      "sha256": "3ab3dd3bfb734875593d457a6d5a2d85a1e9e572bdf48b2b5a38a0607c8eac39",
+      "role": "source-input"
+    },
+    {
+      "path": "research/geography/prt-esp-six-cell-authority-20261006/validation/source-context-controls.json",
+      "hash_kind": "file-bytes",
+      "bytes": 1301,
+      "sha256": "d002d1484dca1dfd255eb4e661828d028358267309e1a4ae67de93d8208c2d01",
+      "role": "analysis-output"
     }
   ],
   "methods": [
@@ -514,7 +558,7 @@
     {
       "id": "dgt-defined-segment-point-distance-epsg25829",
       "kind": "measurement",
-      "description": "Validate each exact issue centre, its response hash/status, exact centered CRS84 BBOX, one matched/returned feature, expected native DGT ID and source property context. Transform every coordinate of the complete returned line and the candidate centre from OGC:CRS84 to EPSG:25829 with PyProj always_xy, then measure direct Shapely point-to-LineString distance. Do not clip/repair/snap/buffer or infer side, ownership, or wetness.",
+      "description": "Validate each exact issue centre, its response hash/status, exact centered CRS84 BBOX, one matched/returned feature, expected native DGT ID and source property context. Validate that the returned full line intersects the exact requested BBOX. Transform every coordinate of the complete returned line and the candidate centre from OGC:CRS84 to EPSG:25829 with PyProj always_xy (selected operation nominal accuracy 1.0 m), then measure direct Shapely point-to-LineString distance. Do not clip/repair/snap/buffer or infer side, ownership, or wetness.",
       "software": "Python 3.12.14; PyProj 3.7.2 / PROJ 9.5.1; Shapely 2.1.2 / GEOS 3.13.1",
       "units": "metres; source OGC:CRS84 longitude/latitude; metric CRS EPSG:25829 (ETRS89 / UTM zone 29N)"
     }
@@ -525,7 +569,7 @@
       "value": 0.9889990669671463,
       "unit": "m",
       "vintage": "current",
-      "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+      "evaluation_commit": "f120991846104a8126b522b12b6af278450fe20e",
       "input_sha256": "1672620c614a195e0d0fe353749e148d65a0475a463c6f7b69432b28ccc8be00"
     },
     {
@@ -533,7 +577,7 @@
       "value": 0.11120456561184491,
       "unit": "m",
       "vintage": "current",
-      "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+      "evaluation_commit": "f120991846104a8126b522b12b6af278450fe20e",
       "input_sha256": "e92b1d28da2f6654f6156dc1dda7df90bfdb38309169326b80cc56aba125c9e5"
     },
     {
@@ -541,7 +585,7 @@
       "value": 10.263659905924813,
       "unit": "m",
       "vintage": "current",
-      "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+      "evaluation_commit": "f120991846104a8126b522b12b6af278450fe20e",
       "input_sha256": "e59adc0c3a497bce96f41a83269bac3b2768567f84a457b527b67d82fe6856e3"
     },
     {
@@ -549,7 +593,7 @@
       "value": 1.5053113741638948,
       "unit": "m",
       "vintage": "current",
-      "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+      "evaluation_commit": "f120991846104a8126b522b12b6af278450fe20e",
       "input_sha256": "e3e5706c95f1ce5bf839e2180f5cdcaa0d751879072c554c7fa9278cfa2d3d81"
     },
     {
@@ -557,7 +601,7 @@
       "value": 1.8357409596390173,
       "unit": "m",
       "vintage": "current",
-      "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+      "evaluation_commit": "f120991846104a8126b522b12b6af278450fe20e",
       "input_sha256": "fb68ee03d75802f96d0123d0c9b2975254820ab9f996507452a26962e1acc76f"
     },
     {
@@ -565,7 +609,7 @@
       "value": 0.9526413596537169,
       "unit": "m",
       "vintage": "current",
-      "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+      "evaluation_commit": "f120991846104a8126b522b12b6af278450fe20e",
       "input_sha256": "c3b4a8a976f94aade6586f35584de99ef77749f94d6e9dd3077e783e89a4e939"
     },
     {
@@ -573,7 +617,7 @@
       "value": 0.11120456561184491,
       "unit": "m",
       "vintage": "current",
-      "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+      "evaluation_commit": "f120991846104a8126b522b12b6af278450fe20e",
       "input_sha256": "e92b1d28da2f6654f6156dc1dda7df90bfdb38309169326b80cc56aba125c9e5"
     },
     {
@@ -581,7 +625,7 @@
       "value": 10.263659905924813,
       "unit": "m",
       "vintage": "current",
-      "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+      "evaluation_commit": "f120991846104a8126b522b12b6af278450fe20e",
       "input_sha256": "e59adc0c3a497bce96f41a83269bac3b2768567f84a457b527b67d82fe6856e3"
     }
   ],
@@ -730,6 +774,12 @@
       "kind": "reproducibility",
       "outcome": "passed",
       "evidence_path": "research/geography/prt-esp-six-cell-authority-20261006/validation/reproducibility.json"
+    },
+    {
+      "method_id": "dgt-defined-segment-point-distance-epsg25829",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/prt-esp-six-cell-authority-20261006/validation/source-context-controls.json"
     }
   ],
   "conclusions": [
@@ -774,10 +824,11 @@
     "geographic_approval": "unapproved"
   },
   "commands": [
-    "PYTHONDONTWRITEBYTECODE=1 Python 3.12.14 -B research/geography/prt-esp-six-cell-authority-20261006/scripts/measure_dgt_segment_proximity.py (two invocations after producer commit 5ae6e04d1fa0459ac788f2aefc47a97a70b4fa8a)",
-    "cmp research/geography/prt-esp-six-cell-authority-20261006/outputs/run-1.json research/geography/prt-esp-six-cell-authority-20261006/outputs/run-2.json",
+    "Python 3.12 bundled runtime: scripts/validate_source_context_controls.py",
+    "Python 3.12 bundled runtime: scripts/measure_dgt_segment_proximity.py (two invocations after producer commit 09080554fa24abfe255f9cd3a6fe5faa3fee54bf)",
+    "cmp outputs/run-1.json outputs/run-2.json",
     "node scripts/evidence-quality.mjs research/geography/prt-esp-six-cell-authority-20261006/evidence-quality.json",
-    "node scripts/check-handoff-scope.mjs --branch geography/prt-esp-six-cell-authority-1197-20261006 --base origin/main --pr-body-file /tmp/geo-1197-pr-body.md --issue-file /tmp/geo-1197.json",
+    "node scripts/check-handoff-scope.mjs --branch geography/prt-esp-six-cell-authority-1197-20261006 --base origin/main --pr-body-file /tmp/geo-1197-pr-body.md --issue-file /tmp/issue-1197-current.json",
     "git diff --check"
   ]
 }
