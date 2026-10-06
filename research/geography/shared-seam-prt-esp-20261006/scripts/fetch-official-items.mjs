@@ -4,24 +4,58 @@
 // used only to discover complete feature IDs; each returned feature is then
 // fetched independently by its native item route.
 import { createHash } from 'node:crypto';
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 const output = path.resolve(process.argv[2] ?? '');
 if (!process.argv[2]) throw new Error('usage: fetch-official-items.mjs NEW_OUTPUT_DIRECTORY');
-await mkdir(output, { recursive: false });
+await mkdir(output, { recursive: true });
 const records = [];
+const receiptPath = path.join(output, 'response-receipt.json');
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+async function checkpoint(status, error = undefined) {
+  const receipt = {
+    version: 1,
+    status,
+    bbox_interpretation: 'bbox selects which complete feature records are returned; it does not clip feature geometries',
+    national_file_claim: false,
+    ...(error ? { error } : {}),
+    records
+  };
+  await writeFile(receiptPath, `${JSON.stringify(receipt, null, 2)}\n`);
+}
 
 async function preserve(id, url, role) {
-  const response = await fetch(url, {
-    headers: { accept: 'application/geo+json, application/json;q=0.9', 'accept-encoding': 'identity', 'user-agent': 'WorldAtlas-source-evidence/1' },
-    redirect: 'follow'
-  });
-  if (!response.ok) throw new Error(`${id}: HTTP ${response.status}`);
+  let response;
+  for (let attempt = 0; attempt < 4; attempt++) {
+    try {
+      response = await fetch(url, {
+        headers: { accept: 'application/geo+json, application/json;q=0.9', 'accept-encoding': 'identity', 'user-agent': 'WorldAtlas-source-evidence/1' },
+        redirect: 'follow', signal: AbortSignal.timeout(45000)
+      });
+      if (response.ok || response.status < 500 && response.status !== 429) break;
+    } catch (error) {
+      if (attempt === 3) throw new Error(`${id}: fetch failed after four attempts: ${error.message}`);
+    }
+    if (attempt < 3) await delay(1000 * (2 ** attempt));
+  }
+  if (!response?.ok) throw new Error(`${id}: HTTP ${response?.status ?? 'unavailable'} after retry policy`);
   const bytes = Buffer.from(await response.arrayBuffer());
   if (bytes.byteLength === 0 || bytes.byteLength > 32 * 1024 * 1024) throw new Error(`${id}: response size ${bytes.byteLength} exceeds bounded source-item policy`);
   const filename = `${id}.json`;
-  await writeFile(path.join(output, filename), bytes, { flag: 'wx' });
+  const filepath = path.join(output, filename);
+  let exactPriorMatch = null;
+  let firstSavedAt = null;
+  try {
+    const prior = await readFile(filepath);
+    exactPriorMatch = prior.equals(bytes);
+    firstSavedAt = (await stat(filepath)).birthtime.toISOString();
+    if (!exactPriorMatch) throw new Error(`${id}: current API response differs from retained first response`);
+  } catch (error) {
+    if (error.code !== 'ENOENT') throw error;
+    await writeFile(filepath, bytes, { flag: 'wx' });
+  }
   const record = {
     id, role, request_url: url, final_response_url: response.url,
     retrieved_at: new Date().toISOString(), status: response.status,
@@ -29,9 +63,11 @@ async function preserve(id, url, role) {
     content_length_header: response.headers.get('content-length'),
     content_encoding_header: response.headers.get('content-encoding'),
     etag: response.headers.get('etag'), last_modified: response.headers.get('last-modified'),
-    bytes: bytes.byteLength, sha256: createHash('sha256').update(bytes).digest('hex'), filename
+    bytes: bytes.byteLength, sha256: createHash('sha256').update(bytes).digest('hex'), filename,
+    ...(exactPriorMatch === null ? {} : { exact_prior_response_match: exactPriorMatch, prior_file_birthtime: firstSavedAt })
   };
   records.push(record);
+  await checkpoint('in-progress');
   return JSON.parse(bytes.toString('utf8'));
 }
 
@@ -59,12 +95,5 @@ for (const nativeId of ids) {
   if (!feature.properties || !Object.hasOwn(feature, 'geometry')) throw new Error(`IGN ${nativeId} lacks a complete feature item`);
 }
 
-const receipt = {
-  version: 1,
-  status: 'complete byte-exact public GET response preservation',
-  bbox_interpretation: 'bbox selects which complete feature records are returned; it does not clip feature geometries',
-  national_file_claim: false,
-  records
-};
-await writeFile(path.join(output, 'response-receipt.json'), `${JSON.stringify(receipt, null, 2)}\n`, { flag: 'wx' });
+await checkpoint('complete byte-exact public GET response preservation');
 process.stdout.write(`${JSON.stringify({ saved: records.length, output, discovery_features: ids.length, discovery_ids: ids, record_count: records.length }, null, 2)}\n`);
