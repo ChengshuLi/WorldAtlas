@@ -1,0 +1,142 @@
+{
+  "version": 1,
+  "retrieved_at": "2026-10-06",
+  "baseline_commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+  "sources": [
+    {
+      "id": "NCL-BDADMIN-NC-2022",
+      "title": "BDADMIN-NC au format Géodatabase",
+      "publisher": "Gouvernement de la Nouvelle-Calédonie / DITTT / Service topographique",
+      "item_url": "https://georep-dtsi-sgt.opendata.arcgis.com/documents/bc8f0eec7d614853b0e9d1a9bd9649ef/about",
+      "item_id": "bc8f0eec7d614853b0e9d1a9bd9649ef",
+      "item_metadata_url": "https://www.arcgis.com/sharing/rest/content/items/bc8f0eec7d614853b0e9d1a9bd9649ef?f=json",
+      "item_metadata_retrieved_at": "2026-10-06",
+      "item_metadata_bytes": 3987,
+      "item_metadata_sha256": "b10b88a11b2c43ab0e7ccc718fa30b32db7bb7bf86f4377dfe76bc3c31cec0d3",
+      "item_created_at": "2019-09-03T23:47:07Z",
+      "item_modified_at": "2024-01-08T22:41:33Z",
+      "download_url": "https://sig-public.gouv.nc/plateforme_telechargement/BDADMINNC.zip",
+      "download_retrieved_at": "2026-10-06",
+      "content_type": "application/zip",
+      "http_last_modified": "2022-05-23T02:26:46Z",
+      "http_etag": "\"628af0e6-181d9f1\"",
+      "bytes": 25287153,
+      "sha256": "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d",
+      "archive_integrity": "fresh response length matched Content-Length; ZIP CRC test passed; downloaded bytes are not retained in this packet",
+      "data_vintage": "Archive last modified 2022-05-23; geodatabase members timestamped 2022-03-02; Open Data NC genealogy states that commune boundaries in Grand Nouméa, Païta, Dumbéa, Nouméa and Mont-Dore were updated 2022-03-02. Earlier recorded updates are 2020-01-21, 2019-07-16 and 2017-11-28.",
+      "source_chain": "DITTT BDADMIN-NC geodatabase, layer PROVINCES, feature names PROVINCE_NORD / PROVINCE_SUD / PROVINCE_DES_ILES; source coordinates are EPSG:3163. The source read-me says the database presents New Caledonia, province and commune administrative boundaries, positioned according to regulations in force, and that coastline/natural limits are revised through BDTOPO-NC update projects.",
+      "internal_documents": [
+        {
+          "archive_member": "DITTT_BDADMIN-NC_lisez-moi.pdf",
+          "bytes": 304178,
+          "sha256": "7de892a2810317857b562cfff99ebe4c0be852e18db7801f9b43f18ab8fa1c01",
+          "document_date": "2020-01-31",
+          "relevant_terms": "Reference scale 1:10,000; identifies regulation-positioned administrative limits; states CC BY-NC-SA 4.0 and incorporates the DITTT CGU."
+        },
+        {
+          "archive_member": "DITTT_CGU_juillet2017.pdf",
+          "bytes": 52125,
+          "sha256": "feef3c0f6c86d301c9e3de897300d6c80e0d99336a16a430d3d1c97092fda737",
+          "document_date": "2017-07",
+          "relevant_terms": "Excludes commercial use; requires attribution with product year; cautions that the data have not, absent specific notice, received strict topological structuring or systematic completion and warns against use above the designed scale."
+        }
+      ],
+      "license_evidence": [
+        {
+          "url": "https://www.arcgis.com/sharing/rest/content/items/bc8f0eec7d614853b0e9d1a9bd9649ef?f=json",
+          "retrieved_at": "2026-10-06",
+          "assertion": "ArcGIS item metadata links Etalab Licence Ouverte / Open License."
+        },
+        {
+          "url": "https://sites.google.com/gouv.nc/catalogue-service-topo/services-en-ligne/t%C3%A9l%C3%A9charger-des-bases-de-donn%C3%A9es",
+          "retrieved_at": "2026-10-06",
+          "assertion": "DITTT's download catalogue says the listed geographic databases, including BDADMIN-NC, are free under Licence Ouverte 2.0."
+        },
+        {
+          "url": "https://dittt.gouv.nc/sites/default/files/documents/Synth%C3%A8se%20bases%20de%20donn%C3%A9es%20g%C3%A9ographiques.pdf",
+          "retrieved_at": "2026-10-06",
+          "response_bytes": 141449,
+          "response_sha256": "b35f2219300dd76fa6971b536556876206fed03c774d5282a70716a26b70765b",
+          "assertion": "DITTT's September 2019 database summary states BDADMIN-NC is under Creative Commons BY-NC-SA."
+        },
+        {
+          "url": "https://data.gouv.nc/explore/dataset/bdadmin-nc-au-format-geodatabase/",
+          "retrieved_at": "2026-10-06",
+          "response_bytes": 114183,
+          "response_sha256": "7a3d455d3f2396094c7adcacc8e25cbb4e997edd7f95c5c08545738b8f7d355a",
+          "assertion": "Open Data NC repeats the 2017 DITTT conditions-of-use attachment without declaring a replacement license."
+        },
+        {
+          "url": "https://dittt.gouv.nc/bdadmin-nc",
+          "retrieved_at": "2026-10-06",
+          "response_bytes": 145907,
+          "response_sha256": "a0de415621daaf7ccaea358e7ac815f6743273caba06b49d091e73b49f87cc3a",
+          "assertion": "The current product page links separate CGU, Creative Commons, and tariff documents; it does not identify which linked license supersedes the package's embedded terms."
+        }
+      ],
+      "license_disposition": "unknown; restoration-only. The ArcGIS/catalogue Open License 2.0 assertion conflicts with the source archive's embedded CC BY-NC-SA 4.0 read-me and non-commercial 2017 CGU, and the current DITTT product page exposes a separate CC BY-NC-ND link. No interpretation or redistribution permission is inferred. Ask DITTT to identify the release-specific terms and whether derived boundary data may be redistributed.",
+      "restoration_instructions": "Only after the user/reviewer independently establishes authorization, download the exact URL above, require HTTP last-modified 2022-05-23 and exactly 25,287,153 bytes, verify SHA-256 66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d, verify ZIP CRCs, extract BDADMIN-NC.gdb, and open its PROVINCES layer with an OpenFileGDB reader. Do not add the archive or its extracted geometry to this repository until the license conflict is resolved."
+    },
+    {
+      "id": "NCL-GeoReP-2024",
+      "title": "Limites des provinces et des communes de Nouvelle-Calédonie à différentes échelles",
+      "publisher": "Gouvernement de la Nouvelle-Calédonie / DITTT / Service topographique",
+      "layer_url": "https://services1.arcgis.com/TZcrgU6CIbqWt9Qv/arcgis/rest/services/limites_terrestres/FeatureServer/1",
+      "service_metadata_url": "https://services1.arcgis.com/TZcrgU6CIbqWt9Qv/arcgis/rest/services/limites_terrestres/FeatureServer?f=pjson",
+      "service_metadata_retrieved_at": "2026-10-06",
+      "service_metadata_bytes": 6979,
+      "service_metadata_sha256": "3d97080918ffb93663b4a0b1e2315d209b683593db2ec53a181409865d654dfe",
+      "layer_metadata_url": "https://services1.arcgis.com/TZcrgU6CIbqWt9Qv/arcgis/rest/services/limites_terrestres/FeatureServer/1?f=pjson",
+      "layer_metadata_retrieved_at": "2026-10-06",
+      "layer_metadata_bytes": 15011,
+      "layer_metadata_sha256": "a0968097c0a01a09107465e349c44625f24fe05ee5d1f723f700de49fcc3516c",
+      "original_query": "https://services1.arcgis.com/TZcrgU6CIbqWt9Qv/arcgis/rest/services/limites_terrestres/FeatureServer/1/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&maxAllowableOffset=0.00005&geometryPrecision=6&f=geojson",
+      "dataset_vintage": "Source item identifies 2024-10-28 update; service metadata says the administrative layers are served at different scales and includes a 2022-03-02 municipality update.",
+      "original_query_bytes": 45177077,
+      "original_query_sha256": "c5784de18d93c94383189f83d7a0e2cb2314159a3ffd18ef9a8ea9e9c6e616eb",
+      "retained_parts": [
+        {"path": "data/regional-review/regional-review-1aa97b490604ea4e/sources/new-caledonia-province-parts/province-nord.geojson", "bytes": 14659942, "sha256": "ab352991c7095df611ec40e79ff652fd4346070c4e725e689a1eed5f9c2fea66"},
+        {"path": "data/regional-review/regional-review-1aa97b490604ea4e/sources/new-caledonia-province-parts/province-sud.geojson", "bytes": 22380497, "sha256": "c85d11f69e68c8a091ee7edc372212777952b897b3010082ba3af1d2774d5c85"},
+        {"path": "data/regional-review/regional-review-1aa97b490604ea4e/sources/new-caledonia-province-parts/province-des-iles.geojson", "bytes": 8136835, "sha256": "5a5ff8fac68b4a28c90ebedc65ba8deff91b0971582f7bb5a8cd32202db962b2"}
+      ],
+      "license": "Open License assertion recorded by source owner; existing parent packet preserves lossless per-feature source objects.",
+      "limitations": "The query requested maxAllowableOffset=0.00005 degrees, precision 6 and EPSG:4326. All three raw province polygons are invalid nested-shell geometries; this query is a generalized service response and is retained unchanged as the original, not repaired."
+    },
+    {
+      "id": "NCL-ORGANIC-LAW-99-209-ARTICLE-1",
+      "title": "Loi organique n° 99-209 du 19 mars 1999, Article 1 (version in force)",
+      "url": "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000020960246/2026-04-28",
+      "retrieved_at": "2026-10-06",
+      "license": "Official public legal text; no copy retained",
+      "role": "Administrative tier, province names and named commune membership; states Poya is divided between Nord and Sud by decree in Council of State.",
+      "limit": "The law names commune membership and does not itself supply a coordinate boundary."
+    },
+    {
+      "id": "NCL-POYA-DECREE-1989",
+      "title": "Décret du 26 avril 1989 portant répartition du territoire de la commune de Poya entre les provinces Nord et Sud",
+      "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000000337236",
+      "retrieved_at": "2026-10-06",
+      "license": "Official public legal text; no copy retained",
+      "role": "Legal act specifically titled as the Poya split instrument.",
+      "limit": "The decree's 23.7 MB scanned Journal officiel annex was not downloaded or georeferenced in this packet. Its title confirms the legal instrument but is not independent line-level boundary evidence."
+    },
+    {
+      "id": "NCL-CENSUS-DECREE-2025",
+      "title": "Décret n° 2025-966 du 18 septembre 2025 authentifiant les résultats du recensement de la population effectué en Nouvelle-Calédonie en 2025",
+      "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000052260146/",
+      "retrieved_at": "2026-10-06",
+      "license": "Official public legal text; no copy retained",
+      "role": "Independent current administrative cross-check: 33 total communes; Îles Loyauté 3, Nord 16 plus the north part of Poya, Sud 13 plus the south part of Poya.",
+      "limit": "Counts corroborate administrative membership labels only; they are not evidence of coordinates, geometry validity or coverage."
+    },
+    {
+      "id": "NCL-NATURAL-EARTH-ATLAS-FALLBACK",
+      "title": "Natural Earth ADM1 fallback as pinned in the WorldAtlas baseline",
+      "url": "https://www.naturalearthdata.com/",
+      "retrieved_at": "2026-10-06",
+      "license": "Public domain as recorded on the pinned Atlas features",
+      "role": "Existing low-resolution/admin-1 comparison geometry; the comparison reads the WorldAtlas baseline features, not a newly downloaded Natural Earth release.",
+      "limit": "The fallback is an undated modern reference and does not establish current legal boundary placement or island-level completeness."
+    }
+  ]
+}

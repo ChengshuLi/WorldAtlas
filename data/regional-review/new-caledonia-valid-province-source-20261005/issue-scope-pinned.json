@@ -1,0 +1,16 @@
+{
+  "issue_number": 911,
+  "title": "Restore valid official New Caledonia province boundary evidence",
+  "body": "Follow-up from #454. This work is blocked until the parent's reviewed evidence packet merges.\n\nReview exactly the three New Caledonia province IDs below. Current Government of New Caledonia GeoReP source is open-licensed and supports the three province names/roles, but its retained raw polygons are invalid (`Nested shells`) and diagnostic comparisons with Natural Earth show Jaccard 0.819–0.917 and symmetric difference 394–816 km². Seek valid, appropriately detailed source bytes or source-owner clarification; review Organic Law 99-209 commune membership, including Poya's split; preserve the invalid original; never silently MakeValid or substitute a diagnostic clone.\n\nAcceptance: exact source chain/license/vintage/hashes; independently check all three subjects; compare only with documented appropriate methods and limitations; record correction-needed or unresolved outcomes honestly; provide a bounded engineering/source restoration handoff; produce the required evidence-quality manifest and positive/negative scoped controls; obtain a distinct exact-head review; submit one focused PR through the serialized merge queue. No core edit, regional certification, publication, or import.\n\nMachine-readable exact subject scope:\n\n```json\n{\n  \"batch_id\": \"new-caledonia-valid-province-source-20261005\",\n  \"region_id\": \"framework:region:southwestern-pacific:f41052c09453\",\n  \"release\": \"geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e\",\n  \"subject_ids\": [\n    \"NCL-1258\",\n    \"NCL-1259\",\n    \"NCL-559\"\n  ]\n}\n```\n\n<!-- worldatlas-work:v1\n{\"max_prs\":1,\"depends_on\":[454],\"scope\":\"Research and restore trustworthy evidence for the exact three scoped New Caledonia province polygons, resolve GeoReP source invalidity and boundary divergence against the Natural Earth fallback, and make source-bounded recommendations only.\",\"mode\":\"geography\",\"owned_paths\":[\"data/regional-review/new-caledonia-valid-province-source-20261005/\"],\"evidence_quality\":{\"version\":1,\"manifest_path\":\"data/regional-review/new-caledonia-valid-province-source-20261005/evidence-quality.json\",\"subject_ids\":[\"NCL-1258\",\"NCL-1259\",\"NCL-559\"],\"pins\":{\"world_index\":\"a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03\",\"source_registry\":\"ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633\",\"geography_part_28\":\"2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d\",\"macro_publication_v5\":\"aae3967fde4f5bf92b3cb0b42c490c6c6a5921c7421dcdc9533f242afbd6a674\"},\"review_kind\":\"geometry\"}}\n-->\n",
+  "body_sha256": "1604745bf74505cd9e79d9a8c2534ee311c833f73e77b346cdc760c535338e43",
+  "pinned_at": "2026-10-06",
+  "subject_ids": [
+    "NCL-1258",
+    "NCL-1259",
+    "NCL-559"
+  ],
+  "owned_paths": [
+    "data/regional-review/new-caledonia-valid-province-source-20261005/"
+  ],
+  "max_prs": 1
+}

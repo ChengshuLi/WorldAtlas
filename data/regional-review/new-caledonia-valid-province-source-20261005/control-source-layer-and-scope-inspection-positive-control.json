@@ -1,0 +1,22 @@
+{
+  "method_id": "source-layer-and-scope-inspection",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "assertions": [
+    "feature-derived mapping matches every expected subject/source name exactly",
+    "33 COMMUNES names match the legal list",
+    "all three source geometries are nonempty and individually valid"
+  ],
+  "record": "reproduce.py source_mapping_matches control; mapping values also cross-checked against comparison-results.json source feature names",
+  "expected_mapping": {
+    "NCL-559": "PROVINCE_NORD",
+    "NCL-1259": "PROVINCE_SUD",
+    "NCL-1258": "PROVINCE_DES_ILES"
+  },
+  "observed_mapping": {
+    "NCL-559": "PROVINCE_NORD",
+    "NCL-1259": "PROVINCE_SUD",
+    "NCL-1258": "PROVINCE_DES_ILES"
+  },
+  "exact_mapping_accepted": true
+}

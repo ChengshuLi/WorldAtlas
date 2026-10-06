@@ -1,0 +1,10 @@
+{
+  "method_id": "shared-helper-land-area",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "assertions": [
+    "export hashes are checked before helper execution",
+    "invalid original GeoReP inputs are excluded from official-source area measurements"
+  ],
+  "record": "source-area-results.json"
+}

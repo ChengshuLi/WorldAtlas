@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "baseline_commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+  "sources": [
+    {
+      "id": "NCL-BDADMIN-NC-2022",
+      "role": "Official high-detail administrative province and commune reference",
+      "url": "https://sig-public.gouv.nc/plateforme_telechargement/BDADMINNC.zip",
+      "item_url": "https://georep-dtsi-sgt.opendata.arcgis.com/documents/bc8f0eec7d614853b0e9d1a9bd9649ef/about",
+      "vintage": "2022-03-02 source database update lineage; archive HTTP Last-Modified 2022-05-23",
+      "retrieved_at": "2026-10-06",
+      "archive_bytes": 25287153,
+      "archive_sha256": "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d",
+      "license_status": "unknown; restoration-only",
+      "reason": "The ArcGIS item and DITTT download catalogue claim Open License 2.0, but the archive read-me says CC BY-NC-SA 4.0 and embeds 2017 non-commercial terms; another DITTT page exposes a separate Creative Commons link. Release-specific terms have not been reconciled.",
+      "files_retained": false,
+      "geometry_use": "Locally inspected only; do not redistribute the archive or derived source geometries from this packet until DITTT confirms terms.",
+      "source_acquisition_record": "source-acquisition.json"
+    },
+    {
+      "id": "NCL-GeoReP-2024",
+      "role": "Preserved official generalized comparison source; raw original is invalid",
+      "url": "https://services1.arcgis.com/TZcrgU6CIbqWt9Qv/arcgis/rest/services/limites_terrestres/FeatureServer/1",
+      "vintage": "Source item update 2024-10-28; query retrieved 2026-10-05 by parent packet",
+      "retrieved_at": "2026-10-05",
+      "license_status": "redistributable as recorded by the source registry",
+      "source_files": [
+        {"path": "data/regional-review/regional-review-1aa97b490604ea4e/sources/new-caledonia-province-parts/province-nord.geojson", "bytes": 14659942, "sha256": "ab352991c7095df611ec40e79ff652fd4346070c4e725e689a1eed5f9c2fea66"},
+        {"path": "data/regional-review/regional-review-1aa97b490604ea4e/sources/new-caledonia-province-parts/province-sud.geojson", "bytes": 22380497, "sha256": "c85d11f69e68c8a091ee7edc372212777952b897b3010082ba3af1d2774d5c85"},
+        {"path": "data/regional-review/regional-review-1aa97b490604ea4e/sources/new-caledonia-province-parts/province-des-iles.geojson", "bytes": 8136835, "sha256": "5a5ff8fac68b4a28c90ebedc65ba8deff91b0971582f7bb5a8cd32202db962b2"}
+      ],
+      "limit": "The retained query used maxAllowableOffset=0.00005 degrees and geometryPrecision=6; it is not the full-resolution 1:10,000 database. Original files remain unchanged."
+    },
+    {
+      "id": "NCL-ORGANIC-LAW-99-209-ARTICLE-1",
+      "role": "Legal province names and commune membership; Poya split authority",
+      "url": "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000020960246/2026-04-28",
+      "vintage": "Article version effective since 2009-08-07; data updated 2026-05-30",
+      "retrieved_at": "2026-10-06",
+      "license_status": "official legal text, linked only",
+      "limit": "The article defines administrative membership but does not provide a coordinate boundary."
+    },
+    {
+      "id": "NCL-POYA-DECREE-1989",
+      "role": "Specific decree titled as the Poya territory split instrument",
+      "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000000337236",
+      "vintage": "1989-04-26",
+      "retrieved_at": "2026-10-06",
+      "license_status": "official legal text, linked only",
+      "limit": "The 23.7 MB scanned annex was not retrieved or georeferenced; this packet does not claim exact line-level decree compliance."
+    },
+    {
+      "id": "NCL-CENSUS-DECREE-2025",
+      "role": "Current administrative count and Poya part membership cross-check only",
+      "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000052260146/",
+      "vintage": "2025-09-18; population figures effective 2026-01-01",
+      "retrieved_at": "2026-10-06",
+      "license_status": "official legal text, linked only",
+      "limit": "Counts support administrative membership labels; they do not validate geometry."
+    },
+    {
+      "id": "NCL-NATURAL-EARTH-ATLAS-FALLBACK",
+      "role": "Existing Atlas comparison geometry, identified by its pinned feature metadata",
+      "url": "https://www.naturalearthdata.com/",
+      "vintage": "Undated modern reference as recorded in the Atlas baseline",
+      "retrieved_at": "2026-10-06",
+      "license_status": "public domain as recorded in the Atlas baseline",
+      "limit": "The raw Natural Earth distribution was not separately retrieved; comparisons use only the exact WorldAtlas features in pinned part-28.json."
+    }
+  ]
+}

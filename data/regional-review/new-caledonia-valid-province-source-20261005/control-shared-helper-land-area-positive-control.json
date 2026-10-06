@@ -1,0 +1,10 @@
+{
+  "method_id": "shared-helper-land-area",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "assertions": [
+    "all three hash-checked temporary source exports parse as valid nonempty geometries",
+    "helper returns finite positive ellipsoidal area for each expected subject"
+  ],
+  "record": "source-area-results.json"
+}

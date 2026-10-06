@@ -1,0 +1,11 @@
+{
+  "method_id": "boundary-overlap",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "assertions": [
+    "actual source_mapping_matches guard rejects the Nord/Sud-swapped feature-derived map before overlays",
+    "out-of-scope ID lookup fails",
+    "invalid GeoReP source geometries are not treated as authoritative valid boundaries"
+  ],
+  "record": "reproduce.py mapping guard and comparison-results.json subject rows"
+}
