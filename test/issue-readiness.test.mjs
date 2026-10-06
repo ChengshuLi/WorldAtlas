@@ -50,3 +50,30 @@ test('an explicit blocker must be resolved for readiness and claiming; ordinary 
  assert.throws(()=>assertIssueReadiness({...x,branch:request.branch}),/Explicit unresolved/);assert.throws(()=>transitionClaim({...x,request}),/Explicit unresolved/);
  x.comments.push({id:3,body:'<!-- worldatlas-blocker:v1\n{"id":"input","active":false,"reason":"Retrieved source"}\n-->'});assertIssueReadiness({...x,branch:request.branch});
 });
+
+test('a linked PR merging during preflight cannot leave a complete eligible exhausted issue',async()=>{
+ let reads=0;const value=issue({...spec,depends_on:[]});
+ const api=async route=>{
+  const u=new URL('https://example.test'+route);
+  if(u.pathname.endsWith('/issues/1'))return value;
+  if(u.pathname.endsWith('/comments'))return [];
+  if(u.pathname.endsWith('/timeline'))return [{source:{issue:{number:3,body:'Refs #1',pull_request:{url:'pr'}}}}];
+  if(u.pathname.endsWith('/pulls/3'))return {number:3,state:'closed',body:'Refs #1',merged_at:reads++?'now':null};
+  throw Error('Unexpected '+route);
+ };
+ const result=await reviewIssueReadiness({api,repo:'owner/repo',number:1});
+ assert.equal(result.coverage,'incomplete');assert.equal(result.eligible,false);assert.match(result.findings.join(),/PR budget/);
+});
+test('a conflicting geography owner added during preflight cannot be reported eligible',async()=>{
+ let lists=0;const geo={...spec,depends_on:[],mode:'geography',owned_paths:['data/regional-review/packet/']};
+ const value={...issue(geo),labels:['type:geography','kind:work-item']};
+ const api=async route=>{
+  const u=new URL('https://example.test'+route);
+  if(u.pathname.endsWith('/issues/1'))return value;
+  if(u.pathname.endsWith('/comments')||u.pathname.endsWith('/timeline'))return [];
+  if(u.pathname.endsWith('/issues'))return lists++?[value,{...value,number:3}]:[value];
+  throw Error('Unexpected '+route);
+ };
+ const result=await reviewIssueReadiness({api,repo:'owner/repo',number:1});
+ assert.equal(result.coverage,'incomplete');assert.equal(result.eligible,false);assert.match(result.findings.join(),/ownership changed/);
+});

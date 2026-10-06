@@ -51,7 +51,7 @@ An issue requiring no additional implementation can be reconciled without anothe
 Follow-ups belong to their lane/role, not permanently to the creating chat.
 
 Substantive issue-contract, acceptance or PR-disposition changes require renewed
-review. New PRs use the existing review receipt's issue_contract_sha256 and
+review. New versioned-evidence PRs use the existing review receipt's issue_contract_sha256 and
 pr_body_sha256 bindings; comments alone do not invalidate those bindings. Existing
 PRs retain the activation compatibility described in PREMERGE_EVIDENCE_REVIEW.md.
 

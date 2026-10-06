@@ -57,24 +57,6 @@
         "hash_kind": "file-bytes"
       },
       {
-        "path": "docs/PUBLICATION_HANDOFF.md",
-        "bytes": 12006,
-        "sha256": "1d24fab230fa1a8e73d59aef23d93866af31015894f02fe55e48fe40f153b168",
-        "hash_kind": "file-bytes"
-      },
-      {
-        "path": "docs/QUEUE_READINESS_AUDIT.md",
-        "bytes": 2717,
-        "sha256": "e3b09de98861f53560176b7e772ff66f8a857369e348446cf7620daedc4ceded",
-        "hash_kind": "file-bytes"
-      },
-      {
-        "path": "docs/WORKER_COORDINATION.md",
-        "bytes": 38368,
-        "sha256": "11ad15af17f374349da376ec36c4e68f6c8f3188c7719b5fff0363e3cac4a3e4",
-        "hash_kind": "file-bytes"
-      },
-      {
         "path": "docs/prompts/AUDITOR.txt",
         "bytes": 8839,
         "sha256": "a3c132621f1e0388fdd0c4a4bdd81faacf9fd1cd6415a018a9b7963949abbee9",
@@ -102,6 +84,30 @@
         "path": "docs/prompts/LUNA_HISTORY.txt",
         "bytes": 10360,
         "sha256": "9db6e71b24d25e257d1e43d6a12021d0cdd60ab2c63404c905da6cd48d8ae40b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/PUBLICATION_HANDOFF.md",
+        "bytes": 12006,
+        "sha256": "1d24fab230fa1a8e73d59aef23d93866af31015894f02fe55e48fe40f153b168",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/QUEUE_READINESS_AUDIT.md",
+        "bytes": 2717,
+        "sha256": "e3b09de98861f53560176b7e772ff66f8a857369e348446cf7620daedc4ceded",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 38368,
+        "sha256": "11ad15af17f374349da376ec36c4e68f6c8f3188c7719b5fff0363e3cac4a3e4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/evidence-policy.mjs",
+        "bytes": 2126,
+        "sha256": "a6b2d154c234d16321ab1841a69b681a739b45ac63e98bbeb6def295e1c6c11f",
         "hash_kind": "file-bytes"
       },
       {
@@ -145,12 +151,6 @@
         "bytes": 5336,
         "sha256": "6561c8e8fcf57cee0e7b12286ade0f877ff129f6ce083eda3143f56f8f9b5712",
         "hash_kind": "file-bytes"
-      },
-      {
-        "path": "scripts/evidence-policy.mjs",
-        "bytes": 2126,
-        "sha256": "a6b2d154c234d16321ab1841a69b681a739b45ac63e98bbeb6def295e1c6c11f",
-        "hash_kind": "file-bytes"
       }
     ],
     "pins": {
@@ -192,8 +192,8 @@
     },
     {
       "path": "coordination/engineering/queue-readiness-1210-20261006/controls.txt",
-      "bytes": 10019,
-      "sha256": "8ef43042f4e03b4fd2da082581cb7f0a7908e885f0749e1cfcf15a3300b2f09b",
+      "bytes": 11637,
+      "sha256": "2c901924abb00c07ce575c342e4dced05c9f6e78b6e7fa1d5cfa70e1ef00b9fb",
       "hash_kind": "file-bytes"
     },
     {
@@ -234,8 +234,8 @@
     },
     {
       "path": "docs/ISSUE_LIFECYCLE.md",
-      "bytes": 7445,
-      "sha256": "425eddcf98b0a81742dd837d16c85383fa0427b99a8e0535c7d04f4cd34f0439",
+      "bytes": 7464,
+      "sha256": "fcf326bf76db429f46326639659a10208388f5d3dc81c0ad5fc819970f89bf36",
       "hash_kind": "file-bytes"
     },
     {
@@ -294,8 +294,8 @@
     },
     {
       "path": "scripts/issue-claim-contract.mjs",
-      "bytes": 14316,
-      "sha256": "a307fd8e2e0ecf33a7e1e1cd0cc40e8b6b94ed8fe4e2f4afceafb401df594f60",
+      "bytes": 14530,
+      "sha256": "6e7cdac9e6d87d5ea3e78c697fd34797b00ddcb9b1ba1b6e8cb91f8c93bc410c",
       "hash_kind": "file-bytes"
     },
     {
@@ -312,14 +312,20 @@
     },
     {
       "path": "scripts/review-issue-readiness.mjs",
-      "bytes": 4109,
-      "sha256": "5eba78dc0638eadbb81a61e5d04b0e6cd05e8233faca58808a1f49088ccb46a5",
+      "bytes": 4496,
+      "sha256": "359ad62c2601f120e3d10462e208f26c4c0ff06a41e2215fc91cb941eaee8231",
       "hash_kind": "file-bytes"
     },
     {
       "path": "scripts/run-issue-claim.mjs",
-      "bytes": 4177,
-      "sha256": "4e9f149bc147916bb8bf0cb67bb981242d1817227949e5f308e8c8b635f4f91d",
+      "bytes": 4757,
+      "sha256": "1f79b67ad5caee35acab3c315095f52f940ec54e1950ef36c8aa78232b989a23",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/claim-readiness-races.test.mjs",
+      "bytes": 3831,
+      "sha256": "fc7a10bf8b73ddbbb2ffa24e46b7bd1f1c095aa4ba46f24b86211ac0c0b95857",
       "hash_kind": "file-bytes"
     },
     {
@@ -330,8 +336,8 @@
     },
     {
       "path": "test/issue-readiness.test.mjs",
-      "bytes": 4501,
-      "sha256": "acb4fdc5dd56d9eaf49f77367c391db8d0f085a6e94629cc2ba0f616b1e229f2",
+      "bytes": 6157,
+      "sha256": "d1ab1486e5247e665ba7e228328eac6eb9229908ad099341ad35ef726ff98654",
       "hash_kind": "file-bytes"
     },
     {
@@ -365,7 +371,7 @@
     "geographic_approval": "not-requested"
   },
   "commands": [
-    "node --test test/issue-readiness.test.mjs test/issue-claims.test.mjs test/queue-readiness-audit.test.mjs test/premerge-evidence.test.mjs test/merge-integration.test.mjs test/handoff-scope.test.mjs test/worker-result.test.mjs"
+    "node --test test/claim-readiness-races.test.mjs test/issue-readiness.test.mjs test/issue-claims.test.mjs test/queue-readiness-audit.test.mjs test/premerge-evidence.test.mjs test/merge-integration.test.mjs test/handoff-scope.test.mjs test/worker-result.test.mjs"
   ],
   "change_receipts": [
     {
@@ -495,6 +501,10 @@
       "path": "scripts/run-issue-claim.mjs",
       "status": "modified",
       "original_sha256": "60a3fe737da086a103595961e0bed97d5c014397746d440948234d348c4700a5"
+    },
+    {
+      "path": "test/claim-readiness-races.test.mjs",
+      "status": "added"
     },
     {
       "path": "test/issue-claims.test.mjs",

@@ -88,6 +88,7 @@ export function transitionClaim({issue,comments,prs=[],dependencies=[],request,g
  const openPR=prs.find(p=>p.state==='open'&&p.head?.ref===current?.branch);
  const own=current?.worker_id===worker_id&&current?.claim_id===claim_id;
  const labels=(issue.labels??[]).map(l=>typeof l==='string'?l:l.name);
+ if(['claim','recover'].includes(action)&&prs.some(p=>p.state==='open')&&!(current?.active&&own&&branch===current.branch))throw Error('Recovery or a new reservation must preserve existing open PR and checkpoint');
  if(action==='release'){
   if(!current?.active||!own)throw Error('Only the current claim holder may release');
   if(openPR||current.live_work)throw Error('Preserve the active PR/live operation; finish or hand over before release');
