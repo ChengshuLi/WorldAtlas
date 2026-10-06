@@ -28,6 +28,15 @@ const producer=executed.map(name=>{
 });
 const summary=JSON.parse(fs.readFileSync(path.join(stage,'summary.json')));
 if(summary.status!=='no-new-regression'||summary.regressions!==0||summary.changed_ids.length!==2||summary.complete_world_locations!==49625)throw Error('Full-world stage did not pass');
+for(const product of summary.products){
+  const file=path.resolve(stage,product.path);
+  if(!file.startsWith(stage+path.sep))throw Error('Stage product escapes owned directory');
+  const raw=fs.readFileSync(file);
+  if(raw.length!==product.bytes||digest(raw)!==product.sha256)throw Error('Stage product bytes differ');
+}
+const worldReport=JSON.parse(fs.readFileSync(path.join(stage,'world-regression.json')));
+if(worldReport.status!=='no-new-regression'||worldReport.regressions!==0||worldReport.geometry_errors.length||
+  JSON.stringify(worldReport.changed_location_ids)!==JSON.stringify(summary.changed_ids))throw Error('Whole-world result differs');
 const inputs=[];
 const load=name=>{
   const raw=read(summary.baseline_commit,name);inputs.push({path:name,sha256:digest(raw),bytes:raw.length});
@@ -37,9 +46,11 @@ const world=load('data/world-index.json'),before=world.parts.flatMap(name=>load(
 const pointer=load('data/geographic-releases/current-manifest.json');
 const releaseRaw=read(summary.baseline_commit,'data/geographic-releases/'+pointer.path);
 if(digest(releaseRaw)!==pointer.sha256)throw Error('Current release pointer differs');
+inputs.push({path:'data/geographic-releases/'+pointer.path,sha256:digest(releaseRaw),bytes:releaseRaw.length});
 const release=JSON.parse(gunzipSync(releaseRaw)).releases.at(-1);
 const oldHash=footprintHash(before);
-if(release.version!==6&&release.id!=='geography:review:831aada26a8c7fe8c75553caf4432a22dc9c2cf458b14221a1135addb475f186')throw Error('Unexpected predecessor release');
+if(release.id!=='geography:review:831aada26a8c7fe8c75553caf4432a22dc9c2cf458b14221a1135addb475f186'||
+  release.version!==undefined&&release.version!==6)throw Error('Unexpected predecessor release');
 if(oldHash!==release.footprints_sha256||before.length!==release.expected_counts.location)throw Error('Complete predecessor geometry differs');
 const proposalRaw=read(summary.candidate_geometry_commit,summary.candidate_geometry_file.path);
 if(digest(proposalRaw)!==summary.candidate_geometry_file.sha256)throw Error('Reviewed candidate differs');
