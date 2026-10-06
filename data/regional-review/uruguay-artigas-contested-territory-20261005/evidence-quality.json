@@ -1,0 +1,313 @@
+{
+  "version": 1,
+  "issue": 927,
+  "lane": "geography",
+  "worker_id": "01a10947-b3d7-7812-8b2f-c5a47e88ccb2",
+  "subject_ids": [
+    "gb:URY:ADM1:27058087B22084813565519"
+  ],
+  "subject_ids_sha256": "a4fe038ac177b539d1542dff7edc80887a05584ced241070f4ad2cd33cf1f50a",
+  "baseline": {
+    "commit": "72029cd16057199be441058c69dd783604541100",
+    "files": [
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/validation/macro-publication-v5.json",
+        "bytes": 2826,
+        "sha256": "aae3967fde4f5bf92b3cb0b42c490c6c6a5921c7421dcdc9533f242afbd6a674",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-25.json",
+        "bytes": 4525239,
+        "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "baseline-world-index": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "baseline-hierarchy": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "baseline-administrative-sources": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "baseline-macro-publication": "aae3967fde4f5bf92b3cb0b42c490c6c6a5921c7421dcdc9533f242afbd6a674",
+      "baseline-uruguay-subjects": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394"
+    },
+    "pin_files": {
+      "baseline-world-index": "data/world-index.json",
+      "baseline-hierarchy": "data/hierarchy.json",
+      "baseline-administrative-sources": "data/administrative-sources.json",
+      "baseline-macro-publication": "data/validation/macro-publication-v5.json",
+      "baseline-uruguay-subjects": "data/geography/part-25.json"
+    },
+    "subject_files": {
+      "gb:URY:ADM1:27058087B22084813565519": "data/geography/part-25.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "ury-gb-2017-adm1",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/URY/ADM1/geoBoundaries-URY-ADM1.geojson",
+      "role": "Historical neighboring-tier and subject-identity comparison. It represents Artigas as a single ordinary ADM1; it does not adjudicate modern disputed features or bilateral title.",
+      "vintage": "2017; gbOpen ADM1",
+      "retrieved_at": "2026-10-05 (retained parent packet)",
+      "license": {
+        "status": "redistributable",
+        "terms": "ODbL 1.0; attribution/source metadata retained"
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "restoration": "retained byte-for-byte at ../regional-review-afee7ce9a5601ab2/ury-gb-2017.geojson",
+      "limit": "Historical neighboring-tier and subject-identity comparison. It represents Artigas as a single ordinary ADM1; it does not adjudicate modern disputed features or bilateral title.",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-afee7ce9a5601ab2/ury-gb-2017.geojson",
+          "bytes": 3632079,
+          "sha256": "9f4887205e7b359af2ef1e4f484ad071d2dc0d12d068f1d7b6c1cc6c2624d1cf",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "uruguay-igm-current",
+      "url": "https://sit.mvot.gub.uy/arcgis/rest/services/07_EXTERNO/LIMITES_ADMINISTRATIVOS/MapServer/3/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson",
+      "role": "Official mapping representation. Its DEPTO field assigns both separate records to ARTIGAS and its DEF/TXT fields mark each contested; this is not a jointly agreed title or complete ADM2 inventory.",
+      "vintage": "Data update 2024-09-18; metadata update 2026-07-15 (official metadata record 55)",
+      "retrieved_at": "2026-10-05 (retained parent packet)",
+      "license": {
+        "status": "redistributable",
+        "terms": "Official metadata permits free use with attribution to IGM, AGESIC and IDE"
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "restoration": "retained byte-for-byte at ../regional-review-afee7ce9a5601ab2/ury-igm-current.geojson",
+      "limit": "Official mapping representation. Its DEPTO field assigns both separate records to ARTIGAS and its DEF/TXT fields mark each contested; this is not a jointly agreed title or complete ADM2 inventory.",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-afee7ce9a5601ab2/ury-igm-current.geojson",
+          "bytes": 16950115,
+          "sha256": "3cfa19c6be9d12bd159b236e15839f958656fdbe66ef19e38379cb54c141b3a7",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "br-1851-boundary-treaty-edition",
+      "url": "https://www.gov.br/funag/pt-br/chdd/arquivos-chdd/publicacoes/obras_do_barao_do_rio_branco__volume_v_._questoes_de_limites__exposicoes_de_motivos__capa_mole.pdf",
+      "role": "Primary treaty text reproduced in official Brazilian government edition. Art. 3 §2 describes the boundary via the branch named Arroyo de la Invernada on one cited map and unnamed on another, and refers to island(s) at the Quaraí mouth as belonging to Brazil. It does not independently identify current IGM polygons as those legal objects or settle the competing modern interpretation.",
+      "vintage": "1851 instrument reproduced in FUNAG edition; edition consulted 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Official hosted historical publication; reuse terms for the PDF are not established here"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Fetch the exact URL as bytes and verify the SHA-256 and byte count above; the relevant text is Portuguese Article 3 §2 and instrument ratification/exchange information in the same volume. Do not replace with OCR or another edition.",
+      "limit": "Primary treaty text reproduced in official Brazilian government edition. Art. 3 §2 describes the boundary via the branch named Arroyo de la Invernada on one cited map and unnamed on another, and refers to island(s) at the Quaraí mouth as belonging to Brazil. It does not independently identify current IGM polygons as those legal objects or settle the competing modern interpretation.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "uy-decree-315-2019",
+      "url": "https://www.impo.com.uy/bases/decretos-originales/315-2019",
+      "role": "Historical customs-jurisdiction instrument describes a route from Marco Masoller along Arroyo la Invernada (Límite contestado—Arroyo Maneco) to Cuareim. This helps explain official administrative naming but its annulled jurisdiction assignment is not a current department boundary or bilateral territorial delimitation.",
+      "vintage": "Promulgated 2019-10-28; published 2019-10-31; annulled with general and absolute effects by TCA Judgment 758/022 dated 2022-10-20",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Official legal text; reuse terms not separately established"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Fetch the exact URL as bytes and verify SHA-256 and byte count above; consult Annex III, Aduana Artigas jurisdiction. IMPO marks this decree annulled with general and absolute effects by TCA 758/022.",
+      "limit": "Historical customs-jurisdiction instrument describes a route from Marco Masoller along Arroyo la Invernada (Límite contestado—Arroyo Maneco) to Cuareim. This helps explain official administrative naming but its annulled jurisdiction assignment is not a current department boundary or bilateral territorial delimitation.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "uy-tca-758-2022",
+      "url": "https://www.impo.com.uy/bases/sentencias-tca-originales/758-2022",
+      "role": "The Tribunal declared the challenged Decree 315/2019 null with general and absolute effects. This establishes that the customs-jurisdiction instrument is not an operative current legal basis; it does not decide Brazil–Uruguay territorial sovereignty or map the disputed polygons.",
+      "vintage": "Judgment dated 2022-10-20; publication 2025-05-21",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Official judicial text; reuse terms not separately established"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Fetch the exact URL as bytes and verify SHA-256 and byte count above; inspect the case and operative annulment section concerning Decree 315/2019.",
+      "limit": "The Tribunal declared the challenged Decree 315/2019 null with general and absolute effects. This establishes that the customs-jurisdiction instrument is not an operative current legal basis; it does not decide Brazil–Uruguay territorial sovereignty or map the disputed polygons.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "uy-decree-605-1974",
+      "url": "https://www.impo.com.uy/bases/decretos/605-1974",
+      "role": "Uruguay ordered preparation of a general map showing territories held in reserve and contested borders pending agreement with neighbors. It establishes official treatment of a disputed-border category, not the names, location, or title of these two features.",
+      "vintage": "1974-07-26 decree; published 1974-08-02",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Official legal text; reuse terms not separately established"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Fetch the exact URL as bytes and verify the SHA-256 and byte count above.",
+      "limit": "Uruguay ordered preparation of a general map showing territories held in reserve and contested borders pending agreement with neighbors. It establishes official treatment of a disputed-border category, not the names, location, or title of these two features.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "uy-mre-annual-report-2023",
+      "url": "https://medios.presidencia.gub.uy/legal/2024/proyectos/03/tomo_2_memoria_2023.pdf",
+      "role": "Uruguay reports following contested limits with Brazil, including Rincón de Artigas and Isla Brasilera, pending bilateral resolution. It is the government's stated position/status at that reporting time, not a delimitation instrument and does not establish later resolution or a legal boundary.",
+      "vintage": "2023 annual report, issued 2024",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Official government report; reuse terms not separately established"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Fetch the exact URL as bytes and verify the SHA-256 and byte count above; consult the foreign-affairs discussion in printed page 323 (PDF page 324).",
+      "limit": "Uruguay reports following contested limits with Brazil, including Rincón de Artigas and Isla Brasilera, pending bilateral resolution. It is the government's stated position/status at that reporting time, not a delimitation instrument and does not establish later resolution or a legal boundary.",
+      "temporal_status": "reference"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-territory-20261005/README.md",
+      "bytes": 755,
+      "sha256": "c36e870c954a2b3e261bb36e03bebd14655c25c7678b396e9073fd041423cd26",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-territory-20261005/findings.md",
+      "bytes": 6274,
+      "sha256": "fe23e632bbab7000a4fa632eb5fcdda186363880d8921c28bd9fb13d83bf2495",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-territory-20261005/source-inventory.json",
+      "bytes": 7519,
+      "sha256": "83c6a22703baedab022144d3284e4b6434043c91e04dccd1573c02473c576675",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-territory-20261005/reproduce.py",
+      "bytes": 5810,
+      "sha256": "c6abb1d4b2ba662d2b7318db55d4fb9943945257a754ee8e42ff17d4ac0d79f8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-territory-20261005/reproduction-results.json",
+      "bytes": 2506,
+      "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-territory-20261005/reproducibility.json",
+      "bytes": 406,
+      "sha256": "86aee840838e789e1fa395e0c1c515c1db605d2db757be02e95e950f1e3b2463",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "source-review",
+      "kind": "source",
+      "description": "Inspect the immutable exact subject and source feature roster/attributes, role, vintage, and retained source hashes; no boundary overlay or approval calculation.",
+      "software": "Python 3.13 standard library",
+      "units": "feature records and categorical source attributes"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "The retained official IGM source assigns two separately named features to ARTIGAS and marks both contested; this establishes the map representation but not bilateral title, normal ADM2 status, or department-boundary membership.",
+      "status": "supported",
+      "source_ids": [
+        "uruguay-igm-current"
+      ]
+    },
+    {
+      "text": "Uruguay reported in its 2023 executive report that Rincón de Artigas and Isla Brasilera remained contested with Brazil pending bilateral resolution; the report is time-bounded and not a delimitation instrument.",
+      "status": "supported",
+      "source_ids": [
+        "uy-mre-annual-report-2023"
+      ]
+    },
+    {
+      "text": "The reproduced 1851 treaty text describes an Invernada branch with conflicting historical map names and refers to island(s) at the Quaraí mouth as Brazilian; identification of current IGM features with treaty objects and Atlas inclusion remain unresolved.",
+      "status": "unresolved",
+      "source_ids": [
+        "br-1851-boundary-treaty-edition",
+        "uruguay-igm-current"
+      ]
+    },
+    {
+      "text": "Whether either contested polygon should be incorporated into ordinary Artigas ADM1 geometry remains unresolved; no unilateral correction is supported.",
+      "status": "unresolved",
+      "source_ids": [
+        "uruguay-igm-current",
+        "uy-mre-annual-report-2023",
+        "br-1851-boundary-treaty-edition"
+      ]
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-territory-20261005/README.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-territory-20261005/findings.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-territory-20261005/source-inventory.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-territory-20261005/reproduce.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-territory-20261005/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-territory-20261005/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-contested-territory-20261005/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 data/regional-review/uruguay-artigas-contested-territory-20261005/reproduce.py",
+    "node scripts/evidence-quality.mjs data/regional-review/uruguay-artigas-contested-territory-20261005/evidence-quality.json ."
+  ]
+}
