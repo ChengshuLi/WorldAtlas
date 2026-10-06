@@ -1,0 +1,9 @@
+# Evidence schema handoff
+
+Issue #1189 declares 295 subjects: 278 child feature IDs and 17 Atlas province parent IDs. The enforced v1 evidence validator requires `subject_files` to bind every subject to a baseline JSON file whose top-level `features` array contains an exact `feature.id` or `feature.properties.id`. The 17 province IDs are hierarchy-node identifiers; none occurs as a feature ID in the relevant geography part file. They are nodes in `data/hierarchy.json`, whose record shape is not a GeoJSON FeatureCollection. Therefore the current geography subject representation cannot verify the issue's exact 295-subject scope without misclassifying hierarchy nodes as geographic features.
+
+The alternate v1 `subject_inventory` is prior-evidence-only and supports one uniform `id_prefix` applied to every native value. The issue's declared IDs mix `framework:province:` and `gb:...` identifiers, so that pathway cannot express the exact scope either. The 278 native feature children alone do pass the feature identity model.
+
+Engineering follow-up: extend the evidence manifest/verifier to support typed exact subject inventories, for example `geographic_features` and `hierarchy_nodes`, each bound to a pinned containing file and its native identity field. Validate the 17 parent IDs against `hierarchy.json` records and 278 children against the containing geography feature file; require the union of typed inventories to equal the issue contract IDs. Add passing mixed-type fixture coverage and negative tests for a missing parent, an extra subject and a type mismatch. Keep this tooling change outside #1189's declared owned paths and route it through its own engineering issue/claim.
+
+No evidence manifest or PR is submitted for #1189 until that gate representation can honestly encode the full declared scope. The research, source-name guard, preservation control and deterministic historical reproduction remain usable as a checkpoint.

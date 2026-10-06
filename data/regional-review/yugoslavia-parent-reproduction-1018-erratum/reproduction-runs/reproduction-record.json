@@ -1,0 +1,43 @@
+{
+  "baseline": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+  "child_feature_and_shapeName_correspondence": "278/278 exact",
+  "declared_subject_count": 295,
+  "issue": 1189,
+  "native_children": 278,
+  "parents": 17,
+  "pinned_input_count": 44,
+  "preservation": "Every run output goes to a new exclusive directory. Existing destinations are refused before any products are emitted. Historical originals are only read.",
+  "source_name_drift_fixture": "Use --units-override with one source_shape_name mutation; exact source correspondence guard rejects before generating outputs.",
+  "two_fresh_runs": [
+    {
+      "geometry-comparison.json": {
+        "bytes": 67808,
+        "sha256": "c365fceb6d68c011f82340a6693c6658b503e312c64a631ac2a4b63b1bb3c59d"
+      },
+      "issue-1016-overlap.csv": {
+        "bytes": 4710,
+        "sha256": "5e33ac57ee4982803c72fca78bfe6226663b42c2e716b28bd46e2a6e6311bb0a"
+      },
+      "parent-study.json": {
+        "bytes": 152977,
+        "sha256": "7dc99f764c7f4148cd4e54d2e75b93afc7613ee04e7d9eea1d57959c2b4b1951"
+      }
+    },
+    {
+      "geometry-comparison.json": {
+        "bytes": 67808,
+        "sha256": "c365fceb6d68c011f82340a6693c6658b503e312c64a631ac2a4b63b1bb3c59d"
+      },
+      "issue-1016-overlap.csv": {
+        "bytes": 4710,
+        "sha256": "5e33ac57ee4982803c72fca78bfe6226663b42c2e716b28bd46e2a6e6311bb0a"
+      },
+      "parent-study.json": {
+        "bytes": 152977,
+        "sha256": "7dc99f764c7f4148cd4e54d2e75b93afc7613ee04e7d9eea1d57959c2b4b1951"
+      }
+    }
+  ],
+  "version": 1,
+  "whole_file_pins_verified": true
+}

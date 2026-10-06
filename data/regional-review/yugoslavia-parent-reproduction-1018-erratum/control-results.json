@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "issue": 1189,
+  "controls": [
+    {
+      "id": "existing-output-sentinel",
+      "outcome": "rejected",
+      "sentinel_sha256": "d4383fc33176254b2abac7cb3c14bcaae5701681537db3d69adf740b1feb1b9c",
+      "preserved": true,
+      "partial_output": false,
+      "stderr": "guard failed: output directory already exists; no files written"
+    },
+    {
+      "id": "source-name-drift",
+      "fixture_sha256": "2c88c36e9dc9433b18b8f5174e255100c348b0bb26a21fdcbbda3fc15741b397",
+      "outcome": "rejected-before-output",
+      "reason": "guard failed: source shapeName mismatch: gb:SRB:ADM2:33768554B14333994307421",
+      "output_directory_created": false
+    }
+  ]
+}
