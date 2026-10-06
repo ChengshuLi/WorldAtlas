@@ -70,6 +70,42 @@ def numeric_metadata_bytes(value):
     raise ValueError('Unsupported source metadata member')
 
 
+def part_feature_bindings(original,current,part,seen_old,seen_new):
+    def roster(rows,seen):
+        result={}
+        for position,f in enumerate(rows):
+            identity=f.get('id') or f['properties']['id']
+            if not isinstance(identity,str) or not identity or identity in seen:
+                raise ValueError('Duplicate or missing world source feature identity')
+            seen.add(identity);result[identity]=(position,f)
+        return result
+    before,after=roster(original,seen_old),roster(current,seen_new)
+    if set(before)!=set(after):
+        raise ValueError('Current containing-file source identity roster changed')
+    result=[]
+    for identity in sorted(before):
+        old_position,a=before[identity];new_position,b=after[identity]
+        ma,mb={k:v for k,v in a.items() if k!='geometry'},{k:v for k,v in b.items() if k!='geometry'}
+        old_numeric,new_numeric=numeric_metadata_bytes(ma),numeric_metadata_bytes(mb)
+        if old_numeric!=new_numeric:
+            raise ValueError('Source metadata semantic change outside declared integration')
+        result.append({'id':identity,'source_part':part,'original_feature_position':old_position,
+                       'current_feature_position':new_position,
+                       'original_feature_sha256':digest(canonical_json(a)),
+                       'current_feature_sha256':digest(canonical_json(b)),
+                       'original_geometry_sha256':digest(canonical_json(a['geometry'])),
+                       'current_geometry_sha256':digest(canonical_json(b['geometry'])),
+                       'original_binary64_sha256':digest(coordinate_bytes(a['geometry'])),
+                       'current_binary64_sha256':digest(coordinate_bytes(b['geometry'])),
+                       'original_metadata_sha256':digest(canonical_json(ma)),
+                       'current_metadata_sha256':digest(canonical_json(mb)),
+                       'original_numeric_metadata_sha256':digest(old_numeric),
+                       'current_numeric_metadata_sha256':digest(new_numeric),
+                       'metadata_canonical_equal':canonical_json(ma)==canonical_json(mb),
+                       'metadata_numeric_equal':True})
+    return result
+
+
 def overlay_neighbors(rows, changed_shapes):
     """Complete ordinary and exact wrapped-seam intersection candidates."""
     geometries=[shape(f['geometry']) for f in rows]
@@ -224,14 +260,17 @@ def run(repo, selected, output):
         raise ValueError('Use declared immutable actual input and new output vintage')
     execution = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=repo, text=True).strip()
     subprocess.run(['git', 'merge-base', '--is-ancestor', selected, 'origin/main'], cwd=repo, check=True)
-    cache = {}
+    cache,object_bodies = {},{}
     def blob(commit, path):
         key = (commit, path)
         if key not in cache:
             tree = subprocess.check_output(['git', 'ls-tree', commit, '--', path], cwd=repo).split()
             if not tree or tree[0] not in (b'100644', b'100755'):
                 raise ValueError('Ordinary immutable file required: ' + path)
-            cache[key] = subprocess.check_output(['git', 'show', commit + ':' + path], cwd=repo)
+            oid=tree[2].decode()
+            if oid not in object_bodies:
+                object_bodies[oid]=subprocess.check_output(['git','cat-file','blob',oid],cwd=repo)
+            cache[key]=object_bodies[oid]
         return cache[key]
     def descriptor(path, raw):
         return {'path': path, 'bytes': len(raw), 'sha256': digest(raw), 'hash_kind': 'file-bytes'}
@@ -294,37 +333,19 @@ def run(repo, selected, output):
         source_members[label]['invalid_water'] = {r['id']: digest(canonical_json(r)) for r in data['invalid_water']}
         source_members[label]['shorelines'] = {f'physical-shoreline:{i}': digest(g.wkb)
                                               for i, g in enumerate((old_detector if label == 'original' else new_detector).shorelines)}
-    old_features, current_features = {}, {}
-    for label, commit, target in [('original', ORIGINAL, old_features), ('current', selected, current_features)]:
-        world = json.loads(blob(commit, 'data/world-index.json'))
-        for part in world['parts']:
-            rows = json.loads(blob(commit, 'data/' + part))['features']
-            for f in rows:
-                identity = f.get('id') or f['properties']['id']
-                if identity in target:
-                    raise ValueError('Duplicate world source feature')
-                target[identity] = f
-    if set(old_features) != set(current_features):
-        raise ValueError('Current source identity roster changed outside this integration')
-    for identity in sorted(old_features):
-        a, b = old_features[identity], current_features[identity]
-        ma,mb={k:v for k,v in a.items() if k!='geometry'},{k:v for k,v in b.items() if k!='geometry'}
-        metadata_equal=canonical_json(ma)==canonical_json(mb)
-        metadata_numeric_equal=numeric_metadata_bytes(ma)==numeric_metadata_bytes(mb)
-        if not metadata_numeric_equal:
-            raise ValueError('Source metadata semantic change outside declared integration')
-        feature_proof.append({'id': identity, 'original_feature_sha256': digest(canonical_json(a)),
-                              'current_feature_sha256': digest(canonical_json(b)),
-                              'original_geometry_sha256': digest(canonical_json(a['geometry'])),
-                              'current_geometry_sha256': digest(canonical_json(b['geometry'])),
-                              'original_binary64_sha256': digest(coordinate_bytes(a['geometry'])),
-                              'current_binary64_sha256': digest(coordinate_bytes(b['geometry'])),
-                              'original_metadata_sha256':digest(canonical_json(ma)),
-                              'current_metadata_sha256':digest(canonical_json(mb)),
-                              'original_numeric_metadata_sha256':digest(numeric_metadata_bytes(ma)),
-                              'current_numeric_metadata_sha256':digest(numeric_metadata_bytes(mb)),
-                              'metadata_canonical_equal':metadata_equal,
-                              'metadata_numeric_equal':metadata_numeric_equal})
+    old_world=json.loads(blob(ORIGINAL,'data/world-index.json'))
+    current_world=json.loads(blob(selected,'data/world-index.json'))
+    if old_world['parts']!=current_world['parts']:
+        raise ValueError('World containing-file order changed')
+    seen_old,seen_new=set(),set()
+    for part in old_world['parts']:
+        old_rows=json.loads(blob(ORIGINAL,'data/'+part))['features']
+        current_rows=json.loads(blob(selected,'data/'+part))['features']
+        feature_proof.extend(part_feature_bindings(old_rows,current_rows,'data/'+part,seen_old,seen_new))
+        del old_rows,current_rows
+    feature_proof.sort(key=lambda row:row['id'])
+    if seen_old!=seen_new or len(feature_proof)!=len(seen_old):
+        raise ValueError('Complete world source roster mismatch')
     def read_features(row, path=None):
         raw = verify(blob(ARTIFACT, path or row['path']), {**row, 'path': path or row['path']})
         decoded = decode(raw)
@@ -340,6 +361,7 @@ def run(repo, selected, output):
     old_components = [f for row in comp_report['outputs']['new_components'] for f in read_features(row, aliases[row['path']])]
     old_contacts = [f for row in comp_report['outputs']['new_contacts'] for f in read_features(row, aliases[row['path']])]
     membership(fragments, old_components)
+    cache.clear();object_bodies.clear()
     by_tile, residue_by_tile = defaultdict(list), defaultdict(list)
     for f in fragments:
         by_tile[int(f['id'].split(':')[1])].append(f)
@@ -390,6 +412,8 @@ def run(repo, selected, output):
                                                        'tile':list(bounds),'status':'retained-nonpolygon-residue'}})
         tile_rows.append(evidence)
     print('Authenticated all source features and tile operands; changed tiles', changed, flush=True)
+    release_ids=current_data['release_ids'];release_index_sha=current_data['release_index_sha256']
+    del old_detector,new_detector,old_data,current_data,source_members
     blocked = [r['result'] for r in tile_rows if r['result']['status'] != 'checked']
     new_components, new_contacts = components(new_fragments, blocked, detection['bounds'])
     for c in new_components:
@@ -452,7 +476,7 @@ def run(repo, selected, output):
     summary = {'version':'worldatlas-actual-world-successor-v1','selected_input_commit':selected,
                'executed_code_commit':execution,'executed_code_files':executed_files,
                'original_input_commit':ORIGINAL,'frozen_selected_commit':FROZEN,'measurement_artifact_commit':ARTIFACT,
-               'release_ids':current_data['release_ids'],'release_index_sha256':current_data['release_index_sha256'],
+               'release_ids':release_ids,'release_index_sha256':release_index_sha,
                'tiles':len(tile_rows),'changed_tiles':changed,'reused_tiles':len(tile_rows)-len(changed),
                'original_counts':{'fragments':len(fragments),'components':len(old_components),'residues':len(residues),'contacts':len(old_contacts)},
                'current_counts':{'fragments':len(new_fragments),'components':len(new_components),'residues':len(new_residues),'contacts':len(new_contacts)},

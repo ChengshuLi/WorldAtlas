@@ -7,6 +7,7 @@ from worldwide_gap_successor import (coordinate_bytes, record_delta, reconstruct
                                      tile_equal, component_lineage, overlay_membership_view,
                                      contact_key, validate_selected, SELECTED)
 from worldwide_gap_successor import numeric_metadata_bytes,overlay_links,overlay_neighbors
+from worldwide_gap_successor import part_feature_bindings
 from shapely.geometry import box,mapping
 from evidence.immutable import canonical_json
 
@@ -22,6 +23,18 @@ def component(identity, ids):
 
 
 class SuccessorControls(unittest.TestCase):
+    def test_streamed_source_roster_order_and_duplicate_guards(self):
+        a,b=feature('a'),feature('b',2)
+        rows=part_feature_bindings([a,b],[b,a],'source-part',set(),set())
+        self.assertEqual([r['id'] for r in rows],['a','b'])
+        self.assertEqual([r['original_feature_position'] for r in rows],[0,1])
+        self.assertEqual([r['current_feature_position'] for r in rows],[1,0])
+        self.assertTrue(all(r['original_binary64_sha256']==r['current_binary64_sha256'] for r in rows))
+        with self.assertRaisesRegex(ValueError,'Duplicate or missing'):part_feature_bindings([a,a],[a,b],'p',set(),set())
+        with self.assertRaisesRegex(ValueError,'roster changed'):part_feature_bindings([a,b],[a],'p',set(),set())
+        seen=set();part_feature_bindings([a],[a],'p',seen,set())
+        with self.assertRaisesRegex(ValueError,'Duplicate or missing'):part_feature_bindings([a],[a],'other-part',seen,set())
+
     def test_metadata_representation_preserves_exact_json_semantics(self):
         self.assertEqual(numeric_metadata_bytes({'overlap':1}),numeric_metadata_bytes({'overlap':1.0}))
         for a,b in [(9007199254740993,9007199254740992.0),(True,1),(None,'null'),(-0.0,0.0),([1,2],[2,1]),([[1]],[1])]:
