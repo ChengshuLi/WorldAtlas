@@ -1,0 +1,724 @@
+{
+  "version": 1,
+  "issue": 1092,
+  "lane": "geography",
+  "worker_id": "01a10948-7d38-75d0-bc01-4cc28ea41f49",
+  "subject_ids": [
+    "atlas:physical:01145f8d18b933920a48",
+    "atlas:physical:18095d1ae330d01e2090",
+    "atlas:physical:5658b7201ba7b8f69e6a",
+    "atlas:physical:6009eac4ca158faaa1aa",
+    "atlas:physical:9f7853a3967ea002645b",
+    "atlas:physical:ab952d23e84da2846198",
+    "atlas:physical:c0f93b87687b32800d53",
+    "atlas:physical:d18bdcb161bf48955c01",
+    "atlas:physical:ebe561cf8f03b270b83f",
+    "atlas:physical:f61262e7e0e10bd646cf",
+    "atlas:physical:fd3e82aaa7e59f216318",
+    "gb:RUS:ADM2:50074027B1024572337800",
+    "gb:RUS:ADM2:50074027B10379539839705",
+    "gb:RUS:ADM2:50074027B1336621418144",
+    "gb:RUS:ADM2:50074027B14701566742636",
+    "gb:RUS:ADM2:50074027B1644674550414",
+    "gb:RUS:ADM2:50074027B17917543280875",
+    "gb:RUS:ADM2:50074027B18253095483754",
+    "gb:RUS:ADM2:50074027B18760987875066",
+    "gb:RUS:ADM2:50074027B2154875125895",
+    "gb:RUS:ADM2:50074027B23262720042196",
+    "gb:RUS:ADM2:50074027B25917769136183",
+    "gb:RUS:ADM2:50074027B28971786615675",
+    "gb:RUS:ADM2:50074027B29329231814048",
+    "gb:RUS:ADM2:50074027B30864735873510",
+    "gb:RUS:ADM2:50074027B34738491600615",
+    "gb:RUS:ADM2:50074027B40944163415540",
+    "gb:RUS:ADM2:50074027B44152060141244",
+    "gb:RUS:ADM2:50074027B50058998089809",
+    "gb:RUS:ADM2:50074027B52368021684741",
+    "gb:RUS:ADM2:50074027B52463258949821",
+    "gb:RUS:ADM2:50074027B53792659884597",
+    "gb:RUS:ADM2:50074027B55969640981213",
+    "gb:RUS:ADM2:50074027B56233113775442",
+    "gb:RUS:ADM2:50074027B57421544908828",
+    "gb:RUS:ADM2:50074027B57809326542315",
+    "gb:RUS:ADM2:50074027B58285687326194",
+    "gb:RUS:ADM2:50074027B59422198546785",
+    "gb:RUS:ADM2:50074027B61219657375498",
+    "gb:RUS:ADM2:50074027B65962797819795",
+    "gb:RUS:ADM2:50074027B68599046641011",
+    "gb:RUS:ADM2:50074027B74546691194068",
+    "gb:RUS:ADM2:50074027B75983799969403",
+    "gb:RUS:ADM2:50074027B76413707909035",
+    "gb:RUS:ADM2:50074027B95202300265125"
+  ],
+  "subject_ids_sha256": "bfc28011d523d063794c21c09eb7a3671e2215bc285a5ce786d4d3e17448b561",
+  "baseline": {
+    "commit": "00664f04790641a9e0c0b29535823076ed243b93",
+    "files": [
+      {
+        "path": "data/regional-review/regional-review-626fdf640aab94e2/findings/member-assessments.json",
+        "bytes": 297458,
+        "sha256": "55e20fc63247dd81a3d23dac405811c34e7dee79dc7b7a72712febbe813d913f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-626fdf640aab94e2/baseline/issue-scope.json",
+        "bytes": 13222,
+        "sha256": "bd01cfec3fa206b2e99dd3505c923fbec185be16842da260b440800fa9cd2117",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-626fdf640aab94e2/sources/geoboundaries-commit-9469f09.json",
+        "bytes": 331076,
+        "sha256": "5f1b2549c5741c6708fae329dc3fe25c0bdb3185dfca34575fe8bffdf22da6ce",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-626fdf640aab94e2/sources/geoboundaries-rus-adm1-2017-metadata.json",
+        "bytes": 856,
+        "sha256": "5c8f45f4965693016d70e08dae4c195d614644eed8c8fa3dca5948c9d89b84a1",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-626fdf640aab94e2/sources/geoboundaries-rus-adm1-2017-scoped-parent-features.geojson",
+        "bytes": 3124983,
+        "sha256": "4dab95fa1bbb8aa0ffeeecca9bc269ece139aab4368faff8ed2d0890c05d6602",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-626fdf640aab94e2/sources/geoboundaries-rus-adm2-2017-metadata.json",
+        "bytes": 815,
+        "sha256": "2064a236e3473d76adf00729b4482a22ffefae22a40364a4cfe78ef43ce3c672",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-626fdf640aab94e2/sources/geoboundaries-rus-adm2-2017-scoped-original-features.geojson",
+        "bytes": 7590020,
+        "sha256": "7eb4cba61f0d17bfacb634c08aff3ec4873ece62734d518b51614bf061a5a129",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+        "bytes": 924809,
+        "sha256": "44aa8bed8c6d3f6b7f4c553007efbaa82d39ff384790e95c06d1e3615ad4f070",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-626fdf640aab94e2/sources/arcgis-item-37ea320eebb647c6838c23f72abae5ef.json",
+        "bytes": 9587,
+        "sha256": "9ccbb076714184b4565ca6546f988aca1fad7afabf17191f920f3da64ba85340",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-626fdf640aab94e2/sources/resolve-ecoregions-layer-0.json",
+        "bytes": 37257,
+        "sha256": "d1feffd594812affdc08e089607bab2ed76e256ba7748784d37536797a777d4e",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-626fdf640aab94e2/sources/resolve-ecoregions-eco-id-query.json",
+        "bytes": 6209,
+        "sha256": "cc42c18d35c06b794914ccbfe11ebe8c74d39c26c5b7ae3e35ad9935c187f998",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-626fdf640aab94e2/sources/resolve-ecoregions-2017-features.geojson",
+        "bytes": 4755917,
+        "sha256": "aed773990a041f91cc457912627718a1d5da55b8d854719ba13630a18d49af59",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-626fdf640aab94e2/sources/resolve-ecoregions-by-eco-id.geojson",
+        "bytes": 185538,
+        "sha256": "95557a6db0dffeda4786e3961a2daf3aa977160adf09dbada2ec73cc8305a3b3",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-626fdf640aab94e2/sources/mchs-yamal-current-region.html",
+        "bytes": 91038,
+        "sha256": "a73397b83e44731675ce5ddda196f29a752696975840b03524344674c9de22fa",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-626fdf640aab94e2/sources/mchs-yamal-district-islands.html",
+        "bytes": 104060,
+        "sha256": "b325387ce5f8e18217aaf822afef33e2c8969c8b85b6fae64672abf5303fe723",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {
+      "prior_member_assessments": "55e20fc63247dd81a3d23dac405811c34e7dee79dc7b7a72712febbe813d913f",
+      "prior_issue_scope": "bd01cfec3fa206b2e99dd3505c923fbec185be16842da260b440800fa9cd2117",
+      "prior_scoped_source_features": "7eb4cba61f0d17bfacb634c08aff3ec4873ece62734d518b51614bf061a5a129",
+      "prior_current_features": "44aa8bed8c6d3f6b7f4c553007efbaa82d39ff384790e95c06d1e3615ad4f070"
+    },
+    "pin_files": {
+      "prior_member_assessments": "data/regional-review/regional-review-626fdf640aab94e2/findings/member-assessments.json",
+      "prior_issue_scope": "data/regional-review/regional-review-626fdf640aab94e2/baseline/issue-scope.json",
+      "prior_scoped_source_features": "data/regional-review/regional-review-626fdf640aab94e2/sources/geoboundaries-rus-adm2-2017-scoped-original-features.geojson",
+      "prior_current_features": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson"
+    },
+    "subject_files": {
+      "atlas:physical:01145f8d18b933920a48": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "atlas:physical:18095d1ae330d01e2090": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "atlas:physical:5658b7201ba7b8f69e6a": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "atlas:physical:6009eac4ca158faaa1aa": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "atlas:physical:9f7853a3967ea002645b": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "atlas:physical:ab952d23e84da2846198": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "atlas:physical:c0f93b87687b32800d53": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "atlas:physical:d18bdcb161bf48955c01": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "atlas:physical:ebe561cf8f03b270b83f": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "atlas:physical:f61262e7e0e10bd646cf": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "atlas:physical:fd3e82aaa7e59f216318": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B1024572337800": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B10379539839705": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B1336621418144": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B14701566742636": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B1644674550414": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B17917543280875": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B18253095483754": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B18760987875066": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B2154875125895": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B23262720042196": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B25917769136183": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B28971786615675": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B29329231814048": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B30864735873510": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B34738491600615": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B40944163415540": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B44152060141244": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B50058998089809": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B52368021684741": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B52463258949821": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B53792659884597": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B55969640981213": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B56233113775442": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B57421544908828": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B57809326542315": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B58285687326194": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B59422198546785": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B61219657375498": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B65962797819795": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B68599046641011": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B74546691194068": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B75983799969403": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B76413707909035": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson",
+      "gb:RUS:ADM2:50074027B95202300265125": "data/regional-review/regional-review-626fdf640aab94e2/sources/current-scoped-features.geojson"
+    }
+  },
+  "sources": [
+    {
+      "id": "prior-geoboundaries-adm2",
+      "url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d",
+      "role": "Original national ADM2 source for the 34 native-unit subjects and administrative parents from which the 11 ecological pieces were derived.",
+      "vintage": "Represented boundary year 2017; data update 2023-03-03; source build 2023-12-12.",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "Open Data Commons Open Database License 1.0; source metadata attributes OpenStreetMap and Wambacher."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "curl --fail --location 'https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/RUS/ADM2/geoBoundaries-RUS-ADM2.geojson' --output data/regional-review/regional-review-626fdf640aab94e2/sources/geoboundaries-rus-adm2-2017-original.geojson",
+      "limit": "The source metadata says 2,328 ADM2 units while its complete archive has 2,327 features. It is historical and does not establish current legal status or boundary completeness.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "prior-resolve-ecoregions",
+      "url": "https://www.arcgis.com/home/item.html?id=37ea320eebb647c6838c23f72abae5ef",
+      "role": "Physical ecoregion source used to create the 11 ecological portions; ECO_ID is the verified identity field.",
+      "vintage": "Layer source data last edit 2022-01-27; later schema edits are not a new boundary vintage.",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "CC BY 4.0 as listed by the ArcGIS item; underlying source district geometry retains the separate ODbL 1.0 attribution."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Use the record-specific direct URL and instructions in sources/source-register.json; acquire through verified TLS, preserve terms, final URL, date, byte length and SHA-256.",
+      "limit": "This dataset is ecological, not an administrative-territory source, and does not validate current province or district boundaries.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "rosstat-oktmo-open-data-catalog",
+      "url": "https://rosstat.gov.ru/opendata/7708234640-oktmo",
+      "role": "Federal open-data catalog for the All-Russian Classifier of Municipal Territories (OKTMO); official national lead for current municipal names/codes and hierarchy.",
+      "vintage": "Search-indexed catalog lists CSV data-20261001T1110-structure-20260210T1102.csv; catalog last modified 2026-10-01.",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Catalog states typical terms for publicly available open data, but those terms and the specific file were not inspected; treat reuse status as unverified."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Open https://rosstat.gov.ru/opendata/7708234640-oktmo and download the catalog's 2026-10-01 CSV data-20261001T1110-structure-20260210T1102.csv plus structure-20260210T1102.csv; record final URLs, terms, byte lengths and SHA-256 before relying on rows.",
+      "limit": "Search extraction is a source-discovery lead, not retained source bytes or an inspected CSV. No geographic claim in this packet relies on an unread OKTMO row.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "altai-krai-rosstat-municipal-list",
+      "url": "https://22.rosstat.gov.ru/folder/33029",
+      "role": "Official Altai Krai municipal register index. The page describes its linked list as according to regional laws establishing the status and boundaries of municipal and administrative-territorial entities.",
+      "vintage": "Linked DOCX named `Municipal formations of Altai Krai`, catalog date 2026-01-16; official statistical material also reports 2026-01-01 totals.",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Specific DOCX reuse terms not inspected."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Open the official page and download the 40.29 KB `Municipal formations of Altai Krai` DOCX listed 2026-01-16; inspect its source-law citations and record the exact file SHA-256.",
+      "limit": "The current DOCX is not retained. The eight city labels have earlier official-statistics support but their 2026 row-level types remain unchecked here. Official Treasury search extraction records Slavgorod's conversion to municipal okrug; its complete current legal roster remains to be inspected.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "altai-krai-rosstat-2024-yearbook",
+      "url": "https://22.rosstat.gov.ru/storage/mediabank/%D0%95%D0%B6%D0%B5%D0%B3%D0%BE%D0%B4%D0%BD%D0%B8%D0%BA.2024.pdf",
+      "role": "Earlier official Rosstat classification of Altai Krai urban and municipal okrugs, useful to compare the 2017 source names.",
+      "vintage": "2024 statistical yearbook; table describes municipality types as of 1 January for 2021-2025.",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Specific PDF terms not inspected."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Download the 2024 yearbook PDF from the listed official Rosstat URL; record final URL, size, terms and SHA-256.",
+      "limit": "Historic statistical classification, not legal-boundary evidence or the 2026 list.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "novosibirsk-oblast-rosstat-list",
+      "url": "https://54.rosstat.gov.ru/list_of_municipalities",
+      "role": "Official current Novosibirsk Oblast municipal register; distinguishes urban okrugs, municipal okrugs and municipal districts, including Novosibirsk city and Novosibirsky district.",
+      "vintage": "Page crawled 2026-10-06; no embedded effective date shown in the extracted text.",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Page-level reuse terms not inspected."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Open the listed official page and save the rendered municipal list or its linked data in a verified way; record its date and SHA-256.",
+      "limit": "A roster distinguishes entity classes but does not provide boundary geometry or prove the 2017 multipart components.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "omsk-oblast-rosstat-list",
+      "url": "https://55.rosstat.gov.ru/list_of_municipalities",
+      "role": "Official Omsk Oblast municipal list. The extracted current list identifies Omsk as a city okrug and shows former district-named entities among municipal okrugs and remaining municipal districts.",
+      "vintage": "List explicitly dated 2026-01-01.",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Page-level reuse terms not inspected."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Open the listed official page and save the rendered municipal list or linked data; record its date, terms and SHA-256.",
+      "limit": "Names/status can contextualize a source role; they do not establish geometry of Omsk, Bolsherechensky or Krutinsky components.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "tomsk-oblast-rosstat-list",
+      "url": "https://70.rosstat.gov.ru/list_of_municipalities",
+      "role": "Official Tomsk Oblast municipal register. It lists city Tomsk, city Kedrovy and city Strezhevoy under the city-okrug heading, separate from municipal districts and settlements.",
+      "vintage": "Page crawled 2026-09-30; no explicit effective date shown in extracted text.",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Page-level reuse terms not inspected."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Open the listed official page and save the rendered municipal list or linked data; record its date, terms and SHA-256.",
+      "limit": "The list supports role category only; does not show the territorial extent or verify the 2017 feature boundary.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "yamal-nenets-mchs-profile",
+      "url": "https://89.mchs.gov.ru/glavnoe-upravlenie/harakteristika-subekta",
+      "role": "Official regional MChS profile listing Yamal-Nenets municipal entities under city okrugs and municipal okrugs; it names the four in-scope city entities and seven district-named municipal okrugs.",
+      "vintage": "Original packet HTML capture 2026-10-05 23:10:05 PDT; current official page search extraction crawled two days before 2026-10-06.",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "CC BY 4.0 page footer, as recorded in the parent packet."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "restoration": "For this packet, inspect the retained source file `sources/mchs-yamal-current-region.html`; its SHA-256 is recorded above. Original upstream page: https://89.mchs.gov.ru/glavnoe-upravlenie/harakteristika-subekta.",
+      "limit": "A municipality roster does not supply a component-by-component municipal boundary; the MChS island statement covers some islands only.",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/west-siberia-roles-followup-20261006/sources/mchs-yamal-current-region.html",
+          "bytes": 91038,
+          "sha256": "a73397b83e44731675ce5ddda196f29a752696975840b03524344674c9de22fa",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "khanty-mansi-63oz-municipal-boundaries-law",
+      "url": "https://www.dumahmao.ru/ai_fill/File/Law/1%20State%20Legal%20device/2%20Local%20government/63-oz5.pdf",
+      "role": "Official regional legislature publication of Law 63-oz, whose subject is the status and boundaries of municipalities and whose Article 1 enumerates city okrugs; annexes include boundary schemes.",
+      "vintage": "Official PDF indexed as the amended text; the page's exact revision date was not inspected. A 2025 amendment is reflected in the official law passport; 2026 amendments were not ruled out.",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Legal text; reuse terms not inspected. Citation rather than PDF redistribution is planned."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Download the legislature-hosted PDF and compare Article 1 plus the separate administrative-territorial law 43-oz; record both exact URLs, publication/revision dates and SHA-256.",
+      "limit": "Municipal city-okrg status is not equivalent to administrative territorial `gorod okrug significance`; exact 2026 statutory state and Annex geometry were not byte-inspected in this run.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "nefteyugansk-official-charter",
+      "url": "https://special.admugansk.ru/category/8",
+      "role": "Official city-government charter source confirming the municipality's name and urban-okrug status under regional Law 63-oz; its extracted text cites the 2025 Federal Law 33-FZ and a March 2026 charter amendment.",
+      "vintage": "Search-extracted text reflects a 2026-03-25 city council amendment; HTML bytes not retrieved.",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Page-level reuse terms not inspected."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Open the official charter page and retrieve the currently linked charter and revision record with TLS validation.",
+      "limit": "Confirms only Nefteyugansk's legal name/status; does not validate the footprint or every other city subject.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "nizhnevartovsk-official-charter",
+      "url": "https://www.n-vartovsk.ru/town/ustav/",
+      "role": "Official city-government charter identifying Nizhnevartovsk as a municipal urban okrug and saying its legal municipal boundary coincides with the administrative-territorial city boundary.",
+      "vintage": "Official current charter page crawled 2026-10-02; HTML/PDF not retrieved.",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Page-level reuse terms not inspected."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Open the current city charter and boundary law; retrieve them with TLS validation and hash the bytes.",
+      "limit": "Boundary coincidence is a statutory statement for this municipality and does not independently validate source geometry.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "hmao-administrative-territorial-law-43oz",
+      "url": "https://base.garant.ru/19022037/",
+      "role": "Secondary access copy of the HMAO-Yugra administrative-territorial law, identifying the separate administrative-territorial status list; retained only as a discovery lead, not primary evidence.",
+      "vintage": "Law 43-oz; date of current consolidated text not inspected.",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Not assessed."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Find and retrieve the primary legislature/publisher text and verify all current amendments.",
+      "limit": "Secondary lead only. It is not used to assert current territorial facts.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "yamal-nenets-mchs-islands-note",
+      "url": "https://89.mchs.gov.ru/deyatelnost/press-centr/novosti/3921938",
+      "role": "Official MChS note supporting only the limited statement that some islands in internal sea waters belong to municipal-district territories.",
+      "vintage": "Original packet HTML capture 2026-10-05 23:10:07 PDT.",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "CC BY 4.0 page footer, as recorded in parent packet."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "restoration": "For this packet, inspect retained source file `sources/mchs-yamal-district-islands.html`; its SHA-256 is recorded above. Original upstream page URL is listed here.",
+      "limit": "Supports only the limited island-membership statement; it does not validate all multipart components, boundaries, or complete current membership.",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/west-siberia-roles-followup-20261006/sources/mchs-yamal-district-islands.html",
+          "bytes": 104060,
+          "sha256": "b325387ce5f8e18217aaf822afef33e2c8969c8b85b6fae64672abf5303fe723",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/README.md",
+      "bytes": 5273,
+      "sha256": "be33849f54a0580283291b76d9062c76cbe12e487e4ad841e42dde322e8a2021",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/baseline/issue-contract.json",
+      "bytes": 2370,
+      "sha256": "13a9d0c8bbf6fbc80f98a8842c82f315211d9183e066a246e319a90dc46f9acf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/findings/followup-assessments.json",
+      "bytes": 105972,
+      "sha256": "7fa0d983d07534ffe068cdf056a102eb033d1c268466c4a1605d405b2c0630b0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/findings/reproduction-result.json",
+      "bytes": 247,
+      "sha256": "82a3375b9b9d20ec4ae1a2dfae1d6d230f48acaa7c2daa8831e14ba7cd08f85c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/findings/positive-control.json",
+      "bytes": 191,
+      "sha256": "a0ab32cee3adc7c1dbd81fa7acec0bb4076a3e8a556a4aa06410593f8bc79dd8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/findings/negative-control.json",
+      "bytes": 192,
+      "sha256": "cc31d1ed56eb47310413b8f870aba8c07d5e037b86a740ec9300c7c5a17ef913",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/sources/source-register.json",
+      "bytes": 16272,
+      "sha256": "17c48b10b490c79c489ffedefcbdbe0c68065157f936a9a275cfd14275d1ca81",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/reproduce-followup.py",
+      "bytes": 13840,
+      "sha256": "145ac6073637a03d1e05f88debbab34a92e3978def08169ae6d2717c99096c94",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/verify-followup.py",
+      "bytes": 1043,
+      "sha256": "544c1798a10191ceb4a0a4bd4cb1cafdc79e82eac845210f2270208c05825be3",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "followup-generator",
+      "kind": "generator",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "description": "Derive the exact issue roster from the pinned #395 assessment, assign each row to its bounded evidence category, and emit per-subject role/parent/source limitation records.",
+      "software": "Python 3 standard library; canonical JSON SHA-256",
+      "units": "45 exact subject records; categorical status and evidence references"
+    },
+    {
+      "id": "inherited-source-review",
+      "kind": "source",
+      "description": "Inspect retained #395 source metadata, scoped features and per-member claims; compare official source-page text only where accessible and record missing bytes/limits.",
+      "software": "Git immutable blobs and official-source page/search extraction as detailed in source-register.json",
+      "units": "Source records and named territorial claims, not measured geometry"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "ecoregion_count",
+      "value": 11,
+      "unit": "subjects",
+      "vintage": "baseline",
+      "input_sha256": "7fa0d983d07534ffe068cdf056a102eb033d1c268466c4a1605d405b2c0630b0",
+      "evaluation_commit": "00664f04790641a9e0c0b29535823076ed243b93"
+    },
+    {
+      "id": "city_role_count",
+      "value": 25,
+      "unit": "subjects",
+      "vintage": "baseline",
+      "input_sha256": "7fa0d983d07534ffe068cdf056a102eb033d1c268466c4a1605d405b2c0630b0",
+      "evaluation_commit": "00664f04790641a9e0c0b29535823076ed243b93"
+    },
+    {
+      "id": "multipart_count",
+      "value": 9,
+      "unit": "subjects",
+      "vintage": "baseline",
+      "input_sha256": "7fa0d983d07534ffe068cdf056a102eb033d1c268466c4a1605d405b2c0630b0",
+      "evaluation_commit": "00664f04790641a9e0c0b29535823076ed243b93"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "ecoregion_count",
+      "value": 11,
+      "unit": "subjects"
+    },
+    {
+      "metric_id": "city_role_count",
+      "value": 25,
+      "unit": "subjects"
+    },
+    {
+      "metric_id": "multipart_count",
+      "value": 9,
+      "unit": "subjects"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "The 11 retained ecological fragments have a source-role contradiction requiring a product/engineering type decision; no geometry edit is proposed.",
+      "status": "supported",
+      "source_ids": [
+        "prior-geoboundaries-adm2",
+        "prior-resolve-ecoregions"
+      ]
+    },
+    {
+      "text": "The 25 city-name role cases warrant a separate municipal-type crosswalk; available text evidence does not establish that Atlas tier or current boundary geometry should change.",
+      "status": "unresolved",
+      "source_ids": [
+        "prior-geoboundaries-adm2",
+        "rosstat-oktmo-open-data-catalog",
+        "altai-krai-rosstat-municipal-list",
+        "altai-krai-rosstat-2024-yearbook",
+        "tomsk-oblast-rosstat-list",
+        "yamal-nenets-mchs-profile",
+        "khanty-mansi-63oz-municipal-boundaries-law",
+        "nefteyugansk-official-charter",
+        "nizhnevartovsk-official-charter",
+        "omsk-oblast-rosstat-list"
+      ]
+    },
+    {
+      "text": "The nine multipart geometries are not verified complete or current because authoritative component-level legal geometry was not retrieved and compared.",
+      "status": "unresolved",
+      "source_ids": [
+        "prior-geoboundaries-adm2",
+        "rosstat-oktmo-open-data-catalog",
+        "altai-krai-rosstat-municipal-list",
+        "novosibirsk-oblast-rosstat-list",
+        "omsk-oblast-rosstat-list",
+        "yamal-nenets-mchs-profile",
+        "yamal-nenets-mchs-islands-note"
+      ]
+    },
+    {
+      "text": "No current legal boundary, all-seven-province crosswalk, regional completeness, or publication approval is established by this packet.",
+      "status": "unresolved",
+      "source_ids": [
+        "prior-geoboundaries-adm2",
+        "rosstat-oktmo-open-data-catalog"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 data/regional-review/west-siberia-roles-followup-20261006/verify-followup.py",
+    "node scripts/evidence-quality.mjs data/regional-review/west-siberia-roles-followup-20261006/evidence-quality.json",
+    "node scripts/premerge-evidence.mjs --help"
+  ],
+  "validation": [
+    {
+      "method_id": "followup-generator",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/west-siberia-roles-followup-20261006/findings/positive-control.json"
+    },
+    {
+      "method_id": "followup-generator",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/west-siberia-roles-followup-20261006/findings/negative-control.json"
+    },
+    {
+      "method_id": "followup-generator",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/west-siberia-roles-followup-20261006/findings/reproduction-result.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/README.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/baseline/issue-contract.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/findings/followup-assessments.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/findings/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/findings/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/findings/reproduction-result.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/reproduce-followup.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/sources/mchs-yamal-current-region.html",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/sources/mchs-yamal-district-islands.html",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/sources/source-register.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/verify-followup.py",
+      "status": "added"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "ecoregion_count",
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/findings/followup-assessments.json",
+      "json_pointer": "/counts/ecoregion-fragment"
+    },
+    {
+      "metric_id": "city_role_count",
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/findings/followup-assessments.json",
+      "json_pointer": "/counts/city-name-role"
+    },
+    {
+      "metric_id": "multipart_count",
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/findings/followup-assessments.json",
+      "json_pointer": "/counts/multipart-component-review"
+    }
+  ],
+  "rendered_tables": []
+}
