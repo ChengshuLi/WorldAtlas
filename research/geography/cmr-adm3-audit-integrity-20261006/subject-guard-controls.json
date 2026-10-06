@@ -1,0 +1,33 @@
+{
+  "method_id": "exact-issue-subject-roster-guard",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "source_id_list_sha256": "777661c91c40a4e7175e08e62f1ee7af5e4530aecbda9cef0d914a672926329e",
+  "declared_issue_scope_sha256": "777661c91c40a4e7175e08e62f1ee7af5e4530aecbda9cef0d914a672926329e",
+  "cases": {
+    "exact": {
+      "count": 226,
+      "unique_count": 226,
+      "matches_declared_roster": true,
+      "accepted": true
+    },
+    "duplicate": {
+      "count": 227,
+      "unique_count": 226,
+      "matches_declared_roster": true,
+      "accepted": false
+    },
+    "missing": {
+      "count": 225,
+      "unique_count": 225,
+      "matches_declared_roster": false,
+      "accepted": false
+    },
+    "fabricated": {
+      "count": 226,
+      "unique_count": 226,
+      "matches_declared_roster": false,
+      "accepted": false
+    }
+  }
+}

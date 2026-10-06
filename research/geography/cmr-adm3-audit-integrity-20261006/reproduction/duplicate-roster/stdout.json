@@ -1,0 +1,52 @@
+{
+  "output": "data/regional-review/cameroon-adm3-authoritative-source-restoration/candidate-crosswalk.json",
+  "scope_count": 226,
+  "ocha": {
+    "feature_count": 360,
+    "unique_pcode_count": 360,
+    "missing_pcode_count": 0,
+    "unique_parent_pcode_count": 58,
+    "scope_unique_name_parent_match_count": 157,
+    "historical_to_spatial_candidate_geometry_component_pairs_all_subjects": {
+      "1->1": 221,
+      "2->1": 1,
+      "3->1": 1,
+      "3->3": 2,
+      "7->1": 1
+    },
+    "spatial_matches_with_runner_up_margin_at_least_0_10": 226,
+    "spatial_matches_iou_at_least_0_95": 217,
+    "spatial_matches_covering_at_least_0_95_of_both_polygons": 219,
+    "spatial_matches_below_0_95_iou": 9,
+    "below_0_95_iou_subject_ids": [
+      "gb:CMR:ADM3:9386221B2109018232138",
+      "gb:CMR:ADM3:9386221B28684632711326",
+      "gb:CMR:ADM3:9386221B49652047441621",
+      "gb:CMR:ADM3:9386221B53666537605784",
+      "gb:CMR:ADM3:9386221B54934718963778",
+      "gb:CMR:ADM3:9386221B67102516877537",
+      "gb:CMR:ADM3:9386221B80502497294933",
+      "gb:CMR:ADM3:9386221B83686298967433",
+      "gb:CMR:ADM3:9386221B9418579396637"
+    ],
+    "historical_name_differences": 36,
+    "name_differences_with_direct_normalized_ocha_join": 19,
+    "spatial_candidate_parent_mismatch_subject_ids": [
+      "gb:CMR:ADM3:9386221B18243073945100",
+      "gb:CMR:ADM3:9386221B18291950390240",
+      "gb:CMR:ADM3:9386221B18747608346686",
+      "gb:CMR:ADM3:9386221B20641552566497",
+      "gb:CMR:ADM3:9386221B39879304680772",
+      "gb:CMR:ADM3:9386221B47531248617039",
+      "gb:CMR:ADM3:9386221B50506655196067",
+      "gb:CMR:ADM3:9386221B56027412894684",
+      "gb:CMR:ADM3:9386221B58745723770454",
+      "gb:CMR:ADM3:9386221B66762903352612",
+      "gb:CMR:ADM3:9386221B93294394992231"
+    ]
+  },
+  "inc_wri": {
+    "feature_count": 360,
+    "scope_unique_name_parent_match_count": 154
+  }
+}
