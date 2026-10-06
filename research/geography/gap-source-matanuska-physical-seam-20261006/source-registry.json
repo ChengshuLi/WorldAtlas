@@ -104,7 +104,15 @@
         "script_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
         "script_sha256": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22",
         "source_url_transform": "gjDownloadURL with .geojson replaced by _simplified.geojson",
-        "script_lines": "The baseline script sets simplifiedGeometryGeoJSON from source_url by replacing the suffix, then downloads that value."
+        "script_lines": "The baseline script sets simplifiedGeometryGeoJSON from source_url by replacing the suffix, then downloads that value.",
+        "location_policy": {
+          "path": "data/location-policy.json",
+          "bytes": 69433,
+          "sha256": "efab4528fd4b7b180815ef82de93480f490ef8fa48ad9ef32d1f9d76a64b7fb9",
+          "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+          "usa_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.geojson",
+          "transformed_simplified_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2_simplified.geojson"
+        }
       },
       "selected_feature_ids": [
         "52423323B25289890288494",

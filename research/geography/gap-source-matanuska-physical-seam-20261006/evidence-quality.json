@@ -651,6 +651,13 @@
         "role": "original-source"
       },
       {
+        "path": "data/location-policy.json",
+        "bytes": 69433,
+        "sha256": "efab4528fd4b7b180815ef82de93480f490ef8fa48ad9ef32d1f9d76a64b7fb9",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
         "path": "data/regional-review/alaska-ecoregion-role-followup-2026/sources/resolve-alaska-eco-attributes-20261004.json",
         "bytes": 3912,
         "sha256": "8baab6f616a508c778d1dd65b72605c4cea83649b8a51c7799f94ad60535408b",
@@ -766,6 +773,18 @@
       "id": "geoboundaries-us-adm2-2018-simplified",
       "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2_simplified.geojson",
       "role": "Simplified geoBoundaries feature product selected by exact issue-baseline scripts/administrative.py URL transformation; source-coordinate comparison only, no owner assignment",
+      "administrative_input_basis": {
+        "script_path": "scripts/administrative.py",
+        "script_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "script_sha256": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22",
+        "source_url_transform": "USA data/location-policy.json source_url with .geojson replaced by _simplified.geojson",
+        "location_policy_path": "data/location-policy.json",
+        "location_policy_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "location_policy_sha256": "efab4528fd4b7b180815ef82de93480f490ef8fa48ad9ef32d1f9d76a64b7fb9",
+        "usa_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.geojson",
+        "transformed_simplified_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2_simplified.geojson",
+        "script_lines": "The baseline data/location-policy.json USA entry supplies source_url; the baseline script transforms it and downloads that value."
+      },
       "vintage": "boundaryYear 2018; sourceDataUpdateDate Thu Jan 19 07:31:04 2023; buildDate Dec 12, 2023; immutable release commit 9469f09592ced973a3448cf66b6100b741b64c0d",
       "retrieved_at": "2026-10-06T20:46:44Z",
       "license": {
@@ -798,8 +817,8 @@
         },
         {
           "path": "research/geography/gap-source-matanuska-physical-seam-20261006/sources/geoboundaries-simplified-capture-receipt.json",
-          "bytes": 2545,
-          "sha256": "a61d57eeb0685a17a4c1a1828c45610128725a3072341c28ac8421d476299ad5",
+          "bytes": 3158,
+          "sha256": "d98194e0bbd0f5c01ea429959412e474b053f01c82aa402b120b0437901a69b3",
           "hash_kind": "file-bytes",
           "role": "original-source"
         }
@@ -925,8 +944,8 @@
     },
     {
       "path": "research/geography/gap-source-matanuska-physical-seam-20261006/build-evidence-manifest.py",
-      "bytes": 21555,
-      "sha256": "344e5c9d0bdc340825662bbd2ae87803a8b1a7c9b89dcb44848fe0314319a015",
+      "bytes": 22479,
+      "sha256": "24c0caa0f9c7196b80a4c161e0cd0a7f5fce4d2fa869a6645927a00c5047fc55",
       "hash_kind": "file-bytes"
     },
     {
@@ -1021,8 +1040,8 @@
     },
     {
       "path": "research/geography/gap-source-matanuska-physical-seam-20261006/source-registry.json",
-      "bytes": 7965,
-      "sha256": "1c1099bf448f431a028c108ef6bf9c79f17e09f686e5db5752af474a6b4edb3a",
+      "bytes": 8540,
+      "sha256": "761ec26716f3004d44ca8bad40849310ec1d00e5a31efbf8aa2b6e932cfb802e",
       "hash_kind": "file-bytes"
     },
     {
