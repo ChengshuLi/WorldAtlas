@@ -10,7 +10,7 @@ import json
 import math
 import subprocess
 
-from shapely import STRtree, union_all
+from shapely import STRtree, get_coordinates, union_all
 from shapely.geometry import box, mapping, shape
 from shapely.validation import explain_validity
 
@@ -57,9 +57,12 @@ def bad_record(identity, geometry, reason, input_path):
     bounds = list(geometry.bounds)
     # Unknown/nonfinite bounds block the whole declared domain, not zero tiles.
     bounded = len(bounds) == 4 and all(math.isfinite(x) for x in bounds)
+    coordinates = get_coordinates(geometry, include_z=geometry.has_z)
+    finite = all(math.isfinite(x) for coordinate in coordinates for x in coordinate)
     return {'id': identity, 'input_path': input_path, 'reason': reason,
             'bounds': bounds if bounded else None,
-            'unchecked_bounds': bounds if bounded else list(DOMAIN),
+            'unchecked_bounds': bounds if bounded and finite else list(DOMAIN),
+            'source_extent_status': 'finite-bounds' if bounded and finite else 'unknown-nonfinite-extent',
             'geometry_sha256': hashlib.sha256(geometry.wkb).hexdigest(),
             'geometry_hash_kind': 'diagnostic-shapely-wkb-original-source-pinned-separately'}
 
@@ -88,7 +91,7 @@ def load_inputs(repo, commit, water_root, water_commit):
     if (hashlib.sha256(retained_land).hexdigest() != land_source['retained_sha256']
             or hashlib.sha256(land_raw).hexdigest() != land_source['original_sha256']):
         raise ValueError('Physical land does not match the unchanged original source receipt')
-    land, invalid_land = [], []
+    land, land_metadata, invalid_land = [], [], []
     for i, feature in enumerate(json.loads(land_raw)['features']):
         g = shape(feature['geometry'])
         if g.is_empty or not g.is_valid or g.geom_type not in ('Polygon', 'MultiPolygon'):
@@ -96,6 +99,8 @@ def load_inputs(repo, commit, water_root, water_commit):
                                            explain_validity(g), LAND_ROOT + 'natural-earth-land.geojson.gz.gz'))
         else:
             land.append(g)
+            land_metadata.append({'id': 'land-reference:' + str(i), 'original_feature_index': i,
+                                  'input_path': LAND_ROOT + 'natural-earth-land.geojson.gz.gz'})
     locations, metadata, invalid_locations, seen = [], [], [], set()
     for part in json.loads(raw)['parts']:
         path = 'data/' + part
@@ -134,7 +139,8 @@ def load_inputs(repo, commit, water_root, water_commit):
         else:
             water.append(g)
             water_metadata.append(record)
-    return {'land': land, 'locations': locations, 'location_metadata': metadata,
+    return {'land': land, 'land_metadata': land_metadata,
+            'locations': locations, 'location_metadata': metadata,
             'water': water, 'water_metadata': water_metadata,
             'invalid_land': invalid_land, 'invalid_locations': invalid_locations,
             'invalid_water': invalid_water, 'inputs': list(pins.values()),
@@ -155,6 +161,7 @@ class Detector:
     def __init__(self, inputs):
         self.inputs = inputs
         self.land_tree = STRtree(inputs['land'])
+        self.land_boundaries = [g.boundary for g in inputs['land']]
         self.location_tree = STRtree(inputs['locations'])
         self.water_tree = STRtree(inputs['water'])
 
@@ -164,22 +171,26 @@ class Detector:
         if blocked:
             return {'status': 'unchecked', 'blocked_sources': blocked, 'bounds': list(bounds)}
         tile = box(*bounds)
-        land_clips = [data['land'][int(i)].intersection(tile)
-                      for i in self.land_tree.query(tile, predicate='intersects')]
-        location_clips = [data['locations'][int(i)].intersection(tile)
-                          for i in self.location_tree.query(tile, predicate='intersects')]
+        land_indices = [int(i) for i in self.land_tree.query(tile, predicate='intersects')]
+        location_indices = [int(i) for i in self.location_tree.query(tile, predicate='intersects')]
+        land_clips = [data['land'][i].intersection(tile) for i in land_indices]
+        location_clips = [data['locations'][i].intersection(tile) for i in location_indices]
         physical = union_all(land_clips)
         occupied = union_all(location_clips)
         # Deliberately no water operand: it cannot suppress discovery or block a tile.
         missing = physical.difference(occupied)
         candidates, remnants = split_result(missing)
         residues = [{'stage': 'land-minus-locations', 'geometry': mapping(g)} for g in remnants]
-        for stage, clips in [('physical-land-clipping', land_clips), ('location-clipping', location_clips)]:
+        for stage, clips, indexes, records in [
+                ('physical-land-clipping', land_clips, land_indices, data['land_metadata']),
+                ('location-clipping', location_clips, location_indices, data['location_metadata'])]:
             for i, clip in enumerate(clips):
                 for residue in split_result(clip)[1]:
-                    residues.append({'stage': stage, 'clip_index': i, 'geometry': mapping(residue)})
-        boundary = union_all(split_result(physical)[0]).boundary
-        shore = boundary.difference(tile.boundary) if boundary is not None else union_all([])
+                    residues.append({'stage': stage, 'clip_index': i, 'source': records[indexes[i]],
+                                     'geometry': mapping(residue)})
+        # Original shoreline survives even when it exactly coincides with a tile
+        # edge. Boundaries created by clipping are never promoted to coastline.
+        shore = union_all([self.land_boundaries[i].intersection(tile) for i in land_indices])
         return {'status': 'checked', 'bounds': list(bounds), 'candidates': candidates,
                 'residues': residues, 'physical_shore': shore,
                 'missing_geometry_sha256': hashlib.sha256(canonical_json(mapping(missing))).hexdigest(),

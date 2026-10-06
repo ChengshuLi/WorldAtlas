@@ -5,11 +5,13 @@ import unittest
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / 'scripts'))
 from shapely.geometry import box, GeometryCollection, LineString, Point, Polygon
-from physical_gap_audit import Detector, split_result
+from physical_gap_audit import DOMAIN, Detector, bad_record, split_result
 
 
 def inputs(land, locations=(), water=(), invalid_water=(), invalid_land=()):
     return {'land': list(land), 'locations': list(locations), 'water': list(water),
+            'land_metadata': [{'id': 'land-reference:' + str(i), 'input_path': 'original-land'}
+                              for i in range(len(land))],
             'invalid_land': list(invalid_land), 'invalid_locations': [], 'invalid_water': list(invalid_water),
             'location_metadata': [{'id': str(i)} for i in range(len(locations))],
             'water_metadata': [{'id': str(i)} for i in range(len(water))]}
@@ -65,6 +67,7 @@ class BeforeWaterControls(unittest.TestCase):
         self.assertEqual(result['candidates'], [])
         self.assertTrue(any(x['stage'] == 'physical-land-clipping' and
                             x['geometry']['type'] == 'LineString' for x in result['residues']))
+        self.assertEqual(result['residues'][1]['source']['id'], 'land-reference:0')
 
     def test_no_contact_does_not_invent_neighbor(self):
         detector = Detector(inputs([box(0, 0, 10, 10)], [box(20, 20, 21, 21)]))
@@ -85,6 +88,22 @@ class BeforeWaterControls(unittest.TestCase):
         self.assertEqual(sum(g.area for g in a + b), 2)
         self.assertTrue(a[0].equals_exact(east, 0, normalize=True))
         self.assertTrue(b[0].equals_exact(west, 0, normalize=True))
+
+    def test_original_shore_on_tile_edge_is_not_removed(self):
+        detector = Detector(inputs([box(0, 0, 10, 10)]))
+        whole = detector.tile((0, 0, 10, 10))
+        self.assertTrue(whole['physical_shore'].equals(box(0, 0, 10, 10).boundary))
+        interior = detector.tile((2, 2, 8, 8))
+        self.assertTrue(interior['physical_shore'].is_empty)
+
+    def test_nonfinite_vertex_blocks_domain_even_with_finite_bounds(self):
+        g = Polygon([(0, 0), (1, 0), (1, 1), (float('nan'), 1), (0, 0)])
+        self.assertTrue(all(__import__('math').isfinite(x) for x in g.bounds))
+        for identity in ['land-reference:0', 'location:0']:
+            bad = bad_record(identity, g, 'invalid-nonfinite-coordinate', 'original-source')
+            self.assertEqual(bad['unchecked_bounds'], list(DOMAIN))
+            detector = Detector(inputs([], invalid_land=[bad]))
+            self.assertEqual(detector.tile((90, 30, 95, 35))['status'], 'unchecked')
 
 
 if __name__ == '__main__':
