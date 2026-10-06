@@ -1,0 +1,203 @@
+{
+  "version": 1,
+  "issue": 408,
+  "retrieved_on_utc": "2026-10-06",
+  "disposition": "insufficient-evidence-with-sourced-correction-findings",
+  "pinned_release": {
+    "id": "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+    "version": 5,
+    "baseline_commit": "1451fb0788892ff9db6415e6ce6704bdd13d8f9a",
+    "hierarchy_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+    "footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286",
+    "member_digest": "3bbf3ce4482e0ecc865b3cb8828ba7adb061b605ee1e0061d44ab379d93deea6",
+    "note": "This issue is frozen to v5. Current main is v6. Never replace the historical pin with current main's release. The reproducible script verifies retained v5 Git blobs and the current row data against v5 feature identities/geometries."
+  },
+  "retained_inputs": [
+    {
+      "id": "geoboundaries-chn-adm2-2017",
+      "role": "original-source",
+      "path": "data/regional-review/regional-review-9b38f58111efd323/sources/geoboundaries-chn-adm2-2017.geojson",
+      "restore_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/CHN/ADM2/geoBoundaries-CHN-ADM2.geojson",
+      "retrieved_on": "2026-10-05",
+      "bytes": 7618692,
+      "sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
+      "metadata_path": "data/regional-review/regional-review-9b38f58111efd323/sources/geoboundaries-chn-adm2-metadata.json",
+      "metadata_bytes": 1101,
+      "metadata_sha256": "7f609da61c856d022a9bf83b35fb271d78ebb5855ad2c1cdff337e51acdec58a",
+      "citation_and_use_path": "data/regional-review/regional-review-9b38f58111efd323/sources/geoboundaries-citation-and-use.txt",
+      "citation_and_use_sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+      "source_repository_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "declared_boundary_year": "2017",
+      "declared_source_data_update": "2023-01-19",
+      "declared_build_date": "2023-12-12",
+      "declared_role": "ADM2 / County Level",
+      "declared_license": "Open Data Commons Public Domain Dedication and License (PDDL) v1.0",
+      "attribution": "The retained geoBoundaries citation/use text requests geoBoundaries attribution and citation of the individual layer's source metadata; it also describes derivatives as CC BY 4.0. Follow the stricter attribution request pending license reconciliation.",
+      "limitations": [
+        "The source has 2,391 CHN ADM2 features and only shapeName, shapeISO, shapeID, shapeGroup, and shapeType; it has no official administrative code or parent code.",
+        "The source metadata's boundarySourceURL, licenseSource, and licenseDetail use malformed https// URLs. The named upstream source and its legal chain were not independently restored or verified.",
+        "The 2017 generalised layer cannot establish 2026 legal boundaries, present-day completeness, island/fragment coverage, or current neighbor alignment."
+      ],
+      "restoration": "Use the exact media URL above at the pinned repository commit, save response bytes unchanged, and check both 7,618,692 bytes and SHA-256 before use. The retained original is in the pre-existing #449 packet path shown above; this packet does not overwrite or relocate it."
+    },
+    {
+      "id": "natural-earth-admin1-5.1.1",
+      "role": "original-source",
+      "path": "data/regional-review/regional-review-365cbd6478904888/source/natural-earth-admin1/",
+      "source_repository": "nvkelso/natural-earth-vector",
+      "source_repository_commit": "ca96624a56bd078437bca8184e78163e5039ad19",
+      "source_commit_date": "2022-06-02T07:25:00Z",
+      "declared_version": "5.1.1 (retained source README)",
+      "role": "Natural Earth Admin 1 States/Provinces; used for the HKG/MAC compact territory member IDs and the GBA framework lineage",
+      "license": "The retained Natural Earth LICENSE.md states its vector/raster map data are public domain; this does not independently license upstream sources used to compile it.",
+      "dbf": {
+        "path": "data/regional-review/regional-review-365cbd6478904888/source/natural-earth-admin1/ne_10m_admin_1_states_provinces.dbf",
+        "bytes": 15161514,
+        "sha256": "7b3244333680d6aec58cc49bde9484177a0baa44c974ec9d371a8f7f1cdb5359",
+        "repository_blob_sha": "dfa7e3f72b79a875d54bb008c6afe3b814050db0"
+      },
+      "shapefile": {
+        "path": "data/regional-review/regional-review-365cbd6478904888/source/natural-earth-admin1/ne_10m_admin_1_states_provinces.shp",
+        "bytes": 20998780,
+        "sha256": "c6f5c8b4b1320d9417033762419c6df1eb423989cd880fba78ea0b1e3522cbe4",
+        "repository_blob_sha": "f97a631c6784f4097304a83668df51ec803b0072"
+      },
+      "member_findings": {
+        "hong_kong": "The Atlas HKG aggregation lists 18 Natural Earth admin1 IDs. The pinned DBF has exactly 18 HKG records; the reproduced IDs agree. Natural Earth source names include district names and one feature named Lantau Island; these are source-level components, not a legal cadastral boundary certificate.",
+        "macao": "The Atlas MAC aggregation lists Natural Earth MAC+00? plus an unnamed 2017 geoBoundaries shape. The pinned DBF contains one matching Natural Earth Macau row. The other source member has no shapeName in the geoBoundaries file; its bbox is 113.530444528,22.094499232 to 113.600874595,22.198665653. Inclusion provenance and current legal boundary correspondence remain unresolved."
+      },
+      "restoration": "Read the exact commit/source file pins in the retained #449 source-register.json; restore the five shapefile components by raw/API URL at that commit and verify repository blob IDs, bytes, and SHA-256. The reproducible helper reads the retained DBF and does not modify that prior packet."
+    }
+  ],
+  "official_sources": [
+    {
+      "id": "gba-outline-2019",
+      "title": "Central Committee / State Council, Outline Development Plan for the Guangdong-Hong Kong-Macao Greater Bay Area, Chapter 3, Section 1",
+      "url": "https://app.www.gov.cn/govdata/gov/201902/18/435204/article.html",
+      "retrieved_on_utc": "2026-10-06",
+      "retained_path": "data/regional-review/regional-review-173ccc74c2fd93ae/source/official-web-captures/prc-gba-development-outline-2019.html",
+      "retained_bytes": 92626,
+      "retained_sha256": "66ea0583af542ac8a9239cef36ad051ed686b5f8596eba4f632e52b51bf0ee94",
+      "finding": "The official plan names Hong Kong–Shenzhen, Guangzhou–Foshan, and Macao–Zhuhai as cooperation poles. This supports those three Atlas parent labels as policy/geographic groupings; it does not make them official provinces or administrative parents.",
+      "reuse": "No blanket reuse license was located. The locally retained response is attributed for internal evidence and is not presented as freely redistributable."
+    },
+    {
+      "id": "hong-kong-basic-law-chapter-1",
+      "title": "Hong Kong Basic Law, Chapter I, Articles 1–2",
+      "url": "https://www.basiclaw.gov.hk/en/basiclaw/chapter1.html",
+      "retrieved_on_utc": "2026-10-06",
+      "retained_path": "data/regional-review/regional-review-173ccc74c2fd93ae/source/official-web-captures/hong-kong-basic-law-ch1.html",
+      "retained_bytes": 5171,
+      "retained_sha256": "c8a6f3c384be366ce0c33d070809db07df0691515edefc558b9a5b354f0eee3b",
+      "finding": "The Basic Law states Hong Kong is an inalienable part of the PRC and has a separate SAR constitutional and administrative framework. Preserve atlas:territory:HKG as a distinct source identity; do not treat the Shenzhen cooperation-pole parent as a legal parent.",
+      "reuse": "Official legal text; no page-specific redistribution terms reviewed."
+    },
+    {
+      "id": "hong-kong-basic-law-preamble",
+      "title": "Hong Kong Basic Law, Preamble",
+      "url": "https://www.basiclaw.gov.hk/en/basiclaw/preamble.html",
+      "retrieved_on_utc": "2026-10-06",
+      "retained_path": "data/regional-review/regional-review-173ccc74c2fd93ae/source/official-web-captures/hong-kong-basic-law-preamble.html",
+      "retained_bytes": 3254,
+      "retained_sha256": "8e778b15735dfd2aea66fd639c1f47df6c6849b664bdb801d959dcc207eb73fd",
+      "finding": "The preamble establishes the SAR legal context. It is not a polygon source."
+    },
+    {
+      "id": "macao-constitutional-documents",
+      "title": "Macao SAR Government Portal, Constitutional Documents",
+      "url": "https://www.gov.mo/en/content/laws/constitutional-documents/",
+      "retrieved_on_utc": "2026-10-06",
+      "retained_path": "data/regional-review/regional-review-173ccc74c2fd93ae/source/official-web-captures/macao-constitutional-documents.html",
+      "retained_bytes": 69251,
+      "retained_sha256": "392ef4bfc645ce43dff1a34b672ff247e2ba1cfb82c6d866e4e0779a15757935",
+      "finding": "Macao is established as a Special Administrative Region under PRC Constitution Article 31 and its Basic Law. Preserve atlas:territory:MAC separately; the Macao–Zhuhai parent is a policy pole, not a legal administrative parent."
+    },
+    {
+      "id": "hainan-statistical-yearbook-2024-table-1-1",
+      "title": "Hainan Statistical Yearbook 2024, table 1-1: Divisions of Administrative Areas (2023)",
+      "url": "https://stats.hainan.gov.cn/tjj/tjsu/ndsj/2024/202412/P020250116308974141111.pdf",
+      "retrieved_on_utc": "2026-10-06",
+      "access": "Official web search index exposed the table text; direct page/PDF retrieval returned HTTP 403 in this environment, so original PDF bytes/hash are not claimed.",
+      "restoration": "Re-fetch the exact official PDF URL, retain the original bytes, record response date, length and SHA-256, then inspect printed page 3/table 1-1.",
+      "finding": "The 2023 official table lists 19 administrative place rows, including Wuzhishan, Wenchang, Sansha, Danzhou, Haikou, and Sanya. The issue's Hainan scope has 18 rows and no Wuzhishan; it includes separate Qiongshan City and Haikou rows. The 2017 source name Qiongshan City therefore needs modern district crosswalk review."
+    },
+    {
+      "id": "hainan-statistical-bulletin-2024",
+      "title": "Hainan Provincial Bureau of Statistics, 2024 Statistical Bulletin",
+      "url": "https://stats.hainan.gov.cn/tjj/tjgb/fzgb/2023_87039/202503/t20250313_3832017.html",
+      "retrieved_on_utc": "2026-10-06",
+      "access": "Official search-indexed primary source; direct page retrieval returned HTTP 403 in this environment; no original byte hash is claimed.",
+      "restoration": "Re-fetch the exact official URL and retain exact response bytes/hash, or use the 2025 Hainan Statistical Yearbook official index then retrieve table 1-1 for 2024.",
+      "finding": "The 2024 bulletin separately lists Wenchang among the five cities/counties of the Haikou economic circle and Wuzhishan in the four-unit central ecological conservation zone, while Danzhou, Sanya, Haikou and Sansha are distinct named units. This corroborates the Wenchang/Sansha parent conflict and Wuzhishan omission."
+    },
+    {
+      "id": "hainan-latest-yearbook-index",
+      "title": "Hainan Statistical Yearbook 2025 official index",
+      "url": "https://stats.hainan.gov.cn/tjj/tjsu/ndsj/2025/18gb_list.html",
+      "retrieved_on_utc": "2026-10-06",
+      "access": "Search index reports release on 2026-06-08 and includes the 2025 yearbook. Page fetch timed out; the official 2024 table is cited above pending exact latest table retrieval.",
+      "restoration": "Open the official yearbook index, follow the 2025 yearbook to table 1-1 (administrative divisions, 2024), and retain/hash the official table/PDF bytes."
+    },
+    {
+      "id": "sansha-jurisdiction",
+      "title": "People's Republic of China Ministry of Finance, Sansha City jurisdiction notice",
+      "url": "https://www.mof.gov.cn/zhengwuxinxi/xinwenlianbo/hainancaizhengxinxilianbo/201307/t20130730_970652.htm",
+      "retrieved_on_utc": "2026-10-06",
+      "access": "Official central-government page, search indexed; local capture not retained.",
+      "restoration": "Fetch exact official URL, retain original response and hash.",
+      "finding": "The page says Sansha administers the reefs/islands and sea areas of Xisha, Zhongsha and Nansha and is a prefecture-level city. The issue source feature Wenchangxian has bbox [110.429148605, 19.282446738, 111.033916258, 20.133496589], on Hainan Island, and is parented to the Sansha framework group. Alongside the Hainan yearbook's separate Wenchang City and Sansha rows, this is a sourced parent correction finding; the source polygon still needs current official boundary comparison."
+    },
+    {
+      "id": "qiongshan-adjustment-2002",
+      "title": "Qiongshan District official local government history page",
+      "url": "https://www.ycqfw.gov.cn/html/2019/tdbb_0929/8887.html",
+      "retrieved_on_utc": "2026-10-06",
+      "access": "Local government discipline-inspection commission page, search indexed; original bytes not retained.",
+      "restoration": "Fetch exact page and retain/hash the section stating the October 2002 adjustment and conversion of Qiongshan City to Qiongshan District.",
+      "finding": "The official local history page states Qiongshan City was converted to Qiongshan District in the October 2002 Haikou/Qiongshan adjustment. Treat the separate 2017 Qiongshanshi source row as an old-vintage predecessor requiring crosswalk to current Haikou district geometry, not as a current city-level unit."
+    },
+    {
+      "id": "guangxi-2025-administrative-roster",
+      "title": "Guangxi Zhuang Autonomous Region Government, Administrative Divisions and Population, as of 2025-12-31",
+      "url": "https://www.gxzf.gov.cn/html/mlgxi/gxrw/qhrk/t1003588.shtml",
+      "retrieved_on_utc": "2026-10-06",
+      "access": "Official government search-indexed page; capture not retained in this runtime.",
+      "restoration": "Retrieve the exact page URL, retain/hash its original response bytes, and retain the official 2025 county/city roster table.",
+      "finding": "The official roster reports 14 prefecture-level divisions and 111 county-level divisions and enumerates each prefecture's current counties/cities. This corroborates the 14 Guangxi parent city names in the packet, but the 2017 shapeID-to-current-code/parent correspondence still needs a row-level Chinese-name/code map."
+    },
+    {
+      "id": "guangxi-civil-affairs-2024",
+      "title": "Guangxi Civil Affairs Department, 2024 Civil Affairs Statistical Bulletin",
+      "url": "https://mzt.gxzf.gov.cn/xxgk/tjxx/tjgb/t25447308.shtml",
+      "retrieved_on_utc": "2026-10-06",
+      "access": "Official primary source search index; direct download did not complete. Original bytes/hash not claimed.",
+      "restoration": "Fetch exact official URL; archive original bytes and hash; retain the administrative-division section and publication date.",
+      "finding": "As of 2024 year-end, 14 prefecture-level, 111 county-level, and 1,256 township-level administrative units. Counts contextualize tiering, not spatial correctness."
+    },
+    {
+      "id": "guangdong-standard-maps-2019",
+      "title": "Guangdong Government announcement of 176 reviewed standard maps (2019 edition)",
+      "url": "https://www.gd.gov.cn/gdywdt/bmdt/content/post_2275980.html",
+      "retrieved_on_utc": "2026-10-06",
+      "access": "Official government source, search indexed. The 2019 map products themselves were not downloaded or geometrically compared in this packet.",
+      "restoration": "Retrieve the linked official 2019 Guangdong administrative map sheets covering the issue's Guangdong and coastal neighbor edges. Preserve map review numbers, exact bytes, retrieval date, reuse terms and hash; do not use screenshots as substitute boundary data.",
+      "finding": "The announcement says the 2019 provincial standard-map administrative boundaries were reviewed by the provincial natural-resources authority and includes 21 prefecture-level cities and 176 map products. This is authoritative visual reference context, not a current machine-readable boundary proof."
+    },
+    {
+      "id": "national-statistics-code-publication-policy",
+      "title": "National Bureau of Statistics answer on accessing statistical division codes (2025-08-25)",
+      "url": "https://www.stats.gov.cn/hd/lyzx/zxgk/202509/t20250903_1960996.html",
+      "retrieved_on_utc": "2026-10-06",
+      "access": "Official web search index; direct capture not retained.",
+      "restoration": "Retrieve exact official page and retain/hash response bytes if a public code source is needed.",
+      "finding": "NBS says that since October 2024 it continues publishing statistical code methods but no longer publishes the specific code files. Statistical code requests are not a usable public substitute for current Ministry of Civil Affairs / provincial administrative rosters."
+    }
+  ],
+  "research_limits": [
+    "Official current county-level legal boundary bytes and reuse conditions have not been recovered for the 198 mainland China source features.",
+    "The current 2025 Hainan yearbook official listing is known, but its exact table bytes were unavailable; the 2024 yearbook's 2023 table and official 2024 bulletin support the identified roster discrepancy.",
+    "No current legal polygon overlay, boundary validity, gap/overlap, coastline/island completeness, or neighbor-alignment test was performed for Guangdong, Guangxi, Hainan, Hong Kong, Macao, Fujian, Jiangxi, Hunan, Yunnan, Vietnam, or South China Sea island units.",
+    "The Natural Earth HKG/MAC member IDs are reproducible from retained Admin 1 DBF rows; this does not certify source geometry against current official SAR boundaries.",
+    "The 2017 source has no official locality code or parent key. Present-day parent support for every mainland row therefore remains incomplete even when current framework labels and source names appear plausible."
+  ]
+}
