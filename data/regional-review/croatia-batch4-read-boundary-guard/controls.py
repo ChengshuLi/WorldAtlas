@@ -132,7 +132,10 @@ def run_controls() -> dict:
             # Preserve and authenticate completed runs after a later control
             # failure; never overwrite or silently rerun a reserved name.
             record = json.loads((directory / 'run-record.json').read_bytes())
-            if record.get('runner') != issue_inputs['runner']:
+            prior_runner = record.get('runner') or {}
+            current_runner = issue_inputs['runner']
+            if any(prior_runner.get(key) != current_runner.get(key)
+                   for key in ('path', 'git_blob', 'sha256', 'bytes')):
                 raise ValueError(f'preserved {run_id} was produced by another runner head')
             for name, expected in record.get('outputs', {}).items():
                 if name not in reproduce.FILES or sha((directory / name).read_bytes()) != expected:
