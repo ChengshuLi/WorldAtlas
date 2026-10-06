@@ -1,0 +1,528 @@
+{
+  "version": 1,
+  "issue": 1136,
+  "lane": "geography",
+  "worker_id": "01a10948-7d38-75d0-bc01-4cc28ea41f49",
+  "subject_ids": [
+    "atlas:physical:1538387b190f8f38b83a",
+    "atlas:physical:6163aa608a4bef05f593",
+    "atlas:physical:79218f9fcd9d823dc677",
+    "atlas:physical:8450a9374a58496990c8",
+    "atlas:physical:8ddd55c4674bcf4840cc",
+    "atlas:physical:a00b9b9d765f68873d45",
+    "atlas:physical:a8dd3c7691065856ab31",
+    "atlas:physical:c34c73a63b55a4ea2c4f",
+    "atlas:physical:d346a38b9d0cf68f0bab",
+    "atlas:physical:e8ac26e9505fda358bb9",
+    "atlas:physical:f839689847902ae299b2",
+    "atlas:physical:fd7386efa898786d2eb7",
+    "atlas:physical:fdc046e8a7e7466ef4d6",
+    "gb:BWA:ADM2:55941954B20262478145890",
+    "gb:BWA:ADM2:55941954B26927140411587",
+    "gb:BWA:ADM2:55941954B28903282369970",
+    "gb:BWA:ADM2:55941954B31216508800768",
+    "gb:BWA:ADM2:55941954B34591946516146",
+    "gb:BWA:ADM2:55941954B39393851070434",
+    "gb:BWA:ADM2:55941954B44678367556360",
+    "gb:BWA:ADM2:55941954B45615354641166",
+    "gb:BWA:ADM2:55941954B49613130605683",
+    "gb:BWA:ADM2:55941954B49792364057910",
+    "gb:BWA:ADM2:55941954B50535260459809",
+    "gb:BWA:ADM2:55941954B56458887922680",
+    "gb:BWA:ADM2:55941954B61152089533455",
+    "gb:BWA:ADM2:55941954B76527564067138",
+    "gb:BWA:ADM2:55941954B82526344478572",
+    "gb:BWA:ADM2:55941954B84762067272179",
+    "gb:BWA:ADM2:55941954B86221332842775",
+    "gb:BWA:ADM2:55941954B87089695796057",
+    "gb:BWA:ADM2:55941954B89738474745599",
+    "gb:BWA:ADM2:55941954B92705944270684",
+    "gb:BWA:ADM2:55941954B98371115502172",
+    "gb:BWA:ADM2:55941954B98579419812372",
+    "gb:LSO:ADM1:63558799B33254441338778",
+    "gb:LSO:ADM1:63558799B57972026302791",
+    "gb:LSO:ADM1:63558799B58245420334254",
+    "gb:LSO:ADM1:63558799B62052207870559",
+    "gb:LSO:ADM1:63558799B64035332832072",
+    "gb:LSO:ADM1:63558799B80267127102175",
+    "gb:LSO:ADM1:63558799B83139219064193",
+    "gb:LSO:ADM1:63558799B8829159228001",
+    "gb:LSO:ADM1:63558799B90026421394578",
+    "gb:LSO:ADM1:63558799B97764260128978"
+  ],
+  "subject_ids_sha256": "d72588d3ca265d7d554029d981613ea6234f19f8c7e6eb3b83e46b68ffb1643f",
+  "baseline": {
+    "commit": "ebfc498397c64706177cc8d885d916d446fe19a8",
+    "files": [
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-13.json",
+        "bytes": 5709487,
+        "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-2.json",
+        "bytes": 6259307,
+        "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-b9aef9289b79194e/findings/source-register.json",
+        "bytes": 18354,
+        "sha256": "f35089b4369f02119abe0973683c507643e7a3fe37b6a82706b7cb6e480e78cb",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-b9aef9289b79194e/findings/subject-roster.jsonl",
+        "bytes": 265780,
+        "sha256": "72f51e67aaebeab0df81e40763f3b372662d0928ba1bbeaf70c498a776ee30fe",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-b9aef9289b79194e/sources/gb-BWA-ADM2.geojson",
+        "bytes": 219907,
+        "sha256": "466b6a2c45c81ade313403f7cfe004325079bbaa0cd06c97e7bc5c5b5c43db5e",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-b9aef9289b79194e/sources/gb-LSO-ADM1.geojson",
+        "bytes": 1229492,
+        "sha256": "d2402f2fd99b06d894237e652f70d3e163b4e0cf5f95bb8e2227a1d5f3162a19",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {
+      "administrative-sources.json": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "geography_part-13.json": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1",
+      "geography_part-2.json": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf",
+      "hierarchy.json": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "world-index.json": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "source_register_435": "f35089b4369f02119abe0973683c507643e7a3fe37b6a82706b7cb6e480e78cb"
+    },
+    "pin_files": {
+      "administrative-sources.json": "data/administrative-sources.json",
+      "geography_part-13.json": "data/geography/part-13.json",
+      "geography_part-2.json": "data/geography/part-2.json",
+      "hierarchy.json": "data/hierarchy.json",
+      "world-index.json": "data/world-index.json",
+      "source_register_435": "data/regional-review/regional-review-b9aef9289b79194e/findings/source-register.json"
+    },
+    "subject_files": {
+      "gb:BWA:ADM2:55941954B50535260459809": "data/geography/part-2.json",
+      "gb:BWA:ADM2:55941954B28903282369970": "data/geography/part-2.json",
+      "gb:BWA:ADM2:55941954B98371115502172": "data/geography/part-2.json",
+      "gb:BWA:ADM2:55941954B49792364057910": "data/geography/part-2.json",
+      "gb:BWA:ADM2:55941954B87089695796057": "data/geography/part-2.json",
+      "gb:BWA:ADM2:55941954B44678367556360": "data/geography/part-2.json",
+      "gb:BWA:ADM2:55941954B89738474745599": "data/geography/part-2.json",
+      "gb:BWA:ADM2:55941954B86221332842775": "data/geography/part-2.json",
+      "gb:BWA:ADM2:55941954B82526344478572": "data/geography/part-2.json",
+      "gb:BWA:ADM2:55941954B92705944270684": "data/geography/part-2.json",
+      "gb:BWA:ADM2:55941954B61152089533455": "data/geography/part-2.json",
+      "atlas:physical:fd7386efa898786d2eb7": "data/geography/part-2.json",
+      "atlas:physical:a00b9b9d765f68873d45": "data/geography/part-2.json",
+      "gb:BWA:ADM2:55941954B31216508800768": "data/geography/part-2.json",
+      "gb:BWA:ADM2:55941954B76527564067138": "data/geography/part-2.json",
+      "gb:BWA:ADM2:55941954B45615354641166": "data/geography/part-2.json",
+      "gb:BWA:ADM2:55941954B56458887922680": "data/geography/part-2.json",
+      "gb:BWA:ADM2:55941954B20262478145890": "data/geography/part-2.json",
+      "gb:BWA:ADM2:55941954B84762067272179": "data/geography/part-2.json",
+      "atlas:physical:8ddd55c4674bcf4840cc": "data/geography/part-2.json",
+      "atlas:physical:f839689847902ae299b2": "data/geography/part-2.json",
+      "atlas:physical:fdc046e8a7e7466ef4d6": "data/geography/part-2.json",
+      "atlas:physical:d346a38b9d0cf68f0bab": "data/geography/part-2.json",
+      "atlas:physical:6163aa608a4bef05f593": "data/geography/part-2.json",
+      "gb:BWA:ADM2:55941954B98579419812372": "data/geography/part-2.json",
+      "gb:BWA:ADM2:55941954B39393851070434": "data/geography/part-2.json",
+      "gb:BWA:ADM2:55941954B34591946516146": "data/geography/part-2.json",
+      "atlas:physical:79218f9fcd9d823dc677": "data/geography/part-2.json",
+      "atlas:physical:1538387b190f8f38b83a": "data/geography/part-2.json",
+      "atlas:physical:a8dd3c7691065856ab31": "data/geography/part-2.json",
+      "atlas:physical:e8ac26e9505fda358bb9": "data/geography/part-2.json",
+      "atlas:physical:8450a9374a58496990c8": "data/geography/part-2.json",
+      "atlas:physical:c34c73a63b55a4ea2c4f": "data/geography/part-2.json",
+      "gb:BWA:ADM2:55941954B26927140411587": "data/geography/part-2.json",
+      "gb:BWA:ADM2:55941954B49613130605683": "data/geography/part-2.json",
+      "gb:LSO:ADM1:63558799B62052207870559": "data/geography/part-13.json",
+      "gb:LSO:ADM1:63558799B83139219064193": "data/geography/part-13.json",
+      "gb:LSO:ADM1:63558799B80267127102175": "data/geography/part-13.json",
+      "gb:LSO:ADM1:63558799B8829159228001": "data/geography/part-13.json",
+      "gb:LSO:ADM1:63558799B33254441338778": "data/geography/part-13.json",
+      "gb:LSO:ADM1:63558799B90026421394578": "data/geography/part-13.json",
+      "gb:LSO:ADM1:63558799B64035332832072": "data/geography/part-13.json",
+      "gb:LSO:ADM1:63558799B97764260128978": "data/geography/part-13.json",
+      "gb:LSO:ADM1:63558799B57972026302791": "data/geography/part-13.json",
+      "gb:LSO:ADM1:63558799B58245420334254": "data/geography/part-13.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "BWA-RCMRD-2015",
+      "url": "https://www.geoboundaries.org/",
+      "role": "Retained original 25-feature Botswana ADM2 source, source-reported RCMRD",
+      "vintage": "2015; source commit 9469f09592ced973a3448cf66b6100b741b64c0d",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "redistributable",
+        "terms": "Original geoBoundaries metadata declares Public Domain; preserve source attribution and metadata lineage."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2015,
+        "to": 2016
+      },
+      "files": [
+        {
+          "path": "data/regional-review/botswana-lesotho-source-restoration-435/sources/gb-BWA-ADM2-2015.geojson",
+          "bytes": 219907,
+          "sha256": "466b6a2c45c81ade313403f7cfe004325079bbaa0cd06c97e7bc5c5b5c43db5e",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "LSO-GB-2017",
+      "url": "https://www.geoboundaries.org/",
+      "role": "Retained original Lesotho ADM1 input, source metadata describes OSM-derived districts",
+      "vintage": "2017",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "redistributable",
+        "terms": "ODbL 1.0 as declared by source metadata; attribution/share-alike obligations apply; not proof of authority."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2017,
+        "to": 2018
+      },
+      "files": [
+        {
+          "path": "data/regional-review/botswana-lesotho-source-restoration-435/sources/gb-LSO-ADM1-2017.geojson",
+          "bytes": 1229492,
+          "sha256": "d2402f2fd99b06d894237e652f70d3e163b4e0cf5f95bb8e2227a1d5f3162a19",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "BWA-STATSBOTS-2022",
+      "url": "https://www.statsbots.org.bw/sites/default/files/publications/Population%20and%20Housing%20Census%202022-Administrative%20and%20Technical%20Report%20Version%202.pdf",
+      "role": "official census operation/roster, not legal boundary proof",
+      "vintage": "2022 PHC report version 2 (published 2025)",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "restricted",
+        "terms": "Statistics Botswana terms allow statistical data reuse with acknowledgement; report publication copyrighted; PDF not redistributed."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "GET exact URL and verify 1,753,665 bytes and SHA-256 eca23da4cb3dfa1dcc1df8b53d6abe5a0790db3dc3c95a329e7f80bd9caf0034; preserve URL/hash only; cite Statistics Botswana.",
+      "limit": "Census category does not certify statutory status or polygon geometry."
+    },
+    {
+      "id": "BWA-GOV-DSM-ACCESS",
+      "url": "https://www.gov.bw/land-management/maps-and-geospatial-data?page=1",
+      "role": "official access route to survey and mapping layers",
+      "vintage": "accessed 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Government page indicates request/fee access; selected layer reuse license unknown."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Request dated district/subdistrict layer, legal basis, completeness, neighbor coverage, source vintage and written reuse/adaptation terms from Department of Surveys and Mapping.",
+      "limit": "No licensed, reproducible, current Botswana boundary data available here."
+    },
+    {
+      "id": "BWA-MBR-ESRI-2025",
+      "url": "https://www.arcgis.com/home/item.html?id=fad4c62442ca40f49d7ac5f8b28aaaaf",
+      "role": "public metadata of commercial 2025 subdistrict product",
+      "vintage": "2025; item updated 2025-10-31",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "restricted",
+        "terms": "Esri Master License says offline export prohibited; subscription or registered developer required."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Use metadata only; obtain vendor permission or a lawful open source before comparing geometries.",
+      "limit": "Boundary data not exported or retained."
+    },
+    {
+      "id": "LSO-GOV-2022",
+      "url": "https://www.gov.ls/wp-content/uploads/2022/03/Third-National-Communication.pdf",
+      "role": "official national report for administrative tiers/counts; figure map credited to Lesotho Meteorological Services",
+      "vintage": "2022",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "restricted",
+        "terms": "Copyright/reuse terms not established."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Restore verified HTTPS transfer or request official copy and reuse terms; prior declared length 26,096,689 bytes, earlier bounded retrieval timed out at 3,538,464 bytes. Never disable TLS verification.",
+      "limit": "Complete response not retained; no whole-file hash."
+    },
+    {
+      "id": "LSO-DELIMITATION-2022",
+      "url": "https://www.gov.ls/wp-content/uploads/2022/04/Constituency-Delimitation-Order.pdf",
+      "role": "official electoral constituency delimitation legal notice",
+      "vintage": "2022 order based on census available in 2018",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Redistribution license not stated."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Retrieve full official PDF, hash exact bytes and check terms; individual deposited constituency maps and schedule prevail over convenience district aggregates.",
+      "limit": "Electoral boundaries do not provide district/community-council boundaries."
+    },
+    {
+      "id": "LSO-IEC-MAPS-2025",
+      "url": "https://iec.org.ls/constituency-maps/",
+      "role": "official election constituency map listing",
+      "vintage": "page lists 2025-07-05",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms unknown."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Retain source links, vintage, sizes and hashes after terms verification.",
+      "limit": "Electoral purpose only; not a district/community-council polygon source."
+    },
+    {
+      "id": "LSO-SALB-2024",
+      "url": "https://salb.un.org/en/data/lso",
+      "role": "nationally validated administrative district layer metadata",
+      "vintage": "temporal validity from 1990; last update 2024-06-24",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "restricted",
+        "terms": "SALB terms: noncommercial use, attribution to UN and contributor, no geometry changes without contributor consent."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Request versioned polygons and explicit reuse/adaptation permission from the National Geospatial Information Authority / Department of Lands, Surveys and Physical Planning and SALB.",
+      "limit": "No geometry or consent retained; commercial reuse/modification cannot be assumed."
+    },
+    {
+      "id": "LSO-SALB-TERMS",
+      "url": "https://salb.un.org/sites/default/files/wysiwyg_uploads/docs_uploads/TermsOfUseSALB2021.pdf",
+      "role": "dataset reuse terms",
+      "vintage": "2021",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "restricted",
+        "terms": "Noncommercial; attribution required; geometry/content changes require contributor consent."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Re-read current terms and obtain contributor consent before any geometry adaptation.",
+      "limit": "Terms may change and do not authorize current use without live recheck/consent."
+    },
+    {
+      "id": "LSO-DRWS-MAPSERVER",
+      "url": "https://drws.gov.ls/server/rest/services/LesothoBoundaries/MapServer",
+      "role": "potential official district/community-council map service; endpoint access denied",
+      "vintage": "unknown",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Attribution and license metadata were not returned."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Request authenticated service metadata and layer access, vintage, completeness, attribution and redistribution rights; exact response retained in findings/lesotho-service-access.json and sources/lesotho-drws-token-required-response.json.",
+      "limit": "HTTP 200 body carries ArcGIS app error 499 Token Required, so there is no usable service metadata/data."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/botswana-lesotho-source-restoration-435/findings/lesotho-service-access.json",
+      "bytes": 832,
+      "sha256": "d36244a60b5b11f1caf38cbad78bc08924e75d73714e0df306433042c091e734",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/botswana-lesotho-source-restoration-435/findings/reproduction.json",
+      "bytes": 2921,
+      "sha256": "1f0f4eaf304b5ffa388b84a3e194d6071e723002ab01957451ff10b83c36f998",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/botswana-lesotho-source-restoration-435/findings/source-register.json",
+      "bytes": 10694,
+      "sha256": "bbf7f1a9f71ac455c7d1424f93b5a58caa3767162deb3a7437a1c4db901195c2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/botswana-lesotho-source-restoration-435/findings/subject-assessments.jsonl",
+      "bytes": 65707,
+      "sha256": "f6a39065c77c11092c0e937a12ccb2a65bdb106b36041b2d4742f059487ce578",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/botswana-lesotho-source-restoration-435/findings/subject-roster-45.jsonl",
+      "bytes": 21726,
+      "sha256": "656455fe0146695b1769bdb1262b10a31743d2c886e72cf59c9dca73b3d2ecf1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/botswana-lesotho-source-restoration-435/review.md",
+      "bytes": 6811,
+      "sha256": "de16e8bdc47de55013e429cdc14ae07206cf01eaa19ba351c6295c1cc230f964",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/botswana-lesotho-source-restoration-435/scripts/reproduce.py",
+      "bytes": 5055,
+      "sha256": "ac90f0c0273a025f4ab985e48a2cc199571ea66b0177bba2c517d113827ce88e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/botswana-lesotho-source-restoration-435/sources/lesotho-drws-token-required-response.json",
+      "bytes": 81,
+      "sha256": "f705ab4b9ce1218b9bdcfb1d1c913f7530eb03da2197303e4bc5296871af1bdd",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "source-roster-review",
+      "kind": "source",
+      "description": "Exact-join all declared #1136 IDs to the immutable #435 roster and fresh-main GeoJSON, preserve source/parent identifiers, check the pinned baselines and exact retained input hashes. Interpret administrative meaning independently from geometry evidence; no polygon correctness measurement is claimed.",
+      "software": "Python standard library (reproduce.py); manual primary-source interpretation dated 2026-10-06",
+      "units": "subject identities and whole-file bytes"
+    }
+  ],
+  "validation": [],
+  "metrics": [],
+  "summaries": [],
+  "metric_bindings": [],
+  "conclusions": [
+    {
+      "text": "The 45 subjects and their prior source/parent lineage reproduce exactly from fresh main and retained #435 evidence.",
+      "status": "supported",
+      "source_ids": [
+        "BWA-RCMRD-2015",
+        "LSO-GB-2017"
+      ]
+    },
+    {
+      "text": "Official sources support multiple census/electoral/district roles and identify a current lawful boundary-source access/permission gap; none of the checked operational rosters certifies the 2015/2017 polygons or authorizes hierarchy deletion.",
+      "status": "supported",
+      "source_ids": [
+        "BWA-STATSBOTS-2022",
+        "BWA-GOV-DSM-ACCESS",
+        "BWA-MBR-ESRI-2025",
+        "LSO-GOV-2022",
+        "LSO-DELIMITATION-2022",
+        "LSO-SALB-2024",
+        "LSO-DRWS-MAPSERVER"
+      ]
+    },
+    {
+      "text": "Whether the 2015 Botswana and 2017 Lesotho geometries represent current legal territories, and whether ten repeated Lesotho parent labels are intentional, remains unresolved.",
+      "status": "unresolved",
+      "source_ids": [
+        "BWA-GOV-DSM-ACCESS",
+        "BWA-MBR-ESRI-2025",
+        "LSO-SALB-2024",
+        "LSO-DRWS-MAPSERVER"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 data/regional-review/botswana-lesotho-source-restoration-435/scripts/reproduce.py",
+    "python3 -m json.tool data/regional-review/botswana-lesotho-source-restoration-435/findings/source-register.json >/dev/null",
+    "python3 -m json.tool data/regional-review/botswana-lesotho-source-restoration-435/findings/reproduction.json >/dev/null"
+  ],
+  "change_receipts": [
+    {
+      "path": "data/regional-review/botswana-lesotho-source-restoration-435/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/botswana-lesotho-source-restoration-435/findings/lesotho-service-access.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/botswana-lesotho-source-restoration-435/findings/reproduction.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/botswana-lesotho-source-restoration-435/findings/source-register.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/botswana-lesotho-source-restoration-435/findings/subject-assessments.jsonl",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/botswana-lesotho-source-restoration-435/findings/subject-roster-45.jsonl",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/botswana-lesotho-source-restoration-435/review.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/botswana-lesotho-source-restoration-435/scripts/reproduce.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/botswana-lesotho-source-restoration-435/sources/gb-BWA-ADM2-2015.geojson",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/botswana-lesotho-source-restoration-435/sources/gb-LSO-ADM1-2017.geojson",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/botswana-lesotho-source-restoration-435/sources/lesotho-drws-token-required-response.json",
+      "status": "added"
+    }
+  ]
+}

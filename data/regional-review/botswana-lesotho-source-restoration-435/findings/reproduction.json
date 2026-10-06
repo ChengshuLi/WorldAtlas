@@ -1,0 +1,69 @@
+{
+  "atlas_feature_matches": {
+    "part-13": 10,
+    "part-2": 35
+  },
+  "baseline_commit": "ebfc498397c64706177cc8d885d916d446fe19a8",
+  "controls": {
+    "negative_duplicate_subject_id": "passed",
+    "positive_exact_roster_and_lineage": "passed"
+  },
+  "interpretation_limit": "Identity, lineage, and hash checks do not establish legal territorial meaning, currentness, boundary correctness, license beyond retained metadata, regional approval, publication, or import permission.",
+  "issue": 1136,
+  "lineage": "all source IDs, names, parent IDs/names and source IDs match the prior immutable subject roster",
+  "outcome": "passed",
+  "pinned_inputs": {
+    "data/administrative-sources.json": {
+      "expected_sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "matched": true,
+      "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+    },
+    "data/geography/part-13.json": {
+      "expected_sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1",
+      "matched": true,
+      "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1"
+    },
+    "data/geography/part-2.json": {
+      "expected_sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf",
+      "matched": true,
+      "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf"
+    },
+    "data/hierarchy.json": {
+      "expected_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "matched": true,
+      "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+    },
+    "data/regional-review/regional-review-b9aef9289b79194e/findings/source-register.json": {
+      "expected_sha256": "f35089b4369f02119abe0973683c507643e7a3fe37b6a82706b7cb6e480e78cb",
+      "matched": true,
+      "sha256": "f35089b4369f02119abe0973683c507643e7a3fe37b6a82706b7cb6e480e78cb"
+    },
+    "data/world-index.json": {
+      "expected_sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "matched": true,
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+    }
+  },
+  "retained_sources": {
+    "sources/gb-BWA-ADM2-2015.geojson": {
+      "expected_sha256": "466b6a2c45c81ade313403f7cfe004325079bbaa0cd06c97e7bc5c5b5c43db5e",
+      "matched": true,
+      "sha256": "466b6a2c45c81ade313403f7cfe004325079bbaa0cd06c97e7bc5c5b5c43db5e"
+    },
+    "sources/gb-LSO-ADM1-2017.geojson": {
+      "expected_sha256": "d2402f2fd99b06d894237e652f70d3e163b4e0cf5f95bb8e2227a1d5f3162a19",
+      "matched": true,
+      "sha256": "d2402f2fd99b06d894237e652f70d3e163b4e0cf5f95bb8e2227a1d5f3162a19"
+    }
+  },
+  "scope": {
+    "botswana": 35,
+    "botswana_adm2_direct": 22,
+    "botswana_ecological_clips": 13,
+    "expected_unique_ids": 45,
+    "lesotho": 10,
+    "lesotho_adm1_districts": 10,
+    "matched_ids": 45
+  },
+  "version": 1
+}
