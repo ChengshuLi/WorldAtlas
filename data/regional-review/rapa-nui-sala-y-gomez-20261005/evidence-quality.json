@@ -323,6 +323,10 @@
       "status": "added"
     },
     {
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/evidence-quality.json",
+      "status": "added"
+    },
+    {
       "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/geometry-controls.json",
       "status": "added"
     },
@@ -336,6 +340,14 @@
     },
     {
       "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/geometry-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/neighbor-negative.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/neighbor-positive.json",
       "status": "added"
     },
     {
@@ -396,14 +408,6 @@
     },
     {
       "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/verify.py",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/neighbor-positive.json",
-      "status": "added"
-    },
-    {
-      "path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/neighbor-negative.json",
       "status": "added"
     }
   ],
@@ -487,11 +491,12 @@
       "units": "file identities, features, bytes and SHA-256"
     },
     {
-      "area_method": "not applicable; representative-point screening only",
+      "area_method": "WGS84 straight-source-edge ellipsoidal integral (not used by this point-only screen)",
       "axis_order": "longitude-latitude",
       "crs": "EPSG:4326",
       "description": "Read all 34 immutable baseline data/geography/part-N.json shards, require a stored representative point for each feature, and screen WGS84 inverse-geodesic distances from the official Salas y Gómez decree coordinate. Record all points within 2,500 km and the ten nearest other features with source tier, role, parent, vintage, coordinates and shard. This is point proximity only; it is not polygon adjacency or maritime jurisdiction.",
       "distance_method": "WGS84 inverse geodesic between stored representative points",
+      "helper_version": "worldatlas-evidence-geometry-v1",
       "id": "neighbor-point-screen",
       "kind": "geography",
       "software": "Python 3.12.14; pyproj 3.7.2; worldatlas-evidence-geometry-v1; Git immutable blobs",
