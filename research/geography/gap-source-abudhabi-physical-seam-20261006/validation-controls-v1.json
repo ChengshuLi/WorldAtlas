@@ -1,32 +1,39 @@
 {
-  "component_contact_rows": 51,
-  "component_count": 134,
-  "component_roster_sha256": "b7af8568f5972dd935d8cc85d16c19f349938ea6810b6b2b391c92d4a1b9df94",
-  "contact_type_counts": {
-    "point-only-ambiguous": 45,
-    "shared-edge": 6
-  },
-  "eco_overlap_counts": {
-    "no_intersection": 0,
-    "positive_area": 132,
-    "zero_area": 2
-  },
-  "fragment_binding_count": 140,
-  "historical_source_hash": "unavailable in pinned baseline; current captured bytes are not represented as historical",
   "kind": "measurement",
-  "method_id": "source-overlay-controls",
+  "method_id": "exact-source-overlay",
   "negative_controls": [
-    "A selected component does not intersect adjacent ECO_ID 320 (Indus River Delta-Arabian Sea mangroves).",
-    "Appending one byte to retained source input differs from its pinned SHA256.",
-    "Removing one roster ID changes exact count and canonical roster digest.",
-    "Removing one component-contact row changes the required 51-row count.",
-    "The deliberately incorrect current ObjectID 810/811 selection returns ECO_ID 519/643 rather than Abu Dhabi regions.",
-    "The 2017 layer title is kept separate from 2026 current-service retrieval date."
+    {
+      "control": "changed-source-bytes",
+      "guard": "Source whole-file SHA-256 mismatch",
+      "outcome": "rejected-as-required"
+    },
+    {
+      "control": "omitted-component",
+      "guard": "Exact component roster count/uniqueness mismatch",
+      "outcome": "rejected-as-required"
+    },
+    {
+      "control": "omitted-contact-row",
+      "guard": "Complete selected contact inventory mismatch",
+      "outcome": "rejected-as-required"
+    },
+    {
+      "control": "historical-vintage-laundering",
+      "guard": "Current service bytes cannot be labelled as a historical snapshot",
+      "outcome": "rejected-as-required"
+    },
+    {
+      "control": "altered-selector-transform",
+      "guard": "Simplified download URL does not follow the pinned selector transform",
+      "outcome": "rejected-as-required"
+    }
   ],
   "outcome": "passed",
-  "positive_controls": [
-    "A selected component intersects ECO_ID 811 (Arabian-Persian Gulf coastal plain desert).",
-    "All selected components intersect both current Atlas physical features and the retained Abu Dhabi administrative source polygon."
-  ],
-  "source_response_sha256": "5a7c0583209df1145fb542d595b122b90147ac2e62c0f5dc442f8909f7d67c65"
+  "positive_controls": {
+    "component_contact_rows": 51,
+    "component_roster_sha256": "b7af8568f5972dd935d8cc85d16c19f349938ea6810b6b2b391c92d4a1b9df94",
+    "current_service_response_vintage": "accepted-with-explicit-current-label",
+    "pinned_ADM1_selector_transform": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/ARE/ADM1/geoBoundaries-ARE-ADM1_simplified.geojson",
+    "source_pin_sha256": "5a7c0583209df1145fb542d595b122b90147ac2e62c0f5dc442f8909f7d67c65"
+  }
 }
