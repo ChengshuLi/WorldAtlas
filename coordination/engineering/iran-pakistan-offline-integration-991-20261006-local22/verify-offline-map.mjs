@@ -120,6 +120,7 @@ try{
   fs.mkdirSync(out);
   for(const renderer of ['webgl2','canvas']){
     const context=await browser.newContext({viewport:{width:1440,height:1080},deviceScaleFactor:1});
+    let activePage,lastProbe;
     try{
       // Chrome's inspector drops bodies above its per-resource cache limit.
       // Hash a clone of the actual browser response without changing app bytes.
@@ -137,6 +138,7 @@ try{
       });
       if(renderer==='canvas')await context.addInitScript(()=>{const original=HTMLCanvasElement.prototype.getContext;HTMLCanvasElement.prototype.getContext=function(kind,...args){return kind==='webgl2'?null:original.call(this,kind,...args);};});
       const page=await context.newPage(),errors=[],httpErrors=[],requests=[],consoleErrors=[],failedLocalRequests=[];
+      activePage=page;
       const network=await context.newCDPSession(page);
       await network.send('Network.enable',{maxTotalBufferSize:128*1024*1024,maxResourceBufferSize:32*1024*1024});
       page.on('pageerror',e=>errors.push(e.message));page.on('response',response=>{if(response.url().startsWith(base)&&response.status()>=400)httpErrors.push({url:response.url(),status:response.status()});});
@@ -180,6 +182,7 @@ try{
         const probes=[camera.samples[0],camera.samples[Math.floor(camera.samples.length/2)],camera.samples.at(-1)];
         const picks=[];
         for(const probe of probes){
+          lastProbe={...probe,subject:subject.id};
           await page.mouse.move(...probe.screen);await page.locator('.leaflet-tooltip').waitFor({state:'visible'});
           assert.equal(await page.locator('.leaflet-tooltip').textContent(),subject.name,'Actual pointer hover picks the supported new native owner');
           await page.mouse.click(...probe.screen);await page.locator('#details').waitFor({state:'visible'});
@@ -195,6 +198,19 @@ try{
       assert.deepEqual(failedLocalRequests.filter(r=>r.error!=='net::ERR_ABORTED'),[]);
       assert.ok(!requests.some(url=>new URL(url).pathname.startsWith('/api/')),'Offline static app must not require hosted API');
       results.push({renderer,startup,profiles:profileResults,page_errors:errors,http_errors:httpErrors,console_errors:consoleErrors,failed_local_requests:failedLocalRequests,local_requests:requests.filter(url=>url.startsWith(base)).map(url=>new URL(url).pathname)});
+    }catch(error){
+      if(activePage){
+        const state=await activePage.evaluate(probe=>{
+          const element=probe&&document.elementFromPoint(...probe.screen);
+          return {canvas:document.querySelector('.atlas-pixel-canvas')?.dataset,
+            details:{hidden:document.querySelector('#details')?.hidden,key:document.querySelector('#details')?.dataset.profileKey},
+            tooltip:document.querySelector('.leaflet-tooltip')?.textContent,
+            hit:element?{tag:element.tagName,id:element.id,className:element.className,ancestors:[...function*(e){while(e){yield e.tagName+'#'+e.id+'.'+e.className;e=e.parentElement;}}(element)]}:null};
+        },lastProbe);
+        fs.writeFileSync(path.join(out,renderer+'-failure.json'),JSON.stringify({error:String(error),lastProbe,state})+'\n',{flag:'wx'});
+        await activePage.screenshot({path:path.join(out,renderer+'-failure.png')});
+      }
+      throw error;
     }finally{await context.close();}
   }
   const comparisons=subjects.map((subject,i)=>{
