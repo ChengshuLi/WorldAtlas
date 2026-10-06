@@ -1,0 +1,18 @@
+{
+  "method_id": "county-product-source-crosswalk",
+  "kind": "reproducibility",
+  "outcome": "passed",
+  "evidence_path": "data/regional-review/south-atlantic-source-reuse-basis-429/reproducibility.json",
+  "run_one_path": "data/regional-review/south-atlantic-source-reuse-basis-429/runs/run-one.json",
+  "run_two_path": "data/regional-review/south-atlantic-source-reuse-basis-429/runs/run-two.json",
+  "run_one_sha256": "6f9e5cfd28ab6083826e4cf9a8f25330f1c4f633d3e662feb92dddb2b7a9cea2",
+  "run_two_sha256": "6f9e5cfd28ab6083826e4cf9a8f25330f1c4f633d3e662feb92dddb2b7a9cea2",
+  "compared_outputs": [
+    "baseline-input-digests.json",
+    "negative-control.json",
+    "positive-control.json",
+    "reproduction-summary.json",
+    "subject-source-crosswalk.jsonl"
+  ],
+  "interpretation": "Two independent Python 3.12 runs emitted byte-identical output receipts and rewrote identical result files. This proves reproducibility of the documented source-identity checks, not legal rights or boundary correctness."
+}

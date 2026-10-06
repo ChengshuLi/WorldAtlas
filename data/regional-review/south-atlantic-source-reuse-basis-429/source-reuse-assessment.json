@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "issue": 1143,
+  "product": {
+    "name": "geoBoundaries gbOpen USA ADM2",
+    "source_id": "gb:USA:ADM2",
+    "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+    "upstream_geojson": {
+      "path": "data/regional-review/regional-review-e5d9b45b0ad3ed31/sources/geoboundaries-USA-ADM2-2018.geojson",
+      "bytes": 10500644,
+      "sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43",
+      "records": 3233
+    },
+    "metadata": {
+      "boundaryYear": "2018",
+      "boundaryType": "ADM2",
+      "boundaryCanonical": "Counties",
+      "boundarySource": "United States Census Bureau, MAF/TIGER Database",
+      "boundaryLicense": "Public Domain",
+      "licenseDetail": "",
+      "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+      "buildDate": "Dec 12, 2023",
+      "admUnitCount": "3233",
+      "metadata_sha256": "a4d2a82a1cd434960b6ed49531bff3330d0881674eea9dc8711e1ad6bf049b9f",
+      "malformed_licenseSource": "https//www.census.gov/programs-surveys/geography/technical-documentation/naming-convention/cartographic-boundary-file.html",
+      "malformed_boundarySourceURL": "https//www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html"
+    }
+  },
+  "underlying_census_source": {
+    "title": "2018 Cartographic Boundary File, County, 1:500,000",
+    "official_archive_page": "https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.2018.html",
+    "file_url": "https://www2.census.gov/geo/tiger/GENZ2018/shp/cb_2018_us_county_500k.zip",
+    "path": "data/regional-review/south-atlantic-source-reuse-basis-429/sources/cb_2018_us_county_500k.zip",
+    "retrieved_utc": "2026-10-06T12:16:52.929Z",
+    "bytes": 11530479,
+    "sha256": "aaa866af327754e1b80aa87bfb97b04a7209f4f871075aef84affb8f0b3afe67",
+    "dbf_records": 3233,
+    "source_relation": "The geoBoundaries per-file metadata names Census MAF/TIGER and links to Census Cartographic Boundary Files. Census describes the 2018 CBF as a simplified MAF/TIGER representation. This file is a source-chain reference; the reproduction tests subject identity by name/state, not polygon-coordinate equivalence."
+  },
+  "provider_terms": {
+    "pinned_project_license": {
+      "path": "data/regional-review/south-atlantic-source-reuse-basis-429/sources/upstream-LICENSE.txt",
+      "sha256": "f3e5a21600528018a566fe0020a8b433f542bd67920c6804aac8929b598035bd",
+      "terms": "At the pinned commit, the LICENSE states that computer code and project-generated derivative works are CC BY 4.0, and that individual data files are governed by the license(s) in each boundary's metadata."
+    },
+    "pinned_product_citation": {
+      "path": "data/regional-review/south-atlantic-source-reuse-basis-429/sources/CITATION-AND-USE-geoBoundaries.txt",
+      "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+      "terms": "The product citation file requests geoBoundaries attribution and use of the project link; users of individual boundary files are also asked to cite source metadata."
+    },
+    "current_api_context": {
+      "path": "data/regional-review/south-atlantic-source-reuse-basis-429/sources/primary-web/geoboundaries-api-current.html",
+      "sha256": "b60cb9a2de8e2a1bcd82b1c53264de665a1c5f0e6a66b66c3c8206d10bd3baff",
+      "retrieved_utc": "2026-10-06",
+      "terms": "Current geoBoundaries API guidance calls gbOpen CC BY 4.0 compliant and requires attribution; it is recorded as current context, not a substitute for the exact 2018 per-file metadata."
+    }
+  },
+  "subject_scope": {
+    "issue_subject_count": 268,
+    "unique_subject_count": 268,
+    "parent_packet": 429,
+    "merged_parent_pr": 977,
+    "parent_commit": "dab6ef29468eb97226f642783127720444f299c9",
+    "parent_scope_path": "data/regional-review/regional-review-e5d9b45b0ad3ed31/issue-scope.json",
+    "parent_scope_sha256": "c77e34add3b9d81c13640daedd7d6a777b7b8e07cbb67fd8d5820543115d0d64",
+    "exact_subject_ids_sha256": "7f932033a3e4ddc32fd1b7742510df1618aad86cdd572196ee1b1025d9616ef0",
+    "source_subjects_resolve_once": 268,
+    "census_name_state_matches_resolve_once": 268
+  },
+  "classification": {
+    "underlying_source_license": "Public Domain as asserted by the pinned per-file metadata for the Census source",
+    "project_derivative_rights": "Unresolved for any specific provider-generated transformation to this 2018 file; the pinned LICENSE simultaneously describes generated derivative works as CC BY 4.0 and individual data files as governed by their per-file metadata.",
+    "attribution": "geoBoundaries explicitly requests product attribution and source citation; Census separately provides source citation guidance. Preserve both credits conservatively.",
+    "legal_conclusion": false,
+    "geographic_approval": false,
+    "production_or_import_authorization": false
+  },
+  "limits": [
+    "The malformed source URL fields in the exact metadata are preserved and not rewritten; the Census archive page provides an actionable restoration route.",
+    "The 2018 source vintage is historical relative to current county boundaries and is not a current authority.",
+    "Name/state matching does not prove geographic boundary identity, positional accuracy, or component completeness.",
+    "The project terms do not clarify whether its CC BY derivative-works statement asserts additional rights over this specific source-derived boundary file.",
+    "This evidence records source statements and cautious attribution practices; it is not legal advice."
+  ]
+}
