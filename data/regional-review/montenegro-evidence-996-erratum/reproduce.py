@@ -458,7 +458,7 @@ def finalize():
     runner_commit, runner_blob = verify_running_code()
     issue, spec, quality, reservation = load_issue_contract()
     pin_records, phase_bytes, descriptor_count = verified_inputs(quality)
-    run_dirs = [PACKET / "runs/2026-10-06/anchored-v8/run-1", PACKET / "runs/2026-10-06/anchored-v8/run-2"]
+    run_dirs = [PACKET / "runs/2026-10-06/anchored-v9/run-1", PACKET / "runs/2026-10-06/anchored-v9/run-2"]
     if any(not path.is_dir() for path in run_dirs):
         raise GuardError("both fresh run directories are required before finalization")
     outputs = []
@@ -498,7 +498,7 @@ def finalize():
         "run_two_path": run_dirs[1].relative_to(ROOT).as_posix(),
         "all_three_outputs_byte_identical": True
     }
-    reproduction_path = PACKET / "reproducibility-control-anchored-v8.json"
+    reproduction_path = PACKET / "reproducibility-control-anchored-v9.json"
     reproduction_bytes = canonical(reproduction_control)
 
     # The manifest contains the complete frozen issue pin set. All b6cfa files
@@ -714,8 +714,8 @@ def finalize():
         ],
         "stages": {"research": "partial", "implementation": "not-proposed", "geographic_approval": "unapproved"},
         "commands": [
-            "python data/regional-review/montenegro-evidence-996-erratum/reproduce.py run --output-dir data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v8/run-1",
-            "python data/regional-review/montenegro-evidence-996-erratum/reproduce.py run --output-dir data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v8/run-2",
+            "python data/regional-review/montenegro-evidence-996-erratum/reproduce.py run --output-dir data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-1",
+            "python data/regional-review/montenegro-evidence-996-erratum/reproduce.py run --output-dir data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v9/run-2",
             "python data/regional-review/montenegro-evidence-996-erratum/reproduce.py finalize"
         ],
         "change_receipts": [],
@@ -747,8 +747,10 @@ def finalize():
                                 {"run_dir": "runs/2026-10-06/anchored-v5/run-1", "reason": "Superseded because its manifest omitted bindings for the inherited numeric report ledger; the independent runner outputs remain retained."},
                                 {"run_dir": "runs/2026-10-06/anchored-v5/run-2", "reason": "Superseded because its manifest omitted bindings for the inherited numeric report ledger; the independent runner outputs remain retained."},
                                 {"run_dir": "runs/2026-10-06/anchored-v6/run-1", "reason": "Superseded because finalization hit an implementation error before writing any control or manifest; these independent runs remain retained."},
-                                {"run_dir": "runs/2026-10-06/anchored-v6/run-2", "reason": "Superseded because finalization hit an implementation error before writing any control or manifest; these independent runs remain retained."}],
-            "superseded_control": {"path": "data/regional-review/montenegro-evidence-996-erratum/reproducibility-control-anchored-v5.json", "reason": "The v5 evidence manifest did not rebind the complete inherited numeric ledger; the v7 manifest is authoritative."},
+                                {"run_dir": "runs/2026-10-06/anchored-v6/run-2", "reason": "Superseded because finalization hit an implementation error before writing any control or manifest; these independent runs remain retained."},
+                                {"run_dir": "runs/2026-10-06/anchored-v9/run-1", "reason": "Superseded because finalization's exact-prior-manifest allow-list omitted the current v7 manifest; outputs were generated with the corrected input ledger but not finalized."},
+                                {"run_dir": "runs/2026-10-06/anchored-v9/run-2", "reason": "Superseded because finalization's exact-prior-manifest allow-list omitted the current v7 manifest; outputs were generated with the corrected input ledger but not finalized."}],
+            "superseded_control": {"path": "data/regional-review/montenegro-evidence-996-erratum/reproducibility-control-anchored-v7.json", "reason": "A substantive review found that the inherited metric ledger omitted the measured-area assessment input; the v9 manifest adds complete input provenance."},
             "runs_byte_identical": True, "old_packet_modified": False,
             "issue_trigger_fixture_reference": {
                 "reported_bytes": 1129,
@@ -799,6 +801,7 @@ def finalize():
         "537006e3faba297d607f9e3cb70609a58fc39a3c35028109536c19a79dcad724",
         "066046e853e9614d019cd9ec16119c47c3987cbd48fe1a342e7530e334fbd25f",
         "4802af070b4178eaddfa50e3b8fecb49b6f49c4b3e422122f46536ed6e905970",
+        "a8dad5d83dd965e796674661cf780e344c8edcc2fb78585a07e20857559ef203",
     }
     if manifest_path.exists():
         if sha(manifest_path.read_bytes()) not in prior_manifest_hashes:
