@@ -46,7 +46,31 @@ def preflight(scope_override=None):
     if not (ROOT/'.git').exists(): raise ValueError('expected repository checkout missing')
     return ids
 
+def safe_destination(dest: Path) -> Path:
+    # Resolve lexical traversal, then inspect every existing path component without following links.
+    dest=Path(os.path.abspath(str(dest)))
+    evidence=OWNED/'evidence'
+    try: relative=dest.relative_to(evidence)
+    except ValueError: raise ValueError('output must stay under this packet evidence directory')
+    if not relative.parts or any(part in ('.','..') for part in relative.parts):
+        raise ValueError('output path contains traversal components')
+    if evidence.is_symlink() or not evidence.is_dir():
+        raise ValueError('evidence root must be an ordinary directory')
+    cursor=evidence
+    for component in relative.parts[:-1]:
+        cursor=cursor/component
+        if cursor.is_symlink(): raise ValueError('output parent contains a symlink')
+        if cursor.exists() and not cursor.is_dir(): raise ValueError('output parent is not a directory')
+    if dest.is_symlink() or dest.exists():
+        raise FileExistsError('output destination already exists')
+    root_real=evidence.resolve()
+    parent_real=dest.parent.resolve()
+    try: parent_real.relative_to(root_real)
+    except ValueError: raise ValueError('resolved output parent escapes the packet evidence directory')
+    return dest
+
 def publish_exclusive(scratch: Path, dest: Path, interrupt_after=None):
+    dest=safe_destination(dest)
     dest.mkdir(parents=False, exist_ok=False)
     for i,name in enumerate(FILES,1):
         data=(scratch/name).read_bytes()
@@ -55,14 +79,12 @@ def publish_exclusive(scratch: Path, dest: Path, interrupt_after=None):
         if interrupt_after == i: raise RuntimeError('injected interruption after exclusive output write')
 
 def run(dest: Path):
-    # Refuse traversal, symlinks and every existing named vintage before any build.
-    dest=dest.absolute()
-    try: dest.relative_to(OWNED/'evidence'); within=True
-    except ValueError: within=False
-    if dest.is_symlink() or not within or dest.exists():
-        raise FileExistsError('output must be a new, non-symlink named vintage under this packet evidence directory')
+    # Reject path escape, all symlink ancestors and existing names before any build.
+    dest=safe_destination(dest)
     ids=preflight()
     dest.parent.mkdir(parents=True,exist_ok=True)
+    # Recheck after parent creation to catch a redirected or replaced ancestor.
+    dest=safe_destination(dest)
     with tempfile.TemporaryDirectory(prefix='.reproduce-',dir=dest.parent) as tmp:
         scratch=Path(tmp)
         sys.path.insert(0,str(ROOT/'data/regional-review/regional-review-ce7798317652c0c2'))

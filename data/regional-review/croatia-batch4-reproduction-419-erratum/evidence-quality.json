@@ -812,6 +812,30 @@
       "status": "added"
     },
     {
+      "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/evidence/safe-run-5/assessment-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/evidence/safe-run-5/province-completeness.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/evidence/safe-run-5/scoped-location-assessments.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/evidence/safe-run-6/assessment-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/evidence/safe-run-6/province-completeness.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/evidence/safe-run-6/scoped-location-assessments.csv",
+      "status": "added"
+    },
+    {
       "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/evidence/synthetic-control/negative-controls.json",
       "status": "added"
     },
@@ -908,27 +932,27 @@
     {
       "json_pointer": "/metrics/scoped_subject_count",
       "metric_id": "scoped-subjects",
-      "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/evidence/safe-run-3/assessment-summary.json"
+      "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/evidence/safe-run-5/assessment-summary.json"
     },
     {
       "json_pointer": "/metrics/name_type_matches_using_baseline_parent_count",
       "metric_id": "name-type-matches",
-      "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/evidence/safe-run-3/assessment-summary.json"
+      "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/evidence/safe-run-5/assessment-summary.json"
     },
     {
       "json_pointer": "/metrics/correction_needed_label_count",
       "metric_id": "correction-candidates",
-      "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/evidence/safe-run-3/assessment-summary.json"
+      "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/evidence/safe-run-5/assessment-summary.json"
     },
     {
       "json_pointer": "/metrics/unmatched_official_2021_units_in_eight_counties",
       "metric_id": "unmatched-dzs-roster",
-      "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/evidence/safe-run-3/assessment-summary.json"
+      "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/evidence/safe-run-5/assessment-summary.json"
     },
     {
       "json_pointer": "/metrics/geometry_type_disagreement_count",
       "metric_id": "geometry-type-differences",
-      "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/evidence/safe-run-3/assessment-summary.json"
+      "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/evidence/safe-run-5/assessment-summary.json"
     }
   ],
   "metrics": [
@@ -975,16 +999,16 @@
   ],
   "outputs": [
     {
-      "bytes": 6616,
+      "bytes": 6780,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/RESEARCH.md",
-      "sha256": "21bd536b65cce190d5633f1b514887f698ac25361bc25d2d74e4677cdc3d8f72"
+      "sha256": "0b44de83892aaab0c8acfd455cfd4f627cd7d86620cbc8afb486284713b5f234"
     },
     {
-      "bytes": 2134,
+      "bytes": 2296,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/evidence/reproduction-record.json",
-      "sha256": "86114f7b736ba07ed8863ac90472e01e1d2d6e82b8036db410d61868ea19b3d7"
+      "sha256": "93aac48b77b3d256fc24fc0b87c8c30657c8a5aeee78f1d67f70bb0dbce849a2"
     },
     {
       "bytes": 10913,
@@ -1095,10 +1119,46 @@
       "sha256": "91d12e56fa600e4cbeebdc7d12c82f131aded59a8a38a3d87eb8ed8f64429420"
     },
     {
-      "bytes": 670,
+      "bytes": 10913,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/evidence/safe-run-5/assessment-summary.json",
+      "sha256": "c5118a9046d10babfeab755e4f3dfbc09d9f5a35269a006820d3b27082c1a467"
+    },
+    {
+      "bytes": 1448,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/evidence/safe-run-5/province-completeness.csv",
+      "sha256": "7a46977bafc709cab611f2b0b21fe890c3e8ffdcd067c494f7465424c1abba37"
+    },
+    {
+      "bytes": 167059,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/evidence/safe-run-5/scoped-location-assessments.csv",
+      "sha256": "91d12e56fa600e4cbeebdc7d12c82f131aded59a8a38a3d87eb8ed8f64429420"
+    },
+    {
+      "bytes": 10913,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/evidence/safe-run-6/assessment-summary.json",
+      "sha256": "c5118a9046d10babfeab755e4f3dfbc09d9f5a35269a006820d3b27082c1a467"
+    },
+    {
+      "bytes": 1448,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/evidence/safe-run-6/province-completeness.csv",
+      "sha256": "7a46977bafc709cab611f2b0b21fe890c3e8ffdcd067c494f7465424c1abba37"
+    },
+    {
+      "bytes": 167059,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/evidence/safe-run-6/scoped-location-assessments.csv",
+      "sha256": "91d12e56fa600e4cbeebdc7d12c82f131aded59a8a38a3d87eb8ed8f64429420"
+    },
+    {
+      "bytes": 791,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/evidence/synthetic-control/negative-controls.json",
-      "sha256": "257d62b20d80cae84bcfa3d5c487cd27496199ea6df5b4a52ef7167abe4f9c2f"
+      "sha256": "e443a6e66658920b8345858ef30e51e7e5bd1a51fa74fa40ca4e61c83ecdc071"
     },
     {
       "bytes": 57025,
@@ -1107,28 +1167,28 @@
       "sha256": "a479c0bf26d6da7eeb4241b967e296ea4fbb762b977cb4ef9db1c9cb70c44393"
     },
     {
-      "bytes": 775,
+      "bytes": 992,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/evidence/validation/negative-control.json",
-      "sha256": "c8b1b54b28fa3cc0fa98d9a4ce8b62241a16fa7cdcaada00032403ef2dbed087"
+      "sha256": "9a2acd8ceacfe3c5c7e00b487a9f359e5ecb98cb4f5d17f18dd4920c93b2795c"
     },
     {
-      "bytes": 585,
+      "bytes": 564,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/evidence/validation/positive-control.json",
-      "sha256": "a8e3f9bfc638a3244f3ea1817165d99248b26802212f849d4e06a13812082a65"
+      "sha256": "9b93679b77aef8574f6d79621b6aac10f751fc2f676ef94128a1a3f419498399"
     },
     {
-      "bytes": 972,
+      "bytes": 974,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/evidence/validation/reproducibility.json",
-      "sha256": "9ebf4c332f98044e9e0a7877d01a541a544c382b892ffb874d432306c57afa78"
+      "sha256": "1f65ec00a8de16e8ea4f3a31fa46bb85a4015173811004843aefde0b713b82a0"
     },
     {
-      "bytes": 4749,
+      "bytes": 5898,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/croatia-batch4-reproduction-419-erratum/reproduce.py",
-      "sha256": "0fece4a2e91cbf457cbc68acde591cd7e306f4c77eb8006ed9fe70f245615e53"
+      "sha256": "7d218ec616982692c604ff6d30740db36d443a206aaf99dd950141839eab9602"
     },
     {
       "bytes": 910,

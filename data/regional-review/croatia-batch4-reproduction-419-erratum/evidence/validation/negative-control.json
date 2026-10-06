@@ -3,7 +3,10 @@
     "existing_destination_sentinel": "refused; sentinel unchanged",
     "interrupted_exclusive_publish": "first file preserved; retry refused",
     "issue_scope_file_pin_removal": "rejected by complete issue-scope hash before destination creation",
+    "outside_owned_destination_created": "false",
     "scope_identity_drift": "rejected before destination creation",
+    "scope_pin_removal": "rejected by hardcoded complete scope SHA-256",
+    "symlink_ancestor_escape": "rejected before preflight/write; outside destination absent",
     "whole_summary_workbook_hash_drift": "rejected before destination creation"
   },
   "historical_fixture_exact_bytes_available": false,
