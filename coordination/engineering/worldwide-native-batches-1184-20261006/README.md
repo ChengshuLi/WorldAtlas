@@ -1,0 +1,13 @@
+# Complete worldwide native assessment and actionable batches
+
+The frozen campaign covers all 95,174 components and all 49,625 contexts. The selected-source successor covers all 95,173 components, preserving 95,167 original investigations and six new complete contact investigations. Both cohorts have three complete ranked views, 15,610 traceable source families and 594 disjoint operational batches. These are investigations, not confirmed defects or proposed thousands of issues.
+
+Each operational batch preserves its complete source-family/contact closure, subcontinent set, observed bucket, responsible role, extent and uncertainty. The verification directory supplies bounded dispatch candidates from each of the three queue views. Shared sources and cross-region seams remain coordinated. Existing open work and closed predecessors remain linked through declared, validated workload rosters; an issue snapshot does not establish current claim eligibility.
+
+A strict sampled point and its normative cell centre distinguish unassigned-inside from outside-centre and no-strict-point cases. They cannot establish that a whole component is land, water, ownerless, or repairable. Existing water diagnostics remain in the complete original investigation references. Source-product and historical-processing metadata are research clues, not proven causes.
+
+The reviewed frozen native candidate is an unselected materialization. The selected repository native grid comparison against frozen geometry is separate from the updated selected-source cohort. No database, production website, runtime selection or geometry was changed by this delivery. The accepted successor is pinned at 7c7cdf2388e0e7200b937c2cfb440b53165d9d98; its merge lifecycle is independent of these immutable measurements.
+
+Reports bind all ordinary original inputs. complete-input-custody-aliases.json maps each fully read immutable commit/path to one byte-identical ordinary payload; no unchecked hash-only dependencies are used. Original investigation fields are retained through the full archived containing files and one-to-one annotations. Expanded parent contexts retain every original field under the accepted parent proof.
+
+Both complete cohorts were executed twice. All scientific payload bytes match within each cohort, but code commits and report capsules differ: first frozen execution 43fffba8, first current execution c9be3365, second executions 1557e844. The actual reports and full-file reproducibility receipts preserve this distinction. Three queue orders are reconstructed from complete rank positions and independently sorted full tuples, not merely checked as permutations.

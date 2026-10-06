@@ -1,0 +1,26 @@
+{
+  "cohorts": [
+    {
+      "aggregate_sha256": "0bbba82ddb8cb5e4c9d290299e86f33f05189bc9ff057d76c9bc1c687d57c531",
+      "cohort": "frozen",
+      "first_execution": "43fffba83ededd14ee5babde2a92ac49886361be",
+      "full_equality_receipt": "coordination/engineering/worldwide-native-batches-1184-20261006/verification/frozen-two-run-reproducibility.json",
+      "payload_count": 62,
+      "second_execution": "1557e8441b0e07cf3b167fa4a640d23be99a3c81"
+    },
+    {
+      "aggregate_sha256": "167ed13f61dd0abb9d6888529229597d73c3f5db2974676192768a2c18c565ad",
+      "cohort": "current",
+      "first_execution": "c9be3365bec68b553e1c003f5efc44d945dab2b6",
+      "full_equality_receipt": "coordination/engineering/worldwide-native-batches-1184-20261006/verification/current-two-run-reproducibility.json",
+      "payload_count": 16,
+      "second_execution": "1557e8441b0e07cf3b167fa4a640d23be99a3c81"
+    }
+  ],
+  "kind": "reproducibility",
+  "method_id": "complete-native-assessment-and-batching-v1",
+  "outcome": "passed",
+  "run_one_sha256": "dbac3dc6f0164acee8f9974a74b9f40b56df48257d98707a9f02ef1b2ab58fe9",
+  "run_two_sha256": "dbac3dc6f0164acee8f9974a74b9f40b56df48257d98707a9f02ef1b2ab58fe9",
+  "scope": "Full scientific payload equality; actual code/report capsule differences preserved and not represented as equal"
+}

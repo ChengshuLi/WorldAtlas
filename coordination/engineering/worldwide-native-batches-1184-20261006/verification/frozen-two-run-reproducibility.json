@@ -1,0 +1,636 @@
+{
+  "status": "two actual complete frozen executions; all scientific and operational payloads byte-identical",
+  "first_execution": "43fffba83ededd14ee5babde2a92ac49886361be",
+  "second_execution": "1557e8441b0e07cf3b167fa4a640d23be99a3c81",
+  "component_count": 95174,
+  "context_count": 49625,
+  "fine_family_count": 15610,
+  "operational_batch_count": 594,
+  "ordinary_aliases": [
+    {
+      "family": "batches",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/batches-000.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/batches-000.json.gz",
+      "bytes": 1374536,
+      "sha256": "29b4f857515719ac26ee3b3bc2d46fd65e5ae61754beee81d805b4ffdec1b248",
+      "uncompressed_bytes": 8386855,
+      "uncompressed_sha256": "3a78b91342f2a4bb87ff438dc56f0feed678bbba8eb7c87c973f3d92b9e22991",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "batches",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/batches-001.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/batches-001.json.gz",
+      "bytes": 1389809,
+      "sha256": "033500c86bd9b533e45b7ca7750f54423ac1f59779beda5f3ed20e7c6ae54f66",
+      "uncompressed_bytes": 8387191,
+      "uncompressed_sha256": "3c5e4d6ae1738d11f1a9fff6c240ecc1ac6a6b0917d0695dc781483721450332",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "batches",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/batches-002.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/batches-002.json.gz",
+      "bytes": 1375152,
+      "sha256": "7b365a144e3e4127246c4f0744e5a989a0e285004621516df013c2c19c3896c9",
+      "uncompressed_bytes": 8388065,
+      "uncompressed_sha256": "37a8815cd13b7390aedc9c7371590b7c2f70ea52ecb046f79617308f62647c62",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "batches",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/batches-003.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/batches-003.json.gz",
+      "bytes": 1466155,
+      "sha256": "208ce15c04d4a85e9bdd64530c6fcd3cd1f5045467faa9965eba4180645b8409",
+      "uncompressed_bytes": 8388054,
+      "uncompressed_sha256": "d4deb43cb14ed02b605a5cdd15a489d009c370fb110eabd8a9b8f9e14b0c0c08",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "batches",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/batches-004.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/batches-004.json.gz",
+      "bytes": 1349896,
+      "sha256": "5bd08baba204a78445098472ff19d6891cbd04cd0bf01e632d89bd9a54a3e9aa",
+      "uncompressed_bytes": 8387532,
+      "uncompressed_sha256": "b4ea50cc975f7d59c4b6f1f3583b406ea3d3cf142fe22bc3ded07c9fc29316fb",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "batches",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/batches-005.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/batches-005.json.gz",
+      "bytes": 1380060,
+      "sha256": "3cdf01c6bf8e6540af64468160c27027fec5cd26bb8fa0f0de9a715492980ffb",
+      "uncompressed_bytes": 8382435,
+      "uncompressed_sha256": "86a32a636ca05d03519bbdcfd852f7224b74e2e8e1a3105bdef479eea3ecbcbc",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "batches",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/batches-006.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/batches-006.json.gz",
+      "bytes": 1284086,
+      "sha256": "0d0b088bdaa09a01f86f798a7c7353d2092699d7d38654a9769c807641a49687",
+      "uncompressed_bytes": 7720948,
+      "uncompressed_sha256": "668d344054af270005a022e24a36bc2ccc02aa2e047b427ce0f3850e1e07e045",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "complete-investigation-annotations",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/complete-investigation-annotations-000.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-000.json.gz",
+      "bytes": 788323,
+      "sha256": "de5cd91977918870dc5d265bddf0ed8d42015b6a19bc8e3c35faede8c62beadd",
+      "uncompressed_bytes": 8386806,
+      "uncompressed_sha256": "5fb27580683dbcc32d97c7162856ace197024e106d58f26dd1ba3a93a98a9d54",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "complete-investigation-annotations",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/complete-investigation-annotations-001.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-001.json.gz",
+      "bytes": 787530,
+      "sha256": "22abd897312bc04971659099d1a0b49b88bb00f4fd6a614f43aeb2b2633634e5",
+      "uncompressed_bytes": 8388253,
+      "uncompressed_sha256": "f00ee399a1cc89feaffaaeb0dbdb72f798d7e4a2cec2664f5db92795c5554814",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "complete-investigation-annotations",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/complete-investigation-annotations-002.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-002.json.gz",
+      "bytes": 790458,
+      "sha256": "5721a5b53da89a56f9cd459d5c48ce9b4dc6047dfd7cc1eb37fc21f8461f9157",
+      "uncompressed_bytes": 8388374,
+      "uncompressed_sha256": "099042833904197be74d35a66e03b1cc63921be4dbb5473ebc5f687b58887e5b",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "complete-investigation-annotations",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/complete-investigation-annotations-003.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-003.json.gz",
+      "bytes": 786052,
+      "sha256": "5486b5d07882a2ca36f751a9cc08dbc06823c482d4db183de60cbb64dcf785ff",
+      "uncompressed_bytes": 8386510,
+      "uncompressed_sha256": "934f544d94278623faeb28cb955a99321e75cf9dbd4f0047c22ee4237620cd52",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "complete-investigation-annotations",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/complete-investigation-annotations-004.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-004.json.gz",
+      "bytes": 789105,
+      "sha256": "7619edf64cb457149eb9f25a8a2ac7fc1d0812048c5173f34ee6ccd2c884478d",
+      "uncompressed_bytes": 8386988,
+      "uncompressed_sha256": "b96931ad6b6521c0d2c414b451c7496b176dc7d68e65df1497850891e5bf519f",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "complete-investigation-annotations",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/complete-investigation-annotations-005.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-005.json.gz",
+      "bytes": 788984,
+      "sha256": "ca21ddd3071d2839609050e597adc7a49088c413b8d1de7c376fd7d484b89ec7",
+      "uncompressed_bytes": 8387197,
+      "uncompressed_sha256": "c2cff0684c8d6529c604c2bb164739a7d89d5d860b921fd420cf5277af58e0e9",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "complete-investigation-annotations",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/complete-investigation-annotations-006.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-006.json.gz",
+      "bytes": 790477,
+      "sha256": "82f6b08b01221a011b3f8db4066a1ae60871fd7798d882920f1bd573ed9148cd",
+      "uncompressed_bytes": 8387095,
+      "uncompressed_sha256": "9617e83b3609193eb12f5cbefe8e78ebf11f6fb38d0ddb5a959a7824ee86ead6",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "complete-investigation-annotations",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/complete-investigation-annotations-007.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-007.json.gz",
+      "bytes": 790374,
+      "sha256": "128059e39e18fb63035d2d8bf405e4a1bc69379c61e00d11a189188352436de1",
+      "uncompressed_bytes": 8388375,
+      "uncompressed_sha256": "d0b43fe30edafde83369efc5b86511c7cec83460decbd7658d68f3c77ab373e2",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "complete-investigation-annotations",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/complete-investigation-annotations-008.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-008.json.gz",
+      "bytes": 789223,
+      "sha256": "991560b6876050a07f4b46278fcb8520c88036054e188ef72c34b2ff3f02c634",
+      "uncompressed_bytes": 8387040,
+      "uncompressed_sha256": "0022baec0f553f9042dc484745ad49cd1f66d6d211796eac87191d6116a69b4c",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "complete-investigation-annotations",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/complete-investigation-annotations-009.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-009.json.gz",
+      "bytes": 789520,
+      "sha256": "9fe0da834e92417009b305d24409a9d760215afa30239eb849202bbf66be7563",
+      "uncompressed_bytes": 8387579,
+      "uncompressed_sha256": "b3b811c6c892174058e99fb5a9817c2c61d3cd1dd42436cf3d9da6b9ab5d5712",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "complete-investigation-annotations",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/complete-investigation-annotations-010.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-010.json.gz",
+      "bytes": 789946,
+      "sha256": "1dfae16707ccac26e411a51e11b6640bd4765c1b16eab3b010a4e25de7b04fe8",
+      "uncompressed_bytes": 8387178,
+      "uncompressed_sha256": "5612c0b013d60f9259c5962208d2ceec166662c0994ee703bcc05d524bff894e",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "complete-investigation-annotations",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/complete-investigation-annotations-011.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-011.json.gz",
+      "bytes": 791199,
+      "sha256": "39a9b2ecde01c930b4c76a84aba048119d7f3033899812f9163b28e919c5489c",
+      "uncompressed_bytes": 8387868,
+      "uncompressed_sha256": "eb9e00fa31fe8fbf9f01ee9dcdf8fa655b896303ebd9e1ba5811980c1deeac9b",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "complete-investigation-annotations",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/complete-investigation-annotations-012.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-012.json.gz",
+      "bytes": 788768,
+      "sha256": "3f682e97ee91dadb90c149915c9f052b94b6b0c1b649b0f60f57f71fab95455f",
+      "uncompressed_bytes": 8388061,
+      "uncompressed_sha256": "abca7870968981f6ee36ece42d80edfb0741870bbf11bf388b0c4ebd1a6bdddd",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "complete-investigation-annotations",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/complete-investigation-annotations-013.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-013.json.gz",
+      "bytes": 786947,
+      "sha256": "cde60ceb1c0fe9f109d6226737b359a9e6a67ef75389035d2909c5a3ef858b3b",
+      "uncompressed_bytes": 8386638,
+      "uncompressed_sha256": "d7a8a3c6b6d7b9fff077b79d8a12df0b106b5eee06da2e246f1dda52ed71cc97",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "complete-investigation-annotations",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/complete-investigation-annotations-014.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-014.json.gz",
+      "bytes": 790366,
+      "sha256": "3ce7486661077eb784b750e6fe1c09064abd7ef64efcf376319b9ccac6503fdf",
+      "uncompressed_bytes": 8387557,
+      "uncompressed_sha256": "474e960bea77cca48ceefc904593f74b3813ae1002f71367b062a9c00f2085da",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "complete-investigation-annotations",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/complete-investigation-annotations-015.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-015.json.gz",
+      "bytes": 787512,
+      "sha256": "b92fdc91272a0b1b821008a00a2a2355937dd247bcd08e7d973dc334ab14b0c5",
+      "uncompressed_bytes": 8387184,
+      "uncompressed_sha256": "049fb9193252a36004c52f988c464f07738b57711c07f3e5ae7a18db0129b0a7",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "complete-investigation-annotations",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/complete-investigation-annotations-016.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-016.json.gz",
+      "bytes": 783745,
+      "sha256": "73891ae6da0a2491252743370ceae1f6e8879326097ada3c78bcd547d79ae9d7",
+      "uncompressed_bytes": 8387173,
+      "uncompressed_sha256": "1ac98aef49080b05752ff88ff577e87c9ef6e7f47aa72bdc78eab83b2cc817ec",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "complete-investigation-annotations",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/complete-investigation-annotations-017.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-017.json.gz",
+      "bytes": 785834,
+      "sha256": "efa0c14486178d904b53c08b4b3ecbecbc39f79ac82d8b21837f062fe58deac6",
+      "uncompressed_bytes": 8387638,
+      "uncompressed_sha256": "8a3160289b3ec2b59862dc1fb40e446ae839eb8f3a22839a83707e83f8a8f371",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "complete-investigation-annotations",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/complete-investigation-annotations-018.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-018.json.gz",
+      "bytes": 787607,
+      "sha256": "09b17eade5bb8c1a4554bd5e5d02b8a9e84a1a2cc6fb3886197136317fe6bf09",
+      "uncompressed_bytes": 8388050,
+      "uncompressed_sha256": "f636e1630bb5428cbffc5568493dd1a82faae4af444e252b3a95c9ec55ba311f",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "complete-investigation-annotations",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/complete-investigation-annotations-019.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-019.json.gz",
+      "bytes": 789180,
+      "sha256": "5202eb777d037c8810592c618a4282f2e498aadd908bd13031b32f45ebabfd95",
+      "uncompressed_bytes": 8388072,
+      "uncompressed_sha256": "c270db9df0f8fe7ae28a987f7b0dbc3732862383417bfce948292399f4fdee64",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "complete-investigation-annotations",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/complete-investigation-annotations-020.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-020.json.gz",
+      "bytes": 785913,
+      "sha256": "2b0c86e8886e284a833b29d936ba581993d2f79e4fa5623073dd41ac0ba0f14f",
+      "uncompressed_bytes": 8387971,
+      "uncompressed_sha256": "fdbf49ca1fcf8cf1df5d2446a477cdb884260263f5ef069b882f62147c47107b",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "complete-investigation-annotations",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/complete-investigation-annotations-021.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-021.json.gz",
+      "bytes": 786502,
+      "sha256": "cda7e19bcd4e89cb2a1e663502f88cc54e7b8e8ef8731b9000ca92d1b8c00ce9",
+      "uncompressed_bytes": 8387407,
+      "uncompressed_sha256": "19b510685a765d7fad86d0b123be6d9496280184524cdd9c35a748393464a7a6",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "complete-investigation-annotations",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/complete-investigation-annotations-022.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-022.json.gz",
+      "bytes": 790697,
+      "sha256": "58aaf6dbdbdbe45712ad05ce34e933ec5b65ec81ff422c0a751ac3ce7abff31f",
+      "uncompressed_bytes": 8388073,
+      "uncompressed_sha256": "c316513f894d14db438bfa2bb050809fee81cd09559b81a756f6ba456e46685a",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "complete-investigation-annotations",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/complete-investigation-annotations-023.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/complete-investigation-annotations-023.json.gz",
+      "bytes": 653265,
+      "sha256": "925f08b5c520d2e99c88317e16c876b9fef236a46a3f1cb97e8a656304b66b64",
+      "uncompressed_bytes": 6955136,
+      "uncompressed_sha256": "e4b472777336256d40b558f3c4711cf6dab266994940fa6f2841a735761400a8",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "frozen-reviewed-native",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/frozen-reviewed-native-000.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/frozen-reviewed-native-000.json.gz",
+      "bytes": 1455575,
+      "sha256": "939168bb77436408699fbe4c75631ed254015bf33ba591953a50da619bf06ee0",
+      "uncompressed_bytes": 8388228,
+      "uncompressed_sha256": "353ad03af03a8f27ac8a480988992839b1a89799c352bb92172d7051d914ecf6",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "frozen-reviewed-native",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/frozen-reviewed-native-001.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/frozen-reviewed-native-001.json.gz",
+      "bytes": 1457301,
+      "sha256": "d2b62bd5f9003e2151c50fc1e27630fdcac90697049b063909040ade344937b2",
+      "uncompressed_bytes": 8388413,
+      "uncompressed_sha256": "45fe2e565f60788414aefdbd624097be565c3832ef70ef9f29effffd29a58dc4",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "frozen-reviewed-native",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/frozen-reviewed-native-002.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/frozen-reviewed-native-002.json.gz",
+      "bytes": 1458715,
+      "sha256": "3d0460e3cf99e24c441bd032b12c74593ab1c4bb2af5a5e8b6d804f79968342c",
+      "uncompressed_bytes": 8388413,
+      "uncompressed_sha256": "e1a881cc74d71d59089b912b32353b517351e898165a7a6c67cf6cf22c1e9407",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "frozen-reviewed-native",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/frozen-reviewed-native-003.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/frozen-reviewed-native-003.json.gz",
+      "bytes": 1460032,
+      "sha256": "f7369d8b1ed630d0372bfb1949d2e94d4b068c451aaaa3e9fd3713fa7f103e66",
+      "uncompressed_bytes": 8388017,
+      "uncompressed_sha256": "c1c78f0cb504166eee51b42f90b13ee16dacf13f48190ffd6ead230f5f97c164",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "frozen-reviewed-native",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/frozen-reviewed-native-004.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/frozen-reviewed-native-004.json.gz",
+      "bytes": 1459400,
+      "sha256": "70a5400d9c288b0302360db825d0d6504977013bfd9637f5f0889bb02296a400",
+      "uncompressed_bytes": 8388144,
+      "uncompressed_sha256": "99520a259dbf381e3254a67fceae1514db2142b2dc6e23397b3793a9fdcfc01c",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "frozen-reviewed-native",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/frozen-reviewed-native-005.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/frozen-reviewed-native-005.json.gz",
+      "bytes": 1456516,
+      "sha256": "6e78a70d20cd072d9cb46b5257da2d737e85437b764d8051a06b5fd6c02f3484",
+      "uncompressed_bytes": 8388172,
+      "uncompressed_sha256": "41c2648938f436daee101ad14db619b6c671197835cd0ad79121f92b06959a80",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "frozen-reviewed-native",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/frozen-reviewed-native-006.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/frozen-reviewed-native-006.json.gz",
+      "bytes": 1457853,
+      "sha256": "d011dd0ae69cc9f892b7b9aa5e5d0dcf19ff8e0e4ca03b6967aca29df5e32116",
+      "uncompressed_bytes": 8388534,
+      "uncompressed_sha256": "e206d6aa048b7ff72f1502bea8bbc384f9dc3edb0913f54acf3d4c78c8ddadfb",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "frozen-reviewed-native",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/frozen-reviewed-native-007.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/frozen-reviewed-native-007.json.gz",
+      "bytes": 1458294,
+      "sha256": "984f9e0fe09bdb6d3e3bbe870ce60affb8509fb5ef1a99cb4aafc9cfa64f6ee0",
+      "uncompressed_bytes": 8388413,
+      "uncompressed_sha256": "4fa3faed884fb53af8008d0d75b60bf70275dba6e409a9da80f7896c6aa35860",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "frozen-reviewed-native",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/frozen-reviewed-native-008.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/frozen-reviewed-native-008.json.gz",
+      "bytes": 938790,
+      "sha256": "3c49712473e169cd9425664cda76866c01d6a99f1e3806ba69b9895f051a05af",
+      "uncompressed_bytes": 5401059,
+      "uncompressed_sha256": "3e3ca666a263586f2297dc327ffad42efb31f658b18489cfafada5e6cf6b5464",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "frozen-reviewed-native-owner-counts",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/frozen-reviewed-native-owner-counts-000.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/frozen-reviewed-native-owner-counts-000.json.gz",
+      "bytes": 485008,
+      "sha256": "4bc962a91ee7ecbbf7a4eef00fe906c89b46d5191b4a918fd7865b5789e89cb5",
+      "uncompressed_bytes": 8388610,
+      "uncompressed_sha256": "c151d5729f1f06e4d4d937bbebf7dfb419a10055eb4cc986067e8cbcd51351d1",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "frozen-reviewed-native-owner-counts",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/frozen-reviewed-native-owner-counts-001.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/frozen-reviewed-native-owner-counts-001.json.gz",
+      "bytes": 325369,
+      "sha256": "613a52c63b60dbb0cd06732555635f6ae9a1a772228c9a3fb84556506ec8c480",
+      "uncompressed_bytes": 5534718,
+      "uncompressed_sha256": "bb6e195bb5c71a5c1349f823f8db61b2e7a96edd53e52ad9b94456e5d0cce93c",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "issue-rosters",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/issue-rosters-000.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/issue-rosters-000.json.gz",
+      "bytes": 702926,
+      "sha256": "282bb90ba86e70ced9135e11d1a3ca8b97fd7930afa2ddcf0db6984bb773d79d",
+      "uncompressed_bytes": 3228212,
+      "uncompressed_sha256": "4b2bb4ccced8a41dd7645bb743dfb9fc2d66ca3f35c6b2e7e1efe590944d6fc3",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "operational-batches",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/operational-batches-000.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/operational-batches-000.json.gz",
+      "bytes": 343222,
+      "sha256": "ea985a089f7f6c2fc532d6744aeffc2d33434215ce7a7080e6579080db3caf21",
+      "uncompressed_bytes": 1396675,
+      "uncompressed_sha256": "0d5baf1270b09f93b0e0bdb6ccbb1a299206a2681956fc838d3ae4148b454410",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "rejected-issue-declarations",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/rejected-issue-declarations-000.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/rejected-issue-declarations-000.json.gz",
+      "bytes": 401,
+      "sha256": "3148091d4432ffc8bdbdb274f5c04d07a8a70163dd060fb183aae1af881738ec",
+      "uncompressed_bytes": 940,
+      "uncompressed_sha256": "7132a39d88d5ab456b10a05baadc4b7c3785ebf949acc9a185bd7aec70169c2d",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "selected-repository-native-complete-overlay",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/selected-repository-native-complete-overlay-000.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/selected-repository-native-complete-overlay-000.json.gz",
+      "bytes": 684,
+      "sha256": "93f83f3c484346990c88476b157c14901ffaefd27a627d9241e4c2c6000b6666",
+      "uncompressed_bytes": 1135,
+      "uncompressed_sha256": "402308e59a18c75d87257aeb0212f29d879544f09936cb2baa5a566e3ee7b87f",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "selected-repository-native-owner-counts",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/selected-repository-native-owner-counts-000.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/selected-repository-native-owner-counts-000.json.gz",
+      "bytes": 485009,
+      "sha256": "06cbab3ee3ac213586d09e069f4e7fe9a871c63a7522925461c22996f2a15a84",
+      "uncompressed_bytes": 8388610,
+      "uncompressed_sha256": "9c42e1836e0af85b176e77ee686dd40d58cf1bdcd984b848cab7dc7910860cb1",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "selected-repository-native-owner-counts",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/selected-repository-native-owner-counts-001.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/selected-repository-native-owner-counts-001.json.gz",
+      "bytes": 325369,
+      "sha256": "098174889670694d2d23eac0152bd13606cdfa80793d0034a7c6ccd714520ed2",
+      "uncompressed_bytes": 5534718,
+      "uncompressed_sha256": "efe91b398e3c96ec6a7515bf5b5b818357c12cc98c89049969a3d86d9bbdc839",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "source-product-contexts",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/source-product-contexts-000.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/source-product-contexts-000.json.gz",
+      "bytes": 555988,
+      "sha256": "b861b37325d3f1e3d45409afd7aed482ed854545289dd4bafdd87a5622f4eaee",
+      "uncompressed_bytes": 8386587,
+      "uncompressed_sha256": "9fb6a6aa9f6ebf68eed3fd5a82a4ded13d5a88bfdaf2b7055f42b54c5054bcd7",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "source-product-contexts",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/source-product-contexts-001.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/source-product-contexts-001.json.gz",
+      "bytes": 234804,
+      "sha256": "01032a4a78c2555ca2b5f15c9a5d8e23c37925d7eab874f98f861e53a237601e",
+      "uncompressed_bytes": 8386684,
+      "uncompressed_sha256": "e9066be0ec79d4a995b60a5c07e074cb37ebf639de691cfacae93da6837fdb95",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "source-product-contexts",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/source-product-contexts-002.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/source-product-contexts-002.json.gz",
+      "bytes": 231383,
+      "sha256": "66f85c61fb1bd98134d31a2b9de0cf9fbe36403dab2749b3f2fc346a4118fc35",
+      "uncompressed_bytes": 8386542,
+      "uncompressed_sha256": "ee31be4f5474324501b0e0f4eb02f4082addc681dcf46d1ea826e300cb8b2ac2",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "source-product-contexts",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/source-product-contexts-003.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/source-product-contexts-003.json.gz",
+      "bytes": 232269,
+      "sha256": "6668288db91ce425751e9649d06aa226824de3ffe68a2356d3dd49b9e7755f23",
+      "uncompressed_bytes": 8388224,
+      "uncompressed_sha256": "6f12ce1c94332ce2cc4e653d76be4ad44da5ac2f67f2a91ec30b47ac87a6ab1c",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "source-product-contexts",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/source-product-contexts-004.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/source-product-contexts-004.json.gz",
+      "bytes": 233208,
+      "sha256": "dcbfa55efca5a664aeb520812878d2d7be8848853c2bad106535803d21e4d9f9",
+      "uncompressed_bytes": 8387524,
+      "uncompressed_sha256": "4f6206763c75d7c7362caa9cd5537aebcff1b494c5553108960a5cd1b9b0c5ca",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "source-product-contexts",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/source-product-contexts-005.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/source-product-contexts-005.json.gz",
+      "bytes": 236249,
+      "sha256": "3a8f22c8c821db65e93b72659c59015d9c81a5a8ee13bc90cda3036253df8bbb",
+      "uncompressed_bytes": 8386485,
+      "uncompressed_sha256": "5aa2a399f7c9a49eb658896e586a14311e56019763f47bb4b187d3bdde1e24f3",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "source-product-contexts",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/source-product-contexts-006.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/source-product-contexts-006.json.gz",
+      "bytes": 233820,
+      "sha256": "24e2aa82da8c0ae6ba217e854a513dae91ccb1f0d76050cab9ebe594f038cdbc",
+      "uncompressed_bytes": 8388170,
+      "uncompressed_sha256": "4d303265976ad3ae5ecb802028330612493c2f3ac5253fb5681b8859052fd362",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "source-product-contexts",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/source-product-contexts-007.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/source-product-contexts-007.json.gz",
+      "bytes": 234939,
+      "sha256": "7a12a8cbcc72bce6b2c75383e6533e98276e633f1c0c34eac608218db59806bd",
+      "uncompressed_bytes": 8387035,
+      "uncompressed_sha256": "84240a187560aaa5054224cce6d631bd01c4af41b096572e2b9146c77ffb4376",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "source-product-contexts",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/source-product-contexts-008.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/source-product-contexts-008.json.gz",
+      "bytes": 231186,
+      "sha256": "34aaa336974f60ffe71a8f90d70dcd3458406afd652a5470991c2afc33e3f614",
+      "uncompressed_bytes": 8387422,
+      "uncompressed_sha256": "6049f176b31142b2a56ff3cb9f0105be3f7ec304950a66e0333ec5380fc9ed56",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "source-product-contexts",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/source-product-contexts-009.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/source-product-contexts-009.json.gz",
+      "bytes": 234276,
+      "sha256": "6b61bed9baf0f91f2e4d3f89998e093142ce976e0dcc149f00e65472a287382c",
+      "uncompressed_bytes": 8387918,
+      "uncompressed_sha256": "c49b5c805a7f44615a34dab8b6c39e5a586e5b6282995b5a4fe1b6ccaf58a4a8",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "source-product-contexts",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/source-product-contexts-010.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/source-product-contexts-010.json.gz",
+      "bytes": 232876,
+      "sha256": "ca43e8b8f56e2f63e2022f743d986bb5aa3cd21ff9f5be90440830389b9fa053",
+      "uncompressed_bytes": 8387597,
+      "uncompressed_sha256": "bba94043554377fd5d4f45b13cc511ed2a622c4f2335bde76695e1b08ede57e1",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "source-product-contexts",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/source-product-contexts-011.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/source-product-contexts-011.json.gz",
+      "bytes": 230067,
+      "sha256": "33964a5c419c8dd15f20bbd8bbda1e40cacaf3504cf5267c8086a33cdbdc3b89",
+      "uncompressed_bytes": 8387182,
+      "uncompressed_sha256": "9283a3b35da109158953022b1d2a187c0ab6bea3dcb2994050de1e7195252c7d",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "source-product-contexts",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/source-product-contexts-012.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/source-product-contexts-012.json.gz",
+      "bytes": 65700,
+      "sha256": "7e65e4d0f0620960f74c6a8688894640c699ea4d973e41f070f28ff575945498",
+      "uncompressed_bytes": 2321332,
+      "uncompressed_sha256": "fc2dd2ebf22a5b831037ba0dc164159439186451bc7b958afefe1c764e0d6624",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    },
+    {
+      "family": "weaker-issue-context",
+      "run_two_logical_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-two/weaker-issue-context-000.json.gz",
+      "ordinary_payload_path": "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/weaker-issue-context-000.json.gz",
+      "bytes": 2883,
+      "sha256": "4f0a0eeeaf27718ebc14cec83811692f7581e4e9f1eb00e43b03cf1054fa8055",
+      "uncompressed_bytes": 11817,
+      "uncompressed_sha256": "c0d70865c4c804b9cf89a0388ae17833fba908abe6589d0fcb91484e6e4a0278",
+      "readback": "complete encoded/decoded bytes read from both actual complete executions"
+    }
+  ],
+  "limits": [
+    "Both actual code/import bindings preserved. Later native-family guard only rejects a mutated reference; all actual first-run references independently verified frozen-reviewed-native.",
+    "Native/rank/classification/operational payloads are exactly identical, not just counts or hash-only assertions.",
+    "One full ordinary output tree retained; actual second tree retained in ignored cache after full readback."
+  ]
+}
