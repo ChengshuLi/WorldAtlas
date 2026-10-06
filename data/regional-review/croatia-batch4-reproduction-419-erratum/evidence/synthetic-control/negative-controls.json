@@ -1,0 +1,13 @@
+{
+  "existing_destination": "refused; sentinel=KEEP-ME",
+  "interruption": "injected after first file",
+  "partial_retry": "refused; first file preserved=True",
+  "reconstructed_fixture": {
+    "bytes": 57025,
+    "historical_fixture_sha256": "0a214eb21f46b5d2ea133e9e7739d830a0186d394db8df2ae5445f8a8227636a",
+    "is_historical_exact_bytes": false,
+    "sha256": "a479c0bf26d6da7eeb4241b967e296ea4fbb762b977cb4ef9db1c9cb70c44393"
+  },
+  "scope_drift": "rejected: exact issue subject identity differs before output creation",
+  "whole_file_drift": "rejected: summary complete source SHA-256 mismatch: a479c0bf26d6da7eeb4241b967e296ea4fbb762b977cb4ef9db1c9cb70c44393"
+}
