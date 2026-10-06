@@ -1,0 +1,3274 @@
+{
+  "version": 1,
+  "issue": 1010,
+  "lane": "engineering",
+  "worker_id": "01a10893-2a57-72e0-aa08-5c36088d5206",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "548c5f89f00271050823076a84695bb41e1b8454",
+    "files": [
+      {
+        "path": "data/canonical-grid/manifest.json",
+        "bytes": 271171,
+        "sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/bounds.json.gz",
+        "bytes": 2663523,
+        "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 11096191,
+        "uncompressed_sha256": "a8086008b7a072dd86483720a2a166785229753422769dbbe0749497d870f428"
+      },
+      {
+        "path": "data/prepared-evidence/index.json",
+        "bytes": 14739,
+        "sha256": "830b3e483a2fd910b795a964520631c0e417cc80f7c5fcc3b3399abbccc958b2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+        "bytes": 1851757,
+        "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 2097328,
+        "uncompressed_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/decoded-native-verification.json",
+        "bytes": 10928,
+        "sha256": "3fd8d5cfb18d100af0aee8bb94d33ce25bb5ccb9b2e02a55a8c15d585a86a410",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/manifest.json",
+        "bytes": 251190,
+        "sha256": "efe31373ff6a2c3f4ba5f11f8cbe37b25337778b344d9dbf1d3dfde301e3e722",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-0.bin.gz",
+        "bytes": 983823,
+        "sha256": "8f867b6e64b1117a4fa80dd4ed82733ae9696461e1612dc7fb314c40935fd462",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "5fb33e6ed857e0140feb040291e8ed130b99a63ee1e99b750f5c795d4f0caa60"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-1048576.bin.gz",
+        "bytes": 999504,
+        "sha256": "2bda4f1128703596e5dad026013d81b944471052aea388d7bd20c504ca735e7b",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "cdb75e3b779c549663990797d525f496805daaf4b5779293801232b67f0e53fe"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-2097152.bin.gz",
+        "bytes": 967519,
+        "sha256": "fca2e7d5f30a1914d370ebf660c69bdb5b872af41e528a7f0bebde08de6644ea",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "2b0e4f8e8d340e8f6630cc2fb6f615fce5ee04ac16aa3d956322b28268340fc8"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-3145728.bin.gz",
+        "bytes": 903226,
+        "sha256": "5ab8e10a21297c2c84c6feeeb907935589d02fbcfd30837b31065596f47009b4",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "f3b27edf228ed680ff45db865ec31c4481c0afb61912f77ae7c2f370970c3d45"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-4194304.bin.gz",
+        "bytes": 868242,
+        "sha256": "2d39a4a314ff55f8f4135e21ac6f8dd42359a801f01ab435b7b4adb31019003e",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "f6486b596989b6c182b84cf3f39cd07940569419e01825c9eff3649eb43e6dd3"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-5242880.bin.gz",
+        "bytes": 868549,
+        "sha256": "295247e4a865b866070e6747a13dc816d0c7f76573e72ab3519dbb8cd8c33e9a",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "248cd5e40619f5f337e4d1d8316edfeb383ba903f3676f180c07c5e8560ac8ac"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-6291456.bin.gz",
+        "bytes": 851783,
+        "sha256": "eca1667dfc637570231ba2a1174e8cc52f34e599a35259915145ebe1045e4663",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "508743b2afd7612a1adc6c5ee047521ef81568e41c0b7cdad221129362e26b69"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-7340032.bin.gz",
+        "bytes": 847665,
+        "sha256": "237e70f2c59d54b80c55e274338a2e1b8e0cf0d9d9356bf861f14a362594cbc7",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "b0bd2f0f36f0c2facb88e4dd99498cd915d7c3cfea6eec83737dd7dcee8e4c74"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-8388608.bin.gz",
+        "bytes": 851524,
+        "sha256": "564ac30f9675984701481cf8e6277c43252ed1c02f16245b87536fa64befc221",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "5b00009e3450f33b40249b37ff43344339d1da3c5ef1653b3810362d06cd5fb7"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-9437184.bin.gz",
+        "bytes": 850915,
+        "sha256": "573f2e8baaf7364810038e67f02c883c4d8661a521d015fcc4b8d674be3d4856",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "22e1548196acc2ed2629d24331aa181677fd07b68fd18986608c0abce6f0b0b7"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-10485760.bin.gz",
+        "bytes": 855339,
+        "sha256": "41573aead112141c0dd904c33f1b9c47074d93b7c8dd68da0184bf6f297c80ca",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "f903f7139d9f4fcd2c695cd3db49799dd62d4239c512f03703590d251f0661d0"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-11534336.bin.gz",
+        "bytes": 874119,
+        "sha256": "c8b834faad9825db2b50b579cfb1e49dbd31698adfb5dfc7dd6a1eae015d536a",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "307c34bc64d87718b26730331f78c8273dfab44e95509a79030b665a03a46e7e"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-12582912.bin.gz",
+        "bytes": 878294,
+        "sha256": "ad248445d13714a5aeb9f4dd371b330d1b6443293f1e0f55a2767d66294a1717",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "8ab6a09c06ea043da15f501050bb3b6c49b3f44e09ec7ec9e25edf47ae271e1e"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-13631488.bin.gz",
+        "bytes": 866895,
+        "sha256": "c7909c129678ae56d4a4a1815b6a3c41613ef1a4ee1c7df73c32a50da341d30f",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "be99de6240ea396699cff58214561f77d26451d39acafb4824ef12ec36b9e4ca"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-14680064.bin.gz",
+        "bytes": 867980,
+        "sha256": "cd7751fd1c9d3c707c5dd5d32b120fc30e8d85f71ba712a5404501d678ca027a",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "5275e14292a4457daa86b3d207258e34c5b312c1ab927be877e6e07ba62e34d5"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-15728640.bin.gz",
+        "bytes": 876729,
+        "sha256": "25b4c8b1e0baff140fc6ba86231c52bdc709fd763d87ff63c77dd0a5f640662d",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "9360dc7e96b4a48c7b30bd3958f155715bebb7d4ec7b0f710842f6b1346f0c66"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-16777216.bin.gz",
+        "bytes": 846061,
+        "sha256": "ce2a3d020af88ded0d04a9835e100bc8b8d16c9452fa2b47418950c137a7f2e9",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "3e3ba717fa2e9f91d257ebef8bd53f895b90fba4d57e9e51e912ebaff56b63fd"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-17825792.bin.gz",
+        "bytes": 827007,
+        "sha256": "d948cc214c6793e776572ce80d7adc7343a25a45b17524f581d21a7c3adb5189",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "02deccd5f197cb20a08e722143a84b8e3e8372e2749c02eaf371557da268c2e9"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-18874368.bin.gz",
+        "bytes": 816599,
+        "sha256": "c9d72e1e88e3e6e1d7deb8141c9854ccb9794cab24b489a5cf8c3ae048067ab8",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "45f34f9eb9151b771f646f559f23c2808c420b9a08dfd23b3538a580f6399fca"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-19922944.bin.gz",
+        "bytes": 812930,
+        "sha256": "7f2e1af8be1158ae562db72a941b748eee6555a753e126b9d2c0305c39b5bdf7",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "a8b9bbff90b72b088a3a9bae91b5e99f57ffbdbb8ade28f7ebda0fa4b3221b7c"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-20971520.bin.gz",
+        "bytes": 792059,
+        "sha256": "81e9475d8e426a2ffba6666f82670c2993029ca71df3e3d35d8296cf3a0ec35f",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "74fbfae82ed959a1fd72232ff26cd8c2cbbcb58713a536b4bc9caf9275bca4af"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-22020096.bin.gz",
+        "bytes": 789756,
+        "sha256": "74cc431765cfdbb1c02907feac89a8bd50d996031d22e25fbf4c85a051cb72f6",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "0de7a43cc54e01e58cfd1fd11126ab6e0bb38d30614e83f9bc5c5c08a5592241"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-23068672.bin.gz",
+        "bytes": 788444,
+        "sha256": "457821241979e8dc8a0646af4c704af1fa350c9331bdb4119c4690e27e016a1c",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "c704fbab6a0554a998714b234950fbddbb62e4b8d658135989a1edfe324c08f4"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-24117248.bin.gz",
+        "bytes": 787631,
+        "sha256": "bb128ba2dfebc576af2b2091ef7d8a650abba83fec0e5ce1bba18fa37ac59081",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "b97f0afbae0b1754afdb8d0a2aae60a54ed18b7739c145e0a67c5bac725641c3"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-25165824.bin.gz",
+        "bytes": 805336,
+        "sha256": "22f1decdcffb44861082adc014c4c9626f106265f98cf9defd9ecb2e852b7f1b",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "ea858b1ffa976f5f6e8ca134ddf276e772a880a2bf9140e81e5798160d6c40a0"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-26214400.bin.gz",
+        "bytes": 836070,
+        "sha256": "987689c7cb980b9a6e53fdf36c4d6b0b656d4bf5aa107699aad2e276f1860ca1",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "16f937a57b7ee1dd5db72d3fd75f43170a9e2194b390b78477db65bbd597e20b"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-27262976.bin.gz",
+        "bytes": 823672,
+        "sha256": "b5bf435d4d484d95b13430a052671e4da4aaf71646a59b429a0e576ccd16edc5",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "0f8305b3d69a3cfae86eadd38928cd66cbbb0b39dead6f49ae0ffa928f04f354"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-28311552.bin.gz",
+        "bytes": 820941,
+        "sha256": "f5f8c8d0a28e5ebe81257e0ebb8abed4aec966c2bb86880c44d546575d9145a7",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "67e5fa47fda20db1ec3614dbb85b23b5ac9e219e6e953f6d669b2999dade023b"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-29360128.bin.gz",
+        "bytes": 806415,
+        "sha256": "edb4b2b3258b5708e794088f2e762cd962b3fb1b5395ff8cc525eaa72206c90f",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "2215929e461f70ce5e0bcf1f92aa995c2241c2e8c65b96d1ebff636020c235bb"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-30408704.bin.gz",
+        "bytes": 808801,
+        "sha256": "c840d4dd2f611e2c19dff1a3ca8cfe937607a5f65fc8093f66cba152656200e6",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "00305517ddfcb7d7b7f145386231d924b538b5d16cf783fb1fcec7a7db87a5bc"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-31457280.bin.gz",
+        "bytes": 832805,
+        "sha256": "884b709a9581b9a5f39a13306ed77335593e0ec9a3b5e5ad39c841664a0a9da9",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "37e2244dd9bf6b62c8180950d056a142622d1f2cf38abbfe213a5506e48938bf"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-32505856.bin.gz",
+        "bytes": 858271,
+        "sha256": "c804d08f5e26ceb6257de5fa52ac3c8ed008ebf65d8bf493ae7f3395656e458b",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "4bc7e7cac67d283cffb2fc8bb9c07fed0a1e2b77e2ea38fb9c8a3be13fa17a96"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-33554432.bin.gz",
+        "bytes": 879723,
+        "sha256": "aa5b2f73be17f26d585eae47c6d61203596f1a7b57ab1f868e9af733a55f89a4",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "2ef2b6520595aeebc6263a4a6bc13265a3deb0a76e5150e3d751ece8ba345d7e"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-34603008.bin.gz",
+        "bytes": 868464,
+        "sha256": "a0344f18582a8887ddeb33b1100f99fa6c5b7ce0c207965126cc9b08f696987e",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "3a5bbd6e778d414a2884f0056c3cc14b480705a45225fb3b8f9eb6d142819c81"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-35651584.bin.gz",
+        "bytes": 894419,
+        "sha256": "9a7b4f9f12e21a92ac1ee63fee6b539d72a3e1cc2357b47263846e07a8a8227d",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "91ab1383e9976f2e5998beba2b5a50f81af1d4e936eea9ca8ebe8d16348a9df7"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-36700160.bin.gz",
+        "bytes": 892291,
+        "sha256": "daf8607b2f37855992ce7b31a63400f5f98a70f84a6d518a85c6510838106a63",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "cdf6cdf65248d8382c2bf6880e482209612ea87b21d683eefc2ff46d446be52b"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-37748736.bin.gz",
+        "bytes": 880040,
+        "sha256": "d741dced36080e4f10d01762db6a10a0cab9749633c0b5052e10890afcfed3ba",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "53ec40ab6e6f5ba74f3265b9e47814d2b1d7c2377ddcb27eea7cc57a0adb5657"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-38797312.bin.gz",
+        "bytes": 869848,
+        "sha256": "bc5003ffb881bbb942ab7d334f469e0c20998a762d8ee12fd12448a11cd82456",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "1695b03aacddc55e0b52efa80ab06fedf264e77922da9ef2849efe47db499cb4"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-39845888.bin.gz",
+        "bytes": 873708,
+        "sha256": "4ee17aab5f21287604b59a8a25adaac0c7ecdd3eaf56c09ef77803c02b2d486c",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "161279fc51bacafd837900aab90e93e5a10f3af4d1078f83ddc367d88377b646"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-40894464.bin.gz",
+        "bytes": 888629,
+        "sha256": "069e5857d543e2546f061f6720dd24ab11056e29a6e1c204ac25666e2f4a33e3",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "041288244381c9a23d9f4211e3a02b4b815aab02b4f6b4392236784b2bd4be0f"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-41943040.bin.gz",
+        "bytes": 896715,
+        "sha256": "a0516c2d8e95194dd405ab59170ad95984c37f85506ed6558c63d0f142ebd842",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "b545934d61f5e01ca6f77180f0fbc5e2be0b45b5c360ed139926ddbce6631bb5"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-42991616.bin.gz",
+        "bytes": 890486,
+        "sha256": "b82e8ea66f1e48a4adc47e90ee2c166506ef6749504a3a0deba7e1c902ff6954",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "491c74d8e2fa9a9da7597dbd9836cac0cc7d42863d615597005ece979442397c"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-44040192.bin.gz",
+        "bytes": 876377,
+        "sha256": "05c9bca5629daef98c7ab29a4b7d0762faf90812a8b6023571a85e429feacec3",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "fea7f52bff4b1922545b8b05f9de766917772a5a602b0bf00c331328bcdf787b"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-45088768.bin.gz",
+        "bytes": 883290,
+        "sha256": "20b55c0571eef5ce7b275e310113662fd9d3115ed28a9344037efd6d87f413d6",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "a93d8db9053685cdaa6ee0e146ab54129bb1cacf72fdf7ff749bfcc90c88facd"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-46137344.bin.gz",
+        "bytes": 884758,
+        "sha256": "a8b1e683bd453ecdef11cdb77b8435a4929e48f04fe000715c5efef15893676f",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "0f8a77b6336d3521ff2ab868cc1aa95dac3c2086c23ae7519a25be2cd215802e"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-47185920.bin.gz",
+        "bytes": 899878,
+        "sha256": "85bb2d7fcb98d215f7849794a6752a83ad212aa55b36f6e66f90d1d35fe01ed8",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "e9947e4520529300cb7f7b9f24a572831b93410b515aa8ee100e611955113d53"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-48234496.bin.gz",
+        "bytes": 878778,
+        "sha256": "62b55180b136fe105796107e9a28f3dee8e2cd318e250450af00be71de16ce9b",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "8f89c6586bbe28a94bd3409a32b959e4cb39ca7bfd4f98cbf2b23f63571303c3"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-49283072.bin.gz",
+        "bytes": 903381,
+        "sha256": "e96f6eb8bcb7981f038b5157a5116eb27a88ac6253a49e6b9030f61b5b910f1d",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "7447d051f324b2eb63c5ac44809db3b5d219ac65588e690655230ccb77b302ad"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-50331648.bin.gz",
+        "bytes": 877437,
+        "sha256": "1185a1e1011a8f0e2f125e971981cf18f6cf099e7e9a783fee30816e94d3a6a9",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "51500dbcf54e0d2e7e1335d7f6af9e24ff19598004a5718debec8ee77f0b2e27"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-51380224.bin.gz",
+        "bytes": 859559,
+        "sha256": "6fd68346be95c2d38cef12fa84d01a774e6f42155caab6fd05915bc7b2a3ce1e",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "bbba3513bc8689d1c928bee901a511a8df1310ced59ae318a9129a798c075be0"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-52428800.bin.gz",
+        "bytes": 848555,
+        "sha256": "5764e172ebe57c5a0fa21ec083760a73f466af40cb72ba772a6c291f60e421e9",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "0485042b73e55fa00e28f2295a46e0f9be9f45e5dc9c793f0499b5992a9aa31b"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-53477376.bin.gz",
+        "bytes": 822813,
+        "sha256": "7361c21485085840494cc3bfc3ece6b407d2ed96fa449bffd4b2037fd7233b2d",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "7d8b78fb4cbd82599868b2636460fa2658194055a1e97f062a2577bf4583c004"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-54525952.bin.gz",
+        "bytes": 798496,
+        "sha256": "c5d027beac5b672fd2fae3658898e4917bafd78de6ea272cc73a8e9b8d7e6e32",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "4f1b7daacfccc842e174c94a9dd75bc9163c87f97b47ed37524d9a05cb9b5a6f"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-55574528.bin.gz",
+        "bytes": 813343,
+        "sha256": "4f31f7515e9db6061a35d556c9238e8c19a5e7355c7dceb29d6caa014bf5b5cf",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "729218e88242634fa99874e8947144fa8608c2815fbd1ac9ce94d281f51c1ea7"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-56623104.bin.gz",
+        "bytes": 852152,
+        "sha256": "3aa3f548869491ef51cf1cd1e5092d5c5a3506559e4070348f738de18a643c27",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 3978640,
+        "uncompressed_sha256": "9d9d63b66596b2c5cdcf6321e017bbd4008ad01175e926931d0923393af203bb"
+      },
+      {
+        "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/rows-0.bin.gz",
+        "bytes": 306707,
+        "sha256": "fbd4c0218e3e2210ff0e785b35881ca6905e8c1005e950d52eaf9718d66d984f",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 2097328,
+        "uncompressed_sha256": "271262716d42859a3e72913ee69f8c877b79ee54ae4d400e057c0d60112b3d93"
+      },
+      {
+        "path": "data/coverage-classification/manifest.json",
+        "bytes": 4921,
+        "sha256": "be2a88a8ae0a9516ea116ccc378fb3d06663d327b0dde2c05b1cb72be4c8d5ed",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/coverage-classification/rows-0.bin.gz",
+        "bytes": 197404,
+        "sha256": "fe22d673af6150f5eb6891995ddf87d3b19cacd963194f9f95e4333750961b89",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 2097328,
+        "uncompressed_sha256": "75aa0c52f6a431dbada24bbd3fef5f3d60cbe0cc7f01d339c5e9dcb34f60b094"
+      },
+      {
+        "path": "data/coverage-classification/runs-0.bin.gz",
+        "bytes": 962839,
+        "sha256": "e0d39c8e75372ddfd3d602019960a13ab95ba8c07722c1f089dbe99c1e756f93",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "916d1cb7ce3ab4912d296d1b68d0a5f20ae51ec787ef21ff6e811b4abe688c44"
+      },
+      {
+        "path": "data/coverage-classification/runs-1048576.bin.gz",
+        "bytes": 974502,
+        "sha256": "e7a2f63cd4bf1f49a5d58c89f0f227b56c476bb4fe64d5500a8901278b9b5b88",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "2e26c5dfb630e84060dbe28d1086fa37a1446c10b8bfa5d2e3819d49a01e6e24"
+      },
+      {
+        "path": "data/coverage-classification/runs-2097152.bin.gz",
+        "bytes": 945123,
+        "sha256": "9e39fbf19fc30325fe042b4bf2d93bd522b3f31524447592630c1f1f5e0ef0e3",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "d7c3d2cd82e34bafe82dbb8a4a1491da3674c827ef84b3340732d9df2bbc800b"
+      },
+      {
+        "path": "data/coverage-classification/runs-3145728.bin.gz",
+        "bytes": 918272,
+        "sha256": "0517d15be35f3c2fa88244fcab9758f8ef0603f6699a87e416a2ce87d21b80e9",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "8516c592c48179198c714244e13aa201bc50e18ec3733bc28c5bd9bcc01435f7"
+      },
+      {
+        "path": "data/coverage-classification/runs-4194304.bin.gz",
+        "bytes": 921147,
+        "sha256": "311349333e016170ebf105291fd2e6d096261014f0162e11d40e01e0f0a18d5b",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "41ab46d780e12ada292c7856ef53c22302fb1f86491671eaff624d5287e95fb3"
+      },
+      {
+        "path": "data/coverage-classification/runs-5242880.bin.gz",
+        "bytes": 895070,
+        "sha256": "51e838a3277570fbc02c3a2da7272bb086a1dbc25239fc95249b873e50248923",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "e2f7d0f3bf65ebd9e19e392d5c8f3205e706b9e78c039ebae8ed9fef11ee3a3a"
+      },
+      {
+        "path": "data/coverage-classification/runs-6291456.bin.gz",
+        "bytes": 914965,
+        "sha256": "bf0db6a93fa40574fcd52f4802b021d6750c05a4f601565b694bda654a69684f",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "53d74d9d67944f7fc15523fdcccca35786082417757e3c53c6219fdb25d15127"
+      },
+      {
+        "path": "data/coverage-classification/runs-7340032.bin.gz",
+        "bytes": 974283,
+        "sha256": "4803961d4353b5c85e52effa00205bd7cbf2055153cb6a49c0be01af9a40eb73",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "a088a8a9b1afe6764677aec328bd84a9f0c62ea31a18ffbcee32ca34cd44a43a"
+      },
+      {
+        "path": "data/coverage-classification/runs-8388608.bin.gz",
+        "bytes": 980306,
+        "sha256": "633cb2bb48d1bbc19db6a3bffab2bc44378125dc011c3863288907e1d2466963",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4194304,
+        "uncompressed_sha256": "b801c8a1bea768566ba4e9bf049eec82bb7a6c66d3d316ad3e03751bb7109189"
+      },
+      {
+        "path": "data/coverage-classification/runs-9437184.bin.gz",
+        "bytes": 757101,
+        "sha256": "4fead58c9f9012b0e9705f7d7f7439d2ca047f8a74881d686cb43637059446db",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 3391512,
+        "uncompressed_sha256": "0d38f7ccf84d068f439806692c80cd4e6de1bcbce4bf6d917cb7d77ed3a68126"
+      }
+    ],
+    "pins": {
+      "canonical_grid": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+      "hierarchy": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+    },
+    "pin_files": {
+      "canonical_grid": "data/canonical-grid/manifest.json",
+      "hierarchy": "data/hierarchy.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "retained-original-reference",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/548c5f89f00271050823076a84695bb41e1b8454",
+      "role": "Original geography/identity/release and physical-class transport references; source authority remains separately limited",
+      "vintage": "548c5f89f00271050823076a84695bb41e1b8454",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Existing original source reuse terms are retained; no new external-source redistribution approval is asserted"
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Restore complete immutable originals and their retained source/release manifests from the repository baseline and mandatory source stage.",
+      "limit": "Numerical/transport fidelity does not prove factual geography completeness or land/water truth. Physical source blocked tiles and uncertainties remain; broad dated/device performance and live delivery are unverified."
+    }
+  ],
+  "outputs": [
+    {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "bytes": 7842,
+      "sha256": "d6e7864f72941bca329e59a2cf1767d32cea3ae8f313ca1add9bc09598116020",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/README.md",
+      "bytes": 2044,
+      "sha256": "9c0b9fdfc8f31da6b803cf147145ca5cee307fd847d75662527ad76d00108da4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/asset-inventory.json",
+      "bytes": 32962,
+      "sha256": "29ada46f50176551c89f278ca4df81dbee58c10fe7da7533a66964b1a205150f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/assets/index-C3c5uWsH.js",
+      "bytes": 366833,
+      "sha256": "46c989eb41772e9b7bae2651166c90e8b16c6dd3fff2c533927e9ba465a8eaa2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/assets/index-C3pmC4rP.css",
+      "bytes": 31457,
+      "sha256": "3719753e6385f4d59f7271b56c6b439d40905c4777bc202cb05b17796ce1db39",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/assets/native-context-worker-Dc0lM6v4.js",
+      "bytes": 15981,
+      "sha256": "23c2cf8c0a512d7f6fa8ef2c7a95c9ffe45d42076cd610bceabd5ed8abad512a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/assets/pixel-gpu-worker-DOOaZKfq.js",
+      "bytes": 2332,
+      "sha256": "734c8d12b0857cb45d974f87dcc79d3fbcc3f707c0f1430b9a8421fae22c10a3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/assets/pixel-worker-CRnmADsw.js",
+      "bytes": 2680,
+      "sha256": "19bcce491dc0717ceb2159c4f78b592bfbd3c856ebb69cfda27fefa67f53eefd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/atlas-geography.json",
+      "bytes": 10519995,
+      "sha256": "c6bf82934dc86ed2a93594a325fdcaece61e8fbc68b2af72daf548d6ed9f6baa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/coverage-classification/rows-0.bin.gz",
+      "bytes": 197404,
+      "sha256": "fe22d673af6150f5eb6891995ddf87d3b19cacd963194f9f95e4333750961b89",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 2097328,
+      "uncompressed_sha256": "75aa0c52f6a431dbada24bbd3fef5f3d60cbe0cc7f01d339c5e9dcb34f60b094"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/coverage-classification/runs-0.bin.gz",
+      "bytes": 962839,
+      "sha256": "e0d39c8e75372ddfd3d602019960a13ab95ba8c07722c1f089dbe99c1e756f93",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 4194304,
+      "uncompressed_sha256": "916d1cb7ce3ab4912d296d1b68d0a5f20ae51ec787ef21ff6e811b4abe688c44"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/coverage-classification/runs-1048576.bin.gz",
+      "bytes": 974502,
+      "sha256": "e7a2f63cd4bf1f49a5d58c89f0f227b56c476bb4fe64d5500a8901278b9b5b88",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 4194304,
+      "uncompressed_sha256": "2e26c5dfb630e84060dbe28d1086fa37a1446c10b8bfa5d2e3819d49a01e6e24"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/coverage-classification/runs-2097152.bin.gz",
+      "bytes": 945123,
+      "sha256": "9e39fbf19fc30325fe042b4bf2d93bd522b3f31524447592630c1f1f5e0ef0e3",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 4194304,
+      "uncompressed_sha256": "d7c3d2cd82e34bafe82dbb8a4a1491da3674c827ef84b3340732d9df2bbc800b"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/coverage-classification/runs-3145728.bin.gz",
+      "bytes": 918272,
+      "sha256": "0517d15be35f3c2fa88244fcab9758f8ef0603f6699a87e416a2ce87d21b80e9",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 4194304,
+      "uncompressed_sha256": "8516c592c48179198c714244e13aa201bc50e18ec3733bc28c5bd9bcc01435f7"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/coverage-classification/runs-4194304.bin.gz",
+      "bytes": 921147,
+      "sha256": "311349333e016170ebf105291fd2e6d096261014f0162e11d40e01e0f0a18d5b",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 4194304,
+      "uncompressed_sha256": "41ab46d780e12ada292c7856ef53c22302fb1f86491671eaff624d5287e95fb3"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/coverage-classification/runs-5242880.bin.gz",
+      "bytes": 895070,
+      "sha256": "51e838a3277570fbc02c3a2da7272bb086a1dbc25239fc95249b873e50248923",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 4194304,
+      "uncompressed_sha256": "e2f7d0f3bf65ebd9e19e392d5c8f3205e706b9e78c039ebae8ed9fef11ee3a3a"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/coverage-classification/runs-6291456.bin.gz",
+      "bytes": 914965,
+      "sha256": "bf0db6a93fa40574fcd52f4802b021d6750c05a4f601565b694bda654a69684f",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 4194304,
+      "uncompressed_sha256": "53d74d9d67944f7fc15523fdcccca35786082417757e3c53c6219fdb25d15127"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/coverage-classification/runs-7340032.bin.gz",
+      "bytes": 974283,
+      "sha256": "4803961d4353b5c85e52effa00205bd7cbf2055153cb6a49c0be01af9a40eb73",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 4194304,
+      "uncompressed_sha256": "a088a8a9b1afe6764677aec328bd84a9f0c62ea31a18ffbcee32ca34cd44a43a"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/coverage-classification/runs-8388608.bin.gz",
+      "bytes": 980306,
+      "sha256": "633cb2bb48d1bbc19db6a3bffab2bc44378125dc011c3863288907e1d2466963",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 4194304,
+      "uncompressed_sha256": "b801c8a1bea768566ba4e9bf049eec82bb7a6c66d3d316ad3e03751bb7109189"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/coverage-classification/runs-9437184.bin.gz",
+      "bytes": 757101,
+      "sha256": "4fead58c9f9012b0e9705f7d7f7439d2ca047f8a74881d686cb43637059446db",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3391512,
+      "uncompressed_sha256": "0d38f7ccf84d068f439806692c80cd4e6de1bcbce4bf6d917cb7d77ed3a68126"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-0.json.gz",
+      "bytes": 478428,
+      "sha256": "2e4b41fec257f1cc0e93b91aaa3de804834e81976092f47971376614002ab4d2",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 4087758,
+      "uncompressed_sha256": "ebae8d2319b12c6ef37f463c926f45785e8b86e036e59c3802ddaeb21a39fe45"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-1.json.gz",
+      "bytes": 211542,
+      "sha256": "00126d1bf101c39c2057ac5ae875abc53695f397adc646a7406d28ffcfad134e",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3049091,
+      "uncompressed_sha256": "8d028692426edfcde65fdada55ee2b05e11cad2e1228101c916e2882072cdd0c"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-10.json.gz",
+      "bytes": 206673,
+      "sha256": "ae92bc36ff3076636e9ab9acb92f566836b021e2a67676a88e95f276f23dc158",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3645737,
+      "uncompressed_sha256": "98df30acddeae9e79adde7432bf863a6ac82db135e069be7fb01413c7dbc47fd"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-11.json.gz",
+      "bytes": 200958,
+      "sha256": "6b142de010b25c4187314bc114775fb5c7c1dda0f6533f13f36240c044ddc080",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3555258,
+      "uncompressed_sha256": "48c97733cdd09ad9e45c79aed8b8c4606386cc946aed566bf4f89c644f094bae"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-12.json.gz",
+      "bytes": 204994,
+      "sha256": "7141d608714354e0092baee58a1a163ff3ee80542cf472470f93b9a7e4de805e",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3626698,
+      "uncompressed_sha256": "ce9170cd92a25676a5fa8a0846a97713df2ae7dea5f8d12b259227031db08dce"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-13.json.gz",
+      "bytes": 216758,
+      "sha256": "1976c234a083054117252671071b536a6128c439cde3227c232d678d268270fa",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3667750,
+      "uncompressed_sha256": "908e6ab718a7beca0d06d419380ddad47b1b86f4667ff151d0efdd2ad3d3f620"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-14.json.gz",
+      "bytes": 212400,
+      "sha256": "a9b1a4532b2078e49cd5cb5c9d96dee3f5937ebed60954f7767600e886a201f5",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3682698,
+      "uncompressed_sha256": "2fbc8b7cb80aef73d5d8a88c324f60078f1268e6971aa5a69d11c052bde3b5b4"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-15.json.gz",
+      "bytes": 218271,
+      "sha256": "1ae52b80475df4ac1711098dfdda5cae4f81194426937971f9d3dd3e41f4a4d9",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3622191,
+      "uncompressed_sha256": "edcb2df3d28e8597cacc8d286324be09ed5c25b24bc7403d45cc526b76d26705"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-16.json.gz",
+      "bytes": 202954,
+      "sha256": "07c540e60cef42f33b5b459c8a09d10259f0208186d38e84edf406d3a741d351",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3517228,
+      "uncompressed_sha256": "06697d457c088c4b5da40254a3c6124f63c3ced64fad452b8b100b819be0b7b2"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-17.json.gz",
+      "bytes": 216890,
+      "sha256": "564801e474edec3157f210f4d989b8f5d90cda9240557229700602788b8da58a",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3724814,
+      "uncompressed_sha256": "52ff61ca8eb5802a9eadd022dc3c13dd0b0f0ea48eec308b17ea86565d196792"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-18.json.gz",
+      "bytes": 206643,
+      "sha256": "c2fc2d59df038a7444a8aa242e60bb082e04a211e62cddc916cbedbe7ee468e9",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3631178,
+      "uncompressed_sha256": "59aaa61282585f749f3c352d8c7ff95baecda632dcca5d44600dec574c9ea805"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-19.json.gz",
+      "bytes": 199032,
+      "sha256": "23768d03b5576b8efe4b6aa334e2d8d6e69ae0e1a7580210d9dc4783b5d40c60",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3589735,
+      "uncompressed_sha256": "7449723cb411051021c35aac8f30bc886707471aff41eedbb7830706cccc3344"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-2.json.gz",
+      "bytes": 212435,
+      "sha256": "788c5efab1b9cc8041a9c62034bc1bf48ca1c5d06aab51908568bd682970020f",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3049335,
+      "uncompressed_sha256": "919e1e22e12416f5c137aa021fa65702d44b94693b815a11328f25f97ec5fb02"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-20.json.gz",
+      "bytes": 215860,
+      "sha256": "8a727a3b7741a783e23d8d47ad1608f7470901b85d00d2fd2aab4f06c3d22f97",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3671217,
+      "uncompressed_sha256": "02d044f5e6f573c5e49b6f8095c40f6e4d76346f24f31b54e4db7a5c99421690"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-21.json.gz",
+      "bytes": 202759,
+      "sha256": "eb125a883fec2c8bd1f489797207993431b75ab050466bf38a25207edae25f32",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3646107,
+      "uncompressed_sha256": "674515dea0d526fa81e317cf3e4b0ddb8b962a406fcc6b94efdebc6369fea0df"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-22.json.gz",
+      "bytes": 212433,
+      "sha256": "25031c404daf2e9405ea68e027ae288ad93a46effc38c24514b98816e09f505f",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3705023,
+      "uncompressed_sha256": "15d8ba271e1a2c33616850b00b23b82805ad85785ed1d92baea5e94540fc09f4"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-23.json.gz",
+      "bytes": 204916,
+      "sha256": "0f541b15fe6a438bb5d217a885fedf6c00ec55a010662d7b883f32cb6022f704",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3655238,
+      "uncompressed_sha256": "b1346ed267bfea2eabd493e48a88fc455c0302e9686e9d62ecf80cb87308a372"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-24.json.gz",
+      "bytes": 219874,
+      "sha256": "eb5cc8f362458dcdee3a5fe67f582b507677348026264034fc2751fbcf445571",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3739871,
+      "uncompressed_sha256": "f98af305577d0b0a6fa865b7d94ea2b2953f9b8c5f0095662b6abad15e493e69"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-25.json.gz",
+      "bytes": 235181,
+      "sha256": "30e16c5f2699ef0170f4123874c097fc8b41fe5165f689f1893352bd5ca4a868",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3628168,
+      "uncompressed_sha256": "8612d954bbba0830009081af19ea95c0dc8611f4ec85e296664c97e4720ce4a5"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-26.json.gz",
+      "bytes": 220937,
+      "sha256": "3ca9e1e5a9e38a2ad73c41096423276b89e846954b0f1062c48eda927d8ec0ff",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3705195,
+      "uncompressed_sha256": "e7adfed365d25ee996b48c3c61e03ddd276e21aedff5e0c033f9da6d5e8a4d74"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-27.json.gz",
+      "bytes": 217327,
+      "sha256": "05f4895d5608d60e54a10433616beacfa9ddb80e0b02b787c56d17327b771a58",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3690004,
+      "uncompressed_sha256": "80acf4d167a42853051063928e7e07f0660aa87bcb93084f33c331b4622c5736"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-28.json.gz",
+      "bytes": 217379,
+      "sha256": "5239932154cfeb359ebd28d4fdd6bb16a3a9cd3616f3e0b3f349287a370ea27a",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3633462,
+      "uncompressed_sha256": "e082cc6d444fcdc397c909af3e8c3b49f9fc57fcd71da6f9e293b044f0f2b457"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-29.json.gz",
+      "bytes": 215362,
+      "sha256": "0663629345193c431a89c24a1106af9c0d63fbee8fce013e642d2e9a18396299",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3678201,
+      "uncompressed_sha256": "8fb4224b4cf6839ecb92aba4d430a9393003feec81eeea41903a41d65017cdb4"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-3.json.gz",
+      "bytes": 251689,
+      "sha256": "837a11e3961ea0d6896a5e8fe7de4a3ad7d5794624e29f9a14a6dea2e67815c1",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3849597,
+      "uncompressed_sha256": "5a83b603d3d784939bddfda5b7659571b71d32ad65143e72365ba38af06a01b5"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-30.json.gz",
+      "bytes": 206788,
+      "sha256": "f04cda274f3efaa89f5e538bacdb47e42b7c8579358f4b74cb3b0d2596738fdc",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3574901,
+      "uncompressed_sha256": "89521c7dfd5c326f4f88cf7aa446a39d9843d8a1208216ab59f9fd93479826b5"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-31.json.gz",
+      "bytes": 210626,
+      "sha256": "07d3765dd2686f2d588a9b5bf60407773fa057cc73f2aa1beda15c48628f98f2",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3613400,
+      "uncompressed_sha256": "41dac627e13f19428a596cce4c017dbb9f49959301774af3a9cc3fb1d623d625"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-32.json.gz",
+      "bytes": 217645,
+      "sha256": "846711454aeb9050daf6d2041a9a4f2dac48a52204700be81c8e0890783934b8",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3688289,
+      "uncompressed_sha256": "4ff9bb1d23f49dd9b40ed0ded601f76bd6a849021771a3b4735977b7819debde"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-33.json.gz",
+      "bytes": 22641,
+      "sha256": "86fe0e2e15b33cff1c7bf92d552cf97a86b8e9f6ec225902cb992444da797595",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 287271,
+      "uncompressed_sha256": "23ac4f66fbabb64897b7375951df64150e6a7fd896212b82ebf695b5bdedf3ce"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-4.json.gz",
+      "bytes": 441722,
+      "sha256": "92531dd80607baf8071f5251adee10e01d0423abb31d38b6f25bb959026447f8",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 4953878,
+      "uncompressed_sha256": "9d83cb4d4fb6b939a247da0b2cdcd0221155b5a1b90ea95a5193c0b1114ad527"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-5.json.gz",
+      "bytes": 208821,
+      "sha256": "0df2cf6eab0208ff6ab2c1994171e5376519d6e317c149fe5d0e855f4474120c",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3766609,
+      "uncompressed_sha256": "dcec15f29fa94b9af099f87414e0859c3a5e35731741835deb7fb56c348f6ff0"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-6.json.gz",
+      "bytes": 216786,
+      "sha256": "c8e871c7f6d27748a5456073805a0a9b6f05b98fc6d77d32f81b5827c7c05809",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3683722,
+      "uncompressed_sha256": "e0f6c5dac6135daa4ee167ef85f50f4cbcac8c3505314f519ae728e2a87621e9"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-7.json.gz",
+      "bytes": 222040,
+      "sha256": "fd7952be5df3f6210fd4c46f23d0fcf950903fa2c418d45b25f8002ae0b71202",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3718185,
+      "uncompressed_sha256": "769606b4ce80813325dc6a058d9c31126983dec969f38996e381f709f248af30"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-8.json.gz",
+      "bytes": 224485,
+      "sha256": "d486accf2799ab1b18f2c0795e329e847dd07d493546a228f84e0bec89a13314",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3704143,
+      "uncompressed_sha256": "20db5841b5c64cb85901106cafcae4b472d4f37d926e0d6535ecbbeeb7e32dbd"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-9.json.gz",
+      "bytes": 211944,
+      "sha256": "933ee504a0c7e75f33fac388b06e3ae1e0ecd127aceaa95125886d94fba4dc72",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3720850,
+      "uncompressed_sha256": "5a83e0a919bc0c08fac7e35f7f1573eedbe680e10655edd142f8654ea077ede8"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-0.json.gz",
+      "bytes": 1489697,
+      "sha256": "d1320880e42dbff946812426a0bc49a2528af26f7454069599830bf6eafa1a9e",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 4798555,
+      "uncompressed_sha256": "705e3121b368c4e2851e054eea8c2f980b9021e4557c6409b2ced0d520e618d0"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-1.json.gz",
+      "bytes": 1191212,
+      "sha256": "cf977f4f770ab4ea56afcc235ced943f6e11c5fc25400876f399ae23a76f7009",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3958542,
+      "uncompressed_sha256": "df8e420dc92d54fa99e62c0b2cd759edfa1e65e33fa94d92089d57675fc13629"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-10.json.gz",
+      "bytes": 545483,
+      "sha256": "89ac1ff70ea862a0bc4df0b0f28e594fe10734157478a594aede9e2881f2497a",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1857805,
+      "uncompressed_sha256": "e3f5eb117dbbb4abd13ac8928af6ad233d952efc29102e97950b819589281ed2"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-11.json.gz",
+      "bytes": 572555,
+      "sha256": "f3371e64e62393feeaf027f9ed3bed1c79df4f7c7c35862d9e9059cfb32ee157",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1957474,
+      "uncompressed_sha256": "94626d0acfac8e40f4bb135b029770c13ba62a221db52cc9e005ce9143e50976"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-12.json.gz",
+      "bytes": 345385,
+      "sha256": "e54e039f92b335327e75fc1148e36a3b0a110e014bdb758d7c2b8a4c98d5295f",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1343838,
+      "uncompressed_sha256": "0065d29602ef9897e204da5d483db08637595d40d5a8677bff14d1ce3b61bbcf"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-13.json.gz",
+      "bytes": 663191,
+      "sha256": "a04165b8351cc0c2b0767a46b3cce3697da81c6893eb0af57652eff55ef615af",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 2313790,
+      "uncompressed_sha256": "4096e0a833c4321e53f52fe36c4faadc929318ba8c3994fda08f9b50dc89edeb"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-14.json.gz",
+      "bytes": 284234,
+      "sha256": "e4c4577bf6eb3c659940f52c9d709bf145272f3c96f8df037e4d295645935473",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1176785,
+      "uncompressed_sha256": "397cf03f69467f75fb9a6d01cdb7eb336a046f60086cd33c8b1dc3912b945686"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-15.json.gz",
+      "bytes": 558955,
+      "sha256": "995e286161429e2e7dab050e5b1f6bdbbabafc140f7c28cd024ac214d93f06d5",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1934515,
+      "uncompressed_sha256": "9bfd0361f376d54dc92a4126042902d2b37211b97dfbb2d341d1a22ef96cf7e3"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-16.json.gz",
+      "bytes": 578915,
+      "sha256": "fac54236346e6e7adfa8e7a2f84c40a20400ef9f80d28ac5db39ffecc1100888",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1934748,
+      "uncompressed_sha256": "a468610c412df192b120f905dd60639934008f7768c63d5687e551f44aa855f2"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-17.json.gz",
+      "bytes": 464932,
+      "sha256": "1984d4b2ff151c8c9ba6d1b34bcf1768a2e1963a726d264ed79beb630fa796d6",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1635437,
+      "uncompressed_sha256": "31cb3c0a47583feeeed61487ef47cf96e56920d4eb636b319da34c9b53c733fe"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-18.json.gz",
+      "bytes": 519779,
+      "sha256": "b82e3d38d1083f3f0c7c3c8bb4e01de963670d23b85c2b9422ed13280ec8f572",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1653146,
+      "uncompressed_sha256": "78408a30264f253ab70e96419b87ef2e3006d7e7e21ea5f5396795b3e0a1f47a"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-19.json.gz",
+      "bytes": 357575,
+      "sha256": "501b011ff01f6245a6e6b07d3bcc26d16b1250daafcd307b5b9538156b19e019",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1236547,
+      "uncompressed_sha256": "8abf5356fd7bc2234df409efa83e6d775046408226c1cef4c66be3a3357f5f65"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-2.json.gz",
+      "bytes": 860497,
+      "sha256": "05972b20fd61232394bb70429da69370751a4ed60886430c06c40dc77552dd8c",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 2906777,
+      "uncompressed_sha256": "1858cc3068c587fa59f91dd90010cd7c58f76b2c2d6eec7cdeb03e1b846087a2"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-20.json.gz",
+      "bytes": 1093612,
+      "sha256": "93152061c301d32c93327fbc61958720748679ee0a9a482868944d0cf4da71f6",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3295803,
+      "uncompressed_sha256": "841a14104a1ccf81b57e46b880c22b20c61d421e29b4256e280ba902f5d05705"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-21.json.gz",
+      "bytes": 1137356,
+      "sha256": "c4c43297342a94f62785cce1aa2af7b12e27ae7ed4513ba6ece1b727f81d5fb5",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3460406,
+      "uncompressed_sha256": "a6f090db9ae226e1293d713972897ba49ef95aa108454b2cd864e8af173c878a"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-22.json.gz",
+      "bytes": 397827,
+      "sha256": "7f65c0d72d44f23d95c21e87df9ae54b546b862ed299d9f19e8f2d81ff85863d",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1428046,
+      "uncompressed_sha256": "3b192d14384c85996103a37acd92b40d06647193d932e655524eb360dab25fd2"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-23.json.gz",
+      "bytes": 501494,
+      "sha256": "b7f886932d1fe51885cb34b1f72c45a9a7cbdb7d94c131192baf4fab7cbd98b0",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1644098,
+      "uncompressed_sha256": "fc811d709495e06a15c6e55d1440211bb9d6e3895ad5795950a9f319a95c3ce5"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-24.json.gz",
+      "bytes": 448079,
+      "sha256": "d828e02cc21275d03371fd93417df4ada20b0d95350c9a9fc581025d88d02c70",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1531172,
+      "uncompressed_sha256": "512607487631917e9cdfdb709a795846ca0d0da60d4ba19c7644f96a1ea78242"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-25.json.gz",
+      "bytes": 385853,
+      "sha256": "991d2f971b9d9468161af1d58d19e15a1ccb4e578f19002a5dd52d5568fe769c",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1313596,
+      "uncompressed_sha256": "10cd58a7236059e656d84a023d36c8986a2b248634b560d2fc8ab0988eb5defc"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-26.json.gz",
+      "bytes": 443230,
+      "sha256": "a8de791a31c3be242dd908ba4b60efce641198ee668f3e95f897eecbd639c410",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1419961,
+      "uncompressed_sha256": "15cad1f726faf2ad4d96366e89ed5d64c0d76deb05de7062e730f9d61b05cbaf"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-27.json.gz",
+      "bytes": 491137,
+      "sha256": "d4bdf6be5abf7a79677eaeef660c5a0d32802e51f347d16d2f2f6256bb949b28",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1609398,
+      "uncompressed_sha256": "5121d4407cb0a0e0809fabd6aeda4ecb8b6685fde06a08fa226ea34a95db4788"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-28.json.gz",
+      "bytes": 941802,
+      "sha256": "c4b79182cc241525fdfa05e321b0fd7c47183fa20a1647ab8f7a20283c9e956b",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3136948,
+      "uncompressed_sha256": "903261b1807df7122ae51efe9617be319109f335507f6724094f2375561e50c9"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-29.json.gz",
+      "bytes": 2771205,
+      "sha256": "58ae920058a1f16c2360577a779050b55bcf3ecff43c770a3d1383ff0ea90d52",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 9092568,
+      "uncompressed_sha256": "9131e14ec43c64229eaa709073b6e082c8cbb41a2d1b99e686e08b3a420c8f83"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-3.json.gz",
+      "bytes": 528770,
+      "sha256": "d43211c861ea3e1397cadd6c0cf60585cdc42124f35892bcbd9c7f9ee6806291",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1838042,
+      "uncompressed_sha256": "ddd903f42fca2b06da3172a3abdd30c28a22b2fd9a24122f4db7aafb15f57575"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-30.json.gz",
+      "bytes": 3165750,
+      "sha256": "77e677c75774c570e2be32ac4f6c9b1e5f6f8750f4d937ee74887f458e1e81dd",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 8932993,
+      "uncompressed_sha256": "e7d61cf41fc8e5604acc391edc09b4eb7c9fd16f7edeae2a8ab156666d65bcf2"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-31.json.gz",
+      "bytes": 3032619,
+      "sha256": "4c6ee23b9e5f87d5262667908828139f6a88312e471d6c2f5cd0c7cdaa907389",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 7437808,
+      "uncompressed_sha256": "e70082234383d0be8b7219ece66cca50ed7ca836ceb7936f83accf65a7151fc4"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-32.json.gz",
+      "bytes": 3082053,
+      "sha256": "c3e83ea45ecac823fe316228ce5be57f7fe2c096d4d614b1a71bd7f12d44e24a",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 7563409,
+      "uncompressed_sha256": "a6b1584e748c1d1abd8530f0a8f1be44f1c45afc9fc2ff8612b30e68fa165b0c"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-33.json.gz",
+      "bytes": 629494,
+      "sha256": "d008104dbea80162a77f81d95917749e4711bddec1df0fb9858e287d1a88cdaf",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1985962,
+      "uncompressed_sha256": "8091fd27221ea61761ba3a52abfdb32c3f32b3384fd01dc6a11d0f0330f3b953"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-4.json.gz",
+      "bytes": 445742,
+      "sha256": "0be70ec74c93938fca771d2186c3ef64723d991029cba18e577af26f2499ef65",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1515515,
+      "uncompressed_sha256": "ede7e21c3cb531ef5f8adc410fda3c8ff8ea2f37585a623c1b005327aa3b300d"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-5.json.gz",
+      "bytes": 583084,
+      "sha256": "a841a528f2cde68c0259f22e1070d937772318943545bea7cae9b9921a5b194b",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1946732,
+      "uncompressed_sha256": "ffa1f71bb62ef951194bd798a8e3683d3c40e4e31f14a3a29f150d4f40e027db"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-6.json.gz",
+      "bytes": 363161,
+      "sha256": "5002b342a90634ccfc99fbe12d05b74f06e90e6f984b777f99286322b4d5e727",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1383430,
+      "uncompressed_sha256": "853a134db2cb0833ebdae060fccbeba8a021d512192112b7ebfeaeb8b8e8e525"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-7.json.gz",
+      "bytes": 286742,
+      "sha256": "f407a7d9a2da7c0fe3eaf2710fa6b8af2726823e3a37eeb6f278f7b0e48282d6",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1061063,
+      "uncompressed_sha256": "5a1adbc935113e925370df0e477088f9238371353d5170b1c444ac11b00194a7"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-8.json.gz",
+      "bytes": 548288,
+      "sha256": "c06d316804a103bb1bb3f8445159587fc9fa03582939967be0fc7e7f6e58c92b",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1860037,
+      "uncompressed_sha256": "9556db4c1211868d3364852cfca9f21068f664924b7461a714dd8668766e82d3"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-9.json.gz",
+      "bytes": 770854,
+      "sha256": "d887f3eee2a2b57a6ae36dc5421c24c84917a325b06a262cf85db96e788caede",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 2429389,
+      "uncompressed_sha256": "e27931a8752cee3e017a71fda48768bfb36a66c89ea5046a74ebc625efc7bc6b"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/index.html",
+      "bytes": 462,
+      "sha256": "8babba2967c7b1fb9c59ef49ca1d84ff46f83e2c580e7e30bffaf272e1387c16",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/native-v1/native-row-latitudes.f64le.gz",
+      "bytes": 1851757,
+      "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 2097328,
+      "uncompressed_sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/native-v1/ownership/rows-0.bin.gz",
+      "bytes": 306707,
+      "sha256": "fbd4c0218e3e2210ff0e785b35881ca6905e8c1005e950d52eaf9718d66d984f",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 2097328,
+      "uncompressed_sha256": "271262716d42859a3e72913ee69f8c877b79ee54ae4d400e057c0d60112b3d93"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/native-v1/ownership/startup-runs-0.bin.gz",
+      "bytes": 3854101,
+      "sha256": "c6c3ea248c320c9264748e4588e47d6cef45ad37a73235cb27ae0d493b4fe1cd",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 16777216,
+      "uncompressed_sha256": "39b19e37f1ac0fdfec8b3ce0b6e2edd461a7fadb9fbca8db6ffc7c2f6caca278"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/native-v1/ownership/startup-runs-12582912.bin.gz",
+      "bytes": 3478671,
+      "sha256": "882e3f41a33830a33608274ad0a6d8e1aab422393194a6e9e38b44024c769f53",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 16777216,
+      "uncompressed_sha256": "857f9cbe62de383d4c7369378231101d54ea73cfd88e1ee3a1438461f7a7d17a"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/native-v1/ownership/startup-runs-16777216.bin.gz",
+      "bytes": 3289315,
+      "sha256": "0591a2271cf700d4d1de36c6623b5017c9f1f843b18261f1b3e08945a4d3b5f2",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 16777216,
+      "uncompressed_sha256": "5be4da17e0c541e5dba33480b722625e871cb554528715a8dbd36a47396eddaa"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/native-v1/ownership/startup-runs-20971520.bin.gz",
+      "bytes": 3146688,
+      "sha256": "a3b2b6f3bea03f34e7544e44e308ecdb0c8b262a1ff0922a16629073355e70b0",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 16777216,
+      "uncompressed_sha256": "bbdbd930b5e5af7c98db31621bb2651da02b47011e9af399e4da4e94a768bed8"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/native-v1/ownership/startup-runs-25165824.bin.gz",
+      "bytes": 3272875,
+      "sha256": "e6ead1e1fc22eec4cc9c8ac3d8fa877ba8890f605103a91560765e7d12a24ba1",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 16777216,
+      "uncompressed_sha256": "93138fa8fe0672d3b346311f0822f23ed3f6d0e06800e00d31cea037aab9175d"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/native-v1/ownership/startup-runs-29360128.bin.gz",
+      "bytes": 3296575,
+      "sha256": "bb16d1b2fb08bd09ab42234c35bf4f2e912dbf22a05b6312093b3dc5e800a3ae",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 16777216,
+      "uncompressed_sha256": "a68e790aaab92c6f23ceb9708266eee16a1a0777198991b002f1dc927cdc4b47"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/native-v1/ownership/startup-runs-33554432.bin.gz",
+      "bytes": 3521909,
+      "sha256": "b7e13bed0f72429cab3f46dd54ae23c9839b5fa38a7208e0cb6b4d9c954faca9",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 16777216,
+      "uncompressed_sha256": "f6a4005580671f18022e43fb9a0514243a408afec8c3f7ac12b087344099fb86"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/native-v1/ownership/startup-runs-37748736.bin.gz",
+      "bytes": 3497659,
+      "sha256": "c4bb0be820f556c91c48760f8f1000a16c02ea27313fa2f3b27f07b756ffd0af",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 16777216,
+      "uncompressed_sha256": "76b3e9ad7acfe43b928dab3f5147e3a48a7795b3995b8075ab714a2ca8306b93"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/native-v1/ownership/startup-runs-4194304.bin.gz",
+      "bytes": 3428397,
+      "sha256": "73648609a52d91d21533b3e18188cda450afb4ccd40ce890ceae1c571eddadb1",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 16777216,
+      "uncompressed_sha256": "7cec4b0cef217d6616aa008a098b998e455292160759e54ae763ec286dd760b4"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/native-v1/ownership/startup-runs-41943040.bin.gz",
+      "bytes": 3534618,
+      "sha256": "a263c262d1be2c2abcd9348503c16d0a6e45fb05eae17143f48fb2bd88836897",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 16777216,
+      "uncompressed_sha256": "4ccd6b3163d98c0d9d1c1365434a29207689bd9b49ee93b2bab3e6168b46690d"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/native-v1/ownership/startup-runs-46137344.bin.gz",
+      "bytes": 3556924,
+      "sha256": "dc0a1c4a3409cc29e09b42dc43cfe982ed2bd814502bb1fb1461067ce9851fad",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 16777216,
+      "uncompressed_sha256": "79173e1baeb6b8e2296897a780ad394570017263604c48c9a7ae15360ccc6e07"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/native-v1/ownership/startup-runs-50331648.bin.gz",
+      "bytes": 3397948,
+      "sha256": "54d90534ee1c87c775340a050283218ccc03639e8c87d1a6da3df770c1ad1f0b",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 16777216,
+      "uncompressed_sha256": "26b50ff86b76a94fc7291f63adcc9c2942f13682a6019e352c9c3b5f877b54a8"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/native-v1/ownership/startup-runs-54525952.bin.gz",
+      "bytes": 2460611,
+      "sha256": "88a9f89b9fc6467db773c8d18f61ce93bfb1fc8b116cfa82a3ac59bf54618748",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 12367248,
+      "uncompressed_sha256": "f83389d626479bd78daa1333da8b84211130ab9c3228671ed94ec517a4ecc7af"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/native-v1/ownership/startup-runs-8388608.bin.gz",
+      "bytes": 3423683,
+      "sha256": "51ffe4eea1d172bbfdbbf979a894ba7c5143bfcad65ad096d5de75fc328ddac6",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 16777216,
+      "uncompressed_sha256": "ac204f257f07113c0c25b9dc00ce90b4d8235c70eb85a82227721990da71c75a"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/binding.json",
+      "bytes": 1502,
+      "sha256": "9d33b8177d353cfe63d484d8e231c602f93211c66d9379b2a9e9ca91938854bb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/build.txt",
+      "bytes": 622,
+      "sha256": "36b1dba85b0f6a17c3af3f9e9709333df750879662112f57417c1fdd6279d494",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/stage-binding.json",
+      "bytes": 564,
+      "sha256": "b0a2821bbb64a9ef66fa68bd2692ce0942c13e03f553049e401c8c84054f13b2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/tests.txt",
+      "bytes": 3635,
+      "sha256": "47b5bd0c5c4a5736204ebb49b711ab0fcbd36b1d912d8d0cc20ea15354e30762",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/README.md",
+      "bytes": 3476,
+      "sha256": "d609574c0ec59229e65e4d67e357e6fb110a790ea4964ad701fe776faa35f3c4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/controls.txt",
+      "bytes": 336,
+      "sha256": "e87843046c393cad3a6ce5958de58d8e5809492ee33336c4718ddb1af2470383",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/evidence-quality.json",
+      "bytes": 28748,
+      "sha256": "d2f03beb2d4e04b31dbdeefff917535541a4c9706dae4ea64e87e0312996b94d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/generation-one.txt",
+      "bytes": 376,
+      "sha256": "bfd274788f761778d13494fccba33cfc76c3d2c238354f6d26e93586532f909f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/generation-two.txt",
+      "bytes": 376,
+      "sha256": "1080a93471f9872b55c45aceb2f9c6a00c2b6e717b6ea7d8c8c844eff96e4340",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/inputs.json",
+      "bytes": 17380,
+      "sha256": "3d224732d99333c9d85b12717316965091415fc84ea60e9dbe1c79b510257b0d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-0.json.gz",
+      "bytes": 2001789,
+      "sha256": "0432c76ebac49c61e09cbff7d4c9f4d53e33ac0a6a560bca821e03cef0d2d56a",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 6311057,
+      "uncompressed_sha256": "4fbc4c52c0d910d50f3abe62d63de2773a57474a59b5a5ce29869652612e31c2"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-10500.json.gz",
+      "bytes": 743386,
+      "sha256": "4ef400407e6b371b8c48bd3fc294ba53929393d357b23ecb3004911075a3b920",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 2350411,
+      "uncompressed_sha256": "32ed92f2b0bf0a7588a8aa3e22146ad6c0044008624a21d516cd8c0062ca72a2"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-12000.json.gz",
+      "bytes": 629985,
+      "sha256": "f1684ab3f37ada42d94601fe014bd22971de29d818a83783dd88bd608de9fc19",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1915421,
+      "uncompressed_sha256": "70ebf92f1eb82a1de612eeeaf402f94095d9f24c73ebd1d4c5b78fcaeba082cd"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-13500.json.gz",
+      "bytes": 657907,
+      "sha256": "391b7faf0e5a9c326120be8db3bd31bf63169acbdf6d1dda885af01a43c349c8",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 2042741,
+      "uncompressed_sha256": "d4c42f4809e05098e1bd574fbf23fcc812f111dee9dd1be5edb97a137823503d"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-1500.json.gz",
+      "bytes": 3038895,
+      "sha256": "562ac47bdd151c1f5dc9b60f9ba21851033a3a9612455ae02ec418767ab78e17",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 7498888,
+      "uncompressed_sha256": "a7e8f7aae3b6025739d01f04ab12161883683a3d4cba9c85c0521bc4eaaa4690"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-15000.json.gz",
+      "bytes": 536556,
+      "sha256": "e04e1a4261ee0699bd2bce824e32f16c98aa3d463fb14953d63918f26b4b56da",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1774061,
+      "uncompressed_sha256": "f07cf38488f057da64d1e1bdd7acc719de596457ce30c4cfd5614f5f5ee66f96"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-16500.json.gz",
+      "bytes": 267934,
+      "sha256": "0949462962e0dd1152262820a5bc7d08e791e7f1eac3e1bbf7697fe714a314f4",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 973939,
+      "uncompressed_sha256": "d8c1e2064db96e5420baf351c5895cc39a36b9baceb12c4940d7f801a154af4d"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-18000.json.gz",
+      "bytes": 411064,
+      "sha256": "a3fd597844cbb73466b481a624a10722ca190b6bfab70679898db2ac578799ab",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1408983,
+      "uncompressed_sha256": "738d04bbb08062f85590517de56e225d7cd76cd8311af206d30e5fb956b800d3"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-19500.json.gz",
+      "bytes": 713204,
+      "sha256": "3df5c59b6abe2b854103c8aa1728c01ea62c82eba555383ecfe1d37bf6bb7535",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 2248767,
+      "uncompressed_sha256": "7ca4ba02ad9c98a0856ffd9434a91267133737e5abd03d0bee1f47e84d0d2066"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-21000.json.gz",
+      "bytes": 332935,
+      "sha256": "ad7c5c4a8eee4bb7b2e707f0440870a614e4ad9368e98f18eccefda34d4d1bd6",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1229674,
+      "uncompressed_sha256": "34b5be44821a76e354acd46ef33d64c95b2b22a183d1339e6499acebf9ef5add"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-22500.json.gz",
+      "bytes": 947927,
+      "sha256": "a769d0aa2fdeb8e182adede3ca6268c0782629b3eaab3a7d69214cc7e90f94a0",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 2942204,
+      "uncompressed_sha256": "835ba44de02b6629429c0d60ffffc69ce8c62897d928c6b75f7dda43a2b6ca90"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-24000.json.gz",
+      "bytes": 333224,
+      "sha256": "38fd3a8471c27127c8c4d751c912557207ae601d90fc642241d4fce9934d704f",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1203374,
+      "uncompressed_sha256": "24afedbda6dd43ecd9bbe4e73e742f22b6dfb756e0e2b470b26bd908c9d978c2"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-25500.json.gz",
+      "bytes": 589309,
+      "sha256": "616e3e5fa66e92326c1a9f02e8bac2687bbb200d27060108510b9ae5062223ba",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1931584,
+      "uncompressed_sha256": "0eb5099333467a85dc5d95b44019e70265708b2e391bf2fef2c9bcb1cf4050e2"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-27000.json.gz",
+      "bytes": 575253,
+      "sha256": "0b3d0020927c5ceb29f302c099f6afc06bf4485b320a8b67cc7e5aafcb7da4b5",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1951510,
+      "uncompressed_sha256": "0fcd3f7c6b82f9ba06e083e147362eb23d7337f0fc87f847f4642df39a9849ea"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-28500.json.gz",
+      "bytes": 411142,
+      "sha256": "b949bfbd039a6e2eea75ba6250c99dd51421339a3472ffcbe81c0edb8f2295e8",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1439030,
+      "uncompressed_sha256": "07407335c85e2f4757c8b3283e82fdbb11b77d304d701bb29567bb9014bc5138"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-3000.json.gz",
+      "bytes": 3145634,
+      "sha256": "df4818a9d5abeb9765d62c8d14560c638e9042726166a947fbfc6cf677082ce3",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 7767700,
+      "uncompressed_sha256": "9a5aecaa77efbc5d1b9e8b31a6a26085b06fe9d4a1512efef013f5e9e30f7e7e"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-30000.json.gz",
+      "bytes": 784733,
+      "sha256": "b5080b6ff2b7af772fc41c3a72b9797b1d4711bd86e0d6edab7a419f255b0a40",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 2494132,
+      "uncompressed_sha256": "21f56c133ce35939b527063a33e3a15b55db600ca6559e4c7322c8ca54e60377"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-31500.json.gz",
+      "bytes": 429650,
+      "sha256": "0d8e1ef7ac5c4e089769da988d220341d8afbf8bef2d8f00ce9859d4bf35d537",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1399906,
+      "uncompressed_sha256": "255eb111ee67a313b2d2a369ad303cd7ceb5db25b9f69ff5576623c46d8bb5c3"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-33000.json.gz",
+      "bytes": 606492,
+      "sha256": "3f4f46ae1143a18f49fc5b84eb49a6ca067ad2a020eb51d67680114d6a3e35d7",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 2031132,
+      "uncompressed_sha256": "f8049b540e9cdab6b915e6190f8f0bfff1facdae8656ed7033ac90cde430eaf5"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-34500.json.gz",
+      "bytes": 324072,
+      "sha256": "1533441c7e4723f23aa813565b906593e4e12149a499a0056227530131c591e3",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1152581,
+      "uncompressed_sha256": "aff57e89f5eb2263580722b62a464098210d77962596573d9a0a82c16b8c5e72"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-36000.json.gz",
+      "bytes": 670962,
+      "sha256": "b6d1d63232b27d67124d2dd57791d85831591f556666d8659f43a276f74b0f1b",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 2184581,
+      "uncompressed_sha256": "3134806bd4c2bdf99b9d899fefdfd4182bc3d0521c251a9fcff9b74dbd296976"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-37500.json.gz",
+      "bytes": 1069204,
+      "sha256": "89e77f7d90d26b18f374d279b84f02729483855bc469bbec339d8d37ccdf9ed4",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3174968,
+      "uncompressed_sha256": "79457bd054410a1a46816f174bdd7e885de3307d0a5349fd108bfc470150511f"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-39000.json.gz",
+      "bytes": 691339,
+      "sha256": "9fa4ecf944bf0edbe3e6ba3a725efe140c101797e3bbc28c549b7eff28593204",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 2257037,
+      "uncompressed_sha256": "2f19cd5bb6dc79741559af1158d0373db09e92e4a98dc4afd8fa366aa216f04f"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-40500.json.gz",
+      "bytes": 480074,
+      "sha256": "04cce59cc660029815d4dd26ae4fda474b6151acc7cb3099327e07dee16e09e2",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1625271,
+      "uncompressed_sha256": "935dc57ce79a94b29b0dc1cf6ef8922c22bbc294e6f4e4ad4bf28e335578a302"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-42000.json.gz",
+      "bytes": 473533,
+      "sha256": "1cce89d26654907140e92dfc9b673ddb3347661d240e4826df2e94cab54f4142",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1567840,
+      "uncompressed_sha256": "1fc173cc6235d44a0303187b677b8caae035402cf51fd22a6c7d2cf80b14821f"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-43500.json.gz",
+      "bytes": 479228,
+      "sha256": "8c0bf41e765ad3c291bff0735fd89e83c378cdfcb59e1398156970cc24400b1a",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1618234,
+      "uncompressed_sha256": "19f0792f121b824f444d096c6269acfafb13cae9d35ae91aa9f7de1680e955ed"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-4500.json.gz",
+      "bytes": 3492440,
+      "sha256": "bc71cac361e5552b1066405b22163d39aec0829e3784458dc5b79c2c1fe5e952",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 10199115,
+      "uncompressed_sha256": "088ec9ed4acf0cbf7fdf77173110f7c01848e0db1f21f6feb3d110bb3f1f2b68"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-45000.json.gz",
+      "bytes": 376329,
+      "sha256": "895ea07b762e61431128cc62325569e29c5aa227bfc5132d97cd551c75f537b4",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1291015,
+      "uncompressed_sha256": "b6311abf37f44fee86e7c4dcfb73651e6a2787d393c62f74f7404fc401e626ff"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-46500.json.gz",
+      "bytes": 444860,
+      "sha256": "8da9ad7e913b25cf2517540e3762b2e129595a897673c87788ba114c14308569",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 1491917,
+      "uncompressed_sha256": "3964508432d1d22766ef3ecadb683830f39b6f788e60925a00f231acaee459bb"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-48000.json.gz",
+      "bytes": 672248,
+      "sha256": "c17b3ac17126d1a870f3ad9dec8328a3d3e0e466fcf57470d97f920ed30b602a",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 2211035,
+      "uncompressed_sha256": "6f46621946f91894f0f11285e6b27de4b3b81f92bf5228afc53c303cb751ed5f"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-49500.json.gz",
+      "bytes": 216283,
+      "sha256": "f7557e58ddb4244a2160c6d3e5938a4fe1a0f27bcfa1621a09371c90401bf4a2",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 729798,
+      "uncompressed_sha256": "4d7c5acaf261ee1fb063ee21b683b723d77fb65e6af7f73453c6021aea90e3b2"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-6000.json.gz",
+      "bytes": 4572887,
+      "sha256": "ea4835ae6e3ea9eddf4444a7040b1a6345d99d2ea9ad73f0f0ed93f3ba5e4c87",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 13128830,
+      "uncompressed_sha256": "eb9428a37169c88b82b60553d115214f60f81ac62b93d289d82b203376109337"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-7500.json.gz",
+      "bytes": 1078928,
+      "sha256": "fbce5ba922f4f7f7ae9bde54685657bceb40c629c984697057a69b4220db672e",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 3378264,
+      "uncompressed_sha256": "710a244354dd37a98c0af2de074c40ad65b047f40e315fe4d825c12e5b9f9750"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-9000.json.gz",
+      "bytes": 641440,
+      "sha256": "0da648f55a2e3e9aaf53a8885b641b49ba57d159fc841f9ac124d138c0549837",
+      "hash_kind": "file-bytes",
+      "uncompressed_bytes": 2160160,
+      "uncompressed_sha256": "ff82aa06e7224b674f151128809a2ae4f3a2f556563aa527dd4901f2ede60a1b"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/verification.json",
+      "bytes": 12117,
+      "sha256": "bfde1baee85d95f4cdfa13afc52271524e7cc78a7bede09fff0403ab13d5d98b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-performance-v1/README.md",
+      "bytes": 2717,
+      "sha256": "9a19e8e1837b969601002534da27cd489e717a9d335eabaa8a00e703f1d6e331",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-performance-v1/build-output.txt",
+      "bytes": 622,
+      "sha256": "2cc16d421d1963aa7159bb9a8ea92b3f5d5ece21b89295088234d923238c3ff3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-performance-v1/fragment-tests.txt",
+      "bytes": 606,
+      "sha256": "117e18d2efeca815ea395efebab4f06dadfa7e4522b6e6b3117e71c0fae38e8c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-performance-v1/lifecycle-tests.txt",
+      "bytes": 1130,
+      "sha256": "90268bf394459ba3160214a4763cdcac341d93f6608f4a1662917efecb765472",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-performance-v1/run-one.json",
+      "bytes": 940,
+      "sha256": "6e859ccc8668a9d2d60001c4d0f2311e2b035489f3fb63f27c994f778e0b1dbc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-performance-v1/run-two.json",
+      "bytes": 1036,
+      "sha256": "1db1149a0066f3a28b6c2ad658278ee46ab24cf5f2ae45321cf03b9a305db08c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/joined-dated-browser-v1/README.md",
+      "bytes": 1317,
+      "sha256": "23d33b6ac0914da4bb85cdbe0918c159cd5a5e544e5615563f2bebf7145dafcf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/joined-dated-browser-v1/result.json",
+      "bytes": 1251,
+      "sha256": "42d51eac5ed141435f7e124047317ebca26b6f054c10738e344ada8689a4014e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/joined-dated-browser-v1/test.txt",
+      "bytes": 234,
+      "sha256": "17d8d9b1aca0c8e6e02e481c9185af07fecbf952119e615652e9d6b032a4de8d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/materialization-binding-v1/README.md",
+      "bytes": 1933,
+      "sha256": "55b1a4a36a002f47d68a93b0ccca6b4a88d236855940af6fff9576d7658c1d38",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/materialization-binding-v1/build-binding.json",
+      "bytes": 1645,
+      "sha256": "c6a8f84f554a47469910afd9e10fe4920cdb54f7eae415829629baf876d32f37",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/materialization-binding-v1/build-output.txt",
+      "bytes": 622,
+      "sha256": "8a48c86319994e01208fb8444a4b7c886d1cc2b9b25302fe6c35d77b890a58c6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/materialization-binding-v1/gate-tests.txt",
+      "bytes": 1908,
+      "sha256": "9b99d1a7056790c1258d4c6914fa12309b71f4d4e81f1ada6935d28d497a6720",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/materialization-binding-v1/release-tests.txt",
+      "bytes": 1561,
+      "sha256": "0ca6955dcb28b76aad3c3c0f06be7611e2dfaf6f3475e148ce1bd3c354c74712",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/renderer-controls-v1/README.md",
+      "bytes": 1673,
+      "sha256": "02943eed72132bd226195c000ed6144aa342d7208833afd8bb1e4890b74a0b86",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/renderer-controls-v1/result.json",
+      "bytes": 1519,
+      "sha256": "889a1b2bb8f314a141f43c6bf5d8ddd9a76838bc1e7b0cd7a99256b8c7394ae6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/renderer-controls-v1/test-output.txt",
+      "bytes": 220,
+      "sha256": "5d83efff9a44e30a0847df4df20e58092a9acf022f2408ea7c5e087a01d66db1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/source-digest-v1/README.md",
+      "bytes": 2639,
+      "sha256": "0c247f27b9e5c3f7391f87bdba44992df22b41fa752a2947383043a03a98f533",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/source-digest-v1/build-output.txt",
+      "bytes": 622,
+      "sha256": "9f74876952435856b1312565870edf39c1ba891ce2032116772a56ce43989d0e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/source-digest-v1/diagnostic-memory.json",
+      "bytes": 49382,
+      "sha256": "20c25e67a78a931cce0dfb51df74df4fd0250a3f676a3ff67aa0aadeb4fcca85",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/source-digest-v1/diagnostic-result.json",
+      "bytes": 1218,
+      "sha256": "40624a065bc1f7f50acec15f27a098769f0e1b1f1ae0352b424316a6eabbec5e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/source-digest-v1/diagnostic-world-check.mjs",
+      "bytes": 4988,
+      "sha256": "e315954dd151c0d9014d76d97f66aa0cd4e1791960c47f8c49eb68239d5c561a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/source-digest-v1/run-one.json",
+      "bytes": 1199,
+      "sha256": "f9be2ed8cc557519c134d50b474e4b0ba042b5cf0343e07a96ca9a7924b244be",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/source-digest-v1/run-two.json",
+      "bytes": 1217,
+      "sha256": "83a0ef7f874807ede97f70691c1cccb71983af9e9d5bf29a763a868823dd1382",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/source-digest-v1/tests.txt",
+      "bytes": 1468,
+      "sha256": "dd35d28f1c726d7aced11fa6fdfffca57b8af515193b3cf39d47032e2c435240",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/NATIVE_GRID_VALIDATION.md",
+      "bytes": 6207,
+      "sha256": "99aa32b7bdfc09a03e212142900d3c8f3496afd69c78c2bbfca9dd4226a49b44",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "package-lock.json",
+      "bytes": 246591,
+      "sha256": "471d035f92567ea447f221661db5fa8febfc7afc32af8ac975506ce9e0303255",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "package.json",
+      "bytes": 1417,
+      "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/build-static.mjs",
+      "bytes": 16392,
+      "sha256": "56af055238338a104498c12c0bd5a3b483fa3367b88102d95d897d5db6c40886",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/native-ownership/compact-context-inputs.mjs",
+      "bytes": 2093,
+      "sha256": "bba188fcb97fadcce680959694c8b9617720b5fd30b68e42202611d5fac62bf2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/native-ownership/prepare-context-inputs.mjs",
+      "bytes": 4137,
+      "sha256": "78957b46ddb1a217dbcd35305664e501b8cdf9fea6d5e02266ce9481ee101199",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/native-ownership/require-verified-selection.mjs",
+      "bytes": 4033,
+      "sha256": "17f909354dcf29a18b9c00f0fdf18c39be9c8a255086cc1b7f6062bdc6a306da",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/native-ownership/validate-context-input-stage.mjs",
+      "bytes": 7157,
+      "sha256": "55025e4990f8bde923a3d22de7ac0746360b45a64f673812d9f74121060b41ec",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/native-ownership/verified-candidates.json",
+      "bytes": 482,
+      "sha256": "0abfff6981ecb0191c7e5526bbb9c65bb42994326597883ec00db690adefe600",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/native-ownership/verify-context-inputs.mjs",
+      "bytes": 4024,
+      "sha256": "6c9971a9a42428b97365865dc97a8c7cb4182a438615192e533bfa6586c444c2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/package-native-latitudes.mjs",
+      "bytes": 1751,
+      "sha256": "62e83d7a3837a5d8e3aa76b31b956177ed82694446241c8f407ae4a0a7436bbe",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/package-startup-ownership.mjs",
+      "bytes": 4093,
+      "sha256": "a088c1296be000afdbc6ee1b8d51e12946ac1b90beb18be15a05decfec7293fc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/read-prepared-evidence-bundle.mjs",
+      "bytes": 1749,
+      "sha256": "327890c1c1fd6f8dbc96905c8759b5eef91874eb4d513da1f98630997c16ea8f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/rebind-coverage-manifest.mjs",
+      "bytes": 1703,
+      "sha256": "e9eae349685ea07f106303f749aaa6179c5dbd4fd243b12004059a3c3a05697c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/select-build-ownership.mjs",
+      "bytes": 2597,
+      "sha256": "d61c735491f743e5953da2e23d3f566aafe5aa02347ba5162792d8ad38c5ea95",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/data-client.js",
+      "bytes": 20633,
+      "sha256": "d9731377cd0e7b5f27ede6e53f5cfbf5c2f63b2bde8de5a56ce1246f015228fb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/main.js",
+      "bytes": 37183,
+      "sha256": "d13cf96832af5b4553e4f63b77a2482692a5ed9aa6fbd9e9812040f4fbe2aa3a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/native-context-client.js",
+      "bytes": 2440,
+      "sha256": "eb6d41a97a85bf14fa990120f23b2373212ece69ef25f8b075557de11cf54eb8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/native-context-worker.js",
+      "bytes": 1126,
+      "sha256": "2345fd25048cc5720d6f61d62c2daad220cb558eafbb369595cab8e39fb92477",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/native-latitudes.js",
+      "bytes": 2769,
+      "sha256": "fdfb69c76d76a3f1fbf1f03256e24d333e55c68afff3a539e3ba1acd3bb9b37c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/native-location-context.js",
+      "bytes": 9451,
+      "sha256": "4035b15342072b59f1f6d97c7e6f349f319ad556373bd1d2b72eb56d2d999992",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/native-runtime.js",
+      "bytes": 3497,
+      "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/native-source-digest.js",
+      "bytes": 1420,
+      "sha256": "82f6c1c7fc084f70bfd486299b913554a511e7433b48e8f55624e195df79cb2b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/ownership-assets.js",
+      "bytes": 4301,
+      "sha256": "8d00ac72e118230e5804c8c30056cfc63bb19d80f4963aa5cfb3aca64123e6dc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/ownership-method.js",
+      "bytes": 3126,
+      "sha256": "3a19f5fb267e32f9a4ab302d7de9dea84f1b6e2cdfa93701229917c86ff4e3df",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/pixel-canvas-layer.js",
+      "bytes": 10679,
+      "sha256": "1626ec20d5ddef83fb3304d10735b2d3b1823837f452aeae00490c720d4c2587",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/pixel-grid.js",
+      "bytes": 3699,
+      "sha256": "ad31039b651e157480eaf0053787b119bdab4b9a2a699e5f6a05d396736c7595",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/pixel-layer.js",
+      "bytes": 7903,
+      "sha256": "b1ea68b44c18bca339e9a79e9bd1a1bd82b0795d135597a80e2a92fad1090e21",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/compact-context-inputs.test.mjs",
+      "bytes": 2091,
+      "sha256": "c595dace279856b055eb6a1beca9f6738ae27b52d70dafe9b0e2e59fd03b8069",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/compact-map-client.test.mjs",
+      "bytes": 39284,
+      "sha256": "65a1a561ecf32646bf9969bd94b92226a238e524a919cb4f0b0e06a59e8237eb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/context-input-stage.test.mjs",
+      "bytes": 3106,
+      "sha256": "bb1b5e4865330f0eb48c5bc27770b8de503a83c45d8a5dd6fc85dd4fc28f8682",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/native-build-binding.mjs",
+      "bytes": 5562,
+      "sha256": "2cfb632482e6f53b3c21ffbe188f380850eba0a6f30bede75be5c448d09fa5b3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/native-context-client.test.mjs",
+      "bytes": 2734,
+      "sha256": "51773a566581c2038730ab4000353ea5af5af56b31e2ee6816da8e2832d6e5c2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/native-dated-browser.mjs",
+      "bytes": 10340,
+      "sha256": "0674bf2d8cf85c9e13138b9f8ba3679b917f274b05a680f1eb53d037e662d146",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/native-dated-browser.test.mjs",
+      "bytes": 478,
+      "sha256": "05d0d6506e1cc0038c8c9cb92834c5aae120cc9c87d358ff998bf2c5417bcf93",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/native-latitudes.test.mjs",
+      "bytes": 4453,
+      "sha256": "abdcb6fb078facbc48b23cd80c53d6db195a92e2f5aa4cb5bf6c95b8c2e5b393",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/native-location-context.test.mjs",
+      "bytes": 6184,
+      "sha256": "879f3aab0c790a7cf69d72da1378b1c7a973058ac13b0335ba3b81ae06b41630",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/native-materialization-gate.test.mjs",
+      "bytes": 2836,
+      "sha256": "896697fc21918f26a628a1a3f91c9a54efb257114dd7f46b6636d98599c39600",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/native-renderer.mjs",
+      "bytes": 10091,
+      "sha256": "1ff21d67ac1fbbd68f44f92fd06cd5b04d4377c26a0e02981e88fd5605818e9d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/native-renderer.test.mjs",
+      "bytes": 466,
+      "sha256": "d52f1b7e7ce6cc4a94dcad1b754213dea0a339a2af52019846123a33a18a921d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/native-source-digest.test.mjs",
+      "bytes": 2119,
+      "sha256": "1f82409f3e61f6fb1f03a241f80326deb0ea8eeef16c31eac0f5663975a7222e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/native-startup.test.mjs",
+      "bytes": 8254,
+      "sha256": "3135809f20f62f14652471cc2cb2b9c1ad18cb4551a3407c703de7dd2d839442",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/native-world-context.mjs",
+      "bytes": 4610,
+      "sha256": "89800e2a5055a2d30b172b3a21a77155713a9092cb46b02c004d87abde77a0c3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/native-year-selection.test.mjs",
+      "bytes": 4444,
+      "sha256": "41f5bd214ff2f000e720d916362f16cad6f4a124d1875c7c2537d3421c5e9817",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/read-prepared-evidence-bundle.test.mjs",
+      "bytes": 1079,
+      "sha256": "2df9372f960beb4417c57dc4a77f1dff17d99193422f32f93dffed6ef4fc6e7e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/rebind-coverage-manifest.test.mjs",
+      "bytes": 2470,
+      "sha256": "9dd5e7abd706ac7289149cee96073df2b44b3c447f3e5df3b0f060e839e72db8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/select-build-ownership.test.mjs",
+      "bytes": 3179,
+      "sha256": "210a53decf048ab205e8b11f9e7919e7001aed079f98ee7cf12f38b6416cb435",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/README.md",
+      "bytes": 3217,
+      "sha256": "a3b5902bf1d9128ef754c8d01b8586809bc9040a5098e036f7e145d28ec323c9",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "native-application-integration",
+      "kind": "code",
+      "description": "Explicit immutable native selection, exact byte transport/readback and stable native source/owner/latitude authentication; dated affected-row contexts, cancellation and GPU/Canvas lifecycle controls. Separately bounded mandatory original-to-compact stage, no factual boundary generator or source approval.",
+      "software": "Node24; committed573b24c build/readback and exact retained code; pinned npm/Python dependencies; isolated Playwright Chromium1243 SwiftShader/Canvas controls",
+      "units": "whole-file bytes, integer row/run/owner counts"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "checked_rows",
+      "value": 262166,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "9d33b8177d353cfe63d484d8e231c602f93211c66d9379b2a9e9ca91938854bb",
+      "evaluation_commit": "573b24cc6d99b1cf1d937d0751d9ccc4e194b38e",
+      "scope": "Complete selected offline native transport readback at committed573b24c; no factual source approval or delivery."
+    },
+    {
+      "id": "checked_row_words",
+      "value": 524332,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "9d33b8177d353cfe63d484d8e231c602f93211c66d9379b2a9e9ca91938854bb",
+      "evaluation_commit": "573b24cc6d99b1cf1d937d0751d9ccc4e194b38e",
+      "scope": "Complete selected offline native transport readback at committed573b24c; no factual source approval or delivery."
+    },
+    {
+      "id": "checked_run_words",
+      "value": 57617764,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "9d33b8177d353cfe63d484d8e231c602f93211c66d9379b2a9e9ca91938854bb",
+      "evaluation_commit": "573b24cc6d99b1cf1d937d0751d9ccc4e194b38e",
+      "scope": "Complete selected offline native transport readback at committed573b24c; no factual source approval or delivery."
+    },
+    {
+      "id": "normative_latitudes",
+      "value": 262166,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "9d33b8177d353cfe63d484d8e231c602f93211c66d9379b2a9e9ca91938854bb",
+      "evaluation_commit": "573b24cc6d99b1cf1d937d0751d9ccc4e194b38e",
+      "scope": "Complete selected offline native transport readback at committed573b24c; no factual source approval or delivery."
+    },
+    {
+      "id": "locations",
+      "value": 49625,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "9d33b8177d353cfe63d484d8e231c602f93211c66d9379b2a9e9ca91938854bb",
+      "evaluation_commit": "573b24cc6d99b1cf1d937d0751d9ccc4e194b38e",
+      "scope": "Complete selected offline native transport readback at committed573b24c; no factual source approval or delivery."
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "checked_rows",
+      "value": 262166,
+      "unit": "count"
+    },
+    {
+      "metric_id": "checked_row_words",
+      "value": 524332,
+      "unit": "count"
+    },
+    {
+      "metric_id": "checked_run_words",
+      "value": 57617764,
+      "unit": "count"
+    },
+    {
+      "metric_id": "normative_latitudes",
+      "value": 262166,
+      "unit": "count"
+    },
+    {
+      "metric_id": "locations",
+      "value": 49625,
+      "unit": "count"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "checked_rows",
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/binding.json",
+      "json_pointer": "/checked_rows"
+    },
+    {
+      "metric_id": "checked_row_words",
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/binding.json",
+      "json_pointer": "/checked_row_words"
+    },
+    {
+      "metric_id": "checked_run_words",
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/binding.json",
+      "json_pointer": "/checked_run_words"
+    },
+    {
+      "metric_id": "normative_latitudes",
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/binding.json",
+      "json_pointer": "/normative_latitudes"
+    },
+    {
+      "metric_id": "locations",
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/binding.json",
+      "json_pointer": "/locations"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "Worldwide factual coverage gaps, source-backed coordinated repairs, broad dated/device performance and deployment remain unresolved.",
+      "status": "unresolved",
+      "source_ids": [
+        "retained-original-reference"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node scripts/native-ownership/validate-context-input-stage.mjs",
+    "node --test test/context-input-stage.test.mjs test/native-dated-browser.test.mjs",
+    "ATLAS_NATIVE_GRID_MANIFEST=coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/manifest.json ATLAS_NATIVE_GRID_SHA256=efe31373ff6a2c3f4ba5f11f8cbe37b25337778b344d9dbf1d3dfde301e3e722 node scripts/build-static.mjs",
+    "node test/native-build-binding.mjs",
+    "node test/native-world-context.mjs"
+  ],
+  "change_receipts": [
+    {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "status": "modified",
+      "original_sha256": "e970aaf6eb797b298892707a938a237e40977c63962e8fa840588dcf2cf411b8"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/asset-inventory.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/assets/index-C3c5uWsH.js",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/assets/index-C3pmC4rP.css",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/assets/native-context-worker-Dc0lM6v4.js",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/assets/pixel-gpu-worker-DOOaZKfq.js",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/assets/pixel-worker-CRnmADsw.js",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/atlas-geography.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/coverage-classification/rows-0.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/coverage-classification/runs-0.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/coverage-classification/runs-1048576.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/coverage-classification/runs-2097152.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/coverage-classification/runs-3145728.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/coverage-classification/runs-4194304.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/coverage-classification/runs-5242880.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/coverage-classification/runs-6291456.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/coverage-classification/runs-7340032.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/coverage-classification/runs-8388608.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/coverage-classification/runs-9437184.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-0.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-1.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-10.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-11.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-12.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-13.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-14.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-15.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-16.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-17.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-18.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-19.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-2.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-20.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-21.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-22.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-23.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-24.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-25.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-26.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-27.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-28.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-29.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-3.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-30.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-31.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-32.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-33.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-4.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-5.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-6.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-7.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-8.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/catalog-9.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-0.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-1.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-10.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-11.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-12.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-13.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-14.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-15.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-16.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-17.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-18.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-19.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-2.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-20.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-21.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-22.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-23.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-24.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-25.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-26.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-27.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-28.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-29.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-3.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-30.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-31.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-32.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-33.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-4.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-5.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-6.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-7.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-8.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/geography/part-9.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/index.html",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/native-v1/native-row-latitudes.f64le.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/native-v1/ownership/rows-0.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/native-v1/ownership/startup-runs-0.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/native-v1/ownership/startup-runs-12582912.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/native-v1/ownership/startup-runs-16777216.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/native-v1/ownership/startup-runs-20971520.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/native-v1/ownership/startup-runs-25165824.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/native-v1/ownership/startup-runs-29360128.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/native-v1/ownership/startup-runs-33554432.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/native-v1/ownership/startup-runs-37748736.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/native-v1/ownership/startup-runs-4194304.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/native-v1/ownership/startup-runs-41943040.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/native-v1/ownership/startup-runs-46137344.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/native-v1/ownership/startup-runs-50331648.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/native-v1/ownership/startup-runs-54525952.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/assets/native-v1/ownership/startup-runs-8388608.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/binding.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/build.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/stage-binding.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/tests.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/controls.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/generation-one.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/generation-two.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/inputs.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-0.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-10500.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-12000.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-13500.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-1500.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-15000.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-16500.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-18000.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-19500.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-21000.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-22500.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-24000.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-25500.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-27000.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-28500.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-3000.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-30000.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-31500.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-33000.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-34500.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-36000.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-37500.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-39000.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-40500.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-42000.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-43500.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-4500.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-45000.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-46500.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-48000.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-49500.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-6000.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-7500.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/part-9000.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/verification.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-performance-v1/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-performance-v1/build-output.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-performance-v1/fragment-tests.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-performance-v1/lifecycle-tests.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-performance-v1/run-one.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-performance-v1/run-two.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/joined-dated-browser-v1/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/joined-dated-browser-v1/result.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/joined-dated-browser-v1/test.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/materialization-binding-v1/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/materialization-binding-v1/build-binding.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/materialization-binding-v1/build-output.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/materialization-binding-v1/gate-tests.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/materialization-binding-v1/release-tests.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/renderer-controls-v1/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/renderer-controls-v1/result.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/renderer-controls-v1/test-output.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/source-digest-v1/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/source-digest-v1/build-output.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/source-digest-v1/diagnostic-memory.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/source-digest-v1/diagnostic-result.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/source-digest-v1/diagnostic-world-check.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/source-digest-v1/run-one.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/source-digest-v1/run-two.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/source-digest-v1/tests.txt",
+      "status": "added"
+    },
+    {
+      "path": "docs/NATIVE_GRID_VALIDATION.md",
+      "status": "added"
+    },
+    {
+      "path": "package-lock.json",
+      "status": "modified",
+      "original_sha256": "38279076ceffe227ac3e77678916d5f223bd0fb086c0036a4fe0c8905d110394"
+    },
+    {
+      "path": "package.json",
+      "status": "modified",
+      "original_sha256": "96481c8339f7ea60cfdfe91b8a42a4bf9d60ef108b3b1d9ffe2de780db1fa443"
+    },
+    {
+      "path": "scripts/build-static.mjs",
+      "status": "modified",
+      "original_sha256": "d68c27fb2730425ff10c1c703bac8628205a30d5494703b2a3117fd6b6f3282d"
+    },
+    {
+      "path": "scripts/native-ownership/compact-context-inputs.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/native-ownership/prepare-context-inputs.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/native-ownership/require-verified-selection.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/native-ownership/validate-context-input-stage.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/native-ownership/verified-candidates.json",
+      "status": "added"
+    },
+    {
+      "path": "scripts/native-ownership/verify-context-inputs.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/package-native-latitudes.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/package-startup-ownership.mjs",
+      "status": "modified",
+      "original_sha256": "ce43f372da285d810f59a89eee8a9bae44ffeba84e676122af8adc33069bfa99"
+    },
+    {
+      "path": "scripts/read-prepared-evidence-bundle.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/rebind-coverage-manifest.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/select-build-ownership.mjs",
+      "status": "added"
+    },
+    {
+      "path": "src/data-client.js",
+      "status": "modified",
+      "original_sha256": "716d308799c95012ffe066f402100c22fa056f91e858e5214d55bd04fee1f252"
+    },
+    {
+      "path": "src/main.js",
+      "status": "modified",
+      "original_sha256": "415cc50275e953a30877bae6394572942fc033bb98dfc7fb9902bd128f3a43f1"
+    },
+    {
+      "path": "src/native-context-client.js",
+      "status": "added"
+    },
+    {
+      "path": "src/native-context-worker.js",
+      "status": "added"
+    },
+    {
+      "path": "src/native-latitudes.js",
+      "status": "added"
+    },
+    {
+      "path": "src/native-location-context.js",
+      "status": "added"
+    },
+    {
+      "path": "src/native-runtime.js",
+      "status": "added"
+    },
+    {
+      "path": "src/native-source-digest.js",
+      "status": "added"
+    },
+    {
+      "path": "src/ownership-assets.js",
+      "status": "modified",
+      "original_sha256": "b14470b088208ac66d6ed564b063100c1e58d4d191d441b5e7c5d031eed5864c"
+    },
+    {
+      "path": "src/ownership-method.js",
+      "status": "added"
+    },
+    {
+      "path": "src/pixel-canvas-layer.js",
+      "status": "modified",
+      "original_sha256": "d48d145ed727c25060a9e6ce2782c59328c9e7cae562888f59efed828a7d647f"
+    },
+    {
+      "path": "src/pixel-grid.js",
+      "status": "modified",
+      "original_sha256": "320cc48796d5d3aaf07bb096441346abbe44ed4fab66df08ee003620ce5870a9"
+    },
+    {
+      "path": "src/pixel-layer.js",
+      "status": "modified",
+      "original_sha256": "ebc4b9bcae59ed0393b9329949836e61d8eb627b511f93630a89e579cdfa7d2b"
+    },
+    {
+      "path": "test/compact-context-inputs.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/compact-map-client.test.mjs",
+      "status": "modified",
+      "original_sha256": "fd7cca5980765619afc98f39d7a2fdde728415860f17b91720d1228cd6934fe8"
+    },
+    {
+      "path": "test/context-input-stage.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/native-build-binding.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/native-context-client.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/native-dated-browser.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/native-dated-browser.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/native-latitudes.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/native-location-context.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/native-materialization-gate.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/native-renderer.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/native-renderer.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/native-source-digest.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/native-startup.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/native-world-context.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/native-year-selection.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/read-prepared-evidence-bundle.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/rebind-coverage-manifest.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/select-build-ownership.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "mandatory_input_stage": {
+    "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/evidence-quality.json",
+    "sha256": "d2f03beb2d4e04b31dbdeefff917535541a4c9706dae4ea64e87e0312996b94d",
+    "validator": "scripts/native-ownership/validate-context-input-stage.mjs",
+    "build_entrypoint": "scripts/build-static.mjs",
+    "regression": "test/context-input-stage.test.mjs",
+    "scope": "All original native source bytes and exact immutable generator/readback code; all compact outputs preserve native geometry/ID/parent/index. Root standard checker alone is not recursive stage certification; the native build/regression and independent review enforce this typed prerequisite."
+  }
+}
