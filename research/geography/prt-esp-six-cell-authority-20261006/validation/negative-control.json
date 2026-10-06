@@ -71,5 +71,15 @@
       "minimum_expected_m": 1000,
       "outcome": "passed"
     }
-  ]
+  ],
+  "added_controls": [
+    "source byte/hash mutation",
+    "missing feature",
+    "extra feature",
+    "wrong native ID",
+    "line outside requested BBOX",
+    "mismatched request BBOX",
+    "altered issue centre"
+  ],
+  "context_controls_path": "research/geography/prt-esp-six-cell-authority-20261006/validation/source-context-controls.json"
 }

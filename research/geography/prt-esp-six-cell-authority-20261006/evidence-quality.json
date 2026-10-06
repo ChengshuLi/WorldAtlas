@@ -447,25 +447,19 @@
         "status": "unknown",
         "terms": "Public issue API response retained solely as assessment input; reuse terms not established."
       },
-      "retention": "bounded-original",
+      "retention": "restoration-only",
       "verification": "verified",
       "temporal_status": "reference",
-      "files": [
-        {
-          "path": "research/geography/prt-esp-six-cell-authority-20261006/sources/issue-1197.json",
-          "bytes": 10101,
-          "sha256": "3ab3dd3bfb734875593d457a6d5a2d85a1e9e572bdf48b2b5a38a0607c8eac39",
-          "hash_kind": "file-bytes"
-        }
-      ],
-      "limit": "Binds scope only; issue-authored preview labels do not establish installed geometry, legal ownership or physical wetness."
+      "files": [],
+      "limit": "Binds scope only; issue-authored preview labels do not establish installed geometry, legal ownership or physical wetness.",
+      "restoration": "Retrieve the issue response at https://api.github.com/repos/ChengshuLi/WorldAtlas/issues/1197 and compare its number, exact six centres, and worldatlas-work:v1 contract."
     }
   ],
   "outputs": [
     {
       "path": "research/geography/prt-esp-six-cell-authority-20261006/README.md",
-      "bytes": 1623,
-      "sha256": "d3685aafe50225622f308f578e7ba163ad48237b51a81cb4add2e043b4310206",
+      "bytes": 1672,
+      "sha256": "cde9d6d25d25b1a704c9fb4f9940a5ced6009ce697df70617a24637411fc3243",
       "hash_kind": "file-bytes",
       "role": "analysis-output"
     },
@@ -513,15 +507,15 @@
     },
     {
       "path": "research/geography/prt-esp-six-cell-authority-20261006/validation/negative-control.json",
-      "bytes": 2082,
-      "sha256": "26287077b64f80bfae281a60a479b160216892cf1486509021338b5a66da4a32",
+      "bytes": 2427,
+      "sha256": "47b19cf0527a9966f98827aa8f95288119de4cdbf96bfa4d41f5cbd0fad02909",
       "hash_kind": "file-bytes",
       "role": "analysis-output"
     },
     {
       "path": "research/geography/prt-esp-six-cell-authority-20261006/validation/reproducibility.json",
       "bytes": 871,
-      "sha256": "0120ee81bd2e9372ec017b0d14138d97a3c1ca1d19d29f72def36daf2227a8a9",
+      "sha256": "f6ce13b24941f0ed9b48d923750d5c39992b4c85f0bf9dc0cf3f3787cf2992cb",
       "hash_kind": "file-bytes",
       "role": "analysis-output"
     },
