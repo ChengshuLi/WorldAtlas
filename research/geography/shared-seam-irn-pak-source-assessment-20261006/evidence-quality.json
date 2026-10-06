@@ -1,0 +1,373 @@
+{
+  "version": 1,
+  "issue": 1115,
+  "lane": "geography",
+  "worker_id": "01a1107a-78cc-7b83-ab75-1284605eebaa",
+  "subject_ids": [
+    "gb:IRN:ADM2:26516999B17111396986996",
+    "gb:PAK:ADM2:60131773B78019453337506"
+  ],
+  "subject_ids_sha256": "0c405b5930054180f3bf0244d221b947ac40e5924412bffaa25c893517f7ca16",
+  "baseline": {
+    "commit": "390281b6d80657a5f17de3c5b217faf572e355ca",
+    "files": [
+      {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-ADM2-native.geojson",
+        "bytes": 16649405,
+        "sha256": "6f95cb3e108907663846f1e7479d07714fe95b5c3e0adf44ad94d27b8b42ff7a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-ADM2-native.geojson",
+        "bytes": 1082661,
+        "sha256": "108eeaa75a6de678f022e0b6d8fd8ab4c93e4b4d1a9c6a28995afe7c0731182c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-geoBoundaries-IRN-ADM2-metaData.json",
+        "bytes": 864,
+        "sha256": "02f1671f06a4a1e62834fb45105622008d6aa3127189ad7440774d00d6602301",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-geoBoundaries-PAK-ADM2-metaData.json",
+        "bytes": 801,
+        "sha256": "2d5077f656aae8202338520cc02f594e243eb425efbb44e4f32fca7d41868d88",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-CITATION-AND-USE-geoBoundaries.txt",
+        "bytes": 4316,
+        "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-CITATION-AND-USE-geoBoundaries.txt",
+        "bytes": 4316,
+        "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/IRN-original-lfs-pointer.txt",
+        "bytes": 133,
+        "sha256": "b6628169366bebe8b8e6fc643073c0706a43033e4f251d3f648ca116342e1206",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/PAK-original-lfs-pointer.txt",
+        "bytes": 132,
+        "sha256": "a459290c3cf4a81239d325c6d6526a347719020a0df846b8a47c15a281907b06",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/osm-panjgur-relation-3229274-full.json",
+        "bytes": 346713,
+        "sha256": "7057f7488622c5a5c086b094205978fffe5d25ca514a89a72f2d45c1f0ff31be",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-saravan-relation-6555069-full.json",
+        "bytes": 894050,
+        "sha256": "abf435a64b61fd7f678f149adee6468d99e14edc769ec6e8e43d464ec6ed579d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-way-239441239-relations.json",
+        "bytes": 96398,
+        "sha256": "7e7c08b25918ad750468365a9fa45b07e2d961931daa600180fe6e1a7f588908",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-way-239453665-relations.json",
+        "bytes": 96398,
+        "sha256": "bbd63239e335cb4795076ffe70a4a0f5994b3eb1f2439fe2dd517e3392312db3",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/manifest.json",
+        "bytes": 271171,
+        "sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-11.json",
+        "bytes": 5131824,
+        "sha256": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-17.json",
+        "bytes": 4945828,
+        "sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "canonical_grid": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+      "hierarchy": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+    },
+    "pin_files": {
+      "canonical_grid": "data/canonical-grid/manifest.json",
+      "hierarchy": "data/hierarchy.json"
+    },
+    "subject_files": {
+      "gb:IRN:ADM2:26516999B17111396986996": "data/geography/part-11.json",
+      "gb:PAK:ADM2:60131773B78019453337506": "data/geography/part-17.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "geoboundaries-originals",
+      "url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen",
+      "role": "complete IRN/PAK ADM2 reference features and source metadata/citation",
+      "vintage": "provider boundary years 2017 (IRN) and 2019 (PAK), commit 9469f09592ced973a3448cf66b6100b741b64c0d",
+      "retrieved_at": "2026-10-05 (day precision for geometry)",
+      "license": {
+        "status": "redistributable",
+        "terms": "IRN metadata ODbL 1.0; PAK metadata says Public Domain but underlying Wikipedia license unresolved; geoBoundaries notice CC BY 4.0 attribution/citation; downstream compatibility not adjudicated."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Restore the pinned full GeoJSON, metadata, citation notices and LFS pointers from coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals",
+      "limit": "Files retained in prior packet; full-file bytes and LFS pointers agree. Underlying PAK license and legal compatibility remain unverified.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "osm-relations",
+      "url": "https://api.openstreetmap.org/api/0.6/relation/6555069/full.json",
+      "role": "whole county relation snapshots and shared-way relation membership",
+      "vintage": "retrieved 2026-10-05; relation edit dates 2023-11-10 and 2023-11-08; element edit ranges separately reported",
+      "retrieved_at": "2026-10-05 (exact timestamps in source receipts)",
+      "license": {
+        "status": "redistributable",
+        "terms": "OpenStreetMap ODbL 1.0, OpenStreetMap and contributors attribution; derivative database share-alike plan required."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Restore the relation and way-response files and receipts from coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals and coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals",
+      "limit": "OSM records establish source-recorded identity/topology only, not official, legal, historical, accuracy or water meaning.",
+      "temporal_status": "reference"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/compare_sources.py",
+      "bytes": 8539,
+      "sha256": "e7193fd3c66f817b60b3cf60339455ebe16a1970376d9c1ebe2c61e0ca563dde",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/whole-geometry-comparison.json",
+      "bytes": 5582,
+      "sha256": "717507027588d6d3e69ee780f1334207afdb9fc7383fc5fe8041b940b68892ee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/shared_edge_controls.py",
+      "bytes": 3203,
+      "sha256": "b22988a4c7ffa7998112f495237241bc946d965793c2f86ec9b850d6dc5a24e3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/shared-edge-controls.json",
+      "bytes": 884,
+      "sha256": "ebc83b96e5af976f5361bcd3f1606096bde7e09b91c0ddece0cc8ec98f620f71",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/README.md",
+      "bytes": 11596,
+      "sha256": "724da11d42476b9f2e8470f305d57dcca17081680e35b32b1452d0e18f829d38",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/source-claims.json",
+      "bytes": 4992,
+      "sha256": "114a2e57bb124af32b989dffce64315924d46889696684451433791938ab6d43",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/whole-geometry-positive-control.json",
+      "bytes": 435,
+      "sha256": "28bf3e90d661974568aa556bb6f119c75ca4ded74aa49dda5056382f34522ae6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/whole-geometry-negative-control.json",
+      "bytes": 210,
+      "sha256": "7b14bf6dce397d5f01c776b6e4c111ce8fb7d978b39a43e9927c378e89229ba5",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "whole-subject-crosswalk",
+      "kind": "source",
+      "description": "Inspect exact provider identifiers, namesakes, OSM aliases/admin tiers/Wikidata IDs, and native parent chains to evaluate an authored cross-provider crosswalk.",
+      "software": "Python 3.12.14",
+      "units": "source identifiers, names and administrative parent relations"
+    },
+    {
+      "id": "whole-subject-overlay",
+      "kind": "measurement",
+      "description": "Transform source vertices from longitude/latitude WGS84 to EPSG:6933 with pyproj always_xy; compute planar polygon areas, intersection, union and IoU without densification. This is a whole-footprint discrepancy diagnostic, not a seam or accuracy method.",
+      "software": "Python 3.12.14; Shapely 2.1.2; pyproj 3.7.2",
+      "units": "square metres and dimensionless fractions",
+      "axis_order": "longitude-latitude",
+      "crs": "EPSG:4326 to EPSG:6933",
+      "area_method": "planar equal-area overlay after transforming source vertices; no densification",
+      "distance_method": "not used"
+    },
+    {
+      "id": "osm-shared-edge-source-membership",
+      "kind": "source",
+      "description": "Compare exact OSM way objects, node sequences/coordinates, and membership in both county and national relations; exercise positive and negative controls.",
+      "software": "Python 3.12.14",
+      "units": "OSM ways, nodes and relation memberships"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "saravan-whole-feature-iou",
+      "value": 0.602997293451444,
+      "unit": "fraction",
+      "vintage": "baseline",
+      "input_sha256": "6f95cb3e108907663846f1e7479d07714fe95b5c3e0adf44ad94d27b8b42ff7a",
+      "evaluation_commit": "390281b6d80657a5f17de3c5b217faf572e355ca",
+      "numerator": 8814832867.683807,
+      "denominator": 14618362243.766216
+    },
+    {
+      "id": "panjgur-whole-feature-iou",
+      "value": 0.8517888797887251,
+      "unit": "fraction",
+      "vintage": "baseline",
+      "input_sha256": "6f95cb3e108907663846f1e7479d07714fe95b5c3e0adf44ad94d27b8b42ff7a",
+      "evaluation_commit": "390281b6d80657a5f17de3c5b217faf572e355ca",
+      "numerator": 16682710943.463781,
+      "denominator": 19585499810.23667
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "saravan-whole-feature-iou",
+      "value": 0.602997293451444,
+      "unit": "fraction"
+    },
+    {
+      "metric_id": "panjgur-whole-feature-iou",
+      "value": 0.8517888797887251,
+      "unit": "fraction"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "Evidence supports a proposed local modern-reference seam crosswalk using exact OSM snapshots, subject to explicit attribution/ODbL handling and preserving whole-feature divergence.",
+      "status": "supported",
+      "source_ids": [
+        "geoboundaries-originals",
+        "osm-relations"
+      ]
+    },
+    {
+      "text": "Official/legal/historical approval, effective dates, positional accuracy, physical water, sovereignty and full-footprint replacement are not established.",
+      "status": "unresolved",
+      "source_ids": [
+        "geoboundaries-originals",
+        "osm-relations"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python research/geography/shared-seam-irn-pak-source-assessment-20261006/compare_sources.py",
+    "python research/geography/shared-seam-irn-pak-source-assessment-20261006/shared_edge_controls.py",
+    "node scripts/evidence-quality.mjs research/geography/shared-seam-irn-pak-source-assessment-20261006/evidence-quality.json"
+  ],
+  "validation": [
+    {
+      "method_id": "whole-subject-overlay",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/whole-geometry-positive-control.json"
+    },
+    {
+      "method_id": "whole-subject-overlay",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/whole-geometry-negative-control.json"
+    },
+    {
+      "method_id": "osm-shared-edge-source-membership",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/shared-edge-controls.json"
+    },
+    {
+      "method_id": "osm-shared-edge-source-membership",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/shared-edge-controls.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/README.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/compare_sources.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/shared-edge-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/shared_edge_controls.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/source-claims.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/whole-geometry-comparison.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/whole-geometry-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/whole-geometry-negative-control.json",
+      "status": "added"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "saravan-whole-feature-iou",
+      "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/whole-geometry-comparison.json",
+      "json_pointer": "/subjects/IRN/whole_geometry/iou"
+    },
+    {
+      "metric_id": "panjgur-whole-feature-iou",
+      "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/whole-geometry-comparison.json",
+      "json_pointer": "/subjects/PAK/whole_geometry/iou"
+    }
+  ]
+}

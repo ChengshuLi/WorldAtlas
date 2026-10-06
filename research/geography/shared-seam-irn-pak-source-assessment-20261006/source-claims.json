@@ -1,0 +1,102 @@
+{
+  "version": 1,
+  "issue": 1115,
+  "parent_issues": [991, 971],
+  "subjects": [
+    {
+      "atlas_id": "gb:IRN:ADM2:26516999B17111396986996",
+      "crosswalk": {
+        "geoboundaries_shape_id": "26516999B17111396986996",
+        "osm_relation_id": 6555069,
+        "osm_wikidata": "Q1279055",
+        "osm_name": "Saravan County",
+        "osm_admin_level": "5",
+        "osm_native_parent": {
+          "relation_id": 537693,
+          "wikidata": "Q939575",
+          "name": "Sistan and Baluchestan Province"
+        },
+        "atlas_parent_id": "framework:province:sistan-and-baluchestan:ed7f0643a0ed",
+        "atlas_parent_name": "Sistan and Baluchestan",
+        "mapping_status": "supported_as_authored_modern_reference_crosswalk"
+      },
+      "identity_limits": [
+        "The geoBoundaries target carries no OSM relation ID or Wikidata property.",
+        "The OSM relation carries its own relation and Wikidata IDs, but no geoBoundaries shape ID.",
+        "The association is an authored cross-provider mapping supported by several independent attributes, not a provider-issued identifier crosswalk."
+      ],
+      "geometry_comparison": {
+        "geoBoundaries_vintage": 2017,
+        "intersection_over_union_approx": 0.6030,
+        "geo_covered_by_osm_approx": 0.6815,
+        "osm_covered_by_geo_approx": 0.8396,
+        "scope": "complete county feature, EPSG:6933 after vertex transform"
+      }
+    },
+    {
+      "atlas_id": "gb:PAK:ADM2:60131773B78019453337506",
+      "crosswalk": {
+        "geoboundaries_shape_id": "60131773B78019453337506",
+        "osm_relation_id": 3229274,
+        "osm_wikidata": "Q2428944",
+        "osm_name": "Panjgur District",
+        "osm_admin_level": "6",
+        "osm_native_parent_chain": [
+          {"relation_id": 16347101, "wikidata": "Q3308229", "name": "Makran Division"},
+          {"relation_id": 357968, "wikidata": "Q163239", "name": "Balochistan"}
+        ],
+        "atlas_parent_id": "framework:province:balochistan:c6b6e17e4739",
+        "atlas_parent_name": "Balochistan",
+        "mapping_status": "supported_as_authored_modern_reference_crosswalk"
+      },
+      "identity_limits": [
+        "The geoBoundaries target carries no OSM relation ID or Wikidata property.",
+        "The OSM relation carries its own relation and Wikidata IDs, but no geoBoundaries shape ID.",
+        "The association is an authored cross-provider mapping supported by several independent attributes, not a provider-issued identifier crosswalk."
+      ],
+      "geometry_comparison": {
+        "geoboundaries_vintage": 2019,
+        "intersection_over_union_approx": 0.8518,
+        "geo_covered_by_osm_approx": 0.9088,
+        "osm_covered_by_geo_approx": 0.9314,
+        "scope": "complete county feature, EPSG:6933 after vertex transform"
+      }
+    }
+  ],
+  "source_facts": {
+    "geoboundaries_country_feature_counts": {"IRN": 432, "PAK": 126},
+    "exact_name_occurrences_in_each_complete_geoboundaries_source": 1,
+    "geoBoundaries_release_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+    "shared_osm_ways_in_component": [
+      {"id": 239441239, "nodes": 940},
+      {"id": 239453665, "nodes": 641}
+    ],
+    "shared_way_identity_and_parent_membership_control": "passed",
+    "official_reference_access": "unavailable; retained State Department LSIB WFS response states Service WFS is disabled"
+  },
+  "temporal_limits": [
+    "geoBoundaries boundaryYear is 2017 for IRN and 2019 for PAK; metadata update/build dates are separate.",
+    "OSM relation root edit dates and per-element node/way edit ranges are retained separately from API retrieval dates.",
+    "No effective legal boundary date or single boundary observation date is established."
+  ],
+  "reuse_limits": [
+    "OSM data carries ODbL 1.0 and OpenStreetMap/contributors attribution requirements; derivative database terms need explicit handling.",
+    "geoBoundaries product notice requires CC BY 4.0 attribution; IRN underlying data is marked ODbL 1.0 and PAK metadata marks Public Domain with a blank licenseDetail.",
+    "The specific underlying PAK Wikipedia work and final combined release-license compatibility were not independently adjudicated."
+  ],
+  "modern_reference_assessment": {
+    "supported": true,
+    "scope": "Proposed local seam reference using exact OSM relation snapshots retrieved 2026-10-05, preserving existing whole county footprints outside the retained component.",
+    "conditions": [
+      "Declare the OSM relation IDs and authored crosswalk explicitly.",
+      "Use an ODbL-compatible attribution and derivative-database plan.",
+      "Retain the full-source geometry discrepancy and do not claim full feature replacement."
+    ],
+    "not_established": [
+      "Official or legally adjudicated international/county boundaries.",
+      "Historical boundaries or effective dates.",
+      "Physical water, dry land, national sovereignty, or raster approval.",
+      "Positional accuracy or map scale."
+    ]
+  }
+}
