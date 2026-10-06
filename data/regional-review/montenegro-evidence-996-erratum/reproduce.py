@@ -458,7 +458,7 @@ def finalize():
     runner_commit, runner_blob = verify_running_code()
     issue, spec, quality, reservation = load_issue_contract()
     pin_records, phase_bytes, descriptor_count = verified_inputs(quality)
-    run_dirs = [PACKET / "runs/2026-10-06/anchored-v6/run-1", PACKET / "runs/2026-10-06/anchored-v6/run-2"]
+    run_dirs = [PACKET / "runs/2026-10-06/anchored-v7/run-1", PACKET / "runs/2026-10-06/anchored-v7/run-2"]
     if any(not path.is_dir() for path in run_dirs):
         raise GuardError("both fresh run directories are required before finalization")
     outputs = []
@@ -498,7 +498,7 @@ def finalize():
         "run_two_path": run_dirs[1].relative_to(ROOT).as_posix(),
         "all_three_outputs_byte_identical": True
     }
-    reproduction_path = PACKET / "reproducibility-control-anchored-v6.json"
+    reproduction_path = PACKET / "reproducibility-control-anchored-v7.json"
     reproduction_bytes = canonical(reproduction_control)
 
     # The manifest contains the complete frozen issue pin set. All b6cfa files
@@ -596,8 +596,8 @@ def finalize():
             numeric_rows.append((metric_id, value, unit, metric_input_hash(key, section, pointer), pointer))
         elif isinstance(value, dict):
             for key, child in value.items(): collect_numeric(child, f"{pointer}/{key.replace('~','~0').replace('/','~1')}", section, subject_id)
-    for key, value in report["summary"].items(): collect_numeric(value, f"/summary/{key}", "summary")
-    for index, row in enumerate(report["subjects"]):
+    for key, value in generated["summary"].items(): collect_numeric(value, f"/summary/{key}", "summary")
+    for index, row in enumerate(generated["subjects"]):
         for key, value in row.items(): collect_numeric(value, f"/subjects/{index}/{key}", "subject", row["subject_id"])
     existing_ids = {row["id"] for row in metric_rows}
     for metric_id, value, unit, input_hash, pointer in numeric_rows:
@@ -688,8 +688,8 @@ def finalize():
         ],
         "stages": {"research": "partial", "implementation": "not-proposed", "geographic_approval": "unapproved"},
         "commands": [
-            "python data/regional-review/montenegro-evidence-996-erratum/reproduce.py run --output-dir data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v6/run-1",
-            "python data/regional-review/montenegro-evidence-996-erratum/reproduce.py run --output-dir data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v6/run-2",
+            "python data/regional-review/montenegro-evidence-996-erratum/reproduce.py run --output-dir data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v7/run-1",
+            "python data/regional-review/montenegro-evidence-996-erratum/reproduce.py run --output-dir data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v7/run-2",
             "python data/regional-review/montenegro-evidence-996-erratum/reproduce.py finalize"
         ],
         "change_receipts": [],
@@ -719,8 +719,10 @@ def finalize():
                                 {"run_dir": "runs/2026-10-06/anchored-v4/run-1", "reason": "Superseded because its finalizer did not authenticate committed code before writing the control and manifest; the independent runner outputs remain retained."},
                                 {"run_dir": "runs/2026-10-06/anchored-v4/run-2", "reason": "Superseded because its finalizer did not authenticate committed code before writing the control and manifest; the independent runner outputs remain retained."},
                                 {"run_dir": "runs/2026-10-06/anchored-v5/run-1", "reason": "Superseded because its manifest omitted bindings for the inherited numeric report ledger; the independent runner outputs remain retained."},
-                                {"run_dir": "runs/2026-10-06/anchored-v5/run-2", "reason": "Superseded because its manifest omitted bindings for the inherited numeric report ledger; the independent runner outputs remain retained."}],
-            "superseded_control": {"path": "data/regional-review/montenegro-evidence-996-erratum/reproducibility-control-anchored-v5.json", "reason": "The v5 evidence manifest did not rebind the complete inherited numeric ledger; the v6 manifest is authoritative."},
+                                {"run_dir": "runs/2026-10-06/anchored-v5/run-2", "reason": "Superseded because its manifest omitted bindings for the inherited numeric report ledger; the independent runner outputs remain retained."},
+                                {"run_dir": "runs/2026-10-06/anchored-v6/run-1", "reason": "Superseded because finalization hit an implementation error before writing any control or manifest; these independent runs remain retained."},
+                                {"run_dir": "runs/2026-10-06/anchored-v6/run-2", "reason": "Superseded because finalization hit an implementation error before writing any control or manifest; these independent runs remain retained."}],
+            "superseded_control": {"path": "data/regional-review/montenegro-evidence-996-erratum/reproducibility-control-anchored-v5.json", "reason": "The v5 evidence manifest did not rebind the complete inherited numeric ledger; the v7 manifest is authoritative."},
             "runs_byte_identical": True, "old_packet_modified": False,
             "issue_trigger_fixture_reference": {
                 "reported_bytes": 1129,
