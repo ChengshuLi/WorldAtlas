@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Reproduce pinned source/hash, scope, and comparative geometry observations for issue #405."""
-import csv, hashlib, json, subprocess, sys
+import csv, hashlib, json, re, subprocess, sys
 from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parents[2]
@@ -43,6 +43,23 @@ location_policy = json.loads((REPO / "data/location-policy.json").read_text())
 administrative_sources = json.loads((REPO / "data/administrative-sources.json").read_text())
 assert not ({"COK", "PCN", "PYF", "UMI"} & set(location_policy["countries"]))
 assert not any(key.startswith(("COK:", "PCN:", "PYF:", "UMI:")) for key in administrative_sources)
+child_contracts = {
+    1052: {"gb:CHL:ADM3:31580391B33082267781919"},
+    1058: {"COK-4950", "COK-4951", "COK-4952", "COK-4953", "COK-4954", "COK-4955", "COK-4956", "COK-4959", "COK-4960", "COK-4961", "COK-4962"},
+    1059: {"PYF-4963", "PYF-4964", "PYF-4965", "PYF-4966", "PYF-4967"},
+    1060: {"PCN+00?"},
+    1061: {"UMI-5171", "UMI-5172", "UMI-5173", "UMI-5178"},
+}
+for number, subjects in child_contracts.items():
+    rel = "source/chile-followup-1052-api-snapshot.json" if number == 1052 else f"source/followup-issue-{number}-api-snapshot.json"
+    issue = json.loads((ROOT / rel).read_text())
+    blocks = re.findall(r"<!-- worldatlas-work:v1\s*\n([\s\S]*?)\n-->", issue["body"])
+    assert issue["state"] == "open" and len(blocks) == 1
+    spec = json.loads(blocks[0]); quality = spec["evidence_quality"]
+    assert spec["mode"] == "geography" and spec["depends_on"] == [405] and spec["max_prs"] == 1
+    assert set(quality["subject_ids"]) == subjects and quality["version"] == 1 and quality["review_kind"] == "geometry"
+    assert len(spec["owned_paths"]) == 1 and quality["manifest_path"].startswith(spec["owned_paths"][0])
+    assert all(re.fullmatch(r"[a-f0-9]{64}", pin) for pin in quality["pins"].values())
 checks = {
     "source/natural-earth/ne_10m_admin_0_map_units.geojson": "57da82be755f4afccd8f3b14251bb2752f5df1395f47d2d86f817470c4a48862",
     "source/natural-earth/ne_10m_land.geojson": "1ac90796408bc6ad6911d69448485d3c4dbf2190370080368a09976e1c9f7416",
@@ -53,6 +70,10 @@ checks = {
     "source/geoboundaries/KIR/geoBoundaries-KIR-ADM1-metaData.json": "e611d682fb3eb7e64176ac9753942321819a847443c1d3c87f8885e1b981211c",
     "source/geoboundaries/KIR/geoBoundaries-KIR-ADM1.geojson": "93a0914dc2572951a72cae1aef5145bc056180d75b96812c770bff06e8d8e86f",
     "source/chile-followup-1052-api-snapshot.json": "15981340aec150c359975325f4315eb1e569e0e93b7ff93ce29770ab434f385b",
+    "source/followup-issue-1058-api-snapshot.json": "abbc5625a971946344117d9eeacf52271d3653a8c0873601dcba4b9ced4bb9f8",
+    "source/followup-issue-1059-api-snapshot.json": "0f0d7c49adc2af47d6269c1e4977d692e0772c2216c223aa0d08d9b36ff23099",
+    "source/followup-issue-1060-api-snapshot.json": "6e0be04b627127ae68c4cc1f59d022646f524058489504367ef49e939b277614",
+    "source/followup-issue-1061-api-snapshot.json": "7eac102d32bea7fda7b8b130093f10514e9973cb86077cd6e68f71b2a19b9793",
 }
 for rel, wanted in checks.items():
     got = hashlib.sha256((ROOT / rel).read_bytes()).hexdigest()
