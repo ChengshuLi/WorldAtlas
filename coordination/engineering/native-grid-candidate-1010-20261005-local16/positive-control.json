@@ -1,0 +1,15 @@
+{
+  "method_id": "native-candidate-preparation",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "code_commit": "a967f2dfeccb4daa16c75102e7bcd1f3b781aaee",
+  "actual_output_path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/controls-output.txt",
+  "controls": [
+    "streamed candidate round-trips actual codecs and every cell matches independent native oracle",
+    "actual committed CLI fixture produces two identical complete offline candidates",
+    "canonical owner packing crosses low/high word boundaries with independently checked row spans"
+  ],
+  "limits": [
+    "Actual committed synthetic CLI, codec, picking and independent integer oracle controls; not factual geography approval."
+  ]
+}
