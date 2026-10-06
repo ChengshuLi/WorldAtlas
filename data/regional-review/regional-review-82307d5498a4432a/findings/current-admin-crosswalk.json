@@ -1,0 +1,38 @@
+{
+  "issue": 396,
+  "as_of": "2026-10-05",
+  "decision": "insufficient-evidence",
+  "scope_note": "A legal-role update is identified for one scoped legacy feature. No current boundary is asserted and no Atlas geometry correction is proposed.",
+  "findings": [
+    {
+      "subject_id": "gb:RUS:ADM2:50074027B1492213945391",
+      "source_name": "Полысаевский городской окр",
+      "source_vintage": "geoBoundaries gbOpen RUS ADM2, boundary year 2017; source extract pinned to commit 9469f09",
+      "legal_change": {
+        "act": "Kemerovo Oblast–Kuzbass Law 18-OZ of 2025-03-04",
+        "official_publication_id": "4200202503050001",
+        "official_publication_url": "https://publication.pravo.gov.ru/document/4200202503050001",
+        "effective_date": "2025-03-05",
+        "finding": "The city of oblast significance Polysaevo was transformed to a city of district significance and administratively subordinated to the city of oblast significance Leninsk-Kuznetsky. The amended register entry names Polysaevo and subordinate settlements Krasnogorsky and Shakhta No. 5.",
+        "text_access": "Official portal search record confirms act title, publication identifier, and date. Detailed operative text was read in a secondary-hosted Garant reproduction, https://base.garant.ru/411592057/; direct page retrieval was blocked during this review."
+      },
+      "interpretation": "The 2017 feature label does not establish a current separate city-of-oblast-significance unit. Law 18-OZ is an administrative-territorial change, distinct from Law 46-OZ's 2024 municipal merger.",
+      "unresolved": [
+        "No official act bytes or hash were retrieved and retained; use the official publication identifier above to restore and verify the act.",
+        "No legal coordinate description or current authoritative boundary dataset was compared with the source feature.",
+        "No evidence establishes whether the 2017 polygon matches the current administrative city, the former municipal entity, or a different legal territory.",
+        "The exact geographic effect of the subordinate-settlement listing has not been interpreted as a boundary description."
+      ],
+      "engineering_handoff": "Before any geometry or hierarchy correction, retrieve the official publication, identify the effective current register entry, obtain a lawful current boundary source, and compare it spatially with this exact feature and the Leninsk-Kuznetsky city/district features."
+    }
+  ],
+  "additional_currentness_gap": {
+    "act": "Kemerovo Oblast–Kuzbass Law 20-OZ of 2026-03-04",
+    "official_publication_id": "4200202603050008",
+    "official_publication_url": "https://publication.pravo.gov.ru/document/4200202603050008",
+    "title": "Amends article 14 of Law 215-OZ on administrative-territorial organization",
+    "secondary_text_url": "https://kemerovo-pravo.ru/zakon/2026/03/04/n-20-oz/",
+    "text_observed": "Replaces the words urban or rural settlement with municipal formation in paragraph 3 of article 14.",
+    "status": "Official publication listing confirms identifier. Operative text found in a secondary-hosted reproduction; official act bytes and exact hash were not retrieved. The wording appears procedural and no territorial change is inferred."
+  }
+}

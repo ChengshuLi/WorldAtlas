@@ -1,0 +1,24 @@
+{
+  "source_id": "kemerovo-oblast-area-mchs-reference",
+  "url": "https://42.mchs.gov.ru/glavnoe-upravlenie/harakteristika-subekta",
+  "retrieved": "2026-10-05 America/Los_Angeles",
+  "source_page": {
+    "bytes": 87128,
+    "sha256": "24d6dc5cc7f4f23906d3addb45949afa9785fdfc613431414db18e56e83fd61c",
+    "content_type": "text/html; charset=UTF-8"
+  },
+  "observed_statement": {
+    "text": "Общая площадь территории - 95,5 тыс. км2.",
+    "normalized_area_km2": 95500,
+    "precision": "Rounded to 0.1 thousand km2; undated agency reference page"
+  },
+  "role": "Coarse independent size reference for screening whether a scoped unit approaches Kemerovo Oblast scale; not a legal boundary or exact cadastral area.",
+  "publisher": "Main Directorate of the Ministry of Emergency Situations of Russia for Kemerovo Oblast–Kuzbass",
+  "retention": "The web page bytes are not redistributed; restoration URL, retrieval date, exact retrieved-page SHA-256 and observed statement are retained.",
+  "license": "Reuse terms for the page were not established.",
+  "limits": [
+    "The page gives a rounded region-wide reference, not per-unit areas or legal boundary geometry.",
+    "The page does not state an observation date; the quoted area is not an exact denominator for completeness or coverage.",
+    "Area sums do not test polygon union, overlap, gaps, adjacency, or legal correspondence."
+  ]
+}
