@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>More Information - NOAA Shoreline Data Explorer</title>
+    <link href="css/style.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <div id="top-nav">
+        <div class="brand">
+            <a href="https://www.noaa.gov/" target="_blank" rel="noopener noreferrer">
+            <img src="noaa-emblem.svg" alt="NOAA Logo" class="nav-logo">
+        </a>
+            <strong>NOAA Shoreline Data Explorer</strong>
+        </div>
+        <div class="tabs">
+            <a href="index.html">CUSP</a>
+            <a href="cmp.html">National Shoreline</a>
+            <a href="tsheet.html">T-Sheets</a>
+            <a href="more.html" class="active">More</a>
+        </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="more-container">
+        
+        <div class="content-grid">
+            
+            <!-- LEFT COLUMN: Reading Material -->
+            <div class="left-col">
+                
+                <!-- Tabbed About Card -->
+                <div class="more-card" style="padding-top: 10px;">
+                    <div class="card-tabs">
+                        <button class="card-tab-btn active" onclick="openAboutTab(event, 'tab-cusp')">About CUSP</button>
+                        <button class="card-tab-btn" onclick="openAboutTab(event, 'tab-national')">National Shoreline</button>
+                        <button class="card-tab-btn" onclick="openAboutTab(event, 'tab-tsheets')">Raster T-Sheets</button>
+                        <button class="card-tab-btn" onclick="openAboutTab(event, 'tab-disclaimer')">Disclaimer</button>
+                    </div>
+
+                    <div id="tab-cusp" class="card-tab-content active">
+                        <p>Shoreline is a dynamic interface between land and water. The cartographic depiction of shoreline is a representation at the time of survey. 
+                           Continually Updated Shoreline Product (CUSP) provides the most up-to-date shoreline of the United States and its territories. CUSP will identify the 
+                           most up-to-date surveys for inclusion, employ state-of-the-art technology for cartographic review, attribute shoreline features, and develop a strategy to 
+                           replace shoreline as it becomes available. CUSP is a separate product from the project-based national shoreline mapped by the National Geodetic Survey (NGS). 
+                           The national shoreline from the Coastal Mapping Program provides accurate tidal referenced shoreline, aids to navigation, hazards to navigation, and associated 
+                           cultural and topographic reference data primarily for nautical chart applications. CUSP will only include shoreline and alongshore features that represent shoreline 
+                           (groin, breakwater, and jetty). CUSP has less stringent data acquisition requirements and quality control measures compared to the Coastal Mapping Program's National 
+                           Shoreline. Where applicable, CUSP will reference a mean high water shoreline based on vertical (VDatum) modeling or image interpretation using water level stations 
+                           and/or shoreline indicators. CUSP is built upon contemporary NGS's National Shoreline which comprises approximately one-third of our nation's shoreline and focuses 
+                           primarily on the most navigational significant areas. CUSP uses and incorporates both NOAA and non-NOAA contemporary sources (Lidar, imagery, and external shoreline vectors) 
+                           to replace shoreline areas of older vintage. Shoreline continues to be reviewed with contemporary imagery and additional data is being included with the goal of providing a 
+                           continuous shoreline of our nation and its territories. For additional information, please see the <a href="https://geodesy.noaa.gov/INFO/OnePagers/CUSPOnePager.pdf"  target="_blank">CUSP One Pager</a>.</p>
+                    </div> 
+
+                    <div id="tab-national" class="card-tab-content">
+                            <p>NOAA's National Geodetic Survey (NGS) produces the national shoreline which provides critical baseline data for updating nautical charts; defining our nation's territorial 
+                               limits, including the Exclusive Economic Zone; and managing our coastal resources. The national shoreline contributes to our nation's economy by supporting: maritime trade 
+                               and transportation, coastal and marine spatial planning, coastal engineering, academic research, and insurance activities, to provide a means for enhancing our global 
+                               competitiveness and more efficiently managing our resources. An accurate, consistent, and up-to-date national shoreline can provide and improve: Official nautical charts for 
+                               maritime navigation, Data to model sea level change, storm surge, coastal flooding, and pollution trajectories, Contemporary ocean management plans, Wave and wind energy site
+                               selection, Land and marine geographic information system base layers, and Environmental analysis and monitoring. NGS delineates the shoreline through various photogrammetric 
+                               sources, including tide-coordinated stereo aerial photographs, commercial satellite imagery, Light Detection and Ranging (LiDAR), and related remote sensing technologies. The 
+                               data-gathering process results in a vector database of the national shoreline and products such as high-resolution aerial frame photographs, orthoimagery, and coastal LiDAR 
+                               data sets. Additionally, NGS is exploring the use of emerging remote sensing technologies and methodologies to map the shoreline. For additional information, please see the <a href="https://www.ngs.noaa.gov/INFO/OnePagers/Shoreline.pdf"  target="_blank">National Shoreline One Pager</a>.</p>
+                    </div>
+
+                    <div id="tab-tsheets" class="card-tab-content">
+                            <p>The National Ocean Service (NOS) and its predecessors have been surveying and mapping the U.S. domestic waters and territories, 
+                               including the outer coast, the estuaries, and the Great Lakes since it was established in 1807. Mapped features normally include the 
+                               mean high water line, the mean lower low water line, along with other natural and cultural coastal features such as rocks, bulkheads, 
+                               jetties, piers, and ramps along the coast and connecting waterways. Until the 1990's, the primary map product was a graphic shoreline 
+                               manuscript, called by several names including "coastal map", "shoreline map", "T-Series Map", "TP-Series Map", "T-Sheet," or "TP-Sheet." 
+                               There are over 14,400 maps that have been scanned as part of a joint Coastal Services Center and National Geodetic Survey data rescue project 
+                               originally funded through the NOAA National Environmental Satellite, Data, and Information Service's Environmental Data Rescue Program (EDRP) 
+                               and later by the National Climatic Data Center's Climate Database Modernization Program (CDMP). From the more than 14,400 scanned maps, 
+                               8,963 were georeferenced and transformed to a common horizontal datum (NAD 83). Historical data from these surveys are often used in litigation 
+                               to determine property ownership, to enforce regulatory mandates, and to estimate rates of shoreline change. Additionally, these maps provide an 
+                               accurate framework of geomorphic data for generating related products, such as submerged aquatic vegetation maps and shoreline movement maps used 
+                               in managing the nation's coastal resources. The user should realize that these data are considered accurate during the time of survey and may not 
+                               represent the current condition of the ground at this time. These maps permanently reside within the offices of the National Archives and Records 
+                               Administration (NARA). These maps were transferred by NOS to NARA in 1999.<br><br>
+
+                               There are <a href="https://geodesy.noaa.gov/pub/Shoreline/T-Sheet%20Raster%20Images/nongeomanu_index.html"  target="_blank">over 14,400 maps that have been scanned </a>as part of a 
+                               joint Coastal Services Center and National Geodetic Survey data rescue project originally funded through the NOAA National Environmental Satellite, Data, and 
+                               Information Service's Environmental Data Rescue Program (EDRP) and later by the National Climatic Data Center's Climate Database Modernization Program (CDMP).
+
+                               From the <a href="https://geodesy.noaa.gov/pub/Shoreline/T-Sheet%20Raster%20Images/nongeomanu_index.html"  target="_blank">more than 14,400 scanned maps</a>, 8,963 were georeferenced 
+                               and transformed to a common horizontal datum (NAD 83).<br></p>
+                    </div>
+
+                    <div id="tab-disclaimer" class="card-tab-content">
+                         <p><strong style="color: red;">Names and boundary representation are not necessarily authoritative.</strong></p>
+                    </div>
+                </div>
+
+                <!-- Shoreline Update Notices Card -->
+                <div class="more-card">
+                    <h2>Shoreline Update Notices</h2>
+                    <p>NOAA National Shoreline Update Notice Disclaimer - Please read carefully This service provides access to NGS 
+                       shoreline updates that have been made to contemporary national shoreline data accessible through the NOAA Shoreline 
+                       Data Explorer (NSDE) website. Subsequent to providing the shoreline data in the NSDE, discrepancies may be discovered 
+                       during the application of the data to the nautical chart, during a Hydrographic or Navigation Response Team field survey, 
+                       or by other users of the data. Some of these items, in turn, may require corrective action such as removing, adding, 
+                       reshaping, or attribute modification in order to resolve the discrepancy. Shoreline updates may include information on aids 
+                       to navigation changes, hazards to navigation or other information considered essential for safe navigation. While information provided by 
+                       this web site is intended to assist in the updating of shoreline data available on the NSDE, it must not be used as a substitute for the 
+                       United States Coast Guard, National Imagery & Mapping Agency or Canadian Coast Guard Notice to Mariner publications.<br><br>
+                       Proceed to <a href="https://geodesy.noaa.gov/RSD/shoredata/sun.html" target="_blank">NOAA National Shoreline Update Notices</a>.</p>
+                </div>
+
+            </div>
+
+            <!-- RIGHT COLUMN: Action Items -->
+            <div class="right-col">
+                
+                <!-- Download CUSP by Region Card -->
+                <div class="more-card">
+                    <h2>Download CUSP by Region</h2>
+                    <ul class="region-grid">
+                        <li><a href="https://geodesy.noaa.gov/dist_shoreline/Alaska.zip">Alaska</a></li>
+                        <li><a href="https://geodesy.noaa.gov/dist_shoreline/Gulf_Of_America.zip">Gulf of America</a></li>
+                        <li><a href="https://geodesy.noaa.gov/dist_shoreline/Great_Lakes.zip">Great Lakes</a></li>
+                        <li><a href="https://geodesy.noaa.gov/dist_shoreline/North_Atlantic.zip">North Atlantic</a></li>
+                        <li><a href="https://geodesy.noaa.gov/dist_shoreline/Pacific_Islands.zip">Pacific Islands</a></li>
+                        <li><a href="https://geodesy.noaa.gov/dist_shoreline/Southeast_Caribbean.zip">Southeast Caribbean</a></li>
+                        <li><a href="https://geodesy.noaa.gov/dist_shoreline/West.zip">West</a></li>
+                    </ul>
+                </div>
+
+                 <!-- BOTTOM: Contact Card (Stays full width) -->
+                <div class="more-card">
+                    <h2>Contact</h2>
+                    <p style="margin-bottom: 15px;">For more information, contact NGS: <a href="https://www.ngs.noaa.gov/cgi-bin/redirectNOAA.prl?u=ngs.shoreline">ngs.shoreline@noaa.gov</a></p>
+                </div>
+
+            </div>
+
+        </div> <!-- End of content-grid -->
+
+    </div>
+
+    <!-- Inner Card Tabs Logic -->
+    <script>
+        function openAboutTab(evt, tabName) {
+            const tabcontent = document.getElementsByClassName("card-tab-content");
+            for (let i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+            const tablinks = document.getElementsByClassName("card-tab-btn");
+            for (let i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+</body>
+</html>
