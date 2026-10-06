@@ -158,14 +158,6 @@ jobs:
       - name: Build hosted assets
         if: needs.profile.outputs.profile == 'full' && matrix.shard == 0
         run: npm run build:hosted
-      - name: Fetch immutable native regression vintages
-        if: needs.profile.outputs.profile == 'full'
-        run: |
-          if test -f scripts/native-ownership/validate-context-input-stage.mjs; then
-            # Original bounds, reviewed candidate receipt, generator, readback and normative latitude vintage.
-            # Checkout is shallow; these ordinary immutable blobs are test inputs.
-            git fetch --no-tags --depth=1 origin d55795e4c0ad01527029db0bd1d774124a12a61a 548c5f89f00271050823076a84695bb41e1b8454 d70c5d86e345a225b6bc78d67451b3cbbf7a5eed 65cfcef5ffd7d8b98077b9058a374d1e27047430 35d2d3ff48957d34ee8d4329824b268ecadc6d3c
-          fi
       - name: Complete regression shard
         env:
           INTEGRATION_PROFILE: ${{ needs.profile.outputs.profile }}

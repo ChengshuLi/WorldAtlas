@@ -6,6 +6,27 @@ import {compileHostedMigrations} from './compile-hosted-migrations.mjs';
 
 export const PACKAGED_ASSET_TESTS = ['test/compact-ownership.test.mjs','test/prepared-parity.test.mjs'];
 
+// Both PR CI and the trusted queue's isolated candidate checkout are shallow.
+// Read-only regression requires these exact original source/code vintages.
+export const NATIVE_REGRESSION_COMMITS = [
+  'd55795e4c0ad01527029db0bd1d774124a12a61a',
+  '548c5f89f00271050823076a84695bb41e1b8454',
+  'd70c5d86e345a225b6bc78d67451b3cbbf7a5eed',
+  '65cfcef5ffd7d8b98077b9058a374d1e27047430',
+  '35d2d3ff48957d34ee8d4329824b268ecadc6d3c'
+];
+export function prepareNativeRegressionInputs(profile,{exists=fs.existsSync,run=spawnSync}={}) {
+  if(profile!=='full'||!exists('scripts/native-ownership/validate-context-input-stage.mjs'))return {applicable:false,fetched:[]};
+  const present=commit=>run('git',['cat-file','-e',commit+'^{commit}'],{encoding:'utf8'}).status===0;
+  const missing=NATIVE_REGRESSION_COMMITS.filter(commit=>!present(commit));
+  if(missing.length){
+    const fetched=run('git',['fetch','--no-tags','--depth=1','origin',...missing],{encoding:'utf8',maxBuffer:4*1024*1024});
+    if(fetched.status!==0)throw Error('Immutable native regression fetch failed: '+(fetched.error?.message??fetched.stderr??''));
+  }
+  if(NATIVE_REGRESSION_COMMITS.some(commit=>!present(commit)))throw Error('Immutable native regression inputs remain unavailable');
+  return {applicable:true,fetched:missing};
+}
+
 // Archived TAP profiles identify these expensive neighbors. Reserve them away
 // from the packaged build/parity worker; timings are not runtime guarantees.
 export const DATABASE_NEIGHBOR_TESTS = [
@@ -56,6 +77,7 @@ export function prepareIntegrationTests(files) {
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const profile = process.env.INTEGRATION_PROFILE, shard = Number(process.env.INTEGRATION_SHARD);
   const files = integrationTestFiles(profile, shard);
+  console.log(JSON.stringify({native_inputs:prepareNativeRegressionInputs(profile)}));
   prepareIntegrationTests(files);
   console.log(JSON.stringify({profile, shard, files}));
   const result = spawnSync(process.execPath, ['--test','--test-reporter=tap','--test-concurrency=2', ...files], {
