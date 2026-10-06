@@ -6,7 +6,6 @@ import hashlib
 import json
 import pathlib
 import subprocess
-import sys
 import zipfile
 import xml.etree.ElementTree as ET
 
@@ -15,54 +14,69 @@ XLSX = ROOT / "sources/tajik-stat-admin-units-2025.xlsx"
 NS = {"m": "http://schemas.openxmlformats.org/spreadsheetml/2006/main"}
 
 
-def parse(path: pathlib.Path) -> tuple[str, list[list[str]]]:
+def parse(path: pathlib.Path) -> dict[str, str]:
     with zipfile.ZipFile(path) as archive:
         shared_root = ET.fromstring(archive.read("xl/sharedStrings.xml"))
         strings = ["".join(t.text or "" for t in item.iter("{http://schemas.openxmlformats.org/spreadsheetml/2006/main}t"))
                    for item in shared_root]
         sheet = ET.fromstring(archive.read("xl/worksheets/sheet1.xml"))
-        rows: list[list[str]] = []
+        cells: dict[str, str] = {}
         for row in sheet.findall(".//m:row", NS):
-            values: list[str] = []
             for cell in row.findall("m:c", NS):
                 value = cell.find("m:v", NS)
-                if value is None:
-                    values.append("")
-                elif cell.attrib.get("t") == "s":
-                    values.append(strings[int(value.text or "0")])
+                if value is not None and cell.attrib.get("t") == "s":
+                    text = strings[int(value.text or "0")]
+                elif value is not None:
+                    text = value.text or ""
                 else:
-                    values.append(value.text or "")
-            rows.append(values)
-    if not rows or not rows[0]:
+                    inline = cell.find("m:is", NS)
+                    text = "".join(t.text or "" for t in inline.iter("{http://schemas.openxmlformats.org/spreadsheetml/2006/main}t")) if inline is not None else ""
+                if text:
+                    cells[cell.attrib["r"]] = text
+    if "A1" not in cells:
         raise ValueError("Workbook has no title row")
-    return rows[0][0], rows
+    return cells
 
 
-def check(rows: list[list[str]]) -> bool:
-    if not rows or rows[0][0] != "Number of administrative area units as of January 1, 2025":
-        return False
-    row = next((r for r in rows if r and r[0] == "GBAO"), None)
-    # Preserve the publisher's literal English headers. Do not infer administrative
-    # classes from a possibly translated or ambiguous column label.
-    if row is None or row[1:] != ["7", "1", "1", "-", "4", "42"]:
-        return False
-    return not any("geometry" in cell.lower() or "boundary coordinates" in cell.lower()
-                   for row in rows for cell in row)
+def check(cells: dict[str, str]) -> bool:
+    # Bind literal source headers and values to worksheet coordinates. Do not infer
+    # administrative classes from a possibly translated or ambiguous column label.
+    expected = {
+        "A1": "Number of administrative area units as of January 1, 2025",
+        "B3": "Regions",
+        "C3": "Towns",
+        "E3": "Districts",
+        "F3": "Colonies",
+        "G3": "Number of",
+        "C4": "total",
+        "D4": "o/w  republican and regional submission",
+        "G4": "jamoats",
+        "A6": "GBAO",
+        "B6": "7",
+        "C6": "1",
+        "D6": "1",
+        "E6": "-",
+        "F6": "4",
+        "G6": "42",
+    }
+    return all(cells.get(coord) == value for coord, value in expected.items())
 
 
 def main() -> None:
     raw = XLSX.read_bytes()
     with zipfile.ZipFile(XLSX) as archive:
         decoded_member_bytes = sum(member.file_size for member in archive.infolist())
-    title, rows = parse(XLSX)
-    if not check(rows):
+    cells = parse(XLSX)
+    if not check(cells):
         raise SystemExit("positive source/table assertions failed")
-    mutated = [row[:] for row in rows]
-    gbao = next(row for row in mutated if row and row[0] == "GBAO")
-    gbao[1] = "8"
-    negative_mutation_rejected = not check(mutated)
-    if not negative_mutation_rejected:
-        raise SystemExit("negative control failed: mutated GBAO count was accepted")
+    mutated_header = dict(cells)
+    mutated_header["B3"] = "Administrative districts"
+    header_mutation_rejected = not check(mutated_header)
+    mutated_value = dict(cells)
+    mutated_value["B6"] = "8"
+    value_mutation_rejected = not check(mutated_value)
+    if not header_mutation_rejected or not value_mutation_rejected:
+        raise SystemExit("negative control failed: altered header or cell was accepted")
     execution_commit = subprocess.check_output(
         ["git", "-C", str(ROOT), "rev-parse", "HEAD"], text=True
     ).strip()
@@ -73,7 +87,7 @@ def main() -> None:
         "source_sha256": hashlib.sha256(raw).hexdigest(),
         "source_encoded_bytes": len(raw),
         "decoded_zip_member_bytes_sum": decoded_member_bytes,
-        "source_title": title,
+        "source_title": cells["A1"],
         "reference_date": "2025-01-01",
         "gbao_row": {
             "Regions": 7,
@@ -83,9 +97,18 @@ def main() -> None:
             "Colonies": 4,
             "Number_of_jamoats": 42,
         },
-        "positive_control": "official workbook title, literal headers and GBAO cells parsed exactly",
-        "negative_control": "mutated GBAO cell under literal Regions header rejected by the same table assertion",
-        "negative_control_passed": negative_mutation_rejected,
+        "worksheet_headers": {
+            "B3": cells["B3"], "C3": cells["C3"], "E3": cells["E3"],
+            "F3": cells["F3"], "G3": cells["G3"], "C4": cells["C4"],
+            "D4": cells["D4"], "G4": cells["G4"],
+        },
+        "gbao_cell_coordinates": {f"{column}6": cells[f"{column}6"] for column in "ABCDEFG"},
+        "positive_control": "literal worksheet header coordinates and GBAO value coordinates parsed and linked exactly",
+        "negative_controls": {
+            "header_mutation_rejected": header_mutation_rejected,
+            "value_mutation_rejected": value_mutation_rejected,
+        },
+        "negative_controls_passed": header_mutation_rejected and value_mutation_rejected,
         "geometry_present": False,
         "interpretation_limit": "Raw publisher column labels and values only; no reclassification into districts/towns or entity-level geometry inference.",
     }
