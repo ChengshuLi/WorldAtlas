@@ -845,8 +845,8 @@
   "outputs": [
     {
       "path": "data/regional-review/texas-source-interpretation-followup-431/README.md",
-      "bytes": 8399,
-      "sha256": "36923c9fba234b9530e0b3dd779eb4c5ba35e17123673138a6bb87955dd72979",
+      "bytes": 8664,
+      "sha256": "1c0ecc1e61c8e62bf8bca77b1e5d08b4a199c27a4e38a2fbe3e2602592cc855a",
       "hash_kind": "file-bytes"
     },
     {
@@ -857,8 +857,8 @@
     },
     {
       "path": "data/regional-review/texas-source-interpretation-followup-431/county-interpretation-erratum.jsonl",
-      "bytes": 255480,
-      "sha256": "252e8cde1bb2c70fdb80a7dcef90d1a9986ff664c14590d29d99461232f93da6",
+      "bytes": 309836,
+      "sha256": "0ac299d71139bae80567dbde66a05f1863c38acffe4f1a3bf9e6a0935ba9df28",
       "hash_kind": "file-bytes"
     },
     {
@@ -875,26 +875,26 @@
     },
     {
       "path": "data/regional-review/texas-source-interpretation-followup-431/positive-control.json",
-      "bytes": 312,
-      "sha256": "7708d88ff5944735dfe8ee6c023c8956bd40fef1e440bd437055b82eb888aa45",
+      "bytes": 472,
+      "sha256": "576f55ffc6d359104e2963b48ebac18f37635b11e8788a538c9114d9943e2fe5",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/texas-source-interpretation-followup-431/reproduce.py",
-      "bytes": 5566,
-      "sha256": "7b0f62fa3ba0b83fe36de4e6b9d19571a343841912b3ecc54ee2f650cdfc9165",
+      "bytes": 7002,
+      "sha256": "878b40bcf28717cbc1f91245e6d9e6933a7b8229ecf9d6033054b04f8db6ffc4",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/texas-source-interpretation-followup-431/reproducibility.json",
       "bytes": 372,
-      "sha256": "3844fc9d301adf71a8a968055d5a29da8e8a6669301e31dc15d1c8a3e5f05aa7",
+      "sha256": "f97466686083ad63facb21619a30403c0aa0ed800808211bcaa954e79ea07455",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/texas-source-interpretation-followup-431/reproduction-summary.json",
-      "bytes": 3244,
-      "sha256": "ecd52c6ce5846011760055f0c227dfe337c526f9798cb6e425385db8bf990758",
+      "bytes": 3552,
+      "sha256": "66cd56184262d86b40f06d75b2a3e201adf1718828dc9746f73b23d32bc351e6",
       "hash_kind": "file-bytes"
     },
     {
@@ -943,6 +943,22 @@
       "vintage": "baseline",
       "input_sha256": "cdaf1f6396aeda00adcc627a81a686a13206ee2f1f4782c61bdff2695970077a",
       "evaluation_commit": "09c2dcff4f5acd92936fdd49378dd563332a1187"
+    },
+    {
+      "id": "tigerweb_2018_feature_records",
+      "value": 254,
+      "unit": "2018 Census TIGERweb county Polygon records",
+      "vintage": "baseline",
+      "input_sha256": "309151b2ea2bfcad71698f7c3b82a52fc92cb3a59c29ee040d22ec7263b34cc7",
+      "evaluation_commit": "09c2dcff4f5acd92936fdd49378dd563332a1187"
+    },
+    {
+      "id": "tigerweb_2025_feature_records",
+      "value": 254,
+      "unit": "2025 Census TIGERweb county Polygon records",
+      "vintage": "baseline",
+      "input_sha256": "efc43054c4a7f555ba1a1cf26e6315e5562005635152a9a41795152fe0eec0d6",
+      "evaluation_commit": "09c2dcff4f5acd92936fdd49378dd563332a1187"
     }
   ],
   "summaries": [
@@ -960,6 +976,16 @@
       "metric_id": "cbf_multipolygon_records",
       "value": 11,
       "unit": "MultiPolygon records"
+    },
+    {
+      "metric_id": "tigerweb_2018_feature_records",
+      "value": 254,
+      "unit": "2018 Census TIGERweb county Polygon records"
+    },
+    {
+      "metric_id": "tigerweb_2025_feature_records",
+      "value": 254,
+      "unit": "2025 Census TIGERweb county Polygon records"
     }
   ],
   "conclusions": [
@@ -1043,6 +1069,16 @@
       "metric_id": "cbf_multipolygon_records",
       "path": "data/regional-review/texas-source-interpretation-followup-431/reproduction-summary.json",
       "json_pointer": "/record_geometry_type_counts/MultiPolygon"
+    },
+    {
+      "metric_id": "tigerweb_2018_feature_records",
+      "path": "data/regional-review/texas-source-interpretation-followup-431/reproduction-summary.json",
+      "json_pointer": "/tigerweb_2018_query_features"
+    },
+    {
+      "metric_id": "tigerweb_2025_feature_records",
+      "path": "data/regional-review/texas-source-interpretation-followup-431/reproduction-summary.json",
+      "json_pointer": "/tigerweb_2025_query_features"
     }
   ],
   "change_receipts": [

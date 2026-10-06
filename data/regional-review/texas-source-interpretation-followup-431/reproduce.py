@@ -55,6 +55,15 @@ for item in retrieval:
             "native_and_latest_spatial_reference": metadata["spatialReference"],
         }
 assert {"2018", "2025", "2018_service_layer", "2025_service_layer"} == set(census_crs)
+api_features = {}
+for year in ("2018", "2025"):
+    collection = json.loads((BASE / f"source/census-{year}/texas-counties.geojson").read_text())
+    assert collection["type"] == "FeatureCollection" and len(collection["features"]) == 254
+    key = "GEOID" if year == "2018" else "GEOID"
+    by_geoid = {f["properties"][key]: f for f in collection["features"]}
+    assert len(by_geoid) == 254
+    assert all(f["geometry"]["type"] == "Polygon" for f in collection["features"])
+    api_features[year] = by_geoid
 geoboundaries = json.loads((BASE / "source/geoBoundaries-USA-ADM2.geojson").read_text())
 geoboundaries_crs = geoboundaries.get("crs", {}).get("properties", {}).get("name")
 assert geoboundaries_crs == "urn:ogc:def:crs:OGC:1.3:CRS84"
@@ -65,6 +74,10 @@ with out.open("w") as f:
     for sid in sorted(SCOPE):
         row = by_id[sid]
         components = row["multipart_components"]["census2018_cbf_500k"]
+        api_2018 = api_features["2018"][row["census_geoid_2018"]]
+        api_2025 = api_features["2025"][row["census_geoid_2025"]]
+        assert api_2018["geometry"]["type"] == row["geometry_types"]["census2018"] == "Polygon"
+        assert api_2025["geometry"]["type"] == row["geometry_types"]["census2025"] == "Polygon"
         record = {
             "subject_id": sid,
             "name": row["atlas_name"],
@@ -72,6 +85,10 @@ with out.open("w") as f:
             "parent_id": row["parent_id"],
             "census_geoid_2018": row["census_geoid_2018"],
             "census_geoid_2025": row["census_geoid_2025"],
+            "census_2018_tigerweb_record_geometry_type": api_2018["geometry"]["type"],
+            "census_2018_tigerweb_polygon_component_count": 1,
+            "census_2025_tigerweb_record_geometry_type": api_2025["geometry"]["type"],
+            "census_2025_tigerweb_polygon_component_count": 1,
             "census_2018_cbf_record_geometry_type": row["geometry_types"]["census2018_cbf_500k"],
             "census_2018_cbf_polygon_component_count": components,
             "record_is_not_component": True,
@@ -89,6 +106,12 @@ summary = {
     "scope_count": len(SCOPE),
     "scope_subject_ids_sha256_lf_sorted": scope_hash,
     "source_rows": len(rows),
+    "tigerweb_2018_query_features": 254,
+    "tigerweb_2018_geometry_type_counts": {"Polygon": 254},
+    "tigerweb_2018_polygon_components_total": 254,
+    "tigerweb_2025_query_features": 254,
+    "tigerweb_2025_geometry_type_counts": {"Polygon": 254},
+    "tigerweb_2025_polygon_components_total": 254,
     "record_geometry_type_counts": dict(sorted(type_counts.items())),
     "polygon_component_count_distribution": {str(k): component_counts[k] for k in sorted(component_counts)},
     "polygon_components_total": 313,
