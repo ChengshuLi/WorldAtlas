@@ -21,7 +21,7 @@ from pathlib import Path
 
 import pyproj
 import shapely
-from shapely.geometry import shape
+from shapely.geometry import mapping, shape
 from shapely.ops import transform
 
 ROOT = Path(__file__).resolve().parents[4]
@@ -261,6 +261,7 @@ def gap_coverage_record(gap, members):
         "gap_intersection_type": None,
         "gap_intersection_parts": [],
         "uncovered_residual": None,
+        "uncovered_residual_geometry_epsg25829": None,
         "shared_boundary_contact_length_m": None,
         "boundary_contact_type": None,
         "boundary_contact_parts": [],
@@ -289,6 +290,7 @@ def gap_coverage_record(gap, members):
             "gap_intersection_type": intersection.geom_type,
             "gap_intersection_parts": geometry_parts(intersection),
             "uncovered_residual": geometry_record(residual),
+            "uncovered_residual_geometry_epsg25829": mapping(residual),
             "shared_boundary_contact_length_m": metric(contact.length),
             "boundary_contact_type": contact.geom_type,
             "boundary_contact_parts": geometry_parts(contact),
