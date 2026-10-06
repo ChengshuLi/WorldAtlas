@@ -1,0 +1,64 @@
+✔ package applicability comes only from the enforced declaration (28.087125ms)
+✔ renamed or copied runtime origins cannot hide behind documentation or receipt destinations (5.44825ms)
+✔ PR inventory exhausts pages and catches a relevant path on a later page (4.0285ms)
+✔ PR missing pages, changed heads, unavailable lookup and malformed inventories default full (1.272125ms)
+✔ push before/after comparison includes rename origins and fails full for missing or capped inventories (2.454667ms)
+✔ API failures use bounded authenticated read-only requests (0.355666ms)
+✔ workflow keeps trusted bootstrap fallback and runs package checks only when their inputs can change (45.715041ms)
+✔ promoting research is explicit and exact, without freezing implementation bytes (2.762167ms)
+✔ unavailable or altered declaration bytes conservatively require the package build (0.33475ms)
+✔ only declared files enter the source image; unrelated research cannot alter artifact bytes (95.774917ms)
+node:fs:622
+  return binding.open(
+                 ^
+
+Error: ENOENT: no such file or directory, open 'research/paper.json'
+    at Object.openSync (node:fs:622:18)
+    at Object.readFileSync (node:fs:488:35)
+    at file:///private/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/atlas-package-boundary-Jr7HyN/.cache/package-input-image-j4ld4J/scripts/build-static-inner.mjs:1:30
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'research/paper.json'
+}
+
+Node.js v24.19.0
+node:internal/modules/esm/resolve:271
+    throw new ERR_MODULE_NOT_FOUND(
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/private/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/atlas-package-boundary-i9RsQG/.cache/package-input-image-EKLogU/research/secret.mjs' imported from /private/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/atlas-package-boundary-i9RsQG/.cache/package-input-image-EKLogU/scripts/build-static-inner.mjs
+    at finalizeResolution (node:internal/modules/esm/resolve:271:11)
+    at moduleResolve (node:internal/modules/esm/resolve:865:10)
+    at defaultResolve (node:internal/modules/esm/resolve:992:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:701:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:721:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:759:56)
+    at #resolve (node:internal/modules/esm/loader:683:17)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:603:35)
+    at node:internal/modules/esm/loader:632:32
+    at TracingChannel.tracePromise (node:diagnostics_channel:362:14) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///private/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/atlas-package-boundary-i9RsQG/.cache/package-input-image-EKLogU/research/secret.mjs'
+}
+
+Node.js v24.19.0
+✔ undeclared reads and imports fail before replacing caller outputs and clean the image (74.933417ms)
+✔ explicit research promotion makes the same read available (39.42375ms)
+✔ input symlinks, including ancestor aliases, cannot expose undeclared files (5.061083ms)
+✔ missing mandatory inputs fail; optional absent inputs are allowed (4.01575ms)
+✔ dependency links must stay within the installed dependency tree (4.32975ms)
+✔ output and cache ancestor links are rejected (3.224833ms)
+✔ private builder requires the actual declared image identity (0.210833ms)
+✔ declaration uses literal paths, precise directory membership and approved outputs (10.307333ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 291.976125

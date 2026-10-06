@@ -176,12 +176,13 @@ test('non-geography selectors preserve existing profiles without requesting geog
 if (process.env.INTEGRATION_PROFILE === 'evidence') await import('./deployment-budget-scope.test.mjs');
 
 test('package CI coordination paths use focused tests while builders and runners stay full', () => {
-  for (const filename of ['scripts/classify-deployment-budget.mjs', 'scripts/package-research-inputs.mjs',
+  for (const filename of ['scripts/classify-deployment-budget.mjs',
     '.github/workflows/deployment-budget.yml', 'test/deployment-budget-scope.test.mjs']) {
     assert.equal(integrationProfile('engineering/example', [{filename}]), 'evidence', filename);
   }
   for (const filename of ['scripts/build-hosted.mjs', 'scripts/build-static.mjs', 'scripts/deployment-budget.mjs',
-    'scripts/run-integration-tests.mjs', 'src/main.js', 'data/hierarchy.json', 'drizzle/0002.sql']) {
+    'scripts/package-inputs.mjs', 'scripts/package-build.mjs', '.github/package-inputs.json',
+    'scripts/build-cloudflare-inner.mjs', 'test/package-build.test.mjs', 'scripts/run-integration-tests.mjs', 'src/main.js', 'data/hierarchy.json', 'drizzle/0002.sql']) {
     assert.equal(integrationProfile('engineering/example', [{filename}]), 'full', filename);
   }
   assert.equal(integrationProfile('engineering/example', [{filename:'scripts/classify-deployment-budget.mjs', previous_filename:'src/main.js'}]), 'full');

@@ -1,0 +1,13 @@
+{
+  "method_id": "declared-package-boundary",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "command": [
+    "node",
+    "--test",
+    "--test-name-pattern=only declared|explicit research promotion|missing mandatory",
+    "test/package-build.test.mjs"
+  ],
+  "exit_code": 0,
+  "log_path": "coordination/engineering/package-input-boundary-1067/positive-control.log"
+}

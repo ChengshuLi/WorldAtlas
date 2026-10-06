@@ -1,0 +1,13 @@
+{
+  "method_id": "declared-package-boundary",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "command": [
+    "node",
+    "--test",
+    "--test-name-pattern=undeclared reads|input symlinks|dependency links|output and cache",
+    "test/package-build.test.mjs"
+  ],
+  "exit_code": 0,
+  "log_path": "coordination/engineering/package-input-boundary-1067/negative-control.log"
+}
