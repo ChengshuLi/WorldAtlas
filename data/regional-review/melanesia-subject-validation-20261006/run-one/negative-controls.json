@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "issue": 1107,
+  "method_id": "melanesia-contract-validation",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "all_passed": true,
+  "control_count": 11,
+  "controls": [
+    {
+      "id": "duplicate_subject_even_with_recomputed_digest",
+      "passed": true,
+      "rejection": "Candidate subject roster is not the exact immutable ancestor roster"
+    },
+    {
+      "id": "missing_subject",
+      "passed": true,
+      "rejection": "Candidate subject roster is not the exact immutable ancestor roster"
+    },
+    {
+      "id": "fabricated_subject",
+      "passed": true,
+      "rejection": "Candidate subject roster is not the exact immutable ancestor roster"
+    },
+    {
+      "id": "changed_declared_count",
+      "passed": true,
+      "rejection": "Candidate declared count differs from exact roster"
+    },
+    {
+      "id": "changed_declared_digest",
+      "passed": true,
+      "rejection": "Candidate declared digest differs from exact roster digest"
+    },
+    {
+      "id": "duplicate_child_missing_910",
+      "passed": true,
+      "rejection": "Saved child inventory must contain exactly four distinct expected issue numbers"
+    },
+    {
+      "id": "missing_child_913",
+      "passed": true,
+      "rejection": "Saved child inventory must contain exactly four distinct expected issue numbers"
+    },
+    {
+      "id": "unexpected_child_914",
+      "passed": true,
+      "rejection": "Saved child inventory must contain exactly four distinct expected issue numbers"
+    },
+    {
+      "id": "incorrect_fiji_child_subset",
+      "passed": true,
+      "rejection": "Live child snapshots must contain exactly #910–#913 once each"
+    },
+    {
+      "id": "overlapping_child_subjects",
+      "passed": true,
+      "rejection": "Live child snapshots must contain exactly #910–#913 once each"
+    },
+    {
+      "id": "incomplete_child_union",
+      "passed": true,
+      "rejection": "Live child snapshots must contain exactly #910–#913 once each"
+    }
+  ]
+}

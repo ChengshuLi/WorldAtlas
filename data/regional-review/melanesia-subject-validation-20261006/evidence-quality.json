@@ -1,0 +1,920 @@
+{
+  "version": 1,
+  "issue": 1107,
+  "lane": "geography",
+  "worker_id": "01a10947-7d6e-7ba2-98a1-a9f91dedabfc",
+  "subject_ids": [
+    "NCL-1258",
+    "NCL-1259",
+    "NCL-559",
+    "gb:FJI:ADM2:14151628B20319301670654",
+    "gb:FJI:ADM2:14151628B28251361437248",
+    "gb:FJI:ADM2:14151628B39642918357252",
+    "gb:FJI:ADM2:14151628B42533076410957",
+    "gb:FJI:ADM2:14151628B48978228339800",
+    "gb:FJI:ADM2:14151628B53541640625043",
+    "gb:FJI:ADM2:14151628B53702400461405",
+    "gb:FJI:ADM2:14151628B59272471160482",
+    "gb:FJI:ADM2:14151628B61046117406534",
+    "gb:FJI:ADM2:14151628B68154180840071",
+    "gb:FJI:ADM2:14151628B71764118664060",
+    "gb:FJI:ADM2:14151628B80423492752803",
+    "gb:FJI:ADM2:14151628B8492423103487",
+    "gb:FJI:ADM2:14151628B95966095088914",
+    "gb:FJI:ADM2:14151628B98370545668292",
+    "gb:SLB:ADM1:17018030B19935783635883",
+    "gb:VUT:ADM1:32282491B17169683382430",
+    "gb:VUT:ADM1:32282491B5439526076152",
+    "gb:VUT:ADM1:32282491B61228346728599",
+    "gb:VUT:ADM1:32282491B7486560380604",
+    "gb:VUT:ADM1:32282491B78905986242135",
+    "gb:VUT:ADM1:32282491B8417950609019"
+  ],
+  "subject_ids_sha256": "68582a71a2e035f8a1027d7e03a566a8c20bd19af93d27a4b5e4a618c8255da8",
+  "baseline": {
+    "commit": "27be77596f23304de6a720735538427e6d23e242",
+    "files": [
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-22.json",
+        "bytes": 4746385,
+        "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-28.json",
+        "bytes": 6613963,
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-8.json",
+        "bytes": 5097739,
+        "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/location-policy.json",
+        "bytes": 69433,
+        "sha256": "efab4528fd4b7b180815ef82de93480f490ef8fa48ad9ef32d1f9d76a64b7fb9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/macro-foundation/current-membership-inventory.json.gz",
+        "bytes": 2404397,
+        "sha256": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/macro-foundation/macro-certificate.json",
+        "bytes": 38959,
+        "sha256": "f50f70fcb0756712ab7a7a388bc8cada093080518f07d3a6f7329758980ea81b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/macro-foundation/regional-handoffs.json.gz",
+        "bytes": 71286,
+        "sha256": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/README.md",
+        "bytes": 5614,
+        "sha256": "a210d2392072a041f7926e73f42415e5b86d4d28b3b08b128bedaf21944fd775",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/area-review.csv",
+        "bytes": 2130,
+        "sha256": "8a80840202f625edea608270dfcad1abfe66c0984eaa28ee8db016f506dd5cc3",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/baseline-files.json",
+        "bytes": 10241,
+        "sha256": "b692450cd25a16196881f57391e21f2367c9512603d0b2eb2dea92202480073b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/claim-receipt.json",
+        "bytes": 705,
+        "sha256": "7537fc815b0ff35393285bc5b8bc0106cdf67b2a5c34b189e5ee284d0dfd2b99",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/findings.md",
+        "bytes": 9268,
+        "sha256": "871e7d243fce2e835818dca43c9ebd216012936a19a6bc65b7de67eb2951ac73",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/follow-up-contract-check.json",
+        "bytes": 4771,
+        "sha256": "4eeaa3b3f0b452e8e6d804b0b72dac5d722c9af601bb5d26ed4fb69a36b3d086",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/follow-up-issues.json",
+        "bytes": 41133,
+        "sha256": "2e8c687a893c6e124032c1724dec2b57703bf5f5476eeac201d4ad97964adfe0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/issue-scope-pinned.json",
+        "bytes": 20198,
+        "sha256": "c93052db058e1bfe371c48227c41dfd70afcbeddabe04d780fa17c4fe0e97385",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/reproduce.py",
+        "bytes": 16730,
+        "sha256": "5fb806d25dd72c3cfac52c0910ed169a024a7a7ea04934ebfcbe8c57dd39e4aa",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/reproducibility-check.json",
+        "bytes": 535,
+        "sha256": "fef324d0e8861023fee629c236489a760ebcc656fef87587efcb166dee47ff85",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/reproduction-run.log",
+        "bytes": 3815,
+        "sha256": "c02f21419546cf459053aa3b69fabafa54189eceb58314e702095d33a1bb1d4c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/reproduction.json",
+        "bytes": 31743,
+        "sha256": "cb8060420b535076114e3fd54823565078271b73857cbfd62cc46f67e11c4e6b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/scope.json",
+        "bytes": 8044,
+        "sha256": "0377ad3ad5af9ec45e233e9e62e5b958d3a3b81329aaf3fcc71b5222f02ada80",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/source-acquisition.json",
+        "bytes": 9302,
+        "sha256": "8ca953420a96d12200f4ca56d5b91abf5aafe276918a36c1745dae72bfd42d2c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/sources.json",
+        "bytes": 12015,
+        "sha256": "36daeaef5331367bcd70679d8f860faf3b0f30d6c193fe879660d1d21d323ca1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/sources/fiji-2007-census-province.geojson",
+        "bytes": 1357011,
+        "sha256": "a9cd94789cb5eb66cfbcbaf32a21bcbceba16b9a76adacba9ac675b950ca1ccd",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/sources/new-caledonia-georep-item.json",
+        "bytes": 3697,
+        "sha256": "8049992f737b73ddeb8c27b1260621e1cbcaf7bd3e3cf3de8de7b8c673d40f26",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/sources/new-caledonia-georep-provinces-layer.json",
+        "bytes": 15011,
+        "sha256": "a0968097c0a01a09107465e349c44625f24fe05ee5d1f723f700de49fcc3516c",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/sources/new-caledonia-georep-service.json",
+        "bytes": 6979,
+        "sha256": "3d97080918ffb93663b4a0b1e2315d209b683593db2ec53a181409865d654dfe",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/sources/new-caledonia-province-parts/province-des-iles.geojson",
+        "bytes": 8136835,
+        "sha256": "5a5ff8fac68b4a28c90ebedc65ba8deff91b0971582f7bb5a8cd32202db962b2",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/sources/new-caledonia-province-parts/province-nord.geojson",
+        "bytes": 14659942,
+        "sha256": "ab352991c7095df611ec40e79ff652fd4346070c4e725e689a1eed5f9c2fea66",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/sources/new-caledonia-province-parts/province-sud.geojson",
+        "bytes": 22380497,
+        "sha256": "c85d11f69e68c8a091ee7edc372212777952b897b3010082ba3af1d2774d5c85",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/sources/solomon-islands-natural-earth-adm1.geojson",
+        "bytes": 101513,
+        "sha256": "bd22f4cdce1c19066950b8c384c4d484a21a0dcaee5f207e363179f68c58c69d",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/sources/vanuatu-2017-adm1.geojson",
+        "bytes": 1094439,
+        "sha256": "69f44b96d0690310c67a4a430488fb7a02d028bdec8bbc755436cdfb90962c8d",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/unit-review.csv",
+        "bytes": 10892,
+        "sha256": "45b87dcc448ed8b571a58e0a6166d533c05120d8ebe49dc23a255a642a2000af",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/verify-followup-contracts.mjs",
+        "bytes": 4093,
+        "sha256": "4897dac25ef14384c252090b20934531ab886848867c13f5bb6b766981b50bc4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/validation/macro-publication-v5.json",
+        "bytes": 2826,
+        "sha256": "aae3967fde4f5bf92b3cb0b42c490c6c6a5921c7421dcdc9533f242afbd6a674",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "baseline_world_index": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "baseline_scope": "0377ad3ad5af9ec45e233e9e62e5b958d3a3b81329aaf3fcc71b5222f02ada80",
+      "baseline_reproducer": "5fb806d25dd72c3cfac52c0910ed169a024a7a7ea04934ebfcbe8c57dd39e4aa",
+      "baseline_followup_verifier": "4897dac25ef14384c252090b20934531ab886848867c13f5bb6b766981b50bc4",
+      "baseline_followup_inventory": "2e8c687a893c6e124032c1724dec2b57703bf5f5476eeac201d4ad97964adfe0",
+      "macro_hierarchy": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "macro_publication": "aae3967fde4f5bf92b3cb0b42c490c6c6a5921c7421dcdc9533f242afbd6a674",
+      "macro_certificate": "f50f70fcb0756712ab7a7a388bc8cada093080518f07d3a6f7329758980ea81b"
+    },
+    "pin_files": {
+      "baseline_world_index": "data/world-index.json",
+      "baseline_scope": "data/regional-review/regional-review-1aa97b490604ea4e/scope.json",
+      "baseline_reproducer": "data/regional-review/regional-review-1aa97b490604ea4e/reproduce.py",
+      "baseline_followup_verifier": "data/regional-review/regional-review-1aa97b490604ea4e/verify-followup-contracts.mjs",
+      "baseline_followup_inventory": "data/regional-review/regional-review-1aa97b490604ea4e/follow-up-issues.json",
+      "macro_hierarchy": "data/hierarchy.json",
+      "macro_publication": "data/validation/macro-publication-v5.json",
+      "macro_certificate": "data/macro-foundation/macro-certificate.json"
+    },
+    "subject_files": {
+      "gb:FJI:ADM2:14151628B98370545668292": "data/geography/part-8.json",
+      "gb:FJI:ADM2:14151628B28251361437248": "data/geography/part-8.json",
+      "gb:FJI:ADM2:14151628B53541640625043": "data/geography/part-8.json",
+      "gb:FJI:ADM2:14151628B39642918357252": "data/geography/part-8.json",
+      "gb:FJI:ADM2:14151628B68154180840071": "data/geography/part-8.json",
+      "gb:FJI:ADM2:14151628B48978228339800": "data/geography/part-8.json",
+      "gb:FJI:ADM2:14151628B71764118664060": "data/geography/part-8.json",
+      "gb:FJI:ADM2:14151628B59272471160482": "data/geography/part-8.json",
+      "gb:FJI:ADM2:14151628B95966095088914": "data/geography/part-8.json",
+      "gb:FJI:ADM2:14151628B61046117406534": "data/geography/part-8.json",
+      "gb:FJI:ADM2:14151628B80423492752803": "data/geography/part-8.json",
+      "gb:FJI:ADM2:14151628B20319301670654": "data/geography/part-8.json",
+      "gb:FJI:ADM2:14151628B42533076410957": "data/geography/part-8.json",
+      "gb:FJI:ADM2:14151628B53702400461405": "data/geography/part-8.json",
+      "gb:FJI:ADM2:14151628B8492423103487": "data/geography/part-8.json",
+      "gb:SLB:ADM1:17018030B19935783635883": "data/geography/part-22.json",
+      "gb:VUT:ADM1:32282491B7486560380604": "data/geography/part-28.json",
+      "gb:VUT:ADM1:32282491B8417950609019": "data/geography/part-28.json",
+      "gb:VUT:ADM1:32282491B78905986242135": "data/geography/part-28.json",
+      "gb:VUT:ADM1:32282491B5439526076152": "data/geography/part-28.json",
+      "gb:VUT:ADM1:32282491B17169683382430": "data/geography/part-28.json",
+      "gb:VUT:ADM1:32282491B61228346728599": "data/geography/part-28.json",
+      "NCL-559": "data/geography/part-28.json",
+      "NCL-1259": "data/geography/part-28.json",
+      "NCL-1258": "data/geography/part-28.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "FJI-2007-PHC",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/FJI/ADM2/geoBoundaries-FJI-ADM2.geojson",
+      "role": "Fiji ADM2 province/census boundary layer",
+      "vintage": "2007 census boundaries; catalog metadata says 2020",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "CC BY 4.0 recorded in the original source inventory; the source-registry whole-file hash conflicts with the retained download."
+      },
+      "retention": "retained",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "limit": "This integrity packet verifies exact retained bytes and identity crosswalks only; it does not establish current legal boundaries, complete islands, or authoritative source standing.",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-1aa97b490604ea4e/sources/fiji-2007-census-province.geojson",
+          "bytes": 1357011,
+          "sha256": "a9cd94789cb5eb66cfbcbaf32a21bcbceba16b9a76adacba9ac675b950ca1ccd",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "SLB-Natural-Earth-ADM1",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SLB/ADM1/geoBoundaries-SLB-ADM1.geojson",
+      "role": "Solomon Islands ADM1 generalized province layer",
+      "vintage": "Natural Earth 2021",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "Public domain recorded in the original source inventory and Natural Earth lineage."
+      },
+      "retention": "retained",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "limit": "This integrity packet verifies exact retained bytes and identity crosswalks only; it does not establish current legal boundaries, complete islands, or authoritative source standing.",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-1aa97b490604ea4e/sources/solomon-islands-natural-earth-adm1.geojson",
+          "bytes": 101513,
+          "sha256": "bd22f4cdce1c19066950b8c384c4d484a21a0dcaee5f207e363179f68c58c69d",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "VUT-ADM1-2017",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VUT/ADM1/geoBoundaries-VUT-ADM1.geojson",
+      "role": "Vanuatu ADM1 province layer",
+      "vintage": "2017/2018 layer vintage",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "ODbL 1.0 recorded in the original source inventory; attribution and share-alike obligations apply."
+      },
+      "retention": "retained",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "limit": "This integrity packet verifies exact retained bytes and identity crosswalks only; it does not establish current legal boundaries, complete islands, or authoritative source standing.",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-1aa97b490604ea4e/sources/vanuatu-2017-adm1.geojson",
+          "bytes": 1094439,
+          "sha256": "69f44b96d0690310c67a4a430488fb7a02d028bdec8bbc755436cdfb90962c8d",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "NCL-GeoReP-2024",
+      "url": "https://services1.arcgis.com/TZcrgU6CIbqWt9Qv/arcgis/rest/services/limites_terrestres/FeatureServer/1/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&maxAllowableOffset=0.00005&geometryPrecision=6&f=geojson",
+      "role": "New Caledonia official provincial layer",
+      "vintage": "Metadata updated 2024-10-28; retrieved 2026-10-05",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "GeoReP item metadata declares Licence Ouverte (Open License); its item metadata is retained and hash-pinned in the ancestor packet."
+      },
+      "retention": "retained",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "limit": "The retained official polygons are invalid and the current correction does not establish exact legal geometry or neighboring-scale completeness.",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-1aa97b490604ea4e/sources/new-caledonia-georep-item.json",
+          "bytes": 3697,
+          "sha256": "8049992f737b73ddeb8c27b1260621e1cbcaf7bd3e3cf3de8de7b8c673d40f26",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-1aa97b490604ea4e/sources/new-caledonia-province-parts/province-des-iles.geojson",
+          "bytes": 8136835,
+          "sha256": "5a5ff8fac68b4a28c90ebedc65ba8deff91b0971582f7bb5a8cd32202db962b2",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-1aa97b490604ea4e/sources/new-caledonia-province-parts/province-nord.geojson",
+          "bytes": 14659942,
+          "sha256": "ab352991c7095df611ec40e79ff652fd4346070c4e725e689a1eed5f9c2fea66",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-1aa97b490604ea4e/sources/new-caledonia-province-parts/province-sud.geojson",
+          "bytes": 22380497,
+          "sha256": "c85d11f69e68c8a091ee7edc372212777952b897b3010082ba3af1d2774d5c85",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/melanesia-subject-validation-20261006/README.md",
+      "bytes": 6126,
+      "sha256": "c4eca1868d44ddfc66c59f5634f973f775523a59dd6b2b9047200eed783d77bd",
+      "hash_kind": "file-bytes",
+      "role": "generated-table"
+    },
+    {
+      "path": "data/regional-review/melanesia-subject-validation-20261006/github-issue-snapshots.json",
+      "bytes": 38024,
+      "sha256": "01d7284d7791f73fbb40b9fd5a1740d2f7543be7dbbfd20793d8609741c976f5",
+      "hash_kind": "file-bytes",
+      "role": "source-snapshot"
+    },
+    {
+      "path": "data/regional-review/melanesia-subject-validation-20261006/issue-1107-contract.json",
+      "bytes": 8661,
+      "sha256": "29d4abe47af96d5ebcbcaa4f81298ea6578e41df215f74d2f9fb7ed808f03f8b",
+      "hash_kind": "file-bytes",
+      "role": "source-snapshot"
+    },
+    {
+      "path": "data/regional-review/melanesia-subject-validation-20261006/run-one/negative-controls.json",
+      "bytes": 2002,
+      "sha256": "38e41c1d0e88a85850aceff84a963ffd89bf9e1d1df75c8afecdd9c9dfbc8551",
+      "hash_kind": "file-bytes",
+      "role": "generated-result"
+    },
+    {
+      "path": "data/regional-review/melanesia-subject-validation-20261006/run-one/positive-control.json",
+      "bytes": 214,
+      "sha256": "7cf8cfae646c942b2dd0ccaaca84fdd502ad2d79ef7fc4161f2d4d593c092dc7",
+      "hash_kind": "file-bytes",
+      "role": "generated-result"
+    },
+    {
+      "path": "data/regional-review/melanesia-subject-validation-20261006/run-one/reproduction.json",
+      "bytes": 30097,
+      "sha256": "7648ffcdc15a7c70b4c516356d4183b5e7c28196dddffaec4950414a93caf13a",
+      "hash_kind": "file-bytes",
+      "role": "generated-result"
+    },
+    {
+      "path": "data/regional-review/melanesia-subject-validation-20261006/run-two/negative-controls.json",
+      "bytes": 2002,
+      "sha256": "38e41c1d0e88a85850aceff84a963ffd89bf9e1d1df75c8afecdd9c9dfbc8551",
+      "hash_kind": "file-bytes",
+      "role": "generated-result"
+    },
+    {
+      "path": "data/regional-review/melanesia-subject-validation-20261006/run-two/positive-control.json",
+      "bytes": 214,
+      "sha256": "7cf8cfae646c942b2dd0ccaaca84fdd502ad2d79ef7fc4161f2d4d593c092dc7",
+      "hash_kind": "file-bytes",
+      "role": "generated-result"
+    },
+    {
+      "path": "data/regional-review/melanesia-subject-validation-20261006/run-two/reproduction.json",
+      "bytes": 30097,
+      "sha256": "7648ffcdc15a7c70b4c516356d4183b5e7c28196dddffaec4950414a93caf13a",
+      "hash_kind": "file-bytes",
+      "role": "generated-result"
+    },
+    {
+      "path": "data/regional-review/melanesia-subject-validation-20261006/two-run-reproducibility.json",
+      "bytes": 1763,
+      "sha256": "c3529fad8b8d902c6f6d86e2027028fe41b3cccb5f48087ffe0aa37a5c4a76b4",
+      "hash_kind": "file-bytes",
+      "role": "generated-result"
+    },
+    {
+      "path": "data/regional-review/melanesia-subject-validation-20261006/verify-packet.mjs",
+      "bytes": 17710,
+      "sha256": "86c4fbe58ba307524226ca344283facbe00dc7f84a370c94b46d38cfcdff7c95",
+      "hash_kind": "file-bytes",
+      "role": "code"
+    }
+  ],
+  "methods": [
+    {
+      "id": "melanesia-contract-validation",
+      "kind": "generator",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "description": "Bind exact parent subjects to current GitHub issue contract and immutable ancestor roster, verify unique baseline/source identities and disjoint child coverage, then run 11 executable negative controls before writing outputs.",
+      "software": "Node.js v24.19.0; committed verify-packet.mjs; no external packages",
+      "units": "exact geographic subject and issue-contract counts"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "exact_parent_subjects",
+      "value": 25,
+      "unit": "locations",
+      "vintage": "current",
+      "evaluation_commit": "27be77596f23304de6a720735538427e6d23e242",
+      "input_sha256": "01d7284d7791f73fbb40b9fd5a1740d2f7543be7dbbfd20793d8609741c976f5"
+    },
+    {
+      "id": "unique_subjects",
+      "value": 25,
+      "unit": "locations",
+      "vintage": "current",
+      "evaluation_commit": "27be77596f23304de6a720735538427e6d23e242",
+      "input_sha256": "01d7284d7791f73fbb40b9fd5a1740d2f7543be7dbbfd20793d8609741c976f5"
+    },
+    {
+      "id": "unique_containing_features",
+      "value": 25,
+      "unit": "features",
+      "vintage": "current",
+      "evaluation_commit": "27be77596f23304de6a720735538427e6d23e242",
+      "input_sha256": "0377ad3ad5af9ec45e233e9e62e5b958d3a3b81329aaf3fcc71b5222f02ada80"
+    },
+    {
+      "id": "original_unique_rows",
+      "value": 25,
+      "unit": "rows",
+      "vintage": "current",
+      "evaluation_commit": "27be77596f23304de6a720735538427e6d23e242",
+      "input_sha256": "cb8060420b535076114e3fd54823565078271b73857cbfd62cc46f67e11c4e6b"
+    },
+    {
+      "id": "source_identity_matches",
+      "value": 25,
+      "unit": "crosswalks",
+      "vintage": "current",
+      "evaluation_commit": "27be77596f23304de6a720735538427e6d23e242",
+      "input_sha256": "cb8060420b535076114e3fd54823565078271b73857cbfd62cc46f67e11c4e6b"
+    },
+    {
+      "id": "fiji_subjects",
+      "value": 15,
+      "unit": "locations",
+      "vintage": "current",
+      "evaluation_commit": "27be77596f23304de6a720735538427e6d23e242",
+      "input_sha256": "01d7284d7791f73fbb40b9fd5a1740d2f7543be7dbbfd20793d8609741c976f5"
+    },
+    {
+      "id": "new_caledonia_subjects",
+      "value": 3,
+      "unit": "locations",
+      "vintage": "current",
+      "evaluation_commit": "27be77596f23304de6a720735538427e6d23e242",
+      "input_sha256": "01d7284d7791f73fbb40b9fd5a1740d2f7543be7dbbfd20793d8609741c976f5"
+    },
+    {
+      "id": "vanuatu_subjects",
+      "value": 6,
+      "unit": "locations",
+      "vintage": "current",
+      "evaluation_commit": "27be77596f23304de6a720735538427e6d23e242",
+      "input_sha256": "01d7284d7791f73fbb40b9fd5a1740d2f7543be7dbbfd20793d8609741c976f5"
+    },
+    {
+      "id": "temotu_subjects",
+      "value": 1,
+      "unit": "locations",
+      "vintage": "current",
+      "evaluation_commit": "27be77596f23304de6a720735538427e6d23e242",
+      "input_sha256": "01d7284d7791f73fbb40b9fd5a1740d2f7543be7dbbfd20793d8609741c976f5"
+    },
+    {
+      "id": "correction_needed_inherited",
+      "value": 5,
+      "unit": "rows",
+      "vintage": "current",
+      "evaluation_commit": "27be77596f23304de6a720735538427e6d23e242",
+      "input_sha256": "cb8060420b535076114e3fd54823565078271b73857cbfd62cc46f67e11c4e6b"
+    },
+    {
+      "id": "insufficient_evidence_inherited",
+      "value": 20,
+      "unit": "rows",
+      "vintage": "current",
+      "evaluation_commit": "27be77596f23304de6a720735538427e6d23e242",
+      "input_sha256": "cb8060420b535076114e3fd54823565078271b73857cbfd62cc46f67e11c4e6b"
+    },
+    {
+      "id": "distinct_child_contracts",
+      "value": 4,
+      "unit": "issues",
+      "vintage": "current",
+      "evaluation_commit": "27be77596f23304de6a720735538427e6d23e242",
+      "input_sha256": "01d7284d7791f73fbb40b9fd5a1740d2f7543be7dbbfd20793d8609741c976f5"
+    },
+    {
+      "id": "child_union_subjects",
+      "value": 25,
+      "unit": "locations",
+      "vintage": "current",
+      "evaluation_commit": "27be77596f23304de6a720735538427e6d23e242",
+      "input_sha256": "01d7284d7791f73fbb40b9fd5a1740d2f7543be7dbbfd20793d8609741c976f5"
+    },
+    {
+      "id": "negative_controls_passed",
+      "value": 11,
+      "unit": "controls",
+      "vintage": "current",
+      "evaluation_commit": "27be77596f23304de6a720735538427e6d23e242",
+      "input_sha256": "38e41c1d0e88a85850aceff84a963ffd89bf9e1d1df75c8afecdd9c9dfbc8551"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "exact_parent_subjects",
+      "path": "data/regional-review/melanesia-subject-validation-20261006/run-one/reproduction.json",
+      "json_pointer": "/scope_validation/exact_subject_count"
+    },
+    {
+      "metric_id": "unique_subjects",
+      "path": "data/regional-review/melanesia-subject-validation-20261006/run-one/reproduction.json",
+      "json_pointer": "/scope_validation/unique_subject_count"
+    },
+    {
+      "metric_id": "unique_containing_features",
+      "path": "data/regional-review/melanesia-subject-validation-20261006/run-one/reproduction.json",
+      "json_pointer": "/scope_validation/unique_baseline_feature_count"
+    },
+    {
+      "metric_id": "original_unique_rows",
+      "path": "data/regional-review/melanesia-subject-validation-20261006/run-one/reproduction.json",
+      "json_pointer": "/scope_validation/original_row_unique_count"
+    },
+    {
+      "metric_id": "source_identity_matches",
+      "path": "data/regional-review/melanesia-subject-validation-20261006/run-one/reproduction.json",
+      "json_pointer": "/scope_validation/source_identity_matches"
+    },
+    {
+      "metric_id": "fiji_subjects",
+      "path": "data/regional-review/melanesia-subject-validation-20261006/run-one/reproduction.json",
+      "json_pointer": "/scope_validation/original_findings/by_country/FJI"
+    },
+    {
+      "metric_id": "new_caledonia_subjects",
+      "path": "data/regional-review/melanesia-subject-validation-20261006/run-one/reproduction.json",
+      "json_pointer": "/scope_validation/original_findings/by_country/NCL"
+    },
+    {
+      "metric_id": "vanuatu_subjects",
+      "path": "data/regional-review/melanesia-subject-validation-20261006/run-one/reproduction.json",
+      "json_pointer": "/scope_validation/original_findings/by_country/VUT"
+    },
+    {
+      "metric_id": "temotu_subjects",
+      "path": "data/regional-review/melanesia-subject-validation-20261006/run-one/reproduction.json",
+      "json_pointer": "/scope_validation/original_findings/by_country/SLB"
+    },
+    {
+      "metric_id": "correction_needed_inherited",
+      "path": "data/regional-review/melanesia-subject-validation-20261006/run-one/reproduction.json",
+      "json_pointer": "/scope_validation/original_findings/correction_needed"
+    },
+    {
+      "metric_id": "insufficient_evidence_inherited",
+      "path": "data/regional-review/melanesia-subject-validation-20261006/run-one/reproduction.json",
+      "json_pointer": "/scope_validation/original_findings/insufficient_evidence"
+    },
+    {
+      "metric_id": "distinct_child_contracts",
+      "path": "data/regional-review/melanesia-subject-validation-20261006/run-one/reproduction.json",
+      "json_pointer": "/followup_validation/unique_child_issue_count"
+    },
+    {
+      "metric_id": "child_union_subjects",
+      "path": "data/regional-review/melanesia-subject-validation-20261006/run-one/reproduction.json",
+      "json_pointer": "/followup_validation/union_subject_count"
+    },
+    {
+      "metric_id": "negative_controls_passed",
+      "path": "data/regional-review/melanesia-subject-validation-20261006/run-one/negative-controls.json",
+      "json_pointer": "/control_count"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "exact_parent_subjects",
+      "value": 25,
+      "unit": "locations"
+    },
+    {
+      "metric_id": "unique_subjects",
+      "value": 25,
+      "unit": "locations"
+    },
+    {
+      "metric_id": "unique_containing_features",
+      "value": 25,
+      "unit": "features"
+    },
+    {
+      "metric_id": "original_unique_rows",
+      "value": 25,
+      "unit": "rows"
+    },
+    {
+      "metric_id": "source_identity_matches",
+      "value": 25,
+      "unit": "crosswalks"
+    },
+    {
+      "metric_id": "fiji_subjects",
+      "value": 15,
+      "unit": "locations"
+    },
+    {
+      "metric_id": "new_caledonia_subjects",
+      "value": 3,
+      "unit": "locations"
+    },
+    {
+      "metric_id": "vanuatu_subjects",
+      "value": 6,
+      "unit": "locations"
+    },
+    {
+      "metric_id": "temotu_subjects",
+      "value": 1,
+      "unit": "locations"
+    },
+    {
+      "metric_id": "correction_needed_inherited",
+      "value": 5,
+      "unit": "rows"
+    },
+    {
+      "metric_id": "insufficient_evidence_inherited",
+      "value": 20,
+      "unit": "rows"
+    },
+    {
+      "metric_id": "distinct_child_contracts",
+      "value": 4,
+      "unit": "issues"
+    },
+    {
+      "metric_id": "child_union_subjects",
+      "value": 25,
+      "unit": "locations"
+    },
+    {
+      "metric_id": "negative_controls_passed",
+      "value": 11,
+      "unit": "controls"
+    }
+  ],
+  "rendered_tables": [
+    {
+      "path": "data/regional-review/melanesia-subject-validation-20261006/README.md",
+      "rows": [
+        {
+          "metric_id": "fiji_subjects",
+          "line": 17,
+          "template": "| Fiji, {value} | Fourteen named provinces plus Rotuma; ADM1 Divisions are the coarser neighboring tier. Rotuma’s administrative status is different from the census reporting grouping. | Retained GeoBoundaries province layer is identified as 2007 census geography despite a 2020 catalog vintage; retained bytes do not match the source-registry hash. CC BY 4.0 is recorded for the retained GeoBoundaries release. Census labels do not establish current legal boundaries. The Fiji census report and Prime Minister page/PDF were restoration-only because redistribution terms were not established. |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "new_caledonia_subjects",
+          "line": 18,
+          "template": "| New Caledonia, {value} | Nord, Îles Loyauté, and Sud are provinces; Organic Law 99-209 supplies the legal province/commune membership context. | The official GeoReP layer metadata is dated 2024-10-28 and was retrieved 2026-10-05. Its item metadata declares [Licence Ouverte](https://alliance.numerique.gouv.fr/licence-ouverte-open-licence/). The three retained feature partitions preserve the original feature objects from a 45,177,077-byte response; each raw polygon is invalid. Natural Earth is only a generalized fallback. |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "temotu_subjects",
+          "line": 19,
+          "template": "| Solomon Islands / Temotu, {value} | The source identifies Temotu as an ADM1 province; the province is not established as equivalent to the whole Santa Cruz Islands geographic-area parent. | Natural Earth 2021 generalized reference, public domain. The Ministry of Provincial Government confirms provincial role and broad geography; it does not establish exact boundary placement, island inclusion, or parent equivalence. |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "vanuatu_subjects",
+          "line": 20,
+          "template": "| Vanuatu, {value} | Six province units at ADM1; OCHA/Pacific Community ADM2 area-council data (66 units in the inherited metadata) is finer neighboring granularity. | Retained 2017 OSM/Wambacher-derived layer is recorded under ODbL 1.0. Government profiles corroborate names and island groupings but not exact polygons. The cited OCHA layer metadata declares no license; no official exact province boundary source was established. |",
+          "decimals": 0
+        }
+      ]
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "The live #454 contract, immutable ancestor scope and retained original row results agree on 25 unique subjects; four current child issue contracts have distinct exact subsets whose union matches the parent.",
+      "status": "supported",
+      "source_ids": [
+        "FJI-2007-PHC",
+        "SLB-Natural-Earth-ADM1",
+        "VUT-ADM1-2017",
+        "NCL-GeoReP-2024"
+      ]
+    },
+    {
+      "text": "Boundary correctness, lawful current source reuse for all retained inputs, exact island completeness and disputed parent semantics remain unresolved.",
+      "status": "unresolved",
+      "source_ids": [
+        "FJI-2007-PHC",
+        "SLB-Natural-Earth-ADM1",
+        "VUT-ADM1-2017",
+        "NCL-GeoReP-2024"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "node data/regional-review/melanesia-subject-validation-20261006/verify-packet.mjs data/regional-review/melanesia-subject-validation-20261006/run-one",
+    "node data/regional-review/melanesia-subject-validation-20261006/verify-packet.mjs data/regional-review/melanesia-subject-validation-20261006/run-two"
+  ],
+  "validation": [
+    {
+      "method_id": "melanesia-contract-validation",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/melanesia-subject-validation-20261006/run-one/positive-control.json"
+    },
+    {
+      "method_id": "melanesia-contract-validation",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/melanesia-subject-validation-20261006/run-one/negative-controls.json"
+    },
+    {
+      "method_id": "melanesia-contract-validation",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/melanesia-subject-validation-20261006/two-run-reproducibility.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "data/regional-review/melanesia-subject-validation-20261006/README.md",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/melanesia-subject-validation-20261006/evidence-quality.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/melanesia-subject-validation-20261006/github-issue-snapshots.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/melanesia-subject-validation-20261006/issue-1107-contract.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/melanesia-subject-validation-20261006/run-one/negative-controls.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/melanesia-subject-validation-20261006/run-one/positive-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/melanesia-subject-validation-20261006/run-one/reproduction.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/melanesia-subject-validation-20261006/run-two/negative-controls.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/melanesia-subject-validation-20261006/run-two/positive-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/melanesia-subject-validation-20261006/run-two/reproduction.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/melanesia-subject-validation-20261006/two-run-reproducibility.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/melanesia-subject-validation-20261006/verify-packet.mjs",
+      "status": "added",
+      "previous_path": null
+    }
+  ]
+}

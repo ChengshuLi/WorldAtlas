@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "issue": 1107,
+  "method_id": "melanesia-contract-validation",
+  "kind": "reproducibility",
+  "outcome": "passed",
+  "retrieved_inputs": "github-issue-snapshots.json captured by GitHub REST API on 2026-10-06",
+  "issue_snapshot_sha256": "01d7284d7791f73fbb40b9fd5a1740d2f7543be7dbbfd20793d8609741c976f5",
+  "baseline_commit": "27be77596f23304de6a720735538427e6d23e242",
+  "generator_sha256": "86c4fbe58ba307524226ca344283facbe00dc7f84a370c94b46d38cfcdff7c95",
+  "runs": [
+    {
+      "run": "run-one",
+      "files": {
+        "reproduction.json": {
+          "bytes": 30097,
+          "sha256": "7648ffcdc15a7c70b4c516356d4183b5e7c28196dddffaec4950414a93caf13a"
+        },
+        "negative-controls.json": {
+          "bytes": 2002,
+          "sha256": "38e41c1d0e88a85850aceff84a963ffd89bf9e1d1df75c8afecdd9c9dfbc8551"
+        },
+        "positive-control.json": {
+          "bytes": 214,
+          "sha256": "7cf8cfae646c942b2dd0ccaaca84fdd502ad2d79ef7fc4161f2d4d593c092dc7"
+        }
+      }
+    },
+    {
+      "run": "run-two",
+      "files": {
+        "reproduction.json": {
+          "bytes": 30097,
+          "sha256": "7648ffcdc15a7c70b4c516356d4183b5e7c28196dddffaec4950414a93caf13a"
+        },
+        "negative-controls.json": {
+          "bytes": 2002,
+          "sha256": "38e41c1d0e88a85850aceff84a963ffd89bf9e1d1df75c8afecdd9c9dfbc8551"
+        },
+        "positive-control.json": {
+          "bytes": 214,
+          "sha256": "7cf8cfae646c942b2dd0ccaaca84fdd502ad2d79ef7fc4161f2d4d593c092dc7"
+        }
+      }
+    }
+  ],
+  "run_one_sha256": "7648ffcdc15a7c70b4c516356d4183b5e7c28196dddffaec4950414a93caf13a",
+  "run_two_sha256": "7648ffcdc15a7c70b4c516356d4183b5e7c28196dddffaec4950414a93caf13a",
+  "byte_identical": true
+}
