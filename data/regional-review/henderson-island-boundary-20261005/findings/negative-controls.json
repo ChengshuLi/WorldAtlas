@@ -1,0 +1,42 @@
+{
+  "method_id": "rounded-component-lineage",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "evidence_path": "data/regional-review/henderson-island-boundary-20261005/findings/negative-controls.json",
+  "assertion": "each of the three other named-group components differs from the Henderson feature after rounding",
+  "controls": [
+    {
+      "component": 0,
+      "bbox": [
+        -130.120351,
+        -25.077081,
+        -130.086252,
+        -25.064386
+      ],
+      "ring_positions": 9,
+      "matches_current_after_rounding": false
+    },
+    {
+      "component": 1,
+      "bbox": [
+        -124.797109,
+        -24.67254,
+        -124.778066,
+        -24.663995
+      ],
+      "ring_positions": 11,
+      "matches_current_after_rounding": false
+    },
+    {
+      "component": 3,
+      "bbox": [
+        -130.753082,
+        -23.934666,
+        -130.741363,
+        -23.924412
+      ],
+      "ring_positions": 9,
+      "matches_current_after_rounding": false
+    }
+  ]
+}
