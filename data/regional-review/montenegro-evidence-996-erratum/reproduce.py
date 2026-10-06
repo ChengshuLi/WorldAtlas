@@ -458,7 +458,7 @@ def finalize():
     runner_commit, runner_blob = verify_running_code()
     issue, spec, quality, reservation = load_issue_contract()
     pin_records, phase_bytes, descriptor_count = verified_inputs(quality)
-    run_dirs = [PACKET / "runs/2026-10-06/anchored-v7/run-1", PACKET / "runs/2026-10-06/anchored-v7/run-2"]
+    run_dirs = [PACKET / "runs/2026-10-06/anchored-v8/run-1", PACKET / "runs/2026-10-06/anchored-v8/run-2"]
     if any(not path.is_dir() for path in run_dirs):
         raise GuardError("both fresh run directories are required before finalization")
     outputs = []
@@ -498,7 +498,7 @@ def finalize():
         "run_two_path": run_dirs[1].relative_to(ROOT).as_posix(),
         "all_three_outputs_byte_identical": True
     }
-    reproduction_path = PACKET / "reproducibility-control-anchored-v7.json"
+    reproduction_path = PACKET / "reproducibility-control-anchored-v8.json"
     reproduction_bytes = canonical(reproduction_control)
 
     # The manifest contains the complete frozen issue pin set. All b6cfa files
@@ -560,22 +560,35 @@ def finalize():
     prior_bindings = {row["metric_id"]: row for row in prior_quality.get("metric_bindings", [])}
     if len(prior_metrics) != 23 or len(prior_bindings) != 23:
         raise GuardError("immutable predecessor must contain all 23 area-delta metric bindings")
-    for metric in prior_metrics:
-        binding = prior_bindings.get(metric["id"])
-        if not binding or not binding["json_pointer"].startswith("/subjects/"):
-            raise GuardError("predecessor area metric lacks its exact report JSON pointer")
-        metric_rows.append({**metric, "vintage": "archived", "evaluation_commit": BASELINE})
-        bindings.append({"metric_id": metric["id"], "path": report_output, "json_pointer": binding["json_pointer"]})
-        summaries.append({"metric_id": metric["id"], "value": metric["value"], "unit": metric["unit"]})
     old_delta_pointers = {prior_bindings[row["id"]]["json_pointer"] for row in prior_metrics}
     sha17 = quality["pins"][f"{ORIGINAL_PACKET_COMMIT}:{ORIGINAL_PACKET}/source/official-municipal-areas-2017.json"]
     sha18 = quality["pins"][f"{ORIGINAL_PACKET_COMMIT}:{ORIGINAL_PACKET}/source/official-municipal-areas-2018.json"]
     shageo = quality["pins"][f"{ORIGINAL_PACKET_COMMIT}:{ORIGINAL_PACKET}/source/gb-MNE-ADM1-geoBoundaries-2017.geojson"]
+    area_path = f"{PRIOR_SOURCE}/area-assessments.json"
+    shaarea = quality["pins"][f"{BASELINE}:{area_path}"]
     shahierarchy = quality["pins"][f"{BASELINE}:data/hierarchy.json"]
     shaworld = quality["pins"][f"{BASELINE}:data/world-index.json"]
     roster_rel = f"{ORIGINAL_PACKET}/source/current-municipalities-2025.json"
     sharoster = quality["pins"][f"{ORIGINAL_PACKET_COMMIT}:{roster_rel}"]
+    def metric_input_sources(key, section, pointer):
+        if "area_delta_2017" in key:
+            paths = [area_path, f"{ORIGINAL_PACKET}/source/official-municipal-areas-2017.json",
+                     f"{ORIGINAL_PACKET}/source/gb-MNE-ADM1-geoBoundaries-2017.geojson"]
+        elif "area_delta_2018" in key:
+            paths = [area_path, f"{ORIGINAL_PACKET}/source/official-municipal-areas-2018.json",
+                     f"{ORIGINAL_PACKET}/source/gb-MNE-ADM1-geoBoundaries-2017.geojson"]
+        elif key == "retained_geometry_area_km2_wgs84":
+            paths = [area_path, f"{ORIGINAL_PACKET}/source/gb-MNE-ADM1-geoBoundaries-2017.geojson"]
+        else:
+            return []
+        source_rows = []
+        for path in paths:
+            digest = (shaarea if path == area_path else quality["pins"][f"{ORIGINAL_PACKET_COMMIT}:{path}"])
+            source_rows.append({"path": path, "sha256": digest, "role": "numeric input or identity cross-check"})
+        return source_rows
+
     def metric_input_hash(key, section, pointer):
+        if key.startswith("area_delta_") or key == "retained_geometry_area_km2_wgs84": return shaarea
         if "2018" in key: return sha18
         if "2017" in key and not key.startswith("retained"): return sha17
         if key.startswith("atlas_parent"): return shahierarchy
@@ -583,6 +596,15 @@ def finalize():
         if "retained_source_geometry_types" in pointer: return shageo
         if "geometry" in key or "source_" in key or key.startswith("retained_") or key == "coastal_source_municipality_count": return shageo
         return shaworld if section == "summary" else shageo
+    for metric in prior_metrics:
+        binding = prior_bindings.get(metric["id"])
+        if not binding or not binding["json_pointer"].startswith("/subjects/"):
+            raise GuardError("predecessor area metric lacks its exact report JSON pointer")
+        metric_rows.append({**metric, "vintage": "archived", "evaluation_commit": BASELINE,
+                            "input_sha256": shaarea,
+                            "input_sources": metric_input_sources("area_delta_2017_official_minus_geometry_km2", "subject", binding["json_pointer"])})
+        bindings.append({"metric_id": metric["id"], "path": report_output, "json_pointer": binding["json_pointer"]})
+        summaries.append({"metric_id": metric["id"], "value": metric["value"], "unit": metric["unit"]})
     numeric_rows = []
     def collect_numeric(value, pointer, section, subject_id=None):
         if isinstance(value, bool): return
@@ -602,8 +624,12 @@ def finalize():
     existing_ids = {row["id"] for row in metric_rows}
     for metric_id, value, unit, input_hash, pointer in numeric_rows:
         if metric_id in existing_ids: continue
-        metric_rows.append({"id": metric_id, "value": value, "unit": unit, "vintage": "archived",
-                            "evaluation_commit": BASELINE, "input_sha256": input_hash})
+        key = pointer.rsplit("/", 1)[-1].replace("~1", "/").replace("~0", "~")
+        metric = {"id": metric_id, "value": value, "unit": unit, "vintage": "archived",
+                  "evaluation_commit": BASELINE, "input_sha256": input_hash}
+        input_sources = metric_input_sources(key, "subject", pointer)
+        if input_sources: metric["input_sources"] = input_sources
+        metric_rows.append(metric)
         bindings.append({"metric_id": metric_id, "path": report_output, "json_pointer": pointer})
         summaries.append({"metric_id": metric_id, "value": value, "unit": unit})
         existing_ids.add(metric_id)
@@ -688,8 +714,8 @@ def finalize():
         ],
         "stages": {"research": "partial", "implementation": "not-proposed", "geographic_approval": "unapproved"},
         "commands": [
-            "python data/regional-review/montenegro-evidence-996-erratum/reproduce.py run --output-dir data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v7/run-1",
-            "python data/regional-review/montenegro-evidence-996-erratum/reproduce.py run --output-dir data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v7/run-2",
+            "python data/regional-review/montenegro-evidence-996-erratum/reproduce.py run --output-dir data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v8/run-1",
+            "python data/regional-review/montenegro-evidence-996-erratum/reproduce.py run --output-dir data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v8/run-2",
             "python data/regional-review/montenegro-evidence-996-erratum/reproduce.py finalize"
         ],
         "change_receipts": [],
