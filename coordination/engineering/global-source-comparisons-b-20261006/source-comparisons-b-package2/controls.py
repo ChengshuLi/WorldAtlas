@@ -92,4 +92,13 @@ for name,change in [('missing actual source product receipt',lambda r:r['source_
  try:verify_report(value)
  except AssertionError:checks.append(name)
  else:raise AssertionError(name)
+# Separate future invocation guard: this was not used or claimed in past runs.
+import importlib.util
+spec=importlib.util.spec_from_file_location('fixed_invocation_guard',CASE/'reproduce-pinned.py');guard=importlib.util.module_from_spec(spec);spec.loader.exec_module(guard)
+check('future exact full pinned invocation positive',guard.pinned_commit(guard.PIN)==guard.PIN)
+for name,value in [('future mutable HEAD rejected','HEAD'),('future short commit rejected','c0bb4c62'),('future different full commit rejected','0'*40),('future Git option rejected','--help')]:
+ try:guard.pinned_commit(value)
+ except ValueError:checks.append(name)
+ else:raise AssertionError(name)
+check('future original executed code authentication positive',guard.command_for(guard.PIN,'not-executed-test-output')[3]==guard.PIN)
 print(json.dumps({'status':'PASS','controls':checks,'producer_sha256':namespace['sha'](source.encode()),'limits':'Small fixtures of actual loop; not a complete scientific run or final artifact acceptance.'},sort_keys=True))
