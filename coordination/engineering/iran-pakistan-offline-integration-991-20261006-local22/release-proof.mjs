@@ -5,6 +5,7 @@ import {fileURLToPath} from 'node:url';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
+import {isDeepStrictEqual} from 'node:util';
 import {footprintHash} from '../../../scripts/check-prepared.mjs';
 import {validateGeometryMigrations} from '../../../scripts/prepare-geographic-release.mjs';
 
@@ -42,7 +43,10 @@ const load=name=>{
   const raw=read(summary.baseline_commit,name);inputs.push({path:name,sha256:digest(raw),bytes:raw.length});
   return JSON.parse(name.endsWith('.gz')?gunzipSync(raw,{maxOutputLength:32*1024*1024}):raw);
 };
-const world=load('data/world-index.json'),before=world.parts.flatMap(name=>load('data/'+name).features);
+const world=load('data/world-index.json'),collections=new Map();
+const before=world.parts.flatMap(name=>{
+  const collection=load('data/'+name);collections.set('data/'+name,collection);return collection.features;
+});
 const pointer=load('data/geographic-releases/current-manifest.json');
 const releaseRaw=read(summary.baseline_commit,'data/geographic-releases/'+pointer.path);
 if(digest(releaseRaw)!==pointer.sha256)throw Error('Current release pointer differs');
@@ -58,6 +62,17 @@ const proposals=JSON.parse(proposalRaw),changed=summary.changed_ids;
 if(JSON.stringify(Object.keys(proposals).sort())!==JSON.stringify([...changed].sort()))throw Error('Target roster differs');
 const after=before.map(f=>proposals[f.id]?{...f,geometry:proposals[f.id]}:f),newHash=footprintHash(after);
 const archives=before.filter(f=>changed.includes(f.id)).map(feature=>({id:feature.id,feature}));
+const originalArchive=JSON.parse(fs.readFileSync(path.join(stage,'original-target-features.json')));
+if(!Array.isArray(originalArchive)||originalArchive.length!==archives.length||new Set(originalArchive.map(row=>row.id)).size!==archives.length||
+  archives.some(row=>!isDeepStrictEqual(row,originalArchive.find(saved=>saved.id===row.id))))throw Error('Staged original archive differs from exact baseline features');
+const actualParts=world.parts.map(name=>'data/'+name).filter(name=>collections.get(name).features.some(f=>changed.includes(f.id))).sort();
+if(!isDeepStrictEqual(actualParts,[...summary.changed_parts].sort()))throw Error('Staged changed partition inventory differs');
+for(const name of actualParts){
+  const original=collections.get(name),expected={...original,features:original.features.map(f=>proposals[f.id]?{...f,geometry:proposals[f.id]}:f)};
+  const raw=fs.readFileSync(path.join(stage,'stage',name));
+  const actual=JSON.parse(name.endsWith('.gz')?gunzipSync(raw):raw);
+  if(!isDeepStrictEqual(actual,expected))throw Error('Staged partition rewrites an original property or differs from exact proposed geometry: '+name);
+}
 const receipt={version:1,geometry_stage_validated:true,historical_claims_transferred:false,
   before_footprints_sha256:oldHash,after_footprints_sha256:newHash,
   changed_ids:changed,removed_ids:[],added_ids:[],reused_ids:before.filter(f=>!changed.includes(f.id)).map(f=>f.id).sort(),archives,
@@ -88,6 +103,7 @@ if(proof.changedIds.size!==2||proof.retiredIds.size||proof.addedIds.size||proof.
 write('validation.json',{version:1,evaluation_commit:head,producer,inputs,stage_summary_sha256:digest(fs.readFileSync(path.join(stage,'summary.json'))),
   predecessor_release_id:release.id,before_footprints_sha256:oldHash,after_footprints_sha256:newHash,
   complete_reconstructed_features:proof.baselineFeatures.length,changed_ids:[...proof.changedIds].sort(),
+  complete_staged_partitions_semantically_checked:actualParts,exact_staged_original_archive_checked:true,
   exact_original_features_restored:true,identity_pairs:proof.pairs.map(({old_entity_id,new_entity_id,history_transfer})=>({old_entity_id,new_entity_id,history_transfer})),
   historical_claims_transferred:false,installed:false,published:false,
   limits:['Last-step reference migration validation only; complete predecessor proof chronology retained separately.','No new geographic release, certificate, content import scope or ownership package is certified by this result.']});
