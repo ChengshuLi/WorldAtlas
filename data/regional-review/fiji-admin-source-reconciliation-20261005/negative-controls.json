@@ -1,0 +1,19 @@
+{
+  "issue": 910,
+  "method_id": "fiji-crosswalk-and-lau-outline-comparison",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "passed_controls": 2,
+  "controls": [
+    {
+      "detail": "Deliberately absent source shape ID does not match",
+      "name": "absent-source negative control",
+      "outcome": "passed"
+    },
+    {
+      "detail": "A wrong display name cannot be accepted as a source crosswalk",
+      "name": "wrong-name negative control",
+      "outcome": "passed"
+    }
+  ]
+}

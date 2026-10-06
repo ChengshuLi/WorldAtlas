@@ -1,0 +1,627 @@
+{
+  "version": 1,
+  "issue": 910,
+  "lane": "geography",
+  "worker_id": "01a10947-7d6e-7ba2-98a1-a9f91dedabfc",
+  "subject_ids": [
+    "gb:FJI:ADM2:14151628B20319301670654",
+    "gb:FJI:ADM2:14151628B28251361437248",
+    "gb:FJI:ADM2:14151628B39642918357252",
+    "gb:FJI:ADM2:14151628B42533076410957",
+    "gb:FJI:ADM2:14151628B48978228339800",
+    "gb:FJI:ADM2:14151628B53541640625043",
+    "gb:FJI:ADM2:14151628B53702400461405",
+    "gb:FJI:ADM2:14151628B59272471160482",
+    "gb:FJI:ADM2:14151628B61046117406534",
+    "gb:FJI:ADM2:14151628B68154180840071",
+    "gb:FJI:ADM2:14151628B71764118664060",
+    "gb:FJI:ADM2:14151628B80423492752803",
+    "gb:FJI:ADM2:14151628B8492423103487",
+    "gb:FJI:ADM2:14151628B95966095088914",
+    "gb:FJI:ADM2:14151628B98370545668292"
+  ],
+  "subject_ids_sha256": "e92327ddae0eda1820716c9cd5ec5541c3abd3532449d60b757d23fe673a6c11",
+  "baseline": {
+    "commit": "fc328993bb8c0690b3b4687d193c7f0887bd5b17",
+    "files": [
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-8.json",
+        "bytes": 5097739,
+        "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/validation/macro-publication-v5.json",
+        "bytes": 2826,
+        "sha256": "aae3967fde4f5bf92b3cb0b42c490c6c6a5921c7421dcdc9533f242afbd6a674",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "world_index": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "source_registry": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "geography_part_8": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1",
+      "macro_publication_v5": "aae3967fde4f5bf92b3cb0b42c490c6c6a5921c7421dcdc9533f242afbd6a674"
+    },
+    "pin_files": {
+      "world_index": "data/world-index.json",
+      "source_registry": "data/administrative-sources.json",
+      "geography_part_8": "data/geography/part-8.json",
+      "macro_publication_v5": "data/validation/macro-publication-v5.json"
+    },
+    "subject_files": {
+      "gb:FJI:ADM2:14151628B20319301670654": "data/geography/part-8.json",
+      "gb:FJI:ADM2:14151628B28251361437248": "data/geography/part-8.json",
+      "gb:FJI:ADM2:14151628B39642918357252": "data/geography/part-8.json",
+      "gb:FJI:ADM2:14151628B42533076410957": "data/geography/part-8.json",
+      "gb:FJI:ADM2:14151628B48978228339800": "data/geography/part-8.json",
+      "gb:FJI:ADM2:14151628B53541640625043": "data/geography/part-8.json",
+      "gb:FJI:ADM2:14151628B53702400461405": "data/geography/part-8.json",
+      "gb:FJI:ADM2:14151628B59272471160482": "data/geography/part-8.json",
+      "gb:FJI:ADM2:14151628B61046117406534": "data/geography/part-8.json",
+      "gb:FJI:ADM2:14151628B68154180840071": "data/geography/part-8.json",
+      "gb:FJI:ADM2:14151628B71764118664060": "data/geography/part-8.json",
+      "gb:FJI:ADM2:14151628B80423492752803": "data/geography/part-8.json",
+      "gb:FJI:ADM2:14151628B8492423103487": "data/geography/part-8.json",
+      "gb:FJI:ADM2:14151628B95966095088914": "data/geography/part-8.json",
+      "gb:FJI:ADM2:14151628B98370545668292": "data/geography/part-8.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "geoBoundaries-FJI-ADM2-pinned",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/FJI/ADM2/geoBoundaries-FJI-ADM2.geojson",
+      "role": "Full Fiji ADM2 feature layer; native identity/name crosswalk and Lau comparison source",
+      "vintage": "Underlying dataset is identified by linked Pacific Data source as 2007 Fiji PHC administrative boundaries; geoBoundaries API says boundaryYearRepresented 2020 and build 2023-12-12. Meaning unresolved.",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "redistributable",
+        "terms": "geoBoundaries source citation/use file and metadata state CC BY 4.0; attribution required."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "limit": "Full source has 15 features and exact source IDs/names; this does not establish current legal boundaries or small-island completeness.",
+      "files": [
+        {
+          "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/sources/geoBoundaries-FJI-ADM2.geojson",
+          "bytes": 1357011,
+          "sha256": "a9cd94789cb5eb66cfbcbaf32a21bcbceba16b9a76adacba9ac675b950ca1ccd",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "geoBoundaries-release-metadata",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/FJI/ADM2/geoBoundaries-FJI-ADM2-metaData.json",
+      "role": "Pinned release metadata, including source link, license, update/build dates and feature count",
+      "vintage": "Pinned release build 2023-12-12; metadata source update 2023-01-19",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "redistributable",
+        "terms": "Associated release identifies CC BY 4.0; metadata itself is retained for research provenance."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "limit": "Pinned metadata has boundaryYearRepresented and sha256 null; cannot explain conflicting current API and Atlas registry fields.",
+      "files": [
+        {
+          "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/sources/geoBoundaries-FJI-ADM2-metaData.json",
+          "bytes": 970,
+          "sha256": "2a518d79ff779e3dddd3cfabd0357885c078e7226fdeceb0ddc3e10d47d31925",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "geoBoundaries-citation-use",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/CITATION-AND-USE.txt",
+      "role": "License and attribution instructions for retained geoBoundaries data",
+      "vintage": "Repository state pinned at commit 9469f09592ced973a3448cf66b6100b741b64c0d",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "redistributable",
+        "terms": "CC BY 4.0 applies to the underlying data, with attribution as described by the source."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "limit": "License statement does not independently verify the underlying boundary authority or metadata vintage.",
+      "files": [
+        {
+          "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/sources/CITATION-AND-USE-geoBoundaries.txt",
+          "bytes": 4316,
+          "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "geoBoundaries-current-api-metadata",
+      "url": "https://www.geoboundaries.org/api/current/gbOpen/FJI/ADM2/",
+      "role": "Current API catalog record used to compare current registry metadata with the pinned release",
+      "vintage": "API response retrieved on 2026-10-06; source update 2023-01-19/build 2023-12-12",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "redistributable",
+        "terms": "Catalog record describes linked source as CC BY 4.0; API record retained as metadata."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "limit": "Catalog returns sha256 null, while Atlas registry has a different digest; digest recipe remains unknown.",
+      "files": [
+        {
+          "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/sources/geoBoundaries-api-current-FJI-ADM2.json",
+          "bytes": 1867,
+          "sha256": "35e5eff798967d740490f28420d48a11ce7f764acc8470c4354b11a4e6272564",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "PacificData-2007-Fiji-PHC-record",
+      "url": "https://pacificdata.org/data/geographic_data/2007_fji_phc_admin_boundaries/resource/5880cadb-2287-4eac-9f3d-8b321730e6cd",
+      "role": "Underlying dataset catalog record cited from geoBoundaries metadata",
+      "vintage": "2007 census-derived boundaries",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms for linked source record not established in this packet."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2007,
+        "to": 2008
+      },
+      "restoration": "Open the canonical URL; the linked record is also identified in the retained geoBoundaries metadata.",
+      "limit": "No independent record payload/license verification; 2007 boundary vintage is not a claim of current boundaries."
+    },
+    {
+      "id": "Fiji-Bureau-Statistics-census",
+      "url": "https://www.statsfiji.gov.fj/census-surveys/census-of-population-and-housing/",
+      "role": "Official census programme page and 2017 census report for statistical roster context",
+      "vintage": "2017 census; page notes 2017 and 2007 census records",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms for page/PDF content not established; originals omitted."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Open the census page; 2017 Release 1 PDF: https://www.statsfiji.gov.fj/download/121/phc-2017/727/2017-population-and-housing-census-release-1.pdf . SHA-256 page HTML 584107940b7d34b9412e01cc0887d4392af11fc32ed77c665083359173560396 (42878 bytes); PDF dfbd8db60f8ef6855d9f532dc6cde42ded37e8a4f7beaa9c02e588c3fd56ee88 (483235 bytes), both retrieved 2026-10-06; restoration only, omitted from packet.",
+      "limit": "Statistical roster/grouping does not establish statutory territorial class or authoritative geometry."
+    },
+    {
+      "id": "Fiji-Parliament-Rotuma-Hansard-2024-12-02",
+      "url": "https://parliament.gov.fj/wp-content/uploads/2024/12/Daily-Hansard-Monday-2nd-December-2024.pdf",
+      "role": "Official parliamentary record of Rotuma dependency status and local-government autonomy under Rotuma Act",
+      "vintage": "2024-12-02",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms not established; original omitted."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Open official PDF URL. Retrieved original SHA-256 b22a40aa3e11df2dca4af151e38cfdc578b755e43906a4b5e704ea4cd7d08836 (745941 bytes), retrieved 2026-10-06; restoration only, omitted.",
+      "limit": "Supports national parliamentary description; not a boundary geometry source."
+    },
+    {
+      "id": "UN-SALB-Fiji",
+      "url": "https://salb.un.org/en/data/fji",
+      "role": "Catalog record identifying validated Fiji national geospatial dataset and national authority",
+      "vintage": "Catalog record temporal validity 2000-01-01 through last update 2024-03-18",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms for underlying geometry not established."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Open catalog URL. Direct page retrieval returned HTTP 403 in this environment; no data bytes acquired and therefore no byte digest is asserted.",
+      "limit": "Page/catalog discovery only; polygon data were unavailable and no boundary comparison was possible."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/README.md",
+      "bytes": 7142,
+      "sha256": "46cb62d7edb8362699429ff2a6be44f09caee9c8bd134639fcc318ddde2bdccb",
+      "hash_kind": "file-bytes",
+      "role": "research-findings"
+    },
+    {
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/build_packet.py",
+      "bytes": 21626,
+      "sha256": "9506e38e84f1050b5182495ca55ce2bbc6fbc07a23c0c94358f914eeb518f0ca",
+      "hash_kind": "file-bytes",
+      "role": "generated-result"
+    },
+    {
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/claim-receipt.json",
+      "bytes": 929,
+      "sha256": "deca49b00fb95dcc1199398164c31f75f3ad494531d4a3066dc2ca90884e1b5f",
+      "hash_kind": "file-bytes",
+      "role": "generated-result"
+    },
+    {
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/issue-910-contract.json",
+      "bytes": 4555,
+      "sha256": "492e04272e4290b19d4a2e0d0a77be3a82dd098c286367150f947c8ef59759c3",
+      "hash_kind": "file-bytes",
+      "role": "generated-result"
+    },
+    {
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/negative-controls.json",
+      "bytes": 498,
+      "sha256": "c3289c30bf23b09f630e4de25b3d7c8c255143b3bbb7ad412a565234100b416f",
+      "hash_kind": "file-bytes",
+      "role": "generated-result"
+    },
+    {
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/positive-control.json",
+      "bytes": 674,
+      "sha256": "997824637e40d252d4b26eb03ccc4d98e5b9ef37134ae738d5d3cffd146e443d",
+      "hash_kind": "file-bytes",
+      "role": "generated-result"
+    },
+    {
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/reproduce.py",
+      "bytes": 12474,
+      "sha256": "e1e819ac5d346b65d39d55d27f02b50a969334ae8b634e7672f278e07e7afc14",
+      "hash_kind": "file-bytes",
+      "role": "reproduction-script"
+    },
+    {
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/run-one/reproduction.json",
+      "bytes": 17695,
+      "sha256": "fa227c96ff77ef1da66b505b648ab32fdc2472c091277253bd5320befae8ce7c",
+      "hash_kind": "file-bytes",
+      "role": "generated-result"
+    },
+    {
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/run-two/reproduction.json",
+      "bytes": 17695,
+      "sha256": "fa227c96ff77ef1da66b505b648ab32fdc2472c091277253bd5320befae8ce7c",
+      "hash_kind": "file-bytes",
+      "role": "generated-result"
+    },
+    {
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/source-provenance.json",
+      "bytes": 9623,
+      "sha256": "79e1c3d97e896f5ff42aa49176f14e9baca8854306840a961e72b71e6ebf1cb2",
+      "hash_kind": "file-bytes",
+      "role": "research-findings"
+    },
+    {
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/two-run-reproducibility.json",
+      "bytes": 918,
+      "sha256": "f0f9251b1dc4e22689f0053cd7aecc279f39a3b570e3dbf7951ae34d8a38a0d3",
+      "hash_kind": "file-bytes",
+      "role": "generated-result"
+    }
+  ],
+  "methods": [
+    {
+      "id": "fiji-crosswalk-and-lau-outline-comparison",
+      "kind": "geography",
+      "description": "Verify the pinned issue contract and immutable file pins; map all 15 stable IDs to full source shapeIDs/names; compare Lau source and baseline geometry without snapping, buffering or boundary adjudication.",
+      "software": "Python 3.12.14; Shapely 2.1.2; PyProj 3.7.2; WorldAtlas shared evidence geometry helper v1",
+      "units": "counts, fractions, square metres and square kilometres",
+      "helper_version": "worldatlas-evidence-geometry-v1",
+      "axis_order": "longitude-latitude",
+      "crs": "EPSG:4326",
+      "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+      "distance_method": "WGS84 inverse geodesic"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "exact_subjects",
+      "value": 15,
+      "unit": "locations",
+      "vintage": "current",
+      "evaluation_commit": "fc328993bb8c0690b3b4687d193c7f0887bd5b17",
+      "input_sha256": "fa227c96ff77ef1da66b505b648ab32fdc2472c091277253bd5320befae8ce7c"
+    },
+    {
+      "id": "source_features",
+      "value": 15,
+      "unit": "features",
+      "vintage": "current",
+      "evaluation_commit": "fc328993bb8c0690b3b4687d193c7f0887bd5b17",
+      "input_sha256": "fa227c96ff77ef1da66b505b648ab32fdc2472c091277253bd5320befae8ce7c"
+    },
+    {
+      "id": "exact_identity_matches",
+      "value": 15,
+      "unit": "crosswalks",
+      "vintage": "current",
+      "evaluation_commit": "fc328993bb8c0690b3b4687d193c7f0887bd5b17",
+      "input_sha256": "fa227c96ff77ef1da66b505b648ab32fdc2472c091277253bd5320befae8ce7c"
+    },
+    {
+      "id": "passed_controls",
+      "value": 5,
+      "unit": "controls",
+      "vintage": "current",
+      "evaluation_commit": "fc328993bb8c0690b3b4687d193c7f0887bd5b17",
+      "input_sha256": "fa227c96ff77ef1da66b505b648ab32fdc2472c091277253bd5320befae8ce7c"
+    },
+    {
+      "id": "lau_jaccard",
+      "value": 0.7687948822374159,
+      "unit": "fraction",
+      "vintage": "current",
+      "evaluation_commit": "fc328993bb8c0690b3b4687d193c7f0887bd5b17",
+      "input_sha256": "fa227c96ff77ef1da66b505b648ab32fdc2472c091277253bd5320befae8ce7c",
+      "numerator": 400229314.42260104,
+      "denominator": 520593104.44135344
+    },
+    {
+      "id": "lau_symmetric_difference",
+      "value": 120.3637900187524,
+      "unit": "km2",
+      "vintage": "current",
+      "evaluation_commit": "fc328993bb8c0690b3b4687d193c7f0887bd5b17",
+      "input_sha256": "fa227c96ff77ef1da66b505b648ab32fdc2472c091277253bd5320befae8ce7c"
+    },
+    {
+      "id": "lau_intersection",
+      "value": 400229314.42260104,
+      "unit": "m2",
+      "vintage": "current",
+      "evaluation_commit": "fc328993bb8c0690b3b4687d193c7f0887bd5b17",
+      "input_sha256": "fa227c96ff77ef1da66b505b648ab32fdc2472c091277253bd5320befae8ce7c"
+    },
+    {
+      "id": "lau_union",
+      "value": 520593104.44135344,
+      "unit": "m2",
+      "vintage": "current",
+      "evaluation_commit": "fc328993bb8c0690b3b4687d193c7f0887bd5b17",
+      "input_sha256": "fa227c96ff77ef1da66b505b648ab32fdc2472c091277253bd5320befae8ce7c"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "exact_subjects",
+      "value": 15,
+      "unit": "locations"
+    },
+    {
+      "metric_id": "source_features",
+      "value": 15,
+      "unit": "features"
+    },
+    {
+      "metric_id": "exact_identity_matches",
+      "value": 15,
+      "unit": "crosswalks"
+    },
+    {
+      "metric_id": "passed_controls",
+      "value": 5,
+      "unit": "controls"
+    },
+    {
+      "metric_id": "lau_jaccard",
+      "value": 0.7687948822374159,
+      "unit": "fraction"
+    },
+    {
+      "metric_id": "lau_symmetric_difference",
+      "value": 120.3637900187524,
+      "unit": "km2"
+    },
+    {
+      "metric_id": "lau_intersection",
+      "value": 400229314.42260104,
+      "unit": "m2"
+    },
+    {
+      "metric_id": "lau_union",
+      "value": 520593104.44135344,
+      "unit": "m2"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "The exact 15 issue subjects each match a unique native shapeID and exact source name in the complete pinned geoBoundaries source layer; this supports an identity crosswalk only.",
+      "status": "supported",
+      "source_ids": [
+        "geoBoundaries-FJI-ADM2-pinned"
+      ]
+    },
+    {
+      "text": "The Lau source and Atlas outlines have a reproducible material divergence, but source vintage and authoritative legal geometry remain unresolved.",
+      "status": "unresolved",
+      "source_ids": [
+        "geoBoundaries-FJI-ADM2-pinned",
+        "geoBoundaries-current-api-metadata",
+        "PacificData-2007-Fiji-PHC-record",
+        "UN-SALB-Fiji"
+      ]
+    },
+    {
+      "text": "Official parliamentary evidence describes Rotuma as a dependency with local-government autonomy; the appropriate Atlas parent/category requires an engineering hierarchy review.",
+      "status": "supported",
+      "source_ids": [
+        "Fiji-Parliament-Rotuma-Hansard-2024-12-02",
+        "Fiji-Bureau-Statistics-census"
+      ]
+    },
+    {
+      "text": "Current legal edge authority, small-island completeness, the Atlas registry hash recipe and SALB polygon geometry were not established.",
+      "status": "unresolved",
+      "source_ids": [
+        "geoBoundaries-FJI-ADM2-pinned",
+        "geoBoundaries-current-api-metadata",
+        "UN-SALB-Fiji"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 data/regional-review/fiji-admin-source-reconciliation-20261005/reproduce.py --output data/regional-review/fiji-admin-source-reconciliation-20261005/run-one/reproduction.json",
+    "python3 data/regional-review/fiji-admin-source-reconciliation-20261005/reproduce.py --output data/regional-review/fiji-admin-source-reconciliation-20261005/run-two/reproduction.json",
+    "node scripts/evidence-quality.mjs data/regional-review/fiji-admin-source-reconciliation-20261005/evidence-quality.json"
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "exact_subjects",
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/run-one/reproduction.json",
+      "json_pointer": "/scope/issue_subject_count"
+    },
+    {
+      "metric_id": "source_features",
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/run-one/reproduction.json",
+      "json_pointer": "/scope/source_feature_count"
+    },
+    {
+      "metric_id": "exact_identity_matches",
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/run-one/reproduction.json",
+      "json_pointer": "/scope/crosswalk_count"
+    },
+    {
+      "metric_id": "passed_controls",
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/run-one/reproduction.json",
+      "json_pointer": "/control_count"
+    },
+    {
+      "metric_id": "lau_jaccard",
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/run-one/reproduction.json",
+      "json_pointer": "/lau_comparison/jaccard"
+    },
+    {
+      "metric_id": "lau_symmetric_difference",
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/run-one/reproduction.json",
+      "json_pointer": "/lau_comparison/symmetric_difference_km2"
+    },
+    {
+      "metric_id": "lau_intersection",
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/run-one/reproduction.json",
+      "json_pointer": "/lau_comparison/intersection_m2"
+    },
+    {
+      "metric_id": "lau_union",
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/run-one/reproduction.json",
+      "json_pointer": "/lau_comparison/union_m2"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "fiji-crosswalk-and-lau-outline-comparison",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/fiji-admin-source-reconciliation-20261005/positive-control.json"
+    },
+    {
+      "method_id": "fiji-crosswalk-and-lau-outline-comparison",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/fiji-admin-source-reconciliation-20261005/negative-controls.json"
+    },
+    {
+      "method_id": "fiji-crosswalk-and-lau-outline-comparison",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/fiji-admin-source-reconciliation-20261005/two-run-reproducibility.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/README.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/build_packet.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/claim-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/issue-910-contract.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/negative-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/reproduce.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/run-one/reproduction.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/run-two/reproduction.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/source-provenance.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/sources/CITATION-AND-USE-geoBoundaries.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/sources/geoBoundaries-FJI-ADM2-metaData.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/sources/geoBoundaries-FJI-ADM2.geojson",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/sources/geoBoundaries-api-current-FJI-ADM2.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/two-run-reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}

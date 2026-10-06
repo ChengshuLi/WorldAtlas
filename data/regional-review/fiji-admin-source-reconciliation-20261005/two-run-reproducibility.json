@@ -1,0 +1,21 @@
+{
+  "issue": 910,
+  "method_id": "fiji-crosswalk-and-lau-outline-comparison",
+  "kind": "reproducibility",
+  "outcome": "passed",
+  "baseline_commit": "fc328993bb8c0690b3b4687d193c7f0887bd5b17",
+  "run_one_sha256": "fa227c96ff77ef1da66b505b648ab32fdc2472c091277253bd5320befae8ce7c",
+  "run_two_sha256": "fa227c96ff77ef1da66b505b648ab32fdc2472c091277253bd5320befae8ce7c",
+  "runs": [
+    {
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/run-one/reproduction.json",
+      "sha256": "fa227c96ff77ef1da66b505b648ab32fdc2472c091277253bd5320befae8ce7c"
+    },
+    {
+      "path": "data/regional-review/fiji-admin-source-reconciliation-20261005/run-two/reproduction.json",
+      "sha256": "fa227c96ff77ef1da66b505b648ab32fdc2472c091277253bd5320befae8ce7c"
+    }
+  ],
+  "byte_identical": true,
+  "reproduction_script_sha256": "e1e819ac5d346b65d39d55d27f02b50a969334ae8b634e7672f278e07e7afc14"
+}
