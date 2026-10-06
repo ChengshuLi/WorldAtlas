@@ -1,0 +1,168 @@
+{
+  "method": "source-line coincidence only; no buffer, snap, repair, or water classification",
+  "target_component_id": "gap:ad2052defbeba8e89287bcc4344e641225c6579f9afd584497b381fe8fd8eedc",
+  "component_input": {
+    "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v2/components-004.json.gz",
+    "sha256": "c8726499e2d34c89b45fcf5d4c725b9583d2cb14319736580c032d460c04cb54",
+    "source_crs": "OGC:CRS84 longitude,latitude"
+  },
+  "target_component_geometry": {
+    "type": "Polygon",
+    "is_valid": true,
+    "coordinate_count_including_closed_ring": 66,
+    "bounds_crs84": [
+      -7.5432,
+      39.6412,
+      -6.8665,
+      40.0666
+    ]
+  },
+  "analysis_crs": "EPSG:25829 ETRS89 / UTM zone 29N",
+  "source": {
+    "dataset": "APA/SNIAmb AM.WaterBodyForWFD",
+    "native_crs": "EPSG:4326, GML coordinates parsed latitude then longitude",
+    "page0_sha256": "41c231afc90b3a0b66025440215d4d4451ff64f4b1ceb4cab8ba89f6a2c4c52c",
+    "page1_sha256": "c1379a198ee0d12d4533171f0bf3c473cf2c6fbbe88cbb9083bb8bfbaca36576",
+    "page0_timestamp": "2026-10-06T14:49:54Z",
+    "page1_timestamp": "2026-10-06T14:49:56Z",
+    "page0_numberReturned": 59,
+    "page0_numberMatched": "unknown",
+    "page1_numberReturned": 0,
+    "page1_numberMatched": "unknown",
+    "unique_native_members": 59,
+    "native_ids": [
+      "AM.WaterBodyForWFD.100003564",
+      "AM.WaterBodyForWFD.100003936",
+      "AM.WaterBodyForWFD.100003946",
+      "AM.WaterBodyForWFD.100003951",
+      "AM.WaterBodyForWFD.100003956",
+      "AM.WaterBodyForWFD.100003961",
+      "AM.WaterBodyForWFD.100003981",
+      "AM.WaterBodyForWFD.100003991",
+      "AM.WaterBodyForWFD.100003996",
+      "AM.WaterBodyForWFD.100004021",
+      "AM.WaterBodyForWFD.100004031",
+      "AM.WaterBodyForWFD.100004041",
+      "AM.WaterBodyForWFD.100004046",
+      "AM.WaterBodyForWFD.100004051",
+      "AM.WaterBodyForWFD.100004066",
+      "AM.WaterBodyForWFD.100004076",
+      "AM.WaterBodyForWFD.100004081",
+      "AM.WaterBodyForWFD.100004086",
+      "AM.WaterBodyForWFD.100004091",
+      "AM.WaterBodyForWFD.100004101",
+      "AM.WaterBodyForWFD.100004111",
+      "AM.WaterBodyForWFD.100004116",
+      "AM.WaterBodyForWFD.100004121",
+      "AM.WaterBodyForWFD.100004126",
+      "AM.WaterBodyForWFD.100004136",
+      "AM.WaterBodyForWFD.100004141",
+      "AM.WaterBodyForWFD.100004154",
+      "AM.WaterBodyForWFD.100004169",
+      "AM.WaterBodyForWFD.100004177",
+      "AM.WaterBodyForWFD.100004192",
+      "AM.WaterBodyForWFD.100004197",
+      "AM.WaterBodyForWFD.100004207",
+      "AM.WaterBodyForWFD.100004217",
+      "AM.WaterBodyForWFD.100004222",
+      "AM.WaterBodyForWFD.100004241",
+      "AM.WaterBodyForWFD.100004253",
+      "AM.WaterBodyForWFD.100004263",
+      "AM.WaterBodyForWFD.100004268",
+      "AM.WaterBodyForWFD.100004273",
+      "AM.WaterBodyForWFD.100004288",
+      "AM.WaterBodyForWFD.100004293",
+      "AM.WaterBodyForWFD.100004298",
+      "AM.WaterBodyForWFD.100004303",
+      "AM.WaterBodyForWFD.100004308",
+      "AM.WaterBodyForWFD.100004313",
+      "AM.WaterBodyForWFD.100004318",
+      "AM.WaterBodyForWFD.100004323",
+      "AM.WaterBodyForWFD.100004338",
+      "AM.WaterBodyForWFD.100004343",
+      "AM.WaterBodyForWFD.100004358",
+      "AM.WaterBodyForWFD.100004368",
+      "AM.WaterBodyForWFD.100004378",
+      "AM.WaterBodyForWFD.100004393",
+      "AM.WaterBodyForWFD.100004398",
+      "AM.WaterBodyForWFD.100004413",
+      "AM.WaterBodyForWFD.100004418",
+      "AM.WaterBodyForWFD.100004433",
+      "AM.WaterBodyForWFD.100004438",
+      "AM.WaterBodyForWFD.100004458"
+    ]
+  },
+  "comparison": {
+    "members_with_nonempty_intersection": 10,
+    "sum_of_per_member_line_intersection_lengths_m": 63474.71031159193,
+    "unique_union_line_length_inside_component_m": 63474.71031159195,
+    "intersections": [
+      {
+        "native_id": "AM.WaterBodyForWFD.100003946",
+        "geometry_type": "LineString",
+        "coincident_length_m": 383.6279051312829,
+        "nonempty_intersection": true
+      },
+      {
+        "native_id": "AM.WaterBodyForWFD.100004086",
+        "geometry_type": "LineString",
+        "coincident_length_m": 3031.9743521967785,
+        "nonempty_intersection": true
+      },
+      {
+        "native_id": "AM.WaterBodyForWFD.100004141",
+        "geometry_type": "MultiLineString",
+        "coincident_length_m": 7606.00120628858,
+        "nonempty_intersection": true
+      },
+      {
+        "native_id": "AM.WaterBodyForWFD.100004222",
+        "geometry_type": "LineString",
+        "coincident_length_m": 2270.5089380181603,
+        "nonempty_intersection": true
+      },
+      {
+        "native_id": "AM.WaterBodyForWFD.100004263",
+        "geometry_type": "LineString",
+        "coincident_length_m": 4714.599170595626,
+        "nonempty_intersection": true
+      },
+      {
+        "native_id": "AM.WaterBodyForWFD.100004298",
+        "geometry_type": "MultiLineString",
+        "coincident_length_m": 18336.961230101664,
+        "nonempty_intersection": true
+      },
+      {
+        "native_id": "AM.WaterBodyForWFD.100004303",
+        "geometry_type": "LineString",
+        "coincident_length_m": 4048.815176072413,
+        "nonempty_intersection": true
+      },
+      {
+        "native_id": "AM.WaterBodyForWFD.100004433",
+        "geometry_type": "MultiLineString",
+        "coincident_length_m": 7396.790345983945,
+        "nonempty_intersection": true
+      },
+      {
+        "native_id": "AM.WaterBodyForWFD.100004438",
+        "geometry_type": "MultiLineString",
+        "coincident_length_m": 6810.865133216244,
+        "nonempty_intersection": true
+      },
+      {
+        "native_id": "AM.WaterBodyForWFD.100004458",
+        "geometry_type": "LineString",
+        "coincident_length_m": 8874.566853987242,
+        "nonempty_intersection": true
+      }
+    ]
+  },
+  "limitations": [
+    "Provider reports numberMatched=unknown on vector pages; separate hits query reported 59, page 0 returned 59 and subsequent page returned 0. Page timestamps differ, so this is not a stable transactional snapshot.",
+    "WFD river features are water-planning objects, not observations of surface wetness or measured channel polygons.",
+    "Line coincidence cannot establish channel width, wetted extent, whole-cell water, land/water proportions, administrative ownership, or legal boundary.",
+    "This result covers the full retained gap component, not only the administrative comparison residual."
+  ]
+}

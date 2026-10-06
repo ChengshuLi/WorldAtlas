@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "method_id": "apa-wfd-line-geometry-intersection",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "control_coordinates_analysis_crs": "EPSG:25829",
+  "control_exchange_axis": "EPSG:4326 GML latitude,longitude; parsed to x=longitude,y=latitude",
+  "actual": {
+    "projected_roundtrip_max_error_m": 9.313225746154785e-10,
+    "intersection_type": "LineString",
+    "intersection_length_m": 0.0,
+    "is_empty": true
+  },
+  "expected": {
+    "intersection_empty": true,
+    "intersection_length_m": 0.0
+  },
+  "interpretation": "Tests axis order, CRS roundtrip and line-polygon intersection behavior only; does not validate source positional accuracy or physical wetness."
+}

@@ -1,0 +1,416 @@
+{
+  "retrieved": "2026-10-06",
+  "raw_response_directory": "sources/official-api-responses/",
+  "important_requests": [
+    {
+      "source": "APA WFD AM.WaterBodyForWFD WFS 2.0 full-component envelope page 0",
+      "url": "https://inspire.apambiente.pt/getogc/services/INSPIRE/AM_WaterBodyForWFD_WFDRiver/MapServer/WFSServer?service=WFS&version=2.0.0&request=GetFeature&typeNames=INSPIRE_AM_WaterBodyForWFD_WFDRiver:AM.WaterBodyForWFD&bbox=39.6412,-7.5432,40.0666,-6.8665,urn:ogc:def:crs:EPSG::4326&count=100&startIndex=0",
+      "body": "apa-wfd-explicit-full-aoi-page-0.xml",
+      "headers": "apa-wfd-explicit-full-aoi-page-0.headers.txt",
+      "meaning": "Full component bounding envelope; EPSG:4326 native axis order latitude,longitude; 59 returned."
+    },
+    {
+      "source": "APA WFD AM.WaterBodyForWFD WFS 2.0 page 1 exhaustion",
+      "url": "https://inspire.apambiente.pt/getogc/services/INSPIRE/AM_WaterBodyForWFD_WFDRiver/MapServer/WFSServer?service=WFS&version=2.0.0&request=GetFeature&typeNames=INSPIRE_AM_WaterBodyForWFD_WFDRiver:AM.WaterBodyForWFD&bbox=39.6412,-7.5432,40.0666,-6.8665,urn:ogc:def:crs:EPSG::4326&count=100&startIndex=59",
+      "body": "apa-wfd-explicit-full-aoi-page-1.xml",
+      "headers": "apa-wfd-explicit-full-aoi-page-1.headers.txt",
+      "meaning": "Exhaustion check; 0 returned."
+    },
+    {
+      "source": "MITECO vector WFS candidate GetCapabilities",
+      "url": "https://gis.miteco.gob.es/geoserver/agua/ows?service=WFS&request=GetCapabilities",
+      "response_note": "Connection could not be established through tested client (TLS reset/certificate validation); no HTTP response body."
+    },
+    {
+      "source": "MITECO PHC RedHidro WMS GetCapabilities",
+      "url": "https://wms.mapama.gob.es/sig/Agua/PHC/RedHidro2027?service=WMS&request=GetCapabilities",
+      "body": "miteco-redhidro-wms-cap-retry.xml",
+      "headers": "miteco_wms_cap_retry.headers.txt",
+      "meaning": "HTTP 200, but body is ServiceExceptionReport/InvalidFormat; not usable capabilities."
+    },
+    {
+      "source": "MITECO official OGC Features collections list",
+      "url": "https://wmts.mapama.gob.es/sig-api/ogc/features/v1/collections?f=json",
+      "body": "miteco-api-collections.json",
+      "headers": "miteco_features_api_collections.headers.txt",
+      "meaning": "121863-byte full response, 30 collections; no water/hydrography collection."
+    }
+  ],
+  "pagination_and_completeness": "APA WFD feature page0 returns 59; page1 at startIndex=59 returns 0; separate hits response reports 59. Page numberMatched remains unknown, and pages can be snapshots at different timestamps, so bounded completeness is conditional, not transactional proof.",
+  "header_handling": "HTTP headers retained where available. Set-Cookie transient ASP.NET session values were removed from two MITECO header receipts; response bodies are unchanged.",
+  "inventory": [
+    {
+      "path": "apa-hydro-all-hits.xml",
+      "bytes": 965,
+      "sha256": "53bbcf830e184a03b36f28d395ba04dc1260a8c30474fde58c767dac43da9ae3"
+    },
+    {
+      "path": "apa-hydro-cap.xml",
+      "bytes": 14435,
+      "sha256": "91243c7140c921ee6a20883f1a525d866b12560e7c648f9bc4222700ee8acb30"
+    },
+    {
+      "path": "apa-hydro-controlbox-firstfeature.xml",
+      "bytes": 965,
+      "sha256": "349dcb04c49664e2c365e73d1138d7a406bb46cb45ffcb7f185c44ba0ddcf662"
+    },
+    {
+      "path": "apa-hydro-first-feature.headers.txt",
+      "bytes": 458,
+      "sha256": "77602e4b3570cd15c841c320d50b5b1eb6935b77f6449fc2d3c6eecfed182d60",
+      "http_status": 200,
+      "http_date": "Tue, 06 Oct 2026 14:46:56 GMT",
+      "content_type": "application/xml",
+      "set_cookie_header_redacted": false
+    },
+    {
+      "path": "apa-hydro-first-feature.xml",
+      "bytes": 5925,
+      "sha256": "124f91fad68c2f40b175cb85f94b724c0def56a63a6f040c64c99748fd90236e"
+    },
+    {
+      "path": "apa-hydro-hits-3763-broad.xml",
+      "bytes": 965,
+      "sha256": "81ca4a2049499c08e0f155163b1e8ce4b575bad6d67ba5e4015d11ca62d4f6fe"
+    },
+    {
+      "path": "apa-hydro-hits-3763-default.xml",
+      "bytes": 960,
+      "sha256": "3e4a383dae1ce5a109770439db0e7a33b88c1220533670aad1dd649e31e80caf"
+    },
+    {
+      "path": "apa-hydro-hits-3763-region.headers.txt",
+      "bytes": 457,
+      "sha256": "ed8dc322df05e7795b3d9f168ddf1957051b361d766f6efee0d476debf36bafd",
+      "http_status": 200,
+      "http_date": "Tue, 06 Oct 2026 14:46:30 GMT",
+      "content_type": "application/xml",
+      "set_cookie_header_redacted": false
+    },
+    {
+      "path": "apa-hydro-hits-3763-region.xml",
+      "bytes": 965,
+      "sha256": "c6e2cf0ac73efbd2ad8726b0f9fb003395ab9f40353446a550524b1f3eae255e"
+    },
+    {
+      "path": "apa-hydro-hits-epsg3763.xml",
+      "bytes": 960,
+      "sha256": "4548350855fcdc0122c092e4a4b2ccc0e878643a277e31e5369910a14cf7e750"
+    },
+    {
+      "path": "apa-hydro-hits.xml",
+      "bytes": 960,
+      "sha256": "221e33a70755e69ce21081f16edd97e51be568805850f50f08de06da9790a684"
+    },
+    {
+      "path": "apa-hydro-schema.xml",
+      "bytes": 8891,
+      "sha256": "b696954d48b42bb67deac94427018bb8513162cb3ec6fa2a286e1e5e5c562473"
+    },
+    {
+      "path": "apa-hydro-targetbox-crs.xml",
+      "bytes": 960,
+      "sha256": "5c1b92409a62ebea0fffafed9d943f366ef4c728999dd629371847490836ca4a"
+    },
+    {
+      "path": "apa-hydro-targetbox-simple.xml",
+      "bytes": 960,
+      "sha256": "e15cec9f6350f7fd889bd130778554f4ac9153f2033de6149df92137a598cbf9"
+    },
+    {
+      "path": "apa-wfd-all-hits.xml",
+      "bytes": 967,
+      "sha256": "fd20eabdd965921d0a404a111a1ab645e3f3baf98993f10637dee07f34a111ed"
+    },
+    {
+      "path": "apa-wfd-cap.xml",
+      "bytes": 14517,
+      "sha256": "6967b11ec832960d75067ca98a90edfb736077cf632c105e3e9f0ad41735c803"
+    },
+    {
+      "path": "apa-wfd-explicit-full-aoi-page-0.headers.txt",
+      "bytes": 464,
+      "sha256": "f1a6885deecf36cd6f9a0494d1de7fd0eb0b83f82f2f239e589ab9af981e5a03",
+      "http_status": 200,
+      "http_date": "Tue, 06 Oct 2026 14:49:54 GMT",
+      "content_type": "application/xml",
+      "set_cookie_header_redacted": false
+    },
+    {
+      "path": "apa-wfd-explicit-full-aoi-page-0.xml",
+      "bytes": 674404,
+      "sha256": "41c231afc90b3a0b66025440215d4d4451ff64f4b1ceb4cab8ba89f6a2c4c52c"
+    },
+    {
+      "path": "apa-wfd-explicit-full-aoi-page-1.headers.txt",
+      "bytes": 457,
+      "sha256": "6f47d4b2982321b5962b66b3cf76c30438af9bc0e446a9cf4c9389046684d2fd",
+      "http_status": 200,
+      "http_date": "Tue, 06 Oct 2026 14:49:56 GMT",
+      "content_type": "application/xml",
+      "set_cookie_header_redacted": false
+    },
+    {
+      "path": "apa-wfd-explicit-full-aoi-page-1.xml",
+      "bytes": 970,
+      "sha256": "c1379a198ee0d12d4533171f0bf3c473cf2c6fbbe88cbb9083bb8bfbaca36576"
+    },
+    {
+      "path": "apa-wfd-full-component-bbox-page-0.headers.txt",
+      "bytes": 464,
+      "sha256": "3015a4e006b451ed559121410cca27fa2ede85bc23edee9addcf131a1e5a46f6",
+      "http_status": 200,
+      "http_date": "Tue, 06 Oct 2026 14:47:50 GMT",
+      "content_type": "application/xml",
+      "set_cookie_header_redacted": false
+    },
+    {
+      "path": "apa-wfd-full-component-bbox-page-0.xml",
+      "bytes": 674404,
+      "sha256": "5724791f5b544467d2b6bdddf246e3105b0b55ecd46e4f49b4e1d3cd8bb3c11b"
+    },
+    {
+      "path": "apa-wfd-full-component-bbox-page-1.headers.txt",
+      "bytes": 457,
+      "sha256": "236094009b81800488b08d7de9d518aa5fb17ca8d10bd8d1a0eafd04b25b3868",
+      "http_status": 200,
+      "http_date": "Tue, 06 Oct 2026 14:48:35 GMT",
+      "content_type": "application/xml",
+      "set_cookie_header_redacted": false
+    },
+    {
+      "path": "apa-wfd-full-component-bbox-page-1.xml",
+      "bytes": 970,
+      "sha256": "51184d8d6c2a9aee70b66f8b1dee63f78928f8300126c7c375d5cbd37d35718d"
+    },
+    {
+      "path": "apa-wfd-hits-epsg4326axis.xml",
+      "bytes": 965,
+      "sha256": "4bd869d2e41e36b09f6f8acc814d5a99307c79677fb655338b1127c867599ef9"
+    },
+    {
+      "path": "apa-wfd-hits-xydefault.xml",
+      "bytes": 964,
+      "sha256": "6cd963d9b76c54393dc3339ed0f04608d8da39280af555227ab8b66ea36a6432"
+    },
+    {
+      "path": "apa-wfd-hits.xml",
+      "bytes": 964,
+      "sha256": "c99fa89eb890454102d79a8574b5dea5fc50ddb3e7676eb9dae0fea58617fdd3"
+    },
+    {
+      "path": "apa-wfd-schema.xml",
+      "bytes": 4983,
+      "sha256": "95880da90c3765090d1db947463ad2ffef97adefd8fc9758c80a114d0e913889"
+    },
+    {
+      "path": "apa_hydro_all_hits.headers.txt",
+      "bytes": 457,
+      "sha256": "fd53facefddb916fd3c8dbef50186368bd9120cdea4b597b30f0f36e783db77c",
+      "http_status": 200,
+      "http_date": "Tue, 06 Oct 2026 14:44:32 GMT",
+      "content_type": "application/xml",
+      "set_cookie_header_redacted": false
+    },
+    {
+      "path": "apa_hydro_cap.headers.txt",
+      "bytes": 459,
+      "sha256": "59dd539182f3f714d32787f62909f0f94471f653f401b1dd03a6cb764da8c273",
+      "http_status": 200,
+      "http_date": "Tue, 06 Oct 2026 14:43:20 GMT",
+      "content_type": "application/xml",
+      "set_cookie_header_redacted": false
+    },
+    {
+      "path": "apa_hydro_controlbox_firstfeature.headers.txt",
+      "bytes": 457,
+      "sha256": "a563a7503620159ec270a04a1fcb2a0d0e37df51b17990fa5dc92f5d0b0c15c6",
+      "http_status": 200,
+      "http_date": "Tue, 06 Oct 2026 14:47:17 GMT",
+      "content_type": "application/xml",
+      "set_cookie_header_redacted": false
+    },
+    {
+      "path": "apa_hydro_hits.headers.txt",
+      "bytes": 457,
+      "sha256": "be89ed0358fcfec4102c8a61886166d490f63458a9db0146e3c572d27479d706",
+      "http_status": 200,
+      "http_date": "Tue, 06 Oct 2026 14:44:03 GMT",
+      "content_type": "application/xml",
+      "set_cookie_header_redacted": false
+    },
+    {
+      "path": "apa_hydro_hits_3763_broad.headers.txt",
+      "bytes": 457,
+      "sha256": "a58bab58a68ec1c82cd77dd74b1bcd9e05302020828fbf697c910cbf9240401d",
+      "http_status": 200,
+      "http_date": "Tue, 06 Oct 2026 14:46:02 GMT",
+      "content_type": "application/xml",
+      "set_cookie_header_redacted": false
+    },
+    {
+      "path": "apa_hydro_hits_3763_default.headers.txt",
+      "bytes": 457,
+      "sha256": "dfdbfbf44c01f138fa846d3c8f08b72e62594378dfff1c1267bdf79b3b02b871",
+      "http_status": 200,
+      "http_date": "Tue, 06 Oct 2026 14:46:01 GMT",
+      "content_type": "application/xml",
+      "set_cookie_header_redacted": false
+    },
+    {
+      "path": "apa_hydro_hits_epsg3763.headers.txt",
+      "bytes": 457,
+      "sha256": "f08c81d4ab3beb6b77efc1b570e649424a9942ba164ee63f1068c937cbcc9b70",
+      "http_status": 200,
+      "http_date": "Tue, 06 Oct 2026 14:45:25 GMT",
+      "content_type": "application/xml",
+      "set_cookie_header_redacted": false
+    },
+    {
+      "path": "apa_hydro_schema.headers.txt",
+      "bytes": 458,
+      "sha256": "95b6d04239fd17930b701d2d532feb00679b1fd7e55f111d98d04e2b198419da",
+      "http_status": 200,
+      "http_date": "Tue, 06 Oct 2026 14:43:20 GMT",
+      "content_type": "application/xml",
+      "set_cookie_header_redacted": false
+    },
+    {
+      "path": "apa_hydro_targetbox_crs.headers.txt",
+      "bytes": 457,
+      "sha256": "07a0c935cc5969b0993f5a7a76e077e698fc16444a375e90f29225382ac91168",
+      "http_status": 200,
+      "http_date": "Tue, 06 Oct 2026 14:47:17 GMT",
+      "content_type": "application/xml",
+      "set_cookie_header_redacted": false
+    },
+    {
+      "path": "apa_hydro_targetbox_simple.headers.txt",
+      "bytes": 457,
+      "sha256": "c5a573aa6ee29780f5ef5612bfe96278dc163ac4f24cd90e0323565447f0e5ae",
+      "http_status": 200,
+      "http_date": "Tue, 06 Oct 2026 14:47:15 GMT",
+      "content_type": "application/xml",
+      "set_cookie_header_redacted": false
+    },
+    {
+      "path": "apa_wfd_all_hits.headers.txt",
+      "bytes": 457,
+      "sha256": "64fe3510fcecac62456fb1d91d02aa5e2e9a126005834b7191f91f28c995905f",
+      "http_status": 200,
+      "http_date": "Tue, 06 Oct 2026 14:44:31 GMT",
+      "content_type": "application/xml",
+      "set_cookie_header_redacted": false
+    },
+    {
+      "path": "apa_wfd_cap.headers.txt",
+      "bytes": 459,
+      "sha256": "416d5877e02d9bdcf4e0190eadd4468aa09103e5a8dca375b11478ea6beeb1c8",
+      "http_status": 200,
+      "http_date": "Tue, 06 Oct 2026 14:43:20 GMT",
+      "content_type": "application/xml",
+      "set_cookie_header_redacted": false
+    },
+    {
+      "path": "apa_wfd_hits.headers.txt",
+      "bytes": 457,
+      "sha256": "f752d050bb2472c8335b268aa194a7f6741fb3774ac8abe16a9bf1f4698c5fee",
+      "http_status": 200,
+      "http_date": "Tue, 06 Oct 2026 14:44:03 GMT",
+      "content_type": "application/xml",
+      "set_cookie_header_redacted": false
+    },
+    {
+      "path": "apa_wfd_hits_epsg4326axis.headers.txt",
+      "bytes": 457,
+      "sha256": "4b7987941843acf2e5aa42c8bfde463f2d62e29069debc79f2f41f8b02ed5e9f",
+      "http_status": 200,
+      "http_date": "Tue, 06 Oct 2026 14:45:25 GMT",
+      "content_type": "application/xml",
+      "set_cookie_header_redacted": false
+    },
+    {
+      "path": "apa_wfd_hits_xydefault.headers.txt",
+      "bytes": 457,
+      "sha256": "aa4f032867e412e42a0aee26a0062b59ed4e0a646fe3800efd53b2ae2d9d9482",
+      "http_status": 200,
+      "http_date": "Tue, 06 Oct 2026 14:45:29 GMT",
+      "content_type": "application/xml",
+      "set_cookie_header_redacted": false
+    },
+    {
+      "path": "apa_wfd_schema.headers.txt",
+      "bytes": 458,
+      "sha256": "4f76c66be71aaa38a4afff0a086ab600faa7b5e41ae566ed0d3f83bd5a7cb01b",
+      "http_status": 200,
+      "http_date": "Tue, 06 Oct 2026 14:43:20 GMT",
+      "content_type": "application/xml",
+      "set_cookie_header_redacted": false
+    },
+    {
+      "path": "miteco-api-collections-slash.json",
+      "bytes": 121863,
+      "sha256": "25ee4127cd8e620bb919408e80b1ac4b53913bb72fd40f8631123906467b6dcf"
+    },
+    {
+      "path": "miteco-api-collections.json",
+      "bytes": 121863,
+      "sha256": "0876cc42dcfbfc9fdbf23e35ae8e75a6e753c9a9d2ad53f40f6dc81760b26004"
+    },
+    {
+      "path": "miteco-redhidro-wms-cap-retry.xml",
+      "bytes": 561,
+      "sha256": "0b5d1c05279c38c479db00c0d29c32911f448a08a6fdc8f4cae9df978ebc55dc"
+    },
+    {
+      "path": "miteco-redhidro-wms-cap.xml",
+      "bytes": 561,
+      "sha256": "0b5d1c05279c38c479db00c0d29c32911f448a08a6fdc8f4cae9df978ebc55dc"
+    },
+    {
+      "path": "miteco_api_collections_slash.headers.txt",
+      "bytes": 1051,
+      "sha256": "824a33f4303566a13a93bee06004f99b810e4e385208055169f68259d1ac9f32",
+      "http_status": 200,
+      "http_date": "Tue, 06 Oct 2026 14:44:03 GMT",
+      "content_type": "application/json",
+      "set_cookie_header_redacted": false
+    },
+    {
+      "path": "miteco_features_api_collections.headers.txt",
+      "bytes": 1051,
+      "sha256": "ee3cbe02e1997fb43ab736bb96ca15b0a34c1f71382e82bbfcb530797dfb6632",
+      "http_status": 200,
+      "http_date": "Tue, 06 Oct 2026 14:43:20 GMT",
+      "content_type": "application/json",
+      "set_cookie_header_redacted": false
+    },
+    {
+      "path": "miteco_gis_wms_cap.headers.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "http_status": null,
+      "http_date": null,
+      "content_type": null,
+      "set_cookie_header_redacted": false
+    },
+    {
+      "path": "miteco_redhidro_wms_cap.headers.txt",
+      "bytes": 2374,
+      "sha256": "9956dae860209aea9be9461102c9b4d8f26204e5d17495f2bbe85e19ee637075",
+      "http_status": 200,
+      "http_date": "Tue, 06 Oct 2026 14:43:19 GMT",
+      "content_type": "text/xml; charset=utf-8",
+      "set_cookie_header_redacted": true
+    },
+    {
+      "path": "miteco_wms_cap_retry.headers.txt",
+      "bytes": 2374,
+      "sha256": "3e865055595d6ab6f76aa105c5cc528245d5df5efdf5ebeac6969ce050c60479",
+      "http_status": 200,
+      "http_date": "Tue, 06 Oct 2026 14:44:02 GMT",
+      "content_type": "text/xml; charset=utf-8",
+      "set_cookie_header_redacted": true
+    }
+  ]
+}

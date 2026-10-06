@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xsd:schema xmlns:INSPIRE_HY_Network_WatercourseLink="https://inspire.apambiente.pt/getogc/services/INSPIRE/HY_Network_WatercourseLink/MapServer/WFSServer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:gml="http://www.opengis.net/gml/3.2" targetNamespace="https://inspire.apambiente.pt/getogc/services/INSPIRE/HY_Network_WatercourseLink/MapServer/WFSServer" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:import namespace="http://www.opengis.net/gml/3.2" schemaLocation="http://schemas.opengis.net/gml/3.2.1/gml.xsd"/>
+<xsd:element name="HY.Network" type="INSPIRE_HY_Network_WatercourseLink:HY.NetworkFeatureType" substitutionGroup="gml:AbstractFeature"/>
+<xsd:complexType name="HY.NetworkFeatureType">
+  <xsd:complexContent>
+    <xsd:extension base="gml:AbstractFeatureType">
+      <xsd:sequence>
+        <xsd:element minOccurs="0" maxOccurs="1" name="objectid" type="xsd:int"/>
+        <xsd:element minOccurs="0" maxOccurs="1" name="IFC_identifier__used_in_references_to_the_object_feature" type="xsd:int"/>
+        <xsd:element minOccurs="0" maxOccurs="1" name="beginLifespanVersion" nillable="true" type="xsd:dateTime"/>
+        <xsd:element minOccurs="0" maxOccurs="1" name="beginLifespanVersion_void" nillable="true" type="xsd:short"/>
+        <xsd:element minOccurs="0" maxOccurs="1" name="inspireId_localId" nillable="true">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="255"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element minOccurs="0" maxOccurs="1" name="inspireId_namespace" nillable="true">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="255"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element minOccurs="0" maxOccurs="1" name="inspireId_versionId" nillable="true">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="255"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element minOccurs="0" maxOccurs="1" name="inspireId_versionId_void" nillable="true" type="xsd:short"/>
+        <xsd:element minOccurs="0" maxOccurs="1" name="endLifespanVersion" nillable="true" type="xsd:dateTime"/>
+        <xsd:element minOccurs="0" maxOccurs="1" name="endLifespanVersion_void" nillable="true" type="xsd:short"/>
+        <xsd:element minOccurs="0" maxOccurs="1" name="inNetwork_void" nillable="true" type="xsd:short"/>
+        <xsd:element minOccurs="0" maxOccurs="1" name="fictitious" nillable="true" type="xsd:short"/>
+        <xsd:element minOccurs="0" maxOccurs="1" name="endNode" nillable="true" type="xsd:int"/>
+        <xsd:element minOccurs="0" maxOccurs="1" name="startNode" nillable="true" type="xsd:int"/>
+        <xsd:element minOccurs="0" maxOccurs="1" name="geographicalName_void" nillable="true" type="xsd:short"/>
+        <xsd:element minOccurs="0" maxOccurs="1" name="hydroId_void" nillable="true" type="xsd:short"/>
+        <xsd:element minOccurs="0" maxOccurs="1" name="flowDirection" nillable="true">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="255"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element minOccurs="0" maxOccurs="1" name="flowDirection_cl" nillable="true">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="255"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element minOccurs="0" maxOccurs="1" name="flowDirection_void" nillable="true" type="xsd:short"/>
+        <xsd:element minOccurs="0" maxOccurs="1" name="length" nillable="true" type="xsd:double"/>
+        <xsd:element minOccurs="0" maxOccurs="1" name="length_uom" nillable="true">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="255"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element minOccurs="0" maxOccurs="1" name="length_void" nillable="true" type="xsd:short"/>
+        <xsd:element minOccurs="0" maxOccurs="1" name="geographicalName" nillable="true">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="255"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element minOccurs="0" maxOccurs="1" name="validFrom" nillable="true" type="xsd:dateTime"/>
+        <xsd:element minOccurs="0" maxOccurs="1" name="validFrom_void" nillable="true" type="xsd:short"/>
+        <xsd:element minOccurs="0" maxOccurs="1" name="validTo" nillable="true" type="xsd:dateTime"/>
+        <xsd:element minOccurs="0" maxOccurs="1" name="validTo_void" nillable="true" type="xsd:short"/>
+        <xsd:element minOccurs="0" maxOccurs="1" name="cablewayType" nillable="true">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="255"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element minOccurs="0" maxOccurs="1" name="cablewayType_cl" nillable="true">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="255"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element minOccurs="0" maxOccurs="1" name="cablewayType_void" nillable="true" type="xsd:short"/>
+        <xsd:element minOccurs="0" maxOccurs="1" name="designator" nillable="true">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="255"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element minOccurs="0" maxOccurs="1" name="designator_void" nillable="true" type="xsd:short"/>
+        <xsd:element minOccurs="0" maxOccurs="1" name="airRouteLinkClass" nillable="true">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="255"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element minOccurs="0" maxOccurs="1" name="airRouteLinkClass_cl" nillable="true">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="255"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element minOccurs="0" maxOccurs="1" name="airRouteLinkClass_void" nillable="true" type="xsd:short"/>
+        <xsd:element minOccurs="0" maxOccurs="1" name="Subtype_discriminator__type_name_" type="xsd:int"/>
+        <xsd:element minOccurs="0" maxOccurs="1" name="FROM_NODE" nillable="true" type="xsd:int"/>
+        <xsd:element minOccurs="0" maxOccurs="1" name="TO_NODE" nillable="true" type="xsd:int"/>
+        <xsd:element minOccurs="0" maxOccurs="1" name="NextDownID" nillable="true" type="xsd:int"/>
+        <xsd:element minOccurs="0" maxOccurs="1" name="HydroID" nillable="true" type="xsd:int"/>
+        <xsd:element minOccurs="0" maxOccurs="1" name="FeatureID" nillable="true" type="xsd:int"/>
+        <xsd:element minOccurs="0" maxOccurs="1" name="fnodefa" nillable="true" type="xsd:double"/>
+        <xsd:element minOccurs="0" maxOccurs="1" name="tnodefa" nillable="true" type="xsd:double"/>
+        <xsd:element minOccurs="0" maxOccurs="1" name="riverrk" nillable="true" type="xsd:short"/>
+        <xsd:element minOccurs="0" maxOccurs="1" name="shape" nillable="true" type="gml:MultiCurvePropertyType"/>
+        <xsd:element minOccurs="0" maxOccurs="1" name="streamorder_order" nillable="true">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="255"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element minOccurs="0" maxOccurs="1" name="streamorder_orderscheme" nillable="true">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="255"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element minOccurs="0" maxOccurs="1" name="streamorder_scope" nillable="true">
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:maxLength value="255"/>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element minOccurs="0" maxOccurs="1" name="st_length_shape_" type="xsd:double"/>
+      </xsd:sequence>
+    </xsd:extension>
+  </xsd:complexContent>
+</xsd:complexType>
+</xsd:schema>

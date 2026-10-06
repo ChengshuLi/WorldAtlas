@@ -1,0 +1,939 @@
+{
+  "version": 1,
+  "issue": 1163,
+  "lane": "geography",
+  "worker_id": "01a11197-62f9-7fd3-b334-f810b077601a",
+  "subject_ids": [
+    "atlas:district:ESP-1003:a5622946",
+    "atlas:district:ESP-1004:a5622946",
+    "atlas:district:ESP-1010:a5622946",
+    "gb:PRT:ADM2:2272694B24025236019409",
+    "gb:PRT:ADM2:2272694B40601521893357",
+    "gb:PRT:ADM2:2272694B64876814145037",
+    "gb:PRT:ADM2:2272694B74999887486897"
+  ],
+  "subject_ids_sha256": "1fc4ba624de8a5fa76ea70785b91636f2d6039287e02858595cfac9fac271733",
+  "baseline": {
+    "commit": "301b19178f940a9f6e8bf3d17901c96bc1d8a3c7",
+    "files": [
+      {
+        "path": "data/canonical-grid/manifest.json",
+        "bytes": 271171,
+        "sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v2/components-004.json.gz",
+        "bytes": 3640001,
+        "sha256": "c8726499e2d34c89b45fcf5d4c725b9583d2cb14319736580c032d460c04cb54",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-19.json",
+        "bytes": 4583022,
+        "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-28.json",
+        "bytes": 6613963,
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "canonical_grid": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+      "hierarchy": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "full_gap_component_shard": "c8726499e2d34c89b45fcf5d4c725b9583d2cb14319736580c032d460c04cb54"
+    },
+    "pin_files": {
+      "canonical_grid": "data/canonical-grid/manifest.json",
+      "hierarchy": "data/hierarchy.json",
+      "full_gap_component_shard": "coordination/engineering/geographic-components-946-20261005-local06/components-v2/components-004.json.gz"
+    },
+    "subject_files": {
+      "atlas:district:ESP-1003:a5622946": "data/geography/part-28.json",
+      "atlas:district:ESP-1004:a5622946": "data/geography/part-28.json",
+      "atlas:district:ESP-1010:a5622946": "data/geography/part-28.json",
+      "gb:PRT:ADM2:2272694B24025236019409": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B40601521893357": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B64876814145037": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B74999887486897": "data/geography/part-19.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "apa-hy-network",
+      "url": "https://inspire.apambiente.pt/getogc/services/INSPIRE/HY_Network_WatercourseLink/MapServer/WFSServer?request=GetCapabilities&service=WFS",
+      "role": "APA/SNIAmb official hydrographic network capabilities, schema and retained bounded-query diagnostics; local BBOX results were contradictory and do not establish complete coverage.",
+      "vintage": "Metadata edition 2015-06-18 (publication 2006-07-01); API responses retrieved 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "redistributable",
+        "terms": "APA metadata states no use restrictions for the described hydrography product; verify live terms before any redistribution or derivative reuse."
+      },
+      "retention": "retained",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-hydro-all-hits.xml",
+          "bytes": 965,
+          "sha256": "53bbcf830e184a03b36f28d395ba04dc1260a8c30474fde58c767dac43da9ae3",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-hydro-cap.xml",
+          "bytes": 14435,
+          "sha256": "91243c7140c921ee6a20883f1a525d866b12560e7c648f9bc4222700ee8acb30",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-hydro-controlbox-firstfeature.xml",
+          "bytes": 965,
+          "sha256": "349dcb04c49664e2c365e73d1138d7a406bb46cb45ffcb7f185c44ba0ddcf662",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-hydro-first-feature.headers.txt",
+          "bytes": 458,
+          "sha256": "77602e4b3570cd15c841c320d50b5b1eb6935b77f6449fc2d3c6eecfed182d60",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-hydro-first-feature.xml",
+          "bytes": 5925,
+          "sha256": "124f91fad68c2f40b175cb85f94b724c0def56a63a6f040c64c99748fd90236e",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-hydro-hits-3763-broad.xml",
+          "bytes": 965,
+          "sha256": "81ca4a2049499c08e0f155163b1e8ce4b575bad6d67ba5e4015d11ca62d4f6fe",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-hydro-hits-3763-default.xml",
+          "bytes": 960,
+          "sha256": "3e4a383dae1ce5a109770439db0e7a33b88c1220533670aad1dd649e31e80caf",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-hydro-hits-3763-region.headers.txt",
+          "bytes": 457,
+          "sha256": "ed8dc322df05e7795b3d9f168ddf1957051b361d766f6efee0d476debf36bafd",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-hydro-hits-3763-region.xml",
+          "bytes": 965,
+          "sha256": "c6e2cf0ac73efbd2ad8726b0f9fb003395ab9f40353446a550524b1f3eae255e",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-hydro-hits-epsg3763.xml",
+          "bytes": 960,
+          "sha256": "4548350855fcdc0122c092e4a4b2ccc0e878643a277e31e5369910a14cf7e750",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-hydro-hits.xml",
+          "bytes": 960,
+          "sha256": "221e33a70755e69ce21081f16edd97e51be568805850f50f08de06da9790a684",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-hydro-schema.xml",
+          "bytes": 8891,
+          "sha256": "b696954d48b42bb67deac94427018bb8513162cb3ec6fa2a286e1e5e5c562473",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-hydro-targetbox-crs.xml",
+          "bytes": 960,
+          "sha256": "5c1b92409a62ebea0fffafed9d943f366ef4c728999dd629371847490836ca4a",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-hydro-targetbox-simple.xml",
+          "bytes": 960,
+          "sha256": "e15cec9f6350f7fd889bd130778554f4ac9153f2033de6149df92137a598cbf9",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa_hydro_all_hits.headers.txt",
+          "bytes": 457,
+          "sha256": "fd53facefddb916fd3c8dbef50186368bd9120cdea4b597b30f0f36e783db77c",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa_hydro_cap.headers.txt",
+          "bytes": 459,
+          "sha256": "59dd539182f3f714d32787f62909f0f94471f653f401b1dd03a6cb764da8c273",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa_hydro_controlbox_firstfeature.headers.txt",
+          "bytes": 457,
+          "sha256": "a563a7503620159ec270a04a1fcb2a0d0e37df51b17990fa5dc92f5d0b0c15c6",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa_hydro_hits.headers.txt",
+          "bytes": 457,
+          "sha256": "be89ed0358fcfec4102c8a61886166d490f63458a9db0146e3c572d27479d706",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa_hydro_hits_3763_broad.headers.txt",
+          "bytes": 457,
+          "sha256": "a58bab58a68ec1c82cd77dd74b1bcd9e05302020828fbf697c910cbf9240401d",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa_hydro_hits_3763_default.headers.txt",
+          "bytes": 457,
+          "sha256": "dfdbfbf44c01f138fa846d3c8f08b72e62594378dfff1c1267bdf79b3b02b871",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa_hydro_hits_epsg3763.headers.txt",
+          "bytes": 457,
+          "sha256": "f08c81d4ab3beb6b77efc1b570e649424a9942ba164ee63f1068c937cbcc9b70",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa_hydro_schema.headers.txt",
+          "bytes": 458,
+          "sha256": "95b6d04239fd17930b701d2d532feb00679b1fd7e55f111d98d04e2b198419da",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa_hydro_targetbox_crs.headers.txt",
+          "bytes": 457,
+          "sha256": "07a0c935cc5969b0993f5a7a76e077e698fc16444a375e90f29225382ac91168",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa_hydro_targetbox_simple.headers.txt",
+          "bytes": 457,
+          "sha256": "c5a573aa6ee29780f5ef5612bfe96278dc163ac4f24cd90e0323565447f0e5ae",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        }
+      ]
+    },
+    {
+      "id": "apa-wfd",
+      "url": "https://inspire.apambiente.pt/getogc/services/INSPIRE/AM_WaterBodyForWFD_WFDRiver/MapServer/WFSServer?SERVICE=WFS&REQUEST=GetCapabilities",
+      "role": "Official APA WFD cycle-2 river water-body schema and bounded vector response pages; reference hydrography/planning geometry only, not a physical wetness mask.",
+      "vintage": "WFD planning cycle 2015–2021; response retrieval date 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "redistributable",
+        "terms": "Open-data catalogue lists CC BY 4.0; attribute Agência Portuguesa do Ambiente and link to licence."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-wfd-all-hits.xml",
+          "bytes": 967,
+          "sha256": "fd20eabdd965921d0a404a111a1ab645e3f3baf98993f10637dee07f34a111ed",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-wfd-cap.xml",
+          "bytes": 14517,
+          "sha256": "6967b11ec832960d75067ca98a90edfb736077cf632c105e3e9f0ad41735c803",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-wfd-explicit-full-aoi-page-0.headers.txt",
+          "bytes": 464,
+          "sha256": "f1a6885deecf36cd6f9a0494d1de7fd0eb0b83f82f2f239e589ab9af981e5a03",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-wfd-explicit-full-aoi-page-0.xml",
+          "bytes": 674404,
+          "sha256": "41c231afc90b3a0b66025440215d4d4451ff64f4b1ceb4cab8ba89f6a2c4c52c",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-wfd-explicit-full-aoi-page-1.headers.txt",
+          "bytes": 457,
+          "sha256": "6f47d4b2982321b5962b66b3cf76c30438af9bc0e446a9cf4c9389046684d2fd",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-wfd-explicit-full-aoi-page-1.xml",
+          "bytes": 970,
+          "sha256": "c1379a198ee0d12d4533171f0bf3c473cf2c6fbbe88cbb9083bb8bfbaca36576",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-wfd-full-component-bbox-page-0.headers.txt",
+          "bytes": 464,
+          "sha256": "3015a4e006b451ed559121410cca27fa2ede85bc23edee9addcf131a1e5a46f6",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-wfd-full-component-bbox-page-0.xml",
+          "bytes": 674404,
+          "sha256": "5724791f5b544467d2b6bdddf246e3105b0b55ecd46e4f49b4e1d3cd8bb3c11b",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-wfd-full-component-bbox-page-1.headers.txt",
+          "bytes": 457,
+          "sha256": "236094009b81800488b08d7de9d518aa5fb17ca8d10bd8d1a0eafd04b25b3868",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-wfd-full-component-bbox-page-1.xml",
+          "bytes": 970,
+          "sha256": "51184d8d6c2a9aee70b66f8b1dee63f78928f8300126c7c375d5cbd37d35718d",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-wfd-hits-epsg4326axis.xml",
+          "bytes": 965,
+          "sha256": "4bd869d2e41e36b09f6f8acc814d5a99307c79677fb655338b1127c867599ef9",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-wfd-hits-xydefault.xml",
+          "bytes": 964,
+          "sha256": "6cd963d9b76c54393dc3339ed0f04608d8da39280af555227ab8b66ea36a6432",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-wfd-hits.xml",
+          "bytes": 964,
+          "sha256": "c99fa89eb890454102d79a8574b5dea5fc50ddb3e7676eb9dae0fea58617fdd3",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-wfd-schema.xml",
+          "bytes": 4983,
+          "sha256": "95880da90c3765090d1db947463ad2ffef97adefd8fc9758c80a114d0e913889",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa_wfd_all_hits.headers.txt",
+          "bytes": 457,
+          "sha256": "64fe3510fcecac62456fb1d91d02aa5e2e9a126005834b7191f91f28c995905f",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa_wfd_cap.headers.txt",
+          "bytes": 459,
+          "sha256": "416d5877e02d9bdcf4e0190eadd4468aa09103e5a8dca375b11478ea6beeb1c8",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa_wfd_hits.headers.txt",
+          "bytes": 457,
+          "sha256": "f752d050bb2472c8335b268aa194a7f6741fb3774ac8abe16a9bf1f4698c5fee",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa_wfd_hits_epsg4326axis.headers.txt",
+          "bytes": 457,
+          "sha256": "4b7987941843acf2e5aa42c8bfde463f2d62e29069debc79f2f41f8b02ed5e9f",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa_wfd_hits_xydefault.headers.txt",
+          "bytes": 457,
+          "sha256": "aa4f032867e412e42a0aee26a0062b59ed4e0a646fe3800efd53b2ae2d9d9482",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa_wfd_schema.headers.txt",
+          "bytes": 458,
+          "sha256": "4f76c66be71aaa38a4afff0a086ab600faa7b5e41ae566ed0d3f83bd5a7cb01b",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        }
+      ]
+    },
+    {
+      "id": "miteco-access",
+      "url": "https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/agua/masas-de-agua-phc-2022-2027.html",
+      "role": "Official service capability/preflight and collection-list receipts documenting that bounded vector acquisition was unavailable in tested endpoints; no MITECO water feature data were retrieved.",
+      "vintage": "PHC 2022–2027; national hydrographic file page reports update 2023-11-02",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "redistributable",
+        "terms": "Official page states free use with attribution to MITECO for listed hydrography/water-body products."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Consult the linked official PHC download/service page and request an official vector feature service scoped to the entire component; preserve complete paginated responses and metadata before any analysis.",
+      "limit": "Tested WMS capability returned an XML ServiceException and tested vector capability could not be established. No bounded MITECO vector comparison is available."
+    },
+    {
+      "id": "jrc-gsw-docs",
+      "url": "https://global-surface-water.appspot.com/download",
+      "role": "Official access and user-guide documentation consulted to assess a possible dated observational follow-up; no raster tiles were downloaded.",
+      "vintage": "Monthly History v1.4 (1984-03 to 2021-12), v1.5 (2022–2024)",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "redistributable",
+        "terms": "JRC access page states Copernicus-produced data are free without restriction and requests attribution to EC JRC/Google plus Pekel et al. (2016)."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 1984,
+        "to": 2025
+      },
+      "restoration": "Use official native grid/tile access for only tiles/windows intersecting the complete component plus an explicitly justified registration halo. Preserve masks, class codes, version and month.",
+      "limit": "Only documentation reviewed; no raster response or per-pixel classification was produced."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/reproduction/compare_apa_wfd_component.py",
+      "bytes": 6549,
+      "sha256": "24f000c4aaba662b533dc53aaa56f7f73b4709ad964ff4135d028cd9444da046",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/reproduction/run-1.json",
+      "bytes": 6461,
+      "sha256": "27c0479134a509942f297913449c9af7f635f0c79cdc2249210e594107bce5db",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/reproduction/run-2.json",
+      "bytes": 6461,
+      "sha256": "27c0479134a509942f297913449c9af7f635f0c79cdc2249210e594107bce5db",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/reproduction/run_controls.py",
+      "bytes": 2754,
+      "sha256": "2ee1aa0c5628a169e118cc3a691d7b7ccdc2e8cfb0ea4b55cbabcb08f3723774",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/response-receipts.json",
+      "bytes": 16028,
+      "sha256": "a2ce62a516b32abce576c7de62cd3093502e4855df3576a15533454fdc84663d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/source-assessment.md",
+      "bytes": 8662,
+      "sha256": "414ffef9c195a970bb29d06a545da94e376291bf9afd2976e93aa0da1d2a3e0c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/miteco-api-collections-slash.json",
+      "bytes": 121863,
+      "sha256": "25ee4127cd8e620bb919408e80b1ac4b53913bb72fd40f8631123906467b6dcf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/miteco-api-collections.json",
+      "bytes": 121863,
+      "sha256": "0876cc42dcfbfc9fdbf23e35ae8e75a6e753c9a9d2ad53f40f6dc81760b26004",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/miteco-redhidro-wms-cap-retry.xml",
+      "bytes": 561,
+      "sha256": "0b5d1c05279c38c479db00c0d29c32911f448a08a6fdc8f4cae9df978ebc55dc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/miteco-redhidro-wms-cap.xml",
+      "bytes": 561,
+      "sha256": "0b5d1c05279c38c479db00c0d29c32911f448a08a6fdc8f4cae9df978ebc55dc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/miteco_api_collections_slash.headers.txt",
+      "bytes": 1051,
+      "sha256": "824a33f4303566a13a93bee06004f99b810e4e385208055169f68259d1ac9f32",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/miteco_features_api_collections.headers.txt",
+      "bytes": 1051,
+      "sha256": "ee3cbe02e1997fb43ab736bb96ca15b0a34c1f71382e82bbfcb530797dfb6632",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/miteco_gis_wms_cap.headers.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/miteco_redhidro_wms_cap.headers.txt",
+      "bytes": 2374,
+      "sha256": "9956dae860209aea9be9461102c9b4d8f26204e5d17495f2bbe85e19ee637075",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/miteco_wms_cap_retry.headers.txt",
+      "bytes": 2374,
+      "sha256": "3e865055595d6ab6f76aa105c5cc528245d5df5efdf5ebeac6969ce050c60479",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/validation/negative-control.json",
+      "bytes": 701,
+      "sha256": "935fc6a341e4289564b5cf0a273d80f58964e81b62a8b6b0de144260e4c31ff0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/validation/positive-control.json",
+      "bytes": 726,
+      "sha256": "5e7fabc9d6c2a1960098d4196930d64b4d237b964af595bde19a7ffaa2050014",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "official-source-access",
+      "kind": "source",
+      "description": "Inspect official provider metadata/capabilities and retain exact bounded response bodies, response headers where available, request URLs, status, byte lengths and SHA-256 receipts. Failed or incomplete service responses remain unavailable; no imagery used.",
+      "software": "curl 8.x, official web catalogues, Python 3.12.14 for whole-file SHA-256",
+      "units": "HTTP responses, provider features and source metadata"
+    },
+    {
+      "id": "apa-wfd-line-geometry-intersection",
+      "kind": "measurement",
+      "description": "Parse all complete WFD response pages with EPSG:4326 GML latitude-longitude axis order, transform to EPSG:25829 with always_xy, then directly intersect original line features against the full retained component without repair, snapping, buffering, rasterization or ownership assignment. Report per-member and unique-union line length separately.",
+      "software": "Python 3.12.14; Shapely 2.1.2; GEOS 3.13.1; PyProj 3.7.2; PROJ 9.5.1",
+      "units": "metres; native source CRS EPSG:4326; analysis EPSG:25829"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "apa_wfd_members_returned",
+      "value": 59,
+      "unit": "features",
+      "vintage": "baseline",
+      "evaluation_commit": "301b19178f940a9f6e8bf3d17901c96bc1d8a3c7",
+      "input_sha256": "41c231afc90b3a0b66025440215d4d4451ff64f4b1ceb4cab8ba89f6a2c4c52c"
+    },
+    {
+      "id": "apa_wfd_members_intersecting_full_component",
+      "value": 10,
+      "unit": "features",
+      "vintage": "baseline",
+      "evaluation_commit": "301b19178f940a9f6e8bf3d17901c96bc1d8a3c7",
+      "input_sha256": "41c231afc90b3a0b66025440215d4d4451ff64f4b1ceb4cab8ba89f6a2c4c52c"
+    },
+    {
+      "id": "apa_wfd_sum_member_line_length_in_component_m",
+      "value": 63474.71031159193,
+      "unit": "m",
+      "vintage": "baseline",
+      "evaluation_commit": "301b19178f940a9f6e8bf3d17901c96bc1d8a3c7",
+      "input_sha256": "41c231afc90b3a0b66025440215d4d4451ff64f4b1ceb4cab8ba89f6a2c4c52c"
+    },
+    {
+      "id": "apa_wfd_unique_union_line_length_in_component_m",
+      "value": 63474.71031159195,
+      "unit": "m",
+      "vintage": "baseline",
+      "evaluation_commit": "301b19178f940a9f6e8bf3d17901c96bc1d8a3c7",
+      "input_sha256": "41c231afc90b3a0b66025440215d4d4451ff64f4b1ceb4cab8ba89f6a2c4c52c"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "apa_wfd_members_returned",
+      "value": 59,
+      "unit": "features"
+    },
+    {
+      "metric_id": "apa_wfd_members_intersecting_full_component",
+      "value": 10,
+      "unit": "features"
+    },
+    {
+      "metric_id": "apa_wfd_sum_member_line_length_in_component_m",
+      "value": 63474.71031159193,
+      "unit": "m"
+    },
+    {
+      "metric_id": "apa_wfd_unique_union_line_length_in_component_m",
+      "value": 63474.71031159195,
+      "unit": "m"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "APA WFD cycle-2 river line response supports contextual geometric coincidence with the complete retained component for 10 of 59 returned features; provider page count has numberMatched=unknown and is cross-checked against a hits count plus exhausted next page.",
+      "status": "supported",
+      "source_ids": [
+        "apa-wfd"
+      ]
+    },
+    {
+      "text": "Physical water/land extent, contemporary wetness, whole-cell classes, exact water fractions, channel width and territorial ownership remain undetermined; APA HY bounded completeness and MITECO vector acquisition are unresolved.",
+      "status": "unresolved",
+      "source_ids": [
+        "apa-hy-network",
+        "apa-wfd",
+        "miteco-access",
+        "jrc-gsw-docs"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 research/geography/physical-water-prt-esp-20261006/reproduction/compare_apa_wfd_component.py research/geography/physical-water-prt-esp-20261006/reproduction/run-1.json",
+    "python3 research/geography/physical-water-prt-esp-20261006/reproduction/compare_apa_wfd_component.py research/geography/physical-water-prt-esp-20261006/reproduction/run-2.json",
+    "python3 research/geography/physical-water-prt-esp-20261006/reproduction/run_controls.py"
+  ],
+  "validation": [
+    {
+      "method_id": "apa-wfd-line-geometry-intersection",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/physical-water-prt-esp-20261006/validation/positive-control.json"
+    },
+    {
+      "method_id": "apa-wfd-line-geometry-intersection",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/physical-water-prt-esp-20261006/validation/negative-control.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/reproduction/compare_apa_wfd_component.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/reproduction/run-1.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/reproduction/run-2.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/reproduction/run_controls.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/response-receipts.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/source-assessment.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-hydro-all-hits.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-hydro-cap.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-hydro-controlbox-firstfeature.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-hydro-first-feature.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-hydro-first-feature.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-hydro-hits-3763-broad.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-hydro-hits-3763-default.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-hydro-hits-3763-region.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-hydro-hits-3763-region.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-hydro-hits-epsg3763.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-hydro-hits.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-hydro-schema.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-hydro-targetbox-crs.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-hydro-targetbox-simple.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-wfd-all-hits.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-wfd-cap.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-wfd-explicit-full-aoi-page-0.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-wfd-explicit-full-aoi-page-0.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-wfd-explicit-full-aoi-page-1.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-wfd-explicit-full-aoi-page-1.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-wfd-full-component-bbox-page-0.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-wfd-full-component-bbox-page-0.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-wfd-full-component-bbox-page-1.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-wfd-full-component-bbox-page-1.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-wfd-hits-epsg4326axis.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-wfd-hits-xydefault.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-wfd-hits.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa-wfd-schema.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa_hydro_all_hits.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa_hydro_cap.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa_hydro_controlbox_firstfeature.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa_hydro_hits.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa_hydro_hits_3763_broad.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa_hydro_hits_3763_default.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa_hydro_hits_epsg3763.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa_hydro_schema.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa_hydro_targetbox_crs.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa_hydro_targetbox_simple.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa_wfd_all_hits.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa_wfd_cap.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa_wfd_hits.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa_wfd_hits_epsg4326axis.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa_wfd_hits_xydefault.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/apa_wfd_schema.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/miteco-api-collections-slash.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/miteco-api-collections.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/miteco-redhidro-wms-cap-retry.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/miteco-redhidro-wms-cap.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/miteco_api_collections_slash.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/miteco_features_api_collections.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/miteco_gis_wms_cap.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/miteco_redhidro_wms_cap.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/sources/official-api-responses/miteco_wms_cap_retry.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/validation/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/validation/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "apa_wfd_members_returned",
+      "path": "research/geography/physical-water-prt-esp-20261006/reproduction/run-1.json",
+      "json_pointer": "/source/page0_numberReturned"
+    },
+    {
+      "metric_id": "apa_wfd_members_intersecting_full_component",
+      "path": "research/geography/physical-water-prt-esp-20261006/reproduction/run-1.json",
+      "json_pointer": "/comparison/members_with_nonempty_intersection"
+    },
+    {
+      "metric_id": "apa_wfd_sum_member_line_length_in_component_m",
+      "path": "research/geography/physical-water-prt-esp-20261006/reproduction/run-1.json",
+      "json_pointer": "/comparison/sum_of_per_member_line_intersection_lengths_m"
+    },
+    {
+      "metric_id": "apa_wfd_unique_union_line_length_in_component_m",
+      "path": "research/geography/physical-water-prt-esp-20261006/reproduction/run-1.json",
+      "json_pointer": "/comparison/unique_union_line_length_inside_component_m"
+    }
+  ]
+}
