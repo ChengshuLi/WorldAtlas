@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "kind": "actual-owned-browser-regression",
+  "execution_commit": "cb72f370b9bfdeed1eb8ade4b97a897f2f5f1eea",
+  "command": "Node24 --test test/coverage-source-policy.browser.mjs, owned Playwright profiles",
+  "exit": 0,
+  "source_files": [
+    {
+      "path": "test/coverage-source-policy.browser.mjs",
+      "bytes": 4909,
+      "sha256": "4229f324700045357f358b9093740fa680390c3ce0a7960a3e54af0fa7c06e99"
+    },
+    {
+      "path": "src/coverage.js",
+      "bytes": 16793,
+      "sha256": "fa61f21557934620edae8131d7d58a954d6e281d46088b1aa9a3d3c39a57377b"
+    },
+    {
+      "path": "src/data-client.js",
+      "bytes": 20633,
+      "sha256": "d9731377cd0e7b5f27ede6e53f5cfbf5c2f63b2bde8de5a56ce1246f015228fb"
+    },
+    {
+      "path": "server.mjs",
+      "bytes": 7785,
+      "sha256": "48b8cc98ee2b795ed5f2329af390a6c03e09f90400e5651fbf3fbd8f5ee896d2"
+    },
+    {
+      "path": "scripts/build-static-inner.mjs",
+      "bytes": 18343,
+      "sha256": "a265bab8b1c475819a83111e921245f27d449125b66ad77a33751749242bf6c4"
+    }
+  ],
+  "log": {
+    "sha256": "ce569ae6fc6bc8db94422618f26572bb07d76cfd8dd5a6be703f333536e9ad07",
+    "text": "\u2714 coverage keeps frozen reports readable during correction failure and retries the actual asset (47739.150834ms)\n\u2714 correction role counts follow selected continent membership and retain evidence below the readable description (151.440833ms)\n\u2139 tests 2\n\u2139 suites 0\n\u2139 pass 2\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 48530.498959\n"
+  },
+  "limits": [
+    "Development coverage component and actual gzip/report routes; final full production bundle browser test remains separate.",
+    "Initial failed variant remains at immutable b93dbfaa and cache logs; failure was missing reasons in the retained projected report, not dropped audit rows."
+  ]
+}

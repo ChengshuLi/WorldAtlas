@@ -9,6 +9,24 @@ import {requireVerifiedNativeSelection} from './native-ownership/require-verifie
 
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 
+// A committed selection keeps ordinary builds on the same release as geography.
+// Explicit environment selection remains available for isolated candidate checks.
+export async function readBuildOwnershipSelection({root='.',env=process.env}={}) {
+  if(env.ATLAS_NATIVE_GRID_MANIFEST||env.ATLAS_NATIVE_GRID_SHA256){
+    if(!env.ATLAS_NATIVE_GRID_MANIFEST||!/^[a-f0-9]{64}$/.test(env.ATLAS_NATIVE_GRID_SHA256??''))
+      throw Error('Explicit native selection requires both manifest and checksum');
+    return {manifestPath:env.ATLAS_NATIVE_GRID_MANIFEST,expectedSha256:env.ATLAS_NATIVE_GRID_SHA256,requireNative:true};
+  }
+  const file=path.join(root,'data/ownership-selection.json');
+  const bytes=await fs.readFile(file).catch(error=>{if(error.code==='ENOENT')return null;throw error;});
+  if(!bytes)return {manifestPath:'data/canonical-grid/manifest.json',requireNative:false};
+  const selection=JSON.parse(bytes);
+  if(selection.version!==1||selection.method!==NATIVE_METHOD||!safePackagePath(selection.manifest_path)||
+    !/^[a-f0-9]{64}$/.test(selection.sha256??'')||!selection.release_id?.startsWith('geography:review:'))
+    throw Error('Invalid committed ownership selection');
+  return {manifestPath:selection.manifest_path,expectedSha256:selection.sha256,requireNative:true,releaseId:selection.release_id};
+}
+
 // A native build is an explicit offline selection of a reviewed whole-file
 // candidate. The legacy default and all original release products remain intact.
 export async function selectBuildOwnership({manifestPath = 'data/canonical-grid/manifest.json',
