@@ -777,11 +777,19 @@
       "status": "added"
     },
     {
+      "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/negative-controls-v1.json",
+      "status": "added"
+    },
+    {
       "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/overlay-v1.json",
       "status": "added"
     },
     {
       "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/overlay_guards.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/positive-controls-v1.json",
       "status": "added"
     },
     {
@@ -1116,6 +1124,12 @@
       "sha256": "7559fbbad71ffc9ec6627770495e23f9071083ceb3fadc0f2214e461deac4538"
     },
     {
+      "bytes": 949,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/negative-controls-v1.json",
+      "sha256": "ae592b22065c1355e0fb356260ea0cf03a5664726e22c000f068be139e8d251c"
+    },
+    {
       "bytes": 1533195,
       "hash_kind": "file-bytes",
       "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/overlay-v1.json",
@@ -1126,6 +1140,12 @@
       "hash_kind": "file-bytes",
       "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/overlay_guards.py",
       "sha256": "c5760f1eddf62c849a0dd9a8808a130ff14d52484fc3d49ea7d4f18c8f9200c0"
+    },
+    {
+      "bytes": 584,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/positive-controls-v1.json",
+      "sha256": "c073f986836d87c8393b46f4cab57bd5e261d1be405ef97da99197eaa21a660f"
     },
     {
       "bytes": 15145,
@@ -1170,10 +1190,10 @@
       "sha256": "ce6bda0413300e57d35e89a13a1955059c829b228eaeffba82024e453bc1f2c1"
     },
     {
-      "bytes": 3128,
+      "bytes": 3608,
       "hash_kind": "file-bytes",
       "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/validate-overlay-controls.py",
-      "sha256": "ab43e6d805ae8ec3bb480763ec9b34066e3d1f3fbddf988b8937d393931b73cc"
+      "sha256": "f3b5c66857468c9daaeddadbcb95fe73d06343a3862f9eda71a4aac86f11f09d"
     },
     {
       "bytes": 1455,
@@ -1375,6 +1395,18 @@
     {
       "evidence_path": "research/geography/gap-source-abudhabi-physical-seam-20261006/validation-controls-v1.json",
       "kind": "measurement",
+      "method_id": "exact-source-overlay",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "research/geography/gap-source-abudhabi-physical-seam-20261006/negative-controls-v1.json",
+      "kind": "negative-control",
+      "method_id": "exact-source-overlay",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "research/geography/gap-source-abudhabi-physical-seam-20261006/positive-controls-v1.json",
+      "kind": "positive-control",
       "method_id": "exact-source-overlay",
       "outcome": "passed"
     },

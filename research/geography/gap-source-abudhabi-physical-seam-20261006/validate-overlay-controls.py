@@ -57,3 +57,15 @@ result = {
     "negative_controls": negative,
 }
 (OWNED / "validation-controls-v1.json").write_text(json.dumps(result, sort_keys=True, indent=2) + "\n")
+(OWNED / "positive-controls-v1.json").write_text(json.dumps({
+    "method_id": "exact-source-overlay",
+    "kind": "positive-control",
+    "outcome": "passed",
+    "checks": result["positive_controls"],
+}, sort_keys=True, indent=2) + "\n")
+(OWNED / "negative-controls-v1.json").write_text(json.dumps({
+    "method_id": "exact-source-overlay",
+    "kind": "negative-control",
+    "outcome": "passed",
+    "checks": result["negative_controls"],
+}, sort_keys=True, indent=2) + "\n")
