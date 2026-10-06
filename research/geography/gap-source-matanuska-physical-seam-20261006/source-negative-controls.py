@@ -14,8 +14,9 @@ def sha(raw): return hashlib.sha256(raw).hexdigest()
 def write(name,value):
     raw=(json.dumps(value,ensure_ascii=False,separators=(',',':'),sort_keys=True)+'\n').encode()
     target=OUT/name
-    if target.exists(): raise SystemExit('Refusing to overwrite control receipt: '+str(target))
-    target.write_bytes(raw)
+    if target.exists():
+        if target.read_bytes()!=raw: raise SystemExit('Existing control receipt differs; preserving it: '+str(target))
+    else: target.write_bytes(raw)
     return str(target.relative_to(ROOT))
 
 one=RUN/'run-one';two=RUN/'run-two'
@@ -47,9 +48,14 @@ if len(positive)!=282 or any(r['status']!='complete-recorded-contacts' for r in 
 write('positive-exact-roster-and-contact-closure.json',{'method_id':'source-overlay-analysis','kind':'positive-control','outcome':'passed','component_count':len(positive),'bound_fragment_count':sum(len(r['fragment_contacts']) for r in positive),'contact_rows':sum(len(b['exact_location_contacts'] or []) for r in positive for b in r['fragment_contacts']),'all_contact_ledgers_complete':all(r['status']=='complete-recorded-contacts' for r in positive)})
 mutated=copy.deepcopy(fragments)
 mutated[0]['properties'].pop('exact_location_contacts',None)
-negative=component_contacts(mutated,components)
-if all(r['status']=='complete-recorded-contacts' for r in negative): raise SystemExit('Omitted-contact negative did not detect mutation')
-write('negative-omitted-contact.json',{'method_id':'source-overlay-analysis','kind':'negative-control','outcome':'passed','control':'remove exact_location_contacts from one retained candidate-fragment clone','complete_contact_components':sum(r['status']=='complete-recorded-contacts' for r in negative),'expected_components':282,'rejected':'incomplete-source-contact-recording'})
+try:
+    negative=component_contacts(mutated,components)
+    rejected=not all(r['status']=='complete-recorded-contacts' for r in negative)
+    reason='incomplete-source-contact-recording'
+except ValueError as error:
+    rejected=True; reason=str(error)
+if not rejected: raise SystemExit('Omitted-contact negative did not detect mutation')
+write('negative-omitted-contact.json',{'method_id':'source-overlay-analysis','kind':'negative-control','outcome':'passed','control':'remove exact_location_contacts from one retained candidate-fragment clone','rejected':reason})
 
 layer=json.loads((PACKET/'sources/resolve-layer-0.json').read_bytes())
 name=layer.get('name')
