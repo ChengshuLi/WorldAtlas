@@ -35,3 +35,7 @@ Compressed county responses are retained exactly as returned. Their uncompressed
 ## Reproduction
 
 From repository root, use a clean isolated Python environment and install `data/regional-review/regional-review-1662301453abd475/requirements.txt`, then run `PYTHONPATH=. python data/regional-review/regional-review-1662301453abd475/reproduce.py`. The script reads retained files only, performs no network requests, and writes only the packet's `geometry-and-membership-results.json`. It imports the immutable shared geometry helper from `scripts/evidence/`; the script does not alter input geometry or Atlas source data.
+
+## Related GitHub issue-scope snapshots
+
+The exact public GitHub API responses for sibling West North Central work items #261, #263, and #265 are retained as `issue-261-api-snapshot.json`, `issue-263-api-snapshot.json`, and `issue-265-api-snapshot.json`. They were retrieved on 2026-10-05 America/Los_Angeles from `https://api.github.com/repos/ChengshuLi/WorldAtlas/issues/{number}`. They reproduce task-scope comparison only and are not geographic sources. The reproduction checks their scoped states and counts (119, 198, and 115) against the other five states; with #264's 186 these sum to the full 618-location division scope. Treat these as dated snapshots and do not overwrite them when refreshing.

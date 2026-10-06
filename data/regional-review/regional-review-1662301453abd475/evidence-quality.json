@@ -647,26 +647,26 @@
   "outputs": [
     {
       "path": "data/regional-review/regional-review-1662301453abd475/build-evidence-quality.py",
-      "bytes": 16425,
-      "sha256": "f338fe773199f6c3c2ad6824799bf406f1fb0c2468699c89e5822237d3087395",
+      "bytes": 17221,
+      "sha256": "5b9dbf97d67e8c488013afed40ff40ba3567bebc837fc212f5220097e571fc08",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/regional-review-1662301453abd475/geometry-and-membership-results.json",
-      "bytes": 599666,
-      "sha256": "42228b70e581b4d6a949e934b33a3cc66a2331f3c685c1c56f54dabbf97c381b",
+      "bytes": 601168,
+      "sha256": "6aa450f637b419957d8207967365938ba3d51185afe7f69cc1ee918e82624182",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/regional-review-1662301453abd475/metric-inputs.json",
       "bytes": 6836,
-      "sha256": "532b33f6ffafb94c412fd7288bae6789b5a06d1a7e733ceb60c5deb4d509f010",
+      "sha256": "340441a03000741e1c7ba5b39c958d066489c76a2fa31fddb3caebc157539d7a",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/regional-review-1662301453abd475/reproduce.py",
-      "bytes": 14321,
-      "sha256": "754f3111ffc3044c0276f3483cedf80ebacc6fdb8c83625f899455eaeb48c407",
+      "bytes": 15746,
+      "sha256": "73cd449e24d554f7ea8ff2f476cffb5dcf940c0e6ddf4071507aa08e2f82dfde",
       "hash_kind": "file-bytes"
     },
     {
@@ -677,14 +677,14 @@
     },
     {
       "path": "data/regional-review/regional-review-1662301453abd475/research.md",
-      "bytes": 11876,
-      "sha256": "725b9a9b1ef1f3390eabda10ac991d8ed01264dbe85ca6061ac2a931c1e3a2fc",
+      "bytes": 12544,
+      "sha256": "94333758483925ae4c7f24d46eab6d77682355f29f67dcaec026532571dcc27d",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/regional-review-1662301453abd475/source/RESTORE.md",
-      "bytes": 4580,
-      "sha256": "3babd774277baf9a16330f046dbff2e2c659b933df212ffa13c44df0319eadfe",
+      "bytes": 5286,
+      "sha256": "c51abac719f5891854375e2997fbc50ef195a8bf6cbe24417a4eb1db49265379",
       "hash_kind": "file-bytes"
     },
     {
@@ -694,15 +694,33 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "data/regional-review/regional-review-1662301453abd475/source/issue-261-api-snapshot.json",
+      "bytes": 22009,
+      "sha256": "2d481807f58446313a1106f754a9db7921cd9ba13c311834e13c79dc5721eda1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-1662301453abd475/source/issue-263-api-snapshot.json",
+      "bytes": 21130,
+      "sha256": "4018474d840fae2c447c296c5cbab6ba27604becb51be16570360696577a207d",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "data/regional-review/regional-review-1662301453abd475/source/issue-264-api-snapshot.json",
       "bytes": 16410,
       "sha256": "142e764541e7fa50e425036810f90cd55da49db4236cd9beed100129bc207344",
       "hash_kind": "file-bytes"
     },
     {
+      "path": "data/regional-review/regional-review-1662301453abd475/source/issue-265-api-snapshot.json",
+      "bytes": 17580,
+      "sha256": "a8a7c426010320545edd704878bc9a3bc2f258ae57c7eca2faf144340c373177",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "data/regional-review/regional-review-1662301453abd475/source/provenance.json",
-      "bytes": 10542,
-      "sha256": "8c08a4637f429a8e84ba40e671a72106dd7ad941ce3f7a27f4b45559a3994c8a",
+      "bytes": 12489,
+      "sha256": "4475f2c40799dc308713b0864e0dd30e2e8ce37fffa3909ca6fa9eb4dddc8a02",
       "hash_kind": "file-bytes"
     },
     {
@@ -744,7 +762,7 @@
       "id": "scoped_count",
       "value": 186,
       "unit": "county locations",
-      "input_sha256": "532b33f6ffafb94c412fd7288bae6789b5a06d1a7e733ceb60c5deb4d509f010",
+      "input_sha256": "340441a03000741e1c7ba5b39c958d066489c76a2fa31fddb3caebc157539d7a",
       "evaluation_commit": "8e1162e3e364cebdec700ec796e2730379494922",
       "vintage": "baseline"
     },
@@ -752,7 +770,7 @@
       "id": "iowa_count",
       "value": 99,
       "unit": "county locations",
-      "input_sha256": "532b33f6ffafb94c412fd7288bae6789b5a06d1a7e733ceb60c5deb4d509f010",
+      "input_sha256": "340441a03000741e1c7ba5b39c958d066489c76a2fa31fddb3caebc157539d7a",
       "evaluation_commit": "8e1162e3e364cebdec700ec796e2730379494922",
       "vintage": "baseline"
     },
@@ -760,7 +778,7 @@
       "id": "minnesota_count",
       "value": 87,
       "unit": "county locations",
-      "input_sha256": "532b33f6ffafb94c412fd7288bae6789b5a06d1a7e733ceb60c5deb4d509f010",
+      "input_sha256": "340441a03000741e1c7ba5b39c958d066489c76a2fa31fddb3caebc157539d7a",
       "evaluation_commit": "8e1162e3e364cebdec700ec796e2730379494922",
       "vintage": "baseline"
     },
@@ -768,7 +786,7 @@
       "id": "justified_identity_tier_count",
       "value": 183,
       "unit": "county locations",
-      "input_sha256": "532b33f6ffafb94c412fd7288bae6789b5a06d1a7e733ceb60c5deb4d509f010",
+      "input_sha256": "340441a03000741e1c7ba5b39c958d066489c76a2fa31fddb3caebc157539d7a",
       "evaluation_commit": "8e1162e3e364cebdec700ec796e2730379494922",
       "vintage": "baseline"
     },
@@ -776,7 +794,7 @@
       "id": "insufficient_evidence_count",
       "value": 3,
       "unit": "county locations",
-      "input_sha256": "532b33f6ffafb94c412fd7288bae6789b5a06d1a7e733ceb60c5deb4d509f010",
+      "input_sha256": "340441a03000741e1c7ba5b39c958d066489c76a2fa31fddb3caebc157539d7a",
       "evaluation_commit": "8e1162e3e364cebdec700ec796e2730379494922",
       "vintage": "baseline"
     },
@@ -784,7 +802,7 @@
       "id": "atlas_vs_geoboundaries_jaccard_median",
       "value": 0.9992283000297176,
       "unit": "Jaccard (unitless)",
-      "input_sha256": "532b33f6ffafb94c412fd7288bae6789b5a06d1a7e733ceb60c5deb4d509f010",
+      "input_sha256": "340441a03000741e1c7ba5b39c958d066489c76a2fa31fddb3caebc157539d7a",
       "evaluation_commit": "8e1162e3e364cebdec700ec796e2730379494922",
       "vintage": "baseline"
     },
@@ -792,7 +810,7 @@
       "id": "atlas_vs_cartographic_jaccard_median",
       "value": 0.9973770938985244,
       "unit": "Jaccard (unitless)",
-      "input_sha256": "532b33f6ffafb94c412fd7288bae6789b5a06d1a7e733ceb60c5deb4d509f010",
+      "input_sha256": "340441a03000741e1c7ba5b39c958d066489c76a2fa31fddb3caebc157539d7a",
       "evaluation_commit": "8e1162e3e364cebdec700ec796e2730379494922",
       "vintage": "baseline"
     },
@@ -800,7 +818,7 @@
       "id": "cartographic_vs_tigerweb_jaccard_median",
       "value": 0.999494819491942,
       "unit": "Jaccard (unitless)",
-      "input_sha256": "532b33f6ffafb94c412fd7288bae6789b5a06d1a7e733ceb60c5deb4d509f010",
+      "input_sha256": "340441a03000741e1c7ba5b39c958d066489c76a2fa31fddb3caebc157539d7a",
       "evaluation_commit": "8e1162e3e364cebdec700ec796e2730379494922",
       "vintage": "baseline"
     },
@@ -808,7 +826,7 @@
       "id": "cook_cartographic_vs_tigerweb_jaccard",
       "value": 0.481157313481996,
       "unit": "Jaccard (unitless)",
-      "input_sha256": "532b33f6ffafb94c412fd7288bae6789b5a06d1a7e733ceb60c5deb4d509f010",
+      "input_sha256": "340441a03000741e1c7ba5b39c958d066489c76a2fa31fddb3caebc157539d7a",
       "evaluation_commit": "8e1162e3e364cebdec700ec796e2730379494922",
       "vintage": "baseline"
     },
@@ -816,7 +834,7 @@
       "id": "lake_cartographic_vs_tigerweb_jaccard",
       "value": 0.7643834459190499,
       "unit": "Jaccard (unitless)",
-      "input_sha256": "532b33f6ffafb94c412fd7288bae6789b5a06d1a7e733ceb60c5deb4d509f010",
+      "input_sha256": "340441a03000741e1c7ba5b39c958d066489c76a2fa31fddb3caebc157539d7a",
       "evaluation_commit": "8e1162e3e364cebdec700ec796e2730379494922",
       "vintage": "baseline"
     },
@@ -824,7 +842,7 @@
       "id": "positive_control_jaccard",
       "value": 1.0,
       "unit": "Jaccard (unitless)",
-      "input_sha256": "532b33f6ffafb94c412fd7288bae6789b5a06d1a7e733ceb60c5deb4d509f010",
+      "input_sha256": "340441a03000741e1c7ba5b39c958d066489c76a2fa31fddb3caebc157539d7a",
       "evaluation_commit": "8e1162e3e364cebdec700ec796e2730379494922",
       "vintage": "baseline"
     },
@@ -832,7 +850,7 @@
       "id": "negative_control_jaccard",
       "value": 0.0,
       "unit": "Jaccard (unitless)",
-      "input_sha256": "532b33f6ffafb94c412fd7288bae6789b5a06d1a7e733ceb60c5deb4d509f010",
+      "input_sha256": "340441a03000741e1c7ba5b39c958d066489c76a2fa31fddb3caebc157539d7a",
       "evaluation_commit": "8e1162e3e364cebdec700ec796e2730379494922",
       "vintage": "baseline"
     }
@@ -989,7 +1007,7 @@
   ],
   "conclusions": [
     {
-      "text": "183 counties have supported named Census county identity, state parent linkage and administrative-tier role in the scoped source lineage. This does not establish exhaustive coast/island extent or legal boundary authority.",
+      "text": "183 counties are classified justified for named Census county identity, state parent linkage and administrative-tier role in the scoped source lineage. The three insufficient-evidence county IDs are excluded from this conclusion. This does not establish exhaustive coast/island extent or legal boundary authority.",
       "status": "supported",
       "subject_ids": [
         "gb:USA:ADM2:52423323B10100313584475",
@@ -1014,7 +1032,6 @@
         "gb:USA:ADM2:52423323B20020016400421",
         "gb:USA:ADM2:52423323B20975718145591",
         "gb:USA:ADM2:52423323B21865505270884",
-        "gb:USA:ADM2:52423323B21927262007954",
         "gb:USA:ADM2:52423323B22497914926467",
         "gb:USA:ADM2:52423323B22827021429588",
         "gb:USA:ADM2:52423323B22987820366787",
@@ -1034,7 +1051,6 @@
         "gb:USA:ADM2:52423323B33016719022729",
         "gb:USA:ADM2:52423323B33552570255615",
         "gb:USA:ADM2:52423323B34480475653148",
-        "gb:USA:ADM2:52423323B35428884505626",
         "gb:USA:ADM2:52423323B35986324347111",
         "gb:USA:ADM2:52423323B36329758644763",
         "gb:USA:ADM2:52423323B36406005077231",
@@ -1113,7 +1129,6 @@
         "gb:USA:ADM2:52423323B69668368996820",
         "gb:USA:ADM2:52423323B70350332268545",
         "gb:USA:ADM2:52423323B70817605938932",
-        "gb:USA:ADM2:52423323B71326746759120",
         "gb:USA:ADM2:52423323B71367497505693",
         "gb:USA:ADM2:52423323B71444567785310",
         "gb:USA:ADM2:52423323B71710421504154",
@@ -1347,7 +1362,22 @@
       "previous_path": null
     },
     {
+      "path": "data/regional-review/regional-review-1662301453abd475/source/issue-261-api-snapshot.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-1662301453abd475/source/issue-263-api-snapshot.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
       "path": "data/regional-review/regional-review-1662301453abd475/source/issue-264-api-snapshot.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-1662301453abd475/source/issue-265-api-snapshot.json",
       "status": "added",
       "previous_path": null
     },

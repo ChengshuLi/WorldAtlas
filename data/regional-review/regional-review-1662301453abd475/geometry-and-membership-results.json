@@ -67,14 +67,46 @@
       "Nebraska",
       "North Dakota",
       "South Dakota"
-    ]
+    ],
+    "other_work_item_scopes": [
+      {
+        "issue": 261,
+        "title": "Review Interior North America interior batch 3: East North Central, West North Central",
+        "url": "https://github.com/ChengshuLi/WorldAtlas/issues/261",
+        "area_owned_location_count": 119,
+        "covered_states": [
+          "North Dakota",
+          "South Dakota"
+        ]
+      },
+      {
+        "issue": 263,
+        "title": "Review Interior North America interior batch 4: West North Central",
+        "url": "https://github.com/ChengshuLi/WorldAtlas/issues/263",
+        "area_owned_location_count": 198,
+        "covered_states": [
+          "Kansas",
+          "Nebraska"
+        ]
+      },
+      {
+        "issue": 265,
+        "title": "Review Interior North America interior batch 6: West North Central",
+        "url": "https://github.com/ChengshuLi/WorldAtlas/issues/265",
+        "area_owned_location_count": 115,
+        "covered_states": [
+          "Missouri"
+        ]
+      }
+    ],
+    "work_item_scope_counts_partition_full_area": true
   },
   "positive_control_self_overlap_jaccard": 1.0,
   "negative_control_IA_vs_MN_overlap_jaccard": 0.0,
   "sources": {
     "RESTORE.md": {
-      "sha256": "3babd774277baf9a16330f046dbff2e2c659b933df212ffa13c44df0319eadfe",
-      "bytes": 4580
+      "sha256": "c51abac719f5891854375e2997fbc50ef195a8bf6cbe24417a4eb1db49265379",
+      "bytes": 5286
     },
     "census-cartographic-counties-2018-500k.zip": {
       "sha256": "aaa866af327754e1b80aa87bfb97b04a7209f4f871075aef84affb8f0b3afe67",
@@ -144,9 +176,21 @@
       "sha256": "a4d2a82a1cd434960b6ed49531bff3330d0881674eea9dc8711e1ad6bf049b9f",
       "bytes": 939
     },
+    "issue-261-api-snapshot.json": {
+      "sha256": "2d481807f58446313a1106f754a9db7921cd9ba13c311834e13c79dc5721eda1",
+      "bytes": 22009
+    },
+    "issue-263-api-snapshot.json": {
+      "sha256": "4018474d840fae2c447c296c5cbab6ba27604becb51be16570360696577a207d",
+      "bytes": 21130
+    },
     "issue-264-api-snapshot.json": {
       "sha256": "142e764541e7fa50e425036810f90cd55da49db4236cd9beed100129bc207344",
       "bytes": 16410
+    },
+    "issue-265-api-snapshot.json": {
+      "sha256": "a8a7c426010320545edd704878bc9a3bc2f258ae57c7eca2faf144340c373177",
+      "bytes": 17580
     },
     "tigerweb-layer-counties-2018.json": {
       "sha256": "2d3b72f3957787cae0f8ae5a77bafd0b9603f8d6a5b4db2a700898e179e855c6",
