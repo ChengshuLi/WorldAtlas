@@ -15,18 +15,18 @@
   "declared_lfs_object_bytes": 149105849,
   "resolved_lfs_route": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/ESP/ADM3/geoBoundaries-ESP-ADM3.geojson",
   "resolved_lfs_response_etag": "ccce612ee6275d91e2d2fcccf7912087dcc72377abec6c8e20c65089ecb48564",
+  "role": "complete unsimplified same-vintage source retained for native-member crosswalk and detailed source geometry; not the byte source used by the original Atlas importer",
   "upstream_metadata_path": "releaseData/gbOpen/ESP/ADM3/geoBoundaries-ESP-ADM3-metaData.json",
   "upstream_metadata_lfs_pointer_git_blob_sha1": "4d7c1d46219b194635b80c307acb245345837445",
   "upstream_metadata_lfs_object_sha256": "035c029cb25c099c5426a1e13b34b1c99cdd962fad0b4fc5fd6b9abb7d14fb90",
   "upstream_metadata_lfs_object_bytes": 1013,
   "upstream_metadata_route": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/ESP/ADM3/geoBoundaries-ESP-ADM3-metaData.json",
   "atlas_baseline_registry_sha256": "e5bfa1c3889ea763ca2bb82c7f1e8ff9eff715dcb99ce405293a03de7ac85862",
-  "atlas_baseline_registry_pin_status": "unresolved mismatch: it does not equal this exact upstream commit's LFS pointer OID or the resolved source bytes",
+  "atlas_baseline_registry_sha256_role": "This hash is verified against the separate simplified LFS object consumed by scripts/administrative.py at baseline, not against these unsimplified bytes.",
   "retrieved_on": "2026-10-06",
   "verification_limits": [
     "The complete upstream LFS object matches its exact commit pointer and media response ETag.",
-    "The independent SHA-256 recorded in the Atlas source registry does not match; its original provenance and intended source bytes remain unresolved.",
-    "Do not relabel the registry hash as verified or silently replace it.",
+    "The Atlas source registry hash belongs to the separate simplified source file, which is recorded and verified independently.",
     "The source is country-level ADM3 geometry and does not by itself establish a mutually authoritative Spain–Portugal international boundary."
   ]
 }
