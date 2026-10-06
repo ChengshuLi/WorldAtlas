@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "status": "passed",
+  "execution_commit": "aa3575a9ea38ff568e17d90393729eb4b8984a3b",
+  "producer": {
+    "path": "test/compact-ownership.test.mjs",
+    "bytes": 15017,
+    "sha256": "46dd960151af4457f202fe422387cbe0c5229f87bdf4bca66099f6dc74f17795"
+  },
+  "command": "PLAYWRIGHT_BROWSERS_PATH=.cache/reference-repair-991/playwright-browsers NODE24 --test --test-name-pattern='packaged coverage supports' test/compact-ownership.test.mjs",
+  "result": {
+    "tests": 1,
+    "passed": 1,
+    "failed": 0,
+    "skipped": 0,
+    "complete_stdout": "✔ packaged coverage supports all modes, gap explanations and unavailable-reference policy (12164.925083ms)\nℹ tests 1\nℹ suites 0\nℹ pass 1\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 12527.718125\n",
+    "stdout_sha256": "6c24107378d6533a1288ca3db3068ef166fd8901b05c739a95be348bcd734117"
+  },
+  "asset_build_execution_commit": "bdb1f941c4542b9f4e7990edb7025fb89e1498f2",
+  "actual_built_atlas_sha256": "1cd6c21f97ccbe84f8e35052e3c319286e56d8e935f8547b16b2614e212730e5",
+  "asset_reuse": {
+    "verified_prior_report": "coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22/offline-browser-v13/result.json",
+    "verified_prior_report_sha256": "31d9881bb5e6b784dbc03a9650a489d49eb02a1602fa89484bef1caf53e0c432",
+    "all_reported_built_assets_match": true,
+    "source_application_data_build_inputs_unchanged": true,
+    "layout": "Directory rename only into dist/client; no asset bytes changed; no new hosted-build claim"
+  },
+  "checks": [
+    "Actual packaged ownership at retained Portugal-Spain gap probe is zero",
+    "Successful classification loads and uploads complete physical grid",
+    "All fourteen modes and three years remain exercised",
+    "Actual gap popup has explanation and two source links",
+    "Navigation preserves compilation, ownership-upload and classification-upload counts",
+    "Missing mandatory native classification stream shows explicit Atlas load failure and publishes no pixel canvas",
+    "Legacy optional classification fallback remains conditional on actual method",
+    "Page errors empty in both successful and rejected-load cases"
+  ],
+  "prior_ci_failure": {
+    "head": "5ae929d086632c76a5e8d4e2b1658043e179b909",
+    "run": 37468725219,
+    "job": 112286404882,
+    "url": "https://github.com/ChengshuLi/WorldAtlas/actions/runs/37468725219/job/112286404882",
+    "failure": "Old gap popup anchor now has actual repaired owner33554; obsolete optional-classification expectation also conflicted with existing native required-input policy.",
+    "other_shards": "Regression1 and2 passed at prior head; not asserted as current-head results"
+  },
+  "limits": [
+    "Focused actual browser test only; fresh exact-head CI and distinct review remain required.",
+    "Assets reused from verified prior build with unchanged implementation/data/build inputs; no production/provider/database writes, deployment or personal browser use."
+  ]
+}
