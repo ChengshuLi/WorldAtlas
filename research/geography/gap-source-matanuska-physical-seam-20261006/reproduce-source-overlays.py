@@ -93,16 +93,35 @@ resolve_path='sources/resolve-ecoregions-2017-ecoids-371-405.geojson'
 gb_raw=verify_source_bytes(gb_path,(PACKET/gb_path).read_bytes(),source_by_id['geoboundaries-us-adm2-2018'])
 resolve_raw=verify_source_bytes(resolve_path,(PACKET/resolve_path).read_bytes(),source_by_id['resolve-ecoregions-biomes-2017'])
 gb=json.loads(gb_raw)
+gb_full_original_path='data/regional-review/regional-review-93f8f3bee8e205be/sources/geoboundaries-USA-ADM2.geojson'
+gb_full_original=json.loads(blob(gb_full_original_path))
+full_original_selected={f['properties']['shapeID']:f for f in gb_full_original['features'] if f.get('properties',{}).get('shapeID') in {'52423323B34523976645917','52423323B25289890288494'}}
+if sha(blob(gb_full_original_path))!='81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43' or {f['properties']['shapeID']:f for f in gb['features']}!=full_original_selected: raise SystemExit('Full-resolution selected features do not match the complete pinned #486 source')
 resolve=json.loads(resolve_raw)
+gb_simplified_source=source_by_id['geoboundaries-us-adm2-2018-simplified']
+gb_simplified_full_path='sources/geoboundaries-usa-adm2-simplified-full.geojson'
+gb_simplified_selected_path='sources/geoboundaries-usa-adm2-simplified-selected.geojson'
+gb_simplified_meta_path='sources/geoboundaries-usa-adm2-2018-metadata.json'
+gb_simplified_full_raw=verify_source_bytes(gb_simplified_full_path,(PACKET/gb_simplified_full_path).read_bytes(),gb_simplified_source)
+gb_simplified_selected_raw=verify_source_bytes(gb_simplified_selected_path,(PACKET/gb_simplified_selected_path).read_bytes(),gb_simplified_source)
+gb_simplified_meta_raw=verify_source_bytes(gb_simplified_meta_path,(PACKET/gb_simplified_meta_path).read_bytes(),gb_simplified_source)
+gb_simplified_full=json.loads(gb_simplified_full_raw)
+gb_simplified=json.loads(gb_simplified_selected_raw)
+gb_simplified_meta=json.loads(gb_simplified_meta_raw)
+full_by_id={f['properties']['shapeID']:f for f in gb_simplified_full['features'] if f['properties'].get('shapeID') in {'52423323B34523976645917','52423323B25289890288494'}}
+if len(gb_simplified_full.get('features',[]))!=3233 or gb_simplified_meta.get('boundaryYear')!='2018' or gb_simplified_meta.get('boundaryLicense')!='Public Domain': raise SystemExit('Simplified source capture metadata or complete feature roster mismatch')
+if {f['properties']['shapeID']:f for f in gb_simplified['features']}!=full_by_id: raise SystemExit('Selected simplified features differ from exact full-source product features')
 admin={f['properties']['shapeID']:shape(f['geometry']) for f in gb['features']}
+admin_simplified={f['properties']['shapeID']:shape(f['geometry']) for f in gb_simplified['features']}
 eco={str(f['properties']['ECO_ID']):shape(f['geometry']) for f in resolve['features']}
-if set(admin)!={'52423323B34523976645917','52423323B25289890288494'} or set(eco)!={'371','405'}: raise SystemExit('Selected sources have unexpected IDs')
+if set(admin)!={'52423323B34523976645917','52423323B25289890288494'} or set(admin_simplified)!=set(admin) or set(eco)!={'371','405'}: raise SystemExit('Selected sources have unexpected IDs')
 
 out_features=[]; rows_out=[]
 for cid in sorted(component_ids):
     feature=by_id[cid]; geom=shape(feature['geometry'])
     intersections={}
     for key,g in admin.items(): intersections['admin:'+key]={'intersects':geom.intersects(g),'covers_component':g.covers(geom),'positive_area_intersection':geom.intersection(g).area>0}
+    for key,g in admin_simplified.items(): intersections['admin_simplified:'+key]={'intersects':geom.intersects(g),'covers_component':g.covers(geom),'positive_area_intersection':geom.intersection(g).area>0}
     for key,g in eco.items(): intersections['resolve:ECO_ID='+key]={'intersects':geom.intersects(g),'covers_component':g.covers(geom),'positive_area_intersection':geom.intersection(g).area>0}
     fragment_extents=[{'fragment':b['id'],'bounds_lon_lat':list(shape(fragments[b['id']]['geometry']).bounds)} for b in sorted(feature['properties']['fragment_bindings'],key=lambda x:x['id'])]
     rows_out.append({'component':cid,'coordinate_bounds_lon_lat':list(geom.bounds),'bound_fragment_extents_lon_lat':fragment_extents,'intersections':intersections,'classification':'unknown','supported_source_footprint_omission':False,'supported_source_disagreement':False,'independent_water_or_ice_support':False,'reason':'Available overlay polygons, recorded contacts, and incomplete Rock-and-Ice query do not establish a complete physical class or the cause of this component.'})
@@ -110,7 +129,12 @@ for cid in sorted(component_ids):
 summary={}
 for source in ['admin:52423323B34523976645917','admin:52423323B25289890288494','resolve:ECO_ID=371','resolve:ECO_ID=405']:
     summary[source]={'intersects':sum(r['intersections'][source]['intersects'] for r in rows_out),'covers_component':sum(r['intersections'][source]['covers_component'] for r in rows_out),'positive_area_intersection':sum(r['intersections'][source]['positive_area_intersection'] for r in rows_out)}
-summary.update({'roster_count':len(rows_out),'component_geometry_collection':write_json('selected-components.geojson',{'type':'FeatureCollection','features':out_features}), 'overlay_ledger':write_json('source-overlay-ledger.json',{'version':1,'baseline_commit':BASE,'detector_vintage':{'report_path':'coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/report.json','report_sha256':sha(blob('coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/report.json')),'version':detection_report.get('version'),'baseline_commit':detection_report.get('baseline_commit'),'executed_code_commit':detection_report.get('executed_code_commit'),'release_ids':detection_report.get('release_ids'),'canonical_grid_sha256':detection_report.get('canonical_grid_sha256')},'coordinate_order':'longitude-latitude; EPSG:4326/CRS84; extents are [west,south,east,north]','roster_predicate':{'partition_prefix':'interior','positive_length_neighbor_ids_sorted':TARGET},'source_crs':'EPSG:4326 longitude-latitude','method':'unprojected planar Shapely intersects/covers/area>0; diagnostic only; no tolerance, repair, or authority inference','summary':summary,'components':rows_out,'exact_contact_ledgers':contact_ledger,'candidate_fragments':{'type':'FeatureCollection','features':[fragments[k] for k in sorted(fragments)]}})})
+for source in ['admin_simplified:52423323B34523976645917','admin_simplified:52423323B25289890288494']:
+    summary[source]={'intersects':sum(r['intersections'][source]['intersects'] for r in rows_out),'covers_component':sum(r['intersections'][source]['covers_component'] for r in rows_out),'positive_area_intersection':sum(r['intersections'][source]['positive_area_intersection'] for r in rows_out)}
+for shape_id in sorted(admin):
+    full_key='admin:'+shape_id; simple_key='admin_simplified:'+shape_id
+    summary['admin_product_predicate_differences:'+shape_id]={field:sum(r['intersections'][full_key][field]!=r['intersections'][simple_key][field] for r in rows_out) for field in ['intersects','covers_component','positive_area_intersection']}
+summary.update({'roster_count':len(rows_out),'component_geometry_collection':write_json('selected-components.geojson',{'type':'FeatureCollection','features':out_features}), 'overlay_ledger':write_json('source-overlay-ledger.json',{'version':1,'baseline_commit':BASE,'detector_vintage':{'report_path':'coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/report.json','report_sha256':sha(blob('coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/report.json')),'version':detection_report.get('version'),'baseline_commit':detection_report.get('baseline_commit'),'executed_code_commit':detection_report.get('executed_code_commit'),'release_ids':detection_report.get('release_ids'),'canonical_grid_sha256':detection_report.get('canonical_grid_sha256')},'coordinate_order':'longitude-latitude; EPSG:4326/CRS84; extents are [west,south,east,north]','roster_predicate':{'partition_prefix':'interior','positive_length_neighbor_ids_sorted':TARGET},'source_crs':'EPSG:4326 longitude-latitude','source_products':{'geoboundaries_full_resolution':{'url':source_by_id['geoboundaries-us-adm2-2018']['url'],'baseline_source_path':gb_full_original_path,'baseline_source_sha256':sha(blob(gb_full_original_path)),'retained_selected_sha256':source_by_id['geoboundaries-us-adm2-2018']['retained_source_sha256']},'geoboundaries_simplified_administrative_input':{'url':gb_simplified_source['url'],'complete_dataset_sha256':gb_simplified_source['original_sha256'],'selected_features_sha256':gb_simplified_source['retained_source_sha256'],'metadata_sha256':gb_simplified_source['metadata_sha256'],'metadata':{'boundaryYear':gb_simplified_meta['boundaryYear'],'boundarySource':gb_simplified_meta['boundarySource'],'boundaryLicense':gb_simplified_meta['boundaryLicense'],'sourceDataUpdateDate':gb_simplified_meta['sourceDataUpdateDate'],'buildDate':gb_simplified_meta['buildDate']}}},'method':'Unprojected planar Shapely predicates computed independently against full-resolution and simplified ADM2 polygons, plus RESOLVE ECO_ID 371/405; no tolerance, repair, or authority inference.','summary':summary,'components':rows_out,'exact_contact_ledgers':contact_ledger,'candidate_fragments':{'type':'FeatureCollection','features':[fragments[k] for k in sorted(fragments)]}})})
 summary['exact_contact_rows']=sum(len(b['exact_location_contacts'] or []) for r in contact_ledger for b in r['fragment_contacts'])
 write_json('source-overlay-summary.json',summary)
 print(json.dumps(summary,sort_keys=True))

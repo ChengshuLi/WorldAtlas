@@ -30,16 +30,18 @@ if run_one_sha!=run_two_sha: raise SystemExit('Independent complete output runs 
 write('reproducibility.json',{'method_id':'source-overlay-analysis','kind':'reproducibility','outcome':'passed','run_one_sha256':run_one_sha,'run_two_sha256':run_two_sha,'per_file_sha256':one_hashes})
 
 source_path=PACKET/'sources/resolve-ecoregions-2017-ecoids-371-405.geojson'
-source_raw=source_path.read_bytes(); expected=sha(source_raw); changed=bytearray(source_raw);changed[0]^=1
 registry=json.loads((PACKET/'source-registry.json').read_bytes())
-resolve_source=next(source for source in registry['sources'] if source['id']=='resolve-ecoregions-biomes-2017')
-try:
-    verify_source_bytes('sources/resolve-ecoregions-2017-ecoids-371-405.geojson',bytes(changed),resolve_source)
-except ValueError as error:
-    rejected=str(error)
-else:
-    raise SystemExit('Changed-source negative was accepted by the producer source-pin guard')
-write('negative-changed-source-hash.json',{'method_id':'source-overlay-analysis','kind':'negative-control','outcome':'passed','control':'one source byte changed in memory and passed through the exact whole-file guard used by the producer','expected_bytes':len(source_raw),'observed_bytes':len(changed),'expected_sha256':expected,'changed_sha256':sha(bytes(changed)),'rejected':rejected})
+checks=[]
+for source_id,path in [('resolve-ecoregions-biomes-2017','sources/resolve-ecoregions-2017-ecoids-371-405.geojson'),('geoboundaries-us-adm2-2018-simplified','sources/geoboundaries-usa-adm2-simplified-full.geojson')]:
+    source=next(source for source in registry['sources'] if source['id']==source_id)
+    raw=(PACKET/path).read_bytes(); changed=bytearray(raw);changed[0]^=1
+    try:
+        verify_source_bytes(path,bytes(changed),source)
+    except ValueError as error:
+        checks.append({'source_id':source_id,'path':path,'expected_bytes':len(raw),'observed_bytes':len(changed),'expected_sha256':sha(raw),'changed_sha256':sha(bytes(changed)),'rejected':str(error)})
+    else:
+        raise SystemExit('Changed-source negative was accepted by the producer source-pin guard: '+source_id)
+write('negative-changed-source-hash.json',{'method_id':'source-overlay-analysis','kind':'negative-control','outcome':'passed','control':'One byte was changed in each representative source file and both mutations passed through the exact whole-file guard used by the producer.','source_checks':checks})
 
 ledger=json.loads((one/'source-overlay-ledger.json').read_bytes())
 component_ids=sorted(row['component'] for row in ledger['components'])

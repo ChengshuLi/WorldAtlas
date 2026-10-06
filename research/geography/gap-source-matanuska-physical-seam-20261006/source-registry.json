@@ -5,7 +5,7 @@
     {
       "id": "geoboundaries-us-adm2-2018",
       "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.geojson",
-      "role": "historical ADM2 boundary comparison; not ownership adjudication",
+      "role": "Separate full-resolution historical ADM2 comparison; not the input selected by scripts/administrative.py and not an ownership adjudication.",
       "vintage": "2018 boundaryYearRepresented; archived source at immutable release commit 9469f09592ced973a3448cf66b6100b741b64c0d",
       "retrieved_at": "2026-10-06T20:01:27.061Z",
       "license": {
@@ -16,15 +16,23 @@
       "original_sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43",
       "retained_source_features": "sources/geoboundaries-usa-adm2-selected.geojson",
       "crs": "OGC CRS84; longitude-latitude",
-      "temporal_status": "historical",
+      "temporal_status": "reference",
       "limitation": "Source boundary vintage; not a contemporary jurisdictional assertion.",
       "retained_source_bytes": 7360,
       "retained_source_sha256": "9a3bd8495e29927c9496e162c1a2eacc7d2195765105d283a70ad713cfc56bdb",
       "coordinate_precision_and_registration": {
         "published_xy_resolution_or_tolerance": "not reported in retained source metadata",
         "published_positional_accuracy_or_registration": "not reported in retained source metadata",
-        "coordinate_representation": "retained source coordinate values are preserved byte-for-byte in the pinned captures; no rounding, reprojection, or registration adjustment was applied"
-      }
+        "coordinate_representation": "exact captured coordinates; no rounding, reprojection, or registration adjustment"
+      },
+      "product": "full-resolution geoBoundaries release geometry",
+      "retained_source_files": [
+        {
+          "path": "sources/geoboundaries-usa-adm2-selected.geojson",
+          "bytes": 7360,
+          "sha256": "9a3bd8495e29927c9496e162c1a2eacc7d2195765105d283a70ad713cfc56bdb"
+        }
+      ]
     },
     {
       "id": "resolve-ecoregions-biomes-2017",
@@ -53,6 +61,65 @@
         "published_positional_accuracy_or_registration": "not reported in retained source metadata",
         "coordinate_representation": "retained source coordinate values are preserved byte-for-byte in the pinned captures; no rounding, reprojection, or registration adjustment was applied"
       }
+    },
+    {
+      "id": "geoboundaries-us-adm2-2018-simplified",
+      "product": "simplified geoBoundaries release geometry",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2_simplified.geojson",
+      "role": "Exact simplified feature product selected by the baseline administrative source loader after its documented URL transformation; source-coordinate comparison only, no owner assignment.",
+      "vintage": "boundaryYear 2018; sourceDataUpdateDate Thu Jan 19 07:31:04 2023; buildDate Dec 12, 2023; release commit 9469f09592ced973a3448cf66b6100b741b64c0d",
+      "retrieved_at": "2026-10-06T20:46:44Z",
+      "license": {
+        "status": "redistributable",
+        "terms": "Public Domain per exact release metadata; underlying United States Census Bureau MAF/TIGER Database"
+      },
+      "original_bytes": 7938450,
+      "original_sha256": "16249e8d795aaded6a72910a8c72115a073814b25ee902d61ccc9a9490c6641a",
+      "metadata_path": "sources/geoboundaries-usa-adm2-2018-metadata.json",
+      "metadata_bytes": 939,
+      "metadata_sha256": "a4d2a82a1cd434960b6ed49531bff3330d0881674eea9dc8711e1ad6bf049b9f",
+      "complete_dataset_path": "sources/geoboundaries-usa-adm2-simplified-full.geojson",
+      "retained_source_features": "sources/geoboundaries-usa-adm2-simplified-selected.geojson",
+      "retained_source_bytes": 6823,
+      "retained_source_sha256": "51ea8756733fc55a964527333860d6008c2c3d2930a1cacf6dd3d7d7227c6ecc",
+      "retained_source_files": [
+        {
+          "path": "sources/geoboundaries-usa-adm2-simplified-full.geojson",
+          "bytes": 7938450,
+          "sha256": "16249e8d795aaded6a72910a8c72115a073814b25ee902d61ccc9a9490c6641a"
+        },
+        {
+          "path": "sources/geoboundaries-usa-adm2-2018-metadata.json",
+          "bytes": 939,
+          "sha256": "a4d2a82a1cd434960b6ed49531bff3330d0881674eea9dc8711e1ad6bf049b9f"
+        },
+        {
+          "path": "sources/geoboundaries-usa-adm2-simplified-selected.geojson",
+          "bytes": 6823,
+          "sha256": "51ea8756733fc55a964527333860d6008c2c3d2930a1cacf6dd3d7d7227c6ecc"
+        }
+      ],
+      "administrative_input_basis": {
+        "script_path": "scripts/administrative.py",
+        "script_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+        "script_sha256": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22",
+        "source_url_transform": "gjDownloadURL with .geojson replaced by _simplified.geojson",
+        "script_lines": "The baseline script sets simplifiedGeometryGeoJSON from source_url by replacing the suffix, then downloads that value."
+      },
+      "selected_feature_ids": [
+        "52423323B25289890288494",
+        "52423323B34523976645917"
+      ],
+      "selected_properties_match_full_resolution": true,
+      "selected_geometries_match_full_resolution": false,
+      "crs": "OGC CRS84; longitude-latitude",
+      "coordinate_precision_and_registration": {
+        "published_xy_resolution_or_tolerance": "not reported in retained source metadata",
+        "published_positional_accuracy_or_registration": "not reported in retained source metadata",
+        "coordinate_representation": "full source bytes and selected feature values are preserved; no rounding, reprojection, snapping, or registration adjustment"
+      },
+      "temporal_status": "reference",
+      "limitation": "The original and simplified products share the selected IDs and attributes but selected geometries are not byte- or coordinate-identical. Analysis reports separate predicates and does not claim simplification equivalence, registration accuracy, or Atlas feature lineage."
     }
   ],
   "excluded_sources": [

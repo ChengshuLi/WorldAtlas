@@ -672,6 +672,13 @@
         "role": "original-source"
       },
       {
+        "path": "scripts/administrative.py",
+        "bytes": 12313,
+        "sha256": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
         "path": "scripts/evidence/immutable.py",
         "bytes": 7090,
         "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd",
@@ -720,13 +727,13 @@
   "sources": [
     {
       "id": "geoboundaries-us-adm2-2018",
-      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.geojson",
-      "role": "Historical ADM2 extent comparison only; no owner assignment",
-      "vintage": "2018 boundaryYearRepresented; immutable release commit 9469f09592ced973a3448cf66b6100b741b64c0d",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2.geojson",
+      "role": "Separate full-resolution historical ADM2 comparison only; not the input selected by scripts/administrative.py and no owner assignment",
+      "vintage": "boundaryYear 2018; exact full-resolution product at immutable commit 9469f09592ced973a3448cf66b6100b741b64c0d",
       "retrieved_at": "2026-10-06T20:01:27.061Z",
       "license": {
         "status": "redistributable",
-        "terms": "Public Domain as recorded in the pinned archived source packet; underlying source US Census/TIGER"
+        "terms": "Public Domain per pinned exact-release metadata; underlying US Census Bureau MAF/TIGER Database"
       },
       "retention": "retained",
       "verification": "verified",
@@ -748,7 +755,63 @@
       ],
       "crs": "OGC CRS84; longitude-latitude",
       "temporal_status": "reference",
-      "limit": "Only the complete Matanuska-Susitna and Denali source features are retained in the candidate capture; the pinned ancestor source contains the full archived USA ADM2 file."
+      "coordinate_precision_and_registration": {
+        "xy_resolution_or_tolerance": "not reported by retained metadata",
+        "positional_accuracy_or_registration": "not reported by retained metadata",
+        "operation": "No rounding, reprojection, snapping, or registration adjustment applied"
+      },
+      "limit": "Only Matanuska-Susitna and Denali features are retained here; the complete exact full-resolution USA ADM2 file is pinned in the issue-baseline input inventory. Their geometries are not interchangeable with the separately retained simplified product."
+    },
+    {
+      "id": "geoboundaries-us-adm2-2018-simplified",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2_simplified.geojson",
+      "role": "Simplified geoBoundaries feature product selected by exact issue-baseline scripts/administrative.py URL transformation; source-coordinate comparison only, no owner assignment",
+      "vintage": "boundaryYear 2018; sourceDataUpdateDate Thu Jan 19 07:31:04 2023; buildDate Dec 12, 2023; immutable release commit 9469f09592ced973a3448cf66b6100b741b64c0d",
+      "retrieved_at": "2026-10-06T20:46:44Z",
+      "license": {
+        "status": "redistributable",
+        "terms": "Public Domain per exact release metadata; underlying US Census Bureau MAF/TIGER Database"
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "files": [
+        {
+          "path": "research/geography/gap-source-matanuska-physical-seam-20261006/sources/geoboundaries-usa-adm2-simplified-full.geojson",
+          "bytes": 7938450,
+          "sha256": "16249e8d795aaded6a72910a8c72115a073814b25ee902d61ccc9a9490c6641a",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/gap-source-matanuska-physical-seam-20261006/sources/geoboundaries-usa-adm2-2018-metadata.json",
+          "bytes": 939,
+          "sha256": "a4d2a82a1cd434960b6ed49531bff3330d0881674eea9dc8711e1ad6bf049b9f",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/gap-source-matanuska-physical-seam-20261006/sources/geoboundaries-usa-adm2-simplified-selected.geojson",
+          "bytes": 6823,
+          "sha256": "51ea8756733fc55a964527333860d6008c2c3d2930a1cacf6dd3d7d7227c6ecc",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "research/geography/gap-source-matanuska-physical-seam-20261006/sources/geoboundaries-simplified-capture-receipt.json",
+          "bytes": 2545,
+          "sha256": "a61d57eeb0685a17a4c1a1828c45610128725a3072341c28ac8421d476299ad5",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        }
+      ],
+      "crs": "OGC CRS84; longitude-latitude",
+      "temporal_status": "reference",
+      "coordinate_precision_and_registration": {
+        "xy_resolution_or_tolerance": "not reported by exact-release metadata",
+        "positional_accuracy_or_registration": "not reported by exact-release metadata",
+        "operation": "No rounding, reprojection, snapping, or registration adjustment applied"
+      },
+      "limit": "The 3,233-feature simplified file and metadata are retained whole; selected features share IDs/attributes but differ geometrically from full-resolution features. This does not establish that Atlas output parts were generated from this exact capture or establish registration accuracy."
     },
     {
       "id": "resolve-ecoregions-biomes-2017",
@@ -855,33 +918,33 @@
   "outputs": [
     {
       "path": "research/geography/gap-source-matanuska-physical-seam-20261006/README.md",
-      "bytes": 8187,
-      "sha256": "eaeeb66c36c8e6a38f1029ef74c1bb2bb3d5160d5e3acb40b011b4c8595840e5",
+      "bytes": 10248,
+      "sha256": "5042f51f9f58516863bc8b261a74dd1be028dc87b37b5048108051df6271f044",
       "hash_kind": "file-bytes",
       "role": "generated-table"
     },
     {
       "path": "research/geography/gap-source-matanuska-physical-seam-20261006/build-evidence-manifest.py",
-      "bytes": 16705,
-      "sha256": "b3caba1e5d8fe53802daaeee21060abec732fc48994e55482123133f15106188",
+      "bytes": 21555,
+      "sha256": "344e5c9d0bdc340825662bbd2ae87803a8b1a7c9b89dcb44848fe0314319a015",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/gap-source-matanuska-physical-seam-20261006/engineering-handoff.md",
-      "bytes": 5040,
-      "sha256": "61fd4e64b9c8be87e99d6efc1422c8afa16012af0124fdf4b491e5d07f01a60d",
+      "bytes": 5771,
+      "sha256": "5c1cdde5b65175b64b60aa4ab56fe35b32a89007a16f00ae4a7f4c6b6db5f40b",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/gap-source-matanuska-physical-seam-20261006/reproduce-source-overlays.py",
-      "bytes": 10324,
-      "sha256": "63fefa9d72250446c285d6379cc609213f8f2a91c1083dace1f988aa85949782",
+      "bytes": 14521,
+      "sha256": "bfd3b6519d255128144b041143310eb25c5d857c248618d7ad6f1af98f344198",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/controls/negative-changed-source-hash.json",
-      "bytes": 520,
-      "sha256": "fede509dbfe51b9e2199ac4cec2888b93127a6b8e75a78bfa8b52f5a0c21bbe8",
+      "bytes": 1129,
+      "sha256": "5d53fec8b0b51c54fb84fdca956ec90ab8932b55652a32a96e4f82d16b2ed37e",
       "hash_kind": "file-bytes"
     },
     {
@@ -911,7 +974,7 @@
     {
       "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/controls/reproducibility.json",
       "bytes": 562,
-      "sha256": "ace9bfd06071c41096ebb86a4cfb2b1d7ae0148fc24a50054d4e6c666504a9d2",
+      "sha256": "45981bc4776b58b88849c41c1a69dadf6a4ee0368f393d83d3a7614c3ddcad5a",
       "hash_kind": "file-bytes"
     },
     {
@@ -922,14 +985,14 @@
     },
     {
       "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/run-one/source-overlay-ledger.json",
-      "bytes": 1086607,
-      "sha256": "794f767711590503165c4bde89256dff6cb8f5117844cf775d5e28d01e647f1d",
+      "bytes": 1157441,
+      "sha256": "d653653d1aa4517c4542d532b8a659d9dfd11ce1da049e48684bd73482c7f61c",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/run-one/source-overlay-summary.json",
-      "bytes": 908,
-      "sha256": "5e2e12f3cfa9533a15e25b003e0700b9871db60ed58203fd3396aaf58da4ebcf",
+      "bytes": 1400,
+      "sha256": "e940b3ef4844115bd53c885a7fc6a1cfb9ceee1fce745a00c1fc9be6cbf2fd13",
       "hash_kind": "file-bytes"
     },
     {
@@ -940,32 +1003,32 @@
     },
     {
       "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/run-two/source-overlay-ledger.json",
-      "bytes": 1086607,
-      "sha256": "794f767711590503165c4bde89256dff6cb8f5117844cf775d5e28d01e647f1d",
+      "bytes": 1157441,
+      "sha256": "d653653d1aa4517c4542d532b8a659d9dfd11ce1da049e48684bd73482c7f61c",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/run-two/source-overlay-summary.json",
-      "bytes": 908,
-      "sha256": "5e2e12f3cfa9533a15e25b003e0700b9871db60ed58203fd3396aaf58da4ebcf",
+      "bytes": 1400,
+      "sha256": "e940b3ef4844115bd53c885a7fc6a1cfb9ceee1fce745a00c1fc9be6cbf2fd13",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/gap-source-matanuska-physical-seam-20261006/source-negative-controls.py",
-      "bytes": 5941,
-      "sha256": "0a8a08beb0079589715e6939b66f599255c1484c3dabf89b71841fc5caacceae",
+      "bytes": 6169,
+      "sha256": "f8d0d688acebdc2a652718e875bb70818f436a65a8d74bc8c8b8f0ddada6b51e",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/gap-source-matanuska-physical-seam-20261006/source-registry.json",
-      "bytes": 3919,
-      "sha256": "c163dee8950bfbf3edf12b3cbdefaa3162acde9b93fb376f5e30b813a358fa91",
+      "bytes": 7965,
+      "sha256": "1c1099bf448f431a028c108ef6bf9c79f17e09f686e5db5752af474a6b4edb3a",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/gap-source-matanuska-physical-seam-20261006/source_input_integrity.py",
-      "bytes": 736,
-      "sha256": "4a11b8d7fcbba387a39c3cbb37712652b15fac38fc2e8364270746c65fce5a01",
+      "bytes": 1004,
+      "sha256": "697b2c094bf3fd69ded734f712b9846fc1830284ed7e67b8267801601422067d",
       "hash_kind": "file-bytes"
     },
     {
@@ -991,7 +1054,7 @@
     {
       "id": "source-overlay-analysis",
       "kind": "source",
-      "description": "Verify the exact archived component roster, custody payloads and exact contact ledgers, then compare source polygon intersects/covers predicates. Unprojected coordinate-plane topological observations only; no area, distance, repair, ownership or causal inference. Per-component physical class remains unknown.",
+      "description": "Verify the exact archived component roster, custody payloads and exact contact ledgers, then compare per-component predicates independently against retained full-resolution and simplified geoBoundaries USA ADM2 products and complete RESOLVE ECO_ID 371/405 polygons. Unprojected coordinate-plane topological observations only; no area, distance, repair, ownership or causal inference. Per-component physical class remains unknown.",
       "software": "Python 3.12.14; Shapely 2.1.2; GEOS 3.13.1; shared physical_component_contacts helper at baseline",
       "units": "component and source-contact counts; boolean topology predicates",
       "crs": "EPSG:4326 / CRS84; longitude-latitude axis order"
@@ -1004,7 +1067,7 @@
       "unit": "components",
       "vintage": "archived",
       "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
-      "input_sha256": "794f767711590503165c4bde89256dff6cb8f5117844cf775d5e28d01e647f1d"
+      "input_sha256": "d653653d1aa4517c4542d532b8a659d9dfd11ce1da049e48684bd73482c7f61c"
     },
     {
       "id": "selected-fragments",
@@ -1012,7 +1075,7 @@
       "unit": "fragments",
       "vintage": "archived",
       "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
-      "input_sha256": "794f767711590503165c4bde89256dff6cb8f5117844cf775d5e28d01e647f1d"
+      "input_sha256": "d653653d1aa4517c4542d532b8a659d9dfd11ce1da049e48684bd73482c7f61c"
     },
     {
       "id": "exact-contact-rows",
@@ -1020,7 +1083,7 @@
       "unit": "source-contact rows",
       "vintage": "archived",
       "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
-      "input_sha256": "794f767711590503165c4bde89256dff6cb8f5117844cf775d5e28d01e647f1d"
+      "input_sha256": "d653653d1aa4517c4542d532b8a659d9dfd11ce1da049e48684bd73482c7f61c"
     },
     {
       "id": "matanuska-intersections",
@@ -1028,7 +1091,7 @@
       "unit": "components",
       "vintage": "archived",
       "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
-      "input_sha256": "794f767711590503165c4bde89256dff6cb8f5117844cf775d5e28d01e647f1d"
+      "input_sha256": "d653653d1aa4517c4542d532b8a659d9dfd11ce1da049e48684bd73482c7f61c"
     },
     {
       "id": "matanuska-covers",
@@ -1036,7 +1099,7 @@
       "unit": "components",
       "vintage": "archived",
       "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
-      "input_sha256": "794f767711590503165c4bde89256dff6cb8f5117844cf775d5e28d01e647f1d"
+      "input_sha256": "d653653d1aa4517c4542d532b8a659d9dfd11ce1da049e48684bd73482c7f61c"
     },
     {
       "id": "denali-intersections",
@@ -1044,7 +1107,7 @@
       "unit": "components",
       "vintage": "archived",
       "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
-      "input_sha256": "794f767711590503165c4bde89256dff6cb8f5117844cf775d5e28d01e647f1d"
+      "input_sha256": "d653653d1aa4517c4542d532b8a659d9dfd11ce1da049e48684bd73482c7f61c"
     },
     {
       "id": "denali-covers",
@@ -1052,7 +1115,7 @@
       "unit": "components",
       "vintage": "archived",
       "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
-      "input_sha256": "794f767711590503165c4bde89256dff6cb8f5117844cf775d5e28d01e647f1d"
+      "input_sha256": "d653653d1aa4517c4542d532b8a659d9dfd11ce1da049e48684bd73482c7f61c"
     },
     {
       "id": "cook-inlet-taiga-intersections",
@@ -1060,7 +1123,7 @@
       "unit": "components",
       "vintage": "archived",
       "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
-      "input_sha256": "794f767711590503165c4bde89256dff6cb8f5117844cf775d5e28d01e647f1d"
+      "input_sha256": "d653653d1aa4517c4542d532b8a659d9dfd11ce1da049e48684bd73482c7f61c"
     },
     {
       "id": "cook-inlet-taiga-covers",
@@ -1068,7 +1131,7 @@
       "unit": "components",
       "vintage": "archived",
       "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
-      "input_sha256": "794f767711590503165c4bde89256dff6cb8f5117844cf775d5e28d01e647f1d"
+      "input_sha256": "d653653d1aa4517c4542d532b8a659d9dfd11ce1da049e48684bd73482c7f61c"
     },
     {
       "id": "st-elias-tundra-intersections",
@@ -1076,7 +1139,7 @@
       "unit": "components",
       "vintage": "archived",
       "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
-      "input_sha256": "794f767711590503165c4bde89256dff6cb8f5117844cf775d5e28d01e647f1d"
+      "input_sha256": "d653653d1aa4517c4542d532b8a659d9dfd11ce1da049e48684bd73482c7f61c"
     },
     {
       "id": "st-elias-tundra-covers",
@@ -1084,7 +1147,87 @@
       "unit": "components",
       "vintage": "archived",
       "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
-      "input_sha256": "794f767711590503165c4bde89256dff6cb8f5117844cf775d5e28d01e647f1d"
+      "input_sha256": "d653653d1aa4517c4542d532b8a659d9dfd11ce1da049e48684bd73482c7f61c"
+    },
+    {
+      "id": "matanuska-simplified-intersections",
+      "value": 281,
+      "unit": "components",
+      "vintage": "archived",
+      "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+      "input_sha256": "d653653d1aa4517c4542d532b8a659d9dfd11ce1da049e48684bd73482c7f61c"
+    },
+    {
+      "id": "matanuska-simplified-covers",
+      "value": 279,
+      "unit": "components",
+      "vintage": "archived",
+      "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+      "input_sha256": "d653653d1aa4517c4542d532b8a659d9dfd11ce1da049e48684bd73482c7f61c"
+    },
+    {
+      "id": "denali-simplified-intersections",
+      "value": 3,
+      "unit": "components",
+      "vintage": "archived",
+      "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+      "input_sha256": "d653653d1aa4517c4542d532b8a659d9dfd11ce1da049e48684bd73482c7f61c"
+    },
+    {
+      "id": "denali-simplified-covers",
+      "value": 1,
+      "unit": "components",
+      "vintage": "archived",
+      "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+      "input_sha256": "d653653d1aa4517c4542d532b8a659d9dfd11ce1da049e48684bd73482c7f61c"
+    },
+    {
+      "id": "matanuska-full-vs-simplified-intersect-changed-components",
+      "value": 0,
+      "unit": "components",
+      "vintage": "archived",
+      "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+      "input_sha256": "d653653d1aa4517c4542d532b8a659d9dfd11ce1da049e48684bd73482c7f61c"
+    },
+    {
+      "id": "matanuska-full-vs-simplified-covers-changed-components",
+      "value": 0,
+      "unit": "components",
+      "vintage": "archived",
+      "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+      "input_sha256": "d653653d1aa4517c4542d532b8a659d9dfd11ce1da049e48684bd73482c7f61c"
+    },
+    {
+      "id": "matanuska-full-vs-simplified-positive-area-changed-components",
+      "value": 0,
+      "unit": "components",
+      "vintage": "archived",
+      "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+      "input_sha256": "d653653d1aa4517c4542d532b8a659d9dfd11ce1da049e48684bd73482c7f61c"
+    },
+    {
+      "id": "denali-full-vs-simplified-intersect-changed-components",
+      "value": 0,
+      "unit": "components",
+      "vintage": "archived",
+      "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+      "input_sha256": "d653653d1aa4517c4542d532b8a659d9dfd11ce1da049e48684bd73482c7f61c"
+    },
+    {
+      "id": "denali-full-vs-simplified-covers-changed-components",
+      "value": 0,
+      "unit": "components",
+      "vintage": "archived",
+      "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+      "input_sha256": "d653653d1aa4517c4542d532b8a659d9dfd11ce1da049e48684bd73482c7f61c"
+    },
+    {
+      "id": "denali-full-vs-simplified-positive-area-changed-components",
+      "value": 0,
+      "unit": "components",
+      "vintage": "archived",
+      "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+      "input_sha256": "d653653d1aa4517c4542d532b8a659d9dfd11ce1da049e48684bd73482c7f61c"
     }
   ],
   "metric_bindings": [
@@ -1142,6 +1285,56 @@
       "metric_id": "st-elias-tundra-covers",
       "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/run-one/source-overlay-summary.json",
       "json_pointer": "/resolve:ECO_ID=405/covers_component"
+    },
+    {
+      "metric_id": "matanuska-simplified-intersections",
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/run-one/source-overlay-summary.json",
+      "json_pointer": "/admin_simplified:52423323B34523976645917/intersects"
+    },
+    {
+      "metric_id": "matanuska-simplified-covers",
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/run-one/source-overlay-summary.json",
+      "json_pointer": "/admin_simplified:52423323B34523976645917/covers_component"
+    },
+    {
+      "metric_id": "denali-simplified-intersections",
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/run-one/source-overlay-summary.json",
+      "json_pointer": "/admin_simplified:52423323B25289890288494/intersects"
+    },
+    {
+      "metric_id": "denali-simplified-covers",
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/run-one/source-overlay-summary.json",
+      "json_pointer": "/admin_simplified:52423323B25289890288494/covers_component"
+    },
+    {
+      "metric_id": "matanuska-full-vs-simplified-intersect-changed-components",
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/run-one/source-overlay-summary.json",
+      "json_pointer": "/admin_product_predicate_differences:52423323B34523976645917/intersects"
+    },
+    {
+      "metric_id": "matanuska-full-vs-simplified-covers-changed-components",
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/run-one/source-overlay-summary.json",
+      "json_pointer": "/admin_product_predicate_differences:52423323B34523976645917/covers_component"
+    },
+    {
+      "metric_id": "matanuska-full-vs-simplified-positive-area-changed-components",
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/run-one/source-overlay-summary.json",
+      "json_pointer": "/admin_product_predicate_differences:52423323B34523976645917/positive_area_intersection"
+    },
+    {
+      "metric_id": "denali-full-vs-simplified-intersect-changed-components",
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/run-one/source-overlay-summary.json",
+      "json_pointer": "/admin_product_predicate_differences:52423323B25289890288494/intersects"
+    },
+    {
+      "metric_id": "denali-full-vs-simplified-covers-changed-components",
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/run-one/source-overlay-summary.json",
+      "json_pointer": "/admin_product_predicate_differences:52423323B25289890288494/covers_component"
+    },
+    {
+      "metric_id": "denali-full-vs-simplified-positive-area-changed-components",
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/run-one/source-overlay-summary.json",
+      "json_pointer": "/admin_product_predicate_differences:52423323B25289890288494/positive_area_intersection"
     }
   ],
   "summaries": [
@@ -1199,6 +1392,56 @@
       "metric_id": "st-elias-tundra-covers",
       "value": 40,
       "unit": "components"
+    },
+    {
+      "metric_id": "matanuska-simplified-intersections",
+      "value": 281,
+      "unit": "components"
+    },
+    {
+      "metric_id": "matanuska-simplified-covers",
+      "value": 279,
+      "unit": "components"
+    },
+    {
+      "metric_id": "denali-simplified-intersections",
+      "value": 3,
+      "unit": "components"
+    },
+    {
+      "metric_id": "denali-simplified-covers",
+      "value": 1,
+      "unit": "components"
+    },
+    {
+      "metric_id": "matanuska-full-vs-simplified-intersect-changed-components",
+      "value": 0,
+      "unit": "components"
+    },
+    {
+      "metric_id": "matanuska-full-vs-simplified-covers-changed-components",
+      "value": 0,
+      "unit": "components"
+    },
+    {
+      "metric_id": "matanuska-full-vs-simplified-positive-area-changed-components",
+      "value": 0,
+      "unit": "components"
+    },
+    {
+      "metric_id": "denali-full-vs-simplified-intersect-changed-components",
+      "value": 0,
+      "unit": "components"
+    },
+    {
+      "metric_id": "denali-full-vs-simplified-covers-changed-components",
+      "value": 0,
+      "unit": "components"
+    },
+    {
+      "metric_id": "denali-full-vs-simplified-positive-area-changed-components",
+      "value": 0,
+      "unit": "components"
     }
   ],
   "rendered_tables": [
@@ -1207,50 +1450,110 @@
       "rows": [
         {
           "metric_id": "matanuska-intersections",
-          "line": 25,
-          "template": "| Matanuska–Susitna ADM2 | intersects | {value} |",
+          "line": 26,
+          "template": "| Matanuska–Susitna full-resolution ADM2 | intersects | {value} |",
           "decimals": 0
         },
         {
           "metric_id": "matanuska-covers",
-          "line": 26,
-          "template": "| Matanuska–Susitna ADM2 | covers component | {value} |",
+          "line": 27,
+          "template": "| Matanuska–Susitna full-resolution ADM2 | covers component | {value} |",
           "decimals": 0
         },
         {
           "metric_id": "denali-intersections",
-          "line": 27,
-          "template": "| Denali ADM2 | intersects | {value} |",
+          "line": 28,
+          "template": "| Denali full-resolution ADM2 | intersects | {value} |",
           "decimals": 0
         },
         {
           "metric_id": "denali-covers",
-          "line": 28,
-          "template": "| Denali ADM2 | covers component | {value} |",
+          "line": 29,
+          "template": "| Denali full-resolution ADM2 | covers component | {value} |",
           "decimals": 0
         },
         {
           "metric_id": "cook-inlet-taiga-intersections",
-          "line": 29,
+          "line": 40,
           "template": "| RESOLVE ECO_ID 371, Cook Inlet taiga | intersects | {value} |",
           "decimals": 0
         },
         {
           "metric_id": "cook-inlet-taiga-covers",
-          "line": 30,
+          "line": 41,
           "template": "| RESOLVE ECO_ID 371, Cook Inlet taiga | covers component | {value} |",
           "decimals": 0
         },
         {
           "metric_id": "st-elias-tundra-intersections",
-          "line": 31,
+          "line": 42,
           "template": "| RESOLVE ECO_ID 405, Alaska–St. Elias Range tundra | intersects | {value} |",
           "decimals": 0
         },
         {
           "metric_id": "st-elias-tundra-covers",
-          "line": 32,
+          "line": 43,
           "template": "| RESOLVE ECO_ID 405, Alaska–St. Elias Range tundra | covers component | {value} |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "matanuska-simplified-intersections",
+          "line": 30,
+          "template": "| Matanuska–Susitna simplified ADM2 input | intersects | {value} |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "matanuska-simplified-covers",
+          "line": 31,
+          "template": "| Matanuska–Susitna simplified ADM2 input | covers component | {value} |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "denali-simplified-intersections",
+          "line": 32,
+          "template": "| Denali simplified ADM2 input | intersects | {value} |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "denali-simplified-covers",
+          "line": 33,
+          "template": "| Denali simplified ADM2 input | covers component | {value} |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "matanuska-full-vs-simplified-intersect-changed-components",
+          "line": 34,
+          "template": "| Matanuska full/simplified intersect status changes | components | {value} |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "matanuska-full-vs-simplified-covers-changed-components",
+          "line": 35,
+          "template": "| Matanuska full/simplified covers status changes | components | {value} |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "matanuska-full-vs-simplified-positive-area-changed-components",
+          "line": 36,
+          "template": "| Matanuska full/simplified positive-area status changes | components | {value} |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "denali-full-vs-simplified-intersect-changed-components",
+          "line": 37,
+          "template": "| Denali full/simplified intersect status changes | components | {value} |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "denali-full-vs-simplified-covers-changed-components",
+          "line": 38,
+          "template": "| Denali full/simplified covers status changes | components | {value} |",
+          "decimals": 0
+        },
+        {
+          "metric_id": "denali-full-vs-simplified-positive-area-changed-components",
+          "line": 39,
+          "template": "| Denali full/simplified positive-area status changes | components | {value} |",
           "decimals": 0
         }
       ]
@@ -1274,9 +1577,10 @@
     },
     {
       "status": "supported",
-      "text": "The exact roster closes over 282 components, 283 bound fragments and 571 recorded source-contact rows. Source polygon intersections and coverage are coordinate-plane diagnostics only, not physical area or jurisdiction decisions.",
+      "text": "The exact roster closes over 282 components, 283 bound fragments and 571 recorded source-contact rows. Separate full-resolution and simplified geoBoundaries feature products share selected IDs and attributes but have different geometries; the bounded roster has identical per-component intersects/covers/positive-area booleans for both products. These source predicates are coordinate-plane diagnostics only, not physical area, general product equivalence, or jurisdiction decisions.",
       "source_ids": [
         "geoboundaries-us-adm2-2018",
+        "geoboundaries-us-adm2-2018-simplified",
         "resolve-ecoregions-biomes-2017"
       ]
     },
@@ -1285,6 +1589,7 @@
       "text": "All 282 component physical classes remain unknown among source footprint omission, source disagreement, independently evidenced water or ice, and other cause. Complete ECO_ID 0 geometry is unavailable; the overlays and recipe metadata do not establish whole-surface attribution or per-component causal lineage.",
       "source_ids": [
         "geoboundaries-us-adm2-2018",
+        "geoboundaries-us-adm2-2018-simplified",
         "resolve-ecoregions-biomes-2017",
         "resolve-rock-and-ice-incomplete",
         "atlas-recorded-subject-lineage",
@@ -1430,7 +1735,23 @@
       "status": "added"
     },
     {
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/sources/geoboundaries-simplified-capture-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/sources/geoboundaries-usa-adm2-2018-metadata.json",
+      "status": "added"
+    },
+    {
       "path": "research/geography/gap-source-matanuska-physical-seam-20261006/sources/geoboundaries-usa-adm2-selected.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/sources/geoboundaries-usa-adm2-simplified-full.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/sources/geoboundaries-usa-adm2-simplified-selected.geojson",
       "status": "added"
     },
     {

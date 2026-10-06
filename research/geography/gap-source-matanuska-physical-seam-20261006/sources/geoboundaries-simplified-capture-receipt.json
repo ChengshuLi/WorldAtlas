@@ -1,0 +1,47 @@
+{
+  "product": "geoBoundaries USA ADM2 simplified geometry",
+  "retrieved_at": "2026-10-06T20:46:44Z",
+  "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/USA/ADM2/geoBoundaries-USA-ADM2_simplified.geojson",
+  "resolved_release_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+  "http_status": 200,
+  "complete_dataset": {
+    "path": "sources/geoboundaries-usa-adm2-simplified-full.geojson",
+    "bytes": 7938450,
+    "sha256": "16249e8d795aaded6a72910a8c72115a073814b25ee902d61ccc9a9490c6641a"
+  },
+  "feature_count": 3233,
+  "metadata": {
+    "path": "sources/geoboundaries-usa-adm2-2018-metadata.json",
+    "bytes": 939,
+    "sha256": "a4d2a82a1cd434960b6ed49531bff3330d0881674eea9dc8711e1ad6bf049b9f",
+    "boundaryYear": "2018",
+    "boundarySource": "United States Census Bureau, MAF/TIGER Database",
+    "boundaryCanonical": "Counties",
+    "boundaryLicense": "Public Domain",
+    "licenseSource": "https//www.census.gov/programs-surveys/geography/technical-documentation/naming-convention/cartographic-boundary-file.html",
+    "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+    "buildDate": "Dec 12, 2023"
+  },
+  "selected_feature_file": {
+    "path": "sources/geoboundaries-usa-adm2-simplified-selected.geojson",
+    "bytes": 6823,
+    "sha256": "51ea8756733fc55a964527333860d6008c2c3d2930a1cacf6dd3d7d7227c6ecc"
+  },
+  "selected_shape_ids": [
+    "52423323B25289890288494",
+    "52423323B34523976645917"
+  ],
+  "selected_count": 2,
+  "selected_properties_match_full_resolution": true,
+  "selected_geometries_match_full_resolution": false,
+  "administrative_input_basis": {
+    "script_path": "scripts/administrative.py",
+    "script_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+    "script_sha256": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22",
+    "source_url_transform": "gjDownloadURL with .geojson replaced by _simplified.geojson",
+    "script_lines": "The baseline script sets simplifiedGeometryGeoJSON from source_url by replacing the suffix, then downloads that value."
+  },
+  "crs": "urn:ogc:def:crs:OGC:1.3:CRS84",
+  "license": "Public Domain per exact release metadata; underlying United States Census Bureau MAF/TIGER Database",
+  "limitation": "The original and simplified products share the selected IDs and attributes but selected geometries are not byte- or coordinate-identical. Analysis reports separate predicates and does not claim simplification equivalence, registration accuracy, or Atlas feature lineage."
+}
