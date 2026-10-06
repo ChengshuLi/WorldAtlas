@@ -13,6 +13,15 @@ const snapshotPath = path.join(owned, 'source/issue-393-api-snapshot.json');
 const snapshotBytes = read(snapshotPath);
 const issue = JSON.parse(snapshotBytes);
 if (issue.number !== 393 || issue.state !== 'open') throw Error('Issue snapshot is not the open #393 issue');
+const sourceInventory = json(path.join(owned, 'source-inventory.json'));
+const baselineCommit = sourceInventory.baseline_commit;
+if (!/^[0-9a-f]{40}$/.test(baselineCommit)) throw Error('Source inventory must pin the reviewed baseline commit.');
+execFileSync('git', ['cat-file', '-e', `${baselineCommit}^{commit}`]);
+execFileSync('git', ['merge-base', '--is-ancestor', baselineCommit, 'HEAD']);
+const baselineBlob = file => execFileSync('git', ['show', `${baselineCommit}:${file}`], {maxBuffer: 64 * 1024 * 1024});
+const verifyBaselineBytes = (file, bytes) => {
+  if (!baselineBlob(file).equals(bytes)) throw Error(`Input ${file} differs from pinned baseline ${baselineCommit}`);
+};
 const match = issue.body.match(/Machine-readable exact workload scope \(JSON;[^\n]*\):\n\n```json\n([\s\S]*?)\n```/);
 if (!match) throw Error('Exact machine scope JSON was not found');
 const scope = JSON.parse(match[1]);
@@ -22,6 +31,7 @@ const expectedDigest = sha(Buffer.from(ids.join('\n')));
 if (expectedDigest !== scope.member_location_ids_sha256) throw Error('Issue member ID digest mismatch');
 
 const indexBytes = read('data/world-index.json');
+verifyBaselineBytes('data/world-index.json', indexBytes);
 const index = JSON.parse(indexBytes);
 const wanted = new Set(ids);
 const features = new Map();
@@ -29,6 +39,7 @@ const partBytes = {};
 for (const relative of index.parts) {
   const file = path.join('data', relative);
   const bytes = read(file);
+  verifyBaselineBytes(file, bytes);
   partBytes[file] = {bytes: bytes.length, sha256: sha(bytes)};
   const collection = JSON.parse(bytes);
   for (const feature of collection.features ?? []) {
@@ -41,6 +52,7 @@ for (const relative of index.parts) {
 if (features.size !== ids.length) throw Error(`Only ${features.size}/${ids.length} exact subjects found in indexed geometry`);
 
 const hierarchyBytes = read('data/hierarchy.json');
+verifyBaselineBytes('data/hierarchy.json', hierarchyBytes);
 const hierarchy = new Map(JSON.parse(hierarchyBytes).map(record => [record.id, record]));
 const counts = new Map();
 const parents = new Map();
@@ -75,6 +87,7 @@ const rows = ids.map(id => {
 });
 
 const handoffBytes = read('data/macro-foundation/regional-handoffs.json.gz');
+verifyBaselineBytes('data/macro-foundation/regional-handoffs.json.gz', handoffBytes);
 const handoffs = JSON.parse(gunzipSync(handoffBytes));
 const region = handoffs.regions?.find(value => value.region_id === scope.region_id);
 if (!region) throw Error(`Pinned macro handoff lacks ${scope.region_id}`);
@@ -82,13 +95,12 @@ if (region.envelope?.geometry_sha256 !== scope.frozen_region_geometry_sha256 ||
     region.envelope?.member_location_ids_sha256 !== scope.frozen_region_member_ids_sha256) {
   throw Error('Issue frozen region envelope/member pins differ from current handoff');
 }
-const commit = execFileSync('git', ['rev-parse', 'HEAD'], {encoding: 'utf8'}).trim();
 const sourceDistribution = Object.fromEntries([...counts.entries()].sort(([a], [b]) => a.localeCompare(b)));
 const parentDistribution = Object.fromEntries([...parents.entries()].sort(([a], [b]) => a.localeCompare(b)));
 process.stdout.write(JSON.stringify({
   version: 1,
   issue: 393,
-  baseline_commit: commit,
+  baseline_commit: baselineCommit,
   scope: {
     batch_id: scope.batch_id,
     region_id: scope.region_id,
