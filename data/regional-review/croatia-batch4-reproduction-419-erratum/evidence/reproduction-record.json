@@ -1,0 +1,56 @@
+{
+  "geometry": {
+    "bytes": 20788018,
+    "features": 560,
+    "sha256": "68a317129a0c295fd8baf7acc0f31ffefdf65ff2f1f62f8ed90a765cc57cf01e"
+  },
+  "guarded_runner_sha256": "7d218ec616982692c604ff6d30740db36d443a206aaf99dd950141839eab9602",
+  "historical_baseline": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+  "negative_controls": [
+    "Altered issue subject ID rejected before output",
+    "Removed a committed issue pin from scope JSON rejected by hardcoded whole-file scope hash",
+    "Reconstructed complete synthetic workbook SHA mismatch rejected before output; distinct from unavailable private fixture",
+    "Existing destination sentinel remained unchanged",
+    "Interrupted exclusive write preserved first file and retry refused partial directory",
+    "Symlinked output parent pointing outside owned paths was rejected and no outside destination was created"
+  ],
+  "outputs": [
+    {
+      "bytes": 10913,
+      "file": "assessment-summary.json",
+      "identical_across_all_eight_runs": true,
+      "sha256": "c5118a9046d10babfeab755e4f3dfbc09d9f5a35269a006820d3b27082c1a467"
+    },
+    {
+      "bytes": 1448,
+      "file": "province-completeness.csv",
+      "identical_across_all_eight_runs": true,
+      "sha256": "7a46977bafc709cab611f2b0b21fe890c3e8ffdcd067c494f7465424c1abba37"
+    },
+    {
+      "bytes": 167059,
+      "file": "scoped-location-assessments.csv",
+      "identical_across_all_eight_runs": true,
+      "sha256": "91d12e56fa600e4cbeebdc7d12c82f131aded59a8a38a3d87eb8ed8f64429420"
+    }
+  ],
+  "raw_issue_snapshot_sha256": "5863aa5a0f5845dbb9939a8fb841ceeeff6d1c87bc3bdee9f6e6936313389439",
+  "retrieved_at": "2026-10-06",
+  "run_directories": [
+    "evidence/run-1",
+    "evidence/run-2",
+    "evidence/safe-run-1",
+    "evidence/safe-run-2",
+    "evidence/safe-run-3",
+    "evidence/safe-run-4",
+    "evidence/safe-run-5",
+    "evidence/safe-run-6"
+  ],
+  "scope_ids_sha256": "c5816fc5587099904fd5c5cff51801676ec361606153cb39c70e9fb19ef0f116",
+  "scope_json_sha256": "0f082390fe2f9c7bd3e627489b4f5160616d9b85e4cc15503ed1521c050e3cb8",
+  "summary_workbook": {
+    "expected_bytes": 63196,
+    "expected_sha256": "99feecc93627db02509aee7d625b391c33a69f201f377464ac15c2fd7c16f20f"
+  },
+  "unchanged_builder_commit": "ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb"
+}

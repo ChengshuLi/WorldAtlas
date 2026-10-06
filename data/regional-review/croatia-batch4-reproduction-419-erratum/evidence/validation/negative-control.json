@@ -1,0 +1,18 @@
+{
+  "controls": {
+    "existing_destination_sentinel": "refused; sentinel unchanged",
+    "interrupted_exclusive_publish": "first file preserved; retry refused",
+    "issue_scope_file_pin_removal": "rejected by complete issue-scope hash before destination creation",
+    "outside_owned_destination_created": "false",
+    "scope_identity_drift": "rejected before destination creation",
+    "scope_pin_removal": "rejected by hardcoded complete scope SHA-256",
+    "symlink_ancestor_escape": "rejected before preflight/write; outside destination absent",
+    "whole_summary_workbook_hash_drift": "rejected before destination creation"
+  },
+  "historical_fixture_exact_bytes_available": false,
+  "historical_private_fixture_sha256": "0a214eb21f46b5d2ea133e9e7739d830a0186d394db8df2ae5445f8a8227636a",
+  "kind": "negative-control",
+  "method_id": "guarded-reproduction",
+  "outcome": "passed",
+  "reconstructed_fixture_sha256": "a479c0bf26d6da7eeb4241b967e296ea4fbb762b977cb4ef9db1c9cb70c44393"
+}
