@@ -76,6 +76,9 @@ def check_context(cell: dict, raw: bytes, receipt: dict) -> tuple[dict, dict]:
     }
     if any(props.get(key) != value for key, value in required.items()):
         raise ValueError(f"Source context mismatch for {cell['cell_id']}")
+    unsupported = ("date", "valid", "effective", "accuracy", "wetness", "owner", "sovereign")
+    if any(any(token in key.lower() for token in unsupported) for key in props):
+        raise ValueError(f"Unsupported date/accuracy/wetness/ownership source field for {cell['cell_id']}")
     geometry = shape(feature["geometry"])
     if not geometry.intersects(box(*expected_bbox)):
         raise ValueError(f"Returned line does not intersect requested BBOX for {cell['cell_id']}")
@@ -96,6 +99,16 @@ def check_issue_snapshot() -> None:
     eq = metadata["evidence_quality"]
     if metadata.get("mode") != "geography" or metadata.get("owned_paths") != ["research/geography/prt-esp-six-cell-authority-20261006/"] or eq.get("review_kind") != "source":
         raise ValueError("Issue work contract does not match this source assessment")
+    expected_subjects = [
+        "atlas:district:ESP-1003:a5622946", "atlas:district:ESP-1004:a5622946", "atlas:district:ESP-1010:a5622946",
+        "gb:PRT:ADM2:2272694B24025236019409", "gb:PRT:ADM2:2272694B40601521893357",
+        "gb:PRT:ADM2:2272694B64876814145037", "gb:PRT:ADM2:2272694B74999887486897",
+    ]
+    if eq.get("subject_ids") != expected_subjects or eq.get("pins") != {
+        "canonical_grid": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+        "hierarchy": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+    }:
+        raise ValueError("Issue subject roster or canonical pins changed")
 
 
 def load_case(cell: dict) -> tuple[dict, dict, dict]:
