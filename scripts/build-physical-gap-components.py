@@ -146,7 +146,8 @@ def run(commit, output):
     outputs = {'new_components': write_bundles(out, 'components', records, True),
                'new_contacts': write_bundles(out, 'contacts', contacts)}
     for name, rows in result.items():
-        outputs[name] = write_bundles(out, name.replace('_', '-'), rows)
+        stem = 'component-accounting' if name == 'components' else name.replace('_', '-')
+        outputs[name] = write_bundles(out, stem, rows)
     errors = [p for p in result['fragment_pairs'] if p['status'] != 'checked']
     difference_errors = [f for key in ('old_fragments', 'new_fragments') for f in result[key]
                          if f['difference']['status'] != 'checked']
