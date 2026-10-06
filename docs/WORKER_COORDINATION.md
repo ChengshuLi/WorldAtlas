@@ -173,3 +173,60 @@ packages only for the `full` profile. Full proof still requires successful Node
 and Python installation, applicable browser setup and the actual hosted build;
 focused proof requires every focused control to execute successfully with zero
 skipped tests. A skipped dependency-install step is not application coverage.
+
+## Durable FIFO integration admission
+
+Issue #1174 identified an actual starvation path: a long engineering request tested
+main `72029…` while unrelated source merges advanced it to `1f971…` and `9a824…`.
+The final base guard correctly rejected that candidate. Independent testing plus
+final-only serialization allowed this to repeat indefinitely. The observed HTTP
+403 failures have no established cause and are separate from this scheduling bug.
+
+`queue-pr-merge.mjs` now submits to `merge-scheduler.yml`. A trusted registration
+job appends a bot-authored immutable request to its PR, retaining the exact head
+and request ID. Registration runs outside execution concurrency. The short
+serialized scheduler chooses the oldest unresolved open-PR request by comment ID,
+then dispatches `worker-merge.yml` only when a complete live-run inventory is empty.
+The entire admitted preparation, regression and final merge lifecycle holds
+`worldatlas-main-integrate`; source authors continue research and submit normally.
+Both preparation and final merge require that same FIFO ticket and dispatch
+attempt. All existing reviewed-head, authority, evidence, test, candidate-parent,
+base and SHA-guarded squash checks remain mandatory.
+
+GitHub retains only one pending concurrency run. A replaced scheduler tick loses
+no requests because their registrations already exist outside that group.
+Completed worker runs trigger a scheduler tick; five-minute scheduled ticks also
+recover cancelled execution, failed notification and ambiguous dispatch. Live,
+queued, requested, waiting and pending executions of any age prevent redispatch;
+observation expiry never implies completion. Each execution attempt is recorded
+before dispatch, cancellation/conclusion observations remain on the PR, and an
+absent dispatch gets two minutes to appear. At most three execution attempts are
+automatic. Exhaustion produces a durable rejection and advances FIFO; inspect the
+receipts and submit a new unchanged-head request after correcting the transient
+condition. A failed test or authority rejection is terminal; changed heads require
+new review and a new request. Main advancement remains a rejection requiring a
+fresh tested candidate with the same reviewed head. Closing a PR withdraws its
+request; its registrations/results remain preserved on the closed PR.
+
+The CLI observes for 65 minutes, then reports its request ID without cancelling
+anything. Resume observation/idempotent registration using
+`--request-id ORIGINAL-REQUEST-ID`; duplicates retain the original FIFO ticket.
+Never infer a merge from timeout, a candidate SHA or workflow success: the exact
+bot result must agree with the actual merged PR/head/squash commit.
+
+Progress is bounded by the finite tickets ahead of a request and each execution's
+existing job timeouts plus at most three recovery attempts; new arrivals cannot
+jump ahead. GitHub runner and scheduled-event availability remain external
+requirements: ticks can be delayed, and these are cooperative admission controls,
+not a platform availability guarantee. A queue workflow failure keeps the request
+and receipts visible and must be inspected rather than reported as a merge.
+
+For initial rollout, the integrator coordinates the currently live request and
+waits for it to settle. Temporarily disabling the old worker-merge workflow can
+hold new dispatches without cancelling live work; do not disable it before the
+scheduler PR's own normal integration is dispatched. Record deferred authors'
+request IDs/heads and re-enable immediately after actual merge confirmation.
+The new scheduler then recovers registrations under ordinary exact-head rules.
+No direct merge, manual research stop, provider operation or publication is part
+of this procedure. Only the coordinating integrator performs this reversible
+admission hold; workers do not independently toggle shared workflow availability.

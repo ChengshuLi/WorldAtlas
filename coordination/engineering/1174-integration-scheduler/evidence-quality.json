@@ -1,0 +1,261 @@
+{
+  "version": 1,
+  "issue": 1174,
+  "lane": "engineering",
+  "worker_id": "01a111d7-4e3b-7d22-b94d-09dd77f60e3f",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "9a8240e49328aba95e97ca1283bbf4293065468c",
+    "files": [
+      {
+        "path": ".github/workflows/worker-merge.yml",
+        "bytes": 8906,
+        "sha256": "1c8ba8c5497367b11708adfb96187acef5d27233e56f11e7b5f5d98e2faaed90",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 27530,
+        "sha256": "228efbc07476a0bd4defad5d0d59c96836da81bba399f8c2e1395a5303e760ae",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/merge-integration.mjs",
+        "bytes": 25436,
+        "sha256": "85b881e02a7d9dca3538982423a14ca04e093241f5de7728c95f9c1c70d93c2b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/queue-pr-merge.mjs",
+        "bytes": 3271,
+        "sha256": "5aaef3641e262332a8d21484e8bc2682c740205af8ad1e0c72878a4cd1a50178",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/run-worker-merge.mjs",
+        "bytes": 5028,
+        "sha256": "3de24f87fdd7af8aa0b6638619833d9837ac07861b54b9d1d46ce2baa3b57e88",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/merge-integration-client.test.mjs",
+        "bytes": 4771,
+        "sha256": "f30653d0583c49830f3ae525c0f4b32f5fa544516c2df42df4843ceb5a5dfc6c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/merge-integration.test.mjs",
+        "bytes": 37273,
+        "sha256": "8d55b72519453a5a28b77d689a735c662ef8d5563b7591a593b2ece101ac1837",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/trusted-workflow-checkouts.test.mjs",
+        "bytes": 4202,
+        "sha256": "45c374689bc05ae068fb2ac90c97975eb1fb7da3e40466353644b3da1654939d",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": ".github/workflows/merge-scheduler.yml",
+      "bytes": 2251,
+      "sha256": "cc2e2917c92c147fe8fa93b12871046730e7364f80adfc63edd5e70265c5b2fe",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": ".github/workflows/worker-merge.yml",
+      "bytes": 9216,
+      "sha256": "c57608daf9a3dbf9d1ae6bf73e1a3a57aa23d500de4bc4fe7464fcb092714edf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/1174-integration-scheduler/negative-control.json",
+      "bytes": 668,
+      "sha256": "bfdad835bb6c5b352288f2faab43617684f938b107ad6c3e62324c970bb06729",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/1174-integration-scheduler/positive-control.json",
+      "bytes": 594,
+      "sha256": "3ededc9ecf23f1fcf5d135149e87a2468b5dd01371b226f8902dbbfdaa85e108",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/1174-integration-scheduler/test-results.txt",
+      "bytes": 8638,
+      "sha256": "53105dd1b9b7db13a3137de5027485a7c0f614fb589d116abe550720c18837d4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "bytes": 31431,
+      "sha256": "ec16cb21cfb573be6d2533e64ade73a1851d81d4cb1bbc43760f813c8d27bb19",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/merge-integration.mjs",
+      "bytes": 26085,
+      "sha256": "b9d7840f8ae210091c87d04f5d117b9a2e6b64a9c904dceff66d752c4545ba0a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/merge-scheduler.mjs",
+      "bytes": 7254,
+      "sha256": "03568b7ff1a58628ca46e6de0b085e6b0b4058143c2b5513bcbef24b22889073",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/queue-pr-merge.mjs",
+      "bytes": 3605,
+      "sha256": "dd068edea0893024d8d0ea071aad05ca8ac4d7451849b513905cba3a139b948e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/run-merge-scheduler.mjs",
+      "bytes": 1033,
+      "sha256": "965c0af4fdac81dd3f69894b2b6db652e243dd500876467ad34ce7d5d64ec36c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/run-worker-merge.mjs",
+      "bytes": 5431,
+      "sha256": "1eb4b9fd29290a7872271aa937d897d510337b0f1299a59d00f4908cfe3f3001",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/merge-integration-client.test.mjs",
+      "bytes": 4001,
+      "sha256": "371d987df517c9ec2878e6fa1954e49bd40d41d5f00c4fa01725a0e5ffc32aa4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/merge-integration.test.mjs",
+      "bytes": 37915,
+      "sha256": "ee66560a4506bb56b777b6812aa49d5016a4c8010cba75f38ff1029429a99062",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/merge-scheduler.test.mjs",
+      "bytes": 5950,
+      "sha256": "06f828b96f075e35e0e11eecde82eac02deafa739ce10a325bd54bdca34b4955",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/trusted-workflow-checkouts.test.mjs",
+      "bytes": 4272,
+      "sha256": "6ae8f171f169c7a864a5ebc31a1dd5fff0496f22208cd060a3d8ae30360dc040",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": ".github/workflows/merge-scheduler.yml",
+      "status": "added"
+    },
+    {
+      "path": ".github/workflows/worker-merge.yml",
+      "status": "modified",
+      "original_sha256": "1c8ba8c5497367b11708adfb96187acef5d27233e56f11e7b5f5d98e2faaed90"
+    },
+    {
+      "path": "coordination/engineering/1174-integration-scheduler/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/1174-integration-scheduler/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/1174-integration-scheduler/test-results.txt",
+      "status": "added"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "status": "modified",
+      "original_sha256": "228efbc07476a0bd4defad5d0d59c96836da81bba399f8c2e1395a5303e760ae"
+    },
+    {
+      "path": "scripts/merge-integration.mjs",
+      "status": "modified",
+      "original_sha256": "85b881e02a7d9dca3538982423a14ca04e093241f5de7728c95f9c1c70d93c2b"
+    },
+    {
+      "path": "scripts/merge-scheduler.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/queue-pr-merge.mjs",
+      "status": "modified",
+      "original_sha256": "5aaef3641e262332a8d21484e8bc2682c740205af8ad1e0c72878a4cd1a50178"
+    },
+    {
+      "path": "scripts/run-merge-scheduler.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/run-worker-merge.mjs",
+      "status": "modified",
+      "original_sha256": "3de24f87fdd7af8aa0b6638619833d9837ac07861b54b9d1d46ce2baa3b57e88"
+    },
+    {
+      "path": "test/merge-integration-client.test.mjs",
+      "status": "modified",
+      "original_sha256": "f30653d0583c49830f3ae525c0f4b32f5fa544516c2df42df4843ceb5a5dfc6c"
+    },
+    {
+      "path": "test/merge-integration.test.mjs",
+      "status": "modified",
+      "original_sha256": "8d55b72519453a5a28b77d689a735c662ef8d5563b7591a593b2ece101ac1837"
+    },
+    {
+      "path": "test/merge-scheduler.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/trusted-workflow-checkouts.test.mjs",
+      "status": "modified",
+      "original_sha256": "45c374689bc05ae068fb2ac90c97975eb1fb7da3e40466353644b3da1654939d"
+    }
+  ],
+  "methods": [
+    {
+      "id": "queue-controls",
+      "kind": "code",
+      "description": "Controlled trusted scheduler FIFO, cancellation, recovery, exact-head/authority/main guards and rejected-base fast-path API tests; actual CLI observation controls and sparse workflow module probes.",
+      "software": "Node 24 built-in test runner",
+      "units": "pass/fail"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "queue-controls",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/1174-integration-scheduler/positive-control.json"
+    },
+    {
+      "method_id": "queue-controls",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/1174-integration-scheduler/negative-control.json"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/merge-scheduler.test.mjs test/merge-integration.test.mjs test/merge-integration-client.test.mjs test/merge-integration-entrypoint.test.mjs test/trusted-workflow-checkouts.test.mjs test/worker-result.test.mjs test/premerge-evidence.test.mjs"
+  ]
+}

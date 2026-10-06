@@ -303,6 +303,15 @@ export async function prepareIntegration(options) {
 export async function completeIntegration(options) {
   need(options.integrationResult === 'success' || options.integrationResult === 'skipped',
     'Integration tests failed or were cancelled; no merge performed');
+  // Rejection-only fast path: known stale base/head cannot benefit from the
+  // expensive full evidence inventory. Eligible/replayed requests still run
+  // every normal trusted validation and the later final base guard.
+  const initialPR = await options.api(`${root(options.repo)}/pulls/${options.number}`);
+  need(initialPR.head.sha === options.expectedHead, 'PR head changed; obtain fresh exact-head review');
+  if (!initialPR.merged) {
+    const current = await options.api(`${root(options.repo)}/git/ref/heads/main`);
+    need(current.object?.sha === options.testedBase, 'Main advanced after integration tests; resubmit unchanged head');
+  }
   const state = await inspectMerge(options);
   if (state.replayed) return {accepted: true, replayed: true, merge_commit: state.pr.merge_commit_sha,
     head_cleanup: await cleanupMergedHead(options)};

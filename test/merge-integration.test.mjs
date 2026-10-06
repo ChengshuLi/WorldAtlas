@@ -108,7 +108,7 @@ test('latest failed or pending check replaces old success', () => {
 test('workflow separates untrusted candidate tests from write credentials and serializes the lifecycle', () => {
   const yaml=fs.readFileSync(new URL('../.github/workflows/worker-merge.yml',import.meta.url),'utf8');
   const integration=yaml.split('  integration:\n')[1].split('  merge:\n')[0];
-  assert.match(yaml.split('  merge:\n')[1],/concurrency:\n      group: worldatlas-main-integrate/);
+  assert.match(yaml.split('jobs:')[0],/concurrency:\n  group: worldatlas-main-integrate/);
   assert.doesNotMatch(integration,/concurrency:/);
   assert.match(integration,/permissions:\n      contents: read/);
   assert.doesNotMatch(integration,/GH_TOKEN|secrets\.|contents: write|issues: write|pull-requests: write/);
@@ -545,4 +545,15 @@ test('trusted geography outputs bind attempted artifact digest through the privi
  assert.match(runner,/runId: process\.env\.GITHUB_RUN_ID/);
  assert.match(runner,/expectedHash: process\.env\.GEOGRAPHY_REPORT_SHA256/);
  assert.doesNotMatch(workflow,/actions\/download-artifact/,'privileged job must not extract an unverified archive');
+});
+
+
+test('known stale tested base or head rejects before expensive evidence/tree inspection', async()=>{
+ const stale=fixture();stale.base=sha('d');
+ await assert.rejects(stale.complete(),/resubmit unchanged head/);
+ assert.equal(stale.evidenceReads??0,0);assert.equal(stale.writes.length,0);
+ const changed=fixture();changed.pr.head.sha=sha('e');
+ await assert.rejects(changed.complete(),/head changed/);
+ assert.equal(changed.evidenceReads??0,0);assert.equal(changed.mainReads,0);assert.equal(changed.writes.length,0);
+ const eligible=fixture();await eligible.complete();assert.ok(eligible.evidenceReads>0);assert.equal(eligible.writes.length,1);
 });

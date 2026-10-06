@@ -1,0 +1,14 @@
+{
+  "method_id": "queue-controls",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "test_cases": [
+    "long request holds main admission amid arbitrarily many short arrivals and FIFO progresses",
+    "coalesced scheduler ticks cannot lose FIFO registrations; duplicate request retains ticket",
+    "eligible fast-path request still performs full evidence inspection"
+  ],
+  "transcript": "coordination/engineering/1174-integration-scheduler/test-results.txt",
+  "limits": [
+    "Controlled mocked GitHub API/workflow tests; no hosted scheduler execution is claimed before merge."
+  ]
+}
