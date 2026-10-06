@@ -1,0 +1,29 @@
+{
+  "legacy_output": {
+    "area_reviews": 5,
+    "asuncion_city_aggregate_rows": 1,
+    "baseline_matches": 215,
+    "baseline_parts": [
+      2,
+      20,
+      28
+    ],
+    "chile_rows": 167,
+    "distinct_parent_ids": 39,
+    "exact_source_name_links": 214,
+    "individual_classifications": 215,
+    "paraguay_ine_2022_candidate_roster_matches": 47,
+    "paraguay_rows": 47,
+    "province_classifications": 39,
+    "restoration_source_hashes_reverified": 0,
+    "result": "identity/source/scope checks pass; legal and positional boundaries not validated",
+    "retained_metadata_hashes_verified": 2,
+    "scope_ids": 215
+  },
+  "legacy_reproducer_outcome": "passed-with-fabricated-member-id",
+  "mutated_candidate_csv_sha256": "92e747846c092a75fc6953d229f34aa676633c844af3da5632d541642370cbbe",
+  "mutated_subject_id": "gb:CHL:ADM3:31580391B10529430884395",
+  "mutated_value": "FABRICATED-NOT-A-SOURCE-ID",
+  "new_validator_outcome": "rejected-source-member-ID-mismatch",
+  "note": "Candidate bytes and any recomputed digest do not replace semantic row-to-baseline validation."
+}
