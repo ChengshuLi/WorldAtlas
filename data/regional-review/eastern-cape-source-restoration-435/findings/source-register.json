@@ -1,0 +1,221 @@
+{
+  "version": 1,
+  "scope_issue": 1137,
+  "retrieved_at": "2026-10-06",
+  "sources": [
+    {
+      "id": "geoBoundaries-ZAF-ADM3-2020",
+      "path": "data/regional-review/regional-review-b9aef9289b79194e/sources/ (two ordered original source-byte parts, pinned at base commit)",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/ZAF/ADM3/geoBoundaries-ZAF-ADM3.geojson",
+      "role": "retained original source; exact ancestor packet whole-stream hash and ordered parts",
+      "vintage": "geoBoundaries gbOpen ZAF ADM3 2020; commit 9469f09; retrieved 2026-10-05 and retained unchanged by ancestor packet; reused at baseline 2026-10-06 without copy",
+      "bytes": 50705428,
+      "sha256": "74e489fd4370972403950719026a317abba443668cea7d49f4b36c61637958f1",
+      "part_hashes": [
+        {
+          "path": "sources/gb-ZAF-ADM3.geojson.part-001",
+          "bytes": 25352714,
+          "sha256": "a87211053b2a57f7948bf4c416655959cca91a720e35ca3a5aef5a891ac52433"
+        },
+        {
+          "path": "sources/gb-ZAF-ADM3.geojson.part-002",
+          "bytes": 25352714,
+          "sha256": "fa2143ac904ae38dd71793d9b520badccd79088735d1dd8082e72679494f1616"
+        }
+      ],
+      "reuse_terms": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO); attribution: geoBoundaries (Runfola et al.), gbOpen ZAF ADM3 release commit 9469f09.",
+      "limit": "Identity/name replay only for 17 scoped features; retained source was split into ordered parts and parsed as stream. Its territorial truth is not implied.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "mdb-2021-item-metadata",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-local-municipalities-2021-item-metadata.json",
+      "url": "https://www.arcgis.com/sharing/rest/content/items/27bbdd5b041b4ba6b5707dfed5aa3923?f=json",
+      "role": "MDB Local Municipalities 2021 item metadata",
+      "vintage": "2021 title; based on MDB 2018 product; came into effect 2021; item metadata retrieved 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "bytes": 5117,
+      "sha256": "2c09557bf368739c45e9823565563beb1f958f33fd8bacc4bdc6497fc27a0839",
+      "reuse_terms": "Attribution to MDB required; research/publication/value-added use allowed, no sale/commercial use; do not alter and redistribute as MDB product.",
+      "limit": "limited: item metadata controls attribution/reuse terms, not current feature geometry.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "mdb-2021-layer-metadata",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-local-municipalities-2021-layer-metadata.json",
+      "url": "https://services7.arcgis.com/oeoyTUJC8HEeYsRB/arcgis/rest/services/LocalMunicipalities2018_Final/FeatureServer/0?f=pjson",
+      "role": "MDB 2021 service layer metadata",
+      "vintage": "Layer based on MDB 2018; layer last edited 2023-12-12; metadata retrieved 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "bytes": 14946,
+      "sha256": "98afa9ea38849e32ac216b78cd82f0ca4737a201990bbef602584f9e2fcc5277",
+      "reuse_terms": "Same MDB restrictions; source response retains the service response, not original MDB shapefile.",
+      "limit": "The layer metadata date is not a legal effective date.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "mdb-2021-ec-attributes",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-2021-eastern-cape-attribute-roster.json",
+      "url": "https://services7.arcgis.com/oeoyTUJC8HEeYsRB/arcgis/rest/services/LocalMunicipalities2018_Final/FeatureServer/0/query?where=PROVINCE%3D%27EC%27&outFields=*&returnGeometry=false&f=json",
+      "role": "Eastern Cape returned attributes, 2021 layer",
+      "vintage": "Exact REST response retrieved 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "bytes": 11290,
+      "sha256": "ffd8ae38ed99d2cb66b5d4c0cf3f74972de81ca8e4d02bb161eb59cf5e79dbd4",
+      "reuse_terms": "Same MDB restrictions; REST response, no separate license grant.",
+      "limit": "The service response roster is not proof of legal completeness beyond the served records.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "mdb-2021-ec-geometry",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-2021-eastern-cape-boundaries.geojson",
+      "url": "https://services7.arcgis.com/oeoyTUJC8HEeYsRB/arcgis/rest/services/LocalMunicipalities2018_Final/FeatureServer/0/query?where=PROVINCE%3D%27EC%27&outFields=*&returnGeometry=true&outSR=4326&f=geojson",
+      "role": "Eastern Cape served geometry, 2021 layer",
+      "vintage": "Exact REST response retrieved 2026-10-06; 33 records",
+      "retrieved_at": "2026-10-06",
+      "bytes": 10008353,
+      "sha256": "d92db8c3ed9f508841336a68c8e3b94c7a5b9f031787884119d9575a95673eab",
+      "reuse_terms": "Same MDB restrictions; do not represent as unrestricted data.",
+      "limit": "All returned geometries are Polygon, but omitted detached territory cannot be ruled out.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "mdb-2026-item-metadata",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-2026-item-metadata.json",
+      "url": "https://www.arcgis.com/sharing/rest/content/items/82c7a6d178454ddcb4dc1ef6bf2a4303?f=json",
+      "role": "MDB Local Municipalities 2026 item metadata",
+      "vintage": "Item created 2026-07-14; retrieved 2026-10-06; says comes into effect 2026-11-04 following local elections",
+      "retrieved_at": "2026-10-06",
+      "bytes": 5127,
+      "sha256": "5476378615eb8094a045a346a3de1b0820c6b3b34ff10e320e3ccfea343a49e3",
+      "reuse_terms": "Same restricted public-domain use: attribution required; no sale/commercial use; no alteration and onward representation as MDB product.",
+      "limit": "Prospective on the evaluation date; not current geography on 2026-10-06.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "mdb-2026-layer-metadata",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-2026-layer-metadata.json",
+      "url": "https://services7.arcgis.com/oeoyTUJC8HEeYsRB/arcgis/rest/services/MDB_L_ocal_Municipalities_2026/FeatureServer/0?f=pjson",
+      "role": "MDB 2026 service layer metadata",
+      "vintage": "Future release; retrieved 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "bytes": 15666,
+      "sha256": "27a7b5c409efe59d20b60c1ac66d0edb65eb5404835a7fcb64aea550af687cb8",
+      "reuse_terms": "Same MDB restrictions.",
+      "limit": "Post-election dataset; date does not prove actual election or legal effectiveness by itself.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "mdb-2026-ec-attributes",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-2026-eastern-cape-attribute-roster.json",
+      "url": "https://services7.arcgis.com/oeoyTUJC8HEeYsRB/arcgis/rest/services/MDB_L_ocal_Municipalities_2026/FeatureServer/0/query?where=PROVINCE%3D%27EC%27&outFields=*&returnGeometry=false&f=json",
+      "role": "Eastern Cape attributes, prospective 2026 layer",
+      "vintage": "Exact REST response retrieved 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "bytes": 11749,
+      "sha256": "ef7fbf219bb3d33062cf78bd6e5b32b5f6fac687b576212d12320a005f7c2604",
+      "reuse_terms": "Same MDB restrictions.",
+      "limit": "Forward reference only; returned roster does not establish earlier current boundaries.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "mdb-2026-ec-geometry",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-2026-eastern-cape-boundaries.geojson",
+      "url": "https://services7.arcgis.com/oeoyTUJC8HEeYsRB/arcgis/rest/services/MDB_L_ocal_Municipalities_2026/FeatureServer/0/query?where=PROVINCE%3D%27EC%27&outFields=*&returnGeometry=true&outSR=4326&f=geojson",
+      "role": "Eastern Cape served geometry, prospective 2026 layer",
+      "vintage": "Exact REST response retrieved 2026-10-06; 33 records",
+      "retrieved_at": "2026-10-06",
+      "bytes": 9972867,
+      "sha256": "f0069abf4892d52c4a8884f932c2e760e5663690c37204b91fa17a9ff3524147",
+      "reuse_terms": "Same MDB restrictions.",
+      "limit": "Prospective geometry; returned Polygon records do not prove disconnected land completeness.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "gazette-5030-PN763-2024",
+      "url": "https://www.demarcation.org.za/wp-content/uploads/2024/01/Eastern-Cape-S21-5030-08-01-2024.pdf",
+      "role": "MDB section 21 boundary determination notices",
+      "vintage": "Eastern Cape Provincial Gazette 5030, PN 763, 2024-01-08",
+      "retrieved_at": "2026-10-06",
+      "retention": "restoration-only",
+      "verification": "verified",
+      "license": {
+        "status": "unknown",
+        "terms": "Official provincial gazette; no redistribution determination made for the PDF in this packet."
+      },
+      "restoration": "Retrieve the official PDF at the URL and inspect map sheet/DEM notice. Earlier direct request timed out; official search index exposed the DEM6500/6506/6611 notice text and map detail.",
+      "limit": "Gazette 5030 is the initial determination; it does not on its own establish the section 23 effective date.",
+      "temporal_status": "reference",
+      "files": []
+    },
+    {
+      "id": "gazette-5064-PN805-2024",
+      "url": "https://www.demarcation.org.za/wp-content/uploads/2024/03/EC_S21_5_5064-11-03-ECape.pdf",
+      "role": "MDB section 21(5) confirmation notice",
+      "vintage": "Eastern Cape Provincial Gazette 5064, PN 805, 2024-03-11",
+      "retrieved_at": "2026-10-06",
+      "retention": "restoration-only",
+      "verification": "verified",
+      "license": {
+        "status": "unknown",
+        "terms": "Official provincial gazette; no redistribution determination made for the PDF in this packet."
+      },
+      "restoration": "Retrieve the official PDF at the URL. Earlier direct request returned 502; official search index exposed the section 21(5) confirmations of DEM6500, DEM6506 and DEM6611.",
+      "limit": "Confirmation of final MDB decision; not the Electoral Commission section 23 opinion or MEC effective-date notice.",
+      "temporal_status": "reference",
+      "files": []
+    },
+    {
+      "id": "stats-sa-2022-eastern-cape",
+      "url": "https://www.statssa.gov.za/?p=16760",
+      "role": "Stats SA municipal/district naming context",
+      "vintage": "Eastern Cape Census 2022 article posted 2023-10-23",
+      "retrieved_at": "2026-10-06",
+      "retention": "restoration-only",
+      "verification": "verified",
+      "license": {
+        "status": "unknown",
+        "terms": "Official Stats SA page; reuse terms not separately assessed."
+      },
+      "restoration": "Retrieve the official Stats SA page directly at URL; inspect the 2018 district naming text. Full PDF report endpoint returned a 212-byte Incapsula challenge and was not retained.",
+      "limit": "Supports Cacadu renamed Sarah Baartman in 2018; does not establish boundaries or completeness.",
+      "temporal_status": "reference",
+      "files": []
+    },
+    {
+      "id": "dr-ab-xuma-municipal-source",
+      "url": "https://drabxumalm.gov.za/about/",
+      "role": "Municipal identity/name context",
+      "vintage": "Municipality page dated 2026-09-23",
+      "retrieved_at": "2026-10-06",
+      "retention": "restoration-only",
+      "verification": "verified",
+      "license": {
+        "status": "unknown",
+        "terms": "Municipality website; reuse terms not separately assessed."
+      },
+      "restoration": "Retrieve municipal about page and inspect its description that Dr AB Xuma is Category B and Engcobo town is its urban centre.",
+      "limit": "Current self-description supports municipal identity, but not the legal instrument/date of name change.",
+      "temporal_status": "reference",
+      "files": []
+    },
+    {
+      "id": "mda-section23-effective-date",
+      "url": "https://www.gov.za/documents/local-government-municipal-demarcation-act",
+      "role": "Legal procedure for boundary effective dates",
+      "vintage": "Local Government: Municipal Demarcation Act 1998, section 23 (as amended)",
+      "retrieved_at": "2026-10-06",
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "license": {
+        "status": "unknown",
+        "terms": "Official legislation; reuse terms not assessed."
+      },
+      "restoration": "Retrieve current consolidated Act and the IEC section 23 view plus Eastern Cape MEC gazette notices for DEM6500, DEM6506, DEM6611. Search MDB official archive, GPW and Provincial Gazette index.",
+      "limit": "The date depends on IEC materiality and potentially next election or MEC notice; specific effective date remains unresolved.",
+      "temporal_status": "reference",
+      "files": []
+    }
+  ],
+  "assertion_policy": "Hashes bind the bytes actually retained, not upstream identity or factual accuracy. Restricted MDB bytes are preserved for this research packet under restoration-only use; no license grant is inferred."
+}

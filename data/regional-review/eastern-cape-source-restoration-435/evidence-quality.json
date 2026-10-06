@@ -1,0 +1,3565 @@
+{
+  "baseline": {
+    "commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+    "files": [
+      {
+        "bytes": 661416,
+        "hash_kind": "file-bytes",
+        "path": "data/administrative-sources.json",
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+      },
+      {
+        "bytes": 6613963,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-28.json",
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+      },
+      {
+        "bytes": 10164089,
+        "hash_kind": "file-bytes",
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+      },
+      {
+        "bytes": 944,
+        "hash_kind": "file-bytes",
+        "path": "data/world-index.json",
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+      },
+      {
+        "bytes": 18354,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-b9aef9289b79194e/findings/source-register.json",
+        "sha256": "f35089b4369f02119abe0973683c507643e7a3fe37b6a82706b7cb6e480e78cb"
+      },
+      {
+        "bytes": 25352714,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-b9aef9289b79194e/sources/gb-ZAF-ADM3.geojson.part-001",
+        "role": "original-source",
+        "sha256": "a87211053b2a57f7948bf4c416655959cca91a720e35ca3a5aef5a891ac52433"
+      },
+      {
+        "bytes": 25352714,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/regional-review-b9aef9289b79194e/sources/gb-ZAF-ADM3.geojson.part-002",
+        "role": "original-source",
+        "sha256": "fa2143ac904ae38dd71793d9b520badccd79088735d1dd8082e72679494f1616"
+      }
+    ],
+    "pin_files": {
+      "administrative-sources.json": "data/administrative-sources.json",
+      "geography_part-28.json": "data/geography/part-28.json",
+      "hierarchy.json": "data/hierarchy.json",
+      "source_register_435": "data/regional-review/regional-review-b9aef9289b79194e/findings/source-register.json",
+      "world-index.json": "data/world-index.json"
+    },
+    "pins": {
+      "administrative-sources.json": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "geography_part-28.json": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "hierarchy.json": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "source_register_435": "f35089b4369f02119abe0973683c507643e7a3fe37b6a82706b7cb6e480e78cb",
+      "world-index.json": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+    },
+    "subject_files": {
+      "gb:ZAF:ADM3:15628383B16723794281290": "data/geography/part-28.json",
+      "gb:ZAF:ADM3:15628383B24019341917361": "data/geography/part-28.json",
+      "gb:ZAF:ADM3:15628383B24472250012031": "data/geography/part-28.json",
+      "gb:ZAF:ADM3:15628383B28857154592205": "data/geography/part-28.json",
+      "gb:ZAF:ADM3:15628383B33674951697181": "data/geography/part-28.json",
+      "gb:ZAF:ADM3:15628383B35584475836677": "data/geography/part-28.json",
+      "gb:ZAF:ADM3:15628383B36159893459203": "data/geography/part-28.json",
+      "gb:ZAF:ADM3:15628383B46688478529811": "data/geography/part-28.json",
+      "gb:ZAF:ADM3:15628383B4889923419833": "data/geography/part-28.json",
+      "gb:ZAF:ADM3:15628383B56060894344771": "data/geography/part-28.json",
+      "gb:ZAF:ADM3:15628383B59220525748831": "data/geography/part-28.json",
+      "gb:ZAF:ADM3:15628383B67522024924235": "data/geography/part-28.json",
+      "gb:ZAF:ADM3:15628383B78908098986015": "data/geography/part-28.json",
+      "gb:ZAF:ADM3:15628383B80616091697700": "data/geography/part-28.json",
+      "gb:ZAF:ADM3:15628383B88034979550306": "data/geography/part-28.json",
+      "gb:ZAF:ADM3:15628383B92131487833225": "data/geography/part-28.json",
+      "gb:ZAF:ADM3:15628383B99818150234159": "data/geography/part-28.json"
+    }
+  },
+  "change_receipts": [
+    {
+      "path": "data/regional-review/eastern-cape-source-restoration-435/README.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/eastern-cape-source-restoration-435/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/geometry-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/geometry-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/mdb-crosswalk-and-reproduction.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/measurement-inputs.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/source-register.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/eastern-cape-source-restoration-435/measure_boundary_vintages.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/eastern-cape-source-restoration-435/reproduce_source_audit.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/eastern-cape-source-restoration-435/sources/issue-1137-api-snapshot.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/eastern-cape-source-restoration-435/sources/issue-955-api-snapshot.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-2021-eastern-cape-attribute-roster.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-2021-eastern-cape-boundaries.geojson",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-2026-eastern-cape-attribute-roster.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-2026-eastern-cape-boundaries.geojson",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-2026-item-metadata.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-2026-layer-metadata.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-local-municipalities-2021-item-metadata.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-local-municipalities-2021-layer-metadata.json",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "python data/regional-review/eastern-cape-source-restoration-435/reproduce_source_audit.py",
+    "python data/regional-review/eastern-cape-source-restoration-435/measure_boundary_vintages.py",
+    "python test/evidence-geography.py",
+    "python test/ellipsoidal-area.py",
+    "node scripts/evidence-quality.mjs data/regional-review/eastern-cape-source-restoration-435/evidence-quality.json"
+  ],
+  "conclusions": [
+    {
+      "source_ids": [
+        "geoboundaries-zaf-adm3-2020",
+        "issue-1137-scope-snapshot"
+      ],
+      "status": "supported",
+      "text": "Exact source identity and names for all 17 issue IDs reproduce from the retained 2020 geoBoundaries source; this supports a stable historical identity crosswalk, not territorial correctness."
+    },
+    {
+      "source_ids": [
+        "mdb-2021-current-reference"
+      ],
+      "status": "supported",
+      "text": "The MDB 2021 served roster identifies 16 scoped Category B local municipalities and Nelson Mandela Bay as Category A; completeness of detached territory remains unresolved."
+    },
+    {
+      "source_ids": [
+        "mdb-2024-gazette-5030",
+        "mdb-2024-gazette-5064",
+        "mda-effective-date-law",
+        "mdb-2021-current-reference",
+        "mdb-2026-prospective"
+      ],
+      "status": "unresolved",
+      "text": "The current legal/effective footprint after confirmed 2024 MDB determinations cannot be established without the specific Section 23 notices and an authoritative current boundary source."
+    },
+    {
+      "source_ids": [
+        "dr-ab-xuma-identity",
+        "mdb-2021-current-reference"
+      ],
+      "status": "unresolved",
+      "text": "The Dr AB Xuma/Engcobo legal name history and effective date need a gazetted naming instrument."
+    },
+    {
+      "source_ids": [
+        "stats-sa-district-name",
+        "mdb-2021-current-reference"
+      ],
+      "status": "supported",
+      "text": "Seven source-parent Cacadu members map to present MDB Sarah Baartman (DC10), while source labels/IDs should remain preserved pending hierarchy review."
+    },
+    {
+      "source_ids": [
+        "mdb-2021-current-reference"
+      ],
+      "status": "supported",
+      "text": "Nelson Mandela Bay has metropolitan Category A tier; current same-name hierarchy repetition needs separate engineering review."
+    },
+    {
+      "source_ids": [
+        "mdb-2026-prospective"
+      ],
+      "status": "supported",
+      "text": "MDB 2026 geometry is prospective on the evaluation date and is not a current replacement input."
+    },
+    {
+      "source_ids": [
+        "mdb-2021-current-reference",
+        "mdb-2026-prospective"
+      ],
+      "status": "supported",
+      "text": "All 33 2021-versus-prospective 2026 returned geometries differ, but the area comparison cannot identify the authoritative/current limits or explain each difference."
+    }
+  ],
+  "issue": 1137,
+  "lane": "geography",
+  "limitations": [
+    "MDB geometry responses are exact served REST responses, not the original MDB shapefile bytes.",
+    "MDB current legal-effective date after 2024 decisions is unresolved; 2026 source explicitly prospective on 2026-10-06.",
+    "Official gazette PDFs for determinations were not retained; restore from cited official URLs and inspect pages/maps.",
+    "Detached/island feature completeness has not been proved.",
+    "Geometry differences for municipalities without cited decisions are unexplained; no boundary is selected or approved.",
+    "This manifest validates recorded bytes and methods, not geographic truth, legal currentness, redistribution rights, deployment or historical import."
+  ],
+  "methods": [
+    {
+      "description": "Stream pinned 2020 geoBoundaries byte parts; verify whole-file and part hashes and all 213 features; crosswalk exact issue IDs and #955 disjoint scope; replay served MDB roster and parent relationships.",
+      "id": "source-and-scope-reproduction",
+      "kind": "source",
+      "software": "Python 3.12.14; stdlib json/hashlib; no network at reproduction time",
+      "units": "feature and subject counts"
+    },
+    {
+      "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+      "axis_order": "longitude-latitude",
+      "crs": "EPSG:4326",
+      "description": "Compare official-served MDB 2021 vs prospective MDB 2026 Polygon/MultiPolygon records by stable CAT_B; symmetric difference, area and IoU only; no snapping, repair or threshold-based correction.",
+      "distance_method": "WGS84 inverse geodesic",
+      "helper_version": "worldatlas-evidence-geometry-v1",
+      "id": "boundary-vintage-measurement",
+      "kind": "geography",
+      "software": "Python 3.12.14; Shapely 2.1.2; pyproj 3.7.2; WorldAtlas shared helper worldatlas-evidence-geometry-v1",
+      "units": "m2, dimensionless fraction"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "json_pointer": "/rows/0/area_2021_m2",
+      "metric_id": "BUF.area_2021_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/0/area_2026_m2",
+      "metric_id": "BUF.area_2026_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/0/net_area_change_m2",
+      "metric_id": "BUF.net_area_change_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/0/symmetric_difference_m2",
+      "metric_id": "BUF.symmetric_difference_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/0/intersection_over_union",
+      "metric_id": "BUF.intersection_over_union",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/1/area_2021_m2",
+      "metric_id": "EC101.area_2021_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/1/area_2026_m2",
+      "metric_id": "EC101.area_2026_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/1/net_area_change_m2",
+      "metric_id": "EC101.net_area_change_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/1/symmetric_difference_m2",
+      "metric_id": "EC101.symmetric_difference_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/1/intersection_over_union",
+      "metric_id": "EC101.intersection_over_union",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/2/area_2021_m2",
+      "metric_id": "EC102.area_2021_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/2/area_2026_m2",
+      "metric_id": "EC102.area_2026_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/2/net_area_change_m2",
+      "metric_id": "EC102.net_area_change_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/2/symmetric_difference_m2",
+      "metric_id": "EC102.symmetric_difference_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/2/intersection_over_union",
+      "metric_id": "EC102.intersection_over_union",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/3/area_2021_m2",
+      "metric_id": "EC104.area_2021_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/3/area_2026_m2",
+      "metric_id": "EC104.area_2026_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/3/net_area_change_m2",
+      "metric_id": "EC104.net_area_change_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/3/symmetric_difference_m2",
+      "metric_id": "EC104.symmetric_difference_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/3/intersection_over_union",
+      "metric_id": "EC104.intersection_over_union",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/4/area_2021_m2",
+      "metric_id": "EC105.area_2021_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/4/area_2026_m2",
+      "metric_id": "EC105.area_2026_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/4/net_area_change_m2",
+      "metric_id": "EC105.net_area_change_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/4/symmetric_difference_m2",
+      "metric_id": "EC105.symmetric_difference_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/4/intersection_over_union",
+      "metric_id": "EC105.intersection_over_union",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/5/area_2021_m2",
+      "metric_id": "EC106.area_2021_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/5/area_2026_m2",
+      "metric_id": "EC106.area_2026_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/5/net_area_change_m2",
+      "metric_id": "EC106.net_area_change_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/5/symmetric_difference_m2",
+      "metric_id": "EC106.symmetric_difference_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/5/intersection_over_union",
+      "metric_id": "EC106.intersection_over_union",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/6/area_2021_m2",
+      "metric_id": "EC108.area_2021_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/6/area_2026_m2",
+      "metric_id": "EC108.area_2026_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/6/net_area_change_m2",
+      "metric_id": "EC108.net_area_change_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/6/symmetric_difference_m2",
+      "metric_id": "EC108.symmetric_difference_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/6/intersection_over_union",
+      "metric_id": "EC108.intersection_over_union",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/7/area_2021_m2",
+      "metric_id": "EC109.area_2021_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/7/area_2026_m2",
+      "metric_id": "EC109.area_2026_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/7/net_area_change_m2",
+      "metric_id": "EC109.net_area_change_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/7/symmetric_difference_m2",
+      "metric_id": "EC109.symmetric_difference_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/7/intersection_over_union",
+      "metric_id": "EC109.intersection_over_union",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/8/area_2021_m2",
+      "metric_id": "EC121.area_2021_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/8/area_2026_m2",
+      "metric_id": "EC121.area_2026_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/8/net_area_change_m2",
+      "metric_id": "EC121.net_area_change_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/8/symmetric_difference_m2",
+      "metric_id": "EC121.symmetric_difference_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/8/intersection_over_union",
+      "metric_id": "EC121.intersection_over_union",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/9/area_2021_m2",
+      "metric_id": "EC122.area_2021_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/9/area_2026_m2",
+      "metric_id": "EC122.area_2026_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/9/net_area_change_m2",
+      "metric_id": "EC122.net_area_change_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/9/symmetric_difference_m2",
+      "metric_id": "EC122.symmetric_difference_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/9/intersection_over_union",
+      "metric_id": "EC122.intersection_over_union",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/10/area_2021_m2",
+      "metric_id": "EC123.area_2021_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/10/area_2026_m2",
+      "metric_id": "EC123.area_2026_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/10/net_area_change_m2",
+      "metric_id": "EC123.net_area_change_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/10/symmetric_difference_m2",
+      "metric_id": "EC123.symmetric_difference_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/10/intersection_over_union",
+      "metric_id": "EC123.intersection_over_union",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/11/area_2021_m2",
+      "metric_id": "EC124.area_2021_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/11/area_2026_m2",
+      "metric_id": "EC124.area_2026_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/11/net_area_change_m2",
+      "metric_id": "EC124.net_area_change_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/11/symmetric_difference_m2",
+      "metric_id": "EC124.symmetric_difference_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/11/intersection_over_union",
+      "metric_id": "EC124.intersection_over_union",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/12/area_2021_m2",
+      "metric_id": "EC126.area_2021_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/12/area_2026_m2",
+      "metric_id": "EC126.area_2026_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/12/net_area_change_m2",
+      "metric_id": "EC126.net_area_change_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/12/symmetric_difference_m2",
+      "metric_id": "EC126.symmetric_difference_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/12/intersection_over_union",
+      "metric_id": "EC126.intersection_over_union",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/13/area_2021_m2",
+      "metric_id": "EC129.area_2021_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/13/area_2026_m2",
+      "metric_id": "EC129.area_2026_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/13/net_area_change_m2",
+      "metric_id": "EC129.net_area_change_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/13/symmetric_difference_m2",
+      "metric_id": "EC129.symmetric_difference_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/13/intersection_over_union",
+      "metric_id": "EC129.intersection_over_union",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/14/area_2021_m2",
+      "metric_id": "EC131.area_2021_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/14/area_2026_m2",
+      "metric_id": "EC131.area_2026_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/14/net_area_change_m2",
+      "metric_id": "EC131.net_area_change_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/14/symmetric_difference_m2",
+      "metric_id": "EC131.symmetric_difference_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/14/intersection_over_union",
+      "metric_id": "EC131.intersection_over_union",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/15/area_2021_m2",
+      "metric_id": "EC135.area_2021_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/15/area_2026_m2",
+      "metric_id": "EC135.area_2026_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/15/net_area_change_m2",
+      "metric_id": "EC135.net_area_change_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/15/symmetric_difference_m2",
+      "metric_id": "EC135.symmetric_difference_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/15/intersection_over_union",
+      "metric_id": "EC135.intersection_over_union",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/16/area_2021_m2",
+      "metric_id": "EC136.area_2021_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/16/area_2026_m2",
+      "metric_id": "EC136.area_2026_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/16/net_area_change_m2",
+      "metric_id": "EC136.net_area_change_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/16/symmetric_difference_m2",
+      "metric_id": "EC136.symmetric_difference_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/16/intersection_over_union",
+      "metric_id": "EC136.intersection_over_union",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/17/area_2021_m2",
+      "metric_id": "EC137.area_2021_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/17/area_2026_m2",
+      "metric_id": "EC137.area_2026_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/17/net_area_change_m2",
+      "metric_id": "EC137.net_area_change_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/17/symmetric_difference_m2",
+      "metric_id": "EC137.symmetric_difference_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/17/intersection_over_union",
+      "metric_id": "EC137.intersection_over_union",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/18/area_2021_m2",
+      "metric_id": "EC138.area_2021_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/18/area_2026_m2",
+      "metric_id": "EC138.area_2026_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/18/net_area_change_m2",
+      "metric_id": "EC138.net_area_change_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/18/symmetric_difference_m2",
+      "metric_id": "EC138.symmetric_difference_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/18/intersection_over_union",
+      "metric_id": "EC138.intersection_over_union",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/19/area_2021_m2",
+      "metric_id": "EC139.area_2021_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/19/area_2026_m2",
+      "metric_id": "EC139.area_2026_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/19/net_area_change_m2",
+      "metric_id": "EC139.net_area_change_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/19/symmetric_difference_m2",
+      "metric_id": "EC139.symmetric_difference_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/19/intersection_over_union",
+      "metric_id": "EC139.intersection_over_union",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/20/area_2021_m2",
+      "metric_id": "EC141.area_2021_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/20/area_2026_m2",
+      "metric_id": "EC141.area_2026_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/20/net_area_change_m2",
+      "metric_id": "EC141.net_area_change_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/20/symmetric_difference_m2",
+      "metric_id": "EC141.symmetric_difference_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/20/intersection_over_union",
+      "metric_id": "EC141.intersection_over_union",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/21/area_2021_m2",
+      "metric_id": "EC142.area_2021_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/21/area_2026_m2",
+      "metric_id": "EC142.area_2026_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/21/net_area_change_m2",
+      "metric_id": "EC142.net_area_change_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/21/symmetric_difference_m2",
+      "metric_id": "EC142.symmetric_difference_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/21/intersection_over_union",
+      "metric_id": "EC142.intersection_over_union",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/22/area_2021_m2",
+      "metric_id": "EC145.area_2021_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/22/area_2026_m2",
+      "metric_id": "EC145.area_2026_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/22/net_area_change_m2",
+      "metric_id": "EC145.net_area_change_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/22/symmetric_difference_m2",
+      "metric_id": "EC145.symmetric_difference_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/22/intersection_over_union",
+      "metric_id": "EC145.intersection_over_union",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/23/area_2021_m2",
+      "metric_id": "EC153.area_2021_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/23/area_2026_m2",
+      "metric_id": "EC153.area_2026_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/23/net_area_change_m2",
+      "metric_id": "EC153.net_area_change_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/23/symmetric_difference_m2",
+      "metric_id": "EC153.symmetric_difference_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/23/intersection_over_union",
+      "metric_id": "EC153.intersection_over_union",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/24/area_2021_m2",
+      "metric_id": "EC154.area_2021_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/24/area_2026_m2",
+      "metric_id": "EC154.area_2026_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/24/net_area_change_m2",
+      "metric_id": "EC154.net_area_change_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/24/symmetric_difference_m2",
+      "metric_id": "EC154.symmetric_difference_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/24/intersection_over_union",
+      "metric_id": "EC154.intersection_over_union",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/25/area_2021_m2",
+      "metric_id": "EC155.area_2021_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/25/area_2026_m2",
+      "metric_id": "EC155.area_2026_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/25/net_area_change_m2",
+      "metric_id": "EC155.net_area_change_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/25/symmetric_difference_m2",
+      "metric_id": "EC155.symmetric_difference_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/25/intersection_over_union",
+      "metric_id": "EC155.intersection_over_union",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/26/area_2021_m2",
+      "metric_id": "EC156.area_2021_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/26/area_2026_m2",
+      "metric_id": "EC156.area_2026_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/26/net_area_change_m2",
+      "metric_id": "EC156.net_area_change_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/26/symmetric_difference_m2",
+      "metric_id": "EC156.symmetric_difference_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/26/intersection_over_union",
+      "metric_id": "EC156.intersection_over_union",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/27/area_2021_m2",
+      "metric_id": "EC157.area_2021_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/27/area_2026_m2",
+      "metric_id": "EC157.area_2026_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/27/net_area_change_m2",
+      "metric_id": "EC157.net_area_change_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/27/symmetric_difference_m2",
+      "metric_id": "EC157.symmetric_difference_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/27/intersection_over_union",
+      "metric_id": "EC157.intersection_over_union",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/28/area_2021_m2",
+      "metric_id": "EC441.area_2021_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/28/area_2026_m2",
+      "metric_id": "EC441.area_2026_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/28/net_area_change_m2",
+      "metric_id": "EC441.net_area_change_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/28/symmetric_difference_m2",
+      "metric_id": "EC441.symmetric_difference_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/28/intersection_over_union",
+      "metric_id": "EC441.intersection_over_union",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/29/area_2021_m2",
+      "metric_id": "EC442.area_2021_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/29/area_2026_m2",
+      "metric_id": "EC442.area_2026_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/29/net_area_change_m2",
+      "metric_id": "EC442.net_area_change_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/29/symmetric_difference_m2",
+      "metric_id": "EC442.symmetric_difference_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/29/intersection_over_union",
+      "metric_id": "EC442.intersection_over_union",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/30/area_2021_m2",
+      "metric_id": "EC443.area_2021_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/30/area_2026_m2",
+      "metric_id": "EC443.area_2026_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/30/net_area_change_m2",
+      "metric_id": "EC443.net_area_change_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/30/symmetric_difference_m2",
+      "metric_id": "EC443.symmetric_difference_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/30/intersection_over_union",
+      "metric_id": "EC443.intersection_over_union",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/31/area_2021_m2",
+      "metric_id": "EC444.area_2021_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/31/area_2026_m2",
+      "metric_id": "EC444.area_2026_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/31/net_area_change_m2",
+      "metric_id": "EC444.net_area_change_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/31/symmetric_difference_m2",
+      "metric_id": "EC444.symmetric_difference_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/31/intersection_over_union",
+      "metric_id": "EC444.intersection_over_union",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/32/area_2021_m2",
+      "metric_id": "NMA.area_2021_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/32/area_2026_m2",
+      "metric_id": "NMA.area_2026_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/32/net_area_change_m2",
+      "metric_id": "NMA.net_area_change_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/32/symmetric_difference_m2",
+      "metric_id": "NMA.symmetric_difference_m2",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    },
+    {
+      "json_pointer": "/rows/32/intersection_over_union",
+      "metric_id": "NMA.intersection_over_union",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json"
+    }
+  ],
+  "metrics": [
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "BUF.area_2021_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 2752576861.688096,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "BUF.area_2026_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 2809510403.6624484,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "BUF.net_area_change_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 56933541.97435236,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "BUF.symmetric_difference_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 56933552.23484531,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "BUF.intersection_over_union",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "fraction",
+      "value": 0.9797354186492191,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC101.area_2021_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 28653032961.858383,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC101.area_2026_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 28652390446.579884,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC101.net_area_change_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": -642515.2784996033,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC101.symmetric_difference_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 3094061.6168980687,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC101.intersection_over_union",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "fraction",
+      "value": 0.9998920208808921,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC102.area_2021_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 11068462624.050568,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC102.area_2026_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 11069874023.678656,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC102.net_area_change_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 1411399.6280879974,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC102.symmetric_difference_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 2295824.0253032693,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC102.intersection_over_union",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "fraction",
+      "value": 0.9997926144135013,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC104.area_2021_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 4376378769.421211,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC104.area_2026_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 4376378769.247927,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC104.net_area_change_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": -0.17328453063964844,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC104.symmetric_difference_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 11.892481296328373,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC104.intersection_over_union",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "fraction",
+      "value": 0.9999999972825748,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC105.area_2021_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 1839881700.7674687,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC105.area_2026_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 1839881701.1491299,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC105.net_area_change_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 0.38166117668151855,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC105.symmetric_difference_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 6.4408220315606926,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC105.intersection_over_union",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "fraction",
+      "value": 0.9999999964993281,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC106.area_2021_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 5995165799.118261,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC106.area_2026_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 5995165800.065553,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC106.net_area_change_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 0.947291374206543,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC106.symmetric_difference_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 13.90259338512317,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC106.intersection_over_union",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "fraction",
+      "value": 0.9999999976810326,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC108.area_2021_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 2670479904.9628024,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC108.area_2026_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 2670969646.516321,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC108.net_area_change_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 489741.5535187721,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC108.symmetric_difference_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 1620279.9694302303,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC108.intersection_over_union",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "fraction",
+      "value": 0.999393502229788,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC109.area_2021_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 3641812897.6085067,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC109.area_2026_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 3641255580.2702684,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC109.net_area_change_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": -557317.3382382393,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC109.symmetric_difference_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 588270.1673603156,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC109.intersection_over_union",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "fraction",
+      "value": 0.9998384684540444,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC121.area_2021_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 3302514025.962756,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC121.area_2026_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 3430010599.018916,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC121.net_area_change_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 127496573.05615997,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC121.symmetric_difference_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 163942113.10182682,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC121.intersection_over_union",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "fraction",
+      "value": 0.9524562013192902,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC122.area_2021_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 3137261339.26366,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC122.area_2026_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 2991542001.786738,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC122.net_area_change_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": -145719337.47692204,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC122.symmetric_difference_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 145719347.16675612,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC122.intersection_over_union",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "fraction",
+      "value": 0.9535520534684172,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC123.area_2021_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 1699826897.2525063,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC123.area_2026_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 1699752371.7670712,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC123.net_area_change_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": -74525.485435009,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC123.symmetric_difference_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 74533.17950800237,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC123.intersection_over_union",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "fraction",
+      "value": 0.9999561524885507,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC124.area_2021_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 4505478060.573875,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC124.area_2026_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 4454972165.9317255,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC124.net_area_change_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": -50505894.642149925,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC124.symmetric_difference_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 50505909.27616654,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC124.intersection_over_union",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "fraction",
+      "value": 0.9887901109460266,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC126.area_2021_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 2112464507.43965,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC126.area_2026_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 2106111385.9183855,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC126.net_area_change_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": -6353121.521264553,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC126.symmetric_difference_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 6353130.855488571,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC126.intersection_over_union",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "fraction",
+      "value": 0.9969925502563106,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC129.area_2021_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 6357325680.756861,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC129.area_2026_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 6357325680.702627,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC129.net_area_change_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": -0.054233551025390625,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC129.symmetric_difference_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 15.915615990705321,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC129.intersection_over_union",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "fraction",
+      "value": 0.9999999974964919,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC131.area_2021_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 11663498237.647816,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC131.area_2026_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 11663028744.981476,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC131.net_area_change_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": -469492.66633987427,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC131.symmetric_difference_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 469510.1671166209,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC131.intersection_over_union",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "fraction",
+      "value": 0.9999597453390743,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC135.area_2021_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 2845957983.294202,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC135.area_2026_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 2815654812.2656755,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC135.net_area_change_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": -30303171.028526306,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC135.symmetric_difference_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 30303181.684847746,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC135.intersection_over_union",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "fraction",
+      "value": 0.9893522034387033,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC136.area_2021_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 3484230842.679761,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC136.area_2026_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 3484230843.734727,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC136.net_area_change_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 1.0549659729003906,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC136.symmetric_difference_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 10.006364949812113,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC136.intersection_over_union",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "fraction",
+      "value": 0.9999999971280994,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC137.area_2021_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 2483867869.8769712,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC137.area_2026_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 2499518688.854265,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC137.net_area_change_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 15650818.977293968,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC137.symmetric_difference_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 20794716.9937668,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC137.intersection_over_union",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "fraction",
+      "value": 0.9916890632660967,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC138.area_2021_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 2345065750.892032,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC138.area_2026_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 2377940867.266515,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC138.net_area_change_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 32875116.37448263,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC138.symmetric_difference_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 32875123.20028942,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC138.intersection_over_union",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "fraction",
+      "value": 0.9861749618732546,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC139.area_2021_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 13584135524.994577,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC139.area_2026_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 13585314251.48338,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC139.net_area_change_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 1178726.4888019562,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC139.symmetric_difference_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 1178748.0152099982,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC139.intersection_over_union",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "fraction",
+      "value": 0.9999132336586068,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC141.area_2021_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 5018807718.80009,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC141.area_2026_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 5018807718.55435,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC141.net_area_change_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": -0.24573993682861328,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC141.symmetric_difference_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 12.593448683010287,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC141.intersection_over_union",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "fraction",
+      "value": 0.999999997490749,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC142.area_2021_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 7329422985.8686285,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC142.area_2026_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 7329422985.693592,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC142.net_area_change_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": -0.17503643035888672,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC142.symmetric_difference_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 13.888054104229662,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC142.intersection_over_union",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "fraction",
+      "value": 0.9999999981051639,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC145.area_2021_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 13268926079.689598,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC145.area_2026_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 13267747351.50449,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC145.net_area_change_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": -1178728.1851081848,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC145.symmetric_difference_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 1178747.8585539763,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC145.intersection_over_union",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "fraction",
+      "value": 0.999911164788273,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC153.area_2021_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 2476830042.5298643,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC153.area_2026_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 2476830042.8330007,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC153.net_area_change_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 0.30313634872436523,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC153.symmetric_difference_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 10.130227349150136,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC153.intersection_over_union",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "fraction",
+      "value": 0.999999995910003,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC154.area_2021_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 1291199522.294743,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC154.area_2026_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 1291199522.330548,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC154.net_area_change_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 0.03580498695373535,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC154.symmetric_difference_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 6.042745110819003,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC154.intersection_over_union",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "fraction",
+      "value": 0.9999999953200533,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC155.area_2021_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 2474010505.5055103,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC155.area_2026_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 2474010505.006598,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC155.net_area_change_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": -0.49891233444213867,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC155.symmetric_difference_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 9.850753208211572,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC155.intersection_over_union",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "fraction",
+      "value": 0.9999999960183058,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC156.area_2021_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 2880265038.9882536,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC156.area_2026_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 2880265039.286497,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC156.net_area_change_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 0.29824352264404297,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC156.symmetric_difference_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 13.358161700150301,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC156.intersection_over_union",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "fraction",
+      "value": 0.9999999953621761,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC157.area_2021_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 3018929718.969754,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC157.area_2026_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 3018929718.8666363,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC157.net_area_change_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": -0.1031179428100586,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC157.symmetric_difference_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 13.139431742229577,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC157.intersection_over_union",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "fraction",
+      "value": 0.9999999956476524,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC441.area_2021_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 4352308416.935903,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC441.area_2026_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 4352308416.551321,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC441.net_area_change_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": -0.3845815658569336,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC441.symmetric_difference_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 11.606354813705874,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC441.intersection_over_union",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "fraction",
+      "value": 0.9999999973332876,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC442.area_2021_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 2578900218.579937,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC442.area_2026_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 2578900218.8324914,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC442.net_area_change_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 0.25255441665649414,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC442.symmetric_difference_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 11.433587203530534,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC442.intersection_over_union",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "fraction",
+      "value": 0.999999995566487,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC443.area_2021_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 2415488365.2872586,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC443.area_2026_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 2415488364.921967,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC443.net_area_change_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": -0.3652915954589844,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC443.symmetric_difference_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 9.442681057423947,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC443.intersection_over_union",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "fraction",
+      "value": 0.9999999960907777,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC444.area_2021_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 1384522008.5735686,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC444.area_2026_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 1384522008.5433624,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC444.net_area_change_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": -0.03020620346069336,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC444.symmetric_difference_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 8.185550489467222,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "EC444.intersection_over_union",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "fraction",
+      "value": 0.9999999940878147,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "NMA.area_2021_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 1956958475.3110595,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "NMA.area_2026_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 1956726658.109693,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "NMA.net_area_change_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": -231817.20136642456,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "NMA.symmetric_difference_m2",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "m2",
+      "value": 1360750.893378227,
+      "vintage": "baseline"
+    },
+    {
+      "evaluation_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+      "id": "NMA.intersection_over_union",
+      "input_sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e",
+      "unit": "fraction",
+      "value": 0.9993048608197261,
+      "vintage": "baseline"
+    }
+  ],
+  "outputs": [
+    {
+      "bytes": 6820,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/README.md",
+      "sha256": "ee4386f490adc9e55d3023efea1d97b4a05e8eed443a6678d004e245150337eb"
+    },
+    {
+      "bytes": 19248,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/boundary-vintage-differences.json",
+      "sha256": "39c36e301e82035c7eb1736e4ef0cbf7de0861a90024c7c51b787abf88b52979"
+    },
+    {
+      "bytes": 382,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/geometry-negative-control.json",
+      "sha256": "fcb95e09eccb6bb9e453b6b5634ad8e065876cf3a33e62979af15575c3c3082a"
+    },
+    {
+      "bytes": 1288,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/geometry-positive-control.json",
+      "sha256": "73cfce1bf53048b1ed35bd22d3768f876dfe5f90b2ba200b9fc35cb2010b96f1"
+    },
+    {
+      "bytes": 40205,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/mdb-crosswalk-and-reproduction.json",
+      "sha256": "25f97304c52c52c85cf2d1bc18c36ce35ef011c07cdd49bf19969f4f7bb143d0"
+    },
+    {
+      "bytes": 672,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/measurement-inputs.json",
+      "sha256": "7c299b16c2ef1dbf90c3e8d9294fd7dff049664c7ee096a09012cd7a3c4ac92e"
+    },
+    {
+      "bytes": 13239,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/findings/source-register.json",
+      "sha256": "841c31e655cbaf55e03e95a6b1df325928edb822a74f9a217a57de4913ba8688"
+    },
+    {
+      "bytes": 5363,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/measure_boundary_vintages.py",
+      "sha256": "40b8af8954c3cc3641575c9f5ba505363e76b1553ee8f2523e029d1608a8c62c"
+    },
+    {
+      "bytes": 24367,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/reproduce_source_audit.py",
+      "sha256": "3daa4c433c7a740756e27fc0de7a9a00c5581db6dcc64e8d8b4a07a85e266727"
+    },
+    {
+      "bytes": 10385,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/sources/issue-1137-api-snapshot.json",
+      "sha256": "e1071db7ec1b7dfed28dbfa1ae52902a3339218c8d150d006abbd20aa6337989"
+    },
+    {
+      "bytes": 17619,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/sources/issue-955-api-snapshot.json",
+      "sha256": "7644a280533b32c4bcd74faa3ece3d2af56beb1bf551084265762caecf8f007f"
+    },
+    {
+      "bytes": 11290,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-2021-eastern-cape-attribute-roster.json",
+      "sha256": "ffd8ae38ed99d2cb66b5d4c0cf3f74972de81ca8e4d02bb161eb59cf5e79dbd4"
+    },
+    {
+      "bytes": 10008353,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-2021-eastern-cape-boundaries.geojson",
+      "sha256": "d92db8c3ed9f508841336a68c8e3b94c7a5b9f031787884119d9575a95673eab"
+    },
+    {
+      "bytes": 11749,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-2026-eastern-cape-attribute-roster.json",
+      "sha256": "ef7fbf219bb3d33062cf78bd6e5b32b5f6fac687b576212d12320a005f7c2604"
+    },
+    {
+      "bytes": 9972867,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-2026-eastern-cape-boundaries.geojson",
+      "sha256": "f0069abf4892d52c4a8884f932c2e760e5663690c37204b91fa17a9ff3524147"
+    },
+    {
+      "bytes": 5127,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-2026-item-metadata.json",
+      "sha256": "5476378615eb8094a045a346a3de1b0820c6b3b34ff10e320e3ccfea343a49e3"
+    },
+    {
+      "bytes": 15666,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-2026-layer-metadata.json",
+      "sha256": "27a7b5c409efe59d20b60c1ac66d0edb65eb5404835a7fcb64aea550af687cb8"
+    },
+    {
+      "bytes": 5117,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-local-municipalities-2021-item-metadata.json",
+      "sha256": "2c09557bf368739c45e9823565563beb1f958f33fd8bacc4bdc6497fc27a0839"
+    },
+    {
+      "bytes": 14946,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/eastern-cape-source-restoration-435/sources/mdb-local-municipalities-2021-layer-metadata.json",
+      "sha256": "98afa9ea38849e32ac216b78cd82f0ca4737a201990bbef602584f9e2fcc5277"
+    }
+  ],
+  "sources": [
+    {
+      "id": "geoboundaries-zaf-adm3-2020",
+      "license": {
+        "status": "redistributable",
+        "terms": "CC BY 3.0 IGO; retain attribution to geoBoundaries (Runfola et al.) and commit 9469f09."
+      },
+      "limit": "This child does not duplicate the already-retained source. Exact original attribution and part/whole-file hashes are pinned and replayed; original geographic accuracy is not implied.",
+      "restoration": "The exact lawful original bytes are already preserved unchanged at the pinned ancestor-main paths listed as baseline role original-source and in the prior source register; reproduce from these files without making a duplicate.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "original source for the stable Atlas subject IDs and historical names",
+      "temporal_status": "reference",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/ZAF/ADM3/geoBoundaries-ZAF-ADM3.geojson",
+      "verification": "verified",
+      "vintage": "gbOpen ZAF ADM3 at release commit 9469f09; 2020 reference; original retrieval 2026-10-05, byte-identical parts copied 2026-10-06"
+    },
+    {
+      "id": "mdb-2021-current-reference",
+      "license": {
+        "status": "restricted",
+        "terms": "Attribution to MDB required. Research/publication/value-added use allowed; no sale/commercial use; do not alter original and pass to third parties as MDB product."
+      },
+      "limit": "Layer is based on MDB 2018, effective in 2021, last service edit December 2023. 2024 final decisions are later; legal effective date and complete/current footprint remain unresolved.",
+      "restoration": "The exact item, service metadata, and 2026-10-06 Eastern Cape REST response bytes and hashes are retained as research evidence in this packet; retrieve by REST URL parameters recorded in findings/source-register.json. Respect MDB attribution and restricted-use terms; this is not an unrestricted downstream redistribution grant.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "MDB 2021 item, layer metadata and Eastern Cape roster/geometry REST responses",
+      "temporal_status": "reference",
+      "url": "https://www.arcgis.com/sharing/rest/content/items/27bbdd5b041b4ba6b5707dfed5aa3923?f=json",
+      "verification": "verified",
+      "vintage": "MDB Local Municipalities 2021; based on 2018 MDB product; service edited 2023-12-12"
+    },
+    {
+      "id": "mdb-2026-prospective",
+      "license": {
+        "status": "restricted",
+        "terms": "Attribution to MDB required. Research/publication/value-added use allowed; no sale/commercial use; do not alter original and pass to third parties as MDB product."
+      },
+      "limit": "Prospective on evaluation date; cannot establish effective/current geography as of 2026-10-06.",
+      "restoration": "The exact item, service metadata, and 2026-10-06 Eastern Cape REST response bytes and hashes are retained as research evidence in this packet; retrieve by REST URL parameters recorded in findings/source-register.json. Respect MDB attribution and restricted-use terms; this is not an unrestricted downstream redistribution grant.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "prospective MDB 2026 item, layer metadata and Eastern Cape roster/geometry REST responses",
+      "temporal_status": "reference",
+      "url": "https://www.arcgis.com/sharing/rest/content/items/82c7a6d178454ddcb4dc1ef6bf2a4303?f=json",
+      "verification": "verified",
+      "vintage": "MDB Local Municipalities 2026; item created 2026-07-14; states effective 2026-11-04"
+    },
+    {
+      "id": "mdb-2024-gazette-5030",
+      "license": {
+        "status": "unknown",
+        "terms": "Official gazette PDF terms were not determined; no copy redistributed."
+      },
+      "limit": "DEM determination is not itself a section 23 effective-date notice.",
+      "restoration": "Retrieve official PDF from URL and inspect relevant DEM map sheets; direct fetch timed out, official search index returned notice/map text.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "MDB determination notices for DEM6500, DEM6506 and DEM6611",
+      "temporal_status": "reference",
+      "url": "https://www.demarcation.org.za/wp-content/uploads/2024/01/Eastern-Cape-S21-5030-08-01-2024.pdf",
+      "verification": "verified",
+      "vintage": "Eastern Cape Provincial Gazette 5030, PN763, 2024-01-08"
+    },
+    {
+      "id": "mdb-2024-gazette-5064",
+      "license": {
+        "status": "unknown",
+        "terms": "Official gazette PDF terms were not determined; no copy redistributed."
+      },
+      "limit": "Confirms final MDB decision only; not IEC materiality opinion or MEC effect date.",
+      "restoration": "Retrieve official PDF from URL; direct fetch returned 502, official search index returned confirmation table.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "MDB Section 21(5) confirmations for DEM6500, DEM6506 and DEM6611",
+      "temporal_status": "reference",
+      "url": "https://www.demarcation.org.za/wp-content/uploads/2024/03/EC_S21_5_5064-11-03-ECape.pdf",
+      "verification": "verified",
+      "vintage": "Eastern Cape Provincial Gazette 5064, PN805, 2024-03-11"
+    },
+    {
+      "id": "stats-sa-district-name",
+      "license": {
+        "status": "unknown",
+        "terms": "Official Stats SA web page; reuse terms not separately established."
+      },
+      "limit": "Supports Cacadu renamed Sarah Baartman in 2018; not boundary geometry.",
+      "restoration": "Retrieve page by URL. PDF report endpoint returned an Incapsula challenge, not a retained report.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "Stats SA district-name context",
+      "temporal_status": "reference",
+      "url": "https://www.statssa.gov.za/?p=16760",
+      "verification": "verified",
+      "vintage": "Eastern Cape Census 2022 article posted 2023-10-23"
+    },
+    {
+      "id": "mda-effective-date-law",
+      "license": {
+        "status": "unknown",
+        "terms": "Official legislation; terms not separately assessed."
+      },
+      "limit": "Specific legal effective date remains unresolved.",
+      "restoration": "Retrieve current official consolidated Act and source the specific IEC opinion and Eastern Cape MEC Gazette notices for DEM6500/6506/6611.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "MDA section 23 legal effective-date procedure",
+      "temporal_status": "reference",
+      "url": "https://www.gov.za/documents/local-government-municipal-demarcation-act",
+      "verification": "unverified",
+      "vintage": "Local Government: Municipal Demarcation Act 1998 as amended"
+    },
+    {
+      "id": "dr-ab-xuma-identity",
+      "license": {
+        "status": "unknown",
+        "terms": "Municipal website reuse terms not established."
+      },
+      "limit": "Supports present self-description, not legal name change instrument/date.",
+      "restoration": "Retrieve the municipal about page at URL.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "municipality self-description, category and Engcobo place distinction",
+      "temporal_status": "reference",
+      "url": "https://drabxumalm.gov.za/about/",
+      "verification": "verified",
+      "vintage": "Municipality page dated 2026-09-23"
+    },
+    {
+      "id": "issue-1137-scope-snapshot",
+      "license": {
+        "status": "unknown",
+        "terms": "Public issue metadata; no separate reuse analysis."
+      },
+      "limit": "Scope snapshot dates issue contents; live issue should be checked during PR/queue.",
+      "restoration": "Retrieve the public issue through GitHub API.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "exact scope, owned path and acceptance contract",
+      "temporal_status": "reference",
+      "url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/issues/1137",
+      "verification": "verified",
+      "vintage": "GitHub API snapshot retrieved 2026-10-06"
+    },
+    {
+      "id": "issue-955-sibling-scope",
+      "license": {
+        "status": "unknown",
+        "terms": "Public issue metadata; no separate reuse analysis."
+      },
+      "limit": "Exact disjointness uses the captured issue snapshot; check current sibling work before scope expansion.",
+      "restoration": "Retrieve the public issue through GitHub API.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "disjoint adjacent South Africa scope check",
+      "temporal_status": "reference",
+      "url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/issues/955",
+      "verification": "verified",
+      "vintage": "GitHub API snapshot retrieved 2026-10-06"
+    }
+  ],
+  "stages": {
+    "geographic_approval": "unapproved",
+    "implementation": "not-proposed",
+    "research": "complete"
+  },
+  "subject_ids": [
+    "gb:ZAF:ADM3:15628383B16723794281290",
+    "gb:ZAF:ADM3:15628383B24019341917361",
+    "gb:ZAF:ADM3:15628383B24472250012031",
+    "gb:ZAF:ADM3:15628383B28857154592205",
+    "gb:ZAF:ADM3:15628383B33674951697181",
+    "gb:ZAF:ADM3:15628383B35584475836677",
+    "gb:ZAF:ADM3:15628383B36159893459203",
+    "gb:ZAF:ADM3:15628383B46688478529811",
+    "gb:ZAF:ADM3:15628383B4889923419833",
+    "gb:ZAF:ADM3:15628383B56060894344771",
+    "gb:ZAF:ADM3:15628383B59220525748831",
+    "gb:ZAF:ADM3:15628383B67522024924235",
+    "gb:ZAF:ADM3:15628383B78908098986015",
+    "gb:ZAF:ADM3:15628383B80616091697700",
+    "gb:ZAF:ADM3:15628383B88034979550306",
+    "gb:ZAF:ADM3:15628383B92131487833225",
+    "gb:ZAF:ADM3:15628383B99818150234159"
+  ],
+  "subject_ids_sha256": "ce6edf3e65f49cd452276fecd25a8e7ae449e55c7e4ec46e4357b9e14c96e0d5",
+  "summaries": [
+    {
+      "metric_id": "BUF.area_2021_m2",
+      "unit": "m2",
+      "value": 2752576861.688096
+    },
+    {
+      "metric_id": "BUF.area_2026_m2",
+      "unit": "m2",
+      "value": 2809510403.6624484
+    },
+    {
+      "metric_id": "BUF.net_area_change_m2",
+      "unit": "m2",
+      "value": 56933541.97435236
+    },
+    {
+      "metric_id": "BUF.symmetric_difference_m2",
+      "unit": "m2",
+      "value": 56933552.23484531
+    },
+    {
+      "metric_id": "BUF.intersection_over_union",
+      "unit": "fraction",
+      "value": 0.9797354186492191
+    },
+    {
+      "metric_id": "EC101.area_2021_m2",
+      "unit": "m2",
+      "value": 28653032961.858383
+    },
+    {
+      "metric_id": "EC101.area_2026_m2",
+      "unit": "m2",
+      "value": 28652390446.579884
+    },
+    {
+      "metric_id": "EC101.net_area_change_m2",
+      "unit": "m2",
+      "value": -642515.2784996033
+    },
+    {
+      "metric_id": "EC101.symmetric_difference_m2",
+      "unit": "m2",
+      "value": 3094061.6168980687
+    },
+    {
+      "metric_id": "EC101.intersection_over_union",
+      "unit": "fraction",
+      "value": 0.9998920208808921
+    },
+    {
+      "metric_id": "EC102.area_2021_m2",
+      "unit": "m2",
+      "value": 11068462624.050568
+    },
+    {
+      "metric_id": "EC102.area_2026_m2",
+      "unit": "m2",
+      "value": 11069874023.678656
+    },
+    {
+      "metric_id": "EC102.net_area_change_m2",
+      "unit": "m2",
+      "value": 1411399.6280879974
+    },
+    {
+      "metric_id": "EC102.symmetric_difference_m2",
+      "unit": "m2",
+      "value": 2295824.0253032693
+    },
+    {
+      "metric_id": "EC102.intersection_over_union",
+      "unit": "fraction",
+      "value": 0.9997926144135013
+    },
+    {
+      "metric_id": "EC104.area_2021_m2",
+      "unit": "m2",
+      "value": 4376378769.421211
+    },
+    {
+      "metric_id": "EC104.area_2026_m2",
+      "unit": "m2",
+      "value": 4376378769.247927
+    },
+    {
+      "metric_id": "EC104.net_area_change_m2",
+      "unit": "m2",
+      "value": -0.17328453063964844
+    },
+    {
+      "metric_id": "EC104.symmetric_difference_m2",
+      "unit": "m2",
+      "value": 11.892481296328373
+    },
+    {
+      "metric_id": "EC104.intersection_over_union",
+      "unit": "fraction",
+      "value": 0.9999999972825748
+    },
+    {
+      "metric_id": "EC105.area_2021_m2",
+      "unit": "m2",
+      "value": 1839881700.7674687
+    },
+    {
+      "metric_id": "EC105.area_2026_m2",
+      "unit": "m2",
+      "value": 1839881701.1491299
+    },
+    {
+      "metric_id": "EC105.net_area_change_m2",
+      "unit": "m2",
+      "value": 0.38166117668151855
+    },
+    {
+      "metric_id": "EC105.symmetric_difference_m2",
+      "unit": "m2",
+      "value": 6.4408220315606926
+    },
+    {
+      "metric_id": "EC105.intersection_over_union",
+      "unit": "fraction",
+      "value": 0.9999999964993281
+    },
+    {
+      "metric_id": "EC106.area_2021_m2",
+      "unit": "m2",
+      "value": 5995165799.118261
+    },
+    {
+      "metric_id": "EC106.area_2026_m2",
+      "unit": "m2",
+      "value": 5995165800.065553
+    },
+    {
+      "metric_id": "EC106.net_area_change_m2",
+      "unit": "m2",
+      "value": 0.947291374206543
+    },
+    {
+      "metric_id": "EC106.symmetric_difference_m2",
+      "unit": "m2",
+      "value": 13.90259338512317
+    },
+    {
+      "metric_id": "EC106.intersection_over_union",
+      "unit": "fraction",
+      "value": 0.9999999976810326
+    },
+    {
+      "metric_id": "EC108.area_2021_m2",
+      "unit": "m2",
+      "value": 2670479904.9628024
+    },
+    {
+      "metric_id": "EC108.area_2026_m2",
+      "unit": "m2",
+      "value": 2670969646.516321
+    },
+    {
+      "metric_id": "EC108.net_area_change_m2",
+      "unit": "m2",
+      "value": 489741.5535187721
+    },
+    {
+      "metric_id": "EC108.symmetric_difference_m2",
+      "unit": "m2",
+      "value": 1620279.9694302303
+    },
+    {
+      "metric_id": "EC108.intersection_over_union",
+      "unit": "fraction",
+      "value": 0.999393502229788
+    },
+    {
+      "metric_id": "EC109.area_2021_m2",
+      "unit": "m2",
+      "value": 3641812897.6085067
+    },
+    {
+      "metric_id": "EC109.area_2026_m2",
+      "unit": "m2",
+      "value": 3641255580.2702684
+    },
+    {
+      "metric_id": "EC109.net_area_change_m2",
+      "unit": "m2",
+      "value": -557317.3382382393
+    },
+    {
+      "metric_id": "EC109.symmetric_difference_m2",
+      "unit": "m2",
+      "value": 588270.1673603156
+    },
+    {
+      "metric_id": "EC109.intersection_over_union",
+      "unit": "fraction",
+      "value": 0.9998384684540444
+    },
+    {
+      "metric_id": "EC121.area_2021_m2",
+      "unit": "m2",
+      "value": 3302514025.962756
+    },
+    {
+      "metric_id": "EC121.area_2026_m2",
+      "unit": "m2",
+      "value": 3430010599.018916
+    },
+    {
+      "metric_id": "EC121.net_area_change_m2",
+      "unit": "m2",
+      "value": 127496573.05615997
+    },
+    {
+      "metric_id": "EC121.symmetric_difference_m2",
+      "unit": "m2",
+      "value": 163942113.10182682
+    },
+    {
+      "metric_id": "EC121.intersection_over_union",
+      "unit": "fraction",
+      "value": 0.9524562013192902
+    },
+    {
+      "metric_id": "EC122.area_2021_m2",
+      "unit": "m2",
+      "value": 3137261339.26366
+    },
+    {
+      "metric_id": "EC122.area_2026_m2",
+      "unit": "m2",
+      "value": 2991542001.786738
+    },
+    {
+      "metric_id": "EC122.net_area_change_m2",
+      "unit": "m2",
+      "value": -145719337.47692204
+    },
+    {
+      "metric_id": "EC122.symmetric_difference_m2",
+      "unit": "m2",
+      "value": 145719347.16675612
+    },
+    {
+      "metric_id": "EC122.intersection_over_union",
+      "unit": "fraction",
+      "value": 0.9535520534684172
+    },
+    {
+      "metric_id": "EC123.area_2021_m2",
+      "unit": "m2",
+      "value": 1699826897.2525063
+    },
+    {
+      "metric_id": "EC123.area_2026_m2",
+      "unit": "m2",
+      "value": 1699752371.7670712
+    },
+    {
+      "metric_id": "EC123.net_area_change_m2",
+      "unit": "m2",
+      "value": -74525.485435009
+    },
+    {
+      "metric_id": "EC123.symmetric_difference_m2",
+      "unit": "m2",
+      "value": 74533.17950800237
+    },
+    {
+      "metric_id": "EC123.intersection_over_union",
+      "unit": "fraction",
+      "value": 0.9999561524885507
+    },
+    {
+      "metric_id": "EC124.area_2021_m2",
+      "unit": "m2",
+      "value": 4505478060.573875
+    },
+    {
+      "metric_id": "EC124.area_2026_m2",
+      "unit": "m2",
+      "value": 4454972165.9317255
+    },
+    {
+      "metric_id": "EC124.net_area_change_m2",
+      "unit": "m2",
+      "value": -50505894.642149925
+    },
+    {
+      "metric_id": "EC124.symmetric_difference_m2",
+      "unit": "m2",
+      "value": 50505909.27616654
+    },
+    {
+      "metric_id": "EC124.intersection_over_union",
+      "unit": "fraction",
+      "value": 0.9887901109460266
+    },
+    {
+      "metric_id": "EC126.area_2021_m2",
+      "unit": "m2",
+      "value": 2112464507.43965
+    },
+    {
+      "metric_id": "EC126.area_2026_m2",
+      "unit": "m2",
+      "value": 2106111385.9183855
+    },
+    {
+      "metric_id": "EC126.net_area_change_m2",
+      "unit": "m2",
+      "value": -6353121.521264553
+    },
+    {
+      "metric_id": "EC126.symmetric_difference_m2",
+      "unit": "m2",
+      "value": 6353130.855488571
+    },
+    {
+      "metric_id": "EC126.intersection_over_union",
+      "unit": "fraction",
+      "value": 0.9969925502563106
+    },
+    {
+      "metric_id": "EC129.area_2021_m2",
+      "unit": "m2",
+      "value": 6357325680.756861
+    },
+    {
+      "metric_id": "EC129.area_2026_m2",
+      "unit": "m2",
+      "value": 6357325680.702627
+    },
+    {
+      "metric_id": "EC129.net_area_change_m2",
+      "unit": "m2",
+      "value": -0.054233551025390625
+    },
+    {
+      "metric_id": "EC129.symmetric_difference_m2",
+      "unit": "m2",
+      "value": 15.915615990705321
+    },
+    {
+      "metric_id": "EC129.intersection_over_union",
+      "unit": "fraction",
+      "value": 0.9999999974964919
+    },
+    {
+      "metric_id": "EC131.area_2021_m2",
+      "unit": "m2",
+      "value": 11663498237.647816
+    },
+    {
+      "metric_id": "EC131.area_2026_m2",
+      "unit": "m2",
+      "value": 11663028744.981476
+    },
+    {
+      "metric_id": "EC131.net_area_change_m2",
+      "unit": "m2",
+      "value": -469492.66633987427
+    },
+    {
+      "metric_id": "EC131.symmetric_difference_m2",
+      "unit": "m2",
+      "value": 469510.1671166209
+    },
+    {
+      "metric_id": "EC131.intersection_over_union",
+      "unit": "fraction",
+      "value": 0.9999597453390743
+    },
+    {
+      "metric_id": "EC135.area_2021_m2",
+      "unit": "m2",
+      "value": 2845957983.294202
+    },
+    {
+      "metric_id": "EC135.area_2026_m2",
+      "unit": "m2",
+      "value": 2815654812.2656755
+    },
+    {
+      "metric_id": "EC135.net_area_change_m2",
+      "unit": "m2",
+      "value": -30303171.028526306
+    },
+    {
+      "metric_id": "EC135.symmetric_difference_m2",
+      "unit": "m2",
+      "value": 30303181.684847746
+    },
+    {
+      "metric_id": "EC135.intersection_over_union",
+      "unit": "fraction",
+      "value": 0.9893522034387033
+    },
+    {
+      "metric_id": "EC136.area_2021_m2",
+      "unit": "m2",
+      "value": 3484230842.679761
+    },
+    {
+      "metric_id": "EC136.area_2026_m2",
+      "unit": "m2",
+      "value": 3484230843.734727
+    },
+    {
+      "metric_id": "EC136.net_area_change_m2",
+      "unit": "m2",
+      "value": 1.0549659729003906
+    },
+    {
+      "metric_id": "EC136.symmetric_difference_m2",
+      "unit": "m2",
+      "value": 10.006364949812113
+    },
+    {
+      "metric_id": "EC136.intersection_over_union",
+      "unit": "fraction",
+      "value": 0.9999999971280994
+    },
+    {
+      "metric_id": "EC137.area_2021_m2",
+      "unit": "m2",
+      "value": 2483867869.8769712
+    },
+    {
+      "metric_id": "EC137.area_2026_m2",
+      "unit": "m2",
+      "value": 2499518688.854265
+    },
+    {
+      "metric_id": "EC137.net_area_change_m2",
+      "unit": "m2",
+      "value": 15650818.977293968
+    },
+    {
+      "metric_id": "EC137.symmetric_difference_m2",
+      "unit": "m2",
+      "value": 20794716.9937668
+    },
+    {
+      "metric_id": "EC137.intersection_over_union",
+      "unit": "fraction",
+      "value": 0.9916890632660967
+    },
+    {
+      "metric_id": "EC138.area_2021_m2",
+      "unit": "m2",
+      "value": 2345065750.892032
+    },
+    {
+      "metric_id": "EC138.area_2026_m2",
+      "unit": "m2",
+      "value": 2377940867.266515
+    },
+    {
+      "metric_id": "EC138.net_area_change_m2",
+      "unit": "m2",
+      "value": 32875116.37448263
+    },
+    {
+      "metric_id": "EC138.symmetric_difference_m2",
+      "unit": "m2",
+      "value": 32875123.20028942
+    },
+    {
+      "metric_id": "EC138.intersection_over_union",
+      "unit": "fraction",
+      "value": 0.9861749618732546
+    },
+    {
+      "metric_id": "EC139.area_2021_m2",
+      "unit": "m2",
+      "value": 13584135524.994577
+    },
+    {
+      "metric_id": "EC139.area_2026_m2",
+      "unit": "m2",
+      "value": 13585314251.48338
+    },
+    {
+      "metric_id": "EC139.net_area_change_m2",
+      "unit": "m2",
+      "value": 1178726.4888019562
+    },
+    {
+      "metric_id": "EC139.symmetric_difference_m2",
+      "unit": "m2",
+      "value": 1178748.0152099982
+    },
+    {
+      "metric_id": "EC139.intersection_over_union",
+      "unit": "fraction",
+      "value": 0.9999132336586068
+    },
+    {
+      "metric_id": "EC141.area_2021_m2",
+      "unit": "m2",
+      "value": 5018807718.80009
+    },
+    {
+      "metric_id": "EC141.area_2026_m2",
+      "unit": "m2",
+      "value": 5018807718.55435
+    },
+    {
+      "metric_id": "EC141.net_area_change_m2",
+      "unit": "m2",
+      "value": -0.24573993682861328
+    },
+    {
+      "metric_id": "EC141.symmetric_difference_m2",
+      "unit": "m2",
+      "value": 12.593448683010287
+    },
+    {
+      "metric_id": "EC141.intersection_over_union",
+      "unit": "fraction",
+      "value": 0.999999997490749
+    },
+    {
+      "metric_id": "EC142.area_2021_m2",
+      "unit": "m2",
+      "value": 7329422985.8686285
+    },
+    {
+      "metric_id": "EC142.area_2026_m2",
+      "unit": "m2",
+      "value": 7329422985.693592
+    },
+    {
+      "metric_id": "EC142.net_area_change_m2",
+      "unit": "m2",
+      "value": -0.17503643035888672
+    },
+    {
+      "metric_id": "EC142.symmetric_difference_m2",
+      "unit": "m2",
+      "value": 13.888054104229662
+    },
+    {
+      "metric_id": "EC142.intersection_over_union",
+      "unit": "fraction",
+      "value": 0.9999999981051639
+    },
+    {
+      "metric_id": "EC145.area_2021_m2",
+      "unit": "m2",
+      "value": 13268926079.689598
+    },
+    {
+      "metric_id": "EC145.area_2026_m2",
+      "unit": "m2",
+      "value": 13267747351.50449
+    },
+    {
+      "metric_id": "EC145.net_area_change_m2",
+      "unit": "m2",
+      "value": -1178728.1851081848
+    },
+    {
+      "metric_id": "EC145.symmetric_difference_m2",
+      "unit": "m2",
+      "value": 1178747.8585539763
+    },
+    {
+      "metric_id": "EC145.intersection_over_union",
+      "unit": "fraction",
+      "value": 0.999911164788273
+    },
+    {
+      "metric_id": "EC153.area_2021_m2",
+      "unit": "m2",
+      "value": 2476830042.5298643
+    },
+    {
+      "metric_id": "EC153.area_2026_m2",
+      "unit": "m2",
+      "value": 2476830042.8330007
+    },
+    {
+      "metric_id": "EC153.net_area_change_m2",
+      "unit": "m2",
+      "value": 0.30313634872436523
+    },
+    {
+      "metric_id": "EC153.symmetric_difference_m2",
+      "unit": "m2",
+      "value": 10.130227349150136
+    },
+    {
+      "metric_id": "EC153.intersection_over_union",
+      "unit": "fraction",
+      "value": 0.999999995910003
+    },
+    {
+      "metric_id": "EC154.area_2021_m2",
+      "unit": "m2",
+      "value": 1291199522.294743
+    },
+    {
+      "metric_id": "EC154.area_2026_m2",
+      "unit": "m2",
+      "value": 1291199522.330548
+    },
+    {
+      "metric_id": "EC154.net_area_change_m2",
+      "unit": "m2",
+      "value": 0.03580498695373535
+    },
+    {
+      "metric_id": "EC154.symmetric_difference_m2",
+      "unit": "m2",
+      "value": 6.042745110819003
+    },
+    {
+      "metric_id": "EC154.intersection_over_union",
+      "unit": "fraction",
+      "value": 0.9999999953200533
+    },
+    {
+      "metric_id": "EC155.area_2021_m2",
+      "unit": "m2",
+      "value": 2474010505.5055103
+    },
+    {
+      "metric_id": "EC155.area_2026_m2",
+      "unit": "m2",
+      "value": 2474010505.006598
+    },
+    {
+      "metric_id": "EC155.net_area_change_m2",
+      "unit": "m2",
+      "value": -0.49891233444213867
+    },
+    {
+      "metric_id": "EC155.symmetric_difference_m2",
+      "unit": "m2",
+      "value": 9.850753208211572
+    },
+    {
+      "metric_id": "EC155.intersection_over_union",
+      "unit": "fraction",
+      "value": 0.9999999960183058
+    },
+    {
+      "metric_id": "EC156.area_2021_m2",
+      "unit": "m2",
+      "value": 2880265038.9882536
+    },
+    {
+      "metric_id": "EC156.area_2026_m2",
+      "unit": "m2",
+      "value": 2880265039.286497
+    },
+    {
+      "metric_id": "EC156.net_area_change_m2",
+      "unit": "m2",
+      "value": 0.29824352264404297
+    },
+    {
+      "metric_id": "EC156.symmetric_difference_m2",
+      "unit": "m2",
+      "value": 13.358161700150301
+    },
+    {
+      "metric_id": "EC156.intersection_over_union",
+      "unit": "fraction",
+      "value": 0.9999999953621761
+    },
+    {
+      "metric_id": "EC157.area_2021_m2",
+      "unit": "m2",
+      "value": 3018929718.969754
+    },
+    {
+      "metric_id": "EC157.area_2026_m2",
+      "unit": "m2",
+      "value": 3018929718.8666363
+    },
+    {
+      "metric_id": "EC157.net_area_change_m2",
+      "unit": "m2",
+      "value": -0.1031179428100586
+    },
+    {
+      "metric_id": "EC157.symmetric_difference_m2",
+      "unit": "m2",
+      "value": 13.139431742229577
+    },
+    {
+      "metric_id": "EC157.intersection_over_union",
+      "unit": "fraction",
+      "value": 0.9999999956476524
+    },
+    {
+      "metric_id": "EC441.area_2021_m2",
+      "unit": "m2",
+      "value": 4352308416.935903
+    },
+    {
+      "metric_id": "EC441.area_2026_m2",
+      "unit": "m2",
+      "value": 4352308416.551321
+    },
+    {
+      "metric_id": "EC441.net_area_change_m2",
+      "unit": "m2",
+      "value": -0.3845815658569336
+    },
+    {
+      "metric_id": "EC441.symmetric_difference_m2",
+      "unit": "m2",
+      "value": 11.606354813705874
+    },
+    {
+      "metric_id": "EC441.intersection_over_union",
+      "unit": "fraction",
+      "value": 0.9999999973332876
+    },
+    {
+      "metric_id": "EC442.area_2021_m2",
+      "unit": "m2",
+      "value": 2578900218.579937
+    },
+    {
+      "metric_id": "EC442.area_2026_m2",
+      "unit": "m2",
+      "value": 2578900218.8324914
+    },
+    {
+      "metric_id": "EC442.net_area_change_m2",
+      "unit": "m2",
+      "value": 0.25255441665649414
+    },
+    {
+      "metric_id": "EC442.symmetric_difference_m2",
+      "unit": "m2",
+      "value": 11.433587203530534
+    },
+    {
+      "metric_id": "EC442.intersection_over_union",
+      "unit": "fraction",
+      "value": 0.999999995566487
+    },
+    {
+      "metric_id": "EC443.area_2021_m2",
+      "unit": "m2",
+      "value": 2415488365.2872586
+    },
+    {
+      "metric_id": "EC443.area_2026_m2",
+      "unit": "m2",
+      "value": 2415488364.921967
+    },
+    {
+      "metric_id": "EC443.net_area_change_m2",
+      "unit": "m2",
+      "value": -0.3652915954589844
+    },
+    {
+      "metric_id": "EC443.symmetric_difference_m2",
+      "unit": "m2",
+      "value": 9.442681057423947
+    },
+    {
+      "metric_id": "EC443.intersection_over_union",
+      "unit": "fraction",
+      "value": 0.9999999960907777
+    },
+    {
+      "metric_id": "EC444.area_2021_m2",
+      "unit": "m2",
+      "value": 1384522008.5735686
+    },
+    {
+      "metric_id": "EC444.area_2026_m2",
+      "unit": "m2",
+      "value": 1384522008.5433624
+    },
+    {
+      "metric_id": "EC444.net_area_change_m2",
+      "unit": "m2",
+      "value": -0.03020620346069336
+    },
+    {
+      "metric_id": "EC444.symmetric_difference_m2",
+      "unit": "m2",
+      "value": 8.185550489467222
+    },
+    {
+      "metric_id": "EC444.intersection_over_union",
+      "unit": "fraction",
+      "value": 0.9999999940878147
+    },
+    {
+      "metric_id": "NMA.area_2021_m2",
+      "unit": "m2",
+      "value": 1956958475.3110595
+    },
+    {
+      "metric_id": "NMA.area_2026_m2",
+      "unit": "m2",
+      "value": 1956726658.109693
+    },
+    {
+      "metric_id": "NMA.net_area_change_m2",
+      "unit": "m2",
+      "value": -231817.20136642456
+    },
+    {
+      "metric_id": "NMA.symmetric_difference_m2",
+      "unit": "m2",
+      "value": 1360750.893378227
+    },
+    {
+      "metric_id": "NMA.intersection_over_union",
+      "unit": "fraction",
+      "value": 0.9993048608197261
+    }
+  ],
+  "validation": [
+    {
+      "evidence_path": "data/regional-review/eastern-cape-source-restoration-435/findings/geometry-positive-control.json",
+      "kind": "positive-control",
+      "method_id": "boundary-vintage-measurement",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/eastern-cape-source-restoration-435/findings/geometry-negative-control.json",
+      "kind": "negative-control",
+      "method_id": "boundary-vintage-measurement",
+      "outcome": "passed"
+    }
+  ],
+  "version": 1,
+  "worker_id": "01a10948-7d38-75d0-bc01-4cc28ea41f49"
+}
