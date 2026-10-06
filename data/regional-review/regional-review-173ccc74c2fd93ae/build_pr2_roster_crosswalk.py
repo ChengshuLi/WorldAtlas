@@ -43,37 +43,37 @@ assert len({r["source_shape_id"] for r in rows}) == len(rows)
 # table or the 2025 Guangxi government roster. Candidate only: no code or
 # official boundary crosswalk is present in the 2017 source.
 known = {
-    "Panyushi": ("Guangdong", "番禺市", "Panyu District"),
-    "Zengchengshi": ("Guangdong", "增城市", "Zengcheng District"),
-    "Chonghuashi": ("Guangdong", "从化市", "Conghua District"),
-    "Huadushi": ("Guangdong", "花都市", "Huadu District"),
-    "Nanhaishi": ("Guangdong", "南海市", "Nanhai District"),
-    "Shundeshi": ("Guangdong", "顺德市", "Shunde District"),
-    "Gaomingshi": ("Guangdong", "高明市", "Gaoming District"),
-    "Chenghaishi": ("Guangdong", "澄海市", "Chenghai District"),
-    "Chaoyangxian": ("Guangdong", "潮阳县", "Chaoyang District"),
-    "Qujiangxian": ("Guangdong", "曲江县", "Qujiang District"),
-    "Huiyangshi": ("Guangdong", "惠阳市", "Huiyang District"),
-    "Dianbaxian": ("Guangdong", "电白县", "Dianbai District"),
-    "Xinhuishi": ("Guangdong", "新会市", "Xinhui District"),
-    "Gaoyaoshi": ("Guangdong", "高要市", "Gaoyao District"),
-    "Pingguoxian": ("Guangxi", "平果县", "Pingguo City"),
-    "Tianyangxian": ("Guangxi", "田阳县", "Tianyang District"),
-    "Jingxixian": ("Guangxi", "靖西县", "Jingxi City"),
-    "Hengxian": ("Guangxi", "横县", "Hengzhou City"),
-    "Wumingxian": ("Guangxi", "武鸣县", "Wuming District"),
-    "Yongningxian": ("Guangxi", "邕宁县", "Yongning District"),
-    "Linguixian": ("Guangxi", "临桂县", "Lingui District"),
-    "Lipuxian": ("Guangxi", "荔浦县", "Lipu City"),
-    "Liujiangxian": ("Guangxi", "柳江县", "Liujiang District"),
-    "Yizhoushi": ("Guangxi", "宜州市", "Yizhou District"),
+    "Panyushi": ("Guangdong", "番禺区", "Panyu District"),
+    "Zengchengshi": ("Guangdong", "增城区", "Zengcheng District"),
+    "Chonghuashi": ("Guangdong", "从化区", "Conghua District"),
+    "Huadushi": ("Guangdong", "花都区", "Huadu District"),
+    "Nanhaishi": ("Guangdong", "南海区", "Nanhai District"),
+    "Shundeshi": ("Guangdong", "顺德区", "Shunde District"),
+    "Gaomingshi": ("Guangdong", "高明区", "Gaoming District"),
+    "Chenghaishi": ("Guangdong", "澄海区", "Chenghai District"),
+    "Chaoyangxian": ("Guangdong", "潮阳区", "Chaoyang District"),
+    "Qujiangxian": ("Guangdong", "曲江区", "Qujiang District"),
+    "Huiyangshi": ("Guangdong", "惠阳区", "Huiyang District"),
+    "Dianbaxian": ("Guangdong", "电白区", "Dianbai District"),
+    "Xinhuishi": ("Guangdong", "新会区", "Xinhui District"),
+    "Gaoyaoshi": ("Guangdong", "高要区", "Gaoyao District"),
+    "Pingguoxian": ("Guangxi", "平果市", "Pingguo City"),
+    "Tianyangxian": ("Guangxi", "田阳区", "Tianyang District"),
+    "Jingxixian": ("Guangxi", "靖西市", "Jingxi City"),
+    "Hengxian": ("Guangxi", "横州市", "Hengzhou City"),
+    "Wumingxian": ("Guangxi", "武鸣区", "Wuming District"),
+    "Yongningxian": ("Guangxi", "邕宁区", "Yongning District"),
+    "Linguixian": ("Guangxi", "临桂区", "Lingui District"),
+    "Lipuxian": ("Guangxi", "荔浦市", "Lipu City"),
+    "Liujiangxian": ("Guangxi", "柳江区", "Liujiang District"),
+    "Yizhoushi": ("Guangxi", "宜州区", "Yizhou District"),
 }
 longan = "gb:CHN:ADM2:17275852B2033650787942"
 zhaoping_wuzhou = "gb:CHN:ADM2:17275852B79176055066883"
 fields = [
     "location_id", "area", "source_shape_id", "source_shape_name_2017",
     "current_atlas_parent_id", "current_atlas_parent_name", "prior_row_classification",
-    "crosswalk_status", "candidate_current_name", "candidate_current_name_zh", "finding",
+    "roster_source_id", "crosswalk_status", "candidate_current_name", "candidate_current_name_zh", "finding",
 ]
 out_path = ROOT / "findings/pr2-current-roster-crosswalk.csv"
 out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -102,6 +102,7 @@ with out_path.open("w", newline="") as out:
             "current_atlas_parent_id": row["current_main_parent_id"],
             "current_atlas_parent_name": row["current_main_parent_name"],
             "prior_row_classification": row["classification"], "crosswalk_status": status,
+            "roster_source_id": "gd-2025-roster" if row["area_name"] == "Guangdong" else "gx-2025-roster",
             "candidate_current_name": english, "candidate_current_name_zh": chinese,
             "finding": finding,
         })
@@ -119,6 +120,7 @@ for row in rows:
             "id": row["id"], "area": row["area_name"], "source_name": name,
             "atlas_parent": row["current_main_parent_name"],
             "source_role": "2017 geoBoundaries metadata: County Level (ADM2)",
+            "roster_source_id": "gd-2025-roster" if row["area_name"] == "Guangdong" else "gx-2025-roster",
             "finding": "Name matches a present-day prefecture-level city while retained source metadata declares County Level. Semantic review lead only; no official source code or current boundary join.",
         })
 findings = ROOT / "findings"
