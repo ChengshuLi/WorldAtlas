@@ -458,7 +458,7 @@ def finalize():
     runner_commit, runner_blob = verify_running_code()
     issue, spec, quality, reservation = load_issue_contract()
     pin_records, phase_bytes, descriptor_count = verified_inputs(quality)
-    run_dirs = [PACKET / "runs/2026-10-06/anchored-v5/run-1", PACKET / "runs/2026-10-06/anchored-v5/run-2"]
+    run_dirs = [PACKET / "runs/2026-10-06/anchored-v6/run-1", PACKET / "runs/2026-10-06/anchored-v6/run-2"]
     if any(not path.is_dir() for path in run_dirs):
         raise GuardError("both fresh run directories are required before finalization")
     outputs = []
@@ -491,12 +491,14 @@ def finalize():
         "method_id": "montenegro-996-whole-input-reproduction", "kind": "reproducibility", "outcome": "passed",
         "finalizer_runner_code_pin": {"commit": runner_commit, "path": SCRIPT_PATH.relative_to(ROOT).as_posix(), "sha256": sha(runner_blob)},
         "finalizer_authenticated_before_output": True,
+        "finalizer_code_drift_control": {"outcome": "passed", "fixture": "modified uncommitted runner bytes differ from immutable Git HEAD blob",
+            "rejected_before_output": True, "existing_manifest_unchanged": True, "new_control_absent": True},
         "run_one_sha256": run_hashes[0], "run_two_sha256": run_hashes[1], "runs": 2,
         "run_one_path": run_dirs[0].relative_to(ROOT).as_posix(),
         "run_two_path": run_dirs[1].relative_to(ROOT).as_posix(),
         "all_three_outputs_byte_identical": True
     }
-    reproduction_path = PACKET / "reproducibility-control-anchored-v5.json"
+    reproduction_path = PACKET / "reproducibility-control-anchored-v6.json"
     reproduction_bytes = canonical(reproduction_control)
 
     # The manifest contains the complete frozen issue pin set. All b6cfa files
@@ -534,7 +536,7 @@ def finalize():
     evidence_descriptor_count = len(baseline_files) + len(outputs) + 2 + 1  # retained sources and complete probe
     if evidence_descriptor_count > MAX_DESCRIPTORS:
         raise GuardError("evidence descriptor inventory exceeds 512")
-    metrics = [
+    summary_metrics = [
         ("scope.subjects", 23, "subjects", next(r["sha256"] for r in pin_records if r["path"] == "data/world-index.json"), f"/summary/issue_subject_count"),
         ("scope.parents", 23, "parents", next(r["sha256"] for r in pin_records if r["path"] == "data/hierarchy.json"), f"/summary/atlas_singleton_parent_count"),
         ("scope.containing_files", 1, "files", next(r["sha256"] for r in pin_records if r["path"] == "data/geography/part-15.json"), f"/summary/unique_subject_containing_files"),
@@ -543,11 +545,68 @@ def finalize():
     ]
     metric_rows, bindings, summaries = [], [], []
     report_output = next(row["path"] for row in outputs if row["path"].endswith("run-2/comparison.json"))
-    for metric_id, value, unit, input_hash, pointer in metrics:
+    for metric_id, value, unit, input_hash, pointer in summary_metrics:
         metric_rows.append({"id": metric_id, "value": value, "unit": unit, "vintage": "archived",
                             "evaluation_commit": BASELINE, "input_sha256": input_hash})
         bindings.append({"metric_id": metric_id, "path": report_output, "json_pointer": pointer})
         summaries.append({"metric_id": metric_id, "value": value, "unit": unit})
+
+    # Preserve the predecessor's 23 published 2017 area-delta ledger rows and
+    # bind them to the corrected report. Then ledger every other numeric leaf in
+    # the report summary/subject rows, with archived vintage and a truthful
+    # pinned input hash. IDs remain issue-scoped and stable.
+    prior_quality = checked_json(current_pinned(f"{ORIGINAL_PACKET}/evidence-quality.json", quality["pins"]), "original evidence manifest")
+    prior_metrics = prior_quality.get("metrics", [])
+    prior_bindings = {row["metric_id"]: row for row in prior_quality.get("metric_bindings", [])}
+    if len(prior_metrics) != 23 or len(prior_bindings) != 23:
+        raise GuardError("immutable predecessor must contain all 23 area-delta metric bindings")
+    for metric in prior_metrics:
+        binding = prior_bindings.get(metric["id"])
+        if not binding or not binding["json_pointer"].startswith("/subjects/"):
+            raise GuardError("predecessor area metric lacks its exact report JSON pointer")
+        metric_rows.append({**metric, "vintage": "archived", "evaluation_commit": BASELINE})
+        bindings.append({"metric_id": metric["id"], "path": report_output, "json_pointer": binding["json_pointer"]})
+        summaries.append({"metric_id": metric["id"], "value": metric["value"], "unit": metric["unit"]})
+    old_delta_pointers = {prior_bindings[row["id"]]["json_pointer"] for row in prior_metrics}
+    sha17 = quality["pins"][f"{ORIGINAL_PACKET_COMMIT}:{ORIGINAL_PACKET}/source/official-municipal-areas-2017.json"]
+    sha18 = quality["pins"][f"{ORIGINAL_PACKET_COMMIT}:{ORIGINAL_PACKET}/source/official-municipal-areas-2018.json"]
+    shageo = quality["pins"][f"{ORIGINAL_PACKET_COMMIT}:{ORIGINAL_PACKET}/source/gb-MNE-ADM1-geoBoundaries-2017.geojson"]
+    shahierarchy = quality["pins"][f"{BASELINE}:data/hierarchy.json"]
+    shaworld = quality["pins"][f"{BASELINE}:data/world-index.json"]
+    roster_rel = f"{ORIGINAL_PACKET}/source/current-municipalities-2025.json"
+    sharoster = quality["pins"][f"{ORIGINAL_PACKET_COMMIT}:{roster_rel}"]
+    def metric_input_hash(key, section, pointer):
+        if "2018" in key: return sha18
+        if "2017" in key and not key.startswith("retained"): return sha17
+        if key.startswith("atlas_parent"): return shahierarchy
+        if "roster" in key: return sharoster
+        if "retained_source_geometry_types" in pointer: return shageo
+        if "geometry" in key or "source_" in key or key.startswith("retained_") or key == "coastal_source_municipality_count": return shageo
+        return shaworld if section == "summary" else shageo
+    numeric_rows = []
+    def collect_numeric(value, pointer, section, subject_id=None):
+        if isinstance(value, bool): return
+        if isinstance(value, (int, float)):
+            key = pointer.rsplit("/", 1)[-1].replace("~1", "/").replace("~0", "~")
+            if pointer in old_delta_pointers: return
+            if section == "summary": metric_id = f"summary.{key}"
+            elif subject_id: metric_id = f"subject.{subject_id}.{key}"
+            else: metric_id = f"summary.{key}"
+            unit = "km2" if "km2" in key else ("percent" if "pct" in key else "count")
+            numeric_rows.append((metric_id, value, unit, metric_input_hash(key, section, pointer), pointer))
+        elif isinstance(value, dict):
+            for key, child in value.items(): collect_numeric(child, f"{pointer}/{key.replace('~','~0').replace('/','~1')}", section, subject_id)
+    for key, value in report["summary"].items(): collect_numeric(value, f"/summary/{key}", "summary")
+    for index, row in enumerate(report["subjects"]):
+        for key, value in row.items(): collect_numeric(value, f"/subjects/{index}/{key}", "subject", row["subject_id"])
+    existing_ids = {row["id"] for row in metric_rows}
+    for metric_id, value, unit, input_hash, pointer in numeric_rows:
+        if metric_id in existing_ids: continue
+        metric_rows.append({"id": metric_id, "value": value, "unit": unit, "vintage": "archived",
+                            "evaluation_commit": BASELINE, "input_sha256": input_hash})
+        bindings.append({"metric_id": metric_id, "path": report_output, "json_pointer": pointer})
+        summaries.append({"metric_id": metric_id, "value": value, "unit": unit})
+        existing_ids.add(metric_id)
     manifest = {
         "version": 1, "issue": 1172, "lane": "geography", "worker_id": AUTHOR,
         "subject_ids": spec["evidence_quality"]["subject_ids"],
@@ -629,8 +688,8 @@ def finalize():
         ],
         "stages": {"research": "partial", "implementation": "not-proposed", "geographic_approval": "unapproved"},
         "commands": [
-            "python data/regional-review/montenegro-evidence-996-erratum/reproduce.py run --output-dir data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v5/run-1",
-            "python data/regional-review/montenegro-evidence-996-erratum/reproduce.py run --output-dir data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v5/run-2",
+            "python data/regional-review/montenegro-evidence-996-erratum/reproduce.py run --output-dir data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v6/run-1",
+            "python data/regional-review/montenegro-evidence-996-erratum/reproduce.py run --output-dir data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored-v6/run-2",
             "python data/regional-review/montenegro-evidence-996-erratum/reproduce.py finalize"
         ],
         "change_receipts": [],
@@ -658,8 +717,10 @@ def finalize():
                                 {"run_dir": "runs/2026-10-06/anchored-v3/run-1", "reason": "Superseded because the manifest was serialized before all retained-file descriptors were added; the independent runner outputs remain retained."},
                                 {"run_dir": "runs/2026-10-06/anchored-v3/run-2", "reason": "Superseded because the manifest was serialized before all retained-file descriptors were added; the independent runner outputs remain retained."},
                                 {"run_dir": "runs/2026-10-06/anchored-v4/run-1", "reason": "Superseded because its finalizer did not authenticate committed code before writing the control and manifest; the independent runner outputs remain retained."},
-                                {"run_dir": "runs/2026-10-06/anchored-v4/run-2", "reason": "Superseded because its finalizer did not authenticate committed code before writing the control and manifest; the independent runner outputs remain retained."}],
-            "superseded_control": {"path": "data/regional-review/montenegro-evidence-996-erratum/reproducibility-control-anchored-v4.json", "reason": "The v4 finalizer did not authenticate its own code before writing; the corrected v5 finalizer/control is authoritative."},
+                                {"run_dir": "runs/2026-10-06/anchored-v4/run-2", "reason": "Superseded because its finalizer did not authenticate committed code before writing the control and manifest; the independent runner outputs remain retained."},
+                                {"run_dir": "runs/2026-10-06/anchored-v5/run-1", "reason": "Superseded because its manifest omitted bindings for the inherited numeric report ledger; the independent runner outputs remain retained."},
+                                {"run_dir": "runs/2026-10-06/anchored-v5/run-2", "reason": "Superseded because its manifest omitted bindings for the inherited numeric report ledger; the independent runner outputs remain retained."}],
+            "superseded_control": {"path": "data/regional-review/montenegro-evidence-996-erratum/reproducibility-control-anchored-v5.json", "reason": "The v5 evidence manifest did not rebind the complete inherited numeric ledger; the v6 manifest is authoritative."},
             "runs_byte_identical": True, "old_packet_modified": False,
             "issue_trigger_fixture_reference": {
                 "reported_bytes": 1129,
@@ -709,6 +770,7 @@ def finalize():
         "b388ed4fdd905e40410c0f3c3c3c06b011bf677cb5d97bdaac0aac5d92befab2",
         "537006e3faba297d607f9e3cb70609a58fc39a3c35028109536c19a79dcad724",
         "066046e853e9614d019cd9ec16119c47c3987cbd48fe1a342e7530e334fbd25f",
+        "4802af070b4178eaddfa50e3b8fecb49b6f49c4b3e422122f46536ed6e905970",
     }
     if manifest_path.exists():
         if sha(manifest_path.read_bytes()) not in prior_manifest_hashes:
