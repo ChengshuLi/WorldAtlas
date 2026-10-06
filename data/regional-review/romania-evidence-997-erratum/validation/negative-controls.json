@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "method_id": "romania-42-unit-source-and-parent-crosswalk",
+  "issue": 1177,
+  "input_manifest_sha256": "e1e9f9b921652afcd171744b5a2bd972c64f9a6b1c3b21fec84cf3eea56b5b33",
+  "outcome": "passed",
+  "tests": [
+    {
+      "id": "neighbor-context-byte-drift",
+      "outcome": "rejected-before-generation",
+      "reason": "Immutable whole-file input pin mismatch: da9b0c46deb7b06027f2edd07016e0923cffde29:data/regional-review/followup-romania-422-county-roles-20261005/neighbor-source-context.json"
+    },
+    {
+      "id": "roster-byte-change",
+      "outcome": "rejected-before-generation",
+      "reason": "Immutable whole-file input pin mismatch: da9b0c46deb7b06027f2edd07016e0923cffde29:data/regional-review/followup-romania-422-county-roles-20261005/official-county-roster.json"
+    },
+    {
+      "id": "original-contract-byte-change",
+      "outcome": "rejected-before-generation",
+      "reason": "Immutable whole-file input pin mismatch: da9b0c46deb7b06027f2edd07016e0923cffde29:data/regional-review/followup-romania-422-county-roles-20261005/github-issue-contract.json"
+    },
+    {
+      "id": "original-code-byte-change",
+      "outcome": "rejected-before-generation",
+      "reason": "Immutable whole-file input pin mismatch: da9b0c46deb7b06027f2edd07016e0923cffde29:data/regional-review/followup-romania-422-county-roles-20261005/reproduce.py"
+    },
+    {
+      "id": "baseline-byte-change",
+      "outcome": "rejected-before-generation",
+      "reason": "Immutable whole-file input pin mismatch: 0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15:data/hierarchy.json"
+    },
+    {
+      "id": "source-byte-change",
+      "outcome": "rejected-before-generation",
+      "reason": "Immutable whole-file input pin mismatch: 0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15:data/regional-review/regional-review-3c4fe25a21fa428d/source/gb/gb-ROU-ADM1.geojson"
+    },
+    {
+      "id": "hun-adm1-count-20-to-21",
+      "outcome": "rejected-before-generation",
+      "guard": "immutable whole-file pin and explicit catalog value match"
+    },
+    {
+      "id": "existing-output-directory",
+      "outcome": "rejected-without-overwrite"
+    }
+  ],
+  "assertions": {
+    "all_wrong_inputs_rejected_before_generation": true,
+    "existing_output_preserved": true,
+    "rejected_controls_emitted_no_output": true,
+    "original_source_files_modified": false
+  },
+  "limits": "Byte-pin tests prove changed inputs are rejected; the explicit HUN count check also proves catalog disagreement is rejected after parsing. They do not validate legal meaning or geometry accuracy."
+}

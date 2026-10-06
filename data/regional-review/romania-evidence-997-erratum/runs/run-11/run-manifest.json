@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "method_id": "romania-42-unit-source-and-parent-crosswalk",
+  "issue": 1177,
+  "input_manifest_sha256": "e1e9f9b921652afcd171744b5a2bd972c64f9a6b1c3b21fec84cf3eea56b5b33",
+  "runner_sha256": "eda190519c478b902ed5b572a313b64ba9f5b5d60bc437f9f11b59224acfe57b",
+  "pinned_historical_generator_sha256": "0ee0c7b80324ea4ba5caab9e6a76e48b95d43ee20a1fac80988f3298aa557651",
+  "input_count": 27,
+  "source_crosswalk_sha256": "4272cd06a16f7c30e1128fae6d4bd2f41246f83997f565816190e78bf4cb563d",
+  "stored_output_path": "source-crosswalk.json.gz",
+  "stored_output_bytes": 8296,
+  "stored_output_sha256": "2a3fef0a43becea6a961da56c0ba74526d11c9e443eabfde9e9a9873541d8ac8",
+  "uncompressed_output_bytes": 40710,
+  "uncompressed_output_sha256": "4272cd06a16f7c30e1128fae6d4bd2f41246f83997f565816190e78bf4cb563d",
+  "source_sha256": "e70d8bedfcaad1b99f387b044f7e7563102b98ccee982496a092178d05f22387",
+  "metrics": {
+    "subject_count": 42,
+    "singleton_parent_count": 42,
+    "distinct_parent_ids": 42,
+    "neighbor_catalog_row_count": 7,
+    "county_transcription_match_count": 41,
+    "bucharest_transcription_match_count": 1,
+    "source_geometry_vertices": 740512,
+    "atlas_geometry_vertices": 8119,
+    "exact_geometry_json_matches": 0,
+    "official_polygon_comparison_performed": false
+  }
+}

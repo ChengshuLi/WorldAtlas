@@ -1,0 +1,22 @@
+{
+  "method_id": "romania-42-unit-source-and-parent-crosswalk",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "scope": "exact 42 issue subjects, their 42 same-name singleton parents, and seven read-only catalog context rows",
+  "metrics": {
+    "subject_count": 42,
+    "singleton_parent_count": 42,
+    "distinct_parent_ids": 42,
+    "neighbor_catalog_row_count": 7,
+    "county_transcription_match_count": 41,
+    "bucharest_transcription_match_count": 1,
+    "source_geometry_vertices": 740512,
+    "atlas_geometry_vertices": 8119,
+    "exact_geometry_json_matches": 0,
+    "official_polygon_comparison_performed": false
+  },
+  "source_sha256": "e70d8bedfcaad1b99f387b044f7e7563102b98ccee982496a092178d05f22387",
+  "input_descriptor_count": 27,
+  "historical_output_sha256": "4272cd06a16f7c30e1128fae6d4bd2f41246f83997f565816190e78bf4cb563d",
+  "limit": "Agreement with retained bytes and roster transcription is not legal-source authentication or boundary accuracy."
+}
