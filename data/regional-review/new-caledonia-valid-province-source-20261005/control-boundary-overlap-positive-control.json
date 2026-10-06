@@ -1,0 +1,11 @@
+{
+  "method_id": "boundary-overlap",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "assertions": [
+    "all three exact subject geometries were paired by name/ID",
+    "official-vs-Atlas and official-vs-GeoReP diagnostic overlays completed for each subject",
+    "all intersection, union and symmetric-difference areas are finite and nonnegative"
+  ],
+  "record": "comparison-results.json subject rows; original archive restoration required for rerun"
+}

@@ -1,0 +1,43 @@
+{
+  "areas": [
+    {
+      "area_m2": 9419440821.0262,
+      "feature_id": "PROVINCE_NORD",
+      "input_bytes": 16066199,
+      "input_sha256": "896a35af72dcf301c559ee8544a0d44a3d8536f9991626cef4a695edbf78c6ee",
+      "source_archive_sha256": "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d",
+      "subject_id": "NCL-559",
+      "unit": "m2"
+    },
+    {
+      "area_m2": 6982832520.277022,
+      "feature_id": "PROVINCE_SUD",
+      "input_bytes": 24613217,
+      "input_sha256": "8836a2d6cd97f3ecde4d96566be073bd3a7fe76001b3e178061930c62dada901",
+      "source_archive_sha256": "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d",
+      "subject_id": "NCL-1259",
+      "unit": "m2"
+    },
+    {
+      "area_m2": 1948606351.797986,
+      "feature_id": "PROVINCE_DES_ILES",
+      "input_bytes": 8912975,
+      "input_sha256": "6db928c385edf8365d86e0ecd80e5432efd2a1072d2bdab9a2d4f691153f1d8e",
+      "source_archive_sha256": "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d",
+      "subject_id": "NCL-1258",
+      "unit": "m2"
+    }
+  ],
+  "comparison_result_sha256": "3730d89798756763ce4b7b29ac7045cd81d542aaee374a2919bfe83bc8506a89",
+  "helper_version": "worldatlas-evidence-geometry-v1",
+  "method": {
+    "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+    "area_units": "m2",
+    "axis_order": "longitude-latitude",
+    "crs": "EPSG:4326",
+    "distance_method": "WGS84 inverse geodesic",
+    "distance_units": "m",
+    "version": "worldatlas-evidence-geometry-v1"
+  },
+  "version": "worldatlas-evidence-geometry-v1"
+}

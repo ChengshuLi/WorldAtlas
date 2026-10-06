@@ -1,0 +1,1312 @@
+{
+  "version": 1,
+  "issue": 911,
+  "lane": "geography",
+  "worker_id": "01a10947-7d6e-7ba2-98a1-a9f91dedabfc",
+  "subject_ids": [
+    "NCL-1258",
+    "NCL-1259",
+    "NCL-559"
+  ],
+  "subject_ids_sha256": "b61e3dabde93d5c8156e13551c70f8bc0aefcd257e434ff7286dcf225b6c2f06",
+  "baseline": {
+    "commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+    "files": [
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-28.json",
+        "bytes": 6613963,
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/validation/macro-publication-v5.json",
+        "bytes": 2826,
+        "sha256": "aae3967fde4f5bf92b3cb0b42c490c6c6a5921c7421dcdc9533f242afbd6a674",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/macro-foundation/macro-certificate.json",
+        "bytes": 38959,
+        "sha256": "f50f70fcb0756712ab7a7a388bc8cada093080518f07d3a6f7329758980ea81b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/macro-foundation/regional-handoffs.json.gz",
+        "bytes": 71286,
+        "sha256": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 440969,
+        "uncompressed_sha256": "25dd00067eee73913e2d2c1c46599008eb8b40f46ca2925b98786f054e5571d8"
+      },
+      {
+        "path": "data/macro-foundation/current-membership-inventory.json.gz",
+        "bytes": 2404397,
+        "sha256": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 10317725,
+        "uncompressed_sha256": "52348f585df4fa12b598ffa61ddd1f764497f421e16ed2dc412a0cead820c4e3"
+      },
+      {
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/source-acquisition.json",
+        "bytes": 9302,
+        "sha256": "8ca953420a96d12200f4ca56d5b91abf5aafe276918a36c1745dae72bfd42d2c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/sources/new-caledonia-province-parts/province-nord.geojson",
+        "bytes": 14659942,
+        "sha256": "ab352991c7095df611ec40e79ff652fd4346070c4e725e689a1eed5f9c2fea66",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/sources/new-caledonia-province-parts/province-sud.geojson",
+        "bytes": 22380497,
+        "sha256": "c85d11f69e68c8a091ee7edc372212777952b897b3010082ba3af1d2774d5c85",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-1aa97b490604ea4e/sources/new-caledonia-province-parts/province-des-iles.geojson",
+        "bytes": 8136835,
+        "sha256": "5a5ff8fac68b4a28c90ebedc65ba8deff91b0971582f7bb5a8cd32202db962b2",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "world_index": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "source_registry": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "geography_part_28": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "macro_publication_v5": "aae3967fde4f5bf92b3cb0b42c490c6c6a5921c7421dcdc9533f242afbd6a674",
+      "hierarchy": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "regional_handoffs": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
+      "current_membership_inventory": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+      "scope": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+      "release": "aae3967fde4f5bf92b3cb0b42c490c6c6a5921c7421dcdc9533f242afbd6a674"
+    },
+    "pin_files": {
+      "world_index": "data/world-index.json",
+      "source_registry": "data/administrative-sources.json",
+      "geography_part_28": "data/geography/part-28.json",
+      "macro_publication_v5": "data/validation/macro-publication-v5.json",
+      "hierarchy": "data/hierarchy.json",
+      "regional_handoffs": "data/macro-foundation/regional-handoffs.json.gz",
+      "current_membership_inventory": "data/macro-foundation/current-membership-inventory.json.gz",
+      "scope": "data/macro-foundation/current-membership-inventory.json.gz",
+      "release": "data/validation/macro-publication-v5.json"
+    },
+    "subject_files": {
+      "NCL-1258": "data/geography/part-28.json",
+      "NCL-1259": "data/geography/part-28.json",
+      "NCL-559": "data/geography/part-28.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "NCL-BDADMIN-NC-2022",
+      "url": "https://sig-public.gouv.nc/plateforme_telechargement/BDADMINNC.zip",
+      "role": "official 1:10,000 province boundary candidate and commune hierarchy source",
+      "vintage": "2022-03-02 update lineage; archive HTTP Last-Modified 2022-05-23",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "ArcGIS/catalogue say Open License 2.0; included 2020 read-me says CC BY-NC-SA 4.0 and included 2017 CGU excludes commercial use; current DITTT page links a separate CC license. Ask DITTT for the release-specific applicable terms."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Obtain only after confirming authorization. Download exact URL, verify 25,287,153 bytes and SHA-256 66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d, check ZIP CRC, extract BDADMIN-NC.gdb and read PROVINCES/COMMUNES with OpenFileGDB. See source-acquisition.json for metadata, embedded terms hashes and lineage.",
+      "limit": "The source bytes and extracted geometry are not retained in this packet. License conflict is unresolved; 1:10,000 reference scale does not guarantee topological closure or completeness.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "NCL-GeoReP-2024",
+      "url": "https://services1.arcgis.com/TZcrgU6CIbqWt9Qv/arcgis/rest/services/limites_terrestres/FeatureServer/1",
+      "role": "official generalized source original; invalid nested-shell polygons preserved unchanged",
+      "vintage": "Source item update 2024-10-28; query retrieved 2026-10-05",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "Open License assertion is recorded for the Government of New Caledonia GeoReP source in the pinned parent evidence packet."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-1aa97b490604ea4e/sources/new-caledonia-province-parts/province-nord.geojson",
+          "bytes": 14659942,
+          "sha256": "ab352991c7095df611ec40e79ff652fd4346070c4e725e689a1eed5f9c2fea66",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-1aa97b490604ea4e/sources/new-caledonia-province-parts/province-sud.geojson",
+          "bytes": 22380497,
+          "sha256": "c85d11f69e68c8a091ee7edc372212777952b897b3010082ba3af1d2774d5c85",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-1aa97b490604ea4e/sources/new-caledonia-province-parts/province-des-iles.geojson",
+          "bytes": 8136835,
+          "sha256": "5a5ff8fac68b4a28c90ebedc65ba8deff91b0971582f7bb5a8cd32202db962b2",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "limit": "Original aggregate query is 45,177,077 bytes; the parent packet preserves exact per-feature GeoJSON parts. Query includes maxAllowableOffset 0.00005 degrees and geometryPrecision 6; all three original polygons remain invalid and are not corrected here.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "NCL-NATURAL-EARTH-ATLAS-FALLBACK",
+      "url": "https://www.naturalearthdata.com/",
+      "role": "existing Atlas baseline geometry comparator, whose row metadata identifies Natural Earth ADM1",
+      "vintage": "undated modern reference as recorded in pinned baseline",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "redistributable",
+        "terms": "Public domain as recorded on the pinned Atlas features."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Read the exact three subject geometries from data/geography/part-28.json at the baseline commit in this manifest. The raw upstream Natural Earth release was not separately downloaded.",
+      "limit": "Natural Earth is a coarse undated reference; it does not prove current legal boundaries or island completeness.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "NCL-ORGANIC-LAW-99-209-ARTICLE-1",
+      "url": "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000020960246/2026-04-28",
+      "role": "legal province meaning and named commune membership; legal Poya split requirement",
+      "vintage": "Effective since 2009-08-07; data updated 2026-05-30",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Official legal text consulted at source URL; no copy retained in this packet."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Open the cited in-force Article 1; it names the three province commune groups and states Poya is split between Nord and Sud by decree.",
+      "limit": "Commune membership text does not supply a coordinate boundary.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "NCL-POYA-DECREE-1989",
+      "url": "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000000337236",
+      "role": "specific legal instrument for Poya split",
+      "vintage": "1989-04-26",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Official legal text consulted at source URL; no copy retained."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Open the decree and inspect its original Journal officiel scan/annex when line-level confirmation is needed.",
+      "limit": "The scanned 23.7 MB annex was not downloaded or georeferenced; title alone does not establish the location of the dividing line.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "NCL-CENSUS-DECREE-2025",
+      "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000052260146/",
+      "role": "current commune count and Poya-part membership cross-check only",
+      "vintage": "2025-09-18; applicable figures from 2026-01-01",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Official legal text consulted at source URL; no copy retained."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Open the decree annex Table I, which records the three province commune counts, Poya parts and 33 total communes.",
+      "limit": "Counts support membership labels only; they are not geometric evidence.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "NCL-DITTT-2019-SUMMARY",
+      "url": "https://dittt.gouv.nc/sites/default/files/documents/Synth%C3%A8se%20bases%20de%20donn%C3%A9es%20g%C3%A9ographiques.pdf",
+      "role": "official product-scale and license statement used to document conflicting terms",
+      "vintage": "PDF version September 2019",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Official document accessed for research; not retained in the packet."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Open the official four-page DITTT PDF and inspect the BDADMIN-NC section on page 4. The retrieval response used in research was 141,449 bytes, SHA-256 b35f2219300dd76fa6971b536556876206fed03c774d5282a70716a26b70765b.",
+      "limit": "It describes the product and license but does not reconcile the later Open License metadata.",
+      "temporal_status": "reference"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/README.md",
+      "bytes": 5599,
+      "sha256": "866f303259c8a83274a5e2d7b9cd354b44227b5aaf35399edbd6a49e3401daa3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/findings.md",
+      "bytes": 10545,
+      "sha256": "0f6efd82f8a1fdbe163f9fec8412dc114eff2b3cb521e34a948af92943d32edf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/issue-scope-pinned.json",
+      "bytes": 3048,
+      "sha256": "79422b8df12b9e0540bf7c2c9b281bad1e9d44327f838805be804c46b0f0e426",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/sources.json",
+      "bytes": 4684,
+      "sha256": "49f1e16aa5275ce681425db0cc4db732dfd53b6e9956334c3fe71f0ae5fb5659",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/source-acquisition.json",
+      "bytes": 11309,
+      "sha256": "bcd5b34b2fd4cc6785865a1769a1ca0bf495cbb461cb48723253b13e1710f5c3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/comparison-results.json",
+      "bytes": 6646,
+      "sha256": "3730d89798756763ce4b7b29ac7045cd81d542aaee374a2919bfe83bc8506a89",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/source-area-results.json",
+      "bytes": 1593,
+      "sha256": "4e11d39c737429928068bf04c7067508ee3164935d5cb6d494b2d0caffbdfd13",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/reproduce.py",
+      "bytes": 12191,
+      "sha256": "f79693bdaf76b7ce3f5f24ab22bd355b552989a3add974fae846c9052eaa77dc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/measure-geodesic-area.py",
+      "bytes": 1912,
+      "sha256": "d8b9f24f7679edc4d24a8eeec32480cc0d1901d3b1b4275c7dcf4a9dbaad61b1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/control-source-layer-and-scope-inspection-positive-control.json",
+      "bytes": 768,
+      "sha256": "d022e33d9b19e227f4d8c65f9412772f4dc8a40b91c0dd749e47bc9315e69d4d",
+      "hash_kind": "file-bytes",
+      "role": "control-result"
+    },
+    {
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/control-source-layer-and-scope-inspection-negative-control.json",
+      "bytes": 848,
+      "sha256": "790f2ffa65d7ddd08f23c2180d708f76cf8b64322f39b89daae216294cf9897f",
+      "hash_kind": "file-bytes",
+      "role": "control-result"
+    },
+    {
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/control-boundary-overlap-positive-control.json",
+      "bytes": 463,
+      "sha256": "73a59eb7766883ed7e28f28e6a4aa04c6041afaac85a72e3c8283f23238b15b0",
+      "hash_kind": "file-bytes",
+      "role": "control-result"
+    },
+    {
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/control-boundary-overlap-negative-control.json",
+      "bytes": 430,
+      "sha256": "eb67a362b85c64b4565e68b4db97a845f85d02661031371814c22d8d6c78eb59",
+      "hash_kind": "file-bytes",
+      "role": "control-result"
+    },
+    {
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/control-shared-helper-land-area-positive-control.json",
+      "bytes": 331,
+      "sha256": "32e52c238f3cb21003f4436ee15a5cf15209ccae88991ea80d1e338660e71334",
+      "hash_kind": "file-bytes",
+      "role": "control-result"
+    },
+    {
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/control-shared-helper-land-area-negative-control.json",
+      "bytes": 307,
+      "sha256": "9f1e15d67ef657cbdafdf91080fe4175627a7cf7292f648de60e1f47f7b4aa73",
+      "hash_kind": "file-bytes",
+      "role": "control-result"
+    }
+  ],
+  "methods": [
+    {
+      "id": "source-layer-and-scope-inspection",
+      "description": "Verify archive size, SHA-256 and ZIP CRC; read FileGDB layers PROVINCES and COMMUNES; match legal source names and exact scoped IDs; retain source polygons unchanged and record their Shapely validity.",
+      "software": "Fiona 1.8.21 / GDAL 3.4.1 with OpenFileGDB; Shapely 2.0.7 / GEOS 3.11.4",
+      "units": "features, commune names, IDs, geometry validity",
+      "kind": "source"
+    },
+    {
+      "id": "boundary-overlap",
+      "kind": "measurement",
+      "description": "Compare official, current Atlas fallback and disposable GeoReP MakeValid diagnostic geometries as planar set overlays after transforming coordinates without densification. No repair is written to source bytes.",
+      "software": "Fiona 1.8.21 / GDAL 3.4.1; Shapely 2.0.7 / GEOS 3.11.4",
+      "units": "unitless Jaccard ratio; km2 symmetric difference",
+      "axis_order": "longitude-latitude",
+      "crs": "Source EPSG:3163 and WGS84 projected to local Lambert azimuthal equal-area +proj=laea +lat_0=-21.5 +lon_0=165 +datum=WGS84 +units=m",
+      "area_method": "Planar polygon intersection/union/symmetric-difference in local WGS84 Lambert azimuthal equal-area; vertex transformation without densification, straight coordinate-segment edges.",
+      "distance_method": "not measured"
+    },
+    {
+      "id": "shared-helper-land-area",
+      "kind": "geography",
+      "description": "Hash-check Fiona-exported temporary source features, then measure each as longitude-first WGS84 land geometry using the committed WorldAtlas v1 shared helper.",
+      "software": "WorldAtlas worldatlas-evidence-geometry-v1; Shapely 2.1.2 / GEOS 3.13.1; pyproj 3.7.2 / PROJ 9.5.1",
+      "units": "m2",
+      "axis_order": "longitude-latitude",
+      "crs": "EPSG:4326",
+      "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+      "distance_method": "WGS84 inverse geodesic",
+      "helper_version": "worldatlas-evidence-geometry-v1"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "bdadmin_province_feature_count",
+      "value": 3,
+      "unit": "features",
+      "input_sha256": "bcd5b34b2fd4cc6785865a1769a1ca0bf495cbb461cb48723253b13e1710f5c3",
+      "vintage": "baseline",
+      "evaluation_commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+      "json_pointer": "/source_layers/PROVINCES/feature_count",
+      "additional_input_sha256": [
+        "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d"
+      ]
+    },
+    {
+      "id": "bdadmin_commune_feature_count",
+      "value": 33,
+      "unit": "features",
+      "input_sha256": "bcd5b34b2fd4cc6785865a1769a1ca0bf495cbb461cb48723253b13e1710f5c3",
+      "vintage": "baseline",
+      "evaluation_commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+      "json_pointer": "/source_layers/COMMUNES/feature_count",
+      "additional_input_sha256": [
+        "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d"
+      ]
+    },
+    {
+      "id": "bdadmin_valid_province_geometry_count",
+      "value": 3,
+      "unit": "features",
+      "input_sha256": "bcd5b34b2fd4cc6785865a1769a1ca0bf495cbb461cb48723253b13e1710f5c3",
+      "vintage": "baseline",
+      "evaluation_commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+      "json_pointer": "/source_layers/PROVINCES/feature_count",
+      "additional_input_sha256": [
+        "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d"
+      ]
+    },
+    {
+      "id": "ncl-559_bdadmin_polygon_parts",
+      "value": 822,
+      "unit": "polygon-parts",
+      "input_sha256": "bcd5b34b2fd4cc6785865a1769a1ca0bf495cbb461cb48723253b13e1710f5c3",
+      "vintage": "baseline",
+      "evaluation_commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+      "json_pointer": "/subjects/0/official_source_polygon_parts",
+      "additional_input_sha256": [
+        "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d"
+      ]
+    },
+    {
+      "id": "ncl-559_bdadmin_local_laea_area_km2",
+      "value": 9419.440880505,
+      "unit": "km2",
+      "input_sha256": "bcd5b34b2fd4cc6785865a1769a1ca0bf495cbb461cb48723253b13e1710f5c3",
+      "vintage": "baseline",
+      "evaluation_commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+      "json_pointer": "/subjects/0/official_source_area_km2_local_equal_area",
+      "additional_input_sha256": [
+        "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d"
+      ]
+    },
+    {
+      "id": "ncl-559_bdadmin_vs_atlas_jaccard",
+      "value": 0.9174109228761054,
+      "unit": "ratio",
+      "input_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "vintage": "baseline",
+      "evaluation_commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+      "json_pointer": "/subjects/0/official_vs_natural_earth/jaccard",
+      "additional_input_sha256": [
+        "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d",
+        "ab352991c7095df611ec40e79ff652fd4346070c4e725e689a1eed5f9c2fea66"
+      ]
+    },
+    {
+      "id": "ncl-559_bdadmin_vs_atlas_symmetric_difference_km2",
+      "value": 815.685917720177,
+      "unit": "km2",
+      "input_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "vintage": "baseline",
+      "evaluation_commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+      "json_pointer": "/subjects/0/official_vs_natural_earth/symmetric_difference_km2",
+      "additional_input_sha256": [
+        "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d",
+        "ab352991c7095df611ec40e79ff652fd4346070c4e725e689a1eed5f9c2fea66"
+      ]
+    },
+    {
+      "id": "ncl-559_bdadmin_vs_georep_diagnostic_jaccard",
+      "value": 0.9999505880799807,
+      "unit": "ratio",
+      "input_sha256": "ab352991c7095df611ec40e79ff652fd4346070c4e725e689a1eed5f9c2fea66",
+      "vintage": "baseline",
+      "evaluation_commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+      "json_pointer": "/subjects/0/official_vs_georep_makevalid_diagnostic/jaccard",
+      "additional_input_sha256": [
+        "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d"
+      ]
+    },
+    {
+      "id": "ncl-559_bdadmin_vs_georep_diagnostic_symmetric_difference_km2",
+      "value": 0.4654416722788595,
+      "unit": "km2",
+      "input_sha256": "ab352991c7095df611ec40e79ff652fd4346070c4e725e689a1eed5f9c2fea66",
+      "vintage": "baseline",
+      "evaluation_commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+      "json_pointer": "/subjects/0/official_vs_georep_makevalid_diagnostic/symmetric_difference_km2",
+      "additional_input_sha256": [
+        "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d"
+      ]
+    },
+    {
+      "id": "ncl-559_georep_diagnostic_vs_atlas_jaccard",
+      "value": 0.9174011598756514,
+      "unit": "ratio",
+      "input_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "vintage": "baseline",
+      "evaluation_commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+      "json_pointer": "/subjects/0/georep_makevalid_diagnostic_vs_natural_earth/jaccard",
+      "additional_input_sha256": [
+        "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d",
+        "ab352991c7095df611ec40e79ff652fd4346070c4e725e689a1eed5f9c2fea66"
+      ]
+    },
+    {
+      "id": "ncl-559_georep_diagnostic_vs_atlas_symmetric_difference_km2",
+      "value": 815.7821593056375,
+      "unit": "km2",
+      "input_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "vintage": "baseline",
+      "evaluation_commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+      "json_pointer": "/subjects/0/georep_makevalid_diagnostic_vs_natural_earth/symmetric_difference_km2",
+      "additional_input_sha256": [
+        "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d",
+        "ab352991c7095df611ec40e79ff652fd4346070c4e725e689a1eed5f9c2fea66"
+      ]
+    },
+    {
+      "id": "ncl-1259_bdadmin_polygon_parts",
+      "value": 666,
+      "unit": "polygon-parts",
+      "input_sha256": "bcd5b34b2fd4cc6785865a1769a1ca0bf495cbb461cb48723253b13e1710f5c3",
+      "vintage": "baseline",
+      "evaluation_commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+      "json_pointer": "/subjects/1/official_source_polygon_parts",
+      "additional_input_sha256": [
+        "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d"
+      ]
+    },
+    {
+      "id": "ncl-1259_bdadmin_local_laea_area_km2",
+      "value": 6982.832461685449,
+      "unit": "km2",
+      "input_sha256": "bcd5b34b2fd4cc6785865a1769a1ca0bf495cbb461cb48723253b13e1710f5c3",
+      "vintage": "baseline",
+      "evaluation_commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+      "json_pointer": "/subjects/1/official_source_area_km2_local_equal_area",
+      "additional_input_sha256": [
+        "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d"
+      ]
+    },
+    {
+      "id": "ncl-1259_bdadmin_vs_atlas_jaccard",
+      "value": 0.911026130343376,
+      "unit": "ratio",
+      "input_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "vintage": "baseline",
+      "evaluation_commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+      "json_pointer": "/subjects/1/official_vs_natural_earth/jaccard",
+      "additional_input_sha256": [
+        "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d",
+        "c85d11f69e68c8a091ee7edc372212777952b897b3010082ba3af1d2774d5c85"
+      ]
+    },
+    {
+      "id": "ncl-1259_bdadmin_vs_atlas_symmetric_difference_km2",
+      "value": 665.0879582692721,
+      "unit": "km2",
+      "input_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "vintage": "baseline",
+      "evaluation_commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+      "json_pointer": "/subjects/1/official_vs_natural_earth/symmetric_difference_km2",
+      "additional_input_sha256": [
+        "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d",
+        "c85d11f69e68c8a091ee7edc372212777952b897b3010082ba3af1d2774d5c85"
+      ]
+    },
+    {
+      "id": "ncl-1259_bdadmin_vs_georep_diagnostic_jaccard",
+      "value": 0.9997545455488213,
+      "unit": "ratio",
+      "input_sha256": "c85d11f69e68c8a091ee7edc372212777952b897b3010082ba3af1d2774d5c85",
+      "vintage": "baseline",
+      "evaluation_commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+      "json_pointer": "/subjects/1/official_vs_georep_makevalid_diagnostic/jaccard",
+      "additional_input_sha256": [
+        "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d"
+      ]
+    },
+    {
+      "id": "ncl-1259_bdadmin_vs_georep_diagnostic_symmetric_difference_km2",
+      "value": 1.7141048479050203,
+      "unit": "km2",
+      "input_sha256": "c85d11f69e68c8a091ee7edc372212777952b897b3010082ba3af1d2774d5c85",
+      "vintage": "baseline",
+      "evaluation_commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+      "json_pointer": "/subjects/1/official_vs_georep_makevalid_diagnostic/symmetric_difference_km2",
+      "additional_input_sha256": [
+        "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d"
+      ]
+    },
+    {
+      "id": "ncl-1259_georep_diagnostic_vs_atlas_jaccard",
+      "value": 0.9108841257177316,
+      "unit": "ratio",
+      "input_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "vintage": "baseline",
+      "evaluation_commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+      "json_pointer": "/subjects/1/georep_makevalid_diagnostic_vs_natural_earth/jaccard",
+      "additional_input_sha256": [
+        "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d",
+        "c85d11f69e68c8a091ee7edc372212777952b897b3010082ba3af1d2774d5c85"
+      ]
+    },
+    {
+      "id": "ncl-1259_georep_diagnostic_vs_atlas_symmetric_difference_km2",
+      "value": 666.1712853151955,
+      "unit": "km2",
+      "input_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "vintage": "baseline",
+      "evaluation_commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+      "json_pointer": "/subjects/1/georep_makevalid_diagnostic_vs_natural_earth/symmetric_difference_km2",
+      "additional_input_sha256": [
+        "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d",
+        "c85d11f69e68c8a091ee7edc372212777952b897b3010082ba3af1d2774d5c85"
+      ]
+    },
+    {
+      "id": "ncl-1258_bdadmin_polygon_parts",
+      "value": 386,
+      "unit": "polygon-parts",
+      "input_sha256": "bcd5b34b2fd4cc6785865a1769a1ca0bf495cbb461cb48723253b13e1710f5c3",
+      "vintage": "baseline",
+      "evaluation_commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+      "json_pointer": "/subjects/2/official_source_polygon_parts",
+      "additional_input_sha256": [
+        "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d"
+      ]
+    },
+    {
+      "id": "ncl-1258_bdadmin_local_laea_area_km2",
+      "value": 1948.606352094425,
+      "unit": "km2",
+      "input_sha256": "bcd5b34b2fd4cc6785865a1769a1ca0bf495cbb461cb48723253b13e1710f5c3",
+      "vintage": "baseline",
+      "evaluation_commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+      "json_pointer": "/subjects/2/official_source_area_km2_local_equal_area",
+      "additional_input_sha256": [
+        "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d"
+      ]
+    },
+    {
+      "id": "ncl-1258_bdadmin_vs_atlas_jaccard",
+      "value": 0.8191248110961153,
+      "unit": "ratio",
+      "input_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "vintage": "baseline",
+      "evaluation_commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+      "json_pointer": "/subjects/2/official_vs_natural_earth/jaccard",
+      "additional_input_sha256": [
+        "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d",
+        "5a5ff8fac68b4a28c90ebedc65ba8deff91b0971582f7bb5a8cd32202db962b2"
+      ]
+    },
+    {
+      "id": "ncl-1258_bdadmin_vs_atlas_symmetric_difference_km2",
+      "value": 394.0753940404578,
+      "unit": "km2",
+      "input_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "vintage": "baseline",
+      "evaluation_commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+      "json_pointer": "/subjects/2/official_vs_natural_earth/symmetric_difference_km2",
+      "additional_input_sha256": [
+        "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d",
+        "5a5ff8fac68b4a28c90ebedc65ba8deff91b0971582f7bb5a8cd32202db962b2"
+      ]
+    },
+    {
+      "id": "ncl-1258_bdadmin_vs_georep_diagnostic_jaccard",
+      "value": 0.9999999807277812,
+      "unit": "ratio",
+      "input_sha256": "5a5ff8fac68b4a28c90ebedc65ba8deff91b0971582f7bb5a8cd32202db962b2",
+      "vintage": "baseline",
+      "evaluation_commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+      "json_pointer": "/subjects/2/official_vs_georep_makevalid_diagnostic/jaccard",
+      "additional_input_sha256": [
+        "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d"
+      ]
+    },
+    {
+      "id": "ncl-1258_bdadmin_vs_georep_diagnostic_symmetric_difference_km2",
+      "value": 3.755396180610879e-05,
+      "unit": "km2",
+      "input_sha256": "5a5ff8fac68b4a28c90ebedc65ba8deff91b0971582f7bb5a8cd32202db962b2",
+      "vintage": "baseline",
+      "evaluation_commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+      "json_pointer": "/subjects/2/official_vs_georep_makevalid_diagnostic/symmetric_difference_km2",
+      "additional_input_sha256": [
+        "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d"
+      ]
+    },
+    {
+      "id": "ncl-1258_georep_diagnostic_vs_atlas_jaccard",
+      "value": 0.8191248143478411,
+      "unit": "ratio",
+      "input_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "vintage": "baseline",
+      "evaluation_commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+      "json_pointer": "/subjects/2/georep_makevalid_diagnostic_vs_natural_earth/jaccard",
+      "additional_input_sha256": [
+        "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d",
+        "5a5ff8fac68b4a28c90ebedc65ba8deff91b0971582f7bb5a8cd32202db962b2"
+      ]
+    },
+    {
+      "id": "ncl-1258_georep_diagnostic_vs_atlas_symmetric_difference_km2",
+      "value": 394.0753862475633,
+      "unit": "km2",
+      "input_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "vintage": "baseline",
+      "evaluation_commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+      "json_pointer": "/subjects/2/georep_makevalid_diagnostic_vs_natural_earth/symmetric_difference_km2",
+      "additional_input_sha256": [
+        "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d",
+        "5a5ff8fac68b4a28c90ebedc65ba8deff91b0971582f7bb5a8cd32202db962b2"
+      ]
+    },
+    {
+      "id": "ncl-559_bdadmin_wgs84_helper_land_area_m2",
+      "value": 9419440821.0262,
+      "unit": "m2",
+      "input_sha256": "3730d89798756763ce4b7b29ac7045cd81d542aaee374a2919bfe83bc8506a89",
+      "vintage": "baseline",
+      "evaluation_commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+      "json_pointer": "/areas/0/area_m2",
+      "additional_input_sha256": [
+        "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d",
+        "896a35af72dcf301c559ee8544a0d44a3d8536f9991626cef4a695edbf78c6ee"
+      ]
+    },
+    {
+      "id": "ncl-1259_bdadmin_wgs84_helper_land_area_m2",
+      "value": 6982832520.277022,
+      "unit": "m2",
+      "input_sha256": "3730d89798756763ce4b7b29ac7045cd81d542aaee374a2919bfe83bc8506a89",
+      "vintage": "baseline",
+      "evaluation_commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+      "json_pointer": "/areas/1/area_m2",
+      "additional_input_sha256": [
+        "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d",
+        "8836a2d6cd97f3ecde4d96566be073bd3a7fe76001b3e178061930c62dada901"
+      ]
+    },
+    {
+      "id": "ncl-1258_bdadmin_wgs84_helper_land_area_m2",
+      "value": 1948606351.797986,
+      "unit": "m2",
+      "input_sha256": "3730d89798756763ce4b7b29ac7045cd81d542aaee374a2919bfe83bc8506a89",
+      "vintage": "baseline",
+      "evaluation_commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+      "json_pointer": "/areas/2/area_m2",
+      "additional_input_sha256": [
+        "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d",
+        "6db928c385edf8365d86e0ecd80e5432efd2a1072d2bdab9a2d4f691153f1d8e"
+      ]
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "bdadmin_province_feature_count",
+      "value": 3,
+      "unit": "features",
+      "text": "Official PROVINCES layer count is exactly three.",
+      "json_pointer": "/source_layers/PROVINCES/feature_count"
+    },
+    {
+      "metric_id": "bdadmin_commune_feature_count",
+      "value": 33,
+      "unit": "features",
+      "text": "Official COMMUNES layer count is 33.",
+      "json_pointer": "/source_layers/COMMUNES/feature_count"
+    },
+    {
+      "metric_id": "bdadmin_valid_province_geometry_count",
+      "value": 3,
+      "unit": "features",
+      "text": "All three official province geometries are nonempty and valid.",
+      "json_pointer": "/positive_controls/all_official_source_geometries_nonempty_valid"
+    },
+    {
+      "metric_id": "ncl-559_bdadmin_polygon_parts",
+      "value": 822,
+      "unit": "polygon-parts",
+      "text": "NCL-559 official source multipart component count.",
+      "json_pointer": "/subjects/0/official_source_polygon_parts"
+    },
+    {
+      "metric_id": "ncl-559_bdadmin_local_laea_area_km2",
+      "value": 9419.440880505,
+      "unit": "km2",
+      "text": "NCL-559 BDADMIN area in local equal-area projection.",
+      "json_pointer": "/subjects/0/official_source_area_km2_local_equal_area"
+    },
+    {
+      "metric_id": "ncl-559_bdadmin_vs_atlas_jaccard",
+      "value": 0.9174109228761054,
+      "unit": "ratio",
+      "text": "NCL-559 bdadmin vs atlas intersection over union.",
+      "json_pointer": "/subjects/0/official_vs_natural_earth/jaccard"
+    },
+    {
+      "metric_id": "ncl-559_bdadmin_vs_atlas_symmetric_difference_km2",
+      "value": 815.685917720177,
+      "unit": "km2",
+      "text": "NCL-559 bdadmin vs atlas symmetric difference.",
+      "json_pointer": "/subjects/0/official_vs_natural_earth/symmetric_difference_km2"
+    },
+    {
+      "metric_id": "ncl-559_bdadmin_vs_georep_diagnostic_jaccard",
+      "value": 0.9999505880799807,
+      "unit": "ratio",
+      "text": "NCL-559 bdadmin vs georep diagnostic intersection over union.",
+      "json_pointer": "/subjects/0/official_vs_georep_makevalid_diagnostic/jaccard"
+    },
+    {
+      "metric_id": "ncl-559_bdadmin_vs_georep_diagnostic_symmetric_difference_km2",
+      "value": 0.4654416722788595,
+      "unit": "km2",
+      "text": "NCL-559 bdadmin vs georep diagnostic symmetric difference.",
+      "json_pointer": "/subjects/0/official_vs_georep_makevalid_diagnostic/symmetric_difference_km2"
+    },
+    {
+      "metric_id": "ncl-559_georep_diagnostic_vs_atlas_jaccard",
+      "value": 0.9174011598756514,
+      "unit": "ratio",
+      "text": "NCL-559 georep diagnostic vs atlas intersection over union.",
+      "json_pointer": "/subjects/0/georep_makevalid_diagnostic_vs_natural_earth/jaccard"
+    },
+    {
+      "metric_id": "ncl-559_georep_diagnostic_vs_atlas_symmetric_difference_km2",
+      "value": 815.7821593056375,
+      "unit": "km2",
+      "text": "NCL-559 georep diagnostic vs atlas symmetric difference.",
+      "json_pointer": "/subjects/0/georep_makevalid_diagnostic_vs_natural_earth/symmetric_difference_km2"
+    },
+    {
+      "metric_id": "ncl-1259_bdadmin_polygon_parts",
+      "value": 666,
+      "unit": "polygon-parts",
+      "text": "NCL-1259 official source multipart component count.",
+      "json_pointer": "/subjects/1/official_source_polygon_parts"
+    },
+    {
+      "metric_id": "ncl-1259_bdadmin_local_laea_area_km2",
+      "value": 6982.832461685449,
+      "unit": "km2",
+      "text": "NCL-1259 BDADMIN area in local equal-area projection.",
+      "json_pointer": "/subjects/1/official_source_area_km2_local_equal_area"
+    },
+    {
+      "metric_id": "ncl-1259_bdadmin_vs_atlas_jaccard",
+      "value": 0.911026130343376,
+      "unit": "ratio",
+      "text": "NCL-1259 bdadmin vs atlas intersection over union.",
+      "json_pointer": "/subjects/1/official_vs_natural_earth/jaccard"
+    },
+    {
+      "metric_id": "ncl-1259_bdadmin_vs_atlas_symmetric_difference_km2",
+      "value": 665.0879582692721,
+      "unit": "km2",
+      "text": "NCL-1259 bdadmin vs atlas symmetric difference.",
+      "json_pointer": "/subjects/1/official_vs_natural_earth/symmetric_difference_km2"
+    },
+    {
+      "metric_id": "ncl-1259_bdadmin_vs_georep_diagnostic_jaccard",
+      "value": 0.9997545455488213,
+      "unit": "ratio",
+      "text": "NCL-1259 bdadmin vs georep diagnostic intersection over union.",
+      "json_pointer": "/subjects/1/official_vs_georep_makevalid_diagnostic/jaccard"
+    },
+    {
+      "metric_id": "ncl-1259_bdadmin_vs_georep_diagnostic_symmetric_difference_km2",
+      "value": 1.7141048479050203,
+      "unit": "km2",
+      "text": "NCL-1259 bdadmin vs georep diagnostic symmetric difference.",
+      "json_pointer": "/subjects/1/official_vs_georep_makevalid_diagnostic/symmetric_difference_km2"
+    },
+    {
+      "metric_id": "ncl-1259_georep_diagnostic_vs_atlas_jaccard",
+      "value": 0.9108841257177316,
+      "unit": "ratio",
+      "text": "NCL-1259 georep diagnostic vs atlas intersection over union.",
+      "json_pointer": "/subjects/1/georep_makevalid_diagnostic_vs_natural_earth/jaccard"
+    },
+    {
+      "metric_id": "ncl-1259_georep_diagnostic_vs_atlas_symmetric_difference_km2",
+      "value": 666.1712853151955,
+      "unit": "km2",
+      "text": "NCL-1259 georep diagnostic vs atlas symmetric difference.",
+      "json_pointer": "/subjects/1/georep_makevalid_diagnostic_vs_natural_earth/symmetric_difference_km2"
+    },
+    {
+      "metric_id": "ncl-1258_bdadmin_polygon_parts",
+      "value": 386,
+      "unit": "polygon-parts",
+      "text": "NCL-1258 official source multipart component count.",
+      "json_pointer": "/subjects/2/official_source_polygon_parts"
+    },
+    {
+      "metric_id": "ncl-1258_bdadmin_local_laea_area_km2",
+      "value": 1948.606352094425,
+      "unit": "km2",
+      "text": "NCL-1258 BDADMIN area in local equal-area projection.",
+      "json_pointer": "/subjects/2/official_source_area_km2_local_equal_area"
+    },
+    {
+      "metric_id": "ncl-1258_bdadmin_vs_atlas_jaccard",
+      "value": 0.8191248110961153,
+      "unit": "ratio",
+      "text": "NCL-1258 bdadmin vs atlas intersection over union.",
+      "json_pointer": "/subjects/2/official_vs_natural_earth/jaccard"
+    },
+    {
+      "metric_id": "ncl-1258_bdadmin_vs_atlas_symmetric_difference_km2",
+      "value": 394.0753940404578,
+      "unit": "km2",
+      "text": "NCL-1258 bdadmin vs atlas symmetric difference.",
+      "json_pointer": "/subjects/2/official_vs_natural_earth/symmetric_difference_km2"
+    },
+    {
+      "metric_id": "ncl-1258_bdadmin_vs_georep_diagnostic_jaccard",
+      "value": 0.9999999807277812,
+      "unit": "ratio",
+      "text": "NCL-1258 bdadmin vs georep diagnostic intersection over union.",
+      "json_pointer": "/subjects/2/official_vs_georep_makevalid_diagnostic/jaccard"
+    },
+    {
+      "metric_id": "ncl-1258_bdadmin_vs_georep_diagnostic_symmetric_difference_km2",
+      "value": 3.755396180610879e-05,
+      "unit": "km2",
+      "text": "NCL-1258 bdadmin vs georep diagnostic symmetric difference.",
+      "json_pointer": "/subjects/2/official_vs_georep_makevalid_diagnostic/symmetric_difference_km2"
+    },
+    {
+      "metric_id": "ncl-1258_georep_diagnostic_vs_atlas_jaccard",
+      "value": 0.8191248143478411,
+      "unit": "ratio",
+      "text": "NCL-1258 georep diagnostic vs atlas intersection over union.",
+      "json_pointer": "/subjects/2/georep_makevalid_diagnostic_vs_natural_earth/jaccard"
+    },
+    {
+      "metric_id": "ncl-1258_georep_diagnostic_vs_atlas_symmetric_difference_km2",
+      "value": 394.0753862475633,
+      "unit": "km2",
+      "text": "NCL-1258 georep diagnostic vs atlas symmetric difference.",
+      "json_pointer": "/subjects/2/georep_makevalid_diagnostic_vs_natural_earth/symmetric_difference_km2"
+    },
+    {
+      "metric_id": "ncl-559_bdadmin_wgs84_helper_land_area_m2",
+      "value": 9419440821.0262,
+      "unit": "m2",
+      "text": "NCL-559 BDADMIN WGS84 straight-source-edge ellipsoidal land area from shared helper.",
+      "json_pointer": "/areas/0/area_m2"
+    },
+    {
+      "metric_id": "ncl-1259_bdadmin_wgs84_helper_land_area_m2",
+      "value": 6982832520.277022,
+      "unit": "m2",
+      "text": "NCL-1259 BDADMIN WGS84 straight-source-edge ellipsoidal land area from shared helper.",
+      "json_pointer": "/areas/1/area_m2"
+    },
+    {
+      "metric_id": "ncl-1258_bdadmin_wgs84_helper_land_area_m2",
+      "value": 1948606351.797986,
+      "unit": "m2",
+      "text": "NCL-1258 BDADMIN WGS84 straight-source-edge ellipsoidal land area from shared helper.",
+      "json_pointer": "/areas/2/area_m2"
+    }
+  ],
+  "controls": {
+    "positive": [
+      {
+        "id": "exact-subject-source-mapping",
+        "passed": true,
+        "evidence": "source feature names map Nord/Sud/Îles Loyauté to the three scoped IDs in order-independent exact set"
+      },
+      {
+        "id": "valid-official-source-features",
+        "passed": true,
+        "evidence": "all three PROVINCES features are nonempty valid multipolygons"
+      },
+      {
+        "id": "commune-membership-name-set",
+        "passed": true,
+        "evidence": "33 normalized source commune names equal the 33 distinct legal commune names"
+      }
+    ],
+    "negative": [
+      {
+        "id": "swapped-nord-sud-labels",
+        "passed": true,
+        "evidence": "a Nord/Sud source feature swap fails the exact scope mapping"
+      },
+      {
+        "id": "out-of-scope-subject",
+        "passed": true,
+        "evidence": "NCL-911 is absent from the pinned container and is rejected"
+      },
+      {
+        "id": "preserve-invalid-originals",
+        "passed": true,
+        "evidence": "the three pinned GeoReP originals remain invalid; only a temporary diagnostic clone is repaired"
+      }
+    ]
+  },
+  "conclusions": [
+    {
+      "text": "The 2022 DITTT BDADMIN-NC PROVINCES layer has exactly three valid nonempty official province multipolygons that map by name to all three issue subjects; its compatible redistribution license remains unverified because official license statements conflict.",
+      "status": "supported",
+      "source_ids": [
+        "NCL-BDADMIN-NC-2022",
+        "NCL-DITTT-2019-SUMMARY"
+      ]
+    },
+    {
+      "text": "The 2022 COMMUNES layer has 33 normalized names matching the legal New Caledonia commune names; law and 2025 census decree corroborate province membership labels and the Poya split but do not establish the dividing coordinates.",
+      "status": "supported",
+      "source_ids": [
+        "NCL-BDADMIN-NC-2022",
+        "NCL-ORGANIC-LAW-99-209-ARTICLE-1",
+        "NCL-POYA-DECREE-1989",
+        "NCL-CENSUS-DECREE-2025"
+      ]
+    },
+    {
+      "text": "All three official source geometries closely match diagnostic MakeValid clones of the preserved invalid GeoReP originals, while differing materially from the pinned Natural Earth fallback. This supports a sourced correction proposal, but the exact licensed source release and fallback legal placement remain unresolved.",
+      "status": "unresolved",
+      "source_ids": [
+        "NCL-BDADMIN-NC-2022",
+        "NCL-GeoReP-2024",
+        "NCL-NATURAL-EARTH-ATLAS-FALLBACK"
+      ]
+    },
+    {
+      "text": "The exact Poya dividing line, inter-province/commune topology, offshore/islet completeness and appropriate final product scale are not certified. DITTT source terms also caution against assuming topological closure or systematic completeness.",
+      "status": "unresolved",
+      "source_ids": [
+        "NCL-BDADMIN-NC-2022",
+        "NCL-ORGANIC-LAW-99-209-ARTICLE-1",
+        "NCL-POYA-DECREE-1989"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "PYTHONPATH=<authorized-Fiona-wheel> python3 data/regional-review/new-caledonia-valid-province-source-20261005/reproduce.py --repo . --archive <authorized-BDADMINNC.zip> --area-export-dir <scratch-dir> --output data/regional-review/new-caledonia-valid-province-source-20261005/comparison-results.json",
+    "<python3.12-with-pinned-scientific-dependencies> data/regional-review/new-caledonia-valid-province-source-20261005/measure-geodesic-area.py --exports <scratch-dir> --comparison data/regional-review/new-caledonia-valid-province-source-20261005/comparison-results.json --output data/regional-review/new-caledonia-valid-province-source-20261005/source-area-results.json",
+    "node scripts/evidence-quality.mjs data/regional-review/new-caledonia-valid-province-source-20261005/evidence-quality.json ."
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "bdadmin_province_feature_count",
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/comparison-results.json",
+      "json_pointer": "/source_layers/PROVINCES/feature_count"
+    },
+    {
+      "metric_id": "bdadmin_commune_feature_count",
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/comparison-results.json",
+      "json_pointer": "/source_layers/COMMUNES/feature_count"
+    },
+    {
+      "metric_id": "bdadmin_valid_province_geometry_count",
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/comparison-results.json",
+      "json_pointer": "/source_layers/PROVINCES/feature_count"
+    },
+    {
+      "metric_id": "ncl-559_bdadmin_polygon_parts",
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/comparison-results.json",
+      "json_pointer": "/subjects/0/official_source_polygon_parts"
+    },
+    {
+      "metric_id": "ncl-559_bdadmin_local_laea_area_km2",
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/comparison-results.json",
+      "json_pointer": "/subjects/0/official_source_area_km2_local_equal_area"
+    },
+    {
+      "metric_id": "ncl-559_bdadmin_vs_atlas_jaccard",
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/comparison-results.json",
+      "json_pointer": "/subjects/0/official_vs_natural_earth/jaccard"
+    },
+    {
+      "metric_id": "ncl-559_bdadmin_vs_atlas_symmetric_difference_km2",
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/comparison-results.json",
+      "json_pointer": "/subjects/0/official_vs_natural_earth/symmetric_difference_km2"
+    },
+    {
+      "metric_id": "ncl-559_bdadmin_vs_georep_diagnostic_jaccard",
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/comparison-results.json",
+      "json_pointer": "/subjects/0/official_vs_georep_makevalid_diagnostic/jaccard"
+    },
+    {
+      "metric_id": "ncl-559_bdadmin_vs_georep_diagnostic_symmetric_difference_km2",
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/comparison-results.json",
+      "json_pointer": "/subjects/0/official_vs_georep_makevalid_diagnostic/symmetric_difference_km2"
+    },
+    {
+      "metric_id": "ncl-559_georep_diagnostic_vs_atlas_jaccard",
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/comparison-results.json",
+      "json_pointer": "/subjects/0/georep_makevalid_diagnostic_vs_natural_earth/jaccard"
+    },
+    {
+      "metric_id": "ncl-559_georep_diagnostic_vs_atlas_symmetric_difference_km2",
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/comparison-results.json",
+      "json_pointer": "/subjects/0/georep_makevalid_diagnostic_vs_natural_earth/symmetric_difference_km2"
+    },
+    {
+      "metric_id": "ncl-1259_bdadmin_polygon_parts",
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/comparison-results.json",
+      "json_pointer": "/subjects/1/official_source_polygon_parts"
+    },
+    {
+      "metric_id": "ncl-1259_bdadmin_local_laea_area_km2",
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/comparison-results.json",
+      "json_pointer": "/subjects/1/official_source_area_km2_local_equal_area"
+    },
+    {
+      "metric_id": "ncl-1259_bdadmin_vs_atlas_jaccard",
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/comparison-results.json",
+      "json_pointer": "/subjects/1/official_vs_natural_earth/jaccard"
+    },
+    {
+      "metric_id": "ncl-1259_bdadmin_vs_atlas_symmetric_difference_km2",
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/comparison-results.json",
+      "json_pointer": "/subjects/1/official_vs_natural_earth/symmetric_difference_km2"
+    },
+    {
+      "metric_id": "ncl-1259_bdadmin_vs_georep_diagnostic_jaccard",
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/comparison-results.json",
+      "json_pointer": "/subjects/1/official_vs_georep_makevalid_diagnostic/jaccard"
+    },
+    {
+      "metric_id": "ncl-1259_bdadmin_vs_georep_diagnostic_symmetric_difference_km2",
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/comparison-results.json",
+      "json_pointer": "/subjects/1/official_vs_georep_makevalid_diagnostic/symmetric_difference_km2"
+    },
+    {
+      "metric_id": "ncl-1259_georep_diagnostic_vs_atlas_jaccard",
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/comparison-results.json",
+      "json_pointer": "/subjects/1/georep_makevalid_diagnostic_vs_natural_earth/jaccard"
+    },
+    {
+      "metric_id": "ncl-1259_georep_diagnostic_vs_atlas_symmetric_difference_km2",
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/comparison-results.json",
+      "json_pointer": "/subjects/1/georep_makevalid_diagnostic_vs_natural_earth/symmetric_difference_km2"
+    },
+    {
+      "metric_id": "ncl-1258_bdadmin_polygon_parts",
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/comparison-results.json",
+      "json_pointer": "/subjects/2/official_source_polygon_parts"
+    },
+    {
+      "metric_id": "ncl-1258_bdadmin_local_laea_area_km2",
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/comparison-results.json",
+      "json_pointer": "/subjects/2/official_source_area_km2_local_equal_area"
+    },
+    {
+      "metric_id": "ncl-1258_bdadmin_vs_atlas_jaccard",
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/comparison-results.json",
+      "json_pointer": "/subjects/2/official_vs_natural_earth/jaccard"
+    },
+    {
+      "metric_id": "ncl-1258_bdadmin_vs_atlas_symmetric_difference_km2",
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/comparison-results.json",
+      "json_pointer": "/subjects/2/official_vs_natural_earth/symmetric_difference_km2"
+    },
+    {
+      "metric_id": "ncl-1258_bdadmin_vs_georep_diagnostic_jaccard",
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/comparison-results.json",
+      "json_pointer": "/subjects/2/official_vs_georep_makevalid_diagnostic/jaccard"
+    },
+    {
+      "metric_id": "ncl-1258_bdadmin_vs_georep_diagnostic_symmetric_difference_km2",
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/comparison-results.json",
+      "json_pointer": "/subjects/2/official_vs_georep_makevalid_diagnostic/symmetric_difference_km2"
+    },
+    {
+      "metric_id": "ncl-1258_georep_diagnostic_vs_atlas_jaccard",
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/comparison-results.json",
+      "json_pointer": "/subjects/2/georep_makevalid_diagnostic_vs_natural_earth/jaccard"
+    },
+    {
+      "metric_id": "ncl-1258_georep_diagnostic_vs_atlas_symmetric_difference_km2",
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/comparison-results.json",
+      "json_pointer": "/subjects/2/georep_makevalid_diagnostic_vs_natural_earth/symmetric_difference_km2"
+    },
+    {
+      "metric_id": "ncl-559_bdadmin_wgs84_helper_land_area_m2",
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/source-area-results.json",
+      "json_pointer": "/areas/0/area_m2"
+    },
+    {
+      "metric_id": "ncl-1259_bdadmin_wgs84_helper_land_area_m2",
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/source-area-results.json",
+      "json_pointer": "/areas/1/area_m2"
+    },
+    {
+      "metric_id": "ncl-1258_bdadmin_wgs84_helper_land_area_m2",
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/source-area-results.json",
+      "json_pointer": "/areas/2/area_m2"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "source-layer-and-scope-inspection",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/new-caledonia-valid-province-source-20261005/control-source-layer-and-scope-inspection-positive-control.json"
+    },
+    {
+      "method_id": "source-layer-and-scope-inspection",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/new-caledonia-valid-province-source-20261005/control-source-layer-and-scope-inspection-negative-control.json"
+    },
+    {
+      "method_id": "boundary-overlap",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/new-caledonia-valid-province-source-20261005/control-boundary-overlap-positive-control.json"
+    },
+    {
+      "method_id": "boundary-overlap",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/new-caledonia-valid-province-source-20261005/control-boundary-overlap-negative-control.json"
+    },
+    {
+      "method_id": "shared-helper-land-area",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/new-caledonia-valid-province-source-20261005/control-shared-helper-land-area-positive-control.json"
+    },
+    {
+      "method_id": "shared-helper-land-area",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/new-caledonia-valid-province-source-20261005/control-shared-helper-land-area-negative-control.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/README.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/findings.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/issue-scope-pinned.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/sources.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/source-acquisition.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/comparison-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/source-area-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/reproduce.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/measure-geodesic-area.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/control-source-layer-and-scope-inspection-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/control-source-layer-and-scope-inspection-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/control-boundary-overlap-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/control-boundary-overlap-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/control-shared-helper-land-area-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/new-caledonia-valid-province-source-20261005/control-shared-helper-land-area-negative-control.json",
+      "status": "added"
+    }
+  ]
+}

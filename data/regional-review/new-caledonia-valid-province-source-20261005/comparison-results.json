@@ -1,0 +1,197 @@
+{
+  "area_helper_inputs": [
+    {
+      "bytes": 16066199,
+      "crs": "EPSG:4326",
+      "path": "province_nord.geojson",
+      "retention": "local temporary only",
+      "sha256": "896a35af72dcf301c559ee8544a0d44a3d8536f9991626cef4a695edbf78c6ee",
+      "subject_id": "NCL-559"
+    },
+    {
+      "bytes": 24613217,
+      "crs": "EPSG:4326",
+      "path": "province_sud.geojson",
+      "retention": "local temporary only",
+      "sha256": "8836a2d6cd97f3ecde4d96566be073bd3a7fe76001b3e178061930c62dada901",
+      "subject_id": "NCL-1259"
+    },
+    {
+      "bytes": 8912975,
+      "crs": "EPSG:4326",
+      "path": "province_des_iles.geojson",
+      "retention": "local temporary only",
+      "sha256": "6db928c385edf8365d86e0ecd80e5432efd2a1072d2bdab9a2d4f691153f1d8e",
+      "subject_id": "NCL-1258"
+    }
+  ],
+  "area_method": {
+    "area_method": "planar polygon overlay in local WGS84 Lambert azimuthal equal-area projection",
+    "crs": "+proj=laea +lat_0=-21.5 +lon_0=165 +datum=WGS84 +units=m +no_defs",
+    "edge_method": "input vertices transformed without densification; source edges retained as straight coordinate segments",
+    "limits": "diagnostic comparison only; no shoreline completeness, inter-province topology certification, legal survey or regional approval"
+  },
+  "baseline_commit": "1f971fef3ed24f4ddc3e3c41caac00db567caea5",
+  "negative_controls": {
+    "all_three_preserved_georep_originals_are_invalid": true,
+    "out_of_scope_subject_absent": true,
+    "swapped_nord_sud_source_mapping_rejected": true
+  },
+  "parent_relationships": {
+    "NCL-1258": {
+      "area_parent": "framework:area:new-caledonia:42bf5323d811",
+      "level": "province",
+      "province_node": "framework:province:iles-loyaute:e5b43b46af0a"
+    },
+    "NCL-1259": {
+      "area_parent": "framework:area:new-caledonia:42bf5323d811",
+      "level": "province",
+      "province_node": "framework:province:sud:bc594d611e94"
+    },
+    "NCL-559": {
+      "area_parent": "framework:area:new-caledonia:42bf5323d811",
+      "level": "province",
+      "province_node": "framework:province:nord:4b48cbfce7bf"
+    }
+  },
+  "positive_controls": {
+    "all_official_source_geometries_nonempty_valid": true,
+    "exact_subject_to_source_mapping": true
+  },
+  "source_archive": {
+    "bytes": 25287153,
+    "sha256": "66363268e37d5f58c9e49864ea29ef11ecf518f4d24b09b31daa98bcc6c6e59d"
+  },
+  "source_layers": {
+    "COMMUNES": {
+      "crs": "EPSG:3163",
+      "feature_count": 33,
+      "legal_name_set_match": true,
+      "names": [
+        "BELEP",
+        "BOULOUPARI",
+        "BOURAIL",
+        "CANALA",
+        "DUMBEA",
+        "FARINO",
+        "HIENGHENE",
+        "HOUAILOU",
+        "ILE_DES_PINS",
+        "KAALA_GOMEN",
+        "KONE",
+        "KOUAOUA",
+        "KOUMAC",
+        "LA_FOA",
+        "LIFOU",
+        "MARE",
+        "MOINDOU",
+        "MONT_DORE",
+        "NOUMEA",
+        "OUEGOA",
+        "OUVEA",
+        "PAITA",
+        "POINDIMIE",
+        "PONERIHOUEN",
+        "POUEBO",
+        "POUEMBOUT",
+        "POUM",
+        "POYA",
+        "SARRAMEA",
+        "THIO",
+        "TOUHO",
+        "VOH",
+        "YATE"
+      ]
+    },
+    "PROVINCES": {
+      "crs": "EPSG:3163",
+      "feature_count": 3,
+      "features": [
+        "PROVINCE_DES_ILES",
+        "PROVINCE_NORD",
+        "PROVINCE_SUD"
+      ]
+    }
+  },
+  "subjects": [
+    {
+      "atlas_baseline_valid": true,
+      "atlas_name": "Nord",
+      "georep_makevalid_diagnostic_vs_natural_earth": {
+        "jaccard": 0.9174011598756514,
+        "symmetric_difference_km2": 815.7821593056375
+      },
+      "georep_original_reason": "Nested shells[164.288563583004 -20.5691327386611]",
+      "georep_original_valid": false,
+      "georep_source_sha256": "ab352991c7095df611ec40e79ff652fd4346070c4e725e689a1eed5f9c2fea66",
+      "natural_earth_source_id": "natural-earth",
+      "official_source_area_km2_local_equal_area": 9419.440880505,
+      "official_source_feature": "PROVINCE_NORD",
+      "official_source_geometry_type": "MultiPolygon",
+      "official_source_polygon_parts": 822,
+      "official_source_valid": true,
+      "official_vs_georep_makevalid_diagnostic": {
+        "jaccard": 0.9999505880799807,
+        "symmetric_difference_km2": 0.4654416722788595
+      },
+      "official_vs_natural_earth": {
+        "jaccard": 0.9174109228761054,
+        "symmetric_difference_km2": 815.685917720177
+      },
+      "subject_id": "NCL-559"
+    },
+    {
+      "atlas_baseline_valid": true,
+      "atlas_name": "Sud",
+      "georep_makevalid_diagnostic_vs_natural_earth": {
+        "jaccard": 0.9108841257177316,
+        "symmetric_difference_km2": 666.1712853151955
+      },
+      "georep_original_reason": "Nested shells[166.125730121754 -22.0910746177353]",
+      "georep_original_valid": false,
+      "georep_source_sha256": "c85d11f69e68c8a091ee7edc372212777952b897b3010082ba3af1d2774d5c85",
+      "natural_earth_source_id": "natural-earth",
+      "official_source_area_km2_local_equal_area": 6982.832461685449,
+      "official_source_feature": "PROVINCE_SUD",
+      "official_source_geometry_type": "MultiPolygon",
+      "official_source_polygon_parts": 666,
+      "official_source_valid": true,
+      "official_vs_georep_makevalid_diagnostic": {
+        "jaccard": 0.9997545455488213,
+        "symmetric_difference_km2": 1.7141048479050203
+      },
+      "official_vs_natural_earth": {
+        "jaccard": 0.911026130343376,
+        "symmetric_difference_km2": 665.0879582692721
+      },
+      "subject_id": "NCL-1259"
+    },
+    {
+      "atlas_baseline_valid": true,
+      "atlas_name": "Îles Loyauté",
+      "georep_makevalid_diagnostic_vs_natural_earth": {
+        "jaccard": 0.8191248143478411,
+        "symmetric_difference_km2": 394.0753862475633
+      },
+      "georep_original_reason": "Nested shells[167.870321236749 -21.5741319853041]",
+      "georep_original_valid": false,
+      "georep_source_sha256": "5a5ff8fac68b4a28c90ebedc65ba8deff91b0971582f7bb5a8cd32202db962b2",
+      "natural_earth_source_id": "natural-earth",
+      "official_source_area_km2_local_equal_area": 1948.606352094425,
+      "official_source_feature": "PROVINCE_DES_ILES",
+      "official_source_geometry_type": "MultiPolygon",
+      "official_source_polygon_parts": 386,
+      "official_source_valid": true,
+      "official_vs_georep_makevalid_diagnostic": {
+        "jaccard": 0.9999999807277812,
+        "symmetric_difference_km2": 3.755396180610879e-05
+      },
+      "official_vs_natural_earth": {
+        "jaccard": 0.8191248110961153,
+        "symmetric_difference_km2": 394.0753940404578
+      },
+      "subject_id": "NCL-1258"
+    }
+  ],
+  "version": 1
+}
