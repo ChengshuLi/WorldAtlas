@@ -1,0 +1,74 @@
+[
+  {
+    "path": "research/geography/gap-source-matanuska-physical-seam-20261006/sources/resolve-item-no2.json",
+    "url": "https://www.arcgis.com/sharing/rest/content/items/37ea320eebb647c6838c23f72abae5ef?f=json",
+    "final_url": "https://www.arcgis.com/sharing/rest/content/items/37ea320eebb647c6838c23f72abae5ef?f=json",
+    "retrieved_at": "2026-10-06T20:01:37.823Z",
+    "http_status": 200,
+    "bytes": 8638,
+    "sha256": "936ed45da03eefef9372d94a10639dbadb629567b9103fe53d220fe180061005",
+    "content_type": "application/json;charset=utf-8",
+    "last_modified": null,
+    "etag": null,
+    "error": null,
+    "features": null
+  },
+  {
+    "path": "research/geography/gap-source-matanuska-physical-seam-20261006/sources/resolve-item-with2-response.json",
+    "url": "https://www.arcgis.com/sharing/rest/content/items/37ea320eebb647c6838c23f72abae5ef2?f=json",
+    "final_url": "https://www.arcgis.com/sharing/rest/content/items/37ea320eebb647c6838c23f72abae5ef2?f=json",
+    "retrieved_at": "2026-10-06T20:01:38.040Z",
+    "http_status": 200,
+    "bytes": 113,
+    "sha256": "65915fb331b297e9907690d5a715a75062b6dc04c3bae84bfdae5fc17e705d5c",
+    "content_type": "application/json;charset=utf-8",
+    "last_modified": null,
+    "etag": null,
+    "error": {
+      "code": 400,
+      "messageCode": "CONT_0001",
+      "message": "Item does not exist or is inaccessible.",
+      "details": []
+    },
+    "features": null
+  },
+  {
+    "path": "research/geography/gap-source-matanuska-physical-seam-20261006/sources/resolve-layer-0.json",
+    "url": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer/0?f=json",
+    "final_url": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer/0?f=json",
+    "retrieved_at": "2026-10-06T20:01:38.134Z",
+    "http_status": 200,
+    "bytes": 25682,
+    "sha256": "4ae61d5e18ee8d02203dda087805737a25cdfcf48a1f31567c92c09572d8a5e3",
+    "content_type": "application/json; charset=utf-8",
+    "last_modified": "Tue, 03 Mar 2026 21:16:59 GMT",
+    "etag": "640338538",
+    "error": null,
+    "features": null
+  },
+  {
+    "path": "research/geography/gap-source-matanuska-physical-seam-20261006/sources/resolve-ecoregions-2017-ecoids-371-405.geojson",
+    "url": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer/0/query?where=ECO_ID%20IN%20(371%2C405)&outFields=*&returnGeometry=true&outSR=4326&f=geojson",
+    "final_url": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer/0/query?where=ECO_ID%20IN%20(371%2C405)&outFields=*&returnGeometry=true&outSR=4326&f=geojson",
+    "retrieved_at": "2026-10-06T20:01:38.206Z",
+    "http_status": 200,
+    "bytes": 297498,
+    "sha256": "68a060237b35bd6914959df3de86c42b7c0caf1955213020f97bb616ab5a60fe",
+    "content_type": "application/json; charset=utf-8",
+    "last_modified": "Tue, 03 Mar 2026 21:16:59 GMT",
+    "etag": "sd27828_1008146058",
+    "error": null,
+    "features": [
+      {
+        "ECO_ID": 405,
+        "ECO_NAME": "Alaska-St. Elias Range tundra",
+        "geometry_type": "MultiPolygon"
+      },
+      {
+        "ECO_ID": 371,
+        "ECO_NAME": "Cook Inlet taiga",
+        "geometry_type": "MultiPolygon"
+      }
+    ]
+  }
+]
