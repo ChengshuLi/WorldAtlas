@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "method_id": "exact-roster-generator",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "rejected_input_mutations": [
+    "wrong-baseline",
+    "demonstrated-whole-source-drift",
+    "wrong-original-code",
+    "demonstrated-complete-source-name-drift",
+    "symlink-output-target"
+  ],
+  "outputs_created_before_rejection": false,
+  "control_manifest": "runs/verify-20261006-symlinkfix/negative-controls.json"
+}

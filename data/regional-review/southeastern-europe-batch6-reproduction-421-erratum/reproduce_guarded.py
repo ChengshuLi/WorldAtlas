@@ -5,9 +5,11 @@ from __future__ import annotations
 import hashlib
 import io
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
+import tempfile
 import time
 from contextlib import redirect_stdout
 
@@ -32,6 +34,37 @@ SCRIPTS = {
 
 def sha(raw: bytes) -> str:
     return hashlib.sha256(raw).hexdigest()
+
+
+def guarded_path_open(path: Path, mode: str, *, old_open, root: Path, packet: Path,
+                      outdir: Path, allowed: set[str], pinned: set[str], writes: list[str],
+                      args=(), kwargs=None):
+    """Guard packet paths lexically, before symlinks can redirect resolution."""
+    lexical = Path(os.path.abspath(path))
+    root = Path(os.path.abspath(root))
+    packet = Path(os.path.abspath(packet))
+    if lexical == packet or packet in lexical.parents:
+        # Reject symlinked packet components, including the target file. This
+        # applies to both reads and writes, and does not follow the final link.
+        current = lexical
+        while current != packet:
+            if current.is_symlink():
+                raise PermissionError(f"Symlinked historical packet path: {current}")
+            current = current.parent
+        if packet.is_symlink():
+            raise PermissionError(f"Symlinked historical packet directory: {packet}")
+        rel = str(lexical.relative_to(root))
+        if any(flag in mode for flag in "wax+"):
+            if lexical.parent != packet or lexical.name not in allowed or "r" in mode or "+" in mode:
+                raise PermissionError(f"Unexpected historical output target: {rel}")
+            destination = outdir / lexical.name
+            if destination.exists():
+                raise FileExistsError(f"Fresh output already exists: {destination}")
+            writes.append(lexical.name)
+            return old_open(destination, "x" + ("b" if "b" in mode else ""), *args, **(kwargs or {}))
+        if rel not in pinned:
+            raise PermissionError(f"Unpinned historical packet read: {rel}")
+    return old_open(path, mode, *args, **(kwargs or {}))
 
 
 def git_bytes(commit: str, path: str) -> bytes:
@@ -78,6 +111,11 @@ def validate_inputs(overrides: dict[str, bytes] | None = None) -> dict:
         local = ROOT / item["path"]
         # Older baseline files need not be materialized in the sparse checkout;
         # when present, they must match the same immutable bytes as the Git blob.
+        current = local
+        while current != ROOT:
+            if current.is_symlink():
+                raise ValueError(f"Symlinked working-tree input is not allowed: {item['path']}")
+            current = current.parent
         if local.exists() and (not local.is_file() or local.stat().st_size != item["bytes"] or sha(local.read_bytes()) != item["sha256"]):
             raise ValueError(f"Working-tree input differs from its immutable pin: {item['path']}")
     if total > MAX_PHASE:
@@ -141,6 +179,34 @@ def verify_negative_controls() -> dict:
     if sentinel.read_bytes() != before:
         raise AssertionError("Existing output sentinel changed")
     controls.append({"id": "existing-output", "outcome": "passed", "sentinel_sha256": sha(before), "preserved": True})
+
+    # A retained historical output path that is a symlink must never redirect
+    # writes to an external file. Exercise the same guard used by reproduction.
+    with tempfile.TemporaryDirectory(prefix="symlink-guard-", dir=HERE / "runs" / RUN_ID) as temp:
+        sandbox = Path(temp)
+        root = sandbox / "repo"
+        packet = root / "data/regional-review/legacy"
+        packet.mkdir(parents=True)
+        fresh = sandbox / "fresh"
+        fresh.mkdir()
+        external = sandbox / "external-sentinel.csv"
+        external.write_bytes(b"EXTERNAL EVIDENCE MUST SURVIVE\n")
+        historical = packet / "assessment.csv"
+        historical.symlink_to(external)
+        before = external.read_bytes()
+        writes: list[str] = []
+        try:
+            guarded_path_open(historical, "w", old_open=Path.open, root=root, packet=packet,
+                              outdir=fresh, allowed={"assessment.csv"}, pinned={"data/regional-review/legacy/assessment.csv"},
+                              writes=writes)
+        except PermissionError:
+            pass
+        else:
+            raise AssertionError("Symlinked historical output path was admitted")
+        if external.read_bytes() != before:
+            raise AssertionError("External symlink target changed")
+        controls.append({"id": "symlink-output-target", "outcome": "passed",
+                         "target_sha256": sha(before), "preserved": True, "rejected_before_write": True})
     result = {"version": 1, "method_id": "immutable-input-and-exclusive-output-guard", "controls": controls}
     target = HERE / "runs" / RUN_ID / "negative-controls.json"
     with target.open("x", encoding="utf-8") as stream:
@@ -161,26 +227,16 @@ def execute_phase(phase: str, run_name: str) -> dict:
     reads: set[str] = set()
     writes: list[str] = []
     old_open = Path.open
+    pinned_paths = {x["path"] for x in read_pins()}
 
     def guarded_open(path: Path, mode="r", *args, **kwargs):
-        try:
-            resolved = path.resolve(strict=False)
-        except OSError:
-            resolved = path.absolute()
-        if resolved == PACKET or PACKET in resolved.parents:
-            rel = str(resolved.relative_to(ROOT))
-            if any(flag in mode for flag in "wax+"):
-                if resolved.parent != PACKET or resolved.name not in allowed or "r" in mode or "+" in mode:
-                    raise PermissionError(f"Unexpected historical output target: {rel}")
-                destination = outdir / resolved.name
-                if destination.exists():
-                    raise FileExistsError(f"Fresh output already exists: {destination}")
-                writes.append(resolved.name)
-                return old_open(destination, "x" + ("b" if "b" in mode else ""), *args, **kwargs)
-            if rel not in {x["path"] for x in read_pins()}:
-                raise PermissionError(f"Unpinned historical packet read: {rel}")
-            reads.add(rel)
-        return old_open(path, mode, *args, **kwargs)
+        result = guarded_path_open(path, mode, old_open=old_open, root=ROOT, packet=PACKET,
+                                   outdir=outdir, allowed=allowed,
+                                   pinned=pinned_paths, writes=writes,
+                                   args=args, kwargs=kwargs)
+        if str(path).startswith(str(PACKET)) and not any(flag in mode for flag in "wax+"):
+            reads.add(str(Path(os.path.abspath(path)).relative_to(ROOT)))
+        return result
 
     # Import the exact historical helper only after all its bytes have passed
     # the same 47-input verification.  Python's bytecode cache is disabled.

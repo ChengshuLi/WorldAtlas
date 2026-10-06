@@ -812,8 +812,7 @@
       "verification": "verified",
       "temporal_status": "reference",
       "limit": "IDs and names establish source-era lineage only, not current legal identity, boundaries or completeness.",
-      "restoration": "Use exact pinned source blobs at 5b72dc3adf48b089c3319b18c3a447468196176a and inspect source package/license instructions before reuse.",
-      "files": "2026-10-05"
+      "restoration": "Use exact pinned source blobs at 5b72dc3adf48b089c3319b18c3a447468196176a and inspect source package/license instructions before reuse."
     },
     {
       "id": "greek-adm2-2016",
@@ -1023,8 +1022,8 @@
   "outputs": [
     {
       "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/README.md",
-      "bytes": 9517,
-      "sha256": "6106f14d7bafc922697db5b092cab5d8dbef203b118c7119a5fccc702a210be1",
+      "bytes": 9739,
+      "sha256": "252c1b6d221c1c2e331b4749106512e317b627c8ff607fad3fa3253110200f2b",
       "hash_kind": "file-bytes"
     },
     {
@@ -1036,8 +1035,8 @@
     },
     {
       "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/negative-controls.json",
-      "bytes": 1280,
-      "sha256": "20bc8b9ad4e2b004f62ab43bd56490121231ea7bbf7c58d60d539e35161176ec",
+      "bytes": 1509,
+      "sha256": "77edd6ba6bd05adb9738b7b730a945f711ea30042e73bddad523144db4a2a27c",
       "hash_kind": "file-bytes"
     },
     {
@@ -1048,14 +1047,14 @@
     },
     {
       "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/reproduce_guarded.py",
-      "bytes": 17595,
-      "sha256": "a2e6d771fde34ffb4d3dd8cbba32e25ae8bd81b7fa01e2fe684cc24affbc14eb",
+      "bytes": 20536,
+      "sha256": "e4ecfe73a0e5b72314417b32412e0c39ab6749c6c0f864a519cecc70acd1acd7",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/reproduction-results.json",
-      "bytes": 23155,
-      "sha256": "c2c0a2e291c6de50e116776732a1df4df2e5d2c2aedd8f765373e6772733d2ab",
+      "bytes": 26872,
+      "sha256": "6cd4613e425e976de66313fd159684f7d0e32f0cc15c02059e70877412bd05bb",
       "hash_kind": "file-bytes"
     },
     {
@@ -1664,6 +1663,195 @@
       "bytes": 714,
       "sha256": "74cbc01dc4724e25c7296aa2b45c50bcb8ed20c2067a224172be70a90473065a",
       "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/controls/assessment.csv",
+      "hash_kind": "file-bytes",
+      "role": "generated-reproduction-evidence",
+      "bytes": 17,
+      "sha256": "1bc453fcbacd0e2942d47aac3aa6972d01380fbc6318f77903f5fb5a0e73b129"
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/geometry-run-1/geometry-method-and-neighbor-summary.json",
+      "hash_kind": "file-bytes",
+      "role": "generated-reproduction-evidence",
+      "bytes": 4556,
+      "sha256": "1373f9285575eabb1c19d90ed954153e2a415ea4dc02370fae84a3fed640f833"
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/geometry-run-1/geometry-run-summary.json",
+      "hash_kind": "file-bytes",
+      "role": "generated-reproduction-evidence",
+      "bytes": 5059,
+      "sha256": "8ce49a6cc4db6cbebf588351056d1e9b09f497b1c5828e4204fa8d05babf5c40"
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/geometry-run-1/geometry-screen.csv",
+      "hash_kind": "file-bytes",
+      "role": "generated-reproduction-evidence",
+      "bytes": 57689,
+      "sha256": "75028bcec59629db53587663f53a752842b4cc7c74e7e42d9a7ef3cec8fa1951"
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/geometry-run-1/parent-scale-screen.csv",
+      "hash_kind": "file-bytes",
+      "role": "generated-reproduction-evidence",
+      "bytes": 3333,
+      "sha256": "14d3a8e3c9127fee23a090f303629819426ed9a758a255ea1531ec46c5a02f71"
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/geometry-run-2/geometry-method-and-neighbor-summary.json",
+      "hash_kind": "file-bytes",
+      "role": "generated-reproduction-evidence",
+      "bytes": 4556,
+      "sha256": "1373f9285575eabb1c19d90ed954153e2a415ea4dc02370fae84a3fed640f833"
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/geometry-run-2/geometry-run-summary.json",
+      "hash_kind": "file-bytes",
+      "role": "generated-reproduction-evidence",
+      "bytes": 5059,
+      "sha256": "8ce49a6cc4db6cbebf588351056d1e9b09f497b1c5828e4204fa8d05babf5c40"
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/geometry-run-2/geometry-screen.csv",
+      "hash_kind": "file-bytes",
+      "role": "generated-reproduction-evidence",
+      "bytes": 57689,
+      "sha256": "75028bcec59629db53587663f53a752842b4cc7c74e7e42d9a7ef3cec8fa1951"
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/geometry-run-2/parent-scale-screen.csv",
+      "hash_kind": "file-bytes",
+      "role": "generated-reproduction-evidence",
+      "bytes": 3333,
+      "sha256": "14d3a8e3c9127fee23a090f303629819426ed9a758a255ea1531ec46c5a02f71"
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/negative-controls.json",
+      "hash_kind": "file-bytes",
+      "role": "generated-reproduction-evidence",
+      "bytes": 1509,
+      "sha256": "77edd6ba6bd05adb9738b7b730a945f711ea30042e73bddad523144db4a2a27c"
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/receipts/geometry-diagnostic-negative-control.json",
+      "hash_kind": "file-bytes",
+      "role": "generated-reproduction-evidence",
+      "bytes": 392,
+      "sha256": "a97ae99cba3ca718180d8abedccbd63e41b584242a8d1659d1472cc71139e3fd"
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/receipts/geometry-diagnostic-positive-control.json",
+      "hash_kind": "file-bytes",
+      "role": "generated-reproduction-evidence",
+      "bytes": 393,
+      "sha256": "c5280874ea52358cc0962feb1e7e545b4ac19fc814e44fb1b23259b9704c1957"
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/receipts/geometry-negative-control.json",
+      "hash_kind": "file-bytes",
+      "role": "generated-reproduction-evidence",
+      "bytes": 441,
+      "sha256": "0767a95f7815dc4c48bb4736dc6d9e791da0caa6c94da33e9bbdb8d88b0bd14d"
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/receipts/geometry-positive-control.json",
+      "hash_kind": "file-bytes",
+      "role": "generated-reproduction-evidence",
+      "bytes": 547,
+      "sha256": "267f37640a87ca52715c7173d864c6cda03a265f7887c8aa5da5552e7cca822a"
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/receipts/geometry-reproducibility.json",
+      "hash_kind": "file-bytes",
+      "role": "generated-reproduction-evidence",
+      "bytes": 353,
+      "sha256": "6d56c60bf1708087021685a14d3702654db8171988cca5648b7eff9c630c2cf9"
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/receipts/roster-negative-control.json",
+      "hash_kind": "file-bytes",
+      "role": "generated-reproduction-evidence",
+      "bytes": 438,
+      "sha256": "8cb924d4f66af61e427b81a42037fc6c019e1f918b58d5cea5035e90950f97c2"
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/receipts/roster-positive-control.json",
+      "hash_kind": "file-bytes",
+      "role": "generated-reproduction-evidence",
+      "bytes": 542,
+      "sha256": "82d210667e6ac964a2acc12acd0483e40256a434be87dbccfa99852bbe2cb96c"
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/receipts/roster-reproducibility.json",
+      "hash_kind": "file-bytes",
+      "role": "generated-reproduction-evidence",
+      "bytes": 346,
+      "sha256": "dd0e155bb19b6d75301a5e960df31ca7743938e972bedc9c7e0e341f5af9000f"
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/reproduction-results.json",
+      "hash_kind": "file-bytes",
+      "role": "generated-reproduction-evidence",
+      "bytes": 26872,
+      "sha256": "6cd4613e425e976de66313fd159684f7d0e32f0cc15c02059e70877412bd05bb"
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/roster-run-1/area-scope.csv",
+      "hash_kind": "file-bytes",
+      "role": "generated-reproduction-evidence",
+      "bytes": 1960,
+      "sha256": "209f53e38a133b922bb83bd3f604b9e807257179a880f3eee7a30b93c24ff145"
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/roster-run-1/assessment.csv",
+      "hash_kind": "file-bytes",
+      "role": "generated-reproduction-evidence",
+      "bytes": 139606,
+      "sha256": "f6ee194f5270f08762fbdfacd8a14e641414ce1ee2a8a3fb391d4d1fa2f6fe3b"
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/roster-run-1/province-scope.csv",
+      "hash_kind": "file-bytes",
+      "role": "generated-reproduction-evidence",
+      "bytes": 16309,
+      "sha256": "e25d6bbd6d387c5d56f67cf39638ccd002986bdabb5ba64dfd6b0d5341ce728d"
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/roster-run-1/reproduction-summary.json",
+      "hash_kind": "file-bytes",
+      "role": "generated-reproduction-evidence",
+      "bytes": 714,
+      "sha256": "74cbc01dc4724e25c7296aa2b45c50bcb8ed20c2067a224172be70a90473065a"
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/roster-run-2/area-scope.csv",
+      "hash_kind": "file-bytes",
+      "role": "generated-reproduction-evidence",
+      "bytes": 1960,
+      "sha256": "209f53e38a133b922bb83bd3f604b9e807257179a880f3eee7a30b93c24ff145"
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/roster-run-2/assessment.csv",
+      "hash_kind": "file-bytes",
+      "role": "generated-reproduction-evidence",
+      "bytes": 139606,
+      "sha256": "f6ee194f5270f08762fbdfacd8a14e641414ce1ee2a8a3fb391d4d1fa2f6fe3b"
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/roster-run-2/province-scope.csv",
+      "hash_kind": "file-bytes",
+      "role": "generated-reproduction-evidence",
+      "bytes": 16309,
+      "sha256": "e25d6bbd6d387c5d56f67cf39638ccd002986bdabb5ba64dfd6b0d5341ce728d"
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/roster-run-2/reproduction-summary.json",
+      "hash_kind": "file-bytes",
+      "role": "generated-reproduction-evidence",
+      "bytes": 714,
+      "sha256": "74cbc01dc4724e25c7296aa2b45c50bcb8ed20c2067a224172be70a90473065a"
     },
     {
       "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/source-review.json",
@@ -2437,49 +2625,49 @@
       "method_id": "exact-roster-generator",
       "kind": "positive-control",
       "outcome": "passed",
-      "evidence_path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-final/receipts/roster-positive-control.json"
+      "evidence_path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/receipts/roster-positive-control.json"
     },
     {
       "method_id": "exact-roster-generator",
       "kind": "negative-control",
       "outcome": "passed",
-      "evidence_path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-final/receipts/roster-negative-control.json"
+      "evidence_path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/receipts/roster-negative-control.json"
     },
     {
       "method_id": "exact-roster-generator",
       "kind": "reproducibility",
       "outcome": "passed",
-      "evidence_path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-final/receipts/roster-reproducibility.json"
+      "evidence_path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/receipts/roster-reproducibility.json"
     },
     {
       "method_id": "geometry-screen-generator",
       "kind": "positive-control",
       "outcome": "passed",
-      "evidence_path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-final/receipts/geometry-positive-control.json"
+      "evidence_path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/receipts/geometry-positive-control.json"
     },
     {
       "method_id": "geometry-screen-generator",
       "kind": "negative-control",
       "outcome": "passed",
-      "evidence_path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-final/receipts/geometry-negative-control.json"
+      "evidence_path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/receipts/geometry-negative-control.json"
     },
     {
       "method_id": "geometry-screen-generator",
       "kind": "reproducibility",
       "outcome": "passed",
-      "evidence_path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-final/receipts/geometry-reproducibility.json"
+      "evidence_path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/receipts/geometry-reproducibility.json"
     },
     {
       "method_id": "epsg6933-source-comparison",
       "kind": "positive-control",
       "outcome": "passed",
-      "evidence_path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-final/receipts/geometry-diagnostic-positive-control.json"
+      "evidence_path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/receipts/geometry-diagnostic-positive-control.json"
     },
     {
       "method_id": "epsg6933-source-comparison",
       "kind": "negative-control",
       "outcome": "passed",
-      "evidence_path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-final/receipts/geometry-diagnostic-negative-control.json"
+      "evidence_path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/receipts/geometry-diagnostic-negative-control.json"
     }
   ],
   "stages": {
@@ -2994,12 +3182,142 @@
       "previous_path": null
     },
     {
-      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/source-review.json",
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/controls/assessment.csv",
       "status": "added",
       "previous_path": null
     },
     {
-      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/evidence-quality.json",
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/geometry-run-1/geometry-method-and-neighbor-summary.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/geometry-run-1/geometry-run-summary.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/geometry-run-1/geometry-screen.csv",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/geometry-run-1/parent-scale-screen.csv",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/geometry-run-2/geometry-method-and-neighbor-summary.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/geometry-run-2/geometry-run-summary.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/geometry-run-2/geometry-screen.csv",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/geometry-run-2/parent-scale-screen.csv",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/negative-controls.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/receipts/geometry-diagnostic-negative-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/receipts/geometry-diagnostic-positive-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/receipts/geometry-negative-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/receipts/geometry-positive-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/receipts/geometry-reproducibility.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/receipts/roster-negative-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/receipts/roster-positive-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/receipts/roster-reproducibility.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/reproduction-results.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/roster-run-1/area-scope.csv",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/roster-run-1/assessment.csv",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/roster-run-1/province-scope.csv",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/roster-run-1/reproduction-summary.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/roster-run-2/area-scope.csv",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/roster-run-2/assessment.csv",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/roster-run-2/province-scope.csv",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-symlinkfix/roster-run-2/reproduction-summary.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/source-review.json",
       "status": "added",
       "previous_path": null
     }
