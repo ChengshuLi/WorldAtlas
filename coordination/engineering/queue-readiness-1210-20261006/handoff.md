@@ -7,7 +7,10 @@ Authors/reviewers reconcile completion separately from merging; dependency owner
 review direct dependents; available same-lane workers review neglected unclaimed
 readiness problems between jobs. Auditor and Publisher retain their existing roles.
 The hourly report trigger is removed; explicit investigations remain read-only.
-The merge scheduler and merge-integration machinery are unchanged.
+The merge scheduler and merge admission/timing machinery are unchanged. Source
+authority, early evidence-capacity and voluntary partition review pass the
+authoritative issue through the existing receipt validator; new bound receipts
+must remain usable and must reject changed acceptance or PR disposition.
 
 Read-only readiness and claims now share contract/lane/evidence/dependency/budget,
 explicit-blocker and geography-owned-path validation. The targeted command preserves
@@ -27,6 +30,16 @@ review contract/disposition drift, plus existing evidence/claim/handoff/integrat
 regressions. controls.txt records the current run. compatibility-controls.txt is
 an archived earlier-draft regression run, not evidence for unexecuted current code.
 Local controls do not prove hosted workflow behavior or actual worker adoption.
+
+Hosted head 8cff157 failed scope and regression shard 0: two older synthetic
+fixtures lacked activation timestamps and the ownership test still rejected safe
+nested scopes. The expanded controls also exposed secondary receipt callers that
+omitted the authoritative issue. The current code fixes those callers, exercises
+post-activation source/capacity review bindings and preserves all rejection gates.
+Native whole-shape replay uses the retained 1,565,161-byte Natural Earth lake input
+and an existing Python 3.12 environment with Shapely 2.1.2; no source download or
+new full checkout is needed. That failed hosted head is historical failure evidence,
+not a successful hosted verification of the replacement head.
 
 Remaining #1210 work includes retrospective original-acceptance reconciliation,
 independent final exact-head review, hosted merge and actual main/workflow readback,

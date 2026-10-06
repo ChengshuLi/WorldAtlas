@@ -20,7 +20,7 @@ test('v1 worldwide approval remains compatible',()=>{
 });
 test('regional content claims depend on macro and branch approval, not unfinished worldwide descendants',()=>{
  const spec={max_prs:1,depends_on:[],scope:'One sourced census batch',mode:'content',region_ids:['region:a'],geographic_release:pins.release_id,scope_manifest:'campaign/scope.json',territory_match_review:'Approved subject denominator'};
- const issue={number:200,state:'open',labels:['type:history-research','kind:work-item','status:ready'],body:`<!-- worldatlas-work:v1\n${JSON.stringify(spec)}\n-->`};
+ const issue={number:200,created_at:'2026-10-03T00:00:00Z',state:'open',labels:['type:history-research','kind:work-item','status:ready'],body:`<!-- worldatlas-work:v1\n${JSON.stringify(spec)}\n-->`};
  const request={action:'claim',worker_id:'research-a',claim_id:'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa',request_id:'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb',branch:'research/census-a'};
  const dependencies=[{number:100,state:'closed'},{number:101,state:'closed'},{number:7,state:'open'}];
  assert.equal(transitionClaim({issue,comments:[],request,dependencies,geographyGate:gate()}).claim.mode,'content');

@@ -57,6 +57,24 @@
         "hash_kind": "file-bytes"
       },
       {
+        "path": "docs/PUBLICATION_HANDOFF.md",
+        "bytes": 12006,
+        "sha256": "1d24fab230fa1a8e73d59aef23d93866af31015894f02fe55e48fe40f153b168",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/QUEUE_READINESS_AUDIT.md",
+        "bytes": 2717,
+        "sha256": "e3b09de98861f53560176b7e772ff66f8a857369e348446cf7620daedc4ceded",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 38368,
+        "sha256": "11ad15af17f374349da376ec36c4e68f6c8f3188c7719b5fff0363e3cac4a3e4",
+        "hash_kind": "file-bytes"
+      },
+      {
         "path": "docs/prompts/AUDITOR.txt",
         "bytes": 8839,
         "sha256": "a3c132621f1e0388fdd0c4a4bdd81faacf9fd1cd6415a018a9b7963949abbee9",
@@ -87,24 +105,6 @@
         "hash_kind": "file-bytes"
       },
       {
-        "path": "docs/PUBLICATION_HANDOFF.md",
-        "bytes": 12006,
-        "sha256": "1d24fab230fa1a8e73d59aef23d93866af31015894f02fe55e48fe40f153b168",
-        "hash_kind": "file-bytes"
-      },
-      {
-        "path": "docs/QUEUE_READINESS_AUDIT.md",
-        "bytes": 2717,
-        "sha256": "e3b09de98861f53560176b7e772ff66f8a857369e348446cf7620daedc4ceded",
-        "hash_kind": "file-bytes"
-      },
-      {
-        "path": "docs/WORKER_COORDINATION.md",
-        "bytes": 38368,
-        "sha256": "11ad15af17f374349da376ec36c4e68f6c8f3188c7719b5fff0363e3cac4a3e4",
-        "hash_kind": "file-bytes"
-      },
-      {
         "path": "scripts/check-handoff-scope.mjs",
         "bytes": 6972,
         "sha256": "c4f838076f63ad82c09d4e4a202f70e17e8495fe92938668aa6746f78c4083cb",
@@ -114,6 +114,18 @@
         "path": "scripts/evidence-policy.mjs",
         "bytes": 2126,
         "sha256": "a6b2d154c234d16321ab1841a69b681a739b45ac63e98bbeb6def295e1c6c11f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/final-capacity.mjs",
+        "bytes": 19048,
+        "sha256": "139028f6924ce2c7d69d2d6a76f536bb5dbd62dca525a01e683bb9a72a2f4ae3",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/geographic-adjudication-api.mjs",
+        "bytes": 12270,
+        "sha256": "49866b00bd4646f3978be31fc70233002cc973d767562191c276302f5e7f27ca",
         "hash_kind": "file-bytes"
       },
       {
@@ -141,6 +153,30 @@
         "hash_kind": "file-bytes"
       },
       {
+        "path": "scripts/validate-evidence-partition-review.mjs",
+        "bytes": 6948,
+        "sha256": "5b0cd81c9cfc86299707a8132a076bd5deb754f03bd5038a06f13b8fe167168d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/final-capacity.test.mjs",
+        "bytes": 19377,
+        "sha256": "d2332f242fb8abae511a72534ae428f3bd6b37d2fbe3930a97530f8756933e83",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/geographic-adjudication-api.test.mjs",
+        "bytes": 15936,
+        "sha256": "bbe3ed22ad083a3b8017cd29b0e218b967a1865f241ac0ceca135a7048ae58a7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/geography-worker-lane.test.mjs",
+        "bytes": 8614,
+        "sha256": "3a1303c3e0b840faae27546f527784b52907ae9209cdd02fe39aa786079b6b67",
+        "hash_kind": "file-bytes"
+      },
+      {
         "path": "test/handoff-scope.test.mjs",
         "bytes": 6782,
         "sha256": "4c0b26e4382d27076a5800dca380c1edb44111124ae811dcb643575506d6c0ac",
@@ -162,6 +198,12 @@
         "path": "test/queue-readiness-audit.test.mjs",
         "bytes": 5336,
         "sha256": "6561c8e8fcf57cee0e7b12286ade0f877ff129f6ce083eda3143f56f8f9b5712",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/regional-research-gate.test.mjs",
+        "bytes": 8032,
+        "sha256": "b188ca857f49d84a24c96ea36ca311e558a849532ab27f8cd76b625c49c176d9",
         "hash_kind": "file-bytes"
       }
     ],
@@ -204,14 +246,14 @@
     },
     {
       "path": "coordination/engineering/queue-readiness-1210-20261006/controls.txt",
-      "bytes": 11830,
-      "sha256": "b07dc9216ec4f319b5139e74746e810d0eec7be96f2ac51bd19ddfb38c353d64",
+      "bytes": 17679,
+      "sha256": "c9e623d5d5b1230b7b40e9662af1e37d563a0a1b620ec0e5ad5b70c48ccf091f",
       "hash_kind": "file-bytes"
     },
     {
       "path": "coordination/engineering/queue-readiness-1210-20261006/handoff.md",
-      "bytes": 2443,
-      "sha256": "b36af6de4e739b99aee52a0cd324a34e57aeb262838cd9cfe8498fb8acd3fef0",
+      "bytes": 3399,
+      "sha256": "a8b91ffa787e27d43f4d8e6b7633080151f24ad8a4f40954fc3608c69be13085",
       "hash_kind": "file-bytes"
     },
     {
@@ -311,6 +353,18 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "scripts/final-capacity.mjs",
+      "bytes": 19145,
+      "sha256": "949ea298d2d5ef5f07d3392c42c955bf86cc97faedb23f0d1d71abf7157d0880",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/geographic-adjudication-api.mjs",
+      "bytes": 12389,
+      "sha256": "ce0357365f791064971067e1e7a9a74e10dbe65e8437dfe3a0c64e708f86a7e8",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "scripts/issue-claim-contract.mjs",
       "bytes": 14530,
       "sha256": "6e7cdac9e6d87d5ea3e78c697fd34797b00ddcb9b1ba1b6e8cb91f8c93bc410c",
@@ -341,9 +395,33 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "scripts/validate-evidence-partition-review.mjs",
+      "bytes": 7113,
+      "sha256": "9c2c7603ca5f285af16cd7464438c6190586b5caa0c0b12fdf9f9e5b6e39dd8a",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "test/claim-readiness-races.test.mjs",
       "bytes": 3831,
       "sha256": "fc7a10bf8b73ddbbb2ffa24e46b7bd1f1c095aa4ba46f24b86211ac0c0b95857",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/final-capacity.test.mjs",
+      "bytes": 20398,
+      "sha256": "749dc81b6004b81c0eec73b2723671fbfe40c8392cf6aff7e5c05dbac8041d06",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/geographic-adjudication-api.test.mjs",
+      "bytes": 16099,
+      "sha256": "aee05daafed344f4312ed6eaff7fa8d411a0bc01b515c207108bd56398865523",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/geography-worker-lane.test.mjs",
+      "bytes": 8645,
+      "sha256": "5cb4597a8aa3a5338aabfcd92e2ccbffcc59580d59a62d393cb3cf5e66663dd1",
       "hash_kind": "file-bytes"
     },
     {
@@ -375,6 +453,12 @@
       "bytes": 5370,
       "sha256": "490b4a3ce1f4ce79152ac8975a99931bf9bf5dffbf87813112e040222b34b4f5",
       "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/regional-research-gate.test.mjs",
+      "bytes": 8066,
+      "sha256": "9919ebaef9afe818c6ba38f44e62c49ab086f37a766a54efcb937cdbfde8b262",
+      "hash_kind": "file-bytes"
     }
   ],
   "methods": [
@@ -395,7 +479,7 @@
     "geographic_approval": "not-requested"
   },
   "commands": [
-    "node --test test/claim-readiness-races.test.mjs test/issue-readiness.test.mjs test/issue-claims.test.mjs test/queue-readiness-audit.test.mjs test/premerge-evidence.test.mjs test/merge-integration.test.mjs test/handoff-scope.test.mjs test/worker-result.test.mjs"
+    "PYTHON=/tmp/worldatlas-422-venv/bin/python node --test test/claim-readiness-races.test.mjs test/issue-readiness.test.mjs test/issue-claims.test.mjs test/queue-readiness-audit.test.mjs test/premerge-evidence.test.mjs test/merge-integration.test.mjs test/handoff-scope.test.mjs test/worker-result.test.mjs test/geography-worker-lane.test.mjs test/regional-research-gate.test.mjs test/geographic-adjudication-api.test.mjs test/final-capacity.test.mjs test/evidence-partition-review.test.mjs"
   ],
   "change_receipts": [
     {
@@ -508,6 +592,16 @@
       "original_sha256": "c4f838076f63ad82c09d4e4a202f70e17e8495fe92938668aa6746f78c4083cb"
     },
     {
+      "path": "scripts/final-capacity.mjs",
+      "status": "modified",
+      "original_sha256": "139028f6924ce2c7d69d2d6a76f536bb5dbd62dca525a01e683bb9a72a2f4ae3"
+    },
+    {
+      "path": "scripts/geographic-adjudication-api.mjs",
+      "status": "modified",
+      "original_sha256": "49866b00bd4646f3978be31fc70233002cc973d767562191c276302f5e7f27ca"
+    },
+    {
       "path": "scripts/issue-claim-contract.mjs",
       "status": "modified",
       "original_sha256": "ad168cb536b3aec404e524d6dac9a0986975a72aee63dc54a29ba956a7fef916"
@@ -532,8 +626,28 @@
       "original_sha256": "60a3fe737da086a103595961e0bed97d5c014397746d440948234d348c4700a5"
     },
     {
+      "path": "scripts/validate-evidence-partition-review.mjs",
+      "status": "modified",
+      "original_sha256": "5b0cd81c9cfc86299707a8132a076bd5deb754f03bd5038a06f13b8fe167168d"
+    },
+    {
       "path": "test/claim-readiness-races.test.mjs",
       "status": "added"
+    },
+    {
+      "path": "test/final-capacity.test.mjs",
+      "status": "modified",
+      "original_sha256": "d2332f242fb8abae511a72534ae428f3bd6b37d2fbe3930a97530f8756933e83"
+    },
+    {
+      "path": "test/geographic-adjudication-api.test.mjs",
+      "status": "modified",
+      "original_sha256": "bbe3ed22ad083a3b8017cd29b0e218b967a1865f241ac0ceca135a7048ae58a7"
+    },
+    {
+      "path": "test/geography-worker-lane.test.mjs",
+      "status": "modified",
+      "original_sha256": "3a1303c3e0b840faae27546f527784b52907ae9209cdd02fe39aa786079b6b67"
     },
     {
       "path": "test/handoff-scope.test.mjs",
@@ -558,6 +672,11 @@
       "path": "test/queue-readiness-audit.test.mjs",
       "status": "modified",
       "original_sha256": "6561c8e8fcf57cee0e7b12286ade0f877ff129f6ce083eda3143f56f8f9b5712"
+    },
+    {
+      "path": "test/regional-research-gate.test.mjs",
+      "status": "modified",
+      "original_sha256": "b188ca857f49d84a24c96ea36ca311e558a849532ab27f8cd76b625c49c176d9"
     }
   ],
   "metric_bindings": []

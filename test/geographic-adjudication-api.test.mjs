@@ -23,6 +23,7 @@ test('source bindings match the actual shared Python canonical protocol', () => 
 import {collectGeographicApproval, METHOD, TARGET} from '../scripts/geographic-adjudication-api.mjs';
 import {sha256, subjectsHash} from '../scripts/evidence-quality.mjs';
 import {renderClaim} from '../scripts/issue-claim-contract.mjs';
+import {reviewContractBinding} from '../scripts/premerge-evidence.mjs';
 const repo='owner/repo', head='b'.repeat(40), base='a'.repeat(40), branch='engineering/authority-fixture';
 const packet='coordination/engineering/authority-fixture/', manifestPath=packet+'evidence-quality.json', dossierPath=packet+'dossier.json';
 const sourcePath='coordination/engineering/retained-fixture/water.geojson';
@@ -38,12 +39,13 @@ function fixture({mutation=()=>{}, secondReview=null, changeClaim=false, changeC
  const quality={version:1,manifest_path:'coordination/engineering/{job}/evidence-quality.json',subject_ids:[],pins:{},review_kind:'code'};
  const spec={max_prs:3,depends_on:[],mode:'engineering',scope:'Synthetic source-decision transport controls',evidence_quality:quality};
  const issue={number:920,state:'open',created_at:'2026-10-05T00:00:00Z',labels:['type:engineering','kind:work-item','status:ready'],body:`<!-- worldatlas-work:v1\n${JSON.stringify(spec)}\n-->`};
- const pr={number:32,state:'open',draft:false,merged:false,title:'Synthetic source transport',body:'Refs #920',changed_files:2,head:{sha:head,ref:branch,repo:{full_name:repo}},base:{sha:base,ref:'main'}};
+ const pr={number:32,created_at:'2026-10-07T00:00:00Z',state:'open',draft:false,merged:false,title:'Synthetic source transport',body:'Refs #920',changed_files:2,head:{sha:head,ref:branch,repo:{full_name:repo}},base:{sha:base,ref:'main'}};
  const claim={version:1,active:true,worker_id:'synthetic-author',claim_id:'synthetic-claim',branch,expires_at:'2030-01-01T00:00:00Z',mode:'engineering',max_prs:3};
  const baselineRaw=Buffer.from('Immutable synthetic code baseline\n');
  const manifest={version:1,issue:920,lane:'engineering',worker_id:claim.worker_id,subject_ids:[],subject_ids_sha256:subjectsHash([]),baseline:{commit:base,files:[desc('README.md',baselineRaw),{...sourceFile,role:'original-source'}],pins:{},pin_files:{},subject_files:{}},sources:[source],outputs:[],methods:[{id:'authority-transport',kind:'code',description:'Read-only synthetic authority transport controls',software:'Node24',units:'None; geometry is validated separately'}],metrics:[],summaries:[],conclusions:[],stages:{research:'partial',implementation:'proposed',geographic_approval:'not-requested'},commands:[],change_receipts:[{path:dossierPath,status:'added'},{path:manifestPath,status:'added'}],metric_bindings:[],validation:[],geographic_adjudications:[]};
  const receipt={version:1,pr_number:pr.number,head_sha:head,author_worker_id:claim.worker_id,reviewer_worker_id:'synthetic-reviewer',inspected_files:[dossierPath,manifestPath],outcome:'accepted',limits:[],domains:Object.fromEntries(['implementation','source','geometry'].map(name=>[name,{outcome:'accepted',scope:'Synthetic transport only; no actual source approval',limits:[]}]))};
  mutation({source,manifest,decision,dossier,receipt,issue,claim,pr});
+ Object.assign(receipt,reviewContractBinding(issue,pr));
  const dossierRaw=nativeControl?Buffer.from(nativeControl.dossier_base64,'base64'):Buffer.from(JSON.stringify(dossier));decision.dossier_sha256=sha256(dossierRaw);
  manifest.outputs=[desc(dossierPath,dossierRaw)];manifest.geographic_adjudications=[{path:dossierPath,sha256:sha256(dossierRaw)}];
  const manifestRaw=Buffer.from(JSON.stringify(manifest));receipt.manifest_sha256=sha256(manifestRaw);receipt.evidence_hashes=[...new Set([...manifest.baseline.files,...manifest.outputs,...manifest.sources.flatMap(row=>row.files??[])].map(row=>row.sha256))];receipt.geographic_adjudications={version:1,decisions:[decision]};

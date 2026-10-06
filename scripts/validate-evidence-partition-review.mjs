@@ -51,6 +51,8 @@ need(indexPath===index.index_path,'Executed index path differs');
 const files=readGitPRFiles(base,head);
 need(files.length===pr.changed_files,'Incomplete actual PR file inventory');
 const bytes=validateEvidencePartitions(index,{readFile:read,files,branch:pr.head.ref,workerId:index.worker_id,issueNumber:index.issue});
+const issue=gh(`repos/${repo}/issues/${index.issue}`);
+need(issue.number===index.issue&&!issue.pull_request,'Partition review needs its authoritative issue');
 const comments=await githubPages(async route=>gh(route),`/repos/${repo}/issues/${number}/comments`);
 const root=selectAggregateReview(comments,head),aggregate=reviewMarker(root,'worldatlas-review-aggregate'),rootReceipt=reviewMarker(root,'worldatlas-review');
 need(aggregate.version===1&&aggregate.pr_number===pr.number&&aggregate.author_worker_id===index.worker_id&&aggregate.outcome==='accepted'&&aggregate.queue_enforces_aggregate===false,'Wrong aggregate review context/outcome');
@@ -68,7 +70,7 @@ for(const part of [{path:index.root_manifest_path,change_paths:index.root_change
  }
  need(receipt?.reviewer_worker_id===aggregate.reviewer_worker_id,'Partition reviewer differs');
  const assigned=files.filter(row=>part.change_paths.includes(row.filename));
- validateReviewReceipt(receipt,{pr,manifest,manifestHash:sha256(manifestRaw),files:assigned,limits,author:index.worker_id,reviewKind:'release'});
+ validateReviewReceipt(receipt,{pr,issue,manifest,manifestHash:sha256(manifestRaw),files:assigned,limits,author:index.worker_id,reviewKind:'release'});
  reviewed.push({manifest_path:part.path,manifest_sha256:sha256(manifestRaw),comment_id:comment.id,assigned_files:assigned.length});
 }
 console.log(JSON.stringify({version:1,verified:true,pr_number:pr.number,head_sha:head,reviewer_worker_id:aggregate.reviewer_worker_id,root_comment_url:root.html_url,queue_enforces_aggregate:false,changed_files:bytes.changed_files_verified,baseline_files:bytes.baseline_files_verified,preserved_files:bytes.preserved_files_verified,partitions:reviewed,published:false},null,2));
