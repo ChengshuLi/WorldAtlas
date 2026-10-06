@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "method_id": "scope-and-provenance-review",
+  "outcome": "passed",
+  "scope": "Exact three #999 IDs; 4 #1008 contexts; seven pinned source shapes and hierarchy/neighbor source metadata.",
+  "findings": [
+    "Three issue subjects and four read-only contexts form an exact partition of seven source features.",
+    "Seven source district names correspond by name to the seven KAS statistical regions; this is not polygon equivalence.",
+    "KAS describes 38 municipalities as administrative and the seven NUTS III proposed regions as non-administrative.",
+    "Upstream metadata says 48 admUnitCount while the retained collection has seven records; source vintage and license chain remain uncertain."
+  ],
+  "limits": [
+    "No same-vintage official reusable vector was retrieved.",
+    "No polygon comparison, topology validation, boundary approval, or license compatibility determination.",
+    "KAS source body and official legal response bodies are not retained; cited hashes are retrieval receipts from the prior packet."
+  ],
+  "review_status": "accepted-with-limits"
+}

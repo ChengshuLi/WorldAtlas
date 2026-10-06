@@ -1,0 +1,9 @@
+Authenticated complete world source closure and all tile queries
+Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3c89d6c5ab9db29126ebfdf4a6baf58ca5d902aab5c9236a23066fab5314a4d9/work/scripts/worldwide_gap_inventory.py", line 190, in <module>
+    run(pathlib.Path(__file__).resolve().parents[1], args.selected, pathlib.Path(args.output).resolve())
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3c89d6c5ab9db29126ebfdf4a6baf58ca5d902aab5c9236a23066fab5314a4d9/work/scripts/worldwide_gap_inventory.py", line 135, in run
+    require_equivalent(fresh_components, archived_components)
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3c89d6c5ab9db29126ebfdf4a6baf58ca5d902aab5c9236a23066fab5314a4d9/work/scripts/worldwide_gap_inventory.py", line 43, in require_equivalent
+    raise ValueError('Changed operand/order/status requires recomputation; identity reuse refused')
+ValueError: Changed operand/order/status requires recomputation; identity reuse refused

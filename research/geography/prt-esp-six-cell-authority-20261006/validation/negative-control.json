@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "method_id": "dgt-defined-segment-point-distance-epsg25829",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "purpose": "A point one degree east and north of each candidate centre must remain at least 1,000 m from the returned source line; this detects axis/projection or distance-method mistakes, but does not test source positional accuracy.",
+  "cases": [
+    {
+      "cell_id": "cell126077/99248",
+      "source_feature_id": "d9492c5b-a667-11ee-a363-a76e0bcee2d6",
+      "offset_degrees": [
+        1,
+        1
+      ],
+      "measured_distance_m": 139411.1798729631,
+      "minimum_expected_m": 1000,
+      "outcome": "passed"
+    },
+    {
+      "cell_id": "cell126068/99272",
+      "source_feature_id": "d9492c5b-a667-11ee-a363-a76e0bcee2d6",
+      "offset_degrees": [
+        1,
+        1
+      ],
+      "measured_distance_m": 136560.27393632857,
+      "minimum_expected_m": 1000,
+      "outcome": "passed"
+    },
+    {
+      "cell_id": "cell126053/99322",
+      "source_feature_id": "d9492c5b-a667-11ee-a363-a76e0bcee2d6",
+      "offset_degrees": [
+        1,
+        1
+      ],
+      "measured_distance_m": 130911.02154604718,
+      "minimum_expected_m": 1000,
+      "outcome": "passed"
+    },
+    {
+      "cell_id": "cell125754/99583",
+      "source_feature_id": "d95df7ee-a667-11ee-a363-773b75e2e95a",
+      "offset_degrees": [
+        1,
+        1
+      ],
+      "measured_distance_m": 137901.16096885028,
+      "minimum_expected_m": 1000,
+      "outcome": "passed"
+    },
+    {
+      "cell_id": "cell125752/99584",
+      "source_feature_id": "d95df7ee-a667-11ee-a363-773b75e2e95a",
+      "offset_degrees": [
+        1,
+        1
+      ],
+      "measured_distance_m": 137666.92374784386,
+      "minimum_expected_m": 1000,
+      "outcome": "passed"
+    },
+    {
+      "cell_id": "cell125663/99573",
+      "source_feature_id": "d95df7ee-a667-11ee-a363-773b75e2e95a",
+      "offset_degrees": [
+        1,
+        1
+      ],
+      "measured_distance_m": 132744.29334622438,
+      "minimum_expected_m": 1000,
+      "outcome": "passed"
+    }
+  ],
+  "added_controls": [
+    "hash-rebound synthetic source mutations for changed bytes, omitted/extra feature, wrong native ID, mismatched BBOX, line outside BBOX",
+    "issue centre, subject roster and canonical pin mutations",
+    "unsupported validity-date, wetness and sovereign-owner field mutations",
+    "retained-source documentary guards for vintage conflict, feature accuracy/date absence, planning/wetness separation and provider unavailability"
+  ],
+  "context_controls_path": "research/geography/prt-esp-six-cell-authority-20261006/validation/source-context-controls.json"
+}

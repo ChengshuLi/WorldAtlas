@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "method_id": "immutable-input-and-exclusive-output-guard",
+  "controls": [
+    {
+      "id": "wrong-baseline",
+      "outcome": "passed",
+      "rejected_path": "data/hierarchy.json",
+      "before_output_creation": true
+    },
+    {
+      "id": "demonstrated-whole-source-drift",
+      "outcome": "passed",
+      "rejected_path": "data/regional-review/regional-review-3f920fc5cb99166e/sources/geoBoundaries-XKX-ADM1.geojson",
+      "before_output_creation": true
+    },
+    {
+      "id": "wrong-original-code",
+      "outcome": "passed",
+      "rejected_path": "data/regional-review/regional-review-3f920fc5cb99166e/reproduce.py",
+      "before_output_creation": true
+    },
+    {
+      "id": "demonstrated-complete-source-name-drift",
+      "outcome": "passed",
+      "native_id": "2360587B11570115914955",
+      "synthetic_name": "AUDITOR_SYNTHETIC_SOURCE_NAME",
+      "source_bytes_modified": false,
+      "rejected_path": "data/regional-review/regional-review-3f920fc5cb99166e/sources/geoBoundaries-XKX-ADM1.geojson",
+      "before_output_creation": true
+    },
+    {
+      "id": "existing-output",
+      "outcome": "passed",
+      "sentinel_sha256": "1bc453fcbacd0e2942d47aac3aa6972d01380fbc6318f77903f5fb5a0e73b129",
+      "preserved": true
+    }
+  ]
+}

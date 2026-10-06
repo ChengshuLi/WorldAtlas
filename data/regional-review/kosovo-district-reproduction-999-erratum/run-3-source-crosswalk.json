@@ -1,0 +1,288 @@
+{
+  "version": 1,
+  "issue": 999,
+  "baseline_commit": "96f2a6d201236ba62f471535db240b123de60c09",
+  "source_path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/gb/gb-XKX-ADM1.geojson",
+  "source_bytes": 1898578,
+  "source_sha256": "9b07b08fe0f9ca5a26ddb6de2008ac235b38ffaf069063df9851711c2d358315",
+  "metadata_path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/gb/XKX-ADM1-geoBoundaries-XKX-ADM1-metaData.json",
+  "metadata_bytes": 799,
+  "metadata_sha256": "a912dcaefa1096a6c0af067af9723b2a67c32f5b0147b8198f99751eb591b49c",
+  "source_manifest_path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/source-manifest.json",
+  "source_manifest_bytes": 6787,
+  "source_manifest_sha256": "fded0febc8ef8d934b1f7358755b3102ec8043cc027a88ad8106dec8247b7f56",
+  "metadata_admUnitCount": 48,
+  "source_feature_count": 7,
+  "official_statistical_region_count": 7,
+  "official_administrative_municipality_count": 38,
+  "all_source_feature_ids_match_atlas_ids": true,
+  "name_match_only_not_geometry_match": true,
+  "issue_subject_count": 3,
+  "issue_subjects_are_subset_of_seven": true,
+  "neighboring_source_layers": [
+    {
+      "source_id": "gb:MKD:ADM2",
+      "path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/gb/gb-MKD-ADM2.geojson",
+      "bytes": 426003,
+      "sha256": "0a0d7340810fb353c3faa37ab9afea20830ce6124083ffe6321182277da61d01",
+      "features": 84,
+      "vintage": "2016",
+      "type": "ADM2",
+      "canonical": "Opštini",
+      "catalog_source": "EuroGeographics, Regional IM Working Group - Europe",
+      "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+      "license_source": "data.humdata.org/dataset/fyrom-administrative-levels-1-4-from-eurogeographics-and-ntes",
+      "catalog_adm_count": "84"
+    },
+    {
+      "source_id": "gb:MNE:ADM1",
+      "path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/gb/gb-MNE-ADM1.geojson",
+      "bytes": 610015,
+      "sha256": "9674292fbc0a50c68c6584a2ae23fae768e76cc796bdb7e3e009c0197aec6ae3",
+      "features": 23,
+      "vintage": "2017",
+      "type": "ADM1",
+      "canonical": "Unknown",
+      "catalog_source": "OpenStreetMap, Wambacher",
+      "license": "Open Data Commons Open Database License 1.0",
+      "license_source": "www.openstreetmap.org/copyright",
+      "catalog_adm_count": "23"
+    },
+    {
+      "source_id": "gb:SRB:ADM2",
+      "path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/gb/gb-SRB-ADM2.geojson",
+      "bytes": 1653192,
+      "sha256": "f94ba868818e4f87dd24bc97aeaf37732cc23f6744facd1010cd91d2349fc884",
+      "features": 145,
+      "vintage": "2017",
+      "type": "ADM2",
+      "canonical": "Unknown",
+      "catalog_source": "OpenStreetMap, Wambacher",
+      "license": "Open Data Commons Open Database License 1.0",
+      "license_source": "www.openstreetmap.org/copyright",
+      "catalog_adm_count": "145"
+    }
+  ],
+  "features": [
+    {
+      "shape_id": "2360587B11570115914955",
+      "source_name": "District of Mitrovica",
+      "source_type": "ADM1",
+      "source_group": "XKX",
+      "kas_statistical_region_name": "Mitrovicë",
+      "in_issue_999_scope": false,
+      "followup_issue": 1008,
+      "atlas_feature_path": "data/geography/part-28.json",
+      "atlas_name": "District of Mitrovica",
+      "atlas_parent_id": "framework:province:district-of-mitrovica:f4149a641a12",
+      "atlas_parent_name": "District of Mitrovica",
+      "atlas_parent_level": "province",
+      "atlas_parent_child_count": 1,
+      "atlas_area_parent_id": "framework:area:yugoslavia:cff5e9ba6c8e",
+      "atlas_area_parent_name": "Yugoslavia",
+      "atlas_source_role": "Municipalities",
+      "atlas_area_code": "YUG",
+      "atlas_region_code": 13
+    },
+    {
+      "shape_id": "2360587B15813948402025",
+      "source_name": "District of Peja",
+      "source_type": "ADM1",
+      "source_group": "XKX",
+      "kas_statistical_region_name": "Pejë",
+      "in_issue_999_scope": false,
+      "followup_issue": 1008,
+      "atlas_feature_path": "data/geography/part-28.json",
+      "atlas_name": "District of Peja",
+      "atlas_parent_id": "framework:province:district-of-peja:68d54986d0ba",
+      "atlas_parent_name": "District of Peja",
+      "atlas_parent_level": "province",
+      "atlas_parent_child_count": 1,
+      "atlas_area_parent_id": "framework:area:yugoslavia:cff5e9ba6c8e",
+      "atlas_area_parent_name": "Yugoslavia",
+      "atlas_source_role": "Municipalities",
+      "atlas_area_code": "YUG",
+      "atlas_region_code": 13
+    },
+    {
+      "shape_id": "2360587B5118871504069",
+      "source_name": "District of Prishtina",
+      "source_type": "ADM1",
+      "source_group": "XKX",
+      "kas_statistical_region_name": "Prishtinë",
+      "in_issue_999_scope": true,
+      "followup_issue": 999,
+      "atlas_feature_path": "data/geography/part-28.json",
+      "atlas_name": "District of Prishtina",
+      "atlas_parent_id": "framework:province:district-of-prishtina:f033b08833f6",
+      "atlas_parent_name": "District of Prishtina",
+      "atlas_parent_level": "province",
+      "atlas_parent_child_count": 1,
+      "atlas_area_parent_id": "framework:area:yugoslavia:cff5e9ba6c8e",
+      "atlas_area_parent_name": "Yugoslavia",
+      "atlas_source_role": "Municipalities",
+      "atlas_area_code": "YUG",
+      "atlas_region_code": 13
+    },
+    {
+      "shape_id": "2360587B74553771763221",
+      "source_name": "District of Ferizaj",
+      "source_type": "ADM1",
+      "source_group": "XKX",
+      "kas_statistical_region_name": "Ferizaj",
+      "in_issue_999_scope": true,
+      "followup_issue": 999,
+      "atlas_feature_path": "data/geography/part-28.json",
+      "atlas_name": "District of Ferizaj",
+      "atlas_parent_id": "framework:province:district-of-ferizaj:53e696afd661",
+      "atlas_parent_name": "District of Ferizaj",
+      "atlas_parent_level": "province",
+      "atlas_parent_child_count": 1,
+      "atlas_area_parent_id": "framework:area:yugoslavia:cff5e9ba6c8e",
+      "atlas_area_parent_name": "Yugoslavia",
+      "atlas_source_role": "Municipalities",
+      "atlas_area_code": "YUG",
+      "atlas_region_code": 13
+    },
+    {
+      "shape_id": "2360587B89959345704230",
+      "source_name": "District of Prizren",
+      "source_type": "ADM1",
+      "source_group": "XKX",
+      "kas_statistical_region_name": "Prizren",
+      "in_issue_999_scope": false,
+      "followup_issue": 1008,
+      "atlas_feature_path": "data/geography/part-28.json",
+      "atlas_name": "District of Prizren",
+      "atlas_parent_id": "framework:province:district-of-prizren:5ea331ce3ec0",
+      "atlas_parent_name": "District of Prizren",
+      "atlas_parent_level": "province",
+      "atlas_parent_child_count": 1,
+      "atlas_area_parent_id": "framework:area:yugoslavia:cff5e9ba6c8e",
+      "atlas_area_parent_name": "Yugoslavia",
+      "atlas_source_role": "Municipalities",
+      "atlas_area_code": "YUG",
+      "atlas_region_code": 13
+    },
+    {
+      "shape_id": "2360587B9056373484571",
+      "source_name": "District of Gjakova",
+      "source_type": "ADM1",
+      "source_group": "XKX",
+      "kas_statistical_region_name": "Gjakovë",
+      "in_issue_999_scope": false,
+      "followup_issue": 1008,
+      "atlas_feature_path": "data/geography/part-28.json",
+      "atlas_name": "District of Gjakova",
+      "atlas_parent_id": "framework:province:district-of-gjakova:86f71e89a8e2",
+      "atlas_parent_name": "District of Gjakova",
+      "atlas_parent_level": "province",
+      "atlas_parent_child_count": 1,
+      "atlas_area_parent_id": "framework:area:yugoslavia:cff5e9ba6c8e",
+      "atlas_area_parent_name": "Yugoslavia",
+      "atlas_source_role": "Municipalities",
+      "atlas_area_code": "YUG",
+      "atlas_region_code": 13
+    },
+    {
+      "shape_id": "2360587B95703323116719",
+      "source_name": "District of Gjilan",
+      "source_type": "ADM1",
+      "source_group": "XKX",
+      "kas_statistical_region_name": "Gjilan",
+      "in_issue_999_scope": true,
+      "followup_issue": 999,
+      "atlas_feature_path": "data/geography/part-28.json",
+      "atlas_name": "District of Gjilan",
+      "atlas_parent_id": "framework:province:district-of-gjilan:d48796969836",
+      "atlas_parent_name": "District of Gjilan",
+      "atlas_parent_level": "province",
+      "atlas_parent_child_count": 1,
+      "atlas_area_parent_id": "framework:area:yugoslavia:cff5e9ba6c8e",
+      "atlas_area_parent_name": "Yugoslavia",
+      "atlas_source_role": "Municipalities",
+      "atlas_area_code": "YUG",
+      "atlas_region_code": 13
+    }
+  ],
+  "kas_regions": [
+    {
+      "name": "Prishtinë",
+      "municipalities": [
+        "Gllogoc",
+        "Fushë Kosovë",
+        "Lipjan",
+        "Obiliq",
+        "Podujevë",
+        "Prishtinë",
+        "Graçanicë"
+      ]
+    },
+    {
+      "name": "Mitrovicë",
+      "municipalities": [
+        "Mitrovicë",
+        "Mitrovica e Veriut",
+        "Leposaviq",
+        "Skenderaj",
+        "Vushtrri",
+        "Zubin Potok",
+        "Zveçan"
+      ]
+    },
+    {
+      "name": "Pejë",
+      "municipalities": [
+        "Deçan",
+        "Istog",
+        "Klinë",
+        "Pejë"
+      ]
+    },
+    {
+      "name": "Prizren",
+      "municipalities": [
+        "Dragash",
+        "Prizren",
+        "Suharekë",
+        "Mamushë"
+      ]
+    },
+    {
+      "name": "Ferizaj",
+      "municipalities": [
+        "Kaçanik",
+        "Shtime",
+        "Shtërpcë",
+        "Ferizaj",
+        "Hani i Elezit"
+      ]
+    },
+    {
+      "name": "Gjilan",
+      "municipalities": [
+        "Gjilan",
+        "Kamenicë",
+        "Novobërdë",
+        "Viti",
+        "Ranillug",
+        "Partesh",
+        "Kllokot"
+      ]
+    },
+    {
+      "name": "Gjakovë",
+      "municipalities": [
+        "Gjakovë",
+        "Rahovec",
+        "Malishevë",
+        "Junik"
+      ]
+    }
+  ],
+  "limitations": [
+    "The 48 metadata value is inconsistent with seven exact source features and KAS's 38 municipality / seven non-administrative region structure; its provenance is unknown.",
+    "KAS's proposed regions and membership table do not prove polygon equivalence. No lawful, machine-readable official 2021/2024 boundary geometry with reuse terms was retrieved.",
+    "The underlying OSM snapshot/database and relation IDs for the original geoBoundaries input are absent from the pinned metadata."
+  ]
+}
