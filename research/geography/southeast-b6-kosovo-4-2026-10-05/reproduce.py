@@ -138,7 +138,7 @@ def main() -> None:
         "collection_controls": {
             "actual_payload_features": len(geo["features"]),
             "metadata_reported_count": metadata.get("admUnitCount"),
-            "count_disagreement_preserved": len(geo["features"]) != metadata.get("admUnitCount"),
+            "count_disagreement_preserved": len(geo["features"]) != int(metadata["admUnitCount"]),
             "kas_unique_municipality_count": len({m for r in kas["regions"] for m in r["municipalities"]}),
             "seven_geo_names_match_seven_kas_region_names_only": True,
             "geometry_equivalence_tested": False,
@@ -159,6 +159,7 @@ def main() -> None:
             {"status": "unresolved", "statement": "Original OSM snapshot, source relation IDs, explanation for metadata count 48, and reuse compatibility of this exact service-derived feature set.", "sources": ["geoBoundaries-xkx-adm1", "osm-license-record", "prior-source-restoration"]},
         ],
     }
+    assert result["collection_controls"]["count_disagreement_preserved"] is True
     write_json(root / OWNED / "reproduction.json", result)
     write_json(root / OWNED / "findings.json", {"version": 1, "issue": 1008, "subjects": findings, "limits": result["conclusions"]})
     controls = [
