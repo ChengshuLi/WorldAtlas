@@ -13,8 +13,8 @@ import {committedPreparationFiles,requirePlainExecution} from '../../../scripts/
 requirePlainExecution();
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../../..'),prefix='coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22';
 const [oneName,twoName,outName]=process.argv.slice(2);
-const owned=name=>{const p=path.resolve(root,name??'');if(!p.startsWith(path.join(root,prefix)+path.sep))throw Error('Owned path required');return p;};
-const one=owned(oneName),two=owned(twoName),out=owned(outName);
+const ownedPath=name=>{const p=path.resolve(root,name??'');if(!p.startsWith(path.join(root,prefix)+path.sep))throw Error('Owned path required');return p;};
+const one=ownedPath(oneName),two=ownedPath(twoName),out=ownedPath(outName);
 if(one===two||fs.existsSync(out))throw Error('Distinct complete vintages and fresh receipt required');
 const head=execFileSync('git',['-C',root,'rev-parse','HEAD'],{encoding:'utf8'}).trim(),digest=raw=>createHash('sha256').update(raw).digest('hex');
 const executed=committedPreparationFiles(root,head,['package.json',prefix+'/verify-patch.mjs','src/ownership-assets.js',
