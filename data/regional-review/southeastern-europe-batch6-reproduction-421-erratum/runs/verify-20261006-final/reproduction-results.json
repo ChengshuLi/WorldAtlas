@@ -1,0 +1,592 @@
+{
+  "version": 1,
+  "issue": 1169,
+  "source_packet_issue": 421,
+  "scope_accounting": {
+    "subject_count": 230,
+    "subject_ids": [
+      "atlas:multipart:196e23aa49f304ea1997",
+      "gb:GRC:ADM3:53547021B11217134811414",
+      "gb:GRC:ADM3:53547021B11230814438806",
+      "gb:GRC:ADM3:53547021B11381598519126",
+      "gb:GRC:ADM3:53547021B11646633463152",
+      "gb:GRC:ADM3:53547021B11940599573027",
+      "gb:GRC:ADM3:53547021B12719539164910",
+      "gb:GRC:ADM3:53547021B13585760966110",
+      "gb:GRC:ADM3:53547021B13973442480426",
+      "gb:GRC:ADM3:53547021B139863795",
+      "gb:GRC:ADM3:53547021B14587890141063",
+      "gb:GRC:ADM3:53547021B1587257754392",
+      "gb:GRC:ADM3:53547021B16404317109439",
+      "gb:GRC:ADM3:53547021B18503575679457",
+      "gb:GRC:ADM3:53547021B20166446327707",
+      "gb:GRC:ADM3:53547021B20400809877088",
+      "gb:GRC:ADM3:53547021B20655569007044",
+      "gb:GRC:ADM3:53547021B2109852565692",
+      "gb:GRC:ADM3:53547021B21928215171810",
+      "gb:GRC:ADM3:53547021B22263739106563",
+      "gb:GRC:ADM3:53547021B2228776915974",
+      "gb:GRC:ADM3:53547021B22321934068186",
+      "gb:GRC:ADM3:53547021B22915983963117",
+      "gb:GRC:ADM3:53547021B22944615886020",
+      "gb:GRC:ADM3:53547021B23400479427281",
+      "gb:GRC:ADM3:53547021B24220934156468",
+      "gb:GRC:ADM3:53547021B25281145353458",
+      "gb:GRC:ADM3:53547021B26428037037954",
+      "gb:GRC:ADM3:53547021B27162960455281",
+      "gb:GRC:ADM3:53547021B2738722376900",
+      "gb:GRC:ADM3:53547021B27647726174343",
+      "gb:GRC:ADM3:53547021B27793297184106",
+      "gb:GRC:ADM3:53547021B27848080443845",
+      "gb:GRC:ADM3:53547021B27852952685239",
+      "gb:GRC:ADM3:53547021B28142208211838",
+      "gb:GRC:ADM3:53547021B28305351611678",
+      "gb:GRC:ADM3:53547021B28340391516050",
+      "gb:GRC:ADM3:53547021B28343804278369",
+      "gb:GRC:ADM3:53547021B28596502705639",
+      "gb:GRC:ADM3:53547021B28693517863347",
+      "gb:GRC:ADM3:53547021B28786686705921",
+      "gb:GRC:ADM3:53547021B28890095708986",
+      "gb:GRC:ADM3:53547021B28941291401601",
+      "gb:GRC:ADM3:53547021B29376854507726",
+      "gb:GRC:ADM3:53547021B30143015860130",
+      "gb:GRC:ADM3:53547021B31053030759604",
+      "gb:GRC:ADM3:53547021B31587155744737",
+      "gb:GRC:ADM3:53547021B31633588775048",
+      "gb:GRC:ADM3:53547021B31670610652055",
+      "gb:GRC:ADM3:53547021B31742213292685",
+      "gb:GRC:ADM3:53547021B31775501825799",
+      "gb:GRC:ADM3:53547021B31949944847371",
+      "gb:GRC:ADM3:53547021B31952026636048",
+      "gb:GRC:ADM3:53547021B3249049019402",
+      "gb:GRC:ADM3:53547021B3259543617639",
+      "gb:GRC:ADM3:53547021B32913874834462",
+      "gb:GRC:ADM3:53547021B34089236971204",
+      "gb:GRC:ADM3:53547021B34638618079058",
+      "gb:GRC:ADM3:53547021B34968344051936",
+      "gb:GRC:ADM3:53547021B35158137424672",
+      "gb:GRC:ADM3:53547021B35192590886666",
+      "gb:GRC:ADM3:53547021B35436816313063",
+      "gb:GRC:ADM3:53547021B35461032943071",
+      "gb:GRC:ADM3:53547021B35893397617258",
+      "gb:GRC:ADM3:53547021B36167023330158",
+      "gb:GRC:ADM3:53547021B36207579712353",
+      "gb:GRC:ADM3:53547021B37029617742900",
+      "gb:GRC:ADM3:53547021B37686149214956",
+      "gb:GRC:ADM3:53547021B38858534933408",
+      "gb:GRC:ADM3:53547021B38986077120400",
+      "gb:GRC:ADM3:53547021B39305400178376",
+      "gb:GRC:ADM3:53547021B39990906216499",
+      "gb:GRC:ADM3:53547021B40329858246568",
+      "gb:GRC:ADM3:53547021B40439292556203",
+      "gb:GRC:ADM3:53547021B40828543742438",
+      "gb:GRC:ADM3:53547021B40832205739746",
+      "gb:GRC:ADM3:53547021B40993190034895",
+      "gb:GRC:ADM3:53547021B41068859033459",
+      "gb:GRC:ADM3:53547021B41286573070339",
+      "gb:GRC:ADM3:53547021B41412986529583",
+      "gb:GRC:ADM3:53547021B42038688650447",
+      "gb:GRC:ADM3:53547021B42397561694605",
+      "gb:GRC:ADM3:53547021B43088565949702",
+      "gb:GRC:ADM3:53547021B43730380907048",
+      "gb:GRC:ADM3:53547021B45001441830807",
+      "gb:GRC:ADM3:53547021B45296397879130",
+      "gb:GRC:ADM3:53547021B45546194955397",
+      "gb:GRC:ADM3:53547021B46158263543411",
+      "gb:GRC:ADM3:53547021B46293618367520",
+      "gb:GRC:ADM3:53547021B46856554305408",
+      "gb:GRC:ADM3:53547021B46893578630881",
+      "gb:GRC:ADM3:53547021B47495045685041",
+      "gb:GRC:ADM3:53547021B47822971652302",
+      "gb:GRC:ADM3:53547021B48705604430403",
+      "gb:GRC:ADM3:53547021B48713005805080",
+      "gb:GRC:ADM3:53547021B48888064243698",
+      "gb:GRC:ADM3:53547021B4929221298038",
+      "gb:GRC:ADM3:53547021B49340454870822",
+      "gb:GRC:ADM3:53547021B49666897739583",
+      "gb:GRC:ADM3:53547021B50273584733503",
+      "gb:GRC:ADM3:53547021B50341787829702",
+      "gb:GRC:ADM3:53547021B50444274561613",
+      "gb:GRC:ADM3:53547021B50561479527523",
+      "gb:GRC:ADM3:53547021B50579698605337",
+      "gb:GRC:ADM3:53547021B50685952725825",
+      "gb:GRC:ADM3:53547021B50922238140388",
+      "gb:GRC:ADM3:53547021B51158260814857",
+      "gb:GRC:ADM3:53547021B51937330255180",
+      "gb:GRC:ADM3:53547021B52093950324767",
+      "gb:GRC:ADM3:53547021B52309910958375",
+      "gb:GRC:ADM3:53547021B53070107446977",
+      "gb:GRC:ADM3:53547021B53279819470328",
+      "gb:GRC:ADM3:53547021B54133435495657",
+      "gb:GRC:ADM3:53547021B5427658956553",
+      "gb:GRC:ADM3:53547021B54315896732910",
+      "gb:GRC:ADM3:53547021B54383895091480",
+      "gb:GRC:ADM3:53547021B54920470672520",
+      "gb:GRC:ADM3:53547021B55105718637699",
+      "gb:GRC:ADM3:53547021B55703563260454",
+      "gb:GRC:ADM3:53547021B56010870315220",
+      "gb:GRC:ADM3:53547021B56645835062764",
+      "gb:GRC:ADM3:53547021B57383137441935",
+      "gb:GRC:ADM3:53547021B57678197221990",
+      "gb:GRC:ADM3:53547021B57876303019843",
+      "gb:GRC:ADM3:53547021B58173786897638",
+      "gb:GRC:ADM3:53547021B58485440362899",
+      "gb:GRC:ADM3:53547021B58919078390867",
+      "gb:GRC:ADM3:53547021B58981703500850",
+      "gb:GRC:ADM3:53547021B59197259507031",
+      "gb:GRC:ADM3:53547021B59212511746888",
+      "gb:GRC:ADM3:53547021B60272535960699",
+      "gb:GRC:ADM3:53547021B60830595805901",
+      "gb:GRC:ADM3:53547021B61086329555590",
+      "gb:GRC:ADM3:53547021B61284314661449",
+      "gb:GRC:ADM3:53547021B61294073718847",
+      "gb:GRC:ADM3:53547021B61397551596629",
+      "gb:GRC:ADM3:53547021B61977716091776",
+      "gb:GRC:ADM3:53547021B62185300299797",
+      "gb:GRC:ADM3:53547021B62210225540795",
+      "gb:GRC:ADM3:53547021B62460080330009",
+      "gb:GRC:ADM3:53547021B62964358378279",
+      "gb:GRC:ADM3:53547021B64058474759409",
+      "gb:GRC:ADM3:53547021B64910393860585",
+      "gb:GRC:ADM3:53547021B6491391664836",
+      "gb:GRC:ADM3:53547021B65975063640854",
+      "gb:GRC:ADM3:53547021B66089273979602",
+      "gb:GRC:ADM3:53547021B66289561682340",
+      "gb:GRC:ADM3:53547021B66598831065721",
+      "gb:GRC:ADM3:53547021B66684372134379",
+      "gb:GRC:ADM3:53547021B67022327666840",
+      "gb:GRC:ADM3:53547021B67372955866360",
+      "gb:GRC:ADM3:53547021B67677949028001",
+      "gb:GRC:ADM3:53547021B68402716695830",
+      "gb:GRC:ADM3:53547021B68771809691865",
+      "gb:GRC:ADM3:53547021B68968081494032",
+      "gb:GRC:ADM3:53547021B69430193409893",
+      "gb:GRC:ADM3:53547021B69726865703456",
+      "gb:GRC:ADM3:53547021B69991505918188",
+      "gb:GRC:ADM3:53547021B7101265711670",
+      "gb:GRC:ADM3:53547021B7133830368092",
+      "gb:GRC:ADM3:53547021B71932835552379",
+      "gb:GRC:ADM3:53547021B73063922158983",
+      "gb:GRC:ADM3:53547021B73687817516293",
+      "gb:GRC:ADM3:53547021B73781600558558",
+      "gb:GRC:ADM3:53547021B73817444221742",
+      "gb:GRC:ADM3:53547021B73836708319898",
+      "gb:GRC:ADM3:53547021B74318370838028",
+      "gb:GRC:ADM3:53547021B75591847630099",
+      "gb:GRC:ADM3:53547021B7583828069802",
+      "gb:GRC:ADM3:53547021B7637934364384",
+      "gb:GRC:ADM3:53547021B76628339296380",
+      "gb:GRC:ADM3:53547021B77563010922332",
+      "gb:GRC:ADM3:53547021B77689448104002",
+      "gb:GRC:ADM3:53547021B78031769692212",
+      "gb:GRC:ADM3:53547021B78495835617013",
+      "gb:GRC:ADM3:53547021B78630521546068",
+      "gb:GRC:ADM3:53547021B78874173841678",
+      "gb:GRC:ADM3:53547021B79003090223986",
+      "gb:GRC:ADM3:53547021B80449020436996",
+      "gb:GRC:ADM3:53547021B80454148409460",
+      "gb:GRC:ADM3:53547021B80740180433739",
+      "gb:GRC:ADM3:53547021B81524104874165",
+      "gb:GRC:ADM3:53547021B81638497609890",
+      "gb:GRC:ADM3:53547021B82148027008131",
+      "gb:GRC:ADM3:53547021B82210761635723",
+      "gb:GRC:ADM3:53547021B83448724449925",
+      "gb:GRC:ADM3:53547021B84320611928141",
+      "gb:GRC:ADM3:53547021B84334822638882",
+      "gb:GRC:ADM3:53547021B84513117359577",
+      "gb:GRC:ADM3:53547021B85097268009433",
+      "gb:GRC:ADM3:53547021B8539280325295",
+      "gb:GRC:ADM3:53547021B8633274333782",
+      "gb:GRC:ADM3:53547021B87111517925303",
+      "gb:GRC:ADM3:53547021B88004550076070",
+      "gb:GRC:ADM3:53547021B88525152151548",
+      "gb:GRC:ADM3:53547021B88855189165217",
+      "gb:GRC:ADM3:53547021B89272738567676",
+      "gb:GRC:ADM3:53547021B89364660535842",
+      "gb:GRC:ADM3:53547021B90088686662999",
+      "gb:GRC:ADM3:53547021B90895117321858",
+      "gb:GRC:ADM3:53547021B9100129164717",
+      "gb:GRC:ADM3:53547021B91453036712640",
+      "gb:GRC:ADM3:53547021B91519057350540",
+      "gb:GRC:ADM3:53547021B92158672895518",
+      "gb:GRC:ADM3:53547021B92339582809627",
+      "gb:GRC:ADM3:53547021B9274256728427",
+      "gb:GRC:ADM3:53547021B92788697254427",
+      "gb:GRC:ADM3:53547021B93190523098982",
+      "gb:GRC:ADM3:53547021B93267404928266",
+      "gb:GRC:ADM3:53547021B93576040480111",
+      "gb:GRC:ADM3:53547021B93700344623224",
+      "gb:GRC:ADM3:53547021B94603646495013",
+      "gb:GRC:ADM3:53547021B95840700609502",
+      "gb:GRC:ADM3:53547021B95986693846291",
+      "gb:GRC:ADM3:53547021B96091145181184",
+      "gb:GRC:ADM3:53547021B96323782975669",
+      "gb:GRC:ADM3:53547021B96945859655047",
+      "gb:GRC:ADM3:53547021B97495413305113",
+      "gb:GRC:ADM3:53547021B9803331652981",
+      "gb:GRC:ADM3:53547021B98291261217128",
+      "gb:GRC:ADM3:53547021B98389785253572",
+      "gb:GRC:ADM3:53547021B9872067267260",
+      "gb:GRC:ADM3:53547021B98799222939047",
+      "gb:GRC:ADM3:53547021B98874047367663",
+      "gb:GRC:ADM3:53547021B99660133623789",
+      "gb:GRC:ADM3:53547021B99961606275333",
+      "gb:XKX:ADM1:2360587B11570115914955",
+      "gb:XKX:ADM1:2360587B15813948402025",
+      "gb:XKX:ADM1:2360587B89959345704230",
+      "gb:XKX:ADM1:2360587B9056373484571"
+    ],
+    "scope_sha256": "9ad32208c0ef0f325af657dd8d449fcaf92059916fb8818ca5cb6c3363a9aac1",
+    "parent_reference_count": 17,
+    "area_reference_count": 3,
+    "area_scopes": [
+      {
+        "full_area_location_count": 281,
+        "id": "framework:area:greece:e5489fc04cd7",
+        "name": "Greece",
+        "original_full_area_location_count": 281,
+        "owned_member_location_count": 201,
+        "partial": true
+      },
+      {
+        "full_area_location_count": 25,
+        "id": "framework:area:kriti:88da4b529aa4",
+        "name": "Kriti",
+        "original_full_area_location_count": 25,
+        "owned_member_location_count": 25,
+        "partial": false
+      },
+      {
+        "full_area_location_count": 1169,
+        "id": "framework:area:yugoslavia:cff5e9ba6c8e",
+        "name": "Yugoslavia",
+        "original_full_area_location_count": 1169,
+        "owned_member_location_count": 4,
+        "partial": true
+      }
+    ],
+    "source_packet_owned_path": "data/regional-review/regional-review-3f920fc5cb99166e/"
+  },
+  "input_admission": {
+    "file_count": 47,
+    "input_bytes": 46361299,
+    "max_file_bytes": 12932167
+  },
+  "runs": [
+    {
+      "phase": "roster",
+      "run": "roster-run-1",
+      "elapsed_seconds": 1.669,
+      "input_admission": {
+        "file_count": 47,
+        "input_bytes": 46361299,
+        "max_file_bytes": 12932167
+      },
+      "packet_files_read": [
+        "data/regional-review/regional-review-3f920fc5cb99166e/area-scope.csv",
+        "data/regional-review/regional-review-3f920fc5cb99166e/assessment.csv",
+        "data/regional-review/regional-review-3f920fc5cb99166e/baseline-inputs.json",
+        "data/regional-review/regional-review-3f920fc5cb99166e/issue-421-api.json",
+        "data/regional-review/regional-review-3f920fc5cb99166e/province-scope.csv",
+        "data/regional-review/regional-review-3f920fc5cb99166e/scope.json",
+        "data/regional-review/regional-review-3f920fc5cb99166e/sources/geoBoundaries-GRC-ADM2-metaData.json",
+        "data/regional-review/regional-review-3f920fc5cb99166e/sources/geoBoundaries-GRC-ADM2.geojson",
+        "data/regional-review/regional-review-3f920fc5cb99166e/sources/geoBoundaries-XKX-ADM1-metaData.json",
+        "data/regional-review/regional-review-3f920fc5cb99166e/sources/geoBoundaries-XKX-ADM1.geojson"
+      ],
+      "outputs": [
+        {
+          "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-final/roster-run-1/assessment.csv",
+          "bytes": 139606,
+          "sha256": "f6ee194f5270f08762fbdfacd8a14e641414ce1ee2a8a3fb391d4d1fa2f6fe3b",
+          "matches_historical": true,
+          "historical_sha256": "f6ee194f5270f08762fbdfacd8a14e641414ce1ee2a8a3fb391d4d1fa2f6fe3b"
+        },
+        {
+          "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-final/roster-run-1/province-scope.csv",
+          "bytes": 16309,
+          "sha256": "e25d6bbd6d387c5d56f67cf39638ccd002986bdabb5ba64dfd6b0d5341ce728d",
+          "matches_historical": true,
+          "historical_sha256": "e25d6bbd6d387c5d56f67cf39638ccd002986bdabb5ba64dfd6b0d5341ce728d"
+        },
+        {
+          "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-final/roster-run-1/area-scope.csv",
+          "bytes": 1960,
+          "sha256": "209f53e38a133b922bb83bd3f604b9e807257179a880f3eee7a30b93c24ff145",
+          "matches_historical": true,
+          "historical_sha256": "209f53e38a133b922bb83bd3f604b9e807257179a880f3eee7a30b93c24ff145"
+        },
+        {
+          "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-final/roster-run-1/reproduction-summary.json",
+          "bytes": 714,
+          "sha256": "74cbc01dc4724e25c7296aa2b45c50bcb8ed20c2067a224172be70a90473065a",
+          "matches_historical": true,
+          "historical_sha256": "74cbc01dc4724e25c7296aa2b45c50bcb8ed20c2067a224172be70a90473065a"
+        }
+      ]
+    },
+    {
+      "phase": "roster",
+      "run": "roster-run-2",
+      "elapsed_seconds": 1.564,
+      "input_admission": {
+        "file_count": 47,
+        "input_bytes": 46361299,
+        "max_file_bytes": 12932167
+      },
+      "packet_files_read": [
+        "data/regional-review/regional-review-3f920fc5cb99166e/area-scope.csv",
+        "data/regional-review/regional-review-3f920fc5cb99166e/assessment.csv",
+        "data/regional-review/regional-review-3f920fc5cb99166e/baseline-inputs.json",
+        "data/regional-review/regional-review-3f920fc5cb99166e/issue-421-api.json",
+        "data/regional-review/regional-review-3f920fc5cb99166e/province-scope.csv",
+        "data/regional-review/regional-review-3f920fc5cb99166e/scope.json",
+        "data/regional-review/regional-review-3f920fc5cb99166e/sources/geoBoundaries-GRC-ADM2-metaData.json",
+        "data/regional-review/regional-review-3f920fc5cb99166e/sources/geoBoundaries-GRC-ADM2.geojson",
+        "data/regional-review/regional-review-3f920fc5cb99166e/sources/geoBoundaries-XKX-ADM1-metaData.json",
+        "data/regional-review/regional-review-3f920fc5cb99166e/sources/geoBoundaries-XKX-ADM1.geojson"
+      ],
+      "outputs": [
+        {
+          "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-final/roster-run-2/assessment.csv",
+          "bytes": 139606,
+          "sha256": "f6ee194f5270f08762fbdfacd8a14e641414ce1ee2a8a3fb391d4d1fa2f6fe3b",
+          "matches_historical": true,
+          "historical_sha256": "f6ee194f5270f08762fbdfacd8a14e641414ce1ee2a8a3fb391d4d1fa2f6fe3b"
+        },
+        {
+          "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-final/roster-run-2/province-scope.csv",
+          "bytes": 16309,
+          "sha256": "e25d6bbd6d387c5d56f67cf39638ccd002986bdabb5ba64dfd6b0d5341ce728d",
+          "matches_historical": true,
+          "historical_sha256": "e25d6bbd6d387c5d56f67cf39638ccd002986bdabb5ba64dfd6b0d5341ce728d"
+        },
+        {
+          "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-final/roster-run-2/area-scope.csv",
+          "bytes": 1960,
+          "sha256": "209f53e38a133b922bb83bd3f604b9e807257179a880f3eee7a30b93c24ff145",
+          "matches_historical": true,
+          "historical_sha256": "209f53e38a133b922bb83bd3f604b9e807257179a880f3eee7a30b93c24ff145"
+        },
+        {
+          "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-final/roster-run-2/reproduction-summary.json",
+          "bytes": 714,
+          "sha256": "74cbc01dc4724e25c7296aa2b45c50bcb8ed20c2067a224172be70a90473065a",
+          "matches_historical": true,
+          "historical_sha256": "74cbc01dc4724e25c7296aa2b45c50bcb8ed20c2067a224172be70a90473065a"
+        }
+      ]
+    },
+    {
+      "phase": "geometry",
+      "run": "geometry-run-1",
+      "elapsed_seconds": 2.097,
+      "input_admission": {
+        "file_count": 47,
+        "input_bytes": 46361299,
+        "max_file_bytes": 12932167
+      },
+      "packet_files_read": [
+        "data/regional-review/regional-review-3f920fc5cb99166e/baseline-inputs.json",
+        "data/regional-review/regional-review-3f920fc5cb99166e/scope.json",
+        "data/regional-review/regional-review-3f920fc5cb99166e/sources/geoBoundaries-XKX-ADM1.geojson"
+      ],
+      "outputs": [
+        {
+          "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-final/geometry-run-1/geometry-screen.csv",
+          "bytes": 57689,
+          "sha256": "75028bcec59629db53587663f53a752842b4cc7c74e7e42d9a7ef3cec8fa1951",
+          "matches_historical": true,
+          "historical_sha256": "75028bcec59629db53587663f53a752842b4cc7c74e7e42d9a7ef3cec8fa1951"
+        },
+        {
+          "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-final/geometry-run-1/parent-scale-screen.csv",
+          "bytes": 3333,
+          "sha256": "14d3a8e3c9127fee23a090f303629819426ed9a758a255ea1531ec46c5a02f71",
+          "matches_historical": true,
+          "historical_sha256": "14d3a8e3c9127fee23a090f303629819426ed9a758a255ea1531ec46c5a02f71"
+        },
+        {
+          "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-final/geometry-run-1/geometry-method-and-neighbor-summary.json",
+          "bytes": 4556,
+          "sha256": "1373f9285575eabb1c19d90ed954153e2a415ea4dc02370fae84a3fed640f833",
+          "matches_historical": true,
+          "historical_sha256": "1373f9285575eabb1c19d90ed954153e2a415ea4dc02370fae84a3fed640f833"
+        },
+        {
+          "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-final/geometry-run-1/geometry-run-summary.json",
+          "bytes": 5059,
+          "sha256": "8ce49a6cc4db6cbebf588351056d1e9b09f497b1c5828e4204fa8d05babf5c40",
+          "matches_historical": true,
+          "historical_sha256": "8ce49a6cc4db6cbebf588351056d1e9b09f497b1c5828e4204fa8d05babf5c40"
+        }
+      ]
+    },
+    {
+      "phase": "geometry",
+      "run": "geometry-run-2",
+      "elapsed_seconds": 2.248,
+      "input_admission": {
+        "file_count": 47,
+        "input_bytes": 46361299,
+        "max_file_bytes": 12932167
+      },
+      "packet_files_read": [
+        "data/regional-review/regional-review-3f920fc5cb99166e/baseline-inputs.json",
+        "data/regional-review/regional-review-3f920fc5cb99166e/scope.json",
+        "data/regional-review/regional-review-3f920fc5cb99166e/sources/geoBoundaries-XKX-ADM1.geojson"
+      ],
+      "outputs": [
+        {
+          "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-final/geometry-run-2/geometry-screen.csv",
+          "bytes": 57689,
+          "sha256": "75028bcec59629db53587663f53a752842b4cc7c74e7e42d9a7ef3cec8fa1951",
+          "matches_historical": true,
+          "historical_sha256": "75028bcec59629db53587663f53a752842b4cc7c74e7e42d9a7ef3cec8fa1951"
+        },
+        {
+          "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-final/geometry-run-2/parent-scale-screen.csv",
+          "bytes": 3333,
+          "sha256": "14d3a8e3c9127fee23a090f303629819426ed9a758a255ea1531ec46c5a02f71",
+          "matches_historical": true,
+          "historical_sha256": "14d3a8e3c9127fee23a090f303629819426ed9a758a255ea1531ec46c5a02f71"
+        },
+        {
+          "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-final/geometry-run-2/geometry-method-and-neighbor-summary.json",
+          "bytes": 4556,
+          "sha256": "1373f9285575eabb1c19d90ed954153e2a415ea4dc02370fae84a3fed640f833",
+          "matches_historical": true,
+          "historical_sha256": "1373f9285575eabb1c19d90ed954153e2a415ea4dc02370fae84a3fed640f833"
+        },
+        {
+          "path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-final/geometry-run-2/geometry-run-summary.json",
+          "bytes": 5059,
+          "sha256": "8ce49a6cc4db6cbebf588351056d1e9b09f497b1c5828e4204fa8d05babf5c40",
+          "matches_historical": true,
+          "historical_sha256": "8ce49a6cc4db6cbebf588351056d1e9b09f497b1c5828e4204fa8d05babf5c40"
+        }
+      ]
+    }
+  ],
+  "negative_controls": [
+    {
+      "id": "wrong-baseline",
+      "outcome": "passed",
+      "rejected_path": "data/hierarchy.json",
+      "before_output_creation": true
+    },
+    {
+      "id": "demonstrated-whole-source-drift",
+      "outcome": "passed",
+      "rejected_path": "data/regional-review/regional-review-3f920fc5cb99166e/sources/geoBoundaries-XKX-ADM1.geojson",
+      "before_output_creation": true
+    },
+    {
+      "id": "wrong-original-code",
+      "outcome": "passed",
+      "rejected_path": "data/regional-review/regional-review-3f920fc5cb99166e/reproduce.py",
+      "before_output_creation": true
+    },
+    {
+      "id": "demonstrated-complete-source-name-drift",
+      "outcome": "passed",
+      "native_id": "2360587B11570115914955",
+      "synthetic_name": "AUDITOR_SYNTHETIC_SOURCE_NAME",
+      "source_bytes_modified": false,
+      "rejected_path": "data/regional-review/regional-review-3f920fc5cb99166e/sources/geoBoundaries-XKX-ADM1.geojson",
+      "before_output_creation": true
+    },
+    {
+      "id": "existing-output",
+      "outcome": "passed",
+      "sentinel_sha256": "1bc453fcbacd0e2942d47aac3aa6972d01380fbc6318f77903f5fb5a0e73b129",
+      "preserved": true
+    }
+  ],
+  "reproduced_scope_summary": {
+    "row_count": 230,
+    "province_parent_count": 17,
+    "outcomes": {
+      "insufficient-evidence": 225,
+      "correction-needed": 5
+    },
+    "source_counts": {
+      "gb:GRC:ADM3": 226,
+      "gb:XKX:ADM1": 4
+    },
+    "native_source_feature_counts": {
+      "Greece_2010": 326,
+      "Kosovo_2021_package": 7
+    },
+    "area_counts": {
+      "Greece": {
+        "owned": 201,
+        "full": 281
+      },
+      "Kriti": {
+        "owned": 25,
+        "full": 25
+      },
+      "Yugoslavia": {
+        "owned": 4,
+        "full": 1169
+      }
+    },
+    "assessment_sha256": "f6ee194f5270f08762fbdfacd8a14e641414ce1ee2a8a3fb391d4d1fa2f6fe3b"
+  },
+  "validation": [
+    {
+      "method_id": "exact-roster-generator",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-final/receipts/roster-positive-control.json"
+    },
+    {
+      "method_id": "exact-roster-generator",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-final/receipts/roster-negative-control.json"
+    },
+    {
+      "method_id": "exact-roster-generator",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-final/receipts/roster-reproducibility.json"
+    },
+    {
+      "method_id": "geometry-screen-generator",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-final/receipts/geometry-positive-control.json"
+    },
+    {
+      "method_id": "geometry-screen-generator",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-final/receipts/geometry-negative-control.json"
+    },
+    {
+      "method_id": "geometry-screen-generator",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-final/receipts/geometry-reproducibility.json"
+    },
+    {
+      "method_id": "epsg6933-source-comparison",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-final/receipts/geometry-diagnostic-positive-control.json"
+    },
+    {
+      "method_id": "epsg6933-source-comparison",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/southeastern-europe-batch6-reproduction-421-erratum/runs/verify-20261006-final/receipts/geometry-diagnostic-negative-control.json"
+    }
+  ],
+  "historical_outputs_matched": 16,
+  "historical_output_comparisons": 16,
+  "limits": [
+    "Reproduction safeguards and historical numerical identity do not establish legal boundaries, license compatibility, present-day completeness, or regional approval."
+  ]
+}

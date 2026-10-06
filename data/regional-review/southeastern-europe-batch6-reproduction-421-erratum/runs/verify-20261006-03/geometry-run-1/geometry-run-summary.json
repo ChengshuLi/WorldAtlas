@@ -1,0 +1,188 @@
+{
+  "locations": 230,
+  "scope_grc_source_features": 227,
+  "multipart_atlas_locations": 22,
+  "iou_below_0_95": 90,
+  "neighbor_summary": {
+    "method": "EPSG:6933 equal-area transforms; make_valid only for diagnostics; STRtree exact layer pair screens.",
+    "grc_source_feature_count": 326,
+    "scoped_grc_source_feature_count": 227,
+    "scoped_source_features_with_shared_edge_over_0_1m": 192,
+    "scoped_source_features_without_shared_edge_over_0_1m": 35,
+    "scoped_features_in_pairs_with_overlap_over_1000m2": 0,
+    "source_pairs_total_overlap_over_1000m2": 0,
+    "scope_ids_with_no_same_layer_edge": [
+      {
+        "shapeID": "53547021B11217134811414",
+        "shapeName": "Astypalaia"
+      },
+      {
+        "shapeID": "53547021B11646633463152",
+        "shapeName": "Agistri"
+      },
+      {
+        "shapeID": "53547021B14587890141063",
+        "shapeName": "Andros"
+      },
+      {
+        "shapeID": "53547021B1587257754392",
+        "shapeName": "Antiparos"
+      },
+      {
+        "shapeID": "53547021B20655569007044",
+        "shapeName": "Sikinos"
+      },
+      {
+        "shapeID": "53547021B2109852565692",
+        "shapeName": "Anafi"
+      },
+      {
+        "shapeID": "53547021B2228776915974",
+        "shapeName": "Aegina"
+      },
+      {
+        "shapeID": "53547021B27848080443845",
+        "shapeName": "Lemnos"
+      },
+      {
+        "shapeID": "53547021B29376854507726",
+        "shapeName": "Agios Efstratios"
+      },
+      {
+        "shapeID": "53547021B31952026636048",
+        "shapeName": "Amorgos"
+      },
+      {
+        "shapeID": "53547021B40993190034895",
+        "shapeName": "Kythira"
+      },
+      {
+        "shapeID": "53547021B41286573070339",
+        "shapeName": "Santorini"
+      },
+      {
+        "shapeID": "53547021B47495045685041",
+        "shapeName": "Ydra"
+      },
+      {
+        "shapeID": "53547021B50922238140388",
+        "shapeName": "Kithnos"
+      },
+      {
+        "shapeID": "53547021B52309910958375",
+        "shapeName": "Kimolos"
+      },
+      {
+        "shapeID": "53547021B54920470672520",
+        "shapeName": "Gavdos"
+      },
+      {
+        "shapeID": "53547021B57678197221990",
+        "shapeName": "Milos"
+      },
+      {
+        "shapeID": "53547021B58981703500850",
+        "shapeName": "Sifnos"
+      },
+      {
+        "shapeID": "53547021B65975063640854",
+        "shapeName": "Folegandros"
+      },
+      {
+        "shapeID": "53547021B66684372134379",
+        "shapeName": "Skyros"
+      },
+      {
+        "shapeID": "53547021B68771809691865",
+        "shapeName": "Kea"
+      },
+      {
+        "shapeID": "53547021B69726865703456",
+        "shapeName": "Kasos"
+      },
+      {
+        "shapeID": "53547021B73687817516293",
+        "shapeName": "Karpathos"
+      },
+      {
+        "shapeID": "53547021B73817444221742",
+        "shapeName": "Syros"
+      },
+      {
+        "shapeID": "53547021B73836708319898",
+        "shapeName": "Tinos"
+      },
+      {
+        "shapeID": "53547021B7637934364384",
+        "shapeName": "Mikonos"
+      },
+      {
+        "shapeID": "53547021B79003090223986",
+        "shapeName": "Salamina"
+      },
+      {
+        "shapeID": "53547021B84513117359577",
+        "shapeName": "Elafonisos"
+      },
+      {
+        "shapeID": "53547021B87111517925303",
+        "shapeName": "Iiton"
+      },
+      {
+        "shapeID": "53547021B90088686662999",
+        "shapeName": "Paros"
+      },
+      {
+        "shapeID": "53547021B9100129164717",
+        "shapeName": "Samothrakis"
+      },
+      {
+        "shapeID": "53547021B91453036712640",
+        "shapeName": "Naxos and Lesser Cyclades"
+      },
+      {
+        "shapeID": "53547021B93700344623224",
+        "shapeName": "Serifos"
+      },
+      {
+        "shapeID": "53547021B94603646495013",
+        "shapeName": "Thassou"
+      },
+      {
+        "shapeID": "53547021B99660133623789",
+        "shapeName": "Spetses"
+      }
+    ],
+    "controls": {
+      "positive_control": {
+        "method_id": "epsg6933-source-comparison",
+        "kind": "positive-control",
+        "outcome": "passed",
+        "expectation": "identical synthetic squares have IoU exactly 1",
+        "observed_iou": 1.0
+      },
+      "negative_control": {
+        "method_id": "epsg6933-source-comparison",
+        "kind": "negative-control",
+        "outcome": "passed",
+        "expectation": "disjoint synthetic squares have IoU exactly 0",
+        "observed_iou": 0.0
+      },
+      "axis_order_control": {
+        "input_longitude_latitude": [
+          10,
+          45
+        ],
+        "target_crs": "EPSG:3857",
+        "x_m": 1113194.9079327357,
+        "y_m": 5621521.486192066,
+        "outcome": "passed"
+      }
+    },
+    "limits": [
+      "Coastlines and islands naturally have no same-layer land neighbor.",
+      "No-edge/overlap results do not establish coverage, legal boundaries, omitted islands, or correct parent assignments.",
+      "The selected source inventory itself is stale for present-day completeness; these are 2010 geometry screens only."
+    ]
+  }
+}
