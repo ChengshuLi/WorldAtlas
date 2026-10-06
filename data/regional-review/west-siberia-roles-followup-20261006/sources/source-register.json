@@ -1,0 +1,155 @@
+{
+  "retrieval_date_local": "2026-10-06 America/Los_Angeles",
+  "method": "Repository API/source-file inspection plus official-page text returned by web search extraction. No GitHub browser or user browser was used.",
+  "records": [
+    {
+      "id": "prior-geoboundaries-adm2",
+      "url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d",
+      "role": "Original national ADM2 source for the 34 native-unit subjects and administrative parents from which the 11 ecological pieces were derived.",
+      "vintage": "Represented boundary year 2017; data update 2023-03-03; source build 2023-12-12.",
+      "retrieved_at": "2026-10-05T22:51:01-07:00 (original packet source capture)",
+      "license": "Open Data Commons Open Database License 1.0; source metadata attributes OpenStreetMap and Wambacher.",
+      "retention": "restoration-only for the full 120,489,189-byte national archive; the 203 scoped original features needed for this Siberia review are retained in the parent packet.",
+      "raw_sha256": "74012237384e53061aa63b6e20b9be24f94facfe615b52bbe72e62a81fa68ff0",
+      "scoped_features_sha256": "7eb4cba61f0d17bfacb634c08aff3ec4873ece62734d518b51614bf061a5a129",
+      "restore": "curl --fail --location 'https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/RUS/ADM2/geoBoundaries-RUS-ADM2.geojson' --output data/regional-review/regional-review-626fdf640aab94e2/sources/geoboundaries-rus-adm2-2017-original.geojson",
+      "limit": "The source metadata says 2,328 ADM2 units while its complete archive has 2,327 features. It is historical and does not establish current legal status or boundary completeness."
+    },
+    {
+      "id": "prior-resolve-ecoregions",
+      "url": "https://www.arcgis.com/home/item.html?id=37ea320eebb647c6838c23f72abae5ef",
+      "role": "Physical ecoregion source used to create the 11 ecological portions; ECO_ID is the verified identity field.",
+      "vintage": "Layer source data last edit 2022-01-27; later schema edits are not a new boundary vintage.",
+      "retrieved_at": "2026-10-05T22:51:28-07:00 (original packet source capture)",
+      "license": "CC BY 4.0 as listed by the ArcGIS item; underlying source district geometry retains the separate ODbL 1.0 attribution.",
+      "retention": "restoration-only for the national service; the four exact ecoregion features, item record, layer metadata, and query are retained in the parent packet.",
+      "item_sha256": "9ccbb076714184b4565ca6546f988aca1fad7afabf17191f920f3da64ba85340",
+      "layer_sha256": "d1feffd594812affdc08e089607bab2ed76e256ba7748784d37536797a777d4e",
+      "features_sha256": "95557a6db0dffeda4786e3961a2daf3aa977160adf09dbada2ec73cc8305a3b3",
+      "limit": "This dataset is ecological, not an administrative-territory source, and does not validate current province or district boundaries."
+    },
+    {
+      "id": "rosstat-oktmo-open-data-catalog",
+      "url": "https://rosstat.gov.ru/opendata/7708234640-oktmo",
+      "role": "Federal open-data catalog for the All-Russian Classifier of Municipal Territories (OKTMO); official national lead for current municipal names/codes and hierarchy.",
+      "vintage": "Search-indexed catalog lists CSV data-20261001T1110-structure-20260210T1102.csv; catalog last modified 2026-10-01.",
+      "retrieved_at": "2026-10-06 (official page text returned by web search extraction; raw catalog and CSV not retrieved)",
+      "license": "Catalog states typical terms for publicly available open data, but those terms and the specific file were not inspected; treat reuse status as unverified.",
+      "retention": "restoration-only; no source bytes retained and no source-byte hash claimed.",
+      "restore": "Open https://rosstat.gov.ru/opendata/7708234640-oktmo and download the catalog's 2026-10-01 CSV data-20261001T1110-structure-20260210T1102.csv plus structure-20260210T1102.csv; record final URLs, terms, byte lengths and SHA-256 before relying on rows.",
+      "access_attempt": "A normal TLS-verified curl to the catalog and guessed official CSV endpoint failed with `SSL certificate problem: unable to get local issuer certificate` on 2026-10-06. Certificate checks were not bypassed.",
+      "limit": "Search extraction is a source-discovery lead, not retained source bytes or an inspected CSV. No geographic claim in this packet relies on an unread OKTMO row."
+    },
+    {
+      "id": "altai-krai-rosstat-municipal-list",
+      "url": "https://22.rosstat.gov.ru/folder/33029",
+      "role": "Official Altai Krai municipal register index. The page describes its linked list as according to regional laws establishing the status and boundaries of municipal and administrative-territorial entities.",
+      "vintage": "Linked DOCX named `Municipal formations of Altai Krai`, catalog date 2026-01-16; official statistical material also reports 2026-01-01 totals.",
+      "retrieved_at": "2026-10-06 (official page text returned by web search extraction; DOCX not retrieved)",
+      "license": "Specific DOCX reuse terms not inspected.",
+      "retention": "restoration-only; no DOCX bytes or source-byte hash claimed.",
+      "restore": "Open the official page and download the 40.29 KB `Municipal formations of Altai Krai` DOCX listed 2026-01-16; inspect its source-law citations and record the exact file SHA-256.",
+      "limit": "The current DOCX is not retained. The eight city labels have earlier official-statistics support but their 2026 row-level types remain unchecked here. Official Treasury search extraction records Slavgorod's conversion to municipal okrug; its complete current legal roster remains to be inspected."
+    },
+    {
+      "id": "altai-krai-rosstat-2024-yearbook",
+      "url": "https://22.rosstat.gov.ru/storage/mediabank/%D0%95%D0%B6%D0%B5%D0%B3%D0%BE%D0%B4%D0%BD%D0%B8%D0%BA.2024.pdf",
+      "role": "Earlier official Rosstat classification of Altai Krai urban and municipal okrugs, useful to compare the 2017 source names.",
+      "vintage": "2024 statistical yearbook; table describes municipality types as of 1 January for 2021-2025.",
+      "retrieved_at": "2026-10-06 (official PDF text returned by web search extraction; file not retrieved)",
+      "license": "Specific PDF terms not inspected.",
+      "retention": "restoration-only; no PDF bytes or source-byte hash claimed.",
+      "restore": "Download the 2024 yearbook PDF from the listed official Rosstat URL; record final URL, size, terms and SHA-256.",
+      "limit": "Historic statistical classification, not legal-boundary evidence or the 2026 list."
+    },
+    {
+      "id": "novosibirsk-oblast-rosstat-list",
+      "url": "https://54.rosstat.gov.ru/list_of_municipalities",
+      "role": "Official current Novosibirsk Oblast municipal register; distinguishes urban okrugs, municipal okrugs and municipal districts, including Novosibirsk city and Novosibirsky district.",
+      "vintage": "Page crawled 2026-10-06; no embedded effective date shown in the extracted text.",
+      "retrieved_at": "2026-10-06 (official page text returned by web search extraction; HTML not retrieved)",
+      "license": "Page-level reuse terms not inspected.",
+      "retention": "restoration-only; no page bytes or source-byte hash claimed.",
+      "restore": "Open the listed official page and save the rendered municipal list or its linked data in a verified way; record its date and SHA-256.",
+      "limit": "A roster distinguishes entity classes but does not provide boundary geometry or prove the 2017 multipart components."
+    },
+    {
+      "id": "omsk-oblast-rosstat-list",
+      "url": "https://55.rosstat.gov.ru/list_of_municipalities",
+      "role": "Official Omsk Oblast municipal list. The extracted current list identifies Omsk as a city okrug and shows former district-named entities among municipal okrugs and remaining municipal districts.",
+      "vintage": "List explicitly dated 2026-01-01.",
+      "retrieved_at": "2026-10-06 (official page text returned by web search extraction; HTML not retrieved)",
+      "license": "Page-level reuse terms not inspected.",
+      "retention": "restoration-only; no page bytes or source-byte hash claimed.",
+      "restore": "Open the listed official page and save the rendered municipal list or linked data; record its date, terms and SHA-256.",
+      "limit": "Names/status can contextualize a source role; they do not establish geometry of Omsk, Bolsherechensky or Krutinsky components."
+    },
+    {
+      "id": "tomsk-oblast-rosstat-list",
+      "url": "https://70.rosstat.gov.ru/list_of_municipalities",
+      "role": "Official Tomsk Oblast municipal register. It lists city Tomsk, city Kedrovy and city Strezhevoy under the city-okrug heading, separate from municipal districts and settlements.",
+      "vintage": "Page crawled 2026-09-30; no explicit effective date shown in extracted text.",
+      "retrieved_at": "2026-10-06 (official page text returned by web search extraction; HTML not retrieved)",
+      "license": "Page-level reuse terms not inspected.",
+      "retention": "restoration-only; no page bytes or source-byte hash claimed.",
+      "restore": "Open the listed official page and save the rendered municipal list or linked data; record its date, terms and SHA-256.",
+      "limit": "The list supports role category only; does not show the territorial extent or verify the 2017 feature boundary."
+    },
+    {
+      "id": "yamal-nenets-mchs-profile",
+      "url": "https://89.mchs.gov.ru/glavnoe-upravlenie/harakteristika-subekta",
+      "role": "Official regional MChS profile listing Yamal-Nenets municipal entities under city okrugs and municipal okrugs; it names the four in-scope city entities and seven district-named municipal okrugs.",
+      "vintage": "Original packet HTML capture 2026-10-05 23:10:05 PDT; current official page search extraction crawled two days before 2026-10-06.",
+      "retrieved_at": "2026-10-05T23:10:05-07:00",
+      "license": "CC BY 4.0 page footer, as recorded in the parent packet.",
+      "retention": "retained in parent packet as `sources/mchs-yamal-profile.html`.",
+      "sha256": "a73397b83e44731675ce5ddda196f29a752696975840b03524344674c9de22fa",
+      "limit": "A municipality roster does not supply a component-by-component municipal boundary; the MChS island statement covers some islands only."
+    },
+    {
+      "id": "khanty-mansi-63oz-municipal-boundaries-law",
+      "url": "https://www.dumahmao.ru/ai_fill/File/Law/1%20State%20Legal%20device/2%20Local%20government/63-oz5.pdf",
+      "role": "Official regional legislature publication of Law 63-oz, whose subject is the status and boundaries of municipalities and whose Article 1 enumerates city okrugs; annexes include boundary schemes.",
+      "vintage": "Official PDF indexed as the amended text; the page's exact revision date was not inspected. A 2025 amendment is reflected in the official law passport; 2026 amendments were not ruled out.",
+      "retrieved_at": "2026-10-06 (official PDF metadata/text returned by web search extraction; PDF not retrieved)",
+      "license": "Legal text; reuse terms not inspected. Citation rather than PDF redistribution is planned.",
+      "retention": "restoration-only; no PDF bytes or source-byte hash claimed.",
+      "restore": "Download the legislature-hosted PDF and compare Article 1 plus the separate administrative-territorial law 43-oz; record both exact URLs, publication/revision dates and SHA-256.",
+      "limit": "Municipal city-okrg status is not equivalent to administrative territorial `gorod okrug significance`; exact 2026 statutory state and Annex geometry were not byte-inspected in this run."
+    },
+    {
+      "id": "nefteyugansk-official-charter",
+      "url": "https://special.admugansk.ru/category/8",
+      "role": "Official city-government charter source confirming the municipality's name and urban-okrug status under regional Law 63-oz; its extracted text cites the 2025 Federal Law 33-FZ and a March 2026 charter amendment.",
+      "vintage": "Search-extracted text reflects a 2026-03-25 city council amendment; HTML bytes not retrieved.",
+      "retrieved_at": "2026-10-06 (official page text returned by web search extraction)",
+      "license": "Page-level reuse terms not inspected.",
+      "retention": "restoration-only; no HTML bytes or source-byte hash claimed.",
+      "restore": "Open the official charter page and retrieve the currently linked charter and revision record with TLS validation.",
+      "limit": "Confirms only Nefteyugansk's legal name/status; does not validate the footprint or every other city subject."
+    },
+    {
+      "id": "nizhnevartovsk-official-charter",
+      "url": "https://www.n-vartovsk.ru/town/ustav/",
+      "role": "Official city-government charter identifying Nizhnevartovsk as a municipal urban okrug and saying its legal municipal boundary coincides with the administrative-territorial city boundary.",
+      "vintage": "Official current charter page crawled 2026-10-02; HTML/PDF not retrieved.",
+      "retrieved_at": "2026-10-06 (official page text returned by web search extraction)",
+      "license": "Page-level reuse terms not inspected.",
+      "retention": "restoration-only; no source bytes or source-byte hash claimed.",
+      "restore": "Open the current city charter and boundary law; retrieve them with TLS validation and hash the bytes.",
+      "limit": "Boundary coincidence is a statutory statement for this municipality and does not independently validate source geometry."
+    },
+    {
+      "id": "hmao-administrative-territorial-law-43oz",
+      "url": "https://base.garant.ru/19022037/",
+      "role": "Secondary access copy of the HMAO-Yugra administrative-territorial law, identifying the separate administrative-territorial status list; retained only as a discovery lead, not primary evidence.",
+      "vintage": "Law 43-oz; date of current consolidated text not inspected.",
+      "retrieved_at": "2026-10-06 (secondary search-index extraction)",
+      "license": "Not assessed.",
+      "retention": "restoration-only; no bytes or hash claimed.",
+      "restore": "Find and retrieve the primary legislature/publisher text and verify all current amendments.",
+      "limit": "Secondary lead only. It is not used to assert current territorial facts."
+    }
+  ],
+  "retrieved_date": "2026-10-06"
+}
