@@ -207,9 +207,20 @@ def run_controls() -> dict:
         interrupted_output = {'outcome': 'passed', 'preserved_files': [reproduce.FILES[0]],
                               'preserved_sha256': partial_hash, 'retry_refused': True}
 
+    def aggregate_run(run: dict) -> str:
+        directory = OWNED / f"evidence/runs/2026-10-06/{'run-1' if run is run_one else 'run-2'}"
+        return sha(b''.join((directory / name).read_bytes() for name in reproduce.FILES))
+
+    run_one_sha = aggregate_run(run_one)
+    run_two_sha = aggregate_run(run_two)
+    if run_one_sha != run_two_sha:
+        raise AssertionError('positive report vintages differ across complete output sets')
     return {
         'version': 1,
         'issue': 1209,
+        'method_id': 'read-boundary-reproduction',
+        'kind': 'positive-control',
+        'outcome': 'passed',
         'runner_head': issue_inputs['runner']['commit'],
         'manifest_scope': 'exactly 224 Croatia #1199 subjects; read-boundary integrity only',
         'positive_runs': [run_one, run_two],
@@ -218,6 +229,17 @@ def run_controls() -> dict:
         'existing_output_control': existing_output,
         'unsafe_path_control': {'outcome': 'passed', 'traversal_rejected_before_reads': True},
         'interrupted_output_control': interrupted_output,
+        'validation_records': {
+            'positive-control': {'method_id': 'read-boundary-reproduction', 'kind': 'positive-control',
+                                 'outcome': 'passed', 'positive_run_count': 2,
+                                 'historical_output_sets_identical': True},
+            'negative-control': {'method_id': 'read-boundary-reproduction', 'kind': 'negative-control',
+                                 'outcome': 'passed', 'case_count': 5,
+                                 'rejections_created_no_destination': True},
+            'reproducibility': {'method_id': 'read-boundary-reproduction', 'kind': 'reproducibility',
+                                'outcome': 'passed', 'run_one_sha256': run_one_sha,
+                                'run_two_sha256': run_two_sha}
+        },
         'limits': [
             'The coherent synthetic parent-name fixture is a byte-integrity trigger, not evidence that any original Croatia parent label is wrong.',
             'These runs do not establish legal municipal boundaries, census-date geometry, official parentage, coast/island completeness or countrywide roster completeness.',
@@ -228,8 +250,12 @@ def run_controls() -> dict:
 
 if __name__ == '__main__':
     result = run_controls()
-    output = EVIDENCE / 'validation/controls.json'
-    output.parent.mkdir(parents=True, exist_ok=True)
+    validation = result.pop('validation_records')
+    output = EVIDENCE / 'validation/2026-10-06-final/controls.json'
+    output.parent.mkdir(parents=True, exist_ok=False)
+    for kind, record in validation.items():
+        with (output.parent / f'{kind}.json').open('xb') as stream:
+            stream.write((json.dumps(record, ensure_ascii=False, sort_keys=True, indent=2) + '\n').encode())
     with output.open('xb') as stream:
         stream.write((json.dumps(result, ensure_ascii=False, sort_keys=True, indent=2) + '\n').encode())
     print(json.dumps({'control_file': str(output.relative_to(ROOT)), 'sha256': sha(output.read_bytes()),
