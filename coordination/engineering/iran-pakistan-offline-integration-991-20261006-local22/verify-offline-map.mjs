@@ -160,8 +160,23 @@ try{
         const environments=[];
         for(let i=5;i<8;i++){assert.ok(values[i].trim()&&!values[i].includes('Unknown'),'Recomputed environmental reference must be visible');assert.equal(await page.locator('.profile-attributes dd').nth(i).locator('.reference-badge').textContent(),'Reference');environments.push(values[i]);}
         await page.locator('[data-mode="location"]').click();await page.locator('#close-details').click();await settled(page);
-        const eligible=cells.filter(c=>c.owner===subject.pixelIndex),camera=await screenSamples(page,renderer,eligible);
+        const eligible=cells.filter(c=>c.owner===subject.pixelIndex);
+        let camera=await screenSamples(page,renderer,eligible);
         assert.ok(camera.samples.length,'Reviewed new cells must be visible at the actual source-location camera');
+        if(camera.scale<4){
+          // Mouse client coordinates are integer screen pixels. A cell smaller
+          // than a pixel cannot be a reliable independent click probe.
+          const box=await page.locator('#map').boundingBox(),center=[box.x+box.width/2,box.y+box.height/2];
+          const nearest=[...camera.samples].sort((a,b)=>Math.hypot(a.screen[0]-center[0],a.screen[1]-center[1])-Math.hypot(b.screen[0]-center[0],b.screen[1]-center[1]))[0];
+          await page.mouse.move(...center);await page.mouse.down();
+          await page.mouse.move(center[0]+center[0]-nearest.screen[0],center[1]+center[1]-nearest.screen[1],{steps:12});await page.mouse.up();await settled(page);
+          for(let step=0;step<8;step++){
+            camera=await screenSamples(page,renderer,eligible);if(camera.scale>=4)break;
+            const frame=await page.locator('.atlas-pixel-canvas').getAttribute('data-frame');await page.locator('#zoom-in').click();
+            await page.waitForFunction(old=>document.querySelector('.atlas-pixel-canvas').dataset.frame!==old,frame);await settled(page);
+          }
+        }
+        assert.ok(camera.scale>=4&&camera.samples.length,'Independent click probes require visible cells at least four screen pixels wide');
         const probes=[camera.samples[0],camera.samples[Math.floor(camera.samples.length/2)],camera.samples.at(-1)];
         const picks=[];
         for(const probe of probes){
