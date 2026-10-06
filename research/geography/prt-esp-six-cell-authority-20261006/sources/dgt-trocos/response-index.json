@@ -1,0 +1,208 @@
+{
+  "version": 1,
+  "source": "DGT CAOP2025 Troços OGC API",
+  "retrieval_date": "2026-10-06",
+  "successful_responses": [
+    {
+      "name": "cell125663-99573",
+      "request_url": "https://ogcapi.dgterritorio.gov.pt/collections/trocos/items?f=json&bbox=-7.442926107885849%2C39.65847539227069%2C-7.440926107885848%2C39.66047539227068&limit=1000",
+      "client": "curl (default TLS certificate validation)",
+      "http_status": 200,
+      "bytes": 15176,
+      "sha256": "c3b4a8a976f94aade6586f35584de99ef77749f94d6e9dd3077e783e89a4e939",
+      "headers_file": "cell125663-99573.headers.txt",
+      "elapsed_seconds": 0.818,
+      "retrieved_at": "2026-10-06T19:44:47.443Z",
+      "content_type": "application/geo+json",
+      "response_headers_sha256": "25db87b814c5ec19dcbb197e45b3af1b6017b8a10b02a5362c3a1cbb5a28e309"
+    },
+    {
+      "name": "cell125752-99584",
+      "request_url": "https://ogcapi.dgterritorio.gov.pt/collections/trocos/items?f=json&bbox=-7.32071346398845%2C39.64684586349555%2C-7.318713463988449%2C39.648845863495545&limit=1000",
+      "client": "curl (default TLS certificate validation)",
+      "http_status": 200,
+      "bytes": 15176,
+      "sha256": "fb68ee03d75802f96d0123d0c9b2975254820ab9f996507452a26962e1acc76f",
+      "headers_file": "cell125752-99584.headers.txt",
+      "elapsed_seconds": 0.849,
+      "retrieved_at": "2026-10-06T19:44:46.624Z",
+      "content_type": "application/geo+json",
+      "response_headers_sha256": "39f575186fd3a6506dd5e5c59927a213ff50d39cfefb39bffd0936b18fe2a642"
+    },
+    {
+      "name": "cell125754-99583",
+      "request_url": "https://ogcapi.dgterritorio.gov.pt/collections/trocos/items?f=json&bbox=-7.31796711244021%2C39.647903174230095%2C-7.31596711244021%2C39.64990317423009&limit=1000",
+      "client": "curl (default TLS certificate validation)",
+      "http_status": 200,
+      "bytes": 15172,
+      "sha256": "e3e5706c95f1ce5bf839e2180f5cdcaa0d751879072c554c7fa9278cfa2d3d81",
+      "headers_file": "cell125754-99583.headers.txt",
+      "elapsed_seconds": 0.752,
+      "retrieved_at": "2026-10-06T19:44:45.775Z",
+      "content_type": "application/geo+json",
+      "response_headers_sha256": "71e38af04a5a9ac8aa6f72add4624d84dad71ff508ae501da177883ddc0df23f"
+    },
+    {
+      "name": "cell126053-99322",
+      "request_url": "https://ogcapi.dgterritorio.gov.pt/collections/trocos/items?f=json&bbox=-6.9073875559759825%2C39.92330811747299%2C-6.905387555975982%2C39.92530811747299&limit=1000",
+      "client": "curl (default TLS certificate validation)",
+      "http_status": 200,
+      "bytes": 46806,
+      "sha256": "e59adc0c3a497bce96f41a83269bac3b2768567f84a457b527b67d82fe6856e3",
+      "headers_file": "cell126053-99322.headers.txt",
+      "elapsed_seconds": 0.929,
+      "retrieved_at": "2026-10-06T19:44:45.022Z",
+      "content_type": "application/geo+json",
+      "response_headers_sha256": "b17383909a2ba93367ba2d292bdd4db57c9d6380bc8c0f652f92bf1c799b98eb"
+    },
+    {
+      "name": "cell126068-99272",
+      "request_url": "https://ogcapi.dgterritorio.gov.pt/collections/trocos/items?f=json&bbox=-6.886789919364072%2C39.97594180898698%2C-6.884789919364072%2C39.97794180898698&limit=1000",
+      "client": "curl (default TLS certificate validation)",
+      "http_status": 200,
+      "bytes": 46802,
+      "sha256": "e92b1d28da2f6654f6156dc1dda7df90bfdb38309169326b80cc56aba125c9e5",
+      "headers_file": "cell126068-99272.headers.txt",
+      "elapsed_seconds": 0.931,
+      "retrieved_at": "2026-10-06T19:44:44.092Z",
+      "content_type": "application/geo+json",
+      "response_headers_sha256": "b3605a23b886a6523d6dcd5393ce62998b8195f4a1fccae42621147edf041d4b"
+    },
+    {
+      "name": "cell126077-99248",
+      "request_url": "https://ogcapi.dgterritorio.gov.pt/collections/trocos/items?f=json&bbox=-6.874431337396909%2C40.001191593667016%2C-6.872431337396908%2C40.00319159366701&limit=1000",
+      "client": "curl (default TLS certificate validation)",
+      "http_status": 200,
+      "bytes": 46806,
+      "sha256": "1672620c614a195e0d0fe353749e148d65a0475a463c6f7b69432b28ccc8be00",
+      "headers_file": "cell126077-99248.headers.txt",
+      "elapsed_seconds": 0.943,
+      "retrieved_at": "2026-10-06T19:44:43.160Z",
+      "content_type": "application/geo+json",
+      "response_headers_sha256": "b23ef3eead77ad4aa14a5615f6a5f468be040d8a6a3d0f92c508bedcea6bc667"
+    },
+    {
+      "name": "collection",
+      "request_url": "https://ogcapi.dgterritorio.gov.pt/collections/trocos?f=json",
+      "client": "curl (default TLS certificate validation)",
+      "http_status": 200,
+      "bytes": 5043,
+      "sha256": "da7a217a0e5415ca7de68ad75c8bcd30dda91743cd0c6e933c88753086eaf71d",
+      "headers_file": "collection.headers.txt",
+      "elapsed_seconds": 1.032,
+      "retrieved_at": "2026-10-06T19:44:40.972Z",
+      "content_type": "application/json",
+      "response_headers_sha256": "46ceda3b54a1d9aaec9549621ba3682bdaf83345f1476bb3db702c48be8064b0"
+    },
+    {
+      "name": "queryables",
+      "request_url": "https://ogcapi.dgterritorio.gov.pt/collections/trocos/queryables?f=json",
+      "client": "curl (default TLS certificate validation)",
+      "http_status": 200,
+      "bytes": 1198,
+      "sha256": "7fa53677c9807293de30615526a32e5237e01e52983f0c410f233c227bb11e57",
+      "headers_file": "queryables.headers.txt",
+      "elapsed_seconds": 0.637,
+      "retrieved_at": "2026-10-06T19:44:41.612Z",
+      "content_type": "application/json",
+      "response_headers_sha256": "1e2d9e99371930082a59b0d2cf9446022ac276a93e56717ea9507e3ccd6db25f"
+    },
+    {
+      "name": "schema",
+      "request_url": "https://ogcapi.dgterritorio.gov.pt/collections/trocos/schema?f=json",
+      "client": "curl (default TLS certificate validation)",
+      "http_status": 200,
+      "bytes": 887,
+      "sha256": "1d36e973c411d68a9c834aeea4d4dde67d9bc6586873523c03cdc0d301a6e5a1",
+      "headers_file": "schema.headers.txt",
+      "elapsed_seconds": 0.603,
+      "retrieved_at": "2026-10-06T19:44:42.216Z",
+      "content_type": "application/json",
+      "response_headers_sha256": "a4a9f51739698e34c44426b739320c99ea44a2138e066cd3990acf0f575744bd"
+    }
+  ],
+  "failed_client_attempts": [
+    {
+      "name": "cell125663-99573",
+      "path": "cell125663-99573.failure.txt",
+      "url": "https://ogcapi.dgterritorio.gov.pt/collections/trocos/items?f=json&bbox=-7.442926107885849%2C39.65847539227069%2C-7.440926107885848%2C39.66047539227068&limit=1000",
+      "retrieved_at": "2026-10-06T19:44:18.711Z",
+      "client": "Python urllib with default certificate verification",
+      "result": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1056)>",
+      "body_sha256": "fdb3e9f4e5f02c190a5d17b8d6d695043f3ff2a6f29b91a8514bf31410d3bd4b"
+    },
+    {
+      "name": "cell125752-99584",
+      "path": "cell125752-99584.failure.txt",
+      "url": "https://ogcapi.dgterritorio.gov.pt/collections/trocos/items?f=json&bbox=-7.32071346398845%2C39.64684586349555%2C-7.318713463988449%2C39.648845863495545&limit=1000",
+      "retrieved_at": "2026-10-06T19:44:18.319Z",
+      "client": "Python urllib with default certificate verification",
+      "result": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1056)>",
+      "body_sha256": "32ac5ad9fbbfa4245fd96c7f27f32c0d1a187194d2f7e55ea1224f3f71de7cb6"
+    },
+    {
+      "name": "cell125754-99583",
+      "path": "cell125754-99583.failure.txt",
+      "url": "https://ogcapi.dgterritorio.gov.pt/collections/trocos/items?f=json&bbox=-7.31796711244021%2C39.647903174230095%2C-7.31596711244021%2C39.64990317423009&limit=1000",
+      "retrieved_at": "2026-10-06T19:44:17.924Z",
+      "client": "Python urllib with default certificate verification",
+      "result": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1056)>",
+      "body_sha256": "3e0c86a10382c1f54e61c87eddad891e397f2d49733372ef190e0202633f3ca5"
+    },
+    {
+      "name": "cell126053-99322",
+      "path": "cell126053-99322.failure.txt",
+      "url": "https://ogcapi.dgterritorio.gov.pt/collections/trocos/items?f=json&bbox=-6.9073875559759825%2C39.92330811747299%2C-6.905387555975982%2C39.92530811747299&limit=1000",
+      "retrieved_at": "2026-10-06T19:44:17.547Z",
+      "client": "Python urllib with default certificate verification",
+      "result": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1056)>",
+      "body_sha256": "12ec5797bff9a5456adc51831f358ccbce27bc8436f6f9ed7293681e9b59215a"
+    },
+    {
+      "name": "cell126068-99272",
+      "path": "cell126068-99272.failure.txt",
+      "url": "https://ogcapi.dgterritorio.gov.pt/collections/trocos/items?f=json&bbox=-6.886789919364072%2C39.97594180898698%2C-6.884789919364072%2C39.97794180898698&limit=1000",
+      "retrieved_at": "2026-10-06T19:44:17.156Z",
+      "client": "Python urllib with default certificate verification",
+      "result": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1056)>",
+      "body_sha256": "a196c0fa95bd728b327b4888752c0e64a332fb583df6297fea1ddf51e5fb4b17"
+    },
+    {
+      "name": "cell126077-99248",
+      "path": "cell126077-99248.failure.txt",
+      "url": "https://ogcapi.dgterritorio.gov.pt/collections/trocos/items?f=json&bbox=-6.874431337396909%2C40.001191593667016%2C-6.872431337396908%2C40.00319159366701&limit=1000",
+      "retrieved_at": "2026-10-06T19:44:16.792Z",
+      "client": "Python urllib with default certificate verification",
+      "result": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1056)>",
+      "body_sha256": "fb4878fd5fd471959715fc20a40bcecb3675b1815b7068f445472f1e5a04caf6"
+    },
+    {
+      "name": "collection",
+      "path": "collection.failure.txt",
+      "url": "https://ogcapi.dgterritorio.gov.pt/collections/trocos?f=json",
+      "retrieved_at": "2026-10-06T19:44:15.671Z",
+      "client": "Python urllib with default certificate verification",
+      "result": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1056)>",
+      "body_sha256": "cddc0f2faf98b967ee34ae6be24676efd9d3e400780140ee4e263520579d5474"
+    },
+    {
+      "name": "queryables",
+      "path": "queryables.failure.txt",
+      "url": "https://ogcapi.dgterritorio.gov.pt/collections/trocos/queryables?f=json",
+      "retrieved_at": "2026-10-06T19:44:16.040Z",
+      "client": "Python urllib with default certificate verification",
+      "result": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1056)>",
+      "body_sha256": "93dd1f5f73f6a4253f0856c7626a0385253281cdf7e9977e16441d1d07b8ecf8"
+    },
+    {
+      "name": "schema",
+      "path": "schema.failure.txt",
+      "url": "https://ogcapi.dgterritorio.gov.pt/collections/trocos/schema?f=json",
+      "retrieved_at": "2026-10-06T19:44:16.404Z",
+      "client": "Python urllib with default certificate verification",
+      "result": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1056)>",
+      "body_sha256": "5ffc2e8894b90029b48ca4e8e7da72c9edca54c3c9c163fdce13121f0ac4b1ec"
+    }
+  ],
+  "interpretation": "The urllib certificate failures are retained attempts by this machine client; corresponding official endpoint queries later succeeded with curl default TLS certificate verification. They are not treated as provider unavailability."
+}

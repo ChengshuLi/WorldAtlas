@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "method_id": "dgt-defined-segment-point-distance-epsg25829",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "purpose": "An exact first vertex from each returned full source LineString, transformed with the same EPSG:25829 projection, must have zero point-to-line distance.",
+  "cases": [
+    {
+      "cell_id": "cell126077/99248",
+      "source_feature_id": "d9492c5b-a667-11ee-a363-a76e0bcee2d6",
+      "exact_source_vertex_distance_m": 0.0,
+      "outcome": "passed"
+    },
+    {
+      "cell_id": "cell126068/99272",
+      "source_feature_id": "d9492c5b-a667-11ee-a363-a76e0bcee2d6",
+      "exact_source_vertex_distance_m": 0.0,
+      "outcome": "passed"
+    },
+    {
+      "cell_id": "cell126053/99322",
+      "source_feature_id": "d9492c5b-a667-11ee-a363-a76e0bcee2d6",
+      "exact_source_vertex_distance_m": 0.0,
+      "outcome": "passed"
+    },
+    {
+      "cell_id": "cell125754/99583",
+      "source_feature_id": "d95df7ee-a667-11ee-a363-773b75e2e95a",
+      "exact_source_vertex_distance_m": 0.0,
+      "outcome": "passed"
+    },
+    {
+      "cell_id": "cell125752/99584",
+      "source_feature_id": "d95df7ee-a667-11ee-a363-773b75e2e95a",
+      "exact_source_vertex_distance_m": 0.0,
+      "outcome": "passed"
+    },
+    {
+      "cell_id": "cell125663/99573",
+      "source_feature_id": "d95df7ee-a667-11ee-a363-773b75e2e95a",
+      "exact_source_vertex_distance_m": 0.0,
+      "outcome": "passed"
+    }
+  ]
+}
