@@ -1,0 +1,239 @@
+{
+  "all_complete_encoded_and_decoded_products_equal": true,
+  "changed_tiles": [
+    1272,
+    1273
+  ],
+  "current_counts": {
+    "components": 95173,
+    "contacts": 4889,
+    "fragments": 96962,
+    "residues": 343
+  },
+  "executed_code_commit": "d31c320fd3a71002a5c47cd72a20052e95c381a1",
+  "kind": "reproducibility",
+  "method_id": "actual-world-successor",
+  "original_counts": {
+    "components": 95174,
+    "contacts": 4889,
+    "fragments": 96963,
+    "residues": 343
+  },
+  "outcome": "passed",
+  "product_files": 26,
+  "products": [
+    {
+      "bytes": 1387,
+      "hash_kind": "file-bytes",
+      "path": "component-lineage-current-delta.json.gz",
+      "sha256": "e60d0dc22a8fc07c05574c5d2dd5c8dfb8a0d4549934056397e1b9fbf7d48b53",
+      "uncompressed_bytes": 3615,
+      "uncompressed_sha256": "83705f6342fc66ccee2ce0b922ea71b9719bfb74ba90befaeb19edb3e9223c6b"
+    },
+    {
+      "bytes": 2608186,
+      "hash_kind": "file-bytes",
+      "path": "component-lineage-original-00.json.gz",
+      "sha256": "6c1716ffb456af088cd971bbfe458f25d27f32b42461ff86d75a2e6dfbd15309",
+      "uncompressed_bytes": 8808989,
+      "uncompressed_sha256": "4d198d3086f2442cfadc79c8d6a68c3ab4f31f9600397d42091287746ce497f6"
+    },
+    {
+      "bytes": 2611617,
+      "hash_kind": "file-bytes",
+      "path": "component-lineage-original-01.json.gz",
+      "sha256": "2d4c2e01e2901d80b161c94d58dbe8118396fbc2884f0d3f438831b766cd653f",
+      "uncompressed_bytes": 8815460,
+      "uncompressed_sha256": "dc3c3251f5dafe25864f9c023df25528e8e3ca42e08076e7e518729e6398227e"
+    },
+    {
+      "bytes": 2610148,
+      "hash_kind": "file-bytes",
+      "path": "component-lineage-original-02.json.gz",
+      "sha256": "e7b13a079b9fefec1591a66c1e8bc29fc83b85e8dc7cd2d3db29135cc4bc3dd6",
+      "uncompressed_bytes": 8812541,
+      "uncompressed_sha256": "78cd40e79581538088fc9594cc32ce6dad1b124f95305c87e41df65796725cec"
+    },
+    {
+      "bytes": 2610902,
+      "hash_kind": "file-bytes",
+      "path": "component-lineage-original-03.json.gz",
+      "sha256": "2b3d6321ea37bad41251533288ad13314dd8bf1486c078da670425cfe913c8ea",
+      "uncompressed_bytes": 8815073,
+      "uncompressed_sha256": "014c27992c6af92d8e0ac407068a5128a4800f786942ea1c7777601c336a7d43"
+    },
+    {
+      "bytes": 1980702,
+      "hash_kind": "file-bytes",
+      "path": "component-lineage-original-04.json.gz",
+      "sha256": "01c8e0b078d766194209774149fc63b69c4e8785c45550f70fe457a88b09a6a7",
+      "uncompressed_bytes": 6686791,
+      "uncompressed_sha256": "9002f64c24be95d1fc18b28b0f82fd924141505dfa764cdbb8e55d060d6fb937"
+    },
+    {
+      "bytes": 2335,
+      "hash_kind": "file-bytes",
+      "path": "components-delta.json.gz",
+      "sha256": "21ad3c832ef294cae76d5e6603e61313fc2890a1a5653667caef8665374de460",
+      "uncompressed_bytes": 7011,
+      "uncompressed_sha256": "4b554e0194f7b3782bc2a8b1557832eb46fe5f2130fbb363429c18e43816512c"
+    },
+    {
+      "bytes": 209,
+      "hash_kind": "file-bytes",
+      "path": "contacts-delta.json.gz",
+      "sha256": "a5e36d1d48ad69d7f010561c35fc0f969be7fb211e8a00b1b855848922901a4f",
+      "uncompressed_bytes": 378,
+      "uncompressed_sha256": "2794e5846dfa64cb0591106f7685f29548c6bd72fd64a3c6b91fdfa75ef8947b"
+    },
+    {
+      "bytes": 181,
+      "hash_kind": "file-bytes",
+      "path": "custody/current-data_geographic-releases_current-manifest.json.gz",
+      "sha256": "3a10ae4f0689c0497a72e7e21c81f3c386bb14990435c7754ce502066507f54f",
+      "uncompressed_bytes": 215,
+      "uncompressed_sha256": "5bffef7aa5cf7f3256d648674ed66b4293ba545097bd9c32d85d8987cedc5178"
+    },
+    {
+      "bytes": 754194,
+      "hash_kind": "file-bytes",
+      "path": "custody/current-data_geography_part-11.json.gz",
+      "sha256": "77efb8761958d2fb4f58a8739a41d44df8f6df6eec30ad4ee96a6710ef0f9492",
+      "uncompressed_bytes": 5133018,
+      "uncompressed_sha256": "d1b2fb15c9427497de740eb33a529ef382b58cb319028f2aa38f5878de4c9b02"
+    },
+    {
+      "bytes": 644791,
+      "hash_kind": "file-bytes",
+      "path": "custody/current-data_geography_part-17.json.gz",
+      "sha256": "9a85f9f8c19be79a85928932e379b10d40f4bddb72f7fc2afd11fae689668188",
+      "uncompressed_bytes": 4948066,
+      "uncompressed_sha256": "1ae1a9ef25c1f71b66084aadf57933132383d4271b888ab38866905da5678af3"
+    },
+    {
+      "bytes": 174,
+      "hash_kind": "file-bytes",
+      "path": "custody/original-data_geographic-releases_current-manifest.json.gz",
+      "sha256": "d2bd3bff618b55fcf45355e635e6162f65a689db4b16993b606350c46a9e295e",
+      "uncompressed_bytes": 206,
+      "uncompressed_sha256": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81"
+    },
+    {
+      "bytes": 752471,
+      "hash_kind": "file-bytes",
+      "path": "custody/original-data_geography_part-11.json.gz",
+      "sha256": "04e746ffce5df833810b2b0576854a61949b127149514793a89cc4fa2b3ed4bb",
+      "uncompressed_bytes": 5131824,
+      "uncompressed_sha256": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f"
+    },
+    {
+      "bytes": 643149,
+      "hash_kind": "file-bytes",
+      "path": "custody/original-data_geography_part-17.json.gz",
+      "sha256": "df1764c00503601e30495bbe1bb787fa94d6731a628f5927c35d2f4bff899504",
+      "uncompressed_bytes": 4945828,
+      "uncompressed_sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db"
+    },
+    {
+      "bytes": 3400149,
+      "hash_kind": "file-bytes",
+      "path": "custody/unchanged-data_geography_part-29.json.gz",
+      "sha256": "7f3b041570ff703b353dc5d8940c95dbf54b9610fc0fce0831940a1c0fe28e91",
+      "uncompressed_bytes": 12932167,
+      "uncompressed_sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a"
+    },
+    {
+      "bytes": 4374,
+      "hash_kind": "file-bytes",
+      "path": "fragment-lineage.json.gz",
+      "sha256": "79abdb95f7d75c5d66e9ec63e77bce2c71bb1c6c799989e497a77918a5550034",
+      "uncompressed_bytes": 21409,
+      "uncompressed_sha256": "baad7bb98aeda0ce951ecf41d7ba1fcd60ad625167be83e86cc8f5905edd93f8"
+    },
+    {
+      "bytes": 2429,
+      "hash_kind": "file-bytes",
+      "path": "fragments-delta.json.gz",
+      "sha256": "4fa09fa384c6d53f106a88d44476f9b03d4955d4640a369f2d0272f82c9e72b2",
+      "uncompressed_bytes": 12877,
+      "uncompressed_sha256": "14e67078729a8914d5471cd9646f5bdcf53f6f29bc67c80e33da018c72ec91a7"
+    },
+    {
+      "bytes": 65206,
+      "hash_kind": "file-bytes",
+      "path": "report.json",
+      "sha256": "3d95a15d3797943290997c9a16fede48e6eb6e0941b0071a5fcd410375c49d46"
+    },
+    {
+      "bytes": 208,
+      "hash_kind": "file-bytes",
+      "path": "residues-delta.json.gz",
+      "sha256": "7a53944b4cfbff2e824272381d62ceab720b924288cd06a07df30f33dd6a6a98",
+      "uncompressed_bytes": 375,
+      "uncompressed_sha256": "cf9ee299a16b56ea82f39e523b0f4ed22d61b4bb2d3924ef15cf04276c137c2e"
+    },
+    {
+      "bytes": 27531,
+      "hash_kind": "file-bytes",
+      "path": "source-custody.json",
+      "sha256": "c88ca151ba2400c68541152c22315fb7bbe621d09e103ea9098e2f60f73c1cb9"
+    },
+    {
+      "bytes": 2485736,
+      "hash_kind": "file-bytes",
+      "path": "source-feature-bindings-00.json.gz",
+      "sha256": "f886934cf2e16955f8593705ec09caddce3d946809d5b11a7580e6a6222b11b2",
+      "uncompressed_bytes": 11627247,
+      "uncompressed_sha256": "82908eefed0627edc19a78dd81eefd7f0f2b20468151b165b7a9e83ccd37e9c4"
+    },
+    {
+      "bytes": 2497382,
+      "hash_kind": "file-bytes",
+      "path": "source-feature-bindings-01.json.gz",
+      "sha256": "4c2704bc18c6f8a733f7bd0e3d244b17e7e8047c1d4f8c680551a64fb8f737ab",
+      "uncompressed_bytes": 11621684,
+      "uncompressed_sha256": "c4fef0bb5406af5b2e50add29e2ae8f2371cdc47d50ca6b05a78fb18004d26d2"
+    },
+    {
+      "bytes": 2577445,
+      "hash_kind": "file-bytes",
+      "path": "source-feature-bindings-02.json.gz",
+      "sha256": "43371a2da4a388e1da554fb65b750a7a8dde741452638f0c36b11fab799f16de",
+      "uncompressed_bytes": 11632112,
+      "uncompressed_sha256": "c26fbfde36dbd994d229997d83da7df0ef61e1e9ed033e4f69b9c0d28b41e718"
+    },
+    {
+      "bytes": 2564664,
+      "hash_kind": "file-bytes",
+      "path": "source-feature-bindings-03.json.gz",
+      "sha256": "704648839aecafb8c91bee290871eb693f4dc220c636fc9165821ee9b2d2ae9c",
+      "uncompressed_bytes": 11634049,
+      "uncompressed_sha256": "2f2390c457882bcef1957e5a318720677577abb7c0ea797f8017ac992056e891"
+    },
+    {
+      "bytes": 2403708,
+      "hash_kind": "file-bytes",
+      "path": "source-feature-bindings-04.json.gz",
+      "sha256": "a493280fc146c89780e125801c98b612d6bfd84bbb3f6597e28ba48a90d0c1fc",
+      "uncompressed_bytes": 11197611,
+      "uncompressed_sha256": "645c2e90151d5f682d810368dbe2b2ff7425d1e672cac5822019330477d0dbfb"
+    },
+    {
+      "bytes": 709806,
+      "hash_kind": "file-bytes",
+      "path": "tile-queries.json.gz",
+      "sha256": "b8fed5cc5c6cfb519e86a4ba06926e87b67e063f1765a0f1c5f6af4d64309b84",
+      "uncompressed_bytes": 6326165,
+      "uncompressed_sha256": "7e65a24a8612dbfe06201268281581a148f7aa0e756d06b08725e457eadf20f9"
+    }
+  ],
+  "run_one_sha256": "137fb2f9e7a74bd9fa45882769a33d7c2a09f7c6ace01cb82a18c6bd95bd1264",
+  "run_two_sha256": "137fb2f9e7a74bd9fa45882769a33d7c2a09f7c6ace01cb82a18c6bd95bd1264",
+  "selected_input_commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+  "source_binary64_geometry_changes": 2,
+  "source_canonical_feature_changes": 2063,
+  "source_runs": "Two independently executed complete generations; ordinary run-one complete payloads bound here. Both private run directories retained in full.",
+  "transport_executed_commit": "437ad998357a5421e4b611ffa6d2597a58d3e5ee",
+  "transport_runs_equal": true,
+  "version": "complete-successor-two-runs-v1"
+}

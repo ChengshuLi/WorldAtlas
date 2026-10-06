@@ -1,0 +1,62 @@
+{
+  "executed_packaging_commit": "437ad998357a5421e4b611ffa6d2597a58d3e5ee",
+  "limits": "Transport only: actual numerical source reads are recorded by the separately committed worldwide producer.",
+  "relations": [
+    {
+      "decoded_relation": {
+        "decoded_bytes": 11979437,
+        "decoded_sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a",
+        "encoded_bytes": 3445252,
+        "encoded_sha256": "9a3853ebbd9bb90e0469bb68f0ddf1afd1342631389ab4b12c655eac19c98d46",
+        "gzip_layers": 1
+      },
+      "encoded": {
+        "bytes": 3445252,
+        "hash_kind": "file-bytes",
+        "path": "data_geography_part-30.json.gz",
+        "sha256": "9a3853ebbd9bb90e0469bb68f0ddf1afd1342631389ab4b12c655eac19c98d46",
+        "uncompressed_bytes": 11979437,
+        "uncompressed_sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a"
+      },
+      "source": {
+        "bytes": 11979437,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-30.json",
+        "sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a"
+      },
+      "source_commits": [
+        "548c5f89f00271050823076a84695bb41e1b8454",
+        "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+      ]
+    },
+    {
+      "decoded_relation": {
+        "decoded_bytes": 10211739,
+        "decoded_sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64",
+        "encoded_bytes": 3336091,
+        "encoded_sha256": "1219ae2f8acb59793df14e17963784e7ee26d6311d86c55ce6723698871ade1e",
+        "gzip_layers": 1
+      },
+      "encoded": {
+        "bytes": 3336091,
+        "hash_kind": "file-bytes",
+        "path": "data_geography_part-32.json.gz",
+        "sha256": "1219ae2f8acb59793df14e17963784e7ee26d6311d86c55ce6723698871ade1e",
+        "uncompressed_bytes": 10211739,
+        "uncompressed_sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64"
+      },
+      "source": {
+        "bytes": 10211739,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-32.json",
+        "sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64"
+      },
+      "source_commits": [
+        "548c5f89f00271050823076a84695bb41e1b8454",
+        "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f"
+      ]
+    }
+  ],
+  "scientific_producer_commit": "d31c320fd3a71002a5c47cd72a20052e95c381a1",
+  "version": "whole-source-lossless-transport-v1"
+}
