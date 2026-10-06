@@ -5,7 +5,7 @@ import {gunzipSync} from 'node:zlib';
 import {createHash} from 'node:crypto';
 import {compileNativeRuntime} from '../src/native-runtime.js';
 import {compileNativeLocationContext,nativeDisplayContext} from '../src/native-location-context.js';
-import {pickOwnership} from '../src/pixel-ownership.js';
+import {pickOwnership,ownershipRun} from '../src/pixel-ownership.js';
 import {projectCell} from '../src/pixel-grid.js';
 const size=262166,raw=gunzipSync(fs.readFileSync('coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz'));
 const latitudes=Float64Array.from({length:size},(_,y)=>raw.readDoubleLE(y*8));
@@ -58,4 +58,26 @@ test('changed source, original owner mapping, duplicate IDs, malformed geometry 
   signal:controller.signal,onProgress:()=>controller.abort()}),{name:'AbortError'});
  const corrupt=new Float64Array(latitudes);corrupt[0]+=1e-8;
  await assert.rejects(compileNativeLocationContext({referenceFeatures:reference,features:reference,base,latitudes:corrupt}),/latitude rule/);
+});
+
+
+test('streamed reuse coalesces adjacent fragments without changing dense owners or untouched gaps',async()=>{
+ let row=-1,index=-1,run;
+ for(let y=0;y<size&&row<0;y++)for(let n=base.rows[y*2];n<base.rows[y*2]+base.rows[y*2+1];n++){
+  const candidate=ownershipRun(base,n);
+  if(candidate.end-candidate.start>2){row=y;index=n;run=candidate;break;}
+ }
+ assert.ok(row>=0);
+ const runs=new Uint32Array(base.runs.length+2),rows=new Uint32Array(base.rows);
+ runs.set(base.runs.subarray(0,index*2));
+ const middle=run.start+1,factor=2**19,ownerBase=2**13;
+ const encode=(offset,start,end)=>{runs[offset]=run.id%ownerBase*factor+start;runs[offset+1]=Math.floor(run.id/ownerBase)*factor+end-1;};
+ encode(index*2,run.start,middle);encode(index*2+2,middle,run.end);
+ runs.set(base.runs.subarray(index*2+2),index*2+4);
+ rows[row*2+1]++;
+ for(let y=row+1;y<size;y++)rows[y*2]++;
+ const result=await compileNativeLocationContext({referenceFeatures:reference,features:reference,base:{...base,rows,runs},latitudes});
+ const expected=await compileNativeRuntime(result.context.features.map((f,i)=>({...f,pixelIndex:i+1})),{size,latitudes});
+ assert.deepEqual(result.grid.rows,expected.rows);assert.deepEqual(result.grid.runs,expected.runs);
+ assert.equal(result.accounting.recomputedRows,0);
 });

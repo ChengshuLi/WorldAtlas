@@ -1,0 +1,17 @@
+✔ native selection waits for matching worker result and terminates after ready (1.65275ms)
+✔ selection abort stops actual worker lifecycle and ignores late result (0.535083ms)
+✔ malformed grid, changed display identity, worker failure and callback failure reject without ready map (0.789958ms)
+✔ dated removal, replacement, holes and additions equal complete native compilation over every canonical row/run (1052.154042ms)
+✔ dated metadata changes reuse all native reference rows with explicit dense identity mapping (278.476375ms)
+✔ changed source, original owner mapping, duplicate IDs, malformed geometry and cancellation reject without partial output (40.138959ms)
+✔ actual year-selection code retains coherent old date until changed native grid is ready (2.434292ms)
+✔ an old native result cannot replace a newer selected year even if worker completion ignores abort (1.760792ms)
+✔ same-count identity replacement loads native source geometry and prepares a new display mapping (0.466875ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1607.884208

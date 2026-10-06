@@ -1,7 +1,6 @@
 import {nativePolygonIntervals, NATIVE_GRID_METHOD} from './native-grid.js';
 import {nativeRuntimeIndex} from './native-runtime.js';
 import {coverageRow} from '../scripts/audit-grid-intervals.mjs';
-import {ownershipRun} from './pixel-ownership.js';
 import {LATITUDE_DIGEST} from './ownership-method.js';
 
 const digest = async bytes => Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', bytes)),
@@ -113,35 +112,47 @@ export async function compileNativeLocationContext({referenceFeatures, features,
     await yieldTask();
     first = end;
   }
-  const rowSegments = y => {
-    if (changedRows.has(y)) return changedRows.get(y);
-    const result = [], first = base.rows[y * 2], end = first + base.rows[y * 2 + 1];
+  const factor = 2 ** 19, ownerBase = 2 ** 13;
+  // Stream reference runs rather than allocating tens of millions of temporary
+  // segment objects twice. Preserve exactly the same adjacency coalescing rule.
+  const visitRow = (y, visit) => {
+    if (changedRows.has(y)) {
+      for (const {start, end, id} of changedRows.get(y)) visit(start, end, id);
+      return;
+    }
+    const first = base.rows[y * 2], end = first + base.rows[y * 2 + 1];
+    let pendingStart = 0, pendingEnd = 0, pendingId = 0;
     for (let n = first; n < end; n++) {
-      const run = ownershipRun(base, n), id = ownerMap.get(run.id);
+      const wordOne = base.runs[n * 2], wordTwo = base.runs[n * 2 + 1];
+      const start = wordOne % factor, runEnd = wordTwo % factor + 1;
+      const originalOwner = Math.floor(wordOne / factor) + Math.floor(wordTwo / factor) * ownerBase;
+      const id = ownerMap.get(originalOwner);
       if (id === undefined) throw Error('Reference grid owner lacks a stable identity');
       if (!id) throw Error('Removed reference owner appeared outside its native affected rows');
-      const previous = result.at(-1);
-      if (previous?.id === id && previous.end === run.start) previous.end = run.end;
-      else result.push({...run, id});
+      if (pendingId === id && pendingEnd === start) pendingEnd = runEnd;
+      else {
+        if (pendingId) visit(pendingStart, pendingEnd, pendingId);
+        pendingStart = start; pendingEnd = runEnd; pendingId = id;
+      }
     }
-    return result;
+    if (pendingId) visit(pendingStart, pendingEnd, pendingId);
   };
   const rows = new Uint32Array(base.size * 2);
   let count = 0;
   for (let y = 0; y < base.size; y++) {
     signal?.throwIfAborted(); rows[y * 2] = count;
-    const n = rowSegments(y).length; rows[y * 2 + 1] = n; count += n;
+    let n = 0; visitRow(y, () => n++); rows[y * 2 + 1] = n; count += n;
     if (y % 4096 === 0) await yieldTask();
   }
   if (count > 2 ** 32 - 1) throw Error('Native context exceeds row-offset capacity');
-  const runs = new Uint32Array(count * 2), factor = 2 ** 19, ownerBase = 2 ** 13;
+  const runs = new Uint32Array(count * 2);
   let offset = 0;
   for (let y = 0; y < base.size; y++) {
     signal?.throwIfAborted();
-    for (const {start, end, id} of rowSegments(y)) {
+    visitRow(y, (start, end, id) => {
       runs[offset++] = id % ownerBase * factor + start;
       runs[offset++] = Math.floor(id / ownerBase) * factor + end - 1;
-    }
+    });
     if (y % 4096 === 0) await yieldTask();
   }
   return {grid: {version: 2, coordinateBits: 19, size: base.size, method: NATIVE_GRID_METHOD, rows, runs},
