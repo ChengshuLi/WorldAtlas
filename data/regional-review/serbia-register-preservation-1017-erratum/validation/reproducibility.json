@@ -1,0 +1,16 @@
+{
+  "method_id": "serbia-register-preservation",
+  "outcome": "passed",
+  "kind": "reproducibility",
+  "run_one_sha256": "b83592ccafc795562e283b77590f51dc9dd238c946cae15bd1e28e1777b931fa",
+  "run_two_sha256": "b83592ccafc795562e283b77590f51dc9dd238c946cae15bd1e28e1777b931fa",
+  "run_one": "outputs/run-20261006-a",
+  "run_two": "outputs/run-20261006-b",
+  "products": [
+    "sources/derived/subject-crosswalk.csv",
+    "sources/derived/parent-register-comparison.csv",
+    "sources/derived/neighboring-city-municipality-context.csv",
+    "sources/derived/reproduction-summary.json",
+    "validation/controls.json"
+  ]
+}

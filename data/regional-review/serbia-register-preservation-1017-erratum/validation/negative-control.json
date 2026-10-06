@@ -1,0 +1,25 @@
+{
+  "method_id": "serbia-register-preservation",
+  "outcome": "passed",
+  "kind": "negative-control",
+  "checks": [
+    "missing subject rejected by production scope validator",
+    "duplicate subject rejected by production scope validator",
+    "outside-roster subject rejected by production scope validator",
+    "mutated whole-file input rejected by production pin verifier",
+    "pre-existing fifth output rejected by actual CLI before any earlier destination was created"
+  ],
+  "actual_cli_preexisting_output": {
+    "outcome": "passed",
+    "sentinel_sha256": "9eda654c7cd90dca40efb5c10a9d2af184b9ba881c842ae0c97077ed50b1feae",
+    "first_four_created": false,
+    "five_historical_outputs_unchanged": true
+  },
+  "historical_output_hashes": {
+    "sources/derived/subject-crosswalk.csv": "c3e30e6d773056f55e20a39b073beff54eadc485bc547931f36f7e5c134e926f",
+    "sources/derived/parent-register-comparison.csv": "55202bca39e3bd5e5df17afaf398af8b687f8973788fb163dbe883be47469a29",
+    "sources/derived/neighboring-city-municipality-context.csv": "dee71868bcad9d57b4b9806f3fc30eb1f0ddee0ea4c0abd486e464daa0c29c69",
+    "sources/derived/reproduction-summary.json": "01246dc83a59a5a9029c6e953f22889e989d3168dd312c59c4f04576b5e9d1af",
+    "validation/controls.json": "c7aa5fcfd04119d66800c3fca8764c647b1a6fa3c896203f6ec5e72b1a8013a2"
+  }
+}
