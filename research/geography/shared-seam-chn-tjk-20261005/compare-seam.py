@@ -309,7 +309,7 @@ def execute(vintage):
     # Positive control: this exact native CHN pair shares a recorded line.
     positive_geom = source_geometries[SUBJECTS[0]].boundary.intersection(source_geometries[SUBJECTS[1]].boundary)
     positive = {
-        'method_id': 'chn-tjk-native-seam', 'kind': 'geography', 'outcome': 'passed',
+        'method_id': 'chn-tjk-native-seam', 'kind': 'positive-control', 'outcome': 'passed',
         'control': 'Positive geographic control: the two CHN source members share a line contact.',
         'geometry': geometry_record(positive_geom), 'assertions': {
             'contact_is_nonempty': not positive_geom.is_empty,
@@ -321,7 +321,7 @@ def execute(vintage):
     negative_b = box(83.0, 37.0, 83.1, 37.1)
     negative_geom = negative_a.intersection(negative_b)
     negative = {
-        'method_id': 'chn-tjk-native-seam', 'kind': 'geography', 'outcome': 'passed',
+        'method_id': 'chn-tjk-native-seam', 'kind': 'negative-control', 'outcome': 'passed',
         'control': 'Negative numerical control: disjoint analytic EPSG:4326 rectangles return an empty intersection; this does not assert any geographic fact.',
         'geometry': geometry_record(negative_geom), 'assertions': {
             'intersection_is_empty': negative_geom.is_empty,
@@ -413,8 +413,8 @@ def main():
     # independent process runs have completed.
     current, *_ = baselines()
     root = REPO / OWNED
-    run_one = root / 'vintages/final-one-20261006'
-    run_two = root / 'vintages/final-two-20261006'
+    run_one = root / 'vintages/final-one-r2-20261006'
+    run_two = root / 'vintages/final-two-r2-20261006'
     names = ['comparison.json', 'source-crosswalk.json', 'input-envelope-readback.json',
         'positive-control.json', 'negative-control.json']
     hashes_one = {name: sha256((run_one / name).read_bytes()) for name in names}
@@ -422,9 +422,9 @@ def main():
     one = (run_one / 'comparison.json').read_bytes()
     two = (run_two / 'comparison.json').read_bytes()
     doc = {
-        'method_id': 'chn-tjk-native-seam', 'kind': 'geography', 'outcome': 'passed',
-        'run_one_path': OWNED + 'vintages/run-one-20261006/comparison.json',
-        'run_two_path': OWNED + 'vintages/run-two-20261006/comparison.json',
+        'method_id': 'chn-tjk-native-seam', 'kind': 'reproducibility', 'outcome': 'passed',
+        'run_one_path': OWNED + 'vintages/final-one-r2-20261006/comparison.json',
+        'run_two_path': OWNED + 'vintages/final-two-r2-20261006/comparison.json',
         'run_one_sha256': sha256(one), 'run_two_sha256': sha256(two),
         'run_one_output_sha256': hashes_one, 'run_two_output_sha256': hashes_two,
         'all_outputs_equal': hashes_one == hashes_two,
