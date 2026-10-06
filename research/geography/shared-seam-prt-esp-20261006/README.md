@@ -1,0 +1,23 @@
+# Portugal–Spain shared-seam source investigation
+
+This packet is bounded to the seven subjects and the retained component named in issue #1106. It asks whether present official administrative source records can be traced to one another across this segment. It does not make an ownership, physical-land, dry-land, or map-repair finding.
+
+## Acquisition and evidence plan
+
+The baseline is commit `27be77596f23304de6a720735538427e6d23e242`. The issue-pinned release, grid, hierarchy, full-gap shard/report, and triage report/inputs hashes were verified against that commit before source acquisition. The managed sparse author slot passed `local-workspace.mjs check` immediately before planning; at that check it had 13,673,660,416 bytes free and 37,577,379,840 bytes of existing checkouts against the 10 GiB minimum-free and 50 GiB checkout limits.
+
+The pinned geoBoundaries Spain ADM3 original is 149,105,849 bytes and its expected SHA-256 is `e5bfa1c3889ea763ca2bb82c7f1e8ff9eff715dcb99ce405293a03de7ac85862`. It will be acquired as five contiguous raw byte ranges: four chunks of 33,554,432 bytes and a final chunk of 14,888,121 bytes, with offsets and per-chunk hashes recorded. The exact final length follows from the pinned total (`149,105,849 - 4 × 33,554,432 = 14,888,121`). The parts reconstruct the original byte-for-byte; no clipping, simplification, export, or feature-only substitute is permitted. Each part is below the 32 MiB evidence descriptor limit; the total reassembled input is counted once (not in addition to the parts) in the 256 MiB declared-input budget. Temporary reassembly is for verification and analysis only and will be removed after the receipt is written.
+
+The pinned geoBoundaries Portugal ADM2 original is 415,110 bytes with expected SHA-256 `f7a9143190715b85812b03617adc4879898b8c6a6789b9c9732c9705ea6c21ac`; its whole original will be retained unchanged. Four complete CAOP2025 native municipality feature responses and the complete direct CNIG/IGN administrative-boundary item responses are separately retained as source API items. A bounded IGN bbox response is retained only as a discovery response: bbox selects which complete features the service returns and does not clip their geometries; this response is neither the national source dataset nor an original national export. Its route, parameters, service version/metadata, retrieval timestamp, length, and hash will be recorded.
+
+The complete DGT CAOP2025 mainland GPKG archive (111,647,845 bytes) and CNIG national SHP/GML products (the catalog lists the SHP at 156.96 MB and GML at 63.18 MB) will not be downloaded in addition to the exact native API items. The packet will state that choice explicitly and will not describe API items or discovery responses as complete national files. DGT/CAOP administrative-cartographic role and an IGN line record's `legalstatus` are distinct source attributes; neither alone proves a jointly authoritative international line. The IGN municipal records returned so far are marked `agreed` with method 3, while the Spain–Portugal country line record reports an unpopulated legal status. That discrepancy remains open pending record-level review and exact member crosswalk.
+
+Before any source transfer, the allocator is rechecked. The current positive headroom is ample for the roughly 150 MB partitioned Spain source plus the small Portugal, DGT, and IGN feature items while retaining more than the 10 GiB free-space threshold. Any new size or storage change that would breach local evidence limits stops acquisition pending a reviewed partition plan.
+
+## Interpretation limits
+
+Source membership, aliases, vintages, geometry contacts, component overlap, nonpolygon/tiny remnants, and failed operations will be reported separately. No snap, buffer, geometry repair, nearest-owner assignment, fill, or disputed territorial inference is allowed. Water, seasonal channel position, legal coordinate realization, datum/registration uncertainty, and the limited-AOI pilot stay unknown unless a directly relevant source resolves them.
+
+## Evidence status
+
+This file is the pre-acquisition plan. It is not a source verification or a scientific result. Acquisition receipts, the reproducible method, two post-commit source runs, and independent exact-head review will be added before a proposal or precise missing-evidence finding is considered complete.
