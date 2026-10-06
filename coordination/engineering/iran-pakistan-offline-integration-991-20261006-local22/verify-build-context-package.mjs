@@ -4,12 +4,12 @@ import path from 'node:path';
 import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
-import {gunzipSync} from 'node:zlib';
+import {gunzipSync,gzipSync} from 'node:zlib';
 import {pathToFileURL} from 'node:url';
 import {committedPreparationFiles,requirePlainExecution} from '../../../scripts/native-ownership/native-preparation-guards.mjs';
 requirePlainExecution();
 const root=process.cwd(),prefix='coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22',head=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
-const image=path.join(root,'.cache/reference-repair-991/build-context-image-v3');
+const image=path.join(root,'.cache/reference-repair-991/build-context-image-v4');
 if(fs.existsSync(image))throw Error('Fresh context image required');
 const producer=committedPreparationFiles(root,head,['package.json',prefix+'/verify-build-context-package.mjs','scripts/native-ownership/native-preparation-guards.mjs']);
 const stagePath=prefix+'/migrated-build-context-v4/manifest.json',stage=JSON.parse(fs.readFileSync(stagePath)),old=JSON.parse(fs.readFileSync(stage.original_stage.path));
@@ -35,6 +35,18 @@ try{
  const initial=fs.readFileSync(stagePath),controls=[];
  for(const [name,mutate] of cases){const value=JSON.parse(initial);mutate(value);fs.writeFileSync(stagePath,JSON.stringify(value));await assert.rejects(()=>validateBuildContextStage({root:image,stagePath,expectedReference}));controls.push(name);}
  fs.writeFileSync(stagePath,initial);
+ const registryRaw=fs.readFileSync(stage.releases.path),corruptRegistry=structuredClone(registry),corruptStage=JSON.parse(initial);
+ corruptRegistry.releases.at(-2).metadata={...corruptRegistry.releases.at(-2).metadata,unreceipted_source_revision:'invalid'};
+ const corruptBytes=gzipSync(Buffer.from(JSON.stringify(corruptRegistry)));
+ corruptStage.releases={...corruptStage.releases,bytes:corruptBytes.length,sha256:sha(corruptBytes)};
+ fs.writeFileSync(stage.releases.path,corruptBytes);fs.writeFileSync(stagePath,JSON.stringify(corruptStage));
+ await assert.rejects(()=>validateBuildContextStage({root:image,stagePath,expectedReference}),/Original release records changed/);
+ controls.push('modified-predecessor-source-record');fs.writeFileSync(stage.releases.path,registryRaw);fs.writeFileSync(stagePath,initial);
+ const extraStage=JSON.parse(initial),extraPin=old.immutable_snapshots.find(p=>p.commit===old.transform.original_commit&&p.path==='data/geography/part-0.json');
+ extraStage.original_snapshot_overrides.push({commit:extraPin.commit,original_path:extraPin.path,path:extraPin.snapshot_path,bytes:extraPin.bytes,sha256:extraPin.sha256});
+ fs.writeFileSync(stagePath,JSON.stringify(extraStage));
+ await assert.rejects(()=>validateBuildContextStage({root:image,stagePath,expectedReference}),/outside the exact subjects/);
+ controls.push('unrelated-source-snapshot-override');fs.writeFileSync(stagePath,initial);
  const report={execution_commit:head,producer,image_inventory:inventory,package_has_git:false,replaced_current_inputs:['data/geography/part-11.json','data/geography/part-17.json','data/geographic-releases/current-manifest.json'],original_snapshot_aliases_validated:true,receipt:result.receipt,negative_controls:controls,installed:false,published:false};
- fs.writeFileSync(path.join(root,prefix,'migrated-build-context-package-verification-v3.json'),JSON.stringify(report)+'\n',{flag:'wx'});console.log(JSON.stringify({locations:49625,package_has_git:false,negative_controls:controls.length,migration_budget:result.receipt.budget}));
+ fs.writeFileSync(path.join(root,prefix,'migrated-build-context-package-verification-v4.json'),JSON.stringify(report)+'\n',{flag:'wx'});console.log(JSON.stringify({locations:49625,package_has_git:false,negative_controls:controls.length,migration_budget:result.receipt.budget}));
 }finally{process.chdir(originalCwd);delete process.env.WORLDATLAS_PACKAGE_STAGE;}
