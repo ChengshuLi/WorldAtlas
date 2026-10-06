@@ -209,8 +209,10 @@ fresh tested candidate with the same reviewed head. Closing a PR withdraws its
 request; its registrations/results remain preserved on the closed PR.
 
 The CLI observes for 65 minutes, then reports its request ID without cancelling
-anything. Resume observation/idempotent registration using
-`--request-id ORIGINAL-REQUEST-ID`; duplicates retain the original FIFO ticket.
+anything. Resume read-only observation using
+`--request-id ORIGINAL-REQUEST-ID --observe`; the existing registration retains
+its original FIFO ticket. An absent or uncertain registration is inspected rather
+than automatically resubmitted. Omit `--request-id` only for a genuinely new request.
 Existing author checkouts can contain the old helper. After rollout, invoke the
 updated helper from the trusted primary checkout by its absolute path, keeping
 the current working directory in your managed author slot so verified local
