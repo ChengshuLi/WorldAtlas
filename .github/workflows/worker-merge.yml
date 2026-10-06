@@ -188,7 +188,7 @@ jobs:
     needs: [prepare, integration, geography]
     if: always() && needs.prepare.result == 'success'
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 75
     permissions:
       contents: write
       pull-requests: write
@@ -214,6 +214,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           QUEUE_ADMISSION: 'required'
           MERGE_PHASE: merge
+          FINAL_CAPACITY: 'required'
           CANDIDATE_REF: ${{ needs.prepare.outputs.candidate_ref }}
           TESTED_BASE: ${{ needs.prepare.outputs.base }}
           TESTED_CANDIDATE: ${{ needs.prepare.outputs.candidate }}

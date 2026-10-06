@@ -4,6 +4,7 @@ import {integrationProof} from './integration-proof.mjs';
 import {githubPages, linkedPulls, verifyClaimForPR, workSpec} from './issue-claim-contract.mjs';
 import {validateIssuePRBody, validateLanePaths} from './check-handoff-scope.mjs';
 import {checkPremergeEvidence} from './premerge-evidence.mjs';
+import {beginFinalPlanning, paceFinalValidation, finalRequestBudget} from './final-capacity.mjs';
 import {memoizeImmutableGitBlobs} from './immutable-git-blobs.mjs';
 import {evidenceRequirement} from './evidence-policy.mjs';
 
@@ -303,9 +304,18 @@ export async function prepareIntegration(options) {
   }
 }
 export async function completeIntegration(options) {
-  options = {...options, api: memoizeImmutableGitBlobs(options.api)};
+  const capacityBudget = options.finalCapacity ? finalRequestBudget(options.api) : null;
+  options = {...options, ...(capacityBudget ? {capacityBudget} : {}),
+    api: memoizeImmutableGitBlobs(capacityBudget?.api ?? options.api)};
   need(options.integrationResult === 'success' || options.integrationResult === 'skipped',
     'Integration tests failed or were cancelled; no merge performed');
+  let capacity = null;
+  if (options.finalCapacity) {
+    need(options.geographyResult === 'success', 'Trusted combined geography check missing, failed or cancelled; no merge performed');
+    options = await beginFinalPlanning(options);
+    const paced = await paceFinalValidation(options, {inspect: inspectMerge, admission: options.finalAdmission});
+    options = {...options, api: paced.api}; capacity = paced.receipt;
+  }
   // Rejection-only fast path: known stale base/head cannot benefit from the
   // expensive full evidence inventory. Eligible/replayed requests still run
   // every normal trusted validation and the later final base guard.
@@ -374,6 +384,7 @@ export async function completeIntegration(options) {
   });
   need(merged.merged, 'GitHub did not merge the PR');
   return {accepted: true, merge_commit: merged.sha, title: state.pr.title, github_issue: state.issue.number,
+    ...(capacity ? {final_capacity: capacity} : {}),
     geography: {status: 'passed', trusted_code_commit: state.base, candidate_commit: options.testedCandidate,
       report_sha256: options.geographyReportHash, adjudication: geography.adjudication ?? null},
     tested_base: state.base, tested_candidate: options.testedCandidate, reviewed_head: state.pr.head.sha, evidence: state.evidence, proof,
