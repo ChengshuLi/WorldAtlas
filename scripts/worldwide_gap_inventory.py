@@ -39,7 +39,8 @@ def verify(raw, row):
 
 
 def require_equivalent(original, selected):
-    if original != selected:
+    equal = original == selected if isinstance(original, (bytes, str)) else canonical_json(original) == canonical_json(selected)
+    if not equal:
         raise ValueError('Changed operand/order/status requires recomputation; identity reuse refused')
 
 
