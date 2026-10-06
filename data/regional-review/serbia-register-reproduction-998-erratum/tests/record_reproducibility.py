@@ -45,7 +45,7 @@ exact = [row["path"] for row in first["files"] if row["path"] != "reproduction-s
 summary = next(row for row in first["files"] if row["path"] == "reproduction-summary.json")
 result = {
     "method_id": "serbia-guarded-two-run-reproduction-v1",
-    "kind": "generator",
+    "kind": "reproducibility",
     "outcome": "passed",
     "run_one_sha256": run_one_sha,
     "run_two_sha256": run_two_sha,

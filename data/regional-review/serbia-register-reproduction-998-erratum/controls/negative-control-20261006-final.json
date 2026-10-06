@@ -1,0 +1,49 @@
+{
+  "method_id": "serbia-guarded-two-run-reproduction-v1",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "controls": [
+    {
+      "id": "test_duplicate_or_unmatched_scope_is_rejected",
+      "outcome": "passed",
+      "expected": "Short, duplicate, and substituted IDs are rejected by the exact ordered roster validator."
+    },
+    {
+      "id": "test_existing_output_is_preserved_and_rejected",
+      "outcome": "passed",
+      "expected": "An existing exclusive destination is refused and its sentinel remains byte-identical."
+    },
+    {
+      "id": "test_metadata_boundary_year_complete_file_probe_is_rejected",
+      "outcome": "passed",
+      "expected": "A complete changed 919-byte source-metadata file is rejected before staging."
+    },
+    {
+      "id": "test_shortened_scope_complete_file_is_rejected_before_output",
+      "outcome": "passed",
+      "expected": "A complete captured issue with 77 of 78 IDs is rejected before output; direct scope validation also rejects it."
+    },
+    {
+      "id": "test_two_runs_are_byte_reproducible_and_match_historical_outputs",
+      "outcome": "passed",
+      "expected": "Two private full reproductions match each other; seven products match historical bytes and summary findings match after truthful runtime fields are excluded."
+    },
+    {
+      "id": "test_wrong_baseline_bytes_are_rejected",
+      "outcome": "passed",
+      "expected": "Changed bytes at an immutable c944 baseline path are rejected before output."
+    },
+    {
+      "id": "test_wrong_historical_generator_bytes_are_rejected",
+      "outcome": "passed",
+      "expected": "Changed original generator code bytes are rejected before output."
+    },
+    {
+      "id": "test_wrong_workbook_bytes_are_rejected",
+      "outcome": "passed",
+      "expected": "A one-byte change to the original XLS workbook is rejected before output."
+    }
+  ],
+  "source_control_receipt_sha256": "16f65b9eaeed8ef974c2e5c7ef6043b9004c058620cf405b3ca1ba3b7c75dfe1",
+  "evidence_basis": "All eight source/scope and generator failure probes rejected altered inputs or preserved existing output before publishing a result."
+}

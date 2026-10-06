@@ -753,8 +753,8 @@
     },
     {
       "path": "data/regional-review/serbia-register-reproduction-998-erratum/controls/reproducibility-20261006-final.json",
-      "bytes": 3963,
-      "sha256": "9ea4afcc07d1c6ffc224560e81412171149e7c000b8645cb0212e7476051ed34",
+      "bytes": 3969,
+      "sha256": "5ec77782a5b3c4bc35334f0ca71616b28180426a5cd68d72d64762fe2f637bb8",
       "hash_kind": "file-bytes",
       "role": "verification-output"
     },
@@ -914,8 +914,8 @@
     },
     {
       "path": "data/regional-review/serbia-register-reproduction-998-erratum/tests/record_reproducibility.py",
-      "bytes": 4273,
-      "sha256": "429da0ac0f8760b6a32b2c829a48b026dd6565e73f0fefbe08dd6390e7aac1dd",
+      "bytes": 4279,
+      "sha256": "f9de1f238d1b46a922e081d4435d028758a07f0c52a6cc9a52d6bbebcfa31d99",
       "hash_kind": "file-bytes",
       "role": "reproduction-code"
     },
@@ -1072,6 +1072,20 @@
       "sha256": "a5a01d678c51cf273aa5afd8194d10c1b103176f8fe30ac50d0ccc9e69ec2751",
       "hash_kind": "file-bytes",
       "role": "repeatable-reproduction-output"
+    },
+    {
+      "path": "data/regional-review/serbia-register-reproduction-998-erratum/controls/positive-control-20261006-final.json",
+      "bytes": 598,
+      "sha256": "a17851267995e1f805c6c32a5ab1e888a54f45eda3742fb1c8a4d590e99d8b84",
+      "hash_kind": "file-bytes",
+      "role": "typed-generator-control-receipt"
+    },
+    {
+      "path": "data/regional-review/serbia-register-reproduction-998-erratum/controls/negative-control-20261006-final.json",
+      "bytes": 2140,
+      "sha256": "4353dc7d4f66ea6bd6f07724e09599a5274e3ba2fb2e0832710575d58cb3fcad",
+      "hash_kind": "file-bytes",
+      "role": "typed-generator-control-receipt"
     }
   ],
   "methods": [
@@ -6440,9 +6454,21 @@
     },
     {
       "method_id": "serbia-guarded-two-run-reproduction-v1",
-      "kind": "generator",
+      "kind": "positive-control",
       "outcome": "passed",
-      "evidence_path": "data/regional-review/serbia-register-reproduction-998-erratum/controls/generator-controls-20261006-final.json",
+      "evidence_path": "data/regional-review/serbia-register-reproduction-998-erratum/controls/positive-control-20261006-final.json"
+    },
+    {
+      "method_id": "serbia-guarded-two-run-reproduction-v1",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/serbia-register-reproduction-998-erratum/controls/negative-control-20261006-final.json"
+    },
+    {
+      "method_id": "serbia-guarded-two-run-reproduction-v1",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/serbia-register-reproduction-998-erratum/controls/reproducibility-20261006-final.json",
       "reproducibility_path": "data/regional-review/serbia-register-reproduction-998-erratum/controls/reproducibility-20261006-final.json"
     }
   ],
@@ -6469,6 +6495,14 @@
     },
     {
       "path": "data/regional-review/serbia-register-reproduction-998-erratum/controls/metric-ledger.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/serbia-register-reproduction-998-erratum/controls/negative-control-20261006-final.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/serbia-register-reproduction-998-erratum/controls/positive-control-20261006-final.json",
       "status": "added"
     },
     {
