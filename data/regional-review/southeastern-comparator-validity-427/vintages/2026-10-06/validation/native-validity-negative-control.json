@@ -1,0 +1,24 @@
+{
+  "fixtures": {
+    "fixture": "bow-tie polygon; coordinate list preserved in this script",
+    "passed": true,
+    "reason": "Self-intersection[0.5 0.5]",
+    "shared_helper_rejected": true,
+    "valid": false
+  },
+  "kind": "negative-control",
+  "method_id": "native-validity",
+  "outcome": "passed",
+  "scoped_targets": [
+    {
+      "geoid": "01095",
+      "is_valid": false,
+      "reason": "Ring Self-intersection[-86.1498060003656 34.5336330000066]"
+    },
+    {
+      "geoid": "47145",
+      "is_valid": false,
+      "reason": "Ring Self-intersection[-84.539962999621 35.6704649997119]"
+    }
+  ]
+}
