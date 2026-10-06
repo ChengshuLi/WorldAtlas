@@ -37,9 +37,9 @@ let baseline;
 test('actual committed CLI fixture produces two identical complete offline candidates', async () => {
   git(['init', '-q']); put('package.json', json({type: 'module'}));
   for (const name of ['prepare-native-candidate.mjs','native-only-inputs.mjs','compile-native-ownership.mjs',
-    'native-candidate-manifest.mjs','native-preparation-guards.mjs','native-topology-binding.mjs'])
+    'native-candidate-manifest.mjs','native-preparation-guards.mjs','native-topology-binding.mjs','verify-native-candidate.mjs'])
     put('scripts/native-ownership/' + name, fs.readFileSync(path.join(source, name)));
-  for (const name of ['src/native-grid.js','src/ownership-codec.js','scripts/audit-grid-intervals.mjs',latitudePath])
+  for (const name of ['src/native-grid.js','src/ownership-codec.js','src/ownership-assets.js','src/pixel-ownership.js','src/pixel-grid.js','scripts/audit-grid-intervals.mjs',latitudePath])
     put(name, fs.readFileSync(path.join(atlas, name)));
   const feature = {type: 'Feature', id: 'fixture-location', properties: {name: 'Fixture', parent_id: 'province'},
     geometry: {type: 'Polygon', coordinates: [[[0,0],[1,0],[1,1],[0,1],[0,0]]]}};
@@ -110,6 +110,19 @@ test('actual committed CLI fixture produces two identical complete offline candi
     }
   }
   assert.equal(runs * 2, decoded.runs.length); assert.equal(owned, report.owned_cells);
+  const verify = path.join(repo, 'scripts/native-ownership/verify-native-candidate.mjs');
+  const verified = JSON.parse(execFileSync(process.execPath, [verify, '--repo', repo, '--one', 'one', '--two', 'two'],
+    {encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe']}));
+  assert.equal(verified.checked_cells, 68731011556);
+  assert.equal(verified.unchecked_cells, 0);
+  assert.equal(verified.owned_cells, report.owned_cells);
+  assert.equal(verified.run_one_sha256, verified.run_two_sha256);
+  const extra = path.join(repo, '.cache/native-grid-candidates/two/undeclared.json');
+  fs.writeFileSync(extra, '{}');
+  try {
+    assert.throws(() => execFileSync(process.execPath, [verify, '--repo', repo, '--one', 'one', '--two', 'two'],
+      {stdio: 'pipe'}), /Command failed/);
+  } finally {fs.unlinkSync(extra);}
   assert.equal(git(['status', '--short', '--untracked-files=no']), '', 'original tracked sources untouched');
 });
 test('actual CLI refuses reused outputs and changed executed code before emitting a candidate', () => {
