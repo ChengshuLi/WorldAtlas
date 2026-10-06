@@ -31,7 +31,7 @@ def sha(b): return hashlib.sha256(b).hexdigest()
 def write_json(name,obj):
     raw=(json.dumps(obj,ensure_ascii=False,separators=(',',':'),sort_keys=True)+'\n').encode()
     (RUN_DIR/name).write_bytes(raw)
-    return {'path':str((RUN_DIR/name).relative_to(ROOT)),'bytes':len(raw),'sha256':sha(raw)}
+    return {'path':str((RUN_DIR/name).relative_to(ROOT)).replace('/'+RUN_DIR.name+'/', '/{run-id}/'),'bytes':len(raw),'sha256':sha(raw)}
 
 # Exact 282-component roster predicate declared in issue #1205, applied to every shard.
 priority_path=PRIOR+'report.json'
