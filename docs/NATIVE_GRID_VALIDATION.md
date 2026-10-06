@@ -24,6 +24,8 @@ Future materializations require a fresh candidate, two complete reproducible gen
 
 Dated contexts use original native geometry, explicit dense display indices mapped to original IDs, and recomputation of every row affected by changed/removed/added geometry. Unaffected rows retain the verified base through that mapping. Both renderers consume the same completed grid. Source digest, owner mapping and normative latitude bytes are verified; cancellation does not replace the displayed year with an unfinished context.
 
+Inside a package image, explicit grid manifests and their asset paths must be safe relative paths declared by the package input definition. Absolute paths, traversal, undeclared paths and symlinked manifests fail before selection, even when the manifest bytes match the approved candidate. Non-package diagnostic selection retains its existing behavior. The source-image fixture covers each rejection.
+
 ## Offline readback and recovery
 
 After the explicit native build:
