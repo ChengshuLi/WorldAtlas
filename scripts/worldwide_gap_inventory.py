@@ -9,6 +9,7 @@ import gzip
 import hashlib
 import json
 import pathlib
+import re
 import subprocess
 import sys
 
@@ -58,7 +59,14 @@ def query(detector, data, bounds):
     }
 
 
+def validate_selected(selected):
+    if not isinstance(selected, str) or not re.fullmatch(r'[0-9a-f]{40}', selected):
+        raise ValueError('Selected revision must be an exact lowercase forty-character commit SHA')
+    return selected
+
+
 def run(repo, selected, output):
+    validate_selected(selected)
     if output.exists():
         raise ValueError('Refusing to overwrite prior run')
     def blob(commit, path):
@@ -68,10 +76,23 @@ def run(repo, selected, output):
         return subprocess.check_output(['git', 'show', commit + ':' + path], cwd=repo)
     subprocess.run(['git', 'merge-base', '--is-ancestor', selected, 'origin/main'], cwd=repo, check=True)
     execution = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=repo, text=True).strip()
-    for path in ('scripts/worldwide_gap_inventory.py', 'scripts/geographic_components.py',
-                 'scripts/physical_gap_audit.py', 'scripts/physical_gap_crosswalk.py',
-                 'scripts/evidence/immutable.py', 'scripts/evidence/geometry.py'):
-        require_equivalent(blob(execution, path), (repo / path).read_bytes())
+    executed_files = []
+    for module in list(sys.modules.values()):
+        filename = getattr(module, '__file__', None)
+        if not filename:
+            continue
+        source = pathlib.Path(filename).resolve()
+        try:
+            path = str(source.relative_to(repo / 'scripts'))
+        except ValueError:
+            continue
+        path = 'scripts/' + path
+        if source.is_symlink() or source.suffix != '.py':
+            raise ValueError('Owned imported module is not an ordinary Python source')
+        raw = blob(execution, path)
+        require_equivalent(raw, source.read_bytes())
+        executed_files.append({'path': path, 'bytes': len(raw), 'sha256': digest(raw), 'hash_kind': 'file-bytes'})
+    executed_files = list({row['path']: row for row in executed_files}.values())
     if (sys.version.split()[0], shapely.__version__, shapely.geos_version_string) != ('3.12.14', '2.1.2', '3.13.1'):
         raise ValueError('Original measured software environment required')
     descriptors = {}
@@ -83,6 +104,9 @@ def run(repo, selected, output):
         require_equivalent(raw, selected_raw)
         descriptors[path] = {'path': path, 'bytes': len(raw), 'sha256': digest(raw), 'hash_kind': 'file-bytes'}
         return raw
+    for row in executed_files:
+        if row['path'] != 'scripts/worldwide_gap_inventory.py':
+            retained(execution, row['path'], row)
     report = json.loads(retained(ARTIFACT, DETECTOR))
     require_equivalent(report['baseline_commit'], ORIGINAL)
     for row in report['inputs']:
@@ -158,7 +182,7 @@ def run(repo, selected, output):
                'removed': [], 'new': [], 'split': [], 'merged': [], 'unknown_lineage': []}
     products.append(emit('identity-lineage.json.gz', lineage, True))
     summary = {'version': 'worldatlas-existing-world-inventory-v1',
-               'selected_main_commit': selected, 'executed_code_commit': execution,
+               'selected_main_commit': selected, 'executed_code_commit': execution, 'executed_code_files': executed_files,
                'original_input_commit': ORIGINAL, 'measurement_artifact_commit': ARTIFACT,
                'measurement_executed_code_commit': report['executed_code_commit'],
                'release_ids': new_data['release_ids'], 'release_index_sha256': new_data['release_index_sha256'],

@@ -6,12 +6,17 @@ from copy import deepcopy
 from shapely.geometry import box, mapping
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
-from worldwide_gap_inventory import verify, digest, require_equivalent
+from worldwide_gap_inventory import verify, digest, require_equivalent, validate_selected
 from geographic_components import components
 from physical_gap_crosswalk import membership
 
 
 class InventoryControls(unittest.TestCase):
+    def test_selected_revision_is_immutable(self):
+        self.assertEqual(validate_selected('a' * 40), 'a' * 40)
+        for value in ['main', 'origin/main', 'aacda0cd', 'A' * 40, None]:
+            with self.assertRaises(ValueError): validate_selected(value)
+
     def test_actual_byte_custody(self):
         raw = b'{"original-source":true}'
         row = {'path': 'source.json', 'bytes': len(raw), 'sha256': digest(raw)}
