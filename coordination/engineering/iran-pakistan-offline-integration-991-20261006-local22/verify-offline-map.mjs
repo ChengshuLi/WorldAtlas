@@ -105,6 +105,8 @@ async function screenSamples(page,renderer,samples){
     const projected=samples.map(c=>{
       const x=rect.left+(c.x-origin[0])*scale,y=rect.top+(c.y-origin[1])*scale;
       if(x<Math.max(rect.left,map.left)+2||x>=Math.min(rect.right,map.right)-2||y<Math.max(rect.top,map.top)+2||y>=Math.min(rect.bottom,map.bottom)-2)return null;
+      const hit=document.elementFromPoint(x,y);
+      if(!hit?.closest('#map')||hit.closest('.leaflet-control,.leaflet-popup'))return null;
       const cx=Math.min(canvas.width-1,Math.max(0,Math.floor((x-rect.left)/rect.width*canvas.width))),cy=Math.min(canvas.height-1,Math.max(0,Math.floor((y-rect.top)/rect.height*canvas.height)));
       const rgba=new Uint8Array(4);
       if(gl)gl.readPixels(cx,canvas.height-1-cy,1,1,gl.RGBA,gl.UNSIGNED_BYTE,rgba);else rgba.set(canvas.getContext('2d').getImageData(cx,cy,1,1).data);
@@ -169,7 +171,9 @@ try{
           // Mouse client coordinates are integer screen pixels. A cell smaller
           // than a pixel cannot be a reliable independent click probe.
           const box=await page.locator('#map').boundingBox(),center=[box.x+box.width/2,box.y+box.height/2];
-          const nearest=[...camera.samples].sort((a,b)=>Math.hypot(a.screen[0]-center[0],a.screen[1]-center[1])-Math.hypot(b.screen[0]-center[0],b.screen[1]-center[1]))[0];
+          const anchor=eligible[Math.floor(eligible.length/2)];
+          const nearest=camera.samples.find(c=>c.x===anchor.x&&c.y===anchor.y);
+          assert.ok(nearest,'Both renderers must focus the same supported geographic cell');
           await page.mouse.move(...center);await page.mouse.down();
           await page.mouse.move(center[0]+center[0]-nearest.screen[0],center[1]+center[1]-nearest.screen[1],{steps:12});await page.mouse.up();await settled(page);
           for(let step=0;step<8;step++){
