@@ -471,7 +471,7 @@
       "description": "Compare only the exact source component covering the decree coordinate with the current Atlas feature; compute WGS84 land areas/intersection and geodesic distance using the shared helper. The mainland intersection and axis-order point are positive controls; the remote component’s zero current overlap is a negative inclusion control.",
       "distance_method": "WGS84 inverse geodesic",
       "helper_version": "worldatlas-evidence-geometry-v1",
-      "id": "geodesic-overlays",
+      "id": "geometry-comparison",
       "kind": "geography",
       "software": "Python 3.12.14; NumPy 2.3.5; Shapely 2.1.2; pyproj 3.7.2; worldatlas-evidence-geometry-v1",
       "units": "m² and metres"
@@ -491,10 +491,10 @@
       "units": "file identities, features, bytes and SHA-256"
     },
     {
-      "area_method": "WGS84 straight-source-edge ellipsoidal integral (not used by this point-only screen)",
+      "area_method": "WGS84 straight-source-edge ellipsoidal integral",
       "axis_order": "longitude-latitude",
       "crs": "EPSG:4326",
-      "description": "Read all 34 immutable baseline data/geography/part-N.json shards, require a stored representative point for each feature, and screen WGS84 inverse-geodesic distances from the official Salas y Gómez decree coordinate. Record all points within 2,500 km and the ten nearest other features with source tier, role, parent, vintage, coordinates and shard. This is point proximity only; it is not polygon adjacency or maritime jurisdiction.",
+      "description": "Read all 34 immutable baseline data/geography/part-N.json shards, require a stored representative point for each feature, and screen WGS84 inverse-geodesic distances from the official Salas y Gómez decree coordinate. Record all points within 2,500 km and the ten nearest other features with source tier, role, parent, vintage, coordinates and shard. The method computes no area for this point-only screen. It is not polygon adjacency or maritime jurisdiction.",
       "distance_method": "WGS84 inverse geodesic between stored representative points",
       "helper_version": "worldatlas-evidence-geometry-v1",
       "id": "neighbor-point-screen",
@@ -932,13 +932,13 @@
     {
       "evidence_path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/geometry-positive.json",
       "kind": "positive-control",
-      "method_id": "geodesic-overlays",
+      "method_id": "geometry-comparison",
       "outcome": "passed"
     },
     {
       "evidence_path": "data/regional-review/rapa-nui-sala-y-gomez-20261005/geometry-negative.json",
       "kind": "negative-control",
-      "method_id": "geodesic-overlays",
+      "method_id": "geometry-comparison",
       "outcome": "passed"
     },
     {
