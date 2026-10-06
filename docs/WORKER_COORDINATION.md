@@ -292,3 +292,41 @@ failure intact. It explicitly redacts the known token as well as token prefixes
 and Bearer values. This later same-token probe describes its own response, not an
 inferred original response. The trusted-base selector still owns the actual
 profile/coverage decision; a successful probe cannot substitute for validation.
+
+### Observed capacity before final validation
+
+The final job observes `/rate_limit` with its existing authenticated token before
+any repository planning read. It validates the current core limit, remaining
+capacity and reset, including the corresponding allowlisted response fields.
+It never assumes a fixed installation quota or reserves shared capacity.
+A zero or insufficient observation waits inside the same live FIFO run.
+
+A complete fresh metadata inventory binds manifest descriptors and all nonadded
+originals to current complete Git trees, ordinary paths, vintages and OIDs. Only
+verified immutable OID reuse tightens the blob estimate. Review, claim, checks,
+proof jobs, artifact pagination and applicable source authority remain fresh.
+The estimate includes repeated metadata passes and 48 additional calls: 16 for
+bounded rejection cleanup/receipt, 20 for final mutable guards and guarded merge,
+8 for candidate/proof trees, and 4 for artifact download/notification overhead.
+The paid-call guard sits below immutable reuse. It reserves those 16 recovery
+calls outside validation, and fails closed if growing inventories consume the
+remaining allowance; capacity observation never approves evidence or a merge.
+
+There are at most three complete planning attempts. Only a proven planning-call
+budget deficit may wait and restart the whole mutable inventory. Original API
+errors and invalid authority fail normally. All planning and capacity waits share
+one monotonic 61-minute deadline, with 13 further minutes for validation and one
+minute for job setup inside the 75-minute final timeout. Polling is at most once
+per 30 seconds and waits only for an observed deficit. A bound above the observed
+limit, invalid observation, exhausted call/deadline budget or actual denial needs
+bounded intervention. Capacity can be consumed by concurrent jobs after a probe.
+
+After waiting, FIFO, reviewed head, tested base, claim, issue, review, checks,
+proof jobs and tree/path bindings are read again before costly output bytes.
+The original full evidence, source/geography, candidate-parent/tree, final
+mutable guards and SHA-guarded merge then run unchanged. A long final job may
+outlast a local observer; resume observation of that original request rather than
+cancel or dispatch a duplicate. A terminal result settles its FIFO ticket and
+cannot be recovered by rerunning just that final job under the resolved ticket.
+Local controls demonstrate pacing and rejection, not hosted quota recovery;
+record actual same-token hosted observations separately when those conditions occur.

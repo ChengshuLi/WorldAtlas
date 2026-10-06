@@ -17,7 +17,7 @@ const api = githubAPI(process.env.GH_TOKEN), options = {api, repo, number, expec
   integrationRequestId: input.request_id + (process.env.GITHUB_RUN_ID ? `-${process.env.GITHUB_RUN_ID}` : '')};
 let result = {accepted: false, request_id: input.request_id, pr_number: number, phase, ...(input.queue_attempt ? {queue_attempt: Number(input.queue_attempt)} : {})};
 try {
-  if (process.env.QUEUE_ADMISSION === 'required') {
+  if (process.env.QUEUE_ADMISSION === 'required' && (phase === 'prepare' || process.env.FINAL_CAPACITY !== 'required')) {
     await assertAdmission({api, repo, request: {pr_number: number, expected_head: input.expected_head, request_id: input.request_id},
       attempt: Number(input.queue_attempt), runId: process.env.GITHUB_RUN_ID});
   }
@@ -28,10 +28,17 @@ try {
     // Only validated commit IDs and owned ref identifiers become job outputs.
     fs.appendFileSync(process.env.GITHUB_OUTPUT, `candidate_ref=${state.candidate_ref ?? ''}\nproof_attempt=${state.proof?.run_attempt ?? ''}\nproof_run=${state.proof?.run_id ?? ''}\ncandidate=${state.candidate ?? ''}\nbase=${state.base ?? ''}\nprofile=${state.profile ?? 'evidence'}\nshards=${JSON.stringify(state.profile === 'full' ? [0,1,2] : [0])}\n`);
   } else {
+    const finalAdmission = admittedAPI => assertAdmission({api: admittedAPI, repo,
+      request: {pr_number: number, expected_head: input.expected_head, request_id: input.request_id},
+      attempt: Number(input.queue_attempt), runId: process.env.GITHUB_RUN_ID});
     const completed = await completeIntegration({...options, integrationResult: process.env.INTEGRATION_RESULT,
+      finalCapacity: process.env.FINAL_CAPACITY === 'required',
+      finalAdmission: process.env.QUEUE_ADMISSION === 'required' ? finalAdmission : undefined,
+      artifactRunId: Number(process.env.GITHUB_RUN_ID),
+      capacityObserver: observation => {result.final_capacity = observation; console.log(JSON.stringify(observation));},
       geographyResult: process.env.GEOGRAPHY_RESULT,
       geographyReportHash: process.env.GEOGRAPHY_REPORT_SHA256,
-      geographyReportLoader: () => loadGeographicReport({api, repo, runId: process.env.GITHUB_RUN_ID,
+      geographyReportLoader: ({api: reportAPI = api} = {}) => loadGeographicReport({api: reportAPI, repo, runId: process.env.GITHUB_RUN_ID,
         artifactName: process.env.GEOGRAPHY_ARTIFACT_NAME, expectedHash: process.env.GEOGRAPHY_REPORT_SHA256,
         token: process.env.GH_TOKEN}),
       proofRunAttempt: process.env.PROOF_RUN_ATTEMPT ? Number(process.env.PROOF_RUN_ATTEMPT) : undefined,
@@ -42,6 +49,7 @@ try {
 } catch (error) {
   result.reason = error.message;
   if (error.github) result.api_error = error.github;
+  if (error.capacity) result.final_capacity = error.capacity;
   if (error.candidateCleanup) result.candidate_cleanup = error.candidateCleanup;
   if (error.candidateDiagnostics) result.candidate_diagnostics = error.candidateDiagnostics;
   result.status = /conflict|changes reviewed bytes|substantive review/.test(error.message) ? 'intervention-required' : 'not-merged';

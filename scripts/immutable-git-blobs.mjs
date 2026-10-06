@@ -1,9 +1,12 @@
 import {createHash} from 'node:crypto';
 
+export const IMMUTABLE_CACHE_BYTES = 272 * 1024 * 1024;
+export const IMMUTABLE_CACHE_ENTRIES = 512;
+
 // Keep one execution's known immutable bytes. Mutable identities, trees,
 // authority and checks always reach the underlying API again. This memory bound
 // is independent of (and does not increase) any evidence-validator byte limit.
-export function memoizeImmutableGitBlobs(api, {maxBytes = 272 * 1024 * 1024, maxEntries = 512} = {}) {
+export function memoizeImmutableGitBlobs(api, {maxBytes = IMMUTABLE_CACHE_BYTES, maxEntries = IMMUTABLE_CACHE_ENTRIES} = {}) {
   if (!Number.isSafeInteger(maxBytes) || maxBytes < 0 || !Number.isSafeInteger(maxEntries) || maxEntries < 0) throw Error('Invalid immutable blob cache bounds');
   const cache = new Map(); let bytes = 0;
   return async (route, method = 'GET', body) => {

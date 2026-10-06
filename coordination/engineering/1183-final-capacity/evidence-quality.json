@@ -1,0 +1,255 @@
+{
+  "version": 1,
+  "issue": 1183,
+  "lane": "engineering",
+  "worker_id": "01a111d7-4e3b-7d22-b94d-09dd77f60e3f",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "8ec1e31a451541af8b4cd5e09cc74d4325fe3b62",
+    "files": [
+      {
+        "path": ".github/workflows/worker-merge.yml",
+        "bytes": 9216,
+        "sha256": "c57608daf9a3dbf9d1ae6bf73e1a3a57aa23d500de4bc4fe7464fcb092714edf",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 35785,
+        "sha256": "d7a914f7692fce2545a7033a0f4b007ac13b0b21bdc2ce5c1c4b01f360e1eef0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/immutable-git-blobs.mjs",
+        "bytes": 2143,
+        "sha256": "200390dab3ffc41197497952ddaa1250b32b2b66cf23ea99d372daf0a51a07b0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/issue-claim-contract.mjs",
+        "bytes": 11381,
+        "sha256": "26c37f0ab117d1ad893999c58a886cef42878a536e6876eac8c7ddaf2f2aa758",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/merge-integration.mjs",
+        "bytes": 26293,
+        "sha256": "a3db0d28fe9dc56c187ce42d21c63063843bf09521902c50bb973f08b8db2cd8",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/run-worker-merge.mjs",
+        "bytes": 5550,
+        "sha256": "3fbe2f6d27916b76bff697290db0b11a1771b15f751614478980085f4cbcbf33",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/merge-integration.test.mjs",
+        "bytes": 39605,
+        "sha256": "6f52d99d965a943e25ad130865419eb3bd84c86ff28c3b6f86e8aef6d21c021f",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": ".github/workflows/worker-merge.yml",
+      "bytes": 9253,
+      "sha256": "fb2545b2300f2d8f536eb278e6fb27c75bdfa0a09ff5aac168c1730ba844cc1b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/1183-final-capacity/adapter-controls.txt",
+      "bytes": 8216,
+      "sha256": "ed2aa958588990f7f5551daba8d569047dbc38d52cfc2edb4540b31ca052ddce",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/1183-final-capacity/controls.txt",
+      "bytes": 17030,
+      "sha256": "32767e1c58af39e1cad4ce8d3befd7d9981fa1bcb341eaffcc3be2c431c6f711",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/1183-final-capacity/handoff.md",
+      "bytes": 2889,
+      "sha256": "9ccff95174b4377bef402b29f4758c5a19f939eeb8830568f57166fffa2a18b2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/1183-final-capacity/negative-control.json",
+      "bytes": 422,
+      "sha256": "1d209f1190c8b4942a34cb180ca8f57fd23456146183f65d3ff9b83d61ed3106",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/1183-final-capacity/positive-control.json",
+      "bytes": 388,
+      "sha256": "57dd694e192f05f869f96865c1341be0658bce657eaca2caa1a14a7dedada550",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "bytes": 38368,
+      "sha256": "11ad15af17f374349da376ec36c4e68f6c8f3188c7719b5fff0363e3cac4a3e4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/final-capacity.mjs",
+      "bytes": 19048,
+      "sha256": "139028f6924ce2c7d69d2d6a76f536bb5dbd62dca525a01e683bb9a72a2f4ae3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/immutable-git-blobs.mjs",
+      "bytes": 2268,
+      "sha256": "e1336689fd685d13eec299ed3500e7e7860ac9637a256548eeb94a199f633a20",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/issue-claim-contract.mjs",
+      "bytes": 11922,
+      "sha256": "ad168cb536b3aec404e524d6dac9a0986975a72aee63dc54a29ba956a7fef916",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/merge-integration.mjs",
+      "bytes": 27048,
+      "sha256": "5f664eedd5628f058e79ded1654aeb37e5fd3e72161d14f116f1770325b83d1b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/run-worker-merge.mjs",
+      "bytes": 6321,
+      "sha256": "f19fdad80e06d0a6cdef9a76ebaf770de5ee39224f4329725924220667425905",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/final-capacity.test.mjs",
+      "bytes": 19377,
+      "sha256": "d2332f242fb8abae511a72534ae428f3bd6b37d2fbe3930a97530f8756933e83",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/merge-integration.test.mjs",
+      "bytes": 39654,
+      "sha256": "dc77e9a279f1887ede11d3d23552e3d09521d28b868228be2ca4b202fbfbd9c5",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "capacity-guard",
+      "kind": "code",
+      "description": "Observed same-token capacity pacing with complete current metadata inventory, bounded monotonic wait and unchanged full final validators; positive and rejection controls exercise real merge validators with in-memory GitHub fixtures.",
+      "software": "Node24; Python3.12.14/Shapely2.1.2/GEOS3.13.1 for existing native controls",
+      "units": "API calls, milliseconds, exact Git OIDs and file bytes"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "capacity-guard",
+      "kind": "positive",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/1183-final-capacity/positive-control.json"
+    },
+    {
+      "method_id": "capacity-guard",
+      "kind": "negative",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/1183-final-capacity/negative-control.json"
+    }
+  ],
+  "metrics": [],
+  "metric_bindings": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "Actual hosted large-workload quota recovery is conditional and unverified; local controls do not establish quota reservation or geographic approval.",
+      "status": "unresolved",
+      "source_ids": []
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/final-capacity.test.mjs test/immutable-git-blobs.test.mjs test/merge-scheduler.test.mjs test/merge-integration.test.mjs test/merge-integration-client.test.mjs test/merge-integration-entrypoint.test.mjs test/trusted-workflow-checkouts.test.mjs test/worker-result.test.mjs test/premerge-evidence.test.mjs test/issue-claims.test.mjs test/integration-proof.test.mjs test/geographic-adjudication-api.test.mjs",
+    "node scripts/evidence-quality.mjs coordination/engineering/1183-final-capacity/evidence-quality.json"
+  ],
+  "change_receipts": [
+    {
+      "path": ".github/workflows/worker-merge.yml",
+      "status": "modified",
+      "original_sha256": "c57608daf9a3dbf9d1ae6bf73e1a3a57aa23d500de4bc4fe7464fcb092714edf"
+    },
+    {
+      "path": "coordination/engineering/1183-final-capacity/adapter-controls.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/1183-final-capacity/controls.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/1183-final-capacity/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/1183-final-capacity/handoff.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/1183-final-capacity/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/1183-final-capacity/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "status": "modified",
+      "original_sha256": "d7a914f7692fce2545a7033a0f4b007ac13b0b21bdc2ce5c1c4b01f360e1eef0"
+    },
+    {
+      "path": "scripts/final-capacity.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/immutable-git-blobs.mjs",
+      "status": "modified",
+      "original_sha256": "200390dab3ffc41197497952ddaa1250b32b2b66cf23ea99d372daf0a51a07b0"
+    },
+    {
+      "path": "scripts/issue-claim-contract.mjs",
+      "status": "modified",
+      "original_sha256": "26c37f0ab117d1ad893999c58a886cef42878a536e6876eac8c7ddaf2f2aa758"
+    },
+    {
+      "path": "scripts/merge-integration.mjs",
+      "status": "modified",
+      "original_sha256": "a3db0d28fe9dc56c187ce42d21c63063843bf09521902c50bb973f08b8db2cd8"
+    },
+    {
+      "path": "scripts/run-worker-merge.mjs",
+      "status": "modified",
+      "original_sha256": "3fbe2f6d27916b76bff697290db0b11a1771b15f751614478980085f4cbcbf33"
+    },
+    {
+      "path": "test/final-capacity.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/merge-integration.test.mjs",
+      "status": "modified",
+      "original_sha256": "6f52d99d965a943e25ad130865419eb3bd84c86ff28c3b6f86e8aef6d21c021f"
+    }
+  ]
+}

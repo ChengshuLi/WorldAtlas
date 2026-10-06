@@ -110,6 +110,15 @@ export function githubAPI(token){
      ['retry_after',numeric('retry-after')],['request_id',/^[a-fA-F0-9:]{1,100}$/.test(requestId??'')?requestId:undefined]].filter(([,value])=>value!==undefined))};
    throw error;
   }
-  return response.status===204?null:response.json();
+  if(response.status===204)return null;
+  const payload=await response.json();
+  if(route==='/rate_limit'){
+   const numeric=name=>{const value=response.headers.get(name);return /^\d{1,13}$/.test(value??'')?Number(value):undefined;};
+   const capacity_headers={limit:numeric('x-ratelimit-limit'),remaining:numeric('x-ratelimit-remaining'),reset:numeric('x-ratelimit-reset')};
+   // Only numeric capacity fields are exposed. No complete response/header map
+   // or authentication data crosses into pacing logs or durable receipts.
+   return {...payload,capacity_headers};
+  }
+  return payload;
  };
 }
