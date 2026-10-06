@@ -1,0 +1,40 @@
+# Croatia #1199 consumed-input read-boundary correction (#1209)
+
+Research recorded 2026-10-06. This is an additive, preservation-safe reproduction correction for the exact 224 Croatian local-government IDs in #1199/#419. It makes no new territorial finding and does not change source geometry, Atlas IDs, labels, parent assignments, boundary claims, core geography, or release status.
+
+## Issue scope and lineage
+
+Issue [#1209](https://github.com/ChengshuLi/WorldAtlas/issues/1209) was retrieved from the GitHub REST API at `2026-10-06T20:57:57Z`. The complete response is retained at `source/issue-1209-api-snapshot.json`, SHA-256 `f694f98d653042bffe067c698dd6ec20f8673416dc94d8370937b83e2977694b`; its retrieval record is adjacent. It declares one PR, dependency #1194, exact `type:geography` ownership of this directory, 224 subjects and 66 immutable pins at #1199 merge `dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e`.
+
+The prior #1194 packet retains the nested source scope and raw issue #419 API snapshot, with 62 historical Git pins at baseline `7646e0962afab6cc4f566439bb2f96890ae4b91e`. Their historical source hash mapping remains authoritative. This packet checks those 62 Git blobs, the 66 #1199 Git blobs, and the actual working-tree bytes read by the old builder before computation. The scope, issue snapshot, DZS inputs, geoBoundaries geometry and builder bytes are frozen into a private scratch packet; the original builder is compiled from the verified Git blob. No old source or output is rewritten.
+
+The vulnerable read boundary was reproducible in the merged #1199 wrapper: it authenticated its own scope/snapshot and checked Git pins, then imported `build_assessment.py` from disk. That builder independently reopened `regional-review-ce7798317652c0c2/scope.json` and `source/issue-419-api-snapshot.json` via `Path.read_text()`. It read the DZS detail extract, workbook and geometry from their mutable checkout paths. The correction compares the complete filesystem bytes to the relevant hashes and uses the exact bytes checked, rather than letting the builder reopen unverified source files. The captured two-file synthetic parent-name fixture is rejected before a destination or its parent is created; a matching input is not evidence that a real parent label is wrong.
+
+## Subjects, roles, source vintage and limits carried forward
+
+All 224 subjects remain geoBoundaries HRV ADM2-backed Atlas local-government locations. In the preserved #419 investigation, each exact ID resolves once in the pinned Atlas inventory and to a native source `shapeID`; the source declares HRV/ADM2. DZS’s 2021 census detail identifies matched units as `Grad` (town) or `Općina` (municipality), with 220 baseline labels matching the local name/type comparison and four previously documented name candidates. The 2021 roster reports 231 town/municipality units for the eight counties; seven roster rows remain unmatched. These comparisons inherit the Atlas county parent mapping and do not independently prove legal parentage. The exact scope contains no new subjects and no inferred IDs.
+
+The original geoBoundaries HRV ADM2 object was retrieved in the predecessor work from the immutable `9469f09592ced973a3448cf66b6100b741b64c0d` release: 20,788,018 bytes, SHA-256 `68a317129a0c295fd8baf7acc0f31ffefdf65ff2f1f62f8ed90a765cc57cf01e`, 560 features. Its metadata says representative year 2021 while reporting the underlying data updated 2023-01-19 and built 2023-12-12. That does not establish exact legal boundaries on the census reference date, coastline/island completeness, or geometry accuracy. The source metadata asserts CC BY-SA 2.0 and references OpenStreetMap; the file-specific grant remains unresolved, so this packet does not duplicate the geometry.
+
+The DZS census roster’s reference time is 2021-08-31. The retained 555-row detail extract has SHA-256 `225021e29f4ec2eeeffda3801031f4c0587241e91eed984394c9d2d56b09785c`; the summary workbook is 63,196 bytes, SHA-256 `99feecc93627db02509aee7d625b391c33a69f201f377464ac15c2fd7c16f20f`. DZS states that its published datasets are reusable under the Croatian Open License with attribution. These are names, types and roster counts, not polygon evidence.
+
+Prior primary-source review retained the [DZS 2021 census report](https://podaci.dzs.hr/2021/en/39858), [DZS Open Data terms](https://dzs.gov.hr/o-zavodu/pravo-na-pristup-informacijama/otvoreni-podaci/1812), the [2006 Territorial Organization Act](https://narodne-novine.nn.hr/clanci/sluzbeni/full/2006_07_86_2045.html), and the [DGU Register of Spatial Units](https://dgu.gov.hr/registar-prostornih-jedinica-172/172) and [DGU Open Data listing](https://dgu.gov.hr/proizvodi-i-usluge/otvoreni-podaci/6596?big=0). DZS roster/terms do not settle polygons. The 2006 law is not represented as a consolidated 2026 legal text or geometry archive. The DGU service is an official lead; the predecessor did not obtain a suitable dated reusable polygon set, and availability, contents and file-specific reuse terms remain unresolved.
+
+The predecessor screen found 13 source/baseline geometry-type differences and 19 scoped multipolygon source records, including island and coastal municipalities. These are screening signals, not boundary findings. Seven unmatched census rows remain in source-restoration issue #1028; four name candidates and 13 geometry-type differences remain in #1029. Neighboring batches #416–#418 and #420–#424 remain distinct, and the botanical WGSRPD reference for the shared “Yugoslavia” area is not general-purpose atlas boundary authority. This correction neither closes those findings nor certifies a region.
+
+## Read-boundary method and reproduction
+
+Before calculation the runner verifies: (1) its own exact bytes against its current committed Git blob; (2) all 66 issue-pinned bytes at #1199 merge and all 62 historical Git pins at the #1194 baseline; (3) complete bytes of the actual scope, request snapshot, builder, geometry and DZS files opened by the old computation; and (4) the exact 224 scoped IDs. It then executes the prior builder’s verified Git source against private copies of the verified data bytes. Output is published under this packet using exclusive creation only after the full build completes. Existing destinations, traversal, symlink components, changed scope/request/source/code bytes and interrupted destinations fail closed. A rejected read-boundary fixture cannot create its requested output path.
+
+Reproduce a fresh run after this packet is committed, so the runner can compare its executed file to the immutable `HEAD` blob:
+
+```sh
+python3 data/regional-review/croatia-batch4-read-boundary-guard/reproduce.py --run-id fresh-run-3
+python3 data/regional-review/croatia-batch4-read-boundary-guard/controls.py
+```
+
+Use a never-before-used run ID. Results remain under `evidence/runs/2026-10-06/`; the controls compare two new full executions byte-for-byte with both historical #1199 output vintages, test the reported coherent in-memory scope/snapshot drift and one-file scope, request, builder-code and source-extract drift, and verify existing/interrupted output preservation. All synthetic inputs are created in memory; original retained files are not edited.
+
+## Interpretation limits
+
+The evidence demonstrates preservation and reproducibility of declared input bytes and report outputs. It does not independently restore upstream sources, establish DZS parentage, adjudicate any of the four spelling candidates, confirm the seven unmatched units, validate legal municipality boundaries, certify islands/coastline/neighbor completeness, or authorize geographic approval, publication, production writes or imports. The full factual and licensing limitations in the prior #1199 packet remain in force.
