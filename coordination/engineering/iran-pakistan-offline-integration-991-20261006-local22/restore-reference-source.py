@@ -15,6 +15,7 @@ parser.add_argument('--bytes', type=int, required=True)
 parser.add_argument('--sha256', required=True)
 parser.add_argument('--output', type=pathlib.Path, required=True)
 parser.add_argument('--receipt', type=pathlib.Path, required=True)
+parser.add_argument('--range', action='store_true', help='Request the complete pinned object using an explicit HTTP byte range')
 args = parser.parse_args()
 head = subprocess.check_output(['git', '-C', str(root), 'rev-parse', 'HEAD'], text=True).strip()
 relative_code = pathlib.Path(__file__).resolve().relative_to(root).as_posix()
@@ -30,7 +31,10 @@ assert not output.exists() and not receipt.exists()
 output.parent.mkdir(parents=True, exist_ok=True)
 sha = hashlib.sha256()
 count = 0
-request = urllib.request.Request(args.url, headers={'User-Agent': 'WorldAtlas-reference-restoration/1'})
+request_headers = {'User-Agent': 'WorldAtlas-reference-restoration/1'}
+if args.range:
+    request_headers['Range'] = f'bytes=0-{args.bytes-1}'
+request = urllib.request.Request(args.url, headers=request_headers)
 with urllib.request.urlopen(request, timeout=60) as response, output.open('xb') as stream:
     headers = {name: response.headers.get(name) for name in ['Content-Length', 'ETag', 'Last-Modified']}
     final_url = response.url
@@ -43,6 +47,7 @@ with urllib.request.urlopen(request, timeout=60) as response, output.open('xb') 
 if count != args.bytes or sha.hexdigest() != args.sha256:
     raise ValueError('Restored object differs from pinned original; retain diagnostic bytes, never use as source')
 report = {'version': 1, 'source_url': args.url, 'resolved_url': final_url, 'bytes': count,
+          'requested_range': request_headers.get('Range'),
           'sha256': sha.hexdigest(), 'response_headers': headers, 'execution_commit': head,
           'executed_code': {'path': relative_code, 'bytes': len(code), 'sha256': hashlib.sha256(code).hexdigest()},
           'python_version': platform.python_version(), 'restored_original': True,
