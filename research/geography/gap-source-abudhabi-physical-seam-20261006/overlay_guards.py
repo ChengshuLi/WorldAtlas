@@ -1,5 +1,6 @@
 """Input guards shared by the source overlay and its mutation controls."""
 import hashlib
+from collections import Counter
 from evidence.immutable import canonical_json
 
 
@@ -11,6 +12,13 @@ def verify_source_bytes(raw, expected_sha256):
     actual = hashlib.sha256(raw).hexdigest()
     if actual != expected_sha256:
         raise EvidenceGuardError("Source whole-file SHA-256 mismatch")
+    return actual
+
+
+def verify_output_bytes(raw, expected_sha256):
+    actual = hashlib.sha256(raw).hexdigest()
+    if actual != expected_sha256:
+        raise EvidenceGuardError("Generated output SHA-256 mismatch")
     return actual
 
 
@@ -33,6 +41,19 @@ def verify_contact_rows(rows, expected_count, expected_types):
     if any(not isinstance(row.get("geometry"), dict) for row in rows):
         raise EvidenceGuardError("Contact geometry must be retained for every row")
     return counts
+
+
+def verify_component_links(rows, selected_ids):
+    kinds = Counter(tuple(row.get("kinds", [])) for row in rows)
+    expected = {
+        ("identical-coordinates",): 128,
+        ("point-only-contact",): 68,
+        ("identical-coordinates", "positive-length-contact"): 6,
+    }
+    linked_ids = {row.get("new_component") for row in rows}
+    if len(rows) != 202 or kinds != expected or linked_ids != set(selected_ids):
+        raise EvidenceGuardError("Complete selected old-gap/new-component link inventory mismatch")
+    return {"/".join(k): value for k, value in sorted(kinds.items())}
 
 
 def verify_vintage(dataset_title, response_date, source_snapshot_label):
