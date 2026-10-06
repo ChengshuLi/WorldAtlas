@@ -1,6 +1,6 @@
 # Baker, Howland, Jarvis and Palmyra dry-land source review
 
-Issue #1061 · retrieved/researched 2026-10-05 (America/Los_Angeles) · baseline `947b991690a5720b48b9a664b34cba3f5e4a515d`.
+Issue #1061 · retrieved/researched 2026-10-05 (America/Los_Angeles) · baseline `f1a6c0abc29de7bf7b7a081a8a9864b0450c0427`.
 
 This packet reviews only `UMI-5171` Baker Island, `UMI-5172` Howland Island, `UMI-5173` Jarvis Island and `UMI-5178` Palmyra Atoll. It preserves their current feature IDs, province parent links, and `owner:Q30` / United States Minor Outlying Islands reference-owner metadata. In the hierarchy, Baker and Howland sit under the physical `Howland and Baker Islands` area; Palmyra and Jarvis sit under the physical `Line Islands` area. That physical group does not make Palmyra or Jarvis Kiribati. It does not change geography, certify regional coverage or authorize imports.
 
@@ -42,7 +42,7 @@ PYTHONPATH="$PWD/$PACKET/.scratch/python:$PWD/scripts" python3.12 "$PACKET/verif
 rm -rf "$PACKET/.scratch"
 ```
 
-The reproduction uses retained NOAA CUSP, four original NOAA project archives, OSM and pinned Atlas part 28/hierarchy bytes; it makes no network requests and writes deterministic `results.json`. Two runs on refreshed base `947b991690a5720b48b9a664b34cba3f5e4a515d` produced identical result SHA-256 `ffd735c28319655939487feb936776b095051d160b0d4487ff47ee0cec133b86`. Positive and negative geometry controls pass. See `evidence-quality.json` for pinned baseline bytes, sources, file receipts, result bindings and explicit limits.
+The reproduction uses retained NOAA CUSP, four original NOAA project archives, OSM and pinned Atlas part 28/hierarchy bytes; it makes no network requests and writes deterministic `results.json`. Two runs on the PR base `f1a6c0abc29de7bf7b7a081a8a9864b0450c0427` produced identical result SHA-256 `893bf77dbebb58be2e267847e08b0aea0ee0c82d6d3d1743a6a87298f48768fa`. Positive and negative geometry controls pass. See `evidence-quality.json` for pinned baseline bytes, sources, file receipts, result bindings and explicit limits.
 
 The OSM response is retained under ODbL 1.0 with attribution to OpenStreetMap contributors; the saved query is a reproducible equivalent tag/window query. The original request POST body was not retained at first retrieval, so this saved query documents how to repeat the screen, not an assertion of byte-identical query provenance. OSM is not authoritative. NOAA reports and datasets are old at three locations, and Palmyra's newer CUSP lines do not establish complete atoll coverage. Public FWS descriptive pages establish identity, protected-area meaning and dated approximate counts, but not current shoreline vertices or a complete islet inventory.
 

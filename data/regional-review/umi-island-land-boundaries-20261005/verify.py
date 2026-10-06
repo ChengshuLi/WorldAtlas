@@ -278,7 +278,7 @@ def main():
     result = {
         "version": 1,
         "purpose": "Diagnostic source coverage comparison only; not a completeness or boundary certification",
-        "baseline_commit": "947b991690a5720b48b9a664b34cba3f5e4a515d",
+        "baseline_commit": "f1a6c0abc29de7bf7b7a081a8a9864b0450c0427",
         "software": {"python": platform.python_version(), "shapely": shapely_version,
                      "pyproj": pyproj.__version__, "pyshp": shapefile.__version__},
         "subject_ids": sorted(EXPECTED),
