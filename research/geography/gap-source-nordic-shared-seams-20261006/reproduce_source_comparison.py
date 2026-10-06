@@ -84,8 +84,12 @@ for id in ids:
   sg=shape(feat['geometry'])
   if g.intersects(sg):
    inter=g.intersection(sg)
-   if inter.area>0: perunit.append({'source_feature_id':fid,'shapeName':feat['properties'].get('shapeName'),'intersection_planar_area':inter.area,'intersection_geometry':mapping(inter)})
- unionRows.append({'id':id,'full_candidate_feature':f,'canonical_full_feature_sha256':sha(canon(f)),'detector_properties':f['properties'],'candidate_planar_area':g.area,'norway_full_product':regions[0],'sweden_full_product':regions[1],'all_two_source_products_intersection_geometry':mapping(allI),'all_two_source_products_difference_geometry':mapping(allD),'all_two_source_products_intersection_planar_area':allI.area,'all_two_source_products_difference_planar_area':allD.area,'four_contact_union_intersection_geometry':mapping(cI),'four_contact_union_difference_geometry':mapping(cD),'four_contact_union_intersection_planar_area':cI.area,'four_contact_union_difference_planar_area':cD.area,'positive_area_overlapping_adm2_units':perunit})
+   if not inter.is_empty:
+    if inter.area>0: contact_kind='positive-area-overlap'
+    elif inter.length>0: contact_kind='positive-length-contact'
+    else: contact_kind='point-only-contact'
+    perunit.append({'source_feature_id':fid,'shapeName':feat['properties'].get('shapeName'),'contact_kind':contact_kind,'intersection_dimension':2 if inter.area>0 else (1 if inter.length>0 else 0),'intersection_planar_area':inter.area,'intersection_planar_length':inter.length,'intersection_geometry':mapping(inter)})
+ unionRows.append({'id':id,'full_candidate_feature':f,'canonical_full_feature_sha256':sha(canon(f)),'detector_properties':f['properties'],'candidate_planar_area':g.area,'norway_full_product':regions[0],'sweden_full_product':regions[1],'all_two_source_products_intersection_geometry':mapping(allI),'all_two_source_products_difference_geometry':mapping(allD),'all_two_source_products_intersection_planar_area':allI.area,'all_two_source_products_difference_planar_area':allD.area,'four_contact_union_intersection_geometry':mapping(cI),'four_contact_union_difference_geometry':mapping(cD),'four_contact_union_intersection_planar_area':cI.area,'four_contact_union_difference_planar_area':cD.area,'intersecting_adm2_units':perunit})
 # Rebind diagnostic fragment rows exactly; feature bytes written canonically as extracted rows
 for fid,f in fragments.items():
  provided=next((b['feature_sha256'] for ci in ids for b in components[ci]['properties']['fragment_bindings'] if b['id']==fid),None)
