@@ -25,11 +25,13 @@ const gitText = args => git(args).toString('utf8').trim();
 const head = gitText(['rev-parse', 'HEAD']);
 const branch = gitText(['branch', '--show-current']);
 need(branch === 'engineering/iran-pakistan-offline-integration-991-20261006-local22', 'Wrong owned branch');
-need(process.argv.length === 4 && process.argv[2] === '--worker-id' && process.argv[3].trim(),
-  'Usage: node ' + SELF + ' --worker-id CANONICAL_ROOT_RESERVATION_WORKER_ID');
+need([4, 6].includes(process.argv.length) && process.argv[2] === '--worker-id' && process.argv[3]?.trim() &&
+  (process.argv.length === 4 || process.argv[4] === '--replace-manifest' && /^[a-f0-9]{64}$/.test(process.argv[5])),
+  'Usage: node ' + SELF + ' --worker-id CANONICAL_ROOT_RESERVATION_WORKER_ID [--replace-manifest EXACT_PRIOR_SHA256]');
 const worker = process.argv[3];
+const priorHash = process.argv.length === 6 ? process.argv[5] : null;
+const manifestTarget = path.join(repo, MANIFEST);
 git(['merge-base', '--is-ancestor', BASE, head]);
-need(!fs.existsSync(path.join(repo, MANIFEST)), 'Exclusive manifest output already exists; preserve it and review a new vintage');
 need(gitText(['status', '--porcelain', '--untracked-files=normal']) === '', 'Commit all candidate inputs before manifest preparation');
 
 function blob(name, commit) {
@@ -44,6 +46,21 @@ function blob(name, commit) {
   need(raw.length === size, 'Incomplete Git bytes: ' + name);
   return raw;
 }
+let previousManifest = null, previousRaw = null;
+function checkedPreviousManifest() {
+  const stat = fs.lstatSync(manifestTarget);
+  need(stat.isFile() && fs.realpathSync(manifestTarget) === manifestTarget && stat.size <= 1024 * 1024,
+    'Prior manifest must be an ordinary bounded file without symlinks');
+  const raw = fs.readFileSync(manifestTarget);
+  need(raw.length === stat.size && sha256(raw) === priorHash && raw.equals(blob(MANIFEST, head)),
+    'Prior manifest must match the declared hash and exact committed HEAD bytes');
+  if (previousRaw) need(raw.equals(previousRaw), 'Prior manifest changed during preparation');
+  return raw;
+}
+if (priorHash) {
+  previousRaw = checkedPreviousManifest();
+  previousManifest = {commit: head, path: MANIFEST, bytes: previousRaw.length, sha256: priorHash};
+} else need(!fs.existsSync(manifestTarget), 'Existing manifest requires explicitly reviewed --replace-manifest EXACT_PRIOR_SHA256');
 const descriptor = (name, raw, role) => ({path: name, bytes: raw.length, sha256: sha256(raw), hash_kind: 'file-bytes', role});
 const baseFiles = new Map(), outputs = new Map();
 function baseline(name, role = 'predecessor-context') {
@@ -135,10 +152,12 @@ for (const [index, source] of climate.entries()) sources.push({id: 'climate-orig
   restoration: 'Restore exact original archive SHA ' + source.sha256 + ' from its recorded URL; source cache path ' + source.cache_path + '.',
   limit: 'Raw archive exceeds the per-file evidence limit and is not claimed retained in this packet. Climate values remain reference labels; this packet establishes no common source date or historical membership.', original_source: source});
 
-const files = readGitPRFiles(BASE, head, {cwd: repo});
+const currentFiles = readGitPRFiles(BASE, head, {cwd: repo});
+const existingSelf = currentFiles.find(file => file.filename === MANIFEST);
+const files = currentFiles.filter(file => file.filename !== MANIFEST);
 need(files.every(file => ['added', 'modified', 'removed', 'renamed'].includes(file.status)), 'Unsupported Git change status');
-need(!files.some(file => file.filename === MANIFEST), 'Manifest already committed; use an independently reviewed replacement vintage');
-files.push({filename: MANIFEST, status: 'added'});
+need(!existingSelf || priorHash && ['added', 'modified'].includes(existingSelf.status), 'Unexpected prior manifest change status');
+files.push(existingSelf ?? {filename: MANIFEST, status: 'added'});
 const receipts = files.map(file => {
   const row = {path: file.filename, status: file.status};
   if (file.previous_filename) row.previous_path = file.previous_filename;
@@ -192,8 +211,9 @@ const manifest = {version: 1, issue: 991, lane: 'engineering', worker_id: worker
   metrics, metric_bindings: bindings, summaries: metrics.map(({id, value, unit}) => ({metric_id: id, value, unit})), validation,
   conclusions: [{status: 'unresolved', source_ids: sources.map(source => source.id), text: 'Geographic authority, historical interval alignment, unknown-cell water status, source reuse approvals and publication approval remain unresolved. Byte verification and archived engineering executions do not establish them.'}],
   stages: {research: 'partial', implementation: 'implemented', geographic_approval: 'unapproved'},
-  commands: ['node ' + SELF + ' --worker-id ' + worker],
+  commands: ['node ' + SELF + ' --worker-id ' + worker + (priorHash ? ' --replace-manifest ' + priorHash : '')],
   preparation: {execution_commit: head, prototype_archive_commit: ARCHIVE, producer,
+    ...(previousManifest ? {previous_manifest: previousManifest} : {}),
     runtime: {node: process.version, executable_sha256: sha256(fs.readFileSync(process.execPath))},
     self_hash_excluded: MANIFEST, trusted_validator_baseline: BASE,
     validation_scope: 'Local exact-file fixture using trusted PR-base validators; not a GitHub contract check, independent review, factual approval or deployment'},
@@ -230,8 +250,28 @@ need(raw.length <= 1024 * 1024, 'Enforced manifest fetch exceeds 1 MiB');
 manifest.preparation.manifest_fetch_budget_is_separate = true;
 const final = Buffer.from(JSON.stringify(manifest, null, 2) + '\n');
 need(final.length <= 1024 * 1024, 'Enforced manifest fetch exceeds 1 MiB');
-fs.writeFileSync(path.join(repo, MANIFEST), final, {flag: 'wx'});
-need(fs.readFileSync(path.join(repo, MANIFEST)).equals(final), 'Manifest readback mismatch');
+need(gitText(['rev-parse', 'HEAD']) === head && gitText(['status', '--porcelain', '--untracked-files=normal']) === '',
+  'Candidate HEAD or inputs changed during validation');
+// Complete the new file before touching the old path. An interrupted preparation
+// never truncates the committed prior receipt. The temporary file is ours only.
+const temporary = manifestTarget + '.prepare-' + process.pid + '.tmp';
+let temporaryOwned = false;
+try {
+  const fd = fs.openSync(temporary, 'wx', 0o644); temporaryOwned = true;
+  try { fs.writeFileSync(fd, final); fs.fsyncSync(fd); } finally { fs.closeSync(fd); }
+  need(fs.readFileSync(temporary).equals(final), 'Temporary manifest readback mismatch');
+  need(gitText(['rev-parse', 'HEAD']) === head, 'Candidate HEAD changed before manifest installation');
+  if (priorHash) {
+    checkedPreviousManifest();
+    fs.renameSync(temporary, manifestTarget);
+    temporaryOwned = false;
+  } else {
+    // A hard link admits the new path exclusively, without an overwrite race.
+    fs.linkSync(temporary, manifestTarget);
+    fs.unlinkSync(temporary); temporaryOwned = false;
+  }
+} finally { if (temporaryOwned) fs.unlinkSync(temporary); }
+need(fs.readFileSync(manifestTarget).equals(final), 'Manifest readback mismatch');
 console.log(JSON.stringify({path: MANIFEST, bytes: final.length, sha256: sha256(final), changed_files: files.length,
   descriptors: manifest.baseline.files.length + manifest.outputs.length, trusted_remote_reader_bytes: admittedBytes,
   status: result.status, metric_vintage: 'archived', approval: 'unapproved'}));

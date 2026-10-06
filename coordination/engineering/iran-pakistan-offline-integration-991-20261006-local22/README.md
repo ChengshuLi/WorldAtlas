@@ -14,4 +14,6 @@ Prototype vintages, failed attempts, full generator closures and raw restoration
 
 The original environmental sources remain separately identified by whole-byte hashes and restoration receipts in the prototype archive. Oversized raster originals are not misrepresented as clipped working windows or silently discarded; terrain licensing and source-date limits remain explicit. Original political source preparation and all record hashes are retained in the ownership receipts; prepared simplified products are not described as their provider's raw original archive.
 
+The published pixel audit uses a single complete gzip transport. The original source JSON stays in the repository; the build checks every decoded byte against it, and the coverage dialog uses the shared gzip reader. This reduces package bytes without dropping records or weakening the reserve gate.
+
 The final review must include every changed ordinary file in the enforced bounded evidence manifest, the actual final-head build and UI checks, the trusted geography/integration checks and distinct source/geometry/release/code review. Earlier successful prototype build/render receipts establish their recorded vintages only. No delivery or worldwide completion is claimed by this packet.

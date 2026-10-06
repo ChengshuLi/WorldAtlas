@@ -41,6 +41,9 @@ assert.equal(atlas.reference_release.id,expected.release);assert.equal(atlas.ref
 assert.equal(atlas.pixelMap.canonical_grid_sha256,expected.native);assert.equal(atlas.pixelMap.method,'native-linear-evenodd-first-owner-v1');
 assert.equal(atlas.preparedEvidence.footprints_sha256,expected.footprints);
 assert.ok(atlas.nativeContextInputStage&&atlas.gridVerification,'Mandatory actual build context/selection receipts must be present');
+const pixelAuditInput=blob('data/pixel-audit.json'),pixelAuditTransport=asset('pixel-audit.json.gz');
+assert.ok(gunzipSync(pixelAuditTransport,{maxOutputLength:MAX}).equals(pixelAuditInput.raw),'Published audit transport must retain every original byte');
+assert.ok(!fs.existsSync(path.join(dist,'pixel-audit.json')),'Published audit has one complete transport');
 const subjects=[{id:'gb:IRN:ADM2:26516999B17111396986996',query:'Saravan'},{id:'gb:PAK:ADM2:60131773B78019453337506',query:'Panjgur'}];
 assert.deepEqual(Object.keys(atlas.boundarySourceReviews).sort(),subjects.map(s=>s.id).sort(),'Mixed boundary provenance must cover exactly the migrated reference subjects');
 const targets=new Map(subjects.map(s=>[s.id,s]));
@@ -227,6 +230,11 @@ try{
         await page.screenshot({path:path.join(out,renderer+'-'+subject.query.toLowerCase()+'.png')});
         profileResults.push({id:subject.id,name:subject.name,environments,camera,picks});
       }
+      await page.locator('#coverage-button').click();
+      await page.waitForFunction(()=>document.querySelector('#coverage-tree')?.children.length===6);
+      assert.ok(!(await page.locator('#coverage-context').textContent()).includes('could not load'),'Actual coverage report must load the complete compressed audit');
+      assert.equal(await page.locator('#coverage-dialog a[href="./pixel-audit.json.gz"]').count(),1,'Complete audit remains downloadable');
+      await page.locator('#coverage-dialog').evaluate(dialog=>dialog.close());
       assert.deepEqual(errors,[]);assert.deepEqual(httpErrors,[]);assert.deepEqual(consoleErrors,[]);
       // Stream reader cancellation can surface as ERR_ABORTED after the checked
       // grid has loaded. Retain those events and reject other transport failures.
@@ -265,7 +273,7 @@ try{
     const paired=gpu.camera.samples.flatMap(g=>{const c=cpu.camera.samples.find(c=>c.x===g.x&&c.y===g.y);return c?[{cell:[g.x,g.y],gpu:g.rgba,canvas:c.rgba,equal:g.rgba.every((v,k)=>Math.abs(v-c.rgba[k])<=1)}]:[];});
     return {id:subject.id,matching_ui_owner:true,matching_reference_values:true,scaleComparison,paired_visible_cells:paired.length,matching_rgba_cells:paired.filter(p=>p.equal).length,paired};
   });
-  const report={version:1,execution_commit:head,producer,dist,expected,atlas_manifest_sha256:sha(atlasBytes),inputs:[candidates.pin,deltaInput.pin],built_assets:[...files.values()],
+  const report={version:1,execution_commit:head,producer,dist,expected,atlas_manifest_sha256:sha(atlasBytes),inputs:[candidates.pin,deltaInput.pin,pixelAuditInput.pin],built_assets:[...files.values()],pixel_audit_complete_byte_roundtrip:true,coverage_dialog_checked_both_renderers:true,
     playwright_version:playwrightPackage.version,browser_version:browser.version(),owned_browser_contexts:true,optional_remote_font_css_disabled:true,all_954_gpu_owners_checked:true,results,comparisons,
     limits:['Isolated headless Chromium checks the actual built production application; this is not a personal-browser or hardware-device certification.',
       'Canvas UI hover/click checks sample supported additions; all 954 additions are checked against actual uploaded GPU ownership textures.',

@@ -155,7 +155,10 @@ try {
     await fs.mkdir('dist/'+file.path.split('/').slice(0,-1).join('/'),{recursive:true});await fs.writeFile(`dist/${file.path}`,bytes);
   }
   await fs.writeFile('dist/geographic-migration-review.json.gz',gzipSync(await fs.readFile('data/geographic-migration-review.json'),{level:9}));
-  for(const file of ['world-review.json','global-refinement-report.json','source-inventory.json','pixel-audit.json','regional-membership-report.json','border-parent-review.json','attribute-sources.json','reference-polity-report.json','settlement-source-report.json'])await fs.copyFile(`data/${file}`,`dist/${file}`);
+  const pixelAuditBytes=await fs.readFile('data/pixel-audit.json'),pixelAuditTransport=gzipSync(pixelAuditBytes,{level:9});
+  if(!gunzipSync(pixelAuditTransport).equals(pixelAuditBytes))throw Error('Pixel audit transport must preserve every original byte');
+  await fs.writeFile('dist/pixel-audit.json.gz',pixelAuditTransport);
+  for(const file of ['world-review.json','global-refinement-report.json','source-inventory.json','regional-membership-report.json','border-parent-review.json','attribute-sources.json','reference-polity-report.json','settlement-source-report.json'])await fs.copyFile(`data/${file}`,`dist/${file}`);
   const projectedReviewFile='data/macro-foundation/world-review-projection.json',hasProjectedReview=await fs.access(projectedReviewFile).then(()=>true,()=>false);
   if(hasProjectedReview){await fs.writeFile('dist/world-review-source-inspection.json.gz',gzipSync(await fs.readFile('data/world-review.json'),{level:9}));await fs.copyFile(projectedReviewFile,'dist/world-review.json');}
   for(const file of ['administrative-sources.json','granularity-report.json','hierarchy-report.json','semantic-report.json','granularity-audit.json','location-policy.json','coverage-report.json'])await fs.copyFile(`data/${file}`,`dist/${file}`);
