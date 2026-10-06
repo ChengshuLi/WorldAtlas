@@ -165,6 +165,14 @@ def observation_overlay(original,current):
         raise ValueError('Full observation overlay reconstruction differs')
     return overlay
 
+def verify_annotation_original(annotation,original,pin,ordinal):
+    reference=annotation['original_investigation']
+    if (annotation['component']!=original['component']
+            or reference['path']!=pin['path'] or reference['file_sha256']!=pin['sha256']
+            or type(reference['row_index'])is not int or reference['row_index']!=ordinal
+            or reference['commit']!=C or annotation['native_observation_reference']['component']!=original['component']):
+        raise ValueError('Complete annotation original-file/index/identity binding differs')
+
 def source_family(context):
     metadata=context['original_metadata']
     if context['id'].startswith('atlas:physical:'):
@@ -306,10 +314,10 @@ def main():
             record['cause_triage']={'observed_bucket':key['observed_scope_bucket'],'cause_status':'unknown',
                 'processing_clues_are_hypotheses':True,'source_family_references':[sha256(canonical_json(f)) for f in families]}
             annotations[identity]={'component':identity,'original_investigation':{'commit':C,'path':d['path'],
-                'file_sha256':d['sha256'],'row_index':ordinal,'row_sha256':sha256(canonical_json(archived))},
-                'native_observation_reference':{'family':'frozen-reviewed-native','component':identity,
-                    'row_sha256':sha256(canonical_json(frozen_observations[identity]))},
+                'file_sha256':d['sha256'],'row_index':ordinal},
+                'native_observation_reference':{'family':'frozen-reviewed-native','component':identity},
                 'current_issue_subject_joins':links,'actionable_batch_id':bid,'cause_triage':record['cause_triage']}
+            verify_annotation_original(annotations[identity],archived,d,ordinal)
             triage_counts[key['observed_scope_bucket']]+=1
             group=groups.setdefault(bid,{'id':bid,'grouping':key,'component_ids':[],'contact_ids':set(),
                 'edge_neighbor_ids':set(),'existing_related_issues':set(),'source_families':{},'best_rank':{}})
