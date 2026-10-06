@@ -41,8 +41,10 @@ def main():
  baseline="fc328993bb8c0690b3b4687d193c7f0887bd5b17"
  if subprocess.call(["git","merge-base","--is-ancestor",baseline,execution],cwd=ROOT)!=0:
   raise ValueError("fresh main baseline is not an ancestor of execution commit")
- if subprocess.check_output(["git","status","--porcelain","--untracked-files=no"],cwd=ROOT,text=True).strip():
-  raise ValueError("tracked changes present during source sampling")
+ status=subprocess.check_output(["git","status","--porcelain","--untracked-files=no"],cwd=ROOT,text=True).splitlines()
+ allowed="research/geography/shared-seam-ind-pak-20261006/follow-up-v2/worldcover-window-summary.json"
+ if any(line[3:]!=allowed for line in status):
+  raise ValueError("tracked changes outside the generated summary during source sampling")
  transformer=Transformer.from_crs("EPSG:4326","EPSG:4326",always_xy=True)
  for tile in TILES:
   url=BASE.format(tile); local=CACHE/(tile+"_Map.tif")
