@@ -1,0 +1,38 @@
+{
+  "method_id": "serbia-register-preservation",
+  "kind": "generator",
+  "outcome": "passed",
+  "evidence_path": "data/regional-review/serbia-register-preservation-1017-erratum/validation/negative-control.json",
+  "checks": [
+    {
+      "control_id": "positive-exact-scope",
+      "outcome": "passed",
+      "detail": "exact 67-ID ordered issue roster accepted and tied to its canonical SHA256"
+    },
+    {
+      "control_id": "negative-missing-subject",
+      "outcome": "passed",
+      "detail": "66-ID fixture rejected by the production scope validator before emission"
+    },
+    {
+      "control_id": "negative-duplicate-subject",
+      "outcome": "passed",
+      "detail": "duplicate-ID fixture rejected by the production scope validator before emission"
+    },
+    {
+      "control_id": "negative-outside-subject",
+      "outcome": "passed",
+      "detail": "outside-roster fixture rejected by the production scope validator before emission"
+    },
+    {
+      "control_id": "negative-mutated-input",
+      "outcome": "passed",
+      "detail": "changed byte fixture rejected by the production whole-file pin verifier"
+    },
+    {
+      "control_id": "negative-late-preexisting-output",
+      "outcome": "passed",
+      "detail": "fifth-destination sentinel rejected before any of the four earlier output paths were created; sentinel bytes unchanged"
+    }
+  ]
+}
