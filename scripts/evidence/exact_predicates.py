@@ -238,7 +238,7 @@ def read_inputs(root, request):
             reject('duplicate-file-or-invalid-role')
         seen_paths.add(path)
         candidate = Path(path)
-        if candidate.is_absolute() or '..' in candidate.parts:
+        if candidate.is_absolute() or any(part in ('', '.', '..') for part in path.split('/')) or '\\' in path or '\0' in path:
             reject('unsafe-original-file-path')
         source = root / candidate
         if any((root / Path(*candidate.parts[:i])).is_symlink() for i in range(1, len(candidate.parts) + 1)):

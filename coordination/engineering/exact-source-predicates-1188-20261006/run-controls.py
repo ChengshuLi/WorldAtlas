@@ -6,15 +6,15 @@ import json
 from pathlib import Path
 import subprocess
 import sys
-import tempfile
 
 REPO = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO / 'scripts'))
 from evidence.exact_predicates import diagnose, segment_certificate, VERSION
+from evidence.immutable import Baseline, canonical_json, VERSION as PREPARATION_VERSION
 
 
 def encode(value):
-    return (json.dumps(value, sort_keys=True, separators=(',', ':'), allow_nan=False) + '\n').encode()
+    return canonical_json(value)
 
 
 def write_new(path, value):
@@ -24,7 +24,16 @@ def write_new(path, value):
 
 def main(output):
     fixtures = Path(__file__).parent / 'fixtures'
-    request = json.loads((fixtures / 'request.json').read_bytes())
+    producer_commit = subprocess.check_output(['git', '-C', str(REPO), 'rev-parse', 'HEAD'], text=True).strip()
+    pins = []
+    for path in sorted(fixtures.glob('*.json')):
+        relative = path.relative_to(REPO).as_posix()
+        original = subprocess.check_output(['git', '-C', str(REPO), 'show', producer_commit + ':' + relative])
+        pins.append({'path': relative, 'bytes': len(original), 'sha256': hashlib.sha256(original).hexdigest()})
+    baseline = Baseline(REPO, producer_commit, pins)
+    for pin in pins:
+        assert (REPO / pin['path']).read_bytes() == baseline.read(pin['path'])
+    request = json.loads(baseline.read((fixtures / 'request.json').relative_to(REPO).as_posix()))
     context = request['context']
     def seg(id, endpoints): return {'id': id, 'endpoints': endpoints, 'context': context}
     triangle = segment_certificate(seg('analytic-diagonal', [[0, 0], [1, 1]]), seg('analytic-gap-edge', [[0, 1], [1, -1]]))
@@ -54,7 +63,7 @@ def main(output):
     assert first_hash == second_hash
     reproducibility = {'method_id': 'exact-original-source', 'kind': 'reproducibility', 'outcome': 'passed',
                        'run_one_sha256': first_hash, 'run_two_sha256': second_hash,
-                       'producer_commit': subprocess.check_output(['git', '-C', str(REPO), 'rev-parse', 'HEAD'], text=True).strip(),
+                       'producer_commit': producer_commit, 'input_files': pins, 'preparation_helper_version': PREPARATION_VERSION,
                        'helper_version': VERSION, 'python': sys.version}
     output.mkdir(parents=True, exist_ok=False)
     for name, result in [('run-one.json', one), ('run-two.json', two), ('positive-control.json', positive),
