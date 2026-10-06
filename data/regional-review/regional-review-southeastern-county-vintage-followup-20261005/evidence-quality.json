@@ -154,6 +154,16 @@
       "status": "added"
     },
     {
+      "path": "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/iou-negative-control.json",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/iou-positive-control.json",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
       "path": "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/issue-978-scope-snapshot.json",
       "previous_path": null,
       "status": "added"
@@ -238,21 +248,40 @@
   "lane": "geography",
   "methods": [
     {
-      "description": "Check six GeoJSON county polygons in native EPSG:4326 for non-empty 2D polygon validity without repair; independently reproduce each 2026 comparison IoU after transforming valid shapes to EPSG:5070 with explicit longitude-first axis order.",
-      "id": "native-validity-and-iou",
+      "description": "Check the six Atlas, geoBoundaries and TIGERweb polygons in native EPSG:4326 for non-empty valid Polygon/MultiPolygon geometry without repair or MakeValid.",
+      "id": "native-geometry-validity",
+      "kind": "measurement",
+      "software": "Python 3.12.14; Shapely 2.1.2",
+      "units": "Boolean validity and component/vertex counts"
+    },
+    {
+      "description": "Transform valid source/reference shapes from longitude-first EPSG:4326 to EPSG:5070 using pyproj always_xy and compute intersection area divided by union area.",
+      "id": "iou-5070-reproduction",
       "kind": "measurement",
       "software": "Python 3.12.14; Shapely 2.1.2; pyproj 3.7.2",
-      "units": "EPSG:5070 planar intersection-area / union-area ratio; polygon validity status"
+      "units": "EPSG:5070 planar intersection area / union area ratio"
     }
   ],
   "metric_bindings": [],
   "metrics": [],
   "outputs": [
     {
-      "bytes": 9998,
+      "bytes": 10264,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/RESEARCH.md",
-      "sha256": "e42965b297fcb48b6af7c77d4a9b5295a9d48da118b69f3c73af3feda20f63cc"
+      "sha256": "0c52c4254f89872b66ccc81a7c4c970f937e72ecf8cfeac0c21819ae3dea8283"
+    },
+    {
+      "bytes": 477,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/iou-negative-control.json",
+      "sha256": "ed4bbe492ba492754962e0eafcadbf0dd5326ca227225bc074ea82e62074b547"
+    },
+    {
+      "bytes": 296,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/iou-positive-control.json",
+      "sha256": "f569d070b374b18c0a68e3621f153de9e617a621f77922cf9d42893d107a5f17"
     },
     {
       "bytes": 8983,
@@ -261,16 +290,16 @@
       "sha256": "5ad623c6e9f4bb867d80461021601fb4da8358ce48271358d676d5d42021768a"
     },
     {
-      "bytes": 193,
+      "bytes": 143,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/measurement-negative-control.json",
-      "sha256": "4b47c8adae7d86b3567010b0634b69c6681155573c48dc883b5f471431e99f7a"
+      "sha256": "86864d3eca0c7f88edd9fffec8fc829ba8c066faca7719d3be77d317ad5c5588"
     },
     {
-      "bytes": 181,
+      "bytes": 131,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/measurement-positive-control.json",
-      "sha256": "6f459d46385f9b957dcb618e9ce368c376b60c4431e8ee2842b8d05a69c90a2b"
+      "sha256": "71cfc8727c6db06dc046ebd68df07d26805c5863404618c07929d265403012b7"
     },
     {
       "bytes": 13389,
@@ -285,10 +314,10 @@
       "sha256": "350b4389b80f21c319560f99b9a4a1d7d07187c17a32f73ddbb177596b3b59f6"
     },
     {
-      "bytes": 898,
+      "bytes": 2745,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/run-measurement-controls.py",
-      "sha256": "399fa23a1ec29e8b4e0bd24ba8e206bd55ba89789a63fd0eabe1f6193ef157b2"
+      "sha256": "c6212e32ebb1f4999630af42409c420259f6db3a13c4db26367a639d21b14bdc"
     },
     {
       "bytes": 2253,
@@ -410,13 +439,25 @@
     {
       "evidence_path": "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/measurement-positive-control.json",
       "kind": "positive-control",
-      "method_id": "native-validity-and-iou",
+      "method_id": "native-geometry-validity",
       "outcome": "passed"
     },
     {
       "evidence_path": "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/measurement-negative-control.json",
       "kind": "negative-control",
-      "method_id": "native-validity-and-iou",
+      "method_id": "native-geometry-validity",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/iou-positive-control.json",
+      "kind": "positive-control",
+      "method_id": "iou-5070-reproduction",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/regional-review-southeastern-county-vintage-followup-20261005/iou-negative-control.json",
+      "kind": "negative-control",
+      "method_id": "iou-5070-reproduction",
       "outcome": "passed"
     }
   ],
