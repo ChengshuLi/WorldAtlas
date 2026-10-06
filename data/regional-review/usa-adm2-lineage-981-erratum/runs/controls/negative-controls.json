@@ -1,0 +1,25 @@
+{
+  "method_id": "immutable-source-reproduction",
+  "kind": "source",
+  "outcome": "passed",
+  "version": 1,
+  "fixture_bytes": 3,
+  "controls": [
+    {
+      "control": "modified input bytes hash rejected",
+      "rejected_before_output": true
+    },
+    {
+      "control": "missing input rejected",
+      "rejected_before_output": true
+    },
+    {
+      "control": "duplicate scoped IDs rejected",
+      "rejected_before_output": true
+    },
+    {
+      "control": "existing output preserved",
+      "rejected_before_overwrite": true
+    }
+  ]
+}

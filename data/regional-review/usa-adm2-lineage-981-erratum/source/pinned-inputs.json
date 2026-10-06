@@ -1,0 +1,509 @@
+{
+  "baseline_commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+  "files": [
+    {
+      "pin": "input_1",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/administrative-sources.json",
+      "bytes": 661416,
+      "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+    },
+    {
+      "pin": "input_2",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geographic-releases/current-manifest.json",
+      "bytes": 206,
+      "sha256": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81"
+    },
+    {
+      "pin": "input_3",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/macro-loose-ends-v5-additions.json",
+      "bytes": 11393,
+      "sha256": "8f49c003f2277593041f3526c97b58252599cd53f20abf27fd6a6eb62cfdb5d1"
+    },
+    {
+      "pin": "input_4",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-0.json",
+      "bytes": 8539839,
+      "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3"
+    },
+    {
+      "pin": "input_5",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-1.json",
+      "bytes": 8060108,
+      "sha256": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7"
+    },
+    {
+      "pin": "input_6",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-10.json",
+      "bytes": 5144571,
+      "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+    },
+    {
+      "pin": "input_7",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-11.json",
+      "bytes": 5131824,
+      "sha256": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f"
+    },
+    {
+      "pin": "input_8",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-12.json",
+      "bytes": 4489493,
+      "sha256": "24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7"
+    },
+    {
+      "pin": "input_9",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-13.json",
+      "bytes": 5709487,
+      "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1"
+    },
+    {
+      "pin": "input_10",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-14.json",
+      "bytes": 4355198,
+      "sha256": "c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0"
+    },
+    {
+      "pin": "input_11",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-15.json",
+      "bytes": 5180426,
+      "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df"
+    },
+    {
+      "pin": "input_12",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-16.json",
+      "bytes": 5213846,
+      "sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797"
+    },
+    {
+      "pin": "input_13",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-17.json",
+      "bytes": 4945828,
+      "sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db"
+    },
+    {
+      "pin": "input_14",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-18.json",
+      "bytes": 4909063,
+      "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123"
+    },
+    {
+      "pin": "input_15",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-19.json",
+      "bytes": 4583022,
+      "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269"
+    },
+    {
+      "pin": "input_16",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-2.json",
+      "bytes": 6259307,
+      "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf"
+    },
+    {
+      "pin": "input_17",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-20.json",
+      "bytes": 6570767,
+      "sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f"
+    },
+    {
+      "pin": "input_18",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-21.json",
+      "bytes": 6737781,
+      "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7"
+    },
+    {
+      "pin": "input_19",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-22.json",
+      "bytes": 4746385,
+      "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+    },
+    {
+      "pin": "input_20",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-23.json",
+      "bytes": 4962410,
+      "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2"
+    },
+    {
+      "pin": "input_21",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-24.json",
+      "bytes": 4816899,
+      "sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c"
+    },
+    {
+      "pin": "input_22",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-25.json",
+      "bytes": 4525239,
+      "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394"
+    },
+    {
+      "pin": "input_23",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-26.json",
+      "bytes": 4608983,
+      "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632"
+    },
+    {
+      "pin": "input_24",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-27.json",
+      "bytes": 4863162,
+      "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758"
+    },
+    {
+      "pin": "input_25",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-28.json",
+      "bytes": 6613963,
+      "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+    },
+    {
+      "pin": "input_26",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-29.json",
+      "bytes": 12932167,
+      "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a"
+    },
+    {
+      "pin": "input_27",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-3.json",
+      "bytes": 5153118,
+      "sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617"
+    },
+    {
+      "pin": "input_28",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-30.json",
+      "bytes": 11979437,
+      "sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a"
+    },
+    {
+      "pin": "input_29",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-31.json",
+      "bytes": 10086485,
+      "sha256": "44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e"
+    },
+    {
+      "pin": "input_30",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-32.json",
+      "bytes": 10211739,
+      "sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64"
+    },
+    {
+      "pin": "input_31",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-33.json",
+      "bytes": 607984,
+      "sha256": "d928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe"
+    },
+    {
+      "pin": "input_32",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-4.json",
+      "bytes": 4835479,
+      "sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c"
+    },
+    {
+      "pin": "input_33",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-5.json",
+      "bytes": 5226173,
+      "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc"
+    },
+    {
+      "pin": "input_34",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-6.json",
+      "bytes": 4607953,
+      "sha256": "dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a"
+    },
+    {
+      "pin": "input_35",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-7.json",
+      "bytes": 4257402,
+      "sha256": "1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387"
+    },
+    {
+      "pin": "input_36",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-8.json",
+      "bytes": 5097739,
+      "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1"
+    },
+    {
+      "pin": "input_37",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/part-9.json",
+      "bytes": 5729632,
+      "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6"
+    },
+    {
+      "pin": "input_38",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/geography/source-restoration-additions.json",
+      "bytes": 1573576,
+      "sha256": "04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9"
+    },
+    {
+      "pin": "input_39",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/hierarchy.json",
+      "bytes": 10164089,
+      "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+    },
+    {
+      "pin": "input_40",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/macro-foundation/approved-boundary-decisions.json",
+      "bytes": 634171,
+      "sha256": "b67d5a3bcf8101cffb089c0262286378a80bb642cd6dde33f7721419227e3f18"
+    },
+    {
+      "pin": "input_41",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/macro-foundation/current-membership-inventory.json.gz",
+      "bytes": 2404397,
+      "sha256": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab"
+    },
+    {
+      "pin": "input_42",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/macro-foundation/macro-certificate.json",
+      "bytes": 38959,
+      "sha256": "f50f70fcb0756712ab7a7a388bc8cada093080518f07d3a6f7329758980ea81b"
+    },
+    {
+      "pin": "input_43",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/macro-foundation/regional-handoffs.json.gz",
+      "bytes": 71286,
+      "sha256": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a"
+    },
+    {
+      "pin": "input_44",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/macro-foundation/review-index.json",
+      "bytes": 2383,
+      "sha256": "31dfd5cbfd8f3def829f655e7ddd855d2d2865e5ac63f9d1a97d1c08782910cf"
+    },
+    {
+      "pin": "input_45",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/regional-review/regional-review-2353eb2f714cba0c/sources/geoboundaries-2018/CITATION-AND-USE-geoBoundaries.txt",
+      "bytes": 4316,
+      "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+    },
+    {
+      "pin": "input_46",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/regional-review/regional-review-528e53393a4376b4/findings.md",
+      "bytes": 10135,
+      "sha256": "029bf958998bcfb069bef9a77dbbf31b1f1955e9f4f3ab81e6b32bd89876e566"
+    },
+    {
+      "pin": "input_47",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/regional-review/regional-review-528e53393a4376b4/runs/verified-one/county-assessments.jsonl",
+      "bytes": 631015,
+      "sha256": "3c0ce637918e482c4a717164a819daf820cd1c2072abf440aac1ecb2ceff187e"
+    },
+    {
+      "pin": "input_48",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/regional-review/regional-review-528e53393a4376b4/scope.json",
+      "bytes": 12812,
+      "sha256": "0e61c22b18a93947685a2cdd2975d8462b5a1e9527a7dd897bb009d1eb54e155"
+    },
+    {
+      "pin": "input_49",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/regional-review/regional-review-528e53393a4376b4/source/geoBoundaries-USA-ADM2-metaData.json.lfs-pointer",
+      "bytes": 128,
+      "sha256": "c312a38735f5b437262981afae4ea72f49c6d1608c4aefd7fef4e345de493d21"
+    },
+    {
+      "pin": "input_50",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/regional-review/regional-review-528e53393a4376b4/source/geoBoundaries-USA-ADM2.geojson.lfs-pointer",
+      "bytes": 133,
+      "sha256": "bce3f45df8a08d5f2475eaa44717eab79f9f57dababa22378c5d62f5bbabc1dd"
+    },
+    {
+      "pin": "input_51",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/regional-review/regional-review-528e53393a4376b4/source/geoBoundaries-restoration.json",
+      "bytes": 1215,
+      "sha256": "79e1152972030b7e581249673ce396aa47168f068b2e39d15b06affe3759b5e9"
+    },
+    {
+      "pin": "input_52",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/regional-review/usa-adm2-lineage-428/README.md",
+      "bytes": 904,
+      "sha256": "9544d3bfc0e162787e4c558afd9e03b1c404211170b16c714817e9bdbf134195"
+    },
+    {
+      "pin": "input_53",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/regional-review/usa-adm2-lineage-428/evidence-quality.json",
+      "bytes": 68847,
+      "sha256": "1529cf82a2af384c2ceec5f09969b3da22466a695550d60faeef0e098d089d6d"
+    },
+    {
+      "pin": "input_54",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/regional-review/usa-adm2-lineage-428/findings.md",
+      "bytes": 4822,
+      "sha256": "b3878feaa115f073de39ca753469504b1e6d9f45745016953055b8f025dba903"
+    },
+    {
+      "pin": "input_55",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/regional-review/usa-adm2-lineage-428/findings/input-manifest.json",
+      "bytes": 11843,
+      "sha256": "d582b787f663988ad908ff14329a9aac271c9b7b3b659ce285ce19f063a74b1f"
+    },
+    {
+      "pin": "input_56",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/regional-review/usa-adm2-lineage-428/findings/source-lineage-audit.json",
+      "bytes": 12229,
+      "sha256": "1160ac4e2491182853659a4115199f56583c281dd5efe0d9d9d45797434f892d"
+    },
+    {
+      "pin": "input_57",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/regional-review/usa-adm2-lineage-428/findings/subject-crosswalk.jsonl",
+      "bytes": 218611,
+      "sha256": "c7ae095791268a05e266b450229f99b7b86546fdd7d644dcbf5876d6eea313c3"
+    },
+    {
+      "pin": "input_58",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/regional-review/usa-adm2-lineage-428/scripts/audit_lineage.py",
+      "bytes": 23566,
+      "sha256": "cd85779fe005fc40eae9045044b94a93576c7eb92c2029508eaf6c503c110b31"
+    },
+    {
+      "pin": "input_59",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/regional-review/usa-adm2-lineage-428/source/api-retrieval.json",
+      "bytes": 827,
+      "sha256": "034b2cded53f7990f336aa9c58c84aa041b9abfdcec8fef5df1d8494b5ba0ad3"
+    },
+    {
+      "pin": "input_60",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/regional-review/usa-adm2-lineage-428/source/issue-api-response.json",
+      "bytes": 29627,
+      "sha256": "90ac9e03c6c4cfa23a2569daf9707e40e4cd1693737d2d0a1d081e026926daa1"
+    },
+    {
+      "pin": "input_61",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/regional-review/usa-adm2-lineage-428/source/upstream-commit-api.json",
+      "bytes": 303566,
+      "sha256": "3443ba146cecbd295fe0a2571dc872ad008b3126153b88d70232a8bfb0b2f833"
+    },
+    {
+      "pin": "input_62",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/regional-review/usa-adm2-lineage-428/sources/upstream-2018/geoBoundaries-USA-ADM2-all.zip.lfs-pointer",
+      "bytes": 133,
+      "sha256": "e0b93eda2f2afc41bda3dc2343e80621933f53e1925446eedee265818d986599"
+    },
+    {
+      "pin": "input_63",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/regional-review/usa-adm2-lineage-428/sources/upstream-2018/geoBoundaries-USA-ADM2-metaData.json",
+      "bytes": 939,
+      "sha256": "a4d2a82a1cd434960b6ed49531bff3330d0881674eea9dc8711e1ad6bf049b9f"
+    },
+    {
+      "pin": "input_64",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/regional-review/usa-adm2-lineage-428/sources/upstream-2018/geoBoundaries-USA-ADM2-metaData.json.lfs-pointer",
+      "bytes": 128,
+      "sha256": "c312a38735f5b437262981afae4ea72f49c6d1608c4aefd7fef4e345de493d21"
+    },
+    {
+      "pin": "input_65",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/regional-review/usa-adm2-lineage-428/sources/upstream-2018/geoBoundaries-USA-ADM2.geojson",
+      "bytes": 10500644,
+      "sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43"
+    },
+    {
+      "pin": "input_66",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/regional-review/usa-adm2-lineage-428/sources/upstream-2018/geoBoundaries-USA-ADM2.geojson.lfs-pointer",
+      "bytes": 133,
+      "sha256": "bce3f45df8a08d5f2475eaa44717eab79f9f57dababa22378c5d62f5bbabc1dd"
+    },
+    {
+      "pin": "input_67",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/regional-review/usa-adm2-lineage-428/sources/upstream-2018/geoBoundaries-USA-ADM2.topojson.lfs-pointer",
+      "bytes": 132,
+      "sha256": "d46ff3121da18651d21910e2ee5e69da8354b6dffc00fb5e3868f4e191aca660"
+    },
+    {
+      "pin": "input_68",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/regional-review/usa-adm2-lineage-428/sources/upstream-2018/geoBoundaries-USA-ADM2_simplified.geojson",
+      "bytes": 7938450,
+      "sha256": "16249e8d795aaded6a72910a8c72115a073814b25ee902d61ccc9a9490c6641a"
+    },
+    {
+      "pin": "input_69",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/regional-review/usa-adm2-lineage-428/sources/upstream-2018/geoBoundaries-USA-ADM2_simplified.geojson.lfs-pointer",
+      "bytes": 132,
+      "sha256": "3a9de34f51a4ce4d4b670bb0c091345f9fec0bc3703f654c395b9b42fd4bba45"
+    },
+    {
+      "pin": "input_70",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/regional-review/usa-adm2-lineage-428/sources/upstream-2018/retrieval.json",
+      "bytes": 6807,
+      "sha256": "6fa77ed577eed18f745bca79aab0f86e879c88ec769026dbd22a386ecad6bc35"
+    },
+    {
+      "pin": "input_71",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/regional-review/usa-adm2-lineage-428/sources/upstream-2018/simplified-object-retrieval.json",
+      "bytes": 717,
+      "sha256": "8c215453feef0b2b43a6e1618d7aec94f45fbc6a553d8edf939304d3faaef12f"
+    },
+    {
+      "pin": "input_72",
+      "commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+      "path": "data/world-index.json",
+      "bytes": 944,
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+    }
+  ]
+}
