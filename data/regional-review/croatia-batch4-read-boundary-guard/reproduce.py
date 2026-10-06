@@ -22,6 +22,11 @@ ISSUE_SNAPSHOT = OWNED / 'source/issue-1209-api-snapshot.json'
 ISSUE_SNAPSHOT_SHA256 = 'f694f98d653042bffe067c698dd6ec20f8673416dc94d8370937b83e2977694b'
 PINNED_COMMIT = 'dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e'
 ORIGINAL_BASELINE = '7646e0962afab6cc4f566439bb2f96890ae4b91e'
+HISTORICAL_PIN_COMMITS = {
+    ORIGINAL_BASELINE,
+    'ab655fbbaf5c0091f24653e66e8e1a40b8fdfeeb',
+    '96f2a6d201236ba62f471535db240b123de60c09',
+}
 OLD_PACKET = Path('data/regional-review/regional-review-ce7798317652c0c2')
 OLD_SCOPE = OLD_PACKET / 'scope.json'
 OLD_ISSUE_SNAPSHOT = OLD_PACKET / 'source/issue-419-api-snapshot.json'
@@ -127,7 +132,7 @@ def load_inputs(read_input=None) -> dict:
         raise ValueError('preserved #1194 scope does not contain all 62 historical pins')
     for key, expected in prior_pins.items():
         commit, separator, path = key.partition(':')
-        if not separator or commit != ORIGINAL_BASELINE or not re.fullmatch(r'[a-f0-9]{64}', expected):
+        if not separator or commit not in HISTORICAL_PIN_COMMITS or not re.fullmatch(r'[a-f0-9]{64}', expected):
             raise ValueError(f'malformed historical source pin: {key}')
         if sha(git_file(commit, path)) != expected:
             raise ValueError(f'historical source pin changed: {key}')
