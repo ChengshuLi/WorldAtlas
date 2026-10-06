@@ -30,10 +30,85 @@ def require(condition, message):
         raise ValueError(message)
 
 
+def structural_geometry(geometry):
+    """Canonicalize representation order only; retain every coordinate token.
+
+    This does not use point-set equality, overlay, rounding or GEOS repair.
+    Type, dimensions, duplicate members/vertices and extra fields stay exact.
+    """
+    def ordered(values):
+        return sorted(values, key=canonical_json)
+
+    def line(points):
+        return min([points, list(reversed(points))], key=canonical_json)
+
+    def rotation(points):
+        # Booth's linear-time minimal cyclic rotation on exact coordinate keys.
+        if not points:
+            return points
+        keys = [canonical_json(p) for p in points]
+        n, i, j, offset = len(keys), 0, 1, 0
+        while i < n and j < n and offset < n:
+            a, b = keys[(i + offset) % n], keys[(j + offset) % n]
+            if a == b:
+                offset += 1
+                continue
+            if a > b:
+                i += offset + 1
+                if i == j:
+                    i += 1
+            else:
+                j += offset + 1
+                if i == j:
+                    j += 1
+            offset = 0
+        start = min(i, j)
+        return points[start:] + points[:start]
+
+    def ring(points):
+        if not points:
+            return points
+        require(len(points) >= 4, 'Reconstructed nonempty ring has too few vertices')
+        require(canonical_json(points[0]) == canonical_json(points[-1]),
+                'Reconstructed ring lost exact closure')
+        # Remove only the mandatory closing copy, never repeated vertices.
+        cycle = points[:-1]
+        result = min([rotation(cycle), rotation(list(reversed(cycle)))], key=canonical_json)
+        return result + result[:1]
+
+    def polygon(rings):
+        return [ring(rings[0])] + ordered([ring(r) for r in rings[1:]]) if rings else []
+
+    result = dict(geometry)
+    kind = geometry['type']
+    if kind == 'GeometryCollection':
+        result['geometries'] = ordered([structural_geometry(g) for g in geometry['geometries']])
+        return result
+    points = geometry['coordinates']
+    operations = {'Point': lambda x: x, 'MultiPoint': ordered,
+                  'LineString': line, 'MultiLineString': lambda x: ordered([line(p) for p in x]),
+                  'Polygon': polygon, 'MultiPolygon': lambda x: ordered([polygon(p) for p in x])}
+    require(kind in operations, 'Unsupported reconstructed geometry type')
+    result['coordinates'] = operations[kind](points)
+    return result
+
+
+def same_structural_row(a, b):
+    if canonical_json(a) == canonical_json(b):
+        return True
+    if 'geometry' not in a or 'geometry' not in b:
+        return False
+    metadata_a = {k: v for k, v in a.items() if k != 'geometry'}
+    metadata_b = {k: v for k, v in b.items() if k != 'geometry'}
+    return (canonical_json(metadata_a) == canonical_json(metadata_b) and
+            canonical_json(structural_geometry(a['geometry'])) ==
+            canonical_json(structural_geometry(b['geometry'])))
+
+
 def require_exact_reconstruction(original, rebuilt, message):
     require(len(original) == len(rebuilt), message + ': different complete row count')
     for number, (a, b) in enumerate(zip(original, rebuilt)):
-        if canonical_json(a) == canonical_json(b):
+        if same_structural_row(a, b):
             continue
         diagnostic = {'row': number, 'software': {'shapely': shapely.__version__,
                       'geos': shapely.geos_version_string},

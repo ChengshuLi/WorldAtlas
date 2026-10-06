@@ -443,8 +443,8 @@
   "outputs": [
     {
       "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/README.md",
-      "bytes": 6031,
-      "sha256": "a163f3c29764b41dd7f00aee290c6b36932051ade96011b7a79c2fb0438cfe5e",
+      "bytes": 7251,
+      "sha256": "b1751d06f81e87402daf2bc10142025a95fc6d9287882278de1aac6b60dc415e",
       "hash_kind": "file-bytes"
     },
     {
@@ -797,14 +797,14 @@
     },
     {
       "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/physical-components-negative-control.json",
-      "bytes": 791,
-      "sha256": "f8877cd26a47c54cca0e3ce5d0f0e9495d95cedb014b7ad3ce45f8265fca343b",
+      "bytes": 1015,
+      "sha256": "06bb984e0a6db45add2533dfcef10f42399bbd9a7f9427d693ae98d17da49e57",
       "hash_kind": "file-bytes"
     },
     {
       "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/physical-components-positive-control.json",
-      "bytes": 791,
-      "sha256": "6848515b5b26cfeca9f10e15c780db3d392d2f6fd940699b314300d792ca7612",
+      "bytes": 1015,
+      "sha256": "71af04c7791c11e171754eab2e03158b49d462c58ab3a9c419c158189e8017e8",
       "hash_kind": "file-bytes"
     },
     {
@@ -845,8 +845,8 @@
     },
     {
       "path": "scripts/validate-physical-component-evidence.py",
-      "bytes": 14265,
-      "sha256": "afe2589c99b9ac95441ed14435cb054e4dc09e4db0060628e1663b50d3717f70",
+      "bytes": 17242,
+      "sha256": "4377aa20ed954b43d13d68b18ca25a0bc19ef0969746365ce3c486902951d9f5",
       "hash_kind": "file-bytes"
     },
     {
@@ -877,6 +877,18 @@
       "path": "test/physical-component-evidence.test.mjs",
       "bytes": 748,
       "sha256": "0574de859912b528682a1534a6b7a53811a9b1486aca712c859e01c61ebf9de8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/physical-component-structure.py",
+      "bytes": 5456,
+      "sha256": "5252f918f679c08d61f0176d45329d754e43d5f8a4d9ff7533d27ee3df5b47dd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/physical-component-structure.test.mjs",
+      "bytes": 498,
+      "sha256": "e92a64197aeb69b0f06007c0bdb491f198dd910681fb98e98e122c1220d0ffcd",
       "hash_kind": "file-bytes"
     },
     {
@@ -1191,6 +1203,14 @@
       "status": "added"
     },
     {
+      "path": "test/physical-component-structure.py",
+      "status": "added"
+    },
+    {
+      "path": "test/physical-component-structure.test.mjs",
+      "status": "added"
+    },
+    {
       "path": "test/physical-gap-crosswalk.py",
       "status": "added"
     },
@@ -1220,7 +1240,7 @@
     }
   ],
   "commands": [
-    "node --test test/physical-component-custody.test.mjs test/physical-gap-crosswalk.test.mjs test/physical-component-evidence.test.mjs test/physical-component-evidence-controls.test.mjs"
+    "node --test test/physical-component-custody.test.mjs test/physical-gap-crosswalk.test.mjs test/physical-component-evidence.test.mjs test/physical-component-evidence-controls.test.mjs test/physical-component-structure.test.mjs"
   ],
   "stages": {
     "implementation": "implemented",

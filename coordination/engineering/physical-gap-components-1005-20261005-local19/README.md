@@ -44,3 +44,9 @@ node --test test/physical-component-evidence.test.mjs \
 ```
 
 The raw logical generation directories are intentionally not duplicated as committed outputs. Original full bytes remain recoverable through the custody ledger, complete unchanged payloads and archived executed code. Source authority, physical water truth, factual repairs and delivery remain unapproved.
+
+### Reconstruction across platforms
+
+Linux at Shapely 2.1.2 / GEOS 3.13.1 reconstructed one retained MultiPoint contact with its identical two members in reverse order. The reconstruction gate therefore compares exact structural geometry signatures: whole line reversal, closed-ring rotation/reversal, hole permutation and multipart-member permutation are allowed. Geometry types, exact numeric representations/dimensions, every vertex/member occurrence, ring closure, exterior/hole roles, extra geometry fields and all row metadata remain exact. No geometric point-set equality, rounding, tolerance, vertex removal, overlay or repair can satisfy this gate. Original encoded payloads, hashes and source bindings are untouched.
+
+Whole-file byte reproduction remains a separate obligation tied to the original actual execution environment; structural reconstruction does not imply identical encoded products on another platform. `test/physical-component-structure.test.mjs` checks the observed Linux permutation and rejects tiny coordinate changes, lost/extra vertices or members, altered kinds/identities, type changes and erased positive-area shapes. Complete-world reconstruction still compares every retained record.
