@@ -203,12 +203,10 @@ def main():
     }
     scope_path = OWNED / "baseline/issue-contract.json"
     scope_path.write_bytes(canonical(scope))
-    result = {"version": 1, "method_id": "followup-generator", "outcome": "passed", "assessment_sha256": sha256(out.read_bytes()), "issue_contract_sha256": sha256(scope_path.read_bytes()), "subject_ids_sha256": subject_hash, "counts": counts, "controls": controls, "run_one_sha256": sha256(out.read_bytes()), "run_two_sha256": sha256(out.read_bytes())}
-    (OWNED / "findings/reproduction-result.json").write_bytes(canonical(result))
     for control_kind in ("positive-control", "negative-control"):
         control = {"method_id": "followup-generator", "kind": control_kind, "outcome": "passed", "positive": control_kind == "positive-control", "evidence": controls}
         (OWNED / f"findings/{control_kind}.json").write_bytes(canonical(control))
-    print(json.dumps(result, sort_keys=True))
+    print(json.dumps({"assessment_sha256": sha256(out.read_bytes()), "issue_contract_sha256": sha256(scope_path.read_bytes()), "subject_ids_sha256": subject_hash, "counts": counts, "controls": controls}, sort_keys=True))
 
 
 if __name__ == "__main__":

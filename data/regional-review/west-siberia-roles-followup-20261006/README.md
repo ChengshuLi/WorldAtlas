@@ -19,9 +19,9 @@ Official Rosstat pages, the federal OKTMO catalog, statutory/municipal pages and
 From the repository root, run:
 
 ```sh
-python3 data/regional-review/west-siberia-roles-followup-20261006/reproduce-followup.py
+python3 data/regional-review/west-siberia-roles-followup-20261006/verify-followup.py
 ```
 
-The generator checks the inherited assessment's pinned file hash and baseline, derives the exact 45-member roster, validates positive and negative scope controls, emits the row-level assessment and issue-contract files, and writes `findings/reproduction-result.json`. Two consecutive runs produced identical assessment SHA-256 `05ad7a208d2be3531d9be343bcb51d0c02349152ae69c84bfd9b5cb185e8bb47` and issue-contract SHA-256 `13a9d0c8bbf6fbc80f98a8842c82f315211d9183e066a246e319a90dc46f9acf`; category counts were 11, 25 and 9 respectively. Hashes establish reproducibility of this derivation, not correctness of upstream geography or the source descriptions.
+The verifier invokes the generator twice as separate processes. Each generator run checks the inherited assessment's pinned file hash and baseline, derives the exact 45-member roster, validates positive and negative scope controls, and emits the row-level assessment and issue-contract files. The verifier hashes both outputs after each execution and writes `findings/reproduction-result.json`; the two observed combined output hashes are recorded there. The stable assessment and issue-contract hashes are `05ad7a208d2be3531d9be343bcb51d0c02349152ae69c84bfd9b5cb185e8bb47` and `13a9d0c8bbf6fbc80f98a8842c82f315211d9183e066a246e319a90dc46f9acf`; category counts were 11, 25 and 9 respectively. Hashes establish reproducibility of this derivation, not correctness of upstream geography or the source descriptions.
 
 This packet is a bounded source/role research result. It does not certify the West Siberian region, current boundaries, source completeness, or authorize imports, geography changes, publication or regional approval. The role crosswalk, official-byte restoration and component-level boundary research are explicit engineering/research follow-ups.

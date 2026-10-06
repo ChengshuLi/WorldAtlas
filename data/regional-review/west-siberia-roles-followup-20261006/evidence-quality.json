@@ -361,8 +361,8 @@
   "outputs": [
     {
       "path": "data/regional-review/west-siberia-roles-followup-20261006/README.md",
-      "bytes": 4993,
-      "sha256": "9b082458e86f558e66fa83809a8581b08e353a0f09be1f85ca8bbdc73aee3dfe",
+      "bytes": 5147,
+      "sha256": "97934008de8222f1103bb1acbbcda1982abbfc5fd94bc99856808a36319aa8be",
       "hash_kind": "file-bytes"
     },
     {
@@ -379,8 +379,8 @@
     },
     {
       "path": "data/regional-review/west-siberia-roles-followup-20261006/findings/reproduction-result.json",
-      "bytes": 681,
-      "sha256": "72f573436bd349203591a9b943ef70f8632e53af6221216a43693eb7ffc78b23",
+      "bytes": 247,
+      "sha256": "9653dbbc5a4557b345662bbc8c184b22f09a7be5c7c3fce562d100bede287776",
       "hash_kind": "file-bytes"
     },
     {
@@ -403,8 +403,14 @@
     },
     {
       "path": "data/regional-review/west-siberia-roles-followup-20261006/reproduce-followup.py",
-      "bytes": 14065,
-      "sha256": "25d025a81c740cd120b2f24eab63ae81b696a12ca1d50d5af3477fd47addcffc",
+      "bytes": 13806,
+      "sha256": "6d5c0e0d04b5903a2ce6729ea5b824572927a87a430c495e089e3b8baa10df77",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/verify-followup.py",
+      "bytes": 1043,
+      "sha256": "544c1798a10191ceb4a0a4bd4cb1cafdc79e82eac845210f2270208c05825be3",
       "hash_kind": "file-bytes"
     }
   ],
@@ -520,7 +526,7 @@
     "geographic_approval": "unapproved"
   },
   "commands": [
-    "python3 data/regional-review/west-siberia-roles-followup-20261006/reproduce-followup.py",
+    "python3 data/regional-review/west-siberia-roles-followup-20261006/verify-followup.py",
     "node scripts/evidence-quality.mjs data/regional-review/west-siberia-roles-followup-20261006/evidence-quality.json",
     "node scripts/premerge-evidence.mjs --help"
   ],
@@ -554,10 +560,6 @@
       "status": "added"
     },
     {
-      "path": "data/regional-review/west-siberia-roles-followup-20261006/evidence-quality.json",
-      "status": "added"
-    },
-    {
       "path": "data/regional-review/west-siberia-roles-followup-20261006/findings/followup-assessments.json",
       "status": "added"
     },
@@ -580,8 +582,28 @@
     {
       "path": "data/regional-review/west-siberia-roles-followup-20261006/sources/source-register.json",
       "status": "added"
+    },
+    {
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/verify-followup.py",
+      "status": "added"
     }
   ],
-  "metric_bindings": [],
+  "metric_bindings": [
+    {
+      "metric_id": "ecoregion_count",
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/findings/followup-assessments.json",
+      "json_pointer": "/counts/ecoregion-fragment"
+    },
+    {
+      "metric_id": "city_role_count",
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/findings/followup-assessments.json",
+      "json_pointer": "/counts/city-name-role"
+    },
+    {
+      "metric_id": "multipart_count",
+      "path": "data/regional-review/west-siberia-roles-followup-20261006/findings/followup-assessments.json",
+      "json_pointer": "/counts/multipart-component-review"
+    }
+  ],
   "rendered_tables": []
 }
