@@ -85,7 +85,24 @@ def main():
     out.mkdir(exist_ok=True)
     for row, name in zip(controls, ("positive-control.json", "negative-control.json")):
         (out / name).write_text(json.dumps(row, sort_keys=True, separators=(",", ":")) + "\n")
-    print(json.dumps({"method_id": METHOD_ID, "controls": [row["kind"] for row in controls], "outcome": "passed"}))
+    run_paths = [OWNED / "outputs/run-09/report.json", OWNED / "outputs/run-10/report.json"]
+    run_hashes = [hashlib.sha256(path.read_bytes()).hexdigest() for path in run_paths]
+    if run_hashes[0] != run_hashes[1]:
+        raise AssertionError(f"Final complete reports differ: {run_hashes}")
+    reproducibility = {
+        "version": 1,
+        "method_id": METHOD_ID,
+        "kind": "reproducibility",
+        "outcome": "passed",
+        "run_one_path": str(run_paths[0].relative_to(ROOT)),
+        "run_two_path": str(run_paths[1].relative_to(ROOT)),
+        "run_one_sha256": run_hashes[0],
+        "run_two_sha256": run_hashes[1],
+        "analysis_script_sha256": hashlib.sha256(ANALYSIS.read_bytes()).hexdigest(),
+        "execution_commit": subprocess.check_output(["git", "-C", ROOT, "rev-parse", "HEAD"], text=True).strip(),
+    }
+    (out / "reproducibility.json").write_text(json.dumps(reproducibility, sort_keys=True, separators=(",", ":")) + "\n")
+    print(json.dumps({"method_id": METHOD_ID, "controls": [row["kind"] for row in controls], "outcome": "passed", "reproducibility_sha256": run_hashes[0]}))
 
 
 if __name__ == "__main__":
