@@ -6,6 +6,7 @@ from shapely.geometry import box, mapping
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / 'scripts'))
 from geographic_components import components
 from physical_gap_crosswalk import crosswalk, membership
+from physical_component_contacts import component_contacts
 
 
 def feature(identity, g, area=1):
@@ -22,6 +23,25 @@ def run(old, new):
 
 
 class CrosswalkControls(unittest.TestCase):
+    def test_exact_contacts_resolve_original_bindings_not_legacy_summary(self):
+        f = feature('original', box(0, 0, 1, 1))
+        contact = {'id': 'source-location', 'kind': 'point-only-contact',
+                   'geometry': {'type': 'Point', 'coordinates': [0, 0]},
+                   'reference_year': '2020', 'source': 'original-source'}
+        f['properties']['exact_location_contacts'] = [contact]
+        records, _ = components([f])
+        resolved = component_contacts([f], records)[0]
+        self.assertEqual(resolved['fragment_contacts'][0]['exact_location_contacts'], [contact])
+        self.assertEqual(resolved['status'], 'complete-recorded-contacts')
+        self.assertIsNone(resolved['administrative_assignment'])
+
+    def test_missing_source_contacts_remain_unknown_not_empty(self):
+        f = feature('original', box(0, 0, 1, 1))
+        records, _ = components([f])
+        resolved = component_contacts([f], records)[0]
+        self.assertEqual(resolved['status'], 'incomplete-source-contact-recording')
+        self.assertIsNone(resolved['fragment_contacts'][0]['exact_location_contacts'])
+
     def test_water_split_to_whole_keeps_both_original_identities(self):
         result = run([feature('old-left', box(0, 0, 1, 1)), feature('old-right', box(2, 0, 3, 1))],
                      [feature('new-whole', box(0, 0, 3, 1))])
