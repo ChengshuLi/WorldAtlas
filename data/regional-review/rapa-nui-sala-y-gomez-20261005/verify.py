@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import json
 import math
+import re
 import struct
 import subprocess
 from pathlib import Path
@@ -29,6 +30,68 @@ def sha(raw):
 
 def baseline(path):
     return subprocess.check_output(['git', 'show', f'{BASELINE}:{path}'])
+
+
+def scan_neighbor_points(subject_point, radius_m=2_500_000):
+    """Screen every pinned baseline geography shard by representative point."""
+    paths = subprocess.check_output(
+        ['git', 'ls-tree', '-r', '--name-only', BASELINE, 'data/geography/'],
+        text=True).splitlines()
+    paths = sorted(p for p in paths if re.fullmatch(r'data/geography/part-\d+\.json', p))
+    records, inputs, feature_count, point_count = [], [], 0, 0
+    for path in paths:
+        raw = baseline(path)
+        inputs.append({'path': path, 'bytes': len(raw), 'sha256': sha(raw)})
+        collection = json.loads(raw)
+        for feature in collection.get('features', []):
+            feature_count += 1
+            props = feature.get('properties') or {}
+            metadata = props.get('metadata') or {}
+            point = metadata.get('representative_point')
+            if not (isinstance(point, list) and len(point) == 2):
+                continue
+            point_count += 1
+            distance = distance_m(subject_point, point)
+            records.append({
+                'distance_m': round(distance, 3),
+                'id': props.get('id'),
+                'name': props.get('name'),
+                'path': path,
+                'parent_id': props.get('parent_id'),
+                'point_lon_lat': point,
+                'reference_year': metadata.get('reference_year'),
+                'source_id': metadata.get('source_id'),
+                'source_role': metadata.get('source_role'),
+                'territorial_level': metadata.get('administrative_level'),
+            })
+    if not paths or point_count != feature_count:
+        raise ValueError(f'Neighbor scan did not cover every feature point: {point_count}/{feature_count}')
+    records.sort(key=lambda row: (row['distance_m'], row['id'] or ''))
+    others = [row for row in records if row['id'] != SUBJECT]
+    within = [row for row in others if row['distance_m'] <= radius_m]
+    positive_id = 'PCN+00?'
+    negative_id = 'gb:CHL:ADM3:31580391B64836371657473'
+    positive = [row for row in within if row['id'] == positive_id]
+    negative = [row for row in others if row['id'] == negative_id and row['distance_m'] > radius_m]
+    if len(positive) != 1 or len(negative) != 1:
+        raise ValueError('Representative-point scan positive/negative controls failed')
+    return {
+        'version': 1,
+        'baseline_commit': BASELINE,
+        'subject_id': SUBJECT,
+        'subject_point_lon_lat': list(subject_point),
+        'method': 'WGS84 inverse geodesic between stored representative points; screening only, not polygon adjacency or maritime jurisdiction',
+        'search_radius_m': radius_m,
+        'input_shard_count': len(paths),
+        'input_feature_count': feature_count,
+        'input_features_with_representative_points': point_count,
+        'input_files': inputs,
+        'nearest_other_features': others[:10],
+        'other_features_within_radius': within,
+        'positive_control': {'method_id': 'neighbor-point-screen', 'kind': 'positive-control', 'outcome': 'passed', 'test': 'known Henderson Island record falls within the 2,500 km representative-point screen', 'expected_id': positive_id, 'distance_m': positive[0]['distance_m']},
+        'negative_control': {'method_id': 'neighbor-point-screen', 'kind': 'negative-control', 'outcome': 'passed', 'test': 'known Juan Fernández commune point falls outside the 2,500 km screen', 'expected_id': negative_id, 'distance_m': negative[0]['distance_m']},
+        'interpretation_limit': 'Point proximity does not establish contiguity, legal adjacency, or equal administrative granularity. The nearest other Atlas feature is a distant comparison only.'
+    }
 
 
 def bounds_wgs84(points):
@@ -201,6 +264,7 @@ def main():
     main_overlap = land_area_m2(main_geom.intersection(atlas_geom)) if main_geom.intersects(atlas_geom) else 0.0
     point_ll = atlas_feature['properties']['metadata']['representative_point']
     point_atlas = atlas_geom.covers(Point(point_ll))
+    neighbor_results = scan_neighbor_points(SALA_COORD)
     if not point_atlas or main_overlap <= 0 or remote_overlap != 0:
         raise ValueError('Positive/negative location geometry controls failed')
     axis_control = transform_point(10, 45, 'EPSG:3857')
@@ -258,11 +322,20 @@ def main():
     (outdir / 'geometry-controls.json').write_text(json.dumps(result['controls'], sort_keys=True, indent=2) + '\n')
     for name, control in source_controls.items():
         (outdir / name).write_text(json.dumps(control, sort_keys=True, indent=2, ensure_ascii=False) + '\n')
+    (outdir / 'neighbor-search.json').write_text(
+        json.dumps(neighbor_results, sort_keys=True, indent=2, ensure_ascii=False) + '\n')
+    (outdir / 'neighbor-positive.json').write_text(
+        json.dumps(neighbor_results['positive_control'], sort_keys=True, indent=2, ensure_ascii=False) + '\n')
+    (outdir / 'neighbor-negative.json').write_text(
+        json.dumps(neighbor_results['negative_control'], sort_keys=True, indent=2, ensure_ascii=False) + '\n')
     print(json.dumps({'output': str(outdir / 'geometry-results.json'),
                       'subject': SUBJECT, 'source_component_count': len(source_geom.geoms),
                       'source_component_area_m2': round(remote_area, 3),
                       'current_intersection_m2': remote_overlap,
                       'positive_main_intersection_m2': round(main_overlap, 3),
+                      'neighbor_shards': neighbor_results['input_shard_count'],
+                      'neighbor_features': neighbor_results['input_feature_count'],
+                      'nearest_other_feature': neighbor_results['nearest_other_features'][0]['id'] if neighbor_results['nearest_other_features'] else None,
                       'official_dpa_checked': bool(args.official_dpa_dir)}, indent=2))
 
 if __name__ == '__main__':

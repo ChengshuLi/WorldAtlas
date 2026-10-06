@@ -2,11 +2,38 @@
   "baseline_commit": "249e396178cfc160fd547ec4487c5d94832fc9af",
   "kind": "reproducibility",
   "method_id": "packet-code",
-  "note": "Two consecutive executions of verify.py with the restored and SHA-verified official DPA 2022 archives produced byte-identical geometry-results.json; both runs also generated identical control records.",
+  "note": "Two consecutive standalone executions of verify.py (without restored optional DPA archives) produced byte-identical retained geometry-results.json, neighbor-search.json, neighbor-positive.json and neighbor-negative.json. The supplemental official-DPA positive/negative controls remain from two earlier successful archive-restored executions; their augmented geometry-results output is not retained at this path.",
   "outcome": "passed",
-  "output_bytes": 7446,
-  "output_path": "geometry-results.json",
-  "run_one_sha256": "b53e5c44d213b8b66c572a123bb5f6ab5b9760ccb77244f8fafeec7304b9ed1d",
-  "run_two_sha256": "b53e5c44d213b8b66c572a123bb5f6ab5b9760ccb77244f8fafeec7304b9ed1d",
-  "runs": 2
+  "runs": 2,
+  "outputs": [
+    {
+      "path": "geometry-results.json",
+      "bytes": 4530,
+      "run_one_sha256": "0aba83e794698e10fe98656b67a2d7a00f934453fc1adab5e3427275a0882de2",
+      "run_two_sha256": "0aba83e794698e10fe98656b67a2d7a00f934453fc1adab5e3427275a0882de2"
+    },
+    {
+      "path": "neighbor-search.json",
+      "bytes": 12011,
+      "run_one_sha256": "920e391b9ffea6551e9f60267a407af5c9ccff720b7f5e69d02d787708e17561",
+      "run_two_sha256": "920e391b9ffea6551e9f60267a407af5c9ccff720b7f5e69d02d787708e17561"
+    },
+    {
+      "path": "neighbor-positive.json",
+      "bytes": 249,
+      "run_one_sha256": "aa2e0c5db35fb73e3b3723b3cc2755bf080d37118adf6f083fbe60b041bbc228",
+      "run_two_sha256": "aa2e0c5db35fb73e3b3723b3cc2755bf080d37118adf6f083fbe60b041bbc228"
+    },
+    {
+      "path": "neighbor-negative.json",
+      "bytes": 264,
+      "run_one_sha256": "f2a6fcce62c6958cff5c24eaf2ba28770920f3c984b69d53b45540bba9fe68e5",
+      "run_two_sha256": "f2a6fcce62c6958cff5c24eaf2ba28770920f3c984b69d53b45540bba9fe68e5"
+    }
+  ],
+  "supplemental_official_dpa": {
+    "runs": 2,
+    "outcome": "positive-and-negative-controls-passed",
+    "detail": "The augmented geometry-results output from those runs was not retained after standalone runs replaced that path; exact archives, hashes, controls and restoration instructions are retained. Re-run with --official-dpa-dir to reproduce."
+  }
 }

@@ -1,14 +1,372 @@
 {
-  "version": 1,
   "baseline_commit": "249e396178cfc160fd547ec4487c5d94832fc9af",
-  "paths": ["data/geography"],
-  "method": "git grep -i -E 'sala(s)? y g[óo]mez|motu motiro hiva' BASELINE -- data/geography",
-  "matched_lines": 0,
-  "interpretation": "No separately named Atlas location for Isla Salas y Gómez or Motu Motiro Hiva was found. This is a label search, not a claim that all differently named or unnamed maritime records were exhaustively spatially reviewed.",
-  "scoped_subject_parent": {
-    "subject_id": "gb:CHL:ADM3:31580391B33082267781919",
-    "current_name": "Isla de Pascua",
-    "parent_id": "framework:province:easter-island-province:56a8d02c6b29",
-    "parent_semantic_review": "open"
-  }
+  "input_feature_count": 49589,
+  "input_features_with_representative_points": 49589,
+  "input_files": [
+    {
+      "bytes": 8539839,
+      "path": "data/geography/part-0.json",
+      "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3"
+    },
+    {
+      "bytes": 8060108,
+      "path": "data/geography/part-1.json",
+      "sha256": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7"
+    },
+    {
+      "bytes": 5144571,
+      "path": "data/geography/part-10.json",
+      "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+    },
+    {
+      "bytes": 5131824,
+      "path": "data/geography/part-11.json",
+      "sha256": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f"
+    },
+    {
+      "bytes": 4489493,
+      "path": "data/geography/part-12.json",
+      "sha256": "24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7"
+    },
+    {
+      "bytes": 5709487,
+      "path": "data/geography/part-13.json",
+      "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1"
+    },
+    {
+      "bytes": 4355198,
+      "path": "data/geography/part-14.json",
+      "sha256": "c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0"
+    },
+    {
+      "bytes": 5180426,
+      "path": "data/geography/part-15.json",
+      "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df"
+    },
+    {
+      "bytes": 5213846,
+      "path": "data/geography/part-16.json",
+      "sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797"
+    },
+    {
+      "bytes": 4945828,
+      "path": "data/geography/part-17.json",
+      "sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db"
+    },
+    {
+      "bytes": 4909063,
+      "path": "data/geography/part-18.json",
+      "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123"
+    },
+    {
+      "bytes": 4583022,
+      "path": "data/geography/part-19.json",
+      "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269"
+    },
+    {
+      "bytes": 6259307,
+      "path": "data/geography/part-2.json",
+      "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf"
+    },
+    {
+      "bytes": 6570767,
+      "path": "data/geography/part-20.json",
+      "sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f"
+    },
+    {
+      "bytes": 6737781,
+      "path": "data/geography/part-21.json",
+      "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7"
+    },
+    {
+      "bytes": 4746385,
+      "path": "data/geography/part-22.json",
+      "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3"
+    },
+    {
+      "bytes": 4962410,
+      "path": "data/geography/part-23.json",
+      "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2"
+    },
+    {
+      "bytes": 4816899,
+      "path": "data/geography/part-24.json",
+      "sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c"
+    },
+    {
+      "bytes": 4525239,
+      "path": "data/geography/part-25.json",
+      "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394"
+    },
+    {
+      "bytes": 4608983,
+      "path": "data/geography/part-26.json",
+      "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632"
+    },
+    {
+      "bytes": 4863162,
+      "path": "data/geography/part-27.json",
+      "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758"
+    },
+    {
+      "bytes": 6613963,
+      "path": "data/geography/part-28.json",
+      "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+    },
+    {
+      "bytes": 12932167,
+      "path": "data/geography/part-29.json",
+      "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a"
+    },
+    {
+      "bytes": 5153118,
+      "path": "data/geography/part-3.json",
+      "sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617"
+    },
+    {
+      "bytes": 11979437,
+      "path": "data/geography/part-30.json",
+      "sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a"
+    },
+    {
+      "bytes": 10086485,
+      "path": "data/geography/part-31.json",
+      "sha256": "44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e"
+    },
+    {
+      "bytes": 10211739,
+      "path": "data/geography/part-32.json",
+      "sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64"
+    },
+    {
+      "bytes": 607984,
+      "path": "data/geography/part-33.json",
+      "sha256": "d928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe"
+    },
+    {
+      "bytes": 4835479,
+      "path": "data/geography/part-4.json",
+      "sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c"
+    },
+    {
+      "bytes": 5226173,
+      "path": "data/geography/part-5.json",
+      "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc"
+    },
+    {
+      "bytes": 4607953,
+      "path": "data/geography/part-6.json",
+      "sha256": "dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a"
+    },
+    {
+      "bytes": 4257402,
+      "path": "data/geography/part-7.json",
+      "sha256": "1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387"
+    },
+    {
+      "bytes": 5097739,
+      "path": "data/geography/part-8.json",
+      "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1"
+    },
+    {
+      "bytes": 5729632,
+      "path": "data/geography/part-9.json",
+      "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6"
+    }
+  ],
+  "input_shard_count": 34,
+  "interpretation_limit": "Point proximity does not establish contiguity, legal adjacency, or equal administrative granularity. The nearest other Atlas feature is a distant comparison only.",
+  "method": "WGS84 inverse geodesic between stored representative points; screening only, not polygon adjacency or maritime jurisdiction",
+  "nearest_other_features": [
+    {
+      "distance_m": 2317660.72,
+      "id": "PCN+00?",
+      "name": "Henderson Island",
+      "parent_id": "framework:province:pitcairn-islands:d483df587794",
+      "path": "data/geography/part-28.json",
+      "point_lon_lat": [
+        -128.31687071115908,
+        -24.36875
+      ],
+      "reference_year": "Undated modern reference",
+      "source_id": "natural-earth",
+      "source_role": null,
+      "territorial_level": "ADM1 fallback"
+    },
+    {
+      "distance_m": 2669890.237,
+      "id": "gb:CHL:ADM3:31580391B64836371657473",
+      "name": "Juan Fernández",
+      "parent_id": "framework:province:provincia-de-valparaiso:1556db69a421",
+      "path": "data/geography/part-2.json",
+      "point_lon_lat": [
+        -78.83866592157842,
+        -33.64245
+      ],
+      "reference_year": "2020",
+      "source_id": "gb:CHL:ADM3",
+      "source_role": "Communes",
+      "territorial_level": "ADM3"
+    },
+    {
+      "distance_m": 3225267.119,
+      "id": "gb:CHL:ADM3:31580391B47956415575590",
+      "name": "Lebu",
+      "parent_id": "framework:province:provincia-de-arauco:fa4d78011e43",
+      "path": "data/geography/part-2.json",
+      "point_lon_lat": [
+        -73.59714120555921,
+        -37.6208
+      ],
+      "reference_year": "2020",
+      "source_id": "gb:CHL:ADM3",
+      "source_role": "Communes",
+      "territorial_level": "ADM3"
+    },
+    {
+      "distance_m": 3235879.045,
+      "id": "gb:CHL:ADM3:31580391B13536690151086",
+      "name": "Arauco",
+      "parent_id": "framework:province:provincia-de-arauco:fa4d78011e43",
+      "path": "data/geography/part-2.json",
+      "point_lon_lat": [
+        -73.3802644028103,
+        -37.292100000000005
+      ],
+      "reference_year": "2020",
+      "source_id": "gb:CHL:ADM3",
+      "source_role": "Communes",
+      "territorial_level": "ADM3"
+    },
+    {
+      "distance_m": 3244090.797,
+      "id": "gb:CHL:ADM3:31580391B46581821310744",
+      "name": "Talcahuano",
+      "parent_id": "framework:province:provincia-de-concepcion:d46d4c68aafe",
+      "path": "data/geography/part-2.json",
+      "point_lon_lat": [
+        -73.13270223659732,
+        -36.704
+      ],
+      "reference_year": "2020",
+      "source_id": "gb:CHL:ADM3",
+      "source_role": "Communes",
+      "territorial_level": "ADM3"
+    },
+    {
+      "distance_m": 3246314.737,
+      "id": "gb:CHL:ADM3:31580391B60486476389484",
+      "name": "Hualpén",
+      "parent_id": "framework:province:provincia-de-concepcion:d46d4c68aafe",
+      "path": "data/geography/part-2.json",
+      "point_lon_lat": [
+        -73.12865864779874,
+        -36.7903
+      ],
+      "reference_year": "2020",
+      "source_id": "gb:CHL:ADM3",
+      "source_role": "Communes",
+      "territorial_level": "ADM3"
+    },
+    {
+      "distance_m": 3247823.99,
+      "id": "gb:CHL:ADM3:31580391B71117118367624",
+      "name": "Cañete",
+      "parent_id": "framework:province:provincia-de-arauco:fa4d78011e43",
+      "path": "data/geography/part-2.json",
+      "point_lon_lat": [
+        -73.42132159943142,
+        -37.91215
+      ],
+      "reference_year": "2020",
+      "source_id": "gb:CHL:ADM3",
+      "source_role": "Communes",
+      "territorial_level": "ADM3"
+    },
+    {
+      "distance_m": 3250971.992,
+      "id": "gb:CHL:ADM3:31580391B19604062196873",
+      "name": "San Pedro de la Paz",
+      "parent_id": "framework:province:provincia-de-concepcion:d46d4c68aafe",
+      "path": "data/geography/part-2.json",
+      "point_lon_lat": [
+        -73.10087614326555,
+        -36.8918
+      ],
+      "reference_year": "2020",
+      "source_id": "gb:CHL:ADM3",
+      "source_role": "Communes",
+      "territorial_level": "ADM3"
+    },
+    {
+      "distance_m": 3254355.248,
+      "id": "gb:CHL:ADM3:31580391B57242884177731",
+      "name": "Curanilahue",
+      "parent_id": "framework:province:provincia-de-arauco:fa4d78011e43",
+      "path": "data/geography/part-2.json",
+      "point_lon_lat": [
+        -73.22716182391332,
+        -37.50945
+      ],
+      "reference_year": "2020",
+      "source_id": "gb:CHL:ADM3",
+      "source_role": "Communes",
+      "territorial_level": "ADM3"
+    },
+    {
+      "distance_m": 3255371.463,
+      "id": "gb:CHL:ADM3:31580391B54931874155628",
+      "name": "Coronel",
+      "parent_id": "framework:province:provincia-de-concepcion:d46d4c68aafe",
+      "path": "data/geography/part-2.json",
+      "point_lon_lat": [
+        -73.08019413580246,
+        -37.0083
+      ],
+      "reference_year": "2020",
+      "source_id": "gb:CHL:ADM3",
+      "source_role": "Communes",
+      "territorial_level": "ADM3"
+    }
+  ],
+  "negative_control": {
+    "distance_m": 2669890.237,
+    "expected_id": "gb:CHL:ADM3:31580391B64836371657473",
+    "kind": "negative-control",
+    "method_id": "neighbor-point-screen",
+    "outcome": "passed",
+    "test": "known Juan Fernández commune point falls outside the 2,500 km screen"
+  },
+  "other_features_within_radius": [
+    {
+      "distance_m": 2317660.72,
+      "id": "PCN+00?",
+      "name": "Henderson Island",
+      "parent_id": "framework:province:pitcairn-islands:d483df587794",
+      "path": "data/geography/part-28.json",
+      "point_lon_lat": [
+        -128.31687071115908,
+        -24.36875
+      ],
+      "reference_year": "Undated modern reference",
+      "source_id": "natural-earth",
+      "source_role": null,
+      "territorial_level": "ADM1 fallback"
+    }
+  ],
+  "positive_control": {
+    "distance_m": 2317660.72,
+    "expected_id": "PCN+00?",
+    "kind": "positive-control",
+    "method_id": "neighbor-point-screen",
+    "outcome": "passed",
+    "test": "known Henderson Island record falls within the 2,500 km representative-point screen"
+  },
+  "search_radius_m": 2500000,
+  "subject_id": "gb:CHL:ADM3:31580391B33082267781919",
+  "subject_point_lon_lat": [
+    -105.3652777778,
+    -26.4713888889
+  ],
+  "version": 1
 }
