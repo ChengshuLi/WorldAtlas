@@ -1,0 +1,339 @@
+{
+  "version": 1,
+  "issue": 1169,
+  "packet_issue": 421,
+  "packet_merge_commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+  "baseline_commit": "5b72dc3adf48b089c3319b18c3a447468196176a",
+  "inputs": [
+    {
+      "commit": "5b72dc3adf48b089c3319b18c3a447468196176a",
+      "path": "data/world-index.json",
+      "bytes": 944,
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "5b72dc3adf48b089c3319b18c3a447468196176a",
+      "path": "data/hierarchy.json",
+      "bytes": 10164089,
+      "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "5b72dc3adf48b089c3319b18c3a447468196176a",
+      "path": "data/geography/part-9.json",
+      "bytes": 5729632,
+      "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "5b72dc3adf48b089c3319b18c3a447468196176a",
+      "path": "data/geography/part-28.json",
+      "bytes": 6613963,
+      "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "5b72dc3adf48b089c3319b18c3a447468196176a",
+      "path": "data/geography/part-29.json",
+      "bytes": 12932167,
+      "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "5b72dc3adf48b089c3319b18c3a447468196176a",
+      "path": "data/macro-foundation/current-membership-inventory.json.gz",
+      "bytes": 2404397,
+      "sha256": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "5b72dc3adf48b089c3319b18c3a447468196176a",
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/sources/geoBoundaries-GRC-ADM3.geojson.gz",
+      "bytes": 519962,
+      "sha256": "c0c518f1b87a09b52776accff437a4aae5c82061cc0127342305f777b56ac7b2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "5b72dc3adf48b089c3319b18c3a447468196176a",
+      "path": "data/regional-review/regional-review-ef67318527f5f3a3/sources/geoBoundaries-GRC-ADM3-metaData.json",
+      "bytes": 889,
+      "sha256": "0c0956d301dd1e04cb2586e27237e91d4509c9ecdb3471210989315cda013d2d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "5b72dc3adf48b089c3319b18c3a447468196176a",
+      "path": "data/administrative-sources.json",
+      "bytes": 661416,
+      "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "5b72dc3adf48b089c3319b18c3a447468196176a",
+      "path": "data/geographic-releases/current-manifest.json",
+      "bytes": 206,
+      "sha256": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "5b72dc3adf48b089c3319b18c3a447468196176a",
+      "path": "data/macro-foundation/macro-certificate.json",
+      "bytes": 38959,
+      "sha256": "f50f70fcb0756712ab7a7a388bc8cada093080518f07d3a6f7329758980ea81b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "5b72dc3adf48b089c3319b18c3a447468196176a",
+      "path": "data/macro-foundation/regional-handoffs.json.gz",
+      "bytes": 71286,
+      "sha256": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "5b72dc3adf48b089c3319b18c3a447468196176a",
+      "path": "data/macro-foundation/review-index.json",
+      "bytes": 2383,
+      "sha256": "31dfd5cbfd8f3def829f655e7ddd855d2d2865e5ac63f9d1a97d1c08782910cf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "5b72dc3adf48b089c3319b18c3a447468196176a",
+      "path": "data/macro-foundation/approved-boundary-decisions.json",
+      "bytes": 634171,
+      "sha256": "b67d5a3bcf8101cffb089c0262286378a80bb642cd6dde33f7721419227e3f18",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "path": "data/regional-review/regional-review-3f920fc5cb99166e/README.md",
+      "bytes": 12614,
+      "sha256": "1cc5b4854a6cfe95227f744d5ac0ab4a51f202378fdfacfe88edf92e8d8f88e1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "path": "data/regional-review/regional-review-3f920fc5cb99166e/area-scope.csv",
+      "bytes": 1960,
+      "sha256": "209f53e38a133b922bb83bd3f604b9e807257179a880f3eee7a30b93c24ff145",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "path": "data/regional-review/regional-review-3f920fc5cb99166e/assessment.csv",
+      "bytes": 139606,
+      "sha256": "f6ee194f5270f08762fbdfacd8a14e641414ce1ee2a8a3fb391d4d1fa2f6fe3b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "path": "data/regional-review/regional-review-3f920fc5cb99166e/baseline-inputs.json",
+      "bytes": 5513,
+      "sha256": "a444eba8e5571fa121cdc746201b922228d997650a7020eb3f69c7b0718dba26",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "path": "data/regional-review/regional-review-3f920fc5cb99166e/claim-receipt.json",
+      "bytes": 931,
+      "sha256": "139fb16bb4f0825886679dcd3286eafec1188d26e88af8d0dd3f2090a1c10520",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "path": "data/regional-review/regional-review-3f920fc5cb99166e/engineering-handoff.md",
+      "bytes": 6837,
+      "sha256": "a2b63634786a62265715b96977721a13415a6f55648b23dbb73d137ae6b7949a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "path": "data/regional-review/regional-review-3f920fc5cb99166e/evidence-quality.json",
+      "bytes": 68950,
+      "sha256": "6520bea3d8a365498166d3f36d5414e6db9e49be285db4af9b32514810da1f09",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "path": "data/regional-review/regional-review-3f920fc5cb99166e/findings.json",
+      "bytes": 10020,
+      "sha256": "aa2ae87e638a517827964f2b6e059cc850a83b399bd8ea0a5eef7f1ecd948815",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "path": "data/regional-review/regional-review-3f920fc5cb99166e/geometry-method-and-neighbor-summary.json",
+      "bytes": 4556,
+      "sha256": "1373f9285575eabb1c19d90ed954153e2a415ea4dc02370fae84a3fed640f833",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "path": "data/regional-review/regional-review-3f920fc5cb99166e/geometry-negative-control.json",
+      "bytes": 190,
+      "sha256": "fc0527517d2c7146d8d7c5193358425787c7f610d4396eac91e1e5f19b55ed6f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "path": "data/regional-review/regional-review-3f920fc5cb99166e/geometry-positive-control.json",
+      "bytes": 191,
+      "sha256": "f83256efb4053f82539060238e21479cd78a524941654effdbafeccfb95e9b0d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "path": "data/regional-review/regional-review-3f920fc5cb99166e/geometry-run-summary.json",
+      "bytes": 5059,
+      "sha256": "8ce49a6cc4db6cbebf588351056d1e9b09f497b1c5828e4204fa8d05babf5c40",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "path": "data/regional-review/regional-review-3f920fc5cb99166e/geometry-screen.csv",
+      "bytes": 57689,
+      "sha256": "75028bcec59629db53587663f53a752842b4cc7c74e7e42d9a7ef3cec8fa1951",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "path": "data/regional-review/regional-review-3f920fc5cb99166e/geometry_screen.py",
+      "bytes": 8418,
+      "sha256": "d9a663483cc6ea2617572563fe4cae5552c7430901654029965edb378cb7b40c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "path": "data/regional-review/regional-review-3f920fc5cb99166e/issue-421-api.json",
+      "bytes": 25624,
+      "sha256": "6e1e3d0e1ae9c15acb69383e21bb6811ccc39c38d8592f9e3c74560c8b0dc560",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "path": "data/regional-review/regional-review-3f920fc5cb99166e/parent-scale-screen.csv",
+      "bytes": 3333,
+      "sha256": "14d3a8e3c9127fee23a090f303629819426ed9a758a255ea1531ec46c5a02f71",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "path": "data/regional-review/regional-review-3f920fc5cb99166e/province-scope.csv",
+      "bytes": 16309,
+      "sha256": "e25d6bbd6d387c5d56f67cf39638ccd002986bdabb5ba64dfd6b0d5341ce728d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "path": "data/regional-review/regional-review-3f920fc5cb99166e/reproduce.py",
+      "bytes": 14505,
+      "sha256": "88112b2600200b5f4b2a33e63a15c42dea1b8899894134e920413f8f85a90cc0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "path": "data/regional-review/regional-review-3f920fc5cb99166e/reproduction-summary.json",
+      "bytes": 714,
+      "sha256": "74cbc01dc4724e25c7296aa2b45c50bcb8ed20c2067a224172be70a90473065a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "path": "data/regional-review/regional-review-3f920fc5cb99166e/roster-negative-control.json",
+      "bytes": 180,
+      "sha256": "c0a3e082ada9588324956ecfcdf0c2719963f068ca7a0bc71b6e9ad5d95cf85d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "path": "data/regional-review/regional-review-3f920fc5cb99166e/roster-positive-control.json",
+      "bytes": 185,
+      "sha256": "12d8a3d83f4829b5292f80f4aeb4142fb2751d0dede0f6c4d0c9ab8eaf46b0bb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "path": "data/regional-review/regional-review-3f920fc5cb99166e/roster-reproducibility.json",
+      "bytes": 394,
+      "sha256": "d695d620b76e26142adf33b30d8d30d328e61f428d9e6e09a407ed9955cad504",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "path": "data/regional-review/regional-review-3f920fc5cb99166e/scope.json",
+      "bytes": 17507,
+      "sha256": "9ad32208c0ef0f325af657dd8d449fcaf92059916fb8818ca5cb6c3363a9aac1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "path": "data/regional-review/regional-review-3f920fc5cb99166e/source-inventory.json",
+      "bytes": 13444,
+      "sha256": "e8ad97904f0c7395bba45c159f77f7a19a59bfa91cd4a28a2c7a38caccb6d23c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "path": "data/regional-review/regional-review-3f920fc5cb99166e/sources/geoBoundaries-GRC-ADM2-all.zip",
+      "bytes": 1336957,
+      "sha256": "213a8f4bdf66c9edb2c99e2e2895f6acefa531f498489538a3ac2cc3021a5a0e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "path": "data/regional-review/regional-review-3f920fc5cb99166e/sources/geoBoundaries-GRC-ADM2-metaData.json",
+      "bytes": 864,
+      "sha256": "a9649a5377d9eb834deeba926a850d4a7d73539e3fec8c0d431d64f5ff0fbc7f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "path": "data/regional-review/regional-review-3f920fc5cb99166e/sources/geoBoundaries-GRC-ADM2.geojson",
+      "bytes": 1329310,
+      "sha256": "005ac2734762f33b822ed568991bb8ec8c1b5e46fc99a4a7557e65d7ed0d8f4a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "path": "data/regional-review/regional-review-3f920fc5cb99166e/sources/geoBoundaries-XKX-ADM1-all.zip",
+      "bytes": 1585582,
+      "sha256": "6b7af09355bc9b5f82e69c3cb98585ef4da33a1c6e48abec6d5e0a57e822c429",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "path": "data/regional-review/regional-review-3f920fc5cb99166e/sources/geoBoundaries-XKX-ADM1-current-api-metadata.json",
+      "bytes": 1664,
+      "sha256": "28fa0fdf25211cfcb4f649db3b23fc53a8e7f442b6312341c801d02eed4d6fa0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "path": "data/regional-review/regional-review-3f920fc5cb99166e/sources/geoBoundaries-XKX-ADM1-metaData.json",
+      "bytes": 799,
+      "sha256": "a912dcaefa1096a6c0af067af9723b2a67c32f5b0147b8198f99751eb591b49c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "path": "data/regional-review/regional-review-3f920fc5cb99166e/sources/geoBoundaries-XKX-ADM1.geojson",
+      "bytes": 1898578,
+      "sha256": "9b07b08fe0f9ca5a26ddb6de2008ac235b38ffaf069063df9851711c2d358315",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "path": "data/regional-review/regional-review-3f920fc5cb99166e/validation-runs.json",
+      "bytes": 11262,
+      "sha256": "9576ffbc524b3dfdd892dd478f5aa42771a12453049c0d201e00e3eff5326c52",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "commit": "11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "path": "scripts/evidence/immutable.py",
+      "bytes": 7090,
+      "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "note": "Exact whole-file pins transcribed from issue #1169 at each file\u2019s actual immutable commit. They are historical inputs, including former report outputs used as comparison targets; they are not new boundary or legal-status certifications."
+}

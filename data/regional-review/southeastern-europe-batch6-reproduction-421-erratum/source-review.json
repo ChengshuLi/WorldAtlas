@@ -1,0 +1,161 @@
+{
+  "version": 1,
+  "issue": 1169,
+  "reviewed_at": "2026-10-06",
+  "scope": {
+    "packet_issue": 421,
+    "subject_count": 230,
+    "greek_atlas_rows": 226,
+    "kosovo_atlas_rows": 4,
+    "greek_native_source_features": 227,
+    "province_parent_contexts": 17,
+    "area_contexts": 3,
+    "area_counts": {
+      "Greece": {"owned": 201, "full": 281},
+      "Kriti": {"owned": 25, "full": 25},
+      "Yugoslavia": {"owned": 4, "full": 1169}
+    },
+    "prior_outcomes": {"insufficient-evidence": 225, "correction-needed": 5}
+  },
+  "sources": [
+    {
+      "id": "packet-scope",
+      "url": "https://api.github.com/repos/ChengshuLi/WorldAtlas/issues/421",
+      "role": "Authorized exact subject/parent/area scope and preserved findings contract",
+      "vintage": "Issue #421 and merged packet PR #1011, commit 11e0633d40a7c23dc6cda2f71c98edf48a9e0f2e",
+      "observation": "Scope has 230 Atlas subject IDs, 17 parent references and three area references. The earlier packet records 225 rows insufficient-evidence and five correction-needed; this is project-scoped research evidence, not independent geographic authority.",
+      "license_status": "unknown",
+      "retention": "GitHub API record and immutable packet files; exact file pins are in original-input-pins.json",
+      "limit": "Issue contract and retained assessment do not certify current boundaries, source licensing, completeness or regional approval."
+    },
+    {
+      "id": "greek-municipal-structure-2024",
+      "url": "https://www.ypes.gr/wp-content/uploads/2024/06/STRUCTURE-OPERATION-LRD-ENGLISH-VERSION-2024.pdf",
+      "role": "Hellenic Ministry of Interior account of local and regional government structure",
+      "vintage": "Situation in 2024; report credited May 2024",
+      "pages": "Printed pp. 13-14; PDF index 12-13",
+      "observations": {"first_level": "municipalities", "second_level": "regions", "municipalities": 332, "regions": 13},
+      "license_status": "redistributable",
+      "license_terms": "Page 3 says reproduction is authorized provided the source is mentioned. No PDF or GIS layer was copied.",
+      "limit": "Administrative roles and national counts do not provide a current boundary layer or identify each of the 226 historical Atlas rows."
+    },
+    {
+      "id": "greek-municipality-splits-2019",
+      "url": "https://www.ypes.gr/wp-content/uploads/2019/04/egk24740-03-04-2019.pdf",
+      "role": "Greek Ministry of Interior Circular 15 interpreting Law 4600/2019 Articles 154-158",
+      "vintage": "2019",
+      "pages": "PDF pp. 1-2",
+      "observations": {"dissolved_municipalities": 5, "successor_municipalities": 12},
+      "license_status": "unknown",
+      "license_terms": "Official circular; no redistribution terms established. Text is cited, not copied.",
+      "limit": "Documents specific reorganizations; it is not a complete crosswalk for the 226 scoped historical identities."
+    },
+    {
+      "id": "constitution-article-105",
+      "url": "https://www.hellenicparliament.gr/vouli-ton-ellinon/to-politevma/syntagma/article-109/",
+      "role": "Official Hellenic Parliament text of Constitution Article 105 on Mount Athos",
+      "vintage": "Constitution page identifies revision through 2019",
+      "observations": {"status": "self-governed part of the Greek State", "administration": "through representatives of the twenty Holy Monasteries", "monasteries": 20},
+      "license_status": "unknown",
+      "license_terms": "Official Parliament text not copied; reuse terms not established.",
+      "limit": "Territorial-role evidence does not identify the exact polygon or settle the retained source feature identity."
+    },
+    {
+      "id": "elstat-cartographic-catalog",
+      "url": "https://www.statistics.gr/digital-cartographical-data",
+      "role": "Hellenic Statistical Authority catalog of digital census/cartographic backgrounds",
+      "vintage": "Catalog lists census layers for 2001, 2011 and 2021; the 2021 background uses 2015-2016 orthophotos",
+      "observations": {"administrative_layer_vintages": [2011, 2021], "orthophoto_years_for_2021": [2015, 2016]},
+      "license_status": "unknown",
+      "license_terms": "Reuse terms for bulk boundary files were not established; no layer was copied.",
+      "limit": "Census cartography is not treated as a present-day legal boundary authority or complete island/settlement inventory."
+    },
+    {
+      "id": "kosovo-municipal-boundaries-law",
+      "url": "https://gzk.rks-gov.net/ActDetail.aspx?ActID=2518",
+      "role": "Kosovo Official Gazette catalog entry for Law 03/L-041 on municipal administrative boundaries",
+      "vintage": "Published 2008-06-02; catalog page lists subsequent amendment acts",
+      "observations": {"law_number": "03/L-041", "publication_date": "2008-06-02"},
+      "license_status": "unknown",
+      "license_terms": "Official Gazette page not copied; reuse terms not established.",
+      "limit": "Catalog metadata and law title do not prove current consolidated boundaries or a complete identity crosswalk for the four scoped Atlas rows."
+    },
+    {
+      "id": "kosovo-statistics-release-8471",
+      "url": "https://ask.rks-gov.net/Releases/Details/8471",
+      "role": "Kosovo Agency of Statistics release cited in the prior source inventory",
+      "vintage": "Prior packet describes a 2024 census release published 2025-02-07",
+      "observations": {"page_body_available_in_this_inspection": false, "new_values_asserted": false},
+      "license_status": "unknown",
+      "license_terms": "Bulk-release reuse terms were not established.",
+      "limit": "The inspected page response did not expose release content. The prior packet's reported 38-municipality comparison remains a restoration/follow-up lead, not a freshly verified claim."
+    },
+    {
+      "id": "kew-wgsrpd-purpose",
+      "url": "https://powo.science.kew.org/about",
+      "role": "Royal Botanic Gardens, Kew, Plants of the World Online explanation of WGSRPD",
+      "vintage": "Current explanation inspected 2026-10-06",
+      "observations": {"wgsrpd_level": 3, "level_3_name": "botanical countries", "may_ignore_political_boundaries": true},
+      "license_status": "unknown",
+      "license_terms": "Web page not copied; reuse terms not established.",
+      "limit": "Supports classification purpose only; does not establish the exact geometry of Greece, Kriti or Yugoslavia Atlas area records."
+    },
+    {
+      "id": "greek-geoboundaries-adm3-2010",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/GRC/ADM3/geoBoundaries-GRC-ADM3-all.zip",
+      "role": "Retained historical Greek ADM3 source and Atlas lineage match",
+      "vintage": "2010 boundaries; source data update 2023-02-10; build 2023-12-12",
+      "observations": {"source_features": 326, "scoped_atlas_rows": 226, "scoped_native_features": 227, "oraiokastro_native_features": 2},
+      "license_status": "unknown",
+      "license_terms": "Original metadata conflicts between CC0 and CC BY 3.0 statements; do not treat as resolved.",
+      "limit": "Feature ID/name matches establish source-era lineage only, not current administrative legal role, present boundary, exact island completeness or current parent."
+    },
+    {
+      "id": "greek-geoboundaries-adm2-2016",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/GRC/ADM2/geoBoundaries-GRC-ADM2-all.zip",
+      "role": "Retained Greek ADM2 parent reference collection from EuroGeoGraphics / Regional IM Working Group - Europe",
+      "vintage": "2016; source update 2023-01-19; build 2023-12-12",
+      "observations": {"metadata_units": 14, "license": "CC BY 4.0", "boundary_canonical": "empty"},
+      "license_status": "redistributable",
+      "license_terms": "GeoBoundaries metadata declares CC BY 4.0; attribution retained. Source provenance/licenseDetail refer to an unspecified metadata tab.",
+      "files": [
+        {"path": "data/regional-review/regional-review-3f920fc5cb99166e/sources/geoBoundaries-GRC-ADM2-all.zip", "bytes": 1336957, "sha256": "213a8f4bdf66c9edb2c99e2e2895f6acefa531f498489538a3ac2cc3021a5a0e", "hash_kind": "file-bytes"},
+        {"path": "data/regional-review/regional-review-3f920fc5cb99166e/sources/geoBoundaries-GRC-ADM2.geojson", "bytes": 1329310, "sha256": "005ac2734762f33b822ed568991bb8ec8c1b5e46fc99a4a7557e65d7ed0d8f4a", "hash_kind": "file-bytes"},
+        {"path": "data/regional-review/regional-review-3f920fc5cb99166e/sources/geoBoundaries-GRC-ADM2-metaData.json", "bytes": 864, "sha256": "a9649a5377d9eb834deeba926a850d4a7d73539e3fec8c0d431d64f5ff0fbc7f", "hash_kind": "file-bytes"}
+      ],
+      "limit": "Parent collection is reference context; no exact legal parent identity or current boundary is certified."
+    },
+    {
+      "id": "kosovo-geoboundaries-adm1-2021",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/XKX/ADM1/geoBoundaries-XKX-ADM1-all.zip",
+      "role": "Retained Kosovo ADM1 layer/source package used for lineage screening",
+      "vintage": "2021; source update 2023-01-19; build 2023-12-12",
+      "observations": {"metadata_units": 48, "retained_source_features": 7, "metadata_type": "ADM1", "source": "OpenStreetMap"},
+      "license_status": "redistributable",
+      "license_terms": "GeoBoundaries metadata declares CC BY-SA 2.0 and credits OpenStreetMap/OSM Boundaries; bundle instructions require attribution under CC BY 4.0 and source citation. Atlas redistribution compatibility is not adjudicated.",
+      "files": [
+        {"path": "data/regional-review/regional-review-3f920fc5cb99166e/sources/geoBoundaries-XKX-ADM1-all.zip", "bytes": 1585582, "sha256": "6b7af09355bc9b5f82e69c3cb98585ef4da33a1c6e48abec6d5e0a57e822c429", "hash_kind": "file-bytes"},
+        {"path": "data/regional-review/regional-review-3f920fc5cb99166e/sources/geoBoundaries-XKX-ADM1.geojson", "bytes": 1898578, "sha256": "9b07b08fe0f9ca5a26ddb6de2008ac235b38ffaf069063df9851711c2d358315", "hash_kind": "file-bytes"},
+        {"path": "data/regional-review/regional-review-3f920fc5cb99166e/sources/geoBoundaries-XKX-ADM1-metaData.json", "bytes": 799, "sha256": "a912dcaefa1096a6c0af067af9723b2a67c32f5b0147b8198f99751eb591b49c", "hash_kind": "file-bytes"},
+        {"path": "data/regional-review/regional-review-3f920fc5cb99166e/sources/geoBoundaries-XKX-ADM1-current-api-metadata.json", "bytes": 1664, "sha256": "28fa0fdf25211cfcb4f649db3b23fc53a8e7f442b6312341c801d02eed4d6fa0", "hash_kind": "file-bytes"}
+      ],
+      "limit": "The seven-feature archive contradicts its 48-unit metadata count; official law/statistics crosswalk and rights compatibility remain unresolved. ADM1 naming is not treated as current municipality identity."
+    }
+  ],
+  "neighboring_granularity": {
+    "finding": "The original handoff records adjacent North Macedonia packet #422 as an 84-legacy-polygon to 80-code 2019 statistical roster crosswalk against 2016 geometry, after PR #1009. It is source-vintage context only and does not establish any Greek/Kosovo boundary or legal parent relationship.",
+    "legacy_polygon_count": 84,
+    "statistical_code_count": 80,
+    "roster_vintage": 2019,
+    "geometry_vintage": 2016,
+    "source_file": "data/regional-review/regional-review-3f920fc5cb99166e/engineering-handoff.md",
+    "limit": "No cross-border geometry or current neighbor completeness claim is made."
+  },
+  "limits": [
+    "No current official Greek municipality geometry or exact 226-row legal crosswalk was acquired.",
+    "The four Kosovo IDs remain in a legacy ADM1 source lineage; current law annexes, consolidated roster and exact boundaries were not crosswalked.",
+    "No independent physical-island, settlement or city-fragment completeness authority was retained.",
+    "Boundary source licensing and compatibility remain unresolved for the 2010 Greek source and 2021 Kosovo package.",
+    "Planar area, IoU, source-layer adjacency and structural counts are diagnostics, not legal boundary or regional approval evidence."
+  ]
+}
