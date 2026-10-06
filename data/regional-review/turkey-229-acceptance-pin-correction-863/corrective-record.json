@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "issue": 1088,
+  "recorded_at_utc": "2026-10-06T06:54:55Z",
+  "issue_body_sha256": "e76958dc8e0b06640e6c664d51648388c23ce34d52c0d43a1cb6105efc8d6ee4",
+  "baseline_commit": "cbb829672d18801e4310c30896a7ddb13a79b451",
+  "originating_pr": {
+    "number": 863,
+    "url": "https://github.com/ChengshuLi/WorldAtlas/pull/863",
+    "head_sha": "81b3ddee2043a9b7e539c3d85d8a157dfad3f7ee",
+    "merge_commit": "b7aab8b8d353eb3510cf7323da7bc2dcde10147b",
+    "merged_at": "2026-10-05T04:34:55Z"
+  },
+  "inputs": [
+    {
+      "pin": "original-acceptance-review",
+      "path": "data/regional-review/regional-review-96597060edbd6143/acceptance-review.json",
+      "sha256": "eac93598e1ef56769c1926df97d3fe2c0001d98c8ca5da718f4a95fca5391656"
+    },
+    {
+      "pin": "original-scope",
+      "path": "data/regional-review/regional-review-96597060edbd6143/scope.json",
+      "sha256": "4aa4c622f95dfffac97359e4443a7b330dbc9bd554d73fed6e792fc1f6e772c9"
+    },
+    {
+      "pin": "original-assessments",
+      "path": "data/regional-review/regional-review-96597060edbd6143/district-assessments.json",
+      "sha256": "ce7be5a2bf47cd33f0de7737a8d99a3dd068d601b63b3ac9805a382f3e6a344f"
+    },
+    {
+      "pin": "original-evidence-manifest",
+      "path": "data/regional-review/regional-review-96597060edbd6143/evidence-quality.json",
+      "sha256": "4ed8de8a53d096192a4374d7ff9ce370d3b4db2db8d89d83307dad56d8c3900c"
+    },
+    {
+      "pin": "atlas-subjects-part24",
+      "path": "data/geography/part-24.json",
+      "sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c"
+    },
+    {
+      "pin": "macro-region-handoffs",
+      "path": "data/macro-foundation/regional-handoffs.json.gz",
+      "sha256": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a"
+    }
+  ],
+  "packet_scope": {
+    "path": "data/regional-review/regional-review-96597060edbd6143/scope.json",
+    "location_count": 229,
+    "member_location_ids_sha256": "50597f85cd48e244f864325a474f44013c1212375e977196cfd53812edba9d14",
+    "hash_method": "SHA-256 of UTF-8 member IDs sorted lexically and joined with LF, with no final LF.",
+    "matching_assessment_path": "data/regional-review/regional-review-96597060edbd6143/district-assessments.json",
+    "matching_assessment_pointer": "/scope/subject_ids_sha256"
+  },
+  "prior_evidence_manifest_subject_digest": {
+    "path": "data/regional-review/regional-review-96597060edbd6143/evidence-quality.json",
+    "subject_ids_sha256": "dfcd4696b6c63deeee2cc1e693537b86afccc9ef3ae873dd2390b143a78e906a",
+    "hash_method": "SHA-256 of the UTF-8 compact JSON array of sorted IDs; a different, unchanged field and canonicalization."
+  },
+  "frozen_macro_region": {
+    "id": "atlas:macro-foundation:region:anatolia-eastern-mediterranean",
+    "name": "Anatolia and Eastern Mediterranean",
+    "location_count": 939,
+    "member_location_ids_sha256": "c192f338b815c029ea0c8338cbf153686a11bfd5e102d733272417f290ae85eb",
+    "envelope_geometry_sha256": "505db3089243e5bcd2ba2ea86099d9e993186cf9cad18b0030bfd098252e4f86",
+    "handoffs_path": "data/macro-foundation/regional-handoffs.json.gz",
+    "handoffs_file_sha256": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
+    "release": {
+      "footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286",
+      "hierarchy_sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "id": "geography:review:831aada26a8c7fe8c75553caf4432a22dc9c2cf458b14221a1135addb475f186",
+      "version": 6
+    }
+  },
+  "prior_acceptance_summary": {
+    "path": "data/regional-review/regional-review-96597060edbd6143/acceptance-review.json",
+    "sha256": "eac93598e1ef56769c1926df97d3fe2c0001d98c8ca5da718f4a95fca5391656",
+    "field": "/scope/member_ids_sha256",
+    "value": "c192f338b815c029ea0c8338cbf153686a11bfd5e102d733272417f290ae85eb",
+    "error": "This field used the frozen 939-member regional digest where a 229-member packet digest was intended."
+  },
+  "controls": {
+    "positive": "validation/positive-control.json",
+    "negative": "validation/negative-control.json"
+  },
+  "preservation": {
+    "original_packet_files_modified": false,
+    "original_assessment_rows": 229,
+    "insufficient_evidence_rows": 229,
+    "all_original_rows_remain_insufficient_evidence": true,
+    "geography_or_legal_crosswalk_reviewed": false,
+    "regional_approval_or_import_authority_created": false
+  },
+  "disposition": "Corrective provenance record only. It separates three distinct digest conventions and does not repin IDs, rewrite the historical acceptance summary, validate legal boundaries, or certify geography."
+}

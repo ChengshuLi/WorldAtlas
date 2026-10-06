@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "method_id": "packet-region-pin-comparison",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "control": "Substituting the frozen macro-region digest for the 229-member packet digest is rejected.",
+  "candidate_packet_hash": "c192f338b815c029ea0c8338cbf153686a11bfd5e102d733272417f290ae85eb",
+  "expected_packet_hash": "50597f85cd48e244f864325a474f44013c1212375e977196cfd53812edba9d14",
+  "candidate_equals_packet": false,
+  "candidate_matches_frozen_region": true,
+  "frozen_region_id": "atlas:macro-foundation:region:anatolia-eastern-mediterranean",
+  "frozen_region_member_count": 939,
+  "substitution_rejected": true
+}

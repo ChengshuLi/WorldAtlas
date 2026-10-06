@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "method_id": "packet-region-pin-comparison",
+  "kind": "reproducibility",
+  "outcome": "passed",
+  "run_one_sha256": "01a3a0135354ce8ed99d8d8856c35dd95a8f89b57c3f0fb79040c2fa34439837",
+  "run_two_sha256": "01a3a0135354ce8ed99d8d8856c35dd95a8f89b57c3f0fb79040c2fa34439837",
+  "artifact_sha256": {
+    "data/regional-review/turkey-229-acceptance-pin-correction-863/corrective-record.json": "2208f0995835438a176bc9e9c7d73f0325f5e4c9e0a23f8be6ea18dfa0dd9e19",
+    "data/regional-review/turkey-229-acceptance-pin-correction-863/validation/positive-control.json": "2615653567e4c91adcade8c1a075a87896913f5821d2515353b6b855016c1291",
+    "data/regional-review/turkey-229-acceptance-pin-correction-863/validation/negative-control.json": "40e576c6213ba95f857d1969c38df36349d77610bd62fbe2e06e2e945f1aef37"
+  },
+  "independent_processes": 2,
+  "equal": true
+}
