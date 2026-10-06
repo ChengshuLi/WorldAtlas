@@ -5,9 +5,13 @@ import csv, hashlib, json, pathlib
 ROOT = pathlib.Path(__file__).resolve().parents[3]
 PACKET = pathlib.Path(__file__).resolve().parent
 INPUT = ROOT / 'data/regional-review/regional-review-365cbd6478904888/source/geoBoundaries-CHN-ADM2.geojson'
+ATLAS = ROOT / 'data/geography/part-4.json'
 CROSSWALK = PACKET / 'findings/hainan-18-crosswalk.csv'
 OUT = PACKET / 'findings/reproduction-summary.json'
+POSITIVE = PACKET / 'findings/positive-edge-control.json'
+NEGATIVE = PACKET / 'findings/negative-point-control.json'
 EXPECTED_INPUT = '2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34'
+EXPECTED_ATLAS = 'e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c'
 IDS = '''gb:CHN:ADM2:17275852B2295538790743 gb:CHN:ADM2:17275852B38709981190197 gb:CHN:ADM2:17275852B38939963469829 gb:CHN:ADM2:17275852B41190306193582 gb:CHN:ADM2:17275852B42599245130625 gb:CHN:ADM2:17275852B50589627480209 gb:CHN:ADM2:17275852B53008264931106 gb:CHN:ADM2:17275852B70320302334749 gb:CHN:ADM2:17275852B72819681774342 gb:CHN:ADM2:17275852B7979903099841 gb:CHN:ADM2:17275852B80309702523612 gb:CHN:ADM2:17275852B82960244806798 gb:CHN:ADM2:17275852B85583949591367 gb:CHN:ADM2:17275852B86431238150342 gb:CHN:ADM2:17275852B87782309196497 gb:CHN:ADM2:17275852B88042861362346 gb:CHN:ADM2:17275852B93743910489906 gb:CHN:ADM2:17275852B98891327369808'''.split()
 IDS = sorted(IDS)
 # Current identity/tier values use Hainan Statistical Yearbook 2024, table 1-1 (2023).
@@ -49,9 +53,16 @@ def exact_shared_edges(records):
     return pairs
 
 # Positive/negative contact controls: a reversed full edge matches; a point touch does not.
-assert exact_shared_edges([('a',[[[0,0],[1,0]]]),('b',[[[1,0],[0,0]]])]) == {('a','b'):1}
-assert exact_shared_edges([('a',[[[0,0],[1,0]]]),('b',[[[1,0],[1,1]]])]) == {}
+positive=exact_shared_edges([('a',[[[0,0],[1,0]]]),('b',[[[1,0],[0,0]]])]) == {('a','b'):1}
+negative=exact_shared_edges([('a',[[[0,0],[1,0]]]),('b',[[[1,0],[1,1]]])]) == {}
+assert positive and negative
+POSITIVE.write_text(json.dumps({'method_id':'exact-edge-screen','kind':'positive-control','outcome':'passed','case':'same full segment with reversed orientation','observed':positive},indent=2)+'\n',encoding='utf-8')
+NEGATIVE.write_text(json.dumps({'method_id':'exact-edge-screen','kind':'negative-control','outcome':'passed','case':'boundaries meet at one endpoint only','observed':negative},indent=2)+'\n',encoding='utf-8')
 raw=INPUT.read_bytes(); assert sha(raw)==EXPECTED_INPUT,'Pinned source bytes changed'
+atlas_raw=ATLAS.read_bytes(); assert sha(atlas_raw)==EXPECTED_ATLAS,'Pinned Atlas feature bytes changed'
+atlas=json.loads(atlas_raw)
+atlas_by={f.get('id') or f.get('properties',{}).get('id'):f for f in atlas.get('features',[]) if (f.get('id') or f.get('properties',{}).get('id')) in IDS}
+assert set(atlas_by)==set(IDS),'Frozen IDs missing in pinned Atlas part'
 source=json.loads(raw); source_by={}
 for feature in source.get('features',[]):
     native=feature.get('properties',{}).get('shapeID')
@@ -75,7 +86,8 @@ for fid in IDS:
     total_vertices+=vertices; holes+=interior
     records.append((fid,rings))
     per_feature.append({'id':fid,'source_name':props['shapeName'],'geometry_type':geom['type'],'polygon_components':len(polys),'exterior_vertices':vertices,'interior_rings':interior})
-    csv_rows.append({'location_id':fid,'source_name_2017':props['shapeName'],'source_role_claim':'ADM2; County Level (Atlas source metadata)','current_official_identity':name,'current_official_role':role,'current_official_government_parent':parent,'current_model_parent':feature['properties'].get('parent_id',''),'assessment':status,'identity_tier_parent_finding':finding,'boundary_finding':'No current official GIS boundary bytes retrieved; pinned 2017 candidate only. Current line, island/fragment, coastal completeness and legal fit remain unresolved.','neighboring_granularity':'','source_vintage':'2017 reference (source metadata)','license_reuse':'Unknown upstream provenance/reuse terms; embedded repository source metadata claims ODbL/PDDL; no new source copy redistributed.','source_byte_sha256':EXPECTED_INPUT,'identity_evidence_source_ids':'hainan-yearbook-2024;geoboundaries-2017','boundary_source_status':'No current official GIS bytes retrieved; exact 2017 candidate geometry only'})
+    atlas_feature=atlas_by[fid]; atlas_props=atlas_feature.get('properties',{})
+    csv_rows.append({'location_id':fid,'source_name_2017':props['shapeName'],'source_role_claim':'ADM2; County Level (Atlas source metadata)','current_official_identity':name,'current_official_role':role,'current_official_government_parent':parent,'current_model_parent':atlas_props.get('parent_id',''),'assessment':status,'identity_tier_parent_finding':finding,'boundary_finding':'No current official GIS boundary bytes retrieved; pinned 2017 candidate only. Current line, island/fragment, coastal completeness and legal fit remain unresolved.','neighboring_granularity':'','source_vintage':'2017 reference (source metadata)','license_reuse':'Unknown upstream provenance/reuse terms; embedded repository source metadata claims ODbL/PDDL; no new source copy redistributed.','source_byte_sha256':EXPECTED_INPUT,'identity_evidence_source_ids':'hainan-yearbook-2024;geoboundaries-2017','boundary_source_status':'No current official GIS bytes retrieved; exact 2017 candidate geometry only'})
 pairs=exact_shared_edges(records)
 name_by={r['location_id']:r['source_name_2017'] for r in csv_rows}
 for (left,right),count in sorted(pairs.items()):
