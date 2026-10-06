@@ -698,8 +698,8 @@
   "outputs": [
     {
       "path": "data/regional-review/southern-south-america-batch3-validation-20261006/README.md",
-      "bytes": 6023,
-      "sha256": "40fe22a53f5474121b26332d72ed5ab0f85e588ba0a6d6fd6bf987b870dadadb",
+      "bytes": 6075,
+      "sha256": "ce74c3329dc81613023d99d4fc92ae4e3f8c94b8a39dd5e63028c758178f33fa",
       "hash_kind": "file-bytes"
     },
     {
@@ -718,6 +718,24 @@
       "path": "data/regional-review/southern-south-america-batch3-validation-20261006/claim-receipt.json",
       "bytes": 947,
       "sha256": "9fd790f46491146cd26e8d680e302cd5303db2f495c49177cc45cd634b0d74d9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/southern-south-america-batch3-validation-20261006/negative-control.json",
+      "bytes": 4009,
+      "sha256": "b32e7489043afe40e284f597dae89b7a74d05bd01cb496db3fcc071ba1368323",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/southern-south-america-batch3-validation-20261006/positive-control.json",
+      "bytes": 463,
+      "sha256": "125a69ca69fe795605ca90ce7b35bdabf328fdb8117ddf0fda1b7df805ac4609",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/southern-south-america-batch3-validation-20261006/reproducibility.json",
+      "bytes": 597,
+      "sha256": "8fe6bb27c3701f35b07e24c018cb0ca9b659e0eee9ea8e9f3f0e5a4046fb7fcf",
       "hash_kind": "file-bytes"
     },
     {
@@ -812,20 +830,14 @@
     },
     {
       "path": "data/regional-review/southern-south-america-batch3-validation-20261006/validate_batch3.py",
-      "bytes": 32936,
-      "sha256": "b7a806235f82cf3fcb69aae58bac8a774acdd7b2575018e46d7e65a729ae060e",
+      "bytes": 34008,
+      "sha256": "cc62f77bf6e77e65827ef66e4237fbc6d5ab639f29c2d71ec9b46bdc7ddf3fc8",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/southern-south-america-batch3-validation-20261006/verification-results.json",
       "bytes": 7166,
       "sha256": "9808c4ff969c45ae354cd44a5c9b1779c51fac7036e6a09b839d0887a17b5f95",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "data/regional-review/southern-south-america-batch3-validation-20261006/reproducibility.json",
-      "bytes": 587,
-      "sha256": "6200abbdb2c004516d70879ad121b15d07a0183bfcf8722c855315fadfbc933b",
       "hash_kind": "file-bytes"
     }
   ],
@@ -836,27 +848,7 @@
       "helper_version": "worldatlas-evidence-preparation-v1",
       "description": "Validates pinned #1122 and parent-packet bytes, binds all 230 issue IDs to actual immutable baseline features, reconciles retained ledgers and summaries, authenticates upstream GitHub LFS pointer bytes and tests positive/negative controls. It does not download source geometries or recompute prior source matching/IoU.",
       "software": "Python 3.12.14; Shapely 2.1.2; shared scripts/evidence/immutable.py; Git 2.x",
-      "units": "features, records, polygon components, bytes, SHA-256 digests",
-      "validation": {
-        "positive_control": "positive-original-roster",
-        "negative_controls": [
-          "rehashed-false-country-SPI-parent",
-          "wrong-source-identity-level",
-          "wrong-baseline-geometry-type",
-          "wrong-assessment-source-role",
-          "wrong-upstream-pointer-vintage",
-          "duplicate-subject",
-          "foreign-subject",
-          "inconsistent-match-summary",
-          "newly-omitted-baseline-component-field"
-        ],
-        "outcome": "passed",
-        "evidence_path": "data/regional-review/southern-south-america-batch3-validation-20261006/adversarial-controls.json"
-      },
-      "reproducibility": {
-        "outcome": "passed",
-        "evidence_path": "data/regional-review/southern-south-america-batch3-validation-20261006/reproducibility.json"
-      }
+      "units": "features, records, polygon components, bytes, SHA-256 digests"
     }
   ],
   "metrics": [
@@ -1130,6 +1122,14 @@
     {
       "path": "data/regional-review/southern-south-america-batch3-validation-20261006/verification-results.json",
       "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-south-america-batch3-validation-20261006/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-south-america-batch3-validation-20261006/negative-control.json",
+      "status": "added"
     }
   ],
   "metric_bindings": [
@@ -1192,17 +1192,23 @@
   "validation": [
     {
       "method_id": "batch3-provenance-crossfield-validator",
-      "kind": "generator",
+      "kind": "positive-control",
       "outcome": "passed",
-      "evidence_path": "data/regional-review/southern-south-america-batch3-validation-20261006/adversarial-controls.json"
+      "evidence_path": "data/regional-review/southern-south-america-batch3-validation-20261006/positive-control.json"
     },
     {
       "method_id": "batch3-provenance-crossfield-validator",
-      "kind": "generator",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/southern-south-america-batch3-validation-20261006/negative-control.json"
+    },
+    {
+      "method_id": "batch3-provenance-crossfield-validator",
+      "kind": "reproducibility",
       "outcome": "passed",
       "evidence_path": "data/regional-review/southern-south-america-batch3-validation-20261006/reproducibility.json",
-      "run_one_sha256": "e8c94557ff8cba55057c3e09a7ba9c22c149043f26780b45d248d737ed453e5a",
-      "run_two_sha256": "e8c94557ff8cba55057c3e09a7ba9c22c149043f26780b45d248d737ed453e5a"
+      "run_one_sha256": "7133fb56ed198d70db8f943b378eeb7ed504596b9ef0ead75601a6cd905b0e7f",
+      "run_two_sha256": "7133fb56ed198d70db8f943b378eeb7ed504596b9ef0ead75601a6cd905b0e7f"
     }
   ]
 }

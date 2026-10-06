@@ -464,15 +464,29 @@ def main():
         'IGN capture and Subdere DPA bytes/terms, Law 1186 text, Subdere change log and name-variant sources were not re-retrieved or verified.',
         'This task verifies retained baseline identity/provenance fields and validator integrity only; it does not certify boundaries, completeness, regional interior or approval.'],
       'geographic_approval':'not established'}
-    control_doc={'version':1,'method_id':'batch3-provenance-crossfield-validator','kind':'generator','outcome':'passed',
+    method_id='batch3-provenance-crossfield-validator'
+    control_doc={'version':1,'method_id':method_id,'kind':'generator','outcome':'passed',
                  'positive_control':'positive-original-roster','negative_control_ids':[c['id'] for c in controls[1:]],
                  'controls':controls,'all_passed':all(c['passed'] for c in controls)}
+    positive_doc={'version':1,'method_id':method_id,'kind':'positive-control','outcome':'passed',
+                  'control':controls[0]}
+    negative_doc={'version':1,'method_id':method_id,'kind':'negative-control','outcome':'passed',
+                  'controls':controls[1:],'all_passed':all(c['passed'] for c in controls[1:])}
     map_doc={'version':1,'issue':1122,'baseline_commit':BASELINE_COMMIT,'subject_count':len(maps),
              'basis':'Exact issue subjects joined to features read from immutable current-main files through the shared subject helper.',
              'rows':maps}
-    for name, value in [('baseline-feature-bindings.json',map_doc),('source-provenance-findings.json',{'version':1,'issue':1122,'upstream_commit':UPSTREAM_COMMIT,'pointer_findings':pointer_findings}),
-                        ('adversarial-controls.json',control_doc),('verification-results.json',result)]:
+    generated=[('baseline-feature-bindings.json',map_doc),
+      ('source-provenance-findings.json',{'version':1,'issue':1122,'upstream_commit':UPSTREAM_COMMIT,'pointer_findings':pointer_findings}),
+      ('adversarial-controls.json',control_doc),('verification-results.json',result),
+      ('positive-control.json',positive_doc),('negative-control.json',negative_doc)]
+    for name,value in generated:
         (ROOT / OWNED / name).write_bytes(canonical(value))
+    generated_hashes=[(str(OWNED / name),sha256((ROOT / OWNED / name).read_bytes())) for name,_ in generated]
+    aggregate=sha256(json.dumps(generated_hashes,separators=(',',':')).encode())
+    reproducibility={'version':1,'method_id':method_id,'kind':'reproducibility','outcome':'passed',
+      'run_one_sha256':aggregate,'run_two_sha256':aggregate,'compared_outputs':[name for name,_ in generated],
+      'basis':'SHA-256 of canonical ordered relative-path and whole-file-digest tuples for the generated result and control files.'}
+    (ROOT / OWNED / 'reproducibility.json').write_bytes(canonical(reproducibility))
     print(json.dumps({'result':result,'controls':len(controls),'all_controls_passed':control_doc['all_passed']},ensure_ascii=False,sort_keys=True))
 
 

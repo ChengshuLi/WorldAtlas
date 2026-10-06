@@ -38,4 +38,4 @@ PYTHONDONTWRITEBYTECODE=1 python3 data/regional-review/southern-south-america-ba
 node scripts/evidence-quality.mjs data/regional-review/southern-south-america-batch3-validation-20261006/evidence-quality.json .
 ```
 
-The validator reads the immutable baseline through the shared evidence helper, plus retained issue/API-pointer snapshots. It writes its four generated JSON results only inside this owned directory. Run it twice and compare their whole-file SHA-256 values; `reproducibility.json` records the matched runs. The evidence audit is expected to be `limited`; neither check establishes the underlying current-source geometry or legal geography.
+The validator reads the immutable baseline through the shared evidence helper, plus retained issue/API-pointer snapshots. It writes generated JSON results and separate positive-control, negative-control and reproducibility receipts only inside this owned directory. Run it twice and compare the whole-file SHA-256 values recorded in `reproducibility.json`. The evidence audit is expected to be `limited`; neither check establishes the underlying current-source geometry or legal geography.
