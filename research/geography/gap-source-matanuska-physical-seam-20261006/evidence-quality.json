@@ -862,14 +862,92 @@
     },
     {
       "path": "research/geography/gap-source-matanuska-physical-seam-20261006/build-evidence-manifest.py",
-      "bytes": 16537,
-      "sha256": "476d436ff3ae48231305bd7b08651324269efba1d898a68d726f8a547be0462e",
+      "bytes": 16725,
+      "sha256": "dbe73056ef63756bcb3c45d5a2fe3824c1999626964ea1d08a86c4a8ffcc80d4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/engineering-handoff.md",
+      "bytes": 4758,
+      "sha256": "c1357830aab997e761d78893d1fc5001fe7c290befc5d36efc5968ce57248e56",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/gap-source-matanuska-physical-seam-20261006/reproduce-source-overlays.py",
       "bytes": 9901,
       "sha256": "6abe45b3ec7f56a010101c74471aedd5dfe107e2c26a0d0b7f47d5bb6cd1b6e8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/controls/negative-changed-source-hash.json",
+      "bytes": 344,
+      "sha256": "a48963059091d2c0a8c7ee56d22bda29c871c1e6adae95abebde91985a19770d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/controls/negative-omitted-component.json",
+      "bytes": 423,
+      "sha256": "a45cb000cab18bc1c4023b57c7f5490d363963c96080ce785524d2a9635f266c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/controls/negative-omitted-contact.json",
+      "bytes": 222,
+      "sha256": "70c7128d0c9295c68b2d4248045d311666b590b4dab5f3df55b660c1f56b8742",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/controls/negative-vintage-laundering.json",
+      "bytes": 399,
+      "sha256": "efad6aec468dd0e6be2f7da8f259d5af3015aa3fd5e3435dbb7ddb1d1b262c31",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/controls/positive-exact-roster-and-contact-closure.json",
+      "bytes": 189,
+      "sha256": "61eaa278ddac9cc0d716476fc71f0c3068b9fa6fe74e4414ff674bbab303e70c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/controls/reproducibility.json",
+      "bytes": 562,
+      "sha256": "ace9bfd06071c41096ebb86a4cfb2b1d7ae0148fc24a50054d4e6c666504a9d2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/run-one/selected-components.geojson",
+      "bytes": 274326,
+      "sha256": "271d213f985d3a9f22d28f244d04b6a9a5dbe70ae9bbe925c5dcc50bda818379",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/run-one/source-overlay-ledger.json",
+      "bytes": 1086607,
+      "sha256": "794f767711590503165c4bde89256dff6cb8f5117844cf775d5e28d01e647f1d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/run-one/source-overlay-summary.json",
+      "bytes": 908,
+      "sha256": "5e2e12f3cfa9533a15e25b003e0700b9871db60ed58203fd3396aaf58da4ebcf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/run-two/selected-components.geojson",
+      "bytes": 274326,
+      "sha256": "271d213f985d3a9f22d28f244d04b6a9a5dbe70ae9bbe925c5dcc50bda818379",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/run-two/source-overlay-ledger.json",
+      "bytes": 1086607,
+      "sha256": "794f767711590503165c4bde89256dff6cb8f5117844cf775d5e28d01e647f1d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/run-two/source-overlay-summary.json",
+      "bytes": 908,
+      "sha256": "5e2e12f3cfa9533a15e25b003e0700b9871db60ed58203fd3396aaf58da4ebcf",
       "hash_kind": "file-bytes"
     },
     {
@@ -1268,12 +1346,77 @@
       "previous_path": null
     },
     {
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/engineering-handoff.md",
+      "status": "added",
+      "previous_path": null
+    },
+    {
       "path": "research/geography/gap-source-matanuska-physical-seam-20261006/evidence-quality.json",
       "status": "added",
       "previous_path": null
     },
     {
       "path": "research/geography/gap-source-matanuska-physical-seam-20261006/reproduce-source-overlays.py",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/controls/negative-changed-source-hash.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/controls/negative-omitted-component.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/controls/negative-omitted-contact.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/controls/negative-vintage-laundering.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/controls/positive-exact-roster-and-contact-closure.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/controls/reproducibility.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/run-one/selected-components.geojson",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/run-one/source-overlay-ledger.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/run-one/source-overlay-summary.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/run-two/selected-components.geojson",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/run-two/source-overlay-ledger.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/results/run-two/source-overlay-summary.json",
       "status": "added",
       "previous_path": null
     },
