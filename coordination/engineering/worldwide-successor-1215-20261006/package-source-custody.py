@@ -23,7 +23,7 @@ def main():
         name = path.replace('/', '_') + '.gz'; (out / name).write_bytes(packed)
         encoded = descriptor(name, packed); encoded.update(uncompressed_bytes=len(raw), uncompressed_sha256=hashlib.sha256(raw).hexdigest())
         source = descriptor(path, raw)
-        relation = verify_decoded_relation(encoded, packed, source, raw, 1)
+        relation = verify_decoded_relation({k: encoded[k] for k in ['path', 'bytes', 'sha256', 'hash_kind']}, packed, source, raw, 1)
         relations.append({'source_commits': [ORIGINAL, SELECTED], 'source': source, 'encoded': encoded, 'decoded_relation': relation})
     receipt = {'version': 'whole-source-lossless-transport-v1', 'executed_packaging_commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(), 'scientific_producer_commit': 'd31c320fd3a71002a5c47cd72a20052e95c381a1', 'relations': relations, 'limits': 'Transport only: actual numerical source reads are recorded by the separately committed worldwide producer.'}
     (out / 'receipt.json').write_text(json.dumps(receipt, sort_keys=True, indent=2) + '\n')
