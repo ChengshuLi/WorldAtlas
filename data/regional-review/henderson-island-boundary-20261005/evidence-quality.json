@@ -1,0 +1,371 @@
+{
+  "version": 1,
+  "issue": 1060,
+  "lane": "geography",
+  "worker_id": "01a10947-b3d7-7812-8b2f-c5a47e88ccb2",
+  "subject_ids": [
+    "PCN+00?"
+  ],
+  "subject_ids_sha256": "356ed6af0d3d9026dd669628c7b7fb9af3a8104c981c31a07088c0d137400c27",
+  "baseline": {
+    "commit": "a762119a4926c927617dc2f85471b3b822cadc58",
+    "files": [
+      {
+        "path": "data/geography/part-28.json",
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "bytes": 6613963,
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "bytes": 10164089,
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/source/natural-earth/ne_10m_admin_1_scoped-admin-features.json",
+        "sha256": "dd3f4a5683c713fd89c00b41748d89771f905ef236feaacb7887818085f3d96e",
+        "bytes": 96517,
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/source/provenance.json",
+        "sha256": "1935a8ae202c64fa1b84ddaad772efb305131263febdddc9e5f2d3ccc43c5eb9",
+        "bytes": 7642,
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/geometry-comparison.json",
+        "sha256": "e6e9b208e6f3ccbe5c2dfcd78cb2852cd341e32c92ea2546b70454e6299812d0",
+        "bytes": 26550,
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/scope.json",
+        "sha256": "122274d0c0e4e13a29167e2f1bf2cd4c9eaef04a2fc97e0c05762a3471657383",
+        "bytes": 11746,
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "data/geography/part-28.json": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "data/hierarchy.json": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "data/regional-review/regional-review-14a242c4cb0781a7/source/natural-earth/ne_10m_admin_1_scoped-admin-features.json": "dd3f4a5683c713fd89c00b41748d89771f905ef236feaacb7887818085f3d96e"
+    },
+    "pin_files": {
+      "data/geography/part-28.json": "data/geography/part-28.json",
+      "data/hierarchy.json": "data/hierarchy.json",
+      "data/regional-review/regional-review-14a242c4cb0781a7/source/natural-earth/ne_10m_admin_1_scoped-admin-features.json": "data/regional-review/regional-review-14a242c4cb0781a7/source/natural-earth/ne_10m_admin_1_scoped-admin-features.json"
+    },
+    "subject_files": {
+      "PCN+00?": "data/geography/part-28.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "natural-earth-admin1",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_admin_1_states_provinces.geojson",
+      "role": "Pinned generalized Admin-1 comparator; one four-island group feature",
+      "vintage": "Natural Earth commit ca96624a56bd078437bca8184e78163e5039ad19 (2022-06-02); full original SHA-256 22d0e3ad85eb3e27f17cabf8ba2d50e554fbc27a87796ff891d958185da62fb5; scoped extract in pinned baseline",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "Natural Earth terms of use declare vector/raster data public domain and permit reuse/modification; quality is not warranted. https://www.naturalearthdata.com/about/terms-of-use/; generalized 1:10m cartographic data."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Read the immutable baseline bytes at data/regional-review/regional-review-14a242c4cb0781a7/source/natural-earth/ne_10m_admin_1_scoped-admin-features.json (SHA-256 dd3f4a5683c713fd89c00b41748d89771f905ef236feaacb7887818085f3d96e); provenance is pinned at data/regional-review/regional-review-14a242c4cb0781a7/source/provenance.json. To restore original full input fetch https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_admin_1_states_provinces.geojson, verify SHA-256 22d0e3ad85eb3e27f17cabf8ba2d50e554fbc27a87796ff891d958185da62fb5, then retain all features with admin in Cook Islands, French Polynesia, Pitcairn Islands, or U.S. Minor Outlying Islands.",
+      "limit": "This is a generalized administrative group comparator; its Henderson component lineage does not validate current shoreline position, legal boundary, or small-islet completeness."
+    },
+    {
+      "id": "pitcairn-constitution-order-2010",
+      "url": "https://www.legislation.gov.uk/uksi/2010/244/made",
+      "role": "Territorial meaning and four-island legal group definition",
+      "vintage": "Pitcairn Constitution Order 2010",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Official legislation page; no reuse license for map geometry was identified. This packet records the cited textual definition only."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Open the official legislation URL and inspect its interpretation provision defining \u201cPitcairn\u201d as Pitcairn, Henderson, Ducie and Oeno Islands.",
+      "limit": "Establishes group membership, not a coastline, local island boundary, or current surveyed geometry."
+    },
+    {
+      "id": "unesco-henderson-property",
+      "url": "https://whc.unesco.org/en/list/487",
+      "role": "Henderson physical and heritage-property description; GIS availability statement",
+      "vintage": "UNESCO World Heritage Centre page, accessed 2026-10-05",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "UNESCO page content has stated use terms; no license to redistribute its maps or derive geometry was established. See https://whc.unesco.org/en/syndication/."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Open the UNESCO World Heritage Centre page for Henderson Island and inspect its description, area and map/GIS notice.",
+      "limit": "Describes a World Heritage property; says georeferenced polygons will be made available once GIS data are received. Does not provide an island coastline or establish completeness."
+    },
+    {
+      "id": "unesco-henderson-maps",
+      "url": "https://whc.unesco.org/en/list/487/maps/",
+      "role": "Catalogue locator for 2004 Henderson outline image and linked document 101387",
+      "vintage": "Map catalog entry dated 2004; accessed 2026-10-05",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "restricted",
+        "terms": "UNESCO/WHC syndicated material requires prior written authorization for republication; no permission or geometry reuse right obtained."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2004,
+        "to": 2005
+      },
+      "restoration": "Request document 101387 (\u201cHenderson Island outline, scale ~1:72,000\u201d) through an authorized UNESCO channel; linked URL https://whc.unesco.org/document/101387 returned HTTP 403 with no bytes during this review. Do not redistribute without prior written authorization.",
+      "limit": "Only a small image map is catalogued; bytes were unavailable and its map depiction would not by itself prove complete land coastline or legal boundary."
+    },
+    {
+      "id": "jncc-ramsar-potential-sites",
+      "url": "https://jncc.gov.uk/our-work/ramsar-sites/",
+      "role": "Official Ramsar status classification and Henderson potential-site entry",
+      "vintage": "JNCC page accessed 2026-10-05",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "No reuse license for spatial data identified on the page; text citation only."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Open the official JNCC Ramsar sites page; inspect its Potential sites section for Henderson Island (UK62002, Pitcairn Islands, 3,700 ha), and the linked policy on overseas-territory GIS coverage.",
+      "limit": "Lists Henderson as a potential, not designated, Ramsar site; the acreage is not a land outline. JNCC states its GIS coverage excludes UK Overseas Territories."
+    },
+    {
+      "id": "uk-overseas-territories-biodiversity-strategy",
+      "url": "https://www.gov.uk/government/publications/uk-overseas-territories-biodiversity-strategy/uk-overseas-territories-biodiversity-strategy",
+      "role": "Official archipelago membership and island landform context",
+      "vintage": "UK Government strategy page, accessed 2026-10-05",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "GOV.UK page; no reuse terms for boundary geometry identified. Text citation only."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Open the UK Government Overseas Territories Biodiversity Strategy and inspect the Pitcairn Islands section for four-island and raised-atoll descriptions.",
+      "limit": "Context on archipelago and landform only; no island-scale polygon or shoreline completeness evidence."
+    },
+    {
+      "id": "ukotcf-ramsar-information-sheet-locator",
+      "url": "https://www.ukotcf.org/pdf/Ramsar/62Pitcairn.pdf",
+      "role": "Third-party locator for historical proposed Ramsar marine boundary description",
+      "vintage": "2004 Ramsar Information Sheet (secondary host)",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Third-party host; original reuse terms and document bytes were not verified."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2004,
+        "to": 2005
+      },
+      "restoration": "Locate the original Ramsar Information Sheet from its official/authorized record. A secondary-host URL was found, but retrieval failed certificate validation; do not disable TLS checks or redistribute.",
+      "limit": "Unverified secondary locator only. Reported proposed 50 m depth contour / 1.5 km offshore describes a marine-site proposal, not an island shoreline."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/henderson-island-boundary-20261005/README.md",
+      "sha256": "7afce52ea5d1a0ea3261e1029c056dc684f73bf755c0ab968b3ac086bc7a897d",
+      "bytes": 6780,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/henderson-island-boundary-20261005/reproduce_henderson.py",
+      "sha256": "d82d5d405afed78595f659ff34d274cd34dc2017c83d1e869edf7ebf81891792",
+      "bytes": 6003,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/henderson-island-boundary-20261005/findings/component-lineage.json",
+      "sha256": "5acdbe35b845a276bfdb2cf821dd42ee9a2058b1259ecc299cd8bdfceb98d3b9",
+      "bytes": 1844,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/henderson-island-boundary-20261005/findings/positive-control.json",
+      "sha256": "b6d8fd6474b5e132ab75c3e0843419728a3ab74a9ea86e003a3df7270f3a060d",
+      "bytes": 412,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/henderson-island-boundary-20261005/findings/negative-controls.json",
+      "sha256": "5932f37cd93dc32a96c7ba0c6d4092f46efa6a9dd07815de3c16b6045ca1321e",
+      "bytes": 987,
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "rounded-component-lineage",
+      "kind": "code",
+      "description": "Compare the pinned Natural Earth group component with the existing Henderson ring after coordinate rounding; ring start and winding are ignored. No geographic measurement or shoreline accuracy assessment.",
+      "software": "Python 3 standard library",
+      "units": "vertices, coordinate tuples, component counts"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "natural_earth_parent_component_count",
+      "value": 4,
+      "unit": "multipolygon components",
+      "vintage": "baseline",
+      "input_sha256": "dd3f4a5683c713fd89c00b41748d89771f905ef236feaacb7887818085f3d96e",
+      "evaluation_commit": "a762119a4926c927617dc2f85471b3b822cadc58"
+    },
+    {
+      "id": "current_ring_unique_vertices",
+      "value": 8,
+      "unit": "vertices excluding closure",
+      "vintage": "baseline",
+      "input_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "evaluation_commit": "a762119a4926c927617dc2f85471b3b822cadc58"
+    },
+    {
+      "id": "matched_henderson_ring_vertices",
+      "value": 8,
+      "unit": "vertices after rounding to 4 decimal places",
+      "vintage": "baseline",
+      "input_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "evaluation_commit": "a762119a4926c927617dc2f85471b3b822cadc58"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "natural_earth_parent_component_count",
+      "path": "data/regional-review/henderson-island-boundary-20261005/findings/component-lineage.json",
+      "json_pointer": "/component_count"
+    },
+    {
+      "metric_id": "current_ring_unique_vertices",
+      "path": "data/regional-review/henderson-island-boundary-20261005/findings/component-lineage.json",
+      "json_pointer": "/current_unique_vertices"
+    },
+    {
+      "metric_id": "matched_henderson_ring_vertices",
+      "path": "data/regional-review/henderson-island-boundary-20261005/findings/component-lineage.json",
+      "json_pointer": "/matched_unique_vertices"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "natural_earth_parent_component_count",
+      "value": 4,
+      "unit": "multipolygon components"
+    },
+    {
+      "metric_id": "current_ring_unique_vertices",
+      "value": 8,
+      "unit": "vertices excluding closure"
+    },
+    {
+      "metric_id": "matched_henderson_ring_vertices",
+      "value": 8,
+      "unit": "vertices after rounding to 4 decimal places"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "The current Henderson outline has a reproducible lineage match to the third component of the pinned Natural Earth four-island Pitcairn Islands Admin-1 feature after rounding to four decimal places.",
+      "status": "supported",
+      "source_ids": [
+        "natural-earth-admin1"
+      ]
+    },
+    {
+      "text": "Henderson belongs to the Pitcairn, Henderson, Ducie and Oeno Islands group; the Atlas parent and child-count context are preserved.",
+      "status": "supported",
+      "source_ids": [
+        "pitcairn-constitution-order-2010",
+        "uk-overseas-territories-biodiversity-strategy"
+      ]
+    },
+    {
+      "text": "No dedicated current authoritative island coastline source was obtained from the bounded sources inspected; full shoreline and small-islet completeness remain unresolved.",
+      "status": "unresolved",
+      "source_ids": [
+        "unesco-henderson-property",
+        "unesco-henderson-maps",
+        "jncc-ramsar-potential-sites",
+        "natural-earth-admin1"
+      ]
+    },
+    {
+      "text": "The existing coordinates are not demonstrated to be legally authoritative or positionally accurate as a current shoreline.",
+      "status": "unresolved",
+      "source_ids": [
+        "natural-earth-admin1",
+        "unesco-henderson-property"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 data/regional-review/henderson-island-boundary-20261005/reproduce_henderson.py",
+    "node scripts/evidence-quality.mjs data/regional-review/henderson-island-boundary-20261005/evidence-quality.json"
+  ],
+  "validation": [
+    {
+      "method_id": "rounded-component-lineage",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/henderson-island-boundary-20261005/findings/positive-control.json"
+    },
+    {
+      "method_id": "rounded-component-lineage",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/henderson-island-boundary-20261005/findings/negative-controls.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "data/regional-review/henderson-island-boundary-20261005/README.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/henderson-island-boundary-20261005/reproduce_henderson.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/henderson-island-boundary-20261005/findings/component-lineage.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/henderson-island-boundary-20261005/findings/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/henderson-island-boundary-20261005/findings/negative-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/henderson-island-boundary-20261005/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}
