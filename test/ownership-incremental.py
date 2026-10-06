@@ -74,6 +74,12 @@ class IncrementalOwnership(unittest.TestCase):
   completed=subprocess.run(command,check=True,capture_output=True,text=True);receipt=json.loads(completed.stdout.strip().splitlines()[-1]);self.assertEqual(receipt['source_records_scanned'],10);self.assertEqual(receipt['reused_intervals'],1);self.assertTrue((self.root/'stage/index.json').exists())
  def test_runtime_compiler_decodes_appended_evidence_without_renumbering(self):
   self.run_prepare();spec=importlib.util.spec_from_file_location('runtime',ROOT/'scripts/prepare-ownership-runtime.py');runtime=importlib.util.module_from_spec(spec);spec.loader.exec_module(runtime);compiled=runtime.prepare(self.root/'stage',self.root/'runtime');bucket=next(b for b in compiled['buckets'] if b['valid_from']<=10<b['valid_to']);body=m.load(self.root/'runtime'/bucket['path']);r=next(rows for part in body['parts'] for id,rows in part if id=='keep')[0];self.assertEqual(body['evidence'][r[4]],[0,1,1,[[0,1]],[0],0])
+ def test_hash_pinned_array_snapshot_rejects_corruption(self):
+  part=m.write_gzip(self.root/'features.json.gz',self.before);part['bytes']=(self.root/part['path']).stat().st_size
+  manifest=self.root/'array-world.json';put(manifest,{'parts':[part]})
+  self.assertEqual(m.feature_snapshot(manifest),m.feature_snapshot(self.before_path))
+  raw=(self.root/part['path']).read_bytes();(self.root/part['path']).write_bytes(raw+b'changed')
+  with self.assertRaisesRegex(ValueError,'checksum/size'):m.feature_snapshot(manifest)
  def test_unknown_changed_never_derives_new_ancient_ownership(self):
   result=m.prepare(self.before_path,self.after_path,self.bv,self.av,self.receipt,self.old,self.source,self.root/'stage',True)
   index,rows,e=read_rows(self.root/'stage');self.assertEqual(result['incremental_preparation']['source_records_scanned'],0);self.assertEqual(rows['aaa-dateline'],[]);self.assertEqual(rows['change'],[]);self.assertEqual(rows['keep'],self.old_rows[1][1]);self.assertEqual(e[:2],m.load(self.old/'evidence-0.json.gz'))
