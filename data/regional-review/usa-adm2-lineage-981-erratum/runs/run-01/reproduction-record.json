@@ -1,0 +1,25 @@
+{
+  "run": "run-01",
+  "baseline_commit": "c42f4b7465964245ecbcd8eed4961eb76af3106b",
+  "checked_inputs": 72,
+  "checked_input_bytes": 237038540,
+  "script_sha256": "61abe57243f1c0fbe2b60712d7512de1f29717377e637de2a89e866a32125303",
+  "outputs": {
+    "input-manifest.json": {
+      "bytes": 11843,
+      "sha256": "d582b787f663988ad908ff14329a9aac271c9b7b3b659ce285ce19f063a74b1f",
+      "matches_retained_output": true
+    },
+    "subject-crosswalk.jsonl": {
+      "bytes": 218611,
+      "sha256": "c7ae095791268a05e266b450229f99b7b86546fdd7d644dcbf5876d6eea313c3",
+      "matches_retained_output": true
+    },
+    "source-lineage-audit.json": {
+      "bytes": 12229,
+      "sha256": "1160ac4e2491182853659a4115199f56583c281dd5efe0d9d9d45797434f892d",
+      "matches_retained_output": true
+    }
+  },
+  "written_exclusively_under_owned_path": true
+}
