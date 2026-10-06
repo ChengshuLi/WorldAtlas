@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "verification_method": "stream SHA-256 over ordered unchanged source-byte partitions; no reconstructed full file written",
+  "expected_bytes": 149105849,
+  "actual_bytes": 149105849,
+  "part_limit_bytes": 33554432,
+  "baseline_registry_sha256": "e5bfa1c3889ea763ca2bb82c7f1e8ff9eff715dcb99ce405293a03de7ac85862",
+  "actual_sha256": "ccce612ee6275d91e2d2fcccf7912087dcc72377abec6c8e20c65089ecb48564",
+  "baseline_registry_pin_status": "mismatch",
+  "upstream_lfs_sha256": "ccce612ee6275d91e2d2fcccf7912087dcc72377abec6c8e20c65089ecb48564",
+  "upstream_lfs_pin_status": "verified",
+  "parts": [
+    {
+      "filename": "part-31.bin",
+      "offset": 0,
+      "bytes": 33554432,
+      "sha256": "7b257f2f33c5db607d468633a4f0fe48161ed46cfa999c734fcd2fb52489dabd"
+    },
+    {
+      "filename": "part-32.bin",
+      "offset": 33554432,
+      "bytes": 33554432,
+      "sha256": "bba32556feb88e1422652bdc3c81ffea582abf1f690249963ccaf6eb19ffba9d"
+    },
+    {
+      "filename": "part-33.bin",
+      "offset": 67108864,
+      "bytes": 33554432,
+      "sha256": "e93df33ce770f1aab7f10c7ec40039693ef2469c38b4bec7c9ab5255e3181a6f"
+    },
+    {
+      "filename": "part-34.bin",
+      "offset": 100663296,
+      "bytes": 33554432,
+      "sha256": "44afcd7050ddd84e0c45bfe1d372e784fbb59d7fcf996172340e2d9a5606e685"
+    },
+    {
+      "filename": "part-35.bin",
+      "offset": 134217728,
+      "bytes": 14888121,
+      "sha256": "ef0aea678ea9a25613a98bcdae1f25647e9bb0856840c22093df81eab921b53a"
+    }
+  ]
+}

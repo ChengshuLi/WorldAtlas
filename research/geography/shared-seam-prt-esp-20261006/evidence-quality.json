@@ -1,0 +1,1745 @@
+{
+  "version": 1,
+  "issue": 1106,
+  "lane": "geography",
+  "worker_id": "01a1100f-38f0-7402-bdf6-8486137da3f9",
+  "subject_ids": [
+    "atlas:district:ESP-1003:a5622946",
+    "atlas:district:ESP-1004:a5622946",
+    "atlas:district:ESP-1010:a5622946",
+    "gb:PRT:ADM2:2272694B24025236019409",
+    "gb:PRT:ADM2:2272694B40601521893357",
+    "gb:PRT:ADM2:2272694B64876814145037",
+    "gb:PRT:ADM2:2272694B74999887486897"
+  ],
+  "subject_ids_sha256": "1fc4ba624de8a5fa76ea70785b91636f2d6039287e02858595cfac9fac271733",
+  "baseline": {
+    "commit": "27be77596f23304de6a720735538427e6d23e242",
+    "files": [
+      {
+        "path": "data/geographic-releases/current-manifest.json",
+        "bytes": 206,
+        "sha256": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/manifest.json",
+        "bytes": 271171,
+        "sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v2/components-004.json.gz",
+        "bytes": 3640001,
+        "sha256": "c8726499e2d34c89b45fcf5d4c725b9583d2cb14319736580c032d460c04cb54",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/geographic-components-946-20261005-local06/components-v2/report.json",
+        "bytes": 26701,
+        "sha256": "69aa2c4cc0a949d66938344cb80e526fe77b68661b93fd0b3be7830e2e18e478",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/report.json",
+        "bytes": 38613,
+        "sha256": "ba7a4b190683f8436109b6159359727a2300053ac42a96dcdd53ebef7f092b20",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/geographic-grid-triage-946-20261005-local08/inputs.json",
+        "bytes": 64337,
+        "sha256": "ae609d1312be34a15d34f2c5b7915292a568465acab729f44036f8d4400d338d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/semantic-report.json",
+        "bytes": 6091596,
+        "sha256": "266c4f0f6e91381a26bfa6868d3c0df22b30140fa7f8551977be10b423295831",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-19.json",
+        "bytes": 4583022,
+        "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-28.json",
+        "bytes": 6613963,
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/administrative.py",
+        "bytes": 12313,
+        "sha256": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "current_release_manifest": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81",
+      "canonical_grid": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+      "hierarchy": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "full_gap_component_shard": "c8726499e2d34c89b45fcf5d4c725b9583d2cb14319736580c032d460c04cb54",
+      "full_gap_component_report": "69aa2c4cc0a949d66938344cb80e526fe77b68661b93fd0b3be7830e2e18e478",
+      "full_gap_triage_report": "ba7a4b190683f8436109b6159359727a2300053ac42a96dcdd53ebef7f092b20",
+      "full_gap_triage_inputs": "ae609d1312be34a15d34f2c5b7915292a568465acab729f44036f8d4400d338d"
+    },
+    "pin_files": {
+      "current_release_manifest": "data/geographic-releases/current-manifest.json",
+      "canonical_grid": "data/canonical-grid/manifest.json",
+      "hierarchy": "data/hierarchy.json",
+      "full_gap_component_shard": "coordination/engineering/geographic-components-946-20261005-local06/components-v2/components-004.json.gz",
+      "full_gap_component_report": "coordination/engineering/geographic-components-946-20261005-local06/components-v2/report.json",
+      "full_gap_triage_report": "coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/report.json",
+      "full_gap_triage_inputs": "coordination/engineering/geographic-grid-triage-946-20261005-local08/inputs.json"
+    },
+    "subject_files": {
+      "atlas:district:ESP-1003:a5622946": "data/geography/part-28.json",
+      "atlas:district:ESP-1004:a5622946": "data/geography/part-28.json",
+      "atlas:district:ESP-1010:a5622946": "data/geography/part-28.json",
+      "gb:PRT:ADM2:2272694B24025236019409": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B40601521893357": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B64876814145037": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B74999887486897": "data/geography/part-19.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "geoboundaries-esp-adm3",
+      "url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/ESP/ADM3",
+      "role": "Complete 2018 Spain ADM3 raw and baseline-simplified whole GeoJSON objects, exact LFS pointers and receipts. Raw bytes support native member identity/detail; only simplified bytes were consumed by the pinned Atlas importer.",
+      "vintage": "2018 at geoBoundaries commit 9469f09592ced973a3448cf66b6100b741b64c0d",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "redistributable",
+        "terms": "CC BY 4.0; attribute geoBoundaries, with terms at https://creativecommons.org/licenses/by/4.0/."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-esp-adm3-baseline-simplified/source-record.json",
+          "bytes": 2216,
+          "sha256": "c40c20201978309587ee5ad77dd4db371973cb4461651004201f97838492c51e",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-esp-adm3-baseline-simplified/upstream-pointer/geoBoundaries-ESP-ADM3_simplified.geojson.lfs-pointer",
+          "bytes": 133,
+          "sha256": "4c22700a6891afd3ee6013b839fe9e099761479eeada1c9b755d3fb9726a7881",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-esp-adm3-baseline-simplified/whole-original/part-001.bin",
+          "bytes": 18613175,
+          "sha256": "e5bfa1c3889ea763ca2bb82c7f1e8ff9eff715dcb99ce405293a03de7ac85862",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-esp-adm3-baseline-simplified/whole-original/partition-receipt.json",
+          "bytes": 1169,
+          "sha256": "15f19d861b31c3a9a1228540bb7c7c9e5420b3c2d387f75f764a4f184a75bd32",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-esp-adm3-original/chunks/part-31.bin",
+          "bytes": 33554432,
+          "sha256": "7b257f2f33c5db607d468633a4f0fe48161ed46cfa999c734fcd2fb52489dabd",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-esp-adm3-original/chunks/part-32.bin",
+          "bytes": 33554432,
+          "sha256": "bba32556feb88e1422652bdc3c81ffea582abf1f690249963ccaf6eb19ffba9d",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-esp-adm3-original/chunks/part-33.bin",
+          "bytes": 33554432,
+          "sha256": "e93df33ce770f1aab7f10c7ec40039693ef2469c38b4bec7c9ab5255e3181a6f",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-esp-adm3-original/chunks/part-34.bin",
+          "bytes": 33554432,
+          "sha256": "44afcd7050ddd84e0c45bfe1d372e784fbb59d7fcf996172340e2d9a5606e685",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-esp-adm3-original/chunks/part-35.bin",
+          "bytes": 14888121,
+          "sha256": "ef0aea678ea9a25613a98bcdae1f25647e9bb0856840c22093df81eab921b53a",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-esp-adm3-original/chunks/verified-partition-receipt.json",
+          "bytes": 1513,
+          "sha256": "7dbde4e15a72e08f9f938e223ab8648dd07501c5ece17194a02fd62e95f9a6f1",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-esp-adm3-original/upstream-metadata/geoBoundaries-ESP-ADM3-metaData.json",
+          "bytes": 1013,
+          "sha256": "035c029cb25c099c5426a1e13b34b1c99cdd962fad0b4fc5fd6b9abb7d14fb90",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-esp-adm3-original/upstream-pointer/geoBoundaries-ESP-ADM3-metaData.json.lfs-pointer",
+          "bytes": 129,
+          "sha256": "387f645ce30d5ec0a3cc72bd0d72352730cebe83a01924f7cd619a85cd6b6fdc",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-esp-adm3-original/upstream-pointer/geoBoundaries-ESP-ADM3.geojson.lfs-pointer",
+          "bytes": 134,
+          "sha256": "989a3b8deb49621fea85f484a3561b5e0de7a179960db86b0634d719bb121ea9",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-esp-adm3-original/upstream-source-record.json",
+          "bytes": 2659,
+          "sha256": "98bb0604226e240506ae69d9fdd28401c27ddbc952db2f516345ebc3d4e933e3",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "temporal_limit": "The provider boundaryYear identifies a source vintage only; no authoritative effective-date interval or validity history is established by the retained metadata."
+    },
+    {
+      "id": "geoboundaries-prt-adm2",
+      "url": "https://github.com/wmgeolab/geoBoundaries/tree/90a1d5290ede3adc147c5a2351472fd000412e72/releaseData/gbOpen/PRT/ADM2",
+      "role": "Complete 2020 Portugal ADM2 raw and baseline-simplified whole GeoJSON objects, exact LFS pointers and receipts. Raw bytes support native member identity/detail; only simplified bytes were consumed by the pinned Atlas importer.",
+      "vintage": "2020 at geoBoundaries commit 90a1d5290ede3adc147c5a2351472fd000412e72",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "redistributable",
+        "terms": "CC0 1.0 Universal public-domain dedication, as declared by geoBoundaries."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-prt-adm2-baseline-simplified/source-record.json",
+          "bytes": 2141,
+          "sha256": "0b589653a49f997062607a538af71ae761eef95cc0a5357b53fba8ad84a32ed8",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-prt-adm2-baseline-simplified/upstream-pointer/geoBoundaries-PRT-ADM2_simplified.geojson.lfs-pointer",
+          "bytes": 131,
+          "sha256": "77425caee05e3c6f3193ca34665de65679d6b98aa7c466713dab888a5ecca9dc",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-prt-adm2-baseline-simplified/whole-original/part-001.bin",
+          "bytes": 387331,
+          "sha256": "f7a9143190715b85812b03617adc4879898b8c6a6789b9c9732c9705ea6c21ac",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-prt-adm2-baseline-simplified/whole-original/partition-receipt.json",
+          "bytes": 1161,
+          "sha256": "7febceebdf8f706f8fd22ab6db1e8eeb8535852face2758d9cdcf7bb3e8a5c48",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-prt-adm2-original/source-record.json",
+          "bytes": 1696,
+          "sha256": "634049820f3d3c7f993789d7a88c4a11112126eb3c70fbf24bb8f17ca1d22fdf",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-prt-adm2-original/upstream-pointer/geoBoundaries-PRT-ADM2.geojson.lfs-pointer",
+          "bytes": 131,
+          "sha256": "e0a2eab718fef5ab8414c9b7858a676b5e812b3776e1da0eb29a62dc02059dcb",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-prt-adm2-original/whole-original/part-001.bin",
+          "bytes": 415110,
+          "sha256": "a02fd52278e5e300a19949450e793812fe76d78664c0a896bb3c5ebda7f79f9e",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-prt-adm2-original/whole-original/partition-receipt.json",
+          "bytes": 1256,
+          "sha256": "2a3e62f03320725a0753952083bb48d540c8973cdda88296f2ba917f2848a4d5",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-prt-adm2-original/whole-original/verified-partition-receipt.json",
+          "bytes": 784,
+          "sha256": "21732981c65e36fdd009235447a6f590cbe947d9536a178f6956249edef9c0af",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "temporal_limit": "The provider boundaryYear identifies a source vintage only; no authoritative effective-date interval or validity history is established by the retained metadata."
+    },
+    {
+      "id": "dgt-caop2025",
+      "url": "https://ogcapi.dgterritorio.gov.pt/collections/municipios?f=json",
+      "role": "Official DGT CAOP2025 collection/queryables/product documentation and four complete, direct municipality feature responses, with per-response receipts. Product role and collection vintage metadata disagree (title 2025; declared temporal extent 2000–2007); administrative geometry is not legal-border evidence.",
+      "vintage": "CAOP2025 (DGT product page records approval on 2026-01-28; API extent says 2000–2007)",
+      "retrieved_at": "2026-10-06T08:54:03.026Z",
+      "license": {
+        "status": "redistributable",
+        "terms": "DGT open data CC BY 4.0 with attribution: https://www.dgterritorio.gov.pt/dados-abertos."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/dgt-municipios-castelo-branco.json",
+          "bytes": 3324311,
+          "sha256": "930ff69502f52d9b7784b3667489c52be73c2dadddd753c085caeb87293c5a8f",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/dgt-municipios-collection.json",
+          "bytes": 5075,
+          "sha256": "7c123a42e833b3bfa9d302564f8550c8045d73b2db1014772d4cc3a1bcf2c7e6",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/dgt-municipios-idanha-a-nova.json",
+          "bytes": 1604707,
+          "sha256": "5f766934fc7f68d74f6d804eb3e2dac334ee4a4e89a3e9f71212838b7a24ed53",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/dgt-municipios-nisa.json",
+          "bytes": 1340918,
+          "sha256": "9f09aca60d5eda0948d62b9611ab480de59f3ed295949ffb77e0cf29efb53735",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/dgt-municipios-queryables.json",
+          "bytes": 1306,
+          "sha256": "3b0eeac423f242b2614642a88c2dde464d479537094c706bdab21543591daa8e",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/dgt-municipios-vila-velha-de-rodao.json",
+          "bytes": 1478866,
+          "sha256": "c80f534824f67f7552e3396e2e1156e32d1ed7e2a2c4fa5bfa9a2f1ea57da8e4",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "ign-admin-boundary-api",
+      "url": "https://api-features.ign.es/collections/administrativeboundary?f=json",
+      "role": "Official IGN administrativeboundary line records and distinct administrativeunit current municipality polygon collection, collection/queryables, complete direct line and polygon items, exact-name/native-code discovery responses, retrieval receipts, and a losslessly partitioned bbox discovery response. The bbox selects complete records and does not clip geometry. Polygon collection/item validity date is unstated; line-item agreed status is not treated as bilateral legal authority.",
+      "vintage": "Per-record dates: selected municipal border items 2022-04-04; national Spain–Portugal control 2026-07-02; interior negative control 2009-07-06",
+      "retrieved_at": "2026-10-06T08:57:47.734Z",
+      "license": {
+        "status": "redistributable",
+        "terms": "IGN linked license states CC BY 4.0 reuse with required attribution: https://www.ign.es/resources/licencia/Condiciones_licenciaUso_IGN.pdf."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeboundary-collection.json",
+          "bytes": 5908,
+          "sha256": "6142d8b4ffafb37442847a73e1ef7f35a999d5c64270dbe170fcf83b598b6129",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeboundary-queryables.json",
+          "bytes": 1863,
+          "sha256": "ab75a6e49485dafe75d07cc435bf4c028661803fa1a75e7fbf9a7bb4e0de1e17",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-bbox-discovery-partitions/part-001.bin.gz",
+          "bytes": 2143539,
+          "sha256": "8c0a7e0cfac3758cdea89e86d6af2e328d503a1ac5d6f34258208314fdc442e8",
+          "hash_kind": "file-bytes",
+          "uncompressed_bytes": 32000000,
+          "uncompressed_sha256": "6e22fc224a69ec24fa66e29b4c6b2e1efbe56cdc79206bdefc90fe7082777895"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-bbox-discovery-partitions/part-002.bin.gz",
+          "bytes": 2271713,
+          "sha256": "4040d48d8f4a7f9e600bf4336e1ec92bc7e41d9776b8aef9b6fde66694cef185",
+          "hash_kind": "file-bytes",
+          "uncompressed_bytes": 32000000,
+          "uncompressed_sha256": "7711885ed22cdb692033c8e7aba6edf4f5f48aec04e852f84a2714e595fd24d4"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-bbox-discovery-partitions/part-003.bin.gz",
+          "bytes": 2138104,
+          "sha256": "9f4e0358dc7b5b3f34bf3055a9c221055df23df41099d480a12ee1f224b6aeb5",
+          "hash_kind": "file-bytes",
+          "uncompressed_bytes": 32000000,
+          "uncompressed_sha256": "aa6a6f23b1887ceff8429f3ac1bd3f7fbb638bb08f6db8602ac619661f731421"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-bbox-discovery-partitions/part-004.bin.gz",
+          "bytes": 2199813,
+          "sha256": "5cfd6c3eb38b02056843ad1fa1026c002970b49963db476a14ce4052a2a7a650",
+          "hash_kind": "file-bytes",
+          "uncompressed_bytes": 32000000,
+          "uncompressed_sha256": "bfbd6788339a168a680d60188a06f6d36cd752d597c128627834bc9cb0e4f4e7"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-bbox-discovery-partitions/part-005.bin.gz",
+          "bytes": 587376,
+          "sha256": "f23c7966e43bf976f08b1a8f2a4cd38a415b52fec7370cc615f981d63430e00e",
+          "hash_kind": "file-bytes",
+          "uncompressed_bytes": 8542585,
+          "uncompressed_sha256": "a17e48f16916b9ca4cb014f2a1924cc98e25f9ac2d96e5d0eda7e14d9afd2388"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-bbox-discovery-partitions/verified-partition-receipt.json",
+          "bytes": 2335,
+          "sha256": "e6c4f43bb0fa6f73ea802b2b0f2efaf01c91581999595b902ea0eb1a7286d294",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-bbox-discovery-receipt.json",
+          "bytes": 764,
+          "sha256": "be56df6aaffdbe699059837040a8f1adbf80f63b5b81b42f1182eb239b9e31d5",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-collection-receipt.json",
+          "bytes": 496,
+          "sha256": "bb9dcab7d0760e875f8059e4a8752da9ade4d095dddff8cbeda82562ef6f9745",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-collection.json",
+          "bytes": 5932,
+          "sha256": "8ae89b34391bc561dd9a1a9dcb067d831b415054213a4b69f6633f6a2012080f",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-filter-carbajo-receipt.json",
+          "bytes": 562,
+          "sha256": "64e9a3d9ee4d74c127d946f3812f4af3e293590de3b014bc2e9f19c8b6bb15a0",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-filter-carbajo.json",
+          "bytes": 65259,
+          "sha256": "fe790096e0483394027ec6ceb18e9a3ea4bb878eb129bfddbebb3e79c27a4b8a",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-ambiguous-6-receipt.json",
+          "bytes": 574,
+          "sha256": "e0222ec499055c997e6f8328ebcf0137ec50ff4bb693480063e948387b6baf92",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-ambiguous-6.json",
+          "bytes": 1197,
+          "sha256": "cbf429d5fd06bce8e70409f883c8c16dbda62d6c6d484a23fca4f1330b572611",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-name-1172975-receipt.json",
+          "bytes": 578,
+          "sha256": "9c9849456e092cc845e684944a05e7838022232d6f20b399513f73e1e7353443",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-name-1172975.json",
+          "bytes": 237783,
+          "sha256": "1b3cb6f5b361b75b71d161fcd53088ecf90304e31e32e62c3d5b133fe92a347f",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-name-1173013-receipt.json",
+          "bytes": 562,
+          "sha256": "2636e7bb5b0c8db35f1c9aba33b213829349557f8a11889e583fcee70370eb52",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-name-1173013.json",
+          "bytes": 65259,
+          "sha256": "eb98cfc150f5115f609827606bbd502fb92afd6b05581f7b56e635e7e1a10a39",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-name-1173029-receipt.json",
+          "bytes": 562,
+          "sha256": "afa1cfd90a993bbb51f4ee81613e1fdae716c31c5508158f1a935bb22624de4c",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-name-1173029.json",
+          "bytes": 73983,
+          "sha256": "23b035efb1c45b2ae44404d5dad1325aff795539c2741c2c8b3ba23c8cd86e9b",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-name-1173031-receipt.json",
+          "bytes": 566,
+          "sha256": "e6235792c1abb51284f98887a1bf5c738ad2057e1c918a03caba87df1da5bcfd",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-name-1173031.json",
+          "bytes": 129614,
+          "sha256": "9fd933b4a65a1a1d2f5c9a60bf15462305dfcf5ed8a02796458501ebf9a4ec2f",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-name-1173060-receipt.json",
+          "bytes": 600,
+          "sha256": "394f9cc10322eae5120a5ecdec30e82aa7e5947e4a3be59025dd6972c8ea1047",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-name-1173060.json",
+          "bytes": 122222,
+          "sha256": "bcfcbbfb697cbe3cb9002b6dc08ea88d8eba8c053412a3920cdf3463635c0ce4",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-name-1173085-receipt.json",
+          "bytes": 572,
+          "sha256": "74bdb6981833792c17b83bb3b4e4452c3fee86c49523f183d51760c1c6fdf4bd",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-name-1173085.json",
+          "bytes": 90937,
+          "sha256": "f079ddab4f4e7adceed876b356904aa6934d2ee219504df2a6de6dd3c01291c8",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-name-1173135-receipt.json",
+          "bytes": 602,
+          "sha256": "0de284c8ebe8636e62041e27453ebd3dd1b555bfebe02355d4ba6c0937441b2a",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-name-1173135.json",
+          "bytes": 126612,
+          "sha256": "f6d3d44f752c3f123ea646052cac53c254f8a418af98d14aa80fb7da28066d07",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-no-match-6-receipt.json",
+          "bytes": 574,
+          "sha256": "38dfceec408d93cf43a46bc6ea5a05647e544bb9fd2721d1bc58f7a031df7c44",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-no-match-6.json",
+          "bytes": 1197,
+          "sha256": "bf11cbb7b0592760112df71d9b26f342c8042443902d8128ecce207198b53873",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-zarza-la-mayor-diagnostic-receipt.json",
+          "bytes": 574,
+          "sha256": "3ae78261c9d378fbc561eb12a2219700c9281223424d9e6c6550d5c990a872e5",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-zarza-la-mayor-diagnostic.json",
+          "bytes": 1197,
+          "sha256": "d948facee7caee63e159865bcac8a3d1ec97722b0b847460c751a104dfd33ce8",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-nationalcode-zarza-discovery-receipt.json",
+          "bytes": 788,
+          "sha256": "db8db234ddb3116f399fa2e83409ca063b3b75790bff0b41b2967dd2f1b6307f",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-nationalcode-zarza-discovery.json",
+          "bytes": 110353,
+          "sha256": "28dcbd4eb17890007bfd4f3781e804a56e29dae748737d04086426d7624735fc",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1172975-receipt.json",
+          "bytes": 528,
+          "sha256": "6565d3edee4f79aef29b89642a1a80db2d5ff9182fcc79515d95d3faefc4c5cb",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1172975.json",
+          "bytes": 190137,
+          "sha256": "abf3ebd988da76705e5576a0f9982ce766802605f392edce18a8babf125c824f",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173013-receipt.json",
+          "bytes": 526,
+          "sha256": "6b29ed257b6e33a0456de9f24af7ecba0b7faf75e8d83c0fb245e46e09faef1a",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173013.json",
+          "bytes": 52818,
+          "sha256": "1ca32b139f585823e1e1cc6ccba236f3cdb7caed5f0101fe7dfa5260eeab02c6",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173029-receipt.json",
+          "bytes": 526,
+          "sha256": "6ca909aaee3508866d563753ef3bd603a0d5ee70378abac3f9256769f5a9f41d",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173029.json",
+          "bytes": 59718,
+          "sha256": "c2514b1cdc558f9ee3995907a737a78ce9a906ab7865ad78164f33ba5456daaa",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173031-receipt.json",
+          "bytes": 528,
+          "sha256": "22f59e72c0183a204ae8b2e6e6e6164cf6dfcc09bb81ecf38b27b088d029e004",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173031.json",
+          "bytes": 103986,
+          "sha256": "ef34778f9af815573e307bb9a04d3b7096c0d60d63c1e69dad9a094acd373d4d",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173060-receipt.json",
+          "bytes": 526,
+          "sha256": "ec280b218f3d90e5b7142876e1b9636f14551c867171bce3f137c1c4c5fc2983",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173060.json",
+          "bytes": 98099,
+          "sha256": "bd3ffcc837958a95e7c876c1764fd07373172f47ec07fcb49b256b8bf286bf85",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173085-receipt.json",
+          "bytes": 526,
+          "sha256": "e0727a6f808011dc7bc4c557fb2eb48c10a9d2293ea2ceec3b064949fe3a4ec0",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173085.json",
+          "bytes": 73233,
+          "sha256": "244f232018f43fdbb7f7b4778c1084bf9980ac20ce5905480692ffc2c26c78df",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173135-receipt.json",
+          "bytes": 528,
+          "sha256": "b80f8efcc39d7a49c2c5bd5a28064eaee7e0872cf4dcb54fd68cfd01df9152c3",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173135.json",
+          "bytes": 101622,
+          "sha256": "b0a73364ceef55fac66616c5c4e1c61afd445e44bb0337bc825aac1572a4ca33",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173184-receipt.json",
+          "bytes": 526,
+          "sha256": "cc803cb3c3ccec520dd1fa30c760b4cea9eebbe4ca5262e9363ae5a5e2187502",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173184.json",
+          "bytes": 88640,
+          "sha256": "71c944ee243f62b1bd66325661035ff39170f0ff46077722b176bdb063a591a9",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/response-receipt.json",
+          "bytes": 16806,
+          "sha256": "4679e9ce9ba37547689ada5ad1f68d408c76427902c332a78a4dfa14e1abef59",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-queryables-receipt.json",
+          "bytes": 525,
+          "sha256": "0427d8faddeab6ee341cb5dd13765b05e98f0cefc87d801c92a1aaf43f3c9b72",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-queryables.json",
+          "bytes": 1226,
+          "sha256": "f9bf50be263819b12fa7011396742b6f6dc7823415ac3e4caa14e89fc6e03160",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-bbox-discovery-only.json",
+          "bytes": 4092323,
+          "sha256": "9a9b653f2512a62043fa559bc1939ebeb3e9d2b3380f48ed1c8fa96c4ffd02d7",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-bbox-discovery-receipt.json",
+          "bytes": 1097,
+          "sha256": "9980104c91a3f916090fb82609c0517d7dc47949d02b36744a26b909f1ec962a",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-collections-receipt.json",
+          "bytes": 460,
+          "sha256": "29490fab5d450770624c671e3a9405c163c21213b3e7cbec36ba95839316b257",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-collections.json",
+          "bytes": 75871,
+          "sha256": "3344f50484382e3ce90c9704f2e8a6f06c10ea32e3c91cba2a3ca09674abaaa3",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-native-items/ign-administrativeboundary-5665057.json",
+          "bytes": 4910,
+          "sha256": "82ee75f343fd04de2c1e32d8ee81c1daf85cc4bdc96adb4713d717907f4df605",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-native-items/ign-administrativeboundary-5666602.json",
+          "bytes": 6505,
+          "sha256": "c4413a5c7afc2bcdfafe6bd60177e52a987fdae8bece069bc650d50c0fbe5e47",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-native-items/ign-administrativeboundary-5673087.json",
+          "bytes": 10564,
+          "sha256": "19389843a6ef27a1ef998546585cdb2eff37a82d34ea52ea6f3d72286c808785",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-native-items/ign-administrativeboundary-5674903.json",
+          "bytes": 27841,
+          "sha256": "60bf7a1db2ced034a68b77796cc274cf2108398acae08a052aa72e06d5f0e5f0",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-native-items/ign-administrativeboundary-5680275.json",
+          "bytes": 8282,
+          "sha256": "43f8c400713fd1d66bd03d4e0033bbe27e6228182648a415be94f8e47e4679b1",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-native-items/ign-administrativeboundary-5684705.json",
+          "bytes": 52649,
+          "sha256": "5d6c0477cb07c87f2137b53512c8c50562abc897ec21a9e5523941407fdc8040",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-native-items/ign-administrativeboundary-5686837.json",
+          "bytes": 34837,
+          "sha256": "ebb5dfd113a7ca2371350e527471a947b6b17a2d126365709384a5cfd70fb923",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-native-items/ign-administrativeboundary-5688358.json",
+          "bytes": 19614,
+          "sha256": "38ee1d7cc6b645099014d4d6b441866fe957172f9d1dff3b230daa8cdafae2ad",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-native-items/ign-administrativeboundary-5690193.json",
+          "bytes": 8402,
+          "sha256": "42a9686b9f1ab19737acf1cfcdecb63bc90abec4d4b9f282d27a4036e3e28073",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-native-items/ign-administrativeboundary-5702440.json",
+          "bytes": 1804371,
+          "sha256": "20994a22fa497786e6c01ebaebb451228e52a874c516ad31c7996cc6f5c5b41c",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-native-items/response-receipt.json",
+          "bytes": 15975,
+          "sha256": "f916235ccbe7af417536676043a2af57792aea1c3227314c1659ac3a0eeff383",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/response-receipt.json",
+          "bytes": 6307,
+          "sha256": "e8fc4248957b9a56190652cc629d30f0ecfed17dc904a0b780c605e6309f5ca3",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/README.md",
+      "bytes": 10738,
+      "sha256": "77d31f80df8ac189ba81ef1bbae61f830e46c1e98e2b5e31014458fa691e7ed8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/outputs/run-01/report.json",
+      "bytes": 87905,
+      "sha256": "8004afd2dd2ce608bf60a3c524a0af8ec2d4dd07b8118e82b5c039079c2040c3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/outputs/run-02/report.json",
+      "bytes": 87905,
+      "sha256": "8004afd2dd2ce608bf60a3c524a0af8ec2d4dd07b8118e82b5c039079c2040c3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/outputs/run-03/report.json",
+      "bytes": 99636,
+      "sha256": "1cd44b0dc5ed06bab805b0f7dce594cfd60d27ec95ae709656dd406cd416c9e6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/outputs/run-04/report.json",
+      "bytes": 99636,
+      "sha256": "1cd44b0dc5ed06bab805b0f7dce594cfd60d27ec95ae709656dd406cd416c9e6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/outputs/run-06/report.json",
+      "bytes": 377718,
+      "sha256": "174d5e0d6bff9200d4ff3ac755699dfc9886f224badd8f84fd8b55b403e62fd6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/outputs/run-07/report.json",
+      "bytes": 377718,
+      "sha256": "174d5e0d6bff9200d4ff3ac755699dfc9886f224badd8f84fd8b55b403e62fd6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/outputs/run-08/report.json",
+      "bytes": 388738,
+      "sha256": "caa474cc1b658e7f96d460a9cbd6857dbd2750b768b3f282e20825ea72ac489a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/outputs/run-09/report.json",
+      "bytes": 549069,
+      "sha256": "4f52d5ef455ae24e4ec7d0067567e6498e7407a0244a08622c3e2793ed0ad5a0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/outputs/run-10/report.json",
+      "bytes": 549069,
+      "sha256": "4f52d5ef455ae24e4ec7d0067567e6498e7407a0244a08622c3e2793ed0ad5a0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/scripts/fetch-ign-administrativeunit-polygons.mjs",
+      "bytes": 12205,
+      "sha256": "aae61dff828bb4006941e9f45e58fd4b8a059879c0211146be4b573dbd8c9c1f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/scripts/fetch-official-items.mjs",
+      "bytes": 5899,
+      "sha256": "31e2d26097f750a79e5dba757b9d0f7df28220d3e4fbfcf15e83d49e44e4e667",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/scripts/fetch-selected-ign-items.mjs",
+      "bytes": 4950,
+      "sha256": "94e7802fe2747e702f8cb3b7884978b3789086fc7dc5a64936cc7517d77e6488",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/scripts/partition-immutable-source.mjs",
+      "bytes": 4086,
+      "sha256": "e2dbe20140120a6eabbf526b78ca3b526c0df999e2effc972b2083857a8f4ce3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/scripts/reproduce-comparison.py",
+      "bytes": 53172,
+      "sha256": "62fad3ced494623fa7b3b6c790d94e1b3d5103c6b8361c866725bd02e92ad215",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/scripts/validate-measurement-controls.py",
+      "bytes": 5069,
+      "sha256": "9d617d3589109ee85db087fff3fc25ee6f36df8dace2b51949c5d06d20e9ad4f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/scripts/verify-partition.mjs",
+      "bytes": 3171,
+      "sha256": "b313babbf180aa1125d432dc0e50a531e75a1f6eca79123ea0455eee4333cce9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/validation/negative-control.json",
+      "bytes": 2326,
+      "sha256": "3df7bebbe0099e5af0b8a7a665143a5dce3983a78ebdc99d31dee6e57d846885",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/validation/positive-control.json",
+      "bytes": 2752,
+      "sha256": "0785be71c7af64b626e8098b6a49be96b3171107d34f54f9600b7893e80f284d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/validation/reproducibility.json",
+      "bytes": 616,
+      "sha256": "9fcbd1ceb03ca82b73e66414dc40fbe11333204155aeb750820fb8f75d496499",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "utm29-direct-geos-overlay-measurement",
+      "kind": "measurement",
+      "description": "Verify immutable source/API byte receipts and exact identities; project unchanged OGC CRS84 geometries into ETRS89 / UTM zone 29N (EPSG:25829), then use direct GEOS union/intersection/difference/boundary operations for area and linear-contact measurements. Inputs are not repaired, snapped, buffered, filled, clipped, or assigned by proximity.",
+      "software": "Python 3.12.14; Shapely 2.1.2; GEOS 3.13.1; PyProj 3.7.2; PROJ 9.5.1",
+      "units": "metres and square metres; OGC:CRS84 coordinates longitude/latitude",
+      "axis_order": "longitude-latitude",
+      "crs": "Input OGC:CRS84; measurement EPSG:25829 (ETRS89 / UTM zone 29N)",
+      "area_method": "Direct GEOS planar area in EPSG:25829; coverage is intersection with the unmodified gap polygon, and residual is gap difference from the unchanged union.",
+      "distance_method": "Direct GEOS distance, boundary-contact line length, and Hausdorff distance in EPSG:25829; no nearest-owner assignment."
+    },
+    {
+      "id": "official-native-source-custody",
+      "kind": "source",
+      "description": "Restore whole pinned geoBoundaries objects and verify their exact pointers/commits/hashes separately from the simplified importer inputs. Preserve official DGT and IGN collection metadata, licenses, complete native response bodies, exact query routes/IDs, response receipts, and explicit dates/unknown vintages. Exact provider IDs/codes or unique name joins inside the pinned roster are retained; no ownership/legal authority is inferred.",
+      "software": "Node.js 24; Python 3.12.14; SHA-256 byte receipts",
+      "units": "source bytes, provider-native identifiers, source dates"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "verified_spanish_source_members",
+      "value": 55,
+      "unit": "source_member_ids",
+      "vintage": "archived",
+      "input_sha256": "4f52d5ef455ae24e4ec7d0067567e6498e7407a0244a08622c3e2793ed0ad5a0",
+      "evaluation_commit": "992cd13dfbc74af7669029c4104af390993e5471"
+    },
+    {
+      "id": "selected_ign_portugal_line_items",
+      "value": 8,
+      "unit": "native_items",
+      "vintage": "archived",
+      "input_sha256": "4f52d5ef455ae24e4ec7d0067567e6498e7407a0244a08622c3e2793ed0ad5a0",
+      "evaluation_commit": "992cd13dfbc74af7669029c4104af390993e5471"
+    },
+    {
+      "id": "gap_intersection_area_brozas_district",
+      "value": 272.109906,
+      "unit": "m2",
+      "vintage": "archived",
+      "input_sha256": "4f52d5ef455ae24e4ec7d0067567e6498e7407a0244a08622c3e2793ed0ad5a0",
+      "evaluation_commit": "992cd13dfbc74af7669029c4104af390993e5471"
+    },
+    {
+      "id": "gap_intersection_area_valencia_district",
+      "value": 1.725552,
+      "unit": "m2",
+      "vintage": "archived",
+      "input_sha256": "4f52d5ef455ae24e4ec7d0067567e6498e7407a0244a08622c3e2793ed0ad5a0",
+      "evaluation_commit": "992cd13dfbc74af7669029c4104af390993e5471"
+    },
+    {
+      "id": "full_gap_area",
+      "value": 297528340.703454,
+      "unit": "m2",
+      "vintage": "archived",
+      "input_sha256": "4f52d5ef455ae24e4ec7d0067567e6498e7407a0244a08622c3e2793ed0ad5a0",
+      "evaluation_commit": "992cd13dfbc74af7669029c4104af390993e5471"
+    },
+    {
+      "id": "combined_current_admin_reference_covered_area",
+      "value": 297501253.047717,
+      "unit": "m2",
+      "vintage": "archived",
+      "input_sha256": "4f52d5ef455ae24e4ec7d0067567e6498e7407a0244a08622c3e2793ed0ad5a0",
+      "evaluation_commit": "992cd13dfbc74af7669029c4104af390993e5471"
+    },
+    {
+      "id": "combined_current_admin_reference_uncovered_residual",
+      "value": 27087.655736,
+      "unit": "m2",
+      "vintage": "archived",
+      "input_sha256": "4f52d5ef455ae24e4ec7d0067567e6498e7407a0244a08622c3e2793ed0ad5a0",
+      "evaluation_commit": "992cd13dfbc74af7669029c4104af390993e5471"
+    },
+    {
+      "id": "combined_current_admin_reference_coverage",
+      "value": 0.999909,
+      "unit": "fraction",
+      "vintage": "archived",
+      "input_sha256": "4f52d5ef455ae24e4ec7d0067567e6498e7407a0244a08622c3e2793ed0ad5a0",
+      "evaluation_commit": "992cd13dfbc74af7669029c4104af390993e5471"
+    },
+    {
+      "id": "caop_four_polygon_coverage",
+      "value": 0.988539,
+      "unit": "fraction",
+      "vintage": "archived",
+      "input_sha256": "4f52d5ef455ae24e4ec7d0067567e6498e7407a0244a08622c3e2793ed0ad5a0",
+      "evaluation_commit": "992cd13dfbc74af7669029c4104af390993e5471"
+    },
+    {
+      "id": "raw_2018_55plus_caop_coverage",
+      "value": 0.998566,
+      "unit": "fraction",
+      "vintage": "archived",
+      "input_sha256": "4f52d5ef455ae24e4ec7d0067567e6498e7407a0244a08622c3e2793ed0ad5a0",
+      "evaluation_commit": "992cd13dfbc74af7669029c4104af390993e5471"
+    },
+    {
+      "id": "eight_ign_lines_length_inside_gap",
+      "value": 39039.008346,
+      "unit": "m",
+      "vintage": "archived",
+      "input_sha256": "4f52d5ef455ae24e4ec7d0067567e6498e7407a0244a08622c3e2793ed0ad5a0",
+      "evaluation_commit": "992cd13dfbc74af7669029c4104af390993e5471"
+    },
+    {
+      "id": "eight_ign_lines_total_unique_length",
+      "value": 124601.889222,
+      "unit": "m",
+      "vintage": "archived",
+      "input_sha256": "4f52d5ef455ae24e4ec7d0067567e6498e7407a0244a08622c3e2793ed0ad5a0",
+      "evaluation_commit": "992cd13dfbc74af7669029c4104af390993e5471"
+    },
+    {
+      "id": "ign_line_linear_contact_with_gap_boundary",
+      "value": 0.0,
+      "unit": "m",
+      "vintage": "archived",
+      "input_sha256": "4f52d5ef455ae24e4ec7d0067567e6498e7407a0244a08622c3e2793ed0ad5a0",
+      "evaluation_commit": "992cd13dfbc74af7669029c4104af390993e5471"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "verified_spanish_source_members",
+      "value": 55,
+      "unit": "source_member_ids"
+    },
+    {
+      "metric_id": "selected_ign_portugal_line_items",
+      "value": 8,
+      "unit": "native_items"
+    },
+    {
+      "metric_id": "gap_intersection_area_brozas_district",
+      "value": 272.109906,
+      "unit": "m2"
+    },
+    {
+      "metric_id": "gap_intersection_area_valencia_district",
+      "value": 1.725552,
+      "unit": "m2"
+    },
+    {
+      "metric_id": "full_gap_area",
+      "value": 297528340.703454,
+      "unit": "m2"
+    },
+    {
+      "metric_id": "combined_current_admin_reference_covered_area",
+      "value": 297501253.047717,
+      "unit": "m2"
+    },
+    {
+      "metric_id": "combined_current_admin_reference_uncovered_residual",
+      "value": 27087.655736,
+      "unit": "m2"
+    },
+    {
+      "metric_id": "combined_current_admin_reference_coverage",
+      "value": 0.999909,
+      "unit": "fraction"
+    },
+    {
+      "metric_id": "caop_four_polygon_coverage",
+      "value": 0.988539,
+      "unit": "fraction"
+    },
+    {
+      "metric_id": "raw_2018_55plus_caop_coverage",
+      "value": 0.998566,
+      "unit": "fraction"
+    },
+    {
+      "metric_id": "eight_ign_lines_length_inside_gap",
+      "value": 39039.008346,
+      "unit": "m"
+    },
+    {
+      "metric_id": "eight_ign_lines_total_unique_length",
+      "value": 124601.889222,
+      "unit": "m"
+    },
+    {
+      "metric_id": "ign_line_linear_contact_with_gap_boundary",
+      "value": 0.0,
+      "unit": "m"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "The pinned importer hashes complete simplified geoBoundaries files; those exact Spain and Portugal simplified bytes are restored and verified independently from their distinct complete raw objects.",
+      "status": "supported",
+      "source_ids": [
+        "geoboundaries-esp-adm3",
+        "geoboundaries-prt-adm2"
+      ]
+    },
+    {
+      "text": "All 55 exact Spain source members for the three Atlas districts are present in both complete 2018 ADM3 source files. Eight dated IGN border-line names uniquely match eight distinct members inside that exact 55-member roster.",
+      "status": "supported",
+      "source_ids": [
+        "geoboundaries-esp-adm3",
+        "ign-admin-boundary-api"
+      ]
+    },
+    {
+      "text": "The eight selected IGN line records have complete current administrativeunit polygon items: seven exact-name matches and Zarza la Mayor resolved by the exact nationalcode prefix carried by its full line item. This native-code crosswalk is source-supported; the collection does not state polygon validity date, and no published cross-provider ID crosswalk to the Portuguese municipalities is established.",
+      "status": "supported",
+      "source_ids": [
+        "ign-admin-boundary-api"
+      ]
+    },
+    {
+      "text": "The four Portugal Atlas municipalities match direct full CAOP2025 item features by exact DTMN code/name. CAOP collection title is 2025 while declared temporal extent is 2000–2007, retained as a vintage limitation.",
+      "status": "supported",
+      "source_ids": [
+        "geoboundaries-prt-adm2",
+        "dgt-caop2025"
+      ]
+    },
+    {
+      "text": "The union of eight current IGN Spanish municipality polygons and four direct CAOP2025 Portuguese municipality polygons covers 99.9909% of the exact pinned full gap (297,501,253.047717 m2); the complete uncovered 27,087.655736 m2 MultiPolygon residual coordinates are preserved in EPSG:25829 in the final reports for later partition/classification. This is a modern administrative-reference comparison, not a seam repair or ownership allocation.",
+      "status": "supported",
+      "source_ids": [
+        "ign-admin-boundary-api",
+        "dgt-caop2025"
+      ]
+    },
+    {
+      "text": "The eight IGN lines total 124,601.889222 m, with 39,039.008346 m inside the gap and zero linear contact length with the gap polygon boundary; line contacts are measured separately from polygon area coverage.",
+      "status": "supported",
+      "source_ids": [
+        "ign-admin-boundary-api"
+      ]
+    },
+    {
+      "text": "The exact bilateral instrument/registered international coordinates and jointly authoritative cross-provider administrative crosswalk remain unverified. The country-level Spain–Portugal legalstatus is unpopulated, so item-level agreed status is not a legal certification. Physical water/shoreline position, seasonal movement, datum/registration history, and limited-AOI implications have no dated source in this packet. No core map edit, delivery, or geographic approval is claimed.",
+      "status": "unresolved",
+      "source_ids": [
+        "ign-admin-boundary-api",
+        "dgt-caop2025",
+        "geoboundaries-esp-adm3",
+        "geoboundaries-prt-adm2"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "PYTHONDONTWRITEBYTECODE=1 python3 -B research/geography/shared-seam-prt-esp-20261006/scripts/reproduce-comparison.py run-09",
+    "PYTHONDONTWRITEBYTECODE=1 python3 -B research/geography/shared-seam-prt-esp-20261006/scripts/reproduce-comparison.py run-10",
+    "cmp research/geography/shared-seam-prt-esp-20261006/outputs/run-09/report.json research/geography/shared-seam-prt-esp-20261006/outputs/run-10/report.json",
+    "PYTHONDONTWRITEBYTECODE=1 python3 -B research/geography/shared-seam-prt-esp-20261006/scripts/validate-measurement-controls.py"
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "verified_spanish_source_members",
+      "path": "research/geography/shared-seam-prt-esp-20261006/outputs/run-09/report.json",
+      "json_pointer": "/baseline_source_member_counts/unique_source_members"
+    },
+    {
+      "metric_id": "selected_ign_portugal_line_items",
+      "path": "research/geography/shared-seam-prt-esp-20261006/outputs/run-09/report.json",
+      "json_pointer": "/ign_selected_line_geometry_overlay/native_line_item_count"
+    },
+    {
+      "metric_id": "gap_intersection_area_brozas_district",
+      "path": "research/geography/shared-seam-prt-esp-20261006/outputs/run-09/report.json",
+      "json_pointer": "/gap_to_subject_geometry_comparisons/6/overlap_area_m2"
+    },
+    {
+      "metric_id": "gap_intersection_area_valencia_district",
+      "path": "research/geography/shared-seam-prt-esp-20261006/outputs/run-09/report.json",
+      "json_pointer": "/gap_to_subject_geometry_comparisons/5/overlap_area_m2"
+    },
+    {
+      "metric_id": "full_gap_area",
+      "path": "research/geography/shared-seam-prt-esp-20261006/outputs/run-09/report.json",
+      "json_pointer": "/full_gap_areal_coverage_and_boundary_contacts/combined_eight_returned_ign_and_four_caop_polygons/gap_area_m2"
+    },
+    {
+      "metric_id": "combined_current_admin_reference_covered_area",
+      "path": "research/geography/shared-seam-prt-esp-20261006/outputs/run-09/report.json",
+      "json_pointer": "/full_gap_areal_coverage_and_boundary_contacts/combined_eight_returned_ign_and_four_caop_polygons/covered_area_m2"
+    },
+    {
+      "metric_id": "combined_current_admin_reference_uncovered_residual",
+      "path": "research/geography/shared-seam-prt-esp-20261006/outputs/run-09/report.json",
+      "json_pointer": "/full_gap_areal_coverage_and_boundary_contacts/combined_eight_returned_ign_and_four_caop_polygons/uncovered_residual_area_m2"
+    },
+    {
+      "metric_id": "combined_current_admin_reference_coverage",
+      "path": "research/geography/shared-seam-prt-esp-20261006/outputs/run-09/report.json",
+      "json_pointer": "/full_gap_areal_coverage_and_boundary_contacts/combined_eight_returned_ign_and_four_caop_polygons/covered_fraction"
+    },
+    {
+      "metric_id": "caop_four_polygon_coverage",
+      "path": "research/geography/shared-seam-prt-esp-20261006/outputs/run-09/report.json",
+      "json_pointer": "/full_gap_areal_coverage_and_boundary_contacts/portugal_four_dgt_caop2025_municipalities/covered_fraction"
+    },
+    {
+      "metric_id": "raw_2018_55plus_caop_coverage",
+      "path": "research/geography/shared-seam-prt-esp-20261006/outputs/run-09/report.json",
+      "json_pointer": "/full_gap_areal_coverage_and_boundary_contacts/combined_2018_spanish_raw_and_caop2025_portuguese/covered_fraction"
+    },
+    {
+      "metric_id": "eight_ign_lines_length_inside_gap",
+      "path": "research/geography/shared-seam-prt-esp-20261006/outputs/run-09/report.json",
+      "json_pointer": "/ign_selected_line_geometry_overlay/line_length_inside_gap_polygon_m"
+    },
+    {
+      "metric_id": "eight_ign_lines_total_unique_length",
+      "path": "research/geography/shared-seam-prt-esp-20261006/outputs/run-09/report.json",
+      "json_pointer": "/ign_selected_line_geometry_overlay/total_unique_line_length_m"
+    },
+    {
+      "metric_id": "ign_line_linear_contact_with_gap_boundary",
+      "path": "research/geography/shared-seam-prt-esp-20261006/outputs/run-09/report.json",
+      "json_pointer": "/ign_selected_line_geometry_overlay/gap_polygon_boundary_contact_length_m"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "utm29-direct-geos-overlay-measurement",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/shared-seam-prt-esp-20261006/validation/positive-control.json"
+    },
+    {
+      "method_id": "utm29-direct-geos-overlay-measurement",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/shared-seam-prt-esp-20261006/validation/negative-control.json"
+    },
+    {
+      "method_id": "utm29-direct-geos-overlay-measurement",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "research/geography/shared-seam-prt-esp-20261006/validation/reproducibility.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/README.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/outputs/run-01/report.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/outputs/run-02/report.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/outputs/run-03/report.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/outputs/run-04/report.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/outputs/run-06/report.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/outputs/run-07/report.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/outputs/run-08/report.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/outputs/run-09/report.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/outputs/run-10/report.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/scripts/fetch-ign-administrativeunit-polygons.mjs",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/scripts/fetch-official-items.mjs",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/scripts/fetch-selected-ign-items.mjs",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/scripts/partition-immutable-source.mjs",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/scripts/reproduce-comparison.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/scripts/validate-measurement-controls.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/scripts/verify-partition.mjs",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-esp-adm3-baseline-simplified/source-record.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-esp-adm3-baseline-simplified/upstream-pointer/geoBoundaries-ESP-ADM3_simplified.geojson.lfs-pointer",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-esp-adm3-baseline-simplified/whole-original/part-001.bin",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-esp-adm3-baseline-simplified/whole-original/partition-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-esp-adm3-original/chunks/part-31.bin",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-esp-adm3-original/chunks/part-32.bin",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-esp-adm3-original/chunks/part-33.bin",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-esp-adm3-original/chunks/part-34.bin",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-esp-adm3-original/chunks/part-35.bin",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-esp-adm3-original/chunks/verified-partition-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-esp-adm3-original/upstream-metadata/geoBoundaries-ESP-ADM3-metaData.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-esp-adm3-original/upstream-pointer/geoBoundaries-ESP-ADM3-metaData.json.lfs-pointer",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-esp-adm3-original/upstream-pointer/geoBoundaries-ESP-ADM3.geojson.lfs-pointer",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-esp-adm3-original/upstream-source-record.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-prt-adm2-baseline-simplified/source-record.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-prt-adm2-baseline-simplified/upstream-pointer/geoBoundaries-PRT-ADM2_simplified.geojson.lfs-pointer",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-prt-adm2-baseline-simplified/whole-original/part-001.bin",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-prt-adm2-baseline-simplified/whole-original/partition-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-prt-adm2-original/source-record.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-prt-adm2-original/upstream-pointer/geoBoundaries-PRT-ADM2.geojson.lfs-pointer",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-prt-adm2-original/whole-original/part-001.bin",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-prt-adm2-original/whole-original/partition-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-prt-adm2-original/whole-original/verified-partition-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/dgt-municipios-castelo-branco.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/dgt-municipios-collection.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/dgt-municipios-idanha-a-nova.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/dgt-municipios-nisa.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/dgt-municipios-queryables.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/dgt-municipios-vila-velha-de-rodao.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeboundary-collection.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeboundary-queryables.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-bbox-discovery-partitions/part-001.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-bbox-discovery-partitions/part-002.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-bbox-discovery-partitions/part-003.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-bbox-discovery-partitions/part-004.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-bbox-discovery-partitions/part-005.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-bbox-discovery-partitions/verified-partition-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-bbox-discovery-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-collection-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-collection.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-filter-carbajo-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-filter-carbajo.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-ambiguous-6-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-ambiguous-6.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-name-1172975-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-name-1172975.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-name-1173013-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-name-1173013.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-name-1173029-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-name-1173029.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-name-1173031-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-name-1173031.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-name-1173060-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-name-1173060.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-name-1173085-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-name-1173085.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-name-1173135-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-name-1173135.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-no-match-6-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-discovery/ign-administrativeunit-no-match-6.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-zarza-la-mayor-diagnostic-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-name-zarza-la-mayor-diagnostic.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-nationalcode-zarza-discovery-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-nationalcode-zarza-discovery.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1172975-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1172975.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173013-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173013.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173029-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173029.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173031-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173031.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173060-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173060.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173085-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173085.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173135-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173135.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173184-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/ign-administrativeunit-1173184.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-native-items/response-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-queryables-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-administrativeunit-queryables.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-bbox-discovery-only.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-bbox-discovery-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-collections-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-collections.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-native-items/ign-administrativeboundary-5665057.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-native-items/ign-administrativeboundary-5666602.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-native-items/ign-administrativeboundary-5673087.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-native-items/ign-administrativeboundary-5674903.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-native-items/ign-administrativeboundary-5680275.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-native-items/ign-administrativeboundary-5684705.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-native-items/ign-administrativeboundary-5686837.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-native-items/ign-administrativeboundary-5688358.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-native-items/ign-administrativeboundary-5690193.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-native-items/ign-administrativeboundary-5702440.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/ign-native-items/response-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/sources/official-api-responses/response-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/validation/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/validation/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-prt-esp-20261006/validation/reproducibility.json",
+      "status": "added"
+    }
+  ]
+}

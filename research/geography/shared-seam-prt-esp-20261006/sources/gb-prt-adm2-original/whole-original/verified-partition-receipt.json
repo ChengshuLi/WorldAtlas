@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "verification_method": "stream SHA-256 over ordered unchanged source-byte partitions; no reconstructed full file written",
+  "expected_bytes": 415110,
+  "actual_bytes": 415110,
+  "part_limit_bytes": 33554432,
+  "baseline_registry_sha256": "f7a9143190715b85812b03617adc4879898b8c6a6789b9c9732c9705ea6c21ac",
+  "actual_sha256": "a02fd52278e5e300a19949450e793812fe76d78664c0a896bb3c5ebda7f79f9e",
+  "baseline_registry_pin_status": "mismatch",
+  "upstream_lfs_sha256": "a02fd52278e5e300a19949450e793812fe76d78664c0a896bb3c5ebda7f79f9e",
+  "upstream_lfs_pin_status": "verified",
+  "parts": [
+    {
+      "filename": "part-001.bin",
+      "offset": 0,
+      "bytes": 415110,
+      "sha256": "a02fd52278e5e300a19949450e793812fe76d78664c0a896bb3c5ebda7f79f9e"
+    }
+  ]
+}
