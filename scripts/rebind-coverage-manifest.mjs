@@ -27,7 +27,7 @@ export function rebindCoverageManifest(manifest, {originalGrid, originalGridSha2
         release.metadata?.geometry_migration?.sha256 !== proof[0].receipt_sha256 ||
         release.metadata.geometry_migration.before_footprints_sha256 !== originalRelease.footprints_sha256 ||
         release.metadata.geometry_migration.after_footprints_sha256 !== release.footprints_sha256 ||
-        release.metadata.geometry_migration.history_transfer !== false ||
+        release.metadata.geometry_migration.history_transfer !== 'none' ||
         release.hierarchy_sha256 !== originalRelease.hierarchy_sha256 ||
         originalGrid.footprints_sha256 !== originalRelease.footprints_sha256 ||
         proof[0].receipt.before_footprints_sha256 !== originalRelease.footprints_sha256 ||

@@ -53,7 +53,7 @@ test('validated geometry-only successor preserves physical assets and records bo
   try {
     const raw=Buffer.from(JSON.stringify(receipt));
     successor.metadata={predecessor_release_id:predecessor.id,geometry_migration:{
-      sha256:digest(raw),before_footprints_sha256:oldHash,after_footprints_sha256:newHash,history_transfer:false}};
+      sha256:digest(raw),before_footprints_sha256:oldHash,after_footprints_sha256:newHash,history_transfer:'none'}};
     await fs.writeFile(directory+'/migration-receipt.json',raw);
     await fs.writeFile(directory+'/index.json',JSON.stringify({
       before_footprints_sha256:oldHash,after_footprints_sha256:newHash,history_transfer:false,
