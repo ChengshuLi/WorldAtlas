@@ -1,0 +1,367 @@
+{
+  "version": 1,
+  "issue": 376,
+  "date": "2026-10-06",
+  "region_id": "framework:region:northern-south-america:0b870a3f4ff0",
+  "member_count": 188,
+  "classifications": {
+    "insufficient-evidence": 35,
+    "justified": 152,
+    "correction-needed": 1
+  },
+  "gb_adm2_scoped_rows": 184,
+  "resolve_physical_fragments": 4,
+  "adm2_source_feature_count": 335,
+  "adm1_source_feature_count": 25,
+  "igvsb_feature_count": 408,
+  "igvsb_municipio_feature_count": 338,
+  "igvsb_named_boundary_issue_feature_count": 69,
+  "igvsb_guayana_esequiba_feature_count": 1,
+  "igvsb_overlap_zone_feature_count": 65,
+  "igvsb_no_jurisdiction_zone_feature_count": 4,
+  "igvsb_scoped_rows_intersecting_boundary_issue_features": 35,
+  "screening_subsets": {
+    "municipal_role_parent_justified": 152,
+    "municipal_role_parent_insufficient": 31,
+    "physical_fragments_insufficient": 4,
+    "pseudo_territorial_unit_correction_needed": 1,
+    "municipal_rows_intersecting_zone_features": 35,
+    "zone_hit_rows_classified_justified_for_role_parent_only": 31,
+    "zone_hit_rows_classified_insufficient": 4,
+    "municipal_same_name_2016_match_but_parent_cover_below_0_98": 24,
+    "municipal_no_exact_normalized_name_match_in_2016_comparator": 7
+  },
+  "issue_area_full_member_count": 327,
+  "issue_area_owned_member_count": 188,
+  "area_scope_partial": true,
+  "classification_limit": "Justified applies only to source-backed municipal role and parent evidence at the declared source vintages. It does not certify exact boundaries, complete source coverage, regional interiors, the outer envelope or imports.",
+  "igvsb_license_limit": "Official 2016 IGVSB municipal-boundary content was retrieved from Provita Geoportal, whose site footer states CC BY 4.0. No dataset-specific license or source redistribution terms were identified in the embedded metadata; see source register.",
+  "physical_subdivision": {
+    "atlas_physical_location_ids": [
+      "atlas:physical:432b44d2e7bdcbd1a570",
+      "atlas:physical:5f7ea253b110fb6890e9",
+      "atlas:physical:736a88b00fc9541855f2",
+      "atlas:physical:cc53a89e1f220c7c9194"
+    ],
+    "shared_original_source_member_id": "gb:VEN:ADM2:92452058B20928146308063",
+    "shared_original_source_name": "Raúl Leoni",
+    "resolve_ecoregion_ids": [
+      464,
+      466,
+      490,
+      572
+    ],
+    "resolve_records": [
+      {
+        "eco_id": 464,
+        "name": "Guianan Highlands moist forests",
+        "license": "CC-BY 4.0"
+      },
+      {
+        "eco_id": 466,
+        "name": "Guianan piedmont moist forests",
+        "license": "CC-BY 4.0"
+      },
+      {
+        "eco_id": 490,
+        "name": "Pantepui forests & shrublands",
+        "license": "CC-BY 4.0"
+      },
+      {
+        "eco_id": 572,
+        "name": "Llanos",
+        "license": "CC-BY 4.0"
+      }
+    ],
+    "unit_metrics": [
+      {
+        "location_id": "atlas:physical:432b44d2e7bdcbd1a570",
+        "source_id": "resolve:490",
+        "resolve_name": "Pantepui forests & shrublands",
+        "atlas_fragment_area_covered_by_original_municipality_and_named_ecoregion": 0.98383496,
+        "atlas_fragment_outside_original_municipality_fraction": 0.00043079,
+        "original_municipality_area_covered_by_fragment": 0.04027998
+      },
+      {
+        "location_id": "atlas:physical:5f7ea253b110fb6890e9",
+        "source_id": "resolve:572",
+        "resolve_name": "Llanos",
+        "atlas_fragment_area_covered_by_original_municipality_and_named_ecoregion": 0.99491798,
+        "atlas_fragment_outside_original_municipality_fraction": 0.00166305,
+        "original_municipality_area_covered_by_fragment": 0.14427371
+      },
+      {
+        "location_id": "atlas:physical:736a88b00fc9541855f2",
+        "source_id": "resolve:464",
+        "resolve_name": "Guianan Highlands moist forests",
+        "atlas_fragment_area_covered_by_original_municipality_and_named_ecoregion": 0.98129649,
+        "atlas_fragment_outside_original_municipality_fraction": 0.00027099,
+        "original_municipality_area_covered_by_fragment": 0.17662401
+      },
+      {
+        "location_id": "atlas:physical:cc53a89e1f220c7c9194",
+        "source_id": "resolve:466",
+        "resolve_name": "Guianan piedmont moist forests",
+        "atlas_fragment_area_covered_by_original_municipality_and_named_ecoregion": 0.99564241,
+        "atlas_fragment_outside_original_municipality_fraction": 0.00072096,
+        "original_municipality_area_covered_by_fragment": 0.62197704
+      }
+    ],
+    "source_municipality_area_coverage_by_four_atlas_units": 0.98315475,
+    "four_atlas_units_inside_source_municipality_area": 0.99923335,
+    "four_atlas_units_union_area_relative_to_source_municipality": 0.98390907,
+    "pairwise_overlap_area_degrees2": 0.0
+  },
+  "provinces": [
+    {
+      "full_province_locations": 14,
+      "id": "framework:province:portuguesa:d3e888b3586b",
+      "name": "Portuguesa",
+      "original_full_province_locations": 14,
+      "original_name": "Portuguesa",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "justified": 12,
+        "insufficient-evidence": 2
+      }
+    },
+    {
+      "full_province_locations": 14,
+      "id": "framework:province:yaracuy:00e5a5072b16",
+      "name": "Yaracuy",
+      "original_full_province_locations": 14,
+      "original_name": "Yaracuy",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "justified": 13,
+        "insufficient-evidence": 1
+      }
+    },
+    {
+      "full_province_locations": 7,
+      "id": "framework:province:apure:d0edbe4c689c",
+      "name": "Apure",
+      "original_full_province_locations": 7,
+      "original_name": "Apure",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "justified": 7
+      }
+    },
+    {
+      "full_province_locations": 9,
+      "id": "framework:province:cojedes:0ffcf4d05528",
+      "name": "Cojedes",
+      "original_full_province_locations": 9,
+      "original_name": "Cojedes",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "justified": 8,
+        "insufficient-evidence": 1
+      }
+    },
+    {
+      "full_province_locations": 14,
+      "id": "framework:province:carabobo:baf5d863629a",
+      "name": "Carabobo",
+      "original_full_province_locations": 14,
+      "original_name": "Carabobo",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "justified": 11,
+        "insufficient-evidence": 3
+      }
+    },
+    {
+      "full_province_locations": 17,
+      "id": "framework:province:aragua:209b97f0e40e",
+      "name": "Aragua",
+      "original_full_province_locations": 17,
+      "original_name": "Aragua",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "justified": 15,
+        "insufficient-evidence": 2
+      }
+    },
+    {
+      "full_province_locations": 1,
+      "id": "framework:province:la-guaira:43a5fcf8c87e",
+      "name": "La Guaira",
+      "original_full_province_locations": 1,
+      "original_name": "La Guaira",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "insufficient-evidence": 1
+      }
+    },
+    {
+      "full_province_locations": 1,
+      "id": "framework:province:distrito-capital:3098dfb83d58",
+      "name": "Distrito Capital",
+      "original_full_province_locations": 1,
+      "original_name": "Distrito Capital",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "insufficient-evidence": 1
+      }
+    },
+    {
+      "full_province_locations": 7,
+      "id": "framework:province:amazonas:dda057aedb0e",
+      "name": "Amazonas",
+      "original_full_province_locations": 7,
+      "original_name": "Amazonas",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "justified": 7
+      }
+    },
+    {
+      "full_province_locations": 21,
+      "id": "framework:province:miranda:c08c2666c7c4",
+      "name": "Miranda",
+      "original_full_province_locations": 21,
+      "original_name": "Miranda",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "justified": 19,
+        "insufficient-evidence": 2
+      }
+    },
+    {
+      "full_province_locations": 15,
+      "id": "framework:province:guarico:768a8658d27d",
+      "name": "Guárico",
+      "original_full_province_locations": 15,
+      "original_name": "Guárico",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "justified": 13,
+        "insufficient-evidence": 2
+      }
+    },
+    {
+      "full_province_locations": 21,
+      "id": "framework:province:anzoategui:48326e5e1b4d",
+      "name": "Anzoátegui",
+      "original_full_province_locations": 21,
+      "original_name": "Anzoátegui",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "justified": 17,
+        "insufficient-evidence": 4
+      }
+    },
+    {
+      "full_province_locations": 15,
+      "id": "framework:province:sucre:a672348dc911",
+      "name": "Sucre",
+      "original_full_province_locations": 15,
+      "original_name": "Sucre",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "insufficient-evidence": 6,
+        "justified": 9
+      }
+    },
+    {
+      "full_province_locations": 13,
+      "id": "framework:province:monagas:04643c18e61c",
+      "name": "Monagas",
+      "original_full_province_locations": 13,
+      "original_name": "Monagas",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "justified": 13
+      }
+    },
+    {
+      "full_province_locations": 4,
+      "id": "framework:province:delta-amacuro:c5e3a392c190",
+      "name": "Delta Amacuro",
+      "original_full_province_locations": 4,
+      "original_name": "Delta Amacuro",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "insufficient-evidence": 2,
+        "justified": 2
+      }
+    },
+    {
+      "full_province_locations": 1,
+      "id": "framework:province:zona-en-reclamacion:d630ab02654a",
+      "name": "Zona en Reclamación",
+      "original_full_province_locations": 1,
+      "original_name": "Zona en Reclamación",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "correction-needed": 1
+      }
+    },
+    {
+      "full_province_locations": 14,
+      "id": "framework:province:bolivar:f57910bb18ad",
+      "name": "Bolívar",
+      "original_full_province_locations": 14,
+      "original_name": "Bolívar",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "insufficient-evidence": 8,
+        "justified": 6
+      }
+    }
+  ],
+  "method": "Exact ID crosswalk, metadata/source role reconciliation, 2015 ADM2-to-2020 ADM1 spatial overlay, named cross-vintage comparison to IGVSB municipal polygons, and direct intersection screen against IGVSB municipal-overlap/unassigned features. WGS84 planar area ratios are only spatial diagnostics, not legal accuracy measures."
+}

@@ -1,0 +1,394 @@
+{
+  "version": 1,
+  "issue": 376,
+  "date": "2026-10-06",
+  "scope_count": 188,
+  "source_multipart_adm2_features": [
+    {
+      "location_id": "gb:VEN:ADM2:92452058B30911467500490",
+      "source_name": "San Joaquín",
+      "component_count": 2,
+      "largest_component_area_fraction": 0.99980554
+    },
+    {
+      "location_id": "gb:VEN:ADM2:92452058B40300597364264",
+      "source_name": "Carlos Arvelo",
+      "component_count": 6,
+      "largest_component_area_fraction": 0.99687673
+    },
+    {
+      "location_id": "gb:VEN:ADM2:92452058B58412499983511",
+      "source_name": "Zamora",
+      "component_count": 4,
+      "largest_component_area_fraction": 0.99917747
+    },
+    {
+      "location_id": "gb:VEN:ADM2:92452058B76868797395121",
+      "source_name": "Fernando de Peñalver",
+      "component_count": 2,
+      "largest_component_area_fraction": 0.69323985
+    }
+  ],
+  "adm2_source_units_with_area_at_least_25_percent_of_expected_2020_adm1_parent": [
+    {
+      "location_id": "gb:VEN:ADM2:92452058B13345815126611",
+      "source_name": "Libertador",
+      "atlas_parent_name": "Distrito Capital",
+      "planar_wgs84_fraction": 0.96677857
+    },
+    {
+      "location_id": "gb:VEN:ADM2:92452058B33564894721572",
+      "source_name": "Pedro Camejo",
+      "atlas_parent_name": "Apure",
+      "planar_wgs84_fraction": 0.28424901
+    },
+    {
+      "location_id": "gb:VEN:ADM2:92452058B44788675020047",
+      "source_name": "Nirgua",
+      "atlas_parent_name": "Yaracuy",
+      "planar_wgs84_fraction": 0.31359876
+    },
+    {
+      "location_id": "gb:VEN:ADM2:92452058B48463153943022",
+      "source_name": "Vargas",
+      "atlas_parent_name": "La Guaira",
+      "planar_wgs84_fraction": 0.96191582
+    },
+    {
+      "location_id": "gb:VEN:ADM2:92452058B57031672069031",
+      "source_name": "Maturín",
+      "atlas_parent_name": "Monagas",
+      "planar_wgs84_fraction": 0.45710837
+    },
+    {
+      "location_id": "gb:VEN:ADM2:92452058B64948290230997",
+      "source_name": "Pao de San Juan Bautista",
+      "atlas_parent_name": "Cojedes",
+      "planar_wgs84_fraction": 0.33729146
+    },
+    {
+      "location_id": "gb:VEN:ADM2:92452058B65922817978550",
+      "source_name": "Autónomo Alto Orinoco",
+      "atlas_parent_name": "Amazonas",
+      "planar_wgs84_fraction": 0.27095888
+    },
+    {
+      "location_id": "gb:VEN:ADM2:92452058B74293045430698",
+      "source_name": "Antonio Díaz",
+      "atlas_parent_name": "Delta Amacuro",
+      "planar_wgs84_fraction": 0.55617842
+    },
+    {
+      "location_id": "gb:VEN:ADM2:92452058B80404447780707",
+      "source_name": "Tucupita",
+      "atlas_parent_name": "Delta Amacuro",
+      "planar_wgs84_fraction": 0.29956917
+    },
+    {
+      "location_id": "gb:VEN:ADM2:92452058B98233245594574",
+      "source_name": "Urdaneta",
+      "atlas_parent_name": "Aragua",
+      "planar_wgs84_fraction": 0.27610969
+    }
+  ],
+  "source_labels_with_autonomo": [
+    {
+      "location_id": "gb:VEN:ADM2:92452058B12581966052082",
+      "source_name": "Autónomo Atures",
+      "atlas_parent_name": "Amazonas",
+      "classification": "justified"
+    },
+    {
+      "location_id": "gb:VEN:ADM2:92452058B1963066211404",
+      "source_name": "Autónomo Maroa",
+      "atlas_parent_name": "Amazonas",
+      "classification": "justified"
+    },
+    {
+      "location_id": "gb:VEN:ADM2:92452058B35318903418648",
+      "source_name": "Autónomo Río Negro",
+      "atlas_parent_name": "Amazonas",
+      "classification": "justified"
+    },
+    {
+      "location_id": "gb:VEN:ADM2:92452058B42172892239758",
+      "source_name": "Autónomo Manapiare",
+      "atlas_parent_name": "Amazonas",
+      "classification": "justified"
+    },
+    {
+      "location_id": "gb:VEN:ADM2:92452058B65922817978550",
+      "source_name": "Autónomo Alto Orinoco",
+      "atlas_parent_name": "Amazonas",
+      "classification": "justified"
+    },
+    {
+      "location_id": "gb:VEN:ADM2:92452058B84571882758287",
+      "source_name": "Autónomo Autana",
+      "atlas_parent_name": "Amazonas",
+      "classification": "justified"
+    },
+    {
+      "location_id": "gb:VEN:ADM2:92452058B96252003881726",
+      "source_name": "Autónomo Atabapo",
+      "atlas_parent_name": "Amazonas",
+      "classification": "justified"
+    }
+  ],
+  "city_granularity": "No city or urban-area boundary source is present in this issue input set; ADM2 municipio boundaries do not establish city extent or that a city split across municipalities is an atlas error.",
+  "disconnected_feature_limit": "Four scoped ADM2 geometries have multiple polygon components. Component counts do not identify islands, legal enclaves or errors; each needs an island/coastal/admin source crosswalk before classifying its components.",
+  "same_tier_limit": "184 inputs are in a source collection labeled Municipios; four additional leaf records are ecological fragments sharing one municipal source member. There is no separate city/parish input in this packet. This supports an administrative-vs-physical distinction, not a decision to re-tier.",
+  "large_unit_limit": "Ten municipal polygons cover at least 25% of their corresponding 2020 ADM1 reference polygon in an unprojected WGS84 area ratio. This is a triage list only; municipality size can vary substantially and the measure is not an area-based validity rule.",
+  "province_scopes": [
+    {
+      "full_province_locations": 14,
+      "id": "framework:province:portuguesa:d3e888b3586b",
+      "name": "Portuguesa",
+      "original_full_province_locations": 14,
+      "original_name": "Portuguesa",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "justified": 12,
+        "insufficient-evidence": 2
+      }
+    },
+    {
+      "full_province_locations": 14,
+      "id": "framework:province:yaracuy:00e5a5072b16",
+      "name": "Yaracuy",
+      "original_full_province_locations": 14,
+      "original_name": "Yaracuy",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "justified": 13,
+        "insufficient-evidence": 1
+      }
+    },
+    {
+      "full_province_locations": 7,
+      "id": "framework:province:apure:d0edbe4c689c",
+      "name": "Apure",
+      "original_full_province_locations": 7,
+      "original_name": "Apure",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "justified": 7
+      }
+    },
+    {
+      "full_province_locations": 9,
+      "id": "framework:province:cojedes:0ffcf4d05528",
+      "name": "Cojedes",
+      "original_full_province_locations": 9,
+      "original_name": "Cojedes",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "justified": 8,
+        "insufficient-evidence": 1
+      }
+    },
+    {
+      "full_province_locations": 14,
+      "id": "framework:province:carabobo:baf5d863629a",
+      "name": "Carabobo",
+      "original_full_province_locations": 14,
+      "original_name": "Carabobo",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "justified": 11,
+        "insufficient-evidence": 3
+      }
+    },
+    {
+      "full_province_locations": 17,
+      "id": "framework:province:aragua:209b97f0e40e",
+      "name": "Aragua",
+      "original_full_province_locations": 17,
+      "original_name": "Aragua",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "justified": 15,
+        "insufficient-evidence": 2
+      }
+    },
+    {
+      "full_province_locations": 1,
+      "id": "framework:province:la-guaira:43a5fcf8c87e",
+      "name": "La Guaira",
+      "original_full_province_locations": 1,
+      "original_name": "La Guaira",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "insufficient-evidence": 1
+      }
+    },
+    {
+      "full_province_locations": 1,
+      "id": "framework:province:distrito-capital:3098dfb83d58",
+      "name": "Distrito Capital",
+      "original_full_province_locations": 1,
+      "original_name": "Distrito Capital",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "insufficient-evidence": 1
+      }
+    },
+    {
+      "full_province_locations": 7,
+      "id": "framework:province:amazonas:dda057aedb0e",
+      "name": "Amazonas",
+      "original_full_province_locations": 7,
+      "original_name": "Amazonas",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "justified": 7
+      }
+    },
+    {
+      "full_province_locations": 21,
+      "id": "framework:province:miranda:c08c2666c7c4",
+      "name": "Miranda",
+      "original_full_province_locations": 21,
+      "original_name": "Miranda",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "justified": 19,
+        "insufficient-evidence": 2
+      }
+    },
+    {
+      "full_province_locations": 15,
+      "id": "framework:province:guarico:768a8658d27d",
+      "name": "Guárico",
+      "original_full_province_locations": 15,
+      "original_name": "Guárico",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "justified": 13,
+        "insufficient-evidence": 2
+      }
+    },
+    {
+      "full_province_locations": 21,
+      "id": "framework:province:anzoategui:48326e5e1b4d",
+      "name": "Anzoátegui",
+      "original_full_province_locations": 21,
+      "original_name": "Anzoátegui",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "justified": 17,
+        "insufficient-evidence": 4
+      }
+    },
+    {
+      "full_province_locations": 15,
+      "id": "framework:province:sucre:a672348dc911",
+      "name": "Sucre",
+      "original_full_province_locations": 15,
+      "original_name": "Sucre",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "insufficient-evidence": 6,
+        "justified": 9
+      }
+    },
+    {
+      "full_province_locations": 13,
+      "id": "framework:province:monagas:04643c18e61c",
+      "name": "Monagas",
+      "original_full_province_locations": 13,
+      "original_name": "Monagas",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "justified": 13
+      }
+    },
+    {
+      "full_province_locations": 4,
+      "id": "framework:province:delta-amacuro:c5e3a392c190",
+      "name": "Delta Amacuro",
+      "original_full_province_locations": 4,
+      "original_name": "Delta Amacuro",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "insufficient-evidence": 2,
+        "justified": 2
+      }
+    },
+    {
+      "full_province_locations": 1,
+      "id": "framework:province:zona-en-reclamacion:d630ab02654a",
+      "name": "Zona en Reclamación",
+      "original_full_province_locations": 1,
+      "original_name": "Zona en Reclamación",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "correction-needed": 1
+      }
+    },
+    {
+      "full_province_locations": 14,
+      "id": "framework:province:bolivar:f57910bb18ad",
+      "name": "Bolívar",
+      "original_full_province_locations": 14,
+      "original_name": "Bolívar",
+      "original_parts": 1,
+      "part": 1,
+      "partial": false,
+      "parts": 1,
+      "assessments": {
+        "insufficient-evidence": 8,
+        "justified": 6
+      }
+    }
+  ],
+  "neighbor_limit": "Issue #375 owns the disjoint Venezuela workload complement. Cross-packet or neighboring-region conclusions require that evidence and a combined integration review."
+}

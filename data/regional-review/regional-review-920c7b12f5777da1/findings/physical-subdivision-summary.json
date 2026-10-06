@@ -1,0 +1,76 @@
+{
+  "atlas_physical_location_ids": [
+    "atlas:physical:432b44d2e7bdcbd1a570",
+    "atlas:physical:5f7ea253b110fb6890e9",
+    "atlas:physical:736a88b00fc9541855f2",
+    "atlas:physical:cc53a89e1f220c7c9194"
+  ],
+  "shared_original_source_member_id": "gb:VEN:ADM2:92452058B20928146308063",
+  "shared_original_source_name": "Raúl Leoni",
+  "resolve_ecoregion_ids": [
+    464,
+    466,
+    490,
+    572
+  ],
+  "resolve_records": [
+    {
+      "eco_id": 464,
+      "name": "Guianan Highlands moist forests",
+      "license": "CC-BY 4.0"
+    },
+    {
+      "eco_id": 466,
+      "name": "Guianan piedmont moist forests",
+      "license": "CC-BY 4.0"
+    },
+    {
+      "eco_id": 490,
+      "name": "Pantepui forests & shrublands",
+      "license": "CC-BY 4.0"
+    },
+    {
+      "eco_id": 572,
+      "name": "Llanos",
+      "license": "CC-BY 4.0"
+    }
+  ],
+  "unit_metrics": [
+    {
+      "location_id": "atlas:physical:432b44d2e7bdcbd1a570",
+      "source_id": "resolve:490",
+      "resolve_name": "Pantepui forests & shrublands",
+      "atlas_fragment_area_covered_by_original_municipality_and_named_ecoregion": 0.98383496,
+      "atlas_fragment_outside_original_municipality_fraction": 0.00043079,
+      "original_municipality_area_covered_by_fragment": 0.04027998
+    },
+    {
+      "location_id": "atlas:physical:5f7ea253b110fb6890e9",
+      "source_id": "resolve:572",
+      "resolve_name": "Llanos",
+      "atlas_fragment_area_covered_by_original_municipality_and_named_ecoregion": 0.99491798,
+      "atlas_fragment_outside_original_municipality_fraction": 0.00166305,
+      "original_municipality_area_covered_by_fragment": 0.14427371
+    },
+    {
+      "location_id": "atlas:physical:736a88b00fc9541855f2",
+      "source_id": "resolve:464",
+      "resolve_name": "Guianan Highlands moist forests",
+      "atlas_fragment_area_covered_by_original_municipality_and_named_ecoregion": 0.98129649,
+      "atlas_fragment_outside_original_municipality_fraction": 0.00027099,
+      "original_municipality_area_covered_by_fragment": 0.17662401
+    },
+    {
+      "location_id": "atlas:physical:cc53a89e1f220c7c9194",
+      "source_id": "resolve:466",
+      "resolve_name": "Guianan piedmont moist forests",
+      "atlas_fragment_area_covered_by_original_municipality_and_named_ecoregion": 0.99564241,
+      "atlas_fragment_outside_original_municipality_fraction": 0.00072096,
+      "original_municipality_area_covered_by_fragment": 0.62197704
+    }
+  ],
+  "source_municipality_area_coverage_by_four_atlas_units": 0.98315475,
+  "four_atlas_units_inside_source_municipality_area": 0.99923335,
+  "four_atlas_units_union_area_relative_to_source_municipality": 0.98390907,
+  "pairwise_overlap_area_degrees2": 0.0
+}

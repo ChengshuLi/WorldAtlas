@@ -1,0 +1,208 @@
+{
+  "version": 1,
+  "issue": 376,
+  "retrieved_on": "2026-10-06",
+  "hash_algorithm": "SHA-256 whole-file bytes",
+  "sources": [
+    {
+      "id": "gb:VEN:ADM2",
+      "provider": "geoBoundaries / source credited to Carlos Efrain Porto Tapiquen, Orogenesis Soluciones Geograficas",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VEN/ADM2/geoBoundaries-VEN-ADM2.geojson",
+      "pinned_repository_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "vintage": 2015,
+      "role": "ADM2 Municipios; source metadata says 335 administrative units",
+      "completeness": "335 features in this pinned collection; not proof of current or legally complete municipal coverage; this packet uses 184 of 335 features and only 188/327 Venezuela workload members",
+      "license": "Open Data Commons Open Database License 1.0 per retained baseline and geoBoundaries metadata; metadata credits original 2015 source",
+      "retained_file": "source/geoboundaries-ven-adm2-2015-9469f09.geojson.gz",
+      "sha256": "c2c70f909530bcdab89256ee7fdd7f3eabbecb74eab2231a20b4a0e4ec9d5fd8",
+      "restoration": "GET the URL above; require the exact SHA-256 before analysis. The pinned full repository commit is the provenance anchor.",
+      "retrieval_headers": "source/geoboundaries-ven-adm2-9469f09.headers.txt",
+      "retrieval_headers_sha256": "d3561ef29f623c1fbad773e407b875432df29cc294e812408ba4518e03a079ed",
+      "container_sha256": "f827825ea89bb8a8123ef312d1296c523bbb2f4ea4b70b197538f6310836c0f0",
+      "storage": "Deterministic gzip (mtime=0) of the exact retrieved GeoJSON bytes; decompress and verify sha256 before parsing."
+    },
+    {
+      "id": "gb:VEN:ADM2-metadata",
+      "provider": "geoBoundaries",
+      "url": "https://www.geoboundaries.org/api/current/gbOpen/VEN/ADM2/",
+      "vintage": "2015 boundary; metadata build 2023-12-12; source update field 2023-01-19",
+      "role": "Source attribution, boundary type, year, license and ADM unit count metadata",
+      "completeness": "Metadata only",
+      "license": "Metadata records ODbL 1.0 and credits Tapiquen; see baseline metadata",
+      "retained_file": "source/geoboundaries-ven-adm2-metadata-9469f09.json",
+      "sha256": "43a3d0b5552afe456ecf863334bced685e2db8e1422d4a63369104c4040d0f46",
+      "restoration": "Use the pinned repository release metadata at commit 9469f09592ced973a3448cf66b6100b741b64c0d.",
+      "retrieval_headers": "source/geoboundaries-ven-adm2-metadata-9469f09.headers.txt",
+      "retrieval_headers_sha256": "b360827fd8492fb88e077d4adbf58607d3888f1ee8049fb6ce4a53543049ebac"
+    },
+    {
+      "id": "gb:VEN:ADM1",
+      "provider": "geoBoundaries; source credits OCHA Venezuela and Instituto Nacional de Estad\u00edstica",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VEN/ADM1/geoBoundaries-VEN-ADM1.geojson",
+      "pinned_repository_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "vintage": 2020,
+      "role": "ADM1 Estados reference for parent/overlay screen",
+      "completeness": "25 source features; independent comparator only, not a legal edge or complete province certificate",
+      "license": "CC BY 3.0 IGO per source metadata",
+      "retained_file": "source/geoboundaries-ven-adm1-2020-9469f09.geojson.gz",
+      "sha256": "76f34911610e1215b761bbbc060a612bf3de6d8cd0056068c45c51b89e7c64e2",
+      "restoration": "GET URL above and verify SHA-256.",
+      "retrieval_headers": "source/geoboundaries-ven-adm1-9469f09.headers.txt",
+      "retrieval_headers_sha256": "028c7b828831cee0f9e2a2c7fd5e9e939fad82e1b71ef0deba5833e47b6fe437",
+      "container_sha256": "86fff0b59f354669ddc83e1a386415926860f398fda60cadf3c3e74602946c3a",
+      "storage": "Deterministic gzip (mtime=0) of the exact retrieved GeoJSON bytes; decompress and verify sha256 before parsing."
+    },
+    {
+      "id": "gb:VEN:ADM1-metadata",
+      "provider": "geoBoundaries",
+      "url": "https://www.geoboundaries.org/api/current/gbOpen/VEN/ADM1/",
+      "vintage": "2020 boundary; metadata build 2023-12-12; source update field 2023-01-19",
+      "role": "Source attribution, boundary type, year, license and ADM unit count metadata",
+      "completeness": "Metadata only",
+      "license": "CC BY 3.0 IGO per source metadata",
+      "retained_file": "source/geoboundaries-ven-adm1-metadata-9469f09.json",
+      "sha256": "43aa742fb39769dbdab8ef1362e6cb69e50b1a0a80a28a7c4279cdf45baee255",
+      "restoration": "Use pinned geoBoundaries metadata at commit above.",
+      "retrieval_headers": "source/geoboundaries-ven-adm1-metadata-9469f09.headers.txt",
+      "retrieval_headers_sha256": "1772093f707868ed9951cd3b8d0c1309c7b0ff9786aa7985b0b1e8618d72f8b5"
+    },
+    {
+      "id": "IGVSB 2016 municipal boundaries",
+      "provider": "Instituto Geogr\u00e1fico de Venezuela Sim\u00f3n Bol\u00edvar (IGVSB), distributed by Provita Geoportal",
+      "page": "https://geoportal.provita.org.ve/",
+      "download_url": "https://geoportalp-files.s3-us-east-2.amazonaws.com/files/shapefile/Limites_municipales_de_venezuela_IGVSB_WGS84.zip",
+      "vintage": "Underlying embedded metadata says published 2016; Provita page/package is dated 2024-06-07 and S3 Last-Modified 2024-09-03",
+      "role": "Independent cross-vintage named municipality and explicit overlap/no-jurisdiction comparison; not asserted to be current or authoritative legal boundary proof",
+      "completeness": "408 features: 338 names begin Municipio; 69 begin Zona, consisting of 65 explicitly named municipal-overlap features and 4 explicitly named no-jurisdiction features (one overlap feature has plural spelling). One separate feature is named Guayana Esequiba. This is inventory of the delivered file, not proof of complete official coverage. 35 scoped ADM2 polygons intersect one or more Zona features at planar WGS84 fraction >=0.0001.",
+      "license": "Unresolved for the embedded IGVSB dataset. Provita site footer displays CC BY 4.0, but no dataset-specific redistribution grant was found in its embedded metadata. Original ZIP is therefore not redistributed; inspect locally only after explicit retrieval under applicable terms.",
+      "retained_file": null,
+      "sha256": "f5c9712ef77a7e4c2692a7c967f7436533b359a4a22cb280e2763b910671991f",
+      "retrieval_headers": "source/igvsb-municipal-2024.headers.txt",
+      "restoration": "Run `sh restore_inputs.sh igvsb`; script downloads the exact URL, verifies this whole-file SHA-256, and keeps it as an untracked ignored local input only after the operator explicitly asks for it.",
+      "retrieval_headers_sha256": "8b92e1d7ff0228051e45ba0058685f0307fad4813b60eaacbc1171d67e7b042b"
+    },
+    {
+      "id": "RESOLVE ecoregions",
+      "provider": "RESOLVE / ArcGIS FeatureServer item 37ea320eebb647c6838c23f72abae5ef",
+      "item_url": "https://www.arcgis.com/sharing/rest/content/items/37ea320eebb647c6838c23f72abae5ef?f=pjson",
+      "service_url": "https://services.arcgis.com/nzS0F0zdNLvs7nc8/ArcGIS/rest/services/RESOLVE_Ecoregions_and_Biomes/FeatureServer/0",
+      "vintage": 2017,
+      "role": "Ecological descriptive layer for four `atlas:physical:` fragments; not a national administrative collection",
+      "completeness": "Two retained spatial query extracts contain only IDs 464,466,490,572 needed by this packet; not whole-world coverage. Ecoregion overlaps and coastal/generalization behavior are not treated as legal units.",
+      "license": "CC BY 4.0 per item metadata; attribution RESOLVE and Esri per metadata",
+      "retained_files": [
+        "source/arcgis-item-37ea320eebb647c6838c23f72abae5ef-metadata.json",
+        "source/resolve-ecoregions-featureserver-metadata.json",
+        "source/resolve-ecoregions-layer-0-metadata.json",
+        "source/resolve-ven-ecoregions-query.geojson.gz",
+        "source/resolve-ecoregion-490-query.geojson.gz"
+      ],
+      "sha256_by_file": {
+        "arcgis-item-37ea320eebb647c6838c23f72abae5ef-data.json": "07ebea5c4a70c20b929508acb0bbb929e2f841d145b9c45f2c044ec6953fbb9c",
+        "resolve-ven-ecoregions-query.geojson": "8feb5d6a5398aecb0189d34626bd4c6d211156634e55b393e487743775d40f66",
+        "resolve-ecoregions-layer-0-metadata.json": "d1feffd594812affdc08e089607bab2ed76e256ba7748784d37536797a777d4e",
+        "resolve-ecoregion-490-query.geojson": "dfa1a964576dd6424ca736cd082187d50f9e6ac081123b5da0948a63ded54fa6",
+        "arcgis-item-37ea320eebb647c6838c23f72abae5ef-metadata.json": "a5c2461636205d25ebc86bff1ac5563057ea21655d0aeac7c30e23aed1a73c32",
+        "resolve-ecoregions-featureserver-metadata.json": "3b899aaf67c1ed31b19452e4393fadaa7cf9e709b03983e8a7e197b125043ebe",
+        "resolve-ven-ecoregions-query.geojson.gz": "8feb5d6a5398aecb0189d34626bd4c6d211156634e55b393e487743775d40f66",
+        "resolve-ecoregion-490-query.geojson.gz": "dfa1a964576dd6424ca736cd082187d50f9e6ac081123b5da0948a63ded54fa6"
+      },
+      "restoration": "Use retained item/layer query metadata and the service URL; request ECO_ID IN (464,466,490,572) in EPSG:4326 and verify each output geometry/attribute against retained hashes.",
+      "container_sha256_by_file": {
+        "resolve-ven-ecoregions-query.geojson.gz": "a05ce424985235103d5619830e8fc27ea0ebcf4aa5c5da1605fe5a4722c806d7",
+        "resolve-ecoregion-490-query.geojson.gz": "87163746482eac83b071259c7fd6893ed1e62667985d1e7c3665cd4b66d28324"
+      }
+    },
+    {
+      "id": "Venezuelan Organic Law on Municipal Public Power, Article 2",
+      "provider": "Government of Venezuela state domain (satdc.gobernacion.web.ve)",
+      "url": "https://satdc.gobernacion.web.ve/documentos/ordenanzas/ley_organica_del_poder_publico_municipal.pdf",
+      "vintage": "2010 consolidated law copy at the retrieved official-host URL; HTTP Last-Modified header 2026-03-16",
+      "role": "Legal statement that Municipio is the primary political unit in national organization (Article 2); supports administrative concept only, not any individual municipality boundary or the special status of each source label containing \u201cAut\u00f3nomo\u201d.",
+      "completeness": "Relevant cited article inspected; not used to infer exact count or current boundaries",
+      "license": "No specific redistribution terms established; PDF is not redistributed",
+      "retained_file": null,
+      "sha256": "a6794e9eef64d5d9c13fb47f0783030d1e6337d723eac0a224a397563330aabe",
+      "restoration": "Retrieve the URL directly if available; verify SHA-256 above. This packet cites Article 2 and records the retrieved headers in source/municipal-law.headers.txt.",
+      "retrieval_headers": "source/municipal-law.headers.txt",
+      "retrieval_headers_sha256": "4e9185d5960ee48e0e0a37ba96b5629d60de1f6f46d2d1b2d640ce840b2616a7"
+    },
+    {
+      "id": "ICJ Guyana v Venezuela, Order of 1 December 2023",
+      "provider": "International Court of Justice",
+      "url": "https://www.icj-cij.org/index.php/node/203341",
+      "case_docs": "https://www.icj-cij.org/case/171/orders",
+      "vintage": "2023-12-01",
+      "role": "Provisional measures regarding status quo; order states Guyana administers and controls the disputed territory pending final decision and directs Venezuela not to take action to alter that situation",
+      "completeness": "Specific interim order; not final merits judgment and does not settle ultimate sovereignty",
+      "license": "Official court document; redistributability not assumed here",
+      "retained_file": null,
+      "sha256": null,
+      "retrieval": "Direct PDF endpoint returned HTTP 403 / Cloudflare challenge on 2026-10-06; no document bytes/hash retained. Headers are preserved in source/icj-171-order-2023-12-01.headers.txt and source/icj-2023.headers.txt.",
+      "restoration": "Open the official case order index or citation above; no access-control bypass was attempted.",
+      "retrieval_headers": {
+        "source/icj-171-order-2023-12-01.headers.txt": "99dfda310c5cfaa6263b401fd1568dae4c26c61b9f702f261aa71d4a37dc54ed",
+        "source/icj-2023.headers.txt": "78f63aeaa0295ab73cc165e8d82ab79eeb5c327cc3018ae807a4e4591bc1f51a"
+      }
+    },
+    {
+      "id": "ICJ Guyana v Venezuela, Order of 1 May 2025",
+      "provider": "International Court of Justice",
+      "url": "https://www.icj-cij.org/node/205403",
+      "case_docs": "https://www.icj-cij.org/case/171/orders",
+      "vintage": "2025-05-01",
+      "role": "Reaffirms provisional measures and specifies Venezuela must not conduct or prepare elections in disputed territory administered and controlled by Guyana pending final decision",
+      "completeness": "Interim order only; merits remain unresolved",
+      "license": "Official court document; redistributability not assumed here",
+      "retained_file": null,
+      "sha256": null,
+      "retrieval": "Direct PDF endpoint returned HTTP 403 / Cloudflare challenge on 2026-10-06; no bytes/hash retained. Headers preserved in source/icj-2025.headers.txt.",
+      "restoration": "Use official case page/order index; access challenge is recorded, with no bypass attempted.",
+      "retrieval_headers": {
+        "source/icj-2025.headers.txt": "6848bbe8cb534431279853b7c315e955bcfd0e872edc69a20a54beb4764907da"
+      }
+    }
+  ],
+  "byte_hash_note": "The issue baseline pin `gb:VEN:ADM2` sha256 90220a05cb77775a848c48618b753fd1efef5e673068cb731d7b701077844938 is retained separately in the baseline administrative-sources.json; this packet makes no claim that it equals the raw downloaded file hash. Raw-file hashes above refer exactly to retained/retrieved bytes. Licensed spatial inputs are retained as deterministic gzip containers to keep review diffs compact; source sha256 values refer to decompressed original bytes and container_sha256 values refer to committed compressed bytes.",
+  "response_receipts": {
+    "source/constitution.headers.txt": "e8ae2b0d390fb693c48552106df777fd83f1c09c7dee4299c914b5d5348af201",
+    "source/geoboundaries-ven-adm1-9469f09.headers.txt": "028c7b828831cee0f9e2a2c7fd5e9e939fad82e1b71ef0deba5833e47b6fe437",
+    "source/geoboundaries-ven-adm1-metadata-9469f09.headers.txt": "1772093f707868ed9951cd3b8d0c1309c7b0ff9786aa7985b0b1e8618d72f8b5",
+    "source/geoboundaries-ven-adm2-9469f09.headers.txt": "d3561ef29f623c1fbad773e407b875432df29cc294e812408ba4518e03a079ed",
+    "source/geoboundaries-ven-adm2-metadata-9469f09.headers.txt": "b360827fd8492fb88e077d4adbf58607d3888f1ee8049fb6ce4a53543049ebac",
+    "source/icj-171-order-2023-12-01.headers.txt": "99dfda310c5cfaa6263b401fd1568dae4c26c61b9f702f261aa71d4a37dc54ed",
+    "source/icj-2023.headers.txt": "78f63aeaa0295ab73cc165e8d82ab79eeb5c327cc3018ae807a4e4591bc1f51a",
+    "source/icj-2025.headers.txt": "6848bbe8cb534431279853b7c315e955bcfd0e872edc69a20a54beb4764907da",
+    "source/igvsb-municipal-2024.headers.txt": "8b92e1d7ff0228051e45ba0058685f0307fad4813b60eaacbc1171d67e7b042b",
+    "source/municipal-law.headers.txt": "4e9185d5960ee48e0e0a37ba96b5629d60de1f6f46d2d1b2d640ce840b2616a7"
+  },
+  "supporting_records": [
+    {
+      "id": "issue-376 body snapshot",
+      "provider": "ChengshuLi/WorldAtlas GitHub Issues API",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/376",
+      "retrieved_on": "2026-10-06",
+      "retained_file": "source/issue-376-body-2026-10-06.md",
+      "sha256": "c474a46e7c17b6b1ee3e2b5cbda3c98dbdcd585d33264867186d441da82292e2",
+      "role": "Exact task scope, IDs, starting source pins and acceptance criteria; not a geographic data source."
+    },
+    {
+      "id": "Provita Geoportal discovery page",
+      "provider": "Provita Geoportal",
+      "url": "https://geoportal.provita.org.ve/",
+      "retrieved_on": "2026-10-06",
+      "retained_file": "source/provita-geoportal-home-2026-10-06.html",
+      "sha256": "8c8baf26cc8139b26d4642f9136136e585f41f63f4904d29d7ecdbd92abeb3f7",
+      "role": "Discovery page for the IGVSB municipal archive; page footer states CC BY 4.0, which was not treated as a dataset-specific grant for the embedded IGVSB boundary file."
+    },
+    {
+      "id": "Unresolved Constitution source-access attempt",
+      "provider": "Not recoverable from the retained response headers",
+      "url": null,
+      "retrieved_on": "2026-10-06",
+      "retained_file": "source/constitution.headers.txt",
+      "sha256": "e8ae2b0d390fb693c48552106df777fd83f1c09c7dee4299c914b5d5348af201",
+      "role": "Failed HTTP 403 \u201cSuspicious User-Agent\u201d response only; target URL was not captured, bytes were not obtained, and this attempt was not used as evidence. Restoration is not possible from this receipt alone."
+    }
+  ]
+}
