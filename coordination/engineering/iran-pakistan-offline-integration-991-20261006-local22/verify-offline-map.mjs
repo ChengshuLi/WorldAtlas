@@ -148,7 +148,7 @@ try{
       await page.waitForFunction(()=>window.__testedAtlasSHA||window.__testedAtlasError,null,{timeout:120000});
       assert.equal(await page.evaluate(()=>window.__testedAtlasSHA),sha(atlasBytes),'Browser consumed the exact built atlas manifest');await settled(page);
       const startup=await page.locator('.atlas-pixel-canvas').evaluate(c=>({...c.dataset}));
-      if(renderer==='webgl2'){assert.equal(startup.renderer,'webgl2');assert.equal(startup.precompiled,'true');assert.equal(startup.compilations,'0');assert.deepEqual(await gpuOwners(page),cells.map(c=>c.owner),'Actual uploaded GPU native ownership covers all 954 supported additions');}
+      if(renderer==='webgl2'){assert.equal(startup.renderer,'webgl2');assert.equal(startup.precompiled,'true');assert.equal(startup.compilations,'0');assert.equal(startup.coverageUploads,'2','The complete checksum-validated physical grid must be uploaded');assert.deepEqual(await gpuOwners(page),cells.map(c=>c.owner),'Actual uploaded GPU native ownership covers all 954 supported additions');}
       else {assert.equal(await page.locator('.atlas-pixel-canvas').evaluate(c=>!!c.getContext('2d')),true);assert.equal(startup.compilations,'0');}
       const profileResults=[];
       for(const subject of subjects){
@@ -189,7 +189,11 @@ try{
         await page.screenshot({path:path.join(out,renderer+'-'+subject.query.toLowerCase()+'.png')});
         profileResults.push({id:subject.id,name:subject.name,environments,camera,picks});
       }
-      assert.deepEqual(errors,[]);assert.deepEqual(httpErrors,[]);assert.deepEqual(consoleErrors,[]);assert.deepEqual(failedLocalRequests,[]);assert.ok(!requests.some(url=>new URL(url).pathname.startsWith('/api/')),'Offline static app must not require hosted API');
+      assert.deepEqual(errors,[]);assert.deepEqual(httpErrors,[]);assert.deepEqual(consoleErrors,[]);
+      // Stream reader cancellation can surface as ERR_ABORTED after the checked
+      // grid has loaded. Retain those events and reject other transport failures.
+      assert.deepEqual(failedLocalRequests.filter(r=>r.error!=='net::ERR_ABORTED'),[]);
+      assert.ok(!requests.some(url=>new URL(url).pathname.startsWith('/api/')),'Offline static app must not require hosted API');
       results.push({renderer,startup,profiles:profileResults,page_errors:errors,http_errors:httpErrors,console_errors:consoleErrors,failed_local_requests:failedLocalRequests,local_requests:requests.filter(url=>url.startsWith(base)).map(url=>new URL(url).pathname)});
     }finally{await context.close();}
   }
