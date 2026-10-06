@@ -150,9 +150,9 @@ def run(repo, selected, output):
     # duplicated geometry or artificial intersection/difference is necessary.
     lineage = {'kind': 'whole-byte-identity-bijection', 'original_input_commit': ORIGINAL,
                'selected_input_commit': selected, 'measurement_artifact_commit': ARTIFACT,
-               'fragment_ids': sorted(f['id'] for f in fragments),
-               'component_ids': sorted(f['id'] for f in fresh_components),
-               'residue_ids': sorted(f['id'] for f in residues),
+               'fragment_roster': {'count': len(fragments), 'sorted_ids_sha256': digest(canonical_json(sorted(f['id'] for f in fragments)))},
+               'component_roster': {'count': len(fresh_components), 'sorted_ids_sha256': digest(canonical_json(sorted(f['id'] for f in fresh_components)))},
+               'residue_roster': {'count': len(residues), 'sorted_ids_sha256': digest(canonical_json(sorted(f['id'] for f in residues)))},
                'mapping_rule': 'Every declared original ID maps to the identical selected ID; exact full record equality verified.',
                'removed': [], 'new': [], 'split': [], 'merged': [], 'unknown_lineage': []}
     products.append(emit('identity-lineage.json.gz', lineage, True))
