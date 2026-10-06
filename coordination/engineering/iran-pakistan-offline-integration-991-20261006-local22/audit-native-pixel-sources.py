@@ -23,10 +23,11 @@ head = config['commit']
 pins = {}
 
 
-def read(name, pin=None):
+def read(name, pin=None, commit=head):
     assert not pathlib.PurePosixPath(name).is_absolute() and '..' not in pathlib.PurePosixPath(name).parts
-    spec = head + ':' + name
-    tree = subprocess.check_output(['git', '-C', str(ROOT), 'ls-tree', '-z', head, '--', name]).decode()
+    assert len(commit) == 40 and all(c in '0123456789abcdef' for c in commit)
+    spec = commit + ':' + name
+    tree = subprocess.check_output(['git', '-C', str(ROOT), 'ls-tree', '-z', commit, '--', name]).decode()
     assert tree.startswith('100644 blob ') and tree.split('\t', 1)[1] == name + '\0'
     size = int(subprocess.check_output(['git', '-C', str(ROOT), 'cat-file', '-s', spec]))
     assert size <= MAX
@@ -35,7 +36,7 @@ def read(name, pin=None):
     assert len(raw) == size
     if pin:
         assert digest == pin['sha256'] and size == pin['bytes']
-    pins[spec] = {'commit': head, 'path': name, 'bytes': size, 'sha256': digest}
+    pins[spec] = {'commit': commit, 'path': name, 'bytes': size, 'sha256': digest}
     assert sum(p['bytes'] for p in pins.values()) + 131072 <= 256 * 1024 * 1024
     assert len(pins) + 16 <= 512
     return raw
@@ -59,7 +60,7 @@ before = json.loads(read(config['before']))
 after = json.loads(read(config['after']))
 assert isinstance(before['parts'], list) and isinstance(after['parts'], list)
 assert len(before['parts']) <= 128 and len(after['parts']) <= 128
-old = json.loads(read(config['old_pixel']))
+old = json.loads(read(config['old_pixel'], commit=config['old_pixel_commit']))
 assert old['footprints_sha256'] == before['footprints_sha256']
 assert before['owner_sha256'] == after['owner_sha256']
 assert len(before['parts']) == len(after['parts'])

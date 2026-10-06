@@ -40,14 +40,14 @@ function read(name,pin,commit=head){
 const sources=[prefix+'/audit-native-pixels.mjs',prefix+'/audit-native-pixel-sources.py','src/ownership-codec.js','scripts/native-ownership/native-preparation-guards.mjs','scripts/ellipsoidal_area.py','requirements.txt','package.json','package-lock.json'];
 const producer=committedPreparationFiles(root,head,sources);
 for(const pin of producer)read(pin.path,pin);
-const manifestPath=options['--manifest']??prefix+'/native-selected-v1/manifest.json';
+const manifestPath=options['--manifest']??'data/native-ownership/repaired-v7/manifest.json';
 const manifestRaw=read(manifestPath),manifest=JSON.parse(manifestRaw);
 if(manifest.version!==2||manifest.method!=='native-linear-evenodd-first-owner-v1'||manifest.size!==262166||manifest.coordinateBits!==19||manifest.accounting.owners!==49625)throw Error('Unsupported selected native manifest');
 const beforePath=options['--before-context']??'coordination/engineering/native-grid-integration-1010-20261005-local17/context-inputs-v1/inputs.json';
 const afterPath=options['--after-context']??prefix+'/repaired-context-v2/inputs.json';
-const oldPixelPath='data/pixel-audit.json',oldPixel=JSON.parse(read(oldPixelPath));
+const oldPixelPath='data/pixel-audit.json',oldPixelCommit='d0cc67eac85038159f88a673acbc39b77ab7461d',oldPixel=JSON.parse(read(oldPixelPath,undefined,oldPixelCommit));
 const sourceRaw=execFileSync(options['--python']??'python3',['-I','-B',path.join(root,prefix,'audit-native-pixel-sources.py')],{
-  input:JSON.stringify({root,commit:head,helper:prefix+'/audit-native-pixel-sources.py',before:beforePath,after:afterPath,old_pixel:oldPixelPath,
+  input:JSON.stringify({root,commit:head,helper:prefix+'/audit-native-pixel-sources.py',before:beforePath,after:afterPath,old_pixel:oldPixelPath,old_pixel_commit:oldPixelCommit,
     targets:['gb:IRN:ADM2:26516999B17111396986996','gb:PAK:ADM2:60131773B78019453337506']}),maxBuffer:MAX});
 const source=JSON.parse(sourceRaw);
 for(const pin of source.inputs){const key=pin.commit+':'+pin.path;if(inputs.has(key)&&JSON.stringify(inputs.get(key))!==JSON.stringify(pin))throw Error('Helper input pin differs');if(!inputs.has(key))admission.add(pin);inputs.set(key,pin);}budget();
@@ -61,7 +61,7 @@ const latitudePin=manifest.native_latitudes,latitudeRaw=gunzipSync(read(latitude
 if(latitudeRaw.length!==latitudePin.decoded_bytes||latitudeRaw.length!==manifest.size*8||sha(latitudeRaw)!==latitudePin.decoded_sha256)throw Error('Normative latitude bytes differ');
 let previousLatitude=Infinity;
 for(let y=0;y<manifest.size;y++){const latitude=latitudeRaw.readDoubleLE(y*8);if(!Number.isFinite(latitude)||latitude>=previousLatitude||Math.abs(latitude)>90)throw Error('Invalid normative latitude sequence');previousLatitude=latitude;}
-const partsRoot=options['--parts-root']??prefix+'/native-selected-v1';safe(partsRoot);
+const partsRoot=options['--parts-root']??'data/native-ownership/repaired-v7';safe(partsRoot);
 function decode(part){
   if(!['rows','runs'].includes(part.kind)||part.encoding!=='byte-shuffle'||!Number.isInteger(part.words)||part.words<1||part.words>1048576||part.words%2||!Number.isSafeInteger(part.offset)||part.offset<0||part.offset%2)throw Error('Invalid bounded native part');
   const encoded=read(partsRoot+'/'+part.path,part),decoded=gunzipSync(encoded,{maxOutputLength:MAX});
