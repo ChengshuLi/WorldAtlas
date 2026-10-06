@@ -1,0 +1,24 @@
+✔ exact pinned latitude table survives packaging and both compressed and host-decoded transport (111.999833ms)
+✔ rule transport rejects missing paths, mixed release, corruption, truncation, oversized bodies and cancellation (16.265708ms)
+✔ packager rejects altered pinned input metadata without creating output (20.226208ms)
+✔ selected native candidate binds its full-domain, two-run asset proof to immutable reviewed receipt (58.856083ms)
+✔ native materialization rejects another candidate, stale source, partial domain and forged product success (1.163458ms)
+✔ rehashed success summaries cannot conceal missing or altered native asset inventory (0.455834ms)
+✔ startup transport retains native rule and exact GPU words; legacy assets keep their original namespace (148.794833ms)
+✔ current native requirement rejects legacy and unknown or corrupted rules before fetching any ownership data (0.403625ms)
+✔ native packaging rejects a legacy path namespace before creating any destination (17.606125ms)
+✔ startup transport merges original partitions across its four-million-word chunk boundary without changing any run (360.324292ms)
+✔ native transport source pins must agree with the selected reference release before any fetch (0.841583ms)
+✔ native ownership binding retains all original physical bytes, sources, domain and uncertainties (3.477334ms)
+✔ changed coordinate grid, sources, release or original ownership binding prohibit reuse (0.628709ms)
+✔ explicit reviewed candidate preserves metadata and retrieves immutable original bounds (80.410041ms)
+✔ native selection rejects unpinned, altered and wrong-release candidates (4.931542ms)
+✔ legacy recovery selection retains original grid bytes and does not reinterpret old releases as native (5.519792ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 606.842166

@@ -9,6 +9,8 @@ import {decodeDerived} from './derived-records.js';
 import {runtimeOwnershipBucket,runtimeOwnershipData} from './runtime-ownership.js';
 import {loadCoverageClassification} from './coverage-classification.js';
 import {loadOwnershipAssets} from './ownership-assets.js';
+import {loadNativeLatitudes} from './native-latitudes.js';
+import {NATIVE_METHOD} from './ownership-method.js';
 import { validYear } from './model.js';
 import { validateHierarchy } from './hierarchy.js';
 
@@ -198,8 +200,12 @@ export async function loadGeography(initialSelection) {
   if(staticAtlas&&referenceAttributeBundle)loadReferenceGeneration().catch(()=>{});
   // Queue ownership rows before the catalog fan-out so decoding can overlap it.
   // Every required stream still completes before this generation is exposed.
-  const ownershipInput=data.parts&&data.pixelMap?loadOwnershipAssets(data.pixelMap):null;
-  const coverageInput=data.coverageClassification?loadCoverageClassification(data.coverageClassification,{...data.reference_release,release_id:data.reference_release?.id,canonical_grid_sha256:data.pixelMap?.canonical_grid_sha256,size:data.pixelMap?.size,coordinateBits:data.pixelMap?.coordinateBits}).catch(()=>null):null;
+  const nativeSelected=data.pixelMap?.method===NATIVE_METHOD;
+  const nativeOptions=nativeSelected?{requireNative:true,expectedReference:data.reference_release}:{};
+  const ownershipInput=data.parts&&data.pixelMap?loadOwnershipAssets(data.pixelMap,fetch,nativeOptions):null;
+  const latitudeInput=nativeSelected?loadNativeLatitudes(data.pixelMap,data.reference_release):null;
+  const coverageRequest=data.coverageClassification?loadCoverageClassification(data.coverageClassification,{...data.reference_release,release_id:data.reference_release?.id,canonical_grid_sha256:data.pixelMap?.canonical_grid_sha256,size:data.pixelMap?.size,coordinateBits:data.pixelMap?.coordinateBits}):null;
+  const coverageInput=nativeSelected?coverageRequest:coverageRequest?.catch(()=>null);
   // Fetch one pinned initial evidence selection while complete geography loads.
   // It is consumed only for that same year/examples pair, never another visit.
   let speculative;
@@ -214,14 +220,16 @@ export async function loadGeography(initialSelection) {
   const inputs=Promise.all([
    ownershipInput,
    coverageInput,
+   latitudeInput,
    data.temporalHistoryParts?Promise.all(data.temporalHistoryParts.map(p=>readJSON(`./${p}`))).then(parts=>parts.flat()):null,
    data.entityParts?Promise.all(data.entityParts.map(p=>readJSON(`./${p}`))).then(parts=>parts.flat()):null,
    data.parts?Promise.all(data.parts.map(part=>readJSON(`./${part}`))).then(parts=>parts.flat()):null
   ]);
-  let ownership,coverage,history,entities,features;
+  let ownership,coverage,nativeLatitudes,history,entities,features;
   try{
-   [ownership,coverage,history,entities,features]=await inputs;
+   [ownership,coverage,nativeLatitudes,history,entities,features]=await inputs;
    data.coverage=coverage;
+   data.nativeLatitudes=nativeLatitudes;
    if(generation!==geographyGeneration)throw new DOMException('Geography superseded','AbortError');
    if(features){data.features=features;data.ownership=ownership;}
    if(entities)data.temporal.entities=entities;

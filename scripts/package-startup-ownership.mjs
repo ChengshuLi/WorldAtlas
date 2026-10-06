@@ -6,13 +6,18 @@ import {gzipSync} from 'node:zlib';
 import {loadOwnershipAssets} from '../src/ownership-assets.js';
 import {shuffleOwnershipBytes, unshuffleOwnershipBytes} from '../src/ownership-codec.js';
 
+import {ownershipMetadata} from '../src/ownership-method.js';
+
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 const validHash = value => /^[a-f0-9]{64}$/.test(value ?? '');
 const WORDS_PER_PART = 4194304; // At most16MiB of decoded GPU words per new part.
 
 export async function packageStartupOwnership({manifest, source, destination}) {
+  const metadata=ownershipMetadata(manifest);
+  const native=metadata.method==='native-linear-evenodd-first-owner-v1';
+  const assetPattern=native?/^native-v1\/ownership\/(?:rows|runs)-[0-9]+\.bin\.gz$/:/^ownership\/(?:rows|runs)-[0-9]+\.bin\.gz$/;
   if (manifest.version !== 2 || !Array.isArray(manifest.parts) ||
-      manifest.parts.some(part => !/^ownership\/(?:rows|runs)-[0-9]+\.bin\.gz$/.test(part.path) ||
+      manifest.parts.some(part => !assetPattern.test(part.path) ||
         !validHash(part.sha256) || !validHash(part.decoded_sha256)) ||
       new Set(manifest.parts.map(part => part.path)).size !== manifest.parts.length) throw Error('Invalid canonical ownership input');
   const inputs = [], byPath = new Map(manifest.parts.map(part => ['./' + part.path, part]));
@@ -25,7 +30,7 @@ export async function packageStartupOwnership({manifest, source, destination}) {
     return new Response(bytes);
   });
   const parts = manifest.parts.filter(part => part.kind === 'rows'), receipts = [];
-  await fs.mkdir(path.join(destination, 'ownership'), {recursive: true});
+  await fs.mkdir(path.join(destination, native?'native-v1/ownership':'ownership'), {recursive: true});
   for (let offset = 0; offset < original.runs.length; offset += WORDS_PER_PART) {
     const words = original.runs.subarray(offset, Math.min(offset + WORDS_PER_PART, original.runs.length));
     const encoded = shuffleOwnershipBytes(words);
@@ -36,7 +41,7 @@ export async function packageStartupOwnership({manifest, source, destination}) {
     if (!originalBytes.equals(decodedBytes)) throw Error('Ownership transport changed canonical GPU words');
     const bytes = gzipSync(encoded, {level: 9});
     if (bytes.length > 8 * 1024 * 1024) throw Error('Ownership transport exceeds compressed byte limit');
-    const relative = `ownership/startup-runs-${offset}.bin.gz`;
+    const relative = `${native?'native-v1/ownership':'ownership'}/startup-runs-${offset}.bin.gz`;
     await fs.writeFile(path.join(destination, relative), bytes, {flag: 'wx'});
     parts.push({kind: 'runs', path: relative, offset, words: words.length, encoding: 'byte-shuffle',
       sha256: digest(bytes), decoded_sha256: digest(decodedBytes)});
@@ -45,7 +50,7 @@ export async function packageStartupOwnership({manifest, source, destination}) {
       decoded_gpu_word_bytes: decodedBytes.length, decoded_gpu_word_sha256: digest(decodedBytes),
       original_gpu_word_sha256: digest(originalBytes), outcome: 'passed'});
   }
-  const pixelMap = Object.fromEntries(['version', 'coordinateBits', 'size', 'runWords'].map(key => [key, manifest[key]]));
+  const pixelMap = metadata;
   pixelMap.parts = parts;
   return {pixelMap, inputs: inputs.sort((a, b) => a.path.localeCompare(b.path)), outputs: receipts,
     rows_sha256: digest(Buffer.from(original.rows.buffer)), runs_word_stream_sha256: digest(Buffer.from(original.runs.buffer)),

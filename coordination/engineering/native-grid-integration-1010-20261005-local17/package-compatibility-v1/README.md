@@ -1,0 +1,7 @@
+# Shared package source-image compatibility
+
+Executed native code at ec2914b produced a complete explicit native static build through the standard package wrapper. The complete readback again compared all 524332 row words and 57617764 run words, all 49625 original location identities/parents/native footprints and normative latitude bytes, and unchanged physical-class source bytes/uncertainty. Seventeen package/stage/selection/latitude tests and three complete source-image/native GPU/Canvas/year-worker tests passed with zero failures or skips. The source-image fixture disables Git discovery and rejects changed or missing snapshots.
+
+This inventory retains every selected product from the original readback scope. Byte-identical products refer to their unchanged archived files; changed atlas metadata and bundle products have new owned paths. Original build-readback-v1 is not overwritten. The wrapper receipt describes the actual declared physical input image, not an expansion of scientific evidence limits.
+
+A separately attempted generic packaged-UI test expected a hosted dist/client artifact and timed out against this static build; it is not counted as passing. The dedicated isolated native rendering controls passed. Whole hosted UI/content, factual geography/water completeness, broad performance, default installation and delivery remain unapproved. No user browser, live endpoint, publisher request or provider write was used. Fresh independent exact-head review is required.

@@ -22,7 +22,7 @@ export class PixelLayer extends L.Layer {
   constructor(features,options){
     super();this.canvas=L.DomUtil.create('canvas','atlas-pixel-canvas leaflet-layer leaflet-zoom-animated');
     try{this.gpu=new PixelGPU(this.canvas);}catch(error){console.warn('Using Canvas map renderer:',error.message);return new PixelCanvasLayer(features,options);}
-    this.index=createGridIndex(features);this.ids=new Map(this.index.map(i=>[i.feature.id,i.index]));this.options=options;
+    this.index=createGridIndex(features,{ordered:options.orderedOwners===true});this.ids=new Map(this.index.map(i=>[i.feature.id,i.index]));this.options=options;
     this.revisions={locations:0,political:0};this.grids={};this.styleDirty=true;
     this.worker=new Worker(new URL('./pixel-gpu-worker.js',import.meta.url),{type:'module'});
     this.worker.onmessage=({data})=>{

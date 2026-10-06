@@ -1,0 +1,63 @@
+✔ complete native context stage verifies original bytes, compact derivative and both immutable inventories (11641.165208ms)
+✔ mandatory context stage rejects missing, tampered, stale and over-budget inputs (46926.375167ms)
+✔ exact pinned latitude table survives packaging and both compressed and host-decoded transport (345.210125ms)
+✔ rule transport rejects missing paths, mixed release, corruption, truncation, oversized bodies and cancellation (16.680459ms)
+✔ packager rejects altered pinned input metadata without creating output (33.311209ms)
+✔ only declared files enter the source image; unrelated research cannot alter artifact bytes (102.215958ms)
+node:fs:622
+  return binding.open(
+                 ^
+
+Error: ENOENT: no such file or directory, open 'research/paper.json'
+    at Object.openSync (node:fs:622:18)
+    at Object.readFileSync (node:fs:488:35)
+    at file:///private/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/atlas-package-boundary-gMUFRI/.cache/package-input-image-s4aE0a/scripts/build-static-inner.mjs:1:30
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'research/paper.json'
+}
+
+Node.js v24.19.0
+node:internal/modules/esm/resolve:271
+    throw new ERR_MODULE_NOT_FOUND(
+          ^
+
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/private/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/atlas-package-boundary-W6ftK2/.cache/package-input-image-aQZ7Qm/research/secret.mjs' imported from /private/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/atlas-package-boundary-W6ftK2/.cache/package-input-image-aQZ7Qm/scripts/build-static-inner.mjs
+    at finalizeResolution (node:internal/modules/esm/resolve:271:11)
+    at moduleResolve (node:internal/modules/esm/resolve:865:10)
+    at defaultResolve (node:internal/modules/esm/resolve:992:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:701:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:721:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:759:56)
+    at #resolve (node:internal/modules/esm/loader:683:17)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:603:35)
+    at node:internal/modules/esm/loader:632:32
+    at TracingChannel.tracePromise (node:diagnostics_channel:362:14) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///private/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/atlas-package-boundary-W6ftK2/.cache/package-input-image-aQZ7Qm/research/secret.mjs'
+}
+
+Node.js v24.19.0
+✔ undeclared reads and imports fail before replacing caller outputs and clean the image (86.023125ms)
+✔ explicit research promotion makes the same read available (38.635292ms)
+✔ input symlinks, including ancestor aliases, cannot expose undeclared files (5.094ms)
+✔ missing mandatory inputs fail; optional absent inputs are allowed (9.149125ms)
+✔ dependency links must stay within the installed dependency tree (9.464667ms)
+✔ output and cache ancestor links are rejected (3.4665ms)
+✔ private builder requires the actual declared image identity (0.21625ms)
+✔ declaration uses literal paths, precise directory membership and approved outputs (11.078625ms)
+✔ explicit reviewed candidate preserves metadata and retrieves immutable original bounds (329.985959ms)
+✔ native selection rejects unpinned, altered and wrong-release candidates (9.791458ms)
+✔ legacy recovery selection retains original grid bytes and does not reinterpret old releases as native (26.421917ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 58783.159084
