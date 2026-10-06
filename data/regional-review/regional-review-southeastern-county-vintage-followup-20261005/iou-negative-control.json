@@ -1,0 +1,19 @@
+{
+  "kind": "negative-control",
+  "method_id": "iou-5070-reproduction",
+  "observed": {
+    "authority_axis_coordinate_m": [
+      16396500.12766753,
+      5830417.764602467
+    ],
+    "correct_iou": 0.3333333333324796,
+    "known_always_xy_coordinate_m": [
+      577912.4519685141,
+      787624.2805250759
+    ],
+    "swapped_axis_rejected": true,
+    "wrong_formula_rejected": true,
+    "wrong_intersection_over_source_area": 0.49999999999819555
+  },
+  "outcome": "passed"
+}
