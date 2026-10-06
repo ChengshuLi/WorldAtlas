@@ -1,0 +1,426 @@
+{
+  "version": 1,
+  "issue": 1108,
+  "lane": "geography",
+  "worker_id": "01a11013-8ab3-7691-9548-082b89a5a25a",
+  "subject_ids": [
+    "atlas:local:IND:7132399B1507487316620",
+    "atlas:local:IND:7132399B19493089186258",
+    "atlas:local:IND:7132399B23352295489123",
+    "atlas:local:IND:7132399B25679382819073",
+    "atlas:local:IND:7132399B27106528401514",
+    "atlas:local:IND:7132399B38242062299143",
+    "atlas:local:IND:7132399B49490689811564",
+    "atlas:local:IND:7132399B516102083904",
+    "atlas:local:IND:7132399B78390472834442",
+    "atlas:local:IND:7132399B91194549462935",
+    "gb:IND:ADM2:76128533B7291413308870",
+    "gb:PAK:ADM2:60131773B1682888309057",
+    "gb:PAK:ADM2:60131773B44072502651200",
+    "gb:PAK:ADM2:60131773B44161758981040",
+    "gb:PAK:ADM2:60131773B62209958986210",
+    "gb:PAK:ADM2:60131773B87869837926518"
+  ],
+  "subject_ids_sha256": "ba16e82eef4bf35c153533bd2a6b142f9054d5fb6682e677edceb822aa2da2c3",
+  "baseline": {
+    "commit": "27be77596f23304de6a720735538427e6d23e242",
+    "files": [
+      {
+        "path": "data/geography/part-11.json",
+        "bytes": 5131824,
+        "sha256": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f",
+        "hash_kind": "file-bytes",
+        "role": "scope-reference"
+      },
+      {
+        "path": "data/geography/part-17.json",
+        "bytes": 4945828,
+        "sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db",
+        "hash_kind": "file-bytes",
+        "role": "scope-reference"
+      },
+      {
+        "path": "data/geography/part-30.json",
+        "bytes": 11979437,
+        "sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a",
+        "hash_kind": "file-bytes",
+        "role": "scope-reference"
+      },
+      {
+        "path": "data/geography/part-31.json",
+        "bytes": 10086485,
+        "sha256": "44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e",
+        "hash_kind": "file-bytes",
+        "role": "scope-reference"
+      },
+      {
+        "path": "data/geography/part-32.json",
+        "bytes": 10211739,
+        "sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64",
+        "hash_kind": "file-bytes",
+        "role": "scope-reference"
+      },
+      {
+        "path": "research/geography/shared-seam-ind-pak-20261006/sources/physical-gap-fragments/1274-1.geojson",
+        "bytes": 14845,
+        "sha256": "370a3a380760f6dd02c5c588e69385d65b3afd4cd9703cbc578596989302a730",
+        "hash_kind": "file-bytes",
+        "role": "scope-reference"
+      },
+      {
+        "path": "research/geography/shared-seam-ind-pak-20261006/sources/physical-gap-fragments/1346-2.geojson",
+        "bytes": 6824,
+        "sha256": "d16ac5ffccab3c818261a7835797831b87a1fba5115332a651eda7eb9c54c273",
+        "hash_kind": "file-bytes",
+        "role": "scope-reference"
+      }
+    ],
+    "pins": {
+      "physical_gap_fragment_1274": "370a3a380760f6dd02c5c588e69385d65b3afd4cd9703cbc578596989302a730",
+      "physical_gap_fragment_1346": "d16ac5ffccab3c818261a7835797831b87a1fba5115332a651eda7eb9c54c273"
+    },
+    "pin_files": {
+      "physical_gap_fragment_1274": "research/geography/shared-seam-ind-pak-20261006/sources/physical-gap-fragments/1274-1.geojson",
+      "physical_gap_fragment_1346": "research/geography/shared-seam-ind-pak-20261006/sources/physical-gap-fragments/1346-2.geojson"
+    },
+    "subject_files": {
+      "atlas:local:IND:7132399B1507487316620": "data/geography/part-30.json",
+      "atlas:local:IND:7132399B19493089186258": "data/geography/part-30.json",
+      "atlas:local:IND:7132399B23352295489123": "data/geography/part-30.json",
+      "atlas:local:IND:7132399B25679382819073": "data/geography/part-30.json",
+      "atlas:local:IND:7132399B27106528401514": "data/geography/part-30.json",
+      "atlas:local:IND:7132399B38242062299143": "data/geography/part-31.json",
+      "atlas:local:IND:7132399B49490689811564": "data/geography/part-31.json",
+      "atlas:local:IND:7132399B516102083904": "data/geography/part-31.json",
+      "atlas:local:IND:7132399B78390472834442": "data/geography/part-32.json",
+      "atlas:local:IND:7132399B91194549462935": "data/geography/part-32.json",
+      "gb:IND:ADM2:76128533B7291413308870": "data/geography/part-11.json",
+      "gb:PAK:ADM2:60131773B1682888309057": "data/geography/part-17.json",
+      "gb:PAK:ADM2:60131773B44072502651200": "data/geography/part-17.json",
+      "gb:PAK:ADM2:60131773B44161758981040": "data/geography/part-17.json",
+      "gb:PAK:ADM2:60131773B62209958986210": "data/geography/part-17.json",
+      "gb:PAK:ADM2:60131773B87869837926518": "data/geography/part-17.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "soi-abdb-product",
+      "url": "https://surveyofindia.gov.in/pages/administrative-boundary-data-base-abdb-",
+      "role": "Official SoI ABDB product catalogue and download locator",
+      "vintage": "2025 district/subdistrict product listing viewed 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Public free/no-login access is documented, but product-specific public-repository redistribution permission for complete raw files is not explicit."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Open the official ABDB product page and follow the State/District/Sub District Boundary Data-Base and Meta Data links.",
+      "limit": "Listing/access verified; no complete RAR transfer, member list, or geometry was verified.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "soi-abdb-rar",
+      "url": "https://surveyofindia.gov.in/documents/State_District_Subdistrict_PAN%20INDIA.rar",
+      "role": "Official Pan-India district/subdistrict vector archive restoration reference",
+      "vintage": "Advertised as 2025 ABDB; server header observed 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "No product-specific redistribution permission established; metadata marks access/use constraints copyright and references Geospatial Guidelines 2021."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Use the direct SoI ABDB RAR URL; observed response advertised HTTP 200, byte ranges and 202524438 encoded bytes. No complete download is present.",
+      "limit": "Two incomplete transfers; final stopped partial was removed after its 57877142-byte size and SHA-256 were recorded. Header length is not a whole archive hash or verified content.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "soi-abdb-metadata",
+      "url": "https://surveyofindia.gov.in/documents/Metadata_ABDB.zip",
+      "role": "Official ABDB district/subdistrict metadata; local original archive excluded from PR",
+      "vintage": "2025 metadata package; workbook metadata date 2026-05-06",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Locally inspected fields mark access/use constraints copyright; redistribution of the ZIP is not asserted."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Download Metadata_ABDB.zip from the official ABDB page. Local audit recorded 38879 encoded bytes, SHA-256 1a14716b73f00fc8391f2708a7975c2f2c1ad4a4e91aafb6dce6546a039e9514, and its complete nested member inventory; original archive is not in this PR.",
+      "limit": "Author-local byte verification only; reviewers cannot independently rehash the excluded ZIP.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "soi-online-maps-faq",
+      "url": "https://onlinemaps.surveyofindia.gov.in/FAQs.aspx",
+      "role": "Official SoI FAQ on ABDB access",
+      "vintage": "Current FAQ viewed 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Cited as policy evidence; no copy of page bytes is retained."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Open the official Online Maps FAQ questions 6 and 7.",
+      "limit": "Establishes access statements only; not product-specific redistribution permission.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "soi-geospatial-guidelines",
+      "url": "https://onlinemaps.surveyofindia.gov.in/GeospatialGuidelines.aspx",
+      "role": "Government of India geospatial guideline text hosted by SoI",
+      "vintage": "Guidelines dated 2021, viewed 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Cited as a policy reference; no page copy is retained."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Open the official Guidelines page and inspect clauses 8(ii), 8(ix-xiii).",
+      "limit": "Broad dissemination rules do not resolve their exact interaction with ABDB metadata restrictions for full-source public rehosting.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "soi-copyright-policy",
+      "url": "https://surveyofindia.gov.in/pages/copyright-policy",
+      "role": "Current SoI website copyright policy",
+      "vintage": "Policy viewed 2026-10-06; page reports update 2026-06-09",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Cited as a policy reference; no page copy is retained."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Open the official SoI Copyright Policy page.",
+      "limit": "Policy speaks to website-material reproduction; scope against product data and the Geospatial Guidelines is unresolved here.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "soi-online-maps-checkout",
+      "url": "https://onlinemaps.surveyofindia.gov.in/addtocart.aspx",
+      "role": "Online Maps checkout terms page",
+      "vintage": "Terms viewed 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Cited as a policy reference; no page copy is retained."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Open the official Online Maps checkout terms page and inspect its data-sharing condition.",
+      "limit": "Foreign-sharing restriction is presented in account checkout; applicability to no-login Quick Access ABDB is unclear.",
+      "temporal_status": "unknown"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/README.md",
+      "bytes": 5924,
+      "sha256": "28ad9255255b5f632098747a0dc0fab71acd272b62f00c4ac179d482c394c10b",
+      "hash_kind": "file-bytes",
+      "role": "source-evidence"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/controls/source-negative-control.json",
+      "bytes": 336,
+      "sha256": "329883af1358da897271563e3dd0682efdb2f1114fd329b202e5d1924bd25e0c",
+      "hash_kind": "file-bytes",
+      "role": "source-evidence"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/controls/source-positive-control.json",
+      "bytes": 480,
+      "sha256": "1799837ebadf655474b97739ba5e8118c34f699ccd99a7aa57281a965a28a90f",
+      "hash_kind": "file-bytes",
+      "role": "source-evidence"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/runs/metadata-audit-run-1-superseded-parser-bug.json",
+      "bytes": 13385,
+      "sha256": "8617afb5861d0b18940d7580d363e883d72f64fa554f449acb93811ed806678a",
+      "hash_kind": "file-bytes",
+      "role": "source-evidence"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/runs/metadata-audit-run-1.json",
+      "bytes": 13385,
+      "sha256": "47cbf9f5a77c82100604642e39533c0724c1d997dd799192ea5a8f286fcf1bd9",
+      "hash_kind": "file-bytes",
+      "role": "source-evidence"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/runs/metadata-audit-run-2-superseded-parser-bug.json",
+      "bytes": 13385,
+      "sha256": "8617afb5861d0b18940d7580d363e883d72f64fa554f449acb93811ed806678a",
+      "hash_kind": "file-bytes",
+      "role": "source-evidence"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/runs/metadata-audit-run-2.json",
+      "bytes": 13385,
+      "sha256": "47cbf9f5a77c82100604642e39533c0724c1d997dd799192ea5a8f286fcf1bd9",
+      "hash_kind": "file-bytes",
+      "role": "source-evidence"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/runs/two-run-reproducibility.json",
+      "bytes": 675,
+      "sha256": "35e650df380bfe2e30fd192e72a18d1de8c0b7fdc576ad797abbbf0554ecca0f",
+      "hash_kind": "file-bytes",
+      "role": "source-evidence"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/source-assessment.json",
+      "bytes": 7966,
+      "sha256": "0d6e80f177aa8eb7be4e5226f726756c9c27f371332a7b9fbb13a48a09684cb8",
+      "hash_kind": "file-bytes",
+      "role": "source-evidence"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/tools/inspect_metadata.py",
+      "bytes": 9921,
+      "sha256": "599892f624683674839dcb7f024e0652376cebbedbe74bbe9db06fba9270ff4d",
+      "hash_kind": "file-bytes",
+      "role": "source-evidence"
+    }
+  ],
+  "methods": [
+    {
+      "id": "soi-metadata-audit",
+      "kind": "source",
+      "description": "Validate author-local ABDB metadata bytes, ZIP/member inventory and district/subdistrict product identifiers; record bounded metadata facts without inferring redistribution permission.",
+      "software": "Python 3.12.14 standard library; committed inspect_metadata.py; execution commit 736c97d1ad033507c2d116ee260391d8216eb0e0",
+      "units": "encoded and decoded bytes, archive members, metadata identifiers; no geographic measurements"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "SoI publicly lists a nationwide ABDB district/subdistrict product; its FAQ says ABDB access is free and Quick Access needs no login.",
+      "status": "supported",
+      "source_ids": [
+        "soi-abdb-product",
+        "soi-online-maps-faq"
+      ]
+    },
+    {
+      "text": "The author-local official metadata package identifies 2025 district and subdistrict products with 2022\u20132025 creation extent, 1:50,000 scale, stated 12.5 m plotting accuracy/RMSE, and copyright access/use constraints.",
+      "status": "supported",
+      "source_ids": [
+        "soi-abdb-metadata"
+      ]
+    },
+    {
+      "text": "Permission to redistribute the complete ABDB RAR and metadata archive in this public repository is unresolved because official access, geospatial-guideline and copyright statements have not been reconciled for these exact files.",
+      "status": "unresolved",
+      "source_ids": [
+        "soi-abdb-product",
+        "soi-abdb-rar",
+        "soi-abdb-metadata",
+        "soi-online-maps-faq",
+        "soi-geospatial-guidelines",
+        "soi-copyright-policy",
+        "soi-online-maps-checkout"
+      ]
+    },
+    {
+      "text": "Feature-level SoI names/IDs and geometry membership for the 16 seam subjects remain unresolved because the complete RAR was not acquired or inspected.",
+      "status": "unresolved",
+      "source_ids": [
+        "soi-abdb-product",
+        "soi-abdb-rar",
+        "soi-abdb-metadata"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "validation": [
+    {
+      "method_id": "soi-metadata-audit",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/controls/source-positive-control.json"
+    },
+    {
+      "method_id": "soi-metadata-audit",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/controls/source-negative-control.json"
+    },
+    {
+      "method_id": "soi-metadata-audit",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/runs/two-run-reproducibility.json"
+    }
+  ],
+  "commands": [
+    "python3 -B research/geography/shared-seam-ind-pak-soi-abdb-2026/tools/inspect_metadata.py research/geography/shared-seam-ind-pak-soi-abdb-2026/sources/official/Metadata_ABDB_2026-10-06.zip --repo ."
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/README.md",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/controls/source-negative-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/controls/source-positive-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/runs/metadata-audit-run-1-superseded-parser-bug.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/runs/metadata-audit-run-1.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/runs/metadata-audit-run-2-superseded-parser-bug.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/runs/metadata-audit-run-2.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/runs/two-run-reproducibility.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/source-assessment.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/tools/inspect_metadata.py",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/evidence-quality.json",
+      "status": "added",
+      "previous_path": null
+    }
+  ]
+}
