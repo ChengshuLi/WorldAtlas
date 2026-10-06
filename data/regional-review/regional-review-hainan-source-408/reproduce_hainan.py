@@ -89,12 +89,20 @@ for fid in IDS:
     atlas_feature=atlas_by[fid]; atlas_props=atlas_feature.get('properties',{})
     csv_rows.append({'location_id':fid,'source_name_2017':props['shapeName'],'source_role_claim':'ADM2; County Level (Atlas source metadata)','current_official_identity':name,'current_official_role':role,'current_official_government_parent':parent,'current_model_parent':atlas_props.get('parent_id',''),'assessment':status,'identity_tier_parent_finding':finding,'boundary_finding':'No current official GIS boundary bytes retrieved; pinned 2017 candidate only. Current line, island/fragment, coastal completeness and legal fit remain unresolved.','neighboring_granularity':'','source_geometry_type':geom['type'],'polygon_components':len(polys),'exterior_vertices':vertices,'interior_rings':interior,'source_vintage':'2017 reference (source metadata)','license_reuse':'Unknown upstream provenance/reuse terms; embedded repository source metadata claims ODbL/PDDL; no new source copy redistributed.','source_byte_sha256':EXPECTED_INPUT,'identity_evidence_source_ids':'hainan-yearbook-2024;geoboundaries-2017','boundary_source_status':'No current official GIS bytes retrieved; exact 2017 candidate geometry only'})
 pairs=exact_shared_edges(records)
+current_by_source={row['source_name_2017']:row for row in csv_rows}
 name_by={r['location_id']:r['source_name_2017'] for r in csv_rows}
 for (left,right),count in sorted(pairs.items()):
     for row in csv_rows:
         if row['location_id'] in (left,right):
             neighbor=name_by[right if row['location_id']==left else left]
-            row['neighboring_granularity']+=('; ' if row['neighboring_granularity'] else '')+neighbor+f' ({count} exact source edge segments; vintage clue only)'
+            counterpart=current_by_source.get(neighbor)
+            if counterpart:
+                tier=f"current counterpart: {counterpart['current_official_identity']} — {counterpart['current_official_role']} (2023 roster)"
+                if counterpart['current_official_identity'].startswith('Qiongshan District'):
+                    tier += '; historic Qiongshan source footprint is not the present district footprint'
+            else:
+                tier='current tier unresolved; no same-scope roster crosswalk'
+            row['neighboring_granularity']+=('; ' if row['neighboring_granularity'] else '')+neighbor+f' ({count} exact source edge segments; vintage clue only; {tier})'
 for row in csv_rows:
     if not row['neighboring_granularity']: row['neighboring_granularity']='No exact full-edge contact detected among the 18 frozen features; absence is not evidence of no current neighbor.'
 columns=list(csv_rows[0])
