@@ -1,4 +1,4 @@
-import json
+import argparse, hashlib, json, subprocess
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[3]
 B=ROOT/"coordination/engineering"
@@ -30,6 +30,8 @@ def verify(shared_way_ids=WAYS, parent_mutation=None):
    if not any(m.get("type")=="way" and m.get("ref")==wid and m.get("role")=="outer" for m in members):
     raise ValueError(f"national parent relation {rid} missing shared outer way {wid}")
  return [{"way_id":wid,"nodes":len(a[("way",wid)]["nodes"]),"same_way_object":True,"same_node_sequence_and_coordinates":True,"outer_in_both_counties":True,"outer_in_both_national_relations":True} for wid in shared_way_ids]
+parser=argparse.ArgumentParser(); parser.add_argument("--out",required=True,help="fresh output file; refuses existing path")
+args=parser.parse_args()
 positive=verify()
 missing_way_rejected=False
 try: verify([239441239,239453665,999])
@@ -38,7 +40,8 @@ wrong_parent_rejected=False
 try: verify(parent_mutation=(239441239,304938))
 except ValueError: wrong_parent_rejected=True
 if not missing_way_rejected or not wrong_parent_rejected: raise SystemExit("negative source controls did not reject altered inputs")
-out={"method_id":"osm-shared-edge-source-membership","kind":"source","outcome":"passed","positive":positive,"negative":[{"rejected":missing_way_rejected,"case":"one expected shared way removed from the comparison scope"},{"rejected":wrong_parent_rejected,"case":"national parent relation 304938 omits the exact outer way"}],"limit":"Identical OSM IDs, member order, node coordinates and administrative relation membership establish shared topology in these retrieved OSM records only; they do not establish legal sovereignty, official source authority, boundary observation date, or water."}
-target=ROOT/"research/geography/shared-seam-irn-pak-source-assessment-20261006/shared-edge-controls.json"
-target.write_text(json.dumps(out,sort_keys=True,separators=(",",":"))+"\n")
-print(json.dumps(out,indent=2))
+input_paths=[IRN,PAK,PARENT/"osm-way-239441239-relations.json",PARENT/"osm-way-239453665-relations.json"]
+out={"producer_commit":subprocess.check_output(["git","-C",str(ROOT),"rev-parse","HEAD"],text=True).strip(),"inputs":[{"path":str(p.relative_to(ROOT)),"bytes":p.stat().st_size,"sha256":hashlib.sha256(p.read_bytes()).hexdigest()} for p in input_paths],"method_id":"osm-shared-edge-source-membership","kind":"source","outcome":"passed","positive":positive,"negative":[{"rejected":missing_way_rejected,"case":"one expected shared way removed from the comparison scope"},{"rejected":wrong_parent_rejected,"case":"national parent relation 304938 omits the exact outer way"}],"limit":"Identical OSM IDs, member order, node coordinates and administrative relation membership establish shared topology in these retrieved OSM records only; they do not establish legal sovereignty, official source authority, boundary observation date, or water."}
+target=Path(args.out)
+with target.open("x",encoding="utf-8") as f: f.write(json.dumps(out,sort_keys=True,separators=(",",":"))+"\n")
+print(json.dumps({"output":str(target),**out},indent=2))

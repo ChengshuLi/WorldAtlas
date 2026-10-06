@@ -1,7 +1,10 @@
 {
   "version": 1,
   "issue": 1115,
-  "parent_issues": [991, 971],
+  "parent_issues": [
+    991,
+    971
+  ],
   "subjects": [
     {
       "atlas_id": "gb:IRN:ADM2:26516999B17111396986996",
@@ -27,10 +30,10 @@
       ],
       "geometry_comparison": {
         "geoBoundaries_vintage": 2017,
-        "intersection_over_union_approx": 0.6030,
-        "geo_covered_by_osm_approx": 0.6815,
-        "osm_covered_by_geo_approx": 0.8396,
-        "scope": "complete county feature, EPSG:6933 after vertex transform"
+        "intersection_over_union_approx": 0.602997293451444,
+        "geo_covered_by_osm_approx": 0.6814807804175339,
+        "osm_covered_by_geo_approx": 0.8396380196104828,
+        "scope": "complete county feature, EPSG:6933 planar equal-area overlay after transforming source vertices; no densification"
       }
     },
     {
@@ -42,8 +45,16 @@
         "osm_name": "Panjgur District",
         "osm_admin_level": "6",
         "osm_native_parent_chain": [
-          {"relation_id": 16347101, "wikidata": "Q3308229", "name": "Makran Division"},
-          {"relation_id": 357968, "wikidata": "Q163239", "name": "Balochistan"}
+          {
+            "relation_id": 16347101,
+            "wikidata": "Q3308229",
+            "name": "Makran Division"
+          },
+          {
+            "relation_id": 357968,
+            "wikidata": "Q163239",
+            "name": "Balochistan"
+          }
         ],
         "atlas_parent_id": "framework:province:balochistan:c6b6e17e4739",
         "atlas_parent_name": "Balochistan",
@@ -55,21 +66,30 @@
         "The association is an authored cross-provider mapping supported by several independent attributes, not a provider-issued identifier crosswalk."
       ],
       "geometry_comparison": {
-        "geoboundaries_vintage": 2019,
-        "intersection_over_union_approx": 0.8518,
-        "geo_covered_by_osm_approx": 0.9088,
-        "osm_covered_by_geo_approx": 0.9314,
-        "scope": "complete county feature, EPSG:6933 after vertex transform"
+        "geoBoundaries_vintage": 2019,
+        "intersection_over_union_approx": 0.8517888797887251,
+        "geo_covered_by_osm_approx": 0.908809654658024,
+        "osm_covered_by_geo_approx": 0.9313940656838654,
+        "scope": "complete county feature, EPSG:6933 planar equal-area overlay after transforming source vertices; no densification"
       }
     }
   ],
   "source_facts": {
-    "geoboundaries_country_feature_counts": {"IRN": 432, "PAK": 126},
+    "geoboundaries_country_feature_counts": {
+      "IRN": 432,
+      "PAK": 126
+    },
     "exact_name_occurrences_in_each_complete_geoboundaries_source": 1,
     "geoBoundaries_release_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
     "shared_osm_ways_in_component": [
-      {"id": 239441239, "nodes": 940},
-      {"id": 239453665, "nodes": 641}
+      {
+        "id": 239441239,
+        "nodes": 940
+      },
+      {
+        "id": 239453665,
+        "nodes": 641
+      }
     ],
     "shared_way_identity_and_parent_membership_control": "passed",
     "official_reference_access": "unavailable; retained State Department LSIB WFS response states Service WFS is disabled"
@@ -98,5 +118,20 @@
       "Physical water, dry land, national sovereignty, or raster approval.",
       "Positional accuracy or map scale."
     ]
+  },
+  "measurement_producer_commit": "2ed630f9aef42b54a75f12fdae1f0c8caad9b1e3",
+  "measurement_results_path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/results-2ed630f9/whole-geometry.json",
+  "measurement_controls": {
+    "analytic_equal_latitude_rectangle_iou": 0.33333333333333326,
+    "expected": 0.3333333333333333,
+    "axis_reference_point_lonlat": [
+      10,
+      45
+    ],
+    "epsg6933_xy": [
+      964862.802508965,
+      5180102.328839251
+    ],
+    "self_intersecting_geometry_rejected": true
   }
 }

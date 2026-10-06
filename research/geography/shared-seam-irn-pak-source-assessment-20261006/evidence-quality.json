@@ -158,8 +158,8 @@
   "outputs": [
     {
       "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/compare_sources.py",
-      "bytes": 8539,
-      "sha256": "e7193fd3c66f817b60b3cf60339455ebe16a1970376d9c1ebe2c61e0ca563dde",
+      "bytes": 10397,
+      "sha256": "dc2c8be8f228d3fcde49d864bfb61addf69f48a7748c165ab5d775d4f6cec233",
       "hash_kind": "file-bytes"
     },
     {
@@ -170,8 +170,8 @@
     },
     {
       "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/shared_edge_controls.py",
-      "bytes": 3203,
-      "sha256": "b22988a4c7ffa7998112f495237241bc946d965793c2f86ec9b850d6dc5a24e3",
+      "bytes": 3712,
+      "sha256": "0e7794d8755d9bf5de8c0f694cc4d83712d648fe8e5cc8c012ef721705530ed6",
       "hash_kind": "file-bytes"
     },
     {
@@ -182,14 +182,14 @@
     },
     {
       "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/README.md",
-      "bytes": 11596,
-      "sha256": "724da11d42476b9f2e8470f305d57dcca17081680e35b32b1452d0e18f829d38",
+      "bytes": 11899,
+      "sha256": "5a36036487b81e3f35965c32444cc8bed667906e0dbc513291abfab99f46c82f",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/source-claims.json",
-      "bytes": 4992,
-      "sha256": "114a2e57bb124af32b989dffce64315924d46889696684451433791938ab6d43",
+      "bytes": 5883,
+      "sha256": "dfdf59cbf74819c3f1b97b5b942741dcb44b80b1685b3ecefe88c7ecf79dade9",
       "hash_kind": "file-bytes"
     },
     {
@@ -202,6 +202,30 @@
       "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/whole-geometry-negative-control.json",
       "bytes": 210,
       "sha256": "7b14bf6dce397d5f01c776b6e4c111ce8fb7d978b39a43e9927c378e89229ba5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/results-2ed630f9/whole-geometry.json",
+      "bytes": 7239,
+      "sha256": "321bc4612c5ecd677f516ba7471201134bd6604cfaeecc7f422695d919b8d356",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/results-2ed630f9/whole-geometry.positive.json",
+      "bytes": 714,
+      "sha256": "cad499ac1ac647b5018fd07c4c330e282ba9042d927643d26296ea9ca016e8eb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/results-2ed630f9/whole-geometry.negative.json",
+      "bytes": 210,
+      "sha256": "7b14bf6dce397d5f01c776b6e4c111ce8fb7d978b39a43e9927c378e89229ba5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/results-2ed630f9/shared-edge-controls.json",
+      "bytes": 1843,
+      "sha256": "a50ea18177b8bf9d62412d57cb9344dc23ff1c93335b3be3b3a4c7c273fcd1ad",
       "hash_kind": "file-bytes"
     }
   ],
@@ -217,7 +241,7 @@
       "id": "whole-subject-overlay",
       "kind": "measurement",
       "description": "Transform source vertices from longitude/latitude WGS84 to EPSG:6933 with pyproj always_xy; compute planar polygon areas, intersection, union and IoU without densification. This is a whole-footprint discrepancy diagnostic, not a seam or accuracy method.",
-      "software": "Python 3.12.14; Shapely 2.1.2; pyproj 3.7.2",
+      "software": "Python 3.12.14; Shapely 2.1.2; pyproj 3.7.2; producer commit 2ed630f9aef42b54a75f12fdae1f0c8caad9b1e3",
       "units": "square metres and dimensionless fractions",
       "axis_order": "longitude-latitude",
       "crs": "EPSG:4326 to EPSG:6933",
@@ -228,7 +252,7 @@
       "id": "osm-shared-edge-source-membership",
       "kind": "source",
       "description": "Compare exact OSM way objects, node sequences/coordinates, and membership in both county and national relations; exercise positive and negative controls.",
-      "software": "Python 3.12.14",
+      "software": "Python 3.12.14; producer commit 2ed630f9aef42b54a75f12fdae1f0c8caad9b1e3",
       "units": "OSM ways, nodes and relation memberships"
     }
   ],
@@ -237,9 +261,9 @@
       "id": "saravan-whole-feature-iou",
       "value": 0.602997293451444,
       "unit": "fraction",
-      "vintage": "baseline",
+      "vintage": "archived",
       "input_sha256": "6f95cb3e108907663846f1e7479d07714fe95b5c3e0adf44ad94d27b8b42ff7a",
-      "evaluation_commit": "390281b6d80657a5f17de3c5b217faf572e355ca",
+      "evaluation_commit": "2ed630f9aef42b54a75f12fdae1f0c8caad9b1e3",
       "numerator": 8814832867.683807,
       "denominator": 14618362243.766216
     },
@@ -247,9 +271,9 @@
       "id": "panjgur-whole-feature-iou",
       "value": 0.8517888797887251,
       "unit": "fraction",
-      "vintage": "baseline",
-      "input_sha256": "6f95cb3e108907663846f1e7479d07714fe95b5c3e0adf44ad94d27b8b42ff7a",
-      "evaluation_commit": "390281b6d80657a5f17de3c5b217faf572e355ca",
+      "vintage": "archived",
+      "input_sha256": "108eeaa75a6de678f022e0b6d8fd8ab4c93e4b4d1a9c6a28995afe7c0731182c",
+      "evaluation_commit": "2ed630f9aef42b54a75f12fdae1f0c8caad9b1e3",
       "numerator": 16682710943.463781,
       "denominator": 19585499810.23667
     }
@@ -290,8 +314,8 @@
     "geographic_approval": "unapproved"
   },
   "commands": [
-    "python research/geography/shared-seam-irn-pak-source-assessment-20261006/compare_sources.py",
-    "python research/geography/shared-seam-irn-pak-source-assessment-20261006/shared_edge_controls.py",
+    "python research/geography/shared-seam-irn-pak-source-assessment-20261006/compare_sources.py --out research/geography/shared-seam-irn-pak-source-assessment-20261006/results-<fresh-run>/whole-geometry",
+    "python research/geography/shared-seam-irn-pak-source-assessment-20261006/shared_edge_controls.py --out research/geography/shared-seam-irn-pak-source-assessment-20261006/results-<fresh-run>/shared-edge-controls.json",
     "node scripts/evidence-quality.mjs research/geography/shared-seam-irn-pak-source-assessment-20261006/evidence-quality.json"
   ],
   "validation": [
@@ -299,25 +323,13 @@
       "method_id": "whole-subject-overlay",
       "kind": "positive-control",
       "outcome": "passed",
-      "evidence_path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/whole-geometry-positive-control.json"
+      "evidence_path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/results-2ed630f9/whole-geometry.positive.json"
     },
     {
       "method_id": "whole-subject-overlay",
       "kind": "negative-control",
       "outcome": "passed",
-      "evidence_path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/whole-geometry-negative-control.json"
-    },
-    {
-      "method_id": "osm-shared-edge-source-membership",
-      "kind": "positive-control",
-      "outcome": "passed",
-      "evidence_path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/shared-edge-controls.json"
-    },
-    {
-      "method_id": "osm-shared-edge-source-membership",
-      "kind": "negative-control",
-      "outcome": "passed",
-      "evidence_path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/shared-edge-controls.json"
+      "evidence_path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/results-2ed630f9/whole-geometry.negative.json"
     }
   ],
   "change_receipts": [
@@ -356,17 +368,33 @@
     {
       "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/whole-geometry-negative-control.json",
       "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/results-2ed630f9/whole-geometry.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/results-2ed630f9/whole-geometry.positive.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/results-2ed630f9/whole-geometry.negative.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/results-2ed630f9/shared-edge-controls.json",
+      "status": "added"
     }
   ],
   "metric_bindings": [
     {
       "metric_id": "saravan-whole-feature-iou",
-      "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/whole-geometry-comparison.json",
+      "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/results-2ed630f9/whole-geometry.json",
       "json_pointer": "/subjects/IRN/whole_geometry/iou"
     },
     {
       "metric_id": "panjgur-whole-feature-iou",
-      "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/whole-geometry-comparison.json",
+      "path": "research/geography/shared-seam-irn-pak-source-assessment-20261006/results-2ed630f9/whole-geometry.json",
       "json_pointer": "/subjects/PAK/whole_geometry/iou"
     }
   ]
