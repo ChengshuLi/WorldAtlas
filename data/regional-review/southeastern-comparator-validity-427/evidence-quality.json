@@ -165,6 +165,26 @@
     {
       "path": "data/regional-review/southeastern-comparator-validity-427/evidence-quality.json",
       "status": "added"
+    },
+    {
+      "path": "data/regional-review/southeastern-comparator-validity-427/vintages/2026-10-06-r2/native-validity-and-score-reproduction.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southeastern-comparator-validity-427/vintages/2026-10-06-r2/validation/legacy-iou-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southeastern-comparator-validity-427/vintages/2026-10-06-r2/validation/legacy-iou-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southeastern-comparator-validity-427/vintages/2026-10-06-r2/validation/native-validity-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southeastern-comparator-validity-427/vintages/2026-10-06-r2/validation/native-validity-positive-control.json",
+      "status": "added"
     }
   ],
   "commands": [
@@ -232,12 +252,12 @@
     {
       "json_pointer": "/subjects/0/comparator_iou_epsg5070",
       "metric_id": "legacy-iou-01095",
-      "path": "data/regional-review/southeastern-comparator-validity-427/vintages/2026-10-06/native-validity-and-score-reproduction.json"
+      "path": "data/regional-review/southeastern-comparator-validity-427/vintages/2026-10-06-r2/native-validity-and-score-reproduction.json"
     },
     {
       "json_pointer": "/subjects/1/comparator_iou_epsg5070",
       "metric_id": "legacy-iou-47145",
-      "path": "data/regional-review/southeastern-comparator-validity-427/vintages/2026-10-06/native-validity-and-score-reproduction.json"
+      "path": "data/regional-review/southeastern-comparator-validity-427/vintages/2026-10-06-r2/native-validity-and-score-reproduction.json"
     }
   ],
   "metrics": [
@@ -260,18 +280,18 @@
   ],
   "outputs": [
     {
-      "bytes": 8564,
+      "bytes": 9396,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/southeastern-comparator-validity-427/README.md",
       "role": "report",
-      "sha256": "c0a78de23c85fd8b4ce344b2e2842522d5211119d16e12bc2ccf9073bdcb9ebf"
+      "sha256": "247ecb546335d2f2ba1e1c3d606f07011a1e75dec07b1e7831378b419c10d6b8"
     },
     {
-      "bytes": 17736,
+      "bytes": 17972,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/southeastern-comparator-validity-427/reproduce.py",
       "role": "reproduction-code",
-      "sha256": "1ee6fe33c437a1c3ff9721369e5cbf603e7ffc1f24d1583acaa5a84bf8ceab0f"
+      "sha256": "a65e1f95470343772d17e480ca3d7746977f5a9613f8975cbadc55226e633f75"
     },
     {
       "bytes": 8587,
@@ -307,6 +327,41 @@
       "path": "data/regional-review/southeastern-comparator-validity-427/vintages/2026-10-06/validation/legacy-iou-negative-control.json",
       "role": "validation-control",
       "sha256": "688404bdfad8db3bab88287d1015bc25e42cffd6fcd791aafdbaf2d8d83ca096"
+    },
+    {
+      "bytes": 8599,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/southeastern-comparator-validity-427/vintages/2026-10-06-r2/native-validity-and-score-reproduction.json",
+      "role": "measurement-ledger",
+      "sha256": "88d33c892c5a115376d6938f6a4e65a27d5e959bff18908b1aaa072c6a985e0b"
+    },
+    {
+      "bytes": 469,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/southeastern-comparator-validity-427/vintages/2026-10-06-r2/validation/legacy-iou-negative-control.json",
+      "role": "validation-control",
+      "sha256": "d8f162031362f1b1c0bfa6b95e28a440ca5000b920ecca7c2f2fa505d89c5626"
+    },
+    {
+      "bytes": 397,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/southeastern-comparator-validity-427/vintages/2026-10-06-r2/validation/legacy-iou-positive-control.json",
+      "role": "validation-control",
+      "sha256": "447d881a7bdf5860aded791b03907113749c7e006c66816f8467b587723d1a41"
+    },
+    {
+      "bytes": 609,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/southeastern-comparator-validity-427/vintages/2026-10-06-r2/validation/native-validity-negative-control.json",
+      "role": "validation-control",
+      "sha256": "e44245215d276e99a68ef4fe95e7823b854dbe641273e58ece30622b169d8870"
+    },
+    {
+      "bytes": 449,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/southeastern-comparator-validity-427/vintages/2026-10-06-r2/validation/native-validity-positive-control.json",
+      "role": "validation-control",
+      "sha256": "1e08d312dbe6765375a281ffd4ad3394676074fe51210043c3ed1b4ce9499201"
     }
   ],
   "sources": [
@@ -415,25 +470,25 @@
   ],
   "validation": [
     {
-      "evidence_path": "data/regional-review/southeastern-comparator-validity-427/vintages/2026-10-06/validation/native-validity-positive-control.json",
+      "evidence_path": "data/regional-review/southeastern-comparator-validity-427/vintages/2026-10-06-r2/validation/native-validity-positive-control.json",
       "kind": "positive-control",
       "method_id": "native-validity",
       "outcome": "passed"
     },
     {
-      "evidence_path": "data/regional-review/southeastern-comparator-validity-427/vintages/2026-10-06/validation/native-validity-negative-control.json",
+      "evidence_path": "data/regional-review/southeastern-comparator-validity-427/vintages/2026-10-06-r2/validation/native-validity-negative-control.json",
       "kind": "negative-control",
       "method_id": "native-validity",
       "outcome": "passed"
     },
     {
-      "evidence_path": "data/regional-review/southeastern-comparator-validity-427/vintages/2026-10-06/validation/legacy-iou-positive-control.json",
+      "evidence_path": "data/regional-review/southeastern-comparator-validity-427/vintages/2026-10-06-r2/validation/legacy-iou-positive-control.json",
       "kind": "positive-control",
       "method_id": "legacy-iou",
       "outcome": "passed"
     },
     {
-      "evidence_path": "data/regional-review/southeastern-comparator-validity-427/vintages/2026-10-06/validation/legacy-iou-negative-control.json",
+      "evidence_path": "data/regional-review/southeastern-comparator-validity-427/vintages/2026-10-06-r2/validation/legacy-iou-negative-control.json",
       "kind": "negative-control",
       "method_id": "legacy-iou",
       "outcome": "passed"

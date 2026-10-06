@@ -1,0 +1,19 @@
+{
+  "fixtures": [
+    {
+      "geoid": "01095",
+      "inputs_invalid": true,
+      "legacy_iou_reproduced_at_retained_precision": true,
+      "positive_boundary_interpretation_withheld": true
+    },
+    {
+      "geoid": "47145",
+      "inputs_invalid": true,
+      "legacy_iou_reproduced_at_retained_precision": true,
+      "positive_boundary_interpretation_withheld": true
+    }
+  ],
+  "kind": "negative-control",
+  "method_id": "legacy-iou",
+  "outcome": "passed"
+}

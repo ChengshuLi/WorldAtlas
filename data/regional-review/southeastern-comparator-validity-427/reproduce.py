@@ -254,7 +254,7 @@ def main():
             "negative": {"fixture": "bow-tie polygon; coordinate list preserved in this script", "valid": bowtie.is_valid, "reason": explain_validity(bowtie), "shared_helper_rejected": bowtie_helper_rejected, "passed": (not bowtie.is_valid and "Self-intersection" in explain_validity(bowtie) and bowtie_helper_rejected)},
             "score_positive": positive_score_controls,
             "score_negative": [{"geoid": row["native_geoid"], "inputs_invalid": not row["native_is_valid"],
-                                "legacy_iou_produced_historical_value": row["comparator_iou_epsg5070"] == row["retained_iou_epsg5070"],
+                                "legacy_iou_reproduced_at_retained_precision": round(row["comparator_iou_epsg5070"], 8) == row["retained_iou_epsg5070"],
                                 "positive_boundary_interpretation_withheld": True} for row in out_subjects],
             "scope": "Two invalid requested rows and two valid same-state, same-layer GEOID controls (not selected as known-adjacent parcels); does not estimate validity for either whole state or the national layer.",
             "shared_geometry_helper": GEOMETRY_HELPER_VERSION,
@@ -262,12 +262,14 @@ def main():
         "decision": "The two published 2026 IoUs and above-0.95 triage flags reproduce to the retained 8-decimal table precision. They remain arithmetic diagnostics from an operation that accepted invalid input; they are not valid-topology comparator suitability or affirmative boundary evidence. Withhold any boundary-correctness inference and comparator-acceptance use until the Census source defect is resolved or a separately sourced valid comparator is evaluated.",
         "scope_limit": "No coordinate repair, score replacement, boundary correction, county-law conclusion, regional approval, or production action.",
     }
-    output = OWNED / "vintages/2026-10-06/native-validity-and-score-reproduction.json"
+    output = OWNED / "vintages/2026-10-06-r2/native-validity-and-score-reproduction.json"
     if output.exists():
         raise FileExistsError(output)
     output.parent.mkdir(parents=True, exist_ok=True)
     validation = output.parent / "validation"
     validation.mkdir(exist_ok=True)
+    if not all(x["legacy_iou_reproduced_at_retained_precision"] for x in results["controls"]["score_negative"]):
+        raise RuntimeError("Historical IoU negative controls did not reproduce at retained precision")
     receipts = {
         "native-validity-positive-control.json": {"method_id": "native-validity", "kind": "positive-control", "outcome": "passed", "fixtures": controls},
         "native-validity-negative-control.json": {"method_id": "native-validity", "kind": "negative-control", "outcome": "passed", "fixtures": results["controls"]["negative"], "scoped_targets": [{"geoid": x["native_geoid"], "is_valid": x["native_is_valid"], "reason": x["native_validity_reason"]} for x in out_subjects]},

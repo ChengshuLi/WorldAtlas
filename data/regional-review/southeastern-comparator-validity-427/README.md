@@ -10,13 +10,17 @@ Both recorded values round to the original eight-decimal results and remain nume
 
 Atlas target geometries and the retained 2018 geoBoundaries comparison geometries were valid in this run. That does not validate either Census target. Same-state, same-layer positive controls were Madison County, Alabama (`01089`) and Knox County, Tennessee (`47093`); both were valid. A synthetic bow-tie polygon was the negative control and was detected as a self-intersection. These controls test this bounded method, not the validity of all 67 Alabama features, all 95 Tennessee features, or the national layer.
 
-The reproducer is [reproduce.py](reproduce.py); the exact machine-readable output is [native-validity-and-score-reproduction.json](vintages/2026-10-06/native-validity-and-score-reproduction.json). Run from repository root:
+### Reproduction correction and preserved history
+
+The first packet vintage, `vintages/2026-10-06/`, is retained unchanged for audit history but is superseded. Independent review found its score-negative-control receipt compared full-precision IoU values with eight-decimal retained values using exact equality, so its boolean field incorrectly reported `false` for both reproduced rows. The corrected reproducer now compares at the retained eight-decimal precision and asserts both results; its authoritative, additive output and control receipts are in `vintages/2026-10-06-r2/`. No source inputs, measurements, or historic scores changed. Read `legacy_iou_reproduced_at_retained_precision` in the r2 result for the corrected control outcome.
+
+The reproducer is [reproduce.py](reproduce.py); the authoritative machine-readable output is [native-validity-and-score-reproduction.json](vintages/2026-10-06-r2/native-validity-and-score-reproduction.json). Run from repository root:
 
 ```sh
 python data/regional-review/southeastern-comparator-validity-427/reproduce.py
 ```
 
-It verifies pinned inputs before parsing. It reads the two state responses, the two actual Atlas containing files, the pinned 2018 geoBoundaries product, and the retained crosswalk; it only writes this issue's new dated result. It does not run the broader #427 script, alter its findings, call a repair operation, or make a live request.
+It verifies pinned inputs before parsing. It reads the two state responses, the two actual Atlas containing files, the pinned 2018 geoBoundaries product, and the retained crosswalk; it only writes this issue's new dated result in the `2026-10-06-r2` vintage; it refuses to overwrite an existing output. It does not run the broader #427 script, alter its findings, call a repair operation, or make a live request.
 
 ## Meaning, parent, vintage and neighboring granularity
 

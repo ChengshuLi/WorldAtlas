@@ -1,0 +1,156 @@
+{
+  "baseline_commit": "bbc24331034c728aa1bfb6de0e88ff6df97e13a1",
+  "controls": {
+    "negative": {
+      "fixture": "bow-tie polygon; coordinate list preserved in this script",
+      "passed": true,
+      "reason": "Self-intersection[0.5 0.5]",
+      "shared_helper_rejected": true,
+      "valid": false
+    },
+    "positive": {
+      "01089": {
+        "name": "Madison County",
+        "reason": "Valid Geometry",
+        "same_state": true,
+        "shared_helper_accepts": true,
+        "valid": true
+      },
+      "47093": {
+        "name": "Knox County",
+        "reason": "Valid Geometry",
+        "same_state": true,
+        "shared_helper_accepts": true,
+        "valid": true
+      }
+    },
+    "scope": "Two invalid requested rows and two valid same-state, same-layer GEOID controls (not selected as known-adjacent parcels); does not estimate validity for either whole state or the national layer.",
+    "score_negative": [
+      {
+        "geoid": "01095",
+        "inputs_invalid": true,
+        "legacy_iou_reproduced_at_retained_precision": true,
+        "positive_boundary_interpretation_withheld": true
+      },
+      {
+        "geoid": "47145",
+        "inputs_invalid": true,
+        "legacy_iou_reproduced_at_retained_precision": true,
+        "positive_boundary_interpretation_withheld": true
+      }
+    ],
+    "score_positive": [
+      {
+        "both_inputs_valid": true,
+        "geoid": "01089",
+        "legacy_iou_finite_and_in_unit_range": true,
+        "same_state": true
+      },
+      {
+        "both_inputs_valid": true,
+        "geoid": "47093",
+        "legacy_iou_finite_and_in_unit_range": true,
+        "same_state": true
+      }
+    ],
+    "shared_geometry_helper": "worldatlas-evidence-geometry-v1"
+  },
+  "decision": "The two published 2026 IoUs and above-0.95 triage flags reproduce to the retained 8-decimal table precision. They remain arithmetic diagnostics from an operation that accepted invalid input; they are not valid-topology comparator suitability or affirmative boundary evidence. Withhold any boundary-correctness inference and comparator-acceptance use until the Census source defect is resolved or a separately sourced valid comparator is evaluated.",
+  "input_sha256": {
+    "data/geography/part-26.json": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632",
+    "data/geography/part-27.json": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758",
+    "data/hierarchy.json": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+    "data/regional-review/regional-review-599d6fe712bbbcae/REVIEW.md": "3685b58e8586a0ac6b222d4500989f40d8a71c0fe675426bb08f302a88d06744",
+    "data/regional-review/regional-review-599d6fe712bbbcae/census-tigerweb-state-retrieval-receipts.json": "efb6dbe4859e5d36595403b418afb0ebc7e50f0289fffec22c8a5e7f75721f0a",
+    "data/regional-review/regional-review-599d6fe712bbbcae/findings/usa-county-crosswalk.csv": "7990aff113168a4447b40ae72bbcccf3b0a28102a4465c87257e98ad993db98a",
+    "data/regional-review/regional-review-599d6fe712bbbcae/reproduce-review.py": "50204510d6786d0708cf911f0653ea795542e30ccdefec6b907a3d14b1f1088d",
+    "data/regional-review/regional-review-599d6fe712bbbcae/sources/census-2018-cartographic-boundaries/cb_2018_us_county_500k.zip": "aaa866af327754e1b80aa87bfb97b04a7209f4f871075aef84affb8f0b3afe67",
+    "data/regional-review/regional-review-599d6fe712bbbcae/sources/census-tigerweb-acs26/counties-state-01.geojson": "386d08c97bfae31678cf70609ba277a4bbc271f4e79d5f651537cf64cac00084",
+    "data/regional-review/regional-review-599d6fe712bbbcae/sources/census-tigerweb-acs26/counties-state-47.geojson": "b9b10ee31927e67c295180c885e8e616940d099a52879df2c5a49bad123f6a15",
+    "data/regional-review/regional-review-599d6fe712bbbcae/sources/census-tigerweb-acs26/layer-82-metadata-20261005.json": "56df6e7d6cff8fe1e082bbdc10109cc2c7c22a134f5dfca1899f93d9bd98337d",
+    "data/regional-review/regional-review-599d6fe712bbbcae/sources/geoboundaries-2018/CITATION-AND-USE-geoBoundaries.txt": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+    "data/regional-review/regional-review-599d6fe712bbbcae/sources/geoboundaries-2018/geoBoundaries-USA-ADM2.geojson": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43",
+    "data/regional-review/regional-review-599d6fe712bbbcae/sources/geoboundaries-2018/upstream-metaData.json": "a4d2a82a1cd434960b6ed49531bff3330d0881674eea9dc8711e1ad6bf049b9f"
+  },
+  "issue": 1148,
+  "method": {
+    "native_axis_order": "GeoJSON longitude,latitude; the exact retained TIGERweb query requested outSR=4326.",
+    "native_validity": "Construct shapely.geometry.shape from retained GeoJSON geometry; read is_valid and shapely.validation.explain_validity before any projection/overlay/repair.",
+    "score_reproduction": "Transform both original 2018 geoBoundaries and 2026 TIGERweb geometries from EPSG:4326 to EPSG:5070 with pyproj Transformer(always_xy=True); Shapely intersection area divided by union area, matching #427 iou(). No geometry repair."
+  },
+  "retrieved_or_reproduced_on": "2026-10-06",
+  "scope_limit": "No coordinate repair, score replacement, boundary correction, county-law conclusion, regional approval, or production action.",
+  "software": {
+    "geos": "3.13.1",
+    "pyproj": "3.7.2",
+    "python": "3.12.14",
+    "shapely": "2.1.2"
+  },
+  "subjects": [
+    {
+      "atlas_containing_file": "part-26.json",
+      "atlas_geometry_valid": true,
+      "atlas_id": "gb:USA:ADM2:52423323B91350179619182",
+      "atlas_parent_child_count": 67,
+      "atlas_parent_id": "framework:province:alabama:2ea4f64966c3",
+      "atlas_parent_level": "province",
+      "atlas_parent_name": "Alabama",
+      "comparator_iou_epsg5070": 0.9897814808275113,
+      "native_county_fips": "095",
+      "native_geoid": "01095",
+      "native_is_valid": false,
+      "native_name": "Marshall County",
+      "native_source_bounds_lon_lat": [
+        -86.58193599985805,
+        34.09907299992842,
+        -86.05771200023187,
+        34.60014299975122
+      ],
+      "native_source_crs": "EPSG:4326; original response requested outSR=4326",
+      "native_source_geometry_type": "Polygon",
+      "native_state_fips": "01",
+      "native_validity_reason": "Ring Self-intersection[-86.1498060003656 34.5336330000066]",
+      "operation_note": "Unrepaired native 2018 source and unrepaired native Census comparator; EPSG:5070 transform using always_xy; intersection area / union area; run for disclosure only because Census comparator fails native validity.",
+      "retained_above_0_95_triage_cutoff": true,
+      "retained_iou_epsg5070": 0.98978148,
+      "same_state_parent_consistency": true,
+      "shared_helper_rejection": "Invalid unwrapped land geometry; inspect a diagnostic clone, do not silently MakeValid",
+      "source_2018_feature_id": "52423323B91350179619182",
+      "source_2018_geometry_valid": true,
+      "state_filtered_response_feature_count": 67
+    },
+    {
+      "atlas_containing_file": "part-27.json",
+      "atlas_geometry_valid": true,
+      "atlas_id": "gb:USA:ADM2:52423323B98361785836731",
+      "atlas_parent_child_count": 95,
+      "atlas_parent_id": "framework:province:tennessee:1e9839d5c457",
+      "atlas_parent_level": "province",
+      "atlas_parent_name": "Tennessee",
+      "comparator_iou_epsg5070": 0.9806881053587667,
+      "native_county_fips": "145",
+      "native_geoid": "47145",
+      "native_is_valid": false,
+      "native_name": "Roane County",
+      "native_source_bounds_lon_lat": [
+        -84.78953500001396,
+        35.644423999768854,
+        -84.26338300019238,
+        36.04931700024562
+      ],
+      "native_source_crs": "EPSG:4326; original response requested outSR=4326",
+      "native_source_geometry_type": "Polygon",
+      "native_state_fips": "47",
+      "native_validity_reason": "Ring Self-intersection[-84.539962999621 35.6704649997119]",
+      "operation_note": "Unrepaired native 2018 source and unrepaired native Census comparator; EPSG:5070 transform using always_xy; intersection area / union area; run for disclosure only because Census comparator fails native validity.",
+      "retained_above_0_95_triage_cutoff": true,
+      "retained_iou_epsg5070": 0.98068811,
+      "same_state_parent_consistency": true,
+      "shared_helper_rejection": "Invalid unwrapped land geometry; inspect a diagnostic clone, do not silently MakeValid",
+      "source_2018_feature_id": "52423323B98361785836731",
+      "source_2018_geometry_valid": true,
+      "state_filtered_response_feature_count": 95
+    }
+  ],
+  "version": 1
+}
