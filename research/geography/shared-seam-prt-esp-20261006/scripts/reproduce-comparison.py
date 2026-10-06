@@ -249,6 +249,55 @@ def geometry_parts(geom):
     ]
 
 
+def gap_coverage_record(gap, members):
+    """Measure areal coverage and line contact separately on unchanged shapes."""
+    row = {
+        "member_count": len(members),
+        "invalid_member_ids": [],
+        "gap_area_m2": metric(gap.area),
+        "covered_area_m2": None,
+        "uncovered_residual_area_m2": None,
+        "covered_fraction": None,
+        "gap_intersection_type": None,
+        "gap_intersection_parts": [],
+        "uncovered_residual": None,
+        "shared_boundary_contact_length_m": None,
+        "boundary_contact_type": None,
+        "boundary_contact_parts": [],
+        "operation_errors": [],
+    }
+    try:
+        for identity, member in members:
+            if member is None:
+                row["operation_errors"].append(f"missing geometry: {identity}")
+                continue
+            if not member.is_valid:
+                row["invalid_member_ids"].append(identity)
+        if row["operation_errors"]:
+            return row
+        union = None
+        for _, member in members:
+            candidate = projected(member)
+            union = candidate if union is None else union.union(candidate)
+        intersection = gap.intersection(union)
+        residual = gap.difference(union)
+        contact = gap.boundary.intersection(union.boundary)
+        row.update({
+            "covered_area_m2": metric(intersection.area),
+            "uncovered_residual_area_m2": metric(residual.area),
+            "covered_fraction": metric(intersection.area / gap.area) if gap.area else None,
+            "gap_intersection_type": intersection.geom_type,
+            "gap_intersection_parts": geometry_parts(intersection),
+            "uncovered_residual": geometry_record(residual),
+            "shared_boundary_contact_length_m": metric(contact.length),
+            "boundary_contact_type": contact.geom_type,
+            "boundary_contact_parts": geometry_parts(contact),
+        })
+    except Exception as error:
+        row["operation_errors"].append(f"coverage/union/contact: {type(error).__name__}: {error}")
+    return row
+
+
 def normalize_name(value):
     normalized = unicodedata.normalize("NFKD", value or "")
     return "".join(character for character in normalized if not unicodedata.combining(character)).casefold()
@@ -484,6 +533,21 @@ def main():
         "component_geometry_hash": hashlib.sha256(json.dumps(gap_feature["geometry"], sort_keys=True, separators=(",", ":")).encode()).hexdigest(),
     }
 
+    spanish_subjects = ["atlas:district:ESP-1003:a5622946", "atlas:district:ESP-1004:a5622946", "atlas:district:ESP-1010:a5622946"]
+    portuguese_subjects = list(DGT_BY_PRT_ID)
+    coverage_inputs = {
+        "spanish_exact_55_raw_members": [(identity, esp_raw_features[identity]["geometry"]) for identity in sorted(member_ids)],
+        "spanish_exact_55_baseline_simplified_members": [(identity, esp_simple_features[identity]["geometry"]) for identity in sorted(member_ids)],
+        "spanish_three_current_atlas_districts": [(subject, shape(current[subject]["geometry"])) for subject in spanish_subjects],
+        "portugal_four_geoboundaries_raw_municipalities": [(subject, shape(prt_raw_features[subject]["geometry"])) for subject in portuguese_subjects],
+        "portugal_four_geoboundaries_baseline_simplified_municipalities": [(subject, shape(prt_simple_features[subject]["geometry"])) for subject in portuguese_subjects],
+        "portugal_four_dgt_caop2025_municipalities": [(subject, shape(dgt_items[subject][0]["geometry"])) for subject in portuguese_subjects],
+        "portugal_four_current_atlas_municipalities": [(subject, current_geometries[subject]) for subject in portuguese_subjects],
+        "combined_seven_current_atlas_subjects": [(subject, geom) for subject, geom in current_geometries.items()],
+        "combined_2018_spanish_raw_and_caop2025_portuguese": [(identity, esp_raw_features[identity]["geometry"]) for identity in sorted(member_ids)] + [(subject, shape(dgt_items[subject][0]["geometry"])) for subject in portuguese_subjects],
+    }
+    gap_coverage = {name: gap_coverage_record(gap_projected, members) for name, members in coverage_inputs.items()}
+
     # Pairwise measurements only. Names and identifiers establish the crosswalk;
     # distances never assign ownership or resolve a disputed boundary.
     target_member_lookup = {identity: row for row in esp_member_rows for identity in [row["source_member_id"]]}
@@ -604,6 +668,11 @@ def main():
         },
         "full_gap": gap_source,
         "gap_to_subject_geometry_comparisons": gap_relation_rows,
+        "full_gap_areal_coverage_and_boundary_contacts": gap_coverage,
+        "physical_water_evidence": {
+            "status": "not established",
+            "explanation": "The retained geoBoundaries administrative polygons, CAOP municipal polygons, and IGN administrative-boundary line records are not physical water/shoreline or seasonal-channel observations. No dated hydrographic source for the exact gap was retained.",
+        },
         "decision": {
             "shared_seam_edit_proposed": False,
             "supported": [
