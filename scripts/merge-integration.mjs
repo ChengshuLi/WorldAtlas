@@ -4,6 +4,7 @@ import {integrationProof} from './integration-proof.mjs';
 import {githubPages, linkedPulls, verifyClaimForPR, workSpec} from './issue-claim-contract.mjs';
 import {validateIssuePRBody, validateLanePaths} from './check-handoff-scope.mjs';
 import {checkPremergeEvidence} from './premerge-evidence.mjs';
+import {memoizeImmutableGitBlobs} from './immutable-git-blobs.mjs';
 import {evidenceRequirement} from './evidence-policy.mjs';
 
 const need = (condition, message) => { if (!condition) throw Error(message); };
@@ -240,6 +241,7 @@ export async function inspectMerge({api, repo, number, expectedHead, policy, evi
   return {pr, issue, reservation, files, evidence, base};
 }
 export async function prepareIntegration(options) {
+  options = {...options, api: memoizeImmutableGitBlobs(options.api)};
   const state = await inspectMerge(options);
   if (state.replayed) return state;
   let fresh;
@@ -301,6 +303,7 @@ export async function prepareIntegration(options) {
   }
 }
 export async function completeIntegration(options) {
+  options = {...options, api: memoizeImmutableGitBlobs(options.api)};
   need(options.integrationResult === 'success' || options.integrationResult === 'skipped',
     'Integration tests failed or were cancelled; no merge performed');
   // Rejection-only fast path: known stale base/head cannot benefit from the

@@ -97,7 +97,19 @@ export function githubAPI(token){
  if(!token)throw Error('Read/write GitHub token required');
  return async(route,method='GET',body)=>{
   const response=await fetch('https://api.github.com'+route,{method,headers:{Authorization:`Bearer ${token}`,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28',...(body?{'Content-Type':'application/json'}:{})},...(body?{body:JSON.stringify(body)}:{}),signal:AbortSignal.timeout(20000)});
-  if(!response.ok)throw Error(`GitHub ${method} ${route} failed (HTTP ${response.status})`);
+  if(!response.ok){
+   const error=Error(`GitHub ${method} ${route} failed (HTTP ${response.status})`);
+   let payload;try{payload=await response.json();}catch{/* Keep the actual HTTP rejection even without a JSON message. */}
+   const numeric=name=>{const value=response.headers.get(name);return /^\d{1,13}$/.test(value??'')?value:undefined;};
+   const requestId=response.headers.get('x-github-request-id');
+   const message=typeof payload?.message==='string'?payload.message
+    .replace(/(?:github_pat_|gh[pousr]_)[A-Za-z0-9_]+/g,'[redacted]')
+    .replace(/Bearer\s+\S+/gi,'Bearer [redacted]').replace(/[\x00-\x1f\x7f]/g,' ').slice(0,512):undefined;
+   error.github={http_status:response.status,...(message?{message}:{}),
+    ...Object.fromEntries([['rate_remaining',numeric('x-ratelimit-remaining')],['rate_reset',numeric('x-ratelimit-reset')],
+     ['retry_after',numeric('retry-after')],['request_id',/^[a-fA-F0-9:]{1,100}$/.test(requestId??'')?requestId:undefined]].filter(([,value])=>value!==undefined))};
+   throw error;
+  }
   return response.status===204?null:response.json();
  };
 }

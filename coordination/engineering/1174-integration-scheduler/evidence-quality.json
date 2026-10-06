@@ -21,6 +21,12 @@
         "hash_kind": "file-bytes"
       },
       {
+        "path": "scripts/issue-claim-contract.mjs",
+        "bytes": 10407,
+        "sha256": "3ea8f8b74b540de23e50cc339eabc868e5b727f2197bfdf5e477a55d7b94df74",
+        "hash_kind": "file-bytes"
+      },
+      {
         "path": "scripts/merge-integration.mjs",
         "bytes": 25436,
         "sha256": "85b881e02a7d9dca3538982423a14ca04e093241f5de7728c95f9c1c70d93c2b",
@@ -45,9 +51,21 @@
         "hash_kind": "file-bytes"
       },
       {
+        "path": "test/merge-integration-entrypoint.test.mjs",
+        "bytes": 14246,
+        "sha256": "2f787aa92e1734712479dcf6bc808623aa1af33334cd1ce434951147a3663a07",
+        "hash_kind": "file-bytes"
+      },
+      {
         "path": "test/merge-integration.test.mjs",
         "bytes": 37273,
         "sha256": "8d55b72519453a5a28b77d689a735c662ef8d5563b7591a593b2ece101ac1837",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/premerge-evidence.test.mjs",
+        "bytes": 16873,
+        "sha256": "c1ae7dbcaa2d1fb87ff8b8813fa775657b621998aa4705d87712e69cee82f837",
         "hash_kind": "file-bytes"
       },
       {
@@ -75,6 +93,18 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "coordination/engineering/1174-integration-scheduler/immutable-negative-control.json",
+      "bytes": 868,
+      "sha256": "b7fafa1529fa363b845ffa4e02a8fe72704b72de28f637e4722ec4168fb0981d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/1174-integration-scheduler/immutable-positive-control.json",
+      "bytes": 1144,
+      "sha256": "3cc52979664d7bf094f398417eb0054c2ae214657498cd4ba805318b3c9adf59",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "coordination/engineering/1174-integration-scheduler/negative-control.json",
       "bytes": 668,
       "sha256": "bfdad835bb6c5b352288f2faab43617684f938b107ad6c3e62324c970bb06729",
@@ -87,6 +117,12 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "coordination/engineering/1174-integration-scheduler/test-results-cache.txt",
+      "bytes": 11092,
+      "sha256": "948ad28ebec7212860f86819d51666bb0ef420bb1a613f7e623b276214355193",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "coordination/engineering/1174-integration-scheduler/test-results.txt",
       "bytes": 8638,
       "sha256": "53105dd1b9b7db13a3137de5027485a7c0f614fb589d116abe550720c18837d4",
@@ -94,14 +130,26 @@
     },
     {
       "path": "docs/WORKER_COORDINATION.md",
-      "bytes": 32431,
-      "sha256": "a8df85300c3dca7a0dd087746968432f2512fa4487e24e0b7f342ff48b98dc99",
+      "bytes": 35148,
+      "sha256": "89c0b2447ea085b8c846282eca2993257150a14b637c4281d5edd1a71db06408",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/immutable-git-blobs.mjs",
+      "bytes": 2143,
+      "sha256": "200390dab3ffc41197497952ddaa1250b32b2b66cf23ea99d372daf0a51a07b0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/issue-claim-contract.mjs",
+      "bytes": 11349,
+      "sha256": "86e0cbf5bd4a5d12c8994b9157e0ee8ce69c083599a470397e4667f7c9483a00",
       "hash_kind": "file-bytes"
     },
     {
       "path": "scripts/merge-integration.mjs",
-      "bytes": 26085,
-      "sha256": "b9d7840f8ae210091c87d04f5d117b9a2e6b64a9c904dceff66d752c4545ba0a",
+      "bytes": 26293,
+      "sha256": "a3db0d28fe9dc56c187ce42d21c63063843bf09521902c50bb973f08b8db2cd8",
       "hash_kind": "file-bytes"
     },
     {
@@ -124,8 +172,14 @@
     },
     {
       "path": "scripts/run-worker-merge.mjs",
-      "bytes": 5431,
-      "sha256": "1eb4b9fd29290a7872271aa937d897d510337b0f1299a59d00f4908cfe3f3001",
+      "bytes": 5550,
+      "sha256": "3fbe2f6d27916b76bff697290db0b11a1771b15f751614478980085f4cbcbf33",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/immutable-git-blobs.test.mjs",
+      "bytes": 5438,
+      "sha256": "a4ce27299d38ecfd9d1c14cc8722ab60c6187c2d0ccdf36e2516d5b282c1b4a2",
       "hash_kind": "file-bytes"
     },
     {
@@ -135,15 +189,27 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "test/merge-integration-entrypoint.test.mjs",
+      "bytes": 14358,
+      "sha256": "67475a665686ddf3a127f46d9128b17c8b0b1072cab1cdccd99956dc9e2806fc",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "test/merge-integration.test.mjs",
-      "bytes": 37915,
-      "sha256": "ee66560a4506bb56b777b6812aa49d5016a4c8010cba75f38ff1029429a99062",
+      "bytes": 39381,
+      "sha256": "a2c5ce84b82863a7551e771f7df95ab0dc40265a18b9e9b47dd1c8c0246a93b9",
       "hash_kind": "file-bytes"
     },
     {
       "path": "test/merge-scheduler.test.mjs",
       "bytes": 5950,
       "sha256": "06f828b96f075e35e0e11eecde82eac02deafa739ce10a325bd54bdca34b4955",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/premerge-evidence.test.mjs",
+      "bytes": 19260,
+      "sha256": "a7a6c0844dc4c3ed39218692133e2c2288d934751598dafc2f0e56fe179bef55",
       "hash_kind": "file-bytes"
     },
     {
@@ -168,11 +234,23 @@
       "status": "added"
     },
     {
+      "path": "coordination/engineering/1174-integration-scheduler/immutable-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/1174-integration-scheduler/immutable-positive-control.json",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/1174-integration-scheduler/negative-control.json",
       "status": "added"
     },
     {
       "path": "coordination/engineering/1174-integration-scheduler/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/1174-integration-scheduler/test-results-cache.txt",
       "status": "added"
     },
     {
@@ -183,6 +261,15 @@
       "path": "docs/WORKER_COORDINATION.md",
       "status": "modified",
       "original_sha256": "228efbc07476a0bd4defad5d0d59c96836da81bba399f8c2e1395a5303e760ae"
+    },
+    {
+      "path": "scripts/immutable-git-blobs.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/issue-claim-contract.mjs",
+      "status": "modified",
+      "original_sha256": "3ea8f8b74b540de23e50cc339eabc868e5b727f2197bfdf5e477a55d7b94df74"
     },
     {
       "path": "scripts/merge-integration.mjs",
@@ -208,9 +295,18 @@
       "original_sha256": "3de24f87fdd7af8aa0b6638619833d9837ac07861b54b9d1d46ce2baa3b57e88"
     },
     {
+      "path": "test/immutable-git-blobs.test.mjs",
+      "status": "added"
+    },
+    {
       "path": "test/merge-integration-client.test.mjs",
       "status": "modified",
       "original_sha256": "f30653d0583c49830f3ae525c0f4b32f5fa544516c2df42df4843ceb5a5dfc6c"
+    },
+    {
+      "path": "test/merge-integration-entrypoint.test.mjs",
+      "status": "modified",
+      "original_sha256": "2f787aa92e1734712479dcf6bc808623aa1af33334cd1ce434951147a3663a07"
     },
     {
       "path": "test/merge-integration.test.mjs",
@@ -220,6 +316,11 @@
     {
       "path": "test/merge-scheduler.test.mjs",
       "status": "added"
+    },
+    {
+      "path": "test/premerge-evidence.test.mjs",
+      "status": "modified",
+      "original_sha256": "c1ae7dbcaa2d1fb87ff8b8813fa775657b621998aa4705d87712e69cee82f837"
     },
     {
       "path": "test/trusted-workflow-checkouts.test.mjs",
@@ -234,6 +335,13 @@
       "description": "Controlled trusted scheduler FIFO, cancellation, recovery, exact-head/authority/main guards and rejected-base fast-path API tests; actual CLI observation controls and sparse workflow module probes.",
       "software": "Node 24 built-in test runner",
       "units": "pass/fail"
+    },
+    {
+      "id": "immutable-blobs",
+      "kind": "code",
+      "description": "Bounded verified Git blob reuse during repeated fresh authority checks; root-format synthetic aggregate payload workload and real premerge/tree/path/head/review/claim/check negative controls; safe actual API-denial telemetry controls.",
+      "software": "Node 24 built-in test runner and SHA1 Git blob digest",
+      "units": "API calls, raw bytes, pass/fail"
     }
   ],
   "validation": [
@@ -248,6 +356,18 @@
       "kind": "negative-control",
       "outcome": "passed",
       "evidence_path": "coordination/engineering/1174-integration-scheduler/negative-control.json"
+    },
+    {
+      "method_id": "immutable-blobs",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/1174-integration-scheduler/immutable-positive-control.json"
+    },
+    {
+      "method_id": "immutable-blobs",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/1174-integration-scheduler/immutable-negative-control.json"
     }
   ],
   "metrics": [],
@@ -260,6 +380,6 @@
     "geographic_approval": "not-requested"
   },
   "commands": [
-    "node --test test/merge-scheduler.test.mjs test/merge-integration.test.mjs test/merge-integration-client.test.mjs test/merge-integration-entrypoint.test.mjs test/trusted-workflow-checkouts.test.mjs test/worker-result.test.mjs test/premerge-evidence.test.mjs"
+    "node --test test/immutable-git-blobs.test.mjs test/merge-scheduler.test.mjs test/merge-integration.test.mjs test/merge-integration-client.test.mjs test/merge-integration-entrypoint.test.mjs test/trusted-workflow-checkouts.test.mjs test/worker-result.test.mjs test/premerge-evidence.test.mjs test/issue-claims.test.mjs"
   ]
 }

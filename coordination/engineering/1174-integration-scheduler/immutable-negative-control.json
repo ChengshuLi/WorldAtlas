@@ -1,0 +1,16 @@
+{
+  "method_id": "immutable-blobs",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "test_cases": [
+    "fresh remote review, head, tree/path and reservation checks reject after immutable bytes were reused",
+    "candidate waiting rechecks changed claim/check/review/head after caching immutable evidence",
+    "failed, malformed, truncated, changed content and mismatched OID responses never populate cache",
+    "callers and origin objects cannot mutate cached bytes or metadata used by later checks",
+    "actual API rejection preserves only sanitized message/status and allowlisted rate/request headers"
+  ],
+  "transcript": "coordination/engineering/1174-integration-scheduler/test-results-cache.txt",
+  "limits": [
+    "Synthetic byte workload and mocked read-only API/workflow controls; no live scheduler execution or geographic approval claimed."
+  ]
+}

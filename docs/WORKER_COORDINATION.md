@@ -243,3 +243,42 @@ The new scheduler then recovers registrations under ordinary exact-head rules.
 No direct merge, manual research stop, provider operation or publication is part
 of this procedure. Only the coordinating integrator performs this reversible
 admission hold; workers do not independently toggle shared workflow availability.
+
+### Immutable blob reuse during repeated authority checks
+
+The root #1150/head `405f75ce2280dc44172ba596b9ee08513abe437c` workload
+contains 400 descriptors and 92 original changed-file loads. Its remote reader
+makes 493 blob requests per evidence pass, and an isolated fallback can perform
+three full authority/evidence passes (1,479 blob requests). Read-only Git object
+inventory finds 474 distinct OIDs totaling 235,417,555 raw bytes, with a largest
+blob of 14,322,993 bytes. These are request-workload measurements, not geographic
+approval. GitHub documents a default GITHUB_TOKEN limit of
+[1,000 requests per hour per repository](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api).
+That limit is compatible with the observed fanout and denials; it does not prove
+the cause of the earlier HTTP403 results without their actual message/headers.
+
+Each prepare/final execution now memoizes only successful immutable Git blob
+GETs keyed by repository and requested OID. Before admission the helper requires
+base64 encoding, complete canonical encoding, exact response/full-byte size, and
+the Git blob SHA1 computed from its header and full content to match the requested
+OID. Unsupported, incomplete, mismatched and failed responses never enter the
+cache. The cache holds at most 512 entries and 272 MiB of raw payload accounting;
+base64 storage is at most four-thirds of that bound plus response metadata.
+Overflow stays uncached without evicting the useful first scan. Existing evidence
+file/total/descriptor budgets remain mandatory and unchanged. This size retains
+the known 474-blob workload across repeated checks without cache thrashing.
+
+Every commit/tree/path/vintage binding and every PR, issue, reservation, review,
+check, status and ancestry comparison is freshly read. Changed OIDs fetch new
+bytes; cached blob bytes do not cache a validation result or extend authority.
+Separate jobs/requests do not share this in-memory cache. Controls model the actual
+workload count/aggregate/largest payload size and prove 1,479 requested reads use
+474 verified fetches while changed OIDs/tree modes/head/claim/check/review still
+reject. The cache neither skips a byte check nor accepts an untested candidate.
+
+Actual API denials remain failures. Merge receipts retain only HTTP status,
+sanitized API message and allowlisted numeric rate remaining/reset/retry-after
+and GitHub request ID when available; original denial and notification denial are
+separate. Tokens, authentication headers, cookies and complete bodies/header maps
+are never retained. Inspect this evidence before attributing any future denial
+or choosing a retry; observation expiry alone still cannot restart live work.

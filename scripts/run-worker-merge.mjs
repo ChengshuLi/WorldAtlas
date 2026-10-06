@@ -41,6 +41,7 @@ try {
   }
 } catch (error) {
   result.reason = error.message;
+  if (error.github) result.api_error = error.github;
   if (error.candidateCleanup) result.candidate_cleanup = error.candidateCleanup;
   if (error.candidateDiagnostics) result.candidate_diagnostics = error.candidateDiagnostics;
   result.status = /conflict|changes reviewed bytes|substantive review/.test(error.message) ? 'intervention-required' : 'not-merged';
@@ -59,6 +60,7 @@ console.log(JSON.stringify(result));
 try { await api(`/repos/${repo}/issues/${number}/comments`, 'POST', {body: renderWorkerResult('merge', result)}); }
 catch (error) {
   result.notification_error = error.message;
+  if (error.github) result.notification_api_error = error.github;
   // Failed preparation notification prevents the downstream final job from
   // running, so dispose of a confirmed owned candidate here rather than leak it.
   if (phase === 'prepare' && result.candidate_ref) {

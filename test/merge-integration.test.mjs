@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import {createHash} from 'node:crypto';
 import os from 'node:os';
 import path from 'node:path';
 import {integrationTestFiles, integrationNeedsBrowser, prepareIntegrationTests} from '../scripts/run-integration-tests.mjs';
@@ -556,4 +557,30 @@ test('known stale tested base or head rejects before expensive evidence/tree ins
  await assert.rejects(changed.complete(),/head changed/);
  assert.equal(changed.evidenceReads??0,0);assert.equal(changed.mainReads,0);assert.equal(changed.writes.length,0);
  const eligible=fixture();await eligible.complete();assert.ok(eligible.evidenceReads>0);assert.equal(eligible.writes.length,1);
+});
+
+
+test('candidate waiting rechecks changed claim/check/review/head after caching immutable evidence',async()=>{
+ for(const changed of ['claim','check','review','head']) {
+  const f=fixture(),origin=f.api,raw=Buffer.from('immutable evidence'),oid=createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
+  let candidates=0,blobs=0;
+  f.api=async(route,...rest)=>{
+   if(route.endsWith('/git/blobs/'+oid)){blobs++;return {sha:oid,size:raw.length,encoding:'base64',content:raw.toString('base64')};}
+   const value=await origin(route,...rest);
+   if(route.endsWith('/git/commits/'+f.candidate)&&++candidates===1)return {...value,parents:[{sha:sha('d')},{sha:f.head}]};
+   return value;
+  };
+  const options=f.options();options.evidenceCheck=async({api})=>{
+   await api('/repos/owner/repo/git/blobs/'+oid);
+   if(f.staleReview)throw Error('Missing independent exact-head review');return {status:'legacy'};
+  };
+  options.candidateSleep=async()=>{
+   if(changed==='claim')f.claim.expires_at='2000-01-01T00:00:00Z';
+   if(changed==='check')f.checks[0].conclusion='failure';
+   if(changed==='review')f.staleReview=true;
+   if(changed==='head')f.pr.head.sha=sha('e');
+  };
+  await assert.rejects(prepareIntegration(options),changed==='claim'?/unexpired claim/:changed==='check'?/trusted scope/:changed==='review'?/exact-head review/:/head changed/);
+  assert.equal(blobs,1);assert.equal(f.writes.length,0);
+ }
 });

@@ -1,5 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {memoizeImmutableGitBlobs} from '../scripts/immutable-git-blobs.mjs';
 import {sha256, subjectsHash} from '../scripts/evidence-quality.mjs';
 import {evidenceRequirement} from '../scripts/evidence-policy.mjs';
 import {validatePremergeManifest, validateReviewReceipt, checkPremergeEvidence, GEOMETRY_VERSION} from '../scripts/premerge-evidence.mjs';
@@ -115,19 +117,20 @@ test('reviews reject self approval, stale heads, omitted hashes/files and absent
 function remoteFixture(f, comments = []) {
   const bytes = Buffer.from(JSON.stringify(f.manifest));
   const contents = new Map([['baseline.txt', baseline], [outputPath, output], [manifestPath, bytes]]);
-  const blobs = new Map([...contents].map(([name, bytes], index) => [`blob${index}`, bytes]));
-  const tree = [...contents].map(([path, bytes], index) => ({path, type: 'blob', mode: '100644', size: bytes.length, sha: `blob${index}`}));
+  const oid = bytes => createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex');
+  const blobs = new Map([...contents].map(([name, bytes]) => [oid(bytes), bytes]));
+  const tree = [...contents].map(([path, bytes]) => ({path, type: 'blob', mode: '100644', size: bytes.length, sha: oid(bytes)}));
   const calls = [];
   const api = async (route, method = 'GET') => {
     calls.push({route, method}); assert.equal(method, 'GET', 'Setup must never mutate GitHub');
     if (route.includes('/git/commits/')) return {tree: {sha: 'tree'}};
     if (route.includes('/git/trees/')) return {truncated: false, tree};
-    if (route.includes('/git/blobs/')) return {encoding: 'base64', content: blobs.get(route.split('/').pop()).toString('base64')};
+    if (route.includes('/git/blobs/')) {const sha=route.split('/').pop(),raw=blobs.get(sha);return {sha,size:raw.length,encoding:'base64',content:raw.toString('base64')};}
     if (route.includes('/compare/')) return {status: 'identical'};
     if (route.includes('/comments?')) return comments;
     throw Error(`Unexpected remote route: ${route}`);
   };
-  return {api, calls, bytes};
+  return {api, calls, bytes, tree, blobs};
 }
 test('mock remote queue checks exact blobs/head/independent receipt with read-only requests', async () => {
   const f = fixture(), r = receipt(f), remote = remoteFixture(f); r.manifest_sha256 = sha256(remote.bytes);
@@ -194,4 +197,31 @@ test('trusted hosted gate checks a new limited prior-evidence registry and still
   assert.equal(r.status,'limited');assert.equal(r.change_files_checked,2);assert.match(r.limits.join('\n'),/retained prior evidence/);
   await assert.rejects(()=>checkPremergeEvidence({...f,repo:'test/repo',policy,
     api:route=>route.includes('/compare/')?Promise.resolve({status:'diverged'}):api(route)}),/not an ancestor/);
+});
+
+
+test('fresh remote review, head, tree/path and reservation checks reject after immutable bytes were reused',async()=>{
+ for(const change of ['review','head','tree','mode','path','worker']) {
+  const f=fixture(),comments=[],remote=remoteFixture(f,comments),r=receipt(f);r.manifest_sha256=sha256(remote.bytes);
+  const comment=value=>({id:comments.length+1,author_association:'OWNER',body:`<!-- worldatlas-review:v1\n${JSON.stringify(value)}\n-->`});
+  comments.push(comment(r));const api=memoizeImmutableGitBlobs(remote.api);
+  const check=()=>checkPremergeEvidence({...f,api,repo:'test/repo',policy,review:true});
+  await check();await check();assert.equal(remote.calls.filter(c=>c.route.includes('/git/blobs/')).length,3);
+  assert.equal(remote.calls.filter(c=>c.route.includes('/comments?')).length,2);
+  if(change==='review')comments.push(comment({...r,outcome:'changes-requested'}));
+  if(change==='head')f.pr.head.sha='c'.repeat(40);
+  if(change==='worker')f.reservation.worker_id='changed-worker';
+  if(change==='mode')remote.tree.find(e=>e.path===outputPath).mode='120000';
+  if(change==='path')remote.tree.splice(remote.tree.findIndex(e=>e.path===outputPath),1);
+  if(change==='tree') {
+   const raw=Buffer.from('{"value":0.6}\n'),oid=createHash('sha1').update(`blob ${raw.length}\0`).update(raw).digest('hex');
+   remote.blobs.set(oid,raw);Object.assign(remote.tree.find(e=>e.path===outputPath),{sha:oid,size:raw.length});
+  }
+  await assert.rejects(check(),change==='review'?/unresolved/:change==='head'?/Missing independent/:change==='worker'?/worker differs/:['mode','path'].includes(change)?/nonordinary/:/Input bytes mismatch/);
+  assert.equal(remote.calls.filter(c=>c.route.includes('/git/blobs/')).length,change==='tree'?4:3);
+ }
+ const f=fixture(),remote=remoteFixture(f);let truncated=false;
+ const api=memoizeImmutableGitBlobs(async(...args)=>truncated&&args[0].includes('/git/trees/')?{truncated:true,tree:[]}:remote.api(...args));
+ await checkPremergeEvidence({...f,api,repo:'test/repo',policy});truncated=true;
+ await assert.rejects(checkPremergeEvidence({...f,api,repo:'test/repo',policy}),/Incomplete/);
 });
