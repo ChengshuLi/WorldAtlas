@@ -106,8 +106,12 @@ def main():
         context=contexts[proof['id']];selected=context.get('selected_successor_context')
         expected=selected['feature_sha256']if selected else context['original_feature_sha256']
         metadata=selected['metadata']if selected else context['original_metadata']
-        if proof['current_feature_sha256']!=expected or proof['current_metadata_sha256']!=sha256(canonical_json(metadata)):
-            raise ValueError('Selected context feature/metadata whole-byte binding differs')
+        # Successor *_metadata_sha256 covers the WHOLE feature without geometry,
+        # while context metadata is only properties.metadata. Their digests have
+        # different domains. Authenticate both whole feature vintages against
+        # accepted context-stage raw-source bindings rather than equating them.
+        if proof['current_feature_sha256']!=expected or proof['original_feature_sha256']!=context['original_feature_sha256']:
+            raise ValueError('Selected/original whole source-feature context binding differs')
         if selected:
             current_contexts[proof['id']].update(original_metadata=metadata,ancestry=selected['ancestry'],original_parent_id=selected['original_parent_id'])
     manifest=inputs.json(base.M,'data/native-ownership/repaired-v7/manifest.json')
@@ -197,7 +201,7 @@ def main():
     original_batches=rows(inputs,args.frozen_commit,frozen['outputs']['batches'])
     # Full current family content is a validated lossless delta; omitted identical
     # values remain ordinary complete original rows rather than duplicate tables.
-    outputs['current-batches-delta']=base.write_parts(out,'current-batches-delta',[delta(original_batches,batches)])
+    outputs['current-batches']=base.write_parts(out,'current-batches',batches)
     outputs['current-operational-batches']=base.write_parts(out,'current-operational-batches',operational)
     outputs['current-rank-positions']=base.write_parts(out,'current-rank-positions',[{'component':r['component'],'rank_positions':r['rank_positions'],'actionable_batch_id':r['current_actionable_batch_id'],'observed_scope_bucket':r['current_observed_scope_bucket']}for r in current_records])
     outputs['current-new-investigations']=base.write_parts(out,'current-new-investigations',[new_records[i]for i in sorted(new_records)])
@@ -208,6 +212,7 @@ def main():
         'native_counts':counts,'full_grid_accounting':accounting,'rank_views':queues,'triage_counts':dict(sorted(triage.items())),
         'fine_family_count':len(batches),'operational_batch_count':len(operational),'prioritized_dispatch_candidates':dispatch_candidates(operational),
         'inputs':list(inputs.pins.values()),'outputs':outputs,'software':software,
+        'source_metadata_hash_domains':'Successor metadata hashes cover whole source feature excluding geometry. Accepted context metadata covers its properties.metadata only; both source feature vintages join every context by their complete feature hashes. No digest equality across these different domains is asserted.',
         'complete_current_investigation_view':'Complete original investigations retained for identical current component IDs; six new full investigations join ordinary complete current component/fragment/source/contact bindings. Current complete rank positions and native overlays join by exact ID. Complete original/current lineage remains bound to accepted successor products.',
         'limits':['Accepted7c7 successor candidate, not an actual merged/released/production claim.','All measurements scoped to one representative cell and exact stored cell centre; remaining component cells unchecked.','Cause, water, source authority and administrative assignment remain unknown unless separately researched.','Complete current fine families and operational batches are disjoint triaged backlog; no repair, fill or automatic claim eligibility.']}
     (out/'report.json').write_bytes(canonical_json(report));print(json.dumps({'current_components':len(current_records),'new':len(new_components),'batches':len(batches),'operational':len(operational)}),flush=True)
