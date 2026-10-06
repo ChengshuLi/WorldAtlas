@@ -1,0 +1,15 @@
+{
+  "byte_recipe": "SHA256 concatenation in report outputs order then residue_outputs order; each frame is UTF8 basename, one zero byte, unsigned8byte bigendian compressed file length, then every unchanged compressed file byte.",
+  "comparison": "coordination/engineering/physical-gap-audit-1005-20261005-local18/final-two-run-comparison.json",
+  "hash_kind": "ordered complete compressed product bytes framed by filename and byte count",
+  "kind": "reproducibility",
+  "limits": [
+    "Report paths normalized only for report comparison; actual output bytes compared unchanged."
+  ],
+  "method_id": "physical-discovery",
+  "outcome": "passed",
+  "run_one": "detection-v4",
+  "run_one_sha256": "2ed330add2ed9afa8e1419c86b8046ce636b70e8d317622122031f3b99e40f4f",
+  "run_two": "detection-v5",
+  "run_two_sha256": "2ed330add2ed9afa8e1419c86b8046ce636b70e8d317622122031f3b99e40f4f"
+}

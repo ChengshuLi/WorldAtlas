@@ -1,0 +1,7 @@
+{
+  "command": "PYTHON=.cache/audit-python/bin/python3 node --test test/physical-gap-audit.test.mjs test/lossless-audit-inputs.test.mjs test/physical-audit-ledger.test.mjs test/geographic-gaps.test.mjs test/native-regression-inputs.test.mjs",
+  "limits": [
+    "Synthetic controls and immutable read-only source transport; not factual repair or delivery."
+  ],
+  "tap": "\u2714 geographic gap audit preserves seam/island/water and tile controls (205.901041ms)\n\u2714 lossless audit input envelopes preserve complete originals and reject tampering (58.095417ms)\n\u2714 shallow PR and queue regressions obtain only missing immutable vintages and verify availability (1.507417ms)\n\u2714 unpublished evidence and absent native implementation do not fetch or inspect Git (0.146625ms)\n\u2714 failed or incomplete frozen input fetch cannot establish regression coverage (0.363459ms)\n\u2714 complete physical audit ledger rejects omissions, changed bytes and lost unknowns (356.263875ms)\n\u2714 before-water audit retains gaps, unknown water, tiny shapes and all residues (134.586792ms)\n\u2139 tests 7\n\u2139 suites 0\n\u2139 pass 7\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 415.819708\n"
+}
