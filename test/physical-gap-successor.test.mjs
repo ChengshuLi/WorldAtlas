@@ -7,5 +7,5 @@ test('immutable physical-gap successor reuse rejects stale, incomplete and unkno
     encoding: 'utf8', env: process.env, timeout: 120000
   });
   assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
-  assert.match(result.stderr, /Ran 31 tests/);
+  assert.match(result.stderr, /Ran 32 tests/);
 });

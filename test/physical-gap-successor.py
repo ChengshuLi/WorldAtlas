@@ -258,6 +258,40 @@ class SuccessorReuseControls(unittest.TestCase):
         self.assertEqual(plan['decision_counts'], {'reuse-original-output-bytes': 1, 'recompute': 1})
         self.assertEqual(plan['tiles'][1]['reason'], 'new-tile')
 
+    def test_plan_indexes_large_tile_rosters_and_preserves_every_decision(self):
+        def expand(value, payloads, count):
+            rows = [copy.deepcopy(value['tiles'][0])]
+            for index in range(1, count):
+                tile_id = f'tile-{index}'
+                tile = copy.deepcopy(value['tiles'][0])
+                tile['tile_id'] = tile_id
+                for output in tile['outputs']:
+                    previous_path = output['file']['path']
+                    raw = payloads[output['source_commit'] + ':' + previous_path]
+                    role = output['role']
+                    path = f'tile/{index}-{role}.json'
+                    row = descriptor(path, raw)
+                    output['file'] = row
+                    value['files'].append({'source_commit': value['snapshot_id'],
+                                           'role': f'tile-output:{tile_id}:{role}', 'file': row})
+                    payloads[value['snapshot_id'] + ':' + path] = raw
+                rows.append(tile)
+            value['tiles'] = rows
+            roster = {'tile_ids': [row['tile_id'] for row in rows]}
+            raw_roster = (json.dumps(roster, separators=(',', ':')) + '\n').encode()
+            payloads[value['snapshot_id'] + ':tiles.json'] = raw_roster
+            roster_row = next(row for row in value['files'] if row['role'] == 'tile-roster')
+            roster_row['file'] = descriptor('tiles.json', raw_roster)
+            return rows
+
+        count = 2048
+        expand(self.old, self.old_files, count)
+        expand(self.new, self.new_files, count)
+        plan = build_reuse_plan(self.old, self.new, self.old_files, self.new_files)
+        self.assertEqual(plan['tile_decision_count'], count)
+        self.assertEqual(plan['decision_counts'], {'reuse-original-output-bytes': count})
+        self.assertEqual([row['tile_id'] for row in plan['tiles']], [f'tile-{i}' for i in range(count)])
+
     def test_tampered_source_file_rejects_before_reuse(self):
         self.new_files['2' * 40 + ':source.json'] += b'changed'
         with self.assertRaisesRegex(ValueError, 'do not match'):

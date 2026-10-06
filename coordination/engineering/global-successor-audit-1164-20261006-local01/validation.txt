@@ -5,15 +5,16 @@ Author worker: 01a11028-e91d-7fa1-bf6a-32390106d41d
 
 Passed with Python 3.12.14:
   python3 -B test/physical-gap-successor.py
-  Result: 31 controls passed. Controls cover complete/omitted/tampered byte closures,
+  Result: 32 controls passed. Controls cover complete/omitted/tampered byte closures,
   encoded and nested gzip restoration, source/execution commit bindings, code/runtime/
   domain changes, layered query order and metadata changes, release/hierarchy/native
   provenance changes, checked/unchecked output completeness, unknown retention,
-  tiny/line/point remnants, forced recompute, new tiles, and complete preview accounting.
+  tiny/line/point remnants, forced recompute, new tiles, complete preview accounting,
+  and a 2,048-tile plan with one preserved decision per tile.
 
 Passed with Node 24.19.0 and Python 3.12.14:
   node --test test/physical-gap-successor.test.mjs
-  Result: wrapper passed; it ran the same 31 Python controls.
+  Result: wrapper passed; it ran the same 32 Python controls.
 
 Passed:
   git diff --check

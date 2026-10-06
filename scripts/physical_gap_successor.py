@@ -283,14 +283,20 @@ def reuse_decision(original, successor, original_files, successor_files, tile_id
                            tile_id, set(force_recompute))
 
 
-def _reuse_verified(original, successor, verified_original, verified_successor, tile_id, forced):
+def _reuse_verified(original, successor, verified_original, verified_successor, tile_id, forced,
+                    before=None, after=None, original_execution=None, successor_execution=None):
     if tile_id in forced:
         return {'status': 'recompute', 'reason': 'explicit-force-recompute', 'tile_id': tile_id}
     if canonical_json(original['semantics']) != canonical_json(successor['semantics']):
         return {'status': 'recompute', 'reason': 'global-semantics-changed', 'tile_id': tile_id}
-    if _execution_fingerprints(original) != _execution_fingerprints(successor):
+    if original_execution is None:
+        original_execution = _execution_fingerprints(original)
+    if successor_execution is None:
+        successor_execution = _execution_fingerprints(successor)
+    if original_execution != successor_execution:
         return {'status': 'recompute', 'reason': 'execution-code-runtime-or-domain-bytes-changed', 'tile_id': tile_id}
-    before, after = _tile(original, tile_id), _tile(successor, tile_id)
+    before = _tile(original, tile_id) if before is None else before
+    after = _tile(successor, tile_id) if after is None else after
     if (any(before[key] != after[key] for key in ('bounds', 'query_order', 'status'))
             or canonical_json(before['unknowns']) != canonical_json(after['unknowns'])
             or _member_fingerprints(before, verified_original) != _member_fingerprints(after, verified_successor)):
@@ -318,7 +324,10 @@ def build_reuse_plan(original, successor, original_files, successor_files, force
     verified_original = verify_snapshot(original, original_files)
     verified_successor = verify_snapshot(successor, successor_files, require_outputs=False)
     old_rows = {row['tile_id']: row for row in original['tiles']}
-    new_ids = [row['tile_id'] for row in successor['tiles']]
+    new_rows = {row['tile_id']: row for row in successor['tiles']}
+    new_ids = list(new_rows)
+    original_execution = _execution_fingerprints(original)
+    successor_execution = _execution_fingerprints(successor)
     forced = set(force_recompute)
     decisions = []
     for tile_id in new_ids:
@@ -326,8 +335,12 @@ def build_reuse_plan(original, successor, original_files, successor_files, force
             decisions.append({'status': 'recompute', 'reason': 'new-tile', 'tile_id': tile_id})
         else:
             decisions.append(_reuse_verified(original, successor, verified_original,
-                                             verified_successor, tile_id, forced))
+                                             verified_successor, tile_id, forced,
+                                             before=old_rows[tile_id], after=new_rows[tile_id],
+                                             original_execution=original_execution,
+                                             successor_execution=successor_execution))
     old_ids = [row['tile_id'] for row in original['tiles']]
+    new_id_set = set(new_ids)
     counts = {}
     for row in decisions:
         counts[row['status']] = counts.get(row['status'], 0) + 1
@@ -336,7 +349,7 @@ def build_reuse_plan(original, successor, original_files, successor_files, force
             'original_snapshot': original['snapshot_id'], 'successor_snapshot': successor['snapshot_id'],
             'original_tile_count': len(old_ids), 'successor_tile_count': len(new_ids),
             'tile_decision_count': len(decisions), 'decision_counts': counts,
-            'retired_tile_ids': [tile_id for tile_id in old_ids if tile_id not in set(new_ids)],
+            'retired_tile_ids': [tile_id for tile_id in old_ids if tile_id not in new_id_set],
             'tiles': decisions,
             'limits': ['Preview plan only; no tile was declared installed or current.',
                        'Unchanged tile reuse does not reuse global connectivity, contacts, crosswalks, priorities, or native-context statuses.',
