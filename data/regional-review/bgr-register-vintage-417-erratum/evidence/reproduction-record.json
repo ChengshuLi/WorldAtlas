@@ -1,0 +1,23 @@
+{
+  "equal": true,
+  "historical_hash_match": true,
+  "issue": 1191,
+  "output_redirection": "Only the three exact output paths were redirected; logical path strings were preserved. Original files were never opened for writing.",
+  "products": {
+    "bulgaria-audit-summary.json": {
+      "bytes": 2539,
+      "sha256": "a915b4478bcd822bae51576c16c0a65f5a136157c6a1ad6d1a5369b21e34a928"
+    },
+    "bulgaria-full-source-roster.csv": {
+      "bytes": 61666,
+      "sha256": "9bf598322c17f5cbf0be86e859bb126533e6e8685f0748df047c391ed459eb94"
+    },
+    "bulgaria-municipality-crosswalk.csv": {
+      "bytes": 94358,
+      "sha256": "8e16f596cc7805d8841a77d40ef202efe7c34f60acbaa5d6c66d19cd0a61a6c9"
+    }
+  },
+  "row_level_outputs": "written only to ignored local scratch during reproduction, then removed",
+  "runs": 2,
+  "version": 1
+}

@@ -1,0 +1,84 @@
+{
+  "baseline_commit": "9593d2f46953233db3614622ffe54da1336925fd",
+  "controls": {
+    "missing_member_date": {
+      "date": null,
+      "member": "synthetic/missing-date.json",
+      "outcome": "unknown-not-imputed"
+    },
+    "outputs_exclusive": "see control-results.json",
+    "positive_actual_member_dates": "passed",
+    "synthetic_district_date": {
+      "data_reference_date": "2011-02-01",
+      "fixture_sha256": "8f0753045006ef28ea8e2bac06cba2f3737a5933f43a7391e7bfa5fdcfb567d8",
+      "member": "synthetic/ek_obl.json",
+      "outcome": "reported-separately"
+    }
+  },
+  "interpretation": "The two complete NSI table members have different data-reference dates; their separate 2026-10-05 export timestamps do not make the reference dates contemporaneous. The retained 2019 geometry-to-register crosswalk is lexical/code evidence against those distinct register-member vintages, not a current legal-parent or polygon proof.",
+  "issue": 1191,
+  "issue_scope": {
+    "all_subjects_match_preserved_213_id_roster": true,
+    "count": 213,
+    "member_location_ids_sha256": "7824ec6e2fa82cb1c22a221ab3626952d65a61014eb0b652241f9474b7a4f8ff"
+  },
+  "original_reproduction": {
+    "equal": true,
+    "historical_hash_match": true,
+    "output_redirection": "Only the three exact output paths were redirected; logical path strings were preserved. Original files were never opened for writing.",
+    "products": {
+      "bulgaria-audit-summary.json": {
+        "bytes": 2539,
+        "sha256": "a915b4478bcd822bae51576c16c0a65f5a136157c6a1ad6d1a5369b21e34a928"
+      },
+      "bulgaria-full-source-roster.csv": {
+        "bytes": 61666,
+        "sha256": "9bf598322c17f5cbf0be86e859bb126533e6e8685f0748df047c391ed459eb94"
+      },
+      "bulgaria-municipality-crosswalk.csv": {
+        "bytes": 94358,
+        "sha256": "8e16f596cc7805d8841a77d40ef202efe7c34f60acbaa5d6c66d19cd0a61a6c9"
+      }
+    },
+    "row_level_outputs": "written only to ignored local scratch during reproduction, then removed",
+    "runs": 2
+  },
+  "previous_manifest_source_vintage": "register data current as of 2023-12-12; archive export 2026-10-05 03:00",
+  "register_members": [
+    {
+      "data_reference_date": "2023-12-12",
+      "data_reference_raw": "12/12/2023",
+      "data_reference_status": "known",
+      "export_date": "2026-10-05",
+      "export_time": "03:00",
+      "export_timestamp_raw": "05/10/2026 03:00",
+      "export_timestamp_status": "known",
+      "member": "ek_obst.json",
+      "record_rows_excluding_metadata": 265,
+      "timezone": "unspecified by archive"
+    },
+    {
+      "data_reference_date": "2015-10-05",
+      "data_reference_raw": "05/10/2015",
+      "data_reference_status": "known",
+      "export_date": "2026-10-05",
+      "export_time": "03:28",
+      "export_timestamp_raw": "05/10/2026 03:28",
+      "export_timestamp_status": "known",
+      "member": "ek_obl.json",
+      "record_rows_excluding_metadata": 28,
+      "timezone": "unspecified by archive"
+    }
+  ],
+  "source_archive": {
+    "bytes": 413854,
+    "decoded_bytes_all_members": 4712618,
+    "landing_page": "https://www.nsi.bg/nrnm/ekatte/index",
+    "members_count": 12,
+    "path": "data/regional-review/regional-review-aa0be1f8b58caec6/source/NSI-EKATTE-export-20261005.zip",
+    "retrieval_url": "https://www.nsi.bg/nrnm/ekatte/zip/download?files_type=json",
+    "sha256": "6d848e467493f4d6ec6c1c9081bf51266ad888dc8f232c3d1fd2b0a265ace77d"
+  },
+  "version": 1,
+  "worker_id": "01a10947-7d6e-7ba2-98a1-a9f91dedabfc"
+}

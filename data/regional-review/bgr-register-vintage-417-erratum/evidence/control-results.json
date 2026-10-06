@@ -1,0 +1,37 @@
+{
+  "controls": [
+    {
+      "actual_dates": [
+        "2023-12-12",
+        "2015-10-05"
+      ],
+      "name": "separate-member-date-positive-control",
+      "outcome": "passed"
+    },
+    {
+      "did_not_inherit_municipality_date": true,
+      "name": "synthetic-different-member-date",
+      "outcome": "passed",
+      "synthetic_date": "2011-02-01"
+    },
+    {
+      "missing_value_remains_unknown": true,
+      "name": "missing-date",
+      "outcome": "passed"
+    },
+    {
+      "name": "two-run-historical-products",
+      "outcome": "passed",
+      "product_hashes_match_retained_values": true
+    },
+    {
+      "existing_files_unchanged": true,
+      "exit_code": 1,
+      "name": "existing-evidence-output-sentinel",
+      "outcome": "passed",
+      "reason": "refusing to replace existing evidence output directory"
+    }
+  ],
+  "issue": 1191,
+  "version": 1
+}
