@@ -1,0 +1,250 @@
+{
+  "command": "python3 scripts/build-physical-gap-components.py --commit c603befd3aaf4da90d59b12378e1e0739331efba --output coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1",
+  "executed_code_commit": "8f6dc184d1a41b634cec4759bb57b3cc04dd980a",
+  "input_commit": "c603befd3aaf4da90d59b12378e1e0739331efba",
+  "limit": "Whole comparison computed but component-accounting export collided with new component geometry filename. Partial products are preserved without completion or approval claim; corrected full runs use separate exclusive vintages.",
+  "log": "{\"stage\": \"new-components-complete\", \"components\": 95174, \"contacts\": 4889}\nTraceback (most recent call last):\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/scripts/build-physical-gap-components.py\", line 190, in <module>\n    run(args.commit, args.output)\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/scripts/build-physical-gap-components.py\", line 149, in run\n    outputs[name] = write_bundles(out, name.replace('_', '-'), rows)\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/scripts/build-physical-gap-components.py\", line 84, in write_bundles\n    flush()\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/scripts/build-physical-gap-components.py\", line 76, in flush\n    with target.open('xb') as stream:\n         ^^^^^^^^^^^^^^^^^\n  File \"/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py\", line 1013, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileExistsError: [Errno 17] File exists: '/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/components-000.json.gz'\n",
+  "outputs_preserved": [
+    {
+      "bytes": 2754971,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/component-links-000.json.gz",
+      "sha256": "314606ded07fa56ddece01faeeca5282b8efb7aef580f4d6e5819a9e95a2b8e2"
+    },
+    {
+      "bytes": 2756243,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/component-links-001.json.gz",
+      "sha256": "3030e67424aa2d9c877c659ba90896f107057e25023c9fe7fe1825234c318e77"
+    },
+    {
+      "bytes": 2757493,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/component-links-002.json.gz",
+      "sha256": "6bc8dbde1c4577df6f3dcdd12afb89be7a74d77b7a332eaa42a79f35e8212cea"
+    },
+    {
+      "bytes": 107604,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/component-links-003.json.gz",
+      "sha256": "1164df53edafe54154e2afc3b7fbb59afc4a5bcf41bb8d41a238c442fbae8096"
+    },
+    {
+      "bytes": 2080037,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/components-000.json.gz",
+      "sha256": "46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411"
+    },
+    {
+      "bytes": 2081609,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/components-001.json.gz",
+      "sha256": "ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b"
+    },
+    {
+      "bytes": 2080126,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/components-002.json.gz",
+      "sha256": "001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d"
+    },
+    {
+      "bytes": 2081831,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/components-003.json.gz",
+      "sha256": "1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609"
+    },
+    {
+      "bytes": 2074475,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/components-004.json.gz",
+      "sha256": "541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014"
+    },
+    {
+      "bytes": 2080606,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/components-005.json.gz",
+      "sha256": "f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf"
+    },
+    {
+      "bytes": 2085907,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/components-006.json.gz",
+      "sha256": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187"
+    },
+    {
+      "bytes": 2079265,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/components-007.json.gz",
+      "sha256": "654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca"
+    },
+    {
+      "bytes": 2085110,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/components-008.json.gz",
+      "sha256": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156"
+    },
+    {
+      "bytes": 2079838,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/components-009.json.gz",
+      "sha256": "c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f"
+    },
+    {
+      "bytes": 1714760,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/components-010.json.gz",
+      "sha256": "e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a"
+    },
+    {
+      "bytes": 771440,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/contacts-000.json.gz",
+      "sha256": "4a150385c4b026e55cd2faf756f8a3fc43eddac2d8a58c118c9fbcf8419777df"
+    },
+    {
+      "bytes": 2227171,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/fragment-pairs-000.json.gz",
+      "sha256": "0e3188bfc191f3b4399648546554d5f1781622d01c57cb3b133311a8e738516a"
+    },
+    {
+      "bytes": 2177550,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/fragment-pairs-001.json.gz",
+      "sha256": "749fd73a2f8d3007bfc6e06cc1087583e7464eb9276bf5b4a814322e3a8f8c9c"
+    },
+    {
+      "bytes": 2250082,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/fragment-pairs-002.json.gz",
+      "sha256": "f37010eff63c1fc801ac60f39fe83232246dc2cddc96698e9b2a880a84d71435"
+    },
+    {
+      "bytes": 2196336,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/fragment-pairs-003.json.gz",
+      "sha256": "8a6ff67d841f3525c90b305ef8304f5b1515444fbb68faf60f6ef3a12ce284e7"
+    },
+    {
+      "bytes": 2221733,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/fragment-pairs-004.json.gz",
+      "sha256": "5428f748cd3b998a37c49735d02b72d5275d66b9baa9cd474bb8e8fec5c61128"
+    },
+    {
+      "bytes": 2273937,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/fragment-pairs-005.json.gz",
+      "sha256": "43d55753d6bcbe2dd9965af62be041dadd6a4c362fa6301dca853dcddd767bab"
+    },
+    {
+      "bytes": 2256722,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/fragment-pairs-006.json.gz",
+      "sha256": "db6cd76976291e7f8afa867fa4b5c5974878350eef8fa22a2146838c48619894"
+    },
+    {
+      "bytes": 2018255,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/fragment-pairs-007.json.gz",
+      "sha256": "7f2e29fde807c99f389965af3ca926fd822736b4214e9b2addb8dd5b0ef72f18"
+    },
+    {
+      "bytes": 2180280,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/fragment-pairs-008.json.gz",
+      "sha256": "846a08892d53d4b0f1caa4ae9a9541e1700b019d2f97417dd0704fff9ed4c20c"
+    },
+    {
+      "bytes": 2190759,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/fragment-pairs-009.json.gz",
+      "sha256": "27d6d93b180e9ec96232a4109f68e56fc6b95e6b004f92e28fbdfa5677b96f60"
+    },
+    {
+      "bytes": 653050,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/fragment-pairs-010.json.gz",
+      "sha256": "a7219ba6d38e8cc44df3e86a095440685d791fb5c68b6ff1ae3f59f5c7124937"
+    },
+    {
+      "bytes": 2264791,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/new-fragments-000.json.gz",
+      "sha256": "de06004691c70bf09fc8a1a6d3b0bc7b98e42afae05ddd85447d408845389149"
+    },
+    {
+      "bytes": 2264033,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/new-fragments-001.json.gz",
+      "sha256": "f1c0c7be4148a4271dc8e52be5883d892f4c49dd2ece20113f269dc4ce7e9a9d"
+    },
+    {
+      "bytes": 2278862,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/new-fragments-002.json.gz",
+      "sha256": "b7bd9eb7ca0cc1d84fc81ccb9031a5f2fd51847d2f7bcc37de9d4427cef326b7"
+    },
+    {
+      "bytes": 2263359,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/new-fragments-003.json.gz",
+      "sha256": "de043350fca3c6020e8bb66722db49175442a1e8715aa1ba01544d4c766f5e46"
+    },
+    {
+      "bytes": 2254136,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/new-fragments-004.json.gz",
+      "sha256": "e3a4d115ad50f45390267a036de5683c71443b39b98bf1062bc286691e896715"
+    },
+    {
+      "bytes": 2266147,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/new-fragments-005.json.gz",
+      "sha256": "90858fae6c212ee30058c7ab5350bdb059404ca269f5563456d5b1cb9e56d2fb"
+    },
+    {
+      "bytes": 1959674,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/new-fragments-006.json.gz",
+      "sha256": "3696927e3192f3779d8ef43e0dbc1a88ed75e233d15ffc1d1bba143c3614b580"
+    },
+    {
+      "bytes": 2592139,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/old-fragments-000.json.gz",
+      "sha256": "90752aac83bf37dcc1072b7a86f774419c9a3d5ef02e633cdea03abcf3c345b9"
+    },
+    {
+      "bytes": 2588838,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/old-fragments-001.json.gz",
+      "sha256": "336eb62a9f89edbd67fc596b3f9eacf7ee21691a8ffd18b9b307ee98596d039d"
+    },
+    {
+      "bytes": 2589968,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/old-fragments-002.json.gz",
+      "sha256": "fb17c142164f71ede6fd01eaf80cb9e42920c828f8f73bc117dd9952c615b9f4"
+    },
+    {
+      "bytes": 2585022,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/old-fragments-003.json.gz",
+      "sha256": "6263d0b1eae686c3959b76f62ba12b293e770ebdab05d2cd5c1ff9e4305b3b7a"
+    },
+    {
+      "bytes": 2593206,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/old-fragments-004.json.gz",
+      "sha256": "a99bc1212c63293fdb49abd21f951c9b23ee81ad079e481180a2ad4edb856766"
+    },
+    {
+      "bytes": 2132658,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v1/old-fragments-005.json.gz",
+      "sha256": "b7816d264ea3fee42d2c94045941f8b4acb573adfa93b1ba85683add94dac645"
+    }
+  ],
+  "status": "incomplete-export-failed"
+}

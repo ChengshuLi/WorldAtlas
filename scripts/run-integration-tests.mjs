@@ -21,7 +21,12 @@ export const NATIVE_REGRESSION_COMMITS = [
   'e67eeafc1aa130aa5c1a6d1222d39116625fd003',
   '8b61b9303553f2068f18ad5a000d4cba14059547',
   'b6e0d0d21cfd6dde68c3c292c9513d3a24896a11',
-  '85571b6ef23f5565f08693a542fa7dad20c651b8'
+  '85571b6ef23f5565f08693a542fa7dad20c651b8',
+  // Exact original input and both complete/incomplete execution vintages
+  // for the whole-file physical component custody regression.
+  'c603befd3aaf4da90d59b12378e1e0739331efba',
+  '8f6dc184d1a41b634cec4759bb57b3cc04dd980a',
+  '6ed6406f9fad4c7c468b06a376346b216cb50db7'
 ];
 export function prepareNativeRegressionInputs(profile,{exists=fs.existsSync,run=spawnSync}={}) {
   if(profile!=='full'||!exists('scripts/native-ownership/validate-context-input-stage.mjs'))return {applicable:false,fetched:[]};
