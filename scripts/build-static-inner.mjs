@@ -15,7 +15,7 @@ import {packageReferenceBundle} from './package-reference-bundle.mjs';
 import {loadCoverageClassification} from '../src/coverage-classification.js';
 import {packageStartupOwnership} from './package-startup-ownership.mjs';
 import {selectBuildOwnership} from './select-build-ownership.mjs';
-import {validateContextInputStage} from './native-ownership/validate-context-input-stage.mjs';
+import {validateBuildContextStage} from './native-ownership/validate-build-context-stage.mjs';
 import {packageNativeLatitudes} from './package-native-latitudes.mjs';
 import {rebindCoverageManifest} from './rebind-coverage-manifest.mjs';
 import {readGeographicReleaseManifest} from './read-geographic-release-manifest.mjs';
@@ -46,7 +46,8 @@ try {
   const fixedGridPath=process.env.ATLAS_NATIVE_GRID_MANIFEST||'data/canonical-grid/manifest.json';
   const selectedGrid=await fs.access(fixedGridPath).then(()=>selectBuildOwnership({manifestPath:fixedGridPath,expectedSha256:process.env.ATLAS_NATIVE_GRID_SHA256,expectedReference:geographicRelease,requireNative:!!process.env.ATLAS_NATIVE_GRID_MANIFEST}),()=>{if(process.env.ATLAS_NATIVE_GRID_MANIFEST)throw Error('Selected native grid is missing');return null;});
   const fixedGrid=selectedGrid?.manifest;
-  const nativeContextInputStage=fixedGrid?.method?await validateContextInputStage({expectedReference:geographicRelease}):null;
+  const nativeBuildContext=fixedGrid?.method?await validateBuildContextStage({expectedReference:geographicRelease}):null;
+  const nativeContextInputStage=nativeBuildContext?.receipt??null;
   let gridIndex,ownership;
   if(fixedGrid){
     if(fixedGrid.footprints_sha256!==checkPrepared(reference.features)||fixedGrid.hierarchy_sha256!==createHash('sha256').update(await fs.readFile('data/hierarchy.json')).digest('hex'))throw Error('Precompiled canonical grid is stale');
@@ -99,7 +100,7 @@ try {
     if(!fixedGrid)throw Error('Physical classification requires canonical grid');
     coverageClassification=JSON.parse(await fs.readFile(coveragePath));
     const canonicalHash=selectedGrid.sha256;
-    if(fixedGrid.method){const originalBytes=await fs.readFile('data/canonical-grid/manifest.json');coverageClassification=rebindCoverageManifest(coverageClassification,{originalGrid:JSON.parse(originalBytes),originalGridSha256:createHash('sha256').update(originalBytes).digest('hex'),selectedGrid:fixedGrid,selectedGridSha256:canonicalHash,release:geographicRelease});}
+    if(fixedGrid.method){const originalBytes=await fs.readFile('data/canonical-grid/manifest.json');coverageClassification=rebindCoverageManifest(coverageClassification,{originalGrid:JSON.parse(originalBytes),originalGridSha256:createHash('sha256').update(originalBytes).digest('hex'),selectedGrid:fixedGrid,selectedGridSha256:canonicalHash,release:geographicRelease,predecessorRelease:nativeBuildContext?.predecessorRelease,geometryValidation:nativeBuildContext?.geometryValidation});}
     await loadCoverageClassification(coverageClassification,{...fixedGrid,release_id:geographicRelease.id,canonical_grid_sha256:canonicalHash},async url=>new Response(await fs.readFile('data/'+url.replace(/^\.\//,''))));
     pixelMap.canonical_grid_sha256=canonicalHash;
     await fs.mkdir('dist/coverage-classification',{recursive:true});
