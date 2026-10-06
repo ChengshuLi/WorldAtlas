@@ -46,7 +46,10 @@ def validate(root, index):
         if p.is_symlink() or not p.is_file():
             raise ValueError('Complete ordinary payload required')
         raw = p.read_bytes()
-        if descriptor(target, raw) != payloads[target] or describe(original, raw) != alias['original']:
+        original_encoded = {k: v for k, v in alias['original'].items() if not k.startswith('uncompressed_')}
+        if descriptor(target, raw) != payloads[target] or descriptor(original, raw) != original_encoded:
+            raise ValueError('Redirected or changed whole-file alias')
+        if describe(original, raw) != alias['original']:
             raise ValueError('Redirected or changed whole-file alias')
         aliases[original] = raw
         used.add(target)
