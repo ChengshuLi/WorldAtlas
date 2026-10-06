@@ -1,0 +1,27 @@
+{
+  "provider": "geoBoundaries",
+  "source_id": "gb:ESP:ADM3",
+  "represented_vintage": "2018",
+  "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "repository": "https://github.com/wmgeolab/geoBoundaries",
+  "commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+  "source_path": "releaseData/gbOpen/ESP/ADM3/geoBoundaries-ESP-ADM3.geojson",
+  "lfs_pointer_route": "https://api.github.com/repos/wmgeolab/geoBoundaries/git/blobs/f43a49f7c3d3c750f4f71f009acd8893748b6b55",
+  "lfs_pointer_git_blob_sha1": "f43a49f7c3d3c750f4f71f009acd8893748b6b55",
+  "lfs_pointer_bytes": 134,
+  "lfs_pointer_sha256": "989a3b8deb49621fea85f484a3561b5e0de7a179960db86b0634d719bb121ea9",
+  "declared_lfs_object_sha256": "ccce612ee6275d91e2d2fcccf7912087dcc72377abec6c8e20c65089ecb48564",
+  "declared_lfs_object_bytes": 149105849,
+  "resolved_lfs_route": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/ESP/ADM3/geoBoundaries-ESP-ADM3.geojson",
+  "resolved_lfs_response_etag": "ccce612ee6275d91e2d2fcccf7912087dcc72377abec6c8e20c65089ecb48564",
+  "atlas_baseline_registry_sha256": "e5bfa1c3889ea763ca2bb82c7f1e8ff9eff715dcb99ce405293a03de7ac85862",
+  "atlas_baseline_registry_pin_status": "unresolved mismatch: it does not equal this exact upstream commit's LFS pointer OID or the resolved source bytes",
+  "retrieved_on": "2026-10-06",
+  "verification_limits": [
+    "The complete upstream LFS object matches its exact commit pointer and media response ETag.",
+    "The independent SHA-256 recorded in the Atlas source registry does not match; its original provenance and intended source bytes remain unresolved.",
+    "Do not relabel the registry hash as verified or silently replace it.",
+    "The source is country-level ADM3 geometry and does not by itself establish a mutually authoritative Spain–Portugal international boundary."
+  ]
+}

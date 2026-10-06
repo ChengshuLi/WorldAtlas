@@ -36,7 +36,7 @@ async function beginPart() {
   partIndex += 1;
   partBytes = 0;
   partHash = createHash('sha256');
-  const filename = `part-${String(partIndex + 1).padStart(2, '3')}.bin`;
+  const filename = `part-${String(partIndex + 1).padStart(3, '0')}.bin`;
   handle = await open(path.join(output, filename), 'wx');
   parts.push({ filename, offset: total, bytes: 0 });
 }
@@ -76,8 +76,6 @@ try {
 }
 
 const actualSha = whole.digest('hex');
-if (total !== expectedBytes) throw new Error(`received ${total} bytes; expected ${expectedBytes}`);
-if (actualSha !== expectedSha) throw new Error(`whole-original SHA-256 ${actualSha} did not match pinned ${expectedSha}`);
 const receipt = {
   version: 1,
   source_url: url.href,
@@ -90,9 +88,12 @@ const receipt = {
   actual_bytes: total,
   expected_sha256: expectedSha,
   actual_sha256: actualSha,
+  verification_status: total === expectedBytes && actualSha === expectedSha ? 'verified' : 'failed',
+  verification_failure: total !== expectedBytes ? `received ${total} bytes; expected ${expectedBytes}` : actualSha !== expectedSha ? `whole-original SHA-256 ${actualSha} did not match pinned ${expectedSha}` : null,
   partitioning: 'contiguous raw source-byte stream, no decode or transformation',
   part_limit_bytes: partLimit,
   parts
 };
 await writeFile(path.join(output, 'partition-receipt.json'), `${JSON.stringify(receipt, null, 2)}\n`, { flag: 'wx' });
 process.stdout.write(`${JSON.stringify(receipt, null, 2)}\n`);
+if (receipt.verification_status !== 'verified') process.exitCode = 2;
