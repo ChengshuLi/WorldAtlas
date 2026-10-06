@@ -632,6 +632,12 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/README.md",
+      "bytes": 3217,
+      "sha256": "a3b5902bf1d9128ef754c8d01b8586809bc9040a5098e036f7e145d28ec323c9",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/README.md",
       "bytes": 2044,
       "sha256": "9c0b9fdfc8f31da6b803cf147145ca5cee307fd847d75662527ad76d00108da4",
@@ -1994,6 +2000,12 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "scripts/native-ownership/verify-native-candidate.mjs",
+      "bytes": 8263,
+      "sha256": "d34f791f8eb65b67b073ff2faf4cf3683d3d924e17ca5f4cc6c56d0b54b559a4",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "scripts/package-native-latitudes.mjs",
       "bytes": 1751,
       "sha256": "62e83d7a3837a5d8e3aa76b31b956177ed82694446241c8f407ae4a0a7436bbe",
@@ -2162,6 +2174,18 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "test/native-ownership-compilation.test.mjs",
+      "bytes": 7884,
+      "sha256": "1e68ab6c233c1928be8338d6ecdf3630fe0fa63c0ed91f8c76422fe1fe0b3e90",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/native-preparation.test.mjs",
+      "bytes": 15757,
+      "sha256": "71a901c3eeb620ce8305af4ffe468659d9079b69df632394b1b853141d51015e",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "test/native-renderer.mjs",
       "bytes": 10091,
       "sha256": "1ff21d67ac1fbbd68f44f92fd06cd5b04d4377c26a0e02981e88fd5605818e9d",
@@ -2213,12 +2237,6 @@
       "path": "test/select-build-ownership.test.mjs",
       "bytes": 3179,
       "sha256": "210a53decf048ab205e8b11f9e7919e7001aed079f98ee7cf12f38b6416cb435",
-      "hash_kind": "file-bytes"
-    },
-    {
-      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/README.md",
-      "bytes": 3217,
-      "sha256": "a3b5902bf1d9128ef754c8d01b8586809bc9040a5098e036f7e145d28ec323c9",
       "hash_kind": "file-bytes"
     }
   ],
@@ -2358,6 +2376,10 @@
       "path": ".github/workflows/merge-integration-checks.yml",
       "status": "modified",
       "original_sha256": "e970aaf6eb797b298892707a938a237e40977c63962e8fa840588dcf2cf411b8"
+    },
+    {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/README.md",
+      "status": "added"
     },
     {
       "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/build-readback-v1/README.md",
@@ -2980,6 +3002,10 @@
       "status": "added"
     },
     {
+      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/evidence-quality.json",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/joined-dated-browser-v1/README.md",
       "status": "added"
     },
@@ -3097,6 +3123,11 @@
     {
       "path": "scripts/native-ownership/verify-context-inputs.mjs",
       "status": "added"
+    },
+    {
+      "path": "scripts/native-ownership/verify-native-candidate.mjs",
+      "status": "modified",
+      "original_sha256": "16544a393b8e6fda2fc6e2e4c108c3a878d607c8648fed50885fe5a6e7f6b2f1"
     },
     {
       "path": "scripts/package-native-latitudes.mjs",
@@ -3219,6 +3250,16 @@
       "status": "added"
     },
     {
+      "path": "test/native-ownership-compilation.test.mjs",
+      "status": "modified",
+      "original_sha256": "fd1e18c0e96dce0abba15639691856c9681320a51fb8d93b7637817fc8bd2c9d"
+    },
+    {
+      "path": "test/native-preparation.test.mjs",
+      "status": "modified",
+      "original_sha256": "848496de8425d3c25ca90fdc571e170e0df69ea9d017a5d7319aa1390b48bf7f"
+    },
+    {
       "path": "test/native-renderer.mjs",
       "status": "added"
     },
@@ -3252,14 +3293,6 @@
     },
     {
       "path": "test/select-build-ownership.test.mjs",
-      "status": "added"
-    },
-    {
-      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/README.md",
-      "status": "added"
-    },
-    {
-      "path": "coordination/engineering/native-grid-integration-1010-20261005-local17/evidence-quality.json",
       "status": "added"
     }
   ],
