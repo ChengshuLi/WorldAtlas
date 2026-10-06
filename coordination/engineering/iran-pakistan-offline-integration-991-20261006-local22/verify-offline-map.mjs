@@ -108,11 +108,21 @@ async function gpuOwners(page){
 async function screenSamples(page,renderer,samples){
   return page.evaluate(({renderer,samples})=>{
     const canvas=document.querySelector('.atlas-pixel-canvas'),rect=canvas.getBoundingClientRect(),map=document.querySelector('#map').getBoundingClientRect();
-    let origin,scale,gl;
+    let origin,scale,gl,scaleMeasurement;
     if(renderer==='webgl2'){
       gl=canvas.getContext('webgl2');const p=gl.getParameter(gl.CURRENT_PROGRAM),u=n=>gl.getUniform(p,gl.getUniformLocation(p,n));origin=[...u('origin')];scale=u('scale');gl.drawArrays(gl.TRIANGLES,0,3);
+      // WebGL stores the submitted scale as IEEE-754 binary32, rounded to the
+      // nearest representable value; its uncertainty is half a local ULP.
+      scaleMeasurement={method:'webgl-float32-uniform',absolute_error_bound:2**(Math.floor(Math.log2(Math.abs(scale)))-24)};
     }else{
       const [x,y,width,,stride]=canvas.dataset.frame.split('/').map(Number);origin=[x,y];scale=rect.width/(width*stride);
+      // PixelCanvasLayer sets CSS width = frameWidth * stride * trueScale.
+      // Chromium layout quantizes that width in 1/64 CSS-pixel LayoutUnits.
+      // Admit one complete quantum (covers either rounding or truncation),
+      // divided by the actual frame domain rather than a fixed scale epsilon.
+      const denominator=width*stride,cssQuantum=1/64;
+      scaleMeasurement={method:'canvas-css-layout-width',frame_cell_width:denominator,css_width_quantum:cssQuantum,
+        submitted_css_width:canvas.style.width,measured_css_width:rect.width,absolute_error_bound:cssQuantum/denominator};
     }
     const projected=samples.map(c=>{
       const x=rect.left+(c.x-origin[0])*scale,y=rect.top+(c.y-origin[1])*scale;
@@ -124,7 +134,7 @@ async function screenSamples(page,renderer,samples){
       if(gl)gl.readPixels(cx,canvas.height-1-cy,1,1,gl.RGBA,gl.UNSIGNED_BYTE,rgba);else rgba.set(canvas.getContext('2d').getImageData(cx,cy,1,1).data);
       return {...c,screen:[x,y],rgba:[...rgba]};
     }).filter(Boolean);
-    return {origin,scale,rect:{left:rect.left,top:rect.top,width:rect.width,height:rect.height},frame:canvas.dataset.frame,samples:projected};
+    return {origin,scale,scaleMeasurement,rect:{left:rect.left,top:rect.top,width:rect.width,height:rect.height},frame:canvas.dataset.frame,samples:projected};
   },{renderer,samples});
 }
 try{
@@ -233,16 +243,22 @@ try{
       throw error;
     }finally{await context.close();}
   }
+  // Retain completed real renderer checks before any cross-renderer assertion.
+  fs.writeFileSync(path.join(out,'renderer-results.json'),JSON.stringify({version:1,execution_commit:head,expected,results})+'\n',{flag:'wx'});
   const comparisons=subjects.map((subject,i)=>{
     const gpu=results[0].profiles[i],cpu=results[1].profiles[i];assert.deepEqual(gpu.environments,cpu.environments);
-    assert.ok(Math.abs(gpu.camera.scale-cpu.camera.scale)<1e-6,'Search produced the same map scale in both renderers');
+    const scaleComparison={gpu_scale:gpu.camera.scale,canvas_scale:cpu.camera.scale,
+      difference:Math.abs(gpu.camera.scale-cpu.camera.scale),
+      bound:gpu.camera.scaleMeasurement.absolute_error_bound+cpu.camera.scaleMeasurement.absolute_error_bound,
+      gpu_measurement:gpu.camera.scaleMeasurement,canvas_measurement:cpu.camera.scaleMeasurement};
+    assert.ok(scaleComparison.difference<=scaleComparison.bound,'Same camera scale must agree within measured CSS-layout and binary32 quantization bounds: '+JSON.stringify(scaleComparison));
     // Canvas aligns its cached frame to stride boundaries; compare implied screen
     // placement rather than requiring its internal origin to equal GPU origin.
     const gpuCell=gpu.camera.samples.find(s=>cpu.camera.samples.some(t=>t.x===s.x&&t.y===s.y));assert.ok(gpuCell);
     const cpuCell=cpu.camera.samples.find(s=>s.x===gpuCell.x&&s.y===gpuCell.y);
     assert.ok(Math.abs(gpuCell.screen[0]-cpuCell.screen[0])<=2&&Math.abs(gpuCell.screen[1]-cpuCell.screen[1])<=2,'Same geographic cell occupies the same searched camera');
     const paired=gpu.camera.samples.flatMap(g=>{const c=cpu.camera.samples.find(c=>c.x===g.x&&c.y===g.y);return c?[{cell:[g.x,g.y],gpu:g.rgba,canvas:c.rgba,equal:g.rgba.every((v,k)=>Math.abs(v-c.rgba[k])<=1)}]:[];});
-    return {id:subject.id,matching_ui_owner:true,matching_reference_values:true,paired_visible_cells:paired.length,matching_rgba_cells:paired.filter(p=>p.equal).length,paired};
+    return {id:subject.id,matching_ui_owner:true,matching_reference_values:true,scaleComparison,paired_visible_cells:paired.length,matching_rgba_cells:paired.filter(p=>p.equal).length,paired};
   });
   const report={version:1,execution_commit:head,producer,dist,expected,atlas_manifest_sha256:sha(atlasBytes),inputs:[candidates.pin,deltaInput.pin],built_assets:[...files.values()],
     playwright_version:playwrightPackage.version,browser_version:browser.version(),owned_browser_contexts:true,optional_remote_font_css_disabled:true,all_954_gpu_owners_checked:true,results,comparisons,
