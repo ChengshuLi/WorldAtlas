@@ -154,6 +154,12 @@ def main():
     for name in ("scripts/evidence/geometry.py", "scripts/ellipsoidal_area.py"):
         assert pathlib.Path(ROOT / name).read_bytes() == BASELINE.read(name)
 
+    contact_bytes = git_blob(CONTACT_PATH)
+    contact_rows = json.loads(gzip.decompress(contact_bytes))
+    target_contacts = [r for r in contact_rows if set(r.get("components", [])) & set(IDS)]
+    assert len(target_contacts) == 1 and target_contacts[0]["kind"] == "point-only-ambiguous"
+    contact_fragment_ids = set(target_contacts[0]["fragments"])
+
     components = {}
     fragment_ids = set()
     for name, alias in alias_by_path.items():
@@ -168,6 +174,8 @@ def main():
                 components[f["id"]] = f
                 fragment_ids.update(binding["id"] for binding in f["properties"].get("fragment_bindings", []))
     assert set(components) == set(IDS)
+    component_fragment_ids = set(fragment_ids)
+    fragment_ids.update(contact_fragment_ids)
     fragments = {}
     fragment_input_receipts = []
     for shard in range(17):
@@ -312,10 +320,7 @@ def main():
                                "shapeID": sentinel["shapeID"],
                                "intersection": geom_record(negative), "expected_empty": True})
 
-    contact_bytes = git_blob(CONTACT_PATH)
-    contact_rows = json.loads(gzip.decompress(contact_bytes))
-    target_contacts = [r for r in contact_rows if set(r.get("components", [])) & set(IDS)]
-    assert len(target_contacts) == 1 and target_contacts[0]["kind"] == "point-only-ambiguous"
+    assert set(fragments) == component_fragment_ids | contact_fragment_ids
 
     water_bytes = git_blob(WATER_PATH)
     assert sha(water_bytes) == "a57bd38b23b57d884853c3e8e6da1a4a24c9ca40dd1edb8e9b2de4db70c0656f"
@@ -348,7 +353,8 @@ def main():
         "local_country_union_comparisons": union_receipts,
         "local_comparison_method": "union all whole-product bbox candidates within the issue batch extent expanded by 0.05 degrees; compare source and current Atlas country polygons in that local window",
         "components": component_rows,
-        "original_fragment_features": [fragments[i] for i in sorted(fragment_ids)],
+        "original_fragment_features": [fragments[i] for i in sorted(component_fragment_ids)],
+        "original_contact_fragment_features": [fragments[i] for i in sorted(contact_fragment_ids)],
         "original_fragment_inputs": fragment_input_receipts,
         "controls": {"positive": positive_witnesses, "negative": negative_witnesses,
                      "positive_count": len(positive_witnesses), "negative_count": len(negative_witnesses)},
