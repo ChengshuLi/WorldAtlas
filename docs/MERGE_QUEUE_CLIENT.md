@@ -1,0 +1,65 @@
+# Submitting and observing a merge request
+
+Submit a new reviewed PR once:
+
+```sh
+node scripts/queue-pr-merge.mjs --pr PR-NUMBER --head EXACT-REVIEWED-HEAD
+```
+
+Retain the printed request ID on the original issue checkpoint. Identity is printed
+before submission, including when the submission's outcome is uncertain. `submitted`
+means dispatch returned; `registered` means the bot's durable request was read. Neither
+means the PR merged. The GitHub scheduler owns execution and recovery independently
+of the worker's observer. Registration and execution retain their existing rules.
+
+Resume an existing request without submitting it again:
+
+```sh
+node scripts/queue-pr-merge.mjs --pr PR-NUMBER --head EXACT-REVIEWED-HEAD \
+  --request-id EXISTING-ID --observe
+```
+
+Supplying an existing request ID never automatically resubmits an absent registration.
+An uncertain write may still have succeeded. Inspect its registration/run/comment
+before deciding what action is justified; an observation timeout is not cancellation
+or evidence that the request is live. A failed registration is reported explicitly.
+Incomplete registration searches or comment pagination fail safely.
+
+The observer uses one-minute then two/four/five-minute waits with bounded jitter.
+Once the durable request exists, it reads result comments rather than repeatedly
+checking PR state or successful registration. Complete pagination remains required.
+An observation ends after at most 65 minutes, with each API subprocess bounded to 20
+seconds or the remaining deadline. Pending observation returns exit 3; rejected
+merge receipts exit 2; confirmed accepted merge receipts exit 0. Permission/malformed
+responses fail; these are not merge outcomes. Slow/in-flight responses cannot extend
+the deadline and authorize a later action.
+
+Primary API exhaustion waits for the actual response's reset time. Secondary limits
+honor retry-after, otherwise wait at least one minute with exponential retries, at
+most three across the observer. A primary reset is applied only when primary quota
+is exhausted. This follows [GitHub’s rate-limit guidance](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api). Ordinary permission denial is not retried as throttling. All reads,
+including pagination and final merge verification, follow these rules. Uncertain
+submission writes are never automatically repeated. Read-only observation writes
+no GitHub state and does not clean up local files.
+
+Successful observation freshly checks actual merged state, exact reviewed head and
+merge commit against the bot receipt. A missing/mismatched receipt or failed actual
+read cannot authorize success or cleanup. Initial submission retains the existing
+automatic owned-workspace cleanup only after this verification. To recover cleanup
+after an interrupted worker, preserve evidence/unique scratch and stop processes,
+then explicitly request the same verification plus the existing owned cleanup:
+
+```sh
+node scripts/queue-pr-merge.mjs --pr PR-NUMBER --head EXACT-REVIEWED-HEAD \
+  --request-id EXISTING-ID --observe --cleanup
+```
+
+Cleanup still enforces reviewed-head, checkout ownership and clean-workspace guards;
+a cleanup failure does not invalidate a verified merge. Release/reconcile the issue
+claim through the normal workflow. No queue, review, science, publication or provider
+permission is granted by observing a request.
+
+The request budget control simulates time and counts actual API function invocations.
+It does not measure hosted CI latency or promise that unrelated API clients cannot
+exhaust shared limits. Large comment inventories require more than one read per poll.
+The existing scheduler's five-minute schedule and completion trigger remain unchanged.

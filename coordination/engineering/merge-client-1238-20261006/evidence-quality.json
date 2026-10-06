@@ -1,0 +1,209 @@
+{
+  "version": 1,
+  "issue": 1238,
+  "lane": "engineering",
+  "worker_id": "01a10843-da4b-7fc1-a482-d3186bc6334d",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "49b5e23194b1c36397a2ec0ab77cb35124af39a1",
+    "files": [
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 38922,
+        "sha256": "7f02e356200709555ccf2a99586f9c03dd2672d30d7581a590a804e8a35a71b6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/integration-profile.mjs",
+        "bytes": 2409,
+        "sha256": "2cefd701766b677ed63624404f4046eba7facee940a421234bb619dbf4c3df10",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/local-workspace.mjs",
+        "bytes": 13418,
+        "sha256": "a9dc16ea7b2be5987a4d1c26d3d44aea363094e32bca9508f47ff9134355677e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/queue-pr-merge.mjs",
+        "bytes": 3605,
+        "sha256": "dd068edea0893024d8d0ea071aad05ca8ac4d7451849b513905cba3a139b948e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/local-workspace.test.mjs",
+        "bytes": 10250,
+        "sha256": "f51a5e935e434d162b635cde8131b77fb5d30badd6b6be9e7e57d988482bd2a9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/merge-integration-client.test.mjs",
+        "bytes": 4001,
+        "sha256": "371d987df517c9ec2878e6fa1954e49bd40d41d5f00c4fa01725a0e5ffc32aa4",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {},
+    "pin_files": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/merge-client-1238-20261006/controls.txt",
+      "bytes": 13388,
+      "sha256": "b87f239c9651ab0bcda24227cccb7fc79571899bb4ff60e08f76d354bbb212a2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-client-1238-20261006/handoff.md",
+      "bytes": 1611,
+      "sha256": "9548c07c5fd57aa0d68f979875ca948ad66fa171802cc49f477293519a10749c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-client-1238-20261006/hosted-observation.json",
+      "bytes": 516,
+      "sha256": "3cde78c5919461ac870bd1e4fc987c6d8267d3719ff98036682a94a8f180c4e6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/merge-client-1238-20261006/scope-controls.txt",
+      "bytes": 1661,
+      "sha256": "3fa3333b787cb99e8a2ef6a6331b69495a5e42697ecef7b02cb648c4432adb5b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/MERGE_QUEUE_CLIENT.md",
+      "bytes": 3746,
+      "sha256": "75e68d8be4ba6bf9547ae232b07b7ca01fb6e9e52395cc4c57ac7fc930bcde07",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "bytes": 39218,
+      "sha256": "84afaafad177a84a0bff34c8467940936ede2dab9f687e06026b63059e578824",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/integration-profile.mjs",
+      "bytes": 2443,
+      "sha256": "14cd71768884d7caa315b26a1d3afe34b6edd9f5b35717f226f63fdcf2c5d746",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/local-workspace.mjs",
+      "bytes": 13447,
+      "sha256": "8b216c53972d7caac9024da7ef5fd1577fc4b20e15b2e87525ba410a754689ad",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/merge-queue-client.mjs",
+      "bytes": 7513,
+      "sha256": "c9daeb6cfb5fb00f2a6cf47bdfb840cfb97090402aa1f4481e1865f0e085e362",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/queue-pr-merge.mjs",
+      "bytes": 3561,
+      "sha256": "b458e082e691a608849efdabef80e39a1957c00f8803fffcda77b188b1394c10",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/local-workspace.test.mjs",
+      "bytes": 11806,
+      "sha256": "71b3d2980733d3a77ff3fe37dd664ec475d6ed6e554289a521fe334222ad59a9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/merge-integration-client.test.mjs",
+      "bytes": 17806,
+      "sha256": "f53d808e3ca6b7389e6a81569499d9d4ac2f173259182fd9e84c995c2401a515",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "merge-client-controls",
+      "kind": "code",
+      "description": "Execute meaningful queue/client/cleanup and scope controls; one actual read-only completed-request observation.",
+      "software": "Node.js 24; Git; GitHub CLI",
+      "units": "assertions and API calls"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "node --test test/merge-integration-client.test.mjs test/local-workspace.test.mjs test/worker-result.test.mjs test/merge-integration.test.mjs test/integration-proof.test.mjs",
+    "node --test test/handoff-scope.test.mjs test/merge-integration-entrypoint.test.mjs",
+    "node scripts/queue-pr-merge.mjs --pr 1221 --head 06e50b4949f187d0e674614dbb2d035254b09de2 --request-id lifecycle-1210-06e50b4-20261006 --observe"
+  ],
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/merge-client-1238-20261006/controls.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-client-1238-20261006/handoff.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-client-1238-20261006/hosted-observation.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/merge-client-1238-20261006/scope-controls.txt",
+      "status": "added"
+    },
+    {
+      "path": "docs/MERGE_QUEUE_CLIENT.md",
+      "status": "added"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "status": "modified",
+      "original_sha256": "7f02e356200709555ccf2a99586f9c03dd2672d30d7581a590a804e8a35a71b6"
+    },
+    {
+      "path": "scripts/integration-profile.mjs",
+      "status": "modified",
+      "original_sha256": "2cefd701766b677ed63624404f4046eba7facee940a421234bb619dbf4c3df10"
+    },
+    {
+      "path": "scripts/local-workspace.mjs",
+      "status": "modified",
+      "original_sha256": "a9dc16ea7b2be5987a4d1c26d3d44aea363094e32bca9508f47ff9134355677e"
+    },
+    {
+      "path": "scripts/merge-queue-client.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/queue-pr-merge.mjs",
+      "status": "modified",
+      "original_sha256": "dd068edea0893024d8d0ea071aad05ca8ac4d7451849b513905cba3a139b948e"
+    },
+    {
+      "path": "test/local-workspace.test.mjs",
+      "status": "modified",
+      "original_sha256": "f51a5e935e434d162b635cde8131b77fb5d30badd6b6be9e7e57d988482bd2a9"
+    },
+    {
+      "path": "test/merge-integration-client.test.mjs",
+      "status": "modified",
+      "original_sha256": "371d987df517c9ec2878e6fa1954e49bd40d41d5f00c4fa01725a0e5ffc32aa4"
+    },
+    {
+      "path": "coordination/engineering/merge-client-1238-20261006/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "metric_bindings": []
+}

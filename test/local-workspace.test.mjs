@@ -75,6 +75,30 @@ test('dirty tracked, untracked and ignored work cannot be discarded', t => {
   assert.equal(fs.readFileSync(path.join(entry.path, '.scratch/result.txt'), 'utf8'), 'ignored unique');
 });
 
+test('large sparse indexes release only clean owned work and preserve recovery', t => {
+  const {repo, git, manager} = fixture(t);
+  const blob = git('rev-parse', 'HEAD:README.md').trim();
+  const rows = Array.from({length: 9000}, (_, i) =>
+    `100644 ${blob}\tdata/large-index/${String(i).padStart(5, '0')}-${'x'.repeat(120)}.json\n`).join('');
+  execFileSync('git', ['-C', repo, 'update-index', '--index-info'], {input: rows});
+  git('commit', '-q', '-m', 'large sparse index fixture');
+  const head = git('rev-parse', 'HEAD').trim();
+  const entry = manager.allocate({worker: 'large-index', branch: 'engineering/large-index'});
+  const inventory = execFileSync('git', ['-C', entry.path, 'ls-files', '-vz'], {maxBuffer: 32 * 1024 * 1024});
+  assert.ok(inventory.length > 1024 * 1024, 'fixture reproduces the real repository inventory size');
+  assert.ok(!fs.existsSync(path.join(entry.path, 'data/large-index')));
+  assert.throws(() => manager.release({worker: 'large-index', token: 'wrong-token'}), /ownership/);
+  fs.mkdirSync(path.join(entry.path, '.scratch'));
+  const valuable = path.join(entry.path, '.scratch/valuable.txt');
+  fs.writeFileSync(valuable, 'preserve');
+  assert.throws(() => manager.release({worker: 'large-index', token: entry.token}), /ignored/);
+  assert.equal(fs.readFileSync(valuable, 'utf8'), 'preserve');
+  fs.unlinkSync(valuable);
+  const result = manager.release({worker: 'large-index', token: entry.token});
+  assert.equal(git('rev-parse', result.preservedRef).trim(), head);
+  assert.ok(!fs.existsSync(entry.path));
+});
+
 test('invalid scopes and identities are rejected; explicit full profile includes all inputs', t => {
   const {manager, head} = fixture(t);
   for (const include of ['data/../outside', '/tmp', 'data/*', 'data//two', 'data']) {

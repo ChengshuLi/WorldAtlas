@@ -1,0 +1,169 @@
+✔ successful full and focused workflows prove exact tree and pinned current attempt (8.337625ms)
+✔ head metadata without explicit reviewed-head checkout never proves tested tree (0.237083ms)
+✔ different complete tree or modified approved workflow/runner always falls back (0.271416ms)
+✔ wrong head/event/repository/PR/path and incomplete or failed run cannot prove coverage (0.438459ms)
+✔ missing/extra shard and skipped or incomplete required steps never count as successful coverage (0.560084ms)
+✔ final pinned run reread rejects revoked proof (0.211792ms)
+✔ explicit coordination allowlist defaults full for unknown/application/data/schema/import/deploy/rename impact (2.35975ms)
+✔ final proof pins attempt and refuses a later successful rerun or missing/invalid attempt (0.592208ms)
+✔ focused proof accepts complete controls without installing Node dependencies (0.489375ms)
+✔ full proof refuses missing, failed, cancelled or skipped Node installation in any shard (3.160542ms)
+✔ actual PR selector passes verified geography ownership and selects one evidence shard (6.444667ms)
+✔ actual PR selector rejects missing claim (0.391834ms)
+✔ actual PR selector rejects released claim (0.142ms)
+✔ actual PR selector rejects expired claim (0.119042ms)
+✔ actual PR selector rejects wrong branch (1.512166ms)
+✔ actual PR selector rejects wrong issue (0.671959ms)
+✔ actual PR selector rejects wrong lane (0.404833ms)
+✔ actual PR selector rejects closed issue (0.16725ms)
+✔ actual PR selector rejects blocked issue (0.136459ms)
+✔ actual PR selector rejects changed owned scope (0.150083ms)
+✔ actual PR selector rejects unsafe prefixes (0.109209ms)
+✔ actual PR selector rejects stale PR head (0.058625ms)
+✔ actual PR selector rejects incomplete file list (0.057375ms)
+✔ actual PR selector rejects duplicate file inventory (0.070417ms)
+✔ actual PR selector rejects missing issue reference (0.068375ms)
+✔ actual PR selector defaults full for files and rename origins outside geography scope (0.2645ms)
+✔ geography ownership read paginates canonical comments and changed files (0.257875ms)
+✔ non-geography selectors preserve existing profiles without requesting geography ownership (0.359083ms)
+✔ package CI coordination paths use focused tests while builders and runners stay full (0.315084ms)
+From /var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/atlas-storage-test-UnJYSP/repo
+ * branch            main       -> FETCH_HEAD
+ * [new branch]      main       -> origin/main
+Preparing worktree (new branch 'geography/first')
+Preparing worktree (detached HEAD 49fc983)
+From /var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/atlas-storage-test-UnJYSP/repo
+ * branch            main       -> FETCH_HEAD
+Preparing worktree (new branch 'geography/second')
+From /var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/atlas-storage-test-i6ks3i/repo
+ * branch            main       -> FETCH_HEAD
+ * [new branch]      main       -> origin/main
+From /var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/atlas-storage-test-i6ks3i/repo
+ * branch            main       -> FETCH_HEAD
+From /var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/atlas-storage-test-326c94/repo
+ * branch            main       -> FETCH_HEAD
+ * [new branch]      main       -> origin/main
+Preparing worktree (new branch 'engineering/dirty')
+From /var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/atlas-storage-test-wSwJ1T/repo
+ * branch            main       -> FETCH_HEAD
+ * [new branch]      main       -> origin/main
+Preparing worktree (new branch 'engineering/large-index')
+Preparing worktree (detached HEAD 933453c)
+From /var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/atlas-storage-test-aBQj2R/repo
+ * branch            main       -> FETCH_HEAD
+ * [new branch]      main       -> origin/main
+Preparing worktree (new branch 'engineering/already-exists')
+fatal: a branch named 'engineering/already-exists' already exists
+✔ sparse work is isolated and contains required directories and individual inputs only (1019.197208ms)
+✔ low disk and existing legacy checkouts prevent allocation without creating a branch (391.507666ms)
+✔ dirty tracked, untracked and ignored work cannot be discarded (507.911042ms)
+✔ large sparse indexes release only clean owned work and preserve recovery (1347.595458ms)
+✔ invalid scopes and identities are rejected; explicit full profile includes all inputs (274.226875ms)
+✔ allocation lock is exclusive and never broken automatically (210.930875ms)
+✔ an interrupted Git mutation is recorded and occupies its slot (396.579583ms)
+✔ symlink root cannot redirect allocation or release outside the managed directory (240.339708ms)
+From /var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/atlas-storage-test-vl6PRA/repo
+ * branch            main       -> FETCH_HEAD
+ * [new branch]      main       -> origin/main
+Preparing worktree (new branch 'research/new')
+From /var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/atlas-storage-test-14pZQw/repo
+ * branch            main       -> FETCH_HEAD
+ * [new branch]      main       -> origin/main
+Preparing worktree (new branch 'engineering/finished')
+From /var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/atlas-storage-test-Mg7DUN/repo
+ * branch            main       -> FETCH_HEAD
+ * [new branch]      main       -> origin/main
+Preparing worktree (new branch 'engineering/hidden-edits')
+✔ two simultaneous allocation processes cannot acquire the same worker slot (581.951458ms)
+✔ new sparse packet paths permit ordinary creation and staging (478.192833ms)
+✔ confirmed merge cleanup removes only the unchanged clean managed author checkout (776.126666ms)
+✔ assume-unchanged cannot hide unique tracked bytes from cleanup (577.029084ms)
+✔ an hour waiting on a durable request uses only result reads after initial identity check (5.949875ms)
+✔ successful receipt requires fresh actual merge, exact head and merge commit (1.496417ms)
+✔ a completed merge can be observed after the original chat disappears (1.222708ms)
+✔ mismatched merge receipt never reports success (1.139833ms)
+✔ malformed accepted receipts cannot authorize success (0.9695ms)
+✔ jitter never exceeds the five-minute cap and reads receive bounded timeouts (0.796875ms)
+✔ a response arriving after the observation deadline cannot authorize another action (0.64775ms)
+✔ rate limit during final verification cannot turn a receipt into confirmed success (7.30375ms)
+✔ changed reviewed head stops before submission (0.180709ms)
+✔ known rejection ends observation without submission (0.333917ms)
+✔ rate exhaustion pauses every read until the actual reset before continuing (0.615292ms)
+✔ secondary throttling honors retry-after and does not redispatch (0.391667ms)
+✔ secondary retry-after does not wait for a non-exhausted primary reset (0.403ms)
+✔ repeated body-only secondary throttles have a finite exponential retry budget (0.423541ms)
+✔ a reset beyond observation deadline returns pending without additional requests (0.228208ms)
+✔ ordinary permission denial is not disguised as a rate limit (0.130083ms)
+✔ read-only observation never submits an absent request (0.137125ms)
+✔ resuming an uncertain request never submits even without explicit read-only mode (0.119667ms)
+✔ an existing registration workflow prevents duplicate dispatch and is latched (0.159833ms)
+✔ registration discovered on a later complete page is resumed without submission (0.168791ms)
+✔ new submission happens once, then durable registration eliminates workflow checks (0.96725ms)
+✔ uncertain submission is never automatically repeated (0.611625ms)
+✔ fresh submission refuses an already registered pending request for the same reviewed head (0.341292ms)
+✔ incomplete registration search fails without dispatching a duplicate (0.795125ms)
+✔ failed registration remains explicit rather than silently resubmitting (1.567625ms)
+✔ CLI read-only resume confirms actual merged receipt without a write (616.416875ms)
+✔ CLI parses actual rate headers and recovers without resubmission (325.251125ms)
+✔ CLI recognizes explicit body-only secondary throttling without treating ordinary permission denial as throttling (319.076833ms)
+✔ CLI prints request identity before uncertain submission and never repeats it (285.493875ms)
+✔ CLI only claims registration after reading the durable request (402.943167ms)
+✔ CLI ordinary permission errors stop without false rate-limit recovery (295.651708ms)
+✔ CLI waiting timeout returns pending, avoids cleanup and has bounded reads (967.245667ms)
+✔ only staging-test shards prepare the immutable migration derivative (38.7535ms)
+✔ two reviewed PRs sharing a base integrate serially without changing authored head (11.315209ms)
+✔ conflicts and non-conflicting changes to reviewed bytes require intervention (1.568167ms)
+✔ stale merge object and truncated inventories fail closed (1.325166ms)
+✔ stale head or review and expired ownership prohibit integration (0.662292ms)
+✔ failed or skipped candidate tests never merge an open PR (0.330542ms)
+✔ base advances before or during final validation are retryable without branch updates (0.284084ms)
+✔ latest failed or pending check replaces old success (0.10625ms)
+✔ workflow separates untrusted candidate tests from write credentials and serializes the lifecycle (0.946167ms)
+✔ commit status changing during final review prevents the merge (0.435625ms)
+✔ trusted profile uses focused invariants only for isolated evidence and docs (0.664042ms)
+✔ parallel full-regression shards cover each unit file once and focused profile retains core gates (47.347667ms)
+✔ prepare pins successful exact-tree run; skipped candidate job merges only after final proof reread (1.68925ms)
+✔ failed proof reread and stale main prevent merge despite prior accepted proof (1.642917ms)
+✔ successful rerun after preparation invalidates the pinned attempt and refuses merge (0.870208ms)
+✔ late candidate fetch replaces initial stale metadata without branch writes (0.918375ms)
+✔ stale parents and unavailable candidates converge with revalidated authority (2.035875ms)
+✔ permanently stale candidates are bounded and retain exact IDs before tree work (0.476333ms)
+✔ candidate polling stops at its deadline even before exhausting attempts (0.8175ms)
+✔ head/body changes and conflicts during refresh fail without integration or writes (0.587333ms)
+✔ main and evidence vintage advances are not silently adopted while refreshing (0.275542ms)
+✔ claim/check/review and issue authority is rechecked after waiting (1.18975ms)
+✔ only candidate-object 404 is refreshable; access failures stop immediately (0.584625ms)
+✔ post-wait main advance retains old expected and new observed base diagnostics (0.606208ms)
+✔ post-convergence head change retains the new head in rejection diagnostics (0.406667ms)
+✔ persistent automatic lag falls back to exact owned candidate without editing authored branches (1.650458ms)
+✔ isolated conflict or wrong parents is rejected and only the owned ref is deleted (1.436458ms)
+✔ fallback retains reviewed-byte and post-wait authority guards and cleans rejected candidates (1.611334ms)
+✔ cleanup refuses another request, main/worker refs and changed owned refs (0.548292ms)
+✔ failed cleanup retains its exact resource for inspection without hiding rejection (0.805125ms)
+✔ isolated candidate follows the existing final tests/main/head merge guards (3.63725ms)
+✔ unconfirmed ref creation identifies the resource without deleting a possible collision (0.470084ms)
+✔ merged head cleanup deletes only confirmed unchanged same-repository unused worker heads (0.64225ms)
+✔ unmerged, wrong head, fork, default, protected, advanced and shared heads are retained (0.871209ms)
+✔ head cleanup checks paginated open PRs and fails conservatively on unknown identities or API failures (2.938333ms)
+✔ successful integration records cleanup separately, including deletion failure and replay (0.851792ms)
+✔ cleanup stops on time or inventory call budget without starting deletion after pending (2.618583ms)
+✔ fresh geography success is required even when application proof is reusable (19.044625ms)
+✔ fresh geography success is recorded against exact combined commits (1.368542ms)
+✔ green geography job cannot merge without its authenticated exact-combined report (2.365209ms)
+✔ raw unresolved findings cannot be relabeled as a successful geography check (1.561375ms)
+✔ trusted geography outputs bind attempted artifact digest through the privileged merge job (2.623542ms)
+✔ known stale tested base or head rejects before expensive evidence/tree inspection (3.231834ms)
+✔ candidate waiting rechecks changed claim/check/review/head after caching immutable evidence (18.065ms)
+✔ results are bound to the bot, request and issue, including denial (3.10025ms)
+✔ latest matching response wins, unrelated or malformed comments cannot confer ownership (0.234417ms)
+✔ positive confirmations require current exact canonical ownership, not stale success (0.827042ms)
+✔ bootstrap fallback requires exact request and releases require inactive state (0.171167ms)
+✔ merge responses retain exact PR binding and embedded HTML cannot break the marker (0.148084ms)
+ℹ tests 122
+ℹ suites 0
+ℹ pass 122
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6919.376583

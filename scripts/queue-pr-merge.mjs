@@ -1,53 +1,54 @@
 import {execFileSync} from 'node:child_process';
 import {randomUUID} from 'node:crypto';
-import {githubPages} from './issue-claim-contract.mjs';
-import {readWorkerResult} from './worker-result.mjs';
 import {cleanupCompletedWorkspace} from './local-workspace.mjs';
+import {runMergeQueueClient} from './merge-queue-client.mjs';
 
 const args = process.argv.slice(2), values = {};
-for (let i = 0; i < args.length; i += 2) {
-  if (!['--pr','--head','--request-id'].includes(args[i]) || !args[i+1] || values[args[i]]) throw Error('Usage: node scripts/queue-pr-merge.mjs --pr N --head SHA');
-  values[args[i]] = args[i+1];
+for (let i = 0; i < args.length; i++) {
+  const key = args[i];
+  if (['--observe', '--cleanup'].includes(key) && !values[key]) { values[key] = true; continue; }
+  if (!['--pr', '--head', '--request-id'].includes(key) || !args[i + 1] || values[key])
+    throw Error('Usage: node scripts/queue-pr-merge.mjs --pr N --head SHA [--request-id ID] [--observe [--cleanup]]');
+  values[key] = args[++i];
 }
-if (!/^[1-9]\d*$/.test(values['--pr'] ?? '') || !/^[a-f0-9]{40}$/.test(values['--head'] ?? '')) throw Error('Supply the exact PR number and verified head SHA');
+if (!/^[1-9]\d*$/.test(values['--pr'] ?? '') || !/^[a-f0-9]{40}$/.test(values['--head'] ?? ''))
+  throw Error('Supply the exact PR number and verified head SHA');
+if (values['--observe'] && !values['--request-id']) throw Error('Read-only observation requires the existing request ID');
+if (values['--cleanup'] && !values['--observe']) throw Error('Explicit recovery cleanup requires --observe and the existing request ID');
 const repo = 'ChengshuLi/WorldAtlas', number = Number(values['--pr']), head = values['--head'];
-const gh = args => execFileSync('gh', args, {encoding: 'utf8', maxBuffer: 16*1024*1024});
-const api = route => JSON.parse(gh(['api', route]));
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-const request_id = values['--request-id'] ?? randomUUID();
-if (!/^[-a-zA-Z0-9]{16,100}$/.test(request_id)) throw Error('Invalid stable request ID');
-const pr = api(`/repos/${repo}/pulls/${number}`);
-if (pr.head.sha !== head) throw Error('Head changed; obtain a fresh review before queueing');
-const title = `queue #${number} ${request_id}`;
-// Idempotent registration keeps original FIFO position across retries/resumes.
-gh(['workflow','run','merge-scheduler.yml','--repo',repo,'--ref','main',
-  '-f',`pr_number=${number}`,'-f',`expected_head=${head}`,'-f',`request_id=${request_id}`]);
-console.log(JSON.stringify({queued: true, request_id, reviewed_head: head}));
-const started = Date.now(); let registration;
-while (Date.now() - started < 65*60*1000) {
-  const comments = await githubPages(api, `/repos/${repo}/issues/${number}/comments`);
-  const result = readWorkerResult(comments, 'merge', request_id, number);
-  if (result && result.status !== 'testing' && (result.accepted || !result.retryable)) {
-    if (result.accepted) {
-      const actual = api(`/repos/${repo}/pulls/${number}`);
-      if (!actual.merged || actual.head.sha !== head || actual.merge_commit_sha !== result.merge_commit) throw Error('Merge receipt differs from actual PR state');
-      console.log(JSON.stringify({...result, local_cleanup: cleanupCompletedWorkspace(process.cwd(), head)}));
-    } else { console.log(JSON.stringify(result)); process.exitCode = 2; }
-    break;
+const requestId = values['--request-id'] ?? randomUUID();
+if (!/^[-a-zA-Z0-9]{16,100}$/.test(requestId)) throw Error('Invalid stable request ID');
+const gh = (args, timeoutMs = 20_000) => execFileSync('gh', args, {encoding: 'utf8', maxBuffer: 16 * 1024 * 1024,
+  timeout: timeoutMs, killSignal: 'SIGKILL'});
+const api = (route, {timeoutMs} = {}) => {
+  let output, failure;
+  try { output = gh(['api', '--include', route], timeoutMs); }
+  catch (error) { output = String(error.stdout ?? ''); failure = error; }
+  const separator = output.search(/\r?\n\r?\n/);
+  const headers = output.startsWith('HTTP/') && separator >= 0 ? output.slice(0, separator) : '';
+  if (failure) {
+    const error = Error(`GitHub read failed for ${route}; no merge claimed`);
+    const field = name => new RegExp(`^${name}:\\s*(\\d+)\\s*$`, 'im').exec(headers)?.[1];
+    let secondaryLimit = false;
+    try { secondaryLimit = /secondary rate limit/i.test(JSON.parse(headers ? output.slice(separator).trim() : output).message ?? ''); }
+    catch { /* Preserve the actual HTTP rejection if its body is incomplete. */ }
+    error.github = {http_status: Number(/^HTTP\/\S+\s+(\d+)/.exec(headers)?.[1]),
+      rate_remaining: field('x-ratelimit-remaining'), rate_reset: field('x-ratelimit-reset'), retry_after: field('retry-after'),
+      secondary_limit: secondaryLimit};
+    throw error;
   }
-  const actual = api(`/repos/${repo}/pulls/${number}`);
-  if (actual.head.sha !== head || actual.state === 'closed') throw Error(`PR changed/closed; inspect request ${request_id}; no merge claimed`);
-  if (registration?.id) registration = api(`/repos/${repo}/actions/runs/${registration.id}`);
-  else {
-    for (let page = 1; page <= 10; page++) {
-      const response = api(`/repos/${repo}/actions/workflows/merge-scheduler.yml/runs?event=workflow_dispatch&per_page=100&page=${page}`);
-      registration = response.workflow_runs?.find(row => row.display_title === title);
-      if (registration || (response.workflow_runs?.length ?? 0) < 100) break;
-    }
-  }
-  if (registration?.status === 'completed' && registration.conclusion !== 'success') {
-    throw Error(`Registration did not complete (${registration.conclusion}); resume the same request ${request_id}, inspect ${registration.html_url}`);
-  }
-  await sleep(5000);
+  return JSON.parse(headers ? output.slice(separator).trim() : output);
+};
+// Preserve identity before any possible submission, including an uncertain write.
+console.log(JSON.stringify({status: 'observing', request_id: requestId, reviewed_head: head}));
+const result = await runMergeQueueClient({api, repo, number, head, requestId,
+  observeOnly: Boolean(values['--observe']), resuming: Boolean(values['--request-id']),
+  progress: value => console.log(JSON.stringify(value)),
+  submit: ({number, head, requestId, timeoutMs}) => gh(['workflow', 'run', 'merge-scheduler.yml', '--repo', repo, '--ref', 'main',
+    '-f', `pr_number=${number}`, '-f', `expected_head=${head}`, '-f', `request_id=${requestId}`], timeoutMs)});
+if (result.accepted) console.log(JSON.stringify({...result,
+  ...(!values['--observe'] || values['--cleanup'] ? {local_cleanup: cleanupCompletedWorkspace(process.cwd(), head)} : {})}));
+else {
+  console.log(JSON.stringify(result));
+  process.exitCode = result.status === 'pending' ? 3 : 2;
 }
-if (Date.now() - started >= 65*60*1000) throw Error(`Queue observation limit reached; durable request ${request_id} remains queued/live; resume with --request-id ${request_id}; no merge claimed`);
