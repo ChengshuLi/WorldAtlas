@@ -155,6 +155,46 @@ result = {
 }
 out = PACKET / "findings/area-screen.json"
 out.write_text(json.dumps(result, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n")
+
+# Scientific controls for this explicitly approximate measurement method.
+# The positive control is a 1-degree equatorial rectangle with the analytic
+# spherical area R^2 * delta-longitude * (sin(phi_north) - sin(phi_south)).
+control_ring = [[0, 0], [1, 0], [1, 1], [0, 1], [0, 0]]
+positive_expected = RADIUS_KM ** 2 * math.radians(1) * (math.sin(math.radians(1)) - math.sin(0))
+positive_actual = ring_area_km2(control_ring)
+positive_passed = math.isclose(positive_actual, positive_expected, rel_tol=1e-12, abs_tol=1e-9)
+if not positive_passed:
+    raise SystemExit("Positive analytic spherical rectangle control failed")
+(PACKET / "findings/area-screen-positive-control.json").write_text(json.dumps({
+    "method_id": "authalic-area-size-screen",
+    "kind": "positive-control",
+    "outcome": "passed",
+    "control": "1-degree by 1-degree equatorial spherical rectangle",
+    "expected_area_km2": positive_expected,
+    "actual_area_km2": positive_actual,
+    "relative_tolerance": 1e-12,
+    "expected_formula": "R^2 * radians(1) * (sin(radians(1)) - sin(0))",
+}, sort_keys=True, separators=(",", ":")) + "\n")
+
+# Negative control: a purported hole larger than its exterior must be rejected.
+outer = [[0, 0], [1, 0], [1, 1], [0, 1], [0, 0]]
+oversized_hole = [[0, 0], [2, 0], [2, 2], [0, 2], [0, 0]]
+try:
+    geometry_area_km2({"type": "Polygon", "coordinates": [outer, oversized_hole]})
+except ValueError as error:
+    negative_passed = str(error) == "Hole areas exceed polygon area"
+else:
+    negative_passed = False
+if not negative_passed:
+    raise SystemExit("Negative oversized-hole rejection control failed")
+(PACKET / "findings/area-screen-negative-control.json").write_text(json.dumps({
+    "method_id": "authalic-area-size-screen",
+    "kind": "negative-control",
+    "outcome": "passed",
+    "control": "reject polygon whose declared hole area exceeds its exterior area",
+    "expected_error": "Hole areas exceed polygon area",
+    "actual_error": "Hole areas exceed polygon area",
+}, sort_keys=True, separators=(",", ":")) + "\n")
 print(json.dumps({
     "subjects": len(rows),
     "source_total_km2": result["results"]["source_total_area_km2"],

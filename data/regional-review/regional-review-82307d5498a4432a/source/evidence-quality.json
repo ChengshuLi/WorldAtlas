@@ -78,10 +78,35 @@
       "original_sha256": "a4a3c4a397a65bf6ffeaf67048505fbcdbd195dfe89124b9490454fab4169f82"
     },
     {
+      "path": "data/regional-review/regional-review-82307d5498a4432a/findings/area-screen-negative-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-82307d5498a4432a/findings/area-screen-positive-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-82307d5498a4432a/findings/area-screen.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-82307d5498a4432a/findings/current-admin-crosswalk.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
       "path": "data/regional-review/regional-review-82307d5498a4432a/findings/individual-assessment.json",
       "status": "modified",
       "previous_path": null,
       "original_sha256": "8aa7409e1c8da82d2a475b3f3b1712520da00b4d6a8ea25ac3cd425a75ed82b2"
+    },
+    {
+      "path": "data/regional-review/regional-review-82307d5498a4432a/reproduction/area_screen.py",
+      "status": "added",
+      "previous_path": null
     },
     {
       "path": "data/regional-review/regional-review-82307d5498a4432a/source/RESTORE.md",
@@ -96,27 +121,6 @@
       "original_sha256": "389494d06b3b5c7c383e889b3e8c509d6c728b8c7ed3a77480bb6d35d3401394"
     },
     {
-      "path": "data/regional-review/regional-review-82307d5498a4432a/source/source-manifest.json",
-      "status": "modified",
-      "previous_path": null,
-      "original_sha256": "1ff4c01794202f7e5c12a794cf47479c6c63242f62f73c571c5b561432765876"
-    },
-    {
-      "path": "data/regional-review/regional-review-82307d5498a4432a/findings/area-screen.json",
-      "status": "added",
-      "previous_path": null
-    },
-    {
-      "path": "data/regional-review/regional-review-82307d5498a4432a/findings/current-admin-crosswalk.json",
-      "status": "added",
-      "previous_path": null
-    },
-    {
-      "path": "data/regional-review/regional-review-82307d5498a4432a/reproduction/area_screen.py",
-      "status": "added",
-      "previous_path": null
-    },
-    {
       "path": "data/regional-review/regional-review-82307d5498a4432a/source/kemerovo-area-reference.json",
       "status": "added",
       "previous_path": null
@@ -125,6 +129,12 @@
       "path": "data/regional-review/regional-review-82307d5498a4432a/source/kemerovo-law18-reference.json",
       "status": "added",
       "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-82307d5498a4432a/source/source-manifest.json",
+      "status": "modified",
+      "previous_path": null,
+      "original_sha256": "1ff4c01794202f7e5c12a794cf47479c6c63242f62f73c571c5b561432765876"
     }
   ],
   "commands": [
@@ -212,8 +222,8 @@
     },
     {
       "id": "authalic-area-size-screen",
-      "kind": "code",
-      "description": "For each exact issue-396 source polygon and matched Atlas polygon at the immutable PR-base commit, compute an authalic-sphere longitude-latitude ring-integral approximation; sum components and subtract holes. Compare aggregate and maximum feature sizes with the official agency page rounded estimate. This identifies scale and per-record area deltas only; no ellipsoidal measurement, union, overlap, boundary or adjacency test.",
+      "kind": "measurement",
+      "description": "For each exact issue-396 source polygon and matched Atlas polygon at the immutable PR-base commit, compute an authalic-sphere longitude-latitude ring-integral approximation; sum components and subtract holes. Compare aggregate and maximum feature sizes with the official agency page rounded estimate. This identifies scale and per-record area deltas only; no ellipsoidal measurement, union, overlap, boundary or adjacency test. Positive control uses the analytic area of a one-degree equatorial rectangle; negative control rejects a declared hole larger than its exterior.",
       "software": "Python 3.12.14 standard library; baseline Git blobs from 7f23b59fe66c0deb57d88115092f2126d6916505",
       "units": "square kilometres; ratio of source and Atlas approximate areas"
     },
@@ -323,9 +333,21 @@
   "outputs": [
     {
       "path": "data/regional-review/regional-review-82307d5498a4432a/README.md",
-      "bytes": 14608,
+      "bytes": 14878,
       "hash_kind": "file-bytes",
-      "sha256": "1a27107192a359d41bd3b6b00867301564d762e5e4ea1f4327e1222680b0332b"
+      "sha256": "fc5d23dab881cabf05065229bd5655ee600de970cd37de9772cb2520109042ea"
+    },
+    {
+      "path": "data/regional-review/regional-review-82307d5498a4432a/findings/area-screen-negative-control.json",
+      "bytes": 263,
+      "hash_kind": "file-bytes",
+      "sha256": "e4583d324064d0ad8afa87c5e31bdb059cd3e6ae4e6b5b6e1ee4ec181800786d"
+    },
+    {
+      "path": "data/regional-review/regional-review-82307d5498a4432a/findings/area-screen-positive-control.json",
+      "bytes": 321,
+      "hash_kind": "file-bytes",
+      "sha256": "cd2b46cebeee98749eb722298e21b301469ae12df6212f95991dfe27deabbde5"
     },
     {
       "path": "data/regional-review/regional-review-82307d5498a4432a/findings/area-screen.json",
@@ -365,9 +387,9 @@
     },
     {
       "path": "data/regional-review/regional-review-82307d5498a4432a/reproduction/area_screen.py",
-      "bytes": 7160,
+      "bytes": 9207,
       "hash_kind": "file-bytes",
-      "sha256": "b69d5de2166a7afcc0c21b2a4e6a37cc7c10d79c515a929ec991e1e37f4ca104"
+      "sha256": "ad63e5fee541a7f31c38a73631cb18b71bd4136b86b215f075788bb608feed16"
     },
     {
       "path": "data/regional-review/regional-review-82307d5498a4432a/reproduction/audit_source_geometry.py",
@@ -688,5 +710,19 @@
     }
   ],
   "version": 1,
-  "worker_id": "01a10947-7d6e-7ba2-98a1-a9f91dedabfc"
+  "worker_id": "01a10947-7d6e-7ba2-98a1-a9f91dedabfc",
+  "validation": [
+    {
+      "method_id": "authalic-area-size-screen",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/regional-review-82307d5498a4432a/findings/area-screen-positive-control.json"
+    },
+    {
+      "method_id": "authalic-area-size-screen",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/regional-review-82307d5498a4432a/findings/area-screen-negative-control.json"
+    }
+  ]
 }
