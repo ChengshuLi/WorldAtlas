@@ -165,32 +165,32 @@
       "verification": "unverified",
       "temporal_status": "reference",
       "restoration": "Follow the Ministry of Natural Resources-hosted National Geomatics Center catalog record and Hainan Surveying and Mapping authority portal http://hism.mnr.gov.cn/sjkf/hndt/; obtain individual file URLs, review terms and hash each official asset.",
-      "limit": "Catalog shell did not expose map payload or a current redistributable boundary GIS file; map imagery cannot certify legal geometry."
+      "limit": "Catalog direct request returned HTTP 418; Hainan mapping portal host did not resolve. No map payload or current redistributable boundary GIS bytes could be verified."
     }
   ],
   "outputs": [
     {
       "path": "data/regional-review/regional-review-hainan-source-408/README.md",
-      "bytes": 10048,
-      "sha256": "e72e55a39ede95d1fd53de9df5e7218dcc8fd2a9d52f86a5f15c42290c533634",
+      "bytes": 10150,
+      "sha256": "8dd58ee717b49e69290a5cc4e5029270a5a3920e443eeaa1819825499d49e382",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/regional-review-hainan-source-408/findings/hainan-18-crosswalk.csv",
-      "bytes": 20893,
-      "sha256": "0f625005be923501d614f3b7637e3ad798480b0bbef32642e754f10fd93fd28f",
+      "bytes": 21238,
+      "sha256": "29102f4e734aa9b94337b207224f5a8312695aa4e0208e15e8af13d49d268364",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/regional-review-hainan-source-408/findings/reproduction-summary.json",
-      "bytes": 13939,
-      "sha256": "96eeaa4a681be0e14158c843df41c64577c48887eef535ecd7d185741219848e",
+      "bytes": 2325,
+      "sha256": "dbedbf0a588b0bafe50b51029604b80135c4b2bc8c3b34f8718770ed05c2462a",
       "hash_kind": "file-bytes"
     },
     {
       "path": "data/regional-review/regional-review-hainan-source-408/reproduce_hainan.py",
-      "bytes": 13795,
-      "sha256": "91901d5daa55780a7fec0344fa638e46be6f4f0753bd2c6e499bd51236ec6c37",
+      "bytes": 13801,
+      "sha256": "ab83daee554fae5ef12d34f3992e8ade960ea5d125a1dc89635b91f46c203bd9",
       "hash_kind": "file-bytes"
     },
     {
@@ -213,6 +213,13 @@
       "software": "Python 3.12 standard library; manual official-source inspection",
       "units": "administrative names, roles and units; no coordinate conversion",
       "kind": "source"
+    },
+    {
+      "id": "reproduce-frozen-inventory",
+      "kind": "code",
+      "description": "Read immutable pinned Atlas/source files, perform the exact 18-ID join, apply the disclosed administrative crosswalk, and write new issue-owned ledger outputs without changing geographic source data.",
+      "software": "Python 3.7 standard library",
+      "units": "IDs, names, administrative roles and output rows"
     },
     {
       "id": "exact-edge-screen",
