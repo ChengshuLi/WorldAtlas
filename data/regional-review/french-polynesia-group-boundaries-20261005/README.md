@@ -34,22 +34,23 @@ Review a candidate restoration using the retained DAF `loc_ile` land/island feat
 
 ## Reproduction
 
-Run from the repository root after dependencies are installed. Original Shapefiles are in `source/*.zip`; all joins and exports are reproducible from them:
+Run from the repository root after dependencies are installed. Run these commands from the repository root inside the managed work/review slot. Keep decompression and dependency scratch in that slot so its storage is accounted for. Original Shapefiles are in `source/*.zip`; all joins and exports are reproducible from them:
 
 ```sh
-unzip -oq data/regional-review/french-polynesia-group-boundaries-20261005/source/loc-ile.zip -d /tmp/loc-ile
-unzip -oq data/regional-review/french-polynesia-group-boundaries-20261005/source/loc-groupe-ile.zip -d /tmp/loc-groupe
-unzip -oq data/regional-review/french-polynesia-group-boundaries-20261005/source/loc-commune-associee.zip -d /tmp/loc-commune
-node_modules/.bin/mapshaper -i /tmp/loc-groupe/loc_groupe_ile.shp -filter 'type_group == "DIVISION_ADMINISTRATIVE"' -o format=geojson data/regional-review/french-polynesia-group-boundaries-20261005/source/admin-divisions.geojson
-node_modules/.bin/mapshaper -i /tmp/loc-ile/loc_ile.shp -o format=csv data/regional-review/french-polynesia-group-boundaries-20261005/source/island-attributes.csv
-node_modules/.bin/mapshaper -i /tmp/loc-ile/loc_ile.shp -join data/regional-review/french-polynesia-group-boundaries-20261005/source/admin-divisions.geojson largest-overlap fields=id_groupe_ -filter 'id_groupe_ == 1' -o format=geojson data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-1.geojson
-node_modules/.bin/mapshaper -i /tmp/loc-ile/loc_ile.shp -join data/regional-review/french-polynesia-group-boundaries-20261005/source/admin-divisions.geojson largest-overlap fields=id_groupe_ -filter 'id_groupe_ == 2' -o format=geojson data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-2.geojson
-node_modules/.bin/mapshaper -i /tmp/loc-ile/loc_ile.shp -join data/regional-review/french-polynesia-group-boundaries-20261005/source/admin-divisions.geojson largest-overlap fields=id_groupe_ -filter 'id_groupe_ == 3' -o format=geojson data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-3.geojson
-node_modules/.bin/mapshaper -i /tmp/loc-ile/loc_ile.shp -join data/regional-review/french-polynesia-group-boundaries-20261005/source/admin-divisions.geojson largest-overlap fields=id_groupe_ -filter 'id_groupe_ == 4' -o format=geojson data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-4.geojson
-node_modules/.bin/mapshaper -i /tmp/loc-ile/loc_ile.shp -join data/regional-review/french-polynesia-group-boundaries-20261005/source/admin-divisions.geojson largest-overlap fields=id_groupe_ -filter 'id_groupe_ == 5' -o format=geojson data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-5.geojson
-node_modules/.bin/mapshaper -i /tmp/loc-commune/loc_commune_associee.shp -o format=csv data/regional-review/french-polynesia-group-boundaries-20261005/source/commune-associations.csv
-python3 -m pip install --target /tmp/worldatlas-geo-helper -r data/regional-review/regional-review-14a242c4cb0781a7/requirements-review.txt
-PYTHONPATH=/tmp/worldatlas-geo-helper:scripts:scripts/evidence python3 data/regional-review/french-polynesia-group-boundaries-20261005/verify.py
+mkdir -p .scratch/french-polynesia-1059
+unzip -oq data/regional-review/french-polynesia-group-boundaries-20261005/source/loc-ile.zip -d .scratch/french-polynesia-1059/loc-ile
+unzip -oq data/regional-review/french-polynesia-group-boundaries-20261005/source/loc-groupe-ile.zip -d .scratch/french-polynesia-1059/loc-groupe
+unzip -oq data/regional-review/french-polynesia-group-boundaries-20261005/source/loc-commune-associee.zip -d .scratch/french-polynesia-1059/loc-commune
+node_modules/.bin/mapshaper -i .scratch/french-polynesia-1059/loc-groupe/loc_groupe_ile.shp -filter 'type_group == "DIVISION_ADMINISTRATIVE"' -o format=geojson data/regional-review/french-polynesia-group-boundaries-20261005/source/admin-divisions.geojson
+node_modules/.bin/mapshaper -i .scratch/french-polynesia-1059/loc-ile/loc_ile.shp -o format=csv data/regional-review/french-polynesia-group-boundaries-20261005/source/island-attributes.csv
+node_modules/.bin/mapshaper -i .scratch/french-polynesia-1059/loc-ile/loc_ile.shp -join data/regional-review/french-polynesia-group-boundaries-20261005/source/admin-divisions.geojson largest-overlap fields=id_groupe_ -filter 'id_groupe_ == 1' -o format=geojson data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-1.geojson
+node_modules/.bin/mapshaper -i .scratch/french-polynesia-1059/loc-ile/loc_ile.shp -join data/regional-review/french-polynesia-group-boundaries-20261005/source/admin-divisions.geojson largest-overlap fields=id_groupe_ -filter 'id_groupe_ == 2' -o format=geojson data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-2.geojson
+node_modules/.bin/mapshaper -i .scratch/french-polynesia-1059/loc-ile/loc_ile.shp -join data/regional-review/french-polynesia-group-boundaries-20261005/source/admin-divisions.geojson largest-overlap fields=id_groupe_ -filter 'id_groupe_ == 3' -o format=geojson data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-3.geojson
+node_modules/.bin/mapshaper -i .scratch/french-polynesia-1059/loc-ile/loc_ile.shp -join data/regional-review/french-polynesia-group-boundaries-20261005/source/admin-divisions.geojson largest-overlap fields=id_groupe_ -filter 'id_groupe_ == 4' -o format=geojson data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-4.geojson
+node_modules/.bin/mapshaper -i .scratch/french-polynesia-1059/loc-ile/loc_ile.shp -join data/regional-review/french-polynesia-group-boundaries-20261005/source/admin-divisions.geojson largest-overlap fields=id_groupe_ -filter 'id_groupe_ == 5' -o format=geojson data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-5.geojson
+node_modules/.bin/mapshaper -i .scratch/french-polynesia-1059/loc-commune/loc_commune_associee.shp -o format=csv data/regional-review/french-polynesia-group-boundaries-20261005/source/commune-associations.csv
+python3 -m pip install --target .scratch/french-polynesia-1059/python -r data/regional-review/regional-review-14a242c4cb0781a7/requirements-review.txt
+PYTHONPATH=.scratch/french-polynesia-1059/python:scripts:scripts/evidence python3 data/regional-review/french-polynesia-group-boundaries-20261005/verify.py
 node scripts/evidence-quality.mjs data/regional-review/french-polynesia-group-boundaries-20261005/evidence-quality.json
 ```
 
