@@ -1,0 +1,116 @@
+{
+  "actual_containing_file": "data/geography/part-2.json",
+  "actual_containing_file_sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf",
+  "actual_id_count": 1,
+  "all_source_components_current_atlas_intersection_m2": 157503328.27021995,
+  "baseline_commit": "249e396178cfc160fd547ec4487c5d94832fc9af",
+  "complete_source_geometry_area_m2": 163846439.0158006,
+  "controls": {
+    "axis_order_10E_45N_epsg3857": {
+      "passed": true,
+      "result_xy": [
+        1113194.9079327357,
+        5621521.486192066
+      ]
+    },
+    "negative_remote_island_intersection": {
+      "passed": true
+    },
+    "point_control_current_representative_inside_polygon": {
+      "passed": true
+    },
+    "positive_main_island_intersection": {
+      "passed": true
+    }
+  },
+  "current_atlas_geometry_area_m2": 159298433.5159299,
+  "current_geocode_lon_lat": [
+    -109.35103245892952,
+    -27.130499999999998
+  ],
+  "current_geocode_within_existing_polygon": true,
+  "current_name": "Isla de Pascua",
+  "decree_coordinate_distance_from_current_point_m": 402952.8037618872,
+  "decree_coordinate_lon_lat": [
+    -105.3652777778,
+    -26.4713888889
+  ],
+  "disposition": "The source-supported Salas y Gómez land component belongs to the same named Chilean administrative territory as Isla de Pascua and is absent from the current one-polygon atlas footprint. Proposed engineering correction: add only this exact source component to the existing subject; preserve subject/parent/history/release pins and retain the current Rapa Nui representative point. This packet does not validate or authorize replacing the remaining local shoreline.",
+  "geometry_method": {
+    "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+    "area_units": "m2",
+    "axis_order": "longitude-latitude",
+    "crs": "EPSG:4326",
+    "distance_method": "WGS84 inverse geodesic",
+    "distance_units": "m",
+    "version": "worldatlas-evidence-geometry-v1"
+  },
+  "issue_declared_containing_file": "data/geography/part-28.json",
+  "issue_declared_file_id_count": 0,
+  "issue_declared_file_sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+  "largest_source_component_area_m2": 163597394.28925586,
+  "largest_source_component_current_atlas_intersection_m2": 157498033.438303,
+  "largest_source_component_index": 0,
+  "parent_semantic_status": "open",
+  "source_component_area_m2": 162819.52066396928,
+  "source_component_bbox_lon_lat": [
+    -105.366627742,
+    -26.475195634999977,
+    -105.36006169399997,
+    -26.46993269899997
+  ],
+  "source_component_containing_decree_coordinate": 1,
+  "source_component_count": 166,
+  "source_component_current_atlas_intersection_m2": 0.0,
+  "source_feature_name": "Isla de Pascua",
+  "source_native_id": "31580391B33082267781919",
+  "stable_parent_id": "framework:province:easter-island-province:56a8d02c6b29",
+  "stable_parent_level": "province",
+  "subject_id": "gb:CHL:ADM3:31580391B33082267781919",
+  "validation_controls": {
+    "code-negative.json": {
+      "kind": "negative-control",
+      "method_id": "packet-code",
+      "outcome": "passed",
+      "test": "issue-pinned part-28 contains no exact subject while part-2 does"
+    },
+    "code-positive.json": {
+      "kind": "positive-control",
+      "method_id": "packet-code",
+      "outcome": "passed",
+      "test": "pinned baseline contains the exact target once in the detected current part"
+    },
+    "geometry-negative.json": {
+      "intersection_area_m2": 0.0,
+      "kind": "negative-control",
+      "method_id": "geometry-comparison",
+      "outcome": "passed",
+      "test": "remote source island has zero intersection with existing Atlas footprint"
+    },
+    "geometry-positive.json": {
+      "axis_order_control_xy_epsg3857": [
+        1113194.9079327357,
+        5621521.486192066
+      ],
+      "intersection_area_m2": 157498033.438303,
+      "kind": "positive-control",
+      "method_id": "geometry-comparison",
+      "outcome": "passed",
+      "test": "main source island intersects existing Atlas footprint"
+    },
+    "source-negative.json": {
+      "absent_shape_id": "31580391B33082267781920",
+      "kind": "negative-control",
+      "method_id": "source-crosswalk",
+      "outcome": "passed",
+      "test": "adjacent invented shapeID does not resolve"
+    },
+    "source-positive.json": {
+      "kind": "positive-control",
+      "method_id": "source-crosswalk",
+      "outcome": "passed",
+      "test": "exact shapeID resolves once to Isla de Pascua"
+    }
+  },
+  "version": 1
+}
