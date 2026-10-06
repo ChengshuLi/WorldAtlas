@@ -139,7 +139,7 @@ def restore_gap_envelope():
     candidates = json.loads(gzip.decompress(shard.read_bytes()))["features"]
     found = {}
     for f in candidates:
-        fid = f.get("properties", {}).get("id")
+        fid = f.get("id")
         if fid in FRAGMENTS:
             verify_fragment(f, FRAGMENTS[fid])
             found[fid] = f

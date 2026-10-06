@@ -1,0 +1,11 @@
+{
+  "status": "failed-before-comparison",
+  "actual_execution_sha": "78ba77309d2483e77dc65bd58987557c37d5e64c",
+  "run_label": "run-1-attempt-2",
+  "error_type": "ValueError",
+  "error": "the two issue-pinned complete fragments were not both restored",
+  "cause": "GeoJSON candidate identities are stored in Feature.id, not properties.id. Both complete issue-pinned features are present in the exact source shard and their full-feature digests verify when indexed by Feature.id.",
+  "scientific_comparison_started": false,
+  "numerical_outputs_created": false,
+  "treatment": "Retained as a failed identity-index setup trial; not a final run and not used as evidence. Corrected the identity lookup and committed before final numerical runs."
+}
