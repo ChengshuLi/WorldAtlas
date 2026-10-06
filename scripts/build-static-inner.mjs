@@ -18,7 +18,7 @@ import {selectBuildOwnership,readBuildOwnershipSelection} from './select-build-o
 import {validateBuildContextStage} from './native-ownership/validate-build-context-stage.mjs';
 import {packageNativeLatitudes} from './package-native-latitudes.mjs';
 import {rebindCoverageManifest} from './rebind-coverage-manifest.mjs';
-import {readGeographicReleaseManifest} from './read-geographic-release-manifest.mjs';
+import {readGeographicReleaseManifest,decodeGeographicReleaseBatch} from './read-geographic-release-manifest.mjs';
 import { createHash } from 'node:crypto';
 assertPackageStage();
 const ownershipSelection=await readBuildOwnershipSelection();
@@ -41,7 +41,8 @@ try {
   const pixelAudit=JSON.parse(await fs.readFile('data/pixel-audit.json','utf8'));
   reference.pixelMissing=pixelAudit.missing.map(f=>f.id);
   checkPrepared(reference.features);
-  const geographicRelease=readGeographicReleaseManifest('data/geographic-releases').releases.at(-1);
+  const releaseManifest=readGeographicReleaseManifest('data/geographic-releases');
+  const geographicRelease=releaseManifest.releases.at(-1);
   if(geographicRelease.hierarchy_sha256!==createHash('sha256').update(await fs.readFile('data/hierarchy.json')).digest('hex')||geographicRelease.footprints_sha256!==checkPrepared(reference.features))throw Error('Reference release does not match prepared map assets');
   validatePreparedEvidenceIndex(preparedEvidence,geographicRelease);
   if(ownershipSelection.releaseId&&ownershipSelection.releaseId!==geographicRelease.id)throw Error('Committed ownership selection belongs to another release');
@@ -50,6 +51,24 @@ try {
   const fixedGrid=selectedGrid?.manifest;
   const nativeBuildContext=fixedGrid?.method?await validateBuildContextStage({expectedReference:geographicRelease}):null;
   const nativeContextInputStage=nativeBuildContext?.receipt??null;
+  const boundarySourceReviews={};
+  if(nativeContextInputStage?.migration){
+    const sources=[];
+    for(const name of releaseManifest.sources_batches){
+      const part=releaseManifest.batches.find(part=>part.path===name);
+      const payload=decodeGeographicReleaseBatch(await fs.readFile('data/geographic-releases/'+name),part);
+      sources.push(...JSON.parse(payload).sources);
+    }
+    const source=sources.find(source=>source.id===geographicRelease.source_id);
+    if(!source?.metadata?.source_policy)throw Error('Migrated reference lacks its source policy');
+    if(source.metadata.geometry_migration?.sha256!==geographicRelease.metadata.geometry_migration.sha256)throw Error('Migrated boundary attribution belongs to another geometry proof');
+    for(const id of nativeContextInputStage.migration.changed_ids)boundarySourceReviews[id]={
+      source:source.name,url:source.url,license:source.license,vintage:source.vintage,
+      policy:source.metadata.source_policy,source_offer:source.metadata.source_offer,
+      derivative_url:'https://github.com/ChengshuLi/WorldAtlas/tree/'+geographicRelease.metadata.geometry_migration.commit,
+      original_sources:source.metadata.source_evidence
+    };
+  }
   let gridIndex,ownership;
   if(fixedGrid){
     if(fixedGrid.footprints_sha256!==checkPrepared(reference.features)||fixedGrid.hierarchy_sha256!==createHash('sha256').update(await fs.readFile('data/hierarchy.json')).digest('hex'))throw Error('Precompiled canonical grid is stale');
@@ -109,7 +128,7 @@ try {
     for(const part of coverageClassification.parts)await fs.copyFile('data/'+part.path,'dist/'+part.path);
   }
   const referenceBundle=await packageReferenceBundle({source:'data/reference-attributes',destination:'dist/reference-attributes',expectedFootprints:geographicRelease.footprints_sha256});
-  await fs.writeFile('dist/atlas-geography.json', JSON.stringify({gridVerification:selectedGrid?.verification??null,nativeContextInputStage,coverageClassification,referenceAttributes:referenceBundle.descriptor,contentCapabilities:{mapSnapshots:1,datedGeography:1,datedFootprints:0,storageExport:2},type:reference.type,sourceQualityReviews:reference.sourceQualityReviews,reference_release:geographicRelease,preparedEvidence:{footprints_sha256:preparedEvidence.footprints_sha256,hierarchy_sha256:preparedEvidence.hierarchy_sha256,index_sha256:createHash('sha256').update(await fs.readFile('data/prepared-evidence/index.json')).digest('hex')},pixelMissing:reference.pixelMissing,units:reference.units,temporal:{history:[],links:reference.temporal.links},entityParts,temporalHistoryParts,parts:catalogParts,geometryParts:parts,pixelMap}));
+  await fs.writeFile('dist/atlas-geography.json', JSON.stringify({gridVerification:selectedGrid?.verification??null,nativeContextInputStage,coverageClassification,referenceAttributes:referenceBundle.descriptor,contentCapabilities:{mapSnapshots:1,datedGeography:1,datedFootprints:0,storageExport:2},type:reference.type,sourceQualityReviews:reference.sourceQualityReviews,boundarySourceReviews,reference_release:geographicRelease,preparedEvidence:{footprints_sha256:preparedEvidence.footprints_sha256,hierarchy_sha256:preparedEvidence.hierarchy_sha256,index_sha256:createHash('sha256').update(await fs.readFile('data/prepared-evidence/index.json')).digest('hex')},pixelMissing:reference.pixelMissing,units:reference.units,temporal:{history:[],links:reference.temporal.links},entityParts,temporalHistoryParts,parts:catalogParts,geometryParts:parts,pixelMap}));
   await fs.writeFile('dist/atlas-history.json.gz',gzipSync(JSON.stringify(history)));
   await fs.writeFile('dist/environment-classifications.json',JSON.stringify({version:1,unknown:null,attributes:environmentClassifications}));
   await packageOwnershipHistory({source:'data/ownership-history',destination:'dist/ownership-history',hosted:process.env.ATLAS_HOSTED_BUILD==='1',compactReceipts:true});
