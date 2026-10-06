@@ -121,6 +121,20 @@ try{
   for(const renderer of ['webgl2','canvas']){
     const context=await browser.newContext({viewport:{width:1440,height:1080},deviceScaleFactor:1});
     try{
+      // Chrome's inspector drops bodies above its per-resource cache limit.
+      // Hash a clone of the actual browser response without changing app bytes.
+      await context.addInitScript(()=>{
+        const original=window.fetch.bind(window);
+        window.fetch=async(...args)=>{
+          const response=await original(...args);
+          if(new URL(response.url).pathname==='/atlas-geography.json'){
+            response.clone().arrayBuffer().then(bytes=>crypto.subtle.digest('SHA-256',bytes))
+              .then(hash=>{window.__testedAtlasSHA=[...new Uint8Array(hash)].map(b=>b.toString(16).padStart(2,'0')).join('');})
+              .catch(error=>{window.__testedAtlasError=String(error);});
+          }
+          return response;
+        };
+      });
       if(renderer==='canvas')await context.addInitScript(()=>{const original=HTMLCanvasElement.prototype.getContext;HTMLCanvasElement.prototype.getContext=function(kind,...args){return kind==='webgl2'?null:original.call(this,kind,...args);};});
       const page=await context.newPage(),errors=[],httpErrors=[],requests=[],consoleErrors=[],failedLocalRequests=[];
       const network=await context.newCDPSession(page);
@@ -130,8 +144,9 @@ try{
       page.on('requestfailed',request=>{if(request.url().startsWith(base))failedLocalRequests.push({url:request.url(),error:request.failure()?.errorText});});
       page.on('request',request=>requests.push(request.url()));
       await page.route('**/*',route=>{const url=route.request().url();if(url.startsWith('https://fonts.googleapis.com/'))return route.fulfill({status:200,contentType:'text/css',body:''});return url.startsWith(base+'/')||url.startsWith('data:')?route.continue():route.abort();});
-      const actualAtlas=page.waitForResponse(response=>response.url()===base+'/atlas-geography.json').then(async response=>sha(await response.body()));
-      await page.goto(base,{waitUntil:'domcontentloaded'});assert.equal(await actualAtlas,sha(atlasBytes),'Browser consumed the exact built atlas manifest');await settled(page);
+      await page.goto(base,{waitUntil:'domcontentloaded'});
+      await page.waitForFunction(()=>window.__testedAtlasSHA||window.__testedAtlasError,null,{timeout:120000});
+      assert.equal(await page.evaluate(()=>window.__testedAtlasSHA),sha(atlasBytes),'Browser consumed the exact built atlas manifest');await settled(page);
       const startup=await page.locator('.atlas-pixel-canvas').evaluate(c=>({...c.dataset}));
       if(renderer==='webgl2'){assert.equal(startup.renderer,'webgl2');assert.equal(startup.precompiled,'true');assert.equal(startup.compilations,'0');assert.deepEqual(await gpuOwners(page),cells.map(c=>c.owner),'Actual uploaded GPU native ownership covers all 954 supported additions');}
       else {assert.equal(await page.locator('.atlas-pixel-canvas').evaluate(c=>!!c.getContext('2d')),true);assert.equal(startup.compilations,'0');}
