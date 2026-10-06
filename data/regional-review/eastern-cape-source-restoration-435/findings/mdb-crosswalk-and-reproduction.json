@@ -1,0 +1,944 @@
+{
+  "baseline_pins": {
+    "administrative-sources.json": {
+      "bytes": 661416,
+      "path": "data/administrative-sources.json",
+      "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+    },
+    "geography_part-28.json": {
+      "bytes": 6613963,
+      "path": "data/geography/part-28.json",
+      "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+    },
+    "hierarchy.json": {
+      "bytes": 10164089,
+      "path": "data/hierarchy.json",
+      "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+    },
+    "source_register_435": {
+      "bytes": 18354,
+      "path": "data/regional-review/regional-review-b9aef9289b79194e/findings/source-register.json",
+      "sha256": "f35089b4369f02119abe0973683c507643e7a3fe37b6a82706b7cb6e480e78cb"
+    },
+    "world-index.json": {
+      "bytes": 944,
+      "path": "data/world-index.json",
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+    }
+  },
+  "confirmed_2024_changes_in_scope": [
+    {
+      "dem_number": "DEM6500",
+      "description": "Lower Seplan and Emaqwathini villages move from Intsika Yethu (EC135) into Sakhisizwe (EC138); Gazette 5030, Notice 763, 2024-01-08; Section 21(5) confirmation in Gazette 5064, Notice 805, 2024-03-11.",
+      "effective_subjects": [
+        "gb:ZAF:ADM3:15628383B88034979550306",
+        "gb:ZAF:ADM3:15628383B16723794281290"
+      ]
+    },
+    {
+      "dem_number": "DEM6506",
+      "description": "Mbanga administrative area moves from Mbhashe (EC121) into Dr AB Xuma (EC137); Gazette 5030, Notice 763, 2024-01-08; Section 21(5) confirmation in Gazette 5064, Notice 805, 2024-03-11.",
+      "effective_subjects": [
+        "gb:ZAF:ADM3:15628383B4889923419833"
+      ]
+    },
+    {
+      "dem_number": "DEM6611",
+      "description": "Gqutyini D moves from Dr AB Xuma (EC137) into Sakhisizwe (EC138); Gazette 5030, Notice 763, 2024-01-08; Section 21(5) confirmation in Gazette 5064, Notice 805, 2024-03-11.",
+      "effective_subjects": [
+        "gb:ZAF:ADM3:15628383B4889923419833",
+        "gb:ZAF:ADM3:15628383B16723794281290"
+      ]
+    }
+  ],
+  "evaluated_against_commit": "e8138aef2004b419cb8c458ccc1fb2ce31b639f6",
+  "kind": "source",
+  "mdb_2026_prospective_roster": {
+    "assertion_limit": "Official item states future effectiveness after the 2026 local elections. This geometry is retained for forward-reference only; it does not establish the legal/current footprint on 2026-10-06.",
+    "attribute_response_sha256": "ef7fbf219bb3d33062cf78bd6e5b32b5f6fac687b576212d12320a005f7c2604",
+    "category_a_count": 2,
+    "category_b_count": 31,
+    "dataset_effective_before_election": false,
+    "effective_date_utc": "2026-11-04T00:00:00Z",
+    "feature_date_utc": 1793750400000,
+    "geometry_response_sha256": "f0069abf4892d52c4a8884f932c2e760e5663690c37204b91fa17a9ff3524147",
+    "record_count": 33,
+    "scope_category_counts": {
+      "A": 1,
+      "B": 16
+    },
+    "scope_exact_code_crosswalk_count": 17,
+    "scope_unique_municipal_code_count": 17
+  },
+  "mdb_eastern_cape_roster": {
+    "all_features_have_geometry": true,
+    "assertion_limit": "Roster and geometry are the exact publicly served ArcGIS REST response captured on retrieval date, not the original MDB shapefile bytes; existence, completeness and legal status of detached/island polygons beyond the service feature records remain unproven.",
+    "attribute_response_sha256": "ffd8ae38ed99d2cb66b5d4c0cf3f74972de81ca8e4d02bb161eb59cf5e79dbd4",
+    "category_a_count": 2,
+    "category_b_count": 31,
+    "feature_names_unique": true,
+    "geometry_response_sha256": "d92db8c3ed9f508841336a68c8e3b94c7a5b9f031787884119d9575a95673eab",
+    "record_count": 33,
+    "scope_category_counts": {
+      "A": 1,
+      "B": 16
+    },
+    "scope_exact_name_crosswalk_count": 17,
+    "scope_geometry_type_counts": {
+      "MultiPolygon": 0,
+      "Polygon": 17
+    },
+    "scope_multipart_component_count": 17,
+    "scope_unique_municipal_code_count": 17
+  },
+  "method_id": "source-and-scope-reproduction",
+  "negative_control": {
+    "outcome": "passed",
+    "scope_intersection_count": 0,
+    "sibling_issue": 955
+  },
+  "outcome": "passed",
+  "parent_findings": [
+    {
+      "current_mdb_district_code": "DC10",
+      "current_mdb_district_name": "Sarah Baartman",
+      "disposition": "sourced-name-crosswalk; preserve historical/source label and stable member IDs; do not rename shared hierarchy in this research packet.",
+      "member_count": 7,
+      "source_parent_id": "framework:province:cacadu:241cd826ea0e",
+      "source_parent_name": "Cacadu"
+    },
+    {
+      "current_mdb_district_code": "DC13",
+      "current_mdb_district_name": "Chris Hani",
+      "disposition": "current 2021 MDB roster supports district relationship; boundary vintage remains bounded by source date.",
+      "member_count": 6,
+      "source_parent_id": "framework:province:chris-hani:9c3f8a57309e"
+    },
+    {
+      "current_mdb_district_code": "DC14",
+      "current_mdb_district_name": "Joe Gqabi",
+      "disposition": "current 2021 MDB roster supports district relationship; boundary vintage remains bounded by source date.",
+      "member_count": 3,
+      "source_parent_id": "framework:province:joe-gqabi:2eb3c0ffac00"
+    },
+    {
+      "current_mdb_category": "A - Metropolitan Municipality",
+      "current_mdb_code": "NMA",
+      "disposition": "separate metropolitan category is explicit in MDB; same-name repeat needs hierarchy/parent-level engineering review, not a local-municipality alias.",
+      "member_count": 1,
+      "source_parent_id": "framework:province:nelson-mandela-bay:923919a403a5",
+      "source_parent_name": "Nelson Mandela Bay"
+    }
+  ],
+  "positive_control": {
+    "exact_issue_scope_source_id_matches": 17,
+    "exact_source_feature_count": 213,
+    "outcome": "passed"
+  },
+  "scope_issue": 1137,
+  "sibling_scope": {
+    "intersection_count": 0,
+    "issue": 955,
+    "subject_count": 196
+  },
+  "source_2020_exact_replay": {
+    "combined_source_bytes": 50705428,
+    "combined_source_sha256": "74e489fd4370972403950719026a317abba443668cea7d49f4b36c61637958f1",
+    "exact_scope_match_count": 17,
+    "feature_count": 213,
+    "parts": [
+      {
+        "bytes": 25352714,
+        "path": "data/regional-review/regional-review-b9aef9289b79194e/sources/gb-ZAF-ADM3.geojson.part-001",
+        "sha256": "a87211053b2a57f7948bf4c416655959cca91a720e35ca3a5aef5a891ac52433"
+      },
+      {
+        "bytes": 25352714,
+        "path": "data/regional-review/regional-review-b9aef9289b79194e/sources/gb-ZAF-ADM3.geojson.part-002",
+        "sha256": "fa2143ac904ae38dd71793d9b520badccd79088735d1dd8082e72679494f1616"
+      }
+    ],
+    "read_method": "stream exact ordered 25,352,714-byte parts; hash as concatenated bytes; parse one JSON feature at a time; never create a >32 MiB joined file or load the complete source into memory"
+  },
+  "source_bytes": {
+    "issue_1137_snapshot_sha256": "e1071db7ec1b7dfed28dbfa1ae52902a3339218c8d150d006abbd20aa6337989",
+    "issue_955_snapshot_sha256": "7644a280533b32c4bcd74faa3ece3d2af56beb1bf551084265762caecf8f007f",
+    "mdb_2026_attribute_roster_sha256": "ef7fbf219bb3d33062cf78bd6e5b32b5f6fac687b576212d12320a005f7c2604",
+    "mdb_2026_geometry_geojson_sha256": "f0069abf4892d52c4a8884f932c2e760e5663690c37204b91fa17a9ff3524147",
+    "mdb_2026_item_metadata_sha256": "5476378615eb8094a045a346a3de1b0820c6b3b34ff10e320e3ccfea343a49e3",
+    "mdb_2026_layer_metadata_sha256": "27a7b5c409efe59d20b60c1ac66d0edb65eb5404835a7fcb64aea550af687cb8",
+    "mdb_attribute_roster_sha256": "ffd8ae38ed99d2cb66b5d4c0cf3f74972de81ca8e4d02bb161eb59cf5e79dbd4",
+    "mdb_geometry_geojson_sha256": "d92db8c3ed9f508841336a68c8e3b94c7a5b9f031787884119d9575a95673eab",
+    "mdb_item_metadata_sha256": "2c09557bf368739c45e9823565563beb1f958f33fd8bacc4bdc6497fc27a0839",
+    "mdb_service_layer_metadata_sha256": "98afa9ea38849e32ac216b78cd82f0ca4737a201990bbef602584f9e2fcc5277"
+  },
+  "subject_count": 17,
+  "subjects": [
+    {
+      "atlas_id": "gb:ZAF:ADM3:15628383B16723794281290",
+      "mdb_2021": {
+        "category": "B",
+        "category_label": "Local Municipality",
+        "district_code": "DC13",
+        "district_name": "Chris Hani",
+        "feature_date_utc": 1561420800000,
+        "geometry_type": "Polygon",
+        "identity_crosswalk_note": "exact normalized municipality-name match",
+        "municipality_code": "EC138",
+        "municipality_name": "Sakhisizwe",
+        "name_code": "Sakhisizwe (EC138)",
+        "polygon_parts": 1,
+        "province_code": "EC"
+      },
+      "mdb_2026_prospective": {
+        "category": "B",
+        "category_label": "Local Municipality",
+        "current_as_of_evaluation": false,
+        "dataset_effective_date_utc": 1793750400000,
+        "district_code": "DC13",
+        "district_name": "Chris Hani",
+        "geometry_type": "Polygon",
+        "limit": "MDB item metadata says this layer comes into effect after the 2026 Local Government Elections, on 2026-11-04; it is prospective on the 2026-10-06 evaluation date.",
+        "municipality_code": "EC138",
+        "municipality_name": "Sakhisizwe",
+        "name_code": "Sakhisizwe Local Municipality (EC138)",
+        "province_name": "Eastern Cape"
+      },
+      "source_2020": {
+        "administrative_level": "ADM3",
+        "name": "Sakhisizwe",
+        "original_id": "15628383B16723794281290",
+        "parent_id": "framework:province:chris-hani:9c3f8a57309e",
+        "parent_name_at_2020": "Chris Hani",
+        "replayed_source_geometry_type": "Polygon",
+        "replayed_source_name": "Sakhisizwe",
+        "replayed_source_shape_type": "ADM3",
+        "role": "Local municipality",
+        "source": "gb:ZAF:ADM3",
+        "source_year": "2020",
+        "whole_source_sha256": "74e489fd4370972403950719026a317abba443668cea7d49f4b36c61637958f1"
+      }
+    },
+    {
+      "atlas_id": "gb:ZAF:ADM3:15628383B24019341917361",
+      "mdb_2021": {
+        "category": "B",
+        "category_label": "Local Municipality",
+        "district_code": "DC14",
+        "district_name": "Joe Gqabi",
+        "feature_date_utc": 1561420800000,
+        "geometry_type": "Polygon",
+        "identity_crosswalk_note": "exact normalized municipality-name match",
+        "municipality_code": "EC141",
+        "municipality_name": "Elundini",
+        "name_code": "Elundini (EC141)",
+        "polygon_parts": 1,
+        "province_code": "EC"
+      },
+      "mdb_2026_prospective": {
+        "category": "B",
+        "category_label": "Local Municipality",
+        "current_as_of_evaluation": false,
+        "dataset_effective_date_utc": 1793750400000,
+        "district_code": "DC14",
+        "district_name": "Joe Gqabi",
+        "geometry_type": "Polygon",
+        "limit": "MDB item metadata says this layer comes into effect after the 2026 Local Government Elections, on 2026-11-04; it is prospective on the 2026-10-06 evaluation date.",
+        "municipality_code": "EC141",
+        "municipality_name": "Elundini",
+        "name_code": "Elundini Local Municipality (EC141)",
+        "province_name": "Eastern Cape"
+      },
+      "source_2020": {
+        "administrative_level": "ADM3",
+        "name": "Elundini",
+        "original_id": "15628383B24019341917361",
+        "parent_id": "framework:province:joe-gqabi:2eb3c0ffac00",
+        "parent_name_at_2020": "Joe Gqabi",
+        "replayed_source_geometry_type": "Polygon",
+        "replayed_source_name": "Elundini",
+        "replayed_source_shape_type": "ADM3",
+        "role": "Local municipality",
+        "source": "gb:ZAF:ADM3",
+        "source_year": "2020",
+        "whole_source_sha256": "74e489fd4370972403950719026a317abba443668cea7d49f4b36c61637958f1"
+      }
+    },
+    {
+      "atlas_id": "gb:ZAF:ADM3:15628383B24472250012031",
+      "mdb_2021": {
+        "category": "B",
+        "category_label": "Local Municipality",
+        "district_code": "DC10",
+        "district_name": "Sarah Baartman",
+        "feature_date_utc": 1561420800000,
+        "geometry_type": "Polygon",
+        "identity_crosswalk_note": "exact normalized municipality-name match",
+        "municipality_code": "EC106",
+        "municipality_name": "Sundays River Valley",
+        "name_code": "Sundays River Valley (EC106)",
+        "polygon_parts": 1,
+        "province_code": "EC"
+      },
+      "mdb_2026_prospective": {
+        "category": "B",
+        "category_label": "Local Municipality",
+        "current_as_of_evaluation": false,
+        "dataset_effective_date_utc": 1793750400000,
+        "district_code": "DC10",
+        "district_name": "Sarah Baartman",
+        "geometry_type": "Polygon",
+        "limit": "MDB item metadata says this layer comes into effect after the 2026 Local Government Elections, on 2026-11-04; it is prospective on the 2026-10-06 evaluation date.",
+        "municipality_code": "EC106",
+        "municipality_name": "Sundays River Valley",
+        "name_code": "Sundays River Valley Local Municipality (EC106)",
+        "province_name": "Eastern Cape"
+      },
+      "source_2020": {
+        "administrative_level": "ADM3",
+        "name": "Sundays River Valley",
+        "original_id": "15628383B24472250012031",
+        "parent_id": "framework:province:cacadu:241cd826ea0e",
+        "parent_name_at_2020": "Cacadu",
+        "replayed_source_geometry_type": "Polygon",
+        "replayed_source_name": "Sundays River Valley",
+        "replayed_source_shape_type": "ADM3",
+        "role": "Local municipality",
+        "source": "gb:ZAF:ADM3",
+        "source_year": "2020",
+        "whole_source_sha256": "74e489fd4370972403950719026a317abba443668cea7d49f4b36c61637958f1"
+      }
+    },
+    {
+      "atlas_id": "gb:ZAF:ADM3:15628383B28857154592205",
+      "mdb_2021": {
+        "category": "A",
+        "category_label": "Metropolitan Municipality",
+        "district_code": "NMA",
+        "district_name": "Nelson Mandela Bay",
+        "feature_date_utc": 1561420800000,
+        "geometry_type": "Polygon",
+        "identity_crosswalk_note": "exact normalized municipality-name match",
+        "municipality_code": "NMA",
+        "municipality_name": "Nelson Mandela Bay",
+        "name_code": "Nelson Mandela Bay (NMA)",
+        "polygon_parts": 1,
+        "province_code": "EC"
+      },
+      "mdb_2026_prospective": {
+        "category": "A",
+        "category_label": "Metropolitan Municipality",
+        "current_as_of_evaluation": false,
+        "dataset_effective_date_utc": 1793750400000,
+        "district_code": "NMA",
+        "district_name": "Nelson Mandela Bay",
+        "geometry_type": "Polygon",
+        "limit": "MDB item metadata says this layer comes into effect after the 2026 Local Government Elections, on 2026-11-04; it is prospective on the 2026-10-06 evaluation date.",
+        "municipality_code": "NMA",
+        "municipality_name": "Nelson Mandela Bay",
+        "name_code": "Nelson Mandela Bay Metropolitan Municipality (NMA)",
+        "province_name": "Eastern Cape"
+      },
+      "source_2020": {
+        "administrative_level": "ADM3",
+        "name": "Nelson Mandela Bay",
+        "original_id": "15628383B28857154592205",
+        "parent_id": "framework:province:nelson-mandela-bay:923919a403a5",
+        "parent_name_at_2020": "Nelson Mandela Bay",
+        "replayed_source_geometry_type": "Polygon",
+        "replayed_source_name": "Nelson Mandela Bay",
+        "replayed_source_shape_type": "ADM3",
+        "role": "Local municipality",
+        "source": "gb:ZAF:ADM3",
+        "source_year": "2020",
+        "whole_source_sha256": "74e489fd4370972403950719026a317abba443668cea7d49f4b36c61637958f1"
+      }
+    },
+    {
+      "atlas_id": "gb:ZAF:ADM3:15628383B33674951697181",
+      "mdb_2021": {
+        "category": "B",
+        "category_label": "Local Municipality",
+        "district_code": "DC10",
+        "district_name": "Sarah Baartman",
+        "feature_date_utc": 1561420800000,
+        "geometry_type": "Polygon",
+        "identity_crosswalk_note": "exact normalized municipality-name match",
+        "municipality_code": "EC109",
+        "municipality_name": "Kou-Kamma",
+        "name_code": "Kou-Kamma (EC109)",
+        "polygon_parts": 1,
+        "province_code": "EC"
+      },
+      "mdb_2026_prospective": {
+        "category": "B",
+        "category_label": "Local Municipality",
+        "current_as_of_evaluation": false,
+        "dataset_effective_date_utc": 1793750400000,
+        "district_code": "DC10",
+        "district_name": "Sarah Baartman",
+        "geometry_type": "Polygon",
+        "limit": "MDB item metadata says this layer comes into effect after the 2026 Local Government Elections, on 2026-11-04; it is prospective on the 2026-10-06 evaluation date.",
+        "municipality_code": "EC109",
+        "municipality_name": "Kou-Kamma",
+        "name_code": "Kou-Kamma Local Municipality (EC109)",
+        "province_name": "Eastern Cape"
+      },
+      "source_2020": {
+        "administrative_level": "ADM3",
+        "name": "Kou-Kamma",
+        "original_id": "15628383B33674951697181",
+        "parent_id": "framework:province:cacadu:241cd826ea0e",
+        "parent_name_at_2020": "Cacadu",
+        "replayed_source_geometry_type": "Polygon",
+        "replayed_source_name": "Kou-Kamma",
+        "replayed_source_shape_type": "ADM3",
+        "role": "Local municipality",
+        "source": "gb:ZAF:ADM3",
+        "source_year": "2020",
+        "whole_source_sha256": "74e489fd4370972403950719026a317abba443668cea7d49f4b36c61637958f1"
+      }
+    },
+    {
+      "atlas_id": "gb:ZAF:ADM3:15628383B35584475836677",
+      "mdb_2021": {
+        "category": "B",
+        "category_label": "Local Municipality",
+        "district_code": "DC10",
+        "district_name": "Sarah Baartman",
+        "feature_date_utc": 1561420800000,
+        "geometry_type": "Polygon",
+        "identity_crosswalk_note": "exact normalized municipality-name match",
+        "municipality_code": "EC105",
+        "municipality_name": "Ndlambe",
+        "name_code": "Ndlambe (EC105)",
+        "polygon_parts": 1,
+        "province_code": "EC"
+      },
+      "mdb_2026_prospective": {
+        "category": "B",
+        "category_label": "Local Municipality",
+        "current_as_of_evaluation": false,
+        "dataset_effective_date_utc": 1793750400000,
+        "district_code": "DC10",
+        "district_name": "Sarah Baartman",
+        "geometry_type": "Polygon",
+        "limit": "MDB item metadata says this layer comes into effect after the 2026 Local Government Elections, on 2026-11-04; it is prospective on the 2026-10-06 evaluation date.",
+        "municipality_code": "EC105",
+        "municipality_name": "Ndlambe",
+        "name_code": "Ndlambe Local Municipality (EC105)",
+        "province_name": "Eastern Cape"
+      },
+      "source_2020": {
+        "administrative_level": "ADM3",
+        "name": "Ndlambe",
+        "original_id": "15628383B35584475836677",
+        "parent_id": "framework:province:cacadu:241cd826ea0e",
+        "parent_name_at_2020": "Cacadu",
+        "replayed_source_geometry_type": "Polygon",
+        "replayed_source_name": "Ndlambe",
+        "replayed_source_shape_type": "ADM3",
+        "role": "Local municipality",
+        "source": "gb:ZAF:ADM3",
+        "source_year": "2020",
+        "whole_source_sha256": "74e489fd4370972403950719026a317abba443668cea7d49f4b36c61637958f1"
+      }
+    },
+    {
+      "atlas_id": "gb:ZAF:ADM3:15628383B36159893459203",
+      "mdb_2021": {
+        "category": "B",
+        "category_label": "Local Municipality",
+        "district_code": "DC10",
+        "district_name": "Sarah Baartman",
+        "feature_date_utc": 1561420800000,
+        "geometry_type": "Polygon",
+        "identity_crosswalk_note": "exact normalized municipality-name match",
+        "municipality_code": "EC108",
+        "municipality_name": "Kouga",
+        "name_code": "Kouga (EC108)",
+        "polygon_parts": 1,
+        "province_code": "EC"
+      },
+      "mdb_2026_prospective": {
+        "category": "B",
+        "category_label": "Local Municipality",
+        "current_as_of_evaluation": false,
+        "dataset_effective_date_utc": 1793750400000,
+        "district_code": "DC10",
+        "district_name": "Sarah Baartman",
+        "geometry_type": "Polygon",
+        "limit": "MDB item metadata says this layer comes into effect after the 2026 Local Government Elections, on 2026-11-04; it is prospective on the 2026-10-06 evaluation date.",
+        "municipality_code": "EC108",
+        "municipality_name": "Kouga",
+        "name_code": "Kouga Local Municipality (EC108)",
+        "province_name": "Eastern Cape"
+      },
+      "source_2020": {
+        "administrative_level": "ADM3",
+        "name": "Kouga",
+        "original_id": "15628383B36159893459203",
+        "parent_id": "framework:province:cacadu:241cd826ea0e",
+        "parent_name_at_2020": "Cacadu",
+        "replayed_source_geometry_type": "Polygon",
+        "replayed_source_name": "Kouga",
+        "replayed_source_shape_type": "ADM3",
+        "role": "Local municipality",
+        "source": "gb:ZAF:ADM3",
+        "source_year": "2020",
+        "whole_source_sha256": "74e489fd4370972403950719026a317abba443668cea7d49f4b36c61637958f1"
+      }
+    },
+    {
+      "atlas_id": "gb:ZAF:ADM3:15628383B46688478529811",
+      "mdb_2021": {
+        "category": "B",
+        "category_label": "Local Municipality",
+        "district_code": "DC13",
+        "district_name": "Chris Hani",
+        "feature_date_utc": 1561420800000,
+        "geometry_type": "Polygon",
+        "identity_crosswalk_note": "exact normalized municipality-name match",
+        "municipality_code": "EC136",
+        "municipality_name": "Emalahleni",
+        "name_code": "Emalahleni (EC136)",
+        "polygon_parts": 1,
+        "province_code": "EC"
+      },
+      "mdb_2026_prospective": {
+        "category": "B",
+        "category_label": "Local Municipality",
+        "current_as_of_evaluation": false,
+        "dataset_effective_date_utc": 1793750400000,
+        "district_code": "DC13",
+        "district_name": "Chris Hani",
+        "geometry_type": "Polygon",
+        "limit": "MDB item metadata says this layer comes into effect after the 2026 Local Government Elections, on 2026-11-04; it is prospective on the 2026-10-06 evaluation date.",
+        "municipality_code": "EC136",
+        "municipality_name": "Emalahleni",
+        "name_code": "Emalahleni Local Municipality (EC136)",
+        "province_name": "Eastern Cape"
+      },
+      "source_2020": {
+        "administrative_level": "ADM3",
+        "name": "Emalahleni",
+        "original_id": "15628383B46688478529811",
+        "parent_id": "framework:province:chris-hani:9c3f8a57309e",
+        "parent_name_at_2020": "Chris Hani",
+        "replayed_source_geometry_type": "Polygon",
+        "replayed_source_name": "Emalahleni",
+        "replayed_source_shape_type": "ADM3",
+        "role": "Local municipality",
+        "source": "gb:ZAF:ADM3",
+        "source_year": "2020",
+        "whole_source_sha256": "74e489fd4370972403950719026a317abba443668cea7d49f4b36c61637958f1"
+      }
+    },
+    {
+      "atlas_id": "gb:ZAF:ADM3:15628383B4889923419833",
+      "mdb_2021": {
+        "category": "B",
+        "category_label": "Local Municipality",
+        "district_code": "DC13",
+        "district_name": "Chris Hani",
+        "feature_date_utc": 1561420800000,
+        "geometry_type": "Polygon",
+        "identity_crosswalk_note": "MDB code EC137 maps source name Engcobo to current label Dr AB Xuma; identity continuity/name-change date requires official instrument",
+        "municipality_code": "EC137",
+        "municipality_name": "Dr AB Xuma",
+        "name_code": "Dr AB Xuma (EC137)",
+        "polygon_parts": 1,
+        "province_code": "EC"
+      },
+      "mdb_2026_prospective": {
+        "category": "B",
+        "category_label": "Local Municipality",
+        "current_as_of_evaluation": false,
+        "dataset_effective_date_utc": 1793750400000,
+        "district_code": "DC13",
+        "district_name": "Chris Hani",
+        "geometry_type": "Polygon",
+        "limit": "MDB item metadata says this layer comes into effect after the 2026 Local Government Elections, on 2026-11-04; it is prospective on the 2026-10-06 evaluation date.",
+        "municipality_code": "EC137",
+        "municipality_name": "Dr AB Xuma",
+        "name_code": "Dr AB Xuma Local Municipality (EC137)",
+        "province_name": "Eastern Cape"
+      },
+      "source_2020": {
+        "administrative_level": "ADM3",
+        "name": "Engcobo",
+        "original_id": "15628383B4889923419833",
+        "parent_id": "framework:province:chris-hani:9c3f8a57309e",
+        "parent_name_at_2020": "Chris Hani",
+        "replayed_source_geometry_type": "Polygon",
+        "replayed_source_name": "Engcobo",
+        "replayed_source_shape_type": "ADM3",
+        "role": "Local municipality",
+        "source": "gb:ZAF:ADM3",
+        "source_year": "2020",
+        "whole_source_sha256": "74e489fd4370972403950719026a317abba443668cea7d49f4b36c61637958f1"
+      }
+    },
+    {
+      "atlas_id": "gb:ZAF:ADM3:15628383B56060894344771",
+      "mdb_2021": {
+        "category": "B",
+        "category_label": "Local Municipality",
+        "district_code": "DC14",
+        "district_name": "Joe Gqabi",
+        "feature_date_utc": 1561420800000,
+        "geometry_type": "Polygon",
+        "identity_crosswalk_note": "exact normalized municipality-name match",
+        "municipality_code": "EC142",
+        "municipality_name": "Senqu",
+        "name_code": "Senqu (EC142)",
+        "polygon_parts": 1,
+        "province_code": "EC"
+      },
+      "mdb_2026_prospective": {
+        "category": "B",
+        "category_label": "Local Municipality",
+        "current_as_of_evaluation": false,
+        "dataset_effective_date_utc": 1793750400000,
+        "district_code": "DC14",
+        "district_name": "Joe Gqabi",
+        "geometry_type": "Polygon",
+        "limit": "MDB item metadata says this layer comes into effect after the 2026 Local Government Elections, on 2026-11-04; it is prospective on the 2026-10-06 evaluation date.",
+        "municipality_code": "EC142",
+        "municipality_name": "Senqu",
+        "name_code": "Senqu Local Municipality (EC142)",
+        "province_name": "Eastern Cape"
+      },
+      "source_2020": {
+        "administrative_level": "ADM3",
+        "name": "Senqu",
+        "original_id": "15628383B56060894344771",
+        "parent_id": "framework:province:joe-gqabi:2eb3c0ffac00",
+        "parent_name_at_2020": "Joe Gqabi",
+        "replayed_source_geometry_type": "Polygon",
+        "replayed_source_name": "Senqu",
+        "replayed_source_shape_type": "ADM3",
+        "role": "Local municipality",
+        "source": "gb:ZAF:ADM3",
+        "source_year": "2020",
+        "whole_source_sha256": "74e489fd4370972403950719026a317abba443668cea7d49f4b36c61637958f1"
+      }
+    },
+    {
+      "atlas_id": "gb:ZAF:ADM3:15628383B59220525748831",
+      "mdb_2021": {
+        "category": "B",
+        "category_label": "Local Municipality",
+        "district_code": "DC14",
+        "district_name": "Joe Gqabi",
+        "feature_date_utc": 1561420800000,
+        "geometry_type": "Polygon",
+        "identity_crosswalk_note": "exact normalized municipality-name match",
+        "municipality_code": "EC145",
+        "municipality_name": "Walter Sisulu",
+        "name_code": "Walter Sisulu (EC145)",
+        "polygon_parts": 1,
+        "province_code": "EC"
+      },
+      "mdb_2026_prospective": {
+        "category": "B",
+        "category_label": "Local Municipality",
+        "current_as_of_evaluation": false,
+        "dataset_effective_date_utc": 1793750400000,
+        "district_code": "DC14",
+        "district_name": "Joe Gqabi",
+        "geometry_type": "Polygon",
+        "limit": "MDB item metadata says this layer comes into effect after the 2026 Local Government Elections, on 2026-11-04; it is prospective on the 2026-10-06 evaluation date.",
+        "municipality_code": "EC145",
+        "municipality_name": "Walter Sisulu",
+        "name_code": "Walter Sisulu Local Municipality (EC145)",
+        "province_name": "Eastern Cape"
+      },
+      "source_2020": {
+        "administrative_level": "ADM3",
+        "name": "Walter Sisulu",
+        "original_id": "15628383B59220525748831",
+        "parent_id": "framework:province:joe-gqabi:2eb3c0ffac00",
+        "parent_name_at_2020": "Joe Gqabi",
+        "replayed_source_geometry_type": "Polygon",
+        "replayed_source_name": "Walter Sisulu",
+        "replayed_source_shape_type": "ADM3",
+        "role": "Local municipality",
+        "source": "gb:ZAF:ADM3",
+        "source_year": "2020",
+        "whole_source_sha256": "74e489fd4370972403950719026a317abba443668cea7d49f4b36c61637958f1"
+      }
+    },
+    {
+      "atlas_id": "gb:ZAF:ADM3:15628383B67522024924235",
+      "mdb_2021": {
+        "category": "B",
+        "category_label": "Local Municipality",
+        "district_code": "DC13",
+        "district_name": "Chris Hani",
+        "feature_date_utc": 1561420800000,
+        "geometry_type": "Polygon",
+        "identity_crosswalk_note": "exact normalized municipality-name match",
+        "municipality_code": "EC139",
+        "municipality_name": "Enoch Mgijima",
+        "name_code": "Enoch Mgijima (EC139)",
+        "polygon_parts": 1,
+        "province_code": "EC"
+      },
+      "mdb_2026_prospective": {
+        "category": "B",
+        "category_label": "Local Municipality",
+        "current_as_of_evaluation": false,
+        "dataset_effective_date_utc": 1793750400000,
+        "district_code": "DC13",
+        "district_name": "Chris Hani",
+        "geometry_type": "Polygon",
+        "limit": "MDB item metadata says this layer comes into effect after the 2026 Local Government Elections, on 2026-11-04; it is prospective on the 2026-10-06 evaluation date.",
+        "municipality_code": "EC139",
+        "municipality_name": "Enoch Mgijima",
+        "name_code": "Enoch Mgijima Local Municipality (EC139)",
+        "province_name": "Eastern Cape"
+      },
+      "source_2020": {
+        "administrative_level": "ADM3",
+        "name": "Enoch Mgijima",
+        "original_id": "15628383B67522024924235",
+        "parent_id": "framework:province:chris-hani:9c3f8a57309e",
+        "parent_name_at_2020": "Chris Hani",
+        "replayed_source_geometry_type": "Polygon",
+        "replayed_source_name": "Enoch Mgijima",
+        "replayed_source_shape_type": "ADM3",
+        "role": "Local municipality",
+        "source": "gb:ZAF:ADM3",
+        "source_year": "2020",
+        "whole_source_sha256": "74e489fd4370972403950719026a317abba443668cea7d49f4b36c61637958f1"
+      }
+    },
+    {
+      "atlas_id": "gb:ZAF:ADM3:15628383B78908098986015",
+      "mdb_2021": {
+        "category": "B",
+        "category_label": "Local Municipality",
+        "district_code": "DC10",
+        "district_name": "Sarah Baartman",
+        "feature_date_utc": 1561420800000,
+        "geometry_type": "Polygon",
+        "identity_crosswalk_note": "exact normalized municipality-name match",
+        "municipality_code": "EC104",
+        "municipality_name": "Makana",
+        "name_code": "Makana (EC104)",
+        "polygon_parts": 1,
+        "province_code": "EC"
+      },
+      "mdb_2026_prospective": {
+        "category": "B",
+        "category_label": "Local Municipality",
+        "current_as_of_evaluation": false,
+        "dataset_effective_date_utc": 1793750400000,
+        "district_code": "DC10",
+        "district_name": "Sarah Baartman",
+        "geometry_type": "Polygon",
+        "limit": "MDB item metadata says this layer comes into effect after the 2026 Local Government Elections, on 2026-11-04; it is prospective on the 2026-10-06 evaluation date.",
+        "municipality_code": "EC104",
+        "municipality_name": "Makana",
+        "name_code": "Makana Local Municipality (EC104)",
+        "province_name": "Eastern Cape"
+      },
+      "source_2020": {
+        "administrative_level": "ADM3",
+        "name": "Makana",
+        "original_id": "15628383B78908098986015",
+        "parent_id": "framework:province:cacadu:241cd826ea0e",
+        "parent_name_at_2020": "Cacadu",
+        "replayed_source_geometry_type": "Polygon",
+        "replayed_source_name": "Makana",
+        "replayed_source_shape_type": "ADM3",
+        "role": "Local municipality",
+        "source": "gb:ZAF:ADM3",
+        "source_year": "2020",
+        "whole_source_sha256": "74e489fd4370972403950719026a317abba443668cea7d49f4b36c61637958f1"
+      }
+    },
+    {
+      "atlas_id": "gb:ZAF:ADM3:15628383B80616091697700",
+      "mdb_2021": {
+        "category": "B",
+        "category_label": "Local Municipality",
+        "district_code": "DC10",
+        "district_name": "Sarah Baartman",
+        "feature_date_utc": 1561420800000,
+        "geometry_type": "Polygon",
+        "identity_crosswalk_note": "exact normalized municipality-name match",
+        "municipality_code": "EC102",
+        "municipality_name": "Blue Crane Route",
+        "name_code": "Blue Crane Rout/ie (EC102)",
+        "polygon_parts": 1,
+        "province_code": "EC"
+      },
+      "mdb_2026_prospective": {
+        "category": "B",
+        "category_label": "Local Municipality",
+        "current_as_of_evaluation": false,
+        "dataset_effective_date_utc": 1793750400000,
+        "district_code": "DC10",
+        "district_name": "Sarah Baartman",
+        "geometry_type": "Polygon",
+        "limit": "MDB item metadata says this layer comes into effect after the 2026 Local Government Elections, on 2026-11-04; it is prospective on the 2026-10-06 evaluation date.",
+        "municipality_code": "EC102",
+        "municipality_name": "Blue Crane Route",
+        "name_code": "Blue Crane Route Local Municipality (EC102)",
+        "province_name": "Eastern Cape"
+      },
+      "source_2020": {
+        "administrative_level": "ADM3",
+        "name": "Blue Crane Route",
+        "original_id": "15628383B80616091697700",
+        "parent_id": "framework:province:cacadu:241cd826ea0e",
+        "parent_name_at_2020": "Cacadu",
+        "replayed_source_geometry_type": "Polygon",
+        "replayed_source_name": "Blue Crane Route",
+        "replayed_source_shape_type": "ADM3",
+        "role": "Local municipality",
+        "source": "gb:ZAF:ADM3",
+        "source_year": "2020",
+        "whole_source_sha256": "74e489fd4370972403950719026a317abba443668cea7d49f4b36c61637958f1"
+      }
+    },
+    {
+      "atlas_id": "gb:ZAF:ADM3:15628383B88034979550306",
+      "mdb_2021": {
+        "category": "B",
+        "category_label": "Local Municipality",
+        "district_code": "DC13",
+        "district_name": "Chris Hani",
+        "feature_date_utc": 1561420800000,
+        "geometry_type": "Polygon",
+        "identity_crosswalk_note": "exact normalized municipality-name match",
+        "municipality_code": "EC135",
+        "municipality_name": "Intsika Yethu",
+        "name_code": "Intsika Yethu (EC135)",
+        "polygon_parts": 1,
+        "province_code": "EC"
+      },
+      "mdb_2026_prospective": {
+        "category": "B",
+        "category_label": "Local Municipality",
+        "current_as_of_evaluation": false,
+        "dataset_effective_date_utc": 1793750400000,
+        "district_code": "DC13",
+        "district_name": "Chris Hani",
+        "geometry_type": "Polygon",
+        "limit": "MDB item metadata says this layer comes into effect after the 2026 Local Government Elections, on 2026-11-04; it is prospective on the 2026-10-06 evaluation date.",
+        "municipality_code": "EC135",
+        "municipality_name": "Intsika Yethu",
+        "name_code": "Intsika Yethu Local Municipality (EC135)",
+        "province_name": "Eastern Cape"
+      },
+      "source_2020": {
+        "administrative_level": "ADM3",
+        "name": "Intsika Yethu",
+        "original_id": "15628383B88034979550306",
+        "parent_id": "framework:province:chris-hani:9c3f8a57309e",
+        "parent_name_at_2020": "Chris Hani",
+        "replayed_source_geometry_type": "Polygon",
+        "replayed_source_name": "Intsika Yethu",
+        "replayed_source_shape_type": "ADM3",
+        "role": "Local municipality",
+        "source": "gb:ZAF:ADM3",
+        "source_year": "2020",
+        "whole_source_sha256": "74e489fd4370972403950719026a317abba443668cea7d49f4b36c61637958f1"
+      }
+    },
+    {
+      "atlas_id": "gb:ZAF:ADM3:15628383B92131487833225",
+      "mdb_2021": {
+        "category": "B",
+        "category_label": "Local Municipality",
+        "district_code": "DC13",
+        "district_name": "Chris Hani",
+        "feature_date_utc": 1561420800000,
+        "geometry_type": "Polygon",
+        "identity_crosswalk_note": "exact normalized municipality-name match",
+        "municipality_code": "EC131",
+        "municipality_name": "Inxuba Yethemba",
+        "name_code": "Inxuba Yethemba (EC131)",
+        "polygon_parts": 1,
+        "province_code": "EC"
+      },
+      "mdb_2026_prospective": {
+        "category": "B",
+        "category_label": "Local Municipality",
+        "current_as_of_evaluation": false,
+        "dataset_effective_date_utc": 1793750400000,
+        "district_code": "DC13",
+        "district_name": "Chris Hani",
+        "geometry_type": "Polygon",
+        "limit": "MDB item metadata says this layer comes into effect after the 2026 Local Government Elections, on 2026-11-04; it is prospective on the 2026-10-06 evaluation date.",
+        "municipality_code": "EC131",
+        "municipality_name": "Inxuba Yethemba",
+        "name_code": "Inxuba Yethemba Local Municipality (EC131)",
+        "province_name": "Eastern Cape"
+      },
+      "source_2020": {
+        "administrative_level": "ADM3",
+        "name": "Inxuba Yethemba",
+        "original_id": "15628383B92131487833225",
+        "parent_id": "framework:province:chris-hani:9c3f8a57309e",
+        "parent_name_at_2020": "Chris Hani",
+        "replayed_source_geometry_type": "Polygon",
+        "replayed_source_name": "Inxuba Yethemba",
+        "replayed_source_shape_type": "ADM3",
+        "role": "Local municipality",
+        "source": "gb:ZAF:ADM3",
+        "source_year": "2020",
+        "whole_source_sha256": "74e489fd4370972403950719026a317abba443668cea7d49f4b36c61637958f1"
+      }
+    },
+    {
+      "atlas_id": "gb:ZAF:ADM3:15628383B99818150234159",
+      "mdb_2021": {
+        "category": "B",
+        "category_label": "Local Municipality",
+        "district_code": "DC10",
+        "district_name": "Sarah Baartman",
+        "feature_date_utc": 1561420800000,
+        "geometry_type": "Polygon",
+        "identity_crosswalk_note": "exact normalized municipality-name match",
+        "municipality_code": "EC101",
+        "municipality_name": "Dr Beyers Naude",
+        "name_code": "Dr Beyers Naude (EC101)",
+        "polygon_parts": 1,
+        "province_code": "EC"
+      },
+      "mdb_2026_prospective": {
+        "category": "B",
+        "category_label": "Local Municipality",
+        "current_as_of_evaluation": false,
+        "dataset_effective_date_utc": 1793750400000,
+        "district_code": "DC10",
+        "district_name": "Sarah Baartman",
+        "geometry_type": "Polygon",
+        "limit": "MDB item metadata says this layer comes into effect after the 2026 Local Government Elections, on 2026-11-04; it is prospective on the 2026-10-06 evaluation date.",
+        "municipality_code": "EC101",
+        "municipality_name": "Dr Beyers Naude",
+        "name_code": "Dr Beyers Naude Local Municipality (EC101)",
+        "province_name": "Eastern Cape"
+      },
+      "source_2020": {
+        "administrative_level": "ADM3",
+        "name": "Dr Beyers Naude",
+        "original_id": "15628383B99818150234159",
+        "parent_id": "framework:province:cacadu:241cd826ea0e",
+        "parent_name_at_2020": "Cacadu",
+        "replayed_source_geometry_type": "Polygon",
+        "replayed_source_name": "Dr Beyers Naude",
+        "replayed_source_shape_type": "ADM3",
+        "role": "Local municipality",
+        "source": "gb:ZAF:ADM3",
+        "source_year": "2020",
+        "whole_source_sha256": "74e489fd4370972403950719026a317abba443668cea7d49f4b36c61637958f1"
+      }
+    }
+  ],
+  "version": 1
+}
