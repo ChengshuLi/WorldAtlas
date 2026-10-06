@@ -91,6 +91,10 @@ def run(run_id):
       "baseline_main_sha":pin,"source_commit":cross["source_commit"],"subject_count":len(subjects),
       "fragment_count":len(fragments),"method":METHOD,"source_layer_vintages":{"gb:IND:ADM3:simplified:2018":"2018","gb:IND:ADM2:2021":"2021","gb:PAK:ADM2:2019":"2019"},
       "current_main_parts":part_cache,"subjects":subjects,"fragments":fragments,
+      "summary":{"combined_fragment_area_m2":sum(x["area_m2"] for x in fragments),
+        "source_contact_count":sum(len(x["source_contacts"]) for x in fragments),
+        "current_main_contact_count":sum(len(x["current_main_contacts"]) for x in fragments),
+        "unchanged_current_subject_geometries":sum(x["current_feature_sha256"]==next(y["atlas_feature_sha256_canonical_json"] for y in cross["subjects"] if y["subject_id"]==x["subject_id"]) for x in subjects)},
       "checks":{"positive":{"exact_subjects_matched":len(subjects)==16,"original_fragments_identity_verified":len(fragments)==2,"all_current_geometries_equal_retained_prior_features":all(x["current_feature_sha256"]==next(y["atlas_feature_sha256_canonical_json"] for y in cross["subjects"] if y["subject_id"]==x["subject_id"]) for x in subjects)},
       "negative":{"tampered_fragment_identity_rejected":fragment_digest({**json.loads((PACKET/"sources/physical-gap-fragments/1274-1.geojson").read_text()),"properties":{"tamper":"negative-control"}})!="370a3a380760f6dd02c5c588e69385d65b3afd4cd9703cbc578596989302a730"}},
       "limits":["This run updates the comparison baseline only; it does not isolate why geometries differ.","The surface of both fragments and any disputed affiliation remain unknown.","Source datasets have distinct administrative tiers and stated boundary years; no shared observation date is inferred."]}
