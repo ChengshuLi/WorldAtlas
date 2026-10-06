@@ -20,6 +20,13 @@ TARGET=['atlas:physical:2a15134ff18942dc8e5e','atlas:physical:a20d41a6587ce2e299
 
 def blob(path): return subprocess.check_output(['git','show',f'{BASE}:{path}'],cwd=ROOT)
 def parsed(path): return json.loads(blob(path))
+def verified(path, descriptor):
+    raw=blob(path)
+    if len(raw)!=descriptor['bytes'] or sha(raw)!=descriptor['sha256']: raise SystemExit('Whole-file input pin mismatch: '+path)
+    if path.endswith('.gz'):
+        expanded=gzip.decompress(raw)
+        if len(expanded)!=descriptor.get('uncompressed_bytes') or sha(expanded)!=descriptor.get('uncompressed_sha256'): raise SystemExit('Uncompressed input pin mismatch: '+path)
+    return raw
 def sha(b): return hashlib.sha256(b).hexdigest()
 def write_json(name,obj):
     raw=(json.dumps(obj,ensure_ascii=False,separators=(',',':'),sort_keys=True)+'\n').encode()
@@ -27,11 +34,18 @@ def write_json(name,obj):
     return {'path':str((RUN_DIR/name).relative_to(ROOT)),'bytes':len(raw),'sha256':sha(raw)}
 
 # Exact 282-component roster predicate declared in issue #1205, applied to every shard.
+priority_path=PRIOR+'report.json'
+priority_raw=blob(priority_path)
+if len(priority_raw)!=433512 or sha(priority_raw)!='864fe6abab537488766acd6a599782b7a85bbc4f41a4c8027992b05e22462ff1': raise SystemExit('Pinned priority report mismatch')
+priority_report=json.loads(priority_raw)
+shard_descriptors={d['path']:d for d in priority_report['outputs']['investigations']}
+if len(shard_descriptors)!=34: raise SystemExit('Priority report does not enumerate 34 complete shards')
 rows=[]
 for i in range(34):
     path=f'{PRIOR}investigations-{i:03}.json.gz'
-    try: values=json.loads(gzip.decompress(blob(path)))
-    except subprocess.CalledProcessError: continue
+    if path not in shard_descriptors: raise SystemExit('Priority report omits expected shard '+path)
+    try: values=json.loads(gzip.decompress(verified(path,shard_descriptors[path])))
+    except subprocess.CalledProcessError: raise SystemExit('Pinned investigation shard unavailable: '+path)
     for row in values:
         if row.get('partition','').startswith('interior') and sorted(row.get('positive_length_neighbor_ids',[]))==TARGET:
             rows.append(row)
@@ -43,22 +57,27 @@ component_ids={r['component'] for r in rows}
 # Resolve custody aliases without rewriting the historical originals.
 index=parsed(CUSTODY)
 component_features=[]
+component_source_descriptors={}
 for alias in index['aliases']:
     name=alias['original']['path']
     if not name.startswith(COMPONENTS) or not __import__('re').search(r'/components-\d{3}\.json\.gz$', name): continue
     if not name.endswith('.json.gz'): continue
-    raw=blob(alias['payload'])
-    if sha(raw)!=alias['original']['sha256']: raise SystemExit('Custody alias payload hash mismatch')
+    raw=verified(alias['payload'],alias['original'])
+    component_source_descriptors[alias['payload']]=alias['original']
     features=json.loads(gzip.decompress(raw))
     component_features.extend(f for f in (features.get('features',[]) if isinstance(features,dict) else features) if f.get('id') in component_ids)
 by_id={f['id']:f for f in component_features}
 if set(by_id)!=component_ids: raise SystemExit('Selected component geometries incomplete')
 fragment_ids={b['id'] for f in by_id.values() for b in f['properties']['fragment_bindings']}
+detection_report_path='coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/report.json'
+detection_report=json.loads(blob(detection_report_path))
+detection_descriptors={d['path']:d for d in detection_report['outputs'] if '/detection-v4/candidates-' in d['path']}
 fragments={}
 for i in range(17):
     p=f'coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-{i:03}.geojson.gz'
-    try: bundle=json.loads(gzip.decompress(blob(p)))
-    except subprocess.CalledProcessError: continue
+    if p not in detection_descriptors: raise SystemExit('Detection report omits candidate shard '+p)
+    try: bundle=json.loads(gzip.decompress(verified(p,detection_descriptors[p])))
+    except subprocess.CalledProcessError: raise SystemExit('Pinned detection candidate unavailable: '+p)
     fragments.update({f['id']:f for f in bundle['features'] if f['id'] in fragment_ids})
 if set(fragments)!=fragment_ids: raise SystemExit('Selected candidate fragment geometries incomplete')
 contact_ledger=component_contacts(list(fragments.values()),list(by_id.values()))
@@ -78,7 +97,7 @@ for cid in sorted(component_ids):
     intersections={}
     for key,g in admin.items(): intersections['admin:'+key]={'intersects':geom.intersects(g),'covers_component':g.covers(geom),'positive_area_intersection':geom.intersection(g).area>0}
     for key,g in eco.items(): intersections['resolve:ECO_ID='+key]={'intersects':geom.intersects(g),'covers_component':g.covers(geom),'positive_area_intersection':geom.intersection(g).area>0}
-    rows_out.append({'component':cid,'intersections':intersections,'finding':'unresolved-source-overlay-only'})
+    rows_out.append({'component':cid,'intersections':intersections,'classification':'unknown','supported_source_footprint_omission':False,'supported_source_disagreement':False,'independent_water_or_ice_support':False,'reason':'Available overlay polygons, recorded contacts, and incomplete Rock-and-Ice query do not establish a complete physical class or the cause of this component.'})
     out_features.append({'type':'Feature','id':cid,'geometry':mapping(geom),'properties':{'id':cid,'investigation_positive_length_neighbors':TARGET}})
 summary={}
 for source in ['admin:52423323B34523976645917','admin:52423323B25289890288494','resolve:ECO_ID=371','resolve:ECO_ID=405']:

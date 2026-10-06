@@ -34,3 +34,7 @@ Because the complete ECO_ID 0 geometry was not available under the unchanged byt
 ## Reproduction
 
 Run `reproduce-source-overlays.py` with Python 3.12, Shapely 2.1.2, and the pinned baseline commit available in the Git object database. The script checks the complete 282-member roster, custody payload hashes, source feature IDs, exact contact closure, and then writes the selected component geometries and full ledger. All derived output paths are new files under this issue-owned directory.
+
+## Archived processing hypothesis (not causal proof)
+
+The issue-baseline copy of `scripts/refine-remote.py` is retained at `sources/refine-remote.py` (7,440 bytes, SHA-256 `6a6a5258328aa1153d567d9a98b90339421700d491f36fbdca216d3e0cbc2726`). It shows the repository's remote refinement recipe using `make_valid`, topology-preserving simplification at `0.001` degrees, overlays/differences with `grid_size=1e-8`, omission of intersection pieces under 5 km², and coastline buffer bands from `0.001` through `0.1` degrees. Its source builder also includes Natural Earth lakes. These operations are plausible sources of seam/coverage differences, but this snapshot alone does not prove they created any of the 282 components: the execution commit, exact cache inputs, and per-feature lineage through each operation must be established separately. The issue ledger therefore keeps every physical cause `unknown` rather than attributing it to the recipe.
