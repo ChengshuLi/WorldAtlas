@@ -719,6 +719,20 @@
         "hash_kind": "file-bytes",
         "path": "data/administrative-sources.json",
         "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+      },
+      {
+        "bytes": 1120843,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-007.geojson.gz",
+        "sha256": "ff497d1127d47e9df308d118e89a4c3e893a0ed4078da82aaab82326cc9919c7",
+        "uncompressed_bytes": 8388589,
+        "uncompressed_sha256": "2460e55beb8ed740fc92341993e67660b30a142b3433aebcd006b833998f62d4"
+      },
+      {
+        "bytes": 69433,
+        "hash_kind": "file-bytes",
+        "path": "data/location-policy.json",
+        "sha256": "efab4528fd4b7b180815ef82de93480f490ef8fa48ad9ef32d1f9d76a64b7fb9"
       }
     ],
     "pin_files": {
@@ -727,6 +741,7 @@
       "component_custody": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json",
       "current_contact_subjects": "data/geography/part-0.json",
       "hierarchy": "data/hierarchy.json",
+      "location_policy": "data/location-policy.json",
       "release_geometry": "data/geographic-releases/releases-v6-gzip.json.gz",
       "release_manifest": "data/geographic-releases/current-manifest.json",
       "world_index": "data/world-index.json"
@@ -737,6 +752,7 @@
       "component_custody": "dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c",
       "current_contact_subjects": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
       "hierarchy": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "location_policy": "efab4528fd4b7b180815ef82de93480f490ef8fa48ad9ef32d1f9d76a64b7fb9",
       "release_geometry": "96f4e6b1894ecce4c1f3f2be690ebfceec9fde2ec094c886ddffca96c62e4a16",
       "release_manifest": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81",
       "world_index": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
@@ -753,11 +769,19 @@
       "status": "added"
     },
     {
+      "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/evidence-quality.json",
+      "status": "added"
+    },
+    {
       "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/handoff-v1.json",
       "status": "added"
     },
     {
       "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/overlay-v1.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/overlay_guards.py",
       "status": "added"
     },
     {
@@ -785,6 +809,14 @@
       "status": "added"
     },
     {
+      "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/sources/v1/geoBoundaries-ARE-ADM1-simplified-9469f09.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/sources/v1/geoBoundaries-ARE-ADM1-simplified-retrieval.json",
+      "status": "added"
+    },
+    {
       "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/sources/v1/resolve-ecoregions-abu-dhabi-envelope.geojson",
       "status": "added"
     },
@@ -802,6 +834,10 @@
     },
     {
       "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/sources/v1/resolve-ecoregions-retrieval.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/validate-overlay-controls.py",
       "status": "added"
     },
     {
@@ -823,7 +859,7 @@
     },
     {
       "source_ids": [
-        "geoboundaries-are-adm1-9469f09"
+        "geoboundaries-are-adm1-full-reference-9469f09"
       ],
       "status": "supported",
       "text": "Supported: the retained complete geoBoundaries ARE ADM1 file has the Abu Dhabi source feature intersecting all 134; its Dubai source feature intersects one selected component. The pinned current Atlas desert subject geometries also intersect all 134, and the current Dubai contact feature intersects one. These predicates do not assign authority or prove historical source equivalence."
@@ -838,7 +874,8 @@
     {
       "source_ids": [
         "resolve-ecoregions-current",
-        "geoboundaries-are-adm1-9469f09"
+        "geoboundaries-are-adm1-full-reference-9469f09",
+        "geoboundaries-are-adm1-simplified-9469f09"
       ],
       "status": "unresolved",
       "text": "Unresolved: whether any selected residual arose from make_valid, 0.001-degree simplification, 1e-8 degree operation grid, area thresholds, or recorded per-district coastline adjustment bands. The historic code and shared adjustment metadata identify plausible mechanisms only, not component-level causality."
@@ -846,10 +883,18 @@
     {
       "source_ids": [
         "resolve-ecoregions-current",
-        "geoboundaries-are-adm1-9469f09"
+        "geoboundaries-are-adm1-full-reference-9469f09",
+        "geoboundaries-are-adm1-simplified-9469f09"
       ],
       "status": "unresolved",
       "text": "Unresolved: independently evidenced water/ice status for all 134 components. Archived surface status remains unverified; no water inference is made from ecological/admin polygons or point contacts."
+    },
+    {
+      "source_ids": [
+        "geoboundaries-are-adm1-simplified-9469f09"
+      ],
+      "status": "supported",
+      "text": "Supported: the exact simplifiedGeometryGeoJSON selected by the pinned location policy and registry has the Abu Dhabi source feature intersecting all 134 archived components; one also intersects the Dubai feature. This is exact geometry intersection evidence, not authority assignment or historical source equivalence."
     }
   ],
   "issue": 1206,
@@ -930,7 +975,7 @@
     },
     {
       "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
-      "id": "geoBoundaries_abu_dhabi_source_intersections",
+      "id": "geoBoundaries_full_reference_abu_dhabi_intersections",
       "input_sha256": "f6f0097b183518b7ddedd48c60b7e864e222156d2f0227bd345f271c2dd3d873",
       "unit": "components",
       "value": 134,
@@ -967,14 +1012,30 @@
       "unit": "components",
       "value": 134,
       "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+      "id": "geoBoundaries_simplified_abu_dhabi_source_intersections",
+      "input_sha256": "3d5094daf190b9df5a4888694517692e9271b98cb161450b8f3c103602e18c6c",
+      "unit": "components",
+      "value": 134,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+      "id": "original_detector_fragment_features",
+      "input_sha256": "ff497d1127d47e9df308d118e89a4c3e893a0ed4078da82aaab82326cc9919c7",
+      "unit": "features",
+      "value": 140,
+      "vintage": "archived"
     }
   ],
   "outputs": [
     {
-      "bytes": 3982,
+      "bytes": 5033,
       "hash_kind": "file-bytes",
       "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/README.md",
-      "sha256": "f486bdc9d0b9cab852ac4b6f76642e8e38d23645e96d755c09389b81c93f561f"
+      "sha256": "87d1ff06774fbfbb9f2001d891f7a4c5a08cacb86b529f77fd9ca875000a8017"
     },
     {
       "bytes": 3089,
@@ -983,22 +1044,28 @@
       "sha256": "7559fbbad71ffc9ec6627770495e23f9071083ceb3fadc0f2214e461deac4538"
     },
     {
-      "bytes": 863491,
+      "bytes": 1532588,
       "hash_kind": "file-bytes",
       "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/overlay-v1.json",
-      "sha256": "960b6ac43f47f3f5c3778285dbc056f573e001c07f358edbe066a31eb4760f41"
+      "sha256": "d1e7d720786b5de8fad844e2af477311851ce126107dd97ea90ce77018cf3d5b"
     },
     {
-      "bytes": 10687,
+      "bytes": 2259,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/overlay_guards.py",
+      "sha256": "c5760f1eddf62c849a0dd9a8808a130ff14d52484fc3d49ea7d4f18c8f9200c0"
+    },
+    {
+      "bytes": 13630,
       "hash_kind": "file-bytes",
       "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/reproduce-overlay.py",
-      "sha256": "9bc2064c393f8470552359c0fcdbccc826a30731d72ace7e1e7487fa253871a8"
+      "sha256": "035ac56f62f470b1708072a0f94a0cdd6b2a66be095e28a29ac0f2a679913fba"
     },
     {
-      "bytes": 564,
+      "bytes": 653,
       "hash_kind": "file-bytes",
       "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/reproducibility-v1.json",
-      "sha256": "4cabe4c01d343ccf0c7ca85a39a78ce246955d824589f849aba005aab2c98254"
+      "sha256": "e00aae96678e9974b1421e51856b13b35546554647e3793b9493aa6ea24a5188"
     },
     {
       "bytes": 4993,
@@ -1007,34 +1074,16 @@
       "sha256": "3cfc87467859b42a272ca6537a79eff73970c7b09b3276747586decc322e01ba"
     },
     {
-      "bytes": 843,
+      "bytes": 3128,
       "hash_kind": "file-bytes",
-      "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/sources/v1/README.md",
-      "sha256": "c6a9aee0268b1b663a2ff7d29d1b7f018014821696f419eb916bf3ed9933e66b"
+      "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/validate-overlay-controls.py",
+      "sha256": "ab43e6d805ae8ec3bb480763ec9b34066e3d1f3fbddf988b8937d393931b73cc"
     },
     {
-      "bytes": 4164,
-      "hash_kind": "file-bytes",
-      "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/sources/v1/geoBoundaries-ARE-ADM1-retrieval.json",
-      "sha256": "aba6448755f18ce24f0c56e120504a0b517cf1b82a8c1c6b68ffda538d8f0817"
-    },
-    {
-      "bytes": 2881,
-      "hash_kind": "file-bytes",
-      "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/sources/v1/resolve-ecoregions-envelope-retrieval.json",
-      "sha256": "9fd51f0b288150d4370dc763b4da8e0a5a29f30a7da34701e022ea88ff32facf"
-    },
-    {
-      "bytes": 3728,
-      "hash_kind": "file-bytes",
-      "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/sources/v1/resolve-ecoregions-retrieval.json",
-      "sha256": "ce6bda0413300e57d35e89a13a1955059c829b228eaeffba82024e453bc1f2c1"
-    },
-    {
-      "bytes": 1532,
+      "bytes": 1455,
       "hash_kind": "file-bytes",
       "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/validation-controls-v1.json",
-      "sha256": "d439479c424e155fc3b7ecea3851ebc32906480c5ca8011555a0ad32d0aa85e1"
+      "sha256": "83b0c178449c8f71689b01de13244efd277b66eaa200419a9633787eea276ddf"
     }
   ],
   "sources": [
@@ -1076,15 +1125,15 @@
           "sha256": "f6f0097b183518b7ddedd48c60b7e864e222156d2f0227bd345f271c2dd3d873"
         }
       ],
-      "id": "geoboundaries-are-adm1-9469f09",
+      "id": "geoboundaries-are-adm1-full-reference-9469f09",
       "license": {
         "status": "redistributable",
         "terms": "Open Data Commons Open Database License 1.0; preserve attribution/share-alike obligations"
       },
-      "limit": "Underlying boundary survey/effective date is not independently verified; attribution: geoBoundaries gbOpen; OpenStreetMap, Wambacher.",
+      "limit": "The pinned Atlas registry selects the distinct simplifiedGeometryGeoJSON product. Underlying boundary survey/effective date is not independently verified; attribution: geoBoundaries gbOpen; OpenStreetMap, Wambacher.",
       "retention": "retained",
       "retrieved_at": "2026-10-06T19:57:53Z",
-      "role": "complete seven-feature administrative source reference",
+      "role": "complete unsimplified seven-feature administrative comparison reference; not the registry-selected Atlas geometry input",
       "temporal_status": "reference",
       "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/ARE/ADM1/geoBoundaries-ARE-ADM1.geojson",
       "verification": "verified",
@@ -1112,6 +1161,35 @@
       "url": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer/0/query",
       "verification": "verified",
       "vintage": "current hosted feature-service ObjectID selection"
+    },
+    {
+      "files": [
+        {
+          "bytes": 204734,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/sources/v1/geoBoundaries-ARE-ADM1-simplified-9469f09.geojson",
+          "sha256": "3d5094daf190b9df5a4888694517692e9271b98cb161450b8f3c103602e18c6c"
+        },
+        {
+          "bytes": 2545,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/gap-source-abudhabi-physical-seam-20261006/sources/v1/geoBoundaries-ARE-ADM1-simplified-retrieval.json",
+          "sha256": "9c8259931b70a9df793f875f1d5e27737089dcee2ba46da4515265aa78b79622"
+        }
+      ],
+      "id": "geoboundaries-are-adm1-simplified-9469f09",
+      "license": {
+        "status": "redistributable",
+        "terms": "Open Data Commons Open Database License 1.0; preserve attribution/share-alike obligations"
+      },
+      "limit": "Exact product selected by pinned registry simplifiedGeometryGeoJSON and its whole-file hash matches registry; registry boundary year 2017, underlying survey date not independently verified.",
+      "retention": "retained",
+      "retrieved_at": "2026-10-06T20:45:43Z",
+      "role": "exact registry-selected simplified administrative source geometry",
+      "temporal_status": "reference",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/ARE/ADM1/geoBoundaries-ARE-ADM1_simplified.geojson",
+      "verification": "verified",
+      "vintage": "geoBoundaries immutable commit 9469f09592ced973a3448cf66b6100b741b64c0d; registry boundary year 2017"
     }
   ],
   "stages": {
@@ -1162,7 +1240,7 @@
       "value": 6
     },
     {
-      "metric_id": "geoBoundaries_abu_dhabi_source_intersections",
+      "metric_id": "geoBoundaries_full_reference_abu_dhabi_intersections",
       "unit": "components",
       "value": 134
     },
@@ -1185,13 +1263,23 @@
       "metric_id": "unknown_causal_class_components",
       "unit": "components",
       "value": 134
+    },
+    {
+      "metric_id": "geoBoundaries_simplified_abu_dhabi_source_intersections",
+      "unit": "components",
+      "value": 134
+    },
+    {
+      "metric_id": "original_detector_fragment_features",
+      "unit": "features",
+      "value": 140
     }
   ],
   "validation": [
     {
       "evidence_path": "research/geography/gap-source-abudhabi-physical-seam-20261006/validation-controls-v1.json",
       "kind": "measurement",
-      "method_id": "source-overlay-controls",
+      "method_id": "exact-source-overlay",
       "outcome": "passed"
     },
     {
