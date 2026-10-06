@@ -1,0 +1,51 @@
+# Six-county southeastern U.S. boundary-vintage follow-up
+
+Research snapshot: 2026-10-06 UTC. Scope is exactly the six county/county-equivalent IDs declared in issue #978. This packet is a source-vintage adjudication and an engineering handoff; it does not change canonical geometry, approve a region, or certify legal boundaries.
+
+## Findings
+
+The identity and state parent of every feature remain supported. The retained geoBoundaries `shapeID` and `shapeName` match exactly one 2026 TIGERweb Census county-equivalent row by normalized name within the already-declared state parent. Each row has the expected Census GEOID, `LSADC=06`, and state code. The unique matches are Jackson/28059/MS, Moore/47127/TN, Harrison/28047/MS, Hancock/28045/MS, Baldwin/01003/AL, and Mobile/01097/AL. No identity or parent correction is supported.
+
+The six Atlas geometries, six geoBoundaries source geometries and six 2026 TIGERweb comparison geometries are non-empty and valid under Shapely 2.1.2 in their native EPSG:4326 coordinates. Atlas names and state-parent IDs match the issue scope and prior crosswalk. Atlas and geoBoundaries retain the same single-part versus multipart form for each subject, while Atlas has fewer stored vertices for every one (49 vs 95 for Jackson; 42 vs 52 Moore; 42 vs 78 Harrison; 41 vs 117 Hancock; 114 vs 332 Baldwin; 85 vs 143 Mobile). This confirms the current feature is a coarser stored representation; it does not establish a lawful boundary. No repair or MakeValid operation was used. The 2026 service feature has far more vertices than the 2018 geoBoundaries feature in every case. The 2018 source uses multipart geometries for Jackson (3 parts), Harrison (3) and Mobile (4), while the corresponding 2026 service objects are single Polygon features. This is a representation difference, not proof that parts were legally merged or islands omitted. The native check is in `native-geometry-audit.json` and can be reproduced with `reproduce-native-geometry.py`.
+
+The prior 2018 Census 1:500,000 cartographic comparison IoU / 2026 TIGERweb comparison IoU values are:
+
+| County (GEOID) | 2018 CBF IoU | 2026 TIGERweb IoU | geoBoundaries parts / vertices | TIGERweb vertices |
+|---|---:|---:|---:|---:|
+| Jackson, MS (28059) | 0.96938004 | 0.73690648 | 3 / 95 | 1,164 |
+| Moore, TN (47127) | 0.94568923 | 0.94540945 | 1 / 52 | 3,605 |
+| Harrison, MS (28047) | 0.96383669 | 0.61770242 | 3 / 78 | 752 |
+| Hancock, MS (28045) | 0.99548631 | 0.87602581 | 1 / 117 | 1,389 |
+| Baldwin, AL (01003) | 0.99255004 | 0.82322412 | 1 / 332 | 5,016 |
+| Mobile, AL (01097) | 0.97880800 | 0.78163973 | 4 / 143 | 1,768 |
+
+The 2026 TIGERweb IoUs were independently recomputed from the exact pinned source bytes in this packet; all six round to the previously reported values. Separate positive/negative controls validate native geometry checks and projected IoU: an analytic half-shifted square pair yields 1/3 IoU, while negative controls detect authority-axis swapping and intersection-over-source-area in place of intersection-over-union. The 2018 CBF figures are the exact pinned #427 results; they were previously reproduced by two independent bounded executions. The prior script explicitly uses EPSG:5070 with longitude-first (`always_xy`) transformation and intersection area divided by union area. Values are triage diagnostics only. The geographic areas in the native audit are degree-squared summaries only and must not be compared as physical areas.
+
+The strong 2018 agreement is not independent proof: the geoBoundaries release metadata says `boundaryYear=2018` and cites Census MAF/TIGER cartographic boundaries, and its coastal representation closely follows the separately retained 2018 Census CBF. Census explains that its cartographic files are generalized for small-scale maps, may omit small holes/discontiguous pieces, are clipped to a simplified U.S. outline (so offshore areas may be excluded), and should not be used for geographic area or precise-area relationships. That official limitation is consistent with the pattern, especially the Gulf-coast counties, but cannot attribute each missing or differing piece to a specific island, inlet, offshore water claim, legal change, or error.
+
+The TIGERweb comparator is a separate Census service layer explicitly labeled “Counties (or statistically equivalent entities); January 1, 2026 vintage.” It supplies much denser shoreline/detail geometry and is a current statistical representation, not a legal land description. Census’s 2025 TIGER/Line legal disclaimer says the boundaries are for statistical collection/tabulation, do not determine jurisdictional authority or ownership, and are not legal land descriptions. More detail and a later date do not make TIGERweb the legal authority. The exact source pages, bytes, hashes, dates and retrieval instructions are in `source-retrieval-receipts.json` and the evidence manifest.
+
+### Per-subject adjudication
+
+- **Jackson County, MS:** Identity/parent is supported. Both geometries are valid; geoBoundaries has 3 components vs TIGERweb Polygon. The low 2026 IoU is consistent with different coastal extent/generalization and the increase in geometric detail. No retained authoritative legal source isolates which boundary or water/shoreline depiction is correct. Leave boundary status unresolved.
+- **Moore County, TN:** Identity/parent is supported. Both geometries are valid, single Polygon. The 2018 and 2026 IoUs are both about 0.945, so the discrepancy is not specific to a new Census vintage. Generalization, source lineage, or boundary representation remains possible; no legal error is demonstrated. Leave boundary status unresolved.
+- **Harrison County, MS:** Identity/parent is supported. Both geometries are valid; geoBoundaries has 3 components vs TIGERweb Polygon. The very low 2026 IoU is consistent with coastline/offshore representation plus added detail. The evidence cannot establish whether a particular island or water area belongs in either geometry. Leave boundary status unresolved.
+- **Hancock County, MS:** Identity/parent is supported. Both geometries are valid, single Polygon; agreement with 2018 CBF is exceptionally high while agreement with 2026 TIGERweb is lower. This supports a vintage/representation difference, but does not identify its legal cause. Leave boundary status unresolved.
+- **Baldwin County, AL:** Identity/parent is supported. Both geometries are valid, single Polygon; its TIGERweb feature is especially vertex-dense. 2018 CBF agreement is high. Shoreline/offshore and generalization are plausible explanations, not proved attribution. Leave boundary status unresolved.
+- **Mobile County, AL:** Identity/parent is supported. Both geometries are valid; geoBoundaries has 4 components vs TIGERweb Polygon. 2018 agreement is high, 2026 agreement materially lower. Coastal/island multipart conventions and additional detail are plausible, but cannot establish completeness or lawful boundaries. Leave boundary status unresolved.
+
+## Completeness, neighboring granularity, and lineage limits
+
+The complete retained 2026 Census state-layer responses contain 67 Alabama, 82 Mississippi and 95 Tennessee county-equivalent rows; all six subjects join within these state-wide datasets. The crosswalk in the pinned #427 packet covers every county-equivalent in these three parents and reports the same county-level tier; this follow-up does not certify any state or region. The three Alabama/Mississippi/Tennessee state parents remain the current parent records. Surrounding Gulf states and exact offshore jurisdictional adjacency were not adjudicated in this six-ID packet.
+
+Neither compared data product establishes exhaustive offshore/island coverage or legal boundary completeness. No suitable current reusable state/county survey, boundary commission record, or state-authoritative law/GIS source establishing the disputed lines was identified in the pinned evidence. The packet retains no legal-resolution claim. A source-boundary comparison alone cannot determine whether all islands, tidal areas, submerged areas, or offshore extents belong to each county.
+
+## Source and license accounting
+
+- **geoBoundaries USA ADM2:** exact retained upstream GeoJSON is pinned at commit `9469f09592ced973a3448cf66b6100b741b64c0d`; metadata identifies `boundaryYear=2018`, product update 2023-01-19 and build 2023-12-12. Its metadata calls the underlying boundary source Public Domain / Census MAF-TIGER; geoBoundaries-generated product terms in retained citation notice require CC BY 4.0 attribution to geoBoundaries and underlying source. These are distinct statements about source and generated product.
+- **2018 Census cartographic county file:** exact national 1:500,000 ZIP is retained in the ancestor packet with byte hash and retrieval receipt. U.S. Census Bureau federal work is public domain, with Census attribution requested. Scale/generalization and omission limitations apply.
+- **2026 TIGERweb ACS2026 layer 82:** exact state GeoJSON responses and layer metadata are retained in the ancestor packet. The receipt dates are 2026-10-05 UTC; layer vintage is January 1, 2026. Federal U.S. Census Bureau data are public domain; use Census attribution and retain the TIGER statistical-use disclaimer. The query returns the full 67/82/95 state feature counts and selected county rows.
+
+## Engineering handoff
+
+No geometry or ID change is proposed. Keep the six current IDs and state parents. Preserve the existing 2018 geoBoundaries geometry unchanged and do not replace it from 2018 CBF or 2026 TIGERweb based on IoU. The unresolved engineering follow-up is a separately sourced geometry decision: obtain reusable, dated state-authoritative survey/boundary evidence for the six counties and their Gulf/inland neighbors; establish what each source represents (land, inland/coastal water, islands and offshore jurisdiction), its CRS, legal/statistical role, vintage, license and completeness; reconcile shared county boundaries jointly; then propose any geometry correction with exact neighboring features and source hashes. Until then, report all six boundaries as insufficient evidence. This packet does not certify the Southeastern region, grant publication approval or authorize import.

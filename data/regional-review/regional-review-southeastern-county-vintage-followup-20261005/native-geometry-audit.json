@@ -1,0 +1,422 @@
+{
+  "geometry_method": "Validity/component audit occurs in native EPSG:4326. For crosswalk reproduction only, transform valid 2D polygons to EPSG:5070 with pyproj always_xy and calculate intersection area / union area; no repair or threshold acceptance.",
+  "inputs": {
+    "data/geography/part-25.json": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394",
+    "data/geography/part-26.json": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632",
+    "data/geography/part-27.json": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758",
+    "data/regional-review/regional-review-599d6fe712bbbcae/findings/usa-county-crosswalk.csv": "7990aff113168a4447b40ae72bbcccf3b0a28102a4465c87257e98ad993db98a",
+    "data/regional-review/regional-review-599d6fe712bbbcae/sources/census-tigerweb-acs26/counties-state-01.geojson": "386d08c97bfae31678cf70609ba277a4bbc271f4e79d5f651537cf64cac00084",
+    "data/regional-review/regional-review-599d6fe712bbbcae/sources/census-tigerweb-acs26/counties-state-28.geojson": "3826b033a59e185281418d5c624764d6e70e6a938f868d68a773c4e3911b7cb1",
+    "data/regional-review/regional-review-599d6fe712bbbcae/sources/census-tigerweb-acs26/counties-state-47.geojson": "b9b10ee31927e67c295180c885e8e616940d099a52879df2c5a49bad123f6a15",
+    "data/regional-review/regional-review-599d6fe712bbbcae/sources/geoboundaries-2018/geoBoundaries-USA-ADM2.geojson": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43"
+  },
+  "software": {
+    "python": "3.12.14"
+  },
+  "status": "native geometry integrity and representation triage; not a boundary accuracy determination",
+  "subjects": [
+    {
+      "atlas_identity": {
+        "geometry": {
+          "area_degrees2": 0.1871801600000032,
+          "bounds": [
+            -88.8845,
+            30.1894,
+            -88.394,
+            30.7356
+          ],
+          "components": 3,
+          "empty": false,
+          "holes": 0,
+          "type": "MultiPolygon",
+          "valid": true,
+          "validity_reason": "Valid Geometry",
+          "vertices": 49
+        },
+        "matches_expected_name_parent": true,
+        "name": "Jackson",
+        "parent_id": "framework:province:mississippi:ea192a347106"
+      },
+      "baseline_parent": "framework:province:mississippi:ea192a347106",
+      "census_name": "Jackson County",
+      "census_source": "sources/census-tigerweb-acs26/counties-state-28.geojson",
+      "geoboundaries": {
+        "area_degrees2": 0.1873468495372467,
+        "bounds": [
+          -88.88453932199997,
+          30.189354518000073,
+          -88.39398516999995,
+          30.73599662500004
+        ],
+        "components": 3,
+        "empty": false,
+        "holes": 0,
+        "type": "MultiPolygon",
+        "valid": true,
+        "validity_reason": "Valid Geometry",
+        "vertices": 95
+      },
+      "geoid": "28059",
+      "id": "gb:USA:ADM2:52423323B10934602069357",
+      "lsadc": "06",
+      "name": "Jackson",
+      "prior_diagnostic_iou_2018_cbf": 0.96938004,
+      "prior_diagnostic_iou_2026_tigerweb": 0.73690648,
+      "reproduced_2026_tigerweb_iou": 0.73690648,
+      "state": "28",
+      "state_layer_feature_count": 82,
+      "tigerweb_2026": {
+        "area_degrees2": 0.2538309663678303,
+        "bounds": [
+          -88.88453599985274,
+          30.14609599984488,
+          -88.38443100024054,
+          30.736048000333913
+        ],
+        "components": 1,
+        "empty": false,
+        "holes": 0,
+        "type": "Polygon",
+        "valid": true,
+        "validity_reason": "Valid Geometry",
+        "vertices": 1164
+      }
+    },
+    {
+      "atlas_identity": {
+        "geometry": {
+          "area_degrees2": 0.03304506000000059,
+          "bounds": [
+            -86.5395,
+            35.1232,
+            -86.2454,
+            35.4125
+          ],
+          "components": 1,
+          "empty": false,
+          "holes": 0,
+          "type": "Polygon",
+          "valid": true,
+          "validity_reason": "Valid Geometry",
+          "vertices": 42
+        },
+        "matches_expected_name_parent": true,
+        "name": "Moore",
+        "parent_id": "framework:province:tennessee:1e9839d5c457"
+      },
+      "baseline_parent": "framework:province:tennessee:1e9839d5c457",
+      "census_name": "Moore County",
+      "census_source": "sources/census-tigerweb-acs26/counties-state-47.geojson",
+      "geoboundaries": {
+        "area_degrees2": 0.032982536941765755,
+        "bounds": [
+          -86.53948991199996,
+          35.12321564500007,
+          -86.24539482899996,
+          35.41248270800003
+        ],
+        "components": 1,
+        "empty": false,
+        "holes": 0,
+        "type": "Polygon",
+        "valid": true,
+        "validity_reason": "Valid Geometry",
+        "vertices": 52
+      },
+      "geoid": "47127",
+      "id": "gb:USA:ADM2:52423323B16895111765374",
+      "lsadc": "06",
+      "name": "Moore",
+      "prior_diagnostic_iou_2018_cbf": 0.94568923,
+      "prior_diagnostic_iou_2026_tigerweb": 0.94540945,
+      "reproduced_2026_tigerweb_iou": 0.94540945,
+      "state": "47",
+      "state_layer_feature_count": 95,
+      "tigerweb_2026": {
+        "area_degrees2": 0.03346713053442609,
+        "bounds": [
+          -86.53948499989097,
+          35.12238899990175,
+          -86.24428999975372,
+          35.41247600002461
+        ],
+        "components": 1,
+        "empty": false,
+        "holes": 0,
+        "type": "Polygon",
+        "valid": true,
+        "validity_reason": "Valid Geometry",
+        "vertices": 3605
+      }
+    },
+    {
+      "atlas_identity": {
+        "geometry": {
+          "area_degrees2": 0.1480652899999977,
+          "bounds": [
+            -89.3415,
+            30.2009,
+            -88.8143,
+            30.6773
+          ],
+          "components": 3,
+          "empty": false,
+          "holes": 0,
+          "type": "MultiPolygon",
+          "valid": true,
+          "validity_reason": "Valid Geometry",
+          "vertices": 42
+        },
+        "matches_expected_name_parent": true,
+        "name": "Harrison",
+        "parent_id": "framework:province:mississippi:ea192a347106"
+      },
+      "baseline_parent": "framework:province:mississippi:ea192a347106",
+      "census_name": "Harrison County",
+      "census_source": "sources/census-tigerweb-acs26/counties-state-28.geojson",
+      "geoboundaries": {
+        "area_degrees2": 0.148223437064415,
+        "bounds": [
+          -89.34156943499994,
+          30.200893504000078,
+          -88.81431552299995,
+          30.67729761100003
+        ],
+        "components": 3,
+        "empty": false,
+        "holes": 0,
+        "type": "MultiPolygon",
+        "valid": true,
+        "validity_reason": "Valid Geometry",
+        "vertices": 78
+      },
+      "geoid": "28047",
+      "id": "gb:USA:ADM2:52423323B27952664457255",
+      "lsadc": "06",
+      "name": "Harrison",
+      "prior_diagnostic_iou_2018_cbf": 0.96383669,
+      "prior_diagnostic_iou_2026_tigerweb": 0.61770242,
+      "reproduced_2026_tigerweb_iou": 0.61770242,
+      "state": "28",
+      "state_layer_feature_count": 82,
+      "tigerweb_2026": {
+        "area_degrees2": 0.23943481984239745,
+        "bounds": [
+          -89.34175199982994,
+          30.139845000075447,
+          -88.79514700041437,
+          30.67729200015412
+        ],
+        "components": 1,
+        "empty": false,
+        "holes": 0,
+        "type": "Polygon",
+        "valid": true,
+        "validity_reason": "Valid Geometry",
+        "vertices": 752
+      }
+    },
+    {
+      "atlas_identity": {
+        "geometry": {
+          "area_degrees2": 0.11825963000000118,
+          "bounds": [
+            -89.6898,
+            30.1763,
+            -89.3224,
+            30.6484
+          ],
+          "components": 1,
+          "empty": false,
+          "holes": 0,
+          "type": "Polygon",
+          "valid": true,
+          "validity_reason": "Valid Geometry",
+          "vertices": 41
+        },
+        "matches_expected_name_parent": true,
+        "name": "Hancock",
+        "parent_id": "framework:province:mississippi:ea192a347106"
+      },
+      "baseline_parent": "framework:province:mississippi:ea192a347106",
+      "census_name": "Hancock County",
+      "census_source": "sources/census-tigerweb-acs26/counties-state-28.geojson",
+      "geoboundaries": {
+        "area_degrees2": 0.11817765214457865,
+        "bounds": [
+          -89.68978499899998,
+          30.17394848200007,
+          -89.32235042399998,
+          30.648373582000033
+        ],
+        "components": 1,
+        "empty": false,
+        "holes": 0,
+        "type": "Polygon",
+        "valid": true,
+        "validity_reason": "Valid Geometry",
+        "vertices": 117
+      },
+      "geoid": "28045",
+      "id": "gb:USA:ADM2:52423323B49198903326940",
+      "lsadc": "06",
+      "name": "Hancock",
+      "prior_diagnostic_iou_2018_cbf": 0.99548631,
+      "prior_diagnostic_iou_2026_tigerweb": 0.87602581,
+      "reproduced_2026_tigerweb_iou": 0.87602581,
+      "state": "28",
+      "state_layer_feature_count": 82,
+      "tigerweb_2026": {
+        "area_degrees2": 0.13437922172260647,
+        "bounds": [
+          -89.69058899974142,
+          30.160617000349802,
+          -89.30613499986212,
+          30.648390000340342
+        ],
+        "components": 1,
+        "empty": false,
+        "holes": 0,
+        "type": "Polygon",
+        "valid": true,
+        "validity_reason": "Valid Geometry",
+        "vertices": 1389
+      }
+    },
+    {
+      "atlas_identity": {
+        "geometry": {
+          "area_degrees2": 0.4096991900000017,
+          "bounds": [
+            -88.0284,
+            30.2211,
+            -87.3708,
+            31.3021
+          ],
+          "components": 1,
+          "empty": false,
+          "holes": 0,
+          "type": "Polygon",
+          "valid": true,
+          "validity_reason": "Valid Geometry",
+          "vertices": 114
+        },
+        "matches_expected_name_parent": true,
+        "name": "Baldwin",
+        "parent_id": "framework:province:alabama:2ea4f64966c3"
+      },
+      "baseline_parent": "framework:province:alabama:2ea4f64966c3",
+      "census_name": "Baldwin County",
+      "census_source": "sources/census-tigerweb-acs26/counties-state-01.geojson",
+      "geoboundaries": {
+        "area_degrees2": 0.4101457115210033,
+        "bounds": [
+          -88.02927706399998,
+          30.22113753900004,
+          -87.36660588799998,
+          31.31902278700005
+        ],
+        "components": 1,
+        "empty": false,
+        "holes": 0,
+        "type": "Polygon",
+        "valid": true,
+        "validity_reason": "Valid Geometry",
+        "vertices": 332
+      },
+      "geoid": "01003",
+      "id": "gb:USA:ADM2:52423323B60515004813393",
+      "lsadc": "06",
+      "name": "Baldwin",
+      "prior_diagnostic_iou_2018_cbf": 0.99255004,
+      "prior_diagnostic_iou_2026_tigerweb": 0.82322412,
+      "reproduced_2026_tigerweb_iou": 0.82322412,
+      "state": "01",
+      "state_layer_feature_count": 67,
+      "tigerweb_2026": {
+        "area_degrees2": 0.49417171748839084,
+        "bounds": [
+          -88.03730900008911,
+          30.14656100005464,
+          -87.3665910003216,
+          31.3190170003455
+        ],
+        "components": 1,
+        "empty": false,
+        "holes": 0,
+        "type": "Polygon",
+        "valid": true,
+        "validity_reason": "Valid Geometry",
+        "vertices": 5016
+      }
+    },
+    {
+      "atlas_identity": {
+        "geometry": {
+          "area_degrees2": 0.3141588049999984,
+          "bounds": [
+            -88.432,
+            30.2223,
+            -87.9243,
+            31.1733
+          ],
+          "components": 4,
+          "empty": false,
+          "holes": 0,
+          "type": "MultiPolygon",
+          "valid": true,
+          "validity_reason": "Valid Geometry",
+          "vertices": 85
+        },
+        "matches_expected_name_parent": true,
+        "name": "Mobile",
+        "parent_id": "framework:province:alabama:2ea4f64966c3"
+      },
+      "baseline_parent": "framework:province:alabama:2ea4f64966c3",
+      "census_name": "Mobile County",
+      "census_source": "sources/census-tigerweb-acs26/counties-state-01.geojson",
+      "geoboundaries": {
+        "area_degrees2": 0.3143515646259109,
+        "bounds": [
+          -88.43201221499999,
+          30.22141853000005,
+          -87.92429506599996,
+          31.17331174900005
+        ],
+        "components": 4,
+        "empty": false,
+        "holes": 0,
+        "type": "MultiPolygon",
+        "valid": true,
+        "validity_reason": "Valid Geometry",
+        "vertices": 143
+      },
+      "geoid": "01097",
+      "id": "gb:USA:ADM2:52423323B65626355292212",
+      "lsadc": "06",
+      "name": "Mobile",
+      "prior_diagnostic_iou_2018_cbf": 0.978808,
+      "prior_diagnostic_iou_2026_tigerweb": 0.78163973,
+      "reproduced_2026_tigerweb_iou": 0.78163973,
+      "state": "01",
+      "state_layer_feature_count": 67,
+      "tigerweb_2026": {
+        "area_degrees2": 0.40085467765370425,
+        "bounds": [
+          -88.43200700029462,
+          30.144425000011907,
+          -87.92394399985356,
+          31.173306000329838
+        ],
+        "components": 1,
+        "empty": false,
+        "holes": 0,
+        "type": "Polygon",
+        "valid": true,
+        "validity_reason": "Valid Geometry",
+        "vertices": 1768
+      }
+    }
+  ],
+  "version": 1
+}
