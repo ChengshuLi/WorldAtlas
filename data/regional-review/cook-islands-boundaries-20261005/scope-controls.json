@@ -1,0 +1,162 @@
+{
+  "method_id": "baseline-crosswalk",
+  "kind": "reproducibility",
+  "outcome": "passed",
+  "run_one_sha256": "20366d4651bb1c7cbf1985fe9a9128ab2cee6070fecf92814d33a02acb929570",
+  "run_two_sha256": "20366d4651bb1c7cbf1985fe9a9128ab2cee6070fecf92814d33a02acb929570",
+  "verification_output": {
+    "status": "passed",
+    "baseline_commit": "548c5f89f00271050823076a84695bb41e1b8454",
+    "baseline_part_files_checked": 34,
+    "baseline_pins": {
+      "data/geography/part-28.json": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "data/hierarchy.json": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "data/regional-review/regional-review-14a242c4cb0781a7/source/natural-earth/ne_10m_admin_1_scoped-admin-features.json": "dd3f4a5683c713fd89c00b41748d89771f905ef236feaacb7887818085f3d96e"
+    },
+    "subjects_checked": 11,
+    "subjects": [
+      {
+        "subject_id": "COK-4950",
+        "parent_id": "framework:province:atiu:859595940bdf",
+        "current_geometry": "Polygon",
+        "current_parts": 1,
+        "source_id": "COK-4950",
+        "source_name": "Atiu",
+        "source_geometry": "MultiPolygon",
+        "source_parts": 3
+      },
+      {
+        "subject_id": "COK-4951",
+        "parent_id": "framework:province:aitutaki:41d3c8c18e8e",
+        "current_geometry": "MultiPolygon",
+        "current_parts": 7,
+        "source_id": "COK-4951",
+        "source_name": "Aitutaki",
+        "source_geometry": "Polygon",
+        "source_parts": 1
+      },
+      {
+        "subject_id": "COK-4952",
+        "parent_id": "framework:province:mangaia:a21e8b6eb50c",
+        "current_geometry": "Polygon",
+        "current_parts": 1,
+        "source_id": "COK-4952",
+        "source_name": "Mangaia",
+        "source_geometry": "Polygon",
+        "source_parts": 1
+      },
+      {
+        "subject_id": "COK-4953",
+        "parent_id": "framework:province:rarotonga:ab7fb58fd2f8",
+        "current_geometry": "Polygon",
+        "current_parts": 1,
+        "source_id": "COK-4953",
+        "source_name": "Rarotonga",
+        "source_geometry": "Polygon",
+        "source_parts": 1
+      },
+      {
+        "subject_id": "COK-4954",
+        "parent_id": "framework:province:mitiaro:0be500a043d9",
+        "current_geometry": "Polygon",
+        "current_parts": 1,
+        "source_id": "COK-4954",
+        "source_name": "Mitiaro",
+        "source_geometry": "Polygon",
+        "source_parts": 1
+      },
+      {
+        "subject_id": "COK-4955",
+        "parent_id": "framework:province:mauke:d1f20e4c25b2",
+        "current_geometry": "Polygon",
+        "current_parts": 1,
+        "source_id": "COK-4955",
+        "source_name": "Mauke",
+        "source_geometry": "Polygon",
+        "source_parts": 1
+      },
+      {
+        "subject_id": "COK-4956",
+        "parent_id": "framework:province:palmerston:09dad6383ebc",
+        "current_geometry": "MultiPolygon",
+        "current_parts": 28,
+        "source_id": "COK-4956",
+        "source_name": "Palmerston",
+        "source_geometry": "Polygon",
+        "source_parts": 1
+      },
+      {
+        "subject_id": "COK-4959",
+        "parent_id": "atlas:macro-review:province:18e627fd9cb17291",
+        "current_geometry": "Polygon",
+        "current_parts": 1,
+        "source_id": "COK-4959",
+        "source_name": "Pukapuka",
+        "source_geometry": "Polygon",
+        "source_parts": 1
+      },
+      {
+        "subject_id": "COK-4960",
+        "parent_id": "atlas:macro-review:province:bb49370dbaba175f",
+        "current_geometry": "Polygon",
+        "current_parts": 1,
+        "source_id": "COK-4960",
+        "source_name": "Rakahanga",
+        "source_geometry": "Polygon",
+        "source_parts": 1
+      },
+      {
+        "subject_id": "COK-4961",
+        "parent_id": "atlas:macro-review:province:eb76306e7868bcad",
+        "current_geometry": "MultiPolygon",
+        "current_parts": 84,
+        "source_id": "COK-4961",
+        "source_name": "Manihiki",
+        "source_geometry": "Polygon",
+        "source_parts": 1
+      },
+      {
+        "subject_id": "COK-4962",
+        "parent_id": "atlas:macro-review:province:3fd71bcd1b7c7ec9",
+        "current_geometry": "Polygon",
+        "current_parts": 1,
+        "source_id": "COK-4962",
+        "source_name": "Penrhyn",
+        "source_geometry": "Polygon",
+        "source_parts": 1
+      }
+    ],
+    "cook_islands_roster_missing_across_all_parts": [
+      "Nassau",
+      "Palmerston",
+      "Suwarrow",
+      "Takutea"
+    ],
+    "foreign_homonyms": [
+      {
+        "part": "data/geography/part-26.json",
+        "id": "gb:USA:ADM2:52423323B42354579566723",
+        "name": "Nassau",
+        "reference_owner": "United States of America"
+      },
+      {
+        "part": "data/geography/part-26.json",
+        "id": "gb:USA:ADM2:52423323B49658569394047",
+        "name": "Nassau",
+        "reference_owner": "United States of America"
+      },
+      {
+        "part": "data/geography/part-1.json",
+        "id": "gb:AUS:ADM2:25037944B38638552543628",
+        "name": "Palmerston",
+        "reference_owner": "Australia"
+      }
+    ],
+    "positive_control": "passed: Atiu source/current component structures differ and are reported",
+    "negative_control": "passed: substituted COK-4963 rejected by exact ordered roster",
+    "limits": [
+      "No coastline comparison or land completeness claim",
+      "Shape/component diagnostics are not geographic approval"
+    ]
+  }
+}
