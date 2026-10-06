@@ -1,0 +1,50 @@
+{
+  "kind": "source",
+  "limits": [
+    "The metadata findings are inherited from the retained #784 packet; this follow-up does not independently re-adjudicate territorial meaning, boundary completeness, statutory status or reuse rights.",
+    "The receipt verifier preserves source assertions but does not approve geography, close #746's wider audit, publish a region or authorize historical imports."
+  ],
+  "method_id": "sle-readonly-receipt",
+  "negative_control": "passed",
+  "outcome": "passed",
+  "positive_control": "passed",
+  "predecessor_pins": {
+    "issue-contract.json": {
+      "bytes": 4080,
+      "sha256": "37ab337e0e3dc333bfbb9fc337a58ebe76df9d81a7f14f15c7610afbdd0dcdc1"
+    },
+    "license-provenance.json": {
+      "bytes": 45968,
+      "sha256": "3b106d961b9b1a3c6ee691f8c8ab89904d55270fe985183c652fa702bdec6763"
+    },
+    "verification-results.json": {
+      "bytes": 789,
+      "sha256": "799f34a7287c6121156c4eb128b7dfc8d6d8c07271bfe9b3fa46cc92298ae949"
+    },
+    "verify.py": {
+      "bytes": 5661,
+      "sha256": "7ba6e88e75803ea4b9492216d003db94f41cb7556f03891d43f965b815014d8e"
+    }
+  },
+  "reproducibility": "passed",
+  "result_receipt_sha256": "799f34a7287c6121156c4eb128b7dfc8d6d8c07271bfe9b3fa46cc92298ae949",
+  "scope": {
+    "sierra_leone_subject_ids": [
+      "gb:SLE:ADM2:65957751B248885957650",
+      "gb:SLE:ADM2:65957751B2614126839094",
+      "gb:SLE:ADM2:65957751B29483301504535",
+      "gb:SLE:ADM2:65957751B35726846399821",
+      "gb:SLE:ADM2:65957751B39294828597109",
+      "gb:SLE:ADM2:65957751B39959109464342",
+      "gb:SLE:ADM2:65957751B6503620183485",
+      "gb:SLE:ADM2:65957751B7874629800584",
+      "gb:SLE:ADM2:65957751B90425188102960",
+      "gb:SLE:ADM2:65957751B90762568654783",
+      "gb:SLE:ADM2:65957751B93581480515289",
+      "gb:SLE:ADM2:65957751B98964407864499"
+    ],
+    "sierra_leone_subjects": 12,
+    "togo_context_rows": 37
+  },
+  "version": 1
+}

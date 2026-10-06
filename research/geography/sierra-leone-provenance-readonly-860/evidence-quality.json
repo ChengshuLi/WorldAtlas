@@ -1,0 +1,374 @@
+{
+  "version": 1,
+  "issue": 1062,
+  "lane": "geography",
+  "worker_id": "01a10948-7d38-75d0-bc01-4cc28ea41f49",
+  "subject_ids": [
+    "gb:SLE:ADM2:65957751B248885957650",
+    "gb:SLE:ADM2:65957751B2614126839094",
+    "gb:SLE:ADM2:65957751B29483301504535",
+    "gb:SLE:ADM2:65957751B35726846399821",
+    "gb:SLE:ADM2:65957751B39294828597109",
+    "gb:SLE:ADM2:65957751B39959109464342",
+    "gb:SLE:ADM2:65957751B6503620183485",
+    "gb:SLE:ADM2:65957751B7874629800584",
+    "gb:SLE:ADM2:65957751B90425188102960",
+    "gb:SLE:ADM2:65957751B90762568654783",
+    "gb:SLE:ADM2:65957751B93581480515289",
+    "gb:SLE:ADM2:65957751B98964407864499"
+  ],
+  "subject_ids_sha256": "070ebb85b829be341674fe18162186cb581a3ca22e51f12de1f6fe518e946007",
+  "baseline": {
+    "commit": "f0dad9f05852fd71b986e8200531f4113bb784d3",
+    "files": [
+      {
+        "path": "data/geography/part-22.json",
+        "bytes": 4746385,
+        "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-9d08839e1cdb0c8f/assessment.csv",
+        "bytes": 82468,
+        "sha256": "849e89a9b89138e0bef924293ab64f0e43cfb8e6048837f372aac860c65ff089",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-9d08839e1cdb0c8f/assessment.json",
+        "bytes": 170408,
+        "sha256": "c64eda7c325dfc4fb399fb7c00b112d09083917aa0d774df5343ea65153c39f9",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-9d08839e1cdb0c8f/build_assessment.py",
+        "bytes": 26511,
+        "sha256": "632e7156cdaea606f7a04a746461161005e6b4cfb9b380302b2294028f68e937",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-9d08839e1cdb0c8f/scope.json",
+        "bytes": 42689,
+        "sha256": "e9a44d16f4fb94164cfb1a9c2c4b36b70c6125306ae25a0f8799cbef4c7e7e91",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-9d08839e1cdb0c8f/sources/acquisition.json",
+        "bytes": 95398,
+        "sha256": "afc2540734a85b20f64a0c6f3911b6d9fbac557ac257794cdee3a4389ee6490b",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-9d08839e1cdb0c8f/sources/geoboundaries-SLE-adm2-current-api-metadata.json.gz",
+        "bytes": 722,
+        "sha256": "3bb0c1e1a6858bb1246cb4359da2932b135387fb5e295f1549e86f99d6539d39",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1803,
+        "uncompressed_sha256": "d386ac779d773189dc97b523d1c3933f58465bcc9b53837f380c901e34f8ed0f",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-9d08839e1cdb0c8f/sources/geoboundaries-TGO-adm2-current-api-metadata.json.gz",
+        "bytes": 690,
+        "sha256": "03db75c6ceff800161aa092b4071c106ebe4512729a167350b3311f71acd282e",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 1685,
+        "uncompressed_sha256": "b67c11ff5b39f1fa3b7fcddd11cf3b159b3924ffaf4ea02d9632de0fa9a01200",
+        "role": "original-source"
+      },
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/sierra-leone-license-provenance-746/README.md",
+        "bytes": 2750,
+        "sha256": "760a1aae1bfca8bc3f5223aa4bfe5ece2a7534a45122f92436467afd99a84fac",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/sierra-leone-license-provenance-746/evidence-quality.json",
+        "bytes": 15954,
+        "sha256": "e697074e5331607a5065b3d9f99fa10965b93cb0b483e9ac41374238fc3ac5c8",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/sierra-leone-license-provenance-746/issue-contract.json",
+        "bytes": 4080,
+        "sha256": "37ab337e0e3dc333bfbb9fc337a58ebe76df9d81a7f14f15c7610afbdd0dcdc1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/sierra-leone-license-provenance-746/license-provenance.json",
+        "bytes": 45968,
+        "sha256": "3b106d961b9b1a3c6ee691f8c8ab89904d55270fe985183c652fa702bdec6763",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/sierra-leone-license-provenance-746/reproduce.py",
+        "bytes": 14286,
+        "sha256": "b594084345cff8133266bce6f902a0535231b72739d6ea9bf00ad465fea6f1a9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/sierra-leone-license-provenance-746/verification-results.json",
+        "bytes": 789,
+        "sha256": "799f34a7287c6121156c4eb128b7dfc8d6d8c07271bfe9b3fa46cc92298ae949",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/sierra-leone-license-provenance-746/verify.py",
+        "bytes": 5661,
+        "sha256": "7ba6e88e75803ea4b9492216d003db94f41cb7556f03891d43f965b815014d8e",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "original_verifier_sha256": "7ba6e88e75803ea4b9492216d003db94f41cb7556f03891d43f965b815014d8e",
+      "original_verification_receipt_sha256": "799f34a7287c6121156c4eb128b7dfc8d6d8c07271bfe9b3fa46cc92298ae949",
+      "license_provenance_sha256": "3b106d961b9b1a3c6ee691f8c8ab89904d55270fe985183c652fa702bdec6763",
+      "original_contract_sha256": "37ab337e0e3dc333bfbb9fc337a58ebe76df9d81a7f14f15c7610afbdd0dcdc1",
+      "original_generator_sha256": "b594084345cff8133266bce6f902a0535231b72739d6ea9bf00ad465fea6f1a9",
+      "sierra_leone_metadata_sha256": "3bb0c1e1a6858bb1246cb4359da2932b135387fb5e295f1549e86f99d6539d39",
+      "togo_metadata_sha256": "03db75c6ceff800161aa092b4071c106ebe4512729a167350b3311f71acd282e",
+      "sle_metadata_gzip_sha256": "3bb0c1e1a6858bb1246cb4359da2932b135387fb5e295f1549e86f99d6539d39",
+      "tgo_metadata_gzip_sha256": "03db75c6ceff800161aa092b4071c106ebe4512729a167350b3311f71acd282e"
+    },
+    "pin_files": {
+      "original_verifier_sha256": "research/geography/sierra-leone-license-provenance-746/verify.py",
+      "original_verification_receipt_sha256": "research/geography/sierra-leone-license-provenance-746/verification-results.json",
+      "license_provenance_sha256": "research/geography/sierra-leone-license-provenance-746/license-provenance.json",
+      "original_contract_sha256": "research/geography/sierra-leone-license-provenance-746/issue-contract.json",
+      "original_generator_sha256": "research/geography/sierra-leone-license-provenance-746/reproduce.py",
+      "sierra_leone_metadata_sha256": "data/regional-review/regional-review-9d08839e1cdb0c8f/sources/geoboundaries-SLE-adm2-current-api-metadata.json.gz",
+      "togo_metadata_sha256": "data/regional-review/regional-review-9d08839e1cdb0c8f/sources/geoboundaries-TGO-adm2-current-api-metadata.json.gz",
+      "sle_metadata_gzip_sha256": "data/regional-review/regional-review-9d08839e1cdb0c8f/sources/geoboundaries-SLE-adm2-current-api-metadata.json.gz",
+      "tgo_metadata_gzip_sha256": "data/regional-review/regional-review-9d08839e1cdb0c8f/sources/geoboundaries-TGO-adm2-current-api-metadata.json.gz"
+    },
+    "subject_files": {
+      "gb:SLE:ADM2:65957751B248885957650": "data/geography/part-22.json",
+      "gb:SLE:ADM2:65957751B2614126839094": "data/geography/part-22.json",
+      "gb:SLE:ADM2:65957751B29483301504535": "data/geography/part-22.json",
+      "gb:SLE:ADM2:65957751B35726846399821": "data/geography/part-22.json",
+      "gb:SLE:ADM2:65957751B39294828597109": "data/geography/part-22.json",
+      "gb:SLE:ADM2:65957751B39959109464342": "data/geography/part-22.json",
+      "gb:SLE:ADM2:65957751B6503620183485": "data/geography/part-22.json",
+      "gb:SLE:ADM2:65957751B7874629800584": "data/geography/part-22.json",
+      "gb:SLE:ADM2:65957751B90425188102960": "data/geography/part-22.json",
+      "gb:SLE:ADM2:65957751B90762568654783": "data/geography/part-22.json",
+      "gb:SLE:ADM2:65957751B93581480515289": "data/geography/part-22.json",
+      "gb:SLE:ADM2:65957751B98964407864499": "data/geography/part-22.json"
+    }
+  },
+  "sources": [
+    {
+      "description": "Catalog API metadata snapshot; boundarySourceURL=data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries; licenseSource=data.humdata.org/dataset/sierra-leone-all-ad-min-level-boundaries; detailed license field=nan.",
+      "id": "geoboundaries-sle-adm2-metadata",
+      "license": {
+        "status": "unknown",
+        "terms": "Metadata declares Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO); legal reuse terms are not independently adjudicated."
+      },
+      "limit": "Metadata declaration only; not independent legal-license, boundary-completeness, or statutory-status verification. Original bytes remain retained in packet regional-review-9d08839e1cdb0c8f.",
+      "restoration": "From immutable baseline: git show f92b1774aedcaaaf72ac0fe4cc45857dd641d7d1:data/regional-review/regional-review-9d08839e1cdb0c8f/sources/geoboundaries-SLE-adm2-current-api-metadata.json.gz; verify compressed and restored hashes in license-provenance.json.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-04",
+      "role": "Retained geoBoundaries ADM2 metadata for Sierra Leone; declared source Government of Sierra Leone, OCHA ROWCA and role Districts",
+      "temporal_status": "reference",
+      "url": "https://www.geoboundaries.org/api/current/gbOpen/SLE/ADM2/",
+      "verification": "verified",
+      "vintage": "2017"
+    },
+    {
+      "description": "Catalog API metadata snapshot; boundarySourceURL=wambachers-osm.website/boundaries/; licenseSource=www.openstreetmap.org/copyright; detailed license field=nan.",
+      "id": "geoboundaries-tgo-adm2-metadata",
+      "license": {
+        "status": "unknown",
+        "terms": "Metadata declares Creative Commons Attribution-ShareAlike 2.0; legal reuse terms are not independently adjudicated."
+      },
+      "limit": "Metadata declaration only; not independent legal-license, boundary-completeness, or statutory-status verification. Original bytes remain retained in packet regional-review-9d08839e1cdb0c8f.",
+      "restoration": "From immutable baseline: git show f92b1774aedcaaaf72ac0fe4cc45857dd641d7d1:data/regional-review/regional-review-9d08839e1cdb0c8f/sources/geoboundaries-TGO-adm2-current-api-metadata.json.gz; verify compressed and restored hashes in license-provenance.json.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-04",
+      "role": "Retained geoBoundaries ADM2 metadata for Togo; declared source OpenStreetMap, Wambacher and role Prefectures",
+      "temporal_status": "reference",
+      "url": "https://www.geoboundaries.org/api/current/gbOpen/TGO/ADM2/",
+      "verification": "verified",
+      "vintage": "2017"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/sierra-leone-provenance-readonly-860/README.md",
+      "bytes": 4645,
+      "sha256": "676dba170b597d7875b3c9d651f138be8271ad4aa5da526ae8a596c90506c06f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/sierra-leone-provenance-readonly-860/verify.py",
+      "bytes": 9748,
+      "sha256": "84aef040021fd9e1a4d58bb9bc7a09f5dfac86d5bd1af6ff6cfbbde7c1831a03",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/sierra-leone-provenance-readonly-860/vintages/20261005-readonly-check/verification-results.json",
+      "bytes": 1919,
+      "sha256": "a114430aa98030c7ed0324c6480b7d6fa35c784fdf3689a7cafa1c5b6e1ce713",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/sierra-leone-provenance-readonly-860/vintages/20261005-readonly-check/positive-control.json",
+      "bytes": 595,
+      "sha256": "031cad3fc464f0e4fe5d07332f769138c4f3b9f8202e7e05c450e586579dbd5b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/sierra-leone-provenance-readonly-860/vintages/20261005-readonly-check/negative-control.json",
+      "bytes": 268,
+      "sha256": "454d12dc790cb90f66cd2fcdf4f1e05890e024da4df21d2e6a8bf274ce903a1e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/sierra-leone-provenance-readonly-860/vintages/20261005-readonly-check/reproducibility-control.json",
+      "bytes": 405,
+      "sha256": "a29977efe6047ccaeb6d534c1157d4940686aaddf0f6ee869bf6b4826f6f4fe1",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "sle-readonly-receipt",
+      "kind": "source",
+      "description": "Reproduce the retained country-bound license-provenance verifier twice with its only Path.write_text call intercepted in memory; pin predecessor bytes; require the attempted output to equal the immutable receipt; and exercise a sentinel mismatch through the new read-only comparator. This verifies receipt preservation and inherited roster/accounting, not legal boundary facts.",
+      "software": "Python 3.12.14 standard library; Git immutable blobs; Node 24 evidence validator",
+      "units": "ADM2 records, exact file bytes, SHA-256 digests"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "sle-subject-count",
+      "value": 12,
+      "unit": "features",
+      "scope": "Exact issue #1062 Sierra Leone IDs retained from #784; verifier reproduction at pinned ancestor main f0dad9f.",
+      "input_sha256": "3b106d961b9b1a3c6ee691f8c8ab89904d55270fe985183c652fa702bdec6763",
+      "evaluation_commit": "f0dad9f05852fd71b986e8200531f4113bb784d3",
+      "vintage": "archived"
+    },
+    {
+      "id": "tgo-context-count",
+      "value": 37,
+      "unit": "features",
+      "scope": "Togo ADM2 comparison rows retained as context in #784; verifier reproduction at pinned ancestor main f0dad9f.",
+      "input_sha256": "3b106d961b9b1a3c6ee691f8c8ab89904d55270fe985183c652fa702bdec6763",
+      "evaluation_commit": "f0dad9f05852fd71b986e8200531f4113bb784d3",
+      "vintage": "archived"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "sle-subject-count",
+      "path": "research/geography/sierra-leone-provenance-readonly-860/vintages/20261005-readonly-check/verification-results.json",
+      "json_pointer": "/scope/sierra_leone_subjects"
+    },
+    {
+      "metric_id": "tgo-context-count",
+      "path": "research/geography/sierra-leone-provenance-readonly-860/vintages/20261005-readonly-check/verification-results.json",
+      "json_pointer": "/scope/togo_context_rows"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "sle-subject-count",
+      "value": 12,
+      "unit": "features"
+    },
+    {
+      "metric_id": "tgo-context-count",
+      "value": 37,
+      "unit": "features"
+    }
+  ],
+  "conclusions": [
+    {
+      "source_ids": [
+        "geoboundaries-sle-adm2-metadata",
+        "geoboundaries-tgo-adm2-metadata"
+      ],
+      "status": "supported",
+      "text": "The retained country-bound metadata and all 12 Sierra Leone plus 37 Togo context rows reproduce byte-for-byte against the existing #784 receipt; the new checker rejects mismatches without changing either receipt."
+    },
+    {
+      "source_ids": [
+        "geoboundaries-sle-adm2-metadata",
+        "geoboundaries-tgo-adm2-metadata"
+      ],
+      "status": "unresolved",
+      "text": "The metadata license declarations do not independently adjudicate downstream legal reuse, statutory status, completeness or legal boundary accuracy; this follow-up does not reopen the wider #746 geography audit."
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "PYTHONDONTWRITEBYTECODE=1 python3 research/geography/sierra-leone-provenance-readonly-860/verify.py",
+    "node scripts/evidence-quality.mjs research/geography/sierra-leone-provenance-readonly-860/evidence-quality.json"
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/sierra-leone-provenance-readonly-860/README.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/sierra-leone-provenance-readonly-860/verify.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/sierra-leone-provenance-readonly-860/vintages/20261005-readonly-check/verification-results.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/sierra-leone-provenance-readonly-860/vintages/20261005-readonly-check/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/sierra-leone-provenance-readonly-860/vintages/20261005-readonly-check/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/sierra-leone-provenance-readonly-860/vintages/20261005-readonly-check/reproducibility-control.json",
+      "status": "added"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "sle-readonly-receipt",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/sierra-leone-provenance-readonly-860/vintages/20261005-readonly-check/positive-control.json"
+    },
+    {
+      "method_id": "sle-readonly-receipt",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/sierra-leone-provenance-readonly-860/vintages/20261005-readonly-check/negative-control.json"
+    },
+    {
+      "method_id": "sle-readonly-receipt",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "research/geography/sierra-leone-provenance-readonly-860/vintages/20261005-readonly-check/reproducibility-control.json"
+    }
+  ]
+}
