@@ -29,7 +29,11 @@ for p in priority_paths:
 selected=set(selected)
 assert len(selected)==134
 roster_bytes=(json.dumps(sorted(selected),separators=(',',':'))+'\n').encode()
-assert hashlib.sha256(roster_bytes).hexdigest()=='b7af8568f5972dd935d8cc85d16c19f349938ea6810b6b2b391c92d4a1b9df94'
+expected_roster='b7af8568f5972dd935d8cc85d16c19f349938ea6810b6b2b391c92d4a1b9df94'
+assert hashlib.sha256(roster_bytes).hexdigest()==expected_roster
+omitted_roster=sorted(selected)[:-1]
+omitted_roster_digest=hashlib.sha256((json.dumps(omitted_roster,separators=(',',':'))+'\n').encode()).hexdigest()
+assert len(omitted_roster)!=134 and omitted_roster_digest!=expected_roster
 comps=[]
 for n in range(11):
  d=read_alias(f'{base}/components-v2/components-{n:03}.json.gz')
@@ -40,7 +44,12 @@ eco_bytes=git_bytes(SOURCE_COMMIT,eco_path)
 assert hashlib.sha256(eco_bytes).hexdigest()=='5a7c0583209df1145fb542d595b122b90147ac2e62c0f5dc442f8909f7d67c65'
 assert hashlib.sha256(eco_bytes+b'\n').hexdigest()!='5a7c0583209df1145fb542d595b122b90147ac2e62c0f5dc442f8909f7d67c65'
 eco=json.loads(eco_bytes)
+wrong_ids=json.loads(git_bytes(SOURCE_COMMIT,'research/geography/gap-source-abudhabi-physical-seam-20261006/sources/v1/resolve-ecoregions-objectid-810-811.geojson'))
+wrong_eco_ids=sorted(f.get('properties',{}).get('ECO_ID') for f in wrong_ids['features'])
+assert wrong_eco_ids==[519,643]
 assert len(eco['features'])==5
+receipt=json.loads(git_bytes(SOURCE_COMMIT,'research/geography/gap-source-abudhabi-physical-seam-20261006/sources/v1/resolve-ecoregions-envelope-retrieval.json'))
+assert '2017' in json.loads(git_bytes(SOURCE_COMMIT,'research/geography/gap-source-abudhabi-physical-seam-20261006/sources/v1/resolve-ecoregions-layer-metadata.json'))['name'] and '2026' in receipt['response_date']
 eco_by_id={f['properties'].get('ECO_ID'):f for f in eco['features']}
 admin_path='research/geography/gap-source-abudhabi-physical-seam-20261006/sources/v1/geoBoundaries-ARE-ADM1-9469f09.geojson'
 admin=json.loads(git_bytes(SOURCE_COMMIT,admin_path)); admin_feats=admin['features']; admin_geos=[shape(f['geometry']) for f in admin_feats]; admin_tree=STRtree(admin_geos)
@@ -86,8 +95,9 @@ contacts_source=f'{base}/components-v2/contacts-000.json.gz'
 contact_rows=read_alias(contacts_source)
 selected_contacts=[c for c in contact_rows if set(c.get('components',[])) & selected]
 assert len(selected_contacts)==51
-assert len(selected_contacts)-1 != 51
+omitted_contacts=selected_contacts[:-1]
+assert len(omitted_contacts)!=51
 assert sum(c.get('kind')=='point-only-ambiguous' for c in selected_contacts)==45
 assert sum(c.get('kind')=='shared-edge' for c in selected_contacts)==6
-out={'version':'abudhabi-physical-seam-source-overlay-v1','source_note':'Exact source-coordinate topological intersections only; EPSG:4326; no buffering or snapping. Current Ecoregion ECO_ID values and names match Atlas stable IDs; current service bytes are not a frozen historical source snapshot.','component_count':len(comps),'subject_roster_sha256':hashlib.sha256(roster_bytes).hexdigest(),'ecoregion_feature_count':len(eco['features']),'source_service_response_sha256':hashlib.sha256(eco_bytes).hexdigest(),'geoBoundaries_source_feature_count':len(admin_feats),'current_atlas_contact_subject_count':len(atlas_feats),'source_layer_title':'Biomes and Ecoregions 2017','source_response_vintage':'current hosted service response retrieved 2026-10-06','positive_area_overlap_count':sum(any(m['intersection_area_degrees2']>0 for m in x['matches']) for x in results),'zero_area_intersection_count':sum(bool(x['matches']) and not any(m['intersection_area_degrees2']>0 for m in x['matches']) for x in results),'no_intersection_count':sum(not x['matches'] for x in results),'controls':{'positive_selected_component_intersects_ECO_ID_811':True,'negative_selected_component_does_not_intersect_ECO_ID_320':True,'changed_source_bytes_rejected_by_hash':True,'omitted_component_or_contact_fails_exact_count_and_roster_checks':True,'historical_vintage_not_laundered_as_current_snapshot':True},'component_contact_records':selected_contacts,'component_contact_record_count':len(selected_contacts),'components':results}
+out={'version':'abudhabi-physical-seam-source-overlay-v1','source_note':'Exact source-coordinate topological intersections only; EPSG:4326; no buffering or snapping. Current Ecoregion ECO_ID values and names match Atlas stable IDs; current service bytes are not a frozen historical source snapshot.','component_count':len(comps),'subject_roster_sha256':hashlib.sha256(roster_bytes).hexdigest(),'ecoregion_feature_count':len(eco['features']),'source_service_response_sha256':hashlib.sha256(eco_bytes).hexdigest(),'geoBoundaries_source_feature_count':len(admin_feats),'current_atlas_contact_subject_count':len(atlas_feats),'source_layer_title':'Biomes and Ecoregions 2017','source_response_vintage':'current hosted service response retrieved 2026-10-06','positive_area_overlap_count':sum(any(m['intersection_area_degrees2']>0 for m in x['matches']) for x in results),'zero_area_intersection_count':sum(bool(x['matches']) and not any(m['intersection_area_degrees2']>0 for m in x['matches']) for x in results),'no_intersection_count':sum(not x['matches'] for x in results),'controls':{'positive_selected_component_intersects_ECO_ID_811':True,'negative_selected_component_does_not_intersect_ECO_ID_320':True,'changed_source_bytes_rejected_by_hash':True,'omitted_component_changes_roster_count_and_digest':True,'omitted_contact_fails_exact_contact_count':True,'objectid_810_811_control_resolves_to_ECO_IDs_519_643':True,'historical_vintage_not_laundered_as_current_snapshot':True},'component_contact_records':selected_contacts,'component_contact_record_count':len(selected_contacts),'components':results}
 p=ROOT/'research/geography/gap-source-abudhabi-physical-seam-20261006/overlay-v1.json';p.write_text(json.dumps(out,sort_keys=True,separators=(',',':'))+'\n')
