@@ -16,6 +16,11 @@
       "outcome": "rejected-as-required"
     },
     {
+      "control": "omitted-component-link",
+      "guard": "Complete selected old-gap/new-component link inventory mismatch",
+      "outcome": "rejected-as-required"
+    },
+    {
       "control": "historical-vintage-laundering",
       "guard": "Current service bytes cannot be labelled as a historical snapshot",
       "outcome": "rejected-as-required"
