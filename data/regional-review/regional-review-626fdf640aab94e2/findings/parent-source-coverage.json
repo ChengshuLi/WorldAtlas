@@ -1,0 +1,1107 @@
+{
+  "version": 1,
+  "issue": 395,
+  "base_commit": "8e1162e3e364cebdec700ec796e2730379494922",
+  "source_sha256": "74012237384e53061aa63b6e20b9be24f94facfe615b52bbe72e62a81fa68ff0",
+  "parent_extract_sha256": "4dab95fa1bbb8aa0ffeeecca9bc269ece139aab4368faff8ed2d0890c05d6602",
+  "source_feature_count": 2327,
+  "source_metadata_unit_count": 2328,
+  "source_feature_metadata_discrepancy": 1,
+  "spatial_method": "Shapely planar intersection area in source GeoJSON longitude/latitude coordinates; include source unit if its fraction of area intersecting the ADM1 parent is > 1e-6; exact source IDs compared to Atlas source lineage, with ecological fragments mapped to original administrative IDs",
+  "all_parent_unit_sets_match": true,
+  "total_scoped_original_source_units": 203,
+  "parents": [
+    {
+      "atlas_parent_id": "framework:province:altai-krai:fed69825ee77",
+      "parent_name": "Altai Krai",
+      "parent_source_id": "28173009B80457268982215",
+      "atlas_original_source_unit_count": 69,
+      "source_units_overlapping_parent_above_1e-6": 69,
+      "missing_from_atlas_source_ids": [],
+      "unexpected_atlas_source_ids": [],
+      "units": [
+        {
+          "source_id": "50074027B1024572337800",
+          "source_name": "городской округ Бийск",
+          "source_area_fraction_in_parent": 0.9999999999999998
+        },
+        {
+          "source_id": "50074027B1058063804271",
+          "source_name": "Bystroistoksky District",
+          "source_area_fraction_in_parent": 0.9999999999999991
+        },
+        {
+          "source_id": "50074027B10781871905366",
+          "source_name": "Burlinsky District",
+          "source_area_fraction_in_parent": 0.9999999999999997
+        },
+        {
+          "source_id": "50074027B10943489160103",
+          "source_name": "Loktevsky District",
+          "source_area_fraction_in_parent": 1.0000000000000002
+        },
+        {
+          "source_id": "50074027B1336621418144",
+          "source_name": "городской округ Славгород",
+          "source_area_fraction_in_parent": 0.9999999999999994
+        },
+        {
+          "source_id": "50074027B14040427045082",
+          "source_name": "Krutikhinsky District",
+          "source_area_fraction_in_parent": 0.999999999999999
+        },
+        {
+          "source_id": "50074027B15799482797585",
+          "source_name": "Mikhaylovsky District",
+          "source_area_fraction_in_parent": 1.0000000000000004
+        },
+        {
+          "source_id": "50074027B1715913537377",
+          "source_name": "Tyumentsevsky District",
+          "source_area_fraction_in_parent": 1.0
+        },
+        {
+          "source_id": "50074027B19588857007790",
+          "source_name": "Petropavlovsky District",
+          "source_area_fraction_in_parent": 0.999999999999999
+        },
+        {
+          "source_id": "50074027B2154875125895",
+          "source_name": "городской округ Алейск",
+          "source_area_fraction_in_parent": 0.9999999999999991
+        },
+        {
+          "source_id": "50074027B23416918655185",
+          "source_name": "Zmeinogorsky District",
+          "source_area_fraction_in_parent": 1.0000000000000002
+        },
+        {
+          "source_id": "50074027B23870764100253",
+          "source_name": "Ust-Kalmansky District",
+          "source_area_fraction_in_parent": 1.0000000000000007
+        },
+        {
+          "source_id": "50074027B25917769136183",
+          "source_name": "городской округ Новоалтайс",
+          "source_area_fraction_in_parent": 0.9999999999999998
+        },
+        {
+          "source_id": "50074027B28372878802412",
+          "source_name": "Yeltsovsky District",
+          "source_area_fraction_in_parent": 0.9999999999999984
+        },
+        {
+          "source_id": "50074027B30406481833497",
+          "source_name": "Novichikhinsky District",
+          "source_area_fraction_in_parent": 1.0000000000000002
+        },
+        {
+          "source_id": "50074027B3081285107988",
+          "source_name": "Tselinny District",
+          "source_area_fraction_in_parent": 0.9999999999999999
+        },
+        {
+          "source_id": "50074027B34042519229436",
+          "source_name": "Ust-Pristansky District",
+          "source_area_fraction_in_parent": 0.9999999999999999
+        },
+        {
+          "source_id": "50074027B34465006378506",
+          "source_name": "Soloneshensky District",
+          "source_area_fraction_in_parent": 1.0000000000000009
+        },
+        {
+          "source_id": "50074027B35507316918508",
+          "source_name": "Klyuchevsky District",
+          "source_area_fraction_in_parent": 1.0000000000000009
+        },
+        {
+          "source_id": "50074027B36701865492404",
+          "source_name": "Yegoryevsky District",
+          "source_area_fraction_in_parent": 0.9999999999999998
+        },
+        {
+          "source_id": "50074027B3940071957277",
+          "source_name": "Tabunsky District",
+          "source_area_fraction_in_parent": 0.9999999999999998
+        },
+        {
+          "source_id": "50074027B42226450891188",
+          "source_name": "Kamensky District",
+          "source_area_fraction_in_parent": 0.9999999999999987
+        },
+        {
+          "source_id": "50074027B42639071948243",
+          "source_name": "Zonalny District",
+          "source_area_fraction_in_parent": 0.9999999999999999
+        },
+        {
+          "source_id": "50074027B4456705023114",
+          "source_name": "Zalesovsky District",
+          "source_area_fraction_in_parent": 0.9999999999999988
+        },
+        {
+          "source_id": "50074027B47783670520754",
+          "source_name": "Krasnogorsky District",
+          "source_area_fraction_in_parent": 1.0000000000000002
+        },
+        {
+          "source_id": "50074027B48281585258812",
+          "source_name": "Pankrushikhinsky District",
+          "source_area_fraction_in_parent": 0.9999999999999996
+        },
+        {
+          "source_id": "50074027B50389061014103",
+          "source_name": "Topchikhinsky District",
+          "source_area_fraction_in_parent": 0.9999999999999984
+        },
+        {
+          "source_id": "50074027B5073921170544",
+          "source_name": "Kuryinsky District",
+          "source_area_fraction_in_parent": 0.9999999999999993
+        },
+        {
+          "source_id": "50074027B52368021684741",
+          "source_name": "городской округ Яровое",
+          "source_area_fraction_in_parent": 0.9999999999999996
+        },
+        {
+          "source_id": "50074027B52390719176951",
+          "source_name": "Aleysky District",
+          "source_area_fraction_in_parent": 1.0000000000000004
+        },
+        {
+          "source_id": "50074027B52463258949821",
+          "source_name": "Pervomaysky District",
+          "source_area_fraction_in_parent": 0.9999999999999984
+        },
+        {
+          "source_id": "50074027B54520830442466",
+          "source_name": "Shelabolikhinsky District",
+          "source_area_fraction_in_parent": 1.0
+        },
+        {
+          "source_id": "50074027B55370730174848",
+          "source_name": "Uglovsky District",
+          "source_area_fraction_in_parent": 0.9999999999999997
+        },
+        {
+          "source_id": "50074027B56266744785915",
+          "source_name": "Soltonsky District",
+          "source_area_fraction_in_parent": 0.9999999999999998
+        },
+        {
+          "source_id": "50074027B57641669015548",
+          "source_name": "Altaysky District",
+          "source_area_fraction_in_parent": 1.0000000000000002
+        },
+        {
+          "source_id": "50074027B59422198546785",
+          "source_name": "городской округ Барнаул",
+          "source_area_fraction_in_parent": 0.9999999999999984
+        },
+        {
+          "source_id": "50074027B59684569066792",
+          "source_name": "Biysky District",
+          "source_area_fraction_in_parent": 0.9999999999999982
+        },
+        {
+          "source_id": "50074027B63221441083377",
+          "source_name": "Kalmansky District",
+          "source_area_fraction_in_parent": 0.9999999999999989
+        },
+        {
+          "source_id": "50074027B63976435239634",
+          "source_name": "Suyetsky District",
+          "source_area_fraction_in_parent": 0.9999999999999998
+        },
+        {
+          "source_id": "50074027B65789018361375",
+          "source_name": "Togulsky District",
+          "source_area_fraction_in_parent": 1.0
+        },
+        {
+          "source_id": "50074027B65962797819795",
+          "source_name": "городской округ Заринск",
+          "source_area_fraction_in_parent": 0.9999999999999996
+        },
+        {
+          "source_id": "50074027B68599046641011",
+          "source_name": "городской округ Рубцовск",
+          "source_area_fraction_in_parent": 0.9999999999999997
+        },
+        {
+          "source_id": "50074027B70201567000150",
+          "source_name": "Mamontovsky District",
+          "source_area_fraction_in_parent": 0.9999999999999994
+        },
+        {
+          "source_id": "50074027B70663252326506",
+          "source_name": "Troitsky District",
+          "source_area_fraction_in_parent": 0.9999999999999996
+        },
+        {
+          "source_id": "50074027B71087427061133",
+          "source_name": "Romanovsky District",
+          "source_area_fraction_in_parent": 0.9999999999999998
+        },
+        {
+          "source_id": "50074027B71372738920568",
+          "source_name": "Bayevsky District",
+          "source_area_fraction_in_parent": 1.0000000000000007
+        },
+        {
+          "source_id": "50074027B71391443757864",
+          "source_name": "Talmensky District",
+          "source_area_fraction_in_parent": 1.0000000000000016
+        },
+        {
+          "source_id": "50074027B71899291249917",
+          "source_name": "Blagoveshchensky District",
+          "source_area_fraction_in_parent": 1.0000000000000007
+        },
+        {
+          "source_id": "50074027B72834669384190",
+          "source_name": "German National District",
+          "source_area_fraction_in_parent": 1.0000000000000004
+        },
+        {
+          "source_id": "50074027B7598546692655",
+          "source_name": "Tretyakovsky District",
+          "source_area_fraction_in_parent": 0.9999999999999987
+        },
+        {
+          "source_id": "50074027B76413707909035",
+          "source_name": "городской округ Белокуриха",
+          "source_area_fraction_in_parent": 1.0
+        },
+        {
+          "source_id": "50074027B76855541737815",
+          "source_name": "Pavlovsky District",
+          "source_area_fraction_in_parent": 0.9999999999999994
+        },
+        {
+          "source_id": "50074027B77273209658100",
+          "source_name": "Rebrikhinsky District",
+          "source_area_fraction_in_parent": 1.0000000000000002
+        },
+        {
+          "source_id": "50074027B77344027071403",
+          "source_name": "Khabarsky District",
+          "source_area_fraction_in_parent": 1.0000000000000002
+        },
+        {
+          "source_id": "50074027B77576750758664",
+          "source_name": "Kulundinsky District",
+          "source_area_fraction_in_parent": 1.0000000000000002
+        },
+        {
+          "source_id": "50074027B81632682072915",
+          "source_name": "Krasnoshchyokovsky District",
+          "source_area_fraction_in_parent": 0.9999999999999998
+        },
+        {
+          "source_id": "50074027B82856800380020",
+          "source_name": "Zavyalovsky District",
+          "source_area_fraction_in_parent": 1.0000000000000007
+        },
+        {
+          "source_id": "50074027B83886659607675",
+          "source_name": "Kosikhinsky District",
+          "source_area_fraction_in_parent": 1.0000000000000009
+        },
+        {
+          "source_id": "50074027B84213807524310",
+          "source_name": "Rodinsky District",
+          "source_area_fraction_in_parent": 1.0000000000000002
+        },
+        {
+          "source_id": "50074027B8453473929567",
+          "source_name": "Volchikhinsky District",
+          "source_area_fraction_in_parent": 1.000000000000001
+        },
+        {
+          "source_id": "50074027B84951526666168",
+          "source_name": "Smolensky District",
+          "source_area_fraction_in_parent": 1.000000000000002
+        },
+        {
+          "source_id": "50074027B85935779911627",
+          "source_name": "Sovetsky District",
+          "source_area_fraction_in_parent": 0.9999999999999996
+        },
+        {
+          "source_id": "50074027B86834547488285",
+          "source_name": "Pospelikhinsky District",
+          "source_area_fraction_in_parent": 1.0
+        },
+        {
+          "source_id": "50074027B89416408271148",
+          "source_name": "Kytmanovsky District",
+          "source_area_fraction_in_parent": 1.0
+        },
+        {
+          "source_id": "50074027B90846785177281",
+          "source_name": "Zarinsky District",
+          "source_area_fraction_in_parent": 0.9999999999999988
+        },
+        {
+          "source_id": "50074027B92925758050684",
+          "source_name": "Charyshsky District",
+          "source_area_fraction_in_parent": 1.0000000000000024
+        },
+        {
+          "source_id": "50074027B93515874590251",
+          "source_name": "ЗАТО Сибирский",
+          "source_area_fraction_in_parent": 1.0
+        },
+        {
+          "source_id": "50074027B95632257634540",
+          "source_name": "Rubtsovsky District",
+          "source_area_fraction_in_parent": 1.0000000000000002
+        },
+        {
+          "source_id": "50074027B95923812375268",
+          "source_name": "Shipunovsky District",
+          "source_area_fraction_in_parent": 0.9999999999999996
+        }
+      ]
+    },
+    {
+      "atlas_parent_id": "framework:province:khanty-mansiysk-autonomous-okrug-ugra:ae4ed85ee73d",
+      "parent_name": "Khanty-Mansiysk Autonomous Okrug – Ugra",
+      "parent_source_id": "28173009B731487536241",
+      "atlas_original_source_unit_count": 22,
+      "source_units_overlapping_parent_above_1e-6": 22,
+      "missing_from_atlas_source_ids": [],
+      "unexpected_atlas_source_ids": [],
+      "units": [
+        {
+          "source_id": "50074027B10637268431448",
+          "source_name": "Megion",
+          "source_area_fraction_in_parent": 1.0000000000000007
+        },
+        {
+          "source_id": "50074027B18123411923849",
+          "source_name": "Oktyabrsky District",
+          "source_area_fraction_in_parent": 1.0000000000000013
+        },
+        {
+          "source_id": "50074027B21335467742043",
+          "source_name": "Surgutsky District",
+          "source_area_fraction_in_parent": 1.0000000000000009
+        },
+        {
+          "source_id": "50074027B23799547406598",
+          "source_name": "Nefteyugansky District",
+          "source_area_fraction_in_parent": 0.9999999999999982
+        },
+        {
+          "source_id": "50074027B28906813018549",
+          "source_name": "Sovetsky District",
+          "source_area_fraction_in_parent": 0.9999999999999994
+        },
+        {
+          "source_id": "50074027B28971786615675",
+          "source_name": "городской округ Нефтеюганс",
+          "source_area_fraction_in_parent": 1.0000000000000002
+        },
+        {
+          "source_id": "50074027B29329231814048",
+          "source_name": "городской округ Нижневарто",
+          "source_area_fraction_in_parent": 0.9999999999999987
+        },
+        {
+          "source_id": "50074027B31496942337081",
+          "source_name": "Yugorsk",
+          "source_area_fraction_in_parent": 1.0000000000000049
+        },
+        {
+          "source_id": "50074027B44152060141244",
+          "source_name": "городской округ Радужный",
+          "source_area_fraction_in_parent": 0.9999999999999964
+        },
+        {
+          "source_id": "50074027B52838111466804",
+          "source_name": "Nizhnevartovsky District",
+          "source_area_fraction_in_parent": 1.0000000000000004
+        },
+        {
+          "source_id": "50074027B54524544237793",
+          "source_name": "Surgut",
+          "source_area_fraction_in_parent": 0.9999999999999994
+        },
+        {
+          "source_id": "50074027B57809326542315",
+          "source_name": "городской округ Урай",
+          "source_area_fraction_in_parent": 0.9999999999999999
+        },
+        {
+          "source_id": "50074027B58285687326194",
+          "source_name": "городской округ Нягань",
+          "source_area_fraction_in_parent": 0.9999999999999998
+        },
+        {
+          "source_id": "50074027B5850936607294",
+          "source_name": "Khanty-Mansiysky District",
+          "source_area_fraction_in_parent": 1.000000000000001
+        },
+        {
+          "source_id": "50074027B61219657375498",
+          "source_name": "городской округ Когалым",
+          "source_area_fraction_in_parent": 0.9999999999999982
+        },
+        {
+          "source_id": "50074027B71461018269487",
+          "source_name": "Langepas",
+          "source_area_fraction_in_parent": 1.0000000000000002
+        },
+        {
+          "source_id": "50074027B72993481609927",
+          "source_name": "Beloyarsky District",
+          "source_area_fraction_in_parent": 1.000000000000006
+        },
+        {
+          "source_id": "50074027B75983799969403",
+          "source_name": "Khanty-Mansiysk Urban Okrug",
+          "source_area_fraction_in_parent": 1.0
+        },
+        {
+          "source_id": "50074027B79985122577956",
+          "source_name": "Kondinsky District",
+          "source_area_fraction_in_parent": 1.000000000000001
+        },
+        {
+          "source_id": "50074027B86003485610467",
+          "source_name": "Pyt-Yakh",
+          "source_area_fraction_in_parent": 1.0000000000000002
+        },
+        {
+          "source_id": "50074027B92092388399011",
+          "source_name": "Beryozovsky District",
+          "source_area_fraction_in_parent": 1.0000000000000027
+        },
+        {
+          "source_id": "50074027B95202300265125",
+          "source_name": "городской округ Покачи",
+          "source_area_fraction_in_parent": 0.9999999999999984
+        }
+      ]
+    },
+    {
+      "atlas_parent_id": "framework:province:tomsk-oblast:19520c96b3a6",
+      "parent_name": "Tomsk Oblast",
+      "parent_source_id": "28173009B26811060113320",
+      "atlas_original_source_unit_count": 20,
+      "source_units_overlapping_parent_above_1e-6": 20,
+      "missing_from_atlas_source_ids": [],
+      "unexpected_atlas_source_ids": [],
+      "units": [
+        {
+          "source_id": "50074027B12924192729400",
+          "source_name": "Chainsky District",
+          "source_area_fraction_in_parent": 0.9999999999999998
+        },
+        {
+          "source_id": "50074027B14701566742636",
+          "source_name": "городской округ Стрежевой",
+          "source_area_fraction_in_parent": 1.0000000000000009
+        },
+        {
+          "source_id": "50074027B17928586927608",
+          "source_name": "Kargasok region",
+          "source_area_fraction_in_parent": 1.0000000000000024
+        },
+        {
+          "source_id": "50074027B18760987875066",
+          "source_name": "городской округ Томск",
+          "source_area_fraction_in_parent": 0.9999999999999984
+        },
+        {
+          "source_id": "50074027B20283010546533",
+          "source_name": "Tomsk municipal region",
+          "source_area_fraction_in_parent": 0.9999999999999989
+        },
+        {
+          "source_id": "50074027B20937469807639",
+          "source_name": "Teguldetsky District",
+          "source_area_fraction_in_parent": 0.9999999999999973
+        },
+        {
+          "source_id": "50074027B22320603613920",
+          "source_name": "Krivosheinsky District",
+          "source_area_fraction_in_parent": 0.9999999999999984
+        },
+        {
+          "source_id": "50074027B31214621786737",
+          "source_name": "Pervomay region",
+          "source_area_fraction_in_parent": 0.9999999999999997
+        },
+        {
+          "source_id": "50074027B33454891885145",
+          "source_name": "Parabelsky District",
+          "source_area_fraction_in_parent": 1.0000000000000007
+        },
+        {
+          "source_id": "50074027B35867871719252",
+          "source_name": "Shegarsky District",
+          "source_area_fraction_in_parent": 0.9999999999999999
+        },
+        {
+          "source_id": "50074027B40457023206600",
+          "source_name": "Zyryansky District",
+          "source_area_fraction_in_parent": 1.000000000000001
+        },
+        {
+          "source_id": "50074027B43945287193008",
+          "source_name": "ЗАТО Северск",
+          "source_area_fraction_in_parent": 0.9999999999999984
+        },
+        {
+          "source_id": "50074027B45791850356605",
+          "source_name": "Kozhevnikovsky District",
+          "source_area_fraction_in_parent": 0.9999999999999994
+        },
+        {
+          "source_id": "50074027B47808208285077",
+          "source_name": "Bakcharsky District",
+          "source_area_fraction_in_parent": 1.0000000000000033
+        },
+        {
+          "source_id": "50074027B48772613269862",
+          "source_name": "Kolpashevsky District",
+          "source_area_fraction_in_parent": 1.0
+        },
+        {
+          "source_id": "50074027B49750579589380",
+          "source_name": "Molchanovsky District",
+          "source_area_fraction_in_parent": 0.9999999999999999
+        },
+        {
+          "source_id": "50074027B55969640981213",
+          "source_name": "городской округ Кедровый",
+          "source_area_fraction_in_parent": 0.9999999999999996
+        },
+        {
+          "source_id": "50074027B64441434364002",
+          "source_name": "Upper Ket region",
+          "source_area_fraction_in_parent": 0.9999999999999999
+        },
+        {
+          "source_id": "50074027B89987768012006",
+          "source_name": "Alexandrovsky District",
+          "source_area_fraction_in_parent": 0.9999999999999997
+        },
+        {
+          "source_id": "50074027B99774107929021",
+          "source_name": "Asino region",
+          "source_area_fraction_in_parent": 1.0000000000000004
+        }
+      ]
+    },
+    {
+      "atlas_parent_id": "framework:province:novosibirsk-oblast:83efae7f1ea8",
+      "parent_name": "Novosibirsk Oblast",
+      "parent_source_id": "28173009B27844369294009",
+      "atlas_original_source_unit_count": 35,
+      "source_units_overlapping_parent_above_1e-6": 35,
+      "missing_from_atlas_source_ids": [],
+      "unexpected_atlas_source_ids": [],
+      "units": [
+        {
+          "source_id": "50074027B10801739097409",
+          "source_name": "Maslyaninsky District",
+          "source_area_fraction_in_parent": 1.000000000000001
+        },
+        {
+          "source_id": "50074027B1382559662490",
+          "source_name": "Ubinsky District",
+          "source_area_fraction_in_parent": 1.0000000000000036
+        },
+        {
+          "source_id": "50074027B1384423554557",
+          "source_name": "Toguchinsky District",
+          "source_area_fraction_in_parent": 1.000000000000003
+        },
+        {
+          "source_id": "50074027B16932918285671",
+          "source_name": "Suzunsky District",
+          "source_area_fraction_in_parent": 0.9999999999999993
+        },
+        {
+          "source_id": "50074027B17069139049497",
+          "source_name": "Tatarsky District",
+          "source_area_fraction_in_parent": 1.0000000000000007
+        },
+        {
+          "source_id": "50074027B18253095483754",
+          "source_name": "Novosibirsk",
+          "source_area_fraction_in_parent": 0.9999999999999969
+        },
+        {
+          "source_id": "50074027B19808785107388",
+          "source_name": "Berdsk municipality",
+          "source_area_fraction_in_parent": 0.9999999999999988
+        },
+        {
+          "source_id": "50074027B20308709748837",
+          "source_name": "Karasuksky District",
+          "source_area_fraction_in_parent": 1.0000000000000007
+        },
+        {
+          "source_id": "50074027B22451429500005",
+          "source_name": "Bolotninsky District",
+          "source_area_fraction_in_parent": 0.9999999999999973
+        },
+        {
+          "source_id": "50074027B22814382580923",
+          "source_name": "Koltsovo",
+          "source_area_fraction_in_parent": 1.000000000000001
+        },
+        {
+          "source_id": "50074027B22980531200288",
+          "source_name": "Kolyvansky District",
+          "source_area_fraction_in_parent": 0.9999999999999984
+        },
+        {
+          "source_id": "50074027B26458158998268",
+          "source_name": "Barabinsky District",
+          "source_area_fraction_in_parent": 0.9999999999999997
+        },
+        {
+          "source_id": "50074027B29341937409288",
+          "source_name": "Ob",
+          "source_area_fraction_in_parent": 0.9999999999999997
+        },
+        {
+          "source_id": "50074027B30403513393594",
+          "source_name": "Zdvinsky District",
+          "source_area_fraction_in_parent": 0.9999999999999978
+        },
+        {
+          "source_id": "50074027B31680341094146",
+          "source_name": "Kuybyshevsky District",
+          "source_area_fraction_in_parent": 1.0000000000000004
+        },
+        {
+          "source_id": "50074027B3453987182776",
+          "source_name": "Severny District",
+          "source_area_fraction_in_parent": 0.9999999999999987
+        },
+        {
+          "source_id": "50074027B38208689781366",
+          "source_name": "Kupinsky District",
+          "source_area_fraction_in_parent": 1.0000000000000033
+        },
+        {
+          "source_id": "50074027B39854197147849",
+          "source_name": "Kochenyovsky District",
+          "source_area_fraction_in_parent": 0.9999999999999992
+        },
+        {
+          "source_id": "50074027B40944163415540",
+          "source_name": "Novosibirsky District",
+          "source_area_fraction_in_parent": 0.9999999999999993
+        },
+        {
+          "source_id": "50074027B4866264049992",
+          "source_name": "Chulymsky District",
+          "source_area_fraction_in_parent": 1.0000000000000004
+        },
+        {
+          "source_id": "50074027B48874583684365",
+          "source_name": "Iskitimsky District",
+          "source_area_fraction_in_parent": 1.0000000000000009
+        },
+        {
+          "source_id": "50074027B48968131409639",
+          "source_name": "Kargatsky District",
+          "source_area_fraction_in_parent": 0.9999999999999983
+        },
+        {
+          "source_id": "50074027B57630745445526",
+          "source_name": "Chistoozyorny District",
+          "source_area_fraction_in_parent": 1.000000000000001
+        },
+        {
+          "source_id": "50074027B57738790926374",
+          "source_name": "Ust-Tarksky District",
+          "source_area_fraction_in_parent": 1.0000000000000002
+        },
+        {
+          "source_id": "50074027B58386304143379",
+          "source_name": "Dovolensky District",
+          "source_area_fraction_in_parent": 1.0000000000000004
+        },
+        {
+          "source_id": "50074027B58811812536316",
+          "source_name": "Cherepanovsky District",
+          "source_area_fraction_in_parent": 0.9999999999999992
+        },
+        {
+          "source_id": "50074027B60293650992793",
+          "source_name": "Iskitim",
+          "source_area_fraction_in_parent": 0.9999999999999986
+        },
+        {
+          "source_id": "50074027B66695782907424",
+          "source_name": "Vengerovsky District",
+          "source_area_fraction_in_parent": 1.0000000000000016
+        },
+        {
+          "source_id": "50074027B67067698326417",
+          "source_name": "Moshkovsky District",
+          "source_area_fraction_in_parent": 1.0000000000000013
+        },
+        {
+          "source_id": "50074027B79242633204114",
+          "source_name": "Ordynsky District",
+          "source_area_fraction_in_parent": 1.0000000000000002
+        },
+        {
+          "source_id": "50074027B825124419295",
+          "source_name": "Kyshtovsky District",
+          "source_area_fraction_in_parent": 1.0
+        },
+        {
+          "source_id": "50074027B83942452193490",
+          "source_name": "Bagansky District",
+          "source_area_fraction_in_parent": 1.0000000000000002
+        },
+        {
+          "source_id": "50074027B86288600137250",
+          "source_name": "Krasnozyorsky District",
+          "source_area_fraction_in_parent": 0.9999999999999989
+        },
+        {
+          "source_id": "50074027B93982822346714",
+          "source_name": "Kochkovsky District",
+          "source_area_fraction_in_parent": 1.0000000000000004
+        },
+        {
+          "source_id": "50074027B99251072805017",
+          "source_name": "Chanovsky District",
+          "source_area_fraction_in_parent": 1.0000000000000007
+        }
+      ]
+    },
+    {
+      "atlas_parent_id": "framework:province:omsk-oblast:d26fa4706c2e",
+      "parent_name": "Omsk Oblast",
+      "parent_source_id": "28173009B55503329301013",
+      "atlas_original_source_unit_count": 33,
+      "source_units_overlapping_parent_above_1e-6": 33,
+      "missing_from_atlas_source_ids": [],
+      "unexpected_atlas_source_ids": [],
+      "units": [
+        {
+          "source_id": "50074027B10003621776126",
+          "source_name": "Ust-Ishimsky District",
+          "source_area_fraction_in_parent": 1.0000000000000053
+        },
+        {
+          "source_id": "50074027B10746223441661",
+          "source_name": "Tavrichesky District",
+          "source_area_fraction_in_parent": 1.0000000000000009
+        },
+        {
+          "source_id": "50074027B11303742848027",
+          "source_name": "Kalachinsky District",
+          "source_area_fraction_in_parent": 0.9999999999999996
+        },
+        {
+          "source_id": "50074027B11464632928939",
+          "source_name": "Poltavsky District",
+          "source_area_fraction_in_parent": 0.9999999999999994
+        },
+        {
+          "source_id": "50074027B1154757309769",
+          "source_name": "Moskalensky District",
+          "source_area_fraction_in_parent": 1.0000000000000002
+        },
+        {
+          "source_id": "50074027B11964872895292",
+          "source_name": "Tarsky District",
+          "source_area_fraction_in_parent": 1.0
+        },
+        {
+          "source_id": "50074027B15396054994341",
+          "source_name": "Russko-Polyansky District",
+          "source_area_fraction_in_parent": 1.0000000000000002
+        },
+        {
+          "source_id": "50074027B1814535898991",
+          "source_name": "Sargatsky District",
+          "source_area_fraction_in_parent": 1.0000000000000009
+        },
+        {
+          "source_id": "50074027B21454982990779",
+          "source_name": "Nizhneomsky District",
+          "source_area_fraction_in_parent": 1.000000000000001
+        },
+        {
+          "source_id": "50074027B25730099940493",
+          "source_name": "Tevrizsky District",
+          "source_area_fraction_in_parent": 0.9999999999999997
+        },
+        {
+          "source_id": "50074027B40650082048510",
+          "source_name": "Znamensky District",
+          "source_area_fraction_in_parent": 1.000000000000001
+        },
+        {
+          "source_id": "50074027B40989256000236",
+          "source_name": "Maryanovsky District",
+          "source_area_fraction_in_parent": 0.9999999999999996
+        },
+        {
+          "source_id": "50074027B41938053987638",
+          "source_name": "Odessky District",
+          "source_area_fraction_in_parent": 1.0000000000000013
+        },
+        {
+          "source_id": "50074027B42091681257278",
+          "source_name": "Pavlogradsky District",
+          "source_area_fraction_in_parent": 0.9999999999999996
+        },
+        {
+          "source_id": "50074027B42915894018382",
+          "source_name": "Nazyvayevsky District",
+          "source_area_fraction_in_parent": 0.9999999999999988
+        },
+        {
+          "source_id": "50074027B47312345815604",
+          "source_name": "Gorkovsky District",
+          "source_area_fraction_in_parent": 0.9999999999999994
+        },
+        {
+          "source_id": "50074027B50058998089809",
+          "source_name": "Bolsherechensky District",
+          "source_area_fraction_in_parent": 0.999999999999998
+        },
+        {
+          "source_id": "50074027B51076398001550",
+          "source_name": "Cherlaksky District",
+          "source_area_fraction_in_parent": 0.9999999999999991
+        },
+        {
+          "source_id": "50074027B52983592916775",
+          "source_name": "Muromtsevsky District",
+          "source_area_fraction_in_parent": 1.0000000000000004
+        },
+        {
+          "source_id": "50074027B53792659884597",
+          "source_name": "городской округ Омск",
+          "source_area_fraction_in_parent": 0.999999999999999
+        },
+        {
+          "source_id": "50074027B66046349705368",
+          "source_name": "Kormilovsky District",
+          "source_area_fraction_in_parent": 0.9999999999999993
+        },
+        {
+          "source_id": "50074027B73257379170390",
+          "source_name": "Novovarshavsky District",
+          "source_area_fraction_in_parent": 0.9999999999999998
+        },
+        {
+          "source_id": "50074027B74546691194068",
+          "source_name": "Krutinsky District",
+          "source_area_fraction_in_parent": 1.0000000000000007
+        },
+        {
+          "source_id": "50074027B75885575874433",
+          "source_name": "Okoneshnikovsky District",
+          "source_area_fraction_in_parent": 1.0000000000000004
+        },
+        {
+          "source_id": "50074027B76055617717778",
+          "source_name": "Lyubinsky District",
+          "source_area_fraction_in_parent": 1.0000000000000002
+        },
+        {
+          "source_id": "50074027B77540490569541",
+          "source_name": "Sherbakulsky District",
+          "source_area_fraction_in_parent": 0.9999999999999997
+        },
+        {
+          "source_id": "50074027B77832194224419",
+          "source_name": "Isilkulsky District",
+          "source_area_fraction_in_parent": 0.9999999999999997
+        },
+        {
+          "source_id": "50074027B79924738274126",
+          "source_name": "Azovsky Nemetsky National District",
+          "source_area_fraction_in_parent": 0.9999999999999997
+        },
+        {
+          "source_id": "50074027B81841250799510",
+          "source_name": "Tyukalinsky District",
+          "source_area_fraction_in_parent": 1.0000000000000002
+        },
+        {
+          "source_id": "50074027B84115521908944",
+          "source_name": "Omsky District",
+          "source_area_fraction_in_parent": 1.0000000000000033
+        },
+        {
+          "source_id": "50074027B86499512318901",
+          "source_name": "Sedelnikovsky District",
+          "source_area_fraction_in_parent": 0.9999999999999987
+        },
+        {
+          "source_id": "50074027B89255847323601",
+          "source_name": "Kolosovsky District",
+          "source_area_fraction_in_parent": 1.000000000000001
+        },
+        {
+          "source_id": "50074027B98338576310909",
+          "source_name": "Bolsheukovsky District",
+          "source_area_fraction_in_parent": 0.999999999999999
+        }
+      ]
+    },
+    {
+      "atlas_parent_id": "framework:province:yamalo-nenets-autonomous-okrug:9bc3ee3c2efe",
+      "parent_name": "Yamalo-Nenets Autonomous Okrug",
+      "parent_source_id": "28173009B47279883421777",
+      "atlas_original_source_unit_count": 13,
+      "source_units_overlapping_parent_above_1e-6": 13,
+      "missing_from_atlas_source_ids": [],
+      "unexpected_atlas_source_ids": [],
+      "units": [
+        {
+          "source_id": "50074027B10379539839705",
+          "source_name": "Tazovsky Rayon",
+          "source_area_fraction_in_parent": 1.0000000000000022
+        },
+        {
+          "source_id": "50074027B1644674550414",
+          "source_name": "городской округ Лабытнанги",
+          "source_area_fraction_in_parent": 0.9999999999999999
+        },
+        {
+          "source_id": "50074027B17917543280875",
+          "source_name": "городской округ Новый Урен",
+          "source_area_fraction_in_parent": 1.0000000000000002
+        },
+        {
+          "source_id": "50074027B2325947694706",
+          "source_name": "Krasnoselkupsky Rayon",
+          "source_area_fraction_in_parent": 0.9999999999999943
+        },
+        {
+          "source_id": "50074027B23262720042196",
+          "source_name": "городской округ Муравленко",
+          "source_area_fraction_in_parent": 0.9999999999999997
+        },
+        {
+          "source_id": "50074027B30219941944137",
+          "source_name": "Shuryshkarsky Rayon",
+          "source_area_fraction_in_parent": 0.9999999999999983
+        },
+        {
+          "source_id": "50074027B30864735873510",
+          "source_name": "Nadymsky Rayon",
+          "source_area_fraction_in_parent": 0.9999999999999969
+        },
+        {
+          "source_id": "50074027B34738491600615",
+          "source_name": "Salekhard Urban Okrug",
+          "source_area_fraction_in_parent": 0.9999999999999998
+        },
+        {
+          "source_id": "50074027B39292814865227",
+          "source_name": "Gubkinsky",
+          "source_area_fraction_in_parent": 1.0000000000000002
+        },
+        {
+          "source_id": "50074027B56233113775442",
+          "source_name": "Priuralsky Rayon",
+          "source_area_fraction_in_parent": 1.0000000000000038
+        },
+        {
+          "source_id": "50074027B57421544908828",
+          "source_name": "Yamalsky Rayon",
+          "source_area_fraction_in_parent": 0.9999999999999999
+        },
+        {
+          "source_id": "50074027B62501748698742",
+          "source_name": "Purovsky Rayon",
+          "source_area_fraction_in_parent": 0.9999999999999993
+        },
+        {
+          "source_id": "50074027B63935727212307",
+          "source_name": "Noyabrsk",
+          "source_area_fraction_in_parent": 1.0000000000000049
+        }
+      ]
+    },
+    {
+      "atlas_parent_id": "framework:province:altai-republic:09ee95a1ef7d",
+      "parent_name": "Altai Republic",
+      "parent_source_id": "28173009B30008444211385",
+      "atlas_original_source_unit_count": 11,
+      "source_units_overlapping_parent_above_1e-6": 11,
+      "missing_from_atlas_source_ids": [],
+      "unexpected_atlas_source_ids": [],
+      "units": [
+        {
+          "source_id": "50074027B10551483188825",
+          "source_name": "Ongudaysky Rayon",
+          "source_area_fraction_in_parent": 1.0000000000000018
+        },
+        {
+          "source_id": "50074027B11056050899621",
+          "source_name": "Kosh-Agachsky Rayon",
+          "source_area_fraction_in_parent": 0.9999999999999952
+        },
+        {
+          "source_id": "50074027B1388901491568",
+          "source_name": "Shebalinsky Rayon",
+          "source_area_fraction_in_parent": 1.0000000000000009
+        },
+        {
+          "source_id": "50074027B30829642015709",
+          "source_name": "Gorno-Altaysk",
+          "source_area_fraction_in_parent": 0.999999999999999
+        },
+        {
+          "source_id": "50074027B36737161681879",
+          "source_name": "Ust-Koksinsky Rayon",
+          "source_area_fraction_in_parent": 0.9999999999999999
+        },
+        {
+          "source_id": "50074027B40756489093750",
+          "source_name": "Choysky District",
+          "source_area_fraction_in_parent": 0.9999999999999997
+        },
+        {
+          "source_id": "50074027B62478008051708",
+          "source_name": "Ulagansky Rayon",
+          "source_area_fraction_in_parent": 0.9999999999999976
+        },
+        {
+          "source_id": "50074027B67798096823782",
+          "source_name": "Turochaksky Rayon",
+          "source_area_fraction_in_parent": 1.0000000000000027
+        },
+        {
+          "source_id": "50074027B71130034627460",
+          "source_name": "Chemalsky Rayon",
+          "source_area_fraction_in_parent": 0.9999999999999994
+        },
+        {
+          "source_id": "50074027B92064145614684",
+          "source_name": "Ust-Kansky District",
+          "source_area_fraction_in_parent": 1.0000000000000002
+        },
+        {
+          "source_id": "50074027B93475347999022",
+          "source_name": "Mayminsky Rayon",
+          "source_area_fraction_in_parent": 1.0
+        }
+      ]
+    }
+  ]
+}
