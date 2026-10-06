@@ -211,6 +211,13 @@ request; its registrations/results remain preserved on the closed PR.
 The CLI observes for 65 minutes, then reports its request ID without cancelling
 anything. Resume observation/idempotent registration using
 `--request-id ORIGINAL-REQUEST-ID`; duplicates retain the original FIFO ticket.
+Existing author checkouts can contain the old helper. After rollout, invoke the
+updated helper from the trusted primary checkout by its absolute path, keeping
+the current working directory in your managed author slot so verified local
+cleanup targets that slot. Keep the same `--pr` and exact reviewed `--head`; do
+not merge main into or rewrite a reviewed source branch merely to update a CLI.
+The old direct `worker-merge.yml` entry lacks durable FIFO admission and is
+rejected; refresh saved queue commands to use the new helper.
 Never infer a merge from timeout, a candidate SHA or workflow success: the exact
 bot result must agree with the actual merged PR/head/squash commit.
 
@@ -226,6 +233,12 @@ waits for it to settle. Temporarily disabling the old worker-merge workflow can
 hold new dispatches without cancelling live work; do not disable it before the
 scheduler PR's own normal integration is dispatched. Record deferred authors'
 request IDs/heads and re-enable immediately after actual merge confirmation.
+Disabling workflow triggers is separate from cancelling a run; still enumerate
+and settle all queued, requested, waiting, pending and in-progress runs. Retain
+cancelled/coalesced old request IDs and exact PR heads for unchanged-head
+resubmission. The enable/dispatch/disable window is cooperative rather than
+atomic: enumerate racing admissions, preserve them and let them settle. Record
+and restore prior workflow availability. Leave research and PR checks enabled.
 The new scheduler then recovers registrations under ordinary exact-head rules.
 No direct merge, manual research stop, provider operation or publication is part
 of this procedure. Only the coordinating integrator performs this reversible
