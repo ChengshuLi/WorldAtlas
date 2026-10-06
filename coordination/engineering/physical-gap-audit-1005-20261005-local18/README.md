@@ -38,3 +38,5 @@ python3 scripts/validate-physical-audit-evidence.py \
 ```
 
 The full-product gate verifies source validity/unknown diagnostics, identities, tile accounting, complete products, measurement uncertainty and byte equality. It does not independently repeat every worldwide geometry difference operation or grant factual approval. Connected-component crosswalks, global investigation partitions, factual repairs and delivery remain required subsequent work.
+
+The aggregate reproducibility hash iterates each report’s `outputs`, then `residue_outputs`, in recorded order. Each file contributes its UTF-8 basename, one zero byte, its complete compressed byte length encoded as an unsigned eight-byte big-endian integer, and all unchanged compressed file bytes to SHA256. Directories, reports and decoded geometry are excluded from this aggregate; each complete file is also individually hash-checked. Both final runs produce `2ed330add2ed9afa8e1419c86b8046ce636b70e8d317622122031f3b99e40f4f`.
