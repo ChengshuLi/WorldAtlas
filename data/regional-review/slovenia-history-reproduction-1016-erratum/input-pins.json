@@ -1,0 +1,217 @@
+{
+  "version": 1,
+  "issue": 1185,
+  "baseline_commit": "aee3bc644593c8e080f4a8495a851890695581ec",
+  "issue_pins_sha256": {
+    "3042d1278e87dae00c26924c339e940c9fba240e:data/regional-review/regional-review-d282e62cf0209796/scope.json": "7456674ffc3ede4604fd243aaece1dbbb80868f5d3de08efa6868a8574f7884e",
+    "3042d1278e87dae00c26924c339e940c9fba240e:data/regional-review/regional-review-d282e62cf0209796/unit-assessments.json": "98e3d72e5f497b71488e1a233a457d6be31e675de196e6ee7595b1e06a0529c1",
+    "3042d1278e87dae00c26924c339e940c9fba240e:data/regional-review/regional-review-d282e62cf0209796/slovenia-name-correction-candidates.csv": "ac6abb4d3d6f908b1fd958a8afc196447b23a9abb1527bf09cdb9530928340c7",
+    "3042d1278e87dae00c26924c339e940c9fba240e:data/regional-review/regional-review-d282e62cf0209796/source/gurs-municipal-boundaries.geojson": "b74a49d83ce08363b1b43eae38a1900a985c610860ff443e20db712c28d26e1b",
+    "3042d1278e87dae00c26924c339e940c9fba240e:data/regional-review/regional-review-d282e62cf0209796/source/gurs-wfs-collections.json": "028f8c5dc424219d02da7291330689afd6570e8e55983ce35d1b958a92827cc2",
+    "3042d1278e87dae00c26924c339e940c9fba240e:data/regional-review/regional-review-d282e62cf0209796/source/source-provenance.json": "67d39db1cb2f1c73f0106799c2a6f6c85443d7a548a09b6f0c5742778a2d4d74",
+    "3042d1278e87dae00c26924c339e940c9fba240e:data/geography/part-22.json": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3",
+    "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/2017-name-assessment.csv": "46ebdac5372a45cfc7e45d463be4a59e13364ae048f25551348a5c86a3bd056b",
+    "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/evidence-quality.json": "d8965117de641dbd5eeb0aa60f0f970e15cf5861e3d22147f068657787b27324",
+    "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/findings.md": "9b8d3af2fcd2e5d1db50441e48bb7f3bfdf9febda494780d6aae4fccc4029f8d",
+    "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/github-issue-contract.json": "7f2bfb0e72dd8a0d1a933ae6cc77bef1998bea1f2611c0f1fc51ce3fda63491f",
+    "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/pr-body.txt": "3d45a4f14820f2c2c6ef55bb47815620da445698eb2ba7a62c4a3a07307b2fd0",
+    "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/reproduction-summary.json": "9c4008d680aecbf0415aec88703b90a791a6f9eda6033b4e659816879e2de407",
+    "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/reproduction/reproduce-sistat-2017-roster.py": "83e441779f591079c31aa62d46fe532276df87bfd7514815725b99fd42bd62fd",
+    "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source-provenance.json": "e9292cda8e2bbac5a6033201e1feb138728c6068b62caa131327b4f853e9d8f8",
+    "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/gurs-obcine-h-53-codes-2017.json": "828455fec8aa86b9841670da1d00d0b02b8538ea5bc85c2067feba0912915805",
+    "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/gurs-obcine-h-request.json": "55dd678cdf939d51efecee9af4a309258cfc9e1469cf90fc6258f2807b1a5528",
+    "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/sistat-0214809S-2017-area.json": "4682c0cfa67c31a322c6c29bd50dd6184843cd5636c02fe6f98766724f1a7534",
+    "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/sistat-request.json": "79152f24e7b36014a7711e61ab165e204fffda4efaecda45e3dec816bc71373b"
+  },
+  "files": [
+    {
+      "path": "data/geography/part-22.json",
+      "bytes": 4746385,
+      "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3",
+      "baseline_origin_commit": "3042d1278e87dae00c26924c339e940c9fba240e",
+      "issue_pin_key": "3042d1278e87dae00c26924c339e940c9fba240e:data/geography/part-22.json",
+      "required_by_issue": true
+    },
+    {
+      "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/2017-name-assessment.csv",
+      "bytes": 28686,
+      "sha256": "46ebdac5372a45cfc7e45d463be4a59e13364ae048f25551348a5c86a3bd056b",
+      "baseline_origin_commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+      "issue_pin_key": "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/2017-name-assessment.csv",
+      "required_by_issue": true
+    },
+    {
+      "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/evidence-quality.json",
+      "bytes": 24336,
+      "sha256": "d8965117de641dbd5eeb0aa60f0f970e15cf5861e3d22147f068657787b27324",
+      "baseline_origin_commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+      "issue_pin_key": "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/evidence-quality.json",
+      "required_by_issue": true
+    },
+    {
+      "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/findings.md",
+      "bytes": 7351,
+      "sha256": "9b8d3af2fcd2e5d1db50441e48bb7f3bfdf9febda494780d6aae4fccc4029f8d",
+      "baseline_origin_commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+      "issue_pin_key": "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/findings.md",
+      "required_by_issue": true
+    },
+    {
+      "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/github-issue-contract.json",
+      "bytes": 9321,
+      "sha256": "7f2bfb0e72dd8a0d1a933ae6cc77bef1998bea1f2611c0f1fc51ce3fda63491f",
+      "baseline_origin_commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+      "issue_pin_key": "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/github-issue-contract.json",
+      "required_by_issue": true
+    },
+    {
+      "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/pr-body.txt",
+      "bytes": 1224,
+      "sha256": "3d45a4f14820f2c2c6ef55bb47815620da445698eb2ba7a62c4a3a07307b2fd0",
+      "baseline_origin_commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+      "issue_pin_key": "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/pr-body.txt",
+      "required_by_issue": true
+    },
+    {
+      "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/reproduction-summary.json",
+      "bytes": 3807,
+      "sha256": "9c4008d680aecbf0415aec88703b90a791a6f9eda6033b4e659816879e2de407",
+      "baseline_origin_commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+      "issue_pin_key": "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/reproduction-summary.json",
+      "required_by_issue": true
+    },
+    {
+      "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/reproduction/reproduce-sistat-2017-roster.py",
+      "bytes": 7427,
+      "sha256": "83e441779f591079c31aa62d46fe532276df87bfd7514815725b99fd42bd62fd",
+      "baseline_origin_commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+      "issue_pin_key": "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/reproduction/reproduce-sistat-2017-roster.py",
+      "required_by_issue": true
+    },
+    {
+      "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source-provenance.json",
+      "bytes": 6800,
+      "sha256": "e9292cda8e2bbac5a6033201e1feb138728c6068b62caa131327b4f853e9d8f8",
+      "baseline_origin_commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+      "issue_pin_key": "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source-provenance.json",
+      "required_by_issue": true
+    },
+    {
+      "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/gurs-obcine-h-53-codes-2017.json",
+      "bytes": 311717,
+      "sha256": "828455fec8aa86b9841670da1d00d0b02b8538ea5bc85c2067feba0912915805",
+      "baseline_origin_commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+      "issue_pin_key": "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/gurs-obcine-h-53-codes-2017.json",
+      "required_by_issue": true
+    },
+    {
+      "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/gurs-obcine-h-request.json",
+      "bytes": 1652,
+      "sha256": "55dd678cdf939d51efecee9af4a309258cfc9e1469cf90fc6258f2807b1a5528",
+      "baseline_origin_commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+      "issue_pin_key": "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/gurs-obcine-h-request.json",
+      "required_by_issue": true
+    },
+    {
+      "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/sistat-0214809S-2017-area.json",
+      "bytes": 8900,
+      "sha256": "4682c0cfa67c31a322c6c29bd50dd6184843cd5636c02fe6f98766724f1a7534",
+      "baseline_origin_commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+      "issue_pin_key": "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/sistat-0214809S-2017-area.json",
+      "required_by_issue": true
+    },
+    {
+      "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/sistat-request.json",
+      "bytes": 253,
+      "sha256": "79152f24e7b36014a7711e61ab165e204fffda4efaecda45e3dec816bc71373b",
+      "baseline_origin_commit": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+      "issue_pin_key": "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/sistat-request.json",
+      "required_by_issue": true
+    },
+    {
+      "path": "data/regional-review/regional-review-d282e62cf0209796/scope.json",
+      "bytes": 19188,
+      "sha256": "7456674ffc3ede4604fd243aaece1dbbb80868f5d3de08efa6868a8574f7884e",
+      "baseline_origin_commit": "3042d1278e87dae00c26924c339e940c9fba240e",
+      "issue_pin_key": "3042d1278e87dae00c26924c339e940c9fba240e:data/regional-review/regional-review-d282e62cf0209796/scope.json",
+      "required_by_issue": true
+    },
+    {
+      "path": "data/regional-review/regional-review-d282e62cf0209796/slovenia-name-correction-candidates.csv",
+      "bytes": 15544,
+      "sha256": "ac6abb4d3d6f908b1fd958a8afc196447b23a9abb1527bf09cdb9530928340c7",
+      "baseline_origin_commit": "3042d1278e87dae00c26924c339e940c9fba240e",
+      "issue_pin_key": "3042d1278e87dae00c26924c339e940c9fba240e:data/regional-review/regional-review-d282e62cf0209796/slovenia-name-correction-candidates.csv",
+      "required_by_issue": true
+    },
+    {
+      "path": "data/regional-review/regional-review-d282e62cf0209796/source/geoboundaries-9469f09/geoBoundaries-SVN-ADM1-metaData.json",
+      "bytes": 883,
+      "sha256": "23b633c5a6c851c2dac7a30fd317313546f20ac662c213917b3b95e905d7fbbb",
+      "baseline_origin_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "issue_pin_key": null,
+      "required_by_issue": false,
+      "purpose": "Read-only 2017 boundary lineage and parent-tier context; no polygon approval or replacement."
+    },
+    {
+      "path": "data/regional-review/regional-review-d282e62cf0209796/source/geoboundaries-9469f09/geoBoundaries-SVN-ADM1.geojson",
+      "bytes": 4177,
+      "sha256": "2c75e262a75938c59908485eb01227e4f973fd5be307bf218dbefab3020d41b8",
+      "baseline_origin_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "issue_pin_key": null,
+      "required_by_issue": false,
+      "purpose": "Read-only 2017 boundary lineage and parent-tier context; no polygon approval or replacement."
+    },
+    {
+      "path": "data/regional-review/regional-review-d282e62cf0209796/source/geoboundaries-9469f09/geoBoundaries-SVN-ADM2-metaData.json",
+      "bytes": 851,
+      "sha256": "ae1647ee586ac5460522c087c911c2c9a3176adc9a76c3b926b07fece7e1d2d1",
+      "baseline_origin_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "issue_pin_key": null,
+      "required_by_issue": false,
+      "purpose": "Read-only 2017 boundary lineage and parent-tier context; no polygon approval or replacement."
+    },
+    {
+      "path": "data/regional-review/regional-review-d282e62cf0209796/source/geoboundaries-9469f09/geoBoundaries-SVN-ADM2.geojson",
+      "bytes": 5188866,
+      "sha256": "b5e2bb260cd78a05e16a457d85cc3fce83b9ad7f65cbefc7feae6f4b836a97fe",
+      "baseline_origin_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+      "issue_pin_key": null,
+      "required_by_issue": false,
+      "purpose": "Read-only 2017 boundary lineage and parent-tier context; no polygon approval or replacement."
+    },
+    {
+      "path": "data/regional-review/regional-review-d282e62cf0209796/source/gurs-municipal-boundaries.geojson",
+      "bytes": 13049219,
+      "sha256": "b74a49d83ce08363b1b43eae38a1900a985c610860ff443e20db712c28d26e1b",
+      "baseline_origin_commit": "3042d1278e87dae00c26924c339e940c9fba240e",
+      "issue_pin_key": "3042d1278e87dae00c26924c339e940c9fba240e:data/regional-review/regional-review-d282e62cf0209796/source/gurs-municipal-boundaries.geojson",
+      "required_by_issue": true
+    },
+    {
+      "path": "data/regional-review/regional-review-d282e62cf0209796/source/gurs-wfs-collections.json",
+      "bytes": 417486,
+      "sha256": "028f8c5dc424219d02da7291330689afd6570e8e55983ce35d1b958a92827cc2",
+      "baseline_origin_commit": "3042d1278e87dae00c26924c339e940c9fba240e",
+      "issue_pin_key": "3042d1278e87dae00c26924c339e940c9fba240e:data/regional-review/regional-review-d282e62cf0209796/source/gurs-wfs-collections.json",
+      "required_by_issue": true
+    },
+    {
+      "path": "data/regional-review/regional-review-d282e62cf0209796/source/source-provenance.json",
+      "bytes": 15793,
+      "sha256": "67d39db1cb2f1c73f0106799c2a6f6c85443d7a548a09b6f0c5742778a2d4d74",
+      "baseline_origin_commit": "3042d1278e87dae00c26924c339e940c9fba240e",
+      "issue_pin_key": "3042d1278e87dae00c26924c339e940c9fba240e:data/regional-review/regional-review-d282e62cf0209796/source/source-provenance.json",
+      "required_by_issue": true
+    },
+    {
+      "path": "data/regional-review/regional-review-d282e62cf0209796/unit-assessments.json",
+      "bytes": 563382,
+      "sha256": "98e3d72e5f497b71488e1a233a457d6be31e675de196e6ee7595b1e06a0529c1",
+      "baseline_origin_commit": "3042d1278e87dae00c26924c339e940c9fba240e",
+      "issue_pin_key": "3042d1278e87dae00c26924c339e940c9fba240e:data/regional-review/regional-review-d282e62cf0209796/unit-assessments.json",
+      "required_by_issue": true
+    }
+  ],
+  "runner_code_sha256": "408fe92853a0f02b023d709cccadb3876b7ef5e0bdce030378fc9f9370b89271"
+}

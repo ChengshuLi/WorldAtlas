@@ -1,0 +1,1826 @@
+{
+  "version": 1,
+  "issue": 1185,
+  "lane": "geography",
+  "worker_id": "01a10948-7d38-75d0-bc01-4cc28ea41f49",
+  "subject_ids": [
+    "gb:SVN:ADM2:79292919B14844764164504",
+    "gb:SVN:ADM2:79292919B19982075256158",
+    "gb:SVN:ADM2:79292919B22803518802899",
+    "gb:SVN:ADM2:79292919B24232853487661",
+    "gb:SVN:ADM2:79292919B24234918778023",
+    "gb:SVN:ADM2:79292919B27119869854741",
+    "gb:SVN:ADM2:79292919B27121964158679",
+    "gb:SVN:ADM2:79292919B29250597194434",
+    "gb:SVN:ADM2:79292919B30339441017456",
+    "gb:SVN:ADM2:79292919B31270316639781",
+    "gb:SVN:ADM2:79292919B34418813957407",
+    "gb:SVN:ADM2:79292919B36449465355430",
+    "gb:SVN:ADM2:79292919B36906673582366",
+    "gb:SVN:ADM2:79292919B37217694614402",
+    "gb:SVN:ADM2:79292919B37893156652188",
+    "gb:SVN:ADM2:79292919B39454020264245",
+    "gb:SVN:ADM2:79292919B40236159589403",
+    "gb:SVN:ADM2:79292919B41680562738857",
+    "gb:SVN:ADM2:79292919B41699436206095",
+    "gb:SVN:ADM2:79292919B41960414721213",
+    "gb:SVN:ADM2:79292919B43187654305214",
+    "gb:SVN:ADM2:79292919B4491351811803",
+    "gb:SVN:ADM2:79292919B4658103719865",
+    "gb:SVN:ADM2:79292919B47659572418488",
+    "gb:SVN:ADM2:79292919B50582380192051",
+    "gb:SVN:ADM2:79292919B51659604970826",
+    "gb:SVN:ADM2:79292919B51703506835671",
+    "gb:SVN:ADM2:79292919B52859595102923",
+    "gb:SVN:ADM2:79292919B53548294602396",
+    "gb:SVN:ADM2:79292919B54937293403521",
+    "gb:SVN:ADM2:79292919B550141556557",
+    "gb:SVN:ADM2:79292919B606741638743",
+    "gb:SVN:ADM2:79292919B61887521642572",
+    "gb:SVN:ADM2:79292919B63771260852336",
+    "gb:SVN:ADM2:79292919B64708895890629",
+    "gb:SVN:ADM2:79292919B66240323896523",
+    "gb:SVN:ADM2:79292919B6737679693048",
+    "gb:SVN:ADM2:79292919B69562863296028",
+    "gb:SVN:ADM2:79292919B71143168599957",
+    "gb:SVN:ADM2:79292919B72046348709828",
+    "gb:SVN:ADM2:79292919B72096121739234",
+    "gb:SVN:ADM2:79292919B72498543032792",
+    "gb:SVN:ADM2:79292919B74602913806737",
+    "gb:SVN:ADM2:79292919B76966153673191",
+    "gb:SVN:ADM2:79292919B80018774368860",
+    "gb:SVN:ADM2:79292919B85077344195583",
+    "gb:SVN:ADM2:79292919B88661184998894",
+    "gb:SVN:ADM2:79292919B90781452828589",
+    "gb:SVN:ADM2:79292919B92459471483438",
+    "gb:SVN:ADM2:79292919B95549890377821",
+    "gb:SVN:ADM2:79292919B98583397902155",
+    "gb:SVN:ADM2:79292919B98620751360041",
+    "gb:SVN:ADM2:79292919B99171533039052"
+  ],
+  "subject_ids_sha256": "53c01f96e0082121c2e13b8d1745e39a0efbad26486483c9159c9e4e2afd7d47",
+  "baseline": {
+    "commit": "aee3bc644593c8e080f4a8495a851890695581ec",
+    "files": [
+      {
+        "path": "data/geography/part-22.json",
+        "bytes": 4746385,
+        "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/2017-name-assessment.csv",
+        "bytes": 28686,
+        "sha256": "46ebdac5372a45cfc7e45d463be4a59e13364ae048f25551348a5c86a3bd056b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/evidence-quality.json",
+        "bytes": 24336,
+        "sha256": "d8965117de641dbd5eeb0aa60f0f970e15cf5861e3d22147f068657787b27324",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/findings.md",
+        "bytes": 7351,
+        "sha256": "9b8d3af2fcd2e5d1db50441e48bb7f3bfdf9febda494780d6aae4fccc4029f8d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/github-issue-contract.json",
+        "bytes": 9321,
+        "sha256": "7f2bfb0e72dd8a0d1a933ae6cc77bef1998bea1f2611c0f1fc51ce3fda63491f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/pr-body.txt",
+        "bytes": 1224,
+        "sha256": "3d45a4f14820f2c2c6ef55bb47815620da445698eb2ba7a62c4a3a07307b2fd0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/reproduction-summary.json",
+        "bytes": 3807,
+        "sha256": "9c4008d680aecbf0415aec88703b90a791a6f9eda6033b4e659816879e2de407",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/reproduction/reproduce-sistat-2017-roster.py",
+        "bytes": 7427,
+        "sha256": "83e441779f591079c31aa62d46fe532276df87bfd7514815725b99fd42bd62fd",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source-provenance.json",
+        "bytes": 6800,
+        "sha256": "e9292cda8e2bbac5a6033201e1feb138728c6068b62caa131327b4f853e9d8f8",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/gurs-obcine-h-53-codes-2017.json",
+        "bytes": 311717,
+        "sha256": "828455fec8aa86b9841670da1d00d0b02b8538ea5bc85c2067feba0912915805",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/gurs-obcine-h-request.json",
+        "bytes": 1652,
+        "sha256": "55dd678cdf939d51efecee9af4a309258cfc9e1469cf90fc6258f2807b1a5528",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/sistat-0214809S-2017-area.json",
+        "bytes": 8900,
+        "sha256": "4682c0cfa67c31a322c6c29bd50dd6184843cd5636c02fe6f98766724f1a7534",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/sistat-request.json",
+        "bytes": 253,
+        "sha256": "79152f24e7b36014a7711e61ab165e204fffda4efaecda45e3dec816bc71373b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-d282e62cf0209796/scope.json",
+        "bytes": 19188,
+        "sha256": "7456674ffc3ede4604fd243aaece1dbbb80868f5d3de08efa6868a8574f7884e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-d282e62cf0209796/slovenia-name-correction-candidates.csv",
+        "bytes": 15544,
+        "sha256": "ac6abb4d3d6f908b1fd958a8afc196447b23a9abb1527bf09cdb9530928340c7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-d282e62cf0209796/source/geoboundaries-9469f09/geoBoundaries-SVN-ADM1-metaData.json",
+        "bytes": 883,
+        "sha256": "23b633c5a6c851c2dac7a30fd317313546f20ac662c213917b3b95e905d7fbbb",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-d282e62cf0209796/source/geoboundaries-9469f09/geoBoundaries-SVN-ADM1.geojson",
+        "bytes": 4177,
+        "sha256": "2c75e262a75938c59908485eb01227e4f973fd5be307bf218dbefab3020d41b8",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-d282e62cf0209796/source/geoboundaries-9469f09/geoBoundaries-SVN-ADM2-metaData.json",
+        "bytes": 851,
+        "sha256": "ae1647ee586ac5460522c087c911c2c9a3176adc9a76c3b926b07fece7e1d2d1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-d282e62cf0209796/source/geoboundaries-9469f09/geoBoundaries-SVN-ADM2.geojson",
+        "bytes": 5188866,
+        "sha256": "b5e2bb260cd78a05e16a457d85cc3fce83b9ad7f65cbefc7feae6f4b836a97fe",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-d282e62cf0209796/source/gurs-municipal-boundaries.geojson",
+        "bytes": 13049219,
+        "sha256": "b74a49d83ce08363b1b43eae38a1900a985c610860ff443e20db712c28d26e1b",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-d282e62cf0209796/source/gurs-wfs-collections.json",
+        "bytes": 417486,
+        "sha256": "028f8c5dc424219d02da7291330689afd6570e8e55983ce35d1b958a92827cc2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-d282e62cf0209796/source/source-provenance.json",
+        "bytes": 15793,
+        "sha256": "67d39db1cb2f1c73f0106799c2a6f6c85443d7a548a09b6f0c5742778a2d4d74",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-d282e62cf0209796/unit-assessments.json",
+        "bytes": 563382,
+        "sha256": "98e3d72e5f497b71488e1a233a457d6be31e675de196e6ee7595b1e06a0529c1",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "3042d1278e87dae00c26924c339e940c9fba240e:data/regional-review/regional-review-d282e62cf0209796/scope.json": "7456674ffc3ede4604fd243aaece1dbbb80868f5d3de08efa6868a8574f7884e",
+      "3042d1278e87dae00c26924c339e940c9fba240e:data/regional-review/regional-review-d282e62cf0209796/unit-assessments.json": "98e3d72e5f497b71488e1a233a457d6be31e675de196e6ee7595b1e06a0529c1",
+      "3042d1278e87dae00c26924c339e940c9fba240e:data/regional-review/regional-review-d282e62cf0209796/slovenia-name-correction-candidates.csv": "ac6abb4d3d6f908b1fd958a8afc196447b23a9abb1527bf09cdb9530928340c7",
+      "3042d1278e87dae00c26924c339e940c9fba240e:data/regional-review/regional-review-d282e62cf0209796/source/gurs-municipal-boundaries.geojson": "b74a49d83ce08363b1b43eae38a1900a985c610860ff443e20db712c28d26e1b",
+      "3042d1278e87dae00c26924c339e940c9fba240e:data/regional-review/regional-review-d282e62cf0209796/source/gurs-wfs-collections.json": "028f8c5dc424219d02da7291330689afd6570e8e55983ce35d1b958a92827cc2",
+      "3042d1278e87dae00c26924c339e940c9fba240e:data/regional-review/regional-review-d282e62cf0209796/source/source-provenance.json": "67d39db1cb2f1c73f0106799c2a6f6c85443d7a548a09b6f0c5742778a2d4d74",
+      "3042d1278e87dae00c26924c339e940c9fba240e:data/geography/part-22.json": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3",
+      "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/2017-name-assessment.csv": "46ebdac5372a45cfc7e45d463be4a59e13364ae048f25551348a5c86a3bd056b",
+      "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/evidence-quality.json": "d8965117de641dbd5eeb0aa60f0f970e15cf5861e3d22147f068657787b27324",
+      "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/findings.md": "9b8d3af2fcd2e5d1db50441e48bb7f3bfdf9febda494780d6aae4fccc4029f8d",
+      "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/github-issue-contract.json": "7f2bfb0e72dd8a0d1a933ae6cc77bef1998bea1f2611c0f1fc51ce3fda63491f",
+      "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/pr-body.txt": "3d45a4f14820f2c2c6ef55bb47815620da445698eb2ba7a62c4a3a07307b2fd0",
+      "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/reproduction-summary.json": "9c4008d680aecbf0415aec88703b90a791a6f9eda6033b4e659816879e2de407",
+      "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/reproduction/reproduce-sistat-2017-roster.py": "83e441779f591079c31aa62d46fe532276df87bfd7514815725b99fd42bd62fd",
+      "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source-provenance.json": "e9292cda8e2bbac5a6033201e1feb138728c6068b62caa131327b4f853e9d8f8",
+      "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/gurs-obcine-h-53-codes-2017.json": "828455fec8aa86b9841670da1d00d0b02b8538ea5bc85c2067feba0912915805",
+      "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/gurs-obcine-h-request.json": "55dd678cdf939d51efecee9af4a309258cfc9e1469cf90fc6258f2807b1a5528",
+      "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/sistat-0214809S-2017-area.json": "4682c0cfa67c31a322c6c29bd50dd6184843cd5636c02fe6f98766724f1a7534",
+      "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/sistat-request.json": "79152f24e7b36014a7711e61ab165e204fffda4efaecda45e3dec816bc71373b"
+    },
+    "pin_files": {
+      "3042d1278e87dae00c26924c339e940c9fba240e:data/regional-review/regional-review-d282e62cf0209796/scope.json": "data/regional-review/regional-review-d282e62cf0209796/scope.json",
+      "3042d1278e87dae00c26924c339e940c9fba240e:data/regional-review/regional-review-d282e62cf0209796/unit-assessments.json": "data/regional-review/regional-review-d282e62cf0209796/unit-assessments.json",
+      "3042d1278e87dae00c26924c339e940c9fba240e:data/regional-review/regional-review-d282e62cf0209796/slovenia-name-correction-candidates.csv": "data/regional-review/regional-review-d282e62cf0209796/slovenia-name-correction-candidates.csv",
+      "3042d1278e87dae00c26924c339e940c9fba240e:data/regional-review/regional-review-d282e62cf0209796/source/gurs-municipal-boundaries.geojson": "data/regional-review/regional-review-d282e62cf0209796/source/gurs-municipal-boundaries.geojson",
+      "3042d1278e87dae00c26924c339e940c9fba240e:data/regional-review/regional-review-d282e62cf0209796/source/gurs-wfs-collections.json": "data/regional-review/regional-review-d282e62cf0209796/source/gurs-wfs-collections.json",
+      "3042d1278e87dae00c26924c339e940c9fba240e:data/regional-review/regional-review-d282e62cf0209796/source/source-provenance.json": "data/regional-review/regional-review-d282e62cf0209796/source/source-provenance.json",
+      "3042d1278e87dae00c26924c339e940c9fba240e:data/geography/part-22.json": "data/geography/part-22.json",
+      "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/2017-name-assessment.csv": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/2017-name-assessment.csv",
+      "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/evidence-quality.json": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/evidence-quality.json",
+      "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/findings.md": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/findings.md",
+      "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/github-issue-contract.json": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/github-issue-contract.json",
+      "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/pr-body.txt": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/pr-body.txt",
+      "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/reproduction-summary.json": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/reproduction-summary.json",
+      "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/reproduction/reproduce-sistat-2017-roster.py": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/reproduction/reproduce-sistat-2017-roster.py",
+      "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source-provenance.json": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source-provenance.json",
+      "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/gurs-obcine-h-53-codes-2017.json": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/gurs-obcine-h-53-codes-2017.json",
+      "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/gurs-obcine-h-request.json": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/gurs-obcine-h-request.json",
+      "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/sistat-0214809S-2017-area.json": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/sistat-0214809S-2017-area.json",
+      "7646e0962afab6cc4f566439bb2f96890ae4b91e:data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/sistat-request.json": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/sistat-request.json"
+    },
+    "subject_files": {
+      "gb:SVN:ADM2:79292919B14844764164504": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B19982075256158": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B22803518802899": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B24232853487661": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B24234918778023": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B27119869854741": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B27121964158679": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B29250597194434": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B30339441017456": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B31270316639781": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B34418813957407": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B36449465355430": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B36906673582366": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B37217694614402": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B37893156652188": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B39454020264245": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B40236159589403": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B41680562738857": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B41699436206095": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B41960414721213": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B43187654305214": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B4491351811803": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B4658103719865": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B47659572418488": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B50582380192051": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B51659604970826": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B51703506835671": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B52859595102923": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B53548294602396": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B54937293403521": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B550141556557": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B606741638743": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B61887521642572": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B63771260852336": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B64708895890629": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B66240323896523": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B6737679693048": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B69562863296028": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B71143168599957": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B72046348709828": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B72096121739234": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B72498543032792": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B74602913806737": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B76966153673191": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B80018774368860": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B85077344195583": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B88661184998894": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B90781452828589": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B92459471483438": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B95549890377821": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B98583397902155": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B98620751360041": "data/geography/part-22.json",
+      "gb:SVN:ADM2:79292919B99171533039052": "data/geography/part-22.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "retained-2017-geoboundaries",
+      "url": "https://github.com/geoBoundaries/geoBoundaries",
+      "role": "Retained 2017 SVN ADM2 polygons and metadata",
+      "vintage": "geoBoundaries 9469f095; boundaryYear 2017; ADM2; 213 declared units",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "ODbL 1.0"
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-d282e62cf0209796/source/geoboundaries-9469f09/geoBoundaries-SVN-ADM2-metaData.json",
+          "bytes": 851,
+          "sha256": "ae1647ee586ac5460522c087c911c2c9a3176adc9a76c3b926b07fece7e1d2d1",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "data/regional-review/regional-review-d282e62cf0209796/source/geoboundaries-9469f09/geoBoundaries-SVN-ADM2.geojson",
+          "bytes": 5188866,
+          "sha256": "b5e2bb260cd78a05e16a457d85cc3fce83b9ad7f65cbefc7feae6f4b836a97fe",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        }
+      ],
+      "limit": "ODbL 1.0; canonical boundary type unspecified; lineage only, no equivalence",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "retained-current-gurs",
+      "url": "https://ipi.eprostor.gov.si/wfs-si-gurs-rpe/ogc/collections",
+      "role": "Current GURS municipal polygon layer and WFS metadata",
+      "vintage": "Retrieved 2026-10-05; 212 units",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "GURS CC BY 4.0; cite GURS, data type and reference date"
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-d282e62cf0209796/source/gurs-municipal-boundaries.geojson",
+          "bytes": 13049219,
+          "sha256": "b74a49d83ce08363b1b43eae38a1900a985c610860ff443e20db712c28d26e1b",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "data/regional-review/regional-review-d282e62cf0209796/source/gurs-wfs-collections.json",
+          "bytes": 417486,
+          "sha256": "028f8c5dc424219d02da7291330689afd6570e8e55983ce35d1b958a92827cc2",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        }
+      ],
+      "limit": "Current native-code/name crosswalk only; not historical geometry",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "retained-gurs-history",
+      "url": "https://ipi.eprostor.gov.si/wfs-si-gurs-rpe/wfs",
+      "role": "GURS OBCINE_H historical municipality attributes for 53 codes",
+      "vintage": "Retrieved 2026-10-05; 899 returned features",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "GURS CC BY 4.0; cite GURS, data type and reference date"
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "files": [
+        {
+          "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/gurs-obcine-h-53-codes-2017.json",
+          "bytes": 311717,
+          "sha256": "828455fec8aa86b9841670da1d00d0b02b8538ea5bc85c2067feba0912915805",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/gurs-obcine-h-request.json",
+          "bytes": 1652,
+          "sha256": "55dd678cdf939d51efecee9af4a309258cfc9e1469cf90fc6258f2807b1a5528",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        }
+      ],
+      "limit": "Attributes and validity only; no historical polygons",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "retained-surs",
+      "url": "https://pxweb.stat.si/SiStatData/api/v1/en/Data/0214809S.px",
+      "role": "SURS table 0214809S dated municipality area observations",
+      "vintage": "2017H1 and 2017H2; retrieved 2026-10-05",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "SURS reuse with attribution; identify derived results"
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "files": [
+        {
+          "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/reproduction/reproduce-sistat-2017-roster.py",
+          "bytes": 7427,
+          "sha256": "83e441779f591079c31aa62d46fe532276df87bfd7514815725b99fd42bd62fd",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/sistat-0214809S-2017-area.json",
+          "bytes": 8900,
+          "sha256": "4682c0cfa67c31a322c6c29bd50dd6184843cd5636c02fe6f98766724f1a7534",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        },
+        {
+          "path": "data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/sistat-request.json",
+          "bytes": 253,
+          "sha256": "79152f24e7b36014a7711e61ab165e204fffda4efaecda45e3dec816bc71373b",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        }
+      ],
+      "limit": "Dated presence corroboration only; not boundary evidence",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "gurs-rpe-definition",
+      "url": "https://www.e-prostor.gov.si/podrocja/prostorske-enote-in-naslovi/register-prostorskih-enot/",
+      "role": "GURS definitions and types of registered spatial units",
+      "vintage": "checked 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Cited/paraphrased; source page not retained."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Reopen official GURS register of spatial units; checked 2026-10-06.",
+      "limit": "General unit classifications do not prove Atlas parents.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "gurs-history-notice",
+      "url": "https://www.e-prostor.gov.si/novica/register-prostorskih-enot-wfs-servisi-za-zgodovino-oziroma-spremembe/",
+      "role": "GURS notice on historical WFS services and municipality history",
+      "vintage": "checked 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Cited/paraphrased; source page not retained."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Reopen GURS notice dated 2024-01-11; checked 2026-10-06.",
+      "limit": "Describes historical service, not polygon validity.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "gurs-reuse-terms",
+      "url": "https://www.e-prostor.gov.si/dostopi/javni-dostop/",
+      "role": "GURS CC BY 4.0 public reuse terms",
+      "vintage": "checked 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Cited/paraphrased; source page not retained."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Reopen current GURS public access terms; checked 2026-10-06.",
+      "limit": "Attribution does not confer geographic approval.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "surs-reuse-terms",
+      "url": "https://www.stat.si/StatWeb/en/StaticPages/Index/Copyright",
+      "role": "SURS reuse terms",
+      "vintage": "checked 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Cited/paraphrased; source page not retained."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Reopen current SURS reuse terms; checked 2026-10-06.",
+      "limit": "Third-party rights are unaffected.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "zkn-article-130",
+      "url": "https://www.uradni-list.si/glasilo-uradni-list-rs/vsebina/2021-01-1047",
+      "role": "Slovenia Real Estate Cadastre Act Article 130 access distinctions",
+      "vintage": "checked 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Cited/paraphrased; source page not retained."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Reopen Official Gazette 54/2021 Article 130; checked 2026-10-06.",
+      "limit": "No legal determination; distinguish historical register data and archival documents.",
+      "temporal_status": "reference"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/controls/negative-control.json",
+      "bytes": 2051,
+      "sha256": "135243e4fd7197987ce0b87b20b55e6319038ec01771cf02ff348a4005e7ffbb",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/controls/positive-control.json",
+      "bytes": 450,
+      "sha256": "ec796e453c744802afead289b3368ed824dc66fe3eb13d5f4142fdd1f2c5e046",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/controls/reproducibility.json",
+      "bytes": 1519,
+      "sha256": "171be9920c2af85c7cef4cdb1c067e98279bd2552bd53a174e6b3d1da4d79ad5",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/findings.md",
+      "bytes": 8207,
+      "sha256": "66a2ddd118ac8c1f6e51f358ac546b7aab27a8f3bcd96c91fdeabdcd7b143e56",
+      "hash_kind": "file-bytes",
+      "role": "research-report"
+    },
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/github-issue-contract.json",
+      "bytes": 22374,
+      "sha256": "750f5780a17d7350c074481d319b451eb3824121c151ef97105ea5af0a21f99e",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/input-pins.json",
+      "bytes": 15427,
+      "sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "bytes": 9622,
+      "sha256": "ee3fafcb4ea71bd9be8cd2c14a37775d90bcf3035f456b094660271bc8400350",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/pr-body.txt",
+      "bytes": 889,
+      "sha256": "f84688d56c12b9df2c5a957867d3e768cec5eb8a352d3aba2b3bf822584e768e",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/reproduction/reproduce_immutable.py",
+      "bytes": 21095,
+      "sha256": "2b5f452e2a1fd5910bca8e9c91168632f32bf12f275d46c4d0a6d21211e6d0e1",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/reproduction/test_reproduce_immutable.py",
+      "bytes": 7878,
+      "sha256": "cd2a14882824300d2e89e127f4c5543615b4bb2f3aa4a31bf8705af425947fc7",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/vintages/2026-10-06-guard-v1/2017-name-assessment.csv",
+      "bytes": 28686,
+      "sha256": "46ebdac5372a45cfc7e45d463be4a59e13364ae048f25551348a5c86a3bd056b",
+      "hash_kind": "file-bytes",
+      "role": "generated-table"
+    },
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/vintages/2026-10-06-guard-v1/reproduction-summary.json",
+      "bytes": 3807,
+      "sha256": "9c4008d680aecbf0415aec88703b90a791a6f9eda6033b4e659816879e2de407",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/vintages/2026-10-06-guard-v1/territorial-context.json",
+      "bytes": 63011,
+      "sha256": "2ded2e07207d69ecc6a9121f3b1c2115c433a38a509afa0a675ef21f0cb4db9a",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/controls/code-pin-v2/negative-control.json",
+      "bytes": 2050,
+      "sha256": "860691f92801da8024ea81b5b94392781b0b98808b605b4af8ec604523d82aee",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/controls/code-pin-v2/positive-control.json",
+      "bytes": 450,
+      "sha256": "ec796e453c744802afead289b3368ed824dc66fe3eb13d5f4142fdd1f2c5e046",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/controls/code-pin-v2/reproducibility.json",
+      "bytes": 1519,
+      "sha256": "ddd84fe90594c1470a41f6b7ca5a022719c7f988a62712a71673335a0f84bb56",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    }
+  ],
+  "methods": [
+    {
+      "id": "slovenia-history-reproduction",
+      "kind": "generator",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "description": "Verify every immutable input and source correspondence before generation; reproduce preserved historical-name output to a new exclusive vintage and attach bounded territorial context.",
+      "software": "Python 3.12.14, Git, SHA-256",
+      "units": "native municipality codes, names, effective dates and exact bytes"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "surs-h1-121",
+      "value": 60.4,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-205",
+      "value": 38.1,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-033",
+      "value": 58.2,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-134",
+      "value": 103.2,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-054",
+      "value": 286.5,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-001",
+      "value": 245.2,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-118",
+      "value": 65.0,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-169",
+      "value": 12.5,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-115",
+      "value": 34.0,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-146",
+      "value": 163.7,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-119",
+      "value": 96.0,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-190",
+      "value": 117.1,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-125",
+      "value": 18.2,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-106",
+      "value": 71.5,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-126",
+      "value": 95.6,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-015",
+      "value": 33.7,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-123",
+      "value": 43.3,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-194",
+      "value": 94.9,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-111",
+      "value": 217.4,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-010",
+      "value": 38.8,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-203",
+      "value": 28.5,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-120",
+      "value": 222.3,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-127",
+      "value": 28.1,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-116",
+      "value": 51.3,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-192",
+      "value": 42.6,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-057",
+      "value": 197.5,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-023",
+      "value": 72.3,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-042",
+      "value": 36.3,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-028",
+      "value": 29.1,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-108",
+      "value": 60.8,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-147",
+      "value": 49.2,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-103",
+      "value": 63.4,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-087",
+      "value": 141.6,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-105",
+      "value": 40.1,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-176",
+      "value": 9.8,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-182",
+      "value": 17.6,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-069",
+      "value": 72.8,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-166",
+      "value": 46.2,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-132",
+      "value": 23.8,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-202",
+      "value": 32.7,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-117",
+      "value": 40.3,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-124",
+      "value": 107.7,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-016",
+      "value": 156.0,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-191",
+      "value": 38.0,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-188",
+      "value": 12.0,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-206",
+      "value": 34.2,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-179",
+      "value": 49.5,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-183",
+      "value": 14.9,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-072",
+      "value": 22.4,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-122",
+      "value": 146.0,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-131",
+      "value": 155.4,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-009",
+      "value": 268.1,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    },
+    {
+      "id": "surs-h1-193",
+      "value": 164.3,
+      "unit": "km2",
+      "vintage": "baseline",
+      "input_sha256": "589bf98315fdb86bc432f1b6c99a52225a3d1dc6b2f941d8255d0ed44b068a05",
+      "evaluation_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "surs-h1-121",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/0/value"
+    },
+    {
+      "metric_id": "surs-h1-205",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/1/value"
+    },
+    {
+      "metric_id": "surs-h1-033",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/2/value"
+    },
+    {
+      "metric_id": "surs-h1-134",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/3/value"
+    },
+    {
+      "metric_id": "surs-h1-054",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/4/value"
+    },
+    {
+      "metric_id": "surs-h1-001",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/5/value"
+    },
+    {
+      "metric_id": "surs-h1-118",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/6/value"
+    },
+    {
+      "metric_id": "surs-h1-169",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/7/value"
+    },
+    {
+      "metric_id": "surs-h1-115",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/8/value"
+    },
+    {
+      "metric_id": "surs-h1-146",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/9/value"
+    },
+    {
+      "metric_id": "surs-h1-119",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/10/value"
+    },
+    {
+      "metric_id": "surs-h1-190",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/11/value"
+    },
+    {
+      "metric_id": "surs-h1-125",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/12/value"
+    },
+    {
+      "metric_id": "surs-h1-106",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/13/value"
+    },
+    {
+      "metric_id": "surs-h1-126",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/14/value"
+    },
+    {
+      "metric_id": "surs-h1-015",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/15/value"
+    },
+    {
+      "metric_id": "surs-h1-123",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/16/value"
+    },
+    {
+      "metric_id": "surs-h1-194",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/17/value"
+    },
+    {
+      "metric_id": "surs-h1-111",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/18/value"
+    },
+    {
+      "metric_id": "surs-h1-010",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/19/value"
+    },
+    {
+      "metric_id": "surs-h1-203",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/20/value"
+    },
+    {
+      "metric_id": "surs-h1-120",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/21/value"
+    },
+    {
+      "metric_id": "surs-h1-127",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/22/value"
+    },
+    {
+      "metric_id": "surs-h1-116",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/23/value"
+    },
+    {
+      "metric_id": "surs-h1-192",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/24/value"
+    },
+    {
+      "metric_id": "surs-h1-057",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/25/value"
+    },
+    {
+      "metric_id": "surs-h1-023",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/26/value"
+    },
+    {
+      "metric_id": "surs-h1-042",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/27/value"
+    },
+    {
+      "metric_id": "surs-h1-028",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/28/value"
+    },
+    {
+      "metric_id": "surs-h1-108",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/29/value"
+    },
+    {
+      "metric_id": "surs-h1-147",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/30/value"
+    },
+    {
+      "metric_id": "surs-h1-103",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/31/value"
+    },
+    {
+      "metric_id": "surs-h1-087",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/32/value"
+    },
+    {
+      "metric_id": "surs-h1-105",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/33/value"
+    },
+    {
+      "metric_id": "surs-h1-176",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/34/value"
+    },
+    {
+      "metric_id": "surs-h1-182",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/35/value"
+    },
+    {
+      "metric_id": "surs-h1-069",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/36/value"
+    },
+    {
+      "metric_id": "surs-h1-166",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/37/value"
+    },
+    {
+      "metric_id": "surs-h1-132",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/38/value"
+    },
+    {
+      "metric_id": "surs-h1-202",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/39/value"
+    },
+    {
+      "metric_id": "surs-h1-117",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/40/value"
+    },
+    {
+      "metric_id": "surs-h1-124",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/41/value"
+    },
+    {
+      "metric_id": "surs-h1-016",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/42/value"
+    },
+    {
+      "metric_id": "surs-h1-191",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/43/value"
+    },
+    {
+      "metric_id": "surs-h1-188",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/44/value"
+    },
+    {
+      "metric_id": "surs-h1-206",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/45/value"
+    },
+    {
+      "metric_id": "surs-h1-179",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/46/value"
+    },
+    {
+      "metric_id": "surs-h1-183",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/47/value"
+    },
+    {
+      "metric_id": "surs-h1-072",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/48/value"
+    },
+    {
+      "metric_id": "surs-h1-122",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/49/value"
+    },
+    {
+      "metric_id": "surs-h1-131",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/50/value"
+    },
+    {
+      "metric_id": "surs-h1-009",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/51/value"
+    },
+    {
+      "metric_id": "surs-h1-193",
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "json_pointer": "/metrics/52/value"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "All 53 exact scoped IDs reproduce dated GURS name joins at both requested 2017 dates; original report bytes are reproduced exactly. These findings do not authenticate locale policy, historical geometry, parent assignments or complete regional boundaries.",
+      "status": "supported",
+      "source_ids": [
+        "retained-gurs-history",
+        "retained-2017-geoboundaries",
+        "retained-current-gurs",
+        "retained-surs"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3.12 data/regional-review/slovenia-history-reproduction-1016-erratum/reproduction/test_reproduce_immutable.py",
+    "node scripts/evidence-quality.mjs data/regional-review/slovenia-history-reproduction-1016-erratum/evidence-quality.json"
+  ],
+  "validation": [
+    {
+      "method_id": "slovenia-history-reproduction",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/slovenia-history-reproduction-1016-erratum/controls/code-pin-v2/positive-control.json"
+    },
+    {
+      "method_id": "slovenia-history-reproduction",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/slovenia-history-reproduction-1016-erratum/controls/code-pin-v2/negative-control.json"
+    },
+    {
+      "method_id": "slovenia-history-reproduction",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/slovenia-history-reproduction-1016-erratum/controls/code-pin-v2/reproducibility.json"
+    }
+  ],
+  "rendered_tables": [
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/vintages/2026-10-06-guard-v1/2017-name-assessment.csv",
+      "rows": [
+        {
+          "metric_id": "surs-h1-121",
+          "line": 2,
+          "template": "gb:SVN:ADM2:79292919B14844764164504,79292919B14844764164504,Ckocjan,121,Ckocjan,Škocjan,Škocjan,2026-09-15T10:57:55Z,{value},60.4,supported-by-2017-statistical-series,Škocjan,OBCINE_H.OBCINE_H.10000003565,Škocjan,OBCINE_H.OBCINE_H.10000003565,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-205",
+          "line": 3,
+          "template": "gb:SVN:ADM2:79292919B19982075256158,79292919B19982075256158,Sveti Tomaa,205,Sveti Tomaa,Sveti Tomaž,Sveti Tomaž,2026-09-30T09:45:05Z,{value},38.1,supported-by-2017-statistical-series,Sveti Tomaž,OBCINE_H.OBCINE_H.10000004125,Sveti Tomaž,OBCINE_H.OBCINE_H.10000004125,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-033",
+          "line": 4,
+          "template": "gb:SVN:ADM2:79292919B22803518802899,79292919B22803518802899,Kalovci,033,Kalovci,Šalovci,Šalovci,2025-10-02T18:06:46Z,{value},58.2,supported-by-2017-statistical-series,Šalovci,OBCINE_H.OBCINE_H.10000003241,Šalovci,OBCINE_H.OBCINE_H.10000003241,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-134",
+          "line": 5,
+          "template": "gb:SVN:ADM2:79292919B24232853487661,79292919B24232853487661,Velike La,134,Velike La,Velike Lašče,Velike Lašče,2026-09-11T10:38:48Z,{value},103.2,supported-by-2017-statistical-series,Velike Lašče,OBCINE_H.OBCINE_H.10000003642,Velike Lašče,OBCINE_H.OBCINE_H.10000003642,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-054",
+          "line": 6,
+          "template": "gb:SVN:ADM2:79292919B24234918778023,79292919B24234918778023,Krcko,054,Krcko,Krško,Krško,2026-09-15T10:57:55Z,{value},286.5,supported-by-2017-statistical-series,Krško,OBCINE_H.OBCINE_H.10000003303,Krško,OBCINE_H.OBCINE_H.10000003303,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-001",
+          "line": 7,
+          "template": "gb:SVN:ADM2:79292919B27119869854741,79292919B27119869854741,Ajdovtcina,001,Ajdovtcina,Ajdovščina,Ajdovščina,2025-12-05T09:38:07Z,{value},245.2,supported-by-2017-statistical-series,Ajdovščina,OBCINE_H.OBCINE_H.10000003090,Ajdovščina,OBCINE_H.OBCINE_H.10000003090,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-118",
+          "line": 8,
+          "template": "gb:SVN:ADM2:79292919B27121964158679,79292919B27121964158679,Pentilj,118,Pentilj,Šentilj,Šentilj,2026-06-03T16:26:54Z,{value},65,supported-by-2017-statistical-series,Šentilj,OBCINE_H.OBCINE_H.10000003542,Šentilj,OBCINE_H.OBCINE_H.10000003543,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 0,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-169",
+          "line": 9,
+          "template": "gb:SVN:ADM2:79292919B29250597194434,79292919B29250597194434,Miklavl na Dravskem polju,169,Miklavl na Dravskem polju,Miklavž na Dravskem polju,Miklavž na Dravskem polju,2025-10-30T09:21:10Z,{value},12.5,supported-by-2017-statistical-series,Miklavž na Dravskem polju,OBCINE_H.OBCINE_H.10000004058,Miklavž na Dravskem polju,OBCINE_H.OBCINE_H.10000004058,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-115",
+          "line": 10,
+          "template": "gb:SVN:ADM2:79292919B30339441017456,79292919B30339441017456,Star-e,115,Star-e,Starše,Starše,2025-10-02T18:06:46Z,{value},34,supported-by-2017-statistical-series,Starše,OBCINE_H.OBCINE_H.10000003523,Starše,OBCINE_H.OBCINE_H.10000003523,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 0,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-146",
+          "line": 11,
+          "template": "gb:SVN:ADM2:79292919B31270316639781,79292919B31270316639781,Gelezniki,146,Gelezniki,Železniki,Železniki,2026-09-16T09:52:14Z,{value},163.7,supported-by-2017-statistical-series,Železniki,OBCINE_H.OBCINE_H.10000003907,Železniki,OBCINE_H.OBCINE_H.10000003907,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-119",
+          "line": 12,
+          "template": "gb:SVN:ADM2:79292919B34418813957407,79292919B34418813957407,Centjernej,119,Centjernej,Šentjernej,Šentjernej,2026-07-10T10:54:41Z,{value},96,supported-by-2017-statistical-series,Šentjernej,OBCINE_H.OBCINE_H.10000005872,Šentjernej,OBCINE_H.OBCINE_H.10000005872,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 0,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-190",
+          "line": 13,
+          "template": "gb:SVN:ADM2:79292919B36449465355430,79292919B36449465355430,Valec,190,Valec,Žalec,Žalec,2026-07-02T11:04:20Z,{value},117.1,supported-by-2017-statistical-series,Žalec,OBCINE_H.OBCINE_H.10000004099,Žalec,OBCINE_H.OBCINE_H.10000004100,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-125",
+          "line": 14,
+          "template": "gb:SVN:ADM2:79292919B36906673582366,79292919B36906673582366,Vmartno ob Paki,125,Vmartno ob Paki,Šmartno ob Paki,Šmartno ob Paki,2026-02-18T12:02:20Z,{value},18.2,supported-by-2017-statistical-series,Šmartno ob Paki,OBCINE_H.OBCINE_H.10000003591,Šmartno ob Paki,OBCINE_H.OBCINE_H.10000003591,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-106",
+          "line": 15,
+          "template": "gb:SVN:ADM2:79292919B37217694614402,79292919B37217694614402,Rogatka Slatina,106,Rogatka Slatina,Rogaška Slatina,Rogaška Slatina,2026-09-07T12:17:47Z,{value},71.5,supported-by-2017-statistical-series,Rogaška Slatina,OBCINE_H.OBCINE_H.10000003470,Rogaška Slatina,OBCINE_H.OBCINE_H.10000003470,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-126",
+          "line": 16,
+          "template": "gb:SVN:ADM2:79292919B37893156652188,79292919B37893156652188,Voatanj,126,Voatanj,Šoštanj,Šoštanj,2026-10-05T14:32:29Z,{value},95.6,supported-by-2017-statistical-series,Šoštanj,OBCINE_H.OBCINE_H.10000003595,Šoštanj,OBCINE_H.OBCINE_H.10000003595,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-015",
+          "line": 17,
+          "template": "gb:SVN:ADM2:79292919B39454020264245,79292919B39454020264245,Crencovci,015,Crencovci,Črenšovci,Črenšovci,2026-06-22T10:08:11Z,{value},33.7,supported-by-2017-statistical-series,Črenšovci,OBCINE_H.OBCINE_H.10000003143,Črenšovci,OBCINE_H.OBCINE_H.10000003143,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-123",
+          "line": 18,
+          "template": "gb:SVN:ADM2:79292919B40236159589403,79292919B40236159589403,Ikofljica,123,Ikofljica,Škofljica,Škofljica,2026-08-17T09:29:06Z,{value},43.3,supported-by-2017-statistical-series,Škofljica,OBCINE_H.OBCINE_H.10000003579,Škofljica,OBCINE_H.OBCINE_H.10000003579,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-194",
+          "line": 19,
+          "template": "gb:SVN:ADM2:79292919B41680562738857,79292919B41680562738857,Rmartno pri Litiji,194,Rmartno pri Litiji,Šmartno pri Litiji,Šmartno pri Litiji,2026-07-27T08:55:59Z,{value},94.9,supported-by-2017-statistical-series,Šmartno pri Litiji,OBCINE_H.OBCINE_H.10000004111,Šmartno pri Litiji,OBCINE_H.OBCINE_H.10000004111,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-111",
+          "line": 20,
+          "template": "gb:SVN:ADM2:79292919B41699436206095,79292919B41699436206095,Senana,111,Senana,Sežana,Sežana,2026-09-30T10:02:04Z,{value},217.4,supported-by-2017-statistical-series,Sežana,OBCINE_H.OBCINE_H.10000003490,Sežana,OBCINE_H.OBCINE_H.10000003490,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-010",
+          "line": 21,
+          "template": "gb:SVN:ADM2:79292919B41960414721213,79292919B41960414721213,Tigina,010,Tigina,Tišina,Tišina,2026-09-22T09:49:47Z,{value},38.8,supported-by-2017-statistical-series,Tišina,OBCINE_H.OBCINE_H.10000003119,Tišina,OBCINE_H.OBCINE_H.10000003119,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-203",
+          "line": 22,
+          "template": "gb:SVN:ADM2:79292919B43187654305214,79292919B43187654305214,Straca,203,Straca,Straža,Straža,2025-10-28T12:24:02Z,{value},28.5,supported-by-2017-statistical-series,Straža,OBCINE_H.OBCINE_H.10000004118,Straža,OBCINE_H.OBCINE_H.10000004118,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-120",
+          "line": 23,
+          "template": "gb:SVN:ADM2:79292919B4491351811803,79292919B4491351811803,Lentjur,120,Lentjur,Šentjur,Šentjur,2026-06-29T07:31:02Z,{value},222.2,supported-by-2017-statistical-series,Šentjur,OBCINE_H.OBCINE_H.10000003551,Šentjur,OBCINE_H.OBCINE_H.10000003554,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-127",
+          "line": 24,
+          "template": "gb:SVN:ADM2:79292919B4658103719865,79292919B4658103719865,Ltore,127,Ltore,Štore,Štore,2026-05-27T08:49:43Z,{value},28.1,supported-by-2017-statistical-series,Štore,OBCINE_H.OBCINE_H.10000003597,Štore,OBCINE_H.OBCINE_H.10000003597,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-116",
+          "line": 25,
+          "template": "gb:SVN:ADM2:79292919B47659572418488,79292919B47659572418488,Sveti Jurij ob lcavnici,116,Sveti Jurij ob lcavnici,Sveti Jurij ob Ščavnici,Sveti Jurij ob Ščavnici,2026-06-30T10:27:09Z,{value},51.3,supported-by-2017-statistical-series,Sveti Jurij ob Ščavnici,OBCINE_H.OBCINE_H.10000003529,Sveti Jurij ob Ščavnici,OBCINE_H.OBCINE_H.10000003529,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-192",
+          "line": 26,
+          "template": "gb:SVN:ADM2:79292919B50582380192051,79292919B50582380192051,Tirovnica,192,Tirovnica,Žirovnica,Žirovnica,2025-10-02T18:06:46Z,{value},42.6,supported-by-2017-statistical-series,Žirovnica,OBCINE_H.OBCINE_H.10000004095,Žirovnica,OBCINE_H.OBCINE_H.10000004095,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-057",
+          "line": 27,
+          "template": "gb:SVN:ADM2:79292919B51659604970826,79292919B51659604970826,Labko,057,Labko,Laško,Laško,2026-10-02T08:18:41Z,{value},197.5,supported-by-2017-statistical-series,Laško,OBCINE_H.OBCINE_H.10000003732,Laško,OBCINE_H.OBCINE_H.10000003732,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-023",
+          "line": 28,
+          "template": "gb:SVN:ADM2:79292919B51703506835671,79292919B51703506835671,Domcale,023,Domcale,Domžale,Domžale,2026-07-20T07:35:46Z,{value},72.3,supported-by-2017-statistical-series,Domžale,OBCINE_H.OBCINE_H.10000003182,Domžale,OBCINE_H.OBCINE_H.10000003182,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-042",
+          "line": 29,
+          "template": "gb:SVN:ADM2:79292919B52859595102923,79292919B52859595102923,Jurkinci,042,Jurkinci,Juršinci,Juršinci,2026-08-13T08:48:08Z,{value},36.3,supported-by-2017-statistical-series,Juršinci,OBCINE_H.OBCINE_H.10000003271,Juršinci,OBCINE_H.OBCINE_H.10000003271,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-028",
+          "line": 30,
+          "template": "gb:SVN:ADM2:79292919B53548294602396,79292919B53548294602396,Goriunica,028,Goriunica,Gorišnica,Gorišnica,2026-09-21T08:02:30Z,{value},29.1,supported-by-2017-statistical-series,Gorišnica,OBCINE_H.OBCINE_H.10000003224,Gorišnica,OBCINE_H.OBCINE_H.10000003224,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-108",
+          "line": 31,
+          "template": "gb:SVN:ADM2:79292919B54937293403521,79292919B54937293403521,Rube,108,Rube,Ruše,Ruše,2026-04-07T11:29:29Z,{value},60.8,supported-by-2017-statistical-series,Ruše,OBCINE_H.OBCINE_H.10000003476,Ruše,OBCINE_H.OBCINE_H.10000003476,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-147",
+          "line": 32,
+          "template": "gb:SVN:ADM2:79292919B550141556557,79292919B550141556557,Siri,147,Siri,Žiri,Žiri,2026-07-28T07:22:47Z,{value},49.2,supported-by-2017-statistical-series,Žiri,OBCINE_H.OBCINE_H.10000003689,Žiri,OBCINE_H.OBCINE_H.10000003689,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-103",
+          "line": 33,
+          "template": "gb:SVN:ADM2:79292919B606741638743,79292919B606741638743,Ravne na Korokkem,103,Ravne na Korokkem,Ravne na Koroškem,Ravne na Koroškem,2026-02-19T07:14:42Z,{value},63.4,supported-by-2017-statistical-series,Ravne na Koroškem,OBCINE_H.OBCINE_H.10000003461,Ravne na Koroškem,OBCINE_H.OBCINE_H.10000003461,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-087",
+          "line": 34,
+          "template": "gb:SVN:ADM2:79292919B61887521642572,79292919B61887521642572,Ormo,087,Ormo,Ormož,Ormož,2026-07-14T08:54:34Z,{value},141.6,supported-by-2017-statistical-series,Ormož,OBCINE_H.OBCINE_H.10000003413,Ormož,OBCINE_H.OBCINE_H.10000003413,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-105",
+          "line": 35,
+          "template": "gb:SVN:ADM2:79292919B63771260852336,79292919B63771260852336,Rogaoovci,105,Rogaoovci,Rogašovci,Rogašovci,2025-11-10T14:07:06Z,{value},40.1,supported-by-2017-statistical-series,Rogašovci,OBCINE_H.OBCINE_H.10000005868,Rogašovci,OBCINE_H.OBCINE_H.10000005868,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-176",
+          "line": 36,
+          "template": "gb:SVN:ADM2:79292919B64708895890629,79292919B64708895890629,Razkrirje,176,Razkrirje,Razkrižje,Razkrižje,2026-07-27T14:35:10Z,{value},9.8,supported-by-2017-statistical-series,Razkrižje,OBCINE_H.OBCINE_H.10000004011,Razkrižje,OBCINE_H.OBCINE_H.10000004011,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-182",
+          "line": 37,
+          "template": "gb:SVN:ADM2:79292919B66240323896523,79292919B66240323896523,Sveti Andrac v Slov. goricah,182,Sveti Andrac v Slov. goricah,Sveti Andraž v Slov. goricah,Sveti Andraž v Slov. goricah,2026-08-13T08:48:08Z,{value},17.6,supported-by-2017-statistical-series,Sveti Andraž v Slov. goricah,OBCINE_H.OBCINE_H.10000004083,Sveti Andraž v Slov. goricah,OBCINE_H.OBCINE_H.10000004083,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-069",
+          "line": 38,
+          "template": "gb:SVN:ADM2:79292919B6737679693048,79292919B6737679693048,Majrperk,069,Majrperk,Majšperk,Majšperk,2026-09-01T13:53:45Z,{value},72.8,supported-by-2017-statistical-series,Majšperk,OBCINE_H.OBCINE_H.10000003364,Majšperk,OBCINE_H.OBCINE_H.10000003364,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-166",
+          "line": 39,
+          "template": "gb:SVN:ADM2:79292919B69562863296028,79292919B69562863296028,Kritevci,166,Kritevci,Križevci,Križevci,2026-07-28T09:00:51Z,{value},46.2,supported-by-2017-statistical-series,Križevci,OBCINE_H.OBCINE_H.10000003970,Križevci,OBCINE_H.OBCINE_H.10000003970,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-132",
+          "line": 40,
+          "template": "gb:SVN:ADM2:79292919B71143168599957,79292919B71143168599957,Turnicce,132,Turnicce,Turnišče,Turnišče,2025-10-02T18:06:46Z,{value},23.8,supported-by-2017-statistical-series,Turnišče,OBCINE_H.OBCINE_H.10000003629,Turnišče,OBCINE_H.OBCINE_H.10000003629,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-202",
+          "line": 41,
+          "template": "gb:SVN:ADM2:79292919B72046348709828,79292919B72046348709828,Sredikce ob Dravi,202,Sredikce ob Dravi,Središče ob Dravi,Središče ob Dravi,2026-06-01T08:16:06Z,{value},32.7,supported-by-2017-statistical-series,Središče ob Dravi,OBCINE_H.OBCINE_H.10000004116,Središče ob Dravi,OBCINE_H.OBCINE_H.10000004116,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-117",
+          "line": 42,
+          "template": "gb:SVN:ADM2:79292919B72096121739234,79292919B72096121739234,Vencur,117,Vencur,Šenčur,Šenčur,2026-07-17T12:23:57Z,{value},40.3,supported-by-2017-statistical-series,Šenčur,OBCINE_H.OBCINE_H.10000005531,Šenčur,OBCINE_H.OBCINE_H.10000005531,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-124",
+          "line": 43,
+          "template": "gb:SVN:ADM2:79292919B72498543032792,79292919B72498543032792,Lmarje pri Jelcah,124,Lmarje pri Jelcah,Šmarje pri Jelšah,Šmarje pri Jelšah,2026-09-07T12:17:47Z,{value},107.7,supported-by-2017-statistical-series,Šmarje pri Jelšah,OBCINE_H.OBCINE_H.10000003584,Šmarje pri Jelšah,OBCINE_H.OBCINE_H.10000003587,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-016",
+          "line": 44,
+          "template": "gb:SVN:ADM2:79292919B74602913806737,79292919B74602913806737,Crna na Koroakem,016,Crna na Koroakem,Črna na Koroškem,Črna na Koroškem,2026-03-17T11:21:50Z,{value},156,supported-by-2017-statistical-series,Črna na Koroškem,OBCINE_H.OBCINE_H.10000003146,Črna na Koroškem,OBCINE_H.OBCINE_H.10000003146,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 0,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-191",
+          "line": 45,
+          "template": "gb:SVN:ADM2:79292919B76966153673191,79292919B76966153673191,Cetale,191,Cetale,Žetale,Žetale,2025-10-02T18:06:46Z,{value},38,supported-by-2017-statistical-series,Žetale,OBCINE_H.OBCINE_H.10000004043,Žetale,OBCINE_H.OBCINE_H.10000004043,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 0,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-188",
+          "line": 46,
+          "template": "gb:SVN:ADM2:79292919B80018774368860,79292919B80018774368860,Vertej,188,Vertej,Veržej,Veržej,2026-05-07T08:18:52Z,{value},12,supported-by-2017-statistical-series,Veržej,OBCINE_H.OBCINE_H.10000004039,Veržej,OBCINE_H.OBCINE_H.10000004039,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 0,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-206",
+          "line": 47,
+          "template": "gb:SVN:ADM2:79292919B85077344195583,79292919B85077344195583,Smarjepke Toplice,206,Smarjepke Toplice,Šmarješke Toplice,Šmarješke Toplice,2026-09-15T10:14:22Z,{value},34.2,supported-by-2017-statistical-series,Šmarješke Toplice,OBCINE_H.OBCINE_H.10000004126,Šmarješke Toplice,OBCINE_H.OBCINE_H.10000004126,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-179",
+          "line": 48,
+          "template": "gb:SVN:ADM2:79292919B88661184998894,79292919B88661184998894,Sodracica,179,Sodracica,Sodražica,Sodražica,2026-05-04T08:56:17Z,{value},49.5,supported-by-2017-statistical-series,Sodražica,OBCINE_H.OBCINE_H.10000004077,Sodražica,OBCINE_H.OBCINE_H.10000004077,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-183",
+          "line": 49,
+          "template": "gb:SVN:ADM2:79292919B90781452828589,79292919B90781452828589,Nempeter-Vrtojba,183,Nempeter-Vrtojba,Šempeter-Vrtojba,Šempeter - Vrtojba,2026-09-14T10:46:25Z,{value},14.9,supported-by-2017-statistical-series,Šempeter-Vrtojba,OBCINE_H.OBCINE_H.10000005895,Šempeter-Vrtojba,OBCINE_H.OBCINE_H.10000005895,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-072",
+          "line": 50,
+          "template": "gb:SVN:ADM2:79292919B92459471483438,79292919B92459471483438,Mengel,072,Mengel,Mengeš,Mengeš,2026-06-11T08:45:23Z,{value},22.4,supported-by-2017-statistical-series,Mengeš,OBCINE_H.OBCINE_H.10000003369,Mengeš,OBCINE_H.OBCINE_H.10000003369,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-122",
+          "line": 51,
+          "template": "gb:SVN:ADM2:79292919B95549890377821,79292919B95549890377821,Mkofja Loka,122,Mkofja Loka,Škofja Loka,Škofja Loka,2026-09-16T09:52:14Z,{value},146,supported-by-2017-statistical-series,Škofja Loka,OBCINE_H.OBCINE_H.10000003571,Škofja Loka,OBCINE_H.OBCINE_H.10000003571,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 0,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-131",
+          "line": 52,
+          "template": "gb:SVN:ADM2:79292919B98583397902155,79292919B98583397902155,Trsic,131,Trsic,Tržič,Tržič,2026-09-08T12:32:00Z,{value},155.4,supported-by-2017-statistical-series,Tržič,OBCINE_H.OBCINE_H.10000005879,Tržič,OBCINE_H.OBCINE_H.10000005879,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-009",
+          "line": 53,
+          "template": "gb:SVN:ADM2:79292919B98620751360041,79292919B98620751360041,Bretice,009,Bretice,Brežice,Brežice,2026-09-08T09:50:38Z,{value},268.1,supported-by-2017-statistical-series,Brežice,OBCINE_H.OBCINE_H.10000003116,Brežice,OBCINE_H.OBCINE_H.10000003116,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        },
+        {
+          "metric_id": "surs-h1-193",
+          "line": 54,
+          "template": "gb:SVN:ADM2:79292919B99171533039052,79292919B99171533039052,Suremberk,193,Suremberk,Žužemberk,Žužemberk,2025-10-02T18:06:46Z,{value},164.3,supported-by-2017-statistical-series,Žužemberk,OBCINE_H.OBCINE_H.10000004045,Žužemberk,OBCINE_H.OBCINE_H.10000004045,True,True,False,verified-from-GURS-OBCINE_H-effective-interval,\"For approved official-Slovene display policy, replace Atlas reference spelling with this dated official name; preserve stable ID and old source spelling as alias/provenance pending source-lineage review.\"",
+          "decimals": 1,
+          "scale": 1
+        }
+      ]
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/controls/code-pin-v2/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/controls/code-pin-v2/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/controls/code-pin-v2/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/controls/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/controls/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/controls/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/findings.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/github-issue-contract.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/input-pins.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/metric-ledger.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/pr-body.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/reproduction/reproduce_immutable.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/reproduction/test_reproduce_immutable.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/vintages/2026-10-06-guard-v1/2017-name-assessment.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/vintages/2026-10-06-guard-v1/reproduction-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/vintages/2026-10-06-guard-v1/territorial-context.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/slovenia-history-reproduction-1016-erratum/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}

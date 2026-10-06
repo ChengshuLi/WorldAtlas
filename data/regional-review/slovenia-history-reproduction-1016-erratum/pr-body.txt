@@ -1,0 +1,7 @@
+Add immutable, exclusive reproduction for Slovenia #1185
+
+Adds a guarded reproducer for the exact 53 historical-name subjects, pins all 19 issue inputs plus four retained source/parent context files, rejects full-input/name-roster/code drift before generation, and writes only a fresh exclusive version directory. Two runs reproduce the original CSV and summary byte-for-byte. Sentinel controls prove existing and interrupted outputs are preserved.
+
+The retained GURS 2017 name/validity source supports all 53 municipalities at both requested reference dates. The added context records source vintage/level/license, current GURS code matches, parent assignments and explicit boundary/completeness limits. It does not approve those parents, infer historical polygon equivalence, decide Atlas display locale, edit canonical geography, or authorize regional publication/import.
+
+Closes #1185

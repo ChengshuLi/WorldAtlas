@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "issue": 1185,
+  "method_id": "slovenia-history-reproduction",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "source_name_drift": {
+    "field": "NAZIV",
+    "municipality_code": "121",
+    "synthetic_value": "Auditor synthetic historical name",
+    "fixture_bytes": 311743,
+    "fixture_sha256": "21ce54a6565340d80d2916da180a85b326e27dc8995713452e2c44cac403c836",
+    "rejected_before_output": true,
+    "error": "Whole-file input pin mismatch: data/regional-review/followup-yugoslavia-423-slovenia-names-20261005/source/gurs-obcine-h-53-codes-2017.json"
+  },
+  "exact_subject_roster_drift": {
+    "field": "location_id",
+    "fixture_bytes": 15545,
+    "fixture_sha256": "a527c9fac4209170d29df554194c0362063cf57fa12908c6a2b88c7b1223aae9",
+    "rejected_before_output": true,
+    "error": "Whole-file input pin mismatch: data/regional-review/regional-review-d282e62cf0209796/slovenia-name-correction-candidates.csv"
+  },
+  "runner_code_drift": {
+    "rejected_before_output": true,
+    "error": "Runner canonical code pin mismatch"
+  },
+  "existing_destination_and_interrupted_partial": {
+    "rejected_before_write": true,
+    "sentinel_sha256": [
+      "b0577012bfe822ad8a3ad55972f710697a888061eb3a0dcf6678f1b2332fb12b",
+      "d38d58c7b099bc9f4d794010d091bf746570be3c547e834924112c4bdc147e37"
+    ],
+    "errors": [
+      "Destination already exists; preserved unchanged: /Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/data/regional-review/slovenia-history-reproduction-1016-erratum/vintages/control-existing-7de80c162a26435e8c6de7d55c6e4fe7",
+      "Destination already exists; preserved unchanged: /Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/ae1b9113bc909cae/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/data/regional-review/slovenia-history-reproduction-1016-erratum/vintages/control-partial-46a2d59323fe4714bacfaad1c45ed1c5"
+    ],
+    "files_unchanged": true
+  }
+}

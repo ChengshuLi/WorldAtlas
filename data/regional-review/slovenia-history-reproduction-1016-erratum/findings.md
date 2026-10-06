@@ -1,0 +1,41 @@
+# Slovenia historical-name reproducer erratum (#1185)
+
+Research snapshot: 2026-10-06. Author reservation: `01a10948-7d38-75d0-bc01-4cc28ea41f49`. Branch: `geography/slovenia-history-guard-1185-20261006`. This is a bounded, additive correction under the issue-owned prefix; it does not alter the 2017 name packet, its source records, stable IDs, hierarchy or original reports.
+
+## Exact scope and evidence
+
+The issue's 53 exact `gb:SVN:ADM2` IDs are pinned in the parent #423 candidate list. The bounded runner checks the complete 2017 source roster and all 23 whole-file inputs before parsing: 19 actual issue-contract pins at their declared historical commits plus four read-only original source/parent context files. All 19 issue pins also match the current PR-base Git blobs at `aee3bc644593c8e080f4a8495a851890695581ec`. Each input has an exact SHA-256 and byte count in `input-pins.json`; original sources remain where they were retained.
+
+For each of the 53 IDs, the pinned Atlas containing file and 2017 geoBoundaries `SVN-ADM2` source feature agree on source shape ID and source name. The geoBoundaries metadata identifies `boundaryYear=2017`, `boundaryType=ADM2`, source data update 2023-01-19, build 2023-12-12, ODbL 1.0, and an empty `boundaryCanonical`; it declares 213 ADM2 units. This establishes the retained source identity, level, vintage and license, not that the source defines a uniform statutory role. No boundary geometry was changed or certified.
+
+The 53 selected subjects are matched to current official GURS municipality records by the retained native code. All 53 current codes, names and per-feature system dates match the exact current official polygon layer, whose retained whole file contains 212 municipality polygons. This is an attribute/native-code crosswalk; the new control does not assert historical polygon equivalence. The official GURS historical `OBCINE_H` response is attribute-only with geometry omitted. The broader #423 evidence records 211 Slovenia source members against 212 current GURS municipalities; the 53 are a selected subset, not national coverage.
+
+The 53 current Atlas parent assignments in this subset are 39 under `framework:province:vzhodna:d0d1788c155c` and 14 under `framework:province:zahodna-slovenija:52f5c9765039`. They are retained framework assignments only. GURS describes its RPE as an administrative spatial-unit register that separately includes municipalities, statistical regions and cohesion regions; that general description does not authenticate these Atlas parent assignments. No parent approval or change is proposed. The exact per-ID assignments, source names, current municipality joins and parent limits are in `vintages/2026-10-06-guard-v1/territorial-context.json`.
+
+## Historical names, completeness and reuse
+
+The retained GURS query is WFS 2.0 for `SI.GURS.RPE:OBCINE_H`, filtered to the exact 53 municipality codes and fields for code, name and validity dates. It has 899 attribute records. Applying the documented half-open validity rule (`DATUM_OD <= date < DATUM_DO`, with an open end allowed) finds exactly one effective record per code at 2017-01-01 and 2017-07-01: 53/53 at each date, with all names stable between the dates. The official historical service notice says `_H` services contain the last valid state plus changes and that municipalities' full history was migrated. The retained response supports the two tested reference dates; it does not expose geometry or independently prove every historic boundary.
+
+The retained SURS table 0214809S provides a non-null 2017H1/H2 area pair for each code. SURS's public reuse terms allow redistribution/adaptation with attribution and require identifying changes. These observations corroborate dated record presence only; they are not boundary evidence.
+
+Primary source checks performed 2026-10-06:
+
+- GURS identifies the RPE as a registry of administratively defined spatial units and lists its unit types and fields: [Register of Spatial Units](https://www.e-prostor.gov.si/podrocja/prostorske-enote-in-naslovi/register-prostorskih-enot/).
+- GURS's 2024-01-11 notice documents the historical WFS `_H` service, full municipality histories, and migrated history limits: [Historical RPE WFS services](https://www.e-prostor.gov.si/novica/register-prostorskih-enot-wfs-servisi-za-zgodovino-oziroma-spremembe/).
+- Current public GURS service terms specify CC BY 4.0 attribution, including dataset type and reference date: [Public access and reuse terms](https://www.e-prostor.gov.si/dostopi/javni-dostop/). The retained GURS historical and current municipal source files are recorded as redistributable under these terms; cite GURS and the relevant data type/date.
+- SURS's terms permit reuse with source attribution and require derivatives to be identified: [SURS copyright and reuse](https://www.stat.si/StatWeb/en/StaticPages/Index/Copyright).
+- Article 130 of Slovenia's Real Estate Cadastre Act distinguishes general historical RPE data access from access to the archival collection of documents: [Official Gazette, ZKN](https://www.uradni-list.si/glasilo-uradni-list-rs/vsebina/2021-01-1047).
+
+The retained GURS historical response SHA-256 is `828455fec8aa86b9841670da1d00d0b02b8538ea5bc85c2067feba0912915805` (311,717 bytes), retrieved 2026-10-05. It carries public code/name/validity attributes only. Current GURS geometry, retrieved 2026-10-05, is separately pinned at SHA-256 `b74a49d83ce08363b1b43eae38a1900a985c610860ff443e20db712c28d26e1b` (13,049,219 bytes). The 2017 geoBoundaries shape source is pinned at SHA-256 `b5e2bb260cd78a05e16a457d85cc3fce83b9ad7f65cbefc7feae6f4b836a97fe` (5,188,866 bytes), upstream release commit `9469f09592ced973a3448cf66b6100b741b64c0d`.
+
+## Corrective reproducer and controls
+
+`reproduction/reproduce_immutable.py` reads immutable Git blobs through the shared `Baseline` helper, verifies the recorded whole-file pins (including both original issue vintages), verifies the runner's fixed canonical code hash from the immutable pin ledger (pin fields are normalized only for the code digest), and checks all 53 ID/code/source/name/date joins before writing. It refuses any existing version directory before creating files and opens each new report exclusively. A partial/interrupted new directory is preserved and blocks retry; it is never repaired in place. Original reports remain untouched.
+
+A fixed canonical runner-code hash is stored in the immutable pin ledger; the runner does not accept an expected digest from its caller. A changed code fixture fails against that recorded hash. Two runs through the corrected runner reproduced the original 28,686-byte CSV (`46ebdac5372a45cfc7e45d463be4a59e13364ae048f25551348a5c86a3bd056b`) and 3,807-byte summary (`9c4008d680aecbf0415aec88703b90a791a6f9eda6033b4e659816879e2de407`) byte-for-byte. The additive territorial context is 63,011 bytes, SHA-256 `2ded2e07207d69ecc6a9121f3b1c2115c433a38a509afa0a675ef21f0cb4db9a`. Bundle SHA-256 for both runs is `ba9d495db618a24ae2f36455c5e9525cc37c8353f64b0ae06a8d319d59fd8b02`.
+
+The negative controls alter only code 121's historical `NAZIV` to a synthetic value in a complete reserialized GURS response, alter a subject ID in a complete candidate roster, provide a wrong code hash, and prepopulate both an existing destination and an interrupted partial-output directory with sentinels. All are rejected before output creation or mutation. Detailed fixture sizes/hashes and sentinel results are retained in `controls/code-pin-v2/`.
+
+## Limits and handoff
+
+This packet verifies a 53-subject historical-name join and guards its inputs/writes. It does not authenticate Atlas's intended display locale, select replacement names in core geography, establish any historical or current polygon equivalence, approve the 213-to-212 source-count change, validate the 39/14 parent assignments, or resolve the full regional branch, neighboring granularity, rights of upstream sources beyond the inspected terms, or any source restoration absent from the retained packet. Name proposals remain an engineering handoff conditional on product locale policy. No import, publication, merge-to-production, region approval or deployment is implied.
