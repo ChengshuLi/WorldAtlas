@@ -6,6 +6,8 @@ def sha(b):return hashlib.sha256(b).hexdigest()
 p=argparse.ArgumentParser();p.add_argument('--run',required=True);p.add_argument('--out',required=True);a=p.parse_args();root=pathlib.Path(__file__).parent;run=pathlib.Path(a.run)
 scope=json.loads((root/'scope.json').read_bytes());expected=json.loads(gzip.decompress((root/'historical-original-rows.json.gz').read_bytes()));by_id={r['component']:r for r in expected};assert len(by_id)==len(expected)
 report=json.loads((run/'receipt.json').read_bytes())
+assert report['producer_commit']=='3b4ca9e9f42d692530a4139efe2bd8f72ce15723' and report['script_sha256']==sha((root/'producer.py').read_bytes())
+assert report['cohort_sha256']==sha((root/'scope.json').read_bytes()) and report['source_products']==scope['source_ids']
 def checked_bytes(pin):
  path=run/pin['path'];assert not pathlib.Path(pin['path']).is_absolute() and '..' not in pathlib.Path(pin['path']).parts
  assert path.is_file() and not path.is_symlink();body=path.read_bytes();assert len(body)==pin['bytes'] and sha(body)==pin['sha256'] and len(body)<=32*1024*1024
