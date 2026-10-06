@@ -48,6 +48,29 @@ def rows(inputs,commit,pins):
         result.extend(inputs.json(commit,pin['path'],pin))
     return result
 
+def verify_lineage_bindings(features,lineage):
+    by_id={f['id']:f for f in features};ids=[r['id']for r in lineage]
+    if len(by_id)!=len(features)or len(ids)!=len(set(ids))or set(ids)!=set(by_id):
+        raise ValueError('Complete lineage identity bijection differs')
+    for row in lineage:
+        feature=by_id[row['id']]
+        if (row['full_feature_sha256']!=sha256(canonical_json(feature))
+                or row['fragment_ids']!=sorted(b['id']for b in feature['properties']['fragment_bindings'])
+                or row['unmeasured_fragment_ids']!=feature['properties']['unmeasured_fragment_ids']):
+            raise ValueError('Complete lineage feature/fragment/unknown binding differs')
+
+def verify_source_proofs(contexts,proofs):
+    ids=[p['id']for p in proofs]
+    if len(ids)!=len(set(ids))or set(ids)!=set(contexts):raise ValueError('Complete source/context identity bijection differs')
+    result=copy.deepcopy(contexts)
+    for proof in proofs:
+        context=contexts[proof['id']];selected=context.get('selected_successor_context')
+        expected=selected['feature_sha256']if selected else context['original_feature_sha256']
+        if proof['current_feature_sha256']!=expected or proof['original_feature_sha256']!=context['original_feature_sha256']:
+            raise ValueError('Selected/original whole source-feature context binding differs')
+        if selected:result[proof['id']].update(original_metadata=selected['metadata'],ancestry=selected['ancestry'],original_parent_id=selected['original_parent_id'])
+    return result
+
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--frozen-commit',required=True)
     parser.add_argument('--frozen-report',required=True);parser.add_argument('--output',required=True)
@@ -86,13 +109,7 @@ def main():
     if {r['id']for r in original_lineage}!={c['id']for c in old_components}or{r['id']for r in current_lineage}!={c['id']for c in current_components}:
         raise ValueError('Complete original/current identity lineage closure differs')
     for features,lineage in ((old_components,original_lineage),(current_components,current_lineage)):
-        by_id={f['id']:f for f in features}
-        for row in lineage:
-            feature=by_id[row['id']]
-            if (row['full_feature_sha256']!=sha256(canonical_json(feature))
-                    or row['fragment_ids']!=sorted(b['id']for b in feature['properties']['fragment_bindings'])
-                    or row['unmeasured_fragment_ids']!=feature['properties']['unmeasured_fragment_ids']):
-                raise ValueError('Complete lineage feature/fragment/unknown binding differs')
+        verify_lineage_bindings(features,lineage)
     product('fragment-lineage.json.gz');product('tile-queries.json.gz');product('source-custody.json')
     context_report=inputs.json(base.H,base.CP+'report.json')
     contexts={c['id']:c for c in rows(inputs,base.H,context_report['outputs'])}
@@ -101,19 +118,9 @@ def main():
         if name.startswith('source-feature-bindings-'):source_proofs.extend(product(name))
     if len(source_proofs)!=49625 or {p['id']for p in source_proofs}!=set(contexts):
         raise ValueError('Complete current source/context proof closure differs')
-    current_contexts=copy.deepcopy(contexts)
-    for proof in source_proofs:
-        context=contexts[proof['id']];selected=context.get('selected_successor_context')
-        expected=selected['feature_sha256']if selected else context['original_feature_sha256']
-        metadata=selected['metadata']if selected else context['original_metadata']
-        # Successor *_metadata_sha256 covers the WHOLE feature without geometry,
-        # while context metadata is only properties.metadata. Their digests have
-        # different domains. Authenticate both whole feature vintages against
-        # accepted context-stage raw-source bindings rather than equating them.
-        if proof['current_feature_sha256']!=expected or proof['original_feature_sha256']!=context['original_feature_sha256']:
-            raise ValueError('Selected/original whole source-feature context binding differs')
-        if selected:
-            current_contexts[proof['id']].update(original_metadata=metadata,ancestry=selected['ancestry'],original_parent_id=selected['original_parent_id'])
+    # The successor metadata hash covers whole feature-minus-geometry, while
+    # context metadata is properties.metadata. Join their whole feature bindings.
+    current_contexts=verify_source_proofs(contexts,source_proofs)
     manifest=inputs.json(base.M,'data/native-ownership/repaired-v7/manifest.json')
     latpin=manifest['native_latitudes'];latencoded=inputs.read(latpin['commit'],latpin['path'],latpin)
     latraw=gzip.decompress(latencoded)
