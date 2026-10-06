@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "method_id": "tajik-stat-admin-table",
+  "outcome": "passed",
+  "positive": {
+    "outcome": "passed",
+    "assertion": "workbook title, literal headers and GBAO row cells match retained source",
+    "source_sha256": "c0576b220fa3d2b7281d4c4680b3e143a523dec3a733c0fe3eba23ed91e47e40"
+  },
+  "negative": {
+    "outcome": "passed",
+    "assertion": "same parser acceptance predicate rejects a modified cell under literal Regions header",
+    "original_value": 7,
+    "mutated_value": 8
+  },
+  "limits": [
+    "The output preserves source English column labels and values; no administrative classes are inferred.",
+    "The workbook has no spatial geometries."
+  ],
+  "script_sha256": "945da08a70d29e858121893402c4cf0316550850d665cc662a40df8b2eed679a",
+  "execution_commit": "9b6caab28a59b32d6cd335a86c2b01d9d3f169b2"
+}

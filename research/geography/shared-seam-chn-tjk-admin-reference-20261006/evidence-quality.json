@@ -206,8 +206,8 @@
   "outputs": [
     {
       "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/README.md",
-      "bytes": 5414,
-      "sha256": "4f4223440e2d60c47bb7fd7074e848fdcaf2c04aea65f27239ccca00b16ecb51",
+      "bytes": 5638,
+      "sha256": "8add5e178c6a779c568ff80bb2bb84fdbcc93db700c26d1c573454412e36ff6d",
       "hash_kind": "file-bytes"
     },
     {
@@ -231,8 +231,8 @@
     },
     {
       "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/scripts/inspect_admin_table.py",
-      "bytes": 4091,
-      "sha256": "945da08a70d29e858121893402c4cf0316550850d665cc662a40df8b2eed679a",
+      "bytes": 4947,
+      "sha256": "3bd574fa5ec541348f37673243702cdf92cacc46072aff410e2bae6488865a8b",
       "hash_kind": "file-bytes"
     },
     {
@@ -264,16 +264,44 @@
       "role": "generated-result"
     },
     {
-      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-controls.json",
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/superseded-controls-v2-header-unverified.json",
       "bytes": 837,
       "sha256": "b37212d9c7c7d82aa270b8df025f58fb4c3c3fc9742c51e943bc747d6a62e5eb",
       "hash_kind": "file-bytes",
       "role": "generated-result"
     },
     {
-      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-reproducibility.json",
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/superseded-reproducibility-v2-header-unverified.json",
       "bytes": 835,
       "sha256": "1ba2ad4cf58b1d8904a6395bab17fc8dfebfcc4ce7f02f3c17ef64b69458d8ee",
+      "hash_kind": "file-bytes",
+      "role": "generated-result"
+    },
+    {
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-run-5.json",
+      "bytes": 1228,
+      "sha256": "d981ee6216c4a141cc838a7f0bd28baf63c78b22801309b93410e7b9fb06b200",
+      "hash_kind": "file-bytes",
+      "role": "generated-result"
+    },
+    {
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-run-6.json",
+      "bytes": 1228,
+      "sha256": "d981ee6216c4a141cc838a7f0bd28baf63c78b22801309b93410e7b9fb06b200",
+      "hash_kind": "file-bytes",
+      "role": "generated-result"
+    },
+    {
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-controls.json",
+      "bytes": 1535,
+      "sha256": "dd08573b4964770bc310da9ae357bd687d383cb5083cfee9d26d6b59bd1b1ff7",
+      "hash_kind": "file-bytes",
+      "role": "generated-result"
+    },
+    {
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-reproducibility.json",
+      "bytes": 874,
+      "sha256": "64ac76017c7a86aaec8d614d84cfdbd90f59d3229bfdedfb43d9f15ece6d4888",
       "hash_kind": "file-bytes",
       "role": "generated-result"
     }
@@ -296,7 +324,7 @@
     {
       "id": "tajik-stat-admin-table",
       "kind": "source",
-      "description": "Parsed exact XLSX headers and GBAO row with stdlib zipfile/XML; preserved literal source headings/values. Positive and mutation-negative controls exercise same acceptance predicate; two byte-identical complete runs follow committed code.",
+      "description": "Parsed exact XLSX header and value cells by worksheet coordinate with Python stdlib zipfile/XML. Positive control checks literal header coordinates and linked GBAO cells; separate negative controls mutate both a header and a value and exercise the same acceptance predicate. Two complete byte-identical outputs were generated after committing this exact code.",
       "software": "Python 3 standard library; Git; no third-party modules.",
       "units": "source cell values, not spatial measurements"
     }
@@ -308,7 +336,7 @@
       "unit": "source cell value under literal Regions header",
       "vintage": "archived",
       "input_sha256": "c0576b220fa3d2b7281d4c4680b3e143a523dec3a733c0fe3eba23ed91e47e40",
-      "evaluation_commit": "9b6caab28a59b32d6cd335a86c2b01d9d3f169b2"
+      "evaluation_commit": "62a4167f121dc8f8b3389ed6363611e819b2e476"
     },
     {
       "id": "tjk_gbao_towns_total_cell_value",
@@ -316,7 +344,7 @@
       "unit": "source cell value under literal Towns (total) header",
       "vintage": "archived",
       "input_sha256": "c0576b220fa3d2b7281d4c4680b3e143a523dec3a733c0fe3eba23ed91e47e40",
-      "evaluation_commit": "9b6caab28a59b32d6cd335a86c2b01d9d3f169b2"
+      "evaluation_commit": "62a4167f121dc8f8b3389ed6363611e819b2e476"
     },
     {
       "id": "tjk_gbao_towns_of_which_republican_and_regional_submission_cell_value",
@@ -324,7 +352,7 @@
       "unit": "source cell value under literal Towns subcolumn header",
       "vintage": "archived",
       "input_sha256": "c0576b220fa3d2b7281d4c4680b3e143a523dec3a733c0fe3eba23ed91e47e40",
-      "evaluation_commit": "9b6caab28a59b32d6cd335a86c2b01d9d3f169b2"
+      "evaluation_commit": "62a4167f121dc8f8b3389ed6363611e819b2e476"
     },
     {
       "id": "tjk_gbao_colonies_cell_value",
@@ -332,7 +360,7 @@
       "unit": "source cell value under literal Colonies header",
       "vintage": "archived",
       "input_sha256": "c0576b220fa3d2b7281d4c4680b3e143a523dec3a733c0fe3eba23ed91e47e40",
-      "evaluation_commit": "9b6caab28a59b32d6cd335a86c2b01d9d3f169b2"
+      "evaluation_commit": "62a4167f121dc8f8b3389ed6363611e819b2e476"
     },
     {
       "id": "tjk_gbao_number_of_jamoats_cell_value",
@@ -340,33 +368,33 @@
       "unit": "source cell value under literal Number of jamoats header",
       "vintage": "archived",
       "input_sha256": "c0576b220fa3d2b7281d4c4680b3e143a523dec3a733c0fe3eba23ed91e47e40",
-      "evaluation_commit": "9b6caab28a59b32d6cd335a86c2b01d9d3f169b2"
+      "evaluation_commit": "62a4167f121dc8f8b3389ed6363611e819b2e476"
     }
   ],
   "metric_bindings": [
     {
       "metric_id": "tjk_gbao_regions_cell_value",
-      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-run-3.json",
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-run-5.json",
       "json_pointer": "/gbao_row/Regions"
     },
     {
       "metric_id": "tjk_gbao_towns_total_cell_value",
-      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-run-3.json",
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-run-5.json",
       "json_pointer": "/gbao_row/Towns_total"
     },
     {
       "metric_id": "tjk_gbao_towns_of_which_republican_and_regional_submission_cell_value",
-      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-run-3.json",
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-run-5.json",
       "json_pointer": "/gbao_row/Towns_of_which_republican_and_regional_submission"
     },
     {
       "metric_id": "tjk_gbao_colonies_cell_value",
-      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-run-3.json",
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-run-5.json",
       "json_pointer": "/gbao_row/Colonies"
     },
     {
       "metric_id": "tjk_gbao_number_of_jamoats_cell_value",
-      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-run-3.json",
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-run-5.json",
       "json_pointer": "/gbao_row/Number_of_jamoats"
     }
   ],
@@ -481,6 +509,22 @@
     },
     {
       "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/superseded-run-v1-column-interpretation-2.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/superseded-controls-v2-header-unverified.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/superseded-reproducibility-v2-header-unverified.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-run-5.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-run-6.json",
       "status": "added"
     },
     {
