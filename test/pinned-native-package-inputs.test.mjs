@@ -35,6 +35,13 @@ test('declared ordinary package snapshots authenticate complete native source st
   const savedManifest=fs.readFileSync(candidatePath);fs.unlinkSync(candidatePath);fs.symlinkSync(path.join(root,candidatePath),candidatePath);
   await assert.rejects(selectBuildOwnership({manifestPath:candidatePath,expectedSha256:'efe31373ff6a2c3f4ba5f11f8cbe37b25337778b344d9dbf1d3dfde301e3e722',expectedReference:reference}),/symlink|ordinary|symbolic/i);
   fs.unlinkSync(candidatePath);write(image,candidatePath,savedManifest);
+  for(const field of ['part','bounds']){
+   const invalid=JSON.parse(savedManifest);
+   (field==='part'?invalid.parts[0]:invalid.bounds).path='../outside.gz';
+   write(image,candidatePath,Buffer.from(JSON.stringify(invalid)));
+   await assert.rejects(selectBuildOwnership({manifestPath:candidatePath,expectedSha256:'efe31373ff6a2c3f4ba5f11f8cbe37b25337778b344d9dbf1d3dfde301e3e722',expectedReference:reference}),/asset must be a declared package input/);
+  }
+  write(image,candidatePath,savedManifest);
   const result=await validateContextInputStage({expectedReference:reference});
   assert.equal(result.locations,49625);assert.equal(result.source_files,43);assert.equal(result.scientific_approval,false);
   const selected=await selectBuildOwnership({manifestPath:candidatePath,expectedSha256:'efe31373ff6a2c3f4ba5f11f8cbe37b25337778b344d9dbf1d3dfde301e3e722',expectedReference:reference,requireNative:true});

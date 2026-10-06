@@ -1,0 +1,7 @@
+# Declared ownership path boundary
+
+Independent review of3fa4968 found that an externally supplied manifest path could escape the declared physical input image despite matching its approved hash. Executed native build code64e918b now rejects absolute/traversing/undeclared manifest paths, uses ordinary image-contained manifest reads and rejects unsafe/undeclared asset paths. Non-package diagnostic selection is preserved. Complete Git-free source-image controls cover external and traversal paths, same-byte undeclared manifests, external symlinks and traversing part/bounds paths. Four controls passed, zero failures/skips.
+
+The complete standard wrapped native build and exported readback passed again:524332 row words,57617764 run words,49625 original native geometries/identities/parents and exact normative latitude/physical source bindings. Every one of the102 selected products is byte-identical to its retained previous product; this new inventory references those exact whole files and does not overwrite either original vintage. The earlier17+3 test logs remain archived with their executed code; only the path-specific tests are new.
+
+This fixes input accounting and selection containment, not factual source gaps or independent water truth. Global source audit, coordinated repairs, broad performance and delivery remain unapproved. No user browser/provider write/deployment/publisher request. Fresh exact-head independent review and normal CI/queue remain required.
