@@ -27,4 +27,4 @@ PYTHONPATH=research/geography/shared-seam-ind-pak-20261006/.cache/rasterio-runti
 
 The WorldCover script restores each COG from the exact official S3 URL and checks its recorded byte length before hashing and reading; compare the resulting SHA-256, ETag and Last-Modified with the manifest. Original tiles are each larger than the 32 MiB evidence-file bound, so only full-object restoration instructions and exact object hashes are retained in Git; the downloaded originals stay in the ignored local cache. ESA's attribution is `© ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium`.
 
-Sources: [ESA WorldCover data access, license and validation](https://esa-worldcover.org/en/data-access); [WorldCover 2021 v200 release](https://doi.org/10.5281/zenodo.7254221).
+Sources: [ESA WorldCover data access, license and validation](https://esa-worldcover.org/en/data-access); [WorldCover 2021 v200 release](https://doi.org/10.5281/zenodo.7254221); [WorldCover product manual v2, class definitions and temporal scope](https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/docs/WorldCover_PUM_V2.0.pdf).

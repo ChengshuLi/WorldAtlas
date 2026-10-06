@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Read exact classified pixels intersecting the two retained seam fragments."""
-import hashlib, json, urllib.request, time
+import hashlib, json, urllib.request, time, subprocess, sys
 from pathlib import Path
 import numpy as np
 import rasterio
@@ -28,13 +28,21 @@ def sha(path):
   for b in iter(lambda:f.read(8*1024*1024),b""): h.update(b)
  return h.hexdigest()
 def read_json(path): return json.loads(path.read_text())
+def fragment_digest(feature):
+ return hashlib.sha256((json.dumps(feature,ensure_ascii=False,sort_keys=False,separators=(",",":"))+"\n").encode()).hexdigest()
 def main():
  CACHE.mkdir(parents=True,exist_ok=True)
- fragments={}
+ fragments={}; fragment_hashes={}
  for p in (PACKET/"sources/physical-gap-fragments").glob("*.geojson"):
-  f=read_json(p); fragments[f["id"]]=shape(f["geometry"])
+  f=read_json(p); fragments[f["id"]]=shape(f["geometry"]); fragment_hashes[f["id"]]=fragment_digest(f)
  if len(fragments)!=2: raise ValueError("expected exactly two complete fragments")
  receipts=[]; counts={fid:{} for fid in fragments}
+ execution=subprocess.check_output(["git","rev-parse","HEAD"],cwd=ROOT,text=True).strip()
+ baseline="0f08ca8c451e71bb3b06cb5fb82988e92d3048ab"
+ if subprocess.call(["git","merge-base","--is-ancestor",baseline,execution],cwd=ROOT)!=0:
+  raise ValueError("fresh main baseline is not an ancestor of execution commit")
+ if subprocess.check_output(["git","status","--porcelain","--untracked-files=no"],cwd=ROOT,text=True).strip():
+  raise ValueError("tracked changes present during source sampling")
  transformer=Transformer.from_crs("EPSG:4326","EPSG:4326",always_xy=True)
  for tile in TILES:
   url=BASE.format(tile); local=CACHE/(tile+"_Map.tif")
@@ -74,10 +82,10 @@ def main():
   for table in by_tile.values():
    for key,value in table.items(): combined[key]=combined.get(key,0)+value
   total=sum(combined.values())
-  summary[fid]={"pixel_count":total,"class_pixel_counts":combined,"class_labels":{k:labels.get(int(k),"unknown class") for k in combined},
+  summary[fid]={"fragment_feature_sha256":fragment_hashes[fid],"pixel_count":total,"class_pixel_counts":combined,"class_labels":{k:labels.get(int(k),"unknown class") for k in combined},
                 "water_class_80_pixel_count":combined.get("80",0),"water_class_80_fraction":combined.get("80",0)/total if total else None,
                 "tile_pixel_counts":by_tile}
- result={"schema":"geo4-worldcover-seam-window-v1","source":{"product":"ESA WorldCover 10 m 2021 v200 map","release_date":RELEASED,
+ result={"schema":"geo4-worldcover-seam-window-v1","actual_execution_sha":execution,"baseline_main_sha":baseline,"reproduction_code_sha256":sha(Path(__file__)),"source":{"product":"ESA WorldCover 10 m 2021 v200 map","release_date":RELEASED,
    "doi":"10.5281/zenodo.7254221","license":"CC BY 4.0","official_access":"https://esa-worldcover.org/en/data-access",
    "whole_tile_restoration":"GET the exact public S3 URL recorded for each tile; match byte count, SHA-256, ETag and Last-Modified before rerun.",
    "validation_limit":"ESA reports global overall accuracy 76.7%; land-cover pixels are not legal water status, an administrative boundary, or proof of sovereignty."},
