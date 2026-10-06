@@ -1,16 +1,27 @@
-import json,gzip,glob,os,hashlib
+import json,gzip,glob,os,hashlib,subprocess,pathlib
 from shapely.geometry import shape
 from shapely.strtree import STRtree
+ROOT=pathlib.Path(__file__).resolve().parents[3]
+BASE_COMMIT='cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1'
+SOURCE_COMMIT='f4567e7c606680d5d09353fe5b63bbdf8496ee94'
+def git_bytes(commit,path):
+ return subprocess.check_output(['git','-C',str(ROOT),'show',f'{commit}:{path}'])
+def tracked_paths(commit,prefix):
+ raw=subprocess.check_output(['git','-C',str(ROOT),'ls-tree','-r','--name-only',commit,'--',prefix],text=True)
+ return [x for x in raw.splitlines() if x]
 base='coordination/engineering/physical-gap-components-1005-20261005-local19'
-idx=json.load(open(base+'/custody-v1/index.json'))
+idx=json.loads(git_bytes(BASE_COMMIT,base+'/custody-v1/index.json'))
 byorig={a['original']['path']:a['payload'] for a in idx['aliases']}
 def read_alias(path):
- b=open(byorig[path],'rb').read()
+ b=git_bytes(BASE_COMMIT,byorig[path])
  return json.loads(gzip.decompress(b))
 selected=[]
 investigation_by_id={}
-for p in sorted(glob.glob('coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/investigations-*.json.gz')):
- d=json.load(gzip.open(p,'rb'))
+priority_prefix='coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/'
+priority_paths=sorted(p for p in tracked_paths(BASE_COMMIT,priority_prefix) if p.rsplit('/',1)[-1].startswith('investigations-') and p.endswith('.json.gz'))
+assert len(priority_paths)==34
+for p in priority_paths:
+ d=json.loads(gzip.decompress(git_bytes(BASE_COMMIT,p)))
  for r in d:
   if r.get('partition','').startswith('interior') and sorted(r.get('positive_length_neighbor_ids',[]))==['atlas:physical:a2735e777a9d1037bd3a','atlas:physical:cbea9d242259efda3120']:
    selected.append(r['component'])
@@ -25,15 +36,15 @@ for n in range(11):
  comps += [f for f in d['features'] if f['id'] in selected]
 assert len(selected)==134 and len(comps)==134
 eco_path='research/geography/gap-source-abudhabi-physical-seam-20261006/sources/v1/resolve-ecoregions-abu-dhabi-envelope.geojson'
-eco_bytes=open(eco_path,'rb').read()
+eco_bytes=git_bytes(SOURCE_COMMIT,eco_path)
 assert hashlib.sha256(eco_bytes).hexdigest()=='5a7c0583209df1145fb542d595b122b90147ac2e62c0f5dc442f8909f7d67c65'
 assert hashlib.sha256(eco_bytes+b'\n').hexdigest()!='5a7c0583209df1145fb542d595b122b90147ac2e62c0f5dc442f8909f7d67c65'
 eco=json.loads(eco_bytes)
 assert len(eco['features'])==5
 eco_by_id={f['properties'].get('ECO_ID'):f for f in eco['features']}
 admin_path='research/geography/gap-source-abudhabi-physical-seam-20261006/sources/v1/geoBoundaries-ARE-ADM1-9469f09.geojson'
-admin=json.load(open(admin_path)); admin_feats=admin['features']; admin_geos=[shape(f['geometry']) for f in admin_feats]; admin_tree=STRtree(admin_geos)
-atlas_path='data/geography/part-0.json'; atlas_bytes=open(atlas_path,'rb').read()
+admin=json.loads(git_bytes(SOURCE_COMMIT,admin_path)); admin_feats=admin['features']; admin_geos=[shape(f['geometry']) for f in admin_feats]; admin_tree=STRtree(admin_geos)
+atlas_path='data/geography/part-0.json'; atlas_bytes=git_bytes(BASE_COMMIT,atlas_path)
 assert hashlib.sha256(atlas_bytes).hexdigest()=='bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3'
 atlas=json.loads(atlas_bytes); contact_ids={'atlas:physical:a2735e777a9d1037bd3a','atlas:physical:cbea9d242259efda3120','gb:ARE:ADM1:86790563B34058819691262'}
 atlas_feats=[f for f in atlas['features'] if (f.get('id') or f.get('properties',{}).get('id')) in contact_ids]
@@ -79,4 +90,4 @@ assert len(selected_contacts)-1 != 51
 assert sum(c.get('kind')=='point-only-ambiguous' for c in selected_contacts)==45
 assert sum(c.get('kind')=='shared-edge' for c in selected_contacts)==6
 out={'version':'abudhabi-physical-seam-source-overlay-v1','source_note':'Exact source-coordinate topological intersections only; EPSG:4326; no buffering or snapping. Current Ecoregion ECO_ID values and names match Atlas stable IDs; current service bytes are not a frozen historical source snapshot.','component_count':len(comps),'subject_roster_sha256':hashlib.sha256(roster_bytes).hexdigest(),'ecoregion_feature_count':len(eco['features']),'source_service_response_sha256':hashlib.sha256(eco_bytes).hexdigest(),'geoBoundaries_source_feature_count':len(admin_feats),'current_atlas_contact_subject_count':len(atlas_feats),'source_layer_title':'Biomes and Ecoregions 2017','source_response_vintage':'current hosted service response retrieved 2026-10-06','positive_area_overlap_count':sum(any(m['intersection_area_degrees2']>0 for m in x['matches']) for x in results),'zero_area_intersection_count':sum(bool(x['matches']) and not any(m['intersection_area_degrees2']>0 for m in x['matches']) for x in results),'no_intersection_count':sum(not x['matches'] for x in results),'controls':{'positive_selected_component_intersects_ECO_ID_811':True,'negative_selected_component_does_not_intersect_ECO_ID_320':True,'changed_source_bytes_rejected_by_hash':True,'omitted_component_or_contact_fails_exact_count_and_roster_checks':True,'historical_vintage_not_laundered_as_current_snapshot':True},'component_contact_records':selected_contacts,'component_contact_record_count':len(selected_contacts),'components':results}
-p='research/geography/gap-source-abudhabi-physical-seam-20261006/overlay-v1.json';open(p,'w').write(json.dumps(out,sort_keys=True,separators=(',',':'))+'\n')
+p=ROOT/'research/geography/gap-source-abudhabi-physical-seam-20261006/overlay-v1.json';p.write_text(json.dumps(out,sort_keys=True,separators=(',',':'))+'\n')
