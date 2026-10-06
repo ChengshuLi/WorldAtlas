@@ -669,6 +669,12 @@
       "bytes": 2728,
       "sha256": "8cd217673f0ae01387f0ea4e3af06771fa5fb230fe95b6098aee2b7f1105517a",
       "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/worldwide-gap-inventory.test.mjs",
+      "bytes": 505,
+      "sha256": "7735fb90d93a5d77c85c8a6c92e42b62c8c68705fcc12deade9b2e93e4a989e3",
+      "hash_kind": "file-bytes"
     }
   ],
   "methods": [
@@ -802,7 +808,8 @@
     "python -B test/physical-gap-successor.py:34passed",
     "Two complete worldwide runs at committed producer 6dba91220dff2875f99169d3eb0116bd46c8624a",
     "python -B scripts/worldwide_gap_inventory.py --selected cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1 --output .cache/inventory-final-v2-run1",
-    "python -B scripts/worldwide_gap_inventory.py --selected cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1 --output .cache/inventory-final-v2-run2"
+    "python -B scripts/worldwide_gap_inventory.py --selected cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1 --output .cache/inventory-final-v2-run2",
+    "node --test test/worldwide-gap-inventory.test.mjs:1 wrapper passes all5 adaptercontrols"
   ],
   "change_receipts": [
     {
@@ -879,6 +886,10 @@
     },
     {
       "path": "coordination/engineering/worldwide-inventory-1164-20261006/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "test/worldwide-gap-inventory.test.mjs",
       "status": "added"
     }
   ],
