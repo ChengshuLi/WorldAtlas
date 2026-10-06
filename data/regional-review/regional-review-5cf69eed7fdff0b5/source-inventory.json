@@ -26,7 +26,7 @@
       },
       "retention": "restoration-only for the 120 MB countrywide original because it exceeds the 32 MiB evidence-file ceiling; lawful scoped original feature extracts are retained below",
       "restoration": "Download the media_url to a temporary path, verify 120489189 bytes and SHA-256 74012237384e53061aa63b6e20b9be24f94facfe615b52bbe72e62a81fa68ff0, then run node reproduction/extract-geoboundaries-scope.mjs PATH_TO_SOURCE. The raw.githubusercontent.com URL returns a 134-byte Git LFS pointer; the media URL returns the exact payload.",
-      "verification": "Verified payload SHA-256 against the SHA-256 object ID in the pinned Git LFS pointer. GitHub API reports the pointer blob SHA-1 above. The 2,327-versus-2,328 count discrepancy is separately tracked by #396.",
+      "verification": "Verified payload SHA-256 against the SHA-256 object ID in the pinned Git LFS pointer. GitHub API reports the pointer blob SHA-1 above. The 2,327-versus-2,328 count discrepancy is separately tracked by #1133; issue #396 is a different West Siberia review and does not own this finding.",
       "limit": "Publisher metadata and source identity do not establish every unit's current legal status, full country completeness, or acceptable Atlas geometry simplification."
     },
     {
