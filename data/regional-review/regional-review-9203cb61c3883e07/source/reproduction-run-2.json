@@ -1,0 +1,94 @@
+{
+  "issue": 413,
+  "baseline_commit": "90f04d30cf773b5be538bc3d85d4d9051768deef",
+  "baseline_files": {
+    "data/geography/part-28.json": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+    "data/hierarchy.json": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+    "data/administrative-sources.json": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+  },
+  "scope_release": {
+    "id": "geography:review:df86cbaeaf2e18f16ddf2906ef089768baac22f4428e28ed0a4724296cbb413e",
+    "version": 5,
+    "hierarchy_sha256": "03d23534f87cdd0582bcb228780f00f65090bec2e8a760acbab528383f28549d",
+    "footprints_sha256": "2ac42eeb9fef8af923a0d4c4e55af49ca0a103de891ffbfb2c1181ad75950286"
+  },
+  "scope_member_ids_sha256": "5a578f9df7d0b932d14922f47ce7afc490a845a6aa9cf7f9809de47259f10d23",
+  "scope_member_ids_declared_sha256": "79c12258faed667954b6041a32594eb855a72d80f8764b54d7b5421e755a747f",
+  "scope_member_ids_declared_hash_matches": false,
+  "scope_ids_match_saved_issue_body": true,
+  "scope_location_count": 102,
+  "scope_ids_present": true,
+  "source_counts": {
+    "ZMB": 116,
+    "ZWE": 91
+  },
+  "scope_counts": {
+    "zmb_eastern": 14,
+    "zwe_direct_districts": 87,
+    "atlas_city_composite": 1,
+    "province_parents": 11
+  },
+  "zwe_source_features_represented_once": 91,
+  "zwe_source_features_represented_fraction": 1.0,
+  "zwe_unrepresented_source_ids": [],
+  "controls": {
+    "positive": {
+      "source_features_represented_once": 91,
+      "source_features": 91,
+      "passed": true
+    },
+    "negative": {
+      "deliberately_omitted_source_id": "62879985B25596949610081",
+      "detected_unrepresented_source_ids": [
+        "62879985B25596949610081"
+      ],
+      "passed": true
+    }
+  },
+  "zmb_eastern_2022_official_units": 15,
+  "zmb_eastern_2022_units_outside_issue_413": [
+    "Chama"
+  ],
+  "zwe_harare_2022_official_units": [
+    "Chitungwiza Urban",
+    "Epworth",
+    "Harare Urban"
+  ],
+  "assessment_rows": 113,
+  "assessment_csv_sha256": "b51281dece57dc59a18bd1c8b1b21bcb1cd0a9ae3529e3ddaa48a2b0380095f2",
+  "province_scope_parent_counts": {
+    "framework:province:eastern:30af294f5002": 14,
+    "framework:province:matabeleland-north:4b337bdcc2e3": 9,
+    "framework:province:bulawayo:38e36f1243f6": 1,
+    "framework:province:matabeleland-south:6788c557bc53": 10,
+    "framework:province:midlands:adec64a04a03": 14,
+    "framework:province:mashonaland-west:8faaeddc2c75": 13,
+    "framework:province:harare:8fab9cec64d9": 1,
+    "framework:province:masvingo:55407cad29ef": 9,
+    "framework:province:mashonaland-central:d5479dc424a6": 10,
+    "framework:province:mashonaland-east:a080f13edab0": 11,
+    "framework:province:manicaland:58040fac1bc9": 10
+  },
+  "classification_counts": {
+    "insufficient-evidence": 2,
+    "justified": 110,
+    "correction-needed": 1
+  },
+  "geometry_assessment_counts": {
+    "insufficient-evidence": 113
+  },
+  "hashes": {
+    "ZMB": {
+      "catalog_simplified_sha256": "58e9df3f95bb4c7539e5fb48839b246b2bfb12694cf5db3ed595240156016c60",
+      "retrieved_full_resolution_sha256": "ff4a4c8a92f7416b8457f423b339f2623b10f59410339911a0427fcee8434f17",
+      "full_resolution_retained": false,
+      "feature_count": 116
+    },
+    "ZWE": {
+      "catalog_simplified_sha256": "3486ef2803574e63db97e2a35b6688bb327cb8d6ff5e439691c1cc3068ddb424",
+      "retrieved_full_resolution_sha256": "074a3632634b9448bb4043580fe7199e0b2f64ec68bd2f98932a2c68b3795b88",
+      "full_resolution_retained": true,
+      "feature_count": 91
+    }
+  }
+}

@@ -1,0 +1,900 @@
+{
+  "version": 1,
+  "issue": 413,
+  "lane": "geography",
+  "worker_id": "worldatlas-geography-417-20261005-92ca",
+  "subject_ids": [
+    "atlas:city:ZWE-525",
+    "gb:ZMB:ADM2:96606910B12043083212801",
+    "gb:ZMB:ADM2:96606910B40356469041881",
+    "gb:ZMB:ADM2:96606910B40532044353326",
+    "gb:ZMB:ADM2:96606910B44569696961001",
+    "gb:ZMB:ADM2:96606910B53587891275683",
+    "gb:ZMB:ADM2:96606910B61559073197846",
+    "gb:ZMB:ADM2:96606910B63463932820005",
+    "gb:ZMB:ADM2:96606910B72426001037260",
+    "gb:ZMB:ADM2:96606910B72978673218668",
+    "gb:ZMB:ADM2:96606910B8201415928290",
+    "gb:ZMB:ADM2:96606910B89827390447979",
+    "gb:ZMB:ADM2:96606910B94036775861358",
+    "gb:ZMB:ADM2:96606910B99834275279733",
+    "gb:ZMB:ADM2:96606910B99969900210710",
+    "gb:ZWE:ADM2:62879985B11044582115440",
+    "gb:ZWE:ADM2:62879985B11590561680965",
+    "gb:ZWE:ADM2:62879985B11813721132111",
+    "gb:ZWE:ADM2:62879985B12004776276546",
+    "gb:ZWE:ADM2:62879985B12430304395671",
+    "gb:ZWE:ADM2:62879985B13905566839040",
+    "gb:ZWE:ADM2:62879985B16821678583413",
+    "gb:ZWE:ADM2:62879985B16966915887003",
+    "gb:ZWE:ADM2:62879985B17872129948675",
+    "gb:ZWE:ADM2:62879985B19451757525909",
+    "gb:ZWE:ADM2:62879985B19621940565976",
+    "gb:ZWE:ADM2:62879985B19801447956475",
+    "gb:ZWE:ADM2:62879985B20095614329171",
+    "gb:ZWE:ADM2:62879985B20819792882543",
+    "gb:ZWE:ADM2:62879985B22521901004108",
+    "gb:ZWE:ADM2:62879985B2376154175895",
+    "gb:ZWE:ADM2:62879985B25079588336993",
+    "gb:ZWE:ADM2:62879985B25835202040787",
+    "gb:ZWE:ADM2:62879985B26822606878793",
+    "gb:ZWE:ADM2:62879985B27116987268551",
+    "gb:ZWE:ADM2:62879985B2724410998329",
+    "gb:ZWE:ADM2:62879985B28116741742257",
+    "gb:ZWE:ADM2:62879985B28907517418650",
+    "gb:ZWE:ADM2:62879985B291328644758",
+    "gb:ZWE:ADM2:62879985B29850987700829",
+    "gb:ZWE:ADM2:62879985B32287047423365",
+    "gb:ZWE:ADM2:62879985B32453879798080",
+    "gb:ZWE:ADM2:62879985B33346343467018",
+    "gb:ZWE:ADM2:62879985B33993196799610",
+    "gb:ZWE:ADM2:62879985B34329227357286",
+    "gb:ZWE:ADM2:62879985B3462136177187",
+    "gb:ZWE:ADM2:62879985B3510020236883",
+    "gb:ZWE:ADM2:62879985B35130574204282",
+    "gb:ZWE:ADM2:62879985B35185654442710",
+    "gb:ZWE:ADM2:62879985B37979176120849",
+    "gb:ZWE:ADM2:62879985B38074336306054",
+    "gb:ZWE:ADM2:62879985B39326733261715",
+    "gb:ZWE:ADM2:62879985B43566873745809",
+    "gb:ZWE:ADM2:62879985B49874859197959",
+    "gb:ZWE:ADM2:62879985B50430993830170",
+    "gb:ZWE:ADM2:62879985B51591282802552",
+    "gb:ZWE:ADM2:62879985B51719638002761",
+    "gb:ZWE:ADM2:62879985B53444954846030",
+    "gb:ZWE:ADM2:62879985B54181646880786",
+    "gb:ZWE:ADM2:62879985B59782036697495",
+    "gb:ZWE:ADM2:62879985B6112756891378",
+    "gb:ZWE:ADM2:62879985B61982490553927",
+    "gb:ZWE:ADM2:62879985B62139417575129",
+    "gb:ZWE:ADM2:62879985B62286453442238",
+    "gb:ZWE:ADM2:62879985B63106535588765",
+    "gb:ZWE:ADM2:62879985B63510140227201",
+    "gb:ZWE:ADM2:62879985B6381696170590",
+    "gb:ZWE:ADM2:62879985B64547719639207",
+    "gb:ZWE:ADM2:62879985B67434637878842",
+    "gb:ZWE:ADM2:62879985B68584159333685",
+    "gb:ZWE:ADM2:62879985B70697135902781",
+    "gb:ZWE:ADM2:62879985B71906244719276",
+    "gb:ZWE:ADM2:62879985B71976011533530",
+    "gb:ZWE:ADM2:62879985B72104982716343",
+    "gb:ZWE:ADM2:62879985B72758591248620",
+    "gb:ZWE:ADM2:62879985B73698916591345",
+    "gb:ZWE:ADM2:62879985B7429577065299",
+    "gb:ZWE:ADM2:62879985B74735389049647",
+    "gb:ZWE:ADM2:62879985B76003628227782",
+    "gb:ZWE:ADM2:62879985B77595643638308",
+    "gb:ZWE:ADM2:62879985B77670672881921",
+    "gb:ZWE:ADM2:62879985B80414783582816",
+    "gb:ZWE:ADM2:62879985B80856032780976",
+    "gb:ZWE:ADM2:62879985B81037274427079",
+    "gb:ZWE:ADM2:62879985B8135663934724",
+    "gb:ZWE:ADM2:62879985B8175030067165",
+    "gb:ZWE:ADM2:62879985B81925630456869",
+    "gb:ZWE:ADM2:62879985B82265466456290",
+    "gb:ZWE:ADM2:62879985B85730198836463",
+    "gb:ZWE:ADM2:62879985B87269615821372",
+    "gb:ZWE:ADM2:62879985B88663690016764",
+    "gb:ZWE:ADM2:62879985B92853728292751",
+    "gb:ZWE:ADM2:62879985B93379184763454",
+    "gb:ZWE:ADM2:62879985B94368680034661",
+    "gb:ZWE:ADM2:62879985B94385115404707",
+    "gb:ZWE:ADM2:62879985B9450607738823",
+    "gb:ZWE:ADM2:62879985B9452203972303",
+    "gb:ZWE:ADM2:62879985B94788523957313",
+    "gb:ZWE:ADM2:62879985B95307090216295",
+    "gb:ZWE:ADM2:62879985B95649455057602",
+    "gb:ZWE:ADM2:62879985B9904230629136",
+    "gb:ZWE:ADM2:62879985B99568881619892"
+  ],
+  "subject_ids_sha256": "5a578f9df7d0b932d14922f47ce7afc490a845a6aa9cf7f9809de47259f10d23",
+  "baseline": {
+    "commit": "90f04d30cf773b5be538bc3d85d4d9051768deef",
+    "files": [
+      {
+        "path": "data/geography/part-28.json",
+        "bytes": 6613963,
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "data/geography/part-28.json": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "data/hierarchy.json": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "data/administrative-sources.json": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+    },
+    "pin_files": {
+      "data/geography/part-28.json": "data/geography/part-28.json",
+      "data/hierarchy.json": "data/hierarchy.json",
+      "data/administrative-sources.json": "data/administrative-sources.json"
+    },
+    "subject_files": {
+      "atlas:city:ZWE-525": "data/geography/part-28.json",
+      "gb:ZMB:ADM2:96606910B12043083212801": "data/geography/part-28.json",
+      "gb:ZMB:ADM2:96606910B40356469041881": "data/geography/part-28.json",
+      "gb:ZMB:ADM2:96606910B40532044353326": "data/geography/part-28.json",
+      "gb:ZMB:ADM2:96606910B44569696961001": "data/geography/part-28.json",
+      "gb:ZMB:ADM2:96606910B53587891275683": "data/geography/part-28.json",
+      "gb:ZMB:ADM2:96606910B61559073197846": "data/geography/part-28.json",
+      "gb:ZMB:ADM2:96606910B63463932820005": "data/geography/part-28.json",
+      "gb:ZMB:ADM2:96606910B72426001037260": "data/geography/part-28.json",
+      "gb:ZMB:ADM2:96606910B72978673218668": "data/geography/part-28.json",
+      "gb:ZMB:ADM2:96606910B8201415928290": "data/geography/part-28.json",
+      "gb:ZMB:ADM2:96606910B89827390447979": "data/geography/part-28.json",
+      "gb:ZMB:ADM2:96606910B94036775861358": "data/geography/part-28.json",
+      "gb:ZMB:ADM2:96606910B99834275279733": "data/geography/part-28.json",
+      "gb:ZMB:ADM2:96606910B99969900210710": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B11044582115440": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B11590561680965": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B11813721132111": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B12004776276546": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B12430304395671": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B13905566839040": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B16821678583413": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B16966915887003": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B17872129948675": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B19451757525909": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B19621940565976": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B19801447956475": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B20095614329171": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B20819792882543": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B22521901004108": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B2376154175895": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B25079588336993": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B25835202040787": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B26822606878793": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B27116987268551": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B2724410998329": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B28116741742257": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B28907517418650": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B291328644758": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B29850987700829": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B32287047423365": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B32453879798080": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B33346343467018": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B33993196799610": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B34329227357286": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B3462136177187": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B3510020236883": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B35130574204282": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B35185654442710": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B37979176120849": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B38074336306054": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B39326733261715": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B43566873745809": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B49874859197959": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B50430993830170": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B51591282802552": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B51719638002761": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B53444954846030": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B54181646880786": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B59782036697495": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B6112756891378": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B61982490553927": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B62139417575129": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B62286453442238": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B63106535588765": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B63510140227201": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B6381696170590": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B64547719639207": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B67434637878842": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B68584159333685": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B70697135902781": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B71906244719276": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B71976011533530": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B72104982716343": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B72758591248620": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B73698916591345": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B7429577065299": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B74735389049647": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B76003628227782": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B77595643638308": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B77670672881921": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B80414783582816": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B80856032780976": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B81037274427079": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B8135663934724": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B8175030067165": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B81925630456869": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B82265466456290": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B85730198836463": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B87269615821372": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B88663690016764": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B92853728292751": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B93379184763454": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B94368680034661": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B94385115404707": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B9450607738823": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B9452203972303": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B94788523957313": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B95307090216295": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B95649455057602": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B9904230629136": "data/geography/part-28.json",
+      "gb:ZWE:ADM2:62879985B99568881619892": "data/geography/part-28.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "geoboundaries-zmb",
+      "url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d",
+      "role": "National ADM2 district boundaries and metadata; simplified file is the Atlas administrative-source pin",
+      "vintage": "2020 boundary vintage; repository build 2023-12-12",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "geoBoundaries gbOpen, CC BY 4.0; attribute GRID3 and Office of the Surveyor General"
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-9203cb61c3883e07/source/geoboundaries/geoBoundaries-ZMB-ADM2_simplified.geojson",
+          "bytes": 3574952,
+          "sha256": "58e9df3f95bb4c7539e5fb48839b246b2bfb12694cf5db3ed595240156016c60",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-9203cb61c3883e07/source/geoboundaries/geoBoundaries-ZMB-ADM2-metaData.json",
+          "bytes": 829,
+          "sha256": "a2deeb0dc00bc1f8b7b1a5be7668be1f4139ccaf65b2acd0efc0783237a9011b",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "geoboundaries-zmb-full-resolution",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/ZMB/ADM2/geoBoundaries-ZMB-ADM2.geojson",
+      "role": "Original full-resolution national ADM2 boundaries; exact upstream Git LFS object",
+      "vintage": "2020 boundary vintage; repository build 2023-12-12",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "geoBoundaries gbOpen, CC BY 4.0; attribute GRID3 and Office of the Surveyor General"
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Restore from this immutable media URL. Git LFS OID/SHA-256 ff4a4c8a92f7416b8457f423b339f2623b10f59410339911a0427fcee8434f17; expected size 35,998,492 bytes. The pointer and URL are retained in source/geoboundaries/geoBoundaries-ZMB-ADM2.geojson.lfs-pointer.txt.",
+      "limit": "Fetched and SHA-256 verified on 2026-10-05, then omitted because 35,998,492 bytes exceeds the per-input 32 MiB evidence cap. This is a lawful but unretained original; source membership is checked against the retained simplified file."
+    },
+    {
+      "id": "geoboundaries-zwe",
+      "url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d",
+      "role": "National ADM2 district boundaries and metadata; full and simplified release files",
+      "vintage": "2020 boundary vintage; repository build 2023-12-12",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "geoBoundaries gbOpen, CC BY 3.0 IGO; attribute ZIMSTAT Central Statistics Office and OCHA ROSEA"
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-9203cb61c3883e07/source/geoboundaries/geoBoundaries-ZWE-ADM2.geojson",
+          "bytes": 17379177,
+          "sha256": "074a3632634b9448bb4043580fe7199e0b2f64ec68bd2f98932a2c68b3795b88",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-9203cb61c3883e07/source/geoboundaries/geoBoundaries-ZWE-ADM2_simplified.geojson",
+          "bytes": 1042500,
+          "sha256": "3486ef2803574e63db97e2a35b6688bb327cb8d6ff5e439691c1cc3068ddb424",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-9203cb61c3883e07/source/geoboundaries/geoBoundaries-ZWE-ADM2-metaData.json",
+          "bytes": 1008,
+          "sha256": "6adc8672208814d255f3e2224e804c30be49a48ee4afae03e94f001aa75eb5a4",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "natural-earth-admin1",
+      "url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+      "role": "Small-scale admin-1 identity and naming reference, including feature ZWE-525",
+      "vintage": "Pinned 10m release commit; feature survey vintage undated",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "redistributable",
+        "terms": "Natural Earth public domain"
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-9203cb61c3883e07/source/natural-earth-admin1/ne_10m_admin_1_states_provinces.cpg",
+          "bytes": 5,
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-9203cb61c3883e07/source/natural-earth-admin1/ne_10m_admin_1_states_provinces.dbf",
+          "bytes": 15161514,
+          "sha256": "7b3244333680d6aec58cc49bde9484177a0baa44c974ec9d371a8f7f1cdb5359",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-9203cb61c3883e07/source/natural-earth-admin1/ne_10m_admin_1_states_provinces.prj",
+          "bytes": 145,
+          "sha256": "a02a27b1d1982c8516d83398e85a3c8b1aef1713c13ef4d84d7bde17430c07c4",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-9203cb61c3883e07/source/natural-earth-admin1/ne_10m_admin_1_states_provinces.shp",
+          "bytes": 20998780,
+          "sha256": "c6f5c8b4b1320d9417033762419c6df1eb423989cd880fba78ea0b1e3522cbe4",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-9203cb61c3883e07/source/natural-earth-admin1/ne_10m_admin_1_states_provinces.shx",
+          "bytes": 36868,
+          "sha256": "37a9e2bc79ed31d3bdea3cb62d928f77281a1c88d645cd33430231c75dbcf350",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "zamstats-2022-eastern",
+      "url": "https://www.zamstats.gov.zm/wp-content/uploads/2023/12/2022-Census-of-Population-and-Housing-Preliminary.pdf",
+      "role": "Official Eastern Province district roster, Census 2022 Appendix 3.3 p.34",
+      "vintage": "2022 census",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "No open redistribution license identified on inspected source. Do not redistribute without rights review."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Retrieve the official PDF from the canonical ZamStats URL and inspect Appendix 3.3, PDF p.34; recorded observed SHA-256 is fa43febbfbde94884d6bdbe82765a43f2e6e882fc90bb3a35cc6eab45fd18dfd.",
+      "limit": "PDF is not retained; license and current legal boundary linework are not established."
+    },
+    {
+      "id": "zamstats-eastern-projections-2023-2047",
+      "url": "https://www.zamstats.gov.zm/wp-content/uploads/2026/04/Eastern-Province-Census-Projections-2023-2047.pdf",
+      "role": "Official Eastern district projection roster, Table A4 p.14",
+      "vintage": "2026 publication; 2022 census base",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "No open redistribution license identified on inspected source. Do not redistribute without rights review."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Retrieve the official PDF and inspect Table A4, p.14; observed SHA-256 2473f8a57535413f0012356196ebde06868215dbe620e9ed18903b02f3237ca1.",
+      "limit": "PDF is not retained; projections establish roster, not boundary polygons."
+    },
+    {
+      "id": "eastern-province-admin",
+      "url": "https://www.eas.gov.zm/?page_id=118",
+      "role": "Provincial administration current district list",
+      "vintage": "Retrieved 2026-10-05; page undated",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms not stated on inspected page."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Restore the official provincial administration page and inspect “Our Districts”.",
+      "limit": "HTML snapshot not retained; list is corroborative administrative-role evidence."
+    },
+    {
+      "id": "chama-council-idp-2025",
+      "url": "https://www.chamacouncil.gov.zm/wp-content/uploads/2025/02/CHAMA-DISTRICT-INTEGRATED-DEVELOPMENT-PLAN-28_02_2025.pdf",
+      "role": "Chama historical province realignment account, IDP governance section",
+      "vintage": "2025, p.9 reported by indexed text",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Unknown; no payload obtained."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Retrieve the official PDF and verify its bytes and p.9; TLS certificate validation failed on 2026-10-05.",
+      "limit": "Not obtained; current parent is corroborated independently by ZamStats 2022 and Eastern Province Administration."
+    },
+    {
+      "id": "zimstat-districts-2022",
+      "url": "https://www.zimstat.co.zw/wp-content/uploads/Census/2022_Population_Distribution_by_District_Ward_SexandHouseholds_23012023.pdf",
+      "role": "Official Zimbabwe province and district roster and Harare map, pp.4-5 and 98-101",
+      "vintage": "2022 census",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "No open redistribution license identified on inspected source. Do not redistribute without rights review."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Retrieve the official ZIMSTAT PDF from its canonical URL; observed SHA-256 8c941b3c126b2c4f36c4581620867e3ad22613cf2c0b3ff3f392bce8bf5f2d0c.",
+      "limit": "PDF is not retained; a roster/map does not establish compatible current legal boundary vectors."
+    },
+    {
+      "id": "zimstat-harare-2012",
+      "url": "https://www.zimstat.co.zw/wp-content/uploads/publications/Population/population/Harare.pdf",
+      "role": "Historical Harare district roster context",
+      "vintage": "2012 census; indexed table",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Unknown; canonical locator returned 404 on 2026-10-05."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Retry the canonical locator or locate an official ZIMSTAT archive; confirm exact source bytes before use.",
+      "limit": "Not obtained; contextual only, not current boundary evidence."
+    },
+    {
+      "id": "zimbabwe-geoportal-boundaries",
+      "url": "https://zimgeoportal.org.zw/datasets/zimbabwe-administrative-boundaries/",
+      "role": "Potential ZIMSTAT/OCHA/ITOS province/district/ward vector source",
+      "vintage": "Resource filename indicates 2018-09-11",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "ODC-BY 1.0 is listed; actual portal data access requires sign-in."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Authenticate through the official Zimbabwe National Geoportal, retrieve zwe_adm_zimstat_ocha_itos_20180911.gdb, record exact bytes, layer metadata and license statement.",
+      "limit": "Not downloaded; source vintage and current boundary validity need verification."
+    },
+    {
+      "id": "zambia-nsdi-districts-2020",
+      "url": "https://services3.arcgis.com/BU6Aadhn6tbBEdyk/arcgis/rest/services/Zambia_Administrative_Boundaries_Districts_2020/FeatureServer/0",
+      "role": "Potential Zambia official-contributor district vector comparison",
+      "vintage": "Layer named 2020; exact geometry date not established",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Inspected service metadata states no reuse license."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Restore the layer through the ArcGIS REST API, record response bytes and obtain reuse terms before retaining or comparing geometry.",
+      "limit": "Not downloaded or redistributed; geometry license is unresolved."
+    },
+    {
+      "id": "un-salb-zimbabwe",
+      "url": "https://salb.un.org/en/data/zwe",
+      "role": "Alternative validated administrative polygons",
+      "vintage": "Dataset vintage not conclusively established from inspected landing page",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "SALB 2021 terms are noncommercial; project compatibility is unestablished."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Review dataset landing page and https://salb.un.org/sites/default/files/wysiwyg_uploads/docs_uploads/TermsOfUseSALB2021.pdf before any use.",
+      "limit": "Not used or retained because compatible project-use permission is unestablished."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/ASSESSMENT.md",
+      "bytes": 9793,
+      "sha256": "fbe2f8d6d453d6ce504355b6de22c4aad649c03b652a2052553a6754ab563265",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/README.md",
+      "bytes": 3576,
+      "sha256": "c2ded54a7b32d197836a28c98d681de221c1ab5666f0372162e195ec9adf77a4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/reproduce.py",
+      "bytes": 16572,
+      "sha256": "19faa55cb06de22a22e8d25ed7cc3ea9c4997a6572c756f763c2d2008e6daaff",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/PROVENANCE.md",
+      "bytes": 11757,
+      "sha256": "5d033318738f2d566ff69feb162399f45a94d69bcf65ab0d6b298fcde1477418",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/claim-receipt.json",
+      "bytes": 924,
+      "sha256": "2616615787a0efb4110e09febd5157c84389c689d49d19510e0f3327fa3abd58",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/control-negative.json",
+      "bytes": 380,
+      "sha256": "ab0e9d3b9d63489c7e44a30732e560760958922f57ea1f474551658d85c2422d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/control-positive.json",
+      "bytes": 331,
+      "sha256": "ed6cf3e5a7cac4096a2485b1782279b887269c855f616d4afa623f2b2ce8fa8c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/geoboundaries-9469f09/ZWE/ADM2/geoBoundaries-ZWE-ADM2-metaData.json",
+      "bytes": 129,
+      "sha256": "351038cf0fad6784bab95e8f510e60a39eba5d99a820d672fb4787c4a6647cd6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/geoboundaries/geoBoundaries-ZMB-ADM2.geojson.lfs-pointer.txt",
+      "bytes": 584,
+      "sha256": "a3e67abf75ea5dff7d2e9a4b92b812c68a5220140e9bdb596ef375725bb21644",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/issue-scope.json",
+      "bytes": 9863,
+      "sha256": "bcb9fca6267955c910f1638cb195c64d2fb367ef6a65ab27f55e9329ab1442bd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/issue-snapshot.json",
+      "bytes": 20716,
+      "sha256": "d9fcf9bd6fdab1c4c8a5c8474514c14f79e883790a4f6a8564000ae1f8e557fd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/reproducibility.json",
+      "bytes": 477,
+      "sha256": "be7fd6cabcb5b070ecdeae1d5e50504307e7255dc1d95f0da73eec58d43dfe24",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/reproduction-run-1.json",
+      "bytes": 3556,
+      "sha256": "92c730a1cc2487f43a473392c36e2bb753e6303e7fc4c01aa53a8f9f0721dec6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/reproduction-run-2.json",
+      "bytes": 3556,
+      "sha256": "92c730a1cc2487f43a473392c36e2bb753e6303e7fc4c01aa53a8f9f0721dec6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/subject-assessment.csv",
+      "bytes": 53596,
+      "sha256": "b51281dece57dc59a18bd1c8b1b21bcb1cd0a9ae3529e3ddaa48a2b0380095f2",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "source-roster-reconciliation",
+      "kind": "source",
+      "description": "Inspect pinned source role, vintage and reuse metadata; join stable geoBoundaries shapeIDs to frozen Atlas identities; account for each source row exactly once and record limits where comparable contemporary geometry is unavailable.",
+      "software": "Python 3 standard library; Git 2.52; source inspection through GitHub API/media and official publisher documents",
+      "units": "source features, Atlas IDs, administrative units, whole-file bytes"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "frozen-scope-member-count",
+      "value": 102,
+      "unit": "unique Atlas IDs",
+      "vintage": "baseline",
+      "input_sha256": "bcb9fca6267955c910f1638cb195c64d2fb367ef6a65ab27f55e9329ab1442bd",
+      "evaluation_commit": "90f04d30cf773b5be538bc3d85d4d9051768deef"
+    },
+    {
+      "id": "zwe-source-feature-count",
+      "value": 91,
+      "unit": "ADM2 source features",
+      "vintage": "baseline",
+      "input_sha256": "3486ef2803574e63db97e2a35b6688bb327cb8d6ff5e439691c1cc3068ddb424",
+      "evaluation_commit": "90f04d30cf773b5be538bc3d85d4d9051768deef"
+    },
+    {
+      "id": "zwe-crosswalk-represented-fraction",
+      "value": 1,
+      "numerator": 91,
+      "denominator": 91,
+      "unit": "fraction of source features represented exactly once",
+      "vintage": "baseline",
+      "input_sha256": "92c730a1cc2487f43a473392c36e2bb753e6303e7fc4c01aa53a8f9f0721dec6",
+      "evaluation_commit": "90f04d30cf773b5be538bc3d85d4d9051768deef"
+    },
+    {
+      "id": "assessment-subject-count",
+      "value": 113,
+      "unit": "location and province assessment rows",
+      "vintage": "baseline",
+      "input_sha256": "b51281dece57dc59a18bd1c8b1b21bcb1cd0a9ae3529e3ddaa48a2b0380095f2",
+      "evaluation_commit": "90f04d30cf773b5be538bc3d85d4d9051768deef"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "frozen-scope-member-count",
+      "value": 102,
+      "unit": "unique Atlas IDs"
+    },
+    {
+      "metric_id": "zwe-source-feature-count",
+      "value": 91,
+      "unit": "ADM2 source features"
+    },
+    {
+      "metric_id": "zwe-crosswalk-represented-fraction",
+      "value": 1,
+      "unit": "fraction of source features represented exactly once"
+    },
+    {
+      "metric_id": "assessment-subject-count",
+      "value": 113,
+      "unit": "location and province assessment rows"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "The frozen list has 102 unique IDs and all resolve in the pinned baseline part-28 file; the issue-recorded member digest does not match the standard compact-JSON digest computed from the saved list.",
+      "status": "supported",
+      "source_ids": [
+        "geoboundaries-zmb",
+        "geoboundaries-zwe",
+        "zimstat-districts-2022"
+      ]
+    },
+    {
+      "text": "All 91 Zimbabwe geoBoundaries ADM2 source IDs are accounted for exactly once in 87 direct district rows and four members of the Harare city composite, but the city territory and parent scale remain unresolved.",
+      "status": "supported",
+      "source_ids": [
+        "geoboundaries-zwe",
+        "natural-earth-admin1",
+        "zimstat-districts-2022"
+      ]
+    },
+    {
+      "text": "Current Zambia sources place Chama in Eastern Province rather than its frozen Atlas Muchinga parent; the shared Chama correction belongs to neighboring issue #412 and is handed off there.",
+      "status": "supported",
+      "source_ids": [
+        "zamstats-2022-eastern",
+        "zamstats-eastern-projections-2023-2047",
+        "eastern-province-admin"
+      ]
+    },
+    {
+      "text": "The exact current Harare city territory and polygon boundaries for the reviewed subjects are unresolved; source counts and identity joins do not verify geometry.",
+      "status": "unresolved",
+      "source_ids": [
+        "geoboundaries-zwe",
+        "natural-earth-admin1",
+        "zimstat-districts-2022",
+        "zimbabwe-geoportal-boundaries",
+        "zambia-nsdi-districts-2020"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 data/regional-review/regional-review-9203cb61c3883e07/reproduce.py",
+    "node scripts/evidence-quality.mjs data/regional-review/regional-review-9203cb61c3883e07/evidence-quality.json ."
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "frozen-scope-member-count",
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/reproduction-run-1.json",
+      "json_pointer": "/scope_location_count"
+    },
+    {
+      "metric_id": "zwe-source-feature-count",
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/reproduction-run-1.json",
+      "json_pointer": "/source_counts/ZWE"
+    },
+    {
+      "metric_id": "zwe-crosswalk-represented-fraction",
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/reproduction-run-1.json",
+      "json_pointer": "/zwe_source_features_represented_fraction"
+    },
+    {
+      "metric_id": "assessment-subject-count",
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/reproduction-run-1.json",
+      "json_pointer": "/assessment_rows"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "source-roster-reconciliation",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/regional-review-9203cb61c3883e07/source/control-positive.json"
+    },
+    {
+      "method_id": "source-roster-reconciliation",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/regional-review-9203cb61c3883e07/source/control-negative.json"
+    },
+    {
+      "method_id": "source-roster-reconciliation",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/regional-review-9203cb61c3883e07/source/reproducibility.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/ASSESSMENT.md",
+      "status": "A",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/README.md",
+      "status": "A",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/evidence-quality.json",
+      "status": "A",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/reproduce.py",
+      "status": "A",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/PROVENANCE.md",
+      "status": "A",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/claim-receipt.json",
+      "status": "A",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/control-negative.json",
+      "status": "A",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/control-positive.json",
+      "status": "A",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/geoboundaries-9469f09/ZWE/ADM2/geoBoundaries-ZWE-ADM2-metaData.json",
+      "status": "A",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/geoboundaries/geoBoundaries-ZMB-ADM2-metaData.json",
+      "status": "A",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/geoboundaries/geoBoundaries-ZMB-ADM2.geojson.lfs-pointer.txt",
+      "status": "A",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/geoboundaries/geoBoundaries-ZMB-ADM2_simplified.geojson",
+      "status": "A",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/geoboundaries/geoBoundaries-ZWE-ADM2-metaData.json",
+      "status": "A",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/geoboundaries/geoBoundaries-ZWE-ADM2.geojson",
+      "status": "A",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/geoboundaries/geoBoundaries-ZWE-ADM2_simplified.geojson",
+      "status": "A",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/issue-scope.json",
+      "status": "A",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/issue-snapshot.json",
+      "status": "A",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/natural-earth-admin1/ne_10m_admin_1_states_provinces.cpg",
+      "status": "A",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/natural-earth-admin1/ne_10m_admin_1_states_provinces.dbf",
+      "status": "A",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/natural-earth-admin1/ne_10m_admin_1_states_provinces.prj",
+      "status": "A",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/natural-earth-admin1/ne_10m_admin_1_states_provinces.shp",
+      "status": "A",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/natural-earth-admin1/ne_10m_admin_1_states_provinces.shx",
+      "status": "A",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/reproducibility.json",
+      "status": "A",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/reproduction-run-1.json",
+      "status": "A",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/reproduction-run-2.json",
+      "status": "A",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/subject-assessment.csv",
+      "status": "A",
+      "previous_path": null
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "method_id": "source-roster-reconciliation",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "deliberately_omitted_source_id": "62879985B25596949610081",
+  "detected_unrepresented_source_ids": [
+    "62879985B25596949610081"
+  ],
+  "assertion": "Deleting one Harare composite member from a copied crosswalk makes the reconciliation identify exactly that omitted ID."
+}
