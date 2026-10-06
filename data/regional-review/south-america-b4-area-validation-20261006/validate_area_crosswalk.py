@@ -133,7 +133,7 @@ def write_csv(path, columns, rows):
     with path.open('w', newline='', encoding='utf-8') as stream:
         writer = csv.DictWriter(stream, fieldnames=columns, lineterminator='\n'); writer.writeheader(); writer.writerows(rows)
 
-def negative_controls(parent_rows, area_rows, crosswalk_rows, issue_ids, issue_hash, source_scope, features, hierarchy):
+def negative_controls(parent_rows, area_rows, crosswalk_rows, crosswalk_raw, issue_ids, issue_hash, source_scope, features, hierarchy):
     cases = []
     def rejected(name, fn):
         try: fn()
@@ -157,7 +157,20 @@ def negative_controls(parent_rows, area_rows, crosswalk_rows, issue_ids, issue_h
     badcross = [dict(r) for r in crosswalk_rows]
     area_row = next(r for r in badcross if r['record_type'] == 'area'); area_row['wgsrpd_code'] = 'ZZZ'
     rejected('wrong-area-source-label', lambda: validate_crosswalk(badcross, area_rows, parent_rows, issue_ids, features, hierarchy))
-    require(len(cases) == 9, 'Expected nine negative controls')
+    badarea = [dict(r) for r in area_rows]; badarea[0]['area_name'] += ' altered'
+    rejected('wrong-area-name', lambda: validate_crosswalk(crosswalk_rows, badarea, parent_rows, issue_ids, features, hierarchy))
+    badarea_count = [dict(r) for r in area_rows]; badarea_count[0]['owned_member_count'] = str(int(badarea_count[0]['owned_member_count']) + 1)
+    rejected('wrong-area-owned-count', lambda: validate_crosswalk(crosswalk_rows, badarea_count, parent_rows, issue_ids, features, hierarchy))
+    wrong_ancestry = [dict(r) for r in crosswalk_rows]
+    parent_row = next(r for r in wrong_ancestry if r['record_type'] == 'parent'); parent_row['area_id'] = 'framework:area:paraguay:b8f36a1a90ee'
+    rejected('wrong-parent-area-ancestry', lambda: validate_crosswalk(wrong_ancestry, area_rows, parent_rows, issue_ids, features, hierarchy))
+    wrong_match = [dict(r) for r in crosswalk_rows]
+    next(r for r in wrong_match if r['record_type'] == 'parent')['atlas_to_l4_name_match'] = 'fabricated-match'
+    def serialized(rows):
+        stream=io.StringIO(newline=''); writer=csv.DictWriter(stream, fieldnames=list(crosswalk_rows[0]), lineterminator='\n'); writer.writeheader(); writer.writerows(rows)
+        return stream.getvalue().encode('utf-8')
+    rejected('fabricated-source-name-match', lambda: require(serialized(wrong_match) == crosswalk_raw, 'Candidate crosswalk differs from reproduced original'))
+    require(len(cases) == 13, 'Expected thirteen negative controls')
     return {'method_id':'exact-roster-and-ancestry','kind':'negative-control','outcome':'passed','cases':cases}
 
 def main():
@@ -200,7 +213,7 @@ def main():
     crosswalk_raw = input_bytes[EXPECTED_PINS['area_crosswalk'][0]]
     crosswalk_rows = csv_rows(crosswalk_raw, 'source crosswalk')
     parent_groups = validate_parent_rows(parent_rows, issue_ids, feature_map, hierarchy)
-    negative = negative_controls(parent_rows, area_rows, crosswalk_rows, issue_ids, issue_scope['subject_ids_sha256'], source_scope, feature_map, hierarchy)
+    negative = negative_controls(parent_rows, area_rows, crosswalk_rows, crosswalk_raw, issue_ids, issue_scope['subject_ids_sha256'], source_scope, feature_map, hierarchy)
     # Validate all three issue rosters against native parent->area ancestry.
     roster_rows = []
     roster_ids = {}

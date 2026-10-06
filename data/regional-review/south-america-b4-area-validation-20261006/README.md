@@ -30,7 +30,21 @@ python3 data/regional-review/south-america-b4-area-validation-20261006/validate_
   --output-dir data/regional-review/south-america-b4-area-validation-20261006/output
 ```
 
-The script reads all nine issue-pinned files and the six native geography parts through `git show` at the baseline commit. It runs the original source-crosswalk reproducer twice in bounded temporary directories and requires byte-identical results matching the original crosswalk. It writes the native subject-parent-area rosters, report and controls. The packet also records a second complete run's output hashes in `output/reproducibility.json`; every compared output must match byte-for-byte.
+The script reads all nine issue-pinned files and the six native geography parts through `git show` at the baseline commit. It also parses the exact TDWG L3/L4 rows through the pinned original reproducer, which derives each source label and name-match field. The candidate crosswalk must reproduce byte-for-byte. The validator runs that original reproduction twice and exercises duplicate, missing, foreign, wrong-name, wrong-count, wrong-area, fabricated-match and rehashed-scope controls. It writes the native subject-parent-area rosters, report and controls.
+
+To create the two complete deterministic output runs and compare whole-file hashes, run:
+
+```sh
+python3 data/regional-review/south-america-b4-area-validation-20261006/validate_area_crosswalk.py \
+  --level3 /path/to/tblLevel3.txt --level4 /path/to/tblLevel4.txt \
+  --output-dir data/regional-review/south-america-b4-area-validation-20261006/output
+python3 data/regional-review/south-america-b4-area-validation-20261006/validate_area_crosswalk.py \
+  --level3 /path/to/tblLevel3.txt --level4 /path/to/tblLevel4.txt \
+  --output-dir data/regional-review/south-america-b4-area-validation-20261006/scratch/run-two-output
+python3 data/regional-review/south-america-b4-area-validation-20261006/build_manifest.py
+```
+
+The build step requires the first run, second run and restored exact source bytes to be present. It emits `output/reproducibility.json`, input/output whole-file inventories and the evidence manifest. The checked-in packet excludes the raw TDWG tables because their reuse terms remain unknown.
 
 Run the repository checks with Node.js 24:
 
