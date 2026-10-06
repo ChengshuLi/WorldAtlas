@@ -65,7 +65,7 @@ ledger=candidate_descriptor(ledger_path);summary_path=f'{PACKET}/results/run-one
 summary=json.loads((ROOT/summary_path).read_bytes())
 metrics=[];bindings=[];summaries=[]
 def add_metric(mid,value,unit,pointer,path=summary_path):
- metrics.append({'id':mid,'value':value,'unit':unit,'vintage':'current','evaluation_commit':BASE,'input_sha256':ledger['sha256']})
+ metrics.append({'id':mid,'value':value,'unit':unit,'vintage':'archived','evaluation_commit':BASE,'input_sha256':ledger['sha256']})
  bindings.append({'metric_id':mid,'path':path,'json_pointer':pointer});summaries.append({'metric_id':mid,'value':value,'unit':unit})
 add_metric('selected-components',282,'components','/roster_count')
 add_metric('selected-fragments',283,'fragments','/bound_fragment_count',f'{PACKET}/results/controls/positive-exact-roster-and-contact-closure.json')
