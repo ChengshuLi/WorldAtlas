@@ -1,0 +1,36 @@
+{
+  "retrieval_date_utc": "2026-10-06",
+  "source": "Texas Legislature, Texas Constitution and Statutes site",
+  "attempts": [
+    {
+      "url": "https://statutes.capitol.texas.gov/docs/sdocs/thetexasconstitution.pdf",
+      "purpose": "official consolidated constitution PDF",
+      "http_status": 200,
+      "content_type": "text/html",
+      "last_modified": "Tue, 12 May 2026 15:11:35 GMT",
+      "bytes": 250874,
+      "sha256": "dbfba8a96dc3cd584157ca66aaafdf67e0ed15dd5a0c8a58f3d4bd0f109fc646",
+      "result": "navigation/code-selector shell, not PDF and not Article V section text"
+    },
+    {
+      "url": "https://statutes.capitol.texas.gov/?artSec=5.18&chapter=CN.5&code=CN&tab=1",
+      "purpose": "attempted official Article V section view",
+      "http_status": 200,
+      "content_type": "text/html",
+      "bytes": 250874,
+      "sha256": "dbfba8a96dc3cd584157ca66aaafdf67e0ed15dd5a0c8a58f3d4bd0f109fc646",
+      "result": "same navigation/code-selector shell; no provision text"
+    },
+    {
+      "url": "https://statutes.capitol.texas.gov/Docs/CN/pdf/CN.5.pdf",
+      "purpose": "official Article V chapter PDF endpoint discovered from official Texas Constitution and Statutes index",
+      "http_status": 200,
+      "content_type": "text/html",
+      "bytes": 250874,
+      "sha256": "dbfba8a96dc3cd584157ca66aaafdf67e0ed15dd5a0c8a58f3d4bd0f109fc646",
+      "result": "network returned the same navigation/code-selector shell instead of PDF bytes; not retained as a PDF"
+    }
+  ],
+  "reuse": "No explicit license statement was found on the retrieved shell. It is retained solely as factual retrieval evidence; no statute text is redistributed in this packet.",
+  "restoration": "Use the official selector with Code=Texas Constitution, Article=5, Section=18 and retain only after verifying the provision text, or use the site's actual PDF download control and verify a PDF signature. Preserve complete original bytes and record immutable URL, retrieval time, final URL, status, content type, bytes, SHA-256, source vintage, and reuse terms."
+}

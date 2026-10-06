@@ -1,0 +1,78 @@
+{
+  "boundary_completeness_or_legal_validity_inferred": false,
+  "crs_prj_member": "cb_2018_us_county_500k.prj",
+  "crs_prj_text": "GEOGCS[\"GCS_North_American_1983\",DATUM[\"D_North_American_1983\",SPHEROID[\"GRS_1980\",6378137,298.257222101]],PRIMEM[\"Greenwich\",0],UNIT[\"Degree\",0.017453292519943295]]",
+  "issue": 1138,
+  "numerical_effect_measured": false,
+  "original_assessments_modified": false,
+  "other_input_crs_declarations": {
+    "census_tigerweb": {
+      "2018": {
+        "request_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2018/MapServer/84/query?where=STATE+%3D+%2748%27&outFields=GEOID%2CSTATE%2CCOUNTY%2CNAME%2CBASENAME%2CLSADC%2CFUNCSTAT%2CCOUNTYNS%2CAREALAND%2CAREAWATER&returnGeometry=true&outSR=4326&f=geojson",
+        "requested_output_crs": "EPSG:4326 (outSR parameter)",
+        "retrieved_at": "2026-10-05T06:14:19-07:00"
+      },
+      "2018_service_layer": {
+        "native_and_latest_spatial_reference": {
+          "falseM": -100000,
+          "falseX": -23037491.437525004,
+          "falseY": -30241100,
+          "falseZ": 0,
+          "latestWkid": 3857,
+          "mTolerance": 0.001,
+          "mUnits": 10000,
+          "wkid": 102100,
+          "xyTolerance": 0.001,
+          "xyUnits": 136482204.33636737,
+          "zTolerance": 2,
+          "zUnits": 1
+        },
+        "retrieved_at": "2026-10-05T06:14:19-07:00",
+        "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_ACS2018/MapServer/84?f=pjson"
+      },
+      "2025": {
+        "request_url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/39/query?where=STATE+%3D+%2748%27&outFields=GEOID%2CSTATE%2CCOUNTY%2CNAME%2CBASENAME%2CLSADC%2CFUNCSTAT%2CCOUNTYNS%2CAREALAND%2CAREAWATER&returnGeometry=true&outSR=4326&f=geojson",
+        "requested_output_crs": "EPSG:4326 (outSR parameter)",
+        "retrieved_at": "2026-10-05T06:14:54-07:00"
+      },
+      "2025_service_layer": {
+        "native_and_latest_spatial_reference": {
+          "falseM": -100000,
+          "falseX": -21950603.294350002,
+          "falseY": -30241100,
+          "falseZ": 0,
+          "latestWkid": 3857,
+          "mTolerance": 0.001,
+          "mUnits": 10000,
+          "wkid": 102100,
+          "xyTolerance": 0.001,
+          "xyUnits": 144357470.0445541,
+          "zTolerance": 2,
+          "zUnits": 1
+        },
+        "retrieved_at": "2026-10-05T06:14:54-07:00",
+        "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/39?f=pjson"
+      }
+    },
+    "geoboundaries_geojson": "urn:ogc:def:crs:OGC:1.3:CRS84",
+    "texas_constitution": "No provision bytes retained; no coordinate reference system applies.",
+    "texas_government_guide": "PDF text; no coordinate reference system applies."
+  },
+  "polygon_component_count_distribution": {
+    "1": 243,
+    "26": 1,
+    "3": 5,
+    "4": 1,
+    "5": 1,
+    "6": 1,
+    "7": 2
+  },
+  "polygon_components_total": 313,
+  "record_geometry_type_counts": {
+    "MultiPolygon": 11,
+    "Polygon": 243
+  },
+  "scope_count": 254,
+  "scope_subject_ids_sha256_lf_sorted": "ee5984e90bb7add17b6c18a948e92af5876765e20634202523b580c0d9725756",
+  "source_rows": 254
+}
