@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "method_id": "batch3-provenance-crossfield-validator",
+  "kind": "generator",
+  "outcome": "passed",
+  "run_one_sha256": "e8c94557ff8cba55057c3e09a7ba9c22c149043f26780b45d248d737ed453e5a",
+  "run_two_sha256": "e8c94557ff8cba55057c3e09a7ba9c22c149043f26780b45d248d737ed453e5a",
+  "compared_outputs": [
+    "baseline-feature-bindings.json",
+    "source-provenance-findings.json",
+    "adversarial-controls.json",
+    "verification-results.json"
+  ],
+  "basis": "SHA-256 of canonical ordered relative-path and whole-file-digest tuples for the four generated outputs."
+}
