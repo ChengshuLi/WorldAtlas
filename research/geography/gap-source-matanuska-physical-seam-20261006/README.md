@@ -20,12 +20,16 @@ The four exact native contact subjects and their retained Atlas reference year a
 
 Across the exact 282-component roster, unprojected planar Shapely comparisons in EPSG:4326 reported:
 
-| Source feature | Intersections | Source polygon covers component |
-| --- | ---: | ---: |
-| Matanuska–Susitna ADM2 | 281 | 279 |
-| Denali ADM2 | 3 | 1 |
-| RESOLVE ECO_ID 371, Cook Inlet taiga | 0 | 0 |
-| RESOLVE ECO_ID 405, Alaska–St. Elias Range tundra | 227 | 40 |
+| Source feature | Predicate | Count |
+| --- | --- | ---: |
+| Matanuska–Susitna ADM2 | intersects | 281 |
+| Matanuska–Susitna ADM2 | covers component | 279 |
+| Denali ADM2 | intersects | 3 |
+| Denali ADM2 | covers component | 1 |
+| RESOLVE ECO_ID 371, Cook Inlet taiga | intersects | 0 |
+| RESOLVE ECO_ID 371, Cook Inlet taiga | covers component | 0 |
+| RESOLVE ECO_ID 405, Alaska–St. Elias Range tundra | intersects | 227 |
+| RESOLVE ECO_ID 405, Alaska–St. Elias Range tundra | covers component | 40 |
 
 These are geometric observations in the source coordinate plane, not physical area measurements, ownership assignments, or proof of how any component was formed. No reprojection, snapping, tolerance, repair, closest-owner rule, or water/ice forcing was applied. The exact source-contact ledgers contain 571 contact rows across 283 fragments: ECO_ID 405 appears 283 times, Rock and Ice 283 times, ECO_ID 371 four times, and Denali once. Those contact rows are retained as source evidence, not interpreted as source-polygon coverage.
 
