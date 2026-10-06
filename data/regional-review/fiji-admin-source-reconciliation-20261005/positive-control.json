@@ -1,0 +1,24 @@
+{
+  "issue": 910,
+  "method_id": "fiji-crosswalk-and-lau-outline-comparison",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "passed_controls": 3,
+  "controls": [
+    {
+      "detail": "All 15 issue subjects map one-to-one to all 15 full-source features",
+      "name": "exact 15-subject roster",
+      "outcome": "passed"
+    },
+    {
+      "detail": "Every suffix ID and exact source name matches uniquely",
+      "name": "native identity and name",
+      "outcome": "passed"
+    },
+    {
+      "detail": "10E,45N transformed with always_xy; swapped axis coordinates cannot pass",
+      "name": "longitude-first CRS control",
+      "outcome": "passed"
+    }
+  ]
+}
