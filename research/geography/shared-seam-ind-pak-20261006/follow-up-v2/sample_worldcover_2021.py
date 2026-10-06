@@ -38,7 +38,7 @@ def main():
  if len(fragments)!=2: raise ValueError("expected exactly two complete fragments")
  receipts=[]; counts={fid:{} for fid in fragments}
  execution=subprocess.check_output(["git","rev-parse","HEAD"],cwd=ROOT,text=True).strip()
- baseline="0f08ca8c451e71bb3b06cb5fb82988e92d3048ab"
+ baseline="fc328993bb8c0690b3b4687d193c7f0887bd5b17"
  if subprocess.call(["git","merge-base","--is-ancestor",baseline,execution],cwd=ROOT)!=0:
   raise ValueError("fresh main baseline is not an ancestor of execution commit")
  if subprocess.check_output(["git","status","--porcelain","--untracked-files=no"],cwd=ROOT,text=True).strip():

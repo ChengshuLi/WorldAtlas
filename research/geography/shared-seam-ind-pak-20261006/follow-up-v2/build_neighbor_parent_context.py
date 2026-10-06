@@ -5,7 +5,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[4]
 PACKET=ROOT/'research/geography/shared-seam-ind-pak-20261006'
 OUT=PACKET/'follow-up-v2'
-BASE='0f08ca8c451e71bb3b06cb5fb82988e92d3048ab'
+BASE='fc328993bb8c0690b3b4687d193c7f0887bd5b17'
 def sha(b):return hashlib.sha256(b).hexdigest()
 def canonical(x):return json.dumps(x,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()
 def main(run):

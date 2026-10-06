@@ -37,7 +37,7 @@ def line_length(g):
     return 0.0
 
 def run(run_id):
-    pin = "0f08ca8c451e71bb3b06cb5fb82988e92d3048ab"
+    pin = "fc328993bb8c0690b3b4687d193c7f0887bd5b17"
     head = __import__('subprocess').check_output(["git","rev-parse","HEAD"],cwd=ROOT,text=True).strip()
     if __import__('subprocess').call(["git","merge-base","--is-ancestor",pin,head],cwd=ROOT)!=0:
         raise SystemExit(f"fresh main baseline {pin} is not an ancestor of execution commit {head}")

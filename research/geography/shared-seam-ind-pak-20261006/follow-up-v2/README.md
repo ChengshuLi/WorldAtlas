@@ -1,6 +1,6 @@
 # India–Pakistan seam follow-up (2026-10-06)
 
-This follow-up adds a current-main check and an independent physical-surface proxy without changing any of the earlier #1100 files. The fresh branch baseline is `0f08ca8c451e71bb3b06cb5fb82988e92d3048ab`.
+This follow-up adds a current-main check and an independent physical-surface proxy without changing any of the earlier #1100 files. The fresh branch baseline is `fc328993bb8c0690b3b4687d193c7f0887bd5b17`.
 
 ## Fresh-main check
 
