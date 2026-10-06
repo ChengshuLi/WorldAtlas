@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "issue": 1172,
+  "retrieved_at": "2026-10-06",
+  "basis": "Additive reproduction erratum; source facts and the prior report are preserved from the exact #996 packet inputs. This manifest does not assert boundary suitability.",
+  "prior_source_manifest": {
+    "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/source-manifest.json",
+    "commit": "c944e017796005726150abef19763db9ffd07154",
+    "sha256": "3940d3bc984563f2d251a5c5ccfb0e4c62dd6c8df219c4a3a558947708f92ef4"
+  },
+  "prior_comparison": {
+    "path": "data/regional-review/followup-montenegro-422-boundaries-20261005/comparison.json",
+    "commit": "c944e017796005726150abef19763db9ffd07154",
+    "sha256": "0f26b5da1f7f4e9f68ff8a9e2ff0cdaaf6b0bd15c182f3db63209de1c04ba4f2"
+  },
+  "corrected_area_input": {
+    "path": "data/regional-review/regional-review-3c4fe25a21fa428d/source/area-assessments.json",
+    "commit": "b6cfaada43a1e0472cd833d16733d1fd6065eaec",
+    "sha256": "c292ce2794aa786494c19dd87dfdb7867c195c99c9652ec564c7fc00458e513b",
+    "role": "Exact existing whole-file source for the retained WGS84 straight-source-edge ellipsoidal area results; evaluation vintage is frozen, not a new geometry measurement."
+  },
+  "sources": [
+    {
+      "id": "geoboundaries-mne-adm1-2017",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/MNE/ADM1/geoBoundaries-MNE-ADM1.geojson",
+      "role": "Retained comparison geometry for 23 source-feature identities; not official legal boundary evidence.",
+      "vintage": "2017 GeoBoundaries metadata; exact capture/effective date unknown",
+      "retrieved_at": "2026-10-05",
+      "license": "GeoBoundaries states Open Data Commons Open Database License 1.0; attribution to OpenStreetMap and Wambacher and share-alike obligations apply.",
+      "retention": "Retained original GeoJSON in the earlier #996 packet; exact SHA-256 is pinned there and in this issue's source pins.",
+      "limits": "Actual administrative legal-boundary basis, snapshot date, positional accuracy, island/coastal/territorial-water treatment and completeness are not established. The catalog also records a different ambiguous digest which does not match the retained payload."
+    },
+    {
+      "id": "montenegro-current-municipality-roster",
+      "url": "https://data.gov.me/dataset/1a0689c9-2ea3-4adb-85eb-2ba6a88f6980/resource/bc7d04d9-2632-4d96-a778-fa1f5f3a2ccb/download/lokalne_samouprave.json",
+      "role": "Current local-government names and contacts, not boundaries or a settlement hierarchy.",
+      "vintage": "Catalog last updated 2025-05-30; 25 local-government entries",
+      "retrieved_at": "2026-10-05",
+      "license": "Catalog states CC BY; version unspecified.",
+      "retention": "Original JSON retained and pinned in the earlier #996 packet.",
+      "limits": "Roster does not establish current boundaries, effective dates, parentage or island/coastal completeness. Its 25 entries do not share the 2017 report's 23-unit roster."
+    },
+    {
+      "id": "monstat-2017-table-1-2",
+      "url": "https://monstat.org/userfiles/file/publikacije/godisnjak%202017/1.pdf",
+      "role": "Reported historical municipal names and aggregate areas, attributed in the publication to the Real Estate Directorate.",
+      "vintage": "2017 publication; areas as of December 2015",
+      "retrieved_at": "2026-10-05",
+      "license": "No explicit reuse/redistribution license identified in the inspected report/page.",
+      "retention": "Restoration-only PDF; a compact factual transcription is retained in the earlier #996 packet.",
+      "restoration": "Retrieve the exact URL, verify SHA-256 4d6e1d5226ecb81b3a39b54d4ef89e55b097b2dc1ef384dc16d14d959fd9fb89, inspect chapter 1 table 1-2 on PDF page 18 and neighboring notes.",
+      "limits": "The 23-unit table sum is 13,969 km², 157 km² above the reported national 13,812 km²; the report does not explain the discrepancy. Aggregate areas are not legal linework."
+    },
+    {
+      "id": "monstat-2021-table-1-2",
+      "url": "https://monstat.org/uploads/files/publikacije/godisnjak%202021/1.pdf",
+      "role": "Later reported municipal roster/areas and Tuzi/Lake Skadar caveats.",
+      "vintage": "2021 publication; areas as of December 2018",
+      "retrieved_at": "2026-10-05",
+      "license": "No explicit reuse/redistribution license identified in the inspected report/page.",
+      "retention": "Restoration-only PDF; compact transcription is retained in the earlier #996 packet.",
+      "restoration": "Retrieve the exact URL, verify SHA-256 fd3d06010564bc9d252cc2d199f0d52d2dc20010611067a84863d41d1cf14466, inspect table 1-2 and footnotes on PDF page 18.",
+      "limits": "Post-Tuzi 24-unit roster; not the same 23-unit roster. The report explains 226 km² national-minus-municipality difference as Montenegro's Lake Skadar part and calls Tuzi's 246 km² temporary/approximate pending demarcation. Aggregates do not verify boundaries."
+    },
+    {
+      "id": "water-information-system-municipality-layer",
+      "url": "https://wis.gov.me/geoportal",
+      "role": "Official municipality-territory layer lead.",
+      "vintage": "Layer vintage not exposed; observed 2026-10-05",
+      "retrieved_at": "2026-10-05",
+      "license": "Unknown; no reuse terms found for the municipal layer.",
+      "retention": "Restoration-only lead; no screenshot or undocumented service response retained as geometry.",
+      "restoration": "Request native vector, service endpoint, metadata, lineage, dated snapshot and written reuse terms from the responsible authority.",
+      "limits": "Inspected page exposed no downloadable/API geometry, vintage, lineage or reuse terms."
+    },
+    {
+      "id": "real-estate-administration-cadastre-register",
+      "url": "https://geoportal.co.me/geoportal/geoportal_eng.html",
+      "role": "Official Cadastre and State Property Administration / Spatial Units Register restoration route.",
+      "vintage": "Current portal observed 2026-10-05; target snapshots unavailable",
+      "retrieved_at": "2026-10-05",
+      "license": "Unknown; written redistribution/adaptation terms must be confirmed.",
+      "retention": "Restoration-only.",
+      "restoration": "Request comparable official 2017/current native vectors with effective dates/legal acts, machine-readable codes/names and settlement parents, all polygon components/islands and water conventions, lineage, and written reuse terms through the metadata catalogue and Spatial Units Register.",
+      "limits": "Portal description confirms search/display and a metadata catalogue; it does not provide the required source bytes, historical snapshot, completeness or license."
+    },
+    {
+      "id": "municipal-delimitation-ministry-status",
+      "url": "https://www.gov.me/cyr/clanak/mju-u-mandatu-ministra-dukaja-proces-razgranicenja-izmedu-tuzi-i-podgorice-vodilo-nepristrasno-otvoreno-i-transparentno",
+      "role": "Official process-status lead for unresolved Tuzi/Podgorica delimitation.",
+      "vintage": "Published 2026-02-26; earlier status 2024-03-13",
+      "retrieved_at": "2026-10-05",
+      "license": "No explicit reuse terms established for the inspected pages.",
+      "retention": "Restoration-only.",
+      "restoration": "Restore the exact page/date and inspect the 2024-03-13 ministry statement at https://www.gov.me/clanak/saopstenje-ministarstva-javne-uprave-2; seek a later authoritative arbitration outcome and boundary artifact.",
+      "limits": "2026 statement reports referral of open questions to arbitration; it neither proves completion nor provides geometry."
+    }
+  ]
+}
