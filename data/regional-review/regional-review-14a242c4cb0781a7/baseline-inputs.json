@@ -1,0 +1,87 @@
+{
+  "baseline_commit": "a57085b7a5cfdbe3c1e0e4b0cd2e07c6240899fc",
+  "workspace": "fresh origin/main at claim start; HEAD was a57085b7a5cfdbe3c1e0e4b0cd2e07c6240899fc",
+  "release_scope": "scope.json retains issue-pinned release/hierarchy/footprint and frozen-region hashes",
+  "files": [
+    {
+      "path": "data/geography/part-2.json",
+      "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf",
+      "role": "geometry subject input"
+    },
+    {
+      "path": "data/geography/part-13.json",
+      "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1",
+      "role": "geometry subject input"
+    },
+    {
+      "path": "data/geography/part-28.json",
+      "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "role": "geometry subject input"
+    },
+    {
+      "path": "data/world-index.json",
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "role": "index/hierarchy/source policy and membership context"
+    },
+    {
+      "path": "data/hierarchy.json",
+      "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "role": "index/hierarchy/source policy and membership context"
+    },
+    {
+      "path": "data/administrative-sources.json",
+      "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "role": "index/hierarchy/source policy and membership context"
+    },
+    {
+      "path": "data/location-policy.json",
+      "sha256": "efab4528fd4b7b180815ef82de93480f490ef8fa48ad9ef32d1f9d76a64b7fb9",
+      "role": "index/hierarchy/source policy and membership context"
+    },
+    {
+      "path": "data/sources.json",
+      "sha256": "b66732450b7ce2f39550058ea1073036c4bf3419f86ca3a58f105aba0bfed0c4",
+      "role": "index/hierarchy/source policy and membership context"
+    },
+    {
+      "path": "data/semantic-report.json",
+      "sha256": "266c4f0f6e91381a26bfa6868d3c0df22b30140fa7f8551977be10b423295831",
+      "role": "index/hierarchy/source policy and membership context"
+    },
+    {
+      "path": "data/semantic-sources.json",
+      "sha256": "287a7ae13787b9e9fb97051afb977c8ea054ca1a6fed389c6672d6455d24bf7e",
+      "role": "index/hierarchy/source policy and membership context"
+    },
+    {
+      "path": "data/macro-foundation/current-membership-inventory.json.gz",
+      "sha256": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+      "role": "index/hierarchy/source policy and membership context"
+    },
+    {
+      "path": "data/macro-foundation/regional-handoffs.json.gz",
+      "sha256": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
+      "role": "index/hierarchy/source policy and membership context"
+    },
+    {
+      "path": "data/macro-foundation/macro-certificate.json",
+      "sha256": "f50f70fcb0756712ab7a7a388bc8cada093080518f07d3a6f7329758980ea81b",
+      "role": "index/hierarchy/source policy and membership context"
+    },
+    {
+      "path": "data/macro-foundation/approved-boundary-decisions.json",
+      "sha256": "b67d5a3bcf8101cffb089c0262286378a80bb642cd6dde33f7721419227e3f18",
+      "role": "index/hierarchy/source policy and membership context"
+    },
+    {
+      "path": "scripts/evidence/geometry.py",
+      "sha256": "944541968fcdf065b9c4b6105be227c3e0e14b6a20916f4fa21f851338c7a305",
+      "role": "pinned scientific helper"
+    },
+    {
+      "path": "scripts/ellipsoidal_area.py",
+      "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12",
+      "role": "pinned scientific helper"
+    }
+  ]
+}
