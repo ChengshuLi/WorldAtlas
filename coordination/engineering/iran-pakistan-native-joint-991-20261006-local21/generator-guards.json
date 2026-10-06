@@ -1,0 +1,18 @@
+{
+  "cases": [
+    {
+      "case": "existing-complete-output",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/reproduce.py\", line 223, in <module>\n    main()\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/reproduce.py\", line 115, in main\n    raise ValueError('Fresh owned output directory required')\nValueError: Fresh owned output directory required\n"
+    },
+    {
+      "case": "actual-helper-byte-mutation",
+      "exit_code": 1,
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/reproduce.py\", line 223, in <module>\n    main()\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/reproduce.py\", line 111, in main\n    raise ValueError('Producer differs from execution pin: ' + path)\nValueError: Producer differs from execution pin: coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/exact_arrangement.py\n"
+    }
+  ],
+  "evaluation_commit": "93b3235b27d0b4be49985cc4938c126d7a8434b2",
+  "kind": "negative-control",
+  "method_id": "joint-exact-native-partition",
+  "outcome": "passed"
+}

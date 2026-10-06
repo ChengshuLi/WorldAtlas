@@ -1,0 +1,723 @@
+{
+  "version": 1,
+  "issue": 991,
+  "lane": "engineering",
+  "worker_id": "01a10893-2a57-72e0-aa08-5c36088d5206",
+  "subject_ids": [
+    "gb:IRN:ADM2:26516999B17111396986996",
+    "gb:IRN:ADM2:26516999B21476392712465",
+    "gb:IRN:ADM2:26516999B32263338072182",
+    "gb:IRN:ADM2:26516999B69171350042189",
+    "gb:IRN:ADM2:26516999B84118019171575",
+    "gb:PAK:ADM2:60131773B27830056943813",
+    "gb:PAK:ADM2:60131773B36839649837975",
+    "gb:PAK:ADM2:60131773B42304807802578",
+    "gb:PAK:ADM2:60131773B78019453337506",
+    "gb:PAK:ADM2:60131773B83658797775488",
+    "gb:PAK:ADM2:60131773B90188516769392"
+  ],
+  "subject_ids_sha256": "95fbefa53e01535e0688c88f76e7e6fd081ae1648775eee4e754e953b1cba6ff",
+  "baseline": {
+    "commit": "390281b6d80657a5f17de3c5b217faf572e355ca",
+    "files": [
+      {
+        "path": "coordination/engineering/iran-pakistan-grid-proof-971-20261005-local11/results-v1/staged-neighbors.json",
+        "bytes": 152156,
+        "sha256": "8cde9abc927bd3477dd60dc024332307d46206a3b26d1373d53d3b91ba0908db",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/evidence-quality.json",
+        "bytes": 43196,
+        "sha256": "cf39bec9aea9e8bb9a5cd69cc66883ed36aef2dc3063799f51f4a9793d9e93e2",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/reproduce.py",
+        "bytes": 13067,
+        "sha256": "74e0030da2ec1f3bb45f66772c736f018d6e035754f00ab14a09ec0be979f5c2",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+        "bytes": 1851757,
+        "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/canonical-grid/manifest.json",
+        "bytes": 271171,
+        "sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-11.json",
+        "bytes": 5131824,
+        "sha256": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-17.json",
+        "bytes": 4945828,
+        "sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "scripts/audit-grid-intervals.mjs",
+        "bytes": 6777,
+        "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "scripts/ellipsoidal_area.py",
+        "bytes": 1953,
+        "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "scripts/evidence/geometry.py",
+        "bytes": 5264,
+        "sha256": "944541968fcdf065b9c4b6105be227c3e0e14b6a20916f4fa21f851338c7a305",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "scripts/evidence/immutable.py",
+        "bytes": 7090,
+        "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "scripts/native-ownership/compile-native-ownership.mjs",
+        "bytes": 4472,
+        "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "src/native-grid.js",
+        "bytes": 6408,
+        "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "src/native-runtime.js",
+        "bytes": 3497,
+        "sha256": "988f7069b6d39cbe0fa7bc3b0e4faaa61c2def7fb3d0ec68b87b5e14c7463600",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {
+      "canonical_grid": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+      "hierarchy": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+    },
+    "pin_files": {
+      "canonical_grid": "data/canonical-grid/manifest.json",
+      "hierarchy": "data/hierarchy.json"
+    },
+    "subject_files": {
+      "gb:IRN:ADM2:26516999B17111396986996": "data/geography/part-11.json",
+      "gb:IRN:ADM2:26516999B21476392712465": "data/geography/part-11.json",
+      "gb:IRN:ADM2:26516999B32263338072182": "data/geography/part-11.json",
+      "gb:IRN:ADM2:26516999B69171350042189": "data/geography/part-11.json",
+      "gb:IRN:ADM2:26516999B84118019171575": "data/geography/part-11.json",
+      "gb:PAK:ADM2:60131773B27830056943813": "data/geography/part-17.json",
+      "gb:PAK:ADM2:60131773B36839649837975": "data/geography/part-17.json",
+      "gb:PAK:ADM2:60131773B42304807802578": "data/geography/part-17.json",
+      "gb:PAK:ADM2:60131773B78019453337506": "data/geography/part-17.json",
+      "gb:PAK:ADM2:60131773B83658797775488": "data/geography/part-17.json",
+      "gb:PAK:ADM2:60131773B90188516769392": "data/geography/part-17.json"
+    }
+  },
+  "sources": [
+    {
+      "files": [
+        {
+          "bytes": 545,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-saravan-relation-6555069-full-receipt.json",
+          "role": "newly-retained-original-api-source",
+          "sha256": "9380679cf9037eb6f522499218ad32c4457b77b3ea104765ce8aaca63d2b0f4b"
+        },
+        {
+          "bytes": 894050,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/iran-pakistan-joint-proposal-971-20261005-local10/originals/osm-saravan-relation-6555069-full.json",
+          "role": "newly-retained-original-api-source",
+          "sha256": "abf435a64b61fd7f678f149adee6468d99e14edc769ec6e8e43d464ec6ed579d"
+        }
+      ],
+      "id": "osm-saravan-relation-6555069",
+      "license": {
+        "status": "redistributable",
+        "terms": "OpenStreetMap ODbL 1.0; OpenStreetMap and contributors attribution. Authority, historical date and mixed-source installation unapproved."
+      },
+      "retention": "retained",
+      "retrieved_at": "2026-10-05",
+      "role": "current-original-administrative-api-reference-and-retrieval-receipt",
+      "temporal_status": "reference",
+      "url": "https://api.openstreetmap.org/api/0.6/relation/6555069/full.json",
+      "verification": "unverified",
+      "vintage": "2026-10-05 retrieval; original per-element versions/timestamps retained independently"
+    },
+    {
+      "files": [
+        {
+          "bytes": 346713,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/osm-panjgur-relation-3229274-full.json",
+          "role": "retained-ancestor-original-source",
+          "sha256": "7057f7488622c5a5c086b094205978fffe5d25ca514a89a72f2d45c1f0ff31be"
+        },
+        {
+          "bytes": 741,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/iran-pakistan-native-seam-971-20261005-local09/originals/osm-panjgur-relation-3229274-full-receipt.json",
+          "role": "retained-ancestor-original-source",
+          "sha256": "4c27c75a41998b9244995e55be8e95e186e57696fa655a9f5dcb3ae4cfe02c6f"
+        }
+      ],
+      "id": "osm-panjgur-ancestor-source",
+      "license": {
+        "status": "redistributable",
+        "terms": "OpenStreetMap ODbL 1.0; OpenStreetMap and contributors attribution."
+      },
+      "retention": "retained",
+      "retrieved_at": "2026-10-05",
+      "role": "pinned-ancestor-original-source",
+      "temporal_status": "reference",
+      "url": "https://api.openstreetmap.org/api/0.6/relation/3229274/full.json",
+      "verification": "unverified",
+      "vintage": "Prior packet original retrieval with per-element versions/timestamps"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/README.md",
+      "bytes": 4824,
+      "sha256": "374aff114cec91a0436050a3be01f62b9b75abc2bd69eced3d30f7fb93e8f223",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/controls-v1/negative-control.json",
+      "bytes": 437,
+      "sha256": "1a53795227d6252a253f47059d4ec5aeb45e2d0f19592ac80267e662c0968461",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/controls-v1/positive-control.json",
+      "bytes": 437,
+      "sha256": "0418950b385d8a734adcf92197d6a767769a91680c8a478a3ac349ef31c5861c",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/controls.py",
+      "bytes": 3644,
+      "sha256": "f683437673a31ce1fdf2099538561f9c9b6592f17bb3e3d09f77c301010d39b4",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/exact-native-check.py",
+      "bytes": 5723,
+      "sha256": "bf20e5f366366c302a84fb87296d460785b36ac09f0b56c61d04cf12bc19fe9d",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/exact-native-v1/exact-native.json",
+      "bytes": 381409,
+      "sha256": "22a6431c78b2387e60a8679f7bca4a5dac3aa609c7079e53ac711aeb1160118b",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/exact-native-v2/exact-native.json",
+      "bytes": 381409,
+      "sha256": "22a6431c78b2387e60a8679f7bca4a5dac3aa609c7079e53ac711aeb1160118b",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/exact_arrangement.py",
+      "bytes": 5890,
+      "sha256": "780bb3fd5d0c53096736ea5e55291f6f205504ae6f524591c4b10c97ee569d46",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/exact_collinear_v3.py",
+      "bytes": 2077,
+      "sha256": "f71c404f2156f5a936f38ad6614a8b947180b516f23a2d82f2b15a8240d17002",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/exact_faces_v2.py",
+      "bytes": 4948,
+      "sha256": "e9bf669ef503027827d6c6407283f092ebb1f171462a5fb7d35c028dd48762bc",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/finish-checks.py",
+      "bytes": 3360,
+      "sha256": "abcb92cd4d2b313070b7e3fb9d645489a6fb5f12aa5c7c8690dfc0af01955c5f",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/generator-guards.json",
+      "bytes": 1882,
+      "sha256": "e15952600aa749e7593af09360efde76f3839a3aa910465560119a43601bdf8f",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/native-check.mjs",
+      "bytes": 6054,
+      "sha256": "bf6f6852cfb952588c09b07c82d6e0e8301d69cfcf9c1b76d438ed72f0f7cb69",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/native-v1/latitude-bytes.f64le",
+      "bytes": 2097328,
+      "sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/native-v1/native-cells.json",
+      "bytes": 1662549,
+      "sha256": "74f58ea6615cf3fc323e4b5861e30a21c97e29c2ab8cac7d50ce359bbe8ba8c7",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/native-v2/latitude-bytes.f64le",
+      "bytes": 2097328,
+      "sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/native-v2/native-cells.json",
+      "bytes": 1662549,
+      "sha256": "74f58ea6615cf3fc323e4b5861e30a21c97e29c2ab8cac7d50ce359bbe8ba8c7",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/reproduce.py",
+      "bytes": 11548,
+      "sha256": "798b50c26fe1489b34cd6d297066c8db710d30cbddf2e70ffc8d48ea08223ed9",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/reproducibility.json",
+      "bytes": 2525,
+      "sha256": "79fbee32ea7cf22dee56daad74b789774a1427a096b650500c2a813705644790",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v1/candidates.json",
+      "bytes": 20294,
+      "sha256": "a82391eeed610e32a1f40b4e7c596e207803a86bc5c6beee2985785e264c102d",
+      "hash_kind": "file-bytes",
+      "role": "candidate"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v1/partition.json",
+      "bytes": 530004,
+      "sha256": "6d3b7d41b13208356541a45a045ac01f5f9e458f37f4ee92fe25a0d6a2fd5cdc",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v1/report.json",
+      "bytes": 9249,
+      "sha256": "7a979016d3a0ba000858ed2eb91d095d1279b6bc8f059267cf2d91797ea8ae13",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v2/candidates.json",
+      "bytes": 20294,
+      "sha256": "a82391eeed610e32a1f40b4e7c596e207803a86bc5c6beee2985785e264c102d",
+      "hash_kind": "file-bytes",
+      "role": "candidate"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v2/partition.json",
+      "bytes": 530004,
+      "sha256": "6d3b7d41b13208356541a45a045ac01f5f9e458f37f4ee92fe25a0d6a2fd5cdc",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v2/report.json",
+      "bytes": 9249,
+      "sha256": "7a979016d3a0ba000858ed2eb91d095d1279b6bc8f059267cf2d91797ea8ae13",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v3/candidates.json",
+      "bytes": 20294,
+      "sha256": "a82391eeed610e32a1f40b4e7c596e207803a86bc5c6beee2985785e264c102d",
+      "hash_kind": "file-bytes",
+      "role": "candidate"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v3/partition.json",
+      "bytes": 530004,
+      "sha256": "6d3b7d41b13208356541a45a045ac01f5f9e458f37f4ee92fe25a0d6a2fd5cdc",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v3/report.json",
+      "bytes": 9867,
+      "sha256": "5b55744718d8d8b9bac6ae1864c58e9e46c73da65fc02f1845ad6a5eae644734",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v4/candidates.json",
+      "bytes": 20294,
+      "sha256": "a82391eeed610e32a1f40b4e7c596e207803a86bc5c6beee2985785e264c102d",
+      "hash_kind": "file-bytes",
+      "role": "candidate"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v4/partition.json",
+      "bytes": 530004,
+      "sha256": "6d3b7d41b13208356541a45a045ac01f5f9e458f37f4ee92fe25a0d6a2fd5cdc",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v4/report.json",
+      "bytes": 9867,
+      "sha256": "5b55744718d8d8b9bac6ae1864c58e9e46c73da65fc02f1845ad6a5eae644734",
+      "hash_kind": "file-bytes",
+      "role": "evidence"
+    }
+  ],
+  "methods": [
+    {
+      "id": "joint-exact-native-partition",
+      "kind": "generator",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "description": "Pinned exact rational joint face partition; complete original area/noding accounting, explicit Float64 derivative cycles/remnants; unchanged native grid comparison and independent Fraction row oracle. No geographic truth or installation assertion.",
+      "software": "Python3.12.14/Shapely2.1.2/GEOS3.13.1/NumPy2.3.5/pyproj3.7.2; Node24; immutable dependencies, whole input/producer bytes recorded in outputs",
+      "units": "integer cell/row/face counts and exact rational source-coordinate area accounting; no physical area estimate"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "native_checked_cells",
+      "value": 4257008,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "8718ed54524ef0e7567e6feb81c514b67d466061",
+      "input_sha256": "a82391eeed610e32a1f40b4e7c596e207803a86bc5c6beee2985785e264c102d",
+      "scope": "Pinned whole-neighbor rectangle/exact row interval proof; unapproved geography, no installation."
+    },
+    {
+      "id": "native_changed_cells",
+      "value": 954,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "8718ed54524ef0e7567e6feb81c514b67d466061",
+      "input_sha256": "a82391eeed610e32a1f40b4e7c596e207803a86bc5c6beee2985785e264c102d",
+      "scope": "Pinned whole-neighbor rectangle/exact row interval proof; unapproved geography, no installation."
+    },
+    {
+      "id": "native_lost_memberships",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "8718ed54524ef0e7567e6feb81c514b67d466061",
+      "input_sha256": "a82391eeed610e32a1f40b4e7c596e207803a86bc5c6beee2985785e264c102d",
+      "scope": "Pinned whole-neighbor rectangle/exact row interval proof; unapproved geography, no installation."
+    },
+    {
+      "id": "native_new_multiple_cells",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "8718ed54524ef0e7567e6feb81c514b67d466061",
+      "input_sha256": "a82391eeed610e32a1f40b4e7c596e207803a86bc5c6beee2985785e264c102d",
+      "scope": "Pinned whole-neighbor rectangle/exact row interval proof; unapproved geography, no installation."
+    },
+    {
+      "id": "native_outside_component_changes",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "8718ed54524ef0e7567e6feb81c514b67d466061",
+      "input_sha256": "a82391eeed610e32a1f40b4e7c596e207803a86bc5c6beee2985785e264c102d",
+      "scope": "Pinned whole-neighbor rectangle/exact row interval proof; unapproved geography, no installation."
+    },
+    {
+      "id": "exact_discrepancy_rows",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "8ec26348ed3e891b5457dc0caca1952443eadeaf",
+      "input_sha256": "a82391eeed610e32a1f40b4e7c596e207803a86bc5c6beee2985785e264c102d",
+      "scope": "Pinned whole-neighbor rectangle/exact row interval proof; unapproved geography, no installation."
+    },
+    {
+      "id": "exact_rows_per_subject",
+      "value": 1592,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "8ec26348ed3e891b5457dc0caca1952443eadeaf",
+      "input_sha256": "a82391eeed610e32a1f40b4e7c596e207803a86bc5c6beee2985785e264c102d",
+      "scope": "Pinned whole-neighbor rectangle/exact row interval proof; unapproved geography, no installation."
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "native_checked_cells",
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/native-v1/native-cells.json",
+      "json_pointer": "/counts/cells"
+    },
+    {
+      "metric_id": "native_changed_cells",
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/native-v1/native-cells.json",
+      "json_pointer": "/counts/changed"
+    },
+    {
+      "metric_id": "native_lost_memberships",
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/native-v1/native-cells.json",
+      "json_pointer": "/counts/lost"
+    },
+    {
+      "metric_id": "native_new_multiple_cells",
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/native-v1/native-cells.json",
+      "json_pointer": "/counts/new_multiple"
+    },
+    {
+      "metric_id": "native_outside_component_changes",
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/native-v1/native-cells.json",
+      "json_pointer": "/counts/outside_component_changed"
+    },
+    {
+      "metric_id": "exact_discrepancy_rows",
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/exact-native-v1/exact-native.json",
+      "json_pointer": "/discrepancy_rows"
+    },
+    {
+      "metric_id": "exact_rows_per_subject",
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/exact-native-v1/exact-native.json",
+      "json_pointer": "/rows_per_subject"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "Modern-reference proposal and numerical proof only. Source authority/identity/dates and physical water remain separately assessed. Original source bytes/IDs/parents/releases preserved. No core/live/default changes or current whole-world/structural/certificate/content approval.",
+      "status": "unresolved",
+      "source_ids": [
+        "osm-saravan-relation-6555069",
+        "osm-panjgur-ancestor-source"
+      ]
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "joint-exact-native-partition",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/controls-v1/positive-control.json"
+    },
+    {
+      "method_id": "joint-exact-native-partition",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/controls-v1/negative-control.json"
+    },
+    {
+      "method_id": "joint-exact-native-partition",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/generator-guards.json"
+    },
+    {
+      "method_id": "joint-exact-native-partition",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/reproducibility.json"
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 -B coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/reproduce.py --evaluation-commit 93b3235b27d0b4be49985cc4938c126d7a8434b2 --out coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/FRESH-exact",
+    "node coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/native-check.mjs --evaluation-commit 8718ed54524ef0e7567e6feb81c514b67d466061 --candidates coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v1/candidates.json --out coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/FRESH-native",
+    "python3 -B coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/exact-native-check.py --evaluation-commit 8ec26348ed3e891b5457dc0caca1952443eadeaf --out coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/FRESH-independent",
+    "python3 -B coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/controls.py coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/FRESH-controls",
+    "node --test test/native-grid.test.mjs"
+  ],
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/controls-v1/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/controls-v1/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/controls.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/exact-native-check.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/exact-native-v1/exact-native.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/exact-native-v2/exact-native.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/exact_arrangement.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/exact_collinear_v3.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/exact_faces_v2.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/finish-checks.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/generator-guards.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/native-check.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/native-v1/latitude-bytes.f64le",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/native-v1/native-cells.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/native-v2/latitude-bytes.f64le",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/native-v2/native-cells.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/reproduce.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v1/candidates.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v1/partition.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v1/report.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v2/candidates.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v2/partition.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v2/report.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v3/candidates.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v3/partition.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v3/report.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v4/candidates.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v4/partition.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v4/report.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "files": [
+    {
+      "bytes": 9867,
+      "one": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v3/report.json",
+      "sha256": "5b55744718d8d8b9bac6ae1864c58e9e46c73da65fc02f1845ad6a5eae644734",
+      "two": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v4/report.json"
+    },
+    {
+      "bytes": 530004,
+      "one": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v3/partition.json",
+      "sha256": "6d3b7d41b13208356541a45a045ac01f5f9e458f37f4ee92fe25a0d6a2fd5cdc",
+      "two": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v4/partition.json"
+    },
+    {
+      "bytes": 20294,
+      "one": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v3/candidates.json",
+      "sha256": "a82391eeed610e32a1f40b4e7c596e207803a86bc5c6beee2985785e264c102d",
+      "two": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/results-v4/candidates.json"
+    },
+    {
+      "bytes": 1662549,
+      "one": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/native-v1/native-cells.json",
+      "sha256": "74f58ea6615cf3fc323e4b5861e30a21c97e29c2ab8cac7d50ce359bbe8ba8c7",
+      "two": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/native-v2/native-cells.json"
+    },
+    {
+      "bytes": 2097328,
+      "one": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/native-v1/latitude-bytes.f64le",
+      "sha256": "66db3d02ede56a75e9c58426ad1388552be3bf7e5e4477476f198983b7436d23",
+      "two": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/native-v2/latitude-bytes.f64le"
+    },
+    {
+      "bytes": 381409,
+      "one": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/exact-native-v1/exact-native.json",
+      "sha256": "22a6431c78b2387e60a8679f7bca4a5dac3aa609c7079e53ac711aeb1160118b",
+      "two": "coordination/engineering/iran-pakistan-native-joint-991-20261006-local21/exact-native-v2/exact-native.json"
+    }
+  ],
+  "kind": "reproducibility",
+  "limits": [
+    "All complete generated products compared; no source factual or installation approval."
+  ],
+  "method_id": "joint-exact-native-partition",
+  "outcome": "passed",
+  "run_one_sha256": "351542ff52e1c2c0e5054a3ce3989248a2f507e1a98eaa78b056b05f09959350",
+  "run_two_sha256": "351542ff52e1c2c0e5054a3ce3989248a2f507e1a98eaa78b056b05f09959350"
+}
