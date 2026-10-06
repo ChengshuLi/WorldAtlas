@@ -16,6 +16,8 @@ Use Node 24, installed committed npm dependencies and the Python requirements. T
 
 `scripts/select-build-ownership.mjs` rejects unpinned manifests and source/release mismatches. Native selections also pass `require-verified-selection.mjs`: the exact candidate digest must have a reviewed entry in `scripts/native-ownership/verified-candidates.json`. The gate reads a whole-file hash-pinned ordinary Git blob, checks complete-domain accounting, both deterministic product inventories and every ownership asset against the selected manifest. The packaged atlas retains this reference as `gridVerification`. It explicitly carries no installation approval.
 
+Every explicit native static build also runs `validate-context-input-stage.mjs` against the retained original-to-compact stage manifest. This separately bounded prerequisite verifies all 43 original source files, immutable generator/readback code, both complete byte-identical product inventories, all 34 derivative parts, original geometry digest and all IDs/parents/indices. Missing, tampered, omitted or stale stage data fails the build. Its receipt is retained as `nativeContextInputStage`. The standard evidence checker validates stage bytes; this mandatory build validator additionally checks complete transform lineage. Neither is a factual source certificate. Each stage retains the existing 256 MiB/512 descriptor limits; this is not the legacy voluntary partition gate.
+
 Future materializations require a fresh candidate, two complete reproducible generations and exhaustive asset-decoding/native-membership comparison for their own immutable source/release pins, followed by independent review and a new registered receipt. An older receipt cannot admit a changed candidate. The existing native preparation and verifier entry points require committed executed code and preserve byte budgets. Follow their source/topology admission and existing geography approval rules; changing the original source scope is separate coordinated geography work. A registry entry is not permission to change boundaries, import facts or publish a release.
 
 Dated contexts use original native geometry, explicit dense display indices mapped to original IDs, and recomputation of every row affected by changed/removed/added geometry. Unaffected rows retain the verified base through that mapping. Both renderers consume the same completed grid. Source digest, owner mapping and normative latitude bytes are verified; cancellation does not replace the displayed year with an unfinished context.
@@ -28,7 +30,7 @@ After the explicit native build:
 node test/native-build-binding.mjs
 node test/native-world-context.mjs
 node --test test/native-materialization-gate.test.mjs test/select-build-ownership.test.mjs
-node --test test/native-renderer.test.mjs
+node --test test/native-renderer.test.mjs test/native-dated-browser.test.mjs test/context-input-stage.test.mjs
 ```
 
 The binding readback compares every packaged row/run word to the registered candidate; authenticates every original native footprint; verifies original IDs and parents; checks normative latitude bytes; preserves the complete original physical-class manifest, source limits and asset bytes except its ownership association; and verifies the retained prepared-evidence index. It also confirms the original legacy grid remains selectable with its original digest. The world context control duplicates an existing native vertex and requires every output word and original owner mapping to remain identical. This representation control is not a factual repair.

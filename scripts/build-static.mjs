@@ -14,6 +14,7 @@ import {packageReferenceBundle} from './package-reference-bundle.mjs';
 import {loadCoverageClassification} from '../src/coverage-classification.js';
 import {packageStartupOwnership} from './package-startup-ownership.mjs';
 import {selectBuildOwnership} from './select-build-ownership.mjs';
+import {validateContextInputStage} from './native-ownership/validate-context-input-stage.mjs';
 import {packageNativeLatitudes} from './package-native-latitudes.mjs';
 import {rebindCoverageManifest} from './rebind-coverage-manifest.mjs';
 import {readGeographicReleaseManifest} from './read-geographic-release-manifest.mjs';
@@ -43,6 +44,7 @@ try {
   const fixedGridPath=process.env.ATLAS_NATIVE_GRID_MANIFEST||'data/canonical-grid/manifest.json';
   const selectedGrid=await fs.access(fixedGridPath).then(()=>selectBuildOwnership({manifestPath:fixedGridPath,expectedSha256:process.env.ATLAS_NATIVE_GRID_SHA256,expectedReference:geographicRelease,requireNative:!!process.env.ATLAS_NATIVE_GRID_MANIFEST}),()=>{if(process.env.ATLAS_NATIVE_GRID_MANIFEST)throw Error('Selected native grid is missing');return null;});
   const fixedGrid=selectedGrid?.manifest;
+  const nativeContextInputStage=fixedGrid?.method?await validateContextInputStage({expectedReference:geographicRelease}):null;
   let gridIndex,ownership;
   if(fixedGrid){
     if(fixedGrid.footprints_sha256!==checkPrepared(reference.features)||fixedGrid.hierarchy_sha256!==createHash('sha256').update(await fs.readFile('data/hierarchy.json')).digest('hex'))throw Error('Precompiled canonical grid is stale');
@@ -102,7 +104,7 @@ try {
     for(const part of coverageClassification.parts)await fs.copyFile('data/'+part.path,'dist/'+part.path);
   }
   const referenceBundle=await packageReferenceBundle({source:'data/reference-attributes',destination:'dist/reference-attributes',expectedFootprints:geographicRelease.footprints_sha256});
-  await fs.writeFile('dist/atlas-geography.json', JSON.stringify({gridVerification:selectedGrid?.verification??null,coverageClassification,referenceAttributes:referenceBundle.descriptor,contentCapabilities:{mapSnapshots:1,datedGeography:1,datedFootprints:0,storageExport:2},type:reference.type,sourceQualityReviews:reference.sourceQualityReviews,reference_release:geographicRelease,preparedEvidence:{footprints_sha256:preparedEvidence.footprints_sha256,hierarchy_sha256:preparedEvidence.hierarchy_sha256,index_sha256:createHash('sha256').update(await fs.readFile('data/prepared-evidence/index.json')).digest('hex')},pixelMissing:reference.pixelMissing,units:reference.units,temporal:{history:[],links:reference.temporal.links},entityParts,temporalHistoryParts,parts:catalogParts,geometryParts:parts,pixelMap}));
+  await fs.writeFile('dist/atlas-geography.json', JSON.stringify({gridVerification:selectedGrid?.verification??null,nativeContextInputStage,coverageClassification,referenceAttributes:referenceBundle.descriptor,contentCapabilities:{mapSnapshots:1,datedGeography:1,datedFootprints:0,storageExport:2},type:reference.type,sourceQualityReviews:reference.sourceQualityReviews,reference_release:geographicRelease,preparedEvidence:{footprints_sha256:preparedEvidence.footprints_sha256,hierarchy_sha256:preparedEvidence.hierarchy_sha256,index_sha256:createHash('sha256').update(await fs.readFile('data/prepared-evidence/index.json')).digest('hex')},pixelMissing:reference.pixelMissing,units:reference.units,temporal:{history:[],links:reference.temporal.links},entityParts,temporalHistoryParts,parts:catalogParts,geometryParts:parts,pixelMap}));
   await fs.writeFile('dist/atlas-history.json.gz',gzipSync(JSON.stringify(history)));
   await fs.writeFile('dist/environment-classifications.json',JSON.stringify({version:1,unknown:null,attributes:environmentClassifications}));
   await packageOwnershipHistory({source:'data/ownership-history',destination:'dist/ownership-history',hosted:process.env.ATLAS_HOSTED_BUILD==='1',compactReceipts:true});

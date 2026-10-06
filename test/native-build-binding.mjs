@@ -16,6 +16,11 @@ const selected=await selectBuildOwnership({
  expectedSha256:process.env.ATLAS_NATIVE_GRID_SHA256??'efe31373ff6a2c3f4ba5f11f8cbe37b25337778b344d9dbf1d3dfde301e3e722',
  expectedReference:atlas.reference_release,requireNative:true});
 assert.deepEqual(atlas.gridVerification,selected.verification);
+assert.equal(atlas.nativeContextInputStage.status,'verified');
+assert.equal(atlas.nativeContextInputStage.locations,49625);
+assert.equal(atlas.nativeContextInputStage.footprints_sha256,selected.manifest.footprints_sha256);
+assert.equal(atlas.nativeContextInputStage.scientific_approval,false);
+assert.equal(atlas.nativeContextInputStage.manifest_sha256,digest(await fs.readFile(atlas.nativeContextInputStage.manifest_path)));
 const fetchFrom=root=>async url=>new Response(await fs.readFile(path.join(root,url.replace(/^\.\//,''))));
 const options={requireNative:true,expectedReference:atlas.reference_release};
 const original=await loadOwnershipAssets(selected.manifest,fetchFrom(selected.source),options);
