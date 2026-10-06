@@ -57,6 +57,13 @@ SOURCE_FILES = {
     "ind-adm2": "geoBoundaries-IND-ADM2.geojson",
     "pak-adm2": "geoBoundaries-PAK-ADM2.geojson",
 }
+# Independently preflighted exact containing parts for the 16 issue subjects.
+# The index is deliberately bounded to these immutable parts, not the full atlas.
+CURRENT_PART_FILES = (
+    "data/geography/part-11.json", "data/geography/part-17.json",
+    "data/geography/part-30.json", "data/geography/part-31.json",
+    "data/geography/part-32.json",
+)
 
 
 def sha(data: bytes) -> str:
@@ -221,11 +228,10 @@ def safe_overlay(left, right, operation, errors, label):
 def atlas_index():
     index = {}
     parts = []
-    for path in sorted((ROOT / "data/geography").glob("part-*.json")):
-        if path.name.startswith("part-0") and path.name not in {f"part-{i}.json" for i in range(10)}:
-            continue
+    for rel in CURRENT_PART_FILES:
+        path = ROOT / rel
         doc = json.loads(path.read_text())
-        parts.append({"path": str(path.relative_to(ROOT)), "bytes": path.stat().st_size, "sha256": sha(path.read_bytes())})
+        parts.append({"path": rel, "bytes": path.stat().st_size, "sha256": sha(path.read_bytes())})
         for feature in doc["features"]:
             p = feature.get("properties", {})
             meta = p.get("metadata", {})
