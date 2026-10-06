@@ -125,8 +125,23 @@ def run_controls() -> dict:
         str(ROOT / detail_key): bytes(data_fixture),
     }, {old_scope_key, old_snapshot_key, detail_key})
 
-    run_one = reproduce.run('evidence/runs/2026-10-06/run-1')
-    run_two = reproduce.run('evidence/runs/2026-10-06/run-2')
+    def positive_run(run_id: str) -> dict:
+        relative = f'evidence/runs/2026-10-06/{run_id}'
+        directory = OWNED / relative
+        if directory.exists():
+            # Preserve and authenticate completed runs after a later control
+            # failure; never overwrite or silently rerun a reserved name.
+            record = json.loads((directory / 'run-record.json').read_bytes())
+            if record.get('runner') != issue_inputs['runner']:
+                raise ValueError(f'preserved {run_id} was produced by another runner head')
+            for name, expected in record.get('outputs', {}).items():
+                if name not in reproduce.FILES or sha((directory / name).read_bytes()) != expected:
+                    raise ValueError(f'preserved {run_id} output failed its recorded hash: {name}')
+            return record
+        return reproduce.run(relative)
+
+    run_one = positive_run('run-1')
+    run_two = positive_run('run-2')
     historical = {}
     for name in reproduce.FILES:
         prior_one = reproduce.git_file(reproduce.PINNED_COMMIT,
@@ -140,14 +155,14 @@ def run_controls() -> dict:
         historical[name] = {'sha256': sha(current_one), 'bytes': len(current_one),
                             'matches_retained_run_1': True, 'matches_retained_run_2': True}
 
-    with tempfile.TemporaryDirectory(prefix='.controls-', dir=OWNED) as temp:
+    with tempfile.TemporaryDirectory(prefix='.controls-', dir=EVIDENCE) as temp:
         sentinel_dir = Path(temp) / 'sentinel-run'
         sentinel_dir.mkdir()
         sentinel = sentinel_dir / 'sentinel.txt'
         sentinel.write_bytes(b'preserve this existing output')
         sentinel_hash = sha(sentinel.read_bytes())
         try:
-            reproduce.run(str(sentinel_dir.relative_to(OWNED)))
+            reproduce.run(sentinel_dir.relative_to(OWNED).as_posix())
         except FileExistsError:
             pass
         else:
@@ -165,7 +180,7 @@ def run_controls() -> dict:
         if not unsafe_rejected:
             raise AssertionError('traversal destination was accepted')
 
-        partial = Path(temp) / 'partial-output'
+        partial = EVIDENCE / Path(temp).relative_to(EVIDENCE) / 'partial-output'
         products = Path(temp) / 'products'
         products.mkdir()
         for name in reproduce.FILES:
