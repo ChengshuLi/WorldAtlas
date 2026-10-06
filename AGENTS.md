@@ -15,6 +15,10 @@ Geographic structure lives in `data/world-index.json`, its parts and `data/hiera
 
 The primary handoff branch is `main` in `ChengshuLi/WorldAtlas`; `work` retains the initial development history. The Site source repository is a separate deployment mirror. Do not assume a new thread can access `.cache`, SQLite databases or another thread's workspace. Durable research/checkpoints and resume instructions must reach the primary repository through their issue PRs; credentials and local dependency/cache directories must not be committed.
 
+## Worker identity
+
+Use the current chat’s exact `CODEX_THREAD_ID` for new author work, stable across jobs. Never inherit/copy a worker ID from another chat, claim or checkout. Finish and release existing legacy claims under their recorded identity before migrating; do not touch another chat’s work. Review sub-agents use their own distinct stable agent identity even if their environment inherits the parent chat ID. See `docs/WORKER_COORDINATION.md` for enforcement and non-Codex limits.
+
 ## Local storage
 
 Read [LOCAL_WORKSPACES.md](docs/LOCAL_WORKSPACES.md) before allocating local author/reviewer checkouts. Use the shared `scripts/local-workspace.mjs` allocator, sparse scopes and storage checks; release completed slots after preserving work. Fresh branches must not accumulate full dataset copies.

@@ -1,0 +1,9 @@
+{
+  "method_id": "chat-identity-controls",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "details": "Copied author identity rejected by claim, recover, implicit and explicit work allocation before any GitHub/Git side effect.",
+  "command": "node --test test/worker-identity.test.mjs test/local-workspace.test.mjs test/queue-pr-merge.test.mjs",
+  "tests": 14,
+  "failed": 0
+}

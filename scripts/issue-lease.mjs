@@ -1,3 +1,4 @@
+import {assertAuthorWorkerIdentity} from './worker-identity.mjs';
 import {execFileSync} from 'node:child_process';
 import fs from 'node:fs';
 import {randomUUID} from 'node:crypto';
@@ -14,6 +15,7 @@ if(action==='inspect'){
  console.log(JSON.stringify(readClaim(await comments()),null,2));process.exit(0);
 }
 if(!options.worker||!options.branch||action!=='claim'&&action!=='recover'&&!options['claim-id'])throw Error('Supply worker/branch and the held claim ID for renew/release');
+if(action==='claim'||action==='recover')assertAuthorWorkerIdentity(options.worker);
 if(options['live-work']&&!['true','false'].includes(options['live-work']))throw Error('live-work must be true or false');
 const claim_id=options['claim-id']??randomUUID(),request_id=randomUUID(),expectedTitle=`${action} #${options.issue} ${request_id}`;
 let received=false,lastRunID=0;
