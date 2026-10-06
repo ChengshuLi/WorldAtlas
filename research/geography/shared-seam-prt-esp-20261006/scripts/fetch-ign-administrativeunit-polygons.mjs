@@ -106,7 +106,9 @@ for (const name of names) {
   if (collection.numberMatched === 0 && collection.numberReturned === 0 && collection.features?.length === 0) {
     nameQueryRecord = nameQuery.filename
       ? {path: `ign-administrativeunit-name-discovery/${nameQuery.filename}`, ...nameQuery.receipt}
-      : await save(discoveryDir, `ign-administrativeunit-no-match-${records.length + 1}`, nameQuery);
+      : (await existing(discoveryDir, 'ign-administrativeunit-no-match-6.json'))
+        ? {path: 'ign-administrativeunit-name-discovery/ign-administrativeunit-no-match-6.json', ...nameQuery.receipt}
+        : await save(discoveryDir, `ign-administrativeunit-no-match-${records.length + 1}`, nameQuery);
     const boundaryFiles = (await fs.readdir(new URL('ign-native-items/', root))).filter(filename => filename.endsWith('.json') && !filename.endsWith('-receipt.json'));
     let borderRecord;
     for (const filename of boundaryFiles) {
