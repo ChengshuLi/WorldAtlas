@@ -1,0 +1,56 @@
+# Coastal comparison input guards and metadata provenance erratum
+
+**Issue:** #1152; bounded follow-up to #980 / PR #988
+**Research date:** 2026-10-06 UTC
+**Branch baseline:** `0bf17acf0f02b7ac2e6eff3fea3171237aad0a59`
+**Scope:** exactly eight existing Georgia county IDs; no geometry edits or legal boundary determination.
+**Owned path:** `data/regional-review/coastal-reference-reproduction-980/`
+
+## Conclusion
+
+The earlier coastal and invalid-reference findings remain numerically reproducible from the retained bytes. This erratum corrects two methodological/provenance claims: the previous script did not admit all consumed input bytes before calculation and could silently collapse duplicate records; the Census 2026 metadata file is not the exact raw-response byte sequence claimed by its retrieval receipt. A new dated, exclusive-output reproduction now pins every one of the 57 issue-declared inputs and rejects duplicate/missing records before indexing. Two full runs produced identical outputs. The source record remains limited to a statistical comparison: it does not establish coastal county jurisdiction, water or island treatment, source completeness, or legal boundaries.
+
+## Exact subject review
+
+Each subject occurs in its pinned native containing file and in all requested Census responses. A complete scan of all 36 files named by the pinned world index found 49,625 Atlas IDs and 49,625 unique IDs, with no duplicate ID. The new reproducer separately rejects a repeated scoped Atlas ID before constructing an index. All eight Atlas features retain their existing Georgia parent, `framework:province:georgia:99c5fb82481b`, and their existing names/source IDs. Census identity checks use the matching state/county GEOID and LSADC county suffix; the records remain at county/equivalent tier, with no split or aggregation.
+
+| County (GEOID) | Exact Atlas ID | Atlas geometry | Atlas↔Census 2018 IoU | Atlas↔Census 2025 IoU | Atlas↔Census 2026 IoU | 2025↔2026 IoU |
+|---|---|---|---:|---:|---:|---:|
+| Chatham (13051) | `gb:USA:ADM2:52423323B68249799438553` | valid | 0.770335987 | 0.770335987 | 0.770335987 | 1.000000000 |
+| Glynn (13127) | `gb:USA:ADM2:52423323B35006791438696` | valid | 0.787632113 | 0.787636823 | 0.787636823 | 1.000000000 |
+| McIntosh (13191) | `gb:USA:ADM2:52423323B58673559392327` | valid | 0.834332645 | 0.834334728 | 0.834334728 | 1.000000000 |
+| Camden (13039) | `gb:USA:ADM2:52423323B71362647483761` | valid | 0.864182534 | 0.864182534 | 0.864182534 | 1.000000000 |
+| Liberty (13179) | `gb:USA:ADM2:52423323B31615661575159` | valid | 0.883335278 | 0.883319346 | 0.883319346 | 1.000000000 |
+| Schley (13249) | `gb:USA:ADM2:52423323B40186233786127` | valid | 0.981944596 | 0.981944596 | 0.981944596* | 1.000000000* |
+| Pike (13231) | `gb:USA:ADM2:52423323B93853380479562` | valid | 0.982322654 | 0.982322674 | 0.982322674* | 1.000000000* |
+| Terrell (13273) | `gb:USA:ADM2:52423323B62158301450735` | valid | 0.988874986 | 0.988874986 | 0.988874986* | 1.000000000* |
+
+`*` Census reference rings for Schley, Pike and Terrell remain self-intersecting at the same locations across the retained 2018, 2025 and 2026 responses. For overlap screening only, the reproducer creates temporary in-memory `make_valid` geometries. It does not modify or represent the original source as valid. No source-side repair is proposed.
+
+## Input and output admission
+
+`expected-inputs.json` carries the 57 exact SHA-256 and byte-count pins declared by #1152. At this fresh branch baseline, all 57 distinct paths matched both the issue values and the immutable baseline Git blobs. The complete pinned inventory totals 266,062,177 retained bytes; expanding its gzip authorities adds 726,951 bytes, and the specified 200,000-byte reserve produces 266,989,128 bytes, below 256 MiB (268,435,456). Separately, the prior auditor measured the exact #980 scientific input/output phase at 261,355,147 bytes, also within the limit. The script checks the complete issue inventory and baseline ancestry before parsing or calculating, refuses changed/missing pins and stale world-index membership, and uses a new run directory plus exclusive file creation. It records source hashes before calculations in each run's admission record.
+
+The following negative fixtures exercised the same guards used by the reproduction and are retained in `validation-controls.json`: an otherwise complete eight-county roster with a duplicate ninth record; duplicate scoped Atlas IDs; a wrong expected SHA/byte pin; a wrong scoped ID; and an already-existing run output. Each was rejected before overwrite/index admission. The geographic controls also passed: five unchanged coastal 2025/2026 geometries had IoU 1, the shared helper's known axis-order control passed, and deliberately swapped longitude/latitude coordinates separated by more than 1,000 km in EPSG:6933. The complete comparison was run twice. `run-one` and `run-two` have byte-identical SHA-256 for all four artifacts, including the report and controls.
+
+The two new reports preserve the earlier numerical vintage; they are dated reproductions of the retained 2018/2025/2026 inputs, not new Census retrievals. Original #428 source, receipt, findings, and result files remain unchanged. The current script now consumes the exact 57 issue-pinned paths only; it does not fetch or replace source bytes.
+
+## Census 2026 metadata byte correction
+
+The retained file `data/regional-review/coastal-reference-check-428/source/census-2026/counties-layer-metadata.json` is **7,490 bytes**, SHA-256 `61b0ec3c9b54aa09e202fadc6018b9617cffe4629eee7f602baee3d65336093d`. The #428 retrieval receipt records **7,489 bytes**, SHA-256 `56df6e7d6cff8fe1e082bbdc10109cc2c7c22a134f5dfca1899f93d9bd98337d`. Removing the retained file's one final LF yields exactly the receipt's byte count and hash; the parsed JSON is identical. `metadata-provenance.json` records both identities, the existing receipt's retrieval completion time, and the deterministic transformation. No source or receipt was edited, no missing byte was reconstructed as if independently captured, and no new retrieval date is claimed. This is a raw-byte provenance discrepancy, not evidence of changed metadata fields, layer vintage, area units, or boundary geometry.
+
+## Source meaning, vintage, license, and completeness limits
+
+- The retained Census TIGERweb county/equivalent source responses are dated 2018, 2025, and 2026 vintages, with original #980 retrieval records and hashes described in its pinned evidence. The 2026 layer metadata itself says “Counties (or statistically equivalent entities); January 1, 2026 vintage” and identifies Census as source. Its exact 2026 area-field units are not declared in that metadata. The 2025 TIGER/Line technical documentation says its own entity area fields are square metres; that 2025 statement must not be promoted into an explicit 2026 metadata declaration.
+- Census says 2025 TIGER/Line county/equivalent boundaries reflect available governmental boundaries as of January 1, 2025. The Census documentation also says TIGER/Line boundaries are for statistical collection/tabulation, are not a jurisdiction determination or legal land description, and carry no positional/attribute accuracy warranty. The retained LSAD code list identifies the county suffix tier; the layer and IDs do not determine legal county lines.
+- The existing 2018 Atlas source is GeoBoundaries USA ADM2/“Counties” with a 2018 reference and retained restoration/attribution record in the earlier research packet. It is a national administrative reference product, not legal authority for Georgia coastal water or island inclusion. The earlier packet records the source catalog lineage limitation; this erratum does not broaden that license or source claim.
+- The retained Census federal data and technical documents are redistributable with Census attribution; their documented statistical-use/no-warranty context should be retained when repackaged. Existing source retrieval dates, hashes, byte responses, and restoration notes are preserved in the earlier packet. No private, restricted, or unlicensed source is newly redistributed here.
+- Census change notes are selected, not exhaustive; no absent change entry proves no boundary change. The statutory excerpts in the earlier packet are third-party transcription/restoration context and do not constitute a current dispositive county survey. No authoritative legal survey or state/county instrument resolving the exact shoreline, tidal waters, offshore waters, marsh, submerged land, or every island component was established by this bounded work.
+
+The coastal difference remains consistent with a water-convention/source-extent difference; it does not prove that interpretation. Invalid Census comparators remain source-quality limitations rather than Atlas corrections. Do not infer Atlas error from IoU alone, repair stored geometry, or claim coastal completeness. If a boundary correction is later proposed, obtain authoritative county/state survey evidence stating water and island treatment and a valid, suitable comparator for the three invalid Census references. The existing evidence remains useful for identity, parent, tier, and repeatable statistical screening only.
+
+## Reproduction environment and outputs
+
+Python 3.12.14, Shapely 2.1.2, pyproj 3.7.2; EPSG:6933 equal-area overlays, source coordinates interpreted longitude/latitude, shared helper `worldatlas-evidence-geometry-v1`. Invalid references are repaired in memory only. Run `python3.12 data/regional-review/coastal-reference-reproduction-980/reproduce.py --controls-only`, then run the same script once each with `--run-id run-one` and `--run-id run-two` from repository root. The command refuses reused output names.
+
+This packet documents and reproduces an input/provenance correction. It neither changes shared geography nor certifies the Georgia region or the full acceptance of any related regional umbrella.

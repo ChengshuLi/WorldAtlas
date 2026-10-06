@@ -1,0 +1,32 @@
+{
+  "issue": 1152,
+  "subject_ids": [
+    "gb:USA:ADM2:52423323B31615661575159",
+    "gb:USA:ADM2:52423323B35006791438696",
+    "gb:USA:ADM2:52423323B40186233786127",
+    "gb:USA:ADM2:52423323B58673559392327",
+    "gb:USA:ADM2:52423323B62158301450735",
+    "gb:USA:ADM2:52423323B68249799438553",
+    "gb:USA:ADM2:52423323B71362647483761",
+    "gb:USA:ADM2:52423323B93853380479562"
+  ],
+  "source_path": "data/regional-review/coastal-reference-check-428/source/census-2026/counties-layer-metadata.json",
+  "receipt_path": "data/regional-review/coastal-reference-check-428/source/census-2026/retrieval.json",
+  "receipt_retrieval_completed_at": "2026-10-05T15:32:01.777Z",
+  "receipt_claim": {
+    "bytes": 7489,
+    "sha256": "56df6e7d6cff8fe1e082bbdc10109cc2c7c22a134f5dfca1899f93d9bd98337d"
+  },
+  "retained_file": {
+    "bytes": 7490,
+    "sha256": "61b0ec3c9b54aa09e202fadc6018b9617cffe4629eee7f602baee3d65336093d",
+    "final_newline": true
+  },
+  "derived_without_final_newline": {
+    "bytes": 7489,
+    "sha256": "56df6e7d6cff8fe1e082bbdc10109cc2c7c22a134f5dfca1899f93d9bd98337d",
+    "description": "Deterministically derived by removing the retained file's one final LF; not a separately retained or newly fetched upstream response."
+  },
+  "parsed_json_equal": true,
+  "finding": "Raw response byte identity is not established by the committed file. The file is a newline-normalized derivative consistent with the receipt claim; parsed metadata values match. No fresh retrieval or independent historical response authentication is claimed."
+}

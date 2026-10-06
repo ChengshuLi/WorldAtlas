@@ -1,0 +1,14 @@
+{
+  "method_id": "immutable-input-admission",
+  "kind": "source",
+  "outcome": "passed",
+  "scope": "All 57 issue-declared pins matched the fresh baseline and candidate. Missing/changed bytes, stale base registry, unsafe paths, and the complete 256 MiB phase limit refuse before geometry calculation.",
+  "negative_controls": {
+    "altered_source_pin": "rejected-by-size-and-sha256-preflight",
+    "duplicate_atlas_id": "rejected-before-indexing",
+    "duplicate_ninth_county": "rejected-before-indexing",
+    "existing_output": "rejected-by-exclusive-create",
+    "wrong_scoped_id": "rejected-by-exact-roster-check"
+  },
+  "run_admission_sha256": "ea920c41740dde33ca761765a837885059d20c1823c237c99847505941717aa8"
+}
