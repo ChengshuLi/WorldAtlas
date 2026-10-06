@@ -81,17 +81,24 @@ export async function validateBuildContextStage({root=process.cwd(),expectedRefe
  const changedSourceParts=new Set([...originalReceipt.subject_source_parts,'data/geographic-releases/current-manifest.json']);
  assert.deepEqual([...aliases.keys()].sort(),[...oldSnapshots].filter(([,pin])=>changedSourceParts.has(pin.path)).map(([key])=>key).sort(),
   'Original changed-input snapshots are incomplete or outside the exact subjects');
- const decodeContext=pin=>{
+ const decodeContext=(pin,reusableParts)=>{
   const inputs=JSON.parse(read(pin)),dir=path.posix.dirname(pin.path),features=[];
   for(const part of inputs.parts){safeEvidencePath(part.path);fail(/^part-[0-9]+\.json\.gz$/.test(part.path),'Unsafe migrated context part');
-   const raw=read({path:dir+'/'+part.path,bytes:part.bytes,sha256:part.sha256}),decoded=gunzipSync(raw,{maxOutputLength:32*1024*1024});
+   let partPath=dir+'/'+part.path;
+   if(part.reused_from!==undefined){
+    fail(reusableParts&&part.reused_from===stage.before_context.path,'Only an exact mandatory before-context part may be reused');
+    const {reused_from,...descriptor}=part;
+    assert.deepEqual(descriptor,reusableParts.find(original=>original.path===part.path),'Reused context part differs from its complete original descriptor');
+    partPath=path.posix.dirname(stage.before_context.path)+'/'+part.path;
+   }
+   const raw=read({path:partPath,bytes:part.bytes,sha256:part.sha256}),decoded=gunzipSync(raw,{maxOutputLength:32*1024*1024});
    fail(decoded.length===part.uncompressed_bytes&&sha256(decoded)===part.uncompressed_sha256,'Context decoded bytes differ');
    features.push(...JSON.parse(decoded));
   }
   return {inputs,features};
  };
  fail(stage.before_context.path===path.posix.dirname(CONTEXT_STAGE_PATH)+'/inputs.json','Wrong original compact context input');
- const before=decodeContext(stage.before_context),after=decodeContext(stage.after_context);
+ const before=decodeContext(stage.before_context),after=decodeContext(stage.after_context,before.inputs.parts);
  assert.equal(before.inputs.footprints_sha256,originalReceipt.footprints_sha256);assert.equal(before.inputs.owner_sha256,originalReceipt.owner_sha256);
  const geometryManifest=JSON.parse(read(stage.geometry_manifest)),base=path.posix.dirname(stage.geometry_manifest.path);
  const geometryPins=Object.entries(geometryManifest.files).map(([name,pin])=>({path:path.posix.normalize(base+'/'+(pin.archive_path??name)),bytes:pin.bytes,sha256:pin.sha256}));
