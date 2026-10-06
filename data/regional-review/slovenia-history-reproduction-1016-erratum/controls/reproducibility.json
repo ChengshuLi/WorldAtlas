@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "issue": 1185,
+  "method_id": "slovenia-history-reproduction",
+  "kind": "reproducibility",
+  "outcome": "passed",
+  "run_one_sha256": "ba9d495db618a24ae2f36455c5e9525cc37c8353f64b0ae06a8d319d59fd8b02",
+  "run_two_sha256": "ba9d495db618a24ae2f36455c5e9525cc37c8353f64b0ae06a8d319d59fd8b02",
+  "run_one_outputs": {
+    "2017-name-assessment.csv": {
+      "bytes": 28686,
+      "sha256": "46ebdac5372a45cfc7e45d463be4a59e13364ae048f25551348a5c86a3bd056b"
+    },
+    "reproduction-summary.json": {
+      "bytes": 3807,
+      "sha256": "9c4008d680aecbf0415aec88703b90a791a6f9eda6033b4e659816879e2de407"
+    },
+    "territorial-context.json": {
+      "bytes": 63011,
+      "sha256": "2ded2e07207d69ecc6a9121f3b1c2115c433a38a509afa0a675ef21f0cb4db9a"
+    }
+  },
+  "run_two_outputs": {
+    "2017-name-assessment.csv": {
+      "bytes": 28686,
+      "sha256": "46ebdac5372a45cfc7e45d463be4a59e13364ae048f25551348a5c86a3bd056b"
+    },
+    "reproduction-summary.json": {
+      "bytes": 3807,
+      "sha256": "9c4008d680aecbf0415aec88703b90a791a6f9eda6033b4e659816879e2de407"
+    },
+    "territorial-context.json": {
+      "bytes": 63011,
+      "sha256": "2ded2e07207d69ecc6a9121f3b1c2115c433a38a509afa0a675ef21f0cb4db9a"
+    }
+  },
+  "historical_assessment_exact": true,
+  "historical_summary_exact": true,
+  "complete_inputs_pinned_before_generation": true,
+  "code_sha256": "dba8cf5eb05780f041ecb30c84eae391bcd763f381f709fb162cb8e267a82e69",
+  "baseline_commit": "aee3bc644593c8e080f4a8495a851890695581ec"
+}
