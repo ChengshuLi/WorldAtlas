@@ -65,6 +65,20 @@
       "all_inflation_layers_decoded_bytes": 192988,
       "retained_in_managed_slot": true,
       "included_in_packet": false
+    },
+    "final_audit_runs": {
+      "execution_commit": "736c97d1ad033507c2d116ee260391d8216eb0e0",
+      "execution_code_sha256": "599892f624683674839dcb7f024e0652376cebbedbe74bbe9db06fba9270ff4d",
+      "run_one_path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/runs/metadata-audit-run-1.json",
+      "run_two_path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/runs/metadata-audit-run-2.json",
+      "run_one_sha256": "47cbf9f5a77c82100604642e39533c0724c1d997dd799192ea5a8f286fcf1bd9",
+      "run_two_sha256": "47cbf9f5a77c82100604642e39533c0724c1d997dd799192ea5a8f286fcf1bd9",
+      "complete_bytes_identical": true,
+      "superseded_diagnostic_runs": [
+        "research/geography/shared-seam-ind-pak-soi-abdb-2026/runs/metadata-audit-run-1-superseded-parser-bug.json",
+        "research/geography/shared-seam-ind-pak-soi-abdb-2026/runs/metadata-audit-run-2-superseded-parser-bug.json"
+      ],
+      "superseded_reason": "An earlier diagnostic parser interpreted the 0.25 mm plotting notation as 25 m; the corrected committed parser reads 12.5 m. The original outputs remain labelled superseded."
     }
   },
   "metadata_profiles": [
