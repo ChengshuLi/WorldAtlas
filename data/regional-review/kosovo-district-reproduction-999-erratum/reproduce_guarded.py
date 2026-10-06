@@ -154,9 +154,11 @@ def self_test(repo: Path) -> dict:
         cases["historical_runner_accepts_name_drift"] = {"accepted_by_old_runner": True,
             "emitted_synthetic_name": True, "municipality_name_count": len(drift_names),
             "private_output_sha256": sha((stage / PACKET / "source-crosswalk.json").read_bytes())}
-    destination = repo / OWNED / "control-existing.json"
-    destination.write_bytes(b"preserve me")
+    fd, destination_name = tempfile.mkstemp(prefix=".control-existing-", dir=repo / OWNED)
+    destination = Path(destination_name)
     try:
+        with os.fdopen(fd, "wb") as existing:
+            existing.write(b"preserve me")
         try:
             reproduce(repo, destination)
             raise AssertionError("existing output unexpectedly passed")

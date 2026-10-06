@@ -314,8 +314,8 @@
     },
     {
       "path": "data/regional-review/kosovo-district-reproduction-999-erratum/reproduce_guarded.py",
-      "bytes": 10433,
-      "sha256": "44dcf3ba2610b24af318b0147eeb5913852585c66651ab7988fc506d20d7131c",
+      "bytes": 10553,
+      "sha256": "8dece5413c30555e09722e5120da955702a0801e32c7c2c3e3f9b8d215e24a39",
       "hash_kind": "file-bytes"
     },
     {
@@ -368,6 +368,24 @@
     },
     {
       "path": "data/regional-review/kosovo-district-reproduction-999-erratum/run-4-source-crosswalk.json",
+      "hash_kind": "file-bytes",
+      "bytes": 10417,
+      "sha256": "7339a45153c1a7e6f7c594b6c87be2f8b6294e7407ec63ab2598c839bb4cc5e7"
+    },
+    {
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/generator-positive-control.json",
+      "hash_kind": "file-bytes",
+      "bytes": 359,
+      "sha256": "164786b2d33b3bea21f957f4268999f589c73af7d27e4183d4b52973826f2739"
+    },
+    {
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/generator-negative-control.json",
+      "hash_kind": "file-bytes",
+      "bytes": 375,
+      "sha256": "e01aec9cf94280e79e70f9b3717d9a840fc31d04b0beab7d7cd25017e75310ff"
+    },
+    {
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/run-5-source-crosswalk.json",
       "hash_kind": "file-bytes",
       "bytes": 10417,
       "sha256": "7339a45153c1a7e6f7c594b6c87be2f8b6294e7407ec63ab2598c839bb4cc5e7"
@@ -538,6 +556,18 @@
       "kind": "source",
       "outcome": "passed",
       "evidence_path": "data/regional-review/kosovo-district-reproduction-999-erratum/source-review-evidence.json"
+    },
+    {
+      "method_id": "staged-history-reproduction",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/kosovo-district-reproduction-999-erratum/generator-positive-control.json"
+    },
+    {
+      "method_id": "staged-history-reproduction",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/kosovo-district-reproduction-999-erratum/generator-negative-control.json"
     }
   ],
   "conclusions": [
@@ -634,6 +664,18 @@
     {
       "path": "data/regional-review/kosovo-district-reproduction-999-erratum/run-4-source-crosswalk.json",
       "status": "added"
+    },
+    {
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/generator-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/generator-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/kosovo-district-reproduction-999-erratum/run-5-source-crosswalk.json",
+      "status": "added"
     }
   ],
   "commands": [
@@ -641,6 +683,7 @@
     "python3 data/regional-review/kosovo-district-reproduction-999-erratum/reproduce_guarded.py --root . --output data/regional-review/kosovo-district-reproduction-999-erratum/run-2-source-crosswalk.json",
     "python3 data/regional-review/kosovo-district-reproduction-999-erratum/reproduce_guarded.py --root . --output data/regional-review/kosovo-district-reproduction-999-erratum/run-3-source-crosswalk.json",
     "node scripts/evidence-quality.mjs data/regional-review/kosovo-district-reproduction-999-erratum/evidence-quality.json .",
-    "python3 data/regional-review/kosovo-district-reproduction-999-erratum/reproduce_guarded.py --root . --self-test --output data/regional-review/kosovo-district-reproduction-999-erratum/run-4-source-crosswalk.json"
+    "python3 data/regional-review/kosovo-district-reproduction-999-erratum/reproduce_guarded.py --root . --self-test --output data/regional-review/kosovo-district-reproduction-999-erratum/run-4-source-crosswalk.json",
+    "python3 data/regional-review/kosovo-district-reproduction-999-erratum/reproduce_guarded.py --root . --self-test --output data/regional-review/kosovo-district-reproduction-999-erratum/run-5-source-crosswalk.json"
   ]
 }
