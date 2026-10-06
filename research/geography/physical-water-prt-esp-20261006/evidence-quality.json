@@ -468,14 +468,14 @@
     },
     {
       "path": "research/geography/physical-water-prt-esp-20261006/reproduction/run-1.json",
-      "bytes": 6461,
-      "sha256": "27c0479134a509942f297913449c9af7f635f0c79cdc2249210e594107bce5db",
+      "bytes": 6706,
+      "sha256": "9b377c27879dd2d1b2faf4a25f256dff6d2025430a0a5a7251003cac5a282992",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/physical-water-prt-esp-20261006/reproduction/run-2.json",
-      "bytes": 6461,
-      "sha256": "27c0479134a509942f297913449c9af7f635f0c79cdc2249210e594107bce5db",
+      "bytes": 6706,
+      "sha256": "9b377c27879dd2d1b2faf4a25f256dff6d2025430a0a5a7251003cac5a282992",
       "hash_kind": "file-bytes"
     },
     {
@@ -486,14 +486,14 @@
     },
     {
       "path": "research/geography/physical-water-prt-esp-20261006/response-receipts.json",
-      "bytes": 17709,
-      "sha256": "f5462eb7e313f14ede2647b8ccb90101c7f073b13fe2f7f1e2a10be5d715a595",
+      "bytes": 26025,
+      "sha256": "626e2667c52a631ce6a2a3f2b76dda47183eaa912c439805339bb619d9ecbb2b",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/physical-water-prt-esp-20261006/source-assessment.md",
-      "bytes": 9050,
-      "sha256": "01f903b886a0317b49e90151aaa0eec5779900451772097e0463be327ff15009",
+      "bytes": 9278,
+      "sha256": "f52e5252bb2179ac3031f527b118fc14fcbd3f52822dd8a0ed7e1d2a064c4a70",
       "hash_kind": "file-bytes"
     },
     {
@@ -560,6 +560,12 @@
       "path": "research/geography/physical-water-prt-esp-20261006/validation/positive-control.json",
       "bytes": 726,
       "sha256": "5e7fabc9d6c2a1960098d4196930d64b4d237b964af595bde19a7ffaa2050014",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/validation/reproducibility.json",
+      "bytes": 3583,
+      "sha256": "4c75224c8c9125fd6051ca05f9b5dbc45a8e728a999d69a6e62fe4894de3e354",
       "hash_kind": "file-bytes"
     }
   ],
@@ -676,6 +682,12 @@
       "kind": "negative-control",
       "outcome": "passed",
       "evidence_path": "research/geography/physical-water-prt-esp-20261006/validation/negative-control.json"
+    },
+    {
+      "method_id": "apa-wfd-line-geometry-intersection",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "research/geography/physical-water-prt-esp-20261006/validation/reproducibility.json"
     }
   ],
   "change_receipts": [
@@ -929,6 +941,10 @@
     },
     {
       "path": "research/geography/physical-water-prt-esp-20261006/validation/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/physical-water-prt-esp-20261006/validation/reproducibility.json",
       "status": "added"
     },
     {

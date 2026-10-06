@@ -48,12 +48,147 @@
   ],
   "unattributed_legacy_responses": [
     {
-      "body": "apa-wfd-all-hits.xml",
-      "headers": "apa_wfd_all_hits.headers.txt",
-      "limit": "Exact original request URL/parameter trace was not retained in the prior preflight. Body is retained for transparency but is not used as the exact-request hit receipt; use the new explicitly receipted full-component `resultType=hits` response above."
+      "path": "apa-hydro-all-hits.xml",
+      "provenance": "legacy-preflight-unattributed",
+      "limitation": "Exact request URL and complete parameter trace were not preserved; retained for audit/transparency, not used as an exact-query receipt or as sole evidence of completeness."
+    },
+    {
+      "path": "apa-hydro-controlbox-firstfeature.xml",
+      "provenance": "legacy-preflight-unattributed",
+      "limitation": "Exact request URL and complete parameter trace were not preserved; retained for audit/transparency, not used as an exact-query receipt or as sole evidence of completeness."
+    },
+    {
+      "path": "apa-hydro-first-feature.headers.txt",
+      "provenance": "legacy-preflight-unattributed",
+      "limitation": "Exact request URL and complete parameter trace were not preserved; retained for audit/transparency, not used as an exact-query receipt or as sole evidence of completeness."
+    },
+    {
+      "path": "apa-hydro-first-feature.xml",
+      "provenance": "legacy-preflight-unattributed",
+      "limitation": "Exact request URL and complete parameter trace were not preserved; retained for audit/transparency, not used as an exact-query receipt or as sole evidence of completeness."
+    },
+    {
+      "path": "apa-hydro-hits-3763-broad.xml",
+      "provenance": "legacy-preflight-unattributed",
+      "limitation": "Exact request URL and complete parameter trace were not preserved; retained for audit/transparency, not used as an exact-query receipt or as sole evidence of completeness."
+    },
+    {
+      "path": "apa-hydro-hits-3763-default.xml",
+      "provenance": "legacy-preflight-unattributed",
+      "limitation": "Exact request URL and complete parameter trace were not preserved; retained for audit/transparency, not used as an exact-query receipt or as sole evidence of completeness."
+    },
+    {
+      "path": "apa-hydro-hits-3763-region.headers.txt",
+      "provenance": "legacy-preflight-unattributed",
+      "limitation": "Exact request URL and complete parameter trace were not preserved; retained for audit/transparency, not used as an exact-query receipt or as sole evidence of completeness."
+    },
+    {
+      "path": "apa-hydro-hits-3763-region.xml",
+      "provenance": "legacy-preflight-unattributed",
+      "limitation": "Exact request URL and complete parameter trace were not preserved; retained for audit/transparency, not used as an exact-query receipt or as sole evidence of completeness."
+    },
+    {
+      "path": "apa-hydro-hits-epsg3763.xml",
+      "provenance": "legacy-preflight-unattributed",
+      "limitation": "Exact request URL and complete parameter trace were not preserved; retained for audit/transparency, not used as an exact-query receipt or as sole evidence of completeness."
+    },
+    {
+      "path": "apa-hydro-hits.xml",
+      "provenance": "legacy-preflight-unattributed",
+      "limitation": "Exact request URL and complete parameter trace were not preserved; retained for audit/transparency, not used as an exact-query receipt or as sole evidence of completeness."
+    },
+    {
+      "path": "apa-wfd-all-hits.xml",
+      "provenance": "legacy-preflight-unattributed",
+      "limitation": "Exact request URL and complete parameter trace were not preserved; retained for audit/transparency, not used as an exact-query receipt or as sole evidence of completeness."
+    },
+    {
+      "path": "apa-wfd-full-component-bbox-page-0.headers.txt",
+      "provenance": "legacy-preflight-unattributed",
+      "limitation": "Exact request URL and complete parameter trace were not preserved; retained for audit/transparency, not used as an exact-query receipt or as sole evidence of completeness."
+    },
+    {
+      "path": "apa-wfd-full-component-bbox-page-0.xml",
+      "provenance": "legacy-preflight-unattributed",
+      "limitation": "Exact request URL and complete parameter trace were not preserved; retained for audit/transparency, not used as an exact-query receipt or as sole evidence of completeness."
+    },
+    {
+      "path": "apa-wfd-full-component-bbox-page-1.headers.txt",
+      "provenance": "legacy-preflight-unattributed",
+      "limitation": "Exact request URL and complete parameter trace were not preserved; retained for audit/transparency, not used as an exact-query receipt or as sole evidence of completeness."
+    },
+    {
+      "path": "apa-wfd-full-component-bbox-page-1.xml",
+      "provenance": "legacy-preflight-unattributed",
+      "limitation": "Exact request URL and complete parameter trace were not preserved; retained for audit/transparency, not used as an exact-query receipt or as sole evidence of completeness."
+    },
+    {
+      "path": "apa-wfd-hits-epsg4326axis.xml",
+      "provenance": "legacy-preflight-unattributed",
+      "limitation": "Exact request URL and complete parameter trace were not preserved; retained for audit/transparency, not used as an exact-query receipt or as sole evidence of completeness."
+    },
+    {
+      "path": "apa-wfd-hits-xydefault.xml",
+      "provenance": "legacy-preflight-unattributed",
+      "limitation": "Exact request URL and complete parameter trace were not preserved; retained for audit/transparency, not used as an exact-query receipt or as sole evidence of completeness."
+    },
+    {
+      "path": "apa-wfd-hits.xml",
+      "provenance": "legacy-preflight-unattributed",
+      "limitation": "Exact request URL and complete parameter trace were not preserved; retained for audit/transparency, not used as an exact-query receipt or as sole evidence of completeness."
+    },
+    {
+      "path": "apa_hydro_all_hits.headers.txt",
+      "provenance": "legacy-preflight-unattributed",
+      "limitation": "Exact request URL and complete parameter trace were not preserved; retained for audit/transparency, not used as an exact-query receipt or as sole evidence of completeness."
+    },
+    {
+      "path": "apa_hydro_controlbox_firstfeature.headers.txt",
+      "provenance": "legacy-preflight-unattributed",
+      "limitation": "Exact request URL and complete parameter trace were not preserved; retained for audit/transparency, not used as an exact-query receipt or as sole evidence of completeness."
+    },
+    {
+      "path": "apa_hydro_hits.headers.txt",
+      "provenance": "legacy-preflight-unattributed",
+      "limitation": "Exact request URL and complete parameter trace were not preserved; retained for audit/transparency, not used as an exact-query receipt or as sole evidence of completeness."
+    },
+    {
+      "path": "apa_hydro_hits_3763_broad.headers.txt",
+      "provenance": "legacy-preflight-unattributed",
+      "limitation": "Exact request URL and complete parameter trace were not preserved; retained for audit/transparency, not used as an exact-query receipt or as sole evidence of completeness."
+    },
+    {
+      "path": "apa_hydro_hits_3763_default.headers.txt",
+      "provenance": "legacy-preflight-unattributed",
+      "limitation": "Exact request URL and complete parameter trace were not preserved; retained for audit/transparency, not used as an exact-query receipt or as sole evidence of completeness."
+    },
+    {
+      "path": "apa_hydro_hits_epsg3763.headers.txt",
+      "provenance": "legacy-preflight-unattributed",
+      "limitation": "Exact request URL and complete parameter trace were not preserved; retained for audit/transparency, not used as an exact-query receipt or as sole evidence of completeness."
+    },
+    {
+      "path": "apa_wfd_all_hits.headers.txt",
+      "provenance": "legacy-preflight-unattributed",
+      "limitation": "Exact request URL and complete parameter trace were not preserved; retained for audit/transparency, not used as an exact-query receipt or as sole evidence of completeness."
+    },
+    {
+      "path": "apa_wfd_hits.headers.txt",
+      "provenance": "legacy-preflight-unattributed",
+      "limitation": "Exact request URL and complete parameter trace were not preserved; retained for audit/transparency, not used as an exact-query receipt or as sole evidence of completeness."
+    },
+    {
+      "path": "apa_wfd_hits_epsg4326axis.headers.txt",
+      "provenance": "legacy-preflight-unattributed",
+      "limitation": "Exact request URL and complete parameter trace were not preserved; retained for audit/transparency, not used as an exact-query receipt or as sole evidence of completeness."
+    },
+    {
+      "path": "apa_wfd_hits_xydefault.headers.txt",
+      "provenance": "legacy-preflight-unattributed",
+      "limitation": "Exact request URL and complete parameter trace were not preserved; retained for audit/transparency, not used as an exact-query receipt or as sole evidence of completeness."
     }
   ],
-  "pagination_and_completeness": "APA WFD feature pages return 59 then 0; a fresh explicit full-component hits request reports 59. Each has a separate timestamp and feature pages say numberMatched=unknown, so bounded completeness is conditional and not a transactional snapshot.",
+  "pagination_and_completeness": "APA WFD feature pages return 59 then 0; an exactly receipted, separately timestamped full-component hits request reports 59. Feature pages report numberMatched=unknown and page snapshots differ; completeness is conditional, not transactionally guaranteed.",
   "header_handling": "HTTP headers retained where available. Set-Cookie transient ASP.NET session values were removed from two MITECO header receipts; response bodies are unchanged.",
   "inventory": [
     {

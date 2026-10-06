@@ -23,6 +23,10 @@
     "native_crs": "EPSG:4326, GML coordinates parsed latitude then longitude",
     "page0_sha256": "41c231afc90b3a0b66025440215d4d4451ff64f4b1ceb4cab8ba89f6a2c4c52c",
     "page1_sha256": "c1379a198ee0d12d4533171f0bf3c473cf2c6fbbe88cbb9083bb8bfbaca36576",
+    "hits_sha256": "0f863cd1ca30661979d2f571a37a1ce1425d7a6c5a25b006cb9a3317962c5a5b",
+    "hits_numberMatched": "59",
+    "hits_numberReturned": 0,
+    "hits_timestamp": "2026-10-06T15:04:03Z",
     "page0_timestamp": "2026-10-06T14:49:54Z",
     "page1_timestamp": "2026-10-06T14:49:56Z",
     "page0_numberReturned": 59,
@@ -160,7 +164,7 @@
     ]
   },
   "limitations": [
-    "Provider reports numberMatched=unknown on vector pages; separate hits query reported 59, page 0 returned 59 and subsequent page returned 0. Page timestamps differ, so this is not a stable transactional snapshot.",
+    "Provider reports numberMatched=unknown on feature pages; a separately timestamped exact full-component hits request reports 59, page 0 returned 59 and subsequent page returned 0. This cross-snapshot agreement is conditional, not a stable transactional snapshot.",
     "WFD river features are water-planning objects, not observations of surface wetness or measured channel polygons.",
     "Line coincidence cannot establish channel width, wetted extent, whole-cell water, land/water proportions, administrative ownership, or legal boundary.",
     "This result covers the full retained gap component, not only the administrative comparison residual."
