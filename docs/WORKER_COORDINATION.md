@@ -282,3 +282,13 @@ and GitHub request ID when available; original denial and notification denial ar
 separate. Tokens, authentication headers, cookies and complete bodies/header maps
 are never retained. Inspect this evidence before attributing any future denial
 or choosing a retry; observation expiry alone still cannot restart live work.
+
+
+For bootstrap observability, the existing PR regression profile job has a static
+failure-only diagnostic. It makes one read-only current-repository PR GET with
+the same job token and a 20-second request timeout, emits only the sanitized
+message/status and allowlisted rate/request fields, and leaves the original job
+failure intact. It explicitly redacts the known token as well as token prefixes
+and Bearer values. This later same-token probe describes its own response, not an
+inferred original response. The trusted-base selector still owns the actual
+profile/coverage decision; a successful probe cannot substitute for validation.

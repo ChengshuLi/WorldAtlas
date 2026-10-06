@@ -9,6 +9,12 @@
     "commit": "9a8240e49328aba95e97ca1283bbf4293065468c",
     "files": [
       {
+        "path": ".github/workflows/merge-integration-checks.yml",
+        "bytes": 7244,
+        "sha256": "e970aaf6eb797b298892707a938a237e40977c63962e8fa840588dcf2cf411b8",
+        "hash_kind": "file-bytes"
+      },
+      {
         "path": ".github/workflows/worker-merge.yml",
         "bytes": 8906,
         "sha256": "1c8ba8c5497367b11708adfb96187acef5d27233e56f11e7b5f5d98e2faaed90",
@@ -81,6 +87,12 @@
   "sources": [],
   "outputs": [
     {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "bytes": 9544,
+      "sha256": "d8d7b07bfbbbdf558308100cc9da7531ddc7d1a7ec73e9c24bc2bd7b9bd6c867",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": ".github/workflows/merge-scheduler.yml",
       "bytes": 2251,
       "sha256": "cc2e2917c92c147fe8fa93b12871046730e7364f80adfc63edd5e70265c5b2fe",
@@ -94,8 +106,8 @@
     },
     {
       "path": "coordination/engineering/1174-integration-scheduler/immutable-negative-control.json",
-      "bytes": 868,
-      "sha256": "b7fafa1529fa363b845ffa4e02a8fe72704b72de28f637e4722ec4168fb0981d",
+      "bytes": 995,
+      "sha256": "93b59791f4eb586ecbd9eeeb1279a620c69fcb1124e8fd75a0da6e25a63b425c",
       "hash_kind": "file-bytes"
     },
     {
@@ -123,6 +135,12 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "coordination/engineering/1174-integration-scheduler/test-results-diagnostic.txt",
+      "bytes": 11224,
+      "sha256": "684bbca64bcc111474b2be79f44142d63b31eb4ce18db40cf1fdc4d4d173f593",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "coordination/engineering/1174-integration-scheduler/test-results.txt",
       "bytes": 8638,
       "sha256": "53105dd1b9b7db13a3137de5027485a7c0f614fb589d116abe550720c18837d4",
@@ -130,8 +148,8 @@
     },
     {
       "path": "docs/WORKER_COORDINATION.md",
-      "bytes": 35148,
-      "sha256": "89c0b2447ea085b8c846282eca2993257150a14b637c4281d5edd1a71db06408",
+      "bytes": 35785,
+      "sha256": "d7a914f7692fce2545a7033a0f4b007ac13b0b21bdc2ce5c1c4b01f360e1eef0",
       "hash_kind": "file-bytes"
     },
     {
@@ -142,8 +160,8 @@
     },
     {
       "path": "scripts/issue-claim-contract.mjs",
-      "bytes": 11349,
-      "sha256": "86e0cbf5bd4a5d12c8994b9157e0ee8ce69c083599a470397e4667f7c9483a00",
+      "bytes": 11381,
+      "sha256": "26c37f0ab117d1ad893999c58a886cef42878a536e6876eac8c7ddaf2f2aa758",
       "hash_kind": "file-bytes"
     },
     {
@@ -178,8 +196,8 @@
     },
     {
       "path": "test/immutable-git-blobs.test.mjs",
-      "bytes": 5438,
-      "sha256": "a4ce27299d38ecfd9d1c14cc8722ab60c6187c2d0ccdf36e2516d5b282c1b4a2",
+      "bytes": 7724,
+      "sha256": "89c241544100e5f439b30127c7b560ca02c5b62cf4dc153c23a23347bbf4d0f3",
       "hash_kind": "file-bytes"
     },
     {
@@ -221,6 +239,11 @@
   ],
   "change_receipts": [
     {
+      "path": ".github/workflows/merge-integration-checks.yml",
+      "status": "modified",
+      "original_sha256": "e970aaf6eb797b298892707a938a237e40977c63962e8fa840588dcf2cf411b8"
+    },
+    {
       "path": ".github/workflows/merge-scheduler.yml",
       "status": "added"
     },
@@ -251,6 +274,10 @@
     },
     {
       "path": "coordination/engineering/1174-integration-scheduler/test-results-cache.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/1174-integration-scheduler/test-results-diagnostic.txt",
       "status": "added"
     },
     {

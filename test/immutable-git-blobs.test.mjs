@@ -1,6 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import {spawnSync} from 'node:child_process';
 import {githubAPI} from '../scripts/issue-claim-contract.mjs';
 import {memoizeImmutableGitBlobs} from '../scripts/immutable-git-blobs.mjs';
 const blob = content => {
@@ -75,4 +79,27 @@ test('callers and origin objects cannot mutate cached bytes or metadata used by 
  assert.throws(()=>{first.content='mutated';},TypeError);assert.throws(()=>{first.size=0;},TypeError);
  origin.content='changed origin';origin.sha='f'.repeat(40);origin.size=0;
  assert.deepEqual(await api(route(expected)),expected);
+});
+
+
+test('actual failure-only workflow diagnostic uses one bounded read and redacts known token/prefix/Bearer without bypass',()=>{
+ const yaml=fs.readFileSync('.github/workflows/merge-integration-checks.yml','utf8');
+ const profile=yaml.split('  profile:\n')[1].split('  geography:\n')[0];
+ assert.match(profile,/name: Diagnose failed API read[\s\S]*?if: failure\(\)/);
+ assert.doesNotMatch(profile,/continue-on-error|contents: write|pull-requests: write/);
+ const script=profile.match(/node --input-type=module <<'DIAGNOSTIC'\n([\s\S]*?)\n          DIAGNOSTIC/)[1].replace(/^          /gm,'');
+ const dir=fs.mkdtempSync(path.join(os.tmpdir(),'atlas-api-diagnostic-'));
+ try {
+  const mock=path.join(dir,'mock.mjs');
+  fs.writeFileSync(mock,`globalThis.fetch=async(url,options)=>{
+   if(url!=='https://api.github.com/repos/o/r/pulls/2'||options.method)throw Error('Unexpected mutation/route');
+   if(options.headers.Authorization!=='Bearer actual-known-secret'||!options.signal)throw Error('Missing same-token bounded read');
+   return Response.json({message:'denied actual-known-secret github_pat_example Bearer other-secret',unknown:'never retained'},
+    {status:403,headers:{'x-ratelimit-remaining':'0','x-ratelimit-reset':'1791306000','retry-after':'60','x-github-request-id':'ABCD:1234','authorization':'never retained','set-cookie':'never retained'}});
+  };`);
+  const result=spawnSync(process.execPath,['--import',mock,'--input-type=module','-e',script],{encoding:'utf8',env:{GH_TOKEN:'actual-known-secret',DIAGNOSTIC_REPO:'o/r',DIAGNOSTIC_PR:'2',PATH:process.env.PATH}});
+  assert.equal(result.status,0,result.stderr);const row=JSON.parse(result.stdout);
+  assert.deepEqual(row,{phase:'failed-profile-job-api-probe',validation_bypassed:false,http_status:403,rate_remaining:'0',rate_reset:'1791306000',retry_after:'60',request_id:'ABCD:1234',message:'denied [redacted] [redacted] Bearer [redacted]'});
+  for(const forbidden of ['actual-known-secret','github_pat_example','other-secret','never retained','authorization','set-cookie','unknown'])assert.ok(!result.stdout.includes(forbidden));
+ } finally {fs.rmSync(dir,{recursive:true,force:true});}
 });

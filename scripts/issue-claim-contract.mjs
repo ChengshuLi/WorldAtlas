@@ -102,7 +102,7 @@ export function githubAPI(token){
    let payload;try{payload=await response.json();}catch{/* Keep the actual HTTP rejection even without a JSON message. */}
    const numeric=name=>{const value=response.headers.get(name);return /^\d{1,13}$/.test(value??'')?value:undefined;};
    const requestId=response.headers.get('x-github-request-id');
-   const message=typeof payload?.message==='string'?payload.message
+   const message=typeof payload?.message==='string'?payload.message.split(token).join('[redacted]')
     .replace(/(?:github_pat_|gh[pousr]_)[A-Za-z0-9_]+/g,'[redacted]')
     .replace(/Bearer\s+\S+/gi,'Bearer [redacted]').replace(/[\x00-\x1f\x7f]/g,' ').slice(0,512):undefined;
    error.github={http_status:response.status,...(message?{message}:{}),

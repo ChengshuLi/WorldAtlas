@@ -7,9 +7,10 @@
     "candidate waiting rechecks changed claim/check/review/head after caching immutable evidence",
     "failed, malformed, truncated, changed content and mismatched OID responses never populate cache",
     "callers and origin objects cannot mutate cached bytes or metadata used by later checks",
-    "actual API rejection preserves only sanitized message/status and allowlisted rate/request headers"
+    "actual API rejection preserves only sanitized message/status and allowlisted rate/request headers",
+    "actual failure-only workflow diagnostic uses one bounded read and redacts known token/prefix/Bearer without bypass"
   ],
-  "transcript": "coordination/engineering/1174-integration-scheduler/test-results-cache.txt",
+  "transcript": "coordination/engineering/1174-integration-scheduler/test-results-diagnostic.txt",
   "limits": [
     "Synthetic byte workload and mocked read-only API/workflow controls; no live scheduler execution or geographic approval claimed."
   ]
