@@ -1,0 +1,969 @@
+{
+  "version": 1,
+  "issue": 1059,
+  "lane": "geography",
+  "worker_id": "01a10947-7d6e-7ba2-98a1-a9f91dedabfc",
+  "subject_ids": [
+    "PYF-4963",
+    "PYF-4964",
+    "PYF-4965",
+    "PYF-4966",
+    "PYF-4967"
+  ],
+  "subject_ids_sha256": "323fbef100fd5984251fc770d6d1133435fe796989915744e80a7c50c3e7e5ce",
+  "baseline": {
+    "commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+    "files": [
+      {
+        "path": "data/geography/part-28.json",
+        "bytes": 6613963,
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/source/natural-earth/ne_10m_admin_1_scoped-admin-features.json",
+        "bytes": 96517,
+        "sha256": "dd3f4a5683c713fd89c00b41748d89771f905ef236feaacb7887818085f3d96e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "part-28": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "hierarchy": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "natural-earth-scope": "dd3f4a5683c713fd89c00b41748d89771f905ef236feaacb7887818085f3d96e"
+    },
+    "pin_files": {
+      "part-28": "data/geography/part-28.json",
+      "hierarchy": "data/hierarchy.json",
+      "natural-earth-scope": "data/regional-review/regional-review-14a242c4cb0781a7/source/natural-earth/ne_10m_admin_1_scoped-admin-features.json"
+    },
+    "subject_files": {
+      "PYF-4963": "data/geography/part-28.json",
+      "PYF-4964": "data/geography/part-28.json",
+      "PYF-4965": "data/geography/part-28.json",
+      "PYF-4966": "data/geography/part-28.json",
+      "PYF-4967": "data/geography/part-28.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "daf-islands",
+      "url": "https://www.data.gouv.fr/datasets/geographie-administrative-de-la-polynesie-francaise",
+      "role": "Official island, atoll, bank and reef extent layer",
+      "vintage": "GEO PF catalogue updated 2022-02-28; feature dates vary",
+      "retrieved_at": "2026-10-06T03:42:00Z",
+      "license": {
+        "status": "redistributable",
+        "terms": "Creative Commons Attribution (catalogue does not specify version)"
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/loc-ile.zip",
+          "bytes": 14253080,
+          "sha256": "5018fa62ff269ae5b93502218213ce57baa36f31fcbf9d12b47bd36e12a6e29b",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "daf-groups",
+      "url": "https://static.data.gouv.fr/resources/geographie-administrative-de-la-polynesie-francaise/20220228-205413/loc-groupe-ile.zip",
+      "role": "Five figurative administrative group divisions",
+      "vintage": "Acquired 2018-09-05; edited 2020-03-09; published 2022-02-28",
+      "retrieved_at": "2026-10-06T03:42:00Z",
+      "license": {
+        "status": "redistributable",
+        "terms": "Creative Commons Attribution (catalogue does not specify version)"
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/loc-groupe-ile.zip",
+          "bytes": 1168408,
+          "sha256": "3f71d87855a6d46885396b6802ccfa19f559ca4b9876f6480cd122fcba42d6fb",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "daf-communes",
+      "url": "https://static.data.gouv.fr/resources/geographie-administrative-de-la-polynesie-francaise/20220228-205331/loc-commune-associee.zip",
+      "role": "Commune/associated-commune administrative limits and island associations",
+      "vintage": "GEO PF catalogue updated 2022-02-28",
+      "retrieved_at": "2026-10-06T03:42:00Z",
+      "license": {
+        "status": "redistributable",
+        "terms": "Creative Commons Attribution (catalogue does not specify version)"
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/loc-commune-associee.zip",
+          "bytes": 15310967,
+          "sha256": "29230c18487385f84ca480e9b2c921ea389f848663a4a9574e77b9cbbf40db7b",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "natural-earth-admin1",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_admin_1_states_provinces.geojson",
+      "role": "Generalized comparator for the five current atlas features",
+      "vintage": "Natural Earth commit ca96624a56bd078437bca8184e78163e5039ad19 (2022-06-02)",
+      "retrieved_at": "2026-10-06T03:42:00Z",
+      "license": {
+        "status": "redistributable",
+        "terms": "Public domain; https://www.naturalearthdata.com/about/terms-of-use/"
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/ne-admin1-pyffeatures.json",
+          "bytes": 96517,
+          "sha256": "dd3f4a5683c713fd89c00b41748d89771f905ef236feaacb7887818085f3d96e",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "state-decree",
+      "url": "https://www.legifrance.gouv.fr/jorf/id/JORFSCTA000000898677",
+      "role": "State subdivision and commune membership",
+      "vintage": "Decree 2005-1611, current text checked 2026-10-06",
+      "retrieved_at": "2026-10-06T03:42:00Z",
+      "license": {
+        "status": "unknown",
+        "terms": "Official link only; no separate reuse license assessed and no bytes retained."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Open official decree Article 1.",
+      "limit": "Defines commune membership, not precise boundary polygons."
+    },
+    {
+      "id": "state-census",
+      "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000046768003/",
+      "role": "2022 census counts confirming five subdivisions",
+      "vintage": "2022 census",
+      "retrieved_at": "2026-10-06T03:42:00Z",
+      "license": {
+        "status": "unknown",
+        "terms": "Official link only; no separate reuse license assessed and no bytes retained."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Open decree Annex Tables I-II.",
+      "limit": "Census counts do not define boundary geometry."
+    },
+    {
+      "id": "organic-statute",
+      "url": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000038741644/2026-05-07",
+      "role": "Constituent group and maritime-space names",
+      "vintage": "Version in force 2026-05-07",
+      "retrieved_at": "2026-10-06T03:42:00Z",
+      "license": {
+        "status": "unknown",
+        "terms": "Official link only; no separate reuse license assessed and no bytes retained."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Open official Legifrance Article 1.",
+      "limit": "Names groups but gives no coordinates or polygons."
+    },
+    {
+      "id": "dpam",
+      "url": "https://www.service-public.pf/dpam/presentation-de-la-dpam/",
+      "role": "Official physical archipelago and nested Society terminology",
+      "vintage": "Page checked 2026-10-06",
+      "retrieved_at": "2026-10-06T03:42:00Z",
+      "license": {
+        "status": "unknown",
+        "terms": "Official link only; no separate reuse license assessed and no bytes retained."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Open DPAM “Quatre grands archipels”.",
+      "limit": "Service description, not statutory boundary or complete roster."
+    },
+    {
+      "id": "planning",
+      "url": "https://www.service-public.pf/dca/plansdamenagement/",
+      "role": "Official planning label usage",
+      "vintage": "Page checked 2026-10-06",
+      "retrieved_at": "2026-10-06T03:42:00Z",
+      "license": {
+        "status": "unknown",
+        "terms": "Official link only; no separate reuse license assessed and no bytes retained."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Open DCA plans index and dated plans.",
+      "limit": "Planning terminology does not define legal edges."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/README.md",
+      "bytes": 10932,
+      "sha256": "8d63ab23bd0a19be82121743aca4a60094a58990d06c573df9d06c2c9c4ec450",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "bytes": 7932,
+      "sha256": "5df828f2c0d1e4162476fa312efa8f701638a57ce98e95458c8126b5bb1663ea",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/island-membership.csv",
+      "bytes": 17354,
+      "sha256": "282d01494a9e7ce80405870bcd712a2b8ec9efb5b5b0fd2da36ccae849d1dcde",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/references.md",
+      "bytes": 5796,
+      "sha256": "bb9f1b9fd8a4f4c408242ef3d4cf6f5bcad8b1e20e505bf4354817a3023d441a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/admin-divisions.geojson",
+      "bytes": 1410385,
+      "sha256": "88a970ed225298e6f1d06d9d4a12659c74d64389e1e73463505ad52f7bae027f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/archive-inventory.json",
+      "bytes": 5518,
+      "sha256": "40d525847cf3e50ba21002ffc8295a6838c40f78d9c38b0671f1fe75e84414f2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/commune-associations.csv",
+      "bytes": 29417,
+      "sha256": "3702809f89db057332638d395ad13cc80b9937f1ab67928455e352c4558ba159",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/island-attributes.csv",
+      "bytes": 28403,
+      "sha256": "a0550b125c710580db95b4fef2aa5730e77911424fd0213d2460220fa4b7e7d8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-1.geojson",
+      "bytes": 2927790,
+      "sha256": "6179ac6a617f56e3f298d5564db513ab49310c288a6d178158bfaf273852f069",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-2.geojson",
+      "bytes": 5046613,
+      "sha256": "9ef0719f4bfb842b9c5ccf6b4c0d87c7bde1d33ad24825dfd722612a4a983e9b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-3.geojson",
+      "bytes": 7796607,
+      "sha256": "8bad07bfb6bb95dbfa384e4e3ffe389c988f79416fcf85215620acef1f759759",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-4.geojson",
+      "bytes": 1144543,
+      "sha256": "ddd015f5ee8f07faee6d1844575cb79ecf7dbf54ffdad96d713c32c450c10523",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-5.geojson",
+      "bytes": 31660529,
+      "sha256": "de4ea30975d1e135862f16beb3fbde6ab196c55b9537a32016645770212dc311",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/negative-controls.json",
+      "bytes": 1210,
+      "sha256": "02bad23dae4853f9820b2ba71d6c6ded99ae42ac8060edc64008bc3b4d329d86",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/positive-controls.json",
+      "bytes": 580,
+      "sha256": "d236bbce19b954461bde2522b39674861a5f680bade5c50790563d533deb2251",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/provenance.json",
+      "bytes": 19776,
+      "sha256": "be280be73a7ee82ed75b02b6063972b9818e971d26cce14c2ec27796371fa4f2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/verify.py",
+      "bytes": 14581,
+      "sha256": "d86958c5c1ab8259195db39391cd80f6633b3147907aebfb4e1fed3e644dc30f",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "daf-island-crosswalk-and-geometry-v1",
+      "kind": "geography",
+      "description": "Compare pinned Atlas group features to DAF island-object union assigned by greatest polygon overlap; independently cross-check municipal IDs, exact subjects, positive and negative controls, pairwise group overlap, source bytes.",
+      "software": "Python 3.12; NumPy 2.3.5; Shapely 2.1.2; pyproj 3.7.2; Mapshaper 0.6.121",
+      "units": "m2, feature/component counts, fraction",
+      "helper_version": "worldatlas-evidence-geometry-v1",
+      "axis_order": "longitude-latitude",
+      "crs": "EPSG:4326",
+      "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+      "distance_method": "WGS84 inverse geodesic"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "pyf-4963-iou",
+      "value": 0.73494582,
+      "unit": "fraction",
+      "vintage": "archived",
+      "input_sha256": "5df828f2c0d1e4162476fa312efa8f701638a57ce98e95458c8126b5bb1663ea",
+      "evaluation_commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/0/intersection_over_union"
+    },
+    {
+      "id": "pyf-4963-source-components",
+      "value": 4,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "5df828f2c0d1e4162476fa312efa8f701638a57ce98e95458c8126b5bb1663ea",
+      "evaluation_commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/0/natural_earth_source_components"
+    },
+    {
+      "id": "pyf-4963-daf-assigned",
+      "value": 5,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "5df828f2c0d1e4162476fa312efa8f701638a57ce98e95458c8126b5bb1663ea",
+      "evaluation_commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/0/daf_assigned_island_feature_count"
+    },
+    {
+      "id": "pyf-4963-municipal-island-ids",
+      "value": 5,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "5df828f2c0d1e4162476fa312efa8f701638a57ce98e95458c8126b5bb1663ea",
+      "evaluation_commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/0/daf_commune_crosswalk_island_count"
+    },
+    {
+      "id": "pyf-4964-iou",
+      "value": 0.54776912,
+      "unit": "fraction",
+      "vintage": "archived",
+      "input_sha256": "5df828f2c0d1e4162476fa312efa8f701638a57ce98e95458c8126b5bb1663ea",
+      "evaluation_commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/1/intersection_over_union"
+    },
+    {
+      "id": "pyf-4964-source-components",
+      "value": 8,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "5df828f2c0d1e4162476fa312efa8f701638a57ce98e95458c8126b5bb1663ea",
+      "evaluation_commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/1/natural_earth_source_components"
+    },
+    {
+      "id": "pyf-4964-daf-assigned",
+      "value": 8,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "5df828f2c0d1e4162476fa312efa8f701638a57ce98e95458c8126b5bb1663ea",
+      "evaluation_commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/1/daf_assigned_island_feature_count"
+    },
+    {
+      "id": "pyf-4964-municipal-island-ids",
+      "value": 8,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "5df828f2c0d1e4162476fa312efa8f701638a57ce98e95458c8126b5bb1663ea",
+      "evaluation_commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/1/daf_commune_crosswalk_island_count"
+    },
+    {
+      "id": "pyf-4965-iou",
+      "value": 0.04777381,
+      "unit": "fraction",
+      "vintage": "archived",
+      "input_sha256": "5df828f2c0d1e4162476fa312efa8f701638a57ce98e95458c8126b5bb1663ea",
+      "evaluation_commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/2/intersection_over_union"
+    },
+    {
+      "id": "pyf-4965-source-components",
+      "value": 65,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "5df828f2c0d1e4162476fa312efa8f701638a57ce98e95458c8126b5bb1663ea",
+      "evaluation_commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/2/natural_earth_source_components"
+    },
+    {
+      "id": "pyf-4965-daf-assigned",
+      "value": 86,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "5df828f2c0d1e4162476fa312efa8f701638a57ce98e95458c8126b5bb1663ea",
+      "evaluation_commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/2/daf_assigned_island_feature_count"
+    },
+    {
+      "id": "pyf-4965-municipal-island-ids",
+      "value": 84,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "5df828f2c0d1e4162476fa312efa8f701638a57ce98e95458c8126b5bb1663ea",
+      "evaluation_commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/2/daf_commune_crosswalk_island_count"
+    },
+    {
+      "id": "pyf-4966-iou",
+      "value": 0.12245925,
+      "unit": "fraction",
+      "vintage": "archived",
+      "input_sha256": "5df828f2c0d1e4162476fa312efa8f701638a57ce98e95458c8126b5bb1663ea",
+      "evaluation_commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/3/intersection_over_union"
+    },
+    {
+      "id": "pyf-4966-source-components",
+      "value": 4,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "5df828f2c0d1e4162476fa312efa8f701638a57ce98e95458c8126b5bb1663ea",
+      "evaluation_commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/3/natural_earth_source_components"
+    },
+    {
+      "id": "pyf-4966-daf-assigned",
+      "value": 10,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "5df828f2c0d1e4162476fa312efa8f701638a57ce98e95458c8126b5bb1663ea",
+      "evaluation_commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/3/daf_assigned_island_feature_count"
+    },
+    {
+      "id": "pyf-4966-municipal-island-ids",
+      "value": 7,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "5df828f2c0d1e4162476fa312efa8f701638a57ce98e95458c8126b5bb1663ea",
+      "evaluation_commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/3/daf_commune_crosswalk_island_count"
+    },
+    {
+      "id": "pyf-4967-iou",
+      "value": 0.65760307,
+      "unit": "fraction",
+      "vintage": "archived",
+      "input_sha256": "5df828f2c0d1e4162476fa312efa8f701638a57ce98e95458c8126b5bb1663ea",
+      "evaluation_commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/4/intersection_over_union"
+    },
+    {
+      "id": "pyf-4967-source-components",
+      "value": 7,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "5df828f2c0d1e4162476fa312efa8f701638a57ce98e95458c8126b5bb1663ea",
+      "evaluation_commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/4/natural_earth_source_components"
+    },
+    {
+      "id": "pyf-4967-daf-assigned",
+      "value": 16,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "5df828f2c0d1e4162476fa312efa8f701638a57ce98e95458c8126b5bb1663ea",
+      "evaluation_commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/4/daf_assigned_island_feature_count"
+    },
+    {
+      "id": "pyf-4967-municipal-island-ids",
+      "value": 13,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "5df828f2c0d1e4162476fa312efa8f701638a57ce98e95458c8126b5bb1663ea",
+      "evaluation_commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/4/daf_commune_crosswalk_island_count"
+    },
+    {
+      "id": "daf-source-objects",
+      "value": 128,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "5df828f2c0d1e4162476fa312efa8f701638a57ce98e95458c8126b5bb1663ea",
+      "evaluation_commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/daf_island_source_object_count"
+    },
+    {
+      "id": "daf-assigned-objects",
+      "value": 125,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "5df828f2c0d1e4162476fa312efa8f701638a57ce98e95458c8126b5bb1663ea",
+      "evaluation_commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/daf_group_assigned_count"
+    },
+    {
+      "id": "daf-unassigned-objects",
+      "value": 3,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "5df828f2c0d1e4162476fa312efa8f701638a57ce98e95458c8126b5bb1663ea",
+      "evaluation_commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/daf_unassigned_object_count"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "pyf-4963-iou",
+      "value": 0.73494582,
+      "unit": "fraction"
+    },
+    {
+      "metric_id": "pyf-4963-source-components",
+      "value": 4,
+      "unit": "count"
+    },
+    {
+      "metric_id": "pyf-4963-daf-assigned",
+      "value": 5,
+      "unit": "count"
+    },
+    {
+      "metric_id": "pyf-4963-municipal-island-ids",
+      "value": 5,
+      "unit": "count"
+    },
+    {
+      "metric_id": "pyf-4964-iou",
+      "value": 0.54776912,
+      "unit": "fraction"
+    },
+    {
+      "metric_id": "pyf-4964-source-components",
+      "value": 8,
+      "unit": "count"
+    },
+    {
+      "metric_id": "pyf-4964-daf-assigned",
+      "value": 8,
+      "unit": "count"
+    },
+    {
+      "metric_id": "pyf-4964-municipal-island-ids",
+      "value": 8,
+      "unit": "count"
+    },
+    {
+      "metric_id": "pyf-4965-iou",
+      "value": 0.04777381,
+      "unit": "fraction"
+    },
+    {
+      "metric_id": "pyf-4965-source-components",
+      "value": 65,
+      "unit": "count"
+    },
+    {
+      "metric_id": "pyf-4965-daf-assigned",
+      "value": 86,
+      "unit": "count"
+    },
+    {
+      "metric_id": "pyf-4965-municipal-island-ids",
+      "value": 84,
+      "unit": "count"
+    },
+    {
+      "metric_id": "pyf-4966-iou",
+      "value": 0.12245925,
+      "unit": "fraction"
+    },
+    {
+      "metric_id": "pyf-4966-source-components",
+      "value": 4,
+      "unit": "count"
+    },
+    {
+      "metric_id": "pyf-4966-daf-assigned",
+      "value": 10,
+      "unit": "count"
+    },
+    {
+      "metric_id": "pyf-4966-municipal-island-ids",
+      "value": 7,
+      "unit": "count"
+    },
+    {
+      "metric_id": "pyf-4967-iou",
+      "value": 0.65760307,
+      "unit": "fraction"
+    },
+    {
+      "metric_id": "pyf-4967-source-components",
+      "value": 7,
+      "unit": "count"
+    },
+    {
+      "metric_id": "pyf-4967-daf-assigned",
+      "value": 16,
+      "unit": "count"
+    },
+    {
+      "metric_id": "pyf-4967-municipal-island-ids",
+      "value": 13,
+      "unit": "count"
+    },
+    {
+      "metric_id": "daf-source-objects",
+      "value": 128,
+      "unit": "count"
+    },
+    {
+      "metric_id": "daf-assigned-objects",
+      "value": 125,
+      "unit": "count"
+    },
+    {
+      "metric_id": "daf-unassigned-objects",
+      "value": 3,
+      "unit": "count"
+    }
+  ],
+  "conclusions": [
+    {
+      "status": "supported",
+      "text": "The five names correspond to current State administrative subdivisions; physical usage differs and nests Windward/Leeward in Society.",
+      "source_ids": [
+        "state-decree",
+        "state-census",
+        "organic-statute",
+        "dpam"
+      ]
+    },
+    {
+      "status": "supported",
+      "text": "DAF group records are explicitly figurative; the retained 2022 GEO PF layers allow a reproducible 128-object inventory, while commune associations omit some uninhabited objects.",
+      "source_ids": [
+        "daf-islands",
+        "daf-groups",
+        "daf-communes"
+      ]
+    },
+    {
+      "status": "unresolved",
+      "text": "Exact current/legal edge meaning and complete offshore/uninhabited membership remain unresolved. Motu One has municipal Leeward association but no division-polygon overlap.",
+      "source_ids": [
+        "daf-islands",
+        "daf-groups",
+        "daf-communes",
+        "state-decree",
+        "organic-statute"
+      ]
+    },
+    {
+      "status": "supported",
+      "text": "Pinned Atlas outlines differ from the DAF island-scale comparator and warrant bounded engineering review, not direct import or geographic approval.",
+      "source_ids": [
+        "daf-islands",
+        "daf-groups",
+        "natural-earth-admin1"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 -m pip install --target /tmp/worldatlas-geo-helper -r data/regional-review/regional-review-14a242c4cb0781a7/requirements-review.txt",
+    "PYTHONPATH=/tmp/worldatlas-geo-helper:scripts:scripts/evidence python3 data/regional-review/french-polynesia-group-boundaries-20261005/verify.py",
+    "node scripts/evidence-quality.mjs data/regional-review/french-polynesia-group-boundaries-20261005/evidence-quality.json"
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "pyf-4963-iou",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/0/intersection_over_union"
+    },
+    {
+      "metric_id": "pyf-4963-source-components",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/0/natural_earth_source_components"
+    },
+    {
+      "metric_id": "pyf-4963-daf-assigned",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/0/daf_assigned_island_feature_count"
+    },
+    {
+      "metric_id": "pyf-4963-municipal-island-ids",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/0/daf_commune_crosswalk_island_count"
+    },
+    {
+      "metric_id": "pyf-4964-iou",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/1/intersection_over_union"
+    },
+    {
+      "metric_id": "pyf-4964-source-components",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/1/natural_earth_source_components"
+    },
+    {
+      "metric_id": "pyf-4964-daf-assigned",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/1/daf_assigned_island_feature_count"
+    },
+    {
+      "metric_id": "pyf-4964-municipal-island-ids",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/1/daf_commune_crosswalk_island_count"
+    },
+    {
+      "metric_id": "pyf-4965-iou",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/2/intersection_over_union"
+    },
+    {
+      "metric_id": "pyf-4965-source-components",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/2/natural_earth_source_components"
+    },
+    {
+      "metric_id": "pyf-4965-daf-assigned",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/2/daf_assigned_island_feature_count"
+    },
+    {
+      "metric_id": "pyf-4965-municipal-island-ids",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/2/daf_commune_crosswalk_island_count"
+    },
+    {
+      "metric_id": "pyf-4966-iou",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/3/intersection_over_union"
+    },
+    {
+      "metric_id": "pyf-4966-source-components",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/3/natural_earth_source_components"
+    },
+    {
+      "metric_id": "pyf-4966-daf-assigned",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/3/daf_assigned_island_feature_count"
+    },
+    {
+      "metric_id": "pyf-4966-municipal-island-ids",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/3/daf_commune_crosswalk_island_count"
+    },
+    {
+      "metric_id": "pyf-4967-iou",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/4/intersection_over_union"
+    },
+    {
+      "metric_id": "pyf-4967-source-components",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/4/natural_earth_source_components"
+    },
+    {
+      "metric_id": "pyf-4967-daf-assigned",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/4/daf_assigned_island_feature_count"
+    },
+    {
+      "metric_id": "pyf-4967-municipal-island-ids",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/subjects/4/daf_commune_crosswalk_island_count"
+    },
+    {
+      "metric_id": "daf-source-objects",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/daf_island_source_object_count"
+    },
+    {
+      "metric_id": "daf-assigned-objects",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/daf_group_assigned_count"
+    },
+    {
+      "metric_id": "daf-unassigned-objects",
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "json_pointer": "/daf_unassigned_object_count"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "daf-island-crosswalk-and-geometry-v1",
+      "kind": "geography",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/positive-controls.json"
+    },
+    {
+      "method_id": "daf-island-crosswalk-and-geometry-v1",
+      "kind": "geography",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/negative-controls.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/README.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/geometry-findings.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/island-membership.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/references.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/admin-divisions.geojson",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/archive-inventory.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/commune-associations.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/island-attributes.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-1.geojson",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-2.geojson",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-3.geojson",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-4.geojson",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-5.geojson",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/loc-commune-associee.zip",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/loc-groupe-ile.zip",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/loc-ile.zip",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/ne-admin1-pyffeatures.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/negative-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/positive-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/provenance.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/verify.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-group-boundaries-20261005/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}

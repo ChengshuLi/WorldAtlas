@@ -1,0 +1,65 @@
+{
+  "controls": {
+    "all_divisions_disjoint": true,
+    "division_pairwise_overlap_area_m2": [
+      {
+        "group_a": 1,
+        "group_b": 2,
+        "overlap_area_m2": 0.0
+      },
+      {
+        "group_a": 1,
+        "group_b": 3,
+        "overlap_area_m2": 0.0
+      },
+      {
+        "group_a": 1,
+        "group_b": 4,
+        "overlap_area_m2": 0.0
+      },
+      {
+        "group_a": 1,
+        "group_b": 5,
+        "overlap_area_m2": 0.0
+      },
+      {
+        "group_a": 2,
+        "group_b": 3,
+        "overlap_area_m2": 0.0
+      },
+      {
+        "group_a": 2,
+        "group_b": 4,
+        "overlap_area_m2": 0.0
+      },
+      {
+        "group_a": 2,
+        "group_b": 5,
+        "overlap_area_m2": 0.0
+      },
+      {
+        "group_a": 3,
+        "group_b": 4,
+        "overlap_area_m2": 0.0
+      },
+      {
+        "group_a": 3,
+        "group_b": 5,
+        "overlap_area_m2": 0.0
+      },
+      {
+        "group_a": 4,
+        "group_b": 5,
+        "overlap_area_m2": 0.0
+      }
+    ],
+    "exact_unassigned_ids": [
+      "61",
+      "122",
+      "128"
+    ]
+  },
+  "kind": "negative-control",
+  "method_id": "daf-island-crosswalk-and-geometry-v1",
+  "outcome": "passed"
+}

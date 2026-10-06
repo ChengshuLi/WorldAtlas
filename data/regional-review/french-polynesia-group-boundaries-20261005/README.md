@@ -1,0 +1,56 @@
+# French Polynesia island-group boundary review
+
+**Issue:** [#1059](https://github.com/ChengshuLi/WorldAtlas/issues/1059)
+**Subjects:** exactly `PYF-4963`–`PYF-4967`.
+**Baseline:** fresh `origin/main` at `0463152556158926681120155ec2e6fd7d0d8c7f`.
+**Owned path:** this directory only.
+**Disposition:** source and geometry evidence; no atlas geometry, identifiers, parents, release pins, or production data changed. This packet does not approve the five outlines or certify French Polynesia.
+
+## What these groups mean
+
+The five names match French State administrative subdivisions under Article 1 of [Decree 2005-1611](https://www.legifrance.gouv.fr/jorf/id/JORFSCTA000000898677): Windward (13 communes), Leeward (7), Tuamotu-Gambier (17), Marquesas (6), and Austral (5). The current population decree confirms those five counts for the 2022 census in [Decree 2022-1592](https://www.legifrance.gouv.fr/loda/id/JORFTEXT000046768003/). These are State administrative subdivisions whose membership is defined through communes. They are not five physical archipelagos at the same hierarchy tier.
+
+The [French Polynesia organic statute, Article 1](https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000038741644/2026-05-07) names the Windward and Leeward islands, Tuamotu, Gambier, Marquesas, and Austral groups, and adjacent maritime spaces. The official [DPAM geographic introduction](https://www.service-public.pf/dpam/presentation-de-la-dpam/) describes Windward and Leeward as groups within the Society archipelago and uses the combined Tuamotu-Gambier archipelago name. That supports the atlas's nested Society → Windward/Leeward framing as a physical/service grouping; it does not make the Natural Earth outlines statutory boundaries. Official [planning plans](https://www.service-public.pf/dca/plansdamenagement/) are organized using Windward, Leeward, and Tuamotu-Gambier labels, which is evidence of planning purpose rather than a universal shoreline definition.
+
+The DAF Section Cadastre-Topographie's [GEO PF data-gouv catalogue](https://www.data.gouv.fr/datasets/geographie-administrative-de-la-polynesie-francaise) publishes three layers under **Creative Commons Attribution**: island/atoll/bank extents; a *figurative* administrative/toponymic group division; and commune/associated-commune administrative limits. Its group layer has five features explicitly classified `DIVISION_ADMINISTRATIVE`; all five map by name to the issue's five subjects. DAF documentation describes the BD Carto as a dated cartographic reference, updated on an average roughly decadal cycle, and distinguishes high-island and atoll mapping. GEO PF itself was last published 2022-02-28; the five group records say acquired 2018-09-05 and last edited 2020-03-09. The dataset is therefore the best retained official comparator found here, not a live 2026 survey or proof that every line is a legal boundary.
+
+## Island membership and neighboring granularity
+
+`island-membership.csv` lists all 128 objects in the DAF island layer, including high islands, atolls, emergent rocks, banks, and submerged reefs. A Mapshaper 0.6.121 polygon join on greatest areal overlap to the five DAF administrative-subdivision polygons assigns 125 objects: Windward 5, Leeward 8, Tuamotu-Gambier 86, Austral 10, Marquesas 16. Three DAF objects do not overlap any of those five polygons: Banc Mac Donald, Récif de la Minerve, and the Society-island atoll Motu One (Bellinghausen). The DAF archipelago attributes independently retain the first two in the physical Austral archipelago and the last in the physical Society archipelago. They are not silently reassigned to a statutory subdivision.
+
+The 2022 DAF commune/associated-commune table carries `code_subdi` and island IDs. Its mapped island IDs by subdivision are Windward 5, Leeward 8, Tuamotu-Gambier 84, Austral 7, and Marquesas 13. This municipal crosswalk is not a full inventory of uninhabited land. It identifies one material difference: Motu One (Bellinghausen), DAF island ID 61, is associated with the commune of Maupiti and `code_subdi=2` (Leeward), although it does not intersect the Leeward DAF group polygon. Conversely, the DAF polygon assigns Maupihaa to Leeward, while the retained commune table has no island ID for Maupihaa. Several small Marquesas and Austral banks/reefs are also within the figurative group polygons without a municipal island association. The source tables do not resolve whether each of these objects belongs in the atlas's surface-land footprint or administrative-group outline.
+
+There are 14 DAF objects attributed to the physical Society archipelago: 5 geometrically grouped as Windward, 8 as Leeward, and the unassigned Motu One. This explicitly surfaces the nested tier and a neighboring-membership gap. The issue scope does not include the parent Society feature; its current parent and all five child parents remain unchanged.
+
+## Boundary comparison
+
+`geometry-findings.json` compares each pinned atlas feature to the union of DAF island objects assigned to its DAF administrative polygon. It reports WGS84 straight-source-edge ellipsoidal area, intersection, each side's covered share, and intersection over union. Positive controls verify one representative per distinct subdivision and that all five exact issue subjects resolve. Negative controls retain the three unassigned features and verify the five group IDs do not cross-match. The geometry comparison is a source-suitability screen only: no overlap ratio establishes a correct territorial boundary, current completeness, legal effect, or permission to import.
+
+The key result is that the 1:10m Natural Earth fallback cannot be certified as a current island-scale footprint by its source label alone. In particular, the combined Tuamotu-Gambier atlas polygon has 25 components versus 65 in the pinned Natural Earth source extract, while the DAF map has 86 assigned island/reef objects; island-to-polygon area IoU is only 0.0478. The other IoUs are Windward 0.7349, Leeward 0.5478, Austral 0.1225, and Marquesas 0.6576. DAF source shapes for individual islands have detailed coastal outlines; sampled calculated areas closely match their DAF `suface_eme` attribute. These discrepancies justify a bounded engineering restoration review from the retained CC-BY source, but not a blind geometry replacement: group membership, outlying features, lagoon/atoll semantics, and the DAF group's figurative boundary purpose must first be resolved per subject.
+
+## Bounded engineering handoff
+
+Review a candidate restoration using the retained DAF `loc_ile` land/island features and `loc_groupe_ile` division records. Preserve the five existing `PYF-*` IDs, parent IDs, history and release pins. For membership, join atoll/island IDs to the DAF municipal association and subdivision codes where available, then separately resolve uninhabited/offshore features rather than forcing area-overlap results. In particular, resolve Leeward Motu One and Maupihaa, and the unmapped Austral/Marquesas offshore banks/reefs. Validate whether the atlas intends land-only island group footprints or a broader administrative group extent before adapting the DAF group polygons. Retain all three source datasets' attribution and their 2022 vintage. No geometry change is included in this research packet.
+
+## Reproduction
+
+Run from the repository root after dependencies are installed. Original Shapefiles are in `source/*.zip`; all joins and exports are reproducible from them:
+
+```sh
+unzip -oq data/regional-review/french-polynesia-group-boundaries-20261005/source/loc-ile.zip -d /tmp/loc-ile
+unzip -oq data/regional-review/french-polynesia-group-boundaries-20261005/source/loc-groupe-ile.zip -d /tmp/loc-groupe
+unzip -oq data/regional-review/french-polynesia-group-boundaries-20261005/source/loc-commune-associee.zip -d /tmp/loc-commune
+node_modules/.bin/mapshaper -i /tmp/loc-groupe/loc_groupe_ile.shp -filter 'type_group == "DIVISION_ADMINISTRATIVE"' -o format=geojson data/regional-review/french-polynesia-group-boundaries-20261005/source/admin-divisions.geojson
+node_modules/.bin/mapshaper -i /tmp/loc-ile/loc_ile.shp -o format=csv data/regional-review/french-polynesia-group-boundaries-20261005/source/island-attributes.csv
+node_modules/.bin/mapshaper -i /tmp/loc-ile/loc_ile.shp -join data/regional-review/french-polynesia-group-boundaries-20261005/source/admin-divisions.geojson largest-overlap fields=id_groupe_ -filter 'id_groupe_ == 1' -o format=geojson data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-1.geojson
+node_modules/.bin/mapshaper -i /tmp/loc-ile/loc_ile.shp -join data/regional-review/french-polynesia-group-boundaries-20261005/source/admin-divisions.geojson largest-overlap fields=id_groupe_ -filter 'id_groupe_ == 2' -o format=geojson data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-2.geojson
+node_modules/.bin/mapshaper -i /tmp/loc-ile/loc_ile.shp -join data/regional-review/french-polynesia-group-boundaries-20261005/source/admin-divisions.geojson largest-overlap fields=id_groupe_ -filter 'id_groupe_ == 3' -o format=geojson data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-3.geojson
+node_modules/.bin/mapshaper -i /tmp/loc-ile/loc_ile.shp -join data/regional-review/french-polynesia-group-boundaries-20261005/source/admin-divisions.geojson largest-overlap fields=id_groupe_ -filter 'id_groupe_ == 4' -o format=geojson data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-4.geojson
+node_modules/.bin/mapshaper -i /tmp/loc-ile/loc_ile.shp -join data/regional-review/french-polynesia-group-boundaries-20261005/source/admin-divisions.geojson largest-overlap fields=id_groupe_ -filter 'id_groupe_ == 5' -o format=geojson data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-5.geojson
+node_modules/.bin/mapshaper -i /tmp/loc-commune/loc_commune_associee.shp -o format=csv data/regional-review/french-polynesia-group-boundaries-20261005/source/commune-associations.csv
+python3 -m pip install --target /tmp/worldatlas-geo-helper -r data/regional-review/regional-review-14a242c4cb0781a7/requirements-review.txt
+PYTHONPATH=/tmp/worldatlas-geo-helper:scripts:scripts/evidence python3 data/regional-review/french-polynesia-group-boundaries-20261005/verify.py
+node scripts/evidence-quality.mjs data/regional-review/french-polynesia-group-boundaries-20261005/evidence-quality.json
+```
+
+Mapshaper's spatial join is a diagnostic method. The original source archive hashes and every uncompressed archive-member hash are in `source/archive-inventory.json`; output byte hashes, retrieval date, license, issue baseline pins, positive/negative controls and exact numeric results are in `source/provenance.json` and the evidence manifest. The island GeoJSON exports are split by subdivision to stay within the repository evidence-file size bound.

@@ -1,0 +1,456 @@
+{
+  "baseline_commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+  "baselines": [
+    {
+      "bytes": 6613963,
+      "hash_kind": "file-bytes",
+      "path": "data/geography/part-28.json",
+      "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+    },
+    {
+      "bytes": 10164089,
+      "hash_kind": "file-bytes",
+      "path": "data/hierarchy.json",
+      "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+    },
+    {
+      "bytes": 96517,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/regional-review-14a242c4cb0781a7/source/natural-earth/ne_10m_admin_1_scoped-admin-features.json",
+      "sha256": "dd3f4a5683c713fd89c00b41748d89771f905ef236feaacb7887818085f3d96e"
+    },
+    {
+      "bytes": 944,
+      "hash_kind": "file-bytes",
+      "path": "data/world-index.json",
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+    }
+  ],
+  "derived_files": [
+    {
+      "path": "README.md",
+      "bytes": 10932,
+      "sha256": "8d63ab23bd0a19be82121743aca4a60094a58990d06c573df9d06c2c9c4ec450",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "geometry-findings.json",
+      "bytes": 7932,
+      "sha256": "5df828f2c0d1e4162476fa312efa8f701638a57ce98e95458c8126b5bb1663ea",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "island-membership.csv",
+      "bytes": 17354,
+      "sha256": "282d01494a9e7ce80405870bcd712a2b8ec9efb5b5b0fd2da36ccae849d1dcde",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "references.md",
+      "bytes": 5796,
+      "sha256": "bb9f1b9fd8a4f4c408242ef3d4cf6f5bcad8b1e20e505bf4354817a3023d441a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "source/admin-divisions.geojson",
+      "bytes": 1410385,
+      "sha256": "88a970ed225298e6f1d06d9d4a12659c74d64389e1e73463505ad52f7bae027f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "source/archive-inventory.json",
+      "bytes": 5518,
+      "sha256": "40d525847cf3e50ba21002ffc8295a6838c40f78d9c38b0671f1fe75e84414f2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "source/commune-associations.csv",
+      "bytes": 29417,
+      "sha256": "3702809f89db057332638d395ad13cc80b9937f1ab67928455e352c4558ba159",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "source/island-attributes.csv",
+      "bytes": 28403,
+      "sha256": "a0550b125c710580db95b4fef2aa5730e77911424fd0213d2460220fa4b7e7d8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "source/island-group-1.geojson",
+      "bytes": 2927790,
+      "sha256": "6179ac6a617f56e3f298d5564db513ab49310c288a6d178158bfaf273852f069",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "source/island-group-2.geojson",
+      "bytes": 5046613,
+      "sha256": "9ef0719f4bfb842b9c5ccf6b4c0d87c7bde1d33ad24825dfd722612a4a983e9b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "source/island-group-3.geojson",
+      "bytes": 7796607,
+      "sha256": "8bad07bfb6bb95dbfa384e4e3ffe389c988f79416fcf85215620acef1f759759",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "source/island-group-4.geojson",
+      "bytes": 1144543,
+      "sha256": "ddd015f5ee8f07faee6d1844575cb79ecf7dbf54ffdad96d713c32c450c10523",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "source/island-group-5.geojson",
+      "bytes": 31660529,
+      "sha256": "de4ea30975d1e135862f16beb3fbde6ab196c55b9537a32016645770212dc311",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "source/loc-commune-associee.zip",
+      "bytes": 15310967,
+      "sha256": "29230c18487385f84ca480e9b2c921ea389f848663a4a9574e77b9cbbf40db7b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "source/loc-groupe-ile.zip",
+      "bytes": 1168408,
+      "sha256": "3f71d87855a6d46885396b6802ccfa19f559ca4b9876f6480cd122fcba42d6fb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "source/loc-ile.zip",
+      "bytes": 14253080,
+      "sha256": "5018fa62ff269ae5b93502218213ce57baa36f31fcbf9d12b47bd36e12a6e29b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "source/ne-admin1-pyffeatures.json",
+      "bytes": 96517,
+      "sha256": "dd3f4a5683c713fd89c00b41748d89771f905ef236feaacb7887818085f3d96e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "source/negative-controls.json",
+      "bytes": 1210,
+      "sha256": "02bad23dae4853f9820b2ba71d6c6ded99ae42ac8060edc64008bc3b4d329d86",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "source/positive-controls.json",
+      "bytes": 580,
+      "sha256": "d236bbce19b954461bde2522b39674861a5f680bade5c50790563d533deb2251",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 14581,
+      "sha256": "d86958c5c1ab8259195db39391cd80f6633b3147907aebfb4e1fed3e644dc30f",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "notes": [
+    "GEO PF data.gouv metadata identifies CC BY but does not specify its version.",
+    "The three DAF archives are stored byte-for-byte; archive-inventory.json hashes every extracted ZIP member.",
+    "Spatial joins and area comparison use methods documented in verify.py; no geometry is changed."
+  ],
+  "retrieved_at": "2026-10-06T03:42:00Z",
+  "sources": [
+    {
+      "archive_members": [
+        {
+          "bytes": 5,
+          "crc32": "0e813c50",
+          "path": "loc_ile.cpg",
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+        },
+        {
+          "bytes": 239010,
+          "crc32": "c8728e42",
+          "path": "loc_ile.dbf",
+          "sha256": "053995434e308bcb965fd913f96f03ddd2ad36fb353536a61ebc59ae7e36da73"
+        },
+        {
+          "bytes": 176,
+          "crc32": "64343a3f",
+          "path": "loc_ile.prj",
+          "sha256": "55803b5f85ca4b970f33ea4a84198cfa395451fd24fd2748578018f74068a7e1"
+        },
+        {
+          "bytes": 1484,
+          "crc32": "e168e2f8",
+          "path": "loc_ile.sbn",
+          "sha256": "8138edc7383b7c400b5db4728c6f70f9954cd59f408ffde4e22cd71ff4091dfa"
+        },
+        {
+          "bytes": 244,
+          "crc32": "9c8b0c7a",
+          "path": "loc_ile.sbx",
+          "sha256": "82f065318956fa6603ddeb13d078f4cb85b79cb855ea326122da1d93a3fb9aa4"
+        },
+        {
+          "bytes": 20779852,
+          "crc32": "c0a82215",
+          "path": "loc_ile.shp",
+          "sha256": "0a3da3713b5cace0392b37eebbae717e464d93ede40faa7ac3205e8a831b0cc8"
+        },
+        {
+          "bytes": 47779,
+          "crc32": "c76fc0ac",
+          "path": "loc_ile.shp.xml",
+          "sha256": "ac2831bb88300b29619e9cbfd8500751b756fcdc87900eaef1c0f4ffe1c7cbf3"
+        },
+        {
+          "bytes": 1124,
+          "crc32": "98aebd4a",
+          "path": "loc_ile.shx",
+          "sha256": "714667ad0b588dee7f25d54374df20a0eb38f1f8cdc641e8c1c9aef29a7ef232"
+        }
+      ],
+      "catalog_url": "https://www.data.gouv.fr/datasets/geographie-administrative-de-la-polynesie-francaise",
+      "id": "daf-island-extents",
+      "license": "Creative Commons Attribution (data.gouv.fr metadata; version unspecified); attribute Section Cadastre-Topographie, Direction des affaires foncières, Polynésie française and link catalog",
+      "limits": [
+        "Not a live 2026 shoreline survey. The layer is described as island, atoll and bank extents; type field includes submerged reefs/banks as well as land."
+      ],
+      "retention": "retained",
+      "retrieved_at": "2026-10-06T03:40:00Z",
+      "role": "island-scale geometry and island type/archipelago/acquisition crosswalk",
+      "source_archive": {
+        "bytes": 14253080,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/loc-ile.zip",
+        "sha256": "5018fa62ff269ae5b93502218213ce57baa36f31fcbf9d12b47bd36e12a6e29b"
+      },
+      "title": "DAF GEO PF, emprise des îles, atolls et bancs",
+      "url": "https://static.data.gouv.fr/resources/geographie-administrative-de-la-polynesie-francaise/20220228-205614/loc-ile.zip",
+      "vintage": "GEO PF asset published 2022-02-28; 128 features; last_edit dates mostly 2022-01-19, some 2022-02-28; feature date_acq varies from blank/1997–2020"
+    },
+    {
+      "archive_members": [
+        {
+          "bytes": 5,
+          "crc32": "0e813c50",
+          "path": "loc_groupe_ile.cpg",
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+        },
+        {
+          "bytes": 67860,
+          "crc32": "bb0a29f8",
+          "path": "loc_groupe_ile.dbf",
+          "sha256": "cb025c59803c9c0a1ede745f7dfc2e9728723027277678c51261238f50584c34"
+        },
+        {
+          "bytes": 176,
+          "crc32": "64343a3f",
+          "path": "loc_groupe_ile.prj",
+          "sha256": "55803b5f85ca4b970f33ea4a84198cfa395451fd24fd2748578018f74068a7e1"
+        },
+        {
+          "bytes": 764,
+          "crc32": "f68a7d9f",
+          "path": "loc_groupe_ile.sbn",
+          "sha256": "8a40ab051bc11f89c40ca9e8518105b291285d1fed93a9530b3fc77a1b1440ab"
+        },
+        {
+          "bytes": 188,
+          "crc32": "81c46641",
+          "path": "loc_groupe_ile.sbx",
+          "sha256": "da3847d973c3548f844867b1925c373fd370426a0d7b1728f8a8f815268fb39a"
+        },
+        {
+          "bytes": 1517000,
+          "crc32": "6a8d4711",
+          "path": "loc_groupe_ile.shp",
+          "sha256": "94499635cbfefc49f6dc95aaa42af686b0f3b27f3e76aeb68e37e21a0fbd3efc"
+        },
+        {
+          "bytes": 29606,
+          "crc32": "3ba269d5",
+          "path": "loc_groupe_ile.shp.xml",
+          "sha256": "8b4a4cd6b445a24db2b6594fc5a5fe3f068695e2f1741b4bdb9a829e8e7792e2"
+        },
+        {
+          "bytes": 572,
+          "crc32": "a34b7570",
+          "path": "loc_groupe_ile.shx",
+          "sha256": "94581f08665b0bf56f7f8f606222a9b7113588c32b02cf521d21e7ff5bf70c8e"
+        }
+      ],
+      "catalog_url": "https://www.data.gouv.fr/datasets/geographie-administrative-de-la-polynesie-francaise",
+      "id": "daf-administrative-groups",
+      "license": "Creative Commons Attribution (data.gouv.fr metadata; version unspecified); attribute Section Cadastre-Topographie, Direction des affaires foncières, Polynésie française and link catalog",
+      "limits": [
+        "Catalog title calls division figurative. Not treated as a legally surveyed boundary or complete island inventory."
+      ],
+      "retention": "retained",
+      "retrieved_at": "2026-10-06T03:40:00Z",
+      "role": "five State administrative division polygons and group feature metadata",
+      "source_archive": {
+        "bytes": 1168408,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/loc-groupe-ile.zip",
+        "sha256": "3f71d87855a6d46885396b6802ccfa19f559ca4b9876f6480cd122fcba42d6fb"
+      },
+      "title": "DAF GEO PF, figurative administrative and toponymic group division",
+      "url": "https://static.data.gouv.fr/resources/geographie-administrative-de-la-polynesie-francaise/20220228-205413/loc-groupe-ile.zip",
+      "vintage": "GEO PF asset published 2022-02-28; issue features acquired 2018-09-05 and last edited 2020-03-09"
+    },
+    {
+      "archive_members": [
+        {
+          "bytes": 5,
+          "crc32": "0e813c50",
+          "path": "loc_commune_associee.cpg",
+          "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+        },
+        {
+          "bytes": 329740,
+          "crc32": "5350bd43",
+          "path": "loc_commune_associee.dbf",
+          "sha256": "dbccdaad140950bed368b4d6a9e184e2fee0aac461c0c6f7838e6cb9407a11a1"
+        },
+        {
+          "bytes": 176,
+          "crc32": "64343a3f",
+          "path": "loc_commune_associee.prj",
+          "sha256": "55803b5f85ca4b970f33ea4a84198cfa395451fd24fd2748578018f74068a7e1"
+        },
+        {
+          "bytes": 1884,
+          "crc32": "18a9af90",
+          "path": "loc_commune_associee.sbn",
+          "sha256": "a93974b12f3c29150dfc0cd4cd2f0b9194a4905a35aa606bcd50d4e8a1aa2fcb"
+        },
+        {
+          "bytes": 236,
+          "crc32": "7a4ca2f4",
+          "path": "loc_commune_associee.sbx",
+          "sha256": "dea53486097e2a88bf9770f2a8922d95c4f97d37bfbe114a12912a2069f7b9a0"
+        },
+        {
+          "bytes": 22316516,
+          "crc32": "5cdad884",
+          "path": "loc_commune_associee.shp",
+          "sha256": "799a5ccdb1050d4ba5484756e5be655771d7218534e02320200c0cb810d2785b"
+        },
+        {
+          "bytes": 34751,
+          "crc32": "c21bae63",
+          "path": "loc_commune_associee.shp.xml",
+          "sha256": "6538c818cdb698a1627c17d8bbf6f2f1db21454f2f4fda209343859fff5792ba"
+        },
+        {
+          "bytes": 1532,
+          "crc32": "730f744d",
+          "path": "loc_commune_associee.shx",
+          "sha256": "b48f21b450f11496446fc9ba39764522353c3ca32a4e53e42e82e0bf8b7abee0"
+        }
+      ],
+      "catalog_url": "https://www.data.gouv.fr/datasets/geographie-administrative-de-la-polynesie-francaise",
+      "id": "daf-commune-associated-boundaries",
+      "license": "Creative Commons Attribution (data.gouv.fr metadata; version unspecified); attribute Section Cadastre-Topographie, Direction des affaires foncières, Polynésie française and link catalog",
+      "limits": [
+        "Municipal association polygons/codes do not enumerate every uninhabited island or prove a complete coastline."
+      ],
+      "retention": "retained",
+      "retrieved_at": "2026-10-06T03:40:00Z",
+      "role": "commune/subdivision/island identifier crosswalk for mapped municipal portions",
+      "source_archive": {
+        "bytes": 15310967,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/loc-commune-associee.zip",
+        "sha256": "29230c18487385f84ca480e9b2c921ea389f848663a4a9574e77b9cbbf40db7b"
+      },
+      "title": "DAF GEO PF, commune and associated-commune administrative limits",
+      "url": "https://static.data.gouv.fr/resources/geographie-administrative-de-la-polynesie-francaise/20220228-205331/loc-commune-associee.zip",
+      "vintage": "GEO PF asset published 2022-02-28; `code_subdi` and `id_ile` fields in the archive"
+    },
+    {
+      "id": "state-subdivision-decree",
+      "license": "No separate reuse license assessed; linked official legislation only; no page bytes retained",
+      "limit": "Defines administrative assignment through communes, not individual uninhabited island shorelines.",
+      "restoration": "Open the official Legifrance Article 1 page and inspect its five subdivision-to-commune lists.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06T03:42:00Z",
+      "role": "legal subdivision/commune membership definition",
+      "temporal_status": "reference",
+      "title": "French State administrative subdivisions, Decree 2005-1611 Article 1",
+      "url": "https://www.legifrance.gouv.fr/jorf/id/JORFSCTA000000898677",
+      "vintage": "decree dated 2005-12-20; current text checked 2026-10-06"
+    },
+    {
+      "id": "state-census-decree",
+      "license": "No separate reuse license assessed; linked official legislation only; no page bytes retained",
+      "limit": "Census roster/counts do not define boundary geometry.",
+      "restoration": "Open the official Legifrance decree and read Annex Tables I-II.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06T03:42:00Z",
+      "role": "official current five-subdivision and commune counts",
+      "temporal_status": "reference",
+      "title": "2022 population census results, Decree 2022-1592 Annex Tables I-II",
+      "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000046768003/",
+      "vintage": "2022 census; figures applicable from 2023-01-01"
+    },
+    {
+      "id": "organic-statute",
+      "license": "No separate reuse license assessed; linked official legislation only; no page bytes retained",
+      "limit": "Names constituent groups but supplies no geographic coordinates or group boundary polygons.",
+      "restoration": "Open official Legifrance Article 1 text.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06T03:42:00Z",
+      "role": "names islands/groups included in French Polynesia and adjacent maritime spaces",
+      "temporal_status": "reference",
+      "title": "Organic Law 2004-192 Article 1",
+      "url": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000038741644/2026-05-07",
+      "vintage": "version in force 2026-05-07"
+    },
+    {
+      "id": "dpam-physical-geography",
+      "license": "No redistribution license assessed; linked public page only; no page bytes retained",
+      "limit": "Service description, not a statutory boundary or complete membership roster.",
+      "restoration": "Open official DPAM page and inspect the “Quatre grands archipels” section.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06T03:42:00Z",
+      "role": "official maritime service description of physical archipelagos and nested Society groups",
+      "temporal_status": "reference",
+      "title": "French Polynesia DPAM geography introduction",
+      "url": "https://www.service-public.pf/dpam/presentation-de-la-dpam/",
+      "vintage": "page crawled 2026-10-06; page content has no explicit geography vintage"
+    },
+    {
+      "id": "dca-planning-areas",
+      "license": "No redistribution license assessed; linked public page only; no page bytes retained",
+      "limit": "Planning nomenclature does not define all-group or legal shoreline edges.",
+      "restoration": "Open DCA page and inspect listed plan groups; follow dated plans for their scoped purpose.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06T03:42:00Z",
+      "role": "official planning-label usage for Windward, Leeward, Tuamotu-Gambier and other groups",
+      "temporal_status": "reference",
+      "title": "French Polynesia DCA planning plans index",
+      "url": "https://www.service-public.pf/dca/plansdamenagement/",
+      "vintage": "page crawled 2026-10-06; linked plan dates vary"
+    },
+    {
+      "id": "natural-earth-admin1",
+      "license": "Public domain; terms https://www.naturalearthdata.com/about/terms-of-use/",
+      "limit": "1:10m generalized cartographic outlines; not current local shoreline survey or proof of complete membership. The retained object is a scoped 25-feature extract, not the entire global upstream file.",
+      "restoration": "Use pinned baseline `data/regional-review/regional-review-14a242c4cb0781a7/source/natural-earth/ne_10m_admin_1_scoped-admin-features.json`; exact whole-file hash is pinned in this manifest. The packet includes the five PYF features from the upstream 2022-06-02 commit.",
+      "retention": "retained",
+      "retrieved_at": "inherited on main by merged #405 packet; source extraction retained at baseline commit",
+      "role": "original generalized Admin1 comparator for the five current atlas features",
+      "temporal_status": "reference",
+      "title": "Natural Earth 1:10m Admin 1 states and provinces",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_admin_1_states_provinces.geojson",
+      "vintage": "Natural Earth source commit ca96624a56bd078437bca8184e78163e5039ad19, 2022-06-02",
+      "files": [
+        {
+          "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/ne-admin1-pyffeatures.json",
+          "bytes": 96517,
+          "sha256": "dd3f4a5683c713fd89c00b41748d89771f905ef236feaacb7887818085f3d96e",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    }
+  ],
+  "version": 1
+}
