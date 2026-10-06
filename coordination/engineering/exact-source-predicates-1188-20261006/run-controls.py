@@ -29,7 +29,7 @@ def main(output):
     for path in sorted(fixtures.glob('*.json')):
         relative = path.relative_to(REPO).as_posix()
         original = subprocess.check_output(['git', '-C', str(REPO), 'show', producer_commit + ':' + relative])
-        pins.append({'path': relative, 'bytes': len(original), 'sha256': hashlib.sha256(original).hexdigest()})
+        pins.append({'path': relative, 'bytes': len(original), 'sha256': hashlib.sha256(original).hexdigest(), 'hash_kind': 'file-bytes'})
     baseline = Baseline(REPO, producer_commit, pins)
     for pin in pins:
         assert (REPO / pin['path']).read_bytes() == baseline.read(pin['path'])
