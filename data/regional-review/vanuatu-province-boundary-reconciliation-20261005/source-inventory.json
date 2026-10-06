@@ -1,0 +1,175 @@
+{
+  "retrieved_at": "2026-10-06",
+  "retention_policy": "No copied official or unlicensed reference payloads. These records are restoration-only; sha256 values identify the exact bytes fetched for inspection.",
+  "sources": [
+    {
+      "id": "dla-provinces",
+      "url": "https://dla.gov.vu/index.php/about-us/provinces",
+      "sha256": "3853804bbd53d4d58953942a8cf1cb3cf855b838a90b4fd92980ec52a5ac929d",
+      "bytes": 30468,
+      "retrieved_at": "2026-10-06",
+      "vintage": "page states written 2024-10-29; retrieved 2026-10-06",
+      "license": "No reuse license located; restoration-only",
+      "finding": "Lists six named provinces and island groups in a table. Introductory paragraph says six but omits Shefa from its following enumeration, an internal inconsistency."
+    },
+    {
+      "id": "dla-area-councils",
+      "url": "https://dla.gov.vu/index.php/about-us/area-councils",
+      "sha256": "b5c11f57513f06b68590693fd51fbc9c4367c99a0bffe934f54b82fa9141c584",
+      "bytes": 36167,
+      "retrieved_at": "2026-10-06",
+      "vintage": "page states written 2024-10-28; retrieved 2026-10-06",
+      "license": "No reuse license located; restoration-only",
+      "finding": "Lists 71 named area councils: Torba 9, Sanma 11, Penama 10, Malampa 10, Shefa 19, Tafea 12. This is a subordinate governance roster, not provincial boundary authority or proof of island coverage."
+    },
+    {
+      "id": "dla-provincial-profile-index",
+      "url": "https://dla.gov.vu/index.php/resources/provincial-profiles",
+      "sha256": "b3fc3b715fa253ec55bbb58b743b803f891445446b7a2a18701b6edf7b202ae7",
+      "bytes": 29310,
+      "retrieved_at": "2026-10-06",
+      "vintage": "web assets show modified 2026-11-02; profile text says published 2023 and updated 2025-02-28; retrieved 2026-10-06",
+      "license": "No redistribution permission located; PDF originals not retained",
+      "finding": "Links six official provincial profiles with maps and governance information. Asset modified labels are not treated as map-data vintages."
+    },
+    {
+      "id": "dla-decentralization-brochure",
+      "url": "https://dla.gov.vu/images/brochures/DLA%20Brochure.pdf",
+      "sha256": "4f5965faaf9139111ac31f2ee67a20d3a32c82c237fb0e3430209f27d767aba3",
+      "bytes": 838994,
+      "retrieved_at": "2026-10-06",
+      "vintage": "DLA gallery lists modified 2024-10-27; retrieved 2026-10-06",
+      "license": "No redistribution permission located; restoration-only",
+      "finding": "Graphic shows six provinces and an Area Councils (71) heading, but its per-province labels are Torba 9, Sanma 11, Penama 10, Malampa 19, Shefa 19 and Tafea 12 (sum 80). This conflicts internally with the heading and DLA current area-council roster (Malampa list is 10). Do not use graphic count as geometry or temporal proof."
+    },
+    {
+      "id": "dla-profile-torba",
+      "url": "https://dla.gov.vu/images/provincial-profiles/Torba%20Provincial%20Profile.pdf",
+      "sha256": "2ab870f1b6429035b99d1577909826ad3ae570bee1d563756a3b905740044713",
+      "bytes": 170642,
+      "retrieved_at": "2026-10-06",
+      "vintage": "Profile text published 2023, updated 2025-02-28; internal area-council count is older than current roster",
+      "license": "No redistribution permission located; restoration-only",
+      "finding": "Island/council group list and map; profile-era council count 7 differs from current DLA roster count 9."
+    },
+    {
+      "id": "dla-profile-sanma",
+      "url": "https://dla.gov.vu/images/provincial-profiles/Sanma%20Provincial%20Profile.pdf",
+      "sha256": "40220e95482a7304dd8e85ad5f49a4de0620e9d2adf3b0f12b5a8275957d695a",
+      "bytes": 178157,
+      "retrieved_at": "2026-10-06",
+      "vintage": "Profile text published 2023, updated 2025-02-28",
+      "license": "No redistribution permission located; restoration-only",
+      "finding": "Identifies Santo and Malo/Aore groupings; current council names further subdivide Santo and Malo and do not identify Aore as a separate council."
+    },
+    {
+      "id": "dla-profile-penama",
+      "url": "https://dla.gov.vu/images/provincial-profiles/Penama%20Provincial%20Profile.pdf",
+      "sha256": "c9991806042f162efbe3cb01e24c8057bbb00997e615e22a5388f471874a2fe2",
+      "bytes": 220810,
+      "retrieved_at": "2026-10-06",
+      "vintage": "Profile text published 2023, updated 2025-02-28",
+      "license": "No redistribution permission located; restoration-only",
+      "finding": "Official profile and map inspected; text extraction was unavailable in this workflow. Current DLA roster lists Pentecost, Maewo and Ambae councils but is not exact linework."
+    },
+    {
+      "id": "dla-profile-malampa",
+      "url": "https://dla.gov.vu/images/provincial-profiles/Malampa%20Provincial%20Profile.pdf",
+      "sha256": "623e08e0097f16791c1ebfa316e6884285bdeee4adcfe263d11dd838a24973fb",
+      "bytes": 225607,
+      "retrieved_at": "2026-10-06",
+      "vintage": "Profile text published 2023, updated 2025-02-28",
+      "license": "No redistribution permission located; restoration-only",
+      "finding": "Profile and current roster support Malekula, Ambrym and Paama groupings with further Malekula/Ambrym subdivision; no authoritative current boundary geometry located."
+    },
+    {
+      "id": "dla-profile-shefa",
+      "url": "https://dla.gov.vu/images/provincial-profiles/Shefa%20Provincial%20Profile.pdf",
+      "sha256": "42919a25d9e85634e20116ca81f05d90842edbbe95a25225279aadeabd05ef18",
+      "bytes": 193149,
+      "retrieved_at": "2026-10-06",
+      "vintage": "Profile text published 2023, updated 2025-02-28; profile-era counts differ from current roster",
+      "license": "No redistribution permission located; restoration-only",
+      "finding": "Lists Efate, Epi, Emae, Tongoa, Tongariki/Buninga, Makira/Mataso, Emau and Moso/Lelepa groupings; older council count differs from current DLA roster of 19. Municipality carve-out is material."
+    },
+    {
+      "id": "dla-profile-tafea",
+      "url": "https://dla.gov.vu/images/provincial-profiles/Tafea%20Provincial%20Profile.pdf",
+      "sha256": "e0126e7ad7871ef62494e272873fff654cd0fc542237749f877b371d120bfb50",
+      "bytes": 148827,
+      "retrieved_at": "2026-10-06",
+      "vintage": "Profile text published 2023, updated 2025-02-28",
+      "license": "No redistribution permission located; restoration-only",
+      "finding": "Profile names Erromango, Tanna, Aniwa, Futuna and Aneityum; current roster also distinguishes Tanna councils. Municipality carve-out is material."
+    },
+    {
+      "id": "decentralization-act-cap230",
+      "url": "https://dla.gov.vu/images/legislation/Decentralization%20Act%20CAP%20230.pdf",
+      "sha256": "da6b31fa9387e2b8725f79eecc2ecb27a717ee5d799ca8ea7fabecc96f8a9cc6",
+      "bytes": 351998,
+      "retrieved_at": "2026-10-06",
+      "vintage": "Consolidated edition 2025",
+      "license": "No redistribution permission located; restoration-only",
+      "finding": "Section 3 permits the Prime Minister by Order to declare/name/define or alter province-region boundaries; s4A permits Ministerial Orders dividing provinces into area-council divisions; s34 excludes municipalities from provincial regions. The consulted Act is authority context, not the current province-defining Orders or boundary geometries."
+    },
+    {
+      "id": "dla-decentralization-plan",
+      "url": "https://dla.gov.vu/images/policies/5.%20Final%2010%20years%20Decentralisation%20Implementation%20Plan.pdf",
+      "sha256": "d26608ac1d901b84a59a6c8c76556183445ea48147a9f35c5ee708b7731293c4",
+      "bytes": 1576987,
+      "retrieved_at": "2026-10-06",
+      "vintage": "2018-2028 plan",
+      "license": "No redistribution permission located; restoration-only",
+      "finding": "Page 22 points to appendices on existing provincial administrative and customary boundaries; planning context only, not exact legal Orders or polygon data."
+    },
+    {
+      "id": "duap-municipalities",
+      "url": "https://duap.gov.vu/index.php/what-we-do/municipalities",
+      "sha256": "a41c2be2d52bd757252811457b99471336dcea99f46aa5874e8b0db85b0c1329",
+      "bytes": 32138,
+      "retrieved_at": "2026-10-06",
+      "vintage": "Current page, retrieval 2026-10-06",
+      "license": "No reuse license located; restoration-only",
+      "finding": "Identifies Port Vila, Luganville and Lenakel as the three municipalities and says municipalities manage their boundaries. Exact current boundary geometry was not established."
+    },
+    {
+      "id": "duap-port-vila-planning-map",
+      "url": "https://duap.gov.vu/images/docs/Map%20of%20Port%20Vila.pdf",
+      "sha256": "06d8279b33f2cccae377f3c08f79148ed837426057fb2d4f3788d27cad11c938",
+      "bytes": 27456637,
+      "retrieved_at": "2026-10-06",
+      "vintage": "DUAP listing title: Existing MAP of Port Vila (2016-2030); map payload hashed but map contents/effective legal status not examined",
+      "license": "No redistribution permission located; restoration-only",
+      "finding": "DUAP links a Port Vila planning map. The retrieved PDF object is hashed but its cartography and legal status were not reviewed; it is a follow-up lead only and cannot define the municipal exclusion here."
+    },
+    {
+      "id": "ocha-spc-adm2-context",
+      "url": "https://services.arcgis.com/Zoi8xtp32kQcxoKu/arcgis/rest/services/vut_admbnda_adm2_spc_20180824/FeatureServer/0?f=pjson",
+      "sha256": "b414fa6d3821fd9d45c6a87f074f0359c791370c68f3579341a7c24abfb1aebe",
+      "bytes": null,
+      "retrieved_at": "2026-10-05 (retained prior evidence)",
+      "vintage": "2018-08-24 service name; 66 feature count; metadata license blank",
+      "license": "Unknown; no use/redistribution assumed; restoration-only",
+      "finding": "Neighboring ADM2 tier context only; no five-feature difference is interpreted as temporal change without a one-to-one crosswalk."
+    }
+  ],
+  "upstream_distribution": {
+    "id": "geoboundaries-vut-adm1-2017",
+    "url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/VUT/ADM1/geoBoundaries-VUT-ADM1.geojson",
+    "retrieved_at": "2026-10-06",
+    "lfs_data_oid_sha256": "69f44b96d0690310c67a4a430488fb7a02d028bdec8bbc755436cdfb90962c8d",
+    "lfs_data_bytes": 1094439,
+    "lfs_metadata_sha256": "a66ec067f87d2326da5e5401a0742811ca68f54f12d139aa47082288fbb12248",
+    "lfs_metadata_bytes": 851,
+    "metadata_facts": {
+      "boundaryYear": "2017",
+      "boundarySource": "OpenStreetMap, Wambacher",
+      "boundaryLicense": "Open Data Commons Open Database License 1.0",
+      "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+      "buildDate": "Dec 12, 2023",
+      "admUnitCount": "6"
+    },
+    "finding": "The pinned upstream LFS data object matches the lawful ODbL bytes retained under prior issue #454. The repository registry digest 63e187… is generated by scripts/administrative.py from .cache/VUT-ADM1.json, which is absent from the pinned baseline; it is not the upstream LFS data digest and cannot be reconciled to those retained bytes from current evidence."
+  },
+  "engineering_handoff": "Obtain current Prime Minister boundary-defining Orders under Decentralization Act s3(1)(c), Ministerial area-division Orders under s4A, amendments/effective dates, and exact current municipal boundary legal maps/orders for Port Vila, Luganville and Lenakel. Crosswalk each named island and municipal exclusion against all six province units before proposing any coordinated linework correction."
+}
