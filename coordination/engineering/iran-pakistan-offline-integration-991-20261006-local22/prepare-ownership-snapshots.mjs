@@ -32,5 +32,5 @@ const ownership=JSON.parse(read(baseline,'data/ownership-history/index.json'));
 assert.equal(ownership.inputs.boundary_versions,sha(Buffer.from('[]')));
 write('boundaries.json',Buffer.from('[]\n'));
 write('migration-receipt.json',read(head,prefix+'/release-proof-v3/migration-receipt.json'));
-write('preparation-verification.json',Buffer.from(JSON.stringify({execution_commit:head,producer,inputs,products,budget:budget.finish(),locations:49625,non_example_boundary_versions:0,installed:false,published:false})+'\n'));
-console.log(JSON.stringify({locations:49625,products:products.length,budget:budget.finish()}));
+write('preparation-verification.json',Buffer.from(JSON.stringify({execution_commit:head,producer,inputs,products,budget:budget.snapshot(),locations:49625,non_example_boundary_versions:0,installed:false,published:false})+'\n'));
+console.log(JSON.stringify({locations:49625,products:products.length,budget:budget.snapshot()}));

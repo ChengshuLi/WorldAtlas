@@ -4,7 +4,7 @@ sys.dont_write_bytecode=True
 root=pathlib.Path(__file__).resolve().parents[3]
 spec=importlib.util.spec_from_file_location('incremental',root/'scripts/prepare-ownership-incremental.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
 prefix=root/'coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22'
-snapshot=prefix/'ownership-inputs-v1'
+snapshot=prefix/'ownership-inputs-v2'
 output=prefix/'ownership-before-verification-v1.json'
 if output.exists():raise ValueError('Fresh output required')
 index=m.load(root/'data/ownership-history/index.json');helpers=m.exact_helpers(root/'data/ownership-history',index)
