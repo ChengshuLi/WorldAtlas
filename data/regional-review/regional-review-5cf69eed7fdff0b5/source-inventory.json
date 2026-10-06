@@ -1,0 +1,214 @@
+{
+  "version": 1,
+  "issue": 393,
+  "retrieved_at_utc": "2026-10-06",
+  "baseline_commit": "e7cd364e08a713825daa80a3d085d23bd58d5730",
+  "sources": [
+    {
+      "id": "geoboundaries-rus-adm2-raw-2017",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/RUS/ADM2/geoBoundaries-RUS-ADM2.geojson",
+      "media_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/RUS/ADM2/geoBoundaries-RUS-ADM2.geojson",
+      "role": "Published Russia administrative level 2 source boundary polygons and original IDs",
+      "vintage": "Boundary year 2017; source input last updated 2023-03-03; file build 2023-12-12",
+      "retrieved_at_utc": "2026-10-06",
+      "license": {
+        "status": "redistributable",
+        "terms": "Open Data Commons Open Database License 1.0; source metadata cites OpenStreetMap and Wambacher",
+        "evidence_path": "data/regional-review/regional-review-5cf69eed7fdff0b5/source/geoboundaries-rus-adm2-2017-metadata.json",
+        "evidence_sha256": "2064a236e3473d76adf00729b4482a22ffefae22a40364a4cfe78ef43ce3c672"
+      },
+      "original_source": {
+        "bytes": 120489189,
+        "sha256": "74012237384e53061aa63b6e20b9be24f94facfe615b52bbe72e62a81fa68ff0",
+        "github_lfs_pointer_blob_sha1": "3249de07aa937f3a904a7024a0880636fc6a7c33",
+        "feature_count": 2327,
+        "metadata_claimed_feature_count": 2328
+      },
+      "retention": "restoration-only for the 120 MB countrywide original because it exceeds the 32 MiB evidence-file ceiling; lawful scoped original feature extracts are retained below",
+      "restoration": "Download the media_url to a temporary path, verify 120489189 bytes and SHA-256 74012237384e53061aa63b6e20b9be24f94facfe615b52bbe72e62a81fa68ff0, then run node reproduction/extract-geoboundaries-scope.mjs PATH_TO_SOURCE. The raw.githubusercontent.com URL returns a 134-byte Git LFS pointer; the media URL returns the exact payload.",
+      "verification": "Verified payload SHA-256 against the SHA-256 object ID in the pinned Git LFS pointer. GitHub API reports the pointer blob SHA-1 above. The 2,327-versus-2,328 count discrepancy is separately tracked by #396.",
+      "limit": "Publisher metadata and source identity do not establish every unit's current legal status, full country completeness, or acceptable Atlas geometry simplification."
+    },
+    {
+      "id": "geoboundaries-rus-adm2-simplified-2017",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/RUS/ADM2/geoBoundaries-RUS-ADM2_simplified.geojson",
+      "media_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/RUS/ADM2/geoBoundaries-RUS-ADM2_simplified.geojson",
+      "role": "Publisher-distributed generalized version of the same Russia ADM2 dataset, used as a comparison reference",
+      "vintage": "Boundary year 2017; build 2023-12-12",
+      "retrieved_at_utc": "2026-10-06",
+      "license": {
+        "status": "redistributable",
+        "terms": "Open Data Commons Open Database License 1.0",
+        "evidence_path": "data/regional-review/regional-review-5cf69eed7fdff0b5/source/geoboundaries-rus-adm2-2017-metadata.json",
+        "evidence_sha256": "2064a236e3473d76adf00729b4482a22ffefae22a40364a4cfe78ef43ce3c672"
+      },
+      "retained_path": "data/regional-review/regional-review-5cf69eed7fdff0b5/source/geoboundaries-rus-adm2-2017-simplified-full-source.geojson",
+      "bytes": 26338801,
+      "sha256": "81dabf7930ff5e306e2423b586bcec14163fbd10481db6e49aab47273953b128",
+      "github_lfs_pointer_blob_sha1": "92c5b178b3685dfeb711638461d83dff4f411bc9",
+      "feature_count": 2327,
+      "verification": "SHA-256 and byte count match the pinned Git LFS object ID and GitHub API path size."
+    },
+    {
+      "id": "geoboundaries-rus-adm2-scoped-185-original-features",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/RUS/ADM2/geoBoundaries-RUS-ADM2.geojson",
+      "role": "Original lawful source feature extract for the 185 direct issue subjects",
+      "vintage": "Boundary year 2017",
+      "license": {
+        "status": "redistributable",
+        "terms": "Open Data Commons Open Database License 1.0"
+      },
+      "retained_path": "data/regional-review/regional-review-5cf69eed7fdff0b5/source/geoboundaries-rus-adm2-2017-scope-185-original-features.geojson",
+      "bytes": 14415049,
+      "sha256": "0be36fd932447bcfcfecebf10b3804e8098d76f90952baea69c5c64e9cdfde41",
+      "feature_count": 185,
+      "per_feature_hashes_path": "data/regional-review/regional-review-5cf69eed7fdff0b5/reproduction/geoboundaries-feature-hashes.tsv",
+      "per_feature_hashes_sha256": "7b2a9875ddce5b7889e09e4d11566b53b23430ff1d53c44d35dc7d32af7d5e7e",
+      "verification": "The pinned full original source was acquired, hashed, and deterministically reduced to the exact 185 scope IDs."
+    },
+    {
+      "id": "geoboundaries-rus-adm2-adaptation-base-8-supporting-features",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/RUS/ADM2/geoBoundaries-RUS-ADM2.geojson",
+      "role": "Original administrative source features referenced as members of the 21 ecological and one named-water physical overlays; not additional issue subjects",
+      "vintage": "Boundary year 2017",
+      "license": {
+        "status": "redistributable",
+        "terms": "Open Data Commons Open Database License 1.0"
+      },
+      "retained_path": "data/regional-review/regional-review-5cf69eed7fdff0b5/source/geoboundaries-rus-adm2-2017-adaptation-base-8-original-features.geojson",
+      "bytes": 2637307,
+      "sha256": "087017889376976d2fd601dac1fa470b69c2775bd20a3b36695295b963f9e669",
+      "feature_count": 8,
+      "per_feature_hashes_path": "data/regional-review/regional-review-5cf69eed7fdff0b5/reproduction/geoboundaries-adaptation-base-hashes.tsv",
+      "per_feature_hashes_sha256": "dff677bb561e2f4a5f810780263df299055c911c6e8ef8270ed3f2c7daa7ee75"
+    },
+    {
+      "id": "resolve-ecoregions-world-service",
+      "url": "https://www.arcgis.com/home/item.html?id=37ea320eebb647c6838c23f72abae5ef",
+      "feature_service_url": "https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/Resolve_Ecoregions/FeatureServer",
+      "role": "RESOLVE ecological ecoregion polygons and classifications; these are ecological regions, not administrative units",
+      "vintage": "Item describes Dinerstein et al. 2017; service dataLastEditDate 2022-01-27; ArcGIS item modified 2026-05-28; scoped features retrieved 2026-10-06",
+      "retrieved_at_utc": "2026-10-06",
+      "license": {
+        "status": "redistributable",
+        "terms": "Creative Commons Attribution 4.0 International for the ecoregion layer; base district geometry remains ODbL 1.0",
+        "evidence_path": "data/regional-review/regional-review-5cf69eed7fdff0b5/source/arcgis-item-37ea320eebb647c6838c23f72abae5ef.json",
+        "evidence_sha256": "cdf38955e9413461257ff26badc9ed8df067bb3958208834d494de1a5c75eba0"
+      },
+      "retained_files": [
+        {
+          "path": "data/regional-review/regional-review-5cf69eed7fdff0b5/source/arcgis-item-37ea320eebb647c6838c23f72abae5ef.json",
+          "bytes": 9587,
+          "sha256": "cdf38955e9413461257ff26badc9ed8df067bb3958208834d494de1a5c75eba0"
+        },
+        {
+          "path": "data/regional-review/regional-review-5cf69eed7fdff0b5/source/resolve-layer0-metadata.json",
+          "bytes": 37257,
+          "sha256": "d1feffd594812affdc08e089607bab2ed76e256ba7748784d37536797a777d4e"
+        },
+        {
+          "path": "data/regional-review/regional-review-5cf69eed7fdff0b5/source/resolve-ecoregions-east-siberia-query.json",
+          "bytes": 382989,
+          "sha256": "7a95c8e36155e02069e6e6439f1d18ad3145012e361306c155cabd581fff07e7",
+          "feature_count": 7
+        },
+        {
+          "path": "data/regional-review/regional-review-5cf69eed7fdff0b5/source/resolve-ecoregions-east-siberia-8-member-completeness.json",
+          "bytes": 637717,
+          "sha256": "235c587e0964f8c8958f17b2fab806d139b58e088a8e45c2a61354985a0f44a1",
+          "feature_count": 16,
+          "query_envelope_wgs84": [
+            81.7,
+            52,
+            120.6,
+            70
+          ]
+        }
+      ],
+      "verification": "All 21 current RESOLVE/map adaptation pairs match positive-area intersections of the eight supporting district polygons with 16 features returned for the supporting polygons' bounding envelope. Three ecoregion source shapes have invalid original geometry and are used only through diagnostic make_valid clones; originals are preserved.",
+      "limit": "The hosted source is mutable and the item record has a 2026 modification date. Saved query bytes pin the exact retrieved geometry, but do not create a historical independent release for the whole service."
+    },
+    {
+      "id": "natural-earth-10m-lakes-pinned",
+      "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/ca96624a56bd078437bca8184e78163e5039ad19/geojson/ne_10m_lakes.geojson",
+      "role": "Natural and artificial lake polygons at 1:10m scale; this scope uses only ne_id 1159113127, Lake Baikal",
+      "vintage": "Pinned repository commit ca96624a56bd078437bca8184e78163e5039ad19; modern reference, not year-specific hydrology",
+      "retrieved_at_utc": "2026-10-06",
+      "license": {
+        "status": "redistributable",
+        "terms": "Public domain per Natural Earth terms of use; underlying district feature retains ODbL 1.0",
+        "terms_url": "https://www.naturalearthdata.com/about/terms-of-use/"
+      },
+      "retained_path": "data/regional-review/regional-review-5cf69eed7fdff0b5/source/ne_10m_lakes-pinned-source.geojson",
+      "bytes": 5043554,
+      "sha256": "2d036f53dedec578001c5c30c2959ee7d4eebc1306900fa4367c49929ec8f2d9",
+      "feature_count": 1355,
+      "verified_feature": {
+        "ne_id": 1159113127,
+        "name": "Lake Baikal",
+        "featurecla": "Lake",
+        "year_property": -99
+      },
+      "verification": "Full original pinned GeoJSON SHA-256 matches the existing global source receipt and was independently retrieved in this work item."
+    },
+    {
+      "id": "russian-constitution-article-65",
+      "url": "https://www.minjust.gov.ru/ru/documents/8011/",
+      "role": "Legal source for the six parent entities' status as constituent subjects of the Russian Federation",
+      "vintage": "Official Ministry of Justice text; Article 65 includes Buryatia, Tuva, Khakassia, Krasnoyarsk Krai, Irkutsk Oblast, and Zabaykalsky Krai",
+      "retrieved_at_utc": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Government legal text; no separate reuse terms assessed"
+      },
+      "retention": "restoration-only",
+      "verification": "Article 65 was read from the Ministry of Justice page through the web retrieval service. Direct file retrieval returned HTTP 403, so no local source bytes or SHA-256 are claimed.",
+      "limit": "Constitutional subject status does not verify each frozen framework boundary or every subordinate location's complete membership."
+    },
+    {
+      "id": "rosstat-okato-current-classifier",
+      "url": "https://www.rosstat.gov.ru/classification",
+      "open_data_url": "https://rosstat.gov.ru/opendata/7708234640-okato",
+      "role": "Official current administrative-territorial classifier needed for unit-level role and status crosswalk",
+      "vintage": "Classification page showed OKATO OK 019-95 amendments through 569/2026; open-data record listed CSV data-20260801T1408-structure-20140709T1807.csv",
+      "retrieved_at_utc": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Open-data record; license statement for the dataset file not independently downloaded"
+      },
+      "retention": "restoration-only",
+      "verification": "Official Rosstat pages were discoverable through web search. Direct CSV retrieval failed certificate validation for rosstat.gov.ru and www.rosstat.gov.ru; the web page fetch also timed out. No TLS bypass was used and no unit-level OKATO claims are made.",
+      "restoration": "Resolve a verifiable certificate chain, retrieve the exact current CSV from the official dataset page, record whole-file SHA-256 and byte count, then crosswalk each of the 185 original feature names and IDs plus the six federal subjects. Preserve the retrieved CSV as source evidence if within the evidence-size ceiling.",
+      "limit": "No per-unit Russian official administrative role, code, or current completeness was verified from this source in this packet."
+    }
+  ],
+  "reproduction_outputs": [
+    {
+      "path": "data/regional-review/regional-review-5cf69eed7fdff0b5/reproduction/scope-inventory.run-1.json",
+      "bytes": 225036,
+      "sha256": "1a316bce1a5fc7b0c35e8abc132d2e8838f6df58aaf458133f9d6932de46732a"
+    },
+    {
+      "path": "data/regional-review/regional-review-5cf69eed7fdff0b5/reproduction/scope-inventory.run-2.json",
+      "bytes": 225036,
+      "sha256": "1a316bce1a5fc7b0c35e8abc132d2e8838f6df58aaf458133f9d6932de46732a"
+    },
+    {
+      "path": "data/regional-review/regional-review-5cf69eed7fdff0b5/reproduction/geography-assessment.json",
+      "bytes": 456707,
+      "sha256": "014ad146908c2c81145b700fdc04a3533914523af78a822bff3ef79d6bfb4c4a"
+    },
+    {
+      "path": "data/regional-review/regional-review-5cf69eed7fdff0b5/reproduction/subject-assessments.tsv",
+      "bytes": 137185,
+      "sha256": "f274cde0d43f108971425c2c09b2c75b126a924cf82b48756bfd968ecb253744"
+    }
+  ],
+  "limitations": [
+    "This packet reviews only the exact 207 issue subjects and six associated framework province parents; it does not certify East Siberia, Siberia, any region interior, or any neighboring unit set.",
+    "The 185 source names and source IDs are independently matched, but all 185 overall classifications remain insufficient-evidence pending an authoritative unit-level crosswalk, source-completeness resolution, and an approved geometry-tolerance policy.",
+    "All 21 ecological and one named-water physical overlays need source-role and hierarchy correction review; no map, hierarchy, release, or production data was changed.",
+    "Geometry IoU screening uses EPSG:6933 and thresholds only for triage. It does not prove territorial correctness. Invalid ecological source geometry was retained unchanged; diagnostic make_valid clones were used only to compute overlays.",
+    "The global region handoff still marks regional interiors unapproved, publication unverified, and location-attribute imports not ready."
+  ]
+}
