@@ -1,0 +1,222 @@
+{
+  "baseline_commit": "0463152556158926681120155ec2e6fd7d0d8c7f",
+  "comparison_method": {
+    "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+    "area_units": "m2",
+    "axis_order": "longitude-latitude",
+    "crs": "EPSG:4326",
+    "helper_version": "worldatlas-evidence-geometry-v1",
+    "membership_method": "Mapshaper polygon-polygon largest-overlap join, then explicit crosswalk from DAF commune-association id_ile/code_subdi attributes",
+    "software": "Mapshaper 0.6.121; Python 3.12; NumPy 2.3.5; Shapely 2.1.2; pyproj 3.7.2",
+    "version": "worldatlas-evidence-geometry-v1"
+  },
+  "daf_commune_crosswalk_unique_island_counts": {
+    "Austral Islands": 7,
+    "Leeward Islands": 8,
+    "Marquesas Islands": 13,
+    "Tuamotu-Gambier": 84,
+    "Windward Islands": 5
+  },
+  "daf_group_assigned_count": 125,
+  "daf_group_assignment_counts": {
+    "Austral Islands": 10,
+    "Leeward Islands": 8,
+    "Marquesas Islands": 16,
+    "Tuamotu-Gambier": 86,
+    "Windward Islands": 5
+  },
+  "daf_island_source_object_count": 128,
+  "daf_unassigned_object_count": 3,
+  "limits": [
+    "DAF GEO PF is a 2022-published snapshot; island feature acquisition/edit dates vary, and the five group rows were last edited in 2020.",
+    "The DAF administrative-group layer is explicitly figurative; its geometry is not treated as authoritative legal boundary precision.",
+    "The municipal association crosswalk covers mapped municipal island IDs, not every uninhabited object or all emergent surface.",
+    "Three island/reef objects do not overlap the five DAF administrative polygons. Motu One (Bellinghausen) is nevertheless linked to Maupiti/code_subdi 2 in the municipal association table.",
+    "Area ratios are comparison signals only; they do not establish which edge is legally or geographically correct."
+  ],
+  "method_id": "daf-island-crosswalk-and-geometry-v1",
+  "negative_controls": {
+    "all_divisions_disjoint": true,
+    "division_pairwise_overlap_area_m2": [
+      {
+        "group_a": 1,
+        "group_b": 2,
+        "overlap_area_m2": 0.0
+      },
+      {
+        "group_a": 1,
+        "group_b": 3,
+        "overlap_area_m2": 0.0
+      },
+      {
+        "group_a": 1,
+        "group_b": 4,
+        "overlap_area_m2": 0.0
+      },
+      {
+        "group_a": 1,
+        "group_b": 5,
+        "overlap_area_m2": 0.0
+      },
+      {
+        "group_a": 2,
+        "group_b": 3,
+        "overlap_area_m2": 0.0
+      },
+      {
+        "group_a": 2,
+        "group_b": 4,
+        "overlap_area_m2": 0.0
+      },
+      {
+        "group_a": 2,
+        "group_b": 5,
+        "overlap_area_m2": 0.0
+      },
+      {
+        "group_a": 3,
+        "group_b": 4,
+        "overlap_area_m2": 0.0
+      },
+      {
+        "group_a": 3,
+        "group_b": 5,
+        "overlap_area_m2": 0.0
+      },
+      {
+        "group_a": 4,
+        "group_b": 5,
+        "overlap_area_m2": 0.0
+      }
+    ],
+    "exact_unassigned_ids": [
+      "61",
+      "122",
+      "128"
+    ]
+  },
+  "positive_controls": [
+    {
+      "daf_division_id": 1,
+      "island": "Tahiti",
+      "passed": true
+    },
+    {
+      "daf_division_id": 2,
+      "island": "Bora Bora",
+      "passed": true
+    },
+    {
+      "daf_division_id": 3,
+      "island": "Nuku Hiva",
+      "passed": true
+    },
+    {
+      "daf_division_id": 4,
+      "island": "Tubuai",
+      "passed": true
+    },
+    {
+      "daf_division_id": 5,
+      "island": "Mangareva",
+      "passed": true
+    }
+  ],
+  "subjects": [
+    {
+      "atlas_land_area_m2": 1151360620.4,
+      "atlas_land_covered_by_daf": 0.86404385,
+      "atlas_polygon_components": 2,
+      "daf_assigned_island_feature_count": 5,
+      "daf_commune_crosswalk_island_count": 5,
+      "daf_division_feature": "Iles Du Vent",
+      "daf_division_id": 1,
+      "daf_island_union_area_m2": 1197070089.43,
+      "daf_land_covered_by_atlas": 0.83105081,
+      "intersection_area_m2": 994826068.2,
+      "intersection_over_union": 0.73494582,
+      "metric_limit": "DAF objects assigned only by largest polygon overlap to the figurative division polygons; municipal-only and unassigned objects are not included in this area union. Diagnostic, not completeness or legal-boundary proof.",
+      "natural_earth_source_components": 4,
+      "subject_id": "PYF-4963",
+      "subject_name": "Windward Islands"
+    },
+    {
+      "atlas_land_area_m2": 309006690.35,
+      "atlas_land_covered_by_daf": 0.80892989,
+      "atlas_polygon_components": 5,
+      "daf_assigned_island_feature_count": 8,
+      "daf_commune_crosswalk_island_count": 8,
+      "daf_division_feature": "Iles Sous Le Vent",
+      "daf_division_id": 2,
+      "daf_island_union_area_m2": 397290361.97,
+      "daf_land_covered_by_atlas": 0.62917395,
+      "intersection_area_m2": 249964746.72,
+      "intersection_over_union": 0.54776912,
+      "metric_limit": "DAF objects assigned only by largest polygon overlap to the figurative division polygons; municipal-only and unassigned objects are not included in this area union. Diagnostic, not completeness or legal-boundary proof.",
+      "natural_earth_source_components": 8,
+      "subject_id": "PYF-4964",
+      "subject_name": "Leeward Islands"
+    },
+    {
+      "atlas_land_area_m2": 488872321.18,
+      "atlas_land_covered_by_daf": 0.10955633,
+      "atlas_polygon_components": 25,
+      "daf_assigned_island_feature_count": 86,
+      "daf_commune_crosswalk_island_count": 84,
+      "daf_division_feature": "Tuamotu - Gambier",
+      "daf_division_id": 5,
+      "daf_island_union_area_m2": 685783407.32,
+      "daf_land_covered_by_atlas": 0.07809909,
+      "intersection_area_m2": 53559059.47,
+      "intersection_over_union": 0.04777381,
+      "metric_limit": "DAF objects assigned only by largest polygon overlap to the figurative division polygons; municipal-only and unassigned objects are not included in this area union. Diagnostic, not completeness or legal-boundary proof.",
+      "natural_earth_source_components": 65,
+      "subject_id": "PYF-4965",
+      "subject_name": "Tuamotu-Gambier"
+    },
+    {
+      "atlas_land_area_m2": 106745724.53,
+      "atlas_land_covered_by_daf": 0.52739443,
+      "atlas_polygon_components": 4,
+      "daf_assigned_island_feature_count": 10,
+      "daf_commune_crosswalk_island_count": 7,
+      "daf_division_feature": "Australes",
+      "daf_division_id": 4,
+      "daf_island_union_area_m2": 409272482.54,
+      "daf_land_covered_by_atlas": 0.13755408,
+      "intersection_area_m2": 56297100.56,
+      "intersection_over_union": 0.12245925,
+      "metric_limit": "DAF objects assigned only by largest polygon overlap to the figurative division polygons; municipal-only and unassigned objects are not included in this area union. Diagnostic, not completeness or legal-boundary proof.",
+      "natural_earth_source_components": 4,
+      "subject_id": "PYF-4966",
+      "subject_name": "Austral Islands"
+    },
+    {
+      "atlas_land_area_m2": 1063671724.74,
+      "atlas_land_covered_by_daf": 0.80981112,
+      "atlas_polygon_components": 7,
+      "daf_assigned_island_feature_count": 16,
+      "daf_commune_crosswalk_island_count": 13,
+      "daf_division_feature": "Marquises",
+      "daf_division_id": 3,
+      "daf_island_union_area_m2": 1107569442.59,
+      "daf_land_covered_by_atlas": 0.77771484,
+      "intersection_area_m2": 861373195.58,
+      "intersection_over_union": 0.65760307,
+      "metric_limit": "DAF objects assigned only by largest polygon overlap to the figurative division polygons; municipal-only and unassigned objects are not included in this area union. Diagnostic, not completeness or legal-boundary proof.",
+      "natural_earth_source_components": 7,
+      "subject_id": "PYF-4967",
+      "subject_name": "Marquesas Islands"
+    }
+  ],
+  "unassigned_daf_island_ids": [
+    "61",
+    "122",
+    "128"
+  ],
+  "unassigned_daf_island_names": [
+    "Motu One",
+    "Banc Mac Donald",
+    "Recif De La Minerve"
+  ]
+}
