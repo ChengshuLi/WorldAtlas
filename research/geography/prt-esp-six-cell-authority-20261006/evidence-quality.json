@@ -472,8 +472,8 @@
     },
     {
       "path": "research/geography/prt-esp-six-cell-authority-20261006/scripts/measure_dgt_segment_proximity.py",
-      "bytes": 9947,
-      "sha256": "08fc56c0d90e9fb6005a73857df369186a699cd08d0190e20bba56e92507db91",
+      "bytes": 10884,
+      "sha256": "208c8e592a2739036c036dd92c96ebc075d3255265b6d33fabaad64462c85881",
       "hash_kind": "file-bytes",
       "role": "measurement-code"
     },
@@ -507,23 +507,23 @@
     },
     {
       "path": "research/geography/prt-esp-six-cell-authority-20261006/validation/negative-control.json",
-      "bytes": 2427,
-      "sha256": "47b19cf0527a9966f98827aa8f95288119de4cdbf96bfa4d41f5cbd0fad02909",
+      "bytes": 2667,
+      "sha256": "092a10163d8138f9a592429d46ee613f9a4c34eb96bda6c00c2090f0f9841d77",
       "hash_kind": "file-bytes",
       "role": "analysis-output"
     },
     {
       "path": "research/geography/prt-esp-six-cell-authority-20261006/validation/reproducibility.json",
       "bytes": 871,
-      "sha256": "f6ce13b24941f0ed9b48d923750d5c39992b4c85f0bf9dc0cf3f3787cf2992cb",
+      "sha256": "7174fa6a661a586ae9654c54f144df98ad2c1a4856eae153373c8e8824029f5c",
       "hash_kind": "file-bytes",
       "role": "analysis-output"
     },
     {
       "path": "research/geography/prt-esp-six-cell-authority-20261006/scripts/validate_source_context_controls.py",
       "hash_kind": "file-bytes",
-      "bytes": 3720,
-      "sha256": "5275e02fb6715e6c39c8cb5b37afe566bce3163a3310a0aa57f87e5b65d7ec3d",
+      "bytes": 7291,
+      "sha256": "53f110dcf45439c0aafff4898d4bb2f2fdbd85a74eb56d34798b53603dbb03b4",
       "role": "validation-code"
     },
     {
@@ -536,8 +536,8 @@
     {
       "path": "research/geography/prt-esp-six-cell-authority-20261006/validation/source-context-controls.json",
       "hash_kind": "file-bytes",
-      "bytes": 1301,
-      "sha256": "d002d1484dca1dfd255eb4e661828d028358267309e1a4ae67de93d8208c2d01",
+      "bytes": 3836,
+      "sha256": "f91351f91096ab82f3b82a17da59695e7e91be148fb6b015065dc9dd516a57a0",
       "role": "analysis-output"
     }
   ],
@@ -819,7 +819,7 @@
   },
   "commands": [
     "Python 3.12 bundled runtime: scripts/validate_source_context_controls.py",
-    "Python 3.12 bundled runtime: scripts/measure_dgt_segment_proximity.py (two invocations after producer commit 09080554fa24abfe255f9cd3a6fe5faa3fee54bf)",
+    "Python 3.12 bundled runtime: scripts/measure_dgt_segment_proximity.py (two invocations after producer commit fed8ca4a4a2638a4aa31045bb3dc5be3544613fb)",
     "cmp outputs/run-1.json outputs/run-2.json",
     "node scripts/evidence-quality.mjs research/geography/prt-esp-six-cell-authority-20261006/evidence-quality.json",
     "node scripts/check-handoff-scope.mjs --branch geography/prt-esp-six-cell-authority-1197-20261006 --base origin/main --pr-body-file /tmp/geo-1197-pr-body.md --issue-file /tmp/issue-1197-current.json",

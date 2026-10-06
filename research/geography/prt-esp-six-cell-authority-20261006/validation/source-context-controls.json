@@ -2,31 +2,67 @@
   "all_negative_mutations_rejected": true,
   "controls": [
     {
+      "case": "unaltered retained response positive control",
+      "outcome": "passed"
+    },
+    {
       "case": "changed source bytes/hash",
+      "expected_failure": "Source response hash/status mismatch",
+      "fixture_only": true,
+      "observed_failure": "Source response hash/status mismatch for cell126077/99248",
       "outcome": "rejected"
     },
     {
       "case": "omitted feature",
+      "expected_failure": "Incomplete or unexpected query response",
+      "fixture_only": true,
+      "observed_failure": "Incomplete or unexpected query response for cell126077/99248",
       "outcome": "rejected"
     },
     {
       "case": "extra feature",
+      "expected_failure": "Incomplete or unexpected query response",
+      "fixture_only": true,
+      "observed_failure": "Incomplete or unexpected query response for cell126077/99248",
       "outcome": "rejected"
     },
     {
       "case": "mismatched native ID",
+      "expected_failure": "Unexpected native source ID",
+      "fixture_only": true,
+      "observed_failure": "Unexpected native source ID for cell126077/99248",
       "outcome": "rejected"
     },
     {
       "case": "line outside requested BBOX",
+      "expected_failure": "Returned line does not intersect requested BBOX",
+      "fixture_only": true,
+      "observed_failure": "Returned line does not intersect requested BBOX for cell126077/99248",
       "outcome": "rejected"
     },
     {
       "case": "mismatched request BBOX",
+      "expected_failure": "Source query context mismatch",
+      "fixture_only": true,
+      "observed_failure": "Source query context mismatch for cell126077/99248",
       "outcome": "rejected"
     },
     {
       "case": "altered issue centre",
+      "fixture_only": true,
+      "observed_failure": "Issue snapshot does not bind the exact six IDs, coordinates and preview labels",
+      "outcome": "rejected"
+    },
+    {
+      "case": "altered subject roster",
+      "fixture_only": true,
+      "observed_failure": "Issue subject roster or canonical pins changed",
+      "outcome": "rejected"
+    },
+    {
+      "case": "altered canonical pin",
+      "fixture_only": true,
+      "observed_failure": "Issue subject roster or canonical pins changed",
       "outcome": "rejected"
     },
     {
@@ -38,19 +74,38 @@
       "outcome": "unknown-retained"
     },
     {
-      "case": "collection vintage conflict preserved",
+      "case": "collection vintage conflict retained",
       "outcome": "unknown-retained"
     },
     {
-      "case": "planning geometry is not wetness; no wetness field produced",
+      "case": "planning/water source explicitly excluded from wetness conclusion",
       "outcome": "unknown-retained"
     },
     {
-      "case": "provider unavailability retained in prior packet; no substitute claim",
+      "case": "provider failure and no point-level substitute retained",
       "outcome": "unknown-retained"
+    },
+    {
+      "case": "fabricated feature validity date",
+      "fixture_only": true,
+      "observed_failure": "Unsupported date/accuracy/wetness/ownership source field for cell126077/99248",
+      "outcome": "rejected"
+    },
+    {
+      "case": "planning-as-wetness field",
+      "fixture_only": true,
+      "observed_failure": "Unsupported date/accuracy/wetness/ownership source field for cell126077/99248",
+      "outcome": "rejected"
+    },
+    {
+      "case": "inferred sovereign owner field",
+      "fixture_only": true,
+      "observed_failure": "Unsupported date/accuracy/wetness/ownership source field for cell126077/99248",
+      "outcome": "rejected"
     }
   ],
+  "fixture_note": "Mutated JSON fixtures are synthetic and hash-rebound solely to reach intended validation branches; they are not source evidence.",
   "owner_or_wetness_inference": "none",
-  "validator": "check_context + issue snapshot check",
+  "validator": "check_context + issue snapshot + retained-source documentary guards",
   "version": 1
 }

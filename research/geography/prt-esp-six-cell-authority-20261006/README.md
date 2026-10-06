@@ -5,7 +5,7 @@ Issue #1197 source-only campaign, retrieved 2026-10-06. Start with [the per-cell
 ## Retained evidence
 
 - `sources/dgt-trocos/` contains the exact DGT `trocos` collection description, schema/queryables, six full feature responses, HTTP headers, request URLs, byte hashes, and all nine failed Python TLS-verification attempts. The requests later succeeded with default TLS validation using curl.
-- `scripts/measure_dgt_segment_proximity.py` is the immutable point-to-line producer. It checks the exact issue snapshot and BBOX/query context, response hashes/counts, native DGT segment IDs, source properties, and line/BBOX intersection before measuring distances.
+- `scripts/measure_dgt_segment_proximity.py` is the immutable point-to-line producer. It binds the six centres plus subject/pin contract to the issue snapshot, checks response hashes/counts and exact query context, and rejects unsupported date, accuracy, wetness or ownership fields before measuring distances.
 - `outputs/dgt-segment-proximity.json` preserves each exact coordinate, source feature, source-byte hash, distance, and unresolved assessment.
 - `validation/` records positive and negative controls and the two-run result.
 - `evidence-quality.json` binds this campaign to issue subjects, grid/hierarchy pins, source/output hashes, the actual code runs, and the stated limits.
