@@ -439,11 +439,14 @@ def run(repo, selected, output):
     emit('tile-queries.json.gz',tile_rows)
     for name,delta in deltas.items():
         emit(name+'-delta.json.gz',delta)
-    # Complete component ledger is split losslessly under unchanged decoded cap.
-    for side in ('original','current'):
-        rows = lineage['components'][side]
-        for start in range(0,len(rows),20000):
-            emit(f'component-lineage-{side}-{start//20000:02d}.json.gz',rows[start:start+20000])
+    # Keep every original row once; the independently reconstructed current
+    # ledger is a lossless full-record delta, not a second duplicate family.
+    original_ledger=lineage['components']['original']
+    current_ledger=lineage['components']['current']
+    for start in range(0,len(original_ledger),20000):
+        emit(f'component-lineage-original-{start//20000:02d}.json.gz',original_ledger[start:start+20000])
+    lineage_delta=record_delta(original_ledger,current_ledger)
+    emit('component-lineage-current-delta.json.gz',lineage_delta)
     del lineage['components']
     emit('fragment-lineage.json.gz',lineage)
     summary = {'version':'worldatlas-actual-world-successor-v1','selected_input_commit':selected,
@@ -457,6 +460,7 @@ def run(repo, selected, output):
                'source_canonical_feature_changes':sum(r['original_feature_sha256']!=r['current_feature_sha256'] for r in feature_proof),
                'source_binary64_geometry_changes':sum(r['original_binary64_sha256']!=r['current_binary64_sha256'] for r in feature_proof),
                'source_canonical_metadata_changes':sum(not r['metadata_canonical_equal'] for r in feature_proof),
+               'component_lineage_reconstruction':{k:v for k,v in lineage_delta.items() if k not in ('removed_ids','upsert_records')},
                'complete_ancestor_products':frozen['complete_products'],'products':products,
                'limits':frozen['limits']+['Current input is explicitly selected79ff; no later release claims.',
                                         'Exact binary64 equality does not imply raw JSON identity.',
