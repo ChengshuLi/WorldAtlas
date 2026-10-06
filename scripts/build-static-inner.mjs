@@ -14,13 +14,14 @@ import {packageOwnershipHistory} from './package-ownership-history.mjs';
 import {packageReferenceBundle} from './package-reference-bundle.mjs';
 import {loadCoverageClassification} from '../src/coverage-classification.js';
 import {packageStartupOwnership} from './package-startup-ownership.mjs';
-import {selectBuildOwnership} from './select-build-ownership.mjs';
+import {selectBuildOwnership,readBuildOwnershipSelection} from './select-build-ownership.mjs';
 import {validateBuildContextStage} from './native-ownership/validate-build-context-stage.mjs';
 import {packageNativeLatitudes} from './package-native-latitudes.mjs';
 import {rebindCoverageManifest} from './rebind-coverage-manifest.mjs';
 import {readGeographicReleaseManifest} from './read-geographic-release-manifest.mjs';
 import { createHash } from 'node:crypto';
 assertPackageStage();
+const ownershipSelection=await readBuildOwnershipSelection();
 const audit=JSON.parse(await fs.readFile('data/granularity-audit.json','utf8'));
 if(audit.issues.length || !audit.input_sha256)throw new Error('Geography audit has not passed');
 for(const [file,expected] of Object.entries(audit.input_sha256)){
@@ -32,7 +33,7 @@ import {environmentClassifications} from '../src/environment-classifications.js'
 import { openDatabase, seedDatabase, geography } from '../database.mjs';
 
 // A read-only export of the current database, suitable for a private hosted preview.
-const preparedEvidence=process.env.ATLAS_NATIVE_GRID_MANIFEST?await readPreparedEvidenceBundle():prepareEvidenceBundle();
+const preparedEvidence=ownershipSelection.requireNative?await readPreparedEvidenceBundle():prepareEvidenceBundle();
 const db = openDatabase();
 try {
   seedDatabase(db);
@@ -43,8 +44,9 @@ try {
   const geographicRelease=readGeographicReleaseManifest('data/geographic-releases').releases.at(-1);
   if(geographicRelease.hierarchy_sha256!==createHash('sha256').update(await fs.readFile('data/hierarchy.json')).digest('hex')||geographicRelease.footprints_sha256!==checkPrepared(reference.features))throw Error('Reference release does not match prepared map assets');
   validatePreparedEvidenceIndex(preparedEvidence,geographicRelease);
-  const fixedGridPath=process.env.ATLAS_NATIVE_GRID_MANIFEST||'data/canonical-grid/manifest.json';
-  const selectedGrid=await fs.access(fixedGridPath).then(()=>selectBuildOwnership({manifestPath:fixedGridPath,expectedSha256:process.env.ATLAS_NATIVE_GRID_SHA256,expectedReference:geographicRelease,requireNative:!!process.env.ATLAS_NATIVE_GRID_MANIFEST}),()=>{if(process.env.ATLAS_NATIVE_GRID_MANIFEST)throw Error('Selected native grid is missing');return null;});
+  if(ownershipSelection.releaseId&&ownershipSelection.releaseId!==geographicRelease.id)throw Error('Committed ownership selection belongs to another release');
+  const fixedGridPath=ownershipSelection.manifestPath;
+  const selectedGrid=await fs.access(fixedGridPath).then(()=>selectBuildOwnership({...ownershipSelection,expectedReference:geographicRelease}),()=>{if(ownershipSelection.requireNative)throw Error('Selected native grid is missing');return null;});
   const fixedGrid=selectedGrid?.manifest;
   const nativeBuildContext=fixedGrid?.method?await validateBuildContextStage({expectedReference:geographicRelease}):null;
   const nativeContextInputStage=nativeBuildContext?.receipt??null;
