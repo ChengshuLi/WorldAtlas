@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "retrieved_at": "2026-10-06",
+  "question": "Was an accessible, current, precision-described and appropriately reusable official boundary-vector product established for the exact three subjects?",
+  "answer": "not-established",
+  "products": [
+    {
+      "source_id": "ngcc-webmap-catalogue",
+      "geography": "China",
+      "product_candidate": "National Fundamental Geographic Information Database public 1:250,000 edition; catalogue describes county polygon layer",
+      "publisher": "National Fundamental Geographic Information Center (NGCC), Ministry of Natural Resources",
+      "native_vector_boundary": "catalogue search result describes polygon layer, but no exact downloadable archive or full product metadata was retrieved",
+      "vintage": "unresolved; catalogue index includes records whose data currentness is described as 2012; separate 2020 platform announcement documents updates to selected 1:250,000 public base layers but does not establish this county-boundary layer's vintage",
+      "scale_or_precision": "nominal 1:250,000 for candidate public data; no product-specific positional accuracy or boundary-maintenance statement verified",
+      "access": "National catalogue lead at https://www.webmap.cn/main.do?method=index1; direct page retrieval timed out in this assessment; product-specific archive route not verified",
+      "redistribution_terms": "unknown for underlying vector data; catalogue website carries all-rights-reserved/no unauthorized copy-or-mirror wording, which cannot be safely generalized into a definitive raw-product license",
+      "decision": "lead only; not usable as a verified reusable source or geometry comparison in this child",
+      "source_ids": ["ngcc-webmap-catalogue"],
+      "missing": ["exact named product/version and record", "complete vector archive and file-member inventory", "boundary-layer date and maintenance lineage", "documented positional precision", "product-specific permission for retaining/redistributing original bytes"]
+    },
+    {
+      "source_id": "tianditu-admin-search-docs",
+      "geography": "China",
+      "product_candidate": "Tianditu administrative-area search service",
+      "publisher": "National Platform for Common Geospatial Information Services",
+      "native_vector_boundary": "no; documented response provides administrative identifiers/levels and spatial search results such as bounds/center, not a boundary-vector archive",
+      "vintage": "service documentation accessed 2026-10-06; data-vintage metadata not established",
+      "scale_or_precision": "not specified for downloadable county boundary vectors because none were documented",
+      "access": "service/API documentation https://lbs.tianditu.gov.cn/server/search2.html; key required for service use",
+      "redistribution_terms": "unknown for raw geometry; online service access does not grant feature redistribution rights",
+      "decision": "not a demonstrated geometry source",
+      "source_ids": ["tianditu-admin-search-docs"],
+      "missing": ["raw boundary features", "source vintage/precision", "raw-feature license"]
+    },
+    {
+      "source_id": "tajik-geoportal",
+      "geography": "Tajikistan",
+      "product_candidate": "National geoportal cadastral lookup",
+      "publisher": "State unitary enterprise Geoportal",
+      "native_vector_boundary": "not established; published description concerns parcel/property boundary lookup and identifying which administrative place contains an object; no district vector download located",
+      "vintage": "not established",
+      "scale_or_precision": "not established for district geometry",
+      "access": "https://geoportal.tj/; no downloadable administrative boundary product was identified",
+      "redistribution_terms": "not established",
+      "decision": "not a demonstrated district-boundary source",
+      "source_ids": ["tajik-geoportal"],
+      "missing": ["named district-boundary vector product", "retrievable package", "vintage/precision metadata", "redistribution terms"]
+    },
+    {
+      "source_id": "tajik-stat-admin-units-2025",
+      "geography": "Tajikistan",
+      "product_candidate": "Official administrative area unit statistics workbook",
+      "publisher": "Agency on Statistics under the President of Tajikistan",
+      "native_vector_boundary": "no; counts at national/region level only",
+      "vintage": "counts as of 2025-01-01",
+      "scale_or_precision": "not applicable",
+      "access": "retained official XLSX download, 11,242 encoded bytes and 28,161 decoded ZIP member bytes",
+      "redistribution_terms": "CC BY 4.0 per publisher's analytical-tables page, with source link attribution",
+      "decision": "supports counts only; no boundary comparison",
+      "source_ids": ["tajik-stat-admin-units-2025"],
+      "missing": ["district-level geometry"]
+    }
+  ],
+  "scope_limits": [
+    "No PDF, raster, tile set or vector boundary was downloaded.",
+    "No source-versus-Atlas or cross-border geometry overlay was repeated.",
+    "Administrative polygons, if later obtained, would be reference geometry only; they do not establish an international boundary, historical title, physical land/water, or territorial assignment.",
+    "The result is that a qualifying product was not established in this bounded assessment, not proof that no product exists."
+  ]
+}

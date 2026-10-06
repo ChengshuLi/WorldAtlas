@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "method_id": "tajik-stat-admin-table",
+  "outcome": "passed",
+  "positive": {
+    "outcome": "passed",
+    "assertion": "exact workbook title, specified header coordinates, and GBAO row cells/coordinates match retained source",
+    "headers": {
+      "B3": "Regions",
+      "C3": "Towns",
+      "C4": "total",
+      "D4": "o/w  republican and regional submission",
+      "E3": "Districts",
+      "F3": "Colonies",
+      "G3": "Number of",
+      "G4": "jamoats"
+    },
+    "gbao_cells": {
+      "A6": "GBAO",
+      "B6": "7",
+      "C6": "1",
+      "D6": "1",
+      "E6": "-",
+      "F6": "4",
+      "G6": "42"
+    },
+    "source_sha256": "c0576b220fa3d2b7281d4c4680b3e143a523dec3a733c0fe3eba23ed91e47e40"
+  },
+  "negative_controls": [
+    {
+      "outcome": "passed",
+      "assertion": "mutating B3 from literal Regions header causes same acceptance predicate to reject input",
+      "coordinate": "B3",
+      "mutated_value": "Administrative districts"
+    },
+    {
+      "outcome": "passed",
+      "assertion": "mutating GBAO cell B6 causes same acceptance predicate to reject input",
+      "coordinate": "B6",
+      "original_value": "7",
+      "mutated_value": "8"
+    }
+  ],
+  "limits": [
+    "Source labels are preserved literally, with no administrative-class reinterpretation.",
+    "The workbook contains no geometry or spatial coordinate data."
+  ],
+  "script_sha256": "3bd574fa5ec541348f37673243702cdf92cacc46072aff410e2bae6488865a8b",
+  "execution_commit": "62a4167f121dc8f8b3389ed6363611e819b2e476"
+}
