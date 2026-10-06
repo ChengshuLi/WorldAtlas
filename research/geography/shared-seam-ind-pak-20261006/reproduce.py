@@ -282,7 +282,8 @@ def run_geometry_controls():
     }
     if not all(checks.values()):
         raise ValueError(f"analytic geometry control failed: {checks}; failures={failures}")
-    receipt = {"schema": "geo4-shared-seam-geometry-controls-v1", "status": "passed",
+    receipt = {"method_id": "seam-analytic-geometry-controls", "kind": "geography", "outcome": "passed",
+               "schema": "geo4-shared-seam-geometry-controls-v1", "status": "passed",
                "method": METHOD, "checks": checks,
                "measured": {"shell_area_m2": shell_area, "geometry_collection_area_m2": gc_area,
                             "disconnected_multipolygon_area_m2": multi_area,
@@ -453,17 +454,38 @@ def compare(geometry_controls):
         "status": "passed"}
     if not all(controls["positive"].values()) or not all(controls["negative"].values()):
         raise ValueError("one or more scientific positive/negative controls failed")
+    source_controls = {"method_id": "seam-native-source-and-fragment-controls", "kind": "source", "outcome": "passed",
+                       "positive": controls["positive"], "negative": controls["negative"],
+                       "source_crosswalk_sha256": sha((PACKET / "source-crosswalk.json").read_bytes()),
+                       "gap_readback_sha256": sha((PACKET / "inputs/original-input-envelope-readback.json").read_bytes()),
+                       "fragment_identities": FRAGMENTS}
+    write_json(PACKET / "source-controls.json", source_controls)
     write_json(PACKET / "controls.json", controls)
     return seam, crosswalk, comparison_rows, current_part_receipts, component_ledger
 
 
 def main():
-    if len(sys.argv) != 2 or sys.argv[1] != "--run-final":
-        raise SystemExit("usage: reproduce.py --run-final (run only after committing exact code)")
+    if len(sys.argv) != 2 or sys.argv[1] not in {"--run-final", "--verify-two-run"}:
+        raise SystemExit("usage: reproduce.py --run-final | --verify-two-run")
     head = os.popen("git rev-parse HEAD").read().strip()
     tracked_dirty = os.popen("git status --porcelain --untracked-files=no").read().strip()
     if tracked_dirty:
         raise SystemExit("refusing final numerical run with tracked changes after code commit")
+    if sys.argv[1] == "--verify-two-run":
+        run_one = (PACKET / "runs/run-1.json").read_bytes()
+        run_two = (PACKET / "runs/run-2.json").read_bytes()
+        one, two = json.loads(run_one), json.loads(run_two)
+        if run_one != run_two or one != two or one.get("actual_execution_sha") != head:
+            raise SystemExit("two-run byte/field/execution-commit reproducibility check failed")
+        write_json(PACKET / "two-run-reproducibility.json", {
+            "method_id": "seam-two-complete-run-reproducibility", "kind": "generator", "outcome": "passed",
+            "schema": "geo4-two-run-reproducibility-v1", "actual_execution_sha": head,
+            "run_one_sha256": sha(run_one), "run_two_sha256": sha(run_two),
+            "complete_file_bytes_equal": True, "all_fields_equal": True,
+            "run_one_bytes": len(run_one), "run_two_bytes": len(run_two),
+            "reproduction_code_sha256": one["reproduction_code_sha256"],
+        })
+        return
     geometry_controls = run_geometry_controls()
     seam, crosswalk, rows, parts, component_ledger = compare(geometry_controls)
     code_hash = sha(Path(__file__).read_bytes())
@@ -485,7 +507,10 @@ def main():
               "software": {"python": sys.version.split()[0], "shapely": shapely.__version__, "pyproj": pyproj.__version__},
               "geometry_method": METHOD, "comparisons": rows,
               "seam": seam, "geometry_component_ledger": component_ledger,
-              "controls_sha256": sha((PACKET / "controls.json").read_bytes()),
+              "validation_evidence": {
+                  "aggregate_controls_sha256": sha((PACKET / "controls.json").read_bytes()),
+                  "geometry_controls_sha256": sha((PACKET / "geometry-controls.json").read_bytes()),
+                  "source_controls_sha256": sha((PACKET / "source-controls.json").read_bytes())},
               "current_source_parts": parts,
               "inputs": {"original_source_custody_sha256": sha((PACKET / "sources/source-custody.json").read_bytes()),
                          "gap_readback_sha256": sha((PACKET / "inputs/original-input-envelope-readback.json").read_bytes())}}
