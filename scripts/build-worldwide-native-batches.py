@@ -202,7 +202,10 @@ def main():
     geometry_probes=[];component_ids=[]
     for d in inventory['complete_products']['components']:
         path=next(p['path'] for p in inventory['source_descriptors'] if p['sha256']==d['sha256'])
-        for feature in inputs.json(M,path,d):
+        collection=inputs.json(M,path,d)
+        if not isinstance(collection,dict) or collection.get('type')!='FeatureCollection' or not isinstance(collection.get('features'),list):
+            raise ValueError('Complete component product must preserve its FeatureCollection wrapper')
+        for feature in collection['features']:
             component_ids.append(feature['id']);geometry_probes.append(component_probe(feature,native['size'],latitudes))
     if len(component_ids)!=95174 or len(set(component_ids))!=95174:raise ValueError('Incomplete accepted component cohort')
     print('complete geometry probes',len(geometry_probes),flush=True)
