@@ -1,0 +1,71 @@
+{
+  "controls": [
+    {
+      "candidate_sha256_recomputed": "c29205a3696ee2d0f43dcdca22d32191e3aa5428a3ce89da5d1820ac0cb3fae5",
+      "digest_recomputation_does_not_bypass": true,
+      "name": "fabricated-subject",
+      "outcome": "rejected",
+      "reason": "Candidate subject roster differs"
+    },
+    {
+      "candidate_sha256_recomputed": "a4802dfe54ac2b0e4f874bd50124755212965e3cb714d103fa8d1f9bdaebc808",
+      "digest_recomputation_does_not_bypass": true,
+      "name": "missing-subject",
+      "outcome": "rejected",
+      "reason": "Candidate rows are not unique and complete"
+    },
+    {
+      "candidate_sha256_recomputed": "119283b495a9e123487de3208e916a4b3df567b4208259cd9ca4c471369c25ff",
+      "digest_recomputation_does_not_bypass": true,
+      "name": "duplicate-subject-row",
+      "outcome": "rejected",
+      "reason": "Candidate rows are not unique and complete"
+    },
+    {
+      "candidate_sha256_recomputed": "59ea1c2a62817c21c7a857e562a664f506b4f7be5d4892703b88cf842194c54b",
+      "digest_recomputation_does_not_bypass": true,
+      "name": "wrong-baseline-name",
+      "outcome": "rejected",
+      "reason": "Baseline name mismatch for gb:CHL:ADM3:31580391B10529430884395"
+    },
+    {
+      "candidate_sha256_recomputed": "7bab85fe62c87ebdfb46304461752e5b716c8c3f43fac2a6b37f8698518d094a",
+      "digest_recomputation_does_not_bypass": true,
+      "name": "wrong-parent-id",
+      "outcome": "rejected",
+      "reason": "Baseline parent_id mismatch for gb:CHL:ADM3:31580391B10529430884395"
+    },
+    {
+      "candidate_sha256_recomputed": "92e747846c092a75fc6953d229f34aa676633c844af3da5632d541642370cbbe",
+      "digest_recomputation_does_not_bypass": true,
+      "name": "fabricated-source-shape-id-even-with-rehashed-candidate",
+      "outcome": "rejected",
+      "reason": "Baseline original/source member ID mismatch for gb:CHL:ADM3:31580391B10529430884395"
+    },
+    {
+      "candidate_sha256_recomputed": "266796a0d3e73d3c2d9a7edcfef7a32eaba9b03c1f12f995fbef24ba7abbb7b2",
+      "digest_recomputation_does_not_bypass": true,
+      "name": "fabricated-source-name",
+      "outcome": "rejected",
+      "reason": "Baseline source member name mismatch for gb:CHL:ADM3:31580391B10529430884395"
+    },
+    {
+      "candidate_sha256_recomputed": "08ef1f18a553be2fcdea2c8c2e0e6d32c733ce3093b9109a5565c4a546796fdd",
+      "digest_recomputation_does_not_bypass": true,
+      "name": "wrong-source-tier",
+      "outcome": "rejected",
+      "reason": "Baseline source_id mismatch for gb:CHL:ADM3:31580391B10529430884395"
+    },
+    {
+      "candidate_sha256_recomputed": "f8ec18fdfc949f20dc4d480156f0d8d04632322eb3e937b4d2610e5cf840b4ed",
+      "digest_recomputation_does_not_bypass": true,
+      "name": "stale-name-match-flag",
+      "outcome": "rejected",
+      "reason": "Baseline exact-name linkage flag mismatch for gb:CHL:ADM3:31580391B10529430884395"
+    }
+  ],
+  "controls_executed": 9,
+  "kind": "negative-control",
+  "method_id": "southern-south-america-crosswalk-baseline-audit",
+  "outcome": "passed"
+}

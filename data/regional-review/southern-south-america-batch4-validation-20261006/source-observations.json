@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "issue": 1116,
+  "retrieved_at": "2026-10-06",
+  "subject_scope": {
+    "count": 215,
+    "country_source_rows": {
+      "CHL ADM3": 167,
+      "PRY ADM2": 47
+    },
+    "aggregate_rows": 1,
+    "baseline_features": 215,
+    "distinct_actual_parent_ids": 39,
+    "classification": "Exact retained baseline identity audit; not current legal-unit verification"
+  },
+  "sources": [
+    {
+      "id": "gb-chl-adm3-2020",
+      "subject_count": 167,
+      "recorded_role": "Chile ADM3 communes",
+      "source_vintage": "geoBoundaries reference year 2020; upstream commit 9469f09592ced973a3448cf66b6100b741b64c0d",
+      "license_record": "CC BY 3.0 IGO, per retained geoBoundaries metadata; attribution required",
+      "original_source": {
+        "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CHL/ADM3/geoBoundaries-CHL-ADM3.geojson",
+        "retrieved_at": "2026-10-05, recorded in the original source register",
+        "bytes": 171783952,
+        "sha256": "f3833ce1965394ae705e3793b50bdd007775b43da604251871deffed04f3bffd",
+        "compressed_bytes": 48864138,
+        "retention": "restoration-only; source geometry is not retained in this packet"
+      },
+      "independent_checks": "The new verifier compares every candidate source member ID/name, source tier, role, source vintage and license field to the exact baseline feature metadata. It does not re-open the original geoBoundaries source features.",
+      "completeness_and_boundary_limits": "geoBoundaries metadata says 345 national features; inherited SUBDERE 2023 evidence cites 346 communes. The originals and current official polygons were not restored here; no completeness, legal parentage, coast/island edge, or positional claim is made.",
+      "neighboring_granularity": "ADM3 commune records are grouped under the retained Atlas ADM2 province parents. The current SUBDERE 2023 DPA publication is a more current authoritative source lead, but its RAR archive was not extracted in this packet and reuse terms were not located in the inherited review."
+    },
+    {
+      "id": "gb-pry-adm2-2012",
+      "subject_count": 47,
+      "recorded_role": "Paraguay ADM2 districts",
+      "source_vintage": "geoBoundaries reference year 2012; upstream commit f549eab25a258603ea32c9dc6cb11b7657796478",
+      "license_record": "CC BY 4.0, per retained geoBoundaries metadata; attribution required",
+      "original_source": {
+        "url": "https://github.com/wmgeolab/geoBoundaries/raw/f549eab/releaseData/gbOpen/PRY/ADM2/geoBoundaries-PRY-ADM2.geojson",
+        "retrieved_at": "2026-10-05, recorded in the original source register",
+        "bytes": 45589273,
+        "sha256": "d42bd1f910070bf805e32dc46708230c91f58902a3c8792eda60928b22362858",
+        "compressed_bytes": 15941755,
+        "retention": "restoration-only; decompressed source exceeds the evidence input limit"
+      },
+      "independent_checks": "All 47 candidate source member IDs/names and retained parent links are checked against baseline features and their stored metadata. The full upstream source rows are not restored/rechecked.",
+      "completeness_and_boundary_limits": "geoBoundaries metadata says 247 national features, but that count and candidate IDs do not prove current district completeness or legal boundaries. The official National Cadastre study describes unresolved and often technically indeterminate district limits; it is context for unresolved rows, not a substitute boundary dataset.",
+      "neighboring_granularity": "ADM2 district candidate units are nested under 18 retained Atlas province IDs within the Paraguay Level 3 area. Candidate membership and parent links are structural matches only; several existing reviews describe legal, source, or tier uncertainty."
+    },
+    {
+      "id": "paraguay-ine-2022-attributes",
+      "subject_count": 47,
+      "recorded_role": "2022 census/statistical district name, code and department crosswalk; no geometry",
+      "source_vintage": "Census 2022 layer published 2024-07-05, per current INE GeoNode metadata",
+      "url": "https://geonode.ine.gov.py/catalogue/csw_to_extra_format/fa775300-fe68-472d-9d75-e87594c2b093/distritos.html",
+      "observed_official_limit": "INE says the layer supports census field work/statistical results; its district limits are approximate, have no legal scope and are for statistical purposes only.",
+      "license_conflict": "The retained #935 source register describes an INE public-information attribution license for its 2022 response. The current GeoNode layer metadata says Public Domain. The exact 55,137-byte attribute response was not retained or re-fetched here, so the applicable response-level reuse terms remain unresolved.",
+      "recorded_response": {
+        "url": "https://geonode.ine.gov.py/geoserver/ows?service=WFS&version=2.0.0&request=GetFeature&typeNames=geonode%3ADistritos_Paraguay_INE_2022_conID&propertyName=DPTO%2CDPTO_DESC%2CDISTRITO%2CDIST_DESC_%2CCLAVE%2Cid&outputFormat=application%2Fjson&srsName=EPSG%3A4326",
+        "retrieved_at": "2026-10-05, recorded in the original source register",
+        "bytes": 55137,
+        "sha256": "3cf026dd552ac4128f97b68acbdb8e06aba08afdde13fa208185cb07447ae228",
+        "retention": "restoration-only; not retained in this packet"
+      },
+      "independent_checks": "Zero INE response bytes/rows were reverified. The 47 crosswalk fields remain recorded candidate statistical joins. They cannot verify district legal identity, administrative role, parentage or boundaries."
+    },
+    {
+      "id": "subdere-chile-dpa-2023",
+      "subject_count": 167,
+      "recorded_role": "Official Chilean commune/province/region DPA polygon source lead",
+      "source_vintage": "2023 digital DPA release; notice dated 2023-11-10",
+      "publication_url": "https://www.subdere.gov.cl/sala-de-prensa/subdere-publica-nueva-versi%C3%B3n-de-los-l%C3%ADmites-de-la-divisi%C3%B3n-pol%C3%ADtico-administrativa",
+      "download_url": "https://ide.subdere.gov.cl/descargas/SHP/Limite_DPA_03082023.rar",
+      "observed_official_facts": "SUBDERE describes comuna, provincia and region polygons assembled from SUBDERE-maintained interior limits, DIFROL-maintained international limits and IGM coast. It says the digital communal lines are periodically checked against DFL 3 18.715 and laws defining the DPA.",
+      "license": "No explicit reuse terms were located in the inherited review; the archive is not retained.",
+      "recorded_archive": {
+        "retrieved_at": "2026-10-05, recorded in the original source register",
+        "bytes": 262380302,
+        "sha256": "4c8dd01ca4ca7d8b111dac78b88cc8ac64c1af7b8ebe0c85a21eaab337ae3fd3",
+        "prior_extraction": "RAR5 extraction failed in the inherited review"
+      },
+      "limits": "The official notice confirms a source lead and documented method, but this packet did not restore the archive, resolve reuse, match its features or compare any scoped boundary."
+    },
+    {
+      "id": "paraguay-national-cadastre-district-study-2024",
+      "subject_count": 47,
+      "recorded_role": "Official legal-boundary uncertainty context, not a polygon source",
+      "source_vintage": "National Cadastre page identifies the study as January 2024; its overview covers 263 districts and says research is ongoing",
+      "url": "https://www.catastro.gov.py/site/47/Estudio-de-Limites-Distritales-de-la-Republica-del-Paraguay_V2023",
+      "observed_official_facts": "The Dirección General del Servicio Nacional de Catastro says its ongoing review addresses political-administrative district-boundary indefinition and reviews the legal framework. It is national context only; this packet does not infer which scoped district laws are adequate.",
+      "license": "No reuse terms were located in the inherited source review; PDF not retained.",
+      "prior_restoration_record": {
+        "url": "https://www.catastro.gov.py/public/967e7c_ESTUDIO%20DE%20L%C3%8DMITES%20DISTRITALES%20DE%20LA%20REP%C3%9ABLICA%20DEL%20PARAGUAY.pdf",
+        "retrieved_at": "2026-10-05, recorded in the original source register",
+        "bytes": 4079648,
+        "sha256": "c07fd97db9ee7063e377dd6df14f032847c16296a9c8354fe1179d3203762bd1",
+        "retention": "restoration-only"
+      },
+      "limits": "The currently viewed official page is not demonstrated to be the byte-identical 2025-era PDF path/hash recorded in the inherited register. It supports the general uncertainty context only."
+    },
+    {
+      "id": "tdwg-wgsrpd-level3-level4",
+      "subject_count": 5,
+      "recorded_role": "Historical botanical distribution scale crosswalk for five Atlas macro-areas",
+      "vintage": "WGSRPD 2nd Edition tables at commit 52da7828aba9d461dd133c27b3bd7a4407161f54",
+      "source_url": "https://github.com/tdwg/wgsrpd/tree/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition",
+      "recorded_facts": "Inherited #948 evidence maps the five southern South America areas to botanical Level 3 names and compares their Level 4 record counts with Atlas province child counts. These are not administrative-equivalent tiers and do not establish modern legal parenthood.",
+      "reuse_and_retention": "No table reuse terms were located in the inherited review; tables remain restoration-only.",
+      "table_restoration": [
+        {"url":"https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/tblLevel3.txt","bytes":9933,"sha256":"7eaf281dfbdca610c93938326c333d7c62d8e82ce3cba63b299d5a3a01d0003f","encoding":"Windows-1252"},
+        {"url":"https://raw.githubusercontent.com/tdwg/wgsrpd/52da7828aba9d461dd133c27b3bd7a4407161f54/109-488-1-ED/2nd%20Edition/tblLevel4.txt","bytes":17137,"sha256":"6fa350a0bb5939df0c665ae6cf253ddb0aa85fef6daa684c87ba400faf93b1c2","encoding":"Windows-1252"}
+      ],
+      "limits": "This packet preserves the inherited count/name comparison and does not re-fetch these tables or imply the botanical framework is administrative geography."
+    },
+    {
+      "id": "natural-earth-asuncion-aggregate",
+      "subject_count": 1,
+      "recorded_role": "Atlas-source aggregate described as an undated Natural Earth admin-1 capital district plus four 2012 district source members",
+      "source_vintage": "Undated modern reference in retained Atlas feature metadata",
+      "source_url": "https://github.com/nvkelso/natural-earth-vector/tree/ca96624a56bd078437bca8184e78163e5039ad19",
+      "recorded_members": [
+        "gb:PRY:ADM2:47425931B48812642797604",
+        "gb:PRY:ADM2:47425931B12740487609448",
+        "gb:PRY:ADM2:47425931B42548992091348",
+        "gb:PRY:ADM2:47425931B88739802745947"
+      ],
+      "license_and_restoration": "Natural Earth is described as public domain in retained metadata, but the exact source file/vintage and feature roster behind this Atlas aggregate were not restored or rechecked.",
+      "limits": "Keep source entity, current legal tier, extent, overlap, parent and neighboring urban/metropolitan granularity unresolved; do not treat four member IDs as proof of the aggregate's legal identity."
+    }
+  ],
+  "retrieved_pages": [
+    {
+      "url": "https://www.subdere.gov.cl/sala-de-prensa/subdere-publica-nueva-versi%C3%B3n-de-los-l%C3%ADmites-de-la-divisi%C3%B3n-pol%C3%ADtico-administrativa",
+      "retrieved_at": "2026-10-06",
+      "observed": "Published 2023-11-10 notice describes national 2023 commune/province/region digital polygons and the agency roles/periodic law check summarized above."
+    },
+    {
+      "url": "https://geonode.ine.gov.py/catalogue/csw_to_extra_format/fa775300-fe68-472d-9d75-e87594c2b093/distritos.html",
+      "retrieved_at": "2026-10-06",
+      "observed": "INE GeoNode metadata dates the layer 2024-07-05, states approximate non-legal statistical purpose and displays Public Domain as the layer license."
+    },
+    {
+      "url": "https://www.catastro.gov.py/site/47/Estudio-de-Limites-Distritales-de-la-Republica-del-Paraguay_V2023",
+      "retrieved_at": "2026-10-06",
+      "observed": "National Cadastre page identifies a January 2024 ongoing legal-framework review and a national 263-district overview."
+    }
+  ],
+  "disposition": "Scope and baseline relationships are corrected; external row-level source authority, reuse conflicts, completeness, geometry and regional approval remain open."
+}
