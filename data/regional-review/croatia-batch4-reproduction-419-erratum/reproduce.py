@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 """Guarded additive reproduction wrapper for the retained Croatian #419 work."""
 from __future__ import annotations
-import argparse, hashlib, json, os, shutil, subprocess, sys, tempfile
+import argparse, hashlib, json, os, re, shutil, subprocess, sys, tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
 OWNED = Path(__file__).resolve().parent
 SCOPE = OWNED / 'source/issue-evidence-scope.json'
+SNAPSHOT = OWNED / 'source/issue-1194-api-snapshot.json'
+SCOPE_SHA256 = '0f082390fe2f9c7bd3e627489b4f5160616d9b85e4cc15503ed1521c050e3cb8'
+SNAPSHOT_SHA256 = '5863aa5a0f5845dbb9939a8fb841ceeeff6d1c87bc3bdee9f6e6936313389439'
 BASELINE = '7646e0962afab6cc4f566439bb2f96890ae4b91e'
 GEOMETRY = ROOT / 'data/regional-review/regional-review-c64d17e99f61d668/source/geoboundaries-9469f09/HRV/ADM2/geoBoundaries-HRV-ADM2.geojson'
 SUMMARY = ROOT / 'data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx'
@@ -20,7 +23,14 @@ FILES = ('assessment-summary.json','province-completeness.csv','scoped-location-
 
 def sha(b: bytes) -> str: return hashlib.sha256(b).hexdigest()
 def preflight(scope_override=None):
-    issue=json.loads(SCOPE.read_text())
+    scope_raw=SCOPE.read_bytes(); snapshot_raw=SNAPSHOT.read_bytes()
+    if sha(scope_raw)!=SCOPE_SHA256: raise ValueError('complete issue-scope evidence hash mismatch')
+    if sha(snapshot_raw)!=SNAPSHOT_SHA256: raise ValueError('raw GitHub issue snapshot hash mismatch')
+    issue=json.loads(scope_raw); snapshot=json.loads(snapshot_raw)
+    match=re.search(r'<!-- worldatlas-work:v1\s*\n([\s\S]*?)\n-->',snapshot.get('body',''))
+    if not match or json.loads(match.group(1)).get('evidence_quality')!=issue:
+        raise ValueError('saved exact scope differs from pinned raw GitHub issue snapshot')
+    if len(issue.get('pins',{}))!=62: raise ValueError('expected all 62 reviewed issue pins')
     ids=issue['subject_ids'] if scope_override is None else scope_override
     if len(ids)!=224 or len(set(ids))!=224 or sorted(ids)!=sorted(issue['subject_ids']):
         raise ValueError('exact issue subject identity differs before output creation')
