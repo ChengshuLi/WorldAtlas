@@ -89,7 +89,7 @@ def workbook_fields(data: bytes) -> dict:
         extracted = {name: rows.get(label) for name, label in FIELDS.items()}
         if extracted["identifier"] is None:
             raise ValueError("metadata identifier missing")
-        plotted = re.search(r"([0-9]+(?:\.[0-9]+)?)\s*m", extracted.pop("plotted_accuracy_text") or "")
+        plotted = re.search(r"accuracy of this data is\s+([0-9]+(?:\.[0-9]+)?)\s*m\b", extracted.pop("plotted_accuracy_text") or "", re.I)
         extracted["plotted_accuracy_m"] = float(plotted.group(1)) if plotted else None
         extracted["lineage_present"] = bool(extracted.pop("lineage_text"))
         extracted["other_constraints_present"] = bool(extracted.pop("other_constraints"))
