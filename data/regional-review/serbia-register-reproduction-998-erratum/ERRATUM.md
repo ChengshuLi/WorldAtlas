@@ -15,6 +15,13 @@ Reproduce two fresh runs from the repository root:
     python3 data/regional-review/serbia-register-reproduction-998-erratum/guarded_reproduce.py --output results/run-YOUR-UNIQUE-ID-A
     python3 data/regional-review/serbia-register-reproduction-998-erratum/guarded_reproduce.py --output results/run-YOUR-UNIQUE-ID-B
 
+To rerun the complete negative controls and two-run comparison without replacing retained receipts, choose one fresh identifier and use it for both commands:
+
+    python3 data/regional-review/serbia-register-reproduction-998-erratum/tests/run_controls.py --run-id YOUR-UNIQUE-ID
+    python3 data/regional-review/serbia-register-reproduction-998-erratum/tests/record_reproducibility.py --run-id YOUR-UNIQUE-ID
+
+Each invocation writes new receipts and run directories using that identifier. Existing evidence is preserved; do not reuse an identifier.
+
 The runner verifies the immutable baseline with the repository's shared helper, so it reads all indexed world parts from Git. Each ordinary part remains below 32 MiB and the complete scan stays within the recorded 256 MiB preparation budget. Output paths are exclusive and must be new.
 
 ## Reproduction results

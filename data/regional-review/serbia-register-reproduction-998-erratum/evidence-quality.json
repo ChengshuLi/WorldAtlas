@@ -725,8 +725,8 @@
     },
     {
       "path": "data/regional-review/serbia-register-reproduction-998-erratum/ERRATUM.md",
-      "bytes": 6572,
-      "sha256": "3d383b1514e564eecdcf9796a32052f72bd83ad931546d2c51361fc0a419e026",
+      "bytes": 7122,
+      "sha256": "5260fe41a227e779145746bc14605c42f8d5fa66cdd3879e52c1a63caeb17056",
       "hash_kind": "file-bytes",
       "role": "research-artifact"
     },
@@ -914,15 +914,15 @@
     },
     {
       "path": "data/regional-review/serbia-register-reproduction-998-erratum/tests/record_reproducibility.py",
-      "bytes": 3891,
-      "sha256": "94855e30c631e733aca36d5ee852eda722cab6d569022130ec3c7609edb2ae34",
+      "bytes": 4273,
+      "sha256": "429da0ac0f8760b6a32b2c829a48b026dd6565e73f0fefbe08dd6390e7aac1dd",
       "hash_kind": "file-bytes",
       "role": "reproduction-code"
     },
     {
       "path": "data/regional-review/serbia-register-reproduction-998-erratum/tests/run_controls.py",
-      "bytes": 3474,
-      "sha256": "4e383e5cb11c4f7cc9db7f5f69b54daece428ce40c8ee7a32fb684667ecf2ee9",
+      "bytes": 3872,
+      "sha256": "f12408cb4e40b842de8ed5e3ace6263c9c261958c8677f362b95ac15df3d2703",
       "hash_kind": "file-bytes",
       "role": "reproduction-code"
     },
@@ -932,11 +932,151 @@
       "sha256": "f6c62f80e6cb560f474899c2c11f6f7d09155b11576dc2bf951b72165eac9c12",
       "hash_kind": "file-bytes",
       "role": "reproduction-code"
+    },
+    {
+      "path": "data/regional-review/serbia-register-reproduction-998-erratum/requirements-reproduction.txt",
+      "bytes": 299,
+      "sha256": "b379f8923b3422fe1fbba6888779ba97eabb851604bff74b1db08f65ea863429",
+      "hash_kind": "file-bytes",
+      "role": "pinned-reproduction-runtime-constraints"
+    },
+    {
+      "path": "data/regional-review/serbia-register-reproduction-998-erratum/controls/generator-controls-20261006-g.json",
+      "bytes": 2338,
+      "sha256": "f61537508c3cffb68db19b6dacbe16a6244f7b80e8e6b1bd51a042bbc39e7f6d",
+      "hash_kind": "file-bytes",
+      "role": "repeatable-control-receipt"
+    },
+    {
+      "path": "data/regional-review/serbia-register-reproduction-998-erratum/controls/guard-controls-20261006-g.json",
+      "bytes": 2439,
+      "sha256": "c0a777c7f8489587402dcdee8c3a133b37850a295b6b3f947318754446cfbc8d",
+      "hash_kind": "file-bytes",
+      "role": "repeatable-control-receipt"
+    },
+    {
+      "path": "data/regional-review/serbia-register-reproduction-998-erratum/controls/reproducibility-20261006-g.json",
+      "bytes": 3967,
+      "sha256": "fb5cd061809e488553c28b4fc2087414c5853f85bcb2060d56f44aced44e37c9",
+      "hash_kind": "file-bytes",
+      "role": "repeatable-control-receipt"
+    },
+    {
+      "path": "data/regional-review/serbia-register-reproduction-998-erratum/results/run-20261006-g-a/parent-completeness.csv",
+      "bytes": 2220,
+      "sha256": "ae335ad61055051f35ff56098dc7631b46c4b58994f98c6b498d98053750ded0",
+      "hash_kind": "file-bytes",
+      "role": "repeatable-reproduction-output"
+    },
+    {
+      "path": "data/regional-review/serbia-register-reproduction-998-erratum/results/run-20261006-g-a/parent-completeness.json",
+      "bytes": 10658,
+      "sha256": "788186b712ee49effc7fa9c7ea46faebbc07212506c8e9231d85b7b2be66c636",
+      "hash_kind": "file-bytes",
+      "role": "repeatable-reproduction-output"
+    },
+    {
+      "path": "data/regional-review/serbia-register-reproduction-998-erratum/results/run-20261006-g-a/parent-summary.json",
+      "bytes": 5499,
+      "sha256": "f2be5d3cec2834159dc6bdc06af17f1916c4dac188c0ebf1630d78bd4afaf358",
+      "hash_kind": "file-bytes",
+      "role": "repeatable-reproduction-output"
+    },
+    {
+      "path": "data/regional-review/serbia-register-reproduction-998-erratum/results/run-20261006-g-a/reproduction-summary.json",
+      "bytes": 347,
+      "sha256": "73a34c592f5b44d045006261213115c2f096641c345bef5e92dd64159ed39909",
+      "hash_kind": "file-bytes",
+      "role": "repeatable-reproduction-output"
+    },
+    {
+      "path": "data/regional-review/serbia-register-reproduction-998-erratum/results/run-20261006-g-a/scoped-city-urban-municipalities.csv",
+      "bytes": 5140,
+      "sha256": "03423935ae3c810aa6b2e6f98e44f6459b4d83fba5c1a0e12cadc79e705d9df1",
+      "hash_kind": "file-bytes",
+      "role": "repeatable-reproduction-output"
+    },
+    {
+      "path": "data/regional-review/serbia-register-reproduction-998-erratum/results/run-20261006-g-a/sors-2017-roster-normalized.csv",
+      "bytes": 29508,
+      "sha256": "0690c7732fc3ee73fad9c3438c7a60e707837ab51bc724559842c9e362420524",
+      "hash_kind": "file-bytes",
+      "role": "repeatable-reproduction-output"
+    },
+    {
+      "path": "data/regional-review/serbia-register-reproduction-998-erratum/results/run-20261006-g-a/sors-current-roster-normalized.csv",
+      "bytes": 18126,
+      "sha256": "92286089f3d21d2d9ab7cf93c2e68f37c374cd8aadf4a21763cbbcc69d00d6c4",
+      "hash_kind": "file-bytes",
+      "role": "repeatable-reproduction-output"
+    },
+    {
+      "path": "data/regional-review/serbia-register-reproduction-998-erratum/results/run-20261006-g-a/subject-crosswalk.csv",
+      "bytes": 58129,
+      "sha256": "a5a01d678c51cf273aa5afd8194d10c1b103176f8fe30ac50d0ccc9e69ec2751",
+      "hash_kind": "file-bytes",
+      "role": "repeatable-reproduction-output"
+    },
+    {
+      "path": "data/regional-review/serbia-register-reproduction-998-erratum/results/run-20261006-g-b/parent-completeness.csv",
+      "bytes": 2220,
+      "sha256": "ae335ad61055051f35ff56098dc7631b46c4b58994f98c6b498d98053750ded0",
+      "hash_kind": "file-bytes",
+      "role": "repeatable-reproduction-output"
+    },
+    {
+      "path": "data/regional-review/serbia-register-reproduction-998-erratum/results/run-20261006-g-b/parent-completeness.json",
+      "bytes": 10658,
+      "sha256": "788186b712ee49effc7fa9c7ea46faebbc07212506c8e9231d85b7b2be66c636",
+      "hash_kind": "file-bytes",
+      "role": "repeatable-reproduction-output"
+    },
+    {
+      "path": "data/regional-review/serbia-register-reproduction-998-erratum/results/run-20261006-g-b/parent-summary.json",
+      "bytes": 5499,
+      "sha256": "f2be5d3cec2834159dc6bdc06af17f1916c4dac188c0ebf1630d78bd4afaf358",
+      "hash_kind": "file-bytes",
+      "role": "repeatable-reproduction-output"
+    },
+    {
+      "path": "data/regional-review/serbia-register-reproduction-998-erratum/results/run-20261006-g-b/reproduction-summary.json",
+      "bytes": 347,
+      "sha256": "73a34c592f5b44d045006261213115c2f096641c345bef5e92dd64159ed39909",
+      "hash_kind": "file-bytes",
+      "role": "repeatable-reproduction-output"
+    },
+    {
+      "path": "data/regional-review/serbia-register-reproduction-998-erratum/results/run-20261006-g-b/scoped-city-urban-municipalities.csv",
+      "bytes": 5140,
+      "sha256": "03423935ae3c810aa6b2e6f98e44f6459b4d83fba5c1a0e12cadc79e705d9df1",
+      "hash_kind": "file-bytes",
+      "role": "repeatable-reproduction-output"
+    },
+    {
+      "path": "data/regional-review/serbia-register-reproduction-998-erratum/results/run-20261006-g-b/sors-2017-roster-normalized.csv",
+      "bytes": 29508,
+      "sha256": "0690c7732fc3ee73fad9c3438c7a60e707837ab51bc724559842c9e362420524",
+      "hash_kind": "file-bytes",
+      "role": "repeatable-reproduction-output"
+    },
+    {
+      "path": "data/regional-review/serbia-register-reproduction-998-erratum/results/run-20261006-g-b/sors-current-roster-normalized.csv",
+      "bytes": 18126,
+      "sha256": "92286089f3d21d2d9ab7cf93c2e68f37c374cd8aadf4a21763cbbcc69d00d6c4",
+      "hash_kind": "file-bytes",
+      "role": "repeatable-reproduction-output"
+    },
+    {
+      "path": "data/regional-review/serbia-register-reproduction-998-erratum/results/run-20261006-g-b/subject-crosswalk.csv",
+      "bytes": 58129,
+      "sha256": "a5a01d678c51cf273aa5afd8194d10c1b103176f8fe30ac50d0ccc9e69ec2751",
+      "hash_kind": "file-bytes",
+      "role": "repeatable-reproduction-output"
     }
   ],
   "methods": [
     {
-      "id": "immutable-roster-and-source-guard",
+      "id": "serbia-immutable-source-and-scope-controls-v1",
       "kind": "source",
       "helper_version": "worldatlas-evidence-preparation-v1",
       "description": "Validate exact issue subject identity and all 35 complete packet/baseline input byte pins; then check source feature/name relations and actual Atlas subject containing files.",
@@ -6293,7 +6433,7 @@
   ],
   "validation": [
     {
-      "method_id": "immutable-roster-and-source-guard",
+      "method_id": "serbia-immutable-source-and-scope-controls-v1",
       "kind": "source",
       "outcome": "passed",
       "evidence_path": "data/regional-review/serbia-register-reproduction-998-erratum/controls/guard-controls-20261006-final.json"

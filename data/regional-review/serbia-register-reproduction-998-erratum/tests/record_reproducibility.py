@@ -7,7 +7,10 @@ import hashlib
 import importlib.util
 import io
 import json
+import argparse
+from datetime import datetime, timezone
 from pathlib import Path
+import re
 import sys
 
 PACKET = Path(__file__).resolve().parents[1]
@@ -16,10 +19,16 @@ guard = importlib.util.module_from_spec(spec)
 sys.modules[spec.name] = guard
 spec.loader.exec_module(guard)
 
-first_path, second_path = "results/run-20261006-e", "results/run-20261006-f"
-receipt_path = PACKET / "controls" / "reproducibility-20261006-final.json"
-if receipt_path.exists() or receipt_path.is_symlink():
-    raise SystemExit("reproducibility receipt already exists; preserve it and choose a new date/version")
+parser = argparse.ArgumentParser()
+parser.add_argument("--run-id", default=datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ"))
+args = parser.parse_args()
+if not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,39}", args.run_id):
+    raise SystemExit("--run-id must be a short lowercase letters/numbers/hyphens identifier")
+first_path, second_path = f"results/run-{args.run_id}-a", f"results/run-{args.run_id}-b"
+source_receipt_path = PACKET / "controls" / f"guard-controls-{args.run_id}.json"
+if not source_receipt_path.is_file() or source_receipt_path.is_symlink():
+    raise SystemExit(f"run source controls first with --run-id {args.run_id}")
+receipt_path = PACKET / "controls" / f"reproducibility-{args.run_id}.json"
 with contextlib.redirect_stdout(io.StringIO()):
     first = guard.run_reproduction(first_path)
     second = guard.run_reproduction(second_path)
@@ -58,7 +67,7 @@ receipt_path.parent.mkdir(parents=True, exist_ok=True)
 with receipt_path.open("x", encoding="utf-8") as stream:
     json.dump(result, stream, ensure_ascii=False, indent=2)
     stream.write("\n")
-guard_controls = json.loads((PACKET / "controls" / "guard-controls-20261006-final.json").read_text())
+guard_controls = json.loads(source_receipt_path.read_text())
 generator_controls = {
     "method_id": "serbia-guarded-two-run-reproduction-v1",
     "kind": "generator",
@@ -68,9 +77,9 @@ generator_controls = {
     "positive_control": {"paths": [first_path, second_path], "files_per_run": len(first["files"]),
                          "historical_exact_file_matches": len(exact)},
     "negative_controls": guard_controls["controls"],
-    "source_control_receipt_sha256": hashlib.sha256((PACKET / "controls" / "guard-controls-20261006-final.json").read_bytes()).hexdigest(),
+    "source_control_receipt_sha256": hashlib.sha256(source_receipt_path.read_bytes()).hexdigest(),
 }
-generator_path = PACKET / "controls" / "generator-controls-20261006-final.json"
+generator_path = PACKET / "controls" / f"generator-controls-{args.run_id}.json"
 with generator_path.open("x", encoding="utf-8") as stream:
     json.dump(generator_controls, stream, ensure_ascii=False, indent=2)
     stream.write("\n")
