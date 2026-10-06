@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import {prepareNativeRegressionInputs,NATIVE_REGRESSION_COMMITS} from '../scripts/run-integration-tests.mjs';
 function fixture({present=[],fetchFails=false,fetchIncomplete=false}={}){
  const available=new Set(present),calls=[];
@@ -27,5 +28,12 @@ test('unpublished evidence and absent native implementation do not fetch or insp
 test('failed or incomplete frozen input fetch cannot establish regression coverage',()=>{
  for(const options of [{fetchFails:true},{fetchIncomplete:true}]){
   const f=fixture(options);assert.throws(()=>prepareNativeRegressionInputs('full',f.options),/fetch failed|remain unavailable/);
+ }
+});
+
+test('complete archived priority artifacts register their immutable input and execution vintages',()=>{
+ const report=JSON.parse(fs.readFileSync('coordination/engineering/physical-gap-priorities-1005-20261006-local20/priorities-v2/report.json'));
+ for(const commit of [report.input_commit,report.executed_code_commit,report.original_native_commit]){
+  assert.ok(NATIVE_REGRESSION_COMMITS.includes(commit),`Shallow CI must restore ${commit}`);
  }
 });
