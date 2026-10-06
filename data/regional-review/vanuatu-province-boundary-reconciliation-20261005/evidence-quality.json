@@ -72,8 +72,55 @@
       "gb:VUT:ADM1:32282491B8417950609019": "data/geography/part-28.json"
     }
   },
+  "change_receipts": [
+    {
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/README.md",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/evidence-quality.json",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduce.py",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/validate.py",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/source-inventory.json",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/checks/positive-control.json",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/checks/negative-control.json",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/checks/reproducibility.json",
+      "previous_path": null,
+      "status": "added"
+    }
+  ],
   "commands": [
-    "PYTHONPATH=scripts:scripts/evidence python3 data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduce.py",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 data/regional-review/vanuatu-province-boundary-reconciliation-20261005/validate.py",
     "node scripts/evidence-quality.mjs data/regional-review/vanuatu-province-boundary-reconciliation-20261005/evidence-quality.json",
     "node --test test/evidence-quality.test.mjs",
     "python test/evidence-geography.py && python test/ellipsoidal-area.py"
@@ -121,21 +168,152 @@
   "lane": "geography",
   "methods": [
     {
-      "description": "Load immutable pinned baseline and verify exactly six scoped IDs appear once in the indexed world partition, then check source native IDs and names and deliberate absent-ID/wrong-name negative controls.",
+      "description": "Verify exact indexed six-subject roster and matching source native IDs/names, plus absent-ID and wrong-name controls.",
       "id": "identity-and-scope",
-      "software": "Python 3.13 bundled runtime; repository immutable.py",
+      "kind": "code",
+      "software": "Python 3.13; repository immutable.py",
       "units": "IDs/features"
     },
     {
       "area_method": "WGS84 straight-source-edge ellipsoidal integral",
       "axis_order": "longitude-latitude",
       "crs": "EPSG:4326",
-      "description": "Canonicalize source and Atlas MultiPolygon geometries using shared repository geography helper without repair; calculate intersection/union Jaccard and symmetric difference.",
-      "distance_method": "WGS84 inverse geodesic (not used in this area screen)",
+      "description": "Canonicalize source and Atlas MultiPolygon geometries using shared repository helper without repair; calculate intersection/union Jaccard and symmetric difference.",
+      "distance_method": "WGS84 inverse geodesic",
+      "helper_version": "worldatlas-evidence-geometry-v1",
       "id": "geodesic-overlap-screen",
       "kind": "geography",
       "software": "Python 3.13; Shapely 2.1.2; pyproj 3.7.2; repository geometry.py and ellipsoidal_area.py",
       "units": "ratio and km2"
+    },
+    {
+      "description": "Run the baseline-only reproduction twice and compare whole-file output hashes.",
+      "id": "deterministic-reproduction",
+      "kind": "code",
+      "software": "Python 3.13 bundled runtime",
+      "units": "SHA-256 byte digests"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "json_pointer": "/subjects/0/jaccard",
+      "metric_id": "shefa-province:jaccard",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/0/symmetric_difference_km2",
+      "metric_id": "shefa-province:symmetric-difference",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/0/atlas_area_km2",
+      "metric_id": "shefa-province:atlas-area",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/0/source_area_km2",
+      "metric_id": "shefa-province:source-area",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/1/jaccard",
+      "metric_id": "malampa:jaccard",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/1/symmetric_difference_km2",
+      "metric_id": "malampa:symmetric-difference",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/1/atlas_area_km2",
+      "metric_id": "malampa:atlas-area",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/1/source_area_km2",
+      "metric_id": "malampa:source-area",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/2/jaccard",
+      "metric_id": "tafea:jaccard",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/2/symmetric_difference_km2",
+      "metric_id": "tafea:symmetric-difference",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/2/atlas_area_km2",
+      "metric_id": "tafea:atlas-area",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/2/source_area_km2",
+      "metric_id": "tafea:source-area",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/3/jaccard",
+      "metric_id": "sanma:jaccard",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/3/symmetric_difference_km2",
+      "metric_id": "sanma:symmetric-difference",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/3/atlas_area_km2",
+      "metric_id": "sanma:atlas-area",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/3/source_area_km2",
+      "metric_id": "sanma:source-area",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/4/jaccard",
+      "metric_id": "penama:jaccard",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/4/symmetric_difference_km2",
+      "metric_id": "penama:symmetric-difference",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/4/atlas_area_km2",
+      "metric_id": "penama:atlas-area",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/4/source_area_km2",
+      "metric_id": "penama:source-area",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/5/jaccard",
+      "metric_id": "torba:jaccard",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/5/symmetric_difference_km2",
+      "metric_id": "torba:symmetric-difference",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/5/atlas_area_km2",
+      "metric_id": "torba:atlas-area",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
+    },
+    {
+      "json_pointer": "/subjects/5/source_area_km2",
+      "metric_id": "torba:source-area",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduction.json"
     }
   ],
   "metrics": [
@@ -334,16 +512,22 @@
   ],
   "outputs": [
     {
-      "bytes": 5358,
+      "bytes": 5463,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/README.md",
-      "sha256": "909c0fe9f3aaed2a538a1a31df360ad793bea6379be5724e091c255d31ebdfcb"
+      "sha256": "b786549e11b15ed9704b61d1b871c2d0c803dcbd619cf048d938ef84eca5c5b8"
     },
     {
       "bytes": 7222,
       "hash_kind": "file-bytes",
       "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduce.py",
       "sha256": "07376c68f0a79c69c2b30290c0d8e455f0e56f74d06f46a45bb814aed87276c9"
+    },
+    {
+      "bytes": 2738,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/validate.py",
+      "sha256": "a0a949eeaf60cdd68e69c91a51bd28b5b1cbdaff64de5d49166a23c16560189f"
     },
     {
       "bytes": 8967,
@@ -356,6 +540,24 @@
       "hash_kind": "file-bytes",
       "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/source-inventory.json",
       "sha256": "c296b2029a30c23aaf3f1a90456da3ad978c71cc6eddac6faa60a518a4615775"
+    },
+    {
+      "bytes": 652,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/checks/positive-control.json",
+      "sha256": "2bc367c267b28553a58ba86b7a7ec12f04d6c9876a2d42dddae6a9214d31672f"
+    },
+    {
+      "bytes": 325,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/checks/negative-control.json",
+      "sha256": "cee53a60a796484686281489f747f50ee96f978969d7b12919b4c20b0aff8f03"
+    },
+    {
+      "bytes": 429,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/checks/reproducibility.json",
+      "sha256": "93e4187448ea6cb2999483e33c63412aec0459a06c6c42f24e63979db1270551"
     }
   ],
   "sources": [
@@ -774,6 +976,20 @@
       "text": "Torba source area diagnostic: 856.028 km2; not a correctness criterion.",
       "unit": "km2",
       "value": 856.0280001321944
+    }
+  ],
+  "validation": [
+    {
+      "evidence_path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/checks/positive-control.json",
+      "kind": "positive-control",
+      "method_id": "geodesic-overlap-screen",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/checks/negative-control.json",
+      "kind": "negative-control",
+      "method_id": "geodesic-overlap-screen",
+      "outcome": "passed"
     }
   ],
   "version": 1,

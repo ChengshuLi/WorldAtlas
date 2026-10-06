@@ -31,10 +31,10 @@ Obtain current province-defining Orders and amendments, subordinate Orders where
 
 ## Reproduction
 
-Run from repository root with bundled Python dependencies:
+Run from repository root with Python dependencies including Shapely 2 and pyproj:
 
 ```sh
-PYTHONPATH=scripts:scripts/evidence python3 data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduce.py
+python3 data/regional-review/vanuatu-province-boundary-reconciliation-20261005/validate.py
 ```
 
-The script reads only commit `a32ae163473a42ed28d7bedf7e9930414beb54f8`, checks explicit whole-file SHA-256/byte pins, verifies the exact six-subject index roster and native source ID/name controls, then computes the geometry screen with the shared helpers. It writes the candidate `reproduction.json`. Every subject remains unapproved and unresolved on exact boundaries/completeness.
+The validator runs `reproduce.py` twice. That script reads only commit `a32ae163473a42ed28d7bedf7e9930414beb54f8`, checks explicit whole-file SHA-256/byte pins, verifies the exact six-subject index roster and native source ID/name controls, then computes the geometry screen with the shared helpers. The validator compares output hashes and writes separate positive, negative and reproducibility receipts under `checks/`. Every subject remains unapproved and unresolved on exact boundaries/completeness.
