@@ -7,6 +7,7 @@ import io
 import json
 import struct
 import subprocess
+import sys
 import zipfile
 from pathlib import Path
 
@@ -223,13 +224,13 @@ def main():
     (PACKET / "reproduction-summary.json").write_bytes(summary_bytes)
 
     positive = {
-        "method_id": "county-product-source-crosswalk", "kind": "measurement", "outcome": "passed",
+        "method_id": "county-product-source-crosswalk", "kind": "positive-control", "outcome": "passed",
         "evidence_path": "data/regional-review/south-atlantic-source-reuse-basis-429/positive-control.json",
         "subject_count": 268, "matched_source_ids": 268, "unique_census_name_state_matches": 268,
         "assertion": "Every exact issue subject resolves once in pinned Atlas geography parts, once to its pinned source shapeID, and once by source name plus state to the retrieved 2018 Census CBF.",
     }
     negative = {
-        "method_id": "county-product-source-crosswalk", "kind": "measurement", "outcome": "passed",
+        "method_id": "county-product-source-crosswalk", "kind": "negative-control", "outcome": "passed",
         "evidence_path": "data/regional-review/south-atlantic-source-reuse-basis-429/negative-control.json",
         "duplicate_subject_rejected": len(set(expected + [expected[0]])) != len(expected + [expected[0]]),
         "unknown_source_id_rejected": "NOT-A-SOURCE-ID" not in feature_map,
@@ -245,9 +246,15 @@ def main():
 
     generated = ["baseline-input-digests.json", "subject-source-crosswalk.jsonl",
                  "reproduction-summary.json", "positive-control.json", "negative-control.json"]
-    print(json.dumps({"status": "passed", "subject_count": 268,
-                      "outputs": {name: sha256((PACKET / name).read_bytes()) for name in generated}},
-                     sort_keys=True, separators=(",", ":")))
+    receipt = {"status": "passed", "subject_count": 268,
+               "outputs": {name: sha256((PACKET / name).read_bytes()) for name in generated}}
+    receipt_bytes = (json.dumps(receipt, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")
+    if len(sys.argv) > 1:
+        destination = (PACKET / sys.argv[1]).resolve()
+        if PACKET.resolve() not in destination.parents or destination.suffix != ".json":
+            raise ValueError("Run receipt must be a JSON path inside this packet")
+        destination.write_bytes(receipt_bytes)
+    print(receipt_bytes.decode("utf-8"), end="")
 
 
 if __name__ == "__main__":
