@@ -61,5 +61,19 @@ receipt_file.unlink()
 try:reader_context['checked'](receipt_pin)
 except AssertionError:pass
 else:raise AssertionError('actual verifier accepted missing source receipt')
-result={'outcome':'passed','actual_producer_sha256':sha(code),'actual_control_sha256':sha(pathlib.Path(__file__).read_bytes()),'controls':['whole component original pointset hashes','full source polygon hole retained','positive source coverage retains unknown surface/ownership/cause','zero-area boundary contact retained','invalid source feature remains explicit unknown','actual input reader rejects changed whole source bytes','actual input reader rejects omitted alias','retained actual numerical inconsistency remains unknown','zero and positive consistent diagnostics remain consistent','actual verifier rejects changed and missing source receipts'],'units':'literal source coordinate diagnostics and whole-byte custody; no geographic area/distance or water approval','row_statuses':{i:v['status']for i,v in rows.items()}}
+# Execute the actual full-family loading loop and its complete-roster assertion.
+family_loop=next(n for n in tree.body if isinstance(n,ast.For) and isinstance(n.target,ast.Name) and n.target.id=='pin' and isinstance(n.iter,ast.Subscript) and isinstance(n.iter.value,ast.Subscript) and isinstance(n.iter.value.value,ast.Name) and n.iter.value.value.id=='report')
+family_assert=tree.body[tree.body.index(family_loop)+1];assert isinstance(family_assert,ast.Assert)
+family_block=compile(ast.Module(body=[family_loop,family_assert],type_ignores=[]),'actual-complete-family-reader','exec')
+def family_fixture(records,expected):
+ context={'report':{'outputs':{'current-batches':[{'path':'fixture'}]}},'HEAD':'fixture','git':lambda *_:records,'decode':lambda body,*_:body,'family_ids':{'family'},'targets':{},'families':[],'scope':{'complete_component_ids':expected},'sha':sha,'canon':canon}
+ exec(family_block,context)
+ return context
+full={'id':'family','component_ids':['c1','c2'],'component_count':2,'component_ids_sha256':sha(canon(['c1','c2']))}
+assert set(family_fixture([full],['c1','c2'])['targets'])=={'c1','c2'}
+for records,expected in [([dict(full,component_ids=['c1','c1'])],['c1','c2']),([full],['c1']),([full,full],['c1','c2'])]:
+ try:family_fixture(records,expected)
+ except AssertionError:pass
+ else:raise AssertionError('actual family reader accepted duplicate or omitted members')
+result={'outcome':'passed','actual_producer_sha256':sha(code),'actual_control_sha256':sha(pathlib.Path(__file__).read_bytes()),'controls':['whole component original pointset hashes','full source polygon hole retained','positive source coverage retains unknown surface/ownership/cause','zero-area boundary contact retained','invalid source feature remains explicit unknown','actual input reader rejects changed whole source bytes','actual input reader rejects omitted alias','retained actual numerical inconsistency remains unknown','zero and positive consistent diagnostics remain consistent','actual verifier rejects changed and missing source receipts','actual family reader accepts complete roster','actual family reader rejects duplicated component members','actual family reader rejects omitted scope members','actual family reader rejects duplicated family records'],'units':'literal source coordinate diagnostics and whole-byte custody; no geographic area/distance or water approval','row_statuses':{i:v['status']for i,v in rows.items()}}
 (out/'positive-control.json').write_bytes(canon(result));(out/'negative-control.json').write_bytes(canon(result));print(json.dumps(result))
