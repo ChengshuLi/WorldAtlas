@@ -495,7 +495,7 @@
       "axis_order": "longitude-latitude",
       "crs": "EPSG:4326",
       "description": "Read all 34 immutable baseline data/geography/part-N.json shards, require a stored representative point for each feature, and screen WGS84 inverse-geodesic distances from the official Salas y Gómez decree coordinate. Record all points within 2,500 km and the ten nearest other features with source tier, role, parent, vintage, coordinates and shard. The method computes no area for this point-only screen. It is not polygon adjacency or maritime jurisdiction.",
-      "distance_method": "WGS84 inverse geodesic between stored representative points",
+      "distance_method": "WGS84 inverse geodesic",
       "helper_version": "worldatlas-evidence-geometry-v1",
       "id": "neighbor-point-screen",
       "kind": "geography",
