@@ -6,11 +6,16 @@ def sha(b):return hashlib.sha256(b).hexdigest()
 p=argparse.ArgumentParser();p.add_argument('--run',required=True);p.add_argument('--out',required=True);a=p.parse_args();root=pathlib.Path(__file__).parent;run=pathlib.Path(a.run)
 scope=json.loads((root/'scope.json').read_bytes());expected=json.loads(gzip.decompress((root/'historical-original-rows.json.gz').read_bytes()));by_id={r['component']:r for r in expected};assert len(by_id)==len(expected)
 report=json.loads((run/'receipt.json').read_bytes())
+def checked_bytes(pin):
+ path=run/pin['path'];assert not pathlib.Path(pin['path']).is_absolute() and '..' not in pathlib.Path(pin['path']).parts
+ assert path.is_file() and not path.is_symlink();body=path.read_bytes();assert len(body)==pin['bytes'] and sha(body)==pin['sha256'] and len(body)<=32*1024*1024
+ return body
 def checked(pin):
- path=run/pin['path'];assert path.is_file() and not path.is_symlink();body=path.read_bytes();assert len(body)==pin['bytes'] and sha(body)==pin['sha256']
+ body=checked_bytes(pin)
  raw=gzip.decompress(body) if body[:2]==b'\x1f\x8b' else body
  if 'decoded_sha256' in pin:assert len(raw)==pin['decoded_bytes'] and sha(raw)==pin['decoded_sha256']
  assert max(len(raw),len(body))<=32*1024*1024;return json.loads(raw)
+source_receipt=checked(report['source_input_receipt']);assert source_receipt['producer_commit']==report['producer_commit'] and source_receipt['cohort_sha256']==report['cohort_sha256'];assert sorted(v['source_id']for v in source_receipt['source_products'])==scope['source_ids']
 index=checked(report['source_union_object_index']);objects={};scientific_pins=list(report['outputs'])+[report['source_input_receipt'],report['source_union_object_index']]
 for pin in index['shards']:
  scientific_pins.append(pin)
@@ -20,7 +25,7 @@ for h,binding in index['objects'].items():
  if binding['codec']=='canonical-json-exact-byte-fragments':
   bodies=[]
   for pin in binding['parts']:
-   body=(run/pin['path']).read_bytes();assert len(body)==pin['bytes'] and sha(body)==pin['sha256'];bodies.append(body);scientific_pins.append(pin)
+   body=checked_bytes(pin);bodies.append(body);scientific_pins.append(pin)
   raw=b''.join(bodies);assert sha(raw)==h;objects[h]=json.loads(raw)
  assert sha(canon(objects[h]))==h and len(canon(objects[h]))==binding['decoded_bytes']
 assert set(objects)==set(index['objects'])

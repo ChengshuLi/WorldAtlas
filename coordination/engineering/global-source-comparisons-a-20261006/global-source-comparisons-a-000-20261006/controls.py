@@ -48,5 +48,18 @@ assert len(diagnostic)==3
 fixture_record=json.loads(gzip.decompress((root/'historical-consistency-fixture.json.gz').read_bytes()));actual=fixture_record['full_record'];assert sha(canon(actual))==fixture_record['original_binding']['full_row_sha256']
 for label,row,expected in [('retained-real-disagreement',actual,True),('literal-zero-consistent',{'source_union_intersection':{'planar_area_coordinate_units_squared':0},'feature_intersections':[{'intersection':{'planar_area_coordinate_units_squared':0}}]},False),('literal-positive-consistent',{'source_union_intersection':{'planar_area_coordinate_units_squared':1},'feature_intersections':[{'intersection':{'planar_area_coordinate_units_squared':1}}]},False)]:
  context={'row':row,'unknown':[],'i':label};exec(compile(ast.Module(body=diagnostic,type_ignores=[]),'actual-consistency-branch','exec'),context);assert bool(context['unknown'])==expected
-result={'outcome':'passed','actual_producer_sha256':sha(code),'actual_control_sha256':sha(pathlib.Path(__file__).read_bytes()),'controls':['whole component original pointset hashes','full source polygon hole retained','positive source coverage retains unknown surface/ownership/cause','zero-area boundary contact retained','invalid source feature remains explicit unknown','actual input reader rejects changed whole source bytes','actual input reader rejects omitted alias','retained actual numerical inconsistency remains unknown','zero and positive consistent diagnostics remain consistent'],'units':'literal source coordinate diagnostics and whole-byte custody; no geographic area/distance or water approval','row_statuses':{i:v['status']for i,v in rows.items()}}
+# Actual verifier ordinary reader rejects changed and missing source receipts.
+byte_reader=next(n for n in verifier.body if isinstance(n,ast.FunctionDef) and n.name=='checked_bytes');json_reader=next(n for n in verifier.body if isinstance(n,ast.FunctionDef) and n.name=='checked')
+reader_context={'run':out,'pathlib':pathlib,'sha':sha,'gzip':gzip,'json':json};exec(compile(ast.Module(body=[byte_reader,json_reader],type_ignores=[]),'actual-verifier-readers','exec'),reader_context)
+receipt_body=gzip.compress(canon({'retained-source-receipt':True}),mtime=0);receipt_file=out/'source-receipt-fixture.json.gz';receipt_file.write_bytes(receipt_body);receipt_pin={'path':receipt_file.name,'bytes':len(receipt_body),'sha256':sha(receipt_body)}
+assert reader_context['checked'](receipt_pin)=={'retained-source-receipt':True}
+receipt_file.write_bytes(receipt_body[:-1])
+try:reader_context['checked'](receipt_pin)
+except AssertionError:pass
+else:raise AssertionError('actual verifier accepted changed source receipt')
+receipt_file.unlink()
+try:reader_context['checked'](receipt_pin)
+except AssertionError:pass
+else:raise AssertionError('actual verifier accepted missing source receipt')
+result={'outcome':'passed','actual_producer_sha256':sha(code),'actual_control_sha256':sha(pathlib.Path(__file__).read_bytes()),'controls':['whole component original pointset hashes','full source polygon hole retained','positive source coverage retains unknown surface/ownership/cause','zero-area boundary contact retained','invalid source feature remains explicit unknown','actual input reader rejects changed whole source bytes','actual input reader rejects omitted alias','retained actual numerical inconsistency remains unknown','zero and positive consistent diagnostics remain consistent','actual verifier rejects changed and missing source receipts'],'units':'literal source coordinate diagnostics and whole-byte custody; no geographic area/distance or water approval','row_statuses':{i:v['status']for i,v in rows.items()}}
 (out/'positive-control.json').write_bytes(canon(result));(out/'negative-control.json').write_bytes(canon(result));print(json.dumps(result))
