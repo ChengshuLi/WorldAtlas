@@ -226,6 +226,15 @@ def verify_snapshot(snapshot, files: Mapping[str, bytes], *, require_outputs=Tru
                 raise ValueError(f'Malformed tile output descriptor: {tile_id}')
             if not isinstance(output['role'], str) or not output['role']:
                 raise ValueError(f'Missing tile output role: {tile_id}')
+            expected_closure_role = f"tile-output:{tile_id}:{output['role']}"
+            if output['source_commit'] != snapshot['snapshot_id']:
+                raise ValueError(f'Tile output is not bound to the snapshot execution commit: {tile_id}')
+            closure_matches = [row for row in snapshot['files']
+                               if row['role'] == expected_closure_role
+                               and row['source_commit'] == snapshot['snapshot_id']
+                               and row['file'] == output['file']]
+            if len(closure_matches) != 1:
+                raise ValueError(f'Tile output lacks its exact execution-bound closure role: {tile_id}')
             key = _read_verified(files, output['source_commit'], output['file'],
                                  f'tile {tile_id} output', allowed_commits)
             if key not in paths:

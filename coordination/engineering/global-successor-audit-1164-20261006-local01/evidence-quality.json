@@ -81,26 +81,26 @@
   "outputs": [
     {
       "path": "scripts/physical_gap_successor.py",
-      "bytes": 21889,
-      "sha256": "dfba5f363316ed5dd8414293353b079d1de7188259dce21866d48f33d9cab7b7",
+      "bytes": 22571,
+      "sha256": "6b2f7b23a0ac3b9640384c62771e7069b13d530ff8ebe39931df13b35c91e599",
       "hash_kind": "file-bytes"
     },
     {
       "path": "test/physical-gap-successor.py",
-      "bytes": 23465,
-      "sha256": "91737f1bc37e86d3c8f142e64384530ab13ac8cc6a80a1adc1f82d6cd5bf0a6a",
+      "bytes": 25145,
+      "sha256": "e85cdb136b0a27e69bd0d663e228006f983c74731f0c271a5dbc5da5c92675bc",
       "hash_kind": "file-bytes"
     },
     {
       "path": "test/physical-gap-successor.test.mjs",
       "bytes": 507,
-      "sha256": "404a3eeb5d51aa9ec91cc9e1748484e29b6c346d06b5dec2ae8a7ea3fb5be01f",
+      "sha256": "a1578d1d025ca187fa0a36b9a4bf63826d987e48640aa2b0ba3bc3b1e69eb0f4",
       "hash_kind": "file-bytes"
     },
     {
       "path": "docs/PHYSICAL_GAP_SUCCESSORS.md",
-      "bytes": 3695,
-      "sha256": "1ececa1956cda345c0ba1cb08b144796083f41094afc0720a4166128be011ed9",
+      "bytes": 4075,
+      "sha256": "81cb6b067dc3c1481ee7917055ec68d1fd65414d1c26babde3ead9b8e2d7192d",
       "hash_kind": "file-bytes"
     },
     {
@@ -111,8 +111,8 @@
     },
     {
       "path": "coordination/engineering/global-successor-audit-1164-20261006-local01/validation.txt",
-      "bytes": 1872,
-      "sha256": "5534f337c6b6b62d4609cc8cee4af8bc1deb0d0a7213b96c82624e1464caf5a0",
+      "bytes": 1926,
+      "sha256": "fd2884a5811a116efaeb4e2c42a42b8b6dc9b04ecb6fb8d970d23e56dbbe0b41",
       "hash_kind": "file-bytes"
     }
   ],
@@ -135,8 +135,8 @@
     "geographic_approval": "not-requested"
   },
   "commands": [
-    "python3 -B test/physical-gap-successor.py (Python 3.12.14): 32 passed",
-    "node --test test/physical-gap-successor.test.mjs (Node 24.19.0, Python 3.12.14): 1 passed; wrapper runs 32 controls",
+    "python3 -B test/physical-gap-successor.py (Python 3.12.14): 34 passed",
+    "node --test test/physical-gap-successor.test.mjs (Node 24.19.0, Python 3.12.14): 1 passed; wrapper runs 34 controls",
     "git diff --check: passed",
     "npm test: attempted in sparse checkout; not a valid complete-suite result due missing installed dependencies and excluded data/source paths"
   ],

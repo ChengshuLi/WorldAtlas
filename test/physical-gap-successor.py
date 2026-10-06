@@ -47,10 +47,10 @@ def snapshot(commit, *, geometry='a' * 64, order=('land:1',), status='checked', 
                     'native-owner.json':'native_owner', 'tiles.json':'tile-roster',
                     'geometry/land-1.wkb':'geometry:land:1', 'tile/candidates.json':'tile-output:tile-0:candidates',
                     'tile/residues.json':'tile-output:tile-0:residues', 'metadata/land-1.json':'member-metadata:land:1',
-                    'tile/physical-shore.json':'tile-output:tile-0:physical-shore',
-                    'tile/missing-digest.txt':'tile-output:tile-0:missing-digest',
-                    'tile/water-diagnostics.json':'tile-output:tile-0:water-diagnostics',
-                    'tile/blocked.json':'tile-output:tile-0:blocked'}
+                    'tile/physical-shore.json':'tile-output:tile-0:physical_shore',
+                    'tile/missing-digest.txt':'tile-output:tile-0:missing_geometry_sha256',
+                    'tile/water-diagnostics.json':'tile-output:tile-0:invalid_water_diagnostics',
+                    'tile/blocked.json':'tile-output:tile-0:blocked_sources'}
     value = {'version': VERSION, 'snapshot_id': commit, 'source_commits': [commit],
              'files': [{'source_commit': commit, 'role': role_by_name[name],
                         'file': descriptor(name, data)} for name, data in raw.items()],
@@ -125,6 +125,34 @@ class SuccessorReuseControls(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'Executed code and tile outputs'):
             verify_snapshot(self.old, self.old_files)
 
+    def test_foreign_output_commit_and_role_laundering_are_rejected(self):
+        foreign = 'f' * 40
+        snapshot_value = copy.deepcopy(self.old)
+        payloads = dict(self.old_files)
+        snapshot_value['source_commits'] = [foreign]
+        for row in snapshot_value['files']:
+            if row['role'] == 'source:world-index':
+                old_key = '1' * 40 + ':' + row['file']['path']
+                payloads[foreign + ':' + row['file']['path']] = payloads.pop(old_key)
+                row['source_commit'] = foreign
+        for output in snapshot_value['tiles'][0]['outputs']:
+            output['source_commit'] = foreign
+            payloads[foreign + ':' + output['file']['path']] = payloads.pop(
+                '1' * 40 + ':' + output['file']['path'])
+            closure = next(row for row in snapshot_value['files']
+                           if row['file'] == output['file'])
+            closure['source_commit'] = foreign
+            closure['role'] = 'source:foreign-' + output['role']
+        with self.assertRaisesRegex(ValueError, 'Tile output is not bound to the snapshot execution commit'):
+            verify_snapshot(snapshot_value, payloads)
+
+    def test_output_cannot_use_execution_commit_with_a_laundered_closure_role(self):
+        row = self.old['tiles'][0]['outputs'][0]
+        closure = next(item for item in self.old['files'] if item['file'] == row['file'])
+        closure['role'] = 'source:foreign-' + row['role']
+        with self.assertRaisesRegex(ValueError, 'Tile output lacks its exact execution-bound closure role'):
+            verify_snapshot(self.old, self.old_files)
+
     def test_checked_output_bundle_cannot_omit_native_detector_diagnostics(self):
         self.old['tiles'][0]['outputs'] = [row for row in self.old['tiles'][0]['outputs']
                                            if row['role'] != 'invalid_water_diagnostics']
@@ -140,7 +168,7 @@ class SuccessorReuseControls(unittest.TestCase):
         alias = copy.deepcopy(self.new['tiles'][0]['outputs'][0])
         alias['role'] = 'different-output-label'
         self.new['tiles'][0]['outputs'].append(alias)
-        with self.assertRaisesRegex(ValueError, 'alias the same retained bytes'):
+        with self.assertRaisesRegex(ValueError, 'exact execution-bound closure role'):
             self.decision()
 
     def test_changed_exact_member_geometry_forces_recompute_even_with_same_bbox_order(self):
@@ -314,7 +342,7 @@ class SuccessorReuseControls(unittest.TestCase):
     def test_tile_output_missing_from_closure_is_rejected(self):
         self.new['files'] = [row for row in self.new['files'] if row['file']['path'] != 'tile/residues.json']
         self.new_files.pop('2' * 40 + ':tile/residues.json')
-        with self.assertRaisesRegex(ValueError, 'no retained'):
+        with self.assertRaisesRegex(ValueError, 'exact execution-bound closure role'):
             self.decision()
 
     def test_tiny_geometry_fingerprint_is_not_area_filtered(self):

@@ -26,6 +26,13 @@ remnants remain part of the exact retained output bytes. Unknown states can be
 reused only if the same exact unknown records remain, in which case the result
 still reports `unchecked`.
 
+Every retained tile output must also be pinned to the snapshot's exact execution
+commit and have one matching closure row whose role is
+`tile-output:<tile-id>:<output-role>`. A source payload cannot be relabeled as
+an output or moved to a foreign commit to pass the reuse decision. This binds
+output bytes to the declared run instead of accepting a caller-selected
+closure role.
+
 Geometry reuse compares only the declared detector computation semantics,
 exact executable/runtime/domain file bytes, tile bounds, each layer's ordered
 member IDs, and the exact geometry and metadata bytes supplied to the run.
