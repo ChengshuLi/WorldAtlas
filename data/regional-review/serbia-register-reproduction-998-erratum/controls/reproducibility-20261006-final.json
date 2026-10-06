@@ -1,0 +1,123 @@
+{
+  "method_id": "serbia-guarded-two-run-reproduction-v1",
+  "kind": "generator",
+  "outcome": "passed",
+  "run_one_sha256": "3e7f9b6763e52c2f72f07ba67e5d237f48edbbf9dd00d7d889966446927c6fdd",
+  "run_two_sha256": "3e7f9b6763e52c2f72f07ba67e5d237f48edbbf9dd00d7d889966446927c6fdd",
+  "run_one_path": "results/run-20261006-e",
+  "run_two_path": "results/run-20261006-f",
+  "files_per_run": 8,
+  "historical_exact_file_matches": 7,
+  "historical_exact_files": [
+    "parent-completeness.csv",
+    "parent-completeness.json",
+    "parent-summary.json",
+    "scoped-city-urban-municipalities.csv",
+    "sors-2017-roster-normalized.csv",
+    "sors-current-roster-normalized.csv",
+    "subject-crosswalk.csv"
+  ],
+  "summary_runtime_only_difference": {
+    "path": "reproduction-summary.json",
+    "sha256": "73a34c592f5b44d045006261213115c2f096641c345bef5e92dd64159ed39909",
+    "runtime": {
+      "python": "3.12.14",
+      "pandas": "2.2.3",
+      "xlrd": "2.0.2",
+      "openpyxl": "3.1.5",
+      "transitive": {
+        "numpy": "2.5.3",
+        "python-dateutil": "2.9.0.post0",
+        "pytz": "2026.5",
+        "tzdata": "2026.5",
+        "six": "1.17.0",
+        "et-xmlfile": "2.0.0"
+      }
+    },
+    "comparison": "All findings equal after excluding only historical/current Python and pandas version fields."
+  },
+  "run_one_files": [
+    {
+      "path": "parent-completeness.csv",
+      "bytes": 2220,
+      "sha256": "ae335ad61055051f35ff56098dc7631b46c4b58994f98c6b498d98053750ded0"
+    },
+    {
+      "path": "parent-completeness.json",
+      "bytes": 10658,
+      "sha256": "788186b712ee49effc7fa9c7ea46faebbc07212506c8e9231d85b7b2be66c636"
+    },
+    {
+      "path": "parent-summary.json",
+      "bytes": 5499,
+      "sha256": "f2be5d3cec2834159dc6bdc06af17f1916c4dac188c0ebf1630d78bd4afaf358"
+    },
+    {
+      "path": "reproduction-summary.json",
+      "bytes": 347,
+      "sha256": "73a34c592f5b44d045006261213115c2f096641c345bef5e92dd64159ed39909"
+    },
+    {
+      "path": "scoped-city-urban-municipalities.csv",
+      "bytes": 5140,
+      "sha256": "03423935ae3c810aa6b2e6f98e44f6459b4d83fba5c1a0e12cadc79e705d9df1"
+    },
+    {
+      "path": "sors-2017-roster-normalized.csv",
+      "bytes": 29508,
+      "sha256": "0690c7732fc3ee73fad9c3438c7a60e707837ab51bc724559842c9e362420524"
+    },
+    {
+      "path": "sors-current-roster-normalized.csv",
+      "bytes": 18126,
+      "sha256": "92286089f3d21d2d9ab7cf93c2e68f37c374cd8aadf4a21763cbbcc69d00d6c4"
+    },
+    {
+      "path": "subject-crosswalk.csv",
+      "bytes": 58129,
+      "sha256": "a5a01d678c51cf273aa5afd8194d10c1b103176f8fe30ac50d0ccc9e69ec2751"
+    }
+  ],
+  "run_two_files": [
+    {
+      "path": "parent-completeness.csv",
+      "bytes": 2220,
+      "sha256": "ae335ad61055051f35ff56098dc7631b46c4b58994f98c6b498d98053750ded0"
+    },
+    {
+      "path": "parent-completeness.json",
+      "bytes": 10658,
+      "sha256": "788186b712ee49effc7fa9c7ea46faebbc07212506c8e9231d85b7b2be66c636"
+    },
+    {
+      "path": "parent-summary.json",
+      "bytes": 5499,
+      "sha256": "f2be5d3cec2834159dc6bdc06af17f1916c4dac188c0ebf1630d78bd4afaf358"
+    },
+    {
+      "path": "reproduction-summary.json",
+      "bytes": 347,
+      "sha256": "73a34c592f5b44d045006261213115c2f096641c345bef5e92dd64159ed39909"
+    },
+    {
+      "path": "scoped-city-urban-municipalities.csv",
+      "bytes": 5140,
+      "sha256": "03423935ae3c810aa6b2e6f98e44f6459b4d83fba5c1a0e12cadc79e705d9df1"
+    },
+    {
+      "path": "sors-2017-roster-normalized.csv",
+      "bytes": 29508,
+      "sha256": "0690c7732fc3ee73fad9c3438c7a60e707837ab51bc724559842c9e362420524"
+    },
+    {
+      "path": "sors-current-roster-normalized.csv",
+      "bytes": 18126,
+      "sha256": "92286089f3d21d2d9ab7cf93c2e68f37c374cd8aadf4a21763cbbcc69d00d6c4"
+    },
+    {
+      "path": "subject-crosswalk.csv",
+      "bytes": 58129,
+      "sha256": "a5a01d678c51cf273aa5afd8194d10c1b103176f8fe30ac50d0ccc9e69ec2751"
+    }
+  ]
+}

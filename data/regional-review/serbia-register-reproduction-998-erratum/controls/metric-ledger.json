@@ -1,0 +1,937 @@
+{
+  "kind": "generator",
+  "method_id": "serbia-archived-result-metric-ledger-v1",
+  "metrics": {
+    "generated-files-per-run": {
+      "input_sha256": "d7fe852b5526594c609fef50ccb2223da6e4c84076c355da37958bd4a40b9a3c",
+      "unit": "files per run",
+      "value": 8
+    },
+    "historical-output-files-identical": {
+      "input_sha256": "d7fe852b5526594c609fef50ccb2223da6e4c84076c355da37958bd4a40b9a3c",
+      "unit": "exact historical output files",
+      "value": 7
+    },
+    "parent-completeness-official_current_primary_city_or_municipality_count-001": {
+      "unit": "current official primary roster units",
+      "value": 5
+    },
+    "parent-completeness-official_current_primary_city_or_municipality_count-002": {
+      "unit": "current official primary roster units",
+      "value": 12
+    },
+    "parent-completeness-official_current_primary_city_or_municipality_count-003": {
+      "unit": "current official primary roster units",
+      "value": 4
+    },
+    "parent-completeness-official_current_primary_city_or_municipality_count-004": {
+      "unit": "current official primary roster units",
+      "value": 6
+    },
+    "parent-completeness-official_current_primary_city_or_municipality_count-005": {
+      "unit": "current official primary roster units",
+      "value": 10
+    },
+    "parent-completeness-official_current_primary_city_or_municipality_count-006": {
+      "unit": "current official primary roster units",
+      "value": 3
+    },
+    "parent-completeness-official_current_primary_city_or_municipality_count-007": {
+      "unit": "current official primary roster units",
+      "value": 8
+    },
+    "parent-completeness-official_current_primary_city_or_municipality_count-008": {
+      "unit": "current official primary roster units",
+      "value": 7
+    },
+    "parent-completeness-official_current_primary_city_or_municipality_count-009": {
+      "unit": "current official primary roster units",
+      "value": 5
+    },
+    "parent-completeness-official_current_primary_city_or_municipality_count-010": {
+      "unit": "current official primary roster units",
+      "value": 6
+    },
+    "parent-completeness-official_current_primary_city_or_municipality_count-011": {
+      "unit": "current official primary roster units",
+      "value": 7
+    },
+    "parent-completeness-official_current_primary_city_or_municipality_count-012": {
+      "unit": "current official primary roster units",
+      "value": 4
+    },
+    "parent-completeness-official_current_primary_city_or_municipality_count-013": {
+      "unit": "current official primary roster units",
+      "value": 1
+    },
+    "parent-completeness-scoped_children-001": {
+      "unit": "scoped Atlas children",
+      "value": 5
+    },
+    "parent-completeness-scoped_children-002": {
+      "unit": "scoped Atlas children",
+      "value": 12
+    },
+    "parent-completeness-scoped_children-003": {
+      "unit": "scoped Atlas children",
+      "value": 4
+    },
+    "parent-completeness-scoped_children-004": {
+      "unit": "scoped Atlas children",
+      "value": 6
+    },
+    "parent-completeness-scoped_children-005": {
+      "unit": "scoped Atlas children",
+      "value": 10
+    },
+    "parent-completeness-scoped_children-006": {
+      "unit": "scoped Atlas children",
+      "value": 3
+    },
+    "parent-completeness-scoped_children-007": {
+      "unit": "scoped Atlas children",
+      "value": 8
+    },
+    "parent-completeness-scoped_children-008": {
+      "unit": "scoped Atlas children",
+      "value": 7
+    },
+    "parent-completeness-scoped_children-009": {
+      "unit": "scoped Atlas children",
+      "value": 5
+    },
+    "parent-completeness-scoped_children-010": {
+      "unit": "scoped Atlas children",
+      "value": 6
+    },
+    "parent-completeness-scoped_children-011": {
+      "unit": "scoped Atlas children",
+      "value": 7
+    },
+    "parent-completeness-scoped_children-012": {
+      "unit": "scoped Atlas children",
+      "value": 4
+    },
+    "parent-completeness-scoped_children-013": {
+      "unit": "scoped Atlas children",
+      "value": 1
+    },
+    "parent-summary-0a084410ed-distinct_2017_unit_codes": {
+      "unit": "distinct 2017 register codes",
+      "value": 12
+    },
+    "parent-summary-0a084410ed-scoped_subjects": {
+      "unit": "scoped subject IDs",
+      "value": 12
+    },
+    "parent-summary-0a084410ed-unmatched_or_ambiguous": {
+      "unit": "unmatched or ambiguous subjects",
+      "value": 0
+    },
+    "parent-summary-39fc2f8ace-distinct_2017_unit_codes": {
+      "unit": "distinct 2017 register codes",
+      "value": 4
+    },
+    "parent-summary-39fc2f8ace-scoped_subjects": {
+      "unit": "scoped subject IDs",
+      "value": 4
+    },
+    "parent-summary-39fc2f8ace-unmatched_or_ambiguous": {
+      "unit": "unmatched or ambiguous subjects",
+      "value": 0
+    },
+    "parent-summary-5b113e5152-distinct_2017_unit_codes": {
+      "unit": "distinct 2017 register codes",
+      "value": 5
+    },
+    "parent-summary-5b113e5152-scoped_subjects": {
+      "unit": "scoped subject IDs",
+      "value": 5
+    },
+    "parent-summary-5b113e5152-unmatched_or_ambiguous": {
+      "unit": "unmatched or ambiguous subjects",
+      "value": 0
+    },
+    "parent-summary-5e5784e324-distinct_2017_unit_codes": {
+      "unit": "distinct 2017 register codes",
+      "value": 6
+    },
+    "parent-summary-5e5784e324-scoped_subjects": {
+      "unit": "scoped subject IDs",
+      "value": 6
+    },
+    "parent-summary-5e5784e324-unmatched_or_ambiguous": {
+      "unit": "unmatched or ambiguous subjects",
+      "value": 0
+    },
+    "parent-summary-6fc8803ce1-distinct_2017_unit_codes": {
+      "unit": "distinct 2017 register codes",
+      "value": 7
+    },
+    "parent-summary-6fc8803ce1-scoped_subjects": {
+      "unit": "scoped subject IDs",
+      "value": 7
+    },
+    "parent-summary-6fc8803ce1-unmatched_or_ambiguous": {
+      "unit": "unmatched or ambiguous subjects",
+      "value": 0
+    },
+    "parent-summary-a5cc18c174-distinct_2017_unit_codes": {
+      "unit": "distinct 2017 register codes",
+      "value": 1
+    },
+    "parent-summary-a5cc18c174-scoped_subjects": {
+      "unit": "scoped subject IDs",
+      "value": 1
+    },
+    "parent-summary-a5cc18c174-unmatched_or_ambiguous": {
+      "unit": "unmatched or ambiguous subjects",
+      "value": 0
+    },
+    "parent-summary-bdf4af7e14-distinct_2017_unit_codes": {
+      "unit": "distinct 2017 register codes",
+      "value": 4
+    },
+    "parent-summary-bdf4af7e14-scoped_subjects": {
+      "unit": "scoped subject IDs",
+      "value": 4
+    },
+    "parent-summary-bdf4af7e14-unmatched_or_ambiguous": {
+      "unit": "unmatched or ambiguous subjects",
+      "value": 0
+    },
+    "parent-summary-c069ece8ff-distinct_2017_unit_codes": {
+      "unit": "distinct 2017 register codes",
+      "value": 3
+    },
+    "parent-summary-c069ece8ff-scoped_subjects": {
+      "unit": "scoped subject IDs",
+      "value": 3
+    },
+    "parent-summary-c069ece8ff-unmatched_or_ambiguous": {
+      "unit": "unmatched or ambiguous subjects",
+      "value": 0
+    },
+    "parent-summary-d0eb0118d5-distinct_2017_unit_codes": {
+      "unit": "distinct 2017 register codes",
+      "value": 10
+    },
+    "parent-summary-d0eb0118d5-scoped_subjects": {
+      "unit": "scoped subject IDs",
+      "value": 10
+    },
+    "parent-summary-d0eb0118d5-unmatched_or_ambiguous": {
+      "unit": "unmatched or ambiguous subjects",
+      "value": 0
+    },
+    "parent-summary-d712f996a5-distinct_2017_unit_codes": {
+      "unit": "distinct 2017 register codes",
+      "value": 7
+    },
+    "parent-summary-d712f996a5-scoped_subjects": {
+      "unit": "scoped subject IDs",
+      "value": 7
+    },
+    "parent-summary-d712f996a5-unmatched_or_ambiguous": {
+      "unit": "unmatched or ambiguous subjects",
+      "value": 0
+    },
+    "parent-summary-e0fe621533-distinct_2017_unit_codes": {
+      "unit": "distinct 2017 register codes",
+      "value": 8
+    },
+    "parent-summary-e0fe621533-scoped_subjects": {
+      "unit": "scoped subject IDs",
+      "value": 8
+    },
+    "parent-summary-e0fe621533-unmatched_or_ambiguous": {
+      "unit": "unmatched or ambiguous subjects",
+      "value": 0
+    },
+    "parent-summary-e3153db939-distinct_2017_unit_codes": {
+      "unit": "distinct 2017 register codes",
+      "value": 5
+    },
+    "parent-summary-e3153db939-scoped_subjects": {
+      "unit": "scoped subject IDs",
+      "value": 5
+    },
+    "parent-summary-e3153db939-unmatched_or_ambiguous": {
+      "unit": "unmatched or ambiguous subjects",
+      "value": 0
+    },
+    "parent-summary-f5ed1138cb-distinct_2017_unit_codes": {
+      "unit": "distinct 2017 register codes",
+      "value": 6
+    },
+    "parent-summary-f5ed1138cb-scoped_subjects": {
+      "unit": "scoped subject IDs",
+      "value": 6
+    },
+    "parent-summary-f5ed1138cb-unmatched_or_ambiguous": {
+      "unit": "unmatched or ambiguous subjects",
+      "value": 0
+    },
+    "subject-crosswalk-2017_name_match_count-001": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-002": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-003": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-004": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-005": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-006": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-007": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-008": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-009": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-010": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-011": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-012": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-013": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-014": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-015": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-016": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-017": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-018": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-019": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-020": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-021": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-022": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-023": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-024": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-025": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-026": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-027": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-028": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-029": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-030": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-031": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-032": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-033": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-034": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-035": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-036": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-037": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-038": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-039": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-040": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-041": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-042": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-043": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-044": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-045": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-046": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-047": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-048": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-049": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-050": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-051": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-052": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-053": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-054": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-055": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-056": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-057": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-058": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-059": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-060": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-061": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-062": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-063": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-064": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-065": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-066": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-067": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-068": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-069": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-070": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-071": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-072": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-073": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-074": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-075": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-076": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-077": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-2017_name_match_count-078": {
+      "unit": "unique source-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-001": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-002": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-003": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-004": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-005": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-006": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-007": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-008": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-009": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-010": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-011": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-012": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-013": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-014": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-015": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-016": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-017": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-018": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-019": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-020": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-021": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-022": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-023": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-024": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-025": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-026": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-027": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-028": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-029": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-030": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-031": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-032": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-033": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-034": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-035": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-036": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-037": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-038": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-039": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-040": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-041": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-042": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-043": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-044": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-045": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-046": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-047": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-048": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-049": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-050": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-051": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-052": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-053": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-054": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-055": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-056": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-057": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-058": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-059": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-060": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-061": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-062": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-063": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-064": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-065": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-066": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-067": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-068": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-069": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-070": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-071": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-072": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-073": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-074": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-075": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-076": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-077": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "subject-crosswalk-current_name_match_count-078": {
+      "unit": "unique current-register name matches",
+      "value": 1
+    },
+    "summary-atlas-parents": {
+      "unit": "parent contexts",
+      "value": 13
+    },
+    "summary-city-urban-municipality-rows": {
+      "unit": "urban-municipality rows",
+      "value": 19
+    },
+    "summary-code-type-parent-discrepancies": {
+      "unit": "discrepancies",
+      "value": 0
+    },
+    "summary-parent-name-agreements": {
+      "unit": "parent-name agreements",
+      "value": 78
+    },
+    "summary-parent-rosters-covered": {
+      "unit": "complete selected parent rosters",
+      "value": 13
+    },
+    "summary-same-code-type-parent": {
+      "unit": "same code/name/type/parent outcomes",
+      "value": 78
+    },
+    "summary-subjects": {
+      "unit": "scoped subject IDs",
+      "value": 78
+    },
+    "summary-unique-2017-matches": {
+      "unit": "unique name matches",
+      "value": 78
+    },
+    "summary-unique-current-matches": {
+      "unit": "unique name matches",
+      "value": 78
+    }
+  },
+  "outcome": "passed"
+}
