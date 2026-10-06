@@ -1,0 +1,401 @@
+{
+  "version": 1,
+  "issue": 1053,
+  "scope_ids": [
+    "gb:CHN:ADM2:17275852B2295538790743",
+    "gb:CHN:ADM2:17275852B38709981190197",
+    "gb:CHN:ADM2:17275852B38939963469829",
+    "gb:CHN:ADM2:17275852B41190306193582",
+    "gb:CHN:ADM2:17275852B42599245130625",
+    "gb:CHN:ADM2:17275852B50589627480209",
+    "gb:CHN:ADM2:17275852B53008264931106",
+    "gb:CHN:ADM2:17275852B70320302334749",
+    "gb:CHN:ADM2:17275852B72819681774342",
+    "gb:CHN:ADM2:17275852B7979903099841",
+    "gb:CHN:ADM2:17275852B80309702523612",
+    "gb:CHN:ADM2:17275852B82960244806798",
+    "gb:CHN:ADM2:17275852B85583949591367",
+    "gb:CHN:ADM2:17275852B86431238150342",
+    "gb:CHN:ADM2:17275852B87782309196497",
+    "gb:CHN:ADM2:17275852B88042861362346",
+    "gb:CHN:ADM2:17275852B93743910489906",
+    "gb:CHN:ADM2:17275852B98891327369808"
+  ],
+  "input": {
+    "path": "data/regional-review/regional-review-365cbd6478904888/source/geoBoundaries-CHN-ADM2.geojson",
+    "sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
+    "vintage": "geoBoundaries gbOpen CHN ADM2 2017, repository-retained snapshot"
+  },
+  "crosswalk_rows": 18,
+  "unique_source_joins": 18,
+  "geometry_structure": {
+    "features": 18,
+    "polygon_components": 18,
+    "exterior_vertices": 1243,
+    "interior_rings": 0,
+    "all_exterior_rings_closed": true,
+    "coordinate_range_checks_passed": true,
+    "per_feature": [
+      {
+        "id": "gb:CHN:ADM2:17275852B2295538790743",
+        "source_name": "Haikoushi",
+        "geometry_type": "Polygon",
+        "polygon_components": 1,
+        "exterior_vertices": 39,
+        "interior_rings": 0
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B38709981190197",
+        "source_name": "Tunchangxian",
+        "geometry_type": "Polygon",
+        "polygon_components": 1,
+        "exterior_vertices": 43,
+        "interior_rings": 0
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B38939963469829",
+        "source_name": "Chanzhoushi",
+        "geometry_type": "Polygon",
+        "polygon_components": 1,
+        "exterior_vertices": 112,
+        "interior_rings": 0
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B41190306193582",
+        "source_name": "Wenchangxian",
+        "geometry_type": "Polygon",
+        "polygon_components": 1,
+        "exterior_vertices": 139,
+        "interior_rings": 0
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B42599245130625",
+        "source_name": "Wanningshi",
+        "geometry_type": "Polygon",
+        "polygon_components": 1,
+        "exterior_vertices": 95,
+        "interior_rings": 0
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B50589627480209",
+        "source_name": "Ledonglizuzizhixian",
+        "geometry_type": "Polygon",
+        "polygon_components": 1,
+        "exterior_vertices": 73,
+        "interior_rings": 0
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B53008264931106",
+        "source_name": "Qiongzhonglizumiaozuzizhixian",
+        "geometry_type": "Polygon",
+        "polygon_components": 1,
+        "exterior_vertices": 80,
+        "interior_rings": 0
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B70320302334749",
+        "source_name": "Baishalizuzizhixian",
+        "geometry_type": "Polygon",
+        "polygon_components": 1,
+        "exterior_vertices": 55,
+        "interior_rings": 0
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B72819681774342",
+        "source_name": "Lingshuilizumiaozuzizhixian",
+        "geometry_type": "Polygon",
+        "polygon_components": 1,
+        "exterior_vertices": 51,
+        "interior_rings": 0
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B7979903099841",
+        "source_name": "Chengmaixian",
+        "geometry_type": "Polygon",
+        "polygon_components": 1,
+        "exterior_vertices": 73,
+        "interior_rings": 0
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B80309702523612",
+        "source_name": "Shanyashi",
+        "geometry_type": "Polygon",
+        "polygon_components": 1,
+        "exterior_vertices": 77,
+        "interior_rings": 0
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B82960244806798",
+        "source_name": "Dinganxian",
+        "geometry_type": "Polygon",
+        "polygon_components": 1,
+        "exterior_vertices": 49,
+        "interior_rings": 0
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B85583949591367",
+        "source_name": "Baotinglizumiaozuzizhixian",
+        "geometry_type": "Polygon",
+        "polygon_components": 1,
+        "exterior_vertices": 45,
+        "interior_rings": 0
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B86431238150342",
+        "source_name": "Qiongshanshi",
+        "geometry_type": "Polygon",
+        "polygon_components": 1,
+        "exterior_vertices": 71,
+        "interior_rings": 0
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B87782309196497",
+        "source_name": "Qionghaishi",
+        "geometry_type": "Polygon",
+        "polygon_components": 1,
+        "exterior_vertices": 58,
+        "interior_rings": 0
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B88042861362346",
+        "source_name": "Changjianglizuzizhixian",
+        "geometry_type": "Polygon",
+        "polygon_components": 1,
+        "exterior_vertices": 61,
+        "interior_rings": 0
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B93743910489906",
+        "source_name": "Dongfanglizuzizhixian",
+        "geometry_type": "Polygon",
+        "polygon_components": 1,
+        "exterior_vertices": 65,
+        "interior_rings": 0
+      },
+      {
+        "id": "gb:CHN:ADM2:17275852B98891327369808",
+        "source_name": "Lingaoxian",
+        "geometry_type": "Polygon",
+        "polygon_components": 1,
+        "exterior_vertices": 57,
+        "interior_rings": 0
+      }
+    ]
+  },
+  "exact_shared_edge_screen": {
+    "method": "Exact equality of full adjacent coordinate pairs, orientation-insensitive; does not detect subdivided/near-coincident segments or assess validity/coverage.",
+    "neighbor_pairs_detected": 38,
+    "shared_segments": 362,
+    "pairs": [
+      {
+        "left_id": "gb:CHN:ADM2:17275852B2295538790743",
+        "right_id": "gb:CHN:ADM2:17275852B7979903099841",
+        "exact_shared_segments": 2
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B2295538790743",
+        "right_id": "gb:CHN:ADM2:17275852B86431238150342",
+        "exact_shared_segments": 8
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B38709981190197",
+        "right_id": "gb:CHN:ADM2:17275852B53008264931106",
+        "exact_shared_segments": 15
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B38709981190197",
+        "right_id": "gb:CHN:ADM2:17275852B7979903099841",
+        "exact_shared_segments": 8
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B38709981190197",
+        "right_id": "gb:CHN:ADM2:17275852B82960244806798",
+        "exact_shared_segments": 14
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B38709981190197",
+        "right_id": "gb:CHN:ADM2:17275852B87782309196497",
+        "exact_shared_segments": 6
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B38939963469829",
+        "right_id": "gb:CHN:ADM2:17275852B53008264931106",
+        "exact_shared_segments": 9
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B38939963469829",
+        "right_id": "gb:CHN:ADM2:17275852B70320302334749",
+        "exact_shared_segments": 21
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B38939963469829",
+        "right_id": "gb:CHN:ADM2:17275852B7979903099841",
+        "exact_shared_segments": 5
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B38939963469829",
+        "right_id": "gb:CHN:ADM2:17275852B88042861362346",
+        "exact_shared_segments": 3
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B38939963469829",
+        "right_id": "gb:CHN:ADM2:17275852B98891327369808",
+        "exact_shared_segments": 12
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B41190306193582",
+        "right_id": "gb:CHN:ADM2:17275852B82960244806798",
+        "exact_shared_segments": 4
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B41190306193582",
+        "right_id": "gb:CHN:ADM2:17275852B86431238150342",
+        "exact_shared_segments": 19
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B41190306193582",
+        "right_id": "gb:CHN:ADM2:17275852B87782309196497",
+        "exact_shared_segments": 5
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B42599245130625",
+        "right_id": "gb:CHN:ADM2:17275852B53008264931106",
+        "exact_shared_segments": 9
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B42599245130625",
+        "right_id": "gb:CHN:ADM2:17275852B72819681774342",
+        "exact_shared_segments": 5
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B42599245130625",
+        "right_id": "gb:CHN:ADM2:17275852B87782309196497",
+        "exact_shared_segments": 9
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B50589627480209",
+        "right_id": "gb:CHN:ADM2:17275852B53008264931106",
+        "exact_shared_segments": 3
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B50589627480209",
+        "right_id": "gb:CHN:ADM2:17275852B70320302334749",
+        "exact_shared_segments": 3
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B50589627480209",
+        "right_id": "gb:CHN:ADM2:17275852B80309702523612",
+        "exact_shared_segments": 10
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B50589627480209",
+        "right_id": "gb:CHN:ADM2:17275852B85583949591367",
+        "exact_shared_segments": 8
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B50589627480209",
+        "right_id": "gb:CHN:ADM2:17275852B88042861362346",
+        "exact_shared_segments": 5
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B50589627480209",
+        "right_id": "gb:CHN:ADM2:17275852B93743910489906",
+        "exact_shared_segments": 13
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B53008264931106",
+        "right_id": "gb:CHN:ADM2:17275852B70320302334749",
+        "exact_shared_segments": 12
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B53008264931106",
+        "right_id": "gb:CHN:ADM2:17275852B72819681774342",
+        "exact_shared_segments": 8
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B53008264931106",
+        "right_id": "gb:CHN:ADM2:17275852B7979903099841",
+        "exact_shared_segments": 11
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B53008264931106",
+        "right_id": "gb:CHN:ADM2:17275852B85583949591367",
+        "exact_shared_segments": 9
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B53008264931106",
+        "right_id": "gb:CHN:ADM2:17275852B87782309196497",
+        "exact_shared_segments": 4
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B70320302334749",
+        "right_id": "gb:CHN:ADM2:17275852B88042861362346",
+        "exact_shared_segments": 19
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B72819681774342",
+        "right_id": "gb:CHN:ADM2:17275852B80309702523612",
+        "exact_shared_segments": 1
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B72819681774342",
+        "right_id": "gb:CHN:ADM2:17275852B85583949591367",
+        "exact_shared_segments": 12
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B7979903099841",
+        "right_id": "gb:CHN:ADM2:17275852B82960244806798",
+        "exact_shared_segments": 11
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B7979903099841",
+        "right_id": "gb:CHN:ADM2:17275852B86431238150342",
+        "exact_shared_segments": 10
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B7979903099841",
+        "right_id": "gb:CHN:ADM2:17275852B98891327369808",
+        "exact_shared_segments": 13
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B80309702523612",
+        "right_id": "gb:CHN:ADM2:17275852B85583949591367",
+        "exact_shared_segments": 16
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B82960244806798",
+        "right_id": "gb:CHN:ADM2:17275852B86431238150342",
+        "exact_shared_segments": 8
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B82960244806798",
+        "right_id": "gb:CHN:ADM2:17275852B87782309196497",
+        "exact_shared_segments": 12
+      },
+      {
+        "left_id": "gb:CHN:ADM2:17275852B88042861362346",
+        "right_id": "gb:CHN:ADM2:17275852B93743910489906",
+        "exact_shared_segments": 20
+      }
+    ],
+    "controls": {
+      "reversed_full_edge_detected": true,
+      "point_only_contact_not_counted": true
+    }
+  },
+  "official_roster_reconciliation": {
+    "current_units_listed_in_2023_official_yearbook": 19,
+    "scope_current_identity_candidates": 17,
+    "current_unit_absent_from_scope": "Wuzhishan City",
+    "historical_scope_member": "Qiongshan City, abolished/merged into Haikou in 2002; current Qiongshan is a Haikou district",
+    "other_current_unit_outside_scope": "Sansha City; not part of this frozen 18-ID subject set"
+  },
+  "limits": [
+    "Roster/identity evidence does not identify contemporary boundary coordinates.",
+    "No current official redistributable GIS source bytes were retrievable; the provincial statistics PDF returned HTTP 403, and the official map download service did not expose bytes during this review.",
+    "A single Polygon/no-interior-ring representation is a geometry-structure fact, not evidence that all islands, fragments, coast, or legally defined area are complete.",
+    "Exact-edge pairs describe the pinned 2017 source only; they do not validate neighboring boundary correctness, gaps, overlaps, or 2026 administrative adjacency.",
+    "No spatial area, distance, coastline, completeness, or legal topology measurement was performed.",
+    "Wenchang parent and Qiongshan historical identity require a separate sourced engineering migration; no shared geography was edited."
+  ]
+}
