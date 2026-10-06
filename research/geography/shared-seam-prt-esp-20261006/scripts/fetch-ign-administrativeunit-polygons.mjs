@@ -189,5 +189,5 @@ const receipt = {
   discovery_policy: 'Exact nameunit queries select features; if a line-item name query returns zero, its exact Spanish nationalcode prefix is queried and crosschecked against country, municipality level, name and code. Direct item routes return complete feature geometries. No bbox, clipping, simplification, reprojection or geometry modification.',
   records,
 };
-await fs.writeFile(new URL('response-receipt.json', itemDir), `${JSON.stringify(receipt, null, 2)}\n`, {flag: 'wx'});
+await fs.writeFile(new URL('response-receipt.json', itemDir), `${JSON.stringify(receipt, null, 2)}\n`);
 console.log(JSON.stringify({status: receipt.status, items: records.map(({gid, nameunit}) => ({gid, nameunit}))}));
