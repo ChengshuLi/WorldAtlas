@@ -20,6 +20,7 @@ import unicodedata
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
+SCRIPT_PATH = Path(__file__).resolve()
 PACKET = ROOT / "data/regional-review/montenegro-evidence-996-erratum"
 ORIGINAL_PACKET = "data/regional-review/followup-montenegro-422-boundaries-20261005"
 PRIOR_SOURCE = "data/regional-review/regional-review-3c4fe25a21fa428d/source"
@@ -54,6 +55,17 @@ def enforce_whole_file_pin(raw: bytes, expected: str, label: str) -> bytes:
 
 def git_bytes(commit: str, path: str) -> bytes:
     return subprocess.check_output(["git", "-C", str(ROOT), "show", f"{commit}:{path}"])
+
+
+def verify_running_code() -> tuple[str, bytes]:
+    path = SCRIPT_PATH.relative_to(ROOT).as_posix()
+    commit = subprocess.check_output(["git", "-C", str(ROOT), "rev-parse", "HEAD"], text=True).strip()
+    immutable_blob = git_bytes(commit, path)
+    current_bytes = SCRIPT_PATH.read_bytes()
+    enforce_whole_file_pin(current_bytes, sha(immutable_blob), f"committed runner at {commit}:{path}")
+    if current_bytes != immutable_blob:
+        raise GuardError("working reproduction code is not the exact immutable Git HEAD blob")
+    return commit, immutable_blob
 
 
 def checked_json(raw: bytes, label: str):
@@ -158,7 +170,7 @@ def verified_inputs(quality):
     extra_paths = [
         ISSUE_RESPONSE.relative_to(ROOT).as_posix(),
         (PACKET / "reservation.json").relative_to(ROOT).as_posix(),
-        Path(__file__).relative_to(ROOT).as_posix(),
+        SCRIPT_PATH.relative_to(ROOT).as_posix(),
     ]
     for path in extra_paths:
         raw = (ROOT / path).read_bytes()
@@ -362,6 +374,7 @@ def build_report(spec, pins):
 
 
 def run_once(out_dir: Path):
+    runner_commit, runner_blob = verify_running_code()
     issue, spec, quality, _ = load_issue_contract()
     pin_records, phase_bytes, descriptor_count = verified_inputs(quality)
     report, context = build_report(spec, quality["pins"])
@@ -370,7 +383,8 @@ def run_once(out_dir: Path):
         out_dir.relative_to(PACKET.resolve())
     except ValueError as error:
         raise GuardError("output directory must remain under the issue-owned prefix") from error
-    out_dir.mkdir(parents=True, exist_ok=False)
+    if out_dir.exists():
+        raise GuardError("output directory must be fresh and absent")
 
     # Construct complete changed-input fixtures in memory. No source file is edited.
     area17 = checked_json(context["official17_raw"], "2017 table")
@@ -398,9 +412,10 @@ def run_once(out_dir: Path):
         mismatch_rejected(bytes(mutated_baseline), quality["pins"][f"{BASELINE}:{baseline_path}"], "changed immutable baseline context"),
         mismatch_rejected(bytes(mutated_old_code), quality["pins"][f"{ORIGINAL_PACKET_COMMIT}:{old_code_path}"], "changed original reproduction code"),
     ]
-    # The exact per-file hash of this new script is bound by the outer manifest.
-    this_code = Path(__file__).read_bytes()
-    controls.append(mismatch_rejected(this_code + b"\n# altered after pin\n", sha(this_code), "changed additive runner code"))
+    # This fixture is checked against the immutable HEAD Git blob, not a
+    # digest derived from mutable bytes read by the running process.
+    controls.append(mismatch_rejected(runner_blob + b"\n# altered after pin\n", sha(runner_blob),
+                                      f"changed additive runner code pinned at {runner_commit}"))
     official17 = checked_json(context["official17_raw"], "2017 table")
     lookup = {norm(name): (name, value) for name, value in official17["areas_km2"].items()}
     no_match = "Not a Municipality in Montenegro"
@@ -413,11 +428,14 @@ def run_once(out_dir: Path):
     positive = {"method_id": "montenegro-996-whole-input-reproduction", "kind": "positive-control", "outcome": "passed",
                 "detail": "All 63 immutable contract pins match; the exact 23 IDs occur once in data/geography/part-15.json; all have separate singleton province parents and match the retained source names."}
     negative = {"method_id": "montenegro-996-whole-input-reproduction", "kind": "negative-control", "outcome": "passed",
-                "fixtures": controls, "detail": "Every complete-file/source/vintage/baseline/code drift fixture was rejected before a report could be written."}
+                "runner_code_pin": {"commit": runner_commit, "path": SCRIPT_PATH.relative_to(ROOT).as_posix(), "sha256": sha(runner_blob)},
+                "output_directory_absent_during_controls": True,
+                "fixtures": controls, "detail": "Every complete-file/source/vintage/baseline/predecessor-code and committed-runner drift fixture was rejected before a report could be written."}
     report_bytes = canonical(report)
     positive_bytes, negative_bytes = canonical(positive), canonical(negative)
     files = {"comparison.json": report_bytes, "positive-control.json": positive_bytes,
              "negative-control.json": negative_bytes}
+    out_dir.mkdir(parents=True, exist_ok=False)
     for name, raw in files.items():
         if len(raw) > MAX_OBJECT:
             raise GuardError(f"new run result exceeds 32 MiB: {name}")
@@ -428,6 +446,7 @@ def run_once(out_dir: Path):
                    "outputs": {name: {"bytes": len(raw), "sha256": sha(raw)} for name, raw in files.items()},
                    "pin_count": len(pin_records), "phase_bytes_including_reserved_output": phase_bytes,
                    "phase_descriptor_count": descriptor_count,
+                   "runner_code_commit": runner_commit, "runner_code_sha256": sha(runner_blob),
                    "subjects": len(context["ids"]), "source_geometries": 23,
                    "singleton_parent_contexts": 23}
     print(json.dumps(run_summary, indent=2))
@@ -436,7 +455,7 @@ def run_once(out_dir: Path):
 def finalize():
     issue, spec, quality, reservation = load_issue_contract()
     pin_records, phase_bytes, descriptor_count = verified_inputs(quality)
-    run_dirs = [PACKET / "runs/2026-10-06/final/run-1", PACKET / "runs/2026-10-06/final/run-2"]
+    run_dirs = [PACKET / "runs/2026-10-06/anchored/run-1", PACKET / "runs/2026-10-06/anchored/run-2"]
     if any(not path.is_dir() for path in run_dirs):
         raise GuardError("both fresh run directories are required before finalization")
     outputs = []
@@ -472,7 +491,7 @@ def finalize():
         "run_two_path": run_dirs[1].relative_to(ROOT).as_posix(),
         "all_three_outputs_byte_identical": True
     }
-    reproduction_path = PACKET / "reproducibility-control.json"
+    reproduction_path = PACKET / "reproducibility-control-anchored.json"
     reproduction_bytes = canonical(reproduction_control)
 
     # The manifest contains the complete frozen issue pin set. All b6cfa files
@@ -492,7 +511,7 @@ def finalize():
     subject_files = {identity: "data/geography/part-15.json" for identity in spec["evidence_quality"]["subject_ids"]}
     # Added immutable request/claim records and executable are separately listed.
     extra = [ISSUE_RESPONSE.relative_to(ROOT).as_posix(), (PACKET / "reservation.json").relative_to(ROOT).as_posix(),
-             Path(__file__).relative_to(ROOT).as_posix()]
+             SCRIPT_PATH.relative_to(ROOT).as_posix()]
     for rel in extra:
         raw = (ROOT / rel).read_bytes()
         outputs.append({"path": rel, "bytes": len(raw), "sha256": sha(raw), "hash_kind": "file-bytes"})
@@ -605,8 +624,8 @@ def finalize():
         ],
         "stages": {"research": "partial", "implementation": "not-proposed", "geographic_approval": "unapproved"},
         "commands": [
-            "python data/regional-review/montenegro-evidence-996-erratum/reproduce.py run --output-dir data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/final/run-1",
-            "python data/regional-review/montenegro-evidence-996-erratum/reproduce.py run --output-dir data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/final/run-2",
+            "python data/regional-review/montenegro-evidence-996-erratum/reproduce.py run --output-dir data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored/run-1",
+            "python data/regional-review/montenegro-evidence-996-erratum/reproduce.py run --output-dir data/regional-review/montenegro-evidence-996-erratum/runs/2026-10-06/anchored/run-2",
             "python data/regional-review/montenegro-evidence-996-erratum/reproduce.py finalize"
         ],
         "change_receipts": [],
@@ -624,6 +643,8 @@ def finalize():
             "original_wrong_provenance_string_preserved": "data/regional-review/regional-review-3c4fe25a21fa428d/source/source/area-assessments.json",
             "corrected_existing_input": f"{PRIOR_SOURCE}/area-assessments.json",
             "runs": run_receipts, "run_one_comparison_sha256": run_hashes[0], "run_two_comparison_sha256": run_hashes[1],
+            "superseded_runs": [{"run_dir": "runs/2026-10-06/final/run-1", "reason": "Superseded because the initial PR-head runner did not authenticate its own committed Git blob before producing outputs."},
+                                {"run_dir": "runs/2026-10-06/final/run-2", "reason": "Superseded because the initial PR-head runner did not authenticate its own committed Git blob before producing outputs."}],
             "runs_byte_identical": True, "old_packet_modified": False,
             "issue_trigger_fixture_reference": {
                 "reported_bytes": 1129,
@@ -640,18 +661,27 @@ def finalize():
     manifest_relative = manifest_path.relative_to(ROOT).as_posix()
     all_paths = sorted(path for path in PACKET.rglob("*") if path.is_file())
     manifest["change_receipts"] = [
-        {"path": path.relative_to(ROOT).as_posix(), "status": "added", "previous_path": None}
+        {"path": path.relative_to(ROOT).as_posix(), "status": "added"}
         for path in all_paths
-    ] + [{"path": reproduction_path.relative_to(ROOT).as_posix(), "status": "added", "previous_path": None},
-         {"path": manifest_relative, "status": "added", "previous_path": None}]
+    ] + [{"path": reproduction_path.relative_to(ROOT).as_posix(), "status": "added"},
+         {"path": manifest_relative, "status": "added"}]
     manifest["change_receipts"].sort(key=lambda row: row["path"])
     manifest_bytes = canonical(manifest)
     if phase_bytes + len(manifest_bytes) > MAX_PHASE:
         raise GuardError("complete reproduction phase plus final manifest exceeds 256 MiB")
     with reproduction_path.open("xb") as stream:
         stream.write(reproduction_bytes)
-    with manifest_path.open("xb") as stream:
-        stream.write(manifest_bytes)
+    prior_manifest_hash = "c7c9b6603a2555ef605832fa18ca0d9bade9074605a02ee9eda81fa549015076"
+    if manifest_path.exists():
+        if sha(manifest_path.read_bytes()) != prior_manifest_hash:
+            raise GuardError("existing evidence manifest differs from the exact prior PR version")
+        temporary_manifest = manifest_path.with_suffix(".json.tmp")
+        with temporary_manifest.open("xb") as stream:
+            stream.write(manifest_bytes)
+        temporary_manifest.replace(manifest_path)
+    else:
+        with manifest_path.open("xb") as stream:
+            stream.write(manifest_bytes)
     print(json.dumps({"manifest": manifest_path.relative_to(ROOT).as_posix(),
                       "manifest_sha256": sha(manifest_path.read_bytes()), "pins": len(pin_records),
                       "outputs": len(outputs), "output_bytes": outputs_total,
