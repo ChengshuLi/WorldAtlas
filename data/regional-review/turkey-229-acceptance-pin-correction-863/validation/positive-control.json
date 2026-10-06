@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "method_id": "packet-region-pin-comparison",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "control": "The exact 229 sorted packet IDs, newline-joined without a trailing newline, reproduce the packet digest.",
+  "packet_subject_count": 229,
+  "computed_packet_hash": "50597f85cd48e244f864325a474f44013c1212375e977196cfd53812edba9d14",
+  "scope_member_location_ids_sha256": "50597f85cd48e244f864325a474f44013c1212375e977196cfd53812edba9d14",
+  "assessment_subject_ids_sha256": "50597f85cd48e244f864325a474f44013c1212375e977196cfd53812edba9d14",
+  "all_three_packet_values_equal": true
+}
