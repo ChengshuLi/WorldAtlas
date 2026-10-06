@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "issue": 408,
+  "evaluation_base_commit": "762d7b5a568ca845d85a98a4d188678c126a5d58",
+  "pinned_issue_baseline_commit": "1451fb0788892ff9db6415e6ce6704bdd13d8f9a",
+  "run_command": "python3 data/regional-review/regional-review-173ccc74c2fd93ae/reproduce-scope.py",
+  "script_sha256": "720aa0e9eee29b86e4d6cf7b8c5c1b27ec1b3af5300f0c166fb88ead1b51a7fb",
+  "issue_snapshot_sha256": "d0936345559e682327194f3a90bec520b94e5abc5f60bf19d011cffcf07eb59b",
+  "issue_body_sha256": "6506ef8bb824f1180466982f4a72d03b5e9a2b549885b1149ef860798f0cedc8",
+  "scope_file_sha256": "bcd5e42829407d2e6db402e6a721eacfa6d6fbc14f3f77633398082096ea1f0d",
+  "output": {
+    "path": "data/regional-review/regional-review-173ccc74c2fd93ae/row-assessments.json",
+    "sha256_first_run": "079ae0e08f2741ba76492334ea1bb539bd458fa9438cff734133f7fcf59e3f2d",
+    "sha256_second_run": "079ae0e08f2741ba76492334ea1bb539bd458fa9438cff734133f7fcf59e3f2d",
+    "two_run_reproduction_equal": true,
+    "row_count": 200
+  },
+  "checks": {
+    "issue_contract_count_and_owned_paths": "passed",
+    "issue_body_and_json_compact_ordered_member_digest": "passed",
+    "pinned_v5_git_blob_sha256_and_byte_sizes": "passed",
+    "pinned_v5_release_descriptor_and_projection_membership": "passed",
+    "v5_to_current_scoped_atlas_ids_and_geometries": "passed",
+    "atlas_scope_feature_id_uniqueness_and_presence": "passed",
+    "all_51_parent_memberships_and_expected_counts": "passed",
+    "three_area_memberships_and_expected_counts": "passed",
+    "198_exact_unique_geoboundaries_shapeid_joins": "passed",
+    "198_exact_geoboundaries_shape_name_matches": "passed",
+    "natural_earth_admin1_hong_kong_member_id_set": "passed",
+    "natural_earth_admin1_macao_member_id": "passed",
+    "status": "passed_with_explicit_geographic_limits",
+    "per-row-parent-area-classification_inventory": "passed; all 200 rows, 51 parents, 3 areas classified with explicit reasons",
+    "reproducible_two_run_output_sha256": "079ae0e08f2741ba76492334ea1bb539bd458fa9438cff734133f7fcf59e3f2d",
+    "geographic_failure_mode_checklist": "passed; fragmented units, province-scale, anonymous remainder, disconnected units, omissions, tiers, oversized groups, weak parents, neighbors and single-child groups dispositioned with limits"
+  },
+  "summary": {
+    "scoped_ids": 200,
+    "unique_scoped_ids": 200,
+    "guangdong": 94,
+    "guangxi": 88,
+    "hainan": 18,
+    "exact_mainland_source_joins": 198,
+    "exact_mainland_name_matches": 198,
+    "mainland_geometry_matches_after_rounding_4dp": 1,
+    "mainland_geometry_rows_differing_after_rounding_4dp": 197,
+    "source_vertex_count": 12946,
+    "atlas_vertex_count": 11562,
+    "hainan_current_roster_rows_per_2024_yearbook_2023_table": 19,
+    "hainan_scoped_rows": 18,
+    "hainan_missing_current_unit": "Wuzhishan City",
+    "hainan_parent_correction": "Wenchangxian source geometry currently parented to Sansha"
+  },
+  "not_checked": [
+    "current legal boundary geometry agreement",
+    "geometry validity, gaps, or overlaps",
+    "current island/coast/fragment completeness",
+    "current neighbor topology/granularity across the issue edges",
+    "official per-row 2026 administrative code and parent crosswalk for mainland China",
+    "complete upstream legal rights chain for the geoBoundaries Chinese source"
+  ],
+  "classification_summary": {
+    "rows": {
+      "insufficient-evidence": 195,
+      "correction-needed": 5
+    },
+    "parents": {
+      "insufficient-evidence": 34,
+      "correction-needed": 17
+    },
+    "areas": {
+      "insufficient-evidence": 2,
+      "correction-needed": 1
+    }
+  }
+}
