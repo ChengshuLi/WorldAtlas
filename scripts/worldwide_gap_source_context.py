@@ -5,16 +5,16 @@ def sha(b): return hashlib.sha256(b).hexdigest()
 def release_binding(value):
     if not isinstance(value, dict) or type(value.get('version')) is not int or value['version'] < 1:
         raise ValueError('Missing typed declared source vintage')
-    if not re.fullmatch('geography:review:[a-f0-9]{64}', value.get('id', '')):
+    if not isinstance(value.get('id'),str) or not re.fullmatch('geography:review:[a-f0-9]{64}', value['id']):
         raise ValueError('Invalid declared release ID')
-    if any(not re.fullmatch('[a-f0-9]{64}', value.get(k, '')) for k in ('footprints_sha256','hierarchy_sha256')):
+    if any(not isinstance(value.get(k),str) or not re.fullmatch('[a-f0-9]{64}', value[k]) for k in ('footprints_sha256','hierarchy_sha256')):
         raise ValueError('Missing declared release hashes')
     return value
 
 def regional_members(value):
     """Validate the existing regional review/supplement protocol, not arbitrary prose."""
     batch=value.get('batch_id','')
-    if not re.fullmatch('regional-(?:review|supplement):[a-f0-9]{16}',batch):
+    if not isinstance(batch,str) or not re.fullmatch('regional-(?:review|supplement):[a-f0-9]{16}',batch):
         raise ValueError('Not a recognized existing regional workload')
     ids=value.get('member_location_ids')
     if not isinstance(ids,list) or not ids or any(not isinstance(x,str) or not x for x in ids) or ids!=sorted(set(ids)):

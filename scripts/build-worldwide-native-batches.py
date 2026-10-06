@@ -178,7 +178,7 @@ def source_family(context):
     metadata=context['original_metadata']
     if context['id'].startswith('atlas:physical:'):
         return {'kind':'physical-adaptation-processing-reproduction',
-            'original_source_member_id':metadata.get('source_member_id'),
+            'original_source_member_ids':metadata.get('source_member_ids'),
             'source_id':metadata.get('source_id'),
             'source_token':{k:metadata[k] for k in ('ECO_ID','SUB_CODE','lake_id','lakeID') if k in metadata},
             'recorded_coastline_adjustments':metadata.get('coastline_adjustments'),

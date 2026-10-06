@@ -111,3 +111,16 @@ try:p.observation_overlay(old,new[:1])
 except ValueError:pass
 else:raise AssertionError('Incomplete comparison overlay accepted')
 print('Malformed issue declarations retained; runtime and full comparison overlay controls PASS')
+valid={'batch_id':'regional-review:'+'a'*16,'member_location_ids':['a'],'location_count':1,
+       'member_location_ids_sha256':p.sha256(b'a'),'owned_evidence_path':'data/regional-review/regional-review-'+'a'*16+'/',
+       'review_only':True,'original_scope_release':{'version':1,'id':'geography:review:'+'b'*64,'footprints_sha256':'c'*64,'hierarchy_sha256':'d'*64}}
+body=lambda value:'```json\n'+json.dumps(value)+'\n```'
+strong,weak,rejected=issue_rosters([[{'number':1,'state':'closed','body':body(valid)}]])
+assert len(strong)==1 and strong[0]['work_role']=='archived-closed-predecessor-context' and not rejected
+for field in ('id','footprints_sha256','hierarchy_sha256'):
+    malformed=copy.deepcopy(valid);malformed['original_scope_release'][field]=1
+    strong,weak,rejected=issue_rosters([[{'number':1,'state':'open','body':body(malformed)}]])
+    assert not strong and rejected and weak
+malformed=copy.deepcopy(valid);malformed['batch_id']=1
+assert issue_rosters([[{'number':1,'state':'open','body':body(malformed)}]])[2]
+print('Valid closed regional source predecessor retained; malformed typed release and batch fields rejected with provenance')
