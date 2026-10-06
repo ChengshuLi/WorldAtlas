@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "method_id": "negative-controls",
+  "outcome": "passed",
+  "scope_accounting": {
+    "issue_999_subject_ids": [
+      "gb:XKX:ADM1:2360587B5118871504069",
+      "gb:XKX:ADM1:2360587B74553771763221",
+      "gb:XKX:ADM1:2360587B95703323116719"
+    ],
+    "issue_1008_read_only_context_ids": [
+      "gb:XKX:ADM1:2360587B11570115914955",
+      "gb:XKX:ADM1:2360587B15813948402025",
+      "gb:XKX:ADM1:2360587B89959345704230",
+      "gb:XKX:ADM1:2360587B9056373484571"
+    ],
+    "source_feature_ids": [
+      "gb:XKX:ADM1:2360587B11570115914955",
+      "gb:XKX:ADM1:2360587B15813948402025",
+      "gb:XKX:ADM1:2360587B5118871504069",
+      "gb:XKX:ADM1:2360587B74553771763221",
+      "gb:XKX:ADM1:2360587B89959345704230",
+      "gb:XKX:ADM1:2360587B9056373484571",
+      "gb:XKX:ADM1:2360587B95703323116719"
+    ],
+    "partition_verified": true
+  },
+  "controls": {
+    "changed_transcription": {
+      "rejected": true,
+      "before_output": true,
+      "reason": "pinned input mismatch: 0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15:data/regional-review/followup-kosovo-422-district-source-20261005/kas-statistical-regions.json"
+    },
+    "changed_runner_code": {
+      "rejected": true,
+      "before_output": true,
+      "reason": "pinned input mismatch: 0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15:data/regional-review/followup-kosovo-422-district-source-20261005/reproduce.py"
+    },
+    "transcription_name_drift": {
+      "rejected": true,
+      "before_output": true,
+      "reason": "pinned input mismatch: 0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15:data/regional-review/followup-kosovo-422-district-source-20261005/kas-statistical-regions.json"
+    },
+    "wrong_baseline": {
+      "rejected": true,
+      "before_output": true,
+      "reason": "pinned baseline unavailable: 0000000000000000000000000000000000000000:data/regional-review/followup-kosovo-422-district-source-20261005/reproduce.py"
+    },
+    "wrong_packet_path": {
+      "rejected": true,
+      "before_output": true,
+      "reason": "pinned baseline unavailable: 0de4b1f4183d6cf7c5fc6c78b6316f0f3a6b1e15:data/regional-review/followup-kosovo-422-district-source-20261005/REPLACED-KAS.json"
+    },
+    "historical_runner_accepts_name_drift": {
+      "accepted_by_old_runner": true,
+      "emitted_synthetic_name": true,
+      "municipality_name_count": 38,
+      "private_output_sha256": "c521c0409104420c1417d233ee94d633e4e6bdf8087bdaff9644eaa98d766330"
+    },
+    "existing_output": {
+      "rejected": true,
+      "preserved_sha256": "b48ed1895bff942135dda568a78b320ec96206710a83c3f2b9ce654d4ca45f4d"
+    }
+  },
+  "synthetic_fixture": {
+    "bytes": 1834,
+    "sha256": "716cfed3c0399bba60b53ffdbc5e13aa9096ae4e0b693ced8fde80018c794e69",
+    "changed_name": "AUDITOR_SYNTHETIC_MUNICIPALITY",
+    "original_name": "Gllogoc",
+    "issue_receipt": {
+      "bytes": 2340,
+      "sha256": "34ed4c2393dbea07e64cfe00728eccf69611f7137cc86c24d5c49f121a18effd"
+    },
+    "receipt_note": "The issue provides the prior complete-probe size/hash but not the complete fixture bytes; this fixture applies the specified one-name replacement to the pinned transcription."
+  }
+}
