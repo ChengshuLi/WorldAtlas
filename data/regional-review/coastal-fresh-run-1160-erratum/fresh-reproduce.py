@@ -8,6 +8,7 @@ import hashlib
 import json
 import os
 import re
+import stat
 import subprocess
 import sys
 import tempfile
@@ -274,7 +275,16 @@ def historical_product_bytes(pins: dict, run: str):
     return result
 
 
-def publish_products(target: Path, products: dict[str, bytes], receipt: dict):
+def _write_exclusive(destination: Path, content: bytes, created: list, writer=None):
+    with destination.open("xb") as stream:
+        identity = os.fstat(stream.fileno())
+        # Register ownership before the first write, so a partial write or
+        # close/flush error can still be cleaned up without touching a rival.
+        created.append((destination, identity.st_dev, identity.st_ino))
+        (writer or (lambda output, data: output.write(data)))(stream, content)
+
+
+def publish_products(target: Path, products: dict[str, bytes], receipt: dict, writer=None):
     ordinary_path(target)
     if target.exists() or target.is_symlink():
         raise FileExistsError(f"refusing occupied output vintage: {target.name}")
@@ -283,20 +293,18 @@ def publish_products(target: Path, products: dict[str, bytes], receipt: dict):
     try:
         for name in PRODUCTS:
             destination = target / name
-            with destination.open("xb") as stream:
-                stream.write(products[name])
-            created.append((destination, sha256(products[name])))
+            _write_exclusive(destination, products[name], created, writer)
         receipt_path = target / "execution.json"
         receipt_bytes = canonical_json(receipt)
-        with receipt_path.open("xb") as stream:
-            stream.write(receipt_bytes)
-        created.append((receipt_path, sha256(receipt_bytes)))
+        _write_exclusive(receipt_path, receipt_bytes, created, writer)
     except Exception:
-        # Remove only exact regular files written by this invocation. Preserve
-        # any concurrent/unknown file and never recursively delete a target.
-        for path, expected_hash in reversed(created):
+        # Remove only the exact regular files created by this invocation.
+        # Device/inode identity also covers partial files whose full hash was
+        # never completed. Preserve any replacement or concurrent file.
+        for path, device, inode in reversed(created):
             try:
-                if path.is_file() and not path.is_symlink() and sha256(path.read_bytes()) == expected_hash:
+                current = path.lstat()
+                if stat.S_ISREG(current.st_mode) and current.st_dev == device and current.st_ino == inode:
                     path.unlink()
             except OSError:
                 pass
@@ -440,6 +448,21 @@ def run_controls():
             raise Refusal("existing target was accepted")
         if sentinel.read_bytes() != before:
             raise Refusal("existing target sentinel changed")
+        partial = Path(tmp) / "partial"
+
+        def fail_after_partial_write(stream, data):
+            stream.write(data[:max(1, len(data) // 2)])
+            raise OSError("simulated write interruption")
+
+        try:
+            publish_products(partial, {"admission.json": b"bounded-fixture"}, {}, fail_after_partial_write)
+        except OSError as error:
+            if str(error) != "simulated write interruption":
+                raise
+        else:
+            raise Refusal("partial-write fixture unexpectedly completed")
+        if partial.exists() or partial.is_symlink():
+            raise Refusal("failed publication left its own partial output behind")
     # Positive controls execute the real immutable preflight and both original
     # scientific controls without publishing an output vintage.
     pins = load_pin_index()
@@ -452,6 +475,7 @@ def run_controls():
         raise Refusal("positive result fixture differs from retained baseline")
     return {"unsafe_names_rejected": len(rejected_ids), "changed_input_rejected": True,
             "stale_registry_rejected": True, "existing_target_sentinel_preserved": True,
+            "partial_write_cleanup_verified": True,
             "exact_pinned_inputs_admitted": admission["input_count"],
             "four_positive_products_match_baseline": sorted(products)}
 
