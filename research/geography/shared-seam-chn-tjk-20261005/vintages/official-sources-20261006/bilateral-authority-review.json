@@ -6,20 +6,6 @@
   "retrieval_and_retention": "Source response bodies were fetched directly over TLS from the cited official HTTPS pages on 2026-10-06, byte-counted and SHA-256 hashed, then removed from the working tree because clear republication rights for those exact response bytes were not established. Restore from each canonical URL, retain response headers, and verify the listed response-body SHA-256 before reuse. These hashes identify the fetched representations and may change if a live page changes.",
   "sources": [
     {
-      "source_id": "china-mfa-2010-demarcation-treaty-index",
-      "title": "China MFA list of treaties signed in 2010, item 25",
-      "url": "https://www.mfa.gov.cn/web/wjb_673085/zfxxgk_674865/gknrlb/tywj/tyqk/201104/t20110402_9277075.shtml",
-      "final_response_url": "https://www.mfa.gov.cn/web/system/index_17321.shtml",
-      "retrieved_at": "2026-10-06",
-      "response_date_header": "Tue, 06 Oct 2026 11:21:57 GMT",
-      "response_sha256": "271ba2a8c23eedf158d1b6ac23bde1b061e75afc15256424f3297312c5e3288d",
-      "response_bytes": 54156,
-      "reuse": "unknown for this exact page response; restoration-only",
-      "restoration": "GET the canonical URL with normal TLS certificate validation, follow redirects, retain response headers separately, and verify the final-body byte count and SHA-256. Do not disable TLS validation.",
-      "inspected_finding": "Item 25 names the China–Tajikistan border demarcation protocol and records signing on 2010-04-27 in Beijing.",
-      "limits": "Treaty catalog record only; it contains no seam-matched map, marker list or coordinates. Page response may be revised."
-    },
-    {
       "source_id": "china-mfa-2012-border-regime-agreement",
       "title": "Agreement between China and Tajikistan on the Regime of the China–Tajikistan State Border",
       "url": "https://www.mfa.gov.cn/wjb_673085/zfxxgk_674865/gknrlb/tywj/tyqk/201704/P020210830177996111732.pdf",
@@ -76,6 +62,19 @@
       "restoration": "GET the cited official HTTPS page with normal TLS validation; retain response headers separately and verify byte count and SHA-256. Do not disable TLS validation.",
       "inspected_finding": "The page reports delimitation/demarcation issues resolved, lists the 1999 and 2002 agreements and 2010 demarcation protocol, and locates Kulma crossing in Murghab.",
       "limits": "Official summary, not a demarcation map or coordinate register; it does not establish local line position or candidate physical surface."
+    },
+    {
+      "source_id": "china-mfa-2013-joint-declaration",
+      "title": "China and Tajikistan Joint Declaration on Establishing a Strategic Partnership (full text)",
+      "url": "https://www.mfa.gov.cn/ziliao_674904/1179_674909/201305/t20130520_9868261.shtml",
+      "retrieved_at": "2026-10-06",
+      "response_date_header": "Tue, 06 Oct 2026 11:58:07 GMT",
+      "response_sha256": "98480460aeb547654baa2d0332c44382ec44ec79f3cca2a899044a95f4e2b3f0",
+      "response_bytes": 71583,
+      "reuse": "unknown for republication of exact page response; restoration-only",
+      "restoration": "GET this official HTTPS URL with normal TLS validation, preserve response headers separately, and verify exact body size and SHA-256. Do not disable certificate validation.",
+      "inspected_finding": "The joint declaration says the two parties will observe the 1999 China–Tajikistan boundary agreement, 2002 supplementary boundary agreement, and the 2010-04-27 protocol on demarcation of the China–Tajikistan state boundary.",
+      "limits": "Official joint declaration, not the demarcation protocol, its map attachments or marker-coordinate register. It does not position the local legal line relative to the retained candidate."
     }
   ],
   "subject_assessment": [
@@ -84,28 +83,50 @@
       "name": "Tashenkuergantajike",
       "source_role": "2017 generalized administrative source member, as established in retained native-versus-derived comparison",
       "line_position": "unresolved: no retrieved official map sheet or marker-coordinate record was matched to this subject or candidate fragment",
-      "surface": "unresolved: no local multi-date land/water or terrain evidence assessed"
+      "surface": "unresolved: no local multi-date land/water or terrain evidence assessed",
+      "bilateral_context": [
+        "china-mfa-2013-joint-declaration"
+      ]
     },
     {
       "subject_id": "gb:CHN:ADM2:17275852B99352197075157",
       "name": "Anketaoxian",
       "source_role": "2017 generalized administrative source member, as established in retained native-versus-derived comparison",
       "line_position": "unresolved: no retrieved official map sheet or marker-coordinate record was matched to this subject or candidate fragment",
-      "surface": "unresolved: no local multi-date land/water or terrain evidence assessed"
+      "surface": "unresolved: no local multi-date land/water or terrain evidence assessed",
+      "bilateral_context": [
+        "china-mfa-2013-joint-declaration"
+      ]
     },
     {
       "subject_id": "gb:TJK:ADM2:16282066B16686410577714",
       "name": "Murghob District",
       "source_role": "2017 generalized administrative source member, as established in retained native-versus-derived comparison",
       "line_position": "unresolved: no retrieved official map sheet or marker-coordinate record was matched to this subject or candidate fragment",
-      "surface": "unresolved: no local multi-date land/water or terrain evidence assessed"
+      "surface": "unresolved: no local multi-date land/water or terrain evidence assessed",
+      "bilateral_context": [
+        "china-mfa-2013-joint-declaration"
+      ]
     }
   ],
   "engineering_and_research_handoff": [
     "Request the official 2010 demarcation protocol with map sheets/coordinate schedules, plus relevant joint-inspection marker register and current inspection records; identify the segment and preserve authority, datum, scale, vintage and reuse terms.",
     "Only after obtaining those records, compare their line/coordinates to the immutable fragment under independent geospatial review; do not infer the line from generalized ADM2 boundaries or annex administrative names.",
     "Assess physical surface separately using licensed multi-date imagery plus suitable terrain and seasonal-hydrology sources; record dates, resolution and uncertainty. WorldCover 2021 v200 is a possible coarse lead, not a result.",
-    "A Tajik chronicle PDF endpoint was attempted but its presented TLS certificate hostname did not match the requested host; it was not fetched or analyzed. No certificate validation bypass was used."
+    "A Tajik chronicle PDF endpoint was attempted but its presented TLS certificate hostname did not match the requested host; it was not fetched or analyzed. No certificate validation bypass was used.",
+    "The previously cited 2010 China MFA treaty-index URL returned a system-maintenance page in the inspected representation and has been excluded from treaty facts; use the accessible 2013 official joint declaration and 2012 agreement instead."
   ],
-  "decision": "The bilateral legal framework and separate authoritative demarcation-record chain are better documented, but the local demarcated line and candidate physical surface remain unresolved. Preserve the current bounded no-correction proposal; do not infer ownership, dry land or boundary location."
+  "decision": "The accessible official bilateral records and separate authoritative demarcation-record chain are documented, but the local demarcated line and candidate physical surface remain unresolved. Preserve the current bounded no-correction proposal; do not infer ownership, dry land or boundary location.",
+  "access_checks": [
+    {
+      "source_url_attempted": "https://www.mfa.gov.cn/web/wjb_673085/zfxxgk_674865/gknrlb/tywj/tyqk/201104/t20110402_9277075.shtml",
+      "retrieved_at": "2026-10-06",
+      "final_response_url": "https://www.mfa.gov.cn/web/system/index_17321.shtml",
+      "response_date_header": "Tue, 06 Oct 2026 11:21:57 GMT",
+      "response_bytes": 54156,
+      "response_sha256": "271ba2a8c23eedf158d1b6ac23bde1b061e75afc15256424f3297312c5e3288d",
+      "observed_content": "System maintenance page; it contains no treaty-list item 25.",
+      "treatment": "Excluded as factual treaty evidence. The prior draft incorrectly associated these response bytes with the treaty-index claim. The claim is now grounded in the accessible official 2013 joint declaration and the independently inspected 2012 agreement PDF."
+    }
+  ]
 }

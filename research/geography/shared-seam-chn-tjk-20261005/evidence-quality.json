@@ -807,22 +807,6 @@
       "temporal_status": "reference"
     },
     {
-      "id": "china-mfa-2010-demarcation-treaty-index",
-      "url": "https://www.mfa.gov.cn/web/wjb_673085/zfxxgk_674865/gknrlb/tywj/tyqk/201104/t20110402_9277075.shtml",
-      "role": "Official China MFA 2010 treaty catalog record for the bilateral border-demarcation protocol",
-      "vintage": "2010 treaty catalog; response retrieved 2026-10-06",
-      "retrieved_at": "2026-10-06",
-      "license": {
-        "status": "unknown",
-        "terms": "Official treaty index; reuse rights for exact page response not stated."
-      },
-      "retention": "restoration-only",
-      "verification": "verified",
-      "restoration": "Direct HTTPS retrieval with standard TLS verification; response SHA-256 271ba2a8c23eedf158d1b6ac23bde1b061e75afc15256424f3297312c5e3288d, 54156 bytes, HTTP date Tue, 06 Oct 2026 11:21:57 GMT. Restore from cited URL, preserve headers and verify exact bytes; do not bypass TLS.",
-      "limit": "Catalog is not the protocol, map, coordinate schedule or seam evidence.",
-      "temporal_status": "reference"
-    },
-    {
       "id": "china-mfa-2012-border-regime-agreement",
       "url": "https://www.mfa.gov.cn/wjb_673085/zfxxgk_674865/gknrlb/tywj/tyqk/201704/P020210830177996111732.pdf",
       "role": "Official bilateral border-regime agreement; Articles 1\u20133, 6 and Annexes 6, 9 inspected",
@@ -869,13 +853,29 @@
       "restoration": "Direct HTTPS retrieval with standard TLS verification; response SHA-256 cac128ca36d0110a9ee9abda469aaf23d03f132ead31d73807dca8ee6af11181, 41864 bytes, HTTP date Tue, 06 Oct 2026 16:02:41 GMT. Restore from cited URL, preserve headers and verify exact bytes; do not bypass TLS.",
       "limit": "Summary has no local map/coordinate register or candidate surface classification.",
       "temporal_status": "reference"
+    },
+    {
+      "id": "china-mfa-2013-joint-declaration",
+      "url": "https://www.mfa.gov.cn/ziliao_674904/1179_674909/201305/t20130520_9868261.shtml",
+      "role": "Official China\u2013Tajikistan joint declaration naming and dating the bilateral demarcation protocol",
+      "vintage": "Joint declaration published 2013-05-20; response retrieved 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Official declaration page; republication rights for the exact page response are not stated."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Direct TLS-verified HTTPS response; SHA-256 98480460aeb547654baa2d0332c44382ec44ec79f3cca2a899044a95f4e2b3f0, 71,583 bytes; Date header Tue, 06 Oct 2026 11:58:07 GMT. Restore from canonical URL, retain headers and verify exact bytes.",
+      "limit": "The joint declaration names and dates the protocol but is not its map attachment or marker-coordinate register and does not locate the legal line against this seam.",
+      "temporal_status": "reference"
     }
   ],
   "outputs": [
     {
       "path": "research/geography/shared-seam-chn-tjk-20261005/README.md",
-      "bytes": 10417,
-      "sha256": "04bf5cd519e778070f21ac863cda47bb478c806809e92c7a1fd9a715ff782112",
+      "bytes": 10704,
+      "sha256": "6d9e19a8096429e0445566ac1f1150b7b02edca3d50bae33a3c8904c7204fa4f",
       "hash_kind": "file-bytes"
     },
     {
@@ -1084,8 +1084,8 @@
     },
     {
       "path": "research/geography/shared-seam-chn-tjk-20261005/vintages/official-sources-20261006/bilateral-authority-review.json",
-      "bytes": 9401,
-      "sha256": "62dd5147bf6c6f403bb3fcf38b4eee57eef33c6a2895f050c01fc65ee070b103",
+      "bytes": 10841,
+      "sha256": "c765ba2bbdccd3abaa44a67e712c0b510c0eb3706b66a4ef97ebddf108d1c35d",
       "hash_kind": "file-bytes"
     }
   ],
@@ -1494,7 +1494,8 @@
       "source_ids": [
         "tajik-mfa-boundary-summary",
         "china-mfa-treaty-record-1999",
-        "china-mfa-land-boundary-index"
+        "china-mfa-land-boundary-index",
+        "china-mfa-2013-joint-declaration"
       ]
     },
     {
@@ -1518,9 +1519,9 @@
       "text": "Official bilateral records place the 2010 demarcation protocol and future joint-inspection coordinate records in the authority chain for marker location; the inspected 2012 agreement also expressly addresses seasonal boundary rivers and crossing waters. This identifies missing record types but does not locate the local line or classify the fragment.",
       "status": "supported",
       "source_ids": [
-        "china-mfa-2010-demarcation-treaty-index",
         "china-mfa-2012-border-regime-agreement",
-        "tajik-mfa-state-border-summary-current-review"
+        "tajik-mfa-state-border-summary-current-review",
+        "china-mfa-2013-joint-declaration"
       ]
     },
     {
