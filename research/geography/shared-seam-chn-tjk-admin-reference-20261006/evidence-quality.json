@@ -1,0 +1,519 @@
+{
+  "version": 1,
+  "issue": 1118,
+  "lane": "geography",
+  "worker_id": "01a11013-8ab3-7691-9548-082b89a5a25a",
+  "subject_ids": [
+    "gb:CHN:ADM2:17275852B723995182906",
+    "gb:CHN:ADM2:17275852B99352197075157",
+    "gb:TJK:ADM2:16282066B16686410577714"
+  ],
+  "subject_ids_sha256": "d4131c2f029c2d3d5ca266411f1691cce52d5d2906fbdf8be22e20b5a292daa8",
+  "baseline": {
+    "commit": "9b6caab28a59b32d6cd335a86c2b01d9d3f169b2",
+    "files": [
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/canonical-grid/manifest.json",
+        "bytes": 271171,
+        "sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-3.json",
+        "bytes": 5153118,
+        "sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-23.json",
+        "bytes": 4962410,
+        "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/report.json",
+        "bytes": 492083,
+        "sha256": "230a49dbb3feab482d2946a7a4c75b9b8069acd841fc2609f2251cf6d2d58330",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "canonical_grid": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+      "hierarchy": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "fragment_container": "230a49dbb3feab482d2946a7a4c75b9b8069acd841fc2609f2251cf6d2d58330"
+    },
+    "pin_files": {
+      "canonical_grid": "data/canonical-grid/manifest.json",
+      "hierarchy": "data/hierarchy.json",
+      "fragment_container": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/report.json"
+    },
+    "subject_files": {
+      "gb:CHN:ADM2:17275852B723995182906": "data/geography/part-3.json",
+      "gb:CHN:ADM2:17275852B99352197075157": "data/geography/part-3.json",
+      "gb:TJK:ADM2:16282066B16686410577714": "data/geography/part-23.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "xjakt-county-overview",
+      "url": "https://www.xjakt.gov.cn/xjakt/c104788/202404/12638b221beb4a489fcb68c7b6bb0688.shtml",
+      "role": "official Akto name and parent prefecture identity",
+      "vintage": "2024 URL path segment; retrieved 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Product/page-specific redistribution permission not established; cite minimal factual/service-description text only."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Reopen official source URL https://www.xjakt.gov.cn/xjakt/c104788/202404/12638b221beb4a489fcb68c7b6bb0688.shtml; no source-page copy was retained.",
+      "limit": "No page snapshot retained; source-specific portal policy allows attributed public-information reuse for marked material, not a raw geometry license.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "xjhb-county-portal",
+      "url": "https://www.xjhb.gov.cn/tskeg/zjtx/list_zj.shtml",
+      "role": "official Tashkurgan county identity under Kashgar Prefecture",
+      "vintage": "undated current portal, retrieved 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Product/page-specific redistribution permission not established; cite minimal factual/service-description text only."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Reopen official source URL https://www.xjhb.gov.cn/tskeg/zjtx/list_zj.shtml; no source-page copy was retained.",
+      "limit": "Page terms not established; no page copy or geometry retained.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "xinjiang-2010-code-list",
+      "url": "https://wlt.xinjiang.gov.cn/wlt/tzgg/201002/ad846d527eed4068b429b66ad6a24a6b.shtml",
+      "role": "historical official administrative code list",
+      "vintage": "published 2010-02-04; retrieved 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Product/page-specific redistribution permission not established; cite minimal factual/service-description text only."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Reopen official source URL https://wlt.xinjiang.gov.cn/wlt/tzgg/201002/ad846d527eed4068b429b66ad6a24a6b.shtml; no source-page copy was retained.",
+      "limit": "Codes are historical, not verified as current 2026; no page copy retained.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "tajik-president-2026-gbao-record",
+      "url": "https://api.president.tj/event/domestic_trips/53882",
+      "role": "official contemporary record names Murghob among GBAO districts",
+      "vintage": "2026-09-27 event; retrieved 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Product/page-specific redistribution permission not established; cite minimal factual/service-description text only."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Reopen official source URL https://api.president.tj/event/domestic_trips/53882; no source-page copy was retained.",
+      "limit": "No page copy retained; supports identity/parent only.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "ngcc-webmap-catalogue",
+      "url": "https://www.webmap.cn/main.do?method=index1",
+      "role": "official catalogue lead for 1:250,000 county polygon layer",
+      "vintage": "catalogue version unresolved; retrieved 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Product/page-specific redistribution permission not established; cite minimal factual/service-description text only."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Reopen official source URL https://www.webmap.cn/main.do?method=index1; no source-page copy was retained.",
+      "limit": "Direct retrieval timed out; product vintage, precision, vector package and product-level redistribution terms unresolved.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "tianditu-admin-search-docs",
+      "url": "https://lbs.tianditu.gov.cn/server/search2.html",
+      "role": "official administrative-area search/API documentation",
+      "vintage": "accessed 2026-10-06; version unstated",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Product/page-specific redistribution permission not established; cite minimal factual/service-description text only."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Reopen official source URL https://lbs.tianditu.gov.cn/server/search2.html; no source-page copy was retained.",
+      "limit": "Describes attributes/bounds, not a raw reusable boundary archive; rights for raw features unknown.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "tajik-geoportal",
+      "url": "https://geoportal.tj/",
+      "role": "official cadastral lookup service description",
+      "vintage": "accessed 2026-10-06; vintage unstated",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Product/page-specific redistribution permission not established; cite minimal factual/service-description text only."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Reopen official source URL https://geoportal.tj/; no source-page copy was retained.",
+      "limit": "No district boundary download or reuse terms verified.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "tajik-stat-admin-units-2025",
+      "url": "https://www.stat.tj/wp-content/uploads/2026/06/administrative-area_units-2.xlsx",
+      "role": "Official administrative-unit count workbook; not boundary geometry",
+      "vintage": "workbook count date 2025-01-01; Last-Modified observed 2026-06-18",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "redistributable",
+        "terms": "CC BY 4.0 per Agency analytical-tables page; attribution/source link included."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "files": [
+        {
+          "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/sources/tajik-stat-admin-units-2025.xlsx",
+          "bytes": 11242,
+          "sha256": "c0576b220fa3d2b7281d4c4680b3e143a523dec3a733c0fe3eba23ed91e47e40",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "restoration": "Exact XLSX whole bytes retained; verify encoded file SHA and member inventory in source-inventory.json.",
+      "limit": "Count table only; no district-level boundary outlines or coordinates."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/README.md",
+      "bytes": 5234,
+      "sha256": "9bd02171ecadaa89fd0526479243c55074847cbc6ade441fab736508313c4395",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/crosswalk.json",
+      "bytes": 3685,
+      "sha256": "86fdab2aa1a2bd7ceef6bf31933f685dae2140e6d39a311a3af9bab04422cc79",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/geometry-product-assessment.json",
+      "bytes": 5362,
+      "sha256": "5b89e54a28dbf38f1ea22ef11a145227941950b2b051cad9dbc04b49623ebe09",
+      "hash_kind": "file-bytes",
+      "role": "generated-result"
+    },
+    {
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/sources/source-inventory.json",
+      "bytes": 8168,
+      "sha256": "9ff39b033b63ad7f10e2b7a5fec8ecb025f99d65c54365224d77d30e54169f6a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/scripts/inspect_admin_table.py",
+      "bytes": 4091,
+      "sha256": "945da08a70d29e858121893402c4cf0316550850d665cc662a40df8b2eed679a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-run-3.json",
+      "bytes": 960,
+      "sha256": "41c12f32a01b47ed0feae9680f1b5d3d9e961a80ce8b047800ac9939e2b53b76",
+      "hash_kind": "file-bytes",
+      "role": "generated-result"
+    },
+    {
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-run-4.json",
+      "bytes": 960,
+      "sha256": "41c12f32a01b47ed0feae9680f1b5d3d9e961a80ce8b047800ac9939e2b53b76",
+      "hash_kind": "file-bytes",
+      "role": "generated-result"
+    },
+    {
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/superseded-run-v1-column-interpretation-1.json",
+      "bytes": 800,
+      "sha256": "4086dd4854a9cb0bd6ec4fbbe48f18538e8b936fe2e155220f620a9ebe268794",
+      "hash_kind": "file-bytes",
+      "role": "generated-result"
+    },
+    {
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/superseded-run-v1-column-interpretation-2.json",
+      "bytes": 800,
+      "sha256": "4086dd4854a9cb0bd6ec4fbbe48f18538e8b936fe2e155220f620a9ebe268794",
+      "hash_kind": "file-bytes",
+      "role": "generated-result"
+    },
+    {
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-controls.json",
+      "bytes": 837,
+      "sha256": "b37212d9c7c7d82aa270b8df025f58fb4c3c3fc9742c51e943bc747d6a62e5eb",
+      "hash_kind": "file-bytes",
+      "role": "generated-result"
+    },
+    {
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-reproducibility.json",
+      "bytes": 835,
+      "sha256": "1ba2ad4cf58b1d8904a6395bab17fc8dfebfcc4ce7f02f3c17ef64b69458d8ee",
+      "hash_kind": "file-bytes",
+      "role": "generated-result"
+    }
+  ],
+  "methods": [
+    {
+      "id": "source-identity-review",
+      "kind": "source",
+      "description": "Cross-referenced exact Atlas IDs and current official government statements for Chinese county and Tajik district/parent names. 2010 official China codes are labeled historical.",
+      "software": "Manual primary-source review; Python 3 standard library XLSX parser.",
+      "units": "names and administrative parent identity"
+    },
+    {
+      "id": "product-availability-review",
+      "kind": "source",
+      "description": "Examined official catalogue/API/geoportal descriptions for vector delivery, product vintage, stated precision, access and rights. No geometry was downloaded or compared.",
+      "software": "Manual primary-source review, retrieved 2026-10-06.",
+      "units": "product access and legal-status findings"
+    },
+    {
+      "id": "tajik-stat-admin-table",
+      "kind": "source",
+      "description": "Parsed exact XLSX headers and GBAO row with stdlib zipfile/XML; preserved literal source headings/values. Positive and mutation-negative controls exercise same acceptance predicate; two byte-identical complete runs follow committed code.",
+      "software": "Python 3 standard library; Git; no third-party modules.",
+      "units": "source cell values, not spatial measurements"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "tjk_gbao_regions_cell_value",
+      "value": 7,
+      "unit": "source cell value under literal Regions header",
+      "vintage": "baseline",
+      "input_sha256": "c0576b220fa3d2b7281d4c4680b3e143a523dec3a733c0fe3eba23ed91e47e40",
+      "evaluation_commit": "9b6caab28a59b32d6cd335a86c2b01d9d3f169b2"
+    },
+    {
+      "id": "tjk_gbao_towns_total_cell_value",
+      "value": 1,
+      "unit": "source cell value under literal Towns (total) header",
+      "vintage": "baseline",
+      "input_sha256": "c0576b220fa3d2b7281d4c4680b3e143a523dec3a733c0fe3eba23ed91e47e40",
+      "evaluation_commit": "9b6caab28a59b32d6cd335a86c2b01d9d3f169b2"
+    },
+    {
+      "id": "tjk_gbao_towns_of_which_republican_and_regional_submission_cell_value",
+      "value": 1,
+      "unit": "source cell value under literal Towns subcolumn header",
+      "vintage": "baseline",
+      "input_sha256": "c0576b220fa3d2b7281d4c4680b3e143a523dec3a733c0fe3eba23ed91e47e40",
+      "evaluation_commit": "9b6caab28a59b32d6cd335a86c2b01d9d3f169b2"
+    },
+    {
+      "id": "tjk_gbao_colonies_cell_value",
+      "value": 4,
+      "unit": "source cell value under literal Colonies header",
+      "vintage": "baseline",
+      "input_sha256": "c0576b220fa3d2b7281d4c4680b3e143a523dec3a733c0fe3eba23ed91e47e40",
+      "evaluation_commit": "9b6caab28a59b32d6cd335a86c2b01d9d3f169b2"
+    },
+    {
+      "id": "tjk_gbao_number_of_jamoats_cell_value",
+      "value": 42,
+      "unit": "source cell value under literal Number of jamoats header",
+      "vintage": "baseline",
+      "input_sha256": "c0576b220fa3d2b7281d4c4680b3e143a523dec3a733c0fe3eba23ed91e47e40",
+      "evaluation_commit": "9b6caab28a59b32d6cd335a86c2b01d9d3f169b2"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "tjk_gbao_regions_cell_value",
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-run-3.json",
+      "json_pointer": "/gbao_row/Regions"
+    },
+    {
+      "metric_id": "tjk_gbao_towns_total_cell_value",
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-run-3.json",
+      "json_pointer": "/gbao_row/Towns_total"
+    },
+    {
+      "metric_id": "tjk_gbao_towns_of_which_republican_and_regional_submission_cell_value",
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-run-3.json",
+      "json_pointer": "/gbao_row/Towns_of_which_republican_and_regional_submission"
+    },
+    {
+      "metric_id": "tjk_gbao_colonies_cell_value",
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-run-3.json",
+      "json_pointer": "/gbao_row/Colonies"
+    },
+    {
+      "metric_id": "tjk_gbao_number_of_jamoats_cell_value",
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-run-3.json",
+      "json_pointer": "/gbao_row/Number_of_jamoats"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "tjk_gbao_regions_cell_value",
+      "value": 7,
+      "unit": "source cell value under literal Regions header"
+    },
+    {
+      "metric_id": "tjk_gbao_towns_total_cell_value",
+      "value": 1,
+      "unit": "source cell value under literal Towns (total) header"
+    },
+    {
+      "metric_id": "tjk_gbao_towns_of_which_republican_and_regional_submission_cell_value",
+      "value": 1,
+      "unit": "source cell value under literal Towns subcolumn header"
+    },
+    {
+      "metric_id": "tjk_gbao_colonies_cell_value",
+      "value": 4,
+      "unit": "source cell value under literal Colonies header"
+    },
+    {
+      "metric_id": "tjk_gbao_number_of_jamoats_cell_value",
+      "value": 42,
+      "unit": "source cell value under literal Number of jamoats header"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "The three exact Atlas subject IDs correspond to the cited official modern names and parent units at the stated source-vintage level; the two China code values are historical 2010 references, not verified 2026 codes.",
+      "status": "supported",
+      "source_ids": [
+        "xjakt-county-overview",
+        "xjhb-county-portal",
+        "xinjiang-2010-code-list",
+        "tajik-president-2026-gbao-record"
+      ]
+    },
+    {
+      "text": "An official China 1:250,000 catalogue is a follow-up lead, but a current, precision-documented vector product and its redistribution rights were not established.",
+      "status": "unresolved",
+      "source_ids": [
+        "ngcc-webmap-catalogue"
+      ]
+    },
+    {
+      "text": "Reviewed official Tajik statistics and geoportal materials do not establish a downloadable district boundary vector; the retained workbook is counts-only.",
+      "status": "supported",
+      "source_ids": [
+        "tajik-stat-admin-units-2025",
+        "tajik-geoportal"
+      ]
+    },
+    {
+      "text": "No qualifying joint official geometry source was established; this packet does not compare geometry or determine international/physical boundaries or territorial assignment.",
+      "status": "unresolved",
+      "source_ids": [
+        "ngcc-webmap-catalogue",
+        "tianditu-admin-search-docs",
+        "tajik-geoportal",
+        "tajik-stat-admin-units-2025"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "PYTHONDONTWRITEBYTECODE=1 python3 research/geography/shared-seam-chn-tjk-admin-reference-20261006/scripts/inspect_admin_table.py (run twice after code commit; compare complete JSON bytes)"
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/README.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/crosswalk.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/geometry-product-assessment.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/sources/source-inventory.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/scripts/inspect_admin_table.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/sources/tajik-stat-admin-units-2025.xlsx",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-run-3.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-run-4.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/superseded-run-v1-column-interpretation-1.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/superseded-run-v1-column-interpretation-2.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "tajik-stat-admin-table",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-controls.json"
+    },
+    {
+      "method_id": "tajik-stat-admin-table",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-controls.json"
+    },
+    {
+      "method_id": "tajik-stat-admin-table",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "research/geography/shared-seam-chn-tjk-admin-reference-20261006/outputs/admin-table-reproducibility.json"
+    }
+  ]
+}

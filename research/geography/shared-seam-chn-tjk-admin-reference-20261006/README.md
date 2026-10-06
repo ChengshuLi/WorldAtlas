@@ -18,7 +18,9 @@ For Tajikistan, the President's official 2026 GBAO trip record names Murghob amo
 
 `scripts/inspect_admin_table.py` reads the retained XLSX with Python's standard library and checks the workbook title, date and exact GBAO row cells. A negative control mutates the value under the literal `Regions` column and verifies that the same acceptance predicate rejects it. Execute it after committing the exact code, twice, and preserve both complete JSON outputs. It does not reclassify the publisher's column values, infer Murghob's outline or calculate geographic metrics.
 
-The baseline is main commit `d79cf13a564fbdeb5895fef4725cc2968d5be9d1`. It pins the actual grid and hierarchy files, the full immutable report file containing the inherited fragment, and the exact containing feature files for all three IDs. The fragment's ID and canonical full-feature hash are separately identified in `crosswalk.json`; the feature hash is not misrepresented as a whole-file digest.
+Two earlier diagnostic outputs are retained as `superseded-run-v1-column-interpretation-1.json` and `-2.json`. Their parser matched the source cells but attached unsupported administrative-class labels to the counts. The corrected committed parser reports the workbook's literal headers and values in runs 3 and 4; only those outputs support the final interpretation.
+
+The frozen evidence baseline is commit `9b6caab28a59b32d6cd335a86c2b01d9d3f169b2`, which contains the exact parser and retained source file used for the two reported runs. It pins the actual grid and hierarchy files, the full immutable report file containing the inherited fragment, and the exact containing feature files for all three IDs. The fragment's ID and canonical full-feature hash are separately identified in `crosswalk.json`; the feature hash is not misrepresented as a whole-file digest.
 
 No PDF, raster or vector boundary file was acquired. The identified 12.48 MB Tajik PDF remains outside this packet. China product rights/precision and Tajik vector availability remain unresolved. None of these administrative references establishes an international boundary or physical gap classification.
 
