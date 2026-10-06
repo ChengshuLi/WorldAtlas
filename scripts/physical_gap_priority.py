@@ -170,12 +170,24 @@ def investigation_ranks(record, contexts):
                        'Recorded region ancestry is geographic context, not political affiliation.']}
 
 
-def related_issue_scopes(contact_ids, edge_ids, issue_subjects):
+def issue_subject_index(issue_subjects):
+    """Compile exact declared rosters once; no geography inference is performed."""
+    rosters = {number: frozenset(subjects) for number, subjects in issue_subjects.items()}
+    reverse = {}
+    for number, subjects in rosters.items():
+        for subject in subjects:
+            reverse.setdefault(subject, set()).add(number)
+    return rosters, reverse
+
+
+def related_issue_scopes(contact_ids, edge_ids, issue_subjects, compiled=None):
     """Exact declared subjects locate related work; they do not prove repair scope."""
     contacts, edges = set(contact_ids), set(edge_ids)
     result = []
-    for number, subjects in sorted(issue_subjects.items()):
-        declared = set(subjects)
+    rosters, reverse = compiled if compiled is not None else issue_subject_index(issue_subjects)
+    candidates = set().union(*(reverse.get(subject, set()) for subject in contacts))
+    for number in sorted(candidates):
+        declared = rosters[number]
         matches = sorted(contacts & declared)
         if matches:
             result.append({'issue': number, 'matching_contact_subject_ids': matches,

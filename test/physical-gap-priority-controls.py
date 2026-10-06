@@ -4,7 +4,7 @@ from pathlib import Path
 import unittest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
 from evidence.immutable import canonical_json, sha256
-from physical_gap_priority import investigation_record, partition_accounting, hierarchy_context, investigation_ranks, related_issue_scopes, legacy_grid_links, attach_rank_positions, validate_rank_positions, legacy_water_links, difference_unknown_accounting
+from physical_gap_priority import investigation_record, partition_accounting, hierarchy_context, investigation_ranks, related_issue_scopes, legacy_grid_links, attach_rank_positions, validate_rank_positions, legacy_water_links, difference_unknown_accounting, issue_subject_index
 
 
 def fixture(area=1e-12, shore=False, contacts=None):
@@ -24,6 +24,20 @@ def fixture(area=1e-12, shore=False, contacts=None):
 
 
 class PriorityControls(unittest.TestCase):
+    def test_compiled_issue_rosters_preserve_exact_matches(self):
+        rosters = {10:['a','b','c'], 11:['b','d'], 12:['x'], 13:[]}
+        indexed=issue_subject_index(rosters)
+        for contacts,edges in [(['a','b'],['a','b']),(['b','d'],['d']),([],[]),(['z'],[]),(['x','c'],['x','c'])]:
+            observed=related_issue_scopes(contacts,edges,rosters,compiled=indexed)
+            expected=[]
+            for number,subjects in sorted(rosters.items()):
+                matches=sorted(set(contacts)&set(subjects))
+                if matches:
+                    expected.append({'issue':number,'matching_contact_subject_ids':matches,
+                        'qualification':'complete-recorded-edge-subject-roster' if len(set(edges))>=2 and set(edges)<=set(subjects) else 'partial-contact-context',
+                        'scope_status':'related-subjects-only-geometry-coverage-unverified'})
+            self.assertEqual(observed,expected)
+
     def test_tiny_positive_interior_seam_retained(self):
         r = investigation_record(*fixture())
         self.assertEqual(r['partition'], 'interior-multiple-edge-neighbors')

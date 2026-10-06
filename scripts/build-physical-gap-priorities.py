@@ -13,7 +13,7 @@ import zlib
 
 from evidence.immutable import Baseline, MAX_FILE_BYTES, canonical_json, descriptor, deterministic_gzip, safe_path, sha256
 from physical_component_contacts import component_contacts
-from physical_gap_priority import investigation_record, partition_accounting, hierarchy_context, investigation_ranks, related_issue_scopes, legacy_grid_links, attach_rank_positions, legacy_water_links, difference_unknown_accounting
+from physical_gap_priority import investigation_record, partition_accounting, hierarchy_context, investigation_ranks, related_issue_scopes, legacy_grid_links, attach_rank_positions, legacy_water_links, difference_unknown_accounting, issue_subject_index
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 OWNED = 'coordination/engineering/physical-gap-priorities-1005-20261006-local20/'
@@ -23,7 +23,8 @@ ENVELOPE = 'coordination/engineering/physical-gap-audit-1005-20261005-local18/in
 TRIAGE = 'coordination/engineering/geographic-grid-triage-946-20261005-local08/triage-v1/report.json'
 VERSION = 'worldatlas-physical-gap-investigation-priorities-v1'
 CODE = ['scripts/build-physical-gap-priorities.py', 'scripts/physical_gap_priority.py',
-        'scripts/physical_component_contacts.py', 'scripts/physical_gap_crosswalk.py', 'scripts/evidence/immutable.py']
+        'scripts/physical_component_contacts.py', 'scripts/physical_gap_crosswalk.py',
+        'scripts/physical_gap_audit.py', 'scripts/evidence/immutable.py']
 
 
 class GitInputs:
@@ -234,16 +235,18 @@ def run(commit, issues_path, output):
         unknowns_by_new[row['new_component']].append(row)
     issues=inputs.json(issues_path)
     declared=issue_subjects(issues)
+    compiled_issues=issue_subject_index(declared)
+    native_ids=set(context_by_id)
     investigation=[]
     for component,contact in zip(sorted(records,key=lambda r:r['id']),resolved):
         record=investigation_record(component,contact,by_fragment,operation_unknowns=unknowns_by_new[component['id']])
-        scopes=related_issue_scopes(record['distinct_contact_ids'],record['positive_length_neighbor_ids'],declared)
+        scopes=related_issue_scopes(record['distinct_contact_ids'],record['positive_length_neighbor_ids'],declared,compiled=compiled_issues)
         if scopes:
             record=investigation_record(component,contact,by_fragment,links=scopes,operation_unknowns=unknowns_by_new[component['id']])
         record['legacy_grid_context']=legacy_grid_links(component['id'],links_by_new[component['id']],samples)
         record['archived_water_context']=legacy_water_links(component['id'],links_by_new[component['id']],samples,water['pilots'],water_pin)
         record['investigation_orders']=investigation_ranks(record,context_by_id)
-        record['missing_native_contact_ids']=sorted(set(record['distinct_contact_ids'])-set(context_by_id))
+        record['missing_native_contact_ids']=sorted(set(record['distinct_contact_ids'])-native_ids)
         investigation.append(record)
     counts=partition_accounting(investigation,[r['id'] for r in records])
     order_counts=attach_rank_positions(investigation)
@@ -256,7 +259,8 @@ def run(commit, issues_path, output):
              'native_contexts':write_parts(out,'native-contexts',sorted(contexts,key=lambda r:r['id'])),
              'unmatched_original_unknowns':write_parts(out,'unmatched-original-unknowns',unmatched_errors)}
     result={'version':VERSION,'input_commit':commit,'executed_code_commit':executed,'code_inputs':code,
-            'inputs':list(inputs.pins.values()),'original_native_inputs':native_pins,
+            'inputs':list(inputs.pins.values()),'original_native_inputs':list(native.pins.values()),
+            'native_location_containing_parts':native_pins,
             'original_native_commit':detection['baseline_commit'],'original_component_report':generation['prefix']+'/report.json',
             'outputs':outputs,'component_count':len(investigation),'fragment_count':len(features),
             'native_context_count':len(contexts),'partition_counts':counts,'complete_order_counts':order_counts,
