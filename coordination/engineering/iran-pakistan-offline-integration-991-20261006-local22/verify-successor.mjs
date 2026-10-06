@@ -45,7 +45,23 @@ for(const part of newParts){
 if(!fs.readFileSync(path.join(input,'index.json')).equals(read('index.json'))||
   await geographicMembershipHash(oldMembers)!==previous.membership_sha256||await geographicLocationIdsHash(oldMembers)!==previous.location_ids_sha256||
   await geographicChangesHash(oldChanges)!==previous.changes_sha256)throw Error('Complete predecessor registry differs');
-const migration=JSON.parse(fs.readFileSync(path.join(root,prefix,'release-proof-v3/migration-receipt.json'))),target=new Set(migration.changed_ids);
+const migrationRaw=fs.readFileSync(path.join(root,prefix,'release-proof-v3/migration-receipt.json')),migration=JSON.parse(migrationRaw),target=new Set(migration.changed_ids);
+const validationRaw=fs.readFileSync(path.join(root,prefix,'release-proof-v3/validation.json'));
+const expectedProof={commit:prep.evaluation_commit,path:prefix+'/release-proof-v3/migration-receipt.json',sha256:digest(migrationRaw),
+  validation_path:prefix+'/release-proof-v3/validation.json',validation_sha256:digest(validationRaw),
+  before_footprints_sha256:migration.before_footprints_sha256,after_footprints_sha256:migration.after_footprints_sha256,history_transfer:'none'};
+const originalById=new Map(oldMembers.map(row=>[row.entity_id,row]));
+const expectedSource={id:release.source_id,name:'Joint Saravan–Panjgur modern reference seam',url:'https://www.openstreetmap.org/copyright',
+  license:'ODbL 1.0 for new OSM-derived seam data; retained base source notices preserved',
+  vintage:'OSM snapshots retrieved 2026-10-05; no effective boundary date asserted',status:'reference',supported_from:2026,supported_to:2027,
+  metadata:{reference_only:true,historical_membership_not_asserted:true,history_transfer:'none',predecessor_release:previous.id,
+    predecessor_manifest:{commit:baseline,path:'data/geographic-releases/'+oldPointer.path,sha256:oldPointer.sha256},
+    predecessor_proof_chronology:previous.metadata.geometry_proof_sha256,identity_proof_sequence:previous.metadata.identity_proof_sequence,
+    geometry_migration:expectedProof,source_policy:migration.source_policy,source_evidence:migration.source_evidence,
+    source_offer:'Exact original OSM county/way snapshots and complete joint derivative geography are retained in the primary repository with original notices and hashes.',
+    unresolved_source_limits:migration.source_policy.unknown}};
+// JSON transport omits undefined predecessor fields; compare the actual schema.
+const expectedSourceDocument=JSON.parse(JSON.stringify(expectedSource));
 async function compare(candidate,rows,delta,sourceRows){
   const last=candidate.releases.at(-1);
   if(!isDeepStrictEqual(candidate.releases.slice(0,-1),old.releases)||!isDeepStrictEqual(candidate.batches.slice(0,old.batches.length),old.batches)||
@@ -53,7 +69,7 @@ async function compare(candidate,rows,delta,sourceRows){
   if(last.version!==7||last.id!==prep.successor_release_id||last.metadata.predecessor_release_id!==previous.id||
     last.metadata.predecessor_manifest_sha256!==oldPointer.sha256||last.hierarchy_sha256!==previous.hierarchy_sha256||
     last.footprints_sha256!==migration.after_footprints_sha256||last.location_ids_sha256!==previous.location_ids_sha256||
-    !isDeepStrictEqual(last.expected_counts,previous.expected_counts))throw Error('Successor release identity/source pins differ');
+    !isDeepStrictEqual(last.expected_counts,previous.expected_counts)||!isDeepStrictEqual(last.metadata.geometry_migration,expectedProof))throw Error('Successor release identity/source pins differ');
   if(rows.length!==oldMembers.length||new Set(rows.map(r=>r.entity_id)).size!==rows.length)throw Error('Complete membership roster differs');
   const byId=new Map(rows.map(r=>[r.entity_id,r]));
   for(const original of oldMembers){
@@ -64,7 +80,7 @@ async function compare(candidate,rows,delta,sourceRows){
       for(const key of Object.keys(original).filter(k=>!['source_id','evidence'].includes(k)))
         if(!isDeepStrictEqual(row[key],original[key]))throw Error('Target stable identity/parent/status mutated');
       if(row.source_id!==last.source_id||row.evidence.history_transfer!=='none'||row.evidence.reference_only!==true||
-        row.evidence.geometry_migration.after_footprints_sha256!==migration.after_footprints_sha256)throw Error('Target source migration differs');
+        !isDeepStrictEqual(row.evidence.geometry_migration,expectedProof)||row.evidence.predecessor_release_id!==previous.id||row.evidence.predecessor_membership_sha256!==previous.membership_sha256)throw Error('Target source migration differs');
       for(const [key,value] of Object.entries(original.evidence))if(!isDeepStrictEqual(row.evidence[key],value))throw Error('Original target evidence lost');
     }
     if(Buffer.byteLength(JSON.stringify(row.evidence))>16384)throw Error('Membership evidence exceeds API limit');
@@ -72,10 +88,9 @@ async function compare(candidate,rows,delta,sourceRows){
   if(await geographicMembershipHash(rows)!==last.membership_sha256||await geographicLocationIdsHash(rows)!==last.location_ids_sha256||
     await geographicChangesHash(delta)!==last.changes_sha256)throw Error('Successor full membership/change hashes differ');
   if(delta.length!==2||new Set(delta.map(r=>r.new_entity_id)).size!==2||delta.some(r=>r.old_entity_id!==r.new_entity_id||!target.has(r.new_entity_id)||
-    r.change_type!=='retain'||r.source_id!==last.source_id||r.evidence.history_transfer!=='none'))throw Error('Unsupported identity/history transfer');
-  if(sourceRows.length!==1||sourceRows[0].id!==last.source_id||sourceRows[0].status!=='reference'||
-    sourceRows[0].metadata.reference_only!==true||sourceRows[0].metadata.history_transfer!=='none'||
-    !isDeepStrictEqual(sourceRows[0].metadata.source_policy,migration.source_policy))throw Error('Source reference/limitations changed');
+    r.change_type!=='retain'||r.source_id!==last.source_id||r.evidence.history_transfer!=='none'||r.evidence.reference_only!==true||
+    !isDeepStrictEqual(r.evidence.geometry_migration,expectedProof)||!isDeepStrictEqual(r.evidence.original_source_evidence,originalById.get(r.old_entity_id)?.evidence)))throw Error('Unsupported identity/history transfer');
+  if(sourceRows.length!==1||!isDeepStrictEqual(sourceRows[0],expectedSourceDocument))throw Error('Exact source provenance, terms or limitations changed');
   if(candidate.new_entities!==old.new_entities||candidate.changes!==old.changes+2||candidate.total_memberships!==Math.max(old.total_memberships,rows.length))throw Error('Cumulative counters differ');
   return true;
 }
@@ -91,6 +106,14 @@ await reject('target parent mutation',(_,r)=>{r.find(x=>target.has(x.entity_id))
 await reject('non-target evidence mutation',(_,r)=>{r.find(x=>!target.has(x.entity_id)).evidence.unreviewed=true;});
 await reject('historical transfer',(_,r,d)=>{d[0].evidence.history_transfer='all';});
 await reject('wrong predecessor',c=>{c.releases.at(-1).metadata.predecessor_manifest_sha256='0'.repeat(64);});
+await reject('rehashed changed source URL',(_,r,d,s)=>{s[0].url='https://example.org/wrong';});
+await reject('rehashed changed source license',(_,r,d,s)=>{s[0].license='Unknown';});
+await reject('rehashed changed source vintage',(_,r,d,s)=>{s[0].vintage='1900';});
+await reject('rehashed removed source limits',(_,r,d,s)=>{s[0].metadata.unresolved_source_limits=[];});
+await reject('rehashed changed source evidence',(_,r,d,s)=>{s[0].metadata.source_evidence=[];});
+await reject('rehashed changed source offer',(_,r,d,s)=>{s[0].metadata.source_offer='Not retained';});
+await reject('changed target geometry proof',(_,r)=>{r.find(x=>target.has(x.entity_id)).evidence.geometry_migration.sha256='0'.repeat(64);});
+await reject('changed retained original change evidence',(_,r,d)=>{d[0].evidence.original_source_evidence={};});
 const part=newParts.find(p=>p.path.startsWith('7-memberships-')),damaged=Buffer.from(fs.readFileSync(path.join(input,part.path)));damaged[damaged.length-1]^=1;
 let caught=false;try{decodeGeographicReleaseBatch(damaged,part);}catch{caught=true;}if(!caught)throw Error('Changed batch accepted');
 controls.push({name:'altered encoded membership batch',outcome:'rejected'});
