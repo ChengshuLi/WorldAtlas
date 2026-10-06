@@ -35,7 +35,11 @@ async function build(index,size,opts={}){
       const descriptor={...part,path,encoding:'byte-shuffle',sha256:sha(bytes),decoded_sha256:sha(raw)};
       assets.set('./'+path,bytes);return descriptor;
     }});
-  const grid=await loadOwnershipAssets(metadata,async url=>new Response(assets.get(url)));
+  // Tiny synthetic domains exercise packing/native mathematics, not the
+  // authenticated canonical reference rule. Keep the full compiler metadata;
+  // pass only the generic packing contract to the actual decoder here.
+  const {method,...packing}=metadata;
+  const grid=await loadOwnershipAssets(packing,async url=>new Response(assets.get(url)));
   return {metadata,grid,assets,seen};
 }
 const fixture=()=>[

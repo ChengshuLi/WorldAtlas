@@ -39,7 +39,7 @@ test('actual committed CLI fixture produces two identical complete offline candi
   for (const name of ['prepare-native-candidate.mjs','native-only-inputs.mjs','compile-native-ownership.mjs',
     'native-candidate-manifest.mjs','native-preparation-guards.mjs','native-topology-binding.mjs','verify-native-candidate.mjs'])
     put('scripts/native-ownership/' + name, fs.readFileSync(path.join(source, name)));
-  for (const name of ['src/native-grid.js','src/ownership-codec.js','src/ownership-assets.js','src/pixel-ownership.js','src/pixel-grid.js','scripts/audit-grid-intervals.mjs',latitudePath])
+  for (const name of ['src/native-grid.js','src/ownership-codec.js','src/ownership-assets.js','src/ownership-method.js','src/pixel-ownership.js','src/pixel-grid.js','scripts/audit-grid-intervals.mjs',latitudePath])
     put(name, fs.readFileSync(path.join(atlas, name)));
   const feature = {type: 'Feature', id: 'fixture-location', properties: {name: 'Fixture', parent_id: 'province'},
     geometry: {type: 'Polygon', coordinates: [[[0,0],[1,0],[1,1],[0,1],[0,0]]]}};
@@ -157,7 +157,11 @@ test('canonical owner packing crosses low/high word boundaries with independentl
       const bytes = gzipSync(shuffleOwnershipBytes(words), {level:9}), name = `${part.kind}-${part.offset}.bin.gz`;
       assets.set('./'+name,bytes); return {...part,path:name,encoding:'byte-shuffle',sha256:sha(bytes),decoded_sha256:sha(raw)};
     }});
-  const decoded = await loadOwnershipAssets(compiled, async url => new Response(assets.get(url)));
+  // This isolated owner-word stress control has no factual source/release
+  // descriptor. Decode its generic packing contract; the complete CLI fixture
+  // above exercises the authenticated canonical native manifest itself.
+  const {method,...packing}=compiled;
+  const decoded = await loadOwnershipAssets(packing, async url => new Response(assets.get(url)));
   const threshold = lon => Number((BigInt(size)*BigInt(lon)+180n*(BigInt(size)-1n)+359n)/360n);
   let runs = 0;
   for(let y=0;y<size;y++) {

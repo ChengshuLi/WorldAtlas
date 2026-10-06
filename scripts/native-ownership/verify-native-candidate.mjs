@@ -28,7 +28,7 @@ const code=['package.json', ...[import.meta.url,...[
   'native-only-inputs.mjs','native-preparation-guards.mjs','native-candidate-manifest.mjs'
 ].map(name=>new URL(name,import.meta.url)), ...[
   'src/native-grid.js','scripts/audit-grid-intervals.mjs','src/ownership-assets.js',
-  'src/ownership-codec.js','src/pixel-ownership.js','src/pixel-grid.js'
+  'src/ownership-method.js','src/ownership-codec.js','src/pixel-ownership.js','src/pixel-grid.js'
 ].map(name=>new URL('../../'+name,import.meta.url))].map(url=>path.relative(repo,fileURLToPath(url)))];
 const executed=committedPreparationFiles(repo,head,code);
 const directory = vintage => {
