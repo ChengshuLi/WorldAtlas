@@ -231,7 +231,7 @@ try{
         profileResults.push({id:subject.id,name:subject.name,environments,camera,picks});
       }
       await page.locator('#coverage-button').click();
-      await page.waitForFunction(()=>document.querySelector('#coverage-tree')?.children.length===6);
+      await page.waitForFunction(()=>document.querySelector('#coverage-tree')?.children.length===6&&document.querySelector('#coverage-reviews')?.children.length>0);
       assert.ok(!(await page.locator('#coverage-context').textContent()).includes('could not load'),'Actual coverage report must load the complete compressed audit');
       assert.equal(await page.locator('#coverage-dialog a[href="./pixel-audit.json.gz"]').count(),1,'Complete audit remains downloadable');
       await page.locator('#coverage-dialog').evaluate(dialog=>dialog.close());
