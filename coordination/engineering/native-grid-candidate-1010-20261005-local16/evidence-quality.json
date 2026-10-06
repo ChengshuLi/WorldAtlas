@@ -1,0 +1,1337 @@
+{
+  "version": 1,
+  "issue": 1010,
+  "lane": "engineering",
+  "worker_id": "engineering-coverage-gaps-907-20261005-local01",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "86ad8281a47ce77caa250952e0b7a69c6969d98f",
+    "files": [
+      {
+        "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/native-topology-v1.json",
+        "bytes": 5423,
+        "sha256": "1591ffeecb05231cba633c589e369e7c30277f0cfa5dcf79e554d2c48d695df4",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/inputs.json",
+        "bytes": 16729,
+        "sha256": "3c1031761cb9cb0e4774d13ce363ba777fb54653fedbd5b462b2e5bec6443944",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "coordination/engineering/native-grid-fidelity-1010-20261005-local15/results-v1/native-row-latitudes.f64le.gz",
+        "bytes": 1851757,
+        "sha256": "ab0becdda100da3473d7bb5d34ccda6510aa1c0490c407082072c7201ad1e147",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/canonical-grid/bounds.json.gz",
+        "bytes": 2663523,
+        "sha256": "b33f44b882b4a0c9b89c79fb079b766505a18f2ba0089fe2945ac9b5120fb78f",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/canonical-grid/manifest.json",
+        "bytes": 271171,
+        "sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/canonical-grid/province-membership.bin.gz",
+        "bytes": 67912,
+        "sha256": "01f42b69ca969090d10c42d6a1311215a19ce436b0f3e720f7f873f4a18f90da",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geographic-releases/current-manifest.json",
+        "bytes": 206,
+        "sha256": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geographic-releases/releases-v6-gzip.json.gz",
+        "bytes": 169082,
+        "sha256": "96f4e6b1894ecce4c1f3f2be690ebfceec9fde2ec094c886ddffca96c62e4a16",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/macro-loose-ends-v5-additions.json",
+        "bytes": 11393,
+        "sha256": "8f49c003f2277593041f3526c97b58252599cd53f20abf27fd6a6eb62cfdb5d1",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-0.json",
+        "bytes": 8539839,
+        "sha256": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-1.json",
+        "bytes": 8060108,
+        "sha256": "4f267b0bd2e29d2b6fcac27695dc60c919317f58d43cabef21518b5cdfde5ee7",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-10.json",
+        "bytes": 5144571,
+        "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-11.json",
+        "bytes": 5131824,
+        "sha256": "97271c7b246c44dcb1f2c349590fd7b2e590f5b6c79087e8140c5ae49b5e941f",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-12.json",
+        "bytes": 4489493,
+        "sha256": "24b44617b0164913f598c94c2c1b36e1a2321f0456644cc20e7f2856955b03f7",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-13.json",
+        "bytes": 5709487,
+        "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-14.json",
+        "bytes": 4355198,
+        "sha256": "c8d08cd2264f3bcc94d672ba84d0b4b8c5a2d83205b23ca43104054ceaa971f0",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-15.json",
+        "bytes": 5180426,
+        "sha256": "6f763059820d14a4eab78173a756a8869821dd810e94f77c20eb5510c6cfb1df",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-16.json",
+        "bytes": 5213846,
+        "sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-17.json",
+        "bytes": 4945828,
+        "sha256": "5e79cd74b4bafb8259ce6f7b95ae256d10aaeb2ccd4980c7155c900930c923db",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-18.json",
+        "bytes": 4909063,
+        "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-19.json",
+        "bytes": 4583022,
+        "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-2.json",
+        "bytes": 6259307,
+        "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-20.json",
+        "bytes": 6570767,
+        "sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-21.json",
+        "bytes": 6737781,
+        "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-22.json",
+        "bytes": 4746385,
+        "sha256": "f7ac47c8a9012651773264a31bfd6b360394ad029dd1f9cf88d63150953070d3",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-23.json",
+        "bytes": 4962410,
+        "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-24.json",
+        "bytes": 4816899,
+        "sha256": "b816b89f2d6b9e4aed1bca44748e1ca74e775a8f850793c7b3e8751d88a9705c",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-25.json",
+        "bytes": 4525239,
+        "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-26.json",
+        "bytes": 4608983,
+        "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-27.json",
+        "bytes": 4863162,
+        "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-28.json",
+        "bytes": 6613963,
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-29.json",
+        "bytes": 12932167,
+        "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-3.json",
+        "bytes": 5153118,
+        "sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-30.json",
+        "bytes": 11979437,
+        "sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-31.json",
+        "bytes": 10086485,
+        "sha256": "44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-32.json",
+        "bytes": 10211739,
+        "sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-33.json",
+        "bytes": 607984,
+        "sha256": "d928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-4.json",
+        "bytes": 4835479,
+        "sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-5.json",
+        "bytes": 5226173,
+        "sha256": "20215ef8574bcf8958b3177868a7e7a8bbe206e4770ae7824915e233a90e7cbc",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-6.json",
+        "bytes": 4607953,
+        "sha256": "dc494911da2e31191a3e3020006f67a19678a678d0590f379649302d1a2c299a",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-7.json",
+        "bytes": 4257402,
+        "sha256": "1b2ecda65dc41e5327f4a3ef364066f3a5285aaa85e1cdfa552fc0deb2213387",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-8.json",
+        "bytes": 5097739,
+        "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-9.json",
+        "bytes": 5729632,
+        "sha256": "9a3bd8c8846cad2cd4ff681cf1f9341b876fdba4041214c52dcefecb5918aba6",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/source-restoration-additions.json",
+        "bytes": 1573576,
+        "sha256": "04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "package.json",
+        "bytes": 1387,
+        "sha256": "96481c8339f7ea60cfdfe91b8a42a4bf9d60ef108b3b1d9ffe2de780db1fa443",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "scripts/audit-grid-intervals.mjs",
+        "bytes": 6777,
+        "sha256": "084b907b25cc51304a2317eaacfe9c0fd15eed49cb72ce2489c711f565bed1e9",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "src/native-grid.js",
+        "bytes": 6408,
+        "sha256": "b54d593b9c6c1144e08cf2d536862dd9a14dd138e1851441dcbe4c487cf2d663",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "src/ownership-assets.js",
+        "bytes": 4148,
+        "sha256": "b14470b088208ac66d6ed564b063100c1e58d4d191d441b5e7c5d031eed5864c",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "src/ownership-codec.js",
+        "bytes": 2948,
+        "sha256": "64630f340a2815d5c86706cc4456718054990083d1026e0b420dd8f9f02f593d",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "src/pixel-grid.js",
+        "bytes": 3617,
+        "sha256": "320cc48796d5d3aaf07bb096441346abbe44ed4fab66df08ee003620ce5870a9",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "src/pixel-ownership.js",
+        "bytes": 6134,
+        "sha256": "da8e0b4f05e5ce390b47713030bffeefb7ea0df2700f7c358a9ebe77fe92586f",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {
+      "canonical_grid": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+      "hierarchy": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b"
+    },
+    "pin_files": {
+      "canonical_grid": "data/canonical-grid/manifest.json",
+      "hierarchy": "data/hierarchy.json"
+    },
+    "subject_files": {}
+  },
+  "sources": [
+    {
+      "id": "prepared-framework-originals",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/d55795e4c0ad01527029db0bd1d774124a12a61a/data",
+      "role": "Unchanged original native footprints, stable identity/parent/province crosswalk and geographic release context; numerical inputs, not new source authority. Original encoded ownership runs are retained but not read by this candidate generator.",
+      "vintage": "Immutable original geography release 6 inputs at d55795e4c0ad01527029db0bd1d774124a12a61a",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "Original per-location/source attribution and terms remain unchanged; no new blanket source license or authority."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Read source_files at frozen d55795e4c0ad01527029db0bd1d774124a12a61a and compare declared baseline86ad8281a47ce77caa250952e0b7a69c6969d98f bytes. They are identical. Restore normative table and prior topology evidence from declared ancestor-main paths. Follow committed bootstrap commands; original data/grids remain in place.",
+      "limit": "Native planar validity and numerical faithful representation do not establish source completeness, physical water, political affiliation, source dates or factual geographic approval.",
+      "temporal_status": "reference"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/README.md",
+      "bytes": 1965,
+      "sha256": "b53493be376d320f0312bdd5ec066e1650c499f7e5ac97a602ba6255e956b697",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/inputs.json",
+      "bytes": 11811,
+      "sha256": "e86d1f527dbf013ae84786e030cebaec55aaf340a74262b723ecc730e944ab9c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/manifest.json",
+      "bytes": 251190,
+      "sha256": "efe31373ff6a2c3f4ba5f11f8cbe37b25337778b344d9dbf1d3dfde301e3e722",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/rows-0.bin.gz",
+      "bytes": 306707,
+      "sha256": "fbd4c0218e3e2210ff0e785b35881ca6905e8c1005e950d52eaf9718d66d984f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-0.bin.gz",
+      "bytes": 983823,
+      "sha256": "8f867b6e64b1117a4fa80dd4ed82733ae9696461e1612dc7fb314c40935fd462",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-1048576.bin.gz",
+      "bytes": 999504,
+      "sha256": "2bda4f1128703596e5dad026013d81b944471052aea388d7bd20c504ca735e7b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-10485760.bin.gz",
+      "bytes": 855339,
+      "sha256": "41573aead112141c0dd904c33f1b9c47074d93b7c8dd68da0184bf6f297c80ca",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-11534336.bin.gz",
+      "bytes": 874119,
+      "sha256": "c8b834faad9825db2b50b579cfb1e49dbd31698adfb5dfc7dd6a1eae015d536a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-12582912.bin.gz",
+      "bytes": 878294,
+      "sha256": "ad248445d13714a5aeb9f4dd371b330d1b6443293f1e0f55a2767d66294a1717",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-13631488.bin.gz",
+      "bytes": 866895,
+      "sha256": "c7909c129678ae56d4a4a1815b6a3c41613ef1a4ee1c7df73c32a50da341d30f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-14680064.bin.gz",
+      "bytes": 867980,
+      "sha256": "cd7751fd1c9d3c707c5dd5d32b120fc30e8d85f71ba712a5404501d678ca027a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-15728640.bin.gz",
+      "bytes": 876729,
+      "sha256": "25b4c8b1e0baff140fc6ba86231c52bdc709fd763d87ff63c77dd0a5f640662d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-16777216.bin.gz",
+      "bytes": 846061,
+      "sha256": "ce2a3d020af88ded0d04a9835e100bc8b8d16c9452fa2b47418950c137a7f2e9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-17825792.bin.gz",
+      "bytes": 827007,
+      "sha256": "d948cc214c6793e776572ce80d7adc7343a25a45b17524f581d21a7c3adb5189",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-18874368.bin.gz",
+      "bytes": 816599,
+      "sha256": "c9d72e1e88e3e6e1d7deb8141c9854ccb9794cab24b489a5cf8c3ae048067ab8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-19922944.bin.gz",
+      "bytes": 812930,
+      "sha256": "7f2e1af8be1158ae562db72a941b748eee6555a753e126b9d2c0305c39b5bdf7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-2097152.bin.gz",
+      "bytes": 967519,
+      "sha256": "fca2e7d5f30a1914d370ebf660c69bdb5b872af41e528a7f0bebde08de6644ea",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-20971520.bin.gz",
+      "bytes": 792059,
+      "sha256": "81e9475d8e426a2ffba6666f82670c2993029ca71df3e3d35d8296cf3a0ec35f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-22020096.bin.gz",
+      "bytes": 789756,
+      "sha256": "74cc431765cfdbb1c02907feac89a8bd50d996031d22e25fbf4c85a051cb72f6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-23068672.bin.gz",
+      "bytes": 788444,
+      "sha256": "457821241979e8dc8a0646af4c704af1fa350c9331bdb4119c4690e27e016a1c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-24117248.bin.gz",
+      "bytes": 787631,
+      "sha256": "bb128ba2dfebc576af2b2091ef7d8a650abba83fec0e5ce1bba18fa37ac59081",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-25165824.bin.gz",
+      "bytes": 805336,
+      "sha256": "22f1decdcffb44861082adc014c4c9626f106265f98cf9defd9ecb2e852b7f1b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-26214400.bin.gz",
+      "bytes": 836070,
+      "sha256": "987689c7cb980b9a6e53fdf36c4d6b0b656d4bf5aa107699aad2e276f1860ca1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-27262976.bin.gz",
+      "bytes": 823672,
+      "sha256": "b5bf435d4d484d95b13430a052671e4da4aaf71646a59b429a0e576ccd16edc5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-28311552.bin.gz",
+      "bytes": 820941,
+      "sha256": "f5f8c8d0a28e5ebe81257e0ebb8abed4aec966c2bb86880c44d546575d9145a7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-29360128.bin.gz",
+      "bytes": 806415,
+      "sha256": "edb4b2b3258b5708e794088f2e762cd962b3fb1b5395ff8cc525eaa72206c90f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-30408704.bin.gz",
+      "bytes": 808801,
+      "sha256": "c840d4dd2f611e2c19dff1a3ca8cfe937607a5f65fc8093f66cba152656200e6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-3145728.bin.gz",
+      "bytes": 903226,
+      "sha256": "5ab8e10a21297c2c84c6feeeb907935589d02fbcfd30837b31065596f47009b4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-31457280.bin.gz",
+      "bytes": 832805,
+      "sha256": "884b709a9581b9a5f39a13306ed77335593e0ec9a3b5e5ad39c841664a0a9da9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-32505856.bin.gz",
+      "bytes": 858271,
+      "sha256": "c804d08f5e26ceb6257de5fa52ac3c8ed008ebf65d8bf493ae7f3395656e458b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-33554432.bin.gz",
+      "bytes": 879723,
+      "sha256": "aa5b2f73be17f26d585eae47c6d61203596f1a7b57ab1f868e9af733a55f89a4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-34603008.bin.gz",
+      "bytes": 868464,
+      "sha256": "a0344f18582a8887ddeb33b1100f99fa6c5b7ce0c207965126cc9b08f696987e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-35651584.bin.gz",
+      "bytes": 894419,
+      "sha256": "9a7b4f9f12e21a92ac1ee63fee6b539d72a3e1cc2357b47263846e07a8a8227d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-36700160.bin.gz",
+      "bytes": 892291,
+      "sha256": "daf8607b2f37855992ce7b31a63400f5f98a70f84a6d518a85c6510838106a63",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-37748736.bin.gz",
+      "bytes": 880040,
+      "sha256": "d741dced36080e4f10d01762db6a10a0cab9749633c0b5052e10890afcfed3ba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-38797312.bin.gz",
+      "bytes": 869848,
+      "sha256": "bc5003ffb881bbb942ab7d334f469e0c20998a762d8ee12fd12448a11cd82456",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-39845888.bin.gz",
+      "bytes": 873708,
+      "sha256": "4ee17aab5f21287604b59a8a25adaac0c7ecdd3eaf56c09ef77803c02b2d486c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-40894464.bin.gz",
+      "bytes": 888629,
+      "sha256": "069e5857d543e2546f061f6720dd24ab11056e29a6e1c204ac25666e2f4a33e3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-4194304.bin.gz",
+      "bytes": 868242,
+      "sha256": "2d39a4a314ff55f8f4135e21ac6f8dd42359a801f01ab435b7b4adb31019003e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-41943040.bin.gz",
+      "bytes": 896715,
+      "sha256": "a0516c2d8e95194dd405ab59170ad95984c37f85506ed6558c63d0f142ebd842",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-42991616.bin.gz",
+      "bytes": 890486,
+      "sha256": "b82e8ea66f1e48a4adc47e90ee2c166506ef6749504a3a0deba7e1c902ff6954",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-44040192.bin.gz",
+      "bytes": 876377,
+      "sha256": "05c9bca5629daef98c7ab29a4b7d0762faf90812a8b6023571a85e429feacec3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-45088768.bin.gz",
+      "bytes": 883290,
+      "sha256": "20b55c0571eef5ce7b275e310113662fd9d3115ed28a9344037efd6d87f413d6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-46137344.bin.gz",
+      "bytes": 884758,
+      "sha256": "a8b1e683bd453ecdef11cdb77b8435a4929e48f04fe000715c5efef15893676f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-47185920.bin.gz",
+      "bytes": 899878,
+      "sha256": "85bb2d7fcb98d215f7849794a6752a83ad212aa55b36f6e66f90d1d35fe01ed8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-48234496.bin.gz",
+      "bytes": 878778,
+      "sha256": "62b55180b136fe105796107e9a28f3dee8e2cd318e250450af00be71de16ce9b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-49283072.bin.gz",
+      "bytes": 903381,
+      "sha256": "e96f6eb8bcb7981f038b5157a5116eb27a88ac6253a49e6b9030f61b5b910f1d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-50331648.bin.gz",
+      "bytes": 877437,
+      "sha256": "1185a1e1011a8f0e2f125e971981cf18f6cf099e7e9a783fee30816e94d3a6a9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-51380224.bin.gz",
+      "bytes": 859559,
+      "sha256": "6fd68346be95c2d38cef12fa84d01a774e6f42155caab6fd05915bc7b2a3ce1e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-5242880.bin.gz",
+      "bytes": 868549,
+      "sha256": "295247e4a865b866070e6747a13dc816d0c7f76573e72ab3519dbb8cd8c33e9a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-52428800.bin.gz",
+      "bytes": 848555,
+      "sha256": "5764e172ebe57c5a0fa21ec083760a73f466af40cb72ba772a6c291f60e421e9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-53477376.bin.gz",
+      "bytes": 822813,
+      "sha256": "7361c21485085840494cc3bfc3ece6b407d2ed96fa449bffd4b2037fd7233b2d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-54525952.bin.gz",
+      "bytes": 798496,
+      "sha256": "c5d027beac5b672fd2fae3658898e4917bafd78de6ea272cc73a8e9b8d7e6e32",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-55574528.bin.gz",
+      "bytes": 813343,
+      "sha256": "4f31f7515e9db6061a35d556c9238e8c19a5e7355c7dceb29d6caa014bf5b5cf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-56623104.bin.gz",
+      "bytes": 852152,
+      "sha256": "3aa3f548869491ef51cf1cd1e5092d5c5a3506559e4070348f738de18a643c27",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-6291456.bin.gz",
+      "bytes": 851783,
+      "sha256": "eca1667dfc637570231ba2a1174e8cc52f34e599a35259915145ebe1045e4663",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-7340032.bin.gz",
+      "bytes": 847665,
+      "sha256": "237e70f2c59d54b80c55e274338a2e1b8e0cf0d9d9356bf861f14a362594cbc7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-8388608.bin.gz",
+      "bytes": 851524,
+      "sha256": "564ac30f9675984701481cf8e6277c43252ed1c02f16245b87536fa64befc221",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-9437184.bin.gz",
+      "bytes": 850915,
+      "sha256": "573f2e8baaf7364810038e67f02c883c4d8661a521d015fcc4b8d674be3d4856",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/preparation-budget.json",
+      "bytes": 233,
+      "sha256": "ebae172e106abb2dc040c1cef799ad75fa9a7fa905c675bc1b75370b53487f22",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/report.json.gz",
+      "bytes": 272097,
+      "sha256": "2e7251c6b11217b33a1e24147496a11fd9bfbc62f6e2f751229ba3d7a5c344d8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/controls-output.txt",
+      "bytes": 1498,
+      "sha256": "52f9191a24788edae108b7a5932598985b2643906d89a280d47e4c88a6fe7485",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/decoded-native-verification.json",
+      "bytes": 10928,
+      "sha256": "3fd8d5cfb18d100af0aee8bb94d33ce25bb5ccb9b2e02a55a8c15d585a86a410",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/negative-control.json",
+      "bytes": 914,
+      "sha256": "a734ae6ba35be51aeee6afcb2390eadc865e5e1add46328c10d74660bca2b156",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/positive-control.json",
+      "bytes": 734,
+      "sha256": "354acd7bceda0995747f5966b28b29d3b50bbac1a22c32bfde369bd2772336bd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/reproducibility.json",
+      "bytes": 783,
+      "sha256": "c73d4e02e048b702e51dc6449861d0be55801541102008c3742c0963afbb6ddb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/runtime-observations.json",
+      "bytes": 1086,
+      "sha256": "12561f2298683353499838cdcc61d5e0ef692b80ee1a7bc647e4937e7e138453",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/native-ownership/compile-native-ownership.mjs",
+      "bytes": 4472,
+      "sha256": "2cb66b2e3b15e48257976a9c4866e453174c0df961214a67a69d92c1dbbcd378",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/native-ownership/native-candidate-manifest.mjs",
+      "bytes": 5877,
+      "sha256": "2d27cc58e97f4337c3c81143ab3d95be12ab7094cf7163037c07ddff6a61b810",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/native-ownership/native-only-inputs.mjs",
+      "bytes": 6576,
+      "sha256": "337f0c8541a850f6e6f045356b0f56481de6768d2b537bba9d321386312f2074",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/native-ownership/native-preparation-guards.mjs",
+      "bytes": 6371,
+      "sha256": "6c4ea2f29f6bfed9176fa8c38dfde522d859442797e4a3cce76f250c69c75fb0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/native-ownership/native-topology-binding.mjs",
+      "bytes": 4666,
+      "sha256": "6e67f28bf6dfc42ba357304c48ecdcb0a981f1ae6139933e771e21c070173fff",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/native-ownership/prepare-native-candidate.mjs",
+      "bytes": 7842,
+      "sha256": "bc2149c1ea55dab412b6d20aad103cfb67c47d532f6f2885bef35c66e8b4d63c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/native-ownership/verify-native-candidate.mjs",
+      "bytes": 8237,
+      "sha256": "16544a393b8e6fda2fc6e2e4c108c3a878d607c8648fed50885fe5a6e7f6b2f1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/native-ownership-compilation.test.mjs",
+      "bytes": 7624,
+      "sha256": "fd1e18c0e96dce0abba15639691856c9681320a51fb8d93b7637817fc8bd2c9d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/native-preparation.test.mjs",
+      "bytes": 15467,
+      "sha256": "848496de8425d3c25ca90fdc571e170e0df69ea9d017a5d7319aa1390b48bf7f",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "native-candidate-preparation",
+      "kind": "generator",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "description": "Immutable native-only loader, retained complete topology/crosswalk binding, bounded exact native rows, stable original first-owner precedence, streamed compact v2 words, separate explicit numerical-method namespace and original asset references. Two full candidate runs; all products byte-identical. Separate actual-decoder comparison of every run/row against native intervals; independent integer membership/half-space controls cover numerical implementation. Shared native interval mathematics is not an independent full-world factual oracle.",
+      "software": "Node24, pinned generator35d2d3ff48957d34ee8d4329824b268ecadc6d3c and verifiera967f2dfeccb4daa16c75102e7bcd1f3b781aaee; normative exact Float64 LE latitude table. Actual software and executed source hashes in inputs and verification outputs.",
+      "units": "integer cell/row/run/owner/product counts; whole-file bytes and SHA256"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "checked_rows",
+      "value": 262166,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "a967f2dfeccb4daa16c75102e7bcd1f3b781aaee",
+      "input_sha256": "e86d1f527dbf013ae84786e030cebaec55aaf340a74262b723ecc730e944ab9c",
+      "scope": "Frozen original data at d55795e4c0ad01527029db0bd1d774124a12a61a, generator35d2d3ff48957d34ee8d4329824b268ecadc6d3c, verifiera967f2dfeccb4daa16c75102e7bcd1f3b781aaee. Whole-domain native numerical/transport proof; no factual geography approval or installed delivery."
+    },
+    {
+      "id": "checked_cells",
+      "value": 68731011556,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "a967f2dfeccb4daa16c75102e7bcd1f3b781aaee",
+      "input_sha256": "e86d1f527dbf013ae84786e030cebaec55aaf340a74262b723ecc730e944ab9c",
+      "scope": "Frozen original data at d55795e4c0ad01527029db0bd1d774124a12a61a, generator35d2d3ff48957d34ee8d4329824b268ecadc6d3c, verifiera967f2dfeccb4daa16c75102e7bcd1f3b781aaee. Whole-domain native numerical/transport proof; no factual geography approval or installed delivery."
+    },
+    {
+      "id": "unchecked_cells",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "a967f2dfeccb4daa16c75102e7bcd1f3b781aaee",
+      "input_sha256": "e86d1f527dbf013ae84786e030cebaec55aaf340a74262b723ecc730e944ab9c",
+      "scope": "Frozen original data at d55795e4c0ad01527029db0bd1d774124a12a61a, generator35d2d3ff48957d34ee8d4329824b268ecadc6d3c, verifiera967f2dfeccb4daa16c75102e7bcd1f3b781aaee. Whole-domain native numerical/transport proof; no factual geography approval or installed delivery."
+    },
+    {
+      "id": "checked_runs",
+      "value": 28808882,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "a967f2dfeccb4daa16c75102e7bcd1f3b781aaee",
+      "input_sha256": "e86d1f527dbf013ae84786e030cebaec55aaf340a74262b723ecc730e944ab9c",
+      "scope": "Frozen original data at d55795e4c0ad01527029db0bd1d774124a12a61a, generator35d2d3ff48957d34ee8d4329824b268ecadc6d3c, verifiera967f2dfeccb4daa16c75102e7bcd1f3b781aaee. Whole-domain native numerical/transport proof; no factual geography approval or installed delivery."
+    },
+    {
+      "id": "owned_cells",
+      "value": 13854400528,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "a967f2dfeccb4daa16c75102e7bcd1f3b781aaee",
+      "input_sha256": "e86d1f527dbf013ae84786e030cebaec55aaf340a74262b723ecc730e944ab9c",
+      "scope": "Frozen original data at d55795e4c0ad01527029db0bd1d774124a12a61a, generator35d2d3ff48957d34ee8d4329824b268ecadc6d3c, verifiera967f2dfeccb4daa16c75102e7bcd1f3b781aaee. Whole-domain native numerical/transport proof; no factual geography approval or installed delivery."
+    },
+    {
+      "id": "owners",
+      "value": 49625,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "a967f2dfeccb4daa16c75102e7bcd1f3b781aaee",
+      "input_sha256": "e86d1f527dbf013ae84786e030cebaec55aaf340a74262b723ecc730e944ab9c",
+      "scope": "Frozen original data at d55795e4c0ad01527029db0bd1d774124a12a61a, generator35d2d3ff48957d34ee8d4329824b268ecadc6d3c, verifiera967f2dfeccb4daa16c75102e7bcd1f3b781aaee. Whole-domain native numerical/transport proof; no factual geography approval or installed delivery."
+    },
+    {
+      "id": "two_run_products",
+      "value": 60,
+      "unit": "count",
+      "vintage": "archived",
+      "evaluation_commit": "a967f2dfeccb4daa16c75102e7bcd1f3b781aaee",
+      "input_sha256": "e86d1f527dbf013ae84786e030cebaec55aaf340a74262b723ecc730e944ab9c",
+      "scope": "Frozen original data at d55795e4c0ad01527029db0bd1d774124a12a61a, generator35d2d3ff48957d34ee8d4329824b268ecadc6d3c, verifiera967f2dfeccb4daa16c75102e7bcd1f3b781aaee. Whole-domain native numerical/transport proof; no factual geography approval or installed delivery."
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "checked_rows",
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/decoded-native-verification.json",
+      "json_pointer": "/checked_rows"
+    },
+    {
+      "metric_id": "checked_cells",
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/decoded-native-verification.json",
+      "json_pointer": "/checked_cells"
+    },
+    {
+      "metric_id": "unchecked_cells",
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/decoded-native-verification.json",
+      "json_pointer": "/unchecked_cells"
+    },
+    {
+      "metric_id": "checked_runs",
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/decoded-native-verification.json",
+      "json_pointer": "/checked_runs"
+    },
+    {
+      "metric_id": "owned_cells",
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/decoded-native-verification.json",
+      "json_pointer": "/owned_cells"
+    },
+    {
+      "metric_id": "owners",
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/decoded-native-verification.json",
+      "json_pointer": "/owners"
+    },
+    {
+      "metric_id": "two_run_products",
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/decoded-native-verification.json",
+      "json_pointer": "/two_run_products"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "native-candidate-preparation",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/positive-control.json"
+    },
+    {
+      "method_id": "native-candidate-preparation",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/negative-control.json"
+    },
+    {
+      "method_id": "native-candidate-preparation",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/reproducibility.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/inputs.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/manifest.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/rows-0.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-0.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-1048576.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-10485760.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-11534336.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-12582912.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-13631488.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-14680064.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-15728640.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-16777216.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-17825792.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-18874368.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-19922944.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-2097152.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-20971520.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-22020096.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-23068672.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-24117248.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-25165824.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-26214400.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-27262976.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-28311552.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-29360128.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-30408704.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-3145728.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-31457280.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-32505856.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-33554432.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-34603008.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-35651584.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-36700160.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-37748736.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-38797312.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-39845888.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-40894464.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-4194304.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-41943040.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-42991616.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-44040192.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-45088768.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-46137344.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-47185920.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-48234496.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-49283072.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-50331648.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-51380224.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-5242880.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-52428800.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-53477376.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-54525952.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-55574528.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-56623104.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-6291456.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-7340032.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-8388608.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/native-v1/ownership/runs-9437184.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/preparation-budget.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/candidate-v1/report.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/controls-output.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/decoded-native-verification.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/runtime-observations.json",
+      "status": "added"
+    },
+    {
+      "path": "scripts/native-ownership/compile-native-ownership.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/native-ownership/native-candidate-manifest.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/native-ownership/native-only-inputs.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/native-ownership/native-preparation-guards.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/native-ownership/native-topology-binding.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/native-ownership/prepare-native-candidate.mjs",
+      "status": "added"
+    },
+    {
+      "path": "scripts/native-ownership/verify-native-candidate.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/native-ownership-compilation.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/native-preparation.test.mjs",
+      "status": "added"
+    }
+  ],
+  "summaries": [],
+  "conclusions": [
+    {
+      "status": "supported",
+      "source_ids": [
+        "prepared-framework-originals"
+      ],
+      "text": "The complete separately versioned candidate deterministically matches the declared original native numerical membership after actual decoding, with original IDs/parents/source bytes and original grids preserved."
+    },
+    {
+      "status": "unresolved",
+      "source_ids": [
+        "prepared-framework-originals"
+      ],
+      "text": "Candidate is offline and unselected. Application/dated fallback/CPU-GPU-Canvas integration, classification and release/content/recovery bindings, independent review and delivery remain required. True source gaps, physical water questions and factual repairs remain separate global work."
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "implemented",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "node --test test/native-ownership-compilation.test.mjs test/native-preparation.test.mjs",
+    "From immutable generator commit35d2d3ff48957d34ee8d4329824b268ecadc6d3c, run scripts/native-ownership/prepare-native-candidate.mjs twice with --repo absolute --baseline d55795e4c0ad01527029db0bd1d774124a12a61a --vintage world-one/world-two. From verifier commita967f2dfeccb4daa16c75102e7bcd1f3b781aaee, run scripts/native-ownership/verify-native-candidate.mjs --repo absolute --one world-one --two world-two. Follow README and retain honest scientific/physical/delivery limits."
+  ]
+}

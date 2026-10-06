@@ -1,0 +1,17 @@
+{
+  "method_id": "native-candidate-preparation",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "code_commit": "a967f2dfeccb4daa16c75102e7bcd1f3b781aaee",
+  "actual_output_path": "coordination/engineering/native-grid-candidate-1010-20261005-local16/controls-output.txt",
+  "controls": [
+    "invalid inactive rings, ordering, part bounds and writer failures never produce a valid result",
+    "actual CLI refuses reused outputs and changed executed code before emitting a candidate",
+    "aggregate byte/descriptor admission and explicit original identity references reject invalid contracts",
+    "actual CLI refuses inherited execution flags before candidate creation",
+    "undeclared nested module configuration fails before immutable code admission"
+  ],
+  "limits": [
+    "Actual committed synthetic CLI, codec, picking and independent integer oracle controls; not factual geography approval."
+  ]
+}
