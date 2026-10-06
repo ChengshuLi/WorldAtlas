@@ -219,15 +219,15 @@
   "outputs": [
     {
       "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/README.md",
-      "bytes": 5924,
-      "sha256": "28ad9255255b5f632098747a0dc0fab71acd272b62f00c4ac179d482c394c10b",
+      "bytes": 6287,
+      "sha256": "530930645bcc738c7b33670f4ff7bf9c2acacd9a48c27c9e51755fcfcce1820c",
       "hash_kind": "file-bytes",
       "role": "source-evidence"
     },
     {
       "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/controls/source-negative-control.json",
-      "bytes": 336,
-      "sha256": "329883af1358da897271563e3dd0682efdb2f1114fd329b202e5d1924bd25e0c",
+      "bytes": 726,
+      "sha256": "f1eea4cfb0e99d58e3461112b4313219d51a8ac9e5f5be8ce579001066129cb1",
       "hash_kind": "file-bytes",
       "role": "source-evidence"
     },
@@ -267,23 +267,44 @@
       "role": "source-evidence"
     },
     {
+      "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/runs/metadata-audit-run-3.json",
+      "bytes": 13404,
+      "sha256": "a6d9f88e7156bc2a5d5023675243a48ccab196f38126a42472c43f891b5fa9a7",
+      "hash_kind": "file-bytes",
+      "role": "source-evidence"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/runs/metadata-audit-run-4.json",
+      "bytes": 13404,
+      "sha256": "a6d9f88e7156bc2a5d5023675243a48ccab196f38126a42472c43f891b5fa9a7",
+      "hash_kind": "file-bytes",
+      "role": "source-evidence"
+    },
+    {
       "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/runs/two-run-reproducibility.json",
       "bytes": 675,
-      "sha256": "35e650df380bfe2e30fd192e72a18d1de8c0b7fdc576ad797abbbf0554ecca0f",
+      "sha256": "dd3759c27005bd67879f6cbd95074f861509b971c91f630c9fcf4c8eb2bc9067",
       "hash_kind": "file-bytes",
       "role": "source-evidence"
     },
     {
       "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/source-assessment.json",
-      "bytes": 7966,
-      "sha256": "0d6e80f177aa8eb7be4e5226f726756c9c27f371332a7b9fbb13a48a09684cb8",
+      "bytes": 8192,
+      "sha256": "4bc646ef562939ded1a68571e48f6e07117b6ab6950bf0b2231f140a1062ff47",
       "hash_kind": "file-bytes",
       "role": "source-evidence"
     },
     {
       "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/tools/inspect_metadata.py",
-      "bytes": 9921,
-      "sha256": "599892f624683674839dcb7f024e0652376cebbedbe74bbe9db06fba9270ff4d",
+      "bytes": 9771,
+      "sha256": "dd0cfa43268137c659fb8c4ab8d5e490db887eec9161a9c3e2d4cd0a30c41b81",
+      "hash_kind": "file-bytes",
+      "role": "source-evidence"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/tools/test_source_byte_gate.py",
+      "bytes": 2052,
+      "sha256": "28fc0392bd092fcd741ea25fd3df61e1e25533765bb8924ec202ede5331ee200",
       "hash_kind": "file-bytes",
       "role": "source-evidence"
     }
@@ -293,7 +314,7 @@
       "id": "soi-metadata-audit",
       "kind": "source",
       "description": "Validate author-local ABDB metadata bytes, ZIP/member inventory and district/subdistrict product identifiers; record bounded metadata facts without inferring redistribution permission.",
-      "software": "Python 3.12.14 standard library; committed inspect_metadata.py; execution commit 736c97d1ad033507c2d116ee260391d8216eb0e0",
+      "software": "Python 3.12.14 standard library; committed inspect_metadata.py; final runs used commit 02b73312bbc091861d6ddd20674ede81598e8d33 and its byte hash is recorded in each output.",
       "units": "encoded and decoded bytes, archive members, metadata identifiers; no geographic measurements"
     }
   ],
@@ -364,7 +385,8 @@
     }
   ],
   "commands": [
-    "python3 -B research/geography/shared-seam-ind-pak-soi-abdb-2026/tools/inspect_metadata.py research/geography/shared-seam-ind-pak-soi-abdb-2026/sources/official/Metadata_ABDB_2026-10-06.zip --repo ."
+    "python3 -B research/geography/shared-seam-ind-pak-soi-abdb-2026/tools/inspect_metadata.py research/geography/shared-seam-ind-pak-soi-abdb-2026/sources/official/Metadata_ABDB_2026-10-06.zip --repo .",
+    "python3 -B research/geography/shared-seam-ind-pak-soi-abdb-2026/tools/test_source_byte_gate.py"
   ],
   "change_receipts": [
     {
@@ -377,6 +399,10 @@
     },
     {
       "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/controls/source-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/evidence-quality.json",
       "status": "added"
     },
     {
@@ -396,6 +422,14 @@
       "status": "added"
     },
     {
+      "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/runs/metadata-audit-run-3.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/runs/metadata-audit-run-4.json",
+      "status": "added"
+    },
+    {
       "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/runs/two-run-reproducibility.json",
       "status": "added"
     },
@@ -408,7 +442,7 @@
       "status": "added"
     },
     {
-      "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/evidence-quality.json",
+      "path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/tools/test_source_byte_gate.py",
       "status": "added"
     }
   ]

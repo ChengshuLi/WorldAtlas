@@ -1,12 +1,16 @@
 {
-  "checks": {
-    "kind": "negative-control",
-    "mutated_last_byte_rejected": true,
-    "one_byte_truncation_rejected": true,
-    "outcome": "passed"
-  },
-  "input_sha256": "1a14716b73f00fc8391f2708a7975c2f2c1ad4a4e91aafb6dce6546a039e9514",
+  "control_scope": "The shared length/SHA-256 gate rejects changed or incomplete inputs.",
+  "execution_commit": "02b73312bbc091861d6ddd20674ede81598e8d33",
+  "fixture_bytes": 40,
+  "fixture_is_metadata_archive": false,
+  "fixture_sha256": "a6933c31071acc119ce868906165810589ac8b002a6fda9ef74877e55d98a50a",
+  "gate_code_sha256": "dd0cfa43268137c659fb8c4ab8d5e490db887eec9161a9c3e2d4cd0a30c41b81",
   "kind": "negative-control",
+  "metadata_archive_claim": "No mutation-control claim about the locally inspected ZIP; it is excluded from this packet.",
   "method_id": "soi-metadata-audit",
-  "outcome": "passed"
+  "mutation_last_byte_rejected_by_gate": true,
+  "one_byte_truncation_rejected_by_gate": true,
+  "outcome": "passed",
+  "version": 1
 }
+

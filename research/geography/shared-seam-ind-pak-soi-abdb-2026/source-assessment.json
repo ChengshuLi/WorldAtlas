@@ -65,21 +65,21 @@
       "all_inflation_layers_decoded_bytes": 192988,
       "retained_in_managed_slot": true,
       "included_in_packet": false,
-      "restoration_note": "The measured original was removed once before public packet assembly, then reacquired from the official URL inside the measured private slot and verified against the exact prior 38,879-byte SHA-256. No copy is included in Git."
+      "restoration_note": "A complete official-source copy is retained in the measured private slot. It reverified at 38,879 encoded bytes and SHA-256 1a14716b73f00fc8391f2708a7975c2f2c1ad4a4e91aafb6dce6546a039e9514; no copy is included in Git."
     },
     "final_audit_runs": {
-      "execution_commit": "736c97d1ad033507c2d116ee260391d8216eb0e0",
-      "execution_code_sha256": "599892f624683674839dcb7f024e0652376cebbedbe74bbe9db06fba9270ff4d",
-      "run_one_path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/runs/metadata-audit-run-1.json",
-      "run_two_path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/runs/metadata-audit-run-2.json",
-      "run_one_sha256": "47cbf9f5a77c82100604642e39533c0724c1d997dd799192ea5a8f286fcf1bd9",
-      "run_two_sha256": "47cbf9f5a77c82100604642e39533c0724c1d997dd799192ea5a8f286fcf1bd9",
+      "execution_commit": "02b73312bbc091861d6ddd20674ede81598e8d33",
+      "execution_code_sha256": "dd0cfa43268137c659fb8c4ab8d5e490db887eec9161a9c3e2d4cd0a30c41b81",
+      "run_one_path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/runs/metadata-audit-run-3.json",
+      "run_two_path": "research/geography/shared-seam-ind-pak-soi-abdb-2026/runs/metadata-audit-run-4.json",
+      "run_one_sha256": "a6d9f88e7156bc2a5d5023675243a48ccab196f38126a42472c43f891b5fa9a7",
+      "run_two_sha256": "a6d9f88e7156bc2a5d5023675243a48ccab196f38126a42472c43f891b5fa9a7",
       "complete_bytes_identical": true,
-      "superseded_diagnostic_runs": [
-        "research/geography/shared-seam-ind-pak-soi-abdb-2026/runs/metadata-audit-run-1-superseded-parser-bug.json",
-        "research/geography/shared-seam-ind-pak-soi-abdb-2026/runs/metadata-audit-run-2-superseded-parser-bug.json"
+      "superseded_runs": [
+        "research/geography/shared-seam-ind-pak-soi-abdb-2026/runs/metadata-audit-run-1.json",
+        "research/geography/shared-seam-ind-pak-soi-abdb-2026/runs/metadata-audit-run-2.json"
       ],
-      "superseded_reason": "An earlier diagnostic parser interpreted the 0.25 mm plotting notation as 25 m; the corrected committed parser reads 12.5 m. The original outputs remain labelled superseded."
+      "superseded_reason": "Those actual earlier runs preserved metadata facts, but their mutation/truncation fields compared bytes to constants instead of exercising the acceptance gate."
     }
   },
   "metadata_profiles": [
