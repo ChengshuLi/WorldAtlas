@@ -14,7 +14,7 @@ from pathlib import Path
 import sys
 from collections import defaultdict
 
-from shapely.geometry import shape
+from shapely.geometry import GeometryCollection, LineString, MultiPolygon, Point, Polygon, mapping, shape
 from shapely.ops import unary_union
 import shapely
 import pyproj
@@ -154,16 +154,63 @@ def geometry_of(feature):
     return shape(feature["geometry"])
 
 
-def measure_area(geom, errors, label):
+def flatten_components(geom):
+    if geom.geom_type == "GeometryCollection" or geom.geom_type.startswith("Multi"):
+        for child in geom.geoms:
+            yield from flatten_components(child)
+    else:
+        yield geom
+
+
+def measure_area(geom, errors, label, component_ledger):
+    if geom is None:
+        component_ledger.append({"operation": label, "kind": "failed-operation-result"})
+        return None
     if geom.is_empty:
+        component_ledger.append({"operation": label, "kind": "empty", "geometry_type": geom.geom_type})
         return 0.0
-    if geom.geom_type not in ("Polygon", "MultiPolygon"):
+    components = list(flatten_components(geom))
+    polygons = [part for part in components if part.geom_type == "Polygon"]
+    nonpolygons = [part for part in components if part.geom_type != "Polygon"]
+    for part in polygons:
+        encoded = stable(mapping(part))
+        try:
+            component_area = land_area_m2(part)
+            component_ledger.append({"operation": label, "kind": "polygon-component",
+                                     "geometry_type": part.geom_type, "area_m2": component_area,
+                                     "geometry_sha256": sha(encoded), "geometry": mapping(part)})
+        except Exception as exc:
+            errors.append({"operation": label, "geometry_type": part.geom_type,
+                           "error_type": type(exc).__name__, "error": str(exc)})
+            component_ledger.append({"operation": label, "kind": "failed-polygon-component",
+                                     "geometry_type": part.geom_type, "geometry_sha256": sha(encoded),
+                                     "geometry": mapping(part), "error": str(exc)})
+    for part in nonpolygons:
+        encoded = stable(mapping(part))
+        component_ledger.append({"operation": label, "kind": "nonpolygon-remnant",
+                                 "geometry_type": part.geom_type, "geometry_sha256": sha(encoded),
+                                 "geometry": mapping(part)})
+    if not polygons:
         return 0.0
     try:
-        return land_area_m2(geom)
+        # GeometryCollections from overlays may contain area-bearing polygons
+        # and coincident line remnants. Measure the union of polygon members
+        # while retaining every original component and line in the ledger.
+        polygon_union = unary_union(polygons) if geom.geom_type == "GeometryCollection" else geom
+        return land_area_m2(polygon_union)
     except Exception as exc:
         errors.append({"operation": label, "geometry_type": geom.geom_type,
                        "error_type": type(exc).__name__, "error": str(exc)})
+        return None
+
+
+def safe_overlay(left, right, operation, errors, label):
+    try:
+        return getattr(left, operation)(right)
+    except Exception as exc:
+        errors.append({"operation": label, "geometry_type": left.geom_type,
+                       "error_type": type(exc).__name__, "error": str(exc),
+                       "status": "failed; result unknown"})
         return None
 
 
@@ -198,7 +245,59 @@ def geodesic_line_length(geom):
     return 0.0
 
 
-def compare():
+def run_geometry_controls():
+    ledger, failures = [], []
+    shell = Polygon([(73, 28), (73.01, 28), (73.01, 28.01), (73, 28.01), (73, 28)])
+    hole = Polygon([(73, 28), (73.01, 28), (73.01, 28.01), (73, 28.01), (73, 28)],
+                   [[(73.002, 28.002), (73.008, 28.002), (73.008, 28.008), (73.002, 28.008), (73.002, 28.002)]])
+    second = Polygon([(73.02, 28), (73.021, 28), (73.021, 28.001), (73.02, 28.001), (73.02, 28)])
+    tiny = Polygon([(73, 28), (73.000001, 28), (73.000001, 28.000001), (73, 28.000001), (73, 28)])
+    line = LineString([(73.03, 28), (73.031, 28)])
+    point = Point(73.04, 28)
+    geom_collection = GeometryCollection([shell, line, point])
+    multi = MultiPolygon([shell, second])
+    invalid = Polygon([(73, 28), (73.01, 28.01), (73, 28.01), (73.01, 28), (73, 28)])
+
+    gc_area = measure_area(geom_collection, failures, "control:geometry-collection", ledger)
+    shell_area = land_area_m2(shell)
+    multi_area = measure_area(multi, failures, "control:disconnected-multipolygon", ledger)
+    expected_multi = land_area_m2(shell) + land_area_m2(second)
+    hole_area = measure_area(hole, failures, "control:polygon-hole", ledger)
+    line_area = measure_area(line, failures, "control:line-zero-area", ledger)
+    point_area = measure_area(point, failures, "control:point-zero-area", ledger)
+    tiny_area = measure_area(tiny, failures, "control:tiny-positive-polygon", ledger)
+    invalid_area = measure_area(invalid, failures, "control:invalid-polygon", ledger)
+    tiny_length = geodesic_line_length(line)
+    expected_length = distance_m((73.03, 28), (73.031, 28))
+    remnant_types = sorted({entry["geometry_type"] for entry in ledger if entry["kind"] == "nonpolygon-remnant"})
+    checks = {
+        "geometry_collection_retains_polygon_and_measures_its_positive_area": gc_area is not None and gc_area > 0 and abs(gc_area - shell_area) <= shell_area * 1e-12,
+        "geometry_collection_retains_line_and_point_remnants": "LineString" in remnant_types and "Point" in remnant_types,
+        "disconnected_multipolygon_measures_both_components": multi_area is not None and abs(multi_area - expected_multi) <= expected_multi * 1e-12,
+        "polygon_hole_reduces_area_without_repair": hole_area is not None and 0 < hole_area < shell_area,
+        "true_line_and_point_have_zero_area_and_are_retained": line_area == 0 and point_area == 0 and remnant_types.count("LineString") >= 1 and remnant_types.count("Point") >= 1,
+        "tiny_positive_polygon_is_not_cut_off": tiny_area is not None and tiny_area > 0,
+        "invalid_polygon_is_explicit_unknown_not_zero": invalid_area is None and any(e["operation"] == "control:invalid-polygon" for e in failures),
+        "line_length_uses_wgs84_inverse_geodesic": abs(tiny_length - expected_length) <= expected_length * 1e-12,
+    }
+    if not all(checks.values()):
+        raise ValueError(f"analytic geometry control failed: {checks}; failures={failures}")
+    receipt = {"schema": "geo4-shared-seam-geometry-controls-v1", "status": "passed",
+               "method": METHOD, "checks": checks,
+               "measured": {"shell_area_m2": shell_area, "geometry_collection_area_m2": gc_area,
+                            "disconnected_multipolygon_area_m2": multi_area,
+                            "disconnected_component_sum_m2": expected_multi,
+                            "hole_polygon_area_m2": hole_area, "line_area_m2": line_area,
+                            "point_area_m2": point_area, "tiny_polygon_area_m2": tiny_area,
+                            "line_length_m": tiny_length, "line_inverse_geodesic_m": expected_length,
+                            "invalid_polygon_area": invalid_area},
+               "retained_component_ledger_sha256": sha(stable(ledger)),
+               "expected_invalid_geometry_errors": failures}
+    write_json(PACKET / "geometry-controls.json", receipt)
+    return receipt
+
+
+def compare(geometry_controls):
     originals = load_original_sources()
     report, gaps = restore_gap_envelope()
     atlas, current_part_receipts = atlas_index()
@@ -206,6 +305,7 @@ def compare():
     source_by_subject = {}
     current_by_subject = {}
     failures = []
+    component_ledger = []
     for subject, (source_key, shape_id) in SUBJECTS.items():
         source_record = originals[source_key]
         original = source_record["features"].get(shape_id)
@@ -223,14 +323,14 @@ def compare():
         current_by_subject[subject] = current
         original_digest, atlas_digest = sha(stable(original)), sha(stable(current))
         original_geom, current_geom = geometry_of(original), geometry_of(current)
-        overlay = original_geom.intersection(current_geom)
-        union = original_geom.union(current_geom)
-        inter_area = measure_area(overlay, failures, subject + ":source-current-intersection")
-        union_area = measure_area(union, failures, subject + ":source-current-union")
-        symmetric = original_geom.symmetric_difference(current_geom)
-        symmetric_area = measure_area(symmetric, failures, subject + ":symmetric-difference")
-        a_area = measure_area(original_geom, failures, subject + ":original-source-area")
-        b_area = measure_area(current_geom, failures, subject + ":current-atlas-area")
+        overlay = safe_overlay(original_geom, current_geom, "intersection", failures, subject + ":source-current-intersection")
+        union = safe_overlay(original_geom, current_geom, "union", failures, subject + ":source-current-union")
+        inter_area = measure_area(overlay, failures, subject + ":source-current-intersection", component_ledger)
+        union_area = measure_area(union, failures, subject + ":source-current-union", component_ledger)
+        symmetric = safe_overlay(original_geom, current_geom, "symmetric_difference", failures, subject + ":symmetric-difference")
+        symmetric_area = measure_area(symmetric, failures, subject + ":symmetric-difference", component_ledger)
+        a_area = measure_area(original_geom, failures, subject + ":original-source-area", component_ledger)
+        b_area = measure_area(current_geom, failures, subject + ":current-atlas-area", component_ledger)
         props = current.get("properties", {})
         metadata = props.get("metadata", {})
         crosswalk.append({"subject_id": subject, "source_layer": source_key, "shapeID": shape_id,
@@ -292,21 +392,29 @@ def compare():
         p = fragment.get("properties", {})
         source_contacts, current_contacts, intersections = [], [], []
         for sid, subj_geom in all_geoms.items():
-            shared = g.boundary.intersection(subj_geom.boundary)
+            shared = safe_overlay(g.boundary, subj_geom.boundary, "intersection", failures, fid + ":" + sid + ":source-contact")
+            if shared is None:
+                continue
             length = geodesic_line_length(shared)
             if length > 0:
-                source_contacts.append({"subject_id": sid, "shared_boundary_m": length})
-            overlap = g.intersection(subj_geom)
-            if not overlap.is_empty and overlap.geom_type in ("Polygon", "MultiPolygon"):
-                ar = measure_area(overlap, failures, fid + ":" + sid + ":fragment-intersection")
+                source_contacts.append({"subject_id": sid, "shared_boundary_m": length,
+                                        "shared_boundary_geometry": mapping(shared)})
+            overlap = safe_overlay(g, subj_geom, "intersection", failures, fid + ":" + sid + ":source-intersection")
+            if overlap is None:
+                continue
+            if not overlap.is_empty:
+                ar = measure_area(overlap, failures, fid + ":" + sid + ":fragment-intersection", component_ledger)
                 if ar is not None and ar > 0:
                     intersections.append({"subject_id": sid, "positive_area_intersection_m2": ar})
         for sid, subj_geom in all_current_geoms.items():
-            shared = g.boundary.intersection(subj_geom.boundary)
+            shared = safe_overlay(g.boundary, subj_geom.boundary, "intersection", failures, fid + ":" + sid + ":atlas-contact")
+            if shared is None:
+                continue
             length = geodesic_line_length(shared)
             if length > 0:
-                current_contacts.append({"subject_id": sid, "shared_boundary_m": length})
-        fragment_area = measure_area(g, failures, fid + ":fragment-area")
+                current_contacts.append({"subject_id": sid, "shared_boundary_m": length,
+                                         "shared_boundary_geometry": mapping(shared)})
+        fragment_area = measure_area(g, failures, fid + ":fragment-area", component_ledger)
         seam_rows.append({"fragment_id": fid, "full_feature_sha256": FRAGMENTS[fid],
                           "fragment_area_m2": fragment_area, "source_contacts": source_contacts,
                           "current_atlas_contacts": current_contacts, "positive_area_intersections": intersections,
@@ -314,7 +422,7 @@ def compare():
                           "water_status": p.get("water_status"), "water_diagnostics": p.get("water_diagnostics"),
                           "method": METHOD})
     combined = unary_union([geometry_of(x) for x in gaps.values()])
-    combined_area = measure_area(combined, failures, "combined-fragment-area")
+    combined_area = measure_area(combined, failures, "combined-fragment-area", component_ledger)
     seam = {"status": "complete-with-unresolved-surface-and-affiliation", "fragment_count": len(seam_rows),
             "fragments": seam_rows, "combined_fragment_area_m2": combined_area,
             "source_subject_comparisons": comparison_rows,
@@ -341,11 +449,12 @@ def compare():
         "negative": {"nonexistent_member_absent": "GEO4-NEGATIVE-NONEXISTENT-SHAPE-ID" not in originals["ind-adm3-simplified"]["features"],
                      "tampered_fragment_digest_rejected_by_exact_expected_digest": tamper_rejected,
                      "no_owner_or_water_label_generated": all(x["administrative_assignment"] is None and x["water_status"] == "unverified" for x in seam_rows)},
+        "geometry_controls_sha256": sha((PACKET / "geometry-controls.json").read_bytes()),
         "status": "passed"}
     if not all(controls["positive"].values()) or not all(controls["negative"].values()):
         raise ValueError("one or more scientific positive/negative controls failed")
     write_json(PACKET / "controls.json", controls)
-    return seam, crosswalk, comparison_rows, current_part_receipts
+    return seam, crosswalk, comparison_rows, current_part_receipts, component_ledger
 
 
 def main():
@@ -355,7 +464,8 @@ def main():
     tracked_dirty = os.popen("git status --porcelain --untracked-files=no").read().strip()
     if tracked_dirty:
         raise SystemExit("refusing final numerical run with tracked changes after code commit")
-    seam, crosswalk, rows, parts = compare()
+    geometry_controls = run_geometry_controls()
+    seam, crosswalk, rows, parts, component_ledger = compare(geometry_controls)
     code_hash = sha(Path(__file__).read_bytes())
     code_inputs = []
     for rel in ("research/geography/shared-seam-ind-pak-20261006/reproduce.py",
@@ -374,7 +484,8 @@ def main():
               "subject_count": len(crosswalk), "fragment_count": len(seam["fragments"]),
               "software": {"python": sys.version.split()[0], "shapely": shapely.__version__, "pyproj": pyproj.__version__},
               "geometry_method": METHOD, "comparisons": rows,
-              "seam": seam, "controls_sha256": sha((PACKET / "controls.json").read_bytes()),
+              "seam": seam, "geometry_component_ledger": component_ledger,
+              "controls_sha256": sha((PACKET / "controls.json").read_bytes()),
               "current_source_parts": parts,
               "inputs": {"original_source_custody_sha256": sha((PACKET / "sources/source-custody.json").read_bytes()),
                          "gap_readback_sha256": sha((PACKET / "inputs/original-input-envelope-readback.json").read_bytes())}}
