@@ -64,7 +64,8 @@
       "nested_xlsx_decoded_bytes": 146660,
       "all_inflation_layers_decoded_bytes": 192988,
       "retained_in_managed_slot": true,
-      "included_in_packet": false
+      "included_in_packet": false,
+      "restoration_note": "The measured original was removed once before public packet assembly, then reacquired from the official URL inside the measured private slot and verified against the exact prior 38,879-byte SHA-256. No copy is included in Git."
     },
     "final_audit_runs": {
       "execution_commit": "736c97d1ad033507c2d116ee260391d8216eb0e0",
@@ -92,7 +93,10 @@
       "plotted_accuracy_m": 12.5,
       "horizontal_rmse_m": 12.5,
       "horizontal_crs": "LCC-WGS84 / EPSG:7755",
-      "formats": ["Shapefile", "Geodatabase"],
+      "formats": [
+        "Shapefile",
+        "Geodatabase"
+      ],
       "access_constraints": "copyright",
       "use_constraints": "copyright",
       "lineage_summary": "Metadata describes SoI 1:50,000-scale source material and a verification step; source wording omitted."
@@ -107,7 +111,10 @@
       "plotted_accuracy_m": 12.5,
       "horizontal_rmse_m": 12.5,
       "horizontal_crs": "LCC-WGS84 / EPSG:7755",
-      "formats": ["Shapefile", "Geodatabase"],
+      "formats": [
+        "Shapefile",
+        "Geodatabase"
+      ],
       "access_constraints": "copyright",
       "use_constraints": "copyright",
       "lineage_summary": "Metadata describes SoI 1:50,000-scale source material and a verification step; source wording omitted."

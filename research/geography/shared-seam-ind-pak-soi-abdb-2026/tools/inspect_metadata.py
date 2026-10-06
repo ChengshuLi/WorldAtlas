@@ -48,6 +48,16 @@ def digest(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def validate_source_bytes(data: bytes, expected_bytes: int, expected_sha256: str) -> None:
+    """Reject incomplete or changed source bytes before inspecting an archive."""
+    actual_sha256 = digest(data)
+    if len(data) != expected_bytes or actual_sha256 != expected_sha256:
+        raise ValueError(
+            f"source bytes differ: expected {expected_bytes} bytes/{expected_sha256}, "
+            f"got {len(data)} bytes/{actual_sha256}"
+        )
+
+
 def xlsx_inventory(data: bytes) -> dict:
     with zipfile.ZipFile(io.BytesIO(data)) as archive:
         bad_member = archive.testzip()
@@ -99,12 +109,8 @@ def workbook_fields(data: bytes) -> dict:
 def inspect(path: Path, root: Path) -> dict:
     data = path.read_bytes()
     actual_hash = digest(data)
-    positive_checks = {
-        "exact_encoded_length": len(data) == EXPECTED_BYTES,
-        "exact_encoded_sha256": actual_hash == EXPECTED_SHA256,
-    }
-    if not all(positive_checks.values()):
-        raise ValueError(f"metadata source bytes differ from recorded retrieval: {positive_checks}")
+    validate_source_bytes(data, EXPECTED_BYTES, EXPECTED_SHA256)
+    positive_checks = {"exact_encoded_length": True, "exact_encoded_sha256": True}
 
     with zipfile.ZipFile(io.BytesIO(data)) as outer:
         bad_member = outer.testzip()
@@ -138,14 +144,6 @@ def inspect(path: Path, root: Path) -> dict:
                 profile["lineage_summary"] = "Metadata describes SoI 1:50,000-scale source material and a verification step; original source text omitted."
                 products[info.filename] = profile
 
-    # The source page's license/reuse status is not inferred by this byte test.
-    mutated = bytearray(data)
-    mutated[-1] ^= 1
-    mutation_rejected = digest(mutated) != EXPECTED_SHA256
-    truncation_rejected = len(data[:-1]) != EXPECTED_BYTES or digest(data[:-1]) != EXPECTED_SHA256
-    if not mutation_rejected or not truncation_rejected:
-        raise ValueError("negative controls failed to reject altered or incomplete bytes")
-
     execution = subprocess.check_output(
         ["git", "-C", str(root), "rev-parse", "HEAD"], text=True
     ).strip()
@@ -176,9 +174,8 @@ def inspect(path: Path, root: Path) -> dict:
             },
             "negative": {
                 "kind": "negative-control",
-                "outcome": "passed",
-                "mutated_last_byte_rejected": mutation_rejected,
-                "one_byte_truncation_rejected": truncation_rejected,
+                "outcome": "not-claimed",
+                "status": "Mutation/truncation behavior is tested separately through validate_source_bytes.",
             },
         },
         "limits": [
