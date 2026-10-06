@@ -21,6 +21,8 @@ test('explicit reviewed candidate preserves metadata and retrieves immutable ori
   assert.equal(selected.source, path.dirname(candidate));
   assert.equal(createHash('sha256').update(selected.bounds).digest('hex'), manifest.bounds.sha256);
   assert.equal(selected.manifest.installation_ready, false);
+  assert.equal(selected.verification.manifest_sha256, sha256);
+  assert.equal(selected.verification.installation_approval, false);
 });
 
 test('native selection rejects unpinned, altered and wrong-release candidates', async () => {
@@ -33,4 +35,14 @@ test('native selection rejects unpinned, altered and wrong-release candidates', 
   await fs.writeFile(file, altered);
   await assert.rejects(selectBuildOwnership({manifestPath: file,
     expectedSha256: createHash('sha256').update(altered).digest('hex'), expectedReference: reference}), /original bounds/);
+});
+
+
+test('legacy recovery selection retains original grid bytes and does not reinterpret old releases as native',async()=>{
+  const selected=await selectBuildOwnership();
+  assert.equal(selected.sha256,'73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6');
+  assert.equal(selected.manifest.method,undefined);
+  assert.equal(selected.verification,null);
+  assert.equal(selected.source,'data/canonical-grid');
+  await assert.rejects(selectBuildOwnership({requireNative:true}),/cannot select legacy/);
 });

@@ -3,6 +3,7 @@ import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {ownershipMetadata, NATIVE_METHOD} from '../src/ownership-method.js';
+import {requireVerifiedNativeSelection} from './native-ownership/require-verified-selection.mjs';
 
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 
@@ -34,5 +35,6 @@ export async function selectBuildOwnership({manifestPath = 'data/canonical-grid/
     bounds = await fs.readFile(path.join(path.dirname(manifestPath), manifest.bounds.path));
   }
   if (digest(bounds) !== manifest.bounds.sha256) throw Error('Selected grid bounds checksum mismatch');
-  return {manifest, metadata, manifestPath, source: path.dirname(manifestPath), sha256, bounds};
+  const verification = native ? requireVerifiedNativeSelection(manifest, sha256) : null;
+  return {manifest, metadata, verification, manifestPath, source: path.dirname(manifestPath), sha256, bounds};
 }

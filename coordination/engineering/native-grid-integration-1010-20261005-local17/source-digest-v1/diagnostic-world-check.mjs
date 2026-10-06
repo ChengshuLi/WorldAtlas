@@ -44,6 +44,7 @@ const output=await new Promise((resolve,reject)=>{
 });
 const readyMs=performance.now()-started;
 const diagnostics={main:process.memoryUsage(),workerAtCompletion:output.diagnostic,workerProgress:progress};
+await fs.mkdir('.cache/native-context-proof',{recursive:true});
 await fs.writeFile('.cache/native-context-proof/digest-memory-profile.json',JSON.stringify(diagnostics,null,2)+'\n');
 await worker.terminate();
 assert.deepEqual(output.grid.rows,base.rows);assert.deepEqual(output.grid.runs,base.runs);
