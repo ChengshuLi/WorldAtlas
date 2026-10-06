@@ -115,7 +115,7 @@ test('packaged coverage supports all modes, gap explanations and unavailable-ref
   if(!file.startsWith(root+path.sep)||!fs.existsSync(file)||!fs.statSync(file).isFile()){response.writeHead(404);response.end();return;}
   response.setHeader('Content-Type',file.endsWith('.js')?'text/javascript':file.endsWith('.css')?'text/css':file.endsWith('.html')?'text/html':'application/octet-stream');fs.createReadStream(file).pipe(response);
  });
- await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));const base=`http://127.0.0.1:${server.address().port}`,browser=await chromium.launch();
+ await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));const base=`http://127.0.0.1:${server.address().port}`,browser=await chromium.launch({args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
  try{
   for(const unavailable of [false,true]){
    const page=await browser.newPage({viewport:{width:1440,height:1080}}),errors=[];
@@ -127,7 +127,7 @@ test('packaged coverage supports all modes, gap explanations and unavailable-ref
     return route.continue();
    });
    await page.goto(base);
-   await page.waitForFunction(()=>document.querySelector('.atlas-pixel-canvas')?.dataset.rendered==='true',null,{timeout:60000});
+   await page.waitForFunction(()=>document.querySelector('.atlas-pixel-canvas')?.dataset.rendered==='true',null,{timeout:60000}).catch(error=>{error.message+='; page errors: '+JSON.stringify(errors);throw error;});
    await page.locator('#loading').waitFor({state:'hidden',timeout:60000});
    assert.equal(await page.locator('.atlas-pixel-canvas').getAttribute('data-renderer'),'webgl2');
    const before=await page.locator('.atlas-pixel-canvas').evaluate(canvas=>({...canvas.dataset}));
