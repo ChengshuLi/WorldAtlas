@@ -83,7 +83,26 @@ def expected_tiles(size):
     return result
 
 
-def inventory(report, final):
+def source_keys(feature, rosters):
+    props = feature['properties']
+    def require(row, kind):
+        original = rosters[kind].get(row.get('id'))
+        if original is None or any(row.get(key) != value for key, value in original.items()):
+            raise ValueError('Output source key/metadata differs from original source roster')
+        return original
+    for contact in props.get('exact_location_contacts', []):
+        require(contact, 'locations')
+    for water in props.get('water_diagnostics', []):
+        require(water, 'water')
+    stage = props.get('stage')
+    if stage in ('physical-land-clipping', 'location-clipping'):
+        kind = 'land' if stage == 'physical-land-clipping' else 'locations'
+        row = props.get('source', {})
+        if require(row, kind) != row:
+            raise ValueError('Clipping remnant original metadata changed')
+
+
+def inventory(report, final, rosters=None):
     if report['version'] != 'worldatlas-physical-land-before-water-v1' or report['bounds'] != DOMAIN:
         raise ValueError('Unrecognized or narrowed audit domain/method')
     bounds = expected_tiles(report['tile_degrees'])
@@ -112,6 +131,8 @@ def inventory(report, final):
                 if not 0 <= tile_id < len(tiles) or tiles[tile_id]['status'] != 'checked':
                     raise ValueError('Output from an unchecked/outside tile')
                 props = feature['properties']
+                if rosters is not None:
+                    source_keys(feature, rosters)
                 if props['tile'] != bounds[tile_id]:
                     raise ValueError('Output tile binding changed')
                 geometry = canonical_json(feature['geometry'])
@@ -232,6 +253,8 @@ def validate(root_manifest):
     roster = report_roster(reports[3])
     inputs = load_inputs(pathlib.Path(__file__).resolve().parents[1], reports[3]['baseline_commit'],
                          envelope['water_root'], reports[3]['water_commit'])
+    rosters = {kind: {row['id']: row for row in inputs[key]} for kind, key in
+               [('land', 'land_metadata'), ('locations', 'location_metadata'), ('water', 'water_metadata')]}
     aliases = set(require_code(snapshot, envelope, ENVELOPE_CODE))
     results = []
     for i, report in enumerate(reports):
@@ -239,7 +262,7 @@ def validate(root_manifest):
             raise ValueError('A scientific vintage consumed different original input bytes')
         aliases.update(require_code(snapshot, report, SCIENCE_CODE))
         source_accounting(report, inputs)
-        results.append(inventory(report, i >= 3))
+        results.append(inventory(report, i >= 3, rosters if i >= 1 else None))
     if aliases != set(snapshot['aliases']):
         raise ValueError('Execution snapshot has missing/undeclared code aliases')
     if snapshot['unique_files'] != len({row['snapshot']['path'] for row in snapshot['aliases'].values()}):

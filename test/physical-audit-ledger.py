@@ -120,6 +120,18 @@ class LedgerControls(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'complete original file descriptors'):
             ledger.upstream_closure(child, envelope, [None, None, None, {'baseline_commit': 'a' * 40}])
 
+    def test_invented_rehashed_source_keys_are_rejected(self):
+        original = {'id': 'original-location', 'input_path': 'original-part.json', 'name': 'Original'}
+        rosters = {'land': {}, 'water': {}, 'locations': {original['id']: original}}
+        feature = {'properties': {'stage': 'location-clipping', 'source': original}}
+        ledger.source_keys(feature, rosters)
+        feature['properties']['source'] = {**original, 'id': 'invented'}
+        with self.assertRaisesRegex(ValueError, 'source key/metadata'):
+            ledger.source_keys(feature, rosters)
+        feature = {'properties': {'exact_location_contacts': [{**original, 'input_path': 'invented-part.json'}]}}
+        with self.assertRaisesRegex(ValueError, 'source key/metadata'):
+            ledger.source_keys(feature, rosters)
+
     def test_invalid_size_cannot_hang_validator(self):
         for size in [0, -1, float('nan'), float('inf'), True]:
             with self.assertRaisesRegex(ValueError, 'Invalid tile size'):

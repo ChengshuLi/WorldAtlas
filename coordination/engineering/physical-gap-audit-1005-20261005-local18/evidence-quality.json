@@ -494,6 +494,10 @@
       "status": "added"
     },
     {
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/geometry-controls-v1.json",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/evidence-quality.json",
       "status": "added"
     },
@@ -877,13 +881,13 @@
       "bytes": 557,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/artifact-gate-v1.json",
-      "sha256": "1575eb470e16044e54e50ce02d635d44683861773beb362a28ce90323fbc0d10"
+      "sha256": "d01d8020e01ec68bd237f3fc66dec6d39af5ad91a8238eaa38bdf47b5fe6ced6"
     },
     {
-      "bytes": 1239,
+      "bytes": 1237,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/controls-v1.tap.json",
-      "sha256": "83d46059ed4c2881445b63db47c48b01f5997677c2d33c34499301dbb5bc28f5"
+      "sha256": "a07c044d50d9032d61dabeabd0b00921ee4cce14d08b400f4e9c20fcbe721d11"
     },
     {
       "bytes": 1131547,
@@ -1516,6 +1520,12 @@
       "sha256": "c1eac94ddfce35257dd271b8e5aa5c9b483474292eb6e7ca5d74872dc88c5406"
     },
     {
+      "bytes": 335,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/geometry-controls-v1.json",
+      "sha256": "1734164625343658759d2d7e533216229046ab7f39abd514bebc48c6c61fecf9"
+    },
+    {
       "bytes": 31202,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/input-envelope-v1/evidence-quality.json",
@@ -1810,16 +1820,16 @@
       "sha256": "3af466244851ea1fe1ddbb24a3e4b3d70c2d68994c408ac705f65328f4da93c4"
     },
     {
-      "bytes": 478,
+      "bytes": 630,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/physical-discovery-negative-control.json",
-      "sha256": "b6c1d8fc27f11ab59e2bafe2df44d09ee056c64974ae1834b8c6faa93fc6fb0d"
+      "sha256": "8a1fc83577d0d16682b7ac48d94f8885518d3ace181ce554a54480d5dfc08a3e"
     },
     {
-      "bytes": 478,
+      "bytes": 630,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/physical-discovery-positive-control.json",
-      "sha256": "82dbd2923e3201e9171ba951d27461aa72d06133a4c8694135dcf6d0605c22e8"
+      "sha256": "118db84ecb6c66680cc340b52518ea83a310c3127445b6276a06e45a7c55fe5b"
     },
     {
       "bytes": 652,
@@ -1828,16 +1838,16 @@
       "sha256": "ee5721598f12a5fb06eaf0d72f8efef1cab3b9f4e640655f60b2a55605a9bc64"
     },
     {
-      "bytes": 476,
+      "bytes": 628,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/source-edge-area-negative-control.json",
-      "sha256": "301219f7629232b380df059ff41228507f5a6d98c5aca22c797a3865c8a4ae49"
+      "sha256": "700e54e086f98322e9a3ba475f45c794ceba281ff8ef524f54f4a022763a4e34"
     },
     {
-      "bytes": 476,
+      "bytes": 628,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/source-edge-area-positive-control.json",
-      "sha256": "bff2df2278436c20908ca05a618caeaf56d885b5b29a29c1c7b13fea0133db5e"
+      "sha256": "2ec69fd70d7b78132270bf5c2710a944dfde3b363c31f7ef2cbbc80cc348b3a9"
     },
     {
       "bytes": 9773,
@@ -1870,10 +1880,10 @@
       "sha256": "1a23076e6e31c40649ba43ba96059618c0491839a8f297f132461966a11d1a69"
     },
     {
-      "bytes": 16385,
+      "bytes": 17576,
       "hash_kind": "file-bytes",
       "path": "scripts/validate-physical-audit-evidence.py",
-      "sha256": "0ee3d09b489fc523900bb096be159d85b6e1a5db620c9926e35565ffb197bfa7"
+      "sha256": "11d501770684b30ca114fda8cb560de8a8d936bb9bef2c402b19a090fd608eee"
     },
     {
       "bytes": 3784,
@@ -1894,16 +1904,16 @@
       "sha256": "4351368a0313a0ae2f30414b75fa777ea27aa3085dd95b038f32366d66f6c749"
     },
     {
-      "bytes": 7511,
+      "bytes": 8322,
       "hash_kind": "file-bytes",
       "path": "test/physical-audit-ledger.py",
-      "sha256": "e4e0b54706efddbff9cf0853b63a2e004f210de8b871136783982651d4add972"
+      "sha256": "4fc5bfc39597eb4be528388c00a85883374f291ae9efd3d6d7b19088671a9d8d"
     },
     {
-      "bytes": 503,
+      "bytes": 504,
       "hash_kind": "file-bytes",
       "path": "test/physical-audit-ledger.test.mjs",
-      "sha256": "54f15f8486ebccb41453a62aa342d91a2c6c22c850d87ecd597131c1ebae0559"
+      "sha256": "e740c9a16719ff3148ab79a225bd9361212eb229c8956afbde95b45491f0b0e6"
     },
     {
       "bytes": 6563,

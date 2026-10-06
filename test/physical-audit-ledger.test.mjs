@@ -7,5 +7,5 @@ test('complete physical audit ledger rejects omissions, changed bytes and lost u
     encoding: 'utf8', env: process.env, timeout: 120000
   });
   assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
-  assert.match(result.stderr, /Ran 9 tests/);
+  assert.match(result.stderr, /Ran 10 tests/);
 });
