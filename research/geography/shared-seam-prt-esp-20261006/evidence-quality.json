@@ -130,11 +130,7 @@
       },
       "retention": "retained",
       "verification": "verified",
-      "temporal_status": "historical",
-      "supported_interval": {
-        "from": 2018,
-        "to": 2019
-      },
+      "temporal_status": "reference",
       "files": [
         {
           "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-esp-adm3-baseline-simplified/source-record.json",
@@ -220,7 +216,8 @@
           "sha256": "98bb0604226e240506ae69d9fdd28401c27ddbc952db2f516345ebc3d4e933e3",
           "hash_kind": "file-bytes"
         }
-      ]
+      ],
+      "temporal_limit": "The provider boundaryYear identifies a source vintage only; no authoritative effective-date interval or validity history is established by the retained metadata."
     },
     {
       "id": "geoboundaries-prt-adm2",
@@ -234,11 +231,7 @@
       },
       "retention": "retained",
       "verification": "verified",
-      "temporal_status": "historical",
-      "supported_interval": {
-        "from": 2020,
-        "to": 2021
-      },
+      "temporal_status": "reference",
       "files": [
         {
           "path": "research/geography/shared-seam-prt-esp-20261006/sources/gb-prt-adm2-baseline-simplified/source-record.json",
@@ -294,7 +287,8 @@
           "sha256": "21732981c65e36fdd009235447a6f590cbe947d9536a178f6956249edef9c0af",
           "hash_kind": "file-bytes"
         }
-      ]
+      ],
+      "temporal_limit": "The provider boundaryYear identifies a source vintage only; no authoritative effective-date interval or validity history is established by the retained metadata."
     },
     {
       "id": "dgt-caop2025",
