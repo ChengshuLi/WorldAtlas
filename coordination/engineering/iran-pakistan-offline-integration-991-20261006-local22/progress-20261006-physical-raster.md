@@ -1,0 +1,21 @@
+Progress for #991 — 2026-10-06 (America/Los_Angeles)
+
+The repair remains OFFLINE and uninstalled. No deployment, live content import or publisher request was made. The global gap goal remains active; this component is not the complete global fix.
+
+Completed in this continuation:
+
+- Committed the two complete release-bound native packages and their binding receipt. Retained full-grid readback checks 68,731,011,556 cells through decoded intervals; the only ownership difference is 954 previously unowned cells in the reviewed component.
+- Strengthened successor verification to bind the full source record, URLs, licenses, source vintage, unresolved limits, original target evidence and exact migration proof. Actual readback passed all 84,833 memberships and 14 mutation controls.
+- Implemented physical-classification reuse across an explicit retained-identity geometry migration. It requires an unmodified in-process result of complete predecessor reconstruction, the actual release predecessor/migration pins, and the unchanged coordinate domain/hierarchy. An authored boolean or deserialized result cannot substitute for validation.
+- Actual physical readback reconstructed all 49,625 predecessor geometries, decoded all 11 physical assets / 262,166 rows, preserved every original source/class/blocked-tile field, and rejected stale footprint, stale release and damaged bytes. Classification is neither recalculated nor reinterpreted by this reassociation. Three focused tests and four relevant existing migration regressions passed. A broader release-preparation invocation had three missing-sparse-input failures; it is not reported as passing.
+- Restored the exact original climate archive (130,618,411 bytes, SHA-256 bb84453d4541f1a0bc5a804ead83f483c19ce70f16a5197f6d3a7b6a63e65562) and terrain raster (61,980,766 bytes, SHA-256 acbb0254a6ecc5464abbdaff63c6e8af42a085ada4eba1c8feb8d40c4fc6414b). An earlier 2023 climate archive was correctly rejected; the matching archive is Figshare file 61012822 / January 2026 V3.
+- Recomputed 12 climate/terrain summaries for the two changed footprints with the existing aggregation algorithms. Before recomputation exactly reproduces all 12 current values, providing an independent source/algorithm check. Two fresh runs are byte-identical (21,098 bytes, SHA-256 e047f0bdc0466e68199b161eac21d39ffaccda690c3c22e2d8fc8a94d230175b). Panjgur's dominant terrain share changes from 0.318141 to 0.317823; its class stays the same. The other 11 tuples remain equal. Original supported intervals and historical evidence are preserved.
+
+Remaining critical path:
+
+1. Recover/verify the original vegetation source or explicitly review a sourced replacement, then recompute the two vegetation summaries. A full official ArcGIS export candidate is being acquired under a strict byte cap; it is usable as the original only if its original hash matches. The export route has a documented 847-versus-846 count discrepancy and no immutable historical endpoint, so no equivalence is assumed.
+2. Complete mandatory migration-aware compact-context/build validation, prepared-evidence and environmental bundle integration, and source restoration/package inventories. Existing default context guards remain enforced.
+3. Run the actual complete offline build/render checks and obtain substantive independent final review. The accumulated working evidence must be organized into genuinely bounded mandatory stages; it cannot be submitted as an oversized aggregate or waived.
+4. Use the remaining coherent integration PR for this work item. Preserve all existing source/release/history artifacts and unresolved legal/water/date limits. Continue the worldwide audit and other confirmed repairs; Portugal–Spain source PR #1123 and China–Tajikistan source PR #1127 are merged source research, not map repairs.
+
+Artifacts are under this directory: successor-verification-v2.json; native-selected-v1/ and native-selected-v2/; native-release-binding.json; physical-binding-v1/; climate-source-restoration-v2.json; terrain-source-restoration-v1.json; raster-references-v1.json and raster-references-v2.json. Exact producer/code/source pins are retained in their receipts. Native source files and the separate preparation runtime are local managed scratch and still need the declared immutable restoration inventories for final review.
