@@ -1,0 +1,12 @@
+{
+  "assertions": {
+    "each_name_only_municipality_inference_rejected_by_multi_member_kas_roster": true,
+    "observed_metadata_admUnitCount": 48,
+    "observed_payload_features": 7,
+    "wrong_inference": "metadata admUnitCount is the number of features in the retained source payload",
+    "wrong_inference_rejected": true
+  },
+  "kind": "negative-control",
+  "method_id": "pinned-source-and-role-review",
+  "outcome": "passed"
+}
