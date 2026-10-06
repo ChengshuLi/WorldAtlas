@@ -1,7 +1,7 @@
 {
   "version": 1,
   "issue": 411,
-  "reviewed_at_utc": "2026-10-06T00:35:54Z",
+  "reviewed_at_utc": "2026-10-06T01:45:00Z",
   "scope_reproduction": {
     "baseline_commit": "bd2c2aeed9fcaa0b209a4bec1fe18b7129bb7f60",
     "issue_body_sha256": "c1b31eac346e758fdd140565fca23f37386ba9cdaf9d3345b71e09093d00d50e",
@@ -254,6 +254,26 @@
       "retrieval_date": "2026-10-06",
       "finding": "New bounded child, status blocked pending #411. Exact 157 issue-owned non-Cabinda IDs; the four out-of-scope Cabinda IDs stay with #896.",
       "issue_number": 1046
+    },
+    {
+      "artifact_path": "sources/MWI-CODAB/package_show.json",
+      "bytes": 38521,
+      "finding": "The original retained ADM2 layer contains 32 features under three regional parents. A reproducible name-only candidate roster screen matches all 28 pinned 2020 geoBoundaries names (Nkhata Bay/Nkhatabay normalizes as a spelling-form match) and leaves four city-named COD-AB units unmatched. This does not establish identity, legal/statistical tier equivalence, parent correctness, boundary equivalence or correctness. #1045 owns source-semantic adjudication and geometric comparison.",
+      "id": "MWI-CODAB-2023-RETRIEVED-2026-10-06",
+      "license": "HDX metadata license_id cc-by-igo; title Creative Commons Attribution for Intergovernmental Organisations (CC BY-IGO); package does not specify license version",
+      "metadata_api_url": "https://data.humdata.org/api/3/action/package_show?id=20eb8e5b-134d-41d8-a56f-4f358f7faf16",
+      "prior_retrieval_note": "Supersedes the earlier MWI-CODAB-2023 entry that reported endpoint failure; that record is retained as the historical attempt. The newly retained resource ZIP hash is 64b8d599ec0b10809e762372442780572e181035eb6c6e182d80b941dfbbf9f2; the exact member restoration/hash is in sources/MWI-CODAB/source-receipt.json.",
+      "resource_url": "https://data.humdata.org/dataset/20eb8e5b-134d-41d8-a56f-4f358f7faf16/resource/375ffef0-933e-434e-9ef5-145f6ae2d9df/download/mwi_admin_boundaries.geojson.zip",
+      "retained_layer_bytes": 19921587,
+      "retained_layer_path": "sources/MWI-CODAB/mwi_admin2.geojson",
+      "retained_layer_sha256": "f278ce0afacba7137c6b633073cb6a2c46eaacff9b8957d1c8581c9c60fe7e5b",
+      "retrieval_date": "2026-10-06",
+      "sha256": "991ce22326b3c0c29afc293ea34ec404ec0939bdb04d5450244ccb72d04cb368",
+      "source_hash": "64b8d599ec0b10809e762372442780572e181035eb6c6e182d80b941dfbbf9f2",
+      "source_hash_algorithm": "SHA-256 of retrieved original ZIP; archive itself not retained",
+      "title": "Malawi NSO/OCHA COD-AB version 02, official HDX CKAN package and retained ADM2 layer",
+      "url": "https://data.humdata.org/dataset/20eb8e5b-134d-41d8-a56f-4f358f7faf16",
+      "vintage": "COD-AB v02; valid for humanitarian use from 2023-04-05; source boundaries created and last edited 2018-10-22; quality review 2024-10-04; HDX metadata modified 2026-08-14"
     }
   ]
 }
