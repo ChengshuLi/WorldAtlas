@@ -1,0 +1,63 @@
+{
+  "method_id": "serbia-immutable-source-and-scope-controls-v1",
+  "kind": "source",
+  "outcome": "passed",
+  "tests_run": 8,
+  "failure_count": 0,
+  "error_count": 0,
+  "fixtures": [
+    {
+      "path": "tests/fixtures/metadata-boundary-year.json",
+      "bytes": 919,
+      "sha256": "83fd350882500111a1ebcfbc6840a119a03097c465a76fde57cf663c1967668e"
+    },
+    {
+      "path": "tests/fixtures/issue-998-77-subjects.json",
+      "bytes": 16413,
+      "sha256": "81675fc02fa26045a261ffcdd5fe8365cd2ab562846da7223093cd16bb7306ba"
+    }
+  ],
+  "controls": [
+    {
+      "id": "test_duplicate_or_unmatched_scope_is_rejected",
+      "outcome": "passed",
+      "expected": "Short, duplicate, and substituted IDs are rejected by the exact ordered roster validator."
+    },
+    {
+      "id": "test_existing_output_is_preserved_and_rejected",
+      "outcome": "passed",
+      "expected": "An existing exclusive destination is refused and its sentinel remains byte-identical."
+    },
+    {
+      "id": "test_metadata_boundary_year_complete_file_probe_is_rejected",
+      "outcome": "passed",
+      "expected": "A complete changed 919-byte source-metadata file is rejected before staging."
+    },
+    {
+      "id": "test_shortened_scope_complete_file_is_rejected_before_output",
+      "outcome": "passed",
+      "expected": "A complete captured issue with 77 of 78 IDs is rejected before output; direct scope validation also rejects it."
+    },
+    {
+      "id": "test_two_runs_are_byte_reproducible_and_match_historical_outputs",
+      "outcome": "passed",
+      "expected": "Two private full reproductions match each other; seven products match historical bytes and summary findings match after truthful runtime fields are excluded."
+    },
+    {
+      "id": "test_wrong_baseline_bytes_are_rejected",
+      "outcome": "passed",
+      "expected": "Changed bytes at an immutable c944 baseline path are rejected before output."
+    },
+    {
+      "id": "test_wrong_historical_generator_bytes_are_rejected",
+      "outcome": "passed",
+      "expected": "Changed original generator code bytes are rejected before output."
+    },
+    {
+      "id": "test_wrong_workbook_bytes_are_rejected",
+      "outcome": "passed",
+      "expected": "A one-byte change to the original XLS workbook is rejected before output."
+    }
+  ],
+  "test_command": "python3 data/regional-review/serbia-register-reproduction-998-erratum/tests/run_controls.py"
+}
