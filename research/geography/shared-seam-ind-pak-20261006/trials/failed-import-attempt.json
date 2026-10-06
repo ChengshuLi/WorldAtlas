@@ -1,0 +1,12 @@
+{
+  "status": "failed-before-reproduction",
+  "actual_execution_sha": "0c4a3257dcbac704fb81dd6bc285f25d23f9267d",
+  "run_label": "run-1-attempt",
+  "command": "PYTHONDONTWRITEBYTECODE=1 GEO4_RUN_ID=run-1 python3 -B research/geography/shared-seam-ind-pak-20261006/reproduce.py --run-final",
+  "error_type": "ModuleNotFoundError",
+  "error": "No module named 'evidence'",
+  "cause": "The initial script resolved the repository root one parent too high, so the pinned shared geometry helper was not on the import path.",
+  "scientific_work_started": false,
+  "numerical_outputs_created": false,
+  "treatment": "Retained as a failed setup trial; not a final run and not used as evidence. Corrected root resolution and committed the correction before any successful numerical run."
+}

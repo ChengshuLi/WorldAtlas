@@ -19,7 +19,7 @@ from shapely.ops import unary_union
 import shapely
 import pyproj
 
-ROOT = Path(__file__).resolve().parents[4]
+ROOT = Path(__file__).resolve().parents[3]
 PACKET = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "scripts"))
 from evidence.geometry import METHOD, land_area_m2, distance_m  # noqa: E402
