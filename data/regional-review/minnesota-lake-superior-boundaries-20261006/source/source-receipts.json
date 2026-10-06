@@ -1,0 +1,460 @@
+{
+  "version": 1,
+  "issue": 1079,
+  "retrieved_date": "2026-10-06",
+  "retrieval_note": "Exact HTTP timestamps are preserved where recorded; other source requests are date-stamped. Every retained original below is hashed by raw whole-file bytes. REST query URLs are included with source groups; no source was silently refreshed.",
+  "files": [
+    {
+      "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/census-2026-county-layer-metadata.json",
+      "bytes": 7489,
+      "sha256": "56df6e7d6cff8fe1e082bbdc10109cc2c7c22a134f5dfca1899f93d9bd98337d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/census-2026-mn-counties.json",
+      "bytes": 7791159,
+      "sha256": "5954e7c88307731862065af368b2b101be2736fb1c060c116260a0b489813766",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/dnr-counties-iteminfo.json",
+      "bytes": 1975,
+      "sha256": "e9d5dbfacee58eadcb59acc7f35f907939b64e6b962f5bdf60feffc8d259a185",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/dnr-counties.json",
+      "bytes": 3107168,
+      "sha256": "5b73bd4a717fd7bc1d941f48d8115e4c5a937dc46c629708aea38fd5891b6172",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/dnr-layer-metadata.json",
+      "bytes": 9220,
+      "sha256": "4a1261b4212f487f390e1e3bf237a82265e153886e262d54227fdc14c88a1dab",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/issue-1079-api-snapshot.json",
+      "bytes": 5779,
+      "sha256": "15ce91833f522b3a61539f27f764931eb2b0c46eb8643c7b6fea370f302e3229",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/mn-2024-statutes-lake-superior-jurisdiction.pdf",
+      "bytes": 681585,
+      "sha256": "552d7513d8ed3368cc481a5148fe431f2d6c2ae6f81ff7730fa90f0df796d639",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/mn-constitution.html",
+      "bytes": 150014,
+      "sha256": "6bfe2bc1b70379d84df07ea00d6c5c516f1ba4388bd941662c2c5c7a0b834254",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/mn-county-id-standard.html",
+      "bytes": 21621,
+      "sha256": "f27f0ff57716b3f32d0b2a7b44d6bf3d142fba9c917cf7afaa09039c371215ec",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/mn-laws-1907-preface-proclamation.pdf",
+      "bytes": 287017,
+      "sha256": "b7d11187012e1ee08978a32cafb0727619aecaacd34f8b087554dfd81ec2f28f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/mn-state-area.html",
+      "bytes": 46872,
+      "sha256": "8f468df95bd1e4e240f8426f1ad3f977630fe40db9cfd191aa169aa0e704db40",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/mn-statute-1.15-current.html",
+      "bytes": 70716,
+      "sha256": "503224200e2b909980fc0c21f55a28aa54bae1245309af751ddda29174e3c382",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/mn-statute-1.16-current.html",
+      "bytes": 61441,
+      "sha256": "346da0178cf6e2d9bc490323eccb70e7b1efd07ea29712fda00d702c72855fdd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/mn-statute-2.01-current.html",
+      "bytes": 65274,
+      "sha256": "710eb69b6d3f69064651c68d5ee1824238dfb4a6bac5ba3c21ad22a4e7d25bcd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/mn-statute-97A.235-current.html",
+      "bytes": 61353,
+      "sha256": "f8ba6c47f27758fc4ff750863c61ae7e60d69002d69d2be936bc670734397869",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/mn-statutes-1891-ch8-cook-county.pdf",
+      "bytes": 6852430,
+      "sha256": "84392c5feacb940ac422cce0ca5a62a8efa3ffd47c76f2d69a780af95c934486",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/mn-statutes-1905-ch2-territorial-divisions.pdf",
+      "bytes": 128840,
+      "sha256": "e9f44aa7ad8fe45ce84258cad52d44eeeb8b35b25ccea43c05e22181afd52818",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/mn-statutes-1947-boundary-water-compact.html",
+      "bytes": 70716,
+      "sha256": "503224200e2b909980fc0c21f55a28aa54bae1245309af751ddda29174e3c382",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/mn-statutes-370.html",
+      "bytes": 94342,
+      "sha256": "2d89bcc28daf29b7fca628c4e3859521a909f0c8dae9a12560317654c6fac034",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/mndot-counties.json",
+      "bytes": 7293889,
+      "sha256": "ecae54f15e4171e379acac6e75eb0361208458e0fa193dd8cddaa3c35cf35aa7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/mndot-disclaimer.html",
+      "bytes": 21240,
+      "sha256": "2b4b3134482699f0d7341fa7537e1ab7f8357008043322d219f75cad63d975b3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/mndot-layer-metadata.json",
+      "bytes": 7689,
+      "sha256": "57397238912915beaf37c5085b6a7308098c2cce43d879f265154f43e5abe0bf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/mndot-metadata.html",
+      "bytes": 12912,
+      "sha256": "5aeda34e1c8fa7d4c3647823e1bebd59e4014edcb92ad2338d4f35a148bb66fc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/tribal-reservations-2020-layer-metadata.json",
+      "bytes": 8485,
+      "sha256": "fd9c42a783b7a76c4f9eb11f6c2a447397a742c61abe246a8aa12ea6bad9319e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/tribal-reservations-2020-mapserver.json",
+      "bytes": 33946,
+      "sha256": "a7dbc8cbbf664db5bdc7b425dedf39e6a72cd8a1e1e57d26223e07353f8868f2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/tribal-reservations-2020-mn.geojson",
+      "bytes": 1407111,
+      "sha256": "806af40c939f0b52bdd2dd8400857b8d73ede9d8cc9f92284739d609d2317598",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "sources": [
+    {
+      "id": "mndot-county-reference",
+      "title": "Minnesota Department of Transportation, COUNTY",
+      "role": "Complete state county reference boundaries",
+      "vintage": "2022-04-26 content date; service retrieved 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "license": "Public state reference data; retransmit with attached MnDOT disclaimer. No warranties; boundary map depictions are informational and not authoritative legal survey representations.",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "limitations": "Complete 87-county spatial reference layer; no planned data updates in 2022 metadata. Reported 1:24,000 NMAS ±12 m is a cartographic accuracy statement, not a legal-survey warranty. Lineage is related to the DNR layer, so these two are not independent lineage confirmations.",
+      "files": [
+        {
+          "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/mndot-counties.json",
+          "bytes": 7293889,
+          "sha256": "ecae54f15e4171e379acac6e75eb0361208458e0fa193dd8cddaa3c35cf35aa7",
+          "hash_kind": "file-bytes",
+          "url": "https://feat.gisdata.mn.gov/arcgis/rest/services/MnGeo/mn_counties/FeatureServer/0/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=geojson",
+          "retrieved_at": "2026-10-06"
+        },
+        {
+          "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/mndot-layer-metadata.json",
+          "bytes": 7689,
+          "sha256": "57397238912915beaf37c5085b6a7308098c2cce43d879f265154f43e5abe0bf",
+          "hash_kind": "file-bytes",
+          "url": "https://feat.gisdata.mn.gov/arcgis/rest/services/MnGeo/mn_counties/FeatureServer/0?f=pjson",
+          "retrieved_at": "2026-10-06"
+        },
+        {
+          "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/mndot-metadata.html",
+          "bytes": 12912,
+          "sha256": "5aeda34e1c8fa7d4c3647823e1bebd59e4014edcb92ad2338d4f35a148bb66fc",
+          "hash_kind": "file-bytes",
+          "url": "https://www.dot.state.mn.us/tda/docs/emma-metadata/county.html",
+          "retrieved_at": "2026-10-06T07:10:52.061938Z"
+        },
+        {
+          "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/mndot-disclaimer.html",
+          "bytes": 21240,
+          "sha256": "2b4b3134482699f0d7341fa7537e1ab7f8357008043322d219f75cad63d975b3",
+          "hash_kind": "file-bytes",
+          "url": "https://www.dot.state.mn.us/information/disclaimer.html",
+          "retrieved_at": "2026-10-06"
+        }
+      ]
+    },
+    {
+      "id": "mngeo-county-reference-1993-lineage",
+      "title": "Minnesota DNR / MnGeo county boundary service layer",
+      "role": "County/PLS/hydrography reference boundary layer",
+      "vintage": "Layer description says assembled in 1993; service retrieved 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "license": "No representation or warranty for accuracy, currency, suitability or reliability; retransmission prohibited unless the full DNR disclaimer accompanies the data. The attached item-info JSON carries that notice.",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "limitations": "Complete statewide integration/tile-reference layer. Its 1993 lineage mixes stated source scales. Layer metadata alone does not establish exact current source-vintage or legal boundary status.",
+      "files": [
+        {
+          "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/dnr-counties.json",
+          "bytes": 3107168,
+          "sha256": "5b73bd4a717fd7bc1d941f48d8115e4c5a937dc46c629708aea38fd5891b6172",
+          "hash_kind": "file-bytes",
+          "url": "https://enterprise.gisdata.mn.gov/aghost/rest/services/us_mn_state_mngeo/bdry_mn_county_open_data_status/FeatureServer/2/query?where=1%3D1&outFields=*&returnGeometry=true&outSR=4326&f=geojson",
+          "retrieved_at": "2026-10-06"
+        },
+        {
+          "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/dnr-layer-metadata.json",
+          "bytes": 9220,
+          "sha256": "4a1261b4212f487f390e1e3bf237a82265e153886e262d54227fdc14c88a1dab",
+          "hash_kind": "file-bytes",
+          "url": "https://enterprise.gisdata.mn.gov/aghost/rest/services/us_mn_state_mngeo/bdry_mn_county_open_data_status/FeatureServer/2?f=pjson",
+          "retrieved_at": "2026-10-06"
+        },
+        {
+          "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/dnr-counties-iteminfo.json",
+          "bytes": 1975,
+          "sha256": "e9d5dbfacee58eadcb59acc7f35f907939b64e6b962f5bdf60feffc8d259a185",
+          "hash_kind": "file-bytes",
+          "url": "https://enterprise.gisdata.mn.gov/aghost/rest/services/us_mn_state_mngeo/bdry_mn_county_open_data_status/FeatureServer/2/iteminfo?f=pjson",
+          "retrieved_at": "2026-10-06"
+        }
+      ]
+    },
+    {
+      "id": "census-tigerweb-county-current-2026",
+      "title": "U.S. Census Bureau TIGERweb Current Counties",
+      "role": "Independent current county/county-equivalent boundary reporting and land/water area attributes",
+      "vintage": "January 1, 2026 TIGERweb vintage; 2026 BAS reports through March 1, 2026",
+      "retrieved_at": "2026-10-06",
+      "license": "U.S. federal government data (public domain); cite Census. A Census geometry is not a substitute for the underlying county survey/legal record.",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "limitations": "Legal county boundaries/names are reported through BAS. Census AREALAND/AREAWATER and geometry show area allocation but do not resolve the legal extent of county lines in Lake Superior.",
+      "files": [
+        {
+          "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/census-2026-mn-counties.json",
+          "bytes": 7791159,
+          "sha256": "5954e7c88307731862065af368b2b101be2736fb1c060c116260a0b489813766",
+          "hash_kind": "file-bytes",
+          "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Current/MapServer/82/query?where=STATE%3D%2727%27&outFields=*&returnGeometry=true&outSR=4326&f=geojson",
+          "retrieved_at": "2026-10-06"
+        },
+        {
+          "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/census-2026-county-layer-metadata.json",
+          "bytes": 7489,
+          "sha256": "56df6e7d6cff8fe1e082bbdc10109cc2c7c22a134f5dfca1899f93d9bd98337d",
+          "hash_kind": "file-bytes",
+          "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Current/MapServer/82?f=pjson",
+          "retrieved_at": "2026-10-06"
+        }
+      ]
+    },
+    {
+      "id": "census-federal-air-2020",
+      "title": "U.S. Census Bureau Federal American Indian Reservations",
+      "role": "Separate federal tribal-area context, used only to identify overlaps with scoped counties",
+      "vintage": "January 1, 2020 Census geography",
+      "retrieved_at": "2026-10-06",
+      "license": "U.S. federal government data (public domain); cite Census.",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "limitations": "A query by bounding rectangle retains some neighboring-state reservation features. Census/BAS representation is a 2020 report of a separate boundary domain; it does not replace tribal treaty/agency source instruments, decide county lines or certify present boundaries.",
+      "files": [
+        {
+          "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/tribal-reservations-2020-mn.geojson",
+          "bytes": 1407111,
+          "sha256": "806af40c939f0b52bdd2dd8400857b8d73ede9d8cc9f92284739d609d2317598",
+          "hash_kind": "file-bytes",
+          "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/34/query?where=1%3D1&geometry=-97.55%2C43.45%2C-89.4%2C49.4&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outFields=GEOID%2CAIANNH%2CBASENAME%2CNAME%2CAREALAND%2CAREAWATER&returnGeometry=true&outSR=4326&f=geojson",
+          "retrieved_at": "2026-10-06"
+        },
+        {
+          "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/tribal-reservations-2020-layer-metadata.json",
+          "bytes": 8485,
+          "sha256": "fd9c42a783b7a76c4f9eb11f6c2a447397a742c61abe246a8aa12ea6bad9319e",
+          "hash_kind": "file-bytes",
+          "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer/34?f=pjson",
+          "retrieved_at": "2026-10-06"
+        },
+        {
+          "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/tribal-reservations-2020-mapserver.json",
+          "bytes": 33946,
+          "sha256": "a7dbc8cbbf664db5bdc7b425dedf39e6a72cd8a1e1e57d26223e07353f8868f2",
+          "hash_kind": "file-bytes",
+          "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/tigerWMS_Census2020/MapServer?f=pjson",
+          "retrieved_at": "2026-10-06"
+        }
+      ]
+    },
+    {
+      "id": "minnesota-legal-records",
+      "title": "Minnesota Constitution and official Revisor statutes/proclamations",
+      "role": "Legal history, county-creation references and boundary-water governance documents",
+      "vintage": "Current 2025 statutes plus 1891 compilation, 1905/1907 publication and 1857 Constitution",
+      "retrieved_at": "2026-10-06",
+      "license": "Official Minnesota state constitutional/statutory records; public legal text, retain source title and URL.",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "limitations": "These documents establish text/authority/history, not coordinate-controlled county survey geometry. Compact map originals described by §1.16 are held by state Secretaries of State and were not obtained.",
+      "files": [
+        {
+          "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/mn-constitution.html",
+          "bytes": 150014,
+          "sha256": "6bfe2bc1b70379d84df07ea00d6c5c516f1ba4388bd941662c2c5c7a0b834254",
+          "hash_kind": "file-bytes",
+          "url": "https://www.revisor.mn.gov/constitution/",
+          "retrieved_at": "2026-10-06"
+        },
+        {
+          "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/mn-statute-2.01-current.html",
+          "bytes": 65274,
+          "sha256": "710eb69b6d3f69064651c68d5ee1824238dfb4a6bac5ba3c21ad22a4e7d25bcd",
+          "hash_kind": "file-bytes",
+          "url": "https://www.revisor.mn.gov/statutes/cite/2.01",
+          "retrieved_at": "2026-10-06T07:27:18.332557Z"
+        },
+        {
+          "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/mn-statute-1.15-current.html",
+          "bytes": 70716,
+          "sha256": "503224200e2b909980fc0c21f55a28aa54bae1245309af751ddda29174e3c382",
+          "hash_kind": "file-bytes",
+          "url": "https://www.revisor.mn.gov/statutes/cite/1.15",
+          "retrieved_at": "2026-10-06T07:27:18.743789Z"
+        },
+        {
+          "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/mn-statute-1.16-current.html",
+          "bytes": 61441,
+          "sha256": "346da0178cf6e2d9bc490323eccb70e7b1efd07ea29712fda00d702c72855fdd",
+          "hash_kind": "file-bytes",
+          "url": "https://www.revisor.mn.gov/statutes/cite/1.16",
+          "retrieved_at": "2026-10-06T07:27:19.115678Z"
+        },
+        {
+          "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/mn-statute-97A.235-current.html",
+          "bytes": 61353,
+          "sha256": "f8ba6c47f27758fc4ff750863c61ae7e60d69002d69d2be936bc670734397869",
+          "hash_kind": "file-bytes",
+          "url": "https://www.revisor.mn.gov/statutes/cite/97A.235",
+          "retrieved_at": "2026-10-06T07:27:19.616469Z"
+        },
+        {
+          "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/mn-statutes-1891-ch8-cook-county.pdf",
+          "bytes": 6852430,
+          "sha256": "84392c5feacb940ac422cce0ca5a62a8efa3ffd47c76f2d69a780af95c934486",
+          "hash_kind": "file-bytes",
+          "url": "https://www.revisor.mn.gov/statutes/1891/cite/8/pdf",
+          "retrieved_at": "2026-10-06"
+        },
+        {
+          "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/mn-statutes-1905-ch2-territorial-divisions.pdf",
+          "bytes": 128840,
+          "sha256": "e9f44aa7ad8fe45ce84258cad52d44eeeb8b35b25ccea43c05e22181afd52818",
+          "hash_kind": "file-bytes",
+          "url": "https://www.revisor.mn.gov/statutes/1905/cite/2/pdf",
+          "retrieved_at": "2026-10-06"
+        },
+        {
+          "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/mn-laws-1907-preface-proclamation.pdf",
+          "bytes": 287017,
+          "sha256": "b7d11187012e1ee08978a32cafb0727619aecaacd34f8b087554dfd81ec2f28f",
+          "hash_kind": "file-bytes",
+          "url": "https://www.revisor.mn.gov/laws/1907/0/General%2BLaws/Preface/0/",
+          "retrieved_at": "2026-10-06"
+        },
+        {
+          "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/mn-statutes-1947-boundary-water-compact.html",
+          "bytes": 70716,
+          "sha256": "503224200e2b909980fc0c21f55a28aa54bae1245309af751ddda29174e3c382",
+          "hash_kind": "file-bytes",
+          "url": "https://www.revisor.mn.gov/statutes/2025/cite/1.15",
+          "retrieved_at": "2026-10-06"
+        },
+        {
+          "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/mn-statutes-370.html",
+          "bytes": 94342,
+          "sha256": "2d89bcc28daf29b7fca628c4e3859521a909f0c8dae9a12560317654c6fac034",
+          "hash_kind": "file-bytes",
+          "url": "https://www.revisor.mn.gov/statutes/cite/370/full",
+          "retrieved_at": "2026-10-06"
+        }
+      ]
+    },
+    {
+      "id": "minnesota-reference-context",
+      "title": "Minnesota state area portal and county-ID standard",
+      "role": "State land/water context and county code semantics",
+      "vintage": "Portal/standard retrieved 2026-10-06; county ID standard version 2.0 (2019-03-08)",
+      "retrieved_at": "2026-10-06",
+      "license": "Minnesota public informational and geospatial standard documents.",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "limitations": "Area total is broad state context and code standard supports identity exchange; neither source sets county boundary coordinates.",
+      "files": [
+        {
+          "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/mn-state-area.html",
+          "bytes": 46872,
+          "sha256": "8f468df95bd1e4e240f8426f1ad3f977630fe40db9cfd191aa169aa0e704db40",
+          "hash_kind": "file-bytes",
+          "url": "https://mn.gov/portal/about-minnesota/",
+          "retrieved_at": "2026-10-06T07:21:55.384362Z"
+        },
+        {
+          "path": "data/regional-review/minnesota-lake-superior-boundaries-20261006/source/mn-county-id-standard.html",
+          "bytes": 21621,
+          "sha256": "f27f0ff57716b3f32d0b2a7b44d6bf3d142fba9c917cf7afaa09039c371215ec",
+          "hash_kind": "file-bytes",
+          "url": "https://mn.gov/mngeo/gis-data-and-maps/standards/county-id/",
+          "retrieved_at": "2026-10-06T07:21:56.558780Z"
+        }
+      ]
+    },
+    {
+      "id": "prior-reviewed-cartographic-comparison-issue-264",
+      "title": "PR #1084 / Issue #264 retained 2018 Cartographic Boundary comparison",
+      "role": "Previously reproduced and reviewed comparison, reused for context only",
+      "vintage": "2018 1:500,000 cartographic boundary file; prior issue baseline #264",
+      "retrieved_at": "2026-10-05",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/pull/1084",
+      "license": {
+        "status": "redistributable",
+        "terms": "The underlying 2018 Census cartographic boundary file is U.S. government public-domain data. Prior derivation output is repository-retained research evidence."
+      },
+      "verification": "verified",
+      "temporal_status": "reference",
+      "limitations": "Not independently rerun in this packet. The prior issue PR exact-head review and bytes are retained; cartographic geometry is generalized for map display.",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-1662301453abd475/geometry-and-membership-results.json",
+          "bytes": 601168,
+          "sha256": "6aa450f637b419957d8207967365938ba3d51185afe7f69cc1ee918e82624182",
+          "hash_kind": "file-bytes",
+          "role": "prior-reviewed-result"
+        }
+      ]
+    }
+  ]
+}

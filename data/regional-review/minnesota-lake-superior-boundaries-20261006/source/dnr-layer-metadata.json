@@ -1,0 +1,388 @@
+{
+ "currentVersion": 11.5,
+ "cimVersion": "3.5.0",
+ "id": 2,
+ "name": "Bdry Mn County Open Data Status",
+ "type": "Feature Layer",
+ "parentLayer": null,
+ "defaultVisibility": true,
+ "minScale": 0,
+ "maxScale": 0,
+ "canScaleSymbols": false,
+ "geometryType": "esriGeometryPolygon",
+ "description": "Minnesota county boundaries derived from a combination of 1:24,000 scale PLS lines, 1:100,000 scale TIGER, 1:100,000 scale DLG, and 1:24,000 scale hydrography lines. At the time of its development (1993), the largest available scale data were assembled to create the layer.",
+ "copyrightText": "",
+ "editFieldsInfo": null,
+ "ownershipBasedAccessControlForFeatures": null,
+ "syncCanReturnChanges": false,
+ "relationships": [],
+ "isDataVersioned": false,
+ "isDataArchived": false,
+ "infoInEstimates": [
+  "extent",
+  "count"
+ ],
+ "isDataBranchVersioned": false,
+ "isDataReplicaTracked": false,
+ "isCoGoEnabled": false,
+ "supportsRollbackOnFailureParameter": true,
+ "archivingInfo": {
+  "supportsQueryWithHistoricMoment": false,
+  "startArchivingMoment": -1
+ },
+ "supportsStatistics": true,
+ "supportsExceedsLimitStatistics": true,
+ "supportsAdvancedQueries": true,
+ "supportsValidateSQL": true,
+ "supportsCoordinatesQuantization": true,
+ "supportsQuantizationEditMode": true,
+ "supportsCalculate": true,
+ "supportsASyncCalculate": true,
+ "supportsDurableUrlForSyncModelNone": false,
+ "supportsDatumTransformation": true,
+ "advancedQueryCapabilities": {
+  "supportsPagination": true,
+  "supportsQueryWithDistance": true,
+  "supportsReturningQueryExtent": true,
+  "supportsStatistics": true,
+  "supportsPercentileStatistics": true,
+  "supportsHavingClause": true,
+  "supportsOrderBy": true,
+  "supportsDistinct": true,
+  "supportsCountDistinct": true,
+  "supportsAdvancedQueryRelated": true,
+  "supportsQueryRelatedPagination": true,
+  "supportsCurrentUserQueries": true,
+  "supportsFullTextSearch": true,
+  "fullTextSearchCapabilities": {
+   "supportsSearchOperator": true,
+   "supportsOperator": false,
+   "supportsSqlExpressionInFullText": true
+  },
+  "fullTextSearchableFields": [],
+  "supportsQueryWithResultType": true,
+  "supportsReturningGeometryCentroid": true,
+  "supportsReturningGeometryEnvelope": true,
+  "supportsSqlExpression": true,
+  "supportsQueryWithDatumTransformation": true,
+  "supportsLod": false,
+  "supportsQueryWithLodSR": false,
+  "supportsQueryAnalytic": true,
+  "supportsTrueCurve": true,
+  "supportedCurveTypes": [
+   "esriGeometryCircularArc",
+   "esriGeometryEllipticArc",
+   "esriGeometryBezier3Curve"
+  ],
+  "supportsQueryWithCacheHint": false
+ },
+ "advancedQueryAnalyticCapabilities": {
+  "supportsLinearRegression": true,
+  "supportsAsync": true,
+  "supportsPercentileAnalytic": false
+ },
+ "advancedEditingCapabilities": {
+  "supportedSqlFormatsInCalculate": [
+   "standard"
+  ],
+  "supportsAsyncApplyEdits": true,
+  "supportsApplyEditsbyUploadID": true,
+  "supportedApplyEditsUploadIDFormats": "JSON,PBF"
+ },
+ "hasGeometryProperties": true,
+ "geometryProperties": {
+  "shapeAreaFieldName": "Shape__Area",
+  "shapeLengthFieldName": "Shape__Length",
+  "units": "esriMeters"
+ },
+ "hasMetadata": true,
+ "extent": {
+  "xmin": 189775.33200000133,
+  "ymin": 4816305.369999997,
+  "xmax": 761655.073400001,
+  "ymax": 5472427.737,
+  "spatialReference": {
+   "wkid": 26915,
+   "latestWkid": 26915,
+   "xyTolerance": 0.001,
+   "zTolerance": 0.001,
+   "mTolerance": 0.001,
+   "falseX": -5120900,
+   "falseY": -9998100,
+   "xyUnits": 10000,
+   "falseZ": -100000,
+   "zUnits": 10000,
+   "falseM": -100000,
+   "mUnits": 10000
+  }
+ },
+ "spatialReference": {
+  "wkid": 26915,
+  "latestWkid": 26915,
+  "xyTolerance": 0.001,
+  "zTolerance": 0.001,
+  "mTolerance": 0.001,
+  "falseX": -5120900,
+  "falseY": -9998100,
+  "xyUnits": 10000,
+  "falseZ": -100000,
+  "zUnits": 10000,
+  "falseM": -100000,
+  "mUnits": 10000
+ },
+ "sourceSpatialReference": {
+  "wkid": 26915,
+  "latestWkid": 26915,
+  "xyTolerance": 0.001,
+  "zTolerance": 0.001,
+  "mTolerance": 0.001,
+  "falseX": -5120900,
+  "falseY": -9998100,
+  "xyUnits": 4.504455473910538E8,
+  "falseZ": 0,
+  "zUnits": 1,
+  "falseM": 0,
+  "mUnits": 1
+ },
+ "drawingInfo": {
+  "renderer": {
+   "type": "simple",
+   "symbol": {
+    "type": "esriSFS",
+    "style": "esriSFSSolid",
+    "color": [
+     252,
+     222,
+     209,
+     255
+    ],
+    "outline": {
+     "type": "esriSLS",
+     "style": "esriSLSSolid",
+     "color": [
+      110,
+      110,
+      110,
+      255
+     ],
+     "width": 0.7
+    }
+   }
+  },
+  "scaleSymbols": true,
+  "transparency": 0,
+  "labelingInfo": null
+ },
+ "hasM": false,
+ "hasZ": false,
+ "allowGeometryUpdates": true,
+ "allowTrueCurvesUpdates": true,
+ "onlyAllowTrueCurveUpdatesByTrueCurveClients": true,
+ "hasAttachments": false,
+ "supportsApplyEditsWithGlobalIds": false,
+ "htmlPopupType": "esriServerHTMLPopupTypeAsHTMLText",
+ "objectIdField": "objectid",
+ "globalIdField": "",
+ "displayField": "name",
+ "typeIdField": "",
+ "subtypeField": "",
+ "fields": [
+  {
+   "name": "objectid",
+   "type": "esriFieldTypeOID",
+   "alias": "OBJECTID",
+   "domain": null,
+   "editable": false,
+   "nullable": false,
+   "defaultValue": null,
+   "modelName": "OBJECTID"
+  },
+  {
+   "name": "fips",
+   "type": "esriFieldTypeString",
+   "alias": "FIPS",
+   "domain": null,
+   "editable": true,
+   "nullable": true,
+   "length": 3,
+   "defaultValue": null,
+   "modelName": "COUNTYFIPS"
+  },
+  {
+   "name": "name",
+   "type": "esriFieldTypeString",
+   "alias": "NAME",
+   "domain": null,
+   "editable": true,
+   "nullable": true,
+   "length": 24,
+   "defaultValue": null,
+   "modelName": "COUNTYNAME"
+  },
+  {
+   "name": "status",
+   "type": "esriFieldTypeString",
+   "alias": "STATUS",
+   "domain": {
+    "type": "codedValue",
+    "name": "Open_Data_Status",
+    "description": "",
+    "codedValues": [
+     {
+      "name": "Not Open or Unknown",
+      "code": "1"
+     },
+     {
+      "name": "Policy Under Consideration",
+      "code": "2"
+     },
+     {
+      "name": "Open - No Policy",
+      "code": "3"
+     },
+     {
+      "name": "Open - Policy",
+      "code": "4"
+     }
+    ],
+    "mergePolicy": "esriMPTDefaultValue",
+    "splitPolicy": "esriSPTDefaultValue"
+   },
+   "editable": true,
+   "nullable": true,
+   "length": 1,
+   "defaultValue": null,
+   "modelName": "STAT"
+  },
+  {
+   "name": "year_policy",
+   "type": "esriFieldTypeString",
+   "alias": "YEAR_POLICY",
+   "domain": null,
+   "editable": true,
+   "nullable": true,
+   "length": 4,
+   "defaultValue": null,
+   "modelName": "Pol_Temp"
+  },
+  {
+   "name": "year_available",
+   "type": "esriFieldTypeString",
+   "alias": "YEAR_AVAILABLE",
+   "domain": null,
+   "editable": true,
+   "nullable": true,
+   "length": 4,
+   "defaultValue": null,
+   "modelName": "Avail_Temp"
+  },
+  {
+   "name": "link",
+   "type": "esriFieldTypeString",
+   "alias": "LINK",
+   "domain": null,
+   "editable": true,
+   "nullable": true,
+   "length": 254,
+   "defaultValue": null,
+   "modelName": "link"
+  },
+  {
+   "name": "Shape__Area",
+   "type": "esriFieldTypeDouble",
+   "alias": "st_area(shape)",
+   "domain": null,
+   "editable": false,
+   "nullable": true,
+   "defaultValue": null,
+   "modelName": "st_area(shape)",
+   "required": true
+  },
+  {
+   "name": "Shape__Length",
+   "type": "esriFieldTypeDouble",
+   "alias": "st_perimeter(shape)",
+   "domain": null,
+   "editable": false,
+   "nullable": true,
+   "defaultValue": null,
+   "modelName": "st_perimeter(shape)",
+   "required": true
+  }
+ ],
+ "geometryField": {
+  "name": "shape",
+  "type": "esriFieldTypeGeometry",
+  "alias": "Shape",
+  "domain": null,
+  "editable": true,
+  "nullable": true,
+  "defaultValue": null,
+  "modelName": "Shape"
+ },
+ "indexes": [
+  {
+   "name": "r37705_sde_rowid_uk",
+   "isAscending": true,
+   "isUnique": true,
+   "description": "",
+   "fields": "objectid"
+  },
+  {
+   "name": "a21595_ix1",
+   "isAscending": true,
+   "isUnique": true,
+   "description": "",
+   "fields": "shape"
+  }
+ ],
+ "datesInUnknownTimezone": false,
+ "dateFieldsTimeReference": {
+  "timeZone": "UTC",
+  "timeZoneIANA": "Etc/UTC",
+  "respectsDaylightSaving": false
+ },
+ "preferredTimeReference": null,
+ "types": [],
+ "templates": [
+  {
+   "name": "Bdry Mn County Open Data Status",
+   "description": "",
+   "prototype": {
+    "attributes": {
+     "link": null,
+     "year_available": null,
+     "fips": null,
+     "name": null,
+     "status": null,
+     "year_policy": null
+    }
+   },
+   "drawingTool": "esriFeatureEditToolPolygon"
+  }
+ ],
+ "maxRecordCount": 2000,
+ "supportedQueryFormats": "JSON, geoJSON, PBF",
+ "supportedExportFormats": "sqlite,filegdb,shapefile,csv,geojson",
+ "capabilities": "Query,Extract",
+ "useStandardizedQueries": true,
+ "bigIntegerRestrictedTo53Bits": true,
+ "supportedSpatialRelationships": [
+  "esriSpatialRelIntersects",
+  "esriSpatialRelContains",
+  "esriSpatialRelCrosses",
+  "esriSpatialRelEnvelopeIntersects",
+  "esriSpatialRelIndexIntersects",
+  "esriSpatialRelOverlaps",
+  "esriSpatialRelTouches",
+  "esriSpatialRelWithin",
+  "esriSpatialRelRelation"
+ ],
+ "supportsAppend": true,
+ "supportedAppendFormats": "FILEGDB,PBF",
+ "standardMaxRecordCount": 4000,
+ "tileMaxRecordCount": 4000,
+ "standardMaxRecordCountNoGeometry": 32000,
+ "maxRecordCountFactor": 1,
+ "serviceItemId": "b497f27cf6ff46f0ab30b12af3df69e0"
+}

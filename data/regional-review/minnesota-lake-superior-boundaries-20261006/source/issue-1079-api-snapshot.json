@@ -1,0 +1,45 @@
+{
+  "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1079",
+  "title": "Investigate Minnesota county extents and Koochiching fragments",
+  "issue_number": 1079,
+  "body": "Parent: #264, which recorded a source-boundary difference and recommends this bounded investigation. This work does not modify shared geography or approve the Interior North America branch.\n\n**Read-only source/semantic investigation, exactly three Minnesota counties plus their state parent.** The pinned `gbOpen/USA/ADM2` metadata identifies its source as U.S. Census MAF/TIGER, represented year 2018, source-data update Jan. 19, 2023, build Dec. 12, 2023, Public Domain, and points to the Census cartographic-boundary product. Independent Census TIGERweb 2018 and current 2026 county layers both contain the same 186 Iowa/Minnesota GEOIDs. The Atlas geometries closely follow the 2018 Census 1:500,000 cartographic product, which Census documents as generalized for small-scale maps and unsuitable for precise area or geographic-relationship analysis. For Cook (27031), the cartographic/TIGERweb Jaccard is 0.4812; for Lake (27075), 0.7644. Those differences do not establish that Lake Superior water explains them. Koochiching (27071) has seven Atlas polygon parts versus one in the cartographic/geoBoundaries representation: a main component, one approximately 2,129 m² component covered by the source, one approximately 206 m² component outside it, and four tiny components. Their status as land remnants, water, or topology artefacts is unresolved. Minnesota’s county-union and state representation also needs complete-footprint review.\n\nAffected exact Atlas subjects:\n- `gb:USA:ADM2:52423323B35428884505626` — Cook County, Minnesota; Census GEOID `27031`.\n- `gb:USA:ADM2:52423323B21927262007954` — Lake County, Minnesota; Census GEOID `27075`.\n- `gb:USA:ADM2:52423323B71326746759120` — Koochiching County, Minnesota; Census GEOID `27071`.\n- `framework:province:minnesota:bf75ad975e19` — Minnesota parent province/state extent and its relationship to the counties above.\n\n**Acceptance:** inspect and retain lawful, pinned official evidence that establishes what extent the county and state shapes represent; examine Census cartographic boundaries, TIGER/Line/TIGERweb, relevant state/tribal/federal boundary responsibilities and source lineage; establish data vintage, source generalization, license/reuse, water versus land extent and neighboring-boundary completeness. Compare all three exact counties and the complete Minnesota state parent against independent authoritative sources using `worldatlas-evidence-geometry-v1`, with positive/negative controls and per-subject findings. Classify each affected subject justified, correction-needed, or insufficient-evidence; state an engineering handoff if an Atlas geometry correction or a different source is warranted. If evidence cannot settle the representation, document limits and lawful restoration instructions. No shared geometry edits, location imports, production writes, regional approval, deployment, or historical claims.\n\nThis child is blocked on #264 completing its evidence handoff. Once ready, take only the exact owned path below, preserve source and evidence history, and follow the current geography, workspace, evidence-review, and serialized-claim/merge protocols.\n\n<!-- worldatlas-work:v1\n{\"max_prs\":1,\"depends_on\":[264],\"scope\":\"Resolve source meaning and completeness for Cook, Lake, and Koochiching Counties, Minnesota (exact source IDs gb:USA:ADM2:52423323B35428884505626, gb:USA:ADM2:52423323B21927262007954, and gb:USA:ADM2:52423323B71326746759120) plus parent framework:province:minnesota:bf75ad975e19; evidence and sourced handoff only\",\"mode\":\"geography\",\"owned_paths\":[\"data/regional-review/minnesota-lake-superior-boundaries-20261006/\"],\"evidence_quality\":{\"version\":1,\"manifest_path\":\"data/regional-review/minnesota-lake-superior-boundaries-20261006/evidence-quality.json\",\"subject_ids\":[\"framework:province:minnesota:bf75ad975e19\",\"gb:USA:ADM2:52423323B21927262007954\",\"gb:USA:ADM2:52423323B35428884505626\",\"gb:USA:ADM2:52423323B71326746759120\"],\"pins\":{\"atlas_cook_part_25\":\"dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394\",\"atlas_lake_part_26\":\"44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632\",\"atlas_koochiching_part_27\":\"e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758\",\"atlas_hierarchy\":\"568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b\"},\"review_kind\":\"geometry\"}}\n-->",
+  "state": "open",
+  "user": {
+    "login": "ChengshuLi",
+    "name": "ChengshuLi",
+    "email": null,
+    "avatar_url": "https://avatars.githubusercontent.com/u/6732996?v=4",
+    "id": 6732996
+  },
+  "assignees": null,
+  "labels": [
+    {
+      "name": "kind:work-item",
+      "color": "0e8a16",
+      "description": "Bounded actionable scope, normally 1–3 PRs"
+    },
+    {
+      "name": "status:ready",
+      "color": "0e8a16",
+      "description": "Reviewed scope and dependencies ready for a worker claim"
+    },
+    {
+      "name": "status:claimed",
+      "color": "fbca04",
+      "description": "Reserved by a named worker lease recorded in issue comments"
+    },
+    {
+      "name": "type:geography",
+      "color": "8250df",
+      "description": "Geographic source research, hierarchy/boundary evidence and proposals; no live mutations"
+    }
+  ],
+  "milestone": null,
+  "state_reason": null,
+  "comments": 4,
+  "created_at": "2026-10-06T05:34:18Z",
+  "updated_at": "2026-10-06T06:55:54Z",
+  "closed_at": null,
+  "display_url": "https://github.com/ChengshuLi/WorldAtlas/issues/1079",
+  "display_title": "Investigate Minnesota county extents and Koochiching fragments"
+}

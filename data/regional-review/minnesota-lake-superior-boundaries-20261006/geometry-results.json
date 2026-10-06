@@ -1,0 +1,1239 @@
+{
+  "prior_issue_264_cartographic_reproduction": {
+    "baseline_commit": "897fdd0fbac0e16e675a56a15883c22f533b51a3",
+    "results_path": "data/regional-review/regional-review-1662301453abd475/geometry-and-membership-results.json",
+    "results_sha256": "6aa450f637b419957d8207967365938ba3d51185afe7f69cc1ee918e82624182",
+    "source_sha256": "aaa866af327754e1b80aa87bfb97b04a7209f4f871075aef84affb8f0b3afe67",
+    "prior_selected_counties": {
+      "27075": {
+        "atlas_vs_census_cartographic_2018_500k": {
+          "intersection_over_atlas": 0.9990347628089541,
+          "intersection_over_reference": 0.9919645347950554,
+          "jaccard": 0.9910147401728939,
+          "atlas_area_m2": 5884900758.8104925,
+          "reference_area_m2": 5926845393.668383
+        },
+        "cartographic_2018_vs_tigerweb_2018": {
+          "intersection_over_atlas": 0.9994689583689126,
+          "intersection_over_reference": 0.7646940150043093,
+          "jaccard": 0.7643834459190499,
+          "atlas_area_m2": 5926845393.668383,
+          "reference_area_m2": 7746494513.874211
+        }
+      },
+      "27031": {
+        "atlas_vs_census_cartographic_2018_500k": {
+          "intersection_over_atlas": 0.9926756540728933,
+          "intersection_over_reference": 0.9959839877977666,
+          "jaccard": 0.9887181393437684,
+          "atlas_area_m2": 4178774522.493338,
+          "reference_area_m2": 4164893997.4540005
+        },
+        "cartographic_2018_vs_tigerweb_2018": {
+          "intersection_over_atlas": 0.9995453236848265,
+          "intersection_over_reference": 0.4812626476058675,
+          "jaccard": 0.481157313481996,
+          "atlas_area_m2": 4164893997.4540005,
+          "reference_area_m2": 8650162940.148766
+        }
+      },
+      "27071": {
+        "atlas_vs_census_cartographic_2018_500k": {
+          "intersection_over_atlas": 0.9988228677072682,
+          "intersection_over_reference": 0.9981203331212135,
+          "jaccard": 0.9969476193078989,
+          "atlas_area_m2": 8164462766.6068325,
+          "reference_area_m2": 8170209385.8067045
+        },
+        "cartographic_2018_vs_tigerweb_2018": {
+          "intersection_over_atlas": 0.9997136989203371,
+          "intersection_over_reference": 0.9992959300027645,
+          "jaccard": 0.9990100318755485,
+          "atlas_area_m2": 8170209385.8067045,
+          "reference_area_m2": 8173625050.204978
+        }
+      }
+    }
+  },
+  "issue": 1079,
+  "baseline_commit": "00664f04790641a9e0c0b29535823076ed243b93",
+  "helper_version": "worldatlas-evidence-geometry-v1",
+  "method": {
+    "version": "worldatlas-evidence-geometry-v1",
+    "axis_order": "longitude-latitude",
+    "crs": "EPSG:4326",
+    "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+    "area_units": "m2",
+    "distance_method": "WGS84 inverse geodesic",
+    "distance_units": "m"
+  },
+  "units": [
+    {
+      "atlas_id": "gb:USA:ADM2:52423323B35428884505626",
+      "name": "Cook",
+      "GEOID": "27031",
+      "parent_id": "framework:province:minnesota:bf75ad975e19",
+      "census_area_attributes_m2": {
+        "land": 3762233749,
+        "water": 4887826563,
+        "total": 8650060312
+      },
+      "source_identity": {
+        "census": "Cook County",
+        "mndot": "Cook",
+        "mndot_county_code": "16",
+        "mndot_fips55_gnis": "031",
+        "dnr": "Cook",
+        "dnr_county_code": "031",
+        "atlas_parts": 1,
+        "census_parts": 1,
+        "mndot_parts": 1,
+        "dnr_parts": 24
+      },
+      "areas_m2": {
+        "atlas": 4178774522.493338,
+        "census_2026": 8650168272.075851,
+        "mndot_2022": 4158307695.4397116,
+        "dnr_open_data_layer_1993_lineage": 4160545581.6356454
+      },
+      "atlas_components": [
+        {
+          "rank_by_area": 1,
+          "area_m2": 4178774522.493338,
+          "bounds_lonlat": [
+            -91.0318,
+            47.465,
+            -89.4892,
+            48.2458
+          ],
+          "census_2026_overlap_fraction": 0.9982283008690876,
+          "mndot_2022_overlap_fraction": 0.9914320777453518,
+          "dnr_overlap_fraction": 0.9917793480372038
+        }
+      ],
+      "atlas_vs_census_2026": {
+        "intersection_over_atlas": 0.9982283008690876,
+        "intersection_over_reference": 0.4822300399368439,
+        "jaccard": 0.4818176604357032,
+        "atlas_area_m2": 4178774522.493338,
+        "reference_area_m2": 8650168272.075851,
+        "intersection_area_m2": 4171370991.303558
+      },
+      "atlas_vs_mndot_2022": {
+        "intersection_over_atlas": 0.9914320777453518,
+        "intersection_over_reference": 0.9963118197838942,
+        "jaccard": 0.987806712303556,
+        "atlas_area_m2": 4178774522.493338,
+        "reference_area_m2": 4158307695.439712,
+        "intersection_area_m2": 4142971107.2649107
+      },
+      "atlas_vs_dnr": {
+        "intersection_over_atlas": 0.9917793480372038,
+        "intersection_over_reference": 0.9961247125391697,
+        "jaccard": 0.9879673920278373,
+        "atlas_area_m2": 4178774522.493338,
+        "reference_area_m2": 4160545581.635646,
+        "intersection_area_m2": 4144422271.5129204
+      },
+      "mndot_2022_vs_dnr": {
+        "intersection_over_atlas": 0.9996513350132389,
+        "intersection_over_reference": 0.9991136396847109,
+        "jaccard": 0.9987655924020803,
+        "atlas_area_m2": 4158307695.439712,
+        "reference_area_m2": 4160545581.635646,
+        "intersection_area_m2": 4156857839.1421328
+      },
+      "classification": "insufficient-evidence",
+      "classification_basis": "Identity, state parent and land-oriented reference outline are strongly corroborated; Census 2026 includes materially more mapped water area and no inspected survey/legal source establishes the county’s line through Lake Superior."
+    },
+    {
+      "atlas_id": "gb:USA:ADM2:52423323B21927262007954",
+      "name": "Lake",
+      "GEOID": "27075",
+      "parent_id": "framework:province:minnesota:bf75ad975e19",
+      "census_area_attributes_m2": {
+        "land": 5462545572,
+        "water": 2283905028,
+        "total": 7746450600
+      },
+      "source_identity": {
+        "census": "Lake County",
+        "mndot": "Lake",
+        "mndot_county_code": "38",
+        "mndot_fips55_gnis": "075",
+        "dnr": "Lake",
+        "dnr_county_code": "075",
+        "atlas_parts": 1,
+        "census_parts": 1,
+        "mndot_parts": 1,
+        "dnr_parts": 8
+      },
+      "areas_m2": {
+        "atlas": 5884900758.8104925,
+        "census_2026": 7746489338.152484,
+        "mndot_2022": 5926914420.692048,
+        "dnr_open_data_layer_1993_lineage": 5927668592.786962
+      },
+      "atlas_components": [
+        {
+          "rank_by_area": 1,
+          "area_m2": 5884900758.8104925,
+          "bounds_lonlat": [
+            -91.7983,
+            46.9397,
+            -91.0207,
+            48.205
+          ],
+          "census_2026_overlap_fraction": 0.9996147240495918,
+          "mndot_2022_overlap_fraction": 0.998884952332389,
+          "dnr_overlap_fraction": 0.9989599138307876
+        }
+      ],
+      "atlas_vs_census_2026": {
+        "intersection_over_atlas": 0.9996147240495918,
+        "intersection_over_reference": 0.7593934737771906,
+        "jaccard": 0.7591712728420452,
+        "atlas_area_m2": 5884900758.8104925,
+        "reference_area_m2": 7746489338.152484,
+        "intersection_area_m2": 5882633448.077584
+      },
+      "atlas_vs_mndot_2022": {
+        "intersection_over_atlas": 0.998884952332389,
+        "intersection_over_reference": 0.9918042334849307,
+        "jaccard": 0.9907073782357868,
+        "atlas_area_m2": 5884900758.8104925,
+        "reference_area_m2": 5926914420.692048,
+        "intersection_area_m2": 5878338813.945259
+      },
+      "atlas_vs_dnr": {
+        "intersection_over_atlas": 0.9989599138307876,
+        "intersection_over_reference": 0.9917524677539522,
+        "jaccard": 0.9907294583491352,
+        "atlas_area_m2": 5884900758.8104925,
+        "reference_area_m2": 5927668592.786962,
+        "intersection_area_m2": 5878779954.924067
+      },
+      "mndot_2022_vs_dnr": {
+        "intersection_over_atlas": 0.9997825709890449,
+        "intersection_over_reference": 0.9996553695262407,
+        "jaccard": 0.9994380903385063,
+        "atlas_area_m2": 5926914420.692048,
+        "reference_area_m2": 5927668592.786962,
+        "intersection_area_m2": 5925625737.551541
+      },
+      "classification": "insufficient-evidence",
+      "classification_basis": "Identity, state parent and land-oriented reference outline are strongly corroborated; Census 2026 includes materially more mapped water area and no inspected survey/legal source establishes the county’s line through Lake Superior."
+    },
+    {
+      "atlas_id": "gb:USA:ADM2:52423323B71326746759120",
+      "name": "Koochiching",
+      "GEOID": "27071",
+      "parent_id": "framework:province:minnesota:bf75ad975e19",
+      "census_area_attributes_m2": {
+        "land": 8041150676,
+        "water": 132757126,
+        "total": 8173907802
+      },
+      "source_identity": {
+        "census": "Koochiching County",
+        "mndot": "Koochiching",
+        "mndot_county_code": "36",
+        "mndot_fips55_gnis": "071",
+        "dnr": "Koochiching",
+        "dnr_county_code": "071",
+        "atlas_parts": 7,
+        "census_parts": 1,
+        "mndot_parts": 1,
+        "dnr_parts": 1
+      },
+      "areas_m2": {
+        "atlas": 8164462766.6068325,
+        "census_2026": 8173909407.186053,
+        "mndot_2022": 8173143981.431187,
+        "dnr_open_data_layer_1993_lineage": 8172928637.883554
+      },
+      "atlas_components": [
+        {
+          "rank_by_area": 1,
+          "area_m2": 8164460431.82135,
+          "bounds_lonlat": [
+            -94.4303,
+            47.8458,
+            -93.0812,
+            48.7102
+          ],
+          "census_2026_overlap_fraction": 0.9988491637708297,
+          "mndot_2022_overlap_fraction": 0.9987579084726065,
+          "dnr_overlap_fraction": 0.9987445211770385
+        },
+        {
+          "rank_by_area": 2,
+          "area_m2": 2129.250012218524,
+          "bounds_lonlat": [
+            -94.25979559512439,
+            48.69021908913764,
+            -94.25822947090886,
+            48.69214974226541
+          ],
+          "census_2026_overlap_fraction": 1.0,
+          "mndot_2022_overlap_fraction": 1.0,
+          "dnr_overlap_fraction": 1.0
+        },
+        {
+          "rank_by_area": 3,
+          "area_m2": 205.53546968521755,
+          "bounds_lonlat": [
+            -94.42628421379737,
+            48.70451945307646,
+            -94.42568380510501,
+            48.70493764818558
+          ],
+          "census_2026_overlap_fraction": 0.0,
+          "mndot_2022_overlap_fraction": 0.0,
+          "dnr_overlap_fraction": 0.0
+        },
+        {
+          "rank_by_area": 4,
+          "area_m2": 1.1527994203675007e-07,
+          "bounds_lonlat": [
+            -94.2605,
+            48.6835,
+            -94.2512,
+            48.6964
+          ],
+          "census_2026_overlap_fraction": 0.0,
+          "mndot_2022_overlap_fraction": 0.0,
+          "dnr_overlap_fraction": 0.0
+        },
+        {
+          "rank_by_area": 5,
+          "area_m2": 7.658796525518191e-08,
+          "bounds_lonlat": [
+            -94.25139774223895,
+            48.68221467544681,
+            -94.25138931435212,
+            48.683762597327146
+          ],
+          "census_2026_overlap_fraction": 0.2851345802375403,
+          "mndot_2022_overlap_fraction": 0.0,
+          "dnr_overlap_fraction": 0.0
+        },
+        {
+          "rank_by_area": 6,
+          "area_m2": 3.596790802522232e-08,
+          "bounds_lonlat": [
+            -94.25139879440204,
+            48.68220783638671,
+            -94.2512,
+            48.6835
+          ],
+          "census_2026_overlap_fraction": 0.5630000899197043,
+          "mndot_2022_overlap_fraction": 0.745205397459262,
+          "dnr_overlap_fraction": 0.5675585914907175
+        },
+        {
+          "rank_by_area": 7,
+          "area_m2": 1.7544010688652634e-08,
+          "bounds_lonlat": [
+            -93.3482,
+            48.6264,
+            -93.2549,
+            48.6428
+          ],
+          "census_2026_overlap_fraction": 0.0,
+          "mndot_2022_overlap_fraction": 1.0,
+          "dnr_overlap_fraction": 0.0
+        }
+      ],
+      "atlas_vs_census_2026": {
+        "intersection_over_atlas": 0.9988491389255311,
+        "intersection_over_reference": 0.9976947624407614,
+        "jaccard": 0.996549198227636,
+        "atlas_area_m2": 8164462766.6068325,
+        "reference_area_m2": 8173909407.186053,
+        "intersection_area_m2": 8155066604.214794
+      },
+      "atlas_vs_mndot_2022": {
+        "intersection_over_atlas": 0.9987578836534042,
+        "intersection_over_reference": 0.9976970395320708,
+        "jaccard": 0.9964606341506459,
+        "atlas_area_m2": 8164462766.6068325,
+        "reference_area_m2": 8173143981.431187,
+        "intersection_area_m2": 8154321553.943257
+      },
+      "atlas_vs_dnr": {
+        "intersection_over_atlas": 0.9987444963616646,
+        "intersection_over_reference": 0.997709953822612,
+        "jaccard": 0.9964601903293682,
+        "atlas_area_m2": 8164462766.6068325,
+        "reference_area_m2": 8172928637.883554,
+        "intersection_area_m2": 8154212253.898304
+      },
+      "mndot_2022_vs_dnr": {
+        "intersection_over_atlas": 0.999886014273147,
+        "intersection_over_reference": 0.9999123596642646,
+        "jaccard": 0.9997983939148923,
+        "atlas_area_m2": 8173143981.431187,
+        "reference_area_m2": 8172928637.883554,
+        "intersection_area_m2": 8172212359.673789
+      },
+      "classification": "insufficient-evidence",
+      "classification_basis": "Identity and main footprint are corroborated, but the Atlas has one 2,129 m² component shared by all references, a 205 m² component absent from all three and four degenerate slivers; their physical/survey status is unresolved."
+    }
+  ],
+  "state_parent": {
+    "parent_id": "framework:province:minnesota:bf75ad975e19",
+    "classification": "insufficient-evidence",
+    "classification_basis": "The hierarchy record has 87 county children but no independent geometry feature. County-union area is close to land-oriented references yet materially smaller than the current Census state footprint; official Minnesota state area includes a Lake Superior jurisdictional portion, but this does not resolve exact county/state water geometry.",
+    "hierarchy_record": {
+      "id": "framework:province:minnesota:bf75ad975e19",
+      "level": "province",
+      "metadata": {
+        "basis": "Named source administrative unit grouped within this geographic area",
+        "child_count": 87,
+        "framework_status": "retained-reference",
+        "kind": "geographic",
+        "review_reasons": [
+          "More than 25 locations: review intermediate geographic groupings",
+          "Previous reference grouping retained; semantic tier review outstanding"
+        ],
+        "semantic_review": {
+          "action": "open",
+          "boundary_status": "open",
+          "evidence": [
+            {
+              "inspected_fact": "The official page distinguishes counties and county equivalents, including Alaska boroughs/census areas, independent cities, Louisiana parishes and District of Columbia. It also documents economic-census-specific combinations; no automatic city aggregation follows from ADM number.",
+              "sha256": "9e203dd32c1a05fca06fb10d7e17781b67df5d5ac07b4b882c16ae29598aa75d",
+              "title": "US Census Bureau geographic levels",
+              "url": "https://www.census.gov/programs-surveys/economic-census/guidance-geographies/levels.html"
+            },
+            {
+              "inspected_fact": "Official page records finalized adoption of Connecticut’s nine Councils of Governments as county-equivalent geographic units and links the planning-region crosswalk/map. The atlas retains eight2018 counties, so that geometry must be explicitly vintage reference, not current administration.",
+              "sha256": "94cbd1b88f58a2e3cc74eb844ca5fa3d5278f195e732fb571e0bb97503174db2",
+              "title": "US Census Bureau county-equivalent changes in2020s",
+              "url": "https://www.census.gov/programs-surveys/geography/technical-documentation/county-changes/2020.html"
+            }
+          ],
+          "rationale": "Inspected actual 87 location members and 0 child groups. Current role: Named source administrative unit grouped within this geographic area. United States of America: County-equivalent local reference is defensible, but2018 vintage differs from modern Connecticut; county-based city aggregation and Alaska’s ecologically clipped census areas still need functional/local review.",
+          "remaining_reasons": [
+            "Lower-tier source footprints, dates and functional/local purposes require review; this record does not approve all member locations.",
+            "More than 25 locations: review intermediate geographic groupings",
+            "Previous reference grouping retained; semantic tier review outstanding",
+            "The source-wide grouping has 87 local members; assess sourced functional/local clusters without a numerical quota."
+          ]
+        },
+        "source": "gb:USA:ADM1",
+        "source_url": "https://www.geoboundaries.org/"
+      },
+      "name": "Minnesota",
+      "parent_id": "framework:area:west-north-central:2e29334b977b"
+    },
+    "child_count": 87,
+    "complete_source_counts": {
+      "atlas_children": 87,
+      "mndot_2022": 87,
+      "dnr_open_data_layer": 87,
+      "census_tigerweb_2026": 87
+    },
+    "atlas_county_union_vs_census_tigerweb_state_2026": {
+      "intersection_over_atlas": 0.9995635076865993,
+      "intersection_over_reference": 0.9701818872513498,
+      "jaccard": 0.9697710322505668,
+      "atlas_area_m2": 218562961391.7846,
+      "reference_area_m2": 225182064528.21927,
+      "intersection_area_m2": 218467560339.143
+    },
+    "mndot_2022_county_union_vs_census_tigerweb_state_2026": {
+      "intersection_over_atlas": 0.9999410668689594,
+      "intersection_over_reference": 0.9704998605740627,
+      "jaccard": 0.9704443531306436,
+      "atlas_area_m2": 218552042184.55762,
+      "reference_area_m2": 225182064528.21927,
+      "intersection_area_m2": 218539162228.41638
+    },
+    "dnr_county_union_vs_census_tigerweb_state_2026": {
+      "intersection_over_atlas": 0.9999636984331178,
+      "intersection_over_reference": 0.9705985519917962,
+      "jaccard": 0.9705643536449629,
+      "atlas_area_m2": 218569320174.40756,
+      "reference_area_m2": 225182064528.21927,
+      "intersection_area_m2": 218561385765.61285
+    },
+    "atlas_county_union_vs_mndot_county_union": {
+      "intersection_over_atlas": 0.9993503349446489,
+      "intersection_over_reference": 0.9994002640749857,
+      "jaccard": 0.9987513777880829,
+      "atlas_area_m2": 218562961391.7846,
+      "reference_area_m2": 218552042184.55762,
+      "intersection_area_m2": 218420968673.3743
+    },
+    "mndot_county_union_vs_dnr_county_union": {
+      "intersection_over_atlas": 0.9999329596163941,
+      "intersection_over_reference": 0.9998539145266574,
+      "jaccard": 0.9997868937282166,
+      "atlas_area_m2": 218552042184.55762,
+      "reference_area_m2": 218569320174.40756,
+      "intersection_area_m2": 218537390371.8117
+    },
+    "census_county_union_vs_census_tigerweb_state": {
+      "intersection_over_atlas": 1.0000000000000002,
+      "intersection_over_reference": 1.0,
+      "jaccard": 1.0000000000000002,
+      "atlas_area_m2": 225182064528.21924,
+      "reference_area_m2": 225182064528.21927,
+      "intersection_area_m2": 225182064528.21927
+    }
+  },
+  "neighboring_counties": {
+    "atlas": {
+      "Cook": [
+        "Lake"
+      ],
+      "Lake": [
+        "Cook",
+        "St. Louis"
+      ],
+      "Koochiching": [
+        "Beltrami",
+        "Itasca",
+        "Lake of the Woods",
+        "St. Louis"
+      ]
+    },
+    "mndot_2022": {
+      "Cook": [
+        "Lake"
+      ],
+      "Lake": [
+        "Cook",
+        "St. Louis"
+      ],
+      "Koochiching": [
+        "Beltrami",
+        "Itasca",
+        "Lake of the Woods",
+        "St. Louis"
+      ]
+    },
+    "dnr_1993_lineage": {
+      "Cook": [
+        "Lake"
+      ],
+      "Lake": [
+        "Cook",
+        "St. Louis"
+      ],
+      "Koochiching": [
+        "Beltrami",
+        "Itasca",
+        "Lake of the Woods",
+        "St. Louis"
+      ]
+    },
+    "census_tigerweb_2026": {
+      "Cook": [
+        "Lake"
+      ],
+      "Lake": [
+        "Cook",
+        "St. Louis"
+      ],
+      "Koochiching": [
+        "Beltrami",
+        "Itasca",
+        "Lake of the Woods",
+        "St. Louis"
+      ]
+    }
+  },
+  "source_components": {
+    "Cook": {
+      "mndot_2022": [
+        {
+          "rank_by_planar_size": 1,
+          "area_m2_shared_helper": 4158307695.4397116,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -91.03199612008882,
+            47.46506752696072,
+            -89.49176981078615,
+            48.245916417045905
+          ],
+          "atlas_overlap_fraction": 0.9963118197838942
+        }
+      ],
+      "dnr_1993_lineage": [
+        {
+          "rank_by_planar_size": 1,
+          "area_m2_shared_helper": 4158220560.8913283,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -91.03198072745103,
+            47.46502089639706,
+            -89.49176409715501,
+            48.245962942271014
+          ],
+          "atlas_overlap_fraction": 0.996334612700433
+        },
+        {
+          "rank_by_planar_size": 2,
+          "area_m2_shared_helper": 902013.4760294413,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -89.58822092422183,
+            47.96780656081493,
+            -89.56716481797447,
+            47.98059962757737
+          ],
+          "atlas_overlap_fraction": 1.0
+        },
+        {
+          "rank_by_planar_size": 3,
+          "area_m2_shared_helper": 570147.7657791228,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -89.5870665769246,
+            47.95877911976178,
+            -89.56653043863089,
+            47.967866079670856
+          ],
+          "atlas_overlap_fraction": 0.0
+        },
+        {
+          "rank_by_planar_size": 4,
+          "area_m2_shared_helper": 356803.6433993759,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -89.6659545438182,
+            47.950058969460095,
+            -89.65406952871896,
+            47.95645349682958
+          ],
+          "atlas_overlap_fraction": 1.0
+        },
+        {
+          "rank_by_planar_size": 5,
+          "area_m2_shared_helper": 143193.3047661109,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -89.56269290471069,
+            47.96924303631867,
+            -89.55203198725609,
+            47.97331040358959
+          ],
+          "atlas_overlap_fraction": 0.0
+        },
+        {
+          "rank_by_planar_size": 6,
+          "area_m2_shared_helper": 66289.44865811008,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -90.92138328904664,
+            47.5187117985496,
+            -90.90965828449946,
+            47.525911871323345
+          ],
+          "atlas_overlap_fraction": 0.1725360764730764
+        },
+        {
+          "rank_by_planar_size": 7,
+          "area_m2_shared_helper": 37007.38077907001,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -89.56372235920213,
+            47.97771882314603,
+            -89.55886900409475,
+            47.97934972065984
+          ],
+          "atlas_overlap_fraction": 1.0
+        },
+        {
+          "rank_by_planar_size": 8,
+          "area_m2_shared_helper": 33205.086349472804,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -89.59204853567212,
+            47.96653873929675,
+            -89.58651266606887,
+            47.96816757034528
+          ],
+          "atlas_overlap_fraction": 0.638523716940775
+        },
+        {
+          "rank_by_planar_size": 9,
+          "area_m2_shared_helper": 31717.958092100336,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -89.59567722721144,
+            47.97090156657201,
+            -89.5875858602431,
+            47.9736356022643
+          ],
+          "atlas_overlap_fraction": 1.0
+        },
+        {
+          "rank_by_planar_size": 10,
+          "area_m2_shared_helper": 29422.260250599324,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -89.59295470929183,
+            47.97757388360092,
+            -89.58703802725502,
+            47.97902624264895
+          ],
+          "atlas_overlap_fraction": 1.0
+        },
+        {
+          "rank_by_planar_size": 11,
+          "area_m2_shared_helper": 27626.24508633335,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -89.5669766804359,
+            47.970526683587394,
+            -89.56253012588037,
+            47.97190563172777
+          ],
+          "atlas_overlap_fraction": 0.0
+        },
+        {
+          "rank_by_planar_size": 12,
+          "area_m2_shared_helper": 26117.804358960137,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -89.5904587863811,
+            47.973768496363306,
+            -89.586746441989,
+            47.97536571564729
+          ],
+          "atlas_overlap_fraction": 1.0
+        },
+        {
+          "rank_by_planar_size": 13,
+          "area_m2_shared_helper": 24132.694683629958,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -89.84014941548062,
+            47.876180820111614,
+            -89.83794502846077,
+            47.87825019506329
+          ],
+          "atlas_overlap_fraction": 0.0013864970445810608
+        },
+        {
+          "rank_by_planar_size": 14,
+          "area_m2_shared_helper": 14823.987849217128,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -89.5609459185657,
+            47.98858740438798,
+            -89.55850543185143,
+            47.98961316631779
+          ],
+          "atlas_overlap_fraction": 1.0
+        },
+        {
+          "rank_by_planar_size": 15,
+          "area_m2_shared_helper": 12119.894347921676,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -89.82907786133443,
+            47.879849359289395,
+            -89.82688141463652,
+            47.8815337549574
+          ],
+          "atlas_overlap_fraction": 0.0
+        },
+        {
+          "rank_by_planar_size": 16,
+          "area_m2_shared_helper": 11998.18756410202,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -89.6151830268885,
+            47.97948842766615,
+            -89.61309168237358,
+            47.980676882540116
+          ],
+          "atlas_overlap_fraction": 0.004420897760880445
+        },
+        {
+          "rank_by_planar_size": 17,
+          "area_m2_shared_helper": 10214.526487876677,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -90.33211167516696,
+            47.74499717379548,
+            -90.32890323495516,
+            47.74581263459021
+          ],
+          "atlas_overlap_fraction": 0.0
+        },
+        {
+          "rank_by_planar_size": 18,
+          "area_m2_shared_helper": 8837.80553178957,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -89.58936219456714,
+            47.96106079539874,
+            -89.58720743375515,
+            47.96211633871179
+          ],
+          "atlas_overlap_fraction": 0.0
+        },
+        {
+          "rank_by_planar_size": 19,
+          "area_m2_shared_helper": 4851.241997109521,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -89.53697520761165,
+            47.99498397104785,
+            -89.53575502627993,
+            47.99572408948886
+          ],
+          "atlas_overlap_fraction": 1.0
+        },
+        {
+          "rank_by_planar_size": 20,
+          "area_m2_shared_helper": 4634.319060648838,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -89.58300133160263,
+            47.95588446657443,
+            -89.58133455491259,
+            47.95660472025493
+          ],
+          "atlas_overlap_fraction": 0.0
+        },
+        {
+          "rank_by_planar_size": 21,
+          "area_m2_shared_helper": 4569.989163729741,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -89.57995705298124,
+            47.96847714332486,
+            -89.57862966418024,
+            47.96921920045025
+          ],
+          "atlas_overlap_fraction": 1.0
+        },
+        {
+          "rank_by_planar_size": 22,
+          "area_m2_shared_helper": 2155.650078773742,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -89.55818804958416,
+            47.988343386213366,
+            -89.55731897116347,
+            47.98879570589652
+          ],
+          "atlas_overlap_fraction": 1.0
+        },
+        {
+          "rank_by_planar_size": 23,
+          "area_m2_shared_helper": 2148.070931423182,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -90.33516942692707,
+            47.74509836812709,
+            -90.33422687429464,
+            47.74551504296733
+          ],
+          "atlas_overlap_fraction": 0.0
+        },
+        {
+          "rank_by_planar_size": 24,
+          "area_m2_shared_helper": 990.0030726803426,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -89.53339578475517,
+            47.99570228576802,
+            -89.53272125601535,
+            47.99597800005209
+          ],
+          "atlas_overlap_fraction": 1.0
+        }
+      ],
+      "census_tigerweb_2026": [
+        {
+          "rank_by_planar_size": 1,
+          "area_m2_shared_helper": 8650168272.075851,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -91.03228999959029,
+            47.244298999733736,
+            -89.48338500037322,
+            48.24595299995062
+          ],
+          "atlas_overlap_fraction": 0.4822300399368439
+        }
+      ]
+    },
+    "Lake": {
+      "mndot_2022": [
+        {
+          "rank_by_planar_size": 1,
+          "area_m2_shared_helper": 5926914420.692048,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -91.80018224556578,
+            46.93969395037826,
+            -91.02094095488293,
+            48.20597666171482
+          ],
+          "atlas_overlap_fraction": 0.9918042334849307
+        }
+      ],
+      "dnr_1993_lineage": [
+        {
+          "rank_by_planar_size": 1,
+          "area_m2_shared_helper": 5927602890.345687,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -91.80016120621218,
+            46.93970550284489,
+            -91.02080386963239,
+            48.20600677211529
+          ],
+          "atlas_overlap_fraction": 0.9917634604873518
+        },
+        {
+          "rank_by_planar_size": 2,
+          "area_m2_shared_helper": 39784.572957844495,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -91.55392724871994,
+            47.087464017748424,
+            -91.55131815035965,
+            47.09080914049611
+          ],
+          "atlas_overlap_fraction": 0.0
+        },
+        {
+          "rank_by_planar_size": 3,
+          "area_m2_shared_helper": 9672.779008366357,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -91.7743766452017,
+            46.94578502052282,
+            -91.77192820312393,
+            46.94672946117596
+          ],
+          "atlas_overlap_fraction": 0.0
+        },
+        {
+          "rank_by_planar_size": 4,
+          "area_m2_shared_helper": 8594.166036927822,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -91.2457289442788,
+            47.29213901216588,
+            -91.24459206626494,
+            47.29340877625144
+          ],
+          "atlas_overlap_fraction": 0.0
+        },
+        {
+          "rank_by_planar_size": 5,
+          "area_m2_shared_helper": 4149.5789004181515,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -91.23958212621618,
+            47.29672990321768,
+            -91.23800676673679,
+            47.29723586230249
+          ],
+          "atlas_overlap_fraction": 0.0
+        },
+        {
+          "rank_by_planar_size": 6,
+          "area_m2_shared_helper": 2025.5420366451613,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -91.2828295761594,
+            47.26532511367642,
+            -91.2818592189729,
+            47.26588269809818
+          ],
+          "atlas_overlap_fraction": 0.0
+        },
+        {
+          "rank_by_planar_size": 7,
+          "area_m2_shared_helper": 783.9420999252386,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -91.2441792982523,
+            47.293021831990174,
+            -91.2438400734582,
+            47.29340673465189
+          ],
+          "atlas_overlap_fraction": 0.0
+        },
+        {
+          "rank_by_planar_size": 8,
+          "area_m2_shared_helper": 691.8602341121552,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -91.2670989340152,
+            47.27007678598457,
+            -91.26659694169227,
+            47.270289120247334
+          ],
+          "atlas_overlap_fraction": 0.0
+        }
+      ],
+      "census_tigerweb_2026": [
+        {
+          "rank_by_planar_size": 1,
+          "area_m2_shared_helper": 7746489338.152484,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -91.80012899966918,
+            46.794838000237235,
+            -90.79518900036801,
+            48.205997999735565
+          ],
+          "atlas_overlap_fraction": 0.7593934737771906
+        }
+      ]
+    },
+    "Koochiching": {
+      "mndot_2022": [
+        {
+          "rank_by_planar_size": 1,
+          "area_m2_shared_helper": 8173143981.431187,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -94.43031659301481,
+            47.84574610684819,
+            -93.08087515507563,
+            48.711933439166245
+          ],
+          "atlas_overlap_fraction": 0.9976970395320708
+        }
+      ],
+      "dnr_1993_lineage": [
+        {
+          "rank_by_planar_size": 1,
+          "area_m2_shared_helper": 8172928637.883554,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -94.43038206228054,
+            47.84577490623431,
+            -93.08083785071707,
+            48.711955086673036
+          ],
+          "atlas_overlap_fraction": 0.997709953822612
+        }
+      ],
+      "census_tigerweb_2026": [
+        {
+          "rank_by_planar_size": 1,
+          "area_m2_shared_helper": 8173909407.186053,
+          "area_status": "measured",
+          "bounds_lonlat": [
+            -94.43027899957998,
+            47.845815999825945,
+            -93.08087000004588,
+            48.71194300011871
+          ],
+          "atlas_overlap_fraction": 0.9976947624407614
+        }
+      ]
+    }
+  },
+  "tribal_context": {
+    "source_vintage": "Census federal American Indian Reservation geography, 2020-01-01",
+    "geographies_are_separate_from_counties": true,
+    "county_intersections": [
+      {
+        "county": "Cook",
+        "reservation": "Grand Portage Reservation",
+        "GEOID": "1355R",
+        "census_vintage": "2020-01-01",
+        "intersection_planar_square_degrees": 0.023155045183829246
+      },
+      {
+        "county": "Koochiching",
+        "reservation": "Red Lake Reservation",
+        "GEOID": "3100R",
+        "census_vintage": "2020-01-01",
+        "intersection_planar_square_degrees": 0.011357816275759486
+      },
+      {
+        "county": "Koochiching",
+        "reservation": "Bois Forte Reservation",
+        "GEOID": "0335R",
+        "census_vintage": "2020-01-01",
+        "intersection_planar_square_degrees": 0.04365142228060831
+      }
+    ]
+  },
+  "topology": {
+    "atlas": {
+      "features": 87,
+      "invalid": 0,
+      "empty": 0,
+      "multipart": 1,
+      "positive_area_overlap_pairs": 0,
+      "max_planar_overlap_square_degrees": 0
+    },
+    "mndot_2022": {
+      "features": 87,
+      "invalid": 0,
+      "empty": 0,
+      "multipart": 0,
+      "positive_area_overlap_pairs": 0,
+      "max_planar_overlap_square_degrees": 0
+    },
+    "dnr": {
+      "features": 87,
+      "invalid": 0,
+      "empty": 0,
+      "multipart": 2,
+      "positive_area_overlap_pairs": 1,
+      "max_planar_overlap_square_degrees": 5.57638130617724e-15
+    },
+    "census_2026": {
+      "features": 87,
+      "invalid": 0,
+      "empty": 0,
+      "multipart": 0,
+      "positive_area_overlap_pairs": 0,
+      "max_planar_overlap_square_degrees": 0
+    }
+  },
+  "controls": {
+    "positive_cook_self": {
+      "intersection_over_atlas": 1.0,
+      "intersection_over_reference": 1.0,
+      "jaccard": 1.0,
+      "atlas_area_m2": 4178774522.493338,
+      "reference_area_m2": 4178774522.493338,
+      "intersection_area_m2": 4178774522.493338
+    },
+    "negative_cook_vs_kittson": {
+      "intersection_over_atlas": 0.0,
+      "intersection_over_reference": 0.0,
+      "jaccard": 0.0,
+      "atlas_area_m2": 4178774522.493338,
+      "reference_area_m2": 2853357373.852214,
+      "intersection_area_m2": 0.0
+    }
+  },
+  "scope_count": 4,
+  "classifications": {
+    "framework:province:minnesota:bf75ad975e19": "insufficient-evidence",
+    "gb:USA:ADM2:52423323B21927262007954": "insufficient-evidence",
+    "gb:USA:ADM2:52423323B35428884505626": "insufficient-evidence",
+    "gb:USA:ADM2:52423323B71326746759120": "insufficient-evidence"
+  },
+  "source_files": {
+    "census-2026-county-layer-metadata.json": {
+      "bytes": 7489,
+      "sha256": "56df6e7d6cff8fe1e082bbdc10109cc2c7c22a134f5dfca1899f93d9bd98337d"
+    },
+    "census-2026-mn-counties.json": {
+      "bytes": 7791159,
+      "sha256": "5954e7c88307731862065af368b2b101be2736fb1c060c116260a0b489813766"
+    },
+    "dnr-counties-iteminfo.json": {
+      "bytes": 1975,
+      "sha256": "e9d5dbfacee58eadcb59acc7f35f907939b64e6b962f5bdf60feffc8d259a185"
+    },
+    "dnr-counties.json": {
+      "bytes": 3107168,
+      "sha256": "5b73bd4a717fd7bc1d941f48d8115e4c5a937dc46c629708aea38fd5891b6172"
+    },
+    "dnr-layer-metadata.json": {
+      "bytes": 9220,
+      "sha256": "4a1261b4212f487f390e1e3bf237a82265e153886e262d54227fdc14c88a1dab"
+    },
+    "issue-1079-api-snapshot.json": {
+      "bytes": 5779,
+      "sha256": "15ce91833f522b3a61539f27f764931eb2b0c46eb8643c7b6fea370f302e3229"
+    },
+    "mn-2024-statutes-lake-superior-jurisdiction.pdf": {
+      "bytes": 681585,
+      "sha256": "552d7513d8ed3368cc481a5148fe431f2d6c2ae6f81ff7730fa90f0df796d639"
+    },
+    "mn-constitution.html": {
+      "bytes": 150014,
+      "sha256": "6bfe2bc1b70379d84df07ea00d6c5c516f1ba4388bd941662c2c5c7a0b834254"
+    },
+    "mn-county-id-standard.html": {
+      "bytes": 21621,
+      "sha256": "f27f0ff57716b3f32d0b2a7b44d6bf3d142fba9c917cf7afaa09039c371215ec"
+    },
+    "mn-laws-1907-preface-proclamation.pdf": {
+      "bytes": 287017,
+      "sha256": "b7d11187012e1ee08978a32cafb0727619aecaacd34f8b087554dfd81ec2f28f"
+    },
+    "mn-state-area.html": {
+      "bytes": 46872,
+      "sha256": "8f468df95bd1e4e240f8426f1ad3f977630fe40db9cfd191aa169aa0e704db40"
+    },
+    "mn-statute-1.15-current.html": {
+      "bytes": 70716,
+      "sha256": "503224200e2b909980fc0c21f55a28aa54bae1245309af751ddda29174e3c382"
+    },
+    "mn-statute-1.16-current.html": {
+      "bytes": 61441,
+      "sha256": "346da0178cf6e2d9bc490323eccb70e7b1efd07ea29712fda00d702c72855fdd"
+    },
+    "mn-statute-2.01-current.html": {
+      "bytes": 65274,
+      "sha256": "710eb69b6d3f69064651c68d5ee1824238dfb4a6bac5ba3c21ad22a4e7d25bcd"
+    },
+    "mn-statute-97A.235-current.html": {
+      "bytes": 61353,
+      "sha256": "f8ba6c47f27758fc4ff750863c61ae7e60d69002d69d2be936bc670734397869"
+    },
+    "mn-statutes-1891-ch8-cook-county.pdf": {
+      "bytes": 6852430,
+      "sha256": "84392c5feacb940ac422cce0ca5a62a8efa3ffd47c76f2d69a780af95c934486"
+    },
+    "mn-statutes-1905-ch2-territorial-divisions.pdf": {
+      "bytes": 128840,
+      "sha256": "e9f44aa7ad8fe45ce84258cad52d44eeeb8b35b25ccea43c05e22181afd52818"
+    },
+    "mn-statutes-1947-boundary-water-compact.html": {
+      "bytes": 70716,
+      "sha256": "503224200e2b909980fc0c21f55a28aa54bae1245309af751ddda29174e3c382"
+    },
+    "mn-statutes-370.html": {
+      "bytes": 94342,
+      "sha256": "2d89bcc28daf29b7fca628c4e3859521a909f0c8dae9a12560317654c6fac034"
+    },
+    "mndot-counties.json": {
+      "bytes": 7293889,
+      "sha256": "ecae54f15e4171e379acac6e75eb0361208458e0fa193dd8cddaa3c35cf35aa7"
+    },
+    "mndot-disclaimer.html": {
+      "bytes": 21240,
+      "sha256": "2b4b3134482699f0d7341fa7537e1ab7f8357008043322d219f75cad63d975b3"
+    },
+    "mndot-layer-metadata.json": {
+      "bytes": 7689,
+      "sha256": "57397238912915beaf37c5085b6a7308098c2cce43d879f265154f43e5abe0bf"
+    },
+    "mndot-metadata.html": {
+      "bytes": 12912,
+      "sha256": "5aeda34e1c8fa7d4c3647823e1bebd59e4014edcb92ad2338d4f35a148bb66fc"
+    },
+    "source-receipts.json": {
+      "bytes": 24440,
+      "sha256": "075e4aed7dd84768ecf2560130f78700eab22a9b037b4d5dbbcb1ea4e75a678b"
+    },
+    "tribal-reservations-2020-layer-metadata.json": {
+      "bytes": 8485,
+      "sha256": "fd9c42a783b7a76c4f9eb11f6c2a447397a742c61abe246a8aa12ea6bad9319e"
+    },
+    "tribal-reservations-2020-mapserver.json": {
+      "bytes": 33946,
+      "sha256": "a7dbc8cbbf664db5bdc7b425dedf39e6a72cd8a1e1e57d26223e07353f8868f2"
+    },
+    "tribal-reservations-2020-mn.geojson": {
+      "bytes": 1407111,
+      "sha256": "806af40c939f0b52bdd2dd8400857b8d73ede9d8cc9f92284739d609d2317598"
+    }
+  }
+}
