@@ -116,11 +116,11 @@ laundering_rejected='2018' not in layer['name']
 if not laundering_rejected: raise SystemExit('Atlas reference-year laundering control ineffective')
 # Actual CLI negative cases, retaining only an owned, temporary symlink fixture and deleting it after the refusal.
 py=sys.executable
-def run_case(label,args,expected):
+def run_case(label,args,expected,record_args=None):
     proc=subprocess.run([py,str(PRODUCER)]+args,cwd=ROOT,text=True,capture_output=True)
     combined=proc.stdout+proc.stderr
     if proc.returncode==0 or expected not in combined: raise SystemExit('CLI rejection control failed: '+label+'; '+combined[-600:])
-    return {'case':label,'args':args,'exit_code':proc.returncode,'expected_rejection':expected,'stdout':proc.stdout,'stderr':proc.stderr}
+    return {'case':label,'args':args if record_args is None else record_args,'exit_code':proc.returncode,'expected_rejection':expected,'stdout':proc.stdout,'stderr':proc.stderr}
 cli=[]
 cli.append(run_case('path-traversal',['--run-id','../outside'],'safe filename characters'))
 # Existing directory: rerunning fresh-one must not change any member bytes.
@@ -131,7 +131,7 @@ if before!=after: raise SystemExit('Existing directory content changed after rej
 # Existing regular file sentinel at a contained alternate run root.
 fixture=OWNED/'controls/fixtures';fixture.mkdir(parents=True,exist_ok=True)
 sentinel=fixture/'fresh-existing-file';sentinel.write_bytes(b'original-sentinel-1241\\n');sentinel_hash=sha(sentinel.read_bytes())
-cli.append(run_case('existing-file',['--run-id','fresh-existing-file','--runs-root',str(fixture)],'already exists'))
+cli.append(run_case('existing-file',['--run-id','fresh-existing-file','--runs-root',str(fixture)],'already exists',['--run-id','fresh-existing-file','--runs-root','<owned>/controls/fixtures']))
 if sha(sentinel.read_bytes())!=sentinel_hash: raise SystemExit('Existing file sentinel changed after rejection')
 # A symlink run destination pointing at a valid existing run must be refused without following it.
 symlink=RUNS/'fresh-symlink'
@@ -145,7 +145,7 @@ if outside.exists(): raise SystemExit('Outside probe path unexpectedly exists')
 outside_link=fixture/'outside-root-link'
 if outside_link.exists() or outside_link.is_symlink(): raise SystemExit('Temporary outside symlink fixture collision')
 outside_link.symlink_to(outside,target_is_directory=True)
-try: cli.append(run_case('outside-resolved-root',['--run-id','fresh-outside','--runs-root',str(outside_link)],'resolves outside'))
+try: cli.append(run_case('outside-resolved-root',['--run-id','fresh-outside','--runs-root',str(outside_link)],'resolves outside',['--run-id','fresh-outside','--runs-root','<owned>/controls/fixtures/outside-root-link']))
 finally: outside_link.unlink()
 if outside.exists(): raise SystemExit('Outside CLI probe unexpectedly created a destination')
 # A receipt-directory symlink must be rejected without creating a receipt outside the owned path.

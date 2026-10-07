@@ -100,7 +100,7 @@
         "--run-id",
         "fresh-existing-file",
         "--runs-root",
-        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/research/geography/gap-source-matanuska-physical-seam-20261006/reproduction-erratum/controls/fixtures"
+        "<owned>/controls/fixtures"
       ],
       "exit_code": 2,
       "expected_rejection": "already exists",
@@ -124,7 +124,7 @@
         "--run-id",
         "fresh-outside",
         "--runs-root",
-        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/research/geography/gap-source-matanuska-physical-seam-20261006/reproduction-erratum/controls/fixtures/outside-root-link"
+        "<owned>/controls/fixtures/outside-root-link"
       ],
       "exit_code": 2,
       "expected_rejection": "resolves outside",
