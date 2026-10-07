@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "method_id": "source-overlay-reproduction",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "changed_source_mutations_rejected": 2,
+  "omitted_component_control": {
+    "expected_count": 282,
+    "observed_count": 281,
+    "observed_roster_sha256": "73db73996f4ab448b0de58f9296539cc5b7e74487df8f718f06844f850dc8cac",
+    "rejected": true
+  },
+  "omitted_contact_control": {
+    "rejected": true,
+    "reason": "Original full-feature binding changed"
+  },
+  "vintage_laundering_control": {
+    "pinned_layer_name": "Biomes and Ecoregions 2017",
+    "rejected_year": "2018",
+    "rejected": true
+  },
+  "preservation_check": {
+    "selected_components_identical": true,
+    "source_overlay_ledger_identical": true,
+    "numeric_and_predicate_summary_identical": true,
+    "summary_path_metadata_difference": "Archived paths point to results/{run-id}; fresh output metadata points to reproduction-erratum/runs/{run-id} and actual paths are separately bound in run receipts."
+  }
+}
