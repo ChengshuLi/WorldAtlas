@@ -318,7 +318,7 @@ def run_controls(base_packet=PACKET):
 
 
 def geometry_controls():
-        result = subprocess.run([sys.executable, "-I", "-B", str(PACKET / "measure.py"),
+    result = subprocess.run([sys.executable, "-I", "-B", str(PACKET / "measure.py"),
                              "--geometry-method-controls"], cwd=str(PACKET.parents[2]),
                             text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False)
     if result.returncode != 0:
