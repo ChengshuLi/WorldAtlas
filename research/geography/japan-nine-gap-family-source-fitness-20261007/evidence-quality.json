@@ -1051,8 +1051,8 @@
     },
     {
       "path": "research/geography/japan-nine-gap-family-source-fitness-20261007/methods/build_evidence_quality.py",
-      "bytes": 12833,
-      "sha256": "799164678cc7b20a6282a43d75971ec5f9601aa766bc7911171421929b0444da",
+      "bytes": 14383,
+      "sha256": "8a49fdfd5c50f825ade05c0e0d7820ef809206b7b05cfd6fba9217fc8ec240af",
       "hash_kind": "file-bytes",
       "role": "research-output"
     },
@@ -1144,6 +1144,27 @@
       "path": "research/geography/japan-nine-gap-family-source-fitness-20261007/receipts/mlit-source-authentication.json",
       "bytes": 3023,
       "sha256": "7308ccb95e5eea62d252b33c601b082d3b093dc4c81d413fff99032567c8cd19",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "research/geography/japan-nine-gap-family-source-fitness-20261007/receipts/overlay-negative-validation.json",
+      "bytes": 1138,
+      "sha256": "456217b1273d14d031b8786d21672975439f59a153c078a9e025185baddea95e",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "research/geography/japan-nine-gap-family-source-fitness-20261007/receipts/overlay-positive-validation.json",
+      "bytes": 793,
+      "sha256": "259dae5f886fbd245aba096e1cccf73738440d466dfc3cf101c56623aee96745",
+      "hash_kind": "file-bytes",
+      "role": "research-output"
+    },
+    {
+      "path": "research/geography/japan-nine-gap-family-source-fitness-20261007/receipts/overlay-reproducibility-validation.json",
+      "bytes": 484,
+      "sha256": "feae98ff83952b380e39903b00e14754e50b1a04f1cd243cdae0e0c32538a977",
       "hash_kind": "file-bytes",
       "role": "research-output"
     },
@@ -1444,15 +1465,11 @@
   ],
   "methods": [
     {
-      "id": "complete-source-relative-vector-overlay",
-      "kind": "geography",
-      "description": "Exact Shapely polygon intersections/coverage over complete pinned geoBoundaries full and Atlas-simplified features and bbox-selected native MLIT N03 polygons; all 28 whole candidates and 21 whole contacts retained. No repairs, dissolve, raster, or detector rerun.",
+      "id": "exact-source-overlay",
+      "kind": "measurement",
+      "description": "Exact Shapely source-relative polygon intersection, coverage and identity measurements over complete pinned geoBoundaries full and Atlas-simplified products and bbox-selected native MLIT N03 polygons. All 28 whole candidates and 21 whole contacts retained. No repairs, dissolve, raster, or global detector rerun.",
       "software": "Frozen Python 3.12.14; Shapely 2.1.2 / GEOS 3.13.1; pyproj 3.7.2 / PROJ 9.5.1; NumPy 2.3.5; runtime file hashes in inputs/runtime-freeze.json.",
-      "units": "Square degrees only for angular-coordinate polygon areas; categorical exact predicates and source-record counts.",
-      "axis_order": "longitude-latitude",
-      "crs": "GeoJSON RFC 7946 WGS84 longitude/latitude; MLIT native EPSG:6668 JGD2011 geographic after always_xy transformation.",
-      "area_method": "Planar Shapely intersection in each stated geographic coordinate space; degree-squared output only, never square metres.",
-      "distance_method": "No distances calculated."
+      "units": "Categorical exact topological predicates and record counts; planar intersection area in each geographic coordinate space, reported only in square degrees, never square metres. Distances are not calculated."
     },
     {
       "id": "native-n03-record-reader",
@@ -1616,6 +1633,18 @@
     },
     {
       "path": "research/geography/japan-nine-gap-family-source-fitness-20261007/receipts/mlit-source-authentication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-nine-gap-family-source-fitness-20261007/receipts/overlay-negative-validation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-nine-gap-family-source-fitness-20261007/receipts/overlay-positive-validation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/japan-nine-gap-family-source-fitness-20261007/receipts/overlay-reproducibility-validation.json",
       "status": "added"
     },
     {
@@ -1809,6 +1838,26 @@
     {
       "path": "research/geography/japan-nine-gap-family-source-fitness-20261007/sources/source-provenance.json",
       "status": "added"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "exact-source-overlay",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/japan-nine-gap-family-source-fitness-20261007/receipts/overlay-positive-validation.json"
+    },
+    {
+      "method_id": "exact-source-overlay",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/japan-nine-gap-family-source-fitness-20261007/receipts/overlay-negative-validation.json"
+    },
+    {
+      "method_id": "exact-source-overlay",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "research/geography/japan-nine-gap-family-source-fitness-20261007/receipts/overlay-reproducibility-validation.json"
     }
   ]
 }

@@ -1,0 +1,31 @@
+{
+  "schema": "japan-overlay-validation-evidence-v1",
+  "method_id": "exact-source-overlay",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "receipt_path": "receipts/producer-negative-control.json",
+  "receipt_sha256": "b04fa63287d773a099ff83a7b47de7e96c67e601634665dbd627e414dfd6a733",
+  "details": {
+    "bbox_overlapping_but_disjoint": {
+      "intersection_area_degrees2": 0.0,
+      "intersects": false
+    },
+    "control_kind": "negative-control",
+    "duplicate_shapeID_rejected": true,
+    "duplicate_target_rejected": true,
+    "foreign_target_rejected": true,
+    "geometry_repair_performed": false,
+    "invalid_geometry_unresolved": {
+      "intersects": null,
+      "status": "invalid-geometry-unresolved"
+    },
+    "method_id": "exact-source-overlay",
+    "mutated_source_bytes_rejected": true,
+    "omitted_target_rejected": true,
+    "raster_affine_nodata_controls": "not applicable: all compared products are vector geometries; no raster is read",
+    "short_source_ring_rejected": true,
+    "status": "passed",
+    "wrong_full_candidate_context_rejected": true,
+    "wrong_source_vintage_rejected": true
+  }
+}

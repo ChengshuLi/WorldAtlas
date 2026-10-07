@@ -1,0 +1,24 @@
+{
+  "schema": "japan-overlay-validation-evidence-v1",
+  "method_id": "exact-source-overlay",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "receipt_path": "receipts/producer-positive-control.json",
+  "receipt_sha256": "93ea0a2941446514b613992ce855c14bbe3dffcdf6ab06c7c2c8a8ebc02801f1",
+  "details": {
+    "complete_target_roster_bound": 49,
+    "contacts_bound_per_product": 21,
+    "control_kind": "positive-control",
+    "full_product_features": 1742,
+    "geometry_repair_performed": false,
+    "method_id": "exact-source-overlay",
+    "positive_exact_cover": {
+      "intersection_over_target_fraction": 1.0,
+      "intersects": true,
+      "source_covers_target": true
+    },
+    "simplified_product_features": 1742,
+    "source_products_loaded": 2,
+    "status": "passed"
+  }
+}

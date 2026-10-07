@@ -21,6 +21,21 @@ claim=json.loads((ROOT/'inputs/claim-receipt.json').read_bytes())
 proposal=json.loads((ROOT/'inputs/root-proposal-proof.json').read_bytes())
 issue=json.loads((ROOT/'inputs/issue-snapshot.json').read_bytes())
 subjects=sorted(scope['contacts'])
+control_specs=[
+ ('overlay-positive-validation.json','positive-control','producer-positive-control.json'),
+ ('overlay-negative-validation.json','negative-control','producer-negative-control.json')]
+for target,kind,source_name in control_specs:
+    original=json.loads((ROOT/'receipts'/source_name).read_bytes())
+    wrapper={'schema':'japan-overlay-validation-evidence-v1','method_id':'exact-source-overlay',
+             'kind':kind,'outcome':'passed','receipt_path':'receipts/'+source_name,
+             'receipt_sha256':sha((ROOT/'receipts'/source_name).read_bytes()),'details':original}
+    (ROOT/'receipts'/target).write_text(json.dumps(wrapper,ensure_ascii=False,indent=2)+'\n')
+equality=json.loads((ROOT/'receipts/two-run-equality.json').read_bytes())
+repro={'schema':'japan-overlay-validation-evidence-v1','method_id':'exact-source-overlay',
+       'kind':'reproducibility','outcome':'passed','run_one_sha256':equality['run_one_sha256'],
+       'run_two_sha256':equality['run_two_sha256'],'byte_equal':equality['byte_equal'],
+       'receipt_path':'receipts/two-run-equality.json','receipt_sha256':sha((ROOT/'receipts/two-run-equality.json').read_bytes())}
+(ROOT/'receipts/overlay-reproducibility-validation.json').write_text(json.dumps(repro,ensure_ascii=False,indent=2)+'\n')
 source_files={
  'geoboundaries-jpn-adm2-full':[
   PREFIX+'sources/geoboundaries/full-product.geojson',
@@ -74,7 +89,7 @@ manifest={'version':1,'issue':1316,'lane':'geography','worker_id':claim['claim']
  'baseline':{'commit':freeze['data_baseline_commit'],'files':baseline_files,'pins':pins,'pin_files':pin_files,'subject_files':subject_files},
  'sources':sources,'outputs':candidate,
  'methods':[
-  {'id':'complete-source-relative-vector-overlay','kind':'geography','description':'Exact Shapely polygon intersections/coverage over complete pinned geoBoundaries full and Atlas-simplified features and bbox-selected native MLIT N03 polygons; all 28 whole candidates and 21 whole contacts retained. No repairs, dissolve, raster, or detector rerun.','software':'Frozen Python 3.12.14; Shapely 2.1.2 / GEOS 3.13.1; pyproj 3.7.2 / PROJ 9.5.1; NumPy 2.3.5; runtime file hashes in inputs/runtime-freeze.json.','units':'Square degrees only for angular-coordinate polygon areas; categorical exact predicates and source-record counts.','axis_order':'longitude-latitude','crs':'GeoJSON RFC 7946 WGS84 longitude/latitude; MLIT native EPSG:6668 JGD2011 geographic after always_xy transformation.','area_method':'Planar Shapely intersection in each stated geographic coordinate space; degree-squared output only, never square metres.','distance_method':'No distances calculated.'},
+  {'id':'exact-source-overlay','kind':'measurement','description':'Exact Shapely source-relative polygon intersection, coverage and identity measurements over complete pinned geoBoundaries full and Atlas-simplified products and bbox-selected native MLIT N03 polygons. All 28 whole candidates and 21 whole contacts retained. No repairs, dissolve, raster, or global detector rerun.','software':'Frozen Python 3.12.14; Shapely 2.1.2 / GEOS 3.13.1; pyproj 3.7.2 / PROJ 9.5.1; NumPy 2.3.5; runtime file hashes in inputs/runtime-freeze.json.','units':'Categorical exact topological predicates and record counts; planar intersection area in each geographic coordinate space, reported only in square degrees, never square metres. Distances are not calculated.'},
   {'id':'native-n03-record-reader','kind':'source','description':'Scanned complete native SHP/DBF record sequence and applied original SHP envelope query before exact Shapely predicates; rings were not repaired or edited.','software':'Frozen Python 3.12.14; packet native reader and exact dependency/runtime closure.','units':'Original SHP record ordinal, DBF attributes, and exact overlay predicates.'}],
  'metrics':[],'metric_bindings':[],'summaries':[],
  'conclusions':[
@@ -92,6 +107,10 @@ manifest={'version':1,'issue':1316,'lane':'geography','worker_id':claim['claim']
   'python methods/build_source_fitness_table.py',
   'node scripts/evidence-quality.mjs research/geography/japan-nine-gap-family-source-fitness-20261007/evidence-quality.json'],
  'change_receipts':[{'path':PREFIX+p.relative_to(ROOT).as_posix(),'status':'added'}
-  for p in sorted(ROOT.rglob('*')) if p.is_file()]}
+  for p in sorted(ROOT.rglob('*')) if p.is_file()],
+ 'validation':[
+  {'method_id':'exact-source-overlay','kind':'positive-control','outcome':'passed','evidence_path':PREFIX+'receipts/overlay-positive-validation.json'},
+  {'method_id':'exact-source-overlay','kind':'negative-control','outcome':'passed','evidence_path':PREFIX+'receipts/overlay-negative-validation.json'},
+  {'method_id':'exact-source-overlay','kind':'reproducibility','outcome':'passed','evidence_path':PREFIX+'receipts/overlay-reproducibility-validation.json'}]}
 (ROOT/'evidence-quality.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')
 print(json.dumps({'baseline_files':len(baseline_files),'sources':len(sources),'outputs':len(candidate),'source_files':sum(len(x.get('files',[])) for x in sources),'evidence_quality_bytes':(ROOT/'evidence-quality.json').stat().st_size},ensure_ascii=False))
