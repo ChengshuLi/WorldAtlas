@@ -72,7 +72,7 @@ def sha256(raw):
 
 MAX_PACKET_FILE_BYTES = 32 * 1024 * 1024
 ALLOWED_RUN_FILES = {'run-one.json', 'run-two.json', 'execution-one.json', 'execution-two.json'}
-METHOD_ID = 'terengganu-dosm-source-generator-r4'
+METHOD_ID = 'terengganu-dosm-source-generator-r7'
 
 
 def read_bounded_packet_file(path):
@@ -131,19 +131,27 @@ def safe_output_relative_path(value):
     return value
 
 
-def safe_fresh_output_path(relative):
+def validate_output_admission(relative):
     relative = safe_output_relative_path(relative)
     target = ROOT / relative
     vintage = target.parent
-    for ancestor in (vintage, *vintage.parents):
+    for ancestor in (target, vintage, *vintage.parents):
         if ancestor == ROOT.parent:
             break
         if ancestor.is_symlink():
             raise ValueError('Symlink in output path')
-    vintage.mkdir(parents=True, exist_ok=True)
     if target.exists() or target.is_symlink():
         raise FileExistsError('Evidence already exists; choose a fresh vintage')
+    if vintage.exists() and not vintage.is_dir():
+        raise ValueError('Vintage output parent is not an ordinary directory')
     return target
+
+
+def safe_fresh_output_path(relative):
+    target = validate_output_admission(relative)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    # Recheck after directory creation to guard a raced path substitution.
+    return validate_output_admission(relative)
 
 
 def exclusive_write(path, raw):
@@ -161,6 +169,7 @@ def exclusive_write(path, raw):
 
 def run_output_path_controls():
     traversal_rejected = symlink_rejected = overwrite_rejected = parent_symlink_rejected = False
+    entry_rejected_before_calculation = False
     try:
         safe_output_relative_path(OWNED + '/vintages/20261007-dosm-r999999/../escape/run-one.json')
     except ValueError:
@@ -177,7 +186,7 @@ def run_output_path_controls():
         link_target.symlink_to(external / 'sentinel')
         try:
             safe_fresh_output_path(OWNED + '/vintages/' + real_vintage.name + '/run-one.json')
-        except FileExistsError:
+        except (FileExistsError, ValueError):
             symlink_rejected = True
         link_target.unlink()
         sentinel = b'preserve-existing-output'
@@ -189,9 +198,28 @@ def run_output_path_controls():
         real_vintage.rmdir() if not any(real_vintage.iterdir()) else shutil.rmtree(real_vintage)
         linked_vintage.symlink_to(external, target_is_directory=True)
         try:
-            safe_fresh_output_path(OWNED + '/vintages/' + linked_vintage.name + '/run-one.json')
+            validate_output_admission(OWNED + '/vintages/' + linked_vintage.name + '/run-one.json')
         except ValueError:
             parent_symlink_rejected = True
+        previous_argv = sys.argv
+        previous_reproduce = globals()['reproduce']
+        calculation_called = False
+        def calculation_canary(_):
+            nonlocal calculation_called
+            calculation_called = True
+            raise RuntimeError('calculation reached before output admission')
+        try:
+            sys.argv = [str(ROOT / (OWNED + '/reproduce-dosm.py')),
+                        '--output', OWNED + '/vintages/' + linked_vintage.name + '/run-one.json',
+                        '--receipt', OWNED + '/vintages/' + linked_vintage.name + '/execution-one.json']
+            globals()['reproduce'] = calculation_canary
+            try:
+                main()
+            except ValueError:
+                entry_rejected_before_calculation = not calculation_called
+        finally:
+            sys.argv = previous_argv
+            globals()['reproduce'] = previous_reproduce
     finally:
         if real_vintage.exists() and not real_vintage.is_symlink():
             shutil.rmtree(real_vintage)
@@ -203,6 +231,7 @@ def run_output_path_controls():
         {'control': 'symlink output target rejected without following it', 'passed': symlink_rejected},
         {'control': 'existing output rejected and original bytes preserved', 'passed': overwrite_rejected},
         {'control': 'symlink vintage directory rejected by production output path guard', 'passed': parent_symlink_rejected},
+        {'control': 'CLI rejects symlinked vintage before calculation is invoked', 'passed': entry_rejected_before_calculation},
     ]
     if not all(row['passed'] for row in checks):
         raise ValueError('Safe fresh output path controls failed')
@@ -836,7 +865,12 @@ def main():
     expected_receipt = {'run-one.json': 'execution-one.json', 'run-two.json': 'execution-two.json'}
     if expected_receipt.get(output_name) != receipt_name:
         raise SystemExit('Run and execution receipt filenames must correspond')
+    # Admit both destinations before any packet/source read or geometry work.
+    validate_output_admission(output_path)
+    validate_output_admission(receipt_path)
     vintage_dir = ROOT / pathlib.PurePosixPath(output_path).parent
+    if vintage_dir.exists() and (vintage_dir.is_symlink() or not vintage_dir.is_dir()):
+        raise SystemExit('Vintage parent must be an ordinary non-symlink directory')
     existing = set(x.name for x in vintage_dir.iterdir()) if vintage_dir.exists() else set()
     allowed_progress = {'run-one.json', 'execution-one.json'}
     if existing and (existing != allowed_progress or output_name != 'run-two.json'):
