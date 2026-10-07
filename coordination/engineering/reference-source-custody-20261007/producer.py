@@ -135,6 +135,11 @@ def preflight(commit, source_map):
 
 def run(commit, source_map, target):
     # Immutable/fresh output validation precedes output writes or Git option exposure.
+    try:
+        relative_target = str(Path(target).absolute().relative_to(REPO / '.cache'))
+    except ValueError as exc:
+        raise ValueError('Run destination must stay in own checkout cache') from exc
+    custody.ordinary(REPO / '.cache', relative_target)
     if Path(target).exists() or Path(target).is_symlink():
         raise ValueError('Fresh owned run tree required')
     plan, rp, module, objects, actual, code, index, admission = preflight(commit, source_map)
