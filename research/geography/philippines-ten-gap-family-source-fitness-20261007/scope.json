@@ -21,14 +21,44 @@
     "delivered_routing_input_config": "7623fa8a61b72c33a1560f0ab612e70c463e8c25beef930043c985fd6657f173",
     "scoped_part_18": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123",
     "scoped_part_19": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269",
-    "whole_consumed_phl_adm3_source": "2ece3d44a5c6a2afb385ffbf3a6b88d83e4d3a3e7eed9a52cb3be1bc59e289fc"
+    "whole_consumed_phl_adm3_source_transport": "0b7b241fd977a792eca3101f31f0d02fba79d75b6ea463e33dec937b6c5ed72c"
   },
   "goal_tracking": {
     "thread_id": "01a11522-1da9-75a1-8ecb-765bae224f1c",
     "objective": "Complete issue #1328: assess source fitness for all ten Philippines gap families, all 22 whole components, and all 22 full Atlas contact subjects using evidence; deliver the source-only milestone-2 handoff, obtain a distinct review, merge through the normal serialized queue, read back the complete merged changes, reconcile original acceptance, and safely clean up the checkout.",
-    "status": "active",
-    "tokens_used": 654696,
-    "time_used_seconds": 2348,
-    "recorded_at_utc": "2026-10-07T07:30:00Z"
+    "status": "blocked",
+    "tokens_used": 723362,
+    "time_used_seconds": 2478,
+    "recorded_at_utc": "2026-10-07T07:51:04Z"
+  },
+  "source_identity": {
+    "id": "whole_consumed_phl_adm3_source",
+    "decoded_sha256": "2ece3d44a5c6a2afb385ffbf3a6b88d83e4d3a3e7eed9a52cb3be1bc59e289fc",
+    "decoded_bytes": 7071267,
+    "features": 1647,
+    "transport_path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-PHL-ADM3-000.bin.gz",
+    "transport_sha256": "0b7b241fd977a792eca3101f31f0d02fba79d75b6ea463e33dec937b6c5ed72c",
+    "transport_bytes": 2224353
+  },
+  "accepted_predecessor": {
+    "routing_merge_commit": "0198938719a5666b6726fb6a1e45779926eefeb2",
+    "routing_baseline_commit": "9618736b023d041f81496c923e7d0c2154e1491c",
+    "routing_body_closure": {
+      "component_partitions": 25,
+      "family_partitions": 14,
+      "all_encoded_and_decoded_bytes_verified": true
+    },
+    "physical_comparison_body_closure": {
+      "whole_partitions": 18,
+      "selected_whole_component_rows": 22,
+      "original_routing_merge_equals_pinned_baseline_bytes": true
+    },
+    "current_contact_full_parts": [
+      "data/geography/part-18.json",
+      "data/geography/part-19.json"
+    ],
+    "pointsets_and_family_assessments": "unchanged accepted predecessor outputs; no geometry comparison or source adjudication regenerated",
+    "full_proposal_sha256": "5582eeb86f274c2a1d3939f2e8dcaaaeb29473c8d7f58427d6f84ae92f2dab1e",
+    "original_source_handoff_sha256": "e743bcc7287a0d45ff88033aa737f66f6209c8a7f604329aae7544d1916bf1b1"
   }
 }

@@ -1,28 +1,742 @@
 {
   "method": "methods/extract_preserved_records.py",
-  "runtime": "Python 3.7.3; standard library; Git CLI",
-  "commands": [
-    "python3 research/geography/philippines-ten-gap-family-source-fitness-20261007/methods/extract_preserved_records.py --output /tmp/phl-records-run1",
-    "python3 research/geography/philippines-ten-gap-family-source-fitness-20261007/methods/extract_preserved_records.py --output /tmp/phl-records-run2"
-  ],
+  "acceptance_harness": "methods/verify_extraction_acceptance.py",
+  "runtime": "3.7.3 (default, Mar 27 2019, 09:23:32) \n[Clang 9.0.0 (clang-900.0.39.2)]",
+  "platform": "darwin",
+  "imports": "Python standard library only plus Git CLI",
+  "frozen_at_utc": "2026-10-07T07:48:12Z",
   "run_count": 2,
-  "outputs_identical_byte_for_byte": true,
-  "files": [
+  "runs": [
     {
-      "path": "records/original-source-features-22.json",
+      "run": 1,
+      "command": "/usr/local/opt/python/bin/python3.7 /Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/c2957ff17d87f9b25edb9c6a4f8c5f115108da50945919c8ee9ad14bd2330b5e/work/research/geography/philippines-ten-gap-family-source-fitness-20261007/methods/extract_preserved_records.py --output /var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/phl-source-fitness-run-n1vy550a/run-1",
+      "started_at_utc": "2026-10-07T07:48:12Z",
+      "finished_at_utc": "2026-10-07T07:48:42Z",
+      "duration_seconds": 29.999,
+      "exit_code": 0,
+      "stdout": "{\"candidate_pointsets\": 22, \"current_contacts\": 22, \"families\": 10, \"original_contacts\": 22, \"physical_bodies\": 18, \"physical_rows\": 22, \"result\": \"PASS\", \"routing_bodies\": 39, \"routing_component_rows\": 22, \"source_sha256\": \"2ece3d44a5c6a2afb385ffbf3a6b88d83e4d3a3e7eed9a52cb3be1bc59e289fc\"}",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "output_files": [
+        {
+          "path": "accepted-predecessor-source-closure.json",
+          "bytes": 19014,
+          "sha256": "df343d4567a412a7633f01d53988cdcd8a60ed9e8f8832f7c1f9a0fc858e1cbe"
+        },
+        {
+          "path": "candidate-pointsets-22.json",
+          "bytes": 25838,
+          "sha256": "dd0b9b46900f08383329b47b99922e4658636e1017b4389c30b6d767be678944"
+        },
+        {
+          "path": "current-contact-features-22.json",
+          "bytes": 59680,
+          "sha256": "b82302e14ee0736c0b057167ec31685f15fc290b33a2cb5c2867f04a173e2452"
+        },
+        {
+          "path": "original-source-features-22.json",
+          "bytes": 196797,
+          "sha256": "8d019331d39a002a4d52f98b1bc5839c09dd73f4717cb8702f0e0de19b91f1d4"
+        },
+        {
+          "path": "physical-comparison-rows-22.json",
+          "bytes": 190272,
+          "sha256": "a9ddd95b70db6b94d2772d783b6dc8c59a0a13bc8b32c3c65b08abae3d18b5c3"
+        }
+      ]
+    },
+    {
+      "run": 2,
+      "command": "/usr/local/opt/python/bin/python3.7 /Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/c2957ff17d87f9b25edb9c6a4f8c5f115108da50945919c8ee9ad14bd2330b5e/work/research/geography/philippines-ten-gap-family-source-fitness-20261007/methods/extract_preserved_records.py --output /var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/phl-source-fitness-run-n1vy550a/run-2",
+      "started_at_utc": "2026-10-07T07:48:42Z",
+      "finished_at_utc": "2026-10-07T07:49:12Z",
+      "duration_seconds": 29.448,
+      "exit_code": 0,
+      "stdout": "{\"candidate_pointsets\": 22, \"current_contacts\": 22, \"families\": 10, \"original_contacts\": 22, \"physical_bodies\": 18, \"physical_rows\": 22, \"result\": \"PASS\", \"routing_bodies\": 39, \"routing_component_rows\": 22, \"source_sha256\": \"2ece3d44a5c6a2afb385ffbf3a6b88d83e4d3a3e7eed9a52cb3be1bc59e289fc\"}",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "output_files": [
+        {
+          "path": "accepted-predecessor-source-closure.json",
+          "bytes": 19014,
+          "sha256": "df343d4567a412a7633f01d53988cdcd8a60ed9e8f8832f7c1f9a0fc858e1cbe"
+        },
+        {
+          "path": "candidate-pointsets-22.json",
+          "bytes": 25838,
+          "sha256": "dd0b9b46900f08383329b47b99922e4658636e1017b4389c30b6d767be678944"
+        },
+        {
+          "path": "current-contact-features-22.json",
+          "bytes": 59680,
+          "sha256": "b82302e14ee0736c0b057167ec31685f15fc290b33a2cb5c2867f04a173e2452"
+        },
+        {
+          "path": "original-source-features-22.json",
+          "bytes": 196797,
+          "sha256": "8d019331d39a002a4d52f98b1bc5839c09dd73f4717cb8702f0e0de19b91f1d4"
+        },
+        {
+          "path": "physical-comparison-rows-22.json",
+          "bytes": 190272,
+          "sha256": "a9ddd95b70db6b94d2772d783b6dc8c59a0a13bc8b32c3c65b08abae3d18b5c3"
+        }
+      ]
+    }
+  ],
+  "input_closure": [
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/input-config.json",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "pinned scope/current-subject context",
+      "bytes": 90091,
+      "sha256": "7623fa8a61b72c33a1560f0ab612e70c463e8c25beef930043c985fd6657f173"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/components-000.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 1056877,
+      "sha256": "e1cac75959bf1f3125b911757d11061901a277525b58de588b96c384a56af68b",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "698110e7df2d720cdd3ac60242db21e9d677894d0845e69ba623fddba3c96415"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/components-001.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 1055138,
+      "sha256": "039c1c64d81c73a01a57cc9549d84b085b7d5f943eb0c93f888d5868e23a0a2e",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "a9b44b74dcca0a37191e10cbe1f08fbf98e460610f5cab441768e044f37c6b34"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/components-002.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 1056628,
+      "sha256": "c51904bce52448cd5cb50e5577178b94ceb2bbdace6b32bc6ba828bad64dc8bd",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "9de1ea80581fe6f4445108c0c49b68e78bdbd0e2f288d80716ca337c5c2d8561"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/components-003.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 1057266,
+      "sha256": "c1f4128e05d2147936bc76d773110572fa4d85f112acf9fa6023fc1e8af948ee",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "ab35a3bd7f4064d7ef3ad1d37edcb1b1b1b35db2232b026f1322dbbc74b7bacb"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/components-004.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 1056615,
+      "sha256": "f3922059b0406e5f925f4ecc5c71703873afa48e2e888992d96acdb5620ef600",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "651b27a01f11f6b7328ce866abe1c0918ed858e8ab7fc1dac76e2697e9037866"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/components-005.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 1055630,
+      "sha256": "fc45ee3c6e2c9aa6671e9e31453673227de9d36298ca44962795302c00ef58e2",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "7f8d2ab0ce1f0047f30dcd9d97549386fa8f8aa6d252bc96df73f57343ca7d95"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/components-006.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 1056046,
+      "sha256": "c5521f8a382f45e6b7febdd7616d407cbe1a41ad1bcd685fbe59dd49cc91f2ee",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "4b92cb5e1e63dda727254e08b28784fa7ef387d1f946569ea25189bb51607720"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/components-007.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 1056202,
+      "sha256": "5f4240fb226c6bd06e42a72000c3d4e89525e3cf5f1e4ae48f5d90d03834b297",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "228541ac222e9bf1927699c71e2adbb1ba194fa6ddba0d9b70aa500f1c50caf5"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/components-008.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 1056508,
+      "sha256": "efcf3436ed85a990a4ac4716caf967e2480c1b5eaa2e3047ffc412d9341273eb",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "30ed065c87e4a11f3039a3ce1e8a917d1c4ce324b70d08e81a08911bda36f7b0"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/components-009.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 1055685,
+      "sha256": "6b91eea504ecf337a7b4c2d727a42ebf1fc153c4b4340708458003e4563b79ee",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "59429efa412c896af9347049b579293fc9d05b80e950b5640d6e510e46e87ace"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/components-010.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 1054508,
+      "sha256": "9ff730a4f16de640645ae3d209944319765e1a6f4357c4458d0e30e8fc343abc",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "7889ff3e15b041a666f0394c9647835fd89b7ac489075831ed47745be2e83071"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/components-011.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 1056946,
+      "sha256": "d9fcf0e7c5943265880ffa230f79442d926db124394d1967ed6239c972881c96",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "1ff9b2ea435250fbf47c36e203bc95ca99efeadcc43f4b9052d8aaeea12e100e"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/components-012.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 1056866,
+      "sha256": "0cbfd374a2f1fde800ee8a14ad81aec01f55e5ab46d3de4f9f82d92d233533c3",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "48cb9ea6bf7baedefea4391bd3be8aa0564e98c5a4f72c93e9fcf9112d014408"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/components-013.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 1060324,
+      "sha256": "42081c1b1bb00fb8a97f7d238a8c17bd9ac421d6b4e7507c56629ed0fe2e5682",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "8cf5b9d3c11815a5fe548e12d03edd5ef2689ac7627067ec34ffab75dc23ec9e"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/components-014.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 1055098,
+      "sha256": "2654f5c49d285c57abeed978b1d363aecd8374943773d97a9687baefd42228a6",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "d1e3acfb2623dc398ec5266a1a3f2154a958ba0ebc0cf0ad3d3fb108ef555ba9"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/components-015.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 1056340,
+      "sha256": "59f3b744d15828d9dd5dbad1ff0797763687a7dc3c7203b14b47959a266905cb",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "8336e041079ab4cdaeee76442c40fb9f6e69bdb24ead60ef170010b8c1169c8b"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/components-016.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 1056102,
+      "sha256": "fcf08ffe589c2cbd4543fa8d2525ee70d44b4aa3d3a3811f40f71c1e1b60420b",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "504dc711ab22b934f2e47f0546e54f6f4f3352a0589fb47b9ae12348067adc9f"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/components-017.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 1057188,
+      "sha256": "6c1ae1f9b64caf6d58534ce0258a6a637f35f25d403db30af86e8e4775d0932c",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "ff1fd84298383e79f20f27a865ff1d72ba36856a1decc521cc3c460ead16f492"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/components-018.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 1058049,
+      "sha256": "bed843d713bfed48e38491c1196de6e66e4aae47db88d1b3d831dc222949e23e",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "0445faa56bff82aa5d0b98c78c420bb2f83671aa289bda55dfb71283e3673c8c"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/components-019.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 1056760,
+      "sha256": "fe00f2750343c55b0b21a8ae21934321252dff58235a0b4e5fbdd3fd8235c999",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "a54ed7e781d10fbd6403572826bcc801118e78b290c74b9aea56095a7a34c882"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/components-020.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 1054653,
+      "sha256": "f3a284602b62d1fb63b2f18dc478afe366be58837a8c5a30eb87bae939ed8e10",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "2d284aa2cb981e01d9d3ae65458ae97a0bceeeb8b41154adeb90e56b919a91b3"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/components-021.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 1057471,
+      "sha256": "9aed3f2e504a3a5799b39a8a92661d6496b85b853ba2adb4fb84f2e92bef8753",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "bfe35843058aa894e6806f0799bd151ed484efb638f20ad0d8af565e641497a6"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/components-022.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 1057293,
+      "sha256": "e6f8ef3380c42a60b97d5c81d69552129921b832597ed2e039ccaadbba56958d",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "146a652d7cead31fc783d93423b74cb52691cf2eded8de39f4272a1e6cb2250f"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/components-023.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 1055293,
+      "sha256": "a09464e0b05b2137c8fcfa5f7441c379e47893ed154ae11b71a58153d85877be",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "12be08c70304f2c808f53d74ef350c0d302def8e53568922c1734c7bfd06dee9"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/components-024.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 890162,
+      "sha256": "27c19fbd6531e866bd97ff88b52d21a2559ed761ffd9ed6235b680e02c45d01d",
+      "uncompressed_bytes": 7065187,
+      "uncompressed_sha256": "4457b5e94db636f8c1d078c25e2c6ce541781c51ddbdf7bbeed7b8a51285910a"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/families-000.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 1046123,
+      "sha256": "60e770171089510b8f97ebd74a93e1c913953716a4281699e4ecca75aaefffd5",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "fd164c98e3100f98b8488c7ba81e39132cb18a2669a86c8ab5728ec6e20ce97e"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/families-001.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 1003990,
+      "sha256": "1b4c5b7a0d1328bfbee83c759934843aabedde9afc947a9e555eeb6aac276fca",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "947627e169a22ca6a4f877f7ea192467c150fcc43d4fad4d99d3599702029a75"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/families-002.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 1001586,
+      "sha256": "9c50b25acf826a4c65291613cc965d7675a7c66aa672a8c0fe1f21feaf432239",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "dbe45982cb0fbe54d9c8b61e0189a3f6a2093c407849326b250305723a49c0f0"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/families-003.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 1063935,
+      "sha256": "8b7eedc7a4a9234f1917046167f97ad960d4a9c2941ce55dbac46a7eee422549",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "201ae80a0bcb8648950c26e0de7dedab1f6c196671c93734b169e551deb53e9c"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/families-004.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 987691,
+      "sha256": "fab9ac669c568073ab37748190396d3f0c06ac319317c4ff7a0aa31cee259ab0",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "3d329a587e2e06a426dc802e04abfe01726d86657acfc469287cfe668c8102a8"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/families-005.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 1026831,
+      "sha256": "03f13761ce67af5a826a98468ef2dc77d2f4a5c4ab9f25b6e6a1e3bd396bf141",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "6f7ba9a502dd9229365c522f25e3f05e6d3c2e8c329ceef6644618ebc9da930d"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/families-006.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 1493537,
+      "sha256": "6bee149f0d7930d6d95d927c41b78f8a52678df4ebad9824e68b35b917e676dc",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "8d270e713aa1ec33b8b279ae71224b7c2996053e1c2aced441723df8e82c80bb"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/families-007.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 962830,
+      "sha256": "4eb81385ba0d6b6d6a6b47e26a9504f9ae299f8d64dd9e0a82b3b48a4af65ad2",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "1e9358bfccab1b75a7073f63d8b84d65f64b064244a1fdad76669378204d1fc0"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/families-008.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 1043652,
+      "sha256": "897a5cb10967809bb32b541c82ff19c4fd0d8c0b64241d78ea963d09cb0bab62",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "e354113a88c2d3deb64a327a469bcbca7c248b17083b3d739c18445b7b8c23df"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/families-009.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 998433,
+      "sha256": "4621441988498fe2c05bfe6f036bf8dd9cfbc8472c5b8a65bf91d3a424f626da",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "049ab5f591d9821e7279c6c7afccfc0b55ed5a9f81976edfe969315ee25df079"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/families-010.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 1039493,
+      "sha256": "8da6fcf9fd6a7f3215666ab9bae2e91f9b32e5e0bb923492137ea823af8265b7",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "23d37fcd6c369a1dca6ba0fbccea55bc40bbeb74a340b4cca6752ca0d78cf231"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/families-011.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 1081053,
+      "sha256": "9e0d5879d5735d4507773cc66b7da371164c30de022c742969ba5d1e85e2c339",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "f844def184578eda6006664e38b95feb563b80dfaf3cfd3f78f2af8fd08e89ce"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/families-012.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 965771,
+      "sha256": "483fb0b6c5b9a8e1b905bf2dc3aa0ca232dcede6f34ef357381770a603e52df0",
+      "uncompressed_bytes": 8388608,
+      "uncompressed_sha256": "a1663477a0e01de8bb56736262b57e95c3c49647d54db95c4d2fd6d86600c328"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/families-013.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete original routing body",
+      "bytes": 247084,
+      "sha256": "006dd169089fc433251cc2f5939e7ae324744c00eca11066860aab578f07edac",
+      "uncompressed_bytes": 2171381,
+      "uncompressed_sha256": "b1ca16e670f192da7b7f8377b1bc1c0223750d3758512e384555b351554eff6f"
+    },
+    {
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/report.json",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "pinned scope/current-subject context",
+      "bytes": 174829,
+      "sha256": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265"
+    },
+    {
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/components-004.jsonl.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete selected physical comparison body",
+      "bytes": 1001848,
+      "sha256": "e31bf3c632466c74dd45ffc4b531619a75d5370d883fa4bae08d8ea18450c6e0",
+      "uncompressed_bytes": 7397110,
+      "uncompressed_sha256": "b3d50e4dd2e4bfb5fe3f3a6bd84da3b8331f0cd699440e6c8e8cbeb5c51fca24"
+    },
+    {
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/components-005.jsonl.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete selected physical comparison body",
+      "bytes": 1014529,
+      "sha256": "74b5807ba9624632783977868e107957d44ecb8a3b93cd1a632097c5a6d642a9",
+      "uncompressed_bytes": 7442405,
+      "uncompressed_sha256": "38c2eecacd8e03fbaba5035097116e5477978e1198c64c5db80d0965a38dc696"
+    },
+    {
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/components-009.jsonl.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete selected physical comparison body",
+      "bytes": 975730,
+      "sha256": "c34d076e4e7c2a54b82eeb253e8f7bbab80ccc6410bd80b8bf4e9a2130705ae7",
+      "uncompressed_bytes": 7386720,
+      "uncompressed_sha256": "a82da29f7275c4eef994ae0d48c30d27186061d86d9d24f80deef23fa77c2a5a"
+    },
+    {
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/components-012.jsonl.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete selected physical comparison body",
+      "bytes": 968486,
+      "sha256": "c480c3a1a3d159210bfd46e2cb1d0abf023d286291eabee330bf9b6d85a2cf3a",
+      "uncompressed_bytes": 7382607,
+      "uncompressed_sha256": "002a2dae6c8259e5664d6ca585890600942c9ecbcd4689a431de3fa706744b29"
+    },
+    {
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/components-013.jsonl.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete selected physical comparison body",
+      "bytes": 1012203,
+      "sha256": "dc60c8dc5223b6d8d4813da0bd7ff66d83bdfa1a01e37e5dccadd843f742fa3b",
+      "uncompressed_bytes": 7444535,
+      "uncompressed_sha256": "ad3c9b02af0a4a2c6aec20536235e84d4b6e4a18a9f4999ac46f2beede9fe4f0"
+    },
+    {
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/components-020.jsonl.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete selected physical comparison body",
+      "bytes": 966814,
+      "sha256": "fc489bf59d45b56dadb7d9ecaed4e7d7b1adc07b3312f6d4d84fc5b31cd597e9",
+      "uncompressed_bytes": 7383505,
+      "uncompressed_sha256": "b0bcc5c1cbc1114f70eefc5001de8949d662ff780aa255f2851bcc8e0ffbe776"
+    },
+    {
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/components-022.jsonl.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete selected physical comparison body",
+      "bytes": 987473,
+      "sha256": "5a0a899e2f259a87386bcb3c05f3ed4cb74930bfbde06afd3a0be7c5cc13cf2f",
+      "uncompressed_bytes": 7401185,
+      "uncompressed_sha256": "4e4d7d37fd4e04fc1d607b232ff72c1220db5e0ca83e7b373053dbd7a00f9059"
+    },
+    {
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/components-024.jsonl.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete selected physical comparison body",
+      "bytes": 1022176,
+      "sha256": "59aa8e3ee90ab1a55afd3ff082e2737c1c7b3116ee83f010a9ef7ce13eebb089",
+      "uncompressed_bytes": 7429458,
+      "uncompressed_sha256": "9fc25bfc8b41669640937881240d31f59bb14f4504ffe222b352f39eea4ad9e6"
+    },
+    {
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/components-026.jsonl.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete selected physical comparison body",
+      "bytes": 963015,
+      "sha256": "d88625fbc3d2ee666fbf67bdc8b587351ca05c9f59512ab7a728581cfa92abf7",
+      "uncompressed_bytes": 7347357,
+      "uncompressed_sha256": "cfd28c37b668c0f5efa168fde1615fa21df040676f6a5516584949b75932add0"
+    },
+    {
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/components-029.jsonl.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete selected physical comparison body",
+      "bytes": 975090,
+      "sha256": "45b326a57f93a7892a292912d922a6172d86f2e59af12a98f14eefddb26d6f94",
+      "uncompressed_bytes": 7374914,
+      "uncompressed_sha256": "f611173bb5be6855ffecdde3b1da2b8cb4c3989b732234b2b8e4e59913a5cb4c"
+    },
+    {
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/components-035.jsonl.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete selected physical comparison body",
+      "bytes": 1042017,
+      "sha256": "f03a2f3d6a3c54f10312693dcd0fbebbc56a8736c2b67bf422aa7c869d621d18",
+      "uncompressed_bytes": 7447644,
+      "uncompressed_sha256": "99dbb57026c7eae331775d8e7840c8030653033248e6a44552ebeca9485f1a12"
+    },
+    {
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/components-036.jsonl.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete selected physical comparison body",
+      "bytes": 981658,
+      "sha256": "53c2d55ef83f774b50b413d6c37d6dc152544ed7e3461ca9752842a25949277a",
+      "uncompressed_bytes": 7408351,
+      "uncompressed_sha256": "a89070a56552d0b03f989a0d637920b8489fc2d4525b032d33d44d434afac4fa"
+    },
+    {
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/components-042.jsonl.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete selected physical comparison body",
+      "bytes": 983640,
+      "sha256": "e6b7900cefbe801d54d054f6ce0d5b7d9767a5e63e138db052086d3ac5cbe413",
+      "uncompressed_bytes": 7402875,
+      "uncompressed_sha256": "c51b2d3d299630fe2a8e3764d510b164d937f610f9108c9ff04e96f01cc74395"
+    },
+    {
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/components-054.jsonl.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete selected physical comparison body",
+      "bytes": 982221,
+      "sha256": "81a39f2459181a94e28d94758eeeb2860b942db3abb73634b22a9673a37917ae",
+      "uncompressed_bytes": 7425630,
+      "uncompressed_sha256": "80ae551c85713e4b14be6a29c692910f86dd969930d7fc56a1c1ca71bc1f9477"
+    },
+    {
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/components-055.jsonl.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete selected physical comparison body",
+      "bytes": 956155,
+      "sha256": "e3a739e7ceb809d54d50a4b00d8c1cbccdeff38ce1379168db0de057755e6251",
+      "uncompressed_bytes": 7361521,
+      "uncompressed_sha256": "f0e294a319c5e8e674d929fabfce07037fefe542c9e972725adf5c0515336dd9"
+    },
+    {
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/components-058.jsonl.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete selected physical comparison body",
+      "bytes": 990723,
+      "sha256": "0688535e4eeb2ba594d46f90e3f753cca1c814a3d370ba6514d6cc9ea2e5619d",
+      "uncompressed_bytes": 7394892,
+      "uncompressed_sha256": "8a683d81ab38c4fd039472955f91cef51ba8ac93cb13d0f7cfbf385cf6aa3c58"
+    },
+    {
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/components-060.jsonl.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete selected physical comparison body",
+      "bytes": 966219,
+      "sha256": "d8f01fc9c37dbab9a149edf1fdabb4ffa66ee0c05dd7b9b64eea9f4b3b268cea",
+      "uncompressed_bytes": 7374435,
+      "uncompressed_sha256": "aad8bbe8ecf85bddae348c62219bce340dd0d244987e14e13dc46be04335820f"
+    },
+    {
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/components-065.jsonl.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "complete selected physical comparison body",
+      "bytes": 972945,
+      "sha256": "d3c1c31e0472f9581b5e9616180db8fed3aa2d38a87fd8a3495c8830e09b007a",
+      "uncompressed_bytes": 7383553,
+      "uncompressed_sha256": "2ed290f50c034f97deeec9c5bd73c81455e2870156cc3bf73ba978e8bf71c504"
+    },
+    {
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "pinned scope/current-subject context",
+      "bytes": 403376,
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9"
+    },
+    {
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-PHL-ADM3-000.bin.gz",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "whole consumed source transport",
+      "bytes": 2224353,
+      "sha256": "0b7b241fd977a792eca3101f31f0d02fba79d75b6ea463e33dec937b6c5ed72c",
+      "uncompressed_bytes": 7071267,
+      "uncompressed_sha256": "2ece3d44a5c6a2afb385ffbf3a6b88d83e4d3a3e7eed9a52cb3be1bc59e289fc"
+    },
+    {
+      "path": "data/administrative-sources.json",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "pinned scope/current-subject context",
+      "bytes": 661416,
+      "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+    },
+    {
+      "path": "data/geography/part-18.json",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "pinned scope/current-subject context",
+      "bytes": 4909063,
+      "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123"
+    },
+    {
+      "path": "data/geography/part-19.json",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "pinned scope/current-subject context",
+      "bytes": 4583022,
+      "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269"
+    },
+    {
+      "path": "data/world-index.json",
+      "vintage": "9618736b023d041f81496c923e7d0c2154e1491c",
+      "role": "pinned scope/current-subject context",
+      "bytes": 944,
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+    },
+    {
+      "path": "inputs/gb-PHL-ADM3.original",
+      "vintage": "candidate",
+      "role": "complete retained consumed source",
+      "bytes": 7071267,
+      "sha256": "2ece3d44a5c6a2afb385ffbf3a6b88d83e4d3a3e7eed9a52cb3be1bc59e289fc"
+    },
+    {
+      "path": "inputs/root-philippines-ten-full-family-source-fit-proposal.json",
+      "vintage": "candidate",
+      "role": "unchanged accepted predecessor pointsets and family/component closure",
+      "bytes": 250440,
+      "sha256": "5582eeb86f274c2a1d3939f2e8dcaaaeb29473c8d7f58427d6f84ae92f2dab1e"
+    },
+    {
+      "path": "inputs/root-philippines-ten-original-source-handoff.json",
+      "vintage": "candidate",
+      "role": "original source identity and 22-subject handoff",
+      "bytes": 213525,
+      "sha256": "e743bcc7287a0d45ff88033aa737f66f6209c8a7f604329aae7544d1916bf1b1"
+    }
+  ],
+  "outputs_identical_byte_for_byte": true,
+  "negative_controls": [
+    {
+      "control": "omitted contact subject",
+      "result": "mutated input rejected"
+    },
+    {
+      "control": "duplicated contact subject",
+      "result": "mutated input rejected"
+    },
+    {
+      "control": "foreign contact subject",
+      "result": "mutated input rejected"
+    },
+    {
+      "control": "original source byte mutation",
+      "result": "mutated input rejected"
+    },
+    {
+      "control": "original source expected hash mutation",
+      "result": "mutated input rejected"
+    },
+    {
+      "control": "candidate geometry to whole feature identity binding",
+      "result": "mutated input rejected"
+    },
+    {
+      "control": "current geometry to full contact identity binding",
+      "result": "mutated input rejected"
+    }
+  ],
+  "code_sha256": {
+    "extractor": "e66182c1cefd3b11dfaa07d56bb4af586a4fb9595a97a8ffa12fcce8b9a80efa",
+    "harness": "86f0a93424e49a8fe3832af7e57e574bc9bfa31cdb27f9b2bd59e2989bf7a920"
+  },
+  "scope": "Restores source, current-contact, candidate-pointset and already accepted comparison records from declared immutable inputs; no new geometry operation, source adjudication or physical comparison.",
+  "outputs": [
+    {
+      "path": "accepted-predecessor-source-closure.json",
+      "bytes": 19014,
+      "sha256": "df343d4567a412a7633f01d53988cdcd8a60ed9e8f8832f7c1f9a0fc858e1cbe"
+    },
+    {
+      "path": "candidate-pointsets-22.json",
+      "bytes": 25838,
+      "sha256": "dd0b9b46900f08383329b47b99922e4658636e1017b4389c30b6d767be678944"
+    },
+    {
+      "path": "current-contact-features-22.json",
+      "bytes": 59680,
+      "sha256": "b82302e14ee0736c0b057167ec31685f15fc290b33a2cb5c2867f04a173e2452"
+    },
+    {
+      "path": "original-source-features-22.json",
       "bytes": 196797,
       "sha256": "8d019331d39a002a4d52f98b1bc5839c09dd73f4717cb8702f0e0de19b91f1d4"
     },
     {
-      "path": "records/current-contact-features-22.json",
-      "bytes": 59680,
-      "sha256": "67610ed2d9a7a57591dec3425df5e402b8037587747bd7a9a8960badb57b9970"
-    },
-    {
-      "path": "records/physical-comparison-rows-22.json",
+      "path": "physical-comparison-rows-22.json",
       "bytes": 190272,
       "sha256": "a9ddd95b70db6b94d2772d783b6dc8c59a0a13bc8b32c3c65b08abae3d18b5c3"
     }
-  ],
-  "scope": "Extraction of immutable original source features and archived comparison result records only; no geometry operation or new comparison generated."
+  ]
 }
