@@ -1,0 +1,120 @@
+{
+  "version": 1,
+  "issue": 411,
+  "baseline_commit": "bd2c2aeed9fcaa0b209a4bec1fe18b7129bb7f60",
+  "checked_at_utc": "2026-10-07T03:03:30.173Z",
+  "scope": {
+    "count": 223,
+    "sorted_ids_sha256": "4caef1cacac620e3ac826a11e27088b49760f651c1cf33a3229fa868a3a45fb3",
+    "one_to_one_source_and_assessment_rows": 223
+  },
+  "classifications": {
+    "justified": 0,
+    "correction-needed": 1,
+    "insufficient-evidence": 222
+  },
+  "positive_controls": {
+    "exact_member_id": "passed",
+    "retained_source_hash": "passed",
+    "row_assessments_equal_scope": "passed"
+  },
+  "negative_controls": {
+    "fabricated_nonmember_rejected": "passed",
+    "wrong_expected_source_hash_rejected": "passed"
+  },
+  "retained_sources": [
+    {
+      "id": "GB-AGO-2018",
+      "path": "data/regional-review/regional-review-029dcbc646de003d/sources/geoBoundaries-AGO-ADM2-2018.geojson",
+      "bytes": 3146775,
+      "sha256": "44e58b2a8c2fefb9369294a32e2adde3e3637b9e02e8f1e2c53b400bec04f404"
+    },
+    {
+      "id": "GB-MOZ-2019",
+      "path": "data/regional-review/regional-review-029dcbc646de003d/sources/geoBoundaries-MOZ-ADM2-2019.geojson",
+      "bytes": 24879690,
+      "sha256": "5f04bb75bcb08092451f8626f7113830abfe726c1fad5309107309ab6cceab65"
+    },
+    {
+      "id": "GB-MWI-2020",
+      "path": "data/regional-review/regional-review-029dcbc646de003d/sources/geoBoundaries-MWI-ADM2-2020.geojson",
+      "bytes": 5658560,
+      "sha256": "5fe9b6313ee3eaf6d2b8a4579b7a7fa75dc1b16b9324a436f5a359da23527ea6"
+    },
+    {
+      "id": "GB-AGO-2018-METADATA",
+      "path": "data/regional-review/regional-review-029dcbc646de003d/sources/geoBoundaries-metadata/geoBoundaries-AGO-ADM2-metaData.json",
+      "bytes": 927,
+      "sha256": "0f45ab188f1e12b2f4068ecddeb62b2fb73d4ee7d1a71e29a8a8992d4b7ad302"
+    },
+    {
+      "id": "GB-MOZ-2019-METADATA",
+      "path": "data/regional-review/regional-review-029dcbc646de003d/sources/geoBoundaries-metadata/geoBoundaries-MOZ-ADM2-metaData.json",
+      "bytes": 950,
+      "sha256": "0dad350d40953d779e728c14d931548226290b05565f4068ee8e0ce366a0c1ef"
+    },
+    {
+      "id": "GB-MWI-2020-METADATA",
+      "path": "data/regional-review/regional-review-029dcbc646de003d/sources/geoBoundaries-metadata/geoBoundaries-MWI-ADM2-metaData.json",
+      "bytes": 948,
+      "sha256": "d5abb851b1817e42b5f40eed1e61735d8330d5f10f222f5f4018f0659038f16b"
+    },
+    {
+      "id": "GB-ATTRIBUTION",
+      "path": "data/regional-review/regional-review-029dcbc646de003d/sources/geoBoundaries-metadata/CITATION-AND-USE-geoBoundaries.txt.gz",
+      "bytes": 1790,
+      "sha256": "a43b47b3093e01e876d9270ca5dc2b6a17617e82540da9d482aa18abd9117d8c",
+      "raw_bytes": 4316,
+      "raw_sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+    },
+    {
+      "id": "MWI-CODAB-2023-RETRIEVED-2026-10-06",
+      "path": "data/regional-review/regional-review-029dcbc646de003d/sources/MWI-CODAB/package_show.json",
+      "bytes": 38521,
+      "sha256": "991ce22326b3c0c29afc293ea34ec404ec0939bdb04d5450244ccb72d04cb368"
+    }
+  ],
+  "baseline_files_verified": [
+    "data/world-index.json",
+    "data/geography/part-16.json",
+    "data/geography/part-29.json",
+    "data/hierarchy.json",
+    "data/macro-foundation/regional-handoffs.json.gz",
+    "data/macro-foundation/current-membership-inventory.json.gz"
+  ],
+  "external_binary_hash_limits": [
+    {
+      "id": "MWI-OCHA-CODAB-HISTORY",
+      "limit": "Not retained; cite and restore through URL. Hash of canonical page bytes not obtained."
+    },
+    {
+      "id": "MWI-CODAB-2023",
+      "limit": "Not retained; dataset page/API download blocked by endpoint timeout/403 in this run. A source restorer must fetch version 02, record file-level SHA-256, review CC BY 4.0 attribution metadata and compare all 32 level-2 polygons against the 28 pinned rows."
+    },
+    {
+      "id": "MOZ-INE-CENSUS-2017",
+      "limit": "Not retained; catalog page available in web inspection; direct byte retrieval timed out. Restore from exact URL before any later binary-based reproduction."
+    },
+    {
+      "id": "MOZ-INE-GAZA-YEARBOOK-2024",
+      "limit": "Not retained; no redistribution license confirmed. Direct retrieval timed out; restore from exact official URL and hash before binary-based reproduction."
+    },
+    {
+      "id": "MOZ-INE-TETE-YEARBOOK-2024",
+      "limit": "Not retained; no redistribution license confirmed. Direct retrieval timed out; restore from exact official URL and hash before binary-based reproduction."
+    },
+    {
+      "id": "MOZ-INE-MAPUTO-YEARBOOK-2024",
+      "limit": "Not retained; no redistribution license confirmed; retrieval timed out. Restore from URL and hash before relying on the PDF itself."
+    },
+    {
+      "id": "MOZ-INE-MAPUTO-YEARBOOK-MAP-2024",
+      "limit": "Not retained; no redistribution license confirmed; retrieval timed out. Restore and hash the map from the exact official URL."
+    },
+    {
+      "id": "MOZ-INE-CITY-MAPUTO-YB-2024",
+      "limit": "Not retained; no redistribution license confirmed and official host binary retrieval timed out. Restore from exact URL and record full-byte SHA-256 before any geometry claim."
+    }
+  ],
+  "interpretation": "This verifies the saved issue scope, source bytes retained in this packet, current baseline file pins and deterministic ID/name crosswalk. It does not verify topology, accuracy, completeness or the truth of external-source claims."
+}
