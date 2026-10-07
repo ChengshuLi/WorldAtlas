@@ -1,0 +1,90 @@
+{
+  "research_date": "2026-10-06",
+  "baseline_commit": "09f557dd650098e3b6b89fab5950ac9fe5ef8809",
+  "original_report_sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+  "runs": [
+    {
+      "output": "outputs/run-1/reproduction-results.json",
+      "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "match": "byte-for-byte"
+    },
+    {
+      "output": "outputs/run-2/reproduction-results.json",
+      "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "match": "byte-for-byte"
+    },
+    {
+      "output": "outputs/run-3/reproduction-results.json",
+      "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "match": "byte-for-byte"
+    },
+    {
+      "output": "outputs/run-4/reproduction-results.json",
+      "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "match": "byte-for-byte"
+    }
+  ],
+  "full_source_payloads": [
+    {
+      "id": "ury-gb-2017-adm1",
+      "bytes": 3632079,
+      "sha256": "9f4887205e7b359af2ef1e4f484ad071d2dc0d12d068f1d7b6c1cc6c2624d1cf",
+      "feature_count": 19
+    },
+    {
+      "id": "uruguay-igm-current",
+      "bytes": 16950115,
+      "sha256": "3cfa19c6be9d12bd159b236e15839f958656fdbe66ef19e38379cb54c141b3a7",
+      "feature_count": 21
+    }
+  ],
+  "controls": {
+    "duplicate_subject": "passed",
+    "wrong_input_pin": "passed",
+    "existing_output_sentinel_preserved": "passed",
+    "traversal_destination_rejected": "passed",
+    "symlink_destination_rejected_without_escape": "passed",
+    "capsule_code_drift_rejected": "passed",
+    "full_source_byte_drift_rejected": "passed",
+    "source_inventory_pin": "passed"
+  },
+  "geographic_scope": "Representation-only. No topology, overlay, area, legal-boundary, sovereignty, or territorial-membership claim was tested.",
+  "runtime": {
+    "python": "3.7.3",
+    "implementation": "CPython",
+    "platform": "Darwin-24.6.0-x86_64-i386-64bit",
+    "dependencies": "Python standard library only"
+  },
+  "validation": [
+    {
+      "method_id": "source-subject-identity",
+      "kind": "source",
+      "outcome": "passed",
+      "evidence": "The pinned Artigas subject occurs exactly once; duplicate-subject control rejects a second copy."
+    },
+    {
+      "method_id": "source-input-pins",
+      "kind": "source",
+      "outcome": "passed",
+      "evidence": "All five baseline files and both complete source payloads pass full-file SHA-256 pins; a wrong pin is rejected."
+    },
+    {
+      "method_id": "fresh-output-preservation",
+      "kind": "code",
+      "outcome": "passed",
+      "evidence": "Existing output sentinel, traversal, and symlink destination are rejected without external writes."
+    },
+    {
+      "method_id": "capsule-drift-rejection",
+      "kind": "code",
+      "outcome": "passed",
+      "evidence": "Changes to the executed capsule code or full source bytes are rejected before output creation."
+    },
+    {
+      "method_id": "two-run-reproducibility",
+      "kind": "generator",
+      "outcome": "passed",
+      "evidence": "Four fresh outputs match the complete retained result byte-for-byte."
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "research_date": "2026-10-06",
+  "sources": [
+    {
+      "id": "ury-gb-2017-adm1",
+      "title": "geoBoundaries gbOpen Uruguay ADM1, immutable release commit",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/URY/ADM1/geoBoundaries-URY-ADM1.geojson",
+      "vintage": "2017; gbOpen ADM1",
+      "retrieved_at": "2026-10-05 (retained parent packet)",
+      "sha256": "9f4887205e7b359af2ef1e4f484ad071d2dc0d12d068f1d7b6c1cc6c2624d1cf",
+      "bytes": 3632079,
+      "license": "ODbL 1.0 as declared in the pinned Atlas source metadata",
+      "retention": "retained byte-for-byte at ../regional-review-afee7ce9a5601ab2/ury-gb-2017.geojson",
+      "role_and_limit": "Historical neighboring-tier and subject-identity comparison. It represents Artigas as a single ordinary ADM1; it does not adjudicate modern disputed features or bilateral title."
+    },
+    {
+      "id": "uruguay-igm-current",
+      "title": "Uruguay IGM departmental limits MapServer layer 3 query response",
+      "url": "https://sit.mvot.gub.uy/arcgis/rest/services/07_EXTERNO/LIMITES_ADMINISTRATIVOS/MapServer/3/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson",
+      "vintage": "Data update 2024-09-18; metadata update 2026-07-15 (official metadata record 55)",
+      "retrieved_at": "2026-10-05 (retained parent packet)",
+      "sha256": "3cfa19c6be9d12bd159b236e15839f958656fdbe66ef19e38379cb54c141b3a7",
+      "bytes": 16950115,
+      "license": "Official metadata permits free use with attribution to IGM, AGESIC and IDE; service credits IGM",
+      "retention": "retained byte-for-byte at ../regional-review-afee7ce9a5601ab2/ury-igm-current.geojson",
+      "role_and_limit": "Official mapping representation. Its DEPTO field assigns both separate records to ARTIGAS and its DEF/TXT fields mark each contested; this is not a jointly agreed title or complete ADM2 inventory."
+    },
+    {
+      "id": "br-1851-boundary-treaty-edition",
+      "title": "Brazil–Uruguay Treaty of Limits, 12 October 1851, in FUNAG official edition of Rio Branco papers, volume V",
+      "url": "https://www.gov.br/funag/pt-br/chdd/arquivos-chdd/publicacoes/obras_do_barao_do_rio_branco__volume_v_._questoes_de_limites__exposicoes_de_motivos__capa_mole.pdf",
+      "vintage": "1851 instrument reproduced in FUNAG edition; edition consulted 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "sha256": "99875883fc2254a1a4b7b841afc332870b9585a25fa0874c4e11cedc07478531",
+      "bytes": 9981236,
+      "license": "Official hosted historical publication; reuse terms for the PDF are not established here",
+      "retention": "restoration-only",
+      "restore": "Fetch the exact URL as bytes and verify the SHA-256 and byte count above; the relevant text is Portuguese Article 3 §2 and instrument ratification/exchange information in the same volume. Do not replace with OCR or another edition.",
+      "role_and_limit": "Primary treaty text reproduced in official Brazilian government edition. Art. 3 §2 describes the boundary via the branch named Arroyo de la Invernada on one cited map and unnamed on another, and refers to island(s) at the Quaraí mouth as belonging to Brazil. It does not independently identify current IGM polygons as those legal objects or settle the competing modern interpretation."
+    },
+    {
+      "id": "uy-decree-315-2019",
+      "title": "Uruguay Decree 315/019 original text, IMPO official legal record",
+      "url": "https://www.impo.com.uy/bases/decretos-originales/315-2019",
+      "vintage": "Promulgated 2019-10-28; published 2019-10-31; annulled with general and absolute effects by TCA Judgment 758/022 dated 2022-10-20",
+      "retrieved_at": "2026-10-06",
+      "sha256": "5eb6c1ae29ec7ede7e96ffeb67ce88533ae4be1bdb83199b875d9b5b4479d6c3",
+      "bytes": 39319,
+      "license": "Official legal text; reuse terms not separately established",
+      "retention": "restoration-only",
+      "restore": "Fetch the exact URL as bytes and verify SHA-256 and byte count above; consult Annex III, Aduana Artigas jurisdiction. IMPO marks this decree annulled with general and absolute effects by TCA 758/022.",
+      "role_and_limit": "Historical customs-jurisdiction instrument describes a route from Marco Masoller along Arroyo la Invernada (Límite contestado—Arroyo Maneco) to Cuareim. This helps explain official administrative naming but its annulled jurisdiction assignment is not a current department boundary or bilateral territorial delimitation."
+    },
+    {
+      "id": "uy-tca-758-2022",
+      "title": "Uruguay TCA Judgment 758/022, IMPO official publication of judgment",
+      "url": "https://www.impo.com.uy/bases/sentencias-tca-originales/758-2022",
+      "vintage": "Judgment dated 2022-10-20; publication 2025-05-21",
+      "retrieved_at": "2026-10-06",
+      "sha256": "b1bcd5c6e82ea8f203bb533e9edb01160b816a2ce3711c2e4f4b7bef163f1322",
+      "bytes": 24627,
+      "license": "Official judicial text; reuse terms not separately established",
+      "retention": "restoration-only",
+      "restore": "Fetch the exact URL as bytes and verify SHA-256 and byte count above; inspect the case and operative annulment section concerning Decree 315/2019.",
+      "role_and_limit": "The Tribunal declared the challenged Decree 315/2019 null with general and absolute effects. This establishes that the customs-jurisdiction instrument is not an operative current legal basis; it does not decide Brazil–Uruguay territorial sovereignty or map the disputed polygons."
+    },
+    {
+      "id": "uy-decree-605-1974",
+      "title": "Uruguay Decree 605/974, IMPO official legal text",
+      "url": "https://www.impo.com.uy/bases/decretos/605-1974",
+      "vintage": "1974-07-26 decree; published 1974-08-02",
+      "retrieved_at": "2026-10-06",
+      "sha256": "d274d0fd47adc13a7868511118dacce3a4f63bdc784a16bda0301d1a851d3d8a",
+      "bytes": 8739,
+      "license": "Official legal text; reuse terms not separately established",
+      "retention": "restoration-only",
+      "restore": "Fetch the exact URL as bytes and verify the SHA-256 and byte count above.",
+      "role_and_limit": "Uruguay ordered preparation of a general map showing territories held in reserve and contested borders pending agreement with neighbors. It establishes official treatment of a disputed-border category, not the names, location, or title of these two features."
+    },
+    {
+      "id": "uy-mre-annual-report-2023",
+      "title": "Uruguay executive Memoria Anual 2023, Ministry of Foreign Relations section",
+      "url": "https://medios.presidencia.gub.uy/legal/2024/proyectos/03/tomo_2_memoria_2023.pdf",
+      "vintage": "2023 annual report, issued 2024",
+      "retrieved_at": "2026-10-06",
+      "sha256": "de41ac99098e6c2ce84f82bff5bd368a5b080a949b9fbe5fd30b0dc8a1a5de5a",
+      "bytes": 6944331,
+      "license": "Official government report; reuse terms not separately established",
+      "retention": "restoration-only",
+      "restore": "Fetch the exact URL as bytes and verify the SHA-256 and byte count above; consult the foreign-affairs discussion in printed page 323 (PDF page 324).",
+      "role_and_limit": "Uruguay reports following contested limits with Brazil, including Rincón de Artigas and Isla Brasilera, pending bilateral resolution. It is the government's stated position/status at that reporting time, not a delimitation instrument and does not establish later resolution or a legal boundary."
+    }
+  ]
+}
