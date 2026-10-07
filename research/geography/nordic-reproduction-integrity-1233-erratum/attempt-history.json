@@ -1,7 +1,7 @@
 {
   "current_accepted_runs": [
-    "repro-v13-one-20261007",
-    "repro-v13-two-20261007"
+    "repro-v14-one-20261007",
+    "repro-v14-two-20261007"
   ],
   "failed_attempts": [
     {
@@ -27,8 +27,8 @@
   ],
   "issue": 1389,
   "limits": [
-    "Superseded runs and failed attempts are retained as history; only the v13 pair is the final full reproduction against the exact live issue body.",
-    "Failed attempts carry no passing output and no geographic finding."
+    "Superseded runs and failed attempts remain historical; only the v14 pair is the final reproduction against the exact live issue contract.",
+    "The rejection control verifies source-lock pin identity; it does not establish boundary accuracy, source licensing, territorial meaning, or history."
   ],
   "preserved_superseded_runs": [
     "run-one-20261007",
@@ -47,7 +47,9 @@
     "repro-v11-one-20261007",
     "repro-v11-two-20261007",
     "repro-v12-one-20261007",
-    "repro-v12-two-20261007"
+    "repro-v12-two-20261007",
+    "repro-v13-one-20261007",
+    "repro-v13-two-20261007"
   ],
   "version": 1,
   "incomplete_attempts": [],
@@ -56,6 +58,12 @@
       "run_id": "repro-v13-one-20261007",
       "status": "accepted-as-run-one-of-v13-pair",
       "note": "A storage-gate check blocked run two at the first attempt; the gate later passed and the second fresh run completed. Both outputs are retained and paired."
+    }
+  ],
+  "audit_findings": [
+    {
+      "case": "issue-pin-roster-authentication",
+      "finding": "Independent review found a prior runner accepted a mutable source-lock substitution that changed actual_comparison_part-17 to the M vintage while the captured issue contract remained unchanged. That pair is superseded. The v14 runner now checks a hard-pinned exact issue-body hash and compares all 57 id/hash entries to the embedded reviewed work specification; the actual C-to-M mutation is a negative control rejected before output."
     }
   ]
 }

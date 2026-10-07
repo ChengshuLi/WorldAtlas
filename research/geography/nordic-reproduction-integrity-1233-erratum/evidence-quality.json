@@ -683,14 +683,14 @@
   "outputs": [
     {
       "path": "research/geography/nordic-reproduction-integrity-1233-erratum/README.md",
-      "bytes": 7693,
-      "sha256": "1390f105c14088c3270509c1e0c0537be2e679eb9722ca131c7aa7a4e770be51",
+      "bytes": 8137,
+      "sha256": "ce27fbe3fa4661b516ab42c57168d4085e3bfe78fde0562bdfb3c0b1d104d78f",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/nordic-reproduction-integrity-1233-erratum/attempt-history.json",
-      "bytes": 2481,
-      "sha256": "fd124dff42d5ccfa0326f061903bb127cd4334db8c4c53178232914242258595",
+      "bytes": 3158,
+      "sha256": "00dbf018a3ce9cbfe6febf82578dd278551674c118ee02a56fa5358baa159087",
       "hash_kind": "file-bytes"
     },
     {
@@ -701,8 +701,8 @@
     },
     {
       "path": "research/geography/nordic-reproduction-integrity-1233-erratum/geography-negative-control.json",
-      "bytes": 1054,
-      "sha256": "872a6bcb6793d2139e7501e28d739939b9740a0c8f340c65401628c4ed35748d",
+      "bytes": 1294,
+      "sha256": "48a83ece87f30eb857396418d33469a732e0ad864cae2a45749c85b68f823c7d",
       "hash_kind": "file-bytes"
     },
     {
@@ -731,14 +731,20 @@
     },
     {
       "path": "research/geography/nordic-reproduction-integrity-1233-erratum/pairwise-reproducibility.json",
-      "bytes": 1764,
-      "sha256": "975fe0d7cc7049a61a57f6a5ccddcebec626324acde2684e370f24d484c12bb0",
+      "bytes": 1827,
+      "sha256": "e702d76524e67a24bf5748a66bfae525d4c8baa84c8acc821a139f8494284be8",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/nordic-reproduction-integrity-1233-erratum/reproduce.py",
-      "bytes": 42330,
-      "sha256": "a66a2d3b83c735af9abc8c1b383c9daf7272f514d4d166bc7bcfd15936bb2109",
+      "bytes": 44535,
+      "sha256": "2c9e90bc16a3d54fe2729ea629283e3d0703a98bf25345ec38128610b60e3890",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/reproduction-metrics.json",
+      "bytes": 907,
+      "sha256": "76c4bff7b025105a7af83a4399ff3884dacfde2f8917f90ec721136e7dc11ac4",
       "hash_kind": "file-bytes"
     },
     {
@@ -750,7 +756,7 @@
     {
       "path": "research/geography/nordic-reproduction-integrity-1233-erratum/validation-controls.json",
       "bytes": 1903,
-      "sha256": "e704586ad02f592c273d903eab8433477d216b4056353177ce7d3ec14d0cbc69",
+      "sha256": "f3add13fdb08a2a57b5d0cc1cfbf4156116edcf5193766db5d7a0f2711bd2d85",
       "hash_kind": "file-bytes"
     },
     {
@@ -847,6 +853,30 @@
       "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v13-two-20261007/receipt.json",
       "bytes": 300,
       "sha256": "40733f4622a6eb9435f003af434c091eaf4aaf73ee0e55a62670eed36871fb94",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v14-one-20261007/authentication-and-phase-accounting.json",
+      "bytes": 3316661,
+      "sha256": "39f9ee4661149ec85261038aa9812c04b2d3f1e0b1b42b2032a6e6df6eee4c6f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v14-one-20261007/receipt.json",
+      "bytes": 300,
+      "sha256": "e06bfb3e149fd4b4d6e2a486afe535fbbd0207ff3090464a1110318bdf654723",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v14-two-20261007/authentication-and-phase-accounting.json",
+      "bytes": 3316661,
+      "sha256": "8913542cdb56c62af045a3e09c225bfa687b345360519759904f16795f1425e5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v14-two-20261007/receipt.json",
+      "bytes": 300,
+      "sha256": "18c46e1b94a75c3c5773880a162a64bda5cb71546b453e5887c852b8b7685ff1",
       "hash_kind": "file-bytes"
     },
     {
@@ -999,8 +1029,179 @@
       "units": "Feature counts and planar square degrees; not physical area."
     }
   ],
-  "metrics": [],
-  "summaries": [],
+  "metrics": [
+    {
+      "id": "declared_pin_count",
+      "value": 57,
+      "unit": "files",
+      "vintage": "archived",
+      "input_sha256": "39f9ee4661149ec85261038aa9812c04b2d3f1e0b1b42b2032a6e6df6eee4c6f",
+      "evaluation_commit": "24272235650c50528304e8146fb80a5b0c515800"
+    },
+    {
+      "id": "scoped_subject_count",
+      "value": 4,
+      "unit": "subjects",
+      "vintage": "archived",
+      "input_sha256": "39f9ee4661149ec85261038aa9812c04b2d3f1e0b1b42b2032a6e6df6eee4c6f",
+      "evaluation_commit": "24272235650c50528304e8146fb80a5b0c515800"
+    },
+    {
+      "id": "scoped_component_count",
+      "value": 4,
+      "unit": "components",
+      "vintage": "archived",
+      "input_sha256": "39f9ee4661149ec85261038aa9812c04b2d3f1e0b1b42b2032a6e6df6eee4c6f",
+      "evaluation_commit": "24272235650c50528304e8146fb80a5b0c515800"
+    },
+    {
+      "id": "complete_component_family_feature_count",
+      "value": 95174,
+      "unit": "features",
+      "vintage": "archived",
+      "input_sha256": "39f9ee4661149ec85261038aa9812c04b2d3f1e0b1b42b2032a6e6df6eee4c6f",
+      "evaluation_commit": "24272235650c50528304e8146fb80a5b0c515800"
+    },
+    {
+      "id": "complete_fragment_family_feature_count",
+      "value": 96963,
+      "unit": "features",
+      "vintage": "archived",
+      "input_sha256": "39f9ee4661149ec85261038aa9812c04b2d3f1e0b1b42b2032a6e6df6eee4c6f",
+      "evaluation_commit": "24272235650c50528304e8146fb80a5b0c515800"
+    },
+    {
+      "id": "complete_contact_product_feature_count",
+      "value": 4889,
+      "unit": "features",
+      "vintage": "archived",
+      "input_sha256": "39f9ee4661149ec85261038aa9812c04b2d3f1e0b1b42b2032a6e6df6eee4c6f",
+      "evaluation_commit": "24272235650c50528304e8146fb80a5b0c515800"
+    },
+    {
+      "id": "NOR_source_feature_count",
+      "value": 431,
+      "unit": "features",
+      "vintage": "archived",
+      "input_sha256": "39f9ee4661149ec85261038aa9812c04b2d3f1e0b1b42b2032a6e6df6eee4c6f",
+      "evaluation_commit": "24272235650c50528304e8146fb80a5b0c515800"
+    },
+    {
+      "id": "SWE_source_feature_count",
+      "value": 290,
+      "unit": "features",
+      "vintage": "archived",
+      "input_sha256": "39f9ee4661149ec85261038aa9812c04b2d3f1e0b1b42b2032a6e6df6eee4c6f",
+      "evaluation_commit": "24272235650c50528304e8146fb80a5b0c515800"
+    },
+    {
+      "id": "maximum_complete_phase_bytes",
+      "value": 157734275,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "39f9ee4661149ec85261038aa9812c04b2d3f1e0b1b42b2032a6e6df6eee4c6f",
+      "evaluation_commit": "24272235650c50528304e8146fb80a5b0c515800"
+    },
+    {
+      "id": "complete_phase_limit_bytes",
+      "value": 268435456,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "39f9ee4661149ec85261038aa9812c04b2d3f1e0b1b42b2032a6e6df6eee4c6f",
+      "evaluation_commit": "24272235650c50528304e8146fb80a5b0c515800"
+    },
+    {
+      "id": "maximum_raw_input_file_bytes",
+      "value": 10164089,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "39f9ee4661149ec85261038aa9812c04b2d3f1e0b1b42b2032a6e6df6eee4c6f",
+      "evaluation_commit": "24272235650c50528304e8146fb80a5b0c515800"
+    },
+    {
+      "id": "maximum_decoded_input_file_bytes",
+      "value": 10164089,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "39f9ee4661149ec85261038aa9812c04b2d3f1e0b1b42b2032a6e6df6eee4c6f",
+      "evaluation_commit": "24272235650c50528304e8146fb80a5b0c515800"
+    },
+    {
+      "id": "maximum_input_file_limit_bytes",
+      "value": 33554432,
+      "unit": "bytes",
+      "vintage": "archived",
+      "input_sha256": "39f9ee4661149ec85261038aa9812c04b2d3f1e0b1b42b2032a6e6df6eee4c6f",
+      "evaluation_commit": "24272235650c50528304e8146fb80a5b0c515800"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "declared_pin_count",
+      "value": 57,
+      "unit": "files"
+    },
+    {
+      "metric_id": "scoped_subject_count",
+      "value": 4,
+      "unit": "subjects"
+    },
+    {
+      "metric_id": "scoped_component_count",
+      "value": 4,
+      "unit": "components"
+    },
+    {
+      "metric_id": "complete_component_family_feature_count",
+      "value": 95174,
+      "unit": "features"
+    },
+    {
+      "metric_id": "complete_fragment_family_feature_count",
+      "value": 96963,
+      "unit": "features"
+    },
+    {
+      "metric_id": "complete_contact_product_feature_count",
+      "value": 4889,
+      "unit": "features"
+    },
+    {
+      "metric_id": "NOR_source_feature_count",
+      "value": 431,
+      "unit": "features"
+    },
+    {
+      "metric_id": "SWE_source_feature_count",
+      "value": 290,
+      "unit": "features"
+    },
+    {
+      "metric_id": "maximum_complete_phase_bytes",
+      "value": 157734275,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "complete_phase_limit_bytes",
+      "value": 268435456,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "maximum_raw_input_file_bytes",
+      "value": 10164089,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "maximum_decoded_input_file_bytes",
+      "value": 10164089,
+      "unit": "bytes"
+    },
+    {
+      "metric_id": "maximum_input_file_limit_bytes",
+      "value": 33554432,
+      "unit": "bytes"
+    }
+  ],
   "conclusions": [
     {
       "text": "The v12 packet reproduces the exact retained four-subject/four-component evidence and full declared producer families; this is a mechanical integrity result only.",
@@ -1103,6 +1304,10 @@
       "status": "added"
     },
     {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/reproduction-metrics.json",
+      "status": "added"
+    },
+    {
       "path": "research/geography/nordic-reproduction-integrity-1233-erratum/source-lock.json",
       "status": "added"
     },
@@ -1172,6 +1377,22 @@
     },
     {
       "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v13-two-20261007/receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v14-one-20261007/authentication-and-phase-accounting.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v14-one-20261007/receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v14-two-20261007/authentication-and-phase-accounting.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/vintages/repro-v14-two-20261007/receipt.json",
       "status": "added"
     },
     {
@@ -1294,6 +1515,73 @@
         "atlas_C_full_feature_sha256": "atlas_full_feature_sha256",
         "source_C_topologically_equal": "topologically_equal"
       }
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "declared_pin_count",
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/reproduction-metrics.json",
+      "json_pointer": "/results/declared_pin_count"
+    },
+    {
+      "metric_id": "scoped_subject_count",
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/reproduction-metrics.json",
+      "json_pointer": "/results/scoped_subject_count"
+    },
+    {
+      "metric_id": "scoped_component_count",
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/reproduction-metrics.json",
+      "json_pointer": "/results/scoped_component_count"
+    },
+    {
+      "metric_id": "complete_component_family_feature_count",
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/reproduction-metrics.json",
+      "json_pointer": "/results/complete_component_family_feature_count"
+    },
+    {
+      "metric_id": "complete_fragment_family_feature_count",
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/reproduction-metrics.json",
+      "json_pointer": "/results/complete_fragment_family_feature_count"
+    },
+    {
+      "metric_id": "complete_contact_product_feature_count",
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/reproduction-metrics.json",
+      "json_pointer": "/results/complete_contact_product_feature_count"
+    },
+    {
+      "metric_id": "NOR_source_feature_count",
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/reproduction-metrics.json",
+      "json_pointer": "/results/NOR_source_feature_count"
+    },
+    {
+      "metric_id": "SWE_source_feature_count",
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/reproduction-metrics.json",
+      "json_pointer": "/results/SWE_source_feature_count"
+    },
+    {
+      "metric_id": "maximum_complete_phase_bytes",
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/reproduction-metrics.json",
+      "json_pointer": "/results/maximum_complete_phase_bytes"
+    },
+    {
+      "metric_id": "complete_phase_limit_bytes",
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/reproduction-metrics.json",
+      "json_pointer": "/results/complete_phase_limit_bytes"
+    },
+    {
+      "metric_id": "maximum_raw_input_file_bytes",
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/reproduction-metrics.json",
+      "json_pointer": "/results/maximum_raw_input_file_bytes"
+    },
+    {
+      "metric_id": "maximum_decoded_input_file_bytes",
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/reproduction-metrics.json",
+      "json_pointer": "/results/maximum_decoded_input_file_bytes"
+    },
+    {
+      "metric_id": "maximum_input_file_limit_bytes",
+      "path": "research/geography/nordic-reproduction-integrity-1233-erratum/reproduction-metrics.json",
+      "json_pointer": "/results/maximum_input_file_limit_bytes"
     }
   ]
 }

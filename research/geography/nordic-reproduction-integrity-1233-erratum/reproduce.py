@@ -15,6 +15,7 @@ LOCK_PATH = HERE / "source-lock.json"
 RAW_LIMIT = 32 * 1024 * 1024
 PHASE_LIMIT = 256 * 1024 * 1024
 PREPARATION_HELPER = None
+EXPECTED_ISSUE_BODY_SHA256 = "c6fe2c500b0145e20b99554d4dbf5a4a053ca9bd32907b773ad0ac02369a2984"
 
 
 def sha(data: bytes) -> str:
@@ -50,6 +51,41 @@ def decode_pin(pin):
 def verify_pinned_bytes(raw, byte_count, digest, label):
     if len(raw)!=byte_count or sha(raw)!=digest:
         raise ValueError(f"pinned bytes changed: {label}")
+
+
+def validate_issue_pin_roster(lock, contract_bytes):
+    """Bind every executable source descriptor to the reviewed issue's exact pin map."""
+    if sha(contract_bytes) != EXPECTED_ISSUE_BODY_SHA256 or lock.get("issue_body_sha256") != EXPECTED_ISSUE_BODY_SHA256:
+        raise ValueError("captured issue contract is not the reviewed #1389 body")
+    text = contract_bytes.decode("utf-8")
+    blocks = re.findall(r"<!-- worldatlas-work:v1\s*\n([\s\S]*?)\n-->", text)
+    if len(blocks) != 1:
+        raise ValueError("issue contract must contain exactly one reviewed work specification")
+    spec = json.loads(blocks[0])
+    if lock.get("work_contract") != spec:
+        raise ValueError("source lock work contract differs from the captured issue")
+    expected = spec.get("evidence_quality", {}).get("pins")
+    descriptors = lock.get("pins")
+    actual = {row.get("id"): row.get("sha256") for row in descriptors or []}
+    if not isinstance(expected, dict) or len(actual) != len(descriptors or []) or actual != expected:
+        raise ValueError("source pin IDs/hashes differ from the exact issue-declared pin roster")
+    if lock.get("subject_ids") != spec.get("evidence_quality", {}).get("subject_ids"):
+        raise ValueError("source lock subjects differ from the issue contract")
+    return spec
+
+
+def negative_issue_pin_control(lock, contract_bytes):
+    """A C-vintage descriptor replaced by M must fail before a result can be admitted."""
+    altered = json.loads(json.dumps(lock))
+    pins = {row["id"]: row for row in altered["pins"]}
+    pins["actual_comparison_part-17"].update({key: pins["baseline_5"][key]
+        for key in ("commit", "path", "bytes", "sha256", "hash_kind")})
+    try:
+        validate_issue_pin_roster(altered, contract_bytes)
+    except ValueError:
+        return {"case": "C-part-17-replaced-by-M-vintage", "rejected_before_output": True,
+                "issue_contract_unchanged": sha(contract_bytes) == EXPECTED_ISSUE_BODY_SHA256}
+    raise ValueError("negative pin-roster control accepted the wrong Atlas vintage")
 
 
 def require_area_match(actual, expected, label):
@@ -450,7 +486,8 @@ def main():
     args = ap.parse_args()
     lock = json.loads(LOCK_PATH.read_text())
     contract_bytes=(HERE/"issue-contract-source.txt").read_bytes()
-    verify_pinned_bytes(contract_bytes,len(contract_bytes),lock["issue_body_sha256"],"captured GitHub issue contract")
+    validate_issue_pin_roster(lock, contract_bytes)
+    pin_roster_control=negative_issue_pin_control(lock, contract_bytes)
     pins = {p["id"]: p for p in lock["pins"]}
     if len(pins) != 57 or set(lock["subject_ids"]) != {
         "gb:NOR:ADM2:86288312B50158709887361", "gb:NOR:ADM2:86288312B64496782861055",
@@ -589,7 +626,7 @@ def main():
       "worker_visible_python":sys.version.split()[0],"families":family_records,"total_audited_raw_bytes":raw_total,
       "execution_code":{"path":"research/geography/nordic-reproduction-integrity-1233-erratum/reproduce.py","bytes":len(pathlib.Path(__file__).read_bytes()),"sha256":sha(pathlib.Path(__file__).read_bytes())},
       "complete_inventory_family_bindings":{"inventory_pin":inventory_pin,"families":inventory_families},
-      "authentication_controls":[helper_control],"exclusive_output_controls":output_controls,
+      "authentication_controls":[helper_control],"issue_pin_roster_control":pin_roster_control,"exclusive_output_controls":output_controls,
       "total_audited_decoded_bytes":decoded_total,"source_products":source_products,"atlas_subject_feature_hashes_by_vintage":byid,
       "retained_comparison_pin":prior_pin,"retained_physical_pin":old_physical_pin,
       "retained_subject_rows":prior.get("subject_feature_comparisons",[]),
