@@ -21,7 +21,11 @@ A Python trace hook observes immutable returned locals and operation returns,
 including complete level unions, hierarchy differences, alternating land/water
 subtractions, exterior, footprint, missing/extra and overlap. No instrumented
 replacement polygon algorithm is executed. Ordered retained query pieces and
-fresh source-query pointsets are preserved separately. Canonical full six/three
+fresh source-query pointsets are preserved separately. The named original
+`complete-source-record-reconstruction` operand is restored from authenticated
+native records and its explicit periodic offset; the source-free #1300 helper
+could not materialize that operand. Its original #1300 dispositions remain
+archived. Canonical full six/three
 mapping comparisons retain original-replay mismatches; only matching mappings
 permit bounded point diagnosis by the unchanged exact helper. A point witness
 never establishes whole-polygon coverage. Unknowns and operation failures survive.

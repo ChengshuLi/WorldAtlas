@@ -53,6 +53,33 @@ def fresh_queries(candidate,row,sources,validity=None,shifted_cache=None):
                        'exact_relation_fields_equal':equal,'unknowns_retained':query.get('container_chain_issues',[])})
     return result,levels
 
+def original_levels(candidate,row,sources,shifted_cache):
+    """Original104 operand semantics, including whole-source reconstruction.
+
+    The numerical1300 helper deliberately had no native geometry restoration.
+    Here the full native input is authenticated, so this named source alias has
+    its original complete operand instead of an omitted-polygon placeholder.
+    No fresh query result or altered geometry substitutes for retained evidence.
+    """
+    levels=defaultdict(list);retained=[]
+    for ordinal,query in enumerate(row['query_relations']):
+        if query.get('status')=='checked' and query.get('witness')=='complete-source-record-reconstruction' and query.get('candidate_covers_source')is True:
+            meta,source=sources[query['source_id']];reader.query_bind(query,meta)
+            offset=query['periodic_offset'];key=(meta['id'],offset)
+            if key not in shifted_cache:shifted_cache[key]=translate(source,xoff=offset)if offset else source
+            pieces,contacts=reader.old.dimensional_parts(shifted_cache[key])
+            levels[meta['level']].extend(pieces)
+            retained.append({'ordinal':ordinal,'disposition':'exact-original-whole-source-operand-restored','query':query,
+                             'original_native_pointset_sha256':meta['decoded_pointset_binary64_sha256'],
+                             'zero_planar_area_polygon_context_retained':any(g.area<=0 for g in pieces),
+                             'contact_context_count':len(contacts)})
+        else:
+            part,unknowns=kernel.reconstruct_levels(candidate,{'query_relations':[query]})
+            for level,pieces in part.items():levels[level].extend(pieces)
+            retained.extend(dict(value,ordinal=ordinal)for value in unknowns)
+    return levels,retained
+
+
 def mapping_equality(mappings,hierarchy,row):
     equality={key:reader.canonical(mappings[key])==reader.canonical(row['complete_support'][key]['geometry'])for key in RELATIONS}
     hierarchy_equal={key:reader.canonical(value)==reader.canonical(row['complete_support']['hierarchy_disagreements'][key]['geometry'])for key,value in hierarchy.items()}
@@ -64,10 +91,12 @@ def execute(feature,row,sources,validity=None,shifted_cache=None):
     record={'component_id':feature['id'],'whole_candidate_feature':feature,'original_physical_row':row,
             'physical_authority':'unapproved','repair_approval':False}
     if candidate.is_empty or not candidate.is_valid:
-        return dict(record,status='unknown-invalid-candidate',query_replays=[],stage_pointsets={},mapping_equality={},point_diagnostics={})
+        # Preserve actual relation accounting even when construction is forbidden.
+        queries,_=fresh_queries(candidate,row,sources,validity,shifted_cache)
+        return dict(record,status='unknown-invalid-candidate',query_replays=queries,stage_pointsets={},mapping_equality={},point_diagnostics={},original_contradiction_claim_allowed=False)
     try:
         queries,fresh_levels=fresh_queries(candidate,row,sources,validity,shifted_cache)
-        levels,retained=kernel.reconstruct_levels(candidate,row)
+        levels,retained=original_levels(candidate,row,sources,shifted_cache if shifted_cache is not None else {})
         record.update(query_replays=queries,ordered_original_positive_pieces={str(k):[kernel.ordinary_mapping(g)for g in levels[k]]for k in (1,2,3,4)},ordered_fresh_positive_pieces={str(k):[kernel.ordinary_mapping(g)for g in fresh_levels[k]]for k in (1,2,3,4)},retained_query_unknowns=retained)
         measured,local,events=trace_operator(candidate,levels)
         mappings={key:kernel.ordinary_mapping(measured[key])for key in RELATIONS}

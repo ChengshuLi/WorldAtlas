@@ -21,7 +21,7 @@ def code_guard(repo,commit):
         raw=(HERE/name).read_bytes()
         if raw!=reader.old.git(repo,'show',original_commit+':'+original_prefix+name):
             raise ValueError('Literal accepted original dependency changed '+name)
-    for module in (reader,trace,trace.kernel,trace.kernel.exact,reader.old,reader.old.comparison,reader.old.inputs,reader.old.immutable,reader.old.ellipsoidal_area):
+    for module in (reader,reader.transport,trace,trace.kernel,trace.kernel.exact,reader.old,reader.old.comparison,reader.old.inputs,reader.old.immutable,reader.old.ellipsoidal_area):
         path=pathlib.Path(module.__file__).resolve()
         if not path.is_relative_to(HERE) or path.read_bytes()!=reader.old.git(repo,'show',commit+':'+NS+str(path.relative_to(HERE))):
             raise ValueError('Actual transitive imported module closure differs')

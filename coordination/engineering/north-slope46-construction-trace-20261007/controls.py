@@ -59,6 +59,41 @@ def main():
         negative('actual-ordered-query-roster-'+name,lambda bad=bad:reader.query_roster(bad,pin))
     negative('actual-input-encoded-cap-before-git',lambda:reader.whole(None,{'bytes':reader.LIMIT+1}))
     negative('actual-input-decoded-cap-before-git',lambda:reader.whole(None,{'bytes':0,'uncompressed_bytes':reader.LIMIT+1}))
+    full_meta={'id':7,'level':1,'container':-1,'record_sha256':'a'*64,'decoded_pointset_binary64_sha256':'b'*64}
+    q,piece=reader.old.comparison.relation(candidate,box(0,0,1,1),7)
+    q.update(source_level=1,source_container=-1,source_record_sha256='a'*64,source_pointset_sha256='b'*64)
+    measured=reader.old.comparison.alternating_support(candidate,defaultdict(list,{1:[piece]}))
+    complete={k:{'geometry':trace.kernel.ordinary_mapping(measured[k])}for k in trace.RELATIONS}
+    complete['hierarchy_disagreements']={k:{'geometry':trace.kernel.ordinary_mapping(v)}for k,v in measured['hierarchy_disagreements'].items()}
+    row={'query_relations':[q],'complete_support':complete,'unresolved':[]}
+    source={7:(full_meta,box(0,0,1,1))}
+    def valid_execute():
+        result=trace.execute(feature,row,source)
+        assert result['status']=='original-mappings-matched' and len(result['query_replays'])==1
+        assert all(result['mapping_equality'].values()) and all(result['hierarchy_mapping_equality'].values())
+    positive('actual-valid-trace-execute-full-output-equivalence',valid_execute)
+    def invalid_execute():
+        bad=dict(feature,geometry=trace.kernel.ordinary_mapping(invalid));original=trace.trace_operator
+        def forbidden(*a,**k):raise AssertionError('Invalid candidate construction was called')
+        try:
+            trace.trace_operator=forbidden;result=trace.execute(bad,row,source)
+        finally:trace.trace_operator=original
+        assert result['status']=='unknown-invalid-candidate' and len(result['query_replays'])==1
+        assert result['query_replays'][0]['fresh']['status']=='unknown'
+        assert result['query_replays'][0]['original']==q and not result['stage_pointsets']
+        assert result['original_contradiction_claim_allowed'] is False
+    positive('actual-invalid-trace-execute-retains-query-without-construction',invalid_execute)
+    def source_order_and_frame():
+        from shapely.affinity import translate
+        source2=box(1,0,1.5,1);meta2=dict(full_meta,id=8)
+        q2,p2=reader.old.comparison.relation(candidate,source2,8);q2.update(source_level=1,source_container=-1,source_record_sha256='a'*64,source_pointset_sha256='b'*64)
+        ordered,_=trace.original_levels(candidate,{'query_relations':[q2,q]},dict(source,**{})|{8:(meta2,source2)}, {})
+        assert [reader.canonical(trace.kernel.ordinary_mapping(g))for g in ordered[1]]==[reader.canonical(trace.kernel.ordinary_mapping(source2)),reader.canonical(trace.kernel.ordinary_mapping(source[7][1]))]
+        moved=translate(candidate,xoff=360);moved_source=translate(source[7][1],xoff=360)
+        frame=dict(q,periodic_offset=360)
+        shifted,_=trace.original_levels(moved,{'query_relations':[frame]},source,{})
+        assert reader.canonical(trace.kernel.ordinary_mapping(shifted[1][0]))==reader.canonical(trace.kernel.ordinary_mapping(moved_source))
+    positive('actual-whole-source-operands-query-order-and-native-periodic-frame',source_order_and_frame)
     print(json.dumps({'method_id':'north-slope46-literal-stage-observation','kind':'controls','outcome':'passed','actual_controls':len(passed),'controls':passed},sort_keys=True))
 
 def require(value):assert value
