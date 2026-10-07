@@ -1,5 +1,5 @@
 """Lossless #1423 custody of exactly the 39 pre-final files at immutable 83d."""
-import argparse, base64, gzip, hashlib, io, json, os, pathlib, re, resource, shutil, subprocess, sys, types
+import argparse, binascii, gzip, hashlib, io, json, os, pathlib, re, resource, shutil, subprocess, sys, types
 
 N = 'coordination/engineering/angola-original-envelope-20261007/'
 R = pathlib.Path(__file__).resolve().parents[3]
@@ -49,7 +49,7 @@ def read_body(encoded, index, expected):
             raise ValueError('Duplicate custody member')
         if set(row) != {'path', 'mode', 'bytes', 'sha256', 'raw_base64'} or row['mode'] != '100644':
             raise ValueError('Custody member fields/mode')
-        body = base64.b64decode(row['raw_base64'], validate=True)
+        body = binascii.a2b_base64(row['raw_base64'], strict_mode=True)
         if len(body) > CAP or len(body) != row['bytes'] or sha(body) != row['sha256']:
             raise ValueError('Custody member body drift')
         found[name] = (row, body)
@@ -143,7 +143,7 @@ def main():
     adverse('missing-member', rows[:-1])
     adverse('duplicate-member', rows[:-1] + [rows[0]])
     adverse('trailing-body', gzip.decompress(encoded) + b'{}\n')
-    changed = json.loads(json.dumps(rows)); changed[0]['raw_base64'] = base64.b64encode(b'changed').decode()
+    changed = json.loads(json.dumps(rows)); changed[0]['raw_base64'] = binascii.b2a_base64(b'changed', newline=False).decode()
     adverse('member-body-drift', changed)
     changed = json.loads(json.dumps(rows)); changed[0]['path'] = N + 'vintages/../escape'
     adverse('unsafe-member-path', changed)
@@ -193,7 +193,9 @@ def main():
     proof = {'status': 'complete39-lossless-inverse-and10-actual-reader-controls', 'execution_commit': args.commit, 'original_commit': OLD,
              'original_records': checks, 'controls': controls, 'peak_rss_bytes': resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
              'scratch': '39 exact regenerated own copies verified against immutable83d and custody before removal; no unique evidence removed',
-             'archive': index['archive']}
+             'archive': index['archive'], 'runtime_codec': 'binascii is built into pinned Python executable; no extra base64.py/pyc dependency',
+             'previous_auxiliary_proof': [{'path': PACK.replace('pre-final-custody/', 'custody-controls/') + name, 'mode': '100644', 'bytes': len(raw), 'sha256': sha(raw), 'raw_base64': binascii.b2a_base64(raw, newline=False).decode()} for name in ['controls.json', 'publication.json'] for raw in [git('163a97e2fcbe6799d1fd817e167e83ea32ed7da0', PACK.replace('pre-final-custody/', 'custody-controls/') + name)]],
+             'previous_auxiliary_limit': 'Prior b3b custody run additionally imported two unlisted base64 library bodies; its actual raw receipts are preserved here. Replacement uses original captured embedded binascii and requires genuine renewed runtime readback.'}
     publication.publish({'controls.json': proof})
     print(json.dumps({'status': proof['status'], 'members': len(checks), 'controls': len(controls), 'peak_rss_bytes': proof['peak_rss_bytes']}))
 
