@@ -12,10 +12,11 @@
   "dependencies": [
     1249
   ],
-  "updated_at_utc": "2026-10-07T07:41:08.034Z",
+  "updated_at_utc": "2026-10-07T07:52:04.405894+00:00",
   "completed": [
     "Actual-job timing and shared HTTP deadline integration implemented",
-    "Real entrypoint/CLI/adverse controls pass; no live exhaustion or provider writes"
+    "Real entrypoint/CLI/adverse controls pass; no live exhaustion or provider writes",
+    "Independent workflow-vintage finding corrected; 161 plus 23 controls rerun"
   ],
   "checks": [
     {
@@ -41,7 +42,7 @@
   ],
   "blockers": [],
   "next_action": "Local full evidence/scope validation, hosted CI, independent exact-head review, normal queue, actual-main and subsequent normal hosted timing verification",
-  "pull_request": null,
+  "pull_request": "https://github.com/ChengshuLi/WorldAtlas/pull/1338",
   "record_kind": "resumable_execution_artifact",
   "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
 }

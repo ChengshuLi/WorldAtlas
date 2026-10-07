@@ -74,3 +74,8 @@ The request budget control simulates time and counts actual API function invocat
 It does not measure hosted CI latency or promise that unrelated API clients cannot
 exhaust shared limits. Large comment inventories require more than one read per poll.
 The existing scheduler's five-minute schedule and completion trigger remain unchanged.
+
+Scheduler admission checks out the executing `github.workflow_sha`, binds its
+commit and workflow path/ref to GitHub’s current job environment, and reads the
+timeout from that immutable Git blob. A newer main commit cannot extend an
+already-running job’s timeout; mixed-vintage checkouts refuse before API work.

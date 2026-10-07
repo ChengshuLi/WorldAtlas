@@ -2,13 +2,16 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import {spawnSync} from 'node:child_process';
-import {runScheduler} from '../scripts/run-merge-scheduler.mjs';
+import {spawnSync, execFileSync} from 'node:child_process';
+import {runScheduler, executingWorkflow} from '../scripts/run-merge-scheduler.mjs';
 import {githubAPI} from '../scripts/issue-claim-contract.mjs';
 import {queueBody} from '../scripts/merge-scheduler.mjs';
 import {schedulerJobMinutes, HTTP_ATTEMPT_MS, JOB_FINALIZATION_MS} from '../scripts/job-deadline.mjs';
 
 const workflow = fs.readFileSync(new URL('../.github/workflows/merge-scheduler.yml', import.meta.url), 'utf8');
+const workflowSha = 'b'.repeat(40);
+const workflowRef = 'a/b/.github/workflows/merge-scheduler.yml@refs/heads/main';
+const readGit = args => args[0] === 'rev-parse' ? workflowSha + '\n' : workflow;
 const epoch = Date.parse('2026-10-07T00:00:00Z');
 const request = {pr_number: 2, expected_head: 'a'.repeat(40), request_id: 'deadline-test-stable-request'};
 const event = {inputs: request};
@@ -60,8 +63,9 @@ async function execute({phase = 'register', elapsed = 0, rejection = [], request
     throw Error('Unexpected HTTP route: ' + route);
   };
   try {
-    const result = await runScheduler({event, workflow,
+    const result = await runScheduler({event, workflow, readGit,
       env: {GH_TOKEN: 'synthetic-test-token', GITHUB_REF: 'refs/heads/main', GITHUB_REPOSITORY: 'a/b',
+        GITHUB_WORKFLOW_SHA: workflowSha, GITHUB_WORKFLOW_REF: workflowRef,
         GITHUB_RUN_ID: '10', GITHUB_RUN_ATTEMPT: '1', GITHUB_JOB: phase, QUEUE_PHASE: phase},
       wallNow: () => epoch + time + wallOffset, monotonicNow: () => time,
       sleep: async ms => {waits.push(ms);time += ms + oversleepMs;}});
@@ -211,6 +215,7 @@ test('actual CLI emits a controlled quota refusal and accounting with failing ex
     const child = spawnSync(process.execPath, ['--import', path.join(directory, 'mock.mjs'),
       path.resolve('scripts/run-merge-scheduler.mjs')], {cwd: directory, encoding: 'utf8', timeout: 10_000,
       env: {PATH: process.env.PATH, GH_TOKEN: 'synthetic-test-token', GITHUB_REF: 'refs/heads/main',
+        GITHUB_WORKFLOW_SHA: execFileSync('git', ['rev-parse', 'HEAD'], {encoding: 'utf8'}).trim(), GITHUB_WORKFLOW_REF: workflowRef,
         GITHUB_REPOSITORY: 'a/b', GITHUB_RUN_ID: '10', GITHUB_RUN_ATTEMPT: '1', GITHUB_JOB: 'register',
         QUEUE_PHASE: 'register', GITHUB_EVENT_PATH: path.join(directory, 'event.json')}});
     assert.equal(child.status, 1, child.stderr);
@@ -222,4 +227,28 @@ test('actual CLI emits a controlled quota refusal and accounting with failing ex
     assert.deepEqual(trace.waits, [181_000]);assert.equal(trace.time, 191_000);
     assert.equal(trace.calls.filter(row => row.method === 'POST').length, 0);
   } finally {fs.rmSync(directory, {recursive: true, force: true});}
+});
+
+
+test('executing workflow commit rejects newer-main timeout and mixed-vintage checkout before HTTP', async () => {
+  const env = {GH_TOKEN: 'synthetic', GITHUB_REF: 'refs/heads/main', GITHUB_REPOSITORY: 'a/b',
+    QUEUE_PHASE: 'register', GITHUB_JOB: 'register', GITHUB_RUN_ID: '10', GITHUB_RUN_ATTEMPT: '1',
+    GITHUB_WORKFLOW_SHA: workflowSha, GITHUB_WORKFLOW_REF: workflowRef};
+  let requests = 0;
+  const apiFactory = () => async () => {requests++;throw Error('HTTP must not execute');};
+  const drift = await runScheduler({event, env, readGit, apiFactory,
+    workflow: workflow.replace('timeout-minutes: 5', 'timeout-minutes: 10')});
+  assert.equal(drift.failed, true);assert.match(drift.result.reason, /differ from executing commit/);
+  const mixed = await runScheduler({event, env, apiFactory,
+    readGit: args => args[0] === 'rev-parse' ? 'c'.repeat(40) : workflow});
+  assert.equal(mixed.failed, true);assert.match(mixed.result.reason, /Checkout does not match/);
+  for (const invalid of [{GITHUB_WORKFLOW_SHA: undefined}, {GITHUB_WORKFLOW_SHA: 'main'},
+    {GITHUB_WORKFLOW_REF: 'a/b/.github/workflows/other.yml@refs/heads/main'},
+    {GITHUB_WORKFLOW_REF: workflowRef.replace('main', 'untrusted')}]) {
+    assert.throws(() => executingWorkflow({...env, ...invalid}, readGit), /authority/);
+  }
+  assert.equal(requests, 0);
+  assert.match(workflow, /ref: \$\{\{ github.workflow_sha \}\}/);
+  assert.doesNotMatch(workflow, /ref: main/);
+  assert.equal(schedulerJobMinutes(executingWorkflow(env, readGit), 'register'), 5);
 });

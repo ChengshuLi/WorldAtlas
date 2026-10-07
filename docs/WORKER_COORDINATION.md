@@ -376,3 +376,8 @@ ownership/evidence errors before review, while long regressions and substantive
 independent review may proceed in parallel. The guide supplies practical helper and
 command details, meaningful adverse cases and existing-chat refresh text; author
 preflight does not replace independently derived reviewer expectations.
+
+Scheduler admission checks out the executing `github.workflow_sha`, binds its
+commit and workflow path/ref to GitHub’s current job environment, and reads the
+timeout from that immutable Git blob. A newer main commit cannot extend an
+already-running job’s timeout; mixed-vintage checkouts refuse before API work.

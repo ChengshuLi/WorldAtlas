@@ -3,7 +3,7 @@
 The original registration job could admit two 181-second quota waits inside a
 constructor-relative eight-minute window despite its five-minute timeout. This
 repair authenticates the actual current run/attempt/job start through one
-non-retried jobs read, reads the literal timeout from trusted workflow bytes,
+non-retried jobs read, reads the literal timeout from the authenticated executing workflow Git commit,
 and charges setup, metadata and elapsed work. Registration gains only actions:read.
 
 Each retry must fit its wait plus a complete 20-second HTTP attempt, leaving
@@ -30,7 +30,7 @@ capacity refusal and a dispatch timestamp after a real classified quota wait.
 Original tracked bytes are never modified by the controls; CLI scratch is exclusive
 and removed in finally. Do not reproduce by exhausting GitHub or posting live data.
 
-The controls retain 160 passing queue/capacity/evidence/integration tests and
+The controls retain 161 passing queue/capacity/evidence/integration tests and
 23 scope/entrypoint/sparse controls. These are simulated admission proofs, not
 hosted quota recovery. Historical-job-metadata.json records a prior complete
 two-job attempt inspected under the operator credential; it does not prove the
@@ -42,3 +42,8 @@ repair binds registration and scheduling, not every other job in the repository.
 If setup prevents reaching the initial bounded metadata read, do not invent a
 controlled completion receipt. Original #1249 hosted recovery evidence remains
 valid and closed; #1275 is not closed solely on these local tests.
+
+Independent review found that mutable main workflow bytes could extend an older
+five-minute job to ten minutes. The correction pins both checkout and timeout
+bytes to GITHUB_WORKFLOW_SHA, checks the exact workflow ref/path and checkout
+HEAD, and retains a real-entrypoint drift refusal control before any API request.
