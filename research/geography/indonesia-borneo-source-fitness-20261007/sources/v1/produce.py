@@ -85,6 +85,8 @@ def build(run_name: str) -> dict:
     })
     Baseline = modules['evidence.immutable'].Baseline
     NewVintage = modules['evidence.immutable'].NewVintage
+    canonical_json = modules['evidence.immutable'].canonical_json
+    deterministic_gzip = modules['evidence.immutable'].deterministic_gzip
     contract = modules['evidence.contracts']
     baseline = Baseline(REPO, commit, pins)
     if baseline.materialized_bytes((SOURCE / 'produce.py').as_posix()) != Path(__file__).read_bytes():
@@ -293,17 +295,17 @@ def build(run_name: str) -> dict:
                          'properties': {'role': 'current_atlas_admin_contact', 'atlas_feature_id': f['id'],
                                         'atlas_name': f['properties'].get('name')}} for f in atlas_contacts]
     outputs = {
-        'assessment.json.gz': assessment,
-        'intersections.geojson.gz': {'type': 'FeatureCollection', 'features': component_features + contact_features + intersections + contact_intersections},
-        'positive-control.json': {'method_id': 'source-fitness-generation', 'kind': 'positive-control', 'outcome': 'passed',
+        'assessment.json.gz': deterministic_gzip(canonical_json(assessment)),
+        'intersections.geojson.gz': deterministic_gzip(canonical_json({'type': 'FeatureCollection', 'features': component_features + contact_features + intersections + contact_intersections})),
+        'positive-control.json': canonical_json({'method_id': 'source-fitness-generation', 'kind': 'positive-control', 'outcome': 'passed',
                                   'selected_components': len(ids), 'custody_joined_components': len(by_id),
                                   'source_features': len(admin_features), 'positive_area_intersections': positive,
-                                  'current_contact_features': len(atlas_contacts)},
-        'negative-control.json': {'method_id': 'source-fitness-generation', 'kind': 'negative-control', 'outcome': 'passed',
+                                  'current_contact_features': len(atlas_contacts)}),
+        'negative-control.json': canonical_json({'method_id': 'source-fitness-generation', 'kind': 'negative-control', 'outcome': 'passed',
                                   'missing_identity_rejected': True, 'duplicate_identity_rejected': True,
-                                  'fabricated_identity_rejected': True, 'method': 'exact_rows applied to actual source records'},
+                                  'fabricated_identity_rejected': True, 'method': 'exact_rows applied to actual source records'}),
     }
-    records = dest.publish(outputs)
+    records = dest.publish_bytes(outputs)
     return {'run': run_name, 'records': records, 'intersections': len(intersections), 'contacts': len(contact_intersections),
             'raster_components': len(raster_histograms), 'input_bytes': sum(baseline.consumed.values())}
 
