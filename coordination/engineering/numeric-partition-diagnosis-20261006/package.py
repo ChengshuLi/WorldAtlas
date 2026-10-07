@@ -70,8 +70,10 @@ def package():
     for pin in report['actual_consumed_ordinary_inputs']:
         b=subprocess.check_output(['git','show',BASE+':'+pin['path']],cwd=R)
         if SHA(b)!=pin['sha256']or len(b)!=pin['bytes']:raise ValueError('Whole frozen input differs at PR baseline')
-        d=descriptor(pin['path'],b,decoded='decoded_sha256'in pin)
-        if 'decoded_sha256'in pin and(d['uncompressed_sha256']!=pin['decoded_sha256']or d['uncompressed_bytes']!=pin['decoded_bytes']):raise ValueError('Decoded complete input differs')
+        compressed='decoded_sha256'in pin and b[:2]==b'\x1f\x8b'
+        d=descriptor(pin['path'],b,decoded=compressed)
+        raw=gzip.decompress(b)if compressed else b
+        if 'decoded_sha256'in pin and(SHA(raw)!=pin['decoded_sha256']or len(raw)!=pin['decoded_bytes']):raise ValueError('Decoded complete input differs')
         sources.append(d)
     files=sorted(p for p in P.rglob('*')if p.is_file()and'.cache'not in p.relative_to(P).parts and'__pycache__'not in p.relative_to(P).parts and p.name!='evidence-quality.json')
     outputs=[descriptor(str(p.relative_to(R)))for p in files]

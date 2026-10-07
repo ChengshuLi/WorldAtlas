@@ -1,0 +1,1341 @@
+{
+  "baseline": {
+    "commit": "c9bd47774b1ea8216d9cd4608ce2a20e15a2962b",
+    "files": [
+      {
+        "bytes": 31499,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/retired-member-comparison-1255-20261006/run-one/report.json",
+        "role": "original-source",
+        "sha256": "13cd9b18fae16f1ce0a2197fcb832ca6da595168bb58a23b1f85c8998590a6c7"
+      },
+      {
+        "bytes": 2082170,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/retired-member-comparison-1255-20261006/diagnostic-unknowns.json.gz",
+        "role": "original-source",
+        "sha256": "c798574769811cec2075e28885427c7267c5bcf26b27f559e8f976759ceba614",
+        "uncompressed_bytes": 11354152,
+        "uncompressed_sha256": "5aadc937ada246a7e5b06254d255a7c6a07a0fc6ec4bcf25e5d4aea334640d89"
+      },
+      {
+        "bytes": 41964,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/retired-member-comparison-1255-20261006/input-index.json",
+        "role": "original-source",
+        "sha256": "d5c79868705da0900253f2a56a2700b193bc0aff71589e33104eb1646a7cb2e3"
+      },
+      {
+        "bytes": 3574,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/retired-member-comparison-1255-20261006/kernel.py",
+        "sha256": "b2da93607871ed3b5431bec2a97c23fe19be2d9814c389ee3ef3472f7a9cb92e"
+      },
+      {
+        "bytes": 14060,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/retired-member-comparison-1255-20261006/producer.py",
+        "sha256": "ca12afbbc9f8b55d6ff862104a403652150f9e002f0834f84035983973008f0f"
+      },
+      {
+        "bytes": 8126,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/retired-member-comparison-1255-20261006/reader.py",
+        "sha256": "c5d1cad2726b49fbece907db50e76833b025e0d24ff375ad0e285cf09e0b1712"
+      },
+      {
+        "bytes": 7090,
+        "hash_kind": "file-bytes",
+        "path": "scripts/evidence/immutable.py",
+        "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd"
+      }
+    ],
+    "pin_files": {
+      "complete_original_input_index": "coordination/engineering/retired-member-comparison-1255-20261006/input-index.json",
+      "complete_unknown_aggregation": "coordination/engineering/retired-member-comparison-1255-20261006/diagnostic-unknowns.json.gz",
+      "retired_member_complete_run_report": "coordination/engineering/retired-member-comparison-1255-20261006/run-one/report.json"
+    },
+    "pins": {
+      "complete_original_input_index": "d5c79868705da0900253f2a56a2700b193bc0aff71589e33104eb1646a7cb2e3",
+      "complete_unknown_aggregation": "c798574769811cec2075e28885427c7267c5bcf26b27f559e8f976759ceba614",
+      "retired_member_complete_run_report": "13cd9b18fae16f1ce0a2197fcb832ca6da595168bb58a23b1f85c8998590a6c7"
+    }
+  },
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/controls.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/custody.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/numeric_kernel.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/package.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/producer.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/progress.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-one/components-000.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-one/components-001.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-one/components-002.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-one/components-003.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-one/components-004.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-one/components-005.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-one/families-000.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-one/objects/objects-000.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-one/objects.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-one/report.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-two/components-000.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-two/components-001.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-two/components-002.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-two/components-003.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-two/components-004.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-two/components-005.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-two/families-000.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-two/objects/objects-000.json.gz",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-two/objects.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-two/report.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/complete-dimension-and-example-aggregation.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/complete-outcome-buckets.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/complete-reason-and-consensus-aggregation.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/digest-prose-correction.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/executions.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/failed-input-only-declared-algorithm.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/failed-input-only-declared-algorithm.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/full-readback-one.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/full-readback-two.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/input-only-preflight.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/run-one.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/run-two.log",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/summary.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verify.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "producer.py --code-commit a3a6b3761ddfc422f15be6686f492fbf04ae63d5 --output OWNED_ABSENT_DESTINATION",
+    "controls.py (directed fixtures only)",
+    "verify.py --run OWNED_COMPLETE_RUN --output OWNED_READBACK_RECEIPT"
+  ],
+  "conclusions": [],
+  "issue": 1270,
+  "lane": "engineering",
+  "methods": [
+    {
+      "description": "Complete stored partition reconstruction/lost/added pointsets and full runtime predicate evidence; conservative typed literal source relation where predicates and whole overlay checks agree. Original strict unknowns preserved; no tolerance, physical assignment, exact arithmetic or historical cause inference.",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "id": "complete-partition-pointset-diagnosis-v1",
+      "kind": "generator",
+      "software": "Frozen producer a3a6b3761ddfc422f15be6686f492fbf04ae63d5; Python3.12.14 NumPy2.3.5 Shapely2.1.2 GEOS3.13.1 zlib1.2.12",
+      "units": "Planar longitude/latitude coordinate units, dimensions and record counts; no physical area measurement"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "json_pointer": "/counts/complete-literal-reconstruction-diagnosis",
+      "metric_id": "counts-complete-literal-reconstruction-diagnosis",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/summary.json"
+    },
+    {
+      "json_pointer": "/observed_reasons/empty-overlay-remainders-despite-recorded-partition-disagreement",
+      "metric_id": "observed_reasons-empty-overlay-remainders-despite-recorded-partition-disagreement",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/summary.json"
+    },
+    {
+      "json_pointer": "/observed_reasons/nonempty-zero-coordinate-area-overlay-remainder",
+      "metric_id": "observed_reasons-nonempty-zero-coordinate-area-overlay-remainder",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/summary.json"
+    },
+    {
+      "json_pointer": "/observed_reasons/positive-coordinate-area-overlay-remainder",
+      "metric_id": "observed_reasons-positive-coordinate-area-overlay-remainder",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/summary.json"
+    },
+    {
+      "json_pointer": "/literal_coverage_observations/unknown-predicate-or-overlay-disagreement",
+      "metric_id": "literal_coverage_observations-unknown-predicate-or-overlay-disagreement",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/summary.json"
+    }
+  ],
+  "metrics": [
+    {
+      "evaluation_commit": "a3a6b3761ddfc422f15be6686f492fbf04ae63d5",
+      "id": "counts-complete-literal-reconstruction-diagnosis",
+      "input_sha256": "13cd9b18fae16f1ce0a2197fcb832ca6da595168bb58a23b1f85c8998590a6c7",
+      "unit": "records",
+      "value": 6281,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "a3a6b3761ddfc422f15be6686f492fbf04ae63d5",
+      "id": "observed_reasons-empty-overlay-remainders-despite-recorded-partition-disagreement",
+      "input_sha256": "13cd9b18fae16f1ce0a2197fcb832ca6da595168bb58a23b1f85c8998590a6c7",
+      "unit": "records",
+      "value": 115,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "a3a6b3761ddfc422f15be6686f492fbf04ae63d5",
+      "id": "observed_reasons-nonempty-zero-coordinate-area-overlay-remainder",
+      "input_sha256": "13cd9b18fae16f1ce0a2197fcb832ca6da595168bb58a23b1f85c8998590a6c7",
+      "unit": "records",
+      "value": 14,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "a3a6b3761ddfc422f15be6686f492fbf04ae63d5",
+      "id": "observed_reasons-positive-coordinate-area-overlay-remainder",
+      "input_sha256": "13cd9b18fae16f1ce0a2197fcb832ca6da595168bb58a23b1f85c8998590a6c7",
+      "unit": "records",
+      "value": 6152,
+      "vintage": "archived"
+    },
+    {
+      "evaluation_commit": "a3a6b3761ddfc422f15be6686f492fbf04ae63d5",
+      "id": "literal_coverage_observations-unknown-predicate-or-overlay-disagreement",
+      "input_sha256": "13cd9b18fae16f1ce0a2197fcb832ca6da595168bb58a23b1f85c8998590a6c7",
+      "unit": "records",
+      "value": 6281,
+      "vintage": "archived"
+    }
+  ],
+  "outputs": [
+    {
+      "bytes": 3515,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/README.md",
+      "sha256": "561fe68ee18edd179b82fae759da7c1f9bc82e798895be74183843212211740d"
+    },
+    {
+      "bytes": 14156,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/controls.py",
+      "sha256": "4d05413ba18bee9bdca3878863c5385d3f441943f69d6795ac75f44465b6b059"
+    },
+    {
+      "bytes": 11581,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/custody.py",
+      "sha256": "295446b2df4155ddef6b51b78a0453a2b1d809eea3e016a02ef7e20496929dda"
+    },
+    {
+      "bytes": 6728,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/numeric_kernel.py",
+      "sha256": "7c83ea2380a160c6892a668aa7372004dc4469d29e3e622bfa7f2336c7ee8d95"
+    },
+    {
+      "bytes": 11426,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/package.py",
+      "sha256": "119c95e95d26a9a48dc70b89be5c1a5baa2f8f5676068c996972706318771c50"
+    },
+    {
+      "bytes": 8276,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/producer.py",
+      "sha256": "31687d148d8b66b1f238de17f9c2e77210249c8a9506359a7b0bd9d745ec8ba6"
+    },
+    {
+      "bytes": 1907,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/progress.json",
+      "sha256": "95cab851653608a0fbad98e584fa2de5ba5064d0cdb26b42f49bd3839297acc5"
+    },
+    {
+      "bytes": 948036,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-one/components-000.json.gz",
+      "sha256": "70a8aaddcdff76991aaad4f71083f3b91d75fea3f405dbd005cf050515fdff7b",
+      "uncompressed_bytes": 8383687,
+      "uncompressed_sha256": "d44867bb4df702e4ea31c381b8a0ee82179ff8918600e4d5d7bc6d9a628d6efa"
+    },
+    {
+      "bytes": 953523,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-one/components-001.json.gz",
+      "sha256": "fc3e76c92a3756a4db903982cb9002dbaefc5cc133f36e4453acd6805416b4c0",
+      "uncompressed_bytes": 8384865,
+      "uncompressed_sha256": "3aa89465e19c33413678dced5557b8e37eba4fa551597af501678d3c86aa17cc"
+    },
+    {
+      "bytes": 948498,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-one/components-002.json.gz",
+      "sha256": "4e5158a03ed087da09342db4c90cb6fba0a26d25d41f9ca75004849a2babd546",
+      "uncompressed_bytes": 8382461,
+      "uncompressed_sha256": "3b0dd3bfb9a0bce5cc24ee3a6b20609fffe1f481e1adaefe59cf92faa0d10092"
+    },
+    {
+      "bytes": 948989,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-one/components-003.json.gz",
+      "sha256": "82bc9216c174a96bd4907cd53e8a41a4e9d93d8e2ed2fc41e0b4b96549994e6c",
+      "uncompressed_bytes": 8386739,
+      "uncompressed_sha256": "f99381136987ac0d2eb8b9a6873e35522250c82fd4d32790aff3c9bc5e3de9dd"
+    },
+    {
+      "bytes": 948553,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-one/components-004.json.gz",
+      "sha256": "e7d2736ac8bc522f5c0379a2a19259e9551af908e3f3b9ab34b681a509814e98",
+      "uncompressed_bytes": 8381806,
+      "uncompressed_sha256": "268a1ff514796e807f07989b0720ab7435c1ec78a2096d03535ed4818773311f"
+    },
+    {
+      "bytes": 181960,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-one/components-005.json.gz",
+      "sha256": "e7675de1b326bd44df94901b8330593ff56e1161a342d4c3ba89d16df4da44f7",
+      "uncompressed_bytes": 1575603,
+      "uncompressed_sha256": "c94b456d0135aa77f331d4cff9c9f3cc7eea3e9edda4242f2b55b992fd9baaa8"
+    },
+    {
+      "bytes": 859754,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-one/families-000.json.gz",
+      "sha256": "9af80e567c02dba08fedb7aca191711179efef1f4d22ade65082d88ffb23633a",
+      "uncompressed_bytes": 4757836,
+      "uncompressed_sha256": "1126828532b64d6e0d1de3a64cac8eb56fb33205a8747fc233432c0f46a3e662"
+    },
+    {
+      "bytes": 1551176,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-one/objects/objects-000.json.gz",
+      "sha256": "b49e841dee30e9d935644124b6c38e4fae50370fb27fe0e3f82b82b93238ac40",
+      "uncompressed_bytes": 5348180,
+      "uncompressed_sha256": "d8bf19cf9115556535404d70e4313ab5ffc54003197a756c2fab00a132fc8877"
+    },
+    {
+      "bytes": 1935223,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-one/objects.json",
+      "sha256": "aaec231fb8116db673be599fffdb2c6e5a3abd9806a1f48fc676b4e334523d3c"
+    },
+    {
+      "bytes": 1698837,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-one/report.json",
+      "sha256": "6c1b1f26af1d979d050f13634882ffe82fde69d498a9b032afc2dcdb975ab682"
+    },
+    {
+      "bytes": 948036,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-two/components-000.json.gz",
+      "sha256": "70a8aaddcdff76991aaad4f71083f3b91d75fea3f405dbd005cf050515fdff7b",
+      "uncompressed_bytes": 8383687,
+      "uncompressed_sha256": "d44867bb4df702e4ea31c381b8a0ee82179ff8918600e4d5d7bc6d9a628d6efa"
+    },
+    {
+      "bytes": 953523,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-two/components-001.json.gz",
+      "sha256": "fc3e76c92a3756a4db903982cb9002dbaefc5cc133f36e4453acd6805416b4c0",
+      "uncompressed_bytes": 8384865,
+      "uncompressed_sha256": "3aa89465e19c33413678dced5557b8e37eba4fa551597af501678d3c86aa17cc"
+    },
+    {
+      "bytes": 948498,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-two/components-002.json.gz",
+      "sha256": "4e5158a03ed087da09342db4c90cb6fba0a26d25d41f9ca75004849a2babd546",
+      "uncompressed_bytes": 8382461,
+      "uncompressed_sha256": "3b0dd3bfb9a0bce5cc24ee3a6b20609fffe1f481e1adaefe59cf92faa0d10092"
+    },
+    {
+      "bytes": 948989,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-two/components-003.json.gz",
+      "sha256": "82bc9216c174a96bd4907cd53e8a41a4e9d93d8e2ed2fc41e0b4b96549994e6c",
+      "uncompressed_bytes": 8386739,
+      "uncompressed_sha256": "f99381136987ac0d2eb8b9a6873e35522250c82fd4d32790aff3c9bc5e3de9dd"
+    },
+    {
+      "bytes": 948553,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-two/components-004.json.gz",
+      "sha256": "e7d2736ac8bc522f5c0379a2a19259e9551af908e3f3b9ab34b681a509814e98",
+      "uncompressed_bytes": 8381806,
+      "uncompressed_sha256": "268a1ff514796e807f07989b0720ab7435c1ec78a2096d03535ed4818773311f"
+    },
+    {
+      "bytes": 181960,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-two/components-005.json.gz",
+      "sha256": "e7675de1b326bd44df94901b8330593ff56e1161a342d4c3ba89d16df4da44f7",
+      "uncompressed_bytes": 1575603,
+      "uncompressed_sha256": "c94b456d0135aa77f331d4cff9c9f3cc7eea3e9edda4242f2b55b992fd9baaa8"
+    },
+    {
+      "bytes": 859754,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-two/families-000.json.gz",
+      "sha256": "9af80e567c02dba08fedb7aca191711179efef1f4d22ade65082d88ffb23633a",
+      "uncompressed_bytes": 4757836,
+      "uncompressed_sha256": "1126828532b64d6e0d1de3a64cac8eb56fb33205a8747fc233432c0f46a3e662"
+    },
+    {
+      "bytes": 1551176,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-two/objects/objects-000.json.gz",
+      "sha256": "b49e841dee30e9d935644124b6c38e4fae50370fb27fe0e3f82b82b93238ac40",
+      "uncompressed_bytes": 5348180,
+      "uncompressed_sha256": "d8bf19cf9115556535404d70e4313ab5ffc54003197a756c2fab00a132fc8877"
+    },
+    {
+      "bytes": 1935223,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-two/objects.json",
+      "sha256": "aaec231fb8116db673be599fffdb2c6e5a3abd9806a1f48fc676b4e334523d3c"
+    },
+    {
+      "bytes": 1698837,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/run-two/report.json",
+      "sha256": "6c1b1f26af1d979d050f13634882ffe82fde69d498a9b032afc2dcdb975ab682"
+    },
+    {
+      "bytes": 3767,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/complete-dimension-and-example-aggregation.json",
+      "sha256": "b4a3a73e5d8e2056d713484bfaec4b5403ece58c0a02257d9ae0822b8ca7fd31"
+    },
+    {
+      "bytes": 856980,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/complete-outcome-buckets.json",
+      "sha256": "220dd144cb6b9d8ac9bbaaafb7d2b8005cdd33740add5b9b5f51de612cc729f5"
+    },
+    {
+      "bytes": 1648,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/complete-reason-and-consensus-aggregation.json",
+      "sha256": "72dbf13fb3837e6b2a0301b9e31c44c6662c558db88686b3d248c32c1118e304"
+    },
+    {
+      "bytes": 2059,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/controls.json",
+      "sha256": "9ddc2568a48f74a3f6d590c05a4c3f409e1b7fcfd3753bf27eeec00774620a0e"
+    },
+    {
+      "bytes": 1326,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/digest-prose-correction.json",
+      "sha256": "4622be9edb0ace6c45cd92e9608d28dae75086709b858291268c24b9d515ea33"
+    },
+    {
+      "bytes": 1370,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/executions.json",
+      "sha256": "86368abff963b1b8b25cb1e790c5aeec45527a6c98fc16758311269da4cbb7b3"
+    },
+    {
+      "bytes": 368,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/failed-input-only-declared-algorithm.json",
+      "sha256": "838edbf2f27e0e43c1eb4adfbead5565c0d08599ebd7418bc8c62031a62f5aed"
+    },
+    {
+      "bytes": 1235,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/failed-input-only-declared-algorithm.log",
+      "sha256": "59b8c829743e55cad0d3e3c0f2cc91fdb59dcd4aea3d55bbb4ea87302adf34e8"
+    },
+    {
+      "bytes": 2676,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/full-readback-one.json",
+      "sha256": "90053f5ac5eefb626fccad638ce5f7eb5ff73e89280f8db7e89240468a28edf9"
+    },
+    {
+      "bytes": 6185,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/full-readback-two.json",
+      "sha256": "f8b5ebe41ee702ace574bbde1af545aefea08fe7b8c9a88f703486f89b7b83d7"
+    },
+    {
+      "bytes": 35961,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/input-only-preflight.json",
+      "sha256": "8f29af3ebbd2505ec89aba1942607ceb7b194965c7b10bbc833304e5fbe7d206"
+    },
+    {
+      "bytes": 2231,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/negative-control.json",
+      "sha256": "53c464715e8aa742f3f34d854060fb9225d834080d735160147fa75476d98757"
+    },
+    {
+      "bytes": 2878,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/positive-control.json",
+      "sha256": "d164731e20ee3d94c32d7c5383b6b86b993da0b3fea666765627bf4ecc6ac4a5"
+    },
+    {
+      "bytes": 1343,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/reproducibility.json",
+      "sha256": "e4e029152c1a3f6d66577e661cfa0cf8de99fe2fc6a77f1768f261f6b8cbd155"
+    },
+    {
+      "bytes": 946,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/run-one.log",
+      "sha256": "b9b28c5dc0341a43b2ee902489198084c17bf0c2f2d554c5ffdfef9acd7f0701"
+    },
+    {
+      "bytes": 946,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/run-two.log",
+      "sha256": "b9b28c5dc0341a43b2ee902489198084c17bf0c2f2d554c5ffdfef9acd7f0701"
+    },
+    {
+      "bytes": 429,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/summary.json",
+      "sha256": "1dea79ff85361f7b6b4dbefedd22f0d7eb96f7be0cdab1fd9ba9180d88555612"
+    },
+    {
+      "bytes": 10353,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verify.py",
+      "sha256": "c3dc7ff793dd84a4c093f1fcee1f53b9e7126974de503246e4ba11dde80551b5"
+    }
+  ],
+  "sources": [
+    {
+      "files": [
+        {
+          "bytes": 41964,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/input-index.json",
+          "sha256": "d5c79868705da0900253f2a56a2700b193bc0aff71589e33104eb1646a7cb2e3"
+        },
+        {
+          "bytes": 3520062,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/scope.json.gz",
+          "sha256": "64f4dd89bf4f3e2f4962a542d14ebf926f29ae72259bfeb169501270c5b4c1bf",
+          "uncompressed_bytes": 10199212,
+          "uncompressed_sha256": "edd2041bf46229f2782736066d247406b2d21e643afa27bf33f8bbe81467378a"
+        },
+        {
+          "bytes": 4375888,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/remaining-plan.json.gz",
+          "sha256": "be3c513eeb168901be0027620f5bc1869b2a9b5198cc420a72f42142ff964c00",
+          "uncompressed_bytes": 23508972,
+          "uncompressed_sha256": "c1fbd02007b403e064b5ac02e2eea4a06652c1ae56a78aef33cc7a375d25e990"
+        },
+        {
+          "bytes": 103877,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i000.bin",
+          "sha256": "3527014045c5aedc2b26be8bb5dff97e3e34097b7d4cb66a9b2fe3fcf33a6856"
+        },
+        {
+          "bytes": 1660397,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i001.gz",
+          "sha256": "26e8bef1c066f00ad84a03a73505dba1daaeb65315de9419a24aaf9a6d08f722",
+          "uncompressed_bytes": 8387874,
+          "uncompressed_sha256": "19e304908e9969dd3bf5f93cb0cdc06a9c97fca8ec913ef0267031326ae8273c"
+        },
+        {
+          "bytes": 1674139,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i002.gz",
+          "sha256": "7548a2b3ab10339e64ec6432afedda84e21502eb392ee94ace5b0e2f2e6e2de8",
+          "uncompressed_bytes": 8383077,
+          "uncompressed_sha256": "826986366fb93f251b085e0c79ed0c8632457821e78e99aaece999ce21be32c8"
+        },
+        {
+          "bytes": 1783037,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i003.gz",
+          "sha256": "c5eadb68c3c9c03abf5568e7455777b9bea9774e13b9767da476bb8247bbe765",
+          "uncompressed_bytes": 8388323,
+          "uncompressed_sha256": "1330276be56b6e0817775dfa5a207ea6af46617ddb76698dac4723eb687f6345"
+        },
+        {
+          "bytes": 1598911,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i004.gz",
+          "sha256": "71ca9168a7c26f6aeee948f18600bbe00c2eeb5515ec22e0d8e9143551b4f7f7",
+          "uncompressed_bytes": 8387115,
+          "uncompressed_sha256": "03a917626bbf21544931be0cde339ce4dd8fef62991a6c22f16b8233e9047fa1"
+        },
+        {
+          "bytes": 1694391,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i005.gz",
+          "sha256": "1fd21e659e1bf23deab5f8970e0a1124ac3f3cf654e758f4a85eb27fba49fff6",
+          "uncompressed_bytes": 8387404,
+          "uncompressed_sha256": "017dbcc00810cc8851e3bf215b5ce67c8571c4313c962e62a543890724d831aa"
+        },
+        {
+          "bytes": 1029511,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i006.gz",
+          "sha256": "4802ca960cf92d1546ae4348abe86e4b5588056c8f1581d11afcea68cb35b4e8",
+          "uncompressed_bytes": 5397624,
+          "uncompressed_sha256": "ef6b2774dfb96b0b72019baacd72361c8d552ebb0073fde1b38bf6f4116395ae"
+        },
+        {
+          "bytes": 73547,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i007.bin",
+          "sha256": "a5423b1e62b5a0793b83999d87d1f6d50916db482cf2ec74973f75555c2bda6c"
+        },
+        {
+          "bytes": 2080037,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i008.gz",
+          "sha256": "46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411",
+          "uncompressed_bytes": 8387182,
+          "uncompressed_sha256": "eac8b87294e31722939ff834289c00be512312ab83e81720d4fabd577cd5da36"
+        },
+        {
+          "bytes": 2081609,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i009.gz",
+          "sha256": "ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b",
+          "uncompressed_bytes": 8388214,
+          "uncompressed_sha256": "10d2e853604b368fb9f0dbeb29919bec472640c98b457019865ff02e266a883a"
+        },
+        {
+          "bytes": 2080126,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i010.gz",
+          "sha256": "001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d",
+          "uncompressed_bytes": 8388138,
+          "uncompressed_sha256": "318de208374f6418fa7733b380e78aa26e54e883758637d5c5196e19e87b99fb"
+        },
+        {
+          "bytes": 2081831,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i011.gz",
+          "sha256": "1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609",
+          "uncompressed_bytes": 8388063,
+          "uncompressed_sha256": "b02763e7ee4e514a6208432d5ec3d78713cdae5f15b19118a3ac8ba43184cf85"
+        },
+        {
+          "bytes": 2074475,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i012.gz",
+          "sha256": "541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014",
+          "uncompressed_bytes": 8387395,
+          "uncompressed_sha256": "0a895961defbcf80f8cc2e97cd7253830f2720a2fb51b6d4439c53ef0d1f80d9"
+        },
+        {
+          "bytes": 2080606,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i013.gz",
+          "sha256": "f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf",
+          "uncompressed_bytes": 8387970,
+          "uncompressed_sha256": "406730575957ec1115eb05973783814988733887fe64765d49ad22dcfdae6584"
+        },
+        {
+          "bytes": 2085907,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i014.gz",
+          "sha256": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187",
+          "uncompressed_bytes": 8387875,
+          "uncompressed_sha256": "82d775abb31da05bb6058c547ea47a4e8428338f5287b79072e778c50139a7e9"
+        },
+        {
+          "bytes": 2079265,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i015.gz",
+          "sha256": "654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca",
+          "uncompressed_bytes": 8387777,
+          "uncompressed_sha256": "827ec32b0cd1ff9d841d6f5201dac6e015ad080d6d5b32afc0bc664e73d890e2"
+        },
+        {
+          "bytes": 2085110,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i016.gz",
+          "sha256": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156",
+          "uncompressed_bytes": 8388464,
+          "uncompressed_sha256": "5863c2c80e7d4d3213531d757b7bd0d372cbb3fbcc74c52f1177ab9dbb8ac94d"
+        },
+        {
+          "bytes": 2079838,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i017.gz",
+          "sha256": "c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f",
+          "uncompressed_bytes": 8387897,
+          "uncompressed_sha256": "66957c60574f28108c2cf633f02017a99d8dcbf9e1187c2588487675123a6cdd"
+        },
+        {
+          "bytes": 1714760,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i018.gz",
+          "sha256": "e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a",
+          "uncompressed_bytes": 6909917,
+          "uncompressed_sha256": "6a432ffbe3d9a8d4412140438c960b0113f752cb70c2db20b76c7467e9575025"
+        },
+        {
+          "bytes": 65206,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i019.bin",
+          "sha256": "3d95a15d3797943290997c9a16fede48e6eb6e0941b0071a5fcd410375c49d46"
+        },
+        {
+          "bytes": 2335,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i020.gz",
+          "sha256": "21ad3c832ef294cae76d5e6603e61313fc2890a1a5653667caef8665374de460",
+          "uncompressed_bytes": 7011,
+          "uncompressed_sha256": "4b554e0194f7b3782bc2a8b1557832eb46fe5f2130fbb363429c18e43816512c"
+        },
+        {
+          "bytes": 198326,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i021.bin",
+          "sha256": "8180ea63d6c898940fbb2ea8b09c8604550c5883b74e9110f9bdee2d7a3a30d1"
+        },
+        {
+          "bytes": 807759,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i022.gz",
+          "sha256": "bbb8e8b5cc218ee1c7adb636157436bb1e3f62756f9395209f8d33b13bbc037e",
+          "uncompressed_bytes": 8385800,
+          "uncompressed_sha256": "1e024647c03dcbabd0a7be6b8170a3eb5751a2ca21d66b59553e81fd791ff2a4"
+        },
+        {
+          "bytes": 622335,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i023.gz",
+          "sha256": "ea282065029cee79d0fae765a97c2d4649fc3950f6ae793a38eef01dbe79ac84",
+          "uncompressed_bytes": 8387086,
+          "uncompressed_sha256": "8ae8f6c83d1189f98aad3afe9953faddd8e1bdff029e53d774afb1f9e0c7c578"
+        },
+        {
+          "bytes": 701824,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i024.gz",
+          "sha256": "a8e7ac50a63d2deb0a54823ad763648a7f4367c6361f2e194b9d5e22a228ca8b",
+          "uncompressed_bytes": 8387465,
+          "uncompressed_sha256": "c97634e8435e4694a8cc8c3e12f9cdd40ba95527313992a2e1e1d00aa30d4e95"
+        },
+        {
+          "bytes": 537186,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i025.gz",
+          "sha256": "f4822c85f2936ecabc1600378b7ad2fb5c80d338aa8364308587c989393413f8",
+          "uncompressed_bytes": 8386722,
+          "uncompressed_sha256": "b733c831aed57b763df18f5bdf3bd881cc2d5679de2654eac99d9c3f982677c7"
+        },
+        {
+          "bytes": 531463,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i026.gz",
+          "sha256": "63a8dfac8a89d179f9b9eeb6fb0a05a2efdcdefdb2f8c171302c70b2f0a988ca",
+          "uncompressed_bytes": 8386950,
+          "uncompressed_sha256": "d1e269e580baa9ddc54eb6897e746c7f3280f2f9bfbaab4a74c95877042fcbf9"
+        },
+        {
+          "bytes": 581391,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i027.gz",
+          "sha256": "6eb95830520ff95fe10ff2bb01b309583b9a7c1930b8cf459539bc2f3a3e19d3",
+          "uncompressed_bytes": 8385547,
+          "uncompressed_sha256": "fe4648b350c0298d6f1ed683ea8b5e44a18bb82cc04d280858368b2658fcc808"
+        },
+        {
+          "bytes": 503123,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i028.gz",
+          "sha256": "74caba13f93ca8e1d48b8371f663e88f25a6e208b7caea8674d6351954c0eed8",
+          "uncompressed_bytes": 8385414,
+          "uncompressed_sha256": "38c343fbbace749af82a6052b3a3e1fd3e63bb6c6c994adac6388dfee0827725"
+        },
+        {
+          "bytes": 510898,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i029.gz",
+          "sha256": "f6ba2dd33b9fe09186a8eb723a9ea6919de5149aa40f7fdf4556ad7dfdb3b678",
+          "uncompressed_bytes": 8386076,
+          "uncompressed_sha256": "dad9693450ed706aad1d94753bc70fc9bd637b0f386cfbbd6eb3e94c154921d2"
+        },
+        {
+          "bytes": 525814,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i030.gz",
+          "sha256": "9b98e8e9898eab0c1ecd322b790796dc48f8c24e0a1a3c6ebaa4de3c72d52a3c",
+          "uncompressed_bytes": 8387843,
+          "uncompressed_sha256": "8bb3105b82b4af6709978de8dc1d252246007b815c246aa4023dfc7a71f9a8e7"
+        },
+        {
+          "bytes": 519189,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i031.gz",
+          "sha256": "211aaae38a6267b16938c39e0e7017373d02deb2a97f65d336d4556e0da9cf15",
+          "uncompressed_bytes": 8386220,
+          "uncompressed_sha256": "1ad581a7311188c68e0067c3955acfa0cfca79212d9e797749617595f1748ac1"
+        },
+        {
+          "bytes": 469617,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i032.gz",
+          "sha256": "d2b4968448bc53a39d4a70846413a380cddbbd940aa7d5f609fd08db0c85aad5",
+          "uncompressed_bytes": 8386609,
+          "uncompressed_sha256": "332c4fe3e024df6e3fb80721087c35908105fa560fb1be41007ad4dd6935f0d8"
+        },
+        {
+          "bytes": 516500,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i033.gz",
+          "sha256": "824120286ffe28b567e8721f372f6b0e1e22b194a3aadf81d7fefd54d8b65206",
+          "uncompressed_bytes": 8387570,
+          "uncompressed_sha256": "5ff05ca43677c9cc6b02ade119cb3cb1b95a3723e470fec7a1abef771d8e958a"
+        },
+        {
+          "bytes": 495187,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i034.gz",
+          "sha256": "5c7ea91661ba93e7dd7a1f936a28c11392aebbba9b1260a74ca4ed9778778156",
+          "uncompressed_bytes": 8387632,
+          "uncompressed_sha256": "5819331be4ee08183ef4181b9d27bfe4d0727b6548d3bf739157199ebfe2012b"
+        },
+        {
+          "bytes": 506243,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i035.gz",
+          "sha256": "f4b9f1739fd1f0d0b8a920e906fd67fbac30740ab99ede13500b668f8f5da856",
+          "uncompressed_bytes": 8385303,
+          "uncompressed_sha256": "b7993cc82f7edf395b6ce521e723d773de115b0f7f88666b32c5bc5590745219"
+        },
+        {
+          "bytes": 432250,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i036.gz",
+          "sha256": "014f80c167eea494a4a231eebe083c3ec9e753ddbfa1b042ae709ef7705ac9de",
+          "uncompressed_bytes": 8387816,
+          "uncompressed_sha256": "772ab212e41ef49a2af8f14ba6469409857897031b0e281760b4346108eb7740"
+        },
+        {
+          "bytes": 509802,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i037.gz",
+          "sha256": "b9cfcc9ec1d085f8cac1793ce4fb440000a18cedcede761b9553fddc50c9ffe3",
+          "uncompressed_bytes": 8385087,
+          "uncompressed_sha256": "14d8635fc6bfdd1f964043afeb02784f1b4382ea1d434d32305b2b3cf88e5d05"
+        },
+        {
+          "bytes": 557567,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i038.gz",
+          "sha256": "b8e6a6862fd5e5c02b34915fcc1064e64399da64ffdedcfb252107ca8548baa8",
+          "uncompressed_bytes": 8385738,
+          "uncompressed_sha256": "30cda9956b9446228f4a6d87e9c7afa06bb88a7f0108b1d71e432abcd86cd4c4"
+        },
+        {
+          "bytes": 543535,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i039.gz",
+          "sha256": "b5c7a19576482e77ffd1c082bc3d52b9dcc5668deec68fe987415816ee0b950f",
+          "uncompressed_bytes": 8388553,
+          "uncompressed_sha256": "0e22507c59e279f7e9ed037b2e8e5b711b0af469c0d0d15c48c5e13fdc395c4b"
+        },
+        {
+          "bytes": 526149,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i040.gz",
+          "sha256": "4058388a6d7429ab3d330fa34f0d9e924ded061f56dabe7e87f41e8d4bc94356",
+          "uncompressed_bytes": 8388564,
+          "uncompressed_sha256": "9e5803d65e680359b1f3476601f5d904cf90bc4d9125e8808653f0bcd8cf3704"
+        },
+        {
+          "bytes": 525157,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i041.gz",
+          "sha256": "2cd4dcca30dd2f4a9148c6d1e54d5fbfdf2d709a7541124975858f8c92ecff83",
+          "uncompressed_bytes": 8385933,
+          "uncompressed_sha256": "117fd54444d75238528f71eeaae397be96f4b8ae94f490b5f826ced59cb86d99"
+        },
+        {
+          "bytes": 529622,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i042.gz",
+          "sha256": "1956a85720df0e58056f6097c511411d6ad2ce74efc16fe4fbae6739ba460a17",
+          "uncompressed_bytes": 8387662,
+          "uncompressed_sha256": "5f41836cc93e7ee3c4e064256be264e223a9110bee4d9c4ad4af27fe3822abcf"
+        },
+        {
+          "bytes": 394593,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i043.gz",
+          "sha256": "499784804e09b2077a6b32ef92406689a8a35565e5036c9814c0653f4fd6870c",
+          "uncompressed_bytes": 6263643,
+          "uncompressed_sha256": "990e2df53ea898a7126810484b5eb3bd5fb4af6291a7349592b5d008c405cfd1"
+        },
+        {
+          "bytes": 1690299,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/archive-decoded-000.bin.gz",
+          "sha256": "624e53042d0ffa5fd4c2ed22b9d2572623afe0df55cd7bbc47f52167bc99ecea",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "6e9e19a9d130ba509f95b07961a93fd399a681366c1f8d4b2e350a8e160e7296"
+        },
+        {
+          "bytes": 1507066,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/archive-decoded-001.bin.gz",
+          "sha256": "30756b7f06e8241107a716b0cb381a4ad699405c942104a91743e93a40322d3a",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "e86bfe9122fa2cb8008e2b8853d434a9481cc4268a32d6b331b57720e0cf238f"
+        },
+        {
+          "bytes": 1519591,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/archive-decoded-002.bin.gz",
+          "sha256": "3609220745137dcd5796c6e5aa12d889bcbcb5b64995223d55c1105a1a6832e3",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "5bd61b397c31f29b30bc43c0e8f7fc97c54121acf6fb2c40fddb8ff9cd6cf0d0"
+        },
+        {
+          "bytes": 1624585,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/archive-decoded-003.bin.gz",
+          "sha256": "77948b77fbbd3a9aa7049e1733ef5e73fbc36640bd29f88a954fb29a3126b6c3",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "d5f7cd46c7956bd10a98395683252596d4a90f7e3e786ffdad9d1be1d9159fa8"
+        },
+        {
+          "bytes": 1902387,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/archive-decoded-004.bin.gz",
+          "sha256": "71cecd955c2c00b499f26a2bb0796fcd7cf14c82b757e1100b6344f48af40b21",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "338b4f6ea7852ba64cfe180a284cc4768f310c4995400bb04b58e0c0be0d6f4b"
+        },
+        {
+          "bytes": 1944865,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/archive-decoded-005.bin.gz",
+          "sha256": "b7aaec6b81bc16ba40b1e3b1598315b9ffb8b64e4f472a9f1dad703fa3019de7",
+          "uncompressed_bytes": 8388608,
+          "uncompressed_sha256": "2fe7bd23248f4aba6166293ba61609f190eac2868dd207bb250a83a633fcfbb5"
+        },
+        {
+          "bytes": 582213,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/archive-decoded-006.bin.gz",
+          "sha256": "7c875dd7bab0354e5c19108c9be97f6ec917eed21948e4ae3a7ac0788b47e86e",
+          "uncompressed_bytes": 6340932,
+          "uncompressed_sha256": "0b7123ba08ca824ee9ccea6991f301f4808125847dfd25634c576c2e9f67b581"
+        },
+        {
+          "bytes": 8388608,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/archive-encoded-000.bin",
+          "sha256": "60f70e5a3f56431960e3b848daf92602edbdd067a4f164c76f81a5fac3949a01"
+        },
+        {
+          "bytes": 2376531,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/archive-encoded-001.bin",
+          "sha256": "42c8be9f70bf0f9d7337a384cd8ba01d2429d01708f73865a3a2ba9c111e28bf"
+        },
+        {
+          "bytes": 6091596,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i045.bin",
+          "sha256": "266c4f0f6e91381a26bfa6868d3c0df22b30140fa7f8551977be10b423295831"
+        },
+        {
+          "bytes": 7440,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i046.bin",
+          "sha256": "6a6a5258328aa1153d567d9a98b90339421700d491f36fbdca216d3e0cbc2726"
+        },
+        {
+          "bytes": 36266,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i047.bin",
+          "sha256": "ac18022fa1c881bdbedc590f150a501ad23d52ba86cb47c5a005643012f1ad1a"
+        },
+        {
+          "bytes": 7090,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i048.bin",
+          "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd"
+        },
+        {
+          "bytes": 4849,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/i049.bin",
+          "sha256": "287a7ae13787b9e9fb97051afb977c8ea054ca1a6fed389c6672d6455d24bf7e"
+        },
+        {
+          "bytes": 661416,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/attribution-00.bin",
+          "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+        },
+        {
+          "bytes": 4316,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/attribution-01.bin",
+          "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+        },
+        {
+          "bytes": 806110,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/attribution-02.bin",
+          "sha256": "7d8a3baf61f32e6e4398f24bec0d15bce32eafcd4309655edc2b12a2c33256bd"
+        },
+        {
+          "bytes": 16836,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/attribution-03.bin",
+          "sha256": "b820065d55515e0de1e35f74e7670a7b270b0d0f8450497fdc9cd921dd20e65a"
+        },
+        {
+          "bytes": 8469,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/inputs/attribution-04.bin",
+          "sha256": "88191c8fb904e8eea4828e9589af3f5ac290dd8c312f95047b4257e6ca54acab"
+        },
+        {
+          "bytes": 31499,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/run-one/report.json",
+          "sha256": "13cd9b18fae16f1ce0a2197fcb832ca6da595168bb58a23b1f85c8998590a6c7"
+        },
+        {
+          "bytes": 2082170,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/diagnostic-unknowns.json.gz",
+          "sha256": "c798574769811cec2075e28885427c7267c5bcf26b27f559e8f976759ceba614",
+          "uncompressed_bytes": 11354152,
+          "uncompressed_sha256": "5aadc937ada246a7e5b06254d255a7c6a07a0fc6ec4bcf25e5d4aea334640d89"
+        },
+        {
+          "bytes": 4478436,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/run-one/objects.json",
+          "sha256": "2bb9d3462a1be8146255aac7798f6370754a4fde07cd56dfd2f9cfcb8ee57705"
+        },
+        {
+          "bytes": 2754031,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/run-one/objects/objects-000.json.gz",
+          "sha256": "3d1dbeb99cbd4cf58dd6f01828ecc997f2dd8a280fae909f7273f69286ad617b",
+          "uncompressed_bytes": 8388564,
+          "uncompressed_sha256": "0b5b1a17d21e09011d5ee7d66355db39668f81bec798e0db306187c3f38dbca3"
+        },
+        {
+          "bytes": 2637726,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/run-one/objects/objects-001.json.gz",
+          "sha256": "075cdacce220a69f7dc47ddb3fad52ea54c824b65b872bb45ed1087ef073fc83",
+          "uncompressed_bytes": 8000650,
+          "uncompressed_sha256": "14513fef6f548f1d3219a44c70dbdfd8dd0c69b91f8d718d3f9bab74892caed2"
+        },
+        {
+          "bytes": 2753872,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/run-one/objects/objects-002.json.gz",
+          "sha256": "c6173d53af56289697abe97a1e6df721f46ceb0dea190136fe0f37610b2be04e",
+          "uncompressed_bytes": 8388498,
+          "uncompressed_sha256": "64b6283873a9b70493bfeae28c17ba8bd96e429863ed2c2df0c1a5769c1c9c01"
+        },
+        {
+          "bytes": 2716525,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/run-one/objects/objects-003.json.gz",
+          "sha256": "932d6e3e74709b6cb0effec5618c2dbba996cd9ae628be944289d6f6437d7095",
+          "uncompressed_bytes": 8388471,
+          "uncompressed_sha256": "cf803ad8bdad9e4a5ffe419017745aaeb30da307e7fe50e170915b04bd342caa"
+        },
+        {
+          "bytes": 1262930,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/run-one/objects/objects-004.json.gz",
+          "sha256": "27ca8b1723392cd012579dddecf832c64091bfdb7b49e8f20ac0421aca1814bf",
+          "uncompressed_bytes": 3900402,
+          "uncompressed_sha256": "85232b07a258ce40c86e77e446eaa98d23ce401feb6b43c204f201a0a04d8275"
+        },
+        {
+          "bytes": 903234,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/run-one/families-000.json.gz",
+          "sha256": "4b984d32bba358b34b92d672281ad3e9695d368e9be991b6e731126c13386c10",
+          "uncompressed_bytes": 8386031,
+          "uncompressed_sha256": "c149ba77a58f3c482446a7da22c60fb346aa50321ffc345ccf2d7f4876dff3b3"
+        },
+        {
+          "bytes": 819384,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/run-one/families-001.json.gz",
+          "sha256": "fa0128ba2db6038570678b2e55015096829ef35140281de1ff3428cf330e0776",
+          "uncompressed_bytes": 8387306,
+          "uncompressed_sha256": "9233d8031371f1c539afb929d915fc296f70ff6159505aac4bc796b36a18b020"
+        },
+        {
+          "bytes": 498013,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/run-one/families-002.json.gz",
+          "sha256": "db8300dfd947e4b035905a5eec25e5ffc5ca62e5f5d045e7907b4f62b2577432",
+          "uncompressed_bytes": 4606244,
+          "uncompressed_sha256": "f06ec7e5feb89ecf8112380986fb2e48e47d098b1fd209eb991479c7b15fbccf"
+        },
+        {
+          "bytes": 894157,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/run-one/components-000.json.gz",
+          "sha256": "ad806f7bbd353863c207437983bf12cb721c0b7175b0a556760095780f29935e",
+          "uncompressed_bytes": 8387989,
+          "uncompressed_sha256": "214c7d7ead3d151e74f5b9d37439585797f694604492d696d94b02c8872126ea"
+        },
+        {
+          "bytes": 1085719,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/run-one/components-001.json.gz",
+          "sha256": "95279b7351a08f850e4c7b13f93b9c38366c2985f5e1a54b98b0e3ed803537ab",
+          "uncompressed_bytes": 8387689,
+          "uncompressed_sha256": "6c27ade0455d7abe1bbe2db8ea70204bb8843d47db65565db4776ecd30f0793b"
+        },
+        {
+          "bytes": 1029583,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/run-one/components-002.json.gz",
+          "sha256": "22841be13b08d90dc9e1a5164b49b406fd11c780c664fe288ba90d18cd6032a8",
+          "uncompressed_bytes": 8386292,
+          "uncompressed_sha256": "2236825facd723f8d0916539f9f72e3327a2d9ff5d90c19117f0bf55ee180e21"
+        },
+        {
+          "bytes": 1068964,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/run-one/components-003.json.gz",
+          "sha256": "832cc146115eb8ef95a7b5711e262744e80afd21fd979c1e358e562c58abf228",
+          "uncompressed_bytes": 8387633,
+          "uncompressed_sha256": "7d6b7992626d480b3992f52ba2a94548494eb96fd432def00c57ba189a13efd4"
+        },
+        {
+          "bytes": 1098792,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/run-one/components-004.json.gz",
+          "sha256": "dd7506febf614319824298d9b5b44c736987036c08b389a019f38a26cdb048c9",
+          "uncompressed_bytes": 8386702,
+          "uncompressed_sha256": "a6f786e816d4e7acd63a9c29eb3e9141a81abb7d76743ec0ab6e1fb64a0e3e46"
+        },
+        {
+          "bytes": 508031,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/retired-member-comparison-1255-20261006/run-one/components-005.json.gz",
+          "sha256": "83896d86fc0b5f5c192bca26813e3f6a96a52ac4e00178565c4ba341b5c6b44c",
+          "uncompressed_bytes": 4109611,
+          "uncompressed_sha256": "473693ddc5cf81f209e1676941ce63057c2ed8ff073e02905111ac25ea199140"
+        }
+      ],
+      "id": "complete-frozen-predecessor-input-custody",
+      "license": {
+        "status": "redistributable",
+        "terms": "Previously retained repository and derivative bytes; complete original citation/use terms retained. Underlying government Direct Permission remains unverified, not a new permission claim."
+      },
+      "retention": "retained",
+      "retrieved_at": "2026-10-07T02:16:08.755097+00:00",
+      "role": "Complete original component/source/member/context bytes and accepted full diagnostic pointsets, including exact whole archive encoded/decoded fragmentation and original attribution.",
+      "temporal_status": "reference",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1255",
+      "verification": "unverified",
+      "vintage": "Frozen actual ec4783 predecessor and original per-alias immutable vintages; identical whole bytes independently authenticated at declared PR baseline."
+    }
+  ],
+  "stages": {
+    "geographic_approval": "not-requested",
+    "implementation": "implemented",
+    "research": "partial"
+  },
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "summaries": [
+    {
+      "metric_id": "counts-complete-literal-reconstruction-diagnosis",
+      "unit": "records",
+      "value": 6281
+    },
+    {
+      "metric_id": "observed_reasons-empty-overlay-remainders-despite-recorded-partition-disagreement",
+      "unit": "records",
+      "value": 115
+    },
+    {
+      "metric_id": "observed_reasons-nonempty-zero-coordinate-area-overlay-remainder",
+      "unit": "records",
+      "value": 14
+    },
+    {
+      "metric_id": "observed_reasons-positive-coordinate-area-overlay-remainder",
+      "unit": "records",
+      "value": 6152
+    },
+    {
+      "metric_id": "literal_coverage_observations-unknown-predicate-or-overlay-disagreement",
+      "unit": "records",
+      "value": 6281
+    }
+  ],
+  "validation": [
+    {
+      "evidence_path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/positive-control.json",
+      "kind": "positive-control",
+      "method_id": "complete-partition-pointset-diagnosis-v1",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/negative-control.json",
+      "kind": "negative-control",
+      "method_id": "complete-partition-pointset-diagnosis-v1",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/reproducibility.json",
+      "kind": "reproducibility",
+      "method_id": "complete-partition-pointset-diagnosis-v1",
+      "outcome": "passed"
+    }
+  ],
+  "version": 1,
+  "worker_id": "01a112b0-39fb-7f02-a3c7-d21d0916009f"
+}
