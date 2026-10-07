@@ -1,0 +1,37 @@
+{
+  "method_id": "identity-integrity-negative-controls",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "controls": [
+    {
+      "expected": "reject",
+      "id": "omitted-component",
+      "outcome": "passed"
+    },
+    {
+      "expected": "reject",
+      "id": "duplicate-component",
+      "outcome": "passed"
+    },
+    {
+      "expected": "reject",
+      "id": "foreign-subject",
+      "outcome": "passed"
+    },
+    {
+      "expected": "reject",
+      "id": "source-body-hash",
+      "outcome": "passed"
+    },
+    {
+      "expected": "reject",
+      "id": "geometry-binding",
+      "outcome": "passed"
+    },
+    {
+      "expected": "reject",
+      "id": "omitted-contact",
+      "outcome": "passed"
+    }
+  ]
+}

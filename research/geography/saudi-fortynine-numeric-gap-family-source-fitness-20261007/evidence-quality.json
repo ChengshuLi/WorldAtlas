@@ -1,0 +1,2285 @@
+{
+  "version": 1,
+  "issue": 1336,
+  "lane": "geography",
+  "worker_id": "01a11550-a19b-7330-955c-e56e90985bf3",
+  "subject_ids": [
+    "gb:SAU:ADM2:3984122B26220942918379",
+    "gb:SAU:ADM2:3984122B30508649206602",
+    "gb:SAU:ADM2:3984122B40060340495100",
+    "gb:SAU:ADM2:3984122B4619800555153",
+    "gb:SAU:ADM2:3984122B61840424602376",
+    "gb:SAU:ADM2:3984122B84471186351671"
+  ],
+  "subject_ids_sha256": "32b9e3d0b0012bf0abee704afe211e9277df4f1ee4f6f0d9d4daa3110ea0f2ea",
+  "baseline": {
+    "commit": "e3765802ba8a683c706aff8e3440ac21bcddcf4e",
+    "files": [
+      {
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r1/report.json",
+        "bytes": 178556,
+        "sha256": "e47379a74c053b57781fec04aaedc702ecba24adb773b42bb8c75d142326647a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/scope.json.gz",
+        "bytes": 8610767,
+        "sha256": "ada2db15a78524cd28c7a5f924df7bbe0fe616cdead91c429dd2c04384a156e9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/input-config.json",
+        "bytes": 90091,
+        "sha256": "7623fa8a61b72c33a1560f0ab612e70c463e8c25beef930043c985fd6657f173",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-000.bin.gz",
+        "bytes": 1056877,
+        "sha256": "e1cac75959bf1f3125b911757d11061901a277525b58de588b96c384a56af68b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-001.bin.gz",
+        "bytes": 1055138,
+        "sha256": "039c1c64d81c73a01a57cc9549d84b085b7d5f943eb0c93f888d5868e23a0a2e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-002.bin.gz",
+        "bytes": 1056628,
+        "sha256": "c51904bce52448cd5cb50e5577178b94ceb2bbdace6b32bc6ba828bad64dc8bd",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-003.bin.gz",
+        "bytes": 1057266,
+        "sha256": "c1f4128e05d2147936bc76d773110572fa4d85f112acf9fa6023fc1e8af948ee",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-004.bin.gz",
+        "bytes": 1056615,
+        "sha256": "f3922059b0406e5f925f4ecc5c71703873afa48e2e888992d96acdb5620ef600",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-005.bin.gz",
+        "bytes": 1055630,
+        "sha256": "fc45ee3c6e2c9aa6671e9e31453673227de9d36298ca44962795302c00ef58e2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-006.bin.gz",
+        "bytes": 1056046,
+        "sha256": "c5521f8a382f45e6b7febdd7616d407cbe1a41ad1bcd685fbe59dd49cc91f2ee",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-007.bin.gz",
+        "bytes": 1056202,
+        "sha256": "5f4240fb226c6bd06e42a72000c3d4e89525e3cf5f1e4ae48f5d90d03834b297",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-008.bin.gz",
+        "bytes": 1056508,
+        "sha256": "efcf3436ed85a990a4ac4716caf967e2480c1b5eaa2e3047ffc412d9341273eb",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-009.bin.gz",
+        "bytes": 1055685,
+        "sha256": "6b91eea504ecf337a7b4c2d727a42ebf1fc153c4b4340708458003e4563b79ee",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-010.bin.gz",
+        "bytes": 1054508,
+        "sha256": "9ff730a4f16de640645ae3d209944319765e1a6f4357c4458d0e30e8fc343abc",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-011.bin.gz",
+        "bytes": 1056946,
+        "sha256": "d9fcf0e7c5943265880ffa230f79442d926db124394d1967ed6239c972881c96",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-012.bin.gz",
+        "bytes": 1056866,
+        "sha256": "0cbfd374a2f1fde800ee8a14ad81aec01f55e5ab46d3de4f9f82d92d233533c3",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-013.bin.gz",
+        "bytes": 1060324,
+        "sha256": "42081c1b1bb00fb8a97f7d238a8c17bd9ac421d6b4e7507c56629ed0fe2e5682",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-014.bin.gz",
+        "bytes": 1055098,
+        "sha256": "2654f5c49d285c57abeed978b1d363aecd8374943773d97a9687baefd42228a6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-015.bin.gz",
+        "bytes": 1056340,
+        "sha256": "59f3b744d15828d9dd5dbad1ff0797763687a7dc3c7203b14b47959a266905cb",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-016.bin.gz",
+        "bytes": 1056102,
+        "sha256": "fcf08ffe589c2cbd4543fa8d2525ee70d44b4aa3d3a3811f40f71c1e1b60420b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-017.bin.gz",
+        "bytes": 1057188,
+        "sha256": "6c1ae1f9b64caf6d58534ce0258a6a637f35f25d403db30af86e8e4775d0932c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-018.bin.gz",
+        "bytes": 1058049,
+        "sha256": "bed843d713bfed48e38491c1196de6e66e4aae47db88d1b3d831dc222949e23e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-019.bin.gz",
+        "bytes": 1056760,
+        "sha256": "fe00f2750343c55b0b21a8ae21934321252dff58235a0b4e5fbdd3fd8235c999",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-020.bin.gz",
+        "bytes": 1054653,
+        "sha256": "f3a284602b62d1fb63b2f18dc478afe366be58837a8c5a30eb87bae939ed8e10",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-021.bin.gz",
+        "bytes": 1057471,
+        "sha256": "9aed3f2e504a3a5799b39a8a92661d6496b85b853ba2adb4fb84f2e92bef8753",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-022.bin.gz",
+        "bytes": 1057293,
+        "sha256": "e6f8ef3380c42a60b97d5c81d69552129921b832597ed2e039ccaadbba56958d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-023.bin.gz",
+        "bytes": 1055293,
+        "sha256": "a09464e0b05b2137c8fcfa5f7441c379e47893ed154ae11b71a58153d85877be",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-024.bin.gz",
+        "bytes": 890162,
+        "sha256": "27c19fbd6531e866bd97ff88b52d21a2559ed761ffd9ed6235b680e02c45d01d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-000.bin.gz",
+        "bytes": 1046123,
+        "sha256": "60e770171089510b8f97ebd74a93e1c913953716a4281699e4ecca75aaefffd5",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-001.bin.gz",
+        "bytes": 1003990,
+        "sha256": "1b4c5b7a0d1328bfbee83c759934843aabedde9afc947a9e555eeb6aac276fca",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-002.bin.gz",
+        "bytes": 1001586,
+        "sha256": "9c50b25acf826a4c65291613cc965d7675a7c66aa672a8c0fe1f21feaf432239",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-003.bin.gz",
+        "bytes": 1063935,
+        "sha256": "8b7eedc7a4a9234f1917046167f97ad960d4a9c2941ce55dbac46a7eee422549",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-004.bin.gz",
+        "bytes": 987691,
+        "sha256": "fab9ac669c568073ab37748190396d3f0c06ac319317c4ff7a0aa31cee259ab0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-005.bin.gz",
+        "bytes": 1026831,
+        "sha256": "03f13761ce67af5a826a98468ef2dc77d2f4a5c4ab9f25b6e6a1e3bd396bf141",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-006.bin.gz",
+        "bytes": 1493537,
+        "sha256": "6bee149f0d7930d6d95d927c41b78f8a52678df4ebad9824e68b35b917e676dc",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-007.bin.gz",
+        "bytes": 962830,
+        "sha256": "4eb81385ba0d6b6d6a6b47e26a9504f9ae299f8d64dd9e0a82b3b48a4af65ad2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-008.bin.gz",
+        "bytes": 1043652,
+        "sha256": "897a5cb10967809bb32b541c82ff19c4fd0d8c0b64241d78ea963d09cb0bab62",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-009.bin.gz",
+        "bytes": 998433,
+        "sha256": "4621441988498fe2c05bfe6f036bf8dd9cfbc8472c5b8a65bf91d3a424f626da",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-010.bin.gz",
+        "bytes": 1039493,
+        "sha256": "8da6fcf9fd6a7f3215666ab9bae2e91f9b32e5e0bb923492137ea823af8265b7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-011.bin.gz",
+        "bytes": 1081053,
+        "sha256": "9e0d5879d5735d4507773cc66b7da371164c30de022c742969ba5d1e85e2c339",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-012.bin.gz",
+        "bytes": 965771,
+        "sha256": "483fb0b6c5b9a8e1b905bf2dc3aa0ca232dcede6f34ef357381770a603e52df0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-013.bin.gz",
+        "bytes": 247084,
+        "sha256": "006dd169089fc433251cc2f5939e7ae324744c00eca11066860aab578f07edac",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/report.json",
+        "bytes": 174829,
+        "sha256": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-physical-sources-20261006/COPYING.LESSERv3",
+        "bytes": 7816,
+        "sha256": "ea7d049c7705dc13afc202dd18e1827f3484f8212fd3fa7b82fc4a0c363432c9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-physical-sources-20261006/LICENSE.TXT",
+        "bytes": 1375,
+        "sha256": "dc53a4833bf9121360a5286917683f041439327353ffe0231206c6b746005b81",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-physical-sources-20261006/README.TXT",
+        "bytes": 15350,
+        "sha256": "8c83b0d9e861c3cf9390ccfcc28d57dd484b192e1767524e094c988ee9f84ac7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-physical-sources-20261006/catalogue.json",
+        "bytes": 1355,
+        "sha256": "4217ccadad0060ac4b1f150f94bba93af4204c567242cb30c324351cffb1c48a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/CITATION-AND-USE-geoBoundaries-original.txt",
+        "bytes": 4316,
+        "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+        "bytes": 403376,
+        "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/individual-source-attribution.json",
+        "bytes": 806110,
+        "sha256": "7d8a3baf61f32e6e4398f24bec0d15bce32eafcd4309655edc2b12a2c33256bd",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-SAU-ADM2-000.bin.gz",
+        "bytes": 407499,
+        "sha256": "4b6df9fca9398148271a451805f7a26af03d756ef5ceec7fba9ef581bdf8b8aa",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-000.geojson.gz",
+        "bytes": 1131547,
+        "sha256": "82021e76644a5a8b7e314df651802f8b0e7be7121df7f2cf7616ba0bb28ca66b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-001.geojson.gz",
+        "bytes": 945171,
+        "sha256": "1db68fd78b5c45971f2c49744d236fd06773d8af7acdeb4c3f110846a76c1e57",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-002.geojson.gz",
+        "bytes": 1030525,
+        "sha256": "27fd26511ad6c928bd9988cd69d4063f7ac3405676c09076a8c3868d483aeedc",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-003.geojson.gz",
+        "bytes": 1164442,
+        "sha256": "a85f18eae9a30ac8f8b0add7f75430ef7a33fb95c9b1ab3c96de371ff46b793e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-004.geojson.gz",
+        "bytes": 1126016,
+        "sha256": "9342f503fdac75a90223b0ffd607144bb78fa5d30423d4d1390a55ec35e7fbb6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-005.geojson.gz",
+        "bytes": 1137361,
+        "sha256": "3e5763f5742f5d4e6ae99642ab148e05cb7de69c4801704b473b6990a211605f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-006.geojson.gz",
+        "bytes": 1130906,
+        "sha256": "84ca5ca02c77ed04e8fbce3d64870972fc2c6fbb58f64037dd57e71278c7909e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-007.geojson.gz",
+        "bytes": 1120843,
+        "sha256": "ff497d1127d47e9df308d118e89a4c3e893a0ed4078da82aaab82326cc9919c7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-008.geojson.gz",
+        "bytes": 1161752,
+        "sha256": "20ecf84ad85b3fb74514e4633c5b0c0d94d59b20e0a4ef2829348fb1e9f75f77",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-009.geojson.gz",
+        "bytes": 1196442,
+        "sha256": "1a6ddb8db2116f6570bf695897f17aa592684280d93458248ce1ea5fa66ec78d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-010.geojson.gz",
+        "bytes": 1155467,
+        "sha256": "399e7af4f3bf2850745efcc9bea14371ffed187ac3f7983ad860eaf5ab3c284f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-011.geojson.gz",
+        "bytes": 1098101,
+        "sha256": "5228e4344b42adf8445f95d67f3eec5ff107a4632840cac86c10b31246d82fa5",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-012.geojson.gz",
+        "bytes": 1137180,
+        "sha256": "52a1f9104dd4045ba05e9a07769df81477f4e915afb636c508dec15dbe2b88d8",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-013.geojson.gz",
+        "bytes": 1214905,
+        "sha256": "518fe9bf7f869670af7529dd235391b7dfc4794500984e47173249d2da997dab",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-014.geojson.gz",
+        "bytes": 1298884,
+        "sha256": "936da384bb662363a6c45bfed043d009b7c3bdebe08f52c87f5ad22c77574ef1",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-015.geojson.gz",
+        "bytes": 1290795,
+        "sha256": "9df543092cc7ba3fd4a91e764b984972578fb1beed01e4f775024f723bf82ede",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-016.geojson.gz",
+        "bytes": 670977,
+        "sha256": "b72027a958379e676b8e4809f7ab445e697b574b104d3f9552c836798973decf",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/residues-000.geojson.gz",
+        "bytes": 12003,
+        "sha256": "2a4e37ba9e317332a5132681d1c178f0c0a271109f9967a30a8d068b4ce65a7d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin",
+        "bytes": 2080126,
+        "sha256": "001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin",
+        "bytes": 2081831,
+        "sha256": "1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+        "bytes": 2080037,
+        "sha256": "46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/4a150385c4b026e55cd2faf756f8a3fc43eddac2d8a58c118c9fbcf8419777df.bin",
+        "bytes": 771440,
+        "sha256": "4a150385c4b026e55cd2faf756f8a3fc43eddac2d8a58c118c9fbcf8419777df",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+        "bytes": 2074475,
+        "sha256": "541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca.bin",
+        "bytes": 2079265,
+        "sha256": "654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+        "bytes": 2085110,
+        "sha256": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+        "bytes": 2085907,
+        "sha256": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+        "bytes": 2079838,
+        "sha256": "c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin",
+        "bytes": 2081609,
+        "sha256": "ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin",
+        "bytes": 1714760,
+        "sha256": "e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin",
+        "bytes": 2080606,
+        "sha256": "f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/worldwide-successor-1215-20261006/run-one/components-delta.json.gz",
+        "bytes": 2335,
+        "sha256": "21ad3c832ef294cae76d5e6603e61313fc2890a1a5653667caef8665374de460",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/worldwide-successor-1215-20261006/run-one/contacts-delta.json.gz",
+        "bytes": 209,
+        "sha256": "a5e36d1d48ad69d7f010561c35fc0f969be7fb211e8a00b1b855848922901a4f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/worldwide-successor-1215-20261006/run-one/fragments-delta.json.gz",
+        "bytes": 2429,
+        "sha256": "4fa09fa384c6d53f106a88d44476f9b03d4955d4640a369f2d0272f82c9e72b2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/worldwide-successor-1215-20261006/run-one/report.json",
+        "bytes": 65206,
+        "sha256": "3d95a15d3797943290997c9a16fede48e6eb6e0941b0071a5fcd410375c49d46",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/worldwide-successor-1215-20261006/run-one/residues-delta.json.gz",
+        "bytes": 208,
+        "sha256": "7a53944b4cfbff2e824272381d62ceab720b924288cd06a07df30f33dd6a6a98",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-21.json",
+        "bytes": 6737781,
+        "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/worldwide_gap_successor.py",
+        "bytes": 30481,
+        "sha256": "13da93f262d5fef68685d0cdc172ca568b836843cca833028f218da28a9031e1",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "audited_world_index": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "delivered_routing_report": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265",
+      "delivered_routing_input_config": "7623fa8a61b72c33a1560f0ab612e70c463e8c25beef930043c985fd6657f173",
+      "delivered_numeric_report": "e47379a74c053b57781fec04aaedc702ecba24adb773b42bb8c75d142326647a",
+      "original_source_encoded_transport": "4b6df9fca9398148271a451805f7a26af03d756ef5ceec7fba9ef581bdf8b8aa",
+      "scoped_contact_part_0": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7"
+    },
+    "pin_files": {
+      "audited_world_index": "data/world-index.json",
+      "delivered_routing_report": "coordination/engineering/global-actionability-routing-20261007/results/report.json",
+      "delivered_routing_input_config": "coordination/engineering/global-actionability-routing-20261007/input-config.json",
+      "delivered_numeric_report": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r1/report.json",
+      "original_source_encoded_transport": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-SAU-ADM2-000.bin.gz",
+      "scoped_contact_part_0": "data/geography/part-21.json"
+    },
+    "subject_files": {
+      "gb:SAU:ADM2:3984122B26220942918379": "data/geography/part-21.json",
+      "gb:SAU:ADM2:3984122B30508649206602": "data/geography/part-21.json",
+      "gb:SAU:ADM2:3984122B40060340495100": "data/geography/part-21.json",
+      "gb:SAU:ADM2:3984122B4619800555153": "data/geography/part-21.json",
+      "gb:SAU:ADM2:3984122B61840424602376": "data/geography/part-21.json",
+      "gb:SAU:ADM2:3984122B84471186351671": "data/geography/part-21.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "geoboundaries-sau-adm2-consumed",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/SAU/ADM2/geoBoundaries-SAU-ADM2_simplified.geojson",
+      "role": "Exact consumed simplified Saudi ADM2 source; custody only",
+      "vintage": "Pinned source corpus; represented-year claim 2021",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Upstream derivative CC-BY 4.0 statement is retained; underlying source permissions and authority unresolved."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Use pinned payload or candidate raw source copy; verify encoded and decoded hashes.",
+      "limit": "No authority, effective date, simplification tolerance, accuracy, or land/water meaning established.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "geosa-official-map",
+      "url": "https://geosa.gov.sa/en/About/Pages/OfficialSaudiMap.aspx",
+      "role": "Official national-map authority pathway",
+      "vintage": "Inspected 2026-10-07; vector edition unavailable",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "No specific governorate vector release terms established."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Request complete approved governorate vector release and approval records from GEOSA.",
+      "limit": "Official map reference does not supply inspected complete ADM2 vector geometry, feature dates or accuracy.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "geosa-national-platform",
+      "url": "https://geosa.gov.sa/en/Pages/nationalgeospatialplatform.aspx",
+      "role": "National geospatial data discovery pathway",
+      "vintage": "Inspected 2026-10-07",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Exact governorate layer terms unknown."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Request the administrative-region layer and preserve the exact release response and terms.",
+      "limit": "Platform overview does not establish completeness, legal effect or precision.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "geosa-open-data",
+      "url": "https://www.geosa.gov.sa/en/Pages/Open_data.aspx",
+      "role": "Open-data access and request pathway",
+      "vintage": "Inspected 2026-10-07",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "General reuse statement is not the license for an exact dataset."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Request vector source, full roster and product-specific terms.",
+      "limit": "No machine-readable boundary delivery obtained.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "saudi-law-of-provinces",
+      "url": "https://laws.boe.gov.sa/Files/Download/?attId=3e39b246-d554-433e-95a0-adbb01243157",
+      "role": "Legal framework for province/governorate organization",
+      "vintage": "Official law issued 1412/08/27 H (1992-03-01)",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "No geometry reuse determination; cited as legal framework."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Obtain individual subsequent orders, current roster and effective dates.",
+      "limit": "No current complete geometry; ADM2 equivalence unproven.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "geoboundaries-api-docs",
+      "url": "https://www.geoboundaries.org/api.html",
+      "role": "Administrative-level/product metadata documentation",
+      "vintage": "Inspected 2026-10-07",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Not the underlying product license."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Consult exact release metadata and individual source citations.",
+      "limit": "Represented year/build date is not legal effective date or accuracy.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "rfc7946-geojson",
+      "url": "https://www.rfc-editor.org/info/rfc7946/",
+      "role": "GeoJSON coordinate semantics",
+      "vintage": "RFC 7946; inspected 2026-10-07",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Not a boundary-data license."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Consult RFC coordinate semantics.",
+      "limit": "Does not establish datum realization, transformation or accuracy.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "gebco-2025",
+      "url": "https://www.gebco.net/data-products-gridded-bathymetry-data/gebco2025-grid",
+      "role": "Coarse terrain/bathymetry context considered for water questions",
+      "vintage": "GEBCO 2025",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "redistributable",
+        "terms": "Public-domain with attribution per GEBCO terms."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Obtain exact grid and source-type metadata only for separately scoped context work.",
+      "limit": "15-arc-second terrain grid is not administrative authority, legal shoreline, parcel, or feature-level dryland proof; no overlay.",
+      "temporal_status": "modeled"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/compat/immutable.py",
+      "bytes": 7090,
+      "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/compat/inputs.py",
+      "bytes": 3409,
+      "sha256": "6d27ce5ea16280a9cc30507a1960fd69ce3f23e6ecc13f2957d7746281f98503",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/evidence-validation.json",
+      "bytes": 36193,
+      "sha256": "855d25bf4c2b1d275cf75d9fe777b2685bbe4d4630344e0668d65022d863e89f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/frozen-execution.json",
+      "bytes": 39737,
+      "sha256": "ba3ae27b291f850ded10652cc4dc13f90d7df79353833c54999d9dd0a0d12b9d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/goal-receipt.json",
+      "bytes": 751,
+      "sha256": "4fe9b0625e837bcbb8829c16f9d78fd69fc31ba79973ab6edcb883edbfb8b470",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/frozen-execution-v1.json",
+      "bytes": 40186,
+      "sha256": "ef2d425110a26f955784a158dc57f00aa99b5561fec613bc81956a97ab756d2b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/run-1-v1-failed-execution.json",
+      "bytes": 4591,
+      "sha256": "22aa577f01812a7b5fd4e35a93ddd438dbd6c232c9801c73e62ae6a0733d5c2b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/frozen-execution.json",
+      "bytes": 40186,
+      "sha256": "85dd75b9040936f1f6ae347f80e08eefd33a620b6e7f0e6cfd43c82b471407f3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-1/output/candidate-component-features.geojson",
+      "bytes": 50955,
+      "sha256": "77f9dacb3d6a23894f3d0b2d437005d1072a89f6840c481ff6b628e28df736c1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-1/output/candidate-routing-rows.jsonl",
+      "bytes": 109189,
+      "sha256": "a5c82a4ce9c778569b2e9a87c398be561f23161898dc4e6c0f0801a8ca0a5323",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-1/output/complete-family-record.json",
+      "bytes": 16337,
+      "sha256": "5786f082bca27a8e964c3985c12fc6e5d5b93783a49523ade976e117c80ffb33",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-1/output/control-results.json",
+      "bytes": 689,
+      "sha256": "e6638ba762570e79709b7427d196d66755969e88bbf3ab538790a143bb62daad",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-1/output/current-contact-containing-part-21.json",
+      "bytes": 6737781,
+      "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-1/output/current-contact-features.geojson",
+      "bytes": 23100,
+      "sha256": "03a6a16359d1e27bb7941f80b6dcdb4a6757213e811fc51759d18fbf436dd58c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-1/output/current-world-index.json",
+      "bytes": 944,
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-1/output/numeric-scope-family-rows.json",
+      "bytes": 28887,
+      "sha256": "c4483e2a35cac796af3b655893d3c5af3baac73fc0b85e2c949f8da4415c9ed1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-1/output/original-consumed-source.geojson",
+      "bytes": 1481003,
+      "sha256": "1a336a495dfcf3c369c5b5d05c205d7509610e0ab27ef1539140f8a8c763e335",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-1/output/original-consumed-source.geojson.gz",
+      "bytes": 407499,
+      "sha256": "4b6df9fca9398148271a451805f7a26af03d756ef5ceec7fba9ef581bdf8b8aa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-1/output/original-source-features.geojson",
+      "bytes": 1258701,
+      "sha256": "59c6ccf281336a946843bfb72eecc98605f10e60d95f8e2fbbbc32a80d21bae5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-1/output/reconstruction-receipts.json",
+      "bytes": 49056,
+      "sha256": "1c592bbe826761fb8ead2c0171f8e54e6908951c5527af2b0d7f4201aab9564c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-1/output/source-records.json",
+      "bytes": 78058,
+      "sha256": "229a61c00c3a5b0d70d07a5db53121d5b011d83a8f41d5875b8df062432014d1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-1/output/summary.json",
+      "bytes": 2618,
+      "sha256": "ce6f4ac09ac0fb71294c86ea8af06edc9c5a677368bccb60a2f756a3eea6018e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-1-execution.json",
+      "bytes": 5568,
+      "sha256": "9f46d4a049c49e8aa564e9649f265b6dcd0e7930d08a7347a8fc90b75ff5a2ef",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-2/output/candidate-component-features.geojson",
+      "bytes": 50955,
+      "sha256": "77f9dacb3d6a23894f3d0b2d437005d1072a89f6840c481ff6b628e28df736c1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-2/output/candidate-routing-rows.jsonl",
+      "bytes": 109189,
+      "sha256": "a5c82a4ce9c778569b2e9a87c398be561f23161898dc4e6c0f0801a8ca0a5323",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-2/output/complete-family-record.json",
+      "bytes": 16337,
+      "sha256": "5786f082bca27a8e964c3985c12fc6e5d5b93783a49523ade976e117c80ffb33",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-2/output/control-results.json",
+      "bytes": 689,
+      "sha256": "e6638ba762570e79709b7427d196d66755969e88bbf3ab538790a143bb62daad",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-2/output/current-contact-containing-part-21.json",
+      "bytes": 6737781,
+      "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-2/output/current-contact-features.geojson",
+      "bytes": 23100,
+      "sha256": "03a6a16359d1e27bb7941f80b6dcdb4a6757213e811fc51759d18fbf436dd58c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-2/output/current-world-index.json",
+      "bytes": 944,
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-2/output/numeric-scope-family-rows.json",
+      "bytes": 28887,
+      "sha256": "c4483e2a35cac796af3b655893d3c5af3baac73fc0b85e2c949f8da4415c9ed1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-2/output/original-consumed-source.geojson",
+      "bytes": 1481003,
+      "sha256": "1a336a495dfcf3c369c5b5d05c205d7509610e0ab27ef1539140f8a8c763e335",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-2/output/original-consumed-source.geojson.gz",
+      "bytes": 407499,
+      "sha256": "4b6df9fca9398148271a451805f7a26af03d756ef5ceec7fba9ef581bdf8b8aa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-2/output/original-source-features.geojson",
+      "bytes": 1258701,
+      "sha256": "59c6ccf281336a946843bfb72eecc98605f10e60d95f8e2fbbbc32a80d21bae5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-2/output/reconstruction-receipts.json",
+      "bytes": 49056,
+      "sha256": "1c592bbe826761fb8ead2c0171f8e54e6908951c5527af2b0d7f4201aab9564c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-2/output/source-records.json",
+      "bytes": 78058,
+      "sha256": "229a61c00c3a5b0d70d07a5db53121d5b011d83a8f41d5875b8df062432014d1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-2/output/summary.json",
+      "bytes": 2618,
+      "sha256": "ce6f4ac09ac0fb71294c86ea8af06edc9c5a677368bccb60a2f756a3eea6018e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-2-execution.json",
+      "bytes": 5568,
+      "sha256": "2c9b00cebf4b725a22da843809f02d12f662c93b74a4d6d227eb4e7a76b53fa0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/compat/comparison.py",
+      "bytes": 9834,
+      "sha256": "f9c226add23a37a39bf7fd34f5d8bdcb34a8d276b331fabf59bf9867b6f84bfe",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/compat/ellipsoidal_area.py",
+      "bytes": 1953,
+      "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/compat/immutable.py",
+      "bytes": 7090,
+      "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/compat/inputs.py",
+      "bytes": 3409,
+      "sha256": "6d27ce5ea16280a9cc30507a1960fd69ce3f23e6ecc13f2957d7746281f98503",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/compat/producer.py",
+      "bytes": 24243,
+      "sha256": "7203d789acb45886c7ed6cf88c7c6536e27bf8942d6fafa8362ffee25154c3bc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/compat/transport.py",
+      "bytes": 12279,
+      "sha256": "abe52d6f3c945c4423f2eab81cbe3c57cd3e400fef7584df0ee34801d892a887",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/frozen-execution.json",
+      "bytes": 40186,
+      "sha256": "ad998c0c29b9f6a18e16a23b0a30b6101ce420767518805570ed8bebcfb851cd",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-1/output/candidate-component-features.geojson",
+      "bytes": 50955,
+      "sha256": "77f9dacb3d6a23894f3d0b2d437005d1072a89f6840c481ff6b628e28df736c1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-1/output/candidate-routing-rows.jsonl",
+      "bytes": 109140,
+      "sha256": "0e423884304181e252b0ac369db5e23617932d9f5907d6f5535396d29719d853",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-1/output/complete-family-record.json",
+      "bytes": 16337,
+      "sha256": "5786f082bca27a8e964c3985c12fc6e5d5b93783a49523ade976e117c80ffb33",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-1/output/control-results.json",
+      "bytes": 689,
+      "sha256": "e6638ba762570e79709b7427d196d66755969e88bbf3ab538790a143bb62daad",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-1/output/current-contact-containing-part-21.json",
+      "bytes": 6737781,
+      "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-1/output/current-contact-features.geojson",
+      "bytes": 23100,
+      "sha256": "03a6a16359d1e27bb7941f80b6dcdb4a6757213e811fc51759d18fbf436dd58c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-1/output/current-world-index.json",
+      "bytes": 944,
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-1/output/numeric-scope-family-rows.json",
+      "bytes": 28887,
+      "sha256": "c4483e2a35cac796af3b655893d3c5af3baac73fc0b85e2c949f8da4415c9ed1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-1/output/original-consumed-source.geojson",
+      "bytes": 1481003,
+      "sha256": "1a336a495dfcf3c369c5b5d05c205d7509610e0ab27ef1539140f8a8c763e335",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-1/output/original-consumed-source.geojson.gz",
+      "bytes": 407499,
+      "sha256": "4b6df9fca9398148271a451805f7a26af03d756ef5ceec7fba9ef581bdf8b8aa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-1/output/original-source-features.geojson",
+      "bytes": 1258701,
+      "sha256": "59c6ccf281336a946843bfb72eecc98605f10e60d95f8e2fbbbc32a80d21bae5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-1/output/reconstruction-receipts.json",
+      "bytes": 49056,
+      "sha256": "1c592bbe826761fb8ead2c0171f8e54e6908951c5527af2b0d7f4201aab9564c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-1/output/source-records.json",
+      "bytes": 78058,
+      "sha256": "229a61c00c3a5b0d70d07a5db53121d5b011d83a8f41d5875b8df062432014d1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-1/output/summary.json",
+      "bytes": 2618,
+      "sha256": "a43dd0f3f15c09d78ce08229ebc2169ecd34ec22c76f7477f5ec2c83a406b542",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-1-execution.json",
+      "bytes": 5568,
+      "sha256": "11b20818bfbac4e14fcee6c6ec3ef45c7d65349ad2fb040eee5abe9cf7e7bdcf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-2/output/candidate-component-features.geojson",
+      "bytes": 50955,
+      "sha256": "77f9dacb3d6a23894f3d0b2d437005d1072a89f6840c481ff6b628e28df736c1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-2/output/candidate-routing-rows.jsonl",
+      "bytes": 109140,
+      "sha256": "0e423884304181e252b0ac369db5e23617932d9f5907d6f5535396d29719d853",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-2/output/complete-family-record.json",
+      "bytes": 16337,
+      "sha256": "5786f082bca27a8e964c3985c12fc6e5d5b93783a49523ade976e117c80ffb33",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-2/output/control-results.json",
+      "bytes": 689,
+      "sha256": "e6638ba762570e79709b7427d196d66755969e88bbf3ab538790a143bb62daad",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-2/output/current-contact-containing-part-21.json",
+      "bytes": 6737781,
+      "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-2/output/current-contact-features.geojson",
+      "bytes": 23100,
+      "sha256": "03a6a16359d1e27bb7941f80b6dcdb4a6757213e811fc51759d18fbf436dd58c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-2/output/current-world-index.json",
+      "bytes": 944,
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-2/output/numeric-scope-family-rows.json",
+      "bytes": 28887,
+      "sha256": "c4483e2a35cac796af3b655893d3c5af3baac73fc0b85e2c949f8da4415c9ed1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-2/output/original-consumed-source.geojson",
+      "bytes": 1481003,
+      "sha256": "1a336a495dfcf3c369c5b5d05c205d7509610e0ab27ef1539140f8a8c763e335",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-2/output/original-consumed-source.geojson.gz",
+      "bytes": 407499,
+      "sha256": "4b6df9fca9398148271a451805f7a26af03d756ef5ceec7fba9ef581bdf8b8aa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-2/output/original-source-features.geojson",
+      "bytes": 1258701,
+      "sha256": "59c6ccf281336a946843bfb72eecc98605f10e60d95f8e2fbbbc32a80d21bae5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-2/output/reconstruction-receipts.json",
+      "bytes": 49056,
+      "sha256": "1c592bbe826761fb8ead2c0171f8e54e6908951c5527af2b0d7f4201aab9564c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-2/output/source-records.json",
+      "bytes": 78058,
+      "sha256": "229a61c00c3a5b0d70d07a5db53121d5b011d83a8f41d5875b8df062432014d1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-2/output/summary.json",
+      "bytes": 2618,
+      "sha256": "a43dd0f3f15c09d78ce08229ebc2169ecd34ec22c76f7477f5ec2c83a406b542",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-2-execution.json",
+      "bytes": 5569,
+      "sha256": "ba96d5adeb6d616f421a8df00a5f39744530fc2c02994279fedb46cbaa4647bb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run_final.py",
+      "bytes": 2106,
+      "sha256": "b86dc178b4fd2d2f234a4e30e15143c856e4b941ec72302c36d03ce505a212ac",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/source_extract.py",
+      "bytes": 38990,
+      "sha256": "b88b741daca36d6e9307d9c736d499473b38675976b759d1cc2433d4586ccb14",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/frozen-execution.json",
+      "bytes": 39775,
+      "sha256": "9a553ad3586e8aebb769dbf9746f49e8dbd27349150b669773ae38d84a2f26f3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-1/output/candidate-component-features.geojson",
+      "bytes": 50955,
+      "sha256": "77f9dacb3d6a23894f3d0b2d437005d1072a89f6840c481ff6b628e28df736c1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-1/output/candidate-routing-rows.jsonl",
+      "bytes": 109140,
+      "sha256": "0e423884304181e252b0ac369db5e23617932d9f5907d6f5535396d29719d853",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-1/output/complete-family-record.json",
+      "bytes": 16337,
+      "sha256": "5786f082bca27a8e964c3985c12fc6e5d5b93783a49523ade976e117c80ffb33",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-1/output/control-results.json",
+      "bytes": 689,
+      "sha256": "e6638ba762570e79709b7427d196d66755969e88bbf3ab538790a143bb62daad",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-1/output/current-contact-containing-part-21.json",
+      "bytes": 6737781,
+      "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-1/output/current-contact-features.geojson",
+      "bytes": 23100,
+      "sha256": "03a6a16359d1e27bb7941f80b6dcdb4a6757213e811fc51759d18fbf436dd58c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-1/output/current-world-index.json",
+      "bytes": 944,
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-1/output/numeric-scope-family-rows.json",
+      "bytes": 28887,
+      "sha256": "c4483e2a35cac796af3b655893d3c5af3baac73fc0b85e2c949f8da4415c9ed1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-1/output/original-consumed-source.geojson",
+      "bytes": 1481003,
+      "sha256": "1a336a495dfcf3c369c5b5d05c205d7509610e0ab27ef1539140f8a8c763e335",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-1/output/original-consumed-source.geojson.gz",
+      "bytes": 407499,
+      "sha256": "4b6df9fca9398148271a451805f7a26af03d756ef5ceec7fba9ef581bdf8b8aa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-1/output/original-source-features.geojson",
+      "bytes": 1258701,
+      "sha256": "59c6ccf281336a946843bfb72eecc98605f10e60d95f8e2fbbbc32a80d21bae5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-1/output/reconstruction-receipts.json",
+      "bytes": 49056,
+      "sha256": "1c592bbe826761fb8ead2c0171f8e54e6908951c5527af2b0d7f4201aab9564c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-1/output/source-records.json",
+      "bytes": 78058,
+      "sha256": "229a61c00c3a5b0d70d07a5db53121d5b011d83a8f41d5875b8df062432014d1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-1/output/summary.json",
+      "bytes": 2618,
+      "sha256": "a43dd0f3f15c09d78ce08229ebc2169ecd34ec22c76f7477f5ec2c83a406b542",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-1-execution.json",
+      "bytes": 4943,
+      "sha256": "895e4235b9fcfb198d374c1deff71bc7c3e1dbf029a389224973b706be39ff12",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-2/output/candidate-component-features.geojson",
+      "bytes": 50955,
+      "sha256": "77f9dacb3d6a23894f3d0b2d437005d1072a89f6840c481ff6b628e28df736c1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-2/output/candidate-routing-rows.jsonl",
+      "bytes": 109140,
+      "sha256": "0e423884304181e252b0ac369db5e23617932d9f5907d6f5535396d29719d853",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-2/output/complete-family-record.json",
+      "bytes": 16337,
+      "sha256": "5786f082bca27a8e964c3985c12fc6e5d5b93783a49523ade976e117c80ffb33",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-2/output/control-results.json",
+      "bytes": 689,
+      "sha256": "e6638ba762570e79709b7427d196d66755969e88bbf3ab538790a143bb62daad",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-2/output/current-contact-containing-part-21.json",
+      "bytes": 6737781,
+      "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-2/output/current-contact-features.geojson",
+      "bytes": 23100,
+      "sha256": "03a6a16359d1e27bb7941f80b6dcdb4a6757213e811fc51759d18fbf436dd58c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-2/output/current-world-index.json",
+      "bytes": 944,
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-2/output/numeric-scope-family-rows.json",
+      "bytes": 28887,
+      "sha256": "c4483e2a35cac796af3b655893d3c5af3baac73fc0b85e2c949f8da4415c9ed1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-2/output/original-consumed-source.geojson",
+      "bytes": 1481003,
+      "sha256": "1a336a495dfcf3c369c5b5d05c205d7509610e0ab27ef1539140f8a8c763e335",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-2/output/original-consumed-source.geojson.gz",
+      "bytes": 407499,
+      "sha256": "4b6df9fca9398148271a451805f7a26af03d756ef5ceec7fba9ef581bdf8b8aa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-2/output/original-source-features.geojson",
+      "bytes": 1258701,
+      "sha256": "59c6ccf281336a946843bfb72eecc98605f10e60d95f8e2fbbbc32a80d21bae5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-2/output/reconstruction-receipts.json",
+      "bytes": 49056,
+      "sha256": "1c592bbe826761fb8ead2c0171f8e54e6908951c5527af2b0d7f4201aab9564c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-2/output/source-records.json",
+      "bytes": 78058,
+      "sha256": "229a61c00c3a5b0d70d07a5db53121d5b011d83a8f41d5875b8df062432014d1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-2/output/summary.json",
+      "bytes": 2618,
+      "sha256": "a43dd0f3f15c09d78ce08229ebc2169ecd34ec22c76f7477f5ec2c83a406b542",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-2-execution.json",
+      "bytes": 4943,
+      "sha256": "ca97d73348dc424387c7c20a123a948613d26fda7838841bf56f8bb5453c3924",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/inputs/legacy-input-config.json",
+      "bytes": 21939,
+      "sha256": "9100b9832e1519ed631516d74cca5ac2f644740c722fdd3fa119fdfa37f0dedb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/issue-1336-api.json",
+      "bytes": 14119,
+      "sha256": "c83a22d12272c38eb800769fcb397ffddbc5a3c83af47151b989ff4f0e095c46",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/negative-controls.json",
+      "bytes": 727,
+      "sha256": "984602ed4f2c16681ed0b4ea8e120a914a62fb5ffb946f1e127f0b0d8778e8fb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/positive-controls.json",
+      "bytes": 452,
+      "sha256": "a56b5fe4c7f94b30423a7b951878e34ce82dff8e226e1c0755f6b550b2f2161a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/reproducibility.json",
+      "bytes": 772,
+      "sha256": "ef5a939cccdbde911a08e675197c73078f8e27e9be8424de813202b16cf69b99",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/run_final.py",
+      "bytes": 2106,
+      "sha256": "b86dc178b4fd2d2f234a4e30e15143c856e4b941ec72302c36d03ce505a212ac",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-1/output/candidate-component-features.geojson",
+      "bytes": 50955,
+      "sha256": "77f9dacb3d6a23894f3d0b2d437005d1072a89f6840c481ff6b628e28df736c1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-1/output/candidate-routing-rows.jsonl",
+      "bytes": 109140,
+      "sha256": "0e423884304181e252b0ac369db5e23617932d9f5907d6f5535396d29719d853",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-1/output/complete-family-record.json",
+      "bytes": 16337,
+      "sha256": "5786f082bca27a8e964c3985c12fc6e5d5b93783a49523ade976e117c80ffb33",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-1/output/control-results.json",
+      "bytes": 689,
+      "sha256": "e6638ba762570e79709b7427d196d66755969e88bbf3ab538790a143bb62daad",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-1/output/current-contact-containing-part-21.json",
+      "bytes": 6737781,
+      "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-1/output/current-contact-features.geojson",
+      "bytes": 23100,
+      "sha256": "03a6a16359d1e27bb7941f80b6dcdb4a6757213e811fc51759d18fbf436dd58c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-1/output/current-world-index.json",
+      "bytes": 944,
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-1/output/numeric-scope-family-rows.json",
+      "bytes": 28887,
+      "sha256": "c4483e2a35cac796af3b655893d3c5af3baac73fc0b85e2c949f8da4415c9ed1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-1/output/original-consumed-source.geojson",
+      "bytes": 1481003,
+      "sha256": "1a336a495dfcf3c369c5b5d05c205d7509610e0ab27ef1539140f8a8c763e335",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-1/output/original-consumed-source.geojson.gz",
+      "bytes": 407499,
+      "sha256": "4b6df9fca9398148271a451805f7a26af03d756ef5ceec7fba9ef581bdf8b8aa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-1/output/original-source-features.geojson",
+      "bytes": 1258701,
+      "sha256": "59c6ccf281336a946843bfb72eecc98605f10e60d95f8e2fbbbc32a80d21bae5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-1/output/reconstruction-receipts.json",
+      "bytes": 49056,
+      "sha256": "1c592bbe826761fb8ead2c0171f8e54e6908951c5527af2b0d7f4201aab9564c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-1/output/source-records.json",
+      "bytes": 78058,
+      "sha256": "229a61c00c3a5b0d70d07a5db53121d5b011d83a8f41d5875b8df062432014d1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-1/output/summary.json",
+      "bytes": 2618,
+      "sha256": "a43dd0f3f15c09d78ce08229ebc2169ecd34ec22c76f7477f5ec2c83a406b542",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-1-execution.json",
+      "bytes": 4943,
+      "sha256": "a27a2271a54ed42033edbafe28712b184117058291bb7d9be149a65db71e38b7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-2/output/candidate-component-features.geojson",
+      "bytes": 50955,
+      "sha256": "77f9dacb3d6a23894f3d0b2d437005d1072a89f6840c481ff6b628e28df736c1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-2/output/candidate-routing-rows.jsonl",
+      "bytes": 109140,
+      "sha256": "0e423884304181e252b0ac369db5e23617932d9f5907d6f5535396d29719d853",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-2/output/complete-family-record.json",
+      "bytes": 16337,
+      "sha256": "5786f082bca27a8e964c3985c12fc6e5d5b93783a49523ade976e117c80ffb33",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-2/output/control-results.json",
+      "bytes": 689,
+      "sha256": "e6638ba762570e79709b7427d196d66755969e88bbf3ab538790a143bb62daad",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-2/output/current-contact-containing-part-21.json",
+      "bytes": 6737781,
+      "sha256": "d7b850e9fd2e3cc49044aa10218351831acc1d159b6f5eb1ef67a2ddae9f46d7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-2/output/current-contact-features.geojson",
+      "bytes": 23100,
+      "sha256": "03a6a16359d1e27bb7941f80b6dcdb4a6757213e811fc51759d18fbf436dd58c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-2/output/current-world-index.json",
+      "bytes": 944,
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-2/output/numeric-scope-family-rows.json",
+      "bytes": 28887,
+      "sha256": "c4483e2a35cac796af3b655893d3c5af3baac73fc0b85e2c949f8da4415c9ed1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-2/output/original-consumed-source.geojson",
+      "bytes": 1481003,
+      "sha256": "1a336a495dfcf3c369c5b5d05c205d7509610e0ab27ef1539140f8a8c763e335",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-2/output/original-consumed-source.geojson.gz",
+      "bytes": 407499,
+      "sha256": "4b6df9fca9398148271a451805f7a26af03d756ef5ceec7fba9ef581bdf8b8aa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-2/output/original-source-features.geojson",
+      "bytes": 1258701,
+      "sha256": "59c6ccf281336a946843bfb72eecc98605f10e60d95f8e2fbbbc32a80d21bae5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-2/output/reconstruction-receipts.json",
+      "bytes": 49056,
+      "sha256": "1c592bbe826761fb8ead2c0171f8e54e6908951c5527af2b0d7f4201aab9564c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-2/output/source-records.json",
+      "bytes": 78058,
+      "sha256": "229a61c00c3a5b0d70d07a5db53121d5b011d83a8f41d5875b8df062432014d1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-2/output/summary.json",
+      "bytes": 2618,
+      "sha256": "a43dd0f3f15c09d78ce08229ebc2169ecd34ec22c76f7477f5ec2c83a406b542",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-2-execution.json",
+      "bytes": 4943,
+      "sha256": "a829fc698136fde7cac7f5229755a8f9447c7c45dba8ea312b708e5e79d9e934",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/source/source-fitness-assessment.md",
+      "bytes": 9386,
+      "sha256": "5a586d9322d1bd65d46afb093314f5810f16caf2f6f40796ee517714a26dfb5a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/source-component-assessments.json",
+      "bytes": 35690,
+      "sha256": "9ff7193b4f74404c0f9b10f56d75eed205d8f261acb121ccc7cc15313a63afe8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/source_extract.py",
+      "bytes": 41659,
+      "sha256": "e7308957ef4893f61f19a6fa12da368c24e74d89ed90f3c04112eb09dc26bffa",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "immutable-source-closure",
+      "kind": "source",
+      "description": "Authenticate issue body, all original candidate reconstruction inputs, complete component/family routing streams, numeric scope, original source payload, metadata, current contacts and index using Git blob identity, byte lengths and SHA-256; verify decoded hashes for compressed inputs.",
+      "software": "Freeze-lock capture: Python 3.7.3; source extraction and both recorded runs: bundled Python 3.12.14; Git 2.39.5. Execution runtimes are in the run receipts.",
+      "units": "file bytes, SHA-256, source-record identities"
+    },
+    {
+      "id": "candidate-source-reconstruction",
+      "kind": "source",
+      "description": "Reuse retained accepted source reconstruction code and bind all 49 issue components to complete route feature/geometry hashes; no geometry operator runs.",
+      "software": "Frozen legacy producer and helper code; see frozen-execution.json code hashes",
+      "units": "whole feature records and canonical JSON digests"
+    },
+    {
+      "id": "issue-subject-controls",
+      "kind": "code",
+      "description": "Check exact roster and identity joins for all 49 components and six contacts; reject omission, duplication, foreign identity, changed input bytes, changed geometry and omitted contact.",
+      "software": "Frozen source_extract.py and pinned compatibility helpers",
+      "units": "subject IDs and feature hashes"
+    },
+    {
+      "id": "sequential-reproducibility",
+      "kind": "source",
+      "description": "Run the frozen extractor twice sequentially and compare complete per-file output hashes.",
+      "software": "Frozen run_final.py and recorded Python executable/version",
+      "units": "elapsed seconds, bytes and SHA-256"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "The exact consumed simplified source and all 147 original features are byte-authenticated with source metadata and attribution claims retained; this establishes custody only.",
+      "status": "supported",
+      "source_ids": [
+        "geoboundaries-sau-adm2-consumed"
+      ]
+    },
+    {
+      "text": "Authoritative Saudi governorate source fitness, legal applicability, feature dates, accuracy, product-specific reuse permission, land/water meaning and shoreline fitness remain unresolved for all 49 components and six contacts.",
+      "status": "unresolved",
+      "source_ids": [
+        "geoboundaries-sau-adm2-consumed",
+        "geosa-official-map",
+        "geosa-national-platform",
+        "geosa-open-data",
+        "saudi-law-of-provinces",
+        "geoboundaries-api-docs",
+        "rfc7946-geojson",
+        "gebco-2025"
+      ]
+    },
+    {
+      "text": "No geography or numerical science was changed or rerun; the 23 selected-scope and 26 explicit-complement memberships are retained without clearance inference.",
+      "status": "supported",
+      "source_ids": [
+        "geoboundaries-sau-adm2-consumed"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "Use the Python executable and pinned source closure recorded in frozen-execution.json.",
+    "Run source_extract.py --freeze --repo <repository-root> before execution and retain its code/source lock.",
+    "Run run_final.py --run-id run-1 --repo <repository-root>, then run_final.py --run-id run-2 --repo <repository-root>, sequentially.",
+    "Compare complete output file sets and per-file hashes; inspect execution receipts, controls, component assessments and source-fitness report."
+  ],
+  "validation": [
+    {
+      "method_id": "complete-source-candidate-contact-binding",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/positive-controls.json"
+    },
+    {
+      "method_id": "identity-integrity-negative-controls",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/negative-controls.json"
+    },
+    {
+      "method_id": "two-sequential-whole-source-runs",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/reproducibility.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/compat/immutable.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/compat/inputs.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/evidence-validation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/frozen-execution.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/goal-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/frozen-execution-v1.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/run-1-v1-failed-execution.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/frozen-execution.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-1-execution.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-1/output/candidate-component-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-1/output/candidate-routing-rows.jsonl",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-1/output/complete-family-record.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-1/output/control-results.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-1/output/current-contact-containing-part-21.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-1/output/current-contact-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-1/output/current-world-index.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-1/output/numeric-scope-family-rows.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-1/output/original-consumed-source.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-1/output/original-consumed-source.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-1/output/original-source-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-1/output/reconstruction-receipts.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-1/output/source-records.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-1/output/summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-2-execution.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-2/output/candidate-component-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-2/output/candidate-routing-rows.jsonl",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-2/output/complete-family-record.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-2/output/control-results.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-2/output/current-contact-containing-part-21.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-2/output/current-contact-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-2/output/current-world-index.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-2/output/numeric-scope-family-rows.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-2/output/original-consumed-source.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-2/output/original-consumed-source.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-2/output/original-source-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-2/output/reconstruction-receipts.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-2/output/source-records.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-2/run-2/output/summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/compat/comparison.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/compat/ellipsoidal_area.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/compat/immutable.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/compat/inputs.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/compat/producer.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/compat/transport.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/frozen-execution.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-1-execution.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-1/output/candidate-component-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-1/output/candidate-routing-rows.jsonl",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-1/output/complete-family-record.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-1/output/control-results.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-1/output/current-contact-containing-part-21.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-1/output/current-contact-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-1/output/current-world-index.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-1/output/numeric-scope-family-rows.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-1/output/original-consumed-source.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-1/output/original-consumed-source.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-1/output/original-source-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-1/output/reconstruction-receipts.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-1/output/source-records.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-1/output/summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-2-execution.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-2/output/candidate-component-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-2/output/candidate-routing-rows.jsonl",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-2/output/complete-family-record.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-2/output/control-results.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-2/output/current-contact-containing-part-21.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-2/output/current-contact-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-2/output/current-world-index.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-2/output/numeric-scope-family-rows.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-2/output/original-consumed-source.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-2/output/original-consumed-source.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-2/output/original-source-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-2/output/reconstruction-receipts.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-2/output/source-records.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run-2/output/summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/run_final.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-3/source_extract.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/frozen-execution.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-1-execution.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-1/output/candidate-component-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-1/output/candidate-routing-rows.jsonl",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-1/output/complete-family-record.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-1/output/control-results.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-1/output/current-contact-containing-part-21.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-1/output/current-contact-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-1/output/current-world-index.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-1/output/numeric-scope-family-rows.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-1/output/original-consumed-source.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-1/output/original-consumed-source.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-1/output/original-source-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-1/output/reconstruction-receipts.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-1/output/source-records.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-1/output/summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-2-execution.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-2/output/candidate-component-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-2/output/candidate-routing-rows.jsonl",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-2/output/complete-family-record.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-2/output/control-results.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-2/output/current-contact-containing-part-21.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-2/output/current-contact-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-2/output/current-world-index.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-2/output/numeric-scope-family-rows.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-2/output/original-consumed-source.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-2/output/original-consumed-source.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-2/output/original-source-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-2/output/reconstruction-receipts.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-2/output/source-records.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/history/version-4/run-2/output/summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/inputs/legacy-input-config.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/issue-1336-api.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/negative-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/positive-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/run_final.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-1-execution.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-1/output/candidate-component-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-1/output/candidate-routing-rows.jsonl",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-1/output/complete-family-record.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-1/output/control-results.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-1/output/current-contact-containing-part-21.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-1/output/current-contact-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-1/output/current-world-index.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-1/output/numeric-scope-family-rows.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-1/output/original-consumed-source.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-1/output/original-consumed-source.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-1/output/original-source-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-1/output/reconstruction-receipts.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-1/output/source-records.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-1/output/summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-2-execution.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-2/output/candidate-component-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-2/output/candidate-routing-rows.jsonl",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-2/output/complete-family-record.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-2/output/control-results.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-2/output/current-contact-containing-part-21.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-2/output/current-contact-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-2/output/current-world-index.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-2/output/numeric-scope-family-rows.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-2/output/original-consumed-source.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-2/output/original-consumed-source.geojson.gz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-2/output/original-source-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-2/output/reconstruction-receipts.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-2/output/source-records.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/runs/run-2/output/summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/source-component-assessments.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/source/source-fitness-assessment.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/saudi-fortynine-numeric-gap-family-source-fitness-20261007/source_extract.py",
+      "status": "added"
+    }
+  ]
+}
