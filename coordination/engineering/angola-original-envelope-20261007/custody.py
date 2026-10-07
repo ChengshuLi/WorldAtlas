@@ -70,6 +70,8 @@ def read_body(encoded, index, expected):
 def restore(members, destination):
     # Entire safe roster and destination are admitted before allocating any output.
     destination = pathlib.Path(destination)
+    if not destination.is_absolute() or destination.parent != R / N / 'vintages' or not re.fullmatch('[a-z0-9][a-z0-9-]{0,63}', destination.name):
+        raise ValueError('Restoration must use one fresh owned vintage')
     if destination.exists() or destination.is_symlink():
         raise ValueError('Fresh ordinary restoration directory required')
     for ancestor in [destination, *destination.parents]:
@@ -131,6 +133,7 @@ def main():
         raw = b''.join(canon(row) for row in changed) if isinstance(changed, list) else changed
         transport = helper.deterministic_gzip(raw)
         expected = helper.descriptor('coherent-fixture.jsonl.gz', transport)
+        expected.update(uncompressed_bytes=len(raw), uncompressed_sha256=sha(raw))
         try:
             read_body(transport, index, expected)
         except (ValueError, json.JSONDecodeError) as error:
