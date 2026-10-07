@@ -1,0 +1,366 @@
+{
+  "version": 1,
+  "issue": 1388,
+  "lane": "geography",
+  "worker_id": "01a11551-68d1-7031-a9ac-715eb725a184",
+  "subject_ids": [
+    "gb:TON:ADM1:12702645B14713027314985"
+  ],
+  "subject_ids_sha256": "f722e0d546d90a0db137adf82f7f76e2e9b9873f72aa26be15a53c7eab67ab09",
+  "baseline": {
+    "commit": "450126d04c7e6bf85c8763c9bb6949c1fac68000",
+    "files": [
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/report.json",
+        "bytes": 174829,
+        "sha256": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-009.bin.gz",
+        "bytes": 998433,
+        "sha256": "4621441988498fe2c05bfe6f036bf8dd9cfbc8472c5b8a65bf91d3a424f626da",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-003.jsonl.gz",
+        "bytes": 976209,
+        "sha256": "a02d8ef7b63ad0d155d49cd14310fedd3feb7e0e6b6e0181673d2745b44eb5fb",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-a5b86fc6ff2463cd/sources/TON/geoBoundaries-TON-ADM1.geojson",
+        "bytes": 1202782,
+        "sha256": "c879101306e56a83d5efc5cae56b5c92f02d1e3485ea6ac64bd3f94a67b7e24a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-a5b86fc6ff2463cd/sources/TON/geoBoundaries-TON-ADM1-metaData.json",
+        "bytes": 852,
+        "sha256": "b838c88c03410c69802cca9b7e80660270c8ddffe9761ea22b2b619f60748056",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-a5b86fc6ff2463cd/sources/TON/CITATION-AND-USE-geoBoundaries.txt",
+        "bytes": 4316,
+        "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-TON-ADM1-000.bin.gz",
+        "bytes": 10007,
+        "sha256": "638e35c5cf6de869400843894a640efa65e8ec397b022417cf4f1ab628b51c61",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-23.json",
+        "bytes": 4962410,
+        "sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/administrative.py",
+        "bytes": 12313,
+        "sha256": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "global_routing_report": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265",
+      "complete_global_family_row_container": "4621441988498fe2c05bfe6f036bf8dd9cfbc8472c5b8a65bf91d3a424f626da",
+      "complete_physical_comparison_row_container": "a02d8ef7b63ad0d155d49cd14310fedd3feb7e0e6b6e0181673d2745b44eb5fb",
+      "complete_TON_ADM1_source_product": "c879101306e56a83d5efc5cae56b5c92f02d1e3485ea6ac64bd3f94a67b7e24a",
+      "TON_ADM1_source_metadata": "b838c88c03410c69802cca9b7e80660270c8ddffe9761ea22b2b619f60748056",
+      "TON_source_citation_and_use": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+      "original_TON_source_corpus_member": "638e35c5cf6de869400843894a640efa65e8ec397b022417cf4f1ab628b51c61"
+    },
+    "pin_files": {
+      "global_routing_report": "coordination/engineering/global-actionability-routing-20261007/results/report.json",
+      "complete_global_family_row_container": "coordination/engineering/global-actionability-routing-20261007/results/families-009.bin.gz",
+      "complete_physical_comparison_row_container": "coordination/engineering/global-physical-comparison-20261006/results/components-003.jsonl.gz",
+      "complete_TON_ADM1_source_product": "data/regional-review/regional-review-a5b86fc6ff2463cd/sources/TON/geoBoundaries-TON-ADM1.geojson",
+      "TON_ADM1_source_metadata": "data/regional-review/regional-review-a5b86fc6ff2463cd/sources/TON/geoBoundaries-TON-ADM1-metaData.json",
+      "TON_source_citation_and_use": "data/regional-review/regional-review-a5b86fc6ff2463cd/sources/TON/CITATION-AND-USE-geoBoundaries.txt",
+      "original_TON_source_corpus_member": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-TON-ADM1-000.bin.gz"
+    },
+    "subject_files": {
+      "gb:TON:ADM1:12702645B14713027314985": "data/geography/part-23.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "geoboundaries-ton-adm1",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/TON/ADM1/geoBoundaries-TON-ADM1_simplified.geojson",
+      "role": "source-fitness/reference",
+      "vintage": "2017 represented year; source update 2023-01-19; build 2023-12-12",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "GeoBoundaries product notice states CC BY 4.0; underlying contributor/source licensing applicability is unresolved in metadata, which records ODbL 1.0. Exact bytes retained as an inspected comparison source."
+      },
+      "retention": "restoration-only",
+      "restoration": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/TON/ADM1/geoBoundaries-TON-ADM1_simplified.geojson",
+      "limit": "Reference product; metadata effective date is unknown.",
+      "verification": "verified",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "tsd-reboundary-plan",
+      "url": "https://tongastats.gov.to/download/279/reboundary/7658/reboundary-plan-v2.pdf",
+      "role": "source-fitness/reference",
+      "vintage": "2020-2021 plan",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Unknown; official PDF used as a source reference only."
+      },
+      "retention": "restoration-only",
+      "restoration": "https://tongastats.gov.to/download/279/reboundary/7658/reboundary-plan-v2.pdf",
+      "limit": "Statistical hierarchy context; does not establish the candidate geometry.",
+      "verification": "unverified",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "tsd-census-preactivities",
+      "url": "https://tongastats.gov.to/census-2/population-census-3/census-pre-activities/",
+      "role": "source-fitness/reference",
+      "vintage": "2021 preparation; page inspected 2026-10-07",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Unknown; official page reference only."
+      },
+      "retention": "restoration-only",
+      "restoration": "https://tongastats.gov.to/census-2/population-census-3/census-pre-activities/",
+      "limit": "Page provides census-block context, not division geometry.",
+      "verification": "unverified",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "tonga-electoral-regulations",
+      "url": "https://ago.gov.to/cms/images/LEGISLATION/SUBORDINATE/2016/2016-2103/ElectoralBoundariesRegulations_2.pdf",
+      "role": "source-fitness/reference",
+      "vintage": "2020 Revised Edition; regulations dated 2017",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Unknown; official legal PDF reference only."
+      },
+      "retention": "restoration-only",
+      "restoration": "https://ago.gov.to/cms/images/LEGISLATION/SUBORDINATE/2016/2016-2103/ElectoralBoundariesRegulations_2.pdf",
+      "limit": "Electoral constituency purpose differs from island division ADM1.",
+      "verification": "verified",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "mlnr-survey",
+      "url": "https://www.lands.gov.to/programs/land-survey",
+      "role": "source-fitness/reference",
+      "vintage": "Inspected 2026-10-07",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Unknown; official locator reference only."
+      },
+      "retention": "restoration-only",
+      "restoration": "https://www.lands.gov.to/programs/land-survey",
+      "limit": "Custodian lead; no Vava\u2019u ADM1 geometry found.",
+      "verification": "verified",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "nz-vavau-map-catalog",
+      "url": "https://natlib.govt.nz/records/21499890",
+      "role": "source-fitness/reference",
+      "vintage": "1975 map catalog record",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Unknown; catalog reference only; map not inspected."
+      },
+      "retention": "restoration-only",
+      "restoration": "https://natlib.govt.nz/records/21499890",
+      "limit": "Historical locator only; not used for geometry.",
+      "verification": "verified",
+      "temporal_status": "reference"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/tonga-gap-source-fitness-20261007/inputs/bounded-source-comparison.json",
+      "bytes": 4872,
+      "sha256": "a63caa4637e7cc30737d6fa29a7ea149e6c76f1f38b7553772b4be55453605d1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/tonga-gap-source-fitness-20261007/inputs/complete-family-scope.json",
+      "bytes": 6696,
+      "sha256": "43df97ccd29aafa99dd499e19e0ca17601b23e55f754fe2aa9d7edadea704537",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/tonga-gap-source-fitness-20261007/inputs/physical-comparison-record.json",
+      "bytes": 4191,
+      "sha256": "827f1a83633d315f1d0f1bfb151c82135fecb895e54d82eb04b287dd4b6deea0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/tonga-gap-source-fitness-20261007/inputs/source-provenance.json",
+      "bytes": 3511,
+      "sha256": "9b8a80dac7f2e191898cc886573b0021150c9157b553964eb871609178a204d8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/tonga-gap-source-fitness-20261007/sources/official-source-register.json",
+      "bytes": 4358,
+      "sha256": "fd496b457111df560c492f0f096b9ab2f66abe5b64683effcd74b009d52f3384",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/tonga-gap-source-fitness-20261007/source-fitness-report.md",
+      "bytes": 6045,
+      "sha256": "1730b603eb49aa88a8a703fe213deebb879fc38f1ed9aae4a2de527de490ea92",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/tonga-gap-source-fitness-20261007/sources/geoBoundaries-TON-ADM1_simplified.geojson",
+      "bytes": 34754,
+      "sha256": "e4937a7fcb49cc344f2e32f4525b90dbbbb3ef7e81d311b2d4b91a348b1f6f9d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/tonga-gap-source-fitness-20261007/selection-and-collision-audit.md",
+      "bytes": 1877,
+      "sha256": "a10648d49b1fe84cca8b66ba9e8d226419f90afc4eff3850f0c4bacf4c349fd4",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "bounded-topology",
+      "description": "Shapely 2.1.2 planar XY topological predicates on original longitude/latitude coordinates; no transform, repair, buffer, or densification.",
+      "software": "Python 3 / Shapely 2.1.2",
+      "units": "topological relation; WGS84 area in m\u00b2",
+      "kind": "geography",
+      "axis_order": "longitude-latitude",
+      "crs": "EPSG:4326 longitude/latitude coordinates for predicates",
+      "area_method": "PyProj Geod(ellps=WGS84), bounded candidate-support geometry only",
+      "distance_method": "Not calculated"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "support-wgs84-area",
+      "value": 2494.153781838715,
+      "unit": "m\u00b2",
+      "vintage": "baseline",
+      "input_sha256": "a02d8ef7b63ad0d155d49cd14310fedd3feb7e0e6b6e0181673d2745b44eb5fb",
+      "evaluation_commit": "450126d04c7e6bf85c8763c9bb6949c1fac68000"
+    },
+    {
+      "id": "support-inherited-emitted-area",
+      "value": 2494.141562927083,
+      "unit": "m\u00b2",
+      "vintage": "baseline",
+      "input_sha256": "4621441988498fe2c05bfe6f036bf8dd9cfbc8472c5b8a65bf91d3a424f626da",
+      "evaluation_commit": "450126d04c7e6bf85c8763c9bb6949c1fac68000"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "support-wgs84-area",
+      "value": 2494.153781838715,
+      "unit": "m\u00b2"
+    },
+    {
+      "metric_id": "support-inherited-emitted-area",
+      "value": 2494.141562927083,
+      "unit": "m\u00b2"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "The pinned simplified geoBoundaries Vava\u2019u ADM1 feature covers the complete retained support pointset in the bounded comparison.",
+      "status": "supported",
+      "source_ids": [
+        "geoboundaries-ton-adm1"
+      ]
+    },
+    {
+      "text": "Tonga statistical source material supports Vava\u2019u as a statistical division but does not authenticate this exact polygon.",
+      "status": "supported",
+      "source_ids": [
+        "tsd-reboundary-plan",
+        "tsd-census-preactivities"
+      ]
+    },
+    {
+      "text": "The source/current mismatch cause, legal authority, effective date, registration accuracy, physical land/water status, and release fitness remain unresolved.",
+      "status": "unresolved",
+      "source_ids": [
+        "geoboundaries-ton-adm1",
+        "tsd-reboundary-plan",
+        "mlnr-survey"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 scripts/compare-tonga-gap-source.py --bounded-input research/geography/tonga-gap-source-fitness-20261007/inputs/physical-comparison-record.json --source research/geography/tonga-gap-source-fitness-20261007/sources/geoBoundaries-TON-ADM1_simplified.geojson --current data/geography/part-23.json",
+    "node scripts/evidence-quality.mjs research/geography/tonga-gap-source-fitness-20261007/evidence-quality.json"
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/tonga-gap-source-fitness-20261007/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/tonga-gap-source-fitness-20261007/inputs/bounded-source-comparison.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/tonga-gap-source-fitness-20261007/inputs/complete-family-scope.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/tonga-gap-source-fitness-20261007/inputs/physical-comparison-record.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/tonga-gap-source-fitness-20261007/inputs/source-provenance.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/tonga-gap-source-fitness-20261007/source-fitness-report.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/tonga-gap-source-fitness-20261007/sources/geoBoundaries-TON-ADM1_simplified.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/tonga-gap-source-fitness-20261007/sources/official-source-register.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/tonga-gap-source-fitness-20261007/selection-and-collision-audit.md",
+      "status": "added"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "support-wgs84-area",
+      "path": "research/geography/tonga-gap-source-fitness-20261007/inputs/bounded-source-comparison.json",
+      "json_pointer": "/bounded_ellipsoidal_area_comparison/candidate_support_area_m2"
+    },
+    {
+      "metric_id": "support-inherited-emitted-area",
+      "path": "research/geography/tonga-gap-source-fitness-20261007/inputs/bounded-source-comparison.json",
+      "json_pointer": "/candidate/support_area_m2_emitted"
+    }
+  ]
+}

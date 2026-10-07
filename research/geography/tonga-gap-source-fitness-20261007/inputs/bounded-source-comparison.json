@@ -1,0 +1,84 @@
+{
+  "captured_at_utc": "2026-10-07T11:45:30.201775+00:00",
+  "method": "Shapely 2.1.2 planar XY topological predicates on recorded longitude/latitude coordinates, with no reprojection, densification, buffer, or repair. Candidate is the complete mapped-land-support pointset retained in the physical-comparison component row, not a reconstructed global output.",
+  "source_product": {
+    "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TON/ADM1/geoBoundaries-TON-ADM1_simplified.geojson",
+    "resolved_url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/TON/ADM1/geoBoundaries-TON-ADM1_simplified.geojson",
+    "path": "research/geography/tonga-gap-source-fitness-20261007/sources/geoBoundaries-TON-ADM1_simplified.geojson",
+    "bytes": 34754,
+    "sha256": "e4937a7fcb49cc344f2e32f4525b90dbbbb3ef7e81d311b2d4b91a348b1f6f9d",
+    "feature_count": 5,
+    "feature_shapeIDs": [
+      "12702645B14719640472686",
+      "12702645B16834523743175",
+      "12702645B50986277851262",
+      "12702645B14713027314985",
+      "12702645B6842520552302"
+    ],
+    "selected_feature": {
+      "shapeID": "12702645B14713027314985",
+      "shapeName": "Vava'u",
+      "shapeISO": "TO-05",
+      "shapeType": "ADM1",
+      "shapeYear": null,
+      "geometry_sha256": "bbaa2542c77e60910684bd245a5fcfbda021dde1767870df86605e3ec8adf8e8",
+      "valid": true
+    }
+  },
+  "related_unsimplified_product": {
+    "path": "data/regional-review/regional-review-a5b86fc6ff2463cd/sources/TON/geoBoundaries-TON-ADM1.geojson",
+    "feature_count": 5,
+    "whole_file_sha256": "c879101306e56a83d5efc5cae56b5c92f02d1e3485ea6ac64bd3f94a67b7e24a",
+    "selected_geometry_sha256": "346c9ea9a932458398901965a523699b9b768a2f151250d01a0777edbd18f973",
+    "valid": true
+  },
+  "current_contact": {
+    "id": "gb:TON:ADM1:12702645B14713027314985",
+    "name": "Vava'u",
+    "path": "data/geography/part-23.json",
+    "whole_file_sha256": "d61082ccd69b319723fadc4cad582b8d5c8a8ced3e50b4f90f00b4eb17e6a9c2",
+    "selected_geometry_sha256": "893d058b612801bc18186d8c008e23fb4363672c21a45c63ca387c5c1377ab7b",
+    "valid": true
+  },
+  "candidate": {
+    "component_id": "physical-component:0ba5f016c1cac781aba0a9bd5e5fe1736d54077a2fa188026e3907fe98cfaac6",
+    "physical_comparison_row_path": "coordination/engineering/global-physical-comparison-20261006/results/components-003.jsonl.gz",
+    "physical_comparison_row_container_sha256": "a02d8ef7b63ad0d155d49cd14310fedd3feb7e0e6b6e0181673d2745b44eb5fb",
+    "support_geometry_sha256": "b52e73213a58884f9fd29d7fbcac419500fb610fb336064e88b1d143724e5743",
+    "support_area_m2_emitted": 2494.141562927083,
+    "valid": true
+  },
+  "relations": {
+    "candidate_intersects_simplified_feature": true,
+    "simplified_feature_covers_candidate": true,
+    "candidate_covers_simplified_feature": false,
+    "candidate_outside_simplified_feature_empty": true,
+    "candidate_intersects_unsimplified_feature": true,
+    "unsimplified_feature_covers_candidate": true,
+    "candidate_outside_unsimplified_feature_empty": true,
+    "candidate_intersects_current_contact": true,
+    "current_contact_covers_candidate": false,
+    "candidate_outside_current_contact_empty": false,
+    "simplified_feature_equals_unsimplified_feature": false,
+    "simplified_feature_equals_current_contact": false,
+    "unsimplified_feature_equals_current_contact": false,
+    "simplified_vs_current_contact_symdiff_empty": false,
+    "unsimplified_vs_current_contact_symdiff_empty": false
+  },
+  "limits": [
+    "Topological predicates do not establish legal boundaries, accuracy, registration, dry land, effective date, or ownership.",
+    "No displayed planar degree-area is used as an earth area. The 2,494.141562927083 m² value is inherited as a prior emitted metric, not recomputed here.",
+    "The query/physical comparison is inherited. This script only compared one complete retained support pointset to the complete Vava’u feature and current contact."
+  ],
+  "bounded_ellipsoidal_area_comparison": {
+    "method": "WGS84 ellipsoidal area of bounded candidate-support subsets using pyproj.Geod(ellps=WGS84), independently from source polygon comparisons; no buffer, repair, or global producer rerun. This value is measurement of mapped support geometry only, not dry land or a legal boundary.",
+    "candidate_support_area_m2": 2494.153781838715,
+    "candidate_contact_intersection_area_m2": 0.0,
+    "candidate_outside_current_contact_area_m2": 2494.153781838715,
+    "candidate_source_intersection_area_m2": 2494.153781838715,
+    "candidate_outside_simplified_source_area_m2": 0.0,
+    "coverage_fraction_of_support_by_current_contact": 0.0,
+    "coverage_fraction_of_support_by_simplified_source": 1.0,
+    "inherited_reported_support_m2": 2494.141562927083
+  }
+}
