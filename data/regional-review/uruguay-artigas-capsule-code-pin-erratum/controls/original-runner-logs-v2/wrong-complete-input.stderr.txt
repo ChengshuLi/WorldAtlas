@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-fixtures-v2/wrong-complete-input/reproduce.py", line 100, in <module>
+    main()
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-fixtures-v2/wrong-complete-input/reproduce.py", line 81, in main
+    validate_capsule()
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-fixtures-v2/wrong-complete-input/reproduce.py", line 40, in validate_capsule
+    raise ValueError("capsule hash mismatch: " + rel)
+ValueError: capsule hash mismatch: inputs/sources/ury-gb-2017.geojson

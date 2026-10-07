@@ -1,0 +1,122 @@
+{
+  "all_original_pins_unchanged": true,
+  "baseline_commit": "643e4123ce9881a9d07f564166edae34aec7aa08",
+  "baseline_runs_reproduced": true,
+  "capsule_sha256": "5b3787d9f07373751d2bbd5a94acec41eab79de43732cd4f6c45e2fd72c3d873",
+  "date": "2026-10-07",
+  "finding": "The merged runner accepts an omitted required capsule pin and altered executed capsule code when the mutable manifest pin is removed or coherently refreshed; actual probe bytes and their hashes are recorded in this audit.",
+  "helper_sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+  "helper_version": "worldatlas-evidence-preparation-v1",
+  "issue": 1413,
+  "issue_body_sha256": "043bc67f66df53f60f2ac8b5d52b0a62fa71fb13556dd3bdf4f9e5d62cc91f71",
+  "limits": [
+    "These runs reproduce the retained offline representation only; no territorial, legal, current-boundary, source-reuse, or sovereignty conclusion is made."
+  ],
+  "observations": [
+    {
+      "case": "baseline-fresh-run-one",
+      "exit_code": 0,
+      "matches_original_report": true,
+      "output_files": [
+        "reproduction-results.json"
+      ],
+      "probe_sha256": null,
+      "report_sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a"
+    },
+    {
+      "case": "baseline-fresh-run-two",
+      "exit_code": 0,
+      "matches_original_report": true,
+      "output_files": [
+        "reproduction-results.json"
+      ],
+      "probe_sha256": null,
+      "report_sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a"
+    },
+    {
+      "case": "missing-executable-pin",
+      "exit_code": 0,
+      "matches_original_report": true,
+      "output_files": [
+        "reproduction-results.json"
+      ],
+      "probe_sha256": null,
+      "report_sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a"
+    },
+    {
+      "case": "removed-pin-altered-code",
+      "exit_code": 0,
+      "matches_original_report": true,
+      "output_files": [
+        "audit-unreviewed-code.txt",
+        "reproduction-results.json"
+      ],
+      "probe_bytes_hex": "65786563757465640a",
+      "probe_sha256": "72fd168b2afbe32bbf3dd9c035a34214d3169136b27835ae7ff5736e6b9ef888",
+      "probe_utf8": "executed\n",
+      "report_sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a"
+    },
+    {
+      "case": "coherently-refreshed-pin-altered-code",
+      "exit_code": 0,
+      "matches_original_report": true,
+      "output_files": [
+        "audit-unreviewed-code.txt",
+        "reproduction-results.json"
+      ],
+      "probe_bytes_hex": "65786563757465640a",
+      "probe_sha256": "72fd168b2afbe32bbf3dd9c035a34214d3169136b27835ae7ff5736e6b9ef888",
+      "probe_utf8": "executed\n",
+      "report_sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a"
+    },
+    {
+      "case": "ordinary-code-drift",
+      "exit_code": 1,
+      "output_namespace_unchanged": true,
+      "rejected": true,
+      "sentinel_sha256": null
+    },
+    {
+      "case": "wrong-complete-input",
+      "exit_code": 1,
+      "output_namespace_unchanged": true,
+      "rejected": true,
+      "sentinel_sha256": null
+    },
+    {
+      "case": "existing-output-sentinel",
+      "exit_code": 1,
+      "output_namespace_unchanged": true,
+      "rejected": true,
+      "sentinel_sha256": "d4383fc33176254b2abac7cb3c14bcaae5701681537db3d69adf740b1feb1b9c"
+    },
+    {
+      "case": "broken-symlink",
+      "exit_code": 1,
+      "output_namespace_unchanged": true,
+      "rejected": true,
+      "sentinel_sha256": null
+    },
+    {
+      "case": "symlink-parent-escape",
+      "exit_code": 1,
+      "output_namespace_unchanged": true,
+      "rejected": true,
+      "sentinel_sha256": null
+    },
+    {
+      "case": "traversal",
+      "exit_code": 1,
+      "output_namespace_unchanged": true,
+      "rejected": true,
+      "sentinel_sha256": null
+    }
+  ],
+  "pinned_files_checked": 24,
+  "runtime": {
+    "executable": "/usr/local/opt/python/bin/python3.7",
+    "python": "3.7.3 (default, Mar 27 2019, 09:23:32) \n[Clang 9.0.0 (clang-900.0.39.2)]"
+  },
+  "source_phase_bytes": 51396803,
+  "version": 1
+}

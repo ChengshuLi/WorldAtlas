@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-fixtures-v2/output-safety/reproduce.py", line 100, in <module>
+    main()
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-fixtures-v2/output-safety/reproduce.py", line 82, in main
+    dest = fresh_destination(args.output)
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-fixtures-v2/output-safety/reproduce.py", line 62, in fresh_destination
+    raise ValueError("output must be a direct child of owned outputs/")
+ValueError: output must be a direct child of owned outputs/

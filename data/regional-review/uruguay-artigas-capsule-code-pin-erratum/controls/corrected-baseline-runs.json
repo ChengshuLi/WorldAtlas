@@ -1,0 +1,65 @@
+{
+  "capsule_sha256": "5b3787d9f07373751d2bbd5a94acec41eab79de43732cd4f6c45e2fd72c3d873",
+  "directed_failure": {
+    "command": [
+      "/usr/local/opt/python/bin/python3.7",
+      "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/uruguay-artigas-capsule-code-pin-erratum/reproduce.py",
+      "--output",
+      "failure-captured-safe-4",
+      "--fail-after-compute"
+    ],
+    "exit_code": 1,
+    "failure": {
+      "capsule_stdout": "{\"features_checked\": 2, \"igm_features\": 21, \"old_adm1\": 19, \"pins_checked\": 5, \"result_sha256\": \"3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a\"}\n",
+      "error": "directed failure after computation; preserve this attempt",
+      "report_sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "status": "failed"
+    },
+    "output_name": "failure-captured-safe-4",
+    "report_sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+    "stderr_sha256": "ec4d1069a119b7ea654540ff5c517ee0db36f7fd2cc3a83fdcb2c764091d3417",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "success_receipt_exists": false
+  },
+  "issue": 1413,
+  "retained_report_sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+  "runs": [
+    {
+      "command": [
+        "/usr/local/opt/python/bin/python3.7",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/uruguay-artigas-capsule-code-pin-erratum/reproduce.py",
+        "--output",
+        "verified-run-16"
+      ],
+      "exit_code": 0,
+      "output_name": "verified-run-16",
+      "publication_sha256": "968e5cc65620f5b81fc2aa93fc7bab2f6cfac46790f01f9ce7bcb03a7f064784",
+      "report_sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 442,
+      "stdout_sha256": "520b8f278aa0dde567ae646d796ca1f2dcdd2a6ca504353fb96813e8c074b06b"
+    },
+    {
+      "command": [
+        "/usr/local/opt/python/bin/python3.7",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/uruguay-artigas-capsule-code-pin-erratum/reproduce.py",
+        "--output",
+        "verified-run-17"
+      ],
+      "exit_code": 0,
+      "output_name": "verified-run-17",
+      "publication_sha256": "968e5cc65620f5b81fc2aa93fc7bab2f6cfac46790f01f9ce7bcb03a7f064784",
+      "report_sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "stderr_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 442,
+      "stdout_sha256": "98ea481462b56112a2ba765cbc4ba60f7360e39852a77b8972c5bdf75f3ae2f1"
+    }
+  ],
+  "runtime": {
+    "executable": "/usr/local/opt/python/bin/python3.7",
+    "python": "3.7.3 (default, Mar 27 2019, 09:23:32) \n[Clang 9.0.0 (clang-900.0.39.2)]"
+  },
+  "version": 1
+}

@@ -1,0 +1,2436 @@
+{
+  "version": 1,
+  "issue": 1413,
+  "lane": "geography",
+  "worker_id": "01a10947-b3d7-7812-8b2f-c5a47e88ccb2",
+  "subject_ids": [
+    "gb:URY:ADM1:27058087B22084813565519"
+  ],
+  "subject_ids_sha256": "a4fe038ac177b539d1542dff7edc80887a05584ced241070f4ad2cd33cf1f50a",
+  "baseline": {
+    "commit": "643e4123ce9881a9d07f564166edae34aec7aa08",
+    "files": [
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/validation/macro-publication-v5.json",
+        "bytes": 2826,
+        "sha256": "aae3967fde4f5bf92b3cb0b42c490c6c6a5921c7421dcdc9533f242afbd6a674",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-25.json",
+        "bytes": 4525239,
+        "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/uruguay-artigas-contested-territory-20261005/evidence-quality.json",
+        "bytes": 16843,
+        "sha256": "da1f3f78f2abe3b22e38e59c92974c3f39f03abbf03089fb48e4da7c48be4481",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/uruguay-artigas-contested-territory-20261005/reproduce.py",
+        "bytes": 5810,
+        "sha256": "c6abb1d4b2ba662d2b7318db55d4fb9943945257a754ee8e42ff17d4ac0d79f8",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/uruguay-artigas-contested-territory-20261005/reproduction-results.json",
+        "bytes": 2506,
+        "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/uruguay-artigas-contested-territory-20261005/source-inventory.json",
+        "bytes": 7519,
+        "sha256": "83c6a22703baedab022144d3284e4b6434043c91e04dccd1573c02473c576675",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/uruguay-artigas-contested-guard-erratum/reproduce.py",
+        "bytes": 4493,
+        "sha256": "107c20e0cb35ad47d614d56d11bc97780178e769d885bfd66bf0a7f96eba3265",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/uruguay-artigas-contested-guard-erratum/inputs/code/capsule-reproduce.py",
+        "bytes": 6007,
+        "sha256": "5b3787d9f07373751d2bbd5a94acec41eab79de43732cd4f6c45e2fd72c3d873",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/uruguay-artigas-contested-guard-erratum/verify-guard.py",
+        "bytes": 1870,
+        "sha256": "0ea80abcaa0e50f2e8a18ce30b777011e9fdc26deb41bcfc9e3bd65a5628d859",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/uruguay-artigas-contested-guard-erratum/evidence-quality.json",
+        "bytes": 27284,
+        "sha256": "cdf436b27cc1d1504034cba37b2aa3923b6d2b34cc4edef2727294904b219161",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/uruguay-artigas-contested-guard-erratum/inputs/sources/ury-gb-2017.geojson",
+        "bytes": 3632079,
+        "sha256": "9f4887205e7b359af2ef1e4f484ad071d2dc0d12d068f1d7b6c1cc6c2624d1cf",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/uruguay-artigas-contested-guard-erratum/inputs/sources/ury-igm-current.geojson",
+        "bytes": 16950115,
+        "sha256": "3cfa19c6be9d12bd159b236e15839f958656fdbe66ef19e38379cb54c141b3a7",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "data/world-index.json": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "data/hierarchy.json": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "data/administrative-sources.json": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "data/validation/macro-publication-v5.json": "aae3967fde4f5bf92b3cb0b42c490c6c6a5921c7421dcdc9533f242afbd6a674",
+      "data/geography/part-25.json": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394",
+      "data/regional-review/uruguay-artigas-contested-territory-20261005/evidence-quality.json": "da1f3f78f2abe3b22e38e59c92974c3f39f03abbf03089fb48e4da7c48be4481",
+      "data/regional-review/uruguay-artigas-contested-territory-20261005/reproduce.py": "c6abb1d4b2ba662d2b7318db55d4fb9943945257a754ee8e42ff17d4ac0d79f8",
+      "data/regional-review/uruguay-artigas-contested-territory-20261005/reproduction-results.json": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "data/regional-review/uruguay-artigas-contested-territory-20261005/source-inventory.json": "83c6a22703baedab022144d3284e4b6434043c91e04dccd1573c02473c576675",
+      "data/regional-review/uruguay-artigas-contested-guard-erratum/reproduce.py": "107c20e0cb35ad47d614d56d11bc97780178e769d885bfd66bf0a7f96eba3265",
+      "data/regional-review/uruguay-artigas-contested-guard-erratum/inputs/code/capsule-reproduce.py": "5b3787d9f07373751d2bbd5a94acec41eab79de43732cd4f6c45e2fd72c3d873",
+      "data/regional-review/uruguay-artigas-contested-guard-erratum/verify-guard.py": "0ea80abcaa0e50f2e8a18ce30b777011e9fdc26deb41bcfc9e3bd65a5628d859",
+      "data/regional-review/uruguay-artigas-contested-guard-erratum/evidence-quality.json": "cdf436b27cc1d1504034cba37b2aa3923b6d2b34cc4edef2727294904b219161",
+      "data/regional-review/uruguay-artigas-contested-guard-erratum/inputs/sources/ury-gb-2017.geojson": "9f4887205e7b359af2ef1e4f484ad071d2dc0d12d068f1d7b6c1cc6c2624d1cf",
+      "data/regional-review/uruguay-artigas-contested-guard-erratum/inputs/sources/ury-igm-current.geojson": "3cfa19c6be9d12bd159b236e15839f958656fdbe66ef19e38379cb54c141b3a7"
+    },
+    "pin_files": {
+      "data/world-index.json": "data/world-index.json",
+      "data/hierarchy.json": "data/hierarchy.json",
+      "data/administrative-sources.json": "data/administrative-sources.json",
+      "data/validation/macro-publication-v5.json": "data/validation/macro-publication-v5.json",
+      "data/geography/part-25.json": "data/geography/part-25.json",
+      "data/regional-review/uruguay-artigas-contested-territory-20261005/evidence-quality.json": "data/regional-review/uruguay-artigas-contested-territory-20261005/evidence-quality.json",
+      "data/regional-review/uruguay-artigas-contested-territory-20261005/reproduce.py": "data/regional-review/uruguay-artigas-contested-territory-20261005/reproduce.py",
+      "data/regional-review/uruguay-artigas-contested-territory-20261005/reproduction-results.json": "data/regional-review/uruguay-artigas-contested-territory-20261005/reproduction-results.json",
+      "data/regional-review/uruguay-artigas-contested-territory-20261005/source-inventory.json": "data/regional-review/uruguay-artigas-contested-territory-20261005/source-inventory.json",
+      "data/regional-review/uruguay-artigas-contested-guard-erratum/reproduce.py": "data/regional-review/uruguay-artigas-contested-guard-erratum/reproduce.py",
+      "data/regional-review/uruguay-artigas-contested-guard-erratum/inputs/code/capsule-reproduce.py": "data/regional-review/uruguay-artigas-contested-guard-erratum/inputs/code/capsule-reproduce.py",
+      "data/regional-review/uruguay-artigas-contested-guard-erratum/verify-guard.py": "data/regional-review/uruguay-artigas-contested-guard-erratum/verify-guard.py",
+      "data/regional-review/uruguay-artigas-contested-guard-erratum/evidence-quality.json": "data/regional-review/uruguay-artigas-contested-guard-erratum/evidence-quality.json",
+      "data/regional-review/uruguay-artigas-contested-guard-erratum/inputs/sources/ury-gb-2017.geojson": "data/regional-review/uruguay-artigas-contested-guard-erratum/inputs/sources/ury-gb-2017.geojson",
+      "data/regional-review/uruguay-artigas-contested-guard-erratum/inputs/sources/ury-igm-current.geojson": "data/regional-review/uruguay-artigas-contested-guard-erratum/inputs/sources/ury-igm-current.geojson"
+    },
+    "subject_files": {
+      "gb:URY:ADM1:27058087B22084813565519": "data/geography/part-25.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "ury-gb-2017-adm1",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/URY/ADM1/geoBoundaries-URY-ADM1.geojson",
+      "role": "Historical neighboring-tier and subject-identity comparison. It represents Artigas as a single ordinary ADM1; it does not adjudicate modern disputed features or bilateral title.",
+      "vintage": "2017; gbOpen ADM1",
+      "retrieved_at": "2026-10-05 (retained parent packet)",
+      "license": {
+        "status": "redistributable",
+        "terms": "ODbL 1.0 as declared in the pinned Atlas source metadata"
+      },
+      "retention": "retained",
+      "verification": "unverified",
+      "temporal_status": "historical",
+      "limit": "Historical neighboring-tier and subject-identity comparison. It represents Artigas as a single ordinary ADM1; it does not adjudicate modern disputed features or bilateral title.",
+      "files": [
+        {
+          "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/inputs/sources/ury-gb-2017.geojson",
+          "bytes": 3632079,
+          "sha256": "9f4887205e7b359af2ef1e4f484ad071d2dc0d12d068f1d7b6c1cc6c2624d1cf",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "supported_interval": {
+        "from": 2017,
+        "to": 2018
+      }
+    },
+    {
+      "id": "uruguay-igm-current",
+      "url": "https://sit.mvot.gub.uy/arcgis/rest/services/07_EXTERNO/LIMITES_ADMINISTRATIVOS/MapServer/3/query?where=1%3D1&outFields=%2A&returnGeometry=true&outSR=4326&f=geojson",
+      "role": "Official mapping representation. Its DEPTO field assigns both separate records to ARTIGAS and its DEF/TXT fields mark each contested; this is not a jointly agreed title or complete ADM2 inventory.",
+      "vintage": "Data update 2024-09-18; metadata update 2026-07-15 (official metadata record 55)",
+      "retrieved_at": "2026-10-05 (retained parent packet)",
+      "license": {
+        "status": "redistributable",
+        "terms": "Official metadata permits free use with attribution to IGM, AGESIC and IDE; service credits IGM"
+      },
+      "retention": "retained",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "limit": "Official mapping representation. Its DEPTO field assigns both separate records to ARTIGAS and its DEF/TXT fields mark each contested; this is not a jointly agreed title or complete ADM2 inventory.",
+      "files": [
+        {
+          "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/inputs/sources/ury-igm-current.geojson",
+          "bytes": 16950115,
+          "sha256": "3cfa19c6be9d12bd159b236e15839f958656fdbe66ef19e38379cb54c141b3a7",
+          "hash_kind": "file-bytes"
+        }
+      ]
+    },
+    {
+      "id": "br-1851-boundary-treaty-edition",
+      "url": "https://www.gov.br/funag/pt-br/chdd/arquivos-chdd/publicacoes/obras_do_barao_do_rio_branco__volume_v_._questoes_de_limites__exposicoes_de_motivos__capa_mole.pdf",
+      "role": "Primary treaty text reproduced in official Brazilian government edition. Art. 3 §2 describes the boundary via the branch named Arroyo de la Invernada on one cited map and unnamed on another, and refers to island(s) at the Quaraí mouth as belonging to Brazil. It does not independently identify current IGM polygons as those legal objects or settle the competing modern interpretation.",
+      "vintage": "1851 instrument reproduced in FUNAG edition; edition consulted 2026-10-06",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Official hosted historical publication; reuse terms for the PDF are not established here"
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "historical",
+      "limit": "Primary treaty text reproduced in official Brazilian government edition. Art. 3 §2 describes the boundary via the branch named Arroyo de la Invernada on one cited map and unnamed on another, and refers to island(s) at the Quaraí mouth as belonging to Brazil. It does not independently identify current IGM polygons as those legal objects or settle the competing modern interpretation.",
+      "restoration": "Fetch the exact URL as bytes and verify the SHA-256 and byte count above; the relevant text is Portuguese Article 3 §2 and instrument ratification/exchange information in the same volume. Do not replace with OCR or another edition.",
+      "supported_interval": {
+        "from": 1851,
+        "to": 1852
+      }
+    },
+    {
+      "id": "uy-decree-315-2019",
+      "url": "https://www.impo.com.uy/bases/decretos-originales/315-2019",
+      "role": "Historical customs-jurisdiction instrument describes a route from Marco Masoller along Arroyo la Invernada (Límite contestado—Arroyo Maneco) to Cuareim. This helps explain official administrative naming but its annulled jurisdiction assignment is not a current department boundary or bilateral territorial delimitation.",
+      "vintage": "Promulgated 2019-10-28; published 2019-10-31; annulled with general and absolute effects by TCA Judgment 758/022 dated 2022-10-20",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Official legal text; reuse terms not separately established"
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "limit": "Historical customs-jurisdiction instrument describes a route from Marco Masoller along Arroyo la Invernada (Límite contestado—Arroyo Maneco) to Cuareim. This helps explain official administrative naming but its annulled jurisdiction assignment is not a current department boundary or bilateral territorial delimitation.",
+      "restoration": "Fetch the exact URL as bytes and verify SHA-256 and byte count above; consult Annex III, Aduana Artigas jurisdiction. IMPO marks this decree annulled with general and absolute effects by TCA 758/022."
+    },
+    {
+      "id": "uy-tca-758-2022",
+      "url": "https://www.impo.com.uy/bases/sentencias-tca-originales/758-2022",
+      "role": "The Tribunal declared the challenged Decree 315/2019 null with general and absolute effects. This establishes that the customs-jurisdiction instrument is not an operative current legal basis; it does not decide Brazil–Uruguay territorial sovereignty or map the disputed polygons.",
+      "vintage": "Judgment dated 2022-10-20; publication 2025-05-21",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Official judicial text; reuse terms not separately established"
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "limit": "The Tribunal declared the challenged Decree 315/2019 null with general and absolute effects. This establishes that the customs-jurisdiction instrument is not an operative current legal basis; it does not decide Brazil–Uruguay territorial sovereignty or map the disputed polygons.",
+      "restoration": "Fetch the exact URL as bytes and verify SHA-256 and byte count above; inspect the case and operative annulment section concerning Decree 315/2019."
+    },
+    {
+      "id": "uy-decree-605-1974",
+      "url": "https://www.impo.com.uy/bases/decretos/605-1974",
+      "role": "Uruguay ordered preparation of a general map showing territories held in reserve and contested borders pending agreement with neighbors. It establishes official treatment of a disputed-border category, not the names, location, or title of these two features.",
+      "vintage": "1974-07-26 decree; published 1974-08-02",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Official legal text; reuse terms not separately established"
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "historical",
+      "limit": "Uruguay ordered preparation of a general map showing territories held in reserve and contested borders pending agreement with neighbors. It establishes official treatment of a disputed-border category, not the names, location, or title of these two features.",
+      "restoration": "Fetch the exact URL as bytes and verify the SHA-256 and byte count above.",
+      "supported_interval": {
+        "from": 1974,
+        "to": 1975
+      }
+    },
+    {
+      "id": "uy-mre-annual-report-2023",
+      "url": "https://medios.presidencia.gub.uy/legal/2024/proyectos/03/tomo_2_memoria_2023.pdf",
+      "role": "Uruguay reports following contested limits with Brazil, including Rincón de Artigas and Isla Brasilera, pending bilateral resolution. It is the government's stated position/status at that reporting time, not a delimitation instrument and does not establish later resolution or a legal boundary.",
+      "vintage": "2023 annual report, issued 2024",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Official government report; reuse terms not separately established"
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "limit": "Uruguay reports following contested limits with Brazil, including Rincón de Artigas and Isla Brasilera, pending bilateral resolution. It is the government's stated position/status at that reporting time, not a delimitation instrument and does not establish later resolution or a legal boundary.",
+      "restoration": "Fetch the exact URL as bytes and verify the SHA-256 and byte count above; consult the foreign-affairs discussion in printed page 323 (PDF page 324)."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/README.md",
+      "sha256": "02810f929a93b3374e6473d016a43814b637a40f5565bc2f6ecf5ada7027bda9",
+      "bytes": 4151,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/failure-captured-safe/stderr.txt",
+      "sha256": "16ae14b37e86d521105ca871887f488f328c49182eba8de0f95ed36a288044e4",
+      "bytes": 712,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/failure-captured-safe/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/failure-captured-safe-3/stderr.txt",
+      "sha256": "ec4d1069a119b7ea654540ff5c517ee0db36f7fd2cc3a83fdcb2c764091d3417",
+      "bytes": 712,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/failure-captured-safe-3/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/failure-captured-safe-4/stderr.txt",
+      "sha256": "ec4d1069a119b7ea654540ff5c517ee0db36f7fd2cc3a83fdcb2c764091d3417",
+      "bytes": 712,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/failure-captured-safe-4/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/failure-captured-safe-three/stderr.txt",
+      "sha256": "ec4d1069a119b7ea654540ff5c517ee0db36f7fd2cc3a83fdcb2c764091d3417",
+      "bytes": 712,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/failure-captured-safe-three/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/failure-captured-safe-two/stderr.txt",
+      "sha256": "16ae14b37e86d521105ca871887f488f328c49182eba8de0f95ed36a288044e4",
+      "bytes": 712,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/failure-captured-safe-two/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-14/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-14/stdout.txt",
+      "sha256": "1126c29b339858f8f4c5c93b7470b5a03acf676c97efaa29c30cd8b51a94c016",
+      "bytes": 442,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-15/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-15/stdout.txt",
+      "sha256": "eee133358bdd9c050be737ee10b1d9ea1836f0f59b898ad1ae83255c37c63cea",
+      "bytes": 442,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-16/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-16/stdout.txt",
+      "sha256": "520b8f278aa0dde567ae646d796ca1f2dcdd2a6ca504353fb96813e8c074b06b",
+      "bytes": 442,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-17/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-17/stdout.txt",
+      "sha256": "98ea481462b56112a2ba765cbc4ba60f7360e39852a77b8972c5bdf75f3ae2f1",
+      "bytes": 442,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-eight/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-eight/stdout.txt",
+      "sha256": "4cc9520e2017271063d6deed654f2b3469a9e031c4c71fb10a623f4606798a1c",
+      "bytes": 445,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-eleven/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-eleven/stdout.txt",
+      "sha256": "2d4dd4424b53abd95e0c73f59d77114fe816e5dc9f61d81d4723e3a20edf6562",
+      "bytes": 446,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-fifteen/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-fifteen/stdout.txt",
+      "sha256": "78da55799b274d4ab091e81b06f327572b10ff5bc43cac500dbc070cd0c8b4bb",
+      "bytes": 447,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-five/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-five/stdout.txt",
+      "sha256": "8104e90081573a745267e56b090070800b041e58e4b97d9b6aac6c457198447a",
+      "bytes": 444,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-four/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-four/stdout.txt",
+      "sha256": "d5942cfde392cc2e22882c3d4dc9f34af0ff2a770bf40127c7addbc9d5180d40",
+      "bytes": 444,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-fourteen/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-fourteen/stdout.txt",
+      "sha256": "f5eeefec2f2235ca978d88ffaa1f8cba896b651bbf6c051111abca62b2b19be5",
+      "bytes": 448,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-nine/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-nine/stdout.txt",
+      "sha256": "aa0bf4d88ee0959e708d8063e2ac6ec62e5e2684be56fa234efd8936f6718b1f",
+      "bytes": 444,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-seven/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-seven/stdout.txt",
+      "sha256": "0a20316aceed4226eaa4219e1b46f8bf7a63d482535d31f942359794603e211b",
+      "bytes": 445,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-six/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-six/stdout.txt",
+      "sha256": "79b90337007f4b3a125b248966081a3d76cb6575361b289cfd633d52c54984b7",
+      "bytes": 443,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-ten/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-ten/stdout.txt",
+      "sha256": "9ce7d3c621ef96c5ee012f07aaa32c21cb6fafb0a1bd27a7a515b972a3181471",
+      "bytes": 443,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-thirteen/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-thirteen/stdout.txt",
+      "sha256": "f8fb308d8f6bdb2feb716f439622cc8410349c70c9a8ba2d6e39af6d56401e86",
+      "bytes": 448,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-twelve/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-twelve/stdout.txt",
+      "sha256": "51e0783c9604f4a615363813fe4d448b804ef9eb5e00c327496441eb2c00359f",
+      "bytes": 446,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-runs.json",
+      "sha256": "87ccdbda934628b9ce4b5251e205ea2c477bd33eb0ba2230be0fcb2f48653988",
+      "bytes": 3309,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-audit.json",
+      "sha256": "946fdb7b583e551718ae682e9941b72682d8b7680478f215f748f78a62b80fc0",
+      "bytes": 13867,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/altered-code-unchanged-manifest/stderr.txt",
+      "sha256": "7d3e96e4147cf3d864b44ffb545bd3e5ed1d5311ee9f2aa337b8763e9ef802e7",
+      "bytes": 1257,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/altered-code-unchanged-manifest/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/altered-code-unchanged-manifest-1/stderr.txt",
+      "sha256": "7d3e96e4147cf3d864b44ffb545bd3e5ed1d5311ee9f2aa337b8763e9ef802e7",
+      "bytes": 1257,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/altered-code-unchanged-manifest-1/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/altered-code-unchanged-manifest-2/stderr.txt",
+      "sha256": "7d3e96e4147cf3d864b44ffb545bd3e5ed1d5311ee9f2aa337b8763e9ef802e7",
+      "bytes": 1257,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/altered-code-unchanged-manifest-2/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/broken-symlink/stderr.txt",
+      "sha256": "e30f185fa064f85b7e9c4175c60402843f707b26a313ed756588bee954292f1a",
+      "bytes": 1099,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/broken-symlink/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/broken-symlink-1/stderr.txt",
+      "sha256": "e30f185fa064f85b7e9c4175c60402843f707b26a313ed756588bee954292f1a",
+      "bytes": 1099,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/broken-symlink-1/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/broken-symlink-2/stderr.txt",
+      "sha256": "e30f185fa064f85b7e9c4175c60402843f707b26a313ed756588bee954292f1a",
+      "bytes": 1099,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/broken-symlink-2/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/capsule-and-input-replaced-after-validation/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/capsule-and-input-replaced-after-validation/stdout.txt",
+      "sha256": "d1e667b52d5e507bbd92f6f94e33700bdcdc0537ad9c8625586b0bc771162fe3",
+      "bytes": 434,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/capsule-and-input-replaced-after-validation-1/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/capsule-and-input-replaced-after-validation-1/stdout.txt",
+      "sha256": "d1e667b52d5e507bbd92f6f94e33700bdcdc0537ad9c8625586b0bc771162fe3",
+      "bytes": 434,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/capsule-and-input-replaced-after-validation-2/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/capsule-and-input-replaced-after-validation-2/stdout.txt",
+      "sha256": "d1e667b52d5e507bbd92f6f94e33700bdcdc0537ad9c8625586b0bc771162fe3",
+      "bytes": 434,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/coherently-refreshed-manifest/stderr.txt",
+      "sha256": "27b027d63448d504f2301b1f5e936bda3483842ef465df875d6601b2b57e0de5",
+      "bytes": 1245,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/coherently-refreshed-manifest/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/coherently-refreshed-manifest-1/stderr.txt",
+      "sha256": "27b027d63448d504f2301b1f5e936bda3483842ef465df875d6601b2b57e0de5",
+      "bytes": 1245,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/coherently-refreshed-manifest-1/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/coherently-refreshed-manifest-2/stderr.txt",
+      "sha256": "27b027d63448d504f2301b1f5e936bda3483842ef465df875d6601b2b57e0de5",
+      "bytes": 1245,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/coherently-refreshed-manifest-2/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/existing-output-sentinel/stderr.txt",
+      "sha256": "b63689e7c334f3aae53a4eb1a0a29efdc48ea83daf8a53b00d62040754b194a7",
+      "bytes": 1129,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/existing-output-sentinel/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/existing-output-sentinel-1/stderr.txt",
+      "sha256": "b63689e7c334f3aae53a4eb1a0a29efdc48ea83daf8a53b00d62040754b194a7",
+      "bytes": 1129,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/existing-output-sentinel-1/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/existing-output-sentinel-2/stderr.txt",
+      "sha256": "b63689e7c334f3aae53a4eb1a0a29efdc48ea83daf8a53b00d62040754b194a7",
+      "bytes": 1129,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/existing-output-sentinel-2/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/failure-after-compute/stderr.txt",
+      "sha256": "a9e7acfd756b07d01d62375ebacbe02feb19f8ea9f346097fde30f76524d3831",
+      "bytes": 826,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/failure-after-compute/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/failure-after-compute-1/stderr.txt",
+      "sha256": "a9e7acfd756b07d01d62375ebacbe02feb19f8ea9f346097fde30f76524d3831",
+      "bytes": 826,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/failure-after-compute-1/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/failure-after-compute-2/stderr.txt",
+      "sha256": "a9e7acfd756b07d01d62375ebacbe02feb19f8ea9f346097fde30f76524d3831",
+      "bytes": 826,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/failure-after-compute-2/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/fixture-and-log-symlink-parents-rejected/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/fixture-and-log-symlink-parents-rejected/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/fixture-and-log-symlink-parents-rejected-1/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/fixture-and-log-symlink-parents-rejected-1/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/missing-executable-pin/stderr.txt",
+      "sha256": "adba82dc8b516250ef9aa539c1ff63cfbc78adc8bb3f2bfdd63da5f5dac16380",
+      "bytes": 1224,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/missing-executable-pin/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/missing-executable-pin-1/stderr.txt",
+      "sha256": "adba82dc8b516250ef9aa539c1ff63cfbc78adc8bb3f2bfdd63da5f5dac16380",
+      "bytes": 1224,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/missing-executable-pin-1/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/missing-executable-pin-2/stderr.txt",
+      "sha256": "adba82dc8b516250ef9aa539c1ff63cfbc78adc8bb3f2bfdd63da5f5dac16380",
+      "bytes": 1224,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/missing-executable-pin-2/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/publication-receipt-sync-failure/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/publication-receipt-sync-failure/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/publication-receipt-sync-failure-1/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/publication-receipt-sync-failure-1/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/publication-receipt-sync-failure-2/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/publication-receipt-sync-failure-2/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/symlink-parent-escape/stderr.txt",
+      "sha256": "7324dd7e843a0e7652bfc074a94563075a4f72315de1981657b2faac296f18f1",
+      "bytes": 1116,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/symlink-parent-escape/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/symlink-parent-escape-1/stderr.txt",
+      "sha256": "7324dd7e843a0e7652bfc074a94563075a4f72315de1981657b2faac296f18f1",
+      "bytes": 1116,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/symlink-parent-escape-1/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/symlink-parent-escape-2/stderr.txt",
+      "sha256": "7324dd7e843a0e7652bfc074a94563075a4f72315de1981657b2faac296f18f1",
+      "bytes": 1116,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/symlink-parent-escape-2/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/traversal/stderr.txt",
+      "sha256": "b8a9d451b697fcfb289b8071b09c00331d37da12486bed995f604677dc4b311c",
+      "bytes": 1132,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/traversal/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/traversal-1/stderr.txt",
+      "sha256": "b8a9d451b697fcfb289b8071b09c00331d37da12486bed995f604677dc4b311c",
+      "bytes": 1132,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/traversal-1/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/traversal-2/stderr.txt",
+      "sha256": "b8a9d451b697fcfb289b8071b09c00331d37da12486bed995f604677dc4b311c",
+      "bytes": 1132,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/traversal-2/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/wrong-complete-input/stderr.txt",
+      "sha256": "2b7da116ca05e31b6a24543e15b9f23bd98f62d68a112aae66d1c91b1250073b",
+      "bytes": 1229,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/wrong-complete-input/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/wrong-complete-input-1/stderr.txt",
+      "sha256": "2b7da116ca05e31b6a24543e15b9f23bd98f62d68a112aae66d1c91b1250073b",
+      "bytes": 1229,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/wrong-complete-input-1/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/wrong-complete-input-2/stderr.txt",
+      "sha256": "2b7da116ca05e31b6a24543e15b9f23bd98f62d68a112aae66d1c91b1250073b",
+      "bytes": 1229,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/wrong-complete-input-2/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-audit-v2.json",
+      "sha256": "364aba043e1f0e910d313ad3ee35f971204d63cc59f1f7467edac7d3af48a6f9",
+      "bytes": 4140,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/baseline-fresh-run-one.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/baseline-fresh-run-one.stdout.txt",
+      "sha256": "cad172618dcd8bd16150124a2ec89c42f85f1a5e98eb722caaf1b458e3bc56d0",
+      "bytes": 300,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/baseline-fresh-run-two.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/baseline-fresh-run-two.stdout.txt",
+      "sha256": "d9c533d60167015b3c160c20b3283dd3c2e082a135fe7ba86f61d1cfc57c658b",
+      "bytes": 300,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/broken-symlink.stderr.txt",
+      "sha256": "c3b22e9d14030f2b355a399157049224b7bc0ba91bf39762283a2ac450f32abb",
+      "bytes": 1105,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/broken-symlink.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/coherently-refreshed-pin-altered-code.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/coherently-refreshed-pin-altered-code.stdout.txt",
+      "sha256": "c43f41ec48b781f01b3824fa4bea87acd41e1d3844a4057788ef5163f3146655",
+      "bytes": 311,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/existing-output-sentinel.stderr.txt",
+      "sha256": "c3b22e9d14030f2b355a399157049224b7bc0ba91bf39762283a2ac450f32abb",
+      "bytes": 1105,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/existing-output-sentinel.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/missing-executable-pin.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/missing-executable-pin.stdout.txt",
+      "sha256": "7876b92728a9490798a5e296922dccde954c4c284ce9e43a02e68ced11895551",
+      "bytes": 309,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/ordinary-code-drift.stderr.txt",
+      "sha256": "5b645d26d1f2c3655807f45c7ad5c2ddbfc74e1adc0265612cc741b0104bf811",
+      "bytes": 1135,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/ordinary-code-drift.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/removed-pin-altered-code.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/removed-pin-altered-code.stdout.txt",
+      "sha256": "552feb73a639ebe2ce943a6a5465da278acc74d0fc53604830a5dd1297739f2a",
+      "bytes": 309,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/symlink-parent-escape.stderr.txt",
+      "sha256": "2e3ec10eaaf07eebb17f1bdea1f637222ee3cee7adf43e7d14e34847fa7d47a5",
+      "bytes": 1093,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/symlink-parent-escape.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/traversal.stderr.txt",
+      "sha256": "0e161dd45d54c180dc53bd97b464476d5f23b62569075b69ea7916695f0f8fc5",
+      "bytes": 1147,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/traversal.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/wrong-complete-input.stderr.txt",
+      "sha256": "7fc19b135fc001a9996f3212c26d398c94659759d5dfb5b1b54694e141846c55",
+      "bytes": 1140,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/wrong-complete-input.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/reproduce_corrected_runner.py",
+      "sha256": "889129ce64eefbeaaa60ca9d831a102c847d3b806e6d59a31e773a40bf6ab63c",
+      "bytes": 5058,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/reproduce_original_runner.py",
+      "sha256": "6a8fd160f7fa5b73a8be0db4a43f84aa9dffa222fef51587dcaa9ca1cd13ec18",
+      "bytes": 11260,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/verify_corrected_runner.py",
+      "sha256": "fc0a7153f75299d7150db1a72528ebe04c18f1b835613013c05d3aec0e013e84",
+      "bytes": 17259,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/findings.md",
+      "sha256": "3c0b1c20a60b3f9f3b8af4f3b124826db8020930ed009cdc095f0ecd54626d3d",
+      "bytes": 3957,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/inputs/baseline/data-administrative-sources.json",
+      "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "bytes": 661416,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/inputs/baseline/data-geography-part-25.json",
+      "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394",
+      "bytes": 4525239,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/inputs/baseline/data-hierarchy.json",
+      "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "bytes": 10164089,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/inputs/baseline/data-macro-publication-v5.json",
+      "sha256": "aae3967fde4f5bf92b3cb0b42c490c6c6a5921c7421dcdc9533f242afbd6a674",
+      "bytes": 2826,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/inputs/baseline/data-world-index.json",
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "bytes": 944,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/inputs/code/capsule-reproduce.py",
+      "sha256": "5b3787d9f07373751d2bbd5a94acec41eab79de43732cd4f6c45e2fd72c3d873",
+      "bytes": 6007,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/inputs/code/original-reproduce.py",
+      "sha256": "c6abb1d4b2ba662d2b7318db55d4fb9943945257a754ee8e42ff17d4ac0d79f8",
+      "bytes": 5810,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/inputs/code/original-wrapper.py",
+      "sha256": "107c20e0cb35ad47d614d56d11bc97780178e769d885bfd66bf0a7f96eba3265",
+      "bytes": 4493,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/inputs/issue-1413-api.json",
+      "sha256": "4d0606fd5f65966bcab06b2718c5aae8d5fb35187507a1e76424ab1a4dc449d8",
+      "bytes": 13970,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/inputs/original-manifest.json",
+      "sha256": "cdf436b27cc1d1504034cba37b2aa3923b6d2b34cc4edef2727294904b219161",
+      "bytes": 27284,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/inputs/original-reproduction-results.json",
+      "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "bytes": 2506,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/inputs/original-source-inventory.json",
+      "sha256": "83c6a22703baedab022144d3284e4b6434043c91e04dccd1573c02473c576675",
+      "bytes": 7519,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/baseline-run-one/reproduction-results.json",
+      "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "bytes": 2506,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/baseline-run-two/publication.json",
+      "sha256": "968e5cc65620f5b81fc2aa93fc7bab2f6cfac46790f01f9ce7bcb03a7f064784",
+      "bytes": 194,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/baseline-run-two/reproduction-results.json",
+      "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "bytes": 2506,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/captured-execution-run/publication.json",
+      "sha256": "968e5cc65620f5b81fc2aa93fc7bab2f6cfac46790f01f9ce7bcb03a7f064784",
+      "bytes": 194,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/captured-execution-run/reproduction-results.json",
+      "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "bytes": 2506,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/failure-after-compute/failure.json",
+      "sha256": "bf8c5c32b329ad7057f6ab48a5f1094d632cdd915916f241334058fa92064de6",
+      "bytes": 176,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/failure-after-compute/reproduction-results.json",
+      "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "bytes": 2506,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/failure-captured-safe/failure.json",
+      "sha256": "65a8a132a5d40c6407df02e01c06885b85a11acf421df7f0e38f0ce497e7e05d",
+      "bytes": 375,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/failure-captured-safe/reproduction-results.json",
+      "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "bytes": 2506,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/failure-captured-safe-3/failure.json",
+      "sha256": "65a8a132a5d40c6407df02e01c06885b85a11acf421df7f0e38f0ce497e7e05d",
+      "bytes": 375,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/failure-captured-safe-3/reproduction-results.json",
+      "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "bytes": 2506,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/failure-captured-safe-4/failure.json",
+      "sha256": "65a8a132a5d40c6407df02e01c06885b85a11acf421df7f0e38f0ce497e7e05d",
+      "bytes": 375,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/failure-captured-safe-4/reproduction-results.json",
+      "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "bytes": 2506,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/failure-captured-safe-three/failure.json",
+      "sha256": "65a8a132a5d40c6407df02e01c06885b85a11acf421df7f0e38f0ce497e7e05d",
+      "bytes": 375,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/failure-captured-safe-three/reproduction-results.json",
+      "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "bytes": 2506,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/failure-captured-safe-two/failure.json",
+      "sha256": "65a8a132a5d40c6407df02e01c06885b85a11acf421df7f0e38f0ce497e7e05d",
+      "bytes": 375,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/failure-captured-safe-two/reproduction-results.json",
+      "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "bytes": 2506,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/final-run-three/publication.json",
+      "sha256": "968e5cc65620f5b81fc2aa93fc7bab2f6cfac46790f01f9ce7bcb03a7f064784",
+      "bytes": 194,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/final-run-three/reproduction-results.json",
+      "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "bytes": 2506,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/race-stage-one/publication.json",
+      "sha256": "968e5cc65620f5b81fc2aa93fc7bab2f6cfac46790f01f9ce7bcb03a7f064784",
+      "bytes": 194,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/race-stage-one/reproduction-results.json",
+      "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "bytes": 2506,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-14/publication.json",
+      "sha256": "968e5cc65620f5b81fc2aa93fc7bab2f6cfac46790f01f9ce7bcb03a7f064784",
+      "bytes": 194,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-14/reproduction-results.json",
+      "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "bytes": 2506,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-15/publication.json",
+      "sha256": "968e5cc65620f5b81fc2aa93fc7bab2f6cfac46790f01f9ce7bcb03a7f064784",
+      "bytes": 194,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-15/reproduction-results.json",
+      "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "bytes": 2506,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-16/publication.json",
+      "sha256": "968e5cc65620f5b81fc2aa93fc7bab2f6cfac46790f01f9ce7bcb03a7f064784",
+      "bytes": 194,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-16/reproduction-results.json",
+      "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "bytes": 2506,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-17/publication.json",
+      "sha256": "968e5cc65620f5b81fc2aa93fc7bab2f6cfac46790f01f9ce7bcb03a7f064784",
+      "bytes": 194,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-17/reproduction-results.json",
+      "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "bytes": 2506,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-eight/publication.json",
+      "sha256": "968e5cc65620f5b81fc2aa93fc7bab2f6cfac46790f01f9ce7bcb03a7f064784",
+      "bytes": 194,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-eight/reproduction-results.json",
+      "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "bytes": 2506,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-eleven/publication.json",
+      "sha256": "968e5cc65620f5b81fc2aa93fc7bab2f6cfac46790f01f9ce7bcb03a7f064784",
+      "bytes": 194,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-eleven/reproduction-results.json",
+      "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "bytes": 2506,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-fifteen/publication.json",
+      "sha256": "968e5cc65620f5b81fc2aa93fc7bab2f6cfac46790f01f9ce7bcb03a7f064784",
+      "bytes": 194,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-fifteen/reproduction-results.json",
+      "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "bytes": 2506,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-five/publication.json",
+      "sha256": "968e5cc65620f5b81fc2aa93fc7bab2f6cfac46790f01f9ce7bcb03a7f064784",
+      "bytes": 194,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-five/reproduction-results.json",
+      "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "bytes": 2506,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-four/publication.json",
+      "sha256": "968e5cc65620f5b81fc2aa93fc7bab2f6cfac46790f01f9ce7bcb03a7f064784",
+      "bytes": 194,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-four/reproduction-results.json",
+      "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "bytes": 2506,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-fourteen/publication.json",
+      "sha256": "968e5cc65620f5b81fc2aa93fc7bab2f6cfac46790f01f9ce7bcb03a7f064784",
+      "bytes": 194,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-fourteen/reproduction-results.json",
+      "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "bytes": 2506,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-nine/publication.json",
+      "sha256": "968e5cc65620f5b81fc2aa93fc7bab2f6cfac46790f01f9ce7bcb03a7f064784",
+      "bytes": 194,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-nine/reproduction-results.json",
+      "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "bytes": 2506,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-seven/publication.json",
+      "sha256": "968e5cc65620f5b81fc2aa93fc7bab2f6cfac46790f01f9ce7bcb03a7f064784",
+      "bytes": 194,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-seven/reproduction-results.json",
+      "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "bytes": 2506,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-six/publication.json",
+      "sha256": "968e5cc65620f5b81fc2aa93fc7bab2f6cfac46790f01f9ce7bcb03a7f064784",
+      "bytes": 194,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-six/reproduction-results.json",
+      "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "bytes": 2506,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-ten/publication.json",
+      "sha256": "968e5cc65620f5b81fc2aa93fc7bab2f6cfac46790f01f9ce7bcb03a7f064784",
+      "bytes": 194,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-ten/reproduction-results.json",
+      "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "bytes": 2506,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-thirteen/publication.json",
+      "sha256": "968e5cc65620f5b81fc2aa93fc7bab2f6cfac46790f01f9ce7bcb03a7f064784",
+      "bytes": 194,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-thirteen/reproduction-results.json",
+      "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "bytes": 2506,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-twelve/publication.json",
+      "sha256": "968e5cc65620f5b81fc2aa93fc7bab2f6cfac46790f01f9ce7bcb03a7f064784",
+      "bytes": 194,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-twelve/reproduction-results.json",
+      "sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+      "bytes": 2506,
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/reproduce.py",
+      "sha256": "5683d7d85dfbbab6ba516095188194160bd85d582a82e81aefc7df5f8fb62366",
+      "bytes": 9765,
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "immutable-execution-identity",
+      "description": "Compare actual capsule bytes, exact required manifest inventory, all retained inputs, and issue contract snapshot to fixed whole-byte SHA-256 identities before reserving output or executing code.",
+      "software": "Python 3.7.3; SHA-256; GitHub issue API snapshot",
+      "units": "whole-file bytes",
+      "kind": "code"
+    },
+    {
+      "id": "adverse-runner-controls",
+      "description": "Run the actual corrected CLI against fresh hard-linked fixture trees; atomically replace only each fixture’s directed mutation; capture process exit status, output namespace, retained failure state, stdout, and stderr.",
+      "software": "Python 3.7.3; subprocess; SHA-256",
+      "units": "process outcomes and file bytes",
+      "kind": "code"
+    },
+    {
+      "id": "offline-reproduction",
+      "description": "Execute the exact hash-pinned original capsule twice and compare every resulting report byte with the retained 2,506-byte report.",
+      "software": "Python 3.7.3; retained capsule SHA-256 5b3787d9f07373751d2bbd5a94acec41eab79de43732cd4f6c45e2fd72c3d873",
+      "units": "report bytes",
+      "kind": "code"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "status": "supported",
+      "text": "The actual corrected offline runner rejects omitted and coherently refreshed executable-code manifest pins before output creation; fresh runs reproduce the retained report, a post-validation replacement race still consumes the captured capsule and input bytes, directed computation and receipt-sync failures leave no success receipt, and the controls reject symlinked fixture/log roots while preserving an external sentinel.",
+      "source_ids": [
+        "ury-gb-2017-adm1",
+        "uruguay-igm-current"
+      ]
+    },
+    {
+      "status": "unresolved",
+      "text": "This evidence does not authenticate source publishers or resolve disputed territorial title, boundary interpretation, or membership of either IGM feature.",
+      "source_ids": [
+        "ury-gb-2017-adm1",
+        "uruguay-igm-current",
+        "br-1851-boundary-treaty-edition",
+        "uy-decree-315-2019",
+        "uy-tca-758-2022",
+        "uy-decree-605-1974",
+        "uy-mre-annual-report-2023"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/verify_corrected_runner.py",
+    "python3 data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/reproduce_corrected_runner.py",
+    "node scripts/evidence-quality.mjs data/regional-review/uruguay-artigas-capsule-code-pin-erratum/evidence-quality.json ."
+  ],
+  "change_receipts": [
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/README.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/failure-captured-safe/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/failure-captured-safe/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/failure-captured-safe-3/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/failure-captured-safe-3/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/failure-captured-safe-4/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/failure-captured-safe-4/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/failure-captured-safe-three/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/failure-captured-safe-three/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/failure-captured-safe-two/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/failure-captured-safe-two/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-14/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-14/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-15/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-15/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-16/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-16/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-17/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-17/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-eight/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-eight/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-eleven/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-eleven/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-fifteen/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-fifteen/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-five/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-five/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-four/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-four/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-fourteen/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-fourteen/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-nine/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-nine/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-seven/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-seven/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-six/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-six/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-ten/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-ten/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-thirteen/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-thirteen/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-twelve/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-logs/verified-run-twelve/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-baseline-runs.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-audit.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/altered-code-unchanged-manifest/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/altered-code-unchanged-manifest/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/altered-code-unchanged-manifest-1/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/altered-code-unchanged-manifest-1/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/altered-code-unchanged-manifest-2/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/altered-code-unchanged-manifest-2/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/broken-symlink/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/broken-symlink/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/broken-symlink-1/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/broken-symlink-1/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/broken-symlink-2/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/broken-symlink-2/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/capsule-and-input-replaced-after-validation/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/capsule-and-input-replaced-after-validation/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/capsule-and-input-replaced-after-validation-1/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/capsule-and-input-replaced-after-validation-1/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/capsule-and-input-replaced-after-validation-2/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/capsule-and-input-replaced-after-validation-2/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/coherently-refreshed-manifest/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/coherently-refreshed-manifest/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/coherently-refreshed-manifest-1/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/coherently-refreshed-manifest-1/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/coherently-refreshed-manifest-2/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/coherently-refreshed-manifest-2/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/existing-output-sentinel/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/existing-output-sentinel/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/existing-output-sentinel-1/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/existing-output-sentinel-1/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/existing-output-sentinel-2/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/existing-output-sentinel-2/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/failure-after-compute/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/failure-after-compute/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/failure-after-compute-1/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/failure-after-compute-1/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/failure-after-compute-2/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/failure-after-compute-2/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/fixture-and-log-symlink-parents-rejected/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/fixture-and-log-symlink-parents-rejected/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/fixture-and-log-symlink-parents-rejected-1/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/fixture-and-log-symlink-parents-rejected-1/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/missing-executable-pin/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/missing-executable-pin/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/missing-executable-pin-1/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/missing-executable-pin-1/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/missing-executable-pin-2/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/missing-executable-pin-2/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/publication-receipt-sync-failure/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/publication-receipt-sync-failure/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/publication-receipt-sync-failure-1/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/publication-receipt-sync-failure-1/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/publication-receipt-sync-failure-2/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/publication-receipt-sync-failure-2/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/symlink-parent-escape/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/symlink-parent-escape/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/symlink-parent-escape-1/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/symlink-parent-escape-1/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/symlink-parent-escape-2/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/symlink-parent-escape-2/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/traversal/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/traversal/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/traversal-1/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/traversal-1/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/traversal-2/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/traversal-2/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/wrong-complete-input/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/wrong-complete-input/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/wrong-complete-input-1/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/wrong-complete-input-1/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/wrong-complete-input-2/stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/corrected-runner-logs/wrong-complete-input-2/stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-audit-v2.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/baseline-fresh-run-one.stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/baseline-fresh-run-one.stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/baseline-fresh-run-two.stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/baseline-fresh-run-two.stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/broken-symlink.stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/broken-symlink.stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/coherently-refreshed-pin-altered-code.stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/coherently-refreshed-pin-altered-code.stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/existing-output-sentinel.stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/existing-output-sentinel.stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/missing-executable-pin.stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/missing-executable-pin.stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/ordinary-code-drift.stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/ordinary-code-drift.stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/removed-pin-altered-code.stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/removed-pin-altered-code.stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/symlink-parent-escape.stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/symlink-parent-escape.stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/traversal.stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/traversal.stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/wrong-complete-input.stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/original-runner-logs-v2/wrong-complete-input.stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/reproduce_corrected_runner.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/reproduce_original_runner.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/verify_corrected_runner.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/findings.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/inputs/baseline/data-administrative-sources.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/inputs/baseline/data-geography-part-25.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/inputs/baseline/data-hierarchy.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/inputs/baseline/data-macro-publication-v5.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/inputs/baseline/data-world-index.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/inputs/code/capsule-reproduce.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/inputs/code/original-reproduce.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/inputs/code/original-wrapper.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/inputs/issue-1413-api.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/inputs/original-manifest.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/inputs/original-reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/inputs/original-source-inventory.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/inputs/sources/ury-gb-2017.geojson",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/inputs/sources/ury-igm-current.geojson",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/baseline-run-one/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/baseline-run-two/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/baseline-run-two/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/captured-execution-run/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/captured-execution-run/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/failure-after-compute/failure.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/failure-after-compute/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/failure-captured-safe/failure.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/failure-captured-safe/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/failure-captured-safe-3/failure.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/failure-captured-safe-3/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/failure-captured-safe-4/failure.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/failure-captured-safe-4/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/failure-captured-safe-three/failure.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/failure-captured-safe-three/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/failure-captured-safe-two/failure.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/failure-captured-safe-two/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/final-run-three/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/final-run-three/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/race-stage-one/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/race-stage-one/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-14/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-14/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-15/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-15/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-16/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-16/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-17/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-17/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-eight/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-eight/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-eleven/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-eleven/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-fifteen/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-fifteen/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-five/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-five/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-four/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-four/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-fourteen/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-fourteen/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-nine/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-nine/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-seven/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-seven/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-six/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-six/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-ten/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-ten/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-thirteen/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-thirteen/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-twelve/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/outputs/verified-run-twelve/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/uruguay-artigas-capsule-code-pin-erratum/reproduce.py",
+      "status": "added"
+    }
+  ]
+}
