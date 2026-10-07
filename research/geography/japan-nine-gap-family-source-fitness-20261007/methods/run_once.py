@@ -52,7 +52,7 @@ def main():
   runtime_checks.append(d['path'])
  output_rel=safe(a.output);receipt_rel=safe(a.receipt);log_rel=safe(a.log)
  if a.run=='one':
-  expected=('research/geography/japan-nine-gap-family-source-fitness-20261007/results/source-overlays.json','research/geography/japan-nine-gap-family-source-fitness-20261007/runs/run-one.json','research/geography/japan-nine-gap-family-source-fitness-20261007/runs/run-one.log')
+  expected=('research/geography/japan-nine-gap-family-source-fitness-20261007/results/source-overlays.json','research/geography/japan-nine-gap-family-source-fitness-20261007/runs/run-one-attempt-2.json','research/geography/japan-nine-gap-family-source-fitness-20261007/runs/run-one-attempt-2.log')
  else:
   expected=('.cache/japan-nine-gap-run-two/source-overlays.json','research/geography/japan-nine-gap-family-source-fitness-20261007/runs/run-two.json','research/geography/japan-nine-gap-family-source-fitness-20261007/runs/run-two.log')
  if (str(output_rel),str(receipt_rel),str(log_rel))!=expected:raise ValueError('run-specific output/receipt/log paths differ')

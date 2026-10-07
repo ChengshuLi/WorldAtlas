@@ -149,12 +149,13 @@ def main(outpath):
                 products.append(m)
             target_counts.append({'target_kind':t['kind'],'target_id':t['id'],'bbox_candidate_count':len(selected),'exact_intersection_count':exact_count})
         # Bind all source features and roster, not only intersections.
-        counts.update({'source_features':len(rows),'source_feature_roster_sha256':sha(canon(ids)),'source_body_sha256':bodysha})
+        source_feature_count=len(rows)
+        source_roster_sha=sha(canon(ids))
         counts['source_invalid_geometry_count']=sum(not g.is_valid for g in geoms)
         counts['source_empty_geometry_count']=sum(g.is_empty for g in geoms)
         # Same-ID contact bindings are exact identity evidence even if geometry does not intersect after the tree predicate.
         counts['scoped_contact_same_shapeID_count']=sum(t['kind']=='contact' and t['id'].rsplit(':',1)[-1] in features for t in targets)
-        source_summaries.append({'source_product':name,'target_count':len(targets),'per_target_exact_intersections':target_counts,**counts})
+        source_summaries.append({'source_product':name,'target_count':len(targets),'per_target_exact_intersections':target_counts,'source_features':source_feature_count,'source_feature_roster_sha256':source_roster_sha,'source_body_sha256':bodysha,**counts})
     # Restore-only source exceeds the ordinary per-file custody limit. The
     # complete local archive is hashed as one body before any member is read.
     zpath,manifest=restore()
