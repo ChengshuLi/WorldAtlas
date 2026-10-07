@@ -27,6 +27,18 @@ def features(**geometries):
 
 
 class RegressionControls(unittest.TestCase):
+    def test_prepared_invalid_actual_translation(self):
+        from unittest.mock import patch
+        from shapely.geometry import Polygon, MultiPolygon, box, mapping
+        from evidence.geometry import canonical_prepared_land
+        original = MultiPolygon([box(179,0,180,1),box(-180,0,-179,1)])
+        invalid = Polygon([(-181,0),(-180,1),(-181,1),(-180,0),(-181,0)])
+        with patch('evidence.geometry.translate', return_value=invalid):
+            with self.assertRaisesRegex(ValueError, 'actually translated') as caught:
+                canonical_prepared_land(original)
+        self.assertEqual(caught.exception.invalid_translated_members[0], mapping(invalid))
+        self.assertTrue(original.is_valid)
+
     def test_identical_periodic_fixture_has_explicit_prepared_representation(self):
         candidate = MultiPolygon([box(179, 0, 180, 1), box(-180, 0, -179, 1)])
         raw = gate.canonical_json(mapping(candidate))

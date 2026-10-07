@@ -122,6 +122,8 @@ def validate_feature(feature, path, ordinal):
         except (ValueError, TypeError, OverflowError, shapely.errors.ShapelyError) as error:
             row[name] = {'status': 'unsupported-or-invalid', 'exception': type(error).__name__,
                          'error': str(error), 'original_geometry': raw}
+            if hasattr(error, 'invalid_translated_members'):
+                row[name]['invalid_translated_members'] = error.invalid_translated_members
     return row
 
 

@@ -55,6 +55,11 @@ def _unwrap(ring):
 
 def _prepared_seam_contact(a, b):
     """Observe an exact representation seam, without repairing either member."""
+    if not a.is_valid or not b.is_valid:
+        from shapely.geometry import mapping
+        error = ValueError('Invalid actually translated prepared member; seam exception cannot repair it')
+        error.invalid_translated_members = [mapping(a), mapping(b)]
+        raise error
     if not a.relate_pattern(b, 'F********'):
         return None
     contact = a.intersection(b)
