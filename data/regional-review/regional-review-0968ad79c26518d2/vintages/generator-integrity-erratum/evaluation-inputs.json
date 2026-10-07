@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "evaluation_commit": "cbb829672d18801e4310c30896a7ddb13a79b451",
+  "issue_erratum": 1308,
+  "original_issue": 82,
+  "inputs": [
+    {
+      "path": "data/regional-review/regional-review-0968ad79c26518d2/issue-scope.json",
+      "sha256": "5c44c27f9660023628042db7f45edc5e68d72097d54290c42a0632c63f4563ef",
+      "bytes": 34448
+    },
+    {
+      "path": "data/regional-review/regional-review-0968ad79c26518d2/sources/sibling-scope-input.json",
+      "sha256": "58a8fcb6246b8ed54ea4f3bddfde1c1f758de2b9d6cd234e154c12743f4783a1",
+      "bytes": 84318
+    },
+    {
+      "path": "data/regional-review/regional-review-0968ad79c26518d2/sources/current-admin-rosters.json",
+      "sha256": "eba926c4d14c12649f4dd95dcb505b8644d63c7bbee4beed73e9fdc693aacf7e",
+      "bytes": 19133
+    },
+    {
+      "path": "data/regional-review/regional-review-0968ad79c26518d2/sources/source-inventory.json",
+      "sha256": "65e5a086e59c2db619bb3eac3a6248fc439225e2448c222bba6516ae0927904b",
+      "bytes": 25151
+    },
+    {
+      "path": "data/global-sources/IND-ADM3.geojson.gz",
+      "sha256": "211a72c2c80bb60d10214944fa8cc4764e9ba888116e802ce6d87084872f5301",
+      "bytes": 13794274,
+      "uncompressed_bytes": 40040002,
+      "uncompressed_sha256": "4ea6807d0a0c5aac0b46ee8e31ed7c30fbec273b44345bba1e4a2bb5f299f5fb"
+    },
+    {
+      "path": "data/global-sources/IND-ADM3-metadata.json",
+      "sha256": "f7bb99ddfcadaa1091c4b634b48c8843ee9d8b636af4f6da1cefccb0d424fc33",
+      "bytes": 2206
+    },
+    {
+      "path": "data/hierarchy.json",
+      "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "bytes": 10164089
+    },
+    {
+      "path": "data/geographic-decisions/asia.json",
+      "sha256": "a66b5e57b1c8c54dc9480360c61e0f91752c6fc6a0b710dfdf5131abc9dd6807",
+      "bytes": 10723935
+    },
+    {
+      "path": "data/geography/part-30.json",
+      "sha256": "d575442fef21582fe3e262a829059b71c40976e2a0708dcccd451d54c03adb0a",
+      "bytes": 11979437
+    },
+    {
+      "path": "data/geography/part-31.json",
+      "sha256": "44aa2906be9146ea8640a019c5a377c74395063999409061aec46bde66ef040e",
+      "bytes": 10086485
+    },
+    {
+      "path": "data/geography/part-32.json",
+      "sha256": "00f3dbcca1a5ff99c8b7c430ca96287acc88bd95e52524e01984ee23aba7ef64",
+      "bytes": 10211739
+    },
+    {
+      "path": "data/geography/part-33.json",
+      "sha256": "d928d47bb6fa49813b6582ad650c7c91c771c13e3caeca488abf97ad3d4a55fe",
+      "bytes": 607984
+    },
+    {
+      "path": "scripts/evidence/geometry.py",
+      "sha256": "944541968fcdf065b9c4b6105be227c3e0e14b6a20916f4fa21f851338c7a305",
+      "bytes": 5264
+    },
+    {
+      "path": "scripts/ellipsoidal_area.py",
+      "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12",
+      "bytes": 1953
+    },
+    {
+      "path": "data/regional-review/regional-review-0968ad79c26518d2/reproduce.py",
+      "sha256": "df3d42670fe70adc40f8578ef4ee84fb5b64a0769c589c69301bbb2f7fd92097",
+      "bytes": 15126
+    },
+    {
+      "path": "requirements.txt",
+      "sha256": "1c3f3b9598e474af751e25ff0839cbf5c4a9931a59b4ffaaff1a56c6e2f0e2c9",
+      "bytes": 146
+    }
+  ],
+  "baseline_output": {
+    "path": "data/regional-review/regional-review-0968ad79c26518d2/assessments.json",
+    "sha256": "9c5a0cbc869918466c5162aead971a5ccedd72fe42cba007c2660bf120da21ad",
+    "bytes": 374015
+  }
+}
