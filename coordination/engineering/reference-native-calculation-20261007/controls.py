@@ -97,6 +97,14 @@ def run():
         custody.restore_original=lambda *args: None
         rejects('actual loaded source restoration callable mutated',lambda:producer.authenticated_module(custody,custody_raw))
     finally:custody.restore_original=saved
+    with tempfile.TemporaryDirectory(prefix='reference-view-controls-',dir=HERE.parents[2]/'.cache') as td:
+        root=Path(td)/'view';bodies={'index.json':b'{}','prior-archives/original.json':b'whole'}
+        producer.reference_view(root,bodies);passed.append('exclusive complete original-view positive')
+        foreign=root/'prior-archives/foreign.json';foreign.write_bytes(b'foreign')
+        rejects('stock-copy view rejects foreign archive body',lambda:producer.authenticate_reference_view(root,bodies));foreign.unlink()
+        changed=root/'prior-archives/original.json';changed.write_bytes(b'other')
+        rejects('stock-copy view rejects same-size changed body',lambda:producer.authenticate_reference_view(root,bodies));changed.unlink()
+        rejects('stock-copy view rejects missing original body',lambda:producer.authenticate_reference_view(root,bodies))
     print(json.dumps({'status':'PASS','actual_controls':len(passed),'controls':passed,'no_native_or_world_science_run':True}))
 
 if __name__=='__main__':run()

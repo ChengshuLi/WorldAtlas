@@ -108,6 +108,29 @@ def actual_inputs(commit):
     return owned,source,plan
 
 
+def reference_view(root,bodies):
+    if root.exists():raise ValueError('Fresh authenticated reference view required')
+    root.mkdir()
+    for name,raw in bodies.items():
+        path=reader.safe(root,name);path.parent.mkdir(parents=True,exist_ok=True)
+        with path.open('xb') as stream:stream.write(raw)
+        if reader.bounded(path,len(raw))!=raw:
+            raise ValueError('Authenticated reference view body drift')
+    authenticate_reference_view(root,bodies)
+    return root
+
+
+def authenticate_reference_view(root,bodies):
+    actual={str(p.relative_to(root)) for p in root.rglob('*') if p.is_file()}
+    if actual!=set(bodies) or any(p.is_symlink() for p in root.rglob('*')):
+        raise ValueError('Complete exact original reference view required')
+    for name,raw in bodies.items():
+        if reader.bounded(reader.safe(root,name),len(raw))!=raw:
+            raise ValueError('Authenticated reference view body drift')
+    return root
+
+
+
 def runtime_body_closure(owned,source,actual):
     frozen=owned.json(NS+'runtime-plan.json')
     old=source.json(N+'runtime-plan.json')
@@ -186,7 +209,8 @@ def run(commit,name,*,inputs_only=False):
         return {'status':'PASS','scope':'complete171 original inputs/49625 pointset join/346346 original rows and tiny actual operators only',
             'budget':budget,'runtime_whole_body_proof':body_proof,'actual_runtime':actual_runtime,'tiny_operator_positive':warm,'no_target_GIS_calculation':True}
     # Every output is fresh and job-local; original bytes are never changed.
-    out.mkdir();private=out/'private-native-originals';private.mkdir()
+    out.mkdir();references=reference_view(out/'original-reference-view',bodies)
+    private=out/'private-native-originals';private.mkdir()
     custody_plan=source.json(N+'input-plan.json')
     sources={}
     for obj in custody_plan['original_objects']:
@@ -217,8 +241,9 @@ def run(commit,name,*,inputs_only=False):
         'whole_vegetation_sha256':original['inputs']['ecoregions'],
         'native_members':plan['complete_native_members'],'source_custody_report_sha256':source.pins[N+'run-one/report.json']['sha256'],
         'source_proof_or_ZIP_not_read_in_this_phase':True}
-    report=products.merge(helper,ROOT/'data/reference-attributes',bodies,original,index,fresh,missing,evidence,
+    report=products.merge(helper,references,bodies,original,index,fresh,missing,evidence,
         complete['ids'],complete['migration_receipt_sha256'],complete['after_footprints_sha256'],complete['after_geography_sha256'],out/'products',upstream)
+    authenticate_reference_view(references,bodies)
     report.update(execution_commit=commit,actual_calculation_seconds=elapsed,
         full_world_scope_roster_sha256=reader.sha(products.dumps(complete['roster']).encode()),
         full_footprint_hash_vintage=complete['full_footprint_hash_vintage'],
