@@ -6,6 +6,15 @@
     "omission_rejected": true,
     "duplicate_rejected": true,
     "foreign_rejected": true,
-    "swapped_axis_candidate_envelope_hits": 0
+    "swapped_axis_candidate_envelope_hits": 0,
+    "negative_altered_whole_source_bytes_rejected": true,
+    "negative_incomplete_official_layer_rejected": true,
+    "negative_wrong_family_context_rejected": true,
+    "negative_wrong_full_geometry_has_no_intersection": true,
+    "negative_wrong_source_identity_rejected": true,
+    "negative_wrong_source_vintage_rejected": true,
+    "unobserved_surface_preserved_as_unknown": true,
+    "reordered_membership_is_canonically_invariant": true,
+    "raster_affine_nodata_applicability": "not-applicable: no raster input or raster transform was queried; coverage/NoData remain unresolved"
   }
 }

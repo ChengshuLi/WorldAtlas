@@ -9,7 +9,8 @@ import re
 import sys
 
 import shapely
-from shapely.geometry import shape
+from shapely.affinity import translate as translate_geometry
+from shapely.geometry import mapping, shape
 from shapely.strtree import STRtree
 from shapely.ops import transform as transform_geometry
 
@@ -17,6 +18,7 @@ from shapely.ops import transform as transform_geometry
 ROOT = pathlib.Path(__file__).resolve().parents[3]
 OWNED = pathlib.Path(__file__).resolve().parent
 CONTRACT = OWNED / 'run-contract.json'
+EXPECTED_IGN_VINTAGE = 'ADMINEXPRESS-COG.2026, edition 2026-01-01'
 
 
 def digest(raw):
@@ -39,6 +41,28 @@ def load_json(raw):
     return json.loads(raw.decode('utf-8'))
 
 
+def validate_ign_response(raw, receipt):
+    if receipt.get('vintage') != EXPECTED_IGN_VINTAGE:
+        raise ValueError('official source vintage differs from frozen edition')
+    if len(raw) != receipt['bytes'] or digest(raw) != receipt['sha256']:
+        raise ValueError('complete official WFS response differs from frozen whole-body receipt')
+    body = load_json(raw)
+    if body.get('type') != 'FeatureCollection' or len(body.get('features', [])) != receipt['feature_count']:
+        raise ValueError('official response is not the complete declared feature collection')
+    if body.get('numberReturned') != receipt['feature_count'] or body.get('numberMatched') != receipt['feature_count']:
+        raise ValueError('official response does not prove the full expected layer was returned')
+    return body
+
+
+def validate_source_shape_ids(features, contacts):
+    ids = [f.get('properties', {}).get('shapeID') for f in features]
+    if len(ids) != 320 or any(not value for value in ids) or len(set(ids)) != 320:
+        raise ValueError('original source is not exactly 320 unique native shapeIDs')
+    if not contacts.issubset({'gb:FRA:ADM3:' + value for value in ids}):
+        raise ValueError('original source is missing a recorded contact identity')
+    return set(ids)
+
+
 def load_records(raw):
     text = raw.decode('utf-8').lstrip()
     if text.startswith('['):
@@ -56,6 +80,7 @@ def main():
     ap.add_argument('--run', type=int, choices=(1, 2), required=True)
     args = ap.parse_args()
     contract = load_json(CONTRACT.read_bytes())
+    contacts = set(contract['scope']['contact_ids'])
     if contract['script_sha256'] != digest(pathlib.Path(__file__).read_bytes()):
         raise ValueError('script differs from the frozen run contract')
     if contract['runtime']['python'] != sys.version.split()[0]:
@@ -69,13 +94,7 @@ def main():
     external = contract['external_source']
     print('validating and parsing complete official response', flush=True)
     official_raw = pathlib.Path(args.official_source).read_bytes()
-    if len(official_raw) != external['bytes'] or digest(official_raw) != external['sha256']:
-        raise ValueError('complete official WFS response differs from frozen whole-body receipt')
-    official = load_json(official_raw)
-    if official.get('type') != 'FeatureCollection' or len(official.get('features', [])) != external['feature_count']:
-        raise ValueError('official response is not the complete declared feature collection')
-    if official.get('numberReturned') != external['feature_count'] or official.get('numberMatched') != external['feature_count']:
-        raise ValueError('official response does not prove the full expected layer was returned')
+    official = validate_ign_response(official_raw, external)
 
     part8 = load_json(inputs['data/geography/part-8.json'])
     world_index = load_json(inputs['data/world-index.json'])
@@ -84,6 +103,7 @@ def main():
     config = load_json(inputs['coordination/engineering/global-actionability-routing-20261007/input-config.json'])
     original_raw = inputs['coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-FRA-ADM3-000.bin.gz']
     original = load_json(original_raw)
+    original_shape_ids = validate_source_shape_ids(original['features'], contacts)
     print('restoring delivered whole routing bodies', flush=True)
 
     body_specs = {x['name']: x for x in report['complete_whole_raw_bodies']}
@@ -176,7 +196,6 @@ def main():
     if set(candidate_features) != targets:
         raise ValueError('complete candidate pointsets are not present in verified original component outputs')
 
-    contacts = contract['scope']['contact_ids']
     atlas_by_id = {f['id']: f for f in part8['features']}
     if len(contacts) != 16 or set(contacts) - set(atlas_by_id):
         raise ValueError('exact complete Atlas contact roster is missing or duplicated')
@@ -198,6 +217,10 @@ def main():
         raise ValueError('GEOS source geometry count differs from full official feature count')
     tree = STRtree(official_shapes)
     print('checking whole feature relationships', flush=True)
+
+    def require_family_context(component_id, record):
+        if record.get('family') != family_membership[component_id]:
+            raise ValueError('candidate routing/family IDs disagree')
 
     # Negative roster controls show that omitted, duplicated, or foreign entries
     # cannot pass the exact complete-family closure assertion above.
@@ -239,8 +262,9 @@ def main():
         sourcefit = fit_rows.get(cid)
         route = route_component_rows[cid]
         candidate = candidate_features[cid]
-        if (sourcefit is not None and sourcefit.get('family') != family_membership[cid]) or route.get('family') != family_membership[cid]:
-            raise ValueError('candidate routing/family IDs disagree')
+        if sourcefit is not None:
+            require_family_context(cid, sourcefit)
+        require_family_context(cid, route)
         if route.get('current_geometry_sha256') != digest(canonical(candidate['geometry'])):
             raise ValueError('retained full candidate pointset differs from routed complete geometry hash')
         observations = sourcefit.get('original_admin_observations', []) if sourcefit else []
@@ -301,6 +325,8 @@ def main():
             'subject_id': sid,
             'complete_current_atlas_feature': atlas_feature,
             'complete_original_2022_source_feature': source_feature,
+            'official_2026_original_source_whole_layer_relations': relation(source_feature['geometry']),
+            'official_2026_current_atlas_whole_layer_relations': relation(atlas_feature['geometry']),
             'official_2026_exact_name_identity_candidates': [
                 {'feature_id': f.get('id'), 'ign_stable_key': f['properties'].get('cleabs'),
                  'code_insee': f['properties'].get('code_insee'),
@@ -308,7 +334,7 @@ def main():
                  'region_code': f['properties'].get('code_insee_de_la_region'),
                  'name': f['properties'].get('nom_officiel')}
                 for f in official_by_exact_name.get(source_feature['properties'].get('shapeName'), [])],
-            'identity_limit': 'Exact names are identity leads only. No historical/current whole-contact boundary equality or legal applicability is asserted; candidate-scale full geometry relations are reported separately.',
+            'identity_limit': 'Exact names are identity leads only. Whole-source geometric relations against the complete current official layer are diagnostics; they do not establish name identity, historical applicability, legal equality, or a political conclusion.',
         })
     print('running geometry axis negative control', flush=True)
 
@@ -325,6 +351,53 @@ def main():
     candidate_positive_intersections = sum(bool(c['official_2026_whole_layer_relations']['exact_whole_feature_intersections']) for c in candidate_rows)
     if candidate_positive_intersections == 0:
         raise ValueError('full-shape positive source-intersection control unexpectedly has no matches')
+    # Wrong-geometry/context, wrong-vintage, incomplete-coverage, wrong-source-ID,
+    # byte-corruption and unknown-preservation controls exercise the actual guards.
+    control_candidate = next(row for row in candidate_rows if row['official_2026_whole_layer_relations']['exact_whole_feature_intersections'])
+    moved = translate_geometry(shape(control_candidate['full_candidate_feature']['geometry']), xoff=160)
+    wrong_geometry_rejected = not relation(mapping(moved))['exact_whole_feature_intersections']
+    wrong_context_record = dict(route_component_rows[control_candidate['component_id']], family='foreign-family-control')
+    try:
+        require_family_context(control_candidate['component_id'], wrong_context_record)
+        wrong_context_rejected = False
+    except ValueError:
+        wrong_context_rejected = True
+    wrong_vintage = dict(external, vintage='ADMINEXPRESS-COG.2025, edition 2025-01-01')
+    try:
+        validate_ign_response(official_raw, wrong_vintage)
+        wrong_vintage_rejected = False
+    except ValueError:
+        wrong_vintage_rejected = True
+    partial_layer = dict(official, features=official['features'][:-1])
+    # Serialize deliberately stale/untrusted body bytes. The frozen whole-body
+    # receipt must reject truncation even before a caller can use its polygons.
+    partial_bytes = canonical(partial_layer)
+    try:
+        validate_ign_response(partial_bytes, external)
+        incomplete_coverage_rejected = False
+    except ValueError:
+        incomplete_coverage_rejected = True
+    mutated_source = [dict(f, properties=dict(f['properties'])) for f in original['features']]
+    target_shape_id = sorted(sid.rsplit(':', 1)[1] for sid in contacts)[0]
+    target_source_feature = next(f for f in mutated_source if f['properties']['shapeID'] == target_shape_id)
+    target_source_feature['properties']['shapeID'] = 'foreign-source-id-control'
+    try:
+        validate_source_shape_ids(mutated_source, contacts)
+        wrong_source_identity_rejected = False
+    except ValueError:
+        wrong_source_identity_rejected = True
+    try:
+        validate_ign_response(official_raw + b' ', external)
+        altered_source_bytes_rejected = False
+    except ValueError:
+        altered_source_bytes_rejected = True
+    reordered_membership_invariant = sorted(reversed(ordered_targets)) == ordered_targets
+    unknowns_preserved = all(row['physical_status_record']['water_surface_status'] == 'unverified' and
+        row['routing_record'].get('physical_authority') == 'unapproved' for row in candidate_rows)
+    if not all([wrong_geometry_rejected, wrong_context_rejected, wrong_vintage_rejected,
+                incomplete_coverage_rejected, wrong_source_identity_rejected,
+                altered_source_bytes_rejected, reordered_membership_invariant, unknowns_preserved]):
+        raise ValueError('source/geometry/vintage/coverage/unknown control failed')
     disposition_counts = {}
     for row in candidate_rows:
         disposition_counts[row['source_fitness_disposition']] = disposition_counts.get(row['source_fitness_disposition'], 0) + 1
@@ -367,6 +440,19 @@ def main():
         'contacts': contact_rows,
         'controls': {
             'scope_roster': roster_controls,
+            'source_and_geometry': {
+                'negative_wrong_full_geometry_has_no_intersection': wrong_geometry_rejected,
+                'negative_wrong_family_context_rejected': wrong_context_rejected,
+                'negative_wrong_source_vintage_rejected': wrong_vintage_rejected,
+                'negative_incomplete_official_layer_rejected': incomplete_coverage_rejected,
+                'negative_wrong_source_identity_rejected': wrong_source_identity_rejected,
+                'negative_altered_whole_source_bytes_rejected': altered_source_bytes_rejected,
+                'positive_reordered_membership_invariant': reordered_membership_invariant,
+                'positive_preserved_unobserved_surface_unknowns': unknowns_preserved,
+                'raster_affine_nodata': 'not-applicable: no raster input or raster transform was queried; coverage/NoData remain unresolved',
+                'original_source_unique_shape_id_count': len(original_shape_ids),
+                'contact_original_source_identity_count': len(contacts.intersection({'gb:FRA:ADM3:' + value for value in original_shape_ids})),
+            },
             'axis_order': {
                 'positive_control': 'whole candidate points and the full French official layer have geographic extents consistent with longitude/latitude; WFS was requested with CRS:84',
                 'positive_full_geometry_candidate_count_with_source_intersection': candidate_positive_intersections,

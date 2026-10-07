@@ -664,19 +664,41 @@
       "temporal_status": "reference",
       "restoration": "Revisit the official release notice; archive its exact response if later research depends on detailed page content.",
       "limit": "Product context only; not candidate geometry evidence."
+    },
+    {
+      "id": "gshhg-2.3.7-physical-lineage",
+      "url": "https://www.soest.hawaii.edu/pwessel/gshhg/",
+      "role": "Inherited mapped-land physical diagnostic lineage lead; coastline/hydrography context only, not an administrative source",
+      "vintage": "GSHHG 2.3.7 released 2017-06-15; inherited rows report heterogeneous observation dates",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Official GSHHG product page states LGPL licensing. NOAA NCEI catalog metadata separately labels its catalogued distribution CC0. The inherited derived raster body, derivation and licensing chain were not retained or verified; do not infer its license from either upstream record."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "unknown",
+      "restoration": "Consult the official GSHHG product page and archive exact version 2.3.7 source bytes with upstream checksum, license text, retrieval timestamp, and derivation recipe. Separately recover the inherited physical raster bytes and processing metadata before attempting reproduction.",
+      "limit": "This packet does not retain or query GSHHG or an inherited raster body. Candidate-scale coverage, raster affine, NoData, surface correctness and observation dates remain unknown; inherited mapped-land counts are diagnostic only. NOAA catalog: https://catalog.data.gov/dataset/a-global-self-consistent-hierarchical-high-resolution-geography-database-from-2010-02-19-t."
     }
   ],
   "outputs": [
     {
       "path": "research/geography/france-nine-gap-family-source-fitness-20261007/README.md",
-      "bytes": 8743,
-      "sha256": "f1385364a13e06d0fc95be86ca4d534569bee6ef700beaf3ebd70b5f85d92a20",
+      "bytes": 11202,
+      "sha256": "725f9f641da39199c849ce196528a7fc2007e26a00266c6498ff47db29f5e516",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/france-nine-gap-family-source-fitness-20261007/candidate-findings.csv",
       "bytes": 30716,
       "sha256": "530c0fe37be9ee3669577a7924ac636620480283906e4e1b1ba943a7f3d180b2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/contact-findings.csv",
+      "bytes": 6997,
+      "sha256": "cb5768f767091d3be6195b089bb08826815f0c1c7872241d8003dfd2dfdbb85b",
       "hash_kind": "file-bytes"
     },
     {
@@ -687,50 +709,50 @@
     },
     {
       "path": "research/geography/france-nine-gap-family-source-fitness-20261007/reproduce.py",
-      "bytes": 25012,
-      "sha256": "b12aab8e375c569edd325b43bbe10fdf5b169d61d928f6cff07b16c4eb28cf0a",
+      "bytes": 30314,
+      "sha256": "122a04f5deaf741af8aa49084d4f1953220349b73d4cd8d3c48fb4af693b07f9",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/france-nine-gap-family-source-fitness-20261007/run-contract.json",
       "bytes": 35136,
-      "sha256": "eecc37f913ca7a6bce6eb044ee0d622fd401c4e05ec6e32c7daf8c6c23f10176",
+      "sha256": "c53aebed92a5cfa079f1867944563af8aa414d4b41c2342da456077a224b23ee",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/france-nine-gap-family-source-fitness-20261007/summarize.py",
-      "bytes": 6395,
-      "sha256": "0158dad0e8029219a3be035e0a4baa6fc7a648553e0bef8f5af3d6b6b559d560",
+      "bytes": 9547,
+      "sha256": "1669f9166118f09e6eac463299daea46a1f22fe51f0b67f153cb0cbc082696fa",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/france-nine-gap-family-source-fitness-20261007/summary-metrics.json",
-      "bytes": 673,
-      "sha256": "0ef1c0612cd40f1ed36f0ad3e2fea8093c9e42fc60ae7664ea346dbf16e6f706",
+      "bytes": 915,
+      "sha256": "b3a5075d385a3e977333f69836bbe70ef3ec50dc441abfa5e39eeb438b50c445",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/france-nine-gap-family-source-fitness-20261007/validation-negative.json",
-      "bytes": 278,
-      "sha256": "fbf61e7527aa0e3a4104749e5147258aa0f5e97a767dc62f896a9bfc460b7fdd",
+      "bytes": 868,
+      "sha256": "4edb091f4f01644e9c34c47f8d7963b24ca636eb3a44f43c01244a1cdaa6b40b",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/france-nine-gap-family-source-fitness-20261007/validation-positive.json",
-      "bytes": 256,
-      "sha256": "a0180e46e86583295d16f4cba649e98dffaede668dd811a62e1e6d5a10721679",
+      "bytes": 414,
+      "sha256": "9b850130087236a9fbdac0dae5b8b4a010c7b900a27c8e37bc965483df7667fc",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/france-nine-gap-family-source-fitness-20261007/validation-reproducibility.json",
       "bytes": 310,
-      "sha256": "5ad1c70abad9e3064efda49e2a798dd689d264bcc95d80faf24f75d3c64e1414",
+      "sha256": "f8957e8ff2dcd2c4379c27e7512706b0f95b8a27b245003797480e464fe18ceb",
       "hash_kind": "file-bytes"
     },
     {
       "path": "research/geography/france-nine-gap-family-source-fitness-20261007/verification/attempt-00-failure.log",
-      "bytes": 6910,
-      "sha256": "028c33f1b60f8360acfe1db6ba2ba118ea29770f5e5b7f76aac38b670cda62d8",
+      "bytes": 8970,
+      "sha256": "1b0f62d4cf0d61cfd33a0064753f478d32a225cd705526058a3805572bbeede2",
       "hash_kind": "file-bytes"
     },
     {
@@ -758,15 +780,27 @@
       "hash_kind": "file-bytes"
     },
     {
-      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/verification/run-1.json",
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/verification/attempt-03-before-review-controls/run-1.json",
       "bytes": 774931,
       "sha256": "c8b3d5f093acdb263dd95e8fc9b321853e9766e47adbfe8fae1820ed9f7ef70a",
       "hash_kind": "file-bytes"
     },
     {
-      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/verification/run-2.json",
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/verification/attempt-03-before-review-controls/run-2.json",
       "bytes": 774931,
       "sha256": "c8b3d5f093acdb263dd95e8fc9b321853e9766e47adbfe8fae1820ed9f7ef70a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/verification/run-1.json",
+      "bytes": 820804,
+      "sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/verification/run-2.json",
+      "bytes": 820804,
+      "sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
       "hash_kind": "file-bytes"
     }
   ],
@@ -793,7 +827,7 @@
       "value": 9,
       "unit": "families",
       "vintage": "baseline",
-      "input_sha256": "c8b3d5f093acdb263dd95e8fc9b321853e9766e47adbfe8fae1820ed9f7ef70a",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
       "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
     },
     {
@@ -801,23 +835,23 @@
       "value": 48,
       "unit": "candidate geometries",
       "vintage": "baseline",
-      "input_sha256": "c8b3d5f093acdb263dd95e8fc9b321853e9766e47adbfe8fae1820ed9f7ef70a",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
       "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
     },
     {
       "id": "contact_count",
       "value": 16,
-      "unit": "subjects",
+      "unit": "contact subjects",
       "vintage": "baseline",
-      "input_sha256": "c8b3d5f093acdb263dd95e8fc9b321853e9766e47adbfe8fae1820ed9f7ef70a",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
       "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
     },
     {
       "id": "original_source_record_count",
       "value": 320,
-      "unit": "source features",
+      "unit": "features",
       "vintage": "baseline",
-      "input_sha256": "c8b3d5f093acdb263dd95e8fc9b321853e9766e47adbfe8fae1820ed9f7ef70a",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
       "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
     },
     {
@@ -825,7 +859,7 @@
       "value": 333,
       "unit": "features",
       "vintage": "baseline",
-      "input_sha256": "c8b3d5f093acdb263dd95e8fc9b321853e9766e47adbfe8fae1820ed9f7ef70a",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
       "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
     },
     {
@@ -833,7 +867,7 @@
       "value": 11,
       "unit": "candidate geometries",
       "vintage": "baseline",
-      "input_sha256": "c8b3d5f093acdb263dd95e8fc9b321853e9766e47adbfe8fae1820ed9f7ef70a",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
       "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
     },
     {
@@ -841,7 +875,7 @@
       "value": 24,
       "unit": "candidate geometries",
       "vintage": "baseline",
-      "input_sha256": "c8b3d5f093acdb263dd95e8fc9b321853e9766e47adbfe8fae1820ed9f7ef70a",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
       "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
     },
     {
@@ -849,7 +883,7 @@
       "value": 11,
       "unit": "candidate geometries",
       "vintage": "baseline",
-      "input_sha256": "c8b3d5f093acdb263dd95e8fc9b321853e9766e47adbfe8fae1820ed9f7ef70a",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
       "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
     },
     {
@@ -857,7 +891,7 @@
       "value": 2,
       "unit": "candidate geometries",
       "vintage": "baseline",
-      "input_sha256": "c8b3d5f093acdb263dd95e8fc9b321853e9766e47adbfe8fae1820ed9f7ef70a",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
       "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
     },
     {
@@ -865,7 +899,7 @@
       "value": 42,
       "unit": "candidate geometries",
       "vintage": "baseline",
-      "input_sha256": "c8b3d5f093acdb263dd95e8fc9b321853e9766e47adbfe8fae1820ed9f7ef70a",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
       "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
     },
     {
@@ -873,7 +907,7 @@
       "value": 8,
       "unit": "candidate geometries",
       "vintage": "baseline",
-      "input_sha256": "c8b3d5f093acdb263dd95e8fc9b321853e9766e47adbfe8fae1820ed9f7ef70a",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
       "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
     },
     {
@@ -881,7 +915,7 @@
       "value": 34,
       "unit": "candidate geometries",
       "vintage": "baseline",
-      "input_sha256": "c8b3d5f093acdb263dd95e8fc9b321853e9766e47adbfe8fae1820ed9f7ef70a",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
       "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
     },
     {
@@ -889,7 +923,7 @@
       "value": 6,
       "unit": "candidate geometries",
       "vintage": "baseline",
-      "input_sha256": "c8b3d5f093acdb263dd95e8fc9b321853e9766e47adbfe8fae1820ed9f7ef70a",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
       "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
     },
     {
@@ -897,7 +931,7 @@
       "value": 15,
       "unit": "contact subjects",
       "vintage": "baseline",
-      "input_sha256": "c8b3d5f093acdb263dd95e8fc9b321853e9766e47adbfe8fae1820ed9f7ef70a",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
       "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
     },
     {
@@ -905,7 +939,7 @@
       "value": 46,
       "unit": "candidate geometries",
       "vintage": "baseline",
-      "input_sha256": "c8b3d5f093acdb263dd95e8fc9b321853e9766e47adbfe8fae1820ed9f7ef70a",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
       "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
     },
     {
@@ -913,7 +947,7 @@
       "value": 2,
       "unit": "candidate geometries",
       "vintage": "baseline",
-      "input_sha256": "c8b3d5f093acdb263dd95e8fc9b321853e9766e47adbfe8fae1820ed9f7ef70a",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
       "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
     },
     {
@@ -921,7 +955,39 @@
       "value": 48,
       "unit": "candidate geometries",
       "vintage": "baseline",
-      "input_sha256": "c8b3d5f093acdb263dd95e8fc9b321853e9766e47adbfe8fae1820ed9f7ef70a",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
+      "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
+    },
+    {
+      "id": "contacts_with_2022_geometry_intersection_2026",
+      "value": 16,
+      "unit": "contact geometries",
+      "vintage": "baseline",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
+      "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
+    },
+    {
+      "id": "contacts_with_2022_geometry_whole_cover_2026",
+      "value": 0,
+      "unit": "contact geometries",
+      "vintage": "baseline",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
+      "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
+    },
+    {
+      "id": "contacts_with_current_atlas_geometry_intersection_2026",
+      "value": 16,
+      "unit": "contact geometries",
+      "vintage": "baseline",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
+      "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
+    },
+    {
+      "id": "contacts_with_current_atlas_geometry_whole_cover_2026",
+      "value": 0,
+      "unit": "contact geometries",
+      "vintage": "baseline",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
       "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
     }
   ],
@@ -930,103 +996,127 @@
       "metric_id": "family_count",
       "value": 9,
       "unit": "families",
-      "text": "9 families — family count."
+      "text": "9 families: family count."
     },
     {
       "metric_id": "candidate_count",
       "value": 48,
       "unit": "candidate geometries",
-      "text": "48 candidate geometries — candidate count."
+      "text": "48 candidate geometries: candidate count."
     },
     {
       "metric_id": "contact_count",
       "value": 16,
-      "unit": "subjects",
-      "text": "16 subjects — contact count."
+      "unit": "contact subjects",
+      "text": "16 contact subjects: contact count."
     },
     {
       "metric_id": "original_source_record_count",
       "value": 320,
-      "unit": "source features",
-      "text": "320 source features — original source record count."
+      "unit": "features",
+      "text": "320 features: original source record count."
     },
     {
       "metric_id": "official_2026_feature_count",
       "value": 333,
       "unit": "features",
-      "text": "333 features — official 2026 feature count."
+      "text": "333 features: official 2026 feature count."
     },
     {
       "metric_id": "compatible_recorded_subjects",
       "value": 11,
       "unit": "candidate geometries",
-      "text": "11 candidate geometries — compatible recorded subjects."
+      "text": "11 candidate geometries: compatible recorded subjects."
     },
     {
       "metric_id": "partial_or_unbound_original_source",
       "value": 24,
       "unit": "candidate geometries",
-      "text": "24 candidate geometries — partial or unbound original source."
+      "text": "24 candidate geometries: partial or unbound original source."
     },
     {
       "metric_id": "no_compatible_original_intersection",
       "value": 11,
       "unit": "candidate geometries",
-      "text": "11 candidate geometries — no compatible original intersection."
+      "text": "11 candidate geometries: no compatible original intersection."
     },
     {
       "metric_id": "outside_original_source_domain",
       "value": 2,
       "unit": "candidate geometries",
-      "text": "2 candidate geometries — outside original source domain."
+      "text": "2 candidate geometries: outside original source domain."
     },
     {
       "metric_id": "official_2026_intersect",
       "value": 42,
       "unit": "candidate geometries",
-      "text": "42 candidate geometries — official 2026 intersect."
+      "text": "42 candidate geometries: official 2026 intersect."
     },
     {
       "metric_id": "official_2026_whole_feature_cover",
       "value": 8,
       "unit": "candidate geometries",
-      "text": "8 candidate geometries — official 2026 whole feature cover."
+      "text": "8 candidate geometries: official 2026 whole feature cover."
     },
     {
       "metric_id": "official_2026_intersect_without_cover",
       "value": 34,
       "unit": "candidate geometries",
-      "text": "34 candidate geometries — official 2026 intersect without cover."
+      "text": "34 candidate geometries: official 2026 intersect without cover."
     },
     {
       "metric_id": "official_2026_no_intersection",
       "value": 6,
       "unit": "candidate geometries",
-      "text": "6 candidate geometries — official 2026 no intersection."
+      "text": "6 candidate geometries: official 2026 no intersection."
     },
     {
       "metric_id": "exact_current_contact_name_match",
       "value": 15,
       "unit": "contact subjects",
-      "text": "15 contact subjects — exact current contact name match."
+      "text": "15 contact subjects: exact current contact name match."
     },
     {
       "metric_id": "inherited_mapped_land_support",
       "value": 46,
       "unit": "candidate geometries",
-      "text": "46 candidate geometries — inherited mapped land support."
+      "text": "46 candidate geometries: inherited mapped land support."
     },
     {
       "metric_id": "inherited_outside_l1_context",
       "value": 2,
       "unit": "candidate geometries",
-      "text": "2 candidate geometries — inherited outside l1 context."
+      "text": "2 candidate geometries: inherited outside l1 context."
     },
     {
       "metric_id": "unverified_surface",
       "value": 48,
       "unit": "candidate geometries",
-      "text": "48 candidate geometries — unverified surface."
+      "text": "48 candidate geometries: unverified surface."
+    },
+    {
+      "metric_id": "contacts_with_2022_geometry_intersection_2026",
+      "value": 16,
+      "unit": "contact geometries",
+      "text": "16 contact geometries: contacts with 2022 geometry intersection 2026."
+    },
+    {
+      "metric_id": "contacts_with_2022_geometry_whole_cover_2026",
+      "value": 0,
+      "unit": "contact geometries",
+      "text": "0 contact geometries: contacts with 2022 geometry whole cover 2026."
+    },
+    {
+      "metric_id": "contacts_with_current_atlas_geometry_intersection_2026",
+      "value": 16,
+      "unit": "contact geometries",
+      "text": "16 contact geometries: contacts with current atlas geometry intersection 2026."
+    },
+    {
+      "metric_id": "contacts_with_current_atlas_geometry_whole_cover_2026",
+      "value": 0,
+      "unit": "contact geometries",
+      "text": "0 contact geometries: contacts with current atlas geometry whole cover 2026."
     }
   ],
   "conclusions": [
@@ -1038,7 +1128,7 @@
       ]
     },
     {
-      "text": "The 2026 complete current IGN layer has 333 arrondissement features and yields the recorded intersects/covers results for the full candidate geometries. The contemporary comparison cannot replace the 2022 source or establish legal, historical, or physical meaning.",
+      "text": "The complete current 2026 IGN layer has 333 arrondissement features and yields recorded full-geometry intersects/covers results for every candidate and both complete 2022-source/current-Atlas geometries of all 16 contacts. This contemporary comparison cannot replace the 2022 source or establish legal, historical, or physical meaning.",
       "status": "supported",
       "source_ids": [
         "ign-admin-express-cog-2026-arrondissement-wfs"
@@ -1067,11 +1157,11 @@
     "geographic_approval": "unapproved"
   },
   "commands": [
-    "python3 research/geography/france-nine-gap-family-source-fitness-20261007/reproduce.py --official-source /tmp/ign-adminexpress-cog-2026-arrondissement.geojson --output research/geography/france-nine-gap-family-source-fitness-20261007/verification/run-1.json",
-    "python3 research/geography/france-nine-gap-family-source-fitness-20261007/reproduce.py --official-source /tmp/ign-adminexpress-cog-2026-arrondissement.geojson --output research/geography/france-nine-gap-family-source-fitness-20261007/verification/run-2.json",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12 research/geography/france-nine-gap-family-source-fitness-20261007/reproduce.py --official-source /tmp/ign-adminexpress-cog-2026-arrondissement.geojson --run 1",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12 research/geography/france-nine-gap-family-source-fitness-20261007/reproduce.py --official-source /tmp/ign-adminexpress-cog-2026-arrondissement.geojson --run 2",
     "cmp research/geography/france-nine-gap-family-source-fitness-20261007/verification/run-1.json research/geography/france-nine-gap-family-source-fitness-20261007/verification/run-2.json",
-    "node scripts/evidence-quality.mjs research/geography/france-nine-gap-family-source-fitness-20261007/evidence-quality.json .",
-    "python3 research/geography/france-nine-gap-family-source-fitness-20261007/summarize.py"
+    "python3 research/geography/france-nine-gap-family-source-fitness-20261007/summarize.py",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/evidence-quality.mjs research/geography/france-nine-gap-family-source-fitness-20261007/evidence-quality.json ."
   ],
   "metric_bindings": [
     {
@@ -1158,6 +1248,26 @@
       "metric_id": "unverified_surface",
       "path": "research/geography/france-nine-gap-family-source-fitness-20261007/summary-metrics.json",
       "json_pointer": "/values/unverified_surface"
+    },
+    {
+      "metric_id": "contacts_with_2022_geometry_intersection_2026",
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/summary-metrics.json",
+      "json_pointer": "/values/contacts_with_2022_geometry_intersection_2026"
+    },
+    {
+      "metric_id": "contacts_with_2022_geometry_whole_cover_2026",
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/summary-metrics.json",
+      "json_pointer": "/values/contacts_with_2022_geometry_whole_cover_2026"
+    },
+    {
+      "metric_id": "contacts_with_current_atlas_geometry_intersection_2026",
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/summary-metrics.json",
+      "json_pointer": "/values/contacts_with_current_atlas_geometry_intersection_2026"
+    },
+    {
+      "metric_id": "contacts_with_current_atlas_geometry_whole_cover_2026",
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/summary-metrics.json",
+      "json_pointer": "/values/contacts_with_current_atlas_geometry_whole_cover_2026"
     }
   ],
   "validation": [
@@ -1191,7 +1301,7 @@
       "status": "added"
     },
     {
-      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/evidence-quality.json",
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/contact-findings.csv",
       "status": "added"
     },
     {
@@ -1247,11 +1357,23 @@
       "status": "added"
     },
     {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/verification/attempt-03-before-review-controls/run-1.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/verification/attempt-03-before-review-controls/run-2.json",
+      "status": "added"
+    },
+    {
       "path": "research/geography/france-nine-gap-family-source-fitness-20261007/verification/run-1.json",
       "status": "added"
     },
     {
       "path": "research/geography/france-nine-gap-family-source-fitness-20261007/verification/run-2.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/evidence-quality.json",
       "status": "added"
     }
   ]
