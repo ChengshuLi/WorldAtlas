@@ -38,11 +38,16 @@ export function immutableReader(repo,commit,storage){
   if(stored){
    assert.equal(stored.original.blob,oid,'Original containing-file OID changed');
    assert.equal(stored.original.mode,tree.split(' ')[0]);assert.equal(stored.original.bytes,bytes);
+   assert(Number.isSafeInteger(stored.alias.bytes)&&stored.alias.bytes>0&&stored.alias.bytes<=32*1024*1024,'Bounded encoded alias size required before read');
+   assert(Number.isSafeInteger(stored.alias.decoded_bytes)&&stored.alias.decoded_bytes===bytes&&stored.alias.decoded_bytes<=32*1024*1024,'Bounded decoded original size required');
    const name=path.join(repo,stored.alias.path);assert(safe(stored.alias.path));
-   assert(fs.lstatSync(name).isFile()&&fs.realpathSync(name)===name,'Ordinary retained alias required');
+   const stat=fs.lstatSync(name);assert(stat.isFile()&&fs.realpathSync(name)===name,'Ordinary retained alias required');
+   assert(stat.size===stored.alias.bytes&&stat.size<=32*1024*1024,'Actual encoded alias size differs before read');
    const encoded=fs.readFileSync(name);assert.equal(encoded.length,stored.alias.bytes);assert.equal(SHA(encoded),stored.alias.sha256);
    raw=gunzipSync(encoded,{maxOutputLength:32*1024*1024});assert.equal(raw.length,stored.alias.decoded_bytes);assert.equal(SHA(raw),stored.alias.decoded_sha256);
    assert.equal(SHA(raw),stored.original.sha256,'Whole original input changed');
+   const blobHash=createHash('sha1').update(Buffer.from(`blob ${raw.length}\0`)).update(raw).digest('hex');
+   assert.equal(blobHash,oid,'Restored source body differs from actual immutable Git blob');
   }else raw=execFileSync('git',['-C',repo,'cat-file','blob',oid],{maxBuffer:32*1024*1024});
   assert.equal(raw.length,bytes);
   const decoded=raw[0]===31&&raw[1]===139?gunzipSync(raw,{maxOutputLength:32*1024*1024}):raw;

@@ -17,6 +17,11 @@ try{
  const altered=Buffer.concat([original,Buffer.from(' ')]),encoded=gzipSync(altered,{level:9}),relative=path.relative(root,path.join(fixture,'altered.gz'));fs.writeFileSync(relative,encoded);
  const rebound={...row,alias:{path:relative,bytes:encoded.length,sha256:hash(encoded),decoded_bytes:altered.length,decoded_sha256:hash(altered)}};
  caseRun('coherently rebound transport cannot alter original whole body',()=>assert.throws(()=>read(rebound),/Whole original input changed/));
+ const same=Buffer.from(original);same[same.indexOf(123)]=91;const sameEncoded=gzipSync(same,{level:9}),samePath=path.relative(root,path.join(fixture,'same-length.gz'));fs.writeFileSync(samePath,sameEncoded);
+ const forged={original:{...row.original,sha256:hash(same)},alias:{path:samePath,bytes:sameEncoded.length,sha256:hash(sameEncoded),decoded_bytes:same.length,decoded_sha256:hash(same)}};
+ caseRun('same-length coherent original and transport rebind rejected against actual Git OID',()=>assert.throws(()=>read(forged),/actual immutable Git blob/));
+ caseRun('oversized declared encoded alias rejected before read',()=>assert.throws(()=>read({...row,alias:{...row.alias,bytes:32*1024*1024+1}}),/before read/));
+ caseRun('oversized declared decoded alias rejected',()=>assert.throws(()=>read({...row,alias:{...row.alias,decoded_bytes:32*1024*1024+1}}),/Bounded decoded/));
  caseRun('encoded alias digest mutation rejected',()=>assert.throws(()=>read({...row,alias:{...row.alias,sha256:'0'.repeat(64)}})));
  caseRun('decoded alias digest mutation rejected',()=>assert.throws(()=>read({...row,alias:{...row.alias,decoded_sha256:'0'.repeat(64)}})));
  caseRun('absolute storage path rejected',()=>assert.throws(()=>read({...row,alias:{...row.alias,path:path.resolve(row.alias.path)}})));
