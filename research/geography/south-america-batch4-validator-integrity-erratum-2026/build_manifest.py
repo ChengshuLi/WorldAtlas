@@ -129,11 +129,11 @@ def build():
     reproducibility = {
         "method_id": METHOD, "kind": "reproducibility", "outcome": "passed",
         "comparison_policy": "Compare every deterministic calculation/control product byte-for-byte. Run name, timestamp and path-bound publication receipt are retained as different truthful per-run metadata.",
-        "run_three": {"vintage": one["name"], "outputs": one["hashes"],
+        "run_one": {"vintage": one["name"], "outputs": one["hashes"],
                     "metadata_sha256": one["metadata_sha256"], "publication_sha256": one["publication_sha256"]},
-        "run_four": {"vintage": two["name"], "outputs": two["hashes"],
+        "run_two": {"vintage": two["name"], "outputs": two["hashes"],
                     "metadata_sha256": two["metadata_sha256"], "publication_sha256": two["publication_sha256"]},
-        "run_five_sha256": one_digest, "run_six_sha256": two_digest,
+        "run_one_sha256": one_digest, "run_two_sha256": two_digest,
         "equal_deterministic_product_digest": one_digest == two_digest,
         "run_metadata_differ": one["metadata_sha256"] != two["metadata_sha256"],
         "method_note": "The digests bind all six whole calculation/control files; publication receipts independently bind all seven run outputs for each fresh vintage."
@@ -197,6 +197,8 @@ def build():
         (OWNED + "/drafts/reproducibility-prior-final-runs.json", "preserved superseded comparison"),
         (OWNED + "/drafts/evidence-quality-hosted-check-failure.json", "preserved failed hosted-check manifest"),
         (OWNED + "/drafts/reproducibility-hosted-check-failure.json", "preserved hosted-check comparison"),
+        (OWNED + "/drafts/evidence-quality-second-hosted-failure.json", "preserved second failed hosted-check manifest"),
+        (OWNED + "/drafts/reproducibility-second-hosted-failure.json", "preserved second hosted-check comparison"),
     ]
     output_rows = [candidate_descriptor(path, role) for path, role in static_output_paths + run_output_paths]
     # Bind the contract snapshot by its captured complete file hash and record
