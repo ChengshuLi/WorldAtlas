@@ -17,7 +17,7 @@ FAMILY_PATH = SOURCE.as_posix() + '/family-row.json'
 ROSTER_PATH = SOURCE.as_posix() + '/component-roster.txt'
 INDEX_SHA = 'dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c'
 FAMILY_SHA = 'a08249214711d84d7d220a61fe10f2d4582e7bc64f1a5ae811436ddaf22d94b3'
-RESTORE_VINTAGE = 'restore-745cc86a'
+RESTORE_VINTAGE = 'restore-450126d0'
 RESTORE_ROOT = PACKET.as_posix() + '/vintages'
 
 sys.path.insert(0, str(REPO / 'scripts'))

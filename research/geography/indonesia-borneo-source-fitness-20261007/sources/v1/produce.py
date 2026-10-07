@@ -38,8 +38,8 @@ ATLAS_CONTACTS = {
     'gb:IDN:ADM2:22746128B96540112180119',
 }
 RUN_ONE = 'run-five'
-CURRENT_SCOPE_RECEIPT = 'scope-extraction-current-745cc86a.json'
-RESTORE_VINTAGE = 'restore-745cc86a'
+CURRENT_SCOPE_RECEIPT = 'scope-extraction-current-450126d0.json'
+RESTORE_VINTAGE = 'restore-450126d0'
 RESTORE_ROOT = PACKET / 'vintages' / RESTORE_VINTAGE
 RESTORE_RECEIPT = RESTORE_ROOT / 'custody-restoration.json'
 

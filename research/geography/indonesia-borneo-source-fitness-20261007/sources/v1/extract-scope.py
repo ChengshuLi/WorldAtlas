@@ -3,7 +3,7 @@
 from pathlib import Path
 import gzip, hashlib, json, subprocess
 
-BASELINE = '745cc86a5e1e4d9917730bad0b5a7a031de99ceb'
+BASELINE = '450126d04c7e6bf85c8763c9bb6949c1fac68000'
 REPORT = 'coordination/engineering/global-actionability-routing-20261007/results/report.json'
 REPORT_SHA256 = '2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265'
 FAMILY_ID = 'gap-source-batch:8875fd920e43656b5f36e704'
@@ -69,7 +69,7 @@ if not all(controls.values()):
     raise SystemExit('A source-scope control failed')
 row_path = OUT / 'family-row.json'
 roster_path = OUT / 'component-roster.txt'
-receipt_path = OUT / 'scope-extraction-current-745cc86a.json'
+receipt_path = OUT / 'scope-extraction-current-450126d0.json'
 if not row_path.is_file() or row_path.read_bytes() != raw_rows[0]:
     raise ValueError('The preserved original family row differs from the current pinned source row')
 if not roster_path.is_file() or roster_path.read_bytes() != sorted_roster:
