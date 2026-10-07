@@ -15,7 +15,7 @@ const sha=b=>createHash('sha256').update(b).digest('hex');
 const git=(commit,file)=>execFileSync('git',['show',commit+':'+file],{maxBuffer:32*1024*1024});
 const self=owned+'verify-build-context.mjs',prefix='data:text/javascript;base64,';
 assert.ok(import.meta.url.startsWith(prefix));assert.deepEqual(Buffer.from(import.meta.url.slice(prefix.length),'base64'),git(toolCommit,self));
-const destination=path.resolve(root,output??'');assert.ok(destination.startsWith(path.join(root,owned)+path.sep)&&destination.endsWith('.json'),'Fresh owned JSON output required');
+const destination=path.resolve(root,output??'');assert.ok(destination.startsWith(path.resolve(root,owned)+path.sep)&&destination.endsWith('.json'),'Fresh owned JSON output required');
 for(let current=destination;current!==root;current=path.dirname(current)){
  let stat;try{stat=fs.lstatSync(current);}catch(e){if(e.code!=='ENOENT')throw e;}
  assert.ok(!stat?.isSymbolicLink(),'Output symlink refused');if(current===destination)assert.equal(stat,undefined,'Existing output refused');
