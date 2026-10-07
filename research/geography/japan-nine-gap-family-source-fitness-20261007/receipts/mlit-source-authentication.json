@@ -1,0 +1,79 @@
+{
+  "status": "PASS",
+  "comparison_performed": false,
+  "archive_sha256": "a649b4099c1b0df80a6fb9ed087b594ed75ae9a92e9511cecdb6463d1480c6fb",
+  "archive_bytes": 242211059,
+  "member_receipts": [
+    {
+      "name": "KS-META-N03-17_170101.xml",
+      "compressed_bytes": 3010,
+      "uncompressed_bytes": 16226,
+      "crc32": "78418a93"
+    },
+    {
+      "name": "N03-17_170101.dbf",
+      "compressed_bytes": 59191,
+      "uncompressed_bytes": 8818018,
+      "crc32": "42697994"
+    },
+    {
+      "name": "N03-17_170101.prj",
+      "compressed_bytes": 163,
+      "uncompressed_bytes": 221,
+      "crc32": "545c13df"
+    },
+    {
+      "name": "N03-17_170101.shp",
+      "compressed_bytes": 153468591,
+      "uncompressed_bytes": 232075540,
+      "crc32": "b71f6d34"
+    },
+    {
+      "name": "N03-17_170101.shx",
+      "compressed_bytes": 445870,
+      "uncompressed_bytes": 928292,
+      "crc32": "a2876654"
+    },
+    {
+      "name": "N03-17_170101.xml",
+      "compressed_bytes": 88233320,
+      "uncompressed_bytes": 522080421,
+      "crc32": "a43a2691"
+    }
+  ],
+  "opened_member_hashes": {
+    "KS-META-N03-17_170101.xml": {
+      "bytes": 16226,
+      "sha256": "89166a5c9ec400e349f58b9bdeb7600a0981012f4b6af88ed585583f5d1d2051"
+    },
+    "N03-17_170101.prj": {
+      "bytes": 221,
+      "sha256": "f68d9dd64784938c42d8d459468631e52c358d51b6090d86b46d6ff87a1b9738"
+    },
+    "N03-17_170101.dbf": {
+      "bytes": 8818018,
+      "sha256": "ac7cbf12b3513b47f8791e83e0a16b475cebccc9faf0333b3a8fdd22c2a9fb52"
+    },
+    "N03-17_170101.shp": {
+      "bytes": 232075540,
+      "sha256": "50d808b70a11b8569b4b7400fa6ff9c0743bcfd09988cd7d92ebf4b8770d9192"
+    }
+  },
+  "native_prj": "GEOGCS[\"GCS_JGD_2011\",DATUM[\"D_JGD_2011\",SPHEROID[\"GRS_1980\",6378137.0,298.257222101]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433],METADATA[\"Japan\",122.38,17.09,157.64,46.05,0.0,0.0174532925199433,0.0,1129]]",
+  "source_shape_record_count": 116024,
+  "distinct_N03_007_code_count": 1902,
+  "N03_007_code_count_is_unit_count": false,
+  "unit_count_interpretation": "DBF census reports nonempty distinct N03_007 values only; code rows are not assumed equal to municipal units, and 140 rows have blank code.",
+  "shape_type": "ESRI Polygon (5)",
+  "dbf_record_count": 116024,
+  "dbf_code_unique_count": 1903,
+  "dbf_deleted_record_count": 0,
+  "dbf_blank_N03_007_record_count": 140,
+  "dbf_code_value_widths": [
+    5
+  ],
+  "dbf_duplicate_code_count": 695,
+  "source_geometry_invalid_count": null,
+  "source_geometry_invalid_count_limit": "Whole-source validity is not normalized into a roster field; target-relevant source geometries are checked as read in the frozen overlay. Full source ring/part assembly errors: 0.",
+  "full_native_source": "The complete official national ZIP byte body is verified. Every polygon in its SHP and DBF is read; coordinates/rings remain native and unedited. No GML member expansion is required because the exact whole original ZIP SHA-256 binds all six archive members."
+}

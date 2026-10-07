@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "source": "MLIT National Land Numerical Information N03 administrative area data, 2017-01-01 product",
+  "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2017/N03-170101_GML.zip",
+  "retrieved_at_utc": "2026-10-07T06:54:39Z",
+  "http_headers_path": "sources/mlit/n03-2017-download.headers",
+  "http_headers_sha256": "f9323590f30cd34bab1b2ecda777ec2be4b0fc5c291dc6a103e122186fc8e4d2",
+  "http_content_length": 242211059,
+  "http_etag": "\"e6fd8f3-567c240523900\"",
+  "archive_sha256": "a649b4099c1b0df80a6fb9ed087b594ed75ae9a92e9511cecdb6463d1480c6fb",
+  "archive_restoration": "Concatenate decoded part bytes in ordinal order; byte offsets cover the original downloaded ZIP exactly.",
+  "archive_members": [
+    {
+      "name": "KS-META-N03-17_170101.xml",
+      "compressed_bytes": 3010,
+      "uncompressed_bytes": 16226,
+      "uncompressed_sha256": "89166a5c9ec400e349f58b9bdeb7600a0981012f4b6af88ed585583f5d1d2051",
+      "retained_member_path": "sources/mlit/KS-META-N03-17_170101.xml",
+      "crc32": "78418a93"
+    },
+    {
+      "name": "N03-17_170101.dbf",
+      "compressed_bytes": 59191,
+      "uncompressed_bytes": 8818018,
+      "uncompressed_sha256": "ac7cbf12b3513b47f8791e83e0a16b475cebccc9faf0333b3a8fdd22c2a9fb52",
+      "crc32": "42697994"
+    },
+    {
+      "name": "N03-17_170101.prj",
+      "compressed_bytes": 163,
+      "uncompressed_bytes": 221,
+      "uncompressed_sha256": "f68d9dd64784938c42d8d459468631e52c358d51b6090d86b46d6ff87a1b9738",
+      "retained_member_path": "sources/mlit/N03-17_170101.prj",
+      "crc32": "545c13df"
+    },
+    {
+      "name": "N03-17_170101.shp",
+      "compressed_bytes": 153468591,
+      "uncompressed_bytes": 232075540,
+      "uncompressed_sha256": "50d808b70a11b8569b4b7400fa6ff9c0743bcfd09988cd7d92ebf4b8770d9192",
+      "crc32": "b71f6d34"
+    },
+    {
+      "name": "N03-17_170101.shx",
+      "compressed_bytes": 445870,
+      "uncompressed_bytes": 928292,
+      "uncompressed_sha256": "272bb0f56961bc0140508fdab927d60e9265c27de4547c68808a9e57698d0e37",
+      "crc32": "a2876654"
+    },
+    {
+      "name": "N03-17_170101.xml",
+      "compressed_bytes": 88233320,
+      "uncompressed_bytes": 522080421,
+      "uncompressed_sha256": "de2a7c6721afb85afe8a1e16ca82be253a03842c8b390a62d3b5dc51709b0b18",
+      "crc32": "a43a2691"
+    }
+  ],
+  "captured_official_pages": {
+    "n03-v2_3.html": {
+      "bytes": 1080998,
+      "sha256": "2dc1a44224bee8fb79a13ae023737a7b0644521285bf3e1be5fcb75f67372b43"
+    },
+    "n03-2024-list.html": {
+      "bytes": 2379631,
+      "sha256": "61f8e2b28b9e4e1de575d128a4736cf20f4588c62d43c1163a6a5a3bbd2c49a2"
+    },
+    "terms-legacy.html": {
+      "bytes": 62499,
+      "sha256": "5e5b06a9731123e72dec2f497122363de5e2e003b7c37b41963159f967baefa7"
+    },
+    "n03-v2_3.headers": {
+      "bytes": 429,
+      "sha256": "75a5184c68322ac34fe56fb3e0251f10fa1edee463daf2e8f9ed3da82a6f2aa0"
+    },
+    "n03-2024-list.headers": {
+      "bytes": 429,
+      "sha256": "29c95c8b24c3f46aaa193c8bffe081e4fbae59c7b09a0ad87e3b2caf6125d4a2"
+    },
+    "terms-legacy.headers": {
+      "bytes": 429,
+      "sha256": "3e4c6ce7d99196e653d89bab83aad8d0389e5ef9876959f4ac9a08c8dd732104"
+    },
+    "n03-2017-download.headers": {
+      "bytes": 443,
+      "sha256": "f9323590f30cd34bab1b2ecda777ec2be4b0fc5c291dc6a103e122186fc8e4d2"
+    }
+  },
+  "product_claims": {
+    "represented_date": "2017-01-01",
+    "geometry_role": "administrative areas enclosed by administrative boundaries and coastline",
+    "native_crs": "JGD2011 / (B, L)",
+    "source_basis": "GSI National Land Basic Information (Numerical Map / National Land Basic Information), including GSI approvals listed in the product record",
+    "license_display": "商用可 (commercial use permitted)",
+    "terms": "The official current terms page routes data marked commercial-use to agreement_02 legacy terms; this product permits copying/re-distribution with source and processing attribution. The packet preserves both pages.",
+    "limitations": "Administrative/coastline-area polygons are a comparative administrative reference; they do not establish physical water, legal title, exact source authority for each feature, or the processing cause of a candidate."
+  },
+  "retention": "restoration-only",
+  "ordinary_file_limit_note": "The exact 242,211,059-byte source ZIP exceeds the 33,554,432-byte per-file bound. It is restored as a whole from the official URL and checked against captured whole-body SHA-256; no clipped extract is represented as the original source.",
+  "restore_command": "python methods/restore_mlit_source.py --download",
+  "local_verified_whole_source_sha256": "a649b4099c1b0df80a6fb9ed087b594ed75ae9a92e9511cecdb6463d1480c6fb"
+}

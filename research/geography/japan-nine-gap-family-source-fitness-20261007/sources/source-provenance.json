@@ -1,0 +1,69 @@
+{
+  "schema": "japan-source-provenance-v1",
+  "comparison_performed": false,
+  "sources": [
+    {
+      "id": "geoboundaries-jpn-adm2-full",
+      "url": "https://github.com/wmgeolab/geoBoundaries/blob/9469f09/releaseData/gbOpen/JPN/ADM2/geoBoundaries-JPN-ADM2.geojson",
+      "product": "Complete unsimplified geoBoundaries Japan ADM2 GeoJSON at commit 9469f09; upstream LFS OID and exact response bytes retained in adjacent pointer/headers.",
+      "represented_year_claim": "2017",
+      "source_data_update_date": "Thu Jan 19 07:31:04 2023",
+      "build_date": "Dec 12, 2023",
+      "recorded_boundary_id": "JPN-ADM2-22064153",
+      "recorded_canonical_role": "Subprefectures",
+      "recorded_underlying_source": "OpenStreetMap, Wambacher",
+      "recorded_underlying_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "product_license": "Exact retained geoBoundaries CITATION-AND-USE file states CC BY 4.0 with attribution and per-feature citation requirements.",
+      "feature_roster": "The exact full body contains 1,742 unique shapeIDs; metadata advertises 1,745. Preserve the three-count discrepancy.",
+      "temporal_and_accuracy_limit": "The metadata's 2017 represented-year field does not establish 2017-effective source geometry. Recorded source update/build dates are 2023; underlying OSM observation dates, positional accuracy and legal authority are not established.",
+      "coordinate_convention": "GeoJSON RFC 7946 uses WGS84 geographic coordinates and longitude-latitude order. The product metadata has no separate positional accuracy statement; this format convention does not establish source accuracy or legal authority."
+    },
+    {
+      "id": "geoboundaries-jpn-adm2-atlas-simplified",
+      "url": "https://github.com/wmgeolab/geoBoundaries/blob/9469f09/releaseData/gbOpen/JPN/ADM2/geoBoundaries-JPN-ADM2_simplified.geojson",
+      "product": "Exact full simplified GeoJSON consumed by the Atlas's pinned administrative source pipeline. The captured source hash matches data/administrative-sources.json and the upstream LFS pointer. Retained losslessly as deterministic gzip in this packet.",
+      "represented_year_claim": "2017",
+      "recorded_underlying_source": "OpenStreetMap, Wambacher",
+      "recorded_underlying_license": "Creative Commons Attribution-ShareAlike 2.0",
+      "product_license": "CC BY 4.0 product attribution and per-feature citation under the retained upstream CITATION-AND-USE file.",
+      "feature_roster": "1,742 unique shapeIDs, exact roster match to the full product; geometry differs for 1,741 same-ID features.",
+      "temporal_and_accuracy_limit": "Same represented-year and source-date limits as the full product. The Atlas consumed simplified geometry; unsimplified geometry is a separate diagnostic product, not a replacement input.",
+      "coordinate_convention": "GeoJSON RFC 7946 uses WGS84 geographic coordinates and longitude-latitude order. The product metadata has no separate positional accuracy statement; this format convention does not establish source accuracy or legal authority."
+    },
+    {
+      "id": "mlit-n03-2017",
+      "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2017/N03-170101_GML.zip",
+      "official_reference": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-v2_3.html",
+      "product": "Nationwide N03 administrative-area and coastline polygons with represented date 2017-01-01; exact whole archive SHA256 a649b4099c1b0df80a6fb9ed087b594ed75ae9a92e9511cecdb6463d1480c6fb, 242,211,059 bytes. The six original ZIP members and their size/CRC/SHA receipts are recorded in n03-2017-source-manifest.json.",
+      "native_crs": "JGD2011 geographic (EPSG:6668); source coordinates are read from the original SHP and not edited.",
+      "source_basis": "Official product documentation says based on GSI National Land Basic Information / Numerical Map and lists GSI approval H28JO No.1283.",
+      "license": "The 2017 product row is marked 商用可 (commercial use permitted). The official current terms route this status to legacy terms permitting copying and redistribution with source and processing attribution, while retaining stated limitations.",
+      "source_roster_observation": "Original SHP has 116,024 polygon records. The DBF has 1,902 distinct nonblank N03_007 code strings and 140 blank-code rows. Do not equate shape rows or distinct code strings with a legal or municipal unit count.",
+      "retention": "Restoration-only in this packet because the whole ZIP exceeds the 33,554,432-byte ordinary-file limit. The original complete archive was fetched and verified in local ignored custody. Reproduce with python methods/restore_mlit_source.py --download; the command rejects any body whose exact length or SHA differs. No clipped extract is claimed to be the original source.",
+      "limit": "This official administrative/coastline reference does not establish physical land/water truth, legal title, source authority for an individual candidate, positional accuracy, historical cause or a repair decision."
+    },
+    {
+      "id": "gsi-fundamental-geospatial-information-service",
+      "url": "https://service.gsi.go.jp/kiban/app/",
+      "product": "The service and map pages returned HTTP 403 from this request environment. This is recorded as an access outcome here, not evidence of entitlement requirements or service-wide unavailability.",
+      "license": "unknown; no data body was retrieved",
+      "limit": "No high-resolution GSI Kiban geometry was consumed or compared."
+    },
+    {
+      "id": "gsi-digital-map-200000",
+      "url": "https://www.gsi.go.jp/kibanjoho/kibanjoho40082.html",
+      "product": "Official 1:200,000 Digital Map information page captured; its scale does not provide finite candidate-scale applicability for these small coastal gaps.",
+      "license": "unknown; no source geometry body was retrieved",
+      "limit": "Context only; it does not bind a candidate/contact polygon or resolve physical coast/water status."
+    },
+    {
+      "id": "gshhg-existing-accepted-comparison",
+      "url": "https://www.soest.hawaii.edu/pwessel/gshhg/gshhg-bin-2.3.7.zip",
+      "product": "Existing accepted complete comparison from issue #1261 is reused by selecting 28 complete result rows from the committed output. The full original 118,617,033-byte archive and 188,612 native records were previously preserved/reconstructed; this task does not rerun the global detector.",
+      "license": "The original archive has a retained COPYING/README version wording conflict (LGPL v3 or later versus v3 or earlier). Do not resolve it here.",
+      "vintage": "Distributed GSHHG 2.3.7 release 2017-06-15; underlying WVS/WDBII observation dates heterogeneous and unresolved.",
+      "limit": "All physical authority, current truth, observation-date fitness, narrow-channel and shoreline registration questions remain unknown/unapproved."
+    }
+  ],
+  "no_raster": "This packet uses vector products only. Raster affine, pixel indexing, cloud and NoData controls do not apply; missing vector source intersection is never interpreted as dry land or water."
+}
