@@ -19,7 +19,7 @@ for product in config['source_products']:
  files=[desc(ROOT/delivery[str((CASE/p['alias']).relative_to(ROOT))])for p in product['parts']];source_paths.update(f['path']for f in files)
  sources.append({'id':product['key'],'url':product['recorded_consumed_url'],'role':'Complete original consumed input geometry, not dated physical land/water or legal authority','vintage':'Original consumed whole SHA '+product['original_sha256']+'; advertised represented year '+str(product['source_represented_year_claim']),'retrieved_at':'2026-10-06 immutable accepted capsule readback; historical retrieval time remains unknown','license':{'status':'redistributable','terms':product['recorded_license']+'; original source metadata and attribution retained through source catalogue and feature bindings.'},'retention':'retained','verification':'unverified','temporal_status':'reference','files':files,'limit':'Whole source bytes verified, source date/physical water/legal meaning not independently approved.'})
 manifest_path=str((CASE.parent/'evidence-quality.json').relative_to(ROOT));outputs=[]
-for p in sorted(CASE.rglob('*')):
+for p in sorted(list(CASE.rglob('*'))+list((CASE.parent/'i').rglob('*'))):
  if not p.is_file():continue
  assert not p.is_symlink();d=desc(p)
  if d['path']not in source_paths:outputs.append(d)

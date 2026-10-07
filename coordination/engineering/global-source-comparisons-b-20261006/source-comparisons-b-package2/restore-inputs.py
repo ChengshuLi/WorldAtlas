@@ -1,7 +1,7 @@
 """Restore exact frozen execution paths from shorter delivery aliases; no science."""
 import pathlib,json,hashlib,gzip,subprocess,argparse
 PIN='c0bb4c62a725f9d170a9c26db4baa1c477cbc905'
-MAP_SHA='1f12ef59c023ead6d878c18030b96ddd06f0247cfe45bb315070165acbc2a476'
+MAP_SHA='1b23c9723bdd83ed54add068968b494a493fe954e7375b241ed3ac2a3a481799'
 CASE=pathlib.Path(__file__).resolve().parent;ROOT=CASE.parents[3]
 LIMIT=32*1024*1024
 def sha(b):return hashlib.sha256(b).hexdigest()
@@ -25,11 +25,12 @@ def git_bytes(relative):
  tree=subprocess.check_output(['git','ls-tree',PIN,'--',relative],cwd=ROOT).split()
  if not tree or tree[0]not in(b'100644',b'100755'):raise ValueError('Original Git path is not ordinary')
  return subprocess.check_output(['git','show',PIN+':'+relative],cwd=ROOT)
-def validate(root,rows,expected,original_reader,prefix):
+def validate(root,rows,expected,original_reader,prefix,delivery_prefix=None):
+ delivery_prefix=delivery_prefix or prefix+'/inputs/'
  if len({r['original_path']for r in rows})!=len(rows)or len({r['delivered_path']for r in rows})!=len(rows):raise ValueError('Duplicate alias path')
  if len(rows)!=len(expected)or {r['original_path']for r in rows}!=expected:raise ValueError('Incomplete original alias roster')
  for r in rows:
-  if not r['original_path'].startswith(prefix+'/inputs/')or not r['delivered_path'].startswith(prefix+'/inputs/'):raise ValueError('Alias outside input namespace')
+  if not r['original_path'].startswith(prefix+'/inputs/')or not r['delivered_path'].startswith(delivery_prefix):raise ValueError('Alias outside input namespace')
   old=safe(root,r['original_path']);new=safe(root,r['delivered_path']);b=checked(new,r)
   if original_reader(r['original_path'])!=b:raise ValueError('Alias differs from actual original Git bytes')
   if old.exists():checked(old,r)
@@ -48,7 +49,7 @@ def restore(create=True):
  config=json.loads((CASE/'input-config.json').read_bytes())
  expected={prefix+'/'+p['alias']for p in config['immutable_aliases']}
  expected.update(prefix+'/'+p['alias']for product in config['source_products']for p in product['parts'])
- rows=validate(ROOT,mapping['rows'],expected,git_bytes,prefix)
+ rows=validate(ROOT,mapping['rows'],expected,git_bytes,prefix,str(CASE.parent.relative_to(ROOT))+'/i/')
  created=[]
  for r in rows:
   old=safe(ROOT,r['original_path'])
