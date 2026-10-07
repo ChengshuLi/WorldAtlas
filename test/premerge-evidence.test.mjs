@@ -4,7 +4,7 @@ import {createHash} from 'node:crypto';
 import {memoizeImmutableGitBlobs} from '../scripts/immutable-git-blobs.mjs';
 import {sha256, subjectsHash} from '../scripts/evidence-quality.mjs';
 import {evidenceRequirement} from '../scripts/evidence-policy.mjs';
-import {validatePremergeManifest, validateReviewReceipt, checkPremergeEvidence, GEOMETRY_VERSION, reviewContractBinding, reviewBindingRequired} from '../scripts/premerge-evidence.mjs';
+import {validatePremergeManifest, validateRecordChecks, validateReviewReceipt, checkPremergeEvidence, GEOMETRY_VERSION, reviewContractBinding, reviewBindingRequired} from '../scripts/premerge-evidence.mjs';
 
 const commit = 'a'.repeat(40), head = 'b'.repeat(40), branch = 'engineering/synthetic';
 const manifestPath = 'coordination/engineering/synthetic/evidence-quality.json';
@@ -31,6 +31,24 @@ function fixture() {
   return {manifest, spec, issue, files, reservation, pr, readFile, manifestPath, branch};
 }
 const validate = f => validatePremergeManifest(f.manifest, f);
+test('independent record bindings reject coherent wrong joins, incomplete and vacuous coverage', () => {
+  const reference = [{id: 'a', parent: 'province-a', unit: 'm2'}, {id: 'b', parent: 'province-b', unit: 'm2'}];
+  const manifest = {outputs: [{path: 'candidate.json'}], baseline: {commit, files: [{path: 'reference.json'}]}, record_checks: [{
+    version: 1, path: 'candidate.json', json_pointer: '/rows', id_key: 'id', reference_path: 'reference.json',
+    reference_json_pointer: '', reference_id_key: 'id', fields: {parent: 'parent', unit: 'unit'}
+  }]};
+  const run = rows => validateRecordChecks(manifest, (path, vintage) => {
+    assert.equal(vintage, path === 'candidate.json' ? 'candidate' : commit);
+    return Buffer.from(JSON.stringify(path === 'candidate.json' ? {rows, count: 2} : reference));
+  });
+  assert.equal(run(reference), 1);
+  for (const rows of [[], reference.slice(1), [...reference, reference[0]],
+    [{...reference[0], parent: 'country-SPI'}, reference[1]],
+    [{...reference[0], unit: 'count'}, reference[1]],
+    [reference[0], {...reference[1], id: 'fabricated'}]]) assert.throws(() => run(rows));
+  manifest.record_checks[0].reference_path = 'candidate.json';
+  assert.throws(() => run(reference), /independently pinned/);
+});
 function receipt(f) {
   return {version: 1, pr_number: f.pr.number, head_sha: head, manifest_sha256: sha256(JSON.stringify(f.manifest)), author_worker_id: 'author',
     reviewer_worker_id: 'reviewer', inspected_files: f.files.map(file => file.filename), evidence_hashes: [sha256(baseline), sha256(output)],

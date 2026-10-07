@@ -15,6 +15,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
 from evidence.geometry import land_area_m2, distance_m, transform_point, ownership_overlap
 from evidence.immutable import Baseline, descriptor, canonical_json, deterministic_gzip, validate_source_receipts, write_new_vintage
 from evidence.prepare import prepare
+from evidence.contracts import source_crs
 
 
 def analytic(west, south, east, north):
@@ -27,6 +28,12 @@ def analytic(west, south, east, north):
 
 
 class Geometry(unittest.TestCase):
+    def test_native_datum_is_not_silently_relabelled_wgs84(self):
+        self.assertEqual(source_crs('EPSG:4326', expected_crs='EPSG:4326').to_epsg(), 4326)
+        for native in ('EPSG:4269', 'EPSG:4687'):
+            with self.assertRaises(ValueError): source_crs(native, expected_crs='EPSG:4326')
+        with self.assertRaises(ValueError): source_crs(None)
+
     def test_axis_control_and_geodesic_distance(self):
         x,y=transform_point(10,45,'EPSG:3857')
         self.assertAlmostEqual(x,1113194.9079327357,places=5)
@@ -46,6 +53,8 @@ class Geometry(unittest.TestCase):
         island=box(12,50,12.1,50.1)
         expected=analytic(10,50,11,51)-analytic(10.2,50.2,10.8,50.8)+analytic(12,50,12.1,50.1)
         self.assertTrue(math.isclose(land_area_m2(MultiPolygon([land,island])),expected,rel_tol=1e-10))
+        reversed_island = Polygon(list(island.exterior.coords)[::-1])
+        self.assertTrue(math.isclose(land_area_m2(MultiPolygon([land,reversed_island])),expected,rel_tol=1e-10))
 
     def test_dateline_holes_and_unsupported_poles(self):
         g=Polygon([(179,0),(-179,0),(-179,2),(179,2),(179,0)], [[(179.5,.5),(-179.5,.5),(-179.5,1.5),(179.5,1.5),(179.5,.5)]])
@@ -113,6 +122,15 @@ class Preparation(unittest.TestCase):
         self.assertNotEqual(run.returncode,0)
         self.assertIn(b'hash/size mismatch',run.stderr)
         self.assertFalse((self.root/'data/regional-review/test-packet/vintages/bad').exists())
+
+    def test_actual_cli_admits_destination_before_computation(self):
+        request_file = self.root / 'request.json'
+        request_file.write_text(json.dumps({**self.request, 'new_vintage': '../../../escaped'}))
+        cli = Path(__file__).resolve().parents[1] / 'scripts/evidence/prepare.py'
+        run = subprocess.run([sys.executable, str(cli), '--repo', str(self.root), '--request', str(request_file)], capture_output=True)
+        self.assertNotEqual(run.returncode, 0)
+        self.assertIn(b'fresh vintage', run.stderr)
+        self.assertFalse((self.root / 'data/regional-review').exists())
 
     def test_bad_input_baseline_scope_source_and_symlink_fail_before_write(self):
         bad=[{**self.pins[0],'sha256':'a'*64},*self.pins[1:]]
