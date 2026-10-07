@@ -1,0 +1,76 @@
+{
+  "status": "PASS",
+  "same_frozen_execution": "b7b45a6c686c3dff9063185829ec0e2f66d7932d",
+  "two_actual_scientific_products": [
+    {
+      "path": "pixel-audit.json",
+      "bytes": 14323438,
+      "sha256": "a49773818f963c15c27b52a0cad7be6dabcb6dddf9523bdbc253118e177c9cd8"
+    },
+    {
+      "path": "verification.json",
+      "bytes": 45594,
+      "sha256": "5bd55878eaa0782d0a06e2bed56025bb1e67bcce95a313809d1bea5913d20cd5"
+    }
+  ],
+  "actual_run_one": {
+    "status": "PASS",
+    "execution_commit": "b7b45a6c686c3dff9063185829ec0e2f66d7932d",
+    "start": "2026-10-07T09:47:08.785Z",
+    "end": "2026-10-07T09:47:50.336Z",
+    "node": "v24.19.0",
+    "python": "/Users/chengshuli/world-atlas-workspace/.cache/991-author-slot-preserved-20261006-44ed0b44/ignored-cache/reference-repair-991/runtime-rasterio-1.4.3-py312-arm64/bin/python",
+    "pixel_audit": {
+      "bytes": 14323438,
+      "sha256": "a49773818f963c15c27b52a0cad7be6dabcb6dddf9523bdbc253118e177c9cd8"
+    },
+    "resource_usage": {
+      "userCPUTime": 27363481,
+      "systemCPUTime": 13378543,
+      "maxRSS": 1048768,
+      "sharedMemorySize": 0,
+      "unsharedDataSize": 0,
+      "unsharedStackSize": 0,
+      "minorPageFault": 2334830,
+      "majorPageFault": 636,
+      "swappedOut": 0,
+      "fsRead": 0,
+      "fsWrite": 0,
+      "ipcSent": 2,
+      "ipcReceived": 2723,
+      "signalsCount": 0,
+      "voluntaryContextSwitches": 204,
+      "involuntaryContextSwitches": 351027
+    }
+  },
+  "actual_run_two": {
+    "status": "PASS",
+    "execution_commit": "b7b45a6c686c3dff9063185829ec0e2f66d7932d",
+    "start": "2026-10-07T09:48:32.828Z",
+    "end": "2026-10-07T09:49:19.942Z",
+    "node": "v24.19.0",
+    "python": "/Users/chengshuli/world-atlas-workspace/.cache/991-author-slot-preserved-20261006-44ed0b44/ignored-cache/reference-repair-991/runtime-rasterio-1.4.3-py312-arm64/bin/python",
+    "pixel_audit": {
+      "bytes": 14323438,
+      "sha256": "a49773818f963c15c27b52a0cad7be6dabcb6dddf9523bdbc253118e177c9cd8"
+    },
+    "resource_usage": {
+      "userCPUTime": 27779761,
+      "systemCPUTime": 14748288,
+      "maxRSS": 1103808,
+      "sharedMemorySize": 0,
+      "unsharedDataSize": 0,
+      "unsharedStackSize": 0,
+      "minorPageFault": 2454315,
+      "majorPageFault": 394,
+      "swappedOut": 0,
+      "fsRead": 0,
+      "fsWrite": 0,
+      "ipcSent": 2,
+      "ipcReceived": 3011,
+      "signalsCount": 0,
+      "voluntaryContextSwitches": 23032,
+      "involuntaryContextSwitches": 462949
+    }
+  }
+}

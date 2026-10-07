@@ -1,0 +1,2467 @@
+{
+  "status": "INPUT-ONLY-PASS",
+  "execution_commit": "b7b45a6c686c3dff9063185829ec0e2f66d7932d",
+  "source_files": [
+    {
+      "path": "data/ownership-history/algorithms/exact/ellipsoidal_area.py",
+      "bytes": 1953,
+      "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12",
+      "decoded_bytes": 1953,
+      "decoded_sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "518dcaada9e94907d7d886636dcbf928bd0788fa"
+    },
+    {
+      "path": "data/ownership-history/algorithms/exact/majority.py",
+      "bytes": 3114,
+      "sha256": "59046aa90ee824e1a132ba58c831f46bab46e3ac21eba46e77aa80f38802c405",
+      "decoded_bytes": 3114,
+      "decoded_sha256": "59046aa90ee824e1a132ba58c831f46bab46e3ac21eba46e77aa80f38802c405",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "859b8e877f3a4199b848fbcf0949d9c3c10d8422"
+    },
+    {
+      "path": "data/ownership-history/algorithms/exact/prepare-ownership.py",
+      "bytes": 10453,
+      "sha256": "46fa8af5dff2ecd45a7c40648a586250a62499f5531c95da6f35e0c0ceeb6be6",
+      "decoded_bytes": 10453,
+      "decoded_sha256": "46fa8af5dff2ecd45a7c40648a586250a62499f5531c95da6f35e0c0ceeb6be6",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "93d7a5fc759fe854521bdecc0b74188a78a9f2c2"
+    },
+    {
+      "path": "data/ownership-history/algorithms/incremental/e08d67bc39bde0e1-b33afcb77b20715f/prepare-ownership-incremental.py",
+      "bytes": 27611,
+      "sha256": "b33afcb77b20715f8d095a23625d93a472c3a5fb5863f668cab7516b80ee88c5",
+      "decoded_bytes": 27611,
+      "decoded_sha256": "b33afcb77b20715f8d095a23625d93a472c3a5fb5863f668cab7516b80ee88c5",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "281a45a3f71c6fedf9e9f371a62345533fee8604"
+    },
+    {
+      "path": "data/ownership-history/algorithms/incremental/e2eb810a57988535-70c2326434fec294/prepare-ownership-incremental.py",
+      "bytes": 28078,
+      "sha256": "70c2326434fec29419e45c0b1bf186ec506954bee15c08c3ec83ac44dae6a1f5",
+      "decoded_bytes": 28078,
+      "decoded_sha256": "70c2326434fec29419e45c0b1bf186ec506954bee15c08c3ec83ac44dae6a1f5",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "8a3618ed676182caa0061f5dfb7fdeb9f2607f25"
+    },
+    {
+      "path": "data/ownership-history/algorithms/incremental/f44affea3bf822e7-b33afcb77b20715f/prepare-ownership-incremental.py",
+      "bytes": 27611,
+      "sha256": "b33afcb77b20715f8d095a23625d93a472c3a5fb5863f668cab7516b80ee88c5",
+      "decoded_bytes": 27611,
+      "decoded_sha256": "b33afcb77b20715f8d095a23625d93a472c3a5fb5863f668cab7516b80ee88c5",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "281a45a3f71c6fedf9e9f371a62345533fee8604"
+    },
+    {
+      "path": "data/ownership-history/algorithms/incremental/prepare-ownership-incremental.py",
+      "bytes": 25462,
+      "sha256": "b7691092e8e0568b6e1bc8e1ac662cf75e0c8a512877e4d0543f8153ca116b43",
+      "decoded_bytes": 25462,
+      "decoded_sha256": "b7691092e8e0568b6e1bc8e1ac662cf75e0c8a512877e4d0543f8153ca116b43",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "cc42970d339ea9a12e8f042c3e46509b8ec453cf"
+    },
+    {
+      "path": "data/ownership-history/algorithms/majority-refinement.py",
+      "bytes": 3874,
+      "sha256": "ba7915a1ff33250f09baddc5143ca564554755fe7704d09ac5d0737f1ec92ac0",
+      "decoded_bytes": 3874,
+      "decoded_sha256": "ba7915a1ff33250f09baddc5143ca564554755fe7704d09ac5d0737f1ec92ac0",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "6d79206e9122fb3f2f0ffe961a4bc57c894d5b07"
+    },
+    {
+      "path": "data/ownership-history/algorithms/majority.py",
+      "bytes": 3216,
+      "sha256": "25fc899c84ad97736f807d8dbabe27f94680d6fd19b9d1e69279f9306b8f15dd",
+      "decoded_bytes": 3216,
+      "decoded_sha256": "25fc899c84ad97736f807d8dbabe27f94680d6fd19b9d1e69279f9306b8f15dd",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "5d889e48489c17a709fd73d747d38dfac1d70d85"
+    },
+    {
+      "path": "data/ownership-history/algorithms/prepare-ownership.py",
+      "bytes": 9180,
+      "sha256": "dd895979ec5841838c5a72f29eb2f0458062dca7debab464380befa3e62d8ea6",
+      "decoded_bytes": 9180,
+      "decoded_sha256": "dd895979ec5841838c5a72f29eb2f0458062dca7debab464380befa3e62d8ea6",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "3e164fd585b94844876acc8877cb5d23db511c0f"
+    },
+    {
+      "path": "data/ownership-history/algorithms/refine-ownership-threshold.py",
+      "bytes": 10034,
+      "sha256": "d92a0f0cf803c3543e28825df438be589980b444c8c2ea69f014da3d465e9a20",
+      "decoded_bytes": 10034,
+      "decoded_sha256": "d92a0f0cf803c3543e28825df438be589980b444c8c2ea69f014da3d465e9a20",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "f6fdaf11c87c27ed2c87b054432bcb7eb2c9cfae"
+    },
+    {
+      "path": "data/ownership-history/archive-0.json.gz",
+      "bytes": 42,
+      "sha256": "e12c20417066c3f13b6ca547a51f4bb633b5fca7ac15fd05a2b67c95330437a4",
+      "decoded_bytes": 33,
+      "decoded_sha256": "bad833e8480fc2af2dc5f7c1e01ee238a352dc84a2b4f3a95d9d907b47cb5741",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "96b0ad761ec086813426b7c440abdc64173cb712"
+    },
+    {
+      "path": "data/ownership-history/archive-15.json.gz",
+      "bytes": 2102,
+      "sha256": "2c2f17d508b60b4f51e09b33659dd30f59d14b89e6b66a705ccb37ee62e7a03c",
+      "decoded_bytes": 6903,
+      "decoded_sha256": "1bb2012dc6600925917afe8792375eed242fe87f0905a729ad4afac49d81db7b",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "94af035c98e81aaaa81958a8bb457a49011a738b"
+    },
+    {
+      "path": "data/ownership-history/archive-22.json.gz",
+      "bytes": 2141,
+      "sha256": "e9062ade10b8cc7db5ae4b87a88e74071961ab9ab6ab7b83992ae242c96ad44b",
+      "decoded_bytes": 7068,
+      "decoded_sha256": "33ebe5cca72a2feb7edc3bfb6bf1089d5511e5ecb7d1d4297f52b1e2e4e9db4b",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "5b8adfd69aa646d288d3c290f17fb107f31865f8"
+    },
+    {
+      "path": "data/ownership-history/archive-35.json.gz",
+      "bytes": 36,
+      "sha256": "80071d46efe64cdd73a122960754dda24e6d645dfc4f828dd84c794316285ff7",
+      "decoded_bytes": 16,
+      "decoded_sha256": "7757dc54e5374ddaa0cefc9b64733a6fa398b6f588f5af1e64dc190e74054f37",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "4314caa0d135356135715bbd8250bb4a376426d8"
+    },
+    {
+      "path": "data/ownership-history/archive-index.json",
+      "bytes": 577132,
+      "sha256": "cb52d2bb0d1a4f54672cc6883ad35e00c7509664d92be80b4d7d56317d0b4b16",
+      "decoded_bytes": 577132,
+      "decoded_sha256": "cb52d2bb0d1a4f54672cc6883ad35e00c7509664d92be80b4d7d56317d0b4b16",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "f384375513721b73278cb29cb512e2becb59add3"
+    },
+    {
+      "path": "data/ownership-history/candidate-recovery.json",
+      "bytes": 8663175,
+      "sha256": "ef1ea9fd924e56069a8a5d083162e3780206e19bdd43dd2e34be406d3b6fe524",
+      "decoded_bytes": 8663175,
+      "decoded_sha256": "ef1ea9fd924e56069a8a5d083162e3780206e19bdd43dd2e34be406d3b6fe524",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "a9afe6585387ebc8f498d5908d82d53b5fcb755f"
+    },
+    {
+      "path": "data/ownership-history/changed-36.json.gz",
+      "bytes": 125,
+      "sha256": "43939516bfd11dace4147a03e21154164669fe5b7e8c1bb431138e64fd79f139",
+      "decoded_bytes": 164,
+      "decoded_sha256": "785a776959c058fb6cd3b8deeca7078d42f556f3d7663bf828cef5bc946f5f65",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "a35954fdc8befe65f33a6572e6ca8085dff3a51d"
+    },
+    {
+      "path": "data/ownership-history/changed-37.json.gz",
+      "bytes": 2811,
+      "sha256": "63ba085906659d000b4ef874a02771d36473a4ad9d5e810ebf4098dc3c2fed74",
+      "decoded_bytes": 14070,
+      "decoded_sha256": "8e1315b9bce036a7b7313a3f7bbdf229a410da52053e675fc805062bc0267274",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "46ad990423eb0e1fe70c882b1c57563c79a46cd7"
+    },
+    {
+      "path": "data/ownership-history/evidence-0.json.gz",
+      "bytes": 109617,
+      "sha256": "e4509a07c839a0de94ed1d069dec52c72618d493b7b0af54d7a791422a8fbc7d",
+      "decoded_bytes": 1401422,
+      "decoded_sha256": "a93e6d4a469b665fe1184b02112750853195b1d091a871cb2e920ab8eea836bf",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "3991f6b253ef562abc276cecb724c44902b50705"
+    },
+    {
+      "path": "data/ownership-history/evidence-1.json.gz",
+      "bytes": 140943,
+      "sha256": "0af65e92278384e3ba1cf78b051d9d65308017c18260dfca79354007e13f54da",
+      "decoded_bytes": 1658738,
+      "decoded_sha256": "827a384f6a3b5f3da78d8c40528688d9fd1ad836cbf735d0bf2db793f138d659",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "733aacdd5585dcd19cd1a49bd5a06939cfd400ec"
+    },
+    {
+      "path": "data/ownership-history/evidence-10.json.gz",
+      "bytes": 134599,
+      "sha256": "f2b20f2551912784ddf843b45a15c9a7694e8f3f364b6150fdde7dd4af4f805c",
+      "decoded_bytes": 1585838,
+      "decoded_sha256": "acdbeff1512131dd066c2155f004a958dfc9610c21088568e2fca3648e6d73e6",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "23f9b14e2d11fccba2df1cee0a0ce937806239e9"
+    },
+    {
+      "path": "data/ownership-history/evidence-11.json.gz",
+      "bytes": 131633,
+      "sha256": "da5988e0e5636fdbab4f3638887dfc79cbe14d1ccc75e939112ae10cc428cab9",
+      "decoded_bytes": 1570295,
+      "decoded_sha256": "fbc807ecbe834fa0190dde726958e4d9dcf9fb7ec49ed6c7476f2b8e238038b3",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "e321c8a2ef78fef46e5a259ffbb4b982e76d0f26"
+    },
+    {
+      "path": "data/ownership-history/evidence-12.json.gz",
+      "bytes": 162767,
+      "sha256": "30c73ca1cfe6cf8662abdfe20ceb9e96d998f1226693537653c0465fad2ad052",
+      "decoded_bytes": 1664911,
+      "decoded_sha256": "3ca07eb6272990b4f450561d5bdd43a5f9136a4a918fdd32a2231442cc7d454e",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "81fb504ee6434a100b5e59bcd098c4712c8447fe"
+    },
+    {
+      "path": "data/ownership-history/evidence-13.json.gz",
+      "bytes": 141145,
+      "sha256": "7a76085fa66f9ddb05733052659879c429fb3a4d840a944d793e3056760ba948",
+      "decoded_bytes": 1543053,
+      "decoded_sha256": "9ff64c468193851a552d512ee59a687b2f5a0b8eacce603714aba387b561f5ec",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "696976d448874d566d184068de9bab3030700a65"
+    },
+    {
+      "path": "data/ownership-history/evidence-14.json.gz",
+      "bytes": 160447,
+      "sha256": "1f00e751cc4b6023fa876f7b10089cb50b4c7cdc24c33a03c04e9611e531a6ed",
+      "decoded_bytes": 1667993,
+      "decoded_sha256": "76ab43a6814cec13125a799f82efb2e4a82cbfd2679ad2865bba83046b525e39",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "c9c59dea5fa1405cb85a8d83ed528da16ab89035"
+    },
+    {
+      "path": "data/ownership-history/evidence-15.json.gz",
+      "bytes": 139742,
+      "sha256": "e01eb3ccbccdb28422162c173a89289229d687ae989730ffabf0d9eb806a1491",
+      "decoded_bytes": 1603634,
+      "decoded_sha256": "24f7ce3b7d9aaa3b6211b773c9cb3d0984ef05162beebee39fc862828b6b8661",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "d0646d74933c6062e37cc37294a634a756738580"
+    },
+    {
+      "path": "data/ownership-history/evidence-16.json.gz",
+      "bytes": 146544,
+      "sha256": "94dc2c07e49a6065322753ac03d8efdf26936d96f0b66e24eabcaf91822fcfa3",
+      "decoded_bytes": 1638895,
+      "decoded_sha256": "b0d1ef9d89a8c4987cfe88dfd1bfe5fee0937d5295ddb66f8597988e0b5a0654",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "b237cc9acb779af4719e2cc591ede10a6496c74b"
+    },
+    {
+      "path": "data/ownership-history/evidence-17.json.gz",
+      "bytes": 159210,
+      "sha256": "bd3dbec8088f97d4886d224af3820e6bce43a67e84aac6e0ab71b94ce67e0e23",
+      "decoded_bytes": 1639731,
+      "decoded_sha256": "440752fa087b1ecc1075330a265e4319f169f867d33aa20a339284e381376b37",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "d2063f8b81525dc92b48407b56edd6941bfb8090"
+    },
+    {
+      "path": "data/ownership-history/evidence-18.json.gz",
+      "bytes": 160193,
+      "sha256": "553fa6aa1e178b8bcb5f904b9d34e35e31d91fac4fd61ac09d251d1384a18f83",
+      "decoded_bytes": 1562405,
+      "decoded_sha256": "382ade9c3c16d2ed301b594c655f1ef53189c0d65a00a0d944451e355121b0b0",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "fb387235fe7740ac3a9c3e1b068534b34d89b4b1"
+    },
+    {
+      "path": "data/ownership-history/evidence-19.json.gz",
+      "bytes": 157503,
+      "sha256": "31141775890c625298a3e77240f3d36d40957c2cb3be886c4e17af891c55bc25",
+      "decoded_bytes": 1575064,
+      "decoded_sha256": "ea5a2b5287340c745df7fc94c471d02fc458a9d3c3289b8edf7e05892d3b5205",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "e60221dbb6b325adb68eb7a77ff6109315bb021f"
+    },
+    {
+      "path": "data/ownership-history/evidence-2.json.gz",
+      "bytes": 139428,
+      "sha256": "229fd66965cb9e5408714177ebc2b1a276957eeacbb60c07f892df2a8778ca42",
+      "decoded_bytes": 1669757,
+      "decoded_sha256": "654db1e9ad6ada9e3e704a0427c66cdd87c6b53e66e18a7ede32a8491b658539",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "49fc45e6ef7c4801299935415c4f9aacc357699d"
+    },
+    {
+      "path": "data/ownership-history/evidence-20.json.gz",
+      "bytes": 163958,
+      "sha256": "4218c393cb0a562e082f462075a77e2d3f65dffa347ee641be3ca6e66bd798ec",
+      "decoded_bytes": 1580169,
+      "decoded_sha256": "4ef56dac4f1d9fe5ad58a77ca068ac50fbad75dee157b74a37176c2a67fd2155",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "d3b14d472ebb25423676cd75ffe213b70fc10d62"
+    },
+    {
+      "path": "data/ownership-history/evidence-21.json.gz",
+      "bytes": 155158,
+      "sha256": "d16168eb0784943dae9ed0826733a4dbb6985bb1d54c27fc2a1e9069a8ab02c5",
+      "decoded_bytes": 1657754,
+      "decoded_sha256": "f4e419d35664bdc7e2161f9928a2b9d17412b17ee75e76e1f0f1aa9d29d3c8cf",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "facc9b29753fcb05080d3c8d2786280b06ba1e88"
+    },
+    {
+      "path": "data/ownership-history/evidence-22.json.gz",
+      "bytes": 137144,
+      "sha256": "1c6810a299d52d0ad8fd899048719e11127a24d1f5ab70bb314cfd156fb40106",
+      "decoded_bytes": 1674580,
+      "decoded_sha256": "2f0ef65d49ccf8b4322beb46d3a3c07277c66e26a560526b4f22d211f1198d8f",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "4e5bb28cf70c049d897ffbc799b36962b516fc32"
+    },
+    {
+      "path": "data/ownership-history/evidence-23.json.gz",
+      "bytes": 203746,
+      "sha256": "6c5a255bed27b97881d8e1024bd89ce74c7af387531ee6f398569728dc157a1c",
+      "decoded_bytes": 1754331,
+      "decoded_sha256": "178a8fb58f5f6bd28e2e4986aa987b5fac3335f0d16f0325c6c0e1f617994992",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "4b62546071d6b61cdb343481705ffbedb8b79683"
+    },
+    {
+      "path": "data/ownership-history/evidence-24.json.gz",
+      "bytes": 175997,
+      "sha256": "c546a95c6d99e490d27598c21310dcc008fa729ba5990fd9af09e6d69e2eeead",
+      "decoded_bytes": 1702564,
+      "decoded_sha256": "7213855d1db360d1eca67acb5f59a3ffee1f455e9aa9188ce0358911fb45632f",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "946d79993787293dcd5989344475e499b4fecf41"
+    },
+    {
+      "path": "data/ownership-history/evidence-25.json.gz",
+      "bytes": 98341,
+      "sha256": "9adb79d1d7f478c3f996c6ef3d8633be8d17b6d187eca82693e7b579b794127e",
+      "decoded_bytes": 1470761,
+      "decoded_sha256": "ef121a1522a1a8e1a6bcee0696ad3006ab45ef07e31bba944147d14b72cd2e06",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "63ecffdb99c45e594aa61c69f1686f3b5c2d0e92"
+    },
+    {
+      "path": "data/ownership-history/evidence-26.json.gz",
+      "bytes": 94621,
+      "sha256": "77eff1281c7c7d396cfae10c28a6c3bddc5ffc48a649d65acec773646687d13b",
+      "decoded_bytes": 1462297,
+      "decoded_sha256": "089f891203d081fb21f40bce47580bfe7613e2da59cedacb8a1a18852c6043d2",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "3108435f4787648874afb4e47d42cf8cb1c4d18f"
+    },
+    {
+      "path": "data/ownership-history/evidence-27.json.gz",
+      "bytes": 99596,
+      "sha256": "7891ce7d9448f21155574ab768978a19840b362764ba1ed0c1dad48aba561e2f",
+      "decoded_bytes": 1451443,
+      "decoded_sha256": "3af93602b198be8d6a9c3397a6194442a56a3e52665998a94bed8c88924ac9ba",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "e8607744b6c1a0c1516f75e6325b9e8f7a84a7a6"
+    },
+    {
+      "path": "data/ownership-history/evidence-28.json.gz",
+      "bytes": 104362,
+      "sha256": "e231bd547535b8376522785e2328aff05a9a97d585aa8f6fc800547555094c51",
+      "decoded_bytes": 1514563,
+      "decoded_sha256": "f041168f93a93212a478067b891496c96c6cb3ec536e9dc402aaca2ea2cec6e3",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "223477b70f259733b12b343e6a8cace1bb81b506"
+    },
+    {
+      "path": "data/ownership-history/evidence-29.json.gz",
+      "bytes": 177376,
+      "sha256": "c6d06d21e118cf873e8c22315948233759ff759317a1c5ed57083e3c9ca81dd1",
+      "decoded_bytes": 1704660,
+      "decoded_sha256": "04bdfd52e8d581bf908b859eff3219e3ee6ef2fc505b63b4f184e1fec4622c68",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "0b92073be659f2fafed17e04a7f242c7cf755ab0"
+    },
+    {
+      "path": "data/ownership-history/evidence-3.json.gz",
+      "bytes": 189394,
+      "sha256": "6eaf4cb306463e1bab8f4c172c94f244cf80a96162579dffdc157f96d5c0bf7d",
+      "decoded_bytes": 1560978,
+      "decoded_sha256": "ecb4de28ff11d5a375117a386b77703c096c8b323cc9d62ffd62329fccd62923",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "a37b8177f08aeb4f3081efdc14a05458ed2b3cca"
+    },
+    {
+      "path": "data/ownership-history/evidence-30.json.gz",
+      "bytes": 192362,
+      "sha256": "db95a0c685553b08b4ae7ce5e5c33be61a50077b2bd65d5607e72b49bd15c456",
+      "decoded_bytes": 1748578,
+      "decoded_sha256": "26cde90f47dfcb4c45820de087c0d16d4051810e085bd4b8c439d0f850337cd8",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "be36bc92a15d0d71edf7ea4d5d4867528e34c673"
+    },
+    {
+      "path": "data/ownership-history/evidence-31.json.gz",
+      "bytes": 140324,
+      "sha256": "60156bc15d26005538cd864b20341375e138424358bc6fc6971c98e730ad67bf",
+      "decoded_bytes": 1788841,
+      "decoded_sha256": "bb4d039d0d62d02029f8363af0f484429ed44b107c4c946601aa05008af7e08d",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "ec817b3b81a1580727d39a2798322aae2ce041ee"
+    },
+    {
+      "path": "data/ownership-history/evidence-32.json.gz",
+      "bytes": 130682,
+      "sha256": "8b52df975b289c66de96659d810cc2949ebfdfd912f54e5db9a8c4dd766f0d35",
+      "decoded_bytes": 1803796,
+      "decoded_sha256": "d5c32b55e07b9ad58a27eb5abeffc79fbf632715ea9a5f23c183347dfcaabfdf",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "dbe936c4e7bc81ac3988e97e2b62fc83a7c691f1"
+    },
+    {
+      "path": "data/ownership-history/evidence-33.json.gz",
+      "bytes": 95726,
+      "sha256": "6593fd14599c2058a5c92e16c9a53b14221ab1f19f3bdf7a07d98087144f53af",
+      "decoded_bytes": 1379671,
+      "decoded_sha256": "ebf621c279b52e0417c76ca9a960b90c1c3a667aa2510a51b03fe111d2b82bb9",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "dc153f72bf22a7f1b420028464bd02ce6c4a4c38"
+    },
+    {
+      "path": "data/ownership-history/evidence-34.json.gz",
+      "bytes": 90493,
+      "sha256": "e9b6e615593e6842381f837368f62774d6c8f02d6820c28c0de1d2ea28d086a4",
+      "decoded_bytes": 1367387,
+      "decoded_sha256": "187ae55faff4d8b03ba3664035da04d051f4d9bb31f3a1a1a3eeb21f6e6ea2ae",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "23246c672646f3f94e06ad17fdde24344bbec67e"
+    },
+    {
+      "path": "data/ownership-history/evidence-35.json.gz",
+      "bytes": 118585,
+      "sha256": "bdba148f90b34dc82ab3188e7f74b28fae1702c1425d8ce82a71ebaad1a31b81",
+      "decoded_bytes": 1510287,
+      "decoded_sha256": "cd005c64628f90eead33dad07299685f8262bd5bedf53b908a346196c441d388",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "84c3d5d39b658db21e5db7b61aede767fdefba74"
+    },
+    {
+      "path": "data/ownership-history/evidence-36.json.gz",
+      "bytes": 114581,
+      "sha256": "8fe772d688c5bb3a51d87742053e120a72f326433c23ad68f5fe2ad57b2e3d2b",
+      "decoded_bytes": 1507144,
+      "decoded_sha256": "c856f064c872a1b4972f53ed5e4ab8c92722c4dad23cfe2c690ba076a4863179",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "785a2ee4a6f0f2f72bd40e2fac05a7cc393ef1e2"
+    },
+    {
+      "path": "data/ownership-history/evidence-37.json.gz",
+      "bytes": 134388,
+      "sha256": "b2db1ff58e67eb85c10a69ddccad0152b2f27f85f7b1af5ca74721520a9c2fad",
+      "decoded_bytes": 1664083,
+      "decoded_sha256": "4592cae954221db809cbe32324541327752c589d56946744e01ecf27480b076b",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "cb83d51ab74275527de0c1145aacf93eb4f6702a"
+    },
+    {
+      "path": "data/ownership-history/evidence-38.json.gz",
+      "bytes": 152005,
+      "sha256": "808d8e434a76e52c3545805822147312259db11439775dec9e18b837c7c4ab0d",
+      "decoded_bytes": 1729715,
+      "decoded_sha256": "5b254129fb36dddc789b6f844a9274b1a232a98c975f5264558b221c135bd4d9",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "355ed2dbbd7f71d5e0253f6293555d9b4b7e92e4"
+    },
+    {
+      "path": "data/ownership-history/evidence-39.json.gz",
+      "bytes": 155954,
+      "sha256": "b59bbd7e4018bd5621d54197547a14a9fce5fea63957efd46ed0e0d2aa07113b",
+      "decoded_bytes": 1626680,
+      "decoded_sha256": "ba3233aecf0585c2c4ba6e3604be417a8f17df29b1ec58c57545b98c3b6acf91",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "ac8b19eade9eecd27684a0dfbb094e0c21bba2e0"
+    },
+    {
+      "path": "data/ownership-history/evidence-4.json.gz",
+      "bytes": 188519,
+      "sha256": "12fc9019fc1857fa0862ecf65a5308717e579637d58de4b3f8ab864442887e2a",
+      "decoded_bytes": 1584258,
+      "decoded_sha256": "eed95dc7c6ab5a9b10c950353e6aaa7460a244ea68464577645c25caeb91b0c5",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "b20d919ffdb9b6b518b810d0d4e4642a5f00e3dd"
+    },
+    {
+      "path": "data/ownership-history/evidence-40.json.gz",
+      "bytes": 147003,
+      "sha256": "4202e5a500889788be6da42520165efe05601052480fb75f4b0bacabaf80f3b1",
+      "decoded_bytes": 1527616,
+      "decoded_sha256": "fcbf84fdcd6aa4c558f449aed42a92ae0ed14ca55c54fe893858df7d95e9df8e",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "38320a98ab04ec3c8cbc99997f63718e6c6bd979"
+    },
+    {
+      "path": "data/ownership-history/evidence-41.json.gz",
+      "bytes": 123230,
+      "sha256": "e7138da963aba83247c207cf89e3de640a466b911384430084c7dc10edee2580",
+      "decoded_bytes": 1457723,
+      "decoded_sha256": "be67d75bbe1f835e20b88db31bc6706efa6e896c4dc042d6da35b1dfdcaaf1cb",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "19d320f1c3b5f577a345a6623b99a47fc3059437"
+    },
+    {
+      "path": "data/ownership-history/evidence-42.json.gz",
+      "bytes": 125157,
+      "sha256": "4d5283bf6ad977c5fd4694ed27c082b646ef807aab37cdd43c1125041756756c",
+      "decoded_bytes": 1531706,
+      "decoded_sha256": "e8d4df7083d8051efb08bf4cf4f86be7d9648d0856dce4a239f497678caebde9",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "f0dee6c7fc43517874d999b3cc1a6b5baf84db1b"
+    },
+    {
+      "path": "data/ownership-history/evidence-43.json.gz",
+      "bytes": 132264,
+      "sha256": "114984abdfe5560db3034f8e2cfac3e9afa0d3e4019eb9cd9d06b2915ec010f4",
+      "decoded_bytes": 1621810,
+      "decoded_sha256": "b06dd6ea6ef444fa101de1d4785c3ac493f9009b1ab68a9abaf6c9b5b2b0525a",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "bcc424112a5aa283030b6f3c2d7a60901e311e82"
+    },
+    {
+      "path": "data/ownership-history/evidence-44.json.gz",
+      "bytes": 128966,
+      "sha256": "20ea7c2914eab7d3a010be0c2a81612b3fc50882955ddecac4620c41431f1f80",
+      "decoded_bytes": 1688793,
+      "decoded_sha256": "51067ba475774c24d7a4b92fa8e5387a3eac40ffab7368450758cb710750b4b3",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "81ef8cc769796400403a780f9efd3d5c2cf124d7"
+    },
+    {
+      "path": "data/ownership-history/evidence-45.json.gz",
+      "bytes": 148304,
+      "sha256": "5128f2bc0f03b0292ac65c2cf891faee5153a6b790aa35e54bc2f0c1812b7a2a",
+      "decoded_bytes": 1472596,
+      "decoded_sha256": "60a3885d83693ba6e87d1be00371f643fa55a7c8ab5b19707ab170091470de7a",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "eb4834591ef32c485fa8a16527a7684ad748be72"
+    },
+    {
+      "path": "data/ownership-history/evidence-46.json.gz",
+      "bytes": 136977,
+      "sha256": "4d8d765c4f433c5c9fdd57fd79e91e13e5ba3881df8ecb173bc3b4c17c968b89",
+      "decoded_bytes": 1659258,
+      "decoded_sha256": "a07c288fa773842b4626041af05e751bc7135570aa19101ee2148544f3e5f5a5",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "9ea89ccce2bd018ad0597a92c9fc6b8cc21e5a6f"
+    },
+    {
+      "path": "data/ownership-history/evidence-47.json.gz",
+      "bytes": 136421,
+      "sha256": "d853c2ee8f25e276e4adc9dc86eda02bd24b7a42c7774c530c320467bb166a5b",
+      "decoded_bytes": 1805886,
+      "decoded_sha256": "d8e6267052bbf4da4fb921db21182e03648b15dfa74618d7baadc281d97fbe13",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "581f3ae5444fce98611b7c53ee5a90dcd916017b"
+    },
+    {
+      "path": "data/ownership-history/evidence-48.json.gz",
+      "bytes": 167002,
+      "sha256": "3ef201bd09ea46cf9ef0e3273fb1f76545739880ed0bd95afb5bc37f7ebc0b11",
+      "decoded_bytes": 1698036,
+      "decoded_sha256": "08c6023d71c00092f5befbc617935cc3fed616f3d9c0bdfe3c8a9d8b53f7950c",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "5d2da503287e41ad45aa851c9efe3f3a03b30075"
+    },
+    {
+      "path": "data/ownership-history/evidence-49.json.gz",
+      "bytes": 108736,
+      "sha256": "7e5e53869f79d4652f43a85725a8daf9ccfd51952033e1f7b2292ef8961f962e",
+      "decoded_bytes": 1539849,
+      "decoded_sha256": "869328b5f9fa3d455d5947e97ba4e91e6920efda1b7df631e3658fe52410dca7",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "d06103325ba85fc59c57aff7c78fc7cfb34242ff"
+    },
+    {
+      "path": "data/ownership-history/evidence-5.json.gz",
+      "bytes": 195648,
+      "sha256": "dc166ab8df5bce1f8f86578dcea6199975fe560faa20198e3f71557bd168d547",
+      "decoded_bytes": 1582434,
+      "decoded_sha256": "914a60d842b0572b2cd26eeb075d9d25427dcefededb47832146b06a600939cb",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "6a0c08a8567e7108b0f1c10fae6b161c081dd32a"
+    },
+    {
+      "path": "data/ownership-history/evidence-50.json.gz",
+      "bytes": 138574,
+      "sha256": "461f80bcb29bfe32bea333699ddececd99a34406ec16e71ab132566c19d5f483",
+      "decoded_bytes": 1572271,
+      "decoded_sha256": "44f8edb6bc809b24ba094c04822e41d2d4652bdf217919692caf127987798838",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "e509531476965829815f3d00539f8b758f7149bd"
+    },
+    {
+      "path": "data/ownership-history/evidence-51.json.gz",
+      "bytes": 88614,
+      "sha256": "682a7a5a398fd90b8bf424905f57a174d4fd894f8e1fae355d0f4340e2dcb6db",
+      "decoded_bytes": 1440386,
+      "decoded_sha256": "b39cd84baa3e084b491dabb216c8338c763f5be3816709eaefa129eecf796da7",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "f7ea5056a0f97b9ececa67cee9608ea0d1682e70"
+    },
+    {
+      "path": "data/ownership-history/evidence-52.json.gz",
+      "bytes": 174433,
+      "sha256": "55d13556254c269b6b44d11256640a82f264f7fac3975aeda352298c8d298b74",
+      "decoded_bytes": 1734910,
+      "decoded_sha256": "c753d88c664cc541593a15ae9fd453cb665b0ad84303de451b1966980302877d",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "eeda203bea2f907cfae39ac4df51910976cec2ed"
+    },
+    {
+      "path": "data/ownership-history/evidence-53.json.gz",
+      "bytes": 129817,
+      "sha256": "e895bdfaf92983f27c35c46c09612c3604bab4071a5da1b2f24c6c904b3d568d",
+      "decoded_bytes": 1673280,
+      "decoded_sha256": "ff40148d8753832119636646dd438f29ccaa1e1a22cb53a3fc2fbbc296e493a2",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "45c9fa46639298682d406ca6470178ffd689055e"
+    },
+    {
+      "path": "data/ownership-history/evidence-54.json.gz",
+      "bytes": 134026,
+      "sha256": "7f0080034969c58b3d85a2fec562b2e646f12d56a0eff2f2a1974bf141d6515e",
+      "decoded_bytes": 1613031,
+      "decoded_sha256": "7529f2aa84ae1f2131d770a766976f10be85f5b87926670f2dede479ae33a09f",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "564e6636bf6497d0685d5d743531a59b23b43b23"
+    },
+    {
+      "path": "data/ownership-history/evidence-55.json.gz",
+      "bytes": 129372,
+      "sha256": "c303b989a8ce00a42bc3af6903607f7ecc301cf181c606070caebba25b120435",
+      "decoded_bytes": 1529628,
+      "decoded_sha256": "d636edfbc048924d964233e8b7b056f59672435dc1edb8c93210d98f81f0a4a7",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "20f2a98efdb49831cb536620f3dc704ecb652055"
+    },
+    {
+      "path": "data/ownership-history/evidence-56.json.gz",
+      "bytes": 134501,
+      "sha256": "644c83b2d0b77c89cd5d41c3186495920fc391e820c3dad60e41b22c5b1e5f18",
+      "decoded_bytes": 1532093,
+      "decoded_sha256": "aaa1e269d06a7b2c1ff6bf0cb3b9903876fffe1895aad27da8c2e71d107705a7",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "6350992e9d808576847dc33c79623995fdc51f06"
+    },
+    {
+      "path": "data/ownership-history/evidence-57.json.gz",
+      "bytes": 121725,
+      "sha256": "52f472ce039267eded3cb6f4daef019c37986c907eaacddcb80effbab8e49d0b",
+      "decoded_bytes": 1526379,
+      "decoded_sha256": "5fb4c596120e9e17358b3c92671b34c37d808cb732b3c55ff780c3251a25b1df",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "f0f89ea3ed22a9b88245ad000105e9318f2dec5c"
+    },
+    {
+      "path": "data/ownership-history/evidence-58.json.gz",
+      "bytes": 157111,
+      "sha256": "72ecc50e9bfb13d50bb180267da631c15a3b9c459f299fd722ac6ee4a7ec9b80",
+      "decoded_bytes": 1715786,
+      "decoded_sha256": "cb10ff8c73ae58d804107c44b8714c23f9aba95ce8045bd97c20e90fe1ca3682",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "34f2118e69d700c65b0c03f2f6745932891f23c3"
+    },
+    {
+      "path": "data/ownership-history/evidence-59.json.gz",
+      "bytes": 144441,
+      "sha256": "7d628007e1497de2e78039f3d094507ca9cace6161f6c40af9a1e62767958b6b",
+      "decoded_bytes": 1587786,
+      "decoded_sha256": "6345f560b7db34119b92a5e365afe25809f588780bf9103d004ffb3136621a81",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "da8bfb7f42a84890c863c7356bcf0e201b9845ab"
+    },
+    {
+      "path": "data/ownership-history/evidence-6.json.gz",
+      "bytes": 146523,
+      "sha256": "25c84019ca8306cfdc7255971f0cf46c4cbf70cb83d7a370ecaa0120551417ff",
+      "decoded_bytes": 1597560,
+      "decoded_sha256": "97c24e8ca8c53bc224b8e266c2c333bd934cc173e71f540a21ea3aa848005a88",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "f5bdfde56c1608564d2bfb66e859e1f4048667f0"
+    },
+    {
+      "path": "data/ownership-history/evidence-60.json.gz",
+      "bytes": 141109,
+      "sha256": "f7431b798ed5a444f0ba878dbea03302683f5a4afaaadfbc13130ff5efff29c2",
+      "decoded_bytes": 1738928,
+      "decoded_sha256": "47e09dc6c2f1442bb2caaf8185a9c205667ca0663cb9acf43546e6e13f4a1a87",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "135affc700ac3b88e34253534aa3768b80ce246f"
+    },
+    {
+      "path": "data/ownership-history/evidence-61.json.gz",
+      "bytes": 100079,
+      "sha256": "e591b2d5a6accee1c02414193b0595bafc4162c5b2d6a18d6cc851201703165d",
+      "decoded_bytes": 1462074,
+      "decoded_sha256": "6a734370accbf61f8d0f44fb80583d05ec1f1858763b009d0e88109f3928e323",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "1034cad3d827e59c7f611deca6488b351478a505"
+    },
+    {
+      "path": "data/ownership-history/evidence-62.json.gz",
+      "bytes": 111880,
+      "sha256": "2c4ab1fe8fa75f980826aa6c9ceeeb7a0963cea995c50afb39226770d2c52eae",
+      "decoded_bytes": 1448639,
+      "decoded_sha256": "02b9d7d74d4d4ba16fba3316debf20ccd71b38e9ccfd33375f0370f5de0acef3",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "9d0457b6bf8e4d3cbdeec550c71a5973a6bf58ec"
+    },
+    {
+      "path": "data/ownership-history/evidence-63.json.gz",
+      "bytes": 123448,
+      "sha256": "153edac0e4c22898b4e95ddc3872afbe9e7098cf7c42e743e9e42dca9e850f5a",
+      "decoded_bytes": 1468983,
+      "decoded_sha256": "36aa4520e00b9fb6d961740bcbcd0d8c8ea051b1c2bfece6dba467175d88beba",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "07743de0a51bd3ff17354bd0532342a3924bc729"
+    },
+    {
+      "path": "data/ownership-history/evidence-64.json.gz",
+      "bytes": 118911,
+      "sha256": "efa73942ce72d97c3b84326ce2db6a07b04ccf3023e8be85f3f8fa676dba556f",
+      "decoded_bytes": 1464411,
+      "decoded_sha256": "4751bca4bf65643915bcb6862a6b24a97a495a8dad9fedeefb198c75ff8a7c76",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "c39c87cf7ac7bc2e8b05bc2042bcc0e75115ceb7"
+    },
+    {
+      "path": "data/ownership-history/evidence-65.json.gz",
+      "bytes": 115912,
+      "sha256": "b9f1f7ebc0aed3b641b4f65fba9c8c49d0ad22f8db84f364388c71a62de5d4b2",
+      "decoded_bytes": 1440835,
+      "decoded_sha256": "b084fe65e9a56340564df508c9899e23d4d80963690d3e1f08b3390b6e4b7233",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "554ed86b0afecb7dbc4c51b108d0f7abc8c065b5"
+    },
+    {
+      "path": "data/ownership-history/evidence-66.json.gz",
+      "bytes": 122751,
+      "sha256": "fa4bc8922d20f0d2c8c4590da08c32dc59653dcb9d579859093d39b3bb442bb6",
+      "decoded_bytes": 1529786,
+      "decoded_sha256": "182b6b7271c9ab9a9be14e2c624dea289e5408f878e7498978f6a087acd213bc",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "d1fde8f7e463c9366bfa4ccd15ec04322add3cd7"
+    },
+    {
+      "path": "data/ownership-history/evidence-67.json.gz",
+      "bytes": 137499,
+      "sha256": "e4e97a5c34a8fef049a1b0b6ec5423a4b9cab82a1697ac27a59fd6cd988c1668",
+      "decoded_bytes": 1559720,
+      "decoded_sha256": "4ab8233c25130853b0720a777c68ed3254db1345241ce248a5bbc021b295b6c3",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "cad2f609c42d56f0b4028668a653e42cd54d61a2"
+    },
+    {
+      "path": "data/ownership-history/evidence-68.json.gz",
+      "bytes": 128329,
+      "sha256": "0155cac55fc8532f6ec07b4ff975663cb98c4bef749dd8d7f572b44a04dfd38f",
+      "decoded_bytes": 1479663,
+      "decoded_sha256": "30fae353cda5d1ed02d25ad93d08748cd47df9b7f5ffd0da1bba8ea0f714bc3e",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "9254c585c7805e08e43c935e6cee815976684fdc"
+    },
+    {
+      "path": "data/ownership-history/evidence-69.json.gz",
+      "bytes": 133314,
+      "sha256": "ee3b5755fb1648d2e3e834a30316b54853af1f4e8cdabd135651cba1678a3b74",
+      "decoded_bytes": 1508238,
+      "decoded_sha256": "bdc66590f8ec8331b818ffe0335bcb094e57c4b1c5e2410608bff2243cf15496",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "ddc3691c0808cbbfe91cd21d1b21d063afc5a444"
+    },
+    {
+      "path": "data/ownership-history/evidence-7.json.gz",
+      "bytes": 90834,
+      "sha256": "f02499e3f4f526da8d4d54b6fb3289ab1a5d7ff2360db994ceb84938adcec4ed",
+      "decoded_bytes": 1445861,
+      "decoded_sha256": "b3082fb14137effea1b42a40fc09f68a396a1e92cd7d6379c41c3f8ad9bb2c3b",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "38c2ad129ba8f63f7a7a7c02c48cf061347d5f51"
+    },
+    {
+      "path": "data/ownership-history/evidence-70.json.gz",
+      "bytes": 126000,
+      "sha256": "f49c1bd6bd9f7c2495eb334f2aa7d281afb9c8565e4dd74510f84ded13fca4b8",
+      "decoded_bytes": 1602898,
+      "decoded_sha256": "7b0d4c8a2ba726a69e4db9622f270aaeb0be94f7707d65af0b945282fd44faaa",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "22102f99596e4aec678c1a7f3f6f1fac09a1d692"
+    },
+    {
+      "path": "data/ownership-history/evidence-71.json.gz",
+      "bytes": 97238,
+      "sha256": "1159e6d01054e3ba479e15edefcb183b0e1f1d5ab11044aa9b929a18b5b07cf2",
+      "decoded_bytes": 1273712,
+      "decoded_sha256": "98a59bd36950498a22ce8dc611c16ef444567f06190a5cdda4bb0527331b4541",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "f9a055b476b734f3558c29bbcde5254b0d7281c6"
+    },
+    {
+      "path": "data/ownership-history/evidence-8.json.gz",
+      "bytes": 89900,
+      "sha256": "e9c723b8d9413934936c7f380838382475d305c9f65387f7b2243d7ff2190859",
+      "decoded_bytes": 1430673,
+      "decoded_sha256": "06adf60a61dd8262af6e4e09802d253e6dc2134b4b70c8bae9e4ac4b355ec630",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "7bc613095e985363b56f9a18d7da803544133a3b"
+    },
+    {
+      "path": "data/ownership-history/evidence-9.json.gz",
+      "bytes": 138171,
+      "sha256": "e1d544e70abb72fd257c02d69c483612a786b9e3fc5d01ddaca351c7c2510c51",
+      "decoded_bytes": 1657157,
+      "decoded_sha256": "1c92a0e87ee5095af8b8432e41371c33e787819b38d283bd4c6f45c7eb740c5c",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "ad72425404b593b2d3b35f91015cab1abc87f3f3"
+    },
+    {
+      "path": "data/ownership-history/historical-diagnostics.json",
+      "bytes": 2653,
+      "sha256": "068d7e2cd6eb54f51304444aa9ebb319efef5b430dd39be82abba09a5f1779f3",
+      "decoded_bytes": 2653,
+      "decoded_sha256": "068d7e2cd6eb54f51304444aa9ebb319efef5b430dd39be82abba09a5f1779f3",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "a59e0abdd542120c18f92863dbc2bf5ccb029e5b"
+    },
+    {
+      "path": "data/ownership-history/incremental-evidence-1434173.json.gz",
+      "bytes": 7279,
+      "sha256": "a5c3d5c170427fc8384f448cda1eacaf801876dae7a81aaf0cc6903fd13cf760",
+      "decoded_bytes": 98416,
+      "decoded_sha256": "433c6c8bd3060deb13894af5b0bb63081420b460a54d146e9e3247d644431e55",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "b978fd2f127b2b6f8819b123821edfa7b8610b1c"
+    },
+    {
+      "path": "data/ownership-history/incremental-evidence-1435213.json.gz",
+      "bytes": 1288,
+      "sha256": "9c50e9483835fc6179e1305a1096918b1d2fb67fa566bd90b7e84586a7b6f590",
+      "decoded_bytes": 24162,
+      "decoded_sha256": "874413bb79f2deba99bb5f5e5c9fb5930b7623b8658446fcac1f3ab76b124cfe",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "c3b80ba179bbf531b6c921147ce72e2b1fb9390b"
+    },
+    {
+      "path": "data/ownership-history/incremental-evidence-1435539.json.gz",
+      "bytes": 1541,
+      "sha256": "2d513c5e4e5ef258ac0da7ad1eb819b5c4cc761be37c54083e37ba6f70f8ebb5",
+      "decoded_bytes": 19531,
+      "decoded_sha256": "84b2bd3f437216574682a66bcd819a4d831385f7ddca58c6a920ea9cf2400223",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "5522332d6a3c82eea0472743f33e55de26955c45"
+    },
+    {
+      "path": "data/ownership-history/index.json",
+      "bytes": 579219,
+      "sha256": "0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e",
+      "decoded_bytes": 579219,
+      "decoded_sha256": "0bd299b6a517d8e5d504d4bd8c1ed1605c46124f51de87f94f262dacda47496e",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "e57add0009a44508f74cd227091adbb50fbb2c48"
+    },
+    {
+      "path": "data/ownership-history/location-identity-map.json.gz",
+      "bytes": 5029234,
+      "sha256": "ce0fade04cef21cd78b3a305bef520720b358ba43d209d498a2aecfa6b09bffa",
+      "decoded_bytes": 30284234,
+      "decoded_sha256": "da6b6578a22699ae1b508df2467da871701ad7c5524dc4046d2a5e78b2336883",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "cb7465e5bddc8590f032813d8be0114205292222"
+    },
+    {
+      "path": "data/ownership-history/migration-receipt.json",
+      "bytes": 1886445,
+      "sha256": "e2eb810a57988535c24354a3b45d73e32e004ecfb6597ecdcde272f1c65730d0",
+      "decoded_bytes": 1886445,
+      "decoded_sha256": "e2eb810a57988535c24354a3b45d73e32e004ecfb6597ecdcde272f1c65730d0",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "0a3a6cd5f532511caaffd233a8f024d5832d0a7a"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/archive-0.json.gz",
+      "bytes": 42,
+      "sha256": "e12c20417066c3f13b6ca547a51f4bb633b5fca7ac15fd05a2b67c95330437a4",
+      "decoded_bytes": 33,
+      "decoded_sha256": "bad833e8480fc2af2dc5f7c1e01ee238a352dc84a2b4f3a95d9d907b47cb5741",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "96b0ad761ec086813426b7c440abdc64173cb712"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/archive-35.json.gz",
+      "bytes": 36,
+      "sha256": "80071d46efe64cdd73a122960754dda24e6d645dfc4f828dd84c794316285ff7",
+      "decoded_bytes": 16,
+      "decoded_sha256": "7757dc54e5374ddaa0cefc9b64733a6fa398b6f588f5af1e64dc190e74054f37",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "4314caa0d135356135715bbd8250bb4a376426d8"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/archive-index.json",
+      "bytes": 574752,
+      "sha256": "9bb8726591c17ace2cf602f12c3f4ce4a1b6c1b5a98393e89844bfd8c11f6d91",
+      "decoded_bytes": 574752,
+      "decoded_sha256": "9bb8726591c17ace2cf602f12c3f4ce4a1b6c1b5a98393e89844bfd8c11f6d91",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "4d3f27e2462038ba2accccc40e593b5ae33a8f46"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/location-identity-map.json.gz",
+      "bytes": 5087769,
+      "sha256": "8cebfa593af9af8cc943351686cef528ba82156a320d3d473a279f002d2efd7e",
+      "decoded_bytes": 30283691,
+      "decoded_sha256": "89a559e974a53dc597830fb3a824daea2be93e3dbe5408dc4be6c419025a52e8",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "b9e2dd640c29d46ac0269442501f61671cd54293"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/migration-receipt.json",
+      "bytes": 2079222,
+      "sha256": "e08d67bc39bde0e11e86f60ffcf9b3867ad5cfaa50c3bd1544b11b7cd4b6cbc5",
+      "decoded_bytes": 2079222,
+      "decoded_sha256": "e08d67bc39bde0e11e86f60ffcf9b3867ad5cfaa50c3bd1544b11b7cd4b6cbc5",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "52545d67c91d5d6596eed4f48072bca2e298b203"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/archive-0.json.gz",
+      "bytes": 53,
+      "sha256": "6ece1b82269404a936dfc7619fd942c51a3d067b3c4da736a52d2c948110e008",
+      "decoded_bytes": 47,
+      "decoded_sha256": "afd69f01be2d93eea22a7e2c3a72ba814b96bc6a390d1a24c49d8a13b4d5d55f",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "146cdea0a515bc64b6e84c540890a33b1fb3a583"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/archive-14.json.gz",
+      "bytes": 64,
+      "sha256": "05008806b32132a07528a974380a7d2a7bd2524a950bdcb4bf409cfb749aaae5",
+      "decoded_bytes": 44,
+      "decoded_sha256": "6ef1efd53755bb853f3a821551b34d92a0048a6035a09a4c8eb19fca7bd05c43",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "dd6957a941524d2b2348eeb6cb309f5309e30f1f"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/archive-4.json.gz",
+      "bytes": 2111,
+      "sha256": "9ed395fe415b1859077b90df09262ac317fface69c991fa1925bdf9b2b6e488f",
+      "decoded_bytes": 7450,
+      "decoded_sha256": "ea4ab0470639bb7a37fe46569ee3c3f9a098dbc35ad2d69d6e17a25d9ca2a8ce",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "7616af15efa66acacee76010aa2a4d85922c5ea9"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/archive-5.json.gz",
+      "bytes": 64,
+      "sha256": "c840822c3ed688661241d5301087d6e6bff8cceb5bfabd00a66d34a400fe0ddc",
+      "decoded_bytes": 44,
+      "decoded_sha256": "7cecddd140a9413f8c4da7572b09e1e21bd70bb70ece58343c513cc11064dc0e",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "e67568404450d047ca910ab504b195a9e411d681"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/archive-index.json",
+      "bytes": 572633,
+      "sha256": "3ae55147fe12006f1806e80226031492d2072ad1c92ad92d39b77ed79918f61a",
+      "decoded_bytes": 572633,
+      "decoded_sha256": "3ae55147fe12006f1806e80226031492d2072ad1c92ad92d39b77ed79918f61a",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "aca80bfd9d7531c64373d0987a5e1b7fc5c984ef"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/location-identity-map.json.gz",
+      "bytes": 5101795,
+      "sha256": "e870094faf26a3b961bcb4ca4bacd39aa4853706d63219bc4bc94b8f6d7f7245",
+      "decoded_bytes": 30273738,
+      "decoded_sha256": "2f6b4754aa6a39a24e78502ecaa820bcaa24904afd6268009212d2dd1e99b3cf",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "63a3ea74f1d967d95d4f672d35d6da864f9c122b"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/migration-receipt.json",
+      "bytes": 3540073,
+      "sha256": "f44affea3bf822e7d87a8913054ae2c8c96edb2235fa903bc559c2e7c1e90607",
+      "decoded_bytes": 3540073,
+      "decoded_sha256": "f44affea3bf822e7d87a8913054ae2c8c96edb2235fa903bc559c2e7c1e90607",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "89b6ff233b426fe31d4437fd03b341581b5446f9"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-0.json.gz",
+      "bytes": 5657,
+      "sha256": "7ded30565955ccd0c201457be502131cf85b2828e30c869d051a40967ce0b0ef",
+      "decoded_bytes": 27539,
+      "decoded_sha256": "bd0ba1084a2656088aebd6ccfb58fbc977242842bd56cdaac18a82ce66b1522a",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "89cfc06a88a9312b47a9afd941ac4c3514375c05"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-18.json.gz",
+      "bytes": 1543,
+      "sha256": "1af1ade446031c726890a408b4248b9eb32c1140d157077e1d36efc679088247",
+      "decoded_bytes": 6704,
+      "decoded_sha256": "6561a56fff8f520f4d3ddadc27f2e3bb552a0b17028602201189e83231d39685",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "bf3f90592602a66361f1cfb7e9ab6925d21cfde7"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-20.json.gz",
+      "bytes": 104,
+      "sha256": "04c390c2ac061e0f342375cb6d31db2643ea04bb5f065f73391750eeee439b05",
+      "decoded_bytes": 173,
+      "decoded_sha256": "576f42dbf215a0d2b82db41552c8f798a9233abd4be8877ba0094bd17b2d272d",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "78eeb482e55ca5ecdcd5d7c0c7aa7cc04dd8e3ce"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-26.json.gz",
+      "bytes": 2922,
+      "sha256": "0da600a0169c529951415b1511422d049405f84cbc2adc57d025b36146f63a46",
+      "decoded_bytes": 17075,
+      "decoded_sha256": "aadec55fd8583f1d3aca129cdcb503d1e8abbf16dc4d9d2882094d0c100b6e0d",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "7e4aaa57b87b6f13429a4c88b0cce424676b0a2b"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-3.json.gz",
+      "bytes": 1779,
+      "sha256": "7e84d02bb9e94ed54360bbc0cb1a7a7602fa4133bebff66b3112c451ca083d65",
+      "decoded_bytes": 6207,
+      "decoded_sha256": "c4a4d927e13409455a2457f438fcf7d1213723af89c20724965485aa8f287395",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "c5057863f120197549c5be43ac0b7f9d6c7ea4da"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-30.json.gz",
+      "bytes": 128,
+      "sha256": "9b263896b9c8190fb482429ba7b9d3cf09469e80f9ccbbaaec17b30e6a620ea5",
+      "decoded_bytes": 300,
+      "decoded_sha256": "7aee3c6d5ed865f9640451d1cc5e24be7ca50d627e3e8e1b211e93a51b783c6c",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "ca61cb9372c1a2b786fae771251300810800fbc5"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-31.json.gz",
+      "bytes": 81,
+      "sha256": "4c68140228be621bfa1ce70495f47b5d6cff94e6c4277c32a043f4aa5e7d666a",
+      "decoded_bytes": 87,
+      "decoded_sha256": "753816ae34c17f9c9138eed7fb61e335ea353a2ddd5c7342f64ed5bb80a3d00d",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "c8c64e13dba01bbca3c2c2fcbba55bbf5db5dde8"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-index.json",
+      "bytes": 569129,
+      "sha256": "b469f0994e1045258974c8fda383a3e41a01c96875e0dcf8d79f64f7981700bc",
+      "decoded_bytes": 569129,
+      "decoded_sha256": "b469f0994e1045258974c8fda383a3e41a01c96875e0dcf8d79f64f7981700bc",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "873d1ae8282b49a7130a37a26200102b3d2469a5"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/location-identity-map.json.gz",
+      "bytes": 5083607,
+      "sha256": "c4c6513d60e215eba58dda78d53f1f9c723affa4d25d689213453b3ffe0b5969",
+      "decoded_bytes": 30270504,
+      "decoded_sha256": "16f367a7073f17dedb2f56c448c2c0b544d970090af3b7d7678849919acd6bf9",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "66c4d46f4e54727d4b6d90971f3d5183d4aafc94"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/6e177193449682da1bc4c1983b844d81f5d53216ab371957d769e4a52fba32ed/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/migration-receipt.json",
+      "bytes": 2483050,
+      "sha256": "31a2022aee12afec285f2e12fad703073c707f799bae6337264351bf86aa346a",
+      "decoded_bytes": 2483050,
+      "decoded_sha256": "31a2022aee12afec285f2e12fad703073c707f799bae6337264351bf86aa346a",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "f02623326c137eae91ffcd229a0a8a27676318d0"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/archive-0.json.gz",
+      "bytes": 53,
+      "sha256": "6ece1b82269404a936dfc7619fd942c51a3d067b3c4da736a52d2c948110e008",
+      "decoded_bytes": 47,
+      "decoded_sha256": "afd69f01be2d93eea22a7e2c3a72ba814b96bc6a390d1a24c49d8a13b4d5d55f",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "146cdea0a515bc64b6e84c540890a33b1fb3a583"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/archive-14.json.gz",
+      "bytes": 64,
+      "sha256": "05008806b32132a07528a974380a7d2a7bd2524a950bdcb4bf409cfb749aaae5",
+      "decoded_bytes": 44,
+      "decoded_sha256": "6ef1efd53755bb853f3a821551b34d92a0048a6035a09a4c8eb19fca7bd05c43",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "dd6957a941524d2b2348eeb6cb309f5309e30f1f"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/archive-4.json.gz",
+      "bytes": 2111,
+      "sha256": "9ed395fe415b1859077b90df09262ac317fface69c991fa1925bdf9b2b6e488f",
+      "decoded_bytes": 7450,
+      "decoded_sha256": "ea4ab0470639bb7a37fe46569ee3c3f9a098dbc35ad2d69d6e17a25d9ca2a8ce",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "7616af15efa66acacee76010aa2a4d85922c5ea9"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/archive-5.json.gz",
+      "bytes": 64,
+      "sha256": "c840822c3ed688661241d5301087d6e6bff8cceb5bfabd00a66d34a400fe0ddc",
+      "decoded_bytes": 44,
+      "decoded_sha256": "7cecddd140a9413f8c4da7572b09e1e21bd70bb70ece58343c513cc11064dc0e",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "e67568404450d047ca910ab504b195a9e411d681"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/archive-index.json",
+      "bytes": 572633,
+      "sha256": "3ae55147fe12006f1806e80226031492d2072ad1c92ad92d39b77ed79918f61a",
+      "decoded_bytes": 572633,
+      "decoded_sha256": "3ae55147fe12006f1806e80226031492d2072ad1c92ad92d39b77ed79918f61a",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "aca80bfd9d7531c64373d0987a5e1b7fc5c984ef"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/location-identity-map.json.gz",
+      "bytes": 5101795,
+      "sha256": "e870094faf26a3b961bcb4ca4bacd39aa4853706d63219bc4bc94b8f6d7f7245",
+      "decoded_bytes": 30273738,
+      "decoded_sha256": "2f6b4754aa6a39a24e78502ecaa820bcaa24904afd6268009212d2dd1e99b3cf",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "63a3ea74f1d967d95d4f672d35d6da864f9c122b"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/migration-receipt.json",
+      "bytes": 3540073,
+      "sha256": "f44affea3bf822e7d87a8913054ae2c8c96edb2235fa903bc559c2e7c1e90607",
+      "decoded_bytes": 3540073,
+      "decoded_sha256": "f44affea3bf822e7d87a8913054ae2c8c96edb2235fa903bc559c2e7c1e90607",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "89b6ff233b426fe31d4437fd03b341581b5446f9"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-0.json.gz",
+      "bytes": 5657,
+      "sha256": "7ded30565955ccd0c201457be502131cf85b2828e30c869d051a40967ce0b0ef",
+      "decoded_bytes": 27539,
+      "decoded_sha256": "bd0ba1084a2656088aebd6ccfb58fbc977242842bd56cdaac18a82ce66b1522a",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "89cfc06a88a9312b47a9afd941ac4c3514375c05"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-18.json.gz",
+      "bytes": 1543,
+      "sha256": "1af1ade446031c726890a408b4248b9eb32c1140d157077e1d36efc679088247",
+      "decoded_bytes": 6704,
+      "decoded_sha256": "6561a56fff8f520f4d3ddadc27f2e3bb552a0b17028602201189e83231d39685",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "bf3f90592602a66361f1cfb7e9ab6925d21cfde7"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-20.json.gz",
+      "bytes": 104,
+      "sha256": "04c390c2ac061e0f342375cb6d31db2643ea04bb5f065f73391750eeee439b05",
+      "decoded_bytes": 173,
+      "decoded_sha256": "576f42dbf215a0d2b82db41552c8f798a9233abd4be8877ba0094bd17b2d272d",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "78eeb482e55ca5ecdcd5d7c0c7aa7cc04dd8e3ce"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-26.json.gz",
+      "bytes": 2922,
+      "sha256": "0da600a0169c529951415b1511422d049405f84cbc2adc57d025b36146f63a46",
+      "decoded_bytes": 17075,
+      "decoded_sha256": "aadec55fd8583f1d3aca129cdcb503d1e8abbf16dc4d9d2882094d0c100b6e0d",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "7e4aaa57b87b6f13429a4c88b0cce424676b0a2b"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-3.json.gz",
+      "bytes": 1779,
+      "sha256": "7e84d02bb9e94ed54360bbc0cb1a7a7602fa4133bebff66b3112c451ca083d65",
+      "decoded_bytes": 6207,
+      "decoded_sha256": "c4a4d927e13409455a2457f438fcf7d1213723af89c20724965485aa8f287395",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "c5057863f120197549c5be43ac0b7f9d6c7ea4da"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-30.json.gz",
+      "bytes": 128,
+      "sha256": "9b263896b9c8190fb482429ba7b9d3cf09469e80f9ccbbaaec17b30e6a620ea5",
+      "decoded_bytes": 300,
+      "decoded_sha256": "7aee3c6d5ed865f9640451d1cc5e24be7ca50d627e3e8e1b211e93a51b783c6c",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "ca61cb9372c1a2b786fae771251300810800fbc5"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-31.json.gz",
+      "bytes": 81,
+      "sha256": "4c68140228be621bfa1ce70495f47b5d6cff94e6c4277c32a043f4aa5e7d666a",
+      "decoded_bytes": 87,
+      "decoded_sha256": "753816ae34c17f9c9138eed7fb61e335ea353a2ddd5c7342f64ed5bb80a3d00d",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "c8c64e13dba01bbca3c2c2fcbba55bbf5db5dde8"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/archive-index.json",
+      "bytes": 569129,
+      "sha256": "b469f0994e1045258974c8fda383a3e41a01c96875e0dcf8d79f64f7981700bc",
+      "decoded_bytes": 569129,
+      "decoded_sha256": "b469f0994e1045258974c8fda383a3e41a01c96875e0dcf8d79f64f7981700bc",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "873d1ae8282b49a7130a37a26200102b3d2469a5"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/location-identity-map.json.gz",
+      "bytes": 5083607,
+      "sha256": "c4c6513d60e215eba58dda78d53f1f9c723affa4d25d689213453b3ffe0b5969",
+      "decoded_bytes": 30270504,
+      "decoded_sha256": "16f367a7073f17dedb2f56c448c2c0b544d970090af3b7d7678849919acd6bf9",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "66c4d46f4e54727d4b6d90971f3d5183d4aafc94"
+    },
+    {
+      "path": "data/ownership-history/prior-archives/b93dc7122210423aad67a4b247d191219bfead4c16bd6ecec90cba271a64eff1/prior-archives/57060fd5a64469e70cd473e2a1098bd8690dc30fe16a1cc9b06c841741b3f353/migration-receipt.json",
+      "bytes": 2483050,
+      "sha256": "31a2022aee12afec285f2e12fad703073c707f799bae6337264351bf86aa346a",
+      "decoded_bytes": 2483050,
+      "decoded_sha256": "31a2022aee12afec285f2e12fad703073c707f799bae6337264351bf86aa346a",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "f02623326c137eae91ffcd229a0a8a27676318d0"
+    },
+    {
+      "path": "data/ownership-history/reuse-0.json.gz",
+      "bytes": 417081,
+      "sha256": "a8e4908d2e368513b2cf4a2e1de3d834935af686f76080ab108fb405533565ca",
+      "decoded_bytes": 5173432,
+      "decoded_sha256": "bee4f2e81a1431f1fd3d5b8ef62386647023bab528dfa189925bfb5581c36f76",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "2e38d04c0fc7f1de1c4c6fcd954a79f6fe75a97d"
+    },
+    {
+      "path": "data/ownership-history/reuse-1.json.gz",
+      "bytes": 371027,
+      "sha256": "73323c98a21a538e3719ed028ad2ef4149c72be1a8eb26f53210008210998424",
+      "decoded_bytes": 6726536,
+      "decoded_sha256": "124fca74534d5fc74b1fcdb9420bb756fe7203ee20f587385fd447f916855d5f",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "1425bf037b3ac968977c812a1058b53b50f679f0"
+    },
+    {
+      "path": "data/ownership-history/reuse-10.json.gz",
+      "bytes": 302489,
+      "sha256": "4643076cd4dff070f0d765a8d8ce0c785661656b1ab4f19e64ff542a9639eff4",
+      "decoded_bytes": 4568117,
+      "decoded_sha256": "e840507023784745e5d5978c42d53801a1b6b6624cc2be74deb16ee0be818635",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "7c9b59d82077ba71563e6d392b0168a3db05a7f1"
+    },
+    {
+      "path": "data/ownership-history/reuse-11.json.gz",
+      "bytes": 391307,
+      "sha256": "5ae3db2064bea79523d53ac5b4d84a0249426daab8c12b9597f7a4c16ccdadc0",
+      "decoded_bytes": 6385131,
+      "decoded_sha256": "70e222f2d6934d574a0be66e28d9f9afd9c7334202b98f71d2d4a0b7cd206322",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "deb5749dcfe65dd0bc84ce9d4aece451f142f8e3"
+    },
+    {
+      "path": "data/ownership-history/reuse-12.json.gz",
+      "bytes": 286269,
+      "sha256": "7105fd6cca300e03983f0c9f1d2285cdf9b86e6add9eb474af360562797ae6c4",
+      "decoded_bytes": 5426411,
+      "decoded_sha256": "143f771de4e4f6d5eff244a2acf64596bf86c13a08a20b104a6322a386963d1a",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "f7aeef5aef5c36bc8a140ad3abb7a6857382c897"
+    },
+    {
+      "path": "data/ownership-history/reuse-13.json.gz",
+      "bytes": 493245,
+      "sha256": "f5d8a35b411bd32795ed6fdea5f76ca78058909534bd3a32e1947b465a143a56",
+      "decoded_bytes": 5297799,
+      "decoded_sha256": "605140cc4a9422f8cbd21b81d8a9c31a79a32f8b7f57e18d66335937d5aa9c99",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "8229a9406a8f7b4f69dd3087da990fcf91c71775"
+    },
+    {
+      "path": "data/ownership-history/reuse-14.json.gz",
+      "bytes": 570757,
+      "sha256": "cdde3b63d4304334658a9961bae3c0fce527699039a01a33bb52e4657e8d5911",
+      "decoded_bytes": 6637047,
+      "decoded_sha256": "2ab322acb39d4bd631f7de5706b560db68f4586784f2b3cd365163d7f04f9f52",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "8a7431283277e24df9f6041ca05ed6431d4d17a2"
+    },
+    {
+      "path": "data/ownership-history/reuse-15.json.gz",
+      "bytes": 515224,
+      "sha256": "1e6105b3dec11b7bd9d403c0b2480c853fd41c5fde124c3473f62b14c7bc6110",
+      "decoded_bytes": 6297119,
+      "decoded_sha256": "1fef2c525bb27215aa14f4c6750ded5e545bb96b0abc823cbeda2d5bfcfcb6ba",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "84ebe46ddc229998b02ae324c10fe790be0e4918"
+    },
+    {
+      "path": "data/ownership-history/reuse-16.json.gz",
+      "bytes": 203240,
+      "sha256": "5243eda322a89a700d48fbeaf8d7093e8dbcd37ca3e4e4f86ec888957e8943d8",
+      "decoded_bytes": 3843876,
+      "decoded_sha256": "165e8ba135a89b35be6f53c93573983a5a68ccaf3f66268f3fc5afbc240d2b00",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "6e4f26b9390b136b44499d0d65eda74974447ebe"
+    },
+    {
+      "path": "data/ownership-history/reuse-17.json.gz",
+      "bytes": 255439,
+      "sha256": "3c3e3c8a3772f476b9a357dad4a98258a9be4429ea0e40e5bcce5c5cd3b14f69",
+      "decoded_bytes": 3313277,
+      "decoded_sha256": "4d22515031fc40beb1477037c671020b68476f4f183b90d8ce318b81f1d91966",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "d7aa5630c0bceaa9e6e6fe8182c7895581fe5f5b"
+    },
+    {
+      "path": "data/ownership-history/reuse-18.json.gz",
+      "bytes": 196158,
+      "sha256": "b0d20420fd32c2263fca21507fbe8d7034d4ad8cf25a9ca837de8d79e20b9aaf",
+      "decoded_bytes": 3631667,
+      "decoded_sha256": "3d606f283f3822ac3d227ab482e5f13654048aa73edb783bb4819466c6253f2a",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "cf1d114ae790bca4cbde4406b726c0c7f71ecb51"
+    },
+    {
+      "path": "data/ownership-history/reuse-19.json.gz",
+      "bytes": 111941,
+      "sha256": "8731f4e2fe4040881554aece28dacab659bd25ffa055980bfab6b2b3cbfbffbf",
+      "decoded_bytes": 3632764,
+      "decoded_sha256": "cf694411651417d388ae39e561c25b9571d34315b4fd673fb2e9b37d70a87ac4",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "9f3dd37d3606f97d929ef2f5396c2dea2b0ab81a"
+    },
+    {
+      "path": "data/ownership-history/reuse-2.json.gz",
+      "bytes": 388232,
+      "sha256": "0827d14a6ff65eb6ab7eef6a9fe4f528a6051a1c557f110d31ef1714ac83684a",
+      "decoded_bytes": 6768355,
+      "decoded_sha256": "18a91550ba84678e13fb5ba0c75020e7b1e0a34a0034ba0916eb1955dfa648d5",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "6a3054394a0f2f49f49709b07a4ce3c0ac5b27a8"
+    },
+    {
+      "path": "data/ownership-history/reuse-20.json.gz",
+      "bytes": 240697,
+      "sha256": "0dd85fa9d836192871484d9ac9ed0205c31dcc1c6c97624cbee2dff06f7a8cbf",
+      "decoded_bytes": 4038998,
+      "decoded_sha256": "352c073b00e875c43bd5547fc4b69301811b4cf89843d05784b211ae057a002c",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "4544594121af3628efe0862facb191d431b002d6"
+    },
+    {
+      "path": "data/ownership-history/reuse-21.json.gz",
+      "bytes": 212681,
+      "sha256": "5cccbfe0b5e12227f2ff044d18e87bb040b7969593118b8de2784e2ac285fdc6",
+      "decoded_bytes": 3877346,
+      "decoded_sha256": "2a3874dddf4d08459fcd09215f45fd5f621ccbbc656a083acdfd77154b3aa52f",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "7bfebc06b33c1931e6d1d68f17012171388e5cf8"
+    },
+    {
+      "path": "data/ownership-history/reuse-22.json.gz",
+      "bytes": 276397,
+      "sha256": "d9d56a79574d3ded15a992e191295998d2305b7040d7519466d4b7155b8d20b9",
+      "decoded_bytes": 3672217,
+      "decoded_sha256": "bde934338c5a58ce620067292ccf72d9cca914bd9a72ca669874e2916186e94d",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "55f41bc4c942dfb04a0118dc968c901a0514bd87"
+    },
+    {
+      "path": "data/ownership-history/reuse-23.json.gz",
+      "bytes": 195777,
+      "sha256": "d9fee33b6855d3e659ad82818905a532d257d074c86c28b1929bf5d09058136b",
+      "decoded_bytes": 3236767,
+      "decoded_sha256": "7900eeb221642476bc155fe6653acb14d3f91d1c29049fb9b1df0296f07ea6e6",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "db1d2a701aff93f853656eee4e162c3b2cef3f00"
+    },
+    {
+      "path": "data/ownership-history/reuse-24.json.gz",
+      "bytes": 398337,
+      "sha256": "511dd689f4604cfac8466d4394c57d197ba67934c45fe7fac54fa95709303545",
+      "decoded_bytes": 5822646,
+      "decoded_sha256": "056d769439ab70de63b802b03637ca9d7c4595cfe644a95ff13b04affebbc1f9",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "e17227607e9a0d58e0ab6149842dfe41990945ab"
+    },
+    {
+      "path": "data/ownership-history/reuse-25.json.gz",
+      "bytes": 365974,
+      "sha256": "e5ebd96374edc3deecef36dccee3bc3a6a21adb3b6b5d899536994af38dbed4a",
+      "decoded_bytes": 6012117,
+      "decoded_sha256": "62f01aa3398810ff828247cdac96ba3d7e03c854949635cfb09887f54a5d4819",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "33c62b2f5ad1138e248287bd6d049b598021540e"
+    },
+    {
+      "path": "data/ownership-history/reuse-26.json.gz",
+      "bytes": 300976,
+      "sha256": "f9f23565b4a8979cee04a49d4fc7c225c3547bec63b05e6158bb02bb00485ddb",
+      "decoded_bytes": 4405924,
+      "decoded_sha256": "4eab27beb6caa8dbfb8b573fd1a25b7d841b47a8b02162ac869dbc061b643494",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "ab2496515900b3eac04107b0bdb50a4b662759e1"
+    },
+    {
+      "path": "data/ownership-history/reuse-27.json.gz",
+      "bytes": 257032,
+      "sha256": "1a7cd000795d881497fb78e492f2f0aa3d1dcb80e638f6eb00009f9683aaf2a3",
+      "decoded_bytes": 4020522,
+      "decoded_sha256": "356aee8ee9eaf9b39d20eefa88c6e30bf04db02eb57a183f05d49d5c51c13174",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "f071434ce7d43a2705f0d3e0ed27165528bb9b08"
+    },
+    {
+      "path": "data/ownership-history/reuse-28.json.gz",
+      "bytes": 900549,
+      "sha256": "5ca590d929546ce9a27fc810cb327d5ad97609a3964376cb7c7e2fed1114aabf",
+      "decoded_bytes": 10279284,
+      "decoded_sha256": "602cf55db5040940661e2da4e7cfbe920e219cf3221a77e97ffbd12e06ae701c",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "dad7c09ba5427ef833093a2c7781cbe6f515b57f"
+    },
+    {
+      "path": "data/ownership-history/reuse-29.json.gz",
+      "bytes": 290282,
+      "sha256": "8e3ce2355be60c17a6f01e893a6977d3fbdae8b49c1a6c52350ca330fc7093b6",
+      "decoded_bytes": 4130415,
+      "decoded_sha256": "17d2559161e8de58fff4415cc3d2cddc11a6c0bec9aadf6c46027616432db769",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "086a4067435ddc1ecc93bc6145248b49763cfb5d"
+    },
+    {
+      "path": "data/ownership-history/reuse-3.json.gz",
+      "bytes": 730031,
+      "sha256": "56d1b56d7ac8059053cb6a09a53dd6ac05e0e82fdfb5989ec0c641e139cabbdb",
+      "decoded_bytes": 7937927,
+      "decoded_sha256": "37291657af8ba4b5f618648f256c92224ce6357fc92fcb936eae1f8de89e3ba6",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "a560e49e4507e6e37940ec026243d1385c2bcd22"
+    },
+    {
+      "path": "data/ownership-history/reuse-30.json.gz",
+      "bytes": 128009,
+      "sha256": "c43346ea77a7ef918f0493e1bffe49b99f40ee8d4caf7c2402695b65cc065e70",
+      "decoded_bytes": 2300390,
+      "decoded_sha256": "62525b9096b946882c6e1d4fb6aeef04c93987ef79f0254171c123900102fc77",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "8172a47126d13766735972bcb128106461387917"
+    },
+    {
+      "path": "data/ownership-history/reuse-31.json.gz",
+      "bytes": 168698,
+      "sha256": "4455503daed99a6adb9a86c9ec54b4059788a1db89782f2406f936909f865528",
+      "decoded_bytes": 3163399,
+      "decoded_sha256": "89abeb5e3521862ae7801bec9ae62e9a1bbca1196f81242180f5b3842cc9d540",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "8c2e5cacfcd54ea6e8b88f309c00d94b7d95550a"
+    },
+    {
+      "path": "data/ownership-history/reuse-32.json.gz",
+      "bytes": 231556,
+      "sha256": "7bd60b0ccda98a51c88753098f5b51c71a4584a86b27454f7dce96947de6761f",
+      "decoded_bytes": 3939717,
+      "decoded_sha256": "61f945c7cad8f19d17956295bb539b367e021d0770ed837efac2a5cc63321a84",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "3553468ca5565cde03cf5864e5e3728d1a01e91d"
+    },
+    {
+      "path": "data/ownership-history/reuse-33.json.gz",
+      "bytes": 6738,
+      "sha256": "3beab43e50de3b402d037af7d1eb0916d9c36c3527993b22cbd0a11173d3486f",
+      "decoded_bytes": 132474,
+      "decoded_sha256": "82164aecbc779a8bbff5297603041ca2379f73aaa524d05add796dcf9d13f140",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "0c0ebb9bc83fe986039dbeb1d600bfa0eeff46fe"
+    },
+    {
+      "path": "data/ownership-history/reuse-34.json.gz",
+      "bytes": 7790,
+      "sha256": "d369fea9c39eba3553814739a0f8ad04bea7ef6941fb1078549cb33d2560cc79",
+      "decoded_bytes": 37285,
+      "decoded_sha256": "da10c019dce5fa7b8c58e31feb725416c9774c65b79f9e0be3f295a6b0ec0597",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "030609865568679d1d1798d7856f9089b6992455"
+    },
+    {
+      "path": "data/ownership-history/reuse-35.json.gz",
+      "bytes": 2934,
+      "sha256": "7e06cc6a3d4b6434dfa6e348d846db25e3604ed4c0982c733245a704663134ba",
+      "decoded_bytes": 10237,
+      "decoded_sha256": "f36f2e1fa92354df51bd2dad8674d366f8e00d8fcee76fd96d7b387b197b14a6",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "9cade0de30d2eaf7354934e9cc4077b099c143b2"
+    },
+    {
+      "path": "data/ownership-history/reuse-36.json.gz",
+      "bytes": 125,
+      "sha256": "43939516bfd11dace4147a03e21154164669fe5b7e8c1bb431138e64fd79f139",
+      "decoded_bytes": 164,
+      "decoded_sha256": "785a776959c058fb6cd3b8deeca7078d42f556f3d7663bf828cef5bc946f5f65",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "a35954fdc8befe65f33a6572e6ca8085dff3a51d"
+    },
+    {
+      "path": "data/ownership-history/reuse-4.json.gz",
+      "bytes": 353505,
+      "sha256": "e7f9f12185097c3e5c4d9a07e7b3123de656eb5acbf5cc30aa85c9783fbc1b17",
+      "decoded_bytes": 3553077,
+      "decoded_sha256": "d2aa5e400c04e18b0970711d84ff2851dff3b7f23d3b5a147a8e20ef0267171f",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "5e13c67595a5d659f037248b09843a24a768be49"
+    },
+    {
+      "path": "data/ownership-history/reuse-5.json.gz",
+      "bytes": 260220,
+      "sha256": "b7ecfa9b79f7e392cc839b8adf3218a1d2300fa19ee5c07e108f839f17898ae0",
+      "decoded_bytes": 3421803,
+      "decoded_sha256": "af556823e1c2df4165f0c2df28a0c0a655f43051a84e8f619d1bdab411b2bbb7",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "3b7c3f8e965aa0aa488685fbab8e7d0759fb7b22"
+    },
+    {
+      "path": "data/ownership-history/reuse-6.json.gz",
+      "bytes": 305094,
+      "sha256": "5fd3a6ae2d6d9cea3890c6c55d6b78e73792c0505e600f1d82f362a5fbb85246",
+      "decoded_bytes": 5115336,
+      "decoded_sha256": "5b0c9fde6b19ad8eaa08c5eae463a5d5d17a9769812f51ec0229440cd0e078e1",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "ac24c2ea6e619f4738c7318047438e82d6f9c53f"
+    },
+    {
+      "path": "data/ownership-history/reuse-7.json.gz",
+      "bytes": 408530,
+      "sha256": "1e21eaadef7eeb7170baae14e9328d552fe638ddcefe30319c37ccdf1e2db108",
+      "decoded_bytes": 6093096,
+      "decoded_sha256": "88e7946ea5dc5b7afc63e67735c368199fda5395a071052e17ac68a8740d3f8f",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "0f6c367d8d212ca4c4673f0aa1cd3f77d969bd23"
+    },
+    {
+      "path": "data/ownership-history/reuse-8.json.gz",
+      "bytes": 557339,
+      "sha256": "c4845cf44a6a133011cfd425da7b20d8c4f913ba3a9211af3443e6fdc224d870",
+      "decoded_bytes": 8449213,
+      "decoded_sha256": "e9710bd6484279f267f1830c918574c26dfa88f03d8b9bcf7df036f264486ac1",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "190cece12677c2caa484cc60e2540b9802c1641c"
+    },
+    {
+      "path": "data/ownership-history/reuse-9.json.gz",
+      "bytes": 117248,
+      "sha256": "b89c1178f10d7df79119ed5891ef2b165be8b681141c669dd2111ac9d0fba832",
+      "decoded_bytes": 2263122,
+      "decoded_sha256": "49a37fbdae7bf71aa033cae4d622cf2f915e2b73d0624bf19f6481496ef7d30b",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "4169bf72566d0c4b87e32263f3a0f5c6ba168e62"
+    },
+    {
+      "path": "data/ownership-history/threshold-refinement.json",
+      "bytes": 3573,
+      "sha256": "6bcac843f4f3e894f9fa120b6a745c6e7ba989410fb9c68062779aacc21513b5",
+      "decoded_bytes": 3573,
+      "decoded_sha256": "6bcac843f4f3e894f9fa120b6a745c6e7ba989410fb9c68062779aacc21513b5",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "17f76dea508566773825db28181bc510035949a1"
+    },
+    {
+      "path": "data/ownership-history/validation-location.json",
+      "bytes": 1665,
+      "sha256": "dde740511b39c7f7333736acaf20fcbe3b8c3d3b02d4dcd78ad200a6ef244e54",
+      "decoded_bytes": 1665,
+      "decoded_sha256": "dde740511b39c7f7333736acaf20fcbe3b8c3d3b02d4dcd78ad200a6ef244e54",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "bfc1e9db54e05dd2c08e141479908e17fb5e4693"
+    },
+    {
+      "path": "data/cliopatria/index.json",
+      "bytes": 1107591,
+      "sha256": "54b9fdb778bf0ae1059452bd5c3c8f2a46dec6fe85c9373ba6aa316ccb529862",
+      "decoded_bytes": 1107591,
+      "decoded_sha256": "54b9fdb778bf0ae1059452bd5c3c8f2a46dec6fe85c9373ba6aa316ccb529862",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "ef870b35c06c0daa0f8b0cadd17c7616c132e8e6"
+    },
+    {
+      "path": "data/cliopatria/part-000.json",
+      "bytes": 275388,
+      "sha256": "04a84afc23f1fe7026a75b2d02914bdab915088a51a079095de24643cd523949",
+      "decoded_bytes": 275388,
+      "decoded_sha256": "04a84afc23f1fe7026a75b2d02914bdab915088a51a079095de24643cd523949",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "028f4f5fd31026a8e9c4023188506e3dcb5f4d0d"
+    },
+    {
+      "path": "data/cliopatria/part-001.json",
+      "bytes": 400778,
+      "sha256": "0b48e51a17430e1e4adccdebb0c19dfe73d26e1a754b934636f2831a69f6a159",
+      "decoded_bytes": 400778,
+      "decoded_sha256": "0b48e51a17430e1e4adccdebb0c19dfe73d26e1a754b934636f2831a69f6a159",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "bf5862d5d1e8fe33759cff298665f2371c765b72"
+    },
+    {
+      "path": "data/cliopatria/part-002.json",
+      "bytes": 536196,
+      "sha256": "8a57df98e37da0575f3161f7f9ad7c9577d89ef06841440b2c0d432cf1e8759b",
+      "decoded_bytes": 536196,
+      "decoded_sha256": "8a57df98e37da0575f3161f7f9ad7c9577d89ef06841440b2c0d432cf1e8759b",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "038f8641db42a94e9795092c011286a2093c36a3"
+    },
+    {
+      "path": "data/cliopatria/part-003.json",
+      "bytes": 488078,
+      "sha256": "3976cf0b265a2fe8ba25d84d416ddcf90cccfe89176210b3a609480f8bdf4d08",
+      "decoded_bytes": 488078,
+      "decoded_sha256": "3976cf0b265a2fe8ba25d84d416ddcf90cccfe89176210b3a609480f8bdf4d08",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "8d3aab4015eeeca09002a89080c6cecf0b548893"
+    },
+    {
+      "path": "data/cliopatria/part-004.json",
+      "bytes": 559287,
+      "sha256": "4eee4c59cfd5b358ba3c6d394b4035950906c17c25501f0afaf91e579e32310b",
+      "decoded_bytes": 559287,
+      "decoded_sha256": "4eee4c59cfd5b358ba3c6d394b4035950906c17c25501f0afaf91e579e32310b",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "71449cf87f548f5cd42faa65b353ad3d14ae73d9"
+    },
+    {
+      "path": "data/cliopatria/part-005.json",
+      "bytes": 898374,
+      "sha256": "cf046f446b492e55e8199a73c1b1513eea6f22489b2c71acfcf9064f0286ce3c",
+      "decoded_bytes": 898374,
+      "decoded_sha256": "cf046f446b492e55e8199a73c1b1513eea6f22489b2c71acfcf9064f0286ce3c",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "98b090470409c13541a2df9bc7b6c7dffa09a8ea"
+    },
+    {
+      "path": "data/cliopatria/part-006.json",
+      "bytes": 871473,
+      "sha256": "169c49681063342d61d935e3a5c30018bdb0cc350140326ee9d68d082d6908d5",
+      "decoded_bytes": 871473,
+      "decoded_sha256": "169c49681063342d61d935e3a5c30018bdb0cc350140326ee9d68d082d6908d5",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "f98045f8957cec00f93a7c88f450b3ee443f87f3"
+    },
+    {
+      "path": "data/cliopatria/part-007.json",
+      "bytes": 834173,
+      "sha256": "a8e692e9335defa89341060bede017d754dd333be158df9101f5f4e14269edea",
+      "decoded_bytes": 834173,
+      "decoded_sha256": "a8e692e9335defa89341060bede017d754dd333be158df9101f5f4e14269edea",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "7ba723eb33fd53d76722eb20753cd16a2bebcc81"
+    },
+    {
+      "path": "data/cliopatria/part-008.json",
+      "bytes": 608283,
+      "sha256": "7d0436e44aacfe508d970832a4cdc496d338baffd36270936d3dc01c784f7e6e",
+      "decoded_bytes": 608283,
+      "decoded_sha256": "7d0436e44aacfe508d970832a4cdc496d338baffd36270936d3dc01c784f7e6e",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "5228415e6cdaeb1037900e1030d84251916d54c7"
+    },
+    {
+      "path": "data/cliopatria/part-009.json",
+      "bytes": 502366,
+      "sha256": "5a5e730ffb1a6ddb74fbe4f02c104f288c86b3ab110ed64440c2b5f0c64b6f4d",
+      "decoded_bytes": 502366,
+      "decoded_sha256": "5a5e730ffb1a6ddb74fbe4f02c104f288c86b3ab110ed64440c2b5f0c64b6f4d",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "aa1afa5883548309d575ddf502b197cf0a3b26f3"
+    },
+    {
+      "path": "data/cliopatria/part-010.json",
+      "bytes": 599867,
+      "sha256": "02633ef28e14cc5e17fc40d36eb155205e04c732614216a05130d5e6351927b2",
+      "decoded_bytes": 599867,
+      "decoded_sha256": "02633ef28e14cc5e17fc40d36eb155205e04c732614216a05130d5e6351927b2",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "12884204d77903d9d338d2dc8e61568aa306347a"
+    },
+    {
+      "path": "data/cliopatria/part-011.json",
+      "bytes": 647923,
+      "sha256": "b902bdb4b20a91aa5f0a8dcf4a63da076173044c7d6961f1a2f88db3288697e1",
+      "decoded_bytes": 647923,
+      "decoded_sha256": "b902bdb4b20a91aa5f0a8dcf4a63da076173044c7d6961f1a2f88db3288697e1",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "a94f0797e72419cef189a6d2b197ca3f1fa55c94"
+    },
+    {
+      "path": "data/cliopatria/part-012.json",
+      "bytes": 535728,
+      "sha256": "0703253444689a703407b1c9851d67626be191805f88ca83d7b1460b57d03adc",
+      "decoded_bytes": 535728,
+      "decoded_sha256": "0703253444689a703407b1c9851d67626be191805f88ca83d7b1460b57d03adc",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "354a99e6dd096b8b438720cbded9f69bb491332d"
+    },
+    {
+      "path": "data/cliopatria/part-013.json",
+      "bytes": 552701,
+      "sha256": "993941e045347c108bfed011ddd01cfeb4d8d86740d2333b8f13420510cb741f",
+      "decoded_bytes": 552701,
+      "decoded_sha256": "993941e045347c108bfed011ddd01cfeb4d8d86740d2333b8f13420510cb741f",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "5e05c39a5894c755c0260fd64f962c86059690e9"
+    },
+    {
+      "path": "data/cliopatria/part-014.json",
+      "bytes": 518436,
+      "sha256": "4d0eb81c09a4dc46cdc0624269450577df3f639bb3291952a64825e5577a7fb5",
+      "decoded_bytes": 518436,
+      "decoded_sha256": "4d0eb81c09a4dc46cdc0624269450577df3f639bb3291952a64825e5577a7fb5",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "748c2485880f5662852fb4cb783e18285e6f7a92"
+    },
+    {
+      "path": "data/cliopatria/part-015.json",
+      "bytes": 484351,
+      "sha256": "9d4a636cca6984c6e37bbecb0da5bf5428ac8977e583689feb19cb183572674c",
+      "decoded_bytes": 484351,
+      "decoded_sha256": "9d4a636cca6984c6e37bbecb0da5bf5428ac8977e583689feb19cb183572674c",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "e694dfca6ef9752daac2971a0bf950f604824ec9"
+    },
+    {
+      "path": "data/cliopatria/part-016.json",
+      "bytes": 450875,
+      "sha256": "9f51ce81af754768e744755afabd0a63c5adf95d59d118b7729a66d0f0e704ff",
+      "decoded_bytes": 450875,
+      "decoded_sha256": "9f51ce81af754768e744755afabd0a63c5adf95d59d118b7729a66d0f0e704ff",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "82c68a45b8334a5fd000ba6aa3c23541c71ae677"
+    },
+    {
+      "path": "data/cliopatria/part-017.json",
+      "bytes": 392235,
+      "sha256": "6bff787fb2c7b0c730ee083bdda8c52cc90d07453b2d777ba890f6d7f1da8e21",
+      "decoded_bytes": 392235,
+      "decoded_sha256": "6bff787fb2c7b0c730ee083bdda8c52cc90d07453b2d777ba890f6d7f1da8e21",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "340943e5a45d7950e1d160b901cedb69a5aeea37"
+    },
+    {
+      "path": "data/cliopatria/part-018.json",
+      "bytes": 402725,
+      "sha256": "5b2ee99fc4b171e88e8f3af3c52742085b215b023cdceadbc3891be5968dce57",
+      "decoded_bytes": 402725,
+      "decoded_sha256": "5b2ee99fc4b171e88e8f3af3c52742085b215b023cdceadbc3891be5968dce57",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "d65a43923210e8e7cc998d6345cc9663f9e7082c"
+    },
+    {
+      "path": "data/cliopatria/part-019.json",
+      "bytes": 352512,
+      "sha256": "75ef162d13ec0536daa8d13f8494808a97cfea99a8c58bc88b14a9238a429567",
+      "decoded_bytes": 352512,
+      "decoded_sha256": "75ef162d13ec0536daa8d13f8494808a97cfea99a8c58bc88b14a9238a429567",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "d5953253c40759c0f6120ec8cd5ad132d5351e45"
+    },
+    {
+      "path": "data/cliopatria/part-020.json",
+      "bytes": 370808,
+      "sha256": "67c30cdd3d4834046bdd5a3fcde4cefff4aa7a8d5cf90fcedb0fc39cfc6eb900",
+      "decoded_bytes": 370808,
+      "decoded_sha256": "67c30cdd3d4834046bdd5a3fcde4cefff4aa7a8d5cf90fcedb0fc39cfc6eb900",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "77e6bb70e2ec753283dee5703342a110fc7bc93e"
+    },
+    {
+      "path": "data/cliopatria/part-021.json",
+      "bytes": 317552,
+      "sha256": "c3b4b97e36e9361d21aefebf6d8a6ce68681f2d95e92db689991f9faf48fde3e",
+      "decoded_bytes": 317552,
+      "decoded_sha256": "c3b4b97e36e9361d21aefebf6d8a6ce68681f2d95e92db689991f9faf48fde3e",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "f7b6d5c2c83fe2852d4068dc69696b79c4ca194e"
+    },
+    {
+      "path": "data/cliopatria/part-022.json",
+      "bytes": 322711,
+      "sha256": "6afd2ce3a5e6ea4676f4acd7dd02995be6c08ecb4ca9b1e18c3f968e84604ac7",
+      "decoded_bytes": 322711,
+      "decoded_sha256": "6afd2ce3a5e6ea4676f4acd7dd02995be6c08ecb4ca9b1e18c3f968e84604ac7",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "75bf382f3ed8f605c0dc35fcf635be84788d5d68"
+    },
+    {
+      "path": "data/cliopatria/part-023.json",
+      "bytes": 336884,
+      "sha256": "bf4d2c63389437812b1672bfb5da61d4a89acc39a6e7c50223e108c63ae5d790",
+      "decoded_bytes": 336884,
+      "decoded_sha256": "bf4d2c63389437812b1672bfb5da61d4a89acc39a6e7c50223e108c63ae5d790",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "7b325fb1fdad3a9c51168a29f2deae0770f0f7eb"
+    },
+    {
+      "path": "data/cliopatria/part-024.json",
+      "bytes": 352144,
+      "sha256": "6c41439691ae47303ad3a7034149bb3f2169139ba3bf996a7a16227b539f1880",
+      "decoded_bytes": 352144,
+      "decoded_sha256": "6c41439691ae47303ad3a7034149bb3f2169139ba3bf996a7a16227b539f1880",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "af439daa1d7fde78254c689fdf4a4443d4dbfc74"
+    },
+    {
+      "path": "data/cliopatria/part-025.json",
+      "bytes": 335526,
+      "sha256": "1320fe1bdd14ef2af727123e56d53243991610014bcfd6b1678718867ed58b08",
+      "decoded_bytes": 335526,
+      "decoded_sha256": "1320fe1bdd14ef2af727123e56d53243991610014bcfd6b1678718867ed58b08",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "bae8653809f13de1e094e485c38cf6d0b6ba586f"
+    },
+    {
+      "path": "data/cliopatria/part-026.json",
+      "bytes": 370541,
+      "sha256": "12c5da1ce16b789e1f0f73aa9e2aac3499276432141b901dd2935cf443aba2a1",
+      "decoded_bytes": 370541,
+      "decoded_sha256": "12c5da1ce16b789e1f0f73aa9e2aac3499276432141b901dd2935cf443aba2a1",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "9a87a45d948e27eb0585ffd29e939f4f7aeed3f9"
+    },
+    {
+      "path": "data/cliopatria/part-027.json",
+      "bytes": 382937,
+      "sha256": "cab77fe82432c9894132155df1e6fab99546ef12f69d8fe54e98c12bd1a8a959",
+      "decoded_bytes": 382937,
+      "decoded_sha256": "cab77fe82432c9894132155df1e6fab99546ef12f69d8fe54e98c12bd1a8a959",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "b73b777174e04d650797ce3e399d3bfdb5853a10"
+    },
+    {
+      "path": "data/cliopatria/part-028.json",
+      "bytes": 421098,
+      "sha256": "e4c6e364edb8ceec4a4d65c1ccb5698cd45102c1305276325f95fbed3fd147e5",
+      "decoded_bytes": 421098,
+      "decoded_sha256": "e4c6e364edb8ceec4a4d65c1ccb5698cd45102c1305276325f95fbed3fd147e5",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "d2d612c572afc5265bd4bd945a4de6c35db03dfb"
+    },
+    {
+      "path": "data/cliopatria/part-029.json",
+      "bytes": 372037,
+      "sha256": "0ff4c910cb31fc5152882f2c9f8a9c0e628f79195986905e211c9306fcf8783e",
+      "decoded_bytes": 372037,
+      "decoded_sha256": "0ff4c910cb31fc5152882f2c9f8a9c0e628f79195986905e211c9306fcf8783e",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "9fcb9d1ea5c6e30d8b3abe2cc0b3598740abf187"
+    },
+    {
+      "path": "data/cliopatria/part-030.json",
+      "bytes": 406222,
+      "sha256": "e5288ceab6147d426a362a1160b5aaefb1809e41971d5886f7d9b331f2ccbbd2",
+      "decoded_bytes": 406222,
+      "decoded_sha256": "e5288ceab6147d426a362a1160b5aaefb1809e41971d5886f7d9b331f2ccbbd2",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "2339a51eef01b3d9916801be994e3de6d123cd08"
+    },
+    {
+      "path": "data/cliopatria/part-031.json",
+      "bytes": 392687,
+      "sha256": "13364047cc22baded80875636833f2f4a3d15e18532a3f0ec7d062f7f2bf5950",
+      "decoded_bytes": 392687,
+      "decoded_sha256": "13364047cc22baded80875636833f2f4a3d15e18532a3f0ec7d062f7f2bf5950",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "ddfc88a975d3ae78ccc4ca48fb4205e51211a356"
+    },
+    {
+      "path": "data/cliopatria/part-032.json",
+      "bytes": 447032,
+      "sha256": "9451490afdab26d26283a5e9c171c3981ac4e79499e39ede3a67fb35060192b4",
+      "decoded_bytes": 447032,
+      "decoded_sha256": "9451490afdab26d26283a5e9c171c3981ac4e79499e39ede3a67fb35060192b4",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "0f69fb45e3746290f33da6ef4520d394b2e70dff"
+    },
+    {
+      "path": "data/cliopatria/part-033.json",
+      "bytes": 502829,
+      "sha256": "73a76a5b67c40d81e470fc169839c351a495e843a0e11b97aad3f83d8dcf7f26",
+      "decoded_bytes": 502829,
+      "decoded_sha256": "73a76a5b67c40d81e470fc169839c351a495e843a0e11b97aad3f83d8dcf7f26",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "d33290be955d79077de5fa3e365fb9abe6ba9efb"
+    },
+    {
+      "path": "data/cliopatria/part-034.json",
+      "bytes": 508565,
+      "sha256": "313aa7ff42c7935ce3d31d7eafb1a7463afd194454669c82034c7e794908c985",
+      "decoded_bytes": 508565,
+      "decoded_sha256": "313aa7ff42c7935ce3d31d7eafb1a7463afd194454669c82034c7e794908c985",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "8f7fb329cf958c1b10b0c219c36279736a305c64"
+    },
+    {
+      "path": "data/cliopatria/part-035.json",
+      "bytes": 533113,
+      "sha256": "f7fc2c51d8416363d9b78dd6e7b570bd5904bd7ae4fe2c24a01b73b5f542125e",
+      "decoded_bytes": 533113,
+      "decoded_sha256": "f7fc2c51d8416363d9b78dd6e7b570bd5904bd7ae4fe2c24a01b73b5f542125e",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "e42b2b8230925862932f69055a0ebcbe577baf07"
+    },
+    {
+      "path": "data/cliopatria/part-036.json",
+      "bytes": 536562,
+      "sha256": "2b4b6034b1e4680208f05492adb5b563e3676512560f1097923ac71d4f3ef329",
+      "decoded_bytes": 536562,
+      "decoded_sha256": "2b4b6034b1e4680208f05492adb5b563e3676512560f1097923ac71d4f3ef329",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "d66f3b53000423ff4f1ebb9418f1ec47cca63315"
+    },
+    {
+      "path": "data/cliopatria/part-037.json",
+      "bytes": 638444,
+      "sha256": "f7b0b6a0b9302741bde8c77c470990e78276526abe54d6e51e5b51feed5ebc83",
+      "decoded_bytes": 638444,
+      "decoded_sha256": "f7b0b6a0b9302741bde8c77c470990e78276526abe54d6e51e5b51feed5ebc83",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "5453844ae060c413621ec65570bef27ef033c702"
+    },
+    {
+      "path": "data/cliopatria/part-038.json",
+      "bytes": 666070,
+      "sha256": "a7760de91715f935387b6a77d671a74efb68b89d0a1b5f8899455d9e9942769d",
+      "decoded_bytes": 666070,
+      "decoded_sha256": "a7760de91715f935387b6a77d671a74efb68b89d0a1b5f8899455d9e9942769d",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "f2221261c4dcaaec8adbbd03b4715345971c817c"
+    },
+    {
+      "path": "data/cliopatria/part-039.json",
+      "bytes": 720656,
+      "sha256": "49f8d42e2a42ea5a90c5ed361a06b097706d4e30e44d7b7f3e77e1736d0782c4",
+      "decoded_bytes": 720656,
+      "decoded_sha256": "49f8d42e2a42ea5a90c5ed361a06b097706d4e30e44d7b7f3e77e1736d0782c4",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "5083f52a71604c616686a532e6dbbb7977075794"
+    },
+    {
+      "path": "data/cliopatria/part-040.json",
+      "bytes": 906650,
+      "sha256": "8a283635a935ed8a8756b498a8657ee145fc049a37909d62534106d3e809a476",
+      "decoded_bytes": 906650,
+      "decoded_sha256": "8a283635a935ed8a8756b498a8657ee145fc049a37909d62534106d3e809a476",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "685b09ee2159d55941c6e6a75e598e6cb2d1fc7c"
+    },
+    {
+      "path": "data/cliopatria/part-041.json",
+      "bytes": 941143,
+      "sha256": "c58c49f78e3bc6eaa4bbd2be9b50772309b5afa5884e6db7d890e13d39cd343e",
+      "decoded_bytes": 941143,
+      "decoded_sha256": "c58c49f78e3bc6eaa4bbd2be9b50772309b5afa5884e6db7d890e13d39cd343e",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "6f4a67d213ad4ae800e736825cbbfa9caf1e2627"
+    },
+    {
+      "path": "data/cliopatria/part-042.json",
+      "bytes": 883074,
+      "sha256": "2f927c003a667a57ff326e27859eb4af8aaa5a48555c266c1a03889a55c4f122",
+      "decoded_bytes": 883074,
+      "decoded_sha256": "2f927c003a667a57ff326e27859eb4af8aaa5a48555c266c1a03889a55c4f122",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "b2cdc8a8f02a86fb17e0c17c23c5b85f143477de"
+    },
+    {
+      "path": "data/cliopatria/part-043.json",
+      "bytes": 884283,
+      "sha256": "52d90c81cc5348aeff203097c852606652cc83a64ef6026d31fdc54f038d3013",
+      "decoded_bytes": 884283,
+      "decoded_sha256": "52d90c81cc5348aeff203097c852606652cc83a64ef6026d31fdc54f038d3013",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "e33ba850a7c2f6fa0cb3d793c256ecdb8efa5630"
+    },
+    {
+      "path": "data/cliopatria/part-044.json",
+      "bytes": 1004377,
+      "sha256": "412b1199dadaf3e208d27c4457542fb5f24e8cac5799abe706353a03a36df2c7",
+      "decoded_bytes": 1004377,
+      "decoded_sha256": "412b1199dadaf3e208d27c4457542fb5f24e8cac5799abe706353a03a36df2c7",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "4b17a9d6cf7229f6e20e177b9e86716b6e58f0f2"
+    },
+    {
+      "path": "data/cliopatria/part-045.json",
+      "bytes": 1057470,
+      "sha256": "21441edba2ae00f002ce8efa8271d26ad4c13e3e2b8c4abf938d6b7ffc54e472",
+      "decoded_bytes": 1057470,
+      "decoded_sha256": "21441edba2ae00f002ce8efa8271d26ad4c13e3e2b8c4abf938d6b7ffc54e472",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "f775a36d7cd87d268d555b86173900b14f8f884d"
+    },
+    {
+      "path": "data/cliopatria/part-046.json",
+      "bytes": 982243,
+      "sha256": "d690346922d76648351b9f47da66903baf9eb81a37f9877eee681d4ee28c9ffd",
+      "decoded_bytes": 982243,
+      "decoded_sha256": "d690346922d76648351b9f47da66903baf9eb81a37f9877eee681d4ee28c9ffd",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "09feb85042c410d66baae3368fa118497d82a408"
+    },
+    {
+      "path": "data/cliopatria/part-047.json",
+      "bytes": 1002729,
+      "sha256": "598364059e3e3fa822eb1cdca925b38a2d53396be6d0e5c99181d9dc270744d5",
+      "decoded_bytes": 1002729,
+      "decoded_sha256": "598364059e3e3fa822eb1cdca925b38a2d53396be6d0e5c99181d9dc270744d5",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "91f0044b20bd5e3aee56c83be66846f1cebd28e5"
+    },
+    {
+      "path": "data/cliopatria/part-048.json",
+      "bytes": 1076684,
+      "sha256": "66b0f654bcd39a5701a0e91e1731639dc9b7c9d6c8d56ec9c88682a069b01e76",
+      "decoded_bytes": 1076684,
+      "decoded_sha256": "66b0f654bcd39a5701a0e91e1731639dc9b7c9d6c8d56ec9c88682a069b01e76",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "f7bd0fd381b74fed2c7767d8b119a32ead3ccded"
+    },
+    {
+      "path": "data/cliopatria/part-049.json",
+      "bytes": 1085763,
+      "sha256": "9a25d1f0048eb2cd5b0e2e876aa06e0925f60d23065441e4560d44b58076324f",
+      "decoded_bytes": 1085763,
+      "decoded_sha256": "9a25d1f0048eb2cd5b0e2e876aa06e0925f60d23065441e4560d44b58076324f",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "ba968d118e98658f33902ccb87b5996f2f774a4c"
+    },
+    {
+      "path": "data/cliopatria/part-050.json",
+      "bytes": 976210,
+      "sha256": "badbb4d8e4f1115e2c26701cab183ce0331e930ac8229effbcc29ee8ead0c17d",
+      "decoded_bytes": 976210,
+      "decoded_sha256": "badbb4d8e4f1115e2c26701cab183ce0331e930ac8229effbcc29ee8ead0c17d",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "75e696285f4f9d888f5bcac006c4730d96b4c8ba"
+    },
+    {
+      "path": "data/cliopatria/part-051.json",
+      "bytes": 854647,
+      "sha256": "069a63aedf14a347f349acbe2dac307b2a262057aa37857aaa7c4465cb77ea16",
+      "decoded_bytes": 854647,
+      "decoded_sha256": "069a63aedf14a347f349acbe2dac307b2a262057aa37857aaa7c4465cb77ea16",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "c5b8f78a9f6cc267986f2f43fd2d4299a061410e"
+    },
+    {
+      "path": "data/cliopatria/part-052.json",
+      "bytes": 878848,
+      "sha256": "535fb75d30a5e4d9a64d06734ffb24f9cd28a7c90a9199445529af53223241a2",
+      "decoded_bytes": 878848,
+      "decoded_sha256": "535fb75d30a5e4d9a64d06734ffb24f9cd28a7c90a9199445529af53223241a2",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "f7e4bacefbdac1eee5082b86d1024f719f6aebb4"
+    },
+    {
+      "path": "data/cliopatria/part-053.json",
+      "bytes": 850941,
+      "sha256": "c630e0b4ba685a0bedb23b8d63345f5f89ddf2673811e51b809e4decfa58a585",
+      "decoded_bytes": 850941,
+      "decoded_sha256": "c630e0b4ba685a0bedb23b8d63345f5f89ddf2673811e51b809e4decfa58a585",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "9f640ba02a14b26998532b5f13c3cc0a12dc99a9"
+    },
+    {
+      "path": "data/cliopatria/part-054.json",
+      "bytes": 866034,
+      "sha256": "4694263217529a7323adee17784efda235d12b3290c429f0a6817509476ce103",
+      "decoded_bytes": 866034,
+      "decoded_sha256": "4694263217529a7323adee17784efda235d12b3290c429f0a6817509476ce103",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "df6d7867a7f04a905c326009ea0eac3a26d42f8f"
+    },
+    {
+      "path": "data/cliopatria/part-055.json",
+      "bytes": 935972,
+      "sha256": "8b2efc027670db4a6961459cb1fcf1604af4f05e3a9d2fc0e0c80164352bf922",
+      "decoded_bytes": 935972,
+      "decoded_sha256": "8b2efc027670db4a6961459cb1fcf1604af4f05e3a9d2fc0e0c80164352bf922",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "3039d6ae03d14c06a39977a161ba5de8eb7b7aae"
+    },
+    {
+      "path": "data/cliopatria/part-056.json",
+      "bytes": 1085214,
+      "sha256": "26224ffbd209b35ddd8835b67daa5509385e0527c7cfa1ecaab2124d6957e292",
+      "decoded_bytes": 1085214,
+      "decoded_sha256": "26224ffbd209b35ddd8835b67daa5509385e0527c7cfa1ecaab2124d6957e292",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "7ee637e2a1f94542460c2e986c7ba9c1411e150c"
+    },
+    {
+      "path": "data/cliopatria/part-057.json",
+      "bytes": 1121174,
+      "sha256": "97ae1a5586db05a777ead6a2916c51e5dd0b289abe2845f9141ed232ca16547c",
+      "decoded_bytes": 1121174,
+      "decoded_sha256": "97ae1a5586db05a777ead6a2916c51e5dd0b289abe2845f9141ed232ca16547c",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "cd362be67b0e144cc60d27d31a01751dea30411b"
+    },
+    {
+      "path": "data/cliopatria/part-058.json",
+      "bytes": 1089650,
+      "sha256": "1adcbc7d2ca90e276bc14172db5879131c7d51cea2a879df9e1b5848d638cac0",
+      "decoded_bytes": 1089650,
+      "decoded_sha256": "1adcbc7d2ca90e276bc14172db5879131c7d51cea2a879df9e1b5848d638cac0",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "2a5061db4a42020d7f6a0e6b451991b3ad917953"
+    },
+    {
+      "path": "data/cliopatria/part-059.json",
+      "bytes": 1599386,
+      "sha256": "49adafade08b0832df7a631cb3e64148219d84415f5b6718ae4e9290d11485e9",
+      "decoded_bytes": 1599386,
+      "decoded_sha256": "49adafade08b0832df7a631cb3e64148219d84415f5b6718ae4e9290d11485e9",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "b0a42680dabee40df18efb2a83e3b329fab50e62"
+    },
+    {
+      "path": "data/cliopatria/part-060.json",
+      "bytes": 1321999,
+      "sha256": "a691352eaae3ef4314bb87bb7b4f9dc1fec5305def8cb8896c6f8c708ea5de03",
+      "decoded_bytes": 1321999,
+      "decoded_sha256": "a691352eaae3ef4314bb87bb7b4f9dc1fec5305def8cb8896c6f8c708ea5de03",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "4054c4f2195c6a1985c1759ba538ee1a567eb512"
+    },
+    {
+      "path": "data/cliopatria/part-061.json",
+      "bytes": 1389380,
+      "sha256": "f2d3a0e7aa5fc5761163c406df87342a8091951b4ffaa5b8e8864bd84ea04ba3",
+      "decoded_bytes": 1389380,
+      "decoded_sha256": "f2d3a0e7aa5fc5761163c406df87342a8091951b4ffaa5b8e8864bd84ea04ba3",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "91b19118ea6aa80c2b602822d13fa38f1a69f0c0"
+    },
+    {
+      "path": "data/cliopatria/part-062.json",
+      "bytes": 1577573,
+      "sha256": "1d641a84f37552a479367f884b5fa29496e7aca38f332fa9dfbd8cad5f4b8e67",
+      "decoded_bytes": 1577573,
+      "decoded_sha256": "1d641a84f37552a479367f884b5fa29496e7aca38f332fa9dfbd8cad5f4b8e67",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "acb1bbbafa3d5036007905b683b55cfb9e4c2ab7"
+    },
+    {
+      "path": "data/cliopatria/part-063.json",
+      "bytes": 979653,
+      "sha256": "e05d0436a8c2dcc67c35938fdb0389adf0d3a2139343be4acaabbca00ffa49b2",
+      "decoded_bytes": 979653,
+      "decoded_sha256": "e05d0436a8c2dcc67c35938fdb0389adf0d3a2139343be4acaabbca00ffa49b2",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "53c481fced637d60262caafd409acdf062feeb95"
+    },
+    {
+      "path": "data/cliopatria/part-064.json",
+      "bytes": 539652,
+      "sha256": "03b2f2eac2e5e4269559e5b8cc394467545d6b42e7aac191365f3f20d053f083",
+      "decoded_bytes": 539652,
+      "decoded_sha256": "03b2f2eac2e5e4269559e5b8cc394467545d6b42e7aac191365f3f20d053f083",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "cdc50de93a03f250a7246a37e9ce1342c1ce39c2"
+    },
+    {
+      "path": "data/cliopatria/part-065.json",
+      "bytes": 689157,
+      "sha256": "5163926c89f6cd9160713565d7a2bed49eb5b1ad5b152494722d13e972b44a3b",
+      "decoded_bytes": 689157,
+      "decoded_sha256": "5163926c89f6cd9160713565d7a2bed49eb5b1ad5b152494722d13e972b44a3b",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "304fe5f41fa2cf5d34c5e3108f899c908c1e6da5"
+    },
+    {
+      "path": "data/cliopatria/part-066.json",
+      "bytes": 342300,
+      "sha256": "a2c5971f4e6bbc79ce6230835f64c08d7c5c20b05797a052107b5ad8d9c5386e",
+      "decoded_bytes": 342300,
+      "decoded_sha256": "a2c5971f4e6bbc79ce6230835f64c08d7c5c20b05797a052107b5ad8d9c5386e",
+      "commit": "913db0624b8aa79b188ff17a7f5c4ae0c0f63965",
+      "mode": "100644",
+      "blob": "fb9ec10f10466aabbdf123ad2b5c2a40aef37bc0"
+    }
+  ],
+  "before_snapshot": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/.cache/eastern-two-native1295/legacy-input-preparation/before-world-index.json",
+  "after_snapshot": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/.cache/eastern-two-native1295/legacy-input-preparation/after-world-index.json",
+  "reviewed_receipt": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/.cache/eastern-two-native1295/legacy-input-preparation/migration-receipt.json",
+  "original_boundary_versions_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "dated_boundary_rows": 0,
+  "source_reference": "Original exact boundary digest uniquely binds empty explicit source roster; final normal build verifies actual database fingerprint",
+  "executed_code": [
+    {
+      "path": "scripts/prepare-ownership-incremental.py",
+      "bytes": 28797,
+      "sha256": "31ea705a96a09ed3a2ced8081434c4d2b25557c14c473c6bd77adf29704047e9"
+    },
+    {
+      "path": "scripts/prepare-ownership-runtime.py",
+      "bytes": 7405,
+      "sha256": "e4a701e6983740c661552d5a483cbf2bfc9e7d7b41a40e5c055e6a7608c166bb"
+    }
+  ],
+  "input_bytes": 167900131,
+  "reserved_output_bytes": 90000000,
+  "aggregate_admission_bytes": 257900131
+}

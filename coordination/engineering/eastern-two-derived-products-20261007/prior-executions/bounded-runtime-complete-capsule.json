@@ -1,0 +1,110 @@
+{
+  "issue": 1295,
+  "bounded_runtime_execution_source_commit": "55e77780fad75fe38af40e1cc05cbd72c7f193d2",
+  "independent_complete_semantic_verification_code_commit": "c5ebd677a0ba3a376eb12ebb97c47cc0343b48d4",
+  "verified_project_module_bytes": [
+    {
+      "commit": "c5ebd677a0ba3a376eb12ebb97c47cc0343b48d4",
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/runtime-complete-equivalence.py",
+      "mode": "100644",
+      "blob": "4de7f90c2412833421dc0f1ab8921ded6370a992",
+      "bytes": 3447,
+      "sha256": "79799f05de3eb1f0ebc9a1e992ae9b64850edb34cdf2b28f918b8c30d0582e40"
+    },
+    {
+      "commit": "c5ebd677a0ba3a376eb12ebb97c47cc0343b48d4",
+      "path": "coordination/engineering/eastern-two-gap-repair-native-20261007/runtime-selector-proof.mjs",
+      "mode": "100644",
+      "blob": "48c250e1e84597aa9284c46eaaf9c4f3f97d1b58",
+      "bytes": 2332,
+      "sha256": "811482c7304e29a06c1f6a59211c6314ea6aa6fab63bcc03ea59bd99df8a0e26"
+    },
+    {
+      "commit": "c5ebd677a0ba3a376eb12ebb97c47cc0343b48d4",
+      "path": "scripts/validate-ownership-runtime.py",
+      "mode": "100644",
+      "blob": "8ed92aded8157bb8316a4cb43a274c9ec8b2b6d0",
+      "bytes": 5101,
+      "sha256": "118b907d2aec2edc4333987da91f4830e31bf377390ed1a89c67e913ee7b74e1"
+    },
+    {
+      "commit": "c5ebd677a0ba3a376eb12ebb97c47cc0343b48d4",
+      "path": "src/runtime-ownership.js",
+      "mode": "100644",
+      "blob": "e4dc53b6a509b2ac0a83d900e36aa5d8ea363b26",
+      "bytes": 1198,
+      "sha256": "190f60c6d7402570901424a80b08bb2527f4785a590c7e4e2fd5fd51a82a7979"
+    },
+    {
+      "commit": "c5ebd677a0ba3a376eb12ebb97c47cc0343b48d4",
+      "path": "src/model.js",
+      "mode": "100644",
+      "blob": "b742ff4778deb48200007150c77b1f533f8bec41",
+      "bytes": 2822,
+      "sha256": "6cf64270d9c912b09aa93c60a14d058b4482c52e5ffa31d55fdcef026bea3dcc"
+    },
+    {
+      "commit": "c5ebd677a0ba3a376eb12ebb97c47cc0343b48d4",
+      "path": "src/category-palette.js",
+      "mode": "100644",
+      "blob": "fb814163ba0aab841a0affd1a47f5539a964566b",
+      "bytes": 82979,
+      "sha256": "c449f2087075c9e03a25a26449154ac874c54a3285cf0d3df068c8cf6afd43b2"
+    }
+  ],
+  "actual_owned_phase_receipts": [
+    {
+      "path": "ownership-runtime-bounded-run-one-actual-invocation.json",
+      "bytes": 1829,
+      "sha256": "63b7ebb686ab835431635f937d3666beba15bf00538c6fb5432d722364a953f4"
+    },
+    {
+      "path": "ownership-runtime-bounded-run-two-actual-invocation.json",
+      "bytes": 1899,
+      "sha256": "063ee088c72c1a3fca29634f1f729f38e78a9a01cfce2655f2fe6fea4de8521b"
+    },
+    {
+      "path": "bounded-runtime-two-run-whole-and-semantic-equality.json",
+      "bytes": 9297,
+      "sha256": "f2633382a4e6d55c22f84431eec37d5c3501cb6ade98c6db466ad15aa760666b"
+    },
+    {
+      "path": "runtime-complete-every-interval-and-endpoint-proof.json",
+      "bytes": 11143,
+      "sha256": "8fe9bc481daeb4d65df48e2c51416709021505c2f29cb0b26e54ac5d2503e7d1"
+    },
+    {
+      "path": "runtime-production-selector-all-years.json",
+      "bytes": 324629,
+      "sha256": "b962b05ab705384f9c7c8d0df9f90347838e0cc2aa5bedd007af9853531c2a40"
+    },
+    {
+      "path": "runtime-stock-two-run-whole-and-semantic-equality.json",
+      "bytes": 12055,
+      "sha256": "09937a494ca19c169158f6c8f8527c22bbe2a3a6976fd7efa2957cff4c2ea36f"
+    },
+    {
+      "path": "runtime-bounded-run-one-scoped-byte-and-49-reuse-proof.json",
+      "bytes": 1874,
+      "sha256": "5870680ac525c0e07d5387860774cf43fd77e226ae4f35fd3676982fcafb4978"
+    }
+  ],
+  "complete_locations": 49625,
+  "exact_source_intervals": 6833855,
+  "complete_transport_intervals": 7521266,
+  "original_interval_endpoint_selector_checks": 40988469,
+  "all54_full_bucket_bodies_identical": true,
+  "semantic_indexes_identical": true,
+  "observational_index_variation_retained": {
+    "preparation_peak_rss_kib": [
+      175751168,
+      175570944
+    ]
+  },
+  "original_stock_pair_admission_failure_preserved": true,
+  "ordinary_bucket_decoded_limit_pass": true,
+  "actual_scoped_encoded_input_output_code_bytes": 49803004,
+  "max_decoded_output_bytes": 32279614,
+  "final_parent_admission_claimed": false,
+  "deployment_claimed": false
+}
