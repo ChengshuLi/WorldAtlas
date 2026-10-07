@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "source_commit": "d13250b2e7adb0f7fca00e8ee37acda4dc5cb490",
+  "source_path": "research/geography/gap-source-matanuska-physical-seam-20261006/reproduce-source-overlays.py",
+  "source_sha256": "bfd3b6519d255128144b041143310eb25c5d857c248618d7ad6f1af98f344198",
+  "source_helper_pins": {
+    "producer": {
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/reproduce-source-overlays.py",
+      "sha256": "bfd3b6519d255128144b041143310eb25c5d857c248618d7ad6f1af98f344198",
+      "commit": "d13250b2e7adb0f7fca00e8ee37acda4dc5cb490"
+    },
+    "contact_helper": {
+      "path": "scripts/physical_component_contacts.py",
+      "sha256": "2d7be839084ca4929980abadd7a618acc6b77d8ac8f02a58582c44c8161664f2",
+      "commit": "d13250b2e7adb0f7fca00e8ee37acda4dc5cb490"
+    },
+    "source_guard": {
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/source_input_integrity.py",
+      "sha256": "697b2c094bf3fd69ded734f712b9846fc1830284ed7e67b8267801601422067d",
+      "commit": "d13250b2e7adb0f7fca00e8ee37acda4dc5cb490"
+    },
+    "original_controls": {
+      "path": "research/geography/gap-source-matanuska-physical-seam-20261006/source-negative-controls.py",
+      "sha256": "f8d0d688acebdc2a652718e875bb70818f436a65a8d74bc8c8b8f0ddada6b51e",
+      "commit": "d13250b2e7adb0f7fca00e8ee37acda4dc5cb490"
+    }
+  },
+  "new_path": "research/geography/gap-source-matanuska-physical-seam-20261006/reproduction-erratum/reproduce-fresh-vintage.py",
+  "new_sha256": "3fbb37fc32bdfeeea9333bb9d8f0a91c91b4d22841429e170379b74d7232bfe2",
+  "transformation": "Original algorithm copied from immutable commit and minimally modified for nested repo root, fresh named output vintages, resolved containment and exclusive creation for output directory/files, with separate truthful concrete-path receipts.",
+  "input_pins_sha256": "b6b8e1a29322b85edf2f6168bce2e0daea7f2d5f4b4526cfaeae9178b4b638b4",
+  "validator_sha256": "b1fd97f5733fa102154ae4baed5cc5f0271f1dfcb8dee44152ae72cd46a2ae0b"
+}

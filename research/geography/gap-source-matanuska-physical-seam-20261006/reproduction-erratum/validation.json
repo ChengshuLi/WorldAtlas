@@ -1,0 +1,145 @@
+{
+  "version": 1,
+  "method_id": "source-overlay-analysis",
+  "outcome": "passed",
+  "fresh_run_ids": [
+    "fresh-one",
+    "fresh-two"
+  ],
+  "fresh_families_byte_identical": true,
+  "original_run_families_byte_identical": true,
+  "fresh_vs_original": {
+    "selected_components_identical": true,
+    "source_overlay_ledger_identical": true,
+    "numeric_and_predicate_summary_identical": true,
+    "summary_path_metadata_difference": "Archived paths point to results/{run-id}; fresh output metadata points to reproduction-erratum/runs/{run-id} and actual paths are separately bound in run receipts."
+  },
+  "fresh_hashes": {
+    "fresh-one": {
+      "selected-components.geojson": "271d213f985d3a9f22d28f244d04b6a9a5dbe70ae9bbe925c5dcc50bda818379",
+      "source-overlay-ledger.json": "d653653d1aa4517c4542d532b8a659d9dfd11ce1da049e48684bd73482c7f61c",
+      "source-overlay-summary.json": "253d0a6f5220cd884598b30824179c27516aa12660f559571cd3a869c1491864"
+    },
+    "fresh-two": {
+      "selected-components.geojson": "271d213f985d3a9f22d28f244d04b6a9a5dbe70ae9bbe925c5dcc50bda818379",
+      "source-overlay-ledger.json": "d653653d1aa4517c4542d532b8a659d9dfd11ce1da049e48684bd73482c7f61c",
+      "source-overlay-summary.json": "253d0a6f5220cd884598b30824179c27516aa12660f559571cd3a869c1491864"
+    }
+  },
+  "original_hashes": {
+    "run-one": {
+      "selected-components.geojson": "271d213f985d3a9f22d28f244d04b6a9a5dbe70ae9bbe925c5dcc50bda818379",
+      "source-overlay-ledger.json": "d653653d1aa4517c4542d532b8a659d9dfd11ce1da049e48684bd73482c7f61c",
+      "source-overlay-summary.json": "e940b3ef4844115bd53c885a7fc6a1cfb9ceee1fce745a00c1fc9be6cbf2fd13"
+    },
+    "run-two": {
+      "selected-components.geojson": "271d213f985d3a9f22d28f244d04b6a9a5dbe70ae9bbe925c5dcc50bda818379",
+      "source-overlay-ledger.json": "d653653d1aa4517c4542d532b8a659d9dfd11ce1da049e48684bd73482c7f61c",
+      "source-overlay-summary.json": "e940b3ef4844115bd53c885a7fc6a1cfb9ceee1fce745a00c1fc9be6cbf2fd13"
+    }
+  },
+  "component_roster": {
+    "count": 282,
+    "sha256": "37b5efeb08f407cd19cc098186659a01899d748d8dd73b3c26bfccbd1d35fc66"
+  },
+  "fragment_bindings": 283,
+  "contact_rows": 571,
+  "changed_source_controls": [
+    {
+      "source_id": "resolve-ecoregions-biomes-2017",
+      "mutated_sha256": "77c4f06fd0bc2fb0ca9b18d6915d901ff234e6952100a1c9764151b1ea8deeba",
+      "rejected": "Whole-file source pin hash mismatch: sources/resolve-ecoregions-2017-ecoids-371-405.geojson"
+    },
+    {
+      "source_id": "geoboundaries-us-adm2-2018-simplified",
+      "mutated_sha256": "cf1164417e556a37aa009f1efbd9465b0f3140c4a6f7e2afd20fe7947ca1cc7e",
+      "rejected": "Whole-file source pin hash mismatch: sources/geoboundaries-usa-adm2-simplified-full.geojson"
+    }
+  ],
+  "omitted_component_control": {
+    "expected_count": 282,
+    "observed_count": 281,
+    "observed_roster_sha256": "73db73996f4ab448b0de58f9296539cc5b7e74487df8f718f06844f850dc8cac",
+    "rejected": true
+  },
+  "omitted_contact_control": {
+    "rejected": true,
+    "reason": "Original full-feature binding changed"
+  },
+  "vintage_laundering_control": {
+    "pinned_layer_name": "Biomes and Ecoregions 2017",
+    "rejected_year": "2018",
+    "rejected": true
+  },
+  "cli_rejections": [
+    {
+      "case": "path-traversal",
+      "args": [
+        "--run-id",
+        "../outside"
+      ],
+      "exit_code": 2,
+      "expected_rejection": "safe filename characters",
+      "stdout": "",
+      "stderr": "usage: reproduce-fresh-vintage.py [-h] --run-id RUN_ID [--runs-root RUNS_ROOT]\nreproduce-fresh-vintage.py: error: run-id must be a fresh-* name containing only safe filename characters\n"
+    },
+    {
+      "case": "existing-directory",
+      "args": [
+        "--run-id",
+        "fresh-one"
+      ],
+      "exit_code": 2,
+      "expected_rejection": "already exists",
+      "stdout": "",
+      "stderr": "usage: reproduce-fresh-vintage.py [-h] --run-id RUN_ID [--runs-root RUNS_ROOT]\nreproduce-fresh-vintage.py: error: run-id destination already exists; existing vintages are immutable\n"
+    },
+    {
+      "case": "existing-file",
+      "args": [
+        "--run-id",
+        "fresh-existing-file",
+        "--runs-root",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/research/geography/gap-source-matanuska-physical-seam-20261006/reproduction-erratum/controls/fixtures"
+      ],
+      "exit_code": 2,
+      "expected_rejection": "already exists",
+      "stdout": "",
+      "stderr": "usage: reproduce-fresh-vintage.py [-h] --run-id RUN_ID [--runs-root RUNS_ROOT]\nreproduce-fresh-vintage.py: error: run-id destination already exists; existing vintages are immutable\n"
+    },
+    {
+      "case": "symlink-destination",
+      "args": [
+        "--run-id",
+        "fresh-symlink"
+      ],
+      "exit_code": 2,
+      "expected_rejection": "already exists",
+      "stdout": "",
+      "stderr": "usage: reproduce-fresh-vintage.py [-h] --run-id RUN_ID [--runs-root RUNS_ROOT]\nreproduce-fresh-vintage.py: error: run-id destination already exists; existing vintages are immutable\n"
+    },
+    {
+      "case": "outside-resolved-root",
+      "args": [
+        "--run-id",
+        "fresh-outside",
+        "--runs-root",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/cd4c34b51cabfedba197d1fec7ffd8bea30193a8c1835b651f642cfdf9462ccd/work/research/geography/gap-source-matanuska-physical-seam-20261006/reproduction-erratum/controls/fixtures/outside-root-link"
+      ],
+      "exit_code": 2,
+      "expected_rejection": "resolves outside",
+      "stdout": "",
+      "stderr": "usage: reproduce-fresh-vintage.py [-h] --run-id RUN_ID [--runs-root RUNS_ROOT]\nreproduce-fresh-vintage.py: error: runs-root resolves outside the owned reproduction-erratum directory\n"
+    }
+  ],
+  "existing_directory_hashes_unchanged": true,
+  "existing_file_sentinel_sha256": "e98b499bc7d8091b45c489751b239aade7c9d690365b89a52921ab6d183d5d3a",
+  "outside_destination_created": false,
+  "retained_original_baseline_copy": {
+    "path": "research/geography/gap-source-matanuska-physical-seam-20261006/reproduction-erratum/baseline-inputs/current-manifest-at-issue-baseline.json",
+    "commit": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+    "bytes": 206,
+    "sha256": "85075dd4eceebf5bc8e7b554fb4e1573aed2c5baae546ca21746643852c55b81",
+    "unchanged": true
+  }
+}
