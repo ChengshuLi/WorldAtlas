@@ -1,0 +1,771 @@
+{
+  "version": 1,
+  "issue": 1337,
+  "lane": "geography",
+  "worker_id": "01a11551-68d1-7031-a9ac-715eb725a184",
+  "subject_ids": [
+    "gb:CHN:ADM2:17275852B12997706676088",
+    "gb:CHN:ADM2:17275852B18968160632662",
+    "gb:CHN:ADM2:17275852B24476472807157",
+    "gb:CHN:ADM2:17275852B26462026898013",
+    "gb:CHN:ADM2:17275852B28680875187505",
+    "gb:CHN:ADM2:17275852B32574814957612",
+    "gb:CHN:ADM2:17275852B36539700725824",
+    "gb:CHN:ADM2:17275852B49602881017994",
+    "gb:CHN:ADM2:17275852B620737032798",
+    "gb:CHN:ADM2:17275852B66176667563352",
+    "gb:CHN:ADM2:17275852B77518624384720",
+    "gb:CHN:ADM2:17275852B79149802712659",
+    "gb:CHN:ADM2:17275852B83272093468807",
+    "gb:CHN:ADM2:17275852B8642781403558"
+  ],
+  "subject_ids_sha256": "8facba1790de68cbddaa0f80d12dc961fb8ea661ad2937df56eb56899f8052b5",
+  "baseline": {
+    "commit": "e9190786dbf758524a3bde513fc4bb4d1ed6a3e7",
+    "files": [
+      {
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r1/diagnoses-000.jsonl.gz",
+        "bytes": 592180,
+        "sha256": "777c0a0c47ed65d400b7a7eb8463969cf957be45d8c5b1c6dcf1dd253b948e57",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8380665,
+        "uncompressed_sha256": "9cbc55aac66a726de690c6360db1e17496cbb9b27bdfabcc6d52a9c70df493da"
+      },
+      {
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r1/diagnoses-001.jsonl.gz",
+        "bytes": 592105,
+        "sha256": "3d461427b0bedf10fb40b16a7f35951f2e5f9c67801b0b3142d41c4302da1aeb",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8380025,
+        "uncompressed_sha256": "c719f4271dfe03ca19513929892b50afde88aa0dadba6f0475a9e91fe7a7458d"
+      },
+      {
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r1/diagnoses-002.jsonl.gz",
+        "bytes": 598845,
+        "sha256": "e1e1b3d181eca59d44c9e5c5a1f677b162fdea7893e504220c7d876986b68c0a",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8379129,
+        "uncompressed_sha256": "e37423962ae7429e05ed892579fc71151f725c76ab48339a766495cbbe13a5c2"
+      },
+      {
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r1/diagnoses-003.jsonl.gz",
+        "bytes": 584160,
+        "sha256": "f78556d672164e02e41959d032fb6cadfd2d1ea5f559ade2dd5f8746ec58b364",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8384755,
+        "uncompressed_sha256": "7bfd5060419aee509d9dbe48ea41f9ea17c104277cfd3ce04a7f285720a8c470"
+      },
+      {
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r1/diagnoses-004.jsonl.gz",
+        "bytes": 597536,
+        "sha256": "fcab0f4a769b8aa026fd374ec7b1b6105af3e1069260cd17cb342f5e5019b709",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8383293,
+        "uncompressed_sha256": "1184be2b9f9fe408ce32c05e497ad261653f2b6ad74cec9edc10a4c0e8122ad3"
+      },
+      {
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r1/diagnoses-008.jsonl.gz",
+        "bytes": 607568,
+        "sha256": "d8c22c06dd2982a023237fec400cc166a4025ea8f21b69114db5d0f8661f7ef3",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8383173,
+        "uncompressed_sha256": "be5d6782822be8b8304865b02bfdc15e3124ddf46d1f1d05a6d43dd3d4dc49a8"
+      },
+      {
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r1/diagnoses-009.jsonl.gz",
+        "bytes": 617901,
+        "sha256": "1d23e9241730943ef0a2a1f447afe00c6ecd44d5d4b33fdbb6d3222385b5b1c0",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8381199,
+        "uncompressed_sha256": "6309be62338ae96de55d2fa5751cff178bac99a107be5ef6ebc5451a0008996c"
+      },
+      {
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r1/diagnoses-010.jsonl.gz",
+        "bytes": 595984,
+        "sha256": "3b3459257eaf024a5f24dbd3c4efe9ef36547b399057e913728c84aefb064538",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8383422,
+        "uncompressed_sha256": "dfcf5f2edf096b24dfc10fb80b598bfdb13f7e6c06c4504862cd5ee1cdbe3015"
+      },
+      {
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r1/diagnoses-011.jsonl.gz",
+        "bytes": 597250,
+        "sha256": "7ea1a5cb42f36c2e52b62adf58d66ecd1d505c9150dc08eb4a89a53b60344275",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8385482,
+        "uncompressed_sha256": "7490c56e28e2e46fd05f0a1fe883d4a578e6f43eca316e03f9dc2c176f5ed39d"
+      },
+      {
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r1/diagnoses-012.jsonl.gz",
+        "bytes": 598540,
+        "sha256": "780d428750e8ec3ad323b3e1bd287889796467d5cc3c0dbb5912c39d85f1ac53",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8382121,
+        "uncompressed_sha256": "31a866e31d8ac8cd955ecdf2c924afb155bb9550a6877eb5dbffdfe49e00d5ea"
+      },
+      {
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r1/diagnoses-014.jsonl.gz",
+        "bytes": 598169,
+        "sha256": "f7c4f568ecea602dca764138be0ca3b26a7aeb7cc7365bf0b664fa1ccd7f03ce",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8379081,
+        "uncompressed_sha256": "34705acb4f0ced7403e445f7504b93ad9bccc03f77ab3cf4b1adbfc96640871e"
+      },
+      {
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r1/diagnoses-015.jsonl.gz",
+        "bytes": 596283,
+        "sha256": "067040edfac5599de6003a4962730a5af9db1618f66f3159137958cf9152bede",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8383140,
+        "uncompressed_sha256": "f9c50ec8c07fe2f200e53a5c92b01d88608d10ecdf07990e855fd283224ea478"
+      },
+      {
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r1/diagnoses-016.jsonl.gz",
+        "bytes": 595328,
+        "sha256": "31fe79a78dc8670d7e87be09a352527abd2d1861e0f136ad495cc4ba9d4afe1c",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8387401,
+        "uncompressed_sha256": "148dd66a6a23a16fcafce2b971e7d78ee8c6378e60d1b462afe6c0d8c8b28f4d"
+      },
+      {
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r1/diagnoses-018.jsonl.gz",
+        "bytes": 591597,
+        "sha256": "d9f367098b1fa9f779bdc8ba49923a5c310b75311563b59973794f062d88d4de",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8381957,
+        "uncompressed_sha256": "6a4048140cd1da9f87e90f658abc2009f490d16ef06ed7b5785f738ba0a458b5"
+      },
+      {
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r1/diagnoses-019.jsonl.gz",
+        "bytes": 598034,
+        "sha256": "7c6206dc96ccd1756ff297496bb47bfc65cb93dd6fb8a82590500cc1e472f556",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8387785,
+        "uncompressed_sha256": "9109d60c9f63ec5296f430983c4134874fb62eeec26431b6c9c2983ddc193616"
+      },
+      {
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r1/diagnoses-020.jsonl.gz",
+        "bytes": 596090,
+        "sha256": "d5db10b267387c69f075108079bf378faa0f82c2306d811dc90ca84cec6d48fd",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8384227,
+        "uncompressed_sha256": "83b1f5ccdd6ec516a3b42d5a755568fd0c5f8bac629baa7fefe687218f33b04d"
+      },
+      {
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r1/diagnoses-023.jsonl.gz",
+        "bytes": 588777,
+        "sha256": "4fb824811113e5deb1fd1c233137a65e1d83b1172f1a27d8153a78129516edf7",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8385487,
+        "uncompressed_sha256": "75054366df92e5e36ee986f6a373510b98fd9ae70564121690269a9ab76f1eac"
+      },
+      {
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r1/diagnoses-024.jsonl.gz",
+        "bytes": 589239,
+        "sha256": "1f477f8517231e1e039bd2d378853f8692f14cffe35c3faac04350625b4a83db",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8383081,
+        "uncompressed_sha256": "4bb2c3f0a5bcfdd479f0501bfaabf20a559203d31a009792549763f7eb7c01db"
+      },
+      {
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r1/diagnoses-027.jsonl.gz",
+        "bytes": 598510,
+        "sha256": "ce8e24ec43d5566e51c57145cc3ef546805d9dcfd059aa06da09001df13ced63",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8386234,
+        "uncompressed_sha256": "958195d196f078753220370bb9e311154a9a84a8a00232a5d83755bfd57accb9"
+      },
+      {
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r1/diagnoses-028.jsonl.gz",
+        "bytes": 590053,
+        "sha256": "1bb036ad73dc4a271871bb3b46d560998e993ea3da625d0e7f56f89259a97f7b",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8386157,
+        "uncompressed_sha256": "1adb574da43bd6f2472f9a46661f31013e2bd025c3ff62e469b3030097f09e09"
+      },
+      {
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r1/diagnoses-029.jsonl.gz",
+        "bytes": 602140,
+        "sha256": "e5147018d195ca519b3ad73fd317b862fa3847dcab8511784b7d1868271ea725",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8382349,
+        "uncompressed_sha256": "9dd1e354ea31a1a85da316628261707237f3305945d975374d9150538e917af7"
+      },
+      {
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r1/diagnoses-030.jsonl.gz",
+        "bytes": 594599,
+        "sha256": "2ea43447508c342c79bf1561d401ad7a12fc1baaef926fb18f1f8b830ce9d03e",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 8381833,
+        "uncompressed_sha256": "239a0d3e54f9d59bba9ef9220de219703a61287cda1e3f9443dcd3b3c9d4d4bb"
+      },
+      {
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r1/report.json",
+        "bytes": 178556,
+        "sha256": "e47379a74c053b57781fec04aaedc702ecba24adb773b42bb8c75d142326647a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/input-config.json",
+        "bytes": 90091,
+        "sha256": "7623fa8a61b72c33a1560f0ab612e70c463e8c25beef930043c985fd6657f173",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/report.json",
+        "bytes": 174829,
+        "sha256": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/report.json",
+        "bytes": 57840,
+        "sha256": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/CITATION-AND-USE-geoBoundaries-original.txt",
+        "bytes": 4316,
+        "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+        "bytes": 403376,
+        "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/individual-source-attribution.json",
+        "bytes": 806110,
+        "sha256": "7d8a3baf61f32e6e4398f24bec0d15bce32eafcd4309655edc2b12a2c33256bd",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM2-000.bin.gz",
+        "bytes": 2096437,
+        "sha256": "7bcd6bb51042f63c2f4f1717b25d701874cfcd6f12eb79dc36cdff29f3b62f30",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 7018287,
+        "uncompressed_sha256": "8c7dfa8e40842f9162453d9b0b614276a48bf635559ba371c7982cb288e7b303"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-3.json",
+        "bytes": 5153118,
+        "sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "audited_world_index": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "delivered_numeric_report": "e47379a74c053b57781fec04aaedc702ecba24adb773b42bb8c75d142326647a",
+      "delivered_routing_input_config": "7623fa8a61b72c33a1560f0ab612e70c463e8c25beef930043c985fd6657f173",
+      "delivered_routing_report": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265",
+      "original_source_encoded_transport": "7bcd6bb51042f63c2f4f1717b25d701874cfcd6f12eb79dc36cdff29f3b62f30",
+      "scoped_contact_part_0": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617"
+    },
+    "pin_files": {
+      "audited_world_index": "data/world-index.json",
+      "delivered_numeric_report": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r1/report.json",
+      "delivered_routing_report": "coordination/engineering/global-actionability-routing-20261007/results/report.json",
+      "delivered_routing_input_config": "coordination/engineering/global-actionability-routing-20261007/input-config.json",
+      "original_source_encoded_transport": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM2-000.bin.gz",
+      "scoped_contact_part_0": "data/geography/part-3.json"
+    },
+    "subject_files": {
+      "gb:CHN:ADM2:17275852B12997706676088": "data/geography/part-3.json",
+      "gb:CHN:ADM2:17275852B18968160632662": "data/geography/part-3.json",
+      "gb:CHN:ADM2:17275852B24476472807157": "data/geography/part-3.json",
+      "gb:CHN:ADM2:17275852B26462026898013": "data/geography/part-3.json",
+      "gb:CHN:ADM2:17275852B28680875187505": "data/geography/part-3.json",
+      "gb:CHN:ADM2:17275852B32574814957612": "data/geography/part-3.json",
+      "gb:CHN:ADM2:17275852B36539700725824": "data/geography/part-3.json",
+      "gb:CHN:ADM2:17275852B49602881017994": "data/geography/part-3.json",
+      "gb:CHN:ADM2:17275852B620737032798": "data/geography/part-3.json",
+      "gb:CHN:ADM2:17275852B66176667563352": "data/geography/part-3.json",
+      "gb:CHN:ADM2:17275852B77518624384720": "data/geography/part-3.json",
+      "gb:CHN:ADM2:17275852B79149802712659": "data/geography/part-3.json",
+      "gb:CHN:ADM2:17275852B83272093468807": "data/geography/part-3.json",
+      "gb:CHN:ADM2:17275852B8642781403558": "data/geography/part-3.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "geoboundaries-china-adm2",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/CHN/ADM2/geoBoundaries-CHN-ADM2_simplified.geojson",
+      "role": "Actually consumed simplified national ADM2 source; source-relative administrative coverage context only",
+      "vintage": "boundaryYearRepresented 2017; sourceDataUpdateDate 2023-01-19; build 2023-12-12",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Metadata claims Open Data Commons Public Domain Dedication and License (PDDL) v1.0; separately pinned geoBoundaries terms specify CC BY 4.0 for code/derivatives and attribution/citation. Applicability to this simplified geometry and retained derivatives unresolved."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Restore encoded Git blob from the pinned original source corpus path; gzip decode yields the exact complete 2,391-feature GeoJSON body. See runs/final-1.json.",
+      "limit": "Harmonized historical source; not official legal county boundary, ownership, fit-for-purpose precision, or 2026 physical shoreline evidence.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2017,
+        "to": 2018
+      }
+    },
+    {
+      "id": "china-administrative-boundary-regulation",
+      "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=593",
+      "role": "Official rules describing approved administrative boundaries, agreements, markers and boundary maps",
+      "vintage": "2002 regulation; current status not independently certified in this review",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Official legal text; reuse terms not assessed here."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Open cited Ministry of Justice official page.",
+      "limit": "Establishes governing process and evidentiary role; does not provide this packet’s local agreements, maps, markers or segment decisions.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "china-map-management-regulation",
+      "url": "https://xzfg.moj.gov.cn/front/law/detail?LawID=421",
+      "role": "Official rules for current map materials and approved county-and-above boundary depictions",
+      "vintage": "2015 regulation",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Official legal text; reuse terms not assessed here."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Open cited Ministry of Justice official page.",
+      "limit": "Does not establish each local boundary or authorize this geometry.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "china-public-map-standard-2023",
+      "url": "https://zrzyt.hunan.gov.cn/zrzyt/chglln/202302/t20230214_29246255.html",
+      "role": "Official public-map representation specification",
+      "vintage": "2023",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Official standard; reuse terms not assessed here."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Open cited provincial natural-resources department page publishing the 2023 specification.",
+      "limit": "Public-map depiction guidance; no local segment source supplied.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "nbs-2020-county-codes",
+      "url": "https://www.stats.gov.cn/hd/lyzx/zxgk/202104/t20210401_1815920.html",
+      "role": "Dated statistical code guidance for names and codes",
+      "vintage": "2020-06-30 validity described by source",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms not assessed here."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Open cited National Bureau of Statistics page.",
+      "limit": "Statistical code context only; no geometry or coastal/island extent.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2020,
+        "to": 2021
+      }
+    },
+    {
+      "id": "gshhg-noaa",
+      "url": "https://www.ngdc.noaa.gov/mgg/shorelines/shorelines.html",
+      "role": "Inherited global coastline/lake/river source-role reference",
+      "vintage": "GSHHG 2.3.7 released 2017-06-15; heterogeneous observation dates",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms not assessed in this source-fitness packet."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Open NOAA NCEI GSHHG overview; inherited comparison rows are pinned by source-file hashes.",
+      "limit": "Global generalized screening context; not county legal authority, local precision clearance, or current condition.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2017,
+        "to": 2018
+      }
+    },
+    {
+      "id": "jrc-global-surface-water",
+      "url": "https://developers.google.com/earth-engine/datasets/catalog/JRC_GSW1_4_Metadata",
+      "role": "Candidate dated surface-water screening reference; no raster consumed",
+      "vintage": "1984–2021; v1.4; 30 m pixels",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms not assessed in this source-fitness packet."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Open the JRC GSW v1.4 dataset metadata page.",
+      "limit": "30 m metadata does not establish fitness for narrow channels or small features; not legal boundary evidence. No raster retrieved or processed.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 1984,
+        "to": 2021
+      }
+    },
+    {
+      "id": "rfc7946",
+      "url": "https://www.rfc-editor.org/rfc/rfc7946",
+      "role": "GeoJSON coordinate/CRS semantics reference",
+      "vintage": "RFC 7946 (2016)",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Standards reuse terms not assessed."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Open cited RFC.",
+      "limit": "Defines coordinate conventions, not positional accuracy.",
+      "temporal_status": "reference"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/claim-receipt.json",
+      "bytes": 963,
+      "sha256": "17db1841d18d140d6e4a5e2c9cb0e0a7d7637cc4f6fc6e7746fdc1cd284dac13",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/goal-tool-response.json",
+      "bytes": 839,
+      "sha256": "1065de1ee330f1ef63f1f3c8f463e44c16d4896886d9428c20611c9216f9b9c3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/inputs/candidate-contract.json",
+      "bytes": 1898,
+      "sha256": "74c472f546642bb61a6f68695f17f8d47fbabc6fa20c3d5cad32327a8fc82015",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/inputs/complete-source-ready-handoff.json",
+      "bytes": 393708,
+      "sha256": "76a236f6354fa3cba4cec1bc2a5717e4aa66ce9842e108c6c1769e41b73c52ae",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/inputs/frozen-input-lock.json",
+      "bytes": 20333,
+      "sha256": "058eefa94ab2de9db7b114771ae877f4b0769b3c0b0134d7acb229a536129fe2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/producer-freeze-failed-vintage-e919.json",
+      "bytes": 6148,
+      "sha256": "e9fe3c8f753de74223ccbaa5160f1525312a44e9c439918e05f6f2797c37a79f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/producer-freeze-superseded-e376.json",
+      "bytes": 5243,
+      "sha256": "52f4aa313b4e601d8562b249c2feb3de4ebf60b0bf11b76fe06d7853bb965ee0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/producer-freeze-v2-e919.json",
+      "bytes": 5988,
+      "sha256": "d77bb300b0441c4c99c08802ad9b87dd6513c14c7ec201e50b53048f426b33fa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/producer-vintage-correction.json",
+      "bytes": 3833,
+      "sha256": "8dc4f41b15f3fb5f021becb9fe95a1ec3fe16c2634877d0323042a272144dd9a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/attempt-1-failure.json",
+      "bytes": 976,
+      "sha256": "9b133726e8e057fcaf278cf3786ede95531d05e96e5640fa807a9693ae0c80ba",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/final-1-execution.json",
+      "bytes": 821,
+      "sha256": "89ece5c623dc7402573f092acf5985bd0e0eaafed18689124153413f4730664c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/final-1.json",
+      "bytes": 633213,
+      "sha256": "ea270f3be4fe993dbe5e9d1d567d8efef4348f3ea1a27505b91b762ea8505340",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/final-1.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/final-1.stdout",
+      "bytes": 414,
+      "sha256": "ef91f0abf57e1a96d4a06470d7818187797911bac4b84c5231d9d6d3f31171ee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/final-2-execution.json",
+      "bytes": 821,
+      "sha256": "b23b7b7461746d1925bbe43e21b76e11fd1471201f209dfa8f64e55c45f53f63",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/final-2.json",
+      "bytes": 633213,
+      "sha256": "ea270f3be4fe993dbe5e9d1d567d8efef4348f3ea1a27505b91b762ea8505340",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/final-2.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/final-2.stdout",
+      "bytes": 414,
+      "sha256": "92f604cb9b5eccea53951978d52c10ea2cddf50e500e37b178c095e9c89567af",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/negative-controls.json",
+      "bytes": 621,
+      "sha256": "b9cade2b91fa3366124780198367a04760d2055adad90ebb80c883aefa5760c5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/output-comparison.json",
+      "bytes": 1881,
+      "sha256": "4369445962cb54143183c9e0babf409fe112c71739d719434efe846fb2baa5ee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/positive-control.json",
+      "bytes": 450,
+      "sha256": "5813cfecd9da86cd6097d38a01a83ca1fda4db41d1bcac50e2b005771644cd99",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/producer-controls.tap",
+      "bytes": 1359,
+      "sha256": "90e131049ee5a3d5a5e1b00213953cfb3e9392666feb4a01838bf47696eb23f1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/reproducibility.json",
+      "bytes": 565,
+      "sha256": "8e538347ad943f3aa6371b0352b4d923547465e85a9a354e0e38b2a20cb2b810",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/source-fitness.md",
+      "bytes": 13190,
+      "sha256": "398ec98b2499f854cc9983a275c7598336f4faeb4794b517f919132a6789002c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/tools/assemble-source-closure.mjs",
+      "bytes": 15356,
+      "sha256": "daeb6cb71fdb0f8d9b9938bf61259513670204e713214ff542f7f5bd753e5aaa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/tools/assemble-source-closure.test.mjs",
+      "bytes": 3400,
+      "sha256": "8120d8f422c09ef4620a0966dd52c664726adab2ec63b3b907a1309aa7630dad",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/worker-checkpoint.md",
+      "bytes": 1641,
+      "sha256": "71d7260cda2ba89e4b17e72bf627c65a7446d07437ad46d6a6174bc9f6dd1a9c",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/claim-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/goal-tool-response.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/inputs/candidate-contract.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/inputs/complete-source-ready-handoff.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/inputs/frozen-input-lock.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/producer-freeze-failed-vintage-e919.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/producer-freeze-superseded-e376.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/producer-freeze-v2-e919.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/producer-vintage-correction.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/attempt-1-failure.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/final-1-execution.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/final-1.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/final-1.stderr",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/final-1.stdout",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/final-2-execution.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/final-2.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/final-2.stderr",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/final-2.stdout",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/negative-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/output-comparison.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/producer-controls.tap",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/source-fitness.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/tools/assemble-source-closure.mjs",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/tools/assemble-source-closure.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/worker-checkpoint.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "methods": [
+    {
+      "id": "source-review",
+      "kind": "source",
+      "description": "Restored exact source/family rows and inspected cited official/source metadata for role, vintage, terms, limits and applicability; no spatial overlay or geometry decision.",
+      "software": "Node v24.19.0 built-ins; web source review dated 2026-10-07",
+      "units": "source records, dates, declared coordinates and provenance"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "The consumed historical simplified global ADM2 source supports source-relative context only; it does not establish the applicable legal county boundary, local ownership, fit-for-purpose precision, or 2026 physical land/water condition.",
+      "status": "supported",
+      "source_ids": [
+        "geoboundaries-china-adm2",
+        "china-administrative-boundary-regulation",
+        "china-map-management-regulation",
+        "china-public-map-standard-2023"
+      ]
+    },
+    {
+      "text": "Source-term applicability, official local authority records, and per-component numeric/physical unknowns remain unresolved.",
+      "status": "unresolved",
+      "source_ids": [
+        "geoboundaries-china-adm2",
+        "gshhg-noaa",
+        "jrc-global-surface-water"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/tools/assemble-source-closure.mjs research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/final-1.json",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/tools/assemble-source-closure.mjs research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/final-2.json",
+    "node --test research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/tools/assemble-source-closure.test.mjs",
+    "node scripts/evidence-quality.mjs research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/evidence-quality.json ."
+  ]
+}

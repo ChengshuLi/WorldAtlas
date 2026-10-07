@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "freeze_state": "pre-final-runs",
+  "issue": 1337,
+  "worker_id": "01a11551-68d1-7031-a9ac-715eb725a184",
+  "branch": "geography/china-fifty-numeric-gap-family-source-fitness-20261007",
+  "base_head": "e3765802ba8a683c706aff8e3440ac21bcddcf4e",
+  "origin_main": "e9190786dbf758524a3bde513fc4bb4d1ed6a3e7",
+  "handoff": {
+    "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/inputs/complete-source-ready-handoff.json",
+    "bytes": 393708,
+    "sha256": "76a236f6354fa3cba4cec1bc2a5717e4aa66ce9842e108c6c1769e41b73c52ae"
+  },
+  "candidate_contract": {
+    "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/inputs/candidate-contract.json",
+    "bytes": 1898,
+    "sha256": "74c472f546642bb61a6f68695f17f8d47fbabc6fa20c3d5cad32327a8fc82015",
+    "issue_contract_sha256": "3e51af41d2a2a8cfe27ff43e68587991826cab0b08df0f5680f3da707410e3c7"
+  },
+  "frozen_input_lock": {
+    "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/inputs/frozen-input-lock.json",
+    "bytes": 20333,
+    "sha256": "058eefa94ab2de9db7b114771ae877f4b0769b3c0b0134d7acb229a536129fe2",
+    "mode": "000644"
+  },
+  "producer": {
+    "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/tools/assemble-source-closure.mjs",
+    "bytes": 14851,
+    "sha256": "e5616cb27049f9480dfe09502891500b386cca3069cb279dd911406ba50ee027",
+    "mode": "000644"
+  },
+  "controls": {
+    "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/tools/assemble-source-closure.test.mjs",
+    "bytes": 3400,
+    "sha256": "8120d8f422c09ef4620a0966dd52c664726adab2ec63b3b907a1309aa7630dad",
+    "mode": "000644"
+  },
+  "runtime": {
+    "path": "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "version": "v24.19.0",
+    "bytes": 121306800,
+    "sha256": "27db838bb204ef7c21df2931f5656e4c8fb32e6e947f363a402b49714d32b5b1",
+    "builtin_imports": [
+      "node:fs",
+      "node:path",
+      "node:crypto",
+      "node:zlib",
+      "node:child_process"
+    ],
+    "external_packages": []
+  },
+  "git": {
+    "path": "/usr/bin/git",
+    "version": "git version 2.39.5 (Apple Git-154)",
+    "bytes": 118864,
+    "sha256": "7588ceab299393618d6f8861502ac0588d1594025f301d9a61a898215b5571d3"
+  },
+  "whole_input_files": [
+    {
+      "path": "data/world-index.json",
+      "bytes": 944,
+      "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "mode": "100644",
+      "oid": "d4ca1f07f7f504484461007919f90af5c5732b61",
+      "git_bytes": 944,
+      "status": "exact whole-file/current HEAD"
+    },
+    {
+      "path": "data/administrative-sources.json",
+      "bytes": 661416,
+      "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "mode": "100644",
+      "oid": "2747b845f0c5654765da3b951c9074e52f220077",
+      "git_bytes": 661416,
+      "status": "exact whole-file/current HEAD"
+    },
+    {
+      "path": "data/geography/part-3.json",
+      "bytes": 5153118,
+      "sha256": "e28e1ef867d6550ad65964125bd86a8f1d0919e4834e0d920af4046145a00617",
+      "mode": "100644",
+      "oid": "e41c8f549f1cb2162f5adb30029bf4800e86c848",
+      "git_bytes": 5153118,
+      "status": "exact whole-file/current HEAD"
+    },
+    {
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/individual-source-attribution.json",
+      "bytes": 806110,
+      "sha256": "7d8a3baf61f32e6e4398f24bec0d15bce32eafcd4309655edc2b12a2c33256bd",
+      "mode": "100644",
+      "oid": "d84c203f19506d0552ca3cad1efcf9a8b8a5cfde",
+      "git_bytes": 806110,
+      "status": "exact whole-file/current HEAD"
+    },
+    {
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "bytes": 403376,
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+      "mode": "100644",
+      "oid": "09afab19371f0814da61e79e5f310c5fb2405b6d",
+      "git_bytes": 403376,
+      "status": "exact whole-file/current HEAD"
+    },
+    {
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/CITATION-AND-USE-geoBoundaries-original.txt",
+      "bytes": 4316,
+      "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+      "mode": "100644",
+      "oid": "7f16c1c4aa7d11ddf25c6a6434630272a4c45459",
+      "git_bytes": 4316,
+      "status": "exact whole-file/current HEAD"
+    },
+    {
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-CHN-ADM2-000.bin.gz",
+      "bytes": 2096437,
+      "sha256": "7bcd6bb51042f63c2f4f1717b25d701874cfcd6f12eb79dc36cdff29f3b62f30",
+      "mode": "100644",
+      "oid": "48bb210799d1ae8dae4fa23d4e74f9b2a15f4e87",
+      "git_bytes": 2096437,
+      "status": "exact whole-file/current HEAD"
+    }
+  ],
+  "constraints": [
+    "No spatial overlay or geometry-generation was run.",
+    "Source reconstruction only; complete candidate pointsets and original diagnostics are preserved as pinned inputs.",
+    "The descriptor binds the simplified original source actually consumed, encoded Git bytes, and decoded raw whole-body identity."
+  ]
+}
