@@ -10,6 +10,7 @@ from pathlib import Path
 import re
 import subprocess
 import sys
+import types
 
 ROOT = Path(__file__).resolve().parents[3]
 BASELINE = "6a47b43025d963daf80915c6d219c75ebcc8cd91"
@@ -42,6 +43,7 @@ PIN_FILES = {
     "current_contact_partition": "data/geography/part-0.json",
     "current_source_registry": "data/administrative-sources.json",
     "baseline_recipe": "scripts/administrative.py",
+    "baseline_location_policy": "data/location-policy.json",
     "original_source_catalogue": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
     "consumed_simplified_ARG_ADM2": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-ARG-ADM2-000.bin.gz",
     "prior_ARG_unsimplified_source_archive": "data/regional-review/regional-review-7cf674a63057d43f/source/geoBoundaries-ARG/geoBoundaries-ARG-ADM2.geojson.gz",
@@ -65,6 +67,7 @@ PINS = {
     "current_contact_partition": "bcad5408720e0f50165e794636fd44e02913e5e4649d73c8aa422b94562d32f3",
     "current_source_registry": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
     "baseline_recipe": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22",
+    "baseline_location_policy": "efab4528fd4b7b180815ef82de93480f490ef8fa48ad9ef32d1f9d76a64b7fb9",
     "original_source_catalogue": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
     "consumed_simplified_ARG_ADM2": "9b033d8e86946b8f14d9491ec51098e3c5c0e59785707058966d1fc77521546d",
     "prior_ARG_unsimplified_source_archive": "aaf34413713c3b75175d04b6b7cafa4910ebdca762d2637a6547024466e3e07e",
@@ -78,10 +81,32 @@ PINS = {
 MAX_FILE = 32 * 1024 * 1024
 MAX_PHASE = 256 * 1024 * 1024
 helper_bytes = subprocess.check_output(["git", "-C", str(ROOT), "show", BASELINE + ":scripts/evidence/immutable.py"])
-if hashlib.sha256(helper_bytes).hexdigest() != PINS["evidence_immutable_helper"]:
+helper_sha256 = hashlib.sha256(helper_bytes).hexdigest()
+if helper_sha256 != PINS["evidence_immutable_helper"]:
     raise ValueError("shared evidence helper differs from the issue-pinned baseline")
 sys.path.insert(0, str(ROOT / "scripts"))
-from evidence.immutable import Baseline, NewVintage, canonical_json, descriptor, sha256, write_new_vintage
+# Execute the exact bytes read from the issue-pinned baseline. Importing the
+# materialized checkout module here would only authenticate its Git counterpart,
+# not prove that these are the bytes Python actually executes.
+_immutable = types.ModuleType("worldatlas_pinned_immutable")
+_immutable.__file__ = "git:" + BASELINE + ":scripts/evidence/immutable.py"
+exec(compile(helper_bytes, _immutable.__file__, "exec"), _immutable.__dict__)
+Baseline = _immutable.Baseline
+NewVintage = _immutable.NewVintage
+canonical_json = _immutable.canonical_json
+descriptor = _immutable.descriptor
+sha256 = _immutable.sha256
+write_new_vintage = _immutable.write_new_vintage
+EXECUTION_BINDING = {
+    "baseline_commit": BASELINE,
+    "helper_path": "scripts/evidence/immutable.py",
+    "helper_sha256": helper_sha256,
+    "helper_execution": "compile+exec captured git-show bytes; no checkout import",
+    "runner_path": str(Path(__file__).resolve().relative_to(ROOT)),
+    "runner_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+    "python_version": sys.version,
+    "python_executable": sys.executable,
+}
 BASELINE_READER = None
 
 
@@ -99,7 +124,14 @@ def read_baseline(name, override=None):
     if BASELINE_READER is None:
         raise ValueError("immutable baseline reader has not been initialized")
     expected = BASELINE_READER.pinned_bytes(name)
-    raw = BASELINE_READER.materialized_bytes(name) if override is None else override
+    if override is not None:
+        raw = override
+    elif name == PIN_FILES["baseline_location_policy"]:
+        # This immutable source file may be absent from a sparse checkout. Read
+        # its pinned Git blob directly; no working-tree substitute is accepted.
+        raw = BASELINE_READER.pinned_bytes(name)
+    else:
+        raw = BASELINE_READER.materialized_bytes(name)
     if len(raw) > MAX_FILE or sha(raw) != sha(expected):
         raise ValueError("whole-file SHA-256 mismatch: " + name)
     return raw
@@ -188,6 +220,16 @@ def build_report(inputs):
 
     catalogue = j(PIN_FILES["original_source_catalogue"])
     product = next(p for p in catalogue["products"] if p["key"] == "gb:ARG:ADM2")
+    policy = j(PIN_FILES["baseline_location_policy"])
+    arg_policy = policy["countries"]["ARG"]
+    recipe = inputs[PIN_FILES["baseline_recipe"]].decode("utf-8")
+    transform = "rule['source_url'].replace('.geojson','_simplified.geojson')"
+    if transform not in recipe:
+        raise ValueError("baseline recipe lacks the pinned simplification transform")
+    selected_url = arg_policy["source_url"]
+    consumed_url = selected_url.replace(".geojson", "_simplified.geojson")
+    if consumed_url != product["recorded_consumed_url"]:
+        raise ValueError("pinned Argentina policy and recipe do not resolve to the consumed catalogue URL")
     source_path = PIN_FILES["consumed_simplified_ARG_ADM2"]
     source_bytes = gzip.decompress(inputs[source_path])
     if len(source_bytes) != product["original_bytes"] or sha(source_bytes) != product["original_sha256"]:
@@ -291,6 +333,23 @@ def build_report(inputs):
         },
         "prior_assessments": {
             "issue_442_source_inventory": unsimplified,
+            "unsimplified_source_admission": {
+                "encoded_archive_descriptor": descriptor(PIN_FILES["prior_ARG_unsimplified_source_archive"],
+                                                          inputs[PIN_FILES["prior_ARG_unsimplified_source_archive"]]),
+                "decoded_identity_as_recorded_in_pinned_442_inventory": {
+                    "bytes": next(x["retrieved_file_bytes"] for x in unsimplified["sources"] if x["id"] == "gb:ARG:ADM2"),
+                    "sha256": next(x["retrieved_file_sha256"] for x in unsimplified["sources"] if x["id"] == "gb:ARG:ADM2"),
+                },
+                "decoded_input_admission": "refused; recorded decoded size exceeds the 32 MiB per-file limit; no decompression or geometry admission performed",
+            },
+            "source_locator_resolution": {
+                "baseline_location_policy_path": PIN_FILES["baseline_location_policy"],
+                "baseline_location_policy_sha256": PINS["baseline_location_policy"],
+                "selected_unsimplified_url": selected_url,
+                "baseline_recipe_transform": transform,
+                "resolved_simplified_url": consumed_url,
+                "catalogue_url_matches": True,
+            },
             "georef_prior_issue_snapshot": georef_issue,
             "georef_crosswalk_feature_count": len(georef_source.get("features", [])),
             "georef_crosswalk_exact_name_matches_for_all_component_admin_rows": georef_by_shape,
@@ -304,6 +363,7 @@ def build_report(inputs):
             "unknowns": ["boundary length", "physical authority", "cause", "effective date", "lineage", "surface/land-water status", "physical completeness", "legal ownership", "product-specific retrieval timestamp"]
         },
         "input_descriptors": {path: {"bytes": len(raw), "sha256": sha(raw)} for path, raw in sorted(inputs.items())},
+        "execution_binding": EXECUTION_BINDING,
     }
     return report
 
@@ -340,10 +400,13 @@ def main():
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("--run")
     group.add_argument("--finalize-reproducibility", action="store_true")
+    parser.add_argument("--execution-log")
     args = parser.parse_args()
     inputs = load_case()
     if args.finalize_reproducibility:
-        paths = [ROOT / OWNED / "vintages" / f"argentina-run-{n}" / "source-fit.json" for n in (3, 4)]
+        if not args.execution_log:
+            raise ValueError("actual process receipt required for reproducibility finalization")
+        paths = [ROOT / OWNED / "vintages" / f"argentina-run-{n}" / "source-fit.json" for n in (1, 2)]
         reports = [p.read_bytes() for p in paths]
         if reports[0] != reports[1]:
             raise ValueError("two complete source-fit reports differ")
@@ -351,8 +414,12 @@ def main():
                   "run_one_sha256": sha(reports[0]), "run_two_sha256": sha(reports[1]),
                   "run_paths": [str(p.relative_to(ROOT)) for p in paths],
                   "equal_bytes": True}
-        record = write_new_vintage(BASELINE_READER, OWNED + "/", "argentina-repro-check",
-                                   "reproducibility.json", result)
+        execution = json.loads(Path(args.execution_log).read_text(encoding="utf-8"))
+        if execution.get("outcome") != "passed" or len(execution.get("processes", [])) != 2:
+            raise ValueError("require two successful recorded extraction processes")
+        vintage = NewVintage(BASELINE_READER, OWNED + "/", "argentina-repro-check-v2",
+                             ["reproducibility.json", "execution-receipt.json"])
+        record = vintage.publish({"reproducibility.json": result, "execution-receipt.json": execution})
         print(json.dumps({"reproducibility": result, "published": record}, indent=2, sort_keys=True))
         return
     report = build_report(inputs)
