@@ -1,0 +1,126 @@
+{
+  "actual_executions": [
+    {
+      "actual_end_utc": "2026-10-07T18:44:46.664181+00:00",
+      "actual_start_utc": "2026-10-07T18:43:36.976785+00:00",
+      "command": [
+        "/usr/bin/time",
+        "-l",
+        "/Users/chengshuli/world-atlas-workspace/.cache/991-author-slot-preserved-20261006-44ed0b44/ignored-cache/reference-repair-991/runtime-rasterio-1.4.3-py312-arm64/bin/python",
+        "-I",
+        "-S",
+        "-B",
+        "-X",
+        "pycache_prefix=/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/.cache/1421-never-materialized-bytecode",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/coordination/engineering/mongolia-russia-guarded-execution-20261007/run.py",
+        "--commit",
+        "2c8ff13e141498887676b6983fff449d83e0d504",
+        "--out",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/.cache/1421-2c8-run-one"
+      ],
+      "cwd": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work",
+      "elapsed_seconds": 69.685571417,
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "isolated_python": true
+      },
+      "execution_commit": "2c8ff13e141498887676b6983fff449d83e0d504",
+      "exit_code": 0,
+      "limits": [
+        "Native time/RSS is retained literally in stderr. Receipt records actual subprocess terminal status; a failed run is not scientific PASS."
+      ],
+      "mode": "complete original48+8 comparison",
+      "output_directory": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/.cache/1421-2c8-run-one",
+      "pid": 76904,
+      "recorder_sha256": "b6e40af6347adb8b156ca3bd1d8342761fa65b99b9a562bf7be8a6aeab2ab18e",
+      "terminal_files": {
+        "stderr": {
+          "bytes": 777,
+          "sha256": "bedfbfa3dfdcf6975521d18176bc01bcebc4156099536afe40ae09818a7eb016"
+        },
+        "stdout": {
+          "bytes": 146,
+          "sha256": "83cd777d1dc3e47aea4135937ac6d9e806bab44cf915c24035759f042194813b"
+        }
+      }
+    },
+    {
+      "actual_end_utc": "2026-10-07T18:46:54.499858+00:00",
+      "actual_start_utc": "2026-10-07T18:45:33.609949+00:00",
+      "command": [
+        "/usr/bin/time",
+        "-l",
+        "/Users/chengshuli/world-atlas-workspace/.cache/991-author-slot-preserved-20261006-44ed0b44/ignored-cache/reference-repair-991/runtime-rasterio-1.4.3-py312-arm64/bin/python",
+        "-I",
+        "-S",
+        "-B",
+        "-X",
+        "pycache_prefix=/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/.cache/1421-never-materialized-bytecode",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/coordination/engineering/mongolia-russia-guarded-execution-20261007/run.py",
+        "--commit",
+        "2c8ff13e141498887676b6983fff449d83e0d504",
+        "--out",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/.cache/1421-2c8-run-two"
+      ],
+      "cwd": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work",
+      "elapsed_seconds": 80.887989791,
+      "environment": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "isolated_python": true
+      },
+      "execution_commit": "2c8ff13e141498887676b6983fff449d83e0d504",
+      "exit_code": 0,
+      "limits": [
+        "Native time/RSS is retained literally in stderr. Receipt records actual subprocess terminal status; a failed run is not scientific PASS."
+      ],
+      "mode": "complete original48+8 comparison",
+      "output_directory": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/.cache/1421-2c8-run-two",
+      "pid": 82658,
+      "recorder_sha256": "b6e40af6347adb8b156ca3bd1d8342761fa65b99b9a562bf7be8a6aeab2ab18e",
+      "terminal_files": {
+        "stderr": {
+          "bytes": 777,
+          "sha256": "3cc00042837295d0a11ed1f466133899a7ecd07685a4c3e0ba761a9c179e8506"
+        },
+        "stdout": {
+          "bytes": 146,
+          "sha256": "83cd777d1dc3e47aea4135937ac6d9e806bab44cf915c24035759f042194813b"
+        }
+      }
+    }
+  ],
+  "all_three_complete_tables_each48_ids": true,
+  "combined_input_encoded_plus_consumed_decoded": 236929033,
+  "limits": [
+    "Stored whole-byte/JSON comparison only; no third geometry/predicate/area run. The original source physical/legal/precision/ownership limitations and Russia2327-vs2328 mismatch remain. Both actual reports/PIDs/times retained separately."
+  ],
+  "result_counts": {
+    "complete_family_components": 48,
+    "geoboundaries_mng_positive_area_components": 33,
+    "geoboundaries_mng_source_features": 339,
+    "geoboundaries_rus_advertised_source_features": 2328,
+    "geoboundaries_rus_positive_area_components": 34,
+    "geoboundaries_rus_source_features": 2327,
+    "mris_nso_positive_area_components": 37,
+    "mris_nso_source_features": 339,
+    "positive_length_contacts": 8
+  },
+  "runtime_after_whole_origin_rows": 318,
+  "same_entire_original_scientific_JSON_including_all_properties_scalars_method_unknowns": true,
+  "science_freeze": "2c8ff13e141498887676b6983fff449d83e0d504",
+  "status": "PASS",
+  "whole_files": [
+    {
+      "bytes": 84219,
+      "file": "comparison.json",
+      "sha256": "7e7d7e8fed0eca154905694c92e8f69bed01b03eece8f5208b5f05fc7ebb154e",
+      "whole_pair_bytes_equal": true
+    },
+    {
+      "bytes": 340821,
+      "file": "input-receipt.json",
+      "sha256": "221ade4b2e99142bb6f370c5a1362e34c864b544f590d90988217a9241fc92a4",
+      "whole_pair_bytes_equal": true
+    }
+  ]
+}
