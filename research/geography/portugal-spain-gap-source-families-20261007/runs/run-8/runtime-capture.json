@@ -1,0 +1,16 @@
+{
+  "schema": "worldatlas-source-analysis-runtime-v1",
+  "python": "3.12.14",
+  "architecture": "arm64",
+  "packages": {
+    "numpy": "2.3.5",
+    "Pillow": "12.3.0",
+    "pyproj": "3.7.2 (PROJ 9.5.1)",
+    "Shapely": "2.1.2 (GEOS 3.13.1)",
+    "zstandard-cli": "1.4.5"
+  },
+  "limits": [
+    "Runtime versions identify the captured analysis environment; byte-identical reproduction remains the acceptance check.",
+    "The bounded JRC TIFF reader decodes only selected internal tiles and does not expand full rasters."
+  ]
+}

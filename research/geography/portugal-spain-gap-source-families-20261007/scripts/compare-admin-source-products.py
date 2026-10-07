@@ -28,6 +28,12 @@ def sha(value: bytes) -> str:
     return hashlib.sha256(value).hexdigest()
 
 
+def covers_component(source, component, source_crs: str, component_crs: str) -> bool:
+    if source_crs != component_crs:
+        raise ValueError(f"coverage predicate CRS mismatch: {source_crs} != {component_crs}")
+    return source.covers(component)
+
+
 def main() -> None:
     index = json.loads(INDEX_PATH.read_text())
     components = json.loads(GEOMETRY_PATH.read_text())["features"]
@@ -72,6 +78,18 @@ def main() -> None:
             geoms.append(geom)
             projected_geoms.append(transform(project, geom))
         tree = STRtree(projected_geoms)
+        control_source = projected_geoms[0]
+        inside = control_source.representative_point()
+        control_minx, control_miny, control_maxx, control_maxy = control_source.bounds
+        outside = shape({"type": "Point", "coordinates": [control_maxx + max(1_000_000.0, control_maxx - control_minx + 1.0), control_maxy + max(1_000_000.0, control_maxy - control_miny + 1.0)]})
+        coverage_controls = {
+            "crs": AREA_CRS,
+            "production_predicate": "covers_component(source_projected, component_projected, source_crs, component_crs)",
+            "positive_control": {"source_feature_id": features[0]["source_id"], "component_geometry": "representative point of same projected source feature", "covered": covers_component(control_source, inside, AREA_CRS, AREA_CRS)},
+            "negative_control": {"source_feature_id": features[0]["source_id"], "component_geometry": "point beyond projected source bounds", "covered": covers_component(control_source, outside, AREA_CRS, AREA_CRS)},
+        }
+        if not coverage_controls["positive_control"]["covered"] or coverage_controls["negative_control"]["covered"]:
+            raise SystemExit(f"administrative source coverage predicate controls failed: {product['key']}")
         candidates = 0
         component_intersect_count = 0
         component_positive_area_count = 0
@@ -92,7 +110,7 @@ def main() -> None:
                 source = projected_geoms[idx]
                 intersection = component_proj.intersection(source)
                 projected_area = intersection.area
-                source_covers = source.covers(component)
+                source_covers = covers_component(source, component_proj, AREA_CRS, AREA_CRS)
                 row = {
                     "component_id": fid,
                     "source_product": product["key"],
@@ -163,6 +181,7 @@ def main() -> None:
             "controls": {
                 "positive_control": {k: positive_control[k] for k in ("component_id", "source_feature_id", "positive_area_overlap", "intersection_area_m2_equal_area")},
                 "negative_control": negative_control,
+                "coverage_predicate": coverage_controls,
             },
         })
     result = {

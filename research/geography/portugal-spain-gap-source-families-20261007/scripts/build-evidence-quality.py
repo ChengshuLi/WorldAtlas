@@ -194,8 +194,8 @@ def main() -> None:
         "validation": validation,
         "stages": {"research": "complete", "implementation": "not-proposed", "geographic_approval": "unapproved"},
         "commands": [
-            "python3 research/geography/portugal-spain-gap-source-families-20261007/scripts/run-complete-analysis.py run-1",
-            "python3 research/geography/portugal-spain-gap-source-families-20261007/scripts/run-complete-analysis.py run-2",
+            "python3 research/geography/portugal-spain-gap-source-families-20261007/scripts/run-complete-analysis.py run-7",
+            "python3 research/geography/portugal-spain-gap-source-families-20261007/scripts/run-complete-analysis.py run-8",
             "python3 research/geography/portugal-spain-gap-source-families-20261007/scripts/finalize-evidence-lock.py",
             "node scripts/evidence-quality.mjs research/geography/portugal-spain-gap-source-families-20261007/evidence-quality.json",
         ],

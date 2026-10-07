@@ -72,11 +72,14 @@ def main() -> None:
     for product in admin["source_products"]:
         controls = product["controls"]
         positive, negative = controls["positive_control"], controls["negative_control"]
+        coverage = controls["coverage_predicate"]
         if not positive["positive_area_overlap"] or positive["intersection_area_m2_equal_area"] <= 0:
             raise SystemExit(f"administrative positive control failed: {product['source_product']}")
         if negative["intersects"] or negative["distance_m_equal_area"] <= 0:
             raise SystemExit(f"administrative negative control failed: {product['source_product']}")
-        checks.append({"method": "full-simplified-admin-overlay", "source_product": product["source_product"], "positive": positive, "negative": negative})
+        if coverage["crs"] != "EPSG:6933" or not coverage["positive_control"]["covered"] or coverage["negative_control"]["covered"]:
+            raise SystemExit(f"administrative per-feature coverage predicate controls failed: {product['source_product']}")
+        checks.append({"method": "full-simplified-admin-overlay", "source_product": product["source_product"], "positive": positive, "negative": negative, "coverage_predicate": coverage})
 
     positive, negative = apa["controls"]["positive_control"], apa["controls"]["negative_control"]
     if not positive["intersects"] or positive["line_length_inside_component_m"] <= 0 or negative["intersects"] or negative["line_length_inside_component_m"] != 0:
@@ -122,9 +125,15 @@ def main() -> None:
     for row in checks:
         if row["method"] == "full-simplified-admin-overlay":
             slug = row["source_product"].replace(":", "-")
+            positive_evidence = dict(row["positive"])
+            positive_evidence["coverage_predicate_control"] = row["coverage_predicate"]["positive_control"]
+            positive_evidence["coverage_predicate_crs"] = row["coverage_predicate"]["crs"]
+            negative_evidence = dict(row["negative"])
+            negative_evidence["coverage_predicate_control"] = row["coverage_predicate"]["negative_control"]
+            negative_evidence["coverage_predicate_crs"] = row["coverage_predicate"]["crs"]
             receipts.extend([
-                (f"admin-{slug}", "positive-control", row["positive"]),
-                (f"admin-{slug}", "negative-control", row["negative"]),
+                (f"admin-{slug}", "positive-control", positive_evidence),
+                (f"admin-{slug}", "negative-control", negative_evidence),
             ])
         elif row["method"] == "complete-APA-WFD-line-overlay":
             receipts.extend([

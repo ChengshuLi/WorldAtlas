@@ -41,7 +41,7 @@ def sha(path: Path) -> str:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("run_id", choices=("run-1", "run-2"))
+    parser.add_argument("run_id", choices=("run-1", "run-2", "run-3", "run-4", "run-5", "run-6", "run-7", "run-8"))
     args = parser.parse_args()
     destination = RUNS / args.run_id
     if destination.exists():

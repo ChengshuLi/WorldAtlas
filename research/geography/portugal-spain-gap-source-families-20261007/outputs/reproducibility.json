@@ -13,20 +13,20 @@
       "research/geography/portugal-spain-gap-source-families-20261007/scripts/assemble-source-status.py",
       "research/geography/portugal-spain-gap-source-families-20261007/scripts/validate-source-controls.py"
     ],
-    "producer_code_sha256": "d7fb044da19192bcb665338151a1511ad4792f77e1301214764e87b2b860d2c0",
-    "sha256": "596336c7dfbe90fad7cc37e0ff7e09e6412351525b14eb79ba522dee778c6813"
+    "producer_code_sha256": "eb51b8ac9f561aa219df21670c749e152e884cccc012d1d46e19f68682a2fd8f",
+    "sha256": "ff8ab28ffec5ef309d6db7cd6bcecf661a845811dc05920475e8ee2c456d3020"
   },
   "identical_output_sha256": true,
   "limits": [
     "Capture timestamps differ by design; every complete analysis output file has an identical whole-file hash across both runs.",
     "Determinism confirms computational reproducibility only and does not resolve source availability, licensing, historical coverage, or classification."
   ],
-  "output_count": 18,
+  "output_count": 19,
   "outputs": [
     {
-      "bytes": 244210,
+      "bytes": 245504,
       "path": "administrative-source-overlays.json",
-      "sha256": "199dbdbbd7b5296adf74b2f18f7e898c9b4b82c63a79fe7d886ae09bb5ee6f67"
+      "sha256": "7498542b1619ba50e193d7e7794cd130cc96e198a488f8d916a73a248a44a2c3"
     },
     {
       "bytes": 45549,
@@ -34,24 +34,24 @@
       "sha256": "7e6bd8243839f392752d989f48b6dcb30b673e96640b51ebdbc0927166c92a38"
     },
     {
-      "bytes": 427,
+      "bytes": 670,
       "path": "control-admin-gb-ESP-ADM3-negative-control.json",
-      "sha256": "fcc3e6582adae3d35c33f1c4437133025fd92a984b208ab5ea09557bbd773595"
+      "sha256": "dcd7b9aab3ad5285d2d82a7a7b7ea5c6d0215781db4d78698462075d79193ab3"
     },
     {
-      "bytes": 376,
+      "bytes": 635,
       "path": "control-admin-gb-ESP-ADM3-positive-control.json",
-      "sha256": "f334a358b92d0ddc8146ef288f29a33a4c1771e8c9ab00c3fd72b67ff61883b8"
+      "sha256": "31d06a104598efb6661c39e43ee036a073b619b1401da6f58ed65c8e24f455f9"
     },
     {
-      "bytes": 427,
+      "bytes": 669,
       "path": "control-admin-gb-PRT-ADM2-negative-control.json",
-      "sha256": "072da719cc2381fd3381f80cc5e81ea2071050707015c6e9cb68eeea60d994c6"
+      "sha256": "3267bad3662e9f45740c8ad3fdf20f3b0c7f1b3980671c3ab6ce9275b352e135"
     },
     {
-      "bytes": 376,
+      "bytes": 634,
       "path": "control-admin-gb-PRT-ADM2-positive-control.json",
-      "sha256": "0361ea09de1a4d8de846e95f9d54c2302971118fc5f04534ee8ed9398a30217e"
+      "sha256": "b1d6d9cb521c39234ce017e0f577d3ee715a97bff3fd91e85c5a84ee6cdf01af"
     },
     {
       "bytes": 358,
@@ -84,6 +84,11 @@
       "sha256": "59c345e948fdcbd4bc7547cca8ad90dce6a0a5401624b01e03a3d21ed212fb84"
     },
     {
+      "bytes": 5686,
+      "path": "execution-code-input-binding.json",
+      "sha256": "1cc04f0f8180cf8cc5919f59db171c373e95c62c72b716e2fa4cb883e42daf7c"
+    },
+    {
       "bytes": 629423,
       "path": "jrc-2024-component-month-summary.json",
       "sha256": "0bf9a5fc88b98ac0328ec5e49ea93dba6aef3cc94913880c3051f8f92e65223d"
@@ -94,9 +99,9 @@
       "sha256": "13bdb51e04e5afed8c42683fb4e0d9ee5454ff75bb431f096e26704445441b93"
     },
     {
-      "bytes": 2158,
+      "bytes": 5813,
       "path": "reproducibility.json",
-      "sha256": "cbfd2acba960f18a50781921973b537c62a83bdc703b8cd8fefb2ea9b0d8a910"
+      "sha256": "c6f30a2e976fd91531e6472bf10b67821965a661113eddc0a77db4aacafaa011"
     },
     {
       "bytes": 526,
@@ -106,26 +111,26 @@
     {
       "bytes": 602633,
       "path": "source-status-matrix.json",
-      "sha256": "4f52f16e17710ae0b06a55450a142fea2389f1c6258d8a1b9340e1ddb17c6fd2"
+      "sha256": "1c02f0fa73f4b13211c275c1a4214424e4835df8469edd96e8dbb467b2181743"
     },
     {
-      "bytes": 5971,
+      "bytes": 7209,
       "path": "validation-controls.json",
-      "sha256": "329994cdd68b9e6dc2b7a436bb9d80e5c3392e09e38bb0496de0089927afd845"
+      "sha256": "66776e531dcf6c6a5a9378cc9d0a0ecfd1a73a57908179062bb69c7bcc26f12d"
     }
   ],
   "run_ids": [
-    "run-1",
-    "run-2"
+    "run-7",
+    "run-8"
   ],
   "run_manifests": {
-    "run-1": {
-      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/run-manifest.json",
-      "sha256": "a1df14de504bba55631e3d3fa2da453070391291e3a1a18f5ecfc612cda27113"
+    "run-7": {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-7/run-manifest.json",
+      "sha256": "ae8f540a645ef5b61366be4385d7951fa5e85e5fdd03c4c99c18921ae03a360b"
     },
-    "run-2": {
-      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/run-manifest.json",
-      "sha256": "6166b63912273eadeaedb9b5d619204bb00045f4d3526cd54718076e6b50deb8"
+    "run-8": {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-8/run-manifest.json",
+      "sha256": "dd165f486cb384eba468fd9455b1491f613466ebf7a88ea1cd142c800728641f"
     }
   },
   "schema": "worldatlas-source-run-reproducibility-v1",

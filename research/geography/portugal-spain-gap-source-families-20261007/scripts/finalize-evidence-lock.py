@@ -46,8 +46,9 @@ def inventory(*directories: Path) -> list[dict[str, object]]:
 
 def main() -> None:
     runs = PACKAGE / "runs"
-    first = json.loads((runs / "run-1/run-manifest.json").read_text())
-    second = json.loads((runs / "run-2/run-manifest.json").read_text())
+    run_ids = ("run-7", "run-8")
+    first = json.loads((runs / f"{run_ids[0]}/run-manifest.json").read_text())
+    second = json.loads((runs / f"{run_ids[1]}/run-manifest.json").read_text())
     left = {row["path"]: row for row in first["outputs"]}
     right = {row["path"]: row for row in second["outputs"]}
     if left != right:
@@ -55,14 +56,14 @@ def main() -> None:
     reproducibility = {
         "schema": "worldatlas-source-run-reproducibility-v1",
         "scope": {"families": 52, "components": 70, "contacts": 57},
-        "run_ids": ["run-1", "run-2"],
+        "run_ids": list(run_ids),
         "output_count": len(left),
         "identical_output_sha256": True,
         "outputs": list(left.values()),
         "run_manifests": {
             name: {"path": f"research/geography/portugal-spain-gap-source-families-20261007/runs/{name}/run-manifest.json",
                   "sha256": sha(runs / name / "run-manifest.json")}
-            for name in ("run-1", "run-2")
+            for name in run_ids
         },
         "limits": [
             "Capture timestamps differ by design; every complete analysis output file has an identical whole-file hash across both runs.",
