@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "tested_code_commit": "d7f547ccb551f7be51fa8557e36df9c1ac09c424",
+  "tested_code_commit": "85d12fe728365fc5476a4b1ecc2457b1fa884bb2",
   "node_tests": 39,
   "python_execution_controls": 7,
   "python_scientific_cli_controls": 10,
@@ -16,5 +16,9 @@
     "Historical packet repairs retain existing issue ownership",
     "Existing-worker adoption and future exact-head handoffs are not yet verified",
     "No geography, source authority, import or publication approval"
+  ],
+  "reviewer_supplied_regressions": [
+    "Reject undeclared namespace-package code",
+    "Reject aggregate decoded output exceeding the phase budget"
   ]
 }
