@@ -138,7 +138,7 @@ def main():
         "physical_island_group_count": len(physical_rows),
         "groups": {group: sum(row["group"] == group for row in physical_rows) for group in group_names},
         "rows": physical_rows,
-        "archive_group_identity_rows": {group: archive_subjects.get("gb:KIR:ADM1:" + source_ids[group], {}).get("archive_records", []) for group in group_names},
+        "archive_group_identity_rows": {group: archive_subjects.get(source_ids[group], {}).get("archive_records", []) for group in group_names},
         "source_feature_component_groups": {feature["name"]: {"shape_id": feature["source_shape_id"], "feature_id": feature["source_feature_id"], "component_count": feature["component_count"], "part_numbers": [part["source_part"] for part in feature["parts"]]} for feature in inventory["source_feature_component_inventory"]},
         "source_component_status": source_component_status,
         "bbox_screen_unmatched_source_components": unmatched,

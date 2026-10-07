@@ -1603,9 +1603,81 @@
     }
   ],
   "archive_group_identity_rows": {
-    "Gilbert Islands": [],
-    "Phoenix Islands": [],
-    "Line Islands": []
+    "Gilbert Islands": [
+      {
+        "id": "geo:province:4459a3034470eceb:GIL",
+        "name": "Gilbert Islands",
+        "level": "province",
+        "parent_id": "geo:area:GIL",
+        "metadata": {
+          "source": "gb:KIR:ADM1",
+          "basis": "Named source administrative unit grouped within this geographic area",
+          "kind": "whole_territory",
+          "original_unit_id": "world/continent:Oceania/subcontinent:Micronesia/region:Kiribati/area:Kiribati/province:97431129B55805139245338"
+        }
+      },
+      {
+        "id": "world/continent:Oceania/subcontinent:Micronesia/region:Kiribati/area:Kiribati/province:97431129B55805139245338",
+        "name": "Gilbert Islands",
+        "level": "province",
+        "parent_id": "world/continent:Oceania/subcontinent:Micronesia/region:Kiribati/area:Kiribati",
+        "metadata": {
+          "basis": "Source territory represented as a single-location province",
+          "source": "gb:KIR:ADM1",
+          "kind": "whole_territory"
+        }
+      }
+    ],
+    "Phoenix Islands": [
+      {
+        "id": "geo:province:b60ad54d33b6d22f:GIL",
+        "name": "Phoenix Islands",
+        "level": "province",
+        "parent_id": "geo:area:GIL",
+        "metadata": {
+          "source": "gb:KIR:ADM1",
+          "basis": "Named source administrative unit grouped within this geographic area",
+          "kind": "whole_territory",
+          "original_unit_id": "world/continent:Oceania/subcontinent:Micronesia/region:Kiribati/area:Kiribati/province:97431129B36644055464690"
+        }
+      },
+      {
+        "id": "world/continent:Oceania/subcontinent:Micronesia/region:Kiribati/area:Kiribati/province:97431129B36644055464690",
+        "name": "Phoenix Islands",
+        "level": "province",
+        "parent_id": "world/continent:Oceania/subcontinent:Micronesia/region:Kiribati/area:Kiribati",
+        "metadata": {
+          "basis": "Source territory represented as a single-location province",
+          "source": "gb:KIR:ADM1",
+          "kind": "whole_territory"
+        }
+      }
+    ],
+    "Line Islands": [
+      {
+        "id": "geo:province:390364d58e8a78b9:LIN",
+        "name": "Line Islands",
+        "level": "province",
+        "parent_id": "geo:area:LIN",
+        "metadata": {
+          "source": "gb:KIR:ADM1",
+          "basis": "Named source administrative unit grouped within this geographic area",
+          "kind": "whole_territory",
+          "original_unit_id": "world/continent:Oceania/subcontinent:Micronesia/region:Kiribati/area:Kiribati/province:97431129B35506555718846"
+        }
+      },
+      {
+        "id": "world/continent:Oceania/subcontinent:Micronesia/region:Kiribati/area:Kiribati/province:97431129B35506555718846",
+        "name": "Line Islands",
+        "level": "province",
+        "parent_id": "world/continent:Oceania/subcontinent:Micronesia/region:Kiribati/area:Kiribati",
+        "metadata": {
+          "basis": "Source territory represented as a single-location province",
+          "source": "gb:KIR:ADM1",
+          "kind": "whole_territory"
+        }
+      }
+    ]
   },
   "source_feature_component_groups": {
     "Gilbert Islands": {
