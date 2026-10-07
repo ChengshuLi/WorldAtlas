@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3c89d6c5ab9db29126ebfdf4a6baf58ca5d902aab5c9236a23066fab5314a4d9/work/coordination/engineering/global-actionability-routing-20261007/verify.py", line 151, in <module>
+    result = verify(pathlib.Path(args.root))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3c89d6c5ab9db29126ebfdf4a6baf58ca5d902aab5c9236a23066fab5314a4d9/work/coordination/engineering/global-actionability-routing-20261007/verify.py", line 80, in verify
+    raise ValueError('All numerical-first membership, including five zero-area cases, differs')
+ValueError: All numerical-first membership, including five zero-area cases, differs

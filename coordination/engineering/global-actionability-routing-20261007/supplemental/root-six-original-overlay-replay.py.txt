@@ -1,0 +1,22 @@
+import pathlib,json,subprocess,types,hashlib
+from shapely.geometry import shape,mapping
+R=pathlib.Path(__file__).parent;freeze='104091cfecd9c83a53f3e6e62f95b0a0c8074351';p='coordination/engineering/global-physical-comparison-20261006/comparison.py';raw=subprocess.check_output(['git','-C',str(R.parents[1]/'WorldAtlas'),'show',freeze+':'+p]);mod=types.ModuleType('root_actual_comparison');exec(compile(raw,p,'exec'),mod.__dict__);witness=json.loads((R/'root-six-largest-closure-witnesses.json').read_bytes());results=[]
+canon=lambda x:(json.dumps(x,sort_keys=True,separators=(',',':'),ensure_ascii=False)+'\n').encode()
+for w in witness['witnesses']:
+ G=shape(w['complete_candidate']['geometry']);levels={k:[] for k in range(1,5)};q=w['complete_original_scientific_row']['query_relations']
+ for rel in q:
+  if rel.get('witness')=='complete-candidate-reconstruction':
+   assert rel['source_covers_candidate'] is True;levels[rel['source_level']].extend(list(G.geoms) if G.geom_type=='MultiPolygon' else [G])
+  elif rel.get('witness_geometry'):
+   piece=shape(rel['witness_geometry'])
+   if piece.area>0:
+    def members(x):
+     if x.geom_type=='Polygon':return [x]
+     if x.geom_type in ('MultiPolygon','GeometryCollection'):return [m for child in x.geoms for m in members(child)]
+     return []
+    levels[rel['source_level']].extend(members(piece))
+ observed=mod.alternating_support(G,levels);rows={}
+ for key in ['mapped_land_support','mapped_inland_water_support','outside_mapped_L1_context','missing_reconstruction','extra_reconstruction','contradictory_land_water_support']:
+  actual=observed[key];original=w['complete_original_scientific_row']['complete_support'][key]['geometry'];rows[key]={'canonical_geometry_equal':canon(mapping(actual))==canon(original),'actual_sha256':hashlib.sha256(canon(mapping(actual))).hexdigest(),'actual_planar_area':actual.area,'original_planar_area':shape(original).area,'actual_valid':actual.is_valid}
+ assert all(v['canonical_geometry_equal'] for v in rows.values());results.append({'component_id':w['component_id'],'complete_query_observations':len(q),'positive_whole_query_pieces':sum(map(len,levels.values())),'actual_original_operator_replays':rows})
+out={'result':'PASS','scientific_freeze':freeze,'executed_original_module_path':p,'executed_original_module_sha256':hashlib.sha256(raw).hexdigest(),'complete_six_witness_operator_replays':results,'limits':['Actual original operators replayed only on complete retained six-case query/intersection pointsets, not reexecution of source queries or third worldwide run. Original unknowns remain; no coordinate edits, new algorithm, suppression or physical authority approval.']};(R/'root-six-original-overlay-replay.json').write_text(json.dumps(out,indent=2)+'\n');print(json.dumps({'result':'PASS','complete_cases':len(results),'exact_operator_geometries':len(results)*6}))

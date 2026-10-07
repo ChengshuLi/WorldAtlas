@@ -1,0 +1,595 @@
+{
+  "result": "PASS",
+  "input_whole_sha256": "0103c6e6184c3113afe4c2c817b75aa68d7c65bff364ea2f5086b372a2d04a5c",
+  "method": "Exact Fraction orientation, segment bounds and even-odd ring crossing on original binary64 vertices; no decimal rounding or tolerance",
+  "complete_witnesses": [
+    {
+      "complete_triangle_centroid_observations": [
+        {
+          "polygon": 0,
+          "exact_rational_triangle_centroid": [
+            [
+              "-17930324732194549",
+              "105553116266496"
+            ],
+            [
+              "26787010249350011",
+              "422212465065984"
+            ]
+          ],
+          "approximate_centroid": [
+            -169.87015984374,
+            63.44438515135667
+          ],
+          "exact_candidate_relation": "inside",
+          "GEOS_approximate_relation": "inside"
+        }
+      ],
+      "component_id": "physical-component:0a2430767e7d92c53494c508b51959edb5806afe2b16ca3046d3bfe5b555ce78",
+      "target_relation": "missing_reconstruction",
+      "whole_candidate_sha256": "d35f7467f96a94bd607674703b688679aab68e7bca079daa50b435a75750de56",
+      "complete_residue_vertices": [
+        {
+          "polygon": 0,
+          "ring": 0,
+          "vertex": 0,
+          "point": [
+            -169.86227642239,
+            63.44206851396
+          ],
+          "exact_binary64_rational_candidate_relation": "outside",
+          "GEOS_point_relation": "outside",
+          "boundary_distance_degrees_diagnostic_only": 5.753743845690132e-13
+        },
+        {
+          "polygon": 0,
+          "ring": 0,
+          "vertex": 1,
+          "point": [
+            -169.86227642265,
+            63.44206851396
+          ],
+          "exact_binary64_rational_candidate_relation": "outside",
+          "GEOS_point_relation": "outside",
+          "boundary_distance_degrees_diagnostic_only": 1.2225807815013131e-12
+        },
+        {
+          "polygon": 0,
+          "ring": 0,
+          "vertex": 2,
+          "point": [
+            -169.88592668618,
+            63.44901842615
+          ],
+          "exact_binary64_rational_candidate_relation": "outside",
+          "GEOS_point_relation": "outside",
+          "boundary_distance_degrees_diagnostic_only": 3.3044727623302688e-12
+        }
+      ],
+      "counts": {
+        "inside": 0,
+        "boundary": 0,
+        "outside": 3
+      },
+      "floating_vs_exact_vertex_disagreements": 0
+    },
+    {
+      "complete_triangle_centroid_observations": [
+        {
+          "polygon": 0,
+          "exact_rational_triangle_centroid": [
+            [
+              "958010691217065",
+              "17592186044416"
+            ],
+            [
+              "3450382929096935",
+              "140737488355328"
+            ]
+          ],
+          "approximate_centroid": [
+            54.456602993983836,
+            24.51644525860484
+          ],
+          "exact_candidate_relation": "inside",
+          "GEOS_approximate_relation": "inside"
+        }
+      ],
+      "component_id": "physical-component:3cae5043956685a311232bfef802a9e02f99a5a87d39f4afb02ca851792d3b7b",
+      "target_relation": "extra_reconstruction",
+      "whole_candidate_sha256": "6a9c4747c85f277b8b7208562ddf978a37330ab5071f526c4ff2d2f26ca85138",
+      "complete_residue_vertices": [
+        {
+          "polygon": 0,
+          "ring": 0,
+          "vertex": 0,
+          "point": [
+            54.456032379134385,
+            24.515684276573833
+          ],
+          "exact_binary64_rational_candidate_relation": "boundary",
+          "GEOS_point_relation": "boundary",
+          "boundary_distance_degrees_diagnostic_only": 0.0
+        },
+        {
+          "polygon": 0,
+          "ring": 0,
+          "vertex": 1,
+          "point": [
+            54.45688829937473,
+            24.51682575169289
+          ],
+          "exact_binary64_rational_candidate_relation": "outside",
+          "GEOS_point_relation": "outside",
+          "boundary_distance_degrees_diagnostic_only": 9.702746785026996e-16
+        },
+        {
+          "polygon": 0,
+          "ring": 0,
+          "vertex": 2,
+          "point": [
+            54.45688830344239,
+            24.5168257475478
+          ],
+          "exact_binary64_rational_candidate_relation": "outside",
+          "GEOS_point_relation": "outside",
+          "boundary_distance_degrees_diagnostic_only": 2.052823806149188e-15
+        }
+      ],
+      "counts": {
+        "inside": 0,
+        "boundary": 1,
+        "outside": 2
+      },
+      "floating_vs_exact_vertex_disagreements": 0
+    },
+    {
+      "complete_triangle_centroid_observations": [
+        {
+          "polygon": 0,
+          "exact_rational_triangle_centroid": [
+            [
+              "8531714000448215",
+              "52776558133248"
+            ],
+            [
+              "-8744587182933745",
+              "844424930131968"
+            ]
+          ],
+          "approximate_centroid": [
+            161.6572641760326,
+            -10.355671500090752
+          ],
+          "exact_candidate_relation": "inside",
+          "GEOS_approximate_relation": "inside"
+        }
+      ],
+      "component_id": "physical-component:3f8309e420055c726486ecdb318e368769eb52d038fcb6d8266106380217f8fd",
+      "target_relation": "extra_reconstruction",
+      "whole_candidate_sha256": "c034f69376b4e7cea80636e41e13ee3ed8aae7789cdf137a4d7af26a42ef230e",
+      "complete_residue_vertices": [
+        {
+          "polygon": 0,
+          "ring": 0,
+          "vertex": 0,
+          "point": [
+            161.66140304073542,
+            -10.359039857371286
+          ],
+          "exact_binary64_rational_candidate_relation": "outside",
+          "GEOS_point_relation": "outside",
+          "boundary_distance_degrees_diagnostic_only": 3.981063264218926e-15
+        },
+        {
+          "polygon": 0,
+          "ring": 0,
+          "vertex": 1,
+          "point": [
+            161.66140154769982,
+            -10.35904136115672
+          ],
+          "exact_binary64_rational_candidate_relation": "outside",
+          "GEOS_point_relation": "outside",
+          "boundary_distance_degrees_diagnostic_only": 5.889134541269223e-15
+        },
+        {
+          "polygon": 0,
+          "ring": 0,
+          "vertex": 2,
+          "point": [
+            161.64898793966262,
+            -10.348933281744248
+          ],
+          "exact_binary64_rational_candidate_relation": "inside",
+          "GEOS_point_relation": "inside",
+          "boundary_distance_degrees_diagnostic_only": 5.943118048944849e-15
+        }
+      ],
+      "counts": {
+        "inside": 1,
+        "boundary": 0,
+        "outside": 2
+      },
+      "floating_vs_exact_vertex_disagreements": 0
+    },
+    {
+      "complete_triangle_centroid_observations": [
+        {
+          "polygon": 0,
+          "exact_rational_triangle_centroid": [
+            [
+              "-2236062962046901",
+              "35184372088832"
+            ],
+            [
+              "-21566926489106453",
+              "54043195528445952"
+            ]
+          ],
+          "approximate_centroid": [
+            -63.552731775385524,
+            -0.39906830597673626
+          ],
+          "exact_candidate_relation": "inside",
+          "GEOS_approximate_relation": "inside"
+        }
+      ],
+      "component_id": "physical-component:5ca7f4eeeb6ee0c8d7894daef8287f499e26ab036544a6d0af82c4dd94b4c0a1",
+      "target_relation": "extra_reconstruction",
+      "whole_candidate_sha256": "a970bb10553806f5238bef38eb0d159d893116ccd11c887cc82ce0cecc6dc16b",
+      "complete_residue_vertices": [
+        {
+          "polygon": 0,
+          "ring": 0,
+          "vertex": 0,
+          "point": [
+            -63.579965659701756,
+            -0.4215176635823979
+          ],
+          "exact_binary64_rational_candidate_relation": "outside",
+          "GEOS_point_relation": "outside",
+          "boundary_distance_degrees_diagnostic_only": 1.0029656548876301e-15
+        },
+        {
+          "polygon": 0,
+          "ring": 0,
+          "vertex": 1,
+          "point": [
+            -63.5082,
+            -0.36236
+          ],
+          "exact_binary64_rational_candidate_relation": "boundary",
+          "GEOS_point_relation": "boundary",
+          "boundary_distance_degrees_diagnostic_only": 0.0
+        },
+        {
+          "polygon": 0,
+          "ring": 0,
+          "vertex": 2,
+          "point": [
+            -63.570029666454815,
+            -0.4133272543478108
+          ],
+          "exact_binary64_rational_candidate_relation": "inside",
+          "GEOS_point_relation": "inside",
+          "boundary_distance_degrees_diagnostic_only": 2.571039397506351e-10
+        }
+      ],
+      "counts": {
+        "inside": 1,
+        "boundary": 1,
+        "outside": 1
+      },
+      "floating_vs_exact_vertex_disagreements": 0
+    },
+    {
+      "complete_triangle_centroid_observations": [
+        {
+          "polygon": 0,
+          "exact_rational_triangle_centroid": [
+            [
+              "-8141800501194277",
+              "52776558133248"
+            ],
+            [
+              "4983226548890711",
+              "70368744177664"
+            ]
+          ],
+          "approximate_centroid": [
+            -154.26925872350765,
+            70.81590849922337
+          ],
+          "exact_candidate_relation": "inside",
+          "GEOS_approximate_relation": "outside"
+        },
+        {
+          "polygon": 1,
+          "exact_rational_triangle_centroid": [
+            [
+              "-8142850359407713",
+              "52776558133248"
+            ],
+            [
+              "7475364469318175",
+              "105553116266496"
+            ]
+          ],
+          "approximate_centroid": [
+            -154.28915123356458,
+            70.82087894444247
+          ],
+          "exact_candidate_relation": "inside",
+          "GEOS_approximate_relation": "inside"
+        },
+        {
+          "polygon": 2,
+          "exact_rational_triangle_centroid": [
+            [
+              "-8143032851764877",
+              "52776558133248"
+            ],
+            [
+              "7475455666294085",
+              "105553116266496"
+            ]
+          ],
+          "approximate_centroid": [
+            -154.29260906339695,
+            70.82174293575922
+          ],
+          "exact_candidate_relation": "inside",
+          "GEOS_approximate_relation": "inside"
+        }
+      ],
+      "component_id": "physical-component:5d96fcc21157114564d3f7371b7068867b01716ac55791579875d8667e423748",
+      "target_relation": "missing_reconstruction",
+      "whole_candidate_sha256": "4a9e0bf072025369f6c0a84d1cecc297aeaa1f03da10a18cc6dd3b564652f813",
+      "complete_residue_vertices": [
+        {
+          "polygon": 0,
+          "ring": 0,
+          "vertex": 0,
+          "point": [
+            -154.2689597588343,
+            70.8158337983725
+          ],
+          "exact_binary64_rational_candidate_relation": "outside",
+          "GEOS_point_relation": "outside",
+          "boundary_distance_degrees_diagnostic_only": 4.069278733443651e-15
+        },
+        {
+          "polygon": 0,
+          "ring": 0,
+          "vertex": 1,
+          "point": [
+            -154.27030317537617,
+            70.81616947133892
+          ],
+          "exact_binary64_rational_candidate_relation": "inside",
+          "GEOS_point_relation": "inside",
+          "boundary_distance_degrees_diagnostic_only": 6.5368635390539984e-15
+        },
+        {
+          "polygon": 0,
+          "ring": 0,
+          "vertex": 2,
+          "point": [
+            -154.26851323631243,
+            70.81572222795869
+          ],
+          "exact_binary64_rational_candidate_relation": "outside",
+          "GEOS_point_relation": "outside",
+          "boundary_distance_degrees_diagnostic_only": 2.1727456248649143e-15
+        },
+        {
+          "polygon": 1,
+          "ring": 0,
+          "vertex": 0,
+          "point": [
+            -154.29107990521965,
+            70.82136085191354
+          ],
+          "exact_binary64_rational_candidate_relation": "outside",
+          "GEOS_point_relation": "outside",
+          "boundary_distance_degrees_diagnostic_only": 1.7100672483235157e-15
+        },
+        {
+          "polygon": 1,
+          "ring": 0,
+          "vertex": 1,
+          "point": [
+            -154.2903474261101,
+            70.82117783195987
+          ],
+          "exact_binary64_rational_candidate_relation": "inside",
+          "GEOS_point_relation": "inside",
+          "boundary_distance_degrees_diagnostic_only": 5.091156546623859e-15
+        },
+        {
+          "polygon": 1,
+          "ring": 0,
+          "vertex": 2,
+          "point": [
+            -154.28602636936398,
+            70.82009814945401
+          ],
+          "exact_binary64_rational_candidate_relation": "outside",
+          "GEOS_point_relation": "outside",
+          "boundary_distance_degrees_diagnostic_only": 3.0049690556514344e-15
+        },
+        {
+          "polygon": 2,
+          "ring": 0,
+          "vertex": 0,
+          "point": [
+            -154.29250587454987,
+            70.82171715194423
+          ],
+          "exact_binary64_rational_candidate_relation": "outside",
+          "GEOS_point_relation": "outside",
+          "boundary_distance_degrees_diagnostic_only": 7.357432853574567e-15
+        },
+        {
+          "polygon": 2,
+          "ring": 0,
+          "vertex": 1,
+          "point": [
+            -154.29390837273652,
+            70.82206758798955
+          ],
+          "exact_binary64_rational_candidate_relation": "outside",
+          "GEOS_point_relation": "outside",
+          "boundary_distance_degrees_diagnostic_only": 4.480361196336304e-15
+        },
+        {
+          "polygon": 2,
+          "ring": 0,
+          "vertex": 2,
+          "point": [
+            -154.2914129429045,
+            70.82144406734389
+          ],
+          "exact_binary64_rational_candidate_relation": "outside",
+          "GEOS_point_relation": "outside",
+          "boundary_distance_degrees_diagnostic_only": 2.384611983999358e-15
+        }
+      ],
+      "counts": {
+        "inside": 2,
+        "boundary": 0,
+        "outside": 7
+      },
+      "floating_vs_exact_vertex_disagreements": 0
+    },
+    {
+      "complete_triangle_centroid_observations": [
+        {
+          "polygon": 0,
+          "exact_rational_triangle_centroid": [
+            [
+              "-7386686279561909",
+              "140737488355328"
+            ],
+            [
+              "1419187623890553",
+              "281474976710656"
+            ]
+          ],
+          "approximate_centroid": [
+            -52.48556277281515,
+            5.041967284180348
+          ],
+          "exact_candidate_relation": "inside",
+          "GEOS_approximate_relation": "inside"
+        },
+        {
+          "polygon": 1,
+          "exact_rational_triangle_centroid": [
+            [
+              "-7386486466674217",
+              "140737488355328"
+            ],
+            [
+              "266043522596459",
+              "52776558133248"
+            ]
+          ],
+          "approximate_centroid": [
+            -52.48414301685654,
+            5.040941130051787
+          ],
+          "exact_candidate_relation": "outside",
+          "GEOS_approximate_relation": "outside"
+        }
+      ],
+      "component_id": "physical-component:fc5e0999f7d4dac806e138567d694558853c9ae0796427671c390b2cc3528198",
+      "target_relation": "missing_reconstruction",
+      "whole_candidate_sha256": "45786013f9eb4e013797e81e9a846c7a129f7bb6ed7df4f40e931f11aa49635c",
+      "complete_residue_vertices": [
+        {
+          "polygon": 0,
+          "ring": 0,
+          "vertex": 0,
+          "point": [
+            -52.485056279152616,
+            5.041601208786383
+          ],
+          "exact_binary64_rational_candidate_relation": "outside",
+          "GEOS_point_relation": "outside",
+          "boundary_distance_degrees_diagnostic_only": 8.019284411259072e-16
+        },
+        {
+          "polygon": 0,
+          "ring": 0,
+          "vertex": 1,
+          "point": [
+            -52.485296071842555,
+            5.041774519098667
+          ],
+          "exact_binary64_rational_candidate_relation": "inside",
+          "GEOS_point_relation": "inside",
+          "boundary_distance_degrees_diagnostic_only": 1.8324867866995382e-15
+        },
+        {
+          "polygon": 0,
+          "ring": 0,
+          "vertex": 2,
+          "point": [
+            -52.48633596745028,
+            5.0425261246559945
+          ],
+          "exact_binary64_rational_candidate_relation": "outside",
+          "GEOS_point_relation": "outside",
+          "boundary_distance_degrees_diagnostic_only": 7.712141783875153e-16
+        },
+        {
+          "polygon": 1,
+          "ring": 0,
+          "vertex": 0,
+          "point": [
+            -52.48417199440282,
+            5.040962074157508
+          ],
+          "exact_binary64_rational_candidate_relation": "outside",
+          "GEOS_point_relation": "outside",
+          "boundary_distance_degrees_diagnostic_only": 7.712162880615108e-16
+        },
+        {
+          "polygon": 1,
+          "ring": 0,
+          "vertex": 1,
+          "point": [
+            -52.48320077701419,
+            5.04026010721147
+          ],
+          "exact_binary64_rational_candidate_relation": "inside",
+          "GEOS_point_relation": "inside",
+          "boundary_distance_degrees_diagnostic_only": 8.812681698755981e-16
+        },
+        {
+          "polygon": 1,
+          "ring": 0,
+          "vertex": 2,
+          "point": [
+            -52.485056279152616,
+            5.041601208786383
+          ],
+          "exact_binary64_rational_candidate_relation": "outside",
+          "GEOS_point_relation": "outside",
+          "boundary_distance_degrees_diagnostic_only": 8.019284411259072e-16
+        }
+      ],
+      "counts": {
+        "inside": 2,
+        "boundary": 0,
+        "outside": 4
+      },
+      "floating_vs_exact_vertex_disagreements": 0
+    }
+  ],
+  "limits": [
+    "Exact vertex membership only; this does not prove entire-edge or whole-polygon coverage or diagnose universal source cause. Degrees-distance is descriptive, not acceptance tolerance; no suppression/geometry mutation/water or authority classification."
+  ]
+}
