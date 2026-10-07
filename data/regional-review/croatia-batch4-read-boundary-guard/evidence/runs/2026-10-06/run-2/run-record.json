@@ -1,0 +1,79 @@
+{
+  "factual_limit": "This is a byte/read-boundary reproduction correction; it establishes no new territorial, parent, boundary, completeness, legal or licensing finding.",
+  "historical_baseline": "7646e0962afab6cc4f566439bb2f96890ae4b91e",
+  "historical_pin_count": 62,
+  "inputs": [
+    {
+      "bytes": 13943,
+      "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+      "path": "data/regional-review/regional-review-ce7798317652c0c2/scope.json",
+      "read_boundary": "verified bytes copied into private build packet",
+      "sha256": "ba8a10ae3b8a67410bba8b687e256c44d01828c199b2d30961a678e4f5c3a635"
+    },
+    {
+      "bytes": 24044,
+      "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+      "path": "data/regional-review/regional-review-ce7798317652c0c2/source/issue-419-api-snapshot.json",
+      "read_boundary": "verified bytes copied into private build packet",
+      "sha256": "fad09b6e1744ef65fa88ca0d402f4cd591fded1c5c5a1de4f84fada6750f7403"
+    },
+    {
+      "bytes": 19967,
+      "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+      "path": "data/regional-review/regional-review-ce7798317652c0c2/build_assessment.py",
+      "read_boundary": "verified bytes copied into private build packet",
+      "sha256": "f920c23477f5c98a7adc454ac58673ba24a75d64ee8828b7dc93a8a4b306920b"
+    },
+    {
+      "bytes": 20788018,
+      "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+      "path": "data/regional-review/regional-review-c64d17e99f61d668/source/geoboundaries-9469f09/HRV/ADM2/geoBoundaries-HRV-ADM2.geojson",
+      "read_boundary": "verified bytes copied into private build packet",
+      "sha256": "68a317129a0c295fd8baf7acc0f31ffefdf65ff2f1f62f8ed90a765cc57cf01e"
+    },
+    {
+      "bytes": 35680,
+      "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+      "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-detail-extract.csv",
+      "read_boundary": "verified bytes copied into private build packet",
+      "sha256": "225021e29f4ec2eeeffda3801031f4c0587241e91eed984394c9d2d56b09785c"
+    },
+    {
+      "bytes": 63196,
+      "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+      "path": "data/regional-review/regional-review-ce7798317652c0c2/source/dzs-census-2021-summary-tables.xlsx",
+      "read_boundary": "verified bytes copied into private build packet",
+      "sha256": "99feecc93627db02509aee7d625b391c33a69f201f377464ac15c2fd7c16f20f"
+    },
+    {
+      "bytes": 7090,
+      "commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+      "path": "scripts/evidence/immutable.py",
+      "read_boundary": "compiled from immutable Git blob",
+      "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd"
+    }
+  ],
+  "issue": 1209,
+  "issue_pin_count": 66,
+  "issue_snapshot": {
+    "bytes": 30923,
+    "path": "data/regional-review/croatia-batch4-read-boundary-guard/source/issue-1209-api-snapshot.json",
+    "sha256": "f694f98d653042bffe067c698dd6ec20f8673416dc94d8370937b83e2977694b"
+  },
+  "issue_snapshot_retrieved_at": "2026-10-06T20:55:33Z",
+  "outputs": {
+    "assessment-summary.json": "c5118a9046d10babfeab755e4f3dfbc09d9f5a35269a006820d3b27082c1a467",
+    "province-completeness.csv": "7a46977bafc709cab611f2b0b21fe890c3e8ffdcd067c494f7465424c1abba37",
+    "scoped-location-assessments.csv": "91d12e56fa600e4cbeebdc7d12c82f131aded59a8a38a3d87eb8ed8f64429420"
+  },
+  "pinned_commit": "dd096da1b7a8c28f4f824d178a16e59ecdc2ac7e",
+  "runner": {
+    "bytes": 17640,
+    "commit": "741d8c8fa3b9909177937c9433a9e6962bd3d7b3",
+    "git_blob": "49bd46c516afbcfe93ea28f4206cad55e02e87b9",
+    "path": "data/regional-review/croatia-batch4-read-boundary-guard/reproduce.py",
+    "sha256": "9ca5739464e5793eda149f74079f9d07545a71f10aeff8ccd45c96e4f6478d74"
+  },
+  "subject_count": 224,
+  "subject_ids_sha256": "c5816fc5587099904fd5c5cff51801676ec361606153cb39c70e9fb19ef0f116"
+}
