@@ -1,7 +1,7 @@
 """Directed complete-pointset fixtures, not additional counted scientific runs."""
 import pathlib,sys,json,copy,subprocess,tempfile
 from unittest.mock import patch
-from shapely.geometry import box,mapping,LineString,Point,Polygon
+from shapely.geometry import box,mapping,LineString,Point,Polygon,GeometryCollection
 from shapely.errors import GEOSException
 P=pathlib.Path(__file__).resolve().parent;sys.path.insert(0,str(P))
 import numeric_kernel as k
@@ -46,6 +46,9 @@ def run():
     u=box(5,5,15,15)
     partial=k.diagnose(mapping(g),mapping(u),mapping(box(6,6,9,9)),mapping(box(0,0,4,4)))
     assert partial['coverage_observation']['status']=='literal-positive-area-overlap-and-outside-member-union' and partial['predicates']['partition_equals_original']is False and partial['coverage_observation']['partition_recovery']=='not-certified-by-coverage-observation';passed.append('partial-relation-does-not-certify-complete-partition')
+    line=LineString([(10,10),(11,11)])
+    residual=k.diagnose(mapping(g),mapping(g),mapping(GeometryCollection([g,line])),mapping(Polygon()))
+    assert residual['observed_reason']=='nonempty-zero-coordinate-area-overlay-remainder' and residual['partition_minus_original']['is_empty']is False and residual['partition_minus_original']['nonempty_pointset_dimension']==1 and residual['coverage_observation']['status']=='unknown-predicate-or-overlay-disagreement';passed.append('actual-nonempty-zero-area-remainder-diagnosis')
     import custody,importlib.util
     spec=importlib.util.spec_from_file_location('numeric_verify',P/'verify.py');verify=importlib.util.module_from_spec(spec);spec.loader.exec_module(verify)
     from reader import output_target,authenticate_executed_modules
@@ -71,6 +74,14 @@ def run():
         else:changed[key]=value
         reject(name,lambda c=changed:verify.validate_row(c,expected,objects,original,family,ref,ref))
     reject('complete-generated-geometry-loss',lambda:verify.validate_row(row,expected,{},original,family,ref,ref))
+    f={'original_family_reference':ref,'original_complete_family':family,'diagnosed_unknown_component_ids':['c'],'diagnosis_counts':{'complete':1},'limits':['Coordinated family contacts are not newly measured component adjacency.','Original family pointset references belong to the frozen predecessor object namespace.']}
+    verify.validate_family(f,family,ref,['c'],{'complete':1});passed.append('complete-family-positive')
+    for name,key,value in [('family-member-reassignment','original_complete_family',{'complete_original_member_ids':['other']}),('family-component-loss','diagnosed_unknown_component_ids',[]),('family-status-count-rebound','diagnosis_counts',{'unknown':1})]:
+        changed={**f,key:value};reject(name,lambda c=changed:verify.validate_family(c,family,ref,['c'],{'complete':1}))
+    report={'counts':{'complete':1},'observed_reasons':{'reason':1},'literal_coverage_observations':{'unknown':1}}
+    verify.validate_complete_counts({'c':row},['c'],{'complete':1},{'reason':1},{'unknown':1},report);passed.append('complete-status-count-positive')
+    reject('global-status-count-rebound',lambda:verify.validate_complete_counts({'c':row},['c'],{'complete':1},{'reason':1},{'unknown':1},{**report,'counts':{'unknown':1}}))
+    reject('global-component-omission',lambda:verify.validate_complete_counts({},['c'],{'complete':1},{'reason':1},{'unknown':1},report))
     frozen=k.diagnose({'type':'bad'},mapping(g),mapping(g),mapping(Polygon()));changed=copy.deepcopy(frozen);changed['failure_class']='Other'
     reject('unknown-failure-class-mutation',lambda:verify.old.validate_diagnostic(changed,frozen,{}))
     for key in custody.ROSTERS:
@@ -85,6 +96,10 @@ def run():
         reject('output-traversal',lambda:output_target(custody.R,str(P.relative_to(custody.R)),str(P.relative_to(custody.R))+'/../bad'))
         linked=tmp/'linked';linked.symlink_to(tmp,target_is_directory=True)
         reject('symlink-output-parent',lambda:output_target(custody.R,str(P.relative_to(custody.R)),str((linked/'out').relative_to(custody.R))))
+    commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=custody.R,text=True).strip();module=P/'numeric_kernel.py';original_read=pathlib.Path.read_bytes
+    def dirty_read(path):return original_read(path)+b'\n# directed executed-code mutation\n' if path==module else original_read(path)
+    with patch.object(pathlib.Path,'read_bytes',dirty_read):
+        reject('executed-code-byte-mutation',lambda:authenticate_executed_modules(custody.R,commit,[str(module.relative_to(custody.R))]))
     return {'directed_controls':len(passed),'passed':passed,'limits':['Small directed fixtures only; no complete current dataset result or source authority is certified.']}
 
 if __name__=='__main__':print(json.dumps(run(),sort_keys=True))

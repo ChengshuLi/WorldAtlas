@@ -46,6 +46,15 @@ def validate_row(row,expected,objects,original,family,rowref,familyref):
     old.validate_diagnostic({k:v for k,v in row.items()if k not in EXTRAS},expected,objects)
 
 
+def validate_complete_counts(rows,roster,counts,reasons,coverage,report):
+    if sorted(rows)!=roster or dict(counts)!=report['counts'] or dict(reasons)!=report['observed_reasons'] or dict(coverage)!=report['literal_coverage_observations']:raise ValueError('Complete diagnostic roster/count/reason/coverage differs')
+
+
+def validate_family(stored,original,reference,component_ids,counts):
+    expected={'original_family_reference':reference,'original_complete_family':original,'diagnosed_unknown_component_ids':component_ids,'diagnosis_counts':dict(counts),'limits':['Coordinated family contacts are not newly measured component adjacency.','Original family pointset references belong to the frozen predecessor object namespace.']}
+    if canon(stored)!=canon(expected):raise ValueError('Complete family/member/context/original diagnostic changed')
+
+
 def verify(run):
     report=json.loads((run/'report.json').read_bytes())
     if report['input_commit']!=custody.INPUT_COMMIT or report['original_complete_report_sha256']!='13cd9b18fae16f1ce0a2197fcb832ca6da595168bb58a23b1f85c8998590a6c7':raise ValueError('Changed immutable predecessor vintage')
@@ -70,7 +79,7 @@ def verify(run):
             validate_row(row,expected,objects,original,family,rowrefs[i],familyrefs[fid])
             rows[i]=row;counts[row['status']]+=1;reasons[row.get('observed_reason','unknown-operation')]+=1;coverage[row['coverage_observation']['status']]+=1;perfamily[fid][row['status']]+=1
             if len(rows)%1000==0:print('independently replayed',len(rows),flush=True)
-    if sorted(rows)!=rosters['unknown_components'] or dict(counts)!=report['counts'] or dict(reasons)!=report['observed_reasons'] or dict(coverage)!=report['literal_coverage_observations']:raise ValueError('Complete diagnostic roster/count/reason/coverage differs')
+    validate_complete_counts(rows,rosters['unknown_components'],counts,reasons,coverage,report)
     seen=set()
     for pin in report['family_outputs']:
         values=read_pin(run,pin)
@@ -78,8 +87,7 @@ def verify(run):
         for f in values:
             fid=f['original_complete_family']['family']['id']
             if fid in seen or fid not in rosters['families']:raise ValueError('Missing/duplicate/outside family')
-            expected={'original_family_reference':familyrefs[fid],'original_complete_family':oldfamilies[fid],'diagnosed_unknown_component_ids':sorted(i for i in rows if rows[i]['family']==fid),'diagnosis_counts':dict(perfamily[fid]),'limits':['Coordinated family contacts are not newly measured component adjacency.','Original family pointset references belong to the frozen predecessor object namespace.']}
-            if canon(f)!=canon(expected):raise ValueError('Complete family/member/context/original diagnostic changed')
+            validate_family(f,oldfamilies[fid],familyrefs[fid],sorted(i for i in rows if rows[i]['family']==fid),perfamily[fid])
             seen.add(fid)
     if sorted(seen)!=rosters['families']:raise ValueError('Incomplete full family roster')
     inputs.close()
