@@ -10,7 +10,7 @@ This PR changes the Matanuska source-overlay reproducer's unsafe output behavior
 - Reproduced two complete output families. Selected geometries and the source-overlay ledger are byte-identical to the archived outputs; all numeric and source-predicate results match. Summary path metadata now points to the actual nested run root.
 - Verified all 82 original baseline inputs at their frozen commit, including compressed and decompressed hashes, and retained all original source, output, and code descriptors with commit provenance.
 - Confirmed the 282-member roster, 283 bound fragments, and 571 exact contact rows.
-- Exercised changed-input, omitted-scope/contact, vintage-laundering, existing file/directory, symlink, traversal, outside-root, and original-byte preservation controls.
+- Exercised changed-input, omitted-scope/contact, vintage-laundering, existing file/directory, run-destination and receipt-directory symlink, traversal, outside-root, and original-byte preservation controls.
 
 ## Limits
 

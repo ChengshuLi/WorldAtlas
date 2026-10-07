@@ -8,7 +8,7 @@ The original producer only accepts the already archived run-one and run-two dire
 
 reproduce-fresh-vintage.py is based on the exact producer bytes at merge d13250b2e7adb0f7fca00e8ee37acda4dc5cb490 (SHA-256 bfd3b6519d255128144b041143310eb25c5d857c248618d7ad6f1af98f344198). The transformation receipt records the original producer and helper pins. At startup the corrected producer verifies the complete input inventory: all 82 frozen inputs from the original issue baseline, the original source/output descriptors, their compressed and decoded hashes where applicable, and the producer/helper/control code. It also verifies that the exact local source files match their immutable commit pins.
 
-The CLI accepts a new safe name such as --run-id fresh-third. It resolves and bounds the run root and destination under this owned directory, refuses path traversal and symlinks, requires a non-existing run directory, creates that directory exclusively, checks resolved containment, and writes each output with exclusive xb creation. Each run gets a separate receipt with its concrete directory and file paths. Payload path templates use {run-id}; the per-run receipts state the concrete paths.
+The CLI accepts a new safe name such as --run-id fresh-third. It resolves and bounds the run root, run destination, receipt directory, and receipt path under this owned directory, refuses path traversal and symlinks, requires a non-existing run directory, creates that directory exclusively, checks resolved containment, and writes each output with exclusive xb creation. Each run gets a separate receipt with its concrete directory and file paths. Payload path templates use {run-id}; the per-run receipts state the concrete paths.
 
 ## Reproduction result
 
@@ -32,7 +32,7 @@ The original licenses, source roles, vintages, retrieval dates, and limits are c
 
 ## Controls and reproduction
 
-validation.json and the typed control receipts retain the positive, changed-source, omitted-component, omitted-contact, vintage-laundering, existing-file, existing-directory, symlink, traversal, and outside-root cases. Rejected CLI attempts were checked for side effects; the existing-output hashes and sentinel stayed unchanged, and the outside target was not created.
+validation.json and the typed control receipts retain the positive, changed-source, omitted-component, omitted-contact, vintage-laundering, existing-file, existing-directory, run-destination symlink, receipt-directory symlink, traversal, and outside-root cases. Rejected CLI attempts were checked for side effects; the existing-output hashes and sentinel stayed unchanged, and neither outside target was created.
 
 From the repository root, run:
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Revalidate fresh Matanuska output vintages, original inputs, and safe CLI behavior."""
-import gzip, hashlib, json, os, pathlib, subprocess, sys, tempfile
+import gzip, hashlib, json, os, pathlib, shutil, subprocess, sys, tempfile
 ROOT=pathlib.Path(__file__).resolve().parents[4]
 PACKET=ROOT/'research/geography/gap-source-matanuska-physical-seam-20261006'
 OWNED=PACKET/'reproduction-erratum'
@@ -148,6 +148,21 @@ outside_link.symlink_to(outside,target_is_directory=True)
 try: cli.append(run_case('outside-resolved-root',['--run-id','fresh-outside','--runs-root',str(outside_link)],'resolves outside'))
 finally: outside_link.unlink()
 if outside.exists(): raise SystemExit('Outside CLI probe unexpectedly created a destination')
+# A receipt-directory symlink must be rejected without creating a receipt outside the owned path.
+receipt_dir=OWNED/'run-receipts';receipt_backup=fixture/'run-receipts-backup'
+receipt_outside=pathlib.Path(tempfile.mkdtemp(prefix='worldatlas-receipts-outside-'))
+if receipt_dir.is_symlink() or receipt_backup.exists() or receipt_backup.is_symlink(): raise SystemExit('Receipt symlink probe collision')
+receipt_dir.rename(receipt_backup);receipt_dir.symlink_to(receipt_outside,target_is_directory=True)
+try:
+    proc=subprocess.run([py,str(PRODUCER),'--run-id','fresh-receipt-link'],cwd=ROOT,text=True,capture_output=True)
+    receipt_rejected=proc.returncode!=0 and 'run receipt directory may not be a symlink' in (proc.stdout+proc.stderr)
+    if not receipt_rejected or (receipt_outside/'fresh-receipt-link.json').exists(): raise SystemExit('Symlinked run receipt directory was not safely rejected')
+finally:
+    receipt_dir.unlink()
+    receipt_backup.rename(receipt_dir)
+    shutil.rmtree(receipt_outside)
+    shutil.rmtree(RUNS/'fresh-receipt-link',ignore_errors=True)
+cli.append({'case':'symlink-receipt-directory','exit_code':proc.returncode,'rejected':receipt_rejected,'outside_receipt_created':False})
 controls={'version':1,'method_id':'source-overlay-analysis','outcome':'passed','fresh_run_ids':['fresh-one','fresh-two'],'fresh_families_byte_identical':True,'original_run_families_byte_identical':True,'fresh_vs_original':{'selected_components_identical':True,'source_overlay_ledger_identical':True,'numeric_and_predicate_summary_identical':True,'summary_path_metadata_difference':'Archived paths point to results/{run-id}; fresh output metadata points to reproduction-erratum/runs/{run-id} and actual paths are separately bound in run receipts.'},'fresh_hashes':family_hashes,'original_hashes':old_hashes,'component_roster':{'count':len(ids),'sha256':roster},'fragment_bindings':283,'contact_rows':571,'changed_source_controls':changed_checks,'omitted_component_control':{'expected_count':282,'observed_count':len(omitted),'observed_roster_sha256':omitted_hash,'rejected':True},'omitted_contact_control':{'rejected':True,'reason':reason},'vintage_laundering_control':{'pinned_layer_name':layer['name'],'rejected_year':'2018','rejected':True},'cli_rejections':cli,'existing_directory_hashes_unchanged':True,'existing_file_sentinel_sha256':sentinel_hash,'outside_destination_created':False,'retained_original_baseline_copy':baseline_copy}
 out=OWNED/'validation.json'
 out.write_text(json.dumps(controls,ensure_ascii=False,indent=2)+'\n')

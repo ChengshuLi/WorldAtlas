@@ -130,6 +130,12 @@
       "expected_rejection": "resolves outside",
       "stdout": "",
       "stderr": "usage: reproduce-fresh-vintage.py [-h] --run-id RUN_ID [--runs-root RUNS_ROOT]\nreproduce-fresh-vintage.py: error: runs-root resolves outside the owned reproduction-erratum directory\n"
+    },
+    {
+      "case": "symlink-receipt-directory",
+      "exit_code": 1,
+      "rejected": true,
+      "outside_receipt_created": false
     }
   ],
   "existing_directory_hashes_unchanged": true,

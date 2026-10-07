@@ -204,6 +204,10 @@ for name in ['selected-components.geojson','source-overlay-ledger.json','source-
     files.append({'path':str((RUN_DIR/name).relative_to(ROOT)),'bytes':len(raw),'sha256':sha(raw)})
 receipt={'version':1,'run_id':args.run_id,'method_id':'source-overlay-analysis','output_directory':str(RUN_DIR.relative_to(ROOT)),'path_templates_in_payloads':'{run-id} is a template for this output directory; concrete paths are listed in this receipt.','files':files}
 receipt_dir=OWNED/'run-receipts'
+if receipt_dir.is_symlink(): raise SystemExit('run receipt directory may not be a symlink')
 receipt_dir.mkdir(exist_ok=True)
+receipt_dir_resolved=receipt_dir.resolve(strict=True)
+if not within(receipt_dir_resolved,owned_resolved): raise SystemExit('run receipt directory resolves outside the owned reproduction-erratum directory')
 receipt_path=receipt_dir/(args.run_id+'.json')
+if not within(receipt_path.resolve(strict=False),receipt_dir_resolved): raise SystemExit('run receipt path resolves outside the owned receipt directory')
 with receipt_path.open('xb') as stream: stream.write((json.dumps(receipt,ensure_ascii=False,indent=2)+'\n').encode())
