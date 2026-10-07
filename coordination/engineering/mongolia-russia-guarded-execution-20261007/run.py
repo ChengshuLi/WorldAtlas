@@ -63,7 +63,7 @@ def load(commit):
     if subprocess.check_output(['git', '-C', str(REPO), 'rev-parse', 'HEAD']).decode().strip() != commit:
         raise ValueError('Current exact immutable execution commit required')
     inventory = json.loads(materialized(commit, 'code-list.json'))
-    required={'run.py','code-list.json','code_guard.py','science.py','input-plan.json','runtime-plan.json','methods/immutable.py','methods/geometry.py','methods/ellipsoidal_area.py'}
+    required={'run.py','code-list.json','code_guard.py','science.py','input-plan.json','runtime-plan.json','publication-plan.json','methods/immutable.py','methods/geometry.py','methods/ellipsoidal_area.py'}
     if len(inventory) != len(set(inventory)) or not required.issubset(inventory):
         raise ValueError('Incomplete executed inventory')
     raw = {name: materialized(commit, name) for name in inventory}
@@ -118,6 +118,13 @@ def load(commit):
     combined = sum(original.consumed.values()) + sum(own.consumed.values())
     if combined + 24 * 1024 * 1024 > PHASE or len(original.pins) + len(own.pins) + 16 > 512:
         raise ValueError('Complete inputs and pair/evidence reserve exceed admission')
+    publication=json.loads(raw['publication-plan.json'])
+    output_rows=publication['outputs']
+    if len(output_rows)!=len({x['path'] for x in output_rows}) or any(not x['path'].startswith(OWNED) or x['encoded_and_decoded_ceiling']>LIMIT or x['encoded_and_decoded_ceiling']<0 for x in output_rows):
+        raise ValueError('Malformed frozen full publication closure')
+    public_input_bytes=sum(x['bytes'] for x in plan['original_files'])+sum(x['bytes']for x in pins)
+    if public_input_bytes+sum(x['encoded_and_decoded_ceiling']for x in output_rows)>PHASE or len(original.pins)+len(pins)+len(output_rows)>512:
+        raise ValueError('Complete concrete outputs/reports/controls/manifest publication forecast exceeds cap')
     validate_scope(captured, plan)
     methods = own.load_modules({'ellipsoidal_area': OWNED+'methods/ellipsoidal_area.py', 'geometry': OWNED+'methods/geometry.py', 'science': OWNED+'science.py'})
     for name,method in methods.items():
@@ -206,7 +213,14 @@ def require_scientific_bindings(methods, expected):
         raise ValueError('Actual scientific callable or quadrature binding changed')
 
 
-def validate_scope(captured, plan):
+def publication=json.loads(raw['publication-plan.json'])
+    output_rows=publication['outputs']
+    if len(output_rows)!=len({x['path'] for x in output_rows}) or any(not x['path'].startswith(OWNED) or x['encoded_and_decoded_ceiling']>LIMIT or x['encoded_and_decoded_ceiling']<0 for x in output_rows):
+        raise ValueError('Malformed frozen full publication closure')
+    public_input_bytes=sum(x['bytes'] for x in plan['original_files'])+sum(x['bytes']for x in pins)
+    if public_input_bytes+sum(x['encoded_and_decoded_ceiling']for x in output_rows)>PHASE or len(original.pins)+len(pins)+len(output_rows)>512:
+        raise ValueError('Complete concrete outputs/reports/controls/manifest publication forecast exceeds cap')
+    validate_scope(captured, plan):
     prefix='research/geography/mongolia-russia-gap-source-fitness-20261007/inputs/'
     family=json.loads(captured[prefix+'complete-family.json'])
     physical=json.loads(captured[prefix+'physical-component-features.geojson'])['features']
@@ -238,7 +252,7 @@ def main():
         guard.all_callables(method, raw['science.py' if name=='science' else 'methods/'+name+'.py'])
     data=module.canonical_json(result)
     receipt_data=module.canonical_json(receipt)
-    if len(data)>LIMIT or len(receipt_data)>LIMIT or len(data)+len(receipt_data)>11*1024*1024:
+    if len(data)>2*1024*1024 or len(receipt_data)>2*1024*1024 or len(data)+len(receipt_data)>11*1024*1024:
         raise ValueError('Whole result/receipt exceeds complete pair/evidence reserve')
     args.out.mkdir()
     with (args.out/'comparison.json').open('xb') as stream:stream.write(data)
