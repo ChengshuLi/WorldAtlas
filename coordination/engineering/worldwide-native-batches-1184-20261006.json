@@ -1,0 +1,42 @@
+{
+  "base_main_commit": "a801bc56cf8ea2b697a66b22ceebd7edf763badc",
+  "blockers": [],
+  "branch": "engineering/worldwide-native-batches-1184-20261006",
+  "checks": [
+    "Directed positive and negative controls passed; independent full cohort and queue/batch reconstruction passed"
+  ],
+  "completed": [
+    "95,174 frozen and 95,173 selected-source complete component cohorts",
+    "49,625 complete source/context joins",
+    "Three complete semantic rank orders per cohort",
+    "15,610 source families and 594 disjoint operational batches per cohort",
+    "Two actual complete executions per cohort with identical scientific payload bytes"
+  ],
+  "date_timezone": "America/Los_Angeles",
+  "dependencies": [
+    1005,
+    1010,
+    1164
+  ],
+  "deployment": "Offline evidence only; no production/database/geometry changes",
+  "evidence_paths": [
+    "coordination/engineering/worldwide-native-batches-1184-20261006/frozen-run-one/report.json",
+    "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/report.json",
+    "coordination/engineering/worldwide-native-batches-1184-20261006/evidence-quality.json"
+  ],
+  "github_issue": 1184,
+  "job_id": "worldwide-native-batches-1184-20261006",
+  "lane": "engineering",
+  "maintenance": {
+    "active": false,
+    "reason": null,
+    "required": false
+  },
+  "next_action": "Independent exact-head review and normal merge queue",
+  "pull_request": null,
+  "record_kind": "resumable_execution_artifact",
+  "scope": "Complete frozen and selected-source native observations, cause/uncertainty triage, three ranked views, disjoint source and operational batches",
+  "task_status_source": "Linked GitHub issue",
+  "updated_at": "2026-10-06T21:41:38.017888+00:00",
+  "version": 2
+}

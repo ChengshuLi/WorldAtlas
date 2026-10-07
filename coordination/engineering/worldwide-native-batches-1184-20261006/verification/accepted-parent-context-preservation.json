@@ -1,0 +1,22 @@
+{
+  "all_original_canonical_field_bytes_exact": true,
+  "duplicate_old_transport_bytes_not_needed_if_consumer_uses_expanded_fields": 8484191,
+  "expanded_context_head": "6e75438dd9eb9d994ba7d4b9272b4bc95c295aaf",
+  "expanded_rows": 49625,
+  "limits": [
+    "Original native-context rows are source/hierarchy contexts, not newly measured native observations.",
+    "A consumer using original expanded fields needs no second old context transport; source dates and original references remain mandatory.",
+    "This preparation receipt is not a committed final producer/control receipt."
+  ],
+  "ordered_original_row_hashes_sha256": "f54bb4dedbfd28ee3a28e5c69b3e790ecc2a970e2104f54324348493aa857a91",
+  "original_rows": 49625,
+  "original_vintage": "cea80a8aa1f8a55ccb448a8f2ff71e10c49a26f1",
+  "removed_additive_fields": [
+    "frozen_owner_registry",
+    "native_observation_status",
+    "physical_interpretation",
+    "selected_successor_applicability",
+    "selected_successor_context"
+  ],
+  "status": "complete-original-row-field-preservation-preflight-not-source-approval"
+}
