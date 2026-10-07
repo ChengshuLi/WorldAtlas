@@ -37,7 +37,7 @@
     {
       "id": "focused-validator-profile-tests",
       "outcome": "passed",
-      "detail": "Executed test/integration-profile.test.mjs, test/evidence-quality.test.mjs and test/premerge-evidence.test.mjs; no failure, cancellation or skip."
+      "detail": "Verified all five test paths exist, then executed test/integration-proof.test.mjs, test/full-regression-shards.test.mjs, test/merge-integration.test.mjs, test/evidence-quality.test.mjs, test/premerge-evidence.test.mjs on Node 24: 106 passed, 0 failed/cancelled/skipped. Original cc32bcb command silently omitted nonexistent test/integration-profile.test.mjs; its 28 passing validator tests did not establish profile-suite execution. Corrected before acceptance after independent review."
     },
     {
       "id": "focused-ci-selection",

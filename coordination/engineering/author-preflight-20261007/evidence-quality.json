@@ -155,20 +155,20 @@
   "outputs": [
     {
       "path": "coordination/engineering/author-preflight-20261007.json",
-      "bytes": 2052,
-      "sha256": "6fe992d2926b1ca9043ddcc409c9f15740de6fd29888ad47f84e30c95084a281",
+      "bytes": 2211,
+      "sha256": "1593528dc6a9a6d48f21d18ef30244a1362076e20cd16f33b19b50ff1900e937",
       "hash_kind": "file-bytes"
     },
     {
       "path": "coordination/engineering/author-preflight-20261007/CHECKPOINT.md",
-      "bytes": 1232,
-      "sha256": "e6769f60bc40ac51d66ff4b3090393e69b3e4dabfbc7ea511fb5ea08554b9958",
+      "bytes": 1696,
+      "sha256": "52413fd41f1ae24569be31d2d8f2fd3a8f2075a407e7022fc21ecd3d6b037869",
       "hash_kind": "file-bytes"
     },
     {
       "path": "coordination/engineering/author-preflight-20261007/verification.json",
-      "bytes": 2414,
-      "sha256": "ff7e217186c838245413cc890268a4b31ce468b1d5bd1644e0ecfbabc26d11c5",
+      "bytes": 2755,
+      "sha256": "f4b711d49bdd4927da661b02702bf6ffba2740c60a03b9f36c589502e0e08eeb",
       "hash_kind": "file-bytes"
     },
     {
@@ -185,8 +185,8 @@
     },
     {
       "path": "docs/AUTHOR_PREFLIGHT.md",
-      "bytes": 11194,
-      "sha256": "094a5369bbd417f2ae12c95a51c30805b1b8898f2047266b40f0188b84634b4f",
+      "bytes": 11356,
+      "sha256": "e63f1e80b9a17088a1c8d95ba6d940605de295727e6d5e8a4d6d75696ce302e4",
       "hash_kind": "file-bytes"
     },
     {
@@ -280,7 +280,7 @@
     "node scripts/evidence-quality.mjs coordination/engineering/author-preflight-20261007/evidence-quality.json",
     "Read-only validateRecordChecks with repositoryReader as documented in docs/AUTHOR_PREFLIGHT.md",
     "Read-only validatePremergeManifest using actual changed files, issue contract and canonical holder; no candidate provider execution",
-    "node --test test/integration-profile.test.mjs test/evidence-quality.test.mjs test/premerge-evidence.test.mjs"
+    "Verified each test path exists; node --test test/integration-proof.test.mjs test/full-regression-shards.test.mjs test/merge-integration.test.mjs test/evidence-quality.test.mjs test/premerge-evidence.test.mjs"
   ],
   "change_receipts": [
     {

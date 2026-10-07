@@ -107,6 +107,9 @@ independently derived expectations, source inspection or adverse fixtures.
    node --test test/evidence-prevention.test.mjs test/premerge-evidence.test.mjs
    ```
 
+   Check that each named test file exists and the test report contains the intended
+   controls; a successful exit alone may silently omit a mistyped test path.
+
    When changing the foundational immutable reader, also exercise the existing
    trusted geography runner and affected retained-execution validator. Their
    compatibility is a changed-behavior obligation, not a new research-wide test.

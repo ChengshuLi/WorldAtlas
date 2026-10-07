@@ -17,3 +17,10 @@ queue/main verification. Worker adoption, #1266/#1275 repairs and broader
 historical follow-up completion remain unverified or unfinished. Keep #1309 open.
 #1209's bounded integrity repair was independently exercised and reconciled on
 its original issue; this is not geography approval or proof of rollout adoption.
+
+Independent exact-head review of PR #1331 found the original test command named
+a nonexistent integration-profile suite. Its green result proved only the two
+validator suites. The actual five validator/profile suites were rerun after
+checking each path exists: 106 passed, no failures, cancellations or skips.
+This evidence correction and practical path-presence reminder require renewed
+exact-head review; the original cc32bcb record is retained in Git history.
