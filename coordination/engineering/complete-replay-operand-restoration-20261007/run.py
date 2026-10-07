@@ -75,8 +75,20 @@ def frozen(commit):
                                     ('source', 'objects', 'replay', 'products', 'runtime', 'controls')})
     for name, module in modules.items():
         guard.all_callables(module, raws[name + '.py'])
-    runtime = modules['runtime'].cold(runtime_pin, guard)
+    runtime = modules['runtime'].cold(runtime_pin, guard, baseline, json.loads(raws['runtime-custody-index.json']), OWNED)
     return pins, baseline, shared, guard, modules, runtime
+
+
+def final_admission(complete_inputs, products):
+    # Whole final-deliverable reserve, before replay: two complete payloads and
+    # all metadata/code/control/report/manifest increments. The payload ceiling
+    # comes from the retained full failed run; actual outputs must still fit it.
+    final_reserve = 2 * 9163466 + 3 * 1024 * 1024
+    if sum(row['bytes'] for row in complete_inputs) + final_reserve > products.PHASE_LIMIT:
+        raise ValueError('Complete final pair and evidence reserve exceeds ordinary admission')
+    if len(complete_inputs) + 24 + 64 > products.DESCRIPTOR_LIMIT:
+        raise ValueError('Complete final pair and evidence descriptor reserve exceeds admission')
+    return final_reserve
 
 
 def main():
@@ -87,7 +99,8 @@ def main():
     args = parser.parse_args()
     if not args.out.is_absolute() or '..' in args.out.parts or \
             not args.out.resolve().is_relative_to(REPO / '.cache') or args.out.exists() or \
-            any(p.is_symlink() for p in (args.out, *args.out.parents)):
+            any(p.is_symlink() or (p.exists() and not p.is_dir()) for p in (args.out, *args.out.parents)) or \
+            not args.out.parent.is_dir():
         raise ValueError('Fresh exclusive actual owned cache output required')
     started = datetime.datetime.now(datetime.timezone.utc).isoformat()
     tick = time.monotonic()
@@ -99,8 +112,8 @@ def main():
     loaded = modules['source'].load(REPO, baseline, shared, methods_guard)
     records, native_aliases, native_proof = modules['source'].native_operands(loaded, args.out.parent)
     sources = loaded['source']
-    complete_inputs = sources.index['files'] + pins + [dict(row, commit='external-runtime-file-v1')
-                                                     for row in runtime['whole_runtime_files']]
+    complete_inputs = sources.index['files'] + pins + runtime['whole_runtime_aliases']
+    final_reserve = final_admission(complete_inputs, modules['products'])
     preflight = {'execution_commit': args.commit, 'actual_start_utc': started,
                  'command': sys.argv, 'preoperator_controls': controls,
                  'scope_components': len(loaded['diagnoses']), 'families': 494, 'batches': 49,
@@ -108,7 +121,9 @@ def main():
                  'complete_original_physical_restoration': loaded['state']['physical_restore_receipts'],
                  'native': native_proof, 'actual_project_callables': callables,
                  'runtime': runtime, 'flat_inputs': complete_inputs,
-                 'flat_input_bytes': sum(p['bytes'] for p in complete_inputs)}
+                 'flat_input_bytes': sum(p['bytes'] for p in complete_inputs),
+                 'final_pair_encoded_reserve_bytes': final_reserve,
+                 'final_pair_descriptor_reserve': 88}
     products = modules['products'].Products(args.out, complete_inputs, repo=REPO)
     if args.input_only:
         products.write('input-only.json', modules['source'].canonical(dict(preflight, mode='frozen input-only; no replay operators')))
@@ -138,6 +153,8 @@ def main():
     for identity, alias in sorted(native_aliases.items()):
         products.emit('native-record-aliases', dict(alias, source_id=identity, complete_original_metadata=records[identity][0]))
     outputs = products.finish()
+    if sum(row['bytes'] for row in outputs) > 9163466 or len(outputs) > 12:
+        raise ValueError('Actual complete science exceeds preadmitted final-pair reserve; retain failure')
     report = {'mode': 'complete original-source nine-map recovery; not geography repair',
               'execution_commit': args.commit, 'actual_start_utc': started,
               'actual_end_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
@@ -149,7 +166,7 @@ def main():
                          'Remaining mismatches and operator/source failures stay unknown.',
                          'Original diagnoses are retained; no new rational-point diagnostic campaign.',
                          'All changed maps have full ordinary bodies; equal originals have inverse whole-object aliases.']}
-    products.write('report.json', modules['source'].canonical(report))
+    products.write('report.json.gz', modules['source'].canonical(report), compress=True)
     print(json.dumps({'status': 'PASS', 'statuses': report['statuses'],
                       'actual_queries': actual_queries, 'flat_encoded_bytes': preflight['flat_input_bytes'] +
                       sum(p['bytes'] for p in products.outputs)}), flush=True)
