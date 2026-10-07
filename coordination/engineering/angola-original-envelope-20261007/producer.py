@@ -101,7 +101,8 @@ def whole_archive(encoded, pin, select=False):
                     'decoded_bytes': total, 'decoded_sha256': digest.hexdigest(),
                     'all_records': count, 'largest_record_bytes': largest,
                     'outer_skeleton_sha256': sha(header + bytes(suffix)),
-                    'outer_metadata': {k: v for k, v in outer.items() if k not in ('original_records', 'original_entities')},
+                    'outer_metadata': {k: v for k, v in outer.items() if k not in ('original_records', 'original_entities', 'units')},
+                    'outer_units_count': len(outer['units']), 'outer_units_canonical_sha256': sha(canonical(outer['units'])),
                     'ordinary_decoded_cap_pass': False,
                     'custody': 'explicit complete-stream private reconstruction; two passes; semantic selection after first complete verification'}
 
@@ -351,6 +352,8 @@ def run(repo, args, immutable, code, own):
                'conditional-refresh.geojson.gz': immutable.deterministic_gzip(canonical({'type': 'FeatureCollection', 'features': diagnostic})),
                'comparisons.json': canonical(scientific), 'input-receipt.json': canonical(receipt)}
     outputs_total = sum(len(v) + (len(gzip.decompress(v)) if k.endswith('.gz') else 0) for k, v in payload.items())
+    if outputs_total > plan['resource_forecast']['max_output_bytes']:
+        raise ValueError('Actual complete output exceeds conservative admission')
     if receipt['combined_unique_input_bytes'] + outputs_total + 4096 > PHASE:
         raise ValueError('Actual whole private/ordinary/output phase budget')
     if resource.getrusage(resource.RUSAGE_SELF).ru_maxrss > plan['resource_forecast']['max_rss_bytes']:
