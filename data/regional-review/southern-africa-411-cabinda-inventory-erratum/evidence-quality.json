@@ -1,0 +1,480 @@
+{
+  "version": 1,
+  "issue": 1284,
+  "lane": "geography",
+  "worker_id": "01a10948-7d38-75d0-bc01-4cc28ea41f49",
+  "subject_ids": [
+    "gb:AGO:ADM2:16411231B22766430211667",
+    "gb:AGO:ADM2:16411231B679187258105",
+    "gb:AGO:ADM2:16411231B42954517222252",
+    "gb:AGO:ADM2:16411231B63355352791940"
+  ],
+  "subject_ids_sha256": "596d34f3105e465c18a989c9a6e66db5249f2c6736f15cc5f2cb39b314b7aba4",
+  "baseline": {
+    "commit": "c9f2ce1f4fe6434a42a8fbe4886dcfcaa73169e8",
+    "files": [
+      {
+        "path": "data/regional-review/regional-review-029dcbc646de003d/README.md",
+        "bytes": 9697,
+        "sha256": "89cfade5ddbb9e5208772bee3ba8431d690a9461bdff0c3b6aa62e6ae54499e2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-029dcbc646de003d/scope.json",
+        "bytes": 20734,
+        "sha256": "20b2cc1aae272ba862059a11779fa14d2569d1a0c3e5cf59ffa034ce764347ee",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-29.json",
+        "bytes": 12932167,
+        "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-029dcbc646de003d/source-review.json",
+        "bytes": 22077,
+        "sha256": "87201ce5d44caee0adb742aa823fce5f7687e5ff9b05b65e587139a3c78d9356",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-029dcbc646de003d/sources/geoBoundaries-AGO-ADM2-2018.geojson",
+        "bytes": 3146775,
+        "sha256": "44e58b2a8c2fefb9369294a32e2adde3e3637b9e02e8f1e2c53b400bec04f404",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/regional-review/regional-review-029dcbc646de003d/sources/geoBoundaries-metadata/geoBoundaries-AGO-ADM2-metaData.json",
+        "bytes": 927,
+        "sha256": "0f45ab188f1e12b2f4068ecddeb62b2fb73d4ee7d1a71e29a8a8992d4b7ad302",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "readme1057": "89cfade5ddbb9e5208772bee3ba8431d690a9461bdff0c3b6aa62e6ae54499e2",
+      "scope": "20b2cc1aae272ba862059a11779fa14d2569d1a0c3e5cf59ffa034ce764347ee",
+      "atlas-part29": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a",
+      "source-review": "87201ce5d44caee0adb742aa823fce5f7687e5ff9b05b65e587139a3c78d9356",
+      "geoBoundaries-AGO-2018": "44e58b2a8c2fefb9369294a32e2adde3e3637b9e02e8f1e2c53b400bec04f404",
+      "geoBoundaries-AGO-metadata": "0f45ab188f1e12b2f4068ecddeb62b2fb73d4ee7d1a71e29a8a8992d4b7ad302"
+    },
+    "pin_files": {
+      "readme1057": "data/regional-review/regional-review-029dcbc646de003d/README.md",
+      "scope": "data/regional-review/regional-review-029dcbc646de003d/scope.json",
+      "atlas-part29": "data/geography/part-29.json",
+      "source-review": "data/regional-review/regional-review-029dcbc646de003d/source-review.json",
+      "geoBoundaries-AGO-2018": "data/regional-review/regional-review-029dcbc646de003d/sources/geoBoundaries-AGO-ADM2-2018.geojson",
+      "geoBoundaries-AGO-metadata": "data/regional-review/regional-review-029dcbc646de003d/sources/geoBoundaries-metadata/geoBoundaries-AGO-ADM2-metaData.json"
+    },
+    "subject_files": {
+      "gb:AGO:ADM2:16411231B22766430211667": "data/geography/part-29.json",
+      "gb:AGO:ADM2:16411231B679187258105": "data/geography/part-29.json",
+      "gb:AGO:ADM2:16411231B42954517222252": "data/geography/part-29.json",
+      "gb:AGO:ADM2:16411231B63355352791940": "data/geography/part-29.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "historical-readme1047",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/762d7b5a568ca845d85a98a4d188678c126a5d58/data/regional-review/regional-review-029dcbc646de003d/README.md",
+      "role": "Historical #1047 handoff README containing the superseded all-partitions-absence statement",
+      "vintage": "Immutable #1047 merge 762d7b5a568ca845d85a98a4d188678c126a5d58",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Historical repository documentation; no separate license determination is made by this inventory erratum. Restoration uses the repository Git object and does not redistribute a copied README."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "From a WorldAtlas Git checkout run `git show 762d7b5a568ca845d85a98a4d188678c126a5d58:data/regional-review/regional-review-029dcbc646de003d/README.md`; require 8,350 bytes and SHA-256 44005dd5b85ecf2eed4e05d9b1d5c649e1dc4172f609a471f0f13308ac343155.",
+      "limit": "The descriptor verifies the historical README bytes and wording only; it does not establish the README's territorial or boundary claims.",
+      "temporal_status": "unknown",
+      "historical_file": {
+        "commit": "762d7b5a568ca845d85a98a4d188678c126a5d58",
+        "path": "data/regional-review/regional-review-029dcbc646de003d/README.md",
+        "bytes": 8350,
+        "sha256": "44005dd5b85ecf2eed4e05d9b1d5c649e1dc4172f609a471f0f13308ac343155",
+        "hash_kind": "file-bytes"
+      }
+    },
+    {
+      "id": "readme1057",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/c9f2ce1f4fe6434a42a8fbe4886dcfcaa73169e8/data/regional-review/regional-review-029dcbc646de003d/README.md",
+      "role": "Immutable #1057 evidence handoff README containing the same superseded statement",
+      "vintage": "Immutable #1057 merge c9f2ce1f4fe6434a42a8fbe4886dcfcaa73169e8",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Historical repository documentation; this packet references its immutable Git bytes and does not assess upstream geographic data licensing."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "From a WorldAtlas Git checkout run `git show c9f2ce1f4fe6434a42a8fbe4886dcfcaa73169e8:data/regional-review/regional-review-029dcbc646de003d/README.md`; require 9,697 bytes and SHA-256 89cfade5ddbb9e5208772bee3ba8431d690a9461bdff0c3b6aa62e6ae54499e2.",
+      "limit": "The descriptor verifies historical wording only, not territorial meaning or the original boundary source.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "geoBoundaries-AGO-2018",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbHumanitarian/AGO/ADM2/geoBoundaries-AGO-ADM2.geojson",
+      "role": "Original 2018 geoBoundaries gbHumanitarian Angola ADM2 source used to verify the four source feature identities and names",
+      "vintage": "BoundaryYear 2018; source data updated 2023-01-19; geoBoundaries build 2023-12-12",
+      "retrieved_at": "2026-10-06T00:15:21Z",
+      "license": {
+        "status": "redistributable",
+        "terms": "Pinned geoBoundaries metadata reports CC BY 3.0 IGO. Preserve geoBoundaries attribution and listed underlying-source attribution; source lineage is GADM, Instituto Nacional de Estatística (INE), and HDX COD-AB AGO. Separate rights in underlying material are not independently assessed here."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "files": [
+        {
+          "path": "data/regional-review/regional-review-029dcbc646de003d/sources/geoBoundaries-AGO-ADM2-2018.geojson",
+          "bytes": 3146775,
+          "sha256": "44e58b2a8c2fefb9369294a32e2adde3e3637b9e02e8f1e2c53b400bec04f404",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/regional-review-029dcbc646de003d/sources/geoBoundaries-metadata/geoBoundaries-AGO-ADM2-metaData.json",
+          "bytes": 927,
+          "sha256": "0f45ab188f1e12b2f4068ecddeb62b2fb73d4ee7d1a71e29a8a8992d4b7ad302",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "limit": "This 2018 humanitarian ADM2 source and its 161-unit national count support source identity/name/vintage and reported licensing only. They do not establish current Cabinda boundaries, post-2024 completeness, legal meaning, current neighboring granularity, geometry accuracy, or separate underlying-source rights.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "frozen-411-scope",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/c9f2ce1f4fe6434a42a8fbe4886dcfcaa73169e8/data/regional-review/regional-review-029dcbc646de003d/scope.json",
+      "role": "The exact retained 223-member #411 workload membership definition used only to check workload inclusion",
+      "vintage": "Immutable #1057 merge c9f2ce1f4fe6434a42a8fbe4886dcfcaa73169e8",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Repository scope artifact; no external boundary license or territorial authority is inferred."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Run `git show c9f2ce1f4fe6434a42a8fbe4886dcfcaa73169e8:data/regional-review/regional-review-029dcbc646de003d/scope.json`; require 20,734 bytes and SHA-256 20b2cc1aae272ba862059a11779fa14d2569d1a0c3e5cf59ffa034ce764347ee.",
+      "limit": "Confirms membership in a frozen review workload only; this file does not prove geographic completeness or authority.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "atlas-part29",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/c9f2ce1f4fe6434a42a8fbe4886dcfcaa73169e8/data/geography/part-29.json",
+      "role": "Complete retained Atlas partition used to inspect exact IDs, stored names and stored parent IDs",
+      "vintage": "Atlas snapshot at immutable #1057 merge c9f2ce1f4fe6434a42a8fbe4886dcfcaa73169e8",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "The retained partition includes legacy geoBoundaries-derived records; this packet does not resolve their upstream reuse license or authority."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Run `git show c9f2ce1f4fe6434a42a8fbe4886dcfcaa73169e8:data/geography/part-29.json`; require 12,932,167 bytes and SHA-256 077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a.",
+      "limit": "Verifies membership and stored attributes in this immutable Atlas snapshot only; it does not verify geometry, source correctness, current status, license, or completeness.",
+      "temporal_status": "unknown"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/southern-africa-411-cabinda-inventory-erratum/README.md",
+      "bytes": 5140,
+      "sha256": "b1d7d78476fb8a2e0262baaf9a5a329d5597c8a54feb0c6fecc33773cc8efeef",
+      "hash_kind": "file-bytes",
+      "role": "sourced-inventory-erratum"
+    },
+    {
+      "path": "data/regional-review/southern-africa-411-cabinda-inventory-erratum/reproduce.mjs",
+      "bytes": 10724,
+      "sha256": "c216d486528f66afb967298c9670e0f569c015248881d8621e19a4a16ce5458f",
+      "hash_kind": "file-bytes",
+      "role": "reproduction-code"
+    },
+    {
+      "path": "data/regional-review/southern-africa-411-cabinda-inventory-erratum/reproduction.json",
+      "bytes": 5924,
+      "sha256": "290e1bd18dc9e294011cbd5c259f71235fd5653d2fca4c40477daf2184f42eec",
+      "hash_kind": "file-bytes",
+      "role": "generated-reproduction-result"
+    },
+    {
+      "path": "data/regional-review/southern-africa-411-cabinda-inventory-erratum/positive-control.json",
+      "bytes": 1448,
+      "sha256": "e40f3c1b50d2616e4eacf8735de11e01fbd0025174b3d057c18786334ebf0cdd",
+      "hash_kind": "file-bytes",
+      "role": "positive-control-result"
+    },
+    {
+      "path": "data/regional-review/southern-africa-411-cabinda-inventory-erratum/negative-control.json",
+      "bytes": 389,
+      "sha256": "29e2c7dbcbc0abb11bbceaf1435ec8e789de35282705563e3574dabba13ef57c",
+      "hash_kind": "file-bytes",
+      "role": "negative-control-result"
+    },
+    {
+      "path": "data/regional-review/southern-africa-411-cabinda-inventory-erratum/reproducibility.json",
+      "bytes": 280,
+      "sha256": "36951fb73f959070d9708868c2d2a1cd5fa85999b0a0ae4de9a9e0c575f6b859",
+      "hash_kind": "file-bytes",
+      "role": "two-run-reproducibility-result"
+    }
+  ],
+  "methods": [
+    {
+      "id": "cabinda-inventory-reproduction",
+      "kind": "code",
+      "description": "Read and verify immutable Git bytes for the two historical README vintages, frozen #411 scope, full Atlas partition 29, retained source-review receipt, and original geoBoundaries 2018 layer/metadata; join exact native IDs and names, report stored Atlas parents, compare workload membership, and run positive/negative controls.",
+      "software": "Node.js 24.19.0; Git immutable object reader; no network or package dependencies",
+      "units": "feature and workload-membership records"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "atlas_partition_feature_count",
+      "value": 1500,
+      "unit": "features",
+      "vintage": "baseline",
+      "evaluation_commit": "c9f2ce1f4fe6434a42a8fbe4886dcfcaa73169e8",
+      "input_sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a"
+    },
+    {
+      "id": "frozen_scope_member_count",
+      "value": 223,
+      "unit": "members",
+      "vintage": "baseline",
+      "evaluation_commit": "c9f2ce1f4fe6434a42a8fbe4886dcfcaa73169e8",
+      "input_sha256": "20b2cc1aae272ba862059a11779fa14d2569d1a0c3e5cf59ffa034ce764347ee"
+    },
+    {
+      "id": "subject_count",
+      "value": 4,
+      "unit": "IDs",
+      "vintage": "baseline",
+      "evaluation_commit": "c9f2ce1f4fe6434a42a8fbe4886dcfcaa73169e8",
+      "input_sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a"
+    },
+    {
+      "id": "subject_atlas_occurrence_count",
+      "value": 4,
+      "unit": "occurrences",
+      "vintage": "baseline",
+      "evaluation_commit": "c9f2ce1f4fe6434a42a8fbe4886dcfcaa73169e8",
+      "input_sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a"
+    },
+    {
+      "id": "subject_frozen_scope_occurrence_count",
+      "value": 0,
+      "unit": "members",
+      "vintage": "baseline",
+      "evaluation_commit": "c9f2ce1f4fe6434a42a8fbe4886dcfcaa73169e8",
+      "input_sha256": "20b2cc1aae272ba862059a11779fa14d2569d1a0c3e5cf59ffa034ce764347ee"
+    },
+    {
+      "id": "subject_outside_frozen_scope_count",
+      "value": 4,
+      "unit": "IDs",
+      "vintage": "baseline",
+      "evaluation_commit": "c9f2ce1f4fe6434a42a8fbe4886dcfcaa73169e8",
+      "input_sha256": "20b2cc1aae272ba862059a11779fa14d2569d1a0c3e5cf59ffa034ce764347ee"
+    },
+    {
+      "id": "geoBoundaries_source_feature_count",
+      "value": 161,
+      "unit": "features",
+      "vintage": "baseline",
+      "evaluation_commit": "c9f2ce1f4fe6434a42a8fbe4886dcfcaa73169e8",
+      "input_sha256": "44e58b2a8c2fefb9369294a32e2adde3e3637b9e02e8f1e2c53b400bec04f404"
+    },
+    {
+      "id": "subject_source_occurrence_count",
+      "value": 4,
+      "unit": "occurrences",
+      "vintage": "baseline",
+      "evaluation_commit": "c9f2ce1f4fe6434a42a8fbe4886dcfcaa73169e8",
+      "input_sha256": "44e58b2a8c2fefb9369294a32e2adde3e3637b9e02e8f1e2c53b400bec04f404"
+    },
+    {
+      "id": "subject_source_name_match_count",
+      "value": 4,
+      "unit": "name matches",
+      "vintage": "baseline",
+      "evaluation_commit": "c9f2ce1f4fe6434a42a8fbe4886dcfcaa73169e8",
+      "input_sha256": "44e58b2a8c2fefb9369294a32e2adde3e3637b9e02e8f1e2c53b400bec04f404"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "atlas_partition_feature_count",
+      "path": "data/regional-review/southern-africa-411-cabinda-inventory-erratum/reproduction.json",
+      "json_pointer": "/atlas_partition_feature_count"
+    },
+    {
+      "metric_id": "frozen_scope_member_count",
+      "path": "data/regional-review/southern-africa-411-cabinda-inventory-erratum/reproduction.json",
+      "json_pointer": "/frozen_scope_member_count"
+    },
+    {
+      "metric_id": "subject_count",
+      "path": "data/regional-review/southern-africa-411-cabinda-inventory-erratum/reproduction.json",
+      "json_pointer": "/subject_count"
+    },
+    {
+      "metric_id": "subject_atlas_occurrence_count",
+      "path": "data/regional-review/southern-africa-411-cabinda-inventory-erratum/reproduction.json",
+      "json_pointer": "/subject_atlas_occurrence_count"
+    },
+    {
+      "metric_id": "subject_frozen_scope_occurrence_count",
+      "path": "data/regional-review/southern-africa-411-cabinda-inventory-erratum/reproduction.json",
+      "json_pointer": "/subject_frozen_scope_occurrence_count"
+    },
+    {
+      "metric_id": "subject_outside_frozen_scope_count",
+      "path": "data/regional-review/southern-africa-411-cabinda-inventory-erratum/reproduction.json",
+      "json_pointer": "/subject_outside_frozen_scope_count"
+    },
+    {
+      "metric_id": "geoBoundaries_source_feature_count",
+      "path": "data/regional-review/southern-africa-411-cabinda-inventory-erratum/reproduction.json",
+      "json_pointer": "/original_source/source_feature_count"
+    },
+    {
+      "metric_id": "subject_source_occurrence_count",
+      "path": "data/regional-review/southern-africa-411-cabinda-inventory-erratum/reproduction.json",
+      "json_pointer": "/subject_source_occurrence_count"
+    },
+    {
+      "metric_id": "subject_source_name_match_count",
+      "path": "data/regional-review/southern-africa-411-cabinda-inventory-erratum/reproduction.json",
+      "json_pointer": "/subject_source_name_match_count"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "atlas_partition_feature_count",
+      "value": 1500,
+      "unit": "features"
+    },
+    {
+      "metric_id": "frozen_scope_member_count",
+      "value": 223,
+      "unit": "members"
+    },
+    {
+      "metric_id": "subject_count",
+      "value": 4,
+      "unit": "IDs"
+    },
+    {
+      "metric_id": "subject_atlas_occurrence_count",
+      "value": 4,
+      "unit": "occurrences"
+    },
+    {
+      "metric_id": "subject_frozen_scope_occurrence_count",
+      "value": 0,
+      "unit": "members"
+    },
+    {
+      "metric_id": "subject_outside_frozen_scope_count",
+      "value": 4,
+      "unit": "IDs"
+    },
+    {
+      "metric_id": "geoBoundaries_source_feature_count",
+      "value": 161,
+      "unit": "features"
+    },
+    {
+      "metric_id": "subject_source_occurrence_count",
+      "value": 4,
+      "unit": "occurrences"
+    },
+    {
+      "metric_id": "subject_source_name_match_count",
+      "value": 4,
+      "unit": "name matches"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "cabinda-inventory-reproduction",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/southern-africa-411-cabinda-inventory-erratum/positive-control.json"
+    },
+    {
+      "method_id": "cabinda-inventory-reproduction",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/southern-africa-411-cabinda-inventory-erratum/negative-control.json"
+    },
+    {
+      "method_id": "cabinda-inventory-reproduction",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/southern-africa-411-cabinda-inventory-erratum/reproducibility.json"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "All four exact Cabinda IDs are present once in the full retained Atlas part 29 and all four are excluded from the exact frozen 223-member #411 workload. Stored names and the shared stored Cabinda province parent are recorded without treating them as evidence of current territorial identity.",
+      "status": "supported",
+      "source_ids": [
+        "atlas-part29",
+        "frozen-411-scope",
+        "geoBoundaries-AGO-2018"
+      ]
+    },
+    {
+      "text": "Whether the four 2018 geoBoundaries units are authoritative/current boundaries, match the ten statutory municipalities, have reusable upstream geometry, or complete neighboring coverage is not established by this inventory correction.",
+      "status": "unresolved",
+      "source_ids": [
+        "historical-readme1047",
+        "readme1057",
+        "atlas-part29",
+        "geoBoundaries-AGO-2018"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "node data/regional-review/southern-africa-411-cabinda-inventory-erratum/reproduce.mjs",
+    "node data/regional-review/southern-africa-411-cabinda-inventory-erratum/reproduce.mjs --positive-control",
+    "node data/regional-review/southern-africa-411-cabinda-inventory-erratum/reproduce.mjs --negative-control"
+  ],
+  "change_receipts": [
+    {
+      "path": "data/regional-review/southern-africa-411-cabinda-inventory-erratum/README.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-africa-411-cabinda-inventory-erratum/reproduce.mjs",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-africa-411-cabinda-inventory-erratum/reproduction.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-africa-411-cabinda-inventory-erratum/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-africa-411-cabinda-inventory-erratum/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-africa-411-cabinda-inventory-erratum/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/southern-africa-411-cabinda-inventory-erratum/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}
