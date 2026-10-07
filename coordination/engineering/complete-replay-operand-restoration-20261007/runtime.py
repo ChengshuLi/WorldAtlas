@@ -31,6 +31,8 @@ def cold(pin, guard):
             continue
         if str(Path(module.__file__).resolve()) != expected:
             raise ValueError('Actual loaded runtime module escaped its binding: ' + name)
+        if name in pin.get('critical_callables', {}):
+            callables.extend(guard.callable_guard(module, Path(expected).read_bytes(), pin['critical_callables'][name]))
         if name in pin['stdlib_callable_modules']:
             callables.extend(guard.all_callables(module, Path(expected).read_bytes()))
     return {'identity': versions, 'python': sys.version, 'whole_runtime_files': receipts,

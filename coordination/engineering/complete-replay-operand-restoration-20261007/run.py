@@ -72,7 +72,7 @@ def frozen(commit):
     guard.all_callables(shared, raws['methods/shared_immutable.py'])
     baseline = shared.Baseline(REPO, commit, pins)
     modules = baseline.load_modules({name: OWNED + name + '.py' for name in
-                                    ('source', 'objects', 'replay', 'products', 'runtime')})
+                                    ('source', 'objects', 'replay', 'products', 'runtime', 'controls')})
     for name, module in modules.items():
         guard.all_callables(module, raws[name + '.py'])
     runtime = modules['runtime'].cold(runtime_pin, guard)
@@ -95,12 +95,15 @@ def main():
     callables = []
     def methods_guard(methods, code):
         callables.extend(guard.modules_guard(methods, code))
+    controls = modules['controls'].run(guard, modules['objects'], modules['source'])
     loaded = modules['source'].load(REPO, baseline, shared, methods_guard)
     records, native_aliases, native_proof = modules['source'].native_operands(loaded, args.out.parent)
     sources = loaded['source']
     complete_inputs = sources.index['files'] + pins + [dict(row, commit='external-runtime-file-v1')
                                                      for row in runtime['whole_runtime_files']]
-    preflight = {'scope_components': len(loaded['diagnoses']), 'families': 494, 'batches': 49,
+    preflight = {'execution_commit': args.commit, 'actual_start_utc': started,
+                 'command': sys.argv, 'preoperator_controls': controls,
+                 'scope_components': len(loaded['diagnoses']), 'families': 494, 'batches': 49,
                  'original_ordered_queries': 10419, 'complete_candidates': 95173,
                  'complete_original_physical_restoration': loaded['state']['physical_restore_receipts'],
                  'native': native_proof, 'actual_project_callables': callables,

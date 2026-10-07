@@ -4,6 +4,7 @@ callable_guard is the literal accepted issue1376 function with its original
 whole source provenance retained. Cooperative provenance, not a sandbox.
 """
 import hashlib
+import ast
 import json
 import pathlib
 import struct
@@ -55,17 +56,41 @@ def callable_guard(module, raw, names):
 
 
 def all_callables(module, raw):
+    # Derive required names from frozen source, never from the possibly mutated
+    # live inventory. A deleted callable or a builtin replacement must fail.
     names=[]
-    for name,value in vars(module).items():
-        if isinstance(value,types.FunctionType) and value.__module__==module.__name__:
-            names.append(name)
-        elif isinstance(value,type) and value.__module__==module.__name__:
-            for member,implementation in vars(value).items():
-                if isinstance(implementation,(staticmethod,classmethod)):
+    proxy=types.ModuleType(module.__name__)
+    proxy.__file__=module.__file__
+    for node in ast.parse(raw).body:
+        if isinstance(node,(ast.FunctionDef,ast.AsyncFunctionDef)):
+            names.append(node.name)
+            setattr(proxy,node.name,getattr(module,node.name,None))
+        elif isinstance(node,ast.ClassDef):
+            actual=getattr(module,node.name,None)
+            if not isinstance(actual,type) or actual.__module__!=module.__name__:
+                raise ValueError('Actual declared class differs: '+node.name)
+            methods=types.SimpleNamespace()
+            setattr(proxy,node.name,methods)
+            for member in node.body:
+                if not isinstance(member,(ast.FunctionDef,ast.AsyncFunctionDef)):
+                    continue
+                implementation=vars(actual).get(member.name)
+                decorators=[d.id for d in member.decorator_list if isinstance(d,ast.Name)]
+                descriptor=next((d for d in decorators if d in ('staticmethod','classmethod','property')),None)
+                required={'staticmethod':staticmethod,'classmethod':classmethod,'property':property}.get(descriptor,types.FunctionType)
+                if type(implementation) is not required:
+                    raise ValueError('Actual declared callable descriptor differs: '+node.name+'.'+member.name)
+                if descriptor in ('staticmethod','classmethod'):
                     implementation=implementation.__func__
-                if isinstance(implementation,types.FunctionType) and implementation.__module__==module.__name__:
-                    names.append(name+'.'+member)
-    return callable_guard(module,raw,sorted(names))
+                elif descriptor=='property':
+                    if implementation.fset is not None or implementation.fdel is not None:
+                        raise ValueError('Undeclared property mutation binding')
+                    implementation=implementation.fget
+                setattr(methods,member.name,implementation)
+                names.append(node.name+'.'+member.name)
+    if len(names)!=len(set(names)):
+        raise ValueError('Duplicate declared callable needs explicit binding')
+    return callable_guard(proxy,raw,sorted(names))
 
 
 def modules_guard(modules, code_baseline):

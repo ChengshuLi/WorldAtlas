@@ -19,6 +19,7 @@ class Objects:
     def __init__(self, products, loaded, records, native_aliases):
         self.products, self.loaded, self.records = products, loaded, records
         self.native_aliases = native_aliases
+        self.verified_aliases = {}
         self.native = {}
         self.component = {}
         self.emitted = {}
@@ -37,6 +38,7 @@ class Objects:
                      'periodic_offset': offset, 'original_native_record': native_aliases[identity],
                      'decoder': 'literal original comparison.decode_record then original periodic translate',
                      'whole_mapping_bytes': len(raw), 'whole_mapping_sha256': key}
+            self.verify_alias(alias, raw)
             # Keep the exact canonical body for collision/container equality, not
             # merely its digest. These are in-memory source operands, not outputs.
             self.native.setdefault(key, []).append((raw, alias))
@@ -74,7 +76,16 @@ class Objects:
             alias['original_whole_row'] = self.loaded['physical'][identity][1]
         elif kind == 'candidate':
             alias['complete_candidate_feature_sha256'] = self.loaded['state']['routing'][identity]['current_feature_sha256']
+        self.verify_alias(alias, raw)
         return alias
+
+    def verify_alias(self, alias, expected):
+        key = canonical(alias)
+        if key not in self.verified_aliases:
+            reconstructed = canonical(self.resolve_alias(alias))
+            require(reconstructed == expected, 'Executed inverse alias roundtrip differs')
+            self.verified_aliases[key] = reconstructed
+        require(self.verified_aliases[key] == expected, 'Previously verified inverse object changed')
 
     def retain(self, value):
         if isinstance(value, dict) and value.get('type') in (
@@ -84,6 +95,7 @@ class Objects:
             key = sha(raw)
             for original, alias in self.component.get(key, []) + self.native.get(key, []):
                 if original == raw:
+                    self.verify_alias(alias, raw)
                     return {'complete_inverse_alias': alias}
             if key in self.emitted:
                 require(self.emitted[key] == raw, 'Whole geometry object digest collision')
