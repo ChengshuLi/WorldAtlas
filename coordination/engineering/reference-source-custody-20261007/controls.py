@@ -88,7 +88,7 @@ def run():
         finally:
             custody.digest=original_digest
         checked.append('actual project callable replacement before source read')
-        reject(lambda: producer.run(commit,{},root/'escaped'),'own checkout cache')
+        reject(lambda: producer.run(commit,{},producer.REPO.parent/root.name),'own checkout cache')
         with tempfile.TemporaryDirectory(prefix='1364-existing-',dir=producer.REPO/'.cache') as existing:
             reject(lambda: producer.run(commit,{},existing),'Fresh owned run tree')
         with tempfile.TemporaryDirectory(prefix='1364-cache-root-',dir=producer.REPO/'.cache') as fake:
