@@ -50,7 +50,10 @@ for (const name of [...basePaths, 'scripts/evidence/immutable.py']) {
 }
 
 function publisher(request) {
-  const result = spawnSync('python3', [`${packetPath}/publish-vintage.py`], {
+  const publisherPath = `${packetPath}/publish-vintage.py`;
+  const publisherBytes = producerCode.get(publisherPath);
+  if (!publisherBytes) throw new Error('Pinned NewVintage publisher bytes were not captured');
+  const result = spawnSync('python3', ['-c', publisherBytes.toString('utf8')], {
     cwd: repo,
     input: JSON.stringify(request),
     encoding: 'utf8',
