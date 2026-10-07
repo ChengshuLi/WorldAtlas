@@ -22,10 +22,12 @@ The first real package build at head `7c33ffce` refused the changed shared helpe
 
 After the complete old stage passes, the dispatcher reads the same authenticated before/after contexts, proposal and release registry and calls current `validateContextMigration`. Its result must have exactly the same non-token receipt. Only the genuinely reconstructed current-realm proof crosses into coverage rebinding; the old realm's proof cannot substitute.
 
-Frozen coupled code/control commit: `7c38a431fe89085b11d3c2a89a7934a788164f9c`. The actual 38-test command includes six coupled controls:
+Original coupled controls at `7c38a431fe89085b11d3c2a89a7934a788164f9c` remain in `verification/prior-coupled-7c38/`. Final coupled code/control commit: `90e3e58de82c7587326f35d75291bc1ce385f573`. The actual 38-test command includes six coupled controls:
 
 ```
 node --test test/evidence-quality.test.mjs test/premerge-evidence.test.mjs test/build-context-validation-vintage.test.mjs
 ```
 
 Those local tests use bounded fixtures and authentic small code/stage bodies. They do not materialize a whole context image or certify a combined scientific phase. The existing original consumer retains its independently bounded 17-code/105-data admission, including mandatory snapshot overrides; its complete real continuation must pass in hosted package CI. Combining that source floor with subject custody would exceed one ordinary scientific phase, so no such claim is made here. No original native/geography calculation is repeated. Ordinary Node without loaders or preloads is required for the captured code realm.
+
+The final current proof also binds its geometry index body to the exact original stage SHA. A real formatting-only index mutation can leave the migration receipt identical, but is rejected by this source binding. All original geometry files are reauthenticated before current minting.

@@ -217,15 +217,15 @@
         "hash_kind": "file-bytes"
       },
       {
-        "path": "scripts/build-static-inner.mjs",
-        "bytes": 18343,
-        "sha256": "a265bab8b1c475819a83111e921245f27d449125b66ad77a33751749242bf6c4",
-        "hash_kind": "file-bytes"
-      },
-      {
         "path": ".github/package-inputs.json",
         "bytes": 8653,
         "sha256": "6a6edbd480166dd2ea84860db87f652c848c987a264a8f39000fd962a831457c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/build-static-inner.mjs",
+        "bytes": 18343,
+        "sha256": "a265bab8b1c475819a83111e921245f27d449125b66ad77a33751749242bf6c4",
         "hash_kind": "file-bytes"
       },
       {
@@ -283,15 +283,15 @@
         "hash_kind": "file-bytes"
       },
       {
-        "path": "test/premerge-evidence.test.mjs",
-        "bytes": 22314,
-        "sha256": "3cd75521b7ead4f1e066930199e6683401d30210fac040902cd85faa81f66f13",
-        "hash_kind": "file-bytes"
-      },
-      {
         "path": "src/regional-import-gate.js",
         "bytes": 7292,
         "sha256": "83215f326c85b6f95c21f5560c7f0477c581b1e37a1a4f52de4ef39741dabf7d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/premerge-evidence.test.mjs",
+        "bytes": 22314,
+        "sha256": "3cd75521b7ead4f1e066930199e6683401d30210fac040902cd85faa81f66f13",
         "hash_kind": "file-bytes"
       }
     ],
@@ -345,14 +345,14 @@
     },
     {
       "path": "coordination/engineering/subject-descriptor-decode-20261007/README.md",
-      "bytes": 4099,
-      "sha256": "034b73fd78d969fad7646a48b1b69ac8df474cd3bdac557836e88d056da979a6",
+      "bytes": 4502,
+      "sha256": "15f3c22f8246076e6ca3832a947f98c2205a5e65f2c3049050f14e7431f91c31",
       "hash_kind": "file-bytes"
     },
     {
       "path": "coordination/engineering/subject-descriptor-decode-20261007/build-manifest.py",
       "bytes": 7469,
-      "sha256": "f13677f0da1edc81ae47aa2c82818483a93faa9dae91a10cf4d5fddb93ac3152",
+      "sha256": "9204402ec5f14cf7b87147c60855ebe86d9c6b3c135a03a41506862729d25979",
       "hash_kind": "file-bytes"
     },
     {
@@ -363,8 +363,8 @@
     },
     {
       "path": "coordination/engineering/subject-descriptor-decode-20261007/context-vintage-dispatch.mjs",
-      "bytes": 6356,
-      "sha256": "8961490108096393d32d3ee13ed0e185973a2f6e89ff7077ba8cc0714258dab3",
+      "bytes": 6944,
+      "sha256": "0026e844448d2e0589214b555a77dc4a373ad8a2302789d413b6f992c746e316",
       "hash_kind": "file-bytes"
     },
     {
@@ -507,20 +507,20 @@
     },
     {
       "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/context-negative-controls.json",
-      "bytes": 422,
-      "sha256": "ccf988917e9b2be766395c924fce4395fad1aaea9b949de76d29ffc6928bffbb",
+      "bytes": 446,
+      "sha256": "908dff132c0f0e3309906fd0907a9b6b2cbbe42a57634631d6cc0ee0b003093e",
       "hash_kind": "file-bytes"
     },
     {
       "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/context-positive-controls.json",
-      "bytes": 422,
-      "sha256": "1a46288a647ca3f901873b9f78afa59d8eea8bf6ca6a880ff2a7824bf9ae8e73",
+      "bytes": 446,
+      "sha256": "ac6a420a0e49ed519ef47d5493f8bd779b748fb168a0d8e8e5bc8aa990a7ea6d",
       "hash_kind": "file-bytes"
     },
     {
       "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/coupled-tests-actual-execution.json",
-      "bytes": 11322,
-      "sha256": "18fd7303c5cba29196e79234f3b789c85557d6a48d2afa6b0b3e450d0f47081b",
+      "bytes": 11286,
+      "sha256": "84181ee17da44c6fe90d79522228b1476b57e780e5221926cc3c671d10a87e57",
       "hash_kind": "file-bytes"
     },
     {
@@ -531,8 +531,8 @@
     },
     {
       "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/coupled-tests.stdout",
-      "bytes": 4040,
-      "sha256": "d9e748505ce310c7f376bbe9ce80878abbccf8d2c12cbed659d2c2933328b70f",
+      "bytes": 4025,
+      "sha256": "330c04213a17049f2596a9a1b46ce069aff33a9895e500e6bc40b7a0fbab5355",
       "hash_kind": "file-bytes"
     },
     {
@@ -569,6 +569,36 @@
       "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/positive-controls.json",
       "bytes": 460,
       "sha256": "0f0aa3b99f62074a888a47a02cc6bc4f8f8714548b1deb16c7241161c70bc221",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-7c38/context-negative-controls.json",
+      "bytes": 422,
+      "sha256": "ccf988917e9b2be766395c924fce4395fad1aaea9b949de76d29ffc6928bffbb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-7c38/context-positive-controls.json",
+      "bytes": 422,
+      "sha256": "1a46288a647ca3f901873b9f78afa59d8eea8bf6ca6a880ff2a7824bf9ae8e73",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-7c38/coupled-tests-actual-execution.json",
+      "bytes": 11322,
+      "sha256": "18fd7303c5cba29196e79234f3b789c85557d6a48d2afa6b0b3e450d0f47081b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-7c38/coupled-tests.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-7c38/coupled-tests.stdout",
+      "bytes": 4040,
+      "sha256": "d9e748505ce310c7f376bbe9ce80878abbccf8d2c12cbed659d2c2933328b70f",
       "hash_kind": "file-bytes"
     },
     {
@@ -645,8 +675,8 @@
     },
     {
       "path": "test/build-context-validation-vintage.test.mjs",
-      "bytes": 7566,
-      "sha256": "ddaf60c1dc1b1bd2e42dbee60f0480b2890cc9c494b5b3a4c164c182cdd18177",
+      "bytes": 8618,
+      "sha256": "b079997cb9d4df55df1c615ff23214ad74cf1a063291f52a72348c0165c76f94",
       "hash_kind": "file-bytes"
     },
     {
@@ -758,16 +788,16 @@
       "value": 6,
       "unit": "count",
       "vintage": "archived",
-      "input_sha256": "1a46288a647ca3f901873b9f78afa59d8eea8bf6ca6a880ff2a7824bf9ae8e73",
-      "evaluation_commit": "7c38a431fe89085b11d3c2a89a7934a788164f9c"
+      "input_sha256": "ac6a420a0e49ed519ef47d5493f8bd779b748fb168a0d8e8e5bc8aa990a7ea6d",
+      "evaluation_commit": "90e3e58de82c7587326f35d75291bc1ce385f573"
     },
     {
       "id": "all_focused_test_count",
       "value": 38,
       "unit": "count",
       "vintage": "archived",
-      "input_sha256": "1a46288a647ca3f901873b9f78afa59d8eea8bf6ca6a880ff2a7824bf9ae8e73",
-      "evaluation_commit": "7c38a431fe89085b11d3c2a89a7934a788164f9c"
+      "input_sha256": "ac6a420a0e49ed519ef47d5493f8bd779b748fb168a0d8e8e5bc8aa990a7ea6d",
+      "evaluation_commit": "90e3e58de82c7587326f35d75291bc1ce385f573"
     }
   ],
   "metric_bindings": [
@@ -1030,6 +1060,26 @@
     },
     {
       "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/positive-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-7c38/context-negative-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-7c38/context-positive-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-7c38/coupled-tests-actual-execution.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-7c38/coupled-tests.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-7c38/coupled-tests.stdout",
       "status": "added"
     },
     {
