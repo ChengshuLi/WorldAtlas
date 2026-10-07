@@ -91,7 +91,7 @@ manifest={'version':1,'issue':1316,'lane':'geography','worker_id':claim['claim']
   'python methods/run_once.py --execution 4ca1eaf014e3c2e38953812090aa6078ec960ae0 --run two --output .cache/japan-nine-gap-run-two/source-overlays.json --receipt research/geography/japan-nine-gap-family-source-fitness-20261007/runs/run-two.json --log research/geography/japan-nine-gap-family-source-fitness-20261007/runs/run-two.log',
   'python methods/build_source_fitness_table.py',
   'node scripts/evidence-quality.mjs research/geography/japan-nine-gap-family-source-fitness-20261007/evidence-quality.json'],
- 'change_receipts':[{'path':PREFIX+p.relative_to(ROOT).as_posix(),'status':'added','previous_path':None}
+ 'change_receipts':[{'path':PREFIX+p.relative_to(ROOT).as_posix(),'status':'added'}
   for p in sorted(ROOT.rglob('*')) if p.is_file()]}
 (ROOT/'evidence-quality.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')
 print(json.dumps({'baseline_files':len(baseline_files),'sources':len(sources),'outputs':len(candidate),'source_files':sum(len(x.get('files',[])) for x in sources),'evidence_quality_bytes':(ROOT/'evidence-quality.json').stat().st_size},ensure_ascii=False))
