@@ -13,7 +13,7 @@ PACKET = pathlib.Path(__file__).resolve().parent
 SOURCE = ROOT / "data/macro-improvements/macro-coverage-oceania/osm-2af0d96ae4f6.xml.gz"
 EXPECTED_RAW = "0b150bc8b2675fceeca0fca17661d5c373cc1381c4c7667b92b0e8cb4e0dbad4"
 EXPECTED_GZIP = "ade053ac91d0f2f4b6d7a033bba95c3fd39c2468b55b58ab14b2120e8420fb07"
-BASELINE = "3e22e5a2562526e5c9dc3d1aa87c5cc2c3e2e5bc"
+BASELINE = "9be99dfefb5871237ac464c6ef8a23e82be501f6"
 
 def source_bytes(path):
     if path.exists():

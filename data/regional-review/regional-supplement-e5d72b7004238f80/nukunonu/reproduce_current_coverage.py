@@ -22,7 +22,7 @@ from shapely.ops import unary_union
 ROOT = Path(__file__).resolve().parents[4]
 PACKET = Path(__file__).resolve().parent
 BOUNTY = ROOT / "data/regional-review/regional-supplement-b5299df90ec984cc/bounty-islands"
-BASELINE = "3e22e5a2562526e5c9dc3d1aa87c5cc2c3e2e5bc"
+BASELINE = "9be99dfefb5871237ac464c6ef8a23e82be501f6"
 ARCHIVE_COMMIT = "4afe1cb250fe68f5c63022d9583b3b89b9e607a2"
 SUBJECTS = [
     {

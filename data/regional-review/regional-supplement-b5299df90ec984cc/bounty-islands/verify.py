@@ -15,7 +15,7 @@ EXPECTED_RAW = "9bb048bfe6efb335bffbe08bda484a0283571eb7b6f839e9e0e99268ca8f177c
 GSHHG = ROOT / "data/macro-improvements/macro-coverage-oceania/gshhg-selected-full-records.bin.gz"
 GSHHG_GZIP = "7e52c4c7c13ea3b2d35120cc0f1f6832007865750b98f42d5cd9c95162df1df4"
 GSHHG_NATIVE = "a7c071d1e80655b7a929d9a0a3f694f915a224b59b449505560fd40433c71b51"
-BASELINE = "3e22e5a2562526e5c9dc3d1aa87c5cc2c3e2e5bc"
+BASELINE = "9be99dfefb5871237ac464c6ef8a23e82be501f6"
 
 def require(ok, message):
     if not ok:
