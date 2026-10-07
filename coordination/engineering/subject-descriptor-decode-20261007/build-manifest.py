@@ -49,7 +49,7 @@ for kind in ['positive','negative']:
  m['validation'].append({'method_id':'context-vintage','kind':kind,'outcome':'passed','evidence_path':str(NS/'verification'/('context-'+kind+'-controls.json'))})
 p=str(NS/'verification/context-positive-controls.json');raw=(ROOT/p).read_bytes()
 for key in ['context_control_count','all_focused_test_count']:
- value=json.loads(raw)[key];m['metrics'].append({'id':key,'value':value,'unit':'count','vintage':'archived','input_sha256':sha(raw),'evaluation_commit':'90e3e58de82c7587326f35d75291bc1ce385f573'});m['metric_bindings'].append({'metric_id':key,'path':p,'json_pointer':'/'+key});m['summaries'].append({'metric_id':key,'value':value,'unit':'count'})
+ value=json.loads(raw)[key];m['metrics'].append({'id':key,'value':value,'unit':'count','vintage':'archived','input_sha256':sha(raw),'evaluation_commit':'99160ebecb6e94f3419609810d81d33b019e875a'});m['metric_bindings'].append({'metric_id':key,'path':p,'json_pointer':'/'+key});m['summaries'].append({'metric_id':key,'value':value,'unit':'count'})
 m['conclusions'][0]['source_ids'].append('original-context-code')
 m['commands'].append('node --test test/evidence-quality.test.mjs test/premerge-evidence.test.mjs test/build-context-validation-vintage.test.mjs')
 (ROOT/manifest).write_text(json.dumps(m,indent=2)+'\n');print(json.dumps({'outputs':len(outputs),'baseline_files':len(inputs),'bytes':sum(x['bytes'] for x in outputs+inputs),'metrics':len(metrics)}))

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "execution_commit": "99160ebecb6e94f3419609810d81d33b019e875a",
+  "execution_commit": "90e3e58de82c7587326f35d75291bc1ce385f573",
   "command": [
     "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
     "--test",
@@ -8,9 +8,9 @@
     "test/premerge-evidence.test.mjs",
     "test/build-context-validation-vintage.test.mjs"
   ],
-  "started_at": "2026-10-07T12:43:07.464737+00:00",
-  "ended_at": "2026-10-07T12:43:07.691795+00:00",
-  "elapsed_seconds": 0.22649229199999987,
+  "started_at": "2026-10-07T12:37:10.258978+00:00",
+  "ended_at": "2026-10-07T12:37:10.539247+00:00",
+  "elapsed_seconds": 0.27966337500000016,
   "exit_code": 0,
   "runtime": {
     "node": "v24.19.0",
@@ -28,11 +28,6 @@
       "path": "coordination/engineering/subject-descriptor-decode-20261007/context-vintage-dispatch.mjs",
       "sha256": "0026e844448d2e0589214b555a77dc4a373ad8a2302789d413b6f992c746e316",
       "bytes": 6944
-    },
-    {
-      "path": "coordination/engineering/subject-descriptor-decode-20261007/fixtures/original-context-stage.json",
-      "sha256": "471e6a71856c13b5856cd74f24b79cc9961b3b091980e8b9106a19c1f32a2765",
-      "bytes": 6278
     },
     {
       "path": "coordination/engineering/subject-descriptor-decode-20261007/legacy-context-v1/hosted/geographic-releases.js",
@@ -261,8 +256,8 @@
     },
     {
       "path": "test/build-context-validation-vintage.test.mjs",
-      "sha256": "c8e7882ea117b9a9279a63d59f8e81b50f83d470d2a45d704648d59e8c933ec8",
-      "bytes": 8659
+      "sha256": "b079997cb9d4df55df1c615ff23214ad74cf1a063291f52a72348c0165c76f94",
+      "bytes": 8618
     },
     {
       "path": "test/evidence-quality.test.mjs",
@@ -275,8 +270,8 @@
       "bytes": 22314
     }
   ],
-  "stdout_sha256": "5cdb24e6b88807d98969c846b295d6ef1f64a0a2d1cb40fcade82ee28e536c3a",
+  "stdout_sha256": "330c04213a17049f2596a9a1b46ce069aff33a9895e500e6bc40b7a0fbab5355",
   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-  "code_closure_note": "Complete literal import/re-export closure, authenticated dynamic original modules, and exact original stage fixture; tests require no original Git lookup",
-  "limitation": "38 focused controls, including six coupled controls; no complete context/world scientific execution. Complete existing context consumer must pass hosted CI."
+  "code_closure_note": "Complete literal import/re-export closure plus all authenticated dynamically imported original modules",
+  "limitation": "38 focused code controls, including six coupled controls and genuine index-only drift rejection; no complete context/world scientific execution. Full context continuation remains required in hosted package CI."
 }

@@ -345,14 +345,14 @@
     },
     {
       "path": "coordination/engineering/subject-descriptor-decode-20261007/README.md",
-      "bytes": 4502,
-      "sha256": "15f3c22f8246076e6ca3832a947f98c2205a5e65f2c3049050f14e7431f91c31",
+      "bytes": 4942,
+      "sha256": "333c9d4b338a051af85e2c172a4f4dbd54342ae02773829936ac189764f37b4d",
       "hash_kind": "file-bytes"
     },
     {
       "path": "coordination/engineering/subject-descriptor-decode-20261007/build-manifest.py",
       "bytes": 7469,
-      "sha256": "9204402ec5f14cf7b87147c60855ebe86d9c6b3c135a03a41506862729d25979",
+      "sha256": "3d94415592511f606855da732104bb79aee4c3f17542fb2cba827bc472b5b5da",
       "hash_kind": "file-bytes"
     },
     {
@@ -365,6 +365,12 @@
       "path": "coordination/engineering/subject-descriptor-decode-20261007/context-vintage-dispatch.mjs",
       "bytes": 6944,
       "sha256": "0026e844448d2e0589214b555a77dc4a373ad8a2302789d413b6f992c746e316",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/fixtures/original-context-stage.json",
+      "bytes": 6278,
+      "sha256": "471e6a71856c13b5856cd74f24b79cc9961b3b091980e8b9106a19c1f32a2765",
       "hash_kind": "file-bytes"
     },
     {
@@ -507,20 +513,20 @@
     },
     {
       "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/context-negative-controls.json",
-      "bytes": 446,
-      "sha256": "908dff132c0f0e3309906fd0907a9b6b2cbbe42a57634631d6cc0ee0b003093e",
+      "bytes": 450,
+      "sha256": "2346630dde49a7835b5aa2017c24e738dd856592964f9bb19257ed375928384d",
       "hash_kind": "file-bytes"
     },
     {
       "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/context-positive-controls.json",
-      "bytes": 446,
-      "sha256": "ac6a420a0e49ed519ef47d5493f8bd779b748fb168a0d8e8e5bc8aa990a7ea6d",
+      "bytes": 450,
+      "sha256": "03be0865d7ffe64c72fc3b25198bf73498bc9ed3c63870ad4d100570054d3f2e",
       "hash_kind": "file-bytes"
     },
     {
       "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/coupled-tests-actual-execution.json",
-      "bytes": 11286,
-      "sha256": "84181ee17da44c6fe90d79522228b1476b57e780e5221926cc3c671d10a87e57",
+      "bytes": 11515,
+      "sha256": "b03eb17ebc06bc165f35dc5d6bd8c0381747b366f0a95de1bc195ab348a4b72a",
       "hash_kind": "file-bytes"
     },
     {
@@ -531,8 +537,8 @@
     },
     {
       "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/coupled-tests.stdout",
-      "bytes": 4025,
-      "sha256": "330c04213a17049f2596a9a1b46ce069aff33a9895e500e6bc40b7a0fbab5355",
+      "bytes": 4032,
+      "sha256": "5cdb24e6b88807d98969c846b295d6ef1f64a0a2d1cb40fcade82ee28e536c3a",
       "hash_kind": "file-bytes"
     },
     {
@@ -599,6 +605,36 @@
       "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-7c38/coupled-tests.stdout",
       "bytes": 4040,
       "sha256": "d9e748505ce310c7f376bbe9ce80878abbccf8d2c12cbed659d2c2933328b70f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-90e3/context-negative-controls.json",
+      "bytes": 446,
+      "sha256": "908dff132c0f0e3309906fd0907a9b6b2cbbe42a57634631d6cc0ee0b003093e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-90e3/context-positive-controls.json",
+      "bytes": 446,
+      "sha256": "ac6a420a0e49ed519ef47d5493f8bd779b748fb168a0d8e8e5bc8aa990a7ea6d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-90e3/coupled-tests-actual-execution.json",
+      "bytes": 11286,
+      "sha256": "84181ee17da44c6fe90d79522228b1476b57e780e5221926cc3c671d10a87e57",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-90e3/coupled-tests.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-90e3/coupled-tests.stdout",
+      "bytes": 4025,
+      "sha256": "330c04213a17049f2596a9a1b46ce069aff33a9895e500e6bc40b7a0fbab5355",
       "hash_kind": "file-bytes"
     },
     {
@@ -675,8 +711,8 @@
     },
     {
       "path": "test/build-context-validation-vintage.test.mjs",
-      "bytes": 8618,
-      "sha256": "b079997cb9d4df55df1c615ff23214ad74cf1a063291f52a72348c0165c76f94",
+      "bytes": 8659,
+      "sha256": "c8e7882ea117b9a9279a63d59f8e81b50f83d470d2a45d704648d59e8c933ec8",
       "hash_kind": "file-bytes"
     },
     {
@@ -788,16 +824,16 @@
       "value": 6,
       "unit": "count",
       "vintage": "archived",
-      "input_sha256": "ac6a420a0e49ed519ef47d5493f8bd779b748fb168a0d8e8e5bc8aa990a7ea6d",
-      "evaluation_commit": "90e3e58de82c7587326f35d75291bc1ce385f573"
+      "input_sha256": "03be0865d7ffe64c72fc3b25198bf73498bc9ed3c63870ad4d100570054d3f2e",
+      "evaluation_commit": "99160ebecb6e94f3419609810d81d33b019e875a"
     },
     {
       "id": "all_focused_test_count",
       "value": 38,
       "unit": "count",
       "vintage": "archived",
-      "input_sha256": "ac6a420a0e49ed519ef47d5493f8bd779b748fb168a0d8e8e5bc8aa990a7ea6d",
-      "evaluation_commit": "90e3e58de82c7587326f35d75291bc1ce385f573"
+      "input_sha256": "03be0865d7ffe64c72fc3b25198bf73498bc9ed3c63870ad4d100570054d3f2e",
+      "evaluation_commit": "99160ebecb6e94f3419609810d81d33b019e875a"
     }
   ],
   "metric_bindings": [
@@ -924,6 +960,10 @@
     },
     {
       "path": "coordination/engineering/subject-descriptor-decode-20261007/context-vintage-dispatch.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/fixtures/original-context-stage.json",
       "status": "added"
     },
     {
@@ -1080,6 +1120,26 @@
     },
     {
       "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-7c38/coupled-tests.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-90e3/context-negative-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-90e3/context-positive-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-90e3/coupled-tests-actual-execution.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-90e3/coupled-tests.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/prior-coupled-90e3/coupled-tests.stdout",
       "status": "added"
     },
     {
