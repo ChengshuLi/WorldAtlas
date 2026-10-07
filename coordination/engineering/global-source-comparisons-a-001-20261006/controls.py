@@ -1,5 +1,5 @@
 """Directed controls execute the actual frozen producer loop and input reader."""
-import ast, pathlib, json, hashlib, collections, time, gzip, argparse
+import ast, pathlib, json, hashlib, collections, time, gzip, argparse, re, types
 from shapely import STRtree, union_all
 from shapely.geometry import shape, mapping
 from shapely.errors import GEOSException
@@ -85,5 +85,51 @@ for records,expected in [([dict(full,component_ids=['c1','c1'])],['c1','c2']),([
  try:family_fixture(records,expected)
  except AssertionError:pass
  else:raise AssertionError('actual family reader accepted duplicate or omitted members')
-result={'outcome':'passed','actual_producer_sha256':sha(code),'actual_control_sha256':sha(pathlib.Path(__file__).read_bytes()),'controls':['whole component original pointset hashes','full source polygon hole retained','positive source coverage retains unknown surface/ownership/cause','zero-area boundary contact retained','invalid source feature remains explicit unknown','actual input reader rejects changed whole source bytes','actual input reader rejects omitted alias','retained actual numerical inconsistency remains unknown','zero and positive consistent diagnostics remain consistent','actual verifier rejects changed and missing source receipts','actual verifier rejects escaping and symlink-ancestor matching receipt bytes','actual family reader accepts complete roster','actual family reader rejects duplicated component members','actual family reader rejects omitted scope members','actual family reader rejects duplicated family records'],'units':'literal source coordinate diagnostics and whole-byte custody; no geographic area/distance or water approval','row_statuses':{i:v['status']for i,v in rows.items()}}
+# Exercise actual immutable expectation and selector functions, preserving body mutation failures.
+selector=next(n for n in verifier.body if isinstance(n,ast.FunctionDef) and n.name=='validate_selector')
+selector_context={'re':re};exec(compile(ast.Module(body=[selector],type_ignores=[]),'actual-selector', 'exec'),selector_context)
+selector_context['validate_selector']('a'*40)
+for bad in ['not-an-immutable-commit','A'*40,'a'*39]:
+ try:selector_context['validate_selector'](bad)
+ except AssertionError:pass
+ else:raise AssertionError('actual verifier accepted invalid producer selector')
+expected_reader=next(n for n in verifier.body if isinstance(n,ast.FunctionDef) and n.name=='frozen_expected')
+expected_root=out/'immutable-expectations';expected_root.mkdir();original={'scope.json':canon({'complete_component_ids':['original']}),'historical-original-rows.json.gz':gzip.compress(canon([{'component':'original'}]),mtime=0)}
+for name,body in original.items():(expected_root/name).write_bytes(body)
+class FrozenGitFixture:
+ @staticmethod
+ def check_output(command,cwd):
+  if command[1]=='ls-tree':return b'100644 blob '+b'a'*40+b'\t'+command[-1].encode()+b'\n'
+  assert command[1]=='show';return original[command[2].split(':',1)[1].split('/',1)[1]]
+expected_context={'pathlib':pathlib,'subprocess':FrozenGitFixture,'root':expected_root,'ROOT':out,'PREFIX':'fixture','a':types.SimpleNamespace(producer_commit='a'*40)}
+exec(compile(ast.Module(body=[expected_reader],type_ignores=[]),'actual-immutable-expectation-reader','exec'),expected_context)
+for name,body in original.items():
+ assert expected_context['frozen_expected'](name)==body
+ (expected_root/name).write_bytes(b'coherently-rebound-local-expectation')
+ try:expected_context['frozen_expected'](name)
+ except AssertionError:pass
+ else:raise AssertionError('actual verifier accepted mutable expected scope/rows')
+ (expected_root/name).write_bytes(body)
+root_link=out.parent/(out.name+'-run-root-link');root_link.symlink_to(out.resolve(),target_is_directory=True)
+reader_context['run']=root_link
+try:reader_context['checked'](receipt_pin)
+except AssertionError:pass
+else:raise AssertionError('actual verifier accepted symlink run root')
+root_link.unlink();reader_context['run']=out
+# Exercise actual retainer source/target containment and whole-byte positive path.
+retainer=ast.parse((root/'retain-run.py').read_bytes());functions=[n for n in retainer.body if isinstance(n,ast.FunctionDef) and n.name in ['checked_source','retain']];assert len(functions)==2
+retained_root=out/'retained-fixture';retained_root.mkdir();retainer_context={'pathlib':pathlib,'run':out,'CASE':retained_root,'ROOT':out,'gzip':gzip,'sha':sha}
+exec(compile(ast.Module(body=functions,type_ignores=[]),'actual-retainer-readers','exec'),retainer_context)
+assert retainer_context['checked_source'](receipt_file.name)==receipt_body
+positive_pin=retainer_context['retain']('ordinary/source.json.gz',receipt_body);assert(retained_root/'ordinary/source.json.gz').read_bytes()==receipt_body
+source_link=out/'source-parent-link';source_link.symlink_to(out.resolve(),target_is_directory=True)
+try:retainer_context['checked_source']('source-parent-link/'+receipt_file.name)
+except AssertionError:pass
+else:raise AssertionError('actual retainer accepted symlink source ancestor')
+source_link.unlink();target_link=retained_root/'target-parent-link';target_link.symlink_to(out.resolve(),target_is_directory=True)
+try:retainer_context['retain']('target-parent-link/new.json.gz',receipt_body)
+except AssertionError:pass
+else:raise AssertionError('actual retainer wrote through target ancestor symlink')
+target_link.unlink()
+result={'outcome':'passed','actual_producer_sha256':sha(code),'actual_control_sha256':sha(pathlib.Path(__file__).read_bytes()),'controls':['whole component original pointset hashes','full source polygon hole retained','positive source coverage retains unknown surface/ownership/cause','zero-area boundary contact retained','invalid source feature remains explicit unknown','actual input reader rejects changed whole source bytes','actual input reader rejects omitted alias','retained actual numerical inconsistency remains unknown','zero and positive consistent diagnostics remain consistent','actual verifier rejects changed and missing source receipts','actual verifier rejects escaping and symlink-ancestor matching receipt bytes','actual family reader accepts complete roster','actual family reader rejects duplicated component members','actual family reader rejects omitted scope members','actual family reader rejects duplicated family records','actual verifier rejects invalid immutable selector','actual immutable reader rejects locally rebound expected scope','actual immutable reader rejects locally rebound expected rows','actual verifier rejects symlink run root','actual retainer accepts exact ordinary complete bytes','actual retainer rejects source ancestor symlink','actual retainer rejects target ancestor symlink'],'units':'literal source coordinate diagnostics and whole-byte custody; no geographic area/distance or water approval','row_statuses':{i:v['status']for i,v in rows.items()}}
 (out/'positive-control.json').write_bytes(canon(result));(out/'negative-control.json').write_bytes(canon(result));print(json.dumps(result))

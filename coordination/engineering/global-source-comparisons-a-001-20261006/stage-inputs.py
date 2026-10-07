@@ -12,7 +12,8 @@ def git(commit,path):
     assert mode in (b"100644",b"100755")
     return subprocess.check_output(["git","-C",str(repo),"show",commit+":"+path])
 inputs=root/"i";inputs.mkdir(exist_ok=True);aliases=[];written={}
-for ordinal,pin in enumerate(scope["full_input_pins"]):
+supplemental=json.loads((root/"supplemental-input-pins.json").read_bytes())["pins"]
+for ordinal,pin in enumerate(scope["full_input_pins"]+supplemental):
     commit=pin.get("commit","1c4b606d35614bd7c4990bb9da1098fa181c7fe8")
     body=git(commit,pin["path"]);assert len(body)==pin["bytes"] and digest(body)==pin["sha256"]
     raw=gzip.decompress(body) if body[:2]==b"\x1f\x8b" else body

@@ -1,19 +1,37 @@
 """Restore every original row and geometry; do not repeat numerical science."""
-import pathlib,json,gzip,hashlib,argparse,collections,copy
+import pathlib,json,gzip,hashlib,argparse,collections,copy,subprocess,re
 
 def canon(v):return (json.dumps(v,sort_keys=True,separators=(",",":"),ensure_ascii=False,allow_nan=False)+"\n").encode()
 def sha(b):return hashlib.sha256(b).hexdigest()
-p=argparse.ArgumentParser();p.add_argument('--producer-commit',required=True);p.add_argument('--run',required=True);p.add_argument('--out',required=True);a=p.parse_args();root=pathlib.Path(__file__).parent;run=pathlib.Path(a.run)
-scope=json.loads((root/'scope.json').read_bytes());expected=json.loads(gzip.decompress((root/'historical-original-rows.json.gz').read_bytes()));by_id={r['component']:r for r in expected};assert len(by_id)==len(expected)
-report=json.loads((run/'receipt.json').read_bytes())
-assert report['producer_commit']==a.producer_commit and report['script_sha256']==sha((root/'producer.py').read_bytes())
-assert report['cohort_sha256']==sha((root/'scope.json').read_bytes()) and report['source_products']==scope['source_ids']
+def validate_selector(value):
+ assert re.fullmatch('[a-f0-9]{40}',value), 'immutable producer selector required'
+p=argparse.ArgumentParser();p.add_argument('--producer-commit',required=True);p.add_argument('--run',required=True);p.add_argument('--out',required=True);a=p.parse_args();validate_selector(a.producer_commit)
+root=pathlib.Path(__file__).resolve().parent;ROOT=root.parents[2];PREFIX=str(root.relative_to(ROOT));run=pathlib.Path(a.run)
+assert run.is_absolute() and '..' not in run.parts and run.resolve().is_relative_to(ROOT/'.cache')
+for parent in [run,*run.parents]:assert not parent.is_symlink()
+assert run.is_dir()
+def frozen_expected(name):
+ relative=pathlib.Path(name);assert not relative.is_absolute() and '..' not in relative.parts
+ path=root/relative;assert path.is_file() and not path.is_symlink()
+ for parent in path.parents:
+  assert not parent.is_symlink()
+  if parent==ROOT:break
+ full=PREFIX+'/'+name;tree=subprocess.check_output(['git','ls-tree',a.producer_commit,'--',full],cwd=ROOT).split();assert tree[0] in (b'100644',b'100755')
+ body=subprocess.check_output(['git','show',a.producer_commit+':'+full],cwd=ROOT);assert path.read_bytes()==body,('local expected input differs from immutable producer',name)
+ return body
+assert frozen_expected('verify.py')==pathlib.Path(__file__).read_bytes()
+producer_bytes=frozen_expected('producer.py');scope_bytes=frozen_expected('scope.json');original_bytes=frozen_expected('historical-original-rows.json.gz');unknown_bytes=frozen_expected('historical-operation-unknowns.json.gz');witness_bytes=frozen_expected('historical-witness-native-joins.json.gz')
+scope=json.loads(scope_bytes);expected=json.loads(gzip.decompress(original_bytes));by_id={r['component']:r for r in expected};assert len(by_id)==len(expected)
+report_path=run/'receipt.json';assert report_path.is_file() and not report_path.is_symlink();report_bytes=report_path.read_bytes();report=json.loads(report_bytes)
+assert report['producer_commit']==a.producer_commit and report['script_sha256']==sha(producer_bytes)
+assert report['cohort_sha256']==sha(scope_bytes) and report['source_products']==scope['source_ids']
 def checked_bytes(pin):
+ assert not run.is_symlink()
  path=run/pin['path'];assert not pathlib.Path(pin['path']).is_absolute() and '..' not in pathlib.Path(pin['path']).parts
  assert path.resolve().is_relative_to(run.resolve())
  for parent in path.parents:
-  if parent==run:break
   assert not parent.is_symlink()
+  if parent==run:break
  assert path.is_file() and not path.is_symlink();body=path.read_bytes();assert len(body)==pin['bytes'] and sha(body)==pin['sha256'] and len(body)<=32*1024*1024
  return body
 def checked(pin):
@@ -53,8 +71,11 @@ for pin in report['outputs']:
   if unionarea is not None and ((unionarea>0)!=positive):unknown.append(i)
   if row['status']=='one-compatible-recorded-subject-uniquely-covers-component':witness.append(i)
 assert seen==set(scope['complete_component_ids'])==set(by_id) and used==set(objects) and dict(counts)==report['counts']
-old_unknown=json.loads(gzip.decompress((root/'historical-operation-unknowns.json.gz').read_bytes()));old_witness=json.loads(gzip.decompress((root/'historical-witness-native-joins.json.gz').read_bytes()))
+old_unknown=json.loads(gzip.decompress(unknown_bytes));old_witness=json.loads(gzip.decompress(witness_bytes))
 assert set(unknown)=={v['component']for v in old_unknown} and set(witness)=={v['component']for v in old_witness}
 normalized=copy.deepcopy(report);normalized.pop('elapsed_seconds');scientific_hash=sha(canon({'full_result':normalized,'whole_artifacts':sorted(scientific_pins,key=lambda r:r['path'])}))
 result={'producer_commit':report['producer_commit'],'outcome':'passed','complete_components':len(seen),'complete_families':len(scope['complete_family_ids']),'all_original_rows_equal':True,'full_geometry_hashes':hashes,'complete_witnesses':len(witness),'complete_operation_unknowns':len(unknown),'scientific_product_sha256':scientific_hash,'run_report_sha256':sha((run/'receipt.json').read_bytes()),'actual_verifier_sha256':sha(pathlib.Path(__file__).read_bytes()),'limits':['Complete pointset/row custody and numerical discrepancy retention; no land/water, ownership, cause or repair approval.','Verification is not a scientific execution.']}
-out=pathlib.Path(a.out);assert not out.exists();out.write_bytes(canon(result));print(json.dumps(result))
+out=pathlib.Path(a.out);assert out.is_absolute() and '..' not in out.parts and out.resolve().is_relative_to(ROOT/'.cache') and not out.exists()
+for parent in [out,*out.parents]:assert not parent.is_symlink()
+with out.open('xb') as stream:stream.write(canon(result))
+print(json.dumps(result))
