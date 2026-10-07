@@ -52,29 +52,16 @@ export async function geographicRelease(db,id=null,{includeStaged=false}={}){
  if(id!=null)text(id,'release ID');
  return clean(await first(id!=null?db.prepare(`SELECT * FROM atlas_geographic_releases WHERE id=?${includeStaged?'':" AND status='published'"}`).bind(id):db.prepare("SELECT * FROM atlas_geographic_releases WHERE status='published' ORDER BY version DESC LIMIT 1")));
 }
-// Pure consumer admission, shared by the publisher and the actual staging path.
-// Keep envelope rejection before database discovery in the service entry point.
-function validateStageEnvelope(payload){
+export async function stageGeographicRelease(db,payload){
  if(!payload||typeof payload!=='object'||Array.isArray(payload))fail('Expected a release import object');
  const inputMembers=payload.memberships??[],inputChanges=payload.changes??[];if(!Array.isArray(inputMembers)||!Array.isArray(inputChanges))fail('Release rows must be arrays');
  if(inputMembers.length+inputChanges.length+Number(Boolean(payload.release))>250)fail('At most 250 release input rows per atomic batch');if(new TextEncoder().encode(JSON.stringify(payload)).length>1048576)fail('Release import exceeds 1 MiB',413);
- return {inputMembers,inputChanges};
-}
-export async function validateGeographicStageBatch(payload,knownRelease=null){
- const {inputMembers,inputChanges}=validateStageEnvelope(payload);
- const release=payload.release?await normalizeRelease(payload.release):knownRelease;
- if(!release)fail('Unknown staged release',404);
+ let release=payload.release?await normalizeRelease(payload.release):await geographicRelease(db,text(payload.release_id,'release ID'),{includeStaged:true});if(!release)fail('Unknown staged release',404);
  if(payload.release_id!=null&&payload.release_id!==release.id)fail('Conflicting release IDs');
  const memberships=inputMembers.map(row=>member(row,release)),changes=inputChanges.map(row=>change(row,release));
  if(memberships.some(r=>![0,1].includes(r.active)))fail('Membership active must be 0 or 1');
  for(const collection of [memberships.map(r=>r.entity_id),changes.map(r=>r.id)])if(new Set(collection).size!==collection.length)fail('Duplicate release row identity in batch');
  const fingerprint=await hash({release:payload.release?release:null,release_id:release.id,memberships,changes}),id=text(payload.ingestion_id??`geographic:${release.id}:${fingerprint}`,'ingestion ID');
- return {release,memberships,changes,fingerprint,id};
-}
-export async function stageGeographicRelease(db,payload){
- validateStageEnvelope(payload);
- const knownRelease=payload.release?null:await geographicRelease(db,text(payload.release_id,'release ID'),{includeStaged:true});
- const {release,memberships,changes,fingerprint,id}=await validateGeographicStageBatch(payload,knownRelease);
  const receipt=clean(await first(db.prepare('SELECT * FROM atlas_ingestions WHERE id=?').bind(id)));if(receipt){if(receipt.fingerprint!==fingerprint)fail('Ingestion ID already identifies different release input',409);return {...receipt,duplicate:true};}
  const prior=await geographicRelease(db,release.id,{includeStaged:true});if(prior?.status==='published')fail('Published geographic releases are immutable; stage a new version',409);
  const statements=[];if(payload.release)statements.push(insert(db,'atlas_geographic_releases',releaseFields,release));

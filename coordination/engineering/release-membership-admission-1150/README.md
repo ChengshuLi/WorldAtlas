@@ -16,10 +16,14 @@ definition and its ordered membership/change requests. Staging parents run seria
 even when prerequisite concurrency is six; their child requests cannot interleave.
 
 Source/entity admission reuses the service's actual field normalizer through an
-internal read-only helper in `hosted/records.js`. Staging admission and the service
-share `validateGeographicStageBatch`, including dates, text fields and creation
-proof semantics; coherent hashes do not excuse invalid consumer fields. This adds no route and changes no
-server gate. It prevents malformed later source fields or intra-batch parent cycles
+internal read-only helper in `hosted/records.js`. Staging admission invokes the unchanged real `stageGeographicRelease` handler,
+including dates, text fields and creation proof semantics, through a strict
+read-only write-intent sink. The sink admits only known query shapes and captures
+the handler's actual proposed statements, then refuses their commit with a private
+marker. Unknown queries, premature success and unrelated errors fail closed;
+a generic conflict response is never admission proof. Coherent hashes do not
+excuse invalid consumer fields. This reviewed equivalent preserves the historical
+build-context code pins, adds no route and changes no server gate. It prevents malformed later source fields or intra-batch parent cycles
 from causing earlier prerequisite writes. Foreign keys, existing record conflicts
 and provider availability still require the real transactional service. A failed
 operation is not a completed publication.

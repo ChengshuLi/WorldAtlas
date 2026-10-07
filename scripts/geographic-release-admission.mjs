@@ -1,6 +1,6 @@
-import {createHash} from 'node:crypto';
+import {createHash, randomUUID} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
-import {validateGeographicStageBatch} from '../hosted/geographic-releases.js';
+import {stageGeographicRelease} from '../hosted/geographic-releases.js';
 import {validateGeographicPrerequisiteBatch} from '../hosted/records.js';
 
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -26,6 +26,65 @@ function rows(payload, field) {
     if (field === 'memberships' && ![0, 1].includes(row.active ?? 1)) throw Error('Invalid membership active flag');
   }
   return values;
+}
+
+/** Exercise the actual consumer's field rules without committing a database
+ * operation. This proves field admission only: existing-state conflicts and
+ * foreign keys still belong to the real transactional staging execution.
+ * Unknown SQL fails closed; reaching the write boundary is deliberately refused.
+ */
+async function validateGeographicStageFields(payload, knownRelease) {
+  const columns = {
+    atlas_geographic_releases: ['id','source_id','version','reference_date','status','hierarchy_sha256','footprints_sha256','membership_sha256','location_ids_sha256','changes_sha256','expected_counts','metadata','published_at'],
+    atlas_geographic_memberships: ['release_id','entity_id','parent_id','reference_name','active','source_id','evidence'],
+    atlas_geographic_changes: ['id','release_id','old_entity_id','new_entity_id','change_type','source_id','evidence'],
+    atlas_ingestions: ['id','fingerprint','counts','created_at'],
+  };
+  const writes = new Map(Object.entries(columns).map(([table, fields]) => [
+    `INSERT INTO ${table}(${fields.join(',')}) VALUES(${fields.map(() => '?').join(',')})${table === 'atlas_ingestions' ? '' : ' ON CONFLICT DO NOTHING'}`,
+    {table, fields},
+  ]));
+  const tokens = new Set(), marker = `Field admission refuses commit:${randomUUID()}`;
+  let captured = false, normalizedRelease = knownRelease;
+  const sink = {
+    prepare(sql) {
+      const write = writes.get(sql);
+      const ingestionRead = sql === 'SELECT * FROM atlas_ingestions WHERE id=?';
+      const releaseRead = sql === 'SELECT * FROM atlas_geographic_releases WHERE id=?';
+      if (!write && !ingestionRead && !releaseRead) throw Error('Unsupported field-admission SQL');
+      return {bind(...values) {
+        if (write) {
+          if (values.length !== write.fields.length) throw Error('Invalid field-admission write shape');
+          const token = Object.freeze({}); tokens.add(token);
+          if (write.table === 'atlas_geographic_releases') {
+            normalizedRelease = Object.fromEntries(write.fields.map((field, index) => [field,
+              ['expected_counts','metadata'].includes(field) ? JSON.parse(values[index]) : values[index]]));
+          }
+          return token;
+        }
+        if (values.length !== 1 || typeof values[0] !== 'string') throw Error('Invalid field-admission read shape');
+        return {async first() {
+          if (ingestionRead) return null;
+          return knownRelease?.id === values[0] ? {...knownRelease, status: 'staged'} : null;
+        }};
+      }};
+    },
+    async batch(statements) {
+      if (!Array.isArray(statements) || !statements.length || statements.length > 251 ||
+          statements.length !== tokens.size || new Set(statements).size !== statements.length ||
+          statements.some(statement => !tokens.has(statement))) throw Error('Invalid field-admission write intent');
+      captured = true;
+      throw Error(marker);
+    },
+  };
+  try {
+    await stageGeographicRelease(sink, payload);
+  } catch (error) {
+    // The handler wraps batch errors. A generic 409 is never sufficient proof.
+    if (captured && error.status === 409 && error.message === marker) return {release: normalizedRelease};
+    throw error;
+  }
+  throw Error('Field admission unexpectedly returned without refusing a commit');
 }
 
 /** Preserve raw row objects/key order; the service remains the semantic authority.
@@ -122,7 +181,7 @@ export async function admitGeographicReleaseBatches(parts, {readBatch, releases 
       for (const body of requests) {
         const candidate = JSON.parse(body);
         const known = knownReleases.get(candidate.release_id);
-        const validated = await validateGeographicStageBatch(candidate, known);
+        const validated = await validateGeographicStageFields(candidate, known);
         if (candidate.release) knownReleases.set(validated.release.id, validated.release);
       }
     }

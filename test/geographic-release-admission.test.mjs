@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
+import {execFileSync} from 'node:child_process';
 import {splitGeographicReleaseBatch,admitGeographicReleaseBatches} from '../scripts/geographic-release-admission.mjs';
 import {publishGeographicReleases} from '../scripts/bootstrap-geographic-release.mjs';
 import {stageGeographicRelease,geographicMembershipHash,geographicLocationIdsHash,geographicChangesHash} from '../hosted/geographic-releases.js';
@@ -142,4 +143,35 @@ test('complete descriptor admission rejects oversized inventory before reading a
  let reads=0;
  await assert.rejects(admitGeographicReleaseBatches(Array.from({length:513},()=>({})),{readBatch:()=>{reads++;}}),/complete phase descriptor budget/);
  assert.equal(reads,0);
+});
+
+
+test('field-only admission refuses unknown reads, premature success and unrelated write failures', () => {
+  const replacements = [
+    ['SELECT * FROM atlas_ingestions WHERE id=?', 'SELECT * FROM unexpected_receipts WHERE id=?'],
+    ["const receipt=clean(await first(db.prepare('SELECT * FROM atlas_ingestions WHERE id=?').bind(id)));", "return {duplicate:true};"],
+    ['await db.batch(statements)', 'await db.batch([...statements,statements[0]])'],
+    ['fail(error.message,409)', "fail('unrelated refusal',409)"],
+  ];
+  for (const replacement of replacements) {
+    const script = `
+      import {registerHooks} from 'node:module';
+      import {createHash} from 'node:crypto';
+      import assert from 'node:assert/strict';
+      const [from,to]=JSON.parse(process.argv[1]);
+      registerHooks({load(url,context,next){const result=next(url,context);
+        if(url.endsWith('/hosted/geographic-releases.js')){
+          const source=String(result.source);assert.ok(source.includes(from));
+          return {...result,source:source.replace(from,to)};
+        }return result;
+      }});
+      const {admitGeographicReleaseBatches}=await import('./scripts/geographic-release-admission.mjs');
+      const {buildCases}=await import('./test/fixtures/geographic-admission/independent-boundaries.mjs');
+      const bytes=Buffer.from(JSON.stringify({release:buildCases().release}));
+      const part={path:'release.json',route:'/api/geography/stage',sha256:createHash('sha256').update(bytes).digest('hex')};
+      await assert.rejects(admitGeographicReleaseBatches([part],{readBatch:()=>bytes}));
+    `;
+    execFileSync(process.execPath,['--input-type=module','-e',script,JSON.stringify(replacement)],
+      {cwd:new URL('..',import.meta.url),stdio:'pipe'});
+  }
 });
