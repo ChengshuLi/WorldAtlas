@@ -155,21 +155,38 @@ def main() -> None:
     with MemoryFile() as memory:
         with memory.open(**profile) as ds:
             ds.write(np.array([[0, 80], [10, NODATA]], dtype="uint8"), 1)
-            selected, _ = mask(ds, [box(0.25, 1.25, 1.75, 1.75).__geo_interface__], crop=True,
+            selected, _ = mask(ds, [box(0, 0, 2, 2).__geo_interface__], crop=True,
                                all_touched=False, filled=False)
+            raw_selected = sorted(int(value) for value in selected[0].data.flatten())
             selected_values = sorted(int(value) for value in selected[0].compressed())
-            if selected_values != [0, 80]:
-                raise ValueError(f"Positive raster control failed: {selected_values}")
+            masked_nodata = int(np.ma.getmaskarray(selected[0]).sum())
+            if raw_selected != [0, 10, 80, NODATA] or selected_values != [0, 10, 80] or masked_nodata != 1:
+                raise ValueError(f"Positive raster/NoData control failed: raw={raw_selected}, valid={selected_values}, masked={masked_nodata}")
             valid = [value for value in selected_values if value != NODATA]
+            edge_only = box(0.01, 1.01, 0.49, 1.49)
+            edge_selected, _ = mask(ds, [edge_only.__geo_interface__], crop=True,
+                                   all_touched=False, filled=False)
+            edge_values = sorted(int(value) for value in edge_selected[0].compressed())
+            if edge_values:
+                raise ValueError(f"Edge-only raster control selected a pixel center: {edge_values}")
             positive = {
                 "method_id": "jrc-gsw-pixel-center-overlay",
                 "kind": "positive-control",
                 "outcome": "passed",
                 "fixture": {"crs": "EPSG:4326", "grid": "2x2, 1-degree cells, origin (0,2)",
-                            "values_by_row": [[0, 80], [10, 255]], "polygon": [0.25, 1.25, 1.75, 1.75]},
+                            "values_by_row": [[0, 80], [10, 255]], "polygon": [0, 0, 2, 2]},
+                "raw_selected_values_including_masked_nodata": raw_selected,
                 "selected_values": selected_values,
                 "valid_values_after_255_nodata_exclusion": valid,
-                "expected": [0, 80],
+                "masked_nodata_cells": masked_nodata,
+                "expected": [0, 10, 80],
+                "edge_only_case": {
+                    "polygon": [0.01, 1.01, 0.49, 1.49],
+                    "polygon_intersects_cell": True,
+                    "contains_any_pixel_center": False,
+                    "selected_values": edge_values,
+                    "expected": [],
+                },
             }
             POSITIVE_CONTROL.write_text(json.dumps(positive, indent=2) + "\n")
             outside = box(2.25, 0.25, 2.75, 0.75)

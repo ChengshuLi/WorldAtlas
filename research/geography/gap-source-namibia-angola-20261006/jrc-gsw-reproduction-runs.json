@@ -1,11 +1,11 @@
 {
   "version": 1,
   "method_id": "jrc-gsw-pixel-center-overlay",
-  "reproduction_claim": "Two complete executions with identical retained inputs, environment, commands, and output hashes.",
+  "reproduction_claim": "Two complete executions with identical retained inputs, environment, commands, and output hashes, after the final production control logic was frozen.",
   "runs": [
     {
       "run_id": "jrc-gsw-complete-run-1",
-      "started_at_utc": "2026-10-07T03:19:08Z",
+      "started_at_utc": "2026-10-07T03:24:02Z",
       "command": [
         "/tmp/namibia-gsw/venv312/bin/python",
         "research/geography/gap-source-namibia-angola-20261006/reproduce_jrc_gsw_water.py"
@@ -38,8 +38,8 @@
         },
         {
           "path": "reproduce_jrc_gsw_water.py",
-          "bytes": 11930,
-          "sha256": "ec5774905af8d3ad7d1115dc727a99924a169ba69baa34edd7ce0d74bb1edc4a"
+          "bytes": 13048,
+          "sha256": "afd3bbc1904e7fc31a982fc4526b6faba3ba94c75f7db0802bd5f710014c6db2"
         },
         {
           "path": "sources/jrc-gsw-2024/occurrence_10E_10S.part-aa",
@@ -100,8 +100,8 @@
         },
         {
           "path": "validation-jrc-gsw-positive-control.json",
-          "bytes": 518,
-          "sha256": "042c7c863740b6782801a264ca870e326615ea72e928c0d5e6fe6b752e0fc68f"
+          "bytes": 866,
+          "sha256": "c1522900623425805458a31dd866700f8fb53d6d78653793304cc42a19b261b4"
         },
         {
           "path": "validation-jrc-gsw-negative-control.json",
@@ -109,11 +109,11 @@
           "sha256": "6e6ac7838f8c0b1f158554cd93dd4ed0ddea5ec38ab7c2e30bfd809e7d79a73b"
         }
       ],
-      "outcome": "completed; 21 candidate components; aggregates recorded in jrc-gsw-water-analysis.json"
+      "outcome": "completed; 21 candidate components; aggregate metrics match retained analysis output"
     },
     {
       "run_id": "jrc-gsw-complete-run-2",
-      "started_at_utc": "2026-10-07T03:19:09Z",
+      "started_at_utc": "2026-10-07T03:24:08Z",
       "command": [
         "/tmp/namibia-gsw/venv312/bin/python",
         "research/geography/gap-source-namibia-angola-20261006/reproduce_jrc_gsw_water.py"
@@ -146,8 +146,8 @@
         },
         {
           "path": "reproduce_jrc_gsw_water.py",
-          "bytes": 11930,
-          "sha256": "ec5774905af8d3ad7d1115dc727a99924a169ba69baa34edd7ce0d74bb1edc4a"
+          "bytes": 13048,
+          "sha256": "afd3bbc1904e7fc31a982fc4526b6faba3ba94c75f7db0802bd5f710014c6db2"
         },
         {
           "path": "sources/jrc-gsw-2024/occurrence_10E_10S.part-aa",
@@ -208,8 +208,8 @@
         },
         {
           "path": "validation-jrc-gsw-positive-control.json",
-          "bytes": 518,
-          "sha256": "042c7c863740b6782801a264ca870e326615ea72e928c0d5e6fe6b752e0fc68f"
+          "bytes": 866,
+          "sha256": "c1522900623425805458a31dd866700f8fb53d6d78653793304cc42a19b261b4"
         },
         {
           "path": "validation-jrc-gsw-negative-control.json",
@@ -217,11 +217,11 @@
           "sha256": "6e6ac7838f8c0b1f158554cd93dd4ed0ddea5ec38ab7c2e30bfd809e7d79a73b"
         }
       ],
-      "outcome": "completed; 21 candidate components; aggregates recorded in jrc-gsw-water-analysis.json"
+      "outcome": "completed; 21 candidate components; aggregate metrics match retained analysis output"
     }
   ],
   "matching_output_hashes": true,
   "limits": [
-    "Reproducibility establishes repeatability under the recorded environment; it does not establish source correctness, a surveyed shoreline, historic channel, cause, or boundary authority."
+    "Repeatability under the recorded environment does not establish source correctness, a surveyed shoreline, historic channel, cause, or boundary authority."
   ]
 }
