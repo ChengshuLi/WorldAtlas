@@ -1,11 +1,12 @@
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
+import {validateGeographicStageBatch} from '../hosted/geographic-releases.js';
 import {validateGeographicPrerequisiteBatch} from '../hosted/records.js';
 
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const MiB = 1024 * 1024;
 export const geographicAdmissionLimits = Object.freeze({rows: 250, requestBytes: MiB,
-  fileBytes: 32 * MiB, phaseBytes: 256 * MiB});
+  fileBytes: 32 * MiB, phaseBytes: 256 * MiB, descriptors: 512});
 const object = value => value && typeof value === 'object' && !Array.isArray(value);
 const identity = value => typeof value === 'string' && value.trim() && value.length <= 2000;
 const digest = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
@@ -87,11 +88,13 @@ export function splitGeographicReleaseBatch(bytes, part) {
  * Encoded, decoded and derived request bytes all count against the phase budget.
  * Returned bodies are captured bytes; execution must not reopen original paths.
  */
-export async function admitGeographicReleaseBatches(parts, {readBatch, phaseBytes = geographicAdmissionLimits.phaseBytes}) {
+export async function admitGeographicReleaseBatches(parts, {readBatch, releases = [], phaseBytes = geographicAdmissionLimits.phaseBytes}) {
+  if (!Array.isArray(parts) || parts.length > geographicAdmissionLimits.descriptors)
+    throw Error('Required geographic inputs exceed complete phase descriptor budget');
   if (typeof readBatch !== 'function') throw Error('Geographic admission requires authenticated input reader');
   if (!Number.isSafeInteger(phaseBytes) || phaseBytes < 1 || phaseBytes > geographicAdmissionLimits.phaseBytes)
     throw Error('Invalid geographic admission phase budget');
-  const plan = new Map(), names = new Set();
+  const plan = new Map(), names = new Set(), knownReleases = new Map(releases.map(release => [release.id, release]));
   let admittedBytes = 0;
   const admit = length => {
     admittedBytes += length;
@@ -114,7 +117,15 @@ export async function admitGeographicReleaseBatches(parts, {readBatch, phaseByte
     const payload = JSON.parse(decoded);
     if (!object(payload)) throw Error('Expected geographic batch object');
     let requests;
-    if (part.route === '/api/geography/stage') requests = splitGeographicReleaseBatch(decoded, part);
+    if (part.route === '/api/geography/stage') {
+      requests = splitGeographicReleaseBatch(decoded, part);
+      for (const body of requests) {
+        const candidate = JSON.parse(body);
+        const known = knownReleases.get(candidate.release_id);
+        const validated = await validateGeographicStageBatch(candidate, known);
+        if (candidate.release) knownReleases.set(validated.release.id, validated.release);
+      }
+    }
     else {
       validateGeographicPrerequisiteBatch(payload);
       if (decoded.length > MiB)

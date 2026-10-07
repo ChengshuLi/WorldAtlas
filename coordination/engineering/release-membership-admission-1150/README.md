@@ -12,10 +12,13 @@ UTF-8 envelope, metadata and ingestion-ID bytes count toward 1 MiB. Original bou
 requests retain their bytes and identities. New child IDs bind the complete parent
 bytes, route, path, child index and content. Full raw row objects, their key order
 and their sequence are preserved. Source/entity registration precedes the release
-definition and its ordered membership/change requests.
+definition and its ordered membership/change requests. Staging parents run serially
+even when prerequisite concurrency is six; their child requests cannot interleave.
 
 Source/entity admission reuses the service's actual field normalizer through an
-internal read-only helper in `hosted/records.js`. This adds no route and changes no
+internal read-only helper in `hosted/records.js`. Staging admission and the service
+share `validateGeographicStageBatch`, including dates, text fields and creation
+proof semantics; coherent hashes do not excuse invalid consumer fields. This adds no route and changes no
 server gate. It prevents malformed later source fields or intra-batch parent cycles
 from causing earlier prerequisite writes. Foreign keys, existing record conflicts
 and provider availability still require the real transactional service. A failed
@@ -39,8 +42,8 @@ An injected interrupted response follows a durable membership write; the same
 captured inputs resume with duplicate receipts, without overwriting prior rows.
 Meaningfully changed content under an existing ingestion ID is rejected. Original
 registry/source rows are compared before and after staging. The unrestricted
-all-predecessors-missing case must refuse its oversized complete phase before
-any bootstrap write; a small compressed transport does not waive decoded budgets.
+all-predecessors-missing case must refuse its oversized descriptor inventory before
+reading any batch or making any bootstrap write; a small compressed transport does not waive decoded budgets.
 
 `verification-first.json` records the original implementation vintage.
 `verification-second.json` records the optimized byte accounting vintage and
@@ -78,3 +81,9 @@ The catalog and successor phases each retain their own complete inventory and
 existing caps; splitting a manifest does not make an oversized single execution
 phase valid. An unrestricted full bootstrap is rejected when its needed inputs
 cannot fit the admitted phase. No request limit or evidence limit is raised.
+
+Complete caller admission caps a needed phase at 512 descriptors before input reads,
+as well as 32 MiB per file and 256 MiB for encoded, decoded and request bytes.
+The catalog seed uses a separately validated existing-v1 manifest; the primary
+manifest binds that manifest, but does not recursively execute or validate it.
+Independent review must validate both inventories and the isolated experiment.

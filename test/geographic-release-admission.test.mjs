@@ -4,7 +4,7 @@ import {createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
 import {splitGeographicReleaseBatch,admitGeographicReleaseBatches} from '../scripts/geographic-release-admission.mjs';
 import {publishGeographicReleases} from '../scripts/bootstrap-geographic-release.mjs';
-import {stageGeographicRelease} from '../hosted/geographic-releases.js';
+import {stageGeographicRelease,geographicMembershipHash,geographicLocationIdsHash,geographicChangesHash} from '../hosted/geographic-releases.js';
 import {buildCases,assertPreservedRequests,combinedRows,wireBytes} from './fixtures/geographic-admission/independent-boundaries.mjs';
 
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -49,7 +49,7 @@ test('bounded originals retain exact bytes and ingestion IDs; duplicate raw IDs 
 test('complete admission authenticates compressed and decoded bytes and captures once for execution', async () => {
   const payload=buildCases().unicode,decoded=Buffer.from(JSON.stringify(payload)),encoded=gzipSync(decoded);
   const part={...descriptor(encoded,'7-memberships-test.json.gz'),encoding:'gzip',payload_sha256:sha(decoded)};
-  let reads=0;const {plan}=await admitGeographicReleaseBatches([part],{readBatch:()=>{reads++;return encoded;}});
+  let reads=0;const {plan}=await admitGeographicReleaseBatches([part],{releases:[buildCases().release],readBatch:()=>{reads++;return encoded;}});
   encoded.fill(0);assert.equal(reads,1);
   assertPreservedRequests([payload],plan.get(part.path).map(b=>JSON.parse(b)));
   await assert.rejects(admitGeographicReleaseBatches([part],{readBatch:()=>encoded}),/hash mismatch/);
@@ -73,7 +73,7 @@ test('real publisher entrypoint performs zero writes for late malformed, missing
     const bytes=new Map([['sources.json',source],['release-7.json',definition],['7-memberships-final.json',late]]);
     const manifest={releases:[c.release],batches:[descriptor(source,'sources.json','/api/records/import'),descriptor(definition,'release-7.json'),descriptor(late,'7-memberships-final.json')]};
     let writes=0,reads=0;
-    const reason={malformed:/JSON|Unexpected|Expected.*property/,missing:/Missing final input/,duplicate:/duplicate.*identity/, 'conflicting-release':/batch release ID mismatch/}[kind];
+    const reason={malformed:/JSON|Unexpected|Expected.*property/,missing:/Missing final input/,duplicate:/duplicate.*identity/, 'conflicting-release':/Unknown staged release/}[kind];
     await assert.rejects(publishGeographicReleases({manifest,mode:'stage',request:async()=>{reads++;return Response.json(null);},
       batch:async()=>{writes++;},readBatch:p=>{if(kind==='missing'&&p.path==='7-memberships-final.json')throw Error('Missing final input');return bytes.get(p.path);}}),reason);
     assert.equal(writes,0,kind);assert.equal(reads,1);
@@ -101,4 +101,45 @@ test('later source field failures and entity cycles are rejected before any earl
 
 test('empty release inventory cannot produce a vacuous completed stage', async () => {
   let calls=0;await assert.rejects(publishGeographicReleases({manifest:{releases:[],batches:[{path:'sources.json'}]},batch:async()=>calls++,request:async()=>calls++}),/Nonempty/);assert.equal(calls,0);
+});
+
+test('independent coherently pinned invalid staging fields reject before prerequisite writes', async () => {
+for(const kind of ['member-reference-name','change-type','release-calendar-date']){
+ const c=buildCases(),release=structuredClone(c.release),members=[structuredClone(c.memberships[0])],changes=[];
+ if(kind==='member-reference-name')members[0].reference_name='x'.repeat(2001);
+ if(kind==='change-type')changes.push({id:'bad-change',change_type:37,source_id:release.source_id,evidence:{}});
+ if(kind==='release-calendar-date')release.reference_date='2026-02-30';
+ release.membership_sha256=await geographicMembershipHash(members);
+ release.location_ids_sha256=await geographicLocationIdsHash(members);
+ release.changes_sha256=await geographicChangesHash(changes);
+ const payloads=[['sources.json','/api/records/import',{sources:[{id:release.source_id,name:'fixture',license:'CC0',vintage:'2026',status:'reference',supported_from:2026,supported_to:2027}]}],['release-7.json','/api/geography/stage',{release}],['7-memberships-late.json','/api/geography/stage',{release_id:release.id,memberships:members,changes}]];
+ const inputs=new Map(payloads.map(([p,r,v])=>[p,Buffer.from(JSON.stringify(v))]));
+ const parts=payloads.map(([path,route])=>({path,route,sha256:sha(inputs.get(path))}));
+ const writes=[];
+ const db={prepare(sql){return {bind(){return this;},async first(){return sql.includes('atlas_geographic_releases')?{...release,status:'staged'}:null;}};},async batch(){return [];}};
+ let error;
+ try{await publishGeographicReleases({manifest:{releases:[release],batches:parts},mode:'stage',concurrency:1,request:async()=>Response.json(null),readBatch:p=>inputs.get(p.path),batch:async(p,b)=>{writes.push(p.path);if(p.route==='/api/geography/stage')return stageGeographicRelease(db,JSON.parse(b));}});}catch(e){error=e.message;}
+ assert.match(error, /Invalid reference name|Invalid change type|ISO calendar date/);assert.deepEqual(writes,[]);
+
+}
+
+});
+
+test('independent delayed parent transports preserve global source order at default concurrency', async () => {
+const c=buildCases(),members=c.memberships,release={...c.release,membership_sha256:await geographicMembershipHash(members),location_ids_sha256:await geographicLocationIdsHash(members),changes_sha256:await geographicChangesHash([])};
+const rows=[['sources.json','/api/records/import',{sources:[{id:release.source_id,name:'fixture',license:'CC0',vintage:'2026',status:'reference',supported_from:2026,supported_to:2027}]}],['release-7.json','/api/geography/stage',{release}],['7-memberships-a.json','/api/geography/stage',{release_id:release.id,memberships:members.slice(0,251)}],['7-memberships-b.json','/api/geography/stage',{release_id:release.id,memberships:members.slice(251)}]];
+const bytes=new Map(rows.map(([p,r,b])=>[p,Buffer.from(JSON.stringify(b))]));const manifest={releases:[release],batches:rows.map(([path,route])=>({path,route,sha256:createHash('sha256').update(bytes.get(path)).digest('hex')}))};
+for(const concurrency of [1,6]){
+ const observed=[],dispatch=[];
+ await publishGeographicReleases({manifest,mode:'stage',concurrency,request:async()=>Response.json(null),readBatch:p=>bytes.get(p.path),batch:async(p,b)=>{const value=JSON.parse(b);if(!value.memberships)return;dispatch.push({path:p.path,first:value.memberships[0].entity_id});if(p.path.endsWith('a.json'))await new Promise(r=>setTimeout(r,30));observed.push(...value.memberships);}});
+
+ assert.equal(observed.length,members.length);assert.deepEqual(observed,members);
+}
+
+});
+
+test('complete descriptor admission rejects oversized inventory before reading any inputs', async () => {
+ let reads=0;
+ await assert.rejects(admitGeographicReleaseBatches(Array.from({length:513},()=>({})),{readBatch:()=>{reads++;}}),/complete phase descriptor budget/);
+ assert.equal(reads,0);
 });

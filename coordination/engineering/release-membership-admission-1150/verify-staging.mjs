@@ -28,7 +28,8 @@ const destination=path.resolve(root,output??'');
 const owner=path.join(root,'coordination/engineering/release-membership-admission-1150');
 if(!destination.startsWith(owner+path.sep)||!destination.endsWith('.json'))throw Error('Use a fresh owned JSON output');
 for(let current=destination;current!==root;current=path.dirname(current)){
- if(fs.existsSync(current)&&fs.lstatSync(current).isSymbolicLink())throw Error('Output symlink refused');
+ let status;try{status=fs.lstatSync(current);}catch(error){if(error.code!=='ENOENT')throw error;}
+ if(status?.isSymbolicLink())throw Error('Output symlink refused');
 }
 if(fs.existsSync(destination)||!fs.statSync(path.dirname(destination)).isDirectory())throw Error('Output must have a fresh filename and existing owned parent');
 registerHooks({load(url,context,next){
@@ -117,8 +118,8 @@ try{
  let refusalReads=0,refusalBytes=0,refusalWrites=0,refusalReason;
  await assert.rejects(publishGeographicReleases({manifest:original,request,mode:'stage',concurrency:1,
   readBatch:part=>{const bytes=read(baseline,'data/geographic-releases/'+part.path);refusalReads++;refusalBytes+=bytes.length;return bytes;},
-  batch:async()=>{refusalWrites++;}}),error=>{refusalReason=error.message;return /complete phase budget/.test(error.message);});
- assert.equal(refusalWrites,0);
+  batch:async()=>{refusalWrites++;}}),error=>{refusalReason=error.message;return /complete phase descriptor budget/.test(error.message);});
+ assert.equal(refusalWrites,0);assert.equal(refusalReads,0);
  const requestHash=createHash('sha256');for(const {body}of bodies)requestHash.update(body).update('\n');
  const ledger={baseline,execution_commit:executionCommit,runtime:{node:process.versions.node,sqlite:db.sqlite.prepare('SELECT sqlite_version() version').get().version},catalog_inputs:phaseInputs.catalog,staging_inputs:phaseInputs.staging,execution_code:[...code.values()],
   memberships:members.length,changes:changes.length,requests:bodies.length,duplicate_replays:replays,interrupted_durable_memberships:firstCount,catalog_phase_admitted_bytes:catalogBytes*3,

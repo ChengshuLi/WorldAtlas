@@ -45,7 +45,7 @@ export async function publishGeographicReleases({manifest,batch,readBatch,reques
   for(const release of manifest.releases)if(priors.get(release.id)?.status!=='published'){
    needed.push(need(`release-${release.version}.json`),...manifest.batches.filter(p=>p.path.startsWith(`${release.version}-`)));
   }
-  ({plan}=await admitGeographicReleaseBatches(needed,{readBatch}));
+  ({plan}=await admitGeographicReleaseBatches(needed,{readBatch,releases:manifest.releases}));
   // Counts alone cannot establish complete staging. Check identities and the
   // actual canonical consumer hashes against each independently pinned release.
   for(const release of manifest.releases)if(priors.get(release.id)?.status!=='published'){
@@ -78,7 +78,9 @@ export async function publishGeographicReleases({manifest,batch,readBatch,reques
   if(!prior||prior.status!=='published'){
    if(mode!=='finalize'){
     await admittedBatch(need(`release-${release.version}.json`));
-    await concurrent(manifest.batches.filter(p=>p.path.startsWith(`${release.version}-`)));
+    // Parent transports and their children preserve the authoritative raw order.
+    // Prerequisite source/entity tiers may still use bounded concurrency.
+    for(const part of manifest.batches.filter(p=>p.path.startsWith(`${release.version}-`)))await admittedBatch(part);
    }
    if(mode==='stage'){published.push({id:release.id,version:release.version,status:'staged',public_readback_verified:false});continue;}
    await request('/api/geography/finalize',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({release_id:release.id})});
