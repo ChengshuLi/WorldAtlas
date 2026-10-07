@@ -73,7 +73,9 @@ def main(commit):
         with (directory/f'science-run-{ordinal}.log').open('xb') as handle:handle.write(raw)
     invocation(directory,'complete-semantic-readback',[python,'-u','-B',str(HERE/'verify.py'),
         '--repo',str(repo),'--run',str(HERE/'r1'),'--science-commit',SCIENCE,
-        '--verification-commit',commit,'--receipt',str(directory/'complete-semantic-readback.json')],commit)
+        '--verification-commit',commit,'--receipt',str(HERE/'.cache/final-semantic-readback.json')],commit)
+    raw=reader.safe_path(HERE/'.cache','final-semantic-readback.json').read_bytes()
+    with (directory/'complete-semantic-readback.json').open('xb') as handle:handle.write(raw)
     report=json.loads(reader.safe_path(HERE,'r1/report.json').read_bytes())
     for method,file in [('complete-ordinary-retention','preparation'),('literal104-exact-witness-diagnosis','measurement')]:
         for kind in ('positive-control','negative-control'):
