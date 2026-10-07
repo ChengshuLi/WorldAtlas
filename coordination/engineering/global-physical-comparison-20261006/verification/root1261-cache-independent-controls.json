@@ -1,0 +1,31 @@
+{
+  "outcome": "PASS",
+  "freeze": "104091cfecd9c83a53f3e6e62f95b0a0c8074351",
+  "actual_comparison_sha256": "f9c226add23a37a39bf7fd34f5d8bdcb34a8d276b331fabf59bf9867b6f84bfe",
+  "checks": [
+    "whole-source-covers",
+    "whole-candidate-covers",
+    "partial-positive",
+    "disjoint",
+    "edge-only",
+    "point-only",
+    "source-hole",
+    "invalid-source",
+    "invalid-candidate",
+    "stale-id-binding-actually-checks-different-object",
+    "translated-whole-object-is-separately-validated",
+    "container-positive",
+    "container-outside",
+    "container-invalid",
+    "decode-valid",
+    "decode-invalid"
+  ],
+  "count": 16,
+  "runtime": {
+    "shapely": "2.1.2",
+    "geos": "3.13.1"
+  },
+  "limits": [
+    "Independent actual-code directed cache/default comparisons; not another worldwide numerical execution or physical classification approval."
+  ]
+}

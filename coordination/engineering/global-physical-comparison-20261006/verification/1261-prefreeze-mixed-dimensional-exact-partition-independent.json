@@ -1,0 +1,143 @@
+{
+  "outcome": "PASS",
+  "method": "Independent corrected actual-producer exact mixed member partition at all four levels",
+  "producer_sha256": "21f772c85df50ee404b30de1e09ee8064a3cb8494f94664c4a178c3ac4a6fdf5",
+  "comparison_sha256": "ae488da36e3aaff83608ef8f45533776f3e36651e0c79bd07071d547cc059225",
+  "cases": [
+    {
+      "case": "polygon-plus-line",
+      "level": 1,
+      "outcome": "PASS",
+      "areas": {
+        "mapped_land_support": 1.0,
+        "mapped_inland_water_support": 0.0,
+        "outside_mapped_L1_context": 1.0
+      },
+      "injected": false
+    },
+    {
+      "case": "polygon-plus-line",
+      "level": 2,
+      "outcome": "PASS",
+      "areas": {
+        "mapped_land_support": 1.0,
+        "mapped_inland_water_support": 1.0,
+        "outside_mapped_L1_context": 0.0
+      },
+      "injected": false
+    },
+    {
+      "case": "polygon-plus-line",
+      "level": 3,
+      "outcome": "PASS",
+      "areas": {
+        "mapped_land_support": 1.0,
+        "mapped_inland_water_support": 1.0,
+        "outside_mapped_L1_context": 0.0
+      },
+      "injected": false
+    },
+    {
+      "case": "polygon-plus-line",
+      "level": 4,
+      "outcome": "PASS",
+      "areas": {
+        "mapped_land_support": 1.0,
+        "mapped_inland_water_support": 1.0,
+        "outside_mapped_L1_context": 0.0
+      },
+      "injected": false
+    },
+    {
+      "case": "polygon-plus-point",
+      "level": 1,
+      "outcome": "PASS",
+      "areas": {
+        "mapped_land_support": 1.0,
+        "mapped_inland_water_support": 0.0,
+        "outside_mapped_L1_context": 1.0
+      },
+      "injected": false
+    },
+    {
+      "case": "polygon-plus-point",
+      "level": 2,
+      "outcome": "PASS",
+      "areas": {
+        "mapped_land_support": 1.0,
+        "mapped_inland_water_support": 1.0,
+        "outside_mapped_L1_context": 0.0
+      },
+      "injected": false
+    },
+    {
+      "case": "polygon-plus-point",
+      "level": 3,
+      "outcome": "PASS",
+      "areas": {
+        "mapped_land_support": 1.0,
+        "mapped_inland_water_support": 1.0,
+        "outside_mapped_L1_context": 0.0
+      },
+      "injected": false
+    },
+    {
+      "case": "polygon-plus-point",
+      "level": 4,
+      "outcome": "PASS",
+      "areas": {
+        "mapped_land_support": 1.0,
+        "mapped_inland_water_support": 1.0,
+        "outside_mapped_L1_context": 0.0
+      },
+      "injected": false
+    },
+    {
+      "case": "injected-nested-mixed",
+      "level": 1,
+      "outcome": "PASS",
+      "areas": {
+        "mapped_land_support": 1.0,
+        "mapped_inland_water_support": 0.0,
+        "outside_mapped_L1_context": 1.0
+      },
+      "injected": true
+    },
+    {
+      "case": "injected-nested-mixed",
+      "level": 2,
+      "outcome": "PASS",
+      "areas": {
+        "mapped_land_support": 1.0,
+        "mapped_inland_water_support": 1.0,
+        "outside_mapped_L1_context": 0.0
+      },
+      "injected": true
+    },
+    {
+      "case": "injected-nested-mixed",
+      "level": 3,
+      "outcome": "PASS",
+      "areas": {
+        "mapped_land_support": 1.0,
+        "mapped_inland_water_support": 1.0,
+        "outside_mapped_L1_context": 0.0
+      },
+      "injected": true
+    },
+    {
+      "case": "injected-nested-mixed",
+      "level": 4,
+      "outcome": "PASS",
+      "areas": {
+        "mapped_land_support": 1.0,
+        "mapped_inland_water_support": 1.0,
+        "outside_mapped_L1_context": 0.0
+      },
+      "injected": true
+    }
+  ],
+  "limits": [
+    "No full-world science or physical/source approval; prefrozen actual-code counterexamples only."
+  ]
+}
