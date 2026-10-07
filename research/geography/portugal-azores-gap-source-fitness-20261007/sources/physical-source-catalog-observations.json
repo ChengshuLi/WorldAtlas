@@ -1,0 +1,52 @@
+{
+  "schema": "physical-source-catalog-observation/v1",
+  "observed_at_utc": "2026-10-07T12:07:42Z",
+  "catalog": "SNIG / Registo Nacional de Dados Geográficos; DGT catalog pages returned through its metadata search",
+  "records": [
+    {
+      "title": "Ortofotomapas com resolução 10 cm da ilha do Corvo - 2024 - Região Autónoma dos Açores (RAA)",
+      "record_id": "4af06149-5291-4d0e-ac48-861f36541e6a",
+      "metadata_api_url": "https://snig.dgterritorio.gov.pt/rndg/srv/api/records/4af06149-5291-4d0e-ac48-861f36541e6a",
+      "catalog_page": "https://snig.dgterritorio.gov.pt/rndg/srv/search?_source=e652bd46-4143-4371-b14c-a55d494c4d5c",
+      "catalog_observation": "The SNIG result list names a 2024 orthophoto dataset at 10 cm for Corvo."
+    },
+    {
+      "title": "Ortofotomapas com resolução 10 cm da ilha Graciosa - 2024 - Região Autónoma dos Açores (RAA)",
+      "record_id": "3a474ed1-34ef-426b-a853-5ee521e70987",
+      "metadata_api_url": "https://snig.dgterritorio.gov.pt/rndg/srv/api/records/3a474ed1-34ef-426b-a853-5ee521e70987",
+      "catalog_page": "https://snig.dgterritorio.gov.pt/rndg/srv/search?_source=e652bd46-4143-4371-b14c-a55d494c4d5c",
+      "catalog_observation": "The SNIG result list names a 2024 orthophoto dataset at 10 cm for Graciosa."
+    },
+    {
+      "title": "Cobertura Aerofotográfica da ilha do Faial com 8 cm de resolução - Região Autónoma dos Açores (RAA)",
+      "catalog_page": "https://snig.dgterritorio.gov.pt/rndg/srv/search?_source=e652bd46-4143-4371-b14c-a55d494c4d5c",
+      "catalog_observation": "The SNIG result list names local Faial aerial coverage at 8 cm; acquisition/effective date and candidate coverage were not established here."
+    },
+    {
+      "title": "Serviço de Visualização (WMS) da Ortoimagem da ilha das Flores - 2017 - Região Autónoma dos Açores (RAA)",
+      "catalog_page": "https://snig.dgterritorio.gov.pt/rndg/srv/search?_source=e652bd46-4143-4371-b14c-a55d494c4d5c",
+      "catalog_observation": "The SNIG result description states WorldView orthorectification using a 50 cm high-resolution DTM and ground control points; listing is for 2017."
+    },
+    {
+      "title": "Serviço de Visualização (WMS) da Ortoimagem da ilha do Pico - 2017/2018 - Região Autónoma dos Açores (RAA)",
+      "catalog_page": "https://snig.dgterritorio.gov.pt/rndg/srv/search?_source=e652bd46-4143-4371-b14c-a55d494c4d5c",
+      "catalog_observation": "The SNIG result description states WorldView orthorectification using a 50 cm high-resolution DTM and ground control points; listing is for 2017/2018."
+    }
+  ],
+  "access_attempts": [
+    {
+      "url": "https://snig.dgterritorio.gov.pt/rndg/srv/api/records/3a474ed1-34ef-426b-a853-5ee521e70987",
+      "outcome": "metadata request failed with HTTP 500 in browser and HTTP 400 by direct request"
+    },
+    {
+      "url": "https://snig.dgterritorio.gov.pt/rndg/srv/api/records/4af06149-5291-4d0e-ac48-861f36541e6a",
+      "outcome": "metadata request failed with HTTP 500 in browser"
+    }
+  ],
+  "limits": [
+    "Catalog listings are not source-image bytes or image measurements.",
+    "No orthophoto was downloaded, rendered, or overlaid against any component.",
+    "Acquisition time, pixel-to-ground registration accuracy, vertical datum, license terms, and downloadable full-resolution assets were not authenticated for these SNIG records.",
+    "The listed coverage is partial and does not support a physical classification for all 34 components."
+  ]
+}
