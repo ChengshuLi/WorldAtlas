@@ -11,6 +11,7 @@
       "destination_created": false,
       "exit_code": 1,
       "expected_exit_code": 1,
+      "logs_path": "corrected-runner-logs/missing-executable-pin-2",
       "output_names": [],
       "probe_created": false,
       "stderr_bytes": 1224,
@@ -29,6 +30,7 @@
       "destination_created": false,
       "exit_code": 1,
       "expected_exit_code": 1,
+      "logs_path": "corrected-runner-logs/altered-code-unchanged-manifest-2",
       "output_names": [],
       "probe_created": false,
       "stderr_bytes": 1257,
@@ -47,6 +49,7 @@
       "destination_created": false,
       "exit_code": 1,
       "expected_exit_code": 1,
+      "logs_path": "corrected-runner-logs/coherently-refreshed-manifest-2",
       "output_names": [],
       "probe_created": false,
       "stderr_bytes": 1245,
@@ -65,6 +68,7 @@
       "destination_created": false,
       "exit_code": 1,
       "expected_exit_code": 1,
+      "logs_path": "corrected-runner-logs/wrong-complete-input-2",
       "output_names": [],
       "probe_created": false,
       "stderr_bytes": 1229,
@@ -83,6 +87,7 @@
       "destination_created": true,
       "exit_code": 1,
       "expected_exit_code": 1,
+      "logs_path": "corrected-runner-logs/existing-output-sentinel-2",
       "output_names": [
         "attempt"
       ],
@@ -104,6 +109,7 @@
       "destination_created": false,
       "exit_code": 1,
       "expected_exit_code": 1,
+      "logs_path": "corrected-runner-logs/broken-symlink-2",
       "output_names": [
         "attempt"
       ],
@@ -124,6 +130,7 @@
       "destination_created": false,
       "exit_code": 1,
       "expected_exit_code": 1,
+      "logs_path": "corrected-runner-logs/symlink-parent-escape-2",
       "output_names": [],
       "probe_created": false,
       "stderr_bytes": 1116,
@@ -138,6 +145,7 @@
       "exit_code": 0,
       "expected_exit_code": 0,
       "input_sha256_after_replacement": "b9cdf1e6d61c824bada13aab11153cfd5cb157afc61a95f302d2134ba3397fbe",
+      "logs_path": "corrected-runner-logs/capsule-and-input-replaced-after-validation-2",
       "probe_created": false,
       "retained_report_sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
       "stderr_bytes": 0,
@@ -160,6 +168,7 @@
       },
       "failure_exists": true,
       "fsync_calls": 3,
+      "logs_path": "corrected-runner-logs/publication-receipt-sync-failure-2",
       "output_names": [
         "failure.json",
         "reproduction-results.json"
@@ -168,6 +177,17 @@
       "report_exists": true,
       "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "fixture-and-log-symlink-parents-rejected",
+      "external_sentinel_preserved": true,
+      "external_sentinel_sha256": "6b428ace0262db5de1acac5d5e225a117674ede63c6631800103512289d791e6",
+      "fixture_parent_rejected": true,
+      "logs_path": "corrected-runner-logs/fixture-and-log-symlink-parents-rejected-1",
+      "reproduction_log_parent_rejected": true,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verifier_log_parent_rejected": true
     },
     {
       "case": "traversal",
@@ -180,6 +200,7 @@
       "escape_created": false,
       "exit_code": 1,
       "expected_exit_code": 1,
+      "logs_path": "corrected-runner-logs/traversal-2",
       "outputs": [],
       "stderr_bytes": 1132,
       "stderr_sha256": "b8a9d451b697fcfb289b8071b09c00331d37da12486bed995f604677dc4b311c",
@@ -203,6 +224,7 @@
         "report_sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
         "status": "failed"
       },
+      "logs_path": "corrected-runner-logs/failure-after-compute-2",
       "retained_report_sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
       "stderr_bytes": 826,
       "stderr_sha256": "a9e7acfd756b07d01d62375ebacbe02feb19f8ea9f346097fde30f76524d3831",

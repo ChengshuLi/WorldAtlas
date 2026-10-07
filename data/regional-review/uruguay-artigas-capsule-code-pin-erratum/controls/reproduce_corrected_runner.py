@@ -8,23 +8,35 @@ import sys
 
 HERE = Path(__file__).resolve().parents[1]
 CONTROLS = HERE / "controls"
+LOGS = CONTROLS / "corrected-baseline-logs"
 sha = lambda raw: hashlib.sha256(raw).hexdigest()
 
 
+def ensure_scratch_roots():
+    control_root = CONTROLS.resolve()
+    if CONTROLS.is_symlink() or control_root != CONTROLS.absolute():
+        raise ValueError("unsafe control root")
+    if (LOGS.is_symlink() or LOGS.parent.resolve() != control_root or
+            (LOGS.exists() and not LOGS.is_dir())):
+        raise ValueError("unsafe control-log scratch root")
+
+
 def main():
+    ensure_scratch_roots()
     rows = []
     number = 14
     def run_exists(value):
         name = f"verified-run-{value}"
-        return ((HERE / "outputs" / name).exists() or
-                (CONTROLS / "corrected-baseline-logs" / name).exists())
+        return ((HERE / "outputs" / name).exists() or (LOGS / name).exists())
     while run_exists(number) or run_exists(number + 1):
         number += 2
     run_names = (f"verified-run-{number}", f"verified-run-{number + 1}")
     for name in run_names:
         command = [sys.executable, str(HERE / "reproduce.py"), "--output", name]
         process = subprocess.run(command, cwd=HERE, text=True, capture_output=True)
-        logdir = CONTROLS / "corrected-baseline-logs" / name
+        logdir = LOGS / name
+        if logdir.is_symlink() or logdir.parent.resolve() != LOGS.resolve():
+            raise ValueError("unsafe reproduction log path")
         logdir.mkdir(parents=True)
         (logdir / "stdout.txt").write_text(process.stdout)
         (logdir / "stderr.txt").write_text(process.stderr)
@@ -43,14 +55,15 @@ def main():
     failure_number = 3
     def failure_exists(value):
         candidate = f"failure-captured-safe-{value}"
-        return ((HERE / "outputs" / candidate).exists() or
-                (CONTROLS / "corrected-baseline-logs" / candidate).exists())
+        return ((HERE / "outputs" / candidate).exists() or (LOGS / candidate).exists())
     while failure_exists(failure_number):
         failure_number += 1
     name = f"failure-captured-safe-{failure_number}"
     command = [sys.executable, str(HERE / "reproduce.py"), "--output", name, "--fail-after-compute"]
     process = subprocess.run(command, cwd=HERE, text=True, capture_output=True)
-    logdir = CONTROLS / "corrected-baseline-logs" / name
+    logdir = LOGS / name
+    if logdir.is_symlink() or logdir.parent.resolve() != LOGS.resolve():
+        raise ValueError("unsafe reproduction log path")
     logdir.mkdir(parents=True)
     (logdir / "stdout.txt").write_text(process.stdout)
     (logdir / "stderr.txt").write_text(process.stderr)

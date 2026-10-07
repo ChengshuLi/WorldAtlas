@@ -10,12 +10,40 @@ from pathlib import Path
 import shutil
 import subprocess
 import sys
+import tempfile
 
 HERE = Path(__file__).resolve().parents[1]
 CONTROLS = HERE / "controls"
 FIXTURES = CONTROLS / "corrected-runner-fixtures"
 LOGS = CONTROLS / "corrected-runner-logs"
 CAPSULE = "inputs/code/capsule-reproduce.py"
+
+
+def ensure_scratch_roots():
+    control_root = CONTROLS.resolve()
+    if CONTROLS.is_symlink() or control_root != CONTROLS.absolute():
+        raise ValueError("unsafe control root")
+    for scratch in (FIXTURES, LOGS):
+        if (scratch.is_symlink() or scratch.parent.resolve() != control_root or
+                (scratch.exists() and not scratch.is_dir())):
+            raise ValueError("unsafe fixture/log scratch root")
+
+
+def prepare_logdir(name):
+    ensure_scratch_roots()
+    if not name or name in (".", "..") or "/" in name or "\\" in name:
+        raise ValueError("control-log name must be one plain child name")
+    candidate, suffix = name, 1
+    while True:
+        logs = LOGS / candidate
+        if logs.is_symlink() or logs.exists():
+            candidate = name + "-" + str(suffix)
+            suffix += 1
+            continue
+        if logs.parent.resolve() != LOGS.resolve():
+            raise ValueError("unsafe control-log path")
+        logs.mkdir()
+        return logs
 
 
 def digest(raw):
@@ -27,8 +55,15 @@ def link_file(source, target):
 
 
 def fixture(name):
+    ensure_scratch_roots()
+    if not name or name in (".", "..") or "/" in name or "\\" in name:
+        raise ValueError("fixture name must be one plain child name")
     root = FIXTURES / name
+    if root.is_symlink() or root.parent.resolve() != FIXTURES.resolve():
+        raise ValueError("unsafe fixture path")
     if root.exists():
+        if not root.is_dir():
+            raise ValueError("fixture path is not a directory")
         shutil.rmtree(root)
     root.mkdir(parents=True)
     shutil.copytree(HERE / "inputs", root / "inputs", copy_function=link_file)
@@ -49,16 +84,14 @@ def run(name, mutate=None, output="attempt", expected=1, extra=()):
         mutate(root)
     command = [sys.executable, str(root / "reproduce.py"), "--output", output, *extra]
     process = subprocess.run(command, cwd=root, text=True, capture_output=True)
-    logs = LOGS / name
-    if logs.exists():
-        shutil.rmtree(logs)
-    logs.mkdir(parents=True)
+    logs = prepare_logdir(name)
     (logs / "stdout.txt").write_text(process.stdout)
     (logs / "stderr.txt").write_text(process.stderr)
     return root, process, {"case": name, "exit_code": process.returncode,
         "expected_exit_code": expected, "stdout_sha256": digest(process.stdout.encode()),
         "stderr_sha256": digest(process.stderr.encode()), "stdout_bytes": len(process.stdout.encode()),
-        "stderr_bytes": len(process.stderr.encode()), "command": command}
+        "stderr_bytes": len(process.stderr.encode()), "command": command,
+        "logs_path": logs.relative_to(CONTROLS).as_posix()}
 
 
 def manifest(root):
@@ -112,7 +145,57 @@ def replace_after_validation(root):
     replace(input_path, input_path.read_bytes() + b" ")
 
 
+def check_scratch_symlink_parents():
+    probe = Path(tempfile.mkdtemp(prefix="fixture-safety-probe-", dir=str(CONTROLS)))
+    outside = probe / "outside"
+    victim = outside / "missing-executable-pin"
+    outside.mkdir()
+    victim.mkdir()
+    sentinel = victim / "sentinel.txt"
+    sentinel.write_text("retain")
+    sentinel_hash = digest(sentinel.read_bytes())
+    link = probe / "scratch-link"
+    link.symlink_to(outside, target_is_directory=True)
+    original_fixtures, original_logs = FIXTURES, LOGS
+    fixture_rejected = False
+    verifier_log_rejected = False
+    reproduction_log_rejected = False
+    try:
+        globals()["FIXTURES"] = link
+        try:
+            fixture("missing-executable-pin")
+        except ValueError:
+            fixture_rejected = True
+        globals()["FIXTURES"] = original_fixtures
+        globals()["LOGS"] = link
+        try:
+            ensure_scratch_roots()
+        except ValueError:
+            verifier_log_rejected = True
+        spec = importlib.util.spec_from_file_location("artigas_reproduction_harness", CONTROLS / "reproduce_corrected_runner.py")
+        harness = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(harness)
+        harness.LOGS = link
+        try:
+            harness.ensure_scratch_roots()
+        except ValueError:
+            reproduction_log_rejected = True
+    finally:
+        globals()["FIXTURES"] = original_fixtures
+        globals()["LOGS"] = original_logs
+    sentinel_ok = sentinel.is_file() and digest(sentinel.read_bytes()) == sentinel_hash
+    shutil.rmtree(probe)
+    return {"case": "fixture-and-log-symlink-parents-rejected",
+            "fixture_parent_rejected": fixture_rejected,
+            "verifier_log_parent_rejected": verifier_log_rejected,
+            "reproduction_log_parent_rejected": reproduction_log_rejected,
+            "external_sentinel_sha256": sentinel_hash,
+            "external_sentinel_preserved": sentinel_ok,
+            "stdout_sha256": digest(b""), "stderr_sha256": digest(b"")}
+
+
 def main():
+    ensure_scratch_roots()
     FIXTURES.mkdir(parents=True, exist_ok=True)
     LOGS.mkdir(parents=True, exist_ok=True)
     original_manifest = json.loads((HERE / "inputs/original-manifest.json").read_text())
@@ -174,10 +257,8 @@ def main():
                 "stdout_bytes": len(stdout.getvalue().encode()),
                 "stderr_bytes": len(stderr.getvalue().encode()),
                 "execution": "actual reproduce.py main() with capsule/input paths replaced by the destination-admission hook after validate() returned"}
-    logs = LOGS / "capsule-and-input-replaced-after-validation"
-    if logs.exists():
-        shutil.rmtree(logs)
-    logs.mkdir(parents=True)
+    logs = prepare_logdir("capsule-and-input-replaced-after-validation")
+    race_row["logs_path"] = logs.relative_to(CONTROLS).as_posix()
     (logs / "stdout.txt").write_text(stdout.getvalue())
     (logs / "stderr.txt").write_text(stderr.getvalue())
     if race_row["retained_report_sha256"] != "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a" or not race_row["success_receipt_exists"] or race_row["probe_created"]:
@@ -219,10 +300,8 @@ def main():
                 "stdout_sha256": digest(stdout.getvalue().encode()),
                 "stderr_sha256": digest(stderr.getvalue().encode()),
                 "execution": "actual reproduce.py main() with os.fsync forced to fail on publication temp file after report sync"}
-    logs = LOGS / "publication-receipt-sync-failure"
-    if logs.exists():
-        shutil.rmtree(logs)
-    logs.mkdir(parents=True)
+    logs = prepare_logdir("publication-receipt-sync-failure")
+    sync_row["logs_path"] = logs.relative_to(CONTROLS).as_posix()
     (logs / "stdout.txt").write_text(stdout.getvalue())
     (logs / "stderr.txt").write_text(stderr.getvalue())
     if (error != "directed publication receipt fsync failure" or len(sync_calls) != 3 or
@@ -230,6 +309,17 @@ def main():
             sync_row["publication_exists"] or sync_row["output_names"] != ["failure.json", "reproduction-results.json"]):
         raise AssertionError("publication sync failure exposed a success receipt or unsafe output")
     cases.append(sync_row)
+    scratch_row = check_scratch_symlink_parents()
+    if (not scratch_row["fixture_parent_rejected"] or
+            not scratch_row["verifier_log_parent_rejected"] or
+            not scratch_row["reproduction_log_parent_rejected"] or
+            not scratch_row["external_sentinel_preserved"]):
+        raise AssertionError("control harness accepted a symlinked scratch parent")
+    cases.append(scratch_row)
+    logs = prepare_logdir("fixture-and-log-symlink-parents-rejected")
+    scratch_row["logs_path"] = logs.relative_to(CONTROLS).as_posix()
+    (logs / "stdout.txt").write_text("")
+    (logs / "stderr.txt").write_text("")
     root, process, row = run("traversal", output="../escape")
     row["escape_created"] = (root.parent / "escape").exists()
     row["outputs"] = sorted(p.name for p in (root / "outputs").iterdir())

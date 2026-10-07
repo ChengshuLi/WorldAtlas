@@ -21,6 +21,8 @@ Run the directed controls with:
 python3 data/regional-review/uruguay-artigas-capsule-code-pin-erratum/controls/verify_corrected_runner.py
 ```
 
+The controls reject symlinked fixture and log scratch roots before cleanup or writing; a directed sentinel check confirms external scratch data is preserved.
+
 The controls invoke the actual entry point in isolated fixture trees using hard links for unchanged source bytes. Mutated files are atomically replaced in their fixtures. Captured stdout/stderr and per-case outcomes are retained under `controls/`.
 
 To capture two new successful executions and their full process streams, run:
