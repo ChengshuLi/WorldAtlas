@@ -36,6 +36,7 @@ ATLAS_CONTACTS = {
     'gb:IDN:ADM2:22746128B96540112180119',
 }
 RUN_ONE = 'run-five'
+CURRENT_SCOPE_RECEIPT = 'scope-extraction-current.json'
 
 sys.path.insert(0, str(REPO / 'scripts'))
 from evidence.immutable import Baseline as BootstrapBaseline  # noqa: E402
@@ -69,6 +70,12 @@ def topological_dimension(geom) -> int:
 
 def build(run_name: str) -> dict:
     commit = subprocess.check_output(['git', '-C', str(REPO), 'rev-parse', 'HEAD'], text=True).strip()
+    evaluation_commit = subprocess.check_output(
+        ['git', '-C', str(REPO), 'merge-base', 'HEAD', 'origin/main'], text=True).strip()
+    current_main = subprocess.check_output(
+        ['git', '-C', str(REPO), 'rev-parse', 'origin/main'], text=True).strip()
+    if evaluation_commit != current_main:
+        raise ValueError('Rebase onto current origin/main before producing current-vintage metrics')
     # Pins for every consumed file are derived from immutable custody aliases and
     # the committed source packet. Dynamic raster reads use authenticated bytes.
     index_raw = git_bytes(commit, INDEX_PATH)
@@ -86,7 +93,7 @@ def build(run_name: str) -> dict:
         'scripts/evidence/contracts.py',
         (SOURCE / 'produce.py').as_posix(),
         *[a['payload'] for a in component_aliases],
-        *[p.as_posix() for p in (SOURCE / 'scope-extraction.json', SOURCE / 'family-row.json', SOURCE / 'component-roster.txt', SOURCE / 'jrc-source-receipts.json', SOURCE / 'worldcover-whole-tile-receipts.json', SOURCE / 'worldcover-extract-receipts.json', SOURCE / 'README.md', SOURCE / 'metadata-sources.md', SOURCE / 'metadata/occurrence_2024.xml', SOURCE / 'metadata/seasonality_2024.xml', SOURCE / 'metadata/big-2022-ksp-layer.json', SOURCE / 'metadata/big-2023-rbi-layer.json', SOURCE / 'metadata/big-source-receipts.json', SOURCE / 'requirements.txt')],
+        *[p.as_posix() for p in (SOURCE / CURRENT_SCOPE_RECEIPT, SOURCE / 'scope-extraction.json', SOURCE / 'family-row.json', SOURCE / 'component-roster.txt', SOURCE / 'jrc-source-receipts.json', SOURCE / 'worldcover-whole-tile-receipts.json', SOURCE / 'worldcover-extract-receipts.json', SOURCE / 'README.md', SOURCE / 'metadata-sources.md', SOURCE / 'metadata/occurrence_2024.xml', SOURCE / 'metadata/seasonality_2024.xml', SOURCE / 'metadata/big-2022-ksp-layer.json', SOURCE / 'metadata/big-2023-rbi-layer.json', SOURCE / 'metadata/big-source-receipts.json', SOURCE / 'requirements.txt')],
         *[p.as_posix() for p in sorted((SOURCE / 'worldcover').glob('*.tif'))],
         *[p.as_posix() for p in sorted((SOURCE / 'worldcover-crops').glob('*.tif'))],
         *[p.as_posix() for p in sorted((SOURCE / 'jrc-crops').glob('*.tif'))],
@@ -110,11 +117,11 @@ def build(run_name: str) -> dict:
 
     # The family row and roster were independently extracted and retained by the
     # source-stage extractor against all 14 pinned routing chunks.
-    scope = json.loads(baseline.materialized_bytes((SOURCE / 'scope-extraction.json').as_posix()))
+    scope = json.loads(baseline.materialized_bytes((SOURCE / CURRENT_SCOPE_RECEIPT).as_posix()))
     if (scope.get('family_id') != FAMILY or scope.get('component_count') != 45 or
         scope.get('route_report', {}).get('sha256') != '2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265' or
         len(scope.get('family_source_parts', [])) != 14 or
-        not all(scope.get('controls', {}).values())):
+        scope.get('baseline_commit') != evaluation_commit or not all(scope.get('controls', {}).values())):
         raise ValueError('Retained route-family extraction receipt is incomplete or failed')
     family_raw = baseline.materialized_bytes((SOURCE / 'family-row.json').as_posix())
     if sha(family_raw.rstrip(b'\n')) != FAMILY_SHA:
@@ -337,7 +344,7 @@ def build(run_name: str) -> dict:
 
     assessment = {
         'version': 1,
-        'baseline_commit': commit,
+        'baseline_commit': evaluation_commit,
         'family_id': FAMILY,
         'family_raw_line_sha256': FAMILY_SHA,
         'scope': {'component_count': len(ids), 'roster_sha256': '88831aad22806bf4f461197a12cb8309bf9a0139e5bd82b967a55e8255ad26ec',

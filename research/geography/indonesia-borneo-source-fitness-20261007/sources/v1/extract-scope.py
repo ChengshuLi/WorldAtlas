@@ -3,7 +3,7 @@
 from pathlib import Path
 import gzip, hashlib, json, subprocess
 
-BASELINE = 'eddf3d98c725a768959e431462b16d9adf507a41'
+BASELINE = '839883ae281af7bf012f694698624a7ec77275e1'
 REPORT = 'coordination/engineering/global-actionability-routing-20261007/results/report.json'
 REPORT_SHA256 = '2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265'
 FAMILY_ID = 'gap-source-batch:8875fd920e43656b5f36e704'
@@ -69,12 +69,13 @@ if not all(controls.values()):
     raise SystemExit('A source-scope control failed')
 row_path = OUT / 'family-row.json'
 roster_path = OUT / 'component-roster.txt'
-receipt_path = OUT / 'scope-extraction.json'
-for path in (row_path, roster_path, receipt_path):
-    if path.exists():
-        raise FileExistsError('Preserve existing evidence; use a new packet vintage: ' + str(path))
-with row_path.open('xb') as stream: stream.write(raw_rows[0])
-with roster_path.open('xb') as stream: stream.write(sorted_roster)
+receipt_path = OUT / 'scope-extraction-current.json'
+if not row_path.is_file() or row_path.read_bytes() != raw_rows[0]:
+    raise ValueError('The preserved original family row differs from the current pinned source row')
+if not roster_path.is_file() or roster_path.read_bytes() != sorted_roster:
+    raise ValueError('The preserved original roster differs from the current pinned source roster')
+if receipt_path.exists():
+    raise FileExistsError('Preserve existing evidence; use a new receipt vintage: ' + str(receipt_path))
 receipt = {
     'version': 1,
     'baseline_commit': BASELINE,
