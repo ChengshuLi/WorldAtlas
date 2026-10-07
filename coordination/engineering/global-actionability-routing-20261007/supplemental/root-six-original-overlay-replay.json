@@ -1,0 +1,305 @@
+{
+  "result": "PASS",
+  "scientific_freeze": "104091cfecd9c83a53f3e6e62f95b0a0c8074351",
+  "executed_original_module_path": "coordination/engineering/global-physical-comparison-20261006/comparison.py",
+  "executed_original_module_sha256": "f9c226add23a37a39bf7fd34f5d8bdcb34a8d276b331fabf59bf9867b6f84bfe",
+  "complete_six_witness_operator_replays": [
+    {
+      "component_id": "physical-component:0a2430767e7d92c53494c508b51959edb5806afe2b16ca3046d3bfe5b555ce78",
+      "complete_query_observations": 2,
+      "positive_whole_query_pieces": 5,
+      "actual_original_operator_replays": {
+        "mapped_land_support": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "ac77486d9a2734ce9bf501631b5b081af2761b55e38b5060887b9bca8eb01983",
+          "actual_planar_area": 0.0002788735036303957,
+          "original_planar_area": 0.0002788735036303957,
+          "actual_valid": true
+        },
+        "mapped_inland_water_support": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "8c9d0294a6a29b13b238c387607c61c4aa50bb15300089c01846536d010c4455",
+          "actual_planar_area": 0.0,
+          "original_planar_area": 0.0,
+          "actual_valid": true
+        },
+        "outside_mapped_L1_context": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "27e4b6f57995e465b568407c6f45bf72f494d40357c81496f64b881e79a1d2f9",
+          "actual_planar_area": 0.0037503021250608567,
+          "original_planar_area": 0.0037503021250608567,
+          "actual_valid": true
+        },
+        "missing_reconstruction": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "6ae6757b1a69b07787789a926acc827f7e3dddc21c06886ea55e8f26481def5f",
+          "actual_planar_area": 9.034948322163812e-13,
+          "original_planar_area": 9.034948322163812e-13,
+          "actual_valid": true
+        },
+        "extra_reconstruction": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "36b71e85a763d7806f1dc3a0e281a440938aea7799ac7e989f532ff032c61b02",
+          "actual_planar_area": 0.0,
+          "original_planar_area": 0.0,
+          "actual_valid": true
+        },
+        "contradictory_land_water_support": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "8c9d0294a6a29b13b238c387607c61c4aa50bb15300089c01846536d010c4455",
+          "actual_planar_area": 0.0,
+          "original_planar_area": 0.0,
+          "actual_valid": true
+        }
+      }
+    },
+    {
+      "component_id": "physical-component:3cae5043956685a311232bfef802a9e02f99a5a87d39f4afb02ca851792d3b7b",
+      "complete_query_observations": 2,
+      "positive_whole_query_pieces": 1,
+      "actual_original_operator_replays": {
+        "mapped_land_support": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "c77bd134d09319d04756f2a29a20d52349f4e43b75307a49945c6e9c84e8a862",
+          "actual_planar_area": 2.1195413621699267e-12,
+          "original_planar_area": 2.1195413621699267e-12,
+          "actual_valid": true
+        },
+        "mapped_inland_water_support": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "8c9d0294a6a29b13b238c387607c61c4aa50bb15300089c01846536d010c4455",
+          "actual_planar_area": 0.0,
+          "original_planar_area": 0.0,
+          "actual_valid": true
+        },
+        "outside_mapped_L1_context": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "1b39f8392614976fd4f63f893b10d5e0b9cc42a27846d07ecd77acc025e36309",
+          "actual_planar_area": 1.1916557878160211e-11,
+          "original_planar_area": 1.1916557878160211e-11,
+          "actual_valid": true
+        },
+        "missing_reconstruction": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "36b71e85a763d7806f1dc3a0e281a440938aea7799ac7e989f532ff032c61b02",
+          "actual_planar_area": 0.0,
+          "original_planar_area": 0.0,
+          "actual_valid": true
+        },
+        "extra_reconstruction": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "954a8bb196055ee76fe4df01f9cd77cedbfd9eb17a81394773c76354e1aba59a",
+          "actual_planar_area": 4.095498365312675e-12,
+          "original_planar_area": 4.095498365312675e-12,
+          "actual_valid": true
+        },
+        "contradictory_land_water_support": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "8c9d0294a6a29b13b238c387607c61c4aa50bb15300089c01846536d010c4455",
+          "actual_planar_area": 0.0,
+          "original_planar_area": 0.0,
+          "actual_valid": true
+        }
+      }
+    },
+    {
+      "component_id": "physical-component:3f8309e420055c726486ecdb318e368769eb52d038fcb6d8266106380217f8fd",
+      "complete_query_observations": 1,
+      "positive_whole_query_pieces": 3,
+      "actual_original_operator_replays": {
+        "mapped_land_support": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "b0f59937ae596429f7d5dd372ba84e971d7b19b7ca11e82d16d7e69e0e124dbb",
+          "actual_planar_area": 1.2252004899635803e-07,
+          "original_planar_area": 1.2252004899635803e-07,
+          "actual_valid": true
+        },
+        "mapped_inland_water_support": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "8c9d0294a6a29b13b238c387607c61c4aa50bb15300089c01846536d010c4455",
+          "actual_planar_area": 0.0,
+          "original_planar_area": 0.0,
+          "actual_valid": true
+        },
+        "outside_mapped_L1_context": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "1ca20552cf128a8dddef06f7f7ab994c801f8fe639a195b8901344b47961d6c6",
+          "actual_planar_area": 2.8406392133419457e-07,
+          "original_planar_area": 2.8406392133419457e-07,
+          "actual_valid": true
+        },
+        "missing_reconstruction": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "17dcceb4f61f226c0f2824f0686b8ad62f27526897e28ebaec1e3c43be01ae62",
+          "actual_planar_area": 1.8525206126492587e-18,
+          "original_planar_area": 1.8525206126492587e-18,
+          "actual_valid": true
+        },
+        "extra_reconstruction": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "46f6ddad64ff81cc373bb918f2fb73d84946b4f34d88e1ff038b512026dbe05f",
+          "actual_planar_area": 1.6879562666551788e-08,
+          "original_planar_area": 1.6879562666551788e-08,
+          "actual_valid": true
+        },
+        "contradictory_land_water_support": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "8c9d0294a6a29b13b238c387607c61c4aa50bb15300089c01846536d010c4455",
+          "actual_planar_area": 0.0,
+          "original_planar_area": 0.0,
+          "actual_valid": true
+        }
+      }
+    },
+    {
+      "component_id": "physical-component:5ca7f4eeeb6ee0c8d7894daef8287f499e26ab036544a6d0af82c4dd94b4c0a1",
+      "complete_query_observations": 2,
+      "positive_whole_query_pieces": 2,
+      "actual_original_operator_replays": {
+        "mapped_land_support": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "94e2414b794dbbcfa0e8fa4e97288308b828c07b4eb1853cc53cb310e94535cb",
+          "actual_planar_area": 7.451553738670592e-11,
+          "original_planar_area": 7.451553738670592e-11,
+          "actual_valid": true
+        },
+        "mapped_inland_water_support": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "b7f7a0ae09b2b5e40fc678b11619a9aafa92b7f7a4614acb8a7a3c4c20bfadee",
+          "actual_planar_area": 3.7734496842294074e-11,
+          "original_planar_area": 3.7734496842294074e-11,
+          "actual_valid": true
+        },
+        "outside_mapped_L1_context": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "36b71e85a763d7806f1dc3a0e281a440938aea7799ac7e989f532ff032c61b02",
+          "actual_planar_area": 0.0,
+          "original_planar_area": 0.0,
+          "actual_valid": true
+        },
+        "missing_reconstruction": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "36b71e85a763d7806f1dc3a0e281a440938aea7799ac7e989f532ff032c61b02",
+          "actual_planar_area": 0.0,
+          "original_planar_area": 0.0,
+          "actual_valid": true
+        },
+        "extra_reconstruction": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "78506f99a263ea387084af4c8c53e8b0760709b1466024eb50ec009287624f6b",
+          "actual_planar_area": 1.1956022380899683e-11,
+          "original_planar_area": 1.1956022380899683e-11,
+          "actual_valid": true
+        },
+        "contradictory_land_water_support": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "4235e8cd93a47abfb03ed469d7a0aaea0121fda654fd7ea6435b49bb30902502",
+          "actual_planar_area": 2.1053427420479262e-17,
+          "original_planar_area": 2.1053427420479262e-17,
+          "actual_valid": true
+        }
+      }
+    },
+    {
+      "component_id": "physical-component:5d96fcc21157114564d3f7371b7068867b01716ac55791579875d8667e423748",
+      "complete_query_observations": 2,
+      "positive_whole_query_pieces": 2,
+      "actual_original_operator_replays": {
+        "mapped_land_support": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "f797dc2752e40cd6971d340b4ec0849c6c6c5501dc29a482712084893e448a4f",
+          "actual_planar_area": 1.5053205893395536e-11,
+          "original_planar_area": 1.5053205893395536e-11,
+          "actual_valid": true
+        },
+        "mapped_inland_water_support": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "8c9d0294a6a29b13b238c387607c61c4aa50bb15300089c01846536d010c4455",
+          "actual_planar_area": 0.0,
+          "original_planar_area": 0.0,
+          "actual_valid": true
+        },
+        "outside_mapped_L1_context": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "87ee0074641a2996001d3ec0e5792683c4db40423dc7853142f4cf7db26d6521",
+          "actual_planar_area": 4.7421204968068884e-11,
+          "original_planar_area": 4.7421204968068884e-11,
+          "actual_valid": true
+        },
+        "missing_reconstruction": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "e62feb7a170cca2736077fefaae5f31c3e17f865b12e8672750f90e8caae296f",
+          "actual_planar_area": 3.630942324563189e-12,
+          "original_planar_area": 3.630942324563189e-12,
+          "actual_valid": true
+        },
+        "extra_reconstruction": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "36b71e85a763d7806f1dc3a0e281a440938aea7799ac7e989f532ff032c61b02",
+          "actual_planar_area": 0.0,
+          "original_planar_area": 0.0,
+          "actual_valid": true
+        },
+        "contradictory_land_water_support": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "8c9d0294a6a29b13b238c387607c61c4aa50bb15300089c01846536d010c4455",
+          "actual_planar_area": 0.0,
+          "original_planar_area": 0.0,
+          "actual_valid": true
+        }
+      }
+    },
+    {
+      "component_id": "physical-component:fc5e0999f7d4dac806e138567d694558853c9ae0796427671c390b2cc3528198",
+      "complete_query_observations": 1,
+      "positive_whole_query_pieces": 1,
+      "actual_original_operator_replays": {
+        "mapped_land_support": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "bef1fff64bc3513b63e646e5383f93dc7f6b4ae91143bfb300f2f1592f540a5c",
+          "actual_planar_area": 1.723595259403614e-11,
+          "original_planar_area": 1.723595259403614e-11,
+          "actual_valid": true
+        },
+        "mapped_inland_water_support": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "8c9d0294a6a29b13b238c387607c61c4aa50bb15300089c01846536d010c4455",
+          "actual_planar_area": 0.0,
+          "original_planar_area": 0.0,
+          "actual_valid": true
+        },
+        "outside_mapped_L1_context": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "75b89f1ab6223f4a143b1e908b519737157ccd6c2d61530eb0b7151c838f5278",
+          "actual_planar_area": 1.1151460943624025e-10,
+          "original_planar_area": 1.1151460943624025e-10,
+          "actual_valid": true
+        },
+        "missing_reconstruction": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "d12f9d584a7e83e7d53a0d4e364fa77116d24ad97e5de89f27ba58e24d856fa8",
+          "actual_planar_area": 2.442924128685937e-12,
+          "original_planar_area": 2.442924128685937e-12,
+          "actual_valid": true
+        },
+        "extra_reconstruction": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "36b71e85a763d7806f1dc3a0e281a440938aea7799ac7e989f532ff032c61b02",
+          "actual_planar_area": 0.0,
+          "original_planar_area": 0.0,
+          "actual_valid": true
+        },
+        "contradictory_land_water_support": {
+          "canonical_geometry_equal": true,
+          "actual_sha256": "8c9d0294a6a29b13b238c387607c61c4aa50bb15300089c01846536d010c4455",
+          "actual_planar_area": 0.0,
+          "original_planar_area": 0.0,
+          "actual_valid": true
+        }
+      }
+    }
+  ],
+  "limits": [
+    "Actual original operators replayed only on complete retained six-case query/intersection pointsets, not reexecution of source queries or third worldwide run. Original unknowns remain; no coordinate edits, new algorithm, suppression or physical authority approval."
+  ]
+}

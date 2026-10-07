@@ -1,0 +1,40 @@
+import json,pathlib,hashlib
+from fractions import Fraction as F
+from shapely.geometry import shape,Point
+R=pathlib.Path(__file__).parent;raw=(R/'root-six-largest-closure-witnesses.json').read_bytes();data=json.loads(raw)
+def ringloc(p,ring):
+ x,y=map(F,p);cross=False
+ for a,b in zip(ring,ring[1:]):
+  ax,ay=map(F,a);bx,by=map(F,b);orient=(bx-ax)*(y-ay)-(by-ay)*(x-ax)
+  if orient==0 and min(ax,bx)<=x<=max(ax,bx) and min(ay,by)<=y<=max(ay,by):return 'boundary'
+  if (ay>y)!=(by>y):
+   rx=ax+(y-ay)*(bx-ax)/(by-ay)
+   if rx>x:cross=not cross
+ return 'inside' if cross else 'outside'
+def polygonloc(p,rings):
+ outer=ringloc(p,rings[0])
+ if outer!='inside':return outer
+ for hole in rings[1:]:
+  k=ringloc(p,hole)
+  if k=='boundary':return k
+  if k=='inside':return 'outside'
+ return 'inside'
+def polygons(g):
+ if g['type']=='Polygon':return [g['coordinates']] if g['coordinates'] else []
+ if g['type']=='MultiPolygon':return g['coordinates']
+ if g['type']=='GeometryCollection':return [p for child in g['geometries'] for p in polygons(child)]
+ raise ValueError(g['type'])
+results=[]
+for w in data['witnesses']:
+ candidate=w['complete_candidate']['geometry'];residue=w['complete_original_scientific_row']['complete_support'][w['target_relation']]['geometry'];G=shape(candidate);rows=[]
+ for pi,p in enumerate(polygons(residue)):
+  for ri,ring in enumerate(p):
+   for vi,point in enumerate(ring[:-1]):
+    kinds=[polygonloc(point,r) for r in polygons(candidate)];exact='inside' if 'inside' in kinds else 'boundary' if 'boundary' in kinds else 'outside';floating='inside' if G.contains(Point(point)) else 'boundary' if G.covers(Point(point)) else 'outside';rows.append({'polygon':pi,'ring':ri,'vertex':vi,'point':point,'exact_binary64_rational_candidate_relation':exact,'GEOS_point_relation':floating,'boundary_distance_degrees_diagnostic_only':G.boundary.distance(Point(point))})
+ centers=[]
+ for pi,poly in enumerate(polygons(residue)):
+  ring=poly[0][:-1]
+  if len(ring)==3:
+   center=[sum(F(v[i]) for v in ring)/3 for i in range(2)];assert len(poly)==1 and ringloc(center,poly[0])=='inside';kinds=[polygonloc(center,r) for r in polygons(candidate)];exact='inside' if 'inside' in kinds else 'boundary' if 'boundary' in kinds else 'outside';approx=list(map(float,center));centers.append({'polygon':pi,'exact_rational_triangle_centroid':[[str(x.numerator),str(x.denominator)] for x in center],'approximate_centroid':approx,'exact_candidate_relation':exact,'GEOS_approximate_relation':'inside' if G.contains(Point(approx)) else 'boundary' if G.covers(Point(approx)) else 'outside'})
+ results.append({'complete_triangle_centroid_observations':centers,'component_id':w['component_id'],'target_relation':w['target_relation'],'whole_candidate_sha256':hashlib.sha256((json.dumps(w['complete_candidate'],sort_keys=True,separators=(',',':'),ensure_ascii=False)+'\n').encode()).hexdigest(),'complete_residue_vertices':rows,'counts':{k:sum(r['exact_binary64_rational_candidate_relation']==k for r in rows) for k in ['inside','boundary','outside']},'floating_vs_exact_vertex_disagreements':sum(r['exact_binary64_rational_candidate_relation']!=r['GEOS_point_relation'] for r in rows)})
+out={'result':'PASS','input_whole_sha256':hashlib.sha256(raw).hexdigest(),'method':'Exact Fraction orientation, segment bounds and even-odd ring crossing on original binary64 vertices; no decimal rounding or tolerance','complete_witnesses':results,'limits':['Exact vertex membership only; this does not prove entire-edge or whole-polygon coverage or diagnose universal source cause. Degrees-distance is descriptive, not acceptance tolerance; no suppression/geometry mutation/water or authority classification.']};(R/'root-six-residue-exact-vertex-diagnosis.json').write_text(json.dumps(out,indent=2)+'\n');print(json.dumps([{k:v for k,v in r.items() if k not in ['complete_residue_vertices','whole_candidate_sha256']} for r in results]))
