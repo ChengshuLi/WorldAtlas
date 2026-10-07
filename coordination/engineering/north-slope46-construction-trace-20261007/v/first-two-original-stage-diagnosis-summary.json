@@ -1,0 +1,52 @@
+{
+  "execution_commit": "1208538e0ae9dba868bcf9fffc34301ea825b588",
+  "status": "actual first-tree descriptive read; no new operators",
+  "rows": [
+    {
+      "component_id": "physical-component:2b6a9a2bd350573cff0e9c7f63a9fdc26602c624fe2b4944f43855b4e4aa153d",
+      "original_operator_line": 152,
+      "operation": "candidate.difference(footprint)",
+      "whole_retained_stage_geometry": {
+        "complete_geometry_object_sha256": "3fcede71ec8ae2facf1790ccbe72525f31fe99ea73499f54f66707c6eed8b22f"
+      },
+      "six_plus_three_equal": true,
+      "vertices": 9,
+      "vertex_candidate_states": {
+        "boundary": 3,
+        "inside": 3,
+        "outside": 3
+      },
+      "triangles": 3,
+      "triangle_candidate_states": {
+        "inside": 2,
+        "outside": 1
+      },
+      "limits": [
+        "Exact helper checks retained vertices/rational triangle centroids only, not full polygon coverage.",
+        "Original construction disagreement is not Atlas missing land or water evidence."
+      ]
+    },
+    {
+      "component_id": "physical-component:98eb935163c2a05e5c3b832c83166388c6315700517e04da2ee9fac0dc065f65",
+      "original_operator_line": 152,
+      "operation": "candidate.difference(footprint)",
+      "whole_retained_stage_geometry": {
+        "complete_geometry_object_sha256": "b859d2104b5a5a316c74b2a9af71bece5b13f8ee0464cecf95491d0c9736f5cb"
+      },
+      "six_plus_three_equal": true,
+      "vertices": 3,
+      "vertex_candidate_states": {
+        "outside": 2,
+        "boundary": 1
+      },
+      "triangles": 1,
+      "triangle_candidate_states": {
+        "outside": 1
+      },
+      "limits": [
+        "Exact helper checks retained vertices/rational triangle centroids only, not full polygon coverage.",
+        "Original construction disagreement is not Atlas missing land or water evidence."
+      ]
+    }
+  ]
+}

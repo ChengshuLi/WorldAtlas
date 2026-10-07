@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "kind": "development input-only, not committed science freeze",
+  "session": 22708,
+  "exit_code": 0,
+  "log_path": ".cache/north-slope46/development-input-only.log",
+  "log_sha256": "30b8676d9580eb8061a29e73488a4d0378e1233cdd72e6e21aca7c3607a836cb",
+  "actual_whole_inputs": 246,
+  "actual_input_encoded_bytes": 237274443,
+  "complete_current_reconstruction": 95173,
+  "scoped_components": 46,
+  "query_relations": 209,
+  "numeric_siblings": 28,
+  "nonnumeric_siblings": 18,
+  "original_physical_containing_files_restored": 33,
+  "native_headers_authenticated": 188612,
+  "scientific_output_created": false,
+  "command": "PYTHONDONTWRITEBYTECODE=1 pinnedPython -B stdin: import reader; reader.load(owned repo)",
+  "runtime_file": "runtime-pins.json",
+  "limitations": [
+    "Development invocation did not run committed code guard; final immutable entry preflight remains required.",
+    "Later ordered-query/current-contact guards were added after this reader invocation; it is not their executed proof.",
+    "No local source relation or alternating operator cohort executed."
+  ]
+}

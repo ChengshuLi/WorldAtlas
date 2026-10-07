@@ -36,11 +36,41 @@ exclusive bounded deterministic gzip JSONL products. Geometry SHA references are
 lossless aliases into the **fully delivered** geometry-object products, not hash-only
 substitutes. Every referenced entire pointset must be resolved before interpretation.
 
-The final two-run recipe and execution commit will be recorded after the producer,
-controls and complete input-only entry pass. Byte-identical scientific bodies may
-be delivered once only after independent full comparison of both actual trees;
-both truthful commands/times/runtime/outcome receipts remain distinct. Development
-attempts and failures are preserved under the author's `.cache/north-slope46/`.
-The 237,274,443-byte original input floor leaves 31,161,013 bytes before final
-outputs/code/control receipts. Final standard admission remains mandatory; this
-README does not declare ungenerated outputs fit or a finished investigation.
+Both complete scientific executions used immutable
+`1208538e0ae9dba868bcf9fffc34301ea825b588`. Committed controls and the complete
+input-only entry passed before either run. Both full46/209 runs exited0; their
+four entire scientific products are byte-identical and retained separately in
+`r1/` and `r2/`. All776 entire geometry objects are delivered; every emitted
+reference resolves to exactly one full body. Commands, start/end UTC, PID,
+runtime files and actual outcomes are separately preserved in `v/`.
+
+All46 siblings reproduce the original six support and three hierarchy mappings.
+The four original #1300 replay mismatches remain archived alongside their newly
+matched reproduction after their exact whole-source operands are restored.
+Captured `candidate.difference(footprint)` at original line152 reproduces the
+local outside-candidate witness discrepancy in both demonstrations. Exact
+vertices and rational triangle centroids are local witnesses, not whole-polygon
+coverage or evidence that Atlas is missing land. All other invalid, unsupported,
+nontriangle, source/date and physical unknowns remain literal.
+
+Use the pinned runtime recorded in `runtime-pins.json` at the frozen commit:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 ORIGINAL_PINNED_PYTHON -B coordination/engineering/north-slope46-construction-trace-20261007/controls.py
+PYTHONDONTWRITEBYTECODE=1 ORIGINAL_PINNED_PYTHON -B coordination/engineering/north-slope46-construction-trace-20261007/run.py --commit 1208538e0ae9dba868bcf9fffc34301ea825b588 --out ABSENT_OWNED_CACHE_DIRECTORY --input-only
+```
+
+Then invoke the same `run.py` twice with distinct absent output directories and
+without `--input-only`; the actual complete commands are in the execution
+receipts. The current delivery head contains later readback/manifest metadata:
+restore the scientific commit in a separate correctly managed owned checkout
+before reproduction. Do not relabel its execution head as the later delivery.
+`verify.py` authenticates delivered bodies/pointset references and both actual
+families without a third source query or geometry operation.
+
+Development, failed-control and earlier full input-only attempts remain in
+`v/history/` with their original code vintages. No scoped scientific run occurred
+at intermediate2f895e or2ac freezes. `v/acceptance-and-continuation.json` reconciles
+every criterion and records the next bounded engineering question. Final
+ordinary admission, distinct review, merge/readback and lifecycle are still
+required; the parent global repair/prevention campaign remains unfinished.
