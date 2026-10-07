@@ -211,6 +211,18 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/sources/geoboundaries/geoBoundaries-MRT-ADM2.geojson",
+      "bytes": 163642,
+      "sha256": "29caf92b290e3281d43c3a6497893ebfcebede733694d49cebb6d12ea4ff256b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/sources/geoboundaries/geoBoundaries-SEN-ADM2.geojson",
+      "bytes": 1949566,
+      "sha256": "2011b3b60e3b17c47ce0def3e26718631a245a7e3455ece1ad7fb5affc8cc517",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/first/source-fit.json",
       "bytes": 4331,
       "sha256": "55a7c183520fe6af5dd8a9397ea6dd22b5bc8f63a4f88cdf45cc7ee768f1af6b",
@@ -318,83 +330,5 @@
   "commands": [
     "Run source_fit.py to each of the two fresh output paths; compare resulting source-fit.json files byte-for-byte.",
     "Run controls.py; it exercises the same entrypoint with a missing family member and altered consumed source bytes."
-  ],
-  "change_receipts": [
-    {
-      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/README.md",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/evidence-quality.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/controls-confirmation.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/controls-final.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/controls-validation.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/controls.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/final-a/source-fit.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/final-b/source-fit.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/final-c/source-fit.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/final-d/source-fit.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/first/source-fit.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/second/source-fit.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/scripts/controls.py",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/scripts/source_fit.py",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/sources/geoboundaries/geoBoundaries-MRT-ADM2.geojson",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/sources/geoboundaries/geoBoundaries-SEN-ADM2.geojson",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/sources/geoboundaries/original-consumed-simplified/geoBoundaries-MRT-ADM2_simplified.geojson",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/sources/geoboundaries/original-consumed-simplified/geoBoundaries-SEN-ADM2_simplified.geojson",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/mauritania-senegal-gap-source-fitness-20261007/sources/geoboundaries/retrieval-receipt.json",
-      "status": "added"
-    }
   ]
 }
