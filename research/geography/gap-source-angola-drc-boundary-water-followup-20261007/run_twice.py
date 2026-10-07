@@ -10,13 +10,17 @@ import tempfile
 
 sys.dont_write_bytecode = True
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from reproduce_assessment import validate_roster, validate_worldcover_grid, verify_pinned_bytes
+from reproduce_assessment import pixel_counts, validate_roster, validate_worldcover_grid, verify_pinned_bytes
+import numpy as np
 import rasterio
 from affine import Affine
+from rasterio.io import MemoryFile
+from rasterio.transform import from_origin
+from shapely.geometry import Point, box
 
 ROOT = Path(__file__).resolve().parents[3]
 PACKET = ROOT / "research/geography/gap-source-angola-drc-boundary-water-followup-20261007"
-FREEZE = PACKET / "inputs/freeze-v1.json"
+FREEZE = PACKET / "inputs/freeze-v3.json"
 PRODUCER = PACKET / "reproduce_assessment.py"
 
 
@@ -36,6 +40,28 @@ def verify_frozen():
 
 def main():
     freeze = verify_frozen()
+    # Direct native-centre oracle: this tiny polygon contains exactly one of
+    # the 3x3 grid's centres and catches windows whose rounded lengths omit it.
+    oracle_geom = box(2.4, 2.4, 2.6, 2.6)
+    oracle_data = np.arange(1, 10, dtype=np.uint8).reshape((3, 3))
+    with MemoryFile() as memory:
+        with memory.open(driver="GTiff", height=3, width=3, count=1, dtype="uint8",
+                         transform=from_origin(0, 3, 1, 1), crs="EPSG:4326") as dataset:
+            dataset.write(oracle_data, 1)
+            actual_counts, actual_centres, _ = pixel_counts(dataset, oracle_geom)
+            direct_values = []
+            for row in range(dataset.height):
+                for col in range(dataset.width):
+                    x, y = dataset.transform * (col + 0.5, row + 0.5)
+                    if oracle_geom.contains(Point(x, y)):
+                        direct_values.append(int(oracle_data[row, col]))
+            direct_counts = {str(value): direct_values.count(value) for value in sorted(set(direct_values))}
+            if direct_counts != {"3": 1} or actual_counts != direct_counts or actual_centres != 1:
+                raise RuntimeError("strict pixel-centre counterexample disagrees with direct native-centre oracle")
+    centre_oracle = {"passed": True, "oracle": "direct shapely Point construction at every native pixel centre; geom.contains(Point)",
+                     "fixture": "3x3 unit grid; polygon [2.4,2.6] x [2.4,2.6] contains centre (2.5,2.5)",
+                     "expected_class_counts": {"3": 1}, "actual_class_counts": actual_counts,
+                     "strict_centres": actual_centres}
     with tempfile.TemporaryDirectory(prefix="angola-drc-repro-") as temp:
         outputs = []
         for run_number in (1, 2):
@@ -124,6 +150,7 @@ def main():
             "all_ten_saved_search_selections_reproduced": assessment["controls"]["sentinel_selection_is_reproduced_from_saved_first_page"],
             "worldcover_crs_registration_checks": registration_checks,
             "source_independence": independence_check,
+            "strict_native_pixel_centre_oracle": centre_oracle,
         }
         negative = {
             "kind": "negative-control", "outcome": "passed",

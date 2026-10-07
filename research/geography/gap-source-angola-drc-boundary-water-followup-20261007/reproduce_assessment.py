@@ -18,8 +18,8 @@ import shapely
 import pyproj
 from affine import Affine
 from pyproj import Transformer
-from rasterio.features import geometry_mask
-from rasterio.windows import Window, from_bounds
+from rasterio.windows import Window
+from shapely import contains_xy
 from shapely.geometry import LineString, box, mapping, shape
 from shapely.ops import transform as transform_geometry
 
@@ -164,17 +164,17 @@ def read_geojson(path):
 
 
 def window_for_geometry(dataset, geom):
+    """Return a clipped integer window enclosing every possible interior centre."""
     left, bottom, right, top = geom.bounds
-    win = from_bounds(left, bottom, right, top, transform=dataset.transform)
-    win = win.round_offsets().round_lengths()
-    full = Window(0, 0, dataset.width, dataset.height)
-    try:
-        win = win.intersection(full)
-    except Exception:
+    inv = ~dataset.transform
+    corners = [inv * (x, y) for x, y in ((left, bottom), (left, top), (right, bottom), (right, top))]
+    col0 = max(0, math.floor(min(col for col, _ in corners)))
+    row0 = max(0, math.floor(min(row for _, row in corners)))
+    col1 = min(dataset.width, math.ceil(max(col for col, _ in corners)))
+    row1 = min(dataset.height, math.ceil(max(row for _, row in corners)))
+    if col1 <= col0 or row1 <= row0:
         return None
-    if win.width <= 0 or win.height <= 0:
-        return None
-    return win
+    return Window(col0, row0, col1 - col0, row1 - row0)
 
 
 def pixel_counts(dataset, geom):
@@ -183,13 +183,11 @@ def pixel_counts(dataset, geom):
     if win is None:
         return {}, 0, 0
     arr = dataset.read(1, window=win)
-    mask = geometry_mask(
-        [mapping(geom)],
-        out_shape=arr.shape,
-        transform=dataset.window_transform(win),
-        invert=True,
-        all_touched=False,
-    )
+    rows, cols = np.indices(arr.shape, dtype=np.float64)
+    transform = dataset.window_transform(win)
+    xs = transform.c + transform.a * (cols + 0.5) + transform.b * (rows + 0.5)
+    ys = transform.f + transform.d * (cols + 0.5) + transform.e * (rows + 0.5)
+    mask = contains_xy(geom, xs, ys)
     values = arr[mask]
     unique, counts = np.unique(values, return_counts=True)
     return {str(int(v)): int(c) for v, c in zip(unique, counts)}, int(mask.sum()), int(win.width * win.height)
@@ -394,11 +392,11 @@ def run(output_path):
                      "gdal": rasterio.__gdal_version__, "numpy": np.__version__,
                      "shapely": shapely.__version__, "proj": pyproj.proj_version_str},
         "methods": {
-            "worldcover": {"pixel_inclusion": "pixel centres inside source polygon; rasterio geometry_mask all_touched=false",
+            "worldcover": {"pixel_inclusion": "strict pixel-centre membership via Shapely contains_xy on native grid centres; conservative floor/ceil enclosing window",
                             "crs": "EPSG:4326", "resolution_m_nominal": 10,
                             "class_80": "permanent water bodies", "class_90": "herbaceous wetland",
                             "no_data": 0, "vintage_rule": "2020 v100 and 2021 v200 remain separate; the algorithms differ, so no change inference."},
-            "sentinel2_scl": {"pixel_inclusion": "native 20 m pixel centres inside exact polygon transformed to scene UTM CRS; all_touched=false",
+            "sentinel2_scl": {"pixel_inclusion": "strict native 20 m pixel-centre membership via Shapely contains_xy after exact polygon transform to scene UTM CRS; conservative floor/ceil enclosing window",
                                "water_label": 6, "unknown_classes": [0, 1, 2, 3, 7, 8, 9, 10, 11],
                                "scene_selection": "Reproduced from each saved STAC search snapshot: first item in the recorded ascending cloud-cover order whose STAC polygon covers the full component. Search results are limited to the saved first page (up to 50 items), not all numberMatched items; no global lowest-cloud claim is made. The selected native SCL grid is then checked for full component coverage.",
                                "date_rule": "Four scene dates differ; no temporal change is inferred."},

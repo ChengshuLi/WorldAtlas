@@ -10,6 +10,8 @@ The WorldCover class-80 permanent-water counts, by frozen component order, are 0
 
 The SCL grids contain one class-6 (water) pixel centre in component 9 and none in the other nine. Each is a single-scene, 20 m product label on a different acquisition date. Unknown, cloud, shadow, and unclassified cells remain visible in the output. These counts are candidate-scale evidence, not complete-footprint water classifications.
 
+Pixel inclusion uses strict geometry membership at native pixel centres, evaluated with Shapely `contains_xy`. Candidate windows enclose the geometry bounds using floor/ceil before clipping to the raster. The frozen controls also compare a small edge-window case against an independent direct oracle that constructs each native centre as a point and evaluates `geometry.contains(point)`.
+
 The 1894 Gazette ratifies the 26 June 1893 Lunda tracing, effective 31 March 1894, and names rivers and coordinate references. It states that five commission minutes contain the detailed approved limits. The Gazette scan does not include those minutes or their attached maps. Literal horizontal-coordinate intersections are therefore retained only as screens; they do not locate the finite river-bounded treaty segments or establish legal applicability.
 
 The official archival inventory identifies a targeted source lead: Archives du Ministère des Colonies, AE1, file 331, “Lunda — tracing the boundary under the 25 May 1891 convention.” The inventory describes correspondence, reports, instructions, five original 1892–93 commission procès-verbaux, seven sketches, charts, and a general Lunda boundary map; it says the minutes are annexed to special letter 209 of 7 July 1893. The Belgian Archives Cartothèque catalog also lists a copy of the Lunda boundary map annexed to the declaration signed 24 March 1894 (`DEL.L-C.3A+B`). The inventory and Cartothèque are locators; these source records and map images have not yet been retrieved.
@@ -18,13 +20,13 @@ All ten whole-component water statuses and causal classifications remain `unknow
 
 ## Reproduction and byte custody
 
-`inputs/source-pins.json` records ordinary-byte sizes and SHA-256 hashes for the preserved source files and baseline inputs. `inputs/freeze-v1.json` adds the source-pin manifest and the producer/control scripts. `run_twice.py` verifies the frozen bytes before and after each full producer execution, compares the two outputs byte-for-byte, and writes `outputs/reproduction-receipt.json`. It also writes source-specific positive and negative controls plus a reproducibility control under `outputs/`; these check source-byte alteration, component/contact omission, WorldCover CRS and half-pixel registration, SCL cloud/NoData accounting, source-record independence, and repeat-run identity.
+`inputs/source-pins.json` records ordinary-byte sizes and SHA-256 hashes for the preserved source files and baseline inputs. `inputs/freeze-v1.json` records the superseded original run; `inputs/freeze-v2.json` records the first corrected execution, and `inputs/freeze-v3.json` freezes the final strict pixel-centre window method and its direct-centre control. `run_twice.py` verifies frozen bytes before and after each full producer execution, compares the outputs byte-for-byte, and writes `outputs/reproduction-receipt.json`. The superseded receipts and unsuccessful invocation are retained in `outputs/superseded/` and `outputs/execution-history.json`.
 
-The recorded pair of runs produced identical output bytes: see `outputs/reproduction-receipt.json` for the final byte count and SHA-256. The freeze contains exact descriptors for the computational inputs, source receipts, README, and producer/control scripts. The complete WorldCover tiles are pinned in `inputs/source-pins.json` and `sources/worldcover/retrieval.json`. To restore them from the official immutable object URLs and then reproduce, use Python 3.12 with rasterio, NumPy, Shapely, pyproj, and affine installed:
+The recorded final pair of runs produced identical output bytes: see `outputs/reproduction-receipt.json` for the final byte count and SHA-256. The controls include a tiny edge-window case checked against directly constructed native pixel-centre points. The complete WorldCover tiles are pinned in `inputs/source-pins.json` and `sources/worldcover/retrieval.json`. To restore them from the official immutable object URLs and then reproduce, use Python 3.12 with rasterio, NumPy, Shapely, pyproj, and affine installed:
 
 ```sh
 python restore_worldcover.py
-python run_twice.py
+PYTHONPATH="$PWD/.evidence-venv/lib/python3.12/site-packages" /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12 research/geography/gap-source-angola-drc-boundary-water-followup-20261007/run_twice.py
 ```
 
 The producer checks all frozen source pins, roster membership, raster CRS and coverage, and that unknown classifications remain unchanged. No snapping, buffering, repair, or ownership inference is used.
