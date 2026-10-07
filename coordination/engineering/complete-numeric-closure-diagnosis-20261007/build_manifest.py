@@ -90,11 +90,11 @@ def main():
         software='Python3.12.14/NumPy2.3.5/Shapely2.1.2/GEOS3.13.1/PyProj3.7.2; exact frozen3ef project closure; unchanged original104 comparison and exact_predicates.py whole-byte provenance.',
         units='literal OGC:CRS84 source-coordinate binary64 geometry diagnostics and exact-rational point states; no new m²/metres/ellipsoidal/source-authority result')]
     validation=[dict(method_id=method,kind=kind,outcome='passed',evidence_path=PREFIX+'v/'+file) for method,kind,file in (
-        ('complete-ordinary-retention','positive-control','preparation-positive.json'),
-        ('complete-ordinary-retention','negative-control','preparation-negative.json'),
+        ('complete-ordinary-retention','positive-control','preparation-positive-final.json'),
+        ('complete-ordinary-retention','negative-control','preparation-negative-final.json'),
         ('complete-ordinary-retention','reproducibility','reproducibility.json'),
-        ('literal104-exact-witness-diagnosis','positive-control','measurement-positive.json'),
-        ('literal104-exact-witness-diagnosis','negative-control','measurement-negative.json'))]
+        ('literal104-exact-witness-diagnosis','positive-control','measurement-positive-final.json'),
+        ('literal104-exact-witness-diagnosis','negative-control','measurement-negative-final.json'))]
     manifest=dict(version=1,issue=1300,lane='engineering',worker_id=WORKER,subject_ids=[],
         subject_ids_sha256=hashlib.sha256(b'[]').hexdigest(),baseline=dict(commit=BASE,files=baseline,pins=pins,pin_files=PIN_PATHS),
         sources=sources,outputs=outputs,methods=methods,validation=validation,
@@ -102,7 +102,7 @@ def main():
                       input_sha256=scope['sha256']) for name,pointer,value in metric_fields],
         metric_bindings=[dict(metric_id=name,path=PREFIX+'r1/report.json',json_pointer=pointer) for name,pointer,value in metric_fields],
         summaries=[],conclusions=[dict(status='unresolved',source_ids=[x['id'] for x in sources],
-            text='Complete frozen numeric-first diagnosis is delivered. Matching local exact contradictions, original-replay mismatches, invalid/unsupported pointsets and all original source/context/hierarchy unknowns remain distinct and fully retained. No corrected partition, physical water/land, ownership, source accuracy, historical/legal authority, deployment or repair approval is certified; parent1202 remains active.')],
+            text='Complete frozen numeric-first diagnosis is delivered. Matching local exact contradictions, original-replay mismatches, invalid/unsupported pointsets and all original source/context/hierarchy unknowns remain distinct and fully retained. Final verifier correction preserves the actual45a complete custody/semantic proof, adds an immutable4956 all-row guarded-branch audit and14 directed actual partial-prefix/invalid/invented-witness controls. No corrected partition, physical water/land, ownership, source accuracy, historical/legal authority, deployment or repair approval is certified; parent1202 remains active.')],
         stages=dict(research='complete',implementation='implemented',geographic_approval='not-requested'),
         commands=['PYTHONDONTWRITEBYTECODE=1 python -u -B '+PREFIX+'diagnose.py --repo REPO --code-commit '+SCIENCE+' --output ABSOLUTE_ABSENT_OWNED_CACHE_DIRECTORY (execute twice independently at frozen3ef; outputs exclusive)',
                   'Final readback authenticates both whole actual trees and complete rows/pointsets/members without a third operator or exact membership-query cohort; bounded case controls are separately labelled.'],
