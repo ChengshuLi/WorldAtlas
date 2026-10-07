@@ -1,0 +1,456 @@
+{
+  "version": 1,
+  "retrieved_at_utc": "2026-10-07T11:47:17.466397+00:00",
+  "issue": 1385,
+  "issue_contract_sha256": "0a6c1d476026fdbbfb214829987bb2fda613e368b8fdb42340e49a705739115c",
+  "baseline_commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+  "original_merge_commit": "194c46fd4f3f140506678bbff4f134c3c004ffbd",
+  "original_pr_head": "97dbfc996a431e85508ace148b0b65e417d37112",
+  "owned_paths": [
+    "research/geography/zambia-zimbabwe-reproduction-integrity-1244-erratum/"
+  ],
+  "subject_ids": [
+    "gb:ZMB:ADM2:96606910B35256638811207",
+    "gb:ZMB:ADM2:96606910B48730551364911",
+    "gb:ZMB:ADM2:96606910B70191271227661",
+    "gb:ZWE:ADM2:62879985B85730198836463"
+  ],
+  "component_ids": [
+    "physical-component:087b8ed59af27e069111ed4388ae84383625b06dcaaf0a250c56b21b38a09412",
+    "physical-component:1aaf0bcede4fa05f6a0e04291123eb68a618da7d181659dc81785f58f05ce624",
+    "physical-component:339d343f62afdbb94f6352a45d41c17acf0d1df65fed834c1a5e86154f31102f",
+    "physical-component:43d1a11315e3668e90ea91331a0857bbbe9d96984b212bf957653e616ee52cd8",
+    "physical-component:447b38afd61e5dfa559b901ab149a059a711d9e99af2e204ab5f88ec30552275",
+    "physical-component:4e35c8d9131282023f3efb77bc9c166be31ead102344e44e307aa964b66dfdf3",
+    "physical-component:87a14332b9a62f4a42282cf8a415c0b94c15091654aa05b1ac293ee2d4758b3f",
+    "physical-component:bb6382d696364f0b134a83c89a5fa36a479788538ec07a3696347056b63b7bae",
+    "physical-component:e53af7b07bd3f726a90d31048953c13321f872340b2d7ab735d4bd4334faf782",
+    "physical-component:ed72aa6057af62a735ca5b0b3ad6cf79f8f8e96ca7ab15b7aa2e4b4d8c981827"
+  ],
+  "pins": [
+    {
+      "id": "baseline_1",
+      "path": "coordination/engineering/coverage-gaps-907-20261005-local01/sources/natural-earth-lakes.geojson.gz",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 1565161,
+      "sha256": "a57bd38b23b57d884853c3e8e6da1a4a24c9ca40dd1edb8e9b2de4db70c0656f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_2",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-000.geojson.gz",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 1131547,
+      "sha256": "82021e76644a5a8b7e314df651802f8b0e7be7121df7f2cf7616ba0bb28ca66b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_3",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-001.geojson.gz",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 945171,
+      "sha256": "1db68fd78b5c45971f2c49744d236fd06773d8af7acdeb4c3f110846a76c1e57",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_4",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-002.geojson.gz",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 1030525,
+      "sha256": "27fd26511ad6c928bd9988cd69d4063f7ac3405676c09076a8c3868d483aeedc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_5",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-003.geojson.gz",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 1164442,
+      "sha256": "a85f18eae9a30ac8f8b0add7f75430ef7a33fb95c9b1ab3c96de371ff46b793e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_6",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-004.geojson.gz",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 1126016,
+      "sha256": "9342f503fdac75a90223b0ffd607144bb78fa5d30423d4d1390a55ec35e7fbb6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_7",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-005.geojson.gz",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 1137361,
+      "sha256": "3e5763f5742f5d4e6ae99642ab148e05cb7de69c4801704b473b6990a211605f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_8",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-006.geojson.gz",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 1130906,
+      "sha256": "84ca5ca02c77ed04e8fbce3d64870972fc2c6fbb58f64037dd57e71278c7909e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_9",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-007.geojson.gz",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 1120843,
+      "sha256": "ff497d1127d47e9df308d118e89a4c3e893a0ed4078da82aaab82326cc9919c7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_10",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-008.geojson.gz",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 1161752,
+      "sha256": "20ecf84ad85b3fb74514e4633c5b0c0d94d59b20e0a4ef2829348fb1e9f75f77",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_11",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-009.geojson.gz",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 1196442,
+      "sha256": "1a6ddb8db2116f6570bf695897f17aa592684280d93458248ce1ea5fa66ec78d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_12",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-010.geojson.gz",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 1155467,
+      "sha256": "399e7af4f3bf2850745efcc9bea14371ffed187ac3f7983ad860eaf5ab3c284f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_13",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-011.geojson.gz",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 1098101,
+      "sha256": "5228e4344b42adf8445f95d67f3eec5ff107a4632840cac86c10b31246d82fa5",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_14",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-012.geojson.gz",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 1137180,
+      "sha256": "52a1f9104dd4045ba05e9a07769df81477f4e915afb636c508dec15dbe2b88d8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_15",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-013.geojson.gz",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 1214905,
+      "sha256": "518fe9bf7f869670af7529dd235391b7dfc4794500984e47173249d2da997dab",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_16",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-014.geojson.gz",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 1298884,
+      "sha256": "936da384bb662363a6c45bfed043d009b7c3bdebe08f52c87f5ad22c77574ef1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_17",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-015.geojson.gz",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 1290795,
+      "sha256": "9df543092cc7ba3fd4a91e764b984972578fb1beed01e4f775024f723bf82ede",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_18",
+      "path": "coordination/engineering/physical-gap-audit-1005-20261005-local18/detection-v4/candidates-016.geojson.gz",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 670977,
+      "sha256": "b72027a958379e676b8e4809f7ab445e697b574b104d3f9552c836798973decf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_19",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 117156,
+      "sha256": "dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_20",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 2080126,
+      "sha256": "001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_21",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 2081831,
+      "sha256": "1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_22",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 2080037,
+      "sha256": "46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_23",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/4a150385c4b026e55cd2faf756f8a3fc43eddac2d8a58c118c9fbcf8419777df.bin",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 771440,
+      "sha256": "4a150385c4b026e55cd2faf756f8a3fc43eddac2d8a58c118c9fbcf8419777df",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_24",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 2074475,
+      "sha256": "541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_25",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca.bin",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 2079265,
+      "sha256": "654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_26",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 2085110,
+      "sha256": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_27",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 2085907,
+      "sha256": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_28",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 2079838,
+      "sha256": "c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_29",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 2081609,
+      "sha256": "ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_30",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 1714760,
+      "sha256": "e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_31",
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 2080606,
+      "sha256": "f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_32",
+      "path": "coordination/engineering/worldwide-inventory-1164-20261006/run-one/report.json",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 73547,
+      "sha256": "a5423b1e62b5a0793b83999d87d1f6d50916db482cf2ec74973f75555c2bda6c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_33",
+      "path": "data/administrative-sources.json",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 661416,
+      "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_34",
+      "path": "data/canonical-grid/manifest.json",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 271171,
+      "sha256": "73899e8581d74634d6304a9e52aa32849dd174730aba2c6cc48db512a985d1f6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_35",
+      "path": "data/geography/part-28.json",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 6613963,
+      "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_36",
+      "path": "data/hierarchy.json",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 10164089,
+      "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_37",
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/geoboundaries/geoBoundaries-ZMB-ADM2_simplified.geojson",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 3574952,
+      "sha256": "58e9df3f95bb4c7539e5fb48839b246b2bfb12694cf5db3ed595240156016c60",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_38",
+      "path": "data/regional-review/regional-review-9203cb61c3883e07/source/geoboundaries/geoBoundaries-ZWE-ADM2_simplified.geojson",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 1042500,
+      "sha256": "3486ef2803574e63db97e2a35b6688bb327cb8d6ff5e439691c1cc3068ddb424",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_39",
+      "path": "scripts/ellipsoidal_area.py",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 1953,
+      "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "baseline_40",
+      "path": "scripts/evidence/geometry.py",
+      "commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+      "bytes": 5264,
+      "sha256": "944541968fcdf065b9c4b6105be227c3e0e14b6a20916f4fa21f851338c7a305",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "original_1244_1",
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/README.md",
+      "commit": "194c46fd4f3f140506678bbff4f134c3c004ffbd",
+      "bytes": 7529,
+      "sha256": "91ce129d3113231bbf79edd9919988c1db10de681acf0417abcb77bde866e975",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "original_1244_2",
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/evidence-quality.json",
+      "commit": "194c46fd4f3f140506678bbff4f134c3c004ffbd",
+      "bytes": 31399,
+      "sha256": "105c411d0e3354f0ffda965e9ff626feb9baaf2f78b10667df49784918bd79f1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "original_1244_3",
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/generator-negative-control.json",
+      "commit": "194c46fd4f3f140506678bbff4f134c3c004ffbd",
+      "bytes": 787,
+      "sha256": "858579e4d6b8d84e81c1f861cba2dfd5bd077ec95ddba5043d9df5011103db85",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "original_1244_4",
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/generator-positive-control.json",
+      "commit": "194c46fd4f3f140506678bbff4f134c3c004ffbd",
+      "bytes": 334,
+      "sha256": "72710eac60fa4725f5983987f72189a3c806967d1f6964803cda43bdb1cec0d3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "original_1244_5",
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/geography-negative-control.json",
+      "commit": "194c46fd4f3f140506678bbff4f134c3c004ffbd",
+      "bytes": 757,
+      "sha256": "19d8bade60de2a24e4cfd2ba6209a23b449a0dd871fca8e01f9b92ef4591fdf9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "original_1244_6",
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/geography-positive-control.json",
+      "commit": "194c46fd4f3f140506678bbff4f134c3c004ffbd",
+      "bytes": 2303,
+      "sha256": "4f7e620c4ca171831b5f90112c122a77a32e89b5ab75681dfdcd68bd7dfe8d22",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "original_1244_7",
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/record-controls.py",
+      "commit": "194c46fd4f3f140506678bbff4f134c3c004ffbd",
+      "bytes": 3756,
+      "sha256": "b8c131fffae0aa484d2ff5e2a6de8271e4c23162d0d90f22a2052fbb9af2ae91",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "original_1244_8",
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/reproduce.py",
+      "commit": "194c46fd4f3f140506678bbff4f134c3c004ffbd",
+      "bytes": 20770,
+      "sha256": "096dfdd92961a164da26808d5bd456dcf5e2c3a9e960a7b1e05c9dc87f53c582",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "original_1244_9",
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/reproducibility.json",
+      "commit": "194c46fd4f3f140506678bbff4f134c3c004ffbd",
+      "bytes": 520,
+      "sha256": "160711b9afef8b920087c396571d797f1593890064c867fea5cde1f7123efa79",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "original_1244_10",
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/run-one/source-geometry-results.json.gz",
+      "commit": "194c46fd4f3f140506678bbff4f134c3c004ffbd",
+      "bytes": 329369,
+      "sha256": "8a095d6c2c7ff0ba69138ecd6c2d581e55cb57a44485f9d3ce27b525dfb1475e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "original_1244_11",
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/run-two/source-geometry-results.json.gz",
+      "commit": "194c46fd4f3f140506678bbff4f134c3c004ffbd",
+      "bytes": 329369,
+      "sha256": "8a095d6c2c7ff0ba69138ecd6c2d581e55cb57a44485f9d3ce27b525dfb1475e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "original_1244_12",
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/source-material/administrative-at-cea.py",
+      "commit": "194c46fd4f3f140506678bbff4f134c3c004ffbd",
+      "bytes": 12313,
+      "sha256": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "id": "original_1244_13",
+      "path": "research/geography/gap-source-zambia-zimbabwe-shared-seams-20261006/source-provenance.json",
+      "commit": "194c46fd4f3f140506678bbff4f134c3c004ffbd",
+      "bytes": 7147,
+      "sha256": "54594a504345c7100c553c8a8ebff226420b4242c3cd1bafa254c6d1cc51f34c",
+      "hash_kind": "file-bytes"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "issue": 1385,
+  "recorded_at": "2026-10-07",
+  "rule": "All earlier iterations and outputs are retained. Only the pinned-helper run pair and its matching controls are accepted final evidence.",
+  "accepted_final": {
+    "producer_runs": [
+      "run-one-main-d51",
+      "run-two-main-d51"
+    ],
+    "controls": {
+      "false_equal_pairs_rejected": 6,
+      "original_measurement_checks_equal": 275,
+      "drift_entrypoints_fail_before_publication": 2,
+      "output_safety_cases": 5
+    },
+    "helper_commit": "d51c43e878c797d215ba5bd8285571fa14add443",
+    "helper_sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+    "producer_publication_hashes": {
+      "run-one-main-d51": "b0b340be71ad2cbaecad9de4e81028fb2b3aadcb6da2696917afd015cd4d231f",
+      "run-two-main-d51": "546997ce9abbef443a5f3680f335705286064fd1dd0f2eff854d58795f764e29"
+    },
+    "controls_publication_sha256": "bd140c5d9413eb0ed9be682620317cdc484fb1cb60f29b031bf269e4d4f13c9d",
+    "phase_outputs_identical_across_runs": true
+  },
+  "superseded_or_failed_attempts": [
+    {
+      "vintage": "run-one",
+      "disposition": "superseded; complete publication was written, then the CLI success summary tried to gunzip the plain JSON run summary and returned nonzero",
+      "preserve": true
+    },
+    {
+      "vintage": "run-one-corrected",
+      "disposition": "superseded; same post-publication reporting defect was then fixed",
+      "preserve": true
+    },
+    {
+      "vintage": "run-one-final",
+      "disposition": "superseded after subsequent implementation and helper-pin corrections",
+      "preserve": true
+    },
+    {
+      "vintage": "run-two-corrected",
+      "disposition": "superseded after subsequent implementation and helper-pin corrections",
+      "preserve": true
+    },
+    {
+      "vintage": "run-one-verified",
+      "disposition": "superseded after project preparation helper was fully pinned and executed from captured bytes",
+      "preserve": true
+    },
+    {
+      "vintage": "run-two-verified",
+      "disposition": "superseded after project preparation helper was fully pinned and executed from captured bytes",
+      "preserve": true
+    },
+    {
+      "vintage": "controls-corrected-r2, controls-final, controls-verified and their false-pair/safety fixtures",
+      "disposition": "superseded; controls were rerun against the exact pinned-helper pair",
+      "preserve": true
+    },
+    {
+      "vintage": "run-one-pinned-helper, run-two-pinned-helper and controls-pinned-helper",
+      "disposition": "superseded because origin/main advanced; outputs preserve the exact earlier helper and are retained, while accepted runs were repeated against d51c43e.",
+      "preserve": true,
+      "publication_hashes": {
+        "run-one-pinned-helper": "d32bd3f585827d012ac5d60dffafb66ed35f9969562f4b2dfbff09e2c74cb3aa",
+        "run-two-pinned-helper": "6afa5fea6dfa8fd4995f1987ead9bcdbc2415ea2d111ca1aa8518dec925e95a6"
+      }
+    }
+  ],
+  "early_blocking_defects_corrected": [
+    "An early contact assertion incorrectly expected every endpoint component to be in the ten-ID issue roster; the retained complete point-only row correctly includes an out-of-roster neighbor.",
+    "An early accounting loop and the post-publication run-summary decoder were corrected before accepted final runs.",
+    "An early recorder import instantiated the old helper at data baseline 79ff, which lacked the required pinned module loader; final runs capture and execute scripts/evidence/immutable.py from fresh-main commit 44c6477."
+  ],
+  "durable_originals": [
+    "Issue-declared 53 whole-file source pins in source-lock.json",
+    "Original #1244 run and controls at original merge commit 194c46fd4f3f140506678bbff4f134c3c004ffbd",
+    "Every prior producer, control and failure vintage in vintages/"
+  ]
+}

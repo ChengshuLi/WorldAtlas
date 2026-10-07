@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "baseline_commit": "79ffb2ed04702e16f009e4675a8d74ef9bd09d4f",
+  "project_helper": {
+    "commit": "d51c43e878c797d215ba5bd8285571fa14add443",
+    "path": "scripts/evidence/immutable.py",
+    "bytes": 17414,
+    "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46"
+  },
+  "code": {
+    "evidence_core.py": "eb77b163e62a00f438576b08d978d3d710a9d969f970c7e469c019514b228272",
+    "reproduce.py": "2fb31801ede160761caae83f2efe35de8a1f27ec665e5ea11f376ae6ba9e56e2",
+    "record_controls.py": "5513ff70cd9acfaa854d6f9677a2ead61e640dfd3c9c6ab30cf58485582b53e0",
+    "safe_vintage.py": "8d1f4c0f8487b5925a51f93adba8304997cc1dc075fd62eff8d8f328bebac335"
+  },
+  "purpose": "Exact source inputs from the issue baseline; project preparation code is separately captured at fresh main and candidate entrypoints use whole-file locks."
+}
