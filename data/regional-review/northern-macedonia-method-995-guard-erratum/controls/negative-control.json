@@ -1,0 +1,121 @@
+{
+  "version": 1,
+  "method_id": "retained-source-area-comparison",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "recorded_at_utc": "2026-10-07T02:02:10.096289Z",
+  "controls": [
+    {
+      "id": "dot-dot traversal to preserved sibling packet",
+      "outcome": "rejected-before-publication",
+      "exception": "ValueError",
+      "reason": "output must be a relative owned path without dot/traversal components"
+    },
+    {
+      "id": "absolute destination",
+      "outcome": "rejected-before-publication",
+      "exception": "ValueError",
+      "reason": "output must be a relative owned path without dot/traversal components"
+    },
+    {
+      "id": "symlink parent escaping to preserved sibling packet",
+      "outcome": "rejected-before-publication",
+      "exception": "NotADirectoryError",
+      "reason": "[Errno 20] Not a directory: 'symlink-parent'"
+    },
+    {
+      "id": "complete geometry helper code supplied at actual import boundary",
+      "outcome": "rejected-before-publication",
+      "exception": "ValueError",
+      "reason": "actual import-boundary code rejected: /Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/scripts/evidence/geometry.py"
+    },
+    {
+      "id": "complete ellipsoidal helper code supplied at actual import boundary",
+      "outcome": "rejected-before-publication",
+      "exception": "ValueError",
+      "reason": "actual import-boundary code rejected: /Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/scripts/ellipsoidal_area.py"
+    },
+    {
+      "id": "complete original decoder/reproducer drift at actual import boundary",
+      "outcome": "rejected-before-publication",
+      "exception": "ValueError",
+      "reason": "actual import-boundary code rejected: /Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/0ad48b2910dce85fd11f72c80bdc424bbe5395d93c102b5684aed745782784d3/work/data/regional-review/followup-northern-macedonia-422-roster-20261005/reproduce.py"
+    },
+    {
+      "id": "wrong complete input descriptor bytes",
+      "outcome": "rejected-before-publication",
+      "exception": "ValueError",
+      "reason": "prior baseline descriptor changed"
+    },
+    {
+      "id": "wrong immutable whole input bytes",
+      "outcome": "rejected-before-publication",
+      "exception": "ValueError",
+      "reason": "baseline whole-file pin failed: data/geography/part-15.json"
+    },
+    {
+      "id": "complete prior runner drift",
+      "outcome": "rejected-before-publication",
+      "exception": "ValueError",
+      "reason": "immutable previous runner code pin failed"
+    },
+    {
+      "id": "wrong prior runner pin bytes",
+      "outcome": "rejected-before-publication",
+      "exception": "ValueError",
+      "reason": "immutable previous runner pin file failed"
+    },
+    {
+      "id": "wrong current runner pin bytes",
+      "outcome": "rejected-before-publication",
+      "exception": "ValueError",
+      "reason": "current runner complete-file pin failed"
+    }
+  ],
+  "no_result_outputs_created": true,
+  "rejected_output_paths_checked": [
+    "data/regional-review/northern-macedonia-method-995-guard-erratum/controls/rejected-geometry-drift.json",
+    "data/regional-review/northern-macedonia-method-995-guard-erratum/controls/rejected-ellipsoidal-drift.json",
+    "data/regional-review/northern-macedonia-method-995-guard-erratum/controls/rejected-original-reproducer-drift.json",
+    "data/regional-review/northern-macedonia-method-995-guard-erratum/controls/rejected-descriptor-drift.json",
+    "data/regional-review/northern-macedonia-method-995-guard-erratum/controls/rejected-input-drift.json",
+    "data/regional-review/northern-macedonia-method-995-guard-erratum/controls/rejected-runner-drift.json",
+    "data/regional-review/northern-macedonia-method-995-guard-erratum/controls/rejected-runner-pin-drift.json"
+  ],
+  "existing_output_control": {
+    "path": "data/regional-review/northern-macedonia-method-995-guard-erratum/controls/existing-output-sentinel.json",
+    "sha256": "b8ca690c6e4ad28f32ddb14c392648569c23dba61c2365abc165b3659639f751",
+    "bytes_unchanged": true,
+    "result": {
+      "id": "existing output remains protected",
+      "outcome": "rejected-before-publication",
+      "exception": "FileExistsError",
+      "reason": "[Errno 17] File exists: 'existing-output-sentinel.json'"
+    }
+  },
+  "outside_prefix_absent_target": "data/regional-review/northern-macedonia-method-995-erratum/v1/guard-control-must-not-exist.json",
+  "outside_sentinel_files": {
+    "run-one.json": "d3d23c61368d3db4fb5acf049cfaff9f3533a1da7c37c5b96d02070d50b3fef3",
+    "run-two.json": "d3d23c61368d3db4fb5acf049cfaff9f3533a1da7c37c5b96d02070d50b3fef3"
+  },
+  "outside_sentinels_unchanged": true,
+  "full_code_fixtures": {
+    "scripts/evidence/geometry.py": {
+      "path": "data/regional-review/northern-macedonia-method-995-guard-erratum/controls/geometry-helper-drift.py",
+      "bytes": 5270,
+      "sha256": "f03a93d802bd20fcd42949223022f3cc52a3e737129cd7901164e529f85a2c1c",
+      "synthetic_change": "entire original helper with canonical area return increased by 1 m²"
+    },
+    "scripts/ellipsoidal_area.py": {
+      "path": "data/regional-review/northern-macedonia-method-995-guard-erratum/controls/ellipsoidal-area-helper-drift.py",
+      "bytes": 1953,
+      "sha256": "73cc2f8e09d9c456b029fb53e888f442fdf1c1a1db79d1072b5a198c9c8be4f2",
+      "synthetic_change": "entire original helper with semimajor axis increased by 1 m"
+    },
+    "data/regional-review/followup-northern-macedonia-422-roster-20261005/reproduce.py": {
+      "bytes": 19205,
+      "sha256": "e48004fc16b18c08a043487688e57d82d2a29ec34f9a789881ab37079eabf571",
+      "synthetic_change": "complete source with native scope truncated to 83 IDs"
+    }
+  }
+}
