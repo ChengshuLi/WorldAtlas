@@ -1,0 +1,11 @@
+{
+  "method_id": "source-atlas-component-crosswalk",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "cases": [
+    "Removing one subject was rejected by the exact-199 roster and contract digest check.",
+    "Duplicating one subject was rejected by the unique-ID check.",
+    "Increasing a matching Atlas count by one changes the discrepancy count from eight to nine and fails the expected result check.",
+    "Re-running against the existing run-one output path exited with EEXIST; post-attempt SHA-256 remained 4e6b16e4c66715536376ebab4a8a50e971797b39b5ca45a63cdbdbf1823b9bd8."
+  ]
+}
