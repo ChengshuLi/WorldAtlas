@@ -2,7 +2,6 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {pathToFileURL} from 'node:url';
 import {authenticateOriginalValidator,validateBuildContextVintage,requireCurrentMigrationSource} from '../coordination/engineering/subject-descriptor-decode-20261007/context-vintage-dispatch.mjs';
@@ -50,7 +49,9 @@ test('leaf and ancestor symlinks never become captured original code',async()=>f
  await assert.rejects(authenticateOriginalValidator({snapshotRoot:code}),/symlinks/);
 }));
 test('actual original-stage entry rejects changed stage and reaches authenticated data guard',async()=>{
- const raw=execFileSync('git',['show','83bed8c4c49e8f54077bb4abf0f32d41d0992f81:data/native-context-migration/manifest.json']);
+ const raw=await fs.readFile(ns+'/fixtures/original-context-stage.json');
+ const {index}=await authenticateOriginalValidator();
+ assert.equal(raw.length,index.stage_bytes);assert.equal(digest(raw),index.stage_sha256);
  const stage=JSON.parse(raw);stage.execution_commit='0'.repeat(40);
  await assert.rejects(validateBuildContextVintage({readFile:()=>Buffer.from(JSON.stringify(stage))}),/Original context stage bytes differ/);
  let actualOriginalDataRead=false;
