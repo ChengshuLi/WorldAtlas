@@ -22,7 +22,7 @@ Use the archived Python 3.12.14, Shapely 2.1.2, and PyProj 3.7.2 environment (or
 
 ```sh
 python3 data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/reproduce_integrity_erratum.py data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/runs/DATE/run-N/assessments.json.gz
-python3 data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/validate_controls.py
+python3 data/regional-review/regional-review-0968ad79c26518d2/vintages/generator-integrity-erratum/validate_controls.py --run-id replay-YYYY-MM-DD
 ```
 
-Every assessment, control, summary and ledger destination must be fresh; a rerun refuses existing outputs before writing. The input manifest is deliberately pinned to the original #1087 merge vintage and will fail closed if changed.
+Every assessment, control, summary and ledger destination must be fresh; a rerun requires a new run ID and refuses existing outputs before writing. The input manifest is deliberately pinned to the original #1087 merge vintage and will fail closed if changed.

@@ -1,15 +1,20 @@
 #!/usr/bin/env python3
 """Reproduce positive, negative, and two-run controls for issue #1308."""
 from pathlib import Path
-import hashlib, json, subprocess, sys, gzip
+import hashlib, json, subprocess, sys, gzip, argparse, re
 from integrity_guards import verify_bound_input, require_new_output
 
 ROOT = Path(__file__).resolve().parents[2]
 VINTAGE = Path(__file__).resolve().parent
+parser = argparse.ArgumentParser(description='Run controls into a new immutable output vintage.')
+parser.add_argument('--run-id', required=True, help='Unique alphanumeric/hyphen ID for fresh control outputs')
+args = parser.parse_args()
+if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9-]{0,63}', args.run_id):
+    raise SystemExit('run-id must contain 1-64 letters, digits or interior hyphens')
 RUNS = VINTAGE / 'runs' / '2026-10-07'
-OUT = VINTAGE / 'controls' / 'verified-run-2'
-SUMMARY = VINTAGE / 'erratum-summary-v2.json'
-LEDGER = VINTAGE / 'correction-ledger-v2.json'
+OUT = VINTAGE / 'controls' / ('run-' + args.run_id)
+SUMMARY = VINTAGE / ('erratum-summary-' + args.run_id + '.json')
+LEDGER = VINTAGE / ('correction-ledger-' + args.run_id + '.json')
 # Check every destination before reading or writing any control result.
 for destination in (OUT, SUMMARY, LEDGER):
     require_new_output(destination)
