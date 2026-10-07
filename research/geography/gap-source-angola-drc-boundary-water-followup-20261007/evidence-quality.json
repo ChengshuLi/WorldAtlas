@@ -142,6 +142,21 @@
       "status": "added"
     },
     {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/freeze-v5.json",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/freeze-v6.json",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/freeze-v7.json",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
       "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/issue-contract.json",
       "previous_path": null,
       "status": "added"
@@ -218,6 +233,11 @@
     },
     {
       "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/superseded/reproduction-receipt-freeze-v3.json",
+      "previous_path": null,
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/superseded/reproduction-receipt-freeze-v4.json",
       "previous_path": null,
       "status": "added"
     },
@@ -379,7 +399,7 @@
   ],
   "commands": [
     "python restore_worldcover.py",
-    "PYTHONPATH=\"$PWD/.evidence-venv/lib/python3.12/site-packages\" /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12 research/geography/gap-source-angola-drc-boundary-water-followup-20261007/run_twice.py (loads inputs/freeze-v4.json)",
+    "PYTHONPATH=\"$PWD/.evidence-venv/lib/python3.12/site-packages\" /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12 research/geography/gap-source-angola-drc-boundary-water-followup-20261007/run_twice.py (loads inputs/freeze-v7.json)",
     "node scripts/evidence-quality.mjs research/geography/gap-source-angola-drc-boundary-water-followup-20261007/evidence-quality.json ."
   ],
   "conclusions": [
@@ -904,7 +924,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2020-v100-component-01-class80",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 0,
       "vintage": "baseline"
@@ -912,7 +932,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2020-v100-component-01-class90",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 0,
       "vintage": "baseline"
@@ -920,15 +940,15 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2020-v100-component-01-centres",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixel centres",
-      "value": 198427,
+      "value": 198425,
       "vintage": "baseline"
     },
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2021-v200-component-01-class80",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 0,
       "vintage": "baseline"
@@ -936,7 +956,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2021-v200-component-01-class90",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 0,
       "vintage": "baseline"
@@ -944,15 +964,15 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2021-v200-component-01-centres",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixel centres",
-      "value": 198427,
+      "value": 198425,
       "vintage": "baseline"
     },
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "scl-component-01-class6",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 0,
       "vintage": "baseline"
@@ -960,7 +980,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "scl-component-01-unknown",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 6141,
       "vintage": "baseline"
@@ -968,7 +988,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "scl-component-01-centres",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixel centres",
       "value": 41998,
       "vintage": "baseline"
@@ -976,7 +996,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2020-v100-component-02-class80",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 63,
       "vintage": "baseline"
@@ -984,7 +1004,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2020-v100-component-02-class90",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 7023,
       "vintage": "baseline"
@@ -992,15 +1012,15 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2020-v100-component-02-centres",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixel centres",
-      "value": 161806,
+      "value": 161809,
       "vintage": "baseline"
     },
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2021-v200-component-02-class80",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 593,
       "vintage": "baseline"
@@ -1008,7 +1028,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2021-v200-component-02-class90",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 6734,
       "vintage": "baseline"
@@ -1016,15 +1036,15 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2021-v200-component-02-centres",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixel centres",
-      "value": 161806,
+      "value": 161809,
       "vintage": "baseline"
     },
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "scl-component-02-class6",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 0,
       "vintage": "baseline"
@@ -1032,7 +1052,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "scl-component-02-unknown",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 5566,
       "vintage": "baseline"
@@ -1040,7 +1060,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "scl-component-02-centres",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixel centres",
       "value": 34211,
       "vintage": "baseline"
@@ -1048,7 +1068,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2020-v100-component-03-class80",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 0,
       "vintage": "baseline"
@@ -1056,7 +1076,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2020-v100-component-03-class90",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 251,
       "vintage": "baseline"
@@ -1064,7 +1084,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2020-v100-component-03-centres",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixel centres",
       "value": 154903,
       "vintage": "baseline"
@@ -1072,7 +1092,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2021-v200-component-03-class80",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 0,
       "vintage": "baseline"
@@ -1080,7 +1100,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2021-v200-component-03-class90",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 1490,
       "vintage": "baseline"
@@ -1088,7 +1108,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2021-v200-component-03-centres",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixel centres",
       "value": 154903,
       "vintage": "baseline"
@@ -1096,7 +1116,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "scl-component-03-class6",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 0,
       "vintage": "baseline"
@@ -1104,7 +1124,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "scl-component-03-unknown",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 11167,
       "vintage": "baseline"
@@ -1112,7 +1132,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "scl-component-03-centres",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixel centres",
       "value": 32811,
       "vintage": "baseline"
@@ -1120,7 +1140,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2020-v100-component-04-class80",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 0,
       "vintage": "baseline"
@@ -1128,7 +1148,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2020-v100-component-04-class90",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 272,
       "vintage": "baseline"
@@ -1136,15 +1156,15 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2020-v100-component-04-centres",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixel centres",
-      "value": 218508,
+      "value": 218484,
       "vintage": "baseline"
     },
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2021-v200-component-04-class80",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 0,
       "vintage": "baseline"
@@ -1152,7 +1172,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2021-v200-component-04-class90",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 1172,
       "vintage": "baseline"
@@ -1160,15 +1180,15 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2021-v200-component-04-centres",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixel centres",
-      "value": 218508,
+      "value": 218484,
       "vintage": "baseline"
     },
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "scl-component-04-class6",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 0,
       "vintage": "baseline"
@@ -1176,7 +1196,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "scl-component-04-unknown",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 25,
       "vintage": "baseline"
@@ -1184,7 +1204,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "scl-component-04-centres",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixel centres",
       "value": 46285,
       "vintage": "baseline"
@@ -1192,7 +1212,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2020-v100-component-05-class80",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 0,
       "vintage": "baseline"
@@ -1200,7 +1220,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2020-v100-component-05-class90",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 2206,
       "vintage": "baseline"
@@ -1208,7 +1228,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2020-v100-component-05-centres",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixel centres",
       "value": 22628,
       "vintage": "baseline"
@@ -1216,7 +1236,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2021-v200-component-05-class80",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 0,
       "vintage": "baseline"
@@ -1224,7 +1244,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2021-v200-component-05-class90",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 2040,
       "vintage": "baseline"
@@ -1232,7 +1252,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2021-v200-component-05-centres",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixel centres",
       "value": 22628,
       "vintage": "baseline"
@@ -1240,7 +1260,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "scl-component-05-class6",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 0,
       "vintage": "baseline"
@@ -1248,7 +1268,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "scl-component-05-unknown",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 40,
       "vintage": "baseline"
@@ -1256,7 +1276,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "scl-component-05-centres",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixel centres",
       "value": 4791,
       "vintage": "baseline"
@@ -1264,7 +1284,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2020-v100-component-06-class80",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 0,
       "vintage": "baseline"
@@ -1272,7 +1292,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2020-v100-component-06-class90",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 127,
       "vintage": "baseline"
@@ -1280,7 +1300,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2020-v100-component-06-centres",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixel centres",
       "value": 42617,
       "vintage": "baseline"
@@ -1288,7 +1308,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2021-v200-component-06-class80",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 0,
       "vintage": "baseline"
@@ -1296,7 +1316,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2021-v200-component-06-class90",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 110,
       "vintage": "baseline"
@@ -1304,7 +1324,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2021-v200-component-06-centres",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixel centres",
       "value": 42617,
       "vintage": "baseline"
@@ -1312,7 +1332,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "scl-component-06-class6",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 0,
       "vintage": "baseline"
@@ -1320,7 +1340,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "scl-component-06-unknown",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 371,
       "vintage": "baseline"
@@ -1328,7 +1348,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "scl-component-06-centres",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixel centres",
       "value": 9020,
       "vintage": "baseline"
@@ -1336,7 +1356,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2020-v100-component-07-class80",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 0,
       "vintage": "baseline"
@@ -1344,7 +1364,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2020-v100-component-07-class90",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 0,
       "vintage": "baseline"
@@ -1352,15 +1372,15 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2020-v100-component-07-centres",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixel centres",
-      "value": 5729,
+      "value": 5732,
       "vintage": "baseline"
     },
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2021-v200-component-07-class80",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 0,
       "vintage": "baseline"
@@ -1368,7 +1388,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2021-v200-component-07-class90",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 111,
       "vintage": "baseline"
@@ -1376,15 +1396,15 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2021-v200-component-07-centres",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixel centres",
-      "value": 5729,
+      "value": 5732,
       "vintage": "baseline"
     },
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "scl-component-07-class6",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 0,
       "vintage": "baseline"
@@ -1392,7 +1412,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "scl-component-07-unknown",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 7,
       "vintage": "baseline"
@@ -1400,7 +1420,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "scl-component-07-centres",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixel centres",
       "value": 1195,
       "vintage": "baseline"
@@ -1408,7 +1428,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2020-v100-component-08-class80",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 0,
       "vintage": "baseline"
@@ -1416,7 +1436,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2020-v100-component-08-class90",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 563,
       "vintage": "baseline"
@@ -1424,7 +1444,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2020-v100-component-08-centres",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixel centres",
       "value": 20805,
       "vintage": "baseline"
@@ -1432,7 +1452,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2021-v200-component-08-class80",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 0,
       "vintage": "baseline"
@@ -1440,7 +1460,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2021-v200-component-08-class90",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 1203,
       "vintage": "baseline"
@@ -1448,7 +1468,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2021-v200-component-08-centres",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixel centres",
       "value": 20805,
       "vintage": "baseline"
@@ -1456,7 +1476,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "scl-component-08-class6",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 0,
       "vintage": "baseline"
@@ -1464,7 +1484,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "scl-component-08-unknown",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 218,
       "vintage": "baseline"
@@ -1472,7 +1492,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "scl-component-08-centres",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixel centres",
       "value": 4410,
       "vintage": "baseline"
@@ -1480,7 +1500,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2020-v100-component-09-class80",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 0,
       "vintage": "baseline"
@@ -1488,7 +1508,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2020-v100-component-09-class90",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 205,
       "vintage": "baseline"
@@ -1496,15 +1516,15 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2020-v100-component-09-centres",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixel centres",
-      "value": 1161276,
+      "value": 1161288,
       "vintage": "baseline"
     },
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2021-v200-component-09-class80",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 27,
       "vintage": "baseline"
@@ -1512,7 +1532,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2021-v200-component-09-class90",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 297,
       "vintage": "baseline"
@@ -1520,15 +1540,15 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2021-v200-component-09-centres",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixel centres",
-      "value": 1161276,
+      "value": 1161288,
       "vintage": "baseline"
     },
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "scl-component-09-class6",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 1,
       "vintage": "baseline"
@@ -1536,7 +1556,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "scl-component-09-unknown",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 700,
       "vintage": "baseline"
@@ -1544,7 +1564,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "scl-component-09-centres",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixel centres",
       "value": 246297,
       "vintage": "baseline"
@@ -1552,7 +1572,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2020-v100-component-10-class80",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 0,
       "vintage": "baseline"
@@ -1560,7 +1580,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2020-v100-component-10-class90",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 37,
       "vintage": "baseline"
@@ -1568,15 +1588,15 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2020-v100-component-10-centres",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixel centres",
-      "value": 58476,
+      "value": 58473,
       "vintage": "baseline"
     },
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2021-v200-component-10-class80",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 0,
       "vintage": "baseline"
@@ -1584,7 +1604,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2021-v200-component-10-class90",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 0,
       "vintage": "baseline"
@@ -1592,15 +1612,15 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "wc-2021-v200-component-10-centres",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixel centres",
-      "value": 58476,
+      "value": 58473,
       "vintage": "baseline"
     },
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "scl-component-10-class6",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 0,
       "vintage": "baseline"
@@ -1608,7 +1628,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "scl-component-10-unknown",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixels",
       "value": 0,
       "vintage": "baseline"
@@ -1616,7 +1636,7 @@
     {
       "evaluation_commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
       "id": "scl-component-10-centres",
-      "input_sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31",
+      "input_sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360",
       "unit": "pixel centres",
       "value": 12380,
       "vintage": "baseline"
@@ -1624,11 +1644,11 @@
   ],
   "outputs": [
     {
-      "bytes": 7267,
+      "bytes": 7891,
       "hash_kind": "file-bytes",
       "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/README.md",
       "role": "method-and-provenance",
-      "sha256": "eaa90b161272150d53ed0b7ace1235b8b75edc32b5ad82144177833c0475b1fa"
+      "sha256": "e7eb166c0661e4d76b14c6c5f8d4d62eaebfe07da92465f27c9b780d6c59672c"
     },
     {
       "bytes": 2343,
@@ -1708,6 +1728,27 @@
       "sha256": "0ffb752b522466ac7d0a5995be1412811f644d8e3fdac3d5631fcf8ae9cadf18"
     },
     {
+      "bytes": 13135,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/freeze-v5.json",
+      "role": "method-and-provenance",
+      "sha256": "1815d814a82c2910d6a0c7f7ed1ce130165c9bd7561c8e9a180b6fe781e97bf1"
+    },
+    {
+      "bytes": 13366,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/freeze-v6.json",
+      "role": "method-and-provenance",
+      "sha256": "6557e93c2211958e88f17393e2f063b7a4d36c160a3b4a17a519e703dce52b7d"
+    },
+    {
+      "bytes": 13597,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/freeze-v7.json",
+      "role": "method-and-provenance",
+      "sha256": "24388108fedcec825cd7265b5fe93b309c7e67688c9a64934130682d77990143"
+    },
+    {
       "bytes": 1636,
       "hash_kind": "file-bytes",
       "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/inputs/issue-contract.json",
@@ -1733,7 +1774,7 @@
       "hash_kind": "file-bytes",
       "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/assessment-v1.json",
       "role": "generated-result",
-      "sha256": "8f364001d05093efae4e5041ac0c2be3285abf30b9c13c5ff88db92ceddeba31"
+      "sha256": "3e7c08a371cb90ca68094e343b545762979f8ecc6ea06e70c0fa1e648fcc9360"
     },
     {
       "bytes": 12857,
@@ -1743,11 +1784,11 @@
       "sha256": "985237eb84431b852a493a753fb73a5cdad3fe94b289251619c416ad79b99654"
     },
     {
-      "bytes": 3182,
+      "bytes": 4660,
       "hash_kind": "file-bytes",
       "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/execution-history.json",
       "role": "method-and-provenance",
-      "sha256": "3868bdcf6dfeb94ea179a607a3362e34a5d3a82305ee4344b9475e2f0955c3bd"
+      "sha256": "2844f3a542b4774fdfdfe413fd107cf749edc35f491b8522f16143fa6dab65f4"
     },
     {
       "bytes": 287771,
@@ -1775,14 +1816,14 @@
       "hash_kind": "file-bytes",
       "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/reproducibility-control-v1.json",
       "role": "generated-result",
-      "sha256": "244b61ab6ad53cc5a922e7176b7f61ab09a8201ea9a423ef85b7874e1fe0fd5b"
+      "sha256": "9246266a7d14c0e8a537aa8c61dfc993d0ced43fce707d653409245d83a0d433"
     },
     {
       "bytes": 408,
       "hash_kind": "file-bytes",
       "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/reproduction-receipt.json",
       "role": "generated-result",
-      "sha256": "1084a018d03e8cfe20770130ed5f7a8061dc07b9d064292e6702f61c35e23eb2"
+      "sha256": "74959b64feb397a8e6d86604b6643c73149004d9e0421d9410037a8b1dd00b90"
     },
     {
       "bytes": 480,
@@ -1792,11 +1833,11 @@
       "sha256": "dd6943061d0a16d584bad5cd32ae516d8531b30c3b65c05c44d42d12d5257bf7"
     },
     {
-      "bytes": 1673,
+      "bytes": 2025,
       "hash_kind": "file-bytes",
       "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/sentinel-scl-positive-control-v1.json",
       "role": "generated-result",
-      "sha256": "06ee757387bca983bc1b94ba0093620e96d01c89212ade6b230c03102bb8fb02"
+      "sha256": "5a05449511a1f3335fe4430c3e76de0137b30a7ea5446339ab0e73e637465bc8"
     },
     {
       "bytes": 408,
@@ -1820,6 +1861,13 @@
       "sha256": "f16851fa14bc5a1a18ea694a5ef312faa8dbdcb71e4c8c51ffc6600ecc7d05a3"
     },
     {
+      "bytes": 408,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/superseded/reproduction-receipt-freeze-v4.json",
+      "role": "method-and-provenance",
+      "sha256": "1084a018d03e8cfe20770130ed5f7a8061dc07b9d064292e6702f61c35e23eb2"
+    },
+    {
       "bytes": 471,
       "hash_kind": "file-bytes",
       "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/worldcover-negative-control-v1.json",
@@ -1827,18 +1875,18 @@
       "sha256": "910ae8bb67c762be0cbae3914e6fe1059ee04fa8eefef8515f627ee2b623cc6e"
     },
     {
-      "bytes": 1664,
+      "bytes": 2016,
       "hash_kind": "file-bytes",
       "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/outputs/worldcover-positive-control-v1.json",
       "role": "generated-result",
-      "sha256": "dbb69fe19797bf5479e70cec227ca6d1e0942613ece9f04df83840a3aa21bb07"
+      "sha256": "7a72614108c1b0bb2a6fb800e9476a7ba826ef738b73cc7ff646f3712bd95c16"
     },
     {
-      "bytes": 26168,
+      "bytes": 26268,
       "hash_kind": "file-bytes",
       "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/reproduce_assessment.py",
       "role": "method-and-provenance",
-      "sha256": "7f397f52ab8f16abd3624b27cc292d55aa71ed1c93c85e4ba0c38ef8fc522bca"
+      "sha256": "92fc202ed1ad7f665cde7eace736299a40f5cacad663fe2b215ae575e4671aab"
     },
     {
       "bytes": 1386,
@@ -1848,11 +1896,11 @@
       "sha256": "55ca53d796932cf7c7277512b0bb4b7a695ff71c52ce872b868bbf66b5766b84"
     },
     {
-      "bytes": 13599,
+      "bytes": 15912,
       "hash_kind": "file-bytes",
       "path": "research/geography/gap-source-angola-drc-boundary-water-followup-20261007/run_twice.py",
       "role": "method-and-provenance",
-      "sha256": "ae5133595d3502d29c43170ed9c42563b29c2d2875e112a60b570328903cd40a"
+      "sha256": "9489aad6f6dd54dc396768fde022707f2fa69f6ae50f20ac3ce6c1db24894f3a"
     },
     {
       "bytes": 1040603,

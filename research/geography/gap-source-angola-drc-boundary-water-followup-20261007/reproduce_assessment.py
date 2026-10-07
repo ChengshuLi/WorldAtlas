@@ -185,9 +185,11 @@ def pixel_counts(dataset, geom):
         return {}, 0, 0
     arr = dataset.read(1, window=win)
     rows, cols = np.indices(arr.shape, dtype=np.float64)
-    transform = dataset.window_transform(win)
-    xs = transform.c + transform.a * (cols + 0.5) + transform.b * (rows + 0.5)
-    ys = transform.f + transform.d * (cols + 0.5) + transform.e * (rows + 0.5)
+    global_cols = cols + int(win.col_off)
+    global_rows = rows + int(win.row_off)
+    transform = dataset.transform
+    xs = transform.a * (global_cols + 0.5) + transform.b * (global_rows + 0.5) + transform.c
+    ys = transform.d * (global_cols + 0.5) + transform.e * (global_rows + 0.5) + transform.f
     mask = contains_xy(geom, xs, ys)
     values = arr[mask]
     unique, counts = np.unique(values, return_counts=True)

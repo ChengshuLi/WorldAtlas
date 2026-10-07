@@ -10,17 +10,20 @@ import tempfile
 
 sys.dont_write_bytecode = True
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from reproduce_assessment import pixel_counts, scl_accounting, validate_scl_accounting, validate_roster, validate_worldcover_grid, verify_pinned_bytes
+from reproduce_assessment import pixel_counts, scl_accounting, validate_scl_accounting, validate_roster, validate_worldcover_grid, verify_pinned_bytes, window_for_geometry
 import numpy as np
 import rasterio
 from affine import Affine
 from rasterio.io import MemoryFile
 from rasterio.transform import from_origin
+from shapely import contains_xy
 from shapely.geometry import Point, box
+from rasterio.windows import transform as window_transform
+from rasterio.transform import xy as pixel_xy
 
 ROOT = Path(__file__).resolve().parents[3]
 PACKET = ROOT / "research/geography/gap-source-angola-drc-boundary-water-followup-20261007"
-FREEZE = PACKET / "inputs/freeze-v4.json"
+FREEZE = PACKET / "inputs/freeze-v7.json"
 PRODUCER = PACKET / "reproduce_assessment.py"
 
 
@@ -62,6 +65,37 @@ def main():
                      "fixture": "3x3 unit grid; polygon [2.4,2.6] x [2.4,2.6] contains centre (2.5,2.5)",
                      "expected_class_counts": {"3": 1}, "actual_class_counts": actual_counts,
                      "strict_centres": actual_centres}
+    class LargeGridWindowFixture:
+        width = height = 36000
+        transform = Affine(1 / 12000, 0, 18.0, 0, -1 / 12000, -6.0)
+        def read(self, *args, window):
+            return np.ones((int(window.height), int(window.width)), dtype=np.uint8)
+        def window_transform(self, window):
+            return window_transform(window, self.transform)
+        def xy(self, row, col):
+            return pixel_xy(self.transform, row, col)
+
+    affine_fixture = LargeGridWindowFixture()
+    global_row, global_col = 24045, 4716
+    native_x, native_y = affine_fixture.xy(global_row, global_col)
+    affine_geom = box(native_x, native_y - 0.0001, native_x + 0.0000001, native_y + 0.0001)
+    affine_counts, affine_centres, _ = pixel_counts(affine_fixture, affine_geom)
+    affine_window = window_for_geometry(affine_fixture, affine_geom)
+    local_row = global_row - int(affine_window.row_off)
+    local_col = global_col - int(affine_window.col_off)
+    local_transform = affine_fixture.window_transform(affine_window)
+    local_x, local_y = local_transform * (local_col + 0.5, local_row + 0.5)
+    local_probe = contains_xy(affine_geom, np.array([[local_x]]), np.array([[local_y]]))
+    if (native_x, native_y) != (18.393041666666665, -8.003791666666666) or affine_geom.contains(Point(native_x, native_y)):
+        raise RuntimeError("native affine/global-index boundary fixture no longer matches its outside oracle")
+    if affine_centres != 0 or affine_counts or not bool(local_probe[0, 0]):
+        raise RuntimeError("pixel-centre result depends on cropped-window affine precision")
+    global_affine_control = {"passed": True, "fixture_global_row_col": [global_row, global_col],
+                             "original_dataset_xy": [native_x, native_y],
+                             "cropped_window_xy": [local_x, local_y],
+                             "original_centre_is_strictly_outside": True,
+                             "cropped_affine_would_include_centre": True,
+                             "count_uses_original_affine_and_global_indices": affine_centres == 0}
     scl_fixture_classes = np.array([[0, 2, 3, 8, 9, 10, 6]], dtype=np.uint8)
     with MemoryFile() as memory:
         with memory.open(driver="GTiff", height=1, width=7, count=1, dtype="uint8",
@@ -178,6 +212,7 @@ def main():
             "worldcover_crs_registration_checks": registration_checks,
             "source_independence": independence_check,
             "strict_native_pixel_centre_oracle": centre_oracle,
+            "original_affine_global_index_oracle": global_affine_control,
             "scl_cloud_nodata_classification_fixture": scl_fixture_control,
         }
         negative = {
