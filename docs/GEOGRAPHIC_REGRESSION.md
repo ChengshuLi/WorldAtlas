@@ -9,7 +9,8 @@ Uncommitted checkout changes cannot replace its inputs.
 The low-level detector and trusted workflow enforcement are separate components
 of #920. The enforcement wrapper is described below. Source review,
 hierarchy/crosswalk/certificate checks, derived-product validation and publication
-remain separate requirements; source-backed exception adjudication is unfinished.
+remain separate requirements; scoped source-backed water adjudication is described
+below.
 
 ```sh
 python scripts/check-geographic-regression.py \
@@ -30,6 +31,16 @@ There is no snapping, simplification, implicit MakeValid or area cutoff. Positiv
 areas are compared in source-coordinate space; the report labels square degrees
 explicitly and does not describe them as square metres. Unsupported geometry is
 reported rather than silently reinterpreted.
+
+Original multipart members are validated together before clipping or union can
+dissolve an invalid overlap or shared edge. This uses the declared shortest-edge
+longitude domain, including exact ±360-degree comparisons between distinct source
+members. A valid single polygon split at the date line is not mistaken for two
+original members. Disjoint members and valid point contacts remain supported;
+positive overlap of any size and invalid shared-edge contact fail without an area
+waiver. Naive flat-longitude validity is not substituted for this periodic domain.
+Baseline defects remain explicit, even if the candidate corrects the defect:
+invalid baseline geometry cannot certify the differential comparison.
 
 An unchanged inventory still passes geometry validation before success. Already
 validated baseline shapes can be reused for byte-identical candidate geometries;
@@ -53,7 +64,7 @@ must review the entire shape, including all pieces and holes.
 Engineering should repair a shared boundary jointly using reviewed sources, or
 document an intentional shoreline/water correction with exact source evidence.
 A lake enlargement therefore still produces a review blocker: geometry alone
-cannot certify water. This first detector has no exception or automatic repair
+cannot certify water. The low-level detector has no exception or automatic repair
 path. Unknown hydrology stays explicitly unverified. The global gap inventory in
 `GEOGRAPHIC_GAP_AUDIT.md` remains the separate inventory of existing candidates.
 
@@ -89,8 +100,12 @@ and rejects every live `data/` change. The combined queue job has no fallback.
 Already-running older queue workflows fail closed after the new final merge
 condition becomes active and must resubmit.
 
-No source-backed water waiver exists yet. Intentional shoreline changes remain
-blocked until exact geometry, original source bytes and substantive independent
-review are retained through the separate adjudication protocol. Existing source,
+The trusted wrapper's separate water-adjudication protocol accepts only retained
+lost-coverage findings supported in their entirety by original native physical-water
+geometry and an exact-head independent source/geometry decision. It requires
+explicit target, temporal, resolution and uncertainty suitability, rereads the
+authority before final merge, and rejects every additional unreviewed combined
+finding. New overlaps and invalid geometry cannot receive this exception. This
+does not establish global hydrology or approve administrative ownership. Existing source,
 identity, crosswalk, regional certificate, content and publication requirements
 remain in force.

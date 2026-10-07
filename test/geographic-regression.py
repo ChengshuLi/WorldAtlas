@@ -7,6 +7,7 @@ import json
 import hashlib
 import tempfile
 import subprocess
+from unittest.mock import patch
 
 from shapely.geometry import Polygon, MultiPolygon, box, mapping, shape
 
@@ -15,6 +16,7 @@ sys.path.insert(0, str(ROOT / 'scripts'))
 spec = importlib.util.spec_from_file_location('geographic_regression', ROOT / 'scripts/check-geographic-regression.py')
 gate = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(gate)
+from evidence import geometry as shared_geometry
 
 
 def features(**geometries):
@@ -24,6 +26,128 @@ def features(**geometries):
 
 
 class RegressionControls(unittest.TestCase):
+    @staticmethod
+    def tiny_invalid_multipart():
+        return MultiPolygon([box(0, 0, 1e-6, 1e-6),
+                             box(1e-6 - 1e-12, 0, 2e-6, 1e-6)])
+
+    def test_tiny_overlap_rejected_before_union_without_area_waiver(self):
+        candidate = self.tiny_invalid_multipart()
+        self.assertFalse(candidate.is_valid)
+        self.assertGreater(candidate.geoms[0].intersection(candidate.geoms[1]).area, 0)
+        with patch.object(shared_geometry, 'union_all', side_effect=AssertionError('union must not execute')):
+            with self.assertRaisesRegex(ValueError, 'Invalid original multipart topology'):
+                shared_geometry.canonical_land(candidate)
+        result = gate.compare(features(land=box(0, 0, 2e-6, 1e-6)), features(land=candidate))
+        self.assertEqual(result['status'], 'blocked-invalid-or-unsupported-geometry')
+        self.assertEqual(result['geometry_errors'][0]['original_geometry'], mapping(candidate))
+
+    def test_shared_edge_invalidity_rejected_before_union(self):
+        candidate = MultiPolygon([box(0, 0, 1, 1), box(1, 0, 2, 1)])
+        self.assertEqual(candidate.geoms[0].intersection(candidate.geoms[1]).area, 0)
+        with patch.object(shared_geometry, 'union_all', side_effect=AssertionError('union must not execute')):
+            with self.assertRaisesRegex(ValueError, 'Invalid original multipart topology'):
+                shared_geometry.canonical_land(candidate)
+
+    def test_periodic_shared_edge_between_original_members_rejected(self):
+        candidate = MultiPolygon([box(179, 0, 180, 1), box(-180, 0, -179, 1)])
+        self.assertTrue(candidate.is_valid)  # Flat longitude misses the periodic shared edge.
+        with patch.object(shared_geometry, 'union_all', side_effect=AssertionError('union must not execute')):
+            with self.assertRaisesRegex(ValueError, 'Invalid original periodic multipart topology'):
+                shared_geometry.canonical_land(candidate)
+
+    def test_valid_disjoint_and_point_touching_multipart_preserved(self):
+        for candidate in [MultiPolygon([box(0, 0, 1, 1), box(2, 0, 3, 1)]),
+                          MultiPolygon([box(0, 0, 1, 1), box(1, 1, 2, 2)]),
+                          MultiPolygon([box(179, 0, 180, 1), box(-180, 1, -179, 2)])]:
+            self.assertTrue(shared_geometry.canonical_land(candidate).is_valid)
+            self.assertEqual(gate.compare(features(land=candidate), features(land=candidate))['regressions'], 0)
+
+    def test_shortest_edge_domain_positive_is_not_naive_raw_validity(self):
+        across = Polygon([(179, 0), (-179, 0), (-179, 1), (179, 1), (179, 0)])
+        candidate = MultiPolygon([across, box(0, 0, 1, 1)])
+        self.assertFalse(candidate.is_valid)  # Raw flat longitude falsely overlaps the separate island.
+        result = shared_geometry.canonical_land(candidate)
+        self.assertTrue(result.is_valid)
+        self.assertEqual(result.area, 3)
+        self.assertEqual(gate.compare(features(land=candidate), features(land=candidate))['status'], 'no-footprint-change')
+
+    def test_baseline_multipart_defect_retained_even_after_valid_correction(self):
+        invalid = features(land=self.tiny_invalid_multipart())
+        for candidate in [invalid, features(land=box(0, 0, 2e-6, 1e-6))]:
+            result = gate.compare(invalid, candidate)
+            self.assertEqual(result['status'], 'blocked-invalid-or-unsupported-geometry')
+            baseline = next(e for e in result['geometry_errors'] if e['vintage'] == 'baseline')
+            self.assertEqual(baseline['original_geometry'], invalid['land']['geometry'])
+            self.assertIsNone(result['regressions'])  # Invalid baseline is not silently certified/normalized.
+
+    def test_island_inside_hole_is_valid_multipart(self):
+        outer = box(0, 0, 4, 4).difference(box(1, 1, 3, 3))
+        candidate = MultiPolygon([outer, box(1.5, 1.5, 2.5, 2.5)])
+        self.assertTrue(candidate.is_valid)
+        self.assertEqual(shared_geometry.canonical_land(candidate).area, 13)
+
+    @staticmethod
+    def trusted_fixture():
+        spec = importlib.util.spec_from_file_location('multipart_trusted_fixture', ROOT / 'test/trusted-geography-check.py')
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        return module.Fixture()
+
+    def test_trusted_pr_and_actual_combined_candidate_block_multipart_defect(self):
+        fixture = self.trusted_fixture()
+        try:
+            def write_part(name, geometries):
+                fixture.write(name, {'type': 'FeatureCollection', 'features': list(features(**geometries).values())})
+            write_part('data/geography/part.json', {'land': box(0, 0, 2e-6, 1e-6)})
+            write_part('data/geography/neighbor.json', {'neighbor': box(10, 0, 11, 1)})
+            fixture.write('data/world-index.json', {'parts': ['geography/part.json', 'geography/neighbor.json']})
+            baseline = fixture.commit('complete-valid-multipart-baseline')
+            fixture.baseline = baseline
+            fixture.git('checkout', '-qb', 'proposed', baseline)
+            candidate = self.tiny_invalid_multipart()
+            write_part('data/geography/part.json', {'land': candidate})
+            proposed = fixture.commit('invalid-proposed-multipart')
+            result, report = fixture.run(proposed)
+            self.assertEqual(result.returncode, 1, result.stderr)
+            self.assertEqual(report['gate_status'], 'blocked')
+            self.assertFalse(report['candidate_code_executed'])
+            self.assertEqual(report['differential_report']['geometry_errors'][0]['vintage'], 'candidate')
+            self.assertEqual(gate.canonical_json(report['differential_report']['geometry_errors'][0]['original_geometry']),
+                             gate.canonical_json(mapping(candidate)))
+            (fixture.repo / 'geography-check.json').unlink()
+            fixture.git('checkout', '-qb', 'advanced-main', baseline)
+            write_part('data/geography/neighbor.json', {'neighbor': box(10, 0, 10.9, 1)})
+            advanced = fixture.commit('independent-main-footprint-change')
+            fixture.git('merge', '--no-ff', '--no-edit', proposed)
+            combined = fixture.git('rev-parse', 'HEAD')
+            self.assertEqual(fixture.git('show', '-s', '--format=%P', combined).split(), [advanced, proposed])
+            fixture.baseline = advanced
+            result, report = fixture.run(combined)
+            self.assertEqual(result.returncode, 1, result.stderr)
+            self.assertEqual(report['gate_status'], 'blocked')
+            self.assertEqual(report['baseline_commit'], advanced)
+            self.assertEqual(report['candidate_commit'], combined)
+            self.assertFalse(report['candidate_code_executed'])
+        finally:
+            fixture.close()
+
+    def test_trusted_source_only_research_remains_not_applicable(self):
+        fixture = self.trusted_fixture()
+        try:
+            fixture.write('research/geography/synthetic-source-only/proposal.json',
+                          {'proposed_geometry': mapping(self.tiny_invalid_multipart()), 'source_approval': False})
+            candidate = fixture.commit('source-only-proposal-no-live-footprint-import')
+            result, report = fixture.run(candidate)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual(report['status'], 'not-applicable')
+            self.assertIsNone(report['regressions'])
+            self.assertFalse(report['candidate_code_executed'])
+            self.assertFalse(report['source_approval'])
+            self.assertEqual(report['baseline_input_inventory'], report['candidate_input_inventory'])
+        finally:
+            fixture.close()
+
     def test_one_sided_shrink_with_unchanged_neighbor(self):
         before = features(left=box(0, 0, 1, 1), right=box(1, 0, 2, 1))
         after = features(left=box(0, 0, .9, 1), right=box(1, 0, 2, 1))
@@ -255,8 +379,23 @@ class RegressionControls(unittest.TestCase):
             self.assertEqual(out.read_bytes(), original)
 
 
-def receipt_run(directory):
+def receipt_run(directory, code_commit=None):
     """Run real controls and retain deterministic results in a new directory."""
+    files = ['scripts/check-geographic-regression.py', 'scripts/run-geographic-check.py',
+             'scripts/evidence/geometry.py', 'scripts/evidence/immutable.py',
+             'scripts/ellipsoidal_area.py', 'test/geographic-regression.py',
+             'test/trusted-geography-check.py', 'src/regional-import-gate.js',
+             'requirements.txt', 'package.json', '.github/evidence-policy.json']
+    if code_commit is not None:
+        import re
+        if not re.fullmatch('[a-f0-9]{40}', code_commit):
+            raise ValueError('Require exact immutable executed control commit')
+        for name in files:
+            tree = subprocess.check_output(['git', '-C', str(ROOT), 'ls-tree', code_commit, '--', name])
+            if not tree.startswith((b'100644 ', b'100755 ')):
+                raise ValueError('Executed control input must be ordinary Git bytes: ' + name)
+            if subprocess.check_output(['git', '-C', str(ROOT), 'show', code_commit + ':' + name]) != (ROOT / name).read_bytes():
+                raise ValueError('Executed control input differs from frozen commit: ' + name)
     class Result(unittest.TextTestResult):
         def addSuccess(self, test):
             super().addSuccess(test)
@@ -271,16 +410,20 @@ def receipt_run(directory):
         raise ValueError('Symlink receipt destination')
     directory.mkdir()  # Exclusive: never refresh original control evidence.
     controls = sorted(result.successes)
-    files = [gate.descriptor(name, (ROOT / name).read_bytes()) for name in
-             ['scripts/check-geographic-regression.py', 'test/geographic-regression.py']]
+    files = [gate.descriptor(name, (ROOT / name).read_bytes()) for name in files]
     summary = {'method_id': 'geographic-regression', 'tests': result.testsRun,
         'failures': len(result.failures), 'errors': len(result.errors), 'skipped': len(result.skipped),
         'outcome': 'passed', 'controls': controls, 'executed_files': files,
+        'executed_commit': code_commit,
         'software': {'shapely': gate.shapely.__version__, 'geos': gate.shapely.geos_version_string}}
     (directory / 'results.json').write_bytes(gate.canonical_json(summary))
     negative = {'test_valid_joint_boundary_move', 'test_existing_gap_and_overlap_are_not_new_regressions',
         'test_output_is_independent_of_location_input_order', 'test_deletion_and_replacement_preserve_union',
-        'test_islands_holes_and_intentional_water_change_still_require_review'}
+        'test_islands_holes_and_intentional_water_change_still_require_review',
+        'test_valid_disjoint_and_point_touching_multipart_preserved',
+        'test_shortest_edge_domain_positive_is_not_naive_raw_validity',
+        'test_island_inside_hole_is_valid_multipart',
+        'test_trusted_source_only_research_remains_not_applicable'}
     for kind in ['positive-control', 'negative-control']:
         selected = [name for name in controls if (name in negative) == (kind == 'negative-control')]
         value = {**summary, 'kind': kind, 'controls': selected,
@@ -294,5 +437,7 @@ if __name__ == '__main__':
         import argparse
         parser = argparse.ArgumentParser()
         parser.add_argument('--receipts', required=True)
-        sys.exit(receipt_run(parser.parse_args().receipts))
+        parser.add_argument('--code-commit')
+        args = parser.parse_args()
+        sys.exit(receipt_run(args.receipts, args.code_commit))
     unittest.main()

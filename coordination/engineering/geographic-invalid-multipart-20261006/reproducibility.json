@@ -1,0 +1,31 @@
+{
+  "executed_commit": "4397e0697f10432fb35004cf01324b747fb697a8",
+  "files": [
+    {
+      "bytes": 3567,
+      "file": "results.json",
+      "run_one_sha256": "207177937f04a03f308773ddfdb1333434e08ad4c991c4210e6682c791c025c5",
+      "run_two_sha256": "207177937f04a03f308773ddfdb1333434e08ad4c991c4210e6682c791c025c5"
+    },
+    {
+      "bytes": 3236,
+      "file": "positive-control.json",
+      "run_one_sha256": "43bcf4b086e60fd073b45c1b6c103e99c3811798ce5d99eea6a2c764257216c8",
+      "run_two_sha256": "43bcf4b086e60fd073b45c1b6c103e99c3811798ce5d99eea6a2c764257216c8"
+    },
+    {
+      "bytes": 2573,
+      "file": "negative-control.json",
+      "run_one_sha256": "35ab2e545696efbf992fe64eb6a2de661d0efa8b4bab55f546b5394aac020dc0",
+      "run_two_sha256": "35ab2e545696efbf992fe64eb6a2de661d0efa8b4bab55f546b5394aac020dc0"
+    }
+  ],
+  "kind": "reproducibility",
+  "limits": [
+    "Two real complete control runs, not an atlas census or production deployment."
+  ],
+  "method_id": "geographic-regression",
+  "outcome": "passed",
+  "run_one_sha256": "207177937f04a03f308773ddfdb1333434e08ad4c991c4210e6682c791c025c5",
+  "run_two_sha256": "207177937f04a03f308773ddfdb1333434e08ad4c991c4210e6682c791c025c5"
+}

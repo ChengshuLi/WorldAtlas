@@ -1,0 +1,21 @@
+{
+  "actual_gate_status": "no-new-regression",
+  "actual_geometry_errors": [],
+  "actual_regressions": 0,
+  "commit": "09f557dd650098e3b6b89fab5950ac9fe5ef8809",
+  "helper_overlap_budget": "max(1e-6 m2, area(result)*1e-10)",
+  "kind": "bounded actual immutable-code counterexample, not world audit",
+  "raw_candidate_is_valid": false,
+  "raw_internal_overlap_degree_squared": 1.0000000000276037e-18,
+  "runtime": {
+    "geos": "3.13.1",
+    "pyproj": "3.7.2",
+    "shapely": "2.1.2"
+  },
+  "whole_code_hashes": {
+    "scripts/check-geographic-regression.py": "84e58e6ce2b81dca64d4cc4e25e98d899325345447d3bd5ce8306d1474bf8d9e",
+    "scripts/ellipsoidal_area.py": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12",
+    "scripts/evidence/geometry.py": "944541968fcdf065b9c4b6105be227c3e0e14b6a20916f4fa21f851338c7a305",
+    "scripts/evidence/immutable.py": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd"
+  }
+}
