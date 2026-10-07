@@ -89,7 +89,7 @@ def run(commit,target):
     validate_pointsets(scope,features,members)
     # Every declared alias is authenticated, including actual historical recipe and
     # metadata context not consumed by the literal geometry loop.
-    for a in index['aliases']:inputs.original(a['original']['commit'],a['original']['path'],index)
+    for a in index['aliases']:inputs.original(a['original']['commit'],a['original']['path'],index,parse=False)
     for a in index['attribution_context']:inputs.read(a['ordinary']['path'],a['ordinary'])
     target.mkdir(parents=True,exist_ok=False);objects=Objects(target);rows=[];size=0;outputs=[];counts=collections.Counter();family_results=[];processed=[]
     def retain_pointset(p):

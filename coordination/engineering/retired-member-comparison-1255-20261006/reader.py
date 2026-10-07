@@ -28,7 +28,7 @@ class Inputs:
             if decode:p.update(decoded_bytes=len(raw),decoded_sha256=SHA(raw))
             self.used[full]=p;self.pins.append(p)
         return raw
-    def original(self,commit,path,index):
+    def original(self,commit,path,index,parse=True):
         x=next((x for x in index['aliases']if x['original']['commit']==commit and x['original']['path']==path),None)
         if x is None:raise ValueError('Original whole containing input omitted')
         pin=x['ordinary'];b=self.read(pin['path'],pin)
@@ -37,7 +37,7 @@ class Inputs:
         if len(raw)>32*1024*1024:raise ValueError('Oversized decoded alias')
         self.used[self.prefix+'/'+pin['path']].update(decoded_bytes=len(raw),decoded_sha256=SHA(raw))
         if len(b)!=o['bytes']or SHA(b)!=o['sha256']or len(raw)!=o['decoded_bytes']or SHA(raw)!=o['decoded_sha256']:raise ValueError('Original alias relationship mismatch')
-        return json.loads(raw)
+        return json.loads(raw)if parse else raw
     def archive(self,index):
         streams={}
         for kind,g in index['archive'].items():

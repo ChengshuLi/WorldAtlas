@@ -76,6 +76,10 @@ def run(commit,out):
 
     index=json.loads((P/'input-index.json').read_bytes());reader=Inputs(R,commit,PREFIX)
     raw=reader.read('input-index.json');checked('changed ordinary full pin rejects',lambda:rejected(lambda:reader.read('input-index.json',{'bytes':len(raw),'sha256':'0'*64}),'Changed input'))
+    for a in index['aliases']:
+        raw=reader.original(a['original']['commit'],a['original']['path'],index,parse=False)
+        assert len(raw)==a['original']['decoded_bytes']and SHA(raw)==a['original']['decoded_sha256']
+    results.append({'control':'every whole original alias authenticates bytes without forcing recipe text into JSON','outcome':'passed'})
     actual_archive=reader.archive(index);assert len(actual_archive['locations'])==19050;results.append({'control':'complete original encoded+decoded fragment relationship','outcome':'passed'})
     for kind in ['encoded','decoded']:
         changed=json.loads(canon(index));changed['archive'][kind]['parts'][0]['offset']=1
