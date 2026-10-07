@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "kind": "immutable-input-drift-observation",
+  "method_id": "namibia-angola-source-fit",
+  "outcome": "passed",
+  "entrypoint": "node research/geography/namibia-angola-official-history-followup-20261007/build-assessments.mjs --vintage run-three-drift-check-20261007",
+  "altered_working_tree_input": {
+    "path": "research/geography/namibia-angola-official-history-followup-20261007/controls/altered-working-tree-original-components.geojson",
+    "bytes": 416,
+    "sha256": "f9d3ddab57f89f75d607f3233f1c3f22a845a1d476b6f95c579bcba13eb607b5",
+    "mutation": "Changed one longitude from 18.42566188925082 to 18.42566188925083 in the complete working-tree original-components.geojson copy."
+  },
+  "immutable_baseline_input": {
+    "path": "research/geography/gap-source-namibia-angola-20261006/inputs/original-components.geojson",
+    "bytes": 23958,
+    "sha256": "f99f334877c309101afafe56210e40ab2093948e686ec39f98d9c085a42622b9"
+  },
+  "observation": {
+    "working_tree_file_temporarily_replaced_with_fixture": true,
+    "producer_used_authenticated_baseline_bytes": true,
+    "run_one_assessment_sha256": "7f6625470311255c1c362d563ada246792013932ca6f659c43c68ec59ad57f0d",
+    "drift_run_assessment_sha256": "7f6625470311255c1c362d563ada246792013932ca6f659c43c68ec59ad57f0d",
+    "assessment_bytes_equal": true,
+    "original_working_tree_file_restored_sha256": "f99f334877c309101afafe56210e40ab2093948e686ec39f98d9c085a42622b9",
+    "published_complete_receipt_sha256": "be388222505e48ce5489f1ec0d7c376aad585c6de5223a3f9648a6adab5176f5"
+  }
+}

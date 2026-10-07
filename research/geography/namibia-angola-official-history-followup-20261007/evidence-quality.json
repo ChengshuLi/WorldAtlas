@@ -81,6 +81,13 @@
         "sha256": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234",
         "hash_kind": "file-bytes",
         "role": "baseline-input"
+      },
+      {
+        "path": "scripts/evidence/immutable.py",
+        "bytes": 17414,
+        "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+        "hash_kind": "file-bytes",
+        "role": "project-helper"
       }
     ],
     "pins": {
@@ -220,43 +227,50 @@
   "outputs": [
     {
       "path": "research/geography/namibia-angola-official-history-followup-20261007/README.md",
-      "bytes": 5933,
-      "sha256": "0d67755babb31a69403cf6f60de387c50b2f3319e840674eb0a95d819d272c13",
+      "bytes": 8270,
+      "sha256": "260970d49dd6f59cd5c48cc071d437f0bd08f2646efec0b8dc9b4dc168cbd728",
       "hash_kind": "file-bytes",
       "role": "generated-evidence"
     },
     {
       "path": "research/geography/namibia-angola-official-history-followup-20261007/build-assessments.mjs",
-      "bytes": 15318,
-      "sha256": "5cc894654bdf44b3305eac60e0cbd9eadcece7246d8ccbe0a5898ab8efd2d5a8",
+      "bytes": 19931,
+      "sha256": "affbb07f160109168b5acf00783db7be2109c6e1a23657534044643e02b7f898",
       "hash_kind": "file-bytes",
       "role": "generated-evidence"
     },
     {
-      "path": "research/geography/namibia-angola-official-history-followup-20261007/missing-source-control.json",
-      "bytes": 347,
-      "sha256": "801156a441e9de5b11791f230c725610f12325bfcc1e8f075be0c96efcb5c71d",
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/controls/altered-ut-onc-index-http-headers.txt",
+      "bytes": 416,
+      "sha256": "f9d3ddab57f89f75d607f3233f1c3f22a845a1d476b6f95c579bcba13eb607b5",
       "hash_kind": "file-bytes",
       "role": "generated-evidence"
     },
     {
-      "path": "research/geography/namibia-angola-official-history-followup-20261007/negative-control.json",
-      "bytes": 299,
-      "sha256": "ddffc625d31b396c182daa44dd3871ef18c6e214dd4a4439c754182af774e851",
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/controls/altered-working-tree-original-components.geojson",
+      "bytes": 23958,
+      "sha256": "2f8a331c04a46a85fdd6eafcf8c3676c67430f67ab6bbfcce089c2545fe917f7",
       "hash_kind": "file-bytes",
       "role": "generated-evidence"
     },
     {
-      "path": "research/geography/namibia-angola-official-history-followup-20261007/positive-control.json",
-      "bytes": 337,
-      "sha256": "2e9a77d18d237feb19f983673b4f08e27ad30d638e9c36e20f4a7f1bd9716ffa",
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/immutable-input-drift-observation.json",
+      "bytes": 1570,
+      "sha256": "594d83c8963fab545f88fc885f93a11c1cbd925cc02399782ef24a7d9de5aa95",
       "hash_kind": "file-bytes",
       "role": "generated-evidence"
     },
     {
-      "path": "research/geography/namibia-angola-official-history-followup-20261007/reproducibility.json",
-      "bytes": 4290,
-      "sha256": "74e7aa2ac3db682bb0bc7d3bd410e7e3c1e55a87ea19cdaf9b4feab64b8fa810",
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/publish-vintage.py",
+      "bytes": 2470,
+      "sha256": "c79cc0ecb490beb19ae766571afc8c3317fc8b3272eb8126ebb5b0d1c6c979ea",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/source-drift-observation.json",
+      "bytes": 1142,
+      "sha256": "5231343a4cf1819e409e8f024a54e68f246630d6ddcdcda3b7aceced4fd67560",
       "hash_kind": "file-bytes",
       "role": "generated-evidence"
     },
@@ -387,9 +401,114 @@
       "role": "original-source"
     },
     {
-      "path": "research/geography/namibia-angola-official-history-followup-20261007/subject-assessments.json",
-      "bytes": 83905,
-      "sha256": "45a916d8fd1deed66cbd137fa4ecedcd6ddef5b64cdb58cbac89fd5ebacba1e9",
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-one-20261007/missing-source-control.json",
+      "bytes": 318,
+      "sha256": "fa76492ee4cc2cf68bde316cd23de8c54f51d9b6f16b21bbd947632d830befa7",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-one-20261007/negative-control.json",
+      "bytes": 285,
+      "sha256": "0600088e77fdd75abcb67dfec129b9a8da7ef3a6cdba09b5171d80c2ecaa3d99",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-one-20261007/positive-control.json",
+      "bytes": 303,
+      "sha256": "5021148fc690f5d9dfc762423470e4cca8164430420c1c03335c8a23e167d7c1",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-one-20261007/publication.json",
+      "bytes": 1021,
+      "sha256": "48cf280cc5ba2f32390da37513e12bc51db47bf9647c9ff035f3bf7c7fa88609",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-one-20261007/subject-assessments.json",
+      "bytes": 84276,
+      "sha256": "7f6625470311255c1c362d563ada246792013932ca6f659c43c68ec59ad57f0d",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-three-drift-check-20261007/missing-source-control.json",
+      "bytes": 318,
+      "sha256": "fa76492ee4cc2cf68bde316cd23de8c54f51d9b6f16b21bbd947632d830befa7",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-three-drift-check-20261007/negative-control.json",
+      "bytes": 285,
+      "sha256": "0600088e77fdd75abcb67dfec129b9a8da7ef3a6cdba09b5171d80c2ecaa3d99",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-three-drift-check-20261007/positive-control.json",
+      "bytes": 303,
+      "sha256": "5021148fc690f5d9dfc762423470e4cca8164430420c1c03335c8a23e167d7c1",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-three-drift-check-20261007/publication.json",
+      "bytes": 1077,
+      "sha256": "be388222505e48ce5489f1ec0d7c376aad585c6de5223a3f9648a6adab5176f5",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-three-drift-check-20261007/subject-assessments.json",
+      "bytes": 84276,
+      "sha256": "7f6625470311255c1c362d563ada246792013932ca6f659c43c68ec59ad57f0d",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-two-20261007/missing-source-control.json",
+      "bytes": 318,
+      "sha256": "fa76492ee4cc2cf68bde316cd23de8c54f51d9b6f16b21bbd947632d830befa7",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-two-20261007/negative-control.json",
+      "bytes": 285,
+      "sha256": "0600088e77fdd75abcb67dfec129b9a8da7ef3a6cdba09b5171d80c2ecaa3d99",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-two-20261007/positive-control.json",
+      "bytes": 303,
+      "sha256": "5021148fc690f5d9dfc762423470e4cca8164430420c1c03335c8a23e167d7c1",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-two-20261007/publication.json",
+      "bytes": 1262,
+      "sha256": "eba5e1da8289241282e0069b82bce1d1843f17d9f15640bd7ac3f817863ff8c5",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-two-20261007/reproducibility.json",
+      "bytes": 5053,
+      "sha256": "18cc89b40854eb7724e0082927bcfdf3d83e538e16892ac73c8389777aae80cd",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-two-20261007/subject-assessments.json",
+      "bytes": 84276,
+      "sha256": "7f6625470311255c1c362d563ada246792013932ca6f659c43c68ec59ad57f0d",
       "hash_kind": "file-bytes",
       "role": "generated-evidence"
     }
@@ -398,8 +517,8 @@
     {
       "id": "namibia-angola-source-fit",
       "kind": "source",
-      "description": "Inspect the dated ONC P-3 chart and official archive catalogs; test unchanged candidate/contact geometry bboxes against the printed sheet frame; aggregate the exact retained parent candidate/contact overlay matrix without rerunning the geometry overlay.",
-      "software": "Node.js 24.19.0; built-in JSON/crypto/filesystem plus git show of the pinned immutable base commit",
+      "description": "Inspect the dated ONC P-3 chart and official archive catalogs; test unchanged candidate/contact geometry bboxes against the printed sheet frame; aggregate the exact retained parent candidate/contact overlay matrix without rerunning the overlay; publish generated evidence through authenticated immutable inputs and fresh NewVintage receipts.",
+      "software": "Node.js 24 with the base-commit-pinned Python Baseline/NewVintage helpers; authenticated git-backed input reads",
       "units": "longitude/latitude degrees; Boolean frame relations; inherited feature-pair counts"
     }
   ],
@@ -408,7 +527,7 @@
       "id": "component_count",
       "value": 21,
       "unit": "physical-component features",
-      "vintage": "current",
+      "vintage": "baseline",
       "evaluation_commit": "43b48970e71af2b714d5355aeef9e31e3c99a23f",
       "input_sha256": "f99f334877c309101afafe56210e40ab2093948e686ec39f98d9c085a42622b9"
     },
@@ -416,7 +535,7 @@
       "id": "contact_count",
       "value": 10,
       "unit": "source-contact features",
-      "vintage": "current",
+      "vintage": "baseline",
       "evaluation_commit": "43b48970e71af2b714d5355aeef9e31e3c99a23f",
       "input_sha256": "472ee9003155eb62c9e9aa7bfdff0e28dfab13a8c1cc18b2a30ca6b705cc2f14"
     },
@@ -424,15 +543,15 @@
       "id": "subject_bboxes_within_onc_p3_frame",
       "value": 31,
       "unit": "component and contact bboxes",
-      "vintage": "current",
+      "vintage": "baseline",
       "evaluation_commit": "43b48970e71af2b714d5355aeef9e31e3c99a23f",
-      "input_sha256": "45a916d8fd1deed66cbd137fa4ecedcd6ddef5b64cdb58cbac89fd5ebacba1e9"
+      "input_sha256": "7f6625470311255c1c362d563ada246792013932ca6f659c43c68ec59ad57f0d"
     },
     {
       "id": "parent_contact_pair_rows",
       "value": 210,
       "unit": "candidate/contact geometry pairs",
-      "vintage": "current",
+      "vintage": "baseline",
       "evaluation_commit": "43b48970e71af2b714d5355aeef9e31e3c99a23f",
       "input_sha256": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234"
     },
@@ -440,7 +559,7 @@
       "id": "parent_positive_area_contact_pairs",
       "value": 49,
       "unit": "pairs",
-      "vintage": "current",
+      "vintage": "baseline",
       "evaluation_commit": "43b48970e71af2b714d5355aeef9e31e3c99a23f",
       "input_sha256": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234"
     },
@@ -448,7 +567,7 @@
       "id": "parent_line_only_contact_pairs",
       "value": 0,
       "unit": "pairs",
-      "vintage": "current",
+      "vintage": "baseline",
       "evaluation_commit": "43b48970e71af2b714d5355aeef9e31e3c99a23f",
       "input_sha256": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234"
     },
@@ -456,7 +575,7 @@
       "id": "parent_point_only_contact_pairs",
       "value": 0,
       "unit": "pairs",
-      "vintage": "current",
+      "vintage": "baseline",
       "evaluation_commit": "43b48970e71af2b714d5355aeef9e31e3c99a23f",
       "input_sha256": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234"
     }
@@ -553,30 +672,33 @@
     "geographic_approval": "unapproved"
   },
   "commands": [
-    "node research/geography/namibia-angola-official-history-followup-20261007/build-assessments.mjs",
+    "node research/geography/namibia-angola-official-history-followup-20261007/build-assessments.mjs --vintage run-one-20261007",
+    "node research/geography/namibia-angola-official-history-followup-20261007/build-assessments.mjs --vintage run-two-20261007 --compare run-one-20261007",
+    "node research/geography/namibia-angola-official-history-followup-20261007/build-assessments.mjs --vintage run-three-drift-check-20261007 (with retained altered baseline checkout fixture installed)",
+    "node research/geography/namibia-angola-official-history-followup-20261007/build-assessments.mjs --vintage rejected-source-drift-20261007 (with retained altered source fixture installed; expected rejection before output creation)",
     "node scripts/evidence-quality.mjs research/geography/namibia-angola-official-history-followup-20261007/evidence-quality.json"
   ],
   "validation": [
     {
-      "evidence_path": "research/geography/namibia-angola-official-history-followup-20261007/positive-control.json",
+      "evidence_path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-two-20261007/positive-control.json",
       "kind": "positive-control",
       "method_id": "namibia-angola-source-fit",
       "outcome": "passed"
     },
     {
-      "evidence_path": "research/geography/namibia-angola-official-history-followup-20261007/negative-control.json",
+      "evidence_path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-two-20261007/negative-control.json",
       "kind": "negative-control",
       "method_id": "namibia-angola-source-fit",
       "outcome": "passed"
     },
     {
-      "evidence_path": "research/geography/namibia-angola-official-history-followup-20261007/missing-source-control.json",
+      "evidence_path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-two-20261007/missing-source-control.json",
       "kind": "missing-source-control",
       "method_id": "namibia-angola-source-fit",
       "outcome": "passed"
     },
     {
-      "evidence_path": "research/geography/namibia-angola-official-history-followup-20261007/reproducibility.json",
+      "evidence_path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-two-20261007/reproducibility.json",
       "kind": "reproducibility",
       "method_id": "namibia-angola-source-fit",
       "outcome": "passed"
@@ -592,19 +714,27 @@
       "status": "added"
     },
     {
-      "path": "research/geography/namibia-angola-official-history-followup-20261007/missing-source-control.json",
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/controls/altered-ut-onc-index-http-headers.txt",
       "status": "added"
     },
     {
-      "path": "research/geography/namibia-angola-official-history-followup-20261007/negative-control.json",
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/controls/altered-working-tree-original-components.geojson",
       "status": "added"
     },
     {
-      "path": "research/geography/namibia-angola-official-history-followup-20261007/positive-control.json",
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/evidence-quality.json",
       "status": "added"
     },
     {
-      "path": "research/geography/namibia-angola-official-history-followup-20261007/reproducibility.json",
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/immutable-input-drift-observation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/publish-vintage.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/source-drift-observation.json",
       "status": "added"
     },
     {
@@ -680,48 +810,104 @@
       "status": "added"
     },
     {
-      "path": "research/geography/namibia-angola-official-history-followup-20261007/subject-assessments.json",
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-one-20261007/missing-source-control.json",
       "status": "added"
     },
     {
-      "path": "research/geography/namibia-angola-official-history-followup-20261007/evidence-quality.json",
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-one-20261007/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-one-20261007/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-one-20261007/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-one-20261007/subject-assessments.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-three-drift-check-20261007/missing-source-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-three-drift-check-20261007/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-three-drift-check-20261007/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-three-drift-check-20261007/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-three-drift-check-20261007/subject-assessments.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-two-20261007/missing-source-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-two-20261007/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-two-20261007/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-two-20261007/publication.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-two-20261007/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-two-20261007/subject-assessments.json",
       "status": "added"
     }
   ],
   "metric_bindings": [
     {
       "metric_id": "component_count",
-      "path": "research/geography/namibia-angola-official-history-followup-20261007/subject-assessments.json",
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-two-20261007/subject-assessments.json",
       "json_pointer": "/summary/component_count"
     },
     {
       "metric_id": "contact_count",
-      "path": "research/geography/namibia-angola-official-history-followup-20261007/subject-assessments.json",
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-two-20261007/subject-assessments.json",
       "json_pointer": "/summary/contact_count"
     },
     {
       "metric_id": "subject_bboxes_within_onc_p3_frame",
-      "path": "research/geography/namibia-angola-official-history-followup-20261007/subject-assessments.json",
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-two-20261007/subject-assessments.json",
       "json_pointer": "/summary/subjects_inside_sheet_frame"
     },
     {
       "metric_id": "parent_contact_pair_rows",
-      "path": "research/geography/namibia-angola-official-history-followup-20261007/subject-assessments.json",
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-two-20261007/subject-assessments.json",
       "json_pointer": "/summary/inherited_candidate_contact_pairs"
     },
     {
       "metric_id": "parent_positive_area_contact_pairs",
-      "path": "research/geography/namibia-angola-official-history-followup-20261007/subject-assessments.json",
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-two-20261007/subject-assessments.json",
       "json_pointer": "/summary/inherited_positive_area_candidate_contact_pairs"
     },
     {
       "metric_id": "parent_line_only_contact_pairs",
-      "path": "research/geography/namibia-angola-official-history-followup-20261007/subject-assessments.json",
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-two-20261007/subject-assessments.json",
       "json_pointer": "/summary/inherited_line_only_candidate_contact_pairs"
     },
     {
       "metric_id": "parent_point_only_contact_pairs",
-      "path": "research/geography/namibia-angola-official-history-followup-20261007/subject-assessments.json",
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/vintages/run-two-20261007/subject-assessments.json",
       "json_pointer": "/summary/inherited_point_only_candidate_contact_pairs"
     }
   ]

@@ -1,6 +1,6 @@
 # Namibia–Angola dated map and survey-record follow-up
 
-This source-only follow-up reuses the 21 unchanged physical-component geometries, ten unchanged source-contact geometries, and four immutable input pins retained by parent issue #1268. The evidence manifest binds the reused files and exact parent pins. No water product, geometry, boundary, or assignment was changed.
+This source-only follow-up reuses the 21 unchanged physical-component geometries, ten unchanged source-contact geometries, and four immutable input pins retained by parent issue #1268. The evidence manifest binds the reused files and exact parent pins. No water product, geometry, boundary, or assignment was changed. Its retained evidence vintage is commit `43b48970e71af2b714d5355aeef9e31e3c99a23f`. The PR is rebased on current main `745cc86a5e1e4d9917730bad0b5a7a031de99ceb`; all nine declared baseline files, including the shared evidence helper and parent comparison, are byte-identical at both commits. Metrics remain labeled baseline-vintage rather than claiming a fresh measurement at the newer commit.
 
 ## Findings
 
@@ -18,13 +18,18 @@ Two further official finding aids were retrieved. Finding Aid 2/31 identifies C.
 
 ## Reproduction and custody
 
-Run from the repository root with Node.js 24:
+Run from the repository root with Node.js 24 and Python 3:
 
 ```sh
-node research/geography/namibia-angola-official-history-followup-20261007/build-assessments.mjs
+node research/geography/namibia-angola-official-history-followup-20261007/build-assessments.mjs --vintage run-one-20261007
+node research/geography/namibia-angola-official-history-followup-20261007/build-assessments.mjs --vintage run-two-20261007 --compare run-one-20261007
 ```
 
-The producer uses Node.js built-ins plus `git show` to read the immutable parent overlay at the pinned base commit. It checks the 21/10 identity rosters, aggregates the inherited pair matrix, tests sheet-frame bboxes, and hashes the retained UT, National Archives, and LOC files and response headers. It does not rewrite or transform geometry. Two complete runs produced identical `subject-assessments.json` bytes (83,905 bytes; SHA-256 `45a916d8fd1deed66cbd137fa4ecedcd6ddef5b64cdb58cbac89fd5ebacba1e9`). The run receipt is `reproducibility.json`; source byte hashes and retrieval headers are recorded there and under `sources/`. The retained HTTP header receipts are normalized to LF line endings with insignificant trailing whitespace removed for clean repository review; header fields and ordering are preserved.
+Each invocation requires a fresh run name under `vintages/`. Before computing, the producer uses the base-commit-pinned `Baseline` and `NewVintage` helpers to authenticate and read the immutable component, contact, binding, comparison and helper bytes, account for retained source inputs, and admit the complete output set. Candidate source bytes must match their whole-file manifest descriptors before use. The first run publishes its assessment and three controls with a final `publication.json`; the second run independently recomputes the same outputs, verifies the first run's publication receipt and all output hashes, compares assessment bytes, and publishes `reproducibility.json` with its own completion receipt. Existing run names are never overwritten. Partial failed runs have no successful publication receipt; retry with a new name. The producer does not rewrite or transform geometry. Input hashes and complete publication receipts are retained in each run folder. Retrieval header receipts are normalized to LF line endings with insignificant trailing whitespace removed for clean repository review; header fields and ordering are preserved.
+
+The completed outputs are in [`vintages/run-one-20261007/`](vintages/run-one-20261007/) and [`vintages/run-two-20261007/`](vintages/run-two-20261007/). The second run's [`reproducibility.json`](vintages/run-two-20261007/reproducibility.json) compares independently generated assessment bytes and records both run names and output hashes. All retained source byte hashes and per-run receipts are recorded in those folders and the evidence manifest.
+
+An adverse consumed-input check is retained in [`immutable-input-drift-observation.json`](immutable-input-drift-observation.json): a complete fixture changes one coordinate in the mutable working-tree copy of `original-components.geojson`; while that copy was installed, the documented producer entry point completed a third fresh run using authenticated base-commit bytes. Its assessment exactly matches run one, and the original working-tree file was restored. The full altered fixture and third run publication receipt are included so the observation can be independently checked. A second check changed a retained candidate source header while leaving its manifest pin unchanged; the producer rejected it before creating an output directory. Its complete altered file and rejection record are retained in [`source-drift-observation.json`](source-drift-observation.json). Reusing an already completed run name was also rejected without overwriting its files.
 
 The UT Austin collection page supplies public access and bibliographic metadata; no item-level redistribution license for its scan was established. The LOC item has its catalog rights statement retained with the complete JSON record. The Namibia archive pages and scans identify their copyright/reuse terms where shown; the 2/31 PDF states CC BY-NC-SA. The archive files are finding aids, not the underlying commission/survey material. A source hash establishes retained bytes, not historical truth or legal authority.
 
