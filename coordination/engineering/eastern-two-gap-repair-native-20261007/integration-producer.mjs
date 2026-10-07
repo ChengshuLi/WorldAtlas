@@ -56,6 +56,9 @@ export function prepareInputClosure(repo,out){
 }
 export async function integrate(repo,out,{inputOnly=false}={}){
  requirePlainExecution();assert(path.isAbsolute(repo)&&fs.realpathSync(repo)===repo);assert(path.isAbsolute(out)&&!fs.existsSync(out));fs.mkdirSync(out,{recursive:true});
+ assert(process.env.ATLAS_PYTHON&&path.isAbsolute(process.env.ATLAS_PYTHON),'Exact pinned Python runtime required');
+ const pythonRuntime=JSON.parse(execFileSync(process.env.ATLAS_PYTHON,['-c','import json,sys,shapely,numpy;print(json.dumps({"executable":sys.executable,"python":sys.version,"shapely":shapely.__version__,"geos":shapely.geos_version_string,"numpy":numpy.__version__}))'],{encoding:'utf8'}));
+ assert(pythonRuntime.python.startsWith('3.12.14'));assert.equal(pythonRuntime.shapely,'2.1.2');assert.equal(pythonRuntime.geos,'3.13.1');assert.equal(pythonRuntime.numpy,'2.3.5');
  const head=execFileSync('git',['-C',repo,'rev-parse','HEAD'],{encoding:'utf8'}).trim();assert.match(head,/^[a-f0-9]{40}$/);
  const code=codeClosure(repo,NS+'/integration-producer.mjs');code.push(NS+'/serialize-release.py',NS+'/audit-continuation.py',NS+'/original-audit-recipe.py.txt','scripts/evidence/immutable.py','.github/package-inputs.json');
  const modules=[...new Set(code)].sort().map(p=>{const local=fs.readFileSync(repo+'/'+p),committed=execFileSync('git',['-C',repo,'cat-file','blob',head+':'+p],{maxBuffer:32*1024*1024});assert(local.equals(committed),'Actual executed code differs '+p);return{path:p,bytes:local.length,sha256:sha(local)};});
@@ -103,7 +106,7 @@ export async function integrate(repo,out,{inputOnly=false}={}){
  const nextAudit=execFileSync(process.env.ATLAS_PYTHON,[repo+'/'+NS+'/audit-continuation.py',repo+'/'+recipePath],{input:json(auditInput),maxBuffer:32*1024*1024});
  put('data/granularity-audit.json',nextAudit);
  const outputs=[];function inventory(p){for(const row of fs.readdirSync(image+'/'+p,{withFileTypes:true})){const s=p?p+'/'+row.name:row.name;if(row.isDirectory()){if(s!=='.cache')inventory(s);}else outputs.push(pin(s));}}inventory('');
- const report={version:1,issue:1295,final_consumer_inputs:finalConsumerInputs,status:'PASS',execution_commit:head,executed_modules:modules,input_only,complete_memberships:84833,new_payloads:next.pins,release:next.index.releases.at(-1),context_receipt_sha256:sha(json(context.receipt)),content_claim_rows:content.claim_rows,closed_consumer_controls:certificate.closed_consumer_controls,outputs,limits:['Completed native science remains original5b32388 vintage; this is the combined release/context/content/certificate execution.','No deployment, factual source expansion, water classification or historical approval.']};
+ const report={version:1,issue:1295,runtime:{node:process.version,node_executable:process.execPath,python:pythonRuntime},global_inventory_vintage:{release_version:7,current_v8_worldwide_remeasurement:false,original_components:95173,original_families:15610,repaired_components:2,unresolved_siblings:62},final_consumer_inputs:finalConsumerInputs,status:'PASS',execution_commit:head,executed_modules:modules,input_only,complete_memberships:84833,new_payloads:next.pins,release:next.index.releases.at(-1),context_receipt_sha256:sha(json(context.receipt)),content_claim_rows:content.claim_rows,closed_consumer_controls:certificate.closed_consumer_controls,outputs,limits:['Completed native science remains original5b32388 vintage; this is the combined release/context/content/certificate execution.','No deployment, factual source expansion, water classification or historical approval.']};
  fs.writeFileSync(out+'/report.json',json(report));console.log('COMBINED PASS',outputs.length);
  return report;
 }
