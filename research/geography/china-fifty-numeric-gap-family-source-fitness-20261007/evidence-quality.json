@@ -310,7 +310,7 @@
       "retrieved_at": "2026-10-07",
       "license": {
         "status": "unknown",
-        "terms": "Metadata claims ODbL PDDL v1.0; separately pinned geoBoundaries terms specify CC BY 4.0 for code/derivatives and attribution/citation. Applicability to this simplified geometry and retained derivatives unresolved."
+        "terms": "Metadata claims Open Data Commons Public Domain Dedication and License (PDDL) v1.0; separately pinned geoBoundaries terms specify CC BY 4.0 for code/derivatives and attribution/citation. Applicability to this simplified geometry and retained derivatives unresolved."
       },
       "retention": "restoration-only",
       "verification": "verified",
@@ -497,6 +497,12 @@
       "hash_kind": "file-bytes"
     },
     {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/producer-vintage-correction.json",
+      "bytes": 2728,
+      "sha256": "c624e74fdf108f88731f3655bc6b538b78fca45042c00432acb9b2240289d8bb",
+      "hash_kind": "file-bytes"
+    },
+    {
       "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/attempt-1-failure.json",
       "bytes": 976,
       "sha256": "9b133726e8e057fcaf278cf3786ede95531d05e96e5640fa807a9693ae0c80ba",
@@ -582,8 +588,8 @@
     },
     {
       "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/source-fitness.md",
-      "bytes": 11486,
-      "sha256": "fb622b4fdb18fba9eb53fed5067b1e843dc40e1c0d38d8cb9ce150d4d65acb65",
+      "bytes": 12506,
+      "sha256": "2b11c3d60bc4b3ff64d53faa3e8dce24910fd211b1193c0a2516a6153a11ef4c",
       "hash_kind": "file-bytes"
     },
     {
@@ -636,6 +642,10 @@
     },
     {
       "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/producer-freeze-v2-e919.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/producer-vintage-correction.json",
       "status": "added"
     },
     {
@@ -753,9 +763,9 @@
     "geographic_approval": "unapproved"
   },
   "commands": [
-    "node tools/assemble-source-closure.mjs --frozen producer-freeze-v2-e919.json --output runs/final-1.json",
-    "node tools/assemble-source-closure.mjs --frozen producer-freeze-v2-e919.json --output runs/final-2.json",
-    "node --test tools/assemble-source-closure.test.mjs",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/tools/assemble-source-closure.mjs research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/final-1.json",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/tools/assemble-source-closure.mjs research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/runs/final-2.json",
+    "node --test research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/tools/assemble-source-closure.test.mjs",
     "node scripts/evidence-quality.mjs research/geography/china-fifty-numeric-gap-family-source-fitness-20261007/evidence-quality.json ."
   ]
 }

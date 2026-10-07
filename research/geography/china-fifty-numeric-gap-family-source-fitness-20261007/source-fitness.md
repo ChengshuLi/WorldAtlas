@@ -51,7 +51,7 @@ The full IDs retain their `gb:CHN:ADM2:` prefix in the machine closure. The issu
 
 ## Reproduction and limits
 
-The frozen source-closure assembler uses only Node 24.19.0 built-ins. It authenticates the copied preflight's whole 393,708-byte body, exact family/component/contact rosters, each geometry binding, the pinned gzip and decoded source identity, the full source metadata/terms/current-part files, and the actual current-main Git blob identities before writing the closure. Negative controls reject omission, duplicate and foreign IDs, altered source-body hashes, contact or family rebinding, and contact/candidate geometry mutation. The original failure (`runs/attempt-1-failure.json`) and superseded pre-run/code vintages are retained.
+The frozen source-closure assembler uses only Node 24.19.0 built-ins. The input/base vintage is `e9190786dbf758524a3bde513fc4bb4d1ed6a3e7`; the helper itself was not in that Git tree. The exact whole helper SHA-256 at run time was `daeb6cb71fdb0f8d9b9938bf61259513670204e713214ff542f7f5bd753e5aaa`, recorded by the producer-freeze receipt. The exact two executed positional invocations are preserved in each run receipt and `evidence-quality.json`; no `--frozen` or `--output` CLI options are supported. It authenticates the copied preflight's whole 393,708-byte body, exact family/component/contact rosters, each geometry binding, the pinned gzip and decoded source identity, the full source metadata/terms/current-part files, and the actual current-main Git blob identities before writing the closure. Negative controls reject omission, duplicate and foreign IDs, altered source-body hashes, contact or family rebinding, and contact/candidate geometry mutation. The original failure (`runs/attempt-1-failure.json`) and superseded pre-run/code vintages are retained.
 
 The two final full runs both exited 0 at base `e9190786dbf758524a3bde513fc4bb4d1ed6a3e7`; each output is 633,213 bytes with SHA-256 `ea270f3be4fe993dbe5e9d1d567d8efef4348f3ea1a27505b91b762ea8505340`. `runs/output-comparison.json` records byte-for-byte equality. This is source/body/identity reconstruction, not a new overlay, physical classification, numerical diagnosis, or processing-cause determination.
 
@@ -64,3 +64,8 @@ The two final full runs both exited 0 at base `e9190786dbf758524a3bde513fc4bb4d1
 - Every local numeric, replay, registration, missing-source, and outside-context sibling unknown; the source assessment does not infer an operator cause or certify a repair.
 
 Those questions remain on the original #1337 acceptance as explicit findings; any boundary correction requires a new coordinated engineering scope. Parent campaign #1202 remains unfinished. This packet changes no shared geography, release, grid, hierarchy, history, content, or production records.
+
+
+## Review corrections
+
+The first evidence-manifest draft contained two metadata errors: it expanded PDDL incorrectly as “ODbL PDDL” and listed unsupported assembler flags. The manifest now uses the source metadata’s full PDDL name and the exact positional invocations in the two run receipts. The e919 SHA is explicitly the input/base vintage; the separate helper SHA identifies the uncommitted producer code. Prior and corrected values are preserved in `producer-vintage-correction.json`. These are metadata corrections only; the accepted closure outputs were not regenerated.
