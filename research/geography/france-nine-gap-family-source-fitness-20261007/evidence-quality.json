@@ -1,0 +1,1380 @@
+{
+  "version": 1,
+  "issue": 1310,
+  "lane": "geography",
+  "worker_id": "01a10947-7d6e-7ba2-98a1-a9f91dedabfc",
+  "subject_ids": [
+    "gb:FRA:ADM3:44848369B20305007943392",
+    "gb:FRA:ADM3:44848369B23089242581912",
+    "gb:FRA:ADM3:44848369B24772961780517",
+    "gb:FRA:ADM3:44848369B29325850682541",
+    "gb:FRA:ADM3:44848369B30656648376570",
+    "gb:FRA:ADM3:44848369B51773291035899",
+    "gb:FRA:ADM3:44848369B52172696301627",
+    "gb:FRA:ADM3:44848369B55876549394052",
+    "gb:FRA:ADM3:44848369B58525580777905",
+    "gb:FRA:ADM3:44848369B61352423180706",
+    "gb:FRA:ADM3:44848369B6767271871799",
+    "gb:FRA:ADM3:44848369B68747842589675",
+    "gb:FRA:ADM3:44848369B94347640394198",
+    "gb:FRA:ADM3:44848369B9486526015477",
+    "gb:FRA:ADM3:44848369B95927163745199",
+    "gb:FRA:ADM3:44848369B99750392163751"
+  ],
+  "subject_ids_sha256": "bd3c8815b751c8238ed58c9e8e6842f0fc456748036c5d40647a42b81be9dc57",
+  "baseline": {
+    "commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3",
+    "files": [
+      {
+        "bytes": 128836,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/evidence-quality.json",
+        "sha256": "1551d9a51aa7c2407f4ab9733bf2f515aed865670579eb2dbd34d4a405faf3b9"
+      },
+      {
+        "bytes": 90091,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/input-config.json",
+        "sha256": "7623fa8a61b72c33a1560f0ab612e70c463e8c25beef930043c985fd6657f173"
+      },
+      {
+        "bytes": 1423781,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-000.bin.gz",
+        "sha256": "fa75a261900a8daecaf79d5ec52ff98c558c75113f125ce37b3a6cd823884e84",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "d11952aaa416de1f46c27801b159b95487dfd7cb5b9e38db692b3334e4899a86"
+      },
+      {
+        "bytes": 1425093,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-001.bin.gz",
+        "sha256": "1ef86a2583ec6abfd84f58d443c31b4884c567be263cdbb39de0e80cd2f8849f",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "0b45b984c5c4636f622ff4f04d2b7174e8cf6c30d70bab63ddf9e2f25dc982c1"
+      },
+      {
+        "bytes": 1423887,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-002.bin.gz",
+        "sha256": "47b3065edc3da9872679100c070f27054d197833b66e423b35325c41dc66ef80",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "a170b28d3a86f5ed30ec5c537c3f846baeb04412e20814310ddf4cd7e29b3b9b"
+      },
+      {
+        "bytes": 1424763,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-003.bin.gz",
+        "sha256": "281c330f5f7f5727709bdce4c3e662c313e080178d52a5e9f8a0a41c585b0a86",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "d89f2e8f8267493aa9e9ca614fcf401d343b8c4b03dc511bbc1acc036c118a3d"
+      },
+      {
+        "bytes": 1423919,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-004.bin.gz",
+        "sha256": "733c6f92ae1a0975c18b64ab9b12fe63b2f7429d876e986c9dde53c453c273d0",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "6289b606b922d8c01ca231ede71a349da841b98b713c372dc4123893945d2a8b"
+      },
+      {
+        "bytes": 1425720,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-005.bin.gz",
+        "sha256": "7f1ba06f6b035c9efa1a940bab789b6032bfbcee6425f9a06693db3e9cb11b6b",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "2a8bb616b56839ee1e7c21d95443555194de318393bf489818703c014b745aab"
+      },
+      {
+        "bytes": 1424087,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-006.bin.gz",
+        "sha256": "4385d260ee3161c97a44a2bf53c342b79e2d9712083de969bbc965b950ebbd4c",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "9fdca5fb279d413251803a00736ff0b2573eca815effb8a3e24c42f4630ca00f"
+      },
+      {
+        "bytes": 1424128,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-007.bin.gz",
+        "sha256": "06389d188e7b544f187a471c4ebfba937d8f07ccbfadba68d5f302888304b81f",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "e1f9dad27239a5d5f8dd38c0132bc08ea28e8482d394a3fee9eb53ebdfcf30b6"
+      },
+      {
+        "bytes": 158811,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/admin-bindings-008.bin.gz",
+        "sha256": "57a60c413f397633712a7f20663c4423cc4ab1abfb0f597790c66d385da72dc8",
+        "uncompressed_bytes": 932144,
+        "uncompressed_sha256": "91fe1012b01980cbcfc0f309f5d3fbfc321b0135c80a103f1dd5210c1a7a78db"
+      },
+      {
+        "bytes": 1056877,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-000.bin.gz",
+        "sha256": "e1cac75959bf1f3125b911757d11061901a277525b58de588b96c384a56af68b",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "698110e7df2d720cdd3ac60242db21e9d677894d0845e69ba623fddba3c96415"
+      },
+      {
+        "bytes": 1055138,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-001.bin.gz",
+        "sha256": "039c1c64d81c73a01a57cc9549d84b085b7d5f943eb0c93f888d5868e23a0a2e",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "a9b44b74dcca0a37191e10cbe1f08fbf98e460610f5cab441768e044f37c6b34"
+      },
+      {
+        "bytes": 1056628,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-002.bin.gz",
+        "sha256": "c51904bce52448cd5cb50e5577178b94ceb2bbdace6b32bc6ba828bad64dc8bd",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "9de1ea80581fe6f4445108c0c49b68e78bdbd0e2f288d80716ca337c5c2d8561"
+      },
+      {
+        "bytes": 1057266,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-003.bin.gz",
+        "sha256": "c1f4128e05d2147936bc76d773110572fa4d85f112acf9fa6023fc1e8af948ee",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "ab35a3bd7f4064d7ef3ad1d37edcb1b1b1b35db2232b026f1322dbbc74b7bacb"
+      },
+      {
+        "bytes": 1056615,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-004.bin.gz",
+        "sha256": "f3922059b0406e5f925f4ecc5c71703873afa48e2e888992d96acdb5620ef600",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "651b27a01f11f6b7328ce866abe1c0918ed858e8ab7fc1dac76e2697e9037866"
+      },
+      {
+        "bytes": 1055630,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-005.bin.gz",
+        "sha256": "fc45ee3c6e2c9aa6671e9e31453673227de9d36298ca44962795302c00ef58e2",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "7f8d2ab0ce1f0047f30dcd9d97549386fa8f8aa6d252bc96df73f57343ca7d95"
+      },
+      {
+        "bytes": 1056046,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-006.bin.gz",
+        "sha256": "c5521f8a382f45e6b7febdd7616d407cbe1a41ad1bcd685fbe59dd49cc91f2ee",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "4b92cb5e1e63dda727254e08b28784fa7ef387d1f946569ea25189bb51607720"
+      },
+      {
+        "bytes": 1056202,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-007.bin.gz",
+        "sha256": "5f4240fb226c6bd06e42a72000c3d4e89525e3cf5f1e4ae48f5d90d03834b297",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "228541ac222e9bf1927699c71e2adbb1ba194fa6ddba0d9b70aa500f1c50caf5"
+      },
+      {
+        "bytes": 1056508,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-008.bin.gz",
+        "sha256": "efcf3436ed85a990a4ac4716caf967e2480c1b5eaa2e3047ffc412d9341273eb",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "30ed065c87e4a11f3039a3ce1e8a917d1c4ce324b70d08e81a08911bda36f7b0"
+      },
+      {
+        "bytes": 1055685,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-009.bin.gz",
+        "sha256": "6b91eea504ecf337a7b4c2d727a42ebf1fc153c4b4340708458003e4563b79ee",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "59429efa412c896af9347049b579293fc9d05b80e950b5640d6e510e46e87ace"
+      },
+      {
+        "bytes": 1054508,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-010.bin.gz",
+        "sha256": "9ff730a4f16de640645ae3d209944319765e1a6f4357c4458d0e30e8fc343abc",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "7889ff3e15b041a666f0394c9647835fd89b7ac489075831ed47745be2e83071"
+      },
+      {
+        "bytes": 1056946,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-011.bin.gz",
+        "sha256": "d9fcf0e7c5943265880ffa230f79442d926db124394d1967ed6239c972881c96",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "1ff9b2ea435250fbf47c36e203bc95ca99efeadcc43f4b9052d8aaeea12e100e"
+      },
+      {
+        "bytes": 1056866,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-012.bin.gz",
+        "sha256": "0cbfd374a2f1fde800ee8a14ad81aec01f55e5ab46d3de4f9f82d92d233533c3",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "48cb9ea6bf7baedefea4391bd3be8aa0564e98c5a4f72c93e9fcf9112d014408"
+      },
+      {
+        "bytes": 1060324,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-013.bin.gz",
+        "sha256": "42081c1b1bb00fb8a97f7d238a8c17bd9ac421d6b4e7507c56629ed0fe2e5682",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "8cf5b9d3c11815a5fe548e12d03edd5ef2689ac7627067ec34ffab75dc23ec9e"
+      },
+      {
+        "bytes": 1055098,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-014.bin.gz",
+        "sha256": "2654f5c49d285c57abeed978b1d363aecd8374943773d97a9687baefd42228a6",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "d1e3acfb2623dc398ec5266a1a3f2154a958ba0ebc0cf0ad3d3fb108ef555ba9"
+      },
+      {
+        "bytes": 1056340,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-015.bin.gz",
+        "sha256": "59f3b744d15828d9dd5dbad1ff0797763687a7dc3c7203b14b47959a266905cb",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "8336e041079ab4cdaeee76442c40fb9f6e69bdb24ead60ef170010b8c1169c8b"
+      },
+      {
+        "bytes": 1056102,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-016.bin.gz",
+        "sha256": "fcf08ffe589c2cbd4543fa8d2525ee70d44b4aa3d3a3811f40f71c1e1b60420b",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "504dc711ab22b934f2e47f0546e54f6f4f3352a0589fb47b9ae12348067adc9f"
+      },
+      {
+        "bytes": 1057188,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-017.bin.gz",
+        "sha256": "6c1ae1f9b64caf6d58534ce0258a6a637f35f25d403db30af86e8e4775d0932c",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "ff1fd84298383e79f20f27a865ff1d72ba36856a1decc521cc3c460ead16f492"
+      },
+      {
+        "bytes": 1058049,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-018.bin.gz",
+        "sha256": "bed843d713bfed48e38491c1196de6e66e4aae47db88d1b3d831dc222949e23e",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "0445faa56bff82aa5d0b98c78c420bb2f83671aa289bda55dfb71283e3673c8c"
+      },
+      {
+        "bytes": 1056760,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-019.bin.gz",
+        "sha256": "fe00f2750343c55b0b21a8ae21934321252dff58235a0b4e5fbdd3fd8235c999",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "a54ed7e781d10fbd6403572826bcc801118e78b290c74b9aea56095a7a34c882"
+      },
+      {
+        "bytes": 1054653,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-020.bin.gz",
+        "sha256": "f3a284602b62d1fb63b2f18dc478afe366be58837a8c5a30eb87bae939ed8e10",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "2d284aa2cb981e01d9d3ae65458ae97a0bceeeb8b41154adeb90e56b919a91b3"
+      },
+      {
+        "bytes": 1057471,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-021.bin.gz",
+        "sha256": "9aed3f2e504a3a5799b39a8a92661d6496b85b853ba2adb4fb84f2e92bef8753",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "bfe35843058aa894e6806f0799bd151ed484efb638f20ad0d8af565e641497a6"
+      },
+      {
+        "bytes": 1057293,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-022.bin.gz",
+        "sha256": "e6f8ef3380c42a60b97d5c81d69552129921b832597ed2e039ccaadbba56958d",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "146a652d7cead31fc783d93423b74cb52691cf2eded8de39f4272a1e6cb2250f"
+      },
+      {
+        "bytes": 1055293,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-023.bin.gz",
+        "sha256": "a09464e0b05b2137c8fcfa5f7441c379e47893ed154ae11b71a58153d85877be",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "12be08c70304f2c808f53d74ef350c0d302def8e53568922c1734c7bfd06dee9"
+      },
+      {
+        "bytes": 890162,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/components-024.bin.gz",
+        "sha256": "27c19fbd6531e866bd97ff88b52d21a2559ed761ffd9ed6235b680e02c45d01d",
+        "uncompressed_bytes": 7065187,
+        "uncompressed_sha256": "4457b5e94db636f8c1d078c25e2c6ce541781c51ddbdf7bbeed7b8a51285910a"
+      },
+      {
+        "bytes": 1046123,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-000.bin.gz",
+        "sha256": "60e770171089510b8f97ebd74a93e1c913953716a4281699e4ecca75aaefffd5",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "fd164c98e3100f98b8488c7ba81e39132cb18a2669a86c8ab5728ec6e20ce97e"
+      },
+      {
+        "bytes": 1003990,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-001.bin.gz",
+        "sha256": "1b4c5b7a0d1328bfbee83c759934843aabedde9afc947a9e555eeb6aac276fca",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "947627e169a22ca6a4f877f7ea192467c150fcc43d4fad4d99d3599702029a75"
+      },
+      {
+        "bytes": 1001586,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-002.bin.gz",
+        "sha256": "9c50b25acf826a4c65291613cc965d7675a7c66aa672a8c0fe1f21feaf432239",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "dbe45982cb0fbe54d9c8b61e0189a3f6a2093c407849326b250305723a49c0f0"
+      },
+      {
+        "bytes": 1063935,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-003.bin.gz",
+        "sha256": "8b7eedc7a4a9234f1917046167f97ad960d4a9c2941ce55dbac46a7eee422549",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "201ae80a0bcb8648950c26e0de7dedab1f6c196671c93734b169e551deb53e9c"
+      },
+      {
+        "bytes": 987691,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-004.bin.gz",
+        "sha256": "fab9ac669c568073ab37748190396d3f0c06ac319317c4ff7a0aa31cee259ab0",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "3d329a587e2e06a426dc802e04abfe01726d86657acfc469287cfe668c8102a8"
+      },
+      {
+        "bytes": 1026831,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-005.bin.gz",
+        "sha256": "03f13761ce67af5a826a98468ef2dc77d2f4a5c4ab9f25b6e6a1e3bd396bf141",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "6f7ba9a502dd9229365c522f25e3f05e6d3c2e8c329ceef6644618ebc9da930d"
+      },
+      {
+        "bytes": 1493537,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-006.bin.gz",
+        "sha256": "6bee149f0d7930d6d95d927c41b78f8a52678df4ebad9824e68b35b917e676dc",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "8d270e713aa1ec33b8b279ae71224b7c2996053e1c2aced441723df8e82c80bb"
+      },
+      {
+        "bytes": 962830,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-007.bin.gz",
+        "sha256": "4eb81385ba0d6b6d6a6b47e26a9504f9ae299f8d64dd9e0a82b3b48a4af65ad2",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "1e9358bfccab1b75a7073f63d8b84d65f64b064244a1fdad76669378204d1fc0"
+      },
+      {
+        "bytes": 1043652,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-008.bin.gz",
+        "sha256": "897a5cb10967809bb32b541c82ff19c4fd0d8c0b64241d78ea963d09cb0bab62",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "e354113a88c2d3deb64a327a469bcbca7c248b17083b3d739c18445b7b8c23df"
+      },
+      {
+        "bytes": 998433,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-009.bin.gz",
+        "sha256": "4621441988498fe2c05bfe6f036bf8dd9cfbc8472c5b8a65bf91d3a424f626da",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "049ab5f591d9821e7279c6c7afccfc0b55ed5a9f81976edfe969315ee25df079"
+      },
+      {
+        "bytes": 1039493,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-010.bin.gz",
+        "sha256": "8da6fcf9fd6a7f3215666ab9bae2e91f9b32e5e0bb923492137ea823af8265b7",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "23d37fcd6c369a1dca6ba0fbccea55bc40bbeb74a340b4cca6752ca0d78cf231"
+      },
+      {
+        "bytes": 1081053,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-011.bin.gz",
+        "sha256": "9e0d5879d5735d4507773cc66b7da371164c30de022c742969ba5d1e85e2c339",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "f844def184578eda6006664e38b95feb563b80dfaf3cfd3f78f2af8fd08e89ce"
+      },
+      {
+        "bytes": 965771,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-012.bin.gz",
+        "sha256": "483fb0b6c5b9a8e1b905bf2dc3aa0ca232dcede6f34ef357381770a603e52df0",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "a1663477a0e01de8bb56736262b57e95c3c49647d54db95c4d2fd6d86600c328"
+      },
+      {
+        "bytes": 247084,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-013.bin.gz",
+        "sha256": "006dd169089fc433251cc2f5939e7ae324744c00eca11066860aab578f07edac",
+        "uncompressed_bytes": 2171381,
+        "uncompressed_sha256": "b1ca16e670f192da7b7f8377b1bc1c0223750d3758512e384555b351554eff6f"
+      },
+      {
+        "bytes": 301503,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/land-source-fitness-000.bin.gz",
+        "sha256": "98382c95655a927c4075e7de5c8aa5204980340d001cfb28d9993823cc3d8476",
+        "uncompressed_bytes": 1730300,
+        "uncompressed_sha256": "e189f3ca731cf87433e423f88debce44e666e838fea1a8e57560b1f47f54422c"
+      },
+      {
+        "bytes": 174829,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/report.json",
+        "sha256": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265"
+      },
+      {
+        "bytes": 291,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/source-code-provenance.json",
+        "sha256": "8011c31f855ad309021ff46431d5d5640f4414ebc5bb11ca67899e10376fbaaa"
+      },
+      {
+        "bytes": 4316,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/CITATION-AND-USE-geoBoundaries-original.txt",
+        "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+      },
+      {
+        "bytes": 211474,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/evidence-quality.json",
+        "sha256": "bf06eb5a8fbd869d038a11fb17b6c84e41df7ea6037ab17cded2470054d5c54e"
+      },
+      {
+        "bytes": 806110,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/individual-source-attribution.json",
+        "sha256": "7d8a3baf61f32e6e4398f24bec0d15bce32eafcd4309655edc2b12a2c33256bd"
+      },
+      {
+        "bytes": 2449036,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-FRA-ADM3-000.bin.gz",
+        "sha256": "2a4a7cb9a920655771b4c20494460bb6ec18e5454439391898be3122862e1fbb",
+        "uncompressed_bytes": 6755489,
+        "uncompressed_sha256": "318606bceafa5fea93412c66438f333e35bad41079dc756270e961a213a4d6a0",
+        "role": "original-source"
+      },
+      {
+        "bytes": 117156,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json",
+        "sha256": "dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c"
+      },
+      {
+        "bytes": 2080126,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin",
+        "sha256": "001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d"
+      },
+      {
+        "bytes": 2081831,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin",
+        "sha256": "1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609"
+      },
+      {
+        "bytes": 2080037,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+        "sha256": "46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411"
+      },
+      {
+        "bytes": 2074475,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+        "sha256": "541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014"
+      },
+      {
+        "bytes": 2079265,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca.bin",
+        "sha256": "654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca"
+      },
+      {
+        "bytes": 2085110,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+        "sha256": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156"
+      },
+      {
+        "bytes": 2085907,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+        "sha256": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187"
+      },
+      {
+        "bytes": 2079838,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+        "sha256": "c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f"
+      },
+      {
+        "bytes": 2081609,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin",
+        "sha256": "ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b"
+      },
+      {
+        "bytes": 1714760,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin",
+        "sha256": "e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a"
+      },
+      {
+        "bytes": 2080606,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin",
+        "sha256": "f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf"
+      },
+      {
+        "bytes": 5097739,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-8.json",
+        "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1"
+      },
+      {
+        "bytes": 944,
+        "hash_kind": "file-bytes",
+        "path": "data/world-index.json",
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
+      }
+    ],
+    "pins": {
+      "audited_world_index": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "delivered_routing_input_config": "7623fa8a61b72c33a1560f0ab612e70c463e8c25beef930043c985fd6657f173",
+      "delivered_routing_report": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265",
+      "scoped_part_8": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1"
+    },
+    "pin_files": {
+      "audited_world_index": "data/world-index.json",
+      "delivered_routing_input_config": "coordination/engineering/global-actionability-routing-20261007/input-config.json",
+      "delivered_routing_report": "coordination/engineering/global-actionability-routing-20261007/results/report.json",
+      "scoped_part_8": "data/geography/part-8.json"
+    },
+    "subject_files": {
+      "gb:FRA:ADM3:44848369B20305007943392": "data/geography/part-8.json",
+      "gb:FRA:ADM3:44848369B23089242581912": "data/geography/part-8.json",
+      "gb:FRA:ADM3:44848369B24772961780517": "data/geography/part-8.json",
+      "gb:FRA:ADM3:44848369B29325850682541": "data/geography/part-8.json",
+      "gb:FRA:ADM3:44848369B30656648376570": "data/geography/part-8.json",
+      "gb:FRA:ADM3:44848369B51773291035899": "data/geography/part-8.json",
+      "gb:FRA:ADM3:44848369B52172696301627": "data/geography/part-8.json",
+      "gb:FRA:ADM3:44848369B55876549394052": "data/geography/part-8.json",
+      "gb:FRA:ADM3:44848369B58525580777905": "data/geography/part-8.json",
+      "gb:FRA:ADM3:44848369B61352423180706": "data/geography/part-8.json",
+      "gb:FRA:ADM3:44848369B6767271871799": "data/geography/part-8.json",
+      "gb:FRA:ADM3:44848369B68747842589675": "data/geography/part-8.json",
+      "gb:FRA:ADM3:44848369B94347640394198": "data/geography/part-8.json",
+      "gb:FRA:ADM3:44848369B9486526015477": "data/geography/part-8.json",
+      "gb:FRA:ADM3:44848369B95927163745199": "data/geography/part-8.json",
+      "gb:FRA:ADM3:44848369B99750392163751": "data/geography/part-8.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "geoboundaries-france-adm3-2022",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/FRA/ADM3/geoBoundaries-FRA-ADM3_simplified.geojson",
+      "role": "Original pinned simplified 2022 France ADM3 source used by the inherited evidence; recorded subject identities and original-source compatibility checks",
+      "vintage": "represented 2022; registry source updated 2023-01-19; static source body pinned in baseline",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "The upstream registry records Etalab Open Licence 2.0 and the retained source-corpus derivative records CC-BY-4.0 with source citations. This packet does not independently resolve license applicability across the simplified derivative; consult recorded source metadata and preserve attribution."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "restoration": "Use baseline commit 42937b066c28eab0c5a53f94c0f5aee7b3d5aae3, path coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-FRA-ADM3-000.bin.gz; verify compressed SHA-256 2a4a7cb9a920655771b4c20494460bb6ec18e5454439391898be3122862e1fbb and decoded SHA-256 318606bceafa5fea93412c66438f333e35bad41079dc756270e961a213a4d6a0.",
+      "limit": "No effective historical interval was established; source is a simplified derivative, not original unsimplified IGN data."
+    },
+    {
+      "id": "ign-admin-express-cog-2026-arrondissement-wfs",
+      "url": "https://data.geopf.fr/wfs/ows?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAMES=ADMINEXPRESS-COG.2026%3Aarrondissement&OUTPUTFORMAT=application%2Fjson&SRSNAME=CRS%3A84",
+      "role": "Complete current official arrondissement layer used for contemporary whole-feature geometric relation comparison",
+      "vintage": "ADMINEXPRESS-COG.2026 edition 2026-01-01; HTTP Date 2026-10-07T05:41:34Z; GeoJSON timestamp 2026-10-07T05:41:42.540Z",
+      "retrieved_at": "2026-10-07T05:41:34Z",
+      "license": {
+        "status": "redistributable",
+        "terms": "Official French government catalogue identifies Licence Ouverte / Open Licence 2.0; preserve attribution. This is a contemporary reference and does not establish the historic source’s legal meaning."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Repeat the exact WFS GetFeature URL/query above and preserve the entire response body as UTF-8 bytes before parsing. Expected body SHA-256 334c34c5a3ba7f1196198843765b208c5ef744cf31c7fc4d59aa9039b90f86f8 and 156850437 bytes. The run rejects different bytes, incomplete feature counts, and clipped or filtered responses.",
+      "limit": "restoration-only: complete source is 156,850,437 bytes, above 32 MiB per-file and 33,554,432 decoded limit. Restore the exact immutable layer at the URL and require whole SHA-256/byte match before executing comparisons. Do not substitute a layer excerpt for the source."
+    },
+    {
+      "id": "insee-cog-2026",
+      "url": "https://www.insee.fr/fr/information/8740222",
+      "role": "Corroborating official administrative coding/name hierarchy context",
+      "vintage": "COG 2026",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Page terms and redistribution status not assessed for this packet; use as a citation/context only."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Revisit the current official INSEE COG 2026 page and archive exact relevant table/response with its terms before relying on it as an evidentiary dataset.",
+      "limit": "Used only for current administrative context, not a historical feature geometry or independent candidate overlay."
+    },
+    {
+      "id": "ign-admin-express-cog-spec-2024",
+      "url": "https://geoservices.ign.fr/sites/default/files/2024-10/DC_DL_ADMIN_EXPRESS_3-2_0.pdf",
+      "role": "Product specification for ADMIN EXPRESS COG content and generalization context",
+      "vintage": "v3.2, October 2024",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Document redistribution terms not independently assessed; cited as product documentation."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Retrieve the linked official product specification and check its exact revision before relying on it.",
+      "limit": "Supports current product definition and generalization context only; not historical validity or a candidate-specific boundary."
+    },
+    {
+      "id": "ign-admin-express-cog-2026-release",
+      "url": "https://cartes.gouv.fr/aide/fr/partenaires/ign/generalites-ign/actualites/2026-05-admin-express-cog/",
+      "role": "Official notice of 2026 release and current COG alignment context",
+      "vintage": "2026 release notice",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Page terms not independently assessed; cited as contextual official notice."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "reference",
+      "restoration": "Revisit the official release notice; archive its exact response if later research depends on detailed page content.",
+      "limit": "Product context only; not candidate geometry evidence."
+    },
+    {
+      "id": "gshhg-2.3.7-physical-lineage",
+      "url": "https://www.soest.hawaii.edu/pwessel/gshhg/",
+      "role": "Inherited mapped-land physical diagnostic lineage lead; coastline/hydrography context only, not an administrative source",
+      "vintage": "GSHHG 2.3.7 released 2017-06-15; inherited rows report heterogeneous observation dates",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Official GSHHG product page states LGPL licensing. NOAA NCEI catalog metadata separately labels its catalogued distribution CC0. The inherited derived raster body, derivation and licensing chain were not retained or verified; do not infer its license from either upstream record."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "unknown",
+      "restoration": "Consult the official GSHHG product page and archive exact version 2.3.7 source bytes with upstream checksum, license text, retrieval timestamp, and derivation recipe. Separately recover the inherited physical raster bytes and processing metadata before attempting reproduction.",
+      "limit": "This packet does not retain or query GSHHG or an inherited raster body. Candidate-scale coverage, raster affine, NoData, surface correctness and observation dates remain unknown; inherited mapped-land counts are diagnostic only. NOAA catalog: https://catalog.data.gov/dataset/a-global-self-consistent-hierarchical-high-resolution-geography-database-from-2010-02-19-t."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/README.md",
+      "bytes": 11202,
+      "sha256": "725f9f641da39199c849ce196528a7fc2007e26a00266c6498ff47db29f5e516",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/candidate-findings.csv",
+      "bytes": 30716,
+      "sha256": "530c0fe37be9ee3669577a7924ac636620480283906e4e1b1ba943a7f3d180b2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/contact-findings.csv",
+      "bytes": 6997,
+      "sha256": "cb5768f767091d3be6195b089bb08826815f0c1c7872241d8003dfd2dfdbb85b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/family-findings.csv",
+      "bytes": 5447,
+      "sha256": "6ab8552b208fe98759dd2723f9cc1f22b1051ecd644dde5cc91a5efeafb728c2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/reproduce.py",
+      "bytes": 30314,
+      "sha256": "122a04f5deaf741af8aa49084d4f1953220349b73d4cd8d3c48fb4af693b07f9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/run-contract.json",
+      "bytes": 35136,
+      "sha256": "c53aebed92a5cfa079f1867944563af8aa414d4b41c2342da456077a224b23ee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/summarize.py",
+      "bytes": 9547,
+      "sha256": "1669f9166118f09e6eac463299daea46a1f22fe51f0b67f153cb0cbc082696fa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/summary-metrics.json",
+      "bytes": 915,
+      "sha256": "b3a5075d385a3e977333f69836bbe70ef3ec50dc441abfa5e39eeb438b50c445",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/validation-negative.json",
+      "bytes": 868,
+      "sha256": "4edb091f4f01644e9c34c47f8d7963b24ca636eb3a44f43c01244a1cdaa6b40b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/validation-positive.json",
+      "bytes": 414,
+      "sha256": "9b850130087236a9fbdac0dae5b8b4a010c7b900a27c8e37bc965483df7667fc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/validation-reproducibility.json",
+      "bytes": 310,
+      "sha256": "f8957e8ff2dcd2c4379c27e7512706b0f95b8a27b245003797480e464fe18ceb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/verification/attempt-00-failure.log",
+      "bytes": 8970,
+      "sha256": "1b0f62d4cf0d61cfd33a0064753f478d32a225cd705526058a3805572bbeede2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/verification/attempt-01/run-1.json",
+      "bytes": 737909,
+      "sha256": "fa1ced7cd14e73fd1e2b7fddc7545ee2352a290ed43e977b2c08dc3c358fa619",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/verification/attempt-01/run-2.json",
+      "bytes": 737909,
+      "sha256": "3de2888f071ad9a8d5f5a59ba665747ace4bd8916cff926005a02808ab7db59a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/verification/attempt-02/run-1.json",
+      "bytes": 737901,
+      "sha256": "2cf2e91c8aa1a2b837691dc87ab313555b9e44d532879a087e3a5d6c20209955",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/verification/attempt-02/run-2.json",
+      "bytes": 737901,
+      "sha256": "2cf2e91c8aa1a2b837691dc87ab313555b9e44d532879a087e3a5d6c20209955",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/verification/attempt-03-before-review-controls/run-1.json",
+      "bytes": 774931,
+      "sha256": "c8b3d5f093acdb263dd95e8fc9b321853e9766e47adbfe8fae1820ed9f7ef70a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/verification/attempt-03-before-review-controls/run-2.json",
+      "bytes": 774931,
+      "sha256": "c8b3d5f093acdb263dd95e8fc9b321853e9766e47adbfe8fae1820ed9f7ef70a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/verification/run-1.json",
+      "bytes": 820804,
+      "sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/verification/run-2.json",
+      "bytes": 820804,
+      "sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "complete-france-source-fitness-reproduction",
+      "kind": "generator",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "description": "Restore and verify the full declared input closure; reconstruct exact cohort and native-source identities; execute the whole-layer full-geometry comparisons and preserve the complete run outputs. Two complete actual executions were made only after script and runtime closure were frozen.",
+      "software": "Python 3 and Shapely 2.1.2 / GEOS; frozen reproduce.py and run-contract.json; official WFS body pinned by exact response hash",
+      "units": "complete identities, whole-file SHA-256 and topological relations"
+    },
+    {
+      "id": "candidate-and-family-tables",
+      "kind": "code",
+      "description": "Losslessly render CSV views from the frozen complete run JSON; preserve the underlying candidate/family payload and unknown physical-source limits.",
+      "software": "Python 3 standard library; deterministic CSV writer",
+      "units": "one row per candidate or complete family"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "family_count",
+      "value": 9,
+      "unit": "families",
+      "vintage": "baseline",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
+      "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
+    },
+    {
+      "id": "candidate_count",
+      "value": 48,
+      "unit": "candidate geometries",
+      "vintage": "baseline",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
+      "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
+    },
+    {
+      "id": "contact_count",
+      "value": 16,
+      "unit": "contact subjects",
+      "vintage": "baseline",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
+      "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
+    },
+    {
+      "id": "original_source_record_count",
+      "value": 320,
+      "unit": "features",
+      "vintage": "baseline",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
+      "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
+    },
+    {
+      "id": "official_2026_feature_count",
+      "value": 333,
+      "unit": "features",
+      "vintage": "baseline",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
+      "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
+    },
+    {
+      "id": "compatible_recorded_subjects",
+      "value": 11,
+      "unit": "candidate geometries",
+      "vintage": "baseline",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
+      "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
+    },
+    {
+      "id": "partial_or_unbound_original_source",
+      "value": 24,
+      "unit": "candidate geometries",
+      "vintage": "baseline",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
+      "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
+    },
+    {
+      "id": "no_compatible_original_intersection",
+      "value": 11,
+      "unit": "candidate geometries",
+      "vintage": "baseline",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
+      "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
+    },
+    {
+      "id": "outside_original_source_domain",
+      "value": 2,
+      "unit": "candidate geometries",
+      "vintage": "baseline",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
+      "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
+    },
+    {
+      "id": "official_2026_intersect",
+      "value": 42,
+      "unit": "candidate geometries",
+      "vintage": "baseline",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
+      "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
+    },
+    {
+      "id": "official_2026_whole_feature_cover",
+      "value": 8,
+      "unit": "candidate geometries",
+      "vintage": "baseline",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
+      "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
+    },
+    {
+      "id": "official_2026_intersect_without_cover",
+      "value": 34,
+      "unit": "candidate geometries",
+      "vintage": "baseline",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
+      "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
+    },
+    {
+      "id": "official_2026_no_intersection",
+      "value": 6,
+      "unit": "candidate geometries",
+      "vintage": "baseline",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
+      "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
+    },
+    {
+      "id": "exact_current_contact_name_match",
+      "value": 15,
+      "unit": "contact subjects",
+      "vintage": "baseline",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
+      "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
+    },
+    {
+      "id": "inherited_mapped_land_support",
+      "value": 46,
+      "unit": "candidate geometries",
+      "vintage": "baseline",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
+      "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
+    },
+    {
+      "id": "inherited_outside_l1_context",
+      "value": 2,
+      "unit": "candidate geometries",
+      "vintage": "baseline",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
+      "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
+    },
+    {
+      "id": "unverified_surface",
+      "value": 48,
+      "unit": "candidate geometries",
+      "vintage": "baseline",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
+      "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
+    },
+    {
+      "id": "contacts_with_2022_geometry_intersection_2026",
+      "value": 16,
+      "unit": "contact geometries",
+      "vintage": "baseline",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
+      "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
+    },
+    {
+      "id": "contacts_with_2022_geometry_whole_cover_2026",
+      "value": 0,
+      "unit": "contact geometries",
+      "vintage": "baseline",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
+      "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
+    },
+    {
+      "id": "contacts_with_current_atlas_geometry_intersection_2026",
+      "value": 16,
+      "unit": "contact geometries",
+      "vintage": "baseline",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
+      "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
+    },
+    {
+      "id": "contacts_with_current_atlas_geometry_whole_cover_2026",
+      "value": 0,
+      "unit": "contact geometries",
+      "vintage": "baseline",
+      "input_sha256": "b8566a52df9c2ed1e56f679434439567886cebaa43bc135cf08b66058b3ce7af",
+      "evaluation_commit": "42937b066c28eab0c5a53f94c0f5aee7b3d5aae3"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "family_count",
+      "value": 9,
+      "unit": "families",
+      "text": "9 families: family count."
+    },
+    {
+      "metric_id": "candidate_count",
+      "value": 48,
+      "unit": "candidate geometries",
+      "text": "48 candidate geometries: candidate count."
+    },
+    {
+      "metric_id": "contact_count",
+      "value": 16,
+      "unit": "contact subjects",
+      "text": "16 contact subjects: contact count."
+    },
+    {
+      "metric_id": "original_source_record_count",
+      "value": 320,
+      "unit": "features",
+      "text": "320 features: original source record count."
+    },
+    {
+      "metric_id": "official_2026_feature_count",
+      "value": 333,
+      "unit": "features",
+      "text": "333 features: official 2026 feature count."
+    },
+    {
+      "metric_id": "compatible_recorded_subjects",
+      "value": 11,
+      "unit": "candidate geometries",
+      "text": "11 candidate geometries: compatible recorded subjects."
+    },
+    {
+      "metric_id": "partial_or_unbound_original_source",
+      "value": 24,
+      "unit": "candidate geometries",
+      "text": "24 candidate geometries: partial or unbound original source."
+    },
+    {
+      "metric_id": "no_compatible_original_intersection",
+      "value": 11,
+      "unit": "candidate geometries",
+      "text": "11 candidate geometries: no compatible original intersection."
+    },
+    {
+      "metric_id": "outside_original_source_domain",
+      "value": 2,
+      "unit": "candidate geometries",
+      "text": "2 candidate geometries: outside original source domain."
+    },
+    {
+      "metric_id": "official_2026_intersect",
+      "value": 42,
+      "unit": "candidate geometries",
+      "text": "42 candidate geometries: official 2026 intersect."
+    },
+    {
+      "metric_id": "official_2026_whole_feature_cover",
+      "value": 8,
+      "unit": "candidate geometries",
+      "text": "8 candidate geometries: official 2026 whole feature cover."
+    },
+    {
+      "metric_id": "official_2026_intersect_without_cover",
+      "value": 34,
+      "unit": "candidate geometries",
+      "text": "34 candidate geometries: official 2026 intersect without cover."
+    },
+    {
+      "metric_id": "official_2026_no_intersection",
+      "value": 6,
+      "unit": "candidate geometries",
+      "text": "6 candidate geometries: official 2026 no intersection."
+    },
+    {
+      "metric_id": "exact_current_contact_name_match",
+      "value": 15,
+      "unit": "contact subjects",
+      "text": "15 contact subjects: exact current contact name match."
+    },
+    {
+      "metric_id": "inherited_mapped_land_support",
+      "value": 46,
+      "unit": "candidate geometries",
+      "text": "46 candidate geometries: inherited mapped land support."
+    },
+    {
+      "metric_id": "inherited_outside_l1_context",
+      "value": 2,
+      "unit": "candidate geometries",
+      "text": "2 candidate geometries: inherited outside l1 context."
+    },
+    {
+      "metric_id": "unverified_surface",
+      "value": 48,
+      "unit": "candidate geometries",
+      "text": "48 candidate geometries: unverified surface."
+    },
+    {
+      "metric_id": "contacts_with_2022_geometry_intersection_2026",
+      "value": 16,
+      "unit": "contact geometries",
+      "text": "16 contact geometries: contacts with 2022 geometry intersection 2026."
+    },
+    {
+      "metric_id": "contacts_with_2022_geometry_whole_cover_2026",
+      "value": 0,
+      "unit": "contact geometries",
+      "text": "0 contact geometries: contacts with 2022 geometry whole cover 2026."
+    },
+    {
+      "metric_id": "contacts_with_current_atlas_geometry_intersection_2026",
+      "value": 16,
+      "unit": "contact geometries",
+      "text": "16 contact geometries: contacts with current atlas geometry intersection 2026."
+    },
+    {
+      "metric_id": "contacts_with_current_atlas_geometry_whole_cover_2026",
+      "value": 0,
+      "unit": "contact geometries",
+      "text": "0 contact geometries: contacts with current atlas geometry whole cover 2026."
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "The pinned simplified 2022 source body has 320 unique ADM3 shape IDs, and the 16 recorded contact subject IDs are present in it. This is an identity and byte-integrity finding; it does not establish historical validity or boundary fit.",
+      "status": "supported",
+      "source_ids": [
+        "geoboundaries-france-adm3-2022"
+      ]
+    },
+    {
+      "text": "The complete current 2026 IGN layer has 333 arrondissement features and yields recorded full-geometry intersects/covers results for every candidate and both complete 2022-source/current-Atlas geometries of all 16 contacts. This contemporary comparison cannot replace the 2022 source or establish legal, historical, or physical meaning.",
+      "status": "supported",
+      "source_ids": [
+        "ign-admin-express-cog-2026-arrondissement-wfs"
+      ]
+    },
+    {
+      "text": "The physical surface state, the reason for non-intersection/partial relationships, the historical validity of each candidate, and any legal territorial interpretation remain unresolved; physical authority is unapproved.",
+      "status": "unresolved",
+      "source_ids": [
+        "geoboundaries-france-adm3-2022",
+        "ign-admin-express-cog-2026-arrondissement-wfs"
+      ]
+    },
+    {
+      "text": "Exact current name matching did not identify one contact label (Forbach); a stable-ID correspondence and authoritative crosswalk remain unresolved.",
+      "status": "unresolved",
+      "source_ids": [
+        "ign-admin-express-cog-2026-arrondissement-wfs",
+        "insee-cog-2026"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12 research/geography/france-nine-gap-family-source-fitness-20261007/reproduce.py --official-source /tmp/ign-adminexpress-cog-2026-arrondissement.geojson --run 1",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12 research/geography/france-nine-gap-family-source-fitness-20261007/reproduce.py --official-source /tmp/ign-adminexpress-cog-2026-arrondissement.geojson --run 2",
+    "cmp research/geography/france-nine-gap-family-source-fitness-20261007/verification/run-1.json research/geography/france-nine-gap-family-source-fitness-20261007/verification/run-2.json",
+    "python3 research/geography/france-nine-gap-family-source-fitness-20261007/summarize.py",
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/evidence-quality.mjs research/geography/france-nine-gap-family-source-fitness-20261007/evidence-quality.json ."
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "family_count",
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/summary-metrics.json",
+      "json_pointer": "/values/family_count"
+    },
+    {
+      "metric_id": "candidate_count",
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/summary-metrics.json",
+      "json_pointer": "/values/candidate_count"
+    },
+    {
+      "metric_id": "contact_count",
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/summary-metrics.json",
+      "json_pointer": "/values/contact_count"
+    },
+    {
+      "metric_id": "original_source_record_count",
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/summary-metrics.json",
+      "json_pointer": "/values/original_source_record_count"
+    },
+    {
+      "metric_id": "official_2026_feature_count",
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/summary-metrics.json",
+      "json_pointer": "/values/official_2026_feature_count"
+    },
+    {
+      "metric_id": "compatible_recorded_subjects",
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/summary-metrics.json",
+      "json_pointer": "/values/compatible_recorded_subjects"
+    },
+    {
+      "metric_id": "partial_or_unbound_original_source",
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/summary-metrics.json",
+      "json_pointer": "/values/partial_or_unbound_original_source"
+    },
+    {
+      "metric_id": "no_compatible_original_intersection",
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/summary-metrics.json",
+      "json_pointer": "/values/no_compatible_original_intersection"
+    },
+    {
+      "metric_id": "outside_original_source_domain",
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/summary-metrics.json",
+      "json_pointer": "/values/outside_original_source_domain"
+    },
+    {
+      "metric_id": "official_2026_intersect",
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/summary-metrics.json",
+      "json_pointer": "/values/official_2026_intersect"
+    },
+    {
+      "metric_id": "official_2026_whole_feature_cover",
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/summary-metrics.json",
+      "json_pointer": "/values/official_2026_whole_feature_cover"
+    },
+    {
+      "metric_id": "official_2026_intersect_without_cover",
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/summary-metrics.json",
+      "json_pointer": "/values/official_2026_intersect_without_cover"
+    },
+    {
+      "metric_id": "official_2026_no_intersection",
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/summary-metrics.json",
+      "json_pointer": "/values/official_2026_no_intersection"
+    },
+    {
+      "metric_id": "exact_current_contact_name_match",
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/summary-metrics.json",
+      "json_pointer": "/values/exact_current_contact_name_match"
+    },
+    {
+      "metric_id": "inherited_mapped_land_support",
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/summary-metrics.json",
+      "json_pointer": "/values/inherited_mapped_land_support"
+    },
+    {
+      "metric_id": "inherited_outside_l1_context",
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/summary-metrics.json",
+      "json_pointer": "/values/inherited_outside_l1_context"
+    },
+    {
+      "metric_id": "unverified_surface",
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/summary-metrics.json",
+      "json_pointer": "/values/unverified_surface"
+    },
+    {
+      "metric_id": "contacts_with_2022_geometry_intersection_2026",
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/summary-metrics.json",
+      "json_pointer": "/values/contacts_with_2022_geometry_intersection_2026"
+    },
+    {
+      "metric_id": "contacts_with_2022_geometry_whole_cover_2026",
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/summary-metrics.json",
+      "json_pointer": "/values/contacts_with_2022_geometry_whole_cover_2026"
+    },
+    {
+      "metric_id": "contacts_with_current_atlas_geometry_intersection_2026",
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/summary-metrics.json",
+      "json_pointer": "/values/contacts_with_current_atlas_geometry_intersection_2026"
+    },
+    {
+      "metric_id": "contacts_with_current_atlas_geometry_whole_cover_2026",
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/summary-metrics.json",
+      "json_pointer": "/values/contacts_with_current_atlas_geometry_whole_cover_2026"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "complete-france-source-fitness-reproduction",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/france-nine-gap-family-source-fitness-20261007/validation-positive.json"
+    },
+    {
+      "method_id": "complete-france-source-fitness-reproduction",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/france-nine-gap-family-source-fitness-20261007/validation-negative.json"
+    },
+    {
+      "method_id": "complete-france-source-fitness-reproduction",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "research/geography/france-nine-gap-family-source-fitness-20261007/validation-reproducibility.json"
+    }
+  ],
+  "rendered_tables": [],
+  "change_receipts": [
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/README.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/candidate-findings.csv",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/contact-findings.csv",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/family-findings.csv",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/reproduce.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/run-contract.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/summarize.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/summary-metrics.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/validation-negative.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/validation-positive.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/validation-reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/verification/attempt-00-failure.log",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/verification/attempt-01/run-1.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/verification/attempt-01/run-2.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/verification/attempt-02/run-1.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/verification/attempt-02/run-2.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/verification/attempt-03-before-review-controls/run-1.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/verification/attempt-03-before-review-controls/run-2.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/verification/run-1.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/verification/run-2.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/france-nine-gap-family-source-fitness-20261007/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}
