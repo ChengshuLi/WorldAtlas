@@ -70,9 +70,6 @@ def main():
         if 'uncompressed_bytes' in pin:
             d.update(uncompressed_bytes=pin['uncompressed_bytes'], uncompressed_sha256=pin['uncompressed_sha256'])
         baseline.append(d)
-    for name in ['run.py', 'producer.py', 'controls.py', 'execute.py', 'input-plan.json', 'runtime-plan.json', 'triage.json', 'source.geojson']:
-        raw = subprocess.check_output(['git', '-C', str(R), 'show', EXEC + ':' + N + name])
-        baseline.append(descriptor(N + name, raw))
     pin_paths = {}
     for key, expected in spec['evidence_quality']['pins'].items():
         found = [p for p in baseline if p['path'] == key and p['sha256'] == expected]
@@ -114,7 +111,7 @@ def main():
     changed = sorted(set(changed + untracked + [N + 'evidence-quality.json']))
     manifest = {'version': 1, 'issue': 1423, 'lane': 'engineering', 'worker_id': '01a11735-f553-7231-8651-e8edade22f75',
                 'subject_ids': spec['evidence_quality']['subject_ids'], 'subject_ids_sha256': digest(json.dumps(sorted(spec['evidence_quality']['subject_ids']), separators=(',', ':')).encode()),
-                'baseline': {'commit': EXEC, 'files': baseline, 'pins': spec['evidence_quality']['pins'], 'pin_files': pin_paths},
+                'baseline': {'commit': '69a5f97161c36611fc974b626c9666fdf2941a31', 'files': baseline, 'pins': spec['evidence_quality']['pins'], 'pin_files': pin_paths},
                 'sources': sources, 'outputs': outputs,
                 'methods': [{'id': METHOD, 'kind': 'generator', 'helper_version': 'worldatlas-evidence-preparation-v1',
                              'description': 'Authenticated Baseline/load_modules/materialized reader and NewVintage admission; explicitly reviewed whole private streaming equivalent with complete encoded+decoded identity/all19050 records before158 selection. Literal retained refresh cuts/buffers/voting applied only to conditional archived envelope; original validity preserved. No geography correction/global graph.',
