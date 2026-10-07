@@ -1,0 +1,48 @@
+# France nine-family source-fitness research (issue #1310)
+
+Research-only evidence packet for the exact 9 immutable families, 48 full component geometries, and 16 recorded original ADM3 contact subjects declared by issue #1310. It does not certify a region, select replacement boundaries, approve physical geography, authorize imports, or change production geography.
+
+## Results
+
+The pinned original 2022 France ADM3 input contains all 16 recorded contact subjects. The full candidate comparison found **11 compatible recorded subjects**, **24 partial or unbound source cases**, **11 candidates with no compatible original-source intersection**, and **2 outside the original source-domain context**. These are source-fitness dispositions, not findings about land, water, sovereignty, or the reason for any mismatch.
+
+A whole-feature topological comparison against the complete 333-feature IGN ADMINEXPRESS-COG.2026 arrondissement layer found 42 of 48 candidate geometries intersected at least one arrondissement: 8 were covered by a whole source feature, 34 intersected without whole-feature coverage, and 6 had no intersection. This is a different, contemporary reference vintage, not a substitute for the 2022 source. Contact-name identity matched exactly for 15 of 16 recorded original subjects; the Forbach name did not exactly match the current IGN label “Forbach-Boulay-Moselle”. No contact-boundary crosswalk was inferred from that name check.
+
+Inherited physical diagnostics report 46 candidates with mapped-land support and 2 outside the mapped L1 context; all 48 surface statuses remain `unverified`, and physical authority remains unapproved. The physical data has GSHHG 2.3.7 / 2017-06-15 lineage and heterogeneous observation dates. This packet did not independently validate physical surfaces. No area, distance, or boundary length was newly measured. The family table carries missing/mismatched/invalid/unmeasured/hierarchy/numeric-closure checks, counts by recorded source-fit and physical status, next-prerequisite counts, and complete positive-length neighbor identifiers. Boundary lengths are unknown.
+
+Candidate-level details, family reconciliation, full source/contact feature records, input and method controls are in `verification/run-1.json`. `verification/run-2.json` is a second full reproduction; the exact bytes of the two final result files match (SHA-256 `c8b3d5f093acdb263dd95e8fc9b321853e9766e47adbfe8fae1820ed9f7ef70a`). Earlier attempts, including failures and superseded corrected runs, are retained under `verification/` as required provenance.
+
+## Sources and meaning
+
+* geoBoundaries France ADM3 source, represented year 2022, registry identity `FRA-ADM3-44848369` ([pinned simplified GeoJSON](https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/FRA/ADM3/geoBoundaries-FRA-ADM3_simplified.geojson)): original pinned body is retained on the fresh-main baseline at `coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-FRA-ADM3-000.bin.gz` (compressed SHA-256 `2a4a7cb9a920655771b4c20494460bb6ec18e5454439391898be3122862e1fbb`; decoded SHA-256 `318606bceafa5fea93412c66438f333e35bad41079dc756270e961a213a4d6a0`; 6,755,489 decoded bytes). The full source body declares GeoJSON CRS84 (longitude, latitude); the exact source manifest records 320 unique ADM3 `shapeID` features and describes the product as France `ADM3` / canonical `Arrondissement`, represented year 2022, source IGN-F, updated 2023-01-19, with a 2023-12-12 build. The retained source is the simplified derivative, not the full unsimplified download. Registry metadata records Etalab Open Licence 2.0 and points to IGN product metadata; derivative product terms separately state CC-BY 4.0 with geoBoundaries and underlying-source attribution. The packet preserves these statements without broadening them or asserting legal boundary authority. This packet verifies the retained bytes and shapeIDs, not any historical effective period.
+* IGN ADMINEXPRESS-COG.2026 arrondissement whole layer, edition 2026-01-01, retrieved 2026-10-07. Exact WFS request: `https://data.geopf.fr/wfs/ows?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAMES=ADMINEXPRESS-COG.2026%3Aarrondissement&OUTPUTFORMAT=application%2Fjson&SRSNAME=CRS%3A84`. Response was 156,850,437 bytes, SHA-256 `334c34c5a3ba7f1196198843765b208c5ef744cf31c7fc4d59aa9039b90f86f8`, with 333 matched and returned features. It is too large for this repository’s per-file/decoded evidence limit, so it is **restoration-only**: restore the whole body, verify exact byte count and SHA before using it. The GeoJSON response advertises EPSG:4326 despite the CRS:84 request; coordinates were interpreted as GeoJSON longitude, latitude. Government catalogue describes Open Licence 2.0; retain attribution and catalogue terms. See the source citations below.
+* IGN product specification (2024) describes ADMIN EXPRESS COG content and generalization; INSEE’s 2026 COG reference and IGN’s 2026 release notice establish that the current product follows the current administrative coding vintage. Those references support context only and do not establish historical boundary identity for the 2022 source.
+
+## Reproduction and limits
+
+Run in the repository at baseline commit `42937b066c28eab0c5a53f94c0f5aee7b3d5aae3`, with the pinned upstream evidence present and an exact restored WFS body at `/tmp/ign-adminexpress-cog-2026-arrondissement.geojson`:
+
+1. Verify the restored WFS file has 156,850,437 bytes and the SHA above.
+2. Run `python3 research/geography/france-nine-gap-family-source-fitness-20261007/reproduce.py --official-source /tmp/ign-adminexpress-cog-2026-arrondissement.geojson --output research/geography/france-nine-gap-family-source-fitness-20261007/verification/run-1.json`.
+3. Repeat to `.../verification/run-2.json` and byte-compare outputs.
+4. Run `python3 research/geography/france-nine-gap-family-source-fitness-20261007/summarize.py` to render the human-readable tables and control receipts from the frozen runs.
+5. Run the repository evidence-quality validator on `research/geography/france-nine-gap-family-source-fitness-20261007/evidence-quality.json`.
+
+The reproduction restores and checks all scoped full input JSONL bodies and hashes, verifies cohort closure/foreign/duplicate controls, retains complete candidate and contact geometries, checks exact original source membership and hashes, parses all 333 unmodified current source polygons, then runs full-geometry Shapely `intersects` and whole-feature `covers` predicates. No clipping, centroid or bounding-box relation substitutes are used. Envelope queries only narrow the exact whole-feature predicates. CRS, source vintage, retrieval time, license basis and limitations are recorded in the evidence manifest and run contract.
+
+### Unresolved findings and engineering handoffs
+
+* Do not infer a physical or political cause from absent/partial administrative overlay. The 11 no-intersection cases, 24 partial/unbound cases, and 2 source-domain cases remain unresolved.
+* The 2026 IGN comparison exposes additional modern relationships, not authorization to rewrite the 2022 historical source or current Atlas assignments. Route any proposed correction through a separate scoped engineering issue with an explicit authoritative historical source and independently reviewed geometry.
+* Resolve the Forbach identity/name discrepancy using stable administrative identifiers and authoritative correspondence evidence before proposing any contact crosswalk.
+* Physical surface truth, physical authority, and historical validity remain open. A separate source-fitness and physical-evidence review is required before processing/import.
+* The family records retain contact neighborhood IDs and mark boundary-length values unknown. Do not interpret administrative counts or topological overlap as completeness or geographical correctness.
+
+## Authoritative context links
+
+* [IGN ADMIN EXPRESS COG v3.2 product specification (2024)](https://geoservices.ign.fr/sites/default/files/2024-10/DC_DL_ADMIN_EXPRESS_3-2_0.pdf)
+* [INSEE Code officiel géographique 2026](https://www.insee.fr/fr/information/8740222)
+* [IGN ADMIN EXPRESS COG 2026 release notice](https://cartes.gouv.fr/aide/fr/partenaires/ign/generalites-ign/actualites/2026-05-admin-express-cog/)
+* [French government catalogue: ADMIN EXPRESS COG and Open Licence](https://www.data.gouv.fr/datasets/admin-express-admin-express-cog-admin-express-cog-carto-admin-express-cog-carto-pe-admin-express-cog-carto-plus-pe)
+
+Issue acceptance is addressed as a complete research packet only; regional correctness, physical approval, processing, import, publication and historical certification are outside this work item.
