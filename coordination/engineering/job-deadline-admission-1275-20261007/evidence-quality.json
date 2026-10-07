@@ -123,14 +123,14 @@
     },
     {
       "path": "coordination/engineering/job-deadline-admission-1275-20261007.json",
-      "bytes": 1955,
-      "sha256": "c7fd6e820bd36b772f3894f35e3d0d0cbaa95c9d50417d6291ad705c8032d4f8",
+      "bytes": 2073,
+      "sha256": "d2d978302fc5c1baa698597bf1d0d3cc356b6d4d4759cefe8c38908cb493b13f",
       "hash_kind": "file-bytes"
     },
     {
       "path": "coordination/engineering/job-deadline-admission-1275-20261007/README.md",
-      "bytes": 3258,
-      "sha256": "9abdba10cdeffc6a60a6fa384291d3d5b82ff9c76c7c469940052fcc4f767090",
+      "bytes": 3830,
+      "sha256": "39534b8fc50a3563b3ac1034c6a9b3f4e77b3551ab9c50ad3572eed52c229fc1",
       "hash_kind": "file-bytes"
     },
     {
@@ -141,8 +141,8 @@
     },
     {
       "path": "coordination/engineering/job-deadline-admission-1275-20261007/controls.txt",
-      "bytes": 15733,
-      "sha256": "d2294c6caf6ee7ec337f38e2c49d8b4ae23e52a0ab05e751227ccc7685200f67",
+      "bytes": 15923,
+      "sha256": "aa051bb608232cffdd87591ea92c8c0c6e8d762b22138b6f3404f63b16c01ffb",
       "hash_kind": "file-bytes"
     },
     {
@@ -165,8 +165,8 @@
     },
     {
       "path": "coordination/engineering/job-deadline-admission-1275-20261007/verification.json",
-      "bytes": 2168,
-      "sha256": "6f686a6be6589b23bd971337432639df189bcc81080a241a8f7a13d122561219",
+      "bytes": 2492,
+      "sha256": "b8915e7a781612e1e140a4bdd4a6b77f6c5116c1389ae4b055b05a1f2b2eef44",
       "hash_kind": "file-bytes"
     },
     {
@@ -210,6 +210,24 @@
       "bytes": 17731,
       "sha256": "b70dbd2d64be5a67c9f731ac22c7619f7921e9990f73f06b21ef80dc3c03ee67",
       "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/fixtures/deadline/independent-boundaries.mjs",
+      "bytes": 7480,
+      "sha256": "566bf13b9429234c92ae7a88703d2993b368e8197f13d928eefa63984a3302a2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/fixtures/deadline/independent-native-http.mjs",
+      "bytes": 4761,
+      "sha256": "d2bfd9a504a835013be4d44fba58d34b2d0a3fe2443fdf9d231be63212134785",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/job-deadline-independent.test.mjs",
+      "bytes": 954,
+      "sha256": "59acaa2ee3a0431b3f246d86835c8ec75906f057c0748f22c6d632435ef14d72",
+      "hash_kind": "file-bytes"
     }
   ],
   "methods": [
@@ -233,7 +251,7 @@
     "geographic_approval": "not-requested"
   },
   "commands": [
-    "Verify all named test files exist; node --test test/github-quota.test.mjs test/git-blob-transport.test.mjs test/final-capacity.test.mjs test/immutable-git-blobs.test.mjs test/merge-scheduler.test.mjs test/premerge-evidence.test.mjs test/merge-integration.test.mjs test/integration-proof.test.mjs test/job-deadline.test.mjs",
+    "Verify all named test files exist; node --test test/github-quota.test.mjs test/git-blob-transport.test.mjs test/final-capacity.test.mjs test/immutable-git-blobs.test.mjs test/merge-scheduler.test.mjs test/premerge-evidence.test.mjs test/merge-integration.test.mjs test/integration-proof.test.mjs test/job-deadline.test.mjs test/job-deadline-independent.test.mjs",
     "node --test test/handoff-scope.test.mjs test/merge-integration-entrypoint.test.mjs test/trusted-workflow-checkouts.test.mjs",
     "node scripts/evidence-quality.mjs coordination/engineering/job-deadline-admission-1275-20261007/evidence-quality.json",
     "Read-only validatePremergeManifest against current issue/claim and complete changed-file receipts"
@@ -311,6 +329,18 @@
     },
     {
       "path": "test/job-deadline.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/fixtures/deadline/independent-boundaries.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/fixtures/deadline/independent-native-http.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/job-deadline-independent.test.mjs",
       "status": "added"
     }
   ]

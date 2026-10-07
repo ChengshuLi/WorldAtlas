@@ -7,8 +7,8 @@
     {
       "id": "original-plus-deadline-controls",
       "outcome": "passed",
-      "tests": 161,
-      "detail": "Original #1249 eight named suites plus real deadline/registration/CLI controls; all named file paths checked present. Isolated mocked HTTP and simulated time, not live quota exhaustion. Renewed controls include executing-workflow vintage drift rejection before HTTP."
+      "tests": 163,
+      "detail": "Original #1249 eight named suites plus real deadline/registration/CLI controls; all named file paths checked present. Isolated mocked HTTP and simulated time, not live quota exhaustion. Renewed controls include executing-workflow vintage drift rejection before HTTP. Includes two automated independent-fixture subprocesses (20 boundary and 5 native HTTP/replay controls), credential-free and using native Git workflow authentication."
     },
     {
       "id": "scope-entrypoint-trusted-sparse-controls",
@@ -28,6 +28,7 @@
     "receipt": "https://github.com/ChengshuLi/WorldAtlas/pull/1338#issuecomment-6033464842",
     "finding": "Mutable main workflow bytes could admit beyond executing timeout",
     "correction": "Pin checkout to executing workflow SHA, authenticate checkout/ref, read timeout from immutable workflow Git blob",
-    "status": "local-controls-passed; renewed exact-head review pending"
+    "status": "local-controls-passed; renewed exact-head review pending",
+    "retained_fixture_origin": "Independently derived /root/audit_prevention_review controls, retained under test/fixtures/deadline with automated wrapper"
   }
 }

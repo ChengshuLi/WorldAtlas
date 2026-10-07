@@ -30,7 +30,7 @@ capacity refusal and a dispatch timestamp after a real classified quota wait.
 Original tracked bytes are never modified by the controls; CLI scratch is exclusive
 and removed in finally. Do not reproduce by exhausting GitHub or posting live data.
 
-The controls retain 161 passing queue/capacity/evidence/integration tests and
+The controls retain 163 passing queue/capacity/evidence/integration tests and
 23 scope/entrypoint/sparse controls. These are simulated admission proofs, not
 hosted quota recovery. Historical-job-metadata.json records a prior complete
 two-job attempt inspected under the operator credential; it does not prove the
@@ -47,3 +47,12 @@ Independent review found that mutable main workflow bytes could extend an older
 five-minute job to ten minutes. The correction pins both checkout and timeout
 bytes to GITHUB_WORKFLOW_SHA, checks the exact workflow ref/path and checkout
 HEAD, and retains a real-entrypoint drift refusal control before any API request.
+
+Two credential-free regression subprocesses retain independently derived review
+fixtures: 20 real-entrypoint boundary controls with native Git authentication,
+and native loopback HTTP header/body cancellation plus server-persisted POST
+recovery. The native fixture scales only its timer to 500 ms while asserting the
+production timeout remains 20 seconds; delayed responses use a fourfold margin.
+They run automatically in full engineering CI; the focused research list remains
+unchanged. These controls were added by review rather than derived from author
+expectations.
