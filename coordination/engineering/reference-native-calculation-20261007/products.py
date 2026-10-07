@@ -3,6 +3,7 @@ from collections import Counter, defaultdict
 import copy
 import gzip
 import hashlib
+import io
 import json
 from pathlib import Path
 import shutil
@@ -27,6 +28,21 @@ def write_gzip(p, value):
     return file_sha(p)
 
 
+def decode_part(raw):
+    # Stop while streaming, before an oversized decoded allocation can occur.
+    cap = 33554432
+    result = bytearray()
+    with gzip.GzipFile(fileobj=io.BytesIO(raw), mode='rb') as stream:
+        while True:
+            block = stream.read(min(1048576, cap + 1 - len(result)))
+            if not block:
+                break
+            if len(result) + len(block) > cap:
+                raise ValueError('Original reference decoded body exceeds ordinary cap')
+            result.extend(block)
+    return json.loads(result)
+
+
 def records(index, bodies, ids):
     old = defaultdict(list)
     if index['version'] != 2 or index['locations'] != 49625 or len(ids) != 49625:
@@ -36,10 +52,16 @@ def records(index, bodies, ids):
     for name in index['parts']:
         if name not in bodies or hashlib.sha256(bodies[name]).hexdigest() != index['parts_sha256'][name]:
             raise ValueError('Original reference whole part drift')
-        for id, rows in json.loads(gzip.decompress(bodies[name])):
+        part_ids = set()
+        for id, rows in decode_part(bodies[name]):
             if id not in ids or not isinstance(rows, list):
                 raise ValueError('Foreign original reference identity')
+            if id in part_ids:
+                raise ValueError('Duplicate original identity group within one part')
+            part_ids.add(id)
             old[id].extend(rows)
+    if not TARGETS <= old.keys():
+        raise ValueError('Both complete original target groups required')
     if sum(map(len, old.values())) != index['records']:
         raise ValueError('Complete original record count')
     for id, rows in old.items():
@@ -95,7 +117,7 @@ def merge(helper, references, bodies, original, index, fresh, missing, evidence,
     prior = helper.OWN.retain_prior_archives(references, output, original, previous)
     parts = []; active = defaultdict(list); reused = 0
     for name in original['parts']:
-        rows = json.loads(gzip.decompress(bodies[name]))
+        rows = decode_part(bodies[name])
         kept = [[id, rs] for id, rs in rows if id not in TARGETS]
         if not kept:
             continue
