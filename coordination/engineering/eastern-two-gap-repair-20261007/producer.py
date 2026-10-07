@@ -12,6 +12,7 @@ from reader import load,digest,checked_file
 from kernel import TARGETS,exact_addition,complete_neighbor_relations,exact_two_feature_replacements
 P=Path(__file__).resolve().parent
 spec=importlib.util.spec_from_file_location('eastern_regression',ROOT/'scripts/check-geographic-regression.py');regression=importlib.util.module_from_spec(spec);sys.modules[spec.name]=regression;spec.loader.exec_module(regression)
+EXPECTED_G={'atlas:physical:CAN-103:QUE':'b8b357848262d2ccb59b0e9823439c76f329e5dc9baa7678fa0e5bdfb23b1265','atlas:physical:CAN-114:NFL':'172a25d939353bed6168c950cb0f9aaba75e7ff770aad053c7e36c963a6dc98e'}
 NODE='/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node'
 
 def authenticate_code(commit):
@@ -53,6 +54,7 @@ def run(commit,target):
     for f in native:native_groups.setdefault(f['properties']['ECOREGION_ID'],[]).append(f)
     corrections=[];geometries={};neighbors=[]
     for identity,cid in TARGETS.items():
+        if digest(canonical_json(data['components'][cid]['geometry']))!=EXPECTED_G[identity]:raise ValueError('Exact Main-approved whole gap geometry changed')
         feature=world[identity];metadata=feature['properties']['metadata'];eco=metadata['ecoregion_id'];native_members=native_groups[eco]
         if len(native_members)!=1:raise ValueError('Two approved source assignments require exact untouched single native record')
         original=shape(native_members[0]['geometry']);gap=shape(data['components'][cid]['geometry']);old=shape(feature['geometry'])
