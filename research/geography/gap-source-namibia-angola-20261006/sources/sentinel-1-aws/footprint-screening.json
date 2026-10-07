@@ -1,0 +1,1382 @@
+{
+  "version": 1,
+  "retrieved_utc": "2026-10-07T06:14:04.395135+00:00",
+  "api": "https://earth-search.aws.element84.com/v1/search",
+  "collection": "sentinel-1-grd",
+  "scope": "STAC scene-footprint screening only; no SAR pixels read, interpreted, or classified. Footprint intersection is not evidence that water is present.",
+  "input": {
+    "path": "inputs/original-components.geojson",
+    "sha256": "f99f334877c309101afafe56210e40ab2093948e686ec39f98d9c085a42622b9",
+    "feature_count": 21
+  },
+  "periods": [
+    {
+      "period": "2015-09",
+      "query": {
+        "collections": [
+          "sentinel-1-grd"
+        ],
+        "bbox": [
+          18.42566188925082,
+          -18.0421,
+          20.943746679773703,
+          -17.399540716612382
+        ],
+        "datetime": "2015-09-01T00:00:00Z/2015-09-30T23:59:59Z",
+        "limit": 1000
+      },
+      "response_file": "search-2015-09.geojson",
+      "response_bytes": 15928,
+      "response_sha256": "9d181a99a73f2c8ce61246c24c4cc3cdc3af112b9ae9bd5ccb2ba85e4661f4cb",
+      "number_matched": 2,
+      "items_returned": 2,
+      "groups": [
+        {
+          "acquisition_date": "2015-09-05",
+          "relative_orbit": 160,
+          "orbit_state": "ascending",
+          "item_ids": [
+            "S1A_IW_GRDH_1SDV_20150905T171352_20150905T171417_007582_00A7EC",
+            "S1A_IW_GRDH_1SDV_20150905T171327_20150905T171352_007582_00A7EC"
+          ],
+          "item_count": 2,
+          "candidate_ids_intersecting": [
+            "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+            "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+            "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+            "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+            "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+            "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+            "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+            "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+            "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+            "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e"
+          ],
+          "intersecting_count": 15,
+          "candidate_ids_fully_covered_by_footprint_union": [
+            "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+            "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+            "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+            "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+            "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+            "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+            "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+            "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+            "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+            "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e"
+          ],
+          "fully_covered_count": 14
+        }
+      ],
+      "all_returned_scene_footprints_union": {
+        "item_count": 2,
+        "intersecting_count": 15,
+        "fully_covered_count": 14,
+        "candidate_ids_fully_covered": [
+          "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+          "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+          "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+          "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+          "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+          "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+          "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+          "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+          "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+          "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+          "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+          "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+          "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+          "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e"
+        ],
+        "individual_candidate_scene_counts": {
+          "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0": 2,
+          "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd": 1,
+          "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14": 0,
+          "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022": 1,
+          "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f": 0,
+          "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3": 1,
+          "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331": 1,
+          "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c": 0,
+          "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e": 1,
+          "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e": 1,
+          "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b": 1,
+          "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8": 1,
+          "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393": 1,
+          "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a": 1,
+          "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e": 0,
+          "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460": 1,
+          "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90": 1,
+          "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17": 0,
+          "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a": 1,
+          "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e": 1,
+          "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a": 0
+        }
+      }
+    },
+    {
+      "period": "2018-08",
+      "query": {
+        "collections": [
+          "sentinel-1-grd"
+        ],
+        "bbox": [
+          18.42566188925082,
+          -18.0421,
+          20.943746679773703,
+          -17.399540716612382
+        ],
+        "datetime": "2018-08-01T00:00:00Z/2018-08-31T23:59:59Z",
+        "limit": 1000
+      },
+      "response_file": "search-2018-08.geojson",
+      "response_bytes": 46343,
+      "response_sha256": "a9287e78e7856b47cd7db0f24e455c0ba1c100a5c873592987f06d1d32207904",
+      "number_matched": 6,
+      "items_returned": 6,
+      "groups": [
+        {
+          "acquisition_date": "2018-08-02",
+          "relative_orbit": 160,
+          "orbit_state": "ascending",
+          "item_ids": [
+            "S1B_IW_GRDH_1SDV_20180802T171305_20180802T171330_012086_016416"
+          ],
+          "item_count": 1,
+          "candidate_ids_intersecting": [
+            "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+            "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+            "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+            "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+            "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+            "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+            "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+            "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+            "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+            "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e"
+          ],
+          "intersecting_count": 15,
+          "candidate_ids_fully_covered_by_footprint_union": [
+            "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+            "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+            "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+            "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+            "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+            "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+            "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+            "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+            "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+            "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e"
+          ],
+          "fully_covered_count": 14
+        },
+        {
+          "acquisition_date": "2018-08-09",
+          "relative_orbit": 87,
+          "orbit_state": "ascending",
+          "item_ids": [
+            "S1B_IW_GRDH_1SDV_20180809T170505_20180809T170530_012188_01673E",
+            "S1B_IW_GRDH_1SDV_20180809T170440_20180809T170505_012188_01673E"
+          ],
+          "item_count": 2,
+          "candidate_ids_intersecting": [
+            "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+            "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+            "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17",
+            "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a"
+          ],
+          "intersecting_count": 9,
+          "candidate_ids_fully_covered_by_footprint_union": [
+            "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+            "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+            "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17"
+          ],
+          "fully_covered_count": 6
+        },
+        {
+          "acquisition_date": "2018-08-14",
+          "relative_orbit": 160,
+          "orbit_state": "ascending",
+          "item_ids": [
+            "S1B_IW_GRDH_1SDV_20180814T171306_20180814T171331_012261_01697F"
+          ],
+          "item_count": 1,
+          "candidate_ids_intersecting": [
+            "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+            "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+            "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+            "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+            "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+            "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+            "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+            "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+            "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+            "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e"
+          ],
+          "intersecting_count": 15,
+          "candidate_ids_fully_covered_by_footprint_union": [
+            "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+            "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+            "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+            "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+            "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+            "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+            "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+            "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+            "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+            "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e"
+          ],
+          "fully_covered_count": 14
+        },
+        {
+          "acquisition_date": "2018-08-21",
+          "relative_orbit": 87,
+          "orbit_state": "ascending",
+          "item_ids": [
+            "S1B_IW_GRDH_1SDV_20180821T170506_20180821T170531_012363_016CB2",
+            "S1B_IW_GRDH_1SDV_20180821T170441_20180821T170506_012363_016CB2"
+          ],
+          "item_count": 2,
+          "candidate_ids_intersecting": [
+            "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+            "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+            "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17",
+            "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a"
+          ],
+          "intersecting_count": 9,
+          "candidate_ids_fully_covered_by_footprint_union": [
+            "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+            "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+            "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17",
+            "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a"
+          ],
+          "fully_covered_count": 8
+        }
+      ],
+      "all_returned_scene_footprints_union": {
+        "item_count": 6,
+        "intersecting_count": 21,
+        "fully_covered_count": 21,
+        "candidate_ids_fully_covered": [
+          "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+          "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+          "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+          "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+          "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+          "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+          "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+          "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+          "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+          "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+          "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+          "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+          "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+          "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+          "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+          "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+          "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+          "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17",
+          "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+          "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e",
+          "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a"
+        ],
+        "individual_candidate_scene_counts": {
+          "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0": 2,
+          "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd": 2,
+          "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14": 2,
+          "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022": 2,
+          "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f": 2,
+          "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3": 2,
+          "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331": 2,
+          "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c": 2,
+          "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e": 4,
+          "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e": 2,
+          "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b": 2,
+          "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8": 2,
+          "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393": 2,
+          "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a": 2,
+          "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e": 4,
+          "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460": 4,
+          "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90": 4,
+          "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17": 2,
+          "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a": 2,
+          "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e": 2,
+          "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a": 4
+        }
+      }
+    },
+    {
+      "period": "2020-03",
+      "query": {
+        "collections": [
+          "sentinel-1-grd"
+        ],
+        "bbox": [
+          18.42566188925082,
+          -18.0421,
+          20.943746679773703,
+          -17.399540716612382
+        ],
+        "datetime": "2020-03-01T00:00:00Z/2020-03-31T23:59:59Z",
+        "limit": 1000
+      },
+      "response_file": "search-2020-03.geojson",
+      "response_bytes": 61563,
+      "response_sha256": "8a26f07b50bbb4fa9a3c79310b0342619146baa7fd46793357b89a13ac778a2f",
+      "number_matched": 8,
+      "items_returned": 8,
+      "groups": [
+        {
+          "acquisition_date": "2020-03-07",
+          "relative_orbit": 87,
+          "orbit_state": "ascending",
+          "item_ids": [
+            "S1B_IW_GRDH_1SDV_20200307T170510_20200307T170535_020588_027065",
+            "S1B_IW_GRDH_1SDV_20200307T170445_20200307T170510_020588_027065"
+          ],
+          "item_count": 2,
+          "candidate_ids_intersecting": [
+            "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+            "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+            "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17",
+            "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a"
+          ],
+          "intersecting_count": 9,
+          "candidate_ids_fully_covered_by_footprint_union": [
+            "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+            "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+            "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17",
+            "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a"
+          ],
+          "fully_covered_count": 8
+        },
+        {
+          "acquisition_date": "2020-03-12",
+          "relative_orbit": 160,
+          "orbit_state": "ascending",
+          "item_ids": [
+            "S1B_IW_GRDH_1SDV_20200312T171311_20200312T171336_020661_0272A7"
+          ],
+          "item_count": 1,
+          "candidate_ids_intersecting": [
+            "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+            "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+            "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+            "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+            "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+            "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+            "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+            "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+            "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+            "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e"
+          ],
+          "intersecting_count": 15,
+          "candidate_ids_fully_covered_by_footprint_union": [
+            "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+            "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+            "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+            "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+            "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+            "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+            "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+            "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+            "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+            "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e"
+          ],
+          "fully_covered_count": 14
+        },
+        {
+          "acquisition_date": "2020-03-19",
+          "relative_orbit": 87,
+          "orbit_state": "ascending",
+          "item_ids": [
+            "S1B_IW_GRDH_1SDV_20200319T170511_20200319T170536_020763_0275F2",
+            "S1B_IW_GRDH_1SDV_20200319T170446_20200319T170511_020763_0275F2"
+          ],
+          "item_count": 2,
+          "candidate_ids_intersecting": [
+            "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+            "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+            "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17",
+            "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a"
+          ],
+          "intersecting_count": 9,
+          "candidate_ids_fully_covered_by_footprint_union": [
+            "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+            "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+            "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17",
+            "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a"
+          ],
+          "fully_covered_count": 8
+        },
+        {
+          "acquisition_date": "2020-03-24",
+          "relative_orbit": 160,
+          "orbit_state": "ascending",
+          "item_ids": [
+            "S1B_IW_GRDH_1SDV_20200324T171311_20200324T171336_020836_02782E"
+          ],
+          "item_count": 1,
+          "candidate_ids_intersecting": [
+            "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+            "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+            "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+            "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+            "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+            "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+            "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+            "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+            "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+            "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e"
+          ],
+          "intersecting_count": 15,
+          "candidate_ids_fully_covered_by_footprint_union": [
+            "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+            "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+            "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+            "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+            "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+            "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+            "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+            "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+            "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+            "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e"
+          ],
+          "fully_covered_count": 14
+        },
+        {
+          "acquisition_date": "2020-03-31",
+          "relative_orbit": 87,
+          "orbit_state": "ascending",
+          "item_ids": [
+            "S1B_IW_GRDH_1SDV_20200331T170511_20200331T170536_020938_027B79",
+            "S1B_IW_GRDH_1SDV_20200331T170446_20200331T170511_020938_027B79"
+          ],
+          "item_count": 2,
+          "candidate_ids_intersecting": [
+            "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+            "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+            "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17",
+            "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a"
+          ],
+          "intersecting_count": 9,
+          "candidate_ids_fully_covered_by_footprint_union": [
+            "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+            "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+            "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17",
+            "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a"
+          ],
+          "fully_covered_count": 8
+        }
+      ],
+      "all_returned_scene_footprints_union": {
+        "item_count": 8,
+        "intersecting_count": 21,
+        "fully_covered_count": 21,
+        "candidate_ids_fully_covered": [
+          "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+          "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+          "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+          "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+          "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+          "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+          "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+          "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+          "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+          "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+          "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+          "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+          "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+          "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+          "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+          "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+          "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+          "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17",
+          "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+          "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e",
+          "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a"
+        ],
+        "individual_candidate_scene_counts": {
+          "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0": 2,
+          "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd": 2,
+          "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14": 3,
+          "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022": 2,
+          "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f": 3,
+          "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3": 2,
+          "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331": 2,
+          "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c": 3,
+          "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e": 5,
+          "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e": 2,
+          "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b": 2,
+          "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8": 2,
+          "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393": 2,
+          "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a": 2,
+          "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e": 6,
+          "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460": 5,
+          "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90": 5,
+          "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17": 3,
+          "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a": 2,
+          "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e": 2,
+          "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a": 6
+        }
+      }
+    },
+    {
+      "period": "2020-08",
+      "query": {
+        "collections": [
+          "sentinel-1-grd"
+        ],
+        "bbox": [
+          18.42566188925082,
+          -18.0421,
+          20.943746679773703,
+          -17.399540716612382
+        ],
+        "datetime": "2020-08-01T00:00:00Z/2020-08-31T23:59:59Z",
+        "limit": 1000
+      },
+      "response_file": "search-2020-08.geojson",
+      "response_bytes": 53979,
+      "response_sha256": "90bb51d37fd39a9231736513e2b7585e481abbba944d3819e13f50f96fc37e55",
+      "number_matched": 7,
+      "items_returned": 7,
+      "groups": [
+        {
+          "acquisition_date": "2020-08-03",
+          "relative_orbit": 160,
+          "orbit_state": "ascending",
+          "item_ids": [
+            "S1B_IW_GRDH_1SDV_20200803T171318_20200803T171343_022761_02B330"
+          ],
+          "item_count": 1,
+          "candidate_ids_intersecting": [
+            "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+            "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+            "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+            "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+            "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+            "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+            "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+            "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+            "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+            "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e"
+          ],
+          "intersecting_count": 15,
+          "candidate_ids_fully_covered_by_footprint_union": [
+            "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+            "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+            "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+            "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+            "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+            "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+            "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+            "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+            "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+            "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e"
+          ],
+          "fully_covered_count": 14
+        },
+        {
+          "acquisition_date": "2020-08-10",
+          "relative_orbit": 87,
+          "orbit_state": "ascending",
+          "item_ids": [
+            "S1B_IW_GRDH_1SDV_20200810T170518_20200810T170543_022863_02B66D",
+            "S1B_IW_GRDH_1SDV_20200810T170453_20200810T170518_022863_02B66D"
+          ],
+          "item_count": 2,
+          "candidate_ids_intersecting": [
+            "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+            "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+            "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17",
+            "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a"
+          ],
+          "intersecting_count": 9,
+          "candidate_ids_fully_covered_by_footprint_union": [
+            "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+            "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+            "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17",
+            "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a"
+          ],
+          "fully_covered_count": 8
+        },
+        {
+          "acquisition_date": "2020-08-15",
+          "relative_orbit": 160,
+          "orbit_state": "ascending",
+          "item_ids": [
+            "S1B_IW_GRDH_1SDV_20200815T171319_20200815T171344_022936_02B896"
+          ],
+          "item_count": 1,
+          "candidate_ids_intersecting": [
+            "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+            "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+            "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+            "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+            "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+            "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+            "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+            "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+            "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+            "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e"
+          ],
+          "intersecting_count": 15,
+          "candidate_ids_fully_covered_by_footprint_union": [
+            "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+            "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+            "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+            "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+            "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+            "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+            "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+            "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+            "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+            "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e"
+          ],
+          "fully_covered_count": 14
+        },
+        {
+          "acquisition_date": "2020-08-22",
+          "relative_orbit": 87,
+          "orbit_state": "ascending",
+          "item_ids": [
+            "S1B_IW_GRDH_1SDV_20200822T170518_20200822T170543_023038_02BBEB",
+            "S1B_IW_GRDH_1SDV_20200822T170453_20200822T170518_023038_02BBEB"
+          ],
+          "item_count": 2,
+          "candidate_ids_intersecting": [
+            "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+            "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+            "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17",
+            "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a"
+          ],
+          "intersecting_count": 9,
+          "candidate_ids_fully_covered_by_footprint_union": [
+            "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+            "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+            "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17"
+          ],
+          "fully_covered_count": 6
+        },
+        {
+          "acquisition_date": "2020-08-27",
+          "relative_orbit": 160,
+          "orbit_state": "ascending",
+          "item_ids": [
+            "S1B_IW_GRDH_1SDV_20200827T171320_20200827T171345_023111_02BE19"
+          ],
+          "item_count": 1,
+          "candidate_ids_intersecting": [
+            "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+            "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+            "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+            "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+            "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+            "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+            "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+            "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+            "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+            "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e"
+          ],
+          "intersecting_count": 15,
+          "candidate_ids_fully_covered_by_footprint_union": [
+            "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+            "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+            "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+            "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+            "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+            "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+            "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+            "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+            "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+            "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e"
+          ],
+          "fully_covered_count": 14
+        }
+      ],
+      "all_returned_scene_footprints_union": {
+        "item_count": 7,
+        "intersecting_count": 21,
+        "fully_covered_count": 21,
+        "candidate_ids_fully_covered": [
+          "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+          "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+          "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+          "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+          "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+          "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+          "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+          "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+          "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+          "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+          "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+          "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+          "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+          "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+          "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+          "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+          "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+          "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17",
+          "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+          "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e",
+          "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a"
+        ],
+        "individual_candidate_scene_counts": {
+          "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0": 3,
+          "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd": 3,
+          "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14": 2,
+          "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022": 3,
+          "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f": 2,
+          "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3": 3,
+          "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331": 3,
+          "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c": 2,
+          "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e": 5,
+          "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e": 3,
+          "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b": 3,
+          "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8": 3,
+          "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393": 3,
+          "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a": 3,
+          "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e": 4,
+          "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460": 5,
+          "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90": 5,
+          "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17": 2,
+          "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a": 3,
+          "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e": 3,
+          "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a": 4
+        }
+      }
+    },
+    {
+      "period": "2025-03",
+      "query": {
+        "collections": [
+          "sentinel-1-grd"
+        ],
+        "bbox": [
+          18.42566188925082,
+          -18.0421,
+          20.943746679773703,
+          -17.399540716612382
+        ],
+        "datetime": "2025-03-01T00:00:00Z/2025-03-31T23:59:59Z",
+        "limit": 1000
+      },
+      "response_file": "search-2025-03.geojson",
+      "response_bytes": 61733,
+      "response_sha256": "485d8cf55ecd617b2a56386190c388c91655ab867975f42818b82cc0d3f7f99b",
+      "number_matched": 8,
+      "items_returned": 8,
+      "groups": [
+        {
+          "acquisition_date": "2025-03-04",
+          "relative_orbit": 160,
+          "orbit_state": "ascending",
+          "item_ids": [
+            "S1A_IW_GRDH_1SDV_20250304T171430_20250304T171455_058157_072F36",
+            "S1A_IW_GRDH_1SDV_20250304T171405_20250304T171430_058157_072F36"
+          ],
+          "item_count": 2,
+          "candidate_ids_intersecting": [
+            "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+            "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+            "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+            "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+            "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+            "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+            "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+            "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+            "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+            "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e"
+          ],
+          "intersecting_count": 15,
+          "candidate_ids_fully_covered_by_footprint_union": [
+            "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+            "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+            "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+            "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+            "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+            "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+            "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+            "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+            "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+            "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e"
+          ],
+          "fully_covered_count": 14
+        },
+        {
+          "acquisition_date": "2025-03-23",
+          "relative_orbit": 87,
+          "orbit_state": "ascending",
+          "item_ids": [
+            "S1A_IW_GRDH_1SDV_20250323T170616_20250323T170641_058434_073A32",
+            "S1A_IW_GRDH_1SDV_20250323T170551_20250323T170616_058434_073A32"
+          ],
+          "item_count": 2,
+          "candidate_ids_intersecting": [
+            "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+            "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+            "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17",
+            "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a"
+          ],
+          "intersecting_count": 9,
+          "candidate_ids_fully_covered_by_footprint_union": [
+            "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+            "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+            "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17",
+            "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a"
+          ],
+          "fully_covered_count": 8
+        },
+        {
+          "acquisition_date": "2025-03-28",
+          "relative_orbit": 160,
+          "orbit_state": "ascending",
+          "item_ids": [
+            "S1A_IW_GRDH_1SDV_20250328T171430_20250328T171455_058507_073D20",
+            "S1A_IW_GRDH_1SDV_20250328T171405_20250328T171430_058507_073D20"
+          ],
+          "item_count": 2,
+          "candidate_ids_intersecting": [
+            "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+            "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+            "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+            "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+            "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+            "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+            "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+            "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+            "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+            "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e"
+          ],
+          "intersecting_count": 15,
+          "candidate_ids_fully_covered_by_footprint_union": [
+            "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+            "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+            "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+            "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+            "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+            "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+            "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+            "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+            "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+            "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e"
+          ],
+          "fully_covered_count": 14
+        },
+        {
+          "acquisition_date": "2025-03-29",
+          "relative_orbit": 87,
+          "orbit_state": "ascending",
+          "item_ids": [
+            "S1C_IW_GRDH_1SDV_20250329T170500_20250329T170525_001658_002B65",
+            "S1C_IW_GRDH_1SDV_20250329T170435_20250329T170500_001658_002B65"
+          ],
+          "item_count": 2,
+          "candidate_ids_intersecting": [
+            "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+            "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+            "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17",
+            "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a"
+          ],
+          "intersecting_count": 9,
+          "candidate_ids_fully_covered_by_footprint_union": [
+            "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+            "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+            "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17",
+            "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a"
+          ],
+          "fully_covered_count": 8
+        }
+      ],
+      "all_returned_scene_footprints_union": {
+        "item_count": 8,
+        "intersecting_count": 21,
+        "fully_covered_count": 21,
+        "candidate_ids_fully_covered": [
+          "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+          "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+          "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+          "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+          "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+          "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+          "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+          "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+          "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+          "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+          "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+          "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+          "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+          "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+          "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+          "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+          "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+          "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17",
+          "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+          "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e",
+          "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a"
+        ],
+        "individual_candidate_scene_counts": {
+          "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0": 4,
+          "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd": 2,
+          "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14": 2,
+          "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022": 2,
+          "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f": 2,
+          "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3": 2,
+          "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331": 2,
+          "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c": 2,
+          "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e": 4,
+          "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e": 2,
+          "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b": 2,
+          "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8": 2,
+          "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393": 2,
+          "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a": 2,
+          "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e": 2,
+          "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460": 4,
+          "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90": 4,
+          "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17": 2,
+          "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a": 2,
+          "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e": 2,
+          "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a": 2
+        }
+      }
+    },
+    {
+      "period": "2025-08",
+      "query": {
+        "collections": [
+          "sentinel-1-grd"
+        ],
+        "bbox": [
+          18.42566188925082,
+          -18.0421,
+          20.943746679773703,
+          -17.399540716612382
+        ],
+        "datetime": "2025-08-01T00:00:00Z/2025-08-31T23:59:59Z",
+        "limit": 1000
+      },
+      "response_file": "search-2025-08.geojson",
+      "response_bytes": 61714,
+      "response_sha256": "a298e7279ba75f8d8d65a4b738a5e7ce69b2a7a2879f5c94c6987efeb01be971",
+      "number_matched": 8,
+      "items_returned": 8,
+      "groups": [
+        {
+          "acquisition_date": "2025-08-01",
+          "relative_orbit": 160,
+          "orbit_state": "ascending",
+          "item_ids": [
+            "S1C_IW_GRDH_1SDV_20250801T171318_20250801T171343_003481_006FD2",
+            "S1C_IW_GRDH_1SDV_20250801T171253_20250801T171318_003481_006FD2"
+          ],
+          "item_count": 2,
+          "candidate_ids_intersecting": [
+            "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+            "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+            "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+            "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+            "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+            "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+            "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+            "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+            "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+            "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e"
+          ],
+          "intersecting_count": 15,
+          "candidate_ids_fully_covered_by_footprint_union": [
+            "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+            "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+            "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+            "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+            "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+            "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+            "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+            "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+            "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e"
+          ],
+          "fully_covered_count": 13
+        },
+        {
+          "acquisition_date": "2025-08-08",
+          "relative_orbit": 87,
+          "orbit_state": "ascending",
+          "item_ids": [
+            "S1C_IW_GRDH_1SDV_20250808T170450_20250808T170515_003583_0072D7"
+          ],
+          "item_count": 1,
+          "candidate_ids_intersecting": [
+            "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+            "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+            "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17",
+            "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a"
+          ],
+          "intersecting_count": 9,
+          "candidate_ids_fully_covered_by_footprint_union": [
+            "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+            "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+            "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17",
+            "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a"
+          ],
+          "fully_covered_count": 8
+        },
+        {
+          "acquisition_date": "2025-08-13",
+          "relative_orbit": 160,
+          "orbit_state": "ascending",
+          "item_ids": [
+            "S1C_IW_GRDH_1SDV_20250813T171319_20250813T171344_003656_007507",
+            "S1C_IW_GRDH_1SDV_20250813T171254_20250813T171319_003656_007507"
+          ],
+          "item_count": 2,
+          "candidate_ids_intersecting": [
+            "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+            "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+            "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+            "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+            "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+            "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+            "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+            "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+            "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+            "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e"
+          ],
+          "intersecting_count": 15,
+          "candidate_ids_fully_covered_by_footprint_union": [
+            "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+            "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+            "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+            "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+            "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+            "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+            "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+            "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+            "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e"
+          ],
+          "fully_covered_count": 13
+        },
+        {
+          "acquisition_date": "2025-08-20",
+          "relative_orbit": 87,
+          "orbit_state": "ascending",
+          "item_ids": [
+            "S1C_IW_GRDH_1SDV_20250820T170450_20250820T170515_003758_007814"
+          ],
+          "item_count": 1,
+          "candidate_ids_intersecting": [
+            "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+            "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+            "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17",
+            "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a"
+          ],
+          "intersecting_count": 9,
+          "candidate_ids_fully_covered_by_footprint_union": [
+            "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+            "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+            "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17",
+            "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a"
+          ],
+          "fully_covered_count": 8
+        },
+        {
+          "acquisition_date": "2025-08-25",
+          "relative_orbit": 160,
+          "orbit_state": "ascending",
+          "item_ids": [
+            "S1C_IW_GRDH_1SDV_20250825T171319_20250825T171344_003831_007A48",
+            "S1C_IW_GRDH_1SDV_20250825T171254_20250825T171319_003831_007A48"
+          ],
+          "item_count": 2,
+          "candidate_ids_intersecting": [
+            "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+            "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+            "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+            "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+            "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+            "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+            "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+            "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+            "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+            "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+            "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e"
+          ],
+          "intersecting_count": 15,
+          "candidate_ids_fully_covered_by_footprint_union": [
+            "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+            "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+            "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+            "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+            "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+            "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+            "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+            "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+            "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+            "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+            "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+            "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+            "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e"
+          ],
+          "fully_covered_count": 13
+        }
+      ],
+      "all_returned_scene_footprints_union": {
+        "item_count": 8,
+        "intersecting_count": 21,
+        "fully_covered_count": 20,
+        "candidate_ids_fully_covered": [
+          "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+          "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+          "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+          "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+          "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+          "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+          "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+          "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+          "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+          "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+          "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+          "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+          "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+          "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+          "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+          "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+          "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+          "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17",
+          "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e",
+          "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a"
+        ],
+        "individual_candidate_scene_counts": {
+          "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0": 3,
+          "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd": 3,
+          "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14": 2,
+          "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022": 3,
+          "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f": 2,
+          "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3": 3,
+          "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331": 3,
+          "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c": 2,
+          "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e": 5,
+          "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e": 3,
+          "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b": 3,
+          "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8": 3,
+          "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393": 3,
+          "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a": 3,
+          "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e": 2,
+          "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460": 5,
+          "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90": 5,
+          "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17": 2,
+          "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a": 6,
+          "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e": 3,
+          "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a": 2
+        }
+      }
+    }
+  ]
+}

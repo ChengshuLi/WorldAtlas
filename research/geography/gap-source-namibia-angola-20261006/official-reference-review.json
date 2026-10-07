@@ -340,6 +340,18 @@
       "document_date": "Global PALSAR mosaic source acquisitions labelled 2007, 2008, 2009 and 2010; official data description page inspected 2026-10-07.",
       "retrieval_status": "The official description specifies 25 m spacing, approximately 36 m azimuth by 20 m range SAR resolution, ITRF97/GRS80 georeferencing, SRTM3 ortho-rectification, and a mask code 50 for sea and water. The data portal returned HTTP 401 and the documented download procedure requires pre-registration using an email address followed by a second registration step. No account or email submission was made; no tile was acquired or analyzed.",
       "use_limit": "Potential independent L-band SAR surface-water evidence, but the product source description and presence of a water code do not establish actual coverage, valid observations, seasonal state, or water classification in these candidates. Do not use pending lawful access, tile/date coverage checks, mask review, and independent spatial-registration assessment."
+    },
+    {
+      "id": "AWS Sentinel-1 GRD COG public archive / Earth Search STAC coverage screen",
+      "operator": "AWS Open Data Registry (public Sentinel-1 L1 GRD COG collection); Earth Search STAC catalog operated by Element 84",
+      "url": "https://registry.opendata.aws/sentinel-1/",
+      "stac_api": "https://earth-search.aws.element84.com/v1/search",
+      "document_date": "Scene acquisitions screened: 2015-09, 2018-08, 2020-03, 2020-08, 2025-03, 2025-08. STAC catalog records specify Sentinel-1 platform, acquisition datetime, orbit, polarization, scene footprint and asset metadata.",
+      "retrieval_status": "Six exact Earth Search STAC search responses are retained in sources/sentinel-1-aws/ and bound by SHA-256 in footprint-screening.json. Per-period unions of returned footprints cover all 21 candidates in 2018-08, 2020-03, 2020-08 and 2025-03; 2015-09 covers 14 and 2025-08 covers 20. The same-day/same-relative-orbit unions cover no more than 14 components in any screened period. COG pixel values were not interpreted or classified.",
+      "use_limit": "This is a source-availability and footprint-only result. Combining multiple acquisition dates into a monthly union does not produce a dated water observation. Public VV/VH COG assets are uint16 with nodata 0 and STAC reports scale 1/offset 0; calibration and noise assets are separate. No calibrated backscatter, geolocation refinement, water mask, seasonality estimate, or bank line was produced. The asset requires a processing method and per-component acquisition-date accounting before any hydrologic inference.",
+      "local_file": "sources/sentinel-1-aws/footprint-screening.json",
+      "reproduction_script": "reproduce_sentinel1_footprint_screening.py",
+      "scope": "STAC search footprint intersection and coverage against all 21 immutable candidate polygons; no production geometry change and no administrative assignment."
     }
   ],
   "spatial_screen": {
