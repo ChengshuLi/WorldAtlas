@@ -1,0 +1,346 @@
+{
+  "complete_family_shard_count": 14,
+  "existing_global_accounting": {
+    "cause_status": "unknown",
+    "component_ids": [
+      "physical-component:d15872b646c35d39fa1f0cc1bda6edc9775a46edd3c2c5278690d770ef211708"
+    ],
+    "current_contact_ids": [
+      "gb:PER:ADM2:86281439B13089313750619"
+    ],
+    "existing_mapped_inland_water_support_area_m2": 0.0,
+    "existing_mapped_land_support_area_m2": 27.71966428313268,
+    "physical_authority": "unapproved",
+    "physical_observation_status": "unknown-source-fitness-and-observation-date",
+    "physical_source_vintage": "GSHHG2.3.7/2017-06-15 release; observation dates heterogeneous",
+    "physical_status": "mapped-land-support",
+    "source_fitness": "unapproved-for-all-components",
+    "source_fitness_required_role": "GEO-source-research"
+  },
+  "feature_geometry_comparisons": {
+    "current_atlas_vs_simplified": {
+      "intersection_area_utm17s_m2": 6340057427.786337,
+      "left_coordinate_count": 81,
+      "left_covers_right": false,
+      "left_equals_right_exact_coordinates": false,
+      "left_equals_right_topologically": false,
+      "left_minus_right_area_utm17s_m2": 9464497.561501645,
+      "left_valid": true,
+      "right_coordinate_count": 180,
+      "right_covers_left": false,
+      "right_minus_left_area_utm17s_m2": 8205387.037621918,
+      "right_valid": true,
+      "symmetric_difference_area_utm17s_m2": 17669884.59912356
+    },
+    "current_atlas_vs_unsimplified": {
+      "intersection_area_utm17s_m2": 6338486679.66728,
+      "left_coordinate_count": 81,
+      "left_covers_right": false,
+      "left_equals_right_exact_coordinates": false,
+      "left_equals_right_topologically": false,
+      "left_minus_right_area_utm17s_m2": 11035245.680591874,
+      "left_valid": true,
+      "right_coordinate_count": 1680,
+      "right_covers_left": false,
+      "right_minus_left_area_utm17s_m2": 11388665.300278286,
+      "right_valid": true,
+      "symmetric_difference_area_utm17s_m2": 22423910.9808702
+    },
+    "simplified_vs_unsimplified": {
+      "intersection_area_utm17s_m2": 6344461613.270298,
+      "left_coordinate_count": 180,
+      "left_covers_right": false,
+      "left_equals_right_exact_coordinates": false,
+      "left_equals_right_topologically": false,
+      "left_minus_right_area_utm17s_m2": 3801201.5536704287,
+      "left_valid": true,
+      "right_coordinate_count": 1680,
+      "right_covers_left": false,
+      "right_minus_left_area_utm17s_m2": 5413731.697258092,
+      "right_valid": true,
+      "symmetric_difference_area_utm17s_m2": 9214933.250928473
+    }
+  },
+  "method_limits": [
+    "Original lon/lat geometries are used for topological predicates; no snapping, repair or normalization is applied.",
+    "Areas use local EPSG:32717 planar measurements for this single candidate; they are source-relative diagnostics, not survey accuracy or a physical/legal partition.",
+    "Full versus simplified products are kept separate. Registry dates, licensing, source authority and the cause of Atlas geometry differences remain claims or unknowns unless independently supported.",
+    "Existing GSHHG centroid screening is not complete dry-land or coastline evidence; absent water evidence is not dry land.",
+    "No global component, source, water, numeric, hierarchy or release producer is rerun."
+  ],
+  "product_comparisons": {
+    "current_atlas_contact": {
+      "candidate_area_utm17s_m2": 27.697551136650027,
+      "candidate_intersection_contacts": [
+        {
+          "covers_candidate": false,
+          "geometry_type": "Polygon",
+          "intersection_area_utm17s_m2": 0.0,
+          "intersects_in_original_lonlat": true,
+          "positive_area_intersection": false,
+          "shapeID": null,
+          "shapeName": null,
+          "source_geometry_coordinate_count": 81,
+          "source_geometry_valid": true
+        }
+      ],
+      "candidate_intersection_feature_count": 1,
+      "feature_count": 1,
+      "invalid_feature_count_whole_product": 0,
+      "invalid_shapeIDs_whole_product": [],
+      "product": "single current Atlas Sechura feature",
+      "union_candidate_coverage_fraction": 0.0,
+      "union_intersection_area_utm17s_m2": 0.0
+    },
+    "simplified": {
+      "candidate_area_utm17s_m2": 27.697551136650027,
+      "candidate_intersection_contacts": [
+        {
+          "covers_candidate": true,
+          "geometry_type": "Polygon",
+          "intersection_area_utm17s_m2": 27.697551136650034,
+          "intersects_in_original_lonlat": true,
+          "positive_area_intersection": true,
+          "shapeID": "86281439B13089313750619",
+          "shapeName": "Sechura",
+          "source_geometry_coordinate_count": 180,
+          "source_geometry_valid": true
+        }
+      ],
+      "candidate_intersection_feature_count": 1,
+      "feature_count": 196,
+      "invalid_feature_count_whole_product": 0,
+      "invalid_shapeIDs_whole_product": [],
+      "product": "simplified PER ADM2 product actually consumed by pinned baseline recipe",
+      "union_candidate_coverage_fraction": 1.0,
+      "union_intersection_area_utm17s_m2": 27.697551136650034
+    },
+    "unsimplified": {
+      "candidate_area_utm17s_m2": 27.697551136650027,
+      "candidate_intersection_contacts": [
+        {
+          "covers_candidate": true,
+          "geometry_type": "Polygon",
+          "intersection_area_utm17s_m2": 27.697551136650034,
+          "intersects_in_original_lonlat": true,
+          "positive_area_intersection": true,
+          "shapeID": "86281439B13089313750619",
+          "shapeName": "Sechura",
+          "source_geometry_coordinate_count": 1680,
+          "source_geometry_valid": true
+        }
+      ],
+      "candidate_intersection_feature_count": 1,
+      "feature_count": 196,
+      "invalid_feature_count_whole_product": 0,
+      "invalid_shapeIDs_whole_product": [],
+      "product": "unsimplified PER ADM2 product retained and reviewed in #496",
+      "union_candidate_coverage_fraction": 1.0,
+      "union_intersection_area_utm17s_m2": 27.697551136650034
+    }
+  },
+  "scope": {
+    "component_id": "physical-component:d15872b646c35d39fa1f0cc1bda6edc9775a46edd3c2c5278690d770ef211708",
+    "contact_id": "gb:PER:ADM2:86281439B13089313750619",
+    "family_id": "gap-source-batch:5344ddbbdcc5dac52d0580aa"
+  },
+  "selected_family_row_sha256": "b4691e615a11c5f288ec983b39a0c5639a101e3cf7cf02fc02f7f7419458c054",
+  "source_identity": {
+    "candidate_component": {
+      "bounds": [
+        -81.10154689755065,
+        -6.0721432074072945,
+        -81.10135871505447,
+        -6.07195313362975
+      ],
+      "coordinate_count": 4,
+      "type": "Polygon",
+      "valid": true,
+      "validity_reason": "valid"
+    },
+    "current_atlas_feature": {
+      "bounds": [
+        -81.1496,
+        -6.3721,
+        -80.053,
+        -5.3504
+      ],
+      "coordinate_count": 81,
+      "type": "Polygon",
+      "valid": true,
+      "validity_reason": "valid"
+    },
+    "current_feature_recorded_source_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PER/ADM2/geoBoundaries-PER-ADM2.geojson",
+    "shapeID": "86281439B13089313750619",
+    "simplified_feature": {
+      "bounds": [
+        -81.14955661499994,
+        -6.372080099999948,
+        -80.05298436399994,
+        -5.350446675999933
+      ],
+      "coordinate_count": 180,
+      "type": "Polygon",
+      "valid": true,
+      "validity_reason": "valid"
+    },
+    "simplified_product": {
+      "feature_count": 196,
+      "raw_bytes": 4310497,
+      "raw_sha256": "4986d514b9898f7c415febd47d2ae302f79f5a0d23434cc81fb2bdbfaec623a3"
+    },
+    "unsimplified_feature": {
+      "bounds": [
+        -81.14955661499994,
+        -6.372080099999948,
+        -80.05298436399994,
+        -5.350446675999933
+      ],
+      "coordinate_count": 1680,
+      "type": "Polygon",
+      "valid": true,
+      "validity_reason": "valid"
+    },
+    "unsimplified_product": {
+      "feature_count": 196,
+      "raw_bytes": 31291639,
+      "raw_sha256": "58d0720bc01abd27bd02fb73d2ee8443fc6067352d97b752d100a18e3b97bb58"
+    }
+  },
+  "source_product_metadata": {
+    "metadata_limits": [
+      "These are publisher/registry metadata claims; represented year and acquisition/build dates do not independently establish effective dates, authority, positional accuracy or license applicability."
+    ],
+    "recorded_administrative_unit_count": "196",
+    "recorded_boundary_canonical": "Provinces",
+    "recorded_boundary_id": "PER-ADM2-86281439",
+    "recorded_boundary_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "recorded_boundary_source": "Instituto Geográfico Nacional - IGN, OCHA ROLAC",
+    "recorded_boundary_type": "ADM2",
+    "recorded_boundary_year": "2020",
+    "recorded_build_date": "Dec 12, 2023",
+    "recorded_license_source": "https//data.humdata.org/dataset/limites-de-peru",
+    "recorded_source_data_update_date": "Thu Jan 19 07:31:04 2023",
+    "source_metadata_compressed_bytes": 490,
+    "source_metadata_compressed_sha256": "66b688d16e502d63e72a9564cb646edd2218ee7382788bcbb16467ca552b2165",
+    "source_metadata_raw_bytes": 902,
+    "source_metadata_raw_sha256": "d6f5b546a17b37172d5e818051c3bc79dedd522d337698381ec2a23f768539ba"
+  },
+  "version": 1,
+  "wgs84_source_edge_areas_m2": {
+    "candidate_component": 27.71966428313268,
+    "current_atlas_contact": 6354169491.504037,
+    "simplified_source_contact": 6352910275.767673,
+    "unsimplified_source_contact": 6354654098.649521
+  },
+  "whole_input_receipts": [
+    {
+      "bytes": 1265472,
+      "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-PER-ADM2-000.bin.gz",
+      "sha256": "b3578247bece532832159fbe2250e3502be01f6fdd61bdc6527f6ac0b6f95311"
+    },
+    {
+      "bytes": 8305521,
+      "path": "data/regional-review/regional-review-d2dae235991eaa49/sources/geoboundaries-PER-ADM2-2020.geojson.gz",
+      "sha256": "047541aa4fe6d33e2d2246b8ea2a518eaf6fc6f9e2bbc241147cb4587b67e44e"
+    },
+    {
+      "bytes": 4909063,
+      "path": "data/geography/part-18.json",
+      "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123"
+    },
+    {
+      "bytes": 2085110,
+      "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+      "sha256": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156"
+    },
+    {
+      "bytes": 1233045,
+      "path": "coordination/engineering/global-physical-comparison-20261006/results/components-057.jsonl.gz",
+      "sha256": "883e4036eca58e598c8e02a05034c86d81b19a9d8b9727ec7135ffb66c528ea5"
+    },
+    {
+      "bytes": 490,
+      "path": "inputs/upstream/geoboundaries-PER-ADM2-metadata.json.gz",
+      "sha256": "66b688d16e502d63e72a9564cb646edd2218ee7382788bcbb16467ca552b2165",
+      "source_git_blob_oid": "8d4a9cd7727fa1057c2a94fd241fa97590570db2",
+      "source_path": "data/regional-review/regional-review-d2dae235991eaa49/sources/geoboundaries-PER-ADM2-metadata.json.gz"
+    },
+    {
+      "bytes": 902,
+      "derived_from": "inputs/upstream/geoboundaries-PER-ADM2-metadata.json.gz",
+      "path": "inputs/upstream/geoboundaries-PER-ADM2-metadata.json",
+      "sha256": "d6f5b546a17b37172d5e818051c3bc79dedd522d337698381ec2a23f768539ba"
+    },
+    {
+      "bytes": 1046123,
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/families-000.bin.gz",
+      "sha256": "60e770171089510b8f97ebd74a93e1c913953716a4281699e4ecca75aaefffd5"
+    },
+    {
+      "bytes": 1003990,
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/families-001.bin.gz",
+      "sha256": "1b4c5b7a0d1328bfbee83c759934843aabedde9afc947a9e555eeb6aac276fca"
+    },
+    {
+      "bytes": 1001586,
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/families-002.bin.gz",
+      "sha256": "9c50b25acf826a4c65291613cc965d7675a7c66aa672a8c0fe1f21feaf432239"
+    },
+    {
+      "bytes": 1063935,
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/families-003.bin.gz",
+      "sha256": "8b7eedc7a4a9234f1917046167f97ad960d4a9c2941ce55dbac46a7eee422549"
+    },
+    {
+      "bytes": 987691,
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/families-004.bin.gz",
+      "sha256": "fab9ac669c568073ab37748190396d3f0c06ac319317c4ff7a0aa31cee259ab0"
+    },
+    {
+      "bytes": 1026831,
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/families-005.bin.gz",
+      "sha256": "03f13761ce67af5a826a98468ef2dc77d2f4a5c4ab9f25b6e6a1e3bd396bf141"
+    },
+    {
+      "bytes": 1493537,
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/families-006.bin.gz",
+      "sha256": "6bee149f0d7930d6d95d927c41b78f8a52678df4ebad9824e68b35b917e676dc"
+    },
+    {
+      "bytes": 962830,
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/families-007.bin.gz",
+      "sha256": "4eb81385ba0d6b6d6a6b47e26a9504f9ae299f8d64dd9e0a82b3b48a4af65ad2"
+    },
+    {
+      "bytes": 1043652,
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/families-008.bin.gz",
+      "sha256": "897a5cb10967809bb32b541c82ff19c4fd0d8c0b64241d78ea963d09cb0bab62"
+    },
+    {
+      "bytes": 998433,
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/families-009.bin.gz",
+      "sha256": "4621441988498fe2c05bfe6f036bf8dd9cfbc8472c5b8a65bf91d3a424f626da"
+    },
+    {
+      "bytes": 1039493,
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/families-010.bin.gz",
+      "sha256": "8da6fcf9fd6a7f3215666ab9bae2e91f9b32e5e0bb923492137ea823af8265b7"
+    },
+    {
+      "bytes": 1081053,
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/families-011.bin.gz",
+      "sha256": "9e0d5879d5735d4507773cc66b7da371164c30de022c742969ba5d1e85e2c339"
+    },
+    {
+      "bytes": 965771,
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/families-012.bin.gz",
+      "sha256": "483fb0b6c5b9a8e1b905bf2dc3aa0ca232dcede6f34ef357381770a603e52df0"
+    },
+    {
+      "bytes": 247084,
+      "path": "coordination/engineering/global-actionability-routing-20261007/results/families-013.bin.gz",
+      "sha256": "006dd169089fc433251cc2f5939e7ae324744c00eca11066860aab578f07edac"
+    }
+  ]
+}
