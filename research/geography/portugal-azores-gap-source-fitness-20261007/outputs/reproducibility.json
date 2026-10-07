@@ -1,31 +1,34 @@
 {
   "all_output_hashes_equal": true,
+  "baseline_input_bytes_match_pr_base": true,
   "commands": [
     "PYTHONDONTWRITEBYTECODE=1 python research/geography/portugal-azores-gap-source-fitness-20261007/assess.py",
     "PYTHONDONTWRITEBYTECODE=1 python research/geography/portugal-azores-gap-source-fitness-20261007/assess.py"
   ],
+  "evaluation_base_commit": "d51c43e878c797d215ba5bd8285571fa14add443",
+  "historical_issue_baseline_commit": "83bed8c4c49e8f54077bb4abf0f32d41d0992f81",
   "kind": "reproducibility",
   "method_id": "exact-source-overlay",
   "outcome": "passed",
   "producer_sha256": "99e5269733902cf9c44d0dd1b700b670aceafff1bed2048c48216a7874e53321",
   "run_one_files": {
-    "assessment.json": "fea90d7e2b1d24c7d32d35e497ceb0a649a13d637b2e418bc06c4dfeaa9d960d",
+    "assessment.json": "e9c279d457cd3c277679ed9a07943fef726ed86bf041eda079515c335a259eb0",
     "complete-components.geojson": "74856ce26a553c42377af1d5df1dc6516b395addf509cf2d2a89bc737dbbd217",
-    "control-source-overlay-negative.json": "8944b26d59abe5242e0e98eb589a930873f9a09ae1c0848672f63a2a8fff329a",
+    "control-source-overlay-negative.json": "2e6cd2b7f517fad3cf0ecd1931d3118a28fb730627f0dd1d808af8cccaab2aa8",
     "control-source-overlay-positive.json": "88b2c1f12e39306513234b59bcd8fe607e298a3e05be10b2a070cd2fb5fbbbad",
     "current-atlas-contact-features.geojson": "a3fdd5f729b47bf8ea07bf62f38d9debaaa48915dfced80b2ba12c2ee77e45f3",
     "selected-source-features.geojson": "983c6019252a7a53f4246de5ca6076fbdf79da523e59cffa784312b2e8e0c954"
   },
-  "run_one_sha256": "fea90d7e2b1d24c7d32d35e497ceb0a649a13d637b2e418bc06c4dfeaa9d960d",
+  "run_one_sha256": "e9c279d457cd3c277679ed9a07943fef726ed86bf041eda079515c335a259eb0",
   "run_two_files": {
-    "assessment.json": "fea90d7e2b1d24c7d32d35e497ceb0a649a13d637b2e418bc06c4dfeaa9d960d",
+    "assessment.json": "e9c279d457cd3c277679ed9a07943fef726ed86bf041eda079515c335a259eb0",
     "complete-components.geojson": "74856ce26a553c42377af1d5df1dc6516b395addf509cf2d2a89bc737dbbd217",
-    "control-source-overlay-negative.json": "8944b26d59abe5242e0e98eb589a930873f9a09ae1c0848672f63a2a8fff329a",
+    "control-source-overlay-negative.json": "2e6cd2b7f517fad3cf0ecd1931d3118a28fb730627f0dd1d808af8cccaab2aa8",
     "control-source-overlay-positive.json": "88b2c1f12e39306513234b59bcd8fe607e298a3e05be10b2a070cd2fb5fbbbad",
     "current-atlas-contact-features.geojson": "a3fdd5f729b47bf8ea07bf62f38d9debaaa48915dfced80b2ba12c2ee77e45f3",
     "selected-source-features.geojson": "983c6019252a7a53f4246de5ca6076fbdf79da523e59cffa784312b2e8e0c954"
   },
-  "run_two_sha256": "fea90d7e2b1d24c7d32d35e497ceb0a649a13d637b2e418bc06c4dfeaa9d960d",
+  "run_two_sha256": "e9c279d457cd3c277679ed9a07943fef726ed86bf041eda079515c335a259eb0",
   "runtime": "Python 3.12.14; Shapely 2.1.2; pyproj 3.7.2",
   "schema": "two-fresh-runs/v1",
   "scope_sha256": "08b686a84f1ab772c4e056b6c4ada2dabd5e378a608836b88860398af398de53"

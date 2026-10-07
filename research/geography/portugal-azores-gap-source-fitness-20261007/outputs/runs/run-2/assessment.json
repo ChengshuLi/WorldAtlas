@@ -2062,6 +2062,7 @@
   ],
   "contact_source_join_exact_ids": 19,
   "contacts": 19,
+  "evaluation_base_commit": "d51c43e878c797d215ba5bd8285571fa14add443",
   "family_id": "gap-source-batch:3a814f72f5a24fbafdee8afb",
   "geoBoundaries_metadata": {
     "citation_and_use_sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
@@ -2135,7 +2136,7 @@
       },
       "scope_negative": {
         "id": "roster-drop-negative/v1",
-        "result": "removing any one target ID from the expected contact roster fails exact-set equality."
+        "result": "dropping one contact from the pinned 19-contact scope fails its fixed expected-count guard; this is a cardinality control, not an independent source-roster identity check."
       }
     },
     "input_crs": "geoBoundaries and Atlas WGS84/CRS84; component feature coordinates treated as CRS84 as represented in source packet.",

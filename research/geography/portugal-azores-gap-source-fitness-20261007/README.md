@@ -2,8 +2,9 @@
 
 Issue: [#1390](https://github.com/ChengshuLi/WorldAtlas/issues/1390)  
 Family: `gap-source-batch:3a814f72f5a24fbafdee8afb`  
-Worktree baseline: `83bed8c4c49e8f54077bb4abf0f32d41d0992f81`  
+Issue-pinned historical baseline: `83bed8c4c49e8f54077bb4abf0f32d41d0992f81`  
 Scope: all 34 physical components, all 19 current PRT ADM2 contact features, including all 17 numeric-closure siblings.
+Actual PR base for current metrics: `d51c43e878c797d215ba5bd8285571fa14add443`. All 23 whole-file baseline input pins were checked against that commit and match byte-for-byte; source-vintage routing remains tied to the original issue baseline.
 
 This packet assesses source identity and candidate-scale polygon overlays. It changes no Atlas geometry, location assignment, source registry or release. No administrative, physical, water, ownership, cause or historical classification is approved.
 
