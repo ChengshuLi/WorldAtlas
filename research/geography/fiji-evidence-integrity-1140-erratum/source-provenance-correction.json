@@ -1,0 +1,142 @@
+{
+  "version": 1,
+  "issue": 1361,
+  "retrieved_at": "2026-10-07",
+  "baseline_commit": "af355b897c9e3607de610549cfffb890c8e43378",
+  "retained_source": {
+    "id": "FJI-ADM2-geoBoundaries-9469f09",
+    "upstream_repository": "https://github.com/wmgeolab/geoBoundaries",
+    "upstream_commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+    "path": "releaseData/gbOpen/FJI/ADM2/geoBoundaries-FJI-ADM2.geojson",
+    "upstream_git_blob_sha": "a55fc77ef79cfc65ea2bbaf1036d9832d57c5beb",
+    "upstream_lfs_oid_sha256": "a9cd94789cb5eb66cfbcbaf32a21bcbceba16b9a76adacba9ac675b950ca1ccd",
+    "payload_bytes": 1357011,
+    "atlas_retained_path": "data/regional-review/fiji-admin-source-reconciliation-20261005/sources/geoBoundaries-FJI-ADM2.geojson",
+    "atlas_retained_sha256": "a9cd94789cb5eb66cfbcbaf32a21bcbceba16b9a76adacba9ac675b950ca1ccd",
+    "retrieved_via": "GitHub connector fetch_file at the exact upstream commit; original bytes already lawfully retained in the #910 evidence packet",
+    "retrieved_on": "2026-10-07",
+    "license": "geoBoundaries metadata and citation/use text identify CC BY 4.0 and require attribution; underlying source page separately reports Creative Commons Attribution without a version",
+    "limits": [
+      "The pinned layer has 15 polygons and an exact 15-row identity/name crosswalk; this does not certify legal status, current edges or complete island coverage.",
+      "The upstream source label links a 2007 census boundary catalog while geoBoundaries metadata also assigns representative year 2020; no source transformation record resolves the interpretation."
+    ]
+  },
+  "release_metadata": {
+    "path": "releaseData/gbOpen/FJI/ADM2/geoBoundaries-FJI-ADM2-metaData.json",
+    "upstream_git_blob_sha": "8a798505b2cfd83546e8fcc9a59b5643be60987b",
+    "upstream_lfs_oid_sha256": "2a518d79ff779e3dddd3cfabd0357885c078e7226fdeceb0ddc3e10d47d31925",
+    "payload_bytes": 970,
+    "atlas_retained_sha256": "2a518d79ff779e3dddd3cfabd0357885c078e7226fdeceb0ddc3e10d47d31925",
+    "actual_fields": {
+      "boundaryYear": "2020",
+      "boundaryYearRepresented": "absent",
+      "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+      "buildDate": "Dec 12, 2023",
+      "boundaryCanonical": "Provinces",
+      "boundaryType": "ADM2",
+      "boundaryLicense": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+      "admUnitCount": "15",
+      "sha256": "absent"
+    },
+    "correction": "Do not report boundaryYear as null. The citation defines boundaryYear as representative year(s); boundaryYearRepresented is not a key in this pinned release record."
+  },
+  "current_api_metadata": {
+    "url": "https://www.geoboundaries.org/api/current/gbOpen/FJI/ADM2/",
+    "atlas_retained_path": "data/regional-review/fiji-admin-source-reconciliation-20261005/sources/geoBoundaries-api-current-FJI-ADM2.json",
+    "atlas_retained_sha256": "35e5eff798967d740490f28420d48a11ce7f764acc8470c4354b11a4e6272564",
+    "actual_fields": {
+      "boundaryYearRepresented": "2020",
+      "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+      "buildDate": "Dec 12, 2023",
+      "admUnitCount": "15",
+      "sha256": "absent"
+    },
+    "retrieved_at": "2026-10-06 (original retained response); re-read exact retained bytes on 2026-10-07"
+  },
+  "citation_file": {
+    "wrong_declared_path": "CITATION-AND-USE.txt",
+    "wrong_path_result": "HTTP 404 from GitHub Contents API at the exact commit on 2026-10-07",
+    "actual_path": "releaseData/gbOpen/FJI/ADM2/CITATION-AND-USE-geoBoundaries.txt",
+    "upstream_git_blob_sha": "ff1d1d9a4ab9c714a5a60eca051696f41446a086",
+    "upstream_lfs_oid_sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+    "payload_bytes": 4316,
+    "atlas_retained_path": "data/regional-review/fiji-admin-source-reconciliation-20261005/sources/CITATION-AND-USE-geoBoundaries.txt",
+    "atlas_retained_sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5",
+    "license_finding": "Citation requires geoBoundaries attribution, and says project data/code/derivatives are CC BY 4.0; it also directs users to cite underlying file sources."
+  },
+  "official_context": [
+    {
+      "id": "pacific-data-hub-2007-fiji-phc-boundaries",
+      "url": "https://pacificdata.org/data/dataset/2007_fji_phc_admin_boundaries",
+      "publisher": "Pacific Community, Statistics for Development Division",
+      "retrieved_at": "2026-10-07 via indexed source result; direct HTTP request returned 403",
+      "restoration": "Open the canonical dataset page and inspect its dataset description, date issued, disclaimer and Licence fields.",
+      "page_sha256": null,
+      "reuse": "Creative Commons Attribution; version unspecified on the catalog page",
+      "observations": [
+        "The dataset is titled 2007_Fiji_PHC_Admin_Boundaries, dated 01 Jan 2007, and described as boundaries used to conduct the Fiji 2007 Population and Housing Census.",
+        "It lists enumeration areas, tikina boundaries and province boundaries.",
+        "The catalog warns upper-level units may differ from official boundaries and that shown boundaries/codes/names do not imply SPC endorsement or acceptance."
+      ]
+    },
+    {
+      "id": "fiji-government-2025-cedaw-statement",
+      "url": "https://www.fiji.gov.fj/fijis-opening-statement-at-the-constructive-dialogue-for-the-6th-state-report-at-the-pacific-cedaw-technical-cooperation-session/",
+      "publisher": "Government of Fiji, Ministry for Women, Children and Social Protection",
+      "retrieved_at": "2026-10-07",
+      "restoration": "Open the canonical Government of Fiji statement and compare the first administrative-count paragraph with the later paragraph that includes Rotuma.",
+      "raw_response_sha256": "c2fa3850fe8befb51e05540a87ad70230422c9d1c998c3d6ff4d17f36f6145bf",
+      "retention": "restoration-only; page content not copied",
+      "observations": [
+        "The 2025 statement describes four divisions and fourteen provinces.",
+        "Later in that same statement it refers to fifteen provinces including Rotuma.",
+        "The two statements are not reconciled here; official government usage is internally inconsistent for this purpose."
+      ]
+    },
+    {
+      "id": "itaukei-affairs-board-province-list",
+      "url": "https://tab.gov.fj/",
+      "publisher": "iTaukei Affairs Board, Fiji",
+      "retrieved_at": "2026-10-07",
+      "restoration": "Open the iTaukei Affairs Board home page and inspect its province list and description of provincial council tiers.",
+      "raw_response_sha256": "7238be82d5692b61f388277872181d554af57dbde174d126df6d36977c0dc3ae",
+      "retention": "restoration-only; page content not copied",
+      "observations": [
+        "The indexed official board page lists Ba, Bua, Cakaudrove, Kadavu, Lau, Lomaiviti, Macuata, Nadroga-Navosa, Naitasiri, Namosi, Ra, Rewa, Serua and Tailevu as the fourteen provinces it serves.",
+        "It describes provincial councils and nested tikina, vanua, village and yavusa levels; it does not provide boundary geometry or a complete island inventory."
+      ]
+    },
+    {
+      "id": "fiji-bureau-statistics-census-page",
+      "url": "https://www.statsfiji.gov.fj/census-surveys/census-of-population-and-housing/",
+      "publisher": "Fiji Bureau of Statistics",
+      "retrieved_at": "2026-10-07",
+      "restoration": "Open the Fiji Bureau of Statistics census page and verify which Population and Housing Census it labels as the latest.",
+      "raw_response_sha256": "584107940b7d34b9412e01cc0887d4392af11fc32ed77c665083359173560396",
+      "retention": "restoration-only; page content not copied",
+      "observations": [
+        "The Bureau page identifies 2017 as the latest population and housing census.",
+        "A census reporting vintage is not a legal-boundary vintage or proof of current province edges."
+      ]
+    },
+    {
+      "id": "fiji-rotuma-act-1927",
+      "url": "https://laws.gov.fj/Acts/ViewSection/107886?query=ITC+Act+2012",
+      "publisher": "Office of the Attorney-General, Laws of Fiji",
+      "retrieved_at": "2026-10-07 via indexed source result and official text view",
+      "restoration": "Open the official Rotuma Act 1927 consolidated text; inspect its title, Part 3 and Council of Rotuma sections in the current official text view.",
+      "retention": "restoration-only",
+      "observations": [
+        "The official consolidated law titles the Rotuma Act 1927 as making special provision for the government of Rotuma and Rotumans and establishes a Council of Rotuma in Part 3.",
+        "The legal context does not by itself decide the Atlas parent/category or boundary interpretation."
+      ]
+    }
+  ],
+  "explicit_unresolved": [
+    "The geoBoundaries source-vintage meaning (2007 census source versus 2020 representative-year fields) and any transformation producing the 2023 release remain unresolved.",
+    "The source's 15 feature rows and 14 official province names plus Rotuma do not establish exact current legal geometry, island completeness, reefs/islets or current adjoining coverage.",
+    "The official 2025 Fiji Government statement, iTaukei Affairs Board province list and census use different/contradictory Rotuma wording; do not assert it is a current province or force a parent correction.",
+    "The old Atlas registry digest recipe is not recovered from the inspected metadata and raw-source bytes.",
+    "No source-content, boundary, legal or regional approval is claimed; this additive erratum repairs provenance and evidence-production claims only."
+  ]
+}

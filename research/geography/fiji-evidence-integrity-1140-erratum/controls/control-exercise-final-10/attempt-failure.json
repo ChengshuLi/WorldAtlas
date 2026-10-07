@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "run_id": "final-10",
+  "status": "incomplete-before-fixture-writes",
+  "cause": "The first preflight-receipt serialization attempted to relativize an intentionally out-of-scope traversal sentinel against the geography directory and raised ValueError.",
+  "observed_at": "2026-10-07",
+  "preservation": "The reserved namespace was empty when the failure occurred; this receipt records the attempt. No producer sentinel, fixture, or prior evidence was written or changed.",
+  "next_action": "Use fresh final-11 namespace after correcting relative-path recording; retain this failed namespace and receipt."
+}
