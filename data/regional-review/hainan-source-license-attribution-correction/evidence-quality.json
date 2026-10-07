@@ -1,0 +1,557 @@
+{
+  "version": 1,
+  "issue": 1291,
+  "lane": "geography",
+  "worker_id": "01a10947-b3d7-7812-8b2f-c5a47e88ccb2",
+  "subject_ids": [
+    "gb:CHN:ADM2:17275852B2295538790743",
+    "gb:CHN:ADM2:17275852B38709981190197",
+    "gb:CHN:ADM2:17275852B38939963469829",
+    "gb:CHN:ADM2:17275852B41190306193582",
+    "gb:CHN:ADM2:17275852B42599245130625",
+    "gb:CHN:ADM2:17275852B50589627480209",
+    "gb:CHN:ADM2:17275852B53008264931106",
+    "gb:CHN:ADM2:17275852B70320302334749",
+    "gb:CHN:ADM2:17275852B72819681774342",
+    "gb:CHN:ADM2:17275852B7979903099841",
+    "gb:CHN:ADM2:17275852B80309702523612",
+    "gb:CHN:ADM2:17275852B82960244806798",
+    "gb:CHN:ADM2:17275852B85583949591367",
+    "gb:CHN:ADM2:17275852B86431238150342",
+    "gb:CHN:ADM2:17275852B87782309196497",
+    "gb:CHN:ADM2:17275852B88042861362346",
+    "gb:CHN:ADM2:17275852B93743910489906",
+    "gb:CHN:ADM2:17275852B98891327369808"
+  ],
+  "subject_ids_sha256": "e9f54d318be85e24e06e1eab2576ebf1f61e9f070c53d4315107e98d03b34df5",
+  "baseline": {
+    "commit": "a762119a4926c927617dc2f85471b3b822cadc58",
+    "files": [
+      {
+        "path": "data/regional-review/regional-review-hainan-source-408/README.md",
+        "bytes": 10584,
+        "sha256": "026d9b3a71a31f29cb866e32a09a5f0db0e8ecffcb4416edf6b5d01a9a6d83d2",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-hainan-source-408/findings/hainan-18-crosswalk.csv",
+        "bytes": 28037,
+        "sha256": "4c33b8f40263625a04f4a305356c668c8817a5af62c4781ad6d0725bfe4ea9e7",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-hainan-source-408/reproduce_hainan.py",
+        "bytes": 14364,
+        "sha256": "11d423b339d5af27405f4881ba8b21ad7146fe2e7d7f6b38bd289a9bb1bf0316",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-hainan-source-408/evidence-quality.json",
+        "bytes": 20190,
+        "sha256": "f271f8ed0759425a565eda07bd7bf55a1326cbdf41c71df2e20ce59556f1094a",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-365cbd6478904888/source/geoBoundaries-CHN-ADM2-metaData.json",
+        "bytes": 1101,
+        "sha256": "7f609da61c856d022a9bf83b35fb271d78ebb5855ad2c1cdff337e51acdec58a",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-365cbd6478904888/source/geoBoundaries-CHN-ADM2.geojson",
+        "bytes": 7618692,
+        "sha256": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/geography/part-4.json",
+        "bytes": 4835479,
+        "sha256": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      }
+    ],
+    "pins": {
+      "baseline:data/regional-review/regional-review-hainan-source-408/README.md": "026d9b3a71a31f29cb866e32a09a5f0db0e8ecffcb4416edf6b5d01a9a6d83d2",
+      "baseline:data/regional-review/regional-review-hainan-source-408/findings/hainan-18-crosswalk.csv": "4c33b8f40263625a04f4a305356c668c8817a5af62c4781ad6d0725bfe4ea9e7",
+      "baseline:data/regional-review/regional-review-hainan-source-408/reproduce_hainan.py": "11d423b339d5af27405f4881ba8b21ad7146fe2e7d7f6b38bd289a9bb1bf0316",
+      "baseline:data/regional-review/regional-review-hainan-source-408/evidence-quality.json": "f271f8ed0759425a565eda07bd7bf55a1326cbdf41c71df2e20ce59556f1094a",
+      "baseline:data/regional-review/regional-review-365cbd6478904888/source/geoBoundaries-CHN-ADM2-metaData.json": "7f609da61c856d022a9bf83b35fb271d78ebb5855ad2c1cdff337e51acdec58a",
+      "source:geoboundaries-2017-geometry": "2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34",
+      "source:atlas-subject-part-4": "e204a879e160f8b22ccfff698e8063a79d91cdba5ef7aa87df94661323b0bd3c"
+    },
+    "pin_files": {
+      "baseline:data/regional-review/regional-review-hainan-source-408/README.md": "data/regional-review/regional-review-hainan-source-408/README.md",
+      "baseline:data/regional-review/regional-review-hainan-source-408/findings/hainan-18-crosswalk.csv": "data/regional-review/regional-review-hainan-source-408/findings/hainan-18-crosswalk.csv",
+      "baseline:data/regional-review/regional-review-hainan-source-408/reproduce_hainan.py": "data/regional-review/regional-review-hainan-source-408/reproduce_hainan.py",
+      "baseline:data/regional-review/regional-review-hainan-source-408/evidence-quality.json": "data/regional-review/regional-review-hainan-source-408/evidence-quality.json",
+      "baseline:data/regional-review/regional-review-365cbd6478904888/source/geoBoundaries-CHN-ADM2-metaData.json": "data/regional-review/regional-review-365cbd6478904888/source/geoBoundaries-CHN-ADM2-metaData.json",
+      "source:geoboundaries-2017-geometry": "data/regional-review/regional-review-365cbd6478904888/source/geoBoundaries-CHN-ADM2.geojson",
+      "source:atlas-subject-part-4": "data/geography/part-4.json"
+    },
+    "subject_files": {
+      "gb:CHN:ADM2:17275852B2295538790743": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B38709981190197": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B38939963469829": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B41190306193582": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B42599245130625": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B50589627480209": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B53008264931106": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B70320302334749": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B72819681774342": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B7979903099841": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B80309702523612": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B82960244806798": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B85583949591367": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B86431238150342": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B87782309196497": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B88042861362346": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B93743910489906": "data/geography/part-4.json",
+      "gb:CHN:ADM2:17275852B98891327369808": "data/geography/part-4.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "geoboundaries-chn-adm2-metadata-2017",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/CHN/ADM2/geoBoundaries-CHN-ADM2-metaData.json",
+      "role": "Separate geoBoundaries metadata companion; supports exact attribution of its boundaryLicense field, not the separate GeoJSON legal rights.",
+      "vintage": "2017 reference boundary; metadata built 2023-12-12; source update field 2023-01-19",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "The metadata field declares PDDL 1.0; no legal rights, source chain, or permission to redistribute the separate geometry is inferred. The metadata licenseDetail/licenseSource locators are malformed."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Resolve geoBoundaries repository commit 9469f09592ced973a3448cf66b6100b741b64c0d and restore releaseData/gbOpen/CHN/ADM2/geoBoundaries-CHN-ADM2-metaData.json from its LFS object; require SHA-256 7f609da61c856d022a9bf83b35fb271d78ebb5855ad2c1cdff337e51acdec58a and 1,101 bytes. The exact retained file is also pinned at #1071 merge under data/regional-review/regional-review-365cbd6478904888/source/geoBoundaries-CHN-ADM2-metaData.json.",
+      "limit": "Verifies the source metadata field and its LFS object identity only; original source licensing chain, legal validity, and reuse permission remain unknown.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2017,
+        "to": 2018
+      }
+    },
+    {
+      "id": "geoboundaries-2017-chn-adm2-geometry",
+      "url": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/CHN/ADM2/geoBoundaries-CHN-ADM2.geojson",
+      "role": "Historical 2017 reference geometry used only to verify the exact native source subject identities and absence of a GeoJSON license field.",
+      "vintage": "2017 reference; upstream release commit 2023-12-13",
+      "retrieved_at": "2026-10-05",
+      "license": {
+        "status": "unknown",
+        "terms": "The separate metadata companion states PDDL 1.0, but its upstream rights chain is not independently cleared; no new copy is redistributed."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Use exact Git LFS object at https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/CHN/ADM2/geoBoundaries-CHN-ADM2.geojson; require SHA-256 2b68d8a808742fc6d7acd769584db960d8fc2c25b9f1d20e3e98c72e9f1c4d34 and 7618692 bytes. The retained baseline copy is data/regional-review/regional-review-365cbd6478904888/source/geoBoundaries-CHN-ADM2.geojson at #1071 merge.",
+      "limit": "Byte identity and feature structure are verified; upstream rights/provenance, current legal boundaries, source completeness, and current roles are not.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2017,
+        "to": 2018
+      }
+    },
+    {
+      "id": "issue-1291-scope",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1291",
+      "role": "Authoritative issue contract for the exact 18 source-attribution subjects and bounded acceptance criteria.",
+      "vintage": "Issue raised/recorded Raised/recorded 2026-10-06 (America/Los_Angeles). Post-merge audit follow-up for #1071, immutable merge `a762119a4926c927617dc2f85471b3b822cadc58` (head `b7e6be8dfbac60ab6a73f568a423e90f04839bae`). Original initial research #1053 remains closed; this is a distinct source-attribution erratum, not current-boundary research or the five-unit engineering correction #1224.",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "No data reuse license is inferred from a GitHub issue; the exact contract and body hash are retained in this packet."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Restore the issue body from https://github.com/ChengshuLi/WorldAtlas/issues/1291 and compare body_sha256 b30cab346de8cbc74b9d02fd2b4ce723cd717904773651da27974b6f599d76da in issue-scope-snapshot.json.",
+      "limit": "The issue authorizes only correction of the retained source metadata attribution for 18 IDs; it establishes no territorial, boundary, license-clearance, or regional approval.",
+      "temporal_status": "unknown"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/RESEARCH.md",
+      "bytes": 5762,
+      "sha256": "4d7098501dcd7fd9b9d25e1b6fb5b12c7c5d3bb1df427f2dd6dbaeb49a75aade",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/build-evidence-manifest.py",
+      "bytes": 15080,
+      "sha256": "cbd2c7e817a07ccd252a1e2e59e60a90f04e8a71b83a51e7cf58a7c83bfdfd3a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/claim-receipt.json",
+      "bytes": 959,
+      "sha256": "cabf26e8207953cfc78c5945277aba5bd096d260f429ab2fac7c444c401edc1c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/controls/2026-10-07/missing-boundaryLicense-metadata.json",
+      "bytes": 1057,
+      "sha256": "0fb75dbdc112add62bebd367144ef48db05c18de920c6a4cd8eb7bf139b8ba3c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/controls/2026-10-07/negative-control.json",
+      "bytes": 1354,
+      "sha256": "4f207caf98f7412692c84cbad853d74ef4ec6fceba048156c0759a4f164e0be3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/controls/2026-10-07/odbl-substitution-metadata.json",
+      "bytes": 1133,
+      "sha256": "45043a06edd22d7e03bb9c8f7e7e478b3ca7d2a6159a148ffface880b92f4219",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/controls/2026-10-07/positive-control.json",
+      "bytes": 642,
+      "sha256": "80e6fcf96bfbd3ee205455ccb616ce44aef63f8c2c9cd77da8b85031619c7fd4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/controls/2026-10-07/reproducibility-results.json",
+      "bytes": 1369,
+      "sha256": "dd61ea701c9e0c4924795892f5ca954e08bec90a9e975e281af68058d31fc0a9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/issue-scope-snapshot.json",
+      "bytes": 6681,
+      "sha256": "0754b6c812a176edb67c6cdad8e609da662399efffa513c79ea92141299ec96a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/reproduce_attribution.py",
+      "bytes": 10763,
+      "sha256": "f68edb7277618a7000d0205a68562a2d53c889e4f6dd221d422a01f1f20d34bc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/run_controls.py",
+      "bytes": 5131,
+      "sha256": "6af4cff567ab55fbefa718a332434ae080d99cd96f200a6fd347b38aff44d696",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/runs/2026-10-07/run-1/correction-ledger.json",
+      "bytes": 11003,
+      "sha256": "25bc016735fe4ed69b0fc1928f00b9b609d7efeb3fec13313abf97c110e6133d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/runs/2026-10-07/run-1/hainan-18-crosswalk.csv",
+      "bytes": 30701,
+      "sha256": "30e17d8236d296c2ed422695dbcb31e68dae367f3961a57a342e8143785c16ee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/runs/2026-10-07/run-2/correction-ledger.json",
+      "bytes": 11003,
+      "sha256": "25bc016735fe4ed69b0fc1928f00b9b609d7efeb3fec13313abf97c110e6133d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/runs/2026-10-07/run-2/hainan-18-crosswalk.csv",
+      "bytes": 30701,
+      "sha256": "30e17d8236d296c2ed422695dbcb31e68dae367f3961a57a342e8143785c16ee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/upstream-metadata-api-check.json",
+      "bytes": 1939,
+      "sha256": "df14c082f43401d52967c393d9374a364d84345af1f2e9519cbb18dae7aa1bc9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/validation/negative-control.json",
+      "bytes": 243,
+      "sha256": "79c49191bfe32b6f1a066bb4443c2d2b17dd7c15d554c4a1c0fed7042bcce4df",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/validation/positive-control.json",
+      "bytes": 243,
+      "sha256": "1a69fa1ebe759cd79897ed1788f82561f79caa9aa87b3b7a2c96d6db27a42d1c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/validation/reproducibility.json",
+      "bytes": 425,
+      "sha256": "e903feb56cc9549daf8ad9e25543d87105f5c9a1cdfafbf506302346b467d1f7",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "hainan-metadata-attribution-correction",
+      "kind": "generator",
+      "helper_version": "worldatlas-evidence-preparation-v1",
+      "description": "Read the exact immutable #1071 source metadata, GeoJSON, original 18-row CSV and issue scope; replace only the unsupported license_reuse wording with a precise attribution to the separate metadata field while preserving all other cells.",
+      "software": "Python 3 standard library csv/json/hashlib; Git; issue-owned reproduce_attribution.py",
+      "units": "18 frozen source IDs, metadata license field, CSV cells and whole-file SHA-256 bytes"
+    },
+    {
+      "id": "upstream-lfs-object-attribution",
+      "kind": "source",
+      "description": "Resolve the exact upstream geoBoundaries GitHub commit and LFS pointers; compare the LFS object SHA-256 values with retained metadata and geometry bytes, and inspect the exact metadata and GeoJSON fields.",
+      "software": "GitHub REST API via gh; Python 3 standard library; Git immutable blobs",
+      "units": "upstream commit, two LFS pointer objects, source field values, and exact stored feature IDs"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "frozen-subject-count",
+      "value": 18,
+      "unit": "subjects",
+      "vintage": "baseline",
+      "input_sha256": "4c33b8f40263625a04f4a305356c668c8817a5af62c4781ad6d0725bfe4ea9e7",
+      "evaluation_commit": "a762119a4926c927617dc2f85471b3b822cadc58"
+    },
+    {
+      "id": "corrected-license-field-count",
+      "value": 18,
+      "unit": "rows",
+      "vintage": "baseline",
+      "input_sha256": "7f609da61c856d022a9bf83b35fb271d78ebb5855ad2c1cdff337e51acdec58a",
+      "evaluation_commit": "a762119a4926c927617dc2f85471b3b822cadc58"
+    },
+    {
+      "id": "preserved-nonlicense-field-count",
+      "value": 342,
+      "unit": "fields",
+      "vintage": "baseline",
+      "input_sha256": "4c33b8f40263625a04f4a305356c668c8817a5af62c4781ad6d0725bfe4ea9e7",
+      "evaluation_commit": "a762119a4926c927617dc2f85471b3b822cadc58"
+    },
+    {
+      "id": "justified-disposition-count",
+      "value": 12,
+      "unit": "rows",
+      "vintage": "baseline",
+      "input_sha256": "4c33b8f40263625a04f4a305356c668c8817a5af62c4781ad6d0725bfe4ea9e7",
+      "evaluation_commit": "a762119a4926c927617dc2f85471b3b822cadc58"
+    },
+    {
+      "id": "correction-needed-disposition-count",
+      "value": 3,
+      "unit": "rows",
+      "vintage": "baseline",
+      "input_sha256": "4c33b8f40263625a04f4a305356c668c8817a5af62c4781ad6d0725bfe4ea9e7",
+      "evaluation_commit": "a762119a4926c927617dc2f85471b3b822cadc58"
+    },
+    {
+      "id": "insufficient-evidence-disposition-count",
+      "value": 3,
+      "unit": "rows",
+      "vintage": "baseline",
+      "input_sha256": "4c33b8f40263625a04f4a305356c668c8817a5af62c4781ad6d0725bfe4ea9e7",
+      "evaluation_commit": "a762119a4926c927617dc2f85471b3b822cadc58"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "frozen-subject-count",
+      "value": 18,
+      "unit": "subjects"
+    },
+    {
+      "metric_id": "corrected-license-field-count",
+      "value": 18,
+      "unit": "rows"
+    },
+    {
+      "metric_id": "preserved-nonlicense-field-count",
+      "value": 342,
+      "unit": "fields"
+    },
+    {
+      "metric_id": "justified-disposition-count",
+      "value": 12,
+      "unit": "rows"
+    },
+    {
+      "metric_id": "correction-needed-disposition-count",
+      "value": 3,
+      "unit": "rows"
+    },
+    {
+      "metric_id": "insufficient-evidence-disposition-count",
+      "value": 3,
+      "unit": "rows"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "frozen-subject-count",
+      "path": "data/regional-review/hainan-source-license-attribution-correction/runs/2026-10-07/run-1/correction-ledger.json",
+      "json_pointer": "/subject_count"
+    },
+    {
+      "metric_id": "corrected-license-field-count",
+      "path": "data/regional-review/hainan-source-license-attribution-correction/runs/2026-10-07/run-1/correction-ledger.json",
+      "json_pointer": "/corrected_license_fields"
+    },
+    {
+      "metric_id": "preserved-nonlicense-field-count",
+      "path": "data/regional-review/hainan-source-license-attribution-correction/runs/2026-10-07/run-1/correction-ledger.json",
+      "json_pointer": "/preserved_nonlicense_fields"
+    },
+    {
+      "metric_id": "justified-disposition-count",
+      "path": "data/regional-review/hainan-source-license-attribution-correction/runs/2026-10-07/run-1/correction-ledger.json",
+      "json_pointer": "/preserved_assessment_counts/justified"
+    },
+    {
+      "metric_id": "correction-needed-disposition-count",
+      "path": "data/regional-review/hainan-source-license-attribution-correction/runs/2026-10-07/run-1/correction-ledger.json",
+      "json_pointer": "/preserved_assessment_counts/correction-needed"
+    },
+    {
+      "metric_id": "insufficient-evidence-disposition-count",
+      "path": "data/regional-review/hainan-source-license-attribution-correction/runs/2026-10-07/run-1/correction-ledger.json",
+      "json_pointer": "/preserved_assessment_counts/insufficient-evidence"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "hainan-metadata-attribution-correction",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/hainan-source-license-attribution-correction/validation/positive-control.json"
+    },
+    {
+      "method_id": "hainan-metadata-attribution-correction",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/hainan-source-license-attribution-correction/validation/negative-control.json"
+    },
+    {
+      "method_id": "hainan-metadata-attribution-correction",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/hainan-source-license-attribution-correction/validation/reproducibility.json"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "The separate geoBoundaries metadata companion at the pinned upstream commit states boundaryLicense PDDL 1.0; the original ODbL/embedded-metadata attribution is not faithful to the retained source record.",
+      "status": "supported",
+      "source_ids": [
+        "geoboundaries-chn-adm2-metadata-2017",
+        "geoboundaries-2017-chn-adm2-geometry"
+      ]
+    },
+    {
+      "text": "The metadata field and upstream LFS object identity do not resolve the original source provenance, legal validity, or reuse rights. Current official boundaries, island/coastal completeness, and territorial roles remain unresolved.",
+      "status": "unresolved",
+      "source_ids": [
+        "geoboundaries-chn-adm2-metadata-2017",
+        "geoboundaries-2017-chn-adm2-geometry",
+        "issue-1291-scope"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "Run node scripts/local-workspace.mjs check before reproduction.",
+    "Run python3 data/regional-review/hainan-source-license-attribution-correction/reproduce_attribution.py --output-dir data/regional-review/hainan-source-license-attribution-correction/runs/2026-10-07/run-1 and repeat with run-2.",
+    "Run python3 data/regional-review/hainan-source-license-attribution-correction/run_controls.py.",
+    "Run node scripts/evidence-quality.mjs data/regional-review/hainan-source-license-attribution-correction/evidence-quality.json.",
+    "Run scripts/check-handoff-scope.mjs with current GitHub issue 1291, PR body and the exact branch before submitting."
+  ],
+  "change_receipts": [
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/RESEARCH.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/build-evidence-manifest.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/claim-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/controls/2026-10-07/missing-boundaryLicense-metadata.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/controls/2026-10-07/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/controls/2026-10-07/odbl-substitution-metadata.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/controls/2026-10-07/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/controls/2026-10-07/reproducibility-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/issue-scope-snapshot.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/reproduce_attribution.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/run_controls.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/runs/2026-10-07/run-1/correction-ledger.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/runs/2026-10-07/run-1/hainan-18-crosswalk.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/runs/2026-10-07/run-2/correction-ledger.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/runs/2026-10-07/run-2/hainan-18-crosswalk.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/upstream-metadata-api-check.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/validation/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/validation/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/validation/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/hainan-source-license-attribution-correction/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}

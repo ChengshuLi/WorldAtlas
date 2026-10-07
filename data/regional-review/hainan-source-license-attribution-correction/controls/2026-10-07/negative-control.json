@@ -1,0 +1,24 @@
+{
+  "method_id": "hainan-metadata-attribution-correction",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "cases": [
+    {
+      "id": "odbl-substitution",
+      "fixture_path": "data/regional-review/hainan-source-license-attribution-correction/controls/2026-10-07/odbl-substitution-metadata.json",
+      "fixture_sha256": "45043a06edd22d7e03bb9c8f7e7e478b3ca7d2a6159a148ffface880b92f4219",
+      "expected_license": "Open Data Commons Public Domain Dedication and License (PDDL) v1.0",
+      "outcome": "rejected-before-output",
+      "diagnostic": "Separate metadata boundaryLicense does not exactly match pinned PDDL 1.0 declaration"
+    },
+    {
+      "id": "missing-boundaryLicense",
+      "fixture_path": "data/regional-review/hainan-source-license-attribution-correction/controls/2026-10-07/missing-boundaryLicense-metadata.json",
+      "fixture_sha256": "0fb75dbdc112add62bebd367144ef48db05c18de920c6a4cd8eb7bf139b8ba3c",
+      "expected_license": "Open Data Commons Public Domain Dedication and License (PDDL) v1.0",
+      "outcome": "rejected-before-output",
+      "diagnostic": "Separate metadata boundaryLicense does not exactly match pinned PDDL 1.0 declaration"
+    }
+  ],
+  "interpretation": "The generator rejects the unsupported ODbL substitution and a missing metadata license field before it can produce a corrected ledger."
+}

@@ -1,0 +1,25 @@
+{
+  "method_id": "hainan-metadata-attribution-correction",
+  "kind": "reproducibility",
+  "outcome": "passed",
+  "run_one": {
+    "path:hainan-18-crosswalk.csv": "data/regional-review/hainan-source-license-attribution-correction/runs/2026-10-07/run-1/hainan-18-crosswalk.csv",
+    "path:correction-ledger.json": "data/regional-review/hainan-source-license-attribution-correction/runs/2026-10-07/run-1/correction-ledger.json"
+  },
+  "run_two": {
+    "path:hainan-18-crosswalk.csv": "data/regional-review/hainan-source-license-attribution-correction/runs/2026-10-07/run-2/hainan-18-crosswalk.csv",
+    "path:correction-ledger.json": "data/regional-review/hainan-source-license-attribution-correction/runs/2026-10-07/run-2/correction-ledger.json"
+  },
+  "run_one_sha256": "3aa811ca757ff1da747ce56534c1844bbd508e3ded58e197b55db467835ec262",
+  "run_two_sha256": "3aa811ca757ff1da747ce56534c1844bbd508e3ded58e197b55db467835ec262",
+  "files": [
+    {
+      "hainan-18-crosswalk.csv": "30e17d8236d296c2ed422695dbcb31e68dae367f3961a57a342e8143785c16ee",
+      "correction-ledger.json": "25bc016735fe4ed69b0fc1928f00b9b609d7efeb3fec13313abf97c110e6133d"
+    },
+    {
+      "hainan-18-crosswalk.csv": "30e17d8236d296c2ed422695dbcb31e68dae367f3961a57a342e8143785c16ee",
+      "correction-ledger.json": "25bc016735fe4ed69b0fc1928f00b9b609d7efeb3fec13313abf97c110e6133d"
+    }
+  ]
+}
