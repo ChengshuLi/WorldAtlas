@@ -1,6 +1,6 @@
 {
   "baseline": {
-    "commit": "83bed8c4c49e8f54077bb4abf0f32d41d0992f81",
+    "commit": "24272235650c50528304e8146fb80a5b0c515800",
     "files": [
       {
         "bytes": 962830,
@@ -135,6 +135,12 @@
         "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03"
       },
       {
+        "bytes": 15247,
+        "hash_kind": "file-bytes",
+        "path": "scripts/evidence-quality.mjs",
+        "sha256": "eb211fcce90c7f973e5e555e1fde60270ea0a2947c499852fdb8fa7d1cf87e52"
+      },
+      {
         "bytes": 3445,
         "hash_kind": "file-bytes",
         "path": "scripts/evidence/contracts.py",
@@ -145,6 +151,12 @@
         "hash_kind": "file-bytes",
         "path": "scripts/evidence/immutable.py",
         "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46"
+      },
+      {
+        "bytes": 21033,
+        "hash_kind": "file-bytes",
+        "path": "scripts/premerge-evidence.mjs",
+        "sha256": "bc318dc1de2b58425b0933462334d5c0f10cfad209a7d9f01d9e7703aaf29971"
       }
     ],
     "pin_files": {
@@ -1224,18 +1236,18 @@
   ],
   "outputs": [
     {
-      "bytes": 10946,
+      "bytes": 12077,
       "hash_kind": "file-bytes",
       "path": "research/geography/indonesia-borneo-source-fitness-20261007/findings.md",
       "role": "evidence",
-      "sha256": "45514b245533a0be2e147e4b4202d62b0772114f3e0f9ab881cfd56f74669c5f"
+      "sha256": "d319488b3c70c4bd2f8ca4690a8006ee0014302a4690273ce8412d20441d84b9"
     },
     {
-      "bytes": 4136,
+      "bytes": 4527,
       "hash_kind": "file-bytes",
       "path": "research/geography/indonesia-borneo-source-fitness-20261007/sources/v1/README.md",
       "role": "evidence",
-      "sha256": "8a26c3f012d918b1c864ff9ece8c94c5980bdd4ed31c1be415d6ef2983fe4774"
+      "sha256": "5999b9799b227bc9374fe3cf2dc94aa11509f5c2ee764a4e6b7a2059a41ea325"
     },
     {
       "bytes": 2535,
@@ -2498,7 +2510,7 @@
       "retrieved_at": "2026-10-07; retained extraction receipt records byte pins and date precision.",
       "role": "Pinned scope and inherited source-relative diagnostics for one complete route family.",
       "temporal_status": "unknown",
-      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/6e14f5b7f451efe59938e1bcad1d95d7dabd19bb/coordination/engineering/global-actionability-routing-20261007/results/report.json",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/8fdbdf3dde533ff5b37ce0e55b40729b1248b41a/coordination/engineering/global-actionability-routing-20261007/results/report.json",
       "verification": "unverified",
       "vintage": "Frozen route report and selected family row from the issue-pinned baseline."
     },
@@ -2514,7 +2526,7 @@
       "retrieved_at": "2026-10-07; immutable Git baseline read.",
       "role": "Exact original component geometry and identity reference for the 45 selected subjects.",
       "temporal_status": "unknown",
-      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/6e14f5b7f451efe59938e1bcad1d95d7dabd19bb/coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/8fdbdf3dde533ff5b37ce0e55b40729b1248b41a/coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1",
       "verification": "unverified",
       "vintage": "Pinned custody-v3 components-v3 shards at the immutable baseline."
     },
@@ -2530,7 +2542,7 @@
       "retrieved_at": "2026-10-07; immutable Git baseline read.",
       "role": "Eight current Atlas admin polygons used solely as contact surfaces for exact boundary topology checks.",
       "temporal_status": "unknown",
-      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/6e14f5b7f451efe59938e1bcad1d95d7dabd19bb/data/geography/part-10.json",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/8fdbdf3dde533ff5b37ce0e55b40729b1248b41a/data/geography/part-10.json",
       "verification": "unverified",
       "vintage": "Pinned data/geography/part-10.json at the immutable baseline."
     },
