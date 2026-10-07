@@ -1,0 +1,20 @@
+{
+  "method_id": "frozen-scope-gate",
+  "kind": "code",
+  "outcome": "passed",
+  "checks": [
+    {
+      "control": "original-valid",
+      "expected": "pass",
+      "actual": {
+        "status": "passed",
+        "raw_subject_count": 23,
+        "unique_subject_count": 23,
+        "location_rows": 23,
+        "parent_rows": 23,
+        "area_rows": 10,
+        "scope_sha256": "122274d0c0e4e13a29167e2f1bf2cd4c9eaef04a2fc97e0c05762a3471657383"
+      }
+    }
+  ]
+}

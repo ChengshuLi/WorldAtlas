@@ -1,0 +1,1233 @@
+{
+  "version": 1,
+  "issue": 1281,
+  "lane": "geography",
+  "worker_id": "01a10947-7d6e-7ba2-98a1-a9f91dedabfc",
+  "subject_ids": [
+    "COK-4950",
+    "COK-4951",
+    "COK-4952",
+    "COK-4953",
+    "COK-4954",
+    "COK-4955",
+    "COK-4956",
+    "COK-4959",
+    "COK-4960",
+    "COK-4961",
+    "COK-4962",
+    "PCN+00?",
+    "PYF-4963",
+    "PYF-4964",
+    "PYF-4965",
+    "PYF-4966",
+    "PYF-4967",
+    "UMI-5171",
+    "UMI-5172",
+    "UMI-5173",
+    "UMI-5178",
+    "gb:CHL:ADM3:31580391B33082267781919",
+    "gb:KIR:ADM1:97431129B35506555718846"
+  ],
+  "subject_ids_sha256": "fc460f08f213d6474d17d6ef54194b9cca23269cd7a3bbf95ba78e29dd8fde47",
+  "baseline": {
+    "commit": "249e396178cfc160fd547ec4487c5d94832fc9af",
+    "files": [
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "data/geography/part-13.json",
+        "bytes": 5709487,
+        "sha256": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1",
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "data/geography/part-2.json",
+        "bytes": 6259307,
+        "sha256": "93eeb8f5dab7d8ca6c86593f7ab7b1310312757abcef33d4e7200a270624a1bf",
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "data/geography/part-28.json",
+        "bytes": 6613963,
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "data/hierarchy.json",
+        "bytes": 10164089,
+        "sha256": "568301690ef231a85856666b57876a5efe8d8c7c6e671a56d81307b2dc28b80b",
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "data/location-policy.json",
+        "bytes": 69433,
+        "sha256": "efab4528fd4b7b180815ef82de93480f490ef8fa48ad9ef32d1f9d76a64b7fb9",
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "data/macro-foundation/approved-boundary-decisions.json",
+        "bytes": 634171,
+        "sha256": "b67d5a3bcf8101cffb089c0262286378a80bb642cd6dde33f7721419227e3f18",
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "data/macro-foundation/current-membership-inventory.json.gz",
+        "bytes": 2404397,
+        "sha256": "db58f274debe5917f7fa21fdd2ab563f4761cfb673bd814b6402708fa10b06ab",
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "data/macro-foundation/macro-certificate.json",
+        "bytes": 38959,
+        "sha256": "f50f70fcb0756712ab7a7a388bc8cada093080518f07d3a6f7329758980ea81b",
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "data/macro-foundation/regional-handoffs.json.gz",
+        "bytes": 71286,
+        "sha256": "29af5204c1f28d2616d7d8d8bb18e5d718c8c1e6dab3637868b03a2381b5db2a",
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/README.md",
+        "bytes": 11109,
+        "sha256": "a3fd1559ad0c9dee34556959502419a06b7e06be05ef9fe19dddc0f3e3737767",
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/area-assessments.csv",
+        "bytes": 5164,
+        "sha256": "dc08e6a656e420ef00c6d07ffd10b26474c40252bb06fc81c4c7044bdaa10707",
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/baseline-inputs.json",
+        "bytes": 3595,
+        "sha256": "8b5cbc7591b46a997122b1d3430b32a316bff1cb76528734c8f33fb8b8f46d28",
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/geocode-screen.json",
+        "bytes": 879,
+        "sha256": "3f1a540ea0898df35ffba733dda8af81cf1287ebbfa5169d9dfd251b6166c4e9",
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/geometry-comparison.json",
+        "bytes": 26550,
+        "sha256": "e6e9b208e6f3ccbe5c2dfcd78cb2852cd341e32c92ea2546b70454e6299812d0",
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/geometry-controls.json",
+        "bytes": 1052,
+        "sha256": "c686d154be67e2463b28e5828a5d75db446f834213904ed159dfcd42de360bce",
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/location-assessments.csv",
+        "bytes": 31799,
+        "sha256": "64c92cc0aa411dc58b377c65f47c63dca8b148b08c3872c2a9f59bf793baae57",
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/province-assessments.csv",
+        "bytes": 13903,
+        "sha256": "efb24d9f2ec259812ff010c162fba0bffb610a89941a20ca590f1e3c325e8a0e",
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/references.md",
+        "bytes": 9529,
+        "sha256": "11675afde0bcd41d9cee6471f4b46003a2ddd679192676412563ed9a35833146",
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/requirements-review.txt",
+        "bytes": 42,
+        "sha256": "92e239e7cd3fb560aa8d4d96ea5a5739162d15a117dbec47cca4b4efad3312ab",
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/scope.json",
+        "bytes": 11746,
+        "sha256": "122274d0c0e4e13a29167e2f1bf2cd4c9eaef04a2fc97e0c05762a3471657383",
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/source-policy-review.csv",
+        "bytes": 3950,
+        "sha256": "db333fde096e36177f8d2e9b7cf30f4bada5c65b80fb5d251cf82dd3cfe0eb12",
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/source/chile-followup-1052-api-snapshot.json",
+        "bytes": 9135,
+        "sha256": "15981340aec150c359975325f4315eb1e569e0e93b7ff93ce29770ab434f385b",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/source/claim-receipt.json",
+        "bytes": 950,
+        "sha256": "c31a5d27e2e7fba90f1a2e72824f76ac3e9da4e8cb12bd5b9df385e460d71059",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/source/followup-issue-1058-api-snapshot.json",
+        "bytes": 7473,
+        "sha256": "abbc5625a971946344117d9eeacf52271d3653a8c0873601dcba4b9ced4bb9f8",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/source/followup-issue-1059-api-snapshot.json",
+        "bytes": 7129,
+        "sha256": "0f0d7c49adc2af47d6269c1e4977d692e0772c2216c223aa0d08d9b36ff23099",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/source/followup-issue-1060-api-snapshot.json",
+        "bytes": 6625,
+        "sha256": "6e0be04b627127ae68c4cc1f59d022646f524058489504367ef49e939b277614",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/source/followup-issue-1061-api-snapshot.json",
+        "bytes": 7130,
+        "sha256": "7eac102d32bea7fda7b8b130093f10514e9973cb86077cd6e68f71b2a19b9793",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/source/geoboundaries/CHL/geoBoundaries-CHL-ADM3-Isla-de-Pascua-feature.json",
+        "bytes": 816165,
+        "sha256": "fb0ea671f05a6334ec7a867ca5cb46fcedb63c5b3cc25a39115f5879c73986cb",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/source/geoboundaries/CHL/geoBoundaries-CHL-ADM3-metaData.json",
+        "bytes": 983,
+        "sha256": "658356bb413f8b284b260360d1309527781e1b0c46027e1ae0a4c58da1c99409",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/source/geoboundaries/CHL/geoBoundaries-CHL-ADM3.lfs-pointer",
+        "bytes": 134,
+        "sha256": "ef3f8c417d9b67799682610a43040c111ccf0dd3daf30d4e51776cf65d5a764a",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/source/geoboundaries/KIR/geoBoundaries-KIR-ADM1-metaData.json",
+        "bytes": 852,
+        "sha256": "e611d682fb3eb7e64176ac9753942321819a847443c1d3c87f8885e1b981211c",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/source/geoboundaries/KIR/geoBoundaries-KIR-ADM1.geojson",
+        "bytes": 805741,
+        "sha256": "93a0914dc2572951a72cae1aef5145bc056180d75b96812c770bff06e8d8e86f",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/source/geoboundaries/KIR/geoBoundaries-KIR-ADM1.lfs-pointer",
+        "bytes": 131,
+        "sha256": "5fbe7a3ecf52ddf891fa2fa69d8b5043a93873176cc53d46fb8e9f99953d6954",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/source/issue-405-api-snapshot.json",
+        "bytes": 21949,
+        "sha256": "052ad6814d3cf9ff738c6e8c71abe316f0d2f996630581f64d441ea94e94f0c2",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/source/natural-earth/ne_10m_admin_0_map_units.geojson",
+        "bytes": 13526439,
+        "sha256": "57da82be755f4afccd8f3b14251bb2752f5df1395f47d2d86f817470c4a48862",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/source/natural-earth/ne_10m_admin_1_cook-islands-features.json",
+        "bytes": 29915,
+        "sha256": "144a0ab135623ff0903ea3fd99480c548813752d5bd128c9266b3e21c29fa007",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/source/natural-earth/ne_10m_admin_1_scoped-admin-features.json",
+        "bytes": 96517,
+        "sha256": "dd3f4a5683c713fd89c00b41748d89771f905ef236feaacb7887818085f3d96e",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/source/natural-earth/ne_10m_land.geojson",
+        "bytes": 10157965,
+        "sha256": "1ac90796408bc6ad6911d69448485d3c4dbf2190370080368a09976e1c9f7416",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/source/natural-earth/ne_10m_minor_islands.geojson",
+        "bytes": 1320514,
+        "sha256": "8c933ca7a4760256bdc46408355706e39764b0fa01c160c28888b90b4faec29f",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/source/provenance.json",
+        "bytes": 7642,
+        "sha256": "1935a8ae202c64fa1b84ddaad772efb305131263febdddc9e5f2d3ccc43c5eb9",
+        "hash_kind": "file-bytes",
+        "role": "original-source"
+      },
+      {
+        "path": "data/regional-review/regional-review-14a242c4cb0781a7/verify.py",
+        "bytes": 13794,
+        "sha256": "e4b150fd2730acf197d437423a35bed110394099aa6e3439de326a43f7aebf51",
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "data/semantic-report.json",
+        "bytes": 6091596,
+        "sha256": "266c4f0f6e91381a26bfa6868d3c0df22b30140fa7f8551977be10b423295831",
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "data/semantic-sources.json",
+        "bytes": 4849,
+        "sha256": "287a7ae13787b9e9fb97051afb977c8ea054ca1a6fed389c6672d6455d24bf7e",
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "data/sources.json",
+        "bytes": 1338,
+        "sha256": "b66732450b7ce2f39550058ea1073036c4bf3419f86ca3a58f105aba0bfed0c4",
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "scripts/ellipsoidal_area.py",
+        "bytes": 1953,
+        "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12",
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "scripts/evidence/geometry.py",
+        "bytes": 5264,
+        "sha256": "944541968fcdf065b9c4b6105be227c3e0e14b6a20916f4fa21f851338c7a305",
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      }
+    ],
+    "pins": {
+      "original:scope.json": "122274d0c0e4e13a29167e2f1bf2cd4c9eaef04a2fc97e0c05762a3471657383",
+      "original:verify.py": "e4b150fd2730acf197d437423a35bed110394099aa6e3439de326a43f7aebf51",
+      "original:baseline-inputs.json": "8b5cbc7591b46a997122b1d3430b32a316bff1cb76528734c8f33fb8b8f46d28",
+      "original:geometry-comparison.json": "e6e9b208e6f3ccbe5c2dfcd78cb2852cd341e32c92ea2546b70454e6299812d0",
+      "original:geometry-controls.json": "c686d154be67e2463b28e5828a5d75db446f834213904ed159dfcd42de360bce",
+      "original:geocode-screen.json": "3f1a540ea0898df35ffba733dda8af81cf1287ebbfa5169d9dfd251b6166c4e9",
+      "original:location-assessments.csv": "64c92cc0aa411dc58b377c65f47c63dca8b148b08c3872c2a9f59bf793baae57",
+      "original:province-assessments.csv": "efb24d9f2ec259812ff010c162fba0bffb610a89941a20ca590f1e3c325e8a0e",
+      "original:area-assessments.csv": "dc08e6a656e420ef00c6d07ffd10b26474c40252bb06fc81c4c7044bdaa10707"
+    },
+    "pin_files": {
+      "original:scope.json": "data/regional-review/regional-review-14a242c4cb0781a7/scope.json",
+      "original:verify.py": "data/regional-review/regional-review-14a242c4cb0781a7/verify.py",
+      "original:baseline-inputs.json": "data/regional-review/regional-review-14a242c4cb0781a7/baseline-inputs.json",
+      "original:geometry-comparison.json": "data/regional-review/regional-review-14a242c4cb0781a7/geometry-comparison.json",
+      "original:geometry-controls.json": "data/regional-review/regional-review-14a242c4cb0781a7/geometry-controls.json",
+      "original:geocode-screen.json": "data/regional-review/regional-review-14a242c4cb0781a7/geocode-screen.json",
+      "original:location-assessments.csv": "data/regional-review/regional-review-14a242c4cb0781a7/location-assessments.csv",
+      "original:province-assessments.csv": "data/regional-review/regional-review-14a242c4cb0781a7/province-assessments.csv",
+      "original:area-assessments.csv": "data/regional-review/regional-review-14a242c4cb0781a7/area-assessments.csv"
+    },
+    "subject_files": {
+      "gb:CHL:ADM3:31580391B33082267781919": "data/geography/part-2.json",
+      "gb:KIR:ADM1:97431129B35506555718846": "data/geography/part-13.json",
+      "COK-4950": "data/geography/part-28.json",
+      "COK-4951": "data/geography/part-28.json",
+      "COK-4952": "data/geography/part-28.json",
+      "COK-4953": "data/geography/part-28.json",
+      "COK-4954": "data/geography/part-28.json",
+      "COK-4955": "data/geography/part-28.json",
+      "COK-4956": "data/geography/part-28.json",
+      "COK-4959": "data/geography/part-28.json",
+      "COK-4960": "data/geography/part-28.json",
+      "COK-4961": "data/geography/part-28.json",
+      "COK-4962": "data/geography/part-28.json",
+      "PCN+00?": "data/geography/part-28.json",
+      "PYF-4963": "data/geography/part-28.json",
+      "PYF-4964": "data/geography/part-28.json",
+      "PYF-4965": "data/geography/part-28.json",
+      "PYF-4966": "data/geography/part-28.json",
+      "PYF-4967": "data/geography/part-28.json",
+      "UMI-5171": "data/geography/part-28.json",
+      "UMI-5172": "data/geography/part-28.json",
+      "UMI-5173": "data/geography/part-28.json",
+      "UMI-5178": "data/geography/part-28.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "prior-packet",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/249e396178cfc160fd547ec4487c5d94832fc9af/data/regional-review/regional-review-14a242c4cb0781a7",
+      "role": "Immutable original #405 research packet, crosswalk and validation reports",
+      "vintage": "Git merge 249e396178cfc160fd547ec4487c5d94832fc9af",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Repository packet reuse terms are not a separate source license; original bytes remain in their immutable Git commit."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Read the exact Git objects at 249e396178cfc160fd547ec4487c5d94832fc9af:data/regional-review/regional-review-14a242c4cb0781a7/; the reproduction script does so directly.",
+      "limit": "Prior assessment records validate this erratum contract only; their geographic conclusions are not independently certified here.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "natural-earth-admin1",
+      "url": "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/",
+      "role": "Retained source comparator; exact extracted source object plus metadata",
+      "vintage": "Natural Earth 1:10m Admin 1 comparison extract; commit ca96624a56bd078437bca8184e78163e5039ad19 dated 2022-06-02",
+      "retrieved_at": "2026-10-06 (original packet acquisition vintage; exact object hashes are pinned at immutable baseline)",
+      "license": {
+        "status": "redistributable",
+        "terms": "Public domain"
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "files": [
+        {
+          "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/sources/natural-earth-scoped-admin1.json",
+          "bytes": 96517,
+          "sha256": "dd3f4a5683c713fd89c00b41748d89771f905ef236feaacb7887818085f3d96e",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "limit": "Retained exact source object does not independently prove territorial meaning, current completeness or appropriate atlas granularity.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "geoboundaries-chile",
+      "url": "https://www.geoboundaries.org/",
+      "role": "Retained source comparator; exact extracted source object plus metadata",
+      "vintage": "geoBoundaries Chile ADM3 Isla de Pascua exact feature and metadata; source vintage 2020, metadata updated 2023-01-19, built 2023-12-12",
+      "retrieved_at": "2026-10-06 (original packet acquisition vintage; exact object hashes are pinned at immutable baseline)",
+      "license": {
+        "status": "redistributable",
+        "terms": "CC BY 3.0 IGO"
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "files": [
+        {
+          "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/sources/geoboundaries-chile-feature.json",
+          "bytes": 816165,
+          "sha256": "fb0ea671f05a6334ec7a867ca5cb46fcedb63c5b3cc25a39115f5879c73986cb",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/sources/geoboundaries-chile-metadata.json",
+          "bytes": 983,
+          "sha256": "658356bb413f8b284b260360d1309527781e1b0c46027e1ae0a4c58da1c99409",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "limit": "Retained exact source object does not independently prove territorial meaning, current completeness or appropriate atlas granularity.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "geoboundaries-kiribati",
+      "url": "https://www.geoboundaries.org/",
+      "role": "Retained source comparator; exact extracted source object plus metadata",
+      "vintage": "geoBoundaries Kiribati ADM1 exact Line Islands feature and metadata; source vintage 2017, OSM/Wambacher, updated 2023-01-19, built 2023-12-12",
+      "retrieved_at": "2026-10-06 (original packet acquisition vintage; exact object hashes are pinned at immutable baseline)",
+      "license": {
+        "status": "redistributable",
+        "terms": "ODbL 1.0"
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "files": [
+        {
+          "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/sources/geoboundaries-kiribati-line-feature.geojson",
+          "bytes": 805741,
+          "sha256": "93a0914dc2572951a72cae1aef5145bc056180d75b96812c770bff06e8d8e86f",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/sources/geoboundaries-kiribati-metadata.json",
+          "bytes": 852,
+          "sha256": "e611d682fb3eb7e64176ac9753942321819a847443c1d3c87f8885e1b981211c",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "limit": "Retained exact source object does not independently prove territorial meaning, current completeness or appropriate atlas granularity.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "cook-domestic-shipping-policy",
+      "url": "https://www.mfem.gov.ck/post/cook-islands-government-releases-domestic-shipping-policy",
+      "role": "Official Cook Islands MFEM domestic shipping service grouping",
+      "vintage": "Current policy page; approved 2026-06-04, published 2026-08-21, updated 2026-08-28",
+      "retrieved_at": "2026-10-06T20:07:07-07:00",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms for the complete response body were not established; no raw response is redistributed."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Fresh HTTP GET from https://www.mfem.gov.ck/post/cook-islands-government-releases-domestic-shipping-policy; compare the full-body SHA-256 and response metadata in external-source-fingerprints.json. Raw body was not retained.",
+      "limit": "Northern/Southern shipping groupings only; not a boundary census.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "french-polynesia-dpam",
+      "url": "https://www.service-public.pf/dpam/presentation-de-la-dpam/",
+      "role": "French Polynesia DPAM institutional and archipelago context",
+      "vintage": "Current page retrieved 2026-10-06",
+      "retrieved_at": "2026-10-06T20:07:07-07:00",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms for the complete response body were not established; no raw response is redistributed."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Fresh HTTP GET from https://www.service-public.pf/dpam/presentation-de-la-dpam/; compare the full-body SHA-256 and response metadata in external-source-fingerprints.json. Raw body was not retained.",
+      "limit": "Archipelago group context does not validate polygons.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "french-polynesia-planning",
+      "url": "https://www.service-public.pf/dca/plansdamenagement/",
+      "role": "French Polynesia DCA planning subdivisions",
+      "vintage": "Current page retrieved 2026-10-06",
+      "retrieved_at": "2026-10-06T20:07:07-07:00",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms for the complete response body were not established; no raw response is redistributed."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Fresh HTTP GET from https://www.service-public.pf/dca/plansdamenagement/; compare the full-body SHA-256 and response metadata in external-source-fingerprints.json. Raw body was not retained.",
+      "limit": "Planning subdivisions do not establish complete island geometry.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "unesco-henderson",
+      "url": "https://whc.unesco.org/en/list/487",
+      "role": "UNESCO World Heritage Henderson/Pitcairn group context",
+      "vintage": "Current page retrieved 2026-10-06",
+      "retrieved_at": "2026-10-06T20:07:07-07:00",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms for the complete response body were not established; no raw response is redistributed."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Fresh HTTP GET from https://whc.unesco.org/en/list/487; compare the full-body SHA-256 and response metadata in external-source-fingerprints.json. Raw body was not retained.",
+      "limit": "Largest of four group islands; no dedicated validated Henderson boundary.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "fws-baker",
+      "url": "https://www.fws.gov/refuge/baker-island",
+      "role": "U.S. Fish and Wildlife refuge physical and terrestrial/submerged-area context",
+      "vintage": "Current page retrieved 2026-10-06",
+      "retrieved_at": "2026-10-06T20:07:07-07:00",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms for the complete response body were not established; no raw response is redistributed."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Fresh HTTP GET from https://www.fws.gov/refuge/baker-island; compare the full-body SHA-256 and response metadata in external-source-fingerprints.json. Raw body was not retained.",
+      "limit": "Refuge extent includes submerged area and is not an island-land boundary.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "fws-howland",
+      "url": "https://www.fws.gov/refuge/howland-island",
+      "role": "U.S. Fish and Wildlife refuge physical and terrestrial/submerged-area context",
+      "vintage": "Current page retrieved 2026-10-06",
+      "retrieved_at": "2026-10-06T20:07:07-07:00",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms for the complete response body were not established; no raw response is redistributed."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Fresh HTTP GET from https://www.fws.gov/refuge/howland-island; compare the full-body SHA-256 and response metadata in external-source-fingerprints.json. Raw body was not retained.",
+      "limit": "Refuge extent includes submerged area and is not an island-land boundary.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "fws-jarvis",
+      "url": "https://www.fws.gov/refuge/jarvis-island/about-us",
+      "role": "U.S. Fish and Wildlife refuge physical and terrestrial/submerged-area context",
+      "vintage": "Current page retrieved 2026-10-06",
+      "retrieved_at": "2026-10-06T20:07:07-07:00",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms for the complete response body were not established; no raw response is redistributed."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Fresh HTTP GET from https://www.fws.gov/refuge/jarvis-island/about-us; compare the full-body SHA-256 and response metadata in external-source-fingerprints.json. Raw body was not retained.",
+      "limit": "Refuge extent includes submerged area and is not an island-land boundary.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "fws-palmyra",
+      "url": "https://www.fws.gov/refuge/palmyra-atoll",
+      "role": "U.S. Fish and Wildlife islet/lagoon context",
+      "vintage": "Current page retrieved 2026-10-06",
+      "retrieved_at": "2026-10-06T20:07:07-07:00",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms for the complete response body were not established; no raw response is redistributed."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Fresh HTTP GET from https://www.fws.gov/refuge/palmyra-atoll; compare the full-body SHA-256 and response metadata in external-source-fingerprints.json. Raw body was not retained.",
+      "limit": "Refuge/monument extents and lagoon-enclosing forms are not dry-land comparators.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "chile-law-16441-version-1966",
+      "url": "https://nuevo.leychile.cl/navegar?idNorma=28472&idVersion=1966-03-01",
+      "role": "Official Chilean Law 16,441 version, article 1",
+      "vintage": "Version dated 1966-03-01; read 2026-10-06",
+      "retrieved_at": "2026-10-06T20:07:07-07:00",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms for the complete response body were not established; no raw response is redistributed."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Fresh HTTP GET from https://nuevo.leychile.cl/navegar?idNorma=28472&idVersion=1966-03-01; compare the full-body SHA-256 and response metadata in external-source-fingerprints.json. Raw body was not retained.",
+      "limit": "Legal department/commune association does not define current geometry; current retrieval body was only 264 bytes.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "kiribati-nso-line-phoenix",
+      "url": "https://nso.gov.ki/kiribati-districts/line-phoenix/",
+      "role": "Kiribati National Statistics Office Line/Phoenix district context",
+      "vintage": "Current page retrieved 2026-10-06",
+      "retrieved_at": "2026-10-06T20:07:07-07:00",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms for the complete response body were not established; no raw response is redistributed."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Fresh HTTP GET from https://nso.gov.ki/kiribati-districts/line-phoenix/; compare the full-body SHA-256 and response metadata in external-source-fingerprints.json. Raw body was not retained.",
+      "limit": "District/service context does not establish administrative boundary completeness.",
+      "temporal_status": "unknown"
+    },
+    {
+      "id": "kiribati-met-island-groups",
+      "url": "https://www.met.gov.ki/index.php/component/sppagebuilder/page/18",
+      "role": "Kiribati Meteorological Service island-group enumeration",
+      "vintage": "Current page retrieved 2026-10-06",
+      "retrieved_at": "2026-10-06T20:07:07-07:00",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse terms for the complete response body were not established; no raw response is redistributed."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Fresh HTTP GET from https://www.met.gov.ki/index.php/component/sppagebuilder/page/18; compare the full-body SHA-256 and response metadata in external-source-fingerprints.json. Raw body was not retained.",
+      "limit": "Physical island enumeration is not itself an ADM1 polygon source.",
+      "temporal_status": "unknown"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/README.md",
+      "bytes": 2806,
+      "sha256": "2197a1d37a9c93eb3dcfc0840348bac0634486d86e852384bcdcd3a4ad1b4991",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/RESEARCH.md",
+      "bytes": 4739,
+      "sha256": "058b71d2508126dd035741c4fc6f4396592e68598934385ee97b0061918cbd28",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/SOURCES.md",
+      "bytes": 5617,
+      "sha256": "9c5449c83608c4538059cd8381484e64e16192cb002e930c8d1e5ae3ffc253ab",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/24-entry-duplicate.json",
+      "bytes": 11762,
+      "sha256": "79aa72fcae579037fcf69d90e0097dc50b253d2a0d114970ede7f44f60963dd3",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/area-member-count-mismatch/area-assessments.csv",
+      "bytes": 5165,
+      "sha256": "65710e78a5f5dd8071834684cb1cda708c7753cd1f85f92761dd65a99a1c587e",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/area-member-count-mismatch/location-assessments.csv",
+      "bytes": 31799,
+      "sha256": "64c92cc0aa411dc58b377c65f47c63dca8b148b08c3872c2a9f59bf793baae57",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/area-member-count-mismatch/province-assessments.csv",
+      "bytes": 13903,
+      "sha256": "efb24d9f2ec259812ff010c162fba0bffb610a89941a20ca590f1e3c325e8a0e",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/area-member-substitution/area-assessments.csv",
+      "bytes": 5164,
+      "sha256": "4383a1ccf4cfdcde9e02a741b6b68f7cb7c4f0b1817be2d6a28cbd48e2beb9c6",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/area-member-substitution/location-assessments.csv",
+      "bytes": 31799,
+      "sha256": "64c92cc0aa411dc58b377c65f47c63dca8b148b08c3872c2a9f59bf793baae57",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/area-member-substitution/province-assessments.csv",
+      "bytes": 13903,
+      "sha256": "efb24d9f2ec259812ff010c162fba0bffb610a89941a20ca590f1e3c325e8a0e",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/equal-length-duplicate-replacement-rehashed.json",
+      "bytes": 11719,
+      "sha256": "7cd8fd7ddfa0d06d23f0d94a66077b277b805d2a21460ae30c2500029701892b",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/foreign-subject.json",
+      "bytes": 11726,
+      "sha256": "013961b53bc57ccc3b0609c458dbac51cf65566d6493e8cfe54bcba62b68148d",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/missing-location-row/area-assessments.csv",
+      "bytes": 5164,
+      "sha256": "dc08e6a656e420ef00c6d07ffd10b26474c40252bb06fc81c4c7044bdaa10707",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/missing-location-row/location-assessments.csv",
+      "bytes": 31799,
+      "sha256": "323fcd5425b31dc6af5cd6f003087a2a7acf2c030ade0608805f64b7149b2db9",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/missing-location-row/province-assessments.csv",
+      "bytes": 13903,
+      "sha256": "efb24d9f2ec259812ff010c162fba0bffb610a89941a20ca590f1e3c325e8a0e",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/missing-subject.json",
+      "bytes": 11703,
+      "sha256": "681035df5cf4291365dcded24ae5bff4102784891c9292fc9d7f83f7d50dea6b",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/wrong-declared-count.json",
+      "bytes": 11746,
+      "sha256": "8df8a68c7f9044596216fc74c2650a25d04b573d9ccd33995ccf2d553491a736",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/wrong-parent-crosswalk/area-assessments.csv",
+      "bytes": 5164,
+      "sha256": "dc08e6a656e420ef00c6d07ffd10b26474c40252bb06fc81c4c7044bdaa10707",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/wrong-parent-crosswalk/location-assessments.csv",
+      "bytes": 31799,
+      "sha256": "64c92cc0aa411dc58b377c65f47c63dca8b148b08c3872c2a9f59bf793baae57",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/wrong-parent-crosswalk/province-assessments.csv",
+      "bytes": 13876,
+      "sha256": "66c278858e00d724b33d2b8e8af7fb4e017d6f1502a61c751b47649662f1faaf",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/external-source-fingerprints.json",
+      "bytes": 7009,
+      "sha256": "3a47d4f7bb3d3f3833d3dc0261c337df0a2a9ba1da122f0180c4e17e21b6e60a",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/fingerprint-sources.py",
+      "bytes": 3927,
+      "sha256": "230ec9f10b5793473e46ba5d205381e0e508bc4df36d37e3b2251ef212d2067d",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/inputs/expected-subjects.json",
+      "bytes": 378,
+      "sha256": "b9c97bbe9306c24bf32c57184abe0151cb3d83fa30efa1af10054743bbf22465",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/inputs/scope.json",
+      "bytes": 11746,
+      "sha256": "122274d0c0e4e13a29167e2f1bf2cd4c9eaef04a2fc97e0c05762a3471657383",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/issue-scope-snapshot.json",
+      "bytes": 13185,
+      "sha256": "9a6afd13fa696ccdd98286c24ed1e3a1064ff838f761135960b451ae91efaadc",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/negative-validation.json",
+      "bytes": 2910,
+      "sha256": "3072f6740ef70366e447cfdef026ce8ab473442a3f7b2e2d0ffc4d58574e14e7",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/pinned-inputs/area-assessments.csv",
+      "bytes": 5164,
+      "sha256": "dc08e6a656e420ef00c6d07ffd10b26474c40252bb06fc81c4c7044bdaa10707",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/pinned-inputs/location-assessments.csv",
+      "bytes": 31799,
+      "sha256": "64c92cc0aa411dc58b377c65f47c63dca8b148b08c3872c2a9f59bf793baae57",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/pinned-inputs/province-assessments.csv",
+      "bytes": 13903,
+      "sha256": "efb24d9f2ec259812ff010c162fba0bffb610a89941a20ca590f1e3c325e8a0e",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/positive-validation.json",
+      "bytes": 467,
+      "sha256": "56a8e51bb52b6e476d6df6ba178e5d58e19c9570caac19135296970f1b828e77",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/reproduce.py",
+      "bytes": 9510,
+      "sha256": "0c20f8a2bb293a7574ae1d5a3a3f8bd2e6e3c7627873ba4d460d3ab35d78cd4d",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/reproducibility-validation.json",
+      "bytes": 292,
+      "sha256": "23aca2c3ac64d493d3e318a1e9f4a75537d73b255c126036325edbb4ed9e72ea",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/reproduction-results.json",
+      "bytes": 4733,
+      "sha256": "0bd14d4770b7eb43c5bc66772a7ef073a15ffe6fcbad710edaf76b9f26276755",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/runs/run-1/geocode-screen.json",
+      "bytes": 879,
+      "sha256": "3f1a540ea0898df35ffba733dda8af81cf1287ebbfa5169d9dfd251b6166c4e9",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/runs/run-1/geometry-comparison.json",
+      "bytes": 26550,
+      "sha256": "e6e9b208e6f3ccbe5c2dfcd78cb2852cd341e32c92ea2546b70454e6299812d0",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/runs/run-1/geometry-controls.json",
+      "bytes": 1052,
+      "sha256": "c686d154be67e2463b28e5828a5d75db446f834213904ed159dfcd42de360bce",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/runs/run-2/geocode-screen.json",
+      "bytes": 879,
+      "sha256": "3f1a540ea0898df35ffba733dda8af81cf1287ebbfa5169d9dfd251b6166c4e9",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/runs/run-2/geometry-comparison.json",
+      "bytes": 26550,
+      "sha256": "e6e9b208e6f3ccbe5c2dfcd78cb2852cd341e32c92ea2546b70454e6299812d0",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/runs/run-2/geometry-controls.json",
+      "bytes": 1052,
+      "sha256": "c686d154be67e2463b28e5828a5d75db446f834213904ed159dfcd42de360bce",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/scope-validator.py",
+      "bytes": 5907,
+      "sha256": "3195f2c00ecc23010a9ff65f592266611a3368d06cf3bf10f6d2bdb2efa1b52c",
+      "hash_kind": "file-bytes",
+      "role": "new-evidence"
+    }
+  ],
+  "methods": [
+    {
+      "id": "frozen-scope-gate",
+      "kind": "code",
+      "description": "Validate immutable full scope bytes, raw roster length, uniqueness, exact issue roster, declared count, all native location rows and native-to-parent/area assessment crosswalks before treating the input as valid.",
+      "software": "Python 3.12; csv/json/hashlib; scope-validator.py; repository-pinned original CSVs",
+      "units": "records and SHA-256 file bytes"
+    },
+    {
+      "id": "original-verifier-replay",
+      "kind": "code",
+      "description": "Execute the exact original #1054 verifier twice from merge 249e396, against its immutable source packet and all 16 baseline/helper inputs at a57085b; use disposable overlays; compare three outputs to original reports and each other.",
+      "software": "Python 3.12; numpy 2.3.5; shapely 2.1.2; pyproj 3.7.2; original geometry.py and ellipsoidal_area.py pinned by baseline-inputs.json",
+      "units": "whole-file SHA-256 and exact bytes"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "The original verifier accepts the reproduced 24-entry duplicate roster with 23 unique IDs; the strict gate rejects duplicate, missing, foreign, wrong-count and crosswalk corruption controls before any replay output is created.",
+      "status": "supported",
+      "source_ids": [
+        "prior-packet"
+      ]
+    },
+    {
+      "text": "Territorial meaning, source completeness, current shoreline boundaries, and administrative granularity remain unresolved for the Pacific subjects in this packet.",
+      "status": "unresolved",
+      "source_ids": [
+        "natural-earth-admin1",
+        "geoboundaries-chile",
+        "geoboundaries-kiribati",
+        "unesco-henderson",
+        "cook-domestic-shipping-policy",
+        "kiribati-nso-line-phoenix"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/reproduce.py",
+    "python3 data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/scope-validator.py data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/inputs/scope.json data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/pinned-inputs",
+    "node scripts/evidence-quality.mjs data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/evidence-quality.json"
+  ],
+  "validation": [
+    {
+      "method_id": "frozen-scope-gate",
+      "kind": "code",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/positive-validation.json"
+    },
+    {
+      "method_id": "frozen-scope-gate",
+      "kind": "code",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/negative-validation.json"
+    },
+    {
+      "method_id": "original-verifier-replay",
+      "kind": "code",
+      "outcome": "passed",
+      "evidence_path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/reproducibility-validation.json"
+    }
+  ],
+  "review_kind": "geometry",
+  "change_receipts": [
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/README.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/RESEARCH.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/SOURCES.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/24-entry-duplicate.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/area-member-count-mismatch/area-assessments.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/area-member-count-mismatch/location-assessments.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/area-member-count-mismatch/province-assessments.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/area-member-substitution/area-assessments.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/area-member-substitution/location-assessments.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/area-member-substitution/province-assessments.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/equal-length-duplicate-replacement-rehashed.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/foreign-subject.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/missing-location-row/area-assessments.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/missing-location-row/location-assessments.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/missing-location-row/province-assessments.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/missing-subject.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/wrong-declared-count.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/wrong-parent-crosswalk/area-assessments.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/wrong-parent-crosswalk/location-assessments.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/controls/wrong-parent-crosswalk/province-assessments.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/external-source-fingerprints.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/fingerprint-sources.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/inputs/expected-subjects.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/inputs/scope.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/issue-scope-snapshot.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/negative-validation.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/pinned-inputs/area-assessments.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/pinned-inputs/location-assessments.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/pinned-inputs/province-assessments.csv",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/positive-validation.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/reproduce.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/reproducibility-validation.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/reproduction-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/runs/run-1/geocode-screen.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/runs/run-1/geometry-comparison.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/runs/run-1/geometry-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/runs/run-2/geocode-screen.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/runs/run-2/geometry-comparison.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/runs/run-2/geometry-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/scope-validator.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/sources/geoboundaries-chile-feature.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/sources/geoboundaries-chile-metadata.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/sources/geoboundaries-kiribati-line-feature.geojson",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/sources/geoboundaries-kiribati-metadata.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/south-central-pacific-405-scope-validation-1054-erratum/sources/natural-earth-scoped-admin1.json",
+      "status": "added"
+    }
+  ]
+}
