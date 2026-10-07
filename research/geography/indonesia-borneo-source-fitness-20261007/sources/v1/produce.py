@@ -213,6 +213,8 @@ def build(run_name: str) -> dict:
 
     intersections = []
     tree = STRtree(admin_geoms)
+    source_pair_count = 0
+    coordinate_identity_count = 0
     for component_id in sorted(ids):
         component = components[component_id]
         for index_num in tree.query(component, predicate='intersects'):
@@ -220,6 +222,8 @@ def build(run_name: str) -> dict:
             overlay = component.intersection(admin_geoms[admin_index])
             if overlay.is_empty:
                 continue
+            source_pair_count += 1
+            coordinate_identity_count += int(component.equals(admin_geoms[admin_index]))
             intersections.append({
                 'type': 'Feature',
                 'geometry': mapping(overlay),
@@ -295,7 +299,9 @@ def build(run_name: str) -> dict:
         missing_coverage_rejected = True
 
     positive = sum(f['properties']['intersection_dimension'] == 2 for f in intersections)
-    if len(intersections) != 51 or positive != 51 or len({f['properties']['component_id'] for f in intersections}) != 45:
+    possible_source_pairs = len(ids) * len(admin_features)
+    if (len(intersections) != 51 or positive != 51 or len({f['properties']['component_id'] for f in intersections}) != 45 or
+        source_pair_count != 51 or possible_source_pairs != 23355):
         raise ValueError('Expected 51 positive-area source intersections across all 45 components')
     if (len(contact_intersections) != 51 or len({f['properties']['atlas_feature_id'] for f in contact_intersections}) != 8 or
         sum(r['classification'] == 'positive-length' for r in contact_summary) != 7 or
@@ -329,7 +335,10 @@ def build(run_name: str) -> dict:
                                  'interpretation': 'Inherited source-relative route flags and measurements only; not a new land-area measurement, cause, or authority finding.'},
         'source_join': {'product': 'geoBoundaries IDN ADM2', 'represented_year': 2020,
                         'source_feature_count': len(admin_features), 'unique_source_ids': len(admin_by_id),
+                        'component_source_pair_count': possible_source_pairs,
+                        'empty_component_source_pairs': possible_source_pairs - source_pair_count,
                         'component_source_intersection_count': len(intersections), 'positive_area_intersection_count': positive,
+                        'coordinate_identity_count': coordinate_identity_count,
                         'components_with_positive_area_source_intersection': len({f['properties']['component_id'] for f in intersections}),
                         'exact_geometry_preserved': True, 'repair_or_buffer_used': False,
                         'original_source_sha256': GEO_RAW_SHA, 'compressed_payload_sha256': GEO_GZIP_SHA},
