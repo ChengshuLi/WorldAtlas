@@ -106,7 +106,7 @@ def build(run_name: str) -> dict:
         raise ValueError('Route-family extraction receipt does not bind the retained row')
     family = json.loads(family_raw)
     ids = family['complete_component_ids']
-    if family.get('family_id') != FAMILY or len(ids) != 45 or len(set(ids)) != 45:
+    if family.get('id') != FAMILY or family.get('component_count') != 45 or len(ids) != 45 or len(set(ids)) != 45:
         raise ValueError('Selected family must contain exactly 45 unique component IDs')
     roster = baseline.materialized_bytes((SOURCE / 'component-roster.txt').as_posix()).decode().splitlines()
     if sorted(ids) != roster or len(roster) != 45 or len(set(roster)) != 45:
