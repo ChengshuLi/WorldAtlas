@@ -60,6 +60,10 @@ def file_pin(path):
 
 
 def load_original():
+    # The authentic ZIP has legacy flag_bits=0 headers; Python lazily loads this
+    # exact standard codec when ZipFile reads its central directory. Admit it
+    # before freezing runtime bodies, rather than after source reconstruction.
+    import encodings.cp437
     plan = json.loads((ROOT / 'input-plan.json').read_bytes())
     for pin in plan['literal_helpers']:
         name = Path(pin['path']).relative_to(
