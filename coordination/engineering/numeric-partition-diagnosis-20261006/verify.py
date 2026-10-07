@@ -1,5 +1,6 @@
 """Independent complete diagnostic replay, preserving every archived unknown."""
-import argparse,collections,gzip,json,pathlib,sys
+import argparse,collections,gzip,json,pathlib,sys,platform,subprocess
+import numpy,shapely,zlib
 P=pathlib.Path(__file__).resolve().parent
 import custody,numeric_kernel
 from custody import canon,SHA,load_original_inputs,load_complete_scientific_inputs,check_rosters
@@ -77,6 +78,13 @@ def validate_family(stored,original,reference,component_ids,counts):
 def verify(run):
     report=json.loads(checked_output(run,'report.json').read_bytes())
     if report['input_commit']!=custody.INPUT_COMMIT or report['original_complete_report_sha256']!='13cd9b18fae16f1ce0a2197fcb832ca6da595168bb58a23b1f85c8998590a6c7':raise ValueError('Changed immutable predecessor vintage')
+    freeze='a3a6b3761ddfc422f15be6686f492fbf04ae63d5'
+    software={'python':platform.python_version(),'numpy':numpy.__version__,'shapely':shapely.__version__,'geos':shapely.geos_version_string,'zlib':zlib.ZLIB_VERSION}
+    if report['execution_commit']!=freeze or software!=report['software']or software!={'python':'3.12.14','numpy':'2.3.5','shapely':'2.1.2','geos':'3.13.1','zlib':'1.2.12'}:raise ValueError('Frozen execution or actual replay runtime differs')
+    paths=[str(P.relative_to(custody.R))+'/'+x for x in ['producer.py','custody.py','numeric_kernel.py']]+[custody.OLD_PREFIX+'/'+x for x in ['reader.py','kernel.py','producer.py']]+['scripts/evidence/immutable.py']
+    from reader import authenticate_executed_modules
+    modules=authenticate_executed_modules(custody.R,freeze,sorted(paths))
+    if canon(modules)!=canon(report['actual_executed_project_modules']):raise ValueError('Complete actual scientific code capsule differs')
     inputs,scope,families,features,members=load_original_inputs()
     oldreport,oldobjects,oldfamilies,oldrows,familyrefs,rowrefs,rosters=load_complete_scientific_inputs(inputs,families)
     check_rosters(report['scope_rosters'])
@@ -111,7 +119,13 @@ def verify(run):
     if sorted(seen)!=rosters['families']:raise ValueError('Incomplete full family roster')
     inputs.close()
     files=sorted((str(p.relative_to(run)),SHA(p.read_bytes()))for p in run.rglob('*')if p.is_file())
-    return {'status':'passed-complete-diagnostic-replay-and-archived-unknown-preservation','components':len(rows),'families':len(seen),'counts':dict(counts),'coverage':dict(coverage),'scientific_files':files,'scientific_product_sha256':SHA(canon(files)),'limits':['Complete verifier replay is not a third counted producer run or physical/source authority approval.']}
+    head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=custody.R,text=True).strip()
+    actual=set()
+    for module in list(sys.modules.values()):
+        value=getattr(module,'__file__',None)
+        if value and pathlib.Path(value).resolve().is_relative_to(custody.R):actual.add(str(pathlib.Path(value).resolve().relative_to(custody.R)))
+    replay_modules=authenticate_executed_modules(custody.R,head,sorted(actual))
+    return {'status':'passed-complete-diagnostic-replay-and-archived-unknown-preservation','components':len(rows),'families':len(seen),'counts':dict(counts),'coverage':dict(coverage),'scientific_files':files,'scientific_product_sha256':SHA(canon(files)),'actual_replay_commit':head,'actual_replay_modules':replay_modules,'actual_software':software,'limits':['Complete verifier replay is not a third counted producer run or physical/source authority approval.']}
 
 if __name__=='__main__':
     a=argparse.ArgumentParser();a.add_argument('--run',required=True);a.add_argument('--output',required=True);x=a.parse_args();v=verify(pathlib.Path(x.run));pathlib.Path(x.output).write_bytes(canon(v));print(json.dumps({k:v[k]for k in ['status','components','families','scientific_product_sha256']}))
