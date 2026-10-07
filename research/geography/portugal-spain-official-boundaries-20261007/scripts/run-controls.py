@@ -8,6 +8,7 @@ from zoneinfo import ZoneInfo
 import json
 import sys
 import importlib.util
+import subprocess
 
 from shapely.geometry import LineString, Point, Polygon, shape
 
@@ -22,6 +23,7 @@ bounds_and_extent, count_geom, polygon_pair = ANALYSIS.bounds_and_extent, ANALYS
 read_capture, wa_geometry, geom_json = ANALYSIS.read_capture, ANALYSIS.wa_geometry, ANALYSIS.geom_json
 
 METHOD_ID = "official-source-geography-v1"
+CONTROL_PRODUCER_COMMIT = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ANALYSIS.REPO, text=True).strip()
 
 def reject(label, operation):
     try:
@@ -41,6 +43,7 @@ def run_controls():
         "version": 1,
         "method_id": METHOD_ID,
         "kind": "positive-control",
+        "producer_commit": CONTROL_PRODUCER_COMMIT,
         "outcome": "passed",
         "checks": [
             {"id": "exact-complete-scope", "outcome": "passed", "families": len(scope["families"]),
@@ -126,7 +129,7 @@ def run_controls():
             raise ValueError("Whole original response bytes changed")
     negative_rows.append(reject("modified-whole-source-response", altered_original_response))
 
-    negative = {"version": 1, "method_id": METHOD_ID, "outcome": "passed",
+    negative = {"version": 1, "method_id": METHOD_ID, "producer_commit": CONTROL_PRODUCER_COMMIT, "outcome": "passed",
                 "kind": "negative-control", "checks": negative_rows,
                 "limits": ["Each perturbed case must fail closed; these controls do not determine political identity, authority, or physical class."]}
 
@@ -145,7 +148,7 @@ def run_controls():
             raise ValueError(f"Paired full-run output differs: {rel}")
         pairs.append({"path": rel, "bytes": len(a), "sha256": digest(a)})
     inventory_digest = digest(json.dumps(pairs, sort_keys=True, separators=(",", ":")).encode())
-    reproducibility = {"version": 1, "method_id": METHOD_ID, "kind": "reproducibility", "outcome": "passed",
+    reproducibility = {"version": 1, "method_id": METHOD_ID, "producer_commit": CONTROL_PRODUCER_COMMIT, "kind": "reproducibility", "outcome": "passed",
                        "run_one": "runs/run-01", "run_two": "runs/run-02", "compared_files": pairs,
                        "run_one_sha256": inventory_digest, "run_two_sha256": inventory_digest,
                        "source_capture_index_sha256": __import__("hashlib").sha256(CAPTURE_INDEX_PATH.read_bytes()).hexdigest(),
