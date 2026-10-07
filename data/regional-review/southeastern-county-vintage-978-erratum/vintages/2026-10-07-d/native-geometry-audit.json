@@ -1,0 +1,395 @@
+{
+  "baseline_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+  "geometry_method": "Validity and component summaries in native EPSG:4326 without repair; reproducibility IoU transforms valid geoBoundaries and TIGERweb coordinates to EPSG:5070 with pyproj always_xy and computes intersection / union. No legal boundary inference.",
+  "issue": 1252,
+  "roster_counts_by_state_fips": {
+    "01": 67,
+    "28": 82,
+    "47": 95
+  },
+  "runner_sha256": "e5221216c2c18c7423f5a7e8dbda25aaf6a7b36eb24ca5b72c33080a494bd903",
+  "runtime": {
+    "geos": "3.13.1",
+    "pyproj": "3.7.2",
+    "python": "3.12.14",
+    "shapely": "2.1.2"
+  },
+  "scope": "exactly the six subjects declared by issue #1252; no neighboring-region certification",
+  "source_vintage": "geoBoundaries boundaryYear 2018; Census TIGERweb layer 82 January 1, 2026; original retrievals October 5, 2026 UTC",
+  "sources_and_limits": [
+    "geoBoundaries metadata describes 2018 Census MAF/TIGER cartographic lineage; generated-product CC BY 4.0 attribution and underlying Public Domain are distinct statements.",
+    "Census 2018 1:500,000 cartographic geometry is generalized and may omit small holes, discontiguous pieces, or offshore extents.",
+    "TIGERweb is a Census statistical representation; the retained 2025 TIGER/Line legal disclaimer is not a legal determination for a 2026 service feature.",
+    "No current Census-host reauthentication; legal coastline, islands/offshore completeness, causal attribution, and exact county boundary correctness remain unresolved."
+  ],
+  "status": "reproduced bounded evidence; no geographic approval or correction proposed",
+  "subjects": [
+    {
+      "archived_2018_cbf_iou": 0.96938004,
+      "archived_2026_tigerweb_iou": 0.73690648,
+      "atlas": {
+        "area_degrees2_diagnostic_only": 0.1871801600000032,
+        "bounds_epsg4326": [
+          -88.8845,
+          30.1894,
+          -88.394,
+          30.7356
+        ],
+        "components": 3,
+        "empty": false,
+        "holes": 0,
+        "type": "MultiPolygon",
+        "valid": true,
+        "validity_reason": "Valid Geometry",
+        "vertices": 49
+      },
+      "atlas_parent_id": "framework:province:mississippi:ea192a347106",
+      "baseline_crosswalk_parent_id": "framework:province:mississippi:ea192a347106",
+      "geoboundaries_2018": {
+        "area_degrees2_diagnostic_only": 0.1873468495372467,
+        "bounds_epsg4326": [
+          -88.88453932199997,
+          30.189354518000073,
+          -88.39398516999995,
+          30.73599662500004
+        ],
+        "components": 3,
+        "empty": false,
+        "holes": 0,
+        "type": "MultiPolygon",
+        "valid": true,
+        "validity_reason": "Valid Geometry",
+        "vertices": 95
+      },
+      "geoid": "28059",
+      "id": "gb:USA:ADM2:52423323B10934602069357",
+      "matches_archived_2026_iou_at_8dp": true,
+      "name": "Jackson",
+      "reproduced_2026_tigerweb_iou": 0.73690647656133,
+      "source_join": "unique GEOID + STATE + county name + LSADC within complete state layer",
+      "state_fips": "28",
+      "tigerweb_2026": {
+        "area_degrees2_diagnostic_only": 0.2538309663678303,
+        "bounds_epsg4326": [
+          -88.88453599985274,
+          30.14609599984488,
+          -88.38443100024054,
+          30.736048000333913
+        ],
+        "components": 1,
+        "empty": false,
+        "holes": 0,
+        "type": "Polygon",
+        "valid": true,
+        "validity_reason": "Valid Geometry",
+        "vertices": 1164
+      }
+    },
+    {
+      "archived_2018_cbf_iou": 0.94568923,
+      "archived_2026_tigerweb_iou": 0.94540945,
+      "atlas": {
+        "area_degrees2_diagnostic_only": 0.03304506000000059,
+        "bounds_epsg4326": [
+          -86.5395,
+          35.1232,
+          -86.2454,
+          35.4125
+        ],
+        "components": 1,
+        "empty": false,
+        "holes": 0,
+        "type": "Polygon",
+        "valid": true,
+        "validity_reason": "Valid Geometry",
+        "vertices": 42
+      },
+      "atlas_parent_id": "framework:province:tennessee:1e9839d5c457",
+      "baseline_crosswalk_parent_id": "framework:province:tennessee:1e9839d5c457",
+      "geoboundaries_2018": {
+        "area_degrees2_diagnostic_only": 0.032982536941765755,
+        "bounds_epsg4326": [
+          -86.53948991199996,
+          35.12321564500007,
+          -86.24539482899996,
+          35.41248270800003
+        ],
+        "components": 1,
+        "empty": false,
+        "holes": 0,
+        "type": "Polygon",
+        "valid": true,
+        "validity_reason": "Valid Geometry",
+        "vertices": 52
+      },
+      "geoid": "47127",
+      "id": "gb:USA:ADM2:52423323B16895111765374",
+      "matches_archived_2026_iou_at_8dp": true,
+      "name": "Moore",
+      "reproduced_2026_tigerweb_iou": 0.945409449603168,
+      "source_join": "unique GEOID + STATE + county name + LSADC within complete state layer",
+      "state_fips": "47",
+      "tigerweb_2026": {
+        "area_degrees2_diagnostic_only": 0.03346713053442609,
+        "bounds_epsg4326": [
+          -86.53948499989097,
+          35.12238899990175,
+          -86.24428999975372,
+          35.41247600002461
+        ],
+        "components": 1,
+        "empty": false,
+        "holes": 0,
+        "type": "Polygon",
+        "valid": true,
+        "validity_reason": "Valid Geometry",
+        "vertices": 3605
+      }
+    },
+    {
+      "archived_2018_cbf_iou": 0.96383669,
+      "archived_2026_tigerweb_iou": 0.61770242,
+      "atlas": {
+        "area_degrees2_diagnostic_only": 0.1480652899999977,
+        "bounds_epsg4326": [
+          -89.3415,
+          30.2009,
+          -88.8143,
+          30.6773
+        ],
+        "components": 3,
+        "empty": false,
+        "holes": 0,
+        "type": "MultiPolygon",
+        "valid": true,
+        "validity_reason": "Valid Geometry",
+        "vertices": 42
+      },
+      "atlas_parent_id": "framework:province:mississippi:ea192a347106",
+      "baseline_crosswalk_parent_id": "framework:province:mississippi:ea192a347106",
+      "geoboundaries_2018": {
+        "area_degrees2_diagnostic_only": 0.148223437064415,
+        "bounds_epsg4326": [
+          -89.34156943499994,
+          30.200893504000078,
+          -88.81431552299995,
+          30.67729761100003
+        ],
+        "components": 3,
+        "empty": false,
+        "holes": 0,
+        "type": "MultiPolygon",
+        "valid": true,
+        "validity_reason": "Valid Geometry",
+        "vertices": 78
+      },
+      "geoid": "28047",
+      "id": "gb:USA:ADM2:52423323B27952664457255",
+      "matches_archived_2026_iou_at_8dp": true,
+      "name": "Harrison",
+      "reproduced_2026_tigerweb_iou": 0.6177024195641188,
+      "source_join": "unique GEOID + STATE + county name + LSADC within complete state layer",
+      "state_fips": "28",
+      "tigerweb_2026": {
+        "area_degrees2_diagnostic_only": 0.23943481984239745,
+        "bounds_epsg4326": [
+          -89.34175199982994,
+          30.139845000075447,
+          -88.79514700041437,
+          30.67729200015412
+        ],
+        "components": 1,
+        "empty": false,
+        "holes": 0,
+        "type": "Polygon",
+        "valid": true,
+        "validity_reason": "Valid Geometry",
+        "vertices": 752
+      }
+    },
+    {
+      "archived_2018_cbf_iou": 0.99548631,
+      "archived_2026_tigerweb_iou": 0.87602581,
+      "atlas": {
+        "area_degrees2_diagnostic_only": 0.11825963000000118,
+        "bounds_epsg4326": [
+          -89.6898,
+          30.1763,
+          -89.3224,
+          30.6484
+        ],
+        "components": 1,
+        "empty": false,
+        "holes": 0,
+        "type": "Polygon",
+        "valid": true,
+        "validity_reason": "Valid Geometry",
+        "vertices": 41
+      },
+      "atlas_parent_id": "framework:province:mississippi:ea192a347106",
+      "baseline_crosswalk_parent_id": "framework:province:mississippi:ea192a347106",
+      "geoboundaries_2018": {
+        "area_degrees2_diagnostic_only": 0.11817765214457865,
+        "bounds_epsg4326": [
+          -89.68978499899998,
+          30.17394848200007,
+          -89.32235042399998,
+          30.648373582000033
+        ],
+        "components": 1,
+        "empty": false,
+        "holes": 0,
+        "type": "Polygon",
+        "valid": true,
+        "validity_reason": "Valid Geometry",
+        "vertices": 117
+      },
+      "geoid": "28045",
+      "id": "gb:USA:ADM2:52423323B49198903326940",
+      "matches_archived_2026_iou_at_8dp": true,
+      "name": "Hancock",
+      "reproduced_2026_tigerweb_iou": 0.8760258078267498,
+      "source_join": "unique GEOID + STATE + county name + LSADC within complete state layer",
+      "state_fips": "28",
+      "tigerweb_2026": {
+        "area_degrees2_diagnostic_only": 0.13437922172260647,
+        "bounds_epsg4326": [
+          -89.69058899974142,
+          30.160617000349802,
+          -89.30613499986212,
+          30.648390000340342
+        ],
+        "components": 1,
+        "empty": false,
+        "holes": 0,
+        "type": "Polygon",
+        "valid": true,
+        "validity_reason": "Valid Geometry",
+        "vertices": 1389
+      }
+    },
+    {
+      "archived_2018_cbf_iou": 0.99255004,
+      "archived_2026_tigerweb_iou": 0.82322412,
+      "atlas": {
+        "area_degrees2_diagnostic_only": 0.4096991900000017,
+        "bounds_epsg4326": [
+          -88.0284,
+          30.2211,
+          -87.3708,
+          31.3021
+        ],
+        "components": 1,
+        "empty": false,
+        "holes": 0,
+        "type": "Polygon",
+        "valid": true,
+        "validity_reason": "Valid Geometry",
+        "vertices": 114
+      },
+      "atlas_parent_id": "framework:province:alabama:2ea4f64966c3",
+      "baseline_crosswalk_parent_id": "framework:province:alabama:2ea4f64966c3",
+      "geoboundaries_2018": {
+        "area_degrees2_diagnostic_only": 0.4101457115210033,
+        "bounds_epsg4326": [
+          -88.02927706399998,
+          30.22113753900004,
+          -87.36660588799998,
+          31.31902278700005
+        ],
+        "components": 1,
+        "empty": false,
+        "holes": 0,
+        "type": "Polygon",
+        "valid": true,
+        "validity_reason": "Valid Geometry",
+        "vertices": 332
+      },
+      "geoid": "01003",
+      "id": "gb:USA:ADM2:52423323B60515004813393",
+      "matches_archived_2026_iou_at_8dp": true,
+      "name": "Baldwin",
+      "reproduced_2026_tigerweb_iou": 0.823224119247868,
+      "source_join": "unique GEOID + STATE + county name + LSADC within complete state layer",
+      "state_fips": "01",
+      "tigerweb_2026": {
+        "area_degrees2_diagnostic_only": 0.49417171748839084,
+        "bounds_epsg4326": [
+          -88.03730900008911,
+          30.14656100005464,
+          -87.3665910003216,
+          31.3190170003455
+        ],
+        "components": 1,
+        "empty": false,
+        "holes": 0,
+        "type": "Polygon",
+        "valid": true,
+        "validity_reason": "Valid Geometry",
+        "vertices": 5016
+      }
+    },
+    {
+      "archived_2018_cbf_iou": 0.978808,
+      "archived_2026_tigerweb_iou": 0.78163973,
+      "atlas": {
+        "area_degrees2_diagnostic_only": 0.3141588049999984,
+        "bounds_epsg4326": [
+          -88.432,
+          30.2223,
+          -87.9243,
+          31.1733
+        ],
+        "components": 4,
+        "empty": false,
+        "holes": 0,
+        "type": "MultiPolygon",
+        "valid": true,
+        "validity_reason": "Valid Geometry",
+        "vertices": 85
+      },
+      "atlas_parent_id": "framework:province:alabama:2ea4f64966c3",
+      "baseline_crosswalk_parent_id": "framework:province:alabama:2ea4f64966c3",
+      "geoboundaries_2018": {
+        "area_degrees2_diagnostic_only": 0.3143515646259109,
+        "bounds_epsg4326": [
+          -88.43201221499999,
+          30.22141853000005,
+          -87.92429506599996,
+          31.17331174900005
+        ],
+        "components": 4,
+        "empty": false,
+        "holes": 0,
+        "type": "MultiPolygon",
+        "valid": true,
+        "validity_reason": "Valid Geometry",
+        "vertices": 143
+      },
+      "geoid": "01097",
+      "id": "gb:USA:ADM2:52423323B65626355292212",
+      "matches_archived_2026_iou_at_8dp": true,
+      "name": "Mobile",
+      "reproduced_2026_tigerweb_iou": 0.7816397324239746,
+      "source_join": "unique GEOID + STATE + county name + LSADC within complete state layer",
+      "state_fips": "01",
+      "tigerweb_2026": {
+        "area_degrees2_diagnostic_only": 0.40085467765370425,
+        "bounds_epsg4326": [
+          -88.43200700029462,
+          30.144425000011907,
+          -87.92394399985356,
+          31.173306000329838
+        ],
+        "components": 1,
+        "empty": false,
+        "holes": 0,
+        "type": "Polygon",
+        "valid": true,
+        "validity_reason": "Valid Geometry",
+        "vertices": 1768
+      }
+    }
+  ],
+  "version": 1
+}

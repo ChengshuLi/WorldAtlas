@@ -1,0 +1,31 @@
+{
+  "kind": "negative-control",
+  "method_id": "six-county-frozen-reproduction",
+  "outcome": "passed",
+  "preserved_existing_output_sha256": "1cee0a3a18667088d8d391c472cc586386c4022c714a691868ddf8ca773f9363",
+  "rejections": [
+    {
+      "control": "changed whole-file pin before computation",
+      "outcome": "rejected-as-expected"
+    },
+    {
+      "control": "duplicate source identity",
+      "outcome": "rejected-as-expected"
+    },
+    {
+      "control": "missing scoped identity",
+      "outcome": "rejected-as-expected"
+    },
+    {
+      "control": "pre-existing output destination",
+      "outcome": "rejected-as-expected"
+    },
+    {
+      "control": "symlink traversal outside owned directory",
+      "outcome": "rejected-as-expected"
+    }
+  ],
+  "symlink_escape_created_no_external_file": true,
+  "wrong_axis_rejected": true,
+  "wrong_intersection_over_source_area": 0.49999999999819555
+}

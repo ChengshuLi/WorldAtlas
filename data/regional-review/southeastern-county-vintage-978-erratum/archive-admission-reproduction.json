@@ -1,0 +1,67 @@
+{
+  "all_members_below_32_mib": true,
+  "baseline_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+  "decoded_member_bytes": 17480047,
+  "evidence_caps": {
+    "descriptor_count": 512,
+    "single_file_bytes": 33554432,
+    "total_descriptor_bytes": 268435456
+  },
+  "immutable_reader_sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd",
+  "largest_decoded_member_bytes": 16869220,
+  "member_count": 7,
+  "member_limit_bytes": 33554432,
+  "members": [
+    {
+      "decoded_bytes": 21756,
+      "encoded_bytes": 2143,
+      "path": "cb_2018_us_county_500k.shp.ea.iso.xml",
+      "sha256": "5b5b44641d15d6102754ffcb1ec393a833dd9be2ebd8ea4b0a9505884a2cc9c9"
+    },
+    {
+      "decoded_bytes": 35636,
+      "encoded_bytes": 6745,
+      "path": "cb_2018_us_county_500k.shp.iso.xml",
+      "sha256": "426704e0d24bc38e95cdd9c4fd71fdf66bc2e8a5fb9ad1eea62a5a5b4e3cf511"
+    },
+    {
+      "decoded_bytes": 16869220,
+      "encoded_bytes": 11403129,
+      "path": "cb_2018_us_county_500k.shp",
+      "sha256": "bad177d45a8daaad7a7a1cc99caf7173d035947f1b87f112bbd1526c58624887"
+    },
+    {
+      "decoded_bytes": 25964,
+      "encoded_bytes": 17606,
+      "path": "cb_2018_us_county_500k.shx",
+      "sha256": "519c6d2f05a847e4d2972933677a3399d78bbbecc7cc9cde1adbf104de1d2598"
+    },
+    {
+      "decoded_bytes": 527301,
+      "encoded_bytes": 99398,
+      "path": "cb_2018_us_county_500k.dbf",
+      "sha256": "762951580a761afeb267d9af7505985ccecbe07341b6ea762f4f12a87559bb51"
+    },
+    {
+      "decoded_bytes": 165,
+      "encoded_bytes": 133,
+      "path": "cb_2018_us_county_500k.prj",
+      "sha256": "0b9041e921d9ebb43247d314608fe9e38a0b008ee793067fc1806199ea1fb9dd"
+    },
+    {
+      "decoded_bytes": 5,
+      "encoded_bytes": 5,
+      "path": "cb_2018_us_county_500k.cpg",
+      "sha256": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824"
+    }
+  ],
+  "original_1162_descriptor_count": 26,
+  "original_1162_encoded_bytes": 65550965,
+  "original_encoded_plus_decoded_zip_plus_reserve_bytes": 91419620,
+  "reproduction_script_sha256": "8a15bff9e8d5c5a49fc93b5c962c33e00d73ad89054d4c831c0ea46f84231c7d",
+  "reserve_bytes": 8388608,
+  "version": 1,
+  "zip_encoded_bytes": 11530479,
+  "zip_path": "data/regional-review/regional-review-599d6fe712bbbcae/sources/census-2018-cartographic-boundaries/cb_2018_us_county_500k.zip",
+  "zip_sha256": "aaa866af327754e1b80aa87bfb97b04a7209f4f871075aef84affb8f0b3afe67"
+}

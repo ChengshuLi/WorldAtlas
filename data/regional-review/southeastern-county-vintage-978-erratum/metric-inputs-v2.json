@@ -1,0 +1,197 @@
+{
+  "baseline_commit": "a1cf4cd86fd07d00ae592b4705e4b39f50628df7",
+  "baseline_inventory_path": "data/regional-review/southeastern-county-vintage-978-erratum/baseline-inventory-v2.json",
+  "baseline_inventory_sha256": "dd3a1383addc6e967a78e421b3927a385b588ef0babc118f111f528629d87d12",
+  "immutable_reader_sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd",
+  "limits": [
+    "2018 CBF values are retained archival results from the pinned crosswalk and are not recomputed in this erratum.",
+    "2026 comparison values and native geometry counts are freshly recomputed from the exact pinned source and Atlas files.",
+    "All source metadata and response receipts listed in provenance_inputs were separately checked against their exact archived whole-file hashes; the v2 runner verifies receipts against source responses before analysis."
+  ],
+  "provenance_inputs": {
+    "data/regional-review/regional-review-599d6fe712bbbcae/census-tigerweb-state-retrieval-receipts.json": {
+      "bytes": 6873,
+      "sha256": "efb6dbe4859e5d36595403b418afb0ebc7e50f0289fffec22c8a5e7f75721f0a"
+    },
+    "data/regional-review/regional-review-599d6fe712bbbcae/sources/census-2018-cartographic-boundaries/http-receipt.json": {
+      "bytes": 1830,
+      "sha256": "5fdacef2a48ed190d498948176e35cc60e98bed93014816f542720054c7f7a8c"
+    },
+    "data/regional-review/regional-review-599d6fe712bbbcae/sources/census-tigerweb-acs26/layer-82-metadata-20261005.json": {
+      "bytes": 7489,
+      "sha256": "56df6e7d6cff8fe1e082bbdc10109cc2c7c22a134f5dfca1899f93d9bd98337d"
+    },
+    "data/regional-review/regional-review-599d6fe712bbbcae/sources/geoboundaries-2018/http-receipt.json": {
+      "bytes": 1709,
+      "sha256": "71d365e3cfaabe45013b1041c1802b3e41b92c5a30d920af806ccf749a4e9dcb"
+    },
+    "data/regional-review/regional-review-599d6fe712bbbcae/sources/geoboundaries-2018/upstream-metaData.json": {
+      "bytes": 939,
+      "sha256": "a4d2a82a1cd434960b6ed49531bff3330d0881674eea9dc8711e1ad6bf049b9f"
+    },
+    "scripts/evidence/immutable.py": {
+      "bytes": 7090,
+      "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd"
+    }
+  },
+  "runner_sha256": "239900aab93b02664d0338990d291356a9ce9ad6b3d97c70a7e3f0576e391477",
+  "subjects": [
+    {
+      "geoid": "28059",
+      "id": "gb:USA:ADM2:52423323B10934602069357",
+      "inputs": {
+        "archived_crosswalk": {
+          "bytes": 69131,
+          "path": "data/regional-review/regional-review-599d6fe712bbbcae/findings/usa-county-crosswalk.csv",
+          "sha256": "7990aff113168a4447b40ae72bbcccf3b0a28102a4465c87257e98ad993db98a"
+        },
+        "atlas": {
+          "bytes": 4608983,
+          "path": "data/geography/part-26.json",
+          "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632"
+        },
+        "geoboundaries_2018": {
+          "bytes": 10500644,
+          "path": "data/regional-review/regional-review-599d6fe712bbbcae/sources/geoboundaries-2018/geoBoundaries-USA-ADM2.geojson",
+          "sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43"
+        },
+        "tigerweb_2026": {
+          "bytes": 7635933,
+          "path": "data/regional-review/regional-review-599d6fe712bbbcae/sources/census-tigerweb-acs26/counties-state-28.geojson",
+          "sha256": "3826b033a59e185281418d5c624764d6e70e6a938f868d68a773c4e3911b7cb1"
+        }
+      }
+    },
+    {
+      "geoid": "47127",
+      "id": "gb:USA:ADM2:52423323B16895111765374",
+      "inputs": {
+        "archived_crosswalk": {
+          "bytes": 69131,
+          "path": "data/regional-review/regional-review-599d6fe712bbbcae/findings/usa-county-crosswalk.csv",
+          "sha256": "7990aff113168a4447b40ae72bbcccf3b0a28102a4465c87257e98ad993db98a"
+        },
+        "atlas": {
+          "bytes": 4608983,
+          "path": "data/geography/part-26.json",
+          "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632"
+        },
+        "geoboundaries_2018": {
+          "bytes": 10500644,
+          "path": "data/regional-review/regional-review-599d6fe712bbbcae/sources/geoboundaries-2018/geoBoundaries-USA-ADM2.geojson",
+          "sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43"
+        },
+        "tigerweb_2026": {
+          "bytes": 10736861,
+          "path": "data/regional-review/regional-review-599d6fe712bbbcae/sources/census-tigerweb-acs26/counties-state-47.geojson",
+          "sha256": "b9b10ee31927e67c295180c885e8e616940d099a52879df2c5a49bad123f6a15"
+        }
+      }
+    },
+    {
+      "geoid": "28047",
+      "id": "gb:USA:ADM2:52423323B27952664457255",
+      "inputs": {
+        "archived_crosswalk": {
+          "bytes": 69131,
+          "path": "data/regional-review/regional-review-599d6fe712bbbcae/findings/usa-county-crosswalk.csv",
+          "sha256": "7990aff113168a4447b40ae72bbcccf3b0a28102a4465c87257e98ad993db98a"
+        },
+        "atlas": {
+          "bytes": 4608983,
+          "path": "data/geography/part-26.json",
+          "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632"
+        },
+        "geoboundaries_2018": {
+          "bytes": 10500644,
+          "path": "data/regional-review/regional-review-599d6fe712bbbcae/sources/geoboundaries-2018/geoBoundaries-USA-ADM2.geojson",
+          "sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43"
+        },
+        "tigerweb_2026": {
+          "bytes": 7635933,
+          "path": "data/regional-review/regional-review-599d6fe712bbbcae/sources/census-tigerweb-acs26/counties-state-28.geojson",
+          "sha256": "3826b033a59e185281418d5c624764d6e70e6a938f868d68a773c4e3911b7cb1"
+        }
+      }
+    },
+    {
+      "geoid": "28045",
+      "id": "gb:USA:ADM2:52423323B49198903326940",
+      "inputs": {
+        "archived_crosswalk": {
+          "bytes": 69131,
+          "path": "data/regional-review/regional-review-599d6fe712bbbcae/findings/usa-county-crosswalk.csv",
+          "sha256": "7990aff113168a4447b40ae72bbcccf3b0a28102a4465c87257e98ad993db98a"
+        },
+        "atlas": {
+          "bytes": 4863162,
+          "path": "data/geography/part-27.json",
+          "sha256": "e8df7555853e9262162c5e5d5c85e5c30be3fa8f0e6339bafec0e08323054758"
+        },
+        "geoboundaries_2018": {
+          "bytes": 10500644,
+          "path": "data/regional-review/regional-review-599d6fe712bbbcae/sources/geoboundaries-2018/geoBoundaries-USA-ADM2.geojson",
+          "sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43"
+        },
+        "tigerweb_2026": {
+          "bytes": 7635933,
+          "path": "data/regional-review/regional-review-599d6fe712bbbcae/sources/census-tigerweb-acs26/counties-state-28.geojson",
+          "sha256": "3826b033a59e185281418d5c624764d6e70e6a938f868d68a773c4e3911b7cb1"
+        }
+      }
+    },
+    {
+      "geoid": "01003",
+      "id": "gb:USA:ADM2:52423323B60515004813393",
+      "inputs": {
+        "archived_crosswalk": {
+          "bytes": 69131,
+          "path": "data/regional-review/regional-review-599d6fe712bbbcae/findings/usa-county-crosswalk.csv",
+          "sha256": "7990aff113168a4447b40ae72bbcccf3b0a28102a4465c87257e98ad993db98a"
+        },
+        "atlas": {
+          "bytes": 4525239,
+          "path": "data/geography/part-25.json",
+          "sha256": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394"
+        },
+        "geoboundaries_2018": {
+          "bytes": 10500644,
+          "path": "data/regional-review/regional-review-599d6fe712bbbcae/sources/geoboundaries-2018/geoBoundaries-USA-ADM2.geojson",
+          "sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43"
+        },
+        "tigerweb_2026": {
+          "bytes": 6021222,
+          "path": "data/regional-review/regional-review-599d6fe712bbbcae/sources/census-tigerweb-acs26/counties-state-01.geojson",
+          "sha256": "386d08c97bfae31678cf70609ba277a4bbc271f4e79d5f651537cf64cac00084"
+        }
+      }
+    },
+    {
+      "geoid": "01097",
+      "id": "gb:USA:ADM2:52423323B65626355292212",
+      "inputs": {
+        "archived_crosswalk": {
+          "bytes": 69131,
+          "path": "data/regional-review/regional-review-599d6fe712bbbcae/findings/usa-county-crosswalk.csv",
+          "sha256": "7990aff113168a4447b40ae72bbcccf3b0a28102a4465c87257e98ad993db98a"
+        },
+        "atlas": {
+          "bytes": 4608983,
+          "path": "data/geography/part-26.json",
+          "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632"
+        },
+        "geoboundaries_2018": {
+          "bytes": 10500644,
+          "path": "data/regional-review/regional-review-599d6fe712bbbcae/sources/geoboundaries-2018/geoBoundaries-USA-ADM2.geojson",
+          "sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43"
+        },
+        "tigerweb_2026": {
+          "bytes": 6021222,
+          "path": "data/regional-review/regional-review-599d6fe712bbbcae/sources/census-tigerweb-acs26/counties-state-01.geojson",
+          "sha256": "386d08c97bfae31678cf70609ba277a4bbc271f4e79d5f651537cf64cac00084"
+        }
+      }
+    }
+  ],
+  "version": 1
+}

@@ -1,0 +1,17 @@
+{
+  "method_id": "six-county-frozen-reproduction",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "test": "The repository premerge evidence validator rejects a rendered metric row that contradicts its numeric ledger after the fixture row bytes and declared whole-file descriptor hash/length are both refreshed.",
+  "table_path": "data/regional-review/southeastern-county-vintage-978-erratum/metric-table.md",
+  "table_line": 9,
+  "metric_id": "2018-cbf-iou--archived-28059",
+  "ledger_value": 0.96938004,
+  "original_rendered_value": "0.96938004",
+  "manipulated_rendered_value": "0.11111111",
+  "original_table_sha256": "34f86dc062ffce427ee0022d7c6b3eee495f0aad118842db548de568a07ae68f",
+  "manipulated_table_sha256": "f64f52457b9af33bba269cb50e60d48fa61b1794b01dfb75f6270e866b45f4af",
+  "fixture_descriptor_sha256_refreshed": true,
+  "validator": "scripts/premerge-evidence.mjs validatePremergeManifest",
+  "harness_sha256": "84c0c5d845f819751e807dcc2e0d69f62a697ef70e611dc4ce54f11b2b439f92"
+}
