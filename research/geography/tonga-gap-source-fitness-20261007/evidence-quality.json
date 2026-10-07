@@ -241,11 +241,7 @@
       "description": "Shapely 2.1.2 planar XY topological predicates on original longitude/latitude coordinates; no transform, repair, buffer, or densification.",
       "software": "Python 3 / Shapely 2.1.2",
       "units": "topological relation; WGS84 area in m\u00b2",
-      "kind": "geography",
-      "axis_order": "longitude-latitude",
-      "crs": "EPSG:4326 longitude/latitude coordinates for predicates",
-      "area_method": "PyProj Geod(ellps=WGS84), bounded candidate-support geometry only",
-      "distance_method": "Not calculated"
+      "kind": "source"
     }
   ],
   "metrics": [
