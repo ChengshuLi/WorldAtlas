@@ -1,0 +1,29 @@
+{
+  "bbox_epsg4326_axis_order": "lat,lon,lat,lon",
+  "bbox": "37.545909524325495,-8.783424722699392,42.1544,-6.1893,urn:ogc:def:crs:EPSG::4326",
+  "hit_response_sha256": "021226d25956eb4f99b68dc2aa297e38baf121847c754489e4949d362417d195",
+  "hit_numberMatched": 1428,
+  "pages": [
+    {
+      "page": "full-border-envelope-page-0.xml",
+      "bytes": 12571737,
+      "sha256": "a6b5387f002ebcaaf46820769d8fe09488350029b5dca24db01c37e26efec3fe",
+      "members": 1000,
+      "numberMatched": "unknown",
+      "numberReturned": "1000",
+      "timestamp": "2026-10-07T02:14:20Z",
+      "url": "https://inspire.apambiente.pt/getogc/services/INSPIRE/AM_WaterBodyForWFD_WFDRiver/MapServer/WFSServer?service=WFS&version=2.0.0&request=GetFeature&typeNames=INSPIRE_AM_WaterBodyForWFD_WFDRiver%3AAM.WaterBodyForWFD&bbox=37.545909524325495%2C-8.783424722699392%2C42.1544%2C-6.1893%2Curn%3Aogc%3Adef%3Acrs%3AEPSG%3A%3A4326&count=1000&startIndex=0"
+    },
+    {
+      "page": "full-border-envelope-page-1.xml",
+      "bytes": 4757898,
+      "sha256": "a721161ca98fb338446023fe545af5b83ee54341bbe90a97241804baebbf9516",
+      "members": 428,
+      "numberMatched": "unknown",
+      "numberReturned": "428",
+      "timestamp": "2026-10-07T02:14:34Z",
+      "url": "https://inspire.apambiente.pt/getogc/services/INSPIRE/AM_WaterBodyForWFD_WFDRiver/MapServer/WFSServer?service=WFS&version=2.0.0&request=GetFeature&typeNames=INSPIRE_AM_WaterBodyForWFD_WFDRiver%3AAM.WaterBodyForWFD&bbox=37.545909524325495%2C-8.783424722699392%2C42.1544%2C-6.1893%2Curn%3Aogc%3Adef%3Acrs%3AEPSG%3A%3A4326&count=1000&startIndex=1000"
+    }
+  ],
+  "completeness_note": "Two WFS pages captured from separate timestamps; counts and exhaustion are checked after retrieval, but the service is not transactional."
+}

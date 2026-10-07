@@ -1,0 +1,2367 @@
+{
+  "baseline": {
+    "commit": "cf6b5c585dbad62f617e0cf3843c9e4195b0db6c",
+    "files": [
+      {
+        "bytes": 403376,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+        "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9"
+      },
+      {
+        "bytes": 5048979,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-ESP-ADM3-000.bin.gz",
+        "role": "original-source",
+        "sha256": "2c79b3b7c2338733c7026f311148d10c20693facd06a635991e7fdf76204be62"
+      },
+      {
+        "bytes": 85617,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-PRT-ADM2-000.bin.gz",
+        "role": "original-source",
+        "sha256": "f53a331f31d1f0fbdc53dae4884c372b05888995b88e1aea84c8f9d12a3c1d7b"
+      },
+      {
+        "bytes": 103877,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/report.json",
+        "sha256": "3527014045c5aedc2b26be8bb5dff97e3e34097b7d4cb66a9b2fe3fcf33a6856"
+      },
+      {
+        "bytes": 65206,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/worldwide-successor-1215-20261006/run-one/report.json",
+        "sha256": "3d95a15d3797943290997c9a16fede48e6eb6e0941b0071a5fcd410375c49d46"
+      },
+      {
+        "bytes": 661416,
+        "hash_kind": "file-bytes",
+        "path": "data/administrative-sources.json",
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+      },
+      {
+        "bytes": 4583022,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-19.json",
+        "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269"
+      },
+      {
+        "bytes": 6570767,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-20.json",
+        "sha256": "9dda1b495f3e9934d23c99d3ba1c6a631078798c42c5ddb060dc5238a32b7c9f"
+      },
+      {
+        "bytes": 6613963,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-28.json",
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+      },
+      {
+        "bytes": 12932167,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-29.json",
+        "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a"
+      },
+      {
+        "bytes": 5097739,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-8.json",
+        "sha256": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1"
+      }
+    ],
+    "pin_files": {
+      "current_batch_report": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/report.json",
+      "current_lineage_report": "coordination/engineering/worldwide-successor-1215-20261006/run-one/report.json",
+      "source_catalogue": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "source_registry": "data/administrative-sources.json"
+    },
+    "pins": {
+      "current_batch_report": "3527014045c5aedc2b26be8bb5dff97e3e34097b7d4cb66a9b2fe3fcf33a6856",
+      "current_lineage_report": "3d95a15d3797943290997c9a16fede48e6eb6e0941b0071a5fcd410375c49d46",
+      "source_catalogue": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+      "source_registry": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+    },
+    "subject_files": {
+      "atlas:district:ESP-1003:a5622946": "data/geography/part-28.json",
+      "atlas:district:ESP-1004:a5622946": "data/geography/part-28.json",
+      "atlas:district:ESP-1010:a5622946": "data/geography/part-28.json",
+      "atlas:district:ESP-2101:def08fa9": "data/geography/part-29.json",
+      "atlas:district:ESP-2102:def08fa9": "data/geography/part-29.json",
+      "atlas:district:ESP-3201:a4467917": "data/geography/part-28.json",
+      "atlas:district:ESP-3202:a4467917": "data/geography/part-28.json",
+      "atlas:district:ESP-3203:4570e654": "data/geography/part-28.json",
+      "atlas:district:ESP-3203:a4467917": "data/geography/part-28.json",
+      "atlas:district:ESP-3604:e8019e4a": "data/geography/part-28.json",
+      "atlas:district:ESP-3701:fc9fe3a7": "data/geography/part-29.json",
+      "atlas:district:ESP-3707:fc9fe3a7": "data/geography/part-29.json",
+      "atlas:district:ESP-4901:6efc8274": "data/geography/part-29.json",
+      "atlas:district:ESP-4903:6efc8274": "data/geography/part-29.json",
+      "atlas:district:ESP-4905:6efc8274": "data/geography/part-29.json",
+      "atlas:district:ESP-601:1ab54228": "data/geography/part-29.json",
+      "atlas:district:ESP-609:1ab54228": "data/geography/part-29.json",
+      "atlas:district:ESP-610:1ab54228": "data/geography/part-29.json",
+      "gb:ESP:ADM3:28895703B51852065515322": "data/geography/part-8.json",
+      "gb:ESP:ADM3:28895703B56784737193540": "data/geography/part-8.json",
+      "gb:ESP:ADM3:28895703B85450907202515": "data/geography/part-8.json",
+      "gb:PRT:ADM2:2272694B11830376405667": "data/geography/part-20.json",
+      "gb:PRT:ADM2:2272694B13078000098594": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B13329343625414": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B13508937537537": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B2145262070020": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B24025236019409": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B25299423406959": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B25659359288022": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B25989222534263": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B32277573146992": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B34949703173808": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B39010061947552": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B40601521893357": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B41768317119061": "data/geography/part-20.json",
+      "gb:PRT:ADM2:2272694B44176903413239": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B45584620103908": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B48413362260100": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B48583272049708": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B49865802064714": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B50247265681610": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B54400056882039": "data/geography/part-20.json",
+      "gb:PRT:ADM2:2272694B58860133566733": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B59712557461647": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B64635687739310": "data/geography/part-20.json",
+      "gb:PRT:ADM2:2272694B64876814145037": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B65561862548464": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B74999887486897": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B76568333306117": "data/geography/part-20.json",
+      "gb:PRT:ADM2:2272694B82300393258858": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B84696960403407": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B85880843555162": "data/geography/part-20.json",
+      "gb:PRT:ADM2:2272694B92040427781981": "data/geography/part-20.json",
+      "gb:PRT:ADM2:2272694B9223863476395": "data/geography/part-20.json",
+      "gb:PRT:ADM2:2272694B95294848011514": "data/geography/part-20.json",
+      "gb:PRT:ADM2:2272694B96263237304275": "data/geography/part-19.json",
+      "gb:PRT:ADM2:2272694B96745231716253": "data/geography/part-19.json"
+    }
+  },
+  "change_receipts": [
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/README.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/inputs/complete-input-index.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/inputs/frozen-input-code-manifest.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/inputs/jrc-2024-window-plan.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/inputs/public-scope-body.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/inputs/selected-70-component-geometries.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/administrative-source-overlays.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/apa-wfd-line-overlays.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/control-admin-gb-ESP-ADM3-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/control-admin-gb-ESP-ADM3-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/control-admin-gb-PRT-ADM2-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/control-admin-gb-PRT-ADM2-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/control-apa-wfd-lines-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/control-apa-wfd-lines-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/control-jrc-monthly-history-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/control-jrc-monthly-history-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/control-mapa-current-snapshot-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/control-mapa-current-snapshot-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/execution-code-input-binding.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/jrc-2024-component-month-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/mapa-current-snapshot-overlays.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/runtime-capture.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/source-status-matrix.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/validation-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/administrative-source-overlays.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/apa-wfd-line-overlays.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/control-admin-gb-ESP-ADM3-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/control-admin-gb-ESP-ADM3-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/control-admin-gb-PRT-ADM2-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/control-admin-gb-PRT-ADM2-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/control-apa-wfd-lines-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/control-apa-wfd-lines-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/control-jrc-monthly-history-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/control-jrc-monthly-history-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/control-mapa-current-snapshot-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/control-mapa-current-snapshot-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/jrc-2024-component-month-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/mapa-current-snapshot-overlays.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/run-manifest.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/runtime-capture.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/source-status-matrix.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/validation-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/administrative-source-overlays.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/apa-wfd-line-overlays.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/control-admin-gb-ESP-ADM3-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/control-admin-gb-ESP-ADM3-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/control-admin-gb-PRT-ADM2-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/control-admin-gb-PRT-ADM2-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/control-apa-wfd-lines-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/control-apa-wfd-lines-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/control-jrc-monthly-history-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/control-jrc-monthly-history-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/control-mapa-current-snapshot-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/control-mapa-current-snapshot-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/jrc-2024-component-month-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/mapa-current-snapshot-overlays.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/run-manifest.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/runtime-capture.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/source-status-matrix.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/validation-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/administrative-source-overlays.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/apa-wfd-line-overlays.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/control-admin-gb-ESP-ADM3-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/control-admin-gb-ESP-ADM3-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/control-admin-gb-PRT-ADM2-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/control-admin-gb-PRT-ADM2-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/control-apa-wfd-lines-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/control-apa-wfd-lines-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/control-jrc-monthly-history-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/control-jrc-monthly-history-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/control-mapa-current-snapshot-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/control-mapa-current-snapshot-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/jrc-2024-component-month-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/mapa-current-snapshot-overlays.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/run-manifest.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/runtime-capture.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/source-status-matrix.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/validation-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/administrative-source-overlays.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/apa-wfd-line-overlays.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/control-admin-gb-ESP-ADM3-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/control-admin-gb-ESP-ADM3-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/control-admin-gb-PRT-ADM2-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/control-admin-gb-PRT-ADM2-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/control-apa-wfd-lines-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/control-apa-wfd-lines-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/control-jrc-monthly-history-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/control-jrc-monthly-history-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/control-mapa-current-snapshot-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/control-mapa-current-snapshot-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/jrc-2024-component-month-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/mapa-current-snapshot-overlays.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/run-manifest.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/runtime-capture.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/source-status-matrix.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/validation-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/scripts/assemble-source-status.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/scripts/build-evidence-quality.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/scripts/compare-admin-source-products.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/scripts/extract-jrc-scope.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/scripts/finalize-evidence-lock.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/scripts/inventory-jrc-2024.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/scripts/overlay-apa-wfd-lines.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/scripts/overlay-mapa-current-snapshot.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/scripts/run-complete-analysis.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/scripts/summarize-jrc-2024.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/scripts/validate-source-controls.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/capabilities.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/capabilities.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/full-border-envelope-hits.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/full-border-envelope-hits.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/full-border-envelope-page-0.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/full-border-envelope-page-0.xml.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/full-border-envelope-page-1.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/full-border-envelope-page-1.xml.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/full-border-envelope-page-2-exhaustion.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/full-border-envelope-page-2-exhaustion.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/full-border-envelope-second-hits.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/full-border-envelope-second-hits.xml",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/license-catalog-api-secondary.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/license-catalog-api.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/license-catalog-api.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/license-catalog-page.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/license-catalog-page.html",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/pagination.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/schema.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/schema.xsd",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/DataUsersGuidev2024_v5.pdf",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/client/downloadWaterData_Python3_v1_4.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/client/downloadWaterData_Python3_v1_5.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/download-instructions.html",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/download-instructions.html.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/download-water-data-python3.zip",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/download-water-data-python3.zip.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024-capture.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_30N_v1_5_2024_01.tif",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_30N_v1_5_2024_02.tif",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_30N_v1_5_2024_03.tif",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_30N_v1_5_2024_04.tif",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_30N_v1_5_2024_05.tif",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_30N_v1_5_2024_06.tif",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_30N_v1_5_2024_07.tif",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_30N_v1_5_2024_08.tif",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_30N_v1_5_2024_09.tif",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_30N_v1_5_2024_10.tif",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_30N_v1_5_2024_11.tif",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_30N_v1_5_2024_12.tif",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_40N_v1_5_2024_01.tif",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_40N_v1_5_2024_02.tif",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_40N_v1_5_2024_03.tif",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_40N_v1_5_2024_04.tif",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_40N_v1_5_2024_05.tif",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_40N_v1_5_2024_06.tif",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_40N_v1_5_2024_07.tif",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_40N_v1_5_2024_08.tif",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_40N_v1_5_2024_09.tif",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_40N_v1_5_2024_10.tif",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_40N_v1_5_2024_11.tif",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_40N_v1_5_2024_12.tif",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-head-inventory.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/official-download-page.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/official-download-page.html",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/mapa/current-attributes-339.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/mapa/current-attributes-339.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/mapa/current-full-geometry-query-error.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/mapa/current-full-geometry-query-error.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/mapa/feature-id-inventory.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/mapa/feature-id-inventory.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/mapa/layer-metadata.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/mapa/layer-metadata.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/mapa/service-metadata.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/mapa/service-metadata.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/mapa/target-18-geometries-4258.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/mapa/target-18-geometries-4258.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/mapa/target-18-geometries.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/mapa/target-18-geometries.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/mapa/target-contact-feature-joins.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/miteco/hydrographic-network-layer-file.zip",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/miteco/hydrographic-network.download-form.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/miteco/hydrographic-network.download-form.html",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/miteco/hydrographic-network.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/miteco/official-phc-download-page.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/miteco/official-phc-download-page.html",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/miteco/water-body-polygons-layer-file.zip",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/miteco/water-body-polygons.download-form.headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/miteco/water-body-polygons.download-form.html",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/miteco/water-body-polygons.headers.txt",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "python3 research/geography/portugal-spain-gap-source-families-20261007/scripts/run-complete-analysis.py run-9",
+    "python3 research/geography/portugal-spain-gap-source-families-20261007/scripts/run-complete-analysis.py run-10",
+    "python3 research/geography/portugal-spain-gap-source-families-20261007/scripts/finalize-evidence-lock.py",
+    "node scripts/evidence-quality.mjs research/geography/portugal-spain-gap-source-families-20261007/evidence-quality.json"
+  ],
+  "conclusions": [
+    {
+      "source_ids": [
+        "geoboundaries-gb-ESP-ADM3-simplified",
+        "geoboundaries-gb-PRT-ADM2-simplified"
+      ],
+      "status": "supported",
+      "text": "The exact simplified geoBoundaries products recorded as consumed by Atlas were reassembled from pinned shards, byte-verified, and compared against every scoped component; no individual component is fully covered by either complete source union."
+    },
+    {
+      "source_ids": [
+        "mapa-current-comarcas-snapshot",
+        "apa-wfd-river-network",
+        "jrc-global-surface-water-monthly-history-v1-5-2024",
+        "miteco-phc-2022-2027"
+      ],
+      "status": "unresolved",
+      "text": "The current MAPA snapshot, APA lines, and 2024 JRC detections provide bounded reference context but do not resolve whole-component water status, historical ownership, cause, or boundary changes; unavailable and unresolved source results remain unknown."
+    }
+  ],
+  "issue": 1274,
+  "lane": "geography",
+  "methods": [
+    {
+      "description": "Compare every scoped geometry with all ESP ADM3 simplified source features using EPSG:6933 equal-area overlay.",
+      "id": "admin-gb-ESP-ADM3",
+      "kind": "measurement",
+      "software": "Python 3.12.14; NumPy 2.3.5; Shapely 2.1.2/GEOS 3.13.1; pyproj 3.7.2/PROJ 9.5.1; Pillow 12.3.0; Zstandard CLI 1.4.5",
+      "units": "EPSG:6933 square metres and line metres; JRC source-grid pixel centers and monthly code counts"
+    },
+    {
+      "description": "Compare every scoped geometry with all PRT ADM2 simplified source features using EPSG:6933 equal-area overlay.",
+      "id": "admin-gb-PRT-ADM2",
+      "kind": "measurement",
+      "software": "Python 3.12.14; NumPy 2.3.5; Shapely 2.1.2/GEOS 3.13.1; pyproj 3.7.2/PROJ 9.5.1; Pillow 12.3.0; Zstandard CLI 1.4.5",
+      "units": "EPSG:6933 square metres and line metres; JRC source-grid pixel centers and monthly code counts"
+    },
+    {
+      "description": "Intersect every scoped geometry with all 1,428 captured APA WFD planning line features after GML axis-order handling and equal-area projection.",
+      "id": "apa-wfd-lines",
+      "kind": "measurement",
+      "software": "Python 3.12.14; NumPy 2.3.5; Shapely 2.1.2/GEOS 3.13.1; pyproj 3.7.2/PROJ 9.5.1; Pillow 12.3.0; Zstandard CLI 1.4.5",
+      "units": "EPSG:6933 square metres and line metres; JRC source-grid pixel centers and monthly code counts"
+    },
+    {
+      "description": "Compare every scoped geometry with all 17 unique current MAPA target features after applying documented Esri ring winding.",
+      "id": "mapa-current-snapshot",
+      "kind": "measurement",
+      "software": "Python 3.12.14; NumPy 2.3.5; Shapely 2.1.2/GEOS 3.13.1; pyproj 3.7.2/PROJ 9.5.1; Pillow 12.3.0; Zstandard CLI 1.4.5",
+      "units": "EPSG:6933 square metres and line metres; JRC source-grid pixel centers and monthly code counts"
+    },
+    {
+      "description": "Decode only selected source-grid TIFF internal tiles, apply Zstandard and Predictor 2, and count strict-inside pixel centers for each month.",
+      "id": "jrc-monthly-history",
+      "kind": "measurement",
+      "software": "Python 3.12.14; NumPy 2.3.5; Shapely 2.1.2/GEOS 3.13.1; pyproj 3.7.2/PROJ 9.5.1; Pillow 12.3.0; Zstandard CLI 1.4.5",
+      "units": "EPSG:6933 square metres and line metres; JRC source-grid pixel centers and monthly code counts"
+    }
+  ],
+  "metric_bindings": [],
+  "metrics": [],
+  "outputs": [
+    {
+      "bytes": 12559,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/README.md",
+      "sha256": "0f740a1e5c1d6a4ee11e4bd91cf1c2f6d6d07075dc73e4ad7e4fb97aa6a5cb41"
+    },
+    {
+      "bytes": 438758,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/inputs/complete-input-index.json",
+      "sha256": "fde93383b699cff1e36668b85ee6529e7fb27062ab0c714c82412ab8f48e08be"
+    },
+    {
+      "bytes": 373541,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/inputs/frozen-input-code-manifest.json",
+      "sha256": "7e664e7332b5e15a61f7af9f9d32781175a1c85d913d88f7e4db2db8bf9a88ff"
+    },
+    {
+      "bytes": 35925,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/inputs/jrc-2024-window-plan.json",
+      "sha256": "cbd46427ade99e1f2e77ff67d663d0d67515d8844579db19176bb6ba1f4c77e1"
+    },
+    {
+      "bytes": 44361,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/inputs/public-scope-body.md",
+      "sha256": "5c0de3ebe7c8381160ebb07b8b97ffae6a2d3ca95e8a712fc7a1d26e969d6819"
+    },
+    {
+      "bytes": 36116,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/inputs/selected-70-component-geometries.geojson",
+      "sha256": "c320f2be4a560532c0255e655bed696958a5638f6c37e4ab83b10e8aef02d1a4"
+    },
+    {
+      "bytes": 245504,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/administrative-source-overlays.json",
+      "sha256": "7498542b1619ba50e193d7e7794cd130cc96e198a488f8d916a73a248a44a2c3"
+    },
+    {
+      "bytes": 45549,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/apa-wfd-line-overlays.json",
+      "sha256": "7e6bd8243839f392752d989f48b6dcb30b673e96640b51ebdbc0927166c92a38"
+    },
+    {
+      "bytes": 670,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/control-admin-gb-ESP-ADM3-negative-control.json",
+      "sha256": "dcd7b9aab3ad5285d2d82a7a7b7ea5c6d0215781db4d78698462075d79193ab3"
+    },
+    {
+      "bytes": 635,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/control-admin-gb-ESP-ADM3-positive-control.json",
+      "sha256": "31d06a104598efb6661c39e43ee036a073b619b1401da6f58ed65c8e24f455f9"
+    },
+    {
+      "bytes": 669,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/control-admin-gb-PRT-ADM2-negative-control.json",
+      "sha256": "3267bad3662e9f45740c8ad3fdf20f3b0c7f1b3980671c3ab6ce9275b352e135"
+    },
+    {
+      "bytes": 634,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/control-admin-gb-PRT-ADM2-positive-control.json",
+      "sha256": "b1d6d9cb521c39234ce017e0f577d3ee715a97bff3fd91e85c5a84ee6cdf01af"
+    },
+    {
+      "bytes": 358,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/control-apa-wfd-lines-negative-control.json",
+      "sha256": "67714396e91b6cd2b5b15b52953c6973cc72b380d3a979f5eb8615bf53bc9628"
+    },
+    {
+      "bytes": 372,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/control-apa-wfd-lines-positive-control.json",
+      "sha256": "7c35cc3f8ea2be3f2b822e87e35350be3a81818cb72ebff15a4172bcf32c210b"
+    },
+    {
+      "bytes": 575,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/control-jrc-monthly-history-negative-control.json",
+      "sha256": "77b0f974bf174a6e872ddf6e3388a26afac1d40b76cc76d97df17efade71b2c0"
+    },
+    {
+      "bytes": 576,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/control-jrc-monthly-history-positive-control.json",
+      "sha256": "32a967f6d54ecc76663dc8d66063ca16aa79a21172c7d5deb101c1548f673593"
+    },
+    {
+      "bytes": 275,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/control-mapa-current-snapshot-negative-control.json",
+      "sha256": "c1ed2b6234294fe3e539ee8080baa16f8598cc3f115b48f131b3bb1bee119115"
+    },
+    {
+      "bytes": 345,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/control-mapa-current-snapshot-positive-control.json",
+      "sha256": "59c345e948fdcbd4bc7547cca8ad90dce6a0a5401624b01e03a3d21ed212fb84"
+    },
+    {
+      "bytes": 5365,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/execution-code-input-binding.json",
+      "sha256": "6be92c1ffd2d57adfcade36d8697ab43980248f17bca9f57daf533749410780b"
+    },
+    {
+      "bytes": 629423,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/jrc-2024-component-month-summary.json",
+      "sha256": "0bf9a5fc88b98ac0328ec5e49ea93dba6aef3cc94913880c3051f8f92e65223d"
+    },
+    {
+      "bytes": 71213,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/mapa-current-snapshot-overlays.json",
+      "sha256": "13bdb51e04e5afed8c42683fb4e0d9ee5454ff75bb431f096e26704445441b93"
+    },
+    {
+      "bytes": 5493,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/reproducibility.json",
+      "sha256": "40cb4537df3a28faddcd0578d497f37a3729240746a31c56b51dddaf70e02dcd"
+    },
+    {
+      "bytes": 526,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/runtime-capture.json",
+      "sha256": "514cfb957d2f66ac2d89b6ae09594ab1dae682e4d6c62e6148a70529b5ec42c3"
+    },
+    {
+      "bytes": 602633,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/source-status-matrix.json",
+      "sha256": "1c02f0fa73f4b13211c275c1a4214424e4835df8469edd96e8dbb467b2181743"
+    },
+    {
+      "bytes": 7209,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/validation-controls.json",
+      "sha256": "66776e531dcf6c6a5a9378cc9d0a0ecfd1a73a57908179062bb69c7bcc26f12d"
+    },
+    {
+      "bytes": 244210,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/administrative-source-overlays.json",
+      "sha256": "199dbdbbd7b5296adf74b2f18f7e898c9b4b82c63a79fe7d886ae09bb5ee6f67"
+    },
+    {
+      "bytes": 45549,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/apa-wfd-line-overlays.json",
+      "sha256": "7e6bd8243839f392752d989f48b6dcb30b673e96640b51ebdbc0927166c92a38"
+    },
+    {
+      "bytes": 427,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/control-admin-gb-ESP-ADM3-negative-control.json",
+      "sha256": "fcc3e6582adae3d35c33f1c4437133025fd92a984b208ab5ea09557bbd773595"
+    },
+    {
+      "bytes": 376,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/control-admin-gb-ESP-ADM3-positive-control.json",
+      "sha256": "f334a358b92d0ddc8146ef288f29a33a4c1771e8c9ab00c3fd72b67ff61883b8"
+    },
+    {
+      "bytes": 427,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/control-admin-gb-PRT-ADM2-negative-control.json",
+      "sha256": "072da719cc2381fd3381f80cc5e81ea2071050707015c6e9cb68eeea60d994c6"
+    },
+    {
+      "bytes": 376,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/control-admin-gb-PRT-ADM2-positive-control.json",
+      "sha256": "0361ea09de1a4d8de846e95f9d54c2302971118fc5f04534ee8ed9398a30217e"
+    },
+    {
+      "bytes": 358,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/control-apa-wfd-lines-negative-control.json",
+      "sha256": "67714396e91b6cd2b5b15b52953c6973cc72b380d3a979f5eb8615bf53bc9628"
+    },
+    {
+      "bytes": 372,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/control-apa-wfd-lines-positive-control.json",
+      "sha256": "7c35cc3f8ea2be3f2b822e87e35350be3a81818cb72ebff15a4172bcf32c210b"
+    },
+    {
+      "bytes": 575,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/control-jrc-monthly-history-negative-control.json",
+      "sha256": "77b0f974bf174a6e872ddf6e3388a26afac1d40b76cc76d97df17efade71b2c0"
+    },
+    {
+      "bytes": 576,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/control-jrc-monthly-history-positive-control.json",
+      "sha256": "32a967f6d54ecc76663dc8d66063ca16aa79a21172c7d5deb101c1548f673593"
+    },
+    {
+      "bytes": 275,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/control-mapa-current-snapshot-negative-control.json",
+      "sha256": "c1ed2b6234294fe3e539ee8080baa16f8598cc3f115b48f131b3bb1bee119115"
+    },
+    {
+      "bytes": 345,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/control-mapa-current-snapshot-positive-control.json",
+      "sha256": "59c345e948fdcbd4bc7547cca8ad90dce6a0a5401624b01e03a3d21ed212fb84"
+    },
+    {
+      "bytes": 629423,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/jrc-2024-component-month-summary.json",
+      "sha256": "0bf9a5fc88b98ac0328ec5e49ea93dba6aef3cc94913880c3051f8f92e65223d"
+    },
+    {
+      "bytes": 71213,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/mapa-current-snapshot-overlays.json",
+      "sha256": "13bdb51e04e5afed8c42683fb4e0d9ee5454ff75bb431f096e26704445441b93"
+    },
+    {
+      "bytes": 2158,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/reproducibility.json",
+      "sha256": "cbfd2acba960f18a50781921973b537c62a83bdc703b8cd8fefb2ea9b0d8a910"
+    },
+    {
+      "bytes": 3615,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/run-manifest.json",
+      "sha256": "a1df14de504bba55631e3d3fa2da453070391291e3a1a18f5ecfc612cda27113"
+    },
+    {
+      "bytes": 526,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/runtime-capture.json",
+      "sha256": "514cfb957d2f66ac2d89b6ae09594ab1dae682e4d6c62e6148a70529b5ec42c3"
+    },
+    {
+      "bytes": 602633,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/source-status-matrix.json",
+      "sha256": "4f52f16e17710ae0b06a55450a142fea2389f1c6258d8a1b9340e1ddb17c6fd2"
+    },
+    {
+      "bytes": 5971,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/validation-controls.json",
+      "sha256": "329994cdd68b9e6dc2b7a436bb9d80e5c3392e09e38bb0496de0089927afd845"
+    },
+    {
+      "bytes": 245504,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/administrative-source-overlays.json",
+      "sha256": "7498542b1619ba50e193d7e7794cd130cc96e198a488f8d916a73a248a44a2c3"
+    },
+    {
+      "bytes": 45549,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/apa-wfd-line-overlays.json",
+      "sha256": "7e6bd8243839f392752d989f48b6dcb30b673e96640b51ebdbc0927166c92a38"
+    },
+    {
+      "bytes": 670,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/control-admin-gb-ESP-ADM3-negative-control.json",
+      "sha256": "dcd7b9aab3ad5285d2d82a7a7b7ea5c6d0215781db4d78698462075d79193ab3"
+    },
+    {
+      "bytes": 635,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/control-admin-gb-ESP-ADM3-positive-control.json",
+      "sha256": "31d06a104598efb6661c39e43ee036a073b619b1401da6f58ed65c8e24f455f9"
+    },
+    {
+      "bytes": 669,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/control-admin-gb-PRT-ADM2-negative-control.json",
+      "sha256": "3267bad3662e9f45740c8ad3fdf20f3b0c7f1b3980671c3ab6ce9275b352e135"
+    },
+    {
+      "bytes": 634,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/control-admin-gb-PRT-ADM2-positive-control.json",
+      "sha256": "b1d6d9cb521c39234ce017e0f577d3ee715a97bff3fd91e85c5a84ee6cdf01af"
+    },
+    {
+      "bytes": 358,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/control-apa-wfd-lines-negative-control.json",
+      "sha256": "67714396e91b6cd2b5b15b52953c6973cc72b380d3a979f5eb8615bf53bc9628"
+    },
+    {
+      "bytes": 372,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/control-apa-wfd-lines-positive-control.json",
+      "sha256": "7c35cc3f8ea2be3f2b822e87e35350be3a81818cb72ebff15a4172bcf32c210b"
+    },
+    {
+      "bytes": 575,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/control-jrc-monthly-history-negative-control.json",
+      "sha256": "77b0f974bf174a6e872ddf6e3388a26afac1d40b76cc76d97df17efade71b2c0"
+    },
+    {
+      "bytes": 576,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/control-jrc-monthly-history-positive-control.json",
+      "sha256": "32a967f6d54ecc76663dc8d66063ca16aa79a21172c7d5deb101c1548f673593"
+    },
+    {
+      "bytes": 275,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/control-mapa-current-snapshot-negative-control.json",
+      "sha256": "c1ed2b6234294fe3e539ee8080baa16f8598cc3f115b48f131b3bb1bee119115"
+    },
+    {
+      "bytes": 345,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/control-mapa-current-snapshot-positive-control.json",
+      "sha256": "59c345e948fdcbd4bc7547cca8ad90dce6a0a5401624b01e03a3d21ed212fb84"
+    },
+    {
+      "bytes": 629423,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/jrc-2024-component-month-summary.json",
+      "sha256": "0bf9a5fc88b98ac0328ec5e49ea93dba6aef3cc94913880c3051f8f92e65223d"
+    },
+    {
+      "bytes": 71213,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/mapa-current-snapshot-overlays.json",
+      "sha256": "13bdb51e04e5afed8c42683fb4e0d9ee5454ff75bb431f096e26704445441b93"
+    },
+    {
+      "bytes": 3461,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/run-manifest.json",
+      "sha256": "04507e6e5efe7358f049a9b59d7b8eb85c8b88cb96c91fff9ee1a21a70129aa3"
+    },
+    {
+      "bytes": 526,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/runtime-capture.json",
+      "sha256": "514cfb957d2f66ac2d89b6ae09594ab1dae682e4d6c62e6148a70529b5ec42c3"
+    },
+    {
+      "bytes": 602633,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/source-status-matrix.json",
+      "sha256": "1c02f0fa73f4b13211c275c1a4214424e4835df8469edd96e8dbb467b2181743"
+    },
+    {
+      "bytes": 7209,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/validation-controls.json",
+      "sha256": "66776e531dcf6c6a5a9378cc9d0a0ecfd1a73a57908179062bb69c7bcc26f12d"
+    },
+    {
+      "bytes": 244210,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/administrative-source-overlays.json",
+      "sha256": "199dbdbbd7b5296adf74b2f18f7e898c9b4b82c63a79fe7d886ae09bb5ee6f67"
+    },
+    {
+      "bytes": 45549,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/apa-wfd-line-overlays.json",
+      "sha256": "7e6bd8243839f392752d989f48b6dcb30b673e96640b51ebdbc0927166c92a38"
+    },
+    {
+      "bytes": 427,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/control-admin-gb-ESP-ADM3-negative-control.json",
+      "sha256": "fcc3e6582adae3d35c33f1c4437133025fd92a984b208ab5ea09557bbd773595"
+    },
+    {
+      "bytes": 376,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/control-admin-gb-ESP-ADM3-positive-control.json",
+      "sha256": "f334a358b92d0ddc8146ef288f29a33a4c1771e8c9ab00c3fd72b67ff61883b8"
+    },
+    {
+      "bytes": 427,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/control-admin-gb-PRT-ADM2-negative-control.json",
+      "sha256": "072da719cc2381fd3381f80cc5e81ea2071050707015c6e9cb68eeea60d994c6"
+    },
+    {
+      "bytes": 376,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/control-admin-gb-PRT-ADM2-positive-control.json",
+      "sha256": "0361ea09de1a4d8de846e95f9d54c2302971118fc5f04534ee8ed9398a30217e"
+    },
+    {
+      "bytes": 358,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/control-apa-wfd-lines-negative-control.json",
+      "sha256": "67714396e91b6cd2b5b15b52953c6973cc72b380d3a979f5eb8615bf53bc9628"
+    },
+    {
+      "bytes": 372,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/control-apa-wfd-lines-positive-control.json",
+      "sha256": "7c35cc3f8ea2be3f2b822e87e35350be3a81818cb72ebff15a4172bcf32c210b"
+    },
+    {
+      "bytes": 575,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/control-jrc-monthly-history-negative-control.json",
+      "sha256": "77b0f974bf174a6e872ddf6e3388a26afac1d40b76cc76d97df17efade71b2c0"
+    },
+    {
+      "bytes": 576,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/control-jrc-monthly-history-positive-control.json",
+      "sha256": "32a967f6d54ecc76663dc8d66063ca16aa79a21172c7d5deb101c1548f673593"
+    },
+    {
+      "bytes": 275,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/control-mapa-current-snapshot-negative-control.json",
+      "sha256": "c1ed2b6234294fe3e539ee8080baa16f8598cc3f115b48f131b3bb1bee119115"
+    },
+    {
+      "bytes": 345,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/control-mapa-current-snapshot-positive-control.json",
+      "sha256": "59c345e948fdcbd4bc7547cca8ad90dce6a0a5401624b01e03a3d21ed212fb84"
+    },
+    {
+      "bytes": 629423,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/jrc-2024-component-month-summary.json",
+      "sha256": "0bf9a5fc88b98ac0328ec5e49ea93dba6aef3cc94913880c3051f8f92e65223d"
+    },
+    {
+      "bytes": 71213,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/mapa-current-snapshot-overlays.json",
+      "sha256": "13bdb51e04e5afed8c42683fb4e0d9ee5454ff75bb431f096e26704445441b93"
+    },
+    {
+      "bytes": 2158,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/reproducibility.json",
+      "sha256": "cbfd2acba960f18a50781921973b537c62a83bdc703b8cd8fefb2ea9b0d8a910"
+    },
+    {
+      "bytes": 3615,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/run-manifest.json",
+      "sha256": "6166b63912273eadeaedb9b5d619204bb00045f4d3526cd54718076e6b50deb8"
+    },
+    {
+      "bytes": 526,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/runtime-capture.json",
+      "sha256": "514cfb957d2f66ac2d89b6ae09594ab1dae682e4d6c62e6148a70529b5ec42c3"
+    },
+    {
+      "bytes": 602633,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/source-status-matrix.json",
+      "sha256": "4f52f16e17710ae0b06a55450a142fea2389f1c6258d8a1b9340e1ddb17c6fd2"
+    },
+    {
+      "bytes": 5971,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/validation-controls.json",
+      "sha256": "329994cdd68b9e6dc2b7a436bb9d80e5c3392e09e38bb0496de0089927afd845"
+    },
+    {
+      "bytes": 245504,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/administrative-source-overlays.json",
+      "sha256": "7498542b1619ba50e193d7e7794cd130cc96e198a488f8d916a73a248a44a2c3"
+    },
+    {
+      "bytes": 45549,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/apa-wfd-line-overlays.json",
+      "sha256": "7e6bd8243839f392752d989f48b6dcb30b673e96640b51ebdbc0927166c92a38"
+    },
+    {
+      "bytes": 670,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/control-admin-gb-ESP-ADM3-negative-control.json",
+      "sha256": "dcd7b9aab3ad5285d2d82a7a7b7ea5c6d0215781db4d78698462075d79193ab3"
+    },
+    {
+      "bytes": 635,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/control-admin-gb-ESP-ADM3-positive-control.json",
+      "sha256": "31d06a104598efb6661c39e43ee036a073b619b1401da6f58ed65c8e24f455f9"
+    },
+    {
+      "bytes": 669,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/control-admin-gb-PRT-ADM2-negative-control.json",
+      "sha256": "3267bad3662e9f45740c8ad3fdf20f3b0c7f1b3980671c3ab6ce9275b352e135"
+    },
+    {
+      "bytes": 634,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/control-admin-gb-PRT-ADM2-positive-control.json",
+      "sha256": "b1d6d9cb521c39234ce017e0f577d3ee715a97bff3fd91e85c5a84ee6cdf01af"
+    },
+    {
+      "bytes": 358,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/control-apa-wfd-lines-negative-control.json",
+      "sha256": "67714396e91b6cd2b5b15b52953c6973cc72b380d3a979f5eb8615bf53bc9628"
+    },
+    {
+      "bytes": 372,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/control-apa-wfd-lines-positive-control.json",
+      "sha256": "7c35cc3f8ea2be3f2b822e87e35350be3a81818cb72ebff15a4172bcf32c210b"
+    },
+    {
+      "bytes": 575,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/control-jrc-monthly-history-negative-control.json",
+      "sha256": "77b0f974bf174a6e872ddf6e3388a26afac1d40b76cc76d97df17efade71b2c0"
+    },
+    {
+      "bytes": 576,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/control-jrc-monthly-history-positive-control.json",
+      "sha256": "32a967f6d54ecc76663dc8d66063ca16aa79a21172c7d5deb101c1548f673593"
+    },
+    {
+      "bytes": 275,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/control-mapa-current-snapshot-negative-control.json",
+      "sha256": "c1ed2b6234294fe3e539ee8080baa16f8598cc3f115b48f131b3bb1bee119115"
+    },
+    {
+      "bytes": 345,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/control-mapa-current-snapshot-positive-control.json",
+      "sha256": "59c345e948fdcbd4bc7547cca8ad90dce6a0a5401624b01e03a3d21ed212fb84"
+    },
+    {
+      "bytes": 629423,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/jrc-2024-component-month-summary.json",
+      "sha256": "0bf9a5fc88b98ac0328ec5e49ea93dba6aef3cc94913880c3051f8f92e65223d"
+    },
+    {
+      "bytes": 71213,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/mapa-current-snapshot-overlays.json",
+      "sha256": "13bdb51e04e5afed8c42683fb4e0d9ee5454ff75bb431f096e26704445441b93"
+    },
+    {
+      "bytes": 3460,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/run-manifest.json",
+      "sha256": "f7cfc46a6329e9772ea2f33c683be750cbdeb027d29ae6477205dda2e2741838"
+    },
+    {
+      "bytes": 526,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/runtime-capture.json",
+      "sha256": "514cfb957d2f66ac2d89b6ae09594ab1dae682e4d6c62e6148a70529b5ec42c3"
+    },
+    {
+      "bytes": 602633,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/source-status-matrix.json",
+      "sha256": "1c02f0fa73f4b13211c275c1a4214424e4835df8469edd96e8dbb467b2181743"
+    },
+    {
+      "bytes": 7209,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/validation-controls.json",
+      "sha256": "66776e531dcf6c6a5a9378cc9d0a0ecfd1a73a57908179062bb69c7bcc26f12d"
+    },
+    {
+      "bytes": 11567,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/scripts/assemble-source-status.py",
+      "sha256": "7ee3c56eac25df1ab59cb5ae8fa480fbe55a7255ec4bfee95c8ae29675a11367"
+    },
+    {
+      "bytes": 14467,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/scripts/build-evidence-quality.py",
+      "sha256": "1e433b872081627db979daa2c655a755395d826d7a28f761db59e68364d5130f"
+    },
+    {
+      "bytes": 12540,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/scripts/compare-admin-source-products.py",
+      "sha256": "7f1bdd474084ec9a52e260d6bb56737cfbd9828494496a039cb484030b85530b"
+    },
+    {
+      "bytes": 5111,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/scripts/extract-jrc-scope.py",
+      "sha256": "eba72f095469ffeb4a34f1e9b00e42296b9ccab4f21ebf588599bae4f9dfc34b"
+    },
+    {
+      "bytes": 7272,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/scripts/finalize-evidence-lock.py",
+      "sha256": "4e011bf914c14edcb51e8176b13a5af825eb694194515d3222edafcc74529ae7"
+    },
+    {
+      "bytes": 5437,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/scripts/inventory-jrc-2024.py",
+      "sha256": "6c9676742043271d60c67402c1e173d074c467ceb2acf5cc53aef069b29214eb"
+    },
+    {
+      "bytes": 9138,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/scripts/overlay-apa-wfd-lines.py",
+      "sha256": "79f74448123f35208711d87d20f7de3d2c7eaea8072ecf863aeb8f7c441a3ae7"
+    },
+    {
+      "bytes": 8804,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/scripts/overlay-mapa-current-snapshot.py",
+      "sha256": "6d44981a949e87673e888e4795bb0909c130ebcf4f0a7455badb0c41cf60314a"
+    },
+    {
+      "bytes": 2772,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/scripts/run-complete-analysis.py",
+      "sha256": "418c23af53cfa705bcca2daef10bb81e99a01f03bcb25914773324e0e39b7b0d"
+    },
+    {
+      "bytes": 11562,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/scripts/summarize-jrc-2024.py",
+      "sha256": "80aff368618932f2a736ecb7725f89bd9d1316e52a0176ce5c8a2243ffb7ac77"
+    },
+    {
+      "bytes": 10030,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/scripts/validate-source-controls.py",
+      "sha256": "77ed894c41f4ec29a07781393ebb5d97bb94200d769037c31f6816b399789b88"
+    },
+    {
+      "bytes": 459,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/capabilities.headers.txt",
+      "sha256": "b274b1b2c7d30cc134915f7b3979e6a797aef1598d8583da39dd6f7ac9a933a5"
+    },
+    {
+      "bytes": 14517,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/capabilities.xml",
+      "sha256": "6967b11ec832960d75067ca98a90edfb736077cf632c105e3e9f0ad41735c803"
+    },
+    {
+      "bytes": 823,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/full-border-envelope-hits.headers.txt",
+      "sha256": "684631b0351ee18810a33ac72153472961b71fd3cf2c57ace249222224ddf2fe"
+    },
+    {
+      "bytes": 967,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/full-border-envelope-hits.xml",
+      "sha256": "021226d25956eb4f99b68dc2aa297e38baf121847c754489e4949d362417d195"
+    },
+    {
+      "bytes": 12571737,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/full-border-envelope-page-0.xml",
+      "sha256": "a6b5387f002ebcaaf46820769d8fe09488350029b5dca24db01c37e26efec3fe"
+    },
+    {
+      "bytes": 838,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/full-border-envelope-page-0.xml.headers.txt",
+      "sha256": "43771ecc4953e3e0f41d37ce5685f5cebb4fed77612329bcd3b31709ca10dfc1"
+    },
+    {
+      "bytes": 4757898,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/full-border-envelope-page-1.xml",
+      "sha256": "a721161ca98fb338446023fe545af5b83ee54341bbe90a97241804baebbf9516"
+    },
+    {
+      "bytes": 841,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/full-border-envelope-page-1.xml.headers.txt",
+      "sha256": "989aededac4ed0fd79c870df552ab014c0801c24913e651b92d9b300bc6f0ae1"
+    },
+    {
+      "bytes": 834,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/full-border-envelope-page-2-exhaustion.headers.txt",
+      "sha256": "2d3117fab21c5823dee55e26e0f0874863d19e400913ac27735801018c430aa7"
+    },
+    {
+      "bytes": 970,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/full-border-envelope-page-2-exhaustion.xml",
+      "sha256": "4b1667c94cad299aa92a785c78fb5832cd2df32b98ae284fe4d3af554c267ffd"
+    },
+    {
+      "bytes": 823,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/full-border-envelope-second-hits.headers.txt",
+      "sha256": "50eff5e15c70905ef779f380de77326fa3d374fcb9df5791dfd1bba22419c6fb"
+    },
+    {
+      "bytes": 967,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/full-border-envelope-second-hits.xml",
+      "sha256": "ee643091833af4f26bc620bb998b0dda6cf9f16f610c69cad4efc20d6f2e3c6f"
+    },
+    {
+      "bytes": 871,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/license-catalog-api-secondary.headers.txt",
+      "sha256": "4a41ec3e397fb51f0be3369483805f2319cb2c430f4a44baf40288a6c0d06022"
+    },
+    {
+      "bytes": 888,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/license-catalog-api.headers.txt",
+      "sha256": "f7afb3fc1de41b4f6650a44b542929289f68a5d1377e9508a908d9dbff340976"
+    },
+    {
+      "bytes": 6276,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/license-catalog-api.json",
+      "sha256": "f65cbc095a609ef24bf3fe914ba7afb015484868dc8dd2de0a24b85a311a992f"
+    },
+    {
+      "bytes": 2433,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/license-catalog-page.headers.txt",
+      "sha256": "29f09cfdaa31783832821164d41eb67914edcdfb35f25d7492421b8f8f174829"
+    },
+    {
+      "bytes": 246736,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/license-catalog-page.html",
+      "sha256": "fb1046525df5e9f562a705061478490b1b9d3b01bb930ae994fb6a586c364581"
+    },
+    {
+      "bytes": 1773,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/pagination.json",
+      "sha256": "017c147a84e5f379606df4fcedcfec8b69fca3e2ee8daf4dace4adec52ccd03e"
+    },
+    {
+      "bytes": 458,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/schema.headers.txt",
+      "sha256": "7300ec2328159b44a1a766c7b54d0c56827131ad8bed3dbc133890cc05aabd97"
+    },
+    {
+      "bytes": 4983,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/apa-wfd/schema.xsd",
+      "sha256": "95880da90c3765090d1db947463ad2ffef97adefd8fc9758c80a114d0e913889"
+    },
+    {
+      "bytes": 1142853,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/DataUsersGuidev2024_v5.pdf",
+      "sha256": "94aebddbb2d66bcbacea14326d84d0b9d9401c8ef95bc48b42991448f36b839b"
+    },
+    {
+      "bytes": 1790,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/client/downloadWaterData_Python3_v1_4.py",
+      "sha256": "1418db682dad8168fe75be8b033c818f3f451bd11773c21941c048329d23efed"
+    },
+    {
+      "bytes": 4842,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/client/downloadWaterData_Python3_v1_5.py",
+      "sha256": "352c83ea8609c839314b7a4f86aa5e8fe686316e7baeb4eab0b215d0e6723953"
+    },
+    {
+      "bytes": 11694,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/download-instructions.html",
+      "sha256": "9d34675d2070e3af665a28af0e5c3edd53541fde4fc9098f719330e85be56f9a"
+    },
+    {
+      "bytes": 552,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/download-instructions.html.headers.txt",
+      "sha256": "4f127cd5c8ec8a3af11df69ecf6692be7f3d1910ada35e8887004dd191c6ce80"
+    },
+    {
+      "bytes": 6713,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/download-water-data-python3.zip",
+      "sha256": "704382be1bdc7d81069e6de4d66a87d60f4b9470f230c13502c9454828054a68"
+    },
+    {
+      "bytes": 1008,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/download-water-data-python3.zip.headers.txt",
+      "sha256": "57b58a657101823c98c61b6acaf80ef81843625836616186a6121dcdbd008036"
+    },
+    {
+      "bytes": 95633,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024-capture.json",
+      "sha256": "659cacf727f59cf19c637417160c172d89772b23563c1bd9bb025800fc57f5ce"
+    },
+    {
+      "bytes": 37375,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-head-inventory.json",
+      "sha256": "170d8a3fcd293d9c903ca3e32c36514f484369f46e019f14e6f20a49a4976f45"
+    },
+    {
+      "bytes": 455,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/official-download-page.headers.txt",
+      "sha256": "4325ec9cfa3dd5e6caea97077d482f7fac42cb70e70d08737de014660a31733f"
+    },
+    {
+      "bytes": 85116,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/official-download-page.html",
+      "sha256": "8b8d8613efb3078b2c2f64c3a76ccdc6fbacdb7d35a7654be2bb98314eb81e62"
+    },
+    {
+      "bytes": 2763,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/mapa/current-attributes-339.headers.txt",
+      "sha256": "b1b63decbc1744e7273ac64975a53a9900183306fb2b43657fb83616288367bb"
+    },
+    {
+      "bytes": 40883,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/mapa/current-attributes-339.json",
+      "sha256": "b80d1604a89f4c16466b1dee304d8c96e174ce0b65b014964d07b2c500d6b960"
+    },
+    {
+      "bytes": 2600,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/mapa/current-full-geometry-query-error.headers.txt",
+      "sha256": "6768313383758d4b8577e15d776c994e8f9faa122c0aee7ad7f5522414b1ec18"
+    },
+    {
+      "bytes": 80,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/mapa/current-full-geometry-query-error.json",
+      "sha256": "a84421cbafb3748a22cab107d392c932151a69ce77dfe8cfb544e2d5609b14ad"
+    },
+    {
+      "bytes": 2684,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/mapa/feature-id-inventory.headers.txt",
+      "sha256": "71bdc0b9ac43f7a9229b93211feaa0f9924e33412a8e234686baf5531af6ee93"
+    },
+    {
+      "bytes": 2428,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/mapa/feature-id-inventory.json",
+      "sha256": "6908b5c1657fbaa3b0cf7ec3c9e19b058980f37a0d24af13ffabb14887227720"
+    },
+    {
+      "bytes": 2612,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/mapa/layer-metadata.headers.txt",
+      "sha256": "8ad02b627cc75e0406fab11de3396f153e45c7978ddf91ef2ef8f2b52ec15e83"
+    },
+    {
+      "bytes": 3300,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/mapa/layer-metadata.json",
+      "sha256": "857823807fc84b4452cd9b068dd970cf0215b076c13086c55574b30d1f8fb194"
+    },
+    {
+      "bytes": 2610,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/mapa/service-metadata.headers.txt",
+      "sha256": "0752457d3e12d476eb8a18fd5fb62b9a17525b8e0de13f48e3d232e5f37b072c"
+    },
+    {
+      "bytes": 3515,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/mapa/service-metadata.json",
+      "sha256": "cc4ca50949205d351f5f8d74015b89a359eace6102c8d2bd80c05569994ae6b9"
+    },
+    {
+      "bytes": 2850,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/mapa/target-18-geometries-4258.headers.txt",
+      "sha256": "3c5caf670c7892be1c77b2d6c71ff5ef0e8606978385c6f83a9f446d6d0aded8"
+    },
+    {
+      "bytes": 1714970,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/mapa/target-18-geometries-4258.json",
+      "sha256": "1591187bf2a1ae1ec8c2fec2b17c424174500e313c5ca903e5a905b01a27d285"
+    },
+    {
+      "bytes": 2851,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/mapa/target-18-geometries.headers.txt",
+      "sha256": "44a20354e9d0897d653b58615ad2749306a874c4952f70f80acd929d85fe9589"
+    },
+    {
+      "bytes": 1676143,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/mapa/target-18-geometries.json",
+      "sha256": "ed33d1938369500e2e32bb115017a1737e661975e8307b1a408b0070c14bda65"
+    },
+    {
+      "bytes": 5908,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/mapa/target-contact-feature-joins.json",
+      "sha256": "3c847b850d95e267b080764f061cf71505a8fdc6b1e132eef5b724b43c6112a8"
+    },
+    {
+      "bytes": 2469,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/miteco/hydrographic-network-layer-file.zip",
+      "sha256": "dfbd63e90ea8da1e58bc086ca61cf4c5daa3c4fd6f3bab92409e613edc342183"
+    },
+    {
+      "bytes": 722,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/miteco/hydrographic-network.download-form.headers.txt",
+      "sha256": "9631f43d7b30a2ea1d556ee66f33f448b636d3381b5631a4e47c8289f67297a6"
+    },
+    {
+      "bytes": 3411,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/miteco/hydrographic-network.download-form.html",
+      "sha256": "9c76584d1aaa0b69950c40fd4b0ef5f3cc0abc9dc4625aa0b71ac1a8d80b2d60"
+    },
+    {
+      "bytes": 1395,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/miteco/hydrographic-network.headers.txt",
+      "sha256": "37cb8ca9f708efbde543cd68898a8c0973a0ad2e7177510c5fb2b3dbb7baf303"
+    },
+    {
+      "bytes": 1146,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/miteco/official-phc-download-page.headers.txt",
+      "sha256": "b0a10e27b231d677b8ae2dd479bb9394caa1f275197374a25ac1402c5b4898cd"
+    },
+    {
+      "bytes": 89846,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/miteco/official-phc-download-page.html",
+      "sha256": "e033f0d762260d3141a06f5b8392ee4727cfead5c1469f272f8d39b83e24d777"
+    },
+    {
+      "bytes": 3210,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/miteco/water-body-polygons-layer-file.zip",
+      "sha256": "37ae105d14e281c26b1257573ab0a93c8895bae8eaf2af12d719a47624ea5612"
+    },
+    {
+      "bytes": 720,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/miteco/water-body-polygons.download-form.headers.txt",
+      "sha256": "be1e0d7553992d11aa7d7467c73de60b754345b4c90e3b972d518adb81de326e"
+    },
+    {
+      "bytes": 3409,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/miteco/water-body-polygons.download-form.html",
+      "sha256": "07e0f894f543a9ca25c0839b7d398d0fa4cd1ce8dd275cfb8570f86330b16b97"
+    },
+    {
+      "bytes": 1393,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/miteco/water-body-polygons.headers.txt",
+      "sha256": "fc9df1b326ab6e2fef54e7b30a7244b616ca0964005301474073ce9f3fbbdb18"
+    }
+  ],
+  "sources": [
+    {
+      "files": [
+        {
+          "bytes": 5048979,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-ESP-ADM3-000.bin.gz",
+          "role": "original-source",
+          "sha256": "2c79b3b7c2338733c7026f311148d10c20693facd06a635991e7fdf76204be62",
+          "uncompressed_bytes": 18613175,
+          "uncompressed_sha256": "e5bfa1c3889ea763ca2bb82c7f1e8ff9eff715dcb99ce405293a03de7ac85862"
+        }
+      ],
+      "id": "geoboundaries-gb-ESP-ADM3-simplified",
+      "license": {
+        "status": "redistributable",
+        "terms": "CC BY 4.0; preserve source attribution and original metadata"
+      },
+      "retention": "retained",
+      "retrieved_at": "2026-10-07",
+      "role": "Exact simplified administrative product recorded as consumed by Atlas",
+      "temporal_status": "reference",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/ESP/ADM3/geoBoundaries-ESP-ADM3_simplified.geojson",
+      "verification": "verified",
+      "vintage": "Represented-year claim 2018; original simplified release product"
+    },
+    {
+      "files": [
+        {
+          "bytes": 85617,
+          "hash_kind": "file-bytes",
+          "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-PRT-ADM2-000.bin.gz",
+          "role": "original-source",
+          "sha256": "f53a331f31d1f0fbdc53dae4884c372b05888995b88e1aea84c8f9d12a3c1d7b",
+          "uncompressed_bytes": 387331,
+          "uncompressed_sha256": "f7a9143190715b85812b03617adc4879898b8c6a6789b9c9732c9705ea6c21ac"
+        }
+      ],
+      "id": "geoboundaries-gb-PRT-ADM2-simplified",
+      "license": {
+        "status": "redistributable",
+        "terms": "CC0 1.0; preserve source attribution and original metadata"
+      },
+      "retention": "retained",
+      "retrieved_at": "2026-10-07",
+      "role": "Exact simplified administrative product recorded as consumed by Atlas",
+      "temporal_status": "reference",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/90a1d52/releaseData/gbOpen/PRT/ADM2/geoBoundaries-PRT-ADM2_simplified.geojson",
+      "verification": "verified",
+      "vintage": "Represented-year claim 2020; original simplified release product"
+    },
+    {
+      "id": "mapa-current-comarcas-snapshot",
+      "license": {
+        "status": "unknown",
+        "terms": "Layer metadata leaves copyright and use-terms fields blank; reuse rights for geometry are not established."
+      },
+      "limit": "All 18 historical MAPA originals remain absent; 17 current features are diagnostic context only, and source license/use terms are unknown.",
+      "restoration": "Use the recorded official MapServer URL with bounded target ObjectID queries; historical Atlas-imported response bytes were not recovered.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-07",
+      "role": "Recent current-service target-feature snapshot; not a recovered historical import",
+      "temporal_status": "reference",
+      "url": "https://sig.mapa.gob.es/arcgis/rest/services/25830/comunComarcasAgrarias/MapServer/2",
+      "verification": "verified",
+      "vintage": "Undated current MapServer snapshot retrieved 2026-10-07"
+    },
+    {
+      "id": "apa-wfd-river-network",
+      "license": {
+        "status": "unknown",
+        "terms": "Current official catalog API says notspecified; a related catalog record reports CC BY 4.0 and an older record also says notspecified. Fees/access constraints are not a reuse license."
+      },
+      "limit": "Line features do not measure wetted width and are not a complete land/water inventory; separate requests were not transactional; reuse terms remain unresolved.",
+      "restoration": "Use the captured official APA WFS service URL, complete envelope query, pagination metadata, and exact schema/capabilities retained in sources/apa-wfd/.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-07",
+      "role": "Official Portuguese WFD planning river-line source and captured bounded WFS response",
+      "temporal_status": "reference",
+      "url": "https://sniamb.apambiente.pt/geoportal/catalog/search/resource/details.page?uuid=6543c7f7b801ee975665fca5",
+      "verification": "verified",
+      "vintage": "Planning source context 2015\u20132021; WFS captured 2026-10-07"
+    },
+    {
+      "id": "miteco-phc-2022-2027",
+      "license": {
+        "status": "redistributable",
+        "terms": "The official page permits free use with attribution to the Ministry; no vector data were acquired."
+      },
+      "limit": "The linked .lyr files are styles, while data endpoints returned an HTML challenge form; no vectors were acquired or used.",
+      "restoration": "Retry the official dataset links under the published access conditions when the vector endpoints are available without bypassing their challenge.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-07",
+      "role": "Official Spanish water-planning data access record and documented unavailable vector retrieval",
+      "temporal_status": "reference",
+      "url": "https://www.miteco.gob.es/es/cartografia-y-sig/ide/descargas/agua/masas-de-agua-phc-2022-2027.html",
+      "verification": "verified",
+      "vintage": "Planning cycle 2022\u20132027; official page and challenge responses captured 2026-10-07"
+    },
+    {
+      "files": [
+        {
+          "bytes": 2506037,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_30N_v1_5_2024_01.tif",
+          "sha256": "020292049847f5a364be6423b9fa30280bf950d48818e9e9e8ce770dd354aa85"
+        },
+        {
+          "bytes": 580055,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_30N_v1_5_2024_02.tif",
+          "sha256": "f3fc163ca03b0899623560ffc09e5a0cddc678a5383cb98caaca98722cfe1e0a"
+        },
+        {
+          "bytes": 335096,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_30N_v1_5_2024_03.tif",
+          "sha256": "26bdd7b2b9c64f644004e9cef88aa2facb61bf6e22b9547a34b1dd6bb503234c"
+        },
+        {
+          "bytes": 291576,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_30N_v1_5_2024_04.tif",
+          "sha256": "5902ec88985b66d4c34a4f8300c5b7019f1cef1340041fc5553097298bdcf99c"
+        },
+        {
+          "bytes": 361502,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_30N_v1_5_2024_05.tif",
+          "sha256": "deec4ffe4293f0f5e0d9271620b1b457be041a835186b40c4292f6e9704c909e"
+        },
+        {
+          "bytes": 457739,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_30N_v1_5_2024_06.tif",
+          "sha256": "538e10b42701a2922d85f90d72b530db2086772110109045c9cc1f906309f89b"
+        },
+        {
+          "bytes": 291130,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_30N_v1_5_2024_07.tif",
+          "sha256": "44bf3ea3824ce6f803f2aeb8eeac6ad1f468215b62ce480816082b7059436af9"
+        },
+        {
+          "bytes": 320113,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_30N_v1_5_2024_08.tif",
+          "sha256": "64e131feee9b7e3aff37fec080d4bf0ef440bcb261edb309bba25af8f3d7863f"
+        },
+        {
+          "bytes": 878961,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_30N_v1_5_2024_09.tif",
+          "sha256": "423627ad5d3b27595337093489cf02d0ffe18cfe6252609bc2eed1469fe11c51"
+        },
+        {
+          "bytes": 487022,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_30N_v1_5_2024_10.tif",
+          "sha256": "93aef989aab421d5263824b4bca7871b1031ed2ee112989f52631a7b036412a3"
+        },
+        {
+          "bytes": 732482,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_30N_v1_5_2024_11.tif",
+          "sha256": "9a2b0046998caf0f993bf2893b226d6af359ba03b124e35b10be430d9a87a6ba"
+        },
+        {
+          "bytes": 4128390,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_30N_v1_5_2024_12.tif",
+          "sha256": "be03180c54a23200c1bf0c364e1e6b7032f8cdbfc02ea79508086c7498a0ff1c"
+        },
+        {
+          "bytes": 3621967,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_40N_v1_5_2024_01.tif",
+          "sha256": "b173d91dee758727c1fcac3727f361e79ef5164a8ac63805108c3e7e0171c034"
+        },
+        {
+          "bytes": 19949439,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_40N_v1_5_2024_02.tif",
+          "sha256": "c0384a82645cb0098fd41b59495104b3ae9bdc95d16d0fab8e47d44b06afeac4"
+        },
+        {
+          "bytes": 12410312,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_40N_v1_5_2024_03.tif",
+          "sha256": "0b6da29e343526564654067caaac1fea1e2a6af165ec4d3ce536cc385e3fbce4"
+        },
+        {
+          "bytes": 4142596,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_40N_v1_5_2024_04.tif",
+          "sha256": "ea25eaf606556f807739957f025e1cc2471437d542086ab20e02862a37ff05f9"
+        },
+        {
+          "bytes": 3269116,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_40N_v1_5_2024_05.tif",
+          "sha256": "cf1c024a09e797c39136163d6b01ebf61340796b3cc9d39952159bbfe9ebcf0d"
+        },
+        {
+          "bytes": 3336787,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_40N_v1_5_2024_06.tif",
+          "sha256": "eacc7065f01cac0d600eabca949ca90efae72250267b76d7fcd79f322c0a19da"
+        },
+        {
+          "bytes": 2824880,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_40N_v1_5_2024_07.tif",
+          "sha256": "0bcdbe445cfe3b2e799d83110b03bab41b7685b2406e60f41e22266658b9283c"
+        },
+        {
+          "bytes": 2706559,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_40N_v1_5_2024_08.tif",
+          "sha256": "b262074ea789ea461412750d0af1cb25203ac111b6c84dba85ed354217b353c1"
+        },
+        {
+          "bytes": 3429271,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_40N_v1_5_2024_09.tif",
+          "sha256": "a82fb2fed44aecb21342f05384f999a0f5206c095e3b0b91c07a2f03f8739f35"
+        },
+        {
+          "bytes": 12893707,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_40N_v1_5_2024_10.tif",
+          "sha256": "2d682bb062a1d626721ef736393550f324d26f180257153894fe0303fe534b8b"
+        },
+        {
+          "bytes": 14696745,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_40N_v1_5_2024_11.tif",
+          "sha256": "8b1b8bf441b4ba505ca1927054685d679e08ae748e25ec027c6dcfd1d2c22e6c"
+        },
+        {
+          "bytes": 150083,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/portugal-spain-gap-source-families-20261007/sources/jrc/monthlyhistory-v1_5-2024/monthlyhistory_10W_40N_v1_5_2024_12.tif",
+          "sha256": "cd3ecece6a9c7601bf4707c2b285c3f7eee464a291b50c58c2349f8519a47c03"
+        }
+      ],
+      "id": "jrc-global-surface-water-monthly-history-v1-5-2024",
+      "license": {
+        "status": "redistributable",
+        "terms": "Official product page permits use without restrictions; attribute Source: EC JRC/Google and cite the JRC paper."
+      },
+      "retention": "retained",
+      "retrieved_at": "2026-10-07",
+      "role": "Contemporary monthly surface-water reference; 24 exact 2024 assets for two tiles",
+      "temporal_status": "reference",
+      "url": "https://global-surface-water.appspot.com/download",
+      "verification": "verified",
+      "vintage": "2024 Monthly History v1.5; product period 2022\u20132024"
+    }
+  ],
+  "stages": {
+    "geographic_approval": "unapproved",
+    "implementation": "not-proposed",
+    "research": "complete"
+  },
+  "subject_ids": [
+    "atlas:district:ESP-1003:a5622946",
+    "atlas:district:ESP-1004:a5622946",
+    "atlas:district:ESP-1010:a5622946",
+    "atlas:district:ESP-2101:def08fa9",
+    "atlas:district:ESP-2102:def08fa9",
+    "atlas:district:ESP-3201:a4467917",
+    "atlas:district:ESP-3202:a4467917",
+    "atlas:district:ESP-3203:4570e654",
+    "atlas:district:ESP-3203:a4467917",
+    "atlas:district:ESP-3604:e8019e4a",
+    "atlas:district:ESP-3701:fc9fe3a7",
+    "atlas:district:ESP-3707:fc9fe3a7",
+    "atlas:district:ESP-4901:6efc8274",
+    "atlas:district:ESP-4903:6efc8274",
+    "atlas:district:ESP-4905:6efc8274",
+    "atlas:district:ESP-601:1ab54228",
+    "atlas:district:ESP-609:1ab54228",
+    "atlas:district:ESP-610:1ab54228",
+    "gb:ESP:ADM3:28895703B51852065515322",
+    "gb:ESP:ADM3:28895703B56784737193540",
+    "gb:ESP:ADM3:28895703B85450907202515",
+    "gb:PRT:ADM2:2272694B11830376405667",
+    "gb:PRT:ADM2:2272694B13078000098594",
+    "gb:PRT:ADM2:2272694B13329343625414",
+    "gb:PRT:ADM2:2272694B13508937537537",
+    "gb:PRT:ADM2:2272694B2145262070020",
+    "gb:PRT:ADM2:2272694B24025236019409",
+    "gb:PRT:ADM2:2272694B25299423406959",
+    "gb:PRT:ADM2:2272694B25659359288022",
+    "gb:PRT:ADM2:2272694B25989222534263",
+    "gb:PRT:ADM2:2272694B32277573146992",
+    "gb:PRT:ADM2:2272694B34949703173808",
+    "gb:PRT:ADM2:2272694B39010061947552",
+    "gb:PRT:ADM2:2272694B40601521893357",
+    "gb:PRT:ADM2:2272694B41768317119061",
+    "gb:PRT:ADM2:2272694B44176903413239",
+    "gb:PRT:ADM2:2272694B45584620103908",
+    "gb:PRT:ADM2:2272694B48413362260100",
+    "gb:PRT:ADM2:2272694B48583272049708",
+    "gb:PRT:ADM2:2272694B49865802064714",
+    "gb:PRT:ADM2:2272694B50247265681610",
+    "gb:PRT:ADM2:2272694B54400056882039",
+    "gb:PRT:ADM2:2272694B58860133566733",
+    "gb:PRT:ADM2:2272694B59712557461647",
+    "gb:PRT:ADM2:2272694B64635687739310",
+    "gb:PRT:ADM2:2272694B64876814145037",
+    "gb:PRT:ADM2:2272694B65561862548464",
+    "gb:PRT:ADM2:2272694B74999887486897",
+    "gb:PRT:ADM2:2272694B76568333306117",
+    "gb:PRT:ADM2:2272694B82300393258858",
+    "gb:PRT:ADM2:2272694B84696960403407",
+    "gb:PRT:ADM2:2272694B85880843555162",
+    "gb:PRT:ADM2:2272694B92040427781981",
+    "gb:PRT:ADM2:2272694B9223863476395",
+    "gb:PRT:ADM2:2272694B95294848011514",
+    "gb:PRT:ADM2:2272694B96263237304275",
+    "gb:PRT:ADM2:2272694B96745231716253"
+  ],
+  "subject_ids_sha256": "3b65aadebd67df114b2495f9979a1d56a88ecf21d2c20794f21519264b872641",
+  "summaries": [],
+  "validation": [
+    {
+      "evidence_path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/control-admin-gb-ESP-ADM3-positive-control.json",
+      "kind": "positive-control",
+      "method_id": "admin-gb-ESP-ADM3",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/control-admin-gb-ESP-ADM3-negative-control.json",
+      "kind": "negative-control",
+      "method_id": "admin-gb-ESP-ADM3",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/control-admin-gb-PRT-ADM2-positive-control.json",
+      "kind": "positive-control",
+      "method_id": "admin-gb-PRT-ADM2",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/control-admin-gb-PRT-ADM2-negative-control.json",
+      "kind": "negative-control",
+      "method_id": "admin-gb-PRT-ADM2",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/control-apa-wfd-lines-positive-control.json",
+      "kind": "positive-control",
+      "method_id": "apa-wfd-lines",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/control-apa-wfd-lines-negative-control.json",
+      "kind": "negative-control",
+      "method_id": "apa-wfd-lines",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/control-mapa-current-snapshot-positive-control.json",
+      "kind": "positive-control",
+      "method_id": "mapa-current-snapshot",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/control-mapa-current-snapshot-negative-control.json",
+      "kind": "negative-control",
+      "method_id": "mapa-current-snapshot",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/control-jrc-monthly-history-positive-control.json",
+      "kind": "positive-control",
+      "method_id": "jrc-monthly-history",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "research/geography/portugal-spain-gap-source-families-20261007/outputs/control-jrc-monthly-history-negative-control.json",
+      "kind": "negative-control",
+      "method_id": "jrc-monthly-history",
+      "outcome": "passed"
+    }
+  ],
+  "version": 1,
+  "worker_id": "01a112b9-e2b7-7d03-8000-eb2890649612"
+}

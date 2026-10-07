@@ -1,0 +1,133 @@
+{
+ "currentVersion": 10.81,
+ "serviceDescription": "",
+ "mapName": "Layers",
+ "description": "",
+ "copyrightText": "",
+ "supportsDynamicLayers": true,
+ "layers": [
+  {
+   "id": 0,
+   "name": "Comarcas Agrarias Anotaciones",
+   "parentLayerId": -1,
+   "defaultVisibility": true,
+   "subLayerIds": [
+    1
+   ],
+   "minScale": 0,
+   "maxScale": 0,
+   "type": "Annotation Layer",
+   "geometryType": "esriGeometryPolygon"
+  },
+  {
+   "id": 1,
+   "name": "Comarcas Agrarias Anotación",
+   "parentLayerId": 0,
+   "defaultVisibility": true,
+   "subLayerIds": null,
+   "minScale": 800000,
+   "maxScale": 0
+  },
+  {
+   "id": 2,
+   "name": "Comarcas Agrarias",
+   "parentLayerId": -1,
+   "defaultVisibility": true,
+   "subLayerIds": null,
+   "minScale": 0,
+   "maxScale": 0,
+   "type": "Feature Layer",
+   "geometryType": "esriGeometryPolygon"
+  }
+ ],
+ "tables": [],
+ "spatialReference": {
+  "wkid": 25830,
+  "latestWkid": 25830
+ },
+ "singleFusedMapCache": false,
+ "initialExtent": {
+  "xmin": -951306.2923919684,
+  "ymin": 3574179.136430227,
+  "xmax": 1148531.4265993498,
+  "ymax": 4901569.291804216,
+  "spatialReference": {
+   "wkid": 25830,
+   "latestWkid": 25830
+  }
+ },
+ "fullExtent": {
+  "xmin": -1005659.9914023944,
+  "ymin": 3057057.4954805793,
+  "xmax": 1224046.6857195566,
+  "ymax": 4961897.337223504,
+  "spatialReference": {
+   "wkid": 25830,
+   "latestWkid": 25830
+  }
+ },
+ "minScale": 0,
+ "maxScale": 0,
+ "units": "esriMeters",
+ "supportedImageFormatTypes": "PNG32,PNG24,PNG,JPG,DIB,TIFF,EMF,PS,PDF,GIF,SVG,SVGZ,BMP",
+ "documentInfo": {
+  "Title": "",
+  "Author": "",
+  "Comments": "",
+  "Subject": "",
+  "Category": "",
+  "AntialiasingMode": "None",
+  "TextAntialiasingMode": "Force",
+  "Keywords": ""
+ },
+ "capabilities": "Map,Query,Data",
+ "supportedQueryFormats": "JSON, geoJSON",
+ "exportTilesAllowed": false,
+ "referenceScale": 0,
+ "datumTransformations": [
+  {
+   "geoTransforms": [
+    {
+     "wkid": 108001,
+     "latestWkid": 1241,
+     "transformForward": true,
+     "name": "NAD_1927_To_NAD_1983_NADCON"
+    }
+   ]
+  },
+  {
+   "geoTransforms": [
+    {
+     "wkid": 108001,
+     "latestWkid": 1241,
+     "transformForward": false,
+     "name": "NAD_1927_To_NAD_1983_NADCON"
+    }
+   ]
+  },
+  {
+   "geoTransforms": [
+    {
+     "wkt": "GEOGTRAN[\"ED50_ETRS89_ESPAÑA\",GEOGCS[\"GCS_European_1950\",DATUM[\"D_European_1950\",SPHEROID[\"International_1924\",6378388.0,297.0]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]],GEOGCS[\"GCS_ETRS_1989\",DATUM[\"D_ETRS_1989\",SPHEROID[\"GRS_1980\",6378137.0,298.257222101]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]],METHOD[\"NTv2\"],PARAMETER[\"Dataset_spain/sped2et.gsb\",0.0]]",
+     "transformForward": true,
+     "name": "ED50_ETRS89_ESPAÑA"
+    }
+   ]
+  },
+  {
+   "geoTransforms": [
+    {
+     "wkt": "GEOGTRAN[\"ED50_ETRS89_ESPAÑA\",GEOGCS[\"GCS_European_1950\",DATUM[\"D_European_1950\",SPHEROID[\"International_1924\",6378388.0,297.0]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]],GEOGCS[\"GCS_ETRS_1989\",DATUM[\"D_ETRS_1989\",SPHEROID[\"GRS_1980\",6378137.0,298.257222101]],PRIMEM[\"Greenwich\",0.0],UNIT[\"Degree\",0.0174532925199433]],METHOD[\"NTv2\"],PARAMETER[\"Dataset_spain/sped2et.gsb\",0.0]]",
+     "transformForward": false,
+     "name": "ED50_ETRS89_ESPAÑA"
+    }
+   ]
+  }
+ ],
+ "supportsDatumTransformation": true,
+ "maxRecordCount": 1000,
+ "maxImageHeight": 4096,
+ "maxImageWidth": 4096,
+ "supportedExtensions": "SharedServiceMAGRAMA, WFSServer, WMSServer",
+ "resampling": false
+}

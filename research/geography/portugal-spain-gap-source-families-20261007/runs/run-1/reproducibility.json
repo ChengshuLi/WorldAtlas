@@ -1,0 +1,65 @@
+{
+  "identical_output_sha256": true,
+  "limits": [
+    "Capture timestamps differ by design; all seven complete analysis output files have identical whole-file hashes.",
+    "Determinism confirms computational reproducibility only and does not resolve source availability, licensing, historical coverage, or classification."
+  ],
+  "output_count": 7,
+  "outputs": [
+    {
+      "bytes": 244210,
+      "path": "administrative-source-overlays.json",
+      "sha256": "199dbdbbd7b5296adf74b2f18f7e898c9b4b82c63a79fe7d886ae09bb5ee6f67"
+    },
+    {
+      "bytes": 45549,
+      "path": "apa-wfd-line-overlays.json",
+      "sha256": "7e6bd8243839f392752d989f48b6dcb30b673e96640b51ebdbc0927166c92a38"
+    },
+    {
+      "bytes": 629423,
+      "path": "jrc-2024-component-month-summary.json",
+      "sha256": "0bf9a5fc88b98ac0328ec5e49ea93dba6aef3cc94913880c3051f8f92e65223d"
+    },
+    {
+      "bytes": 71213,
+      "path": "mapa-current-snapshot-overlays.json",
+      "sha256": "13bdb51e04e5afed8c42683fb4e0d9ee5454ff75bb431f096e26704445441b93"
+    },
+    {
+      "bytes": 526,
+      "path": "runtime-capture.json",
+      "sha256": "514cfb957d2f66ac2d89b6ae09594ab1dae682e4d6c62e6148a70529b5ec42c3"
+    },
+    {
+      "bytes": 602633,
+      "path": "source-status-matrix.json",
+      "sha256": "4f52f16e17710ae0b06a55450a142fea2389f1c6258d8a1b9340e1ddb17c6fd2"
+    },
+    {
+      "bytes": 5971,
+      "path": "validation-controls.json",
+      "sha256": "329994cdd68b9e6dc2b7a436bb9d80e5c3392e09e38bb0496de0089927afd845"
+    }
+  ],
+  "run_ids": [
+    "run-1",
+    "run-2"
+  ],
+  "run_manifests": {
+    "run-1": {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-1/run-manifest.json",
+      "sha256": "0db022adb208205532f202cc8ae1dd48b100e7a24f29264f304e9f2d47fb213d"
+    },
+    "run-2": {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-2/run-manifest.json",
+      "sha256": "da780540830bbe40cc001556e6917089d223dea6bbd25919f61f285cd8ff25a2"
+    }
+  },
+  "schema": "worldatlas-source-run-reproducibility-v1",
+  "scope": {
+    "components": 70,
+    "contacts": 57,
+    "families": 52
+  }
+}
