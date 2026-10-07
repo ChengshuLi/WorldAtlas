@@ -6,13 +6,14 @@ import sys
 from shapely.geometry import shape
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from evidence.geometry import METHOD, land_area_m2
-from evidence.immutable import Baseline, VERSION, write_new_vintage, validate_source_receipts
+from evidence.immutable import Baseline, VERSION, NewVintage, validate_source_receipts
 
 
 def prepare(repo, request):
     if request.get('version') != 1:
         raise ValueError('Unsupported preparation request')
     baseline = Baseline(repo, request['baseline']['commit'], request['baseline']['files'])
+    destination = NewVintage(baseline, request['owned_path'], request['new_vintage'], [request['output_filename']])
     for role in ('release', 'hierarchy', 'scope', 'source_registry'):
         if request['baseline'].get('pin_files', {}).get(role) not in baseline.pins:
             raise ValueError('Missing reviewed whole-file pin for ' + role)
@@ -24,7 +25,12 @@ def prepare(repo, request):
              'containing_file': files[identity]} for identity in sorted(subjects)]
     value = {'version': VERSION, 'baseline_commit': baseline.commit, 'method': METHOD,
              'status': 'diagnostic-new-vintage', 'subjects': rows}
-    return write_new_vintage(baseline, request['owned_path'], request['new_vintage'], request['output_filename'], value)
+    record = destination.publish({request['output_filename']: value})[0]
+    if request['output_filename'].endswith('.gz'):
+        from evidence.immutable import canonical_json, sha256
+        raw = canonical_json(value)
+        record.update(uncompressed_sha256=sha256(raw), uncompressed_bytes=len(raw))
+    return record
 
 
 if __name__ == '__main__':

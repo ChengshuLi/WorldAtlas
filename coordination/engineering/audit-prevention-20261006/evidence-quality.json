@@ -1,0 +1,590 @@
+{
+  "version": 1,
+  "issue": 1309,
+  "lane": "engineering",
+  "worker_id": "01a10843-da4b-7fc1-a482-d3186bc6334d",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "0198938719a5666b6726fb6a1e45779926eefeb2",
+    "files": [
+      {
+        "path": "AGENTS.md",
+        "bytes": 8939,
+        "sha256": "af462db59f343cfb05708180141d8bc5e8b34d7197b4e7fccbf1cac84b7c069d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/AUDITOR_HANDOFF.md",
+        "bytes": 6052,
+        "sha256": "368def1ccba9c41024c340aeea1533731ac33f1a3e53239025d0dba9a950b511",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/ENGINEERING_HANDOFF.md",
+        "bytes": 9330,
+        "sha256": "ae1e4fe58e0fe8b8fa3018378a9c814338d42e01040635d662265d92b81e720c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/EVIDENCE_GEOGRAPHY_HELPERS.md",
+        "bytes": 5847,
+        "sha256": "0bdc7cf2b65fa5d45e2e52ff66312d7f0cd1c90d438f8f3e9e219e9669d010ec",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/GEOGRAPHY_HANDOFF.md",
+        "bytes": 6088,
+        "sha256": "9f52b9cd6b249561ce93354cd6474da5cdde75ef25100ebc0dc123471e249f13",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/HISTORY_HANDOFF.md",
+        "bytes": 8404,
+        "sha256": "d3d7384850b4092b7f56d83764e7d732aa8587446cba6986a3557833a69b98c0",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/ISSUE_CREATION_HANDOFF.md",
+        "bytes": 5135,
+        "sha256": "9d3b6a5ccf15df9e0ae74b22a647136b28c56d39970c235632f8d07bd76833fd",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/PREMERGE_EVIDENCE_REVIEW.md",
+        "bytes": 16791,
+        "sha256": "133bd70416028375e4b1923432fb3d6bc51dcf88ae032758f6cbc9711608e6ef",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/WORKER_COORDINATION.md",
+        "bytes": 39372,
+        "sha256": "3ecf2dd981b8903dd861904f07fb95c301a9ad68c7849c91f3d0a9bf66bc6da8",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/AUDITOR.txt",
+        "bytes": 9845,
+        "sha256": "c2f6a038edddca322fdfe0d02ec19fb7e9a0e1d7aab85e62b1b98b6e23c4fd9a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/ENGINEERING.txt",
+        "bytes": 12857,
+        "sha256": "ee50ebf35e21bafa146cbb091f318d60a4885e35901f4cb6e4b4ac723a578459",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/GEOGRAPHY.txt",
+        "bytes": 10342,
+        "sha256": "39bc9bba9418fd2f47aa7c1e6d94337fba77dd12a9ed0e0a1b97a2ec29ea00e7",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/ISSUE_CREATION.txt",
+        "bytes": 6905,
+        "sha256": "9d31e446187fb899a533f3a3af01e48e47b81dcd4cc6c831110380a059ede75f",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "docs/prompts/LUNA_HISTORY.txt",
+        "bytes": 11187,
+        "sha256": "8e1b3d9cb59ba435d83cfce72bcc0004cb41059f3928331a34a5dbd18574ee53",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/evidence/immutable.py",
+        "bytes": 7090,
+        "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/evidence/prepare.py",
+        "bytes": 1898,
+        "sha256": "56690c891d3ca3f4961bbe880d9f70ffba939c70311898c690a24cb5313119fc",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/premerge-evidence.mjs",
+        "bytes": 18184,
+        "sha256": "faa3fc0f6763aa0b25bc72bedb4b19cf450c6b7955b311884aabc05135f52e39",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/evidence-geography.py",
+        "bytes": 8646,
+        "sha256": "d48e3b9ebd5a6b8814c3d3b1cce27e1136bfb15b17dff7e5c38624962418f60a",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/premerge-evidence.test.mjs",
+        "bytes": 21028,
+        "sha256": "576da9a8dbebecd8bde556b5f25e3d6078812bf1571a70a58c81aec8d0e137fc",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/validate-physical-audit-evidence.py",
+        "hash_kind": "file-bytes",
+        "bytes": 17576,
+        "sha256": "11d501770684b30ca114fda8cb560de8a8d936bb9bef2c402b19a090fd608eee"
+      },
+      {
+        "path": "test/physical-audit-evidence.test.mjs",
+        "hash_kind": "file-bytes",
+        "bytes": 1799,
+        "sha256": "4351368a0313a0ae2f30414b75fa777ea27aa3085dd95b038f32366d66f6c749"
+      }
+    ],
+    "pins": {}
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 9674,
+      "sha256": "f4610111c7c5878a46dfe242728c278f6dd0f8bf3e99a41870a139873c7a6ab6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/AUDITOR_HANDOFF.md",
+      "bytes": 6787,
+      "sha256": "047f2c70f60ab3b19db96753c976a77839e728bf826825e10efd6698496538db",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/AUDIT_FAILURE_PREVENTION.md",
+      "bytes": 10199,
+      "sha256": "e373a67b5a83c3144998095b4f85e7013ca1367bef1ddff4610f3beec63f9873",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/ENGINEERING_HANDOFF.md",
+      "bytes": 10065,
+      "sha256": "b53a75f72651078023fd480c9b343ddd0005e342d4224d9878cae1d062c966b9",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/EVIDENCE_GEOGRAPHY_HELPERS.md",
+      "bytes": 6582,
+      "sha256": "a88cff6be51f58e4e789cc238bf18fb56426dc1979d22ec26e844c2caeaaf2d6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/GEOGRAPHY_HANDOFF.md",
+      "bytes": 6823,
+      "sha256": "aada4617dda21c7ec5d7dd420fa9d08485eb9ec047946f2e4f037cf6db645197",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/HISTORY_HANDOFF.md",
+      "bytes": 9139,
+      "sha256": "9adff7a1c13bcf202d37b8366f8677697b1693327db5a9d4561a03e31edfc630",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/ISSUE_CREATION_HANDOFF.md",
+      "bytes": 5870,
+      "sha256": "6721ba6106f473ca4a61d7af5ec646f87b8beb872b141d4eadd733168b46713a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/PREMERGE_EVIDENCE_REVIEW.md",
+      "bytes": 17526,
+      "sha256": "c75dd4f43698a46cc9226dcfe42cb8bf72367830a6cf6394d8ae57f4b19d785b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "bytes": 40107,
+      "sha256": "a288c38e89339b4f27b7cdcb160dace17719b6795ee836d2f9d42ba340e3e443",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/AUDITOR.txt",
+      "bytes": 10580,
+      "sha256": "29dd3ec544672339feba01af6dc8961929212fe370b2ae4952329fd468fed24f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/ENGINEERING.txt",
+      "bytes": 13592,
+      "sha256": "6a7cbce4029c1edf70ec75ae4c5424b5a6593f3ffec21e0c7b6945d4e07af8b4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/GEOGRAPHY.txt",
+      "bytes": 11077,
+      "sha256": "053a451cbfcf668822b7fbd93a359d78f8679fce9c38000f28c6eca0d27e366a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/ISSUE_CREATION.txt",
+      "bytes": 7640,
+      "sha256": "d62f7c9a3668ca7067d052f8bb114830f10fa94274b7f138dbc9b6748f7fc411",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "docs/prompts/LUNA_HISTORY.txt",
+      "bytes": 11922,
+      "sha256": "55b42954af6bdf0cbe997808437bdabf55e1e4333acbfc909130978ed79cab73",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/evidence/contracts.py",
+      "bytes": 3445,
+      "sha256": "6473265fe8683004fe091084145957604f2e45d7d143505c69f8099c48467802",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/evidence/immutable.py",
+      "bytes": 17414,
+      "sha256": "a3667cecd88b2862e61a3ce72778e179535d92fbf19b5cd7c5b112722926da46",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/evidence/prepare.py",
+      "bytes": 2210,
+      "sha256": "7659fcfe8dddc7995561589ec2a118da565028b095e5c2a36b35f7dc900b33fc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/premerge-evidence.mjs",
+      "bytes": 21033,
+      "sha256": "bc318dc1de2b58425b0933462334d5c0f10cfad209a7d9f01d9e7703aaf29971",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/evidence-geography.py",
+      "bytes": 9840,
+      "sha256": "db13644e2113bf9aae9c505e626bd5f984a32a84fa04a0944a170417eb91b592",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/evidence-prevention.py",
+      "bytes": 10080,
+      "sha256": "e3d3b8b857e0d46d13eb383ba2c2ac7f409e884e3c0c7644d85dadf96e3fa859",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/evidence-prevention.test.mjs",
+      "bytes": 1479,
+      "sha256": "5779f75a1dbee9e716176aeb7b5099100361a674aae46d09cda2cc201c585202",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/premerge-evidence.test.mjs",
+      "bytes": 22314,
+      "sha256": "3cd75521b7ead4f1e066930199e6683401d30210fac040902cd85faa81f66f13",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/audit-prevention-20261006/verification.json",
+      "bytes": 1185,
+      "sha256": "f0508633d2b352b7c3e3e63e2cac4d7b26497c898a20c0cf22840fe2657db363",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/audit-prevention-20261006/CHECKPOINT.md",
+      "bytes": 1008,
+      "sha256": "eab02040288c5efb52ae5cbafe7d6307d759e7e466a978cd1814ef8d2cf41c95",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/validate-physical-audit-evidence.py",
+      "hash_kind": "file-bytes",
+      "bytes": 18386,
+      "sha256": "3e742b3ad094db2f36e0e8b9944e01d3e00698de07a1359a7c4231130a2256cf"
+    },
+    {
+      "path": "test/physical-audit-evidence.test.mjs",
+      "hash_kind": "file-bytes",
+      "bytes": 5197,
+      "sha256": "995ed0986efe93c5e9cb18f9bc0c4764574f0beec7037dc98576acb3eaaf6cc9"
+    }
+  ],
+  "methods": [
+    {
+      "id": "focused-prevention-regressions",
+      "kind": "code",
+      "description": "Actual isolated shared-helper, trusted-record-validator, scientific-helper, CLI and CI-profile controls; no factual geography result",
+      "software": "Node 24.19.0; Python 3.12; Shapely 2.1.2; pyproj 3.7.2",
+      "units": "test counts"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "node_tests",
+      "value": 59,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "f0508633d2b352b7c3e3e63e2cac4d7b26497c898a20c0cf22840fe2657db363",
+      "evaluation_commit": "96d102beb4e6a65bcf4705c6ccd4501e3ee412be"
+    },
+    {
+      "id": "python_execution_controls",
+      "value": 7,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "f0508633d2b352b7c3e3e63e2cac4d7b26497c898a20c0cf22840fe2657db363",
+      "evaluation_commit": "96d102beb4e6a65bcf4705c6ccd4501e3ee412be"
+    },
+    {
+      "id": "python_scientific_cli_controls",
+      "value": 10,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "f0508633d2b352b7c3e3e63e2cac4d7b26497c898a20c0cf22840fe2657db363",
+      "evaluation_commit": "96d102beb4e6a65bcf4705c6ccd4501e3ee412be"
+    },
+    {
+      "id": "failed",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "f0508633d2b352b7c3e3e63e2cac4d7b26497c898a20c0cf22840fe2657db363",
+      "evaluation_commit": "96d102beb4e6a65bcf4705c6ccd4501e3ee412be"
+    },
+    {
+      "id": "skipped",
+      "value": 0,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "f0508633d2b352b7c3e3e63e2cac4d7b26497c898a20c0cf22840fe2657db363",
+      "evaluation_commit": "96d102beb4e6a65bcf4705c6ccd4501e3ee412be"
+    },
+    {
+      "id": "python_geographic_regression_controls",
+      "unit": "count",
+      "vintage": "archived",
+      "value": 40,
+      "input_sha256": "f0508633d2b352b7c3e3e63e2cac4d7b26497c898a20c0cf22840fe2657db363",
+      "evaluation_commit": "96d102beb4e6a65bcf4705c6ccd4501e3ee412be"
+    },
+    {
+      "id": "python_trusted_geography_controls",
+      "unit": "count",
+      "vintage": "archived",
+      "value": 17,
+      "input_sha256": "f0508633d2b352b7c3e3e63e2cac4d7b26497c898a20c0cf22840fe2657db363",
+      "evaluation_commit": "96d102beb4e6a65bcf4705c6ccd4501e3ee412be"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "node_tests",
+      "value": 59,
+      "unit": "count"
+    },
+    {
+      "metric_id": "python_execution_controls",
+      "value": 7,
+      "unit": "count"
+    },
+    {
+      "metric_id": "python_scientific_cli_controls",
+      "value": 10,
+      "unit": "count"
+    },
+    {
+      "metric_id": "failed",
+      "value": 0,
+      "unit": "count"
+    },
+    {
+      "metric_id": "skipped",
+      "value": 0,
+      "unit": "count"
+    },
+    {
+      "metric_id": "python_geographic_regression_controls",
+      "unit": "count",
+      "value": 40
+    },
+    {
+      "metric_id": "python_trusted_geography_controls",
+      "unit": "count",
+      "value": 17
+    }
+  ],
+  "conclusions": [],
+  "stages": {
+    "research": "partial",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "PYTHON=/path/to/isolated-python WORLDATLAS_TEST_PYTHON=/path/to/isolated-python PYTHONDONTWRITEBYTECODE=1 node --test test/evidence-prevention.test.mjs test/geographic-regression.test.mjs test/trusted-geography-check.test.mjs test/geographic-adjudication-api.test.mjs test/physical-audit-evidence.test.mjs test/premerge-evidence.test.mjs test/evidence-quality.test.mjs test/integration-profile.test.mjs test/deployment-budget-scope.test.mjs"
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "node_tests",
+      "path": "coordination/engineering/audit-prevention-20261006/verification.json",
+      "json_pointer": "/node_tests"
+    },
+    {
+      "metric_id": "python_execution_controls",
+      "path": "coordination/engineering/audit-prevention-20261006/verification.json",
+      "json_pointer": "/python_execution_controls"
+    },
+    {
+      "metric_id": "python_scientific_cli_controls",
+      "path": "coordination/engineering/audit-prevention-20261006/verification.json",
+      "json_pointer": "/python_scientific_cli_controls"
+    },
+    {
+      "metric_id": "failed",
+      "path": "coordination/engineering/audit-prevention-20261006/verification.json",
+      "json_pointer": "/failed"
+    },
+    {
+      "metric_id": "skipped",
+      "path": "coordination/engineering/audit-prevention-20261006/verification.json",
+      "json_pointer": "/skipped"
+    },
+    {
+      "metric_id": "python_geographic_regression_controls",
+      "path": "coordination/engineering/audit-prevention-20261006/verification.json",
+      "json_pointer": "/python_geographic_regression_controls"
+    },
+    {
+      "metric_id": "python_trusted_geography_controls",
+      "path": "coordination/engineering/audit-prevention-20261006/verification.json",
+      "json_pointer": "/python_trusted_geography_controls"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "AGENTS.md",
+      "status": "modified",
+      "original_sha256": "af462db59f343cfb05708180141d8bc5e8b34d7197b4e7fccbf1cac84b7c069d"
+    },
+    {
+      "path": "docs/AUDITOR_HANDOFF.md",
+      "status": "modified",
+      "original_sha256": "368def1ccba9c41024c340aeea1533731ac33f1a3e53239025d0dba9a950b511"
+    },
+    {
+      "path": "docs/AUDIT_FAILURE_PREVENTION.md",
+      "status": "added"
+    },
+    {
+      "path": "docs/ENGINEERING_HANDOFF.md",
+      "status": "modified",
+      "original_sha256": "ae1e4fe58e0fe8b8fa3018378a9c814338d42e01040635d662265d92b81e720c"
+    },
+    {
+      "path": "docs/EVIDENCE_GEOGRAPHY_HELPERS.md",
+      "status": "modified",
+      "original_sha256": "0bdc7cf2b65fa5d45e2e52ff66312d7f0cd1c90d438f8f3e9e219e9669d010ec"
+    },
+    {
+      "path": "docs/GEOGRAPHY_HANDOFF.md",
+      "status": "modified",
+      "original_sha256": "9f52b9cd6b249561ce93354cd6474da5cdde75ef25100ebc0dc123471e249f13"
+    },
+    {
+      "path": "docs/HISTORY_HANDOFF.md",
+      "status": "modified",
+      "original_sha256": "d3d7384850b4092b7f56d83764e7d732aa8587446cba6986a3557833a69b98c0"
+    },
+    {
+      "path": "docs/ISSUE_CREATION_HANDOFF.md",
+      "status": "modified",
+      "original_sha256": "9d3b6a5ccf15df9e0ae74b22a647136b28c56d39970c235632f8d07bd76833fd"
+    },
+    {
+      "path": "docs/PREMERGE_EVIDENCE_REVIEW.md",
+      "status": "modified",
+      "original_sha256": "133bd70416028375e4b1923432fb3d6bc51dcf88ae032758f6cbc9711608e6ef"
+    },
+    {
+      "path": "docs/WORKER_COORDINATION.md",
+      "status": "modified",
+      "original_sha256": "3ecf2dd981b8903dd861904f07fb95c301a9ad68c7849c91f3d0a9bf66bc6da8"
+    },
+    {
+      "path": "docs/prompts/AUDITOR.txt",
+      "status": "modified",
+      "original_sha256": "c2f6a038edddca322fdfe0d02ec19fb7e9a0e1d7aab85e62b1b98b6e23c4fd9a"
+    },
+    {
+      "path": "docs/prompts/ENGINEERING.txt",
+      "status": "modified",
+      "original_sha256": "ee50ebf35e21bafa146cbb091f318d60a4885e35901f4cb6e4b4ac723a578459"
+    },
+    {
+      "path": "docs/prompts/GEOGRAPHY.txt",
+      "status": "modified",
+      "original_sha256": "39bc9bba9418fd2f47aa7c1e6d94337fba77dd12a9ed0e0a1b97a2ec29ea00e7"
+    },
+    {
+      "path": "docs/prompts/ISSUE_CREATION.txt",
+      "status": "modified",
+      "original_sha256": "9d31e446187fb899a533f3a3af01e48e47b81dcd4cc6c831110380a059ede75f"
+    },
+    {
+      "path": "docs/prompts/LUNA_HISTORY.txt",
+      "status": "modified",
+      "original_sha256": "8e1b3d9cb59ba435d83cfce72bcc0004cb41059f3928331a34a5dbd18574ee53"
+    },
+    {
+      "path": "scripts/evidence/contracts.py",
+      "status": "added"
+    },
+    {
+      "path": "scripts/evidence/immutable.py",
+      "status": "modified",
+      "original_sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd"
+    },
+    {
+      "path": "scripts/evidence/prepare.py",
+      "status": "modified",
+      "original_sha256": "56690c891d3ca3f4961bbe880d9f70ffba939c70311898c690a24cb5313119fc"
+    },
+    {
+      "path": "scripts/premerge-evidence.mjs",
+      "status": "modified",
+      "original_sha256": "faa3fc0f6763aa0b25bc72bedb4b19cf450c6b7955b311884aabc05135f52e39"
+    },
+    {
+      "path": "test/evidence-geography.py",
+      "status": "modified",
+      "original_sha256": "d48e3b9ebd5a6b8814c3d3b1cce27e1136bfb15b17dff7e5c38624962418f60a"
+    },
+    {
+      "path": "test/evidence-prevention.py",
+      "status": "added"
+    },
+    {
+      "path": "test/evidence-prevention.test.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/premerge-evidence.test.mjs",
+      "status": "modified",
+      "original_sha256": "576da9a8dbebecd8bde556b5f25e3d6078812bf1571a70a58c81aec8d0e137fc"
+    },
+    {
+      "path": "coordination/engineering/audit-prevention-20261006/verification.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/audit-prevention-20261006/CHECKPOINT.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/audit-prevention-20261006/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "scripts/validate-physical-audit-evidence.py",
+      "status": "modified",
+      "original_sha256": "11d501770684b30ca114fda8cb560de8a8d936bb9bef2c402b19a090fd608eee"
+    },
+    {
+      "path": "test/physical-audit-evidence.test.mjs",
+      "status": "modified",
+      "original_sha256": "4351368a0313a0ae2f30414b75fa777ea27aa3085dd95b038f32366d66f6c749"
+    }
+  ]
+}

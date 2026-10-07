@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "tested_code_commit": "96d102beb4e6a65bcf4705c6ccd4501e3ee412be",
+  "node_tests": 59,
+  "python_execution_controls": 7,
+  "python_scientific_cli_controls": 10,
+  "failed": 0,
+  "skipped": 0,
+  "profiles": {
+    "geography": "evidence",
+    "history": "evidence",
+    "shared_helpers": "full"
+  },
+  "limits": [
+    "Focused local tests, not a full hosted integration run",
+    "Historical packet repairs retain existing issue ownership",
+    "Existing-worker adoption and future exact-head handoffs are not yet verified",
+    "No geography, source authority, import or publication approval"
+  ],
+  "reviewer_supplied_regressions": [
+    "Reject undeclared namespace-package code",
+    "Reject aggregate decoded output exceeding the phase budget"
+  ],
+  "additional_controls": [
+    "Raw CSV and JSONL use the same fresh-run writer",
+    "Existing trusted-runner entry points preserve the self-contained immutable-helper dependency boundary",
+    "Retained execution code uses its authenticated historical vintage; actual missing/duplicate/altered code bindings reject"
+  ],
+  "python_geographic_regression_controls": 40,
+  "python_trusted_geography_controls": 17
+}

@@ -13,6 +13,43 @@ const geometryPolicy = {
   area_method: 'WGS84 straight-source-edge ellipsoidal integral', distance_method: 'WGS84 inverse geodesic'
 };
 
+/** Optional v1 semantic bindings in the existing evidence manifest, never candidate execution. */
+export function validateRecordChecks(manifest, readFile) {
+  const checks = manifest.record_checks ?? [];
+  need(Array.isArray(checks), 'Record checks must be an array');
+  const at = (path, pointer, vintage) => {
+    need(typeof pointer === 'string' && (pointer === '' || pointer.startsWith('/')), 'Invalid record pointer');
+    let raw = readFile(path, vintage);
+    if (path.endsWith('.gz')) raw = gunzipSync(raw, {maxOutputLength: MAX_FILE});
+    let value = JSON.parse(raw);
+    for (const key of pointer === '' ? [] : pointer.slice(1).split('/').map(key => key.replaceAll('~1', '/').replaceAll('~0', '~'))) {
+      need(value && Object.hasOwn(value, key), 'Required record input is absent'); value = value[key];
+    }
+    return value;
+  };
+  const rows = (values, key) => {
+    need(Array.isArray(values) && values.length, 'Empty records cannot prove complete coverage');
+    const ids = values.map(row => row?.[key]);
+    need(ids.every(id => typeof id === 'string' && id.length) && new Set(ids).size === ids.length, 'Missing or duplicate raw record identities');
+    return new Map(values.map((row, i) => [ids[i], row]));
+  };
+  for (const check of checks) {
+    need(check.version === 1 && typeof check.id_key === 'string' && check.id_key && typeof check.reference_id_key === 'string' && check.reference_id_key &&
+      check.fields && typeof check.fields === 'object' && !Array.isArray(check.fields) && Object.keys(check.fields).length, 'Invalid versioned record check');
+    need(manifest.outputs.some(file => file.path === check.path) && manifest.baseline.files.some(file => file.path === check.reference_path),
+      'Record check requires generated output and independently pinned baseline reference');
+    need(!manifest.outputs.some(file => file.path === check.reference_path), 'Candidate output cannot be its own reference');
+    const actual = rows(at(check.path, check.json_pointer, 'candidate'), check.id_key);
+    const expected = rows(at(check.reference_path, check.reference_json_pointer, manifest.baseline.commit), check.reference_id_key);
+    need(actual.size === expected.size && [...expected.keys()].every(id => actual.has(id)), 'Missing or fabricated records in exact reference scope');
+    for (const [id, row] of actual) for (const [field, referenceField] of Object.entries(check.fields)) {
+      need(typeof referenceField === 'string' && referenceField && Object.hasOwn(row, field) && Object.hasOwn(expected.get(id), referenceField) &&
+        JSON.stringify(row[field]) === JSON.stringify(expected.get(id)[referenceField]), `Independent record join mismatch: ${id}/${field}`);
+    }
+  }
+  return checks.length;
+}
+
 /** Strengthen byte receipts with actual output bindings and change accounting. No submitted code runs. */
 export function validatePremergeManifest(manifest, {readFile, files, manifestPath, issue, spec, reservation, branch, pr}) {
   const quality = spec.evidence_quality;
@@ -20,6 +57,7 @@ export function validatePremergeManifest(manifest, {readFile, files, manifestPat
   need(manifest.worker_id === reservation.worker_id, 'Manifest worker differs from canonical reservation');
   const result = validateEvidence(manifest, {readFile, expectedIssue: issue.number,
     expectedLane: spec.mode, expectedSubjects: quality.subject_ids, expectedPins: quality.pins});
+  const recordChecks = validateRecordChecks(manifest, readFile);
   const receipts = manifest.change_receipts;
   need(Array.isArray(receipts) && receipts.length === files.length && new Set(receipts.map(row => row.path)).size === receipts.length,
     'Incomplete changed-file receipts');
@@ -97,7 +135,7 @@ export function validatePremergeManifest(manifest, {readFile, files, manifestPat
   if (result.limits.length) need(manifest.stages.geographic_approval !== 'approved', 'Limited source evidence cannot approve geography');
   need(manifest.stages.geographic_approval !== 'approved' && manifest.stages.implementation !== 'published',
     'A premerge receipt cannot certify geographic approval or a deployment; use the existing publication gates');
-  return {...result, change_files_checked: files.length, metric_bindings_checked: bindings.length};
+  return {...result, change_files_checked: files.length, metric_bindings_checked: bindings.length, record_checks_checked: recordChecks};
 }
 
 // Bind the reviewed acceptance contract and PR disposition, independently of

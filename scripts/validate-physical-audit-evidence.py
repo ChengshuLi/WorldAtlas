@@ -227,9 +227,21 @@ def upstream_closure(child, envelope, reports):
         raise ValueError('Upstream stage exceeds original evidence budget')
     repo = pathlib.Path(__file__).resolve().parents[1]
     source_paths = {row['path'] for row in child['baseline']['files']}
+    # Retained execution inputs are historical bytes, not claims about today's
+    # installed helper. Authenticate the complete declared closure at its actual
+    # execution commit; require matching whole-file descriptors in the child.
+    code_rows = envelope['code_inputs']
+    code_paths = {row['path'] for row in code_rows}
+    if code_paths != ENVELOPE_CODE or len(code_rows) != len(code_paths):
+        raise ValueError('Incomplete or duplicate upstream execution-code closure')
+    for row in code_rows:
+        if clean(outputs.get(row['path'], {})) != clean(row):
+            raise ValueError('Upstream execution descriptor differs from envelope')
+    code = Baseline(repo, envelope['executed_code_commit'], code_rows)
     original = Baseline(repo, child['baseline']['commit'], child['baseline']['files'])
     for row in all_rows:
-        raw = original.read(row['path']) if row['path'] in source_paths else ordinary(row['path'])
+        raw = original.read(row['path']) if row['path'] in source_paths else (
+            code.pinned_bytes(row['path']) if row['path'] in code_paths else ordinary(row['path']))
         if row['hash_kind'] != 'file-bytes' or len(raw) != row['bytes'] or digest(raw) != row['sha256']:
             raise ValueError('Upstream complete descriptor bytes changed')
 
