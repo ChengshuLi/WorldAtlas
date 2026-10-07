@@ -1,0 +1,60 @@
+{
+  "method_id": "kakeri-boundary-contact-jrc-water",
+  "kind": "positive-control",
+  "outcome": "passed",
+  "fixture": {
+    "crs": "EPSG:4326",
+    "grid": "2x2, 1-degree cells, origin (0,2)",
+    "values_by_row": [
+      [
+        0,
+        80
+      ],
+      [
+        10,
+        255
+      ]
+    ],
+    "polygon": [
+      0,
+      0,
+      2,
+      2
+    ]
+  },
+  "raw_selected_values_including_masked_nodata": [
+    0,
+    10,
+    80,
+    255
+  ],
+  "selected_values": [
+    0,
+    10,
+    80
+  ],
+  "valid_values_after_255_nodata_exclusion": [
+    0,
+    10,
+    80
+  ],
+  "masked_nodata_cells": 1,
+  "expected": [
+    0,
+    10,
+    80
+  ],
+  "edge_only_case": {
+    "polygon": [
+      0.01,
+      1.01,
+      0.49,
+      1.49
+    ],
+    "polygon_intersects_cell": true,
+    "contains_any_pixel_center": false,
+    "selected_values": [],
+    "expected": []
+  },
+  "scope_note": "Reuses the same pixel-center, valid-value, edge-only and disjoint-mask primitive invoked by this contact-union measurement."
+}
