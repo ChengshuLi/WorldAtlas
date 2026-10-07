@@ -41,7 +41,7 @@ def sha(path: Path) -> str:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("run_id", choices=("run-1", "run-2", "run-3", "run-4", "run-5", "run-6", "run-7", "run-8"))
+    parser.add_argument("run_id", choices=("run-1", "run-2", "run-9", "run-10"))
     args = parser.parse_args()
     destination = RUNS / args.run_id
     if destination.exists():
@@ -49,8 +49,9 @@ def main() -> None:
     for name in PRODUCERS:
         subprocess.run([sys.executable, str(SCRIPTS / name)], cwd=ROOT, check=True)
     destination.mkdir(parents=True)
+    derived_after_runs = {"execution-code-input-binding.json", "reproducibility.json"}
     for path in sorted(OUTPUTS.iterdir()):
-        if path.is_file():
+        if path.is_file() and path.name not in derived_after_runs:
             shutil.copyfile(path, destination / path.name)
     manifest = {
         "schema": "worldatlas-complete-source-run-v1",

@@ -14,14 +14,14 @@
       "research/geography/portugal-spain-gap-source-families-20261007/scripts/assemble-source-status.py",
       "research/geography/portugal-spain-gap-source-families-20261007/scripts/validate-source-controls.py"
     ],
-    "producer_code_sha256": "eb51b8ac9f561aa219df21670c749e152e884cccc012d1d46e19f68682a2fd8f",
-    "sha256": "ff8ab28ffec5ef309d6db7cd6bcecf661a845811dc05920475e8ee2c456d3020"
+    "producer_code_sha256": "a4c5ce57362ce846dee9ade40815fb63101ee6612362a37e34509baab89008bb",
+    "sha256": "7e664e7332b5e15a61f7af9f9d32781175a1c85d913d88f7e4db2db8bf9a88ff"
   },
   "limits": [
     "Capture timestamps differ by design; every complete analysis output file has an identical whole-file hash across both runs.",
     "Determinism confirms computational reproducibility only and does not resolve source availability, licensing, historical coverage, or classification."
   ],
-  "output_count": 19,
+  "output_count": 17,
   "output_sha256": [
     {
       "bytes": 245504,
@@ -84,11 +84,6 @@
       "sha256": "59c345e948fdcbd4bc7547cca8ad90dce6a0a5401624b01e03a3d21ed212fb84"
     },
     {
-      "bytes": 5686,
-      "path": "execution-code-input-binding.json",
-      "sha256": "1cc04f0f8180cf8cc5919f59db171c373e95c62c72b716e2fa4cb883e42daf7c"
-    },
-    {
       "bytes": 629423,
       "path": "jrc-2024-component-month-summary.json",
       "sha256": "0bf9a5fc88b98ac0328ec5e49ea93dba6aef3cc94913880c3051f8f92e65223d"
@@ -97,11 +92,6 @@
       "bytes": 71213,
       "path": "mapa-current-snapshot-overlays.json",
       "sha256": "13bdb51e04e5afed8c42683fb4e0d9ee5454ff75bb431f096e26704445441b93"
-    },
-    {
-      "bytes": 5813,
-      "path": "reproducibility.json",
-      "sha256": "c6f30a2e976fd91531e6472bf10b67821965a661113eddc0a77db4aacafaa011"
     },
     {
       "bytes": 526,
@@ -120,13 +110,13 @@
     }
   ],
   "runs": {
-    "run-7": {
-      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-7/run-manifest.json",
-      "sha256": "ae8f540a645ef5b61366be4385d7951fa5e85e5fdd03c4c99c18921ae03a360b"
+    "run-10": {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-10/run-manifest.json",
+      "sha256": "04507e6e5efe7358f049a9b59d7b8eb85c8b88cb96c91fff9ee1a21a70129aa3"
     },
-    "run-8": {
-      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-8/run-manifest.json",
-      "sha256": "dd165f486cb384eba468fd9455b1491f613466ebf7a88ea1cd142c800728641f"
+    "run-9": {
+      "path": "research/geography/portugal-spain-gap-source-families-20261007/runs/run-9/run-manifest.json",
+      "sha256": "f7cfc46a6329e9772ea2f33c683be750cbdeb027d29ae6477205dda2e2741838"
     }
   },
   "schema": "worldatlas-source-execution-binding-v1"

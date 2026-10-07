@@ -46,7 +46,7 @@ def inventory(*directories: Path) -> list[dict[str, object]]:
 
 def main() -> None:
     runs = PACKAGE / "runs"
-    run_ids = ("run-7", "run-8")
+    run_ids = ("run-9", "run-10")
     first = json.loads((runs / f"{run_ids[0]}/run-manifest.json").read_text())
     second = json.loads((runs / f"{run_ids[1]}/run-manifest.json").read_text())
     left = {row["path"]: row for row in first["outputs"]}
