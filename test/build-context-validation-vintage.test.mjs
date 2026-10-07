@@ -5,7 +5,7 @@ import path from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {pathToFileURL} from 'node:url';
-import {authenticateOriginalValidator,validateBuildContextVintage} from '../coordination/engineering/subject-descriptor-decode-20261007/context-vintage-dispatch.mjs';
+import {authenticateOriginalValidator,validateBuildContextVintage,requireCurrentMigrationSource} from '../coordination/engineering/subject-descriptor-decode-20261007/context-vintage-dispatch.mjs';
 import {validateContextMigration} from '../scripts/native-ownership/validate-context-migration.mjs';
 import {requireValidatedGeometryMigrations} from '../scripts/prepare-geographic-release.mjs';
 import {footprintHash} from '../scripts/check-prepared.mjs';
@@ -82,6 +82,19 @@ test('genuine old realm proof rejects in current consumer; same validated operan
   const historical=old.validateContextMigration(operands);
   assert.throws(()=>requireValidatedGeometryMigrations(historical.geometryValidation),/complete geometry migration validation/);
   const current=validateContextMigration(operands);assert.equal(requireValidatedGeometryMigrations(current.geometryValidation),current.geometryValidation);
+  const stageBinding={geometry_manifest:{sha256:digest(await fs.readFile(path.join(root,'index.json')))}};
+  assert.equal(requireCurrentMigrationSource(current,stageBinding),current);
+  assert.throws(()=>requireCurrentMigrationSource(historical,stageBinding),/complete geometry migration validation/);
+  // A formatting-only index mutation keeps the migration receipt equal, but
+  // must not evade the original stage's exact index-body source binding.
+  const originalIndex=await fs.readFile(path.join(root,'index.json'));
+  await fs.writeFile(path.join(root,'index.json'),Buffer.concat([originalIndex,Buffer.from('\n')]));
+  const indexChanged=validateContextMigration(operands);
+  const {geometryValidation:ignored,...sameReceipt}=indexChanged;
+  const {geometryValidation:unused,...originalReceipt}=current;
+  assert.deepEqual(sameReceipt,originalReceipt);
+  assert.throws(()=>requireCurrentMigrationSource(indexChanged,stageBinding),/index differs/);
+  await fs.writeFile(path.join(root,'index.json'),originalIndex);
   const {geometryValidation:a,...ar}=historical,{geometryValidation:b,...br}=current;assert.deepEqual(ar,br);
   assert.throws(()=>validateContextMigration({...operands,migrated:[after[0],feature('b',2,3.1,2)]}),/footprints|unchanged field/);
   assert.throws(()=>validateContextMigration({...operands,predecessorRelease:{...predecessor,id:'foreign'}}),/predecessor/);

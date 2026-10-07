@@ -7,6 +7,7 @@ import {fileURLToPath,pathToFileURL} from 'node:url';
 import {gunzipSync} from 'node:zlib';
 import {repositoryReader,safeEvidencePath,sha256} from '../../../scripts/evidence-quality.mjs';
 import {validateContextMigration} from '../../../scripts/native-ownership/validate-context-migration.mjs';
+import {requireValidatedGeometryMigrations} from '../../../scripts/prepare-geographic-release.mjs';
 import {validateBuildContextStage as currentStage,BUILD_CONTEXT_STAGE_PATH} from '../../../scripts/native-ownership/validate-build-context-stage.mjs';
 
 const captureRoot=fileURLToPath(new URL('./legacy-context-v1/',import.meta.url));
@@ -53,6 +54,13 @@ export async function authenticateOriginalValidator({snapshotRoot=captureRoot}={
  const module=await import(pathToFileURL(path.join(snapshotRoot,index.entry)).href);
  return {index,validate:module.validateBuildContextStage};
 }
+export function requireCurrentMigrationSource(migration,stage){
+ const proof=requireValidatedGeometryMigrations(migration.geometryValidation);
+ assert.equal(proof.proofs.length,1);
+ assert.equal(proof.proofs[0].manifest_sha256,stage.geometry_manifest.sha256,
+  'Current geometry index differs from authenticated original stage');
+ return migration;
+}
 export async function validateBuildContextVintage({root=process.cwd(),expectedReference,readFile}={}){
  const read=readFile??repositoryReader(root);
  if(!readFile&&!fs.existsSync(path.join(root,BUILD_CONTEXT_STAGE_PATH)))
@@ -94,9 +102,12 @@ export async function validateBuildContextVintage({root=process.cwd(),expectedRe
   return {inputs,features};
  };
  const before=decode(stage.before_context),after=decode(stage.after_context,before);
+ checked(stage.geometry_manifest);
+ for(const pin of stage.geometry_files)checked(pin);
  const migration=validateContextMigration({original:before.features,migrated:after.features,
   candidates:JSON.parse(checked(stage.native_proposal)),predecessorRelease:predecessor,release,
   migrationManifestFile:path.join(root,stage.geometry_manifest.path)});
+ requireCurrentMigrationSource(migration,stage);
  const {geometryValidation,...receipt}=migration;
  assert.deepEqual(receipt,originalResult.receipt.migration);
  return {...originalResult,geometryValidation}; // Never return the old realm token.
