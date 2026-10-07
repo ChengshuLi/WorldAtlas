@@ -4,15 +4,15 @@
   "runtime": "3.7.3 (default, Mar 27 2019, 09:23:32) \n[Clang 9.0.0 (clang-900.0.39.2)]",
   "platform": "darwin",
   "imports": "Python standard library only plus Git CLI",
-  "frozen_at_utc": "2026-10-07T07:54:44Z",
+  "frozen_at_utc": "2026-10-07T07:48:12Z",
   "run_count": 2,
   "runs": [
     {
       "run": 1,
-      "command": "/usr/local/opt/python/bin/python3.7 /Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/c2957ff17d87f9b25edb9c6a4f8c5f115108da50945919c8ee9ad14bd2330b5e/work/research/geography/philippines-ten-gap-family-source-fitness-20261007/methods/extract_preserved_records.py --output /var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/phl-source-fitness-run-upkxlzjy/run-1",
-      "started_at_utc": "2026-10-07T07:54:44Z",
-      "finished_at_utc": "2026-10-07T07:56:35Z",
-      "duration_seconds": 110.571,
+      "command": "/usr/local/opt/python/bin/python3.7 /Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/c2957ff17d87f9b25edb9c6a4f8c5f115108da50945919c8ee9ad14bd2330b5e/work/research/geography/philippines-ten-gap-family-source-fitness-20261007/methods/extract_preserved_records.py --output /var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/phl-source-fitness-run-n1vy550a/run-1",
+      "started_at_utc": "2026-10-07T07:48:12Z",
+      "finished_at_utc": "2026-10-07T07:48:42Z",
+      "duration_seconds": 29.999,
       "exit_code": 0,
       "stdout": "{\"candidate_pointsets\": 22, \"current_contacts\": 22, \"families\": 10, \"original_contacts\": 22, \"physical_bodies\": 18, \"physical_rows\": 22, \"result\": \"PASS\", \"routing_bodies\": 39, \"routing_component_rows\": 22, \"source_sha256\": \"2ece3d44a5c6a2afb385ffbf3a6b88d83e4d3a3e7eed9a52cb3be1bc59e289fc\"}",
       "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -20,12 +20,12 @@
         {
           "path": "accepted-predecessor-source-closure.json",
           "bytes": 19014,
-          "sha256": "0fe0a1f7b9c76199fa387dc0e9342bf960829cdcbf0f9a9566ecb148d90ea650"
+          "sha256": "df343d4567a412a7633f01d53988cdcd8a60ed9e8f8832f7c1f9a0fc858e1cbe"
         },
         {
           "path": "candidate-pointsets-22.json",
           "bytes": 25838,
-          "sha256": "3396a3406f29fe60deae95fcb399eb698c50644b0c41f6f0a6bd664d3597f6b9"
+          "sha256": "dd0b9b46900f08383329b47b99922e4658636e1017b4389c30b6d767be678944"
         },
         {
           "path": "current-contact-features-22.json",
@@ -46,10 +46,10 @@
     },
     {
       "run": 2,
-      "command": "/usr/local/opt/python/bin/python3.7 /Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/c2957ff17d87f9b25edb9c6a4f8c5f115108da50945919c8ee9ad14bd2330b5e/work/research/geography/philippines-ten-gap-family-source-fitness-20261007/methods/extract_preserved_records.py --output /var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/phl-source-fitness-run-upkxlzjy/run-2",
-      "started_at_utc": "2026-10-07T07:56:35Z",
-      "finished_at_utc": "2026-10-07T07:57:30Z",
-      "duration_seconds": 55.339,
+      "command": "/usr/local/opt/python/bin/python3.7 /Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/c2957ff17d87f9b25edb9c6a4f8c5f115108da50945919c8ee9ad14bd2330b5e/work/research/geography/philippines-ten-gap-family-source-fitness-20261007/methods/extract_preserved_records.py --output /var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/phl-source-fitness-run-n1vy550a/run-2",
+      "started_at_utc": "2026-10-07T07:48:42Z",
+      "finished_at_utc": "2026-10-07T07:49:12Z",
+      "duration_seconds": 29.448,
       "exit_code": 0,
       "stdout": "{\"candidate_pointsets\": 22, \"current_contacts\": 22, \"families\": 10, \"original_contacts\": 22, \"physical_bodies\": 18, \"physical_rows\": 22, \"result\": \"PASS\", \"routing_bodies\": 39, \"routing_component_rows\": 22, \"source_sha256\": \"2ece3d44a5c6a2afb385ffbf3a6b88d83e4d3a3e7eed9a52cb3be1bc59e289fc\"}",
       "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -57,12 +57,12 @@
         {
           "path": "accepted-predecessor-source-closure.json",
           "bytes": 19014,
-          "sha256": "0fe0a1f7b9c76199fa387dc0e9342bf960829cdcbf0f9a9566ecb148d90ea650"
+          "sha256": "df343d4567a412a7633f01d53988cdcd8a60ed9e8f8832f7c1f9a0fc858e1cbe"
         },
         {
           "path": "candidate-pointsets-22.json",
           "bytes": 25838,
-          "sha256": "3396a3406f29fe60deae95fcb399eb698c50644b0c41f6f0a6bd664d3597f6b9"
+          "sha256": "dd0b9b46900f08383329b47b99922e4658636e1017b4389c30b6d767be678944"
         },
         {
           "path": "current-contact-features-22.json",
@@ -662,20 +662,6 @@
       "sha256": "2ece3d44a5c6a2afb385ffbf3a6b88d83e4d3a3e7eed9a52cb3be1bc59e289fc"
     },
     {
-      "path": "inputs/prior-vintage/extract_preserved_records-8eb782a0.py",
-      "vintage": "candidate",
-      "role": "preserved earlier exact-head code or run receipt",
-      "bytes": 13044,
-      "sha256": "e66182c1cefd3b11dfaa07d56bb4af586a4fb9595a97a8ffa12fcce8b9a80efa"
-    },
-    {
-      "path": "inputs/prior-vintage/extraction-runs-8eb782a0.json",
-      "vintage": "candidate",
-      "role": "preserved earlier exact-head code or run receipt",
-      "bytes": 37058,
-      "sha256": "246f5d4a731564642d786395c8f44d44608687b007466403fd2b2c1ed4805f68"
-    },
-    {
       "path": "inputs/root-philippines-ten-full-family-source-fit-proposal.json",
       "vintage": "candidate",
       "role": "unchanged accepted predecessor pointsets and family/component closure",
@@ -688,13 +674,6 @@
       "role": "original source identity and 22-subject handoff",
       "bytes": 213525,
       "sha256": "e743bcc7287a0d45ff88033aa737f66f6209c8a7f604329aae7544d1916bf1b1"
-    },
-    {
-      "path": "records/producer-binding-review.json",
-      "vintage": "candidate",
-      "role": "independent producer-binding counterexample and expected-vintage record",
-      "bytes": 2719,
-      "sha256": "f9d8a63d6d8ba17a67d3c3e446f0b0a28f34c58174473f75f71b955679c3261c"
     }
   ],
   "outputs_identical_byte_for_byte": true,
@@ -720,37 +699,29 @@
       "result": "mutated input rejected"
     },
     {
-      "control": "actual candidate producer geometry mutation against authenticated routing binding",
+      "control": "candidate geometry to whole feature identity binding",
       "result": "mutated input rejected"
     },
     {
-      "control": "actual current-contact restoration geometry mutation against full-feature binding",
+      "control": "current geometry to full contact identity binding",
       "result": "mutated input rejected"
     }
   ],
-  "independent_candidate_producer_counterexample_control": {
-    "component_id": "physical-component:10d537ef342283ca7291f87dea56fc4ef092dcda4691c4008a94941dcd122ecf",
-    "expected_feature_sha256": "f2c617e00d25f073461b2a2a06028382f104305bf0e4ba2767ea3a58ba615d0d",
-    "expected_geometry_sha256": "e5e7bc7fe21520a4062495975bcb8a07dbde5efd978a501f32e8212fe3e86122",
-    "mutated_feature_sha256": "1d7c4f173ac5456e2366ecc85b84b922d41e29a79881afe1f1157afae0978571",
-    "mutated_geometry_sha256": "d58442e460b01b92cafb52c35c7ae4c17f7fd2fc96c348f540f57064e37e6cb4",
-    "actual_producer_binding_rejected_mutation": true
-  },
   "code_sha256": {
-    "extractor": "36fb62f627cf67477cf987b184de80c65a61349c5294ad7053c8efd650dec50f",
-    "harness": "354f980bb139f268db1d7f918acb1465fd63757997ed586f7cc8d7e643ef9b90"
+    "extractor": "e66182c1cefd3b11dfaa07d56bb4af586a4fb9595a97a8ffa12fcce8b9a80efa",
+    "harness": "86f0a93424e49a8fe3832af7e57e574bc9bfa31cdb27f9b2bd59e2989bf7a920"
   },
   "scope": "Restores source, current-contact, candidate-pointset and already accepted comparison records from declared immutable inputs; no new geometry operation, source adjudication or physical comparison.",
   "outputs": [
     {
       "path": "accepted-predecessor-source-closure.json",
       "bytes": 19014,
-      "sha256": "0fe0a1f7b9c76199fa387dc0e9342bf960829cdcbf0f9a9566ecb148d90ea650"
+      "sha256": "df343d4567a412a7633f01d53988cdcd8a60ed9e8f8832f7c1f9a0fc858e1cbe"
     },
     {
       "path": "candidate-pointsets-22.json",
       "bytes": 25838,
-      "sha256": "3396a3406f29fe60deae95fcb399eb698c50644b0c41f6f0a6bd664d3597f6b9"
+      "sha256": "dd0b9b46900f08383329b47b99922e4658636e1017b4389c30b6d767be678944"
     },
     {
       "path": "current-contact-features-22.json",

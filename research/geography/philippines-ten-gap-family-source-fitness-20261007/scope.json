@@ -29,7 +29,7 @@
     "status": "blocked",
     "tokens_used": 723362,
     "time_used_seconds": 2478,
-    "recorded_at_utc": "2026-10-07T07:51:04Z"
+    "recorded_at_utc": "2026-10-07T07:58:05Z"
   },
   "source_identity": {
     "id": "whole_consumed_phl_adm3_source",
@@ -60,5 +60,13 @@
     "pointsets_and_family_assessments": "unchanged accepted predecessor outputs; no geometry comparison or source adjudication regenerated",
     "full_proposal_sha256": "5582eeb86f274c2a1d3939f2e8dcaaaeb29473c8d7f58427d6f84ae92f2dab1e",
     "original_source_handoff_sha256": "e743bcc7287a0d45ff88033aa737f66f6209c8a7f604329aae7544d1916bf1b1"
+  },
+  "producer_integrity": {
+    "previous_vintage_commit": "8eb782a00313bb3749653cd570f12126614a49a7",
+    "previous_extractor_sha256": "e66182c1cefd3b11dfaa07d56bb4af586a4fb9595a97a8ffa12fcce8b9a80efa",
+    "previous_run_receipt_sha256": "246f5d4a731564642d786395c8f44d44608687b007466403fd2b2c1ed4805f68",
+    "counterexample_component": "physical-component:10d537ef342283ca7291f87dea56fc4ef092dcda4691c4008a94941dcd122ecf",
+    "counterexample_reproduced_mutated_feature_sha256": "1d7c4f173ac5456e2366ecc85b84b922d41e29a79881afe1f1157afae0978571",
+    "corrective_invariant": "Each candidate full-feature SHA and geometry SHA must match its independently authenticated whole routing row before that candidate can be emitted."
   }
 }

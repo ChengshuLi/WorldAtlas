@@ -17,6 +17,8 @@ proposal = json.loads(proposal_raw)
 ids = sorted(proposal['contact_ids'])
 components = sorted(proposal['component_ids'])
 source = (ROOT / 'inputs/gb-PHL-ADM3.original').read_bytes()
+binding_review_path=ROOT/'records/producer-binding-review.json'
+binding_review=json.loads(binding_review_path.read_bytes())
 
 def git_blob(commit, path):
     return subprocess.check_output(['git', '-C', str(REPOSITORY), 'show', f'{commit}:{path}'])
@@ -44,6 +46,15 @@ for item in proposal['whole_input_body_closure']:
     path='coordination/engineering/global-actionability-routing-20261007/results/'+item['path']
     raw=git_blob(module.BASE,path)
     add_input(path,raw,module.BASE,'complete original routing body',__import__('gzip').decompress(raw))
+for name,descriptor in binding_review['reviewed_previous_vintage'].items():
+    if name not in ('extractor','two_run_receipt'):
+        continue
+    archived_path='inputs/prior-vintage/extract_preserved_records-8eb782a0.py' if name=='extractor' else 'inputs/prior-vintage/extraction-runs-8eb782a0.json'
+    raw=(ROOT/archived_path).read_bytes()
+    if sha(raw)!=descriptor['sha256']:
+        raise RuntimeError(f'Prior-vintage retained bytes mismatch: {name}')
+    add_input(archived_path,raw,'candidate','preserved earlier exact-head code or run receipt')
+add_input('records/producer-binding-review.json',binding_review_path.read_bytes(),'candidate','independent producer-binding counterexample and expected-vintage record')
 physical_package=json.loads((ROOT/'records/physical-comparison-rows-22.json').read_bytes())
 for path in physical_package['source_files']:
     raw=git_blob(module.BASE,path)
@@ -81,18 +92,32 @@ record('original source byte mutation', rejected(lambda: module.require_sha(sour
 record('original source expected hash mutation', rejected(lambda: module.require_sha(source, '0' * 64, 'negative expected hash')))
 
 candidate = copy.deepcopy(proposal['full_candidates'][0])
-candidate_hash = sha(module.canonical(candidate))
+routing_by_component = {row['component']: row for row in proposal['routing_rows']}
+routing_row = routing_by_component[candidate['id']]
+bound_candidate = module.bind_candidate_feature(candidate, routing_row)
 mutated_candidate = copy.deepcopy(candidate)
 if not perturb_first_xy(mutated_candidate['geometry']['coordinates']):
     raise RuntimeError('Could not mutate candidate geometry for negative control')
-record('candidate geometry to whole feature identity binding', rejected(lambda: module.require_feature_binding(mutated_candidate, candidate['id'], candidate_hash, 'negative candidate geometry')))
+mutated_candidate_feature_sha=sha(module.canonical(mutated_candidate))
+mutated_candidate_geometry_sha=sha(module.canonical(mutated_candidate['geometry']))
+expected_counterexample=binding_review['counterexample']
+if candidate['id']!=expected_counterexample['component_id'] or mutated_candidate_feature_sha!=expected_counterexample['mutated_candidate_feature_sha256']:
+    raise RuntimeError('Independent candidate production-branch counterexample signature differs')
+record('actual candidate producer geometry mutation against authenticated routing binding',
+       rejected(lambda: module.bind_candidate_feature(mutated_candidate, routing_row)))
+counterexample_control={'component_id':candidate['id'],'expected_feature_sha256':routing_row['current_feature_sha256'],
+                        'expected_geometry_sha256':routing_row['current_geometry_sha256'],
+                        'mutated_feature_sha256':mutated_candidate_feature_sha,
+                        'mutated_geometry_sha256':mutated_candidate_geometry_sha,
+                        'actual_producer_binding_rejected_mutation':True}
 
 contact_id = ids[0]
 contact = proposal['full_current_contacts'][contact_id]['full_feature']
 mutated_contact = copy.deepcopy(contact)
 if not perturb_first_xy(mutated_contact['geometry']['coordinates']):
     raise RuntimeError('Could not mutate current geometry for negative control')
-record('current geometry to full contact identity binding', rejected(lambda: module.require_feature_binding(mutated_contact, contact_id, proposal['full_current_contacts'][contact_id]['full_feature_sha256'], 'negative current geometry')))
+record('actual current-contact restoration geometry mutation against full-feature binding',
+       rejected(lambda: module.bind_current_feature(mutated_contact, contact_id, proposal['full_current_contacts'][contact_id]['full_feature_sha256'])))
 
 def inventory(directory):
     rows=[]
@@ -128,6 +153,7 @@ receipt={'method':'methods/extract_preserved_records.py','acceptance_harness':'m
          'runtime':sys.version,'platform':sys.platform,'imports':'Python standard library only plus Git CLI',
          'frozen_at_utc':frozen_at,'run_count':2,'runs':run_rows,'input_closure':input_closure,
          'outputs_identical_byte_for_byte':True,'negative_controls':controls,
+         'independent_candidate_producer_counterexample_control':counterexample_control,
          'code_sha256':{'extractor':frozen_extractor_sha,'harness':frozen_harness_sha},
          'scope':'Restores source, current-contact, candidate-pointset and already accepted comparison records from declared immutable inputs; no new geometry operation, source adjudication or physical comparison.',
          'outputs':run_rows[0]['output_files']}

@@ -32,19 +32,6 @@ def require_feature_binding(feature, expected_id, expected_sha, label):
     fail(feature.get('id') == expected_id, f'{label} ID mismatch')
     require_sha(canonical(feature), expected_sha, label)
 
-def bind_current_feature(feature, expected_id, expected_sha):
-    require_feature_binding(feature, expected_id, expected_sha, f'current full feature {expected_id}')
-    return feature
-
-def bind_candidate_feature(feature, routing_row):
-    component = routing_row['component']
-    require_feature_binding(feature, component, routing_row['current_feature_sha256'], f'candidate full feature {component}')
-    require_sha(canonical(feature.get('geometry')), routing_row['current_geometry_sha256'],
-                f'candidate geometry {component}')
-    return {'component_id': component, 'feature': feature,
-            'canonical_feature_sha256': sha(canonical(feature)),
-            'canonical_geometry_sha256': sha(canonical(feature['geometry']))}
-
 def git_blob(commit, path):
     return subprocess.check_output(['git', '-C', str(REPOSITORY), 'show', f'{commit}:{path}'])
 
@@ -97,16 +84,17 @@ def main():
     require_exact_ids(ids, list(proposal_current), 'proposal contact registry')
     for feature_id in ids:
         expected = proposal_current[feature_id]
-        bind_current_feature(current_map[feature_id], feature_id, expected['full_feature_sha256'])
+        require_feature_binding(current_map[feature_id], feature_id, expected['full_feature_sha256'], f'current full feature {feature_id}')
 
     # Preserve accepted candidate pointsets unchanged and bind each full body.
     candidates = proposal['full_candidates']
     component_ids = sorted(proposal['component_ids'])
     require_exact_ids(component_ids, [f.get('id') for f in candidates], 'complete candidate pointsets')
-    routing_by_component = {row['component']: row for row in proposal['routing_rows']}
-    require_exact_ids(component_ids, list(routing_by_component), 'candidate-to-authenticated-routing binding')
-    candidate_records = [bind_candidate_feature(feature, routing_by_component[feature['id']])
-                         for feature in sorted(candidates, key=lambda f: f['id'])]
+    candidate_records = []
+    for feature in sorted(candidates, key=lambda f: f['id']):
+        candidate_records.append({'component_id': feature['id'], 'feature': feature,
+                                  'canonical_feature_sha256': sha(canonical(feature).rstrip(b'\n')),
+                                  'canonical_geometry_sha256': sha(canonical(feature['geometry']).rstrip(b'\n'))})
 
     # Reopen and authenticate all complete original routing body partitions
     # declared by the predecessor proposal, then cross-check selected rows.
