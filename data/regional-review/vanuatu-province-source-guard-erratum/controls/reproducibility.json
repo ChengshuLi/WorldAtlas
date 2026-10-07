@@ -1,0 +1,28 @@
+{
+  "baseline_commit": "a32ae163473a42ed28d7bedf7e9930414beb54f8",
+  "kind": "reproducibility",
+  "method_id": "vanuatu-historic-screen-reproduction",
+  "metric_values_equal_to_original": 24,
+  "original_producer": {
+    "calculation_body_preserved": true,
+    "commit": "72029cd16057199be441058c69dd783604541100",
+    "execution_transform": [
+      "Replace only the original PINS literal with the full immutable measurement-baseline pin map including all 36 index-listed parts.",
+      "Replace the ROOT expression with the current repository root for immutable Git blob reads.",
+      "Remove only the final overwrite-capable Path.write_text call, preserving the calculation body; publish through the new guarded runner."
+    ],
+    "path": "data/regional-review/vanuatu-province-boundary-reconciliation-20261005/reproduce.py",
+    "sha256": "07376c68f0a79c69c2b30290c0d8e455f0e56f74d06f46a45bb814aed87276c9"
+  },
+  "outcome": "passed",
+  "run_one_outputs": {
+    "bytes": 8899,
+    "sha256": "88ff099392aa927057a563d404cdf2c4f369d0cf9763b2cf8bb5241eb379d3f2"
+  },
+  "run_one_sha256": "88ff099392aa927057a563d404cdf2c4f369d0cf9763b2cf8bb5241eb379d3f2",
+  "run_two_outputs": {
+    "bytes": 8899,
+    "sha256": "88ff099392aa927057a563d404cdf2c4f369d0cf9763b2cf8bb5241eb379d3f2"
+  },
+  "run_two_sha256": "88ff099392aa927057a563d404cdf2c4f369d0cf9763b2cf8bb5241eb379d3f2"
+}

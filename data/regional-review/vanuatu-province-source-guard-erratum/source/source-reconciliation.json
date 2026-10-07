@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "retrieved_at_utc": "2026-10-07T01:02:54Z",
+  "upstream": {
+    "repository": "https://github.com/wmgeolab/geoBoundaries",
+    "commit": "9469f09592ced973a3448cf66b6100b741b64c0d",
+    "release_path": "releaseData/gbOpen/VUT/ADM1/",
+    "selector": "Select the six GeoJSON features by native properties.shapeID, requiring exact subject suffix, and cross-check shapeName and shapeType."
+  },
+  "products": {
+    "full": {
+      "path": "data/regional-review/regional-review-1aa97b490604ea4e/sources/vanuatu-2017-adm1.geojson",
+      "upstream_file": "geoBoundaries-VUT-ADM1.geojson",
+      "bytes": 1094439,
+      "sha256": "69f44b96d0690310c67a4a430488fb7a02d028bdec8bbc755436cdfb90962c8d",
+      "payload_lfs_oid_sha256": "69f44b96d0690310c67a4a430488fb7a02d028bdec8bbc755436cdfb90962c8d",
+      "use": "The historic #912 screen's source geometry. Preserve unchanged."
+    },
+    "simplified": {
+      "path": "data/regional-review/vanuatu-province-source-guard-erratum/source/geoBoundaries-VUT-ADM1_simplified.geojson",
+      "upstream_file": "geoBoundaries-VUT-ADM1_simplified.geojson",
+      "bytes": 133712,
+      "sha256": "63e1878b1a484787aafa029e3f2a8cb063d9d720b38e9d17884a999d28cd10f8",
+      "payload_lfs_oid_sha256": "63e1878b1a484787aafa029e3f2a8cb063d9d720b38e9d17884a999d28cd10f8",
+      "use": "Reconciles the administrative registry digest. It is not substituted into the historic screen."
+    }
+  },
+  "lfs_pointer_records": "lfs-restoration-pointers.json and adjacent .lfs-pointer files retain pointer text, Git blob SHA-1 for the pointer blob, LFS payload SHA-256/size, retrieval time and exact upstream path. The SHA-1 values identify Git pointer blobs, not payload bytes.",
+  "observed_metadata": {
+    "boundaryID": "VUT-ADM1-32282491",
+    "boundaryYear": "2017",
+    "boundaryType": "ADM1",
+    "boundarySource": "OpenStreetMap, Wambacher",
+    "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+    "buildDate": "Dec 12, 2023",
+    "admUnitCount": "6",
+    "data_license": "Open Data Commons Open Database License 1.0",
+    "citation_file_license": "geoBoundaries-generated computer code and derivative works are CC BY 4.0; that statement does not replace the dataset's ODbL 1.0 terms.",
+    "metadata_caveat": "The metadata's licenseSource and boundarySourceURL fields omit the colon in https://. Their intended URLs are not treated as verified from those malformed strings."
+  },
+  "feature_identity_check": {
+    "expected_native_shape_ids": [
+      "32282491B17169683382430",
+      "32282491B5439526076152",
+      "32282491B61228346728599",
+      "32282491B7486560380604",
+      "32282491B78905986242135",
+      "32282491B8417950609019"
+    ],
+    "matching_fields": ["shapeID", "shapeName", "shapeType"],
+    "result": "all six matched in full and simplified payloads"
+  },
+  "limits": [
+    "The identity match establishes that the registry digest is the upstream simplified distribution and that the old packet retains a different full distribution; it does not establish how geoBoundaries produced the simplified derivative.",
+    "No current legal boundary Orders, effective-date proof, municipality carve-out geometry, island completeness, or regional approval is established.",
+    "Keep all six original classifications insufficient-evidence and retain the historic screen's full-product source and geometry."
+  ]
+}

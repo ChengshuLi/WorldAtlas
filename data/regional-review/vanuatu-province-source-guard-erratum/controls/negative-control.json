@@ -1,0 +1,29 @@
+{
+  "existing_destination": {
+    "case": "existing output sentinel",
+    "rejected": true
+  },
+  "existing_destination_unchanged": {
+    "bytes": 33,
+    "sha256": "84de2012a020efac7d82095ebd6e5836cebaa7c49ea492af6d3c1ccd238962f5"
+  },
+  "input_drift": {
+    "case": "changed input digest",
+    "rejected": true
+  },
+  "kind": "negative-control",
+  "method_id": "vanuatu-historic-screen-reproduction",
+  "outcome": "passed",
+  "runner_code_drift": {
+    "case": "changed producer digest",
+    "rejected": true
+  },
+  "symlink_escape": {
+    "case": "symlink escape",
+    "rejected": true
+  },
+  "traversal": {
+    "case": "parent traversal",
+    "rejected": true
+  }
+}
