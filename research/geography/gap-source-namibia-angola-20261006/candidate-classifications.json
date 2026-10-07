@@ -1,0 +1,2295 @@
+{
+  "version": 1,
+  "scope": {
+    "components": 21,
+    "contacts": 10,
+    "consumed_source_years": {
+      "NAM": 2007,
+      "AGO": 2018
+    },
+    "full_product_release_commit": "9469f09592ced973a3448cf66b6100b741b64c0d"
+  },
+  "classification_rules": {
+    "source_geometry": "Supported only as a geometric observation when an exact candidate intersects source geometry by positive area; no administrative or legal resolution is implied.",
+    "physical_water_or_historic_course": "Unresolved absent suitable gap-scale, dated physical-reference evidence.",
+    "processing_cause": "Unresolved unless a specific processing step and mechanism are reproduced.",
+    "boundary_authority": "Unresolved absent the completed demarcation record or authoritative modern line source.",
+    "administrative_assignment": "Not made."
+  },
+  "aggregate_observations": {
+    "positive_area_consumed_intersection_with_ago": 21,
+    "positive_area_consumed_intersection_with_nam": 20,
+    "not_fully_covered_by_consumed_union": 19,
+    "not_fully_covered_by_same_release_full_union": 19,
+    "unverified_water_status": 21,
+    "full_contact_geometry_topological_differences": 10,
+    "full_contact_subjects": 10,
+    "candidate_contact_pairs_with_positive_area": 49,
+    "candidate_contact_pairs_with_line_only": 0,
+    "candidate_contact_pairs_with_point_only": 0
+  },
+  "components": [
+    {
+      "component_id": "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+      "fragment_bindings": [
+        {
+          "feature_sha256": "97440ea15d14b5d0b62bd4895840511ab72db1781358ef3cbda1b4e9a22a2892",
+          "id": "physical-gap:615:5:b4f072612277137fcc8cbc1d9f4953dcc3f2ffcbc94251aa63be5d7a5d83dd8d"
+        }
+      ],
+      "source_geometry": {
+        "consumed_products": "Supported geometric overlap only",
+        "positive_area_intersections": {
+          "NAM": [
+            {
+              "source_id": "gb:NAM:ADM2:8085530B94702234009846",
+              "shapeName": "Luderitz",
+              "area_degrees_squared": 1.9172271997354218e-05,
+              "intersection_type": "MultiPolygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ],
+          "AGO": [
+            {
+              "source_id": "gb:AGO:ADM2:16411231B28551746118834",
+              "shapeName": "Cuangar",
+              "area_degrees_squared": 0.0006121709531311945,
+              "intersection_type": "Polygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ]
+        },
+        "candidate_area_degrees_squared": 0.0006314831439819369,
+        "outside_consumed_union_area_degrees_squared": 1.8357938181092373e-07,
+        "outside_consumed_union_fraction": 0.00029071145217484203,
+        "covered_by_consumed_source_union": false,
+        "same_release_full_products": {
+          "NAM": {
+            "positive_area_intersection_count": 1,
+            "intersecting_source_feature_count": 1,
+            "hits": [
+              {
+                "source_id": "gb:NAM:ADM2:8085530B94702234009846",
+                "shape_name": "Luderitz",
+                "intersection_area_degrees_squared": 2.9819127079186977e-05,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "MultiPolygon"
+              }
+            ]
+          },
+          "AGO": {
+            "positive_area_intersection_count": 1,
+            "intersecting_source_feature_count": 1,
+            "hits": [
+              {
+                "source_id": "gb:AGO:ADM2:16411231B28551746118834",
+                "shape_name": "Cuangar",
+                "intersection_area_degrees_squared": 0.0006016358539497586,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "Polygon"
+              }
+            ]
+          }
+        },
+        "outside_full_union_area_degrees_squared": 6.503568852613206e-08,
+        "outside_full_union_fraction": 0.00010298879573576132,
+        "full_union_coverage": "not fully covered"
+      },
+      "physical_water_or_historic_course": {
+        "status": "unresolved",
+        "original_diagnostic_water_status": "unverified",
+        "touches_reference_shore_diagnostic": false,
+        "touches_domain_boundary_diagnostic": false,
+        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+      },
+      "processing_cause": {
+        "status": "unknown",
+        "finding": "No exact data-processing defect or specific causal step has been reproduced."
+      },
+      "boundary_authority": {
+        "status": "unresolved",
+        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+      },
+      "administrative_assignment": "not made",
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+    },
+    {
+      "component_id": "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+      "fragment_bindings": [
+        {
+          "feature_sha256": "a1c38f1bd14ff5a61aed6c0f7e4479cf15af1ab93e2fed0b14694f559da52a40",
+          "id": "physical-gap:615:11:9a6d24a83734caaaac629e2a6f803e5083bf6c1a31c3ad2c4a4977bac6f6bff5"
+        }
+      ],
+      "source_geometry": {
+        "consumed_products": "Supported geometric overlap only",
+        "positive_area_intersections": {
+          "NAM": [
+            {
+              "source_id": "gb:NAM:ADM2:8085530B32015186497374",
+              "shapeName": "Rehoboth West",
+              "area_degrees_squared": 2.2409331069254738e-07,
+              "intersection_type": "MultiPolygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ],
+          "AGO": [
+            {
+              "source_id": "gb:AGO:ADM2:16411231B28551746118834",
+              "shapeName": "Cuangar",
+              "area_degrees_squared": 0.0004477679250793633,
+              "intersection_type": "Polygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ]
+        },
+        "candidate_area_degrees_squared": 0.0004479979395494385,
+        "outside_consumed_union_area_degrees_squared": 7.263104680952455e-09,
+        "outside_consumed_union_fraction": 1.6212361798487555e-05,
+        "covered_by_consumed_source_union": false,
+        "same_release_full_products": {
+          "NAM": {
+            "positive_area_intersection_count": 1,
+            "intersecting_source_feature_count": 1,
+            "hits": [
+              {
+                "source_id": "gb:NAM:ADM2:8085530B32015186497374",
+                "shape_name": "Rehoboth West",
+                "intersection_area_degrees_squared": 4.768569056506233e-06,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "MultiPolygon"
+              }
+            ]
+          },
+          "AGO": {
+            "positive_area_intersection_count": 1,
+            "intersecting_source_feature_count": 1,
+            "hits": [
+              {
+                "source_id": "gb:AGO:ADM2:16411231B28551746118834",
+                "shape_name": "Cuangar",
+                "intersection_area_degrees_squared": 0.0004432272070941739,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "Polygon"
+              }
+            ]
+          }
+        },
+        "outside_full_union_area_degrees_squared": 7.294786226852888e-09,
+        "outside_full_union_fraction": 1.6283079860120375e-05,
+        "full_union_coverage": "not fully covered"
+      },
+      "physical_water_or_historic_course": {
+        "status": "unresolved",
+        "original_diagnostic_water_status": "unverified",
+        "touches_reference_shore_diagnostic": false,
+        "touches_domain_boundary_diagnostic": false,
+        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+      },
+      "processing_cause": {
+        "status": "unknown",
+        "finding": "No exact data-processing defect or specific causal step has been reproduced."
+      },
+      "boundary_authority": {
+        "status": "unresolved",
+        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+      },
+      "administrative_assignment": "not made",
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+    },
+    {
+      "component_id": "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+      "fragment_bindings": [
+        {
+          "feature_sha256": "832ab71bc46408c401987582fa9c1a5d9d6769f07f8766d8646bcc82433cf078",
+          "id": "physical-gap:616:44:b1096252afa69e50d374cad1f1f43195c381c005698c6a734346966d9c1b5df0"
+        }
+      ],
+      "source_geometry": {
+        "consumed_products": "Supported geometric overlap only",
+        "positive_area_intersections": {
+          "NAM": [
+            {
+              "source_id": "gb:NAM:ADM2:8085530B15355770078360",
+              "shapeName": "Grootfontein",
+              "area_degrees_squared": 5.4873766909628103e-08,
+              "intersection_type": "Polygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ],
+          "AGO": [
+            {
+              "source_id": "gb:AGO:ADM2:16411231B14510444140190",
+              "shapeName": "Dirico",
+              "area_degrees_squared": 1.738788514352489e-05,
+              "intersection_type": "Polygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ]
+        },
+        "candidate_area_degrees_squared": 1.744288333801505e-05,
+        "outside_consumed_union_area_degrees_squared": 4.885159602194449e-10,
+        "outside_consumed_union_fraction": 2.8006605946550842e-05,
+        "covered_by_consumed_source_union": false,
+        "same_release_full_products": {
+          "NAM": {
+            "positive_area_intersection_count": 1,
+            "intersecting_source_feature_count": 1,
+            "hits": [
+              {
+                "source_id": "gb:NAM:ADM2:8085530B15355770078360",
+                "shape_name": "Grootfontein",
+                "intersection_area_degrees_squared": 5.4873766909628103e-08,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "Polygon"
+              }
+            ]
+          },
+          "AGO": {
+            "positive_area_intersection_count": 1,
+            "intersecting_source_feature_count": 1,
+            "hits": [
+              {
+                "source_id": "gb:AGO:ADM2:16411231B14510444140190",
+                "shape_name": "Dirico",
+                "intersection_area_degrees_squared": 1.7388862565117338e-05,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "Polygon"
+              }
+            ]
+          }
+        },
+        "outside_full_union_area_degrees_squared": 4.885159602194449e-10,
+        "outside_full_union_fraction": 2.8006605946550842e-05,
+        "full_union_coverage": "not fully covered"
+      },
+      "physical_water_or_historic_course": {
+        "status": "unresolved",
+        "original_diagnostic_water_status": "unverified",
+        "touches_reference_shore_diagnostic": false,
+        "touches_domain_boundary_diagnostic": false,
+        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+      },
+      "processing_cause": {
+        "status": "unknown",
+        "finding": "No exact data-processing defect or specific causal step has been reproduced."
+      },
+      "boundary_authority": {
+        "status": "unresolved",
+        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+      },
+      "administrative_assignment": "not made",
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+    },
+    {
+      "component_id": "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+      "fragment_bindings": [
+        {
+          "feature_sha256": "88a221865e99b47fecce1305b6a5239eca0029a488ac41fd8954016339b7ee1a",
+          "id": "physical-gap:615:17:ce1730f7f40262207494236b1a61b136d732edb27fe28806d4e47040254b2dab"
+        }
+      ],
+      "source_geometry": {
+        "consumed_products": "Supported geometric overlap only",
+        "positive_area_intersections": {
+          "NAM": [
+            {
+              "source_id": "gb:NAM:ADM2:8085530B43563455443088",
+              "shapeName": "Rundu Urban",
+              "area_degrees_squared": 6.727625754663056e-11,
+              "intersection_type": "Polygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            },
+            {
+              "source_id": "gb:NAM:ADM2:8085530B54610932550654",
+              "shapeName": "Luderitz",
+              "area_degrees_squared": 1.1447672730964677e-07,
+              "intersection_type": "Polygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ],
+          "AGO": [
+            {
+              "source_id": "gb:AGO:ADM2:16411231B36562728226085",
+              "shapeName": "Calai",
+              "area_degrees_squared": 0.00029796413846734133,
+              "intersection_type": "Polygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ]
+        },
+        "candidate_area_degrees_squared": 0.00030114663103761866,
+        "outside_consumed_union_area_degrees_squared": 3.0750535790588246e-06,
+        "outside_consumed_union_fraction": 0.01021115052313069,
+        "covered_by_consumed_source_union": false,
+        "same_release_full_products": {
+          "NAM": {
+            "positive_area_intersection_count": 2,
+            "intersecting_source_feature_count": 2,
+            "hits": [
+              {
+                "source_id": "gb:NAM:ADM2:8085530B43563455443088",
+                "shape_name": "Rundu Urban",
+                "intersection_area_degrees_squared": 6.727625754663056e-11,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "Polygon"
+              },
+              {
+                "source_id": "gb:NAM:ADM2:8085530B54610932550654",
+                "shape_name": "Luderitz",
+                "intersection_area_degrees_squared": 3.197838438267636e-06,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "Polygon"
+              }
+            ]
+          },
+          "AGO": {
+            "positive_area_intersection_count": 1,
+            "intersecting_source_feature_count": 1,
+            "hits": [
+              {
+                "source_id": "gb:AGO:ADM2:16411231B36562728226085",
+                "shape_name": "Calai",
+                "intersection_area_degrees_squared": 0.0002979619658638896,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "Polygon"
+              }
+            ]
+          }
+        },
+        "outside_full_union_area_degrees_squared": 5.724263577352301e-10,
+        "outside_full_union_fraction": 1.9008227180324116e-06,
+        "full_union_coverage": "not fully covered"
+      },
+      "physical_water_or_historic_course": {
+        "status": "unresolved",
+        "original_diagnostic_water_status": "unverified",
+        "touches_reference_shore_diagnostic": false,
+        "touches_domain_boundary_diagnostic": false,
+        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+      },
+      "processing_cause": {
+        "status": "unknown",
+        "finding": "No exact data-processing defect or specific causal step has been reproduced."
+      },
+      "boundary_authority": {
+        "status": "unresolved",
+        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+      },
+      "administrative_assignment": "not made",
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+    },
+    {
+      "component_id": "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+      "fragment_bindings": [
+        {
+          "feature_sha256": "f7b1d701f42fb4c4e93366ced5dfe496cb21d6de6558ce02f76737ae15015c25",
+          "id": "physical-gap:616:37:635cc356a73422ce9b95f545ebd3a53531f16c9a465da821bf761007d74452b1"
+        }
+      ],
+      "source_geometry": {
+        "consumed_products": "Supported geometric overlap only",
+        "positive_area_intersections": {
+          "NAM": [
+            {
+              "source_id": "gb:NAM:ADM2:8085530B15355770078360",
+              "shapeName": "Grootfontein",
+              "area_degrees_squared": 6.225690456846718e-08,
+              "intersection_type": "Polygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ],
+          "AGO": [
+            {
+              "source_id": "gb:AGO:ADM2:16411231B14510444140190",
+              "shapeName": "Dirico",
+              "area_degrees_squared": 3.2346151600234514e-05,
+              "intersection_type": "Polygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ]
+        },
+        "candidate_area_degrees_squared": 3.242558758072544e-05,
+        "outside_consumed_union_area_degrees_squared": 1.717907592926982e-08,
+        "outside_consumed_union_fraction": 0.0005297999885584643,
+        "covered_by_consumed_source_union": false,
+        "same_release_full_products": {
+          "NAM": {
+            "positive_area_intersection_count": 1,
+            "intersecting_source_feature_count": 1,
+            "hits": [
+              {
+                "source_id": "gb:NAM:ADM2:8085530B15355770078360",
+                "shape_name": "Grootfontein",
+                "intersection_area_degrees_squared": 6.225690456846718e-08,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "Polygon"
+              }
+            ]
+          },
+          "AGO": {
+            "positive_area_intersection_count": 1,
+            "intersecting_source_feature_count": 1,
+            "hits": [
+              {
+                "source_id": "gb:AGO:ADM2:16411231B14510444140190",
+                "shape_name": "Dirico",
+                "intersection_area_degrees_squared": 3.234708359885335e-05,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "Polygon"
+              }
+            ]
+          }
+        },
+        "outside_full_union_area_degrees_squared": 1.6247077299152543e-08,
+        "outside_full_union_fraction": 0.0005010572979966661,
+        "full_union_coverage": "not fully covered"
+      },
+      "physical_water_or_historic_course": {
+        "status": "unresolved",
+        "original_diagnostic_water_status": "unverified",
+        "touches_reference_shore_diagnostic": false,
+        "touches_domain_boundary_diagnostic": false,
+        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+      },
+      "processing_cause": {
+        "status": "unknown",
+        "finding": "No exact data-processing defect or specific causal step has been reproduced."
+      },
+      "boundary_authority": {
+        "status": "unresolved",
+        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+      },
+      "administrative_assignment": "not made",
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+    },
+    {
+      "component_id": "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+      "fragment_bindings": [
+        {
+          "feature_sha256": "02f5b6c83f2c18bf7816abf9219cce012fffa7a07e702e1d728ae4d2d489f76f",
+          "id": "physical-gap:615:15:c9af02aab971940eb155bb1fa5dea9fa9cdc8056abe508c11c0519468c50ab75"
+        }
+      ],
+      "source_geometry": {
+        "consumed_products": "Supported geometric overlap only",
+        "positive_area_intersections": {
+          "NAM": [
+            {
+              "source_id": "gb:NAM:ADM2:8085530B25496891828693",
+              "shapeName": "Berseba",
+              "area_degrees_squared": 1.1680671164576026e-06,
+              "intersection_type": "MultiPolygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ],
+          "AGO": [
+            {
+              "source_id": "gb:AGO:ADM2:16411231B36562728226085",
+              "shapeName": "Calai",
+              "area_degrees_squared": 2.1402883691043724e-05,
+              "intersection_type": "MultiPolygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ]
+        },
+        "candidate_area_degrees_squared": 2.257001594326845e-05,
+        "outside_consumed_union_area_degrees_squared": 1.1378033903669286e-10,
+        "outside_consumed_union_fraction": 5.041216600054199e-06,
+        "covered_by_consumed_source_union": false,
+        "same_release_full_products": {
+          "NAM": {
+            "positive_area_intersection_count": 1,
+            "intersecting_source_feature_count": 1,
+            "hits": [
+              {
+                "source_id": "gb:NAM:ADM2:8085530B25496891828693",
+                "shape_name": "Berseba",
+                "intersection_area_degrees_squared": 1.1680671164576026e-06,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "MultiPolygon"
+              }
+            ]
+          },
+          "AGO": {
+            "positive_area_intersection_count": 1,
+            "intersecting_source_feature_count": 1,
+            "hits": [
+              {
+                "source_id": "gb:AGO:ADM2:16411231B36562728226085",
+                "shape_name": "Calai",
+                "intersection_area_degrees_squared": 2.1402883691043724e-05,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "MultiPolygon"
+              }
+            ]
+          }
+        },
+        "outside_full_union_area_degrees_squared": 1.1378033903669286e-10,
+        "outside_full_union_fraction": 5.041216600054199e-06,
+        "full_union_coverage": "not fully covered"
+      },
+      "physical_water_or_historic_course": {
+        "status": "unresolved",
+        "original_diagnostic_water_status": "unverified",
+        "touches_reference_shore_diagnostic": false,
+        "touches_domain_boundary_diagnostic": false,
+        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+      },
+      "processing_cause": {
+        "status": "unknown",
+        "finding": "No exact data-processing defect or specific causal step has been reproduced."
+      },
+      "boundary_authority": {
+        "status": "unresolved",
+        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+      },
+      "administrative_assignment": "not made",
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+    },
+    {
+      "component_id": "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+      "fragment_bindings": [
+        {
+          "feature_sha256": "dabf1ec13ceca9688ec4f2e149f79d6db8e634346aeba0dfade1a289f9a98c5e",
+          "id": "physical-gap:615:12:dfd4aaf6f06eca8efc25c0fe21f8ddc99ac18e6b1bdead109102ef39b725c996"
+        }
+      ],
+      "source_geometry": {
+        "consumed_products": "Supported geometric overlap only",
+        "positive_area_intersections": {
+          "NAM": [
+            {
+              "source_id": "gb:NAM:ADM2:8085530B32015186497374",
+              "shapeName": "Rehoboth West",
+              "area_degrees_squared": 2.904836672498677e-05,
+              "intersection_type": "MultiPolygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ],
+          "AGO": [
+            {
+              "source_id": "gb:AGO:ADM2:16411231B28551746118834",
+              "shapeName": "Cuangar",
+              "area_degrees_squared": 0.0005333675201040649,
+              "intersection_type": "Polygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ]
+        },
+        "candidate_area_degrees_squared": 0.0005623659534831322,
+        "outside_consumed_union_area_degrees_squared": 4.2933278763766145e-09,
+        "outside_consumed_union_fraction": 7.634402206934796e-06,
+        "covered_by_consumed_source_union": false,
+        "same_release_full_products": {
+          "NAM": {
+            "positive_area_intersection_count": 1,
+            "intersecting_source_feature_count": 1,
+            "hits": [
+              {
+                "source_id": "gb:NAM:ADM2:8085530B32015186497374",
+                "shape_name": "Rehoboth West",
+                "intersection_area_degrees_squared": 3.098453081905698e-05,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "MultiPolygon"
+              }
+            ]
+          },
+          "AGO": {
+            "positive_area_intersection_count": 1,
+            "intersecting_source_feature_count": 1,
+            "hits": [
+              {
+                "source_id": "gb:AGO:ADM2:16411231B28551746118834",
+                "shape_name": "Cuangar",
+                "intersection_area_degrees_squared": 0.0005313759670090604,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "Polygon"
+              }
+            ]
+          }
+        },
+        "outside_full_union_area_degrees_squared": 3.568912481583588e-08,
+        "outside_full_union_fraction": 6.346245642145965e-05,
+        "full_union_coverage": "not fully covered"
+      },
+      "physical_water_or_historic_course": {
+        "status": "unresolved",
+        "original_diagnostic_water_status": "unverified",
+        "touches_reference_shore_diagnostic": false,
+        "touches_domain_boundary_diagnostic": false,
+        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+      },
+      "processing_cause": {
+        "status": "unknown",
+        "finding": "No exact data-processing defect or specific causal step has been reproduced."
+      },
+      "boundary_authority": {
+        "status": "unresolved",
+        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+      },
+      "administrative_assignment": "not made",
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+    },
+    {
+      "component_id": "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+      "fragment_bindings": [
+        {
+          "feature_sha256": "0d6ebdf36ef14bdd5e354dbf43bc2fc3cbf06a1265ea769b946c29d293140b43",
+          "id": "physical-gap:616:41:97f45ac270c2701dffba471706cb66182abb2fda3c1751bdf955fbbe5a1166e3"
+        }
+      ],
+      "source_geometry": {
+        "consumed_products": "Supported geometric overlap only",
+        "positive_area_intersections": {
+          "NAM": [
+            {
+              "source_id": "gb:NAM:ADM2:8085530B15355770078360",
+              "shapeName": "Grootfontein",
+              "area_degrees_squared": 3.2591788287819986e-08,
+              "intersection_type": "MultiPolygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ],
+          "AGO": [
+            {
+              "source_id": "gb:AGO:ADM2:16411231B14510444140190",
+              "shapeName": "Dirico",
+              "area_degrees_squared": 2.1522147730060327e-05,
+              "intersection_type": "Polygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ]
+        },
+        "candidate_area_degrees_squared": 2.1551469625183743e-05,
+        "outside_consumed_union_area_degrees_squared": 0.0,
+        "outside_consumed_union_fraction": 0.0,
+        "covered_by_consumed_source_union": true,
+        "same_release_full_products": {
+          "NAM": {
+            "positive_area_intersection_count": 1,
+            "intersecting_source_feature_count": 1,
+            "hits": [
+              {
+                "source_id": "gb:NAM:ADM2:8085530B15355770078360",
+                "shape_name": "Grootfontein",
+                "intersection_area_degrees_squared": 3.2591788287819986e-08,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "MultiPolygon"
+              }
+            ]
+          },
+          "AGO": {
+            "positive_area_intersection_count": 1,
+            "intersecting_source_feature_count": 1,
+            "hits": [
+              {
+                "source_id": "gb:AGO:ADM2:16411231B14510444140190",
+                "shape_name": "Dirico",
+                "intersection_area_degrees_squared": 2.1522147730060327e-05,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "Polygon"
+              }
+            ]
+          }
+        },
+        "outside_full_union_area_degrees_squared": 0.0,
+        "outside_full_union_fraction": 0.0,
+        "full_union_coverage": "covered"
+      },
+      "physical_water_or_historic_course": {
+        "status": "unresolved",
+        "original_diagnostic_water_status": "unverified",
+        "touches_reference_shore_diagnostic": false,
+        "touches_domain_boundary_diagnostic": false,
+        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+      },
+      "processing_cause": {
+        "status": "unknown",
+        "finding": "No exact data-processing defect or specific causal step has been reproduced."
+      },
+      "boundary_authority": {
+        "status": "unresolved",
+        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+      },
+      "administrative_assignment": "not made",
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+    },
+    {
+      "component_id": "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+      "fragment_bindings": [
+        {
+          "feature_sha256": "d15d44d400fc6fb74eb7ef33bfb81203751ddb5d3f24e790f0408107abef1820",
+          "id": "physical-gap:616:32:d004bde79bd327c5129692658f72ba4117af874e7c7a7dbcf279eea6e5fed386"
+        }
+      ],
+      "source_geometry": {
+        "consumed_products": "Supported geometric overlap only",
+        "positive_area_intersections": {
+          "NAM": [
+            {
+              "source_id": "gb:NAM:ADM2:8085530B8620298556926",
+              "shapeName": "Tsumeb",
+              "area_degrees_squared": 3.425593443238681e-05,
+              "intersection_type": "MultiPolygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ],
+          "AGO": [
+            {
+              "source_id": "gb:AGO:ADM2:16411231B14510444140190",
+              "shapeName": "Dirico",
+              "area_degrees_squared": 0.00045559014159313817,
+              "intersection_type": "Polygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ]
+        },
+        "candidate_area_degrees_squared": 0.0004898405297948335,
+        "outside_consumed_union_area_degrees_squared": 4.751918923052487e-08,
+        "outside_consumed_union_fraction": 9.70095088914508e-05,
+        "covered_by_consumed_source_union": false,
+        "same_release_full_products": {
+          "NAM": {
+            "positive_area_intersection_count": 1,
+            "intersecting_source_feature_count": 1,
+            "hits": [
+              {
+                "source_id": "gb:NAM:ADM2:8085530B8620298556926",
+                "shape_name": "Tsumeb",
+                "intersection_area_degrees_squared": 3.425593443238681e-05,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "MultiPolygon"
+              }
+            ]
+          },
+          "AGO": {
+            "positive_area_intersection_count": 1,
+            "intersecting_source_feature_count": 1,
+            "hits": [
+              {
+                "source_id": "gb:AGO:ADM2:16411231B14510444140190",
+                "shape_name": "Dirico",
+                "intersection_area_degrees_squared": 0.0004555924708240526,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "Polygon"
+              }
+            ]
+          }
+        },
+        "outside_full_union_area_degrees_squared": 5.0590811605442384e-08,
+        "outside_full_union_fraction": 0.00010328016676495106,
+        "full_union_coverage": "not fully covered"
+      },
+      "physical_water_or_historic_course": {
+        "status": "unresolved",
+        "original_diagnostic_water_status": "unverified",
+        "touches_reference_shore_diagnostic": false,
+        "touches_domain_boundary_diagnostic": false,
+        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+      },
+      "processing_cause": {
+        "status": "unknown",
+        "finding": "No exact data-processing defect or specific causal step has been reproduced."
+      },
+      "boundary_authority": {
+        "status": "unresolved",
+        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+      },
+      "administrative_assignment": "not made",
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+    },
+    {
+      "component_id": "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+      "fragment_bindings": [
+        {
+          "feature_sha256": "000b03c1afaaa9a22e384e2392980877780b72c4e656fccff1aad8286ab7c9c4",
+          "id": "physical-gap:615:18:e49d2ba6c82af771dfd068c5d0eae63318b02c5d82bac68acfb5efe19d4c9c79"
+        }
+      ],
+      "source_geometry": {
+        "consumed_products": "Supported geometric overlap only",
+        "positive_area_intersections": {
+          "NAM": [
+            {
+              "source_id": "gb:NAM:ADM2:8085530B43563455443088",
+              "shapeName": "Rundu Urban",
+              "area_degrees_squared": 1.1787919118027629e-05,
+              "intersection_type": "Polygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            },
+            {
+              "source_id": "gb:NAM:ADM2:8085530B54610932550654",
+              "shapeName": "Luderitz",
+              "area_degrees_squared": 2.1121036915340325e-05,
+              "intersection_type": "Polygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ],
+          "AGO": [
+            {
+              "source_id": "gb:AGO:ADM2:16411231B36562728226085",
+              "shapeName": "Calai",
+              "area_degrees_squared": 0.0007745010322631238,
+              "intersection_type": "Polygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ]
+        },
+        "candidate_area_degrees_squared": 0.0008164055335791306,
+        "outside_consumed_union_area_degrees_squared": 9.005767480778937e-06,
+        "outside_consumed_union_fraction": 0.011030997599070105,
+        "covered_by_consumed_source_union": false,
+        "same_release_full_products": {
+          "NAM": {
+            "positive_area_intersection_count": 2,
+            "intersecting_source_feature_count": 2,
+            "hits": [
+              {
+                "source_id": "gb:NAM:ADM2:8085530B43563455443088",
+                "shape_name": "Rundu Urban",
+                "intersection_area_degrees_squared": 1.1796561687375707e-05,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "Polygon"
+              },
+              {
+                "source_id": "gb:NAM:ADM2:8085530B54610932550654",
+                "shape_name": "Luderitz",
+                "intersection_area_degrees_squared": 3.0087026549160062e-05,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "Polygon"
+              }
+            ]
+          },
+          "AGO": {
+            "positive_area_intersection_count": 1,
+            "intersecting_source_feature_count": 1,
+            "hits": [
+              {
+                "source_id": "gb:AGO:ADM2:16411231B36562728226085",
+                "shape_name": "Calai",
+                "intersection_area_degrees_squared": 0.000774483996781249,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "Polygon"
+              }
+            ]
+          }
+        },
+        "outside_full_union_area_degrees_squared": 4.916268532110198e-08,
+        "outside_full_union_fraction": 6.0218461657862903e-05,
+        "full_union_coverage": "not fully covered"
+      },
+      "physical_water_or_historic_course": {
+        "status": "unresolved",
+        "original_diagnostic_water_status": "unverified",
+        "touches_reference_shore_diagnostic": false,
+        "touches_domain_boundary_diagnostic": false,
+        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+      },
+      "processing_cause": {
+        "status": "unknown",
+        "finding": "No exact data-processing defect or specific causal step has been reproduced."
+      },
+      "boundary_authority": {
+        "status": "unresolved",
+        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+      },
+      "administrative_assignment": "not made",
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+    },
+    {
+      "component_id": "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+      "fragment_bindings": [
+        {
+          "feature_sha256": "7b9641e03e192b22fe21f7c9e20c55d116d7d875e1ca4ff00046bd895b462b6d",
+          "id": "physical-gap:615:14:fe1630c3557d203e0ca11f1b135d612ca4ba2ac782c2d0aef76d4c6efa72582d"
+        }
+      ],
+      "source_geometry": {
+        "consumed_products": "Supported geometric overlap only",
+        "positive_area_intersections": {
+          "NAM": [
+            {
+              "source_id": "gb:NAM:ADM2:8085530B25496891828693",
+              "shapeName": "Berseba",
+              "area_degrees_squared": 5.2928645732413394e-05,
+              "intersection_type": "MultiPolygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            },
+            {
+              "source_id": "gb:NAM:ADM2:8085530B32015186497374",
+              "shapeName": "Rehoboth West",
+              "area_degrees_squared": 1.6466475789955524e-06,
+              "intersection_type": "MultiPolygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ],
+          "AGO": [
+            {
+              "source_id": "gb:AGO:ADM2:16411231B28551746118834",
+              "shapeName": "Cuangar",
+              "area_degrees_squared": 0.00021873909542732348,
+              "intersection_type": "MultiPolygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ]
+        },
+        "candidate_area_degrees_squared": 0.0002733505870986153,
+        "outside_consumed_union_area_degrees_squared": 4.798779718150612e-08,
+        "outside_consumed_union_fraction": 0.00017555403004930738,
+        "covered_by_consumed_source_union": false,
+        "same_release_full_products": {
+          "NAM": {
+            "positive_area_intersection_count": 2,
+            "intersecting_source_feature_count": 2,
+            "hits": [
+              {
+                "source_id": "gb:NAM:ADM2:8085530B25496891828693",
+                "shape_name": "Berseba",
+                "intersection_area_degrees_squared": 5.2913372411597396e-05,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "MultiPolygon"
+              },
+              {
+                "source_id": "gb:NAM:ADM2:8085530B32015186497374",
+                "shape_name": "Rehoboth West",
+                "intersection_area_degrees_squared": 1.6447018712935516e-06,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "MultiPolygon"
+              }
+            ]
+          },
+          "AGO": {
+            "positive_area_intersection_count": 1,
+            "intersecting_source_feature_count": 1,
+            "hits": [
+              {
+                "source_id": "gb:AGO:ADM2:16411231B28551746118834",
+                "shape_name": "Cuangar",
+                "intersection_area_degrees_squared": 0.00021874632336961686,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "MultiPolygon"
+              }
+            ]
+          }
+        },
+        "outside_full_union_area_degrees_squared": 6.180511128412587e-08,
+        "outside_full_union_fraction": 0.0002261019884395886,
+        "full_union_coverage": "not fully covered"
+      },
+      "physical_water_or_historic_course": {
+        "status": "unresolved",
+        "original_diagnostic_water_status": "unverified",
+        "touches_reference_shore_diagnostic": false,
+        "touches_domain_boundary_diagnostic": false,
+        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+      },
+      "processing_cause": {
+        "status": "unknown",
+        "finding": "No exact data-processing defect or specific causal step has been reproduced."
+      },
+      "boundary_authority": {
+        "status": "unresolved",
+        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+      },
+      "administrative_assignment": "not made",
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+    },
+    {
+      "component_id": "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+      "fragment_bindings": [
+        {
+          "feature_sha256": "e10c9239894b9e8fb3719d95d9f7fd010cd51a0600a4af88a48e642861b520c4",
+          "id": "physical-gap:615:16:ecadd250a52e5c2999b50dbff406d2592add6e418e5f14ffaf4bd30416624368"
+        }
+      ],
+      "source_geometry": {
+        "consumed_products": "Supported geometric overlap only",
+        "positive_area_intersections": {
+          "NAM": [
+            {
+              "source_id": "gb:NAM:ADM2:8085530B25496891828693",
+              "shapeName": "Berseba",
+              "area_degrees_squared": 0.0001676015883517141,
+              "intersection_type": "MultiPolygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            },
+            {
+              "source_id": "gb:NAM:ADM2:8085530B54610932550654",
+              "shapeName": "Luderitz",
+              "area_degrees_squared": 3.5324809418990914e-05,
+              "intersection_type": "Polygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ],
+          "AGO": [
+            {
+              "source_id": "gb:AGO:ADM2:16411231B36562728226085",
+              "shapeName": "Calai",
+              "area_degrees_squared": 0.002609766537166724,
+              "intersection_type": "MultiPolygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ]
+        },
+        "candidate_area_degrees_squared": 0.002812608889665088,
+        "outside_consumed_union_area_degrees_squared": 9.097894004306718e-08,
+        "outside_consumed_union_fraction": 3.2346815221045724e-05,
+        "covered_by_consumed_source_union": false,
+        "same_release_full_products": {
+          "NAM": {
+            "positive_area_intersection_count": 2,
+            "intersecting_source_feature_count": 2,
+            "hits": [
+              {
+                "source_id": "gb:NAM:ADM2:8085530B25496891828693",
+                "shape_name": "Berseba",
+                "intersection_area_degrees_squared": 0.00017159556035352733,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "MultiPolygon"
+              },
+              {
+                "source_id": "gb:NAM:ADM2:8085530B54610932550654",
+                "shape_name": "Luderitz",
+                "intersection_area_degrees_squared": 3.5324809418990914e-05,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "Polygon"
+              }
+            ]
+          },
+          "AGO": {
+            "positive_area_intersection_count": 1,
+            "intersecting_source_feature_count": 1,
+            "hits": [
+              {
+                "source_id": "gb:AGO:ADM2:16411231B36562728226085",
+                "shape_name": "Calai",
+                "intersection_area_degrees_squared": 0.002605697316480688,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "MultiPolygon"
+              }
+            ]
+          }
+        },
+        "outside_full_union_area_degrees_squared": 8.762868925657822e-08,
+        "outside_full_union_fraction": 3.115566105851732e-05,
+        "full_union_coverage": "not fully covered"
+      },
+      "physical_water_or_historic_course": {
+        "status": "unresolved",
+        "original_diagnostic_water_status": "unverified",
+        "touches_reference_shore_diagnostic": false,
+        "touches_domain_boundary_diagnostic": false,
+        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+      },
+      "processing_cause": {
+        "status": "unknown",
+        "finding": "No exact data-processing defect or specific causal step has been reproduced."
+      },
+      "boundary_authority": {
+        "status": "unresolved",
+        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+      },
+      "administrative_assignment": "not made",
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+    },
+    {
+      "component_id": "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+      "fragment_bindings": [
+        {
+          "feature_sha256": "db09ea8e611bca2deb87c99358d9cc787a85d15449993a425c36c31a62e69815",
+          "id": "physical-gap:615:9:25656de7ab07e14ac1622bbc9cfc3546d149d67eda1fde53b827fd092c7e27b6"
+        }
+      ],
+      "source_geometry": {
+        "consumed_products": "Supported geometric overlap only",
+        "positive_area_intersections": {
+          "NAM": [
+            {
+              "source_id": "gb:NAM:ADM2:8085530B32015186497374",
+              "shapeName": "Rehoboth West",
+              "area_degrees_squared": 3.1971246071257516e-05,
+              "intersection_type": "MultiPolygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ],
+          "AGO": [
+            {
+              "source_id": "gb:AGO:ADM2:16411231B28551746118834",
+              "shapeName": "Cuangar",
+              "area_degrees_squared": 0.00018010085335545684,
+              "intersection_type": "MultiPolygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ]
+        },
+        "candidate_area_degrees_squared": 0.00021700277854747068,
+        "outside_consumed_union_area_degrees_squared": 4.950482968797951e-06,
+        "outside_consumed_union_fraction": 0.022812993464574476,
+        "covered_by_consumed_source_union": false,
+        "same_release_full_products": {
+          "NAM": {
+            "positive_area_intersection_count": 1,
+            "intersecting_source_feature_count": 1,
+            "hits": [
+              {
+                "source_id": "gb:NAM:ADM2:8085530B32015186497374",
+                "shape_name": "Rehoboth West",
+                "intersection_area_degrees_squared": 3.1971246071257516e-05,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "MultiPolygon"
+              }
+            ]
+          },
+          "AGO": {
+            "positive_area_intersection_count": 1,
+            "intersecting_source_feature_count": 1,
+            "hits": [
+              {
+                "source_id": "gb:AGO:ADM2:16411231B28551746118834",
+                "shape_name": "Cuangar",
+                "intersection_area_degrees_squared": 0.00018504624677720015,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "MultiPolygon"
+              }
+            ]
+          }
+        },
+        "outside_full_union_area_degrees_squared": 7.019254830666965e-09,
+        "outside_full_union_fraction": 3.234638227976173e-05,
+        "full_union_coverage": "not fully covered"
+      },
+      "physical_water_or_historic_course": {
+        "status": "unresolved",
+        "original_diagnostic_water_status": "unverified",
+        "touches_reference_shore_diagnostic": false,
+        "touches_domain_boundary_diagnostic": false,
+        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+      },
+      "processing_cause": {
+        "status": "unknown",
+        "finding": "No exact data-processing defect or specific causal step has been reproduced."
+      },
+      "boundary_authority": {
+        "status": "unresolved",
+        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+      },
+      "administrative_assignment": "not made",
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+    },
+    {
+      "component_id": "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+      "fragment_bindings": [
+        {
+          "feature_sha256": "4e5a8e64ceb1d955c2127911f1bf67b18b983fe560ffb730184fab20eadc79a9",
+          "id": "physical-gap:615:6:d3e14efaeedd7d66084c3b0a203abf321237d9f4eab7b0dc6c46d69e61fc945e"
+        }
+      ],
+      "source_geometry": {
+        "consumed_products": "Supported geometric overlap only",
+        "positive_area_intersections": {
+          "NAM": [
+            {
+              "source_id": "gb:NAM:ADM2:8085530B32015186497374",
+              "shapeName": "Rehoboth West",
+              "area_degrees_squared": 1.5143965620996385e-05,
+              "intersection_type": "Polygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            },
+            {
+              "source_id": "gb:NAM:ADM2:8085530B94702234009846",
+              "shapeName": "Luderitz",
+              "area_degrees_squared": 1.6217886810580374e-05,
+              "intersection_type": "MultiPolygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ],
+          "AGO": [
+            {
+              "source_id": "gb:AGO:ADM2:16411231B28551746118834",
+              "shapeName": "Cuangar",
+              "area_degrees_squared": 0.0009710724310232575,
+              "intersection_type": "MultiPolygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ]
+        },
+        "candidate_area_degrees_squared": 0.0010178076297167515,
+        "outside_consumed_union_area_degrees_squared": 1.5608686911404267e-05,
+        "outside_consumed_union_fraction": 0.015335596291165602,
+        "covered_by_consumed_source_union": false,
+        "same_release_full_products": {
+          "NAM": {
+            "positive_area_intersection_count": 2,
+            "intersecting_source_feature_count": 2,
+            "hits": [
+              {
+                "source_id": "gb:NAM:ADM2:8085530B32015186497374",
+                "shape_name": "Rehoboth West",
+                "intersection_area_degrees_squared": 3.179066873175699e-05,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "MultiPolygon"
+              },
+              {
+                "source_id": "gb:NAM:ADM2:8085530B94702234009846",
+                "shape_name": "Luderitz",
+                "intersection_area_degrees_squared": 3.2531377122701595e-05,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "MultiPolygon"
+              }
+            ]
+          },
+          "AGO": {
+            "positive_area_intersection_count": 1,
+            "intersecting_source_feature_count": 1,
+            "hits": [
+              {
+                "source_id": "gb:AGO:ADM2:16411231B28551746118834",
+                "shape_name": "Cuangar",
+                "intersection_area_degrees_squared": 0.0009535479766967223,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "MultiPolygon"
+              }
+            ]
+          }
+        },
+        "outside_full_union_area_degrees_squared": 4.687776665739952e-08,
+        "outside_full_union_fraction": 4.605759014642606e-05,
+        "full_union_coverage": "not fully covered"
+      },
+      "physical_water_or_historic_course": {
+        "status": "unresolved",
+        "original_diagnostic_water_status": "unverified",
+        "touches_reference_shore_diagnostic": false,
+        "touches_domain_boundary_diagnostic": false,
+        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+      },
+      "processing_cause": {
+        "status": "unknown",
+        "finding": "No exact data-processing defect or specific causal step has been reproduced."
+      },
+      "boundary_authority": {
+        "status": "unresolved",
+        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+      },
+      "administrative_assignment": "not made",
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+    },
+    {
+      "component_id": "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+      "fragment_bindings": [
+        {
+          "feature_sha256": "ba2427f897df5d7fa2aa3ade6099cdea1b6dd46cbc747fa3e8428bdc71056988",
+          "id": "physical-gap:616:42:dccb183779a17ab1aa8d63d8eb6b6e5f71701562aff4772e62bd63aca5c35fef"
+        }
+      ],
+      "source_geometry": {
+        "consumed_products": "Supported geometric overlap only",
+        "positive_area_intersections": {
+          "NAM": [
+            {
+              "source_id": "gb:NAM:ADM2:8085530B15355770078360",
+              "shapeName": "Grootfontein",
+              "area_degrees_squared": 6.600056646025897e-05,
+              "intersection_type": "MultiPolygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ],
+          "AGO": [
+            {
+              "source_id": "gb:AGO:ADM2:16411231B14510444140190",
+              "shapeName": "Dirico",
+              "area_degrees_squared": 0.0005870903462883157,
+              "intersection_type": "MultiPolygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ]
+        },
+        "candidate_area_degrees_squared": 0.000653088187705627,
+        "outside_consumed_union_area_degrees_squared": 7.664472687064912e-09,
+        "outside_consumed_union_fraction": 1.1735739263622385e-05,
+        "covered_by_consumed_source_union": false,
+        "same_release_full_products": {
+          "NAM": {
+            "positive_area_intersection_count": 1,
+            "intersecting_source_feature_count": 1,
+            "hits": [
+              {
+                "source_id": "gb:NAM:ADM2:8085530B15355770078360",
+                "shape_name": "Grootfontein",
+                "intersection_area_degrees_squared": 6.838282944459878e-05,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "MultiPolygon"
+              }
+            ]
+          },
+          "AGO": {
+            "positive_area_intersection_count": 1,
+            "intersecting_source_feature_count": 1,
+            "hits": [
+              {
+                "source_id": "gb:AGO:ADM2:16411231B14510444140190",
+                "shape_name": "Dirico",
+                "intersection_area_degrees_squared": 0.0005847162514093697,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "MultiPolygon"
+              }
+            ]
+          }
+        },
+        "outside_full_union_area_degrees_squared": 5.730781850653131e-09,
+        "outside_full_union_fraction": 8.774897415900322e-06,
+        "full_union_coverage": "not fully covered"
+      },
+      "physical_water_or_historic_course": {
+        "status": "unresolved",
+        "original_diagnostic_water_status": "unverified",
+        "touches_reference_shore_diagnostic": false,
+        "touches_domain_boundary_diagnostic": false,
+        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+      },
+      "processing_cause": {
+        "status": "unknown",
+        "finding": "No exact data-processing defect or specific causal step has been reproduced."
+      },
+      "boundary_authority": {
+        "status": "unresolved",
+        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+      },
+      "administrative_assignment": "not made",
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+    },
+    {
+      "component_id": "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+      "fragment_bindings": [
+        {
+          "feature_sha256": "60ba0f1788c3ccf966d64055d41b165a5abdeac40ec17679a0d20a802084c045",
+          "id": "physical-gap:615:1:db962a659e5b2d50eca3985d907949ec6ba411f8ad4d0e32494cff4223cbe491"
+        },
+        {
+          "feature_sha256": "3ae0d31708674c6a7e5b9fbef2bb2a811d612e88a098389a6df330121506a015",
+          "id": "physical-gap:616:0:c8128b4a7e5a6dbc4becbc0f500220f5949364ab4efff46adc5909edb451d902"
+        }
+      ],
+      "source_geometry": {
+        "consumed_products": "Supported geometric overlap only",
+        "positive_area_intersections": {
+          "NAM": [
+            {
+              "source_id": "gb:NAM:ADM2:8085530B54610932550654",
+              "shapeName": "Luderitz",
+              "area_degrees_squared": 5.8502493407974556e-05,
+              "intersection_type": "MultiPolygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            },
+            {
+              "source_id": "gb:NAM:ADM2:8085530B8620298556926",
+              "shapeName": "Tsumeb",
+              "area_degrees_squared": 1.0838850403170387e-05,
+              "intersection_type": "MultiPolygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ],
+          "AGO": [
+            {
+              "source_id": "gb:AGO:ADM2:16411231B14510444140190",
+              "shapeName": "Dirico",
+              "area_degrees_squared": 0.0014941764323845672,
+              "intersection_type": "Polygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            },
+            {
+              "source_id": "gb:AGO:ADM2:16411231B36562728226085",
+              "shapeName": "Calai",
+              "area_degrees_squared": 5.6165651253416004e-05,
+              "intersection_type": "Polygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ]
+        },
+        "candidate_area_degrees_squared": 0.0016196201138130506,
+        "outside_consumed_union_area_degrees_squared": 1.477796821305561e-07,
+        "outside_consumed_union_fraction": 9.124342237430005e-05,
+        "covered_by_consumed_source_union": false,
+        "same_release_full_products": {
+          "NAM": {
+            "positive_area_intersection_count": 2,
+            "intersecting_source_feature_count": 2,
+            "hits": [
+              {
+                "source_id": "gb:NAM:ADM2:8085530B54610932550654",
+                "shape_name": "Luderitz",
+                "intersection_area_degrees_squared": 5.8407948660322076e-05,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "MultiPolygon"
+              },
+              {
+                "source_id": "gb:NAM:ADM2:8085530B8620298556926",
+                "shape_name": "Tsumeb",
+                "intersection_area_degrees_squared": 1.0838967023992112e-05,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "MultiPolygon"
+              }
+            ]
+          },
+          "AGO": {
+            "positive_area_intersection_count": 2,
+            "intersecting_source_feature_count": 2,
+            "hits": [
+              {
+                "source_id": "gb:AGO:ADM2:16411231B14510444140190",
+                "shape_name": "Dirico",
+                "intersection_area_degrees_squared": 0.0014942382172328885,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "Polygon"
+              },
+              {
+                "source_id": "gb:AGO:ADM2:16411231B36562728226085",
+                "shape_name": "Calai",
+                "intersection_area_degrees_squared": 5.6165651253416004e-05,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "Polygon"
+              }
+            ]
+          }
+        },
+        "outside_full_union_area_degrees_squared": 1.4380506657520518e-07,
+        "outside_full_union_fraction": 8.87893805150683e-05,
+        "full_union_coverage": "not fully covered"
+      },
+      "physical_water_or_historic_course": {
+        "status": "unresolved",
+        "original_diagnostic_water_status": "unverified",
+        "touches_reference_shore_diagnostic": false,
+        "touches_domain_boundary_diagnostic": false,
+        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+      },
+      "processing_cause": {
+        "status": "unknown",
+        "finding": "No exact data-processing defect or specific causal step has been reproduced."
+      },
+      "boundary_authority": {
+        "status": "unresolved",
+        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+      },
+      "administrative_assignment": "not made",
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+    },
+    {
+      "component_id": "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+      "fragment_bindings": [
+        {
+          "feature_sha256": "cfba8a09b4603d2fd77385e012dd6270f105ae6f4ed2a9ec93faab29439150a4",
+          "id": "physical-gap:616:33:669c6f908f457b2d226e0d70fcc5f824fc5d3a17c2e67a728df2d7c589cd0934"
+        }
+      ],
+      "source_geometry": {
+        "consumed_products": "Supported geometric overlap only",
+        "positive_area_intersections": {
+          "NAM": [
+            {
+              "source_id": "gb:NAM:ADM2:8085530B15355770078360",
+              "shapeName": "Grootfontein",
+              "area_degrees_squared": 9.638710250393007e-06,
+              "intersection_type": "MultiPolygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            },
+            {
+              "source_id": "gb:NAM:ADM2:8085530B8620298556926",
+              "shapeName": "Tsumeb",
+              "area_degrees_squared": 0.00010183707677919775,
+              "intersection_type": "MultiPolygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ],
+          "AGO": [
+            {
+              "source_id": "gb:AGO:ADM2:16411231B14510444140190",
+              "shapeName": "Dirico",
+              "area_degrees_squared": 0.0007890017605552307,
+              "intersection_type": "Polygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ]
+        },
+        "candidate_area_degrees_squared": 0.0009006726792833751,
+        "outside_consumed_union_area_degrees_squared": 2.2608209128257288e-07,
+        "outside_consumed_union_fraction": 0.00025101470987490845,
+        "covered_by_consumed_source_union": false,
+        "same_release_full_products": {
+          "NAM": {
+            "positive_area_intersection_count": 2,
+            "intersecting_source_feature_count": 2,
+            "hits": [
+              {
+                "source_id": "gb:NAM:ADM2:8085530B15355770078360",
+                "shape_name": "Grootfontein",
+                "intersection_area_degrees_squared": 9.646350948218695e-06,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "MultiPolygon"
+              },
+              {
+                "source_id": "gb:NAM:ADM2:8085530B8620298556926",
+                "shape_name": "Tsumeb",
+                "intersection_area_degrees_squared": 0.00010183707677919775,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "MultiPolygon"
+              }
+            ]
+          },
+          "AGO": {
+            "positive_area_intersection_count": 1,
+            "intersecting_source_feature_count": 1,
+            "hits": [
+              {
+                "source_id": "gb:AGO:ADM2:16411231B14510444140190",
+                "shape_name": "Dirico",
+                "intersection_area_degrees_squared": 0.0007890317083674747,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "Polygon"
+              }
+            ]
+          }
+        },
+        "outside_full_union_area_degrees_squared": 1.970322457180972e-07,
+        "outside_full_union_fraction": 0.00021876121064854205,
+        "full_union_coverage": "not fully covered"
+      },
+      "physical_water_or_historic_course": {
+        "status": "unresolved",
+        "original_diagnostic_water_status": "unverified",
+        "touches_reference_shore_diagnostic": false,
+        "touches_domain_boundary_diagnostic": false,
+        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+      },
+      "processing_cause": {
+        "status": "unknown",
+        "finding": "No exact data-processing defect or specific causal step has been reproduced."
+      },
+      "boundary_authority": {
+        "status": "unresolved",
+        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+      },
+      "administrative_assignment": "not made",
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+    },
+    {
+      "component_id": "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17",
+      "fragment_bindings": [
+        {
+          "feature_sha256": "6fba055cb2bc113f7111229506008c9b32d851d3b0bbdeacd16f499af25a43b4",
+          "id": "physical-gap:616:39:76a78cf5825b68403ecd7ab4e46705f17855b2b7db5c4da806e2afcb49a0ba96"
+        }
+      ],
+      "source_geometry": {
+        "consumed_products": "Supported geometric overlap only",
+        "positive_area_intersections": {
+          "NAM": [],
+          "AGO": [
+            {
+              "source_id": "gb:AGO:ADM2:16411231B14510444140190",
+              "shapeName": "Dirico",
+              "area_degrees_squared": 1.0482430661049603e-05,
+              "intersection_type": "Polygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ]
+        },
+        "candidate_area_degrees_squared": 1.0482430661049603e-05,
+        "outside_consumed_union_area_degrees_squared": 0.0,
+        "outside_consumed_union_fraction": 0.0,
+        "covered_by_consumed_source_union": true,
+        "same_release_full_products": {
+          "NAM": {
+            "positive_area_intersection_count": 0,
+            "intersecting_source_feature_count": 0,
+            "hits": []
+          },
+          "AGO": {
+            "positive_area_intersection_count": 1,
+            "intersecting_source_feature_count": 1,
+            "hits": [
+              {
+                "source_id": "gb:AGO:ADM2:16411231B14510444140190",
+                "shape_name": "Dirico",
+                "intersection_area_degrees_squared": 1.0482430661049603e-05,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "Polygon"
+              }
+            ]
+          }
+        },
+        "outside_full_union_area_degrees_squared": 0.0,
+        "outside_full_union_fraction": 0.0,
+        "full_union_coverage": "covered"
+      },
+      "physical_water_or_historic_course": {
+        "status": "unresolved",
+        "original_diagnostic_water_status": "unverified",
+        "touches_reference_shore_diagnostic": false,
+        "touches_domain_boundary_diagnostic": false,
+        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+      },
+      "processing_cause": {
+        "status": "unknown",
+        "finding": "No exact data-processing defect or specific causal step has been reproduced."
+      },
+      "boundary_authority": {
+        "status": "unresolved",
+        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+      },
+      "administrative_assignment": "not made",
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+    },
+    {
+      "component_id": "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+      "fragment_bindings": [
+        {
+          "feature_sha256": "1ce07968b06c5367778438b2cc098c6983b1198b955592b54a690fcf3f7ef949",
+          "id": "physical-gap:615:8:f56deaa5d67f7438066f3137bb91aa6328d115ebb3924272437c3e6a05501cea"
+        }
+      ],
+      "source_geometry": {
+        "consumed_products": "Supported geometric overlap only",
+        "positive_area_intersections": {
+          "NAM": [
+            {
+              "source_id": "gb:NAM:ADM2:8085530B32015186497374",
+              "shapeName": "Rehoboth West",
+              "area_degrees_squared": 3.363117175633174e-05,
+              "intersection_type": "MultiPolygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ],
+          "AGO": [
+            {
+              "source_id": "gb:AGO:ADM2:16411231B28551746118834",
+              "shapeName": "Cuangar",
+              "area_degrees_squared": 0.0002206771528431397,
+              "intersection_type": "Polygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ]
+        },
+        "candidate_area_degrees_squared": 0.00025447238350350136,
+        "outside_consumed_union_area_degrees_squared": 1.6524167409566027e-07,
+        "outside_consumed_union_fraction": 0.0006493501252303344,
+        "covered_by_consumed_source_union": false,
+        "same_release_full_products": {
+          "NAM": {
+            "positive_area_intersection_count": 1,
+            "intersecting_source_feature_count": 1,
+            "hits": [
+              {
+                "source_id": "gb:NAM:ADM2:8085530B32015186497374",
+                "shape_name": "Rehoboth West",
+                "intersection_area_degrees_squared": 3.363117175633174e-05,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "MultiPolygon"
+              }
+            ]
+          },
+          "AGO": {
+            "positive_area_intersection_count": 1,
+            "intersecting_source_feature_count": 1,
+            "hits": [
+              {
+                "source_id": "gb:AGO:ADM2:16411231B28551746118834",
+                "shape_name": "Cuangar",
+                "intersection_area_degrees_squared": 0.00022080592661751823,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "Polygon"
+              }
+            ]
+          }
+        },
+        "outside_full_union_area_degrees_squared": 3.6467899709554904e-08,
+        "outside_full_union_fraction": 0.00014330788751013184,
+        "full_union_coverage": "not fully covered"
+      },
+      "physical_water_or_historic_course": {
+        "status": "unresolved",
+        "original_diagnostic_water_status": "unverified",
+        "touches_reference_shore_diagnostic": false,
+        "touches_domain_boundary_diagnostic": false,
+        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+      },
+      "processing_cause": {
+        "status": "unknown",
+        "finding": "No exact data-processing defect or specific causal step has been reproduced."
+      },
+      "boundary_authority": {
+        "status": "unresolved",
+        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+      },
+      "administrative_assignment": "not made",
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+    },
+    {
+      "component_id": "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e",
+      "fragment_bindings": [
+        {
+          "feature_sha256": "23d992dd51fd18ddcfc13a2e8f429f386dc6e60d3a907bc80ef1df5ff109835e",
+          "id": "physical-gap:615:7:ba07f7a761f219c765b53a521842a44cf752e4d9cecb29fca3dd57bbe6c33434"
+        }
+      ],
+      "source_geometry": {
+        "consumed_products": "Supported geometric overlap only",
+        "positive_area_intersections": {
+          "NAM": [
+            {
+              "source_id": "gb:NAM:ADM2:8085530B32015186497374",
+              "shapeName": "Rehoboth West",
+              "area_degrees_squared": 4.589103593784975e-08,
+              "intersection_type": "Polygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ],
+          "AGO": [
+            {
+              "source_id": "gb:AGO:ADM2:16411231B28551746118834",
+              "shapeName": "Cuangar",
+              "area_degrees_squared": 1.2845667129688159e-05,
+              "intersection_type": "Polygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ]
+        },
+        "candidate_area_degrees_squared": 1.2895438867041582e-05,
+        "outside_consumed_union_area_degrees_squared": 3.880701415587833e-09,
+        "outside_consumed_union_fraction": 0.0003009359708963614,
+        "covered_by_consumed_source_union": false,
+        "same_release_full_products": {
+          "NAM": {
+            "positive_area_intersection_count": 1,
+            "intersecting_source_feature_count": 1,
+            "hits": [
+              {
+                "source_id": "gb:NAM:ADM2:8085530B32015186497374",
+                "shape_name": "Rehoboth West",
+                "intersection_area_degrees_squared": 2.760802686177604e-08,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "Polygon"
+              }
+            ]
+          },
+          "AGO": {
+            "positive_area_intersection_count": 1,
+            "intersecting_source_feature_count": 1,
+            "hits": [
+              {
+                "source_id": "gb:AGO:ADM2:16411231B28551746118834",
+                "shape_name": "Cuangar",
+                "intersection_area_degrees_squared": 1.2865609643289606e-05,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "Polygon"
+              }
+            ]
+          }
+        },
+        "outside_full_union_area_degrees_squared": 2.2580699820073446e-09,
+        "outside_full_union_fraction": 0.00017510609800016691,
+        "full_union_coverage": "not fully covered"
+      },
+      "physical_water_or_historic_course": {
+        "status": "unresolved",
+        "original_diagnostic_water_status": "unverified",
+        "touches_reference_shore_diagnostic": false,
+        "touches_domain_boundary_diagnostic": false,
+        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+      },
+      "processing_cause": {
+        "status": "unknown",
+        "finding": "No exact data-processing defect or specific causal step has been reproduced."
+      },
+      "boundary_authority": {
+        "status": "unresolved",
+        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+      },
+      "administrative_assignment": "not made",
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+    },
+    {
+      "component_id": "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a",
+      "fragment_bindings": [
+        {
+          "feature_sha256": "47b6f757d819307c26dd8bbb7f8fadfd30e1bbb1d12b6b89b1c2815043c09726",
+          "id": "physical-gap:616:43:9801d6487186d44c1e73d68c25de135a5b0fdbfbaf2149bf5da3ce505ce04fa0"
+        }
+      ],
+      "source_geometry": {
+        "consumed_products": "Supported geometric overlap only",
+        "positive_area_intersections": {
+          "NAM": [
+            {
+              "source_id": "gb:NAM:ADM2:8085530B15355770078360",
+              "shapeName": "Grootfontein",
+              "area_degrees_squared": 6.319852307926538e-05,
+              "intersection_type": "MultiPolygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ],
+          "AGO": [
+            {
+              "source_id": "gb:AGO:ADM2:16411231B14510444140190",
+              "shapeName": "Dirico",
+              "area_degrees_squared": 0.0006626531939299883,
+              "intersection_type": "Polygon",
+              "dimension_counts": {
+                "area": 1,
+                "line": 0,
+                "point": 0
+              }
+            }
+          ]
+        },
+        "candidate_area_degrees_squared": 0.0007258656994506014,
+        "outside_consumed_union_area_degrees_squared": 6.050445912212424e-08,
+        "outside_consumed_union_fraction": 8.335489494533121e-05,
+        "covered_by_consumed_source_union": false,
+        "same_release_full_products": {
+          "NAM": {
+            "positive_area_intersection_count": 1,
+            "intersecting_source_feature_count": 1,
+            "hits": [
+              {
+                "source_id": "gb:NAM:ADM2:8085530B15355770078360",
+                "shape_name": "Grootfontein",
+                "intersection_area_degrees_squared": 6.32440219792539e-05,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "MultiPolygon"
+              }
+            ]
+          },
+          "AGO": {
+            "positive_area_intersection_count": 1,
+            "intersecting_source_feature_count": 1,
+            "hits": [
+              {
+                "source_id": "gb:AGO:ADM2:16411231B14510444140190",
+                "shape_name": "Dirico",
+                "intersection_area_degrees_squared": 0.00066263455848916,
+                "dimension_counts": {
+                  "area": 1,
+                  "line": 0,
+                  "point": 0
+                },
+                "intersection_type": "Polygon"
+              }
+            ]
+          }
+        },
+        "outside_full_union_area_degrees_squared": 3.37360359574196e-08,
+        "outside_full_union_fraction": 4.647696672119095e-05,
+        "full_union_coverage": "not fully covered"
+      },
+      "physical_water_or_historic_course": {
+        "status": "unresolved",
+        "original_diagnostic_water_status": "unverified",
+        "touches_reference_shore_diagnostic": false,
+        "touches_domain_boundary_diagnostic": false,
+        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+      },
+      "processing_cause": {
+        "status": "unknown",
+        "finding": "No exact data-processing defect or specific causal step has been reproduced."
+      },
+      "boundary_authority": {
+        "status": "unresolved",
+        "finding": "1926 treaty framework and archival demarcation leads are relevant, but exact completed demarcation/current alignment at this component is unverified."
+      },
+      "administrative_assignment": "not made",
+      "decision_limit": "Positive-area overlap and slivers compare generalized administrative products; they do not identify which country is correct or whether candidate area is land/water."
+    }
+  ],
+  "global_limits": [
+    "Areas are planar EPSG:4326 square degrees; not ground-area estimates.",
+    "No geometry repair, clipping, snapping, reclassification, or territorial assignment was performed.",
+    "No present water edge, historic channel, demarcation monument, or exact legal boundary was independently located.",
+    "Source overlap is geometric product comparison only and cannot identify authority or processing cause."
+  ]
+}

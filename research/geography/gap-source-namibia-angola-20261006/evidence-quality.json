@@ -1,0 +1,1000 @@
+{
+  "version": 1,
+  "issue": 1268,
+  "lane": "geography",
+  "worker_id": "01a112c1-ac99-74b1-9047-a1da2dd0e245",
+  "subject_ids": [
+    "gb:AGO:ADM2:16411231B14510444140190",
+    "gb:AGO:ADM2:16411231B28551746118834",
+    "gb:AGO:ADM2:16411231B36562728226085",
+    "gb:NAM:ADM2:8085530B15355770078360",
+    "gb:NAM:ADM2:8085530B25496891828693",
+    "gb:NAM:ADM2:8085530B32015186497374",
+    "gb:NAM:ADM2:8085530B43563455443088",
+    "gb:NAM:ADM2:8085530B54610932550654",
+    "gb:NAM:ADM2:8085530B8620298556926",
+    "gb:NAM:ADM2:8085530B94702234009846"
+  ],
+  "subject_ids_sha256": "0273221d08cdaa665a81e7f6d510091dd77798f54385948b3b1b92c944d79676",
+  "baseline": {
+    "commit": "68ed7c9ea8c66714c5e30afd8fec827d94142fbd",
+    "files": [
+      {
+        "path": "coordination/engineering/worldwide-inventory-1164-20261006/run-one/report.json",
+        "bytes": 73547,
+        "sha256": "a5423b1e62b5a0793b83999d87d1f6d50916db482cf2ec74973f75555c2bda6c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/current-batches-001.json.gz",
+        "bytes": 1674139,
+        "sha256": "7548a2b3ab10339e64ec6432afedda84e21502eb392ee94ace5b0e2f2e6e2de8",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/report.json",
+        "bytes": 103877,
+        "sha256": "3527014045c5aedc2b26be8bb5dff97e3e34097b7d4cb66a9b2fe3fcf33a6856",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/worldwide-successor-1215-20261006/run-one/report.json",
+        "bytes": 65206,
+        "sha256": "3d95a15d3797943290997c9a16fede48e6eb6e0941b0071a5fcd410375c49d46",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-16.json",
+        "bytes": 5213846,
+        "sha256": "b51719f7ff906a3c2c4dfdfea706ea51aa9541d550cc990b14191c046fb20797",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/part-29.json",
+        "bytes": 12932167,
+        "sha256": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "original_administrative_registry": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "original_physical_inventory": "a5423b1e62b5a0793b83999d87d1f6d50916db482cf2ec74973f75555c2bda6c",
+      "current_native_inventory": "3527014045c5aedc2b26be8bb5dff97e3e34097b7d4cb66a9b2fe3fcf33a6856",
+      "current_successor_inventory": "3d95a15d3797943290997c9a16fede48e6eb6e0941b0071a5fcd410375c49d46"
+    },
+    "pin_files": {
+      "original_administrative_registry": "data/administrative-sources.json",
+      "original_physical_inventory": "coordination/engineering/worldwide-inventory-1164-20261006/run-one/report.json",
+      "current_native_inventory": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/report.json",
+      "current_successor_inventory": "coordination/engineering/worldwide-successor-1215-20261006/run-one/report.json"
+    },
+    "subject_files": {
+      "gb:AGO:ADM2:16411231B14510444140190": "data/geography/part-29.json",
+      "gb:AGO:ADM2:16411231B28551746118834": "data/geography/part-29.json",
+      "gb:AGO:ADM2:16411231B36562728226085": "data/geography/part-29.json",
+      "gb:NAM:ADM2:8085530B15355770078360": "data/geography/part-16.json",
+      "gb:NAM:ADM2:8085530B25496891828693": "data/geography/part-16.json",
+      "gb:NAM:ADM2:8085530B32015186497374": "data/geography/part-16.json",
+      "gb:NAM:ADM2:8085530B43563455443088": "data/geography/part-16.json",
+      "gb:NAM:ADM2:8085530B54610932550654": "data/geography/part-16.json",
+      "gb:NAM:ADM2:8085530B8620298556926": "data/geography/part-16.json",
+      "gb:NAM:ADM2:8085530B94702234009846": "data/geography/part-16.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "consumed-geoBoundaries-NAM-ADM2",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/NAM/ADM2/geoBoundaries-NAM-ADM2_simplified.geojson",
+      "role": "Consumed simplified Namibia ADM2 product, represented year 2007; complete source capsule; no geometry changed.",
+      "vintage": "2007",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "redistributable",
+        "terms": "Recorded geoBoundaries source metadata classifies this product as Public Domain."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "files": [
+        {
+          "path": "research/geography/gap-source-namibia-angola-20261006/sources/gb-NAM-ADM2-000.bin.gz",
+          "bytes": 135327,
+          "sha256": "5a04eb2e5ba43552d902d3bfdf8963f8261cee5b6ee333ddb09da451d4520cf9",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "restoration": "Retrieve the pinned geoBoundaries release at https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/NAM/ADM2/geoBoundaries-NAM-ADM2_simplified.geojson; retained original byte hashes and metadata are in this packet.",
+      "limit": "Administrative source product geometry; no claim of national authority, legal boundary location, or physical water edge.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2007,
+        "to": 2008
+      }
+    },
+    {
+      "id": "consumed-geoBoundaries-AGO-ADM2",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbHumanitarian/AGO/ADM2/geoBoundaries-AGO-ADM2.geojson",
+      "role": "Consumed simplified Angola ADM2 product, represented year 2018; complete source capsule; no geometry changed.",
+      "vintage": "2018",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "redistributable",
+        "terms": "Recorded geoBoundaries metadata identifies CC BY 3.0 IGO; retain attribution to geoBoundaries and original source attribution."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "files": [
+        {
+          "path": "research/geography/gap-source-namibia-angola-20261006/sources/gb-AGO-ADM2-000.bin.gz",
+          "bytes": 236896,
+          "sha256": "377b1a666f58c913dec27b7d4557d98041e4d590d6555a2cdbfe13527ac8e55f",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "restoration": "Retrieve the pinned geoBoundaries release at https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbHumanitarian/AGO/ADM2/geoBoundaries-AGO-ADM2.geojson; retained original byte hashes and metadata are in this packet.",
+      "limit": "Administrative source product geometry; no claim of national authority, legal boundary location, or physical water edge.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2018,
+        "to": 2019
+      }
+    },
+    {
+      "id": "full-geoBoundaries-NAM-ADM2-9469f09",
+      "url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/NAM/ADM2",
+      "role": "Same-release full/detail product, distinct from the consumed simplified product.",
+      "vintage": "2007",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "redistributable",
+        "terms": "Source metadata identifies public-domain source; no boundary authority is inferred."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "files": [
+        {
+          "path": "research/geography/gap-source-namibia-angola-20261006/sources/geoBoundaries-NAM-ADM2-full-9469f09.geojson",
+          "bytes": 3039021,
+          "sha256": "602e48176ff563f029cd08a00b0f8177b47c46a3aad53b8f93659c816593a7f9",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/gap-source-namibia-angola-20261006/sources/geoBoundaries-NAM-ADM2-metadata-9469f09.json",
+          "bytes": 813,
+          "sha256": "388370c1ef1be3a81354d99b1a3b1a26a8340e6aa2f208637049fbf7db909d6b",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/gap-source-namibia-angola-20261006/sources/geoBoundaries-NAM-ADM2-full-9469f09.lfs-pointer.txt",
+          "bytes": 132,
+          "sha256": "bf278325edafaca584dfd6de2b383c2ddfe0c446e64928574483ea1e86f54e25",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/gap-source-namibia-angola-20261006/sources/geoBoundaries-NAM-ADM2-metadata-9469f09.lfs-pointer.txt",
+          "bytes": 128,
+          "sha256": "f9052aac2c1f1eedd23063cadf7cd6a5ed7509809d5900b2b9b518f2ada58e02",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "restoration": "Retrieve the pinned geoBoundaries release at https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbOpen/NAM/ADM2; retained original byte hashes and metadata are in this packet.",
+      "limit": "Administrative source product geometry; no claim of national authority, legal boundary location, or physical water edge.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2007,
+        "to": 2008
+      }
+    },
+    {
+      "id": "full-geoBoundaries-AGO-ADM2-9469f09",
+      "url": "https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbHumanitarian/AGO/ADM2",
+      "role": "Same-release full/detail product, distinct from the consumed simplified product.",
+      "vintage": "2018",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "redistributable",
+        "terms": "Source metadata identifies CC BY 3.0 IGO; retain attribution to geoBoundaries and original source attribution."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "files": [
+        {
+          "path": "research/geography/gap-source-namibia-angola-20261006/sources/geoBoundaries-AGO-ADM2-full-9469f09.geojson",
+          "bytes": 3146775,
+          "sha256": "44e58b2a8c2fefb9369294a32e2adde3e3637b9e02e8f1e2c53b400bec04f404",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/gap-source-namibia-angola-20261006/sources/geoBoundaries-AGO-ADM2-metadata-9469f09.json",
+          "bytes": 927,
+          "sha256": "0f45ab188f1e12b2f4068ecddeb62b2fb73d4ee7d1a71e29a8a8992d4b7ad302",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/gap-source-namibia-angola-20261006/sources/geoBoundaries-AGO-ADM2-full-9469f09.lfs-pointer.txt",
+          "bytes": 132,
+          "sha256": "6b7a03a9394fe47065d8703c619684bb4ec743d1f8c8b98d5d0cba67911c75d6",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/gap-source-namibia-angola-20261006/sources/geoBoundaries-AGO-ADM2-metadata-9469f09.lfs-pointer.txt",
+          "bytes": 128,
+          "sha256": "32ecd30d3016621b8a42bcdf19783147d0825452f31b25edb3963195d3bc078e",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "restoration": "Retrieve the pinned geoBoundaries release at https://github.com/wmgeolab/geoBoundaries/tree/9469f09592ced973a3448cf66b6100b741b64c0d/releaseData/gbHumanitarian/AGO/ADM2; retained original byte hashes and metadata are in this packet.",
+      "limit": "Administrative source product geometry; no claim of national authority, legal boundary location, or physical water edge.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2018,
+        "to": 2019
+      }
+    },
+    {
+      "id": "uk-treaty-1926",
+      "url": "https://treaties.fcdo.gov.uk/data/Library2/pdf/1926-TS0029.pdf",
+      "role": "Primary treaty text for the inland boundary framework, signed 1926-06-22; inspected all four pages.",
+      "vintage": "historical",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Rights not established for reuse; cited for inspection only."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Retrieve from the official URL: https://treaties.fcdo.gov.uk/data/Library2/pdf/1926-TS0029.pdf",
+      "limit": "The public retrieval is inspectable; no license statement for this historical scan was verified in the item itself. Local PDF bytes are retained as a supporting output.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 1926,
+        "to": 1927
+      }
+    },
+    {
+      "id": "mawlr-water-basin-map-2008",
+      "url": "https://mawlr.gov.na/land-reform-documents/-/document_library/rdhh/view_file/1297598",
+      "role": "Official approved water-basin map; portal metadata indicates scale 1:2,000,000.",
+      "vintage": "reference",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Rights not established for reuse; cited for inspection only."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Retrieve from the official URL: https://mawlr.gov.na/land-reform-documents/-/document_library/rdhh/view_file/1297598",
+      "limit": "Map download timed out; indexed portal metadata only. Regional basin context cannot resolve gap-scale banks or boundary.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "mawlr-iwrm-plan-summary",
+      "url": "https://mawlr.gov.na/documents/268157/1297451/Integrated%2BWater%2BResources%2BManagement%2BPlan%2Bfor%2BNamibia.pdf/b7da5e25-f7ee-2221-4a3b-a72a8ada7459?download=true&t=1668087050939",
+      "role": "Approved national IWRM plan summary; 2010 metadata; general water-management context.",
+      "vintage": "reference",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Rights not established for reuse; cited for inspection only."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Retrieve from the official URL: https://mawlr.gov.na/documents/268157/1297451/Integrated%2BWater%2BResources%2BManagement%2BPlan%2Bfor%2BNamibia.pdf/b7da5e25-f7ee-2221-4a3b-a72a8ada7459?download=true&t=1668087050939",
+      "limit": "Indexed text and metadata only; local retrieval timed out; not surveyed hydrography.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "mawlr-okavango-omatako-booklet",
+      "url": "https://mawlr.gov.na/land-reform-documents/-/document_library/rdhh/view_file/1297931",
+      "role": "Approved Okavango–Omatako basin booklet (RV2), 5.9 MB per official portal.",
+      "vintage": "reference",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Rights not established for reuse; cited for inspection only."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Retrieve from the official URL: https://mawlr.gov.na/land-reform-documents/-/document_library/rdhh/view_file/1297931",
+      "limit": "Official item title and approval status verified; content retrieval timed out; not used to classify physical edges.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "angola-minea-2014",
+      "url": "https://minea.gov.ao/index.php/conselho-consultivo/category/33-comunicado-final?download=237%3Acomunicado-final-do-cc-malange-2014",
+      "role": "Official MINEA 2014 consultative council communiqué; basin planning context.",
+      "vintage": "reference",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Rights not established for reuse; cited for inspection only."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Retrieve from the official URL: https://minea.gov.ao/index.php/conselho-consultivo/category/33-comunicado-final?download=237%3Acomunicado-final-do-cc-malange-2014",
+      "limit": "Document text was inspected through web rendering; direct retrieval returned portal HTML, not the PDF. No gap-scale edge or authority finding.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "namibia-archives-2-31",
+      "url": "https://www.nan.gov.na/documents/3219017/3228694/Findaid_2-031.pdf/35bc9ed2-872f-5b81-85e2-633f8848e785?t=1707296061518",
+      "role": "Archive catalogue lead for Angola Boundary Delimitation and Kunene Water Commission, 1926–1927.",
+      "vintage": "historical",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Rights not established for reuse; cited for inspection only."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Retrieve from the official URL: https://www.nan.gov.na/documents/3219017/3228694/Findaid_2-031.pdf/35bc9ed2-872f-5b81-85e2-633f8848e785?t=1707296061518",
+      "limit": "Catalogue entry only; underlying record unavailable.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 1926,
+        "to": 1928
+      }
+    },
+    {
+      "id": "namibia-archives-1-1-071",
+      "url": "https://nan.gov.na/finding-aids-a",
+      "role": "Official archive index lists Angola Boundary Survey, 1927–1928, one unit, 1/1/071.",
+      "vintage": "historical",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Rights not established for reuse; cited for inspection only."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Retrieve from the official URL: https://nan.gov.na/finding-aids-a",
+      "limit": "Finding-aid index inspected; linked scan timed out; underlying record not inspected.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 1927,
+        "to": 1929
+      }
+    },
+    {
+      "id": "namibia-archives-3-3-3",
+      "url": "https://nan.gov.na/finding-aids-a",
+      "role": "Official archive index lists South Africa Angola Boundary Commission, 1926–1928, one unit, 3/3/3.",
+      "vintage": "historical",
+      "retrieved_at": "2026-10-06",
+      "license": {
+        "status": "unknown",
+        "terms": "Rights not established for reuse; cited for inspection only."
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "restoration": "Retrieve from the official URL: https://nan.gov.na/finding-aids-a",
+      "limit": "Finding-aid index inspected; underlying record not inspected.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 1926,
+        "to": 1929
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/README.md",
+      "bytes": 7013,
+      "sha256": "f6ff9288269f400312b3995acc0d9149709978daaf192cb53de54e1979afd3cd",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/analysis-input-set.json",
+      "bytes": 6958,
+      "sha256": "7a0d1e250f6387311b7af67571a2d91a1775db9c6e500e2383a506f572a5b9b8",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/candidate-classifications.json",
+      "bytes": 93971,
+      "sha256": "89eb17aa1bb51a6edefd59e3df2e9833a12e8fad75c46c51fa495f7a7ea8896f",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/full-product-comparison.json",
+      "bytes": 6290740,
+      "sha256": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/inputs/input-bindings.json",
+      "bytes": 49247,
+      "sha256": "35b2d1a9ad33c9f0ff3693e9bdb8dacb438df30e3ba028b6892f817363631fcc",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/inputs/official-reference-leads.json",
+      "bytes": 6195,
+      "sha256": "67438d8b5353a3f3614ca312d9b4c510eaa2f4b7c8ddb4673f625c91d428e531",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/inputs/original-components.geojson",
+      "bytes": 23958,
+      "sha256": "f99f334877c309101afafe56210e40ab2093948e686ec39f98d9c085a42622b9",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/inputs/root-corrected-ordinary-pin-review.json",
+      "bytes": 576,
+      "sha256": "bb1990c4aaecfa48b04b8beb09476f76f5ceec3c43b0776c747429adfeacbcb5",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/inputs/root-whole-input-scope-review.json",
+      "bytes": 33602,
+      "sha256": "ae7377e9631c78667a8bad203200386329e3eebb05f7de63c4e0a7eb51da096c",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/inputs/source-contact-features.geojson",
+      "bytes": 46722,
+      "sha256": "472ee9003155eb62c9e9aa7bfdff0e28dfab13a8c1cc18b2a30ca6b705cc2f14",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/inputs/successor-component-verification.json",
+      "bytes": 29385,
+      "sha256": "5b1208730bdde278b3914cb6f0104a27f0653af56701a7e1931ce21b39ad4e86",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/inputs/whole-input-pins.json",
+      "bytes": 18148,
+      "sha256": "c8f3394449dd1afccb9cfe4bc932c79cbf8c343030376e881ef243bcde1e4e83",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/official-reference-review.json",
+      "bytes": 11277,
+      "sha256": "4c11dd936fd8e4507651798e61a3133c3f200809535c6cda580745a06dc6db3c",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/reproduce_full_product_comparison.py",
+      "bytes": 17642,
+      "sha256": "59a109956ba0f43c9c10041a25ab9ed48214c5ab2ef894f6bac98401062203f6",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/reproduce_source_geometry.py",
+      "bytes": 13461,
+      "sha256": "d66a14339a44e69810532970800f58ceb6980624698955dadb7960d39f6b41de",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/reproduction-runs.json",
+      "bytes": 6559,
+      "sha256": "f47eb6acbd0f8f989cf2687aa4460fda15bd9e46b95100b847276b6971705944",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/source-geometry-comparison.json",
+      "bytes": 1264042,
+      "sha256": "4f7758a83e9118f582f27ee446adedb5bd3e1cdbf91a02e5b6d9f9d821af9818",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/sources/angola-minea-portal-response.html",
+      "bytes": 177326,
+      "sha256": "e6532bf81b33f17a9f90d21f9c00ec7e264637d55487c51325466cbcd3052765",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/sources/uk-treaty-series-1926-ts-29.pdf",
+      "bytes": 195690,
+      "sha256": "120edb084074e033786cb544c4bc8d0046b3b8b001c7afdb80a47e1a972520de",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/validation-negative-control.json",
+      "bytes": 501,
+      "sha256": "8b629fe200c281f9f8edfbff72cdd61d284687d03cb7e94c3285c1b26072289c",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/validation-positive-control.json",
+      "bytes": 427,
+      "sha256": "9ff07035dd9e50ec5c474363a6e531557c3d2c19ee6b426f04427810696004d6",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/validation-reproducibility-control.json",
+      "bytes": 296,
+      "sha256": "1991dc9b7fc29fcb922fb1adf45b8c36649800e4af8bb8326cf173ebdfd8fc4a",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    }
+  ],
+  "methods": [
+    {
+      "id": "whole-product-overlay",
+      "kind": "measurement",
+      "description": "Verify exact source bytes, feature identity, and planar polygon intersections/differences on unchanged EPSG:4326 coordinates. Repeated full executions are separately recorded in reproduction-runs.json. No repair, reprojection, boundary inference, or assignment.",
+      "software": "Python 3.12.14; Shapely 2.1.2; GEOS 3.13.1; Git for immutable whole-file pins",
+      "units": "feature and pair counts; unprojected square degrees"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "candidate_count",
+      "value": 21,
+      "unit": "features",
+      "input_sha256": "7a0d1e250f6387311b7af67571a2d91a1775db9c6e500e2383a506f572a5b9b8",
+      "vintage": "baseline",
+      "evaluation_commit": "68ed7c9ea8c66714c5e30afd8fec827d94142fbd"
+    },
+    {
+      "id": "contact_count",
+      "value": 10,
+      "unit": "source features",
+      "input_sha256": "7a0d1e250f6387311b7af67571a2d91a1775db9c6e500e2383a506f572a5b9b8",
+      "vintage": "baseline",
+      "evaluation_commit": "68ed7c9ea8c66714c5e30afd8fec827d94142fbd"
+    },
+    {
+      "id": "consumed_positive_area_ago",
+      "value": 21,
+      "unit": "candidate features",
+      "input_sha256": "7a0d1e250f6387311b7af67571a2d91a1775db9c6e500e2383a506f572a5b9b8",
+      "vintage": "baseline",
+      "evaluation_commit": "68ed7c9ea8c66714c5e30afd8fec827d94142fbd"
+    },
+    {
+      "id": "consumed_positive_area_nam",
+      "value": 20,
+      "unit": "candidate features",
+      "input_sha256": "7a0d1e250f6387311b7af67571a2d91a1775db9c6e500e2383a506f572a5b9b8",
+      "vintage": "baseline",
+      "evaluation_commit": "68ed7c9ea8c66714c5e30afd8fec827d94142fbd"
+    },
+    {
+      "id": "full_positive_area_ago",
+      "value": 21,
+      "unit": "candidate features",
+      "input_sha256": "7a0d1e250f6387311b7af67571a2d91a1775db9c6e500e2383a506f572a5b9b8",
+      "vintage": "baseline",
+      "evaluation_commit": "68ed7c9ea8c66714c5e30afd8fec827d94142fbd"
+    },
+    {
+      "id": "full_positive_area_nam",
+      "value": 20,
+      "unit": "candidate features",
+      "input_sha256": "7a0d1e250f6387311b7af67571a2d91a1775db9c6e500e2383a506f572a5b9b8",
+      "vintage": "baseline",
+      "evaluation_commit": "68ed7c9ea8c66714c5e30afd8fec827d94142fbd"
+    },
+    {
+      "id": "candidate_contact_pairs_intersect",
+      "value": 49,
+      "unit": "pairs",
+      "input_sha256": "7a0d1e250f6387311b7af67571a2d91a1775db9c6e500e2383a506f572a5b9b8",
+      "vintage": "baseline",
+      "evaluation_commit": "68ed7c9ea8c66714c5e30afd8fec827d94142fbd"
+    },
+    {
+      "id": "full_contact_geometry_differences",
+      "value": 10,
+      "unit": "contacts",
+      "input_sha256": "7a0d1e250f6387311b7af67571a2d91a1775db9c6e500e2383a506f572a5b9b8",
+      "vintage": "baseline",
+      "evaluation_commit": "68ed7c9ea8c66714c5e30afd8fec827d94142fbd"
+    },
+    {
+      "id": "unverified_water_status",
+      "value": 21,
+      "unit": "candidate features",
+      "input_sha256": "7a0d1e250f6387311b7af67571a2d91a1775db9c6e500e2383a506f572a5b9b8",
+      "vintage": "baseline",
+      "evaluation_commit": "68ed7c9ea8c66714c5e30afd8fec827d94142fbd"
+    },
+    {
+      "id": "covered_by_consumed_union",
+      "value": 2,
+      "unit": "candidate features",
+      "input_sha256": "7a0d1e250f6387311b7af67571a2d91a1775db9c6e500e2383a506f572a5b9b8",
+      "vintage": "baseline",
+      "evaluation_commit": "68ed7c9ea8c66714c5e30afd8fec827d94142fbd"
+    },
+    {
+      "id": "candidate_contact_pairs_positive_area",
+      "value": 49,
+      "unit": "pairs",
+      "input_sha256": "7a0d1e250f6387311b7af67571a2d91a1775db9c6e500e2383a506f572a5b9b8",
+      "vintage": "baseline",
+      "evaluation_commit": "68ed7c9ea8c66714c5e30afd8fec827d94142fbd"
+    },
+    {
+      "id": "candidate_contact_pairs_line_only",
+      "value": 0,
+      "unit": "pairs",
+      "input_sha256": "7a0d1e250f6387311b7af67571a2d91a1775db9c6e500e2383a506f572a5b9b8",
+      "vintage": "baseline",
+      "evaluation_commit": "68ed7c9ea8c66714c5e30afd8fec827d94142fbd"
+    },
+    {
+      "id": "candidate_contact_pairs_point_only",
+      "value": 0,
+      "unit": "pairs",
+      "input_sha256": "7a0d1e250f6387311b7af67571a2d91a1775db9c6e500e2383a506f572a5b9b8",
+      "vintage": "baseline",
+      "evaluation_commit": "68ed7c9ea8c66714c5e30afd8fec827d94142fbd"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "candidate_count",
+      "value": 21,
+      "unit": "features",
+      "text": "candidate_count = 21 features."
+    },
+    {
+      "metric_id": "contact_count",
+      "value": 10,
+      "unit": "source features",
+      "text": "contact_count = 10 source features."
+    },
+    {
+      "metric_id": "consumed_positive_area_ago",
+      "value": 21,
+      "unit": "candidate features",
+      "text": "consumed_positive_area_ago = 21 candidate features."
+    },
+    {
+      "metric_id": "consumed_positive_area_nam",
+      "value": 20,
+      "unit": "candidate features",
+      "text": "consumed_positive_area_nam = 20 candidate features."
+    },
+    {
+      "metric_id": "full_positive_area_ago",
+      "value": 21,
+      "unit": "candidate features",
+      "text": "full_positive_area_ago = 21 candidate features."
+    },
+    {
+      "metric_id": "full_positive_area_nam",
+      "value": 20,
+      "unit": "candidate features",
+      "text": "full_positive_area_nam = 20 candidate features."
+    },
+    {
+      "metric_id": "candidate_contact_pairs_intersect",
+      "value": 49,
+      "unit": "pairs",
+      "text": "candidate_contact_pairs_intersect = 49 pairs."
+    },
+    {
+      "metric_id": "full_contact_geometry_differences",
+      "value": 10,
+      "unit": "contacts",
+      "text": "full_contact_geometry_differences = 10 contacts."
+    },
+    {
+      "metric_id": "unverified_water_status",
+      "value": 21,
+      "unit": "candidate features",
+      "text": "unverified_water_status = 21 candidate features."
+    },
+    {
+      "metric_id": "covered_by_consumed_union",
+      "value": 2,
+      "unit": "candidate features",
+      "text": "covered_by_consumed_union = 2 candidate features."
+    },
+    {
+      "metric_id": "candidate_contact_pairs_positive_area",
+      "value": 49,
+      "unit": "pairs",
+      "text": "candidate_contact_pairs_positive_area = 49 pairs."
+    },
+    {
+      "metric_id": "candidate_contact_pairs_line_only",
+      "value": 0,
+      "unit": "pairs",
+      "text": "candidate_contact_pairs_line_only = 0 pairs."
+    },
+    {
+      "metric_id": "candidate_contact_pairs_point_only",
+      "value": 0,
+      "unit": "pairs",
+      "text": "candidate_contact_pairs_point_only = 0 pairs."
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "candidate_count",
+      "path": "research/geography/gap-source-namibia-angola-20261006/full-product-comparison.json",
+      "json_pointer": "/summary/components"
+    },
+    {
+      "metric_id": "contact_count",
+      "path": "research/geography/gap-source-namibia-angola-20261006/full-product-comparison.json",
+      "json_pointer": "/summary/contacts"
+    },
+    {
+      "metric_id": "consumed_positive_area_ago",
+      "path": "research/geography/gap-source-namibia-angola-20261006/source-geometry-comparison.json",
+      "json_pointer": "/summary/candidate_count_intersecting_angola_by_positive_area"
+    },
+    {
+      "metric_id": "consumed_positive_area_nam",
+      "path": "research/geography/gap-source-namibia-angola-20261006/source-geometry-comparison.json",
+      "json_pointer": "/summary/candidate_count_intersecting_namibia_by_positive_area"
+    },
+    {
+      "metric_id": "full_positive_area_ago",
+      "path": "research/geography/gap-source-namibia-angola-20261006/full-product-comparison.json",
+      "json_pointer": "/summary/full_candidate_positive_area_hits_ago"
+    },
+    {
+      "metric_id": "full_positive_area_nam",
+      "path": "research/geography/gap-source-namibia-angola-20261006/full-product-comparison.json",
+      "json_pointer": "/summary/full_candidate_positive_area_hits_nam"
+    },
+    {
+      "metric_id": "candidate_contact_pairs_intersect",
+      "path": "research/geography/gap-source-namibia-angola-20261006/full-product-comparison.json",
+      "json_pointer": "/summary/pair_rows_with_intersection"
+    },
+    {
+      "metric_id": "full_contact_geometry_differences",
+      "path": "research/geography/gap-source-namibia-angola-20261006/full-product-comparison.json",
+      "json_pointer": "/summary/contact_geometries_topologically_different_from_full"
+    },
+    {
+      "metric_id": "unverified_water_status",
+      "path": "research/geography/gap-source-namibia-angola-20261006/candidate-classifications.json",
+      "json_pointer": "/aggregate_observations/unverified_water_status"
+    },
+    {
+      "metric_id": "covered_by_consumed_union",
+      "path": "research/geography/gap-source-namibia-angola-20261006/source-geometry-comparison.json",
+      "json_pointer": "/summary/candidate_count_covered_by_combined_source_union"
+    },
+    {
+      "metric_id": "candidate_contact_pairs_positive_area",
+      "path": "research/geography/gap-source-namibia-angola-20261006/candidate-classifications.json",
+      "json_pointer": "/aggregate_observations/candidate_contact_pairs_with_positive_area"
+    },
+    {
+      "metric_id": "candidate_contact_pairs_line_only",
+      "path": "research/geography/gap-source-namibia-angola-20261006/candidate-classifications.json",
+      "json_pointer": "/aggregate_observations/candidate_contact_pairs_with_line_only"
+    },
+    {
+      "metric_id": "candidate_contact_pairs_point_only",
+      "path": "research/geography/gap-source-namibia-angola-20261006/candidate-classifications.json",
+      "json_pointer": "/aggregate_observations/candidate_contact_pairs_with_point_only"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "All 21 candidates intersect the retained Angola consumed and same-release full products by positive area; 20 also intersect the corresponding Namibia products. This is a source-geometry observation only.",
+      "status": "supported",
+      "source_ids": [
+        "consumed-geoBoundaries-AGO-ADM2",
+        "consumed-geoBoundaries-NAM-ADM2",
+        "full-geoBoundaries-NAM-ADM2-9469f09",
+        "full-geoBoundaries-AGO-ADM2-9469f09"
+      ]
+    },
+    {
+      "text": "The packet does not resolve present water/land status or historic river course at any candidate.",
+      "status": "unresolved",
+      "source_ids": [
+        "mawlr-water-basin-map-2008",
+        "mawlr-iwrm-plan-summary",
+        "mawlr-okavango-omatako-booklet",
+        "angola-minea-2014"
+      ]
+    },
+    {
+      "text": "The 1926 treaty framework and archive catalogue leads are material, but the completed demarcation records needed to establish an exact alignment were not inspected.",
+      "status": "unresolved",
+      "source_ids": [
+        "uk-treaty-1926",
+        "namibia-archives-2-31",
+        "namibia-archives-1-1-071",
+        "namibia-archives-3-3-3"
+      ]
+    },
+    {
+      "text": "The processing cause and any territorial assignment remain unknown; no legal boundary verdict is made.",
+      "status": "unresolved",
+      "source_ids": [
+        "consumed-geoBoundaries-NAM-ADM2",
+        "consumed-geoBoundaries-AGO-ADM2",
+        "uk-treaty-1926"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "partial",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "python3 research/geography/gap-source-namibia-angola-20261006/reproduce_source_geometry.py",
+    "python3 research/geography/gap-source-namibia-angola-20261006/reproduce_full_product_comparison.py"
+  ],
+  "validation": [
+    {
+      "method_id": "whole-product-overlay",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/gap-source-namibia-angola-20261006/validation-positive-control.json"
+    },
+    {
+      "method_id": "whole-product-overlay",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/gap-source-namibia-angola-20261006/validation-negative-control.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/README.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/analysis-input-set.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/candidate-classifications.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/full-product-comparison.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/inputs/input-bindings.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/inputs/official-reference-leads.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/inputs/original-components.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/inputs/root-corrected-ordinary-pin-review.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/inputs/root-whole-input-scope-review.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/inputs/source-contact-features.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/inputs/successor-component-verification.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/inputs/whole-input-pins.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/official-reference-review.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/reproduce_full_product_comparison.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/reproduce_source_geometry.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/reproduction-runs.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/source-geometry-comparison.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/sources/angola-minea-portal-response.html",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/sources/gb-AGO-ADM2-000.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/sources/gb-NAM-ADM2-000.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/sources/geoBoundaries-AGO-ADM2-full-9469f09.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/sources/geoBoundaries-AGO-ADM2-full-9469f09.lfs-pointer.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/sources/geoBoundaries-AGO-ADM2-metadata-9469f09.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/sources/geoBoundaries-AGO-ADM2-metadata-9469f09.lfs-pointer.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/sources/geoBoundaries-NAM-ADM2-full-9469f09.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/sources/geoBoundaries-NAM-ADM2-full-9469f09.lfs-pointer.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/sources/geoBoundaries-NAM-ADM2-metadata-9469f09.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/sources/geoBoundaries-NAM-ADM2-metadata-9469f09.lfs-pointer.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/sources/uk-treaty-series-1926-ts-29.pdf",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/validation-negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/validation-positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/validation-reproducibility-control.json",
+      "status": "added"
+    }
+  ]
+}
