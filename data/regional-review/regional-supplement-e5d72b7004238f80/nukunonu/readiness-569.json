@@ -1,0 +1,22 @@
+{
+  "issue": 569,
+  "coverage": "complete",
+  "eligible": true,
+  "findings": [],
+  "observed_at": "2026-10-07T02:59:25.156Z",
+  "snapshot": {
+    "number": 569,
+    "state": "open",
+    "body": "Raised/recorded: 2026-10-03 UTC. Moderator findings on #558 (merge `7e9979545f91a8ee87bf2068667f97986ecccee3`) and #560 (merge `5a276118e757e5865a5f5d65e2040d91209bf79f`). Follow-up to completed evidence scopes #520/#521.\n\nThe new packets copy old zero-coverage/absent-footprint results into current audit descriptions:\n- Nukunonu assessment.audit.ring_inventory: all 97 rows have all_location_overlap_fraction=0 and absent-footprint status; independent_gshhg_assessment says 0% currently represented.\n- Bounty assessment.audit.osm_ring_inventory: all 27 rows have zero overlap and absent-footprint status; README says the existing audit finds all 27 absent from current location footprints.\n\nBut both merge snapshots' world-index includes `geography/source-restoration-additions.json`, blob `18989f4f6b2789057a00eeda6c5c7e51f06e3caf`. It contains Nukunonu ID `atlas:macro-coverage:location:a0457f0d44c94b71f00d` with 97 polygon components and Bounty ID `atlas:macro-coverage:location:73281d3672f84a47a770` with 27. Every inventory ring bbox matches a published component bbox, and the current source hashes match the packets. Thus the blanket current absence/zero-overlap assertions are stale; this does not prove shoreline completeness or geographic approval.\n\nBounded evidence correction: one coherent PR, maximum two if the independent packets are safer to correct separately. Owned paths are the two packet subdirectories below; coordinate any still-active original ownership before claim. Preserve original pre-restoration comparison reports; do not rewrite original source archives, shared geography, records, certificates, grid or live data.\n\nAcceptance:\n- Explicitly label archived comparison results with their actual inspected baseline/release and date; never present them as current indexed coverage.\n- Recheck each subject against the assigned current release and retain current coverage results separately, with scope/hash and appropriate geographic area method.\n- Correct/supersede README and machine-readable assertions consistently. Verifiers must distinguish source-integrity checks from current coverage checks.\n- Preserve the genuine OSM/GSHHG/official-source disagreements, shoreline uncertainty, shared-parent questions, stable identities and all history. Existing representation does not certify complete coastlines or authorize imports.\n- Coordinate separately tracked parent-count/source-pointer work; do not expand this into a worldwide audit.\n\n<!-- worldatlas-work:v1\n{\"max_prs\":2,\"depends_on\":[],\"mode\":\"geography\",\"owned_paths\":[\"data/regional-review/regional-supplement-e5d72b7004238f80/nukunonu/\",\"data/regional-review/regional-supplement-b5299df90ec984cc/bounty-islands/\"],\"scope\":\"Correct stale current-zero-coverage assertions in two completed island evidence packets; retain historical comparisons and independently verify current indexed coverage; no geographic/live edits\"}\n-->",
+    "labels": [
+      "follow-up",
+      "kind:work-item",
+      "status:ready",
+      "type:geography",
+      "urgent"
+    ],
+    "updated_at": "2026-10-06T23:55:40Z"
+  },
+  "dependencies": [],
+  "decision": "Mechanical eligibility only. Inspect original acceptance, waits and scientific/production evidence; reread issue, claim and dependencies immediately before a narrow mutation. No labels or claims changed."
+}

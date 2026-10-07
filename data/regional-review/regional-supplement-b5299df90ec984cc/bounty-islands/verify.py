@@ -4,6 +4,7 @@ import gzip
 import hashlib
 import json
 import pathlib
+import subprocess
 import xml.etree.ElementTree as ET
 
 ROOT = pathlib.Path(__file__).resolve().parents[4]
@@ -14,12 +15,19 @@ EXPECTED_RAW = "9bb048bfe6efb335bffbe08bda484a0283571eb7b6f839e9e0e99268ca8f177c
 GSHHG = ROOT / "data/macro-improvements/macro-coverage-oceania/gshhg-selected-full-records.bin.gz"
 GSHHG_GZIP = "7e52c4c7c13ea3b2d35120cc0f1f6832007865750b98f42d5cd9c95162df1df4"
 GSHHG_NATIVE = "a7c071d1e80655b7a929d9a0a3f694f915a224b59b449505560fd40433c71b51"
+BASELINE = "9be99dfefb5871237ac464c6ef8a23e82be501f6"
 
 def require(ok, message):
     if not ok:
         raise SystemExit("FAIL: " + message)
 
-compressed = SOURCE.read_bytes()
+def source_bytes(path):
+    if path.exists():
+        return path.read_bytes()
+    relative = path.relative_to(ROOT).as_posix()
+    return subprocess.check_output(["git", "show", f"{BASELINE}:{relative}"], cwd=ROOT)
+
+compressed = source_bytes(SOURCE)
 raw = gzip.decompress(compressed)
 require(hashlib.sha256(compressed).hexdigest() == EXPECTED_GZIP, "retained compressed SHA-256")
 require(len(raw) == 341174 and hashlib.sha256(raw).hexdigest() == EXPECTED_RAW, "retained source bytes/hash")
@@ -47,13 +55,21 @@ polygons = audit["gshhg_components"]
 require(len(polygons) == 14 and len({p["gshhg_id"] for p in polygons}) == 14, "all 14 GSHHG polygons inventoried")
 require(abs(sum(c["source_land_area_km2"] for c in polygons) - audit["gshhg_land_area_km2"]) < 1e-8, "GSHHG polygon area sum")
 source_dir = ROOT / "data/macro-improvements/macro-coverage-oceania"
-source_osm = next(r for r in json.loads((source_dir / "osm-report.json").read_text())["routes"] if r["name"] == "Bounty Islands")
+source_osm = next(r for r in json.loads(source_bytes(source_dir / "osm-report.json"))["routes"] if r["name"] == "Bounty Islands")
 require({c["osm_way_ids"][0] for c in source_osm["current_source_components"]} == set(ways), "matches retained OSM analysis inventory")
-source_gshhg = next(r for r in json.loads((source_dir / "report.json").read_text())["routes"] if r["name"] == "Bounty Islands")
-require(polygons == source_gshhg["independent_land_components"], "matches retained GSHHG comparison inventory")
-gshhg_compressed = GSHHG.read_bytes()
+source_gshhg = next(r for r in json.loads(source_bytes(source_dir / "report.json"))["routes"] if r["name"] == "Bounty Islands")
+source_gshhg_by_id = {p["gshhg_id"]: p for p in source_gshhg["independent_land_components"]}
+require(set(source_gshhg_by_id) == {p["gshhg_id"] for p in polygons}, "matches retained GSHHG component IDs")
+require(all(p["source_level"] == source_gshhg_by_id[p["gshhg_id"]]["source_level"] and
+            p["source_vertex_count"] == source_gshhg_by_id[p["gshhg_id"]]["source_vertex_count"] and
+            abs(p["source_land_area_km2"] - source_gshhg_by_id[p["gshhg_id"]]["source_land_area_km2"]) < 1e-9
+            for p in polygons), "matches retained GSHHG component inventory")
+gshhg_compressed = source_bytes(GSHHG)
 gshhg_native = gzip.decompress(gshhg_compressed)
 require(hashlib.sha256(gshhg_compressed).hexdigest() == GSHHG_GZIP, "retained GSHHG records compressed SHA-256")
 require(len(gshhg_native) == 8081872 and hashlib.sha256(gshhg_native).hexdigest() == GSHHG_NATIVE, "retained GSHHG records native SHA-256")
 require(audit["unclosed_chains"] == [] and audit["missing_node_ways"] == [], "reported complete OSM reconstruction")
-print("PASS: OSM and GSHHG source hashes; all 27 closed, unnamed OSM rings and nodes; exact OSM/GSHHG inventories")
+require(all("archived_pre_restoration_comparison" in row for row in rings), "old OSM overlap values are explicitly archived")
+require(all("archived_pre_restoration_comparison" in row for row in polygons), "old GSHHG overlap values are explicitly archived")
+print("PASS source integrity: OSM/GSHHG hashes; all 27 closed, unnamed OSM rings and nodes; exact inventories")
+print("Current coverage is reproduced separately by the shared reproduce_current_coverage.py --check.")
