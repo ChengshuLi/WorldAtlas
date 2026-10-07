@@ -42,7 +42,8 @@ export function continueContent(repo,baseline,runRoot,plan,{storage}={}){
   assert.equal(prepared.records,396);assert.equal(prepared.names,3588);assert.equal(prepared.footprints_sha256,AFTER);
   assert.deepEqual(prepared.products.map(p=>p.directory).sort(),products.map(p=>p.directory.slice(5)).sort());
   assert(prepared.pending_products.some(p=>p.id==='population-ghsl'));
-  return {version:1,status:'PASS',before_footprints_sha256:BEFORE,after_footprints_sha256:AFTER,entities:3984,changed_source_claims:0,summaries,chains,
+  const entityBindings=summaries.reduce((n,p)=>n+p.entities,0),claimRows=summaries.reduce((n,p)=>n+p.records,0);assert.equal(entityBindings,3984);assert.equal(claimRows,3984);
+  return {version:1,status:'PASS',before_footprints_sha256:BEFORE,after_footprints_sha256:AFTER,product_qualified_entity_bindings:entityBindings,claim_rows:claimRows,changed_source_claims:0,summaries,chains,
    prepared_index_sha256:sha(fs.readFileSync('data/prepared-evidence/index.json')),pending_products:prepared.pending_products,source_pins:[...reader.pins(),...review.pins()],
    limits:['Unchanged dated claim/interval/source bytes only, no historical affiliation transfer','Pending GHSL and macro/regional certificate approvals are not promoted']};
  }finally{process.chdir(initial);}
