@@ -31,7 +31,6 @@ def main():
     parser.add_argument("--physical-record", required=True)
     parser.add_argument("--source", required=True)
     parser.add_argument("--current", required=True)
-    parser.add_argument("--validation-directory", required=True)
     args = parser.parse_args()
 
     physical = load(args.physical_record)["record"]
@@ -49,8 +48,6 @@ def main():
     outside = box(8, 8, 12, 12)
     positive_ok = outer.covers(inside) and inside.difference(outer).is_empty and land_area_m2(inside) > 0
     negative_ok = not outer.covers(outside) and not outside.difference(outer).is_empty and land_area_m2(outside) > 0
-    validation_dir = Path(args.validation_directory)
-    validation_dir.mkdir(parents=True, exist_ok=True)
     controls = [
         {"version": 1, "method_id": "bounded-vavau-source-comparison", "kind": "positive-control",
          "outcome": "passed" if positive_ok else "failed",
@@ -61,18 +58,23 @@ def main():
     ]
     if not positive_ok or not negative_ok:
         raise RuntimeError("Geographic method control failed")
+    packet = Path(__file__).resolve().parent
     for control in controls:
         name = "positive-control.json" if control["kind"] == "positive-control" else "negative-control.json"
-        (validation_dir / name).write_text(json.dumps(control, indent=2) + "\n", encoding="utf-8")
+        retained = load(packet / "validation" / name)
+        if retained != control:
+            raise RuntimeError(f"Retained method control differs from recomputation: {name}")
 
-    print(json.dumps({
+    result = {
         "method": {"helper": METHOD, "topology": "Shapely planar XY predicates on recorded lon/lat; no repair, buffer, transform or densification."},
         "shapely_version": shapely_version,
         "candidate_valid": candidate.is_valid,
         "source_valid": source.is_valid,
         "current_valid": current.is_valid,
+        "candidate_source_intersects": candidate.intersects(source),
         "candidate_source_covered": source.covers(candidate),
         "candidate_current_covered": current.covers(candidate),
+        "candidate_current_intersects": candidate.intersects(current),
         "candidate_source_outside_empty": candidate.difference(source).is_empty,
         "candidate_current_outside_empty": candidate.difference(current).is_empty,
         "candidate_support_area_m2": candidate_area,
@@ -84,7 +86,22 @@ def main():
             "Topological containment does not establish legal boundaries, accuracy, registration, dry land, effective date, or ownership.",
             "Only the single complete retained support pointset is compared; no global producer or geography data is changed."
         ]
-    }, indent=2, sort_keys=True))
+    }
+    expected = load(packet / "inputs" / "bounded-source-comparison.json")
+    relation_keys = {
+        "candidate_intersects_simplified_feature": "candidate_source_intersects",
+        "simplified_feature_covers_candidate": "candidate_source_covered",
+        "candidate_outside_simplified_feature_empty": "candidate_source_outside_empty",
+        "candidate_intersects_current_contact": "candidate_current_intersects",
+        "current_contact_covers_candidate": "candidate_current_covered",
+        "candidate_outside_current_contact_empty": "candidate_current_outside_empty",
+    }
+    for expected_key, result_key in relation_keys.items():
+        if result[result_key] != expected["relations"][expected_key]:
+            raise RuntimeError(f"Reproduced relation differs from retained result: {expected_key}")
+    if result["candidate_support_area_m2"] != expected["bounded_ellipsoidal_area_comparison"]["candidate_support_area_m2"]:
+        raise RuntimeError("Reproduced support area differs from retained result")
+    print(json.dumps(result, indent=2, sort_keys=True))
 
 
 if __name__ == "__main__":

@@ -188,8 +188,8 @@
   "outputs": [
     {
       "path": "research/geography/tonga-gap-source-fitness-20261007/inputs/bounded-source-comparison.json",
-      "bytes": 4681,
-      "sha256": "9683c36ee55988215c859bae1aef5777264aa681a6fb9aa992c58cf49041a453",
+      "bytes": 4731,
+      "sha256": "0ece5e1e2b4a28ba3d3f8e6bb9bbc826bdcce0084907676f28a13cec77829da0",
       "hash_kind": "file-bytes"
     },
     {
@@ -236,8 +236,8 @@
     },
     {
       "path": "research/geography/tonga-gap-source-fitness-20261007/compare-bounded-support.py",
-      "bytes": 4381,
-      "sha256": "b09f19e1ec353082325f6f2203b8cadea028a011416ec3fabdc1483f70da34f2",
+      "bytes": 5517,
+      "sha256": "3f6af9a06ef1b947a661a65d4dfbfaee3dd517cbfd7e4cc7ef4020faec33a48c",
       "hash_kind": "file-bytes"
     },
     {
@@ -329,7 +329,7 @@
     "geographic_approval": "unapproved"
   },
   "commands": [
-    "PYTHONPATH=scripts/evidence:scripts python3 research/geography/tonga-gap-source-fitness-20261007/compare-bounded-support.py --physical-record research/geography/tonga-gap-source-fitness-20261007/inputs/physical-comparison-record.json --source research/geography/tonga-gap-source-fitness-20261007/sources/geoBoundaries-TON-ADM1_simplified.geojson --current data/geography/part-23.json --validation-directory research/geography/tonga-gap-source-fitness-20261007/validation",
+    "PYTHONPATH=scripts/evidence:scripts python3 research/geography/tonga-gap-source-fitness-20261007/compare-bounded-support.py --physical-record research/geography/tonga-gap-source-fitness-20261007/inputs/physical-comparison-record.json --source research/geography/tonga-gap-source-fitness-20261007/sources/geoBoundaries-TON-ADM1_simplified.geojson --current data/geography/part-23.json",
     "node scripts/evidence-quality.mjs research/geography/tonga-gap-source-fitness-20261007/evidence-quality.json"
   ],
   "change_receipts": [
