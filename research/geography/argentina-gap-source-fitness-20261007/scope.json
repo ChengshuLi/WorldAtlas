@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "issue": 1418,
+  "parent_issue": 1202,
+  "baseline_commit": "6a47b43025d963daf80915c6d219c75ebcc8cd91",
+  "family_id": "gap-source-batch:af41d8136269b78548021a84",
+  "operational_batch": "gap-operational-batch:751cacd42f25a241f847a94d",
+  "component_count": 7,
+  "component_ids_sha256": "b2b8155d09bfa4e86a51b8ed6617927790e9c666c9294f96fcc9a7453b87dbda",
+  "component_ids_in_source_family_order": [
+    "physical-component:005bc7c364b9d663c7bde452916a80ca6cc4d06411ffbd8d5cd9bd621c84dbf5",
+    "physical-component:147ddc6aed102d3f2c5e362d8a37a159db9d185a652feb75afe5f8e5b57918d0",
+    "physical-component:1635eecba78b0a2f8477bdd03d603cea93c4ff2d9c68f1a963bd44934790695a",
+    "physical-component:7bd46b9a5ab80cc933fa4de4f0564dc34ee1edf4eef0ed500b875c409ea6df04",
+    "physical-component:91bd8745a426b126855fef4cf183a85e8329b7943cc1c89b02898038c0dceea0",
+    "physical-component:b960e6adda1b56e25b52f8a501b7f6fdc86a461b71e94ec9aaec057cee45b27e",
+    "physical-component:c86d0a6bd3706c3dae7df4b91bc50af6ecd7f07e9bd886b471064c9c84beecdf"
+  ],
+  "current_contact_ids": [
+    "gb:ARG:ADM2:61730980B13025573352502",
+    "gb:ARG:ADM2:61730980B44606052944654",
+    "gb:ARG:ADM2:61730980B51096129050346",
+    "gb:ARG:ADM2:61730980B99310691740446"
+  ],
+  "current_contacts": ["Castelli", "Villarino", "Magdalena", "Pinamar"],
+  "positive_length_neighbor_ids": [
+    "gb:ARG:ADM2:61730980B13025573352502",
+    "gb:ARG:ADM2:61730980B44606052944654",
+    "gb:ARG:ADM2:61730980B99310691740446"
+  ],
+  "positive_length_neighbors": ["Castelli", "Villarino", "Pinamar"],
+  "component_admin_source_features": [
+    {"shapeID":"61730980B13025573352502","shapeName":"Castelli"},
+    {"shapeID":"61730980B24175536898784","shapeName":"Patagones"},
+    {"shapeID":"61730980B44606052944654","shapeName":"Villarino"},
+    {"shapeID":"61730980B51096129050346","shapeName":"Magdalena"},
+    {"shapeID":"61730980B92703930088749","shapeName":"General Juan Madariaga"},
+    {"shapeID":"61730980B99310691740446","shapeName":"Pinamar"}
+  ],
+  "neighbor_length": "unknown",
+  "physical_authority": "unapproved",
+  "source_fitness": "unapproved",
+  "cause": "unknown",
+  "legal_boundary_or_dry_land_approval": false,
+  "geometry_or_publication_changes": false,
+  "interpretation": "The six source shapeIDs are the original administrative observations referenced by the seven physical component rows; they do not expand the four current-contact roster. Exact-name Georef matches do not establish geometry identity or authority."
+}
