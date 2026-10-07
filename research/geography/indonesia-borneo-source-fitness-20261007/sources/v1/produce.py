@@ -53,6 +53,20 @@ def descriptor(path: str, raw: bytes) -> dict:
     return {'path': path, 'bytes': len(raw), 'sha256': sha(raw), 'hash_kind': 'file-bytes'}
 
 
+def topological_dimension(geom) -> int:
+    if geom.is_empty:
+        return -1
+    if geom.geom_type in ('Polygon', 'MultiPolygon'):
+        return 2
+    if geom.geom_type in ('LineString', 'MultiLineString', 'LinearRing'):
+        return 1
+    if geom.geom_type in ('Point', 'MultiPoint'):
+        return 0
+    if geom.geom_type == 'GeometryCollection':
+        return max((topological_dimension(part) for part in geom.geoms), default=-1)
+    raise ValueError('Unexpected topological intersection type: ' + geom.geom_type)
+
+
 def build(run_name: str) -> dict:
     commit = subprocess.check_output(['git', '-C', str(REPO), 'rev-parse', 'HEAD'], text=True).strip()
     # Pins for every consumed file are derived from immutable custody aliases and
@@ -72,7 +86,7 @@ def build(run_name: str) -> dict:
         'scripts/evidence/contracts.py',
         (SOURCE / 'produce.py').as_posix(),
         *[a['payload'] for a in component_aliases],
-        *[p.as_posix() for p in (SOURCE / 'scope-extraction.json', SOURCE / 'family-row.json', SOURCE / 'component-roster.txt', SOURCE / 'jrc-source-receipts.json', SOURCE / 'worldcover-whole-tile-receipts.json', SOURCE / 'worldcover-extract-receipts.json', SOURCE / 'README.md', SOURCE / 'metadata-sources.md', SOURCE / 'metadata/occurrence_2024.xml', SOURCE / 'metadata/seasonality_2024.xml', SOURCE / 'requirements.txt')],
+        *[p.as_posix() for p in (SOURCE / 'scope-extraction.json', SOURCE / 'family-row.json', SOURCE / 'component-roster.txt', SOURCE / 'jrc-source-receipts.json', SOURCE / 'worldcover-whole-tile-receipts.json', SOURCE / 'worldcover-extract-receipts.json', SOURCE / 'README.md', SOURCE / 'metadata-sources.md', SOURCE / 'metadata/occurrence_2024.xml', SOURCE / 'metadata/seasonality_2024.xml', SOURCE / 'metadata/big-2022-ksp-layer.json', SOURCE / 'metadata/big-2023-rbi-layer.json', SOURCE / 'metadata/big-source-receipts.json', SOURCE / 'requirements.txt')],
         *[p.as_posix() for p in sorted((SOURCE / 'worldcover').glob('*.tif'))],
         *[p.as_posix() for p in sorted((SOURCE / 'worldcover-crops').glob('*.tif'))],
         *[p.as_posix() for p in sorted((SOURCE / 'jrc-crops').glob('*.tif'))],
@@ -186,6 +200,17 @@ def build(run_name: str) -> dict:
     if len(admin_features) != 519:
         raise ValueError('Expected complete 519-feature source product')
 
+    big22_path = (SOURCE / 'metadata/big-2022-ksp-layer.json').as_posix()
+    big23_path = (SOURCE / 'metadata/big-2023-rbi-layer.json').as_posix()
+    big22 = json.loads(baseline.materialized_bytes(big22_path))
+    big23 = json.loads(baseline.materialized_bytes(big23_path))
+    big22_description = big22.get('description', '')
+    if (big22.get('geometryType') != 'esriGeometryPolygon' or big22.get('sourceSpatialReference', {}).get('wkid') != 4326 or
+        'edisi tahun 2022' not in big22_description or 'kesalahan topologi' not in big22_description or big22.get('copyrightText')):
+        raise ValueError('Retained BIG 2022 layer metadata does not support its stated source/terms limits')
+    if big23.get('geometryType') != 'esriGeometryPolygon' or big23.get('sourceSpatialReference', {}).get('wkid') != 4326:
+        raise ValueError('Retained BIG 2023 layer metadata lacks expected polygon/WKID information')
+
     intersections = []
     tree = STRtree(admin_geoms)
     for component_id in sorted(ids):
@@ -198,12 +223,12 @@ def build(run_name: str) -> dict:
             intersections.append({
                 'type': 'Feature',
                 'geometry': mapping(overlay),
-                'properties': {
+            'properties': {
                     'overlay': 'component_x_geoboundaries_2020',
                     'component_id': component_id,
                     'source_feature_id': admin_rows[admin_index]['id'],
                     'source_name': admin_rows[admin_index]['name'],
-                    'intersection_dimension': 2 if overlay.area > 0 else (1 if overlay.geom_type in ('LineString', 'MultiLineString') else 0),
+                    'intersection_dimension': topological_dimension(overlay),
                     'intersection_geometry_type': overlay.geom_type,
                 },
             })
@@ -212,16 +237,24 @@ def build(run_name: str) -> dict:
     for component_id in sorted(ids):
         component = components[component_id]
         for feature in atlas_contacts:
-            overlay = component.intersection(shape(feature['geometry']))
+            overlay = component.boundary.intersection(shape(feature['geometry']).boundary)
             if overlay.is_empty:
                 continue
             contact_intersections.append({
                 'type': 'Feature', 'geometry': mapping(overlay),
-                'properties': {'overlay': 'component_x_current_atlas_admin', 'component_id': component_id,
+                'properties': {'overlay': 'component_boundary_x_current_admin_boundary', 'component_id': component_id,
                                'atlas_feature_id': feature['id'], 'atlas_name': feature['properties'].get('name'),
-                               'intersection_dimension': 2 if overlay.area > 0 else (1 if overlay.geom_type in ('LineString', 'MultiLineString') else 0),
+                               'intersection_dimension': topological_dimension(overlay),
                                'intersection_geometry_type': overlay.geom_type},
             })
+    contact_summary = []
+    for feature in sorted(atlas_contacts, key=lambda f: f['id']):
+        rows = [f for f in contact_intersections if f['properties']['atlas_feature_id'] == feature['id']]
+        dimensions = [f['properties']['intersection_dimension'] for f in rows]
+        contact_summary.append({'atlas_feature_id': feature['id'], 'atlas_name': feature['properties'].get('name'),
+                                'component_boundary_contact_rows': len(rows),
+                                'max_contact_dimension': max(dimensions, default=-1),
+                                'classification': 'positive-length' if max(dimensions, default=-1) == 1 else ('point-only' if max(dimensions, default=-1) == 0 else 'none')})
 
     # Raster source files are opened from the exact bytes authenticated above.
     raster_paths = sorted(p for p in pin_paths if p.endswith('.tif'))
@@ -246,13 +279,28 @@ def build(run_name: str) -> dict:
                     observations.append({'raster': name, 'native_crs': crs, 'all_touched_pixel_counts_by_value': hist,
                                          'observed_pixels': sum(hist.values()), 'nodata_excluded': nodata})
         raster_histograms.append({'component_id': component_id, 'source_rasters': observations})
-    if len(raster_histograms) != 45 or any(not row['source_rasters'] for row in raster_histograms):
-        raise ValueError('At least one component lacks a retained source-raster observation')
+    coverage_rows = contract.exact_rows(raster_histograms, sorted(ids), key='component_id')
+    if any(not row['source_rasters'] or any(not item['observed_pixels'] for item in row['source_rasters'])
+           for row in coverage_rows.values()):
+        raise ValueError('At least one component lacks positive source-raster coverage')
+    missing_coverage_rejected = False
+    adverse_coverage = [dict(row) for row in raster_histograms]
+    adverse_coverage[0] = {**adverse_coverage[0], 'source_rasters': []}
+    try:
+        if any(not row['source_rasters'] for row in contract.exact_rows(adverse_coverage, sorted(ids), key='component_id').values()):
+            raise ValueError('Empty-coverage adverse control rejected')
+        raise ValueError('Empty-coverage adverse control unexpectedly passed')
+    except ValueError as exc:
+        if 'unexpectedly passed' in str(exc): raise
+        missing_coverage_rejected = True
 
     positive = sum(f['properties']['intersection_dimension'] == 2 for f in intersections)
     if len(intersections) != 51 or positive != 51 or len({f['properties']['component_id'] for f in intersections}) != 45:
         raise ValueError('Expected 51 positive-area source intersections across all 45 components')
-    if not contact_intersections or len({f['properties']['atlas_feature_id'] for f in contact_intersections}) != 8:
+    if (len(contact_intersections) != 51 or len({f['properties']['atlas_feature_id'] for f in contact_intersections}) != 8 or
+        sum(r['classification'] == 'positive-length' for r in contact_summary) != 7 or
+        sum(r['classification'] == 'point-only' for r in contact_summary) != 1 or
+        next(r for r in contact_summary if r['atlas_feature_id'] == 'gb:IDN:ADM2:22746128B2679722836886')['classification'] != 'point-only'):
         raise ValueError('Contact overlay omitted an issue-pinned current admin feature')
 
     assessment = {
@@ -264,13 +312,28 @@ def build(run_name: str) -> dict:
                   'contact_count': len(atlas_contacts), 'contact_ids': sorted(ATLAS_CONTACTS)},
         'routing_source_flags': {'numeric_closure_component_count': family.get('numeric_closure_component_count'),
                                  'numeric_closure_component_ids': sorted(family.get('numeric_closure_component_ids', [])),
-                                 'interpretation': 'Inherited source-relative route flags only; not a new land-area measurement, cause, or authority finding.'},
+                                 'existing_fragment_area_sum_m2': family.get('exact_existing_fragment_area_sum_m2'),
+                                 'positive_length_neighbor_ids': sorted(family.get('complete_positive_length_neighbor_ids', [])),
+                                 'compatible_original_admin_component_ids': sorted(family.get('compatible_original_admin_component_ids', [])),
+                                 'source_fitness_required_compatible_land_component_ids': sorted(family.get('source_fitness_required_compatible_land_component_ids', [])),
+                                 'admin_status_counts': family.get('admin_status_counts'),
+                                 'contact_classification': contact_summary,
+                                 'interpretation': 'Inherited source-relative route flags and measurements only; not a new land-area measurement, cause, or authority finding.'},
         'source_join': {'product': 'geoBoundaries IDN ADM2', 'represented_year': 2020,
                         'source_feature_count': len(admin_features), 'unique_source_ids': len(admin_by_id),
                         'component_source_intersection_count': len(intersections), 'positive_area_intersection_count': positive,
                         'components_with_positive_area_source_intersection': len({f['properties']['component_id'] for f in intersections}),
                         'exact_geometry_preserved': True, 'repair_or_buffer_used': False,
                         'original_source_sha256': GEO_RAW_SHA, 'compressed_payload_sha256': GEO_GZIP_SHA},
+        'big_metadata': {'2022_ksp_layer': {'path': big22_path, **baseline.pins[big22_path],
+                                            'geometry_type': big22['geometryType'], 'wkid': big22['sourceSpatialReference']['wkid'],
+                                            'edition': '2022; revised December 2022', 'copyright_text': big22.get('copyrightText') or '',
+                                            'topology_warning_retained': True},
+                         '2023_rbi_layer': {'path': big23_path, **baseline.pins[big23_path],
+                                            'geometry_type': big23['geometryType'], 'wkid': big23['sourceSpatialReference']['wkid'],
+                                            'copyright_text': big23.get('copyrightText') or ''},
+                         'redistribution_license': 'not stated in inspected metadata',
+                         'big_geometry_downloaded_or_used': False},
         'raster_observation_method': 'Per-component all_touched pixel value histograms from pinned source rasters/crops; nodata excluded; counts are observations, not land-condition conclusions.',
         'raster_observations': raster_histograms,
         'source_shards': source_shards,
@@ -294,16 +357,29 @@ def build(run_name: str) -> dict:
     contact_features = [{'type': 'Feature', 'geometry': f['geometry'],
                          'properties': {'role': 'current_atlas_admin_contact', 'atlas_feature_id': f['id'],
                                         'atlas_name': f['properties'].get('name')}} for f in atlas_contacts]
+    all_features = component_features + contact_features + intersections + contact_intersections
+    generated_ids = [f['properties']['component_id'] for f in component_features]
+    contract.exact_rows([{'id': identity} for identity in generated_ids], sorted(ids))
+    missing_output_rejected = False
+    try:
+        contract.exact_rows([{'id': identity} for identity in generated_ids[1:]], sorted(ids))
+        raise ValueError('Generated-output completeness adverse control unexpectedly passed')
+    except ValueError as exc:
+        if 'unexpectedly passed' in str(exc): raise
+        missing_output_rejected = True
     outputs = {
         'assessment.json.gz': deterministic_gzip(canonical_json(assessment)),
-        'intersections.geojson.gz': deterministic_gzip(canonical_json({'type': 'FeatureCollection', 'features': component_features + contact_features + intersections + contact_intersections})),
+        'intersections.geojson.gz': deterministic_gzip(canonical_json({'type': 'FeatureCollection', 'features': all_features})),
         'positive-control.json': canonical_json({'method_id': 'source-fitness-generation', 'kind': 'positive-control', 'outcome': 'passed',
                                   'selected_components': len(ids), 'custody_joined_components': len(by_id),
                                   'source_features': len(admin_features), 'positive_area_intersections': positive,
-                                  'current_contact_features': len(atlas_contacts)}),
+                                  'current_contact_features': len(atlas_contacts), 'source_covered_components': len(coverage_rows),
+                                  'generated_component_features': len(generated_ids)}),
         'negative-control.json': canonical_json({'method_id': 'source-fitness-generation', 'kind': 'negative-control', 'outcome': 'passed',
                                   'missing_identity_rejected': True, 'duplicate_identity_rejected': True,
-                                  'fabricated_identity_rejected': True, 'method': 'exact_rows applied to actual source records'}),
+                                  'fabricated_identity_rejected': True, 'missing_raster_coverage_rejected': missing_coverage_rejected,
+                                  'missing_generated_component_rejected': missing_output_rejected,
+                                  'method': 'Exact identity/coverage checks applied to actual source and generated records'}),
     }
     records = dest.publish_bytes(outputs)
     return {'run': run_name, 'records': records, 'intersections': len(intersections), 'contacts': len(contact_intersections),

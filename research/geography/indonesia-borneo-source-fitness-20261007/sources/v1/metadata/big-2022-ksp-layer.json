@@ -1,0 +1,274 @@
+{
+ "currentVersion": 10.81,
+ "id": 2,
+ "name": "Peta Wilayah Administrasi Kabupaten/Kota (Area)",
+ "type": "Feature Layer",
+ "description": "Geodatabase data batas wilayah administrasi kabupaten/kota edisi tahun 2022 (revisi edisi Desember 2022) merupakan pemutakhiran dari geodatabase batas wilayah administrasi kabupaten/kota bulan Mei tahun 2021 revisi 1 . Proses pemutakhiran yang dilakukan antara lain pemutakhiran segmen batas daerah hasil kesepakatan dan yang telah ditetapkan melalui Permendagri, pemutakhiran garis pantai, penyesuaian alokasi wilayah administrasi di wilayah Papua. Sumber data yang digunakan untuk fitur batas wilayah administrasi polyline antara lain:(1) Data batas wilayah provinsi dan kabupaten/kota yang belum ditegaskan dari data peta Rupabumi Indonesia skala 1:25.000 dan 1:50.000; (2) Data batas wilayah administrasi kabupaten/kota yang belum ditegaskan hasil kegiatan ajudikasi batas kabupaten/kota tahun 2013 dan 2014; (3) Data batas daerah hasil kesepakatan yang bersumber dari data digital Kemendagri edisi April-Meil 2022 untuk wilayah Kalimantan, Jawa, Bali Nusa Tenggara, Maluku, dan Papua. Untuk wilayah Sumatera dan Sulawesi sampai dengan September 2022; (4) Data batas daerah yang telah ditetapkan dalam Peraturan Menteri Dalam Negeri. Sumber data yang digunakan untuk fitur wilayah administrasi antara lain: (1) Unsur batas wilayah administrasi kabupaten/kota (ADMINISTRASI_LN); (2) IGD Garis Pantai dari Pusat Pemetaan Kelautan dan Lingkungan Pantai edisi Tahun 2022, yang merupakan pemutakhiran garis pantai penetapan tahun 2021; (2) Data batas negara edisi Agustus 2018Data ini masih terdapat kesalahan topologi pada fitur ADMINISTRASI_LN yang disebabkan oleh garis batas wilayah yang telah ditetapkan dalam Permendagri saling overshoot.",
+ "geometryType": "esriGeometryPolygon",
+ "sourceSpatialReference": {
+  "wkid": 4326,
+  "latestWkid": 4326
+ },
+ "copyrightText": "",
+ "parentLayer": null,
+ "subLayers": [],
+ "minScale": 0,
+ "maxScale": 0,
+ "drawingInfo": {
+  "renderer": {
+   "type": "simple",
+   "symbol": {
+    "type": "esriSFS",
+    "style": "esriSFSSolid",
+    "color": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "outline": {
+     "type": "esriSLS",
+     "style": "esriSLSSolid",
+     "color": [
+      0,
+      0,
+      0,
+      255
+     ],
+     "width": 0.4
+    }
+   },
+   "label": "",
+   "description": ""
+  },
+  "transparency": 0,
+  "labelingInfo": null
+ },
+ "defaultVisibility": false,
+ "extent": {
+  "xmin": 94.97191104600006,
+  "ymin": -11.00761537699998,
+  "xmax": 141.02004178900006,
+  "ymax": 6.076832204000027,
+  "spatialReference": {
+   "wkid": 4326,
+   "latestWkid": 4326,
+   "vcsWkid": 115700,
+   "latestVcsWkid": 115700
+  }
+ },
+ "hasAttachments": false,
+ "htmlPopupType": "esriServerHTMLPopupTypeAsHTMLText",
+ "displayField": "namobj",
+ "typeIdField": null,
+ "subtypeFieldName": null,
+ "subtypeField": null,
+ "defaultSubtypeCode": null,
+ "fields": [
+  {
+   "name": "objectid",
+   "type": "esriFieldTypeOID",
+   "alias": "objectid",
+   "domain": null
+  },
+  {
+   "name": "namobj",
+   "type": "esriFieldTypeString",
+   "alias": "namobj",
+   "length": 250,
+   "domain": null
+  },
+  {
+   "name": "fcode",
+   "type": "esriFieldTypeString",
+   "alias": "fcode",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "remark",
+   "type": "esriFieldTypeString",
+   "alias": "remark",
+   "length": 250,
+   "domain": null
+  },
+  {
+   "name": "metadata",
+   "type": "esriFieldTypeString",
+   "alias": "metadata",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "srs_id",
+   "type": "esriFieldTypeString",
+   "alias": "srs_id",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "kdbbps",
+   "type": "esriFieldTypeString",
+   "alias": "kdbbps",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "kdcbps",
+   "type": "esriFieldTypeString",
+   "alias": "kdcbps",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "kdcpum",
+   "type": "esriFieldTypeString",
+   "alias": "kdcpum",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "kdebps",
+   "type": "esriFieldTypeString",
+   "alias": "kdebps",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "kdepum",
+   "type": "esriFieldTypeString",
+   "alias": "kdepum",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "kdpbps",
+   "type": "esriFieldTypeString",
+   "alias": "kdpbps",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "kdpkab",
+   "type": "esriFieldTypeString",
+   "alias": "kdpkab",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "kdppum",
+   "type": "esriFieldTypeString",
+   "alias": "kdppum",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "luaswh",
+   "type": "esriFieldTypeDouble",
+   "alias": "luaswh",
+   "domain": null
+  },
+  {
+   "name": "tipadm",
+   "type": "esriFieldTypeInteger",
+   "alias": "tipadm",
+   "domain": null
+  },
+  {
+   "name": "wadmkc",
+   "type": "esriFieldTypeString",
+   "alias": "wadmkc",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "wadmkd",
+   "type": "esriFieldTypeString",
+   "alias": "wadmkd",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "wadmkk",
+   "type": "esriFieldTypeString",
+   "alias": "wadmkk",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "wadmpr",
+   "type": "esriFieldTypeString",
+   "alias": "wadmpr",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "wiadkc",
+   "type": "esriFieldTypeString",
+   "alias": "wiadkc",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "wiadkk",
+   "type": "esriFieldTypeString",
+   "alias": "wiadkk",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "wiadpr",
+   "type": "esriFieldTypeString",
+   "alias": "wiadpr",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "wiadkd",
+   "type": "esriFieldTypeSmallInteger",
+   "alias": "wiadkd",
+   "domain": null
+  },
+  {
+   "name": "shape",
+   "type": "esriFieldTypeGeometry",
+   "alias": "shape",
+   "domain": null
+  }
+ ],
+ "geometryField": {
+  "name": "shape",
+  "type": "esriFieldTypeGeometry",
+  "alias": "shape"
+ },
+ "indexes": null,
+ "subtypes": [],
+ "relationships": [],
+ "canModifyLayer": true,
+ "canScaleSymbols": false,
+ "hasLabels": false,
+ "capabilities": "Map,Query,Data",
+ "maxRecordCount": 1000,
+ "supportsStatistics": true,
+ "supportsAdvancedQueries": true,
+ "supportedQueryFormats": "JSON, geoJSON",
+ "isDataVersioned": false,
+ "ownershipBasedAccessControlForFeatures": {"allowOthersToQuery": true},
+ "useStandardizedQueries": true,
+ "advancedQueryCapabilities": {
+  "useStandardizedQueries": true,
+  "supportsStatistics": true,
+  "supportsHavingClause": true,
+  "supportsCountDistinct": true,
+  "supportsOrderBy": true,
+  "supportsDistinct": true,
+  "supportsPagination": true,
+  "supportsTrueCurve": true,
+  "supportsReturningQueryExtent": true,
+  "supportsQueryWithDistance": true,
+  "supportsSqlExpression": true
+ },
+ "supportsDatumTransformation": true,
+ "supportsCoordinatesQuantization": true,
+ "serviceItemId": "1649965d18ac4871bfabff6a60975342"
+}
