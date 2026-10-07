@@ -29,7 +29,7 @@ export async function releaseInputs(repo,baseline,{storage,nativeStorage}={}){
  const native=loadSuccessor(repo,baseline,{storage:nativeStorage});
  const receiptRaw=input.read('data/reference-migrations/eastern-two-gap-repair-20261006/migration-receipt.json.gz');
  const receipt=input.object('data/reference-migrations/eastern-two-gap-repair-20261006/migration-receipt.json.gz');
- const relationships=receipt.relationships.flatMap(r=>{assert.equal(r.history_transfer,false);assert.equal(r.identity_pairs.length,1);return r.identity_pairs.map(p=>({...p,change_type:'retain',history_transfer:'none'}));});
+ const relationships=receipt.relationships.flatMap(r=>{assert.equal(r.history_transfer,false);assert.equal(r.identity_pairs.length,1);return r.identity_pairs.map(p=>({old_entity_id:p.before_id,new_entity_id:p.after_id,change_type:'retain',history_transfer:'none'}));});
  const result=await successorRelease({registry,memberships,changes,world:native.features,hierarchySha:sha(hierarchy),originalCatalogSha:sha(catalog),relationships,
   receiptSha:sha(receiptRaw),proposalCommit:'b4b7db357ba92d19df513f188bbd046fe66a35e4',releaseId:native.releaseId,sourceId:native.sourceId});
  return {registry,memberships,changes,sources:[...sources.values()],payloads,result,input_pins:input.pins(),native_pins:native.sourceFiles};

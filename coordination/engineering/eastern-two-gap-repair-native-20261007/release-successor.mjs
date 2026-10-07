@@ -4,6 +4,7 @@ import {createHash} from 'node:crypto';
 import {gzipSync} from 'node:zlib';
 import {geographicMembershipHash,geographicLocationIdsHash,geographicChangesHash} from '../../../hosted/geographic-releases.js';
 import {appendRelease} from '../../../scripts/install-macro-reference.mjs';
+import {footprintHash} from '../../../scripts/check-prepared.mjs';
 import {BEFORE,AFTER,TARGETS} from './native-producer.mjs';
 const json=x=>Buffer.from(JSON.stringify(x)+'\n'),sha=b=>createHash('sha256').update(b).digest('hex');
 const clone=x=>JSON.parse(JSON.stringify(x));
@@ -29,6 +30,7 @@ export async function validatePredecessor({registry,memberships,changes,hierarch
 export async function successorRelease({registry,memberships,changes,world,hierarchySha,originalCatalogSha,relationships,receiptSha,proposalCommit,releaseId,sourceId,referenceDate='2026-10-07'}){
  const old=await validatePredecessor({registry,memberships,changes,hierarchySha,originalCatalogSha});
  assert.equal(world.length,49625);const activeLocations=new Map(memberships.filter(m=>m.kind==='location'&&m.active===1).map(m=>[m.entity_id,m]));
+ assert.equal(footprintHash(world),AFTER,'Complete serialized successor geometry differs from approved footprint');
  assert.equal(activeLocations.size,world.length);assert.equal(new Set(world.map(f=>f.id)).size,world.length);
  for(const f of world){const m=activeLocations.get(f.id);assert(m,'Current selected location absent from original current members');assert.equal(m.parent_id,f.properties.parent_id,'Current selected parent changed');}
  assert.equal(relationships.length,2);assert.deepEqual(relationships.map(p=>p.old_entity_id).sort(),[...TARGETS].sort());
