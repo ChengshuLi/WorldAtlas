@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/coordination/engineering/numeric-partition-diagnosis-20261006/.cache/input-only-preflight.py", line 5, in <module>
+    report,objects,original_families,rows,family_refs,row_refs,rosters=load_complete_scientific_inputs(inputs,families)
+                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/coordination/engineering/numeric-partition-diagnosis-20261006/custody.py", line 126, in load_complete_scientific_inputs
+    check_rosters(rosters)
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/13630faa807843641a6abb3484134a94a87e5c38c2665c17f5c9742c84749ddf/work/coordination/engineering/numeric-partition-diagnosis-20261006/custody.py", line 71, in check_rosters
+    raise ValueError('Complete '+key+' scope/digest differs')
+ValueError: Complete unknown_components scope/digest differs
