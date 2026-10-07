@@ -172,9 +172,14 @@ def check_scratch_symlink_parents():
             ensure_scratch_roots()
         except ValueError:
             verifier_log_rejected = True
-        spec = importlib.util.spec_from_file_location("artigas_reproduction_harness", CONTROLS / "reproduce_corrected_runner.py")
-        harness = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(harness)
+        previous_bytecode = sys.dont_write_bytecode
+        sys.dont_write_bytecode = True
+        try:
+            spec = importlib.util.spec_from_file_location("artigas_reproduction_harness", CONTROLS / "reproduce_corrected_runner.py")
+            harness = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(harness)
+        finally:
+            sys.dont_write_bytecode = previous_bytecode
         harness.LOGS = link
         try:
             harness.ensure_scratch_roots()
