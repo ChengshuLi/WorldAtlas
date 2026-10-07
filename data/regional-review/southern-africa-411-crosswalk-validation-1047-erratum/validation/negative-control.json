@@ -1,0 +1,17 @@
+{
+  "method_id": "southern-africa-frozen-crosswalk-integrity",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "control_results_path": "data/regional-review/southern-africa-411-crosswalk-validation-1047-erratum/controls/2026-10-07/control-results.json",
+  "control_results_sha256": "49066a0c047d784a10192cffc45ae7cbdd0c5a87653a8fa77d24cfc21c00657a",
+  "expected_rejections": [
+    "missing-crosswalk-member",
+    "duplicate-crosswalk-member",
+    "foreign-crosswalk-replacement",
+    "extra-crosswalk-member",
+    "crosswalk-parent-mismatch",
+    "assessment-native-source-mismatch",
+    "assessment-parent-mismatch"
+  ],
+  "legacy_acceptance_reproduced": true
+}

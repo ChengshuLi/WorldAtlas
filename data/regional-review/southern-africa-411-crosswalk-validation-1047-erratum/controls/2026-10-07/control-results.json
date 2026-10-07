@@ -1,0 +1,123 @@
+{
+  "version": 1,
+  "issue": 1279,
+  "reproduced_at_utc": "2026-10-07T03:03:32.644Z",
+  "original_crosswalk_sha256": "70a1a813a415e6159d703a81be2e54af62fb7d638e5bd92f13449a970cc55d15",
+  "original_assessments_sha256": "9c08840cc0dd52d44f0efe5f03e67b4015607268d666b64efa4c300f1b859bb3",
+  "controls": [
+    {
+      "id": "missing-crosswalk-member",
+      "crosswalk_input_sha256": "aebe88277ce5c8eea37328b8d8c05f2315289af2be93253a37efec3da332d481",
+      "crosswalk_input_bytes": 257897,
+      "assessment_input_sha256": "1931b50cccfc86fc46e9cb3df8d8580f329e1f3c346b734f4887ff6f3732fdd4",
+      "assessment_input_bytes": 485780,
+      "assessment_hash_recomputed_to_actual_crosswalk": true,
+      "corrected_validator": {
+        "outcome": "rejected-before-success-output",
+        "diagnostic": "crosswalk.mjs:26\nconst fail = message => { throw new Error(message); };\n                                ^\n\nError: actual crosswalk row count differs from frozen scope\n    at fail (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/southern-africa-411-crosswalk-validation-1047-erratum/verify-crosswalk.mjs:26:33)\n    at check (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/southern-africa-411-crosswalk-validation-1047-erratum/verify-crosswalk.mjs:27:57)\n    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/southern-africa-411-crosswalk-validation-1047-erratum/verify-crosswalk.mjs:47:1\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.19.0"
+      },
+      "legacy_validator": {
+        "outcome": "accepted-invalid-222-row-crosswalk",
+        "output_path": "data/regional-review/southern-africa-411-crosswalk-validation-1047-erratum/controls/2026-10-07/missing-crosswalk-member/legacy-validator-result.json",
+        "output_sha256": "fb8263f3fc6226cba42f41b8640f13cc3f0c1fc0427f2d3cecb4b43b3cf5e7c0",
+        "output_scope_count": 223,
+        "output_crosswalk_rows": 222,
+        "output_unique_crosswalk_ids": 222,
+        "adapter_sha256": "8556be0d0922af26b6d64a6ab720bee7ad4e67cf1b41d50f977c9a6144a625dc",
+        "adapter_changes": "Only crosswalk/assessment input locators and the matching whole-crosswalk hash read were redirected to the exact mutated input files; original validation predicates are otherwise unchanged.",
+        "stdout_tail": "{\n  \"issue\": 411,\n  \"scope_count\": 223,\n  \"classifications\": {\n    \"justified\": 0,\n    \"correction-needed\": 1,\n    \"insufficient-evidence\": 222\n  },\n  \"sources_verified\": 8,\n  \"negative_controls\": {\n    \"fabricated_nonmember_rejected\": \"passed\",\n    \"wrong_expected_source_hash_rejected\": \"passed\"\n  }\n}"
+      }
+    },
+    {
+      "id": "duplicate-crosswalk-member",
+      "crosswalk_input_sha256": "3efc1df487df54f0b76e63cd28a73056b9f8854bd3b6ef012cdc07fa8ba8ff39",
+      "crosswalk_input_bytes": 259000,
+      "assessment_input_sha256": "779f9fb596a05efdddacf970d78a52e7723caeb393f0fed594ccb62ecb9fbc04",
+      "assessment_input_bytes": 485780,
+      "assessment_hash_recomputed_to_actual_crosswalk": true,
+      "corrected_validator": {
+        "outcome": "rejected-before-success-output",
+        "diagnostic": ".mjs:26\nconst fail = message => { throw new Error(message); };\n                                ^\n\nError: self-reported unique count differs from actual crosswalk rows\n    at fail (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/southern-africa-411-crosswalk-validation-1047-erratum/verify-crosswalk.mjs:26:33)\n    at check (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/southern-africa-411-crosswalk-validation-1047-erratum/verify-crosswalk.mjs:27:57)\n    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/southern-africa-411-crosswalk-validation-1047-erratum/verify-crosswalk.mjs:49:1\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.19.0"
+      },
+      "legacy_validator": {
+        "outcome": "not-run"
+      }
+    },
+    {
+      "id": "foreign-crosswalk-replacement",
+      "crosswalk_input_sha256": "05d28bb5fba95ff13c88577aa61f5e7b1a70edbfd5a923397aa7492239860292",
+      "crosswalk_input_bytes": 259011,
+      "assessment_input_sha256": "c00dbcc5cade77658baa94857cc52daccfc96e3d3db1a63f2ae8ed32de39793f",
+      "assessment_input_bytes": 485780,
+      "assessment_hash_recomputed_to_actual_crosswalk": true,
+      "corrected_validator": {
+        "outcome": "rejected-before-success-output",
+        "diagnostic": "mjs:26\nconst fail = message => { throw new Error(message); };\n                                ^\n\nError: crosswalk IDs do not exactly equal the frozen 223-member scope\n    at fail (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/southern-africa-411-crosswalk-validation-1047-erratum/verify-crosswalk.mjs:26:33)\n    at check (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/southern-africa-411-crosswalk-validation-1047-erratum/verify-crosswalk.mjs:27:57)\n    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/southern-africa-411-crosswalk-validation-1047-erratum/verify-crosswalk.mjs:56:1\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.19.0"
+      },
+      "legacy_validator": {
+        "outcome": "not-run"
+      }
+    },
+    {
+      "id": "extra-crosswalk-member",
+      "crosswalk_input_sha256": "0b8218aa3a5019c943360882397ce375d870a8b4dac5ed8ea927a2d6c10f45e3",
+      "crosswalk_input_bytes": 260117,
+      "assessment_input_sha256": "73d15a4406defc9ae59dbdd87ec866722e788ae93689dda4c34aeac0775c9298",
+      "assessment_input_bytes": 485780,
+      "assessment_hash_recomputed_to_actual_crosswalk": true,
+      "corrected_validator": {
+        "outcome": "rejected-before-success-output",
+        "diagnostic": "crosswalk.mjs:26\nconst fail = message => { throw new Error(message); };\n                                ^\n\nError: actual crosswalk row count differs from frozen scope\n    at fail (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/southern-africa-411-crosswalk-validation-1047-erratum/verify-crosswalk.mjs:26:33)\n    at check (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/southern-africa-411-crosswalk-validation-1047-erratum/verify-crosswalk.mjs:27:57)\n    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/southern-africa-411-crosswalk-validation-1047-erratum/verify-crosswalk.mjs:47:1\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.19.0"
+      },
+      "legacy_validator": {
+        "outcome": "not-run"
+      }
+    },
+    {
+      "id": "crosswalk-parent-mismatch",
+      "crosswalk_input_sha256": "936c32fc46ccf1202b41cd1948229156617e9349ad2c4215255c969c8ebfb0e3",
+      "crosswalk_input_bytes": 259015,
+      "assessment_input_sha256": "dfc5616be2c4bd23a052382dbd6056f6f92b60092ed35e238d783bf8404e34b7",
+      "assessment_input_bytes": 485780,
+      "assessment_hash_recomputed_to_actual_crosswalk": true,
+      "corrected_validator": {
+        "outcome": "rejected-before-success-output",
+        "diagnostic": "w new Error(message); };\n                                ^\n\nError: crosswalk assigned_parent_id differs from source/baseline for gb:AGO:ADM2:16411231B11923183554394\n    at fail (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/southern-africa-411-crosswalk-validation-1047-erratum/verify-crosswalk.mjs:26:33)\n    at check (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/southern-africa-411-crosswalk-validation-1047-erratum/verify-crosswalk.mjs:27:57)\n    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/southern-africa-411-crosswalk-validation-1047-erratum/verify-crosswalk.mjs:168:54\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.19.0"
+      },
+      "legacy_validator": {
+        "outcome": "not-run"
+      }
+    },
+    {
+      "id": "assessment-native-source-mismatch",
+      "crosswalk_input_sha256": "cb0eebb69abbc384943a84ab01d15a78ae6b58de4f35ace46c8f8d910edba2da",
+      "crosswalk_input_bytes": 259007,
+      "assessment_input_sha256": "4b514564c2ad66bf0132a76d99b65ad3111f8198d77a9b24306d61f2d1bd3002",
+      "assessment_input_bytes": 485774,
+      "assessment_hash_recomputed_to_actual_crosswalk": true,
+      "corrected_validator": {
+        "outcome": "rejected-before-success-output",
+        "diagnostic": "ror(message); };\n                                ^\n\nError: assessment source_native_id is not joined to its crosswalk/source for gb:AGO:ADM2:16411231B11923183554394\n    at fail (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/southern-africa-411-crosswalk-validation-1047-erratum/verify-crosswalk.mjs:26:33)\n    at check (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/southern-africa-411-crosswalk-validation-1047-erratum/verify-crosswalk.mjs:27:57)\n    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/southern-africa-411-crosswalk-validation-1047-erratum/verify-crosswalk.mjs:198:56\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.19.0"
+      },
+      "legacy_validator": {
+        "outcome": "not-run"
+      }
+    },
+    {
+      "id": "assessment-parent-mismatch",
+      "crosswalk_input_sha256": "cb0eebb69abbc384943a84ab01d15a78ae6b58de4f35ace46c8f8d910edba2da",
+      "crosswalk_input_bytes": 259007,
+      "assessment_input_sha256": "64c716ee7c9783f3afbabd789115428840d8595f8f3405687d854ac65d1bd5b6",
+      "assessment_input_bytes": 485788,
+      "assessment_hash_recomputed_to_actual_crosswalk": true,
+      "corrected_validator": {
+        "outcome": "rejected-before-success-output",
+        "diagnostic": "r(message); };\n                                ^\n\nError: assessment assigned_parent_id is not joined to its crosswalk/source for gb:AGO:ADM2:16411231B11923183554394\n    at fail (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/southern-africa-411-crosswalk-validation-1047-erratum/verify-crosswalk.mjs:26:33)\n    at check (file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/southern-africa-411-crosswalk-validation-1047-erratum/verify-crosswalk.mjs:27:57)\n    at file:///Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/8f318350dc4fa6b29381ffa44efed32ceca9f516e41dbf1fa72c7f6757517815/work/data/regional-review/southern-africa-411-crosswalk-validation-1047-erratum/verify-crosswalk.mjs:198:56\n    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)\n    at async node:internal/modules/esm/loader:643:26\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)\n\nNode.js v24.19.0"
+      },
+      "legacy_validator": {
+        "outcome": "not-run"
+      }
+    }
+  ],
+  "interpretation": "The old validator accepted the specific 222-row crosswalk after its actual input hash was recomputed. The superseding validator rejects the missing member and each directed identity, parent, duplicate, extra-row and assessment-correlation mutation before writing a success receipt."
+}
