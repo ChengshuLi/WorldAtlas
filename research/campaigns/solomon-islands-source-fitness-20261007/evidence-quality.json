@@ -1049,8 +1049,8 @@
   "outputs": [
     {
       "path": "research/campaigns/solomon-islands-source-fitness-20261007/README.md",
-      "bytes": 7769,
-      "sha256": "3741e742a65a2f6692e35c071e40bde6b65d05e16f882e9a10fae487a72b8019",
+      "bytes": 7954,
+      "sha256": "c9b281aeddc568bedc8372717bc5ed2f5f26775ea3ef94deeb1483cfeac8d533",
       "hash_kind": "file-bytes",
       "role": "generated-table"
     },
@@ -1084,8 +1084,8 @@
     },
     {
       "path": "research/campaigns/solomon-islands-source-fitness-20261007/verify.py",
-      "bytes": 30708,
-      "sha256": "c32c75b7267a9cc59b3991eec626cf11f5155b157bc2cbccb5961f205c1d4925",
+      "bytes": 31737,
+      "sha256": "02308688a2e9954b568a10659a6ecb03548848e340e77bc15b88bd111688bf81",
       "hash_kind": "file-bytes",
       "role": "method"
     }
@@ -1395,7 +1395,7 @@
     "geographic_approval": "unapproved"
   },
   "commands": [
-    "python3 research/campaigns/solomon-islands-source-fitness-20261007/verify.py --repo . --out-dir research/campaigns/solomon-islands-source-fitness-20261007",
+    "python3 research/campaigns/solomon-islands-source-fitness-20261007/verify.py --repo . --compare-dir research/campaigns/solomon-islands-source-fitness-20261007",
     "node scripts/evidence-quality.mjs {rel}/evidence-quality.json ."
   ],
   "change_receipts": [

@@ -59,11 +59,13 @@ Source fitness is **insufficient for finalizing or approving the approximately 2
 
 No source data was downloaded. The packet includes byte-identical copies of the retained 33,558-byte geoBoundaries product and the 26 queried GSHHG native records; all byte-level work used retained repository evidence. The official source pages were consulted only for product/version/license context. No broad imagery inspection, application/geography edit, source import or production action was performed.
 
+The verifier refuses to overwrite generated evidence. Use `--compare-dir` for a read-only reproduction check, or select a fresh empty output directory when creating a new vintage.
+
 Recreate the assessment and its controls from the immutable baseline:
 
 ```sh
 python3 research/campaigns/solomon-islands-source-fitness-20261007/verify.py \
-  --repo . --out-dir research/campaigns/solomon-islands-source-fitness-20261007
+  --repo . --compare-dir research/campaigns/solomon-islands-source-fitness-20261007
 node scripts/evidence-quality.mjs research/campaigns/solomon-islands-source-fitness-20261007/evidence-quality.json .
 ```
 

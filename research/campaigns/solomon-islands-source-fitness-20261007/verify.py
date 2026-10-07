@@ -274,8 +274,14 @@ def geometry_contacts(repo):
     return rows, positive, negative, METHOD, runtime, payload, decoded
 
 
-def build(repo, output_dir):
+def build(repo, output_dir, compare_dir=None):
     global batch_component_ids, wanted_sources
+    output_names = ('batch-context.json', 'native-source-records.bin', 'assessment.json',
+                    'geometry-positive-control.json', 'geometry-negative-control.json')
+    if compare_dir is None:
+        output_dir.mkdir(parents=True, exist_ok=True)
+        need(not any((output_dir / name).exists() for name in output_names),
+             'Refusing to overwrite generated evidence; choose a fresh output directory or use --compare-dir')
     report, bodies, route_inputs = route_bodies(repo)
     family_by_id = {row['id']: row for row in bodies['families']}
     batch_by_id = {row['id']: row for row in bodies['batches']}
@@ -469,15 +475,25 @@ def build(repo, output_dir):
             'No public source download or broad imagery inspection was performed.',
             'Full batch context is retained; classification conclusions are limited to the 12 issue subjects and five named contacts.']}
 
-    output_dir.mkdir(parents=True, exist_ok=True)
     context_path = output_dir / 'batch-context.json'
     context_bytes = (json.dumps(context, ensure_ascii=False, sort_keys=True, separators=(',', ':'), allow_nan=False)+'\n').encode()
-    context_path.write_bytes(context_bytes)
-    (output_dir / 'native-source-records.bin').write_bytes(native_records)
     analysis['batch_context_sha256'] = digest(context_bytes)
-    (output_dir / 'assessment.json').write_text(json.dumps(analysis, ensure_ascii=False, indent=2, allow_nan=False)+'\n')
-    (output_dir / 'geometry-positive-control.json').write_text(json.dumps(positive, ensure_ascii=False, indent=2)+'\n')
-    (output_dir / 'geometry-negative-control.json').write_text(json.dumps(negative, ensure_ascii=False, indent=2)+'\n')
+    generated = {
+        'batch-context.json': context_bytes,
+        'native-source-records.bin': native_records,
+        'assessment.json': (json.dumps(analysis, ensure_ascii=False, indent=2, allow_nan=False)+'\n').encode(),
+        'geometry-positive-control.json': (json.dumps(positive, ensure_ascii=False, indent=2)+'\n').encode(),
+        'geometry-negative-control.json': (json.dumps(negative, ensure_ascii=False, indent=2)+'\n').encode(),
+    }
+    if compare_dir is not None:
+        for name, expected in generated.items():
+            actual_path = compare_dir / name
+            need(actual_path.is_file() and actual_path.read_bytes() == expected,
+                 f'Reproduction differs from retained evidence: {actual_path}')
+    else:
+        for name, contents in generated.items():
+            with (output_dir / name).open('xb') as stream:
+                stream.write(contents)
     return analysis, context, route_inputs, physical_inputs
 
 
@@ -485,8 +501,10 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--repo', type=pathlib.Path, default=pathlib.Path(__file__).resolve().parents[2])
     parser.add_argument('--out-dir', type=pathlib.Path, default=pathlib.Path(__file__).resolve().parent)
+    parser.add_argument('--compare-dir', type=pathlib.Path,
+                        help='Compare regenerated outputs with an existing evidence directory without writing files')
     args = parser.parse_args()
-    analysis, context, route_inputs, physical_inputs = build(args.repo, args.out_dir)
+    analysis, context, route_inputs, physical_inputs = build(args.repo, args.out_dir, args.compare_dir)
     print(json.dumps({'status':'passed', 'baseline_commit':BASELINE, 'scoped_components':analysis['counts']['scoped_components'],
         'context_families':analysis['counts']['context_batch_families'], 'context_components':analysis['counts']['context_batch_components'],
         'context_physical_rows':analysis['counts']['context_physical_rows'], 'native_source_rows':analysis['counts']['context_native_source_rows'],
