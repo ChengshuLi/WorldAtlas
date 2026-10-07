@@ -26,8 +26,12 @@ def descriptor(name, raw):
 
 def exclusive(name, value):
     path = P / name
-    if path.exists() or path.is_symlink():
-        raise ValueError('Fresh manifest support artifact required')
+    if path.is_symlink():
+        raise ValueError('Ordinary manifest support artifact required')
+    if path.exists():
+        if path.read_bytes() != canonical(value):
+            raise ValueError('Actual retained typed receipt drift')
+        return
     path.write_bytes(canonical(value))
 
 
@@ -126,8 +130,8 @@ def main():
                 'change_receipts': [{'path': name, 'status': 'added'} for name in changed]}
     if len(baseline) + len(outputs) + sum(len(s.get('files', [])) for s in sources) > 512:
         raise ValueError('Flat ordinary evidence descriptor cap')
-    if (P / 'evidence-quality.json').exists():
-        raise ValueError('Fresh evidence manifest required')
+    if (P / 'evidence-quality.json').is_symlink():
+        raise ValueError('Ordinary candidate manifest required')
     (P / 'evidence-quality.json').write_bytes(canonical(manifest))
     print(json.dumps({'manifest': N + 'evidence-quality.json', 'ordinary_baseline_files': len(baseline), 'candidate_outputs': len(outputs), 'metrics': len(metrics), 'changed_files': len(changed), 'private_archive_ordinary_descriptor': False}))
 
