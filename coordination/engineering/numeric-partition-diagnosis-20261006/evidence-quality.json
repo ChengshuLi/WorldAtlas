@@ -48,6 +48,12 @@
         "hash_kind": "file-bytes",
         "path": "scripts/evidence/immutable.py",
         "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd"
+      },
+      {
+        "bytes": 11565,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/retired-member-comparison-1255-20261006/verify.py",
+        "sha256": "598a0bcbf0c547fbccb52116fbca90d645c1a72cd39a179911878f3194afc3b3"
       }
     ],
     "pin_files": {
@@ -223,6 +229,10 @@
       "status": "added"
     },
     {
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/predecessor-verify-import-custody.json",
+      "status": "added"
+    },
+    {
       "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/reproducibility.json",
       "status": "added"
     },
@@ -336,16 +346,16 @@
   ],
   "outputs": [
     {
-      "bytes": 3515,
+      "bytes": 4048,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/numeric-partition-diagnosis-20261006/README.md",
-      "sha256": "561fe68ee18edd179b82fae759da7c1f9bc82e798895be74183843212211740d"
+      "sha256": "a136b980d0677718b6487a85162c33e237dfe045723a5f05156e93c471002d6d"
     },
     {
-      "bytes": 14156,
+      "bytes": 14720,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/numeric-partition-diagnosis-20261006/controls.py",
-      "sha256": "4d05413ba18bee9bdca3878863c5385d3f441943f69d6795ac75f44465b6b059"
+      "sha256": "6174ca8d5cbf2241f11c8b6c08666a0b85474a9f022f5de78acc30de0e38c650"
     },
     {
       "bytes": 11581,
@@ -360,10 +370,10 @@
       "sha256": "7c83ea2380a160c6892a668aa7372004dc4469d29e3e622bfa7f2336c7ee8d95"
     },
     {
-      "bytes": 11426,
+      "bytes": 13129,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/numeric-partition-diagnosis-20261006/package.py",
-      "sha256": "119c95e95d26a9a48dc70b89be5c1a5baa2f8f5676068c996972706318771c50"
+      "sha256": "f8629aba8b9beb3aa764d3110b7e064fb5daa8f516396685dfbde8068e0e679a"
     },
     {
       "bytes": 8276,
@@ -372,10 +382,10 @@
       "sha256": "31687d148d8b66b1f238de17f9c2e77210249c8a9506359a7b0bd9d745ec8ba6"
     },
     {
-      "bytes": 1907,
+      "bytes": 1951,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/numeric-partition-diagnosis-20261006/progress.json",
-      "sha256": "95cab851653608a0fbad98e584fa2de5ba5064d0cdb26b42f49bd3839297acc5"
+      "sha256": "40ebdd9c62f627f4bbd256ae43f14380eab573bedea478b09a4f7b88f579f0a4"
     },
     {
       "bytes": 948036,
@@ -548,10 +558,10 @@
       "sha256": "72dbf13fb3837e6b2a0301b9e31c44c6662c558db88686b3d248c32c1118e304"
     },
     {
-      "bytes": 2059,
+      "bytes": 2155,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/controls.json",
-      "sha256": "9ddc2568a48f74a3f6d590c05a4c3f409e1b7fcfd3753bf27eeec00774620a0e"
+      "sha256": "61531725f15a8bb8ee26f0143a03797d3b932a1f4705808d512691638093c192"
     },
     {
       "bytes": 1326,
@@ -596,16 +606,22 @@
       "sha256": "8f29af3ebbd2505ec89aba1942607ceb7b194965c7b10bbc833304e5fbe7d206"
     },
     {
-      "bytes": 2231,
+      "bytes": 2327,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/negative-control.json",
-      "sha256": "53c464715e8aa742f3f34d854060fb9225d834080d735160147fa75476d98757"
+      "sha256": "318d5eaa2934eda5acc96e2f6006282deb721d103eeb6ee78743e0b2847f8403"
     },
     {
       "bytes": 2878,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/positive-control.json",
-      "sha256": "d164731e20ee3d94c32d7c5383b6b86b993da0b3fea666765627bf4ecc6ac4a5"
+      "sha256": "e9cf1b756c3d8468df7b0d7baa45003c5bbdcc80de20a6f3067928b13fedb424"
+    },
+    {
+      "bytes": 1938,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verification/predecessor-verify-import-custody.json",
+      "sha256": "e4a45da1ee3f502f2363eb1d397cdd14ee246e0ebc78d3c6d8d116eee1d55ed1"
     },
     {
       "bytes": 1343,
@@ -632,10 +648,10 @@
       "sha256": "1dea79ff85361f7b6b4dbefedd22f0d7eb96f7be0cdab1fd9ba9180d88555612"
     },
     {
-      "bytes": 10353,
+      "bytes": 10380,
       "hash_kind": "file-bytes",
       "path": "coordination/engineering/numeric-partition-diagnosis-20261006/verify.py",
-      "sha256": "c3dc7ff793dd84a4c093f1fcee1f53b9e7126974de503246e4ba11dde80551b5"
+      "sha256": "5e1989111a7a9776f96f08b54331cb86b37ee83cfa36bc3e2066e2569be52473"
     }
   ],
   "sources": [
@@ -1274,7 +1290,7 @@
         "terms": "Previously retained repository and derivative bytes; complete original citation/use terms retained. Underlying government Direct Permission remains unverified, not a new permission claim."
       },
       "retention": "retained",
-      "retrieved_at": "2026-10-07T02:16:08.755097+00:00",
+      "retrieved_at": "2026-10-07T02:30:31.567428+00:00",
       "role": "Complete original component/source/member/context bytes and accepted full diagnostic pointsets, including exact whole archive encoded/decoded fragmentation and original attribution.",
       "temporal_status": "reference",
       "url": "https://github.com/ChengshuLi/WorldAtlas/issues/1255",

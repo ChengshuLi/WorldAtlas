@@ -42,6 +42,15 @@ def package():
     (v/'failed-input-only-declared-algorithm.log').write_bytes((P/'.cache/failed-input-only-incorrect-declared-digest-algorithm.log').read_bytes())
     write('failed-input-only-declared-algorithm.json',{'status':'preserved-failed-input-only-attempt','failure':'Issue prose said LF-joined identifiers; all five unchanged acceptance digests actually encode canonical JSON arrays with final LF. Complete ordinary reconstruction verified the latter; issue prose was narrowly corrected.','counted_scientific_run':False,'original_scope_counts_or_digest_values_changed':False})
     write('executions.json',json.loads((P/'.cache/executions.json').read_bytes()))
+    helper_path=custody.OLD_PREFIX+'/verify.py'
+    if (R/helper_path).is_symlink()or not (R/helper_path).is_file():raise ValueError('Ordinary actual reused verifier required')
+    helper=(R/helper_path).read_bytes();helper_versions=[]
+    for commit in [BASE,FREEZE,'72cf68907e13240d741d5965806f10a1d119664a']:
+        frozen=subprocess.check_output(['git','show',commit+':'+helper_path],cwd=R)
+        tree=subprocess.check_output(['git','ls-tree',commit,'--',helper_path],cwd=R,text=True).split()
+        if frozen!=helper or tree[0]!='100644':raise ValueError('Original reused verifier body/mode differs')
+        helper_versions.append({'commit':commit,'path':helper_path,'mode':tree[0],'git_blob_oid':tree[2],'bytes':len(helper),'sha256':SHA(helper),'whole_payload_equals_actual_local_helper':True})
+    write('predecessor-verify-import-custody.json',{'status':'supplemental-ordinary-executed-helper-custody','actual_check_time':NOW,'actual_local_helper_path':helper_path,'bytes':len(helper),'sha256':SHA(helper),'frozen_byte_and_mode_bindings':helper_versions,'used_functions':['normalized_diagnostic','validate_diagnostic'],'original_author_replay_import_registry_omitted_this_helper':True,'original_replay_receipt_preserved_unchanged':'verification/full-readback-one.json','not_a_retroactive_claim':'The original registry-derived capsule did not capture this manually loaded module. This supplemental whole byte/mode/OID comparison authenticates the unchanged ordinary helper; corrected verifier registers the module for future execution capture.','numerical_producer_or_scientific_output_changed':False})
     for name in ['complete-reason-and-consensus-aggregation.json','complete-dimension-and-example-aggregation.json']:
         write(name,json.loads((P/'.cache'/name).read_bytes()))
     # Complete evidence buckets retain all cases and all intact family contexts.
@@ -61,6 +70,7 @@ def package():
         if SHA(b)!=h:raise ValueError('Required immutable baseline differs')
         baseline.append({**descriptor(path,b),'role':'original-source'});pin_files[name]=path
     imported={row['path']:row for row in report['actual_executed_project_modules']+full['actual_replay_modules']}
+    imported[helper_path]={'path':helper_path,'bytes':len(helper),'sha256':SHA(helper)}
     for module in imported.values():
         if module['path'].startswith(PREFIX+'/'):continue
         b=subprocess.check_output(['git','show',BASE+':'+module['path']],cwd=R)

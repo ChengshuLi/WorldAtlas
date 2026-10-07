@@ -6,7 +6,7 @@ import custody,numeric_kernel
 from custody import canon,SHA,load_original_inputs,load_complete_scientific_inputs,check_rosters
 import importlib.util
 spec=importlib.util.spec_from_file_location('predecessor_verify',custody.R/custody.OLD_PREFIX/'verify.py')
-old=importlib.util.module_from_spec(spec);spec.loader.exec_module(old)
+old=importlib.util.module_from_spec(spec);sys.modules[spec.name]=old;spec.loader.exec_module(old)
 from evidence.immutable import safe_path
 
 

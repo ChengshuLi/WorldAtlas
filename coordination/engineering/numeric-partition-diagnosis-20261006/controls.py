@@ -127,6 +127,11 @@ def run():
     def dirty_read(path):return original_read(path)+b'\n# directed executed-code mutation\n' if path==module else original_read(path)
     with patch.object(pathlib.Path,'read_bytes',dirty_read):
         reject('executed-code-byte-mutation',lambda:authenticate_executed_modules(custody.R,commit,[str(module.relative_to(custody.R))]))
+    assert sys.modules['predecessor_verify'].__file__==str(custody.R/custody.OLD_PREFIX/'verify.py');passed.append('manual-verifier-import-registered-for-byte-custody')
+    helper=custody.R/custody.OLD_PREFIX/'verify.py'
+    def dirty_helper(path):return original_read(path)+b'\n# directed helper mutation\n' if path==helper else original_read(path)
+    with patch.object(pathlib.Path,'read_bytes',dirty_helper):
+        reject('original-imported-verifier-byte-mutation',lambda:authenticate_executed_modules(custody.R,commit,[str(helper.relative_to(custody.R))]))
     return {'directed_controls':len(passed),'passed':passed,'limits':['Small directed fixtures only; no complete current dataset result or source authority is certified.']}
 
 if __name__=='__main__':print(json.dumps(run(),sort_keys=True))
