@@ -22,6 +22,8 @@ FAMILY = 'gap-source-batch:8875fd920e43656b5f36e704'
 FAMILY_SHA = 'a08249214711d84d7d220a61fe10f2d4582e7bc64f1a5ae811436ddaf22d94b3'
 INDEX_PATH = 'coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json'
 INDEX_SHA = 'dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c'
+REPORT_PATH = 'coordination/engineering/global-actionability-routing-20261007/results/report.json'
+FAMILY_PART_PATH = 'coordination/engineering/global-actionability-routing-20261007/results/families-007.bin.gz'
 GEO_PATH = 'coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-IDN-ADM2-000.bin.gz'
 GEO_GZIP_SHA = 'ef394916ba97454b5592e66eba1df67199731ce7d9636cc3968843801ae904a8'
 GEO_RAW_SHA = '146653d488331086ddc43d159a261b01ea6dd08c7ed422e34a9886c3c690430c'
@@ -88,13 +90,25 @@ def build(run_name: str) -> dict:
     component_aliases = [a for a in index['aliases'] if '/components-v3/components-' in a['original']['path']]
     if len(component_aliases) != 11:
         raise ValueError('Expected the complete 11-shard component-v3 inventory')
+    source_vintage_paths = {
+        INDEX_PATH, REPORT_PATH, FAMILY_PART_PATH, GEO_PATH,
+        'data/geography/part-10.json', 'data/location-policy.json', 'data/world-index.json',
+        *[a['payload'] for a in component_aliases],
+    }
+    for path in source_vintage_paths:
+        if git_bytes(commit, path) != git_bytes(evaluation_commit, path):
+            raise ValueError('Pinned source input differs from current origin/main: ' + path)
     restore_paths = [RESTORE_RECEIPT.as_posix()] + [
         (RESTORE_ROOT / Path(a['original']['path']).name.removesuffix('.gz')).as_posix()
         for a in component_aliases]
     pin_paths = {
         INDEX_PATH,
+        REPORT_PATH,
+        FAMILY_PART_PATH,
         GEO_PATH,
         'data/geography/part-10.json',
+        'data/location-policy.json',
+        'data/world-index.json',
         'scripts/evidence/immutable.py',
         'scripts/evidence/contracts.py',
         (SOURCE / 'produce.py').as_posix(),
@@ -369,7 +383,8 @@ def build(run_name: str) -> dict:
 
     assessment = {
         'version': 1,
-        'baseline_commit': evaluation_commit,
+        'baseline_commit': commit,
+        'upstream_source_commit': evaluation_commit,
         'family_id': FAMILY,
         'family_raw_line_sha256': FAMILY_SHA,
         'scope': {'component_count': len(ids), 'roster_sha256': '88831aad22806bf4f461197a12cb8309bf9a0139e5bd82b967a55e8255ad26ec',
