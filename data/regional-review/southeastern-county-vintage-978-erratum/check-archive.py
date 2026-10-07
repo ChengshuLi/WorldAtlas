@@ -1,100 +1,29 @@
 #!/usr/bin/env python3
-"""Reproduce the retained #1162 descriptor and ZIP-member admission arithmetic."""
-from __future__ import annotations
-
-import argparse
-import hashlib
-import importlib.util
-import io
-import json
+"""Verify the retained Census ZIP and write one exclusive, symlink-safe receipt."""
+import argparse, hashlib, importlib.util, json, re, sys, zipfile
 from pathlib import Path
-import sys
-import zipfile
-
 ROOT = Path(__file__).resolve().parents[3]
 OWNED = "data/regional-review/southeastern-county-vintage-978-erratum/"
-PACKET = ROOT / OWNED
-ZIP_PATH = "data/regional-review/regional-review-599d6fe712bbbcae/sources/census-2018-cartographic-boundaries/cb_2018_us_county_500k.zip"
-EXPECTED_BASELINE = "a1cf4cd86fd07d00ae592b4705e4b39f50628df7"
-EXPECTED_ORIGINAL_DESCRIPTORS = 26
-EXPECTED_ORIGINAL_BYTES = 65550965
-EXPECTED_DECODED_ZIP_BYTES = 17480047
-RESERVE_BYTES = 8 * 1024 * 1024
-PER_FILE_LIMIT = 32 * 1024 * 1024
-
-
-def sha(raw):
-    return hashlib.sha256(raw).hexdigest()
-
-
+def sha(raw): return hashlib.sha256(raw).hexdigest()
 def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--script-sha256", required=True)
-    parser.add_argument("--inventory-sha256", required=True)
-    args = parser.parse_args()
-    script = Path(__file__).read_bytes()
-    inventory_path = PACKET / "baseline-inventory.json"
-    inventory_raw = inventory_path.read_bytes()
-    if sha(script) != args.script_sha256 or sha(inventory_raw) != args.inventory_sha256:
-        raise SystemExit("Archive check code/inventory differs from explicit pins")
-    inventory = json.loads(inventory_raw)
-    if inventory["commit"] != EXPECTED_BASELINE or inventory["original_1162_descriptor_count"] != EXPECTED_ORIGINAL_DESCRIPTORS:
-        raise SystemExit("Wrong immutable baseline or original descriptor count")
-    if sum(f["bytes"] for f in inventory["files"][:EXPECTED_ORIGINAL_DESCRIPTORS]) != EXPECTED_ORIGINAL_BYTES:
-        raise SystemExit("Original #1162 encoded size differs from the checked issue admission")
-    sys.path.insert(0, str(ROOT))
-    from scripts.evidence.immutable import Baseline
-    baseline = Baseline(ROOT, inventory["commit"], inventory["files"])
-    raw = baseline.read(ZIP_PATH)
-    members = []
-    with zipfile.ZipFile(io.BytesIO(raw)) as archive:
-        for info in archive.infolist():
-            if info.is_dir():
-                continue
-            name = info.filename
-            if name.startswith("/") or ".." in Path(name).parts or "\\" in name:
-                raise ValueError(f"Unsafe ZIP member name: {name}")
-            data = archive.read(info)
-            if len(data) > PER_FILE_LIMIT:
-                raise ValueError(f"ZIP member exceeds per-file cap: {name}")
-            members.append({"path":name,"encoded_bytes":info.compress_size,"decoded_bytes":len(data),"sha256":sha(data)})
-    decoded_total = sum(item["decoded_bytes"] for item in members)
-    if decoded_total != EXPECTED_DECODED_ZIP_BYTES or max(item["decoded_bytes"] for item in members) >= PER_FILE_LIMIT:
-        raise ValueError("ZIP decoded size or member cap differs from the checked issue admission")
-    result = {
-        "version": 1,
-        "baseline_commit": baseline.commit,
-        "reproduction_script_sha256": sha(script),
-        "immutable_reader_sha256": next(f["sha256"] for f in inventory["files"] if f["path"] == "scripts/evidence/immutable.py"),
-        "original_1162_descriptor_count": EXPECTED_ORIGINAL_DESCRIPTORS,
-        "original_1162_encoded_bytes": EXPECTED_ORIGINAL_BYTES,
-        "zip_path": ZIP_PATH,
-        "zip_sha256": sha(raw),
-        "zip_encoded_bytes": len(raw),
-        "member_count": len(members),
-        "decoded_member_bytes": decoded_total,
-        "largest_decoded_member_bytes": max(item["decoded_bytes"] for item in members),
-        "member_limit_bytes": PER_FILE_LIMIT,
-        "all_members_below_32_mib": True,
-        "members": members,
-        "reserve_bytes": RESERVE_BYTES,
-        "original_encoded_plus_decoded_zip_plus_reserve_bytes": EXPECTED_ORIGINAL_BYTES + decoded_total + RESERVE_BYTES,
-        "evidence_caps": {"single_file_bytes":PER_FILE_LIMIT,"total_descriptor_bytes":256*1024*1024,"descriptor_count":512},
-    }
-    encoded = (json.dumps(result, sort_keys=True, indent=2) + "\n").encode()
-    relative = OWNED + "archive-admission-reproduction.json"
-    target = PACKET / "archive-admission-reproduction.json"
-    if target.exists():
-        if target.read_bytes() != encoded:
-            raise FileExistsError("Refusing to replace an existing archive-admission reproduction")
-    else:
-        root = ROOT / relative
-        root.parent.mkdir(parents=True, exist_ok=True)
-        with root.open("xb") as stream:
-            stream.write(encoded)
-            stream.flush()
-    print(json.dumps({"output":relative,"sha256":sha(encoded),"members":len(members),"decoded_bytes":decoded_total,"admitted_bytes":result["original_encoded_plus_decoded_zip_plus_reserve_bytes"]},sort_keys=True))
-
-
-if __name__ == "__main__":
-    main()
+    ap=argparse.ArgumentParser()
+    ap.add_argument('--script-sha256',required=True); ap.add_argument('--inventory-sha256',required=True); ap.add_argument('--runner-sha256',required=True)
+    a=ap.parse_args(); script=Path(__file__).read_bytes(); invp=ROOT/(OWNED+'baseline-inventory-v2.json'); runnerp=ROOT/(OWNED+'reproduce-v2.py')
+    if sha(script)!=a.script_sha256 or sha(invp.read_bytes())!=a.inventory_sha256 or sha(runnerp.read_bytes())!=a.runner_sha256: raise SystemExit('explicit code/inventory pin mismatch')
+    inventory=json.loads(invp.read_bytes());
+    spec=importlib.util.spec_from_file_location('reproduce_v2',runnerp); runner=importlib.util.module_from_spec(spec); spec.loader.exec_module(runner)
+    ziprow=next(x for x in inventory['files'] if x['path'].endswith('cb_2018_us_county_500k.zip'))
+    sys.path.insert(0,str(ROOT)); from scripts.evidence.immutable import Baseline
+    base=Baseline(ROOT,inventory['commit'],inventory['files']); raw=base.read(ziprow['path'])
+    if sha(raw)!=ziprow['sha256']: raise SystemExit('ZIP differs from immutable inventory')
+    members=[]
+    with zipfile.ZipFile(__import__('io').BytesIO(raw)) as archive:
+        names=archive.namelist()
+        if len(names)!=7 or len(names)!=len(set(names)): raise SystemExit('Unexpected ZIP member inventory')
+        for name in names:
+            if name.startswith('/') or '..' in Path(name).parts or '\\' in name: raise SystemExit('Unsafe ZIP member path')
+            data=archive.read(name); members.append({'path':name,'encoded_bytes':archive.getinfo(name).compress_size,'decoded_bytes':len(data),'sha256':sha(data)})
+    result={'version':2,'issue':1252,'baseline_commit':base.commit,'zip_path':ziprow['path'],'zip_sha256':sha(raw),'zip_encoded_bytes':len(raw),'inventory_sha256':a.inventory_sha256,'runner_sha256':a.runner_sha256,'reproduction_script_sha256':a.script_sha256,'members':members,'member_count':len(members),'decoded_member_bytes':sum(x['decoded_bytes'] for x in members),'largest_decoded_member_bytes':max(x['decoded_bytes'] for x in members),'member_limit_bytes':33554432,'all_members_below_32_mib':all(x['decoded_bytes']<33554432 for x in members),'original_1162_descriptor_count':inventory['original_1162_descriptor_count'],'original_1162_encoded_bytes':inventory['original_1162_encoded_bytes'],'reserve_bytes':8388608,'original_encoded_plus_decoded_zip_plus_reserve_bytes':inventory['original_1162_encoded_bytes']+sum(x['decoded_bytes'] for x in members)+8388608,'evidence_caps':{'single_file_bytes':33554432,'total_descriptor_bytes':268435456,'descriptor_count':512}}
+    out=(json.dumps(result,sort_keys=True,indent=2)+'\n').encode(); runner.exclusive_write(ROOT,OWNED+'archive-admission-reproduction.json',out)
+    print(json.dumps({'path':OWNED+'archive-admission-reproduction.json','sha256':sha(out),'members':len(members)}))
+if __name__=='__main__': main()
