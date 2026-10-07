@@ -1,0 +1,302 @@
+[
+  {
+    "window": "2019-wet",
+    "page": 1,
+    "endpoint": "https://earth-search.aws.element84.com/v1/search",
+    "request": {
+      "collections": [
+        "sentinel-2-l2a"
+      ],
+      "bbox": [
+        18.42566188925082,
+        -18.0421,
+        20.943746679773703,
+        -17.399540716612382
+      ],
+      "datetime": "2019-01-01T00:00:00Z/2019-03-31T23:59:59Z",
+      "query": {
+        "eo:cloud_cover": {
+          "lt": 20
+        }
+      },
+      "limit": 1000
+    },
+    "retrieved_at": "2026-10-07T09:16:42.993685+00:00",
+    "http_status": 200,
+    "response_headers": {
+      "Content-Type": "application/geo+json; charset=utf-8",
+      "Content-Length": "2036499",
+      "Date": "Wed, 07 Oct 2026 09:16:42 GMT",
+      "x-amzn-RequestId": "a4341b44-ebdd-4714-ae70-7736de03b207",
+      "etag": "W/\"1f1313-1Lk+cDI8s93vCIa9gcVPlsEBIgc\"",
+      "X-Amz-Cf-Id": "awzcl9vbQ3GUe4vs7W6CtINQ3ZHVyo_I0vS0X-XPxp2LofthkU3ohA=="
+    },
+    "bytes": 2036499,
+    "sha256": "57f6c9afed6de0179df52e7bcf1d9a765a05a328c874055de79bd0d4fcae949c",
+    "item_count": 52,
+    "response_path": "inputs/earth-search-stac-2019-wet-page-01.json"
+  },
+  {
+    "window": "2019-wet",
+    "page": 2,
+    "endpoint": "https://earth-search.aws.element84.com/v1/search",
+    "request": {
+      "datetime": "2019-01-01T00:00:00Z/2019-03-31T23:59:59Z",
+      "query": {
+        "eo:cloud_cover": {
+          "lt": 20
+        }
+      },
+      "collections": [
+        "sentinel-2-l2a"
+      ],
+      "bbox": [
+        18.42566188925082,
+        -18.0421,
+        20.943746679773703,
+        -17.399540716612382
+      ],
+      "limit": 1000,
+      "next": "2019-01-19T08:55:23.561000Z,S2B_34KCF_20190119_0_L2A,sentinel-2-l2a"
+    },
+    "retrieved_at": "2026-10-07T09:16:43.174071+00:00",
+    "http_status": 200,
+    "response_headers": {
+      "Content-Type": "application/geo+json; charset=utf-8",
+      "Content-Length": "277",
+      "Date": "Wed, 07 Oct 2026 09:16:43 GMT",
+      "x-amzn-RequestId": "4065d7a4-dca3-491a-8e88-d06d842175b3",
+      "etag": "W/\"115-yGwdMx641ppmyr2AK4a2+r9bqcc\"",
+      "X-Amz-Cf-Id": "lVhhoWYKvDheEZs_hIM19Ohs6qQSHQRIJSAfkwcY-LAud5tkVNbmDg=="
+    },
+    "bytes": 277,
+    "sha256": "944e8474b2073861bac92e58a7ba34d8ff25c6b958c4ad98abb4775ce5ee07cc",
+    "item_count": 0,
+    "response_path": "inputs/earth-search-stac-2019-wet-page-02.json"
+  },
+  {
+    "window": "2019-dry",
+    "page": 1,
+    "endpoint": "https://earth-search.aws.element84.com/v1/search",
+    "request": {
+      "collections": [
+        "sentinel-2-l2a"
+      ],
+      "bbox": [
+        18.42566188925082,
+        -18.0421,
+        20.943746679773703,
+        -17.399540716612382
+      ],
+      "datetime": "2019-08-01T00:00:00Z/2019-10-31T23:59:59Z",
+      "query": {
+        "eo:cloud_cover": {
+          "lt": 20
+        }
+      },
+      "limit": 1000
+    },
+    "retrieved_at": "2026-10-07T09:16:44.024653+00:00",
+    "http_status": 200,
+    "response_headers": {
+      "Content-Type": "application/geo+json; charset=utf-8",
+      "Content-Length": "3336608",
+      "Date": "Wed, 07 Oct 2026 09:16:43 GMT",
+      "x-amzn-RequestId": "bd9f1a60-8ccc-4133-bcb6-b35dbf8987ef",
+      "etag": "W/\"32e9a0-lEP1T/0XqEOm99XEAq6cmUrU2ac\"",
+      "X-Amz-Cf-Id": "ZQWxeQbcVVlS0BqlZY0Soc6IoeTNjQWQtmkSVSxn4axhzeMN24gvjA=="
+    },
+    "bytes": 3336608,
+    "sha256": "796c89d793ac264150ac7ea17d514c9483385f760b64e31c11d2908dd23650ab",
+    "item_count": 156,
+    "response_path": "inputs/earth-search-stac-2019-dry-page-01.json"
+  },
+  {
+    "window": "2019-dry",
+    "page": 2,
+    "endpoint": "https://earth-search.aws.element84.com/v1/search",
+    "request": {
+      "datetime": "2019-08-01T00:00:00Z/2019-10-31T23:59:59Z",
+      "query": {
+        "eo:cloud_cover": {
+          "lt": 20
+        }
+      },
+      "collections": [
+        "sentinel-2-l2a"
+      ],
+      "bbox": [
+        18.42566188925082,
+        -18.0421,
+        20.943746679773703,
+        -17.399540716612382
+      ],
+      "limit": 1000,
+      "next": "2019-08-02T08:55:25.378000Z,S2A_34KDF_20190802_0_L2A,sentinel-2-l2a"
+    },
+    "retrieved_at": "2026-10-07T09:16:44.178475+00:00",
+    "http_status": 200,
+    "response_headers": {
+      "Content-Type": "application/geo+json; charset=utf-8",
+      "Content-Length": "279",
+      "Date": "Wed, 07 Oct 2026 09:16:44 GMT",
+      "x-amzn-RequestId": "9d2da680-87fe-469e-9165-0e5c70862af9",
+      "etag": "W/\"117-S6nEPEzOOVeXgF5Crc0RoTyDxRg\"",
+      "X-Amz-Cf-Id": "_ZcaFRI6WYBl57WYXw6iWD4CdlgAhvgRPCxeffFWs_a_oXQVseEtYw=="
+    },
+    "bytes": 279,
+    "sha256": "e9b8dd5549dc9b6f4ba438388f67d27c968e9c18823f16ce470a71f5b4fde7b5",
+    "item_count": 0,
+    "response_path": "inputs/earth-search-stac-2019-dry-page-02.json"
+  },
+  {
+    "window": "2020-wet",
+    "page": 1,
+    "endpoint": "https://earth-search.aws.element84.com/v1/search",
+    "request": {
+      "collections": [
+        "sentinel-2-l2a"
+      ],
+      "bbox": [
+        18.42566188925082,
+        -18.0421,
+        20.943746679773703,
+        -17.399540716612382
+      ],
+      "datetime": "2020-01-01T00:00:00Z/2020-03-31T23:59:59Z",
+      "query": {
+        "eo:cloud_cover": {
+          "lt": 20
+        }
+      },
+      "limit": 1000
+    },
+    "retrieved_at": "2026-10-07T09:16:44.589559+00:00",
+    "http_status": 200,
+    "response_headers": {
+      "Content-Type": "application/geo+json; charset=utf-8",
+      "Content-Length": "985374",
+      "Date": "Wed, 07 Oct 2026 09:16:44 GMT",
+      "x-amzn-RequestId": "a0b5b569-85af-4ee6-93bb-271b1d9926a5",
+      "etag": "W/\"f091e-JXI5FjMe0b+2Pl/eMFpqSGFsr20\"",
+      "X-Amz-Cf-Id": "ILaqCNlS2FuoMluX68_iZJwSZ3Xemtj4kMYGZ_0wZ-l34paSUg5fsg=="
+    },
+    "bytes": 985374,
+    "sha256": "ff1ac03afe2f5a05335c7d5907a4b569337cb47c5b85231f9f5e166b5967c43c",
+    "item_count": 46,
+    "response_path": "inputs/earth-search-stac-2020-wet-page-01.json"
+  },
+  {
+    "window": "2020-wet",
+    "page": 2,
+    "endpoint": "https://earth-search.aws.element84.com/v1/search",
+    "request": {
+      "datetime": "2020-01-01T00:00:00Z/2020-03-31T23:59:59Z",
+      "query": {
+        "eo:cloud_cover": {
+          "lt": 20
+        }
+      },
+      "collections": [
+        "sentinel-2-l2a"
+      ],
+      "bbox": [
+        18.42566188925082,
+        -18.0421,
+        20.943746679773703,
+        -17.399540716612382
+      ],
+      "limit": 1000,
+      "next": "2020-01-02T09:05:17.058000Z,S2A_34KBF_20200102_0_L2A,sentinel-2-l2a"
+    },
+    "retrieved_at": "2026-10-07T09:16:44.813142+00:00",
+    "http_status": 200,
+    "response_headers": {
+      "Content-Type": "application/geo+json; charset=utf-8",
+      "Content-Length": "277",
+      "Date": "Wed, 07 Oct 2026 09:16:44 GMT",
+      "x-amzn-RequestId": "6e9e60af-4099-47ce-a4a8-5ffd9392e219",
+      "etag": "W/\"115-qDrIHSdzKknnE01PyAVmNkkp6a8\"",
+      "X-Amz-Cf-Id": "TKDB5ZAo67LeQAbHIEdagMPsnZ_1mN3KcwuVdVLnyMBXyLuoOPFgDA=="
+    },
+    "bytes": 277,
+    "sha256": "b7335a5908408152c62e161f0adb3a93257f933317b11a4b302f2ffce72642fd",
+    "item_count": 0,
+    "response_path": "inputs/earth-search-stac-2020-wet-page-02.json"
+  },
+  {
+    "window": "2020-dry",
+    "page": 1,
+    "endpoint": "https://earth-search.aws.element84.com/v1/search",
+    "request": {
+      "collections": [
+        "sentinel-2-l2a"
+      ],
+      "bbox": [
+        18.42566188925082,
+        -18.0421,
+        20.943746679773703,
+        -17.399540716612382
+      ],
+      "datetime": "2020-08-01T00:00:00Z/2020-10-31T23:59:59Z",
+      "query": {
+        "eo:cloud_cover": {
+          "lt": 20
+        }
+      },
+      "limit": 1000
+    },
+    "retrieved_at": "2026-10-07T09:16:45.855355+00:00",
+    "http_status": 200,
+    "response_headers": {
+      "Content-Type": "application/geo+json; charset=utf-8",
+      "Content-Length": "3724831",
+      "Date": "Wed, 07 Oct 2026 09:16:45 GMT",
+      "x-amzn-RequestId": "7d93c363-e52d-45cf-909f-9ef6c17ff620",
+      "etag": "W/\"38d61f-T8bqXUwmHgbI2ydM2e8AzW2VAOw\"",
+      "X-Amz-Cf-Id": "5dwaTFSMciUnoRHJqqEOqJXx7fV6yp2hywqnG1YDi8IvPGnDqKIH-w=="
+    },
+    "bytes": 3724831,
+    "sha256": "f0560034540ae2584cfeebec18e592a75202bb085c7993f7a8044cf7cadfc6e2",
+    "item_count": 174,
+    "response_path": "inputs/earth-search-stac-2020-dry-page-01.json"
+  },
+  {
+    "window": "2020-dry",
+    "page": 2,
+    "endpoint": "https://earth-search.aws.element84.com/v1/search",
+    "request": {
+      "datetime": "2020-08-01T00:00:00Z/2020-10-31T23:59:59Z",
+      "query": {
+        "eo:cloud_cover": {
+          "lt": 20
+        }
+      },
+      "collections": [
+        "sentinel-2-l2a"
+      ],
+      "bbox": [
+        18.42566188925082,
+        -18.0421,
+        20.943746679773703,
+        -17.399540716612382
+      ],
+      "limit": 1000,
+      "next": "2020-08-01T08:55:23.701000Z,S2B_34KDF_20200801_0_L2A,sentinel-2-l2a"
+    },
+    "retrieved_at": "2026-10-07T09:16:46.008458+00:00",
+    "http_status": 200,
+    "response_headers": {
+      "Content-Type": "application/geo+json; charset=utf-8",
+      "Content-Length": "279",
+      "Date": "Wed, 07 Oct 2026 09:16:46 GMT",
+      "x-amzn-RequestId": "796a5612-2290-4d94-aa80-aad19e550e4f",
+      "etag": "W/\"117-UGWh+lwkqhRIXLx36wHo9qtq6S8\"",
+      "X-Amz-Cf-Id": "dtJw7aHAOeVYdh9ALdSW5UuauM7Rv7YFHCZU8tK6JTr5vBirxkF3sw=="
+    },
+    "bytes": 279,
+    "sha256": "88ba0b0787dbf41399fe8f30a04e4af99b323b0c0e8756b47c37f34d8fed26c4",
+    "item_count": 0,
+    "response_path": "inputs/earth-search-stac-2020-dry-page-02.json"
+  }
+]

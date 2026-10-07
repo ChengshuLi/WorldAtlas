@@ -1,0 +1,7 @@
+{
+  "method_id": "sentinel2-window-water-screen",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "expected_observation": "Includes synthetic negative fixture: clear SCL5 sample with negative MNDWI, plus a real contact-overlap mask with no water-like signal in selected observations. Contact-overlap mask gb:NAM:ADM2:8085530B43563455443088 has 1392 sampled centers, no SCL6 and no nonnegative MNDWI centers in the selected scenes; no-water signal is reported as limited observation, not dry-land proof.",
+  "evidence_path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json#/contact_overlap_summaries"
+}

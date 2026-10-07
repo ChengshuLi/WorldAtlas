@@ -1,0 +1,76 @@
+[
+  {
+    "name": "2024-wet",
+    "endpoint": "https://earth-search.aws.element84.com/v1/search",
+    "request": {
+      "collections": [
+        "sentinel-2-l2a"
+      ],
+      "bbox": [
+        18.42566188925082,
+        -18.0421,
+        20.943746679773703,
+        -17.399540716612382
+      ],
+      "datetime": "2024-01-01T00:00:00Z/2024-03-31T23:59:59Z",
+      "query": {
+        "eo:cloud_cover": {
+          "lt": 20
+        }
+      },
+      "limit": 1000
+    },
+    "retrieved_at": "2026-10-07T09:15:24.601203+00:00",
+    "http_status": 200,
+    "response_headers": {
+      "Content-Type": "application/geo+json; charset=utf-8",
+      "Content-Length": "1070755",
+      "Date": "Wed, 07 Oct 2026 09:15:24 GMT",
+      "x-amzn-RequestId": "07d37249-1b9d-476d-81aa-e81d41b1424c",
+      "etag": "W/\"1056a3-aRERjep+A9t2JfXkwWcpi580nYU\"",
+      "X-Amz-Cf-Id": "I7zZiN-mOXSvzHzxOJnSy-La9ZcDphEy-iCf6f6Fq3sjPG7c6ax8WQ=="
+    },
+    "bytes": 1070755,
+    "sha256": "b824dfbbbf2606cbd0801dd8adf5fd62aab3bc39f85d1001971589118d91626b",
+    "item_count": 50,
+    "has_next_page": true,
+    "response_path": "inputs/earth-search-stac-2024-wet.json"
+  },
+  {
+    "name": "2024-dry",
+    "endpoint": "https://earth-search.aws.element84.com/v1/search",
+    "request": {
+      "collections": [
+        "sentinel-2-l2a"
+      ],
+      "bbox": [
+        18.42566188925082,
+        -18.0421,
+        20.943746679773703,
+        -17.399540716612382
+      ],
+      "datetime": "2024-08-01T00:00:00Z/2024-10-31T23:59:59Z",
+      "query": {
+        "eo:cloud_cover": {
+          "lt": 20
+        }
+      },
+      "limit": 1000
+    },
+    "retrieved_at": "2026-10-07T09:15:25.109319+00:00",
+    "http_status": 200,
+    "response_headers": {
+      "Content-Type": "application/geo+json; charset=utf-8",
+      "Content-Length": "1667561",
+      "Date": "Wed, 07 Oct 2026 09:15:24 GMT",
+      "x-amzn-RequestId": "91c1c66b-a891-4c32-91ea-ae3b090ab711",
+      "etag": "W/\"1971e9-Vxe4UAAYXB72BqAI19W0KmkcJoE\"",
+      "X-Amz-Cf-Id": "9uc1SuKJuO-4U2Q93GWKgLjdWquAbCN4wSdfUEnhOLNORjeVZQ-ZlQ=="
+    },
+    "bytes": 1667561,
+    "sha256": "f99f4703fb2cd42b64b805582ad53f499e593f250f2d1ef404ce28e22efc4d0b",
+    "item_count": 78,
+    "has_next_page": true,
+    "response_path": "inputs/earth-search-stac-2024-dry.json"
+  }
+]

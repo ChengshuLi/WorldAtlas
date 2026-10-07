@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "method_id": "sentinel2-window-water-screen",
+  "kind": "reproducibility",
+  "outcome": "passed",
+  "run_one_sha256": "fe903fb95a88c06236f0dba092275421a7eae480ec8c53c696d52d8f74d65f41",
+  "run_two_sha256": "fe903fb95a88c06236f0dba092275421a7eae480ec8c53c696d52d8f74d65f41",
+  "equal": true,
+  "runs": [
+    {
+      "name": "run-one",
+      "command": "python3 research/geography/namibia-angola-sentinel2-followup-20261007/analyze_sentinel2_windows.py --output runs/run-one.json",
+      "output_path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-one.json",
+      "output_sha256": "fe903fb95a88c06236f0dba092275421a7eae480ec8c53c696d52d8f74d65f41"
+    },
+    {
+      "name": "run-two",
+      "command": "python3 research/geography/namibia-angola-sentinel2-followup-20261007/analyze_sentinel2_windows.py --output runs/run-two.json",
+      "output_path": "research/geography/namibia-angola-sentinel2-followup-20261007/runs/run-two.json",
+      "output_sha256": "fe903fb95a88c06236f0dba092275421a7eae480ec8c53c696d52d8f74d65f41"
+    }
+  ],
+  "shared_inputs": {
+    "source_window_receipts_sha256": "378714df06981315b5a229f4b8788ea3ba412196e0a5b9180c674289987e9882",
+    "selected_stac_items_sha256": "14a7594d1900646470564f33b5a60b95c889b86404e373490eee845a1e5779ec"
+  },
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "rasterio": "1.4.3",
+    "gdal": "3.9.3",
+    "platform": "macOS arm64; original COG extraction used Rasterio range reads",
+    "requirements_sha256": "1c3f3b9598e474af751e25ff0839cbf5c4a9931a59b4ffaaff1a56c6e2f0e2c9",
+    "environment_receipt_sha256": "4f8d01b3f95780d4c1fdfc45fa8bbe3cdc9b81ebecec2886e172dd9da2f52507"
+  },
+  "note": "The source window extraction was one recorded remote COG range-read capture. The two complete analysis executions are local and consume the exact retained NPZ files; this package does not claim repeated remote retrieval.",
+  "reproduction_setup": "Install requirements.txt in an isolated Python 3.12 environment before running; the environment and requirements SHA-256 are recorded above. The analysis consumes retained NPZ windows, not remote COGs."
+}
