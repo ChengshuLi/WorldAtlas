@@ -109,12 +109,17 @@ export function executedClosure(repo,head){
  }
  visit(path.relative(repo,fileURLToPath(import.meta.url)));return committedPreparationFiles(repo,head,[...names].sort());
 }
+export function bindLatitudeTree(original,headTree){
+ assert.equal(headTree,`${original.mode} blob ${original.blob}\t${original.path}\0`,'Evaluation latitude ordinary blob differs from original read vintage');
+}
 export async function run(baseline,vintage,{inputOnly=false}={}){
  requirePlainExecution();assert.match(baseline,/^[a-f0-9]{40}$/);assert.match(vintage,/^[a-zA-Z0-9_-]+$/);
  const repo=fs.realpathSync('.'),head=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
  const code=executedClosure(repo,head);
  const indexPath='coordination/engineering/eastern-two-gap-repair-native-20261007/original-inputs/index.json';
- const indexBytes=fs.readFileSync(path.join(repo,indexPath));
+ const physicalIndex=path.join(repo,indexPath),indexStat=fs.lstatSync(physicalIndex);
+ assert(indexStat.isFile()&&fs.realpathSync(physicalIndex)===physicalIndex&&indexStat.size<=32*1024*1024,'Bounded ordinary source index required before read');
+ const indexBytes=fs.readFileSync(physicalIndex);
  const committedIndex=execFileSync('git',['show',head+':'+indexPath],{maxBuffer:32*1024*1024});assert(indexBytes.equals(committedIndex),'Ordinary input index differs from freeze');
  const sourceIndex=JSON.parse(indexBytes);assert.equal(sourceIndex.baseline_commit,baseline);assert.equal(sourceIndex.proposal_commit,PROPOSAL);
  const storage=new Map(sourceIndex.files.map(row=>[row.original.commit+':'+row.original.path,row]));assert.equal(storage.size,sourceIndex.files.length,'Duplicate whole-source alias');
@@ -124,7 +129,7 @@ export async function run(baseline,vintage,{inputOnly=false}={}){
  const preflight=candidateBudget(sourceAdmission,{reserveBytes:96*1024*1024,reserveDescriptors:128}).snapshot();
  const latitudeOriginal=inputs.sourceFiles.find(p=>p.path===inputs.latitude.path&&p.commit===baseline);
  const latitudeHeadTree=execFileSync('git',['ls-tree','-z',head,'--',inputs.latitude.path],{encoding:'utf8'});
- assert.equal(latitudeHeadTree,`${latitudeOriginal.mode} blob ${latitudeOriginal.blob}\t${latitudeOriginal.path}\0`,'Evaluation latitude ordinary blob differs from original read vintage');
+ bindLatitudeTree(latitudeOriginal,latitudeHeadTree);
  const capsule={baseline_commit:baseline,execution_commit:head,source_files:inputs.sourceFiles,ordinary_source_index:{path:indexPath,bytes:indexBytes.length,sha256:SHA(indexBytes)},ordinary_sources:sourceIndex.files,executed_sources:code,
   original_canonical_sha256:inputs.originalCanonicalSha,owner_sha256:inputs.ownerSha,before_footprints_sha256:BEFORE,after_footprints_sha256:AFTER,
   release_id:inputs.releaseId,locations:inputs.features.length,input_admission:preflight,normative_latitude_binding:{original_read_commit:baseline,evaluation_commit:head,path:inputs.latitude.path,mode:latitudeOriginal.mode,blob:latitudeOriginal.blob,encoded_sha256:inputs.latitude.sha256,decoded_sha256:inputs.latitude.decoded_sha256,whole_blob_equality:true},software:{node:process.version,v8:process.versions.v8,zlib:process.versions.zlib,platform:process.platform,arch:process.arch},

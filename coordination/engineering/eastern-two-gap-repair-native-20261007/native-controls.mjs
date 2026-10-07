@@ -1,4 +1,4 @@
-import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';import {gzipSync,gunzipSync} from 'node:zlib';import {createHash} from 'node:crypto';import {immutableReader} from './native-producer.mjs';
+import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';import {gzipSync,gunzipSync} from 'node:zlib';import {createHash} from 'node:crypto';import {immutableReader,bindLatitudeTree} from './native-producer.mjs';
 const hash=b=>createHash('sha256').update(b).digest('hex'),root=process.cwd(),baseline='913db0624b8aa79b188ff17a7f5c4ae0c0f63965';
 const index=JSON.parse(fs.readFileSync('coordination/engineering/eastern-two-gap-repair-native-20261007/original-inputs/index.json'));
 const row=index.files.find(x=>x.original.path==='data/world-index.json');assert(row);
@@ -7,6 +7,10 @@ const caseRun=(name,f)=>{f();checked++;console.log('PASS '+name);};
 const withRow=r=>new Map([[baseline+':'+row.original.path,r]]);
 const read=r=>immutableReader(root,baseline,withRow(r)).read(row.original.path);
 try{
+ const latitude=index.files.find(r=>r.original.path.includes('native-row-latitudes')).original;
+ caseRun('complete original-to-evaluation latitude blob positive',()=>bindLatitudeTree(latitude,`${latitude.mode} blob ${latitude.blob}\t${latitude.path}\0`));
+ caseRun('changed evaluation latitude table rejected',()=>assert.throws(()=>bindLatitudeTree(latitude,`${latitude.mode} blob ${'0'.repeat(40)}\t${latitude.path}\0`),/Evaluation latitude/));
+ caseRun('changed evaluation latitude mode rejected',()=>assert.throws(()=>bindLatitudeTree(latitude,`100755 blob ${latitude.blob}\t${latitude.path}\0`),/Evaluation latitude/));
  caseRun('complete original whole-source positive',()=>assert.equal(hash(read(row)),row.original.sha256));
  caseRun('Git option rejected before write',()=>{const target=path.join(fixture,'no-write');assert.throws(()=>immutableReader(root,'--output='+target),/immutable source commit/);assert(!fs.existsSync(target));});
  caseRun('absent declared input rejected',()=>assert.throws(()=>immutableReader(root,baseline,new Map()).read(row.original.path),/Undeclared/));
