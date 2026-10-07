@@ -133,7 +133,7 @@ export function workspaceManager(repo, {limits = policy, freeBytes} = {}) {
     ordinaryDirectory(entry.path);
     const inventory = worktrees(false);
     if (!inventory.some(item => item.path === entry.path)) throw Error('Managed checkout missing; inspect registry');
-    const localGit = (...args) => execFileSync('git', ['-C', entry.path, ...args], {encoding: 'utf8'});
+    const localGit = (...args) => execFileSync('git', ['-C', entry.path, ...args], {encoding: 'utf8', maxBuffer: 32 * 1024 * 1024});
     if (localGit('rev-parse', '--path-format=absolute', '--git-common-dir').trim() !== common) throw Error('Checkout Git identity changed');
     for (const row of localGit('ls-files', '-vz').split('\0').filter(Boolean)) {
       // Git status/remove can trust assume-unchanged and skip-worktree bits.

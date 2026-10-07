@@ -10,7 +10,7 @@ export const COORDINATION_PATHS = new Set([
   'scripts/classify-deployment-budget.mjs',
   '.github/workflows/deployment-budget.yml', 'test/deployment-budget-scope.test.mjs',
   // Test-runner changes require full regression to validate the real inventory.
-  'scripts/run-worker-merge.mjs', 'scripts/queue-pr-merge.mjs',
+  'scripts/run-worker-merge.mjs', 'scripts/queue-pr-merge.mjs', 'scripts/merge-queue-client.mjs',
   '.github/workflows/handoff-scope.yml',
   '.github/workflows/merge-integration-checks.yml', '.github/workflows/worker-merge.yml',
   '.github/evidence-policy.json',
