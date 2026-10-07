@@ -1,0 +1,135 @@
+{
+  "version": 1,
+  "checked_utc": "2026-10-07T01:59:10Z",
+  "references": [
+    {
+      "id": "UK Treaty Series 29 (1926), Cmd. 2777",
+      "operator": "United Kingdom Foreign, Commonwealth and Development Office treaty archive",
+      "url": "https://treaties.fcdo.gov.uk/data/Library2/pdf/1926-TS0029.pdf",
+      "local_file": "sources/uk-treaty-series-1926-ts-29.pdf",
+      "bytes": 195690,
+      "sha256": "120edb084074e033786cb544c4bc8d0046b3b8b001c7afdb80a47e1a972520de",
+      "pdf_pages": 4,
+      "document_date": "Signed at Cape Town 1926-06-22; presented as Treaty Series No. 29 (1926)",
+      "inspected_pages": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "relevant_content": "Articles 1-3 resolve the Ruacana/Rua Cana waterfall identification and describe the Angola–South-West Africa line from the falls along the latitude parallel to the middle of the Okavango/Cubango, then by reference to the 1886 Lisbon treaty. Article 4 requires joint demarcation and specified beaconing/astronomical observation. Article 6 says the river middle line applies where the line follows a river and cuts an island.",
+      "scope_limit": "Primary treaty text supports the described boundary framework. It does not itself provide a modern georeferenced coordinate polyline or the underlying completed demarcation record for these candidate polygons. The source line at issue is inland; the later 2002 maritime treaty is irrelevant."
+    },
+    {
+      "id": "MAWLR Water Basin Map 2008.pdf",
+      "operator": "Namibia Ministry of Agriculture, Water and Land Reform (MAWLR)",
+      "url": "https://mawlr.gov.na/land-reform-documents/-/document_library/rdhh/view_file/1297598",
+      "document_date": "Portal identifies Version 1.0 Approved; extracted PDF metadata says created 2008-12-19 and modified 2017-02-10; portal lists 1.2 MB",
+      "retrieval_status": "metadata verified from official portal search result; local HTTPS retrieval timed out before bytes were received; PDF not visually inspected and no local hash is available",
+      "use_limit": "Basin context only unless inspection demonstrates a suitable scale and mapped edge; a basin map is not exact river-bank, historic-course, or international-boundary evidence."
+    },
+    {
+      "id": "Integrated Water Resources Management Plan for Namibia - Summary",
+      "operator": "MAWLR / Directorate of Water Resources Management",
+      "url": "https://mawlr.gov.na/documents/268157/1297451/Integrated%2BWater%2BResources%2BManagement%2BPlan%2Bfor%2BNamibia.pdf/b7da5e25-f7ee-2221-4a3b-a72a8ada7459?download=true&t=1668087050939",
+      "document_date": "Official portal marks Version 1.0 Approved; extracted PDF metadata created 2010-12-06 by Ben van der Merwe; portal lists 5.2 MB",
+      "retrieval_status": "official portal PDF text/metadata inspected through indexed source; local HTTPS retrieval timed out before bytes were received; no local hash",
+      "use_limit": "Water-management planning context, not surveyed hydrography or exact gap-scale river geometry."
+    },
+    {
+      "id": "MINEA 4th Consultative Council final communiqué (2014)",
+      "operator": "Angola Ministry of Energy and Water (MINEA)",
+      "url": "https://minea.gov.ao/index.php/conselho-consultivo/category/33-comunicado-final?download=237%3Acomunicado-final-do-cc-malange-2014",
+      "document_date": "2014, exact day not established in the inspected document",
+      "retrieval_status": "official 8-page PDF text inspected through the web document reader; direct shell URL returned the portal homepage HTML rather than PDF, so no local source-byte hash",
+      "inspected_pages": [
+        3,
+        4,
+        5
+      ],
+      "relevant_content": "The communiqué states that the integrated Cubango basin water-resources plan was then in conclusion and discusses basin transfers, river monitoring, and transboundary basin notification.",
+      "use_limit": "Dated basin-planning context, not an exact river edge, historic course, or boundary instrument.",
+      "portal_response_file": "sources/angola-minea-portal-response.html",
+      "portal_response_bytes": 177326,
+      "portal_response_sha256": "e6532bf81b33f17a9f90d21f9c00ec7e264637d55487c51325466cbcd3052765"
+    },
+    {
+      "id": "National Archives of Namibia Finding Aid 2/31, item 3/21/4",
+      "operator": "National Archives of Namibia",
+      "url": "https://www.nan.gov.na/documents/3219017/3228694/Findaid_2-031.pdf/35bc9ed2-872f-5b81-85e2-633f8848e785?t=1707296061518",
+      "document_date": "Cataloged item: Angola Boundary Delimitation and Kunene Water Commission, 1926–1927; Box 12, item 3/21/4",
+      "retrieval_status": "official archive catalog text verified in search index; direct HTTPS retrieval timed out before bytes were received; finding-aid PDF not locally retained or fully inspected",
+      "use_limit": "Archive description is a lead to primary records, not the underlying minutes, survey, instrument, or line geometry."
+    },
+    {
+      "id": "National Archives of South Africa catalog item GG_2075_66/135A_1",
+      "operator": "National Archives and Records Service of South Africa (NARSSA)",
+      "url": "https://www.nationalarchives.gov.za/node/9196364",
+      "document_date": "Catalog describes 1926 Command Papers 2777 (boundary agreement) and 2778 (Kunene water use agreement)",
+      "retrieval_status": "official catalog record inspected online",
+      "use_limit": "Catalog confirms record descriptions, but does not substitute for the full records or establish a precise modern alignment in this scope."
+    },
+    {
+      "id": "1886 German–Portuguese Treaty of Lisbon transcription",
+      "operator": "University of Nebraska-Lincoln African Research and Documentation Initiative",
+      "url": "https://ardhi.unl.edu/item/ardhi.treaty.00008.html",
+      "document_date": "Signed Lisbon 1886-12-30",
+      "retrieval_status": "transcribed text inspected online; no local copy retained",
+      "relevant_content": "Article I describes the line from the Kunene waterfalls on a latitude parallel to the Kubango, then along the stream to Andara and east to the Zambezi rapids.",
+      "use_limit": "Institutional transcript is a secondary access copy; the 1926 primary agreement incorporates the 1886 treaty by reference. The original instrument and exact later demarcation are still required for a certified modern line."
+    },
+    {
+      "id": "RCNA Angola hydrographic basins map reproduction",
+      "operator": "Angola National Institute for Agricultural Research (RCNA) public archive",
+      "url": "https://rcna.gov.ao/public/arquivo/1754212654_73ab10cda406d52e0da5.pdf",
+      "document_date": "Hosted research article indexed circa 2015; map attribution: Diniz (1991), cited by Jacinto (2012)",
+      "retrieval_status": "search-index extraction describes basin map; direct open redirected to suspended account, so source body not retained",
+      "use_limit": "Secondary reproduced basin map only; not a boundary or exact hydrography source."
+    },
+    {
+      "id": "MAWLR IWRM booklet Okavango–Omatako (RV2)",
+      "operator": "Namibia Ministry of Agriculture, Water and Land Reform / Directorate Water Resource Management",
+      "url": "https://mawlr.gov.na/land-reform-documents/-/document_library/rdhh/view_file/1297931",
+      "document_date": "Official portal lists the document as Approved and 5.9 MB; the item page labels the basin-booklet collection as created and modified three years ago (portal-relative dates at 2026-10-07). The booklet date itself was not established.",
+      "retrieval_status": "Official portal item and title verified in indexed results and page listing; PDF fetch timed out; content not inspected and no local bytes/hash.",
+      "use_limit": "Potential basin-management context only until the document is obtained and reviewed. It is not treated as a physical river-edge or international-boundary source."
+    },
+    {
+      "id": "National Archives of Namibia Finding Aid A: Angola Boundary Survey (ABS), 1/1/071",
+      "operator": "National Archives of Namibia",
+      "url": "https://nan.gov.na/finding-aids-a",
+      "document_date": "Official finding-aid index lists the Angola Boundary Survey as 1927–1928, one unit, reference 1/1/071.",
+      "retrieval_status": "Official archive index page inspected; linked image/finding aid fetch timed out; underlying archival item not inspected or retained.",
+      "use_limit": "Archival lead to possible survey evidence; catalog entry alone does not establish surveyed coordinates, completion, or present legal effect."
+    },
+    {
+      "id": "National Archives of Namibia Finding Aid A: South Africa Angola Boundary Commission (ABC), 3/3/3",
+      "operator": "National Archives of Namibia",
+      "url": "https://nan.gov.na/finding-aids-a",
+      "document_date": "Official finding-aid index lists the commission as 1926–1928, one unit, reference 3/3/3.",
+      "retrieval_status": "Official archive index page inspected; underlying document/catalog file not retrieved or inspected.",
+      "use_limit": "Archival lead to potential demarcation material, not evidence of the exact modern alignment until the record and survey annexes are inspected."
+    }
+  ],
+  "spatial_screen": {
+    "method": "Compare candidate latitude bounds with the approximate latitude stated for the 1926 Ruacana/Rua Cana Falls point; use only as a locator screen, not as a legal boundary test.",
+    "candidate_extent_lonlat": [
+      18.42566188925082,
+      -18.0421,
+      20.943746679773703,
+      -17.399540716612382
+    ],
+    "treaty_falls_approximate_latitude_south": -17.383333333333333,
+    "candidate_north_edge_is_south_of_approximate_parallel": true,
+    "approximate_angular_separation_degrees": 0.01620738272095016,
+    "approximate_separation_km_using_111_1_km_per_degree": 1.8,
+    "interpretation": "The candidate family lies close to and south of the approximate latitude associated with the treaty's Ruacana point, and extends east toward the Okavango/Cubango. This makes the 1926 line, the 1886 river sequence, the river's historical course, and demarcation records material. The approximate waterfall latitude and bbox are not enough to assign territory or answer authority."
+  },
+  "separate_classifications": {
+    "consumed_source_geometry": "Source products overlap candidate footprints by positive area; see source-geometry-comparison.json.",
+    "current_physical_water_or_historic_course": "Unresolved. Official Namibia material supplies basin-management/map context only; the 1:2,000,000 water-basin map is too generalized for the candidate edge. The approved Okavango–Omatako booklet was identified but not obtained or inspected. No suitable dated, gap-scale bank/course source is retained.",
+    "processing_cause": "Unresolved; no exact processing defect has been reproduced.",
+    "international_boundary_authority": "The 1926 agreement gives a treaty framework and requires joint demarcation, with archival catalogue leads for 1927–28 survey/commission records. Those underlying survey and beacon records are not inspected. Exact demarcated/current alignment across the candidate coordinates remains unresolved.",
+    "administrative_assignment": "Not made."
+  }
+}

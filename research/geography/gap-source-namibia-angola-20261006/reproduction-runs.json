@@ -1,0 +1,158 @@
+{
+  "version": 1,
+  "captured_utc": "2026-10-07T02:00:46.155595Z",
+  "runtime": {
+    "python": "3.12.14",
+    "shapely": "2.1.2",
+    "geos": "3.13.1"
+  },
+  "immutable_packet_inputs": [
+    {
+      "path": "inputs/input-bindings.json",
+      "bytes": 49247,
+      "sha256": "35b2d1a9ad33c9f0ff3693e9bdb8dacb438df30e3ba028b6892f817363631fcc"
+    },
+    {
+      "path": "inputs/official-reference-leads.json",
+      "bytes": 6195,
+      "sha256": "67438d8b5353a3f3614ca312d9b4c510eaa2f4b7c8ddb4673f625c91d428e531"
+    },
+    {
+      "path": "inputs/original-components.geojson",
+      "bytes": 23958,
+      "sha256": "f99f334877c309101afafe56210e40ab2093948e686ec39f98d9c085a42622b9"
+    },
+    {
+      "path": "inputs/root-corrected-ordinary-pin-review.json",
+      "bytes": 576,
+      "sha256": "bb1990c4aaecfa48b04b8beb09476f76f5ceec3c43b0776c747429adfeacbcb5"
+    },
+    {
+      "path": "inputs/root-whole-input-scope-review.json",
+      "bytes": 33602,
+      "sha256": "ae7377e9631c78667a8bad203200386329e3eebb05f7de63c4e0a7eb51da096c"
+    },
+    {
+      "path": "inputs/source-contact-features.geojson",
+      "bytes": 46722,
+      "sha256": "472ee9003155eb62c9e9aa7bfdff0e28dfab13a8c1cc18b2a30ca6b705cc2f14"
+    },
+    {
+      "path": "inputs/successor-component-verification.json",
+      "bytes": 29385,
+      "sha256": "5b1208730bdde278b3914cb6f0104a27f0653af56701a7e1931ce21b39ad4e86"
+    },
+    {
+      "path": "inputs/whole-input-pins.json",
+      "bytes": 18148,
+      "sha256": "c8f3394449dd1afccb9cfe4bc932c79cbf8c343030376e881ef243bcde1e4e83"
+    },
+    {
+      "path": "sources/angola-minea-portal-response.html",
+      "bytes": 177326,
+      "sha256": "e6532bf81b33f17a9f90d21f9c00ec7e264637d55487c51325466cbcd3052765"
+    },
+    {
+      "path": "sources/gb-AGO-ADM2-000.bin.gz",
+      "bytes": 236896,
+      "sha256": "377b1a666f58c913dec27b7d4557d98041e4d590d6555a2cdbfe13527ac8e55f"
+    },
+    {
+      "path": "sources/gb-NAM-ADM2-000.bin.gz",
+      "bytes": 135327,
+      "sha256": "5a04eb2e5ba43552d902d3bfdf8963f8261cee5b6ee333ddb09da451d4520cf9"
+    },
+    {
+      "path": "sources/geoBoundaries-AGO-ADM2-full-9469f09.geojson",
+      "bytes": 3146775,
+      "sha256": "44e58b2a8c2fefb9369294a32e2adde3e3637b9e02e8f1e2c53b400bec04f404"
+    },
+    {
+      "path": "sources/geoBoundaries-AGO-ADM2-full-9469f09.lfs-pointer.txt",
+      "bytes": 132,
+      "sha256": "6b7a03a9394fe47065d8703c619684bb4ec743d1f8c8b98d5d0cba67911c75d6"
+    },
+    {
+      "path": "sources/geoBoundaries-AGO-ADM2-metadata-9469f09.json",
+      "bytes": 927,
+      "sha256": "0f45ab188f1e12b2f4068ecddeb62b2fb73d4ee7d1a71e29a8a8992d4b7ad302"
+    },
+    {
+      "path": "sources/geoBoundaries-AGO-ADM2-metadata-9469f09.lfs-pointer.txt",
+      "bytes": 128,
+      "sha256": "32ecd30d3016621b8a42bcdf19783147d0825452f31b25edb3963195d3bc078e"
+    },
+    {
+      "path": "sources/geoBoundaries-NAM-ADM2-full-9469f09.geojson",
+      "bytes": 3039021,
+      "sha256": "602e48176ff563f029cd08a00b0f8177b47c46a3aad53b8f93659c816593a7f9"
+    },
+    {
+      "path": "sources/geoBoundaries-NAM-ADM2-full-9469f09.lfs-pointer.txt",
+      "bytes": 132,
+      "sha256": "bf278325edafaca584dfd6de2b383c2ddfe0c446e64928574483ea1e86f54e25"
+    },
+    {
+      "path": "sources/geoBoundaries-NAM-ADM2-metadata-9469f09.json",
+      "bytes": 813,
+      "sha256": "388370c1ef1be3a81354d99b1a3b1a26a8340e6aa2f208637049fbf7db909d6b"
+    },
+    {
+      "path": "sources/geoBoundaries-NAM-ADM2-metadata-9469f09.lfs-pointer.txt",
+      "bytes": 128,
+      "sha256": "f9052aac2c1f1eedd23063cadf7cd6a5ed7509809d5900b2b9b518f2ada58e02"
+    },
+    {
+      "path": "sources/uk-treaty-series-1926-ts-29.pdf",
+      "bytes": 195690,
+      "sha256": "120edb084074e033786cb544c4bc8d0046b3b8b001c7afdb80a47e1a972520de"
+    }
+  ],
+  "executions": [
+    {
+      "script": "reproduce_source_geometry.py",
+      "script_sha256": "d66a14339a44e69810532970800f58ceb6980624698955dadb7960d39f6b41de",
+      "output_path": "source-geometry-comparison.json",
+      "runs": [
+        {
+          "run": 1,
+          "exit_code": 0,
+          "stdout_summary": "{\"angola_feature_count\": 161, \"candidate_count\": 21, \"candidate_count_covered_by_combined_source_union\": 2, \"candidate_count_intersecting_angola_by_positive_area\": 21, \"candidate_count_intersecting_namibia_by_positive_area\": 20, \"namibia_feature_count\": 109}",
+          "output_path": "source-geometry-comparison.json",
+          "output_sha256": "4f7758a83e9118f582f27ee446adedb5bd3e1cdbf91a02e5b6d9f9d821af9818"
+        },
+        {
+          "run": 2,
+          "exit_code": 0,
+          "stdout_summary": "{\"angola_feature_count\": 161, \"candidate_count\": 21, \"candidate_count_covered_by_combined_source_union\": 2, \"candidate_count_intersecting_angola_by_positive_area\": 21, \"candidate_count_intersecting_namibia_by_positive_area\": 20, \"namibia_feature_count\": 109}",
+          "output_path": "source-geometry-comparison.json",
+          "output_sha256": "4f7758a83e9118f582f27ee446adedb5bd3e1cdbf91a02e5b6d9f9d821af9818"
+        }
+      ],
+      "reproduced_identically": true
+    },
+    {
+      "script": "reproduce_full_product_comparison.py",
+      "script_sha256": "59a109956ba0f43c9c10041a25ab9ed48214c5ab2ef894f6bac98401062203f6",
+      "output_path": "full-product-comparison.json",
+      "runs": [
+        {
+          "run": 1,
+          "exit_code": 0,
+          "stdout_summary": "{\"components\": 21, \"contact_geometries_topologically_different_from_full\": 10, \"contact_geometries_topologically_equal_to_full\": 0, \"contacts\": 10, \"full_candidate_positive_area_hits_ago\": 21, \"full_candidate_positive_area_hits_nam\": 20, \"pair_rows\": 210, \"pair_rows_with_intersection\": 49}",
+          "output_path": "full-product-comparison.json",
+          "output_sha256": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234"
+        },
+        {
+          "run": 2,
+          "exit_code": 0,
+          "stdout_summary": "{\"components\": 21, \"contact_geometries_topologically_different_from_full\": 10, \"contact_geometries_topologically_equal_to_full\": 0, \"contacts\": 10, \"full_candidate_positive_area_hits_ago\": 21, \"full_candidate_positive_area_hits_nam\": 20, \"pair_rows\": 210, \"pair_rows_with_intersection\": 49}",
+          "output_path": "full-product-comparison.json",
+          "output_sha256": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234"
+        }
+      ],
+      "reproduced_identically": true
+    }
+  ],
+  "both_scripts_reproduced_identically": true
+}

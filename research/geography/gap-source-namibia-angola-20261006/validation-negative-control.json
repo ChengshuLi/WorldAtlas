@@ -1,0 +1,24 @@
+{
+  "method_id": "whole-product-overlay",
+  "outcome": "passed",
+  "kind": "negative-control",
+  "controls": [
+    {
+      "name": "disjoint source control",
+      "intersection_empty": true,
+      "candidate_minus_source_area_equals_candidate": true
+    },
+    {
+      "name": "invalid geometry rejected",
+      "observed": true
+    },
+    {
+      "name": "missing input rejected",
+      "observed": true
+    },
+    {
+      "name": "original input hash preserved",
+      "observed": true
+    }
+  ]
+}

@@ -1,0 +1,494 @@
+{
+  "version": 1,
+  "family_id": "gap-source-batch:3998e6ad8c18d04c89976a1c",
+  "source_commit": "7c7cdf2388e0e7200b937c2cfb440b53165d9d98",
+  "lineage_original_files": [
+    {
+      "path": "coordination/engineering/worldwide-successor-1215-20261006/run-one/component-lineage-original-00.json.gz",
+      "sha256": "6c1716ffb456af088cd971bbfe458f25d27f32b42461ff86d75a2e6dfbd15309",
+      "bytes": 2608186
+    },
+    {
+      "path": "coordination/engineering/worldwide-successor-1215-20261006/run-one/component-lineage-original-01.json.gz",
+      "sha256": "2d4c2e01e2901d80b161c94d58dbe8118396fbc2884f0d3f438831b766cd653f",
+      "bytes": 2611617
+    },
+    {
+      "path": "coordination/engineering/worldwide-successor-1215-20261006/run-one/component-lineage-original-02.json.gz",
+      "sha256": "e7b13a079b9fefec1591a66c1e8bc29fc83b85e8dc7cd2d3db29135cc4bc3dd6",
+      "bytes": 2610148
+    },
+    {
+      "path": "coordination/engineering/worldwide-successor-1215-20261006/run-one/component-lineage-original-03.json.gz",
+      "sha256": "2b3d6321ea37bad41251533288ad13314dd8bf1486c078da670425cfe913c8ea",
+      "bytes": 2610902
+    },
+    {
+      "path": "coordination/engineering/worldwide-successor-1215-20261006/run-one/component-lineage-original-04.json.gz",
+      "sha256": "01c8e0b078d766194209774149fc63b69c4e8785c45550f70fe457a88b09a6a7",
+      "bytes": 1980702
+    }
+  ],
+  "successor_delta": {
+    "commit": "7c7cdf2388e0e7200b937c2cfb440b53165d9d98",
+    "path": "coordination/engineering/worldwide-successor-1215-20261006/run-one/components-delta.json.gz",
+    "bytes": 2335,
+    "sha256": "21ad3c832ef294cae76d5e6603e61313fc2890a1a5653667caef8665374de460",
+    "decoded_bytes": 7011,
+    "decoded_sha256": "4b554e0194f7b3782bc2a8b1557832eb46fe5f2130fbb363429c18e43816512c",
+    "original_count": 95174,
+    "current_count": 95173,
+    "retained_count": 95167,
+    "retained_ids_sha256": "6bc295b7a0f6e062c6f0698961b13befc1e970d95256f0fc3445ee8b60032a73",
+    "scope_removed_count": 0,
+    "scope_upsert_count": 0
+  },
+  "target_component_checks": [
+    {
+      "id": "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+      "full_feature_sha256": "46640f8c7036bb859a0b636a549b998a73572561f7f4029882c962b51120d4cd",
+      "geometry_sha256": "b4f072612277137fcc8cbc1d9f4953dcc3f2ffcbc94251aa63be5d7a5d83dd8d",
+      "fragment_ids": [
+        "physical-gap:615:5:b4f072612277137fcc8cbc1d9f4953dcc3f2ffcbc94251aa63be5d7a5d83dd8d"
+      ],
+      "unmeasured_fragment_ids": [],
+      "successor_lineage_relation": "linked",
+      "counterparts": [
+        "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0"
+      ],
+      "original_alias": {
+        "logical_original_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v3/components-000.json.gz",
+        "payload_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+        "encoded_sha256": "46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411",
+        "encoded_bytes": 2080037,
+        "decoded_sha256": "eac8b87294e31722939ff834289c00be512312ab83e81720d4fabd577cd5da36",
+        "decoded_bytes": 8387182
+      }
+    },
+    {
+      "id": "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+      "full_feature_sha256": "a58791a1cf6cce32ff87037ef4a1ff9a63bc8021da17241e50c1b7ba1d432f3b",
+      "geometry_sha256": "9a6d24a83734caaaac629e2a6f803e5083bf6c1a31c3ad2c4a4977bac6f6bff5",
+      "fragment_ids": [
+        "physical-gap:615:11:9a6d24a83734caaaac629e2a6f803e5083bf6c1a31c3ad2c4a4977bac6f6bff5"
+      ],
+      "unmeasured_fragment_ids": [],
+      "successor_lineage_relation": "linked",
+      "counterparts": [
+        "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd"
+      ],
+      "original_alias": {
+        "logical_original_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v3/components-001.json.gz",
+        "payload_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin",
+        "encoded_sha256": "ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b",
+        "encoded_bytes": 2081609,
+        "decoded_sha256": "10d2e853604b368fb9f0dbeb29919bec472640c98b457019865ff02e266a883a",
+        "decoded_bytes": 8388214
+      }
+    },
+    {
+      "id": "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+      "full_feature_sha256": "c458bb85365907bf5a19c2a89853b58fdef426ef0ade363ace28d9fdf84f4556",
+      "geometry_sha256": "b1096252afa69e50d374cad1f1f43195c381c005698c6a734346966d9c1b5df0",
+      "fragment_ids": [
+        "physical-gap:616:44:b1096252afa69e50d374cad1f1f43195c381c005698c6a734346966d9c1b5df0"
+      ],
+      "unmeasured_fragment_ids": [],
+      "successor_lineage_relation": "linked",
+      "counterparts": [
+        "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14"
+      ],
+      "original_alias": {
+        "logical_original_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v3/components-001.json.gz",
+        "payload_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin",
+        "encoded_sha256": "ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b",
+        "encoded_bytes": 2081609,
+        "decoded_sha256": "10d2e853604b368fb9f0dbeb29919bec472640c98b457019865ff02e266a883a",
+        "decoded_bytes": 8388214
+      }
+    },
+    {
+      "id": "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+      "full_feature_sha256": "5cb1a00042790f8c7070e298071b5e85efe13a2f79bfd9c598a37bd7cc7c01fa",
+      "geometry_sha256": "ce1730f7f40262207494236b1a61b136d732edb27fe28806d4e47040254b2dab",
+      "fragment_ids": [
+        "physical-gap:615:17:ce1730f7f40262207494236b1a61b136d732edb27fe28806d4e47040254b2dab"
+      ],
+      "unmeasured_fragment_ids": [],
+      "successor_lineage_relation": "linked",
+      "counterparts": [
+        "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022"
+      ],
+      "original_alias": {
+        "logical_original_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v3/components-001.json.gz",
+        "payload_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin",
+        "encoded_sha256": "ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b",
+        "encoded_bytes": 2081609,
+        "decoded_sha256": "10d2e853604b368fb9f0dbeb29919bec472640c98b457019865ff02e266a883a",
+        "decoded_bytes": 8388214
+      }
+    },
+    {
+      "id": "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+      "full_feature_sha256": "8b803e3dccae9134580a4286c6a47058dc5a33394615015e08282f22028d3e80",
+      "geometry_sha256": "635cc356a73422ce9b95f545ebd3a53531f16c9a465da821bf761007d74452b1",
+      "fragment_ids": [
+        "physical-gap:616:37:635cc356a73422ce9b95f545ebd3a53531f16c9a465da821bf761007d74452b1"
+      ],
+      "unmeasured_fragment_ids": [],
+      "successor_lineage_relation": "linked",
+      "counterparts": [
+        "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f"
+      ],
+      "original_alias": {
+        "logical_original_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v3/components-002.json.gz",
+        "payload_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin",
+        "encoded_sha256": "001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d",
+        "encoded_bytes": 2080126,
+        "decoded_sha256": "318de208374f6418fa7733b380e78aa26e54e883758637d5c5196e19e87b99fb",
+        "decoded_bytes": 8388138
+      }
+    },
+    {
+      "id": "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+      "full_feature_sha256": "4d29d87450183591a8826972b8444d5c02829fb83b2f6d96a904bcb5c27fc7dc",
+      "geometry_sha256": "c9af02aab971940eb155bb1fa5dea9fa9cdc8056abe508c11c0519468c50ab75",
+      "fragment_ids": [
+        "physical-gap:615:15:c9af02aab971940eb155bb1fa5dea9fa9cdc8056abe508c11c0519468c50ab75"
+      ],
+      "unmeasured_fragment_ids": [],
+      "successor_lineage_relation": "linked",
+      "counterparts": [
+        "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3"
+      ],
+      "original_alias": {
+        "logical_original_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v3/components-003.json.gz",
+        "payload_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin",
+        "encoded_sha256": "1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609",
+        "encoded_bytes": 2081831,
+        "decoded_sha256": "b02763e7ee4e514a6208432d5ec3d78713cdae5f15b19118a3ac8ba43184cf85",
+        "decoded_bytes": 8388063
+      }
+    },
+    {
+      "id": "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+      "full_feature_sha256": "a591c3e92775c25ae2fe2fa23116cb6c6136ee1b8e58d5029ad63d23d07a0149",
+      "geometry_sha256": "dfd4aaf6f06eca8efc25c0fe21f8ddc99ac18e6b1bdead109102ef39b725c996",
+      "fragment_ids": [
+        "physical-gap:615:12:dfd4aaf6f06eca8efc25c0fe21f8ddc99ac18e6b1bdead109102ef39b725c996"
+      ],
+      "unmeasured_fragment_ids": [],
+      "successor_lineage_relation": "linked",
+      "counterparts": [
+        "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331"
+      ],
+      "original_alias": {
+        "logical_original_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v3/components-003.json.gz",
+        "payload_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin",
+        "encoded_sha256": "1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609",
+        "encoded_bytes": 2081831,
+        "decoded_sha256": "b02763e7ee4e514a6208432d5ec3d78713cdae5f15b19118a3ac8ba43184cf85",
+        "decoded_bytes": 8388063
+      }
+    },
+    {
+      "id": "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+      "full_feature_sha256": "d07e3ea4148206355d6855b3ef5d67ac2c95265f5e1e82c005b4ea6c8722ab2b",
+      "geometry_sha256": "97f45ac270c2701dffba471706cb66182abb2fda3c1751bdf955fbbe5a1166e3",
+      "fragment_ids": [
+        "physical-gap:616:41:97f45ac270c2701dffba471706cb66182abb2fda3c1751bdf955fbbe5a1166e3"
+      ],
+      "unmeasured_fragment_ids": [],
+      "successor_lineage_relation": "linked",
+      "counterparts": [
+        "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c"
+      ],
+      "original_alias": {
+        "logical_original_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v3/components-003.json.gz",
+        "payload_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin",
+        "encoded_sha256": "1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609",
+        "encoded_bytes": 2081831,
+        "decoded_sha256": "b02763e7ee4e514a6208432d5ec3d78713cdae5f15b19118a3ac8ba43184cf85",
+        "decoded_bytes": 8388063
+      }
+    },
+    {
+      "id": "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+      "full_feature_sha256": "2b5b8c8fa1e856d1e5402831b541265685d82e1be921acebe359a068b7d7b639",
+      "geometry_sha256": "d004bde79bd327c5129692658f72ba4117af874e7c7a7dbcf279eea6e5fed386",
+      "fragment_ids": [
+        "physical-gap:616:32:d004bde79bd327c5129692658f72ba4117af874e7c7a7dbcf279eea6e5fed386"
+      ],
+      "unmeasured_fragment_ids": [],
+      "successor_lineage_relation": "linked",
+      "counterparts": [
+        "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e"
+      ],
+      "original_alias": {
+        "logical_original_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v3/components-003.json.gz",
+        "payload_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin",
+        "encoded_sha256": "1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609",
+        "encoded_bytes": 2081831,
+        "decoded_sha256": "b02763e7ee4e514a6208432d5ec3d78713cdae5f15b19118a3ac8ba43184cf85",
+        "decoded_bytes": 8388063
+      }
+    },
+    {
+      "id": "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+      "full_feature_sha256": "07227af85ef7793dc62946f542bfafe6fd84048cc5fab8e32850ba504911adfd",
+      "geometry_sha256": "e49d2ba6c82af771dfd068c5d0eae63318b02c5d82bac68acfb5efe19d4c9c79",
+      "fragment_ids": [
+        "physical-gap:615:18:e49d2ba6c82af771dfd068c5d0eae63318b02c5d82bac68acfb5efe19d4c9c79"
+      ],
+      "unmeasured_fragment_ids": [],
+      "successor_lineage_relation": "linked",
+      "counterparts": [
+        "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e"
+      ],
+      "original_alias": {
+        "logical_original_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v3/components-004.json.gz",
+        "payload_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+        "encoded_sha256": "541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014",
+        "encoded_bytes": 2074475,
+        "decoded_sha256": "0a895961defbcf80f8cc2e97cd7253830f2720a2fb51b6d4439c53ef0d1f80d9",
+        "decoded_bytes": 8387395
+      }
+    },
+    {
+      "id": "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+      "full_feature_sha256": "0ba1420103b54b35d73dc13d30b8def33e47cf496c8692129c1748a425f92906",
+      "geometry_sha256": "fe1630c3557d203e0ca11f1b135d612ca4ba2ac782c2d0aef76d4c6efa72582d",
+      "fragment_ids": [
+        "physical-gap:615:14:fe1630c3557d203e0ca11f1b135d612ca4ba2ac782c2d0aef76d4c6efa72582d"
+      ],
+      "unmeasured_fragment_ids": [],
+      "successor_lineage_relation": "linked",
+      "counterparts": [
+        "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b"
+      ],
+      "original_alias": {
+        "logical_original_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v3/components-004.json.gz",
+        "payload_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+        "encoded_sha256": "541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014",
+        "encoded_bytes": 2074475,
+        "decoded_sha256": "0a895961defbcf80f8cc2e97cd7253830f2720a2fb51b6d4439c53ef0d1f80d9",
+        "decoded_bytes": 8387395
+      }
+    },
+    {
+      "id": "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+      "full_feature_sha256": "eda79e70018ed8e2fc7a984239e8c169f9468b280d11c33252bcc8a2ab5b1d60",
+      "geometry_sha256": "ecadd250a52e5c2999b50dbff406d2592add6e418e5f14ffaf4bd30416624368",
+      "fragment_ids": [
+        "physical-gap:615:16:ecadd250a52e5c2999b50dbff406d2592add6e418e5f14ffaf4bd30416624368"
+      ],
+      "unmeasured_fragment_ids": [],
+      "successor_lineage_relation": "linked",
+      "counterparts": [
+        "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8"
+      ],
+      "original_alias": {
+        "logical_original_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v3/components-004.json.gz",
+        "payload_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+        "encoded_sha256": "541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014",
+        "encoded_bytes": 2074475,
+        "decoded_sha256": "0a895961defbcf80f8cc2e97cd7253830f2720a2fb51b6d4439c53ef0d1f80d9",
+        "decoded_bytes": 8387395
+      }
+    },
+    {
+      "id": "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+      "full_feature_sha256": "098c452870414a70afa5256dc1b2f44ea3fd38c9a23b9bbfcc1c24c27036918f",
+      "geometry_sha256": "25656de7ab07e14ac1622bbc9cfc3546d149d67eda1fde53b827fd092c7e27b6",
+      "fragment_ids": [
+        "physical-gap:615:9:25656de7ab07e14ac1622bbc9cfc3546d149d67eda1fde53b827fd092c7e27b6"
+      ],
+      "unmeasured_fragment_ids": [],
+      "successor_lineage_relation": "linked",
+      "counterparts": [
+        "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393"
+      ],
+      "original_alias": {
+        "logical_original_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v3/components-005.json.gz",
+        "payload_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin",
+        "encoded_sha256": "f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf",
+        "encoded_bytes": 2080606,
+        "decoded_sha256": "406730575957ec1115eb05973783814988733887fe64765d49ad22dcfdae6584",
+        "decoded_bytes": 8387970
+      }
+    },
+    {
+      "id": "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+      "full_feature_sha256": "6b337d604a259abebf5262ec649db27f211ce3392889c97c589e2ca5f19be1af",
+      "geometry_sha256": "d3e14efaeedd7d66084c3b0a203abf321237d9f4eab7b0dc6c46d69e61fc945e",
+      "fragment_ids": [
+        "physical-gap:615:6:d3e14efaeedd7d66084c3b0a203abf321237d9f4eab7b0dc6c46d69e61fc945e"
+      ],
+      "unmeasured_fragment_ids": [],
+      "successor_lineage_relation": "linked",
+      "counterparts": [
+        "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a"
+      ],
+      "original_alias": {
+        "logical_original_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v3/components-006.json.gz",
+        "payload_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+        "encoded_sha256": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187",
+        "encoded_bytes": 2085907,
+        "decoded_sha256": "82d775abb31da05bb6058c547ea47a4e8428338f5287b79072e778c50139a7e9",
+        "decoded_bytes": 8387875
+      }
+    },
+    {
+      "id": "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+      "full_feature_sha256": "d99a78cbc9ada18f6b4c0a3ab9ca90c9a89cd7335b355a56baf941bb2693cbe8",
+      "geometry_sha256": "dccb183779a17ab1aa8d63d8eb6b6e5f71701562aff4772e62bd63aca5c35fef",
+      "fragment_ids": [
+        "physical-gap:616:42:dccb183779a17ab1aa8d63d8eb6b6e5f71701562aff4772e62bd63aca5c35fef"
+      ],
+      "unmeasured_fragment_ids": [],
+      "successor_lineage_relation": "linked",
+      "counterparts": [
+        "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e"
+      ],
+      "original_alias": {
+        "logical_original_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v3/components-006.json.gz",
+        "payload_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+        "encoded_sha256": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187",
+        "encoded_bytes": 2085907,
+        "decoded_sha256": "82d775abb31da05bb6058c547ea47a4e8428338f5287b79072e778c50139a7e9",
+        "decoded_bytes": 8387875
+      }
+    },
+    {
+      "id": "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+      "full_feature_sha256": "8b94fe11897ec513c8f4832bf359c4da0f6ceab9a027d0b14709840c007bc66e",
+      "geometry_sha256": "beca68f0007c33695db81a8d763e7242f2e5d236458f8e6da9d2c89dd9e7abd7",
+      "fragment_ids": [
+        "physical-gap:615:1:db962a659e5b2d50eca3985d907949ec6ba411f8ad4d0e32494cff4223cbe491",
+        "physical-gap:616:0:c8128b4a7e5a6dbc4becbc0f500220f5949364ab4efff46adc5909edb451d902"
+      ],
+      "unmeasured_fragment_ids": [],
+      "successor_lineage_relation": "linked",
+      "counterparts": [
+        "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460"
+      ],
+      "original_alias": {
+        "logical_original_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v3/components-008.json.gz",
+        "payload_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+        "encoded_sha256": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156",
+        "encoded_bytes": 2085110,
+        "decoded_sha256": "5863c2c80e7d4d3213531d757b7bd0d372cbb3fbcc74c52f1177ab9dbb8ac94d",
+        "decoded_bytes": 8388464
+      }
+    },
+    {
+      "id": "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+      "full_feature_sha256": "4ead3371ab3d40e9d6572a57e7111aeabd9167d12b7942dd843c1a75a658bd6a",
+      "geometry_sha256": "669c6f908f457b2d226e0d70fcc5f824fc5d3a17c2e67a728df2d7c589cd0934",
+      "fragment_ids": [
+        "physical-gap:616:33:669c6f908f457b2d226e0d70fcc5f824fc5d3a17c2e67a728df2d7c589cd0934"
+      ],
+      "unmeasured_fragment_ids": [],
+      "successor_lineage_relation": "linked",
+      "counterparts": [
+        "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90"
+      ],
+      "original_alias": {
+        "logical_original_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v3/components-008.json.gz",
+        "payload_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+        "encoded_sha256": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156",
+        "encoded_bytes": 2085110,
+        "decoded_sha256": "5863c2c80e7d4d3213531d757b7bd0d372cbb3fbcc74c52f1177ab9dbb8ac94d",
+        "decoded_bytes": 8388464
+      }
+    },
+    {
+      "id": "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17",
+      "full_feature_sha256": "b0fd4df75e679ad44d85d70e6149e0ff7d0100b641ce807701602e3bc3c3635a",
+      "geometry_sha256": "76a78cf5825b68403ecd7ab4e46705f17855b2b7db5c4da806e2afcb49a0ba96",
+      "fragment_ids": [
+        "physical-gap:616:39:76a78cf5825b68403ecd7ab4e46705f17855b2b7db5c4da806e2afcb49a0ba96"
+      ],
+      "unmeasured_fragment_ids": [],
+      "successor_lineage_relation": "linked",
+      "counterparts": [
+        "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17"
+      ],
+      "original_alias": {
+        "logical_original_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v3/components-008.json.gz",
+        "payload_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+        "encoded_sha256": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156",
+        "encoded_bytes": 2085110,
+        "decoded_sha256": "5863c2c80e7d4d3213531d757b7bd0d372cbb3fbcc74c52f1177ab9dbb8ac94d",
+        "decoded_bytes": 8388464
+      }
+    },
+    {
+      "id": "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+      "full_feature_sha256": "d1063e4e00b355b6b6597973857bcbb310b93e529ee46be1d257717310676184",
+      "geometry_sha256": "f56deaa5d67f7438066f3137bb91aa6328d115ebb3924272437c3e6a05501cea",
+      "fragment_ids": [
+        "physical-gap:615:8:f56deaa5d67f7438066f3137bb91aa6328d115ebb3924272437c3e6a05501cea"
+      ],
+      "unmeasured_fragment_ids": [],
+      "successor_lineage_relation": "linked",
+      "counterparts": [
+        "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a"
+      ],
+      "original_alias": {
+        "logical_original_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v3/components-009.json.gz",
+        "payload_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+        "encoded_sha256": "c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f",
+        "encoded_bytes": 2079838,
+        "decoded_sha256": "66957c60574f28108c2cf633f02017a99d8dcbf9e1187c2588487675123a6cdd",
+        "decoded_bytes": 8387897
+      }
+    },
+    {
+      "id": "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e",
+      "full_feature_sha256": "6d4b85f2e27f7fa24982cba097c9d070df7f65f028f0cee0c5a3d4746db5bf5d",
+      "geometry_sha256": "ba07f7a761f219c765b53a521842a44cf752e4d9cecb29fca3dd57bbe6c33434",
+      "fragment_ids": [
+        "physical-gap:615:7:ba07f7a761f219c765b53a521842a44cf752e4d9cecb29fca3dd57bbe6c33434"
+      ],
+      "unmeasured_fragment_ids": [],
+      "successor_lineage_relation": "linked",
+      "counterparts": [
+        "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e"
+      ],
+      "original_alias": {
+        "logical_original_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v3/components-009.json.gz",
+        "payload_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+        "encoded_sha256": "c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f",
+        "encoded_bytes": 2079838,
+        "decoded_sha256": "66957c60574f28108c2cf633f02017a99d8dcbf9e1187c2588487675123a6cdd",
+        "decoded_bytes": 8387897
+      }
+    },
+    {
+      "id": "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a",
+      "full_feature_sha256": "ff4e09fceb6ac0b402df56935d983ec55cf892c020c4c20a5fce56637f8d24bc",
+      "geometry_sha256": "9801d6487186d44c1e73d68c25de135a5b0fdbfbaf2149bf5da3ce505ce04fa0",
+      "fragment_ids": [
+        "physical-gap:616:43:9801d6487186d44c1e73d68c25de135a5b0fdbfbaf2149bf5da3ce505ce04fa0"
+      ],
+      "unmeasured_fragment_ids": [],
+      "successor_lineage_relation": "linked",
+      "counterparts": [
+        "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a"
+      ],
+      "original_alias": {
+        "logical_original_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/components-v3/components-010.json.gz",
+        "payload_path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin",
+        "encoded_sha256": "e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a",
+        "encoded_bytes": 1714760,
+        "decoded_sha256": "6a432ffbe3d9a8d4412140438c960b0113f752cb70c2db20b76c7467e9575025",
+        "decoded_bytes": 6909917
+      }
+    }
+  ],
+  "result": "All 21 feature canonical hashes, fragment IDs and unmeasured IDs match the immutable current-inventory lineage; none of the 21 IDs is removed or upserted by this successor delta. No stale upsert substitution.",
+  "independent_root_review_file": "root-whole-input-scope-review.json",
+  "independent_root_review_outcome": "passed original input byte reconstruction with explicit actual ordinary alias correction; all21 complete current pointsets checked against c6 inventory plus delta; author declared virtual pins still need correction",
+  "full_contact_source_product_binding": "all ten complete contact features hash-match decoded whole original source corpus capsules; exact contact geometry and feature hashes are retained in input-bindings.json"
+}

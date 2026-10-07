@@ -1,0 +1,50 @@
+# Namibia–Angola gap-family source and physical-reference review
+
+## Scope and disposition
+
+Research status: **partial**. The reproducible source-product comparison is complete for this packet, while gap-scale physical water evidence and completed demarcation records remain unavailable.
+
+This packet reviews the complete 21-component candidate family and all 10 source-contact features carried by issue #1268. It preserves the original geometry and source diagnostics. It does not assign any candidate to Namibia or Angola, amend a boundary, resolve the broader issue #1202, or authorize a data import.
+
+The geometric result is supported at the product level: all 21 candidates have positive-area intersections with the retained 2018 Angola ADM2 product; 20 also have positive-area intersections with the retained 2007 Namibia ADM2 product. Against the same-release full/detail products, the same counts are 21 and 20. The 10 retained contact features all differ topologically from their full-product counterparts. These findings describe how source polygons overlap the candidates; they do not decide which source is authoritative.
+
+Physical water or historic channel location, cause of the candidate geometry, and exact boundary authority remain unresolved. The original water diagnostics label all 21 components `unverified`. The 1926 treaty is relevant to the boundary framework, but its text and the archive catalogue leads do not establish the completed demarcation at these coordinates. Available Namibia basin materials are generalized context; an approved Okavango–Omatako booklet was identified but could not be retrieved or inspected. No administrative assignment is made.
+
+## Contents
+
+- `inputs/`: immutable issue-scope inputs, contact/source bindings, full 35-pin input inventory, and lineage/source-reference leads.
+- `sources/`: byte-preserved consumed simplified geoBoundaries capsules; same-release full products and metadata; exact Git LFS pointer text; the inspected 1926 treaty; and a clearly identified HTML response where MINEA's PDF endpoint returned a portal page.
+- `source-geometry-comparison.json`: verifies custody pins and original feature identities, and reports whole-consumed-product intersections.
+- `full-product-comparison.json`: compares every candidate against both same-release full products and every candidate against each of the 10 full source contacts; retains intersection and difference geometries, dimension counts, and controls.
+- `candidate-classifications.json`: one row per candidate with separate source geometry, physical water, processing cause, authority, and decision-limit fields.
+- `official-reference-review.json`: dated source audit, retrieval status, scope, and limits.
+- `reproduce_source_geometry.py` and `reproduce_full_product_comparison.py`: complete independent reproduction commands.
+
+## Geometry method
+
+The producer scripts re-read the 35 whole-input pins from their immutable Git commits, verify component features against the content-addressed custody payloads, and verify all 10 contact features against the full consumed products. They compare every candidate with all 109 Namibia and 161 Angola features in the consumed simplified products, retaining each intersecting source-unit intersection and both directed differences as geometries, plus the candidate-minus-combined-union geometry. The second script also checks the same-release full products (109 Namibia, 161 Angola), records positive-area component/source intersections and candidate-minus-source differences, and evaluates all 210 candidate/contact pairs. It retains the source-contact symmetric differences and the geometry of each positive intersection or difference; disjoint pairs are recorded as such.
+
+All overlay coordinates remain in longitude/latitude (EPSG:4326). Area values are planar square degrees and are not ground-area estimates. There is no reprojection, repair, snapping, clipping, assignment, or legal interpretation. Both scripts include positive and negative controls for coverage, disjointness, point-only/line-only/area geometry behavior, missing/invalid inputs, and original-byte preservation. The output records the exact software environment and method details.
+
+## Source and authority limits
+
+The consumed simplified products are recorded as geoBoundaries NAM ADM2 (represented year 2007, Public Domain) and AGO ADM2 (represented year 2018, CC-BY 3.0 IGO). Full products are retained as separate, same-release product observations from commit `9469f09592ced973a3448cf66b6100b741b64c0d`; they are not substituted for the consumed products.
+
+The official 1926 treaty text identifies the Ruacana/Rua Cana waterfall reference, describes a latitude-parallel and Okavango/Cubango sequence, refers to the 1886 Lisbon treaty, and requires joint demarcation. It does not supply a modern georeferenced alignment or the completed survey/beacon record for each candidate. National Archives of Namibia catalogues list 1927–28 Angola Boundary Survey and 1926–28 South Africa–Angola Boundary Commission material, but the underlying records were not obtained. The Ministry's 2008 water-basin map is at 1:2,000,000 and useful only for regional context. The approved Okavango–Omatako basin booklet was identified in the Ministry portal, but its file request timed out; it is not relied upon for a physical-edge claim.
+
+Accordingly, the following questions remain open: the present bank/course and historic channel at each candidate; whether any candidates are water, wetland, floodplain, or land; which processing step produced each candidate; whether the candidates coincide with a legally demarcated line; and whether any source polygon is authoritative for territorial attribution. An archive catalogue listing is a retrieval lead, not proof of the underlying contents.
+
+## Reproduction
+
+From the repository root, using Python 3.12.14, Shapely 2.1.2, and GEOS as recorded by the scripts:
+
+```sh
+python3 research/geography/gap-source-namibia-angola-20261006/reproduce_source_geometry.py
+python3 research/geography/gap-source-namibia-angola-20261006/reproduce_full_product_comparison.py
+```
+
+The scripts use only retained files plus exact immutable Git blobs named in `inputs/whole-input-pins.json`. See `reproduction-runs.json` for two complete executions and output-hash agreement. Expected geometric summary: 21 candidate features; 21 positive-area Angola and 20 positive-area Namibia intersections against both product vintages; 49 of 210 candidate/contact pairs intersect, all with positive area; 10 of 10 source contacts differ topologically between consumed and full products.
+
+## Exact limits
+
+This packet supports statements about retained source bytes, feature identity, product vintage metadata, and reproducible polygon overlays. It does not establish legal title, recognized sovereignty, an authoritative current border, a physical river edge, historical channel movement, or causation. It is not an approval to publish or import geometry.
