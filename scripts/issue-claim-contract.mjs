@@ -1,3 +1,4 @@
+import {quotaDelay} from './github-quota.mjs';
 import {laneForBranch,validateIssueMetadata,validateIssuePRBody,validateGeographyOwnedPaths} from './check-handoff-scope.mjs';
 import {evidenceRequirement} from './evidence-policy.mjs';
 import {assertResearchImportsReady} from './research-import-gate.mjs';
@@ -130,10 +131,16 @@ export async function linkedPulls(api,repo,number){
  for(const event of timeline){const source=event.source?.issue;if(!source?.pull_request)continue;try{if(validateIssuePRBody(source.body??'').github_issue===number)ids.add(source.number);}catch{}}
  return Promise.all([...ids].map(id=>api(`/repos/${repo}/pulls/${id}`)));
 }
-export function githubAPI(token){
+export function githubAPI(token, {onRequest = () => {}, readWaitMs = 0, now = Date.now, sleep = ms => new Promise(resolve => setTimeout(resolve, ms))} = {}){
  if(!token)throw Error('Read/write GitHub token required');
- return async(route,method='GET',body)=>{
-  const response=await fetch('https://api.github.com'+route,{method,headers:{Authorization:`Bearer ${token}`,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28',...(body?{'Content-Type':'application/json'}:{})},...(body?{body:JSON.stringify(body)}:{}),signal:AbortSignal.timeout(20000)});
+ const apiStarted=now();
+ const request = async(route,method='GET',body,observeCapacity=()=>{})=>{
+  let response;
+  try {response=await fetch('https://api.github.com'+route,{method,headers:{Authorization:`Bearer ${token}`,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28',...(body?{'Content-Type':'application/json'}:{})},...(body?{body:JSON.stringify(body)}:{}),signal:AbortSignal.timeout(20000)});}
+  catch(error){onRequest({route,method,status:'transport-error'});throw error;}
+  onRequest({route, method, status: response.status});
+  const headerNumber = name => {const value=response.headers.get(name);return /^\d{1,13}$/.test(value??'')?Number(value):undefined;};
+  observeCapacity({limit:headerNumber('x-ratelimit-limit'),remaining:headerNumber('x-ratelimit-remaining'),reset:headerNumber('x-ratelimit-reset'),resource:response.headers.get('x-ratelimit-resource')});
   if(!response.ok){
    const error=Error(`GitHub ${method} ${route} failed (HTTP ${response.status})`);
    let payload;try{payload=await response.json();}catch{/* Keep the actual HTTP rejection even without a JSON message. */}
@@ -158,4 +165,25 @@ export function githubAPI(token){
   }
   return payload;
  };
+ const api = async(route, method='GET', body) => {
+  for(let attempt=0;;attempt++){
+   try{return await request(route,method,body);}
+   catch(error){
+    const delay=quotaDelay(error,now());
+    // Never retry writes, transport ambiguity, ordinary denial or unbounded waits.
+    if(method!=='GET'||body!==undefined||delay===null||attempt>=2||delay>=readWaitMs-(now()-apiStarted))throw error;
+    await sleep(delay);
+   }
+  }
+ };
+ api.readRepositoryCapacity=async repo=>{
+  if(!/^[-\w.]+\/[-\w.]+$/.test(repo))throw Error('Invalid capacity repository');
+  let observed;
+  try {await request(`/repos/${repo}`,'GET',undefined,row=>{observed=row;});}
+  catch(error){if(quotaDelay(error,now())===null||error.github?.rate_remaining!=='0')throw error;}
+  const row={...observed};
+  if(row.resource!=='core'||!['limit','remaining','reset'].every(key=>Number.isSafeInteger(row[key]))||row.limit<1||row.remaining<0||row.remaining>row.limit||row.reset<1)throw Error('Unavailable actual repository capacity');
+  return row;
+ };
+ return api;
 }

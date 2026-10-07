@@ -1,3 +1,4 @@
+import {copyAPIFeatures,quotaDelay} from './github-quota.mjs';
 import {performance} from 'node:perf_hooks';
 import {safeEvidencePath, sha256} from './evidence-quality.mjs';
 import {evidenceRequirement} from './evidence-policy.mjs';
@@ -127,13 +128,16 @@ export function capacityObservation(payload) {
 }
 
 export async function waitForFinalCapacity({api, required, now = () => performance.now(), wallNow = Date.now,
-  sleep = ms => new Promise(resolve => setTimeout(resolve, ms)), deadlineMs = CAPACITY_WAIT_MS, pollMs = 30000, onObservation = () => {}}) {
+  sleep = ms => new Promise(resolve => setTimeout(resolve, ms)), deadlineMs = CAPACITY_WAIT_MS, pollMs = 30000, repo, onObservation = () => {}}) {
   need(Number.isSafeInteger(required) && required > 0 && Number.isFinite(deadlineMs) && deadlineMs > 0 &&
     Number.isFinite(pollMs) && pollMs > 0 && pollMs <= 60000, 'Invalid bounded final capacity wait');
   const started = now(); let observations = 0;
   for (;;) {
     need(now() - started < deadlineMs, 'Final capacity wait timed out; bounded intervention required');
-    const observed = capacityObservation(await api('/rate_limit'));
+    let observed;
+    try {observed = typeof api.readRepositoryCapacity==='function' && repo
+      ? await api.readRepositoryCapacity(repo) : capacityObservation(await api('/rate_limit'));}
+    catch(error){const delay=quotaDelay(error,wallNow());if(delay===null||delay>=deadlineMs-(now()-started))throw error;await sleep(delay);continue;}
     need(now() - started < deadlineMs, 'Final capacity wait timed out; bounded intervention required');
     const elapsedMs = Math.max(0, now() - started); observations++;
     onObservation({phase: 'final-capacity', required, ...observed, observations, elapsed_ms: Math.floor(elapsedMs), reserved: false});
@@ -149,7 +153,7 @@ export async function waitForFinalCapacity({api, required, now = () => performan
 export function finalRequestBudget(api) {
   let maximum = null, planning = false, used = 0, deadline;
   const checkDeadline = () => need(!deadline || deadline() > 0, 'Final capacity/validation deadline exhausted; bounded intervention required');
-  return {setDeadline(value) {deadline = value;}, setLimit(value, isPlanning = false) {
+  const budget = {setDeadline(value) {deadline = value;}, setLimit(value, isPlanning = false) {
     need(Number.isSafeInteger(value) && value > 0, 'Invalid final API call bound');
     maximum = value; planning = isPlanning; used = 0;
   }, api: async (...args) => {
@@ -166,6 +170,8 @@ export function finalRequestBudget(api) {
     used++;
     const value = await api(...args); checkDeadline(); return value;
   }};
+  copyAPIFeatures(budget.api,api);
+  return budget;
 }
 
 export function boundedFinalAPI(api, maximum, {planning = false} = {}) {
@@ -181,7 +187,7 @@ export async function beginFinalPlanning(options) {
     // No repository GET precedes this observation. A zero-capacity job can wait
     // for the reset before even its cheap head/FIFO/manifest planning reads.
     // Reserve 16 calls for bounded rejection cleanup and its durable receipt.
-    const capacity = await waitForFinalCapacity({...timing, now, api: options.api, required: 17,
+    const capacity = await waitForFinalCapacity({...timing, now, api: options.api, repo: options.repo, required: 17,
       onObservation: row => {receipt = {...row, phase: 'final-planning-capacity'}; options.capacityObserver?.(receipt);}});
     options.capacityBudget?.setLimit(capacity.remaining - 16, true);
     options.capacityBudget?.setDeadline(remaining);
@@ -238,7 +244,7 @@ export async function paceFinalValidation(options, {inspect, admission = async (
         // Only our own proven planning-call deficit permits this retry. API403,
         // authority failure and incomplete inventories remain original failures.
         // Discard every partial mutable inventory and start all metadata again.
-        const capacity = await waitForFinalCapacity({...options.capacityTiming, api: options.capacityAPI,
+        const capacity = await waitForFinalCapacity({...options.capacityTiming, api: options.capacityAPI, repo: options.repo,
           deadlineMs: options.capacityDeadlineRemaining(), required: error.planningNeeded,
           onObservation: row => {
             const observation = {...row, phase: 'final-planning-capacity', planning_attempt: planningAttempt};
@@ -255,7 +261,7 @@ export async function paceFinalValidation(options, {inspect, admission = async (
       proof_calls: proofCalls, artifact_pages: artifactPages, inventory: before.evidence};
     const capacity = await waitForFinalCapacity({...options.capacityTiming,
       ...(options.capacityDeadlineRemaining ? {deadlineMs: options.capacityDeadlineRemaining()} : {}),
-      api: options.capacityAPI ?? options.api, required,
+      api: options.capacityAPI ?? options.api, repo: options.repo, required,
       onObservation: observation => {
         receipt = {...receipt, ...observation}; options.capacityObserver?.(observation);
       }});

@@ -1,3 +1,4 @@
+import {copyAPIFeatures} from './github-quota.mjs';
 import {createHash} from 'node:crypto';
 
 export const IMMUTABLE_CACHE_BYTES = 272 * 1024 * 1024;
@@ -9,7 +10,7 @@ export const IMMUTABLE_CACHE_ENTRIES = 512;
 export function memoizeImmutableGitBlobs(api, {maxBytes = IMMUTABLE_CACHE_BYTES, maxEntries = IMMUTABLE_CACHE_ENTRIES} = {}) {
   if (!Number.isSafeInteger(maxBytes) || maxBytes < 0 || !Number.isSafeInteger(maxEntries) || maxEntries < 0) throw Error('Invalid immutable blob cache bounds');
   const cache = new Map(); let bytes = 0;
-  return async (route, method = 'GET', body) => {
+  const wrapped = async (route, method = 'GET', body) => {
     const match = /^\/repos\/[\w.-]+\/[\w.-]+\/git\/blobs\/([a-f0-9]{40})$/.exec(route);
     if (!match || method !== 'GET' || body !== undefined) return api(route, method, body);
     if (cache.has(route)) return cache.get(route);
@@ -30,4 +31,5 @@ export function memoizeImmutableGitBlobs(api, {maxBytes = IMMUTABLE_CACHE_BYTES,
     }
     return value;
   };
+  return copyAPIFeatures(wrapped,api);
 }

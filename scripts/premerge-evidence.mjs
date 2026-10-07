@@ -167,7 +167,16 @@ async function remoteReader(api, repo, commits) {
     const bytes = Buffer.from(blob.content, 'base64'); need(bytes.length === entry.size, 'Incomplete Git blob bytes');
     cache.set(key, bytes); return bytes;
   }
-  return {load, read: (name, vintage) => { const bytes = cache.get(`${vintage}:${name}`); need(bytes, 'Unloaded evidence bytes'); return bytes; }};
+  async function prefetch(loads) {
+    if(typeof api.prefetchGitBlobs!=='function')return;
+    const rows=loads.map(([name,vintage])=>{safeEvidencePath(name);const row=trees.get(vintage)?.get(name);need(row?.type==='blob'&&['100644','100755'].includes(row.mode)&&Number.isSafeInteger(row.size)&&row.size>=0&&row.size<=MAX_FILE,'Invalid prefetch evidence binding');return row;});
+    const byOID=new Map(),byPath=new Map();
+    for(let i=0;i<rows.length;i++){const row=rows[i];need(!byOID.has(row.sha)||byOID.get(row.sha).size===row.size,'Conflicting immutable tree sizes');byOID.set(row.sha,row);byPath.set(JSON.stringify(loads[i]),row);}
+    const unique=[...byOID.values()];
+    need([...byPath.values()].reduce((sum,row)=>sum+row.size,0)<=256*1024*1024,'Remote evidence budget exceeded');
+    if(unique.length<=512)await api.prefetchGitBlobs(repo,unique);
+  }
+  return {load, prefetch, read: (name, vintage) => { const bytes = cache.get(`${vintage}:${name}`); need(bytes, 'Unloaded evidence bytes'); return bytes; }};
 }
 
 export async function checkPremergeEvidence({api, repo, pr, issue, reservation, files, policy = loadEvidencePolicy(), review = false}) {
@@ -190,6 +199,7 @@ export async function checkPremergeEvidence({api, repo, pr, issue, reservation, 
     const loads = [...manifest.baseline.files.map(file => [file.path, manifest.baseline.commit]),
       ...manifest.sources.flatMap(source => source.files ?? []).map(file => [file.path, 'candidate']), ...manifest.outputs.map(file => [file.path, 'candidate']),
       ...files.filter(file => file.status !== 'added').map(file => [file.previous_filename ?? file.filename, 'base'])];
+    await reader.prefetch(loads);
     for (const [name, vintage] of loads) await reader.load(name, vintage);
     const checked = validatePremergeManifest(manifest, {readFile: reader.read, files, manifestPath: requirement.manifestPath,
       issue, spec, reservation, branch: pr.head.ref, pr});
