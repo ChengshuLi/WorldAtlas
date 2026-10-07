@@ -17,7 +17,7 @@
   ],
   "subject_ids_sha256": "0273221d08cdaa665a81e7f6d510091dd77798f54385948b3b1b92c944d79676",
   "baseline": {
-    "commit": "68ed7c9ea8c66714c5e30afd8fec827d94142fbd",
+    "commit": "c5ae8a8457e9e5b00cf05482fbe947680ea9ba43",
     "files": [
       {
         "path": "coordination/engineering/worldwide-inventory-1164-20261006/run-one/report.json",
@@ -379,13 +379,186 @@
         "from": 1926,
         "to": 1929
       }
+    },
+    {
+      "id": "jrc-gsw-occurrence-10e-10s",
+      "url": "https://storage.googleapis.com/water-world/download2024/VER1-5/occurrence/occurrence_10E_10S_v1_5_2024.tif",
+      "role": "Complete original JRC GSW v1.5 occurrence GeoTIFF tile 10E_10S; original file reassembled byte-for-byte from retained parts and SHA-256 verified.",
+      "vintage": "2024 v1.5",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "redistributable",
+        "terms": "Official ISO metadata states “No limitations on use”; official download page requests attribution “Source: EC JRC/Google”."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "files": [
+        {
+          "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/occurrence_10E_10S.part-aa",
+          "bytes": 30000000,
+          "sha256": "c7aa305b53357ae6ff043a91aaf197231094ce5369373d56ca9b216f9502e411",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/occurrence_10E_10S.part-ab",
+          "bytes": 6860540,
+          "sha256": "acbf5c34e50f09a469f89831507afb5e457856aa5f0a209d42ddabdd35aaca31",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "restoration": "Concatenate the listed files in order to reconstruct 36860540 bytes; require SHA-256 ebbe5c88ce5b8b161fdcefb80ffa5eff44b09868433c86ad1536968c0f1c20dd. Original URL: https://storage.googleapis.com/water-world/download2024/VER1-5/occurrence/occurrence_10E_10S_v1_5_2024.tif.",
+      "limit": "Optical surface-water classification only. Not a surveyed bank, historic channel, legal boundary, processing cause, or territorial assignment. The 2022 Landsat Collection 2 transition has the source-documented variable co-registration limit.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 1984,
+        "to": 2025
+      },
+      "source_original_bytes": 36860540,
+      "source_original_sha256": "ebbe5c88ce5b8b161fdcefb80ffa5eff44b09868433c86ad1536968c0f1c20dd"
+    },
+    {
+      "id": "jrc-gsw-occurrence-20e-10s",
+      "url": "https://storage.googleapis.com/water-world/download2024/VER1-5/occurrence/occurrence_20E_10S_v1_5_2024.tif",
+      "role": "Complete original JRC GSW v1.5 occurrence GeoTIFF tile 20E_10S; original file reassembled byte-for-byte from retained parts and SHA-256 verified.",
+      "vintage": "2024 v1.5",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "redistributable",
+        "terms": "Official ISO metadata states “No limitations on use”; official download page requests attribution “Source: EC JRC/Google”."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "files": [
+        {
+          "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/occurrence_20E_10S.part-aa",
+          "bytes": 30000000,
+          "sha256": "4cc33eeb599e90f3b92d8ed2db5daa5640276517922dc95c9707d26e14cfc24b",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/occurrence_20E_10S.part-ab",
+          "bytes": 11757444,
+          "sha256": "079f0d1b30e1535c6d20a9ce0cb39b79cb3ef8095bdb4227006e2332d2e4a96c",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "restoration": "Concatenate the listed files in order to reconstruct 41757444 bytes; require SHA-256 3542a5458e43999271189830f9c39398f514e242ba9aab8be68e67e558741588. Original URL: https://storage.googleapis.com/water-world/download2024/VER1-5/occurrence/occurrence_20E_10S_v1_5_2024.tif.",
+      "limit": "Optical surface-water classification only. Not a surveyed bank, historic channel, legal boundary, processing cause, or territorial assignment. The 2022 Landsat Collection 2 transition has the source-documented variable co-registration limit.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 1984,
+        "to": 2025
+      },
+      "source_original_bytes": 41757444,
+      "source_original_sha256": "3542a5458e43999271189830f9c39398f514e242ba9aab8be68e67e558741588"
+    },
+    {
+      "id": "jrc-gsw-seasonality-10e-10s",
+      "url": "https://storage.googleapis.com/water-world/download2024/VER1-5/seasonality/seasonality_10E_10S_v1_5_2024.tif",
+      "role": "Complete original JRC GSW v1.5 seasonality GeoTIFF tile 10E_10S; original file reassembled byte-for-byte from retained parts and SHA-256 verified.",
+      "vintage": "2024 v1.5",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "redistributable",
+        "terms": "Official ISO metadata states “No limitations on use”; official download page requests attribution “Source: EC JRC/Google”."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "files": [
+        {
+          "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/seasonality_10E_10S.tif",
+          "bytes": 18621860,
+          "sha256": "222564e5f80e660c7122946f62ec92ca19219f1007ec9eb75471b779951934dc",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "restoration": "Concatenate the listed files in order to reconstruct 18621860 bytes; require SHA-256 222564e5f80e660c7122946f62ec92ca19219f1007ec9eb75471b779951934dc. Original URL: https://storage.googleapis.com/water-world/download2024/VER1-5/seasonality/seasonality_10E_10S_v1_5_2024.tif.",
+      "limit": "Optical surface-water classification only. Not a surveyed bank, historic channel, legal boundary, processing cause, or territorial assignment. The 2022 Landsat Collection 2 transition has the source-documented variable co-registration limit.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2024,
+        "to": 2025
+      },
+      "source_original_bytes": 18621860,
+      "source_original_sha256": "222564e5f80e660c7122946f62ec92ca19219f1007ec9eb75471b779951934dc"
+    },
+    {
+      "id": "jrc-gsw-seasonality-20e-10s",
+      "url": "https://storage.googleapis.com/water-world/download2024/VER1-5/seasonality/seasonality_20E_10S_v1_5_2024.tif",
+      "role": "Complete original JRC GSW v1.5 seasonality GeoTIFF tile 20E_10S; original file reassembled byte-for-byte from retained parts and SHA-256 verified.",
+      "vintage": "2024 v1.5",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "redistributable",
+        "terms": "Official ISO metadata states “No limitations on use”; official download page requests attribution “Source: EC JRC/Google”."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "files": [
+        {
+          "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/seasonality_20E_10S.tif",
+          "bytes": 20100950,
+          "sha256": "08f6d1c0ad855034f24aa5c5f5b90cbcfd50450a38ff1a69bd327d6efda1801b",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "restoration": "Concatenate the listed files in order to reconstruct 20100950 bytes; require SHA-256 08f6d1c0ad855034f24aa5c5f5b90cbcfd50450a38ff1a69bd327d6efda1801b. Original URL: https://storage.googleapis.com/water-world/download2024/VER1-5/seasonality/seasonality_20E_10S_v1_5_2024.tif.",
+      "limit": "Optical surface-water classification only. Not a surveyed bank, historic channel, legal boundary, processing cause, or territorial assignment. The 2022 Landsat Collection 2 transition has the source-documented variable co-registration limit.",
+      "temporal_status": "historical",
+      "supported_interval": {
+        "from": 2024,
+        "to": 2025
+      },
+      "source_original_bytes": 20100950,
+      "source_original_sha256": "08f6d1c0ad855034f24aa5c5f5b90cbcfd50450a38ff1a69bd327d6efda1801b"
+    },
+    {
+      "id": "jrc-gsw-v1-5-official-guide-and-metadata",
+      "url": "https://global-surface-water.appspot.com/download",
+      "role": "Official JRC download page, v2024 Data Users Guide, and ISO metadata defining product dates, values, limits, and attribution.",
+      "vintage": "v1.5 2024 documentation and metadata",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "redistributable",
+        "terms": "Official ISO metadata states “No limitations on use”; official download page requests attribution “Source: EC JRC/Google”."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "files": [
+        {
+          "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/DataUsersGuidev2024_v.5.pdf",
+          "bytes": 1142853,
+          "sha256": "94aebddbb2d66bcbacea14326d84d0b9d9401c8ef95bc48b42991448f36b839b",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/occurrence_2024.xml",
+          "bytes": 4946,
+          "sha256": "bc813149d2f0b2c5bfefab17c7a7af4b4f1d68b3ae20c7093623c87b945382a3",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/seasonality_2024.xml",
+          "bytes": 4937,
+          "sha256": "7f8bacf24395e625471eacb29a6d8f0d095bee15a952c5de6fe176981cbc39a1",
+          "hash_kind": "file-bytes"
+        },
+        {
+          "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/jrc-gsw-download.html",
+          "bytes": 85116,
+          "sha256": "8b8d8613efb3078b2c2f64c3a76ccdc6fbacdb7d35a7654be2bb98314eb81e62",
+          "hash_kind": "file-bytes"
+        }
+      ],
+      "temporal_status": "reference",
+      "limit": "Source documentation and metadata support product interpretation; they are not boundary or shoreline evidence."
     }
   ],
   "outputs": [
     {
       "path": "research/geography/gap-source-namibia-angola-20261006/README.md",
-      "bytes": 7013,
-      "sha256": "f6ff9288269f400312b3995acc0d9149709978daaf192cb53de54e1979afd3cd",
+      "bytes": 9637,
+      "sha256": "672cdbf2aa9227544fa7e2698ba4e7e97b188d88eb0aad027bf0e548f04410cd",
       "hash_kind": "file-bytes",
       "role": "evidence-output"
     },
@@ -398,8 +571,8 @@
     },
     {
       "path": "research/geography/gap-source-namibia-angola-20261006/candidate-classifications.json",
-      "bytes": 93971,
-      "sha256": "89eb17aa1bb51a6edefd59e3df2e9833a12e8fad75c46c51fa495f7a7ea8896f",
+      "bytes": 113216,
+      "sha256": "29e2e810ecd09437004f0d50d464d9f02487ad52ff8a01cd61abba15e9e2f381",
       "hash_kind": "file-bytes",
       "role": "evidence-output"
     },
@@ -468,8 +641,8 @@
     },
     {
       "path": "research/geography/gap-source-namibia-angola-20261006/official-reference-review.json",
-      "bytes": 11277,
-      "sha256": "4c11dd936fd8e4507651798e61a3133c3f200809535c6cda580745a06dc6db3c",
+      "bytes": 14630,
+      "sha256": "4d20e3855cb30d587af797f11682316df5cd91f0b05801310e9aea634ea468ed",
       "hash_kind": "file-bytes",
       "role": "evidence-output"
     },
@@ -535,6 +708,55 @@
       "sha256": "1991dc9b7fc29fcb922fb1adf45b8c36649800e4af8bb8326cf173ebdfd8fc4a",
       "hash_kind": "file-bytes",
       "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/jrc-gsw-analysis-input-set.json",
+      "bytes": 3532,
+      "sha256": "0a4ff34f74e23d667ff9f877ce53fa0188e31fc4cb5c8722b41a85d6c7a6a4a9",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/jrc-gsw-water-analysis.json",
+      "bytes": 74139,
+      "sha256": "bc3a0002d6822ddf0ed12e010f52461fb27b28b028abab11673f254be64fd73c",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/reproduce_jrc_gsw_water.py",
+      "bytes": 11930,
+      "sha256": "ec5774905af8d3ad7d1115dc727a99924a169ba69baa34edd7ce0d74bb1edc4a",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/validation-jrc-gsw-positive-control.json",
+      "bytes": 518,
+      "sha256": "042c7c863740b6782801a264ca870e326615ea72e928c0d5e6fe6b752e0fc68f",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/validation-jrc-gsw-negative-control.json",
+      "bytes": 418,
+      "sha256": "6e6ac7838f8c0b1f158554cd93dd4ed0ddea5ec38ab7c2e30bfd809e7d79a73b",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/manifest.json",
+      "bytes": 5317,
+      "sha256": "03e48ad181884b4533861972e078f8a24b762f7a2445fd59ec25fff0c7deb248",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/jrc-gsw-reproduction-runs.json",
+      "bytes": 8586,
+      "sha256": "57f0e3c0b4a59eb3d2e3226efec5b6649ed340a823b84ef9650a2c42d405b9da",
+      "hash_kind": "file-bytes",
+      "role": "evidence-output"
     }
   ],
   "methods": [
@@ -544,6 +766,13 @@
       "description": "Verify exact source bytes, feature identity, and planar polygon intersections/differences on unchanged EPSG:4326 coordinates. Repeated full executions are separately recorded in reproduction-runs.json. No repair, reprojection, boundary inference, or assignment.",
       "software": "Python 3.12.14; Shapely 2.1.2; GEOS 3.13.1; Git for immutable whole-file pins",
       "units": "feature and pair counts; unprojected square degrees"
+    },
+    {
+      "id": "jrc-gsw-pixel-center-overlay",
+      "kind": "measurement",
+      "description": "Reassemble complete JRC GSW v1.5 occurrence and seasonality GeoTIFF tiles from retained parts, verify original-file and part hashes, then count pixel centers selected by a mask of each unchanged candidate geometry. Exclude value 255 as NoData; do not reproject, resample, repair, buffer, or assign geometry.",
+      "software": "Python 3.12.14; Rasterio 1.4.3; NumPy 2.3.5; Shapely 2.1.2; GDAL bundled with Rasterio",
+      "units": "pixel-center counts and candidate-feature counts; values retain source units"
     }
   ],
   "metrics": [
@@ -553,7 +782,7 @@
       "unit": "features",
       "input_sha256": "7a0d1e250f6387311b7af67571a2d91a1775db9c6e500e2383a506f572a5b9b8",
       "vintage": "baseline",
-      "evaluation_commit": "68ed7c9ea8c66714c5e30afd8fec827d94142fbd"
+      "evaluation_commit": "c5ae8a8457e9e5b00cf05482fbe947680ea9ba43"
     },
     {
       "id": "contact_count",
@@ -561,7 +790,7 @@
       "unit": "source features",
       "input_sha256": "7a0d1e250f6387311b7af67571a2d91a1775db9c6e500e2383a506f572a5b9b8",
       "vintage": "baseline",
-      "evaluation_commit": "68ed7c9ea8c66714c5e30afd8fec827d94142fbd"
+      "evaluation_commit": "c5ae8a8457e9e5b00cf05482fbe947680ea9ba43"
     },
     {
       "id": "consumed_positive_area_ago",
@@ -569,7 +798,7 @@
       "unit": "candidate features",
       "input_sha256": "7a0d1e250f6387311b7af67571a2d91a1775db9c6e500e2383a506f572a5b9b8",
       "vintage": "baseline",
-      "evaluation_commit": "68ed7c9ea8c66714c5e30afd8fec827d94142fbd"
+      "evaluation_commit": "c5ae8a8457e9e5b00cf05482fbe947680ea9ba43"
     },
     {
       "id": "consumed_positive_area_nam",
@@ -577,7 +806,7 @@
       "unit": "candidate features",
       "input_sha256": "7a0d1e250f6387311b7af67571a2d91a1775db9c6e500e2383a506f572a5b9b8",
       "vintage": "baseline",
-      "evaluation_commit": "68ed7c9ea8c66714c5e30afd8fec827d94142fbd"
+      "evaluation_commit": "c5ae8a8457e9e5b00cf05482fbe947680ea9ba43"
     },
     {
       "id": "full_positive_area_ago",
@@ -585,7 +814,7 @@
       "unit": "candidate features",
       "input_sha256": "7a0d1e250f6387311b7af67571a2d91a1775db9c6e500e2383a506f572a5b9b8",
       "vintage": "baseline",
-      "evaluation_commit": "68ed7c9ea8c66714c5e30afd8fec827d94142fbd"
+      "evaluation_commit": "c5ae8a8457e9e5b00cf05482fbe947680ea9ba43"
     },
     {
       "id": "full_positive_area_nam",
@@ -593,7 +822,7 @@
       "unit": "candidate features",
       "input_sha256": "7a0d1e250f6387311b7af67571a2d91a1775db9c6e500e2383a506f572a5b9b8",
       "vintage": "baseline",
-      "evaluation_commit": "68ed7c9ea8c66714c5e30afd8fec827d94142fbd"
+      "evaluation_commit": "c5ae8a8457e9e5b00cf05482fbe947680ea9ba43"
     },
     {
       "id": "candidate_contact_pairs_intersect",
@@ -601,7 +830,7 @@
       "unit": "pairs",
       "input_sha256": "7a0d1e250f6387311b7af67571a2d91a1775db9c6e500e2383a506f572a5b9b8",
       "vintage": "baseline",
-      "evaluation_commit": "68ed7c9ea8c66714c5e30afd8fec827d94142fbd"
+      "evaluation_commit": "c5ae8a8457e9e5b00cf05482fbe947680ea9ba43"
     },
     {
       "id": "full_contact_geometry_differences",
@@ -609,15 +838,15 @@
       "unit": "contacts",
       "input_sha256": "7a0d1e250f6387311b7af67571a2d91a1775db9c6e500e2383a506f572a5b9b8",
       "vintage": "baseline",
-      "evaluation_commit": "68ed7c9ea8c66714c5e30afd8fec827d94142fbd"
+      "evaluation_commit": "c5ae8a8457e9e5b00cf05482fbe947680ea9ba43"
     },
     {
-      "id": "unverified_water_status",
+      "id": "original_water_diagnostic_unverified",
       "value": 21,
       "unit": "candidate features",
       "input_sha256": "7a0d1e250f6387311b7af67571a2d91a1775db9c6e500e2383a506f572a5b9b8",
       "vintage": "baseline",
-      "evaluation_commit": "68ed7c9ea8c66714c5e30afd8fec827d94142fbd"
+      "evaluation_commit": "c5ae8a8457e9e5b00cf05482fbe947680ea9ba43"
     },
     {
       "id": "covered_by_consumed_union",
@@ -625,7 +854,7 @@
       "unit": "candidate features",
       "input_sha256": "7a0d1e250f6387311b7af67571a2d91a1775db9c6e500e2383a506f572a5b9b8",
       "vintage": "baseline",
-      "evaluation_commit": "68ed7c9ea8c66714c5e30afd8fec827d94142fbd"
+      "evaluation_commit": "c5ae8a8457e9e5b00cf05482fbe947680ea9ba43"
     },
     {
       "id": "candidate_contact_pairs_positive_area",
@@ -633,7 +862,7 @@
       "unit": "pairs",
       "input_sha256": "7a0d1e250f6387311b7af67571a2d91a1775db9c6e500e2383a506f572a5b9b8",
       "vintage": "baseline",
-      "evaluation_commit": "68ed7c9ea8c66714c5e30afd8fec827d94142fbd"
+      "evaluation_commit": "c5ae8a8457e9e5b00cf05482fbe947680ea9ba43"
     },
     {
       "id": "candidate_contact_pairs_line_only",
@@ -641,7 +870,7 @@
       "unit": "pairs",
       "input_sha256": "7a0d1e250f6387311b7af67571a2d91a1775db9c6e500e2383a506f572a5b9b8",
       "vintage": "baseline",
-      "evaluation_commit": "68ed7c9ea8c66714c5e30afd8fec827d94142fbd"
+      "evaluation_commit": "c5ae8a8457e9e5b00cf05482fbe947680ea9ba43"
     },
     {
       "id": "candidate_contact_pairs_point_only",
@@ -649,7 +878,71 @@
       "unit": "pairs",
       "input_sha256": "7a0d1e250f6387311b7af67571a2d91a1775db9c6e500e2383a506f572a5b9b8",
       "vintage": "baseline",
-      "evaluation_commit": "68ed7c9ea8c66714c5e30afd8fec827d94142fbd"
+      "evaluation_commit": "c5ae8a8457e9e5b00cf05482fbe947680ea9ba43"
+    },
+    {
+      "id": "jrc_gsw_candidates_with_occurrence_water_gt_0",
+      "value": 21,
+      "unit": "candidate components",
+      "input_sha256": "0a4ff34f74e23d667ff9f877ce53fa0188e31fc4cb5c8722b41a85d6c7a6a4a9",
+      "vintage": "current",
+      "evaluation_commit": "c5ae8a8457e9e5b00cf05482fbe947680ea9ba43"
+    },
+    {
+      "id": "jrc_gsw_candidates_with_occurrence_ge_50",
+      "value": 21,
+      "unit": "candidate components",
+      "input_sha256": "0a4ff34f74e23d667ff9f877ce53fa0188e31fc4cb5c8722b41a85d6c7a6a4a9",
+      "vintage": "current",
+      "evaluation_commit": "c5ae8a8457e9e5b00cf05482fbe947680ea9ba43"
+    },
+    {
+      "id": "jrc_gsw_candidates_with_occurrence_ge_90",
+      "value": 20,
+      "unit": "candidate components",
+      "input_sha256": "0a4ff34f74e23d667ff9f877ce53fa0188e31fc4cb5c8722b41a85d6c7a6a4a9",
+      "vintage": "current",
+      "evaluation_commit": "c5ae8a8457e9e5b00cf05482fbe947680ea9ba43"
+    },
+    {
+      "id": "jrc_gsw_occurrence_pixels_gt_0",
+      "value": 66592,
+      "unit": "per-component pixel-center observations",
+      "input_sha256": "0a4ff34f74e23d667ff9f877ce53fa0188e31fc4cb5c8722b41a85d6c7a6a4a9",
+      "vintage": "current",
+      "evaluation_commit": "c5ae8a8457e9e5b00cf05482fbe947680ea9ba43"
+    },
+    {
+      "id": "jrc_gsw_occurrence_pixels_ge_50",
+      "value": 20083,
+      "unit": "per-component pixel-center observations",
+      "input_sha256": "0a4ff34f74e23d667ff9f877ce53fa0188e31fc4cb5c8722b41a85d6c7a6a4a9",
+      "vintage": "current",
+      "evaluation_commit": "c5ae8a8457e9e5b00cf05482fbe947680ea9ba43"
+    },
+    {
+      "id": "jrc_gsw_occurrence_pixels_ge_90",
+      "value": 10203,
+      "unit": "per-component pixel-center observations",
+      "input_sha256": "0a4ff34f74e23d667ff9f877ce53fa0188e31fc4cb5c8722b41a85d6c7a6a4a9",
+      "vintage": "current",
+      "evaluation_commit": "c5ae8a8457e9e5b00cf05482fbe947680ea9ba43"
+    },
+    {
+      "id": "jrc_gsw_2024_seasonality_water_pixels",
+      "value": 33116,
+      "unit": "per-component pixel-center observations",
+      "input_sha256": "0a4ff34f74e23d667ff9f877ce53fa0188e31fc4cb5c8722b41a85d6c7a6a4a9",
+      "vintage": "current",
+      "evaluation_commit": "c5ae8a8457e9e5b00cf05482fbe947680ea9ba43"
+    },
+    {
+      "id": "jrc_gsw_candidates_with_2024_seasonality_water",
+      "value": 21,
+      "unit": "candidate components",
+      "input_sha256": "0a4ff34f74e23d667ff9f877ce53fa0188e31fc4cb5c8722b41a85d6c7a6a4a9",
+      "vintage": "current",
+      "evaluation_commit": "c5ae8a8457e9e5b00cf05482fbe947680ea9ba43"
     }
   ],
   "summaries": [
@@ -702,10 +995,10 @@
       "text": "full_contact_geometry_differences = 10 contacts."
     },
     {
-      "metric_id": "unverified_water_status",
+      "metric_id": "original_water_diagnostic_unverified",
       "value": 21,
       "unit": "candidate features",
-      "text": "unverified_water_status = 21 candidate features."
+      "text": "original_water_diagnostic_unverified = 21 original diagnostic rows labelled unverified."
     },
     {
       "metric_id": "covered_by_consumed_union",
@@ -730,6 +1023,54 @@
       "value": 0,
       "unit": "pairs",
       "text": "candidate_contact_pairs_point_only = 0 pairs."
+    },
+    {
+      "metric_id": "jrc_gsw_candidates_with_occurrence_water_gt_0",
+      "value": 21,
+      "unit": "candidate components",
+      "text": "jrc_gsw_candidates_with_occurrence_water_gt_0 = 21 candidate components."
+    },
+    {
+      "metric_id": "jrc_gsw_candidates_with_occurrence_ge_50",
+      "value": 21,
+      "unit": "candidate components",
+      "text": "jrc_gsw_candidates_with_occurrence_ge_50 = 21 candidate components."
+    },
+    {
+      "metric_id": "jrc_gsw_candidates_with_occurrence_ge_90",
+      "value": 20,
+      "unit": "candidate components",
+      "text": "jrc_gsw_candidates_with_occurrence_ge_90 = 20 candidate components."
+    },
+    {
+      "metric_id": "jrc_gsw_occurrence_pixels_gt_0",
+      "value": 66592,
+      "unit": "per-component pixel-center observations",
+      "text": "jrc_gsw_occurrence_pixels_gt_0 = 66592 per-component pixel-center observations."
+    },
+    {
+      "metric_id": "jrc_gsw_occurrence_pixels_ge_50",
+      "value": 20083,
+      "unit": "per-component pixel-center observations",
+      "text": "jrc_gsw_occurrence_pixels_ge_50 = 20083 per-component pixel-center observations."
+    },
+    {
+      "metric_id": "jrc_gsw_occurrence_pixels_ge_90",
+      "value": 10203,
+      "unit": "per-component pixel-center observations",
+      "text": "jrc_gsw_occurrence_pixels_ge_90 = 10203 per-component pixel-center observations."
+    },
+    {
+      "metric_id": "jrc_gsw_2024_seasonality_water_pixels",
+      "value": 33116,
+      "unit": "per-component pixel-center observations",
+      "text": "jrc_gsw_2024_seasonality_water_pixels = 33116 per-component pixel-center observations."
+    },
+    {
+      "metric_id": "jrc_gsw_candidates_with_2024_seasonality_water",
+      "value": 21,
+      "unit": "candidate components",
+      "text": "jrc_gsw_candidates_with_2024_seasonality_water = 21 candidate components."
     }
   ],
   "metric_bindings": [
@@ -774,9 +1115,9 @@
       "json_pointer": "/summary/contact_geometries_topologically_different_from_full"
     },
     {
-      "metric_id": "unverified_water_status",
+      "metric_id": "original_water_diagnostic_unverified",
       "path": "research/geography/gap-source-namibia-angola-20261006/candidate-classifications.json",
-      "json_pointer": "/aggregate_observations/unverified_water_status"
+      "json_pointer": "/aggregate_observations/original_diagnostic_unverified_water_status"
     },
     {
       "metric_id": "covered_by_consumed_union",
@@ -797,6 +1138,46 @@
       "metric_id": "candidate_contact_pairs_point_only",
       "path": "research/geography/gap-source-namibia-angola-20261006/candidate-classifications.json",
       "json_pointer": "/aggregate_observations/candidate_contact_pairs_with_point_only"
+    },
+    {
+      "metric_id": "jrc_gsw_candidates_with_occurrence_water_gt_0",
+      "path": "research/geography/gap-source-namibia-angola-20261006/jrc-gsw-water-analysis.json",
+      "json_pointer": "/aggregate/components_with_occurrence_water_gt_0"
+    },
+    {
+      "metric_id": "jrc_gsw_candidates_with_occurrence_ge_50",
+      "path": "research/geography/gap-source-namibia-angola-20261006/jrc-gsw-water-analysis.json",
+      "json_pointer": "/aggregate/components_with_occurrence_water_gte_50"
+    },
+    {
+      "metric_id": "jrc_gsw_candidates_with_occurrence_ge_90",
+      "path": "research/geography/gap-source-namibia-angola-20261006/jrc-gsw-water-analysis.json",
+      "json_pointer": "/aggregate/components_with_occurrence_water_gte_90"
+    },
+    {
+      "metric_id": "jrc_gsw_occurrence_pixels_gt_0",
+      "path": "research/geography/gap-source-namibia-angola-20261006/jrc-gsw-water-analysis.json",
+      "json_pointer": "/aggregate/occurrence_water_gt_0"
+    },
+    {
+      "metric_id": "jrc_gsw_occurrence_pixels_ge_50",
+      "path": "research/geography/gap-source-namibia-angola-20261006/jrc-gsw-water-analysis.json",
+      "json_pointer": "/aggregate/occurrence_water_gte_50"
+    },
+    {
+      "metric_id": "jrc_gsw_occurrence_pixels_ge_90",
+      "path": "research/geography/gap-source-namibia-angola-20261006/jrc-gsw-water-analysis.json",
+      "json_pointer": "/aggregate/occurrence_water_gte_90"
+    },
+    {
+      "metric_id": "jrc_gsw_2024_seasonality_water_pixels",
+      "path": "research/geography/gap-source-namibia-angola-20261006/jrc-gsw-water-analysis.json",
+      "json_pointer": "/aggregate/seasonality_water_months_gt_0"
+    },
+    {
+      "metric_id": "jrc_gsw_candidates_with_2024_seasonality_water",
+      "path": "research/geography/gap-source-namibia-angola-20261006/jrc-gsw-water-analysis.json",
+      "json_pointer": "/aggregate/components_with_2024_seasonality_water"
     }
   ],
   "conclusions": [
@@ -811,13 +1192,14 @@
       ]
     },
     {
-      "text": "The packet does not resolve present water/land status or historic river course at any candidate.",
-      "status": "unresolved",
+      "text": "JRC GSW v1.5 records positive occurrence and 2024 seasonality water-classified pixel centers within all 21 candidate footprints; the exact shoreline/current course, historic channel, and waterbody type remain unresolved.",
+      "status": "supported",
       "source_ids": [
-        "mawlr-water-basin-map-2008",
-        "mawlr-iwrm-plan-summary",
-        "mawlr-okavango-omatako-booklet",
-        "angola-minea-2014"
+        "jrc-gsw-occurrence-10e-10s",
+        "jrc-gsw-occurrence-20e-10s",
+        "jrc-gsw-seasonality-10e-10s",
+        "jrc-gsw-seasonality-20e-10s",
+        "jrc-gsw-v1-5-official-guide-and-metadata"
       ]
     },
     {
@@ -838,6 +1220,13 @@
         "consumed-geoBoundaries-AGO-ADM2",
         "uk-treaty-1926"
       ]
+    },
+    {
+      "text": "The JRC Collection 2 transition introduces a documented spatially variable residual co-registration offset, typically sub-pixel but at or above one 30 m pixel in some WRS-2 path/rows; candidate pixel overlays therefore retain this positional limit.",
+      "status": "supported",
+      "source_ids": [
+        "jrc-gsw-v1-5-official-guide-and-metadata"
+      ]
     }
   ],
   "stages": {
@@ -847,7 +1236,8 @@
   },
   "commands": [
     "python3 research/geography/gap-source-namibia-angola-20261006/reproduce_source_geometry.py",
-    "python3 research/geography/gap-source-namibia-angola-20261006/reproduce_full_product_comparison.py"
+    "python3 research/geography/gap-source-namibia-angola-20261006/reproduce_full_product_comparison.py",
+    "python3 research/geography/gap-source-namibia-angola-20261006/reproduce_jrc_gsw_water.py"
   ],
   "validation": [
     {
@@ -861,139 +1251,106 @@
       "kind": "negative-control",
       "outcome": "passed",
       "evidence_path": "research/geography/gap-source-namibia-angola-20261006/validation-negative-control.json"
+    },
+    {
+      "method_id": "jrc-gsw-pixel-center-overlay",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/gap-source-namibia-angola-20261006/validation-jrc-gsw-positive-control.json"
+    },
+    {
+      "method_id": "jrc-gsw-pixel-center-overlay",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/gap-source-namibia-angola-20261006/validation-jrc-gsw-negative-control.json"
     }
   ],
   "change_receipts": [
     {
       "path": "research/geography/gap-source-namibia-angola-20261006/README.md",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/gap-source-namibia-angola-20261006/analysis-input-set.json",
-      "status": "added"
+      "status": "modified",
+      "original_sha256": "f6ff9288269f400312b3995acc0d9149709978daaf192cb53de54e1979afd3cd"
     },
     {
       "path": "research/geography/gap-source-namibia-angola-20261006/candidate-classifications.json",
+      "status": "modified",
+      "original_sha256": "89eb17aa1bb51a6edefd59e3df2e9833a12e8fad75c46c51fa495f7a7ea8896f"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/jrc-gsw-analysis-input-set.json",
       "status": "added"
     },
     {
-      "path": "research/geography/gap-source-namibia-angola-20261006/evidence-quality.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/gap-source-namibia-angola-20261006/full-product-comparison.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/gap-source-namibia-angola-20261006/inputs/input-bindings.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/gap-source-namibia-angola-20261006/inputs/official-reference-leads.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/gap-source-namibia-angola-20261006/inputs/original-components.geojson",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/gap-source-namibia-angola-20261006/inputs/root-corrected-ordinary-pin-review.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/gap-source-namibia-angola-20261006/inputs/root-whole-input-scope-review.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/gap-source-namibia-angola-20261006/inputs/source-contact-features.geojson",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/gap-source-namibia-angola-20261006/inputs/successor-component-verification.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/gap-source-namibia-angola-20261006/inputs/whole-input-pins.json",
+      "path": "research/geography/gap-source-namibia-angola-20261006/jrc-gsw-water-analysis.json",
       "status": "added"
     },
     {
       "path": "research/geography/gap-source-namibia-angola-20261006/official-reference-review.json",
+      "status": "modified",
+      "original_sha256": "4c11dd936fd8e4507651798e61a3133c3f200809535c6cda580745a06dc6db3c"
+    },
+    {
+      "path": "research/geography/gap-source-namibia-angola-20261006/reproduce_jrc_gsw_water.py",
       "status": "added"
     },
     {
-      "path": "research/geography/gap-source-namibia-angola-20261006/reproduce_full_product_comparison.py",
+      "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/DataUsersGuidev2024_v.5.pdf",
       "status": "added"
     },
     {
-      "path": "research/geography/gap-source-namibia-angola-20261006/reproduce_source_geometry.py",
+      "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/jrc-gsw-download.html",
       "status": "added"
     },
     {
-      "path": "research/geography/gap-source-namibia-angola-20261006/reproduction-runs.json",
+      "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/manifest.json",
       "status": "added"
     },
     {
-      "path": "research/geography/gap-source-namibia-angola-20261006/source-geometry-comparison.json",
+      "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/occurrence_10E_10S.part-aa",
       "status": "added"
     },
     {
-      "path": "research/geography/gap-source-namibia-angola-20261006/sources/angola-minea-portal-response.html",
+      "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/occurrence_10E_10S.part-ab",
       "status": "added"
     },
     {
-      "path": "research/geography/gap-source-namibia-angola-20261006/sources/gb-AGO-ADM2-000.bin.gz",
+      "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/occurrence_2024.xml",
       "status": "added"
     },
     {
-      "path": "research/geography/gap-source-namibia-angola-20261006/sources/gb-NAM-ADM2-000.bin.gz",
+      "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/occurrence_20E_10S.part-aa",
       "status": "added"
     },
     {
-      "path": "research/geography/gap-source-namibia-angola-20261006/sources/geoBoundaries-AGO-ADM2-full-9469f09.geojson",
+      "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/occurrence_20E_10S.part-ab",
       "status": "added"
     },
     {
-      "path": "research/geography/gap-source-namibia-angola-20261006/sources/geoBoundaries-AGO-ADM2-full-9469f09.lfs-pointer.txt",
+      "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/seasonality_10E_10S.tif",
       "status": "added"
     },
     {
-      "path": "research/geography/gap-source-namibia-angola-20261006/sources/geoBoundaries-AGO-ADM2-metadata-9469f09.json",
+      "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/seasonality_2024.xml",
       "status": "added"
     },
     {
-      "path": "research/geography/gap-source-namibia-angola-20261006/sources/geoBoundaries-AGO-ADM2-metadata-9469f09.lfs-pointer.txt",
+      "path": "research/geography/gap-source-namibia-angola-20261006/sources/jrc-gsw-2024/seasonality_20E_10S.tif",
       "status": "added"
     },
     {
-      "path": "research/geography/gap-source-namibia-angola-20261006/sources/geoBoundaries-NAM-ADM2-full-9469f09.geojson",
+      "path": "research/geography/gap-source-namibia-angola-20261006/validation-jrc-gsw-negative-control.json",
       "status": "added"
     },
     {
-      "path": "research/geography/gap-source-namibia-angola-20261006/sources/geoBoundaries-NAM-ADM2-full-9469f09.lfs-pointer.txt",
+      "path": "research/geography/gap-source-namibia-angola-20261006/validation-jrc-gsw-positive-control.json",
       "status": "added"
     },
     {
-      "path": "research/geography/gap-source-namibia-angola-20261006/sources/geoBoundaries-NAM-ADM2-metadata-9469f09.json",
+      "path": "research/geography/gap-source-namibia-angola-20261006/jrc-gsw-reproduction-runs.json",
       "status": "added"
     },
     {
-      "path": "research/geography/gap-source-namibia-angola-20261006/sources/geoBoundaries-NAM-ADM2-metadata-9469f09.lfs-pointer.txt",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/gap-source-namibia-angola-20261006/sources/uk-treaty-series-1926-ts-29.pdf",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/gap-source-namibia-angola-20261006/validation-negative-control.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/gap-source-namibia-angola-20261006/validation-positive-control.json",
-      "status": "added"
-    },
-    {
-      "path": "research/geography/gap-source-namibia-angola-20261006/validation-reproducibility-control.json",
+      "path": "research/geography/gap-source-namibia-angola-gsw-20261007/evidence-quality.json",
       "status": "added"
     }
   ]

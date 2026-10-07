@@ -54,3 +54,5 @@ The vector scripts use retained files plus exact immutable Git blobs named in `i
 ## Exact limits
 
 This packet supports statements about retained source bytes, feature identity, product vintage metadata, reproducible polygon overlays, and JRC water-classified pixels within candidate masks. It does not establish legal title, recognized sovereignty, an authoritative current border, an exact physical river edge, historical channel movement, or causation. It is not an approval to publish or import geometry.
+
+The JRC analysis was run twice in full on 2026-10-07 UTC with the same pinned candidate/source inputs and recorded Python/Rasterio/NumPy/Shapely/GDAL environment. Both runs produced identical SHA-256 hashes for the analysis and both synthetic controls. Exact timestamps, commands, all input/output byte hashes, and environment details are retained in `jrc-gsw-reproduction-runs.json`.
