@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import struct
 import sys
 
 from restore import PREFIX, ROOT, checked, gunzip, restore, sha
@@ -17,6 +18,18 @@ AFTER = 'b9a3c8bf375217dba3a50d1a022ec7e4ac6c6f1cdedff22845da953c805b7433'
 def read(p):
     raw = p.read_bytes()
     return json.loads(gunzip(raw) if p.name.endswith('.gz') else raw)
+
+
+def same_values(a, b):
+    if isinstance(a, (int, float)) and not isinstance(a, bool) and isinstance(b, (int, float)) and not isinstance(b, bool):
+        return struct.pack('>d', float(a)) == struct.pack('>d', float(b))
+    if type(a) is not type(b):
+        return False
+    if isinstance(a, dict):
+        return a.keys() == b.keys() and all(same_values(a[k], b[k]) for k in a)
+    if isinstance(a, list):
+        return len(a) == len(b) and all(same_values(x, y) for x, y in zip(a, b))
+    return a == b
 
 
 def world_relation(root, index):
@@ -47,10 +60,10 @@ def world_relation(root, index):
         if len(a) != len(b):
             raise ValueError('Full feature roster differs')
         for old, new in zip(a, b):
-            if old['id'] != new['id'] or old['properties'] != new['properties']:
+            if old['id'] != new['id'] or not same_values(old['properties'], new['properties']):
                 raise ValueError('Identity/metadata/parent transfer')
             ids.append(old['id'])
-            if old != new:
+            if not same_values(old, new):
                 changed.append(old['id'])
     if len(ids) != 49625 or len(set(ids)) != 49625 or set(changed) != TARGETS or len(changed) != 2:
         raise ValueError('Full original/proposed geographic closure differs')
