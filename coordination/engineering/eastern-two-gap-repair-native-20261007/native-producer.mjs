@@ -10,7 +10,7 @@ import {compactContextInputs} from '../../../scripts/native-ownership/compact-co
 import {nativeRuntimeIndex} from '../../../src/native-runtime.js';
 import {compileNativeOwnership} from '../../../scripts/native-ownership/compile-native-ownership.mjs';
 import {nativeCandidateManifest,NATIVE_CANONICAL_LATITUDE_SHA256} from '../../../scripts/native-ownership/native-candidate-manifest.mjs';
-import {committedPreparationFiles,requirePlainExecution,createNativeCandidateOutput} from '../../../scripts/native-ownership/native-preparation-guards.mjs';
+import {committedPreparationFiles,requirePlainExecution,createNativeCandidateOutput,candidateBudget} from '../../../scripts/native-ownership/native-preparation-guards.mjs';
 import {shuffleOwnershipBytes} from '../../../src/ownership-codec.js';
 import {footprintHash} from '../../../scripts/check-prepared.mjs';
 export const BEFORE='6ea7c3613759d7b747c800c399b70c1be24e1f6aea21fc81c389cfdcc78d3eb1';
@@ -21,7 +21,7 @@ const PREFIX='coordination/engineering/eastern-two-gap-repair-20261007/run-one/'
 const SHA=b=>createHash('sha256').update(b).digest('hex');
 const json=x=>Buffer.from(JSON.stringify(x)+'\n');
 const safe=p=>typeof p==='string'&&/^[a-zA-Z0-9_.\/-]+$/.test(p)&&p.split('/').every(x=>x&&x!=='.'&&x!=='..');
-export function immutableReader(repo,commit){
+export function immutableReader(repo,commit,storage){
  assert.match(commit,/^[a-f0-9]{40}$/,'Exact immutable source commit required before Git');
  const files=new Map();
  function read(p){
@@ -32,7 +32,18 @@ export function immutableReader(repo,commit){
   const oid=tree.split(' ')[2].split('\t')[0];
   const bytes=Number(execFileSync('git',['-C',repo,'cat-file','-s',oid],{encoding:'utf8'}));
   assert(Number.isSafeInteger(bytes)&&bytes>0&&bytes<=32*1024*1024,'Bounded source bytes required');
-  const raw=execFileSync('git',['-C',repo,'cat-file','blob',oid],{maxBuffer:32*1024*1024});
+  const stored=storage?.get(commit+':'+p);
+  if(storage)assert(stored,'Undeclared complete ordinary source input '+p);
+  let raw;
+  if(stored){
+   assert.equal(stored.original.blob,oid,'Original containing-file OID changed');
+   assert.equal(stored.original.mode,tree.split(' ')[0]);assert.equal(stored.original.bytes,bytes);
+   const name=path.join(repo,stored.alias.path);assert(safe(stored.alias.path));
+   assert(fs.lstatSync(name).isFile()&&fs.realpathSync(name)===name,'Ordinary retained alias required');
+   const encoded=fs.readFileSync(name);assert.equal(encoded.length,stored.alias.bytes);assert.equal(SHA(encoded),stored.alias.sha256);
+   raw=gunzipSync(encoded,{maxOutputLength:32*1024*1024});assert.equal(raw.length,stored.alias.decoded_bytes);assert.equal(SHA(raw),stored.alias.decoded_sha256);
+   assert.equal(SHA(raw),stored.original.sha256,'Whole original input changed');
+  }else raw=execFileSync('git',['-C',repo,'cat-file','blob',oid],{maxBuffer:32*1024*1024});
   assert.equal(raw.length,bytes);
   const decoded=raw[0]===31&&raw[1]===139?gunzipSync(raw,{maxOutputLength:32*1024*1024}):raw;
   files.set(p,{raw,pin:{commit,path:p,mode:tree.split(' ')[0],blob:oid,bytes,sha256:SHA(raw),decoded_bytes:decoded.length,decoded_sha256:SHA(decoded)}});
@@ -40,8 +51,8 @@ export function immutableReader(repo,commit){
  }
  return {read,object:p=>{const raw=read(p);return JSON.parse(raw[0]===31&&raw[1]===139?gunzipSync(raw,{maxOutputLength:32*1024*1024}):raw);},pins:()=>[...files.values()].map(x=>x.pin)};
 }
-export function loadSuccessor(repo,baseline){
- const current=immutableReader(repo,baseline),reviewed=immutableReader(repo,PROPOSAL);
+export function loadSuccessor(repo,baseline,{storage}={}){
+ const current=immutableReader(repo,baseline,storage),reviewed=immutableReader(repo,PROPOSAL,storage);
  const world=current.object('data/world-index.json'),features=[];
  for(const p of world.parts)features.push(...current.object('data/'+p).features);
  assert.equal(features.length,49625,'Complete current world required');
@@ -96,14 +107,26 @@ export function executedClosure(repo,head){
 export async function run(baseline,vintage,{inputOnly=false}={}){
  requirePlainExecution();assert.match(baseline,/^[a-f0-9]{40}$/);assert.match(vintage,/^[a-zA-Z0-9_-]+$/);
  const repo=fs.realpathSync('.'),head=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
- const code=executedClosure(repo,head),inputs=loadSuccessor(repo,baseline);
- const capsule={baseline_commit:baseline,execution_commit:head,source_files:inputs.sourceFiles,executed_sources:code,
+ const code=executedClosure(repo,head);
+ const indexPath='coordination/engineering/eastern-two-gap-repair-native-20261007/original-inputs/index.json';
+ const indexBytes=fs.readFileSync(path.join(repo,indexPath));
+ const committedIndex=execFileSync('git',['show',head+':'+indexPath],{maxBuffer:32*1024*1024});assert(indexBytes.equals(committedIndex),'Ordinary input index differs from freeze');
+ const sourceIndex=JSON.parse(indexBytes);assert.equal(sourceIndex.baseline_commit,baseline);assert.equal(sourceIndex.proposal_commit,PROPOSAL);
+ const storage=new Map(sourceIndex.files.map(row=>[row.original.commit+':'+row.original.path,row]));assert.equal(storage.size,sourceIndex.files.length,'Duplicate whole-source alias');
+ const inputs=loadSuccessor(repo,baseline,{storage});
+ assert.equal(inputs.sourceFiles.length,sourceIndex.files.length,'Unused or missing complete ordinary input');
+ const sourceAdmission=[...sourceIndex.files.map(p=>p.alias),...code,{path:indexPath,bytes:indexBytes.length}];
+ const preflight=candidateBudget(sourceAdmission,{reserveBytes:96*1024*1024,reserveDescriptors:128}).snapshot();
+ const latitudeOriginal=inputs.sourceFiles.find(p=>p.path===inputs.latitude.path&&p.commit===baseline);
+ const latitudeHeadTree=execFileSync('git',['ls-tree','-z',head,'--',inputs.latitude.path],{encoding:'utf8'});
+ assert.equal(latitudeHeadTree,`${latitudeOriginal.mode} blob ${latitudeOriginal.blob}\t${latitudeOriginal.path}\0`,'Evaluation latitude ordinary blob differs from original read vintage');
+ const capsule={baseline_commit:baseline,execution_commit:head,source_files:inputs.sourceFiles,ordinary_source_index:{path:indexPath,bytes:indexBytes.length,sha256:SHA(indexBytes)},ordinary_sources:sourceIndex.files,executed_sources:code,
   original_canonical_sha256:inputs.originalCanonicalSha,owner_sha256:inputs.ownerSha,before_footprints_sha256:BEFORE,after_footprints_sha256:AFTER,
-  release_id:inputs.releaseId,locations:inputs.features.length,software:{node:process.version,v8:process.versions.v8,zlib:process.versions.zlib,platform:process.platform,arch:process.arch},
+  release_id:inputs.releaseId,locations:inputs.features.length,input_admission:preflight,normative_latitude_binding:{original_read_commit:baseline,evaluation_commit:head,path:inputs.latitude.path,mode:latitudeOriginal.mode,blob:latitudeOriginal.blob,encoded_sha256:inputs.latitude.sha256,decoded_sha256:inputs.latitude.decoded_sha256,whole_blob_equality:true},software:{node:process.version,v8:process.versions.v8,zlib:process.versions.zlib,platform:process.platform,arch:process.arch},
   source_approval:'Only two Main-approved physical-reference additions; no legal/water/historical-cause approval'};
  if(inputOnly){console.log(JSON.stringify(capsule));return capsule;}
- const out=createNativeCandidateOutput(repo,'.cache/native-grid-candidates/'+vintage),products=[];
- const write=(p,raw,decoded=raw)=>{assert(safe(p));assert(raw.length<=32*1024*1024&&decoded.length<=32*1024*1024);const dest=path.join(out,p);fs.mkdirSync(path.dirname(dest),{recursive:true});fs.writeFileSync(dest,raw,{flag:'wx'});const pin={path:p,bytes:raw.length,sha256:SHA(raw),decoded_bytes:decoded.length,decoded_sha256:SHA(decoded)};products.push(pin);return pin;};
+ const out=createNativeCandidateOutput(repo,'.cache/native-grid-candidates/'+vintage),products=[],admission=candidateBudget(sourceAdmission,{reserveBytes:0,reserveDescriptors:0});
+ const write=(p,raw,decoded=raw)=>{assert(safe(p));assert(raw.length<=32*1024*1024&&decoded.length<=32*1024*1024);admission.add({bytes:raw.length});const dest=path.join(out,p);fs.mkdirSync(path.dirname(dest),{recursive:true});fs.writeFileSync(dest,raw,{flag:'wx'});const pin={path:p,bytes:raw.length,sha256:SHA(raw),decoded_bytes:decoded.length,decoded_sha256:SHA(decoded)};products.push(pin);return pin;};
  const compactParts=[];
  for(let first=0;first<inputs.features.length;first+=1500){const raw=json(inputs.features.slice(first,first+1500));compactParts.push({...write('context/part-'+first+'.json.gz',gzipSync(raw,{level:9}),raw),first_owner:first+1,owners:Math.min(1500,inputs.features.length-first)});}
  const compiled=await compileNativeOwnership(inputs.index,{size:inputs.manifest.size,latitudes:inputs.latitudes,
