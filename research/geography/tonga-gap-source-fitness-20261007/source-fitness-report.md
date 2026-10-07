@@ -32,5 +32,6 @@ Tonga Statistics Department’s [Re-boundary Plan 2020–2021](https://tongastat
 - `inputs/physical-comparison-record.json` — complete physical row, query relation, source vintage, and retained unknowns.
 - `inputs/source-provenance.json` — metadata, exact simplified product bytes/hash, feature roster, and related unsimplified product identity.
 - `inputs/bounded-source-comparison.json` — geometry predicates, bounded ellipsoidal area, hashes, and explicit limits.
+- `compare-bounded-support.py` — reproduction helper for the one retained component/source/contact comparison.
 - `sources/official-source-register.json` — official/context source URLs, access dates, findings, and use limits.
 - `sources/geoBoundaries-TON-ADM1_simplified.geojson` — exact retrieved product bytes.

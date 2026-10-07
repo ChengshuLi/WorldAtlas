@@ -218,8 +218,8 @@
     },
     {
       "path": "research/geography/tonga-gap-source-fitness-20261007/source-fitness-report.md",
-      "bytes": 6045,
-      "sha256": "1730b603eb49aa88a8a703fe213deebb879fc38f1ed9aae4a2de527de490ea92",
+      "bytes": 6158,
+      "sha256": "ea087fcf0cbd073faef84fec369f519ce1a327cb386a5039c0c5174fb663ada2",
       "hash_kind": "file-bytes"
     },
     {
@@ -232,6 +232,12 @@
       "path": "research/geography/tonga-gap-source-fitness-20261007/selection-and-collision-audit.md",
       "bytes": 1877,
       "sha256": "a10648d49b1fe84cca8b66ba9e8d226419f90afc4eff3850f0c4bacf4c349fd4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/tonga-gap-source-fitness-20261007/compare-bounded-support.py",
+      "bytes": 2823,
+      "sha256": "61fbe743a68850f624aac515ee41420412b8253bb096d91fef75f1215e99ce79",
       "hash_kind": "file-bytes"
     }
   ],
@@ -306,7 +312,7 @@
     "geographic_approval": "unapproved"
   },
   "commands": [
-    "python3 scripts/compare-tonga-gap-source.py --bounded-input research/geography/tonga-gap-source-fitness-20261007/inputs/physical-comparison-record.json --source research/geography/tonga-gap-source-fitness-20261007/sources/geoBoundaries-TON-ADM1_simplified.geojson --current data/geography/part-23.json",
+    "python3 research/geography/tonga-gap-source-fitness-20261007/compare-bounded-support.py --physical-record research/geography/tonga-gap-source-fitness-20261007/inputs/physical-comparison-record.json --source research/geography/tonga-gap-source-fitness-20261007/sources/geoBoundaries-TON-ADM1_simplified.geojson --current data/geography/part-23.json",
     "node scripts/evidence-quality.mjs research/geography/tonga-gap-source-fitness-20261007/evidence-quality.json"
   ],
   "change_receipts": [
@@ -344,6 +350,10 @@
     },
     {
       "path": "research/geography/tonga-gap-source-fitness-20261007/selection-and-collision-audit.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/tonga-gap-source-fitness-20261007/compare-bounded-support.py",
       "status": "added"
     }
   ],
