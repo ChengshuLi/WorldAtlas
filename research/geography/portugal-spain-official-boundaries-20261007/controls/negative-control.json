@@ -1,0 +1,48 @@
+{
+  "checks": [
+    {
+      "exception": "ValueError",
+      "id": "wrong-native-identity",
+      "outcome": "rejected-as-expected",
+      "reason": "Unexpected item identity: dgt-barrancos-0204"
+    },
+    {
+      "exception": "ValueError",
+      "id": "wrong-product-vintage",
+      "outcome": "rejected-as-expected",
+      "reason": "Unexpected DGT collection version"
+    },
+    {
+      "exception": "ValueError",
+      "id": "duplicate-and-missing-subject",
+      "outcome": "rejected-as-expected",
+      "reason": "Duplicate or missing scoped source subject"
+    },
+    {
+      "exception": "ValueError",
+      "id": "swapped-crs84-axis-order",
+      "outcome": "rejected-as-expected",
+      "reason": "Coordinate outside scoped CRS84 envelope: swapped-axis-canary: (38.091766642, -6.989484029000001)"
+    },
+    {
+      "exception": "ValueError",
+      "id": "invalid-geometry-not-repaired",
+      "outcome": "rejected-as-expected",
+      "reason": "Invalid input polygon; do not MakeValid"
+    },
+    {
+      "exception": "ValueError",
+      "id": "modified-whole-source-response",
+      "outcome": "rejected-as-expected",
+      "reason": "Whole original response bytes changed"
+    }
+  ],
+  "kind": "negative-control",
+  "limits": [
+    "Each perturbed case must fail closed; these controls do not determine political identity, authority, or physical class."
+  ],
+  "method_id": "official-source-geography-v1",
+  "outcome": "passed",
+  "producer_commit": "6c63fc0ded1e12dea76d370639fe0b265c9079b6",
+  "version": 1
+}

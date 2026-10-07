@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "issue": 1299,
+  "baseline_commit": "fbc3c4c3a7cb06e8d33d11992b0c26054a9d50d7",
+  "families": [
+    {
+      "id": "gap-source-batch:509d6812e22b584f960be362",
+      "component_ids": [
+        "physical-component:137a1e1873ef3c0d140480618abd24f8b0125182e0e2c5fbe92242c64ed0cc1a",
+        "physical-component:a1ad449c3035d6ee93d8c07ac3eef6292300891765e6ba3a7debe76135dc1b2c"
+      ],
+      "contact_subjects": [
+        "atlas:district:ESP-2101:def08fa9",
+        "gb:PRT:ADM2:2272694B13078000098594",
+        "gb:PRT:ADM2:2272694B82300393258858"
+      ]
+    },
+    {
+      "id": "gap-source-batch:4c43b39b2038f22dfdedebce",
+      "component_ids": [
+        "physical-component:188a372fefa2333a034123c6a2bb6134f649e44b5be92367725902ea2d568c70",
+        "physical-component:3d26d33457b023a510afc6d77bbd5441ddca5cc9ea597be323c9c1d6b728616e"
+      ],
+      "contact_subjects": [
+        "gb:ESP:ADM3:28895703B56784737193540",
+        "gb:PRT:ADM2:2272694B82300393258858"
+      ]
+    }
+  ],
+  "subject_ids": [
+    "atlas:district:ESP-2101:def08fa9",
+    "gb:ESP:ADM3:28895703B56784737193540",
+    "gb:PRT:ADM2:2272694B13078000098594",
+    "gb:PRT:ADM2:2272694B82300393258858"
+  ],
+  "pinned_baseline_subject_files": {
+    "atlas:district:ESP-2101:def08fa9": "data/geography/part-29.json",
+    "gb:ESP:ADM3:28895703B56784737193540": "data/geography/part-8.json",
+    "gb:PRT:ADM2:2272694B13078000098594": "data/geography/part-19.json",
+    "gb:PRT:ADM2:2272694B82300393258858": "data/geography/part-19.json"
+  },
+  "issue_pins": {
+    "audited_world_index": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+    "scoped_part_8": "2b0b335d6d7d494eac24da313c99834a7c602390e5302d4cf00049244893a3d1",
+    "scoped_part_19": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269",
+    "scoped_part_29": "077e3bdfb18a42318e27bad840bba823a5049ced449407584fb4b9be2ef67c7a"
+  },
+  "original_consumed_source_products": {
+    "gb:ESP:ADM3": {
+      "represented_year_claim": "2018",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/ESP/ADM3/geoBoundaries-ESP-ADM3_simplified.geojson",
+      "full_native_feature_count": 8205
+    },
+    "gb:PRT:ADM2": {
+      "represented_year_claim": "2020",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/90a1d52/releaseData/gbOpen/PRT/ADM2/geoBoundaries-PRT-ADM2_simplified.geojson",
+      "full_native_feature_count": 311
+    }
+  },
+  "official_items": {
+    "dgt-barrancos-0204": {"native_id": "0204", "name": "Barrancos", "collection": "municipios"},
+    "dgt-moura-0210": {"native_id": "0210", "name": "Moura", "collection": "municipios"},
+    "ign-encinasola-1166667": {"native_id": "1166667", "name": "Encinasola", "collection": "administrativeunit"},
+    "ign-rosal-1166698": {"native_id": "1166698", "name": "Rosal de la Frontera", "collection": "administrativeunit"},
+    "ign-encinasola-portugal-5679963": {"native_id": "5679963", "name": "Encinasola#Portugal", "collection": "administrativeboundary"},
+    "ign-rosal-portugal-5671403": {"native_id": "5671403", "name": "Rosal de la Frontera#Portugal", "collection": "administrativeboundary"}
+  },
+  "scope_limits": [
+    "Exactly two whole inland families, four complete components, four unchanged contact subjects and five family-contact incidences; Moura appears in both families.",
+    "The Atlas district is a 28-member aggregation, not an alias for one municipality. Its Encinasola source member is examined as a member only.",
+    "The four official municipal items are complete direct provider features, not complete national datasets.",
+    "No inferred ownership, physical water/ice class, historic authority, or source-processing cause."
+  ]
+}

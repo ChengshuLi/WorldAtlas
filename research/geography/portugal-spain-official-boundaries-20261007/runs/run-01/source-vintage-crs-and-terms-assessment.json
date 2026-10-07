@@ -1,0 +1,49 @@
+{
+  "coordinate_method": {
+    "area_crs": "EPSG:4326 / WGS84 with always-xy semantics, matching the existing WorldAtlas evidence helper",
+    "coordinate_operation": "No extra projection was applied. The OGC API returned CRS84 longitude-latitude coordinates, which were passed as x/y to the existing WGS84 helper. DGT's storage CRS is EPSG:3763, but the item response header declares CRS84.",
+    "geometry_policy": "Existing scripts/evidence/geometry.py worldatlas-evidence-geometry-v1 and scripts/ellipsoidal_area.py; direct overlay, no snap, rounding, buffer, MakeValid or proximity repair.",
+    "input_axis_order": "longitude-latitude"
+  },
+  "dgt_caop2025": {
+    "api_collection_title": "CAOP2025 Municípios",
+    "api_storage_crs": "http://www.opengis.net/def/crs/EPSG/0/3763",
+    "api_temporal_extent": {
+      "interval": [
+        [
+          "2000-10-30T18:24:39+00:00",
+          "2007-10-30T08:57:29+00:00"
+        ]
+      ]
+    },
+    "direct_item_return_crs": "OGC:CRS84 from each pinned Content-Crs header; longitude, latitude coordinates; already transformed by provider from storage CRS.",
+    "official_product_page_claim": "CAOP2025; approved by DGT Director-General order dated 2026-01-28 and published in Diário da República Aviso 3502/2026/2 on 2026-02-18; official page says changes from 2025-03-16 through 2025-12-31.",
+    "vintage_assessment": "The official product page establishes a CAOP2025 release and change window. The API collection's declared interval 2000-10-30 through 2007-10-30 conflicts with the title; no per-item validity date is returned. Treat per-feature effective date as unresolved."
+  },
+  "failed_source_attempts": [
+    {
+      "body_bytes": 59563,
+      "body_path": "sources/failed-requests/dgt-caop2025-change-list-incorrect-route-404.body",
+      "body_sha256": "f409d82df5e0e96135a89c229740254ace0514f63b26f94957e1d84aee6025d8",
+      "headers_path": "sources/failed-requests/dgt-caop2025-change-list-incorrect-route-404.headers.txt",
+      "http_status": 404,
+      "id": "dgt-caop2025-change-list-incorrect-route-404",
+      "reason": "Initial link path was guessed incorrectly; the official CAOP page linked the corrected URL, which is separately captured.",
+      "request_url": "https://www.dgterritorio.gov.pt/sites/default/files/ficheiros-artigos/alteracoes_CAOP2025.pdf"
+    }
+  ],
+  "ign_administrativeboundary": {
+    "collection_title": "AU Límites administrativos",
+    "direct_item_return_crs": "OGC:CRS84 from each pinned Content-Crs header; longitude, latitude coordinates.",
+    "storage_crs": "http://www.opengis.net/def/crs/OGC/1.3/CRS84",
+    "temporal_extent": null,
+    "vintage_assessment": "Selected records return item-level date_boundary 2022-04-04 and legalstatus=agreed. The two linked resource URLs return the same generic CNIG landing page rather than item-specific record content. These Spanish item attributes do not alone prove bilateral authority or a matching Portuguese line."
+  },
+  "ign_administrativeunit": {
+    "collection_title": "AU Unidades administrativas",
+    "direct_item_return_crs": "OGC:CRS84 from each pinned Content-Crs header; longitude, latitude coordinates.",
+    "storage_crs": "http://www.opengis.net/def/crs/OGC/1.3/CRS84",
+    "temporal_extent": null,
+    "vintage_assessment": "The collection and selected polygons provide no validity date or dated polygon snapshot. Retrieval date is recorded; it is not a legal/effective date."
+  }
+}
