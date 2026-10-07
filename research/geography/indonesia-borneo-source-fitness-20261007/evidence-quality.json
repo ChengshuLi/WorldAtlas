@@ -1076,10 +1076,9 @@
     },
     {
       "id": "big-ksp-administrative-overlay",
-      "kind": "generator",
+      "kind": "analysis",
       "description": "Query the official BIG KSP 2022 ADM2 area layer for features intersecting the WGS84 envelope of all 45 pinned components; verify exact response pins and classify all direct, unbuffered component-feature intersections without retaining source geometry.",
       "software": "Python 3.12; Shapely 2.1.2; assess-big-ksp-overlay.py; public BIG ArcGIS REST feature query.",
-      "helper_version": "big-source-overlay-v1",
       "units": "component-feature pairs and topological relation classifications; no area values."
     }
   ],
