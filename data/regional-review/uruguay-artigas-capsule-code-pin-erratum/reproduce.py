@@ -10,6 +10,7 @@ import io
 import json
 import os
 from pathlib import Path
+import secrets
 import sys
 
 HERE = Path(__file__).resolve().parent
@@ -131,7 +132,7 @@ def destination(name):
 
 
 def write_exclusive(directory_fd, name, raw):
-    if name not in ("reproduction-results.json", "publication.json", "failure.json"):
+    if name not in ("reproduction-results.json", "failure.json"):
         raise ValueError("unplanned output file")
     flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_NOFOLLOW", 0)
     file_fd = os.open(name, flags, 0o600, dir_fd=directory_fd)
@@ -139,6 +140,25 @@ def write_exclusive(directory_fd, name, raw):
         stream.write(raw)
         stream.flush()
         os.fsync(stream.fileno())
+
+
+def publish_exclusive(directory_fd, raw):
+    """Expose a success receipt only after its complete bytes are synced."""
+    temporary = ".publication-" + secrets.token_hex(12)
+    flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_NOFOLLOW", 0)
+    file_fd = os.open(temporary, flags, 0o600, dir_fd=directory_fd)
+    try:
+        with os.fdopen(file_fd, "wb") as stream:
+            stream.write(raw)
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.link(temporary, "publication.json", src_dir_fd=directory_fd,
+                dst_dir_fd=directory_fd, follow_symlinks=False)
+    finally:
+        try:
+            os.unlink(temporary, dir_fd=directory_fd)
+        except OSError:
+            pass
 
 
 def main():
@@ -162,7 +182,7 @@ def main():
             raise RuntimeError("directed failure after computation; preserve this attempt")
         receipt = {"status": "complete", "capsule_sha256": CAPSULE_SHA256,
                    "report_sha256": sha(actual)}
-        write_exclusive(out_fd, "publication.json", (json.dumps(receipt, sort_keys=True) + "\n").encode())
+        publish_exclusive(out_fd, (json.dumps(receipt, sort_keys=True) + "\n").encode())
         print(json.dumps({"exit_code": 0, "report_sha256": sha(actual),
                           "capsule_sha256": CAPSULE_SHA256,
                           "output": str((out / "reproduction-results.json").relative_to(HERE)),

@@ -1,0 +1,67 @@
+{
+  "baseline_commit": "72029cd16057199be441058c69dd783604541100",
+  "controls": [
+    {
+      "evidence": "the pinned input contains the exact subject once",
+      "kind": "positive-control",
+      "method_id": "source-review",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "a duplicated subject is rejected",
+      "kind": "negative-control",
+      "method_id": "source-review",
+      "outcome": "passed"
+    },
+    {
+      "evidence": "an altered whole-file pin is rejected",
+      "kind": "negative-control",
+      "method_id": "source-review",
+      "outcome": "passed"
+    }
+  ],
+  "interpretation_limits": [
+    "IGM DEPTO assignment and contested attributes document that source map representation; they do not establish mutually agreed sovereignty, a normal second administrative tier, or whether either polygon belongs inside the ordinary Artigas department boundary.",
+    "This reproduction reads geometry type and coordinate-member presence only; it does not test topology, overlap, containment, area or legal boundaries.",
+    "The 2017 geoBoundaries ADM1 feature represents Artigas as a single ordinary ADM1 unit and does not encode these two separate contested records."
+  ],
+  "issue": 927,
+  "parent_id": "framework:province:artigas:dc4b2e0fed20",
+  "semantic_review": "open",
+  "source_features": {
+    "geoBoundaries_2017_adm1_count": 19,
+    "igm_contested_feature_count": 2,
+    "igm_contested_features": [
+      {
+        "coordinate_member_count": 1,
+        "definition": "Rincón de Maneco (Contestado)",
+        "department": "ARTIGAS",
+        "geometry_type": "Polygon",
+        "id": 15,
+        "name": "Rincón de Maneco",
+        "observation": "Marítimo",
+        "text": "Contestado."
+      },
+      {
+        "coordinate_member_count": 1,
+        "definition": "Isla Brasileña (Contestada)",
+        "department": "ARTIGAS",
+        "geometry_type": "Polygon",
+        "id": 16,
+        "name": "Isla Brasileña",
+        "observation": "Maritímo",
+        "text": "Contestado."
+      }
+    ],
+    "igm_current_count": 21,
+    "igm_regular_department_count": 19
+  },
+  "source_hashes": {
+    "2017_geoBoundaries": "9f4887205e7b359af2ef1e4f484ad071d2dc0d12d068f1d7b6c1cc6c2624d1cf",
+    "igm_current": "3cfa19c6be9d12bd159b236e15839f958656fdbe66ef19e38379cb54c141b3a7",
+    "part25": "dada55df1b7f0f2a2b307f4aea071d0e48791e3105875755fe74a292a6763394"
+  },
+  "subject_id": "gb:URY:ADM1:27058087B22084813565519",
+  "subject_name": "Artigas",
+  "version": 1
+}

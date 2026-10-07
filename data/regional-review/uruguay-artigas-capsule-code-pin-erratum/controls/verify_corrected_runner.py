@@ -183,6 +183,53 @@ def main():
     if race_row["retained_report_sha256"] != "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a" or not race_row["success_receipt_exists"] or race_row["probe_created"]:
         raise AssertionError("runner did not consume the captured code/input bytes")
     cases.append(race_row)
+    root = fixture("publication-sync-failure")
+    spec = importlib.util.spec_from_file_location("artigas_sync_failure_runner", root / "reproduce.py")
+    runner = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(runner)
+    original_fsync = os.fsync
+    sync_calls = []
+    def fail_publication_sync(fd):
+        sync_calls.append(fd)
+        if len(sync_calls) == 2:
+            raise OSError("directed publication receipt fsync failure")
+        return original_fsync(fd)
+    previous_argv = sys.argv
+    stdout, stderr = io.StringIO(), io.StringIO()
+    error = None
+    try:
+        sys.argv = [str(root / "reproduce.py"), "--output", "attempt"]
+        os.fsync = fail_publication_sync
+        with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
+            try:
+                runner.main()
+            except OSError as exc:
+                error = str(exc)
+    finally:
+        os.fsync = original_fsync
+        sys.argv = previous_argv
+    out = root / "outputs/attempt"
+    sync_row = {"case": "publication-receipt-sync-failure", "exit_code": 1,
+                "expected_exit_code": 1, "fsync_calls": len(sync_calls),
+                "error": error, "report_exists": (out / "reproduction-results.json").is_file(),
+                "failure_exists": (out / "failure.json").is_file(),
+                "publication_exists": (out / "publication.json").exists(),
+                "output_names": sorted(p.name for p in out.iterdir()),
+                "failure": json.loads((out / "failure.json").read_text()) if (out / "failure.json").is_file() else None,
+                "stdout_sha256": digest(stdout.getvalue().encode()),
+                "stderr_sha256": digest(stderr.getvalue().encode()),
+                "execution": "actual reproduce.py main() with os.fsync forced to fail on publication temp file after report sync"}
+    logs = LOGS / "publication-receipt-sync-failure"
+    if logs.exists():
+        shutil.rmtree(logs)
+    logs.mkdir(parents=True)
+    (logs / "stdout.txt").write_text(stdout.getvalue())
+    (logs / "stderr.txt").write_text(stderr.getvalue())
+    if (error != "directed publication receipt fsync failure" or len(sync_calls) != 3 or
+            not sync_row["report_exists"] or not sync_row["failure_exists"] or
+            sync_row["publication_exists"] or sync_row["output_names"] != ["failure.json", "reproduction-results.json"]):
+        raise AssertionError("publication sync failure exposed a success receipt or unsafe output")
+    cases.append(sync_row)
     root, process, row = run("traversal", output="../escape")
     row["escape_created"] = (root.parent / "escape").exists()
     row["outputs"] = sorted(p.name for p in (root / "outputs").iterdir())
@@ -208,6 +255,7 @@ def main():
              "cases": cases, "runtime": {"python": sys.version, "executable": sys.executable},
              "limits": ["Fixtures use hard links for unchanged inputs; changed manifest/code/input paths are atomically replaced before invocation.",
                         "The directed race hook replaces both executable and consumed input paths after validation; the runner still executes and reads the captured byte values.",
+                        "The publication failure control injects an fsync error immediately before atomic success-receipt publication; no publication receipt appears.",
                         "The probes write only inside their isolated fixture output directory; generated fixture copies are removed after the retained outcome records are written."]}
     (CONTROLS / "corrected-runner-audit.json").write_text(json.dumps(audit, indent=2, sort_keys=True) + "\n")
     shutil.rmtree(FIXTURES)

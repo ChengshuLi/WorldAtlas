@@ -13,7 +13,15 @@ sha = lambda raw: hashlib.sha256(raw).hexdigest()
 
 def main():
     rows = []
-    for name in ("verified-run-twelve", "verified-run-thirteen"):
+    number = 14
+    def run_exists(value):
+        name = f"verified-run-{value}"
+        return ((HERE / "outputs" / name).exists() or
+                (CONTROLS / "corrected-baseline-logs" / name).exists())
+    while run_exists(number) or run_exists(number + 1):
+        number += 2
+    run_names = (f"verified-run-{number}", f"verified-run-{number + 1}")
+    for name in run_names:
         command = [sys.executable, str(HERE / "reproduce.py"), "--output", name]
         process = subprocess.run(command, cwd=HERE, text=True, capture_output=True)
         logdir = CONTROLS / "corrected-baseline-logs" / name
@@ -32,7 +40,14 @@ def main():
         if process.returncode or row["report_sha256"] != "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a" or not receipt.is_file():
             raise AssertionError("full corrected reproduction did not complete: " + name)
         rows.append(row)
-    name = "failure-captured-safe-two"
+    failure_number = 3
+    def failure_exists(value):
+        candidate = f"failure-captured-safe-{value}"
+        return ((HERE / "outputs" / candidate).exists() or
+                (CONTROLS / "corrected-baseline-logs" / candidate).exists())
+    while failure_exists(failure_number):
+        failure_number += 1
+    name = f"failure-captured-safe-{failure_number}"
     command = [sys.executable, str(HERE / "reproduce.py"), "--output", name, "--fail-after-compute"]
     process = subprocess.run(command, cwd=HERE, text=True, capture_output=True)
     logdir = CONTROLS / "corrected-baseline-logs" / name

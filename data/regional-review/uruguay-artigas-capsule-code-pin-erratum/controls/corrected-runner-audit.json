@@ -14,7 +14,7 @@
       "output_names": [],
       "probe_created": false,
       "stderr_bytes": 1224,
-      "stderr_sha256": "a0b6868ace59f674e7fd6bf5ed0b11367670d81398f3f5b641c188df00128aa1",
+      "stderr_sha256": "adba82dc8b516250ef9aa539c1ff63cfbc78adc8bb3f2bfdd63da5f5dac16380",
       "stdout_bytes": 0,
       "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
@@ -32,7 +32,7 @@
       "output_names": [],
       "probe_created": false,
       "stderr_bytes": 1257,
-      "stderr_sha256": "0b55185479e90594e58eef35b654abb8220916fb7f25ac1759229fde2ba48c74",
+      "stderr_sha256": "7d3e96e4147cf3d864b44ffb545bd3e5ed1d5311ee9f2aa337b8763e9ef802e7",
       "stdout_bytes": 0,
       "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
@@ -50,7 +50,7 @@
       "output_names": [],
       "probe_created": false,
       "stderr_bytes": 1245,
-      "stderr_sha256": "787be53409f946005be5e751eb51f214ab6511e7241bd89fc73d7ef45bc86a5d",
+      "stderr_sha256": "27b027d63448d504f2301b1f5e936bda3483842ef465df875d6601b2b57e0de5",
       "stdout_bytes": 0,
       "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
@@ -68,7 +68,7 @@
       "output_names": [],
       "probe_created": false,
       "stderr_bytes": 1229,
-      "stderr_sha256": "f2d06b2847945823171102d646b20919b21f9595ca76d93351faa16cde839a59",
+      "stderr_sha256": "2b7da116ca05e31b6a24543e15b9f23bd98f62d68a112aae66d1c91b1250073b",
       "stdout_bytes": 0,
       "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
@@ -89,7 +89,7 @@
       "probe_created": false,
       "sentinel_sha256": "6b428ace0262db5de1acac5d5e225a117674ede63c6631800103512289d791e6",
       "stderr_bytes": 1129,
-      "stderr_sha256": "8d4789e50482c2dbf3a36041fa67c8ab6d34090b57e489b9e19473dc5c0060cf",
+      "stderr_sha256": "b63689e7c334f3aae53a4eb1a0a29efdc48ea83daf8a53b00d62040754b194a7",
       "stdout_bytes": 0,
       "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
@@ -109,7 +109,7 @@
       ],
       "probe_created": false,
       "stderr_bytes": 1099,
-      "stderr_sha256": "82a1322967f5ef6749abc987fb23b7c266356d00117becde6f3e2935d40ffcfb",
+      "stderr_sha256": "e30f185fa064f85b7e9c4175c60402843f707b26a313ed756588bee954292f1a",
       "stdout_bytes": 0,
       "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
@@ -127,7 +127,7 @@
       "output_names": [],
       "probe_created": false,
       "stderr_bytes": 1116,
-      "stderr_sha256": "c6dba62556bce7273a75ff6446c51e37d4f01fe2e1888fe22e4f06d930c5511d",
+      "stderr_sha256": "7324dd7e843a0e7652bfc074a94563075a4f72315de1981657b2faac296f18f1",
       "stdout_bytes": 0,
       "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
@@ -147,6 +147,29 @@
       "success_receipt_exists": true
     },
     {
+      "case": "publication-receipt-sync-failure",
+      "error": "directed publication receipt fsync failure",
+      "execution": "actual reproduce.py main() with os.fsync forced to fail on publication temp file after report sync",
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "failure": {
+        "capsule_stdout": "{\"features_checked\": 2, \"igm_features\": 21, \"old_adm1\": 19, \"pins_checked\": 5, \"result_sha256\": \"3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a\"}\n",
+        "error": "directed publication receipt fsync failure",
+        "report_sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
+        "status": "failed"
+      },
+      "failure_exists": true,
+      "fsync_calls": 3,
+      "output_names": [
+        "failure.json",
+        "reproduction-results.json"
+      ],
+      "publication_exists": false,
+      "report_exists": true,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
       "case": "traversal",
       "command": [
         "/usr/local/opt/python/bin/python3.7",
@@ -159,7 +182,7 @@
       "expected_exit_code": 1,
       "outputs": [],
       "stderr_bytes": 1132,
-      "stderr_sha256": "eb3585fb84ce312af587e2bbddb0e96d653e2b421ec319317d7d5b091ab115bb",
+      "stderr_sha256": "b8a9d451b697fcfb289b8071b09c00331d37da12486bed995f604677dc4b311c",
       "stdout_bytes": 0,
       "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
@@ -182,7 +205,7 @@
       },
       "retained_report_sha256": "3970173b2c2050c1099ec427e4d64076e96a3000635ba20db203fa204320e44a",
       "stderr_bytes": 826,
-      "stderr_sha256": "62144ef1f8f4c9f08f793974de858746e8ea3ccb566e08178ec3dc78ddce6650",
+      "stderr_sha256": "a9e7acfd756b07d01d62375ebacbe02feb19f8ea9f346097fde30f76524d3831",
       "stdout_bytes": 0,
       "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "success_receipt_exists": false
@@ -192,6 +215,7 @@
   "limits": [
     "Fixtures use hard links for unchanged inputs; changed manifest/code/input paths are atomically replaced before invocation.",
     "The directed race hook replaces both executable and consumed input paths after validation; the runner still executes and reads the captured byte values.",
+    "The publication failure control injects an fsync error immediately before atomic success-receipt publication; no publication receipt appears.",
     "The probes write only inside their isolated fixture output directory; generated fixture copies are removed after the retained outcome records are written."
   ],
   "originals_unchanged": {
