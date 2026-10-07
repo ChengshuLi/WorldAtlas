@@ -17,6 +17,7 @@ def canonical(value):return json.dumps(value,sort_keys=True,separators=(',',':')
 config=json.loads((CASE/'config.json').read_bytes())
 preflight=json.loads((CASE/'diagnosis/necessary-input-budget-complete-static-imports.json').read_bytes())
 paths={r['path'] for r in preflight['consumed_snapshot']}|{r['path'] for r in config['snapshot_files']+config['source_files']}
+paths.add('coordination/engineering/original-geography-source-corpus-20261006/CITATION-AND-USE-geoBoundaries-original.txt')
 # This is original consumer/import/input history. New actual executed modules are outputs.
 baseline=[]
 modified={'docs/GEOGRAPHIC_REGRESSION.md','scripts/evidence/geometry.py','scripts/check-geographic-regression.py','test/geographic-regression.py','test/geographic-regression.test.mjs'}
@@ -36,7 +37,7 @@ for key,descriptor,retention in [('gb:FJI:ADM2',fji,'retained'),('gb:RUS:ADM2',r
     source={'id':key,'url':metadata['simplifiedGeometryGeoJSON'],'role':'Complete original consumed source geometry and metadata for predecessor diagnosis, not dated water or authority',
             'vintage':'Original whole source SHA '+metadata['sha256']+'; advertised represented year '+metadata['boundaryYearRepresented'],
             'retrieved_at':'Original capture or immutable Git body reauthenticated 2026-10-07; historical first retrieval time unknown',
-            'license':{'status':'redistributable','terms':metadata['boundaryLicense']+'; exact original metadata and attribution are retained in the full baseline administrative registry.'},
+            'license':{'status':'redistributable','terms':metadata['boundaryLicense']+'; geoBoundaries derivative redistribution/citation terms are preserved whole in the baseline CITATION-AND-USE-geoBoundaries-original.txt. Exact original metadata and attribution are retained in the full baseline administrative registry.'},
             'retention':retention,'verification':'unverified','temporal_status':'reference',
             'limit':'Whole original bytes authenticated; dated physical water, legal authority and historical execution cause remain unverified.'}
     if retention=='retained':source['files']=[descriptor]
