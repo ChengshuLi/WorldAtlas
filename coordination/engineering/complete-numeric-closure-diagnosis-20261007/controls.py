@@ -5,6 +5,7 @@ import gzip
 import json
 from pathlib import Path
 import tempfile
+from types import SimpleNamespace
 from unittest.mock import patch
 from shapely.geometry import box, Polygon, shape
 import diagnose
@@ -92,6 +93,39 @@ def main():
     rejected('wrong-routing-row-ordinal',lambda:reader.routing_alias(row,line,sample['actual_routing_row_ordinal'],changed),'row alias')
     changed=dict(row,whole_physical_row_sha256='0'*64)
     rejected('rehashed-routing-physical-row-mismatch',lambda:reader.routing_alias(changed,line,sample['actual_routing_row_ordinal'],expected),'metadata differs')
+    # Actual bounded JSONL reader: complete current IDs, no point/geometry claim.
+    ids=sorted([row['component'] for row in actual_scope['rows']]+actual_scope['complement_ids'])
+    with tempfile.TemporaryDirectory(dir=HERE/'.cache') as directory:
+        root=Path(directory);pins={};products=[];chunk=(len(ids)+70)//71
+        context=SimpleNamespace(components={identity:({},'0'*64,'0'*64) for identity in ids})
+        context.component=lambda row:reader.transport.Context.component(context,row)
+        for ordinal in range(71):
+            rows=[dict(component_id=identity,complete_current_record_metadata_alias='v1') for identity in ids[ordinal*chunk:(ordinal+1)*chunk]]
+            raw=b''.join(reader.canonical(row) for row in rows)
+            encoded=gzip.compress(raw,mtime=0);name=f'member-{ordinal:03}.gz';(root/name).write_bytes(encoded)
+            pins[reader.PHYSICAL+f'results/components-{ordinal:03}.jsonl.gz']=dict(path=name,bytes=len(encoded),sha256=reader.digest(encoded),uncompressed_bytes=len(raw),uncompressed_sha256=reader.digest(raw))
+            restored=b''.join(reader.canonical(reader.transport.restore_row(row,'components',context)) for row in rows)
+            original_encoded=reader.old.immutable.deterministic_gzip(restored)
+            products.append(dict(path=f'components-{ordinal:03}.jsonl.gz',bytes=len(original_encoded),sha256=reader.digest(original_encoded),uncompressed_bytes=len(restored),uncompressed_sha256=reader.digest(restored)))
+        state=dict(originals=pins,routing={},context=context,physical_report={'products':products})
+        with patch.object(reader,'HERE',root):
+            check('actual71-shard-complete95173-membership-positive',list(reader.physical_rows(state))==[])
+            last=next(reversed(pins.values()));raw=reader.checked(root,last)
+            rows=[json.loads(line) for line in raw.splitlines()]
+            old_identity=rows[-1]['component_id'];rows[-1]['component_id']='foreign-unselected-complement-id'
+            # Rebind the fixture context/wholeoriginal file so membership is the
+            # intended rejection, not an earlier missingmetadata/hash failure.
+            context.component=lambda row:dict(original_context={},candidate_feature_sha256='0'*64,candidate_geometry_sha256='0'*64)
+            changed=b''.join(reader.canonical(row) for row in rows);encoded=gzip.compress(changed,mtime=0)
+            (root/last['path']).write_bytes(encoded);last.update(bytes=len(encoded),sha256=reader.digest(encoded),uncompressed_bytes=len(changed),uncompressed_sha256=reader.digest(changed))
+            restored=b''.join(reader.canonical(reader.transport.restore_row(row,'components',context)) for row in rows);original_encoded=reader.old.immutable.deterministic_gzip(restored)
+            products[-1].update(bytes=len(original_encoded),sha256=reader.digest(original_encoded),uncompressed_bytes=len(restored),uncompressed_sha256=reader.digest(restored))
+            rejected('actual-rehashed-reader-foreign-complement-same95173-count',lambda:list(reader.physical_rows(state)),'bijection differs')
+            rows.pop();changed=b''.join(reader.canonical(row) for row in rows);encoded=gzip.compress(changed,mtime=0)
+            (root/last['path']).write_bytes(encoded);last.update(bytes=len(encoded),sha256=reader.digest(encoded),uncompressed_bytes=len(changed),uncompressed_sha256=reader.digest(changed))
+            restored=b''.join(reader.canonical(reader.transport.restore_row(row,'components',context)) for row in rows);original_encoded=reader.old.immutable.deterministic_gzip(restored)
+            products[-1].update(bytes=len(original_encoded),sha256=reader.digest(original_encoded),uncompressed_bytes=len(restored),uncompressed_sha256=reader.digest(restored))
+            rejected('actual-rehashed-reader-omitted-complement',lambda:list(reader.physical_rows(state)),'bijection differs')
     witnesses=json.loads((HERE/'six-retained-control-inputs.json').read_bytes())
     replayed=[]
     for witness in witnesses['witnesses']:
@@ -106,6 +140,25 @@ def main():
         if witness['target_relation']=='extra_reconstruction':
             check('actual-extra-triangle-in-candidate-contradiction:'+witness['component_id'],any(r['relation']=='extra_reconstruction' for r in result['demonstrated_local_contradictions']))
         replayed.append(dict(component_id=witness['component_id'],target_relation=witness['target_relation'],target_diagnosis=target,geometry_equality=result['geometry_byte_container_equality'],hierarchy_equality=result['hierarchy_geometry_equality']))
+    extra=next(w for w in witnesses['witnesses'] if w['target_relation']=='extra_reconstruction')
+    changed=copy.deepcopy(extra['complete_original_scientific_row'])
+    changed['complete_support']['extra_reconstruction']['geometry']={'type':'Polygon','coordinates':[]}
+    mismatch=kernel.replay(shape(extra['complete_candidate']['geometry']),changed,reader.old.comparison.alternating_support)
+    check('actual-original-operator-retained-mapping-mismatch-unknown',mismatch['status']=='original-replay-mismatch' and mismatch['geometry_byte_container_equality']['extra_reconstruction'] is False and mismatch['demonstrated_local_contradictions']==[] and mismatch['point_diagnostics']=={})
+    check('mismatch-keeps-complete-fresh-geometry',mismatch['complete_geometry_mappings']['extra_reconstruction']['coordinates']!=[])
+    generated=reader.old.comparison.alternating_support(candidate,{})
+    synthetic=dict(query_relations=[],unresolved=[],complete_support={key:dict(geometry=kernel.ordinary_mapping(generated[key])) for key in kernel.RELATIONS})
+    synthetic['complete_support']['hierarchy_disagreements']={key:dict(geometry=kernel.ordinary_mapping(value)) for key,value in generated['hierarchy_disagreements'].items()}
+    def signed_zero(values):
+        for ordinal,value in enumerate(values):
+            if isinstance(value,list):
+                if signed_zero(value):return True
+            elif isinstance(value,float) and value==0:
+                values[ordinal]=-0.0;return True
+        return False
+    check('signedzero-control-actually-changes-retained-canonicalbytes',signed_zero(synthetic['complete_support']['outside_mapped_L1_context']['geometry']['coordinates']))
+    mismatch=kernel.replay(candidate,synthetic,reader.old.comparison.alternating_support)
+    check('signedzero-container-equality-does-not-hide-byte-mismatch',mismatch['status']=='original-replay-mismatch' and mismatch['geometry_byte_container_equality']['outside_mapped_L1_context'] is False)
     out=dict(result='PASS',complete_directed_controls=len(records),controls=records,actual_six_retained_replays=replayed,
              limits=['Small directed controls only, not full26276 scientific execution or source/repair approval.'])
     print(json.dumps(out,sort_keys=True))

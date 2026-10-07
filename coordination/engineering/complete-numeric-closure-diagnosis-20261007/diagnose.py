@@ -95,7 +95,8 @@ def run(repo,commit,output,input_only=False):
         print(json.dumps(dict(status='PASS',kind='input-only complete custody/bijection; no original operator replay or point diagnosis',
             complete_current=95173,numeric=26276,complement=68897,families=3503,batches=253,
             input_files=len(state['receipts']),input_bytes=sum(x['bytes'] for x in state['receipts']),
-            actual_code_commit=commit,actual_runtime=runtime,code=code,output_created=output.exists()),sort_keys=True))
+            actual_code_commit=commit,actual_runtime=runtime,code=code,
+            complete_original104_file_restoration=state['physical_restore_receipts'],output_created=output.exists()),sort_keys=True))
         return
     products=reader.old.Products(output)
     objects=Objects(products);counts=Counter();families=defaultdict(list);batches=defaultdict(list)
@@ -137,6 +138,7 @@ def run(repo,commit,output,input_only=False):
         complete_current_components=95173,complete_numeric_components=26276,complete_complement=68897,
         complete_families=3503,complete_batches=253,geometry_objects=len(objects.seen),counts=dict(counts),
         source_input_receipts=state['receipts'],original_reconstructor=state['reconstructor'],
+        complete_original104_file_restoration=state['physical_restore_receipts'],
         derived_component_only_config_sha256=state['derived_component_only_config_sha256'],
         original_config_sha256=state['original_config_sha256'],outputs=descriptors,
         limits=kernel.exact.LIMITS+['Complete original alternating104 operator replay only; no native source query or new data reconstruction.',

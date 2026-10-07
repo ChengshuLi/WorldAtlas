@@ -56,6 +56,10 @@ def current_feature(feature,row):
     if digest(canonical(feature))!=row['current_feature_sha256'] or digest(canonical(feature['geometry']))!=row['current_geometry_sha256']:
         raise ValueError('Changed whole current candidate feature/pointset')
 
+def physical_roster(seen,state):
+    if len(seen)!=95173 or seen!=set(state['context'].components):
+        raise ValueError('Complete physical/current/complement bijection differs')
+
 class ComponentContext:
     """Only component restoration; never instantiate source/native Context."""
     def __init__(self,features):
@@ -128,30 +132,49 @@ def load(repo):
         feature=candidates[identity]
         current_feature(feature,row)
     del current
+    physical_report=json.loads(checked(HERE,originals[PHYSICAL+'results/report.json']))
     return dict(index=index,originals=originals,scope=scope,routing=routing,candidates=candidates,
                 context=context,receipts=receipts,reconstructor=reconstructor,audit=audit,lineage=lineage,
+                physical_report=physical_report,
                 original_config_sha256=digest(canonical(original_config)),
                 derived_component_only_config_sha256=digest(canonical(derived)),source_receipts=source_receipts)
 
 def physical_rows(state):
     seen=set()
+    state['physical_restore_receipts']=[]
     originals=state['originals']
+    original_products={pin['path']:pin for pin in state['physical_report']['products']}
     names=sorted(path for path in originals if path.startswith(PHYSICAL+'results/components-') and path.endswith('.jsonl.gz'))
     if len(names)!=71:raise ValueError('Incomplete71 whole physical scientific shards')
     for path in names:
         pin=originals[path]
         decoded=checked(HERE,pin)
+        restored_body=bytearray()
         for ordinal,line in enumerate(decoded.splitlines()):
             row=json.loads(line)
             identity=row['component_id']
             if identity in seen:raise ValueError('Duplicate full physical component')
             seen.add(identity)
-            if identity not in state['routing']:continue
             restored=transport.restore_row(row,'components',state['context'])
+            restored_body.extend(canonical(restored))
+            if identity not in state['routing']:continue
             routing=state['routing'][identity]
-            if routing['whole_physical_containing_file']!=path or digest(canonical(restored))!=routing['whole_physical_row_sha256']:
-                raise ValueError('Restored entire original scientific row binding differs')
+            packed_sha=digest(canonical(row))
+            if routing['whole_physical_containing_file']!=path or packed_sha!=routing['whole_physical_row_sha256']:
+                raise ValueError('Whole delivered packed scientific row binding differs')
             yield identity,restored,dict(path=pin['path'],original_path=path,row_ordinal=ordinal,
-                restored_whole_row_sha256=digest(canonical(restored)),complete_current_feature_sha256=routing['current_feature_sha256'])
-    if len(seen)!=95173 or set(state['routing'])-seen:
-        raise ValueError('Incomplete original scientific row roster')
+                whole_delivered_packed_row_sha256=packed_sha,
+                packed_row_hash_domain='complete-delivered-packed-canonical-row',
+                restored_whole_row_sha256=digest(canonical(restored)),
+                restored_row_hash_domain='original104-scientific-row-with-current-context-fields-restored',
+                complete_current_feature_sha256=routing['current_feature_sha256'])
+        original=original_products[path.rsplit('/',1)[-1]]
+        if len(restored_body)!=original['uncompressed_bytes'] or digest(restored_body)!=original['uncompressed_sha256']:
+            raise ValueError('Whole original104 restored scientific file differs')
+        encoded=old.immutable.deterministic_gzip(bytes(restored_body))
+        if len(encoded)!=original['bytes'] or digest(encoded)!=original['sha256']:
+            raise ValueError('Whole original104 restored encoded scientific file differs')
+        state['physical_restore_receipts'].append(dict(original,complete_original_row_restoration=True,
+            actual_restored_encoded_bytes=len(encoded),actual_restored_encoded_sha256=digest(encoded),
+            actual_restored_decoded_bytes=len(restored_body),actual_restored_decoded_sha256=digest(restored_body)))
+    physical_roster(seen,state)

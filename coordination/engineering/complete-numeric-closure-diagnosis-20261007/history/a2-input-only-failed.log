@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/coordination/engineering/complete-numeric-closure-diagnosis-20261007/diagnose.py", line 159, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/coordination/engineering/complete-numeric-closure-diagnosis-20261007/diagnose.py", line 157, in main
+    run(Path(args.repo).resolve(),args.code_commit,Path(args.output),args.validate_inputs_only)
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/coordination/engineering/complete-numeric-closure-diagnosis-20261007/diagnose.py", line 90, in run
+    for identity,row,pin in reader.physical_rows(state):
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/coordination/engineering/complete-numeric-closure-diagnosis-20261007/reader.py", line 153, in physical_rows
+    raise ValueError('Restored entire original scientific row binding differs')
+ValueError: Restored entire original scientific row binding differs

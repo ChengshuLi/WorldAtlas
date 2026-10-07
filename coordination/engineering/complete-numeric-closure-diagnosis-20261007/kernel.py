@@ -8,6 +8,13 @@ RELATIONS = ('mapped_land_support', 'mapped_inland_water_support',
              'outside_mapped_L1_context', 'missing_reconstruction',
              'extra_reconstruction', 'contradictory_land_water_support')
 
+CONTEXT={'crs':'OGC:CRS84-source-coordinate-plane', 'axis_order':['x','y'],
+         'numeric_vintage':'immutable-original104-source-relative-operation-binary64',
+         'coordinate_encoding':'IEEE754-binary64'}
+
+def canonical(value):
+    return (json.dumps(value,sort_keys=True,separators=(',',':'),allow_nan=False)+'\n').encode()
+
 def ordinary_mapping(geometry):
     # JSON changes containers only; every binary64 coordinate is preserved.
     return json.loads(json.dumps(mapping(geometry), allow_nan=False))
@@ -45,7 +52,7 @@ def reconstruct_levels(candidate, row):
     return levels,retained
 
 def point_diagnostics(candidate, residue):
-    result={'helper_version':exact.VERSION,'original_point_domain':'IEEE754-binary64-as-exact-rational',
+    result={'helper_version':exact.VERSION,'coordinate_context':exact.context(CONTEXT),'original_point_domain':'IEEE754-binary64-as-exact-rational',
             'derived_point_domain':'exact-rational-centroid-of-original-binary64-triangle',
             'whole_component_certification':False,'partition_repair_approval':False,
             'vertices':[],'triangles':[],'nontriangle_polygons':[]}
@@ -113,9 +120,16 @@ def replay(candidate,row,operator):
         measured=operator(candidate,levels)
         geometries={key:ordinary_mapping(measured[key]) for key in RELATIONS}
         hierarchy={key:ordinary_mapping(value) for key,value in measured['hierarchy_disagreements'].items()}
-        equals={key:geometries[key]==row['complete_support'][key]['geometry'] for key in RELATIONS}
+        equals={key:canonical(geometries[key])==canonical(row['complete_support'][key]['geometry']) for key in RELATIONS}
         old_hierarchy=row['complete_support']['hierarchy_disagreements']
-        hierarchy_equals={key:geometry==old_hierarchy[key]['geometry'] for key,geometry in hierarchy.items()}
+        hierarchy_equals={key:canonical(geometry)==canonical(old_hierarchy[key]['geometry']) for key,geometry in hierarchy.items()}
+        if not all(equals.values()) or not all(hierarchy_equals.values()):
+            result.update(status='original-replay-mismatch',complete_geometry_mappings=geometries,
+                complete_hierarchy_mappings=hierarchy,geometry_byte_container_equality=equals,
+                hierarchy_geometry_equality=hierarchy_equals,point_diagnostics={},
+                demonstrated_local_contradictions=[],conservative_class='retained-unresolved-original-replay-mismatch',
+                next_action='engineering-original-container-or-numerical-replay-mismatch-diagnosis')
+            return result
         probes={key:point_diagnostics(candidate,measured[key]) for key in RELATIONS[3:]}
         for key,value in measured['hierarchy_disagreements'].items():
             probes[key]=point_diagnostics(candidate,value)
