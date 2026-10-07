@@ -80,7 +80,7 @@ inside('inputs/source-transports/gb-UKR-ADM2-000.bin.gz'),
 inside('inputs/baseline/lakes-source.gz')}
 outputs=[]
 for p in sorted(ROOT.rglob('*')):
- if not p.is_file() or p.name=='evidence-quality.json' or p.name=='reproducibility.json' or '__pycache__' in p.parts or p.suffix=='.pyc': continue
+ if not p.is_file() or p==ROOT/'evidence-quality.json' or p==ROOT/'controls/reproducibility.json' or '__pycache__' in p.parts or p.suffix=='.pyc': continue
  path=p.relative_to(REPO).as_posix()
  if path not in source_paths:
   role='generated-result'

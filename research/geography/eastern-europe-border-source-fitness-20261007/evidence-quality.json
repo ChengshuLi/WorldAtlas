@@ -298,7 +298,676 @@
       "gb:UKR:ADM2:74538382B97249439308301": "data/geography/part-25.json"
     }
   },
-  "change_receipts": [],
+  "change_receipts": [
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/README.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/build_manifest.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/control-checks.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/controls/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/controls/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/controls/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/execute.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-admin-script/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-admin-script/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-admin-script/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-admin-script/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-admin-script/run-one-invocation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-admin-script/run-one/feature-inventory.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-admin-script/run-one/run-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-admin-script/run-one/scope-reconciliation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-admin-script/run-one/source-fitness.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-admin-script/run-one/whole-source-neighbor-overlays.csv",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-admin-script/run-two-invocation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-admin-script/run-two/feature-inventory.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-admin-script/run-two/run-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-admin-script/run-two/scope-reconciliation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-admin-script/run-two/source-fitness.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-admin-script/run-two/whole-source-neighbor-overlays.csv",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-admin-script/two-run-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-corpus-metadata/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-corpus-metadata/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-corpus-metadata/run-one-invocation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-corpus-metadata/run-one/feature-inventory.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-corpus-metadata/run-one/run-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-corpus-metadata/run-one/scope-reconciliation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-corpus-metadata/run-one/source-fitness.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-corpus-metadata/run-one/whole-source-neighbor-overlays.csv",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-corpus-metadata/run-two-invocation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-corpus-metadata/run-two/feature-inventory.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-corpus-metadata/run-two/run-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-corpus-metadata/run-two/scope-reconciliation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-corpus-metadata/run-two/source-fitness.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-corpus-metadata/run-two/whole-source-neighbor-overlays.csv",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-corpus-metadata/two-run-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-count-metric/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-count-metric/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-count-metric/run-one-invocation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-count-metric/run-one/feature-inventory.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-count-metric/run-one/run-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-count-metric/run-one/scope-reconciliation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-count-metric/run-one/source-fitness.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-count-metric/run-one/whole-source-neighbor-overlays.csv",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-count-metric/run-two-invocation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-count-metric/run-two/feature-inventory.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-count-metric/run-two/run-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-count-metric/run-two/scope-reconciliation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-count-metric/run-two/source-fitness.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-count-metric/run-two/whole-source-neighbor-overlays.csv",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-count-metric/two-run-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-final-custody-check-failure/run-one-invocation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-final-custody-check-failure/run-two-invocation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-final-custody-check-failure/two-run-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-final-custody-count-failure/run-one-invocation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-final-custody-count-failure/run-two-invocation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-final-custody-count-failure/two-run-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-runtime-closure/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-runtime-closure/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-runtime-closure/run-one-invocation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-runtime-closure/run-one/feature-inventory.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-runtime-closure/run-one/run-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-runtime-closure/run-one/scope-reconciliation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-runtime-closure/run-one/source-fitness.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-runtime-closure/run-one/whole-source-neighbor-overlays.csv",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-runtime-closure/run-two-invocation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-runtime-closure/run-two/feature-inventory.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-runtime-closure/run-two/run-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-runtime-closure/run-two/scope-reconciliation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-runtime-closure/run-two/source-fitness.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-runtime-closure/run-two/whole-source-neighbor-overlays.csv",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-runtime-closure/two-run-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-source-git-identity/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-source-git-identity/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-source-git-identity/run-one-invocation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-source-git-identity/run-one/feature-inventory.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-source-git-identity/run-one/run-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-source-git-identity/run-one/scope-reconciliation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-source-git-identity/run-one/source-fitness.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-source-git-identity/run-one/whole-source-neighbor-overlays.csv",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-source-git-identity/run-two-invocation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-source-git-identity/run-two/feature-inventory.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-source-git-identity/run-two/run-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-source-git-identity/run-two/scope-reconciliation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-source-git-identity/run-two/source-fitness.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-source-git-identity/run-two/whole-source-neighbor-overlays.csv",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-source-git-identity/two-run-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-stable-stage-input/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-stable-stage-input/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-stable-stage-input/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-stable-stage-input/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-stable-stage-input/run-one-invocation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-stable-stage-input/run-one/feature-inventory.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-stable-stage-input/run-one/run-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-stable-stage-input/run-one/scope-reconciliation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-stable-stage-input/run-one/source-fitness.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-stable-stage-input/run-one/whole-source-neighbor-overlays.csv",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-stable-stage-input/run-two-invocation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-stable-stage-input/run-two/feature-inventory.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-stable-stage-input/run-two/run-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-stable-stage-input/run-two/scope-reconciliation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-stable-stage-input/run-two/source-fitness.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-stable-stage-input/run-two/whole-source-neighbor-overlays.csv",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-stable-stage-input/two-run-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/preflight-success-1/feature-inventory.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/preflight-success-1/run-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/preflight-success-1/scope-reconciliation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/preflight-success-1/source-fitness.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/preflight-success-1/whole-source-neighbor-overlays.csv",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/run-one-invocation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/run-two-invocation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/source-custody-before-admin-script.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/source-custody-before-git-identity.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/source-custody-stage-2.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/source-custody-with-live-main-field.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/source-custody-without-corpus-metadata.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/two-run-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/baseline/administrative-registry.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/baseline/administrative-script.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/baseline/atlas-part-19.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/baseline/atlas-part-2.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/baseline/atlas-part-25.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/baseline/candidate-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/baseline/candidate-source.gz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/baseline/ellipsoidal-area-code.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/baseline/geometry-code.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/baseline/immutable-code.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/baseline/lakes-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/baseline/lakes-source.gz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/baseline/numeric-run-one.gz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/baseline/numeric-run-two.gz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/baseline/physical-audit-input-manifest.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/baseline/physical-component-input.gz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/baseline/physical-input-config.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/baseline/physical-source-pins.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/baseline/routing-admin-binding.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/baseline/routing-batch.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/baseline/routing-component.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/baseline/routing-family.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/baseline/source-corpus-catalogue.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/baseline/source-corpus-citation.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/baseline/source-corpus-evidence.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/baseline/world-index.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/source-custody.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/source-products/geoBoundaries-BLR-ADM2_simplified.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/source-products/geoBoundaries-POL-ADM2_simplified.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/source-products/geoBoundaries-UKR-ADM2_simplified.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/source-products/natural-earth-10m-lakes.geojson",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/source-transports/gb-BLR-ADM2-000.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/source-transports/gb-POL-ADM2-000.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/inputs/source-transports/gb-UKR-ADM2-000.bin.gz",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/produce.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/runs/run-one/feature-inventory.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/runs/run-one/run-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/runs/run-one/scope-reconciliation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/runs/run-one/source-fitness.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/runs/run-one/whole-source-neighbor-overlays.csv",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/runs/run-two/feature-inventory.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/runs/run-two/run-summary.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/runs/run-two/scope-reconciliation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/runs/run-two/source-fitness.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/runs/run-two/whole-source-neighbor-overlays.csv",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/stage_inputs.py",
+      "status": "added"
+    }
+  ],
   "commands": [
     "python3 research/geography/eastern-europe-border-source-fitness-20261007/stage_inputs.py",
     "python3 research/geography/eastern-europe-border-source-fitness-20261007/execute.py",
@@ -790,11 +1459,11 @@
       "sha256": "7ca3ec7129ced7c8e7f245006d30dd5fcfdcd891e31ea8e4f1181e3eadc2f06e"
     },
     {
-      "bytes": 19358,
+      "bytes": 19367,
       "hash_kind": "file-bytes",
       "path": "research/geography/eastern-europe-border-source-fitness-20261007/build_manifest.py",
       "role": "reproduction-code",
-      "sha256": "121b2eaa3b94d8058684fc594780c2ca440aa314a4410e97c0d9cd01b1d65569"
+      "sha256": "eabab4fb146f4815f9dbc36610dd879ea9b50f39bc5d293abe518967fec1a06a"
     },
     {
       "bytes": 4895,
@@ -825,6 +1494,13 @@
       "sha256": "fdc66851011afe0b20705ba65e0995f69d01601f5fdc11fc97de433081e179bb"
     },
     {
+      "bytes": 78827,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-admin-script/evidence-quality.json",
+      "role": "preserved-run-history",
+      "sha256": "a51294a84726a44f3f27bd05a811b190bc1b2a693badd94cb0690d5a1c31c121"
+    },
+    {
       "bytes": 5683,
       "hash_kind": "file-bytes",
       "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-admin-script/negative-control.json",
@@ -837,6 +1513,13 @@
       "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-admin-script/positive-control.json",
       "role": "preserved-run-history",
       "sha256": "4ceed9ace1020eb523e42a98d67206b05c50bf4ddb275d32974e15dbc33c9321"
+    },
+    {
+      "bytes": 1135,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-admin-script/reproducibility.json",
+      "role": "preserved-run-history",
+      "sha256": "78b975a9663416ca5a0558b922f9dce5f3e4cc88c445f602a7c4a5fae02f2eed"
     },
     {
       "bytes": 52387,
@@ -1182,6 +1865,13 @@
       "sha256": "c446375863dd68cbd53fae2d029b03f683685451d424bac1777614aa3b897a50"
     },
     {
+      "bytes": 84610,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-runtime-closure/evidence-quality.json",
+      "role": "preserved-run-history",
+      "sha256": "dfe04d7b23fd996bf94fd398188435d745ae08d36aaa0d7b3a5517830fa45dfd"
+    },
+    {
       "bytes": 930,
       "hash_kind": "file-bytes",
       "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-runtime-closure/positive-control.json",
@@ -1385,6 +2075,13 @@
       "sha256": "fa031f92b6a28dd722e362044ea20b65f4d08a2aec9298b7ffa4cce2c3459db4"
     },
     {
+      "bytes": 89241,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-stable-stage-input/evidence-quality.json",
+      "role": "preserved-run-history",
+      "sha256": "a6cd103aef00f8364e335d268062517459bbc02414046c130fb360aa8d816883"
+    },
+    {
       "bytes": 5683,
       "hash_kind": "file-bytes",
       "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-stable-stage-input/negative-control.json",
@@ -1397,6 +2094,13 @@
       "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-stable-stage-input/positive-control.json",
       "role": "preserved-run-history",
       "sha256": "794ff81271d95961a98e20d5957ae082e45e494a0a23aeb4f1f91b37ec5dcefb"
+    },
+    {
+      "bytes": 1135,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/eastern-europe-border-source-fitness-20261007/history/pre-stable-stage-input/reproducibility.json",
+      "role": "preserved-run-history",
+      "sha256": "7902891981e341020b5aac16745f08d1dce418bd76a5142312a5990bcc89c678"
     },
     {
       "bytes": 52387,
