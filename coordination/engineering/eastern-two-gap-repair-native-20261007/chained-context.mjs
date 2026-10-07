@@ -1,5 +1,5 @@
 // Exactly the approved unchanged v6→v7 stage, followed by the two-target v7→v8 stage.
-import fs from 'node:fs';import path from 'node:path';import os from 'node:os';import assert from 'node:assert/strict';import{execFileSync}from'node:child_process';import{gunzipSync}from'node:zlib';import{createHash}from'node:crypto';
+import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';import{execFileSync}from'node:child_process';import{gunzipSync}from'node:zlib';import{createHash}from'node:crypto';import{fileURLToPath}from'node:url';
 import{restoreWholeImage}from'./whole-image.mjs';import{validateContextMigration}from'../../../scripts/native-ownership/validate-context-migration.mjs';
 import{candidateBudget,requirePlainExecution}from'../../../scripts/native-ownership/native-preparation-guards.mjs';import{repositoryReader,safeEvidencePath}from'../../../scripts/evidence-quality.mjs';
 import{BEFORE,AFTER,TARGETS}from'./native-producer.mjs';
@@ -12,7 +12,10 @@ export async function validateChainedBuildContext({root,expectedReference,stageP
  const ordinary=readFile??repositoryReader(root),budget=candidateBudget([]),seen=new Map();budget.add({bytes:stageRaw.length});
  function read(pin){safeEvidencePath(pin.path);assert(Number.isSafeInteger(pin.bytes)&&pin.bytes>0&&pin.bytes<=32*1024*1024&&/^[a-f0-9]{64}$/.test(pin.sha256));if(seen.has(pin.path))assert.deepEqual(pin,seen.get(pin.path));
   const raw=ordinary(pin.path,'candidate');assert.equal(raw.length,pin.bytes);assert.equal(sha(raw),pin.sha256);if(!seen.has(pin.path)){budget.add({bytes:raw.length});seen.set(pin.path,pin);}return raw;}
- for(const pin of stage.validator_sources)read(pin);
+ const actualCodeRoot=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../../..'),required=new Set(['package.json']);
+ function visit(p){if(required.has(p))return;required.add(p);const file=path.join(actualCodeRoot,p);assert(fs.realpathSync(file)===file&&fs.lstatSync(file).isFile());const raw=fs.readFileSync(file);assert(raw.length<=32*1024*1024);for(const m of raw.toString('utf8').matchAll(/(?:from\s*|import\s*)['"]([^'"]+)['"]/g))if(m[1].startsWith('.'))visit(path.posix.normalize(path.posix.join(path.posix.dirname(p),m[1])));}
+ visit('scripts/native-ownership/validate-build-context-stage.mjs');assert.deepEqual(stage.validator_sources.map(p=>p.path).sort(),[...required].sort(),'Complete actual context validator import closure required');
+ for(const pin of stage.validator_sources){const raw=read(pin);assert(raw.equals(fs.readFileSync(path.join(actualCodeRoot,pin.path))),'Declared validator differs from actual executed source');}
  const imageIndexRaw=read(stage.prior_image),imageIndex=JSON.parse(imageIndexRaw),imageBase=path.posix.dirname(stage.prior_image.path);
  for(const pin of imageIndex.parts)read({path:imageBase+'/'+pin.path,bytes:pin.bytes,sha256:pin.sha256});
  const parent=path.join(root,'.cache');fs.mkdirSync(parent,{recursive:true});assert.equal(fs.realpathSync(parent),parent);
