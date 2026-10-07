@@ -39,6 +39,8 @@ export async function integrate(repo,out,{inputOnly=false}={}){
  const head=execFileSync('git',['-C',repo,'rev-parse','HEAD'],{encoding:'utf8'}).trim();assert.match(head,/^[a-f0-9]{40}$/);
  const code=codeClosure(repo,NS+'/integration-producer.mjs');code.push(NS+'/serialize-release.py',NS+'/audit-continuation.py',NS+'/original-audit-recipe.py.txt','scripts/evidence/immutable.py','.github/package-inputs.json');
  const modules=[...new Set(code)].sort().map(p=>{const local=fs.readFileSync(repo+'/'+p),committed=execFileSync('git',['-C',repo,'cat-file','blob',head+':'+p],{maxBuffer:32*1024*1024});assert(local.equals(committed),'Actual executed code differs '+p);return{path:p,bytes:local.length,sha256:sha(local)};});
+ const ordinaryRequired=[NS+'/native-proposal.json',NS+'/native-selection-receipt.json','data/ownership-selection.json','scripts/native-ownership/verified-candidates.json',NS+'/content-source-plan.json',NS+'/original-audit-recipe.py.txt'];
+ for(const p of ordinaryRequired){const raw=fs.readFileSync(repo+'/'+p),original=execFileSync('git',['-C',repo,'cat-file','blob',head+':'+p],{maxBuffer:32*1024*1024});assert(raw.equals(original),'Final consumer input differs from immutable head '+p);}
  const {storage,input_only}=prepareInputClosure(repo,out);fs.writeFileSync(out+'/input-only.json',json(input_only));console.log('ALL202 original inputs loaded',input_only.budget);
  if(inputOnly)return input_only;
  const image=out+'/delivery';fs.mkdirSync(image);const put=(p,b)=>{assert(b.length<=32*1024*1024);const target=image+'/'+p;fs.mkdirSync(path.dirname(target),{recursive:true});assert(!fs.existsSync(target));fs.writeFileSync(target,b);return{path:p,bytes:b.length,sha256:sha(b)};};
