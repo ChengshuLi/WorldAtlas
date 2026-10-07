@@ -44,5 +44,13 @@ old_executable = sys.executable
 rejects('actual executable path mutation',
         lambda: setattr(sys, 'executable', '/bin/sh'),
         lambda: setattr(sys, 'executable', old_executable))
+old_constructor=module.zipfile.ZipFile.__init__
+rejects('actual ZIP constructor replacement',
+        lambda:setattr(module.zipfile.ZipFile,'__init__',lambda *args,**kwargs:None),
+        lambda:setattr(module.zipfile.ZipFile,'__init__',old_constructor))
+old_reader=module.zipfile.ZipExtFile.read
+rejects('actual ZIP native reader replacement',
+        lambda:setattr(module.zipfile.ZipExtFile,'read',lambda *args,**kwargs:b''),
+        lambda:setattr(module.zipfile.ZipExtFile,'read',old_reader))
 print(json.dumps({'status': 'PASS', 'controls': results,
                   'source_proof_invoked': False, 'native_or_GIS_calculations': False}, sort_keys=True))

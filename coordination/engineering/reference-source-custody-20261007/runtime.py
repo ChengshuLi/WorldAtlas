@@ -115,6 +115,15 @@ def snapshot(objects):
                       'reference.zipfile.ZipFile': reference.zipfile.ZipFile,
                       'reference.zipfile.ZipFile.getinfo': reference.zipfile.ZipFile.getinfo,
                       'reference.zlib.crc32': reference.zlib.crc32})
+    # Constructor/context/reader code is an actual operator, not merely a class name.
+    import gzip
+    for label, cls in [('ZipFile', reference.zipfile.ZipFile),
+                       ('ZipExtFile', reference.zipfile.ZipExtFile),
+                       ('GzipFile', gzip.GzipFile)]:
+        for method_name, value in vars(cls).items():
+            if inspect.isfunction(value):
+                functions[label + '.' + method_name] = value
+    functions.update({'gzip.compress': gzip.compress, 'gzip.open': gzip.open})
     for name, obj in objects.items():
         for key, value in vars(obj).items():
             if inspect.isfunction(value) and value.__module__ == obj.__name__:

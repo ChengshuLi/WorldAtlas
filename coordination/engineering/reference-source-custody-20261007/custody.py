@@ -22,7 +22,12 @@ def ordinary(root, relative):
     p = Path(relative)
     if p.is_absolute() or not p.parts or any(x in ('..', '.') for x in p.parts):
         raise ValueError('Unsafe ordinary path')
-    target = Path(root).resolve(strict=True)
+    base = Path(root).absolute()
+    if '..' in base.parts or any(parent.is_symlink() for parent in (base, *base.parents)):
+        raise ValueError('Symlink or traversal in ordinary root')
+    if not base.is_dir():
+        raise ValueError('Ordinary root must exist')
+    target = base.resolve(strict=True)
     for part in p.parts:
         target = target / part
         if target.is_symlink():

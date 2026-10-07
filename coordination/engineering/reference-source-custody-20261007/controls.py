@@ -39,7 +39,9 @@ def run():
         reject(lambda: custody.ordinary(root, str(original)), 'Unsafe ordinary')
         (root / 'link').symlink_to(root / 'frames', target_is_directory=True)
         reject(lambda: custody.ordinary(root, 'link/a.gz'), 'Symlink')
-        checked.extend(['traversal', 'absolute', 'ancestor symlink'])
+        (root/'root-link').symlink_to(root/'frames',target_is_directory=True)
+        reject(lambda:custody.ordinary(root/'root-link','a.gz'),'ordinary root')
+        checked.extend(['traversal', 'absolute', 'ancestor symlink','symlink ordinary root'])
         reject(lambda: custody.budget([pin, pin]), 'Duplicate ordinary')
         reject(lambda: custody.budget([{**pin, 'decoded_bytes': custody.CAP+1}]), 'encoded/decoded')
         reject(lambda: custody.budget([pin], custody.TOTAL), 'phase budget')
@@ -89,7 +91,16 @@ def run():
         reject(lambda: producer.run(commit,{},root/'escaped'),'own checkout cache')
         with tempfile.TemporaryDirectory(prefix='1364-existing-',dir=producer.REPO/'.cache') as existing:
             reject(lambda: producer.run(commit,{},existing),'Fresh owned run tree')
-        checked.extend(['escaped production run destination','existing production run destination'])
+        with tempfile.TemporaryDirectory(prefix='1364-cache-root-') as fake:
+            repo=Path(fake)/'repo';repo.mkdir();(repo/'.cache').symlink_to(root,target_is_directory=True)
+            old_repo=producer.REPO
+            try:
+                producer.REPO=repo
+                reject(lambda:producer.run(commit,{},repo/'.cache'/'escaped'),'ordinary root')
+                assert not (root/'escaped').exists()
+            finally:
+                producer.REPO=old_repo
+        checked.extend(['escaped production run destination','existing production run destination','symlink .cache production root no-write'])
     return {'controls':checked,'count':len(checked),'status':'PASS','original_sources_or_source_proof_invoked':False}
 
 
