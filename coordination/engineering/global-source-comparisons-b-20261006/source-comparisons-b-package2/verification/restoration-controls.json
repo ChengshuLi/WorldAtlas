@@ -1,5 +1,5 @@
 {
-  "complete_controls": 10,
+  "complete_controls": 13,
   "controls": [
     {
       "name": "positive exact complete transport fixture",
@@ -49,6 +49,20 @@
       "name": "symlink-delivery",
       "passed": true,
       "rejection": "Symlink alias path"
+    },
+    {
+      "name": "fresh absent original directories created exclusively and full readback; exact repeat is idempotent",
+      "passed": true
+    },
+    {
+      "name": "symlink original parent rejected before create",
+      "passed": true,
+      "rejection": "Symlink alias path"
+    },
+    {
+      "name": "non-directory original parent rejected during complete prevalidation",
+      "passed": true,
+      "rejection": "Non-directory alias parent"
     }
   ],
   "science_executed": false

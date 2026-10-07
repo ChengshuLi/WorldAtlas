@@ -15,4 +15,22 @@ for name,change in mutations:
  try:fixture(change)
  except(ValueError,FileNotFoundError)as e:results.append({'name':name,'passed':True,'rejection':str(e)})
  else:raise AssertionError(name+' accepted')
+# Execute real exclusive creation on the final fresh-directory layout.
+with tempfile.TemporaryDirectory()as tmp:
+ root=pathlib.Path(tmp);(root/'case/i').mkdir(parents=True);body=gzip.compress(b'fresh\n',mtime=0);(root/'case/i/000.gz').write_bytes(body)
+ row={'original_path':'case/inputs/immutable/original.gz','delivered_path':'case/i/000.gz','bytes':len(body),'sha256':m.sha(body),'decoded_bytes':6,'decoded_sha256':m.sha(b'fresh\n')}
+ assert not(root/'case/inputs').exists();m.validate(root,[row],{row['original_path']},lambda p:body,'case','case/i/');created=m.create_rows(root,[row]);assert created==[row['original_path']]and(root/row['original_path']).read_bytes()==body
+ assert m.create_rows(root,[row])==[];results.append({'name':'fresh absent original directories created exclusively and full readback; exact repeat is idempotent','passed':True})
+with tempfile.TemporaryDirectory()as tmp:
+ root=pathlib.Path(tmp);(root/'case/i').mkdir(parents=True);(root/'outside').mkdir();(root/'case/inputs').symlink_to(root/'outside',target_is_directory=True);(root/'case/i/000.gz').write_bytes(body)
+ try:m.create_rows(root,[row])
+ except ValueError as e:results.append({'name':'symlink original parent rejected before create','passed':True,'rejection':str(e)})
+ else:raise AssertionError('symlink original parent accepted')
+ assert list((root/'outside').iterdir())==[]
+with tempfile.TemporaryDirectory()as tmp:
+ root=pathlib.Path(tmp);(root/'case/i').mkdir(parents=True);(root/'case/inputs').write_bytes(b'ordinary file');(root/'case/i/000.gz').write_bytes(body)
+ try:m.validate(root,[row],{row['original_path']},lambda p:body,'case','case/i/')
+ except ValueError as e:results.append({'name':'non-directory original parent rejected during complete prevalidation','passed':True,'rejection':str(e)})
+ else:raise AssertionError('non-directory parent accepted')
+ assert(root/'case/inputs').read_bytes()==b'ordinary file'
 print(json.dumps({'controls':results,'complete_controls':len(results),'science_executed':False},sort_keys=True,indent=2))

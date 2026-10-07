@@ -13,6 +13,7 @@ def safe(root,relative):
  for candidate in [result,*result.parents]:
   if candidate==root.parent:break
   if candidate.is_symlink():raise ValueError('Symlink alias path')
+  if candidate!=result and candidate.exists()and not candidate.is_dir():raise ValueError('Non-directory alias parent')
  return result
 def checked(path,row):
  if not path.is_file()or path.is_symlink():raise ValueError('Missing ordinary delivery alias')
@@ -36,6 +37,28 @@ def validate(root,rows,expected,original_reader,prefix,delivery_prefix=None):
   if old.exists():checked(old,r)
  return rows
 
+def create_rows(root,rows):
+ created=[]
+ for r in rows:
+  old=safe(root,r['original_path'])
+  if not old.exists():
+   b=checked(safe(root,r['delivered_path']),r)
+   for parent in reversed(old.parent.relative_to(root).parents):
+    if str(parent)=='.':continue
+    directory=safe(root,parent.as_posix())
+    try:directory.mkdir()
+    except FileExistsError:
+     if not directory.is_dir()or directory.is_symlink():raise ValueError('Unsafe original parent')
+   directory=safe(root,old.parent.relative_to(root).as_posix())
+   try:directory.mkdir()
+   except FileExistsError:
+    if not directory.is_dir()or directory.is_symlink():raise ValueError('Unsafe original parent')
+   old=safe(root,r['original_path'])
+   with old.open('xb')as f:f.write(b)
+   created.append(r['original_path'])
+  checked(old,r)
+ return created
+
 def restore(create=True):
  map_path=safe(ROOT,str((CASE/'delivery-input-aliases.json').relative_to(ROOT)))
  if not map_path.is_file():raise ValueError('Missing ordinary delivery map')
@@ -50,15 +73,7 @@ def restore(create=True):
  expected={prefix+'/'+p['alias']for p in config['immutable_aliases']}
  expected.update(prefix+'/'+p['alias']for product in config['source_products']for p in product['parts'])
  rows=validate(ROOT,mapping['rows'],expected,git_bytes,prefix,str(CASE.parent.relative_to(ROOT))+'/i/')
- created=[]
- for r in rows:
-  old=safe(ROOT,r['original_path'])
-  if not create:continue
-  if not old.exists():
-   b=checked(safe(ROOT,r['delivered_path']),r)
-   with old.open('xb')as f:f.write(b)
-   created.append(r['original_path'])
-  checked(old,r)
+ created=create_rows(ROOT,rows)if create else []
  return {'original_execution_commit':PIN,'complete_aliases':len(rows),'created_paths':created,'map_sha256':MAP_SHA,'science_executed':False,'validation_only':not create,'executed_guard_sha256':sha(pathlib.Path(__file__).read_bytes())}
 if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('--receipt');p.add_argument('--verify-only',action='store_true');a=p.parse_args();result=restore(not a.verify_only);body=json.dumps(result,sort_keys=True,indent=2)+'\n'
