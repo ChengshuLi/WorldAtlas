@@ -1,0 +1,171 @@
+{
+  "version": 1,
+  "operator": "European Commission Joint Research Centre / Google",
+  "product": "Global Surface Water v1.5 2024",
+  "source_url": "https://global-surface-water.appspot.com/download",
+  "retrieved_at": "2026-10-07",
+  "attribution": "Source: EC JRC/Google",
+  "license_statement": "Retained official ISO metadata says \u201cNo limitations on use\u201d; official download page requests attribution \u201cSource: EC JRC/Google\u201d.",
+  "temporal_products": {
+    "occurrence": "March 1984 through December 2024",
+    "seasonality": "January through December 2024"
+  },
+  "tiles": [
+    {
+      "layer": "occurrence",
+      "tile": "10E_10S",
+      "url": "https://storage.googleapis.com/water-world/download2024/VER1-5/occurrence/occurrence_10E_10S_v1_5_2024.tif",
+      "original_bytes": 36860540,
+      "original_sha256": "ebbe5c88ce5b8b161fdcefb80ffa5eff44b09868433c86ad1536968c0f1c20dd",
+      "parts": [
+        {
+          "path": "occurrence_10E_10S.part-aa",
+          "bytes": 30000000,
+          "sha256": "c7aa305b53357ae6ff043a91aaf197231094ce5369373d56ca9b216f9502e411"
+        },
+        {
+          "path": "occurrence_10E_10S.part-ab",
+          "bytes": 6860540,
+          "sha256": "acbf5c34e50f09a469f89831507afb5e457856aa5f0a209d42ddabdd35aaca31"
+        }
+      ],
+      "raster_metadata": {
+        "crs": "EPSG:4326",
+        "bounds": [
+          10.000000000000114,
+          -20.000000000000057,
+          20.000000000000114,
+          -10.000000000000057
+        ],
+        "resolution_degrees": [
+          0.00025,
+          0.00025
+        ],
+        "width": 40000,
+        "height": 40000,
+        "dtype": "uint8",
+        "band_count": 1
+      }
+    },
+    {
+      "layer": "occurrence",
+      "tile": "20E_10S",
+      "url": "https://storage.googleapis.com/water-world/download2024/VER1-5/occurrence/occurrence_20E_10S_v1_5_2024.tif",
+      "original_bytes": 41757444,
+      "original_sha256": "3542a5458e43999271189830f9c39398f514e242ba9aab8be68e67e558741588",
+      "parts": [
+        {
+          "path": "occurrence_20E_10S.part-aa",
+          "bytes": 30000000,
+          "sha256": "4cc33eeb599e90f3b92d8ed2db5daa5640276517922dc95c9707d26e14cfc24b"
+        },
+        {
+          "path": "occurrence_20E_10S.part-ab",
+          "bytes": 11757444,
+          "sha256": "079f0d1b30e1535c6d20a9ce0cb39b79cb3ef8095bdb4227006e2332d2e4a96c"
+        }
+      ],
+      "raster_metadata": {
+        "crs": "EPSG:4326",
+        "bounds": [
+          20.000000000000142,
+          -20.000000000000057,
+          30.000000000000142,
+          -10.000000000000057
+        ],
+        "resolution_degrees": [
+          0.00025,
+          0.00025
+        ],
+        "width": 40000,
+        "height": 40000,
+        "dtype": "uint8",
+        "band_count": 1
+      }
+    },
+    {
+      "layer": "seasonality",
+      "tile": "10E_10S",
+      "url": "https://storage.googleapis.com/water-world/download2024/VER1-5/seasonality/seasonality_10E_10S_v1_5_2024.tif",
+      "original_bytes": 18621860,
+      "original_sha256": "222564e5f80e660c7122946f62ec92ca19219f1007ec9eb75471b779951934dc",
+      "parts": [
+        {
+          "path": "seasonality_10E_10S.tif",
+          "bytes": 18621860,
+          "sha256": "222564e5f80e660c7122946f62ec92ca19219f1007ec9eb75471b779951934dc"
+        }
+      ],
+      "raster_metadata": {
+        "crs": "EPSG:4326",
+        "bounds": [
+          10.000000000000114,
+          -20.000000000000057,
+          20.000000000000114,
+          -10.000000000000057
+        ],
+        "resolution_degrees": [
+          0.00025,
+          0.00025
+        ],
+        "width": 40000,
+        "height": 40000,
+        "dtype": "uint8",
+        "band_count": 1
+      }
+    },
+    {
+      "layer": "seasonality",
+      "tile": "20E_10S",
+      "url": "https://storage.googleapis.com/water-world/download2024/VER1-5/seasonality/seasonality_20E_10S_v1_5_2024.tif",
+      "original_bytes": 20100950,
+      "original_sha256": "08f6d1c0ad855034f24aa5c5f5b90cbcfd50450a38ff1a69bd327d6efda1801b",
+      "parts": [
+        {
+          "path": "seasonality_20E_10S.tif",
+          "bytes": 20100950,
+          "sha256": "08f6d1c0ad855034f24aa5c5f5b90cbcfd50450a38ff1a69bd327d6efda1801b"
+        }
+      ],
+      "raster_metadata": {
+        "crs": "EPSG:4326",
+        "bounds": [
+          20.000000000000142,
+          -20.000000000000057,
+          30.000000000000142,
+          -10.000000000000057
+        ],
+        "resolution_degrees": [
+          0.00025,
+          0.00025
+        ],
+        "width": 40000,
+        "height": 40000,
+        "dtype": "uint8",
+        "band_count": 1
+      }
+    }
+  ],
+  "supporting_files": [
+    {
+      "path": "DataUsersGuidev2024_v.5.pdf",
+      "bytes": 1142853,
+      "sha256": "94aebddbb2d66bcbacea14326d84d0b9d9401c8ef95bc48b42991448f36b839b"
+    },
+    {
+      "path": "occurrence_2024.xml",
+      "bytes": 4946,
+      "sha256": "bc813149d2f0b2c5bfefab17c7a7af4b4f1d68b3ae20c7093623c87b945382a3"
+    },
+    {
+      "path": "seasonality_2024.xml",
+      "bytes": 4937,
+      "sha256": "7f8bacf24395e625471eacb29a6d8f0d095bee15a952c5de6fe176981cbc39a1"
+    },
+    {
+      "path": "jrc-gsw-download.html",
+      "bytes": 85116,
+      "sha256": "8b8d8613efb3078b2c2f64c3a76ccdc6fbacdb7d35a7654be2bb98314eb81e62"
+    }
+  ]
+}

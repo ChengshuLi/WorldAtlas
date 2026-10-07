@@ -1,0 +1,27 @@
+{
+  "method_id": "jrc-gsw-pixel-center-overlay",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "fixture": {
+    "crs": "EPSG:4326",
+    "grid": "2x2, 1-degree cells, origin (0,2)",
+    "values_by_row": [
+      [
+        0,
+        80
+      ],
+      [
+        10,
+        255
+      ]
+    ],
+    "polygon": [
+      2.25,
+      0.25,
+      2.75,
+      0.75
+    ]
+  },
+  "selected_values": [],
+  "expected": []
+}

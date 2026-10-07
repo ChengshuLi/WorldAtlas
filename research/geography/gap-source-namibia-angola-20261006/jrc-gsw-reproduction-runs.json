@@ -1,0 +1,227 @@
+{
+  "version": 1,
+  "method_id": "jrc-gsw-pixel-center-overlay",
+  "reproduction_claim": "Two complete executions with identical retained inputs, environment, commands, and output hashes, after the final production control logic was frozen.",
+  "runs": [
+    {
+      "run_id": "jrc-gsw-complete-run-1",
+      "started_at_utc": "2026-10-07T03:24:02Z",
+      "command": [
+        "/tmp/namibia-gsw/venv312/bin/python",
+        "research/geography/gap-source-namibia-angola-20261006/reproduce_jrc_gsw_water.py"
+      ],
+      "working_directory": "repository root",
+      "environment": {
+        "os": "Darwin-24.6.0-x86_64-i386-64bit",
+        "architecture": "x86_64",
+        "python": "3.12.14",
+        "numpy": "2.3.5",
+        "rasterio": "1.4.3",
+        "shapely": "2.1.2",
+        "gdal": "3.9.3"
+      },
+      "inputs": [
+        {
+          "path": "inputs/original-components.geojson",
+          "bytes": 23958,
+          "sha256": "f99f334877c309101afafe56210e40ab2093948e686ec39f98d9c085a42622b9"
+        },
+        {
+          "path": "jrc-gsw-analysis-input-set.json",
+          "bytes": 3532,
+          "sha256": "0a4ff34f74e23d667ff9f877ce53fa0188e31fc4cb5c8722b41a85d6c7a6a4a9"
+        },
+        {
+          "path": "sources/jrc-gsw-2024/manifest.json",
+          "bytes": 5317,
+          "sha256": "03e48ad181884b4533861972e078f8a24b762f7a2445fd59ec25fff0c7deb248"
+        },
+        {
+          "path": "reproduce_jrc_gsw_water.py",
+          "bytes": 13048,
+          "sha256": "afd3bbc1904e7fc31a982fc4526b6faba3ba94c75f7db0802bd5f710014c6db2"
+        },
+        {
+          "path": "sources/jrc-gsw-2024/occurrence_10E_10S.part-aa",
+          "bytes": 30000000,
+          "sha256": "c7aa305b53357ae6ff043a91aaf197231094ce5369373d56ca9b216f9502e411"
+        },
+        {
+          "path": "sources/jrc-gsw-2024/occurrence_10E_10S.part-ab",
+          "bytes": 6860540,
+          "sha256": "acbf5c34e50f09a469f89831507afb5e457856aa5f0a209d42ddabdd35aaca31"
+        },
+        {
+          "path": "sources/jrc-gsw-2024/occurrence_20E_10S.part-aa",
+          "bytes": 30000000,
+          "sha256": "4cc33eeb599e90f3b92d8ed2db5daa5640276517922dc95c9707d26e14cfc24b"
+        },
+        {
+          "path": "sources/jrc-gsw-2024/occurrence_20E_10S.part-ab",
+          "bytes": 11757444,
+          "sha256": "079f0d1b30e1535c6d20a9ce0cb39b79cb3ef8095bdb4227006e2332d2e4a96c"
+        },
+        {
+          "path": "sources/jrc-gsw-2024/seasonality_10E_10S.tif",
+          "bytes": 18621860,
+          "sha256": "222564e5f80e660c7122946f62ec92ca19219f1007ec9eb75471b779951934dc"
+        },
+        {
+          "path": "sources/jrc-gsw-2024/seasonality_20E_10S.tif",
+          "bytes": 20100950,
+          "sha256": "08f6d1c0ad855034f24aa5c5f5b90cbcfd50450a38ff1a69bd327d6efda1801b"
+        },
+        {
+          "path": "sources/jrc-gsw-2024/DataUsersGuidev2024_v.5.pdf",
+          "bytes": 1142853,
+          "sha256": "94aebddbb2d66bcbacea14326d84d0b9d9401c8ef95bc48b42991448f36b839b"
+        },
+        {
+          "path": "sources/jrc-gsw-2024/occurrence_2024.xml",
+          "bytes": 4946,
+          "sha256": "bc813149d2f0b2c5bfefab17c7a7af4b4f1d68b3ae20c7093623c87b945382a3"
+        },
+        {
+          "path": "sources/jrc-gsw-2024/seasonality_2024.xml",
+          "bytes": 4937,
+          "sha256": "7f8bacf24395e625471eacb29a6d8f0d095bee15a952c5de6fe176981cbc39a1"
+        },
+        {
+          "path": "sources/jrc-gsw-2024/jrc-gsw-download.html",
+          "bytes": 85116,
+          "sha256": "8b8d8613efb3078b2c2f64c3a76ccdc6fbacdb7d35a7654be2bb98314eb81e62"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "jrc-gsw-water-analysis.json",
+          "bytes": 74139,
+          "sha256": "bc3a0002d6822ddf0ed12e010f52461fb27b28b028abab11673f254be64fd73c"
+        },
+        {
+          "path": "validation-jrc-gsw-positive-control.json",
+          "bytes": 866,
+          "sha256": "c1522900623425805458a31dd866700f8fb53d6d78653793304cc42a19b261b4"
+        },
+        {
+          "path": "validation-jrc-gsw-negative-control.json",
+          "bytes": 418,
+          "sha256": "6e6ac7838f8c0b1f158554cd93dd4ed0ddea5ec38ab7c2e30bfd809e7d79a73b"
+        }
+      ],
+      "outcome": "completed; 21 candidate components; aggregate metrics match retained analysis output"
+    },
+    {
+      "run_id": "jrc-gsw-complete-run-2",
+      "started_at_utc": "2026-10-07T03:24:08Z",
+      "command": [
+        "/tmp/namibia-gsw/venv312/bin/python",
+        "research/geography/gap-source-namibia-angola-20261006/reproduce_jrc_gsw_water.py"
+      ],
+      "working_directory": "repository root",
+      "environment": {
+        "os": "Darwin-24.6.0-x86_64-i386-64bit",
+        "architecture": "x86_64",
+        "python": "3.12.14",
+        "numpy": "2.3.5",
+        "rasterio": "1.4.3",
+        "shapely": "2.1.2",
+        "gdal": "3.9.3"
+      },
+      "inputs": [
+        {
+          "path": "inputs/original-components.geojson",
+          "bytes": 23958,
+          "sha256": "f99f334877c309101afafe56210e40ab2093948e686ec39f98d9c085a42622b9"
+        },
+        {
+          "path": "jrc-gsw-analysis-input-set.json",
+          "bytes": 3532,
+          "sha256": "0a4ff34f74e23d667ff9f877ce53fa0188e31fc4cb5c8722b41a85d6c7a6a4a9"
+        },
+        {
+          "path": "sources/jrc-gsw-2024/manifest.json",
+          "bytes": 5317,
+          "sha256": "03e48ad181884b4533861972e078f8a24b762f7a2445fd59ec25fff0c7deb248"
+        },
+        {
+          "path": "reproduce_jrc_gsw_water.py",
+          "bytes": 13048,
+          "sha256": "afd3bbc1904e7fc31a982fc4526b6faba3ba94c75f7db0802bd5f710014c6db2"
+        },
+        {
+          "path": "sources/jrc-gsw-2024/occurrence_10E_10S.part-aa",
+          "bytes": 30000000,
+          "sha256": "c7aa305b53357ae6ff043a91aaf197231094ce5369373d56ca9b216f9502e411"
+        },
+        {
+          "path": "sources/jrc-gsw-2024/occurrence_10E_10S.part-ab",
+          "bytes": 6860540,
+          "sha256": "acbf5c34e50f09a469f89831507afb5e457856aa5f0a209d42ddabdd35aaca31"
+        },
+        {
+          "path": "sources/jrc-gsw-2024/occurrence_20E_10S.part-aa",
+          "bytes": 30000000,
+          "sha256": "4cc33eeb599e90f3b92d8ed2db5daa5640276517922dc95c9707d26e14cfc24b"
+        },
+        {
+          "path": "sources/jrc-gsw-2024/occurrence_20E_10S.part-ab",
+          "bytes": 11757444,
+          "sha256": "079f0d1b30e1535c6d20a9ce0cb39b79cb3ef8095bdb4227006e2332d2e4a96c"
+        },
+        {
+          "path": "sources/jrc-gsw-2024/seasonality_10E_10S.tif",
+          "bytes": 18621860,
+          "sha256": "222564e5f80e660c7122946f62ec92ca19219f1007ec9eb75471b779951934dc"
+        },
+        {
+          "path": "sources/jrc-gsw-2024/seasonality_20E_10S.tif",
+          "bytes": 20100950,
+          "sha256": "08f6d1c0ad855034f24aa5c5f5b90cbcfd50450a38ff1a69bd327d6efda1801b"
+        },
+        {
+          "path": "sources/jrc-gsw-2024/DataUsersGuidev2024_v.5.pdf",
+          "bytes": 1142853,
+          "sha256": "94aebddbb2d66bcbacea14326d84d0b9d9401c8ef95bc48b42991448f36b839b"
+        },
+        {
+          "path": "sources/jrc-gsw-2024/occurrence_2024.xml",
+          "bytes": 4946,
+          "sha256": "bc813149d2f0b2c5bfefab17c7a7af4b4f1d68b3ae20c7093623c87b945382a3"
+        },
+        {
+          "path": "sources/jrc-gsw-2024/seasonality_2024.xml",
+          "bytes": 4937,
+          "sha256": "7f8bacf24395e625471eacb29a6d8f0d095bee15a952c5de6fe176981cbc39a1"
+        },
+        {
+          "path": "sources/jrc-gsw-2024/jrc-gsw-download.html",
+          "bytes": 85116,
+          "sha256": "8b8d8613efb3078b2c2f64c3a76ccdc6fbacdb7d35a7654be2bb98314eb81e62"
+        }
+      ],
+      "outputs": [
+        {
+          "path": "jrc-gsw-water-analysis.json",
+          "bytes": 74139,
+          "sha256": "bc3a0002d6822ddf0ed12e010f52461fb27b28b028abab11673f254be64fd73c"
+        },
+        {
+          "path": "validation-jrc-gsw-positive-control.json",
+          "bytes": 866,
+          "sha256": "c1522900623425805458a31dd866700f8fb53d6d78653793304cc42a19b261b4"
+        },
+        {
+          "path": "validation-jrc-gsw-negative-control.json",
+          "bytes": 418,
+          "sha256": "6e6ac7838f8c0b1f158554cd93dd4ed0ddea5ec38ab7c2e30bfd809e7d79a73b"
+        }
+      ],
+      "outcome": "completed; 21 candidate components; aggregate metrics match retained analysis output"
+    }
+  ],
+  "matching_output_hashes": true,
+  "limits": [
+    "Repeatability under the recorded environment does not establish source correctness, a surveyed shoreline, historic channel, cause, or boundary authority."
+  ]
+}

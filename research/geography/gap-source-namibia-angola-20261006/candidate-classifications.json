@@ -11,7 +11,7 @@
   },
   "classification_rules": {
     "source_geometry": "Supported only as a geometric observation when an exact candidate intersects source geometry by positive area; no administrative or legal resolution is implied.",
-    "physical_water_or_historic_course": "Unresolved absent suitable gap-scale, dated physical-reference evidence.",
+    "physical_water_or_historic_course": "JRC GSW v1.5 supplies water-pixel observations within each candidate for 1984–2024 occurrence and 2024 seasonality; exact bank/course, waterbody type, historic course, cause, and boundary authority remain unresolved.",
     "processing_cause": "Unresolved unless a specific processing step and mechanism are reproduced.",
     "boundary_authority": "Unresolved absent the completed demarcation record or authoritative modern line source.",
     "administrative_assignment": "Not made."
@@ -21,12 +21,16 @@
     "positive_area_consumed_intersection_with_nam": 20,
     "not_fully_covered_by_consumed_union": 19,
     "not_fully_covered_by_same_release_full_union": 19,
-    "unverified_water_status": 21,
     "full_contact_geometry_topological_differences": 10,
     "full_contact_subjects": 10,
     "candidate_contact_pairs_with_positive_area": 49,
     "candidate_contact_pairs_with_line_only": 0,
-    "candidate_contact_pairs_with_point_only": 0
+    "candidate_contact_pairs_with_point_only": 0,
+    "original_diagnostic_unverified_water_status": 21,
+    "jrc_gsw_occurrence_positive_components": 21,
+    "jrc_gsw_occurrence_ge_50_components": 21,
+    "jrc_gsw_occurrence_ge_90_components": 20,
+    "jrc_gsw_2024_seasonality_positive_components": 21
   },
   "components": [
     {
@@ -116,7 +120,19 @@
         "original_diagnostic_water_status": "unverified",
         "touches_reference_shore_diagnostic": false,
         "touches_domain_boundary_diagnostic": false,
-        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+        "note": "The original physical-gap diagnostic is unverified. Retained JRC GSW v1.5 pixels add evidence of surface-water occurrence within this candidate, including 2024 seasonality where present; exact present bank/course, waterbody type, historical course, floodplain/wetland status, and legal boundary remain unresolved. See jrc-gsw-water-analysis.json.",
+        "jrc_gsw_v1_5_observation": {
+          "source": "JRC Global Surface Water v1.5",
+          "occurrence_interval": "1984-03 through 2024-12",
+          "occurrence_valid_pixel_centers": 10097,
+          "occurrence_water_pixels_gt_0": 1350,
+          "occurrence_water_pixels_ge_50": 969,
+          "occurrence_water_pixels_ge_90": 240,
+          "seasonality_year": 2024,
+          "seasonality_valid_pixel_centers": 10097,
+          "seasonality_water_pixels_gt_0": 1127,
+          "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        }
       },
       "processing_cause": {
         "status": "unknown",
@@ -216,7 +232,19 @@
         "original_diagnostic_water_status": "unverified",
         "touches_reference_shore_diagnostic": false,
         "touches_domain_boundary_diagnostic": false,
-        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+        "note": "The original physical-gap diagnostic is unverified. Retained JRC GSW v1.5 pixels add evidence of surface-water occurrence within this candidate, including 2024 seasonality where present; exact present bank/course, waterbody type, historical course, floodplain/wetland status, and legal boundary remain unresolved. See jrc-gsw-water-analysis.json.",
+        "jrc_gsw_v1_5_observation": {
+          "source": "JRC Global Surface Water v1.5",
+          "occurrence_interval": "1984-03 through 2024-12",
+          "occurrence_valid_pixel_centers": 7167,
+          "occurrence_water_pixels_gt_0": 2710,
+          "occurrence_water_pixels_ge_50": 1099,
+          "occurrence_water_pixels_ge_90": 565,
+          "seasonality_year": 2024,
+          "seasonality_valid_pixel_centers": 7167,
+          "seasonality_water_pixels_gt_0": 1981,
+          "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        }
       },
       "processing_cause": {
         "status": "unknown",
@@ -316,7 +344,19 @@
         "original_diagnostic_water_status": "unverified",
         "touches_reference_shore_diagnostic": false,
         "touches_domain_boundary_diagnostic": false,
-        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+        "note": "The original physical-gap diagnostic is unverified. Retained JRC GSW v1.5 pixels add evidence of surface-water occurrence within this candidate, including 2024 seasonality where present; exact present bank/course, waterbody type, historical course, floodplain/wetland status, and legal boundary remain unresolved. See jrc-gsw-water-analysis.json.",
+        "jrc_gsw_v1_5_observation": {
+          "source": "JRC Global Surface Water v1.5",
+          "occurrence_interval": "1984-03 through 2024-12",
+          "occurrence_valid_pixel_centers": 281,
+          "occurrence_water_pixels_gt_0": 215,
+          "occurrence_water_pixels_ge_50": 54,
+          "occurrence_water_pixels_ge_90": 34,
+          "seasonality_year": 2024,
+          "seasonality_valid_pixel_centers": 281,
+          "seasonality_water_pixels_gt_0": 54,
+          "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        }
       },
       "processing_cause": {
         "status": "unknown",
@@ -438,7 +478,19 @@
         "original_diagnostic_water_status": "unverified",
         "touches_reference_shore_diagnostic": false,
         "touches_domain_boundary_diagnostic": false,
-        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+        "note": "The original physical-gap diagnostic is unverified. Retained JRC GSW v1.5 pixels add evidence of surface-water occurrence within this candidate, including 2024 seasonality where present; exact present bank/course, waterbody type, historical course, floodplain/wetland status, and legal boundary remain unresolved. See jrc-gsw-water-analysis.json.",
+        "jrc_gsw_v1_5_observation": {
+          "source": "JRC Global Surface Water v1.5",
+          "occurrence_interval": "1984-03 through 2024-12",
+          "occurrence_valid_pixel_centers": 4800,
+          "occurrence_water_pixels_gt_0": 2268,
+          "occurrence_water_pixels_ge_50": 567,
+          "occurrence_water_pixels_ge_90": 276,
+          "seasonality_year": 2024,
+          "seasonality_valid_pixel_centers": 4800,
+          "seasonality_water_pixels_gt_0": 849,
+          "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        }
       },
       "processing_cause": {
         "status": "unknown",
@@ -538,7 +590,19 @@
         "original_diagnostic_water_status": "unverified",
         "touches_reference_shore_diagnostic": false,
         "touches_domain_boundary_diagnostic": false,
-        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+        "note": "The original physical-gap diagnostic is unverified. Retained JRC GSW v1.5 pixels add evidence of surface-water occurrence within this candidate, including 2024 seasonality where present; exact present bank/course, waterbody type, historical course, floodplain/wetland status, and legal boundary remain unresolved. See jrc-gsw-water-analysis.json.",
+        "jrc_gsw_v1_5_observation": {
+          "source": "JRC Global Surface Water v1.5",
+          "occurrence_interval": "1984-03 through 2024-12",
+          "occurrence_valid_pixel_centers": 518,
+          "occurrence_water_pixels_gt_0": 93,
+          "occurrence_water_pixels_ge_50": 36,
+          "occurrence_water_pixels_ge_90": 8,
+          "seasonality_year": 2024,
+          "seasonality_valid_pixel_centers": 518,
+          "seasonality_water_pixels_gt_0": 52,
+          "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        }
       },
       "processing_cause": {
         "status": "unknown",
@@ -638,7 +702,19 @@
         "original_diagnostic_water_status": "unverified",
         "touches_reference_shore_diagnostic": false,
         "touches_domain_boundary_diagnostic": false,
-        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+        "note": "The original physical-gap diagnostic is unverified. Retained JRC GSW v1.5 pixels add evidence of surface-water occurrence within this candidate, including 2024 seasonality where present; exact present bank/course, waterbody type, historical course, floodplain/wetland status, and legal boundary remain unresolved. See jrc-gsw-water-analysis.json.",
+        "jrc_gsw_v1_5_observation": {
+          "source": "JRC Global Surface Water v1.5",
+          "occurrence_interval": "1984-03 through 2024-12",
+          "occurrence_valid_pixel_centers": 361,
+          "occurrence_water_pixels_gt_0": 270,
+          "occurrence_water_pixels_ge_50": 60,
+          "occurrence_water_pixels_ge_90": 34,
+          "seasonality_year": 2024,
+          "seasonality_valid_pixel_centers": 361,
+          "seasonality_water_pixels_gt_0": 153,
+          "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        }
       },
       "processing_cause": {
         "status": "unknown",
@@ -738,7 +814,19 @@
         "original_diagnostic_water_status": "unverified",
         "touches_reference_shore_diagnostic": false,
         "touches_domain_boundary_diagnostic": false,
-        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+        "note": "The original physical-gap diagnostic is unverified. Retained JRC GSW v1.5 pixels add evidence of surface-water occurrence within this candidate, including 2024 seasonality where present; exact present bank/course, waterbody type, historical course, floodplain/wetland status, and legal boundary remain unresolved. See jrc-gsw-water-analysis.json.",
+        "jrc_gsw_v1_5_observation": {
+          "source": "JRC Global Surface Water v1.5",
+          "occurrence_interval": "1984-03 through 2024-12",
+          "occurrence_valid_pixel_centers": 8997,
+          "occurrence_water_pixels_gt_0": 4958,
+          "occurrence_water_pixels_ge_50": 777,
+          "occurrence_water_pixels_ge_90": 491,
+          "seasonality_year": 2024,
+          "seasonality_valid_pixel_centers": 8997,
+          "seasonality_water_pixels_gt_0": 2422,
+          "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        }
       },
       "processing_cause": {
         "status": "unknown",
@@ -838,7 +926,19 @@
         "original_diagnostic_water_status": "unverified",
         "touches_reference_shore_diagnostic": false,
         "touches_domain_boundary_diagnostic": false,
-        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+        "note": "The original physical-gap diagnostic is unverified. Retained JRC GSW v1.5 pixels add evidence of surface-water occurrence within this candidate, including 2024 seasonality where present; exact present bank/course, waterbody type, historical course, floodplain/wetland status, and legal boundary remain unresolved. See jrc-gsw-water-analysis.json.",
+        "jrc_gsw_v1_5_observation": {
+          "source": "JRC Global Surface Water v1.5",
+          "occurrence_interval": "1984-03 through 2024-12",
+          "occurrence_valid_pixel_centers": 341,
+          "occurrence_water_pixels_gt_0": 104,
+          "occurrence_water_pixels_ge_50": 57,
+          "occurrence_water_pixels_ge_90": 29,
+          "seasonality_year": 2024,
+          "seasonality_valid_pixel_centers": 341,
+          "seasonality_water_pixels_gt_0": 75,
+          "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        }
       },
       "processing_cause": {
         "status": "unknown",
@@ -938,7 +1038,19 @@
         "original_diagnostic_water_status": "unverified",
         "touches_reference_shore_diagnostic": false,
         "touches_domain_boundary_diagnostic": false,
-        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+        "note": "The original physical-gap diagnostic is unverified. Retained JRC GSW v1.5 pixels add evidence of surface-water occurrence within this candidate, including 2024 seasonality where present; exact present bank/course, waterbody type, historical course, floodplain/wetland status, and legal boundary remain unresolved. See jrc-gsw-water-analysis.json.",
+        "jrc_gsw_v1_5_observation": {
+          "source": "JRC Global Surface Water v1.5",
+          "occurrence_interval": "1984-03 through 2024-12",
+          "occurrence_valid_pixel_centers": 7838,
+          "occurrence_water_pixels_gt_0": 1628,
+          "occurrence_water_pixels_ge_50": 992,
+          "occurrence_water_pixels_ge_90": 576,
+          "seasonality_year": 2024,
+          "seasonality_valid_pixel_centers": 7838,
+          "seasonality_water_pixels_gt_0": 1144,
+          "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        }
       },
       "processing_cause": {
         "status": "unknown",
@@ -1060,7 +1172,19 @@
         "original_diagnostic_water_status": "unverified",
         "touches_reference_shore_diagnostic": false,
         "touches_domain_boundary_diagnostic": false,
-        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+        "note": "The original physical-gap diagnostic is unverified. Retained JRC GSW v1.5 pixels add evidence of surface-water occurrence within this candidate, including 2024 seasonality where present; exact present bank/course, waterbody type, historical course, floodplain/wetland status, and legal boundary remain unresolved. See jrc-gsw-water-analysis.json.",
+        "jrc_gsw_v1_5_observation": {
+          "source": "JRC Global Surface Water v1.5",
+          "occurrence_interval": "1984-03 through 2024-12",
+          "occurrence_valid_pixel_centers": 13064,
+          "occurrence_water_pixels_gt_0": 3622,
+          "occurrence_water_pixels_ge_50": 1025,
+          "occurrence_water_pixels_ge_90": 644,
+          "seasonality_year": 2024,
+          "seasonality_valid_pixel_centers": 13064,
+          "seasonality_water_pixels_gt_0": 1537,
+          "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        }
       },
       "processing_cause": {
         "status": "unknown",
@@ -1182,7 +1306,19 @@
         "original_diagnostic_water_status": "unverified",
         "touches_reference_shore_diagnostic": false,
         "touches_domain_boundary_diagnostic": false,
-        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+        "note": "The original physical-gap diagnostic is unverified. Retained JRC GSW v1.5 pixels add evidence of surface-water occurrence within this candidate, including 2024 seasonality where present; exact present bank/course, waterbody type, historical course, floodplain/wetland status, and legal boundary remain unresolved. See jrc-gsw-water-analysis.json.",
+        "jrc_gsw_v1_5_observation": {
+          "source": "JRC Global Surface Water v1.5",
+          "occurrence_interval": "1984-03 through 2024-12",
+          "occurrence_valid_pixel_centers": 4369,
+          "occurrence_water_pixels_gt_0": 1998,
+          "occurrence_water_pixels_ge_50": 443,
+          "occurrence_water_pixels_ge_90": 250,
+          "seasonality_year": 2024,
+          "seasonality_valid_pixel_centers": 4369,
+          "seasonality_water_pixels_gt_0": 1045,
+          "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        }
       },
       "processing_cause": {
         "status": "unknown",
@@ -1304,7 +1440,19 @@
         "original_diagnostic_water_status": "unverified",
         "touches_reference_shore_diagnostic": false,
         "touches_domain_boundary_diagnostic": false,
-        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+        "note": "The original physical-gap diagnostic is unverified. Retained JRC GSW v1.5 pixels add evidence of surface-water occurrence within this candidate, including 2024 seasonality where present; exact present bank/course, waterbody type, historical course, floodplain/wetland status, and legal boundary remain unresolved. See jrc-gsw-water-analysis.json.",
+        "jrc_gsw_v1_5_observation": {
+          "source": "JRC Global Surface Water v1.5",
+          "occurrence_interval": "1984-03 through 2024-12",
+          "occurrence_valid_pixel_centers": 45009,
+          "occurrence_water_pixels_gt_0": 23208,
+          "occurrence_water_pixels_ge_50": 3709,
+          "occurrence_water_pixels_ge_90": 1886,
+          "seasonality_year": 2024,
+          "seasonality_valid_pixel_centers": 45009,
+          "seasonality_water_pixels_gt_0": 10090,
+          "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        }
       },
       "processing_cause": {
         "status": "unknown",
@@ -1404,7 +1552,19 @@
         "original_diagnostic_water_status": "unverified",
         "touches_reference_shore_diagnostic": false,
         "touches_domain_boundary_diagnostic": false,
-        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+        "note": "The original physical-gap diagnostic is unverified. Retained JRC GSW v1.5 pixels add evidence of surface-water occurrence within this candidate, including 2024 seasonality where present; exact present bank/course, waterbody type, historical course, floodplain/wetland status, and legal boundary remain unresolved. See jrc-gsw-water-analysis.json.",
+        "jrc_gsw_v1_5_observation": {
+          "source": "JRC Global Surface Water v1.5",
+          "occurrence_interval": "1984-03 through 2024-12",
+          "occurrence_valid_pixel_centers": 3470,
+          "occurrence_water_pixels_gt_0": 1053,
+          "occurrence_water_pixels_ge_50": 351,
+          "occurrence_water_pixels_ge_90": 219,
+          "seasonality_year": 2024,
+          "seasonality_valid_pixel_centers": 3470,
+          "seasonality_water_pixels_gt_0": 647,
+          "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        }
       },
       "processing_cause": {
         "status": "unknown",
@@ -1526,7 +1686,19 @@
         "original_diagnostic_water_status": "unverified",
         "touches_reference_shore_diagnostic": false,
         "touches_domain_boundary_diagnostic": false,
-        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+        "note": "The original physical-gap diagnostic is unverified. Retained JRC GSW v1.5 pixels add evidence of surface-water occurrence within this candidate, including 2024 seasonality where present; exact present bank/course, waterbody type, historical course, floodplain/wetland status, and legal boundary remain unresolved. See jrc-gsw-water-analysis.json.",
+        "jrc_gsw_v1_5_observation": {
+          "source": "JRC Global Surface Water v1.5",
+          "occurrence_interval": "1984-03 through 2024-12",
+          "occurrence_valid_pixel_centers": 16268,
+          "occurrence_water_pixels_gt_0": 2589,
+          "occurrence_water_pixels_ge_50": 1600,
+          "occurrence_water_pixels_ge_90": 204,
+          "seasonality_year": 2024,
+          "seasonality_valid_pixel_centers": 16268,
+          "seasonality_water_pixels_gt_0": 1915,
+          "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        }
       },
       "processing_cause": {
         "status": "unknown",
@@ -1626,7 +1798,19 @@
         "original_diagnostic_water_status": "unverified",
         "touches_reference_shore_diagnostic": false,
         "touches_domain_boundary_diagnostic": false,
-        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+        "note": "The original physical-gap diagnostic is unverified. Retained JRC GSW v1.5 pixels add evidence of surface-water occurrence within this candidate, including 2024 seasonality where present; exact present bank/course, waterbody type, historical course, floodplain/wetland status, and legal boundary remain unresolved. See jrc-gsw-water-analysis.json.",
+        "jrc_gsw_v1_5_observation": {
+          "source": "JRC Global Surface Water v1.5",
+          "occurrence_interval": "1984-03 through 2024-12",
+          "occurrence_valid_pixel_centers": 10444,
+          "occurrence_water_pixels_gt_0": 2836,
+          "occurrence_water_pixels_ge_50": 1127,
+          "occurrence_water_pixels_ge_90": 537,
+          "seasonality_year": 2024,
+          "seasonality_valid_pixel_centers": 10444,
+          "seasonality_water_pixels_gt_0": 1307,
+          "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        }
       },
       "processing_cause": {
         "status": "unknown",
@@ -1774,7 +1958,19 @@
         "original_diagnostic_water_status": "unverified",
         "touches_reference_shore_diagnostic": false,
         "touches_domain_boundary_diagnostic": false,
-        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+        "note": "The original physical-gap diagnostic is unverified. Retained JRC GSW v1.5 pixels add evidence of surface-water occurrence within this candidate, including 2024 seasonality where present; exact present bank/course, waterbody type, historical course, floodplain/wetland status, and legal boundary remain unresolved. See jrc-gsw-water-analysis.json.",
+        "jrc_gsw_v1_5_observation": {
+          "source": "JRC Global Surface Water v1.5",
+          "occurrence_interval": "1984-03 through 2024-12",
+          "occurrence_valid_pixel_centers": 25984,
+          "occurrence_water_pixels_gt_0": 9642,
+          "occurrence_water_pixels_ge_50": 3115,
+          "occurrence_water_pixels_ge_90": 1922,
+          "seasonality_year": 2024,
+          "seasonality_valid_pixel_centers": 25984,
+          "seasonality_water_pixels_gt_0": 3910,
+          "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        }
       },
       "processing_cause": {
         "status": "unknown",
@@ -1896,7 +2092,19 @@
         "original_diagnostic_water_status": "unverified",
         "touches_reference_shore_diagnostic": false,
         "touches_domain_boundary_diagnostic": false,
-        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+        "note": "The original physical-gap diagnostic is unverified. Retained JRC GSW v1.5 pixels add evidence of surface-water occurrence within this candidate, including 2024 seasonality where present; exact present bank/course, waterbody type, historical course, floodplain/wetland status, and legal boundary remain unresolved. See jrc-gsw-water-analysis.json.",
+        "jrc_gsw_v1_5_observation": {
+          "source": "JRC Global Surface Water v1.5",
+          "occurrence_interval": "1984-03 through 2024-12",
+          "occurrence_valid_pixel_centers": 14415,
+          "occurrence_water_pixels_gt_0": 3661,
+          "occurrence_water_pixels_ge_50": 2031,
+          "occurrence_water_pixels_ge_90": 1162,
+          "seasonality_year": 2024,
+          "seasonality_valid_pixel_centers": 14415,
+          "seasonality_water_pixels_gt_0": 2376,
+          "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        }
       },
       "processing_cause": {
         "status": "unknown",
@@ -1972,7 +2180,19 @@
         "original_diagnostic_water_status": "unverified",
         "touches_reference_shore_diagnostic": false,
         "touches_domain_boundary_diagnostic": false,
-        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+        "note": "The original physical-gap diagnostic is unverified. Retained JRC GSW v1.5 pixels add evidence of surface-water occurrence within this candidate, including 2024 seasonality where present; exact present bank/course, waterbody type, historical course, floodplain/wetland status, and legal boundary remain unresolved. See jrc-gsw-water-analysis.json.",
+        "jrc_gsw_v1_5_observation": {
+          "source": "JRC Global Surface Water v1.5",
+          "occurrence_interval": "1984-03 through 2024-12",
+          "occurrence_valid_pixel_centers": 169,
+          "occurrence_water_pixels_gt_0": 34,
+          "occurrence_water_pixels_ge_50": 13,
+          "occurrence_water_pixels_ge_90": 0,
+          "seasonality_year": 2024,
+          "seasonality_valid_pixel_centers": 169,
+          "seasonality_water_pixels_gt_0": 17,
+          "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        }
       },
       "processing_cause": {
         "status": "unknown",
@@ -2072,7 +2292,19 @@
         "original_diagnostic_water_status": "unverified",
         "touches_reference_shore_diagnostic": false,
         "touches_domain_boundary_diagnostic": false,
-        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+        "note": "The original physical-gap diagnostic is unverified. Retained JRC GSW v1.5 pixels add evidence of surface-water occurrence within this candidate, including 2024 seasonality where present; exact present bank/course, waterbody type, historical course, floodplain/wetland status, and legal boundary remain unresolved. See jrc-gsw-water-analysis.json.",
+        "jrc_gsw_v1_5_observation": {
+          "source": "JRC Global Surface Water v1.5",
+          "occurrence_interval": "1984-03 through 2024-12",
+          "occurrence_valid_pixel_centers": 4068,
+          "occurrence_water_pixels_gt_0": 642,
+          "occurrence_water_pixels_ge_50": 313,
+          "occurrence_water_pixels_ge_90": 112,
+          "seasonality_year": 2024,
+          "seasonality_valid_pixel_centers": 4068,
+          "seasonality_water_pixels_gt_0": 406,
+          "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        }
       },
       "processing_cause": {
         "status": "unknown",
@@ -2172,7 +2404,19 @@
         "original_diagnostic_water_status": "unverified",
         "touches_reference_shore_diagnostic": false,
         "touches_domain_boundary_diagnostic": false,
-        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+        "note": "The original physical-gap diagnostic is unverified. Retained JRC GSW v1.5 pixels add evidence of surface-water occurrence within this candidate, including 2024 seasonality where present; exact present bank/course, waterbody type, historical course, floodplain/wetland status, and legal boundary remain unresolved. See jrc-gsw-water-analysis.json.",
+        "jrc_gsw_v1_5_observation": {
+          "source": "JRC Global Surface Water v1.5",
+          "occurrence_interval": "1984-03 through 2024-12",
+          "occurrence_valid_pixel_centers": 206,
+          "occurrence_water_pixels_gt_0": 70,
+          "occurrence_water_pixels_ge_50": 30,
+          "occurrence_water_pixels_ge_90": 22,
+          "seasonality_year": 2024,
+          "seasonality_valid_pixel_centers": 206,
+          "seasonality_water_pixels_gt_0": 30,
+          "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        }
       },
       "processing_cause": {
         "status": "unknown",
@@ -2272,7 +2516,19 @@
         "original_diagnostic_water_status": "unverified",
         "touches_reference_shore_diagnostic": false,
         "touches_domain_boundary_diagnostic": false,
-        "note": "Diagnostic flag is not authoritative hydrography. Official basin context is too generalized or uninspected to establish present bank, historic course, wetland, floodplain, or ice/water classification."
+        "note": "The original physical-gap diagnostic is unverified. Retained JRC GSW v1.5 pixels add evidence of surface-water occurrence within this candidate, including 2024 seasonality where present; exact present bank/course, waterbody type, historical course, floodplain/wetland status, and legal boundary remain unresolved. See jrc-gsw-water-analysis.json.",
+        "jrc_gsw_v1_5_observation": {
+          "source": "JRC Global Surface Water v1.5",
+          "occurrence_interval": "1984-03 through 2024-12",
+          "occurrence_valid_pixel_centers": 11615,
+          "occurrence_water_pixels_gt_0": 3641,
+          "occurrence_water_pixels_ge_50": 1715,
+          "occurrence_water_pixels_ge_90": 992,
+          "seasonality_year": 2024,
+          "seasonality_valid_pixel_centers": 11615,
+          "seasonality_water_pixels_gt_0": 1979,
+          "interpretation": "Pixel-center counts from the unchanged candidate geometry; positive water-classified pixels are physical-reference observations, not an exact shoreline, historic channel, territorial assignment, or boundary-authority determination."
+        }
       },
       "processing_cause": {
         "status": "unknown",

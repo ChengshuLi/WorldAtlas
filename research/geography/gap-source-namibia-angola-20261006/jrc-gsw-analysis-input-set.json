@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "candidate_input": {
+    "path": "inputs/original-components.geojson",
+    "bytes": 23958,
+    "sha256": "f99f334877c309101afafe56210e40ab2093948e686ec39f98d9c085a42622b9"
+  },
+  "source_manifest": {
+    "path": "sources/jrc-gsw-2024/manifest.json",
+    "bytes": 5317,
+    "sha256": "03e48ad181884b4533861972e078f8a24b762f7a2445fd59ec25fff0c7deb248"
+  },
+  "tile_inputs": [
+    {
+      "layer": "occurrence",
+      "tile": "10E_10S",
+      "url": "https://storage.googleapis.com/water-world/download2024/VER1-5/occurrence/occurrence_10E_10S_v1_5_2024.tif",
+      "original_bytes": 36860540,
+      "original_sha256": "ebbe5c88ce5b8b161fdcefb80ffa5eff44b09868433c86ad1536968c0f1c20dd",
+      "grid": {
+        "crs": "EPSG:4326",
+        "bounds": [
+          10.000000000000114,
+          -20.000000000000057,
+          20.000000000000114,
+          -10.000000000000057
+        ],
+        "resolution_degrees": [
+          0.00025,
+          0.00025
+        ],
+        "width": 40000,
+        "height": 40000,
+        "dtype": "uint8",
+        "band_count": 1
+      }
+    },
+    {
+      "layer": "occurrence",
+      "tile": "20E_10S",
+      "url": "https://storage.googleapis.com/water-world/download2024/VER1-5/occurrence/occurrence_20E_10S_v1_5_2024.tif",
+      "original_bytes": 41757444,
+      "original_sha256": "3542a5458e43999271189830f9c39398f514e242ba9aab8be68e67e558741588",
+      "grid": {
+        "crs": "EPSG:4326",
+        "bounds": [
+          20.000000000000142,
+          -20.000000000000057,
+          30.000000000000142,
+          -10.000000000000057
+        ],
+        "resolution_degrees": [
+          0.00025,
+          0.00025
+        ],
+        "width": 40000,
+        "height": 40000,
+        "dtype": "uint8",
+        "band_count": 1
+      }
+    },
+    {
+      "layer": "seasonality",
+      "tile": "10E_10S",
+      "url": "https://storage.googleapis.com/water-world/download2024/VER1-5/seasonality/seasonality_10E_10S_v1_5_2024.tif",
+      "original_bytes": 18621860,
+      "original_sha256": "222564e5f80e660c7122946f62ec92ca19219f1007ec9eb75471b779951934dc",
+      "grid": {
+        "crs": "EPSG:4326",
+        "bounds": [
+          10.000000000000114,
+          -20.000000000000057,
+          20.000000000000114,
+          -10.000000000000057
+        ],
+        "resolution_degrees": [
+          0.00025,
+          0.00025
+        ],
+        "width": 40000,
+        "height": 40000,
+        "dtype": "uint8",
+        "band_count": 1
+      }
+    },
+    {
+      "layer": "seasonality",
+      "tile": "20E_10S",
+      "url": "https://storage.googleapis.com/water-world/download2024/VER1-5/seasonality/seasonality_20E_10S_v1_5_2024.tif",
+      "original_bytes": 20100950,
+      "original_sha256": "08f6d1c0ad855034f24aa5c5f5b90cbcfd50450a38ff1a69bd327d6efda1801b",
+      "grid": {
+        "crs": "EPSG:4326",
+        "bounds": [
+          20.000000000000142,
+          -20.000000000000057,
+          30.000000000000142,
+          -10.000000000000057
+        ],
+        "resolution_degrees": [
+          0.00025,
+          0.00025
+        ],
+        "width": 40000,
+        "height": 40000,
+        "dtype": "uint8",
+        "band_count": 1
+      }
+    }
+  ],
+  "method": {
+    "pixel_selection": "pixel center inside unchanged candidate geometry; rasterio geometry mask all_touched=false",
+    "crs": "EPSG:4326",
+    "nominal_resolution": "approximately 30m; GeoTIFF affine cell size 0.00025 degree in both axes",
+    "NoData": 255,
+    "no_reprojection_or_geometry_repair": true
+  }
+}
