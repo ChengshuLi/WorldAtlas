@@ -1,0 +1,603 @@
+{
+  "baseline": {
+    "commit": "839883ae281af7bf012f694698624a7ec77275e1",
+    "files": [
+      {
+        "bytes": 2476897,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-USA-ADM2-000.bin.gz",
+        "role": "original-source",
+        "sha256": "fe2128f4a5c164c9a9f58a6321af446782f6a689e4d5d9452e5967047c1958c9"
+      },
+      {
+        "bytes": 661416,
+        "hash_kind": "file-bytes",
+        "path": "data/administrative-sources.json",
+        "role": "original-source",
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+      },
+      {
+        "bytes": 806110,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/individual-source-attribution.json",
+        "role": "original-source",
+        "sha256": "7d8a3baf61f32e6e4398f24bec0d15bce32eafcd4309655edc2b12a2c33256bd"
+      },
+      {
+        "bytes": 174829,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/report.json",
+        "role": "original-source",
+        "sha256": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265"
+      },
+      {
+        "bytes": 178555,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/report.json",
+        "role": "original-source",
+        "sha256": "6a56174de64aee619130282a2fe63db58bed51e7e1c0d8d3f4f10045eddb3914"
+      },
+      {
+        "bytes": 8610767,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/scope.json.gz",
+        "role": "original-source",
+        "sha256": "ada2db15a78524cd28c7a5f924df7bbe0fe616cdead91c429dd2c04384a156e9"
+      },
+      {
+        "bytes": 57840,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/report.json",
+        "role": "original-source",
+        "sha256": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0"
+      },
+      {
+        "bytes": 6535,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-physical-sources-20261006/run-one/report.json",
+        "role": "original-source",
+        "sha256": "b90334b4a836604049eb268604f090f686400147e4747dd12bd2ea1d698b497c"
+      },
+      {
+        "bytes": 3185,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/global-physical-sources-20261006/run-one/members.json",
+        "role": "original-source",
+        "sha256": "a0236366ffb0239f20028caeaed21f4627c7545ee09cc7220e58dbc56d3394c3"
+      },
+      {
+        "bytes": 117156,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json",
+        "role": "original-source",
+        "sha256": "dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c"
+      },
+      {
+        "bytes": 4608983,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-26.json",
+        "role": "baseline-subject-features",
+        "sha256": "44de5da3531f5641e0496ab7b01ed73871b40705e2a3eafdda470926872b6632"
+      }
+    ],
+    "pin_files": {
+      "candidate_custody_index_file": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/index.json",
+      "consumed_source_payload_file": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-USA-ADM2-000.bin.gz",
+      "numeric_diagnosis_report_file": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/r2/report.json",
+      "numeric_scope_file": "coordination/engineering/complete-numeric-closure-diagnosis-20261007/scope.json.gz",
+      "physical_comparison_report_file": "coordination/engineering/global-physical-comparison-20261006/results/report.json",
+      "physical_source_members_file": "coordination/engineering/global-physical-sources-20261006/run-one/members.json",
+      "physical_source_run_report_file": "coordination/engineering/global-physical-sources-20261006/run-one/report.json",
+      "routing_report_file": "coordination/engineering/global-actionability-routing-20261007/results/report.json",
+      "source_attribution_file": "coordination/engineering/original-geography-source-corpus-20261006/individual-source-attribution.json",
+      "source_metadata_file": "data/administrative-sources.json"
+    },
+    "pins": {
+      "candidate_custody_index_file": "dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c",
+      "consumed_source_payload_file": "fe2128f4a5c164c9a9f58a6321af446782f6a689e4d5d9452e5967047c1958c9",
+      "numeric_diagnosis_report_file": "6a56174de64aee619130282a2fe63db58bed51e7e1c0d8d3f4f10045eddb3914",
+      "numeric_scope_file": "ada2db15a78524cd28c7a5f924df7bbe0fe616cdead91c429dd2c04384a156e9",
+      "physical_comparison_report_file": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0",
+      "physical_source_members_file": "a0236366ffb0239f20028caeaed21f4627c7545ee09cc7220e58dbc56d3394c3",
+      "physical_source_run_report_file": "b90334b4a836604049eb268604f090f686400147e4747dd12bd2ea1d698b497c",
+      "routing_report_file": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265",
+      "source_attribution_file": "7d8a3baf61f32e6e4398f24bec0d15bce32eafcd4309655edc2b12a2c33256bd",
+      "source_metadata_file": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+    },
+    "subject_files": {
+      "gb:USA:ADM2:52423323B42354579566723": "data/geography/part-26.json",
+      "gb:USA:ADM2:52423323B61185146991898": "data/geography/part-26.json",
+      "gb:USA:ADM2:52423323B83071826775288": "data/geography/part-26.json"
+    }
+  },
+  "branch": "geography/usa31-gap-family-source-fitness-20261007",
+  "claim_id": "ebb0dbbd-c2a5-4baf-8625-3a82030ce801",
+  "commands": [
+    "From repository root, run python3 research/geography/usa31-gap-family-source-fitness-20261007/build_evidence.py (offline reconstruction from pinned commits and captured inputs).",
+    "Run the bounded sources/capture_tigerweb_source.py only when a new Census TIGERweb capture is explicitly required; it performs a limited HTTPS source query.",
+    "Run the bundled Node evidence-quality validator against research/geography/usa31-gap-family-source-fitness-20261007/evidence-quality.json and the repository root."
+  ],
+  "conclusions": [
+    {
+      "source_ids": [
+        "worldatlas-accepted-routing-and-candidate-ancestry"
+      ],
+      "status": "supported",
+      "text": "The exact accepted family has 31 members; all 31 current features and physical query rows were restored and identity/hash matched, and all 15 numeric-first target IDs matched complete #1300 retained scope rows."
+    },
+    {
+      "source_ids": [
+        "gshhg-2.3.7-physical-reference",
+        "worldatlas-accepted-routing-and-candidate-ancestry"
+      ],
+      "status": "unresolved",
+      "text": "Source suitability is unresolved for all 31 components. The physical records cite GSHHG 2.3.7 with heterogeneous or unknown observation dates, and legal/water/ownership status is not established. Preserve all candidates and defer geometry processing."
+    },
+    {
+      "source_ids": [
+        "geoboundaries-usa-adm2-full-2018",
+        "geoboundaries-usa-adm2-simplified-2018",
+        "census-tigerweb-2026-target-counties",
+        "census-tigerline-2018-national",
+        "census-tigerline-2025-national"
+      ],
+      "status": "unresolved",
+      "text": "The three contact features were compared across the retained 2018 geoBoundaries full and simplified products and a bounded 2026 Census TIGERweb capture; differences vary substantially. The 2018 and 2025 national TIGER/Line archive bodies exceeded retention limits, so complete same-purpose archive comparison remains unresolved."
+    }
+  ],
+  "external_snapshots": {
+    "collision_issue_359_snapshot_body": "8f1539c649a0dd937eeddbbc21dcd50ba899043b47454d1a04b510a17ea8a1a6"
+  },
+  "issue": 1377,
+  "lane": "geography",
+  "methods": [
+    {
+      "description": "Join exact immutable family/component/numeric/physical/source record identities; restore and hash all target geometry; retain raw source records; compare exact contact products and recorded equal-area overlap summaries without geometry repair, snapping, semantic inference or ownership transfer.",
+      "id": "bounded-source-fitness-review",
+      "software": "Python 3; Shapely 2.1.2; pyproj 3.7.2; WorldAtlas evidence-quality v1",
+      "units": "Exact IDs and SHA-256; square metres inherited only where explicitly marked; dimensionless intersection-over-union."
+    }
+  ],
+  "metrics": [],
+  "outputs": [
+    {
+      "bytes": 10020,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/README.md",
+      "role": "report",
+      "sha256": "0f0a3ddc48d100a41137a6599918b47b95b7c56ec4562be2578ceff6e77901c0"
+    },
+    {
+      "bytes": 69139,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/accepted-routing-component-rows.json",
+      "role": "report",
+      "sha256": "eefcac7f3af0e0bebc57d73115c4ac70d97302f244def34b611528ae7ffb055c"
+    },
+    {
+      "bytes": 12093,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/accepted-routing-family-record.json",
+      "role": "report",
+      "sha256": "5b36a657c5e6d22de047d5d79deaf74bab32c7126f2039844ea97b0b5b6adcda"
+    },
+    {
+      "bytes": 30884,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/build_evidence.py",
+      "role": "report",
+      "sha256": "2c220809c01ddf402b3c53ac50333f593f5e3ed05878c8cea614a98f30124b4a"
+    },
+    {
+      "bytes": 28619,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/candidate-components.geojson",
+      "role": "generated-table",
+      "sha256": "a63f2f3c10802ad15d498230e9508434331337a7d49b031422c5f304d5c4e66e"
+    },
+    {
+      "bytes": 2596,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/capture_tigerweb_source.py",
+      "role": "report",
+      "sha256": "1ca91fe51956b370333493fdf492c9bd033ba30163dd1c4e43f8bcf2aa385810"
+    },
+    {
+      "bytes": 8610767,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/full-numeric-scope.json.gz",
+      "role": "generated-table",
+      "sha256": "ada2db15a78524cd28c7a5f924df7bbe0fe616cdead91c429dd2c04384a156e9"
+    },
+    {
+      "bytes": 28115,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/gshhg-native-query-records.jsonl",
+      "role": "generated-table",
+      "sha256": "33b5a2d185a901dbd9dbec7601450a9ee22589c1c1fac1c47657d908b4f67a85"
+    },
+    {
+      "bytes": 13178,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/numeric-closure-rows.jsonl",
+      "role": "generated-table",
+      "sha256": "0e41e42f8cf53d971958af943e2c72b94e3980aecd8a7b05fd02ad0e15bd309e"
+    },
+    {
+      "bytes": 205135,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/per-component-source-screen.json",
+      "role": "report",
+      "sha256": "2e6174faf33fc79647f1189debb01d44b97d425c9d8b79afc558c68a1fada3fe"
+    },
+    {
+      "bytes": 244778,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/physical-query-rows.jsonl",
+      "role": "generated-table",
+      "sha256": "c85db0563e90c43db51ef58eeb7713a3a15dae7d36dc665e8965a18c59ef48bd"
+    },
+    {
+      "bytes": 12622,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/prepare_manifest.py",
+      "role": "report",
+      "sha256": "35d70a0f90cc3cdfeb7d21cef1ded7547ad25fd23e14eafda5431bf06a7962d1"
+    },
+    {
+      "bytes": 2421,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/related-issue-state.json",
+      "role": "report",
+      "sha256": "eaf6cc32fa2414967f9cff83ec96ffbbd8eb6d6eaa7d5f103dafde0ff00cd244"
+    },
+    {
+      "bytes": 17683,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/source-pins.json",
+      "role": "report",
+      "sha256": "eec386eb1867c13848e37c9dd2542fc4dfb06398c1ed47c18421941b172a0747"
+    },
+    {
+      "bytes": 4316,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/sources/CITATION-AND-USE-geoBoundaries-original.txt",
+      "role": "report",
+      "sha256": "f6ea7572bea6036c4cdcacf8c0ca7bf09098d4e600d19546d7432533e9a290d5"
+    },
+    {
+      "bytes": 1375,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/sources/GSHHG-LICENSE.TXT",
+      "role": "report",
+      "sha256": "dc53a4833bf9121360a5286917683f041439327353ffe0231206c6b746005b81"
+    },
+    {
+      "bytes": 15350,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/sources/GSHHG-README.TXT",
+      "role": "report",
+      "sha256": "8c83b0d9e861c3cf9390ccfcc28d57dd484b192e1767524e094c988ee9f84ac7"
+    },
+    {
+      "bytes": 661416,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/sources/administrative-sources.json",
+      "role": "report",
+      "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633"
+    },
+    {
+      "bytes": 7463,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/sources/census-tigerweb-2026-layer-metadata.json",
+      "role": "report",
+      "sha256": "2d3d122db59e0f4171d4ac8972dff969b42567bc7239f90a67412fd3616a1b59"
+    },
+    {
+      "bytes": 2978,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/sources/census-tigerweb-2026-retrieval.json",
+      "role": "report",
+      "sha256": "bbc843e1a6d576fc9c9c98b886215e7a766eff8781935ac17c4936da5a6f9c20"
+    },
+    {
+      "bytes": 135074,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/sources/census-tigerweb-2026-target-counties.geojson",
+      "role": "generated-table",
+      "sha256": "67b6991260737bebfc956018613e2e9d8e88cd7267aed48037b440f98d2f3a32"
+    },
+    {
+      "bytes": 939,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/sources/geoboundaries-usa-adm2-2018-metadata.json",
+      "role": "report",
+      "sha256": "a4d2a82a1cd434960b6ed49531bff3330d0881674eea9dc8711e1ad6bf049b9f"
+    },
+    {
+      "bytes": 15886,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/sources/geoboundaries-usa-adm2-full-contacts.geojson",
+      "role": "generated-table",
+      "sha256": "fcc7f37810d6143e591fa0adcdeda90af2b597e1d6b992aa56c3b5f1baad0526"
+    },
+    {
+      "bytes": 11871,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/sources/geoboundaries-usa-adm2-simplified-contacts.geojson",
+      "role": "generated-table",
+      "sha256": "51655ea6ec9807a0679d6d020d4290a2dce40a66f8003c026365af501fe399b0"
+    },
+    {
+      "bytes": 806110,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/sources/individual-source-attribution.json",
+      "role": "report",
+      "sha256": "7d8a3baf61f32e6e4398f24bec0d15bce32eafcd4309655edc2b12a2c33256bd"
+    },
+    {
+      "bytes": 26766,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/sources/issue-1365-current.json",
+      "role": "report",
+      "sha256": "6299e1c44379d2032bc27b4f91148d53174f7b029968f352e18ea50780f94762"
+    },
+    {
+      "bytes": 4608,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/sources/issue-1377-comments.json",
+      "role": "report",
+      "sha256": "0afbe2f26b73c06a4588778efe2838a128c51b41427e173ec61326fe0b863dc1"
+    },
+    {
+      "bytes": 14470,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/sources/issue-1377-current.json",
+      "role": "report",
+      "sha256": "8cd2949ceff8d5442a1f4be99228d4c7d19571ffd2f3616c21213efbefca664a"
+    },
+    {
+      "bytes": 24673,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/sources/issue-359-current.json",
+      "role": "report",
+      "sha256": "5f7e3db6cefc9e3273e9b147b25fec2748b9ae5e22d657e7331fc4d41e26aa71"
+    },
+    {
+      "bytes": 22804,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/sources/issue-359-full-body.md",
+      "role": "report",
+      "sha256": "8f1539c649a0dd937eeddbbc21dcd50ba899043b47454d1a04b510a17ea8a1a6"
+    },
+    {
+      "bytes": 9723,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/sources/issue-359-scope-contacts.json",
+      "role": "report",
+      "sha256": "41a0f20755aa7fd83875319936ceaa68b8503449432d4dd67405f6fdc500aac8"
+    },
+    {
+      "bytes": 33212,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/sources/issue-954-current.json",
+      "role": "report",
+      "sha256": "d9e51973565aa0fac393d751bf7fa61f5c4b6db692e61f69bf3c8d30dd0b62d1"
+    },
+    {
+      "bytes": 403376,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/sources/source-corpus-catalogue.json",
+      "role": "report",
+      "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9"
+    },
+    {
+      "bytes": 5945,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/sources/source-provenance.json",
+      "role": "report",
+      "sha256": "d1cdb3c3827679a28d3db78a1a742b44d8bbc4704610ea8cc88c4f57723fa977"
+    },
+    {
+      "bytes": 117156,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/sources/upstream/candidate-custody-index.json",
+      "role": "report",
+      "sha256": "dfcca9fe2bb64805b94e784be89b3523f5683b95cbd4a617283965ca6187a77c"
+    },
+    {
+      "bytes": 65206,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/sources/upstream/candidate-successor-report.json",
+      "role": "report",
+      "sha256": "3d95a15d3797943290997c9a16fede48e6eb6e0941b0071a5fcd410375c49d46"
+    },
+    {
+      "bytes": 178555,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/sources/upstream/numeric-diagnosis-report.json",
+      "role": "report",
+      "sha256": "6a56174de64aee619130282a2fe63db58bed51e7e1c0d8d3f4f10045eddb3914"
+    },
+    {
+      "bytes": 57840,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/sources/upstream/physical-comparison-report.json",
+      "role": "report",
+      "sha256": "2a5b59198681d50f577bc4c2c321174f166aec14f57c7564100fc411ae940df0"
+    },
+    {
+      "bytes": 6535,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/sources/upstream/physical-source-run-report.json",
+      "role": "report",
+      "sha256": "b90334b4a836604049eb268604f090f686400147e4747dd12bd2ea1d698b497c"
+    },
+    {
+      "bytes": 174829,
+      "hash_kind": "file-bytes",
+      "path": "research/geography/usa31-gap-family-source-fitness-20261007/sources/upstream/routing-report.json",
+      "role": "report",
+      "sha256": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265"
+    }
+  ],
+  "review_kind": "source",
+  "sources": [
+    {
+      "files": [
+        {
+          "bytes": 10500644,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/usa31-gap-family-source-fitness-20261007/sources/geoboundaries-usa-adm2-full-whole-source.geojson",
+          "role": "original-source",
+          "sha256": "81fdd384df8012e5007ed2994a8ab306352f3c48e32cd8ea99182195e8647f43"
+        }
+      ],
+      "id": "geoboundaries-usa-adm2-full-2018",
+      "license": {
+        "status": "redistributable",
+        "terms": "Retained product metadata identifies Public Domain; geoBoundaries distribution documentation separately requires CC-BY 4.0 attribution. Both statements are preserved without resolving beyond the explicit terms."
+      },
+      "retention": "retained",
+      "retrieved_at": "2026-10-07",
+      "role": "Full-resolution USA ADM2 comparison product; contact features and source comparison",
+      "supported_interval": {
+        "from": 2018,
+        "to": 2019
+      },
+      "temporal_status": "historical",
+      "url": "https://www.geoboundaries.org/api/current/gbOpen/USA/ADM2/",
+      "verification": "verified",
+      "vintage": "represented 2018; release 9469f09592ced973a3448cf66b6100b741b64c0d"
+    },
+    {
+      "files": [
+        {
+          "bytes": 2476897,
+          "hash_kind": "file-bytes",
+          "path": "research/geography/usa31-gap-family-source-fitness-20261007/sources/geoboundaries-usa-adm2-simplified-whole-source.bin.gz",
+          "role": "original-source",
+          "sha256": "fe2128f4a5c164c9a9f58a6321af446782f6a689e4d5d9452e5967047c1958c9"
+        }
+      ],
+      "id": "geoboundaries-usa-adm2-simplified-2018",
+      "license": {
+        "status": "redistributable",
+        "terms": "Retained product metadata identifies Public Domain; geoBoundaries distribution documentation separately requires CC-BY 4.0 attribution. Both statements are preserved without resolving beyond the explicit terms."
+      },
+      "retention": "retained",
+      "retrieved_at": "2026-10-07",
+      "role": "Consumed simplified USA ADM2 source and complete source-feature roster",
+      "supported_interval": {
+        "from": 2018,
+        "to": 2019
+      },
+      "temporal_status": "historical",
+      "url": "https://www.geoboundaries.org/api/current/gbOpen/USA/ADM2/",
+      "verification": "verified",
+      "vintage": "represented 2018; source update 2023-01-19; build 2023-12-12"
+    },
+    {
+      "id": "census-tigerweb-2026-target-counties",
+      "license": {
+        "status": "unknown",
+        "terms": "Captured endpoint metadata does not state source reuse or positional-accuracy terms; retain as bounded evidence only."
+      },
+      "limit": "Only three exact counties were requested; this service capture does not establish historical boundary fitness, legal authority, or national coverage.",
+      "restoration": "The exact request URL, parameters, layer metadata and returned target-only GeoJSON are preserved under sources/; repeat the bounded HTTPS query recorded in the retrieval receipt.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-07T10:58:04Z",
+      "role": "Exact target-contact current county comparison; Nassau, Suffolk and Westchester",
+      "temporal_status": "reference",
+      "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/1/query",
+      "verification": "verified",
+      "vintage": "2026 service capture; retrieved 2026-10-07T10:58:04Z"
+    },
+    {
+      "id": "gshhg-2.3.7-physical-reference",
+      "license": {
+        "status": "unknown",
+        "terms": "Retained GSHHG LICENSE.TXT and README.TXT conflict about LGPL version direction; original full archive/native binary exceed the packet retention cap."
+      },
+      "limit": "Whole source ZIP is 118,617,033 bytes and native gshhs_f.b is 95,809,336 bytes, both above the 32 MiB per-file cap. Shoreline/channel registration, river width, seasonal wetness and source observation dates remain unresolved.",
+      "restoration": "Use the immutable physical source run report, member roster and query record hashes to locate the pinned GSHHG 2.3.7 release; selected native query records and source license files are retained in the packet.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-07",
+      "role": "Physical shoreline reference records used by the retained 31 component query",
+      "temporal_status": "unknown",
+      "url": "https://www.ngdc.noaa.gov/mgg/shorelines/shorelines.html",
+      "verification": "verified",
+      "vintage": "GSHHG 2.3.7 release dated 2017-06-15; observation dates heterogeneous or unknown"
+    },
+    {
+      "id": "census-tigerline-2018-national",
+      "license": {
+        "status": "unknown",
+        "terms": "Archive body not retained; license terms were not independently assessed from the target archive."
+      },
+      "limit": "HTTP HEAD reported 79,219,478 bytes, over the 32 MiB cap; no archive body was downloaded. The state-only URL returned 404.",
+      "restoration": "Exact nationwide ZIP URL and bounded HTTP HEAD response are recorded in sources/source-provenance.json.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-07",
+      "role": "Official same-purpose 2018 TIGER/Line county comparator locator",
+      "supported_interval": {
+        "from": 2018,
+        "to": 2019
+      },
+      "temporal_status": "historical",
+      "url": "https://www2.census.gov/geo/tiger/TIGER2018/COUNTY/tl_2018_us_county.zip",
+      "verification": "verified",
+      "vintage": "TIGER/Line 2018; modified 2018-09-18"
+    },
+    {
+      "id": "census-tigerline-2025-national",
+      "license": {
+        "status": "unknown",
+        "terms": "Archive body not retained; license terms were not independently assessed from the target archive."
+      },
+      "limit": "HTTP HEAD reported 83,989,800 bytes, over the 32 MiB cap; no archive body was downloaded. Existing 2025 county samples cover a different county scope and were not substituted.",
+      "restoration": "Exact nationwide ZIP URL and bounded HTTP HEAD response are recorded in sources/source-provenance.json.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-07",
+      "role": "Official later same-purpose TIGER/Line county comparator locator",
+      "supported_interval": {
+        "from": 2025,
+        "to": 2026
+      },
+      "temporal_status": "historical",
+      "url": "https://www2.census.gov/geo/tiger/TIGER2025/COUNTY/tl_2025_us_county.zip",
+      "verification": "verified",
+      "vintage": "TIGER/Line 2025; modified 2025-09-23"
+    },
+    {
+      "id": "worldatlas-accepted-routing-and-candidate-ancestry",
+      "license": {
+        "status": "unknown",
+        "terms": "Repository evidence is retained as audit material; upstream component/source rights remain governed by the individually recorded sources."
+      },
+      "limit": "Ancestor packages are preserved as Git objects and custody aliases; they are not reproduced in full in this bounded issue packet.",
+      "restoration": "Use the immutable commits, the complete candidate custody index aliases, and the exact report paths pinned by the manifest; rebuild the target roster from the retained packet evidence.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-07",
+      "role": "Immutable accepted family routing, complete component ancestry, numeric diagnosis, physical query and source run evidence",
+      "temporal_status": "reference",
+      "url": "https://github.com/ChengshuLi/WorldAtlas",
+      "verification": "verified",
+      "vintage": "Pinned commits 0198938719a5666b6726fb6a1e45779926eefeb2, ea880cdc37b0bdfc63fdb52b79d74545a3e59c88, bec82842ad5d9cf07e38a78395df8d5e7a6f4591 and f8f99612e4d83d561b370189a1969c3e4301a1e3"
+    }
+  ],
+  "stages": {
+    "geographic_approval": "unapproved",
+    "implementation": "not-proposed",
+    "research": "partial"
+  },
+  "subject_ids": [
+    "gb:USA:ADM2:52423323B42354579566723",
+    "gb:USA:ADM2:52423323B61185146991898",
+    "gb:USA:ADM2:52423323B83071826775288"
+  ],
+  "subject_ids_sha256": "241819d3cebfac6c95e8841e79c7fbf97f0afd3a10c6443788eabf4c88008227",
+  "summaries": [],
+  "version": 1,
+  "worker_id": "01a11550-a19b-7330-955c-e56e90985bf3"
+}
