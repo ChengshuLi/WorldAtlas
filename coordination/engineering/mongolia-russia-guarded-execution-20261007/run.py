@@ -213,14 +213,7 @@ def require_scientific_bindings(methods, expected):
         raise ValueError('Actual scientific callable or quadrature binding changed')
 
 
-def publication=json.loads(raw['publication-plan.json'])
-    output_rows=publication['outputs']
-    if len(output_rows)!=len({x['path'] for x in output_rows}) or any(not x['path'].startswith(OWNED) or x['encoded_and_decoded_ceiling']>LIMIT or x['encoded_and_decoded_ceiling']<0 for x in output_rows):
-        raise ValueError('Malformed frozen full publication closure')
-    public_input_bytes=sum(x['bytes'] for x in plan['original_files'])+sum(x['bytes']for x in pins)
-    if public_input_bytes+sum(x['encoded_and_decoded_ceiling']for x in output_rows)>PHASE or len(original.pins)+len(pins)+len(output_rows)>512:
-        raise ValueError('Complete concrete outputs/reports/controls/manifest publication forecast exceeds cap')
-    validate_scope(captured, plan):
+def validate_scope(captured, plan):
     prefix='research/geography/mongolia-russia-gap-source-fitness-20261007/inputs/'
     family=json.loads(captured[prefix+'complete-family.json'])
     physical=json.loads(captured[prefix+'physical-component-features.geojson'])['features']
