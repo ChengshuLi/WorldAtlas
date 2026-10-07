@@ -1,0 +1,17 @@
+{
+  "controls": [
+    {
+      "expected": "longitude-latitude input rejects invalid swapped latitude",
+      "id": "axis-swapped",
+      "outcome": "passed"
+    },
+    {
+      "expected": "raw Mapshaper GeoJSON export has no CRS member and no datum operation",
+      "id": "implicit-wgs84-label",
+      "outcome": "passed"
+    }
+  ],
+  "kind": "negative-control",
+  "method_id": "rgpf-to-wgs84-sensitivity-v1",
+  "outcome": "passed"
+}

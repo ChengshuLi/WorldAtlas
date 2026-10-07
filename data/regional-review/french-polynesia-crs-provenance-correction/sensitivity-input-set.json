@@ -1,0 +1,241 @@
+{
+  "baseline_admin_divisions_sha256": "88a970ed225298e6f1d06d9d4a12659c74d64389e1e73463505ad52f7bae027f",
+  "baseline_commit": "19b2ed4de5d41729c0942b0bb9f6839a54295fee",
+  "baseline_subject_ids": [
+    "PYF-4963",
+    "PYF-4964",
+    "PYF-4965",
+    "PYF-4966",
+    "PYF-4967"
+  ],
+  "operations": {
+    "EPSG:15833": {
+      "accuracy_m": 1.0,
+      "description": "axis order change (2D) + RGPF to WGS 84 (2) + axis order change (2D)",
+      "proj_pipeline": "proj=noop ellps=GRS80",
+      "transformations": [
+        {
+          "accuracy": "1.0",
+          "id": {
+            "authority": "EPSG",
+            "code": 15833
+          },
+          "method": {
+            "id": {
+              "authority": "EPSG",
+              "code": 9603
+            },
+            "name": "Geocentric translations (geog2D domain)"
+          },
+          "name": "RGPF to WGS 84 (2)",
+          "parameters": [
+            {
+              "id": {
+                "authority": "EPSG",
+                "code": 8605
+              },
+              "name": "X-axis translation",
+              "unit": "metre",
+              "value": 0
+            },
+            {
+              "id": {
+                "authority": "EPSG",
+                "code": 8606
+              },
+              "name": "Y-axis translation",
+              "unit": "metre",
+              "value": 0
+            },
+            {
+              "id": {
+                "authority": "EPSG",
+                "code": 8607
+              },
+              "name": "Z-axis translation",
+              "unit": "metre",
+              "value": 0
+            }
+          ],
+          "remarks": "Approximation at the +/- 1m level assuming that RGPF is equivalent to WGS 84."
+        }
+      ]
+    },
+    "EPSG:8828": {
+      "accuracy_m": 0.5,
+      "description": "axis order change (2D) + RGPF to WGS 84 (1) + axis order change (2D)",
+      "proj_pipeline": "proj=pipeline step proj=unitconvert xy_in=deg xy_out=rad step proj=push v_3 step proj=cart ellps=GRS80 step proj=helmert x=0.072 y=-0.507 z=-0.245 rx=0.0183 ry=-0.0003 rz=0.007 s=-0.0093 convention=position_vector step inv proj=cart ellps=WGS84 step proj=pop v_3 step proj=unitconvert xy_in=rad xy_out=deg",
+      "transformations": [
+        {
+          "accuracy": "0.5",
+          "id": {
+            "authority": "EPSG",
+            "code": 8828
+          },
+          "method": {
+            "id": {
+              "authority": "EPSG",
+              "code": 9606
+            },
+            "name": "Position Vector transformation (geog2D domain)"
+          },
+          "name": "RGPF to WGS 84 (1)",
+          "parameters": [
+            {
+              "id": {
+                "authority": "EPSG",
+                "code": 8605
+              },
+              "name": "X-axis translation",
+              "unit": "metre",
+              "value": 0.072
+            },
+            {
+              "id": {
+                "authority": "EPSG",
+                "code": 8606
+              },
+              "name": "Y-axis translation",
+              "unit": "metre",
+              "value": -0.507
+            },
+            {
+              "id": {
+                "authority": "EPSG",
+                "code": 8607
+              },
+              "name": "Z-axis translation",
+              "unit": "metre",
+              "value": -0.245
+            },
+            {
+              "id": {
+                "authority": "EPSG",
+                "code": 8608
+              },
+              "name": "X-axis rotation",
+              "unit": {
+                "conversion_factor": 4.84813681109536e-06,
+                "name": "arc-second",
+                "type": "AngularUnit"
+              },
+              "value": 0.0183
+            },
+            {
+              "id": {
+                "authority": "EPSG",
+                "code": 8609
+              },
+              "name": "Y-axis rotation",
+              "unit": {
+                "conversion_factor": 4.84813681109536e-06,
+                "name": "arc-second",
+                "type": "AngularUnit"
+              },
+              "value": -0.0003
+            },
+            {
+              "id": {
+                "authority": "EPSG",
+                "code": 8610
+              },
+              "name": "Z-axis rotation",
+              "unit": {
+                "conversion_factor": 4.84813681109536e-06,
+                "name": "arc-second",
+                "type": "AngularUnit"
+              },
+              "value": 0.007
+            },
+            {
+              "id": {
+                "authority": "EPSG",
+                "code": 8611
+              },
+              "name": "Scale difference",
+              "unit": {
+                "conversion_factor": 1e-06,
+                "name": "parts per million",
+                "type": "ScaleUnit"
+              },
+              "value": -0.0093
+            }
+          ],
+          "remarks": "SHOM report gives scale difference as 0.999 999 9907 (wrt unity). Transformation is to original Transit definition of WGS 84. It is consistent with later WGS 84 realisations G730, G873 and G1150 to no better than 1m."
+        }
+      ]
+    },
+    "group_best_available": true,
+    "sample_comparison": [
+      {
+        "displacement_from_untransformed_m": 0.712654185,
+        "input_lon_lat": [
+          -149.5,
+          -17.5
+        ],
+        "operation": "EPSG:8828",
+        "output_lon_lat": [
+          -149.49999495651193,
+          -17.50000424756141
+        ]
+      },
+      {
+        "displacement_from_untransformed_m": 0.0,
+        "input_lon_lat": [
+          -149.5,
+          -17.5
+        ],
+        "operation": "EPSG:15833",
+        "output_lon_lat": [
+          -149.5,
+          -17.5
+        ]
+      }
+    ],
+    "selection_for_sensitivity": "EPSG:8828 RGPF to WGS 84 (1), position-vector 7-parameter operation. This reproduces a supported EPSG database operation; it is not evidence that DAF or the historical export selected it.",
+    "unavailable_operations": 0
+  },
+  "parents": {
+    "PYF-4963": "framework:province:windward-islands:f00645bd9827",
+    "PYF-4964": "framework:province:leeward-islands:f1d53af78fed",
+    "PYF-4965": "framework:province:tuamotu-gambier:f6a7d4ec9817",
+    "PYF-4966": "framework:province:austral-islands:280986970614",
+    "PYF-4967": "framework:province:marquesas-islands:0beb7fe5d3cd"
+  },
+  "prior_group_geojson_sha256": {
+    "1": "6179ac6a617f56e3f298d5564db513ab49310c288a6d178158bfaf273852f069",
+    "2": "9ef0719f4bfb842b9c5ccf6b4c0d87c7bde1d33ad24825dfd722612a4a983e9b",
+    "3": "8bad07bfb6bb95dbfa384e4e3ffe389c988f79416fcf85215620acef1f759759",
+    "4": "ddd015f5ee8f07faee6d1844575cb79ecf7dbf54ffdad96d713c32c450c10523",
+    "5": "de4ea30975d1e135862f16beb3fbde6ab196c55b9537a32016645770212dc311"
+  },
+  "reproduction": "reproduce_crs_sensitivity.py; output crs-sensitivity-results.json; two runs identical",
+  "runtime": {
+    "mapshaper": "0.6.121",
+    "mapshaper_npm_integrity": "sha512-kFXE4pbQ1yCwpJxFQthQkAGvZgM/aje/i1OnQwnxlJVWMQoounL4N9VAPOylOBK7GSnrHxCOzI8cakmS30Sljw==",
+    "node": "24.19.0",
+    "numpy": "2.3.5",
+    "proj": "9.5.1",
+    "proj_database": "EPSG v11.022",
+    "proj_db_bytes": 9273344,
+    "proj_db_sha256": "ec8cea0a5490a6f9247d9063645049e0f93fb83307067ebfc859187f0539e67e",
+    "pyproj": "3.7.2",
+    "python": "3.12.14",
+    "shapely": "2.1.2"
+  },
+  "source_archives": {
+    "loc-commune-associee.zip": {
+      "bytes": 15310967,
+      "sha256": "29230c18487385f84ca480e9b2c921ea389f848663a4a9574e77b9cbbf40db7b"
+    },
+    "loc-groupe-ile.zip": {
+      "bytes": 1168408,
+      "sha256": "3f71d87855a6d46885396b6802ccfa19f559ca4b9876f6480cd122fcba42d6fb"
+    },
+    "loc-ile.zip": {
+      "bytes": 14253080,
+      "sha256": "5018fa62ff269ae5b93502218213ce57baa36f31fcbf9d12b47bd36e12a6e29b"
+    }
+  },
+  "source_prj_sha256": "55803b5f85ca4b970f33ea4a84198cfa395451fd24fd2748578018f74068a7e1"
+}

@@ -1,0 +1,1002 @@
+{
+  "baseline": {
+    "commit": "19b2ed4de5d41729c0942b0bb9f6839a54295fee",
+    "files": [
+      {
+        "bytes": 6613963,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-28.json",
+        "sha256": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d"
+      },
+      {
+        "bytes": 38404,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/french-polynesia-group-boundaries-20261005/evidence-quality.json",
+        "sha256": "2ef3cd496e24c520a98331497dbe6195779c4106189fef062431df233f337eb6"
+      },
+      {
+        "bytes": 1410385,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/admin-divisions.geojson",
+        "sha256": "88a970ed225298e6f1d06d9d4a12659c74d64389e1e73463505ad52f7bae027f"
+      },
+      {
+        "bytes": 2927790,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-1.geojson",
+        "sha256": "6179ac6a617f56e3f298d5564db513ab49310c288a6d178158bfaf273852f069"
+      },
+      {
+        "bytes": 5046613,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-2.geojson",
+        "sha256": "9ef0719f4bfb842b9c5ccf6b4c0d87c7bde1d33ad24825dfd722612a4a983e9b"
+      },
+      {
+        "bytes": 7796607,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-3.geojson",
+        "sha256": "8bad07bfb6bb95dbfa384e4e3ffe389c988f79416fcf85215620acef1f759759"
+      },
+      {
+        "bytes": 1144543,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-4.geojson",
+        "sha256": "ddd015f5ee8f07faee6d1844575cb79ecf7dbf54ffdad96d713c32c450c10523"
+      },
+      {
+        "bytes": 31660529,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-5.geojson",
+        "sha256": "de4ea30975d1e135862f16beb3fbde6ab196c55b9537a32016645770212dc311"
+      },
+      {
+        "bytes": 15310967,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/loc-commune-associee.zip",
+        "sha256": "29230c18487385f84ca480e9b2c921ea389f848663a4a9574e77b9cbbf40db7b"
+      },
+      {
+        "bytes": 1168408,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/loc-groupe-ile.zip",
+        "sha256": "3f71d87855a6d46885396b6802ccfa19f559ca4b9876f6480cd122fcba42d6fb"
+      },
+      {
+        "bytes": 14253080,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/french-polynesia-group-boundaries-20261005/source/loc-ile.zip",
+        "sha256": "5018fa62ff269ae5b93502218213ce57baa36f31fcbf9d12b47bd36e12a6e29b"
+      },
+      {
+        "bytes": 14581,
+        "hash_kind": "file-bytes",
+        "path": "data/regional-review/french-polynesia-group-boundaries-20261005/verify.py",
+        "sha256": "d86958c5c1ab8259195db39391cd80f6633b3147907aebfb4e1fed3e644dc30f"
+      }
+    ],
+    "pin_files": {
+      "baseline:data/geography/part-28.json": "data/geography/part-28.json",
+      "baseline:data/regional-review/french-polynesia-group-boundaries-20261005/evidence-quality.json": "data/regional-review/french-polynesia-group-boundaries-20261005/evidence-quality.json",
+      "baseline:data/regional-review/french-polynesia-group-boundaries-20261005/source/admin-divisions.geojson": "data/regional-review/french-polynesia-group-boundaries-20261005/source/admin-divisions.geojson",
+      "baseline:data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-1.geojson": "data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-1.geojson",
+      "baseline:data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-2.geojson": "data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-2.geojson",
+      "baseline:data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-3.geojson": "data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-3.geojson",
+      "baseline:data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-4.geojson": "data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-4.geojson",
+      "baseline:data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-5.geojson": "data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-5.geojson",
+      "baseline:data/regional-review/french-polynesia-group-boundaries-20261005/source/loc-commune-associee.zip": "data/regional-review/french-polynesia-group-boundaries-20261005/source/loc-commune-associee.zip",
+      "baseline:data/regional-review/french-polynesia-group-boundaries-20261005/source/loc-groupe-ile.zip": "data/regional-review/french-polynesia-group-boundaries-20261005/source/loc-groupe-ile.zip",
+      "baseline:data/regional-review/french-polynesia-group-boundaries-20261005/source/loc-ile.zip": "data/regional-review/french-polynesia-group-boundaries-20261005/source/loc-ile.zip",
+      "baseline:data/regional-review/french-polynesia-group-boundaries-20261005/verify.py": "data/regional-review/french-polynesia-group-boundaries-20261005/verify.py"
+    },
+    "pins": {
+      "baseline:data/geography/part-28.json": "2aab2f36aeeb651ee8e6cc656e9541ad14e2ced2ea8160e8700ad4dc950c379d",
+      "baseline:data/regional-review/french-polynesia-group-boundaries-20261005/evidence-quality.json": "2ef3cd496e24c520a98331497dbe6195779c4106189fef062431df233f337eb6",
+      "baseline:data/regional-review/french-polynesia-group-boundaries-20261005/source/admin-divisions.geojson": "88a970ed225298e6f1d06d9d4a12659c74d64389e1e73463505ad52f7bae027f",
+      "baseline:data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-1.geojson": "6179ac6a617f56e3f298d5564db513ab49310c288a6d178158bfaf273852f069",
+      "baseline:data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-2.geojson": "9ef0719f4bfb842b9c5ccf6b4c0d87c7bde1d33ad24825dfd722612a4a983e9b",
+      "baseline:data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-3.geojson": "8bad07bfb6bb95dbfa384e4e3ffe389c988f79416fcf85215620acef1f759759",
+      "baseline:data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-4.geojson": "ddd015f5ee8f07faee6d1844575cb79ecf7dbf54ffdad96d713c32c450c10523",
+      "baseline:data/regional-review/french-polynesia-group-boundaries-20261005/source/island-group-5.geojson": "de4ea30975d1e135862f16beb3fbde6ab196c55b9537a32016645770212dc311",
+      "baseline:data/regional-review/french-polynesia-group-boundaries-20261005/source/loc-commune-associee.zip": "29230c18487385f84ca480e9b2c921ea389f848663a4a9574e77b9cbbf40db7b",
+      "baseline:data/regional-review/french-polynesia-group-boundaries-20261005/source/loc-groupe-ile.zip": "3f71d87855a6d46885396b6802ccfa19f559ca4b9876f6480cd122fcba42d6fb",
+      "baseline:data/regional-review/french-polynesia-group-boundaries-20261005/source/loc-ile.zip": "5018fa62ff269ae5b93502218213ce57baa36f31fcbf9d12b47bd36e12a6e29b",
+      "baseline:data/regional-review/french-polynesia-group-boundaries-20261005/verify.py": "d86958c5c1ab8259195db39391cd80f6633b3147907aebfb4e1fed3e644dc30f"
+    },
+    "subject_files": {
+      "PYF-4963": "data/geography/part-28.json",
+      "PYF-4964": "data/geography/part-28.json",
+      "PYF-4965": "data/geography/part-28.json",
+      "PYF-4966": "data/geography/part-28.json",
+      "PYF-4967": "data/geography/part-28.json"
+    }
+  },
+  "change_receipts": [
+    {
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/README.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/RESEARCH.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/SOURCES.md",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/reproduce_crs_sensitivity.py",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/source-fingerprints.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/sensitivity-input-set.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/positive-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/negative-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/reproducibility-validation.json",
+      "status": "added"
+    },
+    {
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "python3 data/regional-review/french-polynesia-crs-provenance-correction/reproduce_crs_sensitivity.py",
+    "node scripts/evidence-quality.mjs data/regional-review/french-polynesia-crs-provenance-correction/evidence-quality.json"
+  ],
+  "conclusions": [
+    {
+      "source_ids": [
+        "daf-rgpf"
+      ],
+      "status": "supported",
+      "text": "The three DAF archive PRJ files declare RGPF / GRS 1980 (EPSG:4687), not EPSG:4326."
+    },
+    {
+      "source_ids": [
+        "rfc7946",
+        "proj-epsg-db"
+      ],
+      "status": "supported",
+      "text": "Mapshaper default export does not perform a meaningful RGPF-to-WGS84 datum transformation; GeoJSON RFC 7946 semantics therefore require an explicit operation before native RGPF values are represented as WGS84."
+    },
+    {
+      "source_ids": [
+        "proj-epsg-db"
+      ],
+      "status": "unresolved",
+      "text": "EPSG:8828 and EPSG:15833 are candidate sensitivity operations only; DAF intent and production operation remain unresolved."
+    },
+    {
+      "source_ids": [
+        "daf-catalog",
+        "daf-rgpf",
+        "commune-decrees"
+      ],
+      "status": "unresolved",
+      "text": "The source polygons, 2026 legal currency, full island/reef/bank completeness, and downstream authorization remain unresolved."
+    }
+  ],
+  "issue": 1294,
+  "lane": "geography",
+  "methods": [
+    {
+      "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+      "axis_order": "longitude-latitude",
+      "crs": "EPSG:4326",
+      "description": "Reproduce pinned raw RGPF-coordinate overlap outputs and compare them to EPSG:8828 transformed coordinates; evaluate operation metadata, axis-order controls and area sensitivity; no DAF operation is selected.",
+      "distance_method": "WGS84 inverse geodesic",
+      "helper_version": "worldatlas-evidence-geometry-v1",
+      "id": "rgpf-to-wgs84-sensitivity-v1",
+      "kind": "geography",
+      "software": "Python 3.12.14; NumPy 2.3.5; Shapely 2.1.2; pyproj 3.7.2; PROJ 9.5.1 EPSG v11.022; Mapshaper 0.6.121; Node 24.19.0",
+      "units": "m2, fraction, metres, feature count"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "json_pointer": "/subject_sensitivity/0/raw_interpretation/intersection_over_union",
+      "metric_id": "pyf-4963-raw-iou",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "rendered_path": "data/regional-review/french-polynesia-crs-provenance-correction/RESEARCH.md",
+      "rendered_row": "PYF-4963"
+    },
+    {
+      "json_pointer": "/subject_sensitivity/0/epsg_8828_position_vector/intersection_over_union",
+      "metric_id": "pyf-4963-epsg-8828-iou",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "rendered_path": "data/regional-review/french-polynesia-crs-provenance-correction/RESEARCH.md",
+      "rendered_row": "PYF-4963"
+    },
+    {
+      "json_pointer": "/subject_sensitivity/0/delta_m2_or_ratio/intersection_over_union",
+      "metric_id": "pyf-4963-delta-iou",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "rendered_path": "data/regional-review/french-polynesia-crs-provenance-correction/RESEARCH.md",
+      "rendered_row": "PYF-4963"
+    },
+    {
+      "json_pointer": "/subject_sensitivity/0/delta_m2_or_ratio/intersection_area_m2",
+      "metric_id": "pyf-4963-delta-intersection-area",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "rendered_path": "data/regional-review/french-polynesia-crs-provenance-correction/RESEARCH.md",
+      "rendered_row": "PYF-4963"
+    },
+    {
+      "json_pointer": "/subject_sensitivity/1/raw_interpretation/intersection_over_union",
+      "metric_id": "pyf-4964-raw-iou",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "rendered_path": "data/regional-review/french-polynesia-crs-provenance-correction/RESEARCH.md",
+      "rendered_row": "PYF-4964"
+    },
+    {
+      "json_pointer": "/subject_sensitivity/1/epsg_8828_position_vector/intersection_over_union",
+      "metric_id": "pyf-4964-epsg-8828-iou",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "rendered_path": "data/regional-review/french-polynesia-crs-provenance-correction/RESEARCH.md",
+      "rendered_row": "PYF-4964"
+    },
+    {
+      "json_pointer": "/subject_sensitivity/1/delta_m2_or_ratio/intersection_over_union",
+      "metric_id": "pyf-4964-delta-iou",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "rendered_path": "data/regional-review/french-polynesia-crs-provenance-correction/RESEARCH.md",
+      "rendered_row": "PYF-4964"
+    },
+    {
+      "json_pointer": "/subject_sensitivity/1/delta_m2_or_ratio/intersection_area_m2",
+      "metric_id": "pyf-4964-delta-intersection-area",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "rendered_path": "data/regional-review/french-polynesia-crs-provenance-correction/RESEARCH.md",
+      "rendered_row": "PYF-4964"
+    },
+    {
+      "json_pointer": "/subject_sensitivity/2/raw_interpretation/intersection_over_union",
+      "metric_id": "pyf-4965-raw-iou",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "rendered_path": "data/regional-review/french-polynesia-crs-provenance-correction/RESEARCH.md",
+      "rendered_row": "PYF-4965"
+    },
+    {
+      "json_pointer": "/subject_sensitivity/2/epsg_8828_position_vector/intersection_over_union",
+      "metric_id": "pyf-4965-epsg-8828-iou",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "rendered_path": "data/regional-review/french-polynesia-crs-provenance-correction/RESEARCH.md",
+      "rendered_row": "PYF-4965"
+    },
+    {
+      "json_pointer": "/subject_sensitivity/2/delta_m2_or_ratio/intersection_over_union",
+      "metric_id": "pyf-4965-delta-iou",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "rendered_path": "data/regional-review/french-polynesia-crs-provenance-correction/RESEARCH.md",
+      "rendered_row": "PYF-4965"
+    },
+    {
+      "json_pointer": "/subject_sensitivity/2/delta_m2_or_ratio/intersection_area_m2",
+      "metric_id": "pyf-4965-delta-intersection-area",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "rendered_path": "data/regional-review/french-polynesia-crs-provenance-correction/RESEARCH.md",
+      "rendered_row": "PYF-4965"
+    },
+    {
+      "json_pointer": "/subject_sensitivity/3/raw_interpretation/intersection_over_union",
+      "metric_id": "pyf-4966-raw-iou",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "rendered_path": "data/regional-review/french-polynesia-crs-provenance-correction/RESEARCH.md",
+      "rendered_row": "PYF-4966"
+    },
+    {
+      "json_pointer": "/subject_sensitivity/3/epsg_8828_position_vector/intersection_over_union",
+      "metric_id": "pyf-4966-epsg-8828-iou",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "rendered_path": "data/regional-review/french-polynesia-crs-provenance-correction/RESEARCH.md",
+      "rendered_row": "PYF-4966"
+    },
+    {
+      "json_pointer": "/subject_sensitivity/3/delta_m2_or_ratio/intersection_over_union",
+      "metric_id": "pyf-4966-delta-iou",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "rendered_path": "data/regional-review/french-polynesia-crs-provenance-correction/RESEARCH.md",
+      "rendered_row": "PYF-4966"
+    },
+    {
+      "json_pointer": "/subject_sensitivity/3/delta_m2_or_ratio/intersection_area_m2",
+      "metric_id": "pyf-4966-delta-intersection-area",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "rendered_path": "data/regional-review/french-polynesia-crs-provenance-correction/RESEARCH.md",
+      "rendered_row": "PYF-4966"
+    },
+    {
+      "json_pointer": "/subject_sensitivity/4/raw_interpretation/intersection_over_union",
+      "metric_id": "pyf-4967-raw-iou",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "rendered_path": "data/regional-review/french-polynesia-crs-provenance-correction/RESEARCH.md",
+      "rendered_row": "PYF-4967"
+    },
+    {
+      "json_pointer": "/subject_sensitivity/4/epsg_8828_position_vector/intersection_over_union",
+      "metric_id": "pyf-4967-epsg-8828-iou",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "rendered_path": "data/regional-review/french-polynesia-crs-provenance-correction/RESEARCH.md",
+      "rendered_row": "PYF-4967"
+    },
+    {
+      "json_pointer": "/subject_sensitivity/4/delta_m2_or_ratio/intersection_over_union",
+      "metric_id": "pyf-4967-delta-iou",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "rendered_path": "data/regional-review/french-polynesia-crs-provenance-correction/RESEARCH.md",
+      "rendered_row": "PYF-4967"
+    },
+    {
+      "json_pointer": "/subject_sensitivity/4/delta_m2_or_ratio/intersection_area_m2",
+      "metric_id": "pyf-4967-delta-intersection-area",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "rendered_path": "data/regional-review/french-polynesia-crs-provenance-correction/RESEARCH.md",
+      "rendered_row": "PYF-4967"
+    }
+  ],
+  "metrics": [
+    {
+      "evaluation_commit": "19b2ed4de5d41729c0942b0bb9f6839a54295fee",
+      "id": "pyf-4963-raw-iou",
+      "input_sha256": "e21d9db103d2253d54c5184f725309734befa4e5a1b5a614c6efd48d10712c6b",
+      "json_pointer": "/subject_sensitivity/0/raw_interpretation/intersection_over_union",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "unit": "fraction",
+      "value": 0.73494582,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "19b2ed4de5d41729c0942b0bb9f6839a54295fee",
+      "id": "pyf-4963-epsg-8828-iou",
+      "input_sha256": "e21d9db103d2253d54c5184f725309734befa4e5a1b5a614c6efd48d10712c6b",
+      "json_pointer": "/subject_sensitivity/0/epsg_8828_position_vector/intersection_over_union",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "unit": "fraction",
+      "value": 0.73489603,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "19b2ed4de5d41729c0942b0bb9f6839a54295fee",
+      "id": "pyf-4964-raw-iou",
+      "input_sha256": "e21d9db103d2253d54c5184f725309734befa4e5a1b5a614c6efd48d10712c6b",
+      "json_pointer": "/subject_sensitivity/1/raw_interpretation/intersection_over_union",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "unit": "fraction",
+      "value": 0.54776912,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "19b2ed4de5d41729c0942b0bb9f6839a54295fee",
+      "id": "pyf-4964-epsg-8828-iou",
+      "input_sha256": "e21d9db103d2253d54c5184f725309734befa4e5a1b5a614c6efd48d10712c6b",
+      "json_pointer": "/subject_sensitivity/1/epsg_8828_position_vector/intersection_over_union",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "unit": "fraction",
+      "value": 0.54773596,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "19b2ed4de5d41729c0942b0bb9f6839a54295fee",
+      "id": "pyf-4965-raw-iou",
+      "input_sha256": "e21d9db103d2253d54c5184f725309734befa4e5a1b5a614c6efd48d10712c6b",
+      "json_pointer": "/subject_sensitivity/2/raw_interpretation/intersection_over_union",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "unit": "fraction",
+      "value": 0.04777381,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "19b2ed4de5d41729c0942b0bb9f6839a54295fee",
+      "id": "pyf-4965-epsg-8828-iou",
+      "input_sha256": "e21d9db103d2253d54c5184f725309734befa4e5a1b5a614c6efd48d10712c6b",
+      "json_pointer": "/subject_sensitivity/2/epsg_8828_position_vector/intersection_over_union",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "unit": "fraction",
+      "value": 0.04777366,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "19b2ed4de5d41729c0942b0bb9f6839a54295fee",
+      "id": "pyf-4966-raw-iou",
+      "input_sha256": "e21d9db103d2253d54c5184f725309734befa4e5a1b5a614c6efd48d10712c6b",
+      "json_pointer": "/subject_sensitivity/3/raw_interpretation/intersection_over_union",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "unit": "fraction",
+      "value": 0.12245925,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "19b2ed4de5d41729c0942b0bb9f6839a54295fee",
+      "id": "pyf-4966-epsg-8828-iou",
+      "input_sha256": "e21d9db103d2253d54c5184f725309734befa4e5a1b5a614c6efd48d10712c6b",
+      "json_pointer": "/subject_sensitivity/3/epsg_8828_position_vector/intersection_over_union",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "unit": "fraction",
+      "value": 0.12245182,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "19b2ed4de5d41729c0942b0bb9f6839a54295fee",
+      "id": "pyf-4967-raw-iou",
+      "input_sha256": "e21d9db103d2253d54c5184f725309734befa4e5a1b5a614c6efd48d10712c6b",
+      "json_pointer": "/subject_sensitivity/4/raw_interpretation/intersection_over_union",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "unit": "fraction",
+      "value": 0.65760307,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "19b2ed4de5d41729c0942b0bb9f6839a54295fee",
+      "id": "pyf-4967-epsg-8828-iou",
+      "input_sha256": "e21d9db103d2253d54c5184f725309734befa4e5a1b5a614c6efd48d10712c6b",
+      "json_pointer": "/subject_sensitivity/4/epsg_8828_position_vector/intersection_over_union",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "unit": "fraction",
+      "value": 0.65752129,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "19b2ed4de5d41729c0942b0bb9f6839a54295fee",
+      "id": "pyf-4963-delta-iou",
+      "input_sha256": "e21d9db103d2253d54c5184f725309734befa4e5a1b5a614c6efd48d10712c6b",
+      "json_pointer": "/subject_sensitivity/0/delta_m2_or_ratio/intersection_over_union",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "unit": "fraction",
+      "value": -4.979e-05,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "19b2ed4de5d41729c0942b0bb9f6839a54295fee",
+      "id": "pyf-4963-delta-intersection-area",
+      "input_sha256": "e21d9db103d2253d54c5184f725309734befa4e5a1b5a614c6efd48d10712c6b",
+      "json_pointer": "/subject_sensitivity/0/delta_m2_or_ratio/intersection_area_m2",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "unit": "m2",
+      "value": -38884.32000005,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "19b2ed4de5d41729c0942b0bb9f6839a54295fee",
+      "id": "pyf-4964-delta-iou",
+      "input_sha256": "e21d9db103d2253d54c5184f725309734befa4e5a1b5a614c6efd48d10712c6b",
+      "json_pointer": "/subject_sensitivity/1/delta_m2_or_ratio/intersection_over_union",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "unit": "fraction",
+      "value": -3.316e-05,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "19b2ed4de5d41729c0942b0bb9f6839a54295fee",
+      "id": "pyf-4964-delta-intersection-area",
+      "input_sha256": "e21d9db103d2253d54c5184f725309734befa4e5a1b5a614c6efd48d10712c6b",
+      "json_pointer": "/subject_sensitivity/1/delta_m2_or_ratio/intersection_area_m2",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "unit": "m2",
+      "value": -9787.52000001,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "19b2ed4de5d41729c0942b0bb9f6839a54295fee",
+      "id": "pyf-4965-delta-iou",
+      "input_sha256": "e21d9db103d2253d54c5184f725309734befa4e5a1b5a614c6efd48d10712c6b",
+      "json_pointer": "/subject_sensitivity/2/delta_m2_or_ratio/intersection_over_union",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "unit": "fraction",
+      "value": -1.5e-07,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "19b2ed4de5d41729c0942b0bb9f6839a54295fee",
+      "id": "pyf-4965-delta-intersection-area",
+      "input_sha256": "e21d9db103d2253d54c5184f725309734befa4e5a1b5a614c6efd48d10712c6b",
+      "json_pointer": "/subject_sensitivity/2/delta_m2_or_ratio/intersection_area_m2",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "unit": "m2",
+      "value": -164.61,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "19b2ed4de5d41729c0942b0bb9f6839a54295fee",
+      "id": "pyf-4966-delta-iou",
+      "input_sha256": "e21d9db103d2253d54c5184f725309734befa4e5a1b5a614c6efd48d10712c6b",
+      "json_pointer": "/subject_sensitivity/3/delta_m2_or_ratio/intersection_over_union",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "unit": "fraction",
+      "value": -7.43e-06,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "19b2ed4de5d41729c0942b0bb9f6839a54295fee",
+      "id": "pyf-4966-delta-intersection-area",
+      "input_sha256": "e21d9db103d2253d54c5184f725309734befa4e5a1b5a614c6efd48d10712c6b",
+      "json_pointer": "/subject_sensitivity/3/delta_m2_or_ratio/intersection_area_m2",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "unit": "m2",
+      "value": -3048.05,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "19b2ed4de5d41729c0942b0bb9f6839a54295fee",
+      "id": "pyf-4967-delta-iou",
+      "input_sha256": "e21d9db103d2253d54c5184f725309734befa4e5a1b5a614c6efd48d10712c6b",
+      "json_pointer": "/subject_sensitivity/4/delta_m2_or_ratio/intersection_over_union",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "unit": "fraction",
+      "value": -8.178e-05,
+      "vintage": "current"
+    },
+    {
+      "evaluation_commit": "19b2ed4de5d41729c0942b0bb9f6839a54295fee",
+      "id": "pyf-4967-delta-intersection-area",
+      "input_sha256": "e21d9db103d2253d54c5184f725309734befa4e5a1b5a614c6efd48d10712c6b",
+      "json_pointer": "/subject_sensitivity/4/delta_m2_or_ratio/intersection_area_m2",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "unit": "m2",
+      "value": -64665.82000005,
+      "vintage": "current"
+    }
+  ],
+  "outputs": [
+    {
+      "bytes": 1974,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/README.md",
+      "sha256": "2bca92155a0f7fd451c16c15beb011396fd48fa47efcf4e64abb371815e019a8"
+    },
+    {
+      "bytes": 5327,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/RESEARCH.md",
+      "role": "generated-table",
+      "sha256": "8ddb422f08fc428f52882e35d150889a263b40f6751cd3026b397c765d2781da"
+    },
+    {
+      "bytes": 3305,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/SOURCES.md",
+      "sha256": "826e65eec6783f158f63cc9d933dda8374d1f56af2a36b95a67d38077f8fbb9b"
+    },
+    {
+      "bytes": 24555,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/reproduce_crs_sensitivity.py",
+      "sha256": "a909087e53181ace5daa518e87bee11eb6c167e63ca0e458b76136186c5f10ce"
+    },
+    {
+      "bytes": 22200,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/crs-sensitivity-results.json",
+      "sha256": "b393839096a330954edd38482a6910738828c6ce0b41c7395df273ff0b91fb8b"
+    },
+    {
+      "bytes": 3809,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/source-fingerprints.json",
+      "sha256": "3714b4a517ff2e56bdef3b4fe0be75a71a5aa0613a3b7e02997c13353f056137"
+    },
+    {
+      "bytes": 7902,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/sensitivity-input-set.json",
+      "sha256": "e21d9db103d2253d54c5184f725309734befa4e5a1b5a614c6efd48d10712c6b"
+    },
+    {
+      "bytes": 525,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/positive-controls.json",
+      "sha256": "48e1288a161f9c35dbafeb9b4a5613eb72e7c11b3c44bb9b198ac6b684ad2894"
+    },
+    {
+      "bytes": 435,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/negative-controls.json",
+      "sha256": "b685233884b8431a4811519620500340926c2f1dbb43d76d5b825bedb91753dc"
+    },
+    {
+      "bytes": 278,
+      "hash_kind": "file-bytes",
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/reproducibility-validation.json",
+      "sha256": "81851b4e95b3b9d942f1913692a2bd561915ba9d9e505a1dc6e669defe0802c4"
+    }
+  ],
+  "rendered_tables": [
+    {
+      "path": "data/regional-review/french-polynesia-crs-provenance-correction/RESEARCH.md",
+      "rows": [
+        {
+          "decimals": 8,
+          "line": 15,
+          "metric_id": "pyf-4963-raw-iou",
+          "scale": 1,
+          "template": "| PYF-4963 Windward Islands | Raw IoU | {value} | fraction |"
+        },
+        {
+          "decimals": 8,
+          "line": 16,
+          "metric_id": "pyf-4963-epsg-8828-iou",
+          "scale": 1,
+          "template": "| PYF-4963 Windward Islands | EPSG:8828 IoU | {value} | fraction |"
+        },
+        {
+          "decimals": 8,
+          "line": 17,
+          "metric_id": "pyf-4963-delta-iou",
+          "scale": 1,
+          "template": "| PYF-4963 Windward Islands | Delta IoU | {value} | fraction |"
+        },
+        {
+          "decimals": 2,
+          "line": 18,
+          "metric_id": "pyf-4963-delta-intersection-area",
+          "scale": 1,
+          "template": "| PYF-4963 Windward Islands | Delta intersection area | {value} | m\u00b2 |"
+        },
+        {
+          "decimals": 8,
+          "line": 19,
+          "metric_id": "pyf-4964-raw-iou",
+          "scale": 1,
+          "template": "| PYF-4964 Leeward Islands | Raw IoU | {value} | fraction |"
+        },
+        {
+          "decimals": 8,
+          "line": 20,
+          "metric_id": "pyf-4964-epsg-8828-iou",
+          "scale": 1,
+          "template": "| PYF-4964 Leeward Islands | EPSG:8828 IoU | {value} | fraction |"
+        },
+        {
+          "decimals": 8,
+          "line": 21,
+          "metric_id": "pyf-4964-delta-iou",
+          "scale": 1,
+          "template": "| PYF-4964 Leeward Islands | Delta IoU | {value} | fraction |"
+        },
+        {
+          "decimals": 2,
+          "line": 22,
+          "metric_id": "pyf-4964-delta-intersection-area",
+          "scale": 1,
+          "template": "| PYF-4964 Leeward Islands | Delta intersection area | {value} | m\u00b2 |"
+        },
+        {
+          "decimals": 8,
+          "line": 23,
+          "metric_id": "pyf-4965-raw-iou",
+          "scale": 1,
+          "template": "| PYF-4965 Tuamotu-Gambier | Raw IoU | {value} | fraction |"
+        },
+        {
+          "decimals": 8,
+          "line": 24,
+          "metric_id": "pyf-4965-epsg-8828-iou",
+          "scale": 1,
+          "template": "| PYF-4965 Tuamotu-Gambier | EPSG:8828 IoU | {value} | fraction |"
+        },
+        {
+          "decimals": 8,
+          "line": 25,
+          "metric_id": "pyf-4965-delta-iou",
+          "scale": 1,
+          "template": "| PYF-4965 Tuamotu-Gambier | Delta IoU | {value} | fraction |"
+        },
+        {
+          "decimals": 2,
+          "line": 26,
+          "metric_id": "pyf-4965-delta-intersection-area",
+          "scale": 1,
+          "template": "| PYF-4965 Tuamotu-Gambier | Delta intersection area | {value} | m\u00b2 |"
+        },
+        {
+          "decimals": 8,
+          "line": 27,
+          "metric_id": "pyf-4966-raw-iou",
+          "scale": 1,
+          "template": "| PYF-4966 Austral Islands | Raw IoU | {value} | fraction |"
+        },
+        {
+          "decimals": 8,
+          "line": 28,
+          "metric_id": "pyf-4966-epsg-8828-iou",
+          "scale": 1,
+          "template": "| PYF-4966 Austral Islands | EPSG:8828 IoU | {value} | fraction |"
+        },
+        {
+          "decimals": 8,
+          "line": 29,
+          "metric_id": "pyf-4966-delta-iou",
+          "scale": 1,
+          "template": "| PYF-4966 Austral Islands | Delta IoU | {value} | fraction |"
+        },
+        {
+          "decimals": 2,
+          "line": 30,
+          "metric_id": "pyf-4966-delta-intersection-area",
+          "scale": 1,
+          "template": "| PYF-4966 Austral Islands | Delta intersection area | {value} | m\u00b2 |"
+        },
+        {
+          "decimals": 8,
+          "line": 31,
+          "metric_id": "pyf-4967-raw-iou",
+          "scale": 1,
+          "template": "| PYF-4967 Marquesas Islands | Raw IoU | {value} | fraction |"
+        },
+        {
+          "decimals": 8,
+          "line": 32,
+          "metric_id": "pyf-4967-epsg-8828-iou",
+          "scale": 1,
+          "template": "| PYF-4967 Marquesas Islands | EPSG:8828 IoU | {value} | fraction |"
+        },
+        {
+          "decimals": 8,
+          "line": 33,
+          "metric_id": "pyf-4967-delta-iou",
+          "scale": 1,
+          "template": "| PYF-4967 Marquesas Islands | Delta IoU | {value} | fraction |"
+        },
+        {
+          "decimals": 2,
+          "line": 34,
+          "metric_id": "pyf-4967-delta-intersection-area",
+          "scale": 1,
+          "template": "| PYF-4967 Marquesas Islands | Delta intersection area | {value} | m\u00b2 |"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "daf-catalog",
+      "license": {
+        "status": "unknown",
+        "terms": "Catalog states CC BY but version and exact applicability to all archived files not independently confirmed."
+      },
+      "limit": "Catalog is not legal-boundary certification and no 2026 currentness established.",
+      "restoration": "HTTPS GET URL; compare exact response SHA-256 and byte count in source-fingerprints.json",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-07",
+      "role": "DAF layer catalog and license/vintage context",
+      "temporal_status": "reference",
+      "url": "https://www.data.gouv.fr/datasets/geographie-administrative-de-la-polynesie-francaise",
+      "verification": "verified",
+      "vintage": "Catalog updated 2022-02-28; source feature dates vary"
+    },
+    {
+      "id": "daf-rgpf",
+      "license": {
+        "status": "unknown",
+        "terms": "No page reuse terms assessed; no page body retained."
+      },
+      "limit": "Does not establish operation used for archived exports.",
+      "restoration": "HTTPS GET URL; body SHA-256 in source-fingerprints.json",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-07",
+      "role": "DAF statement of official geodetic standard",
+      "temporal_status": "reference",
+      "url": "https://www.service-public.pf/daf/cadastre/cellule-topo_accueil/",
+      "verification": "verified",
+      "vintage": "Arr\u00eat\u00e9 510/CM of 2018 as described on DAF page"
+    },
+    {
+      "id": "rfc7946",
+      "license": {
+        "status": "unknown",
+        "terms": "IETF Trust terms; no body retained."
+      },
+      "limit": "Defines GeoJSON semantics; does not identify DAF conversion.",
+      "restoration": "HTTPS GET URL; body SHA-256 in source-fingerprints.json",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-07",
+      "role": "GeoJSON coordinate reference semantics",
+      "temporal_status": "reference",
+      "url": "https://www.rfc-editor.org/rfc/rfc7946.txt",
+      "verification": "verified",
+      "vintage": "RFC 7946 (2016)"
+    },
+    {
+      "id": "proj-epsg-db",
+      "license": {
+        "status": "unknown",
+        "terms": "No database copied; restore via pyproj 3.7.2 runtime and verify exact proj.db hash."
+      },
+      "limit": "EPSG operation records are sensitivity candidates, not DAF direction.",
+      "restoration": "Install pyproj 3.7.2 with PROJ 9.5.1, locate bundled proj.db and verify SHA-256 ec8cea0a5490a6f9247d9063645049e0f93fb83307067ebfc859187f0539e67e",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-07",
+      "role": "Reproducible local operation definitions",
+      "temporal_status": "reference",
+      "url": "https://proj.org/",
+      "verification": "verified",
+      "vintage": "EPSG database v11.022 bundled with PROJ 9.5.1"
+    },
+    {
+      "id": "daf-geodetic-description",
+      "license": {
+        "status": "unknown",
+        "terms": "Page reuse terms not assessed; no body retained."
+      },
+      "limit": "Descriptive context does not establish the conversion used for the archived exports.",
+      "restoration": "HTTPS GET URL; exact body SHA-256 and byte count in source-fingerprints.json",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-07",
+      "role": "Official DAF RGPF geodetic system description",
+      "temporal_status": "reference",
+      "url": "https://www.service-public.pf/daf/cellule-topo_nosservices/",
+      "verification": "verified",
+      "vintage": "Current page retrieved 2026-10-07; references RGPF and former systems"
+    },
+    {
+      "id": "commune-decrees",
+      "license": {
+        "status": "unknown",
+        "terms": "Official legal links; reuse terms not separately assessed and no bytes retained."
+      },
+      "limit": "Defines commune subdivisions/counts, not the five figurative DAF group boundaries or complete island-object roster.",
+      "restoration": "Restore from this L\u00e9gifrance URL and the 2005 link in the prior packet references.",
+      "retention": "restoration-only",
+      "retrieved_at": "2026-10-06",
+      "role": "Official commune subdivision and roster counts",
+      "temporal_status": "reference",
+      "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000046768003/",
+      "verification": "verified",
+      "vintage": "2005/2022 decree context reviewed in the prior pinned evidence packet"
+    }
+  ],
+  "stages": {
+    "geographic_approval": "unapproved",
+    "implementation": "proposed",
+    "research": "complete"
+  },
+  "subject_ids": [
+    "PYF-4963",
+    "PYF-4964",
+    "PYF-4965",
+    "PYF-4966",
+    "PYF-4967"
+  ],
+  "subject_ids_sha256": "323fbef100fd5984251fc770d6d1133435fe796989915744e80a7c50c3e7e5ce",
+  "summaries": [
+    {
+      "metric_id": "pyf-4963-raw-iou",
+      "unit": "fraction",
+      "value": 0.73494582
+    },
+    {
+      "metric_id": "pyf-4963-epsg-8828-iou",
+      "unit": "fraction",
+      "value": 0.73489603
+    },
+    {
+      "metric_id": "pyf-4964-raw-iou",
+      "unit": "fraction",
+      "value": 0.54776912
+    },
+    {
+      "metric_id": "pyf-4964-epsg-8828-iou",
+      "unit": "fraction",
+      "value": 0.54773596
+    },
+    {
+      "metric_id": "pyf-4965-raw-iou",
+      "unit": "fraction",
+      "value": 0.04777381
+    },
+    {
+      "metric_id": "pyf-4965-epsg-8828-iou",
+      "unit": "fraction",
+      "value": 0.04777366
+    },
+    {
+      "metric_id": "pyf-4966-raw-iou",
+      "unit": "fraction",
+      "value": 0.12245925
+    },
+    {
+      "metric_id": "pyf-4966-epsg-8828-iou",
+      "unit": "fraction",
+      "value": 0.12245182
+    },
+    {
+      "metric_id": "pyf-4967-raw-iou",
+      "unit": "fraction",
+      "value": 0.65760307
+    },
+    {
+      "metric_id": "pyf-4967-epsg-8828-iou",
+      "unit": "fraction",
+      "value": 0.65752129
+    },
+    {
+      "metric_id": "pyf-4963-delta-iou",
+      "unit": "fraction",
+      "value": -4.979e-05
+    },
+    {
+      "metric_id": "pyf-4963-delta-intersection-area",
+      "unit": "m2",
+      "value": -38884.32000005
+    },
+    {
+      "metric_id": "pyf-4964-delta-iou",
+      "unit": "fraction",
+      "value": -3.316e-05
+    },
+    {
+      "metric_id": "pyf-4964-delta-intersection-area",
+      "unit": "m2",
+      "value": -9787.52000001
+    },
+    {
+      "metric_id": "pyf-4965-delta-iou",
+      "unit": "fraction",
+      "value": -1.5e-07
+    },
+    {
+      "metric_id": "pyf-4965-delta-intersection-area",
+      "unit": "m2",
+      "value": -164.61
+    },
+    {
+      "metric_id": "pyf-4966-delta-iou",
+      "unit": "fraction",
+      "value": -7.43e-06
+    },
+    {
+      "metric_id": "pyf-4966-delta-intersection-area",
+      "unit": "m2",
+      "value": -3048.05
+    },
+    {
+      "metric_id": "pyf-4967-delta-iou",
+      "unit": "fraction",
+      "value": -8.178e-05
+    },
+    {
+      "metric_id": "pyf-4967-delta-intersection-area",
+      "unit": "m2",
+      "value": -64665.82000005
+    }
+  ],
+  "validation": [
+    {
+      "evidence_path": "data/regional-review/french-polynesia-crs-provenance-correction/positive-controls.json",
+      "kind": "positive-control",
+      "method_id": "rgpf-to-wgs84-sensitivity-v1",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/french-polynesia-crs-provenance-correction/negative-controls.json",
+      "kind": "negative-control",
+      "method_id": "rgpf-to-wgs84-sensitivity-v1",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "data/regional-review/french-polynesia-crs-provenance-correction/reproducibility-validation.json",
+      "kind": "reproducibility",
+      "method_id": "rgpf-to-wgs84-sensitivity-v1",
+      "outcome": "passed"
+    }
+  ],
+  "version": 1,
+  "worker_id": "01a10947-7d6e-7ba2-98a1-a9f91dedabfc"
+}
