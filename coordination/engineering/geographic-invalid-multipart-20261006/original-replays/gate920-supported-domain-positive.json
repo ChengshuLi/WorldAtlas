@@ -1,0 +1,60 @@
+{
+  "accepted_shortest_edge_domain_is_valid": true,
+  "canonical_degree_area": 3.0,
+  "kind": "read-only supported-domain positive preflight, no implementation",
+  "note": "This legitimate supported-domain multipart is invalid in naive flat-longitude interpretation. A raw geometry.is_valid guard would incorrectly reject it; preserve declared shortest-edge domain and validate combined topology before union there.",
+  "original_geometry": {
+    "coordinates": [
+      [
+        [
+          [
+            179.0,
+            0.0
+          ],
+          [
+            -179.0,
+            0.0
+          ],
+          [
+            -179.0,
+            1.0
+          ],
+          [
+            179.0,
+            1.0
+          ],
+          [
+            179.0,
+            0.0
+          ]
+        ]
+      ],
+      [
+        [
+          [
+            1.0,
+            0.0
+          ],
+          [
+            1.0,
+            1.0
+          ],
+          [
+            0.0,
+            1.0
+          ],
+          [
+            0.0,
+            0.0
+          ],
+          [
+            1.0,
+            0.0
+          ]
+        ]
+      ]
+    ],
+    "type": "MultiPolygon"
+  },
+  "raw_flat_longitude_is_valid": false
+}

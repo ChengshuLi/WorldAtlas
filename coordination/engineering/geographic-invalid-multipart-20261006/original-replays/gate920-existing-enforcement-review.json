@@ -1,0 +1,104 @@
+{
+  "affected_closure": "all location polygons enter bbox/intersects neighbor index; exact changed footprints union and relevant neighbors; date-line \u00b1360 neighbor lookup",
+  "concrete_defect": {
+    "actual_gate_status": "no-new-regression",
+    "actual_geometry_errors": [],
+    "actual_regressions": 0,
+    "commit": "09f557dd650098e3b6b89fab5950ac9fe5ef8809",
+    "helper_overlap_budget": "max(1e-6 m2, area(result)*1e-10)",
+    "kind": "bounded actual immutable-code counterexample, not world audit",
+    "raw_candidate_is_valid": false,
+    "raw_internal_overlap_degree_squared": 1.0000000000276037e-18,
+    "runtime": {
+      "geos": "3.13.1",
+      "pyproj": "3.7.2",
+      "shapely": "2.1.2"
+    },
+    "whole_code_hashes": {
+      "scripts/check-geographic-regression.py": "84e58e6ce2b81dca64d4cc4e25e98d899325345447d3bd5ce8306d1474bf8d9e",
+      "scripts/ellipsoidal_area.py": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12",
+      "scripts/evidence/geometry.py": "944541968fcdf065b9c4b6105be227c3e0e14b6a20916f4fa21f851338c7a305",
+      "scripts/evidence/immutable.py": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd"
+    }
+  },
+  "controls_reviewed": "20 regression tests and 14 physical adjudication tests inspected, not rerun; bounded invalid multipart fixture actually executed",
+  "current_water_adjudication": "implemented despite stale doc: only exact lost-coverage findings, reviewed original licensed native physical-water source covering whole loss, resolved target/time/resolution uncertainty, exact issue/PR/claim/head bytes, independent source+geometry decision; every combined finding exhaustively bound; overlaps/invalid cannot be waived",
+  "detected_domains": [
+    "whole indexed live footprint geometry",
+    "new positive-area previously-covered loss",
+    "new positive-area pair overlap relative to baseline",
+    "unsupported/polar/hemisphere source-edge geometry",
+    "invalid single polygon shapes except reproduced multipart hole below"
+  ],
+  "enforcement": {
+    "combined": "worker-merge.yml geography job mandatory current base vs actual combined candidate, independent of application reuse",
+    "final": "merge-integration.mjs lines314/331-347 requires geography success and exact artifact base/candidate/trustedcode/gate_status; rejects stale main; water authority reread lines371-379",
+    "pr": "merge-integration-checks.yml geography job trusted immutable PRbase vs exact head"
+  },
+  "helper_other_tolerances": [
+    "ambiguous 180-degree edge detection abs_tol1e-12 degrees (rejects unsupported edge)",
+    "multipart internal-overlap rejection only above max(1e-6m2, resultarea*1e-10), materially permits invalid multipart normalization"
+  ],
+  "issue": 920,
+  "issue_state_observed": "closed",
+  "limits": [
+    "Existing unexplained gaps and existing overlaps are intentionally not regressions; this is differential prevention, not global repair or physical land/water classification.",
+    "Newly gained geometry is diagnostic only, not source or ownership approval.",
+    "Raster binary owner/RLE/latitude payload changes are not themselves in this applicability roster; only canonical-grid manifest is. Preventing native grid allocation/rendering holes is a separate domain.",
+    "Release payload geometry is pinned but differential compare consumes world-index geometry; release/data consistency must pass separate gates.",
+    "Geography certificates, hierarchy/crosswalk, historical claims and production publication remain separate.",
+    "docs/GEOGRAPHIC_REGRESSION.md still says water adjudication unfinished/no waiver, while current code implements strict reviewed adjudication."
+  ],
+  "no_author_implementation": true,
+  "no_new_issue_or_remote_post": true,
+  "regression_threshold_square_degrees": 0,
+  "reviewed_main_commit": "09f557dd650098e3b6b89fab5950ac9fe5ef8809",
+  "source_only_research": "unchanged live world-index parts/hierarchy/gridmanifest/release index/currentpointer/pointedrelease produce explicit not-applicable; source evidence does not count as live footprint integration",
+  "status": "bounded read-only existing gate review complete, one reproduced defect",
+  "whole_code_pins": {
+    ".github/workflows/merge-integration-checks.yml": {
+      "bytes": 9544,
+      "sha256": "d8d7b07bfbbbdf558308100cc9da7531ddc7d1a7ec73e9c24bc2bd7b9bd6c867"
+    },
+    ".github/workflows/worker-merge.yml": {
+      "bytes": 9253,
+      "sha256": "fb2545b2300f2d8f536eb278e6fb27c75bdfa0a09ff5aac168c1730ba844cc1b"
+    },
+    "docs/GEOGRAPHIC_REGRESSION.md": {
+      "bytes": 5753,
+      "sha256": "8cff47141a7e88b3833b2d7070f4ac1bfd918b38c50cfef41d47ad2958b82aac"
+    },
+    "scripts/check-geographic-adjudications.mjs": {
+      "bytes": 1374,
+      "sha256": "c1047ff3b45572ef4a668ab41360201b98e4eedff6f6553940b0c75a89f7da86"
+    },
+    "scripts/check-geographic-regression.py": {
+      "bytes": 13813,
+      "sha256": "84e58e6ce2b81dca64d4cc4e25e98d899325345447d3bd5ce8306d1474bf8d9e"
+    },
+    "scripts/evidence/geometry.py": {
+      "bytes": 5264,
+      "sha256": "944541968fcdf065b9c4b6105be227c3e0e14b6a20916f4fa21f851338c7a305"
+    },
+    "scripts/geographic-adjudication-api.mjs": {
+      "bytes": 12389,
+      "sha256": "ce0357365f791064971067e1e7a9a74e10dbe65e8437dfe3a0c64e708f86a7e8"
+    },
+    "scripts/geographic_adjudication.py": {
+      "bytes": 11758,
+      "sha256": "f5347aa32b4d0caf137b8d2f7308bf9946fbd857776c8516812255223d1f5ada"
+    },
+    "scripts/merge-integration.mjs": {
+      "bytes": 27048,
+      "sha256": "5f664eedd5628f058e79ded1654aeb37e5fd3e72161d14f116f1770325b83d1b"
+    },
+    "scripts/run-geographic-check.py": {
+      "bytes": 11788,
+      "sha256": "ed9ac2ba3ee15f966a6d1aa1a8f9af8d965ef66b6d6156d5a897aa9af684e7d6"
+    },
+    "test/geographic-regression.py": {
+      "bytes": 17833,
+      "sha256": "2e8dcee007aa7a17ab05daafce4614b7cd0d4bc74b9620b68deb5b5af60432c5"
+    }
+  }
+}

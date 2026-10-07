@@ -1,0 +1,760 @@
+{
+  "actual_existing_code_replay": true,
+  "immutable_commit": "09f557dd650098e3b6b89fab5950ac9fe5ef8809",
+  "no_changes_or_science_audit": true,
+  "rows": [
+    {
+      "baseline_raw_geometry": {
+        "coordinates": [
+          [
+            [
+              2e-06,
+              0.0
+            ],
+            [
+              2e-06,
+              1e-06
+            ],
+            [
+              0.0,
+              1e-06
+            ],
+            [
+              0.0,
+              0.0
+            ],
+            [
+              2e-06,
+              0.0
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "baseline_raw_valid": true,
+      "candidate_raw_geometry": {
+        "coordinates": [
+          [
+            [
+              [
+                1e-06,
+                0.0
+              ],
+              [
+                1e-06,
+                1e-06
+              ],
+              [
+                0.0,
+                1e-06
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                1e-06,
+                0.0
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                2e-06,
+                0.0
+              ],
+              [
+                2e-06,
+                1e-06
+              ],
+              [
+                9.99999e-07,
+                1e-06
+              ],
+              [
+                9.99999e-07,
+                0.0
+              ],
+              [
+                2e-06,
+                0.0
+              ]
+            ]
+          ]
+        ],
+        "type": "MultiPolygon"
+      },
+      "candidate_raw_valid": false,
+      "case": "tiny-overlap-candidate",
+      "geometry_errors": [],
+      "regressions": 0,
+      "status": "no-new-regression"
+    },
+    {
+      "baseline_raw_geometry": {
+        "coordinates": [
+          [
+            [
+              [
+                1e-06,
+                0.0
+              ],
+              [
+                1e-06,
+                1e-06
+              ],
+              [
+                0.0,
+                1e-06
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                1e-06,
+                0.0
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                2e-06,
+                0.0
+              ],
+              [
+                2e-06,
+                1e-06
+              ],
+              [
+                9.99999e-07,
+                1e-06
+              ],
+              [
+                9.99999e-07,
+                0.0
+              ],
+              [
+                2e-06,
+                0.0
+              ]
+            ]
+          ]
+        ],
+        "type": "MultiPolygon"
+      },
+      "baseline_raw_valid": false,
+      "candidate_raw_geometry": {
+        "coordinates": [
+          [
+            [
+              [
+                1e-06,
+                0.0
+              ],
+              [
+                1e-06,
+                1e-06
+              ],
+              [
+                0.0,
+                1e-06
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                1e-06,
+                0.0
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                2e-06,
+                0.0
+              ],
+              [
+                2e-06,
+                1e-06
+              ],
+              [
+                9.99999e-07,
+                1e-06
+              ],
+              [
+                9.99999e-07,
+                0.0
+              ],
+              [
+                2e-06,
+                0.0
+              ]
+            ]
+          ]
+        ],
+        "type": "MultiPolygon"
+      },
+      "candidate_raw_valid": false,
+      "case": "unchanged-tiny-overlap-baseline",
+      "geometry_errors": [],
+      "regressions": 0,
+      "status": "no-footprint-change"
+    },
+    {
+      "baseline_raw_geometry": {
+        "coordinates": [
+          [
+            [
+              [
+                1e-06,
+                0.0
+              ],
+              [
+                1e-06,
+                1e-06
+              ],
+              [
+                0.0,
+                1e-06
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                1e-06,
+                0.0
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                2e-06,
+                0.0
+              ],
+              [
+                2e-06,
+                1e-06
+              ],
+              [
+                9.99999e-07,
+                1e-06
+              ],
+              [
+                9.99999e-07,
+                0.0
+              ],
+              [
+                2e-06,
+                0.0
+              ]
+            ]
+          ]
+        ],
+        "type": "MultiPolygon"
+      },
+      "baseline_raw_valid": false,
+      "candidate_raw_geometry": {
+        "coordinates": [
+          [
+            [
+              2e-06,
+              0.0
+            ],
+            [
+              2e-06,
+              1e-06
+            ],
+            [
+              0.0,
+              1e-06
+            ],
+            [
+              0.0,
+              0.0
+            ],
+            [
+              2e-06,
+              0.0
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "candidate_raw_valid": true,
+      "case": "valid-correction-of-tiny-overlap-baseline",
+      "geometry_errors": [],
+      "regressions": 0,
+      "status": "no-new-regression"
+    },
+    {
+      "baseline_raw_geometry": {
+        "coordinates": [
+          [
+            [
+              [
+                1.0,
+                0.0
+              ],
+              [
+                1.0,
+                1.0
+              ],
+              [
+                0.0,
+                1.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                1.0,
+                0.0
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                3.0,
+                0.0
+              ],
+              [
+                3.0,
+                1.0
+              ],
+              [
+                2.0,
+                1.0
+              ],
+              [
+                2.0,
+                0.0
+              ],
+              [
+                3.0,
+                0.0
+              ]
+            ]
+          ]
+        ],
+        "type": "MultiPolygon"
+      },
+      "baseline_raw_valid": true,
+      "candidate_raw_geometry": {
+        "coordinates": [
+          [
+            [
+              [
+                1.0,
+                0.0
+              ],
+              [
+                1.0,
+                1.0
+              ],
+              [
+                0.0,
+                1.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                1.0,
+                0.0
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                3.0,
+                0.0
+              ],
+              [
+                3.0,
+                1.0
+              ],
+              [
+                2.0,
+                1.0
+              ],
+              [
+                2.0,
+                0.0
+              ],
+              [
+                3.0,
+                0.0
+              ]
+            ]
+          ]
+        ],
+        "type": "MultiPolygon"
+      },
+      "candidate_raw_valid": true,
+      "case": "valid-disjoint-multipart",
+      "geometry_errors": [],
+      "regressions": 0,
+      "status": "no-footprint-change"
+    },
+    {
+      "baseline_raw_geometry": {
+        "coordinates": [
+          [
+            [
+              [
+                1.0,
+                0.0
+              ],
+              [
+                1.0,
+                1.0
+              ],
+              [
+                0.0,
+                1.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                1.0,
+                0.0
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                2.0,
+                1.0
+              ],
+              [
+                2.0,
+                2.0
+              ],
+              [
+                1.0,
+                2.0
+              ],
+              [
+                1.0,
+                1.0
+              ],
+              [
+                2.0,
+                1.0
+              ]
+            ]
+          ]
+        ],
+        "type": "MultiPolygon"
+      },
+      "baseline_raw_valid": true,
+      "candidate_raw_geometry": {
+        "coordinates": [
+          [
+            [
+              [
+                1.0,
+                0.0
+              ],
+              [
+                1.0,
+                1.0
+              ],
+              [
+                0.0,
+                1.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                1.0,
+                0.0
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                2.0,
+                1.0
+              ],
+              [
+                2.0,
+                2.0
+              ],
+              [
+                1.0,
+                2.0
+              ],
+              [
+                1.0,
+                1.0
+              ],
+              [
+                2.0,
+                1.0
+              ]
+            ]
+          ]
+        ],
+        "type": "MultiPolygon"
+      },
+      "candidate_raw_valid": true,
+      "case": "valid-point-touching-multipart",
+      "geometry_errors": [],
+      "regressions": 0,
+      "status": "no-footprint-change"
+    },
+    {
+      "baseline_raw_geometry": {
+        "coordinates": [
+          [
+            [
+              2.0,
+              0.0
+            ],
+            [
+              2.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.0,
+              0.0
+            ],
+            [
+              2.0,
+              0.0
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "baseline_raw_valid": true,
+      "candidate_raw_geometry": {
+        "coordinates": [
+          [
+            [
+              [
+                1.0,
+                0.0
+              ],
+              [
+                1.0,
+                1.0
+              ],
+              [
+                0.0,
+                1.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                1.0,
+                0.0
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                2.0,
+                0.0
+              ],
+              [
+                2.0,
+                1.0
+              ],
+              [
+                1.0,
+                1.0
+              ],
+              [
+                1.0,
+                0.0
+              ],
+              [
+                2.0,
+                0.0
+              ]
+            ]
+          ]
+        ],
+        "type": "MultiPolygon"
+      },
+      "candidate_raw_valid": false,
+      "case": "invalid-shared-edge-multipart",
+      "geometry_errors": [],
+      "regressions": 0,
+      "status": "no-new-regression"
+    },
+    {
+      "baseline_raw_geometry": {
+        "coordinates": [
+          [
+            [
+              2.0,
+              0.0
+            ],
+            [
+              2.0,
+              1.0
+            ],
+            [
+              0.0,
+              1.0
+            ],
+            [
+              0.0,
+              0.0
+            ],
+            [
+              2.0,
+              0.0
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      },
+      "baseline_raw_valid": true,
+      "candidate_raw_geometry": {
+        "coordinates": [
+          [
+            [
+              [
+                1.0,
+                0.0
+              ],
+              [
+                1.0,
+                1.0
+              ],
+              [
+                0.0,
+                1.0
+              ],
+              [
+                0.0,
+                0.0
+              ],
+              [
+                1.0,
+                0.0
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                2.0,
+                0.0
+              ],
+              [
+                2.0,
+                1.0
+              ],
+              [
+                0.9,
+                1.0
+              ],
+              [
+                0.9,
+                0.0
+              ],
+              [
+                2.0,
+                0.0
+              ]
+            ]
+          ]
+        ],
+        "type": "MultiPolygon"
+      },
+      "candidate_raw_valid": false,
+      "case": "larger-overlap-rejected",
+      "geometry_errors": [
+        {
+          "location_id": "test",
+          "original_geometry": {
+            "coordinates": [
+              [
+                [
+                  [
+                    1.0,
+                    0.0
+                  ],
+                  [
+                    1.0,
+                    1.0
+                  ],
+                  [
+                    0.0,
+                    1.0
+                  ],
+                  [
+                    0.0,
+                    0.0
+                  ],
+                  [
+                    1.0,
+                    0.0
+                  ]
+                ]
+              ],
+              [
+                [
+                  [
+                    2.0,
+                    0.0
+                  ],
+                  [
+                    2.0,
+                    1.0
+                  ],
+                  [
+                    0.9,
+                    1.0
+                  ],
+                  [
+                    0.9,
+                    0.0
+                  ],
+                  [
+                    2.0,
+                    0.0
+                  ]
+                ]
+              ]
+            ],
+            "type": "MultiPolygon"
+          },
+          "reason": "Overlapping source multipart land; inspect instead of silently repairing",
+          "vintage": "candidate"
+        }
+      ],
+      "regressions": null,
+      "status": "blocked-invalid-or-unsupported-geometry"
+    }
+  ]
+}

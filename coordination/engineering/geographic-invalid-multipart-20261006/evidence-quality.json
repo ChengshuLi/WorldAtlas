@@ -1,0 +1,341 @@
+{
+  "baseline": {
+    "commit": "aa0457bfeb80c7359c1f39c82ae9bd7f63da2de2",
+    "files": [
+      {
+        "bytes": 286,
+        "hash_kind": "file-bytes",
+        "path": ".github/evidence-policy.json",
+        "sha256": "ea67d5b8cea88fb6aa5e48366923e06cc06f10977ba320684e8fd04a21d659c2"
+      },
+      {
+        "bytes": 5753,
+        "hash_kind": "file-bytes",
+        "path": "docs/GEOGRAPHIC_REGRESSION.md",
+        "sha256": "8cff47141a7e88b3833b2d7070f4ac1bfd918b38c50cfef41d47ad2958b82aac"
+      },
+      {
+        "bytes": 1417,
+        "hash_kind": "file-bytes",
+        "path": "package.json",
+        "sha256": "2af9169f046047a5cbc14592bdd776740d1b6e2871ec8216fa4a0b5e52b739a3"
+      },
+      {
+        "bytes": 146,
+        "hash_kind": "file-bytes",
+        "path": "requirements.txt",
+        "sha256": "1c3f3b9598e474af751e25ff0839cbf5c4a9931a59b4ffaaff1a56c6e2f0e2c9"
+      },
+      {
+        "bytes": 13813,
+        "hash_kind": "file-bytes",
+        "path": "scripts/check-geographic-regression.py",
+        "sha256": "84e58e6ce2b81dca64d4cc4e25e98d899325345447d3bd5ce8306d1474bf8d9e"
+      },
+      {
+        "bytes": 1953,
+        "hash_kind": "file-bytes",
+        "path": "scripts/ellipsoidal_area.py",
+        "sha256": "4ead1c5de909b257a7b300984e4d3dc56124e9a6c0d27240662024e44fd8ed12"
+      },
+      {
+        "bytes": 5264,
+        "hash_kind": "file-bytes",
+        "path": "scripts/evidence/geometry.py",
+        "sha256": "944541968fcdf065b9c4b6105be227c3e0e14b6a20916f4fa21f851338c7a305"
+      },
+      {
+        "bytes": 7090,
+        "hash_kind": "file-bytes",
+        "path": "scripts/evidence/immutable.py",
+        "sha256": "b7ff607b7774595788396e94f08fc29d750e4032624eb93732a5735c1ddcf7fd"
+      },
+      {
+        "bytes": 11788,
+        "hash_kind": "file-bytes",
+        "path": "scripts/run-geographic-check.py",
+        "sha256": "ed9ac2ba3ee15f966a6d1aa1a8f9af8d965ef66b6d6156d5a897aa9af684e7d6"
+      },
+      {
+        "bytes": 7292,
+        "hash_kind": "file-bytes",
+        "path": "src/regional-import-gate.js",
+        "sha256": "83215f326c85b6f95c21f5560c7f0477c581b1e37a1a4f52de4ef39741dabf7d"
+      },
+      {
+        "bytes": 17833,
+        "hash_kind": "file-bytes",
+        "path": "test/geographic-regression.py",
+        "sha256": "2e8dcee007aa7a17ab05daafce4614b7cd0d4bc74b9620b68deb5b5af60432c5"
+      },
+      {
+        "bytes": 510,
+        "hash_kind": "file-bytes",
+        "path": "test/geographic-regression.test.mjs",
+        "sha256": "f379c1f355f0b1d0492515e543da55b0dd67172b5edcdd04694d50b019c482af"
+      },
+      {
+        "bytes": 18903,
+        "hash_kind": "file-bytes",
+        "path": "test/trusted-geography-check.py",
+        "sha256": "e4f3471312831e4bb0dc9d1386a56d4254bd7ee1fa21527b4ecacf9b87d59238"
+      }
+    ],
+    "pin_files": {
+      "detector_sha256": "scripts/check-geographic-regression.py",
+      "geometry_helper_sha256": "scripts/evidence/geometry.py"
+    },
+    "pins": {
+      "detector_sha256": "84e58e6ce2b81dca64d4cc4e25e98d899325345447d3bd5ce8306d1474bf8d9e",
+      "geometry_helper_sha256": "944541968fcdf065b9c4b6105be227c3e0e14b6a20916f4fa21f851338c7a305"
+    },
+    "subject_files": {}
+  },
+  "change_receipts": [
+    {
+      "original_sha256": "944541968fcdf065b9c4b6105be227c3e0e14b6a20916f4fa21f851338c7a305",
+      "path": "scripts/evidence/geometry.py",
+      "status": "modified"
+    },
+    {
+      "original_sha256": "2e8dcee007aa7a17ab05daafce4614b7cd0d4bc74b9620b68deb5b5af60432c5",
+      "path": "test/geographic-regression.py",
+      "status": "modified"
+    },
+    {
+      "original_sha256": "f379c1f355f0b1d0492515e543da55b0dd67172b5edcdd04694d50b019c482af",
+      "path": "test/geographic-regression.test.mjs",
+      "status": "modified"
+    },
+    {
+      "original_sha256": "8cff47141a7e88b3833b2d7070f4ac1bfd918b38c50cfef41d47ad2958b82aac",
+      "path": "docs/GEOGRAPHIC_REGRESSION.md",
+      "status": "modified"
+    },
+    {
+      "path": "coordination/engineering/geographic-invalid-multipart-20261006/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-invalid-multipart-20261006/controls/run-one/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-invalid-multipart-20261006/controls/run-one/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-invalid-multipart-20261006/controls/run-one/results.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-invalid-multipart-20261006/controls/run-two/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-invalid-multipart-20261006/controls/run-two/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-invalid-multipart-20261006/controls/run-two/results.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-invalid-multipart-20261006/original-replays/gate920-bounded-multipart-fixtures.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-invalid-multipart-20261006/original-replays/gate920-existing-enforcement-review.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-invalid-multipart-20261006/original-replays/gate920-supported-domain-positive.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-invalid-multipart-20261006/original-replays/gate920-tiny-invalid-multipart-counterexample.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-invalid-multipart-20261006/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/geographic-invalid-multipart-20261006/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "commands": [
+    "python test/geographic-regression.py --receipts NEW_ABSENT_DIRECTORY --code-commit 4397e0697f10432fb35004cf01324b747fb697a8"
+  ],
+  "conclusions": [
+    {
+      "source_ids": [],
+      "status": "unresolved",
+      "text": "Bounded implementation and synthetic controls prevent invalid multipart normalization; complete baseline defects and source-only non-applicability remain explicit. No geographic/source/water/ownership/repair or deployment approval."
+    }
+  ],
+  "issue": 1267,
+  "lane": "engineering",
+  "methods": [
+    {
+      "description": "Boolean original-member GEOS topology checks before union in declared shortest-edge/periodic longitude domain; synthetic immutable PR/combined-candidate branch and raw-defect retention controls.",
+      "id": "geographic-regression",
+      "kind": "measurement",
+      "software": "Python 3.12.14 / Shapely 2.1.2 / GEOS 3.13.1 / PyProj 3.7.2",
+      "units": "tests; topology predicates; source-coordinate degrees, no geographic area or distance metric"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "json_pointer": "/tests",
+      "metric_id": "controls",
+      "path": "coordination/engineering/geographic-invalid-multipart-20261006/controls/run-one/results.json"
+    }
+  ],
+  "metrics": [
+    {
+      "evaluation_commit": "4397e0697f10432fb35004cf01324b747fb697a8",
+      "id": "controls",
+      "input_sha256": "4659ed6315e4ecba835572877025628e8d2952793e5440baedc3f2c9a47b3aff",
+      "unit": "tests",
+      "value": 29,
+      "vintage": "archived"
+    }
+  ],
+  "outputs": [
+    {
+      "bytes": 6573,
+      "hash_kind": "file-bytes",
+      "path": "scripts/evidence/geometry.py",
+      "sha256": "0b8e5b155c7a68b802b99a3597c63ac48293f276e682d34e9167cb5105b2a334"
+    },
+    {
+      "bytes": 27085,
+      "hash_kind": "file-bytes",
+      "path": "test/geographic-regression.py",
+      "sha256": "4659ed6315e4ecba835572877025628e8d2952793e5440baedc3f2c9a47b3aff"
+    },
+    {
+      "bytes": 510,
+      "hash_kind": "file-bytes",
+      "path": "test/geographic-regression.test.mjs",
+      "sha256": "8240fba579be2531ef9f55de136fca8193ace9921515fb904ddc0071d96fe014"
+    },
+    {
+      "bytes": 6807,
+      "hash_kind": "file-bytes",
+      "path": "docs/GEOGRAPHIC_REGRESSION.md",
+      "sha256": "3742cc4427584c4821746e4acaa722d540a92ec24c3dfd6cc55bbb9fa465dcf6"
+    },
+    {
+      "bytes": 2485,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-invalid-multipart-20261006/README.md",
+      "sha256": "9dbe5a15840e528594d37493ca54dc535d9192ab84e3826c5949919c24dc6e6c"
+    },
+    {
+      "bytes": 2573,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-invalid-multipart-20261006/controls/run-one/negative-control.json",
+      "sha256": "35ab2e545696efbf992fe64eb6a2de661d0efa8b4bab55f546b5394aac020dc0"
+    },
+    {
+      "bytes": 3236,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-invalid-multipart-20261006/controls/run-one/positive-control.json",
+      "sha256": "43bcf4b086e60fd073b45c1b6c103e99c3811798ce5d99eea6a2c764257216c8"
+    },
+    {
+      "bytes": 3567,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-invalid-multipart-20261006/controls/run-one/results.json",
+      "sha256": "207177937f04a03f308773ddfdb1333434e08ad4c991c4210e6682c791c025c5"
+    },
+    {
+      "bytes": 2573,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-invalid-multipart-20261006/controls/run-two/negative-control.json",
+      "sha256": "35ab2e545696efbf992fe64eb6a2de661d0efa8b4bab55f546b5394aac020dc0"
+    },
+    {
+      "bytes": 3236,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-invalid-multipart-20261006/controls/run-two/positive-control.json",
+      "sha256": "43bcf4b086e60fd073b45c1b6c103e99c3811798ce5d99eea6a2c764257216c8"
+    },
+    {
+      "bytes": 3567,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-invalid-multipart-20261006/controls/run-two/results.json",
+      "sha256": "207177937f04a03f308773ddfdb1333434e08ad4c991c4210e6682c791c025c5"
+    },
+    {
+      "bytes": 14591,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-invalid-multipart-20261006/original-replays/gate920-bounded-multipart-fixtures.json",
+      "sha256": "6c88bcd1c8bf31fa020b702f576fb060da9067cb36edc9f5d21292147163bb95"
+    },
+    {
+      "bytes": 5935,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-invalid-multipart-20261006/original-replays/gate920-existing-enforcement-review.json",
+      "sha256": "3827e1c5eacd15dd50438d1e017ba548909eda805d35459a0e4742da0d650f44"
+    },
+    {
+      "bytes": 1207,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-invalid-multipart-20261006/original-replays/gate920-supported-domain-positive.json",
+      "sha256": "b7442a54732e6212b7caea158968efb99af162322c6c93e4496cbd105a2e38d0"
+    },
+    {
+      "bytes": 944,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-invalid-multipart-20261006/original-replays/gate920-tiny-invalid-multipart-counterexample.json",
+      "sha256": "7252f6934db266c818fa23b23ec3df932cbfa6ba6d2bec85d4449b05d5c2d519"
+    },
+    {
+      "bytes": 1215,
+      "hash_kind": "file-bytes",
+      "path": "coordination/engineering/geographic-invalid-multipart-20261006/reproducibility.json",
+      "sha256": "49ab5594eb53d7b245fd24c93c10aca3718dbfd66f35b939994feb0e2920b09e"
+    }
+  ],
+  "sources": [],
+  "stages": {
+    "geographic_approval": "not-requested",
+    "implementation": "proposed",
+    "research": "partial"
+  },
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "summaries": [
+    {
+      "metric_id": "controls",
+      "unit": "tests",
+      "value": 29
+    }
+  ],
+  "validation": [
+    {
+      "evidence_path": "coordination/engineering/geographic-invalid-multipart-20261006/controls/run-one/positive-control.json",
+      "kind": "positive-control",
+      "method_id": "geographic-regression",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "coordination/engineering/geographic-invalid-multipart-20261006/controls/run-one/negative-control.json",
+      "kind": "negative-control",
+      "method_id": "geographic-regression",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "coordination/engineering/geographic-invalid-multipart-20261006/reproducibility.json",
+      "kind": "reproducibility",
+      "method_id": "geographic-regression",
+      "outcome": "passed"
+    }
+  ],
+  "version": 1,
+  "worker_id": "01a10fea-fe9b-7722-a974-0269a733a330"
+}
