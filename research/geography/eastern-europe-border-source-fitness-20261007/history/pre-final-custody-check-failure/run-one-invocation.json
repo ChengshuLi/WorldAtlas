@@ -1,0 +1,20 @@
+{
+  "command": [
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/produce.py",
+    "--inputs",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/inputs",
+    "--output",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/runs/run-one"
+  ],
+  "cwd": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work",
+  "ended_unix_ns": 1791363253007590000,
+  "exit_code": 1,
+  "outcome": "failed",
+  "producer_sha256_after": "6147fa7e8cc5c1943a939cca8a66514e6f4e1eec0fbe47245f7cc697db6c377d",
+  "producer_sha256_before": "6147fa7e8cc5c1943a939cca8a66514e6f4e1eec0fbe47245f7cc697db6c377d",
+  "run_id": "run-one",
+  "started_unix_ns": 1791363251710806000,
+  "stderr": "{\"reason\": \"Git blob identity mismatch: coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-BLR-ADM2-000.bin.gz\", \"status\": \"rejected\"}\nTraceback (most recent call last):\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/produce.py\", line 243, in <module>\n    try: main()\n         ^^^^^^\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/produce.py\", line 139, in main\n    custody, checked=verify_custody(inputs)\n                     ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/produce.py\", line 89, in verify_custody\n    if oid!=rec[\"origin_blob_oid\"]: raise EvidenceError(f\"Git blob identity mismatch: {rec['origin_path']}\")\n                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nEvidenceError: Git blob identity mismatch: coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-BLR-ADM2-000.bin.gz\n",
+  "stdout": ""
+}

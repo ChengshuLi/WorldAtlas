@@ -1,0 +1,20 @@
+{
+  "command": [
+    "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/produce.py",
+    "--inputs",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/inputs",
+    "--output",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/runs/run-two"
+  ],
+  "cwd": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work",
+  "ended_unix_ns": 1791363314251365000,
+  "exit_code": 0,
+  "outcome": "passed",
+  "producer_sha256_after": "84d49fe775a36375331cb37c56f010576caf83d3a12b18e888aabbd8434e23ca",
+  "producer_sha256_before": "84d49fe775a36375331cb37c56f010576caf83d3a12b18e888aabbd8434e23ca",
+  "run_id": "run-two",
+  "started_unix_ns": 1791363308192338000,
+  "stderr": "",
+  "stdout": "{\"candidate_id\":\"physical-gap:1624:42:d40fef6eb0e28f8ab7556c90e2a934b6d2114f155c633c17d324cbf319058184\",\"complete_current_contacts\":9,\"component_id\":\"physical-component:e30c80444254d81f52df404c8a084164b44849c5a93d2abb7fc1212e31b030a8\",\"family_id\":\"gap-source-batch:70c8e23708e01b28b207d2e8\",\"metric_units\":\"m\\u00b2; shared worldatlas-evidence-geometry-v1 WGS84 straight-source-edge ellipsoidal integral; predicates in longitude,latitude EPSG:4326 coordinate plane\",\"outputs\":{\"feature-inventory.json\":{\"bytes\":52387,\"sha256\":\"4ad640fea6e2e2ef2d024c73bb24410ad1f7cf62fc9c00264351bf1bc389fd57\"},\"scope-reconciliation.json\":{\"bytes\":8937,\"sha256\":\"85fb92f2e10b4b231b7d6b793d4b1d01d4f5312d15fed0b704a58d0482574521\"},\"source-fitness.json\":{\"bytes\":53627,\"sha256\":\"d1d9b947975c853cdcda21c2f43800fe1f64069340bcf296090c603ac3822f33\"},\"whole-source-neighbor-overlays.csv\":{\"bytes\":62202,\"sha256\":\"5fd38d147b673acd1c25376f873bbf08003efc3c4679b2b014d53b9ef955ace8\"}},\"source_custody_sha256\":\"02475c6a15f53dc276fa9bc39a82df97fb8de1f84d4ba37278427cd22f763f89\",\"source_files_verified\":29,\"source_products_scanned\":{\"BLR\":118,\"POL\":380,\"UKR\":495},\"status\":\"complete\",\"unknowns_preserved\":[\"legal international boundary and historical ownership\",\"whether the candidate is current dry land, river/channel, wetland, or registration mismatch\",\"source positional accuracy and transformation history for current Atlas contact geometry\",\"cause of full candidate; one prior local exact numerical contradiction is not a whole-component explanation\",\"source approval or engineering/publication permission\"]}\n"
+}

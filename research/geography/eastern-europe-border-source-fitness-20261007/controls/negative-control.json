@@ -1,0 +1,131 @@
+{
+  "controls": [
+    {
+      "case": "missing-contact",
+      "command": [
+        "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/produce.py",
+        "--inputs",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/inputs",
+        "--output",
+        "/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1344-m8tprzuc/output",
+        "--control",
+        "omit-contact"
+      ],
+      "exit_code": 1,
+      "expected_reason_contains": "candidate contact roster missing",
+      "observed": {
+        "reason": "candidate contact roster missing or foreign relative to issue contract",
+        "status": "rejected"
+      },
+      "outcome": "passed"
+    },
+    {
+      "case": "duplicate-contact",
+      "command": [
+        "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/produce.py",
+        "--inputs",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/inputs",
+        "--output",
+        "/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1344-wwq_yj2_/output",
+        "--control",
+        "duplicate-contact"
+      ],
+      "exit_code": 1,
+      "expected_reason_contains": "duplicate candidate contact ID",
+      "observed": {
+        "reason": "duplicate candidate contact ID",
+        "status": "rejected"
+      },
+      "outcome": "passed"
+    },
+    {
+      "case": "foreign-subject",
+      "command": [
+        "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/produce.py",
+        "--inputs",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/inputs",
+        "--output",
+        "/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1344-2jpt21j0/output",
+        "--control",
+        "foreign-subject"
+      ],
+      "exit_code": 1,
+      "expected_reason_contains": "candidate contact roster missing or foreign",
+      "observed": {
+        "reason": "candidate contact roster missing or foreign relative to issue contract",
+        "status": "rejected"
+      },
+      "outcome": "passed"
+    },
+    {
+      "case": "candidate-geometry-byte-change",
+      "command": [
+        "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/produce.py",
+        "--inputs",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/inputs",
+        "--output",
+        "/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1344-7wgcmg9x/output",
+        "--candidate-override",
+        "/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1344-controls-0tgg9tzx/candidate-geometry.json"
+      ],
+      "exit_code": 1,
+      "expected_reason_contains": "candidate full feature binding mismatch",
+      "observed": {
+        "reason": "candidate full feature binding mismatch",
+        "status": "rejected"
+      },
+      "outcome": "passed"
+    },
+    {
+      "case": "candidate-same-geometry-contact-metadata-byte-change",
+      "command": [
+        "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/produce.py",
+        "--inputs",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/inputs",
+        "--output",
+        "/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1344-v_kbfvjw/output",
+        "--candidate-override",
+        "/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1344-controls-0tgg9tzx/candidate-metadata.json"
+      ],
+      "exit_code": 1,
+      "expected_reason_contains": "candidate full feature binding mismatch",
+      "observed": {
+        "reason": "candidate full feature binding mismatch",
+        "status": "rejected"
+      },
+      "outcome": "passed"
+    },
+    {
+      "case": "changed-source-bytes",
+      "command_shape": [
+        "python",
+        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/produce.py",
+        "--inputs",
+        "temporary exact input-tree copy with one BLR byte changed",
+        "--output",
+        "temporary"
+      ],
+      "exit_code": 1,
+      "fixture": {
+        "changed_byte_offset": 569102,
+        "changed_sha256": "924a8b9f3ff9bab3c2c7d6c50e44656d3eaf5e2f3b1b1b81dc0b24c53d919629",
+        "original_bytes": 1138204,
+        "original_sha256": "8d88002a6b05014da9af4dc1f33f8cb928d961b23c1912654cc056cddca5841a",
+        "path": "source-products/geoBoundaries-BLR-ADM2_simplified.geojson"
+      },
+      "observed": {
+        "reason": "whole-file custody mismatch: inputs/source-products/geoBoundaries-BLR-ADM2_simplified.geojson",
+        "status": "rejected"
+      },
+      "outcome": "passed"
+    }
+  ],
+  "kind": "negative-control",
+  "method_id": "complete-source-overlay",
+  "outcome": "passed"
+}
