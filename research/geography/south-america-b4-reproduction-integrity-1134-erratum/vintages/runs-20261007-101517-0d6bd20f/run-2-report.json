@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "issue": 1124,
+  "baseline_commit": "93c901e1c0b44073233fd3d48d403985a0cf2c52",
+  "status": "validated-with-limits",
+  "issue_subject_hash": "41e0a74958f611ddb955daa304337eba9f301b2ffacb803314dba8f265e504a2",
+  "source_scope_hash": "7d2e4c490905d19e4b8cf159c60cf33b639f22595dc62cc789c935357f6e98ee",
+  "metrics": {
+    "issue_1124_subjects": 215,
+    "native_subject_matches": 215,
+    "distinct_parent_ids": 39,
+    "parent_rows": 39,
+    "parent_assignments": 215,
+    "companion_issue_444_members": 230,
+    "companion_issue_446_members": 215,
+    "companion_native_members_checked": 660,
+    "companion_area_membership_mismatches": 0,
+    "source_crosswalk_rows": 44,
+    "source_crosswalk_reproduced_runs": 2,
+    "chile_central_issue_members": 75,
+    "chile_central_native_members": 252,
+    "chile_north_issue_members": 29,
+    "chile_north_native_members": 29,
+    "chile_south_issue_members": 62,
+    "chile_south_native_members": 62,
+    "juan_fernandez_is_issue_members": 1,
+    "juan_fernandez_is_native_members": 1,
+    "paraguay_issue_members": 48,
+    "paraguay_native_members": 243,
+    "issue_445_paraguay": 48,
+    "issue_445_chile_south": 62,
+    "issue_445_chile_north": 29,
+    "issue_445_chile_central": 75,
+    "issue_445_juan_fernandez_is.": 1,
+    "issue_444_argentina_south": 53,
+    "issue_444_chile_central": 177,
+    "issue_446_paraguay": 195,
+    "issue_446_argentina_south": 1,
+    "issue_446_uruguay": 19
+  },
+  "area_membership_by_scope_issue": {
+    "445": {
+      "Paraguay": 48,
+      "Chile South": 62,
+      "Chile North": 29,
+      "Chile Central": 75,
+      "Juan Fernández Is.": 1
+    },
+    "444": {
+      "Argentina South": 53,
+      "Chile Central": 177
+    },
+    "446": {
+      "Paraguay": 195,
+      "Argentina South": 1,
+      "Uruguay": 19
+    }
+  },
+  "native_full_area_counts": {
+    "Chile Central": 252,
+    "Chile North": 29,
+    "Chile South": 62,
+    "Juan Fernández Is.": 1,
+    "Paraguay": 243
+  },
+  "parent_roster_sha256": "3610294a2bd9111b5eb258dffe3a17e2051ceee6a39102c117f41215b1a0359a",
+  "reproduced_source_crosswalk_sha256": "66093ef613629ec10f28ba7390e38f75f91ace2b3b2d7fdc9ae19f5119798790",
+  "checks": {
+    "issue_scope_matches_immutable_445": true,
+    "all_subject_parent_assignments_match_native_parts": true,
+    "all_parent_rows_unique_and_exact": true,
+    "all_companion_snapshots_match_native_ancestry": true,
+    "all_five_area_populations_match_native_descendants": true,
+    "source_crosswalk_reproduced_twice_byte_identically": true
+  },
+  "limits": [
+    "Membership and ancestry are checked against the pinned Atlas hierarchy and retained source snapshots, not independently adjudicated legal boundaries.",
+    "Chile source crosswalk remains tied to geoBoundaries 2020; current SUBDERE 2023 polygons could not be extracted/reuse-cleared in the earlier source review.",
+    "Paraguay source crosswalk remains a 2012 geoBoundaries roster supplemented by 2022 statistical attributes; INE lines are referential, not legal boundary evidence.",
+    "The TDWG WGSRPD Level 3/4 tables are historical botanical distribution units, not current administrative crosswalks; exact upstream hashes and restoration instructions are retained, while unknown reuse terms prevent redistribution."
+  ]
+}

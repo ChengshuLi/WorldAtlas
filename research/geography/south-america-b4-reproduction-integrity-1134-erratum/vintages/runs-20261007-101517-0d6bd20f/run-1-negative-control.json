@@ -1,0 +1,59 @@
+{
+  "method_id": "exact-roster-and-ancestry",
+  "kind": "negative-control",
+  "outcome": "passed",
+  "cases": [
+    {
+      "case": "duplicate-parent-row",
+      "rejected": true
+    },
+    {
+      "case": "missing-parent-row",
+      "rejected": true
+    },
+    {
+      "case": "foreign-parent",
+      "rejected": true
+    },
+    {
+      "case": "duplicate-subject-assignment",
+      "rejected": true
+    },
+    {
+      "case": "missing-subject-assignment",
+      "rejected": true
+    },
+    {
+      "case": "wrong-parent-name",
+      "rejected": true
+    },
+    {
+      "case": "wrong-parent-count",
+      "rejected": true
+    },
+    {
+      "case": "rehash-does-not-authorize-foreign-scope",
+      "rejected": true
+    },
+    {
+      "case": "wrong-area-source-label",
+      "rejected": true
+    },
+    {
+      "case": "wrong-area-name",
+      "rejected": true
+    },
+    {
+      "case": "wrong-area-owned-count",
+      "rejected": true
+    },
+    {
+      "case": "wrong-parent-area-ancestry",
+      "rejected": true
+    },
+    {
+      "case": "fabricated-source-name-match",
+      "rejected": true
+    }
+  ]
+}
