@@ -1,0 +1,1196 @@
+{
+  "version": 1,
+  "issue": 1379,
+  "lane": "geography",
+  "worker_id": "01a112b9-e2b7-7d03-8000-eb2890649612",
+  "subject_ids": [
+    "gb:PER:ADM2:86281439B13089313750619"
+  ],
+  "subject_ids_sha256": "493cb4447be57573c3edd0e989091820678b9395f68b8514c1daa8e5f3a2f4d3",
+  "baseline": {
+    "commit": "839883ae281af7bf012f694698624a7ec77275e1",
+    "files": [
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-000.bin.gz",
+        "sha256": "60e770171089510b8f97ebd74a93e1c913953716a4281699e4ecca75aaefffd5",
+        "bytes": 1046123,
+        "hash_kind": "file-bytes",
+        "role": "baseline-input",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "fd164c98e3100f98b8488c7ba81e39132cb18a2669a86c8ab5728ec6e20ce97e"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-001.bin.gz",
+        "sha256": "1b4c5b7a0d1328bfbee83c759934843aabedde9afc947a9e555eeb6aac276fca",
+        "bytes": 1003990,
+        "hash_kind": "file-bytes",
+        "role": "baseline-input",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "947627e169a22ca6a4f877f7ea192467c150fcc43d4fad4d99d3599702029a75"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-002.bin.gz",
+        "sha256": "9c50b25acf826a4c65291613cc965d7675a7c66aa672a8c0fe1f21feaf432239",
+        "bytes": 1001586,
+        "hash_kind": "file-bytes",
+        "role": "baseline-input",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "dbe45982cb0fbe54d9c8b61e0189a3f6a2093c407849326b250305723a49c0f0"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-003.bin.gz",
+        "sha256": "8b7eedc7a4a9234f1917046167f97ad960d4a9c2941ce55dbac46a7eee422549",
+        "bytes": 1063935,
+        "hash_kind": "file-bytes",
+        "role": "baseline-input",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "201ae80a0bcb8648950c26e0de7dedab1f6c196671c93734b169e551deb53e9c"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-004.bin.gz",
+        "sha256": "fab9ac669c568073ab37748190396d3f0c06ac319317c4ff7a0aa31cee259ab0",
+        "bytes": 987691,
+        "hash_kind": "file-bytes",
+        "role": "baseline-input",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "3d329a587e2e06a426dc802e04abfe01726d86657acfc469287cfe668c8102a8"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-005.bin.gz",
+        "sha256": "03f13761ce67af5a826a98468ef2dc77d2f4a5c4ab9f25b6e6a1e3bd396bf141",
+        "bytes": 1026831,
+        "hash_kind": "file-bytes",
+        "role": "baseline-input",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "6f7ba9a502dd9229365c522f25e3f05e6d3c2e8c329ceef6644618ebc9da930d"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-006.bin.gz",
+        "sha256": "6bee149f0d7930d6d95d927c41b78f8a52678df4ebad9824e68b35b917e676dc",
+        "bytes": 1493537,
+        "hash_kind": "file-bytes",
+        "role": "baseline-input",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "8d270e713aa1ec33b8b279ae71224b7c2996053e1c2aced441723df8e82c80bb"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-007.bin.gz",
+        "sha256": "4eb81385ba0d6b6d6a6b47e26a9504f9ae299f8d64dd9e0a82b3b48a4af65ad2",
+        "bytes": 962830,
+        "hash_kind": "file-bytes",
+        "role": "baseline-input",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "1e9358bfccab1b75a7073f63d8b84d65f64b064244a1fdad76669378204d1fc0"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-008.bin.gz",
+        "sha256": "897a5cb10967809bb32b541c82ff19c4fd0d8c0b64241d78ea963d09cb0bab62",
+        "bytes": 1043652,
+        "hash_kind": "file-bytes",
+        "role": "baseline-input",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "e354113a88c2d3deb64a327a469bcbca7c248b17083b3d739c18445b7b8c23df"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-009.bin.gz",
+        "sha256": "4621441988498fe2c05bfe6f036bf8dd9cfbc8472c5b8a65bf91d3a424f626da",
+        "bytes": 998433,
+        "hash_kind": "file-bytes",
+        "role": "baseline-input",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "049ab5f591d9821e7279c6c7afccfc0b55ed5a9f81976edfe969315ee25df079"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-010.bin.gz",
+        "sha256": "8da6fcf9fd6a7f3215666ab9bae2e91f9b32e5e0bb923492137ea823af8265b7",
+        "bytes": 1039493,
+        "hash_kind": "file-bytes",
+        "role": "baseline-input",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "23d37fcd6c369a1dca6ba0fbccea55bc40bbeb74a340b4cca6752ca0d78cf231"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-011.bin.gz",
+        "sha256": "9e0d5879d5735d4507773cc66b7da371164c30de022c742969ba5d1e85e2c339",
+        "bytes": 1081053,
+        "hash_kind": "file-bytes",
+        "role": "baseline-input",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "f844def184578eda6006664e38b95feb563b80dfaf3cfd3f78f2af8fd08e89ce"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-012.bin.gz",
+        "sha256": "483fb0b6c5b9a8e1b905bf2dc3aa0ca232dcede6f34ef357381770a603e52df0",
+        "bytes": 965771,
+        "hash_kind": "file-bytes",
+        "role": "baseline-input",
+        "uncompressed_bytes": 8388608,
+        "uncompressed_sha256": "a1663477a0e01de8bb56736262b57e95c3c49647d54db95c4d2fd6d86600c328"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/families-013.bin.gz",
+        "sha256": "006dd169089fc433251cc2f5939e7ae324744c00eca11066860aab578f07edac",
+        "bytes": 247084,
+        "hash_kind": "file-bytes",
+        "role": "baseline-input",
+        "uncompressed_bytes": 2171381,
+        "uncompressed_sha256": "b1ca16e670f192da7b7f8377b1bc1c0223750d3758512e384555b351554eff6f"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/report.json",
+        "sha256": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265",
+        "bytes": 174829,
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "coordination/engineering/global-physical-comparison-20261006/results/components-057.jsonl.gz",
+        "sha256": "883e4036eca58e598c8e02a05034c86d81b19a9d8b9727ec7135ffb66c528ea5",
+        "bytes": 1233045,
+        "hash_kind": "file-bytes",
+        "role": "baseline-input",
+        "uncompressed_bytes": 7640594,
+        "uncompressed_sha256": "13101e6720367512f7784489ebdeec47fd8f44afdb213c00b034f918ce425bfb"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+        "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+        "bytes": 403376,
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-PER-ADM2-000.bin.gz",
+        "sha256": "b3578247bece532832159fbe2250e3502be01f6fdd61bdc6527f6ac0b6f95311",
+        "bytes": 1265472,
+        "hash_kind": "file-bytes",
+        "role": "baseline-input",
+        "uncompressed_bytes": 4310497,
+        "uncompressed_sha256": "4986d514b9898f7c415febd47d2ae302f79f5a0d23434cc81fb2bdbfaec623a3"
+      },
+      {
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+        "sha256": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156",
+        "bytes": 2085110,
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "bytes": 661416,
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "data/geography/part-18.json",
+        "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123",
+        "bytes": 4909063,
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "data/regional-review/regional-review-a1f74bfb55fcb8c1/assessment.json",
+        "sha256": "e0587fe787c3d0b89a23d40cf31eca92994fac585d2f09bb4cd6f90e84c213e1",
+        "bytes": 5318029,
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "data/regional-review/regional-review-a1f74bfb55fcb8c1/sources.json",
+        "sha256": "fb0f9d7cf7b89001ec6a6549b65bfd92f11644a7e91a2038d6d2f4305b71bdef",
+        "bytes": 11573,
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "data/regional-review/regional-review-d2dae235991eaa49/sources/geoboundaries-PER-ADM2-2020.geojson.gz",
+        "sha256": "047541aa4fe6d33e2d2246b8ea2a518eaf6fc6f9e2bbc241147cb4587b67e44e",
+        "bytes": 8305521,
+        "hash_kind": "file-bytes",
+        "role": "original-source",
+        "uncompressed_bytes": 31291639,
+        "uncompressed_sha256": "58d0720bc01abd27bd02fb73d2ee8443fc6067352d97b752d100a18e3b97bb58"
+      },
+      {
+        "path": "data/regional-review/regional-review-d2dae235991eaa49/sources/geoboundaries-PER-ADM2-metadata.json.gz",
+        "sha256": "66b688d16e502d63e72a9564cb646edd2218ee7382788bcbb16467ca552b2165",
+        "bytes": 490,
+        "hash_kind": "file-bytes",
+        "role": "baseline-input",
+        "uncompressed_bytes": 902,
+        "uncompressed_sha256": "d6f5b546a17b37172d5e818051c3bc79dedd522d337698381ec2a23f768539ba"
+      },
+      {
+        "path": "scripts/administrative.py",
+        "sha256": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22",
+        "bytes": 12313,
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      }
+    ],
+    "pins": {
+      "global_routing_report": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265",
+      "global_selected_family_records": "fab9ac669c568073ab37748190396d3f0c06ac319317c4ff7a0aa31cee259ab0",
+      "complete_candidate_component_input": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156",
+      "global_physical_comparison_rows": "883e4036eca58e598c8e02a05034c86d81b19a9d8b9727ec7135ffb66c528ea5",
+      "simplified_PER_ADM2_source": "b3578247bece532832159fbe2250e3502be01f6fdd61bdc6527f6ac0b6f95311",
+      "source_product_catalogue": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+      "administrative_source_registry": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "current_Atlas_contact_partition": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123",
+      "issue_496_assessment": "e0587fe787c3d0b89a23d40cf31eca92994fac585d2f09bb4cd6f90e84c213e1",
+      "issue_496_source_registry": "fb0f9d7cf7b89001ec6a6549b65bfd92f11644a7e91a2038d6d2f4305b71bdef",
+      "issue_496_unsimplified_PER_product": "047541aa4fe6d33e2d2246b8ea2a518eaf6fc6f9e2bbc241147cb4587b67e44e",
+      "baseline_administrative_recipe": "d9df8285f1c270856a8e79b95636cf4b8d8496f48b30348a1e4d6d20619b2f22"
+    },
+    "pin_files": {
+      "global_routing_report": "coordination/engineering/global-actionability-routing-20261007/results/report.json",
+      "global_selected_family_records": "coordination/engineering/global-actionability-routing-20261007/results/families-004.bin.gz",
+      "complete_candidate_component_input": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+      "global_physical_comparison_rows": "coordination/engineering/global-physical-comparison-20261006/results/components-057.jsonl.gz",
+      "simplified_PER_ADM2_source": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-PER-ADM2-000.bin.gz",
+      "source_product_catalogue": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+      "administrative_source_registry": "data/administrative-sources.json",
+      "current_Atlas_contact_partition": "data/geography/part-18.json",
+      "issue_496_assessment": "data/regional-review/regional-review-a1f74bfb55fcb8c1/assessment.json",
+      "issue_496_source_registry": "data/regional-review/regional-review-a1f74bfb55fcb8c1/sources.json",
+      "issue_496_unsimplified_PER_product": "data/regional-review/regional-review-d2dae235991eaa49/sources/geoboundaries-PER-ADM2-2020.geojson.gz",
+      "baseline_administrative_recipe": "scripts/administrative.py"
+    },
+    "subject_files": {
+      "gb:PER:ADM2:86281439B13089313750619": "data/geography/part-18.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "per-adm2-simplified",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PER/ADM2/geoBoundaries-PER-ADM2_simplified.geojson",
+      "role": "administrative boundary source product used by pinned baseline recipe",
+      "vintage": "registry represented year 2020 (publisher claim); effective date unknown",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "redistributable",
+        "terms": "Registry records CC BY 3.0 IGO; applicability and exact terms are not independently verified."
+      },
+      "retention": "retained",
+      "verification": "unverified",
+      "temporal_status": "unknown",
+      "files": [
+        {
+          "path": "research/geography/peru-sechura-gap-source-fitness-20261007/inputs/upstream/geoboundaries-PER-ADM2-simplified.geojson.gz",
+          "sha256": "b3578247bece532832159fbe2250e3502be01f6fdd61bdc6527f6ac0b6f95311",
+          "bytes": 1265472,
+          "hash_kind": "file-bytes",
+          "role": "retained-source-product",
+          "uncompressed_bytes": 4310497,
+          "uncompressed_sha256": "4986d514b9898f7c415febd47d2ae302f79f5a0d23434cc81fb2bdbfaec623a3"
+        }
+      ]
+    },
+    {
+      "id": "per-adm2-unsimplified",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PER/ADM2/geoBoundaries-PER-ADM2.geojson",
+      "role": "unsimplified comparison product retained with prior #496 review",
+      "vintage": "registry represented year 2020 (publisher claim); effective date unknown",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "redistributable",
+        "terms": "Registry records CC BY 3.0 IGO; applicability and exact terms are not independently verified."
+      },
+      "retention": "retained",
+      "verification": "unverified",
+      "temporal_status": "unknown",
+      "files": [
+        {
+          "path": "research/geography/peru-sechura-gap-source-fitness-20261007/inputs/upstream/geoboundaries-PER-ADM2-unsimplified.geojson.gz",
+          "sha256": "047541aa4fe6d33e2d2246b8ea2a518eaf6fc6f9e2bbc241147cb4587b67e44e",
+          "bytes": 8305521,
+          "hash_kind": "file-bytes",
+          "role": "retained-source-product",
+          "uncompressed_bytes": 31291639,
+          "uncompressed_sha256": "58d0720bc01abd27bd02fb73d2ee8443fc6067352d97b752d100a18e3b97bb58"
+        }
+      ]
+    },
+    {
+      "id": "per-adm2-metadata",
+      "url": "https://www.geoboundaries.org/api/current/gbOpen/PER/ADM2/",
+      "role": "publisher metadata describing the retained PER ADM2 products",
+      "vintage": "metadata retrieved with source corpus; date claims remain unverified",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "redistributable",
+        "terms": "Metadata retained for research; this does not establish license applicability to geometries."
+      },
+      "retention": "retained",
+      "verification": "unverified",
+      "temporal_status": "unknown",
+      "files": [
+        {
+          "path": "research/geography/peru-sechura-gap-source-fitness-20261007/inputs/upstream/geoboundaries-PER-ADM2-metadata.json.gz",
+          "sha256": "66b688d16e502d63e72a9564cb646edd2218ee7382788bcbb16467ca552b2165",
+          "bytes": 490,
+          "hash_kind": "file-bytes",
+          "role": "retained-source-metadata",
+          "uncompressed_bytes": 902,
+          "uncompressed_sha256": "d6f5b546a17b37172d5e818051c3bc79dedd522d337698381ec2a23f768539ba"
+        }
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/README.md",
+      "sha256": "def3503e2d5237e356ce84d205b6cb0658ba490edaeeb4b571da9c940d5a0ac6",
+      "bytes": 3386,
+      "hash_kind": "file-bytes",
+      "role": "supporting-output"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/analysis.json",
+      "sha256": "f33806295f94c46d7f6f883b41014ea87e31e939ab966066c8ffb336512d3587",
+      "bytes": 14305,
+      "hash_kind": "file-bytes",
+      "role": "generated-analysis"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/execute_twice.py",
+      "sha256": "5f72744fceab874734e76fdf7c344d8b5d3f22ba5bb2a26b07d71fce345d5c7c",
+      "bytes": 3597,
+      "hash_kind": "file-bytes",
+      "role": "supporting-output"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/execution.json",
+      "sha256": "7f03c46341ecb9dbc88e197beb854ac503feda068ce4c66ed8d44a425ca2dd4c",
+      "bytes": 6351,
+      "hash_kind": "file-bytes",
+      "role": "generated-analysis"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/inputs/candidate-component.geojson",
+      "sha256": "5f432d81c97a7f944e7891c0302c4bc802f2896a12070458b02b02dd0d183011",
+      "bytes": 1179,
+      "hash_kind": "file-bytes",
+      "role": "supporting-output"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/inputs/current-atlas-contact.geojson",
+      "sha256": "b04d3c6825ab158fed91d7b4f365eb15556e2f0554440defe66cf15cac0eb1f6",
+      "bytes": 7621,
+      "hash_kind": "file-bytes",
+      "role": "supporting-output"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/inputs/simplified-sechura-feature.geojson",
+      "sha256": "9d03baec3f1e5fa73cd758871a3432f47b830188c6cc18f74afa0552749841dd",
+      "bytes": 7392,
+      "hash_kind": "file-bytes",
+      "role": "supporting-output"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/inputs/simplified-source-contact.geojson",
+      "sha256": "19b9269a346b10da4f3286ba8137aaf5721d4a1b5afb7a58f60d73f3545a95ae",
+      "bytes": 14630,
+      "hash_kind": "file-bytes",
+      "role": "supporting-output"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/inputs/unsimplified-sechura-feature.geojson",
+      "sha256": "8555f9549c22699192b891b23ed67cea28b08a68215a83102fca4ba8a2a2768b",
+      "bytes": 67121,
+      "hash_kind": "file-bytes",
+      "role": "supporting-output"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/inputs/unsimplified-source-contact.geojson",
+      "sha256": "3f0ff18036e6de38d4eb3aaf745642d3f935002ff434aaa56968711e49f01c61",
+      "bytes": 134359,
+      "hash_kind": "file-bytes",
+      "role": "supporting-output"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/inputs/upstream/geoboundaries-PER-ADM2-metadata.json",
+      "sha256": "d6f5b546a17b37172d5e818051c3bc79dedd522d337698381ec2a23f768539ba",
+      "bytes": 902,
+      "hash_kind": "file-bytes",
+      "role": "generated-analysis"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/preliminary-attempt-1-stderr.txt",
+      "sha256": "c713f3371e24c113617ecb9c05896302f5c38de42aaae3103b27b8ccdcddffe1",
+      "bytes": 1177,
+      "hash_kind": "file-bytes",
+      "role": "supporting-output"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/preliminary-attempts.json",
+      "sha256": "4a7a9bb7dd44a7d363d2fc9d49d0fd521477e3ab03fc121040f98a7a877e3f56",
+      "bytes": 1008,
+      "hash_kind": "file-bytes",
+      "role": "generated-analysis"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/reproduce.py",
+      "sha256": "18122faf80b3a2464961b2e6f28834da40cb32bc52f282a4855dfc3c22f8e15a",
+      "bytes": 15467,
+      "hash_kind": "file-bytes",
+      "role": "supporting-output"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/run-controls.py",
+      "sha256": "764e8e6f94d489fd9082b08d45b0d0786574dea90e64f0aecd4a756650b3fb2d",
+      "bytes": 1073,
+      "hash_kind": "file-bytes",
+      "role": "supporting-output"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-1/analysis.json",
+      "sha256": "f33806295f94c46d7f6f883b41014ea87e31e939ab966066c8ffb336512d3587",
+      "bytes": 14305,
+      "hash_kind": "file-bytes",
+      "role": "generated-analysis"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-1/inputs/candidate-component.geojson",
+      "sha256": "5f432d81c97a7f944e7891c0302c4bc802f2896a12070458b02b02dd0d183011",
+      "bytes": 1179,
+      "hash_kind": "file-bytes",
+      "role": "supporting-output"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-1/inputs/current-atlas-contact.geojson",
+      "sha256": "b04d3c6825ab158fed91d7b4f365eb15556e2f0554440defe66cf15cac0eb1f6",
+      "bytes": 7621,
+      "hash_kind": "file-bytes",
+      "role": "supporting-output"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-1/inputs/simplified-sechura-feature.geojson",
+      "sha256": "9d03baec3f1e5fa73cd758871a3432f47b830188c6cc18f74afa0552749841dd",
+      "bytes": 7392,
+      "hash_kind": "file-bytes",
+      "role": "supporting-output"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-1/inputs/simplified-source-contact.geojson",
+      "sha256": "19b9269a346b10da4f3286ba8137aaf5721d4a1b5afb7a58f60d73f3545a95ae",
+      "bytes": 14630,
+      "hash_kind": "file-bytes",
+      "role": "supporting-output"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-1/inputs/unsimplified-sechura-feature.geojson",
+      "sha256": "8555f9549c22699192b891b23ed67cea28b08a68215a83102fca4ba8a2a2768b",
+      "bytes": 67121,
+      "hash_kind": "file-bytes",
+      "role": "supporting-output"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-1/inputs/unsimplified-source-contact.geojson",
+      "sha256": "3f0ff18036e6de38d4eb3aaf745642d3f935002ff434aaa56968711e49f01c61",
+      "bytes": 134359,
+      "hash_kind": "file-bytes",
+      "role": "supporting-output"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-1/inputs/upstream/geoboundaries-PER-ADM2-metadata.json",
+      "sha256": "d6f5b546a17b37172d5e818051c3bc79dedd522d337698381ec2a23f768539ba",
+      "bytes": 902,
+      "hash_kind": "file-bytes",
+      "role": "generated-analysis"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-1/inputs/upstream/geoboundaries-PER-ADM2-metadata.json.gz",
+      "sha256": "66b688d16e502d63e72a9564cb646edd2218ee7382788bcbb16467ca552b2165",
+      "bytes": 490,
+      "hash_kind": "file-bytes",
+      "role": "supporting-output",
+      "uncompressed_bytes": 902,
+      "uncompressed_sha256": "d6f5b546a17b37172d5e818051c3bc79dedd522d337698381ec2a23f768539ba"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-1/inputs/upstream/geoboundaries-PER-ADM2-simplified.geojson.gz",
+      "sha256": "b3578247bece532832159fbe2250e3502be01f6fdd61bdc6527f6ac0b6f95311",
+      "bytes": 1265472,
+      "hash_kind": "file-bytes",
+      "role": "supporting-output",
+      "uncompressed_bytes": 4310497,
+      "uncompressed_sha256": "4986d514b9898f7c415febd47d2ae302f79f5a0d23434cc81fb2bdbfaec623a3"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-1/inputs/upstream/geoboundaries-PER-ADM2-unsimplified.geojson.gz",
+      "sha256": "047541aa4fe6d33e2d2246b8ea2a518eaf6fc6f9e2bbc241147cb4587b67e44e",
+      "bytes": 8305521,
+      "hash_kind": "file-bytes",
+      "role": "supporting-output",
+      "uncompressed_bytes": 31291639,
+      "uncompressed_sha256": "58d0720bc01abd27bd02fb73d2ee8443fc6067352d97b752d100a18e3b97bb58"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-1/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes",
+      "role": "supporting-output"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-1/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes",
+      "role": "supporting-output"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-2/analysis.json",
+      "sha256": "f33806295f94c46d7f6f883b41014ea87e31e939ab966066c8ffb336512d3587",
+      "bytes": 14305,
+      "hash_kind": "file-bytes",
+      "role": "generated-analysis"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-2/inputs/candidate-component.geojson",
+      "sha256": "5f432d81c97a7f944e7891c0302c4bc802f2896a12070458b02b02dd0d183011",
+      "bytes": 1179,
+      "hash_kind": "file-bytes",
+      "role": "supporting-output"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-2/inputs/current-atlas-contact.geojson",
+      "sha256": "b04d3c6825ab158fed91d7b4f365eb15556e2f0554440defe66cf15cac0eb1f6",
+      "bytes": 7621,
+      "hash_kind": "file-bytes",
+      "role": "supporting-output"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-2/inputs/simplified-sechura-feature.geojson",
+      "sha256": "9d03baec3f1e5fa73cd758871a3432f47b830188c6cc18f74afa0552749841dd",
+      "bytes": 7392,
+      "hash_kind": "file-bytes",
+      "role": "supporting-output"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-2/inputs/simplified-source-contact.geojson",
+      "sha256": "19b9269a346b10da4f3286ba8137aaf5721d4a1b5afb7a58f60d73f3545a95ae",
+      "bytes": 14630,
+      "hash_kind": "file-bytes",
+      "role": "supporting-output"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-2/inputs/unsimplified-sechura-feature.geojson",
+      "sha256": "8555f9549c22699192b891b23ed67cea28b08a68215a83102fca4ba8a2a2768b",
+      "bytes": 67121,
+      "hash_kind": "file-bytes",
+      "role": "supporting-output"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-2/inputs/unsimplified-source-contact.geojson",
+      "sha256": "3f0ff18036e6de38d4eb3aaf745642d3f935002ff434aaa56968711e49f01c61",
+      "bytes": 134359,
+      "hash_kind": "file-bytes",
+      "role": "supporting-output"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-2/inputs/upstream/geoboundaries-PER-ADM2-metadata.json",
+      "sha256": "d6f5b546a17b37172d5e818051c3bc79dedd522d337698381ec2a23f768539ba",
+      "bytes": 902,
+      "hash_kind": "file-bytes",
+      "role": "generated-analysis"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-2/inputs/upstream/geoboundaries-PER-ADM2-metadata.json.gz",
+      "sha256": "66b688d16e502d63e72a9564cb646edd2218ee7382788bcbb16467ca552b2165",
+      "bytes": 490,
+      "hash_kind": "file-bytes",
+      "role": "supporting-output",
+      "uncompressed_bytes": 902,
+      "uncompressed_sha256": "d6f5b546a17b37172d5e818051c3bc79dedd522d337698381ec2a23f768539ba"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-2/inputs/upstream/geoboundaries-PER-ADM2-simplified.geojson.gz",
+      "sha256": "b3578247bece532832159fbe2250e3502be01f6fdd61bdc6527f6ac0b6f95311",
+      "bytes": 1265472,
+      "hash_kind": "file-bytes",
+      "role": "supporting-output",
+      "uncompressed_bytes": 4310497,
+      "uncompressed_sha256": "4986d514b9898f7c415febd47d2ae302f79f5a0d23434cc81fb2bdbfaec623a3"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-2/inputs/upstream/geoboundaries-PER-ADM2-unsimplified.geojson.gz",
+      "sha256": "047541aa4fe6d33e2d2246b8ea2a518eaf6fc6f9e2bbc241147cb4587b67e44e",
+      "bytes": 8305521,
+      "hash_kind": "file-bytes",
+      "role": "supporting-output",
+      "uncompressed_bytes": 31291639,
+      "uncompressed_sha256": "58d0720bc01abd27bd02fb73d2ee8443fc6067352d97b752d100a18e3b97bb58"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-2/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes",
+      "role": "supporting-output"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-2/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hash_kind": "file-bytes",
+      "role": "supporting-output"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/validation/negative-control.json",
+      "sha256": "311ce0a81536bac72fbec170fc3c78a0c1373fad6dc9174c8706d92aa53ba2b0",
+      "bytes": 401,
+      "hash_kind": "file-bytes",
+      "role": "generated-analysis"
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/validation/positive-control.json",
+      "sha256": "780f675c4ea7f6fc809f24f84741be429c50de2a106eea060e924a36abe4e330",
+      "bytes": 399,
+      "hash_kind": "file-bytes",
+      "role": "generated-analysis"
+    }
+  ],
+  "methods": [
+    {
+      "id": "bounded-sechura-component-comparison",
+      "kind": "geography",
+      "description": "Original-coordinate intersection/covers/positive-area predicates for one candidate component against one current contact and the selected feature in each complete source product; all 196 source features checked for geometry validity.",
+      "software": "Python 3.12.14; Shapely 2.1.2; GEOS 3.13.1; pyproj 3.7.2; PROJ 9.5.1",
+      "units": "feature count, coordinates, coverage fraction, m2",
+      "axis_order": "longitude-latitude",
+      "crs": "EPSG:4326 predicates; EPSG:32717 local planar area",
+      "area_method": "Shapely planar area after projecting this local candidate/products to EPSG:32717; descriptive, not accuracy",
+      "distance_method": "No distance metric computed."
+    },
+    {
+      "id": "bounded-packet-reproduction",
+      "kind": "code",
+      "description": "Runs the bounded parser and component comparison twice; compares generated output tree hashes. No global producers run.",
+      "software": "Python 3.12.14; scripts included in packet",
+      "units": "SHA-256 file/tree receipts"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "simplified_feature_count",
+      "value": 196,
+      "unit": "features",
+      "vintage": "baseline",
+      "input_sha256": "b3578247bece532832159fbe2250e3502be01f6fdd61bdc6527f6ac0b6f95311",
+      "evaluation_commit": "839883ae281af7bf012f694698624a7ec77275e1"
+    },
+    {
+      "id": "unsimplified_feature_count",
+      "value": 196,
+      "unit": "features",
+      "vintage": "baseline",
+      "input_sha256": "047541aa4fe6d33e2d2246b8ea2a518eaf6fc6f9e2bbc241147cb4587b67e44e",
+      "evaluation_commit": "839883ae281af7bf012f694698624a7ec77275e1"
+    },
+    {
+      "id": "simplified_candidate_coverage",
+      "value": 1.0,
+      "unit": "fraction",
+      "vintage": "baseline",
+      "input_sha256": "b3578247bece532832159fbe2250e3502be01f6fdd61bdc6527f6ac0b6f95311",
+      "evaluation_commit": "839883ae281af7bf012f694698624a7ec77275e1"
+    },
+    {
+      "id": "unsimplified_candidate_coverage",
+      "value": 1.0,
+      "unit": "fraction",
+      "vintage": "baseline",
+      "input_sha256": "047541aa4fe6d33e2d2246b8ea2a518eaf6fc6f9e2bbc241147cb4587b67e44e",
+      "evaluation_commit": "839883ae281af7bf012f694698624a7ec77275e1"
+    },
+    {
+      "id": "current_atlas_candidate_coverage",
+      "value": 0.0,
+      "unit": "fraction",
+      "vintage": "baseline",
+      "input_sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123",
+      "evaluation_commit": "839883ae281af7bf012f694698624a7ec77275e1"
+    },
+    {
+      "id": "candidate_area",
+      "value": 27.697551136650027,
+      "unit": "m2 EPSG:32717",
+      "vintage": "baseline",
+      "input_sha256": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156",
+      "evaluation_commit": "839883ae281af7bf012f694698624a7ec77275e1"
+    },
+    {
+      "id": "simplified_source_coordinate_count",
+      "value": 180,
+      "unit": "coordinates",
+      "vintage": "baseline",
+      "input_sha256": "b3578247bece532832159fbe2250e3502be01f6fdd61bdc6527f6ac0b6f95311",
+      "evaluation_commit": "839883ae281af7bf012f694698624a7ec77275e1"
+    },
+    {
+      "id": "unsimplified_source_coordinate_count",
+      "value": 1680,
+      "unit": "coordinates",
+      "vintage": "baseline",
+      "input_sha256": "047541aa4fe6d33e2d2246b8ea2a518eaf6fc6f9e2bbc241147cb4587b67e44e",
+      "evaluation_commit": "839883ae281af7bf012f694698624a7ec77275e1"
+    },
+    {
+      "id": "current_atlas_coordinate_count",
+      "value": 81,
+      "unit": "coordinates",
+      "vintage": "baseline",
+      "input_sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123",
+      "evaluation_commit": "839883ae281af7bf012f694698624a7ec77275e1"
+    },
+    {
+      "id": "simplified_intersecting_feature_count",
+      "value": 1,
+      "unit": "features",
+      "vintage": "baseline",
+      "input_sha256": "b3578247bece532832159fbe2250e3502be01f6fdd61bdc6527f6ac0b6f95311",
+      "evaluation_commit": "839883ae281af7bf012f694698624a7ec77275e1"
+    },
+    {
+      "id": "unsimplified_intersecting_feature_count",
+      "value": 1,
+      "unit": "features",
+      "vintage": "baseline",
+      "input_sha256": "047541aa4fe6d33e2d2246b8ea2a518eaf6fc6f9e2bbc241147cb4587b67e44e",
+      "evaluation_commit": "839883ae281af7bf012f694698624a7ec77275e1"
+    },
+    {
+      "id": "current_contact_feature_count",
+      "value": 1,
+      "unit": "features",
+      "vintage": "baseline",
+      "input_sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123",
+      "evaluation_commit": "839883ae281af7bf012f694698624a7ec77275e1"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "simplified_feature_count",
+      "value": 196,
+      "unit": "features",
+      "text": "simplified_feature_count: 196 features"
+    },
+    {
+      "metric_id": "unsimplified_feature_count",
+      "value": 196,
+      "unit": "features",
+      "text": "unsimplified_feature_count: 196 features"
+    },
+    {
+      "metric_id": "simplified_candidate_coverage",
+      "value": 1.0,
+      "unit": "fraction",
+      "text": "simplified_candidate_coverage: 1.0 fraction"
+    },
+    {
+      "metric_id": "unsimplified_candidate_coverage",
+      "value": 1.0,
+      "unit": "fraction",
+      "text": "unsimplified_candidate_coverage: 1.0 fraction"
+    },
+    {
+      "metric_id": "current_atlas_candidate_coverage",
+      "value": 0.0,
+      "unit": "fraction",
+      "text": "current_atlas_candidate_coverage: 0.0 fraction"
+    },
+    {
+      "metric_id": "candidate_area",
+      "value": 27.697551136650027,
+      "unit": "m2 EPSG:32717",
+      "text": "candidate_area: 27.697551136650027 m2 EPSG:32717"
+    },
+    {
+      "metric_id": "simplified_source_coordinate_count",
+      "value": 180,
+      "unit": "coordinates",
+      "text": "simplified_source_coordinate_count: 180 coordinates"
+    },
+    {
+      "metric_id": "unsimplified_source_coordinate_count",
+      "value": 1680,
+      "unit": "coordinates",
+      "text": "unsimplified_source_coordinate_count: 1680 coordinates"
+    },
+    {
+      "metric_id": "current_atlas_coordinate_count",
+      "value": 81,
+      "unit": "coordinates",
+      "text": "current_atlas_coordinate_count: 81 coordinates"
+    },
+    {
+      "metric_id": "simplified_intersecting_feature_count",
+      "value": 1,
+      "unit": "features",
+      "text": "simplified_intersecting_feature_count: 1 features"
+    },
+    {
+      "metric_id": "unsimplified_intersecting_feature_count",
+      "value": 1,
+      "unit": "features",
+      "text": "unsimplified_intersecting_feature_count: 1 features"
+    },
+    {
+      "metric_id": "current_contact_feature_count",
+      "value": 1,
+      "unit": "features",
+      "text": "current_contact_feature_count: 1 features"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "The actual simplified product and retained unsimplified product each have exactly one candidate-intersecting feature, Sechura, which covers the entire candidate component in the bounded geometry predicates. Product choice does not change this candidate-level source-relative relationship.",
+      "status": "supported",
+      "source_ids": [
+        "per-adm2-simplified",
+        "per-adm2-unsimplified"
+      ]
+    },
+    {
+      "text": "The current Atlas Sechura geometry touches the candidate only at its boundary and provides zero positive-area coverage; the difference cause is unknown.",
+      "status": "supported",
+      "source_ids": [
+        "per-adm2-simplified"
+      ]
+    },
+    {
+      "text": "Effective source date, authority, licensing applicability, positional accuracy/registration, source-to-current lineage, physical land/water, complete partition and ownership remain unknown.",
+      "status": "unresolved",
+      "source_ids": [
+        "per-adm2-metadata",
+        "per-adm2-simplified",
+        "per-adm2-unsimplified"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "PYTHONPATH=/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/peru-sechura-gap-source-fitness-20261007/execute_twice.py",
+    "PYTHONPATH=/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python /Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 research/geography/peru-sechura-gap-source-fitness-20261007/reproduce.py"
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "simplified_feature_count",
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/analysis.json",
+      "json_pointer": "/product_comparisons/simplified/feature_count"
+    },
+    {
+      "metric_id": "unsimplified_feature_count",
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/analysis.json",
+      "json_pointer": "/product_comparisons/unsimplified/feature_count"
+    },
+    {
+      "metric_id": "simplified_candidate_coverage",
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/analysis.json",
+      "json_pointer": "/product_comparisons/simplified/union_candidate_coverage_fraction"
+    },
+    {
+      "metric_id": "unsimplified_candidate_coverage",
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/analysis.json",
+      "json_pointer": "/product_comparisons/unsimplified/union_candidate_coverage_fraction"
+    },
+    {
+      "metric_id": "current_atlas_candidate_coverage",
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/analysis.json",
+      "json_pointer": "/product_comparisons/current_atlas_contact/union_candidate_coverage_fraction"
+    },
+    {
+      "metric_id": "candidate_area",
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/analysis.json",
+      "json_pointer": "/product_comparisons/simplified/candidate_area_utm17s_m2"
+    },
+    {
+      "metric_id": "simplified_source_coordinate_count",
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/analysis.json",
+      "json_pointer": "/product_comparisons/simplified/candidate_intersection_contacts/0/source_geometry_coordinate_count"
+    },
+    {
+      "metric_id": "unsimplified_source_coordinate_count",
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/analysis.json",
+      "json_pointer": "/product_comparisons/unsimplified/candidate_intersection_contacts/0/source_geometry_coordinate_count"
+    },
+    {
+      "metric_id": "current_atlas_coordinate_count",
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/analysis.json",
+      "json_pointer": "/product_comparisons/current_atlas_contact/candidate_intersection_contacts/0/source_geometry_coordinate_count"
+    },
+    {
+      "metric_id": "simplified_intersecting_feature_count",
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/analysis.json",
+      "json_pointer": "/product_comparisons/simplified/candidate_intersection_feature_count"
+    },
+    {
+      "metric_id": "unsimplified_intersecting_feature_count",
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/analysis.json",
+      "json_pointer": "/product_comparisons/unsimplified/candidate_intersection_feature_count"
+    },
+    {
+      "metric_id": "current_contact_feature_count",
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/analysis.json",
+      "json_pointer": "/product_comparisons/current_atlas_contact/candidate_intersection_feature_count"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "bounded-sechura-component-comparison",
+      "kind": "positive-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/peru-sechura-gap-source-fitness-20261007/validation/positive-control.json"
+    },
+    {
+      "method_id": "bounded-sechura-component-comparison",
+      "kind": "negative-control",
+      "outcome": "passed",
+      "evidence_path": "research/geography/peru-sechura-gap-source-fitness-20261007/validation/negative-control.json"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/README.md",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/analysis.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/evidence-quality.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/execute_twice.py",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/execution.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/inputs/candidate-component.geojson",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/inputs/current-atlas-contact.geojson",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/inputs/simplified-sechura-feature.geojson",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/inputs/simplified-source-contact.geojson",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/inputs/unsimplified-sechura-feature.geojson",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/inputs/unsimplified-source-contact.geojson",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/inputs/upstream/geoboundaries-PER-ADM2-metadata.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/inputs/upstream/geoboundaries-PER-ADM2-metadata.json.gz",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/inputs/upstream/geoboundaries-PER-ADM2-simplified.geojson.gz",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/inputs/upstream/geoboundaries-PER-ADM2-unsimplified.geojson.gz",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/preliminary-attempt-1-stderr.txt",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/preliminary-attempts.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/reproduce.py",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/run-controls.py",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-1/analysis.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-1/inputs/candidate-component.geojson",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-1/inputs/current-atlas-contact.geojson",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-1/inputs/simplified-sechura-feature.geojson",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-1/inputs/simplified-source-contact.geojson",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-1/inputs/unsimplified-sechura-feature.geojson",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-1/inputs/unsimplified-source-contact.geojson",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-1/inputs/upstream/geoboundaries-PER-ADM2-metadata.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-1/inputs/upstream/geoboundaries-PER-ADM2-metadata.json.gz",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-1/inputs/upstream/geoboundaries-PER-ADM2-simplified.geojson.gz",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-1/inputs/upstream/geoboundaries-PER-ADM2-unsimplified.geojson.gz",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-1/stderr.txt",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-1/stdout.txt",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-2/analysis.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-2/inputs/candidate-component.geojson",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-2/inputs/current-atlas-contact.geojson",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-2/inputs/simplified-sechura-feature.geojson",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-2/inputs/simplified-source-contact.geojson",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-2/inputs/unsimplified-sechura-feature.geojson",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-2/inputs/unsimplified-source-contact.geojson",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-2/inputs/upstream/geoboundaries-PER-ADM2-metadata.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-2/inputs/upstream/geoboundaries-PER-ADM2-metadata.json.gz",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-2/inputs/upstream/geoboundaries-PER-ADM2-simplified.geojson.gz",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-2/inputs/upstream/geoboundaries-PER-ADM2-unsimplified.geojson.gz",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-2/stderr.txt",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/runs/run-2/stdout.txt",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/validation/negative-control.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "research/geography/peru-sechura-gap-source-fitness-20261007/validation/positive-control.json",
+      "status": "added",
+      "previous_path": null
+    }
+  ]
+}

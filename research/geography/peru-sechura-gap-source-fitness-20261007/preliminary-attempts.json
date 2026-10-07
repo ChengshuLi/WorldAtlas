@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "attempts": [
+    {
+      "attempt": 1,
+      "script_sha256": "2094216572e07a1a27460f4127f56c13a3702d4cff135defd4643fbc64618965",
+      "started_at_utc": "2026-10-07T10:48:33.399Z",
+      "ended_at_utc": "2026-10-07T10:48:34.677Z",
+      "elapsed_seconds": 1.27695,
+      "exit_code": 1,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "c713f3371e24c113617ecb9c05896302f5c38de42aaae3103b27b8ccdcddffe1",
+      "failure": "The parser incorrectly treated a raw family shard as an independently parseable JSONL file. The repository documents these as raw slices that must be concatenated in order before parsing. No analysis output was accepted from this attempt.",
+      "repair": "Reconstruct the complete family table by concatenating all 14 ordered decompressed family shards, then select the complete row by family ID. The corrected bounded analysis was executed twice successfully with identical outputs."
+    }
+  ]
+}
