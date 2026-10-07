@@ -57,7 +57,9 @@ def main():
     receipt = {"version": 2, "method_id": "frozen-bounded-source-fitness-measurement",
                "outcome": "passed", "execution_commit": json.loads(freeze_bytes)["execution_commit"],
                "closure_freeze_sha256": freeze_hash, "runs": runs,
-               "byte_identical_results": True}
+               "byte_identical_results": True,
+               "run_one_sha256": runs[0]["result_sha256"],
+               "run_two_sha256": runs[1]["result_sha256"]}
     target = verification / "execution-reproducibility.json"
     target.write_bytes(controls.canonical(receipt))
     print(json.dumps(receipt, sort_keys=True))

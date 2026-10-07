@@ -327,10 +327,21 @@ def geometry_controls():
     method = payload.get("geometry_method_controls", {})
     if payload.get("ok") is not True or len(method.get("negative_rejections", {})) != 3:
         raise ValueError("Actual measurement CLI geometry method control receipt is incomplete")
+    entry = "measure.py CLI --geometry-method-controls"
+    method_id = "direct-stored-coordinate-polygon-overlay"
+    positive = {"method_id": method_id, "kind": "positive-control", "outcome": "passed", "entry": entry,
+                "expected": method["expected"], "observed": method["positive"],
+                "binds_measurement_outputs": ["source_covers_component", "current_contact_covers_component",
+                    "source_minus_component_empty", "component_minus_source_empty",
+                    "source_current_symmetric_difference", "source_current_topologically_equal"]}
+    negative = {"method_id": method_id, "kind": "negative-control", "outcome": "passed", "entry": entry,
+                "rejected_cases": method["negative_rejections"]}
     value = {"method_id": "directed-polygon-method-geometry", "kind": "positive-and-negative-control",
-             "outcome": "passed", "entry": "measure.py CLI --geometry-method-controls", "receipt": method}
+             "outcome": "passed", "entry": entry, "receipt": method}
     target = PACKET / "verification" / "geometry-method-controls.json"
     target.write_bytes(canonical(value))
+    (PACKET / "verification" / "geometry-method-positive.json").write_bytes(canonical(positive))
+    (PACKET / "verification" / "geometry-method-negative.json").write_bytes(canonical(negative))
     return value
 
 
