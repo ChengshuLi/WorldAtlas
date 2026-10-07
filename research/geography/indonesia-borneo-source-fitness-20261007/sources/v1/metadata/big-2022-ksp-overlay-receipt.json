@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "source": "BIG KSP 2022 Peta Wilayah Administrasi Kabupaten/Kota (Area)",
+  "layer_metadata": {
+    "url": "https://kspservices.big.go.id/satupeta/rest/services/PUBLIK/BATAS_WILAYAH/MapServer/2?f=pjson",
+    "sha256": "8b4f36f7046630098f99916210dffbe3c6ed2233eee87f632fb632439922fb28",
+    "bytes": 6924
+  },
+  "feature_selection": {
+    "method": "BIG layer query using exact envelope of the 45 pinned component geometries in WGS84, geometryType esriGeometryEnvelope, spatialRel esriSpatialRelIntersects, returnIdsOnly=true.",
+    "envelope": [116.25791778895884, -2.2215, 119.011729, 2.318793],
+    "ids_response_url": "https://kspservices.big.go.id/satupeta/rest/services/PUBLIK/BATAS_WILAYAH/MapServer/2/query?where=1%3D1&geometry=%7B%22xmin%22%3A116.25791778895884%2C%22ymin%22%3A-2.2215%2C%22xmax%22%3A119.011729%2C%22ymax%22%3A2.318793%2C%22spatialReference%22%3A%7B%22wkid%22%3A4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&returnIdsOnly=true&f=pjson",
+    "ids_response_sha256": "f270c1c04cf8a53bf48ec5c9b632d6642680ce67c3f07b3a0b0f47477a0e517c",
+    "retrieved_utc": "2026-10-07T13:46:42.975446+00:00",
+    "selected_objectids": [57, 402, 403, 358, 366, 369, 376, 377, 378, 387, 490, 491]
+  },
+  "feature_response": {
+    "url": "https://kspservices.big.go.id/satupeta/rest/services/PUBLIK/BATAS_WILAYAH/MapServer/2/query?objectIds=57%2C402%2C403%2C358%2C366%2C369%2C376%2C377%2C378%2C387%2C490%2C491&outFields=%2A&returnGeometry=true&outSR=4326&f=geoJSON",
+    "http_status": 200,
+    "content_type": "application/geo+json;charset=UTF-8",
+    "retrieved_utc": "2026-10-07T13:45:41.811184+00:00",
+    "feature_count": 12,
+    "bytes": 17648743,
+    "sha256": "d45aedf8f0f70031804a2666e1a6061cb5c67c1a36add6fee51ed3dd273ee94e",
+    "out_spatial_reference": 4326
+  },
+  "rights_and_retention": {
+    "copyright_text": "empty in layer metadata",
+    "open_redistribution_license": "not stated",
+    "status": "unknown",
+    "raw_geometry_in_repository": false,
+    "raw_geometry_locally_preserved_outside_repository": true,
+    "local_copy_path": "preserved-ignored/issue-1355-big-source/big-2022-ksp-features.geojson",
+    "reason": "The exact response is held in the workspace's ignored preservation area to avoid redistribution under unspecified terms. The reproduction script can re-fetch the service response and requires the pinned digest."
+  }
+}

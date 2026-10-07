@@ -1,0 +1,55 @@
+{
+  "license": "CC BY 4.0",
+  "product": "ESA WorldCover 10 m 2021 v200 Map",
+  "records": [
+    {
+      "bounds": [
+        117.0,
+        -3.0,
+        120.0,
+        0.0
+      ],
+      "bytes": 18648435,
+      "crs": "EPSG:4326",
+      "dimensions": [
+        36000,
+        36000
+      ],
+      "etag": "\"74c63a92a8c8da4c96d4416756b575b8-3\"",
+      "nodata": 0.0,
+      "path": "research/geography/indonesia-borneo-source-fitness-20261007/sources/v1/worldcover/ESA_WorldCover_10m_2021_v200_S03E117_Map.tif",
+      "pixel_size_degrees": [
+        8.333333333333333e-05,
+        8.333333333333333e-05
+      ],
+      "retrieved_at": "2026-10-07T09:26:30.519029+00:00",
+      "sha256": "9a7544a5689114a6e1b26b80f0773a6a21c39d08749030ca9ffd4f8d361b755e",
+      "url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_S03E117_Map.tif"
+    },
+    {
+      "bounds": [
+        117.0,
+        0.0,
+        120.0,
+        3.0
+      ],
+      "bytes": 14908166,
+      "crs": "EPSG:4326",
+      "dimensions": [
+        36000,
+        36000
+      ],
+      "etag": "\"4d93fa3f2290e0005960c930197edeca-2\"",
+      "nodata": 0.0,
+      "path": "research/geography/indonesia-borneo-source-fitness-20261007/sources/v1/worldcover/ESA_WorldCover_10m_2021_v200_N00E117_Map.tif",
+      "pixel_size_degrees": [
+        8.333333333333333e-05,
+        8.333333333333333e-05
+      ],
+      "retrieved_at": "2026-10-07T09:26:26.497327+00:00",
+      "sha256": "b95beb9811985108a0113ce4d36f7acca83e5bcba06d8146004d17a0a5c8b960",
+      "url": "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_N00E117_Map.tif"
+    }
+  ],
+  "source_page": "https://esa-worldcover.org/en/data-access"
+}

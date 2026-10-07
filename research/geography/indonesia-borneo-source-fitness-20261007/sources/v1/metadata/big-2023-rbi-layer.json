@@ -1,0 +1,304 @@
+{
+ "currentVersion": 10.81,
+ "id": 0,
+ "name": "Batas_Wilayah_Kabupaten/Kota",
+ "type": "Feature Layer",
+ "description": "",
+ "geometryType": "esriGeometryPolygon",
+ "sourceSpatialReference": {
+  "wkid": 4326,
+  "latestWkid": 4326,
+  "vcsWkid": 105790,
+  "latestVcsWkid": 3855
+ },
+ "copyrightText": "",
+ "parentLayer": null,
+ "subLayers": [],
+ "minScale": 0,
+ "maxScale": 0,
+ "drawingInfo": {
+  "renderer": {
+   "type": "simple",
+   "symbol": {
+    "type": "esriSFS",
+    "style": "esriSFSSolid",
+    "color": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "outline": {
+     "type": "esriSLS",
+     "style": "esriSLSSolid",
+     "color": [
+      0,
+      0,
+      0,
+      255
+     ],
+     "width": 1
+    }
+   },
+   "label": "",
+   "description": ""
+  },
+  "transparency": 0,
+  "labelingInfo": null
+ },
+ "defaultVisibility": true,
+ "extent": {
+  "xmin": 94.97191104600006,
+  "ymin": -11.00761537699998,
+  "xmax": 141.02004178900006,
+  "ymax": 6.076832204000027,
+  "spatialReference": {
+   "wkid": 4326,
+   "latestWkid": 4326,
+   "vcsWkid": 105790,
+   "latestVcsWkid": 3855
+  }
+ },
+ "hasAttachments": false,
+ "htmlPopupType": "esriServerHTMLPopupTypeAsHTMLText",
+ "displayField": "NAMOBJ",
+ "typeIdField": null,
+ "subtypeFieldName": null,
+ "subtypeField": null,
+ "defaultSubtypeCode": null,
+ "fields": [
+  {
+   "name": "FID",
+   "type": "esriFieldTypeOID",
+   "alias": "FID",
+   "domain": null
+  },
+  {
+   "name": "Shape",
+   "type": "esriFieldTypeGeometry",
+   "alias": "Shape",
+   "domain": null
+  },
+  {
+   "name": "OBJECTID",
+   "type": "esriFieldTypeInteger",
+   "alias": "OBJECTID",
+   "domain": null
+  },
+  {
+   "name": "NAMOBJ",
+   "type": "esriFieldTypeString",
+   "alias": "NAMOBJ",
+   "length": 250,
+   "domain": null
+  },
+  {
+   "name": "FCODE",
+   "type": "esriFieldTypeString",
+   "alias": "FCODE",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "REMARK",
+   "type": "esriFieldTypeString",
+   "alias": "REMARK",
+   "length": 250,
+   "domain": null
+  },
+  {
+   "name": "METADATA",
+   "type": "esriFieldTypeString",
+   "alias": "METADATA",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "SRS_ID",
+   "type": "esriFieldTypeString",
+   "alias": "SRS_ID",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "KDBBPS",
+   "type": "esriFieldTypeString",
+   "alias": "KDBBPS",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "KDCBPS",
+   "type": "esriFieldTypeString",
+   "alias": "KDCBPS",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "KDCPUM",
+   "type": "esriFieldTypeString",
+   "alias": "KDCPUM",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "KDEBPS",
+   "type": "esriFieldTypeString",
+   "alias": "KDEBPS",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "KDEPUM",
+   "type": "esriFieldTypeString",
+   "alias": "KDEPUM",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "KDPBPS",
+   "type": "esriFieldTypeString",
+   "alias": "KDPBPS",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "KDPKAB",
+   "type": "esriFieldTypeString",
+   "alias": "KDPKAB",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "KDPPUM",
+   "type": "esriFieldTypeString",
+   "alias": "KDPPUM",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "LUASWH",
+   "type": "esriFieldTypeDouble",
+   "alias": "LUASWH",
+   "domain": null
+  },
+  {
+   "name": "TIPADM",
+   "type": "esriFieldTypeInteger",
+   "alias": "TIPADM",
+   "domain": null
+  },
+  {
+   "name": "WADMKC",
+   "type": "esriFieldTypeString",
+   "alias": "WADMKC",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "WADMKD",
+   "type": "esriFieldTypeString",
+   "alias": "WADMKD",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "WADMKK",
+   "type": "esriFieldTypeString",
+   "alias": "WADMKK",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "WADMPR",
+   "type": "esriFieldTypeString",
+   "alias": "WADMPR",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "WIADKC",
+   "type": "esriFieldTypeString",
+   "alias": "WIADKC",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "WIADKK",
+   "type": "esriFieldTypeString",
+   "alias": "WIADKK",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "WIADPR",
+   "type": "esriFieldTypeString",
+   "alias": "WIADPR",
+   "length": 50,
+   "domain": null
+  },
+  {
+   "name": "WIADKD",
+   "type": "esriFieldTypeInteger",
+   "alias": "WIADKD",
+   "domain": null
+  },
+  {
+   "name": "SHAPE_AREA",
+   "type": "esriFieldTypeDouble",
+   "alias": "SHAPE_AREA",
+   "domain": null
+  },
+  {
+   "name": "SHAPE_LEN",
+   "type": "esriFieldTypeDouble",
+   "alias": "SHAPE_LEN",
+   "domain": null
+  }
+ ],
+ "geometryField": {
+  "name": "Shape",
+  "type": "esriFieldTypeGeometry",
+  "alias": "Shape"
+ },
+ "indexes": [
+  {
+   "name": "Shape",
+   "fields": "Shape",
+   "isAscending": true,
+   "isUnique": false,
+   "description": ""
+  }
+ ],
+ "subtypes": [],
+ "relationships": [],
+ "canModifyLayer": true,
+ "canScaleSymbols": false,
+ "hasLabels": false,
+ "capabilities": "Map,Query,Data",
+ "maxRecordCount": 1000,
+ "supportsStatistics": false,
+ "supportsAdvancedQueries": false,
+ "hasZ": true,
+ "hasM": true,
+ "supportedQueryFormats": "JSON, geoJSON",
+ "isDataVersioned": false,
+ "ownershipBasedAccessControlForFeatures": {"allowOthersToQuery": true},
+ "useStandardizedQueries": true,
+ "advancedQueryCapabilities": {
+  "useStandardizedQueries": true,
+  "supportsStatistics": false,
+  "supportsHavingClause": false,
+  "supportsCountDistinct": false,
+  "supportsOrderBy": false,
+  "supportsDistinct": false,
+  "supportsPagination": false,
+  "supportsTrueCurve": true,
+  "supportsReturningQueryExtent": true,
+  "supportsQueryWithDistance": true,
+  "supportsSqlExpression": false
+ },
+ "supportsDatumTransformation": true,
+ "supportsCoordinatesQuantization": true,
+ "serviceItemId": "6b88dd3a96564e38901213d74a6591de"
+}
