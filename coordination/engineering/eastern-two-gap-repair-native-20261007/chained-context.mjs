@@ -4,11 +4,18 @@ import{restoreWholeImage}from'./whole-image.mjs';import{validateContextMigration
 import{candidateBudget,requirePlainExecution}from'../../../scripts/native-ownership/native-preparation-guards.mjs';import{repositoryReader,safeEvidencePath}from'../../../scripts/evidence-quality.mjs';
 import{validateNativeSelectionReceipt}from'../../../scripts/native-ownership/require-verified-selection.mjs';
 import{BEFORE,AFTER,TARGETS}from'./native-producer.mjs';
+import{isDeepStrictEqual}from'node:util';
 import{rebindCoverageManifest}from'../../../scripts/rebind-coverage-manifest.mjs';
 const sha=b=>createHash('sha256').update(b).digest('hex');
 export const FIXED_PRIOR_STAGE_SHA='471e6a71856c13b5856cd74f24b79cc9961b3b091980e8b9106a19c1f32a2765';
 export const FIXED_NATIVE_COMPARISON_SHA='3e5d3a3f06d7e5340fea11b90deb8acc97d9e0c38f067e455e81359602b0aa28';
 export const FIXED_PRIOR_VALIDATOR_SHA='5b6da335c43e438a7fefac264b01d7aafeeba8096dc808a22475e07caa63a4e7';
+// Lossless in-memory aliases only after complete decoded bytes were authenticated.
+export function shareUnchangedContextGeometry(rows,reference){
+ const byId=new Map(reference.map(f=>[f.id,f.geometry]));assert.equal(byId.size,reference.length);
+ let shared=0;for(const row of rows){const prior=byId.get(row.id);if(prior&&isDeepStrictEqual(row.geometry,prior)&&JSON.stringify(row.geometry)===JSON.stringify(prior)){row.geometry=prior;shared++;}}
+ return shared;
+}
 export const FIXED_MIDDLE_GRID_SHA='70204c43deefd1af97c898f120d3638d4b8a3953445df37036d5771a54d718cc';
 // Exactly two authentic retained-identity migrations, with the same middle body.
 export function foldCoverageContinuation(manifest,{originalGrid,originalGridSha256,selectedGrid,selectedGridSha256,release,steps}){
@@ -86,7 +93,7 @@ export async function validateChainedBuildContext({root,expectedReference,stageP
   assert.equal(retained.original_binding.scientific_execution_commit,'5b32388df0501b013ac9a3ba97864932db493d59');
   assert.deepEqual(retained.original_binding.original_product,pin,'Original complete scientific context descriptor changed');
   const raw=fs.readFileSync(path.join(afterImage,pin.path));assert.equal(raw.length,pin.bytes);assert.equal(sha(raw),pin.sha256);
-  const decoded=gunzipSync(raw,{maxOutputLength:32*1024*1024});assert.equal(decoded.length,pin.decoded_bytes);assert.equal(sha(decoded),pin.decoded_sha256);after.push(...JSON.parse(decoded));
+  const decoded=gunzipSync(raw,{maxOutputLength:32*1024*1024});assert.equal(decoded.length,pin.decoded_bytes);assert.equal(sha(decoded),pin.decoded_sha256);const rows=JSON.parse(decoded);shareUnchangedContextGeometry(rows,before.rows);after.push(...rows);
  }
  assert.equal(before.rows.length,49625);assert.equal(after.length,49625);assert.equal(before.index.owner_sha256,afterIndex.owner_sha256);assert.equal(afterIndex.owner_sha256,prior.migration.owner_sha256);
  // Child receipts are evidence, never substitutes for a live branded proof.
@@ -95,7 +102,7 @@ export async function validateChainedBuildContext({root,expectedReference,stageP
  const middleGrid=JSON.parse(middleRaw);assert.equal(middleGrid.geographic_release,predecessor.id);assert.equal(middleGrid.footprints_sha256,predecessor.footprints_sha256);
  assert.equal(middleGrid.hierarchy_sha256,predecessor.hierarchy_sha256);
  const priorMigration=(()=>{
-  const original=legacyContext(oldStage.before_context),oldCandidates=JSON.parse(fs.readFileSync(path.join(image,oldStage.native_proposal.path)));
+  const original=legacyContext(oldStage.before_context);shareUnchangedContextGeometry(original.rows,before.rows);const oldCandidates=JSON.parse(fs.readFileSync(path.join(image,oldStage.native_proposal.path)));
   assert.equal(sha(fs.readFileSync(path.join(image,oldStage.native_proposal.path))),oldStage.native_proposal.sha256);
   return validateContextMigration({original:original.rows,migrated:before.rows,candidates:oldCandidates,predecessorRelease:originalRelease,release:predecessor,migrationManifestFile:path.join(image,oldStage.geometry_manifest.path)});
  })();

@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import {createHash} from 'node:crypto';
-import {foldCoverageContinuation,FIXED_MIDDLE_GRID_SHA} from '../coordination/engineering/eastern-two-gap-repair-native-20261007/chained-context.mjs';
+import {foldCoverageContinuation,FIXED_MIDDLE_GRID_SHA,shareUnchangedContextGeometry} from '../coordination/engineering/eastern-two-gap-repair-native-20261007/chained-context.mjs';
 import {validateGeometryMigrations} from '../scripts/prepare-geographic-release.mjs';
 import {footprintHash} from '../scripts/check-prepared.mjs';
 const digest=b=>createHash('sha256').update(b).digest('hex');
@@ -33,4 +33,12 @@ test('strict ordered two-step fold retains all physical fields and both actual m
   assert.throws(()=>foldCoverageContinuation(source,{...args,steps:steps.map(s=>({...s,geometryValidation:structuredClone(s.geometryValidation)}))}),/complete geometry migration validation/);
   assert.throws(()=>foldCoverageContinuation({...source,sources:[]},args));
  }finally{await fs.rm(directory,{recursive:true,force:true});}
+});
+
+test('memory sharing preserves exact geometry values/order and refuses signed-zero or changed inputs',()=>{
+ const reference=[feature(1)],rows=structuredClone(reference),before=JSON.stringify(rows);
+ assert.equal(shareUnchangedContextGeometry(rows,reference),1);assert.equal(rows[0].geometry,reference[0].geometry);assert.equal(JSON.stringify(rows),before);
+ const changed=[feature(2)];assert.equal(shareUnchangedContextGeometry(changed,reference),0);
+ const zero=structuredClone(reference);zero[0].geometry.coordinates[0][0][0]=-0;assert.equal(shareUnchangedContextGeometry(zero,reference),0);assert(Object.is(zero[0].geometry.coordinates[0][0][0],-0));
+ const reordered=structuredClone(reference);reordered[0].geometry={coordinates:reordered[0].geometry.coordinates,type:'Polygon'};assert.equal(shareUnchangedContextGeometry(reordered,reference),0);
 });

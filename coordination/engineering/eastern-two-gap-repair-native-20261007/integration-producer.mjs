@@ -74,13 +74,13 @@ export async function integrate(repo,out,{inputOnly=false}={}){
  const releases=put('data/geographic-releases/releases-v8.json.gz',gzipSync(json(next.index),{level:9}));
  const baseline=immutableReader(repo,BASE,storage);
  put('data/geographic-releases/current-manifest.json',json({path:'releases-v8.json.gz',sha256:releases.sha256,predecessor_index_sha256:sha(baseline.read('data/geographic-releases/index.json'))}));
- const native=loadSuccessor(repo,BASE,{storage}),manifestDir='data/canonical-grid/eastern-v8';
+ const manifestDir='data/canonical-grid/eastern-v8';
  function copyTree(p){for(const row of fs.readdirSync(repo+'/'+p,{withFileTypes:true})){const s=p+'/'+row.name;if(row.isDirectory())copyTree(s);else{assert(row.isFile());put(s,fs.readFileSync(repo+'/'+s));}}}
  copyTree(manifestDir);copyTree(NS+'/prior-v1');
  const middleGrid=put('data/native-ownership/repaired-v7/manifest.json',baseline.read('data/native-ownership/repaired-v7/manifest.json'));
  put('.github/package-inputs.json',fs.readFileSync(repo+'/.github/package-inputs.json'));put('data/canonical-grid/bounds.json.gz',baseline.read('data/canonical-grid/bounds.json.gz'));
  for(const p of [NS+'/native-selection-receipt.json',NS+'/native-proposal.json','data/ownership-selection.json','scripts/native-ownership/verified-candidates.json'])put(p,fs.readFileSync(repo+'/'+p));
- const gmPath='data/reference-migrations/eastern-two-gap-repair-20261006/index.json',gm=JSON.parse(baseline.read(gmPath)),installedMigration={...gm,activated:true,activation:{kind:'installed-offline-repository',release_id:native.releaseId,native_manifest_sha256:'a71edb65cbd7986e245f626e8a34b70e12c12d081ca24fc936bdd84e1bb07885',context_stage_version:2,production_deployment_verified:false,original_proposal_index_sha256:sha(baseline.read(gmPath))}},gmPin=put(gmPath,json(installedMigration)),geometryFiles=[];
+ const gmPath='data/reference-migrations/eastern-two-gap-repair-20261006/index.json',gm=JSON.parse(baseline.read(gmPath)),installedMigration={...gm,activated:true,activation:{kind:'installed-offline-repository',release_id:next.index.releases.at(-1).id,native_manifest_sha256:'a71edb65cbd7986e245f626e8a34b70e12c12d081ca24fc936bdd84e1bb07885',context_stage_version:2,production_deployment_verified:false,original_proposal_index_sha256:sha(baseline.read(gmPath))}},gmPin=put(gmPath,json(installedMigration)),geometryFiles=[];
  for(const [name,pin]of Object.entries(gm.files)){const p=path.posix.dirname(gmPath)+'/'+(pin.archive_path??name);geometryFiles.push(put(p,baseline.read(p)));}
  const pin=p=>{const b=fs.readFileSync(image+'/'+p);return{path:p,bytes:b.length,sha256:sha(b)};};
  const closure=codeClosure(repo,'scripts/native-ownership/validate-build-context-stage.mjs');for(const p of closure)if(!fs.existsSync(image+'/'+p))put(p,fs.readFileSync(repo+'/'+p));
@@ -92,6 +92,7 @@ export async function integrate(repo,out,{inputOnly=false}={}){
  console.log('Starting actual unchanged v1 replay and full successor context validation');
  const context=await validateBuildContextStage({root:image,expectedReference:next.index.releases.at(-1)});assert.equal(context.receipt.status,'verified');put(NS+'/combined-context-receipt.json',json(context.receipt));
  console.log('Full49625 context continuation PASS');
+ const native=loadSuccessor(repo,BASE,{storage});
  const contentRoot=out+'/content';fs.mkdirSync(contentRoot);const plan=JSON.parse(fs.readFileSync(repo+'/'+NS+'/content-source-plan.json'));
  const contentInvocation=out+'/content-invocation.json';fs.writeFileSync(contentInvocation,json({repo,baseline:BASE,runRoot:contentRoot,plan,storage:[...storage],execution_commit:head,executed_modules:modules}));
  const contentRaw=execFileSync(process.execPath,[repo+'/'+NS+'/content-continuation.mjs',contentInvocation],{maxBuffer:32*1024*1024});const content=JSON.parse(contentRaw);assert.equal(content.claim_rows,3984);
