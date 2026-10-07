@@ -58,7 +58,7 @@ def destination(path):
 
 
 def load(commit):
-    if not sys.flags.isolated or not sys.dont_write_bytecode or sys.pycache_prefix!=str(BYTECODE_PREFIX) or BYTECODE_PREFIX.exists() or BYTECODE_PREFIX.is_symlink():
+    if not sys.flags.isolated or not sys.flags.no_site or not sys.dont_write_bytecode or sys.pycache_prefix!=str(BYTECODE_PREFIX) or BYTECODE_PREFIX.exists() or BYTECODE_PREFIX.is_symlink():
         raise ValueError('Use isolated -B Python with the fixed nonexistent bytecode prefix; no cached or preloaded project execution')
     if subprocess.check_output(['git', '-C', str(REPO), 'rev-parse', 'HEAD']).decode().strip() != commit:
         raise ValueError('Current exact immutable execution commit required')
@@ -87,6 +87,10 @@ def load(commit):
             raise ValueError('Actual installed runtime body differs')
     if str(Path(sys.executable).resolve()) != runtime['executable'] or sys.version != runtime['python']:
         raise ValueError('Actual interpreter differs')
+    # Explicit frozen package paths replace site/.pth execution under -S.
+    if len(runtime['site_paths'])!=len(set(runtime['site_paths'])) or any(not Path(x).is_absolute() or not Path(x).is_dir() for x in runtime['site_paths']):
+        raise ValueError('Frozen package path inventory differs')
+    sys.path[:0]=runtime['site_paths']
     module = types.ModuleType('frozen_immutable')
     module.__file__ = str(HERE / 'methods/immutable.py')
     exec(compile(raw['methods/immutable.py'], module.__file__, 'exec'), module.__dict__)
@@ -112,18 +116,19 @@ def load(commit):
             decoded[name] = value
     # One whole combined phase; separate Baseline instances do not split its cap.
     combined = sum(original.consumed.values()) + sum(own.consumed.values())
-    if combined + 32 * 1024 * 1024 > PHASE or len(original.pins) + len(own.pins) + 16 > 512:
+    if combined + 24 * 1024 * 1024 > PHASE or len(original.pins) + len(own.pins) + 16 > 512:
         raise ValueError('Complete inputs and pair/evidence reserve exceed admission')
     validate_scope(captured, plan)
     methods = own.load_modules({'ellipsoidal_area': OWNED+'methods/ellipsoidal_area.py', 'geometry': OWNED+'methods/geometry.py', 'science': OWNED+'science.py'})
     for name,method in methods.items():
         guard.all_callables(method, raw['science.py' if name=='science' else 'methods/'+name+'.py'])
     loaded=runtime_loaded(runtime)
-    return module, methods, captured, decoded, dict(actual_loaded_runtime=loaded,original_consumed=original.consumed, own_consumed=own.consumed, combined_input_bytes=combined, reserved_output_bytes=32*1024*1024, runtime=runtime, source_commit=plan['original_commit']),guard,raw
+    return module, methods, captured, decoded, dict(actual_loaded_runtime=loaded,original_consumed=original.consumed, own_consumed=own.consumed, combined_input_bytes=combined, reserved_output_bytes=24*1024*1024, runtime=runtime, source_commit=plan['original_commit']),guard,raw
 
 
 def runtime_loaded(runtime):
     """Every actual installed origin must be a whole retained immutable body."""
+    import ctypes
     known={row['path']:row for row in runtime['files']}
     rows=[]
     for name,mod in sorted(sys.modules.items()):
@@ -143,6 +148,27 @@ def runtime_loaded(runtime):
         if len(body)!=pin['bytes'] or hashlib.sha256(body).hexdigest()!=pin['sha256']:
             raise ValueError('Actually loaded runtime origin differs: '+name)
         rows.append(dict(module=name,path=str(path),sha256=pin['sha256'],bytes=len(body)))
+    # Installed native dependency images are executable bodies even when they
+    # have no Python module object. OS shared-cache images remain named platform
+    # dependencies, not fabricated ordinary on-disk byte aliases.
+    import ctypes
+    library=ctypes.CDLL(None)
+    library._dyld_image_count.restype=ctypes.c_uint32
+    library._dyld_get_image_name.argtypes=[ctypes.c_uint32]
+    library._dyld_get_image_name.restype=ctypes.c_char_p
+    for i in range(library._dyld_image_count()):
+        name=library._dyld_get_image_name(i).decode()
+        if name.startswith('/Users/chengshuli/'):
+            path=str(Path(name).resolve());pin=known.get(path)
+            if not pin:
+                raise ValueError('Actually loaded installed native image lacks whole pin: '+path)
+            with Path(path).open('rb') as stream:
+                body=stream.read(pin['bytes']+1)
+            if len(body)!=pin['bytes'] or hashlib.sha256(body).hexdigest()!=pin['sha256']:
+                raise ValueError('Actually loaded native image differs')
+            rows.append(dict(native_image=path,bytes=len(body),sha256=pin['sha256']))
+        elif name not in runtime['system_image_paths']:
+            raise ValueError('Unrecorded platform native image: '+name)
     return rows
 
 
@@ -212,7 +238,7 @@ def main():
         guard.all_callables(method, raw['science.py' if name=='science' else 'methods/'+name+'.py'])
     data=module.canonical_json(result)
     receipt_data=module.canonical_json(receipt)
-    if len(data)>LIMIT or len(receipt_data)>LIMIT or len(data)+len(receipt_data)>15*1024*1024:
+    if len(data)>LIMIT or len(receipt_data)>LIMIT or len(data)+len(receipt_data)>11*1024*1024:
         raise ValueError('Whole result/receipt exceeds complete pair/evidence reserve')
     args.out.mkdir()
     with (args.out/'comparison.json').open('xb') as stream:stream.write(data)

@@ -7,6 +7,7 @@ def load(name,path):
     spec=importlib.util.spec_from_file_location(name,path);m=importlib.util.module_from_spec(spec);sys.modules[name]=m;spec.loader.exec_module(m);return m
 
 def execute(receipt):
+    sys.path[:0]=json.loads((HERE/'runtime-plan.json').read_bytes())['site_paths']
     run=load('method_entry',HERE/'run.py');guard=load('method_guard',HERE/'code_guard.py')
     ell=load('ellipsoidal_area',HERE/'methods/ellipsoidal_area.py');geo=load('geometry',HERE/'methods/geometry.py');science=load('method_science',HERE/'science.py')
     modules={'ellipsoidal_area':ell,'geometry':geo,'science':science};rows=[]
