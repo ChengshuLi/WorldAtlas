@@ -14,7 +14,32 @@ def digest(raw):
     return hashlib.sha256(raw).hexdigest()
 
 
-def decode_record(header, raw_points, ordinal, offset):
+class ValidityCache:
+    """Actual immutable geometry-object checks, never caller-supplied true flags."""
+    def __init__(self):
+        self._rows = {}
+        self.checks = 0
+        self.hits = 0
+    def check(self, geometry):
+        identity = id(geometry)
+        previous = self._rows.get(identity)
+        if previous is not None and previous[0] is geometry:
+            self.hits += 1
+            return previous[1]
+        valid = bool(geometry.is_valid)
+        self.checks += 1
+        # Keep the actual immutable object so a recycled id cannot certify a
+        # different pointset. Translation produces its own separately checked
+        # object; neither validity nor binary64 coordinates are assumed equal.
+        self._rows[identity] = (geometry, valid)
+        return valid
+
+
+def checked_validity(geometry, cache):
+    return cache.check(geometry) if cache is not None else bool(geometry.is_valid)
+
+
+def decode_record(header, raw_points, ordinal, offset, validity=None):
     """Preserve native bodies; honor both GMT point rule and segment range."""
     values = HEADER.unpack(header)
     identity, count, flag, west, east, south, north, area, full_area, container, ancestor = values
@@ -62,18 +87,19 @@ def decode_record(header, raw_points, ordinal, offset):
         meta['geometry_issues'].append('unclosed-native-ring-not-implicitly-closed')
         return meta, None
     geometry = Polygon(coords)
-    if geometry.is_empty or not geometry.is_valid:
+    meta['whole_original_geometry_valid'] = checked_validity(geometry, validity)
+    if geometry.is_empty or not meta['whole_original_geometry_valid']:
         meta['geometry_issues'].append('invalid-original-source-polygon')
     return meta, geometry
 
 
-def relation(candidate, source, source_id, periodic_offset=0):
+def relation(candidate, source, source_id, periodic_offset=0, validity=None):
     """After conservative bbox selection, keep every tested record relation."""
     row = dict(source_id=source_id, periodic_offset=periodic_offset)
-    if candidate.is_empty or not candidate.is_valid:
+    if candidate.is_empty or not checked_validity(candidate, validity):
         row.update(status='unknown', issue='invalid-complete-candidate')
         return row, None
-    if source.is_empty or not source.is_valid:
+    if source.is_empty or not checked_validity(source, validity):
         row.update(status='unknown', issue='invalid-complete-source')
         return row, None
     try:
@@ -148,15 +174,18 @@ def conservative_source_pairs(candidate, tree, source_ids):
     return sorted(pairs)
 
 
-def full_container_relation(child, parent):
+def full_container_relation(child, parent, validity=None):
     """Whole original source polygons in documented periodic coordinate frames."""
-    if child is None or parent is None or not child.is_valid or not parent.is_valid:
+    if child is None or parent is None or not checked_validity(child, validity) or not checked_validity(parent, validity):
         return dict(status='unknown', issue='invalid-or-unconstructed-full-container-member')
     prepare(parent)
     observations = []
     for offset in (-360,0,360):
         shifted = translate(child,xoff=offset) if offset else child
         try:
+            if not checked_validity(shifted, validity):
+                observations.append(dict(child_periodic_offset=offset,issue="invalid-complete-translated-container-child"))
+                continue
             covers = bool(parent.covers(shifted))
             observations.append(dict(child_periodic_offset=offset,parent_covers_child=covers))
             if covers:

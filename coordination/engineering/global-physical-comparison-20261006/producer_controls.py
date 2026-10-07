@@ -71,8 +71,8 @@ def mixed_dimensional():
         if contact_kind=='nested':
           whole=GeometryCollection([box(0,0,1,1),GeometryCollection([LineString([(2,2),(2,3)]),Point(2,2)])])
           original=comparison.relation
-          def nested_relation(c,s,identity,offset=0):
-            return ({'source_id':identity,'status':'checked','witness_geometry':mapping(whole)},whole) if identity==level else original(c,s,identity,offset)
+          def nested_relation(c,s,identity,offset=0,validity=None):
+            return ({'source_id':identity,'status':'checked','witness_geometry':mapping(whole)},whole) if identity==level else original(c,s,identity,offset,validity)
           with patch.object(comparison,'relation',side_effect=nested_relation):
             row=compare(metas,gs,containers,geometry=candidate)
         else:
@@ -210,6 +210,45 @@ with patch.object(p.inputs,'ordinary_git',return_value=archive_body):
     rejects('actual-whole-archive-reader-missing-original-part',lambda:p.original_native(pathlib.Path.cwd(),wrong),'Missing/reordered original source fragment')
     wrong=copy.deepcopy(config);wrong['source_archive']['member_bytes']+=1
     rejects('actual-whole-archive-reader-wrong-whole-member-size',lambda:p.original_native(pathlib.Path.cwd(),wrong),'Wrong/incomplete complete original native member')
+
+def cache_whole_objects():
+    cache=comparison.ValidityCache();g=box(0,0,1,1)
+    assert cache.check(g) and cache.check(g)
+    assert cache.checks==1 and cache.hits==1
+    changed=Polygon([(0,0),(1,1),(1,0),(0,1),(0,0)])
+    assert not cache.check(changed) and cache.checks==2
+check('cached-whole-object-validation-reuses-only-the-same-immutable-pointset',cache_whole_objects)
+
+def stale_binding():
+    cache=comparison.ValidityCache();valid=box(0,0,1,1);bad=Polygon([(0,0),(1,1),(1,0),(0,1),(0,0)])
+    assert cache.check(valid)
+    cache._rows[id(bad)]=(valid,True) # Directed stale-id/object mismatch.
+    assert not cache.check(bad) and cache.checks==2
+check('directed-mismatched-object-cache-binding-cannot-certify-invalid-pointset',stale_binding)
+
+def invalid_cached_source():
+    bad=Polygon([(0,0),(1,1),(1,0),(0,1),(0,0)]);cache=comparison.ValidityCache()
+    row,piece=comparison.relation(box(0,0,2,2),bad,2380,validity=cache)
+    assert row['status']=='unknown' and row['issue']=='invalid-complete-source' and piece is None
+    row2,piece2=comparison.relation(box(0,0,2,2),bad,2380)
+    assert row2['status']=='unknown' and piece2 is None
+check('cached-and-default-real-invalid-source-remain-unknown',invalid_cached_source)
+
+def invalid_shift():
+    parent=box(-10,-10,10,10);child=box(0,0,1,1);bad=Polygon([(0,0),(1,1),(1,0),(0,1),(0,0)]);cache=comparison.ValidityCache()
+    with patch.object(comparison,'translate',return_value=bad):
+        result=comparison.full_container_relation(child,parent,cache)
+    assert result['status']=='supported' and result['child_periodic_offset']==0
+    assert result['whole_member_observations'][0]['issue']=='invalid-complete-translated-container-child'
+    assert cache.checks==3 # parent, child, separately validated bad translation.
+check('actual-container-cache-independently-validates-each-translated-child-object',invalid_shift)
+
+def invalid_source_shift():
+    cache=comparison.ValidityCache();original=box(0,0,1,1);assert cache.check(original)
+    bad=Polygon([(0,0),(1,1),(1,0),(0,1),(0,0)])
+    row,piece=comparison.relation(box(0,0,2,2),bad,17,periodic_offset=360,validity=cache)
+    assert row['status']=='unknown' and row['periodic_offset']==360 and piece is None
+check('actual-relation-cache-invalid-periodic-source-is-not-inferred-valid-from-original',invalid_source_shift)
 
 receipt = dict(kind='Directed actual complete producer controls; injected uncertainty is a control, not an observed GEOS defect.',
                passed=passed,count=len(passed),producer_sha256=p.digest(pathlib.Path(p.__file__).read_bytes()),

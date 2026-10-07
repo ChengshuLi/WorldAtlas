@@ -175,7 +175,7 @@ def original_native(repo, config):
     return native
 
 
-def native_records(native):
+def native_records(native, validity=None):
     """Yield actual original records; reject trailing or incomplete native bytes."""
     offset = ordinal = 0
     while offset < len(native):
@@ -186,7 +186,7 @@ def native_records(native):
         length = values[1] * 8
         if offset + 44 + length > len(native):
             raise ValueError('Truncated original coordinate member')
-        meta, geometry = comparison.decode_record(header, native[offset + 44:offset + 44 + length], ordinal, offset)
+        meta, geometry = comparison.decode_record(header, native[offset + 44:offset + 44 + length], ordinal, offset, validity)
         yield meta, geometry
         offset += 44 + length
         ordinal += 1
@@ -197,8 +197,9 @@ def native_records(native):
 def load_source(repo, config, products):
     """Authenticate original ZIP then read every native row, without repair."""
     native = original_native(repo, config)
+    validity = comparison.ValidityCache()
     metas, geometries = {}, {}
-    for meta, geometry in native_records(native):
+    for meta, geometry in native_records(native, validity):
         if meta['id'] in metas:
             raise ValueError('Duplicate complete original source identity')
         metas[meta['id']] = meta
@@ -209,7 +210,7 @@ def load_source(repo, config, products):
         meta = metas[identity]
         level = meta['level']
         if level in (2, 3, 4):
-            outcome = container_outcome(identity, metas, geometries)
+            outcome = container_outcome(identity, metas, geometries, validity)
             containers[identity] = dict(child=identity, parent=meta['container'], **outcome)
             products.emit('containers', containers[identity])
         products.emit('sources', meta)
@@ -217,15 +218,15 @@ def load_source(repo, config, products):
     source_ids = sorted(metas)
     envelopes = [geometries[identity] if geometries[identity] is not None
                  else box(*metas[identity]['decoded_pointset_bounds']) for identity in source_ids]
-    return metas, geometries, containers, source_ids, STRtree(envelopes)
+    return metas, geometries, containers, source_ids, STRtree(envelopes), validity
 
 
-def container_outcome(identity, metas, geometries):
+def container_outcome(identity, metas, geometries, validity=None):
     meta = metas[identity]
     parent = metas.get(meta['container'])
     if parent is None or parent['level'] != meta['level'] - 1:
         return dict(status='unknown', issue='missing-or-wrong-level-whole-container')
-    return comparison.full_container_relation(geometries[identity], geometries[parent['id']])
+    return comparison.full_container_relation(geometries[identity], geometries[parent['id']], validity)
 
 
 def chain_issues(identity, metas, containers):
@@ -279,7 +280,7 @@ def geometry_evidence(geometry, candidate, candidate_geometry_sha):
                 planar_area=geometry.area)
 
 
-def compare_component(record, metas, geometries, containers, source_ids, tree, shifted):
+def compare_component(record, metas, geometries, containers, source_ids, tree, shifted, validity=None):
     candidate = shape(record['geometry'])
     row = dict(component_id=record['id'], candidate_feature_sha256=digest(immutable.canonical_json(record)),
                candidate_geometry_sha256=digest(immutable.canonical_json(record['geometry'])),
@@ -298,7 +299,7 @@ def compare_component(record, metas, geometries, containers, source_ids, tree, s
     if context.get('unmeasured_fragment_ids'):
         row['unresolved'].append(dict(issue='existing-unmeasured-complete-fragment',
                                       fragment_ids=context['unmeasured_fragment_ids']))
-    if candidate.is_empty or not candidate.is_valid:
+    if candidate.is_empty or not comparison.checked_validity(candidate, validity):
         row.update(status='unknown', unresolved=[dict(issue='invalid-or-empty-complete-candidate')])
         return row
     pieces = defaultdict(list)
@@ -317,7 +318,7 @@ def compare_component(record, metas, geometries, containers, source_ids, tree, s
         if key not in shifted:
             shifted[key] = translate(source, xoff=periodic_offset) if periodic_offset else source
             prepare(shifted[key])
-        relation, piece = comparison.relation(candidate, shifted[key], identity, periodic_offset)
+        relation, piece = comparison.relation(candidate, shifted[key], identity, periodic_offset, validity)
         relation.update(source_record_sha256=meta['record_sha256'],
                         source_pointset_sha256=meta['decoded_pointset_binary64_sha256'],
                         source_level=meta['level'], source_container=meta['container'],
@@ -424,12 +425,12 @@ def main():
         products.emit('lineage', dict(kind=kind, delta=delta))
     candidates = current.pop('components')
     del current
-    metas, geometries, containers, source_ids, tree = load_source(args.repo, config, products)
+    metas, geometries, containers, source_ids, tree, validity = load_source(args.repo, config, products)
     shifted = {}
     statuses = Counter()
     roster = []
     for position, record in enumerate(candidates):
-        result = compare_component(record, metas, geometries, containers, source_ids, tree, shifted)
+        result = compare_component(record, metas, geometries, containers, source_ids, tree, shifted, validity)
         result['complete_contact_ids'] = sorted(contact_members[record['id']])
         products.emit('components', result)
         roster.append(dict(id=record['id'], feature_sha256=result['candidate_feature_sha256']))
@@ -441,7 +442,7 @@ def main():
                   input_receipts=receipts, primary_documentation=source_docs, existing_reconstruction=reconstruction,
                   candidate_delivery=config['candidate_delivery'], source_delivery=config['source_delivery'],
                   component_count=len(candidates), complete_roster_sha256=digest(immutable.canonical_json(roster)),
-                  source_record_count=len(metas), statuses=dict(sorted(statuses.items())), products=descriptors,
+                  source_record_count=len(metas), validity_cache=dict(actual_whole_object_checks=validity.checks, exact_object_reuses=validity.hits), statuses=dict(sorted(statuses.items())), products=descriptors,
                   limits=['Source-relative polygon support only, not current/historical physical truth, political assignment or repair permission.',
                           'Outside mappedL1 is unclassified exterior context, never inferred dryland.',
                           'Original WVS/WDBII source dates, resolution, known registration uncertainty and absent river widths remain unresolved.',
