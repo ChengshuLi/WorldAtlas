@@ -175,3 +175,25 @@ test('field-only admission refuses unknown reads, premature success and unrelate
       {cwd:new URL('..',import.meta.url),stdio:'pipe'});
   }
 });
+
+
+test('prerequisite admission rejects unexpected real importer reads, success and refusal errors', () => {
+  for (const [from,to] of [
+    ['SELECT * FROM atlas_ingestions WHERE id=?','SELECT * FROM unexpected_receipts WHERE id=?'],
+    ["const prior=await first(db.prepare('SELECT * FROM atlas_ingestions WHERE id=?').bind(id));",'return {duplicate:true};'],
+    ['await db.batch(statements)','await db.batch([...statements,statements[0]])'],
+    ['Import rejected: ${e.message}','Unrelated conflict: ${e.message}'],
+  ]) {
+    const script = `
+      import {registerHooks} from 'node:module';import {createHash} from 'node:crypto';import assert from 'node:assert/strict';
+      const [from,to]=JSON.parse(process.argv[1]);
+      registerHooks({load(url,context,next){const result=next(url,context);
+        if(url.endsWith('/hosted/records.js')){const source=String(result.source);assert.ok(source.includes(from));return {...result,source:source.replace(from,to)};}return result;
+      }});
+      const {admitGeographicReleaseBatches}=await import('./scripts/geographic-release-admission.mjs');
+      const bytes=Buffer.from(JSON.stringify({sources:[{id:'reference',name:'Fixture',license:'CC0',vintage:'2026',status:'reference',supported_from:2026,supported_to:2027}]}));
+      await assert.rejects(admitGeographicReleaseBatches([{path:'sources.json',route:'/api/records/import',sha256:createHash('sha256').update(bytes).digest('hex')}],{readBatch:()=>bytes}));
+    `;
+    execFileSync(process.execPath,['--input-type=module','-e',script,JSON.stringify([from,to])],{cwd:new URL('..',import.meta.url),stdio:'pipe'});
+  }
+});

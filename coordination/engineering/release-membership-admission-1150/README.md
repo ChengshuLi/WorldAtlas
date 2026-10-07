@@ -15,8 +15,9 @@ and their sequence are preserved. Source/entity registration precedes the releas
 definition and its ordered membership/change requests. Staging parents run serially
 even when prerequisite concurrency is six; their child requests cannot interleave.
 
-Source/entity admission reuses the service's actual field normalizer through an
-internal read-only helper in `hosted/records.js`. Staging admission invokes the unchanged real `stageGeographicRelease` handler,
+Source/entity admission invokes the unchanged real `importBatch` handler through
+the same read-only write-intent discipline, restricted to source/entity collections.
+Staging admission invokes the unchanged real `stageGeographicRelease` handler,
 including dates, text fields and creation proof semantics, through a strict
 read-only write-intent sink. The sink admits only known query shapes and captures
 the handler's actual proposed statements, then refuses their commit with a private

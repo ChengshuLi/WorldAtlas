@@ -96,26 +96,6 @@ function geographyGuard(db,geography,id,digest){
  return db.prepare(`SELECT json_extract(CASE WHEN EXISTS(SELECT 1 FROM atlas_ingestions WHERE id=? AND fingerprint=?) OR EXISTS(SELECT 1 FROM atlas_geographic_releases g WHERE g.id=? AND g.hierarchy_sha256=? AND g.footprints_sha256=? AND g.status='published' AND NOT EXISTS(SELECT 1 FROM atlas_geographic_releases newer WHERE newer.status='published' AND newer.version>g.version)) THEN 'true' ELSE 'ATLAS_GEOGRAPHY_CONFLICT' END,'$') AS expected_geography_matches`).bind(id,digest,geography.release_id,geography.hierarchy_sha256,geography.footprints_sha256);
 }
 
-/** Internal read-only admission for bootstrap's existing source/entity inputs.
- * Reuse the actual field normalizer without SQL or a public endpoint. Foreign
- * keys and immutable collisions still require the real transactional import.
- */
-export function validateGeographicPrerequisiteBatch(payload){
- if(!payload||typeof payload!=='object'||Array.isArray(payload))fail('Import must be an object');
- if(new TextEncoder().encode(JSON.stringify(payload)).length>1024*1024)fail('Import exceeds 1 MiB',413);
- let total=0;const entities=[];
- for(const [key,rows]of Object.entries(payload)){
-  if(key==='ingestion_id'){text(rows,'ingestion ID');continue;}
-  if(!['sources','entities'].includes(key)||!Array.isArray(rows))fail('Invalid geographic prerequisite collection');
-  const normalized=rows.map(row=>normalize(key,row)),ids=normalized.map(row=>row.id);
-  if(new Set(ids).size!==ids.length)fail('Duplicate stable IDs within an import collection');
-  total+=rows.length;if(key==='entities')entities.push(...normalized);
- }
- if(!total||total>250)fail('Import must contain 1–250 rows');
- const pending=new Map(entities.map(row=>[row.id,row]));
- while(pending.size){const ready=[...pending.values()].filter(row=>!row.parent_id||!pending.has(row.parent_id));if(!ready.length)fail('Entity parent cycle');for(const row of ready)pending.delete(row.id);}
-}
-
 export async function importBatch(db,payload){
  if(!payload||typeof payload!=='object'||Array.isArray(payload))fail('Import must be an object');
  if(new TextEncoder().encode(JSON.stringify(payload)).length>1024*1024)fail('Import exceeds 1 MiB',413);

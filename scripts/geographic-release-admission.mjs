@@ -1,7 +1,7 @@
 import {createHash, randomUUID} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
 import {stageGeographicRelease} from '../hosted/geographic-releases.js';
-import {validateGeographicPrerequisiteBatch} from '../hosted/records.js';
+import {importBatch} from '../hosted/records.js';
 
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const MiB = 1024 * 1024;
@@ -33,14 +33,25 @@ function rows(payload, field) {
  * foreign keys still belong to the real transactional staging execution.
  * Unknown SQL fails closed; reaching the write boundary is deliberately refused.
  */
-async function validateGeographicStageFields(payload, knownRelease) {
+async function validateGeographicFields(payload, knownRelease, prerequisite = false) {
+  if (prerequisite && Object.keys(payload).some(key => !['sources','entities','ingestion_id'].includes(key)))
+    throw Error('Invalid geographic prerequisite collection');
   const columns = {
     atlas_geographic_releases: ['id','source_id','version','reference_date','status','hierarchy_sha256','footprints_sha256','membership_sha256','location_ids_sha256','changes_sha256','expected_counts','metadata','published_at'],
     atlas_geographic_memberships: ['release_id','entity_id','parent_id','reference_name','active','source_id','evidence'],
     atlas_geographic_changes: ['id','release_id','old_entity_id','new_entity_id','change_type','source_id','evidence'],
     atlas_ingestions: ['id','fingerprint','counts','created_at'],
   };
-  const writes = new Map(Object.entries(columns).map(([table, fields]) => [
+  const prerequisiteColumns = {
+    atlas_sources: ['id','name','url','license','vintage','supported_from','supported_to','status','metadata'],
+    atlas_entities: ['id','kind','name','parent_id','valid_from','valid_to','source_id','reference_owner','is_example','active','metadata'],
+    atlas_ingestions: ['id','fingerprint','counts','created_at'],
+  };
+  const writes = prerequisite ? new Map(Object.entries(prerequisiteColumns).map(([table, fields]) => [
+    table === 'atlas_ingestions' ? 'INSERT OR IGNORE INTO atlas_ingestions(id,fingerprint,counts,created_at) VALUES (?,?,?,?)' :
+      `INSERT OR IGNORE INTO ${table} (${fields.join(',')}) VALUES (${fields.map(() => '?').join(',')})`,
+    {table, fields},
+  ])) : new Map(Object.entries(columns).map(([table, fields]) => [
     `INSERT INTO ${table}(${fields.join(',')}) VALUES(${fields.map(() => '?').join(',')})${table === 'atlas_ingestions' ? '' : ' ON CONFLICT DO NOTHING'}`,
     {table, fields},
   ]));
@@ -50,7 +61,7 @@ async function validateGeographicStageFields(payload, knownRelease) {
     prepare(sql) {
       const write = writes.get(sql);
       const ingestionRead = sql === 'SELECT * FROM atlas_ingestions WHERE id=?';
-      const releaseRead = sql === 'SELECT * FROM atlas_geographic_releases WHERE id=?';
+      const releaseRead = !prerequisite && sql === 'SELECT * FROM atlas_geographic_releases WHERE id=?';
       if (!write && !ingestionRead && !releaseRead) throw Error('Unsupported field-admission SQL');
       return {bind(...values) {
         if (write) {
@@ -78,10 +89,11 @@ async function validateGeographicStageFields(payload, knownRelease) {
     },
   };
   try {
-    await stageGeographicRelease(sink, payload);
+    if (prerequisite) await importBatch(sink, payload);
+    else await stageGeographicRelease(sink, payload);
   } catch (error) {
     // The handler wraps batch errors. A generic 409 is never sufficient proof.
-    if (captured && error.status === 409 && error.message === marker) return {release: normalizedRelease};
+    if (captured && error.status === 409 && error.message === (prerequisite ? `Import rejected: ${marker}` : marker)) return {release: normalizedRelease};
     throw error;
   }
   throw Error('Field admission unexpectedly returned without refusing a commit');
@@ -181,12 +193,12 @@ export async function admitGeographicReleaseBatches(parts, {readBatch, releases 
       for (const body of requests) {
         const candidate = JSON.parse(body);
         const known = knownReleases.get(candidate.release_id);
-        const validated = await validateGeographicStageFields(candidate, known);
+        const validated = await validateGeographicFields(candidate, known);
         if (candidate.release) knownReleases.set(validated.release.id, validated.release);
       }
     }
     else {
-      validateGeographicPrerequisiteBatch(payload);
+      await validateGeographicFields(payload, null, true);
       if (decoded.length > MiB)
         throw Error('Geographic prerequisite exceeds service row/byte limits');
       requests = [Buffer.from(decoded)];
