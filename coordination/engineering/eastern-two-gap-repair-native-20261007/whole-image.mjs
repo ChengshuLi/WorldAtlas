@@ -2,7 +2,18 @@
 import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';import{createHash}from'node:crypto';import{gzipSync,gunzipSync}from'node:zlib';
 const sha=b=>createHash('sha256').update(b).digest('hex'),CAP=32*1024*1024,PART=16*1024*1024;
 const safe=p=>typeof p==='string'&&!path.isAbsolute(p)&&p.split('/').every(x=>x&&x!=='.'&&x!=='..')&&!p.includes('\\');
-function bytes(root,p){assert(safe(p));const file=path.join(root,p),stat=fs.lstatSync(file);assert(stat.isFile()&&fs.realpathSync(file)===file&&stat.size<=CAP);return fs.readFileSync(file);}
+function bytes(root,p){
+ assert(safe(p)&&path.isAbsolute(root)&&fs.realpathSync(root)===root);
+ const file=path.join(root,p),stat=fs.lstatSync(file);
+ assert(stat.isFile()&&fs.realpathSync(file)===file&&stat.size<=CAP);
+ const fd=fs.openSync(file,'r');try{
+  const opened=fs.fstatSync(fd);assert(opened.isFile()&&opened.size===stat.size&&fs.realpathSync(file)===file);
+  const raw=Buffer.alloc(stat.size+1);let n=0;while(n<raw.length){const got=fs.readSync(fd,raw,n,raw.length-n,null);if(!got)break;n+=got;}
+  assert.equal(n,stat.size,'Actual ordinary EOF length differs');
+  assert.equal(fs.readSync(fd,Buffer.alloc(1),0,1,null),0,'Actual ordinary body grew after bound');
+  return raw.subarray(0,n);
+ }finally{fs.closeSync(fd);}
+}
 function files(root,prefix=''){return fs.readdirSync(path.join(root,prefix),{withFileTypes:true}).flatMap(e=>{const p=prefix?prefix+'/'+e.name:e.name;assert(!e.isSymbolicLink());return e.isDirectory()?files(root,p):[p];}).sort();}
 export function retainWholeImage(source,out,{roles={}}={}){
  assert(fs.realpathSync(source)===source&&path.isAbsolute(out)&&!fs.existsSync(out)&&fs.realpathSync(path.dirname(out))===path.dirname(out));fs.mkdirSync(out);
