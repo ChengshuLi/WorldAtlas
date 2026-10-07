@@ -36,7 +36,7 @@ def authenticate_code(commit):
 
 def footprint_hash(features):
     script="import fs from 'node:fs';import {footprintHash} from './scripts/check-prepared.mjs';process.stdout.write(footprintHash(JSON.parse(fs.readFileSync(0))));"
-    return subprocess.check_output([NODE,'--input-type=module','-e',script],cwd=ROOT,input=canonical_json(list(features.values()))).decode()
+    return subprocess.check_output([NODE,'--input-type=module','-e',script],cwd=ROOT,input=(json.dumps(list(features.values()),ensure_ascii=False,separators=(',',':'),allow_nan=False)+'\n').encode()).decode()
 
 def run(commit,target):
     code=authenticate_code(commit)
@@ -98,8 +98,8 @@ def run(commit,target):
         contexts[suffix]={'complete_families':rows,'complete_component_ids':sorted(ids)}
     target.mkdir(parents=True)
     outputs=[]
-    def write(name,value):
-        raw=canonical_json(value)
+    def write(name,value,preserve_geometry_order=False):
+        raw=(json.dumps(value,ensure_ascii=False,separators=(',',':'),allow_nan=False)+'\n').encode()if preserve_geometry_order else canonical_json(value)
         if len(raw)>32*1024**2:raise ValueError('Full output decoded cap')
         enc=deterministic_gzip(raw)if name.endswith('.gz')else raw
         with(target/name).open('xb')as f:f.write(enc)
@@ -107,8 +107,8 @@ def run(commit,target):
     write('corrections.json.gz',corrections);write('neighbors.json.gz',neighbors);write('full-source-scope.json.gz',{'current':[world[s]for s in subjects],'retired':retired,'native':data['native_scope']})
     write('full-four-family-context.json.gz',{'families':data['families'],'components':[data['components'][c]for c in sorted(data['components'])],'physics':[data['physics'][c]for c in sorted(data['physics'])],'dispositions':[{'component_id':c,'status':'proposed-whole-addition'if c in TARGETS.values()else'unchanged-unresolved'}for c in sorted(data['components'])]})
     write('complete-regional-contact-context.json.gz',contexts);write('whole-world-geographic-regression.json.gz',report);write('whole-world-prepared-validation.json.gz',{'method':METHOD,'domain':PREPARED_DOMAIN,'feature_count':len(prepared),'feature_geometry_sha256':digest(canonical_json([[i,digest(canonical_json(mapping(g)))]for i,g in sorted(prepared.items())])),'all_original_zero_area_periodic_seam_contacts':seams,'errors':[]})
-    oldpart=data['inputs'].json('data/geography/part-29.json');proposed={**oldpart,'features':[after[f['id']]for f in oldpart['features']]};write('proposed-part-29.json.gz',proposed)
-    write('crosswalk.json.gz',{'changed_ids':sorted(TARGETS),'removed_ids':[],'added_ids':[],'reused_ids':sorted(set(world)-set(TARGETS)),'before_footprints_sha256':before_footprints,'after_footprints_sha256':after_footprints,'archives':[{'id':i,'feature':world[i]}for i in sorted(TARGETS)],'relationships':[{'kind':'source-backed-physical-envelope-correction','before_ids':[i],'after_ids':[i],'history_transfer':False,'identity_pairs':[{'before_id':i,'after_id':i}]}for i in sorted(TARGETS)],'history_transfer':False,'source_evidence':[{'url':world[i]['properties']['metadata']['source_url'],'source_sha256':digest(data['native_source_files']['aafc-ecoregions.geojson']),'subject_id':i}for i in sorted(TARGETS)],'geometry_stage_validated':True,'historical_claims_transferred':False})
+    oldpart=data['inputs'].json('data/geography/part-29.json');proposed={**oldpart,'features':[after[f['id']]for f in oldpart['features']]};write('proposed-part-29.json.gz',proposed,preserve_geometry_order=True)
+    write('crosswalk.json.gz',{'changed_ids':sorted(TARGETS),'removed_ids':[],'added_ids':[],'reused_ids':sorted(set(world)-set(TARGETS)),'before_footprints_sha256':before_footprints,'after_footprints_sha256':after_footprints,'archives':[{'id':i,'feature':world[i]}for i in sorted(TARGETS)],'relationships':[{'kind':'source-backed-physical-envelope-correction','before_ids':[i],'after_ids':[i],'history_transfer':False,'identity_pairs':[{'before_id':i,'after_id':i}]}for i in sorted(TARGETS)],'history_transfer':False,'source_evidence':[{'url':world[i]['properties']['metadata']['source_url'],'source_sha256':digest(data['native_source_files']['aafc-ecoregions.geojson']),'subject_id':i}for i in sorted(TARGETS)],'geometry_stage_validated':True,'historical_claims_transferred':False},preserve_geometry_order=True)
     write('release-footprint-proposal.json',{'before_release':release,'proposed_version':8,'proposed_footprints_sha256':after_footprints,'membership_and_hierarchy':'unchanged; successor registry construction and native/context activation required in PR2','activated':False,'published':False})
     if code!=authenticate_code(commit):raise ValueError('Executed module closure changed during complete run')
     write('report.json',{'version':1,'issue':1295,'stage':'complete-two-target-proposal-only','execution_commit':commit,'executed_project_modules':code,'inputs':data['receipt'],'software':{'python':sys.version,'numpy':numpy.__version__,'shapely':shapely.__version__,'geos':shapely.geos_version_string,'node':subprocess.check_output([NODE,'--version']).decode().strip()},'counts':{'world':49625,'changed':2,'unchanged':49623,'families':4,'components':64,'unchanged_unresolved_components':62,'current_scope':24,'retired_scope':477,'native_source_regions':24,'neighbor_relations':12},'outputs':outputs[:],'before_footprints_sha256':before_footprints,'after_footprints_sha256':after_footprints,'current_pointers_activated':False,'limits':['Main source-envelope fit is limited to the two approved physical-region references, not legal administrative authority.','Historical cause, other gap repairs and water truth are not inferred.','PR2 successor release/native/context/selection/certificate/content acceptance remains required. No deployment.']})

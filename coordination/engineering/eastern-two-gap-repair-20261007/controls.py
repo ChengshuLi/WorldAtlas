@@ -5,7 +5,7 @@ from shapely.geometry import box,mapping
 ROOT=Path(__file__).resolve().parents[3];sys.path.insert(0,str(ROOT/'scripts'))
 from kernel import TARGETS,exact_addition,exact_two_feature_replacements,complete_neighbor_relations
 from reader import checked_file,Inputs
-from producer import authenticate_code
+from producer import authenticate_code,footprint_hash
 from evidence.immutable import canonical_json
 
 def controls():
@@ -20,6 +20,15 @@ def controls():
         new,data=exact_addition(sid,cid,old,gap,native,envelope)
         assert new.covers(old)and new.covers(gap)and not mapping(new)==mapping(old)
         assert data['loss']['coordinates']==()
+    def consumer_order():
+        feature={'id':'fixture','geometry':{'type':'Polygon','coordinates':[[[0,0],[1,0],[1,1],[0,0]]]}}
+        reordered={'id':'fixture','geometry':{'coordinates':feature['geometry']['coordinates'],'type':'Polygon'}}
+        a,b=footprint_hash({'fixture':feature}),footprint_hash({'fixture':reordered})
+        assert a!=b
+        restored=json.loads(json.dumps(feature,separators=(',',':')))
+        assert footprint_hash({'fixture':restored})==a
+        assert canonical_json(feature)==canonical_json(reordered)
+    check('actual legacy hash preserves geometry insertion order independently of canonical equality',consumer_order)
     check('exact no-loss full gain',addition_positive)
     check('wrong authorized component',lambda:reject(lambda:exact_addition(sid,'physical-component:wrong',old,gap,native,envelope)))
     check('source misses positive gap part',lambda:reject(lambda:exact_addition(sid,cid,old,gap,box(1,0,1.5,1),envelope)))
