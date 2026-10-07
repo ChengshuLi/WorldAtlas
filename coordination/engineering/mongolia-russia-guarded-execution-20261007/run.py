@@ -217,8 +217,8 @@ def validate_scope(captured, plan):
     a=[identity(f) for f in physical]
     b=[str(r.get('component',r.get('component_id',r.get('id')))) for r in route]
     c=[identity(f) for f in contacts]
-    expected={x.removeprefix('physical-component:') for x in plan['component_ids'] if x.startswith('physical-component:')}
-    contact_expected=set(plan['component_ids'])-{ 'physical-component:'+x for x in expected }
+    expected={x for x in plan['component_ids'] if x.startswith('physical-component:')}
+    contact_expected=set(plan['component_ids'])-expected
     if len(a)!=48 or len(set(a))!=48 or set(a)!=expected or len(b)!=48 or len(set(b))!=48 or set(a)!=set(b) or len(c)!=8 or len(set(c))!=8 or set(c)!=contact_expected or family['component_count']!=48 or set(family['complete_component_ids'])!=expected or set(family['complete_positive_length_neighbor_ids'])!=contact_expected:
         raise ValueError('Complete original family/route/contact join differs')
 
