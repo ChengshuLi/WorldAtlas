@@ -27,7 +27,7 @@ export async function validatePredecessor({registry,memberships,changes,hierarch
  }
  return old;
 }
-export async function successorRelease({registry,memberships,changes,world,hierarchySha,originalCatalogSha,relationships,receiptSha,proposalCommit,releaseId,sourceId,referenceDate='2026-10-07'}){
+export async function successorRelease({registry,memberships,changes,world,hierarchySha,originalCatalogSha,relationships,receiptSha,proposalCommit,releaseId,sourceId,originalPhysicalSource,sourceEvidence,predecessorManifestSha,referenceDate='2026-10-07'}){
  const old=await validatePredecessor({registry,memberships,changes,hierarchySha,originalCatalogSha});
  assert.equal(world.length,49625);const activeLocations=new Map(memberships.filter(m=>m.kind==='location'&&m.active===1).map(m=>[m.entity_id,m]));
  assert.equal(footprintHash(world),AFTER,'Complete serialized successor geometry differs from approved footprint');
@@ -37,6 +37,8 @@ export async function successorRelease({registry,memberships,changes,world,hiera
  for(const pair of relationships){assert.equal(pair.old_entity_id,pair.new_entity_id);assert.equal(pair.change_type,'retain');assert.equal(pair.history_transfer,'none');assert(activeLocations.has(pair.old_entity_id));}
  assert.match(receiptSha,/^[a-f0-9]{64}$/);assert.match(proposalCommit,/^[a-f0-9]{40}$/);assert.match(releaseId,/^geography:review:[a-f0-9]{64}$/);assert.match(sourceId,/^source:atlas:geographic-review:[a-f0-9]{64}$/);
  assert(!registry.releases.some(r=>r.id===releaseId),'Successor ID already exists');
+ assert.equal(originalPhysicalSource?.id,'source:atlas:22d895eafeff6a0abd40330761603ec43b1ba54c22ffaa16b67e653f44d074d2');assert.equal(originalPhysicalSource.status,'reference');
+ assert(Array.isArray(sourceEvidence)&&sourceEvidence.length===2);assert.deepEqual(sourceEvidence.map(s=>s.subject_id).sort(),[...TARGETS].sort());assert.match(predecessorManifestSha,/^[a-f0-9]{64}$/);
  // Original membership and immutable source/evidence fields are retained exactly.
  // The new two relationships live in the new release change ledger, not rewrites.
  const nextMembers=clone(memberships),key=releaseId.split(':').at(-1);
@@ -44,13 +46,16 @@ export async function successorRelease({registry,memberships,changes,world,hiera
   evidence:{reference_only:true,history_transfer:'none',geometry_migration:pair,migration_sha256:receiptSha}}));
  const release={...clone(old),id:releaseId,version:8,source_id:sourceId,reference_date:referenceDate,footprints_sha256:AFTER,
   membership_sha256:await geographicMembershipHash(nextMembers),location_ids_sha256:await geographicLocationIdsHash(nextMembers),changes_sha256:await geographicChangesHash(nextChanges),
-  metadata:{...clone(old.metadata),predecessor_release_id:old.id,predecessor_manifest_sha256:sha(json(registry)),
+  metadata:{...clone(old.metadata),predecessor_release_id:old.id,predecessor_manifest_sha256:predecessorManifestSha,
    geometry_migration:{commit:proposalCommit,path:'data/reference-migrations/eastern-two-gap-repair-20261006/migration-receipt.json.gz',sha256:receiptSha,before_footprints_sha256:BEFORE,after_footprints_sha256:AFTER,history_transfer:'none'},
    physical_reference_correction:{issue:1295,subjects:TARGETS,source_role:'Main-approved physical-reference envelope only',legal_administrative_authority:false,water_classification:false,historical_cause_approval:false}}};
  assert.equal(release.membership_sha256,old.membership_sha256);assert.equal(release.location_ids_sha256,old.location_ids_sha256);
  assert.deepEqual(nextMembers,memberships);assert.deepEqual(release.expected_counts,old.expected_counts);
- const source={id:sourceId,name:'Two reviewed eastern Canada physical-reference corrections',url:null,license:'Original AAFC/source notices retained unchanged in the reviewed source evidence',vintage:referenceDate,status:'reference',supported_from:2026,supported_to:2027,
-  metadata:{reference_only:true,historical_membership_not_asserted:true,issue:1295,proposal_commit:proposalCommit,migration_sha256:receiptSha,source_role:'Physical-reference correction, not administrative/legal authority'}};
+ const source={id:sourceId,name:'Two reviewed eastern Canada physical-reference corrections',url:originalPhysicalSource.url,license:originalPhysicalSource.license,vintage:referenceDate,status:'reference',supported_from:2026,supported_to:2027,
+  metadata:{reference_only:true,historical_membership_not_asserted:true,issue:1295,proposal_commit:proposalCommit,migration_sha256:receiptSha,source_role:'Physical-reference correction, not administrative/legal authority',
+   source_policy:'Main-approved physical-reference envelope correction for exactly CAN-103:QUE and CAN-114:NFL; no legal administrative, water or historical authority approval',
+   source_offer:'Complete immutable original AAFC pointsets, reviewed additions and transformation/source closure retained in the issue1295 evidence and migration archive',
+   geometry_migration:{commit:proposalCommit,path:release.metadata.geometry_migration.path,sha256:receiptSha},source_evidence:clone(sourceEvidence),original_identity_source:clone(originalPhysicalSource)}};
  return {release,source,memberships:nextMembers,changes:nextChanges,old};
 }
 export function appendSuccessor(registry,result,{rowsPerBatch=200}={}){
