@@ -1,0 +1,2704 @@
+{
+  "issue": 611,
+  "as_of": "2026-10-07",
+  "method": "Name-level crosswalk built from the cited official physical roster, retained census-row candidate IDs, #526 Phoenix source-member inventory, pinned archive exact-name lookup, and geoBoundaries component inventory. Bbox candidates are not polygon matches.",
+  "inventory_path": "data/regional-review/kiribati-gilbert-phoenix-source-crosswalk/source-component-inventory.json",
+  "followup_path": "data/regional-review/kiribati-gilbert-phoenix-source-crosswalk/followup-2026-10-07-evidence.json",
+  "current_geography_baseline_commit": "8b6835dfa645cf763137374c3730401d5ac2f732",
+  "input_hashes": {
+    "source-component-inventory.json": "3a20c64413192ccff0d66a8697054da01505473b1b3055c1ec4da2aa0761ff91",
+    "followup-2026-10-07-evidence.json": "2f653597364a28fe6c95a55706dc5af1fe01aca98b32677cedf9f2894da42b9c"
+  },
+  "current_input_hashes": {
+    "data/geography/part-13.json": "90b032861ecae8a4df9a8b5386eccfb20a7243c264dbf79994b54c5297e6f6c1",
+    "data/geography/source-restoration-additions.json": "04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9"
+  },
+  "physical_island_group_count": 33,
+  "groups": {
+    "Gilbert Islands": 17,
+    "Phoenix Islands": 8,
+    "Line Islands": 8
+  },
+  "rows": [
+    {
+      "group": "Gilbert Islands",
+      "official_name": "Makin",
+      "name_aliases": [
+        "Makin"
+      ],
+      "census_reporting_rows": [
+        {
+          "row": "Makin",
+          "division": "Northern",
+          "qualification": "census island row",
+          "candidate_current_subject_ids": [
+            "gb:KIR:ADM1:97431129B55805139245338"
+          ]
+        }
+      ],
+      "current_retained_location_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "name": "Gilbert Islands",
+          "parent_id": "framework:province:gilbert-islands:8667250dbe42",
+          "storage_path": "data/geography/part-13.json",
+          "name_match": "group-level current feature candidate"
+        }
+      ],
+      "current_location_source_paths": [
+        "data/geography/part-13.json"
+      ],
+      "phoenix_526_member": null,
+      "archived_exact_name_matches": [
+        {
+          "collection": "locations",
+          "index": 17409,
+          "id": "gb:PAK:ADM3:9618217B3793228482505",
+          "name": "MAKIN",
+          "level": null,
+          "parent_id": "geo:province:6ca07678a7ac3ef2:PAK"
+        }
+      ],
+      "source_feature": {
+        "name": "Gilbert Islands",
+        "shape_id": "97431129B55805139245338",
+        "feature_id": "gb:KIR:ADM1:97431129B55805139245338"
+      },
+      "group_level_bbox_candidate_source_parts_for_current_location": [
+        1,
+        4,
+        9,
+        10,
+        12,
+        13,
+        14,
+        16,
+        17,
+        21,
+        22,
+        25,
+        26,
+        29
+      ],
+      "crosswalk_status": "Name/group-level candidate only. The source feature is multipart and does not identify which component is this island; no polygon, legal jurisdiction, or ownership assignment is asserted."
+    },
+    {
+      "group": "Gilbert Islands",
+      "official_name": "Butaritari",
+      "name_aliases": [
+        "Butaritari"
+      ],
+      "census_reporting_rows": [
+        {
+          "row": "Butaritari",
+          "division": "Northern",
+          "qualification": "census island row",
+          "candidate_current_subject_ids": [
+            "gb:KIR:ADM1:97431129B55805139245338"
+          ]
+        }
+      ],
+      "current_retained_location_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "name": "Gilbert Islands",
+          "parent_id": "framework:province:gilbert-islands:8667250dbe42",
+          "storage_path": "data/geography/part-13.json",
+          "name_match": "group-level current feature candidate"
+        }
+      ],
+      "current_location_source_paths": [
+        "data/geography/part-13.json"
+      ],
+      "phoenix_526_member": null,
+      "archived_exact_name_matches": [],
+      "source_feature": {
+        "name": "Gilbert Islands",
+        "shape_id": "97431129B55805139245338",
+        "feature_id": "gb:KIR:ADM1:97431129B55805139245338"
+      },
+      "group_level_bbox_candidate_source_parts_for_current_location": [
+        1,
+        4,
+        9,
+        10,
+        12,
+        13,
+        14,
+        16,
+        17,
+        21,
+        22,
+        25,
+        26,
+        29
+      ],
+      "crosswalk_status": "Name/group-level candidate only. The source feature is multipart and does not identify which component is this island; no polygon, legal jurisdiction, or ownership assignment is asserted."
+    },
+    {
+      "group": "Gilbert Islands",
+      "official_name": "Marakei",
+      "name_aliases": [
+        "Marakei"
+      ],
+      "census_reporting_rows": [
+        {
+          "row": "Marakei",
+          "division": "Northern",
+          "qualification": "census island row",
+          "candidate_current_subject_ids": [
+            "gb:KIR:ADM1:97431129B55805139245338"
+          ]
+        }
+      ],
+      "current_retained_location_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "name": "Gilbert Islands",
+          "parent_id": "framework:province:gilbert-islands:8667250dbe42",
+          "storage_path": "data/geography/part-13.json",
+          "name_match": "group-level current feature candidate"
+        }
+      ],
+      "current_location_source_paths": [
+        "data/geography/part-13.json"
+      ],
+      "phoenix_526_member": null,
+      "archived_exact_name_matches": [],
+      "source_feature": {
+        "name": "Gilbert Islands",
+        "shape_id": "97431129B55805139245338",
+        "feature_id": "gb:KIR:ADM1:97431129B55805139245338"
+      },
+      "group_level_bbox_candidate_source_parts_for_current_location": [
+        1,
+        4,
+        9,
+        10,
+        12,
+        13,
+        14,
+        16,
+        17,
+        21,
+        22,
+        25,
+        26,
+        29
+      ],
+      "crosswalk_status": "Name/group-level candidate only. The source feature is multipart and does not identify which component is this island; no polygon, legal jurisdiction, or ownership assignment is asserted."
+    },
+    {
+      "group": "Gilbert Islands",
+      "official_name": "Abaiang",
+      "name_aliases": [
+        "Abaiang"
+      ],
+      "census_reporting_rows": [
+        {
+          "row": "Abaiang",
+          "division": "Northern",
+          "qualification": "census island row",
+          "candidate_current_subject_ids": [
+            "gb:KIR:ADM1:97431129B55805139245338"
+          ]
+        }
+      ],
+      "current_retained_location_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "name": "Gilbert Islands",
+          "parent_id": "framework:province:gilbert-islands:8667250dbe42",
+          "storage_path": "data/geography/part-13.json",
+          "name_match": "group-level current feature candidate"
+        }
+      ],
+      "current_location_source_paths": [
+        "data/geography/part-13.json"
+      ],
+      "phoenix_526_member": null,
+      "archived_exact_name_matches": [],
+      "source_feature": {
+        "name": "Gilbert Islands",
+        "shape_id": "97431129B55805139245338",
+        "feature_id": "gb:KIR:ADM1:97431129B55805139245338"
+      },
+      "group_level_bbox_candidate_source_parts_for_current_location": [
+        1,
+        4,
+        9,
+        10,
+        12,
+        13,
+        14,
+        16,
+        17,
+        21,
+        22,
+        25,
+        26,
+        29
+      ],
+      "crosswalk_status": "Name/group-level candidate only. The source feature is multipart and does not identify which component is this island; no polygon, legal jurisdiction, or ownership assignment is asserted."
+    },
+    {
+      "group": "Gilbert Islands",
+      "official_name": "Tarawa",
+      "name_aliases": [
+        "Tarawa"
+      ],
+      "census_reporting_rows": [
+        {
+          "row": "North Tarawa",
+          "division": "Northern",
+          "qualification": "reporting division of Tarawa",
+          "candidate_current_subject_ids": [
+            "gb:KIR:ADM1:97431129B55805139245338",
+            "gb:KIR:ADM1:97431129B36644055464690"
+          ]
+        },
+        {
+          "row": "South Tarawa",
+          "division": "South Tarawa",
+          "qualification": "reporting division of Tarawa",
+          "candidate_current_subject_ids": [
+            "gb:KIR:ADM1:97431129B55805139245338",
+            "gb:KIR:ADM1:97431129B36644055464690"
+          ]
+        }
+      ],
+      "current_retained_location_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B36644055464690",
+          "name": "Western equatorial Pacific source remainder",
+          "parent_id": "framework:province:phoenix-islands:8b6d333d3b82",
+          "storage_path": "data/geography/part-13.json",
+          "name_match": "group-level current feature candidate"
+        },
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "name": "Gilbert Islands",
+          "parent_id": "framework:province:gilbert-islands:8667250dbe42",
+          "storage_path": "data/geography/part-13.json",
+          "name_match": "group-level current feature candidate"
+        }
+      ],
+      "current_location_source_paths": [
+        "data/geography/part-13.json"
+      ],
+      "phoenix_526_member": null,
+      "archived_exact_name_matches": [],
+      "source_feature": {
+        "name": "Gilbert Islands",
+        "shape_id": "97431129B55805139245338",
+        "feature_id": "gb:KIR:ADM1:97431129B55805139245338"
+      },
+      "group_level_bbox_candidate_source_parts_for_current_location": [
+        1,
+        4,
+        9,
+        10,
+        12,
+        13,
+        14,
+        16,
+        17,
+        21,
+        22,
+        25,
+        26,
+        29
+      ],
+      "crosswalk_status": "Name/group-level candidate only. The source feature is multipart and does not identify which component is this island; no polygon, legal jurisdiction, or ownership assignment is asserted."
+    },
+    {
+      "group": "Gilbert Islands",
+      "official_name": "Maiana",
+      "name_aliases": [
+        "Maiana"
+      ],
+      "census_reporting_rows": [
+        {
+          "row": "Maiana",
+          "division": "Central",
+          "qualification": "census island row",
+          "candidate_current_subject_ids": [
+            "gb:KIR:ADM1:97431129B55805139245338"
+          ]
+        }
+      ],
+      "current_retained_location_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "name": "Gilbert Islands",
+          "parent_id": "framework:province:gilbert-islands:8667250dbe42",
+          "storage_path": "data/geography/part-13.json",
+          "name_match": "group-level current feature candidate"
+        }
+      ],
+      "current_location_source_paths": [
+        "data/geography/part-13.json"
+      ],
+      "phoenix_526_member": null,
+      "archived_exact_name_matches": [],
+      "source_feature": {
+        "name": "Gilbert Islands",
+        "shape_id": "97431129B55805139245338",
+        "feature_id": "gb:KIR:ADM1:97431129B55805139245338"
+      },
+      "group_level_bbox_candidate_source_parts_for_current_location": [
+        1,
+        4,
+        9,
+        10,
+        12,
+        13,
+        14,
+        16,
+        17,
+        21,
+        22,
+        25,
+        26,
+        29
+      ],
+      "crosswalk_status": "Name/group-level candidate only. The source feature is multipart and does not identify which component is this island; no polygon, legal jurisdiction, or ownership assignment is asserted."
+    },
+    {
+      "group": "Gilbert Islands",
+      "official_name": "Abemama",
+      "name_aliases": [
+        "Abemama"
+      ],
+      "census_reporting_rows": [
+        {
+          "row": "Abemama",
+          "division": "Central",
+          "qualification": "census island row",
+          "candidate_current_subject_ids": [
+            "gb:KIR:ADM1:97431129B55805139245338"
+          ]
+        }
+      ],
+      "current_retained_location_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "name": "Gilbert Islands",
+          "parent_id": "framework:province:gilbert-islands:8667250dbe42",
+          "storage_path": "data/geography/part-13.json",
+          "name_match": "group-level current feature candidate"
+        }
+      ],
+      "current_location_source_paths": [
+        "data/geography/part-13.json"
+      ],
+      "phoenix_526_member": null,
+      "archived_exact_name_matches": [],
+      "source_feature": {
+        "name": "Gilbert Islands",
+        "shape_id": "97431129B55805139245338",
+        "feature_id": "gb:KIR:ADM1:97431129B55805139245338"
+      },
+      "group_level_bbox_candidate_source_parts_for_current_location": [
+        1,
+        4,
+        9,
+        10,
+        12,
+        13,
+        14,
+        16,
+        17,
+        21,
+        22,
+        25,
+        26,
+        29
+      ],
+      "crosswalk_status": "Name/group-level candidate only. The source feature is multipart and does not identify which component is this island; no polygon, legal jurisdiction, or ownership assignment is asserted."
+    },
+    {
+      "group": "Gilbert Islands",
+      "official_name": "Kuria",
+      "name_aliases": [
+        "Kuria"
+      ],
+      "census_reporting_rows": [
+        {
+          "row": "Kuria",
+          "division": "Central",
+          "qualification": "census island row",
+          "candidate_current_subject_ids": [
+            "gb:KIR:ADM1:97431129B55805139245338"
+          ]
+        }
+      ],
+      "current_retained_location_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "name": "Gilbert Islands",
+          "parent_id": "framework:province:gilbert-islands:8667250dbe42",
+          "storage_path": "data/geography/part-13.json",
+          "name_match": "group-level current feature candidate"
+        }
+      ],
+      "current_location_source_paths": [
+        "data/geography/part-13.json"
+      ],
+      "phoenix_526_member": null,
+      "archived_exact_name_matches": [],
+      "source_feature": {
+        "name": "Gilbert Islands",
+        "shape_id": "97431129B55805139245338",
+        "feature_id": "gb:KIR:ADM1:97431129B55805139245338"
+      },
+      "group_level_bbox_candidate_source_parts_for_current_location": [
+        1,
+        4,
+        9,
+        10,
+        12,
+        13,
+        14,
+        16,
+        17,
+        21,
+        22,
+        25,
+        26,
+        29
+      ],
+      "crosswalk_status": "Name/group-level candidate only. The source feature is multipart and does not identify which component is this island; no polygon, legal jurisdiction, or ownership assignment is asserted."
+    },
+    {
+      "group": "Gilbert Islands",
+      "official_name": "Aranuka",
+      "name_aliases": [
+        "Aranuka"
+      ],
+      "census_reporting_rows": [
+        {
+          "row": "Aranuka",
+          "division": "Central",
+          "qualification": "census island row",
+          "candidate_current_subject_ids": [
+            "gb:KIR:ADM1:97431129B55805139245338"
+          ]
+        }
+      ],
+      "current_retained_location_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "name": "Gilbert Islands",
+          "parent_id": "framework:province:gilbert-islands:8667250dbe42",
+          "storage_path": "data/geography/part-13.json",
+          "name_match": "group-level current feature candidate"
+        }
+      ],
+      "current_location_source_paths": [
+        "data/geography/part-13.json"
+      ],
+      "phoenix_526_member": null,
+      "archived_exact_name_matches": [],
+      "source_feature": {
+        "name": "Gilbert Islands",
+        "shape_id": "97431129B55805139245338",
+        "feature_id": "gb:KIR:ADM1:97431129B55805139245338"
+      },
+      "group_level_bbox_candidate_source_parts_for_current_location": [
+        1,
+        4,
+        9,
+        10,
+        12,
+        13,
+        14,
+        16,
+        17,
+        21,
+        22,
+        25,
+        26,
+        29
+      ],
+      "crosswalk_status": "Name/group-level candidate only. The source feature is multipart and does not identify which component is this island; no polygon, legal jurisdiction, or ownership assignment is asserted."
+    },
+    {
+      "group": "Gilbert Islands",
+      "official_name": "Nonouti",
+      "name_aliases": [
+        "Nonouti"
+      ],
+      "census_reporting_rows": [
+        {
+          "row": "Nonouti",
+          "division": "Southern",
+          "qualification": "census island row",
+          "candidate_current_subject_ids": [
+            "gb:KIR:ADM1:97431129B55805139245338"
+          ]
+        }
+      ],
+      "current_retained_location_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "name": "Gilbert Islands",
+          "parent_id": "framework:province:gilbert-islands:8667250dbe42",
+          "storage_path": "data/geography/part-13.json",
+          "name_match": "group-level current feature candidate"
+        }
+      ],
+      "current_location_source_paths": [
+        "data/geography/part-13.json"
+      ],
+      "phoenix_526_member": null,
+      "archived_exact_name_matches": [],
+      "source_feature": {
+        "name": "Gilbert Islands",
+        "shape_id": "97431129B55805139245338",
+        "feature_id": "gb:KIR:ADM1:97431129B55805139245338"
+      },
+      "group_level_bbox_candidate_source_parts_for_current_location": [
+        1,
+        4,
+        9,
+        10,
+        12,
+        13,
+        14,
+        16,
+        17,
+        21,
+        22,
+        25,
+        26,
+        29
+      ],
+      "crosswalk_status": "Name/group-level candidate only. The source feature is multipart and does not identify which component is this island; no polygon, legal jurisdiction, or ownership assignment is asserted."
+    },
+    {
+      "group": "Gilbert Islands",
+      "official_name": "Tabiteuea",
+      "name_aliases": [
+        "Tabiteuea"
+      ],
+      "census_reporting_rows": [
+        {
+          "row": "North Tabiteuea",
+          "division": "Southern",
+          "qualification": "reporting division of Tabiteuea",
+          "candidate_current_subject_ids": [
+            "gb:KIR:ADM1:97431129B55805139245338"
+          ]
+        },
+        {
+          "row": "South Tabiteuea",
+          "division": "Southern",
+          "qualification": "reporting division of Tabiteuea",
+          "candidate_current_subject_ids": [
+            "gb:KIR:ADM1:97431129B55805139245338"
+          ]
+        }
+      ],
+      "current_retained_location_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "name": "Gilbert Islands",
+          "parent_id": "framework:province:gilbert-islands:8667250dbe42",
+          "storage_path": "data/geography/part-13.json",
+          "name_match": "group-level current feature candidate"
+        }
+      ],
+      "current_location_source_paths": [
+        "data/geography/part-13.json"
+      ],
+      "phoenix_526_member": null,
+      "archived_exact_name_matches": [],
+      "source_feature": {
+        "name": "Gilbert Islands",
+        "shape_id": "97431129B55805139245338",
+        "feature_id": "gb:KIR:ADM1:97431129B55805139245338"
+      },
+      "group_level_bbox_candidate_source_parts_for_current_location": [
+        1,
+        4,
+        9,
+        10,
+        12,
+        13,
+        14,
+        16,
+        17,
+        21,
+        22,
+        25,
+        26,
+        29
+      ],
+      "crosswalk_status": "Name/group-level candidate only. The source feature is multipart and does not identify which component is this island; no polygon, legal jurisdiction, or ownership assignment is asserted."
+    },
+    {
+      "group": "Gilbert Islands",
+      "official_name": "Beru",
+      "name_aliases": [
+        "Beru"
+      ],
+      "census_reporting_rows": [
+        {
+          "row": "Beru",
+          "division": "Southern",
+          "qualification": "census island row",
+          "candidate_current_subject_ids": [
+            "gb:KIR:ADM1:97431129B55805139245338"
+          ]
+        }
+      ],
+      "current_retained_location_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "name": "Gilbert Islands",
+          "parent_id": "framework:province:gilbert-islands:8667250dbe42",
+          "storage_path": "data/geography/part-13.json",
+          "name_match": "group-level current feature candidate"
+        }
+      ],
+      "current_location_source_paths": [
+        "data/geography/part-13.json"
+      ],
+      "phoenix_526_member": null,
+      "archived_exact_name_matches": [],
+      "source_feature": {
+        "name": "Gilbert Islands",
+        "shape_id": "97431129B55805139245338",
+        "feature_id": "gb:KIR:ADM1:97431129B55805139245338"
+      },
+      "group_level_bbox_candidate_source_parts_for_current_location": [
+        1,
+        4,
+        9,
+        10,
+        12,
+        13,
+        14,
+        16,
+        17,
+        21,
+        22,
+        25,
+        26,
+        29
+      ],
+      "crosswalk_status": "Name/group-level candidate only. The source feature is multipart and does not identify which component is this island; no polygon, legal jurisdiction, or ownership assignment is asserted."
+    },
+    {
+      "group": "Gilbert Islands",
+      "official_name": "Nikunau",
+      "name_aliases": [
+        "Nikunau"
+      ],
+      "census_reporting_rows": [
+        {
+          "row": "Nikunau",
+          "division": "Southern",
+          "qualification": "census island row",
+          "candidate_current_subject_ids": [
+            "gb:KIR:ADM1:97431129B55805139245338"
+          ]
+        }
+      ],
+      "current_retained_location_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "name": "Gilbert Islands",
+          "parent_id": "framework:province:gilbert-islands:8667250dbe42",
+          "storage_path": "data/geography/part-13.json",
+          "name_match": "group-level current feature candidate"
+        }
+      ],
+      "current_location_source_paths": [
+        "data/geography/part-13.json"
+      ],
+      "phoenix_526_member": null,
+      "archived_exact_name_matches": [],
+      "source_feature": {
+        "name": "Gilbert Islands",
+        "shape_id": "97431129B55805139245338",
+        "feature_id": "gb:KIR:ADM1:97431129B55805139245338"
+      },
+      "group_level_bbox_candidate_source_parts_for_current_location": [
+        1,
+        4,
+        9,
+        10,
+        12,
+        13,
+        14,
+        16,
+        17,
+        21,
+        22,
+        25,
+        26,
+        29
+      ],
+      "crosswalk_status": "Name/group-level candidate only. The source feature is multipart and does not identify which component is this island; no polygon, legal jurisdiction, or ownership assignment is asserted."
+    },
+    {
+      "group": "Gilbert Islands",
+      "official_name": "Onotoa",
+      "name_aliases": [
+        "Onotoa"
+      ],
+      "census_reporting_rows": [
+        {
+          "row": "Onotoa",
+          "division": "Southern",
+          "qualification": "census island row",
+          "candidate_current_subject_ids": [
+            "gb:KIR:ADM1:97431129B55805139245338"
+          ]
+        }
+      ],
+      "current_retained_location_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "name": "Gilbert Islands",
+          "parent_id": "framework:province:gilbert-islands:8667250dbe42",
+          "storage_path": "data/geography/part-13.json",
+          "name_match": "group-level current feature candidate"
+        }
+      ],
+      "current_location_source_paths": [
+        "data/geography/part-13.json"
+      ],
+      "phoenix_526_member": null,
+      "archived_exact_name_matches": [],
+      "source_feature": {
+        "name": "Gilbert Islands",
+        "shape_id": "97431129B55805139245338",
+        "feature_id": "gb:KIR:ADM1:97431129B55805139245338"
+      },
+      "group_level_bbox_candidate_source_parts_for_current_location": [
+        1,
+        4,
+        9,
+        10,
+        12,
+        13,
+        14,
+        16,
+        17,
+        21,
+        22,
+        25,
+        26,
+        29
+      ],
+      "crosswalk_status": "Name/group-level candidate only. The source feature is multipart and does not identify which component is this island; no polygon, legal jurisdiction, or ownership assignment is asserted."
+    },
+    {
+      "group": "Gilbert Islands",
+      "official_name": "Tamana",
+      "name_aliases": [
+        "Tamana"
+      ],
+      "census_reporting_rows": [
+        {
+          "row": "Tamana",
+          "division": "Southern",
+          "qualification": "census island row",
+          "candidate_current_subject_ids": [
+            "gb:KIR:ADM1:97431129B55805139245338"
+          ]
+        }
+      ],
+      "current_retained_location_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "name": "Gilbert Islands",
+          "parent_id": "framework:province:gilbert-islands:8667250dbe42",
+          "storage_path": "data/geography/part-13.json",
+          "name_match": "group-level current feature candidate"
+        }
+      ],
+      "current_location_source_paths": [
+        "data/geography/part-13.json"
+      ],
+      "phoenix_526_member": null,
+      "archived_exact_name_matches": [],
+      "source_feature": {
+        "name": "Gilbert Islands",
+        "shape_id": "97431129B55805139245338",
+        "feature_id": "gb:KIR:ADM1:97431129B55805139245338"
+      },
+      "group_level_bbox_candidate_source_parts_for_current_location": [
+        1,
+        4,
+        9,
+        10,
+        12,
+        13,
+        14,
+        16,
+        17,
+        21,
+        22,
+        25,
+        26,
+        29
+      ],
+      "crosswalk_status": "Name/group-level candidate only. The source feature is multipart and does not identify which component is this island; no polygon, legal jurisdiction, or ownership assignment is asserted."
+    },
+    {
+      "group": "Gilbert Islands",
+      "official_name": "Arorae",
+      "name_aliases": [
+        "Arorae"
+      ],
+      "census_reporting_rows": [
+        {
+          "row": "Arorae",
+          "division": "Southern",
+          "qualification": "census island row",
+          "candidate_current_subject_ids": [
+            "gb:KIR:ADM1:97431129B55805139245338"
+          ]
+        }
+      ],
+      "current_retained_location_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "name": "Gilbert Islands",
+          "parent_id": "framework:province:gilbert-islands:8667250dbe42",
+          "storage_path": "data/geography/part-13.json",
+          "name_match": "group-level current feature candidate"
+        }
+      ],
+      "current_location_source_paths": [
+        "data/geography/part-13.json"
+      ],
+      "phoenix_526_member": null,
+      "archived_exact_name_matches": [],
+      "source_feature": {
+        "name": "Gilbert Islands",
+        "shape_id": "97431129B55805139245338",
+        "feature_id": "gb:KIR:ADM1:97431129B55805139245338"
+      },
+      "group_level_bbox_candidate_source_parts_for_current_location": [
+        1,
+        4,
+        9,
+        10,
+        12,
+        13,
+        14,
+        16,
+        17,
+        21,
+        22,
+        25,
+        26,
+        29
+      ],
+      "crosswalk_status": "Name/group-level candidate only. The source feature is multipart and does not identify which component is this island; no polygon, legal jurisdiction, or ownership assignment is asserted."
+    },
+    {
+      "group": "Gilbert Islands",
+      "official_name": "Banaba",
+      "name_aliases": [
+        "Banaba"
+      ],
+      "census_reporting_rows": [
+        {
+          "row": "Banaba",
+          "division": "Central",
+          "qualification": "raised coral island",
+          "candidate_current_subject_ids": [
+            "gb:KIR:ADM1:97431129B36644055464690"
+          ]
+        }
+      ],
+      "current_retained_location_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B36644055464690",
+          "name": "Western equatorial Pacific source remainder",
+          "parent_id": "framework:province:phoenix-islands:8b6d333d3b82",
+          "storage_path": "data/geography/part-13.json",
+          "name_match": "group-level current feature candidate"
+        }
+      ],
+      "current_location_source_paths": [
+        "data/geography/part-13.json"
+      ],
+      "phoenix_526_member": null,
+      "archived_exact_name_matches": [],
+      "source_feature": {
+        "name": "Gilbert Islands",
+        "shape_id": "97431129B55805139245338",
+        "feature_id": "gb:KIR:ADM1:97431129B55805139245338"
+      },
+      "group_level_bbox_candidate_source_parts_for_current_location": [],
+      "crosswalk_status": "Name/group-level candidate only. The source feature is multipart and does not identify which component is this island; no polygon, legal jurisdiction, or ownership assignment is asserted."
+    },
+    {
+      "group": "Phoenix Islands",
+      "official_name": "Kanton/Canton",
+      "name_aliases": [
+        "Kanton",
+        "Canton"
+      ],
+      "census_reporting_rows": [],
+      "current_retained_location_candidates": [
+        {
+          "id": "atlas:macro-coverage:location:46b9db00a4ded4a51997",
+          "name": "Canton/Kanton/Abariringa",
+          "parent_id": "atlas:macro-coverage:province:07336a1a282ffd691152",
+          "storage_path": "data/geography/source-restoration-additions.json",
+          "name_match": "normalized alias intersection"
+        }
+      ],
+      "current_location_source_paths": [
+        "data/geography/source-restoration-additions.json"
+      ],
+      "phoenix_526_member": {
+        "id": "atlas:macro-coverage:location:46b9db00a4ded4a51997",
+        "name": "Canton/Kanton/Abariringa",
+        "source_bbox": [
+          -171.80555555555554,
+          -2.9405555555555556,
+          -171.54555555555555,
+          -2.680555555555556
+        ],
+        "source_license": "http://opendatacommons.org/licenses/odbl/1-0/",
+        "retained_archive": "data/macro-improvements/macro-coverage-oceania/osm-6354a950ca0d.xml.gz",
+        "retained_archive_sha256": "7d3f5b8e3cdcda08cd3a88b3b39f39d8065d2de89acb0c27f469ceb4bf97ed2c"
+      },
+      "archived_exact_name_matches": [],
+      "source_feature": {
+        "name": "Phoenix Islands",
+        "shape_id": "97431129B36644055464690",
+        "feature_id": "gb:KIR:ADM1:97431129B36644055464690"
+      },
+      "group_level_bbox_candidate_source_parts_for_current_location": [
+        1
+      ],
+      "crosswalk_status": "Name/group-level candidate only. The source feature is multipart and does not identify which component is this island; no polygon, legal jurisdiction, or ownership assignment is asserted."
+    },
+    {
+      "group": "Phoenix Islands",
+      "official_name": "Birnie",
+      "name_aliases": [
+        "Birnie"
+      ],
+      "census_reporting_rows": [],
+      "current_retained_location_candidates": [
+        {
+          "id": "atlas:macro-coverage:location:0dbfec002a36a9e16a06",
+          "name": "Birnie",
+          "parent_id": "atlas:macro-coverage:province:07336a1a282ffd691152",
+          "storage_path": "data/geography/source-restoration-additions.json",
+          "name_match": "normalized alias intersection"
+        }
+      ],
+      "current_location_source_paths": [
+        "data/geography/source-restoration-additions.json"
+      ],
+      "phoenix_526_member": {
+        "id": "atlas:macro-coverage:location:0dbfec002a36a9e16a06",
+        "name": "Birnie",
+        "source_bbox": [
+          -171.68,
+          -3.7133333333333334,
+          -171.42000000000002,
+          -3.4533333333333336
+        ],
+        "source_license": "http://opendatacommons.org/licenses/odbl/1-0/",
+        "retained_archive": "data/macro-improvements/macro-coverage-oceania/osm-33e396cc0be9.xml.gz",
+        "retained_archive_sha256": "29583360223dc258877e82eee66d8e9dc2e50ed3329f1e79ddd864b7ed162667"
+      },
+      "archived_exact_name_matches": [],
+      "source_feature": {
+        "name": "Phoenix Islands",
+        "shape_id": "97431129B36644055464690",
+        "feature_id": "gb:KIR:ADM1:97431129B36644055464690"
+      },
+      "group_level_bbox_candidate_source_parts_for_current_location": [],
+      "crosswalk_status": "Name/group-level candidate only. The source feature is multipart and does not identify which component is this island; no polygon, legal jurisdiction, or ownership assignment is asserted."
+    },
+    {
+      "group": "Phoenix Islands",
+      "official_name": "Enderbury",
+      "name_aliases": [
+        "Enderbury"
+      ],
+      "census_reporting_rows": [],
+      "current_retained_location_candidates": [
+        {
+          "id": "atlas:macro-coverage:location:1e18dcded9449985ca8a",
+          "name": "Enderbury",
+          "parent_id": "atlas:macro-coverage:province:07336a1a282ffd691152",
+          "storage_path": "data/geography/source-restoration-additions.json",
+          "name_match": "normalized alias intersection"
+        }
+      ],
+      "current_location_source_paths": [
+        "data/geography/source-restoration-additions.json"
+      ],
+      "phoenix_526_member": {
+        "id": "atlas:macro-coverage:location:1e18dcded9449985ca8a",
+        "name": "Enderbury",
+        "source_bbox": [
+          -171.21333333333334,
+          -3.263333333333333,
+          -170.95333333333335,
+          -3.0033333333333334
+        ],
+        "source_license": "http://opendatacommons.org/licenses/odbl/1-0/",
+        "retained_archive": "data/macro-improvements/macro-coverage-oceania/osm-f78b79f4460c.xml.gz",
+        "retained_archive_sha256": "83c105775aa24b509029a5c4e76c82eaac58d0f651c530847ce6fe7604379c0c"
+      },
+      "archived_exact_name_matches": [],
+      "source_feature": {
+        "name": "Phoenix Islands",
+        "shape_id": "97431129B36644055464690",
+        "feature_id": "gb:KIR:ADM1:97431129B36644055464690"
+      },
+      "group_level_bbox_candidate_source_parts_for_current_location": [],
+      "crosswalk_status": "Name/group-level candidate only. The source feature is multipart and does not identify which component is this island; no polygon, legal jurisdiction, or ownership assignment is asserted."
+    },
+    {
+      "group": "Phoenix Islands",
+      "official_name": "Manra/Sydney",
+      "name_aliases": [
+        "Manra",
+        "Sydney"
+      ],
+      "census_reporting_rows": [],
+      "current_retained_location_candidates": [
+        {
+          "id": "atlas:macro-coverage:location:9e202f85d736fc409244",
+          "name": "Manra/Sydney",
+          "parent_id": "atlas:macro-coverage:province:07336a1a282ffd691152",
+          "storage_path": "data/geography/source-restoration-additions.json",
+          "name_match": "normalized alias intersection"
+        }
+      ],
+      "current_location_source_paths": [
+        "data/geography/source-restoration-additions.json"
+      ],
+      "phoenix_526_member": {
+        "id": "atlas:macro-coverage:location:9e202f85d736fc409244",
+        "name": "Manra/Sydney",
+        "source_bbox": [
+          -171.39666666666668,
+          -4.58,
+          -171.13666666666668,
+          -4.32
+        ],
+        "source_license": "http://opendatacommons.org/licenses/odbl/1-0/",
+        "retained_archive": "data/macro-improvements/macro-coverage-oceania/osm-b027b52ea40b.xml.gz",
+        "retained_archive_sha256": "39f66d3bac8818be8c60d290a0537293bcdc222738f673d6b1c68dc9d5333feb"
+      },
+      "archived_exact_name_matches": [],
+      "source_feature": {
+        "name": "Phoenix Islands",
+        "shape_id": "97431129B36644055464690",
+        "feature_id": "gb:KIR:ADM1:97431129B36644055464690"
+      },
+      "group_level_bbox_candidate_source_parts_for_current_location": [],
+      "crosswalk_status": "Name/group-level candidate only. The source feature is multipart and does not identify which component is this island; no polygon, legal jurisdiction, or ownership assignment is asserted."
+    },
+    {
+      "group": "Phoenix Islands",
+      "official_name": "McKean",
+      "name_aliases": [
+        "McKean"
+      ],
+      "census_reporting_rows": [],
+      "current_retained_location_candidates": [
+        {
+          "id": "atlas:macro-coverage:location:582224a070f8ca238d16",
+          "name": "McKean",
+          "parent_id": "atlas:macro-coverage:province:07336a1a282ffd691152",
+          "storage_path": "data/geography/source-restoration-additions.json",
+          "name_match": "normalized alias intersection"
+        }
+      ],
+      "current_location_source_paths": [
+        "data/geography/source-restoration-additions.json"
+      ],
+      "phoenix_526_member": {
+        "id": "atlas:macro-coverage:location:582224a070f8ca238d16",
+        "name": "McKean",
+        "source_bbox": [
+          -174.2525,
+          -3.725833333333333,
+          -173.9925,
+          -3.4658333333333333
+        ],
+        "source_license": "http://opendatacommons.org/licenses/odbl/1-0/",
+        "retained_archive": "data/macro-improvements/macro-coverage-oceania/osm-52cf6420e874.xml.gz",
+        "retained_archive_sha256": "bdb450a81d502209071dfa05b089c8250940b6eca298f28092f60519341728c5"
+      },
+      "archived_exact_name_matches": [],
+      "source_feature": {
+        "name": "Phoenix Islands",
+        "shape_id": "97431129B36644055464690",
+        "feature_id": "gb:KIR:ADM1:97431129B36644055464690"
+      },
+      "group_level_bbox_candidate_source_parts_for_current_location": [],
+      "crosswalk_status": "Name/group-level candidate only. The source feature is multipart and does not identify which component is this island; no polygon, legal jurisdiction, or ownership assignment is asserted."
+    },
+    {
+      "group": "Phoenix Islands",
+      "official_name": "Nikumaroro/Gardner",
+      "name_aliases": [
+        "Nikumaroro",
+        "Gardner"
+      ],
+      "census_reporting_rows": [],
+      "current_retained_location_candidates": [
+        {
+          "id": "atlas:macro-coverage:location:d155bd916ef221e751bd",
+          "name": "Nikumaroro/Gardner",
+          "parent_id": "atlas:macro-coverage:province:07336a1a282ffd691152",
+          "storage_path": "data/geography/source-restoration-additions.json",
+          "name_match": "normalized alias intersection"
+        }
+      ],
+      "current_location_source_paths": [
+        "data/geography/source-restoration-additions.json"
+      ],
+      "phoenix_526_member": {
+        "id": "atlas:macro-coverage:location:d155bd916ef221e751bd",
+        "name": "Nikumaroro/Gardner",
+        "source_bbox": [
+          -174.64777777777778,
+          -4.805555555555555,
+          -174.38777777777779,
+          -4.545555555555556
+        ],
+        "source_license": "http://opendatacommons.org/licenses/odbl/1-0/",
+        "retained_archive": "data/macro-improvements/macro-coverage-oceania/osm-70c35df09bc3.xml.gz",
+        "retained_archive_sha256": "eb9b3c9adcca0c1448e3637c476e95161a3bd6d9338e5a6d96dd516ea766325f"
+      },
+      "archived_exact_name_matches": [],
+      "source_feature": {
+        "name": "Phoenix Islands",
+        "shape_id": "97431129B36644055464690",
+        "feature_id": "gb:KIR:ADM1:97431129B36644055464690"
+      },
+      "group_level_bbox_candidate_source_parts_for_current_location": [],
+      "crosswalk_status": "Name/group-level candidate only. The source feature is multipart and does not identify which component is this island; no polygon, legal jurisdiction, or ownership assignment is asserted."
+    },
+    {
+      "group": "Phoenix Islands",
+      "official_name": "Orona/Hull",
+      "name_aliases": [
+        "Orona",
+        "Hull"
+      ],
+      "census_reporting_rows": [],
+      "current_retained_location_candidates": [
+        {
+          "id": "atlas:macro-coverage:location:b654c3c6ddce111fc151",
+          "name": "Orona/Hull",
+          "parent_id": "atlas:macro-coverage:province:07336a1a282ffd691152",
+          "storage_path": "data/geography/source-restoration-additions.json",
+          "name_match": "normalized alias intersection"
+        }
+      ],
+      "current_location_source_paths": [
+        "data/geography/source-restoration-additions.json"
+      ],
+      "phoenix_526_member": {
+        "id": "atlas:macro-coverage:location:b654c3c6ddce111fc151",
+        "name": "Orona/Hull",
+        "source_bbox": [
+          -172.29666666666665,
+          -4.63,
+          -172.03666666666666,
+          -4.37
+        ],
+        "source_license": "http://opendatacommons.org/licenses/odbl/1-0/",
+        "retained_archive": "data/macro-improvements/macro-coverage-oceania/osm-c0c6b55da4fa.xml.gz",
+        "retained_archive_sha256": "ec0f772c9cd9119bd4977b8e2a876af560ed2ebbbcee22d951fd94c79c284263"
+      },
+      "archived_exact_name_matches": [],
+      "source_feature": {
+        "name": "Phoenix Islands",
+        "shape_id": "97431129B36644055464690",
+        "feature_id": "gb:KIR:ADM1:97431129B36644055464690"
+      },
+      "group_level_bbox_candidate_source_parts_for_current_location": [],
+      "crosswalk_status": "Name/group-level candidate only. The source feature is multipart and does not identify which component is this island; no polygon, legal jurisdiction, or ownership assignment is asserted."
+    },
+    {
+      "group": "Phoenix Islands",
+      "official_name": "Rawaki/Phoenix",
+      "name_aliases": [
+        "Rawaki",
+        "Phoenix"
+      ],
+      "census_reporting_rows": [],
+      "current_retained_location_candidates": [
+        {
+          "id": "atlas:macro-coverage:location:faec45c524d0018fcec9",
+          "name": "Rawaki/Phoenix",
+          "parent_id": "atlas:macro-coverage:province:07336a1a282ffd691152",
+          "storage_path": "data/geography/source-restoration-additions.json",
+          "name_match": "normalized alias intersection"
+        }
+      ],
+      "current_location_source_paths": [
+        "data/geography/source-restoration-additions.json"
+      ],
+      "phoenix_526_member": {
+        "id": "atlas:macro-coverage:location:faec45c524d0018fcec9",
+        "name": "Rawaki/Phoenix",
+        "source_bbox": [
+          -170.8425,
+          -3.850833333333333,
+          -170.5825,
+          -3.5908333333333333
+        ],
+        "source_license": "http://opendatacommons.org/licenses/odbl/1-0/",
+        "retained_archive": "data/macro-improvements/macro-coverage-oceania/osm-29d51be30381.xml.gz",
+        "retained_archive_sha256": "4036d0796e795427c69446fe71b44ad5308379140f6d83c3b96107b795a6c885"
+      },
+      "archived_exact_name_matches": [],
+      "source_feature": {
+        "name": "Phoenix Islands",
+        "shape_id": "97431129B36644055464690",
+        "feature_id": "gb:KIR:ADM1:97431129B36644055464690"
+      },
+      "group_level_bbox_candidate_source_parts_for_current_location": [],
+      "crosswalk_status": "Name/group-level candidate only. The source feature is multipart and does not identify which component is this island; no polygon, legal jurisdiction, or ownership assignment is asserted."
+    },
+    {
+      "group": "Line Islands",
+      "official_name": "Teraina/Washington",
+      "name_aliases": [
+        "Teraina",
+        "Washington"
+      ],
+      "census_reporting_rows": [],
+      "current_retained_location_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B35506555718846",
+          "name": "Line Islands",
+          "parent_id": "framework:province:line-islands:ce27f8d7a826",
+          "storage_path": "data/geography/part-13.json",
+          "name_match": "group-level current feature candidate"
+        }
+      ],
+      "current_location_source_paths": [
+        "data/geography/part-13.json"
+      ],
+      "phoenix_526_member": null,
+      "archived_exact_name_matches": [
+        {
+          "collection": "units",
+          "index": 5820,
+          "id": "framework:province:washington:b01ae89096c9",
+          "name": "Washington",
+          "level": "province",
+          "parent_id": "framework:area:pacific:31aced66907e"
+        },
+        {
+          "collection": "units",
+          "index": 6524,
+          "id": "geo:area:WAS",
+          "name": "Washington",
+          "level": "area",
+          "parent_id": "geo:region:73"
+        },
+        {
+          "collection": "units",
+          "index": 11007,
+          "id": "geo:province:d797900cdb456e5f:WAS",
+          "name": "Washington",
+          "level": "province",
+          "parent_id": "geo:area:WAS"
+        },
+        {
+          "collection": "units",
+          "index": 15489,
+          "id": "world/continent:North America/subcontinent:Northern America/region:United States of America/area:West/province:66186276B98555229882405",
+          "name": "Washington",
+          "level": "province",
+          "parent_id": "world/continent:North America/subcontinent:Northern America/region:United States of America/area:West"
+        }
+      ],
+      "source_feature": {
+        "name": "Line Islands",
+        "shape_id": "97431129B35506555718846",
+        "feature_id": "gb:KIR:ADM1:97431129B35506555718846"
+      },
+      "group_level_bbox_candidate_source_parts_for_current_location": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "crosswalk_status": "Name/group-level candidate only. The source feature is multipart and does not identify which component is this island; no polygon, legal jurisdiction, or ownership assignment is asserted."
+    },
+    {
+      "group": "Line Islands",
+      "official_name": "Tabuaeran/Fanning",
+      "name_aliases": [
+        "Tabuaeran",
+        "Fanning"
+      ],
+      "census_reporting_rows": [],
+      "current_retained_location_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B35506555718846",
+          "name": "Line Islands",
+          "parent_id": "framework:province:line-islands:ce27f8d7a826",
+          "storage_path": "data/geography/part-13.json",
+          "name_match": "group-level current feature candidate"
+        }
+      ],
+      "current_location_source_paths": [
+        "data/geography/part-13.json"
+      ],
+      "phoenix_526_member": null,
+      "archived_exact_name_matches": [],
+      "source_feature": {
+        "name": "Line Islands",
+        "shape_id": "97431129B35506555718846",
+        "feature_id": "gb:KIR:ADM1:97431129B35506555718846"
+      },
+      "group_level_bbox_candidate_source_parts_for_current_location": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "crosswalk_status": "Name/group-level candidate only. The source feature is multipart and does not identify which component is this island; no polygon, legal jurisdiction, or ownership assignment is asserted."
+    },
+    {
+      "group": "Line Islands",
+      "official_name": "Kiritimati/Christmas",
+      "name_aliases": [
+        "Kiritimati",
+        "Christmas"
+      ],
+      "census_reporting_rows": [],
+      "current_retained_location_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B35506555718846",
+          "name": "Line Islands",
+          "parent_id": "framework:province:line-islands:ce27f8d7a826",
+          "storage_path": "data/geography/part-13.json",
+          "name_match": "group-level current feature candidate"
+        }
+      ],
+      "current_location_source_paths": [
+        "data/geography/part-13.json"
+      ],
+      "phoenix_526_member": null,
+      "archived_exact_name_matches": [],
+      "source_feature": {
+        "name": "Line Islands",
+        "shape_id": "97431129B35506555718846",
+        "feature_id": "gb:KIR:ADM1:97431129B35506555718846"
+      },
+      "group_level_bbox_candidate_source_parts_for_current_location": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "crosswalk_status": "Name/group-level candidate only. The source feature is multipart and does not identify which component is this island; no polygon, legal jurisdiction, or ownership assignment is asserted."
+    },
+    {
+      "group": "Line Islands",
+      "official_name": "Malden",
+      "name_aliases": [
+        "Malden"
+      ],
+      "census_reporting_rows": [],
+      "current_retained_location_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B35506555718846",
+          "name": "Line Islands",
+          "parent_id": "framework:province:line-islands:ce27f8d7a826",
+          "storage_path": "data/geography/part-13.json",
+          "name_match": "group-level current feature candidate"
+        }
+      ],
+      "current_location_source_paths": [
+        "data/geography/part-13.json"
+      ],
+      "phoenix_526_member": null,
+      "archived_exact_name_matches": [],
+      "source_feature": {
+        "name": "Line Islands",
+        "shape_id": "97431129B35506555718846",
+        "feature_id": "gb:KIR:ADM1:97431129B35506555718846"
+      },
+      "group_level_bbox_candidate_source_parts_for_current_location": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "crosswalk_status": "Name/group-level candidate only. The source feature is multipart and does not identify which component is this island; no polygon, legal jurisdiction, or ownership assignment is asserted."
+    },
+    {
+      "group": "Line Islands",
+      "official_name": "Starbuck",
+      "name_aliases": [
+        "Starbuck"
+      ],
+      "census_reporting_rows": [],
+      "current_retained_location_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B35506555718846",
+          "name": "Line Islands",
+          "parent_id": "framework:province:line-islands:ce27f8d7a826",
+          "storage_path": "data/geography/part-13.json",
+          "name_match": "group-level current feature candidate"
+        }
+      ],
+      "current_location_source_paths": [
+        "data/geography/part-13.json"
+      ],
+      "phoenix_526_member": null,
+      "archived_exact_name_matches": [],
+      "source_feature": {
+        "name": "Line Islands",
+        "shape_id": "97431129B35506555718846",
+        "feature_id": "gb:KIR:ADM1:97431129B35506555718846"
+      },
+      "group_level_bbox_candidate_source_parts_for_current_location": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "crosswalk_status": "Name/group-level candidate only. The source feature is multipart and does not identify which component is this island; no polygon, legal jurisdiction, or ownership assignment is asserted."
+    },
+    {
+      "group": "Line Islands",
+      "official_name": "Vostok",
+      "name_aliases": [
+        "Vostok"
+      ],
+      "census_reporting_rows": [],
+      "current_retained_location_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B35506555718846",
+          "name": "Line Islands",
+          "parent_id": "framework:province:line-islands:ce27f8d7a826",
+          "storage_path": "data/geography/part-13.json",
+          "name_match": "group-level current feature candidate"
+        }
+      ],
+      "current_location_source_paths": [
+        "data/geography/part-13.json"
+      ],
+      "phoenix_526_member": null,
+      "archived_exact_name_matches": [],
+      "source_feature": {
+        "name": "Line Islands",
+        "shape_id": "97431129B35506555718846",
+        "feature_id": "gb:KIR:ADM1:97431129B35506555718846"
+      },
+      "group_level_bbox_candidate_source_parts_for_current_location": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "crosswalk_status": "Name/group-level candidate only. The source feature is multipart and does not identify which component is this island; no polygon, legal jurisdiction, or ownership assignment is asserted."
+    },
+    {
+      "group": "Line Islands",
+      "official_name": "Flint",
+      "name_aliases": [
+        "Flint"
+      ],
+      "census_reporting_rows": [],
+      "current_retained_location_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B35506555718846",
+          "name": "Line Islands",
+          "parent_id": "framework:province:line-islands:ce27f8d7a826",
+          "storage_path": "data/geography/part-13.json",
+          "name_match": "group-level current feature candidate"
+        }
+      ],
+      "current_location_source_paths": [
+        "data/geography/part-13.json"
+      ],
+      "phoenix_526_member": null,
+      "archived_exact_name_matches": [],
+      "source_feature": {
+        "name": "Line Islands",
+        "shape_id": "97431129B35506555718846",
+        "feature_id": "gb:KIR:ADM1:97431129B35506555718846"
+      },
+      "group_level_bbox_candidate_source_parts_for_current_location": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "crosswalk_status": "Name/group-level candidate only. The source feature is multipart and does not identify which component is this island; no polygon, legal jurisdiction, or ownership assignment is asserted."
+    },
+    {
+      "group": "Line Islands",
+      "official_name": "Millennium/Caroline",
+      "name_aliases": [
+        "Millennium",
+        "Caroline"
+      ],
+      "census_reporting_rows": [],
+      "current_retained_location_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B35506555718846",
+          "name": "Line Islands",
+          "parent_id": "framework:province:line-islands:ce27f8d7a826",
+          "storage_path": "data/geography/part-13.json",
+          "name_match": "group-level current feature candidate"
+        }
+      ],
+      "current_location_source_paths": [
+        "data/geography/part-13.json"
+      ],
+      "phoenix_526_member": null,
+      "archived_exact_name_matches": [
+        {
+          "collection": "locations",
+          "index": 9481,
+          "id": "gb:CAN:ADM3:43193130B53401282036412",
+          "name": "Caroline",
+          "level": null,
+          "parent_id": "geo:province:b1f143c26683ee26:ABT"
+        }
+      ],
+      "source_feature": {
+        "name": "Line Islands",
+        "shape_id": "97431129B35506555718846",
+        "feature_id": "gb:KIR:ADM1:97431129B35506555718846"
+      },
+      "group_level_bbox_candidate_source_parts_for_current_location": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "crosswalk_status": "Name/group-level candidate only. The source feature is multipart and does not identify which component is this island; no polygon, legal jurisdiction, or ownership assignment is asserted."
+    }
+  ],
+  "archive_group_identity_rows": {
+    "Gilbert Islands": [],
+    "Phoenix Islands": [],
+    "Line Islands": []
+  },
+  "source_feature_component_groups": {
+    "Gilbert Islands": {
+      "shape_id": "97431129B55805139245338",
+      "feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "component_count": 29,
+      "part_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29
+      ]
+    },
+    "Phoenix Islands": {
+      "shape_id": "97431129B36644055464690",
+      "feature_id": "gb:KIR:ADM1:97431129B36644055464690",
+      "component_count": 11,
+      "part_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ]
+    },
+    "Line Islands": {
+      "shape_id": "97431129B35506555718846",
+      "feature_id": "gb:KIR:ADM1:97431129B35506555718846",
+      "component_count": 5,
+      "part_numbers": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  },
+  "source_component_status": [
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 1,
+      "retained_current_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "part": 1
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 2,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 3,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 4,
+      "retained_current_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "part": 2
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 5,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 6,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 7,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 8,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 9,
+      "retained_current_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "part": 3
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 10,
+      "retained_current_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "part": 4
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 11,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 12,
+      "retained_current_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "part": 5
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 13,
+      "retained_current_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "part": 6
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 14,
+      "retained_current_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "part": 7
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 15,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 16,
+      "retained_current_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "part": 8
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 17,
+      "retained_current_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "part": 9
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 18,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 19,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 20,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 21,
+      "retained_current_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "part": 10
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 22,
+      "retained_current_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "part": 11
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 23,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 24,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 25,
+      "retained_current_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "part": 12
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 26,
+      "retained_current_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "part": 13
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 27,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 28,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 29,
+      "retained_current_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "part": 14
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Phoenix Islands",
+      "source_shape_id": "97431129B36644055464690",
+      "source_feature_id": "gb:KIR:ADM1:97431129B36644055464690",
+      "source_part": 1,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [
+        "atlas:macro-coverage:location:46b9db00a4ded4a51997"
+      ],
+      "phoenix_526_land_component_bbox_candidates": [
+        {
+          "id": "atlas:macro-coverage:location:46b9db00a4ded4a51997",
+          "name": "Canton/Kanton/Abariringa",
+          "component": 1,
+          "bbox_wgs84": [
+            -171.7086033,
+            -2.809887,
+            -171.7085315,
+            -2.8093539
+          ],
+          "osm_way_ids": [
+            "334492318"
+          ],
+          "osm_way_records": [
+            {
+              "way_id": "334492318",
+              "version": "3",
+              "timestamp": "2022-02-14T13:36:50Z",
+              "node_count": 19,
+              "tags": {
+                "natural": "coastline",
+                "place": "islet"
+              },
+              "individually_closed": true
+            }
+          ]
+        },
+        {
+          "id": "atlas:macro-coverage:location:46b9db00a4ded4a51997",
+          "name": "Canton/Kanton/Abariringa",
+          "component": 2,
+          "bbox_wgs84": [
+            -171.7090388,
+            -2.8126886,
+            -171.7079528,
+            -2.8108756
+          ],
+          "osm_way_ids": [
+            "334492317"
+          ],
+          "osm_way_records": [
+            {
+              "way_id": "334492317",
+              "version": "3",
+              "timestamp": "2022-02-14T13:36:50Z",
+              "node_count": 65,
+              "tags": {
+                "natural": "coastline",
+                "place": "islet"
+              },
+              "individually_closed": true
+            }
+          ]
+        },
+        {
+          "id": "atlas:macro-coverage:location:46b9db00a4ded4a51997",
+          "name": "Canton/Kanton/Abariringa",
+          "component": 3,
+          "bbox_wgs84": [
+            -171.7094026,
+            -2.8121481,
+            -171.7085329,
+            -2.8105327
+          ],
+          "osm_way_ids": [
+            "334492316"
+          ],
+          "osm_way_records": [
+            {
+              "way_id": "334492316",
+              "version": "3",
+              "timestamp": "2022-02-14T13:36:50Z",
+              "node_count": 41,
+              "tags": {
+                "natural": "coastline",
+                "place": "islet"
+              },
+              "individually_closed": true
+            }
+          ]
+        },
+        {
+          "id": "atlas:macro-coverage:location:46b9db00a4ded4a51997",
+          "name": "Canton/Kanton/Abariringa",
+          "component": 4,
+          "bbox_wgs84": [
+            -171.7132428,
+            -2.8133818,
+            -171.7103011,
+            -2.8093392
+          ],
+          "osm_way_ids": [
+            "22392034"
+          ],
+          "osm_way_records": [
+            {
+              "way_id": "22392034",
+              "version": "6",
+              "timestamp": "2025-04-27T02:11:13Z",
+              "node_count": 125,
+              "tags": {
+                "name": "Spam Island",
+                "natural": "coastline",
+                "place": "islet",
+                "wikidata": "Q27221349",
+                "wikipedia": "de:Spam Island"
+              },
+              "individually_closed": true
+            }
+          ]
+        },
+        {
+          "id": "atlas:macro-coverage:location:46b9db00a4ded4a51997",
+          "name": "Canton/Kanton/Abariringa",
+          "component": 5,
+          "bbox_wgs84": [
+            -171.7233574,
+            -2.8706287,
+            -171.6151625,
+            -2.7645001
+          ],
+          "osm_way_ids": [
+            "22391694"
+          ],
+          "osm_way_records": [
+            {
+              "way_id": "22391694",
+              "version": "16",
+              "timestamp": "2022-07-25T00:34:46Z",
+              "node_count": 1801,
+              "tags": {
+                "natural": "coastline",
+                "place": "island",
+                "source": "PGS & Bing"
+              },
+              "individually_closed": true
+            }
+          ]
+        }
+      ],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Phoenix Islands",
+      "source_shape_id": "97431129B36644055464690",
+      "source_feature_id": "gb:KIR:ADM1:97431129B36644055464690",
+      "source_part": 2,
+      "retained_current_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B36644055464690",
+          "part": 1
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Phoenix Islands",
+      "source_shape_id": "97431129B36644055464690",
+      "source_feature_id": "gb:KIR:ADM1:97431129B36644055464690",
+      "source_part": 3,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Phoenix Islands",
+      "source_shape_id": "97431129B36644055464690",
+      "source_feature_id": "gb:KIR:ADM1:97431129B36644055464690",
+      "source_part": 4,
+      "retained_current_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B36644055464690",
+          "part": 2
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Phoenix Islands",
+      "source_shape_id": "97431129B36644055464690",
+      "source_feature_id": "gb:KIR:ADM1:97431129B36644055464690",
+      "source_part": 5,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Phoenix Islands",
+      "source_shape_id": "97431129B36644055464690",
+      "source_feature_id": "gb:KIR:ADM1:97431129B36644055464690",
+      "source_part": 6,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Phoenix Islands",
+      "source_shape_id": "97431129B36644055464690",
+      "source_feature_id": "gb:KIR:ADM1:97431129B36644055464690",
+      "source_part": 7,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Phoenix Islands",
+      "source_shape_id": "97431129B36644055464690",
+      "source_feature_id": "gb:KIR:ADM1:97431129B36644055464690",
+      "source_part": 8,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Phoenix Islands",
+      "source_shape_id": "97431129B36644055464690",
+      "source_feature_id": "gb:KIR:ADM1:97431129B36644055464690",
+      "source_part": 9,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Phoenix Islands",
+      "source_shape_id": "97431129B36644055464690",
+      "source_feature_id": "gb:KIR:ADM1:97431129B36644055464690",
+      "source_part": 10,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Phoenix Islands",
+      "source_shape_id": "97431129B36644055464690",
+      "source_feature_id": "gb:KIR:ADM1:97431129B36644055464690",
+      "source_part": 11,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Line Islands",
+      "source_shape_id": "97431129B35506555718846",
+      "source_feature_id": "gb:KIR:ADM1:97431129B35506555718846",
+      "source_part": 1,
+      "retained_current_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B35506555718846",
+          "part": 1
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Line Islands",
+      "source_shape_id": "97431129B35506555718846",
+      "source_feature_id": "gb:KIR:ADM1:97431129B35506555718846",
+      "source_part": 2,
+      "retained_current_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B35506555718846",
+          "part": 2
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Line Islands",
+      "source_shape_id": "97431129B35506555718846",
+      "source_feature_id": "gb:KIR:ADM1:97431129B35506555718846",
+      "source_part": 3,
+      "retained_current_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B35506555718846",
+          "part": 3
+        },
+        {
+          "id": "gb:KIR:ADM1:97431129B35506555718846",
+          "part": 4
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Line Islands",
+      "source_shape_id": "97431129B35506555718846",
+      "source_feature_id": "gb:KIR:ADM1:97431129B35506555718846",
+      "source_part": 4,
+      "retained_current_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B35506555718846",
+          "part": 2
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Line Islands",
+      "source_shape_id": "97431129B35506555718846",
+      "source_feature_id": "gb:KIR:ADM1:97431129B35506555718846",
+      "source_part": 5,
+      "retained_current_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B35506555718846",
+          "part": 5
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    }
+  ],
+  "bbox_screen_unmatched_source_components": [
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 2,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 3,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 5,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 6,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 7,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 8,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 11,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 15,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 18,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 19,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 20,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 23,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 24,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 27,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 28,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Phoenix Islands",
+      "source_shape_id": "97431129B36644055464690",
+      "source_feature_id": "gb:KIR:ADM1:97431129B36644055464690",
+      "source_part": 3,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Phoenix Islands",
+      "source_shape_id": "97431129B36644055464690",
+      "source_feature_id": "gb:KIR:ADM1:97431129B36644055464690",
+      "source_part": 5,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Phoenix Islands",
+      "source_shape_id": "97431129B36644055464690",
+      "source_feature_id": "gb:KIR:ADM1:97431129B36644055464690",
+      "source_part": 6,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Phoenix Islands",
+      "source_shape_id": "97431129B36644055464690",
+      "source_feature_id": "gb:KIR:ADM1:97431129B36644055464690",
+      "source_part": 7,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Phoenix Islands",
+      "source_shape_id": "97431129B36644055464690",
+      "source_feature_id": "gb:KIR:ADM1:97431129B36644055464690",
+      "source_part": 8,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Phoenix Islands",
+      "source_shape_id": "97431129B36644055464690",
+      "source_feature_id": "gb:KIR:ADM1:97431129B36644055464690",
+      "source_part": 9,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Phoenix Islands",
+      "source_shape_id": "97431129B36644055464690",
+      "source_feature_id": "gb:KIR:ADM1:97431129B36644055464690",
+      "source_part": 10,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    },
+    {
+      "feature_name": "Phoenix Islands",
+      "source_shape_id": "97431129B36644055464690",
+      "source_feature_id": "gb:KIR:ADM1:97431129B36644055464690",
+      "source_part": 11,
+      "retained_current_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "exact_physical_island_assignment": null,
+      "status": "unassigned to a named physical island; bbox candidates are screening evidence only"
+    }
+  ],
+  "completeness_and_unmatched": {
+    "all_named_physical_groups_listed": true,
+    "gilbert_census_row_count": 19,
+    "gilbert_group_targets": 17,
+    "source_component_counts": {
+      "Gilbert Islands": 29,
+      "Phoenix Islands": 11,
+      "Line Islands": 5
+    },
+    "source_component_exact_island_assignments": 0,
+    "source_component_exact_island_assignment_limit": "The retained source provides three group-labelled multipart features, not part-to-island names. All part-level bbox candidates are preserved in source-component-inventory.json; they do not resolve exact identity.",
+    "current_representation_limit": "Current Gilbert and Line subjects are group-level polygons. The two retained remainder parts lie near Banaba/Tarawa; they are candidates, not validated island polygons. All eight Phoenix names and IDs are checked against current retained source-restoration additions and #526 OSM member records; that does not prove equality with geoBoundaries parts.",
+    "unmatched_physical_groups": "No exact individual historical archive name row or source-component-to-island geometry match was established. For Gilbert and Line, no island-level current location ID was identified; group-level candidates remain. Phoenix names are matched to all eight #526 members.",
+    "bbox_screen_unmatched_source_component_count": 23,
+    "bbox_screen_unmatched_source_components_are_listed": true,
+    "all_components_lack_exact_physical_island_assignment": true
+  },
+  "limits": [
+    "This crosswalk is not a map or boundary verdict.",
+    "Archived exact-name misses can reflect aliases, missing history or non-name IDs; they do not prove absence.",
+    "#526 OSM records are source families and bbox candidates, not legal boundaries.",
+    "Group-level source components cannot be truthfully assigned one-to-one to 33 named islands without better source evidence."
+  ]
+}

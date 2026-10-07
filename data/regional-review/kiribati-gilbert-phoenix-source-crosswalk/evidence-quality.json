@@ -251,6 +251,12 @@
         "bytes": 64164,
         "sha256": "aeadc0144d5764e5b2e0754de59698b0aac7fa54b1ddf1975149c6e6c7f80070",
         "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geography/source-restoration-additions.json",
+        "bytes": 1573576,
+        "sha256": "04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9",
+        "hash_kind": "file-bytes"
       }
     ],
     "pins": {
@@ -482,6 +488,38 @@
       "restoration": "Read the exact Git blob at commit 8b6835dfa645cf763137374c3730401d5ac2f732, path data/geographic-migration-archive.json.gz; compressed 10,765,139 bytes SHA-256 9e4ca20b4211795f90f1ab8cac59cfb1ff079396e22979bfb4d1fa9d3f5f55d1 and uncompressed 56,672,580 bytes SHA-256 c072bbe6e7f96789e3a6165e9075eb3271050e1e1614f2923f03169480537184. Run inspect_archive_names.py.",
       "limit": "Undated identity-only archive with no geometry; exact-name misses do not prove absence of historical locations or other aliases.",
       "temporal_status": "unknown"
+    },
+    {
+      "id": "WorldAtlas-Retained-Location-Records-2026",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/8b6835dfa645cf763137374c3730401d5ac2f732/data/geography/source-restoration-additions.json",
+      "role": "Pinned retained location records used to check the current Phoenix location IDs and names",
+      "vintage": "As present in the exact pinned baseline commit 8b6835dfa645cf763137374c3730401d5ac2f732",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "This is a repository reference artifact; no separate license determination is made in this packet."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Read exact Git blob data/geography/source-restoration-additions.json at pinned commit 8b6835dfa645cf763137374c3730401d5ac2f732. Expected 1,573,576 bytes, SHA-256 04c557f16bab13aad0f23233f97fc750e113e9faffbd1556e4dd93cc69f5b9f9.",
+      "limit": "Confirms retained IDs and names only; does not validate geometry, source lineage or legal jurisdiction.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "Phoenix-526-Retained-Members",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/8b6835dfa645cf763137374c3730401d5ac2f732/data/regional-review/regional-supplement-948d12b02687d2a9/phoenix-assessment.json",
+      "role": "#526 source-family inventory for eight named Phoenix members and their retained OSM source archives",
+      "vintage": "OSM source extracts retrieved 2026-10-02; inventory pinned to baseline commit 8b6835dfa645cf763137374c3730401d5ac2f732",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "The inventory records individual OSM source licenses and archive hashes; this summary file is not redistributed by this packet."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Read exact Git blob data/regional-review/regional-supplement-948d12b02687d2a9/phoenix-assessment.json at pinned baseline. Expected 64,164 bytes and SHA-256 aeadc0144d5764e5b2e0754de59698b0aac7fa54b1ddf1975149c6e6c7f80070. Individual OSM archives and hashes remain in the #526 packet.",
+      "limit": "Name/member records and source bbox candidates do not prove equality with geoBoundaries polygons or legal boundaries.",
+      "temporal_status": "reference"
     }
   ],
   "outputs": [
@@ -505,8 +543,8 @@
     },
     {
       "path": "data/regional-review/kiribati-gilbert-phoenix-source-crosswalk/followup-2026-10-07.md",
-      "bytes": 4843,
-      "sha256": "95e5fce370583c3b5526f90b2e9e043469cf75f66879d9f59d9236e697111fe8",
+      "bytes": 5962,
+      "sha256": "d6fe6218585cb838bb7c7cfd7716b9000f7aaa779bd0a5450440813462abd038",
       "hash_kind": "file-bytes"
     },
     {
@@ -519,6 +557,18 @@
       "path": "data/regional-review/kiribati-gilbert-phoenix-source-crosswalk/inspect_archive_names.py",
       "bytes": 2815,
       "sha256": "e2f2d05a3684d463e3436afdec060bb00ab87e892654bed5aaaac9da23a62181",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/kiribati-gilbert-phoenix-source-crosswalk/build_island_crosswalk.py",
+      "bytes": 12836,
+      "sha256": "5d0f759b8627216292d90fc7d6206eeae1a244eafaa29a6e0f83c1ab8b2bdb74",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/kiribati-gilbert-phoenix-source-crosswalk/physical-island-crosswalk.json",
+      "bytes": 97305,
+      "sha256": "02bb17089923f9a2821ddb2bab95293f71378fb4c3b1a31caeeb568d22f3b90a",
       "hash_kind": "file-bytes"
     }
   ],
@@ -536,6 +586,13 @@
       "description": "Normalize 42 official physical-group names/aliases with Unicode NFKD, ASCII casefolding and removal of non-alphanumeric characters; compare exact equality with every name in both locations and units collections of the pinned undated archive. Preserve all name hits and parent IDs; do not infer absence from a miss or geography from a name alone.",
       "software": "Python 3.7.3 standard library (gzip, json, re, subprocess, unicodedata); git reads the immutable archive blob",
       "units": "Name strings and record counts; no geographic measurement"
+    },
+    {
+      "id": "physical-name-current-id-crosswalk",
+      "kind": "source",
+      "description": "Join the 33 official KMS physical names to the 19 NSO Gilbert reporting rows, retained #140 group-level subject IDs, pinned current #526 Phoenix member IDs, exact-name archive hits, and group-level source component family. Assert each referenced current feature ID exists in pinned part-13/source-restoration-additions records. Never assign an individual multipart component to an island.",
+      "software": "Python standard library; build_island_crosswalk.py",
+      "units": "Named group rows, census rows, source feature component numbers and retained ID references; no geographic measurement"
     }
   ],
   "metrics": [],
@@ -606,6 +663,17 @@
         "MCIA-Establishment-Warrants-2026",
         "MCIA-Warrant-PDF-Receipts-2026"
       ]
+    },
+    {
+      "text": "The 33-row physical-name crosswalk resolves Gilbert census-row names, eight Phoenix names to the eight retained #526 member IDs, and Gilbert/Line group-level retained IDs; exact island-to-source-component geometry remains unresolved.",
+      "status": "supported",
+      "source_ids": [
+        "KMS-Islands-We-Cover-2026",
+        "KIR-Census-Atlas-2022",
+        "WorldAtlas-Retained-Location-Records-2026",
+        "Phoenix-526-Retained-Members",
+        "geoBoundaries-KIR-ADM1"
+      ]
     }
   ],
   "stages": {
@@ -637,6 +705,16 @@
     },
     {
       "path": "data/regional-review/kiribati-gilbert-phoenix-source-crosswalk/inspect_archive_names.py",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/kiribati-gilbert-phoenix-source-crosswalk/build_island_crosswalk.py",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/kiribati-gilbert-phoenix-source-crosswalk/physical-island-crosswalk.json",
       "status": "added",
       "previous_path": null
     }
