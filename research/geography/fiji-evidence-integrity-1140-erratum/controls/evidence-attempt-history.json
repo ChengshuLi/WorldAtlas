@@ -1,0 +1,954 @@
+{
+  "authoritative_current_evidence": {
+    "adverse_controls": "research/geography/fiji-evidence-integrity-1140-erratum/controls/builder-controls-final-4.json",
+    "builder_pair": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-11",
+    "producer_runs": [
+      "research/geography/fiji-evidence-integrity-1140-erratum/vintages/run-seven",
+      "research/geography/fiji-evidence-integrity-1140-erratum/vintages/run-eight"
+    ]
+  },
+  "issue": 1361,
+  "preservation": "All listed historical evidence remains in place. This index records why it is not used as current proof; no prior run, failed attempt, source or manifest was deleted.",
+  "recorded_at": "2026-10-07",
+  "superseded_artifacts": [
+    {
+      "bytes": 12149,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/controls/builder-controls.json",
+      "reason": "Superseded historical control output. Earlier records did not verify the actual intended probe paths or lacked the final expected-error/output bindings; never treat as the current successful proof.",
+      "sha256": "85e7a432a789dec5caa7b69c99fcf5a25b7f6bb0489c06020d22f2e573ce8294"
+    },
+    {
+      "bytes": 12147,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/controls/builder-controls-final.json",
+      "reason": "Superseded historical control output. Earlier records did not verify the actual intended probe paths or lacked the final expected-error/output bindings; never treat as the current successful proof.",
+      "sha256": "d824e12bdeca7f70b3c27ed4eeda024df9f20da913e94cd3fc17660881796d41"
+    },
+    {
+      "bytes": 12147,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/controls/builder-controls-final-2.json",
+      "reason": "Superseded historical control output. Earlier records did not verify the actual intended probe paths or lacked the final expected-error/output bindings; never treat as the current successful proof.",
+      "sha256": "63859f5c246e3a8131afac1f66b0cace460c9b8586b787ab47f8e77f7625af96"
+    },
+    {
+      "bytes": 25211,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/controls/builder-controls-final-3.json",
+      "reason": "Superseded historical control output. Earlier records did not verify the actual intended probe paths or lacked the final expected-error/output bindings; never treat as the current successful proof.",
+      "sha256": "f858f37aff0dc5686e913fa939db749f13498e3ed697eec0e4b78dfc4f46e60b"
+    },
+    {
+      "file_count": 5,
+      "files": [
+        {
+          "bytes": 11205,
+          "path": "builder-controls.json",
+          "sha256": "23c7fd8e880993432b6e15aaa7631d4d376abebc78e17143e392b577dfafe678"
+        },
+        {
+          "bytes": 937,
+          "path": "publication.json",
+          "sha256": "d1fe8293672a02f33ed53eda3adb73e942003c60efae2c4db3f6302ff6ad3a9b"
+        },
+        {
+          "bytes": 2272,
+          "path": "run-bindings.json",
+          "sha256": "d3c00995e19e9c7700279b5b52126f7d529abbef1980b0e23a0ba11eb23d5f24"
+        },
+        {
+          "bytes": 349,
+          "path": "run-metadata.json",
+          "sha256": "d0dbd59e4d9a33065c26cc77172d96b267faac51b0fd4c37b0616ced7a2b4c1d"
+        },
+        {
+          "bytes": 2441,
+          "path": "two-run-reproducibility.json",
+          "sha256": "5c347612021d6b9348438500e15bf43074bff8c51231240edefed13f5448341c"
+        }
+      ],
+      "kind": "tree",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair",
+      "reason": "Superseded builder attempt. Older pairs predate the corrected actual CLI control run, current source licensing, or complete generated-output metric binding; preserved for history.",
+      "tree_index_sha256": "0f2231c2c20e1f394e1658e5b6158217c61aa765748f1224eb7a6372b04a77f6"
+    },
+    {
+      "file_count": 5,
+      "files": [
+        {
+          "bytes": 11205,
+          "path": "builder-controls.json",
+          "sha256": "23c7fd8e880993432b6e15aaa7631d4d376abebc78e17143e392b577dfafe678"
+        },
+        {
+          "bytes": 945,
+          "path": "publication.json",
+          "sha256": "f8df96259fc782c6651369ba4860279d42c5dc66fb29d1776c78227f39becb03"
+        },
+        {
+          "bytes": 2272,
+          "path": "run-bindings.json",
+          "sha256": "d3c00995e19e9c7700279b5b52126f7d529abbef1980b0e23a0ba11eb23d5f24"
+        },
+        {
+          "bytes": 353,
+          "path": "run-metadata.json",
+          "sha256": "88cc42b22642444e659a5ef142e64d178a5fdb0d7992d7debabb88d86c37bf09"
+        },
+        {
+          "bytes": 2441,
+          "path": "two-run-reproducibility.json",
+          "sha256": "5c347612021d6b9348438500e15bf43074bff8c51231240edefed13f5448341c"
+        }
+      ],
+      "kind": "tree",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-2",
+      "reason": "Superseded builder attempt. Older pairs predate the corrected actual CLI control run, current source licensing, or complete generated-output metric binding; preserved for history.",
+      "tree_index_sha256": "35d1fe2512aecda09d9ed04a139880afc2efacb148af69dfba9bff00321bed63"
+    },
+    {
+      "file_count": 5,
+      "files": [
+        {
+          "bytes": 11203,
+          "path": "builder-controls.json",
+          "sha256": "0c562117b0a560932235c0a22e4ffb8a92556a1715fc81e1308bea6406238731"
+        },
+        {
+          "bytes": 945,
+          "path": "publication.json",
+          "sha256": "6f11ea8d9529407508b7ad70bb69f1e830e0a0ddff2b481e7f39f79d27a7eb80"
+        },
+        {
+          "bytes": 2275,
+          "path": "run-bindings.json",
+          "sha256": "b5ec3334d87b2ede8b8514fa855a5e71bcdf6d1982f87ad058dc8aa3adca415a"
+        },
+        {
+          "bytes": 356,
+          "path": "run-metadata.json",
+          "sha256": "7fbe2e5995e4b9832d5690c84874af71095731dcc86a29e7cbf4b65f14db7770"
+        },
+        {
+          "bytes": 2450,
+          "path": "two-run-reproducibility.json",
+          "sha256": "500487550e7d026f122f3ffe11cc48f0b7da7625e8895421b2b6bc001b1c37fc"
+        }
+      ],
+      "kind": "tree",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-3",
+      "reason": "Superseded builder attempt. Older pairs predate the corrected actual CLI control run, current source licensing, or complete generated-output metric binding; preserved for history.",
+      "tree_index_sha256": "727d7f79851695848f2174382067ac9161e8dcc6937f4bb235bdc5fe159ec91c"
+    },
+    {
+      "file_count": 5,
+      "files": [
+        {
+          "bytes": 11203,
+          "path": "builder-controls.json",
+          "sha256": "0c562117b0a560932235c0a22e4ffb8a92556a1715fc81e1308bea6406238731"
+        },
+        {
+          "bytes": 945,
+          "path": "publication.json",
+          "sha256": "5626a45be7f07e57ac8974a66eb809785b7b3e052b54a58adab775e32014cf24"
+        },
+        {
+          "bytes": 2275,
+          "path": "run-bindings.json",
+          "sha256": "daf198cb555fbdaaeaf0316faa2c1f9eaeaf0ea0d2cdf451c651849773d784f0"
+        },
+        {
+          "bytes": 356,
+          "path": "run-metadata.json",
+          "sha256": "727a39e70852d2bac4fe51f8b6bcfb7ce709badf9ba09dc524ed1026e1a00073"
+        },
+        {
+          "bytes": 2450,
+          "path": "two-run-reproducibility.json",
+          "sha256": "500487550e7d026f122f3ffe11cc48f0b7da7625e8895421b2b6bc001b1c37fc"
+        }
+      ],
+      "kind": "tree",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-4",
+      "reason": "Superseded builder attempt. Older pairs predate the corrected actual CLI control run, current source licensing, or complete generated-output metric binding; preserved for history.",
+      "tree_index_sha256": "815103500fbf566fdfad8afd4b15c391a0a947db089ba6702dc0b53d102e5195"
+    },
+    {
+      "file_count": 5,
+      "files": [
+        {
+          "bytes": 11203,
+          "path": "builder-controls.json",
+          "sha256": "0c562117b0a560932235c0a22e4ffb8a92556a1715fc81e1308bea6406238731"
+        },
+        {
+          "bytes": 945,
+          "path": "publication.json",
+          "sha256": "31c0586ad15265f0dd7eb559a59f96a8ff3d8c93336c8551170c1d5e37df2afc"
+        },
+        {
+          "bytes": 2275,
+          "path": "run-bindings.json",
+          "sha256": "61322fc01bb20165dc99af1b17fdc3afc608bc6435be285dda9e9097329533ab"
+        },
+        {
+          "bytes": 356,
+          "path": "run-metadata.json",
+          "sha256": "da2215ebde4b223e43b4ae8686e46ef7269f8b253617d48b4d92fd0ea8d3e964"
+        },
+        {
+          "bytes": 2450,
+          "path": "two-run-reproducibility.json",
+          "sha256": "500487550e7d026f122f3ffe11cc48f0b7da7625e8895421b2b6bc001b1c37fc"
+        }
+      ],
+      "kind": "tree",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-5",
+      "reason": "Superseded builder attempt. Older pairs predate the corrected actual CLI control run, current source licensing, or complete generated-output metric binding; preserved for history.",
+      "tree_index_sha256": "688df1f09b89e5b15b7dd296bddf62aa9e086b5c6c22ce197782eed33cdc7020"
+    },
+    {
+      "file_count": 5,
+      "files": [
+        {
+          "bytes": 11203,
+          "path": "builder-controls.json",
+          "sha256": "03704d6dfc62ab90ba9c49494b1d9211f911435749a6b565847fcd2303f6cbae"
+        },
+        {
+          "bytes": 945,
+          "path": "publication.json",
+          "sha256": "45dc8fb8e58fb4487fc1fbac003713230d823df61dd746fe5ec70db8d54e8e83"
+        },
+        {
+          "bytes": 2075,
+          "path": "run-bindings.json",
+          "sha256": "1ae077fc8e4d237683509ef5e58a4af057d85653447b12850093aa88b759596c"
+        },
+        {
+          "bytes": 354,
+          "path": "run-metadata.json",
+          "sha256": "4dcdd0bb4ba705f180c3a952c198e91539a7fd0d18689b6ace0cb844eb8fd7bf"
+        },
+        {
+          "bytes": 2450,
+          "path": "two-run-reproducibility.json",
+          "sha256": "b236ffb92ef07efb26f4ad1205faa7bab2816c70c6241ebd2bd7f36eb88e79cd"
+        }
+      ],
+      "kind": "tree",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-6",
+      "reason": "Superseded builder attempt. Older pairs predate the corrected actual CLI control run, current source licensing, or complete generated-output metric binding; preserved for history.",
+      "tree_index_sha256": "69157f6184a8a6553dc3e074bf1e7951d2df81294d61394d5b56b82367012528"
+    },
+    {
+      "file_count": 5,
+      "files": [
+        {
+          "bytes": 11203,
+          "path": "builder-controls.json",
+          "sha256": "03704d6dfc62ab90ba9c49494b1d9211f911435749a6b565847fcd2303f6cbae"
+        },
+        {
+          "bytes": 945,
+          "path": "publication.json",
+          "sha256": "6b5c41cba2c01ae6ea4188009ca06325badbde7b7bfec252441a64b389adc74e"
+        },
+        {
+          "bytes": 2075,
+          "path": "run-bindings.json",
+          "sha256": "abd488e683dd823a9f35b56cd99da74d92a426d472e2b17805896c77405d3b49"
+        },
+        {
+          "bytes": 354,
+          "path": "run-metadata.json",
+          "sha256": "1bb542173bcd0545a5d6632e937da69b8984db43cab19d94b3711b147d2716ad"
+        },
+        {
+          "bytes": 2450,
+          "path": "two-run-reproducibility.json",
+          "sha256": "b236ffb92ef07efb26f4ad1205faa7bab2816c70c6241ebd2bd7f36eb88e79cd"
+        }
+      ],
+      "kind": "tree",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-7",
+      "reason": "Superseded builder attempt. Older pairs predate the corrected actual CLI control run, current source licensing, or complete generated-output metric binding; preserved for history.",
+      "tree_index_sha256": "a2ce1c0e344d43abf6c2e350f75dec676eb59c766b54b7c741bd7f55549c0ea4"
+    },
+    {
+      "file_count": 5,
+      "files": [
+        {
+          "bytes": 11203,
+          "path": "builder-controls.json",
+          "sha256": "03704d6dfc62ab90ba9c49494b1d9211f911435749a6b565847fcd2303f6cbae"
+        },
+        {
+          "bytes": 945,
+          "path": "publication.json",
+          "sha256": "bb7828be5047e7a8b986941d9153a83ad464da8bd1e09af71532bbd36d01885b"
+        },
+        {
+          "bytes": 2075,
+          "path": "run-bindings.json",
+          "sha256": "abd488e683dd823a9f35b56cd99da74d92a426d472e2b17805896c77405d3b49"
+        },
+        {
+          "bytes": 354,
+          "path": "run-metadata.json",
+          "sha256": "7e6666d34c5561dbfdec59964db470a9fadc520e08d7424b8baea93b5bbe5bc8"
+        },
+        {
+          "bytes": 2450,
+          "path": "two-run-reproducibility.json",
+          "sha256": "b236ffb92ef07efb26f4ad1205faa7bab2816c70c6241ebd2bd7f36eb88e79cd"
+        }
+      ],
+      "kind": "tree",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-8",
+      "reason": "Superseded builder attempt. Older pairs predate the corrected actual CLI control run, current source licensing, or complete generated-output metric binding; preserved for history.",
+      "tree_index_sha256": "59ce67031fe6dd537de22e07b803950607ec69f68bb1c6afde2c162ebd090f3f"
+    },
+    {
+      "file_count": 5,
+      "files": [
+        {
+          "bytes": 11203,
+          "path": "builder-controls.json",
+          "sha256": "03704d6dfc62ab90ba9c49494b1d9211f911435749a6b565847fcd2303f6cbae"
+        },
+        {
+          "bytes": 945,
+          "path": "publication.json",
+          "sha256": "83f824bb2f219fff99c30f591149fb584d2823a6e8128afcf93eaf34932fa133"
+        },
+        {
+          "bytes": 2075,
+          "path": "run-bindings.json",
+          "sha256": "ec6b7e523164e173a6b7643a41de67af6f399569c8bd8678b3e62b21be230af8"
+        },
+        {
+          "bytes": 354,
+          "path": "run-metadata.json",
+          "sha256": "e35dd9b626d8e55e082ca20d8d532068a174753727d6a29b07fad552a5ca7ce9"
+        },
+        {
+          "bytes": 2450,
+          "path": "two-run-reproducibility.json",
+          "sha256": "b236ffb92ef07efb26f4ad1205faa7bab2816c70c6241ebd2bd7f36eb88e79cd"
+        }
+      ],
+      "kind": "tree",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-9",
+      "reason": "Superseded builder attempt. Older pairs predate the corrected actual CLI control run, current source licensing, or complete generated-output metric binding; preserved for history.",
+      "tree_index_sha256": "0657e56d99689dc80ede3e6250de447917772ea0af2fd80b71d0cb825f679610"
+    },
+    {
+      "file_count": 5,
+      "files": [
+        {
+          "bytes": 11203,
+          "path": "builder-controls.json",
+          "sha256": "03704d6dfc62ab90ba9c49494b1d9211f911435749a6b565847fcd2303f6cbae"
+        },
+        {
+          "bytes": 949,
+          "path": "publication.json",
+          "sha256": "586f3882a82e23e4c4361d3ca1744b72d46b97ef78fc4c01d0c52968b2db5495"
+        },
+        {
+          "bytes": 2075,
+          "path": "run-bindings.json",
+          "sha256": "4ef3f6105ab782e875029a772ba1e8f2c1f067f81341e3158221b75c3d6d482a"
+        },
+        {
+          "bytes": 356,
+          "path": "run-metadata.json",
+          "sha256": "d12f8142bbc5e36d587f9c0d435341a408ab3429c498856e4963ff191ed87b7d"
+        },
+        {
+          "bytes": 2450,
+          "path": "two-run-reproducibility.json",
+          "sha256": "b236ffb92ef07efb26f4ad1205faa7bab2816c70c6241ebd2bd7f36eb88e79cd"
+        }
+      ],
+      "kind": "tree",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/final-pair-10",
+      "reason": "Superseded builder attempt. Older pairs predate the corrected actual CLI control run, current source licensing, or complete generated-output metric binding; preserved for history.",
+      "tree_index_sha256": "0342461ea6562464b06d68a70e6b4e8c85811b4485e73759daaa6d9a95831159"
+    },
+    {
+      "file_count": 6,
+      "files": [
+        {
+          "bytes": 17198,
+          "path": "audit.json",
+          "sha256": "633ae48a331da1355d79bce4309d8090b691d6c5792c3653d248e72513a63ff2"
+        },
+        {
+          "bytes": 14798,
+          "path": "execution-bindings.json",
+          "sha256": "b6d99236b160fc8532202477ac37318b83692767169e57363f1e8c0c468d1a65"
+        },
+        {
+          "bytes": 1669,
+          "path": "negative-controls.json",
+          "sha256": "c0ea3c1697bb57bd8274e35ffcbc8bdb0dc140772f4ea92ef55160e6bd3c758d"
+        },
+        {
+          "bytes": 721,
+          "path": "positive-control.json",
+          "sha256": "19d8219689699b2632f3597fd23560079a1a2eae2a17e7f2ea2dcb903569ba8d"
+        },
+        {
+          "bytes": 1134,
+          "path": "publication.json",
+          "sha256": "87845d82ca3f9a091e215e8c0a070fe2a55b8b6beeab69498f27c30e2fb4d21c"
+        },
+        {
+          "bytes": 289,
+          "path": "run-metadata.json",
+          "sha256": "2a0faf6b039051b587d39fd775003ecb7a407de5c561f6610bb7434958a7bf94"
+        }
+      ],
+      "kind": "tree",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/run-one",
+      "reason": "Superseded producer run generated before final packet.py changes; preserved, but not used as the current independent run pair.",
+      "tree_index_sha256": "2ccb924a657f512e8b4179b26cc6746e12c439e085fc79ab21c8ffdad4011545"
+    },
+    {
+      "file_count": 6,
+      "files": [
+        {
+          "bytes": 17198,
+          "path": "audit.json",
+          "sha256": "633ae48a331da1355d79bce4309d8090b691d6c5792c3653d248e72513a63ff2"
+        },
+        {
+          "bytes": 14798,
+          "path": "execution-bindings.json",
+          "sha256": "b6d99236b160fc8532202477ac37318b83692767169e57363f1e8c0c468d1a65"
+        },
+        {
+          "bytes": 1669,
+          "path": "negative-controls.json",
+          "sha256": "c0ea3c1697bb57bd8274e35ffcbc8bdb0dc140772f4ea92ef55160e6bd3c758d"
+        },
+        {
+          "bytes": 721,
+          "path": "positive-control.json",
+          "sha256": "19d8219689699b2632f3597fd23560079a1a2eae2a17e7f2ea2dcb903569ba8d"
+        },
+        {
+          "bytes": 1134,
+          "path": "publication.json",
+          "sha256": "79232cd1d0280e4e6a8b915db2e00025a986c46fdf5b07ba97aa1f51e120bb97"
+        },
+        {
+          "bytes": 289,
+          "path": "run-metadata.json",
+          "sha256": "0eeb2bc8d71acb9f2eb2a1b24e8325bb7e0b3a09fcaba2dab69892d259419f3d"
+        }
+      ],
+      "kind": "tree",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/run-two",
+      "reason": "Superseded producer run generated before final packet.py changes; preserved, but not used as the current independent run pair.",
+      "tree_index_sha256": "53fdcdf91b7cf7b8fb95df00449c2e0ae41da843dd51baa0c9baa3172a54e3cc"
+    },
+    {
+      "file_count": 6,
+      "files": [
+        {
+          "bytes": 17198,
+          "path": "audit.json",
+          "sha256": "98adc979ede5b0af2d402db277d54dd60eb490b0374f8e2eb8a307c6a33d57e0"
+        },
+        {
+          "bytes": 14798,
+          "path": "execution-bindings.json",
+          "sha256": "6667a81cae5ad47b7c2d27a8c22db27329d02391dfa66d376e381a3a2bf5b22b"
+        },
+        {
+          "bytes": 1669,
+          "path": "negative-controls.json",
+          "sha256": "c0ea3c1697bb57bd8274e35ffcbc8bdb0dc140772f4ea92ef55160e6bd3c758d"
+        },
+        {
+          "bytes": 721,
+          "path": "positive-control.json",
+          "sha256": "19d8219689699b2632f3597fd23560079a1a2eae2a17e7f2ea2dcb903569ba8d"
+        },
+        {
+          "bytes": 1144,
+          "path": "publication.json",
+          "sha256": "544790eb197e9c9018fa2b456aee5665d2812400afd05e8de5a7db52bd1d47c3"
+        },
+        {
+          "bytes": 293,
+          "path": "run-metadata.json",
+          "sha256": "fb244f16ce98db29cdc73bc72adad6a226358b089f10835f6d156717026edf8d"
+        }
+      ],
+      "kind": "tree",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/run-three",
+      "reason": "Superseded producer run generated before final packet.py changes; preserved, but not used as the current independent run pair.",
+      "tree_index_sha256": "54997c742b07055f7894ca41a78af11dee7f9b312c2ba44b3d20df72df71b68a"
+    },
+    {
+      "file_count": 6,
+      "files": [
+        {
+          "bytes": 17198,
+          "path": "audit.json",
+          "sha256": "98adc979ede5b0af2d402db277d54dd60eb490b0374f8e2eb8a307c6a33d57e0"
+        },
+        {
+          "bytes": 14798,
+          "path": "execution-bindings.json",
+          "sha256": "6667a81cae5ad47b7c2d27a8c22db27329d02391dfa66d376e381a3a2bf5b22b"
+        },
+        {
+          "bytes": 1669,
+          "path": "negative-controls.json",
+          "sha256": "c0ea3c1697bb57bd8274e35ffcbc8bdb0dc140772f4ea92ef55160e6bd3c758d"
+        },
+        {
+          "bytes": 721,
+          "path": "positive-control.json",
+          "sha256": "19d8219689699b2632f3597fd23560079a1a2eae2a17e7f2ea2dcb903569ba8d"
+        },
+        {
+          "bytes": 1139,
+          "path": "publication.json",
+          "sha256": "e90910ade7b667894f3368175e667faacd33601bae17aa16a084cd44d71bede4"
+        },
+        {
+          "bytes": 291,
+          "path": "run-metadata.json",
+          "sha256": "c156cd04cbacbc6a437f63728facec3d105a17e6540534d5f24ef1c631c46ae2"
+        }
+      ],
+      "kind": "tree",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/run-four",
+      "reason": "Superseded producer run generated before final packet.py changes; preserved, but not used as the current independent run pair.",
+      "tree_index_sha256": "5aa3d752e302f2aacbab4b6f642e9d778ce509a2e93f8a1be9e1b6331c1363b7"
+    },
+    {
+      "file_count": 6,
+      "files": [
+        {
+          "bytes": 17198,
+          "path": "audit.json",
+          "sha256": "98adc979ede5b0af2d402db277d54dd60eb490b0374f8e2eb8a307c6a33d57e0"
+        },
+        {
+          "bytes": 14600,
+          "path": "execution-bindings.json",
+          "sha256": "72d894f56c01e1ea986fff99e9e73bfb4b77d0f6b90b962016398ec3d154ba48"
+        },
+        {
+          "bytes": 1669,
+          "path": "negative-controls.json",
+          "sha256": "c0ea3c1697bb57bd8274e35ffcbc8bdb0dc140772f4ea92ef55160e6bd3c758d"
+        },
+        {
+          "bytes": 721,
+          "path": "positive-control.json",
+          "sha256": "19d8219689699b2632f3597fd23560079a1a2eae2a17e7f2ea2dcb903569ba8d"
+        },
+        {
+          "bytes": 1139,
+          "path": "publication.json",
+          "sha256": "727b3bbfe1d58fe4540879475d75155c1c9b3b790873e1417a94bed345042a69"
+        },
+        {
+          "bytes": 291,
+          "path": "run-metadata.json",
+          "sha256": "9c37aca43a0247fc550e16e8722ebadf29475b898940e5e76e23c00be61fc474"
+        }
+      ],
+      "kind": "tree",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/run-five",
+      "reason": "Superseded producer run generated before final packet.py changes; preserved, but not used as the current independent run pair.",
+      "tree_index_sha256": "1ee2274d9dd8cde3b545916bc245a62ddd5dc24fc61c12ffbab7ab91aacaccb6"
+    },
+    {
+      "file_count": 6,
+      "files": [
+        {
+          "bytes": 17198,
+          "path": "audit.json",
+          "sha256": "98adc979ede5b0af2d402db277d54dd60eb490b0374f8e2eb8a307c6a33d57e0"
+        },
+        {
+          "bytes": 14600,
+          "path": "execution-bindings.json",
+          "sha256": "72d894f56c01e1ea986fff99e9e73bfb4b77d0f6b90b962016398ec3d154ba48"
+        },
+        {
+          "bytes": 1669,
+          "path": "negative-controls.json",
+          "sha256": "c0ea3c1697bb57bd8274e35ffcbc8bdb0dc140772f4ea92ef55160e6bd3c758d"
+        },
+        {
+          "bytes": 721,
+          "path": "positive-control.json",
+          "sha256": "19d8219689699b2632f3597fd23560079a1a2eae2a17e7f2ea2dcb903569ba8d"
+        },
+        {
+          "bytes": 1134,
+          "path": "publication.json",
+          "sha256": "0c19887899562df55e9f8d710545eee8fa57d5707844b3dcc73f4b84cad0c712"
+        },
+        {
+          "bytes": 289,
+          "path": "run-metadata.json",
+          "sha256": "810b51878a9251049d75d122ddd18fb52b15e9939902dd1a2775d4f26d4d13c5"
+        }
+      ],
+      "kind": "tree",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/run-six",
+      "reason": "Superseded producer run generated before final packet.py changes; preserved, but not used as the current independent run pair.",
+      "tree_index_sha256": "c6cf1ee562d30ed72d345f02e027d106e0e0e7cec4d6fc36c94480ff0940122c"
+    },
+    {
+      "file_count": 0,
+      "files": [],
+      "kind": "tree",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/control-fixtures",
+      "reason": "Historical adversarial fixture/probe from an earlier attempt; retained unchanged and excluded from current pass claims.",
+      "tree_index_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "file_count": 6,
+      "files": [
+        {
+          "bytes": 17198,
+          "path": "audit.json",
+          "sha256": "98adc979ede5b0af2d402db277d54dd60eb490b0374f8e2eb8a307c6a33d57e0"
+        },
+        {
+          "bytes": 14798,
+          "path": "execution-bindings.json",
+          "sha256": "6667a81cae5ad47b7c2d27a8c22db27329d02391dfa66d376e381a3a2bf5b22b"
+        },
+        {
+          "bytes": 1669,
+          "path": "negative-controls.json",
+          "sha256": "c0ea3c1697bb57bd8274e35ffcbc8bdb0dc140772f4ea92ef55160e6bd3c758d"
+        },
+        {
+          "bytes": 721,
+          "path": "positive-control.json",
+          "sha256": "19d8219689699b2632f3597fd23560079a1a2eae2a17e7f2ea2dcb903569ba8d"
+        },
+        {
+          "bytes": 1144,
+          "path": "publication.json",
+          "sha256": "544790eb197e9c9018fa2b456aee5665d2812400afd05e8de5a7db52bd1d47c3"
+        },
+        {
+          "bytes": 293,
+          "path": "run-metadata.json",
+          "sha256": "fb244f16ce98db29cdc73bc72adad6a226358b089f10835f6d156717026edf8d"
+        }
+      ],
+      "kind": "tree",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/copied-run-four-final",
+      "reason": "Historical adversarial fixture/probe from an earlier attempt; retained unchanged and excluded from current pass claims.",
+      "tree_index_sha256": "54997c742b07055f7894ca41a78af11dee7f9b312c2ba44b3d20df72df71b68a"
+    },
+    {
+      "file_count": 6,
+      "files": [
+        {
+          "bytes": 17198,
+          "path": "audit.json",
+          "sha256": "98adc979ede5b0af2d402db277d54dd60eb490b0374f8e2eb8a307c6a33d57e0"
+        },
+        {
+          "bytes": 14798,
+          "path": "execution-bindings.json",
+          "sha256": "6667a81cae5ad47b7c2d27a8c22db27329d02391dfa66d376e381a3a2bf5b22b"
+        },
+        {
+          "bytes": 1669,
+          "path": "negative-controls.json",
+          "sha256": "c0ea3c1697bb57bd8274e35ffcbc8bdb0dc140772f4ea92ef55160e6bd3c758d"
+        },
+        {
+          "bytes": 721,
+          "path": "positive-control.json",
+          "sha256": "19d8219689699b2632f3597fd23560079a1a2eae2a17e7f2ea2dcb903569ba8d"
+        },
+        {
+          "bytes": 1144,
+          "path": "publication.json",
+          "sha256": "544790eb197e9c9018fa2b456aee5665d2812400afd05e8de5a7db52bd1d47c3"
+        },
+        {
+          "bytes": 293,
+          "path": "run-metadata.json",
+          "sha256": "fb244f16ce98db29cdc73bc72adad6a226358b089f10835f6d156717026edf8d"
+        }
+      ],
+      "kind": "tree",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/copied-run-four-final-2",
+      "reason": "Historical adversarial fixture/probe from an earlier attempt; retained unchanged and excluded from current pass claims.",
+      "tree_index_sha256": "54997c742b07055f7894ca41a78af11dee7f9b312c2ba44b3d20df72df71b68a"
+    },
+    {
+      "file_count": 6,
+      "files": [
+        {
+          "bytes": 17198,
+          "path": "audit.json",
+          "sha256": "633ae48a331da1355d79bce4309d8090b691d6c5792c3653d248e72513a63ff2"
+        },
+        {
+          "bytes": 14798,
+          "path": "execution-bindings.json",
+          "sha256": "b6d99236b160fc8532202477ac37318b83692767169e57363f1e8c0c468d1a65"
+        },
+        {
+          "bytes": 1669,
+          "path": "negative-controls.json",
+          "sha256": "c0ea3c1697bb57bd8274e35ffcbc8bdb0dc140772f4ea92ef55160e6bd3c758d"
+        },
+        {
+          "bytes": 721,
+          "path": "positive-control.json",
+          "sha256": "19d8219689699b2632f3597fd23560079a1a2eae2a17e7f2ea2dcb903569ba8d"
+        },
+        {
+          "bytes": 1134,
+          "path": "publication.json",
+          "sha256": "87845d82ca3f9a091e215e8c0a070fe2a55b8b6beeab69498f27c30e2fb4d21c"
+        },
+        {
+          "bytes": 289,
+          "path": "run-metadata.json",
+          "sha256": "2a0faf6b039051b587d39fd775003ecb7a407de5c561f6610bb7434958a7bf94"
+        }
+      ],
+      "kind": "tree",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/copied-run-two",
+      "reason": "Historical adversarial fixture/probe from an earlier attempt; retained unchanged and excluded from current pass claims.",
+      "tree_index_sha256": "2ccb924a657f512e8b4179b26cc6746e12c439e085fc79ab21c8ffdad4011545"
+    },
+    {
+      "file_count": 0,
+      "files": [],
+      "kind": "tree",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/empty-run-four-final",
+      "reason": "Historical adversarial fixture/probe from an earlier attempt; retained unchanged and excluded from current pass claims.",
+      "tree_index_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "file_count": 0,
+      "files": [],
+      "kind": "tree",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/empty-run-four-final-2",
+      "reason": "Historical adversarial fixture/probe from an earlier attempt; retained unchanged and excluded from current pass claims.",
+      "tree_index_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "file_count": 0,
+      "files": [],
+      "kind": "tree",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/empty-run-two",
+      "reason": "Historical adversarial fixture/probe from an earlier attempt; retained unchanged and excluded from current pass claims.",
+      "tree_index_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "file_count": 6,
+      "files": [
+        {
+          "bytes": 17191,
+          "path": "audit.json",
+          "sha256": "cebdda5ff70def0495ffe235cbcbafd9e365136f36f4338d469312d94e8c660b"
+        },
+        {
+          "bytes": 14798,
+          "path": "execution-bindings.json",
+          "sha256": "6667a81cae5ad47b7c2d27a8c22db27329d02391dfa66d376e381a3a2bf5b22b"
+        },
+        {
+          "bytes": 1669,
+          "path": "negative-controls.json",
+          "sha256": "c0ea3c1697bb57bd8274e35ffcbc8bdb0dc140772f4ea92ef55160e6bd3c758d"
+        },
+        {
+          "bytes": 721,
+          "path": "positive-control.json",
+          "sha256": "19d8219689699b2632f3597fd23560079a1a2eae2a17e7f2ea2dcb903569ba8d"
+        },
+        {
+          "bytes": 1139,
+          "path": "publication.json",
+          "sha256": "111757eb21985df968e3f790f6b7a07e5a2d116144aeae36efb9225110eee7fa"
+        },
+        {
+          "bytes": 291,
+          "path": "run-metadata.json",
+          "sha256": "c156cd04cbacbc6a437f63728facec3d105a17e6540534d5f24ef1c631c46ae2"
+        }
+      ],
+      "kind": "tree",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/mismatched-run-four-final",
+      "reason": "Historical adversarial fixture/probe from an earlier attempt; retained unchanged and excluded from current pass claims.",
+      "tree_index_sha256": "233c8f73144b887e29d1f922183670ff2f34851e99b075fe6bf37568324c3e16"
+    },
+    {
+      "file_count": 6,
+      "files": [
+        {
+          "bytes": 17191,
+          "path": "audit.json",
+          "sha256": "cebdda5ff70def0495ffe235cbcbafd9e365136f36f4338d469312d94e8c660b"
+        },
+        {
+          "bytes": 14798,
+          "path": "execution-bindings.json",
+          "sha256": "6667a81cae5ad47b7c2d27a8c22db27329d02391dfa66d376e381a3a2bf5b22b"
+        },
+        {
+          "bytes": 1669,
+          "path": "negative-controls.json",
+          "sha256": "c0ea3c1697bb57bd8274e35ffcbc8bdb0dc140772f4ea92ef55160e6bd3c758d"
+        },
+        {
+          "bytes": 721,
+          "path": "positive-control.json",
+          "sha256": "19d8219689699b2632f3597fd23560079a1a2eae2a17e7f2ea2dcb903569ba8d"
+        },
+        {
+          "bytes": 1139,
+          "path": "publication.json",
+          "sha256": "111757eb21985df968e3f790f6b7a07e5a2d116144aeae36efb9225110eee7fa"
+        },
+        {
+          "bytes": 291,
+          "path": "run-metadata.json",
+          "sha256": "c156cd04cbacbc6a437f63728facec3d105a17e6540534d5f24ef1c631c46ae2"
+        }
+      ],
+      "kind": "tree",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/mismatched-run-four-final-2",
+      "reason": "Historical adversarial fixture/probe from an earlier attempt; retained unchanged and excluded from current pass claims.",
+      "tree_index_sha256": "233c8f73144b887e29d1f922183670ff2f34851e99b075fe6bf37568324c3e16"
+    },
+    {
+      "file_count": 6,
+      "files": [
+        {
+          "bytes": 17191,
+          "path": "audit.json",
+          "sha256": "be617768027fa3f3cddf14873bbd120fdbdbd8c27638bd08a943491fe28b0645"
+        },
+        {
+          "bytes": 14798,
+          "path": "execution-bindings.json",
+          "sha256": "b6d99236b160fc8532202477ac37318b83692767169e57363f1e8c0c468d1a65"
+        },
+        {
+          "bytes": 1669,
+          "path": "negative-controls.json",
+          "sha256": "c0ea3c1697bb57bd8274e35ffcbc8bdb0dc140772f4ea92ef55160e6bd3c758d"
+        },
+        {
+          "bytes": 721,
+          "path": "positive-control.json",
+          "sha256": "19d8219689699b2632f3597fd23560079a1a2eae2a17e7f2ea2dcb903569ba8d"
+        },
+        {
+          "bytes": 1134,
+          "path": "publication.json",
+          "sha256": "9eb0f2e1980423179fcff930071edc99d74101ffaa0e3d0b48592e271445940a"
+        },
+        {
+          "bytes": 289,
+          "path": "run-metadata.json",
+          "sha256": "0eeb2bc8d71acb9f2eb2a1b24e8325bb7e0b3a09fcaba2dab69892d259419f3d"
+        }
+      ],
+      "kind": "tree",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/mismatched-run-two",
+      "reason": "Historical adversarial fixture/probe from an earlier attempt; retained unchanged and excluded from current pass claims.",
+      "tree_index_sha256": "af37142b567b4fb770671c2af78ce2ee0739169806a68b3c329d632e7c5cd4b1"
+    },
+    {
+      "file_count": 1,
+      "files": [
+        {
+          "bytes": 17198,
+          "path": "audit.json",
+          "sha256": "98adc979ede5b0af2d402db277d54dd60eb490b0374f8e2eb8a307c6a33d57e0"
+        }
+      ],
+      "kind": "tree",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/partial-run-four-final",
+      "reason": "Historical adversarial fixture/probe from an earlier attempt; retained unchanged and excluded from current pass claims.",
+      "tree_index_sha256": "6e3b817776f9ae5c929f18b28b6fc8db5aaac8f1bf8239bc64894441d6bace1b"
+    },
+    {
+      "file_count": 1,
+      "files": [
+        {
+          "bytes": 17198,
+          "path": "audit.json",
+          "sha256": "98adc979ede5b0af2d402db277d54dd60eb490b0374f8e2eb8a307c6a33d57e0"
+        }
+      ],
+      "kind": "tree",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/partial-run-four-final-2",
+      "reason": "Historical adversarial fixture/probe from an earlier attempt; retained unchanged and excluded from current pass claims.",
+      "tree_index_sha256": "6e3b817776f9ae5c929f18b28b6fc8db5aaac8f1bf8239bc64894441d6bace1b"
+    },
+    {
+      "file_count": 1,
+      "files": [
+        {
+          "bytes": 17198,
+          "path": "audit.json",
+          "sha256": "633ae48a331da1355d79bce4309d8090b691d6c5792c3653d248e72513a63ff2"
+        }
+      ],
+      "kind": "tree",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/partial-run-two",
+      "reason": "Historical adversarial fixture/probe from an earlier attempt; retained unchanged and excluded from current pass claims.",
+      "tree_index_sha256": "0bfd5ac2fc696b9c918f45f0d22dfade55bc2e203168cf756175749b36a2eb04"
+    },
+    {
+      "bytes": 28,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/ordinary-file-control",
+      "reason": "Historical adversarial fixture/probe from an earlier attempt; retained unchanged and excluded from current pass claims.",
+      "sha256": "50a736b9f10c7038abbee0f0f032ae4f64de585f2110485a9e0eebb3dd97d380"
+    },
+    {
+      "bytes": 28,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/ordinary-file-control-final",
+      "reason": "Historical adversarial fixture/probe from an earlier attempt; retained unchanged and excluded from current pass claims.",
+      "sha256": "50a736b9f10c7038abbee0f0f032ae4f64de585f2110485a9e0eebb3dd97d380"
+    },
+    {
+      "bytes": 28,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/ordinary-file-control-final-2",
+      "reason": "Historical adversarial fixture/probe from an earlier attempt; retained unchanged and excluded from current pass claims.",
+      "sha256": "50a736b9f10c7038abbee0f0f032ae4f64de585f2110485a9e0eebb3dd97d380"
+    },
+    {
+      "bytes": 28,
+      "kind": "file",
+      "path": "research/geography/fiji-evidence-integrity-1140-erratum/vintages/ordinary-file-control-final-3",
+      "reason": "Historical adversarial fixture/probe from an earlier attempt; retained unchanged and excluded from current pass claims.",
+      "sha256": "50a736b9f10c7038abbee0f0f032ae4f64de585f2110485a9e0eebb3dd97d380"
+    }
+  ],
+  "version": 1
+}

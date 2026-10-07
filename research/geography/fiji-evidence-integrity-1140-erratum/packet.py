@@ -97,7 +97,7 @@ class NewVintage:
     def __init__(self, baseline, owned_path, vintage, filenames):
         if not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,63}",vintage): raise ValueError("Unsafe vintage name")
         self.baseline=baseline; self.filenames=list(filenames)
-        self.root=REPO/owned_path/"vintages"/vintage
+        self.root=ROOT/"vintages"/vintage
         for p in [self.root,*self.root.parents]:
             if p==REPO.parent: break
             if p.is_symlink(): raise ValueError("Symlink in destination path")
@@ -412,7 +412,7 @@ def run_products(vintage: str, fail_after_compute: bool = False):
 def validate_run(vintage: str, ctx, expected_audit, expected_positive, expected_negative):
     if not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,63}", vintage):
         raise ValueError("Unsafe vintage name")
-    root=REPO/OWNED/"vintages"/vintage
+    root=ROOT/"vintages"/vintage
     if root.is_symlink() or not root.is_dir(): raise ValueError(f"missing whole run: {vintage}")
     expected=set(OUTPUTS)|{"publication.json"}
     actual={x.name for x in root.iterdir()}
@@ -424,7 +424,7 @@ def validate_run(vintage: str, ctx, expected_audit, expected_positive, expected_
     if not isinstance(records,list) or {x.get("path") for x in records}!={f"{OWNED}vintages/{vintage}/{name}" for name in OUTPUTS}:
         raise ValueError("whole-run receipt inventory mismatch")
     for rec in records:
-        path=REPO/rec["path"]
+        path=root/Path(rec["path"]).name
         raw=path.read_bytes()
         if rec.get("bytes")!=len(raw) or rec.get("sha256")!=sha(raw): raise ValueError("output receipt digest mismatch: "+str(rec.get("path")))
     audit=json_file(root/"audit.json")
