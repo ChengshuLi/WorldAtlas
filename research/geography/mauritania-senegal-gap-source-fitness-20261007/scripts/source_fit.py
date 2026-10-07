@@ -55,6 +55,36 @@ def require(ok, message):
     if not ok:
         raise ValueError(message)
 
+def prepare_output(repo, output):
+    repo = repo.resolve()
+    rel = pathlib.Path(output)
+    reproduction = (repo / OWNED / 'reproduction').absolute()
+    require(not rel.is_absolute() and '\\' not in str(output) and
+            all(part not in ('', '.', '..') for part in rel.parts),
+            'Output must be a safe repository-relative path')
+    expected_prefix = tuple((OWNED / 'reproduction').parts)
+    require(rel.parts[:len(expected_prefix)] == expected_prefix and
+            len(rel.parts) in (len(expected_prefix) + 1, len(expected_prefix) + 2),
+            'Output must stay directly inside the owned reproduction directory')
+    require(reproduction.resolve() == reproduction, 'Owned reproduction directory must not resolve through a symlink')
+    target = repo / rel
+    parent = target.parent
+    resolved_parent = parent.resolve()
+    try:
+        resolved_parent.relative_to(reproduction)
+    except ValueError:
+        raise ValueError('Output parent escapes the owned reproduction directory')
+    require(not parent.is_symlink(), 'Output parent must not be a symlink')
+    if not parent.exists():
+        require(parent.parent.resolve() == reproduction, 'Only a fresh run subdirectory may be created')
+        parent.mkdir()
+        created_parent = True
+    else:
+        require(parent.is_dir(), 'Output parent must be an ordinary directory')
+        created_parent = False
+    require(not target.exists() and not target.is_symlink(), 'Output destination already exists')
+    return target, created_parent
+
 def load_inputs(repo, roster=None):
     roster = list(COMPONENTS) if roster is None else roster
     require(roster == list(COMPONENTS), 'Candidate roster differs from complete two-member family')
@@ -152,6 +182,9 @@ def screen(repo, roster=None):
         })
     return {
         'version': 1,
+        'producer': {'path': str(pathlib.Path(__file__).resolve().relative_to(repo.resolve())),
+                     'bytes': pathlib.Path(__file__).stat().st_size,
+                     'sha256': sha(pathlib.Path(__file__).read_bytes())},
         'purpose': 'Full-product exact-source fit screen for the complete two-member family; not physical truth or repair approval.',
         'candidate_family_id': 'gap-source-batch:4c735331be01be152eda6db6',
         'operational_batch_id': 'gap-operational-batch:ade3f99f475181e3f9ac2694',
@@ -180,11 +213,17 @@ def main():
     parser.add_argument('--repo', type=pathlib.Path, required=True)
     parser.add_argument('--output', type=pathlib.Path, required=True)
     args = parser.parse_args()
-    report = screen(args.repo.resolve())
-    args.output.parent.mkdir(parents=True, exist_ok=False)
-    with args.output.open('xb') as stream:
+    repo = args.repo.resolve()
+    target, created_parent = prepare_output(repo, args.output)
+    try:
+        report = screen(repo)
+    except BaseException:
+        if created_parent:
+            target.parent.rmdir()
+        raise
+    with target.open('xb') as stream:
         stream.write(canonical(report) + b'\n')
-    print(json.dumps({'output': str(args.output), 'family_members': len(report['family_member_ids']),
+    print(json.dumps({'output': str(target.relative_to(repo)), 'family_members': len(report['family_member_ids']),
                       'component_screens': len(report['component_screens'])}))
 
 if __name__ == '__main__':

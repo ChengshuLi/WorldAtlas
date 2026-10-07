@@ -26,7 +26,7 @@ These rings are near-degenerate: their coordinate-space areas are about `5.63e-1
 
 The administrative products are GeoJSON longitude/latitude coordinate data (WGS 84 / RFC 7946 axis order); the calculation uses angular coordinates as supplied. Source metadata records represented-year claims of 2020 (MRT) and 2019 (SEN), product build date 2023-12-12, and CC BY 3.0 IGO. Attribution recorded for MRT is World Food Programme and OCHA ROWCA; for SEN it is Government of Senegal and OCHA ROWCA. These records and retrieval time are not proof of boundary effective dates or legal authority. The component source records identify GSHHG 2.3.7 (2017-06-15 release), but provide no date-matched independent dry-land/water determination for these features.
 
-Two independent fresh output directories produced byte-identical final result JSON (SHA-256 `140462711cd8112fcc6a61b03bb27a730bc3063fcf9bd162d84d71c6f3238f42`). Controls accepted the complete pinned input and rejected an incomplete family roster and a one-byte source alteration through the same calculation entrypoint. The earlier `first`/`second` receipts predate the bbox-candidate output; `final-a`/`final-b` predate runtime enforcement. `final-c`/`final-d` are the authoritative pinned-runtime reproductions.
+Two independent fresh output directories produced byte-identical final result JSON (SHA-256 `1db1c793d2ab433a176884b7b0f2fb82d34eda3756271cb2c9e8aac7bd3a71f6`). Each receipt binds the exact executed producer path, size, and SHA-256. Controls accepted the complete pinned input and rejected an incomplete family roster, one-byte source alteration, output collision, and escaped output path through the real input/output guards. The earlier `first`/`second` receipts predate the bbox-candidate output; `final-a`/`final-b` predate runtime enforcement and `final-c`/`final-d` predate the safe-output writer. `final-e`/`final-f` are the authoritative pinned-runtime reproductions.
 
 Storage admission passed immediately before the focused materialization and again before the second reproduction and controls. The expected remaining source/output/control scratch for this work is under 20 MiB; no second global graph or GIS corpus was generated.
 
@@ -35,10 +35,13 @@ Storage admission passed immediately before the focused materialization and agai
 From the repository root, with the pinned Python 3.12.14, Shapely 2.1.2, and GEOS 3.13.1 environment:
 
 ```sh
-python3 research/geography/mauritania-senegal-gap-source-fitness-20261007/scripts/source_fit.py --repo . --output research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/final-c/source-fit.json
-python3 research/geography/mauritania-senegal-gap-source-fitness-20261007/scripts/source_fit.py --repo . --output research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/final-d/source-fit.json
-cmp research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/final-c/source-fit.json research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/final-d/source-fit.json
-python3 research/geography/mauritania-senegal-gap-source-fitness-20261007/scripts/controls.py --output research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/controls-validation.json
+node scripts/local-workspace.mjs check
+PYTHONDONTWRITEBYTECODE=1 python3 research/geography/mauritania-senegal-gap-source-fitness-20261007/scripts/source_fit.py --repo . --output research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/final-e/source-fit.json
+node scripts/local-workspace.mjs check
+PYTHONDONTWRITEBYTECODE=1 python3 research/geography/mauritania-senegal-gap-source-fitness-20261007/scripts/source_fit.py --repo . --output research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/final-f/source-fit.json
+cmp research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/final-e/source-fit.json research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/final-f/source-fit.json
+node scripts/local-workspace.mjs check
+PYTHONDONTWRITEBYTECODE=1 python3 research/geography/mauritania-senegal-gap-source-fitness-20261007/scripts/controls.py --output research/geography/mauritania-senegal-gap-source-fitness-20261007/reproduction/controls-final-review.json
 ```
 
 The shown destinations document the runs preserved here. The entrypoints require fresh destinations and deliberately refuse to overwrite them; for another local execution, choose two unused source-fit output paths and a new controls output filename.
