@@ -1,0 +1,24 @@
+✔ lane IDs must be explicit and safe (2.5125ms)
+✔ research owns only campaign files, excluding shared handovers and other campaigns (0.667875ms)
+✔ engineering preserves research and other engineering progress (0.116667ms)
+✔ partial and final PRs link one issue without needing a document tracker ID (0.585542ms)
+✔ PR policy rejects ambiguous issue links and accidental additional closures (0.129ms)
+✔ GitHub issue type agrees with its lane and references an open issue (0.2205ms)
+✔ real git diff checks rename source paths, not only allowed destinations (415.316459ms)
+✔ another lane advancing work is not mistaken for this branch changing its files (484.281584ms)
+✔ remote issue validation reads only the event repository and requires successful labeled issue metadata (10.022625ms)
+✔ geography may own narrower subdirectories without acquiring sibling or parent files (0.815583ms)
+✔ actual trusted entry point preserves the original rejection before a denied comment (106.254375ms)
+✔ actual trusted entry point retains its preparation receipt before successful notification (253.938583ms)
+✔ trusted preparation has PR comment permission while candidate tests remain read-only (0.923583ms)
+✔ actual entry point saves stale/head/conflict/base diagnostics even when notification fails (525.186708ms)
+✔ actual final entry point cleans only its owned ref and retains successful merge on cleanup failure (305.33975ms)
+✔ actual fallback prepare cleans its confirmed ref when receipt notification is denied (92.21525ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1365.032167

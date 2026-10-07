@@ -1,0 +1,1554 @@
+{
+  "version": 1,
+  "issue": 1266,
+  "lane": "engineering",
+  "worker_id": "01a10843-da4b-7fc1-a482-d3186bc6334d",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "d7d209a18b96b5d86ba31795c422e6bf439cd72d",
+    "files": [
+      {
+        "path": "data/geographic-releases/releases-v7-repacked-gzip.json.gz",
+        "bytes": 168219,
+        "sha256": "08faf0b0ad3b1a26c8c7d4e1f79cd17960d064baaaad74906f92a789cd99dbc7",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 571794,
+        "uncompressed_sha256": "c94d5ba51478c377f0c465a8e2736e2a4b83249c78fe84709622345bb51c8cb3"
+      },
+      {
+        "path": "data/geographic-releases/sources.json",
+        "bytes": 2179,
+        "sha256": "c0d928a8bf47536ac03b2646fa7afad3118fbbfe30974a5e86aa8840171967d2",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geographic-releases/sources-3.json",
+        "bytes": 2074,
+        "sha256": "12fc0d03185030216d61dba5777031e773bc4317a5f6333d3b678e85dada47c6",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geographic-releases/sources-4.json.gz",
+        "bytes": 1562,
+        "sha256": "08c07c01baae250b796f16c05d3421c1c9fbb1206608253c51591a030f88de5e",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 3803,
+        "uncompressed_sha256": "10798d54247d65fa9b91fe94c6c2a535351b7ac79de270d36367458b2f6016e5"
+      },
+      {
+        "path": "data/geographic-releases/v5-sources.json.gz",
+        "bytes": 2006,
+        "sha256": "010f4bfa910d17473970d72a5b1260974d76e47087a999ec45eaf4fea1dd6c3d",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 5273,
+        "uncompressed_sha256": "1dd89602b2756d56c16fe62d4959a85bc87728e0651d068042b2f421b09da549"
+      },
+      {
+        "path": "data/geographic-releases/sources-6.json.gz",
+        "bytes": 2024,
+        "sha256": "bfb795f0d8093f6c76b52adbe874bf310c9d91907f509a7fe78281d1aa2c5006",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 5216,
+        "uncompressed_sha256": "4c2cbd6db1ddd247cf8434aa2f839e209d25621f0bd3e268683c582df9b015f0"
+      },
+      {
+        "path": "data/geographic-releases/sources-7.json.gz",
+        "bytes": 2163,
+        "sha256": "cb5d591d21156a77955c73c62195bf022dc0c752b398af25fda99078e007185b",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4885,
+        "uncompressed_sha256": "76c0093a15fcb6b40501135bcace9d1931cc7e2491c9b311417c3b86b209d792"
+      },
+      {
+        "path": "data/geographic-releases/entities-region-v3-0.json",
+        "bytes": 7063,
+        "sha256": "3de4ad84da85aa1d36ecfd9e82fc1c4e507a34e8a67e130deb5657ea4573efcf",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geographic-releases/entities-area-0.json",
+        "bytes": 3818,
+        "sha256": "57b0dd87c9c30278cf6e3b59ca72f853084bc593dcc596c09b8fde5201e2897e",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geographic-releases/entities-area-v3-0.json",
+        "bytes": 4966,
+        "sha256": "3422773c27f32db76e374737f350c2e3b7e3ff385c4d430f92b03f0adfa239a4",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geographic-releases/entities-area-v4-0.json.gz",
+        "bytes": 399,
+        "sha256": "3c8b3234537cc4dd272f70e196579494d2b979e53c482c3424bfb1fff0ffdbeb",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 891,
+        "uncompressed_sha256": "59bc0b7a87dc0d5687b63a7816453fddcf8482fceeeb13e803be1e7dffbfeadc"
+      },
+      {
+        "path": "data/geographic-releases/entities-province-0.json",
+        "bytes": 20238,
+        "sha256": "b6a486760cc2b61f794326beeb90d0630c0f749ad4cd41a6db2533b6df0b9da5",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geographic-releases/entities-province-v3-0.json",
+        "bytes": 497,
+        "sha256": "631e73ed340ef585630ba9f3836f04dbcd22fa796e934ebf6b1b3f34742f465d",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geographic-releases/entities-province-v4-0.json.gz",
+        "bytes": 587,
+        "sha256": "970b11d160eb5c86878c6eae239a401298de372e9bc0bee5fc8750b3e33eddf8",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 2405,
+        "uncompressed_sha256": "65461ef604a5412b5713d78d90abd80bd8fbbab36f9525e9bc4f164f562327b9"
+      },
+      {
+        "path": "data/geographic-releases/entities-location-v4-0.json.gz",
+        "bytes": 1452,
+        "sha256": "f920fc887838d79a61356cca02582481f577a0a563d35e254bccce78bf84b8d3",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 12923,
+        "uncompressed_sha256": "aeb86df14b13992d472289efe8885404bec736bba38b5b571e6b8743142b2316"
+      },
+      {
+        "path": "data/geographic-releases/v5-entities-location-0.json.gz",
+        "bytes": 418,
+        "sha256": "a78f2996a780c57d74d8a03ebe5042a314f1d7c9d441e47a49b500f89c9e1f11",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 882,
+        "uncompressed_sha256": "dc2e740c72bac01371bba91fd6ed0ff7f72dd8cb49e1cc05ff7f7427c120fadf"
+      },
+      {
+        "path": "data/geographic-releases/release-7.json.gz",
+        "bytes": 2310,
+        "sha256": "9d6d88e0ebeb2101aec780452a571ee357355446eeb3af0fe0c7ccbd9e93c0f0",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 5433,
+        "uncompressed_sha256": "5e259ebec45a5ae7571ea4da07ee215f944ae2ab32268dbcff40ab246c17a9b3"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-0.json.gz",
+        "bytes": 50851,
+        "sha256": "40fc59d3a599d138b6b808a88a9e52a6642ff869098cc4a273939e6109f137ca",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 898384,
+        "uncompressed_sha256": "093b110736c900792dbd29db5c7c532c940759c42e080ceb97b7249974e652c0"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-648.json.gz",
+        "bytes": 47152,
+        "sha256": "ef33d234c02fef323d17202a5a1eff6f05d73a91f4df73bac67bc1a2d50505f7",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899096,
+        "uncompressed_sha256": "0e61e7f91a73dee5f0b13855eb44d28e68561e589dee3a09e46a646256e5eec0"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-1341.json.gz",
+        "bytes": 23565,
+        "sha256": "e024e7356380620ce2e3f76c377f4261f3fbf7f3736297eab72133fbbc4367c8",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 898509,
+        "uncompressed_sha256": "7f59c900f9f8ea701d637631d9d94043ee8891d09dfbc7123ed09f709f3845d5"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-2125.json.gz",
+        "bytes": 31418,
+        "sha256": "32df416aeb0e14fe02c96b1924d48c9cf5e7b9300275c3ab7e585f22dec875e7",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899048,
+        "uncompressed_sha256": "72e337e3da5fa6ac95f17b86058de263bae0d1568c82a31b898a1dd5d0b48036"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-2615.json.gz",
+        "bytes": 71098,
+        "sha256": "5258695f0aea9711034afc8a56cb81e0b0a4500a0d96338bd053a524d5673cd4",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899754,
+        "uncompressed_sha256": "8c6d0f72bc7812670e9f4a87d11ea7b0c5e675327af54c9e257679f0ee1d5630"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-3129.json.gz",
+        "bytes": 71234,
+        "sha256": "21a40c7d1f47cf6cc8e49811e8259b08df4f212c8cb496a20ef0894a0bc2a18a",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899261,
+        "uncompressed_sha256": "ff0a04dfa2e38f35848b78e1d32c421bb4dd5f8eb2db04f9e6f9aa5d67dc887b"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-3637.json.gz",
+        "bytes": 74351,
+        "sha256": "a9b3e0b6c2658725443a039bfb20430060e0bcb86319a75b10bf5211d71c5d4c",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 898658,
+        "uncompressed_sha256": "075c6d83f5a493c1648926f43ee93c218e4e1f117742dabd3e1d4f78c3dec798"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-4148.json.gz",
+        "bytes": 65200,
+        "sha256": "027373e97b6e227d22d466aad957b0b8ae6d3487fcf9c0aa5d8c2bb0caeacc60",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899902,
+        "uncompressed_sha256": "67536113e0ca95272154a068f6d383b90a366ba837ddda2ad82e248f5583eb69"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-4658.json.gz",
+        "bytes": 69077,
+        "sha256": "48d39fa1be27b3ffb464c3cc97e3a56b7218a6cc2a887807786300d743fa7110",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 898462,
+        "uncompressed_sha256": "639982571542f2a87ffbc60e0cf57d153fb1e2034f91219f61f34c56493c9a94"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-5168.json.gz",
+        "bytes": 71868,
+        "sha256": "699f1a7e627be97266167252dd943f22727bd37b5c30665ebd01dfc5479024e9",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 898319,
+        "uncompressed_sha256": "74fe194384813e64e41818fb3dc05ed9be0396a068f6b257a523afb5de733214"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-5680.json.gz",
+        "bytes": 72637,
+        "sha256": "4d2c9078c75873be60ac673de030aa8ec8df166da4a56023df92e02a092640e9",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899493,
+        "uncompressed_sha256": "9370ff5474a7a1065e6bfd4e8df38e0b3d62fd35c82e591688ea9c7167c0b7ae"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-6178.json.gz",
+        "bytes": 71642,
+        "sha256": "8f430766519d6fdb9d8b6350bdd54f2f5d5e1d5c31862098151a4c5d0da318c5",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 898526,
+        "uncompressed_sha256": "dd3f87dcec514d0812cee20e4b7c880433a05b264360360d9d11136232109d85"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-6686.json.gz",
+        "bytes": 69976,
+        "sha256": "aa94fb816bbb14dfba7827523e21abd98d51255d71ae75ac8acea7491e746ad4",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899265,
+        "uncompressed_sha256": "0bfc53d477f078a259679623d2da2c4fc5cbcf15bcb00b9ccb3bf8bf97b91c56"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-7193.json.gz",
+        "bytes": 37583,
+        "sha256": "6a21ff40ef02f1f744c9c68279168805665a4e2e1c3176062fa4f3c263af87a9",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899020,
+        "uncompressed_sha256": "b948a721cc53ed567c93dca8f60f87dc2bc6ef4b220c1d9a39098e16a950cd5b"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-7962.json.gz",
+        "bytes": 28852,
+        "sha256": "fe5c3ff4888594d33508573f725d2faf953f5a11ea592f7616996c824c94303c",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899300,
+        "uncompressed_sha256": "a5578c27861010c743a0d59a473c5986de35a2c0505a9feca869848fe78ef307"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-8857.json.gz",
+        "bytes": 29405,
+        "sha256": "40a624ecf7cebaa8141cc6600b0b8113f9797f09f32f7811f8f8d24df1ce37e9",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899397,
+        "uncompressed_sha256": "477cde006c4c783a71144f5c43636891c38407948fb6bc54a0d9384d87162214"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-9752.json.gz",
+        "bytes": 29204,
+        "sha256": "995b6befeef2beb8f1a0f1a0c82d822f718ec394838d16961d6e5b7d76ef0841",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899242,
+        "uncompressed_sha256": "779684f2f8e3c690bf7ddaf5e28756254e9f9a13784c238f2ace546740a9b818"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-10647.json.gz",
+        "bytes": 29394,
+        "sha256": "69cac6c92cc01dd6c7f8031166ed08ba68ee0f0e9050c92713aa23541c230cae",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899334,
+        "uncompressed_sha256": "424bba8dc95c77c79c8da8faad1a69ad5c003b0f71ba16cc0aed9ae713077b25"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-11542.json.gz",
+        "bytes": 29185,
+        "sha256": "ec1d3233b5b61dc517d47f30324af9f73e6f7e8ee45a8a64c6c3f750d8bacfcf",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899151,
+        "uncompressed_sha256": "fb1945ceca059e879f5d87cca44daecb2201eea451b0b7555aa624ebf66487a2"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-12437.json.gz",
+        "bytes": 23657,
+        "sha256": "f5cd8a96969a99a269e5a8c888415dfa7c7dd34b33ccd7b6b3ee19f408d1523c",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899715,
+        "uncompressed_sha256": "753124d785be8a9328e1ddeec44b67267cb7f72f3e3fd320f486084f0dd67260"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-13238.json.gz",
+        "bytes": 21188,
+        "sha256": "14c4d25a1bbeb2c3b0631ad0c8a456486ec7fccab7515df656f8435b9b667836",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899872,
+        "uncompressed_sha256": "89ef4997cf8ec44423dec1307be6f923db154dc363820d0222ca24b6f9ed3ee3"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-14015.json.gz",
+        "bytes": 21560,
+        "sha256": "95051c6940180c11c1278abc72dcb076db70ac340062de60831ec785c0eaff64",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899369,
+        "uncompressed_sha256": "666e4b3565d08d959c77e46416e91444267bad6dc4f063965f7f9ed38d882eb0"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-14793.json.gz",
+        "bytes": 22203,
+        "sha256": "5d3131f8b7fe942f0828da101fa16b498d983756ff5dd8beef14409f01365d62",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899435,
+        "uncompressed_sha256": "ed6344cb1f49a06f8cdc8dd76ccc9970a5482454fea31bedeb52a21a79f73972"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-15565.json.gz",
+        "bytes": 24390,
+        "sha256": "4bb6ae37d6d19694ebb037b31f98e55f3f1c8ac738a3312e8dc2d8dd00fd9443",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899531,
+        "uncompressed_sha256": "7a1d838991000fba91dc4cc99d401a6fc7b80166787194f6c9224d96ec532ffc"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-16332.json.gz",
+        "bytes": 19260,
+        "sha256": "61d1194a0c1887dec322a1df15c6a86733f428cda18a64b01707e2d12c9758ff",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899384,
+        "uncompressed_sha256": "a8d512a096c1d6ad30d98721ff7b342b5f0e9ef4ad7358b205c3c88cf35144b5"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-17108.json.gz",
+        "bytes": 28166,
+        "sha256": "4cc20637b31e8b829835c6ef2e58d62f4d2e097676894e7016e4b20c9059008d",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 898927,
+        "uncompressed_sha256": "0e16b2c049ef9a85b8ebef430daca1e66954675b7b8221d022c9ad8a51aaa4a7"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-17868.json.gz",
+        "bytes": 27990,
+        "sha256": "6db0aa72a365da4a807106299f47cf337ed337479f2387915851516193bfcabe",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899683,
+        "uncompressed_sha256": "c0fed28a784c02570f6009c025be1b73b8cde581cb2a8a6a06eeb6aece087603"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-18656.json.gz",
+        "bytes": 27960,
+        "sha256": "1e5e5062a433759b02c049f2b44b48c4d48793d7e0c3e91e53e08220e74602fe",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899401,
+        "uncompressed_sha256": "c10a2ba034ee65b0ce29e80f0229e71f44fd4d041cbefd26aa8e841f172f588d"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-19444.json.gz",
+        "bytes": 28113,
+        "sha256": "67897955246df7f2b753f831e1a615e8b1222b6c424d27afe2d9ca5be47c75a8",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899611,
+        "uncompressed_sha256": "1d65e706c7c31fd45fe3cf11672ab0b9657da070d6b114726fdcd423be48cdd2"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-20232.json.gz",
+        "bytes": 28225,
+        "sha256": "c419155e5d62b078a66f9ab11fa2d1d83b363c64067977c870aab8eb291e5311",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899511,
+        "uncompressed_sha256": "9bed312512b5229bdbc2123f137372888d2ec020a4f42d6b1884c6482a0c251a"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-21020.json.gz",
+        "bytes": 20906,
+        "sha256": "da0455750caa93b836c9851fb559af56d7436c0883a35e923030c758809a6f96",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899624,
+        "uncompressed_sha256": "b6ef7bf38cf50271ab7875bcb4dc3c7afa849036480550cfb0808d4f24ce61d2"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-21806.json.gz",
+        "bytes": 42006,
+        "sha256": "8ff785e23d3e02ae6d4b7a527071b4e14c1ecadeee5f6c6cd3ca92e58ac0000d",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 898850,
+        "uncompressed_sha256": "9f48cf0c241ded01d3f79a40067aff351d6c46a9eb6d01a08bd5c92ebebfa45c"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-22568.json.gz",
+        "bytes": 34546,
+        "sha256": "41f63b015f65e3108d241f548f82505ca77907a63dabaad7a9ef7738d24c570f",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899974,
+        "uncompressed_sha256": "1e1cc44f30f89884b67b82963042dd8918bd3cb00f15ae5733a57998a0e90719"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-23333.json.gz",
+        "bytes": 26031,
+        "sha256": "6c8e3f0c90ee6054b66d3d041969fe1b04a34af036e8c1c7f2fb9c4d6ffcbb04",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899785,
+        "uncompressed_sha256": "e06df5432f77b81c3b25e20e9b3954fec412af92e5c838dfc68e9236c96d4a5b"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-24139.json.gz",
+        "bytes": 28306,
+        "sha256": "798926dcc6bd93aeed4a20d1ed5c2e58694aedf8d7768b6123a1b66562795794",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899679,
+        "uncompressed_sha256": "ce3a0ea8837994a39292c4ddc9894cb0c25659fc807afd37d70db16e2b255ae4"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-24967.json.gz",
+        "bytes": 24736,
+        "sha256": "4299d9f8702270dfce462ec341d89574fea6a2d4fa7a2dc5717725d89c0de2fb",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899382,
+        "uncompressed_sha256": "9d16fc4b3a25a46982a5dcaa918f5beeaded2347e53b7ba931c8eb75c4270043"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-25751.json.gz",
+        "bytes": 24767,
+        "sha256": "68444c5cd3487537d0d75dd543fe69c23fbce5b65cb63da8d15a8a1ffc62ae17",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899549,
+        "uncompressed_sha256": "93cf888f6b41ac48869e01d8126f3271faf210d79960d3a264dafe4cd9c7ecba"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-26542.json.gz",
+        "bytes": 25765,
+        "sha256": "f792ae5e8469653522885ad17d209f1895419691ca9a7afe893cd774131a8438",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899817,
+        "uncompressed_sha256": "7af4c994432c5fddcea5e9bbbe3312bc3a468a8c6f52957163feda4ffdb33b7f"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-27329.json.gz",
+        "bytes": 28661,
+        "sha256": "409609bdbdb6c25f0e5acb33cb809629b358435aebf6371d74939ae47b153ec2",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899098,
+        "uncompressed_sha256": "183242dbadbe909a4499beab9057f216cf418d5cb00942651241004bdc18376e"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-28193.json.gz",
+        "bytes": 27673,
+        "sha256": "3e4467b59ba5c4c0f36cc51a8bd1939648210579ba4ffec57c86c4585ae9e711",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 898900,
+        "uncompressed_sha256": "37a7cd85181d5aa10b6698d92d0c08ebae1f3c9e79e3b92f771639c327b0c9ac"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-29063.json.gz",
+        "bytes": 27124,
+        "sha256": "8c77df2ac1dacabc2dd972bb9d12445b0be7e9c35a6c8dfbc4632c71041844be",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899517,
+        "uncompressed_sha256": "1900677fdf40c5273f2864d4ec54a0867ea55754c732d12eca36495cefa219ee"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-29934.json.gz",
+        "bytes": 27316,
+        "sha256": "86e013066ba3bf8b3474432991964d00e24a5c188109dfe4ded5e80a4926cce3",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899918,
+        "uncompressed_sha256": "3e395a19b7a4cb7e93e00ea7a8b5439fc2c594f5865451fa70ed4258bbb855e8"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-30806.json.gz",
+        "bytes": 27481,
+        "sha256": "f7bd45921c0b668f324043c1be22f216f02365122eeba789b3bb16d063c2f26f",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899633,
+        "uncompressed_sha256": "6703ea4d810bdf10c8a18f5467c0b79eb8680c2d71886bb92df54edc5f73a8e2"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-31677.json.gz",
+        "bytes": 27206,
+        "sha256": "edae3c2a55e7bee417c11abf15a85b6faa94275b8456ef50fcade2092218045a",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899013,
+        "uncompressed_sha256": "9dec2ee37c9f49fcebddcc23d424636f4dfcebe2c78a80fa4584261eac0271bd"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-32548.json.gz",
+        "bytes": 27719,
+        "sha256": "a7ae2853dfd1b4e4a35aa8eb83507a96d79b6db5e25eb763c7ab7a17a72bb3c0",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899103,
+        "uncompressed_sha256": "d336d19b77abbd0f5594a967c97dc1bbfe213e924f4650deeb87070f2b6a4cb9"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-33409.json.gz",
+        "bytes": 30151,
+        "sha256": "43cbe2c9a43619ccf3960300a7cbf565a1bb0db0866094e7fbf15f7b7f4ec404",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899592,
+        "uncompressed_sha256": "03f1609108896f53bfd81d5945b1861c063508a26bbac21149d98d3283338c92"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-34252.json.gz",
+        "bytes": 31388,
+        "sha256": "5ad2e7bd2473b5fe5632a96ca47bd7d0cb5f6eb79c1ebfdebceb9e2275b61124",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899387,
+        "uncompressed_sha256": "9d57865cc462ecafb558fdd1fccc5419c78fdebb1f283fde7c93f63f22cf1ce1"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-35124.json.gz",
+        "bytes": 31266,
+        "sha256": "8537a6132807233de75138cc8c74b609c0152b523fe0c86b2b17b271dbcbed17",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899210,
+        "uncompressed_sha256": "3a6d0dbd680def9ea5d18a85d03ee83aa1715bd5d190256f3fd9f1f9306fc8ae"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-35996.json.gz",
+        "bytes": 30614,
+        "sha256": "d5b050bc597131901c53e80899200796f2ea490d569cef00d6407c2ad9ad79b9",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899900,
+        "uncompressed_sha256": "eccf6b3c89c2b12949b81844b688d49615e71992da47d2a77ca3e668734b7852"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-36869.json.gz",
+        "bytes": 31178,
+        "sha256": "5cb4b78a47d4f744a2f9b584d384c84dc29b745c4ad74ad563907cc1b7237c41",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899678,
+        "uncompressed_sha256": "1f9e9ca9053fed186ba048596f28ef9fdf568eef70eccef81d50ddfe744bc7dd"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-37741.json.gz",
+        "bytes": 31062,
+        "sha256": "c0031ff4db5b5ce1a0e29843123cefff6b3d8148d27587e11f1c21d3e65c4888",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899211,
+        "uncompressed_sha256": "91273814c17948359693a7eedce9408f5dabbd4ea2cc3e767b532ceb3460fcbd"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-38613.json.gz",
+        "bytes": 28593,
+        "sha256": "ea52becc1f0452a6548ca7303e9af70d4986457f5d4a6af495fbbcace7b24b24",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899905,
+        "uncompressed_sha256": "b36866a130df8a292ddb3b8c7d441b276a9858acb5018dc8b97e97327d89cb4a"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-39419.json.gz",
+        "bytes": 32066,
+        "sha256": "1d6b5818aab1a88943111a83bd1a9ea5c4875cc6c9973a0cc4bb8907118d9f11",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899961,
+        "uncompressed_sha256": "c763e36db3b23b98916647f163a60ffd09322ac76882f7ed86130d381d8a813a"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-40200.json.gz",
+        "bytes": 32150,
+        "sha256": "0e290cff126041021ec8da21fb283bbca8abc3fe136ce97e40ecf55f313b1523",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899820,
+        "uncompressed_sha256": "4887501d63fde615888cbfe73f35bc56c7ddb2d1f87a96bb7e5eecef0050a261"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-40981.json.gz",
+        "bytes": 32179,
+        "sha256": "490d12345321aa90b10d5c9d656d28ec19f7d0fb2f6c82e16d7e2abd804adbf6",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 898933,
+        "uncompressed_sha256": "4db1671a48020fd238cf5005210fcfe042265277331a9726f5a2d5c6d62184fa"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-41761.json.gz",
+        "bytes": 26361,
+        "sha256": "9c608ac537e65a55c7b3fd9adaf3fa88da66a9274a2ee59f9b32cb2188f09f0b",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899143,
+        "uncompressed_sha256": "b8f65b1b05074c83e42cf85f747ef2f98e21c582aaeffe7bf619eeb5a1b4f556"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-42550.json.gz",
+        "bytes": 25507,
+        "sha256": "6524637b943b27309b5bcf6f1c260bb51755faf520302d1181b41a383c8cdd2e",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899827,
+        "uncompressed_sha256": "ba8d9b93ed6eb35c6fd0a83b149807a84a8b1771d1d4bdac20a636eb8452fd81"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-43333.json.gz",
+        "bytes": 24759,
+        "sha256": "8b6410ef8e5ac9bd00a84bf8f20d5d31c522ffa880ab6fda28d5ee3098053661",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 898922,
+        "uncompressed_sha256": "53f8bdb007db4c8ac49a1e7d66d323579e6f0ca0267a60e1311189fe9f1883d5"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-44110.json.gz",
+        "bytes": 28063,
+        "sha256": "5d57c2dea66f78e991bcbd49830023f7b435c1b462961696912aa9ecd41bc49f",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899976,
+        "uncompressed_sha256": "84a010ed8faa86935d80242af7c12ab5a4a64336956c0f73b6881417f7d71a68"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-44895.json.gz",
+        "bytes": 28050,
+        "sha256": "86ab0c2c29b45724eedbe8518ce653ce8057f71c029c5da8c2a6eb3bceed6dd8",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899543,
+        "uncompressed_sha256": "c5df483a87decf4e215a560a3fbb0f0f644c05faf5810cdb5fe1fcbc95879ff4"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-45683.json.gz",
+        "bytes": 25832,
+        "sha256": "4fce470a551ff8f92fede2857a4a811d48dcb691ec3d49120f7b66e7c762b727",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 898958,
+        "uncompressed_sha256": "ef2ebfd5999b7f59563ec89e5fd026962e7279faefb4a0ac2b28874a2e57015e"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-46466.json.gz",
+        "bytes": 26587,
+        "sha256": "28dab3f3d14cf94a934aac799e8bceab5866d422c359991f346919d1f1159501",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899245,
+        "uncompressed_sha256": "5b25bac5bbd68180a5fee368e76f71d364dcbdc2618a79e4d0e91924b43300ef"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-47285.json.gz",
+        "bytes": 26868,
+        "sha256": "cd2dd7c4a5ce8bbe6425b3e4ebe667452dce597a3029df58d35bb9c47a592bd4",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899944,
+        "uncompressed_sha256": "d6cec87cb3d2018af9519f74eb291d1431f29172dfec4d74d71e04d87d8be3ec"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-48161.json.gz",
+        "bytes": 26922,
+        "sha256": "f8d085a24c22d28febcc3ae3990b2aa6b42211bc7f5e79d97e36bbc2d5be0194",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899331,
+        "uncompressed_sha256": "a937eb7a893e9c2a42ef94a8fe9d65c2e502815f7be9285777b0998888e1ade8"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-48982.json.gz",
+        "bytes": 25956,
+        "sha256": "1e8aa7f4a3af075038eba881a39c3d903cc902ea92b2b6d002aedb6d7a9f75c7",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899517,
+        "uncompressed_sha256": "d30c5d1114e004624464f707cf5d152ea684d6ae27a43c6676b154c685ce3698"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-49775.json.gz",
+        "bytes": 27572,
+        "sha256": "bd7980409cbcfe7d6416cfc3b80b9be6ddd45720789ace9f103633ece5e419ae",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899015,
+        "uncompressed_sha256": "e29d2b2cca384743ef8cadd339e4b37c31c5f2211d0207ab0a4c2757688ee86e"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-50561.json.gz",
+        "bytes": 28459,
+        "sha256": "94cf69d9744c85cfd4358f6122133a9b49ade60ed4cad95db3393f2584c7d97b",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899746,
+        "uncompressed_sha256": "2e0218875ee5ba3bfe2dff4e4fee24d733b189a8f596c98071a5d09e5234998b"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-51345.json.gz",
+        "bytes": 26743,
+        "sha256": "b5b2a0886ac488b0caa44c50e1debb222a934784df1bed40169679af954bf3cf",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 898860,
+        "uncompressed_sha256": "1be33abe1926794a7b9e191a218556043e5e7ab727193636edb9f1e6ba53b4dd"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-52128.json.gz",
+        "bytes": 26176,
+        "sha256": "4fea458b6bca073f514843df51035d75a302df648ff5b54d750da2dc2e19cbc5",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899928,
+        "uncompressed_sha256": "b9dfa3679c179c77eb6b7390478614ec12cdb992fb2c97ac29203304f953898f"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-52909.json.gz",
+        "bytes": 26936,
+        "sha256": "dfe13b8f0fd3c7f16cd9b82793a9156999e065a50a57275b25f705446708e164",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899049,
+        "uncompressed_sha256": "0d74ddace6ff49208b8b0bea84c189523c2527c298d808d29b418a460c3268d6"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-53688.json.gz",
+        "bytes": 27552,
+        "sha256": "f428f372b31b2678f3842e9237a221c50511f3ba561e4861318a2a1bd55bb468",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899099,
+        "uncompressed_sha256": "efa519de9fc8bd821cc18ce4183bdfa80236e77046dd66895b98f57fbd4e3be1"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-54497.json.gz",
+        "bytes": 27002,
+        "sha256": "b38deea37864b6aa06bf1c325396d3b87df4cad65e14c5a1a269d59d6ea44817",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899990,
+        "uncompressed_sha256": "4095b397052e25ff138bcef7902fa36fa92347042757d05a42de8a970b951a44"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-55306.json.gz",
+        "bytes": 27443,
+        "sha256": "ab8042a01ff66efd6dc62ff4c4d01c6cb74db02d577ada8f110db48d31957b28",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899240,
+        "uncompressed_sha256": "e2ca51c29cda7659d93ecc766627582eb29a52e9bb91c5cbb4286dd6f3a97ea6"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-56106.json.gz",
+        "bytes": 26134,
+        "sha256": "98274be737d0a96552e1ad5bd9f386aa52d9b495b8aa23851399770651d9eef9",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899411,
+        "uncompressed_sha256": "fbfa8c70d755afa7367eeee0533a44aa389e0db557dc19482553de1136433ac6"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-56888.json.gz",
+        "bytes": 25940,
+        "sha256": "f7b7d9cccec2679a881f645390b4969902fe25be308b130249f9075a241a3408",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 898873,
+        "uncompressed_sha256": "bfddccd8b300d59e62f95da007c26727ab83eb940d956e98c47281530fc0a12e"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-57671.json.gz",
+        "bytes": 26170,
+        "sha256": "048a003d1000a601e3b74488728da49386af41c365fc535cd9a8ca00a9e834ab",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899731,
+        "uncompressed_sha256": "2ce028d24f3d1a0c11b868b97193e4e7307ffe326d7906920a87699d0767cd90"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-58459.json.gz",
+        "bytes": 30534,
+        "sha256": "fd3e99a90a901bbde0b26f47d69154821b6199457c0c25a41f50d42cf86b8388",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899078,
+        "uncompressed_sha256": "2911608a6957a1a06747bd7f615d2fa706acc37f793f8197c3225f4516b1c347"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-59238.json.gz",
+        "bytes": 26512,
+        "sha256": "cbd684d232aaee6bdb0aa61c00ee4926858316bf602c60aa725c0e64721699a2",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899162,
+        "uncompressed_sha256": "835a09e6b0ba9bddf47038c0558f32cb0f4fe6b8cffbf02bc92d9f98d28a89a9"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-60011.json.gz",
+        "bytes": 26768,
+        "sha256": "eff155b229c91f082c03df154d01232ba895314688b645a7c4d99275d459ff7a",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899628,
+        "uncompressed_sha256": "b780d744bb1b8bb6333b105466f005f3fd95e35864c9a86944d7cf97d582711e"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-60784.json.gz",
+        "bytes": 26631,
+        "sha256": "1e1082dbb7c634a2df4ce6507c5c943ed69b3bf015ad7162c6a5535280d069a3",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899314,
+        "uncompressed_sha256": "60a470d18bbf05c9599147b4c5adaf265af460b33d42fb041f7b819cbf05496f"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-61557.json.gz",
+        "bytes": 26369,
+        "sha256": "5ddb76287760d9aa7a2071a7c7526ae2896bfcb4080d25aadc0d0f1fb29c39f7",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899738,
+        "uncompressed_sha256": "553f7ac3654acf9bdae0fb9184cfb091f6034acf09136fb1ec0cdfe912a78a04"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-62400.json.gz",
+        "bytes": 27787,
+        "sha256": "e6a0daec7c2babd174d457a497858018f20b0dfa8cd9e135c891ee151886b00c",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899154,
+        "uncompressed_sha256": "423ff3ff1c6c9d20ee695090681be0cfb40d561256b617d2a4409475cba25966"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-63208.json.gz",
+        "bytes": 27469,
+        "sha256": "a7f2f540013323952d2974a9a6b1307508a497780b016b10993aed270059fc8e",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899327,
+        "uncompressed_sha256": "c051166b5100e1534b687761da76e1a66b0b2f47bdaf7597ef624618771e96fa"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-64029.json.gz",
+        "bytes": 25026,
+        "sha256": "944ea89539faba32247e667aa59298fa84206f52991c2dc0293884043d3dd06f",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899135,
+        "uncompressed_sha256": "1406a0eda12fd52d6d2f482d2beddef12658ab5760d17a7ecf6c6a1f32ea741d"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-64818.json.gz",
+        "bytes": 24881,
+        "sha256": "5469bf02e4c3ed1050bf1aac7c34efec49a7ea58d85e6e8abfccc32568414a1b",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899673,
+        "uncompressed_sha256": "f4a1d5bbc9ef65a20e536434f15ea67a25aaa7fb8281f22a32795ead63da69ee"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-65600.json.gz",
+        "bytes": 23080,
+        "sha256": "f6a2f72c41efadeee0daddbfda1c455b4463db0f365980324ffc33765050229c",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899664,
+        "uncompressed_sha256": "36e31ce4d0c80cccbe5d2f5bad633de8587baf0a75a0ac7d7c01318f0b359b8c"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-66384.json.gz",
+        "bytes": 27292,
+        "sha256": "065864ebf2281505186fa1b84f55f5a35318945e8e72ca2fad628a85f37043a8",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899344,
+        "uncompressed_sha256": "84b1105b283761bcc82645036159533fa2f67f6cad2b217a64ba2419fcab3cd6"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-67209.json.gz",
+        "bytes": 28569,
+        "sha256": "c906c282bae8ab6f0d1e9272b404288b8f4ac4a49ba238443d984e11b89cb7a2",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899747,
+        "uncompressed_sha256": "644954d76c943fca1e8c6494efc2654b3cef5347e4526d13e701bb55bb7147bd"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-68016.json.gz",
+        "bytes": 29948,
+        "sha256": "1dc52126be4e8c22eebf3aa50208d4936a98418e6e3a83a580851a1eefa828e7",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899481,
+        "uncompressed_sha256": "9d35a9f6c2554924a3739cfd48657a9de232398f793e7dcdd2f4d6f35af5fcc0"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-68798.json.gz",
+        "bytes": 29573,
+        "sha256": "463406904ad02cc9c704837b4cc0d8348d9c3ef3bd9e67558f512c0f5a8cc856",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899620,
+        "uncompressed_sha256": "523b619aca3b580b346c0f12ff7c5e32e92c4b559db70c14d1630d4f4d686055"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-69579.json.gz",
+        "bytes": 24029,
+        "sha256": "e3b26428f6e7424f2ebc8985cbe3510d88fa50af333cd81fde07d6862b9ec20d",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 898859,
+        "uncompressed_sha256": "ad123d53b5377f028ca2e458b69680195edf71231d2de949574dd28cb0a790ad"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-70351.json.gz",
+        "bytes": 27655,
+        "sha256": "f2b36b93721615f9156286120d8508408206f9edb94735d544c4cd962e9dec5b",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899159,
+        "uncompressed_sha256": "3850534bd61c54898d6dbd673337d136b6cbeab9d513feeb90eb46dd393e79fc"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-71133.json.gz",
+        "bytes": 32686,
+        "sha256": "fe5e10fc5d1c55fcb649ba0410aef834215639b55bdebd941fdb51e46d47efcc",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899135,
+        "uncompressed_sha256": "3c8e80babb6049ddbcb28ddbc29bc0f84ddcdae6ada451ef6a71fcce3a4de15f"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-71904.json.gz",
+        "bytes": 32901,
+        "sha256": "6d2823e44f8559e26a3bd17ffb80d2b85ed1dde32446649613febbfd367bb2dc",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899666,
+        "uncompressed_sha256": "c418d680e528feb60235124c0587415933f16a1ed23c6e0cedf2b79f9816df6a"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-72675.json.gz",
+        "bytes": 31739,
+        "sha256": "85b7b4a018385566cc17cacda2938ed2f4fbb069e7a80f3ec1248ad5dd722497",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899101,
+        "uncompressed_sha256": "7ed8572e0ee6a1befda1bdd5afd217594a91fcce64a296acd4a4bfa29fc7f817"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-73447.json.gz",
+        "bytes": 26135,
+        "sha256": "394f2e9fe2d0c55897a1b01081b1432c332681ec2b27ba8febc278cc99953fd3",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899095,
+        "uncompressed_sha256": "0d6a706e8b5efb29093a9daabdcd1f4b7889a19c5e31b157bc01f094dc0f22aa"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-74239.json.gz",
+        "bytes": 25048,
+        "sha256": "cb80fabe857a8d77477b142f961e3f5a53a5b32779fc8bc40750a8c914284010",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899810,
+        "uncompressed_sha256": "68a5243b30695980591c07e9f629918b418e30bef4af514f629c95edaa80f1e2"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-75001.json.gz",
+        "bytes": 27409,
+        "sha256": "8d4941c0543d62771258c89183690b5cd6ceb74966f3bfbe55cd71e71c6da201",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899064,
+        "uncompressed_sha256": "dce64c43dd744904f6bae1fd9834adcd2b96112eb011bbc0d338c89355e1320d"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-75788.json.gz",
+        "bytes": 29563,
+        "sha256": "cf7658f9fc442bdc1069bfe3a27a19b77c2937f10065738bc358eb17aa1c6a43",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899606,
+        "uncompressed_sha256": "1bb06ee77004f133bdcf6290a96ae3b853dbc850c20bd598af41c1befbb65036"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-76563.json.gz",
+        "bytes": 28540,
+        "sha256": "bf7b1b4a52a167fa441d2918345495d444ec4901aa16b37d5f4d987857d08d57",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899717,
+        "uncompressed_sha256": "8b4d46379f61601ad6c50dba953b015d6b680a9b5ca0103ef2364023612fc041"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-77354.json.gz",
+        "bytes": 29809,
+        "sha256": "ecc62b57a219587a417d4563161d017431b527fc879fe55ffef77464db89b561",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899374,
+        "uncompressed_sha256": "a9e056aa4a9d3f63b8b110eda415e617d1d7ab04e8d965d798436cf4bd3dc1e9"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-78143.json.gz",
+        "bytes": 25101,
+        "sha256": "f77f25ee652f4bf3226df390094f34fd1cdba2875bfcc1f4365b5325fe915e32",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899774,
+        "uncompressed_sha256": "fae845c8f39a2d816ad837cf19eb2dab41c14cd1a3db074f90aa2fb893dfda2c"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-78932.json.gz",
+        "bytes": 26888,
+        "sha256": "00e4c1d296bcc1b7646053b9631f5df2287f3b302701d6e42aae6fa8f0ca73e9",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899180,
+        "uncompressed_sha256": "9a44c46e24552a0c0ca00dc15dd28a0e82c894d2aebaf8fae5d6760172668907"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-79710.json.gz",
+        "bytes": 30172,
+        "sha256": "280a8adc3921436eb8629f0d7ac9e5ffe80dbae7e80eb3816ef81d973dfbbc2e",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899862,
+        "uncompressed_sha256": "755e47c05b5d14e7e586fb65444af455e1eef20dc19dfab5b0adccf61e3eebd7"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-80483.json.gz",
+        "bytes": 29370,
+        "sha256": "ef1ef4106917be5fa727d4f27e1d6d170d6a4054e8db74751987b0e6d758017e",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899464,
+        "uncompressed_sha256": "6e894dba9a27113cf695e87bb0c1ef41f299428bbef61d82754845122b0319c6"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-81257.json.gz",
+        "bytes": 27834,
+        "sha256": "e5e596130dc6072d54fc5a7d44fbf73f281ba2b46afbfbe2da0aab3566d0ec54",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899033,
+        "uncompressed_sha256": "089c69278c0c864105357c4b4fbcb441dbabb2cd72bef7536b0ab5f5dec0fe8e"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-82034.json.gz",
+        "bytes": 27232,
+        "sha256": "c7237274657c7ce9592a88a02134ab03fd98a872a10755120b230f51d400380d",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899661,
+        "uncompressed_sha256": "2e50bd7aed627f59a80967485c50bba73aba0e392152d44cd046332d35b945c2"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-82812.json.gz",
+        "bytes": 29107,
+        "sha256": "a6a0f39465a388c4273dbb679cab599fa85630d13ef0bf43d71875c72ae210d5",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899670,
+        "uncompressed_sha256": "17e15d066b48989f9102f865e86b13a5933dc1aa3beb5efa9a0d47b13b85d8c6"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-83600.json.gz",
+        "bytes": 27324,
+        "sha256": "c07724cc1303915dd62b4b20d5b9568cf99dbeea095b28e2e2a22166d0deac77",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 899821,
+        "uncompressed_sha256": "2b3a4029adb8311ec0ab2785efa9bf223c200ab315f5cf61729251a9da7b8ad2"
+      },
+      {
+        "path": "data/geographic-releases/7-memberships-repacked-84383.json.gz",
+        "bytes": 20410,
+        "sha256": "6a4628ad0597419c6a1549efbf794a50a710f2bdfde18a5df1ab60b5abd799bb",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 605019,
+        "uncompressed_sha256": "e371b3d2cbb48c65f45531a79fb19c1020714da1b7e5a1ef19772e141b438387"
+      },
+      {
+        "path": "data/geographic-releases/7-changes-0.json.gz",
+        "bytes": 1215,
+        "sha256": "ad6b45943e6f0149130952d053dc71f42a3e84be304708821c393f0b06f125c2",
+        "hash_kind": "file-bytes",
+        "uncompressed_bytes": 4198,
+        "uncompressed_sha256": "ea8107fffff0ec9a8f9cc4210a5f72f0b5572550daf52a07915084c561b4628d"
+      },
+      {
+        "path": "hosted/geographic-releases.js",
+        "bytes": 17288,
+        "sha256": "9eba2ddeeb267ca09dc396225b8fe27385c1834ab6f9ebf5cb627ae38ebf1701",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "scripts/bootstrap-geographic-release.mjs",
+        "bytes": 9576,
+        "sha256": "065a64d6d3fa20dfdc36832414cf89e868d93c5551915b3331709f0385a07cc9",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/geographic-releases/current-manifest.json",
+        "bytes": 215,
+        "sha256": "5bffef7aa5cf7f3256d648674ed66b4293ba545097bd9c32d85d8987cedc5178",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22/repacked-release-v2/verification.json",
+        "bytes": 283719,
+        "sha256": "c33bc34c9c5957cbe663c5ea558d827a170b64602d45a131d38cacab7535bd45",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "data/hosted-catalog/index.json",
+        "bytes": 76218,
+        "sha256": "ade11c54ae041f48c305b79223bb5b230db608b2bb0ee1e8a74edd1bc54f6d2b",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "staging_handler": "9eba2ddeeb267ca09dc396225b8fe27385c1834ab6f9ebf5cb627ae38ebf1701",
+      "bootstrap_caller": "065a64d6d3fa20dfdc36832414cf89e868d93c5551915b3331709f0385a07cc9",
+      "installed_pointer": "5bffef7aa5cf7f3256d648674ed66b4293ba545097bd9c32d85d8987cedc5178",
+      "installed_registry": "08faf0b0ad3b1a26c8c7d4e1f79cd17960d064baaaad74906f92a789cd99dbc7",
+      "first_repacked_batch": "40fc59d3a599d138b6b808a88a9e52a6642ff869098cc4a273939e6109f137ca",
+      "repack_producer_receipt": "c33bc34c9c5957cbe663c5ea558d827a170b64602d45a131d38cacab7535bd45"
+    },
+    "pin_files": {
+      "staging_handler": "hosted/geographic-releases.js",
+      "bootstrap_caller": "scripts/bootstrap-geographic-release.mjs",
+      "installed_pointer": "data/geographic-releases/current-manifest.json",
+      "installed_registry": "data/geographic-releases/releases-v7-repacked-gzip.json.gz",
+      "first_repacked_batch": "data/geographic-releases/7-memberships-repacked-0.json.gz",
+      "repack_producer_receipt": "coordination/engineering/iran-pakistan-offline-integration-991-20261006-local22/repacked-release-v2/verification.json"
+    }
+  },
+  "sources": [],
+  "outputs": [
+    {
+      "path": "coordination/engineering/release-membership-admission-1150.json",
+      "bytes": 1788,
+      "sha256": "f41486cdf346576fd580604b23cce2ca104f09a7fd294605f7591081104068e0",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/README.md",
+      "bytes": 5969,
+      "sha256": "abaf8c6d347e46774887a838a952a4b1b09d1758b7a2a914eed66407e19b9230",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/catalog-evidence.json",
+      "bytes": 99198,
+      "sha256": "139fef0a93cf3b83e5462d20ca9a5057d0e667be86a3f847bb238606833010dc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/claim.json",
+      "bytes": 747,
+      "sha256": "81bc7422fa7a0f5860569f7dbf31aac6ae4c2d851ee474a3531c391ccfcd9583",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/controls.txt",
+      "bytes": 6553,
+      "sha256": "626e2268882a35bec4a481840963217f2303621bcd787cd2589a37396283de58",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/independent-consumer-controls.txt",
+      "bytes": 401,
+      "sha256": "817040b42514b6fee892bdd8cf7120efa5b18635694c45967a3cf1f370e8c5bb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/issue-snapshot.json",
+      "bytes": 10659,
+      "sha256": "91536b143fd6a3b708236f5004d295d97b5686eef31d8c3056a92e8e46252dc7",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/safe-reproduction-controls.txt",
+      "bytes": 873,
+      "sha256": "09e6b4b62c8f4ca5c2eb540afad534052510ad8d97c8ac737870b9084b8abfde",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/scope-controls.txt",
+      "bytes": 1664,
+      "sha256": "4f2d1458be1869becb7c9f56a2f29d710744aa68859991b6e1d75fa17f423f22",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/verification-fifth.json",
+      "bytes": 103704,
+      "sha256": "847792acb0ed213dba57262bdd6e113009e974f2069b6212f902e1d810df1258",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/verification-first.json",
+      "bytes": 103050,
+      "sha256": "b960f0d5be1244d821f219e20467899a6b4241afbc5a9fe39fc335bca8dc5c32",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/verification-fourth.json",
+      "bytes": 103711,
+      "sha256": "0ff49c823dc5c3582a39065265ac1f4e7b0f67c5ffd1b2f2bfb6f5bbb8538acb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/verification-second.json",
+      "bytes": 103250,
+      "sha256": "301821323c9010643fc7384555a50ac8d0f117bd780b52e6d50d02631b2ecfb4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/verification-third.json",
+      "bytes": 103498,
+      "sha256": "6a970bf11ccff23456b8ed1fa9ed8a88c56e2e2d830314943f93cbdea78c9af6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/verify-output-safety.mjs",
+      "bytes": 1606,
+      "sha256": "38c3b4bc71e557f826eabd0b32572f711035841864c5572ceed02bb0ef535a19",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/verify-staging.mjs",
+      "bytes": 11932,
+      "sha256": "20573657859df52de2e51c4df2dcdc66bbdab10a252a8e3512e50cfa6c9c6ab6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "drizzle/0000_bizarre_sentry.sql",
+      "bytes": 38954,
+      "sha256": "a7d4945214a37835bc6cbe8c6c0bfe2073d15fbf76fa1c510e6db072b64ba699",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "drizzle/0001_evidence_retirements.sql",
+      "bytes": 8576,
+      "sha256": "1f29f4af9eb41425dbd932b9d68e1c54406cb99221a02a2a1bc6b6cab2e3846f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "drizzle/0002_geographic_reference_releases.sql",
+      "bytes": 14284,
+      "sha256": "fc03e50b1c7053d9ffe89534395bcbb644e3192231122eca51a424fd14753c53",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "drizzle/0003_unsettled_location_rank.sql",
+      "bytes": 15998,
+      "sha256": "dc249cb326203bee26446fb010e0f2c05d8bd9bcbb918649199382d517e0fa4d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "drizzle/0004_population_precision_guard.sql",
+      "bytes": 5020,
+      "sha256": "302660bc2d4d673bab67820d3c54637ca8cd50460ace57e3142fb3c6f40da447",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "drizzle/0005_population_source_class_guard.sql",
+      "bytes": 5345,
+      "sha256": "44ec5f5a82317b7c430f7d98439e6ce41d04859d46719c36c3e0dc072f102194",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "drizzle/0006_unresolved_attribute_status_guard.sql",
+      "bytes": 472,
+      "sha256": "e2778adcf77945b294609111ecd21a02ffc177e41463393f07e7d15e50e97475",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "drizzle/0007_fixed_environment_classifications.sql",
+      "bytes": 4652,
+      "sha256": "c566a87dc05a5ec5a1311019b60cfea54e8708b29ec2df6c8e80057432c4708b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "drizzle/0008_temporal_geography.sql",
+      "bytes": 21737,
+      "sha256": "a8cd574333d20891a94afac6a034576681fac2531545b761d4c4e609be452082",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "drizzle/0009_footprint_versions.sql",
+      "bytes": 19674,
+      "sha256": "014c90d0f7cba3417480cefe3c20a97119237874098bcfb17b4be5120478a7f6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "drizzle/0010_typed_observations.sql",
+      "bytes": 12622,
+      "sha256": "672cb4f723a84ce2958f90f7c5d1fe517d566d6753da520ec3246a00dfe234c1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "hosted/geographic-releases.js",
+      "bytes": 17934,
+      "sha256": "36697c7250f4f5fe24afc6f771759d5f058e959a231f86206b54a98990228ebf",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "hosted/records.js",
+      "bytes": 29461,
+      "sha256": "524f29706fe73afcf147bde20e5f3c8f958473162a8413dfca4cdca9e38c9db8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/bootstrap-geographic-release.mjs",
+      "bytes": 13130,
+      "sha256": "e1b222aa1644c6fc5141ae51fc06f0675a948b63d40bcb5174dcd011818801b8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/geographic-release-admission.mjs",
+      "bytes": 8496,
+      "sha256": "447e133f69531cf2595d9cd4ed8fe7f1b0d3304152fb47abc82e274a678e78ca",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/read-geographic-release-manifest.mjs",
+      "bytes": 3978,
+      "sha256": "9fddf4a6486a05d85558d19e4937e4da0955844b2156c016cfaec6d6cf2e0486",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/attributes.js",
+      "bytes": 7868,
+      "sha256": "3b46c712e461c67338a28cb6d8bf90bddb1b07f7084f5f3bc26d7b04b1954ec8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/category-palette.js",
+      "bytes": 82979,
+      "sha256": "c449f2087075c9e03a25a26449154ac874c54a3285cf0d3df068c8cf6afd43b2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/environment-classifications.js",
+      "bytes": 5340,
+      "sha256": "d589aa3aa91831f0d1d2b5a21e161270ba44e86ef90dea23110a761510074970",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/evidence-priority.js",
+      "bytes": 441,
+      "sha256": "9e98e8c403d3a8068d286dbac160dc6126331d91958b7801b55ad9ecefa2244c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/model.js",
+      "bytes": 2822,
+      "sha256": "6cf64270d9c912b09aa93c60a14d058b4482c52e5ffa31d55fdcef026bea3dcc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "src/reference-context.js",
+      "bytes": 1885,
+      "sha256": "977ea774cdaf55894ad31adf4b7b2f5edaff717b60634f5d933b855476dbde7d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/fixtures/geographic-admission/independent-boundaries.mjs",
+      "bytes": 6991,
+      "sha256": "43de82e0d1d56489e1e511abf91899350ac3a263fd71899d64fa2894ee3e2c6d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/geographic-bootstrap.test.mjs",
+      "bytes": 12648,
+      "sha256": "ec1eb431c6b360d085834a5c8ef87219619cdacd5c3a1e92e808268f97ef2bdb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/geographic-release-admission.test.mjs",
+      "bytes": 12239,
+      "sha256": "153d1551fa289489d0b0d0a0b928e24c93885154c79a8e5b6e8e3121ecf85c17",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "bounded-handler-experiment",
+      "kind": "code",
+      "description": "Immutable Git inputs/code, actual isolated SQLite handler and meaningful adverse controls; separate catalog-seeding and successor-staging phases; actual consumer semantic validation, globally ordered staging, descriptor-first zero-read refusal, and dangling-symlink rejection. Catalog seed inventory is independently validated with catalog-evidence.json; the primary gate binds its bytes but is not recursive.",
+      "software": "Node 24.19.0 / SQLite 3.53.3",
+      "units": "rows; requests; UTF-8 bytes; exact bytes"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "memberships",
+      "value": 84833,
+      "unit": "rows",
+      "vintage": "archived",
+      "evaluation_commit": "0f28a86cf1ab130092352e814c6eb40c26fd9429",
+      "input_sha256": "08faf0b0ad3b1a26c8c7d4e1f79cd17960d064baaaad74906f92a789cd99dbc7"
+    },
+    {
+      "id": "changes",
+      "value": 2,
+      "unit": "rows",
+      "vintage": "archived",
+      "evaluation_commit": "0f28a86cf1ab130092352e814c6eb40c26fd9429",
+      "input_sha256": "08faf0b0ad3b1a26c8c7d4e1f79cd17960d064baaaad74906f92a789cd99dbc7"
+    },
+    {
+      "id": "requests",
+      "value": 441,
+      "unit": "requests",
+      "vintage": "archived",
+      "evaluation_commit": "0f28a86cf1ab130092352e814c6eb40c26fd9429",
+      "input_sha256": "08faf0b0ad3b1a26c8c7d4e1f79cd17960d064baaaad74906f92a789cd99dbc7"
+    },
+    {
+      "id": "duplicate_replays",
+      "value": 17,
+      "unit": "requests",
+      "vintage": "archived",
+      "evaluation_commit": "0f28a86cf1ab130092352e814c6eb40c26fd9429",
+      "input_sha256": "08faf0b0ad3b1a26c8c7d4e1f79cd17960d064baaaad74906f92a789cd99dbc7"
+    },
+    {
+      "id": "original_registry_source_rows_verified",
+      "value": 85689,
+      "unit": "rows",
+      "vintage": "archived",
+      "evaluation_commit": "0f28a86cf1ab130092352e814c6eb40c26fd9429",
+      "input_sha256": "ade11c54ae041f48c305b79223bb5b230db608b2bb0ee1e8a74edd1bc54f6d2b"
+    },
+    {
+      "id": "catalog_phase_admitted_bytes",
+      "value": 143111331,
+      "unit": "bytes",
+      "vintage": "archived",
+      "evaluation_commit": "0f28a86cf1ab130092352e814c6eb40c26fd9429",
+      "input_sha256": "ade11c54ae041f48c305b79223bb5b230db608b2bb0ee1e8a74edd1bc54f6d2b"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "memberships",
+      "value": 84833,
+      "unit": "rows"
+    },
+    {
+      "metric_id": "changes",
+      "value": 2,
+      "unit": "rows"
+    },
+    {
+      "metric_id": "requests",
+      "value": 441,
+      "unit": "requests"
+    },
+    {
+      "metric_id": "duplicate_replays",
+      "value": 17,
+      "unit": "requests"
+    },
+    {
+      "metric_id": "original_registry_source_rows_verified",
+      "value": 85689,
+      "unit": "rows"
+    },
+    {
+      "metric_id": "catalog_phase_admitted_bytes",
+      "value": 143111331,
+      "unit": "bytes"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "memberships",
+      "path": "coordination/engineering/release-membership-admission-1150/verification-fourth.json",
+      "json_pointer": "/memberships"
+    },
+    {
+      "metric_id": "changes",
+      "path": "coordination/engineering/release-membership-admission-1150/verification-fourth.json",
+      "json_pointer": "/changes"
+    },
+    {
+      "metric_id": "requests",
+      "path": "coordination/engineering/release-membership-admission-1150/verification-fourth.json",
+      "json_pointer": "/requests"
+    },
+    {
+      "metric_id": "duplicate_replays",
+      "path": "coordination/engineering/release-membership-admission-1150/verification-fourth.json",
+      "json_pointer": "/duplicate_replays"
+    },
+    {
+      "metric_id": "original_registry_source_rows_verified",
+      "path": "coordination/engineering/release-membership-admission-1150/verification-fourth.json",
+      "json_pointer": "/original_registry_source_rows_verified"
+    },
+    {
+      "metric_id": "catalog_phase_admitted_bytes",
+      "path": "coordination/engineering/release-membership-admission-1150/verification-fourth.json",
+      "json_pointer": "/catalog_phase_admitted_bytes"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "Original source authority, geographic approval, predecessor publication and live delivery remain outside this isolated compatibility experiment.",
+      "status": "unresolved",
+      "source_ids": []
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "Run the immutable-Git verifier command in the owned README with a fresh output filename."
+  ],
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/release-membership-admission-1150.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/catalog-evidence.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/controls.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/independent-consumer-controls.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/issue-snapshot.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/safe-reproduction-controls.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/scope-controls.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/verification-fifth.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/verification-first.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/verification-fourth.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/verification-second.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/verification-third.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/verify-output-safety.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/release-membership-admission-1150/verify-staging.mjs",
+      "status": "added"
+    },
+    {
+      "path": "hosted/geographic-releases.js",
+      "status": "modified"
+    },
+    {
+      "path": "hosted/records.js",
+      "status": "modified"
+    },
+    {
+      "path": "scripts/bootstrap-geographic-release.mjs",
+      "status": "modified"
+    },
+    {
+      "path": "scripts/geographic-release-admission.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/fixtures/geographic-admission/independent-boundaries.mjs",
+      "status": "added"
+    },
+    {
+      "path": "test/geographic-bootstrap.test.mjs",
+      "status": "modified"
+    },
+    {
+      "path": "test/geographic-release-admission.test.mjs",
+      "status": "added"
+    }
+  ]
+}
