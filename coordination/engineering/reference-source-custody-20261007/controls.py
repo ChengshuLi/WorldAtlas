@@ -77,6 +77,15 @@ def run():
         reject(lambda: custody.ReadGate([original]).call(lambda: original.open('wb')), 'undeclared read/write')
         reject(lambda: custody.ReadGate([original,grow]).call(lambda: original.read_bytes()), 'incomplete actual read')
         checked.extend(['actual open audit positive','undeclared actual read','actual write','missing actual required read'])
+        commit=producer.subprocess.check_output(['git','-C',str(producer.REPO),'rev-parse','HEAD']).decode().strip()
+        producer.authenticate_code(commit)
+        original_digest=custody.digest
+        try:
+            custody.digest=lambda *args,**kwargs: None
+            reject(lambda:producer.authenticate_code(commit),'in-memory project callable')
+        finally:
+            custody.digest=original_digest
+        checked.append('actual project callable replacement before source read')
     return {'controls':checked,'count':len(checked),'status':'PASS','original_sources_or_source_proof_invoked':False}
 
 

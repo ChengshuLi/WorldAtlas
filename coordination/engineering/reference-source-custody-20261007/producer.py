@@ -54,6 +54,20 @@ def authenticate_code(commit):
                         collect(child)
             collect(compile(raw, str(path), 'exec'))
             obj = executed[str(path.resolve())]
+            for qualified, expected_code in expected_codes.items():
+                if '<' in qualified:
+                    continue
+                parts = qualified.split('.')
+                actual_object = obj
+                for part in parts:
+                    actual_object = getattr(actual_object, part, None)
+                    if actual_object is None:
+                        raise ValueError('Actual in-memory project callable missing')
+                if inspect.isclass(actual_object):
+                    if actual_object.__module__ != obj.__name__:
+                        raise ValueError('Actual in-memory project class drift')
+                elif not inspect.isfunction(actual_object) or runtime.code_value(actual_object.__code__) != runtime.code_value(expected_code):
+                    raise ValueError('Actual in-memory project callable differs from frozen source')
             functions = [v for v in vars(obj).values() if inspect.isfunction(v) and v.__module__ == obj.__name__]
             for cls in vars(obj).values():
                 if inspect.isclass(cls) and cls.__module__ == obj.__name__:
