@@ -1,0 +1,28 @@
+{
+  "method": "methods/extract_preserved_records.py",
+  "runtime": "Python 3.7.3; standard library; Git CLI",
+  "commands": [
+    "python3 research/geography/philippines-ten-gap-family-source-fitness-20261007/methods/extract_preserved_records.py --output /tmp/phl-records-run1",
+    "python3 research/geography/philippines-ten-gap-family-source-fitness-20261007/methods/extract_preserved_records.py --output /tmp/phl-records-run2"
+  ],
+  "run_count": 2,
+  "outputs_identical_byte_for_byte": true,
+  "files": [
+    {
+      "path": "records/original-source-features-22.json",
+      "bytes": 196797,
+      "sha256": "8d019331d39a002a4d52f98b1bc5839c09dd73f4717cb8702f0e0de19b91f1d4"
+    },
+    {
+      "path": "records/current-contact-features-22.json",
+      "bytes": 59680,
+      "sha256": "67610ed2d9a7a57591dec3425df5e402b8037587747bd7a9a8960badb57b9970"
+    },
+    {
+      "path": "records/physical-comparison-rows-22.json",
+      "bytes": 190272,
+      "sha256": "a9ddd95b70db6b94d2772d783b6dc8c59a0a13bc8b32c3c65b08abae3d18b5c3"
+    }
+  ],
+  "scope": "Extraction of immutable original source features and archived comparison result records only; no geometry operation or new comparison generated."
+}

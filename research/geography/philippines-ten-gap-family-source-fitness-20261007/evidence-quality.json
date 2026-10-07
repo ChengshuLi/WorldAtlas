@@ -1,0 +1,552 @@
+{
+  "version": 1,
+  "issue": 1328,
+  "lane": "geography",
+  "worker_id": "01a11522-1da9-75a1-8ecb-765bae224f1c",
+  "subject_ids": [
+    "gb:PHL:ADM3:30758251B10201134015189",
+    "gb:PHL:ADM3:30758251B13625365204801",
+    "gb:PHL:ADM3:30758251B13765165414384",
+    "gb:PHL:ADM3:30758251B25477955083554",
+    "gb:PHL:ADM3:30758251B26344522588014",
+    "gb:PHL:ADM3:30758251B31351007635483",
+    "gb:PHL:ADM3:30758251B32987971976921",
+    "gb:PHL:ADM3:30758251B3312801270328",
+    "gb:PHL:ADM3:30758251B33441090905247",
+    "gb:PHL:ADM3:30758251B36088332034654",
+    "gb:PHL:ADM3:30758251B44740133494602",
+    "gb:PHL:ADM3:30758251B48134452570377",
+    "gb:PHL:ADM3:30758251B52108501680053",
+    "gb:PHL:ADM3:30758251B52124640444324",
+    "gb:PHL:ADM3:30758251B57957454535676",
+    "gb:PHL:ADM3:30758251B601129617006",
+    "gb:PHL:ADM3:30758251B68829340121429",
+    "gb:PHL:ADM3:30758251B78542245138850",
+    "gb:PHL:ADM3:30758251B80497082899051",
+    "gb:PHL:ADM3:30758251B84443568375403",
+    "gb:PHL:ADM3:30758251B88112004605587",
+    "gb:PHL:ADM3:30758251B88938828966286"
+  ],
+  "subject_ids_sha256": "c0797b266a9a1034d8f4aa5a254e7ed5e82feaa2a53b8babd0ce455000307f00",
+  "baseline": {
+    "commit": "9618736b023d041f81496c923e7d0c2154e1491c",
+    "files": [
+      {
+        "path": "data/world-index.json",
+        "bytes": 944,
+        "sha256": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+        "hash_kind": "file-bytes",
+        "role": "pinned-original-evidence"
+      },
+      {
+        "path": "data/geography/part-18.json",
+        "bytes": 4909063,
+        "sha256": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123",
+        "hash_kind": "file-bytes",
+        "role": "pinned-original-evidence"
+      },
+      {
+        "path": "data/geography/part-19.json",
+        "bytes": 4583022,
+        "sha256": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269",
+        "hash_kind": "file-bytes",
+        "role": "pinned-original-evidence"
+      },
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes",
+        "role": "pinned-original-evidence"
+      },
+      {
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/catalogue.json",
+        "bytes": 403376,
+        "sha256": "d3da799558be1fcbe7f3ea90ba7033d312a65690984983cb008f2d72e32765f9",
+        "hash_kind": "file-bytes",
+        "role": "pinned-original-evidence"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/input-config.json",
+        "bytes": 90091,
+        "sha256": "7623fa8a61b72c33a1560f0ab612e70c463e8c25beef930043c985fd6657f173",
+        "hash_kind": "file-bytes",
+        "role": "pinned-original-evidence"
+      },
+      {
+        "path": "coordination/engineering/global-actionability-routing-20261007/results/report.json",
+        "bytes": 174829,
+        "sha256": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265",
+        "hash_kind": "file-bytes",
+        "role": "pinned-original-evidence"
+      }
+    ],
+    "pins": {
+      "audited_world_index": "a62d4a74f0f969e228dfcdeb2797bb689ce9836c2498cadd31ed622ad2c38c03",
+      "delivered_routing_report": "2bf401f76aabc30cb9f0120aba958545146ebf37e304d8817d15eed800fa5265",
+      "delivered_routing_input_config": "7623fa8a61b72c33a1560f0ab612e70c463e8c25beef930043c985fd6657f173",
+      "scoped_part_18": "ba4eecfef6b5209da88accbea9d112def3ad91170c8eeaf7ff2816847b27c123",
+      "scoped_part_19": "baeade0e3ad11cdd65beb101e7b79284ae2b6ee8794f9b08e86631c7f20e6269",
+      "whole_consumed_phl_adm3_source": "2ece3d44a5c6a2afb385ffbf3a6b88d83e4d3a3e7eed9a52cb3be1bc59e289fc"
+    },
+    "pin_files": {
+      "audited_world_index": "data/world-index.json",
+      "delivered_routing_report": "coordination/engineering/global-actionability-routing-20261007/results/report.json",
+      "delivered_routing_input_config": "coordination/engineering/global-actionability-routing-20261007/input-config.json",
+      "scoped_part_18": "data/geography/part-18.json",
+      "scoped_part_19": "data/geography/part-19.json",
+      "whole_consumed_phl_adm3_source": "data/administrative-sources.json"
+    },
+    "subject_files": {
+      "gb:PHL:ADM3:30758251B10201134015189": "data/geography/part-18.json",
+      "gb:PHL:ADM3:30758251B13625365204801": "data/geography/part-18.json",
+      "gb:PHL:ADM3:30758251B13765165414384": "data/geography/part-18.json",
+      "gb:PHL:ADM3:30758251B25477955083554": "data/geography/part-19.json",
+      "gb:PHL:ADM3:30758251B26344522588014": "data/geography/part-18.json",
+      "gb:PHL:ADM3:30758251B31351007635483": "data/geography/part-18.json",
+      "gb:PHL:ADM3:30758251B32987971976921": "data/geography/part-18.json",
+      "gb:PHL:ADM3:30758251B3312801270328": "data/geography/part-18.json",
+      "gb:PHL:ADM3:30758251B33441090905247": "data/geography/part-19.json",
+      "gb:PHL:ADM3:30758251B36088332034654": "data/geography/part-18.json",
+      "gb:PHL:ADM3:30758251B44740133494602": "data/geography/part-18.json",
+      "gb:PHL:ADM3:30758251B48134452570377": "data/geography/part-18.json",
+      "gb:PHL:ADM3:30758251B52108501680053": "data/geography/part-18.json",
+      "gb:PHL:ADM3:30758251B52124640444324": "data/geography/part-18.json",
+      "gb:PHL:ADM3:30758251B57957454535676": "data/geography/part-18.json",
+      "gb:PHL:ADM3:30758251B601129617006": "data/geography/part-18.json",
+      "gb:PHL:ADM3:30758251B68829340121429": "data/geography/part-18.json",
+      "gb:PHL:ADM3:30758251B78542245138850": "data/geography/part-18.json",
+      "gb:PHL:ADM3:30758251B80497082899051": "data/geography/part-18.json",
+      "gb:PHL:ADM3:30758251B84443568375403": "data/geography/part-18.json",
+      "gb:PHL:ADM3:30758251B88112004605587": "data/geography/part-18.json",
+      "gb:PHL:ADM3:30758251B88938828966286": "data/geography/part-18.json"
+    }
+  },
+  "sources": [
+    {
+      "id": "philippines-source-capture",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PHL/ADM3/geoBoundaries-PHL-ADM3_simplified.geojson",
+      "role": "Complete, actually consumed simplified source bytes for all 1,647 Philippines ADM3 features",
+      "vintage": "2020 source represented year; retrieved 2026-10-06",
+      "retrieved_at": "2026-10-06T22:17:19Z",
+      "license": {
+        "status": "redistributable",
+        "terms": "Original metadata records CC BY 3.0 IGO for the underlying Philippines administrative source. Current geoBoundaries API docs describe the gbOpen derivative under CC BY 4.0. Preserve both attributions and separately review applicability to downstream derivative uses."
+      },
+      "retention": "retained",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "files": [
+        {
+          "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/inputs/gb-PHL-ADM3.original",
+          "bytes": 7071267,
+          "sha256": "2ece3d44a5c6a2afb385ffbf3a6b88d83e4d3a3e7eed9a52cb3be1bc59e289fc",
+          "hash_kind": "file-bytes",
+          "role": "original-source"
+        }
+      ]
+    },
+    {
+      "id": "psa-psgc",
+      "url": "https://psa.gov.ph/classification/psgc/municipalities",
+      "role": "Present-day identity and administrative-role crosswalk; PSA cities listing also reviewed",
+      "vintage": "Current listing accessed 2026-10-07",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "No page bytes are redistributed; follow PSA reuse terms before republishing its tabular data."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Retrieve the PSA PSGC municipalities and cities listings and compare names/codes as-of the required historical date.",
+      "limit": "Present-day identity/role only; not a 2020 or unit-specific boundary source."
+    },
+    {
+      "id": "local-government-code",
+      "url": "https://officialgazette.gov.ph/1991/10/10/republic-act-no-7160/",
+      "role": "Primary statutory framework for local-unit creation, boundary alteration, and disputes",
+      "vintage": "1991 enactment; later amendments and unit-specific effective dates require review",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "No page bytes redistributed; cited statutory source."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Retrieve the official act/ordinance and any required plebiscite record for each named unit, with operative date.",
+      "limit": "General framework does not establish a unit-specific legal boundary."
+    },
+    {
+      "id": "namria-products",
+      "url": "https://www.namria.gov.ph/downloads.aspx",
+      "role": "Official administrative maps, charts, survey, and hydrographic evidence retrieval path",
+      "vintage": "Product-specific survey dates, scales, and datums",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Reuse/price/permission is product-specific and was not determined for these components."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "restoration": "Obtain the exact NAMRIA sheet, chart, cadastral/survey plan or imagery covering each whole component and document terms, date, CRS/datum, scale, and accuracy.",
+      "limit": "No component-specific sheet or survey was retrieved; complete suitable coverage is not established."
+    },
+    {
+      "id": "geojson-rfc7946",
+      "url": "https://www.rfc-editor.org/rfc/rfc7946.html",
+      "role": "Native GeoJSON CRS and coordinate axis-order interpretation",
+      "vintage": "RFC 7946, 2016",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Standards reference; no data redistributed."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "reference",
+      "restoration": "Read RFC 7946 sections 3.1.1 and 4.",
+      "limit": "This format standard does not verify the source producer’s historical coordinate processing chain."
+    },
+    {
+      "id": "gshhg-docs",
+      "url": "https://www.soest.hawaii.edu/pwessel/gshhg/",
+      "role": "Physical shoreline source and documented class/date/resolution limitations",
+      "vintage": "GSHHG 2.3.7 release 2017-06-15; source observations have heterogeneous dates",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "The archived comparison README has conflicting LGPL wording (v3 or later versus v3 or earlier); unresolved."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "restoration": "Review the official GSHHG release page and resolve archive-specific license documentation before redistribution.",
+      "limit": "Shoreline support is not a political boundary; no uniform observation date or narrow-channel truth is established."
+    },
+    {
+      "id": "archived-routing",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/0198938719a5666b6726fb6a1e45779926eefeb2/coordination/engineering/global-actionability-routing-20261007",
+      "role": "Merged #1298 whole family/component/contact closure, candidate pointsets, and source categories",
+      "vintage": "Archived routing snapshot",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Repository research evidence; not independent geographic authority."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "restoration": "Read the immutable issue-declared commit and compare all original proposal hashes.",
+      "limit": "Routing and hash closure do not resolve legal authority, source fitness, or cause."
+    },
+    {
+      "id": "archived-physical-comparison",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/0198938719a5666b6726fb6a1e45779926eefeb2/coordination/engineering/global-physical-comparison-20261006/results",
+      "role": "Existing 22 source-relative physical comparison rows preserved byte-for-byte per line",
+      "vintage": "Archived comparison; GSHHG 2.3.7 source vintage",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Repository evidence; GSHHG redistribution license wording conflict remains unresolved."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "temporal_status": "unknown",
+      "restoration": "Use the exact commit and 18 source paths in records/physical-comparison-rows-22.json; verify the retained raw line digest and canonical row digest.",
+      "limit": "All rows state source fitness/date unknown and authority unapproved."
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/README.md",
+      "bytes": 13825,
+      "sha256": "c74591ce070e85e72a864122032ff2a9978b2b3ae90a02b99e0ec6302b9a60cb",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/inputs/claim-receipt.json",
+      "bytes": 955,
+      "sha256": "34f56a8c5432d541406e072330dd374bb4dc5090e7abb64dbbe595dcd20d04f8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/inputs/evidence-validator-constraint.json",
+      "bytes": 1999,
+      "sha256": "b0e8d9eac8d58203ea460ed5f5fb79b8de1211f1b7e647a35328f90b78212416",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/inputs/readiness-receipt.json",
+      "bytes": 19566493,
+      "sha256": "5851278ed2bf07820330d9c8a5965502d63ef5d745a7a9425664c39baeb6050d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/inputs/root-philippines-ten-full-family-source-fit-proposal.json",
+      "bytes": 250440,
+      "sha256": "5582eeb86f274c2a1d3939f2e8dcaaaeb29473c8d7f58427d6f84ae92f2dab1e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/inputs/root-philippines-ten-original-source-handoff.json",
+      "bytes": 213525,
+      "sha256": "e743bcc7287a0d45ff88033aa737f66f6209c8a7f604329aae7544d1916bf1b1",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/inputs/source-catalogue-phl.json",
+      "bytes": 3511,
+      "sha256": "715c6d3ab64acc848973bef11e1f5613747550356fc076ffc746c8ca0d73f52f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/inputs/source-register.json",
+      "bytes": 5831,
+      "sha256": "9b063b5e6dfcf1e4d3386b2069c78531bf50a5b83eae9064815b6fc3c816f1e6",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/methods/build_evidence_manifest.py",
+      "bytes": 13331,
+      "sha256": "77bc96dcd6bb12ec222ce8215360551e5e8bb3ad642d63b94475d48ea6f40e3a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/methods/extract_preserved_records.py",
+      "bytes": 3144,
+      "sha256": "5f3c133ae6571bafd90d56b20bff1b1663c94ba45eb45ff6989202ea6fda6cae",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/records/component-assessments.json",
+      "bytes": 52273,
+      "sha256": "d658e96d5f30e90f02c34a3119644ff63d6d40c70dc808d5fc87a1648fd919fa",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/records/contact-assessments.json",
+      "bytes": 24400,
+      "sha256": "52efff1ed10359fb53fd20e2506fdbb72740aee98a073ab0a85c60ca95cefd5e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/records/current-contact-features-22.json",
+      "bytes": 59680,
+      "sha256": "67610ed2d9a7a57591dec3425df5e402b8037587747bd7a9a8960badb57b9970",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/records/extraction-runs.json",
+      "bytes": 1204,
+      "sha256": "f2805c06160a35855ecbc1806987fee5435f7ffabb8e20dc057ab89a0b24a1d2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/records/family-reconciliation.json",
+      "bytes": 11261,
+      "sha256": "90c9c7fb5768228fbb7ea3a0108f73a6d14a40069e32f61c4e17bc563b18372a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/records/original-source-features-22.json",
+      "bytes": 196797,
+      "sha256": "8d019331d39a002a4d52f98b1bc5839c09dd73f4717cb8702f0e0de19b91f1d4",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/records/physical-comparison-rows-22.json",
+      "bytes": 190272,
+      "sha256": "a9ddd95b70db6b94d2772d783b6dc8c59a0a13bc8b32c3c65b08abae3d18b5c3",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/scope.json",
+      "bytes": 1480,
+      "sha256": "8d9c29af73a471de77ca8b484364b17f040aa5a3a9188d6c1fe4ef0bb5a07399",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "exact-source-and-result-record-extraction",
+      "kind": "code",
+      "description": "Extract the 22 exact original source features, 22 complete current contact features, and 22 archived physical comparison result rows; check whole original source hash, member closure and archived canonical row digests. No new spatial analysis or comparison is performed.",
+      "software": "Python 3.7.3 standard library; Git CLI",
+      "units": "preserved JSON source/result records"
+    },
+    {
+      "id": "primary-source-role-and-authority-review",
+      "kind": "source",
+      "description": "Assess source role, temporal limits, legal authority prerequisites, license terms and physical shoreline limitations using cited primary sources and retained source metadata.",
+      "software": "Document review; no GIS operation",
+      "units": "qualitative source fitness dispositions"
+    }
+  ],
+  "metrics": [],
+  "summaries": [],
+  "conclusions": [
+    {
+      "text": "The full source-feature set, full current contact set and all 22 previously accepted whole-component comparison rows are retained and match their declared exact identities and hashes.",
+      "status": "supported",
+      "source_ids": [
+        "philippines-source-capture",
+        "archived-routing",
+        "archived-physical-comparison"
+      ]
+    },
+    {
+      "text": "The present source-role label “Municipalities” is overgeneralized for the 22 current contacts: the 2026 PSA listings classify 21 as municipalities and Cavite City as a city. This is a current identity/role finding only.",
+      "status": "supported",
+      "source_ids": [
+        "philippines-source-capture",
+        "psa-psgc"
+      ]
+    },
+    {
+      "text": "Every contact geometry differs from its corresponding 2020 consumed source geometry under the preserved canonical JSON serialization. This observation does not determine cause, legal authority, or replacement geometry.",
+      "status": "supported",
+      "source_ids": [
+        "philippines-source-capture",
+        "archived-routing"
+      ]
+    },
+    {
+      "text": "The original source is GeoJSON without a crs member; RFC 7946 specifies WGS 84/CRS84 decimal degrees, longitude then latitude, but does not verify the 2020 production chain.",
+      "status": "supported",
+      "source_ids": [
+        "philippines-source-capture",
+        "geojson-rfc7946"
+      ]
+    },
+    {
+      "text": "For all 22 components, source-relative physical comparison rows retain their original support classes, while physical source observation fitness/date and authority remain unapproved or unknown.",
+      "status": "supported",
+      "source_ids": [
+        "archived-physical-comparison",
+        "gshhg-docs"
+      ]
+    },
+    {
+      "text": "Unit-specific legal boundaries and effective dates remain unresolved without the applicable laws/ordinances, required plebiscite evidence, and a matched official survey/cadastral plan.",
+      "status": "unresolved",
+      "source_ids": [
+        "local-government-code",
+        "namria-products"
+      ]
+    },
+    {
+      "text": "Suitable higher-accuracy physical evidence, mapped coverage, date, registration, tidal datum and reuse permission remain unresolved for these specific components. No raster or scene was queried.",
+      "status": "unresolved",
+      "source_ids": [
+        "namria-products",
+        "gshhg-docs",
+        "archived-physical-comparison"
+      ]
+    },
+    {
+      "text": "The geoBoundaries source metadata and gbOpen derivative reuse terms need separate attribution and applicability review before any broader reuse; the GSHHG archive license wording conflict remains unresolved.",
+      "status": "unresolved",
+      "source_ids": [
+        "philippines-source-capture",
+        "gshhg-docs"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "python3 research/geography/philippines-ten-gap-family-source-fitness-20261007/methods/extract_preserved_records.py --output /tmp/phl-records-run1",
+    "python3 research/geography/philippines-ten-gap-family-source-fitness-20261007/methods/extract_preserved_records.py --output /tmp/phl-records-run2",
+    "Compare the three extracted record files byte-for-byte; the recorded two-run receipt is records/extraction-runs.json.",
+    "node scripts/evidence-quality.mjs research/geography/philippines-ten-gap-family-source-fitness-20261007/evidence-quality.json",
+    "node scripts/premerge-evidence.mjs --help"
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/README.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/evidence-quality.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/inputs/claim-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/inputs/evidence-validator-constraint.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/inputs/gb-PHL-ADM3.original",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/inputs/readiness-receipt.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/inputs/root-philippines-ten-full-family-source-fit-proposal.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/inputs/root-philippines-ten-original-source-handoff.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/inputs/source-catalogue-phl.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/inputs/source-register.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/methods/build_evidence_manifest.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/methods/extract_preserved_records.py",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/records/component-assessments.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/records/contact-assessments.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/records/current-contact-features-22.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/records/extraction-runs.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/records/family-reconciliation.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/records/original-source-features-22.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/records/physical-comparison-rows-22.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/philippines-ten-gap-family-source-fitness-20261007/scope.json",
+      "status": "added"
+    }
+  ]
+}

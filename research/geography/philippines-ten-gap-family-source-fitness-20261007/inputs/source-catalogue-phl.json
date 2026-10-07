@@ -1,0 +1,63 @@
+{
+  "catalogue_product": {
+    "advertised_feature_count": 1647,
+    "cohort": "administrative-registry",
+    "feature_count": 1647,
+    "key": "gb:PHL:ADM3",
+    "metadata_sha256": "051eb4e0cc0ff7bc52ebf018399feddb99f7c3e3072d31c66b56aaa36e1f23c2",
+    "original_bytes": 7071267,
+    "original_metadata_file": "data/administrative-sources.json",
+    "original_sha256": "2ece3d44a5c6a2afb385ffbf3a6b88d83e4d3a3e7eed9a52cb3be1bc59e289fc",
+    "partition_method": "contiguous original raw bytes; no decoding/re-serialization of JSON geometry",
+    "parts": [
+      {
+        "bytes": 2224353,
+        "hash_kind": "file-bytes",
+        "offset": 0,
+        "ordinal": 0,
+        "path": "coordination/engineering/original-geography-source-corpus-20261006/payloads/gb-PHL-ADM3-000.bin.gz",
+        "sha256": "0b7b241fd977a792eca3101f31f0d02fba79d75b6ea463e33dec937b6c5ed72c",
+        "uncompressed_bytes": 7071267,
+        "uncompressed_sha256": "2ece3d44a5c6a2afb385ffbf3a6b88d83e4d3a3e7eed9a52cb3be1bc59e289fc"
+      }
+    ],
+    "recorded_consumed_url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PHL/ADM3/geoBoundaries-PHL-ADM3_simplified.geojson",
+    "recorded_license": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "source_represented_year_claim": "2020"
+  },
+  "administrative_source_metadata": {
+    "boundaryID": "PHL-ADM3-30758251",
+    "boundaryName": "Philippines",
+    "boundaryISO": "PHL",
+    "boundaryYearRepresented": "2020",
+    "boundaryType": "ADM3",
+    "boundaryCanonical": "Municipalities",
+    "boundarySource": "National Mapping and Resource Information Authority (NAMRIA), Philippines Statistics Authority (PSA), OCHA Philippines",
+    "boundaryLicense": "Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO)",
+    "licenseDetail": "nan",
+    "licenseSource": "data.humdata.org/dataset/philippines-administrative-levels-0-to-3",
+    "boundarySourceURL": "data.humdata.org/dataset/philippines-administrative-levels-0-to-3",
+    "sourceDataUpdateDate": "Thu Jan 19 07:31:04 2023",
+    "buildDate": "Dec 12, 2023",
+    "Continent": "Asia",
+    "UNSDG-region": "Eastern and South-Eastern Asia",
+    "UNSDG-subregion": "South-Eastern Asia",
+    "worldBankIncomeGroup": "Lower-middle-income Countries",
+    "admUnitCount": "1647",
+    "meanVertices": "8408.0",
+    "minVertices": "13",
+    "maxVertices": "290347",
+    "meanPerimeterLengthKM": "82.20550479906102",
+    "minPerimeterLengthKM": "3.4593672674839184",
+    "maxPerimeterLengthKM": "1068.706043233312",
+    "meanAreaSqKM": "178.20354862474807",
+    "minAreaSqKM": "0.3998143958855597",
+    "maxAreaSqKM": "2341.425972126926",
+    "staticDownloadLink": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PHL/ADM3/geoBoundaries-PHL-ADM3-all.zip",
+    "gjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PHL/ADM3/geoBoundaries-PHL-ADM3.geojson",
+    "tjDownloadURL": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PHL/ADM3/geoBoundaries-PHL-ADM3.topojson",
+    "imagePreview": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PHL/ADM3/geoBoundaries-PHL-ADM3-PREVIEW.png",
+    "simplifiedGeometryGeoJSON": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PHL/ADM3/geoBoundaries-PHL-ADM3_simplified.geojson",
+    "sha256": "2ece3d44a5c6a2afb385ffbf3a6b88d83e4d3a3e7eed9a52cb3be1bc59e289fc"
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "as_of": "2026-10-07",
+  "sources": [
+    {
+      "id": "philippines-source-capture",
+      "title": "geoBoundaries gbOpen Philippines ADM3, simplified consumed source",
+      "url": "https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/PHL/ADM3/geoBoundaries-PHL-ADM3_simplified.geojson",
+      "role": "Consumed original boundary source bytes; complete 1,647-feature national file",
+      "represented_year": "2020",
+      "retrieved_at": "2026-10-06T22:17:19Z",
+      "bytes": 7071267,
+      "sha256": "2ece3d44a5c6a2afb385ffbf3a6b88d83e4d3a3e7eed9a52cb3be1bc59e289fc",
+      "license_recorded": "CC BY 3.0 IGO for underlying original administrative source; geoBoundaries gbOpen API docs describe gbOpen derivative under CC BY 4.0. Preserve both attributions; applicability to derivative processing remains separately reviewable.",
+      "scope_and_limits": "ADM3 source level is not proof that all features are municipalities, nor proof of local legal limits; original metadata credits NAMRIA, PSA, OCHA Philippines; original metadata has separate unsimplified gjDownloadURL."
+    },
+    {
+      "id": "psa-psgc",
+      "title": "PSA Philippine Standard Geographic Code listings",
+      "url": "https://psa.gov.ph/classification/psgc/municipalities",
+      "role": "Present-day name, code and municipal identity crosswalk (cities list also reviewed)",
+      "represented_year": "current 2026 listing",
+      "retrieved_at": "2026-10-07",
+      "license_recorded": "No explicit reuse determination in this packet; source is cited, and no PSA page bytes redistributed.",
+      "scope_and_limits": "Lists 21 contacts as municipalities and Cavite City as City of Cavite; identity/classification only, not a 2020 boundary source."
+    },
+    {
+      "id": "local-government-code",
+      "title": "Republic Act No. 7160, Local Government Code",
+      "url": "https://officialgazette.gov.ph/1991/10/10/republic-act-no-7160/",
+      "role": "Primary statutory context for local government creation, boundary alteration and disputes",
+      "represented_year": "1991 statutory enactment; amendments/effectivity must be checked per unit",
+      "retrieved_at": "2026-10-07",
+      "license_recorded": "No reuse determination; cite law text, no page bytes redistributed.",
+      "scope_and_limits": "General legal framework only. Does not establish unit-specific operative acts, dates, plebiscite results or surveyed geometry."
+    },
+    {
+      "id": "namria-products",
+      "title": "NAMRIA map products and current hydrographic standards catalogue",
+      "url": "https://www.namria.gov.ph/downloads.aspx",
+      "role": "Official mapping and hydrographic evidence retrieval path",
+      "represented_year": "product-specific dates and datums",
+      "retrieved_at": "2026-10-07",
+      "license_recorded": "Coverage/permission specific to product; not determined for these 22 components.",
+      "scope_and_limits": "No component-specific sheet, survey, image or chart was retrieved; applicable coverage, accuracy, datum, date and reuse terms remain unverified."
+    },
+    {
+      "id": "gshhg-docs",
+      "title": "GSHHG shoreline data and documentation",
+      "url": "https://www.soest.hawaii.edu/pwessel/gshhg/",
+      "role": "Physical comparison source metadata and documented limitations",
+      "represented_year": "release 2.3.7, 2017-06-15; observation dates heterogeneous",
+      "retrieved_at": "2026-10-07",
+      "license_recorded": "Archived comparison README has conflicting LGPL wording (“v3 or later” versus “v3 or earlier”); unresolved.",
+      "scope_and_limits": "L1 land/ocean shoreline context, not political boundaries; cannot establish narrow channel or legal land ownership."
+    },
+    {
+      "id": "archived-routing",
+      "title": "Merged global actionability routing #1298",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/0198938719a5666b6726fb6a1e45779926eefeb2/coordination/engineering/global-actionability-routing-20261007",
+      "role": "Authenticated complete family/component/contact routing, candidate pointsets and category assignments",
+      "represented_year": "archived source routing snapshot",
+      "retrieved_at": "2026-10-07",
+      "license_recorded": "Repository evidence; use as scoped research input, not independent geographic authority.",
+      "scope_and_limits": "Routing and hash closure do not determine legal ownership or boundary cause."
+    },
+    {
+      "id": "archived-physical-comparison",
+      "title": "Existing whole-component physical comparison rows",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/0198938719a5666b6726fb6a1e45779926eefeb2/coordination/engineering/global-physical-comparison-20261006/results",
+      "role": "Archived component-level physical support summaries retained with exact source row bytes and canonical row hashes",
+      "represented_year": "archived results; GSHHG 2.3.7 source vintage",
+      "retrieved_at": "2026-10-07",
+      "license_recorded": "Repository evidence; underlying GSHHG release license wording conflict remains unresolved.",
+      "scope_and_limits": "All 22 rows explicitly mark source fitness/observation date unknown and physical authority unapproved."
+    },
+    {
+      "id": "geojson-rfc7946",
+      "title": "RFC 7946 GeoJSON standard",
+      "url": "https://www.rfc-editor.org/rfc/rfc7946.html",
+      "role": "Native GeoJSON CRS and coordinate axis-order interpretation",
+      "represented_year": "2016 standard",
+      "retrieved_at": "2026-10-07",
+      "license_recorded": "Standards reference; no data redistributed.",
+      "scope_and_limits": "The file has no explicit crs member; RFC 7946 defines WGS 84/CRS84 decimal degrees and longitude-first positions. This does not verify the historic producer’s processing chain."
+    }
+  ]
+}
