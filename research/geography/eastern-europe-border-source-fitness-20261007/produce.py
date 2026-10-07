@@ -159,9 +159,9 @@ def main():
         override=json.loads(Path(a.candidate_override).read_text())
         if override.get("id")!=CANDIDATE: raise EvidenceError("candidate override identity mismatch")
         candidate=override
+    if obj_hash(candidate)!=EXPECTED_FEATURE_SHA: raise EvidenceError("candidate full feature binding mismatch")
     geom_hash=obj_hash(candidate["geometry"])
     if geom_hash!=EXPECTED_GEOMETRY_SHA: raise EvidenceError(f"candidate geometry binding mismatch: {geom_hash}")
-    if obj_hash(candidates[0])!=EXPECTED_FEATURE_SHA: raise EvidenceError("candidate full feature binding mismatch")
     if candidate.get("properties",{}).get("area_m2") is None or not math.isclose(candidate["properties"]["area_m2"],860328102.1759481,rel_tol=0,abs_tol=1e-6): raise EvidenceError("candidate area declaration mismatch")
     candidate_geom=shape(candidate["geometry"])
     if candidate_geom.is_empty or candidate_geom.geom_type!="Polygon" or not candidate_geom.is_valid: raise EvidenceError("candidate original geometry is empty, invalid or not one Polygon")
@@ -195,7 +195,7 @@ def main():
                 invalid+=1; source_rows.append({"country":country,"source_shape_id":f.get("properties",{}).get("shapeID"),"name":f.get("properties",{}).get("shapeName"),"geometry_valid":False,"candidate_intersects":None,"positive_intersection_area_m2":None})
                 continue
             geoms.append(g); ix=g.intersects(candidate_geom); inter=g.intersection(candidate_geom) if ix else None; ar=area_m2(inter,geometry_helper) if ix else 0.0
-            intersects+=int(ix); positive+=int(ar>1e-5); covering+=int(g.covers(candidate_geom)); overlap_area+=ar
+            intersects+=int(ix); positive+=int(ar>0); covering+=int(g.covers(candidate_geom)); overlap_area+=ar
             source_rows.append({"country":country,"source_shape_id":f.get("properties",{}).get("shapeID"),"name":f.get("properties",{}).get("shapeName"),"geometry_valid":True,"candidate_intersects":ix,"positive_intersection_area_m2":ar,"source_covers_whole_candidate":g.covers(candidate_geom)})
         if invalid: raise EvidenceError(f"{country} whole source has invalid geometries; no repairs attempted; {invalid} source rows prevent complete overlay")
         union=unary_union(geoms)

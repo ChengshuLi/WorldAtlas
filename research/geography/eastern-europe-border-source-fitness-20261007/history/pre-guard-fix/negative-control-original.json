@@ -8,7 +8,7 @@
         "--inputs",
         "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/inputs",
         "--output",
-        "/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1344-m8tprzuc/output",
+        "/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1344-7todzbs1/output",
         "--control",
         "omit-contact"
       ],
@@ -28,7 +28,7 @@
         "--inputs",
         "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/inputs",
         "--output",
-        "/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1344-wwq_yj2_/output",
+        "/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1344-iomnvb99/output",
         "--control",
         "duplicate-contact"
       ],
@@ -48,7 +48,7 @@
         "--inputs",
         "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/inputs",
         "--output",
-        "/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1344-2jpt21j0/output",
+        "/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1344-v4pwyv96/output",
         "--control",
         "foreign-subject"
       ],
@@ -68,34 +68,14 @@
         "--inputs",
         "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/inputs",
         "--output",
-        "/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1344-7wgcmg9x/output",
+        "/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1344-ds16btke/output",
         "--candidate-override",
-        "/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1344-controls-0tgg9tzx/candidate-geometry.json"
+        "/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1344-controls-sw1nnx__/candidate.json"
       ],
       "exit_code": 1,
-      "expected_reason_contains": "candidate full feature binding mismatch",
+      "expected_reason_contains": "candidate geometry binding mismatch",
       "observed": {
-        "reason": "candidate full feature binding mismatch",
-        "status": "rejected"
-      },
-      "outcome": "passed"
-    },
-    {
-      "case": "candidate-same-geometry-contact-metadata-byte-change",
-      "command": [
-        "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
-        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/produce.py",
-        "--inputs",
-        "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/inputs",
-        "--output",
-        "/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1344-v_kbfvjw/output",
-        "--candidate-override",
-        "/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1344-controls-0tgg9tzx/candidate-metadata.json"
-      ],
-      "exit_code": 1,
-      "expected_reason_contains": "candidate full feature binding mismatch",
-      "observed": {
-        "reason": "candidate full feature binding mismatch",
+        "reason": "candidate geometry binding mismatch: 46844bffd1bd9958b50c20798f1f35517c0ff2c09c71a398493aabaa8ec59f0e",
         "status": "rejected"
       },
       "outcome": "passed"

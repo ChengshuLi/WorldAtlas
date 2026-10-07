@@ -3,102 +3,102 @@
     {
       "case": "missing-contact",
       "command": [
-        "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/bin/python3.7",
         "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/produce.py",
         "--inputs",
         "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/inputs",
         "--output",
-        "/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1344-m8tprzuc/output",
+        "/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1344-sks44hc0/output",
         "--control",
         "omit-contact"
       ],
       "exit_code": 1,
       "expected_reason_contains": "candidate contact roster missing",
       "observed": {
-        "reason": "candidate contact roster missing or foreign relative to issue contract",
-        "status": "rejected"
+        "reason": "Traceback (most recent call last):\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/produce.py\", line 8, in <module>\n    from shapely.geometry import shape, mapping\nModuleNotFoundError: No module named 'shapely'",
+        "status": "unparseable"
       },
-      "outcome": "passed"
+      "outcome": "failed"
     },
     {
       "case": "duplicate-contact",
       "command": [
-        "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/bin/python3.7",
         "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/produce.py",
         "--inputs",
         "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/inputs",
         "--output",
-        "/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1344-wwq_yj2_/output",
+        "/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1344-2elyd3q5/output",
         "--control",
         "duplicate-contact"
       ],
       "exit_code": 1,
       "expected_reason_contains": "duplicate candidate contact ID",
       "observed": {
-        "reason": "duplicate candidate contact ID",
-        "status": "rejected"
+        "reason": "Traceback (most recent call last):\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/produce.py\", line 8, in <module>\n    from shapely.geometry import shape, mapping\nModuleNotFoundError: No module named 'shapely'",
+        "status": "unparseable"
       },
-      "outcome": "passed"
+      "outcome": "failed"
     },
     {
       "case": "foreign-subject",
       "command": [
-        "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/bin/python3.7",
         "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/produce.py",
         "--inputs",
         "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/inputs",
         "--output",
-        "/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1344-2jpt21j0/output",
+        "/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1344-yhi9z5yb/output",
         "--control",
         "foreign-subject"
       ],
       "exit_code": 1,
       "expected_reason_contains": "candidate contact roster missing or foreign",
       "observed": {
-        "reason": "candidate contact roster missing or foreign relative to issue contract",
-        "status": "rejected"
+        "reason": "Traceback (most recent call last):\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/produce.py\", line 8, in <module>\n    from shapely.geometry import shape, mapping\nModuleNotFoundError: No module named 'shapely'",
+        "status": "unparseable"
       },
-      "outcome": "passed"
+      "outcome": "failed"
     },
     {
       "case": "candidate-geometry-byte-change",
       "command": [
-        "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/bin/python3.7",
         "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/produce.py",
         "--inputs",
         "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/inputs",
         "--output",
-        "/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1344-7wgcmg9x/output",
+        "/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1344-uc1vfmex/output",
         "--candidate-override",
-        "/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1344-controls-0tgg9tzx/candidate-geometry.json"
+        "/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1344-controls-ke76_rha/candidate-geometry.json"
       ],
       "exit_code": 1,
       "expected_reason_contains": "candidate full feature binding mismatch",
       "observed": {
-        "reason": "candidate full feature binding mismatch",
-        "status": "rejected"
+        "reason": "Traceback (most recent call last):\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/produce.py\", line 8, in <module>\n    from shapely.geometry import shape, mapping\nModuleNotFoundError: No module named 'shapely'",
+        "status": "unparseable"
       },
-      "outcome": "passed"
+      "outcome": "failed"
     },
     {
       "case": "candidate-same-geometry-contact-metadata-byte-change",
       "command": [
-        "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/bin/python3.7",
         "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/produce.py",
         "--inputs",
         "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/inputs",
         "--output",
-        "/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1344-v_kbfvjw/output",
+        "/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1344-jvutvkt5/output",
         "--candidate-override",
-        "/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1344-controls-0tgg9tzx/candidate-metadata.json"
+        "/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1344-controls-ke76_rha/candidate-metadata.json"
       ],
       "exit_code": 1,
       "expected_reason_contains": "candidate full feature binding mismatch",
       "observed": {
-        "reason": "candidate full feature binding mismatch",
-        "status": "rejected"
+        "reason": "Traceback (most recent call last):\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/produce.py\", line 8, in <module>\n    from shapely.geometry import shape, mapping\nModuleNotFoundError: No module named 'shapely'",
+        "status": "unparseable"
       },
-      "outcome": "passed"
+      "outcome": "failed"
     },
     {
       "case": "changed-source-bytes",
@@ -119,13 +119,13 @@
         "path": "source-products/geoBoundaries-BLR-ADM2_simplified.geojson"
       },
       "observed": {
-        "reason": "whole-file custody mismatch: inputs/source-products/geoBoundaries-BLR-ADM2_simplified.geojson",
-        "status": "rejected"
+        "reason": "Traceback (most recent call last):\n  File \"/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/eastern-europe-border-source-fitness-20261007/produce.py\", line 8, in <module>\n    from shapely.geometry import shape, mapping\nModuleNotFoundError: No module named 'shapely'\n",
+        "status": "unparseable"
       },
-      "outcome": "passed"
+      "outcome": "failed"
     }
   ],
   "kind": "negative-control",
   "method_id": "complete-source-overlay",
-  "outcome": "passed"
+  "outcome": "failed"
 }

@@ -35,6 +35,10 @@ fitness=loadj('runs/run-one/source-fitness.json')
 run_summary=loadj('history/two-run-summary.json')
 cat=loadj('inputs/baseline/source-corpus-catalogue.json')
 existing_manifest=loadj('evidence-quality.json') if (ROOT/'evidence-quality.json').exists() else {}
+change_receipts=[]
+for p in sorted(ROOT.rglob('*')):
+ if not p.is_file() or '__pycache__' in p.parts or p.suffix=='.pyc': continue
+ change_receipts.append({'path':p.relative_to(REPO).as_posix(),'status':'added'})
 # Exact baseline files are referenced as immutable Git paths; staged copies are independently listed as outputs.
 baseline_files=[]; seen=set()
 for rec in custody['files']:
@@ -154,7 +158,7 @@ manifest={
 'stages':{'research':'complete','implementation':'not-proposed','geographic_approval':'unapproved'},
 'commands':['python3 research/geography/eastern-europe-border-source-fitness-20261007/stage_inputs.py','python3 research/geography/eastern-europe-border-source-fitness-20261007/execute.py','python3 research/geography/eastern-europe-border-source-fitness-20261007/control-checks.py','node scripts/evidence-quality.mjs research/geography/eastern-europe-border-source-fitness-20261007/evidence-quality.json'],
 'validation':[{'method_id':'complete-source-overlay','kind':'positive-control','outcome':'passed','evidence_path':inside('controls/positive-control.json')},{'method_id':'complete-source-overlay','kind':'negative-control','outcome':'passed','evidence_path':inside('controls/negative-control.json')},{'method_id':'complete-source-overlay','kind':'reproducibility','outcome':'passed','evidence_path':inside('controls/reproducibility.json')}],
-'change_receipts':existing_manifest.get('change_receipts',[])}
+'change_receipts':change_receipts}
 # Reproducibility receipt bound to the two equal full-output hashes.
 hashes=run_summary['run_output_hashes']
 r1=sha(json.dumps(hashes[0],sort_keys=True,separators=(',',':')).encode());r2=sha(json.dumps(hashes[1],sort_keys=True,separators=(',',':')).encode())

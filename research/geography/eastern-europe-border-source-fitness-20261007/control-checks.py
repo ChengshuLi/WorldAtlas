@@ -20,11 +20,13 @@ def main():
     cand=next(f for f in features if f['id']=='physical-gap:1624:42:d40fef6eb0e28f8ab7556c90e2a934b6d2114f155c633c17d324cbf319058184')
     # Keep this modified candidate temporary: it is a synthetic rejection fixture, not evidence.
     with tempfile.TemporaryDirectory(prefix='worldatlas-1344-controls-') as td:
-      over=Path(td)/'candidate.json'; altered=json.loads(json.dumps(cand)); altered['geometry']['coordinates'][0][0][0]+=0.000001; over.write_text(json.dumps(altered))
+      over=Path(td)/'candidate-geometry.json'; altered=json.loads(json.dumps(cand)); altered['geometry']['coordinates'][0][0][0]+=0.000001; over.write_text(json.dumps(altered))
+      metadata_over=Path(td)/'candidate-metadata.json'; metadata_altered=json.loads(json.dumps(cand)); point=metadata_altered['properties']['exact_location_contacts'][0]['geometry']['coordinates'][0][0]; point[0]=point[0]+0.000001; metadata_over.write_text(json.dumps(metadata_altered))
       cases=[invoke('missing-contact',['--control','omit-contact'],'candidate contact roster missing'),
              invoke('duplicate-contact',['--control','duplicate-contact'],'duplicate candidate contact ID'),
              invoke('foreign-subject',['--control','foreign-subject'],'candidate contact roster missing or foreign'),
-             invoke('candidate-geometry-byte-change',['--candidate-override',str(over)],'candidate geometry binding mismatch')]
+             invoke('candidate-geometry-byte-change',['--candidate-override',str(over)],'candidate full feature binding mismatch'),
+             invoke('candidate-same-geometry-contact-metadata-byte-change',['--candidate-override',str(metadata_over)],'candidate full feature binding mismatch')]
     # Reuse unchanged files by hard link; replace only the single tampered source product.
     with tempfile.TemporaryDirectory(prefix='worldatlas-1344-source-tamper-') as td:
       copied=Path(td)/'inputs'; shutil.copytree(INPUTS,copied,copy_function=shutil.copy2)
