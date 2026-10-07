@@ -58,7 +58,8 @@ def package():
         path=custody.OLD_PREFIX+'/'+path;b=subprocess.check_output(['git','show',BASE+':'+path],cwd=R)
         if SHA(b)!=h:raise ValueError('Required immutable baseline differs')
         baseline.append({**descriptor(path,b),'role':'original-source'});pin_files[name]=path
-    for module in report['actual_executed_project_modules']:
+    imported={row['path']:row for row in report['actual_executed_project_modules']+full['actual_replay_modules']}
+    for module in imported.values():
         if module['path'].startswith(PREFIX+'/'):continue
         b=subprocess.check_output(['git','show',BASE+':'+module['path']],cwd=R)
         if SHA(b)!=module['sha256']:raise ValueError('Imported original helper bytes differ')
