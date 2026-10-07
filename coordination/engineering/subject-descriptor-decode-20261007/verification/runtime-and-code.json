@@ -1,0 +1,40 @@
+{
+  "observed_utc": "2026-10-07T12:06:49.371722+00:00",
+  "node_version": "v24.19.0",
+  "node_binary_sha256": "27db838bb204ef7c21df2931f5656e4c8fb32e6e947f363a402b49714d32b5b1",
+  "actual_frozen_project_inputs": [
+    {
+      "path": "scripts/evidence-quality.mjs",
+      "commit": "4de4a4c2ed0c908eb08f3927b45ad73e75539b65",
+      "bytes": 15247,
+      "sha256": "eb211fcce90c7f973e5e555e1fde60270ea0a2947c499852fdb8fa7d1cf87e52"
+    },
+    {
+      "path": "test/evidence-quality.test.mjs",
+      "commit": "4de4a4c2ed0c908eb08f3927b45ad73e75539b65",
+      "bytes": 14771,
+      "sha256": "a6ccee6f79315ea4fa47c4f8bef359bc1a4dceb9180c1940298239e357a21e5d"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/check-subjects.mjs",
+      "commit": "4de4a4c2ed0c908eb08f3927b45ad73e75539b65",
+      "bytes": 3422,
+      "sha256": "ba18825a738d569817660f7b0e27653efdb7b4bcca2dd5c79db98a13b6cea69e"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/source-plan.json",
+      "commit": "4de4a4c2ed0c908eb08f3927b45ad73e75539b65",
+      "bytes": 22296,
+      "sha256": "874659cfa368ea723ae0b98271d83b5a4a9c374c81b773c2156464eb1d6f0c4f"
+    }
+  ],
+  "imports": [
+    "node:fs",
+    "node:path",
+    "node:url",
+    "node:child_process",
+    "node:crypto",
+    "node:zlib"
+  ],
+  "scope": "installed Node runtime identity plus exact frozen reader/test/caller/plan; no Python GIS or scientific dependencies"
+}

@@ -1,0 +1,554 @@
+{
+  "version": 1,
+  "issue": 1393,
+  "lane": "engineering",
+  "worker_id": "01a10fea-fe9b-7722-a974-0269a733a330",
+  "subject_ids": [],
+  "subject_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "baseline": {
+    "commit": "83bed8c4c49e8f54077bb4abf0f32d41d0992f81",
+    "files": [
+      {
+        "bytes": 2080037,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411.bin",
+        "sha256": "46db0b46812e4c2f1c5af1d583e848f0217baa8f7b883ea91b29d92480490411",
+        "uncompressed_bytes": 8387182,
+        "uncompressed_sha256": "eac8b87294e31722939ff834289c00be512312ab83e81720d4fabd577cd5da36"
+      },
+      {
+        "bytes": 2081609,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b.bin",
+        "sha256": "ce0110686eb48f41fcfc1b496421778395f3491737572f1d4a24dbb2de49af9b",
+        "uncompressed_bytes": 8388214,
+        "uncompressed_sha256": "10d2e853604b368fb9f0dbeb29919bec472640c98b457019865ff02e266a883a"
+      },
+      {
+        "bytes": 2080126,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d.bin",
+        "sha256": "001ca2f5791d5483be2dd9ce03031958349e469219bfab47d57b22e23926f58d",
+        "uncompressed_bytes": 8388138,
+        "uncompressed_sha256": "318de208374f6418fa7733b380e78aa26e54e883758637d5c5196e19e87b99fb"
+      },
+      {
+        "bytes": 2081831,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609.bin",
+        "sha256": "1be0fd1b86f632267766cce57b412ef3fa0ac4f578ec21071e8e2426b0da1609",
+        "uncompressed_bytes": 8388063,
+        "uncompressed_sha256": "b02763e7ee4e514a6208432d5ec3d78713cdae5f15b19118a3ac8ba43184cf85"
+      },
+      {
+        "bytes": 2074475,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014.bin",
+        "sha256": "541236815314006fd30cd216a42cd7aaca78fa7eb50423515ca8b96bc0b87014",
+        "uncompressed_bytes": 8387395,
+        "uncompressed_sha256": "0a895961defbcf80f8cc2e97cd7253830f2720a2fb51b6d4439c53ef0d1f80d9"
+      },
+      {
+        "bytes": 2080606,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf.bin",
+        "sha256": "f3d7b0803f108a10ec800797ac8e83f122833a209fd864eabea209fc199d09bf",
+        "uncompressed_bytes": 8387970,
+        "uncompressed_sha256": "406730575957ec1115eb05973783814988733887fe64765d49ad22dcfdae6584"
+      },
+      {
+        "bytes": 2085907,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187.bin",
+        "sha256": "a93dad7b38d6bad052ad57a230058466a759d7f80795e72755db0fe34dee7187",
+        "uncompressed_bytes": 8387875,
+        "uncompressed_sha256": "82d775abb31da05bb6058c547ea47a4e8428338f5287b79072e778c50139a7e9"
+      },
+      {
+        "bytes": 2079265,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca.bin",
+        "sha256": "654d34ca4d70cfd95df50ab402add09bb205abf3c029855138e711f198ef01ca",
+        "uncompressed_bytes": 8387777,
+        "uncompressed_sha256": "827ec32b0cd1ff9d841d6f5201dac6e015ad080d6d5b32afc0bc664e73d890e2"
+      },
+      {
+        "bytes": 2085110,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156.bin",
+        "sha256": "9c6a122c31a5cc535fbe49ea827fc02c605b4a268abf23ac31f7d0c48f9be156",
+        "uncompressed_bytes": 8388464,
+        "uncompressed_sha256": "5863c2c80e7d4d3213531d757b7bd0d372cbb3fbcc74c52f1177ab9dbb8ac94d"
+      },
+      {
+        "bytes": 2079838,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f.bin",
+        "sha256": "c19aa6673a661cd424fa763501ac89e6b25639d3f02620258eee1a0a3fd3db2f",
+        "uncompressed_bytes": 8387897,
+        "uncompressed_sha256": "66957c60574f28108c2cf633f02017a99d8dcbf9e1187c2588487675123a6cdd"
+      },
+      {
+        "bytes": 1714760,
+        "hash_kind": "file-bytes",
+        "path": "coordination/engineering/physical-gap-components-1005-20261005-local19/custody-v1/payloads/e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a.bin",
+        "sha256": "e3e58921d04f410e30709146c2aa7eaa163deda00ee92604ee70548ad615ee3a",
+        "uncompressed_bytes": 6909917,
+        "uncompressed_sha256": "6a432ffbe3d9a8d4412140438c960b0113f752cb70c2db20b76c7467e9575025"
+      },
+      {
+        "bytes": 5144571,
+        "hash_kind": "file-bytes",
+        "path": "data/geography/part-10.json",
+        "sha256": "ead134bcf52c068ef2893dfc9a976781bd80d7162cc1f2bfab763acbb22357a2"
+      },
+      {
+        "path": "scripts/evidence-quality.mjs",
+        "bytes": 14753,
+        "sha256": "6743a3fc60a73e46917bdcc0ef4ee6b9d4aadefc263f42aaabd003e68c12abdb",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "test/evidence-quality.test.mjs",
+        "bytes": 9677,
+        "sha256": "11faea09b86bd194a852a674c482b52db8e8a840e7bf2cb589e26470fc1975e4",
+        "hash_kind": "file-bytes"
+      }
+    ],
+    "pins": {
+      "original_subject_validator": "6743a3fc60a73e46917bdcc0ef4ee6b9d4aadefc263f42aaabd003e68c12abdb"
+    },
+    "pin_files": {
+      "original_subject_validator": "scripts/evidence-quality.mjs"
+    }
+  },
+  "sources": [
+    {
+      "id": "original-subject-custody",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/tree/ea7ba3eafb0f7b5a384920c79fb6ed42cf48a653",
+      "role": "Retained component/contact identity custody only",
+      "vintage": "ea7ba3eafb0f7b5a384920c79fb6ed42cf48a653",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Underlying terms/date/physical authority remain as retained by original research; this fix grants no approval"
+      },
+      "retention": "restoration-only",
+      "verification": "unverified",
+      "temporal_status": "unknown",
+      "restoration": "Read all twelve immutable whole Git files in source-plan.json; encoded and decoded descriptors are in the baseline",
+      "limit": "Subject membership/byte verification only; no numerical geography or source-fitness approval"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/README.md",
+      "bytes": 2256,
+      "sha256": "1359680695713fa1dd8a352a29866b74ecdc4535be9ae0242a121882ccb95d86",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/build-manifest.py",
+      "bytes": 4611,
+      "sha256": "f9b918089fd311a683a57cbda857aad657ad0c721d12db48788ecfc0954f30fc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/check-subjects.mjs",
+      "bytes": 3422,
+      "sha256": "ba18825a738d569817660f7b0e27653efdb7b4bcca2dd5c79db98a13b6cea69e",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/history/before-fix-complete-membership-proof.json",
+      "bytes": 12899,
+      "sha256": "9020b99333b07cdb1da462342b5be4f3f58ff25b423b0dbe1a09001e9b937124",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/history/before-fix-real-entry-failure.json",
+      "bytes": 422,
+      "sha256": "2cdc656be4197eb3db5447167b6d4ee0df44d37373cbd0988c8a04c6d33bdd45",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/history/rejected-first-claim.json",
+      "bytes": 367,
+      "sha256": "5725f80a09698b261cab02bef991d47ea4fab56d579240185bc75dd4bf9ccc18",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/source-plan.json",
+      "bytes": 22296,
+      "sha256": "874659cfa368ea723ae0b98271d83b5a4a9c374c81b773c2156464eb1d6f0c4f",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/focused-tests-actual-execution.json",
+      "bytes": 622,
+      "sha256": "f9fbef44b5cc82744a85e7325755b7bc1787e6959acb53b9ca085180f4715647",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/focused-tests.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/focused-tests.stdout.txt",
+      "bytes": 3450,
+      "sha256": "adb212d942d8bc75fc82d93814e9640202ea8b06ab429d0e0a3a24d99a7ba8ee",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/negative-controls.json",
+      "bytes": 460,
+      "sha256": "8752cbe71d7941ef82a635ec3de07c217242ece761a7bf9801622210bcff25a2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/positive-controls.json",
+      "bytes": 460,
+      "sha256": "0f0aa3b99f62074a888a47a02cc6bc4f8f8714548b1deb16c7241161c70bc221",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/reproducibility.json",
+      "bytes": 462,
+      "sha256": "69a97a79658950a56ceaa678352dc38038535f120d4a65a2f9aed942f0db55bc",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-one-actual-execution.json",
+      "bytes": 814,
+      "sha256": "927ea7f59208e20e3a46f1b92d92038a43498bf8d14ff305556bbb1cfba6496a",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-one-subjects.json",
+      "bytes": 8185,
+      "sha256": "aa13b9aa2493dc03af96020c543aeb7bfa0109ba36b413c16fe385d426a7647b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-one.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-one.stdout",
+      "bytes": 233,
+      "sha256": "44d9ae6cd54e2a3edf45f2f2051d36c4c8d2fe5e7526ab0449fbfd0b472e60c2",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-two-actual-execution.json",
+      "bytes": 808,
+      "sha256": "ed5779949727761c15d64fb5d33f88aa4e899100c2ab6c5180bf907fe89ef34d",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-two-subjects.json",
+      "bytes": 8185,
+      "sha256": "aa13b9aa2493dc03af96020c543aeb7bfa0109ba36b413c16fe385d426a7647b",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-two.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-two.stdout",
+      "bytes": 233,
+      "sha256": "b82d15971c23426a9a85d9a2042379b3b8a6357aef5b3974fdf55e04c8ee3e38",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/runtime-and-code.json",
+      "bytes": 1473,
+      "sha256": "ec06d5bbcede0da7868bad17c5635308b34092ba653303b0df2a4bd7e4dbb108",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "scripts/evidence-quality.mjs",
+      "bytes": 15247,
+      "sha256": "eb211fcce90c7f973e5e555e1fde60270ea0a2947c499852fdb8fa7d1cf87e52",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "test/evidence-quality.test.mjs",
+      "bytes": 14771,
+      "sha256": "a6ccee6f79315ea4fa47c4f8bef359bc1a4dceb9180c1940298239e357a21e5d",
+      "hash_kind": "file-bytes"
+    }
+  ],
+  "methods": [
+    {
+      "id": "subject-decode",
+      "kind": "code",
+      "description": "Declared gzip subject JSON through the existing bounded reader, exact baseline membership and real-entry controls",
+      "software": "Node24.19.0; Python metadata only; no GIS",
+      "units": "bytes and subject identities"
+    }
+  ],
+  "validation": [
+    {
+      "method_id": "subject-decode",
+      "kind": "positive",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/subject-descriptor-decode-20261007/verification/positive-controls.json"
+    },
+    {
+      "method_id": "subject-decode",
+      "kind": "negative",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/subject-descriptor-decode-20261007/verification/negative-controls.json"
+    },
+    {
+      "method_id": "subject-decode",
+      "kind": "reproducibility",
+      "outcome": "passed",
+      "evidence_path": "coordination/engineering/subject-descriptor-decode-20261007/verification/reproducibility.json"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "subject_count",
+      "value": 53,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "aa13b9aa2493dc03af96020c543aeb7bfa0109ba36b413c16fe385d426a7647b",
+      "evaluation_commit": "4de4a4c2ed0c908eb08f3927b45ad73e75539b65"
+    },
+    {
+      "id": "physical_components",
+      "value": 45,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "aa13b9aa2493dc03af96020c543aeb7bfa0109ba36b413c16fe385d426a7647b",
+      "evaluation_commit": "4de4a4c2ed0c908eb08f3927b45ad73e75539b65"
+    },
+    {
+      "id": "current_contacts",
+      "value": 8,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "aa13b9aa2493dc03af96020c543aeb7bfa0109ba36b413c16fe385d426a7647b",
+      "evaluation_commit": "4de4a4c2ed0c908eb08f3927b45ad73e75539b65"
+    },
+    {
+      "id": "numeric_siblings_preserved",
+      "value": 21,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "aa13b9aa2493dc03af96020c543aeb7bfa0109ba36b413c16fe385d426a7647b",
+      "evaluation_commit": "4de4a4c2ed0c908eb08f3927b45ad73e75539b65"
+    },
+    {
+      "id": "source_files",
+      "value": 12,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "69a97a79658950a56ceaa678352dc38038535f120d4a65a2f9aed942f0db55bc",
+      "evaluation_commit": "4de4a4c2ed0c908eb08f3927b45ad73e75539b65"
+    },
+    {
+      "id": "passed_tests",
+      "value": 32,
+      "unit": "count",
+      "vintage": "archived",
+      "input_sha256": "0f0aa3b99f62074a888a47a02cc6bc4f8f8714548b1deb16c7241161c70bc221",
+      "evaluation_commit": "4de4a4c2ed0c908eb08f3927b45ad73e75539b65"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "subject_count",
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-one-subjects.json",
+      "json_pointer": "/subject_count"
+    },
+    {
+      "metric_id": "physical_components",
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-one-subjects.json",
+      "json_pointer": "/physical_components"
+    },
+    {
+      "metric_id": "current_contacts",
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-one-subjects.json",
+      "json_pointer": "/current_contacts"
+    },
+    {
+      "metric_id": "numeric_siblings_preserved",
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-one-subjects.json",
+      "json_pointer": "/numeric_siblings_preserved"
+    },
+    {
+      "metric_id": "source_files",
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/reproducibility.json",
+      "json_pointer": "/source_files"
+    },
+    {
+      "metric_id": "passed_tests",
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/positive-controls.json",
+      "json_pointer": "/passed_tests"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "subject_count",
+      "value": 53,
+      "unit": "count"
+    },
+    {
+      "metric_id": "physical_components",
+      "value": 45,
+      "unit": "count"
+    },
+    {
+      "metric_id": "current_contacts",
+      "value": 8,
+      "unit": "count"
+    },
+    {
+      "metric_id": "numeric_siblings_preserved",
+      "value": 21,
+      "unit": "count"
+    },
+    {
+      "metric_id": "source_files",
+      "value": 12,
+      "unit": "count"
+    },
+    {
+      "metric_id": "passed_tests",
+      "value": 32,
+      "unit": "count"
+    }
+  ],
+  "conclusions": [
+    {
+      "text": "Corrected readers preserve complete membership and bounded decoding; source physical/date/license approvals remain unresolved",
+      "status": "unresolved",
+      "source_ids": [
+        "original-subject-custody"
+      ]
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "implemented",
+    "geographic_approval": "not-requested"
+  },
+  "commands": [
+    "node --test test/evidence-quality.test.mjs test/premerge-evidence.test.mjs",
+    "node coordination/engineering/subject-descriptor-decode-20261007/check-subjects.mjs 4de4a4c2ed0c908eb08f3927b45ad73e75539b65 run-one|run-two"
+  ],
+  "change_receipts": [
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/README.md",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/build-manifest.py",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/check-subjects.mjs",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/history/before-fix-complete-membership-proof.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/history/before-fix-real-entry-failure.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/history/rejected-first-claim.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/source-plan.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/focused-tests-actual-execution.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/focused-tests.stderr.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/focused-tests.stdout.txt",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/negative-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/positive-controls.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-one-actual-execution.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-one-subjects.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-one.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-one.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-two-actual-execution.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-two-subjects.json",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-two.stderr",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/run-two.stdout",
+      "status": "added"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/verification/runtime-and-code.json",
+      "status": "added"
+    },
+    {
+      "path": "scripts/evidence-quality.mjs",
+      "status": "modified",
+      "original_sha256": "6743a3fc60a73e46917bdcc0ef4ee6b9d4aadefc263f42aaabd003e68c12abdb"
+    },
+    {
+      "path": "test/evidence-quality.test.mjs",
+      "status": "modified",
+      "original_sha256": "11faea09b86bd194a852a674c482b52db8e8a840e7bf2cb589e26470fc1975e4"
+    },
+    {
+      "path": "coordination/engineering/subject-descriptor-decode-20261007/evidence-quality.json",
+      "status": "added"
+    }
+  ]
+}
