@@ -8,6 +8,8 @@ All 45 component geometries resolve exactly once in the pinned custody-v3 shards
 
 ESA WorldCover 2021 v200 and JRC Global Surface Water v1.5 source values were sampled for every component with all-touched pixel masks. The run output retains every component-by-raster histogram, so values can be examined without treating class counts as a land-area estimate. The WorldCover histogram has nine observed class codes. JRC occurrence and seasonality have observations for every component. These are source detections only: WorldCover classes and JRC open-water presence or non-detection do not prove dry land, physical cause, boundary authority, or positional accuracy.
 
+The assessment includes a disposition for each of the 45 components: positive-area source feature IDs, any current admin boundary contacts, raster products with observations, and explicit unresolved values for physical cause, dry-land status, authority, and local positional accuracy. Follow-up evidence is stated per component.
+
 The route-family source marks 21 components with numeric-closure flags and reports an existing mapped-fragment area sum of 1,078,088,489.3853252 m². The IDs and value are retained as inherited source-relative route outputs, not fresh land measurements; this work does not recompute their land areas or assign a cause. The boundary classification identifies Kota Bontang as the sole point-only contact.
 
 ## Source fitness and limits
@@ -20,6 +22,6 @@ The route-family source marks 21 components with numeric-closure flags and repor
 
 ## Reproducibility
 
-The producer authenticates and reads the pinned custody, current-admin, source-corpus, BIG metadata, and retained raster bytes through the repository evidence helper. Its complete consumed phase is about 168 MB, within the 256 MiB limit. Earlier complete outputs are retained as superseded, immutable development runs and are not used for final metrics. The final fresh runs and their comparison receipt are retained under `vintages/run-seventeen`, `vintages/run-eighteen`, and `vintages/run-nineteen`; both runs have identical bytes for all four outputs and complete `publication.json` receipts.
+The producer authenticates and reads the pinned custody, current-admin, source-corpus, BIG metadata, and retained raster bytes through the repository evidence helper. Its complete consumed phase is about 168 MB, within the 256 MiB limit. Earlier complete outputs are retained as superseded, immutable development runs and are not used for final metrics. The final fresh runs and their comparison receipt are retained under `vintages/run-twenty`, `vintages/run-twenty-one`, and `vintages/run-twenty-two`; both runs have identical bytes for all four outputs and complete `publication.json` receipts.
 
 The retained rasters and receipts are in `sources/v1/`. Source URLs, product terms, retrieval precision, original bytes/checksums, and extraction scope are documented there. In particular, the oversized western WorldCover tile is represented by a bounded all-touched crop, not a claimed full-tile copy.

@@ -309,6 +309,25 @@ def build(run_name: str) -> dict:
         next(r for r in contact_summary if r['atlas_feature_id'] == 'gb:IDN:ADM2:22746128B2679722836886')['classification'] != 'point-only'):
         raise ValueError('Contact overlay omitted an issue-pinned current admin feature')
 
+    component_uncertainty = []
+    for component_id in sorted(ids):
+        source_ids = sorted({f['properties']['source_feature_id'] for f in intersections
+                             if f['properties']['component_id'] == component_id})
+        contact_ids = sorted({f['properties']['atlas_feature_id'] for f in contact_intersections
+                              if f['properties']['component_id'] == component_id})
+        raster_rows = next(row['source_rasters'] for row in raster_histograms if row['component_id'] == component_id)
+        component_uncertainty.append({
+            'component_id': component_id,
+            'geoBoundaries_source_feature_ids_with_positive_area_overlap': source_ids,
+            'current_admin_boundary_contact_ids': contact_ids,
+            'raster_products_with_observations': [row['raster'] for row in raster_rows],
+            'physical_cause': 'unresolved',
+            'dry_land_status': 'not established by these sources',
+            'territorial_authority': 'unresolved',
+            'positional_accuracy': 'not established locally',
+            'next_evidence_needed': 'lawfully reusable authoritative BIG/Kemendagri geometry and source-specific local validation; obtain seasonal/field water evidence if physical cause is assessed',
+        })
+
     area_exact = family.get('exact_existing_fragment_area_sum_m2')
     if not isinstance(area_exact, dict) or not {'numerator', 'denominator'}.issubset(area_exact):
         raise ValueError('Pinned family source lacks the exact inherited area-sum rational')
@@ -353,6 +372,7 @@ def build(run_name: str) -> dict:
                          'big_geometry_downloaded_or_used': False},
         'raster_observation_method': 'Per-component all_touched pixel value histograms from pinned source rasters/crops; nodata excluded; counts are observations, not land-condition conclusions.',
         'raster_observations': raster_histograms,
+        'per_component_uncertainty': component_uncertainty,
         'source_shards': source_shards,
         'controls': {'exact_45_roster_join': 'passed', 'missing_identity_rejected': 'passed',
                      'duplicate_identity_rejected': 'passed', 'fabricated_identity_rejected': 'passed',
