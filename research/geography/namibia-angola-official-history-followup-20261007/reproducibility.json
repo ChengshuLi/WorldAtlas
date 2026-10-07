@@ -1,0 +1,107 @@
+{
+  "version": 1,
+  "method_id": "namibia-angola-source-fit",
+  "kind": "reproducibility",
+  "outcome": "passed",
+  "command": "node research/geography/namibia-angola-official-history-followup-20261007/build-assessments.mjs",
+  "baseline_commit": "43b48970e71af2b714d5355aeef9e31e3c99a23f",
+  "subject_count": 31,
+  "input_hashes": {
+    "original-components.geojson": {
+      "bytes": 23958,
+      "sha256": "f99f334877c309101afafe56210e40ab2093948e686ec39f98d9c085a42622b9"
+    },
+    "source-contact-features.geojson": {
+      "bytes": 46722,
+      "sha256": "472ee9003155eb62c9e9aa7bfdff0e28dfab13a8c1cc18b2a30ca6b705cc2f14"
+    },
+    "input-bindings.json": {
+      "bytes": 49247,
+      "sha256": "35b2d1a9ad33c9f0ff3693e9bdb8dacb438df30e3ba028b6892f817363631fcc"
+    },
+    "ut-texas-onc-p3-1975-rev1983.jpg": {
+      "bytes": 7511209,
+      "sha256": "8069180cb198a985d90aaf6f1bb1be4467e4b27cdd5ffe308798ba6ea820fa4e"
+    },
+    "ut-texas-onc-p3-http-headers.txt": {
+      "bytes": 394,
+      "sha256": "08193de752b256c514d68b67c204a9b21b5fd54a74c10561cd81ce6e7240b718"
+    },
+    "ut-onc-index.html": {
+      "bytes": 67435,
+      "sha256": "706732d3ec3fc6110265ed7a16ecbb9510bf1fc9b5cecb5aa6ce9424646613e2"
+    },
+    "ut-onc-index-http-headers.txt": {
+      "bytes": 390,
+      "sha256": "2616135430daf57c5697ad50eecb34e7d6537aa635431fc233e44b015dc7dfc7"
+    },
+    "namibia-national-archives-finding-aids-a.html": {
+      "bytes": 67879,
+      "sha256": "f0674c827d1c521fe4ad833562e8400c642c25bff4093623d88f67c8f61eaaca"
+    },
+    "namibia-national-archives-finding-aids-a-http-headers.txt": {
+      "bytes": 731,
+      "sha256": "95ffb5106626ffd36d31dd841bc0c47470a2fac72b989c20957e4e1746f7a3f8"
+    },
+    "namibia-archive-findaid-1-1-71-p2.jpg": {
+      "bytes": 172815,
+      "sha256": "f05d873dfb113bc50043956dbc45f17fef1833827391b4259e1dbe9833f7cae1"
+    },
+    "namibia-archive-findaid-1-1-71-p2-http-headers.txt": {
+      "bytes": 428,
+      "sha256": "ad35e63e46ece21a7091b91b3c20b29244be213f15566eadf4c24801b935cf58"
+    },
+    "namibia-findaid-2-31.pdf": {
+      "bytes": 1297104,
+      "sha256": "9844b23fcb30a458b6251ae641381c986deabb713bd681dd5ec9836726e49983"
+    },
+    "namibia-findaid-2-31-http-headers.txt": {
+      "bytes": 430,
+      "sha256": "f1fb480b6050d11ce8f816f40ae6b133968a4ff6718cba8d308f207589ccee99"
+    },
+    "namibia-finding-aids-k.html": {
+      "bytes": 75934,
+      "sha256": "5358474bd3f666dedc7c32ec43801906de91e495d8951630c8e9e779b7bb92b1"
+    },
+    "namibia-finding-aids-k-http-headers.txt": {
+      "bytes": 731,
+      "sha256": "dd9093e1cc3f8ecb8986b3cf06df7d5fab5dcae53ebce5776bd0902ad7cd86ec"
+    },
+    "namibia-commissions-committees.html": {
+      "bytes": 202007,
+      "sha256": "d1a489caad02935d57cccac3980bb44fcb6183e7489810ba522d2e481bb6372d"
+    },
+    "namibia-commissions-committees-http-headers.txt": {
+      "bytes": 731,
+      "sha256": "ae5683550c4f7b7f7d4f51732079103707b33b3b87bb1f516838f08d65b0d2ef"
+    },
+    "loc-catalog-record.json": {
+      "bytes": 49744,
+      "sha256": "e61af484a980da92044ba603f029878688ffb7bf7dd6ff15849e5418c6cee650"
+    },
+    "loc-catalog-http-headers.txt": {
+      "bytes": 3511,
+      "sha256": "98b2557aa03668cd31b426adbeee28f448673e0f43839c6a622645d8c8cef34a"
+    },
+    "loc-angola-south-west-africa-boundary-1971.jp2": {
+      "bytes": 3392871,
+      "sha256": "0639c3693cf69d6344a22b22e65f6ce4c564f2dedbfaebeb3a2c5b67330bc207"
+    },
+    "loc-map-http-headers.txt": {
+      "bytes": 560,
+      "sha256": "00e768226576fe83917362258752049d3b9de4eeaebdfecd1a12729753294e71"
+    },
+    "parent-full-product-comparison.json": {
+      "bytes": 6290740,
+      "sha256": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234"
+    }
+  },
+  "run_one_sha256": "45a916d8fd1deed66cbd137fa4ecedcd6ddef5b64cdb58cbac89fd5ebacba1e9",
+  "run_two_sha256": "45a916d8fd1deed66cbd137fa4ecedcd6ddef5b64cdb58cbac89fd5ebacba1e9",
+  "output": {
+    "path": "subject-assessments.json",
+    "bytes": 83905,
+    "sha256": "45a916d8fd1deed66cbd137fa4ecedcd6ddef5b64cdb58cbac89fd5ebacba1e9"
+  },
+  "deterministic": "Two complete producer executions against the same immutable input hashes yielded identical subject-assessments.json bytes; this receipt is excluded from its own content hash."
+}

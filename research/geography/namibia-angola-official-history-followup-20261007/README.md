@@ -1,0 +1,33 @@
+# Namibia–Angola dated map and survey-record follow-up
+
+This source-only follow-up reuses the 21 unchanged physical-component geometries, ten unchanged source-contact geometries, and four immutable input pins retained by parent issue #1268. The evidence manifest binds the reused files and exact parent pins. No water product, geometry, boundary, or assignment was changed.
+
+## Findings
+
+The University of Texas at Austin Perry-Castañeda Library lists ONC P-3 as an Angola/Namibia/Walvis Bay chart compiled in 1975 and revised in 1983. The sheet itself identifies the Defense Mapping Agency Aerospace Center, says “not for navigational use,” and prints scale 1:1,000,000. Its graticule spans the candidate corridor. A deterministic bbox screen against the printed 12°–24°E, 11°–24°S frame places all 21 candidate bboxes and all ten contact-feature bboxes inside the sheet. The scan shows regional hydrography and a mapped international line, so it is useful dated cartographic context. The chart does not identify these small subjects individually, establish exact channel banks or seasonal water, or establish boundary authority. No georeferencing or pixel-to-feature registration was attempted; line width, compilation generalization, scan distortion, and unspecified source survey accuracy remain material limits.
+
+The 1971 Library of Congress lead is a negative coverage control. The catalogue heading implies an Angola–South-West Africa boundary map, but the retained map image is titled “Angola–Zaire Boundary” and its graticule is north of the candidate corridor. It cannot resolve any of the 21 components or ten contacts. This catalog/image mismatch is recorded as a source-identification issue, not interpreted geographically.
+
+The National Archives of Namibia’s official finding aid lists the 1927–1928 Angola Boundary Survey as one unit (reference 1/1/071). Its linked finding-aid scan describes papers of Head Constable McHugh / Angola Boundary Survey and enumerates correspondence and Reports 1–4 dated 28 May, 2 June, 9 June, and 16 June 1928. That is useful evidence that contemporaneous survey records are catalogued, but it is not the reports themselves and gives no candidate coordinates or channel/boundary findings.
+
+Two further official finding aids were retrieved. Finding Aid 2/31 identifies C.H.L. Hahn Papers, A.0450, with Box 12, item 3/21/4 described as “Angola Boundary Delimitation and Kunene Water Commission,” 1926–1927. Finding Aid K lists KAB “Angola Boundary and Kunene Water,” 1926–1927, one unit, reference 1/4/17. The official Commissions and Committees index lists ABC “South Africa Angola Boundary Commission,” 1926–1928; it states the material is on microfilm AMR.0017, accession A.0799, with the original at the National Archives of South Africa in Pretoria. These are catalog and custody facts, not the underlying record contents, and no candidate location or water/boundary feature can be extracted from them. No archive or third party was contacted.
+
+## Subject-level results
+
+[`subject-assessments.json`](subject-assessments.json) contains separate rows for all 21 component IDs and ten contact IDs, their unchanged-input geometry bboxes, sheet-frame tests, mapped-feature interpretation limits, no-data/coverage notes, and separate water-history, boundary-authority, processing-cause, and territorial-assignment conclusions. For all 31, regional sheet coverage is present but candidate-level mapped water/boundary feature presence remains unresolved. The parent packet’s exact 21-by-10 geometry matrix records 210 comparisons, 49 positive-area pairs, and zero line-only or point-only pairs; this follow-up pins and aggregates those existing rows without recomputing the overlays. Per-component and per-contact pair counts appear in the subject records. All ten contacts are broad administrative source features; their bboxes are only a coverage screen and do not imply that the entire administrative polygon is a candidate contact segment.
+
+## Reproduction and custody
+
+Run from the repository root with Node.js 24:
+
+```sh
+node research/geography/namibia-angola-official-history-followup-20261007/build-assessments.mjs
+```
+
+The producer uses Node.js built-ins plus `git show` to read the immutable parent overlay at the pinned base commit. It checks the 21/10 identity rosters, aggregates the inherited pair matrix, tests sheet-frame bboxes, and hashes the retained UT, National Archives, and LOC files and response headers. It does not rewrite or transform geometry. Two complete runs produced identical `subject-assessments.json` bytes (83,905 bytes; SHA-256 `45a916d8fd1deed66cbd137fa4ecedcd6ddef5b64cdb58cbac89fd5ebacba1e9`). The run receipt is `reproducibility.json`; source byte hashes and retrieval headers are recorded there and under `sources/`. The retained HTTP header receipts are normalized to LF line endings with insignificant trailing whitespace removed for clean repository review; header fields and ordering are preserved.
+
+The UT Austin collection page supplies public access and bibliographic metadata; no item-level redistribution license for its scan was established. The LOC item has its catalog rights statement retained with the complete JSON record. The Namibia archive pages and scans identify their copyright/reuse terms where shown; the 2/31 PDF states CC BY-NC-SA. The archive files are finding aids, not the underlying commission/survey material. A source hash establishes retained bytes, not historical truth or legal authority.
+
+## Disposition
+
+This packet improves the dated cartographic and archival lead record. It does not close parent issue #1268: current and historic water status, the executed processing cause, and authoritative boundary support at each candidate remain unresolved. No geometry correction, territorial assignment, administrative fitness verdict, or legal conclusion is proposed.

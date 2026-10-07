@@ -1,0 +1,728 @@
+{
+  "version": 1,
+  "issue": 1372,
+  "lane": "geography",
+  "worker_id": "01a112c1-ac99-74b1-9047-a1da2dd0e245",
+  "subject_ids": [
+    "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0",
+    "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd",
+    "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14",
+    "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022",
+    "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f",
+    "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3",
+    "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331",
+    "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c",
+    "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e",
+    "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e",
+    "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b",
+    "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8",
+    "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393",
+    "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a",
+    "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e",
+    "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460",
+    "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90",
+    "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17",
+    "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a",
+    "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e",
+    "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a"
+  ],
+  "subject_ids_sha256": "84820893a5640f2585b89de3fbfdc88ce7d4f6986ccffaf39b5ecc839460e238",
+  "baseline": {
+    "commit": "43b48970e71af2b714d5355aeef9e31e3c99a23f",
+    "files": [
+      {
+        "path": "data/administrative-sources.json",
+        "bytes": 661416,
+        "sha256": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/worldwide-inventory-1164-20261006/run-one/report.json",
+        "bytes": 73547,
+        "sha256": "a5423b1e62b5a0793b83999d87d1f6d50916db482cf2ec74973f75555c2bda6c",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/report.json",
+        "bytes": 103877,
+        "sha256": "3527014045c5aedc2b26be8bb5dff97e3e34097b7d4cb66a9b2fe3fcf33a6856",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "coordination/engineering/worldwide-successor-1215-20261006/run-one/report.json",
+        "bytes": 65206,
+        "sha256": "3d95a15d3797943290997c9a16fede48e6eb6e0941b0071a5fcd410375c49d46",
+        "hash_kind": "file-bytes"
+      },
+      {
+        "path": "research/geography/gap-source-namibia-angola-20261006/inputs/original-components.geojson",
+        "bytes": 23958,
+        "sha256": "f99f334877c309101afafe56210e40ab2093948e686ec39f98d9c085a42622b9",
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "research/geography/gap-source-namibia-angola-20261006/inputs/source-contact-features.geojson",
+        "bytes": 46722,
+        "sha256": "472ee9003155eb62c9e9aa7bfdff0e28dfab13a8c1cc18b2a30ca6b705cc2f14",
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "research/geography/gap-source-namibia-angola-20261006/inputs/input-bindings.json",
+        "bytes": 49247,
+        "sha256": "35b2d1a9ad33c9f0ff3693e9bdb8dacb438df30e3ba028b6892f817363631fcc",
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      },
+      {
+        "path": "research/geography/gap-source-namibia-angola-20261006/full-product-comparison.json",
+        "bytes": 6290740,
+        "sha256": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234",
+        "hash_kind": "file-bytes",
+        "role": "baseline-input"
+      }
+    ],
+    "pins": {
+      "original_administrative_registry": "ed0051d2956271c72f8917e7da0c6f53e5dfb595bee5920cac489a65a747d633",
+      "original_physical_inventory": "a5423b1e62b5a0793b83999d87d1f6d50916db482cf2ec74973f75555c2bda6c",
+      "current_native_inventory": "3527014045c5aedc2b26be8bb5dff97e3e34097b7d4cb66a9b2fe3fcf33a6856",
+      "current_successor_inventory": "3d95a15d3797943290997c9a16fede48e6eb6e0941b0071a5fcd410375c49d46"
+    },
+    "pin_files": {
+      "original_administrative_registry": "data/administrative-sources.json",
+      "original_physical_inventory": "coordination/engineering/worldwide-inventory-1164-20261006/run-one/report.json",
+      "current_native_inventory": "coordination/engineering/worldwide-native-batches-1184-20261006/current-run-one/report.json",
+      "current_successor_inventory": "coordination/engineering/worldwide-successor-1215-20261006/run-one/report.json"
+    },
+    "subject_files": {
+      "physical-component:12bedbd22f54e5f9495416ba68dea11a9873b873d4ed9f19433634b22734d4a0": "research/geography/gap-source-namibia-angola-20261006/inputs/original-components.geojson",
+      "physical-component:1a66c8c237c85380c1a0e1c6fb9e5b257565f5bc6deb1f1c815e6c5edbfbdcdd": "research/geography/gap-source-namibia-angola-20261006/inputs/original-components.geojson",
+      "physical-component:27a5a61d775c185cfe295a44375f3eb4b4c947d58bb6867a2c38346df3318f14": "research/geography/gap-source-namibia-angola-20261006/inputs/original-components.geojson",
+      "physical-component:2808758be3af125429c34c98cf7ddd2bd8b216fab7130ac6fa2cd490bebe1022": "research/geography/gap-source-namibia-angola-20261006/inputs/original-components.geojson",
+      "physical-component:460cfe8bf6af451c62128caa84c9191bdaf5bab74a140b5e112cffbdc6e3343f": "research/geography/gap-source-namibia-angola-20261006/inputs/original-components.geojson",
+      "physical-component:46fb46ce05b51235b38b2f3658e470931ce9f23cdd4a9d4368689d22b1bfd0f3": "research/geography/gap-source-namibia-angola-20261006/inputs/original-components.geojson",
+      "physical-component:492208178f65a4c75b5f1085973333925ec916837a5a5b399df0621fcbd08331": "research/geography/gap-source-namibia-angola-20261006/inputs/original-components.geojson",
+      "physical-component:5580cd043e913861246c3f6ccc264067d589e54f0f07ffb90bf5594252d46f8c": "research/geography/gap-source-namibia-angola-20261006/inputs/original-components.geojson",
+      "physical-component:56fd69bee0fd575fced4f54d4020b5e33335d08e05f469fa6dcfd9cc4d74723e": "research/geography/gap-source-namibia-angola-20261006/inputs/original-components.geojson",
+      "physical-component:669db93ffd01edc618c8ea3dd682c3e0a3f06067f145f4fa92097965135fe34e": "research/geography/gap-source-namibia-angola-20261006/inputs/original-components.geojson",
+      "physical-component:66c8d0eed6cd91ec69afb99b735291be5c3bd1cec1c842f90ae1dac80073044b": "research/geography/gap-source-namibia-angola-20261006/inputs/original-components.geojson",
+      "physical-component:682a74b71110cd544d02f8e86650ff7cd694cabdd0a2f5f38bf6d471c7ca49d8": "research/geography/gap-source-namibia-angola-20261006/inputs/original-components.geojson",
+      "physical-component:77525b48385a7fc7d2273e829ebbb98d199a950203a1eecf910319e359dfa393": "research/geography/gap-source-namibia-angola-20261006/inputs/original-components.geojson",
+      "physical-component:9e71342159b50824e1fa23a4767246d236e14e7f49a148ea94e18ba82a1b278a": "research/geography/gap-source-namibia-angola-20261006/inputs/original-components.geojson",
+      "physical-component:a13ab87e240b965f49977fac808a2856e5387d1def5db4521a1b765fd52cbb9e": "research/geography/gap-source-namibia-angola-20261006/inputs/original-components.geojson",
+      "physical-component:c31b3663898b9ff3e785f7b01788c8b72ffba23b712a9c41a5a2859510e9e460": "research/geography/gap-source-namibia-angola-20261006/inputs/original-components.geojson",
+      "physical-component:c599cd47e0a90b61f5a300a5bf863630acca9f95e38b776003aad9af0054ca90": "research/geography/gap-source-namibia-angola-20261006/inputs/original-components.geojson",
+      "physical-component:cd9a7967a8f7f17c8fae2c8dbb4cc22f9ca5ac63271e2d003200ab381890ff17": "research/geography/gap-source-namibia-angola-20261006/inputs/original-components.geojson",
+      "physical-component:dbc2f6bc19725cb3232b8fd44be0761111ccb4df102520f3d951216ea17eff1a": "research/geography/gap-source-namibia-angola-20261006/inputs/original-components.geojson",
+      "physical-component:ebcac3213aa796d0dd4af51f08801e99de7d2380493cde958824a955bc03a37e": "research/geography/gap-source-namibia-angola-20261006/inputs/original-components.geojson",
+      "physical-component:f1c39a77cee3de8978b6afc0a331ff355d936e506a84125ff2ef9fba53e7854a": "research/geography/gap-source-namibia-angola-20261006/inputs/original-components.geojson"
+    }
+  },
+  "sources": [
+    {
+      "id": "ut-onc-p3",
+      "url": "https://maps.lib.utexas.edu/maps/onc/",
+      "role": "Official-hosted U.S. Defense Mapping Agency ONC sheet and catalogue",
+      "vintage": "ONC P-3 compiled 1975, revised 1983; printed scale 1:1,000,000",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "UT Austin provides public access and bibliographic metadata; item-level redistribution terms for the scan were not established."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Original sheet and response headers retained locally; canonical map URL is https://maps.lib.utexas.edu/maps/onc/txu-pclmaps-oclc-8322829_p_3.jpg.",
+      "limit": "The chart is marked not for navigational use and generalized. No georeferencing or subject-level pixel registration was performed; it cannot establish legal boundary authority, exact water edges, seasonality or historic channel identity.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "loc-catalog-and-map-84692090",
+      "url": "https://www.loc.gov/item/84692090/",
+      "role": "Official LOC catalog record and map image, used as geographic-coverage negative control",
+      "vintage": "Cataloged 1971; image title Angola–Zaire Boundary",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "redistributable",
+        "terms": "LOC retained catalog record states its Geography and Map Division digitized collections are free to use and reuse unless a contrary Rights Advisory is present; none is reported in this item record. Credit LOC Geography and Map Division."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "The complete catalog JSON and JP2 are retained locally; original URLs https://www.loc.gov/item/84692090/?fo=json and https://tile.loc.gov/storage-services/service/gmd/gmd8/g8641/g8641f/ct002631.jp2.",
+      "limit": "The catalog title disagrees with the image title. The graticule is north of the candidate/contact corridor, so the map is not evidence for its water or boundary features.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "namibia-na-findaid-1-1-071",
+      "url": "https://nan.gov.na/finding-aids-a",
+      "role": "Official National Archives of Namibia finding aid and linked page scan for Angola Boundary Survey",
+      "vintage": "Cataloged 1927–1928 survey papers; linked scan lists correspondence and Reports 1–4 in 1928",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Public catalog and linked finding-aid scan are accessible; item-specific reproduction terms were not established."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Open the ABS Angola Boundary Survey row on the official index; its linked page scan is retained as namibia-archive-findaid-1-1-71-p2.jpg.",
+      "limit": "Finding-aid page, not underlying reports or field records; it has no candidate coordinates or channel/boundary findings. No archive was contacted.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "namibia-findaid-2-31",
+      "url": "https://nan.gov.na/documents/3219017/3228694/Findaid_2-031.pdf/35bc9ed2-872f-5b81-85e2-633f8848e785",
+      "role": "Official National Archives of Namibia Findaid 2/31 for C.H.L. Hahn Papers, A.0450",
+      "vintage": "Finding aid prepared 1985, revised 2006 and 2017; Box 12 item 3/21/4 cataloged 1926–1927",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "restricted",
+        "terms": "PDF page 2 states © National Archives of Namibia, Attribution-NonCommercial-ShareAlike CC BY-NC-SA."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Retrieve Findaid 2/31 from the official Namibia National Archives URL; a copy and HTTP headers are retained in this research packet.",
+      "limit": "The PDF is a finding aid only. It catalogs Box 12 item 3/21/4 as Angola Boundary Delimitation and Kunene Water Commission but does not supply that underlying item’s contents.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "namibia-commissions-index",
+      "url": "https://nan.gov.na/commissions-and-committees",
+      "role": "Official Namibia National Archives Commissions and Committees index and K finding aid",
+      "vintage": "Catalog lists KAB Angola Boundary and Kunene Water (1926–1927), one unit, ref 1/4/17; ABC (1926–1928), microfilm AMR.0017, accession A.0799, original held in Pretoria",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Public official index and finding aid; item-level redistribution terms were not established."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Open the official Commission index and Finding Aids K at https://nan.gov.na/commissions-and-committees and https://nan.gov.na/finding-aids-k; exact retrieved pages and response headers are retained in this packet.",
+      "limit": "The index describes archival locations and custody only; the underlying KAB/ABC materials were not retrieved. No archive or third party was contacted.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "parent-1268-pair-overlay",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/43b48970e71af2b714d5355aeef9e31e3c99a23f/research/geography/gap-source-namibia-angola-20261006/full-product-comparison.json",
+      "role": "Pinned parent #1268 exact candidate-to-contact overlay matrix (inherited context, not recomputed by this source follow-up)",
+      "vintage": "Parent packet at immutable base commit 43b48970e71af2b714d5355aeef9e31e3c99a23f",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Existing repository evidence artifact; underlying consumed source products and overlay are described in the parent evidence manifest."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Read the exact full-product-comparison.json file at the pinned base commit; this file is separately bound in baseline.files.",
+      "limit": "The 21-by-10 overlay is inherited parent evidence and was not rerun by this follow-up. This packet only aggregates its retained pair rows and preserves that limitation.",
+      "temporal_status": "reference"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/README.md",
+      "bytes": 5933,
+      "sha256": "0d67755babb31a69403cf6f60de387c50b2f3319e840674eb0a95d819d272c13",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/build-assessments.mjs",
+      "bytes": 15318,
+      "sha256": "5cc894654bdf44b3305eac60e0cbd9eadcece7246d8ccbe0a5898ab8efd2d5a8",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/missing-source-control.json",
+      "bytes": 347,
+      "sha256": "801156a441e9de5b11791f230c725610f12325bfcc1e8f075be0c96efcb5c71d",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/negative-control.json",
+      "bytes": 299,
+      "sha256": "ddffc625d31b396c182daa44dd3871ef18c6e214dd4a4439c754182af774e851",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/positive-control.json",
+      "bytes": 337,
+      "sha256": "2e9a77d18d237feb19f983673b4f08e27ad30d638e9c36e20f4a7f1bd9716ffa",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/reproducibility.json",
+      "bytes": 4290,
+      "sha256": "74e7aa2ac3db682bb0bc7d3bd410e7e3c1e55a87ea19cdaf9b4feab64b8fa810",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/loc-angola-south-west-africa-boundary-1971.jp2",
+      "bytes": 3392871,
+      "sha256": "0639c3693cf69d6344a22b22e65f6ce4c564f2dedbfaebeb3a2c5b67330bc207",
+      "hash_kind": "file-bytes",
+      "role": "original-source"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/loc-catalog-http-headers.txt",
+      "bytes": 3511,
+      "sha256": "98b2557aa03668cd31b426adbeee28f448673e0f43839c6a622645d8c8cef34a",
+      "hash_kind": "file-bytes",
+      "role": "original-source"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/loc-catalog-record.json",
+      "bytes": 49744,
+      "sha256": "e61af484a980da92044ba603f029878688ffb7bf7dd6ff15849e5418c6cee650",
+      "hash_kind": "file-bytes",
+      "role": "original-source"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/loc-map-http-headers.txt",
+      "bytes": 560,
+      "sha256": "00e768226576fe83917362258752049d3b9de4eeaebdfecd1a12729753294e71",
+      "hash_kind": "file-bytes",
+      "role": "original-source"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/namibia-archive-findaid-1-1-71-p2-http-headers.txt",
+      "bytes": 428,
+      "sha256": "ad35e63e46ece21a7091b91b3c20b29244be213f15566eadf4c24801b935cf58",
+      "hash_kind": "file-bytes",
+      "role": "original-source"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/namibia-archive-findaid-1-1-71-p2.jpg",
+      "bytes": 172815,
+      "sha256": "f05d873dfb113bc50043956dbc45f17fef1833827391b4259e1dbe9833f7cae1",
+      "hash_kind": "file-bytes",
+      "role": "original-source"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/namibia-commissions-committees-http-headers.txt",
+      "bytes": 731,
+      "sha256": "ae5683550c4f7b7f7d4f51732079103707b33b3b87bb1f516838f08d65b0d2ef",
+      "hash_kind": "file-bytes",
+      "role": "original-source"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/namibia-commissions-committees.html",
+      "bytes": 202007,
+      "sha256": "d1a489caad02935d57cccac3980bb44fcb6183e7489810ba522d2e481bb6372d",
+      "hash_kind": "file-bytes",
+      "role": "original-source"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/namibia-findaid-2-31-http-headers.txt",
+      "bytes": 430,
+      "sha256": "f1fb480b6050d11ce8f816f40ae6b133968a4ff6718cba8d308f207589ccee99",
+      "hash_kind": "file-bytes",
+      "role": "original-source"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/namibia-findaid-2-31.pdf",
+      "bytes": 1297104,
+      "sha256": "9844b23fcb30a458b6251ae641381c986deabb713bd681dd5ec9836726e49983",
+      "hash_kind": "file-bytes",
+      "role": "original-source"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/namibia-finding-aids-k-http-headers.txt",
+      "bytes": 731,
+      "sha256": "dd9093e1cc3f8ecb8986b3cf06df7d5fab5dcae53ebce5776bd0902ad7cd86ec",
+      "hash_kind": "file-bytes",
+      "role": "original-source"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/namibia-finding-aids-k.html",
+      "bytes": 75934,
+      "sha256": "5358474bd3f666dedc7c32ec43801906de91e495d8951630c8e9e779b7bb92b1",
+      "hash_kind": "file-bytes",
+      "role": "original-source"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/namibia-national-archives-finding-aids-a-http-headers.txt",
+      "bytes": 731,
+      "sha256": "95ffb5106626ffd36d31dd841bc0c47470a2fac72b989c20957e4e1746f7a3f8",
+      "hash_kind": "file-bytes",
+      "role": "original-source"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/namibia-national-archives-finding-aids-a.html",
+      "bytes": 67879,
+      "sha256": "f0674c827d1c521fe4ad833562e8400c642c25bff4093623d88f67c8f61eaaca",
+      "hash_kind": "file-bytes",
+      "role": "original-source"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/ut-onc-index-http-headers.txt",
+      "bytes": 390,
+      "sha256": "2616135430daf57c5697ad50eecb34e7d6537aa635431fc233e44b015dc7dfc7",
+      "hash_kind": "file-bytes",
+      "role": "original-source"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/ut-onc-index.html",
+      "bytes": 67435,
+      "sha256": "706732d3ec3fc6110265ed7a16ecbb9510bf1fc9b5cecb5aa6ce9424646613e2",
+      "hash_kind": "file-bytes",
+      "role": "original-source"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/ut-texas-onc-p3-1975-rev1983.jpg",
+      "bytes": 7511209,
+      "sha256": "8069180cb198a985d90aaf6f1bb1be4467e4b27cdd5ffe308798ba6ea820fa4e",
+      "hash_kind": "file-bytes",
+      "role": "original-source"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/ut-texas-onc-p3-http-headers.txt",
+      "bytes": 394,
+      "sha256": "08193de752b256c514d68b67c204a9b21b5fd54a74c10561cd81ce6e7240b718",
+      "hash_kind": "file-bytes",
+      "role": "original-source"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/subject-assessments.json",
+      "bytes": 83905,
+      "sha256": "45a916d8fd1deed66cbd137fa4ecedcd6ddef5b64cdb58cbac89fd5ebacba1e9",
+      "hash_kind": "file-bytes",
+      "role": "generated-evidence"
+    }
+  ],
+  "methods": [
+    {
+      "id": "namibia-angola-source-fit",
+      "kind": "source",
+      "description": "Inspect the dated ONC P-3 chart and official archive catalogs; test unchanged candidate/contact geometry bboxes against the printed sheet frame; aggregate the exact retained parent candidate/contact overlay matrix without rerunning the geometry overlay.",
+      "software": "Node.js 24.19.0; built-in JSON/crypto/filesystem plus git show of the pinned immutable base commit",
+      "units": "longitude/latitude degrees; Boolean frame relations; inherited feature-pair counts"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "component_count",
+      "value": 21,
+      "unit": "physical-component features",
+      "vintage": "current",
+      "evaluation_commit": "43b48970e71af2b714d5355aeef9e31e3c99a23f",
+      "input_sha256": "f99f334877c309101afafe56210e40ab2093948e686ec39f98d9c085a42622b9"
+    },
+    {
+      "id": "contact_count",
+      "value": 10,
+      "unit": "source-contact features",
+      "vintage": "current",
+      "evaluation_commit": "43b48970e71af2b714d5355aeef9e31e3c99a23f",
+      "input_sha256": "472ee9003155eb62c9e9aa7bfdff0e28dfab13a8c1cc18b2a30ca6b705cc2f14"
+    },
+    {
+      "id": "subject_bboxes_within_onc_p3_frame",
+      "value": 31,
+      "unit": "component and contact bboxes",
+      "vintage": "current",
+      "evaluation_commit": "43b48970e71af2b714d5355aeef9e31e3c99a23f",
+      "input_sha256": "45a916d8fd1deed66cbd137fa4ecedcd6ddef5b64cdb58cbac89fd5ebacba1e9"
+    },
+    {
+      "id": "parent_contact_pair_rows",
+      "value": 210,
+      "unit": "candidate/contact geometry pairs",
+      "vintage": "current",
+      "evaluation_commit": "43b48970e71af2b714d5355aeef9e31e3c99a23f",
+      "input_sha256": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234"
+    },
+    {
+      "id": "parent_positive_area_contact_pairs",
+      "value": 49,
+      "unit": "pairs",
+      "vintage": "current",
+      "evaluation_commit": "43b48970e71af2b714d5355aeef9e31e3c99a23f",
+      "input_sha256": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234"
+    },
+    {
+      "id": "parent_line_only_contact_pairs",
+      "value": 0,
+      "unit": "pairs",
+      "vintage": "current",
+      "evaluation_commit": "43b48970e71af2b714d5355aeef9e31e3c99a23f",
+      "input_sha256": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234"
+    },
+    {
+      "id": "parent_point_only_contact_pairs",
+      "value": 0,
+      "unit": "pairs",
+      "vintage": "current",
+      "evaluation_commit": "43b48970e71af2b714d5355aeef9e31e3c99a23f",
+      "input_sha256": "717653032714e0346f3c3da18ee5e07ae642af435de0f453e3b06237d4933234"
+    }
+  ],
+  "summaries": [
+    {
+      "metric_id": "component_count",
+      "value": 21,
+      "unit": "physical-component features"
+    },
+    {
+      "metric_id": "contact_count",
+      "value": 10,
+      "unit": "source-contact features"
+    },
+    {
+      "metric_id": "subject_bboxes_within_onc_p3_frame",
+      "value": 31,
+      "unit": "component and contact bboxes"
+    },
+    {
+      "metric_id": "parent_contact_pair_rows",
+      "value": 210,
+      "unit": "candidate/contact geometry pairs"
+    },
+    {
+      "metric_id": "parent_positive_area_contact_pairs",
+      "value": 49,
+      "unit": "pairs"
+    },
+    {
+      "metric_id": "parent_line_only_contact_pairs",
+      "value": 0,
+      "unit": "pairs"
+    },
+    {
+      "metric_id": "parent_point_only_contact_pairs",
+      "value": 0,
+      "unit": "pairs"
+    }
+  ],
+  "conclusions": [
+    {
+      "source_ids": [
+        "ut-onc-p3"
+      ],
+      "status": "supported",
+      "text": "All 21 candidate component and ten source-contact bboxes fall within the ONC P-3 sheet frame. This is regional cartographic coverage only; no subject is individually identified as an exact water or boundary feature."
+    },
+    {
+      "source_ids": [
+        "loc-catalog-and-map-84692090"
+      ],
+      "status": "supported",
+      "text": "LOC catalog record is titled Angola–South-West Africa boundary, while retained map image is Angola–Zaire Boundary; its approximate 0–12°S latitude frame does not overlap any candidate or contact bbox."
+    },
+    {
+      "source_ids": [
+        "namibia-na-findaid-1-1-071",
+        "namibia-findaid-2-31"
+      ],
+      "status": "supported",
+      "text": "Official finding aid documents a one-unit Angola Boundary Survey file and four 1928 reports, but report contents remain unavailable in materials inspected."
+    },
+    {
+      "source_ids": [
+        "ut-onc-p3",
+        "namibia-na-findaid-1-1-071"
+      ],
+      "status": "unresolved",
+      "text": "Historic/current water presence, exact channel edges, seasonality, and per-component physical interpretation remain unresolved."
+    },
+    {
+      "source_ids": [
+        "ut-onc-p3",
+        "loc-catalog-and-map-84692090",
+        "namibia-na-findaid-1-1-071",
+        "namibia-commissions-index"
+      ],
+      "status": "unresolved",
+      "text": "International boundary authority, executed processing cause, and territorial assignment remain unresolved."
+    },
+    {
+      "source_ids": [
+        "parent-1268-pair-overlay"
+      ],
+      "status": "supported",
+      "text": "The pinned parent comparison includes the full 21-by-10 candidate/contact matrix: 210 pairs, 49 positive-area intersections, and zero line-only or point-only contacts. This follow-up aggregates those retained rows per candidate and per contact without rerunning the overlay."
+    }
+  ],
+  "stages": {
+    "research": "complete",
+    "implementation": "not-proposed",
+    "geographic_approval": "unapproved"
+  },
+  "commands": [
+    "node research/geography/namibia-angola-official-history-followup-20261007/build-assessments.mjs",
+    "node scripts/evidence-quality.mjs research/geography/namibia-angola-official-history-followup-20261007/evidence-quality.json"
+  ],
+  "validation": [
+    {
+      "evidence_path": "research/geography/namibia-angola-official-history-followup-20261007/positive-control.json",
+      "kind": "positive-control",
+      "method_id": "namibia-angola-source-fit",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "research/geography/namibia-angola-official-history-followup-20261007/negative-control.json",
+      "kind": "negative-control",
+      "method_id": "namibia-angola-source-fit",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "research/geography/namibia-angola-official-history-followup-20261007/missing-source-control.json",
+      "kind": "missing-source-control",
+      "method_id": "namibia-angola-source-fit",
+      "outcome": "passed"
+    },
+    {
+      "evidence_path": "research/geography/namibia-angola-official-history-followup-20261007/reproducibility.json",
+      "kind": "reproducibility",
+      "method_id": "namibia-angola-source-fit",
+      "outcome": "passed"
+    }
+  ],
+  "change_receipts": [
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/README.md",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/build-assessments.mjs",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/missing-source-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/negative-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/positive-control.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/reproducibility.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/loc-angola-south-west-africa-boundary-1971.jp2",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/loc-catalog-http-headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/loc-catalog-record.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/loc-map-http-headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/namibia-archive-findaid-1-1-71-p2-http-headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/namibia-archive-findaid-1-1-71-p2.jpg",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/namibia-commissions-committees-http-headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/namibia-commissions-committees.html",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/namibia-findaid-2-31-http-headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/namibia-findaid-2-31.pdf",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/namibia-finding-aids-k-http-headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/namibia-finding-aids-k.html",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/namibia-national-archives-finding-aids-a-http-headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/namibia-national-archives-finding-aids-a.html",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/ut-onc-index-http-headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/ut-onc-index.html",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/ut-texas-onc-p3-1975-rev1983.jpg",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/ut-texas-onc-p3-http-headers.txt",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/subject-assessments.json",
+      "status": "added"
+    },
+    {
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/evidence-quality.json",
+      "status": "added"
+    }
+  ],
+  "metric_bindings": [
+    {
+      "metric_id": "component_count",
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/subject-assessments.json",
+      "json_pointer": "/summary/component_count"
+    },
+    {
+      "metric_id": "contact_count",
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/subject-assessments.json",
+      "json_pointer": "/summary/contact_count"
+    },
+    {
+      "metric_id": "subject_bboxes_within_onc_p3_frame",
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/subject-assessments.json",
+      "json_pointer": "/summary/subjects_inside_sheet_frame"
+    },
+    {
+      "metric_id": "parent_contact_pair_rows",
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/subject-assessments.json",
+      "json_pointer": "/summary/inherited_candidate_contact_pairs"
+    },
+    {
+      "metric_id": "parent_positive_area_contact_pairs",
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/subject-assessments.json",
+      "json_pointer": "/summary/inherited_positive_area_candidate_contact_pairs"
+    },
+    {
+      "metric_id": "parent_line_only_contact_pairs",
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/subject-assessments.json",
+      "json_pointer": "/summary/inherited_line_only_candidate_contact_pairs"
+    },
+    {
+      "metric_id": "parent_point_only_contact_pairs",
+      "path": "research/geography/namibia-angola-official-history-followup-20261007/subject-assessments.json",
+      "json_pointer": "/summary/inherited_point_only_candidate_contact_pairs"
+    }
+  ]
+}
