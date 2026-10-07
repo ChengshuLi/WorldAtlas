@@ -46,9 +46,9 @@
       "sha256": "37b74dc28f2d092122b41be4032be7dfed67c1921a84e41b303315bc1dff476a"
     }
   ],
-  "producer_bytes": 16145,
+  "producer_bytes": 16263,
   "producer_path": "reproduce_additional.py",
-  "producer_sha256": "f0396ab90a748cb52fec0944b383d97f87deae677d3e5b52e4610452c9904436",
+  "producer_sha256": "f91e04acda0683bd56b2376d49bb98906c30755068d56569cf50041a01a1b6f1",
   "purpose": "Frozen input/code bytes for two complete candidate-family JRC and official-boundary source screening runs",
   "runner_bytes": 3518,
   "runner_path": "run_additional_twice.py",
@@ -58,5 +58,8 @@
     "rasterio": "1.4.3",
     "shapely": "2.1.2"
   },
-  "version": 1
+  "version": 1,
+  "pin_checker_path": "pinned_bytes.py",
+  "pin_checker_bytes": 393,
+  "pin_checker_sha256": "ea7a2b945b566084e0d06477a0e16e7f0e9d476b3bf88974c0fde32f6fd1d5c7"
 }

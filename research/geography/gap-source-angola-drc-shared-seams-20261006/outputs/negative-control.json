@@ -5,5 +5,6 @@
   "method_id": "source-assessment-generator",
   "mutated_source": "COD consumed simplified product, one interior byte flipped in-memory",
   "outcome": "passed",
-  "rejected": true
+  "rejected": true,
+  "rejection": "COD consumed simplified product does not match its full-file byte pin"
 }

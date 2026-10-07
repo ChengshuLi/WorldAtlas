@@ -7,6 +7,7 @@ from rasterio.features import geometry_mask
 from rasterio.windows import Window
 from shapely.geometry import shape, mapping, box, LineString
 from shapely import to_wkb
+from pinned_bytes import verify_pinned_bytes
 
 ROOT = pathlib.Path(__file__).resolve().parent
 OUT = pathlib.Path(os.environ.get('OUTPUT_DIR', ROOT / 'outputs'))
@@ -60,8 +61,7 @@ def load_raster(year, receipt, features):
     path = ROOT / 'sources/jrc-gsw-v1.4' / filename
     pin = next(row for row in receipt['products'] if row['title'].endswith(str(year)))
     raw = path.read_bytes()
-    if len(raw) != pin['bytes'] or sha(raw) != pin['sha256']:
-        raise ValueError(f'JRC {year} raster does not match the full-byte pin')
+    verify_pinned_bytes(raw, pin['bytes'], pin['sha256'], f'JRC {year} raster')
     with rasterio.open(path) as ds:
         if ds.crs.to_epsg() != 4326 or ds.width != 40000 or ds.height != 40000:
             raise ValueError(f'Unexpected JRC {year} raster coordinate system or shape')
@@ -106,10 +106,12 @@ packet = ROOT
 freeze = readj(packet / 'inputs/additional-freeze.json')
 if sha(pathlib.Path(__file__).read_bytes()) != freeze['producer_sha256']:
     raise ValueError('Producer differs from frozen code bytes')
+pin_checker = packet / 'pinned_bytes.py'
+if pin_checker.stat().st_size != freeze['pin_checker_bytes'] or sha(pin_checker.read_bytes()) != freeze['pin_checker_sha256']:
+    raise ValueError('Shared pin checker differs from frozen code bytes')
 for pin in freeze['inputs']:
     raw = (packet / pin['path']).read_bytes()
-    if len(raw) != pin['bytes'] or sha(raw) != pin['sha256']:
-        raise ValueError(f'Input differs from frozen bytes: {pin["path"]}')
+    verify_pinned_bytes(raw, pin['bytes'], pin['sha256'], f'Frozen input {pin["path"]}')
 components = readj(packet / 'inputs/component-features.geojson')['features']
 contacts = readj(packet / 'inputs/contact-features.geojson')['features']
 roster = readj(packet / 'inputs/family-roster.json')
@@ -156,8 +158,7 @@ law_receipt = readj(packet / 'inputs/angola-law-14-24-retrieval.json')
 law_pin = law_receipt['products'][0]
 law_path = packet / 'sources/official-angola/angola-law-14-24-official-gazette.pdf'
 law_raw = law_path.read_bytes()
-if len(law_raw) != law_pin['bytes'] or sha(law_raw) != law_pin['sha256']:
-    raise ValueError('Official Angolan legal source does not match full-byte pin')
+verify_pinned_bytes(law_raw, law_pin['bytes'], law_pin['sha256'], 'Official Angolan legal source')
 parallels = [
     {'id': 'parallel_8_05_46_6S', 'latitude': -(8 + 5/60 + 46.6/3600), 'legal_description': 'Article 244: Rio Lola to Rio Combe; this parallel to intersection with Rio Uhamba.'},
     {'id': 'parallel_8S', 'latitude': -8.0, 'legal_description': 'Article 244: Rio Camanguna to the 8th parallel and along it to Rio Lucaia; also Rio Cuengo to the 8th parallel and along it to Rio Luita.'},

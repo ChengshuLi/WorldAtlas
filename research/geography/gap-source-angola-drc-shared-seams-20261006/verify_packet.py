@@ -4,7 +4,9 @@ import gzip,hashlib,json,subprocess,sys,pathlib,os
 ROOT=pathlib.Path(__file__).resolve().parents[3]
 PACKET=ROOT/'research/geography/gap-source-angola-drc-shared-seams-20261006'
 sys.path.insert(0,str(ROOT/'scripts'))
+sys.path.insert(0,str(PACKET))
 from evidence.immutable import canonical_json,sha256
+from pinned_bytes import verify_pinned_bytes
 BASE='79ffb2ed04702e16f009e4675a8d74ef9bd09d4f'
 def readj(p):return json.loads(pathlib.Path(p).read_text())
 def git(path):return subprocess.check_output(['git','-C',str(ROOT),'show',f'{BASE}:{path}'])
@@ -48,8 +50,13 @@ positive={'method_id':'source-assessment-generator','kind':'positive-control','o
 (PACKET/'outputs/positive-control.json').write_text(json.dumps(positive,sort_keys=True,indent=2)+'\n')
 # Negative control: any byte mutation must be rejected by the pinned full-file check.
 original=(PACKET/receipt['sources'][0]['saved_path']).read_bytes(); altered=bytearray(original);altered[len(altered)//2]^=1
-assert sha256(altered)!=receipt['sources'][0]['whole_sha256']
-negative={'method_id':'source-assessment-generator','kind':'negative-control','outcome':'passed','mutated_source':'COD consumed simplified product, one interior byte flipped in-memory','expected_sha256':receipt['sources'][0]['whole_sha256'],'altered_sha256':sha256(altered),'rejected':sha256(altered)!=receipt['sources'][0]['whole_sha256']}
+try:
+ verify_pinned_bytes(altered,receipt['sources'][0]['whole_bytes'],receipt['sources'][0]['whole_sha256'],'COD consumed simplified product')
+ rejected=False; rejection=None
+except ValueError as error:
+ rejected=True; rejection=str(error)
+assert rejected
+negative={'method_id':'source-assessment-generator','kind':'negative-control','outcome':'passed','mutated_source':'COD consumed simplified product, one interior byte flipped in-memory','expected_sha256':receipt['sources'][0]['whole_sha256'],'altered_sha256':sha256(altered),'rejected':rejected,'rejection':rejection}
 (PACKET/'outputs/negative-control.json').write_text(json.dumps(negative,sort_keys=True,indent=2)+'\n')
 # Run-level proof is written after two completed final producer executions.
 first=readj(PACKET/'outputs/run-one-digests.json'); second=readj(PACKET/'outputs/run-two-digests.json')
@@ -68,6 +75,8 @@ for row in freeze['inputs']:
 for key in ('producer','runner'):
  raw=(PACKET/freeze[f'{key}_path']).read_bytes()
  assert len(raw)==freeze[f'{key}_bytes'] and sha256(raw)==freeze[f'{key}_sha256']
+checker=(PACKET/'pinned_bytes.py').read_bytes()
+assert len(checker)==freeze['pin_checker_bytes'] and sha256(checker)==freeze['pin_checker_sha256']
 extra=readj(PACKET/'outputs/physical-water-authority-assessment.json')
 assert len(extra['components'])==10 and len(extra['contacts'])==5
 assert {row['contact_id'] for row in extra['contacts']}==set(extra['contact_ids'])
@@ -88,9 +97,14 @@ source_mutations=[]
 for rel in ('sources/jrc-gsw-v1.4/jrc-gsw-yearly-2018-0000320000-0000760000.tif',
             'sources/official-angola/angola-law-14-24-official-gazette.pdf'):
  original=(PACKET/rel).read_bytes(); changed=bytearray(original); changed[len(changed)//2]^=1
- expected=next(x['sha256'] for x in freeze['inputs'] if x['path']==rel)
- assert sha256(changed)!=expected
- source_mutations.append({'path':rel,'expected_sha256':expected,'altered_sha256':sha256(changed),'rejected':True})
+ pin=next(x for x in freeze['inputs'] if x['path']==rel)
+ try:
+  verify_pinned_bytes(changed,pin['bytes'],pin['sha256'],rel)
+  rejected=False; rejection=None
+ except ValueError as error:
+  rejected=True; rejection=str(error)
+ assert rejected
+ source_mutations.append({'path':rel,'expected_sha256':pin['sha256'],'altered_sha256':sha256(changed),'rejected':rejected,'rejection':rejection})
 additional={'method_id':'jrc-gsw-annual-pixel-observation','kind':'positive-control','outcome':'passed',
  'checks':['JRC 2018/2019 exact full-file byte pins','Frozen producer and runner hashes','Ten candidate component outputs and all five contact IDs/geometries','Actual two successful full executions with byte-identical output'],
  'output_sha256':sha256((PACKET/'outputs/physical-water-authority-assessment.json').read_bytes())}
