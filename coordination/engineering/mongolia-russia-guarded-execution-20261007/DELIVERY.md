@@ -1,0 +1,13 @@
+# Guarded execution delivery for #1421
+
+The scientific execution freeze is `2c8ff13e141498887676b6983fff449d83e0d504`, durably retained by the `evidence-1421-science-2c8ff13e141498887676b6983fff449d83e0d504` tag. Both complete comparison subprocesses exited0. Run one took69.685571417s with369164288B maximum RSS; run two took80.887989791s with362594304B maximum RSS. Actual commands, isolated Python flags, cwd, PID, timestamps and stdout/stderr are ordinary files under `run-one/` and `run-two/`.
+
+Both whole comparison files and whole input/runtime receipts are byte-identical. All three full48-component relation tables, every retained source property, method field and scientific scalar match the complete original accepted comparison JSON at merge0796a3a86616aa87e4b89cbd6ce2ec8beb727d07; only JSON formatting differs. The eight contact identities and original full source rosters remain. Russia's2327actual versus2328advertised feature mismatch remains unchanged.
+
+The README is the unchanged scientific-freeze preparation document; this delivery document records the later actual outcome. The17 pre-import/main-entry controls and six tiny literal method controls are separate from the qualifying pair. Full stored-result/readback verification performs no third spatial comparison.
+
+Metadata-only finalization was frozen atc0cc62c7c4226d5cfc3df924b63fe81011c6ed55 and actually executed through `record-finalizer.py`; its terminal receipt remains under `v/`. Final ordinary descriptor annotation includes explicit original encoded/decoded fields for both actual consumed gzip aliases. The required old packet manifest and immutable-helper pins are genuine0796baseline bodies, separately counted as127baseline descriptors. No scientific read or operation was added by these issue/history bindings.
+
+Reproduce science from a detached exact2c8 checkout with the existing pinned runtime. Run `record.py --commit 2c8ff13e141498887676b6983fff449d83e0d504 --name <fresh-safe-name>` using the primary Python with `-I -S -B`; the recorder launches the exact scientific interpreter with `-I -S -B` and the fixed absent bytecode prefix shown in the actual execution receipts. Authenticate every retained runtime origin against its complete alias; The306 macOS system shared-cache image paths are platform dependencies, not claimed ordinary whole-body custody.
+
+This correction establishes guarded executed provenance and repeatability. It adds no geographic conclusion, location edit, source assignment, physical land/water finding, ownership/cause/repair approval or deployment. Original source/date/license/precision/legal/lineage limitations remain. The old1417 ignored-cache preservation has no recovered exact receipt and is not claimed recovered.

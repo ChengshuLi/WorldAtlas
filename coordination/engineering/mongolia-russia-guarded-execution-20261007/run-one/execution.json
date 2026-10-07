@@ -1,0 +1,44 @@
+{
+  "execution_commit": "2c8ff13e141498887676b6983fff449d83e0d504",
+  "mode": "complete original48+8 comparison",
+  "command": [
+    "/usr/bin/time",
+    "-l",
+    "/Users/chengshuli/world-atlas-workspace/.cache/991-author-slot-preserved-20261006-44ed0b44/ignored-cache/reference-repair-991/runtime-rasterio-1.4.3-py312-arm64/bin/python",
+    "-I",
+    "-S",
+    "-B",
+    "-X",
+    "pycache_prefix=/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/.cache/1421-never-materialized-bytecode",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/coordination/engineering/mongolia-russia-guarded-execution-20261007/run.py",
+    "--commit",
+    "2c8ff13e141498887676b6983fff449d83e0d504",
+    "--out",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/.cache/1421-2c8-run-one"
+  ],
+  "cwd": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work",
+  "environment": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "isolated_python": true
+  },
+  "actual_start_utc": "2026-10-07T18:43:36.976785+00:00",
+  "actual_end_utc": "2026-10-07T18:44:46.664181+00:00",
+  "elapsed_seconds": 69.685571417,
+  "pid": 76904,
+  "exit_code": 0,
+  "terminal_files": {
+    "stdout": {
+      "bytes": 146,
+      "sha256": "83cd777d1dc3e47aea4135937ac6d9e806bab44cf915c24035759f042194813b"
+    },
+    "stderr": {
+      "bytes": 777,
+      "sha256": "bedfbfa3dfdcf6975521d18176bc01bcebc4156099536afe40ae09818a7eb016"
+    }
+  },
+  "recorder_sha256": "b6e40af6347adb8b156ca3bd1d8342761fa65b99b9a562bf7be8a6aeab2ab18e",
+  "output_directory": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/20bafd4a10886b69abb8776943965282fdf2647b369891b5eb49bc9f379c7634/work/.cache/1421-2c8-run-one",
+  "limits": [
+    "Native time/RSS is retained literally in stderr. Receipt records actual subprocess terminal status; a failed run is not scientific PASS."
+  ]
+}
