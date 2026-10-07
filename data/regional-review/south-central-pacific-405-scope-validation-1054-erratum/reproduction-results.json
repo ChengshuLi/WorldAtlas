@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "affected_merge": "249e396178cfc160fd547ec4487c5d94832fc9af",
+  "baseline_commit": "a57085b7a5cfdbe3c1e0e4b0cd2e07c6240899fc",
+  "original_scope_sha256": "122274d0c0e4e13a29167e2f1bf2cd4c9eaef04a2fc97e0c05762a3471657383",
+  "runs": [
+    {
+      "run": "run-1",
+      "returncode": 0,
+      "stdout": "{\n  \"scope_ids\": 23,\n  \"locations\": 23,\n  \"provinces\": 23,\n  \"areas\": 10,\n  \"natural_earth_comparator_features\": 25,\n  \"geometry_rows\": 23,\n  \"output\": \"/private/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1281-run-1-ubwf3pwh/repo/data/regional-review/regional-review-14a242c4cb0781a7/geometry-comparison.json\"\n}",
+      "outputs": {
+        "geometry-comparison.json": "e6e9b208e6f3ccbe5c2dfcd78cb2852cd341e32c92ea2546b70454e6299812d0",
+        "geometry-controls.json": "c686d154be67e2463b28e5828a5d75db446f834213904ed159dfcd42de360bce",
+        "geocode-screen.json": "3f1a540ea0898df35ffba733dda8af81cf1287ebbfa5169d9dfd251b6166c4e9"
+      }
+    },
+    {
+      "run": "run-2",
+      "returncode": 0,
+      "stdout": "{\n  \"scope_ids\": 23,\n  \"locations\": 23,\n  \"provinces\": 23,\n  \"areas\": 10,\n  \"natural_earth_comparator_features\": 25,\n  \"geometry_rows\": 23,\n  \"output\": \"/private/var/folders/rc/z6fcf4cd63qg214jx8vdg9pw0000gn/T/worldatlas-1281-run-2-6dgmd38r/repo/data/regional-review/regional-review-14a242c4cb0781a7/geometry-comparison.json\"\n}",
+      "outputs": {
+        "geometry-comparison.json": "e6e9b208e6f3ccbe5c2dfcd78cb2852cd341e32c92ea2546b70454e6299812d0",
+        "geometry-controls.json": "c686d154be67e2463b28e5828a5d75db446f834213904ed159dfcd42de360bce",
+        "geocode-screen.json": "3f1a540ea0898df35ffba733dda8af81cf1287ebbfa5169d9dfd251b6166c4e9"
+      }
+    }
+  ],
+  "legacy_duplicate_control": {
+    "raw_count": 24,
+    "unique_count": 23,
+    "verifier_returncode": 0,
+    "accepted": true
+  },
+  "validator_controls": [
+    {
+      "control": "original-valid",
+      "expected": "pass",
+      "actual": {
+        "status": "passed",
+        "raw_subject_count": 23,
+        "unique_subject_count": 23,
+        "location_rows": 23,
+        "parent_rows": 23,
+        "area_rows": 10,
+        "scope_sha256": "122274d0c0e4e13a29167e2f1bf2cd4c9eaef04a2fc97e0c05762a3471657383"
+      }
+    },
+    {
+      "control": "24-entry-duplicate",
+      "expected": "reject",
+      "actual": "rejected",
+      "reason": "raw roster count 24 != 23",
+      "fixture_sha256": "79aa72fcae579037fcf69d90e0097dc50b253d2a0d114970ede7f44f60963dd3",
+      "replay_suppressed": true,
+      "result_file_count": 0
+    },
+    {
+      "control": "equal-length-duplicate-replacement-rehashed",
+      "expected": "reject",
+      "actual": "rejected",
+      "reason": "duplicate frozen subject",
+      "fixture_sha256": "7cd8fd7ddfa0d06d23f0d94a66077b277b805d2a21460ae30c2500029701892b",
+      "replay_suppressed": true,
+      "result_file_count": 0
+    },
+    {
+      "control": "missing-subject",
+      "expected": "reject",
+      "actual": "rejected",
+      "reason": "raw roster count 22 != 23",
+      "fixture_sha256": "681035df5cf4291365dcded24ae5bff4102784891c9292fc9d7f83f7d50dea6b",
+      "replay_suppressed": true,
+      "result_file_count": 0
+    },
+    {
+      "control": "foreign-subject",
+      "expected": "reject",
+      "actual": "rejected",
+      "reason": "roster differs from frozen issue contract: missing=['gb:KIR:ADM1:97431129B35506555718846']; foreign=['FOREIGN-SUBJECT']",
+      "fixture_sha256": "013961b53bc57ccc3b0609c458dbac51cf65566d6493e8cfe54bcba62b68148d",
+      "replay_suppressed": true,
+      "result_file_count": 0
+    },
+    {
+      "control": "wrong-declared-count",
+      "expected": "reject",
+      "actual": "rejected",
+      "reason": "declared location_count differs from raw roster",
+      "fixture_sha256": "8df8a68c7f9044596216fc74c2650a25d04b573d9ccd33995ccf2d553491a736",
+      "replay_suppressed": true,
+      "result_file_count": 0
+    },
+    {
+      "control": "missing-location-row",
+      "expected": "reject",
+      "actual": "rejected",
+      "reason": "location row count/IDs mismatch",
+      "replay_suppressed": true,
+      "result_file_count": 0
+    },
+    {
+      "control": "wrong-parent-crosswalk",
+      "expected": "reject",
+      "actual": "rejected",
+      "reason": "province row IDs/count mismatch",
+      "replay_suppressed": true,
+      "result_file_count": 0
+    },
+    {
+      "control": "area-member-count-mismatch",
+      "expected": "reject",
+      "actual": "rejected",
+      "reason": "area row count/uniqueness mismatch: atlas:macro-review:area:0bf7d87aca905fea",
+      "replay_suppressed": true,
+      "result_file_count": 0
+    },
+    {
+      "control": "area-member-substitution",
+      "expected": "reject",
+      "actual": "rejected",
+      "reason": "area-assessments.csv bytes differ from immutable original",
+      "replay_suppressed": true,
+      "result_file_count": 0
+    }
+  ],
+  "all_outputs_match_original_and_each_other": true,
+  "scope_outputs_written_before_guard_on_negative_controls": false
+}

@@ -1,0 +1,23 @@
+# Pacific #405 frozen-scope validation erratum
+
+This packet repairs a validation defect in the #1054 evidence verifier. It does not correct or approve any geography. The native roster is the exact 23 identifiers pinned by issue #1281; province and area rows are derived context, not extra native subjects.
+
+## Subject source roles and limits
+
+The retained #405 packet at merge `249e396178cfc160fd547ec4487c5d94832fc9af` is the primary evidence basis for this validator. It contains 11 Cook Islands locations, five French Polynesia locations, a Pitcairn group comparator, four U.S. Minor Outlying Islands locations, one geoBoundaries Chile ADM3 feature, and one geoBoundaries Kiribati ADM1 feature. The Natural Earth comparison extract is from commit `ca96624a56bd078437bca8184e78163e5039ad19` (2022-06-02), generalized 1:10m and public domain. It is a comparator, not a statutory boundary source or completeness proof. Its Pitcairn feature represents a four-island group, not a Henderson shoreline.
+
+The Chile feature is geoBoundaries ADM3 vintage 2020, CC BY 3.0 IGO as recorded in the retained metadata. Chilean Law 16,441 art. 1 places Isla de Pascua and Sala y Gómez in the same department/commune; this legal relationship does not supply current vertices. The Kiribati feature is geoBoundaries ADM1 vintage 2017, OSM/Wambacher source, ODbL 1.0 per retained metadata. The Line Islands feature is multi-part, but the source's current administrative meaning and completeness are unresolved.
+
+Official service and context sources were inspected for neighboring granularity: Cook Islands MFEM's domestic shipping policy groups named islands into Northern and Southern service groups; French Polynesia DPAM identifies four archipelagos and DCA provides planning subdivisions; UNESCO identifies Henderson as the largest of the four Pitcairn group islands; U.S. Fish and Wildlife refuge pages distinguish terrestrial from submerged area at Baker, Howland and Jarvis and describe Palmyra's islets/lagoons; Kiribati NSO and Meteorological Service enumerate Line/Phoenix island groups. These are service, legal, conservation or physical-context sources; none independently validates all polygon boundaries or the atlas's island completeness.
+
+External pages were retrieved on 2026-10-06 America/Los_Angeles (2026-10-07 UTC). Their HTTP-body SHA-256, response metadata, and restoration URLs are recorded in `external-source-fingerprints.json`. Raw page bodies were not retained because their reuse terms were not established; restoration is a fresh GET from the recorded final URL. The Chile legal HTML endpoint currently returned a 264-byte response; the legal statement was independently read via the official LeyChile page and is cited in the retained packet. All external response hashes are retrieval fingerprints, not source-vintage or truth guarantees.
+
+## Validator contract and decisions
+
+`scope-validator.py` validates the raw roster before any verifier success output: exactly 23 list entries; 23 unique string identities; exact equality to the issue-pinned roster; exact equality to `location_count`; exact complete scope-file hash; exact 23 location rows and IDs; exact province and area IDs and declared counts; and the explicit location-to-parent plus area-membership crosswalk retained in the packet. It rejects a duplicate even when the fixture's own content hash has been recomputed. The underlying old verifier's conversion to a set is retained only to reproduce the original finding; it is never relied upon as the repaired gate.
+
+The original algorithm is executed from its immutable #1054 merge in a temporary repository overlay, with its pinned baseline files and helper modules obtained from the stated Git commits. Each valid run has a separate fresh output directory. Expected outputs are byte-compared to the preserved originals and to one another. Negative controls include a 24-entry duplicate, an equal-length duplicate/missing replacement with recomputed scope hash, missing and foreign identities, wrong declared count, and parent/area crosswalk corruption. Controls must fail the new validator before output creation; the old verifier's acceptance of the original 24-entry defect is also re-executed.
+
+## Unresolved findings and handoffs
+
+No legal/current boundary, shoreline completeness, source coverage, administrative membership beyond retained source assertions, or canonical parent is certified here. Existing follow-ups #1052, #1058, #1059, #1060, #1061 and #611 remain authoritative for their separate source work. Any actual source or hierarchy corrections require their own bounded engineering work item and review. This packet makes no production, import, approval, deployment, or publication change.

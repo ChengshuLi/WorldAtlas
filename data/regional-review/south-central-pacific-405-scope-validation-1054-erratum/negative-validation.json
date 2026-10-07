@@ -1,0 +1,85 @@
+{
+  "method_id": "frozen-scope-gate",
+  "kind": "code",
+  "outcome": "passed",
+  "checks": [
+    {
+      "control": "24-entry-duplicate",
+      "expected": "reject",
+      "actual": "rejected",
+      "reason": "raw roster count 24 != 23",
+      "fixture_sha256": "79aa72fcae579037fcf69d90e0097dc50b253d2a0d114970ede7f44f60963dd3",
+      "replay_suppressed": true,
+      "result_file_count": 0
+    },
+    {
+      "control": "equal-length-duplicate-replacement-rehashed",
+      "expected": "reject",
+      "actual": "rejected",
+      "reason": "duplicate frozen subject",
+      "fixture_sha256": "7cd8fd7ddfa0d06d23f0d94a66077b277b805d2a21460ae30c2500029701892b",
+      "replay_suppressed": true,
+      "result_file_count": 0
+    },
+    {
+      "control": "missing-subject",
+      "expected": "reject",
+      "actual": "rejected",
+      "reason": "raw roster count 22 != 23",
+      "fixture_sha256": "681035df5cf4291365dcded24ae5bff4102784891c9292fc9d7f83f7d50dea6b",
+      "replay_suppressed": true,
+      "result_file_count": 0
+    },
+    {
+      "control": "foreign-subject",
+      "expected": "reject",
+      "actual": "rejected",
+      "reason": "roster differs from frozen issue contract: missing=['gb:KIR:ADM1:97431129B35506555718846']; foreign=['FOREIGN-SUBJECT']",
+      "fixture_sha256": "013961b53bc57ccc3b0609c458dbac51cf65566d6493e8cfe54bcba62b68148d",
+      "replay_suppressed": true,
+      "result_file_count": 0
+    },
+    {
+      "control": "wrong-declared-count",
+      "expected": "reject",
+      "actual": "rejected",
+      "reason": "declared location_count differs from raw roster",
+      "fixture_sha256": "8df8a68c7f9044596216fc74c2650a25d04b573d9ccd33995ccf2d553491a736",
+      "replay_suppressed": true,
+      "result_file_count": 0
+    },
+    {
+      "control": "missing-location-row",
+      "expected": "reject",
+      "actual": "rejected",
+      "reason": "location row count/IDs mismatch",
+      "replay_suppressed": true,
+      "result_file_count": 0
+    },
+    {
+      "control": "wrong-parent-crosswalk",
+      "expected": "reject",
+      "actual": "rejected",
+      "reason": "province row IDs/count mismatch",
+      "replay_suppressed": true,
+      "result_file_count": 0
+    },
+    {
+      "control": "area-member-count-mismatch",
+      "expected": "reject",
+      "actual": "rejected",
+      "reason": "area row count/uniqueness mismatch: atlas:macro-review:area:0bf7d87aca905fea",
+      "replay_suppressed": true,
+      "result_file_count": 0
+    },
+    {
+      "control": "area-member-substitution",
+      "expected": "reject",
+      "actual": "rejected",
+      "reason": "area-assessments.csv bytes differ from immutable original",
+      "replay_suppressed": true,
+      "result_file_count": 0
+    }
+  ],
+  "invalid_inputs_rejected_before_reproduction_outputs": true
+}

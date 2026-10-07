@@ -1,0 +1,26 @@
+{
+  "location_id": "gb:CHL:ADM3:31580391B33082267781919",
+  "method": {
+    "version": "worldatlas-evidence-geometry-v1",
+    "axis_order": "longitude-latitude",
+    "crs": "EPSG:4326",
+    "area_method": "WGS84 straight-source-edge ellipsoidal integral",
+    "area_units": "m2",
+    "distance_method": "WGS84 inverse geodesic",
+    "distance_units": "m"
+  },
+  "helper_version": "worldatlas-evidence-geometry-v1",
+  "positive_self_overlap_iou": 1.0,
+  "positive_main_rapa_nui_source_overlap_m2": 157503328.27,
+  "positive_main_source_overlap_detected": true,
+  "negative_control_remote_source_component_bounds_lonlat": [
+    -105.366628,
+    -26.475196,
+    -105.360062,
+    -26.469933
+  ],
+  "negative_control_remote_source_component_area_m2": 162819.521,
+  "negative_control_remote_component_overlap_m2": 0.0,
+  "negative_control_expected_disjoint": true,
+  "control_limit": "Controls verify helper reproducibility and detection of the retained remote component; they do not certify the source's legal meaning or current location-record effects."
+}
