@@ -31,7 +31,9 @@ def main():
     duplicate = clone(); duplicate[2]['complete_component_ids'][1] = duplicate[2]['complete_component_ids'][0]
     missing = clone(); missing[2]['complete_component_ids'].pop()
     join = clone(); join[0]['full_contacts'][0] = 'gb:AGO:ADM2:16411231B999999999'
-    source = json.loads(captured['source.geojson']); source['features'][0]['geometry']['coordinates'][0][0][0] += .0001
+    source = json.loads(captured['source.geojson']); geometry = source['features'][0]['geometry']
+    ring = geometry['coordinates'][0][0] if geometry['type'] == 'MultiPolygon' else geometry['coordinates'][0]
+    ring[0][0] += .0001; ring[-1][0] += .0001
     values = {'duplicate.json': duplicate, 'missing.json': missing, 'join.json': join, 'source.geojson': source, 'sentinel.json': {'original': 'preserve'}}
     fixtures.publish_bytes({n: immutable.canonical_json(v) for n, v in values.items()})
     rows = []
