@@ -2,7 +2,7 @@
   "version": 1,
   "issue": 611,
   "lane": "geography",
-  "worker_id": "01a10947-b3d7-7812-8b2f-c5a47e88ccb2",
+  "worker_id": "01a10948-7d38-75d0-bc01-4cc28ea41f49",
   "subject_ids": [
     "gb:KIR:ADM1:97431129B36644055464690",
     "gb:KIR:ADM1:97431129B55805139245338"
@@ -312,17 +312,17 @@
     {
       "id": "KIR-Census-Atlas-2022",
       "url": "https://nso.gov.ki/download/117/other-reports/2022/kiribati-census-atlas-2022.pdf",
-      "role": "Official island and population reporting rows plus broad physical-geography context",
+      "role": "Official 2022 island and population reporting rows plus broad physical-geography context",
       "vintage": "Atlas issued 2022-11-09; PDF created 2022-07-25 and modified 2022-09-15",
-      "retrieved_at": "2026-10-03",
+      "retrieved_at": "2026-10-07",
       "license": {
         "status": "unknown",
         "terms": "No explicit open reuse terms were found; no PDF redistributed."
       },
       "retention": "restoration-only",
       "verification": "verified",
-      "restoration": "Restore from exact URL; expected 8,415,857 bytes and SHA-256 56b0461dd54bbfb6f3ab894fa6b4f9be68f0d1b28a34670b9c67fcc3aa1f464b. Verify before analysis. Table 5 printed p.18; physical geography printed p.21.",
-      "limit": "The 19 Gilbert Table 5 rows are statistical units, not unique physical-island polygons; atlas maps and reported areas do not define boundaries.",
+      "restoration": "Restore from exact URL; expected 8,415,857 bytes and SHA-256 56b0461dd54bbfb6f3ab894fa6b4f9be68f0d1b28a34670b9c67fcc3aa1f464b. Retrieved and hash-checked again 2026-10-07. Table 3 printed p.11 contains the Gilbert reporting rows; Table 5 printed p.18 is the population-density table; physical geography is printed p.21.",
+      "limit": "The 19 Gilbert Table 3 rows are statistical/reporting units, not unique physical-island polygons; Table 5 population density and atlas maps do not define boundaries.",
       "temporal_status": "reference"
     },
     {
@@ -346,14 +346,14 @@
       "url": "https://www.mcia.gov.ki/island-profiles",
       "role": "Official current council roster and term summary",
       "vintage": "Current page, council term 2025–2029",
-      "retrieved_at": "2026-10-06",
+      "retrieved_at": "2026-10-07",
       "license": {
         "status": "unknown",
         "terms": "No open-content license identified; HTML not retained."
       },
       "retention": "restoration-only",
       "verification": "verified",
-      "restoration": "Restore HTML from exact URL; 30,801 bytes and SHA-256 d7141cfc977cddef3aaec8fe8bcdeae412a04f0d076915aa5fd775a8e3ed719c. Hash refreshed response.",
+      "restoration": "Restore HTML from exact URL; 30,801 bytes and SHA-256 d7141cfc977cddef3aaec8fe8bcdeae412a04f0d076915aa5fd775a8e3ed719c. Retrieved and hash-checked again 2026-10-07.",
       "limit": "Roster is not a legal boundary source; absence of a name from this page is not evidence of absent land or legal status.",
       "temporal_status": "reference"
     },
@@ -362,14 +362,14 @@
       "url": "https://www.mcia.gov.ki/establishment-warrants",
       "role": "Official index explaining Local Government Act 1984 section 4 warrant purpose and linking council instruments",
       "vintage": "Current index; no page-specific publication date observed",
-      "retrieved_at": "2026-10-06",
+      "retrieved_at": "2026-10-07",
       "license": {
         "status": "unknown",
         "terms": "No open-content license identified; HTML and warrant PDFs not retained."
       },
       "retention": "restoration-only",
       "verification": "verified",
-      "restoration": "Restore HTML from exact URL; 38,335 bytes and SHA-256 8e89820238dbe6371d09b36dce0e68ea416e7d73222b33967ae04b19c2b02f4d. Restore and separately hash each warrant before interpreting its effective date/jurisdiction.",
+      "restoration": "Restore HTML from exact URL; 38,335 bytes and SHA-256 8e89820238dbe6371d09b36dce0e68ea416e7d73222b33967ae04b19c2b02f4d. Retrieved and hash-checked again 2026-10-07. Eight linked warrant/profile PDFs were individually restored and byte-hashed; see followup-2026-10-07-evidence.json. They were scans and OCR did not establish their legal text.",
       "limit": "Index summary and link coverage are not warrant contents; a missing link does not prove absence of a council or jurisdiction.",
       "temporal_status": "reference"
     },
@@ -418,6 +418,70 @@
       "restoration": "The exact downloaded OSM XML snapshot is already retained at the listed archive path in #526; verify compressed and uncompressed hashes. Its source-way inventory records way 22391694 and its timestamp.",
       "limit": "Way/shoreline vintage and geometry differ from geoBoundaries simplification; source-bbox correspondence is strong but not exact polygon equivalence or legal jurisdiction.",
       "temporal_status": "reference"
+    },
+    {
+      "id": "KMS-Islands-We-Cover-2026",
+      "url": "https://met.gov.ki/index.php/component/sppagebuilder/page/18",
+      "role": "Official named physical island-group roster for Gilbert, Phoenix and Line",
+      "vintage": "Current page, retrieved 2026-10-07; no survey vintage stated",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "Copyright footer; no open reuse license identified. Page bytes not retained."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Restore exact URL; response receipt was 52,947 bytes, SHA-256 f21cdda95c57108b68643aab391cad79a1f54874d7d099c81f38b271d7ac4fb5. Verify the new response because the page may change.",
+      "limit": "Provides named physical group roster (17 Gilbert, 8 Phoenix, 8 Line), not boundary geometry or legal jurisdiction.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "KIR-KBA-Report-2025",
+      "url": "https://www.mfed.gov.ki/sites/default/files/2025-06/KIRIBATI%20BIODIVERSITY%20AREA%20Report%20-%20KBA%20REPORT%20FINAL.pdf",
+      "role": "Official physical group count and broad island-group context",
+      "vintage": "2025 report, printed p.16 of 78",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "No open redistribution license identified; report bytes not retained."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Restore exact URL; response was 6,268,401 bytes, SHA-256 80d30326ded12c0dbc13e62faf635f8d42175d643f914909e280b2dd4613d3cf. Verify before use.",
+      "limit": "Corroborates broad 32 low-lying plus one raised island count and 17/8/8 group roster; no current boundary geometry.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "MCIA-Warrant-PDF-Receipts-2026",
+      "url": "https://www.mcia.gov.ki/establishment-warrants",
+      "role": "Byte-level restoration receipts for eight linked Island Council warrant/profile PDFs",
+      "vintage": "Files linked from current index; retrieved 2026-10-07",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "No open redistribution license identified; downloaded PDF bytes not retained."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Restore the exact eight URLs, byte lengths and SHA-256 values listed in followup-2026-10-07-evidence.json. All were scanned PDFs; attempted local OCR was not reliable enough to verify warrant text or effective dates.",
+      "limit": "Receipts establish the downloaded file bytes only. No jurisdiction, legal boundary, effective date or inference from missing index entries is asserted.",
+      "temporal_status": "reference"
+    },
+    {
+      "id": "Kiribati-Archive-Name-Lookup-2026",
+      "url": "https://github.com/ChengshuLi/WorldAtlas/blob/8b6835dfa645cf763137374c3730401d5ac2f732/data/geographic-migration-archive.json.gz",
+      "role": "Pinned undated atlas identity/migration archive searched for exact normalized physical-island names",
+      "vintage": "Undated archive; historical_effective_year is null; exact baseline Git commit pinned",
+      "retrieved_at": "2026-10-07",
+      "license": {
+        "status": "unknown",
+        "terms": "No independent license assertion is made for the historical identity archive; the exact Git blob is pinned in the prior evidence baseline."
+      },
+      "retention": "restoration-only",
+      "verification": "verified",
+      "restoration": "Read the exact Git blob at commit 8b6835dfa645cf763137374c3730401d5ac2f732, path data/geographic-migration-archive.json.gz; compressed 10,765,139 bytes SHA-256 9e4ca20b4211795f90f1ab8cac59cfb1ff079396e22979bfb4d1fa9d3f5f55d1 and uncompressed 56,672,580 bytes SHA-256 c072bbe6e7f96789e3a6165e9075eb3271050e1e1614f2923f03169480537184. Run inspect_archive_names.py.",
+      "limit": "Undated identity-only archive with no geometry; exact-name misses do not prove absence of historical locations or other aliases.",
+      "temporal_status": "unknown"
     }
   ],
   "outputs": [
@@ -438,6 +502,24 @@
       "bytes": 58142,
       "sha256": "3a20c64413192ccff0d66a8697054da01505473b1b3055c1ec4da2aa0761ff91",
       "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/kiribati-gilbert-phoenix-source-crosswalk/followup-2026-10-07.md",
+      "bytes": 4843,
+      "sha256": "95e5fce370583c3b5526f90b2e9e043469cf75f66879d9f59d9236e697111fe8",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/kiribati-gilbert-phoenix-source-crosswalk/followup-2026-10-07-evidence.json",
+      "bytes": 52071,
+      "sha256": "2f653597364a28fe6c95a55706dc5af1fe01aca98b32677cedf9f2894da42b9c",
+      "hash_kind": "file-bytes"
+    },
+    {
+      "path": "data/regional-review/kiribati-gilbert-phoenix-source-crosswalk/inspect_archive_names.py",
+      "bytes": 2815,
+      "sha256": "e2f2d05a3684d463e3436afdec060bb00ab87e892654bed5aaaac9da23a62181",
+      "hash_kind": "file-bytes"
     }
   ],
   "methods": [
@@ -447,6 +529,13 @@
       "description": "Read the preserved 2017 geoBoundaries source and current Kiribati feature parts, inventory every component bounding box, and compare rectangle candidates with retained current subjects and #526 OSM source land. Census rows and source-role facts are transcribed from source receipts. This is candidate screening only, not polygon overlay or area measurement.",
       "software": "Python 3.12.4; standard-library JSON/XML/hashlib; no GIS geometry operation",
       "units": "WGS84 longitude/latitude degrees for component bounds; counts are inventory counts only"
+    },
+    {
+      "id": "pinned-archive-island-name-lookup",
+      "kind": "source",
+      "description": "Normalize 42 official physical-group names/aliases with Unicode NFKD, ASCII casefolding and removal of non-alphanumeric characters; compare exact equality with every name in both locations and units collections of the pinned undated archive. Preserve all name hits and parent IDs; do not infer absence from a miss or geography from a name alone.",
+      "software": "Python 3.7.3 standard library (gzip, json, re, subprocess, unicodedata); git reads the immutable archive blob",
+      "units": "Name strings and record counts; no geographic measurement"
     }
   ],
   "metrics": [],
@@ -460,11 +549,12 @@
       ]
     },
     {
-      "text": "The 19 Atlas Table 5 Gilbert entries are census/reporting rows rather than a one-to-one physical-island geometry inventory; the present source and retained Atlas subject parts do not establish exact row-to-island boundaries.",
+      "text": "The 19 Atlas Table 3 Gilbert entries are census/reporting rows rather than a one-to-one physical-island geometry inventory; North/South Tarawa and North/South Tabiteuea are reporting divisions of Tarawa and Tabiteuea. The present sources and retained Atlas subject parts do not establish exact row-to-island boundaries.",
       "status": "supported",
       "source_ids": [
         "KIR-Census-Atlas-2022",
-        "NSO-Districts-2026"
+        "NSO-Districts-2026",
+        "KMS-Islands-We-Cover-2026"
       ]
     },
     {
@@ -493,6 +583,29 @@
         "KIR-Census-Atlas-2022",
         "KIR-PIPA-Plan-2009-2014"
       ]
+    },
+    {
+      "text": "Official sources list 17 physical Gilbert, 8 Phoenix and 8 Line island groups; these named groupings are not administrative boundaries or a vector completeness proof.",
+      "status": "supported",
+      "source_ids": [
+        "KMS-Islands-We-Cover-2026",
+        "KIR-KBA-Report-2025"
+      ]
+    },
+    {
+      "text": "The pinned undated archive contains no exact normalized name rows for the 33 Kiribati physical groups in the locations/units collections; its Makin, Caroline and Washington exact-name collisions have unrelated parents. A miss is not proof of geographic or historical absence.",
+      "status": "supported",
+      "source_ids": [
+        "Kiribati-Archive-Name-Lookup-2026"
+      ]
+    },
+    {
+      "text": "The linked council warrant/profile scans were byte-hashed but their text and effective dates could not be reliably extracted; statutory jurisdiction boundaries remain unresolved.",
+      "status": "unresolved",
+      "source_ids": [
+        "MCIA-Establishment-Warrants-2026",
+        "MCIA-Warrant-PDF-Receipts-2026"
+      ]
     }
   ],
   "stages": {
@@ -502,26 +615,28 @@
   },
   "commands": [
     "python3 data/regional-review/kiribati-gilbert-phoenix-source-crosswalk/build_crosswalk.py",
-    "python3 data/regional-review/regional-supplement-948d12b02687d2a9/verify.py"
+    "python3 data/regional-review/regional-supplement-948d12b02687d2a9/verify.py",
+    "python3 data/regional-review/kiribati-gilbert-phoenix-source-crosswalk/inspect_archive_names.py"
   ],
   "change_receipts": [
     {
-      "path": "data/regional-review/kiribati-gilbert-phoenix-source-crosswalk/README.md",
-      "status": "added",
-      "previous_path": null
-    },
-    {
-      "path": "data/regional-review/kiribati-gilbert-phoenix-source-crosswalk/build_crosswalk.py",
-      "status": "added",
-      "previous_path": null
-    },
-    {
-      "path": "data/regional-review/kiribati-gilbert-phoenix-source-crosswalk/source-component-inventory.json",
-      "status": "added",
-      "previous_path": null
-    },
-    {
       "path": "data/regional-review/kiribati-gilbert-phoenix-source-crosswalk/evidence-quality.json",
+      "status": "modified",
+      "previous_path": null,
+      "original_sha256": "ac9a879ceab1c656916bb4eb5ddd9b39740267d79a128475ce2b90da36e1affe"
+    },
+    {
+      "path": "data/regional-review/kiribati-gilbert-phoenix-source-crosswalk/followup-2026-10-07.md",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/kiribati-gilbert-phoenix-source-crosswalk/followup-2026-10-07-evidence.json",
+      "status": "added",
+      "previous_path": null
+    },
+    {
+      "path": "data/regional-review/kiribati-gilbert-phoenix-source-crosswalk/inspect_archive_names.py",
       "status": "added",
       "previous_path": null
     }

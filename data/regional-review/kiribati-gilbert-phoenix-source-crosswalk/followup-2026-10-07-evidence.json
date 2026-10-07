@@ -1,0 +1,1404 @@
+{
+  "packet": "Kiribati island group, census and source component follow-up",
+  "issue": 611,
+  "as_of": "2026-10-07",
+  "inventory_reference": {
+    "path": "data/regional-review/kiribati-gilbert-phoenix-source-crosswalk/source-component-inventory.json",
+    "bytes": 58142,
+    "sha256": "3a20c64413192ccff0d66a8697054da01505473b1b3055c1ec4da2aa0761ff91"
+  },
+  "interpretation": "Joins physical group names and statistical reporting rows only. Does not assign components, current IDs, geometry, or legal jurisdiction to individual islands. Component-level bboxes/candidates are explicitly repeated below from the pinned inventory for traceability.",
+  "physical_group_roster": {
+    "Gilbert Islands": [
+      "Makin",
+      "Butaritari",
+      "Marakei",
+      "Abaiang",
+      "Tarawa",
+      "Maiana",
+      "Abemama",
+      "Kuria",
+      "Aranuka",
+      "Nonouti",
+      "Tabiteuea",
+      "Beru",
+      "Nikunau",
+      "Onotoa",
+      "Tamana",
+      "Arorae",
+      "Banaba"
+    ],
+    "Phoenix Islands": [
+      "Kanton/Canton",
+      "Birnie",
+      "Enderbury",
+      "Manra/Sydney",
+      "McKean",
+      "Nikumaroro/Gardner",
+      "Orona/Hull",
+      "Rawaki/Phoenix"
+    ],
+    "Line Islands": [
+      "Teraina/Washington",
+      "Tabuaeran/Fanning",
+      "Kiritimati/Christmas",
+      "Malden",
+      "Starbuck",
+      "Vostok",
+      "Flint",
+      "Millennium/Caroline"
+    ]
+  },
+  "gilbert_census_reporting_to_physical_group": {
+    "Abaiang": "Abaiang",
+    "Butaritari": "Butaritari",
+    "Makin": "Makin",
+    "Marakei": "Marakei",
+    "North Tarawa": "Tarawa",
+    "South Tarawa": "Tarawa",
+    "Abemama": "Abemama",
+    "Aranuka": "Aranuka",
+    "Banaba": "Banaba",
+    "Kuria": "Kuria",
+    "Maiana": "Maiana",
+    "Arorae": "Arorae",
+    "Beru": "Beru",
+    "Nikunau": "Nikunau",
+    "Nonouti": "Nonouti",
+    "North Tabiteuea": "Tabiteuea",
+    "Onotoa": "Onotoa",
+    "South Tabiteuea": "Tabiteuea",
+    "Tamana": "Tamana"
+  },
+  "source_components": [
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 1,
+      "bbox_wgs84": [
+        176.7901694,
+        -2.6719916,
+        176.8476184,
+        -2.6126947
+      ],
+      "retained_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "part": 1
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 2,
+      "bbox_wgs84": [
+        175.9648444,
+        -2.5153971,
+        175.999951,
+        -2.4834449
+      ],
+      "retained_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 3,
+      "bbox_wgs84": [
+        175.5682154,
+        -1.9542646,
+        175.5930013,
+        -1.938023
+      ],
+      "retained_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 4,
+      "bbox_wgs84": [
+        175.5176744,
+        -1.9432008,
+        175.6194589,
+        -1.790303
+      ],
+      "retained_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "part": 2
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 5,
+      "bbox_wgs84": [
+        175.0612719,
+        -1.5404722,
+        175.0785796,
+        -1.5171285
+      ],
+      "retained_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 6,
+      "bbox_wgs84": [
+        175.0492483,
+        -1.5253257,
+        175.0787794,
+        -1.4672277
+      ],
+      "retained_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 7,
+      "bbox_wgs84": [
+        175.0205111,
+        -1.4626671,
+        175.0433206,
+        -1.4417387
+      ],
+      "retained_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 8,
+      "bbox_wgs84": [
+        175.0065634,
+        -1.4467154,
+        175.0266478,
+        -1.433537
+      ],
+      "retained_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 9,
+      "bbox_wgs84": [
+        176.4028201,
+        -1.4045718,
+        176.494424,
+        -1.3116546
+      ],
+      "retained_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "part": 3
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 10,
+      "bbox_wgs84": [
+        175.9442327,
+        -1.3751189,
+        176.0294829,
+        -1.2699516
+      ],
+      "retained_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "part": 4
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 11,
+      "bbox_wgs84": [
+        174.7908714,
+        -1.3034085,
+        174.8027063,
+        -1.2593781
+      ],
+      "retained_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 12,
+      "bbox_wgs84": [
+        174.6585024,
+        -1.2572117,
+        174.7928219,
+        -1.1039783
+      ],
+      "retained_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "part": 5
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 13,
+      "bbox_wgs84": [
+        174.3204972,
+        -0.8144305,
+        174.4768271,
+        -0.5722884
+      ],
+      "retained_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "part": 6
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 14,
+      "bbox_wgs84": [
+        173.5364127,
+        0.1697623,
+        173.5868361,
+        0.1891492
+      ],
+      "retained_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "part": 7
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 15,
+      "bbox_wgs84": [
+        173.6106695,
+        0.1180892,
+        173.6445042,
+        0.204798
+      ],
+      "retained_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 16,
+      "bbox_wgs84": [
+        173.4103858,
+        0.1945615,
+        173.4530386,
+        0.2320397
+      ],
+      "retained_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "part": 8
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 17,
+      "bbox_wgs84": [
+        173.3792304,
+        0.2320353,
+        173.4109262,
+        0.2712376
+      ],
+      "retained_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "part": 9
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 18,
+      "bbox_wgs84": [
+        173.9166836,
+        0.3047619,
+        173.9453369,
+        0.3449295
+      ],
+      "retained_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 19,
+      "bbox_wgs84": [
+        173.7607033,
+        0.378641,
+        173.7938808,
+        0.394056
+      ],
+      "retained_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 20,
+      "bbox_wgs84": [
+        173.9205486,
+        0.3444169,
+        173.9448327,
+        0.4036476
+      ],
+      "retained_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 21,
+      "bbox_wgs84": [
+        173.8005605,
+        0.4027565,
+        173.9256922,
+        0.495393
+      ],
+      "retained_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "part": 10
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 22,
+      "bbox_wgs84": [
+        172.9728977,
+        0.8382741,
+        173.0721624,
+        1.030503
+      ],
+      "retained_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "part": 11
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 23,
+      "bbox_wgs84": [
+        172.9081279,
+        1.7119721,
+        173.0483399,
+        1.9547649
+      ],
+      "retained_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 24,
+      "bbox_wgs84": [
+        173.2509971,
+        1.9701183,
+        173.3085075,
+        1.9987905
+      ],
+      "retained_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 25,
+      "bbox_wgs84": [
+        173.252516,
+        1.9964393,
+        173.2972457,
+        2.06097
+      ],
+      "retained_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "part": 12
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 26,
+      "bbox_wgs84": [
+        172.7428743,
+        3.0390803,
+        172.9010756,
+        3.1059859
+      ],
+      "retained_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "part": 13
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 27,
+      "bbox_wgs84": [
+        172.8909759,
+        3.108035,
+        172.9723187,
+        3.1883011
+      ],
+      "retained_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 28,
+      "bbox_wgs84": [
+        172.680949,
+        3.2172695,
+        172.775493,
+        3.27791
+      ],
+      "retained_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Gilbert Islands",
+      "source_shape_id": "97431129B55805139245338",
+      "source_feature_id": "gb:KIR:ADM1:97431129B55805139245338",
+      "source_part": 29,
+      "bbox_wgs84": [
+        172.9767267,
+        3.3517734,
+        173.0098328,
+        3.3952785
+      ],
+      "retained_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B55805139245338",
+          "part": 14
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Phoenix Islands",
+      "source_shape_id": "97431129B36644055464690",
+      "source_feature_id": "gb:KIR:ADM1:97431129B36644055464690",
+      "source_part": 1,
+      "bbox_wgs84": [
+        -171.7234122,
+        -2.8707411,
+        -171.6151249,
+        -2.7646223
+      ],
+      "retained_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [
+        "atlas:macro-coverage:location:46b9db00a4ded4a51997"
+      ],
+      "phoenix_526_land_component_bbox_candidates": [
+        {
+          "id": "atlas:macro-coverage:location:46b9db00a4ded4a51997",
+          "name": "Canton/Kanton/Abariringa",
+          "component": 1,
+          "bbox_wgs84": [
+            -171.7086033,
+            -2.809887,
+            -171.7085315,
+            -2.8093539
+          ],
+          "osm_way_ids": [
+            "334492318"
+          ],
+          "osm_way_records": [
+            {
+              "way_id": "334492318",
+              "version": "3",
+              "timestamp": "2022-02-14T13:36:50Z",
+              "node_count": 19,
+              "tags": {
+                "natural": "coastline",
+                "place": "islet"
+              },
+              "individually_closed": true
+            }
+          ]
+        },
+        {
+          "id": "atlas:macro-coverage:location:46b9db00a4ded4a51997",
+          "name": "Canton/Kanton/Abariringa",
+          "component": 2,
+          "bbox_wgs84": [
+            -171.7090388,
+            -2.8126886,
+            -171.7079528,
+            -2.8108756
+          ],
+          "osm_way_ids": [
+            "334492317"
+          ],
+          "osm_way_records": [
+            {
+              "way_id": "334492317",
+              "version": "3",
+              "timestamp": "2022-02-14T13:36:50Z",
+              "node_count": 65,
+              "tags": {
+                "natural": "coastline",
+                "place": "islet"
+              },
+              "individually_closed": true
+            }
+          ]
+        },
+        {
+          "id": "atlas:macro-coverage:location:46b9db00a4ded4a51997",
+          "name": "Canton/Kanton/Abariringa",
+          "component": 3,
+          "bbox_wgs84": [
+            -171.7094026,
+            -2.8121481,
+            -171.7085329,
+            -2.8105327
+          ],
+          "osm_way_ids": [
+            "334492316"
+          ],
+          "osm_way_records": [
+            {
+              "way_id": "334492316",
+              "version": "3",
+              "timestamp": "2022-02-14T13:36:50Z",
+              "node_count": 41,
+              "tags": {
+                "natural": "coastline",
+                "place": "islet"
+              },
+              "individually_closed": true
+            }
+          ]
+        },
+        {
+          "id": "atlas:macro-coverage:location:46b9db00a4ded4a51997",
+          "name": "Canton/Kanton/Abariringa",
+          "component": 4,
+          "bbox_wgs84": [
+            -171.7132428,
+            -2.8133818,
+            -171.7103011,
+            -2.8093392
+          ],
+          "osm_way_ids": [
+            "22392034"
+          ],
+          "osm_way_records": [
+            {
+              "way_id": "22392034",
+              "version": "6",
+              "timestamp": "2025-04-27T02:11:13Z",
+              "node_count": 125,
+              "tags": {
+                "name": "Spam Island",
+                "natural": "coastline",
+                "place": "islet",
+                "wikidata": "Q27221349",
+                "wikipedia": "de:Spam Island"
+              },
+              "individually_closed": true
+            }
+          ]
+        },
+        {
+          "id": "atlas:macro-coverage:location:46b9db00a4ded4a51997",
+          "name": "Canton/Kanton/Abariringa",
+          "component": 5,
+          "bbox_wgs84": [
+            -171.7233574,
+            -2.8706287,
+            -171.6151625,
+            -2.7645001
+          ],
+          "osm_way_ids": [
+            "22391694"
+          ],
+          "osm_way_records": [
+            {
+              "way_id": "22391694",
+              "version": "16",
+              "timestamp": "2022-07-25T00:34:46Z",
+              "node_count": 1801,
+              "tags": {
+                "natural": "coastline",
+                "place": "island",
+                "source": "PGS & Bing"
+              },
+              "individually_closed": true
+            }
+          ]
+        }
+      ],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Phoenix Islands",
+      "source_shape_id": "97431129B36644055464690",
+      "source_feature_id": "gb:KIR:ADM1:97431129B36644055464690",
+      "source_part": 2,
+      "bbox_wgs84": [
+        169.5209894,
+        -0.8742558,
+        169.5497674,
+        -0.844716
+      ],
+      "retained_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B36644055464690",
+          "part": 1
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Phoenix Islands",
+      "source_shape_id": "97431129B36644055464690",
+      "source_feature_id": "gb:KIR:ADM1:97431129B36644055464690",
+      "source_part": 3,
+      "bbox_wgs84": [
+        172.9185261,
+        1.3414831,
+        172.9578176,
+        1.3658781
+      ],
+      "retained_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Phoenix Islands",
+      "source_shape_id": "97431129B36644055464690",
+      "source_feature_id": "gb:KIR:ADM1:97431129B36644055464690",
+      "source_part": 4,
+      "bbox_wgs84": [
+        172.960301,
+        1.3267166,
+        173.1649377,
+        1.3933984
+      ],
+      "retained_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B36644055464690",
+          "part": 2
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Phoenix Islands",
+      "source_shape_id": "97431129B36644055464690",
+      "source_feature_id": "gb:KIR:ADM1:97431129B36644055464690",
+      "source_part": 5,
+      "bbox_wgs84": [
+        173.119091,
+        1.3878063,
+        173.1351548,
+        1.4016625
+      ],
+      "retained_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Phoenix Islands",
+      "source_shape_id": "97431129B36644055464690",
+      "source_feature_id": "gb:KIR:ADM1:97431129B36644055464690",
+      "source_part": 6,
+      "bbox_wgs84": [
+        172.9829552,
+        1.3837334,
+        173.0086336,
+        1.4029303
+      ],
+      "retained_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Phoenix Islands",
+      "source_shape_id": "97431129B36644055464690",
+      "source_feature_id": "gb:KIR:ADM1:97431129B36644055464690",
+      "source_part": 7,
+      "bbox_wgs84": [
+        173.0908927,
+        1.4106742,
+        173.1144161,
+        1.4277186
+      ],
+      "retained_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Phoenix Islands",
+      "source_shape_id": "97431129B36644055464690",
+      "source_feature_id": "gb:KIR:ADM1:97431129B36644055464690",
+      "source_part": 8,
+      "bbox_wgs84": [
+        173.0802331,
+        1.4282446,
+        173.0957326,
+        1.4405117
+      ],
+      "retained_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Phoenix Islands",
+      "source_shape_id": "97431129B36644055464690",
+      "source_feature_id": "gb:KIR:ADM1:97431129B36644055464690",
+      "source_part": 9,
+      "bbox_wgs84": [
+        173.0171575,
+        1.4708622,
+        173.043489,
+        1.4950657
+      ],
+      "retained_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Phoenix Islands",
+      "source_shape_id": "97431129B36644055464690",
+      "source_feature_id": "gb:KIR:ADM1:97431129B36644055464690",
+      "source_part": 10,
+      "bbox_wgs84": [
+        173.0024341,
+        1.4944598,
+        173.0214624,
+        1.5227183
+      ],
+      "retained_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Phoenix Islands",
+      "source_shape_id": "97431129B36644055464690",
+      "source_feature_id": "gb:KIR:ADM1:97431129B36644055464690",
+      "source_part": 11,
+      "bbox_wgs84": [
+        172.95252,
+        1.5208662,
+        173.0076779,
+        1.6372273
+      ],
+      "retained_bbox_candidates": [],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Line Islands",
+      "source_shape_id": "97431129B35506555718846",
+      "source_feature_id": "gb:KIR:ADM1:97431129B35506555718846",
+      "source_part": 1,
+      "bbox_wgs84": [
+        -157.5622594,
+        1.6932789,
+        -157.1636944,
+        2.0486419
+      ],
+      "retained_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B35506555718846",
+          "part": 1
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Line Islands",
+      "source_shape_id": "97431129B35506555718846",
+      "source_feature_id": "gb:KIR:ADM1:97431129B35506555718846",
+      "source_part": 2,
+      "bbox_wgs84": [
+        -159.3635349,
+        3.8054857,
+        -159.241033,
+        3.8640303
+      ],
+      "retained_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B35506555718846",
+          "part": 2
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Line Islands",
+      "source_shape_id": "97431129B35506555718846",
+      "source_feature_id": "gb:KIR:ADM1:97431129B35506555718846",
+      "source_part": 3,
+      "bbox_wgs84": [
+        -159.3330325,
+        3.8635055,
+        -159.2509675,
+        3.9362817
+      ],
+      "retained_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B35506555718846",
+          "part": 3
+        },
+        {
+          "id": "gb:KIR:ADM1:97431129B35506555718846",
+          "part": 4
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Line Islands",
+      "source_shape_id": "97431129B35506555718846",
+      "source_feature_id": "gb:KIR:ADM1:97431129B35506555718846",
+      "source_part": 4,
+      "bbox_wgs84": [
+        -159.3946161,
+        3.8593842,
+        -159.3382146,
+        3.9398515
+      ],
+      "retained_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B35506555718846",
+          "part": 2
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    },
+    {
+      "feature_name": "Line Islands",
+      "source_shape_id": "97431129B35506555718846",
+      "source_feature_id": "gb:KIR:ADM1:97431129B35506555718846",
+      "source_part": 5,
+      "bbox_wgs84": [
+        -160.4104491,
+        4.6685266,
+        -160.3503301,
+        4.6993439
+      ],
+      "retained_bbox_candidates": [
+        {
+          "id": "gb:KIR:ADM1:97431129B35506555718846",
+          "part": 5
+        }
+      ],
+      "phoenix_526_osm_bbox_candidates": [],
+      "phoenix_526_land_component_bbox_candidates": [],
+      "interpretation": "Bounding-box candidate screen only; it is not polygon intersection, island identity, administrative jurisdiction, or a boundary verdict."
+    }
+  ],
+  "source_receipts": [
+    {
+      "publisher": "Kiribati Meteorological Service",
+      "title": "Islands We Cover",
+      "url": "https://met.gov.ki/index.php/component/sppagebuilder/page/18",
+      "retrieved": "2026-10-07",
+      "bytes": 52947,
+      "sha256": "f21cdda95c57108b68643aab391cad79a1f54874d7d099c81f38b271d7ac4fb5",
+      "license": "Copyright footer; no open license identified; source page not retained.",
+      "role": "Named physical group roster: 17 Gilbert, 8 Phoenix, 8 Line; no geometry.",
+      "restoration": "GET exact URL and verify bytes/hash; response may change."
+    },
+    {
+      "publisher": "Kiribati Ministry of Environment, Lands and Agricultural Development",
+      "title": "Kiribati Biodiversity Area Report (2025), p.16/78",
+      "url": "https://www.mfed.gov.ki/sites/default/files/2025-06/KIRIBATI%20BIODIVERSITY%20AREA%20Report%20-%20KBA%20REPORT%20FINAL.pdf",
+      "retrieved": "2026-10-07",
+      "bytes": 6268401,
+      "sha256": "80d30326ded12c0dbc13e62faf635f8d42175d643f914909e280b2dd4613d3cf",
+      "license": "No open redistribution license identified; PDF not retained.",
+      "role": "Independent official corroboration of 32 low-lying coral islands plus Banaba and 17/8/8 groups; not boundaries.",
+      "restoration": "GET exact URL and verify byte length/hash."
+    },
+    {
+      "publisher": "Kiribati National Statistics Office / SPC",
+      "title": "Kiribati Census Atlas 2022, Table 3 printed p.11; Table 5 printed p.18",
+      "url": "https://nso.gov.ki/download/117/other-reports/2022/kiribati-census-atlas-2022.pdf",
+      "retrieved": "2026-10-07",
+      "bytes": 8415857,
+      "sha256": "56b0461dd54bbfb6f3ab894fa6b4f9be68f0d1b28a34670b9c67fcc3aa1f464b",
+      "license": "No explicit open reuse license identified; PDF not retained.",
+      "role": "2022 statistical reporting rows, not geometry; 19 Gilbert rows include North/South Tarawa and North/South Tabiteuea subdivisions.",
+      "restoration": "GET exact URL and verify byte length/hash."
+    },
+    {
+      "publisher": "Kiribati National Statistics Office",
+      "title": "Kiribati 2020 Population and Housing Census Report, p.11 and Table G-1 p.17",
+      "url": "https://nso.gov.ki/download/146/2020/1965/kiribati-2020-population-and-housing-census-report.pdf",
+      "retrieved": "2026-10-07",
+      "bytes": 23188330,
+      "sha256": "a4f158ddf3548468825338d9ced5bc8d04dca1f349916748ff204974a0102eed",
+      "license": "No explicit open reuse license identified; PDF not retained.",
+      "role": "Census district/statistical context, not boundaries.",
+      "restoration": "GET exact URL and verify byte length/hash."
+    },
+    {
+      "publisher": "Kiribati National Statistics Office",
+      "title": "Kiribati Districts",
+      "url": "https://nso.gov.ki/kiribati-districts/",
+      "retrieved": "2026-10-07",
+      "bytes": 267409,
+      "sha256": "f66c08146110884711b98f3c95ccead8f4c2feaa4be17e16ff98fb60e28aa96c",
+      "license": "No open license identified; page not retained.",
+      "role": "Five census districts: four Gilbert and one combined Line & Phoenix; not council jurisdiction or polygons.",
+      "restoration": "GET exact URL; verify response/hash and check for page changes."
+    },
+    {
+      "publisher": "Kiribati Ministry of Internal Affairs",
+      "title": "Island Profiles",
+      "url": "https://www.mcia.gov.ki/island-profiles",
+      "retrieved": "2026-10-07",
+      "bytes": 30801,
+      "sha256": "d7141cfc977cddef3aaec8fe8bcdeae412a04f0d076915aa5fd775a8e3ed719c",
+      "license": "No open license identified; page not retained.",
+      "role": "Current 23 Island Council roster, term 2025–2029; a different administrative system from physical groups.",
+      "restoration": "GET exact URL and verify response/hash."
+    },
+    {
+      "publisher": "Kiribati Ministry of Internal Affairs",
+      "title": "Establishment Warrant Index",
+      "url": "https://www.mcia.gov.ki/establishment-warrants",
+      "retrieved": "2026-10-07",
+      "bytes": 38335,
+      "sha256": "8e89820238dbe6371d09b36dce0e68ea416e7d73222b33967ae04b19c2b02f4d",
+      "license": "No open license identified; page and PDFs not retained.",
+      "role": "Index says Local Government Act 1984 s.4 warrants set council, effective date and geographic area. Scanned PDFs were not reliably readable; no legal-boundary claims.",
+      "restoration": "GET exact URL; verify response/hash; obtain legible warrant text before interpretation."
+    }
+  ],
+  "mcia_warrant_pdf_receipts": {
+    "retrieved": "2026-10-07",
+    "license": "No open redistribution license identified; PDFs not retained.",
+    "role": "Restoration receipts only; scanned OCR did not reliably establish legal boundary or dates.",
+    "sources": [
+      {
+        "title": "Kiritimati Urban Council profile",
+        "url": "https://www.mcia.gov.ki/sites/default/files/2026-09/KUC_0.pdf",
+        "bytes": 175999,
+        "sha256": "87364d0affe0ce7f6bfc5a773ada637a3472c3bae30f2595d325f8c54703959f"
+      },
+      {
+        "title": "Kiritimati Urban Council establishment warrant",
+        "url": "https://www.mcia.gov.ki/sites/default/files/2026-09/KUC%20Establishment%20Warrant%20_0.pdf",
+        "bytes": 2475916,
+        "sha256": "32bbfeb395ecd8d9c2a9672753397c9db737c28e987c551b7e04ff3c91dcdebb"
+      },
+      {
+        "title": "Banaba warrant",
+        "url": "https://www.mcia.gov.ki/sites/default/files/2026-09/Banaba_1.pdf",
+        "bytes": 242470,
+        "sha256": "03af2851ec179b6e5f794e286d53a941f1476e5dfe862cb0aed281645849c2d3"
+      },
+      {
+        "title": "Betio Town Council warrant",
+        "url": "https://www.mcia.gov.ki/sites/default/files/2026-09/BTC_1.pdf",
+        "bytes": 523414,
+        "sha256": "8c2823cf7c859ceb1f36393b6d4bebf360c4959c6177e7d97b68c18e70ed0962"
+      },
+      {
+        "title": "Eutan Tarawa Council warrant",
+        "url": "https://www.mcia.gov.ki/sites/default/files/2026-09/ETC_1.pdf",
+        "bytes": 649363,
+        "sha256": "9fd72db183bb1d325c3a8e2b7b962055682a131f3bb1a01929c07adf73c0dbfb"
+      },
+      {
+        "title": "North Tabiteuea warrant",
+        "url": "https://www.mcia.gov.ki/sites/default/files/2026-09/Tab%20North_1.pdf",
+        "bytes": 963402,
+        "sha256": "426342afeb3f104972d071064c948d2a90fb61800a224d9aae8e5e6372ab7d66"
+      },
+      {
+        "title": "South Tabiteuea warrant",
+        "url": "https://www.mcia.gov.ki/sites/default/files/2026-09/Tab%20South_1.pdf",
+        "bytes": 58811,
+        "sha256": "5d76290f92d72afd2214b8f25e533233f799521319b8df6bfee271741d113d0d"
+      },
+      {
+        "title": "Tabuaeran warrant",
+        "url": "https://www.mcia.gov.ki/sites/default/files/2026-09/Tabuaeran_1.pdf",
+        "bytes": 253257,
+        "sha256": "ce5e6f21406703bda82a2f8b18ff19ed290f3b2cb8b5946f094c085089c07a71"
+      }
+    ],
+    "restoration": "GET each exact URL and verify size/hash; review a reliable, legible copy before legal interpretation."
+  },
+  "unresolved": [
+    "Exact island identity and polygon topology of all 45 source components.",
+    "Exact join between census rows, retained current polygons and source components.",
+    "Warrant jurisdiction and effective-date interpretation; scanned PDFs could not be read reliably.",
+    "Complete archived ID/claim review and source edit lineage across #140/#139 and #526/#404.",
+    "Current openly reusable authoritative island geometry and complete source-vintage assessment."
+  ],
+  "handoffs": [
+    "#140/#139 owners: inspect full historical ID/claim registry, lineage, retained pieces and cross-parent IDs.",
+    "#526/#404 owners: reconcile Phoenix source feature families with the eight retained OSM source families.",
+    "Regional owners: decide any correction only after exact geometric/legal evidence; this follow-up proposes no correction."
+  ],
+  "archive_name_lookup": {
+    "baseline_commit": "8b6835dfa645cf763137374c3730401d5ac2f732",
+    "archive_path": "data/geographic-migration-archive.json.gz",
+    "search": "Unicode NFKD ASCII casefold; remove non-alphanumeric characters; exact normalized equality on each row name in locations and units",
+    "physical_name_aliases": [
+      "Makin",
+      "Butaritari",
+      "Marakei",
+      "Abaiang",
+      "Tarawa",
+      "Maiana",
+      "Abemama",
+      "Kuria",
+      "Aranuka",
+      "Nonouti",
+      "Tabiteuea",
+      "Beru",
+      "Nikunau",
+      "Onotoa",
+      "Tamana",
+      "Arorae",
+      "Banaba",
+      "Kanton",
+      "Canton",
+      "Birnie",
+      "Enderbury",
+      "Manra",
+      "Sydney",
+      "McKean",
+      "Nikumaroro",
+      "Gardner",
+      "Orona",
+      "Hull",
+      "Rawaki",
+      "Phoenix",
+      "Teraina",
+      "Washington",
+      "Tabuaeran",
+      "Fanning",
+      "Kiritimati",
+      "Christmas",
+      "Malden",
+      "Starbuck",
+      "Vostok",
+      "Flint",
+      "Millennium",
+      "Caroline"
+    ],
+    "archive_collection_counts": {
+      "locations": 19050,
+      "units": 16046
+    },
+    "hits": {
+      "Makin": [
+        {
+          "collection": "locations",
+          "index": 17409,
+          "id": "gb:PAK:ADM3:9618217B3793228482505",
+          "name": "MAKIN",
+          "level": null,
+          "parent_id": "geo:province:6ca07678a7ac3ef2:PAK"
+        }
+      ],
+      "Washington": [
+        {
+          "collection": "units",
+          "index": 5820,
+          "id": "framework:province:washington:b01ae89096c9",
+          "name": "Washington",
+          "level": "province",
+          "parent_id": "framework:area:pacific:31aced66907e"
+        },
+        {
+          "collection": "units",
+          "index": 6524,
+          "id": "geo:area:WAS",
+          "name": "Washington",
+          "level": "area",
+          "parent_id": "geo:region:73"
+        },
+        {
+          "collection": "units",
+          "index": 11007,
+          "id": "geo:province:d797900cdb456e5f:WAS",
+          "name": "Washington",
+          "level": "province",
+          "parent_id": "geo:area:WAS"
+        },
+        {
+          "collection": "units",
+          "index": 15489,
+          "id": "world/continent:North America/subcontinent:Northern America/region:United States of America/area:West/province:66186276B98555229882405",
+          "name": "Washington",
+          "level": "province",
+          "parent_id": "world/continent:North America/subcontinent:Northern America/region:United States of America/area:West"
+        }
+      ],
+      "Caroline": [
+        {
+          "collection": "locations",
+          "index": 9481,
+          "id": "gb:CAN:ADM3:43193130B53401282036412",
+          "name": "Caroline",
+          "level": null,
+          "parent_id": "geo:province:b1f143c26683ee26:ABT"
+        }
+      ]
+    },
+    "limits": [
+      "The archive is undated and has no geometry; names and ID parents alone are identity clues.",
+      "An exact-name miss may reflect another label, an ID without a physical island name, or omitted history; it is not proof of absence.",
+      "A hit is not assigned to Kiribati without independent parent/source context."
+    ],
+    "archive_compressed_bytes": 10765139,
+    "archive_compressed_sha256": "9e4ca20b4211795f90f1ab8cac59cfb1ff079396e22979bfb4d1fa9d3f5f55d1",
+    "archive_uncompressed_bytes": 56672580,
+    "archive_uncompressed_sha256": "c072bbe6e7f96789e3a6165e9075eb3271050e1e1614f2923f03169480537184",
+    "broad_source_identity_rows": [
+      {
+        "current_source_id": "gb:KIR:ADM1:97431129B55805139245338",
+        "original_unit_path": "world/continent:Oceania/subcontinent:Micronesia/region:Kiribati/area:Kiribati/province:97431129B55805139245338",
+        "archive_records": [
+          {
+            "id": "geo:province:4459a3034470eceb:GIL",
+            "name": "Gilbert Islands",
+            "level": "province",
+            "parent_id": "geo:area:GIL",
+            "metadata": {
+              "source": "gb:KIR:ADM1",
+              "basis": "Named source administrative unit grouped within this geographic area",
+              "kind": "whole_territory",
+              "original_unit_id": "world/continent:Oceania/subcontinent:Micronesia/region:Kiribati/area:Kiribati/province:97431129B55805139245338"
+            }
+          },
+          {
+            "id": "world/continent:Oceania/subcontinent:Micronesia/region:Kiribati/area:Kiribati/province:97431129B55805139245338",
+            "name": "Gilbert Islands",
+            "level": "province",
+            "parent_id": "world/continent:Oceania/subcontinent:Micronesia/region:Kiribati/area:Kiribati",
+            "metadata": {
+              "basis": "Source territory represented as a single-location province",
+              "source": "gb:KIR:ADM1",
+              "kind": "whole_territory"
+            }
+          }
+        ],
+        "interpretation": "Identity/name/parent migration records only; this archive has no geometry for these locations and is explicitly undated. It is not evidence that historical territorial attributes transfer."
+      },
+      {
+        "current_source_id": "gb:KIR:ADM1:97431129B36644055464690",
+        "original_unit_path": "world/continent:Oceania/subcontinent:Micronesia/region:Kiribati/area:Kiribati/province:97431129B36644055464690",
+        "archive_records": [
+          {
+            "id": "geo:province:b60ad54d33b6d22f:GIL",
+            "name": "Phoenix Islands",
+            "level": "province",
+            "parent_id": "geo:area:GIL",
+            "metadata": {
+              "source": "gb:KIR:ADM1",
+              "basis": "Named source administrative unit grouped within this geographic area",
+              "kind": "whole_territory",
+              "original_unit_id": "world/continent:Oceania/subcontinent:Micronesia/region:Kiribati/area:Kiribati/province:97431129B36644055464690"
+            }
+          },
+          {
+            "id": "world/continent:Oceania/subcontinent:Micronesia/region:Kiribati/area:Kiribati/province:97431129B36644055464690",
+            "name": "Phoenix Islands",
+            "level": "province",
+            "parent_id": "world/continent:Oceania/subcontinent:Micronesia/region:Kiribati/area:Kiribati",
+            "metadata": {
+              "basis": "Source territory represented as a single-location province",
+              "source": "gb:KIR:ADM1",
+              "kind": "whole_territory"
+            }
+          }
+        ],
+        "interpretation": "Identity/name/parent migration records only; this archive has no geometry for these locations and is explicitly undated. It is not evidence that historical territorial attributes transfer."
+      },
+      {
+        "current_source_id": "gb:KIR:ADM1:97431129B35506555718846",
+        "original_unit_path": "world/continent:Oceania/subcontinent:Micronesia/region:Kiribati/area:Kiribati/province:97431129B35506555718846",
+        "archive_records": [
+          {
+            "id": "geo:province:390364d58e8a78b9:LIN",
+            "name": "Line Islands",
+            "level": "province",
+            "parent_id": "geo:area:LIN",
+            "metadata": {
+              "source": "gb:KIR:ADM1",
+              "basis": "Named source administrative unit grouped within this geographic area",
+              "kind": "whole_territory",
+              "original_unit_id": "world/continent:Oceania/subcontinent:Micronesia/region:Kiribati/area:Kiribati/province:97431129B35506555718846"
+            }
+          },
+          {
+            "id": "world/continent:Oceania/subcontinent:Micronesia/region:Kiribati/area:Kiribati/province:97431129B35506555718846",
+            "name": "Line Islands",
+            "level": "province",
+            "parent_id": "world/continent:Oceania/subcontinent:Micronesia/region:Kiribati/area:Kiribati",
+            "metadata": {
+              "basis": "Source territory represented as a single-location province",
+              "source": "gb:KIR:ADM1",
+              "kind": "whole_territory"
+            }
+          }
+        ],
+        "interpretation": "Identity/name/parent migration records only; this archive has no geometry for these locations and is explicitly undated. It is not evidence that historical territorial attributes transfer."
+      }
+    ],
+    "interpretation": "The exact-name lookup produced only unrelated global name collisions and no per-island archived name row. The pinned archive still records broad Gilbert, Phoenix and Line source identity/name/parent aliases in source_component_inventory.json. Neither result establishes geometry or absence of historical IDs under other labels."
+  }
+}
