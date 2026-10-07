@@ -172,7 +172,7 @@ def main() -> None:
 
     changed_paths = sorted(str(path.relative_to(ROOT)) for path in PACKAGE.rglob("*") if path.is_file())
     changed_paths.append(str(MANIFEST.relative_to(ROOT)))
-    change_receipts = [{"path": path, "status": "added", "previous_path": None} for path in sorted(set(changed_paths))]
+    change_receipts = [{"path": path, "status": "added"} for path in sorted(set(changed_paths))]
 
     manifest = {
         "version": 1, "issue": 1274, "lane": "geography", "worker_id": WORKER,
