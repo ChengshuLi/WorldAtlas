@@ -1,0 +1,48 @@
+{
+  "version": 2,
+  "lane": "engineering",
+  "job_id": "release-membership-admission-1150",
+  "branch": "engineering/release-membership-admission-1150",
+  "base_main_commit": "162f13f76ccae7ac026e075331d2b7b10e1d63ab",
+  "github_issue": 1266,
+  "date_timezone": "America/Los_Angeles",
+  "scope": [
+    "Bound original geographic-release transport admission and preserve raw records/identity/replay; isolated verification only"
+  ],
+  "dependencies": [],
+  "updated_at_utc": "2026-10-07T10:16:15.808276+00:00",
+  "completed": [
+    "Whole-needed input and row/UTF8 request admission implemented",
+    "Source/entity and staging preflight invoke unchanged actual handlers through strict read-only write-intent sinks",
+    "Complete successor84833-row real-handler proof, interruption/replay/conflict and full oversized-phase refusal"
+  ],
+  "checks": [
+    {
+      "check": "focused-adjacent-record-regressions",
+      "status": "passed",
+      "tests": 63
+    },
+    {
+      "check": "scope-entrypoint-controls",
+      "status": "passed",
+      "tests": 16
+    }
+  ],
+  "deployment": "No live import, finalization, deployment or geographic approval",
+  "maintenance": {
+    "required": false,
+    "active": false,
+    "reason": null
+  },
+  "evidence_paths": [
+    "coordination/engineering/release-membership-admission-1150/verification-seventh.json",
+    "coordination/engineering/release-membership-admission-1150/catalog-evidence.json",
+    "coordination/engineering/release-membership-admission-1150/read-only-admission-controls.txt",
+    "coordination/engineering/release-membership-admission-1150/README.md"
+  ],
+  "blockers": [],
+  "next_action": "Independent exact-head review, hosted checks, normal merge queue, actual-main verification and owned cleanup",
+  "pull_request": "https://github.com/ChengshuLi/WorldAtlas/pull/1363",
+  "record_kind": "resumable_execution_artifact",
+  "task_status_source": "Linked GitHub issue; no duplicate TODO status here"
+}

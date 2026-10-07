@@ -2,7 +2,10 @@ import fs from 'node:fs';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import path from 'node:path';
-import {readGeographicReleaseManifest,decodeGeographicReleaseBatch} from './read-geographic-release-manifest.mjs';
+import {isDeepStrictEqual} from 'node:util';
+import {readGeographicReleaseManifest} from './read-geographic-release-manifest.mjs';
+import {admitGeographicReleaseBatches,geographicAdmissionLimits} from './geographic-release-admission.mjs';
+import {geographicMembershipHash,geographicLocationIdsHash,geographicChangesHash} from '../hosted/geographic-releases.js';
 const releasePins=['membership_sha256','footprints_sha256','hierarchy_sha256','location_ids_sha256','changes_sha256'];
 export function bootstrapConcurrency(value=process.env.ATLAS_IMPORT_CONCURRENCY??'6'){
  if(!/^[1-8]$/.test(String(value)))throw Error('ATLAS_IMPORT_CONCURRENCY must be an integer from 1 to 8');
@@ -13,29 +16,71 @@ function validatePrior(actual,release){
  if(!actual.expected_counts||Object.keys(actual.expected_counts).length!==Object.keys(release.expected_counts).length||Object.keys(release.expected_counts).some(k=>actual.expected_counts[k]!==release.expected_counts[k]))throw Error('Existing reference counts mismatch');
  if(!['staged','published'].includes(actual.status))throw Error('Unexpected existing reference status');
 }
-export async function publishGeographicReleases({manifest,batch,request,concurrency=bootstrapConcurrency(),mode='publish'}){
+export async function publishGeographicReleases({manifest,batch,readBatch,request,concurrency=bootstrapConcurrency(),mode='publish'}){
  if(!['publish','stage','finalize'].includes(mode))throw Error('Unknown geographic publication mode');
  concurrency=bootstrapConcurrency(concurrency);
+ manifest=structuredClone(manifest);
+ if(!Array.isArray(manifest?.batches)||!manifest.batches.length||!Array.isArray(manifest.releases)||!manifest.releases.length)throw Error('Nonempty prepared release and batch inventories required');
  const need=pathname=>{const part=manifest.batches.find(p=>p.path===pathname||p.path===pathname+'.gz');if(!part)throw Error(`Missing prepared reference batch: ${pathname}`);return part;};
- async function concurrent(parts){let index=0,failure;await Promise.all(Array.from({length:Math.min(concurrency,parts.length)},async()=>{while(!failure&&index<parts.length){const part=parts[index++];try{await batch(part);}catch(error){failure??=error;}}}));if(failure)throw failure;}
+ let plan;
+ async function admittedBatch(part){for(const body of plan.get(part.path))await batch(part,Buffer.from(body));}
+ async function concurrent(parts){let index=0,failure;await Promise.all(Array.from({length:Math.min(concurrency,parts.length)},async()=>{while(!failure&&index<parts.length){const part=parts[index++];try{await admittedBatch(part);}catch(error){failure??=error;}}}));if(failure)throw failure;}
  // Sources and stable identities precede memberships. All retries use the same
  // pinned ingestion IDs; staging service idempotence preserves completed rows.
  const sourcePaths=manifest.sources_batches??manifest.batches.filter(p=>/^sources(?:-\d+)?\.json$/.test(p.path)).map(p=>p.path);
  if(!sourcePaths.length||new Set(sourcePaths).size!==sourcePaths.length)throw Error('Missing or duplicate prepared reference source batches');
+ // Read-only prior discovery and complete needed-input admission precede ALL
+ // writes. Do not stage sources now and discover a malformed later batch later.
+ const priors=new Map();
+ for(const release of manifest.releases){
+  if(priors.has(release.id))throw Error('Duplicate prepared release ID');
+  const route='/api/geography/release?'+new URLSearchParams({release_id:release.id});
+  const prior=await(await request(route)).json();if(prior)validatePrior(prior,release);
+  priors.set(release.id,prior);
+ }
+ const entityGroups=['continent','subcontinent','region','area','province','location'].map(tier=>
+  manifest.batches.filter(p=>new RegExp(`^(?:v\\d+-)?entities-${tier}-`).test(p.path)));
+ if(mode!=='finalize'){
+  const needed=[...sourcePaths.map(need),...entityGroups.flat()];
+  for(const release of manifest.releases)if(priors.get(release.id)?.status!=='published'){
+   needed.push(need(`release-${release.version}.json`),...manifest.batches.filter(p=>p.path.startsWith(`${release.version}-`)));
+  }
+  ({plan}=await admitGeographicReleaseBatches(needed,{readBatch,releases:manifest.releases}));
+  // Counts alone cannot establish complete staging. Check identities and the
+  // actual canonical consumer hashes against each independently pinned release.
+  for(const release of manifest.releases)if(priors.get(release.id)?.status!=='published'){
+   const memberships=[],changes=[],memberIds=new Set(),changeIds=new Set();let definitions=0;
+   const parts=[need(`release-${release.version}.json`),...manifest.batches.filter(p=>p.path.startsWith(`${release.version}-`))];
+   for(const part of parts)for(const bytes of plan.get(part.path)){
+    const payload=JSON.parse(bytes);
+    if((payload.release?.id??payload.release_id)!==release.id)throw Error('Prepared batch release ID mismatch');
+    if(payload.release){definitions++;if(!isDeepStrictEqual(payload.release,release))throw Error('Prepared release definition mismatch');}
+    for(const [field,output,ids]of[['memberships',memberships,memberIds],['changes',changes,changeIds]])for(const row of payload[field]??[]){
+     const id=field==='memberships'?row.entity_id??row.id:row.id;
+     if(ids.has(id))throw Error('Duplicate complete release row identity');ids.add(id);output.push(row);
+    }
+   }
+   if(definitions!==1)throw Error('Expected exactly one prepared release definition');
+   if(await geographicMembershipHash(memberships)!==release.membership_sha256||
+      await geographicLocationIdsHash(memberships)!==release.location_ids_sha256||
+      await geographicChangesHash(changes)!==release.changes_sha256)throw Error('Prepared complete release record hash mismatch');
+  }
+ }
  if(mode!=='finalize'){
  await concurrent(sourcePaths.map(need));
- for(const tier of ['continent','subcontinent','region','area','province','location'])await concurrent(manifest.batches.filter(p=>p.path.startsWith(`entities-${tier}-`)));
+ for(const parts of entityGroups)await concurrent(parts);
  }
  const published=[];
  for(const release of manifest.releases){
-  const route='/api/geography/release?'+new URLSearchParams({release_id:release.id}),prior=await (await request(route)).json();
-  if(prior)validatePrior(prior,release);
+  const route='/api/geography/release?'+new URLSearchParams({release_id:release.id}),prior=priors.get(release.id);
   // Public readers may hide staged releases; an absent or explicit staged row
   // both require idempotent replay of every bounded batch before finalization.
   if(!prior||prior.status!=='published'){
    if(mode!=='finalize'){
-    await batch(need(`release-${release.version}.json`));
-    await concurrent(manifest.batches.filter(p=>p.path.startsWith(`${release.version}-`)));
+    await admittedBatch(need(`release-${release.version}.json`));
+    // Parent transports and their children preserve the authoritative raw order.
+    // Prerequisite source/entity tiers may still use bounded concurrency.
+    for(const part of manifest.batches.filter(p=>p.path.startsWith(`${release.version}-`)))await admittedBatch(part);
    }
    if(mode==='stage'){published.push({id:release.id,version:release.version,status:'staged',public_readback_verified:false});continue;}
    await request('/api/geography/finalize',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({release_id:release.id})});
@@ -91,12 +136,15 @@ async function request(route,options={}){
 }
 const manifest=readGeographicReleaseManifest(directory);
 let completed=0,lastUpdate=Date.now();
-async function batch(part){
- const bytes=decodeGeographicReleaseBatch(fs.readFileSync(`${directory}/${part.path}`),part);
+function readBatch(part){
+ const file=path.join(directory,part.path),fd=fs.openSync(file,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW);
+ try{const stat=fs.fstatSync(fd);if(!stat.isFile()||stat.size>geographicAdmissionLimits.fileBytes)throw Error('Invalid geographic input file');return fs.readFileSync(fd);}finally{fs.closeSync(fd);}
+}
+async function batch(part,bytes){
  await request(part.route,{method:'POST',headers:{'Content-Type':'application/json'},body:bytes});completed++;
  if(Date.now()-lastUpdate>15000){lastUpdate=Date.now();console.log(`Reference geography: ${completed} bounded import batches completed.`);}
 }
-const published=process.argv.includes('--archives-only')?[]:await publishGeographicReleases({manifest,batch,request,concurrency,mode});
+const published=process.argv.includes('--archives-only')?[]:await publishGeographicReleases({manifest,batch,readBatch,request,concurrency,mode});
 // Retain the complete before/after crosswalk independently of deployment assets.
 const release=manifest.releases.at(-1),archiveFiles=new Set(['data/geographic-decision-migration.json.gz']);
 for(const file of ['data/macro-boundary-migration.json.gz','data/geographic-repair-evidence/index.json','data/reference-migrations/source-territory-repair-v1/index.json'])if(fs.existsSync(file))archiveFiles.add(file);
