@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/japan-nine-gap-family-source-fitness-20261007/methods/producer.py", line 203, in <module>
+    main(sys.argv[1])
+  File "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/ba803b309a763067c28385c734d871bc7d1b9da081d51fc1f4b60b5a02f60453/work/research/geography/japan-nine-gap-family-source-fitness-20261007/methods/producer.py", line 152, in main
+    counts.update({'source_features':len(rows),'source_feature_roster_sha256':sha(canon(ids)),'source_body_sha256':bodysha})
+  File "/Users/chengshuli/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/collections/__init__.py", line 694, in update
+    self[elem] = count + self_get(elem, 0)
+                 ~~~~~~^~~~~~~~~~~~~~~~~~~
+TypeError: can only concatenate str (not "int") to str
