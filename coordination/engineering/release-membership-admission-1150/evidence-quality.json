@@ -1409,32 +1409,32 @@
   "metric_bindings": [
     {
       "metric_id": "memberships",
-      "path": "coordination/engineering/release-membership-admission-1150/verification-fourth.json",
+      "path": "coordination/engineering/release-membership-admission-1150/verification-fifth.json",
       "json_pointer": "/memberships"
     },
     {
       "metric_id": "changes",
-      "path": "coordination/engineering/release-membership-admission-1150/verification-fourth.json",
+      "path": "coordination/engineering/release-membership-admission-1150/verification-fifth.json",
       "json_pointer": "/changes"
     },
     {
       "metric_id": "requests",
-      "path": "coordination/engineering/release-membership-admission-1150/verification-fourth.json",
+      "path": "coordination/engineering/release-membership-admission-1150/verification-fifth.json",
       "json_pointer": "/requests"
     },
     {
       "metric_id": "duplicate_replays",
-      "path": "coordination/engineering/release-membership-admission-1150/verification-fourth.json",
+      "path": "coordination/engineering/release-membership-admission-1150/verification-fifth.json",
       "json_pointer": "/duplicate_replays"
     },
     {
       "metric_id": "original_registry_source_rows_verified",
-      "path": "coordination/engineering/release-membership-admission-1150/verification-fourth.json",
+      "path": "coordination/engineering/release-membership-admission-1150/verification-fifth.json",
       "json_pointer": "/original_registry_source_rows_verified"
     },
     {
       "metric_id": "catalog_phase_admitted_bytes",
-      "path": "coordination/engineering/release-membership-admission-1150/verification-fourth.json",
+      "path": "coordination/engineering/release-membership-admission-1150/verification-fifth.json",
       "json_pointer": "/catalog_phase_admitted_bytes"
     }
   ],
@@ -1524,15 +1524,18 @@
     },
     {
       "path": "hosted/geographic-releases.js",
-      "status": "modified"
+      "status": "modified",
+      "original_sha256": "9eba2ddeeb267ca09dc396225b8fe27385c1834ab6f9ebf5cb627ae38ebf1701"
     },
     {
       "path": "hosted/records.js",
-      "status": "modified"
+      "status": "modified",
+      "original_sha256": "f5ba42a6059da63dd2db1308b3852422252ffb61cb13f5e3b29d27dbfce4083d"
     },
     {
       "path": "scripts/bootstrap-geographic-release.mjs",
-      "status": "modified"
+      "status": "modified",
+      "original_sha256": "065a64d6d3fa20dfdc36832414cf89e868d93c5551915b3331709f0385a07cc9"
     },
     {
       "path": "scripts/geographic-release-admission.mjs",
@@ -1544,7 +1547,8 @@
     },
     {
       "path": "test/geographic-bootstrap.test.mjs",
-      "status": "modified"
+      "status": "modified",
+      "original_sha256": "65406005cf7ab42f567c666853e70e793101b4542db6c6203330fce8d7eaf0b1"
     },
     {
       "path": "test/geographic-release-admission.test.mjs",
