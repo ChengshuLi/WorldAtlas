@@ -65,10 +65,22 @@
       "resource_url": "https://data.humdata.org/dataset/26fa506b-0727-4d9d-a590-d2abee21ee22/resource/4cefb60b-0986-4a91-8186-70ef5730ede6/download/mdg_admin_boundaries.geojson.zip",
       "license": "CC BY-IGO noted in inherited #482 source registry; attribute and indicate modifications; no endorsement implied.",
       "retrieved": "2026-10-03",
-      "archive": {"bytes": 81104333, "sha256": "273badc1391c5663ea4dd5878def610b6f0aa7e6a91ef579db23b5692dfa4913", "retained": false},
+      "archive": {
+        "bytes": 81104333,
+        "sha256": "273badc1391c5663ea4dd5878def610b6f0aa7e6a91ef579db23b5692dfa4913",
+        "retained": false
+      },
       "retained_exact_members": [
-        {"member": "mdg_admin2.geojson", "raw_sha256": "f4a437a737e7b9c71b19db1eb41fc39abd9579aa95505471c6149b06be98c8b9", "gzip_sha256": "a47198ec1307eb1644cec30198e9d4647bb00a67e5a38c3f8bd9537a0ed4f94b"},
-        {"member": "mdg_admin1.geojson", "raw_sha256": "5820a206ddcef5a48385dba8f0eee9f5a23db2927580c7afe109c564f4edc47f", "gzip_sha256": "ed66726d7b60faead0d00cdbf640b94319f58535720d42968c2063072cf912f6"}
+        {
+          "member": "mdg_admin2.geojson",
+          "raw_sha256": "f4a437a737e7b9c71b19db1eb41fc39abd9579aa95505471c6149b06be98c8b9",
+          "gzip_sha256": "a47198ec1307eb1644cec30198e9d4647bb00a67e5a38c3f8bd9537a0ed4f94b"
+        },
+        {
+          "member": "mdg_admin1.geojson",
+          "raw_sha256": "5820a206ddcef5a48385dba8f0eee9f5a23db2927580c7afe109c564f4edc47f",
+          "gzip_sha256": "ed66726d7b60faead0d00cdbf640b94319f58535720d42968c2063072cf912f6"
+        }
       ],
       "metadata": "Dataset reviewed 2026-07-06; source boundary creation 2009-08-01; valid_on 2018-08-10; version v01; package modified 2026-08-14. OCHA COD-AB specification defines valid_on as a dataset-version update date, not legal creation/effect date.",
       "limit": "The declared vintage and geometry do not establish present-day legal boundary authority."
@@ -101,6 +113,92 @@
       "retrieved": "2026-10-07",
       "role": "Secondary lead only; mapbook states BNGRC, GADM and OSM inputs and depicts Antanimora Atsimo as commune MG52516130 under Ambovombe-Androy.",
       "limit": "Does not establish legal continuity or polygon identity; exact original BNGRC predecessor bytes/metadata still need restoration."
+    },
+    {
+      "source_id": "UN-SALB-MDG-POLYGON-2024",
+      "title": "UN Second Administrative Level Boundaries Madagascar data page and validated polygon-vintage metadata",
+      "url": "https://salb.un.org/en/data/mdg",
+      "retrieved": "2026-10-07",
+      "role": "National-authority validated administrative polygon candidate and historic administrative reference",
+      "vintage": "Page advertises validated polygon data temporally valid 2023-06-29 through update 2024-10-17; country page identifies FTM as National Geospatial Information Authority.",
+      "license": "SALB terms restrict use to non-commercial purposes, reserve copyright to United Nations, prohibit changing geometry/content without Contributor consent, and require attribution for derived products; separate project-use clearance may be needed.",
+      "verification": "Metadata inspected via indexed page text. Direct page and linked dataset/REST routes returned HTTP 403 in this environment; no geometry, IDs, neighbor boundaries, native CRS, completeness, or source metadata were inspected.",
+      "retention": "Restoration-only; use authorized SALB page/download/REST routes after access and reuse review.",
+      "limit": "Strong candidate source vintage, not an inspected boundary comparison, legal opinion, or permission to redistribute or derive output."
+    },
+    {
+      "source_id": "UN-SALB-METHODOLOGY-TERMS",
+      "title": "UN SALB methodology and terms of use",
+      "url": "https://salb.un.org/en/methodology",
+      "terms_url": "https://salb.un.org/sites/default/files/wysiwyg_uploads/docs_uploads/TermsOfUseSALB2021.pdf",
+      "retrieved": "2026-10-07",
+      "role": "Source validation process and use restrictions",
+      "vintage": "Methodology page available 2026-10-07; Terms of Use document dated 2021.",
+      "license": "Terms state non-commercial use only; UN copyright; no geometry/content changes without Contributor consent; use of derived products requires credit including phrase ‘from SALB Data, United Nations’ and contributor source.",
+      "verification": "Official terms PDF content inspected via indexed result; methodology states data are made public after validation by national geospatial authority.",
+      "retention": "Restoration-only; terms PDF may be fetched from canonical URL for confirmation.",
+      "limit": "Does not independently establish source-layer accuracy, completeness, legal boundary status, or WorldAtlas reuse permission."
+    },
+    {
+      "source_id": "ANDROY-REGION-PORTAL-BOUNDARIES",
+      "title": "Androy Region SRAT district and commune pages and offered boundary archives",
+      "url": "https://www.regionandroy.mg/region/communes-srat",
+      "district_page": "https://regionandroy.mg/region/districts-srat",
+      "retrieved": "2026-10-07",
+      "role": "Regional government administrative roster, local geography description, and boundary source lead",
+      "vintage": "SRAT 2024-2044; pages have no precise publication/update timestamp.",
+      "license": "Portal legal notice says reproduction rights are reserved, including downloadable documents and maps, absent express authorization by the Androy Region chief. Cartographic/statistical data are described as indicative decision-support information.",
+      "verification": "Inspected pages identify Ministry of the Interior and Decentralization, region/district relationship, and offer separate commune/district archives. District portrait reports seven Antanimora Sud communes; the commune table lists eight named rows. Androy district portrait counts sum to 51 while the portal states 58 and its commune table has 58 rows. Portal attributes district creation to decree 2024-177, not independently verified; inspected official Decree 2024-480 dated 2024-03-06 changes the 2015 administrative annex and lists eight communes. The portal offers no source metadata establishing FTM validation or legal provenance.",
+      "retention": "Restoration-only; archive URLs are https://www.regionandroy.mg/downloads/cartographie/Limite_commune_androy.zip and https://www.regionandroy.mg/downloads/cartographie/Limite_district_androy.zip. Do not download, redistribute, or derive geometry without express permission and lineage review.",
+      "limit": "Not a validated nationwide dataset; source scale, CRS, producer, legal authority, geometry date, archive hashes, and exact administrative roster remain unverified. No offered geometry was downloaded or used."
+    },
+    {
+      "source_id": "CENI-2024-ANTANIMORA-COMMUNAL",
+      "title": "CENI 2024 communal/municipal election voter-list publication",
+      "url": "https://www.ceni-madagascar.mg/liste-des-electeurs-par-ordonnance-aux-elections-communales-et-municipales-du-11-decembre-2024/",
+      "retrieved": "2026-10-07",
+      "role": "Operational electoral district roster",
+      "vintage": "Page posted 2024-12-08 and updated 2024-12-27 for elections on 2024-12-11.",
+      "license": "No explicit reuse license was located; do not redistribute PDF content without checking terms.",
+      "verification": "Official CENI page lists Antanimora Sud under Androy among districts for the 2024 communal and municipal elections. It is operational use evidence, not an administrative boundary law or commune-boundary source.",
+      "retention": "Restoration-only at the canonical CENI page.",
+      "limit": "Does not establish legal effective date, boundary geometry, or complete commune roster; no explicit reuse license was located."
+    },
+    {
+      "source_id": "HDX-CODAB-PACKAGE-METADATA-2026-10-07",
+      "title": "HDX CKAN package metadata for Madagascar COD-AB",
+      "url": "https://data.humdata.org/api/3/action/package_show?id=cod-ab-mdg",
+      "retrieved": "2026-10-07",
+      "role": "Exact version/date/source/license metadata for the current OCHA COD-AB package",
+      "vintage": "Response captured 2026-10-07; package states source boundary creation 2009-08-01, last edit before publication and valid_on 2018-08-10, review 2026-07-06, version v01; 24 ADM1, 120 ADM2, 1,645 ADM3 and 17,465 ADM4.",
+      "license": "Dataset package reports CC BY-IGO; attribution and indication of modification apply.",
+      "verification": "Exact raw response retained at sources/hdx-codab-package-show-2026-10-07.json; 19,532 bytes; SHA-256 8b24b5e7b886ec0741f66917ad64782cafa7882cfd5c0870b7ae7fc0e71eeaef. API metadata names BNGRC as dataset source and describes government survey/data collection and government-system P-codes adapted to OCHA P-codes.",
+      "retention": "Retained metadata response only; no extra geometry data retained.",
+      "limit": "Package metadata describes COD-AB provenance and declared dates, not proof that boundaries or codes are legally authoritative today."
+    },
+    {
+      "source_id": "BNGRC-OCHA-2018-ARCHIVE-RETIRED",
+      "title": "Former OCHA/HDX 2018 BNGRC-OCHA shapefile archive resource",
+      "url": "https://data.humdata.org/dataset/26fa506b-0727-4d9d-a590-d2abee21ee22/resource/ed94d52e-349e-41be-80cb-62dc0435bd34/download/mdg_adm_bngrc_ocha_20181031_shp.zip",
+      "retrieved": "2026-10-07",
+      "role": "Predecessor BNGRC code and geometry source restoration lead",
+      "vintage": "Filename identifies 2018-10-31 product; exact archive metadata was not recoverable.",
+      "license": "The current package reports CC BY-IGO for COD-AB. The former resource's own historical terms/metadata and attribution could not be recovered; do not assume those rights apply to the removed resource.",
+      "verification": "HDX resource_show API and direct download both returned HTTP 404 for resource ID ed94d52e-349e-41be-80cb-62dc0435bd34. The Wayback CDX index query returned no captures. The current dataset page no longer lists this resource.",
+      "retention": "Not retained; restoration would require OCHA/HDX or authorized BNGRC delivery plus original metadata.",
+      "limit": "No source bytes/hash, layer schemas, counts, geometry, license terms, or code crosswalk were recovered; secondary citations alone are not a substitute."
+    },
+    {
+      "source_id": "MDG-COUNCIL-REPORT-2024-03-06",
+      "title": "Madagascar Council of Ministers report dated 6 March 2024",
+      "url": "https://www.gouvernoratanalamanga.mg/uploads/images/2024/2024-03/2024-03-07%20conseil%20des%20ministres/Conseil_des_ministresVM-VF_du_mercredi_06_mars_2024.pdf",
+      "retrieved": "2026-10-07",
+      "role": "Government confirmation of Council adoption of amendment later issued as Decree 2024-480",
+      "vintage": "Meeting report for 2024-03-06.",
+      "license": "Official government report; no explicit reuse license located. Citation and paraphrased findings only.",
+      "verification": "Inspected indexed official report text: says the Council adopted a decree modifying the annex to Decree 2015-593 and discusses the creation of Antanimora Sud and the resulting Ambovombe commune roster.",
+      "retention": "Restoration-only from the canonical URL; PDF bytes not redistributed.",
+      "limit": "Council adoption is not the Article 3 radio/television publication that makes Decree 2024-480 effective; exact broadcast/publication date remains unresolved."
     }
   ]
 }
