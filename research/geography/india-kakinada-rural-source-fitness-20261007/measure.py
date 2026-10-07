@@ -150,7 +150,8 @@ def runtime_receipt():
     exe_digest = hashlib.sha256()
     with exe.open("rb") as f:
         for block in iter(lambda: f.read(CHUNK), b""): exe_digest.update(block)
-    return {"executable": {"path": str(exe), "sha256": exe_digest.hexdigest()},
+    return {"executable": {"invocation_path": sys.executable, "resolved_path": str(exe),
+                            "sha256": exe_digest.hexdigest()},
             "python": sys.version, "python_version": platform.python_version(),
             "zlib_compile": zlib.ZLIB_VERSION, "zlib_runtime": zlib.ZLIB_RUNTIME_VERSION,
             "shapely": shapely.__version__, "geos": shapely.geos_version_string,

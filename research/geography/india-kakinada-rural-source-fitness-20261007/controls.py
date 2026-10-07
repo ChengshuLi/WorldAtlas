@@ -78,7 +78,7 @@ def prepare_case(temp_root, base_packet):
 
 
 def run_actual_entry(temp_root, *, extra_args=()):
-    cmd = [str(Path(sys.executable).resolve()), "-I", "-B", str(PACKET / "measure.py"), "--packet", str(temp_root),
+    cmd = [sys.executable, "-I", "-B", str(PACKET / "measure.py"), "--packet", str(temp_root),
            "--result", str(temp_root / "result.json"), *extra_args]
     return subprocess.run(cmd, cwd=PACKET.parents[2], text=True, stdout=subprocess.PIPE,
                           stderr=subprocess.PIPE, check=False)
@@ -132,7 +132,7 @@ def symlink_packet_case(base_packet):
         prepare_case(actual, base_packet)
         alias = Path(name) / "alias"
         alias.symlink_to(actual, target_is_directory=True)
-        result = subprocess.run([str(Path(sys.executable).resolve()), "-I", "-B", str(PACKET / "measure.py"),
+        result = subprocess.run([sys.executable, "-I", "-B", str(PACKET / "measure.py"),
                                  "--packet", str(alias), "--result", str(alias / "result.json")],
                                 cwd=PACKET.parents[2], text=True, stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE, check=False)
@@ -318,7 +318,7 @@ def run_controls(base_packet=PACKET):
 
 
 def geometry_controls():
-    result = subprocess.run([str(Path(sys.executable).resolve()), "-I", "-B", str(PACKET / "measure.py"),
+        result = subprocess.run([sys.executable, "-I", "-B", str(PACKET / "measure.py"),
                              "--geometry-method-controls"], cwd=str(PACKET.parents[2]),
                             text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False)
     if result.returncode != 0:

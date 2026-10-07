@@ -23,7 +23,8 @@ def main():
     freeze_hash = sha(freeze_bytes)
     verification = PACKET / "verification"
     verification.mkdir(exist_ok=True)
-    executable = str(Path(sys.executable).resolve())
+    executable = sys.executable
+    resolved_executable = str(Path(sys.executable).resolve())
     cwd = str(PACKET.parents[2].resolve())
     frozen_runtime = runtime_receipt()
     if json.loads(freeze_bytes).get("runtime") != frozen_runtime:
@@ -44,7 +45,8 @@ def main():
         result = json.loads(result_bytes)
         if result.get("closure_freeze_sha256") != freeze_hash or result.get("runtime") != frozen_runtime:
             raise ValueError(name + " did not execute the exact frozen code/runtime closure")
-        runs.append({"id": name, "command": command, "cwd": cwd, "resolved_interpreter": executable,
+        runs.append({"id": name, "command": command, "cwd": cwd,
+                     "invoked_interpreter": executable, "resolved_interpreter": resolved_executable,
                      "start_utc": started, "end_utc": ended, "exit_status": completed.returncode,
                      "stdout_sha256": sha(completed.stdout.encode()), "stderr_sha256": sha(completed.stderr.encode()),
                      "result_path": str(result_path.relative_to(PACKET)), "result_sha256": sha(result_bytes),
