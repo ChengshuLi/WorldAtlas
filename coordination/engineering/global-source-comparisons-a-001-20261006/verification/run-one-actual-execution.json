@@ -1,0 +1,72 @@
+{
+  "actual_frozen_executable_closure": [
+    {
+      "bytes": 21100,
+      "path": "coordination/engineering/global-source-comparisons-a-001-20261006/producer.py",
+      "sha256": "884fa343de28638b38d36607d02638bd42a2190afcb74bf4ab166fce99c6b823"
+    },
+    {
+      "bytes": 2253,
+      "path": "coordination/engineering/global-source-comparisons-a-001-20261006/record-execution.py",
+      "sha256": "e8daf99b77a2d38865e6ce692c26bfb3a3bedfb42aaee237b30ea607b1eb56df"
+    },
+    {
+      "bytes": 4492,
+      "path": "coordination/engineering/global-source-comparisons-a-001-20261006/stage-inputs.py",
+      "sha256": "13fbddd1cccb64f2d4a4dfe6d63432c958615a2618c2fd1d171bc6e9b9831002"
+    },
+    {
+      "bytes": 7396,
+      "path": "coordination/engineering/global-source-comparisons-a-001-20261006/verify.py",
+      "sha256": "267fa9adb0bf5f57fffc02d0604939a0e235b32c287659471f03be370184a5b5"
+    },
+    {
+      "bytes": 14602,
+      "path": "coordination/engineering/global-source-comparisons-a-001-20261006/controls.py",
+      "sha256": "36eedf6d8e709fae617fd5404bda8e044a5315232697ebb741055eb368b65538"
+    },
+    {
+      "bytes": 1804,
+      "path": "coordination/engineering/global-source-comparisons-a-001-20261006/record-controls.py",
+      "sha256": "0157d785039f1a20d790ae880c7fbccf6a8391a88171e976eba3d751dfbd7ecc"
+    },
+    {
+      "bytes": 1883,
+      "path": "coordination/engineering/global-source-comparisons-a-001-20261006/record-reproducibility.py",
+      "sha256": "90029e542539d5f0f4cd19854267d9f8565a07666774e47af04b633799272b7a"
+    },
+    {
+      "bytes": 4782,
+      "path": "coordination/engineering/global-source-comparisons-a-001-20261006/retain-run.py",
+      "sha256": "9fa393dd5d46a8c6cc4c21a04682b69b6a35c30cc324551feac3d3e1bfb67b14"
+    },
+    {
+      "bytes": 9132,
+      "path": "coordination/engineering/global-source-comparisons-a-001-20261006/build-manifest.py",
+      "sha256": "31dc335bf2e0e0b861adf82884b8a468dd5835b20d95bc24b9e2389dbed2929b"
+    }
+  ],
+  "command": [
+    "/Users/chengshuli/world-atlas-workspace/private-publisher-checks-20261004/shared-runtime/python-3.12.14-arm64-8358191609611765/bin/python",
+    "-B",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/coordination/engineering/global-source-comparisons-a-001-20261006/producer.py",
+    "--repo",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work",
+    "--producer-commit",
+    "7c154c525905df95ac632f5566cb39ed764e4793",
+    "--output",
+    "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work/.cache/package1-final-run-one"
+  ],
+  "environment": {
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "exit_code": 0,
+  "finished_utc": "2026-10-07T02:24:38.646129+00:00",
+  "limits": [
+    "Actual numerical producer process; no automatic retry and no approval of physical water or repairs."
+  ],
+  "pid": 94521,
+  "started_utc": "2026-10-07T02:19:48.513538+00:00",
+  "status": "completed",
+  "working_directory": "/Users/chengshuli/world-atlas-workspace/.worldatlas-workspaces/8c86b01772c1c827/3d62cf18b0b42e3ae3cd26d42f5e7ac90b65e45ead741649cedd79762724f9e7/work"
+}
