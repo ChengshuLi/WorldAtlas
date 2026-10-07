@@ -63,7 +63,7 @@ def all_callables(module, raw):
             for member,implementation in vars(value).items():
                 if isinstance(implementation,(staticmethod,classmethod)):
                     implementation=implementation.__func__
-                if isinstance(implementation,types.FunctionType):
+                if isinstance(implementation,types.FunctionType) and implementation.__module__==module.__name__:
                     names.append(name+'.'+member)
     return callable_guard(module,raw,sorted(names))
 
@@ -76,6 +76,6 @@ def modules_guard(modules, code_baseline):
         raw=code_baseline.materialized_bytes(relative)
         proof.extend(all_callables(module,raw))
     reader=modules['reader'];old=modules['producer']
-    if reader.old is not old or old.comparison is not modules['comparison'] or old.inputs is not modules['inputs'] or old.immutable is not modules['immutable'] or reader.transport is not modules['transport'] or modules['trace'].reader is not reader or modules['trace'].kernel is not modules['kernel']:
+    if reader.old is not old or old.comparison is not modules['comparison'] or old.inputs is not modules['inputs'] or old.immutable is not modules['immutable'] or reader.transport is not modules['transport'] or reader.ComponentContext.component is not modules['transport'].Context.component or modules['trace'].reader is not reader or modules['trace'].kernel is not modules['kernel']:
         raise ValueError('Actual project module/callable cross-binding differs')
     return proof
