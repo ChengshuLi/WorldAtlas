@@ -96,6 +96,11 @@ def run():
         reject('output-traversal',lambda:output_target(custody.R,str(P.relative_to(custody.R)),str(P.relative_to(custody.R))+'/../bad'))
         linked=tmp/'linked';linked.symlink_to(tmp,target_is_directory=True)
         reject('symlink-output-parent',lambda:output_target(custody.R,str(P.relative_to(custody.R)),str((linked/'out').relative_to(custody.R))))
+        ordinary=tmp/'ordinary.json';ordinary.write_text('{}')
+        reject('ordinary-read-traversal',lambda:verify.checked_output(tmp,'../ordinary.json'))
+        reject('ordinary-read-absolute',lambda:verify.checked_output(tmp,str(ordinary)))
+        reject('ordinary-read-symlink-ancestor',lambda:verify.checked_output(tmp,'linked/ordinary.json'))
+        assert verify.checked_output(tmp,'ordinary.json').read_bytes()==b'{}';passed.append('ordinary-read-complete-local-positive')
     commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=custody.R,text=True).strip();module=P/'numeric_kernel.py';original_read=pathlib.Path.read_bytes
     def dirty_read(path):return original_read(path)+b'\n# directed executed-code mutation\n' if path==module else original_read(path)
     with patch.object(pathlib.Path,'read_bytes',dirty_read):

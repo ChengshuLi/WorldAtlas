@@ -6,7 +6,27 @@ from custody import canon,SHA,load_original_inputs,load_complete_scientific_inpu
 import importlib.util
 spec=importlib.util.spec_from_file_location('predecessor_verify',custody.R/custody.OLD_PREFIX/'verify.py')
 old=importlib.util.module_from_spec(spec);spec.loader.exec_module(old)
-read_pin=old.read_pin
+from evidence.immutable import safe_path
+
+
+def checked_output(root,value):
+    value=safe_path(value);root=pathlib.Path(root)
+    if root.is_symlink()or not root.is_dir():raise ValueError('Unsafe complete run root')
+    p=root/value
+    for part in [p,*p.parents]:
+        if part.is_symlink():raise ValueError('Symlink ordinary output or ancestor')
+        if part==root:break
+    if not p.resolve().is_relative_to(root.resolve())or not p.is_file():raise ValueError('Missing/escaped ordinary scientific output')
+    return p
+
+
+def read_pin(root,pin):
+    b=checked_output(root,pin['path']).read_bytes()
+    if len(b)!=pin['bytes']or SHA(b)!=pin['sha256']or len(b)>32*1024*1024:raise ValueError('Changed scientific output bytes')
+    raw=gzip.decompress(b)if 'decoded_sha256'in pin else b
+    if len(raw)>32*1024*1024:raise ValueError('Oversized decoded output')
+    if 'decoded_sha256'in pin and(len(raw)!=pin['decoded_bytes']or SHA(raw)!=pin['decoded_sha256']):raise ValueError('Changed decoded output')
+    return json.loads(raw)
 
 
 def read_objects(run,index):
@@ -23,8 +43,7 @@ def read_objects(run,index):
             bodies=[];offset=0
             for pin in e['parts']:
                 if pin['offset']!=offset:raise ValueError('Object fragment gap/reordering')
-                p=run/pin['path']
-                if p.is_symlink() or not p.is_file():raise ValueError('Missing ordinary object fragment')
+                p=checked_output(run,pin['path'])
                 b=p.read_bytes();raw=gzip.decompress(b)
                 if len(b)!=pin['bytes'] or SHA(b)!=pin['sha256'] or len(raw)!=pin['decoded_bytes'] or SHA(raw)!=pin['decoded_sha256'] or max(len(b),len(raw))>32*1024*1024:raise ValueError('Changed complete object fragment')
                 bodies.append(raw);offset+=len(raw)
@@ -56,7 +75,7 @@ def validate_family(stored,original,reference,component_ids,counts):
 
 
 def verify(run):
-    report=json.loads((run/'report.json').read_bytes())
+    report=json.loads(checked_output(run,'report.json').read_bytes())
     if report['input_commit']!=custody.INPUT_COMMIT or report['original_complete_report_sha256']!='13cd9b18fae16f1ce0a2197fcb832ca6da595168bb58a23b1f85c8998590a6c7':raise ValueError('Changed immutable predecessor vintage')
     inputs,scope,families,features,members=load_original_inputs()
     oldreport,oldobjects,oldfamilies,oldrows,familyrefs,rowrefs,rosters=load_complete_scientific_inputs(inputs,families)
