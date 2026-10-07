@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "kind": "engineering-preflight-failure",
+  "accepted_run": false,
+  "command": "python3 research/geography/india-kakinada-rural-source-fitness-20261007/measure.py --packet research/geography/india-kakinada-rural-source-fitness-20261007 --result research/geography/india-kakinada-rural-source-fitness-20261007/verification/run-one/result.json",
+  "exit_code": 1,
+  "freeze_sha256": "80502860b2980f636b17df1e67f58186152a3407f7466b6b4655f908ea9019e1",
+  "failure": "The first structured join used a recursive identity lookup that included both the parent candidate row and its nested original-observation row, then treated that as duplicate top-level candidates. The validated bytes contain one top-level exact candidate row.",
+  "correction": "Filter the complete parsed candidate inventory to rows matching the exact component, family and operational-batch keys before enforcing uniqueness. No output result was emitted."
+}

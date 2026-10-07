@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "kind": "engineering-preflight-failure",
+  "accepted_run": false,
+  "command": "python3 research/geography/india-kakinada-rural-source-fitness-20261007/measure.py --packet research/geography/india-kakinada-rural-source-fitness-20261007 --result research/geography/india-kakinada-rural-source-fitness-20261007/verification/run-one/result.json",
+  "exit_code": 1,
+  "freeze_sha256": "a30c62c72c185af6f38b16ac48a788a8194a841306123e3771b3321e207852e2",
+  "failure": "The preflight assumed every routing file ending in .gz was a standalone JSON document. The pinned families-012.bin.gz is a raw byte shard whose decompressed content begins mid-record; parsing it as JSON failed before any scientific result was emitted.",
+  "correction": "Keep the whole shard pinned and byte-verified, and join family/component/contact identities through the complete JSON source-fitness candidate row and original component comparison row. The accepted scientific reader does not decode or use the routing shard as an executable record source."
+}

@@ -1,0 +1,8 @@
+{
+  "accepted_run": false,
+  "correction": "Import the fixed selected source ID into controls.py, invalidate this freeze, regenerate it after code is final, then rerun the complete actual-entry controls.",
+  "failure": "The actual negative-control suite stopped at the coherent foreign selected-feature case because controls.py referenced EXPECTED_SOURCE_ID without importing it. Earlier cases in this invocation were executed but the suite did not emit its final control receipt.",
+  "freeze_sha256": "71b0d6ba47feba1c2dee73ae6244bd5bf350ec66f772b30db6558f7e29d3600f",
+  "kind": "engineering-control-failure",
+  "version": 1
+}
