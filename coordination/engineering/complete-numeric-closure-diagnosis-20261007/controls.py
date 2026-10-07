@@ -109,6 +109,11 @@ def main():
             products.append(dict(path=f'components-{ordinal:03}.jsonl.gz',bytes=len(original_encoded),sha256=reader.digest(original_encoded),uncompressed_bytes=len(restored),uncompressed_sha256=reader.digest(restored)))
         state=dict(originals=pins,routing={},context=context,physical_report={'products':products})
         with patch.object(reader,'HERE',root):
+            for field in ('bytes','uncompressed_bytes'):
+                before=products[0][field];products[0][field]=reader.LIMIT+1
+                with patch.object(reader,'checked',side_effect=AssertionError('Must reject before decode/allocation')):
+                    rejected('actual-reader-overbound-original-before-decode:'+field,lambda:list(reader.physical_rows(state)),'bound')
+                products[0][field]=before
             check('actual71-shard-complete95173-membership-positive',list(reader.physical_rows(state))==[])
             last=next(reversed(pins.values()));raw=reader.checked(root,last)
             rows=[json.loads(line) for line in raw.splitlines()]

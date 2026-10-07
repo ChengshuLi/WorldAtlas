@@ -148,6 +148,8 @@ def physical_rows(state):
     if len(names)!=71:raise ValueError('Incomplete71 whole physical scientific shards')
     for path in names:
         pin=originals[path]
+        original=original_products[path.rsplit('/',1)[-1]]
+        transport.original_bounds(original)
         decoded=checked(HERE,pin)
         restored_body=bytearray()
         for ordinal,line in enumerate(decoded.splitlines()):
@@ -156,7 +158,10 @@ def physical_rows(state):
             if identity in seen:raise ValueError('Duplicate full physical component')
             seen.add(identity)
             restored=transport.restore_row(row,'components',state['context'])
-            restored_body.extend(canonical(restored))
+            restored_row=canonical(restored)
+            if len(restored_body)+len(restored_row)>LIMIT:
+                raise ValueError('Actual original104 restored ordinary body bound')
+            restored_body.extend(restored_row)
             if identity not in state['routing']:continue
             routing=state['routing'][identity]
             packed_sha=digest(canonical(row))
@@ -168,7 +173,6 @@ def physical_rows(state):
                 restored_whole_row_sha256=digest(canonical(restored)),
                 restored_row_hash_domain='original104-scientific-row-with-current-context-fields-restored',
                 complete_current_feature_sha256=routing['current_feature_sha256'])
-        original=original_products[path.rsplit('/',1)[-1]]
         if len(restored_body)!=original['uncompressed_bytes'] or digest(restored_body)!=original['uncompressed_sha256']:
             raise ValueError('Whole original104 restored scientific file differs')
         encoded=old.immutable.deterministic_gzip(bytes(restored_body))
