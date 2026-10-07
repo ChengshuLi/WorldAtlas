@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "kind": "candidate-source-drift-observation",
+  "outcome": "passed",
+  "entrypoint": "node research/geography/namibia-angola-official-history-followup-20261007/build-assessments.mjs --vintage rejected-source-drift-20261007",
+  "altered_complete_input": {
+    "path": "research/geography/namibia-angola-official-history-followup-20261007/controls/altered-ut-onc-index-http-headers.txt",
+    "bytes": 416,
+    "sha256": "f9d3ddab57f89f75d607f3233f1c3f22a845a1d476b6f95c579bcba13eb607b5"
+  },
+  "pinned_candidate_input": {
+    "path": "research/geography/namibia-angola-official-history-followup-20261007/sources/ut-onc-index-http-headers.txt",
+    "bytes": 390,
+    "sha256": "2616135430daf57c5697ad50eecb34e7d6537aa635431fc233e44b015dc7dfc7"
+  },
+  "observation": {
+    "exit_code": 1,
+    "error": "Error: Candidate source differs from immutable manifest descriptor: research/geography/namibia-angola-official-history-followup-20261007/sources/ut-onc-index-http-headers.txt",
+    "destination_created": false,
+    "original_source_restored_sha256": "2616135430daf57c5697ad50eecb34e7d6537aa635431fc233e44b015dc7dfc7"
+  }
+}
